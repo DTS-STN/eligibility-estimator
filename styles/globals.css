@@ -4,39 +4,71 @@
 @tailwind utilities;
 
 @layer base {
-  /* consistent focus styles on all components */
+  /* consistent focus styles on all components -- overriding */
   * {
-    @apply focus:outline-none;
+    /* @apply focus:outline-none;
     @apply focus-visible:ring-1;
-    @apply focus-visible:ring-black;
+    @apply focus-visible:ring-black; */
   }
 
   .btn {
-    @apply mb-0 py-[6px] px-3 min-h-[9px] min-w-[9px] font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid rounded;
+    @apply py-[6px] px-3 min-h-[9px] min-w-[9px] font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid rounded;
     border-style: outset;
   }
 
   .btn-default {
-    @apply text-default-text bg-default-bg hover:bg-default-hover-bg border-default-border;
+    @apply text-default-text bg-default hover:bg-default-hover border-default-border;
   }
 
   .btn-primary {
-    @apply text-white bg-primary-bg hover:bg-primary-hover-bg border-primary-bg;
+    @apply text-white bg-primary hover:bg-primary-hover border-primary-border;
   }
 
   .btn-success {
-    @apply text-white bg-success-bg hover:bg-success-hover-bg border-success-bg;
+    @apply text-white bg-success hover:bg-success-hover border-success-border;
   }
   .btn-info {
-    @apply text-white bg-info-bg hover:bg-info-hover-bg border-info-bg;
+    @apply text-white bg-info hover:bg-info-hover border-info;
   }
   .btn-warning {
-    @apply text-black bg-warning-bg hover:bg-warning-hover-bg border-warning-bg;
+    @apply text-black bg-warning hover:bg-warning-hover border-warning-border;
   }
   .btn-danger {
-    @apply text-white bg-danger-bg hover:bg-danger-hover-bg border-danger-bg;
+    @apply text-white bg-danger hover:bg-danger-hover border-danger-border;
   }
   .btn-link {
-    @apply text-default-text bg-link-bg hover:bg-link-hover-bg border-link-bg hover:underline;
+    @apply text-default-text bg-transparent border-0 hover:underline;
+  }
+
+  /* form controls */
+  .form-control {
+    @apply max-w-full w-auto h-auto min-h-9 block py-[6px] px-3 text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    outline: none;
+  }
+
+  .h1 {
+    @apply text-h1 font-bold mb-4;
+  }
+  .h2 {
+    @apply text-h2 font-bold mb-4;
+  }
+  .lead {
+    @apply text-lead font-bold mb-4;
+  }
+  .h3 {
+    @apply text-h3 font-bold mb-4;
+  }
+  .h4 {
+    @apply text-h4 font-bold mb-4;
+  }
+  .h5 {
+    @apply text-h5 font-bold mb-4;
+  }
+  .h6 {
+    @apply text-h6 font-bold mb-4;
+  }
+  .small {
+    @apply text-small;
   }
 }
