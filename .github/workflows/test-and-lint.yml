@@ -1,0 +1,135 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Lint and Test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v2
+      - name: "Building and Unit Tests Against Node"
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm install
+        env:
+          CI: true
+
+      - name: Build
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Unit Tests 🧪
+        run: npm run test:coverage
+        env:
+          CI: true
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch       
+
+      - name: Deploy Coverage Report 🚀
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          TARGET_FOLDER: ${{ steps.extract_branch.outputs.branch }}/coverage
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: coverage
+
+      - name: Find Comment
+        if: steps.extract_branch.outputs.branch != 'main'
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: |
+            Jest Coverage Report Link for Branch
+            https://dts-stn.github.io/${{ github.event.pull_request.base.repo.name }}/${{ steps.extract_branch.outputs.branch }}/coverage/lcov-report
+
+      - name: Create or update comment # comment in pull request
+        if: steps.extract_branch.outputs.branch != 'main'
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Jest Coverage Report Link for Branch
+            https://dts-stn.github.io/${{ github.event.pull_request.base.repo.name }}/${{ steps.extract_branch.outputs.branch }}/coverage/lcov-report
+          edit-mode: replace         
+
+      # - name: Cypress end-to-end 🧪
+      #   uses: cypress-io/github-action@v2
+      #   env:
+      #     CI: true
+      #     NODE_ENV: production
+      #   with:
+      #     install: false
+      #     start: npm run start
+      #     continue-on-error: true
+         
+      # - name: Copy test execution reports
+      #   run: |
+      #     mkdir report
+      #     cp -r cypress/results report/results
+
+      # - name: Merge test results into one
+      #   run: npm run report:merge
+
+      # - name: Generate HTML report
+      #   run: npm run report:generate
+
+      # - name: Extract branch name
+      #   shell: bash
+      #   run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      #   id: extract_branch 
+
+      # # - name: Deploy to GitHub Pages
+      # #    uses: JamesIves/github-pages-deploy-action@4.1.5
+
+      # - name: Deploy Coverage Report 🚀
+      #   uses: JamesIves/github-pages-deploy-action@3.6.2
+      #   with:
+      #     TARGET_FOLDER: ${{ steps.extract_branch.outputs.branch }}/coverage/e2e-report
+      #     BRANCH: gh-pages # The branch the action should deploy to.
+      #     FOLDER: report
+
+      # - name: Find Comment
+      #   if: steps.extract_branch.outputs.branch != 'main'
+      #   uses: peter-evans/find-comment@v1
+      #   id: fc
+      #   with:
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     comment-author: 'github-actions[bot]'
+      #     body-includes: |
+      #       e2e Coverage Report Link for Branch
+      #       https://dts-stn.github.io/${{ github.event.pull_request.base.repo.name }}/${{ steps.extract_branch.outputs.branch }}/coverage/e2e-report
+
+      # - name: Create or update comment # comment in pull request
+      #   if: steps.extract_branch.outputs.branch != 'main'
+      #   uses: peter-evans/create-or-update-comment@v1
+      #   with:
+      #     comment-id: ${{ steps.fc.outputs.comment-id }}
+      #     issue-number: ${{ github.event.pull_request.number }}
+      #     body: |
+      #       e2e Coverage Report Link for Branch
+      #       https://dts-stn.github.io/${{ github.event.pull_request.base.repo.name }}/${{ steps.extract_branch.outputs.branch }}/coverage/e2e-report
+      #     edit-mode: replace    
+                
+          

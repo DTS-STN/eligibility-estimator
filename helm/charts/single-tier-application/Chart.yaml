@@ -1,0 +1,9 @@
+apiVersion: v1
+appVersion: "1.0"
+description: Generic Helm Chart for deploying a single tier application
+name: single-tier-application
+version: 0.0.1
+maintainers:
+  - name: Digital Technology Solutions, Site Reliability Engineering
+    email: gocmts@gmail.com
+    url: https://confluence.dts-stn.com/display/OPS/Site+Reliability+Engineering

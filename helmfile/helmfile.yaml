@@ -1,0 +1,26 @@
+repositories:
+  - name: stable
+    url: https://charts.helm.sh/stable
+
+context: {{ requiredEnv "K8S_CLUSTER_NAME"}}
+   
+environments:
+  dev:
+  int:
+  main:
+  sprint:
+  prod-blue:
+  prod-green: 
+
+releases:
+# Single Tier Website
+  - name: {{ requiredEnv "APP_NAME" }}-{{ .Environment.Name }}
+    chart: ../helm/Charts/single-tier-appliation
+    values:
+      - overrides/single-tier-application/single-tier-application.yaml.gotmpl
+    labels:
+        category: dts
+        app: single-tier-website-example
+        tier: frontend
+    namespace: examples-{{ .Environment.Name }}
+    installed: true
