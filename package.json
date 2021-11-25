@@ -19,6 +19,7 @@
     "husky-pre-commit": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\" && git add -A ."
   },
   "dependencies": {
+    "@babel/core": "^7.16.0",
     "next": "^12.0.3",
     "prom-client": "^12.0.0",
     "react": "17.0.2",
