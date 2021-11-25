@@ -9,5 +9,34 @@
     @apply focus:outline-none;
     @apply focus-visible:ring-1;
     @apply focus-visible:ring-black;
-}
+  }
+
+  .btn {
+    @apply mb-0 py-[6px] px-3 min-h-[9px] min-w-[9px] font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid rounded;
+    border-style: outset;
+  }
+
+  .btn-default {
+    @apply text-default-text bg-default-bg hover:bg-default-hover-bg border-default-border;
+  }
+
+  .btn-primary {
+    @apply text-white bg-primary-bg hover:bg-primary-hover-bg border-primary-bg;
+  }
+
+  .btn-success {
+    @apply text-white bg-success-bg hover:bg-success-hover-bg border-success-bg;
+  }
+  .btn-info {
+    @apply text-white bg-info-bg hover:bg-info-hover-bg border-info-bg;
+  }
+  .btn-warning {
+    @apply text-black bg-warning-bg hover:bg-warning-hover-bg border-warning-bg;
+  }
+  .btn-danger {
+    @apply text-white bg-danger-bg hover:bg-danger-hover-bg border-danger-bg;
+  }
+  .btn-link {
+    @apply text-default-text bg-link-bg hover:bg-link-hover-bg border-link-bg hover:underline;
+  }
 }
