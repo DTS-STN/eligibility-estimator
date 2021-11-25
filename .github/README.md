@@ -16,9 +16,9 @@ This project uses
 
 ### Values that need to be configured:
 
-#### Replace next-template name to new project name
+#### Replace eligibility-estimator-client name to new project name
 
-Search "next-template", replace in package.json, run "npm i" in terminal and confirm package-lock.json is updated
+Search "eligibility-estimator-client", replace in package.json, run "npm i" in terminal and confirm package-lock.json is updated
 
 #### Configuring Helm
 
