@@ -17,7 +17,7 @@ releases:
   - name: {{ requiredEnv "APP_NAME" }}-{{ .Environment.Name }}
     chart: ../helm/Charts/single-tier-appliation
     values:
-      - overrides/single-tier-application/single-tier-application.yaml.gotmpl
+      - overrides/eligibility-estimator-client/eligibility-estimator-client.yaml.gotmpl
     labels:
         category: dts
         app: single-tier-website-example
