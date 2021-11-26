@@ -83,7 +83,7 @@ const Home: NextPage = () => {
             <textarea
               name=""
               id=""
-              rows="4"
+              rows={4}
               className="form-control"
             ></textarea>
             <p className="italic">
