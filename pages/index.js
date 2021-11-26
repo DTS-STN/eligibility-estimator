@@ -1,6 +1,31 @@
+import Image from 'next/image'
+
 export default function Index() {
   return (
-    <div className="container mx-auto flex flex-col mt-8 font-gc space-y-4">
+    <div className="container mx-auto flex flex-col mt-8 font-gc space-y-4 mb-16">
+      <h1 className="h1">
+        Implementing a slice of the{' '}
+        <a
+          href="https://wet-boew.github.io/wet-boew-styleguide/index-en.html"
+          className="text-default-text hover:underline"
+          target="_blank"
+          rel="noreferrer"
+        >
+          WET
+        </a>{' '}
+        design system
+      </h1>
+      <p className="">
+        This page is just a place to put components that we need for developing
+        a first cut of the eligibility estimator. The elements shown in mockups
+        are prioritized, with more coming later for completeness. Eventually
+        this will be moved to Storybook for easy documentation and integration
+        with othewr solutions.
+      </p>
+      <p>
+        Once we&apos;ve coordinated with the client, we can finish up
+        accessibility and merge any other solutions for components.
+      </p>
       <div className="grid tablet:grid-cols-1 mobile:grid-cols-2 gap-4">
         <div className="rounded border-[1px] border-solid border-default-text px-6 py-4 space-y-4">
           <p className="h5">Inputs</p>
@@ -12,6 +37,24 @@ export default function Index() {
             className="form-control"
           />
           <input type="password" placeholder="****" className="form-control" />
+          <div className="radio">
+            <label htmlFor="radio2">
+              <input type="radio" id="radio1" name="liveCan" className="mr-2" />
+              Option 1
+            </label>
+          </div>
+          <div className="radio">
+            <label htmlFor="radio2">
+              <input type="radio" id="radio2" name="liveCan" className="mr-2" />
+              Option 2
+            </label>
+          </div>
+          <div className="checkbox">
+            <label htmlFor="checkbox1">
+              <span>Do you live in Canada?</span>
+              <input type="checkbox" id="checkbox1" className="ml-2" />
+            </label>
+          </div>
           <select className="form-control" placeholder="Select from ...">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -19,7 +62,10 @@ export default function Index() {
             <option value="2">4</option>
             <option value="2">5</option>
           </select>
-          <p className="italic">Searchable Select? Mockup required</p>
+          <textarea name="" id="" rows="4" className="form-control"></textarea>
+          <p className="italic">
+            Searchable Select? Will develop once mockup is created.
+          </p>
         </div>
         <div className="rounded border-[1px] border-solid border-default-text px-6 py-4">
           <p className="h5">Typography</p>
@@ -43,6 +89,28 @@ export default function Index() {
         <button className="btn btn-warning">Warning</button>
         <button className="btn btn-danger">Danger</button>
         <button className="btn btn-link">Link</button>
+      </div>
+      <div className="rounded border-[1px] border-solid border-default-text px-6 py-4">
+        <p className="h5">Alerts</p>
+        <p>
+          Below is an example of conflicting alerts in the WET design system,
+          and the GC'&apos;s website. Implementation is blocked until we can
+          chat with the client. The personalizer has the GC's Implementation.
+        </p>
+        <p className="h6">GC</p>
+        <Image
+          src="/alert-example.png"
+          alt="an example of whatthe Canada.ca alert looks like."
+          width="905px"
+          height="149px"
+        />
+        <p className="h6">WET</p>
+        <Image
+          src="/alert-example-wet.png"
+          alt="an example of whatthe Canada.ca alert looks like."
+          width="642px"
+          height="113px"
+        />
       </div>
     </div>
   )
