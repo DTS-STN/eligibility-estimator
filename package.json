@@ -14,7 +14,9 @@
     "report:merge": "mochawesome-merge cypress/results/json/*.json > index.json",
     "report:generate": "marge index.json --reportDir report --assetsDir report/assets --reportPageTitle index.html",
     "test:unit": "jest",
-    "test:coverage": "jest --coverage --forceExit",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage",
     "prepare": "husky install"
   },
   "dependencies": {
