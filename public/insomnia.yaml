@@ -1,49 +1,49 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-26T18:26:36.545Z
+__export_date: 2021-11-26T22:31:21.194Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
-  - _id: req_wrk_90d4d590fb5a4034b3d98b7c08964852af277e8f
+  - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1637951151707
-    created: 1637344180348
-    url: "{{ base_url }}/CalculateEligibility"
+    modified: 1637965857068
+    created: 1637965624524
+    url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
-    description: ""
+    description: ''
     method: GET
     body: {}
     parameters:
       - name: income
         disabled: false
-        value: "10000"
-        id: pair_ab54032bee684c07b89c3394565b4aee
+        value: '10000'
+        id: pair_c030ced1f6734091bee59776c93029c4
       - name: age
         disabled: false
-        value: "65"
-        id: pair_c38486b2a2b045a0bdb0482433bd81cd
+        value: '65'
+        id: pair_042513af58dc49779bbacdc070a93a42
       - name: livingCountry
         disabled: false
         value: Canada
-        id: pair_e3ab1f6c34f0426eafcd3412892638af
+        id: pair_be1b9002a3d4425e9d54ca78e70ccd6b
       - name: legalStatus
         disabled: false
         value: Canadian Citizen
-        id: pair_98b2119721fc4568bb3cd8de76fccf8e
+        id: pair_ceb261ba61bc4451a3692f48b970b44f
       - name: yearsInCanadaSince18
         disabled: false
-        value: "40"
-        id: pair_e36b60fab792448bb5d7cef028d4f870
+        value: '40'
+        id: pair_6d9f6c31e8c242e68eece534e7608b30
       - name: maritalStatus
         disabled: false
         value: Married
-        id: pair_1a07872cfac1421c83589a5cb62d0008
+        id: pair_c7ac12a3165840fa9ee705de6c0cbf8f
       - name: partnerReceivingOas
         disabled: false
-        value: "true"
-        id: pair_dcf6604025b4400a9106783d7358b641
+        value: 'true'
+        id: pair_df8f848c110249b7a81e21cc2e6bb455
     headers: []
     authentication: {}
-    metaSortKey: -1637344180348
+    metaSortKey: -1637965624524
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -57,18 +57,18 @@ resources:
     modified: 1637016450873
     created: 1637016450873
     name: eligibility-estimator.yaml
-    description: ""
+    description: ''
     scope: design
     _type: workspace
   - _id: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1637709783015
+    modified: 1637963607236
     created: 1637016450884
     name: Base Environment
     data:
-      base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
+      base_url: '{{ scheme }}://{{ host }}{{ base_path }}'
     dataPropertyOrder:
-      "&":
+      '&':
         - base_url
     color: null
     isPrivate: false
@@ -83,7 +83,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1637951186816
+    modified: 1637965865024
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -103,13 +103,15 @@ resources:
           **To interact with the API, click the "Try it out" button below on the right.**
 
       servers:
-        - url: https://eligibilityestimatorapi.azurewebsites.net/api
+        - url: https://eligibility-estimator.vercel.app/api
           description: 'Main production site'
-        - url: http://localhost:7071/api
+        - url: https://eligibility-estimator-dev.vercel.app/api
+          description: 'Main development site'
+        - url: http://localhost:3000/api
           description: 'Local developer environment'
 
       paths:
-        /CalculateEligibility:
+        /calculateEligibility:
           get:
             summary: Calculate eligibility
             description: Calculates eligibility for all benefits given a certain set of parameters.
@@ -451,15 +453,15 @@ resources:
     _type: api_spec
   - _id: env_env_e85c84355a7e428ff3e7002e5d1e8146fed429b0_sub
     parentId: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
-    modified: 1637709785913
+    modified: 1637965572928
     created: 1637342147321
-    name: OpenAPI env
+    name: Prod env
     data:
       scheme: https
       base_path: /api
-      host: eligibilityestimatorapi.azurewebsites.net
+      host: eligibility-estimator.vercel.app
     dataPropertyOrder:
-      "&":
+      '&':
         - scheme
         - base_path
         - host
@@ -469,19 +471,37 @@ resources:
     _type: environment
   - _id: env_e4bbab0d34a74edb8c6d1c0ae7ad0cf2
     parentId: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
-    modified: 1637709785133
+    modified: 1637963610302
     created: 1637633131081
     name: Local env
     data:
       scheme: http
       base_path: /api
-      host: localhost:7071
+      host: localhost:3000
     dataPropertyOrder:
-      "&":
+      '&':
         - scheme
         - base_path
         - host
     color: null
     isPrivate: false
     metaSortKey: 1637342147371
+    _type: environment
+  - _id: env_caaf3e25e5e1424ebecd70a3666e20ed
+    parentId: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
+    modified: 1637965579015
+    created: 1637965573028
+    name: Dev env
+    data:
+      scheme: https
+      base_path: /api
+      host: eligibility-estimator-dev.vercel.app
+    dataPropertyOrder:
+      '&':
+        - scheme
+        - base_path
+        - host
+    color: null
+    isPrivate: false
+    metaSortKey: 1637342147346
     _type: environment
