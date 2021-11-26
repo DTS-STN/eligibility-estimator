@@ -1,6 +1,9 @@
+import type { NextPage } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
+import styles from '../styles/Home.module.css'
 
-export default function Index() {
+const Home: NextPage = () => {
   return (
     <main>
       <div className="container mx-auto flex flex-col mt-8 font-gc space-y-4 mb-16">
@@ -80,7 +83,7 @@ export default function Index() {
             <textarea
               name=""
               id=""
-              rows="4"
+              rows={4}
               className="form-control"
             ></textarea>
             <p className="italic">
@@ -137,3 +140,5 @@ export default function Index() {
     </main>
   )
 }
+
+export default Home
