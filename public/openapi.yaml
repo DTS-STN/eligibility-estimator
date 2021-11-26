@@ -1,0 +1,359 @@
+openapi: 3.0.3
+info:
+  title: Benefits Eligibility Estimator API
+  version: '1.0'
+  description: >
+    Calculates eligibility for OAS, GIS, and more.
+    Support for entitlement value and other benefits is coming soon.
+
+
+    The code for this project is available [here](https://github.com/DTS-STN/eligibility-estimator-api).
+
+
+    **To interact with the API, click the "Try it out" button below on the right.**
+
+servers:
+  - url: https://eligibility-estimator.vercel.app/api
+    description: 'Main production site'
+  - url: http://localhost:3000/api
+    description: 'Local developer environment'
+
+paths:
+  /calculateEligibility:
+    get:
+      summary: Calculate eligibility
+      description: Calculates eligibility for all benefits given a certain set of parameters.
+      tags:
+        - Endpoints
+      parameters:
+        - $ref: '#/components/parameters/income'
+        - $ref: '#/components/parameters/age'
+        - $ref: '#/components/parameters/livingCountry'
+        - $ref: '#/components/parameters/legalStatus'
+        - $ref: '#/components/parameters/yearsInCanadaSince18'
+        - $ref: '#/components/parameters/maritalStatus'
+        - $ref: '#/components/parameters/partnerReceivingOas'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+
+components:
+  schemas:
+    Fields:
+      type: array
+      description: A list of fields that the frontend should display.
+      items:
+        type: string
+        enum:
+          - age
+          - livingCountry
+          - legalStatus
+          - yearsInCanadaSince18
+          - maritalStatus
+          - partnerReceivingOas
+          - income
+
+    ResultOptions:
+      type: string
+      description: A summary of the resulting eligibility calculation
+      format: string
+      enum:
+        - Eligible!
+        - Ineligible!
+        - Conditionally eligible...
+        - Need more information...
+        - Request is invalid!
+
+    ResultReasons:
+      type: string
+      description: The reason for the provided outcome
+      format: string
+      enum:
+        - You meet the criteria
+        - Age does not meet requirement for this benefit
+        - Not enough years in Canada
+        - Not a Canadian citizen
+        - Not in a country with a social agreement
+        - Need more information...
+        - Not eligible for OAS
+        - Income too high
+        - Your marital status does not meet the requirement for this benefit
+        - Entered data is invalid
+
+    ResultObject:
+      type: object
+      description: The calculated result for a given benefit
+      required:
+        - result
+        - reason
+        - detail
+      properties:
+        result:
+          $ref: '#/components/schemas/ResultOptions'
+        reason:
+          $ref: '#/components/schemas/ResultReasons'
+        detail:
+          type: string
+          example: Based on the information provided, you are eligible!
+        missingFields:
+          $ref: '#/components/schemas/Fields'
+
+    ResponseObject:
+      type: object
+      description: The overall eligibility results, plus a list of fields that the frontend should display
+      required:
+        - oas
+        - gis
+        - allowance
+        - afs
+        - allFields
+      properties:
+        oas:
+          $ref: '#/components/schemas/ResultObject'
+        gis:
+          $ref: '#/components/schemas/ResultObject'
+        allowance:
+          $ref: '#/components/schemas/ResultObject'
+        afs:
+          $ref: '#/components/schemas/ResultObject'
+        allFields:
+          $ref: '#/components/schemas/Fields'
+
+    ErrorResponseObject:
+      type: object
+      description: Error details for the failed request
+      required:
+        - error
+        - detail
+      properties:
+        error:
+          type: string
+          example: Request is invalid!
+        detail:
+          type: object
+
+  responses:
+    '200':
+      description: Successful request and response. Returns the overall eligibility results, plus a list of fields that the frontend should display.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseObject'
+          examples:
+            'Standard case':
+              value:
+                oas:
+                  result: Eligible!
+                  reason: You meet the criteria
+                  detail: Based on the information provided, you are eligible for OAS!
+                gis:
+                  result: Eligible!
+                  reason: You meet the criteria
+                  detail: Based on the information provided, you are eligible for GIS!
+                allowance:
+                  result: Ineligible!
+                  reason: Age does not meet requirement for this benefit
+                  detail: You must be between 60 and 64 to be eligible for Allowance.
+                afs:
+                  result: Ineligible!
+                  reason: Age does not meet requirement for this benefit
+                  detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
+                allFields:
+                  - income
+                  - age
+                  - livingCountry
+                  - legalStatus
+                  - yearsInCanadaSince18
+                  - maritalStatus
+                  - partnerReceivingOas
+
+            'Blank request':
+              value:
+                oas:
+                  result: Need more information...
+                  reason: Need more information...
+                  detail: Missing 1 required field.
+                  missingFields:
+                    - income
+                gis:
+                  result: Need more information...
+                  reason: Need more information...
+                  detail: Missing 1 required field.
+                  missingFields:
+                    - income
+                allowance:
+                  result: Need more information...
+                  reason: Need more information...
+                  detail: Missing 1 required field.
+                  missingFields:
+                    - income
+                afs:
+                  result: Need more information...
+                  reason: Need more information...
+                  detail: Missing 1 required field.
+                  missingFields:
+                    - income
+                allFields:
+                  - income
+
+            'Ineligible case':
+              value:
+                oas:
+                  result: Ineligible!
+                  reason: Income too high
+                  detail: Your income is too high to be eligible for OAS.
+                gis:
+                  result: Ineligible!
+                  reason: Not eligible for OAS
+                  detail: You need to be eligible for OAS to be eligible for GIS.
+                allowance:
+                  result: Ineligible!
+                  reason: Age does not meet requirement for this benefit
+                  detail: You must be between 60 and 64 to be eligible for Allowance.
+                afs:
+                  result: Ineligible!
+                  reason: Age does not meet requirement for this benefit
+                  detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
+                allFields:
+                  - income
+                  - age
+                  - livingCountry
+                  - legalStatus
+                  - yearsInCanadaSince18
+                  - maritalStatus
+                  - partnerReceivingOas
+
+    '400':
+      description: Invalid request, typically because the input did not pass the validation rules.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponseObject'
+          examples:
+            'Years in Canada validation':
+              value:
+                error: Request is invalid!
+                detail:
+                  message: Years in Canada should be no more than age minus 18
+                  path:
+                    - yearsInCanadaSince18
+                  type: number.max
+            'Maximum age validation':
+              value:
+                error: Request is invalid!
+                detail:
+                  message: '"age" must be less than or equal to 150'
+                  path:
+                    - age
+                  type: number.max
+
+  parameters:
+    income:
+      name: income
+      in: query
+      description: The user's current (combined, if applicable) net income.
+      required: true
+      example: 10000
+      schema:
+        type: integer
+        description: Income in Canadian dollars.
+      allowEmptyValue: false
+
+    age:
+      name: age
+      in: query
+      description: The current age of the user, up to a max of 150.
+      required: false
+      schema:
+        type: integer
+        description: Age, up to a max of 150.
+        example: 65
+        maximum: 150
+      allowEmptyValue: false
+
+    livingCountry:
+      name: livingCountry
+      in: query
+      description: >
+        The country that the user is currently living in.
+
+
+        _For testing purposes, "Agreement" and "No agreement" are options._
+      required: false
+      allowEmptyValue: false
+      schema:
+        type: string
+        description: Any country
+        example: Canada
+        enum:
+          - Canada
+          - Agreement
+          - No agreement
+          - Any other country
+
+    legalStatus:
+      name: legalStatus
+      in: query
+      description: >
+        The current legal status of the user.
+
+
+        _Note that all options are treated the same, except for "None of the above", which will be ineligible._
+      required: false
+      example: Canadian Citizen
+      schema:
+        type: string
+        enum:
+          - Canadian Citizen
+          - Permanent Resident
+          - Status Indian
+          - Temporary Resident
+          - None of the above
+        description: The current legal status of the user.
+      allowEmptyValue: false
+
+    yearsInCanadaSince18:
+      name: yearsInCanadaSince18
+      in: query
+      description: >
+        How many years the user has lived in Canada since the age of 18.
+
+
+        _Note that this can not be greater than `age - 18`._
+      required: false
+      example: 40
+      schema:
+        type: integer
+        description: Years, up to a max of 100.
+        maximum: 100
+      allowEmptyValue: false
+
+    maritalStatus:
+      name: maritalStatus
+      in: query
+      description: The current marital status of the user.
+      required: false
+      example: 'Married'
+      schema:
+        type: string
+        enum:
+          - Single
+          - Married
+          - Common-law
+          - Widowed
+          - Divorced
+          - Seperated
+        description: The current marital status of the user.
+      allowEmptyValue: false
+
+    partnerReceivingOas:
+      name: partnerReceivingOas
+      in: query
+      description: Is the user's partner receiving OAS?
+      required: false
+      example: true
+      schema:
+        type: boolean
+      allowEmptyValue: false
