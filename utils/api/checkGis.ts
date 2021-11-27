@@ -1,6 +1,6 @@
 import {
-  CalculationParams,
-  CalculationResult,
+  BenefitResult,
+  CalculationInput,
   GisSchema,
   MaritalStatusOptions,
   ResultOptions,
@@ -9,9 +9,9 @@ import {
 import { validateRequestForBenefit } from './validator'
 
 export default function checkGis(
-  params: CalculationParams,
-  oasResult: CalculationResult
-): CalculationResult {
+  params: CalculationInput,
+  oasResult: BenefitResult
+): BenefitResult {
   // include OAS result
   const paramsWithOas = { ...params, _oasEligible: oasResult.result }
 

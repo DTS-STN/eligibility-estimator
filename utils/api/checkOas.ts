@@ -1,7 +1,7 @@
 import getIsAgreementCountry from './socialAgreement'
 import {
-  CalculationParams,
-  CalculationResult,
+  BenefitResult,
+  CalculationInput,
   LegalStatusOptions,
   OasSchema,
   ResultOptions,
@@ -9,7 +9,7 @@ import {
 } from './types'
 import { validateRequestForBenefit } from './validator'
 
-export default function checkOas(params: CalculationParams): CalculationResult {
+export default function checkOas(params: CalculationInput): BenefitResult {
   // validation
   const { result, value } = validateRequestForBenefit(OasSchema, params)
   // if the validation was able to return an error result, return it

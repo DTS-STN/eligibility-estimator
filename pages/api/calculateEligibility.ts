@@ -4,15 +4,15 @@ import checkAllowance from '../../utils/api/checkAllowance'
 import checkGis from '../../utils/api/checkGis'
 import checkOas from '../../utils/api/checkOas'
 import {
-  ErrorResponseResult,
   RequestSchema,
-  ResponseResult,
+  ResponseError,
+  ResponseSuccess,
   ResultOptions,
 } from '../../utils/api/types'
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseResult | ErrorResponseResult>
+  res: NextApiResponse<ResponseSuccess | ResponseError>
 ) {
   try {
     console.log(`Processing request: `, req.query)

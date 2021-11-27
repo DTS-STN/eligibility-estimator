@@ -188,7 +188,7 @@ export const AfsSchema = RequestSchema.concat(
   })
 )
 
-export interface CalculationParams {
+export interface CalculationInput {
   age?: number
   livingCountry?: string
   legalStatus?: LegalStatusOptions
@@ -199,7 +199,7 @@ export interface CalculationParams {
   _oasEligible?: ResultOptions
 }
 
-export interface CalculationResult {
+export interface BenefitResult {
   result: ResultOptions
   reason: ResultReasons
   detail: String
@@ -207,15 +207,15 @@ export interface CalculationResult {
   missingFields?: Array<String>
 }
 
-export interface ResponseResult {
-  oas: CalculationResult
-  gis: CalculationResult
-  allowance: CalculationResult
-  afs: CalculationResult
+export interface ResponseSuccess {
+  oas: BenefitResult
+  gis: BenefitResult
+  allowance: BenefitResult
+  afs: BenefitResult
   allFields?: Array<String>
 }
 
-export interface ErrorResponseResult {
+export interface ResponseError {
   error: string
   detail: any
 }

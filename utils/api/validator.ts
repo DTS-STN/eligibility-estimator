@@ -1,7 +1,7 @@
 import { ObjectSchema } from 'joi'
 import {
-  CalculationParams,
-  CalculationResult,
+  BenefitResult,
+  CalculationInput,
   ResultOptions,
   ResultReasons,
 } from './types'
@@ -10,8 +10,8 @@ var util = require('util')
 
 export function validateRequestForBenefit(
   schema: ObjectSchema<any>,
-  params: CalculationParams
-): { result: CalculationResult; value: CalculationParams } {
+  params: CalculationInput
+): { result: BenefitResult; value: CalculationInput } {
   const { error, value } = schema.validate(params, {
     abortEarly: false,
   })
