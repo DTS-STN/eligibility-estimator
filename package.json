@@ -16,7 +16,7 @@
     "test:unit": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci --coverage",
+    "test:ci": "jest --ci --coverage --silent",
     "prepare": "husky install"
   },
   "dependencies": {
