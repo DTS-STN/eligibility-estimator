@@ -1,8 +1,8 @@
 import getIsAgreementCountry from './socialAgreement'
 import {
   AfsSchema,
-  CalculationParams,
-  CalculationResult,
+  BenefitResult,
+  CalculationInput,
   LegalStatusOptions,
   MaritalStatusOptions,
   ResultOptions,
@@ -10,7 +10,7 @@ import {
 } from './types'
 import { validateRequestForBenefit } from './validator'
 
-export default function checkAfs(params: CalculationParams): CalculationResult {
+export default function checkAfs(params: CalculationInput): BenefitResult {
   // validation
   const { result, value } = validateRequestForBenefit(AfsSchema, params)
   // if the validation was able to return an error result, return it

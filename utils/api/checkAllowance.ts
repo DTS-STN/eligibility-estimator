@@ -1,8 +1,8 @@
 import getIsAgreementCountry from './socialAgreement'
 import {
   AllowanceSchema,
-  CalculationParams,
-  CalculationResult,
+  BenefitResult,
+  CalculationInput,
   LegalStatusOptions,
   MaritalStatusOptions,
   ResultOptions,
@@ -11,8 +11,8 @@ import {
 import { validateRequestForBenefit } from './validator'
 
 export default function checkAllowance(
-  params: CalculationParams
-): CalculationResult {
+  params: CalculationInput
+): BenefitResult {
   // validation
   const { result, value } = validateRequestForBenefit(AllowanceSchema, params)
   // if the validation was able to return an error result, return it
