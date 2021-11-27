@@ -12,6 +12,9 @@
 /cypress/reports
 /cypress/results
 
+# linting
+/.eslintcache
+
 # next.js
 /.next/
 /out/
