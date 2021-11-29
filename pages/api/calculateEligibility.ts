@@ -10,6 +10,19 @@ import {
   ResultOptions,
 } from '../../utils/api/types'
 
+type formField = {
+  fieldId: string
+  fieldLabel: string
+  fieldRequired: boolean
+  fieldPlaceholder: string
+  fieldType: 'text' | 'number' | 'email' | 'radio' | 'checkbox'
+}
+
+type allFieldProposal = {
+  // ..other data ...
+  fields: formField[]
+}
+
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseSuccess | ResponseError>
