@@ -1,12 +1,10 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
     <main>
-      <div className="container mx-auto flex flex-col mt-8 font-gc space-y-4 mb-16">
+      <div className="container mx-auto flex flex-col mt-8 space-y-4 mb-16">
         <h1 className="h1">
           Implementing a slice of the{' '}
           <a
@@ -30,7 +28,7 @@ const Home: NextPage = () => {
           Once we&apos;ve coordinated with the client, we can finish up
           accessibility and merge any other solutions for components.
         </p>
-        <div className="grid tablet:grid-cols-1 mobile:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="rounded border-[1px] border-solid border-default-text px-6 py-4 space-y-4">
             <p className="h5">Inputs</p>
             <input type="text" placeholder="name" className="form-control" />
@@ -70,7 +68,11 @@ const Home: NextPage = () => {
             <div className="checkbox">
               <label htmlFor="checkbox1">
                 <span>Do you live in Canada?</span>
-                <input type="checkbox" id="checkbox1" className="ml-2" />
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  className="ml-2 rounded"
+                />
               </label>
             </div>
             <select className="form-control" placeholder="Select from ...">
@@ -94,13 +96,11 @@ const Home: NextPage = () => {
             <p className="h5">Typography</p>
             <p className="h1">Size H1</p>
             <p className="h2">Size H2</p>
-            <p className="lead">Size Lead</p>
             <p className="h3">Size H3</p>
             <p className="h4">Size H4</p>
             <p className="h5">Size H5</p>
             <p className="">(Default Size)</p>
             <p className="h6">Size H6</p>
-            <p className="small">Size small</p>
           </div>
         </div>
         <div className="rounded border-[1px] border-solid border-default-text px-6 py-4 space-x-4">
