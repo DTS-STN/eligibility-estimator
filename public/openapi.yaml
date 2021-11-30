@@ -138,7 +138,11 @@ components:
 
   responses:
     '200':
-      description: Successful request and response. Returns the overall eligibility results, plus a list of fields that the frontend should display.
+      description: >
+        Successful request and response. Returns the overall eligibility results, plus a list of fields that the frontend should display.
+
+
+        _Note that "afs" means "Allowance for Survivor"._
       content:
         application/json:
           schema:
@@ -255,7 +259,11 @@ components:
     income:
       name: income
       in: query
-      description: The user's current (combined, if applicable) net income.
+      description: >
+        The user's current net income.
+
+
+        _Note: This should include the user's combined income, and/or partner's income, if applicable._
       required: true
       example: 10000
       schema:
@@ -353,7 +361,11 @@ components:
     partnerReceivingOas:
       name: partnerReceivingOas
       in: query
-      description: Is the user's partner receiving OAS?
+      description: >
+        Is the user's partner receiving OAS?
+
+
+        _Note: You must not select 'true' here when your marital status is anything other than Married or Common-Law._
       required: false
       example: true
       schema:

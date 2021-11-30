@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-26T22:31:21.194Z
+__export_date: 2021-11-30T15:32:57.688Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
@@ -83,7 +83,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1637965865024
+    modified: 1638286366923
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -228,7 +228,11 @@ resources:
 
         responses:
           '200':
-            description: Successful request and response. Returns the overall eligibility results, plus a list of fields that the frontend should display.
+            description: >
+              Successful request and response. Returns the overall eligibility results, plus a list of fields that the frontend should display.
+
+
+              _Note that "afs" means "Allowance for Survivor"._
             content:
               application/json:
                 schema:
@@ -345,7 +349,11 @@ resources:
           income:
             name: income
             in: query
-            description: The user's current (combined, if applicable) net income.
+            description: >
+              The user's current net income.
+
+
+              _Note: This should include the user's combined income, and/or partner's income, if applicable._
             required: true
             example: 10000
             schema:
@@ -443,7 +451,11 @@ resources:
           partnerReceivingOas:
             name: partnerReceivingOas
             in: query
-            description: Is the user's partner receiving OAS?
+            description: >
+              Is the user's partner receiving OAS?
+
+
+              _Note: You must not select 'true' here when your marital status is anything other than Married or Common-Law._
             required: false
             example: true
             schema:
