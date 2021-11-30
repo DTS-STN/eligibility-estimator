@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-30T15:32:57.688Z
+__export_date: 2021-11-30T21:17:36.143Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
@@ -83,7 +83,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1638286366923
+    modified: 1638307046353
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -93,11 +93,13 @@ resources:
         title: Benefits Eligibility Estimator API
         version: '1.0'
         description: >
-          Calculates eligibility for OAS, GIS, and more.
-          Support for entitlement value and other benefits is coming soon.
+          Calculates eligibility for OAS, GIS, and more. Support for entitlement value is coming soon.
 
 
-          The code for this project is available [here](https://github.com/DTS-STN/eligibility-estimator-api).
+          Please note that this is simply a testing interface for the backend API, and is not meant to serve as a user-facing frontend interface.
+
+
+          The code for this project is available [here](https://github.com/DTS-STN/eligibility-estimator).
 
 
           **To interact with the API, click the "Try it out" button below on the right.**
