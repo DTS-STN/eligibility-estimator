@@ -3,66 +3,14 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {
-    screens: {
-      desktop: '1200px',
-      tablet: '992px',
-      mobile: '768px',
-    },
     fontSize: {
-      small: [
-        '87%',
-        {
-          lineHeight: 1.4375,
-        },
-      ],
-      h6: [
-        '14px',
-        {
-          lineHeight: 1.4375,
-        },
-      ],
-      base: [
-        '14px',
-        {
-          lineHeight: 1.4375,
-        },
-      ],
-      h5: [
-        '16px',
-        {
-          lineHeight: 1.1,
-        },
-      ],
-      h4: [
-        '18px',
-        {
-          lineHeight: 1.1,
-        },
-      ],
-      h3: [
-        '22px',
-        {
-          lineHeight: 1.1,
-        },
-      ],
-      lead: [
-        '24px',
-        {
-          lineHeight: 1.1,
-        },
-      ],
-      h2: [
-        '26px',
-        {
-          lineHeight: 1.1,
-        },
-      ],
-      h1: [
-        '34px',
-        {
-          lineHeight: 1.1,
-        },
-      ],
+      h6: ['19px', '21px'],
+      base: ['20px', '33px'],
+      h5: ['20px', '22px'],
+      h4: ['22px', '24px'],
+      h3: ['24px', '26px'],
+      h2: ['36px', '40px'],
+      h1: ['38px', '42px'], // requires red <hr /> below
     },
     colors: {
       'white': '#FFF',
@@ -74,7 +22,7 @@ module.exports = {
       'default-hover': '#cfd1d5',
       'default-border': '#dcdee1',
 
-      // primary - text is white
+      // primary
       'primary': '#2572b4',
       'primary-border': '#091c2d',
       'primary-hover': '#1c578a;',
@@ -109,7 +57,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        gc: 'Helvetica Neue, Helvetica, Arial, sans-serif',
+        'header-gc': 'Lato, sans-serif',
+        'sans': '"Noto Sans", sans-serif',
       },
       minHeight: {
         9: '36px',
@@ -137,5 +86,5 @@ module.exports = {
       ],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 }

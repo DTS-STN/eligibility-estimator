@@ -42,33 +42,27 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px];
+    @apply text-h1 font-bold mb-[15px] font-header-gc;
   }
   .h2 {
-    @apply text-h2 font-bold mb-[15px];
-  }
-  .lead {
-    @apply text-lead font-bold mb-[15px];
+    @apply text-h2 font-bold mb-[15px] font-header-gc;
   }
   .h3 {
-    @apply text-h3 font-bold mb-[15px];
+    @apply text-h3 font-bold mb-[15px] font-header-gc;
   }
   .h4 {
-    @apply text-h4 font-bold mb-[15px];
+    @apply text-h4 font-bold mb-[15px] font-header-gc;
   }
   .h5 {
-    @apply text-h5 font-bold mb-[15px];
+    @apply text-h5 font-bold mb-[15px] font-header-gc;
   }
   .h6 {
-    @apply text-h6 font-bold mb-[15px];
-  }
-  .small {
-    @apply text-small;
+    @apply text-h6 font-bold mb-[15px] font-header-gc;
   }
 
   /* form controls */
   .form-control {
-    @apply max-w-full w-full h-auto min-h-9 block py-[6px] px-3 text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form;
+    @apply w-full h-auto min-h-9 block py-[6px] px-3 text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
   }

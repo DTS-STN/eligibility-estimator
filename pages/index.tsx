@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <main>
-      <div className="container mx-auto flex flex-col mt-8 font-gc space-y-4 mb-16">
+      <div className="container mx-auto flex flex-col mt-8 space-y-4 mb-16">
         <h1 className="h1">
           Implementing a slice of the{' '}
           <a
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
           Once we&apos;ve coordinated with the client, we can finish up
           accessibility and merge any other solutions for components.
         </p>
-        <div className="grid tablet:grid-cols-1 mobile:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="rounded border-[1px] border-solid border-default-text px-6 py-4 space-y-4">
             <p className="h5">Inputs</p>
             <input type="text" placeholder="name" className="form-control" />
@@ -70,7 +70,11 @@ const Home: NextPage = () => {
             <div className="checkbox">
               <label htmlFor="checkbox1">
                 <span>Do you live in Canada?</span>
-                <input type="checkbox" id="checkbox1" className="ml-2" />
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  className="ml-2 rounded"
+                />
               </label>
             </div>
             <select className="form-control" placeholder="Select from ...">
