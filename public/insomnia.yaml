@@ -180,14 +180,18 @@ resources:
 
           ResultObject:
             type: object
-            description: The calculated result for a given benefit
+            description: The calculated results for a given benefit
             required:
-              - result
+              - eligibilityResult
+              - entitlementResult
               - reason
               - detail
             properties:
-              result:
+              eligibilityResult:
                 $ref: '#/components/schemas/ResultOptions'
+              entitlementResult:
+                type: number
+                example: 500
               reason:
                 $ref: '#/components/schemas/ResultReasons'
               detail:
@@ -245,19 +249,23 @@ resources:
                   'Standard case':
                     value:
                       oas:
-                        result: Eligible!
+                        eligibilityResult: Eligible!
+                        entitlementResult: 0
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for OAS!
                       gis:
-                        result: Eligible!
+                        eligibilityResult: Eligible!
+                        entitlementResult: 0
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for GIS!
                       allowance:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
                       allFields:
@@ -272,25 +280,29 @@ resources:
                   'Blank request':
                     value:
                       oas:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       gis:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       allowance:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       afs:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
@@ -301,19 +313,23 @@ resources:
                   'Ineligible case':
                     value:
                       oas:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Income too high
                         detail: Your income is too high to be eligible for OAS.
                       gis:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Not eligible for OAS
                         detail: You need to be eligible for OAS to be eligible for GIS.
                       allowance:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
                       allFields:

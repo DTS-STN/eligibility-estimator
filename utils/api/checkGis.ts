@@ -13,7 +13,7 @@ export default function checkGis(
   oasResult: BenefitResult
 ): BenefitResult {
   // include OAS result
-  const paramsWithOas = { ...params, _oasEligible: oasResult.result }
+  const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }
 
   // validation
   const { result, value } = validateRequestForBenefit(GisSchema, paramsWithOas)
@@ -28,19 +28,22 @@ export default function checkGis(
   // initial checks
   if (value.livingCountry != undefined && value.livingCountry != 'Canada') {
     return {
-      result: ResultOptions.INELIGIBLE,
+      eligibilityResult: ResultOptions.INELIGIBLE,
+      entitlementResult: 0,
       reason: ResultReasons.LIVING_COUNTRY,
       detail: 'You need to live in Canada to be eligible for GIS.',
     }
-  } else if (oasResult.result == ResultOptions.INELIGIBLE) {
+  } else if (oasResult.eligibilityResult == ResultOptions.INELIGIBLE) {
     return {
-      result: ResultOptions.INELIGIBLE,
+      eligibilityResult: ResultOptions.INELIGIBLE,
+      entitlementResult: 0,
       reason: ResultReasons.OAS,
       detail: 'You need to be eligible for OAS to be eligible for GIS.',
     }
-  } else if (oasResult.result == ResultOptions.MORE_INFO) {
+  } else if (oasResult.eligibilityResult == ResultOptions.MORE_INFO) {
     return {
-      result: ResultOptions.MORE_INFO,
+      eligibilityResult: ResultOptions.MORE_INFO,
+      entitlementResult: 0,
       reason: ResultReasons.MORE_INFO,
       detail: 'You need to complete the OAS eligibilty check first.',
     }
@@ -61,16 +64,18 @@ export default function checkGis(
   // main checks
   if (value.income <= maxIncome) {
     if (value.age >= 65) {
-      if (oasResult.result == ResultOptions.CONDITIONAL) {
+      if (oasResult.eligibilityResult == ResultOptions.CONDITIONAL) {
         return {
-          result: ResultOptions.CONDITIONAL,
+          eligibilityResult: ResultOptions.CONDITIONAL,
+          entitlementResult: 0,
           reason: ResultReasons.OAS,
           detail:
             'You may be eligible, please contact Service Canada for more information.',
         }
       } else {
         return {
-          result: ResultOptions.ELIGIBLE,
+          eligibilityResult: ResultOptions.ELIGIBLE,
+          entitlementResult: 0,
           reason: ResultReasons.NONE,
           detail:
             'Based on the information provided, you are eligible for GIS!',
@@ -78,14 +83,16 @@ export default function checkGis(
       }
     } else {
       return {
-        result: ResultOptions.INELIGIBLE,
+        eligibilityResult: ResultOptions.INELIGIBLE,
+        entitlementResult: 0,
         reason: ResultReasons.AGE,
         detail: 'You will be eligible for GIS when you turn 65.',
       }
     }
   } else {
     return {
-      result: ResultOptions.INELIGIBLE,
+      eligibilityResult: ResultOptions.INELIGIBLE,
+      entitlementResult: 0,
       reason: ResultReasons.INCOME,
       detail: 'Your income is too high to be eligible for GIS.',
     }

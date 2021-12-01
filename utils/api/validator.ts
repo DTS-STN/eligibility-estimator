@@ -31,7 +31,8 @@ export function validateRequestForBenefit(
     // return result containing all required fields
     return {
       result: {
-        result: ResultOptions.MORE_INFO,
+        eligibilityResult: ResultOptions.MORE_INFO,
+        entitlementResult: 0,
         reason: ResultReasons.MORE_INFO,
         detail: `Missing ${missingFields.length} required field${
           missingFields.length != 1 ? 's' : ''
