@@ -105,6 +105,8 @@ resources:
           **To interact with the API, click the "Try it out" button below on the right.**
 
       servers:
+        - url: /api
+          description: Current domain (default)
         - url: https://eligibility-estimator.vercel.app/api
           description: 'Main production site'
         - url: https://eligibility-estimator-dev.vercel.app/api
