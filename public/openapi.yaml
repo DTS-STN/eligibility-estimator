@@ -264,10 +264,10 @@ components:
       name: income
       in: query
       description: >
-        The user's current net income.
+        The client's current net income.
 
 
-        _Note: This should include the user's combined income, and/or partner's income, if applicable._
+        _Note: This should include the client's combined income, and/or partner's income, if applicable._
       required: true
       example: 10000
       schema:
@@ -278,7 +278,7 @@ components:
     age:
       name: age
       in: query
-      description: The current age of the user, up to a max of 150.
+      description: The current age of the client, up to a max of 150.
       required: false
       schema:
         type: integer
@@ -291,7 +291,7 @@ components:
       name: livingCountry
       in: query
       description: >
-        The country that the user is currently living in.
+        The country that the client is currently living in.
 
 
         _For testing purposes, "Agreement" and "No agreement" are options._
@@ -311,7 +311,7 @@ components:
       name: legalStatus
       in: query
       description: >
-        The current legal status of the user.
+        The current legal status of the client.
 
 
         _Note that all options are treated the same, except for "None of the above", which will be ineligible._
@@ -325,14 +325,14 @@ components:
           - Status Indian
           - Temporary Resident
           - None of the above
-        description: The current legal status of the user.
+        description: The current legal status of the client.
       allowEmptyValue: false
 
     yearsInCanadaSince18:
       name: yearsInCanadaSince18
       in: query
       description: >
-        How many years the user has lived in Canada since the age of 18.
+        How many years the client has lived in Canada since the age of 18.
 
 
         _Note that this can not be greater than `age - 18`._
@@ -347,7 +347,7 @@ components:
     maritalStatus:
       name: maritalStatus
       in: query
-      description: The current marital status of the user.
+      description: The current marital status of the client.
       required: false
       example: 'Married'
       schema:
@@ -359,14 +359,14 @@ components:
           - Widowed
           - Divorced
           - Seperated
-        description: The current marital status of the user.
+        description: The current marital status of the client.
       allowEmptyValue: false
 
     partnerReceivingOas:
       name: partnerReceivingOas
       in: query
       description: >
-        Is the user's partner receiving OAS?
+        Is the client's partner receiving OAS?
 
 
         _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Seperated._

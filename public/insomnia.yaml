@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-30T21:17:36.143Z
+__export_date: 2021-12-01T19:32:12.963Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1637965857068
+    modified: 1638385826962
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -83,7 +83,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1638307046353
+    modified: 1638387124412
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -354,10 +354,10 @@ resources:
             name: income
             in: query
             description: >
-              The user's current net income.
+              The client's current net income.
 
 
-              _Note: This should include the user's combined income, and/or partner's income, if applicable._
+              _Note: This should include the client's combined income, and/or partner's income, if applicable._
             required: true
             example: 10000
             schema:
@@ -368,7 +368,7 @@ resources:
           age:
             name: age
             in: query
-            description: The current age of the user, up to a max of 150.
+            description: The current age of the client, up to a max of 150.
             required: false
             schema:
               type: integer
@@ -381,7 +381,7 @@ resources:
             name: livingCountry
             in: query
             description: >
-              The country that the user is currently living in.
+              The country that the client is currently living in.
 
 
               _For testing purposes, "Agreement" and "No agreement" are options._
@@ -401,7 +401,7 @@ resources:
             name: legalStatus
             in: query
             description: >
-              The current legal status of the user.
+              The current legal status of the client.
 
 
               _Note that all options are treated the same, except for "None of the above", which will be ineligible._
@@ -415,14 +415,14 @@ resources:
                 - Status Indian
                 - Temporary Resident
                 - None of the above
-              description: The current legal status of the user.
+              description: The current legal status of the client.
             allowEmptyValue: false
 
           yearsInCanadaSince18:
             name: yearsInCanadaSince18
             in: query
             description: >
-              How many years the user has lived in Canada since the age of 18.
+              How many years the client has lived in Canada since the age of 18.
 
 
               _Note that this can not be greater than `age - 18`._
@@ -437,7 +437,7 @@ resources:
           maritalStatus:
             name: maritalStatus
             in: query
-            description: The current marital status of the user.
+            description: The current marital status of the client.
             required: false
             example: 'Married'
             schema:
@@ -449,14 +449,14 @@ resources:
                 - Widowed
                 - Divorced
                 - Seperated
-              description: The current marital status of the user.
+              description: The current marital status of the client.
             allowEmptyValue: false
 
           partnerReceivingOas:
             name: partnerReceivingOas
             in: query
             description: >
-              Is the user's partner receiving OAS?
+              Is the client's partner receiving OAS?
 
 
               _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Seperated._
