@@ -3,11 +3,13 @@ info:
   title: Benefits Eligibility Estimator API
   version: '1.0'
   description: >
-    Calculates eligibility for OAS, GIS, and more.
-    Support for entitlement value and other benefits is coming soon.
+    Calculates eligibility for OAS, GIS, and more. Support for entitlement value is coming soon.
 
 
-    The code for this project is available [here](https://github.com/DTS-STN/eligibility-estimator-api).
+    Please note that this is simply a testing interface for the backend API, and is not meant to serve as a user-facing frontend interface.
+
+
+    The code for this project is available [here](https://github.com/DTS-STN/eligibility-estimator).
 
 
     **To interact with the API, click the "Try it out" button below on the right.**
