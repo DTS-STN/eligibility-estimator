@@ -1,9 +1,10 @@
-import getIsAgreementCountry from './socialAgreement'
+import normalizeLivingCountry from './socialAgreement'
 import {
   AfsSchema,
   BenefitResult,
   CalculationInput,
   LegalStatusOptions,
+  LivingCountryOptions,
   MaritalStatusOptions,
   ResultOptions,
   ResultReasons,
@@ -27,11 +28,8 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
     : undefined
 
   // remove after confirming requirements
-  const requiredYearsInCanada = value.livingCountry === 'Canada' ? 10 : 10
-
-  const inCountryWithAgreement = value.livingCountry
-    ? getIsAgreementCountry(value.livingCountry)
-    : undefined
+  const requiredYearsInCanada =
+    value.livingCountry === LivingCountryOptions.CANADA ? 10 : 10
 
   // main checks
   if (value.age < 60 || value.age > 64) {
@@ -69,7 +67,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
         'Based on the information provided, you are eligible for Allowance for Survivor!',
     }
   } else if (
-    inCountryWithAgreement &&
+    value.livingCountry === LivingCountryOptions.AGREEMENT &&
     value.yearsInCanadaSince18 < requiredYearsInCanada
   ) {
     return {
@@ -91,7 +89,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       detail:
         'You currently do not appear to be eligible for the Allowance for Survivor as you have indicated that you do not have legal status in Canada. However, you may be in the future if you obtain legal status. If you are living outside of Canada, you may be eligible for the Allowance for Survivor if you had legal status prior to your departure.',
     }
-  } else if (inCountryWithAgreement == false) {
+  } else if (value.livingCountry === LivingCountryOptions.NO_AGREEMENT) {
     return {
       result: ResultOptions.INELIGIBLE,
       reason: ResultReasons.SOCIAL_AGREEMENT,

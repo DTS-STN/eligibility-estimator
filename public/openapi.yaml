@@ -39,6 +39,7 @@ paths:
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/partnerReceivingOas'
+        - $ref: '#/components/parameters/everLivedSocialCountry'
       responses:
         '200':
           $ref: '#/components/responses/200'
@@ -60,6 +61,7 @@ components:
           - maritalStatus
           - partnerReceivingOas
           - income
+          - everLivedSocialCountry
 
     ResultOptions:
       type: string
@@ -370,6 +372,16 @@ components:
 
 
         _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Seperated._
+      required: false
+      example: true
+      schema:
+        type: boolean
+      allowEmptyValue: false
+
+    everLivedSocialCountry:
+      name: everLivedSocialCountry
+      in: query
+      description: Has the client ever lived in a country with a social agreement? [link of countries to be included]
       required: false
       example: true
       schema:

@@ -1,6 +1,13 @@
-export default function getIsAgreementCountry(country: string): boolean {
-  if (country === 'Canada') return undefined
+import { LivingCountryOptions } from './types'
+
+export default function normalizeLivingCountry(
+  country: string
+): LivingCountryOptions {
+  if (country === LivingCountryOptions.CANADA)
+    return LivingCountryOptions.CANADA
   return AGREEMENT_COUNTRIES.includes(country)
+    ? LivingCountryOptions.AGREEMENT
+    : LivingCountryOptions.NO_AGREEMENT
 }
 
 const AGREEMENT_COUNTRIES = [

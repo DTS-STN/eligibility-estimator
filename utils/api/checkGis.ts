@@ -55,10 +55,20 @@ export default function checkGis(
   // main checks
   if (value.income <= maxIncome) {
     if (value.age >= 65) {
-      return {
-        result: ResultOptions.ELIGIBLE,
-        reason: ResultReasons.NONE,
-        detail: 'Based on the information provided, you are eligible for GIS!',
+      if (oasResult.result == ResultOptions.CONDITIONAL) {
+        return {
+          result: ResultOptions.CONDITIONAL,
+          reason: ResultReasons.OAS,
+          detail:
+            'You may be eligible, please contact Service Canada for more information.',
+        }
+      } else {
+        return {
+          result: ResultOptions.ELIGIBLE,
+          reason: ResultReasons.NONE,
+          detail:
+            'Based on the information provided, you are eligible for GIS!',
+        }
       }
     } else {
       return {

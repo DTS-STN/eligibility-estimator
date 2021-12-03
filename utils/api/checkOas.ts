@@ -1,8 +1,9 @@
-import getIsAgreementCountry from './socialAgreement'
+import normalizeLivingCountry from './socialAgreement'
 import {
   BenefitResult,
   CalculationInput,
   LegalStatusOptions,
+  LivingCountryOptions,
   OasSchema,
   ResultOptions,
   ResultReasons,
@@ -24,11 +25,8 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         LegalStatusOptions.TEMPORARY_RESIDENT,
       ].includes(value.legalStatus)
     : undefined
-
-  const requiredYearsInCanada = value.livingCountry === 'Canada' ? 10 : 20
-  const inCountryWithAgreement = value.livingCountry
-    ? getIsAgreementCountry(value.livingCountry)
-    : undefined
+  const requiredYearsInCanada =
+    value.livingCountry === LivingCountryOptions.CANADA ? 10 : 20
 
   // main checks
   if (value.income >= 129757) {
@@ -55,7 +53,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       }
     }
   } else if (
-    inCountryWithAgreement &&
+    value.livingCountry === LivingCountryOptions.AGREEMENT &&
     value.yearsInCanadaSince18 < requiredYearsInCanada
   ) {
     return {
@@ -64,11 +62,24 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       detail:
         "Depending on Canada's agreement with this country, you may be eligible to receive the OAS pension.",
     }
-  } else if (value.yearsInCanadaSince18 < requiredYearsInCanada) {
+  } else if (
+    value.yearsInCanadaSince18 < requiredYearsInCanada &&
+    !value.everLivedSocialCountry
+  ) {
     return {
       result: ResultOptions.INELIGIBLE,
       reason: ResultReasons.YEARS_IN_CANADA,
       detail: `You currently do not appear to be eligible for the OAS pension as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.`,
+    }
+  } else if (
+    value.yearsInCanadaSince18 < requiredYearsInCanada &&
+    value.everLivedSocialCountry
+  ) {
+    return {
+      result: ResultOptions.CONDITIONAL,
+      reason: ResultReasons.YEARS_IN_CANADA,
+      detail:
+        "Depending on Canada's agreement with this country, you may be eligible to receive the OAS pension.",
     }
   } else if (canadianCitizen == false) {
     return {
@@ -77,7 +88,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       detail:
         'You currently do not appear to be eligible for the OAS pension as you have indicated that you do not have legal status in Canada. However, you may be in the future if you obtain legal status. If you are living outside of Canada, you may be eligible for the OAS pension if you had legal status prior to your departure.',
     }
-  } else if (inCountryWithAgreement == false) {
+  } else if (value.livingCountry === LivingCountryOptions.NO_AGREEMENT) {
     return {
       result: ResultOptions.INELIGIBLE,
       reason: ResultReasons.SOCIAL_AGREEMENT,
