@@ -60,6 +60,7 @@ export const RequestSchema = Joi.object({
     .message('Years in Canada should be no more than age minus 18'),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatusOptions)),
   partnerReceivingOas: Joi.boolean(),
+  everLivedSocialCountry: Joi.boolean(),
 })
 
 export const OasSchema = RequestSchema.concat(
@@ -85,6 +86,24 @@ export const OasSchema = RequestSchema.concat(
         LegalStatusOptions.TEMPORARY_RESIDENT
       ),
       then: Joi.required(),
+    }),
+    everLivedSocialCountry: Joi.when('livingCountry', {
+      switch: [
+        {
+          is: Joi.string().exist().valid(LivingCountryOptions.CANADA),
+          then: Joi.when('yearsInCanadaSince18', {
+            is: Joi.number().exist().greater(0).less(10),
+            then: Joi.required(),
+          }),
+        },
+        {
+          is: Joi.string().exist().valid('No Agreement'),
+          then: Joi.when('yearsInCanadaSince18', {
+            is: Joi.number().exist().greater(0).less(20),
+            then: Joi.required(),
+          }),
+        },
+      ],
     }),
   })
 )
@@ -204,6 +223,7 @@ export interface CalculationInput {
   maritalStatus?: MaritalStatusOptions
   partnerReceivingOas?: boolean
   income?: number
+  everLivedSocialCountry?: boolean
   _oasEligible?: ResultOptions
 }
 
