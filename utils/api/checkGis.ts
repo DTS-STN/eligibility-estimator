@@ -26,7 +26,13 @@ export default function checkGis(
     value.maritalStatus == MaritalStatusOptions.COMMONLAW
 
   // initial checks
-  if (oasResult.result == ResultOptions.INELIGIBLE) {
+  if (value.livingCountry != undefined && value.livingCountry != 'Canada') {
+    return {
+      result: ResultOptions.INELIGIBLE,
+      reason: ResultReasons.LIVING_COUNTRY,
+      detail: 'You need to live in Canada to be eligible for GIS.',
+    }
+  } else if (oasResult.result == ResultOptions.INELIGIBLE) {
     return {
       result: ResultOptions.INELIGIBLE,
       reason: ResultReasons.OAS,

@@ -84,7 +84,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.missingFields.toString()).toEqual(['income'].toString())
     expect(res.body.allFields.toString()).toEqual(['income'].toString())
   })
-  it('requires 3 OAS and 0 GIS fields when only income provided', async () => {
+  it('requires 3 OAS and 1 GIS fields when only income provided', async () => {
     const res = await mockGetRequest({ income: 10000 })
     expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
@@ -93,12 +93,14 @@ describe('field requirement analysis', () => {
     )
     expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
-    expect(res.body.gis.missingFields).toBeUndefined()
+    expect(res.body.gis.missingFields.toString()).toEqual(
+      ['livingCountry'].toString()
+    )
     expect(res.body.allFields.toString()).toEqual(
       ['income', 'age', 'livingCountry', 'legalStatus'].toString()
     )
   })
-  it('requires 2 OAS and 0 GIS fields when only income/age provided', async () => {
+  it('requires 2 OAS and 1 GIS fields when only income/age provided', async () => {
     const res = await mockGetRequest({ income: 10000, age: 65 })
     expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
@@ -107,7 +109,9 @@ describe('field requirement analysis', () => {
     )
     expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
-    expect(res.body.gis.missingFields).toBeUndefined()
+    expect(res.body.gis.missingFields.toString()).toEqual(
+      ['livingCountry'].toString()
+    )
     expect(res.body.allFields.toString()).toEqual(
       ['income', 'age', 'livingCountry', 'legalStatus'].toString()
     )
@@ -441,6 +445,29 @@ describe('basic GIS scenarios', () => {
     })
     expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
+  })
+  it('returns "needs more info" when missing country', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatusOptions.SINGLE,
+    })
+    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
+  })
+  it('returns "ineligible" when not living in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatusOptions.SINGLE,
+    })
+    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "ineligible" when single and income over 18216', async () => {
     const res = await mockGetRequest({
@@ -852,7 +879,7 @@ describe('thorough personas', () => {
     expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
   })
-  it('Habon Aden: OAS conditionally eligible, GIS ineligible due to income', async () => {
+  it('Habon Aden: OAS conditionally eligible, GIS ineligible due to country', async () => {
     const res = await mockGetRequest({
       income: 28000,
       age: 66,
@@ -865,7 +892,7 @@ describe('thorough personas', () => {
     expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
     expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
-    expect(res.body.gis.reason).toEqual(ResultReasons.INCOME)
+    expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('Miriam Krayem: OAS eligible when 65, GIS ineligible due to income', async () => {
     const res = await mockGetRequest({
@@ -945,8 +972,8 @@ describe('thorough extras', () => {
     })
     expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.CONDITIONAL)
-    expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
+    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "eligible" when living in Canada and 10 years in Canada', async () => {
     const res = await mockGetRequest({
@@ -977,8 +1004,8 @@ describe('thorough extras', () => {
     })
     expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.CONDITIONAL)
-    expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
+    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "ineligible due to years in Canada" when not living in Canada and 19 years in Canada and not lived in social country', async () => {
     const res = await mockGetRequest({
@@ -994,7 +1021,7 @@ describe('thorough extras', () => {
     expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
     expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
-    expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
+    expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "eligible" when not living in Canada and 20 years in Canada', async () => {
     const res = await mockGetRequest({
@@ -1009,7 +1036,7 @@ describe('thorough extras', () => {
     })
     expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
-    expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
+    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
 })
