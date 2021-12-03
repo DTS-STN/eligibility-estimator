@@ -35,6 +35,7 @@ export enum ResultReasons {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
+  LIVING_COUNTRY = `Not living in Canada`,
   CITIZEN = `Not a Canadian citizen`,
   SOCIAL_AGREEMENT = 'Not in a country with a social agreement',
   MORE_INFO = 'Need more information...',
@@ -114,6 +115,10 @@ export const GisSchema = RequestSchema.concat(
       .valid(...Object.values(ResultOptions))
       .required(),
     income: Joi.required(),
+    livingCountry: Joi.when('income', {
+      is: Joi.number().exist().max(43680),
+      then: Joi.required(),
+    }),
     maritalStatus: Joi.when('_oasEligible', {
       not: Joi.valid(ResultOptions.INELIGIBLE, ResultOptions.MORE_INFO),
       then: Joi.required(),
