@@ -17,6 +17,12 @@ export enum LegalStatusOptions {
   NONE = 'None of the above',
 }
 
+export enum LivingCountryOptions {
+  CANADA = 'Canada',
+  AGREEMENT = 'Agreement',
+  NO_AGREEMENT = 'No Agreement',
+}
+
 export enum ResultOptions {
   ELIGIBLE = `Eligible!`,
   INELIGIBLE = `Ineligible!`,
@@ -38,13 +44,15 @@ export enum ResultReasons {
   INVALID = `Entered data is invalid`,
 }
 
-// this is what the API expects to receive
-// don't forget to update OpenAPI!
-// do not require fields here, do it in the benefit-specific schemas
+// This is what the API expects to receive, with the below exceptions due to normalization:
+// - livingCountry accepts a string
+//
+// Note: When updating this, don't forget to update OpenAPI!
+// Note: Do not require fields here, do it in the benefit-specific schemas.
 export const RequestSchema = Joi.object({
   income: Joi.number().integer(),
   age: Joi.number().integer().max(150),
-  livingCountry: Joi.string(),
+  livingCountry: Joi.string().valid(...Object.values(LivingCountryOptions)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatusOptions)),
   yearsInCanadaSince18: Joi.number()
     .integer()
@@ -190,7 +198,7 @@ export const AfsSchema = RequestSchema.concat(
 
 export interface CalculationInput {
   age?: number
-  livingCountry?: string
+  livingCountry?: LivingCountryOptions
   legalStatus?: LegalStatusOptions
   yearsInCanadaSince18?: number
   maritalStatus?: MaritalStatusOptions

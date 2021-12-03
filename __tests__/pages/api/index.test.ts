@@ -1,5 +1,6 @@
 import {
   LegalStatusOptions,
+  LivingCountryOptions,
   MaritalStatusOptions,
   ResultOptions,
   ResultReasons,
@@ -115,7 +116,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
     })
     expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
@@ -133,7 +134,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
     })
     expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
@@ -158,7 +159,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
@@ -185,7 +186,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -211,7 +212,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -240,7 +241,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -278,7 +279,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.NONE,
       yearsInCanadaSince18: 20,
     })
@@ -289,7 +290,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
     })
@@ -300,7 +301,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
     })
@@ -311,7 +312,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
@@ -322,7 +323,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
     })
@@ -333,7 +334,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'No Agreement',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
@@ -344,7 +345,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'No Agreement',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
     })
@@ -355,7 +356,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 55,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
@@ -397,7 +398,7 @@ describe('basic GIS scenarios', () => {
     const res = await mockGetRequest({
       income: 18217,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -409,7 +410,7 @@ describe('basic GIS scenarios', () => {
     const res = await mockGetRequest({
       income: 18216,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -421,7 +422,7 @@ describe('basic GIS scenarios', () => {
     const res = await mockGetRequest({
       income: 43681,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -434,7 +435,7 @@ describe('basic GIS scenarios', () => {
     const res = await mockGetRequest({
       income: 43680,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -447,7 +448,7 @@ describe('basic GIS scenarios', () => {
     const res = await mockGetRequest({
       income: 24049,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -460,7 +461,7 @@ describe('basic GIS scenarios', () => {
     const res = await mockGetRequest({
       income: 24048,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -514,7 +515,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.NONE,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -527,7 +528,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -540,7 +541,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -553,7 +554,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -566,7 +567,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -579,7 +580,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -592,7 +593,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -605,7 +606,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -618,7 +619,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'No Agreement',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -631,7 +632,7 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'No Agreement',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -685,7 +686,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.NONE,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -698,7 +699,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -711,7 +712,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -724,7 +725,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -737,7 +738,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -750,7 +751,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -763,7 +764,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'No Agreement',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -776,7 +777,7 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      livingCountry: 'No Agreement',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -792,7 +793,7 @@ describe('thorough personas', () => {
     const res = await mockGetRequest({
       income: 17000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 47,
       maritalStatus: MaritalStatusOptions.MARRIED,
@@ -807,7 +808,7 @@ describe('thorough personas', () => {
     const res = await mockGetRequest({
       income: 28000,
       age: 66,
-      livingCountry: 'Jamaica',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 18,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -822,7 +823,7 @@ describe('thorough personas', () => {
     const res = await mockGetRequest({
       income: 40000,
       age: 55,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 30,
       maritalStatus: MaritalStatusOptions.DIVORCED,
@@ -837,7 +838,7 @@ describe('thorough personas', () => {
     const res = await mockGetRequest({
       income: 25000,
       age: 62,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.PERMANENT_RESIDENT,
       yearsInCanadaSince18: 15,
       maritalStatus: MaritalStatusOptions.WIDOWED,
@@ -855,7 +856,7 @@ describe('thorough extras', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -870,7 +871,7 @@ describe('thorough extras', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Agreement',
+      livingCountry: LivingCountryOptions.AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -885,7 +886,7 @@ describe('thorough extras', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Canada',
+      livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -900,7 +901,7 @@ describe('thorough extras', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      livingCountry: 'Not Canada',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
       maritalStatus: MaritalStatusOptions.SINGLE,
@@ -915,7 +916,7 @@ describe('thorough extras', () => {
     const res = await mockGetRequest({
       income: 15000,
       age: 65,
-      livingCountry: 'Not Canada',
+      livingCountry: LivingCountryOptions.NO_AGREEMENT,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
