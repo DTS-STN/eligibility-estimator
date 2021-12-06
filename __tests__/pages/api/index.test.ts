@@ -415,6 +415,42 @@ describe('basic OAS scenarios', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.AGE)
   })
+  it('returns "eligible for $317.63" when 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.entitlementResult).toEqual(317.63)
+    expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
+  })
+  it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 39,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.entitlementResult).toEqual(619.38)
+    expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
+  })
+  it('returns "eligible for $635.26" when 40 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.entitlementResult).toEqual(635.26)
+    expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
+  })
 })
 
 describe('basic GIS scenarios', () => {
