@@ -17,6 +17,12 @@ export enum LegalStatusOptions {
   NONE = 'None of the above',
 }
 
+export enum LivingCountryOptions {
+  CANADA = 'Canada',
+  AGREEMENT = 'Agreement',
+  NO_AGREEMENT = 'No Agreement',
+}
+
 export enum ResultOptions {
   ELIGIBLE = `Eligible!`,
   INELIGIBLE = `Ineligible!`,
@@ -29,6 +35,7 @@ export enum ResultReasons {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
+  LIVING_COUNTRY = `Not living in Canada`,
   CITIZEN = `Not a Canadian citizen`,
   SOCIAL_AGREEMENT = 'Not in a country with a social agreement',
   MORE_INFO = 'Need more information...',
@@ -38,13 +45,15 @@ export enum ResultReasons {
   INVALID = `Entered data is invalid`,
 }
 
-// this is what the API expects to receive
-// don't forget to update OpenAPI!
-// do not require fields here, do it in the benefit-specific schemas
+// This is what the API expects to receive, with the below exceptions due to normalization:
+// - livingCountry accepts a string
+//
+// Note: When updating this, don't forget to update OpenAPI!
+// Note: Do not require fields here, do it in the benefit-specific schemas.
 export const RequestSchema = Joi.object({
   income: Joi.number().integer(),
   age: Joi.number().integer().max(150),
-  livingCountry: Joi.string(),
+  livingCountry: Joi.string().valid(...Object.values(LivingCountryOptions)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatusOptions)),
   yearsInCanadaSince18: Joi.number()
     .integer()
@@ -52,6 +61,7 @@ export const RequestSchema = Joi.object({
     .message('Years in Canada should be no more than age minus 18'),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatusOptions)),
   partnerReceivingOas: Joi.boolean(),
+  everLivedSocialCountry: Joi.boolean(),
 })
 
 export const OasSchema = RequestSchema.concat(
@@ -78,6 +88,24 @@ export const OasSchema = RequestSchema.concat(
       ),
       then: Joi.required(),
     }),
+    everLivedSocialCountry: Joi.when('livingCountry', {
+      switch: [
+        {
+          is: Joi.string().exist().valid(LivingCountryOptions.CANADA),
+          then: Joi.when('yearsInCanadaSince18', {
+            is: Joi.number().exist().greater(0).less(10),
+            then: Joi.required(),
+          }),
+        },
+        {
+          is: Joi.string().exist().valid('No Agreement'),
+          then: Joi.when('yearsInCanadaSince18', {
+            is: Joi.number().exist().greater(0).less(20),
+            then: Joi.required(),
+          }),
+        },
+      ],
+    }),
   })
 )
 
@@ -87,6 +115,10 @@ export const GisSchema = RequestSchema.concat(
       .valid(...Object.values(ResultOptions))
       .required(),
     income: Joi.required(),
+    livingCountry: Joi.when('income', {
+      is: Joi.number().exist().max(43680),
+      then: Joi.required(),
+    }),
     maritalStatus: Joi.when('_oasEligible', {
       not: Joi.valid(ResultOptions.INELIGIBLE, ResultOptions.MORE_INFO),
       then: Joi.required(),
@@ -190,17 +222,19 @@ export const AfsSchema = RequestSchema.concat(
 
 export interface CalculationInput {
   age?: number
-  livingCountry?: string
+  livingCountry?: LivingCountryOptions
   legalStatus?: LegalStatusOptions
   yearsInCanadaSince18?: number
   maritalStatus?: MaritalStatusOptions
   partnerReceivingOas?: boolean
   income?: number
+  everLivedSocialCountry?: boolean
   _oasEligible?: ResultOptions
 }
 
 export interface BenefitResult {
-  result: ResultOptions
+  eligibilityResult: ResultOptions
+  entitlementResult: Number
   reason: ResultReasons
   detail: String
   // TODO: use field names as type

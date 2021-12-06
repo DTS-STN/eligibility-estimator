@@ -3,6 +3,7 @@ import checkAfs from '../../utils/api/checkAfs'
 import checkAllowance from '../../utils/api/checkAllowance'
 import checkGis from '../../utils/api/checkGis'
 import checkOas from '../../utils/api/checkOas'
+import normalizeLivingCountry from '../../utils/api/socialAgreement'
 import {
   RequestSchema,
   ResponseError,
@@ -16,6 +17,14 @@ export default function handler(
 ) {
   try {
     console.log(`Processing request: `, req.query)
+
+    // normalization
+    // takes a country string, normalizes to Canada/Agreement/NoAgreement
+    if (req.query.livingCountry) {
+      req.query.livingCountry = normalizeLivingCountry(
+        req.query.livingCountry as string
+      )
+    }
 
     // validation
     let { error, value } = RequestSchema.validate(req.query, {

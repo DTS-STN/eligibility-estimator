@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-11-30T21:17:36.143Z
+__export_date: 2021-12-01T19:32:12.963Z
 __export_source: insomnia.desktop.app:v2021.6.0
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1637965857068
+    modified: 1638385826962
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -83,7 +83,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1638307046353
+    modified: 1638387124412
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -105,6 +105,8 @@ resources:
           **To interact with the API, click the "Try it out" button below on the right.**
 
       servers:
+        - url: /api
+          description: Current domain (default)
         - url: https://eligibility-estimator.vercel.app/api
           description: 'Main production site'
         - url: https://eligibility-estimator-dev.vercel.app/api
@@ -178,14 +180,18 @@ resources:
 
           ResultObject:
             type: object
-            description: The calculated result for a given benefit
+            description: The calculated results for a given benefit
             required:
-              - result
+              - eligibilityResult
+              - entitlementResult
               - reason
               - detail
             properties:
-              result:
+              eligibilityResult:
                 $ref: '#/components/schemas/ResultOptions'
+              entitlementResult:
+                type: number
+                example: 500
               reason:
                 $ref: '#/components/schemas/ResultReasons'
               detail:
@@ -243,19 +249,23 @@ resources:
                   'Standard case':
                     value:
                       oas:
-                        result: Eligible!
+                        eligibilityResult: Eligible!
+                        entitlementResult: 0
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for OAS!
                       gis:
-                        result: Eligible!
+                        eligibilityResult: Eligible!
+                        entitlementResult: 0
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for GIS!
                       allowance:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
                       allFields:
@@ -270,25 +280,29 @@ resources:
                   'Blank request':
                     value:
                       oas:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       gis:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       allowance:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       afs:
-                        result: Need more information...
+                        eligibilityResult: Need more information...
+                        entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
@@ -299,19 +313,23 @@ resources:
                   'Ineligible case':
                     value:
                       oas:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Income too high
                         detail: Your income is too high to be eligible for OAS.
                       gis:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Not eligible for OAS
                         detail: You need to be eligible for OAS to be eligible for GIS.
                       allowance:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        result: Ineligible!
+                        eligibilityResult: Ineligible!
+                        entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
                       allFields:
@@ -352,10 +370,10 @@ resources:
             name: income
             in: query
             description: >
-              The user's current net income.
+              The client's current net income.
 
 
-              _Note: This should include the user's combined income, and/or partner's income, if applicable._
+              _Note: This should include the client's combined income, and/or partner's income, if applicable._
             required: true
             example: 10000
             schema:
@@ -366,7 +384,7 @@ resources:
           age:
             name: age
             in: query
-            description: The current age of the user, up to a max of 150.
+            description: The current age of the client, up to a max of 150.
             required: false
             schema:
               type: integer
@@ -379,7 +397,7 @@ resources:
             name: livingCountry
             in: query
             description: >
-              The country that the user is currently living in.
+              The country that the client is currently living in.
 
 
               _For testing purposes, "Agreement" and "No agreement" are options._
@@ -399,7 +417,7 @@ resources:
             name: legalStatus
             in: query
             description: >
-              The current legal status of the user.
+              The current legal status of the client.
 
 
               _Note that all options are treated the same, except for "None of the above", which will be ineligible._
@@ -413,14 +431,14 @@ resources:
                 - Status Indian
                 - Temporary Resident
                 - None of the above
-              description: The current legal status of the user.
+              description: The current legal status of the client.
             allowEmptyValue: false
 
           yearsInCanadaSince18:
             name: yearsInCanadaSince18
             in: query
             description: >
-              How many years the user has lived in Canada since the age of 18.
+              How many years the client has lived in Canada since the age of 18.
 
 
               _Note that this can not be greater than `age - 18`._
@@ -435,7 +453,7 @@ resources:
           maritalStatus:
             name: maritalStatus
             in: query
-            description: The current marital status of the user.
+            description: The current marital status of the client.
             required: false
             example: 'Married'
             schema:
@@ -447,17 +465,17 @@ resources:
                 - Widowed
                 - Divorced
                 - Seperated
-              description: The current marital status of the user.
+              description: The current marital status of the client.
             allowEmptyValue: false
 
           partnerReceivingOas:
             name: partnerReceivingOas
             in: query
             description: >
-              Is the user's partner receiving OAS?
+              Is the client's partner receiving OAS?
 
 
-              _Note: You must not select 'true' here when your marital status is anything other than Married or Common-Law._
+              _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Seperated._
             required: false
             example: true
             schema:

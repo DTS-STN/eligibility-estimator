@@ -1,3 +1,5 @@
-node_modules/**
-.next/**
-cypress
+node_modules/
+.next/
+coverage/
+helmfile/
+helm/
