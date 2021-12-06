@@ -2,6 +2,7 @@ import { ObjectSchema } from 'joi'
 import {
   BenefitResult,
   CalculationInput,
+  Fields,
   ResultOptions,
   ResultReasons,
 } from './types'
@@ -25,7 +26,9 @@ export function validateRequestForBenefit(
     if (errors.length > 1 || errors[0] != 'any.required') throw error
 
     // gather all missing but required fields
-    const missingFields = [...new Set(error.details.map((x) => `${x.path[0]}`))]
+    const missingFields = [
+      ...new Set(error.details.map((x) => `${x.path[0]}`)),
+    ] as Array<Fields>
     console.log(missingFields)
 
     // return result containing all required fields
@@ -37,7 +40,7 @@ export function validateRequestForBenefit(
         detail: `Missing ${missingFields.length} required field${
           missingFields.length != 1 ? 's' : ''
         }.`,
-        missingFields: missingFields,
+        missingFields,
       },
       value: null,
     }

@@ -91,7 +91,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields.toString()).toEqual(['income'].toString())
-    expect(res.body.allFields.toString()).toEqual(['income'].toString())
+    expect(res.body.visibleFields.toString()).toEqual(['income'].toString())
   })
   it('requires 3 OAS and 1 GIS fields when only income provided', async () => {
     const res = await mockGetRequest({ income: 10000 })
@@ -105,7 +105,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['livingCountry'].toString()
     )
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       ['income', 'age', 'livingCountry', 'legalStatus'].toString()
     )
   })
@@ -121,7 +121,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['livingCountry'].toString()
     )
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       ['income', 'age', 'livingCountry', 'legalStatus'].toString()
     )
   })
@@ -139,7 +139,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields).toBeUndefined()
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       ['income', 'age', 'livingCountry', 'legalStatus'].toString()
     )
   })
@@ -158,7 +158,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields).toBeUndefined()
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       [
         'income',
         'age',
@@ -184,7 +184,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['maritalStatus'].toString()
     )
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       [
         'income',
         'age',
@@ -210,7 +210,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
     expect(res.body.gis.missingFields).toBeUndefined()
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       [
         'income',
         'age',
@@ -238,7 +238,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['partnerReceivingOas'].toString()
     )
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       [
         'income',
         'age',
@@ -266,7 +266,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
     expect(res.body.gis.missingFields).toBeUndefined()
-    expect(res.body.allFields.toString()).toEqual(
+    expect(res.body.visibleFields.toString()).toEqual(
       [
         'income',
         'age',
