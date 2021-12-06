@@ -3,8 +3,10 @@ import checkAfs from '../../utils/api/checkAfs'
 import checkAllowance from '../../utils/api/checkAllowance'
 import checkGis from '../../utils/api/checkGis'
 import checkOas from '../../utils/api/checkOas'
+import { buildFieldData, FieldData } from '../../utils/api/fieldDefinitions'
 import normalizeLivingCountry from '../../utils/api/socialAgreement'
 import {
+  Fields,
   RequestSchema,
   ResponseError,
   ResponseSuccess,
@@ -48,16 +50,18 @@ export default function handler(
     const resultAfs = checkAfs(value)
     console.log('Allowance for Survivor Result: ', resultAfs)
 
-    const allFields: Array<String> = [
+    const visibleFields: Array<Fields> = [
       ...new Set([
-        ...Object.keys(value),
+        ...([...Object.keys(value)] as Array<Fields>),
         ...(resultOas.missingFields ? resultOas.missingFields : []),
         ...(resultGis.missingFields ? resultGis.missingFields : []),
         ...(resultAllowance.missingFields ? resultAllowance.missingFields : []),
         ...(resultAfs.missingFields ? resultAfs.missingFields : []),
       ]),
     ]
-    console.log('All visible fields:', allFields)
+    console.log('All visible fields:', visibleFields)
+
+    const fieldData: Array<FieldData> = buildFieldData(visibleFields)
 
     // completion
     res.status(200).json({
@@ -65,7 +69,8 @@ export default function handler(
       gis: resultGis,
       allowance: resultAllowance,
       afs: resultAfs,
-      allFields,
+      visibleFields,
+      fieldData,
     })
   } catch (error) {
     res.status(400).json({

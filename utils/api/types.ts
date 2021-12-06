@@ -1,4 +1,30 @@
 import Joi from 'joi'
+import { FieldData } from './fieldDefinitions'
+
+export enum Fields {
+  INCOME = 'income',
+  AGE = 'age',
+  LIVING_COUNTRY = 'livingCountry',
+  LEGAL_STATUS = 'legalStatus',
+  YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
+  MARITAL_STATUS = 'maritalStatus',
+  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
+  EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
+}
+
+export enum FieldCategories {
+  INCOME_DETAILS = 'Income Details',
+  PERSONAL_INFORMATION = 'Personal Information',
+  PARTNER_DETAILS = 'Partner Details',
+  RESIDENCY_DETAILS = 'Residency Details',
+}
+
+export enum FieldTypes {
+  NUMBER = 'number',
+  BOOLEAN = 'boolean',
+  DROPDOWN = 'dropdown',
+  RADIO = 'radio',
+}
 
 export enum MaritalStatusOptions {
   SINGLE = 'Single',
@@ -237,8 +263,7 @@ export interface BenefitResult {
   entitlementResult: Number
   reason: ResultReasons
   detail: String
-  // TODO: use field names as type
-  missingFields?: Array<String>
+  missingFields?: Array<Fields>
 }
 
 export interface ResponseSuccess {
@@ -246,7 +271,8 @@ export interface ResponseSuccess {
   gis: BenefitResult
   allowance: BenefitResult
   afs: BenefitResult
-  allFields?: Array<String>
+  visibleFields: Array<Fields>
+  fieldData: Array<FieldData>
 }
 
 export interface ResponseError {
