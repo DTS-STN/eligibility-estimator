@@ -41,8 +41,9 @@ export default function checkOas(params: CalculationInput): BenefitResult {
     value.yearsInCanadaSince18 >= requiredYearsInCanada
   ) {
     if (value.age >= 65) {
-      const entitlementResult =
+      const entitlementResult = roundToTwo(
         Math.min(value.yearsInCanadaSince18 / 40, 1) * 635.26
+      )
       return {
         eligibilityResult: ResultOptions.ELIGIBLE,
         entitlementResult,
@@ -108,4 +109,8 @@ export default function checkOas(params: CalculationInput): BenefitResult {
   }
   // fallback
   throw new Error('should not be here')
+}
+
+function roundToTwo(num: number): number {
+  return Math.round((num + Number.EPSILON) * 100) / 100
 }
