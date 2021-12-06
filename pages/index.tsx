@@ -46,7 +46,7 @@ const Home: NextPage = () => {
               className="form-control"
             />
             <div className="radio">
-              <label htmlFor="radio2">
+              <label htmlFor="radio1">
                 <input
                   type="radio"
                   id="radio1"
@@ -120,10 +120,9 @@ const Home: NextPage = () => {
         <div className="rounded border-[1px] border-solid border-default-text px-6 py-4">
           <p className="h5">Alerts</p>
           <p>
-            Below is an example of conflicting alerts in the WET design system,
-            and the GC&apos;s website. Implementation is blocked until we can
-            chat with the client. The personalizer has the GC&apos;s
-            Implementation.
+            After chatting with the DECD design system stakeholders and Jordan
+            who works on the react components, we will be going with the First
+            alert!
           </p>
           <p className="h6">GC</p>
           <Image
@@ -131,13 +130,6 @@ const Home: NextPage = () => {
             alt="an example of whatthe Canada.ca alert looks like."
             width="905px"
             height="149px"
-          />
-          <p className="h6">WET</p>
-          <Image
-            src="/alert-example-wet.png"
-            alt="an example of whatthe Canada.ca alert looks like."
-            width="642px"
-            height="113px"
           />
         </div>
       </div>
