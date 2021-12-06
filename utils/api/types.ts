@@ -233,7 +233,8 @@ export interface CalculationInput {
 }
 
 export interface BenefitResult {
-  result: ResultOptions
+  eligibilityResult: ResultOptions
+  entitlementResult: Number
   reason: ResultReasons
   detail: String
   // TODO: use field names as type

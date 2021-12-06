@@ -76,22 +76,22 @@ describe('sanity checks', () => {
 describe('field requirement analysis', () => {
   it('requires 1 OAS and 1 GIS fields when nothing provided', async () => {
     const res = await mockGetRequest({})
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(['income'].toString())
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields.toString()).toEqual(['income'].toString())
     expect(res.body.allFields.toString()).toEqual(['income'].toString())
   })
   it('requires 3 OAS and 1 GIS fields when only income provided', async () => {
     const res = await mockGetRequest({ income: 10000 })
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(
       ['age', 'livingCountry', 'legalStatus'].toString()
     )
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['livingCountry'].toString()
@@ -102,12 +102,12 @@ describe('field requirement analysis', () => {
   })
   it('requires 2 OAS and 1 GIS fields when only income/age provided', async () => {
     const res = await mockGetRequest({ income: 10000, age: 65 })
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(
       ['livingCountry', 'legalStatus'].toString()
     )
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['livingCountry'].toString()
@@ -122,12 +122,12 @@ describe('field requirement analysis', () => {
       age: 65,
       livingCountry: LivingCountryOptions.CANADA,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(
       ['legalStatus'].toString()
     )
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields).toBeUndefined()
     expect(res.body.allFields.toString()).toEqual(
@@ -141,12 +141,12 @@ describe('field requirement analysis', () => {
       livingCountry: LivingCountryOptions.CANADA,
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(
       ['yearsInCanadaSince18'].toString()
     )
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields).toBeUndefined()
     expect(res.body.allFields.toString()).toEqual(
@@ -167,10 +167,10 @@ describe('field requirement analysis', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
     expect(res.body.oas.missingFields).toBeUndefined()
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['maritalStatus'].toString()
@@ -195,10 +195,10 @@ describe('field requirement analysis', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
     expect(res.body.oas.missingFields).toBeUndefined()
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
     expect(res.body.gis.missingFields).toBeUndefined()
     expect(res.body.allFields.toString()).toEqual(
@@ -221,10 +221,10 @@ describe('field requirement analysis', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
     expect(res.body.oas.missingFields).toBeUndefined()
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields.toString()).toEqual(
       ['partnerReceivingOas'].toString()
@@ -251,10 +251,10 @@ describe('field requirement analysis', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
     expect(res.body.oas.missingFields).toBeUndefined()
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
     expect(res.body.gis.missingFields).toBeUndefined()
     expect(res.body.allFields.toString()).toEqual(
@@ -276,7 +276,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 129758,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.INCOME)
   })
   it('returns "ineligible" when not citizen', async () => {
@@ -287,7 +287,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.NONE,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.CITIZEN)
   })
   it('returns "needs more info" when citizen and under 10 years in Canada', async () => {
@@ -298,7 +298,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "conditionally eligible" when citizen and under 10 years in Canada and lived in social country', async () => {
@@ -310,7 +310,7 @@ describe('basic OAS scenarios', () => {
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "ineligible" when citizen and under 10 years in Canada and not lived in social country', async () => {
@@ -322,7 +322,7 @@ describe('basic OAS scenarios', () => {
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "eligible" when citizen and 10 years in Canada', async () => {
@@ -333,7 +333,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "eligible" when living in Agreement and 20 years in Canada', async () => {
@@ -344,7 +344,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "conditionally eligible" when living in Agreement and under 20 years in Canada', async () => {
@@ -355,7 +355,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "eligible" when living in No Agreement and 20 years in Canada', async () => {
@@ -366,7 +366,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "needs more info" when living in No Agreement and under 20 years in Canada', async () => {
@@ -377,7 +377,7 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "ineligible" when living in No Agreement and under 20 years in Canada and not lived in social country', async () => {
@@ -389,7 +389,7 @@ describe('basic OAS scenarios', () => {
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: false,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "conditionally eligible" when living in No Agreement and under 20 years in Canada and lived in social country', async () => {
@@ -401,7 +401,7 @@ describe('basic OAS scenarios', () => {
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "eligible when 65" when age 55 and citizen and 20 years in Canada', async () => {
@@ -412,8 +412,44 @@ describe('basic OAS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.AGE)
+  })
+  it('returns "eligible for $317.63" when 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.entitlementResult).toEqual(317.63)
+    expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
+  })
+  it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 39,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.entitlementResult).toEqual(619.38)
+    expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
+  })
+  it('returns "eligible for $635.26" when 40 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.entitlementResult).toEqual(635.26)
+    expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
   })
 })
 
@@ -424,7 +460,7 @@ describe('basic GIS scenarios', () => {
       legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "needs more info" when missing income', async () => {
@@ -434,7 +470,7 @@ describe('basic GIS scenarios', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "needs more info" when partnered and "partnerReceivingOas" missing', async () => {
@@ -443,7 +479,7 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: undefined,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "needs more info" when missing country', async () => {
@@ -454,7 +490,7 @@ describe('basic GIS scenarios', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "ineligible" when not living in Canada', async () => {
@@ -466,7 +502,7 @@ describe('basic GIS scenarios', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "ineligible" when single and income over 18216', async () => {
@@ -478,7 +514,7 @@ describe('basic GIS scenarios', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.INCOME)
   })
   it('returns "eligible" when single and income under 18216', async () => {
@@ -490,7 +526,7 @@ describe('basic GIS scenarios', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.SINGLE,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "ineligible" when married and no partner OAS and income over 43680', async () => {
@@ -503,7 +539,7 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: false,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.INCOME)
   })
   it('returns "eligible" when married and no partner OAS and income under 43680', async () => {
@@ -516,7 +552,7 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: false,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "ineligible" when married and partner OAS and income over 24048', async () => {
@@ -529,7 +565,7 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.INCOME)
   })
   it('returns "eligible" when married and partner OAS and income under 24048', async () => {
@@ -542,7 +578,7 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
   })
 })
@@ -552,14 +588,18 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       income: 35616,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.INCOME)
   })
   it('returns "needs more info" when income under 35616', async () => {
     const res = await mockGetRequest({
       income: 35615,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.MORE_INFO
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "ineligible" when age over 64', async () => {
@@ -567,7 +607,9 @@ describe('basic Allowance scenarios', () => {
       income: 10000,
       age: 65,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.AGE)
   })
   it('returns "ineligible" when age under 60', async () => {
@@ -575,7 +617,9 @@ describe('basic Allowance scenarios', () => {
       income: 10000,
       age: 59,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.AGE)
   })
   it('returns "needs more info" when age 60', async () => {
@@ -583,7 +627,9 @@ describe('basic Allowance scenarios', () => {
       income: 10000,
       age: 60,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.MORE_INFO
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "ineligible" when not citizen', async () => {
@@ -596,7 +642,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.CITIZEN)
   })
   it('returns "ineligible" when citizen and under 10 years in Canada', async () => {
@@ -609,7 +657,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "ineligible" when widowed', async () => {
@@ -622,7 +672,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.MARITAL)
   })
   it('returns "ineligible" when single', async () => {
@@ -635,7 +687,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.SINGLE,
       partnerReceivingOas: false,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.MARITAL)
   })
   it('returns "ineligible" when partner not receiving OAS', async () => {
@@ -648,7 +702,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: false,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.OAS)
   })
   it('returns "eligible" when citizen and 10 years in Canada', async () => {
@@ -661,7 +717,7 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.allowance.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "eligible" when living in Agreement and 10 years in Canada', async () => {
@@ -674,7 +730,7 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.allowance.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "conditionally eligible" when living in Agreement and under 10 years in Canada', async () => {
@@ -687,7 +743,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.CONDITIONAL
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "eligible" when living in No Agreement and 10 years in Canada', async () => {
@@ -700,7 +758,7 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.allowance.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "ineligible" when living in No Agreement and under 10 years in Canada', async () => {
@@ -713,7 +771,9 @@ describe('basic Allowance scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.allowance.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.allowance.eligibilityResult).toEqual(
+      ResultOptions.INELIGIBLE
+    )
     expect(res.body.allowance.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
 })
@@ -723,14 +783,14 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       income: 25920,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.INCOME)
   })
   it('returns "needs more info" when income under 25920', async () => {
     const res = await mockGetRequest({
       income: 25919,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.afs.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "ineligible" when age over 64', async () => {
@@ -738,7 +798,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       income: 10000,
       age: 65,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.AGE)
   })
   it('returns "ineligible" when age under 60', async () => {
@@ -746,7 +806,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       income: 10000,
       age: 59,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.AGE)
   })
   it('returns "needs more info" when age 60', async () => {
@@ -754,7 +814,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       income: 10000,
       age: 60,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.MORE_INFO)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.afs.reason).toEqual(ResultReasons.MORE_INFO)
   })
   it('returns "ineligible" when not citizen', async () => {
@@ -767,7 +827,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.CITIZEN)
   })
   it('returns "ineligible" when citizen and under 10 years in Canada', async () => {
@@ -780,7 +840,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "ineligible" when married', async () => {
@@ -793,7 +853,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.MARITAL)
   })
   it('returns "eligible" when widowed', async () => {
@@ -806,7 +866,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "eligible" when living in Agreement and 10 years in Canada', async () => {
@@ -819,7 +879,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "conditionally eligible" when living in Agreement and under 10 years in Canada', async () => {
@@ -832,7 +892,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.afs.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
   it('returns "eligible" when living in No Agreement and 10 years in Canada', async () => {
@@ -845,7 +905,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "ineligible" when living in No Agreement and under 10 years in Canada', async () => {
@@ -858,7 +918,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,
     })
-    expect(res.body.afs.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
 })
@@ -874,9 +934,9 @@ describe('thorough personas', () => {
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
   })
   it('Habon Aden: OAS conditionally eligible, GIS ineligible due to country', async () => {
@@ -889,9 +949,9 @@ describe('thorough personas', () => {
       maritalStatus: MaritalStatusOptions.SINGLE,
       partnerReceivingOas: undefined,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('Miriam Krayem: OAS eligible when 65, GIS ineligible due to income', async () => {
@@ -904,9 +964,9 @@ describe('thorough personas', () => {
       maritalStatus: MaritalStatusOptions.DIVORCED,
       partnerReceivingOas: undefined,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.AGE)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
   })
   it('Adam Smith: OAS eligible when 65, GIS ineligible due to income', async () => {
@@ -919,9 +979,9 @@ describe('thorough personas', () => {
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: undefined,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.AGE)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
   })
 })
@@ -938,9 +998,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: false,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
   })
   it('returns "conditionally eligible" when living in Canada and 9 years in Canada and lived in social country', async () => {
@@ -954,9 +1014,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: true,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.gis.reason).toEqual(ResultReasons.OAS)
   })
   it('returns "conditionally eligible" when living in Agreement and 9 years in Canada', async () => {
@@ -970,9 +1030,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: undefined,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "eligible" when living in Canada and 10 years in Canada', async () => {
@@ -986,9 +1046,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: undefined,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
-    expect(res.body.gis.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.NONE)
   })
   it('returns "conditionally eligible" when not living in Canada and 19 years in Canada and lived in social country', async () => {
@@ -1002,9 +1062,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: true,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.CONDITIONAL)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "ineligible due to years in Canada" when not living in Canada and 19 years in Canada and not lived in social country', async () => {
@@ -1018,9 +1078,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: false,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
   it('returns "eligible" when not living in Canada and 20 years in Canada', async () => {
@@ -1034,9 +1094,9 @@ describe('thorough extras', () => {
       partnerReceivingOas: undefined,
       everLivedSocialCountry: undefined,
     })
-    expect(res.body.oas.result).toEqual(ResultOptions.ELIGIBLE)
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.ELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.NONE)
-    expect(res.body.gis.result).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReasons.LIVING_COUNTRY)
   })
 })
