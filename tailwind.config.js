@@ -3,14 +3,19 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false,
   theme: {
+    screens: {
+      lg: '1200px',
+      md: '992px',
+      sm: '768px',
+    },
     fontSize: {
       h6: ['19px', '21px'],
       base: ['20px', '33px'],
       h5: ['20px', '22px'],
       h4: ['22px', '24px'],
       h3: ['24px', '26px'],
-      h2: ['36px', '40px'],
-      h1: ['38px', '42px'], // requires red <hr /> below
+      h2: ['32px', '36px'],
+      h1: ['34px', '48px'], // requires red <hr /> below
     },
     colors: {
       'white': '#FFF',
@@ -23,7 +28,7 @@ module.exports = {
       'default-border': '#dcdee1',
 
       // primary
-      'primary': '#2572b4',
+      'primary': '#293749',
       'primary-border': '#091c2d',
       'primary-hover': '#1c578a;',
 
