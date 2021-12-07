@@ -1,9 +1,8 @@
-/* tailwind default */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
   /* consistent focus styles on all components -- overriding */
   * {
     /* @apply focus:outline-none;
@@ -11,8 +10,12 @@
     @apply focus-visible:ring-black; */
   }
 
+  html {
+    @apply text-base;
+  }
+
   .btn {
-    @apply py-[6px] px-3 min-h-[9px] min-w-[9px] font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid rounded;
+    @apply py-1.5 px-3 min-h-9 min-w-9 font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid rounded;
     border-style: outset;
   }
 
@@ -62,8 +65,18 @@
 
   /* form controls */
   .form-control {
-    @apply w-full h-auto min-h-9 block py-[6px] px-3 text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form;
+    @apply w-full h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form mb-4;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
+  }
+  .form-control[disabled] {
+    cursor: not-allowed;
+    background-color: #eee;
+    opacity: 1;
+  }
+  label {
+    @apply mb-1.5 font-bold;
+    display: inline-block;
+    max-width: 100%;
   }
 }
