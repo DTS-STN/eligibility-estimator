@@ -49,6 +49,14 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         reason: ResultReasons.NONE,
         detail: 'Based on the information provided, you are eligible for OAS!',
       }
+    } else if (value.age == 64) {
+      return {
+        eligibilityResult: ResultOptions.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReasons.AGE,
+        detail:
+          'You will be eligible when you turn 65, however you may be able to apply now, please contact Service Canada for more information.',
+      }
     } else {
       return {
         eligibilityResult: ResultOptions.INELIGIBLE,
