@@ -1,139 +1,74 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { Alert } from '../components/Alert'
+import { Input } from '../components/Forms/Input'
+import { Layout } from '../components/Layout'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
-    <main>
-      <div className="container mx-auto flex flex-col mt-8 space-y-4 mb-16">
-        <h1 className="h1">
-          Implementing a slice of the{' '}
-          <a
-            href="https://wet-boew.github.io/wet-boew-styleguide/index-en.html"
-            className="text-default-text hover:underline"
-            target="_blank"
-            rel="noreferrer"
-          >
-            WET
-          </a>{' '}
-          design system
-        </h1>
-        <p className="">
-          This page is just a place to put components that we need for
-          developing a first cut of the eligibility estimator. The elements
-          shown in mockups are prioritized, with more coming later for
-          completeness. Eventually this will be moved to Storybook for easy
-          documentation and integration with othewr solutions.
+    <Layout>
+      <div className="mt-18 text-content">
+        <p className="mb-4 text-content">
+          This prototype is an online, web-based application that enables people
+          to plan their finances for the 60-65+ phase of life. By answering a
+          limited number of questions regarding age, legal and relationship
+          status and income level, the client will be made aware of the the
+          benefit they may be qualified to receive and an estimated dollar value
+          for their monthly payment.{' '}
         </p>
-        <p>
-          Once we&apos;ve coordinated with the client, we can finish up
-          accessibility and merge any other solutions for components.
+        <p className="mb-4 text-content">
+          This prototype covers four benefits programs:
         </p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="rounded border-[1px] border-solid border-default-text px-6 py-4 space-y-4">
-            <p className="h5">Inputs</p>
-            <input type="text" placeholder="name" className="form-control" />
-            <input type="number" placeholder="5" className="form-control" />
-            <input
-              type="email"
-              placeholder="my@email.com"
-              className="form-control"
-            />
-            <input
-              type="password"
-              placeholder="****"
-              className="form-control"
-            />
-            <div className="radio">
-              <label htmlFor="radio1">
-                <input
-                  type="radio"
-                  id="radio1"
-                  name="liveCan"
-                  className="mr-2"
-                />
-                Option 1
-              </label>
-            </div>
-            <div className="radio">
-              <label htmlFor="radio2">
-                <input
-                  type="radio"
-                  id="radio2"
-                  name="liveCan"
-                  className="mr-2"
-                />
-                Option 2
-              </label>
-            </div>
-            <div className="checkbox">
-              <label htmlFor="checkbox1">
-                <span>Do you live in Canada?</span>
-                <input
-                  type="checkbox"
-                  id="checkbox1"
-                  className="ml-2 rounded"
-                />
-              </label>
-            </div>
-            <select className="form-control" placeholder="Select from ...">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="2">3</option>
-              <option value="2">4</option>
-              <option value="2">5</option>
-            </select>
-            <textarea
-              name=""
-              id=""
-              rows={4}
-              className="form-control"
-            ></textarea>
-            <p className="italic">
-              Searchable Select? Will develop once mockup is created.
-            </p>
-          </div>
-          <div className="rounded border-[1px] border-solid border-default-text px-6 py-4">
-            <p className="h5">Typography</p>
-            <p className="h1">Size H1</p>
-            <p className="h2">Size H2</p>
-            <p className="lead">Size Lead</p>
-            <p className="h3">Size H3</p>
-            <p className="h4">Size H4</p>
-            <p className="h5">Size H5</p>
-            <p className="">(Default Size)</p>
-            <p className="h6">Size H6</p>
-            <p className="small">Size small</p>
-          </div>
-        </div>
-        <div className="rounded border-[1px] border-solid border-default-text px-6 py-4 space-x-4">
-          <p className="h5">Buttons</p>
-          <button className="btn btn-default">Default</button>
-          <button className="btn btn-primary">Primary</button>
-          <button className="btn btn-success">Success</button>
-          <button className="btn btn-info">Info</button>
-          <button className="btn btn-warning">Warning</button>
-          <button className="btn btn-danger">Danger</button>
-          <button className="btn btn-link">Link</button>
-        </div>
-        <div className="rounded border-[1px] border-solid border-default-text px-6 py-4">
-          <p className="h5">Alerts</p>
-          <p>
-            After chatting with the DECD design system stakeholders and Jordan
-            who works on the react components, we will be going with the First
-            alert!
-          </p>
-          <p className="h6">GC</p>
-          <Image
-            src="/alert-example.png"
-            alt="an example of whatthe Canada.ca alert looks like."
-            width="905px"
-            height="149px"
-          />
-        </div>
+        <p className="mb-4 text-content">
+          The Old Age Security (OAS) pension is a monthly payment you can get if
+          you are 65 and older. In some cases, Service Canada will be able to
+          automatically enroll you for the OAS pension. In other cases, you will
+          have to apply for the Old Age Security pension. Service Canada will
+          inform you if you have been automatically enrolled.
+        </p>
+        <p className="mb-4 text-content">
+          In most cases, you do not have to apply to get this benefit.
+        </p>
+        <p className="mb-4 text-content">
+          Guaranteed Income Supplement (GIS) is a monthly non-taxable benefit
+          for OAS pension recipients who have a low income and are living in
+          Canada.
+        </p>
+        <p className="mb-4 text-content">
+          Allowance is a monthly benefit available to low-income individuals
+          aged 60 to 64 whose spouse or common-law partner receives the
+          Guaranteed Income Supplement.
+        </p>
+        <p className="mb-4 text-content">
+          Allowance for the Survivor is a monthly benefit available to
+          individuals aged 60 to 64 who have a low income, who are living in
+          Canada, and whose spouse or common-law partner has passed away.{' '}
+        </p>
+        <h2 className="h2 mt-10">Income details</h2>
       </div>
-    </main>
+      <form action="/eligibility" className="mb-10">
+        <Input
+          type="number"
+          name="income"
+          label="What is your current annual net income in Canadian dollars"
+          required
+        />
+        <div className="mt-10 flex space-x-5">
+          <button type="reset" className="btn-default btn w-28">
+            Clear
+          </button>
+          <button className="btn btn-primary w-28">Next</button>
+        </div>
+      </form>
+      <Alert title="Disclaimer" type="warning">
+        These results are rough estimates. For a more accurate assessment of
+        your eligibility, please contact Service Canada. The results should not
+        be considered financial advice. This application does not collect
+        information that would enable personal identification.
+      </Alert>
+    </Layout>
   )
 }
 
