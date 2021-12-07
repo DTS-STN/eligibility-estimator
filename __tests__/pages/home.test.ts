@@ -8,7 +8,7 @@ import React from 'react'
 import * as nextRouter from 'next/router'
 
 describe('index page', () => {
-  let useRouter, data
+  let useRouter
   // mocking useRouter, as we'll eventually need it for sedning the correct requests
   beforeAll(() => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')

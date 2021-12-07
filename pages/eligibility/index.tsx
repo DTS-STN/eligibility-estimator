@@ -37,10 +37,11 @@ const Eligiblity: NextPage = () => {
         <div>Loading form...</div>
       </Layout>
     )
+  console.log(data.allFields)
 
   return (
     <Layout>
-      <div>content</div>
+      <pre>{data.allFields.join(', ')}</pre>
     </Layout>
   )
 }
