@@ -48,7 +48,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       entitlementResult: 0,
       reason: ResultReasons.MARITAL,
       detail:
-        'You must be widowed, not common-law or married, to be eligible for Allowance for Survivor.',
+        'You must be a surviving partner or widowed to be eligible for Allowance for Survivor.',
     }
   } else if (value.income >= 25920) {
     return {
