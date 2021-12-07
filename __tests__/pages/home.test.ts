@@ -4,6 +4,8 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../../pages/index'
+import React from 'react'
+import * as nextRouter from 'next/router'
 
 describe('index page', () => {
   let useRouter, data
@@ -20,7 +22,7 @@ describe('index page', () => {
 
   it('should render the home page', async () => {
     // Once API is ready, fetch here
-    render(React.createElement(Home, { data }))
+    render(React.createElement(Home))
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
   })
