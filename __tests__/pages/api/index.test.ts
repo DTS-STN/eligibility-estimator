@@ -392,6 +392,18 @@ describe('basic OAS scenarios', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReasons.YEARS_IN_CANADA)
   })
+  it('returns "ineligible due to age" when 64 and 9 years in Canada and lived in social country', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 64,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 9,
+      everLivedSocialCountry: true,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.reason).toEqual(ResultReasons.AGE)
+  })
   it('returns "conditionally eligible" when living in No Agreement and under 20 years in Canada and lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
