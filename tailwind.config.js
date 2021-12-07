@@ -9,6 +9,7 @@ module.exports = {
       sm: '768px',
     },
     fontSize: {
+      // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76
       h6: ['19px', '21px'],
       base: ['20px', '33px'],
       h5: ['20px', '22px'],
@@ -20,6 +21,7 @@ module.exports = {
     colors: {
       'white': '#FFF',
       'black': '#000',
+      'content': '#333',
 
       // default
       'default-text': '#335075',
@@ -38,17 +40,17 @@ module.exports = {
       'success-hover': '#114311;',
 
       // info
-      'info': '#4d4d4d;',
-      'info-border': '#000',
+      'info': '#269abc;',
+      'info-border': '#269abc',
       'info-hover': '#343333',
 
       // warning
-      'warning': '#f2d40d;',
+      'warning': '#EE7100;',
       'warning-border': '#917f08',
       'warning-hover': '#c2aa0a',
 
       // danger
-      'danger': '#bc3331',
+      'danger': '#D3080C',
       'danger-border': '#942826',
       'danger-hover': '#3b100f',
 
@@ -59,6 +61,8 @@ module.exports = {
       'muted': '#555',
       'form-border': '#ccc',
       'form-highlighted': '#66afe9;',
+
+      'header-rule': '#AF3C43',
     },
     extend: {
       fontFamily: {
