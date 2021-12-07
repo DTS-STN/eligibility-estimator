@@ -10,7 +10,7 @@
     @apply focus-visible:ring-black; */
   }
 
-  html {
+  main {
     @apply text-base;
   }
 
