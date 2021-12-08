@@ -16,11 +16,12 @@ interface SelectProps
 export const Select: React.VFC<SelectProps> = (props) => {
   return (
     <>
-      <label htmlFor={props.keyForId}>{props.label}</label>
+      <span className="mb-1.5 font-semibold">{props.label}</span>
+      <span className="text-danger font-bold ml-2">(required)</span>
       <select
         name={props.keyForId}
         id={props.keyForId}
-        className="form-control"
+        className="form-control mt-1.5"
         {...props}
       >
         {props.options.map((option, index) => (

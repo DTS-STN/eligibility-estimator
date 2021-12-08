@@ -9,10 +9,23 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Radio: React.VFC<InputProps> = (props) => {
   const { query } = useRouter()
+  const correctForBooleans = (value: string) => {
+    switch (value) {
+      case 'Yes':
+        return 'true'
+        break
+      case 'No':
+        return 'false'
+        break
+      default:
+        return value
+        break
+    }
+  }
   return (
     <>
       <div className="radio mb-8">
-        <p className="font-bold">
+        <p className="font-semibold inline-block mb-1.5">
           {props.label}
           <span className="text-danger font-bold ml-2">(required)</span>
         </p>
@@ -22,7 +35,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
               type="radio"
               id={`${props.keyForId}-${index}`}
               name={`${props.keyForId}`}
-              value={value}
+              value={correctForBooleans(value)}
               className="mr-2"
               {...props}
             />
