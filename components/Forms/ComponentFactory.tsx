@@ -25,22 +25,27 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
   }
 
   return (
-    <form name="ee-form" data-testid="ee-form" noValidate>
-      {console.log(formState)}
+    <form
+      name="ee-form"
+      data-testid="ee-form"
+      onSubmit={(e) => e.preventDefault()}
+      noValidate
+    >
       {formState.map((field) => {
         const content = (
           <div key={field.key} className="">
             {field.category != lastCategory && (
-              <h2 className="h2 mb-4">{field.category}</h2>
+              <h2 className="h2 mb-8">{field.category}</h2>
             )}
             {(field.type == 'number' || field.type == 'text') && (
-              <div className="mb-12">
+              <div className="mb-14">
                 <Input
                   type={field.type}
                   name={field.key}
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
+                  value={query[field.key] ?? undefined}
                   required
                 />
               </div>

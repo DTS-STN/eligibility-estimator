@@ -3,6 +3,7 @@ import { Layout } from '../../components/Layout'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
+import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -47,20 +48,16 @@ const Eligiblity: NextPage = () => {
         <div className="col-span-2">
           <ComponentFactory data={data} />
         </div>
-        <section>
-          {/* This will be a dynamic list of links eventually */}
-          <div className="p-8 bg-[#dcdfe1]">
-            <h2 className="h2">Need help?</h2>
-            <ul>
-              <li>
-                <a href="#">OAS Overview</a>
-              </li>
-              <li>
-                <a href="#">Old age security: how much you could receive?</a>
-              </li>
-            </ul>
-          </div>
-        </section>
+        <NeedHelpList
+          title="Need Help?"
+          links={[
+            { label: 'OAS Overview', location: '#' },
+            {
+              label: 'Entitlements FAQ',
+              location: '#',
+            },
+          ]}
+        />
       </div>
     </Layout>
   )
