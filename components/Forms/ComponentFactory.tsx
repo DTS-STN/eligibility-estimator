@@ -1,14 +1,33 @@
+import { FormEvent, useEffect, useState } from 'react'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
+import { debounce } from 'lodash'
+import { useRouter } from 'next/router'
 
 export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
-  console.log(data.visibleFields)
+  const { query } = useRouter()
+  const [formState, setFormState] = useState(data.fieldData)
   // track lastCategory so we can render a new header when it has changed
   let lastCategory = null
+
+  const handleChange = async (e) => {
+    const formData = new FormData(document.querySelector('form'))
+    const qs = Array.from(formData, (e: [string, any]) =>
+      e.map(encodeURIComponent).join('=')
+    ).join('&')
+    const newFormData = await fetch(`api/calculateEligibility?${qs}`).then(
+      (res) => res.json()
+    )
+
+    console.log(newFormData)
+    setFormState(newFormData.fieldData)
+  }
+
   return (
-    <form action="/eligibility">
-      {data.fieldData.map((field) => {
+    <form name="ee-form" data-testid="ee-form" noValidate>
+      {console.log(formState)}
+      {formState.map((field) => {
         const content = (
           <div key={field.key} className="">
             {field.category != lastCategory && (
@@ -21,6 +40,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   name={field.key}
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
+                  onChange={debounce(handleChange, 1000)}
                   required
                 />
               </div>
@@ -31,6 +51,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   options={field.values}
                   label={field.label}
                   keyForId={field.key}
+                  onChange={handleChange}
                 />
               </div>
             )}
@@ -42,6 +63,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   }
                   keyForId={field.key}
                   label={field.label}
+                  onChange={handleChange}
                   required
                 />
               </div>
