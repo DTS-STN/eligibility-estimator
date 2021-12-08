@@ -1,4 +1,3 @@
-import normalizeLivingCountry from './socialAgreement'
 import {
   AllowanceSchema,
   BenefitResult,
@@ -30,7 +29,7 @@ export default function checkAllowance(
     : undefined
   const partnered =
     value.maritalStatus == MaritalStatusOptions.MARRIED ||
-    value.maritalStatus == MaritalStatusOptions.COMMONLAW
+    value.maritalStatus == MaritalStatusOptions.COMMON_LAW
 
   // remove after confirming requirements
   const requiredYearsInCanada =

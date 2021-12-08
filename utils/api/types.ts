@@ -3,7 +3,7 @@ import Joi from 'joi'
 export enum MaritalStatusOptions {
   SINGLE = 'Single',
   MARRIED = 'Married',
-  COMMONLAW = 'Common-law',
+  COMMON_LAW = 'Common-law',
   WIDOWED = 'Widowed',
   DIVORCED = 'Divorced',
   SEPERATED = 'Seperated',
@@ -42,7 +42,6 @@ export enum ResultReasons {
   OAS = 'Not eligible for OAS',
   INCOME = 'Income too high',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
-  INVALID = `Entered data is invalid`,
 }
 
 // This is what the API expects to receive, with the below exceptions due to normalization:
@@ -98,7 +97,7 @@ export const OasSchema = RequestSchema.concat(
           }),
         },
         {
-          is: Joi.string().exist().valid('No Agreement'),
+          is: Joi.string().exist().valid(LivingCountryOptions.NO_AGREEMENT),
           then: Joi.when('yearsInCanadaSince18', {
             is: Joi.number().exist().greater(0).less(20),
             then: Joi.required(),
@@ -127,7 +126,7 @@ export const GisSchema = RequestSchema.concat(
       .when('maritalStatus', {
         is: Joi.exist().valid(
           MaritalStatusOptions.MARRIED,
-          MaritalStatusOptions.COMMONLAW
+          MaritalStatusOptions.COMMON_LAW
         ),
         then: Joi.required(),
         otherwise: Joi.boolean().falsy().valid(false),
@@ -176,7 +175,7 @@ export const AllowanceSchema = RequestSchema.concat(
     partnerReceivingOas: Joi.when('maritalStatus', {
       is: Joi.exist().valid(
         MaritalStatusOptions.MARRIED,
-        MaritalStatusOptions.COMMONLAW
+        MaritalStatusOptions.COMMON_LAW
       ),
       then: Joi.required(),
     }),

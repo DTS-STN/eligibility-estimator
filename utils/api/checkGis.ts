@@ -23,7 +23,7 @@ export default function checkGis(
   // helpers
   const partnered =
     value.maritalStatus == MaritalStatusOptions.MARRIED ||
-    value.maritalStatus == MaritalStatusOptions.COMMONLAW
+    value.maritalStatus == MaritalStatusOptions.COMMON_LAW
 
   // initial checks
   if (value.livingCountry != undefined && value.livingCountry != 'Canada') {
@@ -45,12 +45,12 @@ export default function checkGis(
       eligibilityResult: ResultOptions.MORE_INFO,
       entitlementResult: 0,
       reason: ResultReasons.MORE_INFO,
-      detail: 'You need to complete the OAS eligibilty check first.',
+      detail: 'You need to complete the OAS eligibility check first.',
     }
   }
 
   // determine max income
-  let maxIncome = -1
+  let maxIncome: number
   if (partnered) {
     if (value.partnerReceivingOas) {
       maxIncome = 24048

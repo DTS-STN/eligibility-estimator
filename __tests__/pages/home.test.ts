@@ -9,7 +9,7 @@ import * as nextRouter from 'next/router'
 
 describe('index page', () => {
   let useRouter, data
-  // mocking useRouter, as we'll eventually need it for sedning the correct requests
+  // mocking useRouter, as we'll eventually need it for sending the correct requests
   beforeAll(() => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')
     useRouter.mockImplementation(() => ({

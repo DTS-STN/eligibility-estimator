@@ -6,7 +6,7 @@ import {
   ResultReasons,
 } from './types'
 
-var util = require('util')
+const util = require('util')
 
 export function validateRequestForBenefit(
   schema: ObjectSchema<any>,
