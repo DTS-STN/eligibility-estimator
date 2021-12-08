@@ -36,11 +36,14 @@ export enum MaritalStatusOptions {
 }
 
 export enum LegalStatusOptions {
-  CANADIAN_CITIZEN = 'Canadian Citizen',
-  PERMANENT_RESIDENT = 'Permanent Resident',
-  STATUS_INDIAN = 'Status Indian',
-  TEMPORARY_RESIDENT = 'Temporary Resident',
-  NONE = 'None of the above',
+  // regular cases
+  CANADIAN_CITIZEN = 'Canadian citizen',
+  PERMANENT_RESIDENT = 'Permanent resident or landed immigrant (non-sponsored)',
+  INDIAN_STATUS = 'Indian status or status card',
+  // edge cases, bail!
+  // or not? (TBD...)
+  SPONSORED = 'Permanent resident or landed immigrant (sponsored)',
+  OTHER = 'Other',
 }
 
 export enum LivingCountryOptions {
@@ -108,8 +111,7 @@ export const OasSchema = RequestSchema.concat(
       is: Joi.exist().valid(
         LegalStatusOptions.CANADIAN_CITIZEN,
         LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT
+        LegalStatusOptions.INDIAN_STATUS
       ),
       then: Joi.required(),
     }),
@@ -186,8 +188,7 @@ export const AllowanceSchema = RequestSchema.concat(
       is: Joi.exist().valid(
         LegalStatusOptions.CANADIAN_CITIZEN,
         LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT
+        LegalStatusOptions.INDIAN_STATUS
       ),
       then: Joi.required(),
     }),
@@ -230,8 +231,7 @@ export const AfsSchema = RequestSchema.concat(
       is: Joi.exist().valid(
         LegalStatusOptions.CANADIAN_CITIZEN,
         LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT
+        LegalStatusOptions.INDIAN_STATUS
       ),
       then: Joi.required(),
     }),

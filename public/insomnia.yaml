@@ -27,7 +27,7 @@ resources:
         id: pair_be1b9002a3d4425e9d54ca78e70ccd6b
       - name: legalStatus
         disabled: false
-        value: Canadian Citizen
+        value: Canadian citizen
         id: pair_ceb261ba61bc4451a3692f48b970b44f
       - name: yearsInCanadaSince18
         disabled: false
@@ -415,21 +415,17 @@ resources:
           legalStatus:
             name: legalStatus
             in: query
-            description: >
-              The current legal status of the client.
-
-
-              _Note that all options are treated the same, except for "None of the above", which will be ineligible._
+            description: The current legal status of the client.
             required: false
-            example: Canadian Citizen
+            example: Canadian citizen
             schema:
               type: string
               enum:
-                - Canadian Citizen
-                - Permanent Resident
-                - Status Indian
-                - Temporary Resident
-                - None of the above
+              - Canadian citizen
+              - Permanent resident or landed immigrant (non-sponsored)
+              - Permanent resident or landed immigrant (sponsored)
+              - Indian status or status card
+              - Other
               description: The current legal status of the client.
             allowEmptyValue: false
 

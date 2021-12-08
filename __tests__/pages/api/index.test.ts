@@ -293,10 +293,21 @@ describe('basic OAS scenarios', () => {
       income: 10000,
       age: 65,
       livingCountry: LivingCountryOptions.CANADA,
-      legalStatus: LegalStatusOptions.NONE,
+      legalStatus: LegalStatusOptions.OTHER,
       yearsInCanadaSince18: 20,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.INELIGIBLE)
+    expect(res.body.oas.reason).toEqual(ResultReasons.CITIZEN)
+  })
+  it('returns "conditionally eligible" when sponsored', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountryOptions.CANADA,
+      legalStatus: LegalStatusOptions.SPONSORED,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.CONDITIONAL)
     expect(res.body.oas.reason).toEqual(ResultReasons.CITIZEN)
   })
   it('returns "needs more info" when citizen and under 10 years in Canada', async () => {
@@ -658,7 +669,7 @@ describe('basic Allowance scenarios', () => {
       income: 10000,
       age: 60,
       livingCountry: LivingCountryOptions.CANADA,
-      legalStatus: LegalStatusOptions.NONE,
+      legalStatus: LegalStatusOptions.OTHER,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.MARRIED,
       partnerReceivingOas: true,
@@ -838,12 +849,12 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.body.afs.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.afs.reason).toEqual(ResultReasons.MORE_INFO)
   })
-  it('returns "ineligible" when not citizen', async () => {
+  it('returns "ineligible" when not citizen (other)', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
       livingCountry: LivingCountryOptions.CANADA,
-      legalStatus: LegalStatusOptions.NONE,
+      legalStatus: LegalStatusOptions.OTHER,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatusOptions.WIDOWED,
       partnerReceivingOas: false,

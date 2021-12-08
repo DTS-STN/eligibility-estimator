@@ -23,8 +23,7 @@ export default function checkAllowance(
     ? [
         LegalStatusOptions.CANADIAN_CITIZEN,
         LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT,
+        LegalStatusOptions.INDIAN_STATUS,
       ].includes(value.legalStatus)
     : undefined
   const partnered =
