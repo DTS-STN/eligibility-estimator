@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { Layout } from '../../components/Layout'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -16,9 +17,24 @@ const dataFetcher = async (url) => {
 const Eligiblity: NextPage = () => {
   const { query } = useRouter()
 
+  // formdata will come from form, going to need a handler function to pass into Component Factory and a useEffect to pull data once the [dependency] changes
   const params = Object.keys(query)
     .map((key) => key + '=' + query[key])
     .join('&')
+
+  // const params = 'income=20000'
+
+  // const params =
+  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen'
+
+  // const params =
+  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen&yearsInCanadaSince18=40'
+
+  // const params =
+  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen&yearsInCanadaSince18=40&maritalStatus=Married'
+
+  // const params =
+  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen&yearsInCanadaSince18=40&maritalStatus=Married&partnerReceivingOas=false'
 
   const { data, error } = useSWR(
     () => query && `api/calculateEligibility?${params && params}`,
@@ -37,11 +53,28 @@ const Eligiblity: NextPage = () => {
         <div>Loading form...</div>
       </Layout>
     )
-  console.log(data.allFields)
 
   return (
     <Layout>
-      <pre>{data.allFields.join(', ')}</pre>
+      <div className="grid grid-cols-3 gap-10 mt-9">
+        <div className="col-span-2">
+          <ComponentFactory data={data} />
+        </div>
+        <section>
+          {/* This will be a dynamic list of links eventually */}
+          <div className="p-8 bg-[#dcdfe1]">
+            <h2 className="h2">Need help?</h2>
+            <ul>
+              <li>
+                <a href="#">OAS Overview</a>
+              </li>
+              <li>
+                <a href="#">Old age security: how much you could receive?</a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
     </Layout>
   )
 }

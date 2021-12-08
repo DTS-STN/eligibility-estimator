@@ -27,7 +27,7 @@ export const Alert: React.VFC<{
 
   return (
     <div className={`p-3 border-[3px] ${className}`}>
-      <section className="flex flex-row justify-start items-center">
+      <div className="flex flex-row justify-start items-center">
         <svg
           width="55"
           height="156"
@@ -45,7 +45,7 @@ export const Alert: React.VFC<{
           <h5 className="h5 mb-3 text-content">{title}</h5>
           <p className="mb-4 text-content">{children}</p>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
