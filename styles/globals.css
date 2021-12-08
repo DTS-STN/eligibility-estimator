@@ -10,7 +10,7 @@
     @apply focus-visible:ring-black; */
   }
 
-  main {
+  main #elig {
     @apply text-base;
   }
 
