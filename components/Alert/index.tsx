@@ -26,7 +26,7 @@ export const Alert: React.VFC<{
   const className = typeToClassName()
 
   return (
-    <div className={`p-3 border-[3px] ${className}`}>
+    <div className={`p-4 border-[3px] ${className}`}>
       <div className="flex flex-row justify-start items-center">
         <svg
           width="55"

@@ -22,20 +22,6 @@ const Eligiblity: NextPage = () => {
     .map((key) => key + '=' + query[key])
     .join('&')
 
-  // const params = 'income=20000'
-
-  // const params =
-  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen'
-
-  // const params =
-  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen&yearsInCanadaSince18=40'
-
-  // const params =
-  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen&yearsInCanadaSince18=40&maritalStatus=Married'
-
-  // const params =
-  //   'income=20000&age=65&livingCountry=Canada&legalStatus=Canadian%20Citizen&yearsInCanadaSince18=40&maritalStatus=Married&partnerReceivingOas=false'
-
   const { data, error } = useSWR(
     () => query && `api/calculateEligibility?${params && params}`,
     dataFetcher
@@ -47,6 +33,7 @@ const Eligiblity: NextPage = () => {
         <div>{error.message}</div>
       </Layout>
     )
+
   if (!data)
     return (
       <Layout>
