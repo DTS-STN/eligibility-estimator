@@ -3,6 +3,7 @@ import { Radio } from './Radio'
 import { Select } from './Select'
 
 export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
+  console.log(data.visibleFields)
   // track lastCategory so we can render a new header when it has changed
   let lastCategory = null
   return (

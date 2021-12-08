@@ -13,7 +13,7 @@ export const Layout: React.VFC<{
   const { userLanguageChange } = useContext(LanguageContext)
 
   return (
-    <main>
+    <main id="elig">
       <div className="mx-4 min-h-screen">
         <div className="container mx-auto">
           <div className="flex justify-end my-4">
