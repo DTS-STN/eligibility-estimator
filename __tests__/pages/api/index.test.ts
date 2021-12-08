@@ -8,6 +8,13 @@ import {
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('sanity checks', () => {
+  it('fails on income with letters', async () => {
+    const res = await mockGetRequestError({
+      income: 'abc' as unknown as number,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultOptions.INVALID)
+  })
   it('fails on age over 150', async () => {
     const res = await mockGetRequestError({ age: 151 })
     expect(res.status).toEqual(400)

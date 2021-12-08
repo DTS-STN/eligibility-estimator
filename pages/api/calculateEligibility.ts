@@ -1,3 +1,4 @@
+import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import checkAfs from '../../utils/api/checkAfs'
 import checkAllowance from '../../utils/api/checkAllowance'
@@ -27,30 +28,27 @@ export default function handler(
     }
 
     // validation
-    let { error, value } = RequestSchema.validate(req.query, {
+    const params = Joi.attempt(req.query, RequestSchema, {
       abortEarly: false,
     })
-    if (error) {
-      throw error
-    }
     console.log('Passed validation.')
 
     // processing
-    const resultOas = checkOas(value)
+    const resultOas = checkOas(params)
     console.log('OAS Result: ', resultOas)
 
-    const resultGis = checkGis(value, resultOas)
+    const resultGis = checkGis(params, resultOas)
     console.log('GIS Result: ', resultGis)
 
-    const resultAllowance = checkAllowance(value)
+    const resultAllowance = checkAllowance(params)
     console.log('Allowance Result: ', resultAllowance)
 
-    const resultAfs = checkAfs(value)
+    const resultAfs = checkAfs(params)
     console.log('Allowance for Survivor Result: ', resultAfs)
 
     const allFields: Array<String> = [
       ...new Set([
-        ...Object.keys(value),
+        ...Object.keys(params),
         ...(resultOas.missingFields ? resultOas.missingFields : []),
         ...(resultGis.missingFields ? resultGis.missingFields : []),
         ...(resultAllowance.missingFields ? resultAllowance.missingFields : []),
