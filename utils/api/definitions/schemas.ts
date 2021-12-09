@@ -1,75 +1,5 @@
 import Joi from 'joi'
-import { FieldData } from './fieldDefinitions'
-
-export enum Fields {
-  INCOME = 'income',
-  AGE = 'age',
-  LIVING_COUNTRY = 'livingCountry',
-  LEGAL_STATUS = 'legalStatus',
-  YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
-  MARITAL_STATUS = 'maritalStatus',
-  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
-  EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
-}
-
-export enum FieldCategories {
-  INCOME_DETAILS = 'Income Details',
-  PERSONAL_INFORMATION = 'Personal Information',
-  PARTNER_DETAILS = 'Partner Details',
-  RESIDENCY_DETAILS = 'Residency Details',
-}
-
-export enum FieldTypes {
-  NUMBER = 'number',
-  BOOLEAN = 'boolean',
-  DROPDOWN = 'dropdown',
-  RADIO = 'radio',
-}
-
-export enum MaritalStatusOptions {
-  SINGLE = 'Single',
-  MARRIED = 'Married',
-  COMMONLAW = 'Common-law',
-  WIDOWED = 'Widowed',
-  DIVORCED = 'Divorced',
-  SEPERATED = 'Seperated',
-}
-
-export enum LegalStatusOptions {
-  CANADIAN_CITIZEN = 'Canadian Citizen',
-  PERMANENT_RESIDENT = 'Permanent Resident',
-  STATUS_INDIAN = 'Status Indian',
-  TEMPORARY_RESIDENT = 'Temporary Resident',
-  NONE = 'None of the above',
-}
-
-export enum LivingCountryOptions {
-  CANADA = 'Canada',
-  AGREEMENT = 'Agreement',
-  NO_AGREEMENT = 'No Agreement',
-}
-
-export enum ResultOptions {
-  ELIGIBLE = `Eligible!`,
-  INELIGIBLE = `Ineligible!`,
-  CONDITIONAL = `Conditionally eligible...`,
-  MORE_INFO = 'Need more information...',
-  INVALID = 'Request is invalid!',
-}
-
-export enum ResultReasons {
-  NONE = `You meet the criteria`,
-  AGE = `Age does not meet requirement for this benefit`,
-  YEARS_IN_CANADA = `Not enough years in Canada`,
-  LIVING_COUNTRY = `Not living in Canada`,
-  CITIZEN = `Not a Canadian citizen`,
-  SOCIAL_AGREEMENT = 'Not in a country with a social agreement',
-  MORE_INFO = 'Need more information...',
-  OAS = 'Not eligible for OAS',
-  INCOME = 'Income too high',
-  MARITAL = 'Your marital status does not meet the requirement for this benefit',
-  INVALID = `Entered data is invalid`,
-}
+import { LegalStatus, LivingCountry, MaritalStatus, ResultKey } from './enums'
 
 // This is what the API expects to receive, with the below exceptions due to normalization:
 // - livingCountry accepts a string
@@ -79,13 +9,13 @@ export enum ResultReasons {
 export const RequestSchema = Joi.object({
   income: Joi.number().integer(),
   age: Joi.number().integer().max(150),
-  livingCountry: Joi.string().valid(...Object.values(LivingCountryOptions)),
-  legalStatus: Joi.string().valid(...Object.values(LegalStatusOptions)),
+  livingCountry: Joi.string().valid(...Object.values(LivingCountry)),
+  legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
   yearsInCanadaSince18: Joi.number()
     .integer()
     .ruleset.max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message('Years in Canada should be no more than age minus 18'),
-  maritalStatus: Joi.string().valid(...Object.values(MaritalStatusOptions)),
+  maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   partnerReceivingOas: Joi.boolean(),
   everLivedSocialCountry: Joi.boolean(),
 })
@@ -107,24 +37,23 @@ export const OasSchema = RequestSchema.concat(
     }),
     yearsInCanadaSince18: Joi.when('legalStatus', {
       is: Joi.exist().valid(
-        LegalStatusOptions.CANADIAN_CITIZEN,
-        LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT
+        LegalStatus.CANADIAN_CITIZEN,
+        LegalStatus.PERMANENT_RESIDENT,
+        LegalStatus.INDIAN_STATUS
       ),
       then: Joi.required(),
     }),
     everLivedSocialCountry: Joi.when('livingCountry', {
       switch: [
         {
-          is: Joi.string().exist().valid(LivingCountryOptions.CANADA),
+          is: Joi.string().exist().valid(LivingCountry.CANADA),
           then: Joi.when('yearsInCanadaSince18', {
             is: Joi.number().exist().greater(0).less(10),
             then: Joi.required(),
           }),
         },
         {
-          is: Joi.string().exist().valid('No Agreement'),
+          is: Joi.string().exist().valid(LivingCountry.NO_AGREEMENT),
           then: Joi.when('yearsInCanadaSince18', {
             is: Joi.number().exist().greater(0).less(20),
             then: Joi.required(),
@@ -138,7 +67,7 @@ export const OasSchema = RequestSchema.concat(
 export const GisSchema = RequestSchema.concat(
   Joi.object({
     _oasEligible: Joi.string()
-      .valid(...Object.values(ResultOptions))
+      .valid(...Object.values(ResultKey))
       .required(),
     income: Joi.required(),
     livingCountry: Joi.when('income', {
@@ -146,20 +75,17 @@ export const GisSchema = RequestSchema.concat(
       then: Joi.required(),
     }),
     maritalStatus: Joi.when('_oasEligible', {
-      not: Joi.valid(ResultOptions.INELIGIBLE, ResultOptions.MORE_INFO),
+      not: Joi.valid(ResultKey.INELIGIBLE, ResultKey.MORE_INFO),
       then: Joi.required(),
     }),
     partnerReceivingOas: Joi.boolean()
       .when('maritalStatus', {
-        is: Joi.exist().valid(
-          MaritalStatusOptions.MARRIED,
-          MaritalStatusOptions.COMMONLAW
-        ),
+        is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
         then: Joi.required(),
         otherwise: Joi.boolean().falsy().valid(false),
       })
       .when('_oasEligible', {
-        is: Joi.valid(ResultOptions.INELIGIBLE, ResultOptions.MORE_INFO),
+        is: Joi.valid(ResultKey.INELIGIBLE, ResultKey.MORE_INFO),
         then: Joi.optional(),
       }),
   })
@@ -185,10 +111,9 @@ export const AllowanceSchema = RequestSchema.concat(
     }),
     yearsInCanadaSince18: Joi.when('legalStatus', {
       is: Joi.exist().valid(
-        LegalStatusOptions.CANADIAN_CITIZEN,
-        LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT
+        LegalStatus.CANADIAN_CITIZEN,
+        LegalStatus.PERMANENT_RESIDENT,
+        LegalStatus.INDIAN_STATUS
       ),
       then: Joi.required(),
     }),
@@ -200,10 +125,7 @@ export const AllowanceSchema = RequestSchema.concat(
       }),
     }),
     partnerReceivingOas: Joi.when('maritalStatus', {
-      is: Joi.exist().valid(
-        MaritalStatusOptions.MARRIED,
-        MaritalStatusOptions.COMMONLAW
-      ),
+      is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
       then: Joi.required(),
     }),
   })
@@ -229,10 +151,9 @@ export const AfsSchema = RequestSchema.concat(
     }),
     yearsInCanadaSince18: Joi.when('legalStatus', {
       is: Joi.exist().valid(
-        LegalStatusOptions.CANADIAN_CITIZEN,
-        LegalStatusOptions.PERMANENT_RESIDENT,
-        LegalStatusOptions.STATUS_INDIAN,
-        LegalStatusOptions.TEMPORARY_RESIDENT
+        LegalStatus.CANADIAN_CITIZEN,
+        LegalStatus.PERMANENT_RESIDENT,
+        LegalStatus.INDIAN_STATUS
       ),
       then: Joi.required(),
     }),
@@ -245,37 +166,3 @@ export const AfsSchema = RequestSchema.concat(
     }),
   })
 )
-
-export interface CalculationInput {
-  age?: number
-  livingCountry?: LivingCountryOptions
-  legalStatus?: LegalStatusOptions
-  yearsInCanadaSince18?: number
-  maritalStatus?: MaritalStatusOptions
-  partnerReceivingOas?: boolean
-  income?: number
-  everLivedSocialCountry?: boolean
-  _oasEligible?: ResultOptions
-}
-
-export interface BenefitResult {
-  eligibilityResult: ResultOptions
-  entitlementResult: Number
-  reason: ResultReasons
-  detail: String
-  missingFields?: Array<Fields>
-}
-
-export interface ResponseSuccess {
-  oas: BenefitResult
-  gis: BenefitResult
-  allowance: BenefitResult
-  afs: BenefitResult
-  visibleFields: Array<Fields>
-  fieldData: Array<FieldData>
-}
-
-export interface ResponseError {
-  error: string
-  detail: any
-}

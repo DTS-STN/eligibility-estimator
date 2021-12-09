@@ -8,8 +8,8 @@ import React from 'react'
 import * as nextRouter from 'next/router'
 
 describe('index page', () => {
-  let useRouter
-  // mocking useRouter, as we'll eventually need it for sedning the correct requests
+  let useRouter, data
+  // mocking useRouter, as we'll eventually need it for sending the correct requests
   beforeAll(() => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')
     useRouter.mockImplementation(() => ({
@@ -21,6 +21,7 @@ describe('index page', () => {
   })
 
   it('should render the home page', async () => {
+    // Once API is ready, fetch here
     render(React.createElement(Home))
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()

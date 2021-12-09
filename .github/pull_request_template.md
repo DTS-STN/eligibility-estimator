@@ -9,4 +9,4 @@ List of proposed changes:
 
 ### What to test for/How to test
 
-### Addtional Notes
+### Additional Notes

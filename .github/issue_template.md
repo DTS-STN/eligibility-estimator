@@ -4,4 +4,4 @@
 
 ### Success Criteria
 
-### Addtional Notes
+### Additional Notes

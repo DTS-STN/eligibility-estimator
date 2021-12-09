@@ -4,7 +4,7 @@ import {
   CalculationInput,
   ResponseError,
   ResponseSuccess,
-} from '../../../utils/api/types'
+} from '../../../utils/api/definitions/types'
 
 interface MockResponseObject<T extends ResponseSuccess | ResponseError> {
   status: number

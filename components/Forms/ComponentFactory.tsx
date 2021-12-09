@@ -1,36 +1,49 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
+import { sortBy } from 'lodash'
 
 export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
-  const { query } = useRouter()
-  const [formState, setFormState] = useState(data.fieldData)
-  // track lastCategory so we can render a new header when it has changed
   let lastCategory = null
+  const { query } = useRouter()
+  const orderedFields = sortBy(data.fieldData, 'order')
+  const [formState, setFormState] = useState(orderedFields)
 
-  const handleChange = async (e) => {
-    const formData = new FormData(document.querySelector('form'))
-    const qs = Array.from(formData, (e: [string, any]) =>
-      e.map(encodeURIComponent).join('=')
-    ).join('&')
+  /**
+   * Global change handler for the dynamic form elements in the eligbility form
+   * @param e {ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>} the change even for the form elements
+   */
+  const handleChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => Promise<void> = async (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const formData = new FormData(
+      document.querySelector('form[name="ee-form"]')
+    )
+
+    let qs = ''
+    // Why is partnerReceivingOas in the entries if not in the form???
+    for (const [key, value] of formData.entries()) {
+      if (qs !== '') qs += '&'
+      qs += `${key}=${value}`
+    }
     const newFormData = await fetch(`api/calculateEligibility?${qs}`).then(
       (res) => res.json()
     )
-
     console.log(newFormData)
-    setFormState(newFormData.fieldData)
+    if (!newFormData.error) {
+      setFormState(newFormData.fieldData)
+    } else {
+      // show error label above error field? Need a way to tell the user
+    }
   }
 
   return (
-    <form
-      name="ee-form"
-      data-testid="ee-form"
-      onSubmit={(e) => e.preventDefault()}
-      noValidate
-    >
+    <form name="ee-form" data-testid="ee-form" noValidate>
       {formState.map((field) => {
         const content = (
           <div key={field.key} className="">
@@ -38,7 +51,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
               <h2 className="h2 mb-8">{field.category}</h2>
             )}
             {(field.type == 'number' || field.type == 'text') && (
-              <div className="mb-14">
+              <div className="mb-10">
                 <Input
                   type={field.type}
                   name={field.key}
