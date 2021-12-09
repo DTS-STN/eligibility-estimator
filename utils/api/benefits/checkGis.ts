@@ -73,7 +73,7 @@ export default function checkGis(
           entitlementResult: 0,
           reason: ResultReason.NONE,
           detail:
-            'Based on the information provided, you are eligible for GIS!',
+            'Based on the information provided, you are likely eligible for GIS!',
         }
       }
     } else {
@@ -81,7 +81,7 @@ export default function checkGis(
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: 'You will be eligible for GIS when you turn 65.',
+        detail: 'You will likely be eligible for GIS when you turn 65.',
       }
     }
   } else {

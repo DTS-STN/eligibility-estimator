@@ -72,7 +72,7 @@ export default function checkAllowance(
       entitlementResult: 0,
       reason: ResultReason.NONE,
       detail:
-        'Based on the information provided, you are eligible for Allowance!',
+        'Based on the information provided, you are likely eligible for Allowance!',
     }
   } else if (
     value.livingCountry === LivingCountry.AGREEMENT &&

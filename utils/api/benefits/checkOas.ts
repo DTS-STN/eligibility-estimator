@@ -35,7 +35,8 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason: ResultReason.NONE,
-        detail: 'Based on the information provided, you are eligible for OAS!',
+        detail:
+          'Based on the information provided, you are likely eligible for OAS!',
       }
     } else if (value.age == 64) {
       return {
@@ -43,14 +44,14 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         entitlementResult: 0,
         reason: ResultReason.AGE,
         detail:
-          'You will be eligible when you turn 65, however you may be able to apply now, please contact Service Canada for more information.',
+          'You will likely be eligible when you turn 65, however you may be able to apply now, please contact Service Canada for more information.',
       }
     } else {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: 'You will be eligible when you turn 65.',
+        detail: 'You will likely be eligible when you turn 65.',
       }
     }
   } else if (!meetsReqIncome) {
@@ -79,7 +80,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
           entitlementResult: 0,
           reason: ResultReason.AGE,
           detail:
-            "You may be eligible when you turn 65, depending on Canada's agreement with this country.",
+            "You may be eligible when you turn 65, depending on Canada's agreement with this country. You are encouraged to contact Service Canada.",
         }
       }
     } else {

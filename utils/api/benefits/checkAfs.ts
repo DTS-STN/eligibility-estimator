@@ -65,7 +65,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       entitlementResult: 0,
       reason: ResultReason.NONE,
       detail:
-        'Based on the information provided, you are eligible for Allowance for Survivor!',
+        'Based on the information provided, you are likely eligible for Allowance for Survivor!',
     }
   } else if (
     value.livingCountry === LivingCountry.AGREEMENT &&
