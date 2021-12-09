@@ -1,13 +1,10 @@
-import { LivingCountryOptions } from './types'
+import { LivingCountry } from '../definitions/enums'
 
-export default function normalizeLivingCountry(
-  country: string
-): LivingCountryOptions {
-  if (country === LivingCountryOptions.CANADA)
-    return LivingCountryOptions.CANADA
+export default function normalizeLivingCountry(country: string): LivingCountry {
+  if (country === LivingCountry.CANADA) return LivingCountry.CANADA
   return AGREEMENT_COUNTRIES.includes(country)
-    ? LivingCountryOptions.AGREEMENT
-    : LivingCountryOptions.NO_AGREEMENT
+    ? LivingCountry.AGREEMENT
+    : LivingCountry.NO_AGREEMENT
 }
 
 const AGREEMENT_COUNTRIES = [

@@ -1,12 +1,8 @@
 import { ObjectSchema } from 'joi'
-import { sortFields } from './fieldDefinitions'
-import {
-  BenefitResult,
-  CalculationInput,
-  Fields,
-  ResultOptions,
-  ResultReasons,
-} from './types'
+import { ResultKey, ResultReason } from '../definitions/enums'
+import { FieldKey } from '../definitions/fields'
+import { BenefitResult, CalculationInput } from '../definitions/types'
+import { sortFields } from './fieldUtils'
 
 const util = require('util')
 
@@ -29,16 +25,16 @@ export function validateRequestForBenefit(
     // gather all missing but required fields
     const missingFields = [
       ...new Set(error.details.map((x) => `${x.path[0]}`)),
-    ] as Array<Fields>
+    ] as Array<FieldKey>
     missingFields.sort(sortFields)
     console.log(missingFields)
 
     // return result containing all required fields
     return {
       result: {
-        eligibilityResult: ResultOptions.MORE_INFO,
+        eligibilityResult: ResultKey.MORE_INFO,
         entitlementResult: 0,
-        reason: ResultReasons.MORE_INFO,
+        reason: ResultReason.MORE_INFO,
         detail: `Missing ${missingFields.length} required field${
           missingFields.length != 1 ? 's' : ''
         }.`,

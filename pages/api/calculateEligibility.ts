@@ -1,22 +1,21 @@
 import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import checkAfs from '../../utils/api/checkAfs'
-import checkAllowance from '../../utils/api/checkAllowance'
-import checkGis from '../../utils/api/checkGis'
-import checkOas from '../../utils/api/checkOas'
+import checkAfs from '../../utils/api/benefits/checkAfs'
+import checkAllowance from '../../utils/api/benefits/checkAllowance'
+import checkGis from '../../utils/api/benefits/checkGis'
+import checkOas from '../../utils/api/benefits/checkOas'
+import { ResultKey } from '../../utils/api/definitions/enums'
+import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import { RequestSchema } from '../../utils/api/definitions/schemas'
+import {
+  ResponseError,
+  ResponseSuccess,
+} from '../../utils/api/definitions/types'
 import {
   buildFieldData,
   buildVisibleFields,
-  FieldData,
-} from '../../utils/api/fieldDefinitions'
-import normalizeLivingCountry from '../../utils/api/socialAgreement'
-import {
-  Fields,
-  RequestSchema,
-  ResponseError,
-  ResponseSuccess,
-  ResultOptions,
-} from '../../utils/api/types'
+} from '../../utils/api/helpers/fieldUtils'
+import normalizeLivingCountry from '../../utils/api/helpers/socialAgreement'
 
 export default function handler(
   req: NextApiRequest,
@@ -52,8 +51,8 @@ export default function handler(
     const resultAfs = checkAfs(params)
     console.log('Allowance for Survivor Result: ', resultAfs)
 
-    const visibleFields = buildVisibleFields([
-      Object.keys(params) as Array<Fields>,
+    const visibleFields: Array<FieldKey> = buildVisibleFields([
+      Object.keys(params) as Array<FieldKey>,
       resultOas.missingFields,
       resultGis.missingFields,
       resultAllowance.missingFields,
@@ -73,7 +72,7 @@ export default function handler(
     })
   } catch (error) {
     res.status(400).json({
-      error: ResultOptions.INVALID,
+      error: ResultKey.INVALID,
       detail: error.details || String(error),
     })
     console.log(error)
