@@ -3,12 +3,16 @@ import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
 import { debounce } from 'lodash'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import { sortBy } from 'lodash'
+import Link from 'next/link'
+import { redirect } from 'next/dist/server/api-utils'
 
 export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
   let lastCategory = null
-  const { query } = useRouter()
+  const router = useRouter()
+  const query = router.query
+
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)
 
@@ -28,9 +32,15 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
     let qs = ''
     // Why is partnerReceivingOas in the entries if not in the form???
     for (const [key, value] of formData.entries()) {
+      if (value == '') continue
       if (qs !== '') qs += '&'
       qs += `${key}=${value}`
     }
+
+    //redirect to exit case if income is too high
+    if (parseInt(formData.get('income') as string) > 129757)
+      router.push(`/eligibility?${qs}`)
+
     const newFormData = await fetch(`api/calculateEligibility?${qs}`).then(
       (res) => res.json()
     )
@@ -43,7 +53,12 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
   }
 
   return (
-    <form name="ee-form" data-testid="ee-form" noValidate>
+    <form
+      name="ee-form"
+      data-testid="ee-form"
+      onSubmit={(e) => e.preventDefault()}
+      noValidate
+    >
       {formState.map((field) => {
         const content = (
           <div key={field.key} className="">
@@ -92,6 +107,22 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
 
         return content
       })}
+
+      <div className="flex flex-row gap-x-8 mt-20">
+        <button
+          type="button"
+          className="btn btn-default w-40"
+          onClick={(e) => router.push('/')}
+        >
+          Back
+        </button>
+        <button type="reset" className="btn btn-default w-40">
+          Clear
+        </button>
+        <button type="submit" className="btn btn-primary w-40">
+          Estimate
+        </button>
+      </div>
     </form>
   )
 }
