@@ -4,7 +4,11 @@ import checkAfs from '../../utils/api/checkAfs'
 import checkAllowance from '../../utils/api/checkAllowance'
 import checkGis from '../../utils/api/checkGis'
 import checkOas from '../../utils/api/checkOas'
-import { buildFieldData, FieldData } from '../../utils/api/fieldDefinitions'
+import {
+  buildFieldData,
+  buildVisibleFields,
+  FieldData,
+} from '../../utils/api/fieldDefinitions'
 import normalizeLivingCountry from '../../utils/api/socialAgreement'
 import {
   Fields,
@@ -48,16 +52,13 @@ export default function handler(
     const resultAfs = checkAfs(params)
     console.log('Allowance for Survivor Result: ', resultAfs)
 
-    const visibleFields: Array<Fields> = [
-      ...new Set([
-        ...([...Object.keys(params)] as Array<Fields>),
-        ...(resultOas.missingFields ? resultOas.missingFields : []),
-        ...(resultGis.missingFields ? resultGis.missingFields : []),
-        ...(resultAllowance.missingFields ? resultAllowance.missingFields : []),
-        ...(resultAfs.missingFields ? resultAfs.missingFields : []),
-      ]),
-    ]
-    console.log('All visible fields:', visibleFields)
+    const visibleFields = buildVisibleFields([
+      Object.keys(params) as Array<Fields>,
+      resultOas.missingFields,
+      resultGis.missingFields,
+      resultAllowance.missingFields,
+      resultAfs.missingFields,
+    ])
 
     const fieldData: Array<FieldData> = buildFieldData(visibleFields)
 

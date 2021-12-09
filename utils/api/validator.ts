@@ -1,4 +1,5 @@
 import { ObjectSchema } from 'joi'
+import { sortFields } from './fieldDefinitions'
 import {
   BenefitResult,
   CalculationInput,
@@ -29,6 +30,7 @@ export function validateRequestForBenefit(
     const missingFields = [
       ...new Set(error.details.map((x) => `${x.path[0]}`)),
     ] as Array<Fields>
+    missingFields.sort(sortFields)
     console.log(missingFields)
 
     // return result containing all required fields

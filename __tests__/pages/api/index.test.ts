@@ -98,7 +98,7 @@ describe('field requirement analysis', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(
-      ['age', 'livingCountry', 'legalStatus'].toString()
+      ['age', 'legalStatus', 'livingCountry'].toString()
     )
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
@@ -106,7 +106,7 @@ describe('field requirement analysis', () => {
       ['livingCountry'].toString()
     )
     expect(res.body.visibleFields.toString()).toEqual(
-      ['income', 'age', 'livingCountry', 'legalStatus'].toString()
+      ['income', 'age', 'legalStatus', 'livingCountry'].toString()
     )
   })
   it('requires 2 OAS and 1 GIS fields when only income/age provided', async () => {
@@ -114,7 +114,7 @@ describe('field requirement analysis', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.oas.missingFields.toString()).toEqual(
-      ['livingCountry', 'legalStatus'].toString()
+      ['legalStatus', 'livingCountry'].toString()
     )
     expect(res.body.gis.eligibilityResult).toEqual(ResultOptions.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
@@ -122,7 +122,7 @@ describe('field requirement analysis', () => {
       ['livingCountry'].toString()
     )
     expect(res.body.visibleFields.toString()).toEqual(
-      ['income', 'age', 'livingCountry', 'legalStatus'].toString()
+      ['income', 'age', 'legalStatus', 'livingCountry'].toString()
     )
   })
   it('requires 1 OAS and 0 GIS fields when only income/age/country provided', async () => {
@@ -140,7 +140,7 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.reason).toEqual(ResultReasons.MORE_INFO)
     expect(res.body.gis.missingFields).toBeUndefined()
     expect(res.body.visibleFields.toString()).toEqual(
-      ['income', 'age', 'livingCountry', 'legalStatus'].toString()
+      ['income', 'age', 'legalStatus', 'livingCountry'].toString()
     )
   })
   it('requires 1 OAS and 0 GIS fields when only income/age/country/legal provided', async () => {
@@ -162,8 +162,8 @@ describe('field requirement analysis', () => {
       [
         'income',
         'age',
-        'livingCountry',
         'legalStatus',
+        'livingCountry',
         'yearsInCanadaSince18',
       ].toString()
     )
@@ -188,10 +188,10 @@ describe('field requirement analysis', () => {
       [
         'income',
         'age',
-        'livingCountry',
         'legalStatus',
-        'yearsInCanadaSince18',
         'maritalStatus',
+        'livingCountry',
+        'yearsInCanadaSince18',
       ].toString()
     )
   })
@@ -214,10 +214,10 @@ describe('field requirement analysis', () => {
       [
         'income',
         'age',
-        'livingCountry',
         'legalStatus',
-        'yearsInCanadaSince18',
         'maritalStatus',
+        'livingCountry',
+        'yearsInCanadaSince18',
       ].toString()
     )
   })
@@ -242,11 +242,11 @@ describe('field requirement analysis', () => {
       [
         'income',
         'age',
-        'livingCountry',
         'legalStatus',
-        'yearsInCanadaSince18',
         'maritalStatus',
         'partnerReceivingOas',
+        'livingCountry',
+        'yearsInCanadaSince18',
       ].toString()
     )
   })
@@ -270,11 +270,11 @@ describe('field requirement analysis', () => {
       [
         'income',
         'age',
-        'livingCountry',
         'legalStatus',
-        'yearsInCanadaSince18',
         'maritalStatus',
         'partnerReceivingOas',
+        'livingCountry',
+        'yearsInCanadaSince18',
       ].toString()
     )
   })
