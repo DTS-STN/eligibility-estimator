@@ -3,6 +3,8 @@ import {
   InputHTMLAttributes,
   SelectHTMLAttributes,
 } from 'react'
+import { fieldDefinitions } from '../Tooltip'
+import { Tooltip } from '../Tooltip/tooltip'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -18,6 +20,7 @@ export const Select: React.VFC<SelectProps> = (props) => {
     <>
       <span className="mb-1.5 font-semibold">{props.label}</span>
       <span className="text-danger font-bold ml-2">(required)</span>
+      <Tooltip text={fieldDefinitions.data[props.keyForId]} />
       <select
         name={props.keyForId}
         id={props.keyForId}

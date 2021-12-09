@@ -75,9 +75,4 @@
     background-color: #eee;
     opacity: 1;
   }
-  label > div:not(.radio) {
-    @apply mb-1.5;
-    display: inline-block;
-    max-width: 100%;
-  }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 
 export const Tooltip: React.VFC<{ text?: string; size?: number }> = ({
   text,
@@ -13,19 +13,19 @@ export const Tooltip: React.VFC<{ text?: string; size?: number }> = ({
     }
   }
 
-  const onEscPress = (event) => {
+  const handleEscPress = (event) => {
     if (event.keyCode === 27) {
       setShow(false)
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('keyup', onEscPress)
+    document.addEventListener('keyup', handleEscPress)
   })
 
   return (
-    <div className="ml-2 absolute" ref={wrapperRef}>
+    <span className="ml-2 absolute" ref={wrapperRef}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -59,6 +59,6 @@ export const Tooltip: React.VFC<{ text?: string; size?: number }> = ({
           <p className="font-normal z">{text}</p>
         </div>
       </div>
-    </div>
+    </span>
   )
 }

@@ -14,7 +14,7 @@ export const Input: React.VFC<InputProps> = (props) => {
       <label
         htmlFor={props.name}
         data-testid="input-label"
-        className="text-content font-bold"
+        className="text-content font-bold mb-12"
       >
         {props.required && <span className="text-danger">*</span>} {props.label}
         {props.required && (
