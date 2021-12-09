@@ -9,6 +9,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Radio: React.VFC<InputProps> = (props) => {
   const { query } = useRouter()
+
   const correctForBooleans = (value: string) => {
     switch (value) {
       case 'Yes':
@@ -22,6 +23,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
         break
     }
   }
+
   return (
     <>
       <div className="radio mb-8">
