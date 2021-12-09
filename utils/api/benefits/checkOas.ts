@@ -96,17 +96,17 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
-        reason: ResultReason.CITIZEN,
+        reason: ResultReason.LEGAL_STATUS,
         detail:
           'You may be eligible for OAS, please contact Service Canada to confirm.',
       }
     } else {
       return {
-        eligibilityResult: ResultKey.INELIGIBLE,
+        eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
-        reason: ResultReason.CITIZEN,
+        reason: ResultReason.LEGAL_STATUS,
         detail:
-          'You currently do not appear to be eligible for the OAS pension as you have indicated that you do not have legal status in Canada. However, you may be in the future if you obtain legal status. If you are living outside of Canada, you may be eligible for the OAS pension if you had legal status prior to your departure.',
+          'You may be eligible for the OAS pension, and should contact Service Canada to confirm due to your legal status in Canada.',
       }
     }
   } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {

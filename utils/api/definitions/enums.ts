@@ -2,7 +2,7 @@ export enum FieldCategory {
   INCOME_DETAILS = 'Income Details',
   PERSONAL_INFORMATION = 'Personal Information',
   PARTNER_DETAILS = 'Partner Details',
-  RESIDENCY_DETAILS = 'Residency Details',
+  LEGAL_STATUS = 'Legal Status',
 }
 
 export enum MaritalStatus {
@@ -44,7 +44,7 @@ export enum ResultReason {
   AGE = `Age does not meet requirement for this benefit`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
   LIVING_COUNTRY = `Not living in Canada`,
-  CITIZEN = `Not a Canadian citizen`,
+  LEGAL_STATUS = `Legal status does not meet requirement for this benefit`,
   SOCIAL_AGREEMENT = 'Not in a country with a social agreement',
   MORE_INFO = 'Need more information...',
   OAS = 'Not eligible for OAS',

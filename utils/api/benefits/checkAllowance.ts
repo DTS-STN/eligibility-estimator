@@ -18,44 +18,82 @@ export default function checkAllowance(
   if (result) return result
 
   // helpers
-  const canadianCitizen = value.legalStatus
-    ? [
-        LegalStatus.CANADIAN_CITIZEN,
-        LegalStatus.PERMANENT_RESIDENT,
-        LegalStatus.INDIAN_STATUS,
-      ].includes(value.legalStatus)
-    : undefined
-  const partnered =
+  const meetsReqMarital =
     value.maritalStatus == MaritalStatus.MARRIED ||
     value.maritalStatus == MaritalStatus.COMMON_LAW
-
-  // remove after confirming requirements
-  const requiredYearsInCanada =
-    value.livingCountry === LivingCountry.CANADA ? 10 : 10
+  const meetsReqPartner = value.partnerReceivingOas !== false
+  const meetsReqAge = 60 <= value.age && value.age <= 64
+  const overAgeReq = 65 <= value.age
+  const underAgeReq = value.age < 60
+  const meetsReqIncome = value.income < 35616
+  const requiredYearsInCanada = 10
+  const meetsReqYears = value.yearsInCanadaSince18 >= requiredYearsInCanada
+  const meetsReqLegal =
+    value.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
+    value.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
+    value.legalStatus === LegalStatus.INDIAN_STATUS
 
   // main checks
-  if (value.age < 60 || value.age > 64) {
-    return {
-      eligibilityResult: ResultKey.INELIGIBLE,
-      entitlementResult: 0,
-      reason: ResultReason.AGE,
-      detail: 'You must be between 60 and 64 to be eligible for Allowance.',
+  if (
+    meetsReqLegal &&
+    meetsReqYears &&
+    meetsReqMarital &&
+    meetsReqIncome &&
+    meetsReqPartner
+  ) {
+    if (meetsReqAge) {
+      return {
+        eligibilityResult: ResultKey.ELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.NONE,
+        detail:
+          'Based on the information provided, you are likely eligible for Allowance!',
+      }
+    } else if (value.age == 59) {
+      return {
+        eligibilityResult: ResultKey.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.AGE,
+        detail:
+          'You will likely be eligible when you turn 60, however you may be able to apply now, please contact Service Canada for more information.',
+      }
+    } else if (underAgeReq) {
+      return {
+        eligibilityResult: ResultKey.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.AGE,
+        detail: 'You will likely be eligible when you turn 60.',
+      }
+    } else {
+      return {
+        eligibilityResult: ResultKey.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.AGE,
+        detail: 'You must be between 60 and 64 to be eligible for Allowance.',
+      }
     }
-  } else if (value.income >= 35616) {
+  } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
       detail: 'Your income is too high to be eligible for Allowance.',
     }
-  } else if (!partnered) {
+  } else if (overAgeReq) {
+    return {
+      eligibilityResult: ResultKey.INELIGIBLE,
+      entitlementResult: 0,
+      reason: ResultReason.AGE,
+      detail: 'You must be between 60 and 64 to be eligible for Allowance.',
+    }
+  } else if (!meetsReqMarital) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.MARITAL,
       detail: 'You must be common-law or married to be eligible for Allowance.',
     }
-  } else if (value.partnerReceivingOas === false) {
+  } else if (!meetsReqPartner) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
@@ -63,42 +101,60 @@ export default function checkAllowance(
       detail:
         'Your partner must be receiving OAS to be eligible for Allowance.',
     }
-  } else if (
-    canadianCitizen &&
-    value.yearsInCanadaSince18 >= requiredYearsInCanada
-  ) {
-    return {
-      eligibilityResult: ResultKey.ELIGIBLE,
-      entitlementResult: 0,
-      reason: ResultReason.NONE,
-      detail:
-        'Based on the information provided, you are likely eligible for Allowance!',
+  } else if (!meetsReqYears) {
+    if (
+      value.livingCountry === LivingCountry.AGREEMENT ||
+      value.everLivedSocialCountry
+    ) {
+      if (meetsReqAge) {
+        return {
+          eligibilityResult: ResultKey.CONDITIONAL,
+          entitlementResult: 0,
+          reason: ResultReason.YEARS_IN_CANADA,
+          detail:
+            "Depending on Canada's agreement with this country, you may be eligible to receive Allowance. You are encouraged to contact Service Canada.",
+        }
+      } else if (underAgeReq) {
+        return {
+          eligibilityResult: ResultKey.INELIGIBLE,
+          entitlementResult: 0,
+          reason: ResultReason.AGE,
+          detail:
+            "You may be eligible when you turn 60, depending on Canada's agreement with this country. You are encouraged to contact Service Canada.",
+        }
+      } else {
+        return {
+          eligibilityResult: ResultKey.INELIGIBLE,
+          entitlementResult: 0,
+          reason: ResultReason.AGE,
+          detail: 'You must be between 60 and 64 to be eligible for Allowance.',
+        }
+      }
+    } else {
+      return {
+        eligibilityResult: ResultKey.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.YEARS_IN_CANADA,
+        detail: `You currently do not appear to be eligible for the Allowance as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.`,
+      }
     }
-  } else if (
-    value.livingCountry === LivingCountry.AGREEMENT &&
-    value.yearsInCanadaSince18 < requiredYearsInCanada
-  ) {
-    return {
-      eligibilityResult: ResultKey.CONDITIONAL,
-      entitlementResult: 0,
-      reason: ResultReason.YEARS_IN_CANADA,
-      detail:
-        "Depending on Canada's agreement with this country, you may be eligible to receive the Allowance. You are encouraged to contact Service Canada.",
-    }
-  } else if (value.yearsInCanadaSince18 < requiredYearsInCanada) {
-    return {
-      eligibilityResult: ResultKey.INELIGIBLE,
-      entitlementResult: 0,
-      reason: ResultReason.YEARS_IN_CANADA,
-      detail: `You currently do not appear to be eligible for the Allowance as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.`,
-    }
-  } else if (canadianCitizen == false) {
-    return {
-      eligibilityResult: ResultKey.INELIGIBLE,
-      entitlementResult: 0,
-      reason: ResultReason.CITIZEN,
-      detail:
-        'You currently do not appear to be eligible for the Allowance as you have indicated that you do not have legal status in Canada. However, you may be in the future if you obtain legal status. If you are living outside of Canada, you may be eligible for the Allowance if you had legal status prior to your departure.',
+  } else if (!meetsReqLegal) {
+    if (value.legalStatus === LegalStatus.SPONSORED) {
+      return {
+        eligibilityResult: ResultKey.CONDITIONAL,
+        entitlementResult: 0,
+        reason: ResultReason.LEGAL_STATUS,
+        detail:
+          'You may be eligible for Allowance, please contact Service Canada to confirm.',
+      }
+    } else {
+      return {
+        eligibilityResult: ResultKey.CONDITIONAL,
+        entitlementResult: 0,
+        reason: ResultReason.LEGAL_STATUS,
+        detail:
+          'You may be eligible for Allowance, and should contact Service Canada to confirm due to your legal status in Canada.',
+      }
     }
   } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {
     return {

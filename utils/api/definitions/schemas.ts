@@ -35,12 +35,8 @@ export const OasSchema = RequestSchema.concat(
       is: Joi.number().exist().greater(0).less(129757),
       then: Joi.required(),
     }),
-    yearsInCanadaSince18: Joi.when('legalStatus', {
-      is: Joi.exist().valid(
-        LegalStatus.CANADIAN_CITIZEN,
-        LegalStatus.PERMANENT_RESIDENT,
-        LegalStatus.INDIAN_STATUS
-      ),
+    yearsInCanadaSince18: Joi.when('income', {
+      is: Joi.number().exist().greater(0).less(129757),
       then: Joi.required(),
     }),
     everLivedSocialCountry: Joi.when('livingCountry', {
@@ -70,8 +66,16 @@ export const GisSchema = RequestSchema.concat(
       .valid(...Object.values(ResultKey))
       .required(),
     income: Joi.required(),
+    age: Joi.when('income', {
+      is: Joi.number().exist().max(43680),
+      then: Joi.required(),
+    }),
     livingCountry: Joi.when('income', {
       is: Joi.number().exist().max(43680),
+      then: Joi.required(),
+    }),
+    legalStatus: Joi.when('income', {
+      is: Joi.number().exist().greater(0).less(43680),
       then: Joi.required(),
     }),
     maritalStatus: Joi.when('_oasEligible', {
@@ -98,31 +102,21 @@ export const AllowanceSchema = RequestSchema.concat(
       is: Joi.number().exist().greater(0).less(35616),
       then: Joi.required(),
     }),
-    livingCountry: Joi.when('age', {
-      is: Joi.number().exist().min(60).max(64),
+    livingCountry: Joi.when('income', {
+      is: Joi.number().exist().greater(0).less(35616),
       then: Joi.required(),
     }),
     legalStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(35616),
-      then: Joi.when('age', {
-        is: Joi.number().exist().min(60).max(64),
-        then: Joi.required(),
-      }),
+      then: Joi.required(),
     }),
-    yearsInCanadaSince18: Joi.when('legalStatus', {
-      is: Joi.exist().valid(
-        LegalStatus.CANADIAN_CITIZEN,
-        LegalStatus.PERMANENT_RESIDENT,
-        LegalStatus.INDIAN_STATUS
-      ),
+    yearsInCanadaSince18: Joi.when('income', {
+      is: Joi.number().exist().greater(0).less(35616),
       then: Joi.required(),
     }),
     maritalStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(35616),
-      then: Joi.when('age', {
-        is: Joi.number().exist().min(60).max(64),
-        then: Joi.required(),
-      }),
+      then: Joi.required(),
     }),
     partnerReceivingOas: Joi.when('maritalStatus', {
       is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
@@ -138,31 +132,21 @@ export const AfsSchema = RequestSchema.concat(
       is: Joi.number().exist().greater(0).less(25920),
       then: Joi.required(),
     }),
-    livingCountry: Joi.when('age', {
-      is: Joi.number().exist().min(60).max(64),
+    livingCountry: Joi.when('income', {
+      is: Joi.number().exist().greater(0).less(25920),
       then: Joi.required(),
     }),
     legalStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(25920),
-      then: Joi.when('age', {
-        is: Joi.number().exist().min(60).max(64),
-        then: Joi.required(),
-      }),
+      then: Joi.required(),
     }),
-    yearsInCanadaSince18: Joi.when('legalStatus', {
-      is: Joi.exist().valid(
-        LegalStatus.CANADIAN_CITIZEN,
-        LegalStatus.PERMANENT_RESIDENT,
-        LegalStatus.INDIAN_STATUS
-      ),
+    yearsInCanadaSince18: Joi.when('income', {
+      is: Joi.number().exist().greater(0).less(25920),
       then: Joi.required(),
     }),
     maritalStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(25920),
-      then: Joi.when('age', {
-        is: Joi.number().exist().min(60).max(64),
-        then: Joi.required(),
-      }),
+      then: Joi.required(),
     }),
   })
 )
