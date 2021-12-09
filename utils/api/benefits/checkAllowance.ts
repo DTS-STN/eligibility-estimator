@@ -83,7 +83,7 @@ export default function checkAllowance(
       entitlementResult: 0,
       reason: ResultReason.YEARS_IN_CANADA,
       detail:
-        "Depending on Canada's agreement with this country, you may be eligible to receive the Allowance.",
+        "Depending on Canada's agreement with this country, you may be eligible to receive the Allowance. You are encouraged to contact Service Canada.",
     }
   } else if (value.yearsInCanadaSince18 < requiredYearsInCanada) {
     return {

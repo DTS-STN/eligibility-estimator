@@ -76,7 +76,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       entitlementResult: 0,
       reason: ResultReason.YEARS_IN_CANADA,
       detail:
-        "Depending on Canada's agreement with this country, you may be eligible to receive the Allowance for Survivor.",
+        "Depending on Canada's agreement with this country, you may be eligible to receive the Allowance for Survivor. You are encouraged to contact Service Canada.",
     }
   } else if (value.yearsInCanadaSince18 < requiredYearsInCanada) {
     return {

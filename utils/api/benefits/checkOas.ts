@@ -71,7 +71,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
           entitlementResult: 0,
           reason: ResultReason.YEARS_IN_CANADA,
           detail:
-            "Depending on Canada's agreement with this country, you may be eligible to receive the OAS pension.",
+            "Depending on Canada's agreement with this country, you may be eligible to receive the OAS pension. You are encouraged to contact Service Canada.",
         }
       } else {
         return {
