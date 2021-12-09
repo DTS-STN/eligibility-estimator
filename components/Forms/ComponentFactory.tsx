@@ -37,6 +37,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
       qs += `${key}=${value}`
     }
 
+    //TODO: move this check to form submission
     //redirect to exit case if income is too high
     if (parseInt(formData.get('income') as string) > 129757)
       router.push(`/eligibility?${qs}`)
@@ -47,8 +48,6 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
     console.log(newFormData)
     if (!newFormData.error) {
       setFormState(newFormData.fieldData)
-    } else {
-      // show error label above error field? Need a way to tell the user
     }
   }
 
@@ -73,7 +72,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
-                  value={query[field.key] ?? undefined}
+                  defaultValue={query[field.key] ?? undefined}
                   required
                 />
               </div>

@@ -57,11 +57,11 @@ const Eligiblity: NextPage = () => {
         <div className="col-span-2">
           {query && parseInt(query.income as string) > 129757 ? (
             <div>
-              <h2 className="h2 mb-8">Income details</h2>
+              <h2 className="h2 mb-8">Income Details</h2>
               <Input
                 type="number"
                 name="income"
-                label="What is your current annual net income in Canadian dollars"
+                label="What is your current annual net income in CanaDian Dollars"
                 value={query.income}
                 extraClasses="mt-6 mb-10"
                 disabled

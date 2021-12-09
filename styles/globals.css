@@ -65,7 +65,7 @@
 
   /* form controls */
   .form-control {
-    @apply w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form mb-4 placeholder-muted/60;
+    @apply w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form mb-4 mt-1 placeholder-muted/60;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
   }
@@ -75,7 +75,7 @@
     background-color: #eee;
     opacity: 1;
   }
-  label :not(.radio) {
+  label > div:not(.radio) {
     @apply mb-1.5;
     display: inline-block;
     max-width: 100%;

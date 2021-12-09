@@ -1,4 +1,6 @@
-import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
+import { InputHTMLAttributes } from 'react'
+import { Tooltip } from '../Tooltip/tooltip'
+import { fieldDefinitions } from '../Tooltip/index'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -18,6 +20,7 @@ export const Input: React.VFC<InputProps> = (props) => {
         {props.required && (
           <span className="text-danger font-bold ml-2">(required)</span>
         )}
+        <Tooltip text={fieldDefinitions.data[props.name]} />
       </label>
       <input
         name={props.name}
