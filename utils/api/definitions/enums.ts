@@ -11,7 +11,7 @@ export enum MaritalStatus {
   COMMON_LAW = 'Common-law',
   WIDOWED = 'Widowed',
   DIVORCED = 'Divorced',
-  SEPERATED = 'Seperated',
+  SEPARATED = 'Separated',
 }
 
 export enum LegalStatus {

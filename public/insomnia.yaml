@@ -459,7 +459,7 @@ resources:
                 - Common-law
                 - Widowed
                 - Divorced
-                - Seperated
+                - Separated
               description: The current marital status of the client.
             allowEmptyValue: false
 
@@ -470,7 +470,7 @@ resources:
               Is the client's partner receiving OAS?
 
 
-              _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Seperated._
+              _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Separated._
             required: false
             example: true
             schema:
