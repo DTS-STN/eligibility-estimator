@@ -3,11 +3,12 @@ import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
+  extraClasses?: string
 }
 
 export const Input: React.VFC<InputProps> = (props) => {
   return (
-    <div>
+    <div className={`${props.extraClasses}`}>
       <label
         htmlFor={props.name}
         data-testid="input-label"
@@ -22,7 +23,7 @@ export const Input: React.VFC<InputProps> = (props) => {
         name={props.name}
         data-testid={props.name}
         {...props}
-        className="form-control"
+        className="form-control text-black"
       />
     </div>
   )

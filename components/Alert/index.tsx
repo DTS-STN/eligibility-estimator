@@ -42,7 +42,7 @@ export const Alert: React.VFC<{
           />
         </svg>
         <div className="ml-3 flex flex-col">
-          <h5 className="h5 mb-3 text-content">{title}</h5>
+          <h5 className="h5 mb-5 text-content">{title}</h5>
           <p className="mb-4 text-content">{children}</p>
         </div>
       </div>

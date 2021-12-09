@@ -1,9 +1,12 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { NextPage } from 'next'
 import { Layout } from '../../components/Layout'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+import Link from 'next/link'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 import { NeedHelpList } from '../../components/Layout/NeedHelpList'
+import { Input } from '../../components/Forms/Input'
+import { Alert } from '../../components/Alert'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -44,9 +47,33 @@ const Eligiblity: NextPage = () => {
 
   return (
     <Layout>
+      {query && parseInt(query.income as string) > 129757 && (
+        <Alert title="Likely not eligible for Benefits" type="danger">
+          You currently do not appear to be eligiable for the OAS pension
+          because your annual income is higher than 129,757 CAD.
+        </Alert>
+      )}
       <div className="grid grid-cols-3 gap-10 mt-9">
         <div className="col-span-2">
-          <ComponentFactory data={data} />
+          {query && parseInt(query.income as string) > 129757 ? (
+            <div>
+              <h2 className="h2 mb-8">Income details</h2>
+              <Input
+                type="number"
+                name="income"
+                label="What is your current annual net income in Canadian dollars"
+                value={query.income}
+                extraClasses="mt-6 mb-10"
+                disabled
+                required
+              />
+              <Link href="/" passHref>
+                <a className="btn btn-default px-8 py-3">Back</a>
+              </Link>
+            </div>
+          ) : (
+            <ComponentFactory data={data} />
+          )}
         </div>
         <NeedHelpList
           title="Need Help?"
