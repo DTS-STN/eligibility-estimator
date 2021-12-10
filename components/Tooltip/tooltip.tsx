@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 
-export const Tooltip: React.VFC<{ text?: string; size?: number }> = ({
+export const Tooltip: React.FC<{ text?: string; size?: number }> = ({
   text,
   size,
 }) => {

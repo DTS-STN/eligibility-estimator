@@ -4,7 +4,7 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      lg: '1200px',
+      lg: '1136px',
       md: '992px',
       sm: '768px',
     },

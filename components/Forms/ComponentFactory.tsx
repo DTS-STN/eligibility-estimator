@@ -1,15 +1,30 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
-import { debounce } from 'lodash'
-import router, { useRouter } from 'next/router'
+import { debounce, groupBy } from 'lodash'
+import { useRouter } from 'next/router'
 import { sortBy } from 'lodash'
-import Link from 'next/link'
-import { redirect } from 'next/dist/server/api-utils'
+import type {
+  BenefitResult,
+  ResponseSuccess,
+  ResponseError,
+} from '../../utils/api/definitions/types'
 
-export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
+export const ComponentFactory: React.VFC<{
+  data: ResponseSuccess
+  oas: Dispatch<BenefitResult>
+  gis: Dispatch<BenefitResult>
+}> = ({ data, oas, gis }) => {
   let lastCategory = null
+
   const router = useRouter()
   const query = router.query
 
@@ -20,24 +35,23 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
    * Global change handler for the dynamic form elements in the eligbility form
    * @param e {ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>} the change even for the form elements
    */
-  const handleChange: (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => Promise<void> = async (
+  const handleChange = async (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const formData = new FormData(
       document.querySelector('form[name="ee-form"]')
     )
 
+    // prepare GET request to send to backend
     let qs = ''
-    // Why is partnerReceivingOas in the entries if not in the form???
     for (const [key, value] of formData.entries()) {
-      if (value == '') continue
+      if (value == '') {
+        continue
+      }
       if (qs !== '') qs += '&'
       qs += `${key}=${value}`
     }
 
-    //TODO: move this check to form submission
     //redirect to exit case if income is too high
     if (parseInt(formData.get('income') as string) > 129757)
       router.push(`/eligibility?${qs}`)
@@ -45,9 +59,14 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
     const newFormData = await fetch(`api/calculateEligibility?${qs}`).then(
       (res) => res.json()
     )
-    console.log(newFormData)
+
+    // if no error, set the formState to the retrieved set of fields
     if (!newFormData.error) {
+      console.log(newFormData)
       setFormState(newFormData.fieldData)
+
+      oas(newFormData.oas)
+      gis(newFormData.gis)
     }
   }
 
@@ -64,7 +83,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
             {field.category != lastCategory && (
               <h2 className="h2 mb-8">{field.category}</h2>
             )}
-            {(field.type == 'number' || field.type == 'text') && (
+            {field.type == 'number' && (
               <div className="mb-10">
                 <Input
                   type={field.type}
@@ -73,6 +92,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
                   defaultValue={query[field.key] ?? undefined}
+                  data-category={field.category}
                   required
                 />
               </div>
@@ -84,6 +104,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   label={field.label}
                   keyForId={field.key}
                   onChange={handleChange}
+                  data-category={field.category}
                 />
               </div>
             )}
@@ -96,6 +117,7 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
                   keyForId={field.key}
                   label={field.label}
                   onChange={handleChange}
+                  category={field.category}
                   required
                 />
               </div>
@@ -124,4 +146,23 @@ export const ComponentFactory: React.FC<{ data: any }> = ({ data }) => {
       </div>
     </form>
   )
+}
+
+const retrieveDistinctCategories = (data: any) => {
+  const flags = {}
+  const distinctCategories = data.filter(function (entry) {
+    if (flags[entry.category]) {
+      return false
+    }
+    flags[entry.category] = true
+    return true
+  })
+  return distinctCategories
+}
+
+const isFormElementFilled = (
+  formElement: HTMLInputElement | HTMLSelectElement
+): boolean => {
+  if (formElement.value !== '') return true
+  return true
 }

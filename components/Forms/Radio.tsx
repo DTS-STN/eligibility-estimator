@@ -7,35 +7,22 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyForId: string
   values: any[]
   label: string
+  category: string
 }
 
 export const Radio: React.VFC<InputProps> = (props) => {
   const { query } = useRouter()
 
-  const correctForBooleans = (value: string) => {
-    switch (value) {
-      case 'Yes':
-        return 'true'
-        break
-      case 'No':
-        return 'false'
-        break
-      default:
-        return value
-        break
-    }
-  }
-
   return (
     <>
-      <div className="radio mb-8">
+      <div className="radio mb-8" data-category={props.category}>
         <p className="font-semibold inline-block mb-1.5">
           {props.label}
           <span className="text-danger font-bold ml-2">(required)</span>
           <Tooltip text={fieldDefinitions.data[props.keyForId]} />
         </p>
         {props.values.map((value, index) => (
-          <div key={index}>
+          <div key={index} className="flex items-center">
             <input
               type="radio"
               id={`${props.keyForId}-${index}`}
@@ -52,4 +39,18 @@ export const Radio: React.VFC<InputProps> = (props) => {
       </div>
     </>
   )
+}
+
+const correctForBooleans = (value: string) => {
+  switch (value) {
+    case 'Yes':
+      return 'true'
+      break
+    case 'No':
+      return 'false'
+      break
+    default:
+      return value
+      break
+  }
 }

@@ -26,7 +26,7 @@ export const Input: React.VFC<InputProps> = (props) => {
         name={props.name}
         data-testid={props.name}
         {...props}
-        className="form-control text-black"
+        className="form-control text-content"
       />
     </div>
   )
