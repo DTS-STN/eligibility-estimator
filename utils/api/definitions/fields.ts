@@ -45,7 +45,7 @@ export const fieldDefinitions: FieldDefinitions = {
     label: 'What is current marital status?',
     category: FieldCategory.PERSONAL_INFORMATION,
     order: 3,
-    type: FieldType.RADIO,
+    type: FieldType.DROPDOWN,
     values: Object.values(MaritalStatus),
     default: undefined,
   },
