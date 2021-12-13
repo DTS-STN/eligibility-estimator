@@ -9,7 +9,7 @@ import {
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
-import { debounce, groupBy } from 'lodash'
+import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import { sortBy } from 'lodash'
 import type {
@@ -22,7 +22,11 @@ export const ComponentFactory: React.VFC<{
   data: ResponseSuccess
   oas: Dispatch<BenefitResult>
   gis: Dispatch<BenefitResult>
-}> = ({ data, oas, gis }) => {
+  allowance: Dispatch<BenefitResult>
+  afs: Dispatch<BenefitResult>
+  estimate: Dispatch<boolean>
+  selectedTabIndex: Dispatch<number>
+}> = ({ data, oas, gis, allowance, afs, estimate, selectedTabIndex }) => {
   let lastCategory = null
 
   const router = useRouter()
@@ -38,9 +42,10 @@ export const ComponentFactory: React.VFC<{
   const handleChange = async (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const formData = new FormData(
-      document.querySelector('form[name="ee-form"]')
-    )
+    const form: HTMLFormElement = document.querySelector('form[name="ee-form"]')
+    if (!form) return
+
+    const formData = new FormData(form)
 
     // prepare GET request to send to backend
     let qs = ''
@@ -67,6 +72,8 @@ export const ComponentFactory: React.VFC<{
 
       oas(newFormData.oas)
       gis(newFormData.gis)
+      allowance(newFormData.allowance)
+      afs(newFormData.afs)
     }
   }
 
@@ -102,7 +109,7 @@ export const ComponentFactory: React.VFC<{
                 <Select
                   options={field.values}
                   label={field.label}
-                  keyForId={field.key}
+                  keyforid={field.key}
                   onChange={handleChange}
                   data-category={field.category}
                 />
@@ -114,7 +121,7 @@ export const ComponentFactory: React.VFC<{
                   values={
                     field.type == 'boolean' ? ['Yes', 'No'] : field.values
                   }
-                  keyForId={field.key}
+                  keyforid={field.key}
                   label={field.label}
                   onChange={handleChange}
                   category={field.category}
@@ -140,7 +147,13 @@ export const ComponentFactory: React.VFC<{
         <button type="reset" className="btn btn-default w-40">
           Clear
         </button>
-        <button type="submit" className="btn btn-primary w-40">
+        <button
+          type="button"
+          className="btn btn-primary w-40"
+          onClick={(e) => {
+            selectedTabIndex(1)
+          }}
+        >
           Estimate
         </button>
       </div>

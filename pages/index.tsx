@@ -47,9 +47,10 @@ const Home: NextPage = () => {
       </div>
       <form action="/eligibility" className="mb-10">
         <Input
-          type="number"
+          type="text"
           name="income"
           label="What is your current annual net income in Canadian dollars"
+          placeholder="$20,000"
           required
         />
         <div className="mt-10 flex space-x-5">

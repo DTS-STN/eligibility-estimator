@@ -12,6 +12,7 @@ import ProgressBar from '../../components/ProgressBar'
 import { useState } from 'react'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { ResultKey } from '../../utils/api/definitions/enums'
+import { allow } from 'joi'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -27,6 +28,10 @@ const Eligiblity: NextPage = () => {
   const { query } = useRouter()
   const [oasResult, setOasResult] = useState<BenefitResult>(null)
   const [gisResult, setGisResult] = useState<BenefitResult>(null)
+  const [allowance, setAllowance] = useState<BenefitResult>(null)
+  const [afs, setAFS] = useState<BenefitResult>(null)
+  const [estimate, estimateClicked] = useState<boolean>(false)
+  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
 
   // show progress under certain circumstances
   const showProgress = (() => {
@@ -60,8 +65,14 @@ const Eligiblity: NextPage = () => {
 
   return (
     <Layout>
-      <Tab.Group manual>
-        <Tab.List>
+      <Tab.Group
+        key={selectedTabIndex}
+        defaultIndex={selectedTabIndex}
+        onChange={(index) => setSelectedTabIndex(index)}
+      >
+        <Tab.List
+          className={`${!showProgress && 'hidden'} border-b border-muted/20`}
+        >
           <Tab
             className={({ selected }) =>
               selected
@@ -81,7 +92,7 @@ const Eligiblity: NextPage = () => {
             Results
           </Tab>
         </Tab.List>
-        <Tab.Panels className="border-t border-muted/20">
+        <Tab.Panels>
           <Tab.Panel className="mt-10">
             {showProgress && (
               <ProgressBar
@@ -98,15 +109,15 @@ const Eligiblity: NextPage = () => {
                 because your annual income is higher than 129,757 CAD.
               </Alert>
             )}
-            <div className="grid grid-cols-3 gap-10 mt-9">
+            <div className="grid grid-cols-3 gap-10 mt-14">
               <div className="col-span-2">
                 {query && parseInt(query.income as string) > 129757 ? (
                   <div>
                     <h2 className="h2 mb-8">Income Details</h2>
                     <Input
-                      type="number"
+                      type="text"
                       name="income"
-                      label="What is your current annual net income in CanaDian Dollars"
+                      label="What is your current annual net income in Canadian Dollars"
                       value={query.income}
                       extraClasses="mt-6 mb-10"
                       disabled
@@ -121,6 +132,10 @@ const Eligiblity: NextPage = () => {
                     data={data}
                     oas={setOasResult}
                     gis={setGisResult}
+                    allowance={setAllowance}
+                    afs={setAFS}
+                    estimate={estimateClicked}
+                    selectedTabIndex={setSelectedTabIndex}
                   />
                 )}
               </div>
@@ -150,7 +165,7 @@ const Eligiblity: NextPage = () => {
                   />
                   <Alert title="Eligibility" type="info">
                     Based on the information you have provided, you are likely
-                    eligible for the sample benefits.
+                    eligible for the following benefits.
                   </Alert>
                   <table>
                     <thead className="font-semibold text-content border-b border-content">
@@ -174,22 +189,57 @@ const Eligiblity: NextPage = () => {
                         </td>
                         <td>${oasResult.entitlementResult}</td>
                       </tr>
-                      <tr className="bg-[#E8F2F4] ">
+                      <tr className="bg-[#E8F2F4]">
                         <td>Guaranteed Income Supplement (GIS)</td>
-                        <p>{gisResult.eligibilityResult.replace('!', '')}</p>
-                        {(gisResult.eligibilityResult == ResultKey.INELIGIBLE ||
-                          gisResult.eligibilityResult ==
-                            ResultKey.CONDITIONAL) && (
-                          <p>Detail: {gisResult.detail}</p>
-                        )}
+                        <td>
+                          <p>{gisResult.eligibilityResult.replace('!', '')}</p>
+                          {(gisResult.eligibilityResult ==
+                            ResultKey.INELIGIBLE ||
+                            gisResult.eligibilityResult ==
+                              ResultKey.CONDITIONAL) && (
+                            <p>Detail: {gisResult.detail}</p>
+                          )}
+                        </td>
                         <td>${gisResult.entitlementResult}</td>
+                      </tr>
+                      <tr>
+                        <td>Allowance</td>
+                        <td>
+                          <p>
+                            {allowance &&
+                              allowance.eligibilityResult.replace('!', '')}
+                          </p>
+                          {allowance &&
+                            (allowance.eligibilityResult ==
+                              ResultKey.INELIGIBLE ||
+                              allowance.eligibilityResult ==
+                                ResultKey.CONDITIONAL) && (
+                              <p>Detail: {allowance.detail}</p>
+                            )}
+                        </td>
+                        <td>${allowance && allowance.entitlementResult}</td>
+                      </tr>
+                      <tr className="bg-[#E8F2F4]">
+                        <td>Allowance for survivor</td>
+                        <td>
+                          <p>{afs && afs.eligibilityResult.replace('!', '')}</p>
+                          {afs &&
+                            (afs.eligibilityResult == ResultKey.INELIGIBLE ||
+                              afs.eligibilityResult ==
+                                ResultKey.CONDITIONAL) && (
+                              <p>Detail: {afs.detail}</p>
+                            )}
+                        </td>
+                        <td>${afs && afs.entitlementResult}</td>
                       </tr>
                       <tr className="border-t border-content font-semibold ">
                         <td colSpan={2}>Total Monthly Benefit Amount</td>
                         <td>
                           $
                           {oasResult.entitlementResult +
-                            gisResult.entitlementResult}
+                            gisResult.entitlementResult +
+                            allowance?.entitlementResult +
+                            afs?.entitlementResult}
                         </td>
                       </tr>
                     </tbody>
@@ -205,7 +255,7 @@ const Eligiblity: NextPage = () => {
                     provide.
                   </p>
                   <div>
-                    <h3 className="h3 mt-4">More Information</h3>
+                    <h2 className="h2 mt-8">More Information</h2>
                     <p>links go here</p>
                   </div>
                 </>

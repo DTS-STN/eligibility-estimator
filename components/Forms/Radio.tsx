@@ -4,7 +4,7 @@ import { fieldDefinitions } from '../Tooltip'
 import { Tooltip } from '../Tooltip/tooltip'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  keyForId: string
+  keyforid: string
   values: any[]
   label: string
   category: string
@@ -16,22 +16,22 @@ export const Radio: React.VFC<InputProps> = (props) => {
   return (
     <>
       <div className="radio mb-8" data-category={props.category}>
-        <p className="font-semibold inline-block mb-1.5">
+        <span className="font-semibold inline-block mb-1.5">
           {props.label}
           <span className="text-danger font-bold ml-2">(required)</span>
-          <Tooltip text={fieldDefinitions.data[props.keyForId]} />
-        </p>
+          <Tooltip text={fieldDefinitions.data[props.keyforid]} />
+        </span>
         {props.values.map((value, index) => (
           <div key={index} className="flex items-center">
             <input
               type="radio"
-              id={`${props.keyForId}-${index}`}
-              name={`${props.keyForId}`}
+              id={`${props.keyforid}-${index}`}
+              name={`${props.keyforid}`}
               value={correctForBooleans(value)}
-              className="mr-2"
+              className="mr-2 text-content focus:ring-content"
               {...props}
             />
-            <label htmlFor={`${props.keyForId}-${index}`} className="radio">
+            <label htmlFor={`${props.keyforid}-${index}`} className="radio">
               {value}
             </label>
           </div>
