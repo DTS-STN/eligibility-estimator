@@ -31,6 +31,13 @@ export default function handler(
         req.query.livingCountry as string
       )
     }
+    // adds partner income to main income
+    if (req.query.partnerIncome) {
+      req.query.income = (
+        parseInt(req.query.income as string) +
+        parseInt(req.query.partnerIncome as string)
+      ).toString()
+    }
 
     // validation
     const params = Joi.attempt(req.query, RequestSchema, {

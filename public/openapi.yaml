@@ -38,6 +38,7 @@ paths:
         - $ref: '#/components/parameters/legalStatus'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/maritalStatus'
+        - $ref: '#/components/parameters/partnerIncome'
         - $ref: '#/components/parameters/partnerReceivingOas'
         - $ref: '#/components/parameters/everLivedSocialCountry'
       responses:
@@ -362,7 +363,7 @@ components:
       in: query
       description: The current marital status of the client.
       required: false
-      example: 'Married'
+      example: Married
       schema:
         type: string
         enum:
@@ -375,6 +376,21 @@ components:
         description: The current marital status of the client.
       allowEmptyValue: false
 
+    partnerIncome:
+      name: partnerIncome
+      in: query
+      description: >
+        What is your partner's annual net income in Canadian dollars?
+
+
+        _Note: This can be provided only when marital status is Married or Common-Law._
+      required: false
+      example: 10000
+      schema:
+        type: integer
+        description: Income in Canadian dollars.
+      allowEmptyValue: false
+
     partnerReceivingOas:
       name: partnerReceivingOas
       in: query
@@ -382,9 +398,9 @@ components:
         Is the client's partner receiving OAS?
 
 
-        _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Separated._
+        _Note: This can be "true" only when marital status is Married or Common-Law._
       required: false
-      example: true
+      example: false
       schema:
         type: boolean
       allowEmptyValue: false

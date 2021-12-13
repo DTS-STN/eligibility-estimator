@@ -8,13 +8,14 @@ import {
 import { FieldData, FieldKey } from './fields'
 
 export interface CalculationInput {
+  income?: number
   age?: number
   livingCountry?: LivingCountry
   legalStatus?: LegalStatus
   yearsInCanadaSince18?: number
   maritalStatus?: MaritalStatus
+  partnerIncome?: number
   partnerReceivingOas?: boolean
-  income?: number
   everLivedSocialCountry?: boolean
   _oasEligible?: ResultKey
 }
