@@ -70,9 +70,6 @@ export const ComponentFactory: React.VFC<{
       formCompletion[key] = value
     }
 
-    //set Progress
-    checkCompletion(formState, formCompletion, setProgress)
-
     //redirect to exit case if income is too high
     if (parseInt(formData.get('income') as string) > 129757)
       router.push(`/eligibility?${qs}`)
@@ -83,13 +80,17 @@ export const ComponentFactory: React.VFC<{
 
     // if no error, set the formState to the retrieved set of fields
     if (!newFormData.error) {
-      console.log(newFormData.fieldData)
       setFormState(newFormData.fieldData)
 
       oas(newFormData.oas)
       gis(newFormData.gis)
       allowance(newFormData.allowance)
       afs(newFormData.afs)
+
+      //set Progress
+      checkCompletion(newFormData.fieldData, formCompletion, setProgress)
+    } else {
+      // handle error
     }
   }
 
@@ -184,7 +185,11 @@ const checkCompletion = (
   setProgress: any
 ) => {
   const personal = fields
-    .filter((field) => field.category == 'Personal Information')
+    .filter(
+      (field) =>
+        field.category == 'Personal Information' ||
+        field.category == 'Partner Details'
+    )
     .map((p) => p.key)
   const personalComplete = personal.every((item) => formCompletion[item])
 
