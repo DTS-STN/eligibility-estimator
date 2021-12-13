@@ -19,7 +19,7 @@
     "test:ci": "jest --ci --coverage --silent",
     "prepare": "husky install",
     "reformat": "prettier --write .",
-    "run-scraper": "ts-node ./utils/api/scrapers/single.ts"
+    "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
