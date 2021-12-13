@@ -17,7 +17,8 @@ export const Radio: React.VFC<InputProps> = (props) => {
     <>
       <div className="radio mb-8" data-category={props.category}>
         <span className="font-semibold inline-block mb-1.5">
-          {props.label}
+          <span className="text-danger">*</span>
+          {' ' + props.label}
           <span className="text-danger font-bold ml-2">(required)</span>
           <Tooltip text={fieldDefinitions.data[props.keyforid]} />
         </span>

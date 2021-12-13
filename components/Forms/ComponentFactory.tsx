@@ -9,7 +9,7 @@ import {
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
-import { debounce } from 'lodash'
+import { debounce, has } from 'lodash'
 import { useRouter } from 'next/router'
 import { sortBy } from 'lodash'
 import type {
@@ -17,6 +17,7 @@ import type {
   ResponseSuccess,
   ResponseError,
 } from '../../utils/api/definitions/types'
+import { FieldData } from '../../utils/api/definitions/fields'
 
 export const ComponentFactory: React.VFC<{
   data: ResponseSuccess
@@ -25,9 +26,20 @@ export const ComponentFactory: React.VFC<{
   allowance: Dispatch<BenefitResult>
   afs: Dispatch<BenefitResult>
   estimate: Dispatch<boolean>
+  setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
-}> = ({ data, oas, gis, allowance, afs, estimate, selectedTabIndex }) => {
+}> = ({
+  data,
+  oas,
+  gis,
+  allowance,
+  afs,
+  estimate,
+  selectedTabIndex,
+  setProgress,
+}) => {
   let lastCategory = null
+  let formCompletion = {}
 
   const router = useRouter()
   const query = router.query
@@ -55,7 +67,11 @@ export const ComponentFactory: React.VFC<{
       }
       if (qs !== '') qs += '&'
       qs += `${key}=${value}`
+      formCompletion[key] = value
     }
+
+    //set Progress
+    checkCompletion(formState, formCompletion, setProgress)
 
     //redirect to exit case if income is too high
     if (parseInt(formData.get('income') as string) > 129757)
@@ -67,7 +83,7 @@ export const ComponentFactory: React.VFC<{
 
     // if no error, set the formState to the retrieved set of fields
     if (!newFormData.error) {
-      console.log(newFormData)
+      console.log(newFormData.fieldData)
       setFormState(newFormData.fieldData)
 
       oas(newFormData.oas)
@@ -151,6 +167,7 @@ export const ComponentFactory: React.VFC<{
           type="button"
           className="btn btn-primary w-40"
           onClick={(e) => {
+            estimate(true)
             selectedTabIndex(1)
           }}
         >
@@ -161,21 +178,20 @@ export const ComponentFactory: React.VFC<{
   )
 }
 
-const retrieveDistinctCategories = (data: any) => {
-  const flags = {}
-  const distinctCategories = data.filter(function (entry) {
-    if (flags[entry.category]) {
-      return false
-    }
-    flags[entry.category] = true
-    return true
-  })
-  return distinctCategories
-}
+const checkCompletion = (
+  fields: FieldData[],
+  formCompletion: any,
+  setProgress: any
+) => {
+  const personal = fields
+    .filter((field) => field.category == 'Personal Information')
+    .map((p) => p.key)
+  const personalComplete = personal.every((item) => formCompletion[item])
 
-const isFormElementFilled = (
-  formElement: HTMLInputElement | HTMLSelectElement
-): boolean => {
-  if (formElement.value !== '') return true
-  return true
+  const legal = fields
+    .filter((field) => field.category == 'Legal Status')
+    .map((p) => p.key)
+  const legalComplete = legal.every((item) => formCompletion[item])
+
+  setProgress({ personal: personalComplete, legal: legalComplete })
 }

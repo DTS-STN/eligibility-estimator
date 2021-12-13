@@ -31,6 +31,7 @@ const Eligiblity: NextPage = () => {
   const [allowance, setAllowance] = useState<BenefitResult>(null)
   const [afs, setAFS] = useState<BenefitResult>(null)
   const [estimate, estimateClicked] = useState<boolean>(false)
+  const [progress, setProgress] = useState({ personal: false, legal: false })
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
 
   // show progress under certain circumstances
@@ -98,8 +99,11 @@ const Eligiblity: NextPage = () => {
               <ProgressBar
                 sections={[
                   { title: 'Income Details', complete: true },
-                  { title: 'Personal Information', complete: false },
-                  { title: 'Legal Status', complete: false },
+                  {
+                    title: 'Personal Information',
+                    complete: progress.personal,
+                  },
+                  { title: 'Legal Status', complete: progress.legal },
                 ]}
               />
             )}
@@ -136,6 +140,7 @@ const Eligiblity: NextPage = () => {
                     afs={setAFS}
                     estimate={estimateClicked}
                     selectedTabIndex={setSelectedTabIndex}
+                    setProgress={setProgress}
                   />
                 )}
               </div>
