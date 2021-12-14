@@ -6,11 +6,13 @@ export class BaseScraper {
   private readonly tableUrl: (pageNo: number) => string
   private readonly outputFileName: string
   private readonly numIterations: number
+  private readonly logHeader
 
   constructor(props) {
     this.tableUrl = props.tableUrl
     this.outputFileName = props.outputFileName
     this.numIterations = props.numIterations
+    this.logHeader = `${this.outputFileName}:`.padEnd(20)
   }
 
   fetchPage(url: string): Promise<string> {
@@ -48,13 +50,13 @@ export class BaseScraper {
   // }
 
   getGis(row) {
-    let gisStr = row.children[1].textContent
-    gisStr = gisStr.replace(/\$\s?|(,*)/g, '')
-    return parseFloat(gisStr)
+    const gisStr = row.children[1].textContent
+    const gisStrStripped = gisStr.replace(/\$\s?|(,*)/g, '')
+    return parseFloat(gisStrStripped)
   }
 
   dataExtractor(row): OutputItem {
-    let incomeRangeStr = row.children[0].textContent
+    const incomeRangeStr = row.children[0].textContent
     return {
       range: this.getIncomeRange(incomeRangeStr),
       // interval: this.getIncomeInterval(incomeRangeStr),
@@ -70,10 +72,10 @@ export class BaseScraper {
    *
    * returns [thing, thing, thing]
    */
-  tableParser(data: string): OutputItem[] {
+  parseTable(data: string): OutputItem[] {
     const { document } = new JSDOM(data).window
-    let rows = document.querySelector('.table tbody').children
-    let intervals = []
+    const rows = document.querySelector('.table tbody').children
+    const intervals = []
     for (let i = 0; i < rows.length; i++) {
       intervals.push(this.dataExtractor(rows[i]))
     }
@@ -81,21 +83,32 @@ export class BaseScraper {
   }
 
   async main() {
-    let tableData = []
-
+    let remaining = this.numIterations
+    console.log(`${this.logHeader} Loading ${remaining} pages...`)
+    const promises = []
     for (let i = 1; i <= this.numIterations; i++) {
-      console.log(`${this.outputFileName}: ${i}/${this.numIterations}`)
-      let pageUrl = this.tableUrl(i)
-      let page = await this.fetchPage(pageUrl)
-      let data = this.tableParser(page)
-      tableData.push(data)
+      const pageUrl = this.tableUrl(i)
+      promises.push(
+        this.fetchPage(pageUrl).then((pageData) => {
+          remaining = remaining - 1
+          console.log(`${this.logHeader} ${remaining} pages remaining`)
+          return {
+            index: i,
+            tableData: this.parseTable(pageData),
+          }
+        })
+      )
     }
+    const parsedTables = await Promise.all(promises)
+    parsedTables.sort((a, b) => a.index - b.index)
+    const tableData = []
+    parsedTables.forEach((result) => tableData.push(...result.tableData))
 
-    tableData = tableData.flat()
-    let jsonStr = JSON.stringify(tableData, null, 2)
-    let filename = `./utils/api/scrapers/output/${this.outputFileName}.json`
+    const jsonStr = JSON.stringify(tableData, null, 2)
+    const filename = `./utils/api/scrapers/output/${this.outputFileName}.json`
     fs.writeFileSync(filename, jsonStr, { flag: 'w' })
-    console.log(`Finished building file: ${this.outputFileName}.json`)
+
+    console.log(`${this.logHeader} Complete!`)
   }
 }
 
