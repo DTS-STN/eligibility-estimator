@@ -62,7 +62,7 @@ export const ComponentFactory: React.VFC<{
 
     // if no error, set the formState to the retrieved set of fields
     if (!newFormData.error) {
-      console.log(newFormData.fieldData)
+      console.log(newFormData)
       setFormState(newFormData.fieldData)
 
       oas(newFormData.oas)
@@ -102,6 +102,7 @@ export const ComponentFactory: React.VFC<{
             {field.type == 'dropdown' && (
               <div className="mb-12">
                 <Select
+                  name={field.key}
                   options={field.values}
                   label={field.label}
                   keyforid={field.key}
@@ -113,6 +114,7 @@ export const ComponentFactory: React.VFC<{
             {(field.type == 'radio' || field.type == 'boolean') && (
               <div className="mb-12">
                 <Radio
+                  name={field.key}
                   values={
                     field.type == 'boolean' ? ['Yes', 'No'] : field.values
                   }

@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { InputHTMLAttributes } from 'react'
-import { fieldDefinitions } from '../Tooltip'
 import { Tooltip } from '../Tooltip/tooltip'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -23,7 +22,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
             {props.label}
           </span>
           <span className="text-danger font-bold ml-2">(required)</span>
-          <Tooltip text={fieldDefinitions.data[props.keyforid]} />
+          <Tooltip field={props.name} />
         </span>
         {props.values.map((value, index) => (
           <div key={index} className="flex items-center">

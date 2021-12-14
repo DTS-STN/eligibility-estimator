@@ -89,6 +89,19 @@
     -moz-appearance: textfield;
   }
 
+  /* Misc */
+  details {
+    @apply cursor-pointer mb-3;
+  }
+  details summary {
+    @apply text-default-text border border-default-text rounded py-2 px-3;
+  }
+  details[open] summary {
+    @apply rounded-bl-none rounded-br-none;
+  }
+  details[open] div {
+    @apply border border-t-0 rounded-br rounded-bl;
+  }
   td {
     @apply p-2;
   }

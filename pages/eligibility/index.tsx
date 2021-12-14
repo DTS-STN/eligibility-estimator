@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Tab } from '@headlessui/react'
 import { Layout } from '../../components/Layout'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
@@ -31,6 +32,9 @@ const Eligiblity: NextPage = () => {
   const [afs, setAFS] = useState<BenefitResult>(null)
   const [progress, setProgress] = useState({ personal: false, legal: false })
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
+
+  // check if income is too high to participate in calculation
+  const incomeTooHigh = query && parseInt(query.income as string) > 129757
 
   // show progress under certain circumstances
   const showProgress = (() => {
@@ -114,7 +118,7 @@ const Eligiblity: NextPage = () => {
                 ]}
               />
             )}
-            {query && parseInt(query.income as string) > 129757 && (
+            {incomeTooHigh && (
               <Alert title="Likely not eligible for Benefits" type="danger">
                 You currently do not appear to be eligiable for the OAS pension
                 because your annual income is higher than 129,757 CAD.
@@ -122,7 +126,7 @@ const Eligiblity: NextPage = () => {
             )}
             <div className="grid md:grid-cols-3 gap-10 mt-14">
               <div className="col-span-2">
-                {query && parseInt(query.income as string) > 129757 ? (
+                {incomeTooHigh ? (
                   <div>
                     <h2 className="h2 mb-8">Income Details</h2>
                     <Input
@@ -174,97 +178,131 @@ const Eligiblity: NextPage = () => {
                     ]}
                     estimateSection
                   />
-                  <Alert title="Eligibility" type="info">
-                    Based on the information you have provided, you are likely
-                    eligible for the following benefits.
-                  </Alert>
-                  <table>
-                    <thead className="font-semibold text-content border-b border-content">
-                      <tr className=" ">
-                        <th>Sample Benefits</th>
-                        <th>Eligibility</th>
-                        <th>Estimated Monthly Amount (CAD)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="align-top">
-                      <tr className="">
-                        <td>Old Age Security (OAS)</td>
-                        <td>
-                          <p>{oas.eligibilityResult.replace('!', '')}</p>
-                          {(oas.eligibilityResult == ResultKey.INELIGIBLE ||
-                            oas.eligibilityResult == ResultKey.CONDITIONAL) && (
-                            <p>Detail: {oas.detail}</p>
-                          )}
-                        </td>
-                        <td>${oas.entitlementResult}</td>
-                      </tr>
-                      <tr className="bg-[#E8F2F4]">
-                        <td>Guaranteed Income Supplement (GIS)</td>
-                        <td>
-                          <p>{gis.eligibilityResult.replace('!', '')}</p>
-                          {(gis.eligibilityResult == ResultKey.INELIGIBLE ||
-                            gis.eligibilityResult == ResultKey.CONDITIONAL) && (
-                            <p>Detail: {gis.detail}</p>
-                          )}
-                        </td>
-                        <td>${gis.entitlementResult}</td>
-                      </tr>
-                      <tr>
-                        <td>Allowance</td>
-                        <td>
+                  {(oas.eligibilityResult == ResultKey.ELIGIBLE &&
+                    gis.eligibilityResult == ResultKey.ELIGIBLE) ||
+                  (allowance &&
+                    allowance.eligibilityResult == ResultKey.ELIGIBLE) ? (
+                    <>
+                      {' '}
+                      <Alert title="Eligibility" type="info">
+                        Based on the information you have provided, you are
+                        likely eligible for the following benefits.
+                      </Alert>
+                      <table>
+                        <thead className="font-semibold text-content border-b border-content">
+                          <tr className=" ">
+                            <th>Sample Benefits</th>
+                            <th>Eligibility</th>
+                            <th>Estimated Monthly Amount (CAD)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="align-top">
+                          <tr className="">
+                            <td>Old Age Security (OAS)</td>
+                            <td>
+                              <p>{oas.eligibilityResult.replace('!', '')}</p>
+                              <p>Detail: {oas.detail}</p>
+                            </td>
+                            <td>${oas.entitlementResult}</td>
+                          </tr>
+                          <tr className="bg-[#E8F2F4]">
+                            <td>Guaranteed Income Supplement (GIS)</td>
+                            <td>
+                              <p>{gis.eligibilityResult.replace('!', '')}</p>
+                              <p>Detail: {gis.detail}</p>
+                            </td>
+                            <td>${gis.entitlementResult}</td>
+                          </tr>
+                          <tr>
+                            <td>Allowance</td>
+                            <td>
+                              <p>
+                                {allowance &&
+                                  allowance.eligibilityResult.replace('!', '')}
+                              </p>
+                              {allowance &&
+                                (allowance.eligibilityResult ==
+                                  ResultKey.INELIGIBLE ||
+                                  allowance.eligibilityResult ==
+                                    ResultKey.CONDITIONAL) && (
+                                  <p>Detail: {allowance.detail}</p>
+                                )}
+                            </td>
+                            <td>${allowance && allowance.entitlementResult}</td>
+                          </tr>
+                          <tr className="bg-[#E8F2F4]">
+                            <td>Allowance for survivor</td>
+                            <td>
+                              <p>
+                                {afs && afs.eligibilityResult.replace('!', '')}
+                              </p>
+                              {afs &&
+                                (afs.eligibilityResult ==
+                                  ResultKey.INELIGIBLE ||
+                                  afs.eligibilityResult ==
+                                    ResultKey.CONDITIONAL) && (
+                                  <p>Detail: {afs.detail}</p>
+                                )}
+                            </td>
+                            <td>${afs && afs.entitlementResult}</td>
+                          </tr>
+                          <tr className="border-t border-content font-semibold ">
+                            <td colSpan={2}>Total Monthly Benefit Amount</td>
+                            <td>
+                              $
+                              {oas.entitlementResult +
+                                gis.entitlementResult +
+                                allowance?.entitlementResult +
+                                afs?.entitlementResult}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p>
+                        For a more accurate assessment, you are encouraged to{' '}
+                        <Link href="#" passHref>
+                          <a className="text-default-text underline">
+                            contact Service Canada{' '}
+                          </a>
+                        </Link>
+                        and check out the FAQ on documents you may be required
+                        to provide.
+                      </p>
+                      <div>
+                        <h2 className="h2 mt-8">More Information</h2>
+                        <p>links go here</p>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex flex-col space-y-4">
+                      <Alert title="Eligibility" type="warning">
+                        <div>
                           <p>
-                            {allowance &&
-                              allowance.eligibilityResult.replace('!', '')}
+                            Based on the information provided, you are
+                            encouraged to contact Service Canada using the link
+                            below:
                           </p>
-                          {allowance &&
-                            (allowance.eligibilityResult ==
-                              ResultKey.INELIGIBLE ||
-                              allowance.eligibilityResult ==
-                                ResultKey.CONDITIONAL) && (
-                              <p>Detail: {allowance.detail}</p>
-                            )}
-                        </td>
-                        <td>${allowance && allowance.entitlementResult}</td>
-                      </tr>
-                      <tr className="bg-[#E8F2F4]">
-                        <td>Allowance for survivor</td>
-                        <td>
-                          <p>{afs && afs.eligibilityResult.replace('!', '')}</p>
-                          {afs &&
-                            (afs.eligibilityResult == ResultKey.INELIGIBLE ||
-                              afs.eligibilityResult ==
-                                ResultKey.CONDITIONAL) && (
-                              <p>Detail: {afs.detail}</p>
-                            )}
-                        </td>
-                        <td>${afs && afs.entitlementResult}</td>
-                      </tr>
-                      <tr className="border-t border-content font-semibold ">
-                        <td colSpan={2}>Total Monthly Benefit Amount</td>
-                        <td>
-                          $
-                          {oas.entitlementResult +
-                            gis.entitlementResult +
-                            allowance?.entitlementResult +
-                            afs?.entitlementResult}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p>
-                    For a more accurate assessment, you are encouraged to{' '}
-                    <Link href="#" passHref>
-                      <a className="text-default-text underline">
-                        contact Service Canada{' '}
-                      </a>
-                    </Link>
-                    and check out the FAQ on documents you may be required to
-                    provide.
-                  </p>
-                  <div>
-                    <h2 className="h2 mt-8">More Information</h2>
-                    <p>links go here</p>
-                  </div>
+                          <Link href={'#'} passHref>
+                            <a className="text-default-text underline">
+                              Contact Service Canada
+                            </a>
+                          </Link>
+                        </div>
+                      </Alert>
+                      <div className="pt-12">
+                        <Image
+                          src="/people.png"
+                          width="1139px"
+                          height="443px"
+                          alt="A diverse group of Candians"
+                        />
+                      </div>
+                      <div>
+                        <h2 className="h2 mt-8">More Information</h2>
+                        <p>links go here</p>
+                      </div>
+                    </div>
+                  )}
                 </>
               ) : (
                 <div className="flex place-content-center">
@@ -276,7 +314,26 @@ const Eligiblity: NextPage = () => {
               )}
             </div>
           </Tab.Panel>
-          <Tab.Panel className="mt-10">Content</Tab.Panel>
+          <Tab.Panel className="mt-10">
+            <div className="">
+              <details>
+                <summary>Section 1&apos;s heading</summary>
+                <div className="p-4">test</div>
+              </details>
+              <details>
+                <summary>Section 2&apos;s heading</summary>
+                <div className="p-4">yikes</div>
+              </details>
+              <details>
+                <summary>Section 3&apos;s heading</summary>
+                <div className="p-4">zip</div>
+              </details>
+              <details>
+                <summary>Section 4&apos;s heading</summary>
+                <div className="p-4">zap</div>
+              </details>
+            </div>
+          </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </Layout>

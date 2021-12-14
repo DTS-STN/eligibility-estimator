@@ -1,9 +1,4 @@
-import {
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  SelectHTMLAttributes,
-} from 'react'
-import { fieldDefinitions } from '../Tooltip'
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
 import { Tooltip } from '../Tooltip/tooltip'
 
 interface SelectProps
@@ -19,9 +14,14 @@ export const Select: React.VFC<SelectProps> = (props) => {
   return (
     <>
       <span className="text-danger">*</span>
-      <span className="mb-1.5 font-semibold text-content"> {props.label}</span>
-      <span className="text-danger font-bold ml-2">(required)</span>
-      <Tooltip text={fieldDefinitions.data[props.keyforid]} />
+      <span className="font-semibold inline-block mb-1.5">
+        <span className="mb-1.5 font-semibold text-content">
+          {' '}
+          {props.label}
+        </span>
+        <span className="text-danger font-bold ml-2">(required)</span>
+        <Tooltip field={props.name} />
+      </span>
       <select
         name={props.keyforid}
         id={props.keyforid}
