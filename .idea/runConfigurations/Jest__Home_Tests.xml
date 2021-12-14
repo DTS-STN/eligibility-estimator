@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Jest: API Tests" type="JavaScriptTestRunnerJest">
+  <configuration default="false" name="Jest: Home Tests" type="JavaScriptTestRunnerJest">
     <node-interpreter value="project" />
     <node-options value="" />
     <jest-package value="yarn:package.json:jest" />
     <working-dir value="$PROJECT_DIR$" />
     <envs />
     <scope-kind value="TEST_FILE" />
-    <test-file value="$PROJECT_DIR$/__tests__/pages/api/index.test.ts" />
+    <test-file value="$PROJECT_DIR$/__tests__/pages/home.test.ts" />
     <method v="2" />
   </configuration>
 </component>
