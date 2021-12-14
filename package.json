@@ -18,7 +18,7 @@
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci --coverage --silent",
     "prepare": "husky install",
-    "reformat": "prettier --write .",
+    "reformat": "prettier --write **/**.{js,ts,jsx,tsx,yaml,yml,json,md}",
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
@@ -65,6 +65,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*": "prettier --ignore-unknown --write"
+    "*.{js,ts,jsx,tsx,yaml,yml,json,md}": "prettier --write"
   }
 }
