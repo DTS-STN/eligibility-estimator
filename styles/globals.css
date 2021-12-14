@@ -76,9 +76,17 @@
     opacity: 1;
   }
 
-  input[type='radio']:checked + label span {
-    background-color: #3490dc;
-    box-shadow: 0px 0px 0px 3px white inset;
+  /* css reset for number input types*/
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
   }
 
   td {

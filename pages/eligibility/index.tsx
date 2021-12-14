@@ -72,7 +72,9 @@ const Eligiblity: NextPage = () => {
         onChange={(index) => setSelectedTabIndex(index)}
       >
         <Tab.List
-          className={`${!showProgress && 'hidden'} border-b border-muted/20`}
+          className={`${
+            (!showProgress || !estimate) && 'hidden'
+          } border-b border-muted/20`}
         >
           <Tab
             className={({ selected }) =>
