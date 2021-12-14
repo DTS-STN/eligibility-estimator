@@ -2,6 +2,7 @@
   "name": "eligibility-estimator-client",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@3.1.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -22,8 +23,8 @@
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.2",
     "@babel/core": "^7.16.5",
+    "@headlessui/react": "^1.4.2",
     "@tailwindcss/forms": "^0.3.4",
     "@types/lodash": "^4.14.177",
     "isarray": "^2.0.5",
