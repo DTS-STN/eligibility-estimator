@@ -88,7 +88,6 @@ components:
         - Not eligible for OAS
         - Income too high
         - Your marital status does not meet the requirement for this benefit
-        - Entered data is invalid
 
     ResultObject:
       type: object
@@ -120,7 +119,7 @@ components:
         - gis
         - allowance
         - afs
-        - allFields
+        - visibleFields
       properties:
         oas:
           $ref: '#/components/schemas/ResultObject'
@@ -130,7 +129,7 @@ components:
           $ref: '#/components/schemas/ResultObject'
         afs:
           $ref: '#/components/schemas/ResultObject'
-        allFields:
+        visibleFields:
           $ref: '#/components/schemas/Fields'
 
     ErrorResponseObject:
@@ -180,7 +179,7 @@ components:
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
-                allFields:
+                visibleFields:
                   - income
                   - age
                   - livingCountry
@@ -219,7 +218,7 @@ components:
                   detail: Missing 1 required field.
                   missingFields:
                     - income
-                allFields:
+                visibleFields:
                   - income
 
             'Ineligible case':
@@ -244,7 +243,7 @@ components:
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
-                allFields:
+                visibleFields:
                   - income
                   - age
                   - livingCountry
@@ -328,21 +327,17 @@ components:
     legalStatus:
       name: legalStatus
       in: query
-      description: >
-        The current legal status of the client.
-
-
-        _Note that all options are treated the same, except for "None of the above", which will be ineligible._
+      description: The current legal status of the client.
       required: false
-      example: Canadian Citizen
+      example: Canadian citizen
       schema:
         type: string
         enum:
-          - Canadian Citizen
-          - Permanent Resident
-          - Status Indian
-          - Temporary Resident
-          - None of the above
+          - Canadian citizen
+          - Permanent resident or landed immigrant (non-sponsored)
+          - Permanent resident or landed immigrant (sponsored)
+          - Indian status or status card
+          - Other
         description: The current legal status of the client.
       allowEmptyValue: false
 
@@ -376,7 +371,7 @@ components:
           - Common-law
           - Widowed
           - Divorced
-          - Seperated
+          - Separated
         description: The current marital status of the client.
       allowEmptyValue: false
 
@@ -387,7 +382,7 @@ components:
         Is the client's partner receiving OAS?
 
 
-        _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Seperated._
+        _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Separated._
       required: false
       example: true
       schema:

@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router'
 import React, { useContext } from 'react'
+import { Breadcrumbs } from '../Breadcrumbs'
 import { LanguageContext } from '../Contexts'
 import { useInternationalization } from '../Hooks'
 import { Footer } from './Footer'
@@ -35,7 +35,15 @@ export const Layout: React.VFC<{
             <p className="font-bold text-white">Sign out</p>
           </div>
         </div>
-        <div className="container mx-auto flex flex-col mb-16">{children}</div>
+        <div className="container mx-auto flex flex-col mb-16">
+          <Breadcrumbs
+            items={['Canada.ca', 'Service Canada', 'Eligibility Estimator']}
+          />
+          <h1 className="h1 mt-8 mb-10 border-b border-header-rule">
+            Benefits Eligibility Estimator
+          </h1>
+          {children}
+        </div>
       </div>
       <Footer />
     </main>

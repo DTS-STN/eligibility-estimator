@@ -1,15 +1,21 @@
+import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import checkAfs from '../../utils/api/checkAfs'
-import checkAllowance from '../../utils/api/checkAllowance'
-import checkGis from '../../utils/api/checkGis'
-import checkOas from '../../utils/api/checkOas'
-import normalizeLivingCountry from '../../utils/api/socialAgreement'
+import checkAfs from '../../utils/api/benefits/checkAfs'
+import checkAllowance from '../../utils/api/benefits/checkAllowance'
+import checkGis from '../../utils/api/benefits/checkGis'
+import checkOas from '../../utils/api/benefits/checkOas'
+import { ResultKey } from '../../utils/api/definitions/enums'
+import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import { RequestSchema } from '../../utils/api/definitions/schemas'
 import {
-  RequestSchema,
   ResponseError,
   ResponseSuccess,
-  ResultOptions,
-} from '../../utils/api/types'
+} from '../../utils/api/definitions/types'
+import {
+  buildFieldData,
+  buildVisibleFields,
+} from '../../utils/api/helpers/fieldUtils'
+import normalizeLivingCountry from '../../utils/api/helpers/socialAgreement'
 
 export default function handler(
   req: NextApiRequest,
@@ -27,37 +33,33 @@ export default function handler(
     }
 
     // validation
-    let { error, value } = RequestSchema.validate(req.query, {
+    const params = Joi.attempt(req.query, RequestSchema, {
       abortEarly: false,
     })
-    if (error) {
-      throw error
-    }
     console.log('Passed validation.')
 
     // processing
-    const resultOas = checkOas(value)
+    const resultOas = checkOas(params)
     console.log('OAS Result: ', resultOas)
 
-    const resultGis = checkGis(value, resultOas)
+    const resultGis = checkGis(params, resultOas)
     console.log('GIS Result: ', resultGis)
 
-    const resultAllowance = checkAllowance(value)
+    const resultAllowance = checkAllowance(params)
     console.log('Allowance Result: ', resultAllowance)
 
-    const resultAfs = checkAfs(value)
+    const resultAfs = checkAfs(params)
     console.log('Allowance for Survivor Result: ', resultAfs)
 
-    const allFields: Array<String> = [
-      ...new Set([
-        ...Object.keys(value),
-        ...(resultOas.missingFields ? resultOas.missingFields : []),
-        ...(resultGis.missingFields ? resultGis.missingFields : []),
-        ...(resultAllowance.missingFields ? resultAllowance.missingFields : []),
-        ...(resultAfs.missingFields ? resultAfs.missingFields : []),
-      ]),
-    ]
-    console.log('All visible fields:', allFields)
+    const visibleFields: Array<FieldKey> = buildVisibleFields([
+      Object.keys(params) as Array<FieldKey>,
+      resultOas.missingFields,
+      resultGis.missingFields,
+      resultAllowance.missingFields,
+      resultAfs.missingFields,
+    ])
+
+    const fieldData: Array<FieldData> = buildFieldData(visibleFields)
 
     // completion
     res.status(200).json({
@@ -65,11 +67,12 @@ export default function handler(
       gis: resultGis,
       allowance: resultAllowance,
       afs: resultAfs,
-      allFields,
+      visibleFields,
+      fieldData,
     })
   } catch (error) {
     res.status(400).json({
-      error: ResultOptions.INVALID,
+      error: ResultKey.INVALID,
       detail: error.details || String(error),
     })
     console.log(error)
