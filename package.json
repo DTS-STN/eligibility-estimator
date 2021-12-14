@@ -22,7 +22,7 @@
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.16.5",
     "@tailwindcss/forms": "^0.3.4",
     "isarray": "^2.0.5",
     "joi": "^17.5.0",
