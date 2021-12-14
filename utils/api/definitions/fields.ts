@@ -1,9 +1,5 @@
-import {
-  FieldCategory,
-  LegalStatus,
-  LivingCountry,
-  MaritalStatus,
-} from './enums'
+import { ALL_COUNTRIES } from '../helpers/countryUtils'
+import { FieldCategory, LegalStatus, MaritalStatus } from './enums'
 
 export enum FieldKey {
   INCOME = 'income',
@@ -72,7 +68,7 @@ export const fieldDefinitions: FieldDefinitions = {
     category: FieldCategory.LEGAL_STATUS,
     order: 6,
     type: FieldType.DROPDOWN,
-    values: Object.values(LivingCountry),
+    values: ALL_COUNTRIES,
     default: 'Canada',
   },
   [FieldKey.LEGAL_STATUS]: {
