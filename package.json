@@ -18,7 +18,8 @@
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci --coverage --silent",
     "prepare": "husky install",
-    "reformat": "prettier --write ."
+    "reformat": "prettier --write **/**.{js,ts,jsx,tsx,yaml,yml,json,md}",
+    "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -33,7 +34,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "swagger-ui-react": "^4.1.2",
-    "swr": "^1.1.0"
+    "swr": "^1.1.0",
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.2.0",
@@ -67,6 +69,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*": "prettier --ignore-unknown --write"
+    "*.{js,ts,jsx,tsx,yaml,yml,json,md}": "prettier --write"
   }
 }

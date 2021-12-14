@@ -11,11 +11,11 @@ import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import normalizeLivingCountry from '../../utils/api/helpers/countryUtils'
 import {
   buildFieldData,
   buildVisibleFields,
 } from '../../utils/api/helpers/fieldUtils'
-import normalizeLivingCountry from '../../utils/api/helpers/socialAgreement'
 
 export default function handler(
   req: NextApiRequest,
