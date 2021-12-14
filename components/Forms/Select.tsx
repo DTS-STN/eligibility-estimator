@@ -19,13 +19,13 @@ export const Select: React.VFC<SelectProps> = (props) => {
   return (
     <>
       <span className="text-danger">*</span>
-      <span className="mb-1.5 font-semibold"> {props.label}</span>
+      <span className="mb-1.5 font-semibold text-content"> {props.label}</span>
       <span className="text-danger font-bold ml-2">(required)</span>
       <Tooltip text={fieldDefinitions.data[props.keyforid]} />
       <select
         name={props.keyforid}
         id={props.keyforid}
-        className="form-control mt-1.5"
+        className="form-control mt-1.5 text-content"
         {...props}
       >
         {props.options.map((option, index) => (

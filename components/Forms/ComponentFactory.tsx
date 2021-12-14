@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from 'react'
+import { ChangeEvent, Dispatch, useState } from 'react'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { Select } from './Select'
@@ -15,7 +8,6 @@ import { sortBy } from 'lodash'
 import type {
   BenefitResult,
   ResponseSuccess,
-  ResponseError,
 } from '../../utils/api/definitions/types'
 import { FieldData } from '../../utils/api/definitions/fields'
 
@@ -25,19 +17,9 @@ export const ComponentFactory: React.VFC<{
   gis: Dispatch<BenefitResult>
   allowance: Dispatch<BenefitResult>
   afs: Dispatch<BenefitResult>
-  estimate: Dispatch<boolean>
   setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
-}> = ({
-  data,
-  oas,
-  gis,
-  allowance,
-  afs,
-  estimate,
-  selectedTabIndex,
-  setProgress,
-}) => {
+}> = ({ data, oas, gis, allowance, afs, selectedTabIndex, setProgress }) => {
   let lastCategory = null
   let formCompletion = {}
 
@@ -80,6 +62,7 @@ export const ComponentFactory: React.VFC<{
 
     // if no error, set the formState to the retrieved set of fields
     if (!newFormData.error) {
+      console.log(newFormData.fieldData)
       setFormState(newFormData.fieldData)
 
       oas(newFormData.oas)
@@ -95,12 +78,7 @@ export const ComponentFactory: React.VFC<{
   }
 
   return (
-    <form
-      name="ee-form"
-      data-testid="ee-form"
-      onSubmit={(e) => e.preventDefault()}
-      noValidate
-    >
+    <form name="ee-form" data-testid="ee-form" action="/eligibility">
       {formState.map((field) => {
         const content = (
           <div key={field.key} className="">
@@ -165,10 +143,9 @@ export const ComponentFactory: React.VFC<{
           Clear
         </button>
         <button
-          type="button"
+          type="submit"
           className="btn btn-primary w-40"
           onClick={(e) => {
-            estimate(true)
             selectedTabIndex(1)
           }}
         >

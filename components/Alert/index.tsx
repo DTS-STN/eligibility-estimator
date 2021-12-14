@@ -43,7 +43,7 @@ export const Alert: React.VFC<{
               x="10"
               y="47"
               width="6"
-              height="127px"
+              height="127"
               className="fill-current"
             />
             <path

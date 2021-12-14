@@ -61,7 +61,7 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
   estimateSection,
 }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex flex-col md:flex-row items-start md:items-center">
       {sections.map(({ title, complete }, index: number) => (
         <ProgressSection
           key={index}

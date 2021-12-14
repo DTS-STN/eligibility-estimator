@@ -63,6 +63,8 @@ module.exports = {
       'form-highlighted': '#66afe9;',
 
       'header-rule': '#AF3C43',
+
+      'emphasis': '#edf9ff',
     },
     extend: {
       fontFamily: {

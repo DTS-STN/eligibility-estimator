@@ -12,7 +12,6 @@ import ProgressBar from '../../components/ProgressBar'
 import { useState } from 'react'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { ResultKey } from '../../utils/api/definitions/enums'
-import { allow } from 'joi'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -26,11 +25,10 @@ const dataFetcher = async (url) => {
 
 const Eligiblity: NextPage = () => {
   const { query } = useRouter()
-  const [oasResult, setOasResult] = useState<BenefitResult>(null)
-  const [gisResult, setGisResult] = useState<BenefitResult>(null)
+  const [oas, setOAS] = useState<BenefitResult>(null)
+  const [gis, setGIS] = useState<BenefitResult>(null)
   const [allowance, setAllowance] = useState<BenefitResult>(null)
   const [afs, setAFS] = useState<BenefitResult>(null)
-  const [estimate, estimateClicked] = useState<boolean>(false)
   const [progress, setProgress] = useState({ personal: false, legal: false })
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
 
@@ -72,9 +70,7 @@ const Eligiblity: NextPage = () => {
         onChange={(index) => setSelectedTabIndex(index)}
       >
         <Tab.List
-          className={`${
-            (!showProgress || !estimate) && 'hidden'
-          } border-b border-muted/20`}
+          className={`${!showProgress && 'hidden'} border-b border-muted/20`}
         >
           <Tab
             className={({ selected }) =>
@@ -88,11 +84,20 @@ const Eligiblity: NextPage = () => {
           <Tab
             className={({ selected }) =>
               selected
+                ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20 mr-2'
+                : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled mr-2'
+            }
+          >
+            Results
+          </Tab>
+          <Tab
+            className={({ selected }) =>
+              selected
                 ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20'
                 : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled'
             }
           >
-            Results
+            FAQ
           </Tab>
         </Tab.List>
         <Tab.Panels>
@@ -115,7 +120,7 @@ const Eligiblity: NextPage = () => {
                 because your annual income is higher than 129,757 CAD.
               </Alert>
             )}
-            <div className="grid grid-cols-3 gap-10 mt-14">
+            <div className="grid md:grid-cols-3 gap-10 mt-14">
               <div className="col-span-2">
                 {query && parseInt(query.income as string) > 129757 ? (
                   <div>
@@ -136,11 +141,10 @@ const Eligiblity: NextPage = () => {
                 ) : (
                   <ComponentFactory
                     data={data}
-                    oas={setOasResult}
-                    gis={setGisResult}
+                    oas={setOAS}
+                    gis={setGIS}
                     allowance={setAllowance}
                     afs={setAFS}
-                    estimate={estimateClicked}
                     selectedTabIndex={setSelectedTabIndex}
                     setProgress={setProgress}
                   />
@@ -160,7 +164,7 @@ const Eligiblity: NextPage = () => {
           </Tab.Panel>
           <Tab.Panel className="mt-10">
             <div className="flex flex-col space-y-12">
-              {oasResult && gisResult ? (
+              {oas && gis ? (
                 <>
                   <ProgressBar
                     sections={[
@@ -186,28 +190,24 @@ const Eligiblity: NextPage = () => {
                       <tr className="">
                         <td>Old Age Security (OAS)</td>
                         <td>
-                          <p>{oasResult.eligibilityResult.replace('!', '')}</p>
-                          {(oasResult.eligibilityResult ==
-                            ResultKey.INELIGIBLE ||
-                            oasResult.eligibilityResult ==
-                              ResultKey.CONDITIONAL) && (
-                            <p>Detail: {oasResult.detail}</p>
+                          <p>{oas.eligibilityResult.replace('!', '')}</p>
+                          {(oas.eligibilityResult == ResultKey.INELIGIBLE ||
+                            oas.eligibilityResult == ResultKey.CONDITIONAL) && (
+                            <p>Detail: {oas.detail}</p>
                           )}
                         </td>
-                        <td>${oasResult.entitlementResult}</td>
+                        <td>${oas.entitlementResult}</td>
                       </tr>
                       <tr className="bg-[#E8F2F4]">
                         <td>Guaranteed Income Supplement (GIS)</td>
                         <td>
-                          <p>{gisResult.eligibilityResult.replace('!', '')}</p>
-                          {(gisResult.eligibilityResult ==
-                            ResultKey.INELIGIBLE ||
-                            gisResult.eligibilityResult ==
-                              ResultKey.CONDITIONAL) && (
-                            <p>Detail: {gisResult.detail}</p>
+                          <p>{gis.eligibilityResult.replace('!', '')}</p>
+                          {(gis.eligibilityResult == ResultKey.INELIGIBLE ||
+                            gis.eligibilityResult == ResultKey.CONDITIONAL) && (
+                            <p>Detail: {gis.detail}</p>
                           )}
                         </td>
-                        <td>${gisResult.entitlementResult}</td>
+                        <td>${gis.entitlementResult}</td>
                       </tr>
                       <tr>
                         <td>Allowance</td>
@@ -243,8 +243,8 @@ const Eligiblity: NextPage = () => {
                         <td colSpan={2}>Total Monthly Benefit Amount</td>
                         <td>
                           $
-                          {oasResult.entitlementResult +
-                            gisResult.entitlementResult +
+                          {oas.entitlementResult +
+                            gis.entitlementResult +
                             allowance?.entitlementResult +
                             afs?.entitlementResult}
                         </td>
@@ -276,6 +276,7 @@ const Eligiblity: NextPage = () => {
               )}
             </div>
           </Tab.Panel>
+          <Tab.Panel className="mt-10">Content</Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
     </Layout>

@@ -34,7 +34,7 @@
     @apply text-white bg-info hover:bg-info-hover border-info;
   }
   .btn-warning {
-    @apply text-black bg-warning hover:bg-warning-hover border-warning-border;
+    @apply text-content bg-warning hover:bg-warning-hover border-warning-border;
   }
   .btn-danger {
     @apply text-white bg-danger hover:bg-danger-hover border-danger-border;

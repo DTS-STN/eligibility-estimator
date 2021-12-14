@@ -3,7 +3,7 @@ export const NeedHelpList: React.VFC<{
   links: { label: string; location: string }[]
 }> = ({ title, links }) => (
   <div>
-    <div className="p-8 bg-[#c8d6dd] rounded">
+    <div className="p-8 bg-emphasis rounded">
       <h2 className="h2">{title}</h2>
       <ul className="pl-5 list-disc">
         {links.map(({ label, location }, index) => (
