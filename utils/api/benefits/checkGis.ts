@@ -68,7 +68,7 @@ export default function checkGis(
         detail: 'You will likely be eligible for GIS when you turn 65.',
       }
     }
-  } else if (!meetsReqLiving) {
+  } else if (!meetsReqLiving && value.livingCountry !== undefined) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
