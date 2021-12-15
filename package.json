@@ -49,7 +49,7 @@
     "eslint-config-next": "^12.0.4",
     "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.1.0",
+    "jest": "^27.4.5",
     "lint-staged": "^12.1.2",
     "mocha": "^9.1.2",
     "mochawesome": "^7.0.1",
@@ -61,7 +61,7 @@
     "react-test-renderer": "^17.0.2",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^2.2.9",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.4"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
