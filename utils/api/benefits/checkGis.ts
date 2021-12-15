@@ -7,6 +7,8 @@ import {
 import { GisSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
+import { OutputItem } from '../scrapers/_base'
+import gisTables from '../scrapers/output'
 
 export default function checkGis(
   params: CalculationInput,
@@ -54,7 +56,11 @@ export default function checkGis(
       } else {
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
-          entitlementResult: 0,
+          entitlementResult: getGisEntitlement(
+            value.maritalStatus,
+            value.income,
+            value.partnerReceivingOas
+          ),
           reason: ResultReason.NONE,
           detail:
             'Based on the information provided, you are likely eligible for GIS!',
@@ -113,6 +119,61 @@ export default function checkGis(
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
       detail: 'You need to complete the OAS eligibility check first.',
+    }
+  }
+}
+
+function getGisEntitlement(
+  maritalStatus: MaritalStatus,
+  income: number,
+  partnerReceivingOas: boolean
+): number {
+  const gisEntitlementItem = getGisTableItem(
+    maritalStatus,
+    income,
+    partnerReceivingOas
+  )
+  if (gisEntitlementItem) {
+    return gisEntitlementItem.gis
+  } else {
+    return 0
+  }
+}
+
+function getGisTableItem(
+  maritalStatus: MaritalStatus,
+  income: number,
+  partnerReceivingOas
+): OutputItem | null {
+  const array: OutputItem[] = getGisTable(maritalStatus, partnerReceivingOas)
+  array.forEach((x) => {
+    console.log(`${x.range.low} <= ${income}`)
+    if (x.range.low <= income && income <= x.range.high) {
+      return x
+    }
+  })
+  return null
+}
+
+function getGisTable(maritalStatus: MaritalStatus, partnerReceivingOas) {
+  if (
+    maritalStatus === MaritalStatus.SINGLE ||
+    maritalStatus === MaritalStatus.WIDOWED ||
+    maritalStatus === MaritalStatus.DIVORCED ||
+    maritalStatus === MaritalStatus.SEPARATED
+  ) {
+    // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
+    return gisTables.single
+  } else if (
+    maritalStatus === MaritalStatus.MARRIED ||
+    maritalStatus === MaritalStatus.COMMON_LAW
+  ) {
+    if (partnerReceivingOas) {
+      // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
+      return gisTables.partneredAndOas
+    } else if (!partnerReceivingOas) {
+      // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
+      return gisTables.partneredNoOas
     }
   }
 }
