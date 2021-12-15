@@ -1,4 +1,5 @@
 import { OutputItem } from '../_base'
+import { OutputItemAllowance } from '../partneredAllowanceScraper'
 import partneredAllowance from './partneredAllowance.json'
 import partneredAndOas from './partneredAndOas.json'
 import partneredNoOas from './partneredNoOas.json'
@@ -9,7 +10,7 @@ interface ScraperCollection {
   single: OutputItem[]
   partneredAndOas: OutputItem[]
   partneredNoOas: OutputItem[]
-  partneredAllowance: OutputItem[]
+  partneredAllowance: OutputItemAllowance[]
   partneredSurvivor: OutputItem[]
 }
 
