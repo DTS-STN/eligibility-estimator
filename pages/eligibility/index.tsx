@@ -72,7 +72,12 @@ const Eligiblity: NextPage = () => {
       <Tab.Group
         key={selectedTabIndex}
         defaultIndex={selectedTabIndex}
-        onChange={(index) => setSelectedTabIndex(index)}
+        onChange={(index) => {
+          if (index == 0) {
+            setProgress({ legal: false, personal: false })
+          }
+          setSelectedTabIndex(index)
+        }}
       >
         <Tab.List
           className={`${!showProgress && 'hidden'} border-b border-muted/20`}
@@ -212,7 +217,7 @@ const Eligiblity: NextPage = () => {
                             <td>Old Age Security (OAS)</td>
                             <td>
                               <p>{oas.eligibilityResult.replace('!', '')}</p>
-                              <p>Detail: {oas.detail}</p>
+                              <p>Details: {oas.detail}</p>
                             </td>
                             <td>${oas.entitlementResult}</td>
                           </tr>
@@ -220,7 +225,7 @@ const Eligiblity: NextPage = () => {
                             <td>Guaranteed Income Supplement (GIS)</td>
                             <td>
                               <p>{gis.eligibilityResult.replace('!', '')}</p>
-                              <p>Detail: {gis.detail}</p>
+                              <p>Details: {gis.detail}</p>
                             </td>
                             <td>${gis.entitlementResult}</td>
                           </tr>
@@ -236,13 +241,13 @@ const Eligiblity: NextPage = () => {
                                   ResultKey.INELIGIBLE ||
                                   allowance.eligibilityResult ==
                                     ResultKey.CONDITIONAL) && (
-                                  <p>Detail: {allowance.detail}</p>
+                                  <p>Details: {allowance.detail}</p>
                                 )}
                             </td>
                             <td>${allowance && allowance.entitlementResult}</td>
                           </tr>
                           <tr className="bg-[#E8F2F4]">
-                            <td>Allowance for survivor</td>
+                            <td>Allowance for Survivor</td>
                             <td>
                               <p>
                                 {afs && afs.eligibilityResult.replace('!', '')}
@@ -252,7 +257,7 @@ const Eligiblity: NextPage = () => {
                                   ResultKey.INELIGIBLE ||
                                   afs.eligibilityResult ==
                                     ResultKey.CONDITIONAL) && (
-                                  <p>Detail: {afs.detail}</p>
+                                  <p>Details: {afs.detail}</p>
                                 )}
                             </td>
                             <td>${afs && afs.entitlementResult}</td>
@@ -282,10 +287,10 @@ const Eligiblity: NextPage = () => {
                       <div>
                         <h2 className="h2 mt-8">More Information</h2>
                         <ul className="list-disc">
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Old Age Security Payment Amounts
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Guaranteed Income Supplement (GIS) amounts
                           </li>
                         </ul>
@@ -318,29 +323,29 @@ const Eligiblity: NextPage = () => {
                       <div>
                         <h2 className="h2 mt-8">More Information</h2>
                         <ul className="list-disc">
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             You may qualify for the Allowance for Survivor
                             program{' '}
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             You may qualify for the Allowance program{' '}
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Guaranteed Income Supplement (GIS) and Allowance
                             amounts {' '}
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Old Age Security: How much you could receive if you
                             have lived in Canada less than 40 years{' '}
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Guaranteed Income Supplement: Do you qualify{' '}
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Lived or living outside Canada - Pensions and
                             benefits - Overview{' '}
                           </li>
-                          <li className="ml-12 text-default underline">
+                          <li className="ml-12 text-default-text underline">
                             Old Age Security: Do you qualify{' '}
                           </li>
                         </ul>
