@@ -54,13 +54,14 @@ export default function checkGis(
             'You may be eligible, please contact Service Canada for more information.',
         }
       } else {
+        const entitlementResult = new GisEntitlement(
+          value.income,
+          value.maritalStatus,
+          value.partnerReceivingOas
+        ).getEntitlement()
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
-          entitlementResult: getGisEntitlement(
-            value.maritalStatus,
-            value.income,
-            value.partnerReceivingOas
-          ),
+          entitlementResult,
           reason: ResultReason.NONE,
           detail:
             'Based on the information provided, you are likely eligible for GIS!',
@@ -123,57 +124,53 @@ export default function checkGis(
   }
 }
 
-function getGisEntitlement(
-  maritalStatus: MaritalStatus,
-  income: number,
+class GisEntitlement {
+  income: number
+  maritalStatus: MaritalStatus
   partnerReceivingOas: boolean
-): number {
-  const gisEntitlementItem = getGisTableItem(
-    maritalStatus,
-    income,
-    partnerReceivingOas
-  )
-  if (gisEntitlementItem) {
-    return gisEntitlementItem.gis
-  } else {
-    return 0
+
+  constructor(
+    income: number,
+    maritalStatus: MaritalStatus,
+    partnerReceivingOas: boolean
+  ) {
+    this.income = income
+    this.maritalStatus = maritalStatus
+    this.partnerReceivingOas = partnerReceivingOas
   }
-}
 
-function getGisTableItem(
-  maritalStatus: MaritalStatus,
-  income: number,
-  partnerReceivingOas
-): OutputItem | null {
-  const array: OutputItem[] = getGisTable(maritalStatus, partnerReceivingOas)
-  array.forEach((x) => {
-    console.log(`${x.range.low} <= ${income}`)
-    if (x.range.low <= income && income <= x.range.high) {
-      return x
-    }
-  })
-  return null
-}
+  getEntitlement(): number {
+    const gisEntitlementItem = this.getTableItem()
+    return gisEntitlementItem ? gisEntitlementItem.gis : 0
+  }
 
-function getGisTable(maritalStatus: MaritalStatus, partnerReceivingOas) {
-  if (
-    maritalStatus === MaritalStatus.SINGLE ||
-    maritalStatus === MaritalStatus.WIDOWED ||
-    maritalStatus === MaritalStatus.DIVORCED ||
-    maritalStatus === MaritalStatus.SEPARATED
-  ) {
-    // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
-    return gisTables.single
-  } else if (
-    maritalStatus === MaritalStatus.MARRIED ||
-    maritalStatus === MaritalStatus.COMMON_LAW
-  ) {
-    if (partnerReceivingOas) {
-      // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
-      return gisTables.partneredAndOas
-    } else if (!partnerReceivingOas) {
-      // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
-      return gisTables.partneredNoOas
+  getTableItem(): OutputItem | undefined {
+    const array: OutputItem[] = this.getTable()
+    return array.find((x) => {
+      if (x.range.low <= this.income && this.income <= x.range.high) return x
+    })
+  }
+
+  getTable(): OutputItem[] {
+    if (
+      this.maritalStatus === MaritalStatus.SINGLE ||
+      this.maritalStatus === MaritalStatus.WIDOWED ||
+      this.maritalStatus === MaritalStatus.DIVORCED ||
+      this.maritalStatus === MaritalStatus.SEPARATED
+    ) {
+      // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
+      return gisTables.single
+    } else if (
+      this.maritalStatus === MaritalStatus.MARRIED ||
+      this.maritalStatus === MaritalStatus.COMMON_LAW
+    ) {
+      if (this.partnerReceivingOas) {
+        // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
+        return gisTables.partneredAndOas
+      } else if (!this.partnerReceivingOas) {
+        // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
+        return gisTables.partneredNoOas
+      }
     }
   }
 }
