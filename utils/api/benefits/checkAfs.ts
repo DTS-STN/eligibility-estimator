@@ -8,6 +8,8 @@ import {
 import { AfsSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
+import gisTables from '../scrapers/output'
+import { OutputItemAfs } from '../scrapers/partneredSurvivorScraper'
 
 export default function checkAfs(params: CalculationInput): BenefitResult {
   // validation
@@ -31,9 +33,12 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
   // main checks
   if (meetsReqLegal && meetsReqYears && meetsReqMarital && meetsReqIncome) {
     if (meetsReqAge) {
+      const entitlementResult = new AfsEntitlement(
+        value.income
+      ).getEntitlement()
       return {
         eligibilityResult: ResultKey.ELIGIBLE,
-        entitlementResult: 0,
+        entitlementResult,
         reason: ResultReason.NONE,
         detail:
           'Based on the information provided, you are likely eligible for Allowance for Survivor!',
@@ -161,4 +166,29 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
   }
   // fallback
   throw new Error('should not be here')
+}
+
+class AfsEntitlement {
+  income: number
+
+  constructor(income: number) {
+    this.income = income
+  }
+
+  getEntitlement(): number {
+    const tableItem = this.getTableItem()
+    console.log(tableItem)
+    return tableItem ? tableItem.afs : 0
+  }
+
+  getTableItem(): OutputItemAfs | undefined {
+    const array = this.getTable()
+    return array.find((x) => {
+      if (x.range.low <= this.income && this.income <= x.range.high) return x
+    })
+  }
+
+  getTable(): OutputItemAfs[] {
+    return gisTables.partneredSurvivor
+  }
 }
