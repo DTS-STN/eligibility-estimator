@@ -43,7 +43,7 @@ export const Tooltip: React.FC<{
       </svg>
       <div className={`${show ? '' : 'hidden'}`} tabIndex={-1}>
         <div
-          className={`max-w-[525px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white relative -top-10 left-10 z-10`}
+          className={`max-w-[525px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white relative z-10 -top-10 left-10`}
         >
           <header className="flex items-center justify-between gap-x-4 bg-primary text-white rounded-t-xl px-5 py-3">
             <div className="flex gap-x-4 items-center">

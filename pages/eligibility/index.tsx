@@ -281,7 +281,14 @@ const Eligiblity: NextPage = () => {
                       </p>
                       <div>
                         <h2 className="h2 mt-8">More Information</h2>
-                        <p>links go here</p>
+                        <ul className="list-disc">
+                          <li className="ml-12 text-default underline">
+                            Old Age Security Payment Amounts
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            Guaranteed Income Supplement (GIS) amounts
+                          </li>
+                        </ul>
                       </div>
                     </>
                   ) : (
@@ -310,7 +317,33 @@ const Eligiblity: NextPage = () => {
                       </div>
                       <div>
                         <h2 className="h2 mt-8">More Information</h2>
-                        <p>links go here</p>
+                        <ul className="list-disc">
+                          <li className="ml-12 text-default underline">
+                            You may qualify for the Allowance for Survivor
+                            program{' '}
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            You may qualify for the Allowance program{' '}
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            Guaranteed Income Supplement (GIS) and Allowance
+                            amounts {' '}
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            Old Age Security: How much you could receive if you
+                            have lived in Canada less than 40 years{' '}
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            Guaranteed Income Supplement: Do you qualify{' '}
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            Lived or living outside Canada - Pensions and
+                            benefits - Overview{' '}
+                          </li>
+                          <li className="ml-12 text-default underline">
+                            Old Age Security: Do you qualify{' '}
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   )}
