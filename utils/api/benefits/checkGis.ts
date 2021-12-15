@@ -7,7 +7,7 @@ import {
 import { GisSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
-import { OutputItem } from '../scrapers/_base'
+import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
 
 export default function checkGis(
@@ -144,14 +144,14 @@ class GisEntitlement {
     return gisEntitlementItem ? gisEntitlementItem.gis : 0
   }
 
-  getTableItem(): OutputItem | undefined {
-    const array: OutputItem[] = this.getTable()
+  getTableItem(): OutputItemGis | undefined {
+    const array: OutputItemGis[] = this.getTable()
     return array.find((x) => {
       if (x.range.low <= this.income && this.income <= x.range.high) return x
     })
   }
 
-  getTable(): OutputItem[] {
+  getTable(): OutputItemGis[] {
     if (
       this.maritalStatus === MaritalStatus.SINGLE ||
       this.maritalStatus === MaritalStatus.WIDOWED ||

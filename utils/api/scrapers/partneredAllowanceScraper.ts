@@ -1,4 +1,4 @@
-import { BaseScraper, OutputItem } from './_base'
+import { BaseScraper, OutputItemGeneric, OutputItemGis } from './_base'
 
 class PartneredAllowanceScraper extends BaseScraper {
   constructor() {
@@ -17,13 +17,14 @@ class PartneredAllowanceScraper extends BaseScraper {
   }
 
   dataExtractor(row): OutputItemAllowance {
-    const orig = super.dataExtractor(row)
+    const orig = super.dataExtractor(row) as OutputItemGis
     const allowance = this.getAllowance(row)
     return { ...orig, allowance }
   }
 }
 
-export interface OutputItemAllowance extends OutputItem {
+export interface OutputItemAllowance extends OutputItemGeneric {
+  gis: number
   allowance: number
 }
 
