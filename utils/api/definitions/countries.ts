@@ -4,6 +4,7 @@ interface CountryConfig {
 }
 
 export const countryList: CountryConfig[] = [
+  { country: 'Canada', agreement: true },
   { country: 'Agreement', agreement: true },
   { country: 'Afghanistan', agreement: false },
   { country: 'Albania', agreement: false },
@@ -36,7 +37,6 @@ export const countryList: CountryConfig[] = [
   { country: 'Cabo Verde', agreement: false },
   { country: 'Cambodia', agreement: false },
   { country: 'Cameroon', agreement: false },
-  { country: 'Canada', agreement: true },
   { country: 'Central African Republic', agreement: false },
   { country: 'Chad', agreement: false },
   { country: 'Chile', agreement: true },

@@ -10,7 +10,7 @@ interface SelectProps
   label: string
   options: any[]
 }
-export const Select: React.VFC<SelectProps> = (props) => {
+export const CustomSelect: React.VFC<SelectProps> = (props) => {
   return (
     <>
       <span className="text-danger">*</span>

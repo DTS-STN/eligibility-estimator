@@ -13,6 +13,7 @@ import ProgressBar from '../../components/ProgressBar'
 import { useState } from 'react'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { ResultKey } from '../../utils/api/definitions/enums'
+import { FAQ } from '../../components/FAQ'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -315,24 +316,7 @@ const Eligiblity: NextPage = () => {
             </div>
           </Tab.Panel>
           <Tab.Panel className="mt-10">
-            <div className="">
-              <details>
-                <summary>Section 1&apos;s heading</summary>
-                <div className="p-4">test</div>
-              </details>
-              <details>
-                <summary>Section 2&apos;s heading</summary>
-                <div className="p-4">yikes</div>
-              </details>
-              <details>
-                <summary>Section 3&apos;s heading</summary>
-                <div className="p-4">zip</div>
-              </details>
-              <details>
-                <summary>Section 4&apos;s heading</summary>
-                <div className="p-4">zap</div>
-              </details>
-            </div>
+            <FAQ />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

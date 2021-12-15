@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, useState } from 'react'
 import { Input } from './Input'
 import { Radio } from './Radio'
-import { Select } from './Select'
+import { CustomSelect } from './Select'
 import { debounce, has } from 'lodash'
 import { useRouter } from 'next/router'
 import { sortBy } from 'lodash'
@@ -31,11 +31,9 @@ export const ComponentFactory: React.VFC<{
 
   /**
    * Global change handler for the dynamic form elements in the eligbility form
-   * @param e {ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>} the change even for the form elements
+   * @param e {ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>} the change event for the form elements
    */
-  const handleChange = async (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  const handleChange = async () => {
     const form: HTMLFormElement = document.querySelector('form[name="ee-form"]')
     if (!form) return
 
@@ -101,7 +99,7 @@ export const ComponentFactory: React.VFC<{
             )}
             {field.type == 'dropdown' && (
               <div className="mb-12">
-                <Select
+                <CustomSelect
                   name={field.key}
                   options={field.values}
                   label={field.label}
@@ -148,6 +146,7 @@ export const ComponentFactory: React.VFC<{
           type="submit"
           className="btn btn-primary w-40"
           onClick={(e) => {
+            handleChange()
             selectedTabIndex(1)
           }}
         >
