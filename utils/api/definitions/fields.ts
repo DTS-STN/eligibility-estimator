@@ -23,7 +23,7 @@ enum FieldType {
 export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
-    label: 'What is your current net income?',
+    label: 'What is your current annual net income in Canadian Dollars?',
     category: FieldCategory.INCOME_DETAILS,
     order: 1,
     type: FieldType.NUMBER,
@@ -48,7 +48,7 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_RECEIVING_OAS]: {
     key: FieldKey.PARTNER_RECEIVING_OAS,
-    label: 'Is your partner currently receiving OAS?',
+    label: 'Does your partner receive a full OAS pension?',
     category: FieldCategory.PARTNER_DETAILS,
     order: 4,
     type: FieldType.BOOLEAN,
@@ -56,7 +56,7 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_INCOME]: {
     key: FieldKey.PARTNER_INCOME,
-    label: "What is your partner's current net income?",
+    label: "What is your partner's annual net income in Canadian dollars?",
     category: FieldCategory.PARTNER_DETAILS,
     order: 5,
     type: FieldType.NUMBER,
@@ -73,7 +73,7 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.LEGAL_STATUS]: {
     key: FieldKey.LEGAL_STATUS,
-    label: 'What is your current legal status in Canada?',
+    label: 'What is your current legal status?',
     category: FieldCategory.LEGAL_STATUS,
     order: 7,
     type: FieldType.RADIO,
@@ -90,7 +90,8 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-    label: 'Have you ever lived in a country with a social agreement?',
+    label:
+      'Have you lived in a country with an established social security agreement before?',
     category: FieldCategory.LEGAL_STATUS,
     order: 9,
     type: FieldType.BOOLEAN,

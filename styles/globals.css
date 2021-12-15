@@ -94,7 +94,7 @@
     @apply cursor-pointer mb-3;
   }
   details summary {
-    @apply text-content border border-content rounded py-2 px-3;
+    @apply text-content border border-content rounded py-2 px-3 font-semibold;
   }
   details[open] summary {
     @apply rounded-bl-none rounded-br-none;
@@ -104,5 +104,10 @@
   }
   td {
     @apply p-2;
+  }
+
+  input[type='radio']:checked + label span {
+    @apply bg-content;
+    box-shadow: 0px 0px 0px 2px white inset;
   }
 }

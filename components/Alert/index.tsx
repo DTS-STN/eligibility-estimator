@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 
 type AlertType = 'warning' | 'info' | 'danger' | 'success'
@@ -7,7 +8,8 @@ export const Alert: React.VFC<{
   children: React.ReactNode
   type: AlertType
 }> = ({ title, children, type }) => {
-  const typeToClassName = () => {
+  const { query, pathname } = useRouter()
+  const className = (() => {
     switch (type) {
       case 'warning':
         return 'border-warning text-warning'
@@ -21,12 +23,10 @@ export const Alert: React.VFC<{
       case 'success':
         return 'border-success text-success'
         break
-
       default:
         break
     }
-  }
-  const className = typeToClassName()
+  })()
 
   return (
     <div className={`py-2.5 pl-2 border-[3px] ${className} rounded`}>
@@ -34,7 +34,7 @@ export const Alert: React.VFC<{
         <div>
           <svg
             width="26"
-            height="107"
+            height={pathname == '/' ? 157 : 107}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >

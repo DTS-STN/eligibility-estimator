@@ -36,7 +36,7 @@ export const FAQ = () => (
           relationship.
         </p>
         <ul className="list-disc">
-          Proof of marriage can include:
+          <p className="font-bold mb-4"> Proof of marriage can include:</p>
           <li className="ml-12">A marriage certificate</li>
           <li className="ml-12">
             An official copy or extract of the church, synagogue, mosque,
@@ -54,7 +54,9 @@ export const FAQ = () => (
           </li>
         </ul>
         <ul className="list-disc">
-          Proof of common-law union can include:
+          <p className="font-bold mb-4">
+            Proof of common-law union can include:
+          </p>
           <li className="ml-12">
             Statutory Declaration of Common-law Union (ISP3004) must be
             witnessed by a Commissioner of Oaths (offered for free in a Service

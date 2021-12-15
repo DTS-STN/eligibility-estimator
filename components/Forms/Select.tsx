@@ -13,12 +13,9 @@ interface SelectProps
 export const CustomSelect: React.VFC<SelectProps> = (props) => {
   return (
     <>
-      <span className="text-danger">*</span>
+      <span className="text-danger">* </span>
       <span className="font-semibold inline-block mb-1.5">
-        <span className="mb-1.5 font-semibold text-content">
-          {' '}
-          {props.label}
-        </span>
+        <span className="mb-1.5 font-semibold text-content">{props.label}</span>
         <span className="text-danger font-bold ml-2">(required)</span>
         <Tooltip field={props.name} />
       </span>

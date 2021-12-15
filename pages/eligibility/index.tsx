@@ -122,7 +122,12 @@ const Eligiblity: NextPage = () => {
             {incomeTooHigh && (
               <Alert title="Likely not eligible for Benefits" type="danger">
                 You currently do not appear to be eligiable for the OAS pension
-                because your annual income is higher than 129,757 CAD.
+                because your annual income is higher than 129,757 CAD. Please
+                contact{' '}
+                <Link href="#" passHref>
+                  <a className="text-default-text underline">Service Canada</a>
+                </Link>{' '}
+                for more information.
               </Alert>
             )}
             <div className="grid md:grid-cols-3 gap-10 mt-14">
@@ -158,10 +163,15 @@ const Eligiblity: NextPage = () => {
               <NeedHelpList
                 title="Need Help?"
                 links={[
-                  { label: 'OAS Overview', location: '#' },
                   {
-                    label: 'Entitlements FAQ',
-                    location: '#',
+                    label: 'OAS Overview',
+                    location:
+                      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
+                  },
+                  {
+                    label: 'Old Age Security: How much you could receive',
+                    location:
+                      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
                   },
                 ]}
               />

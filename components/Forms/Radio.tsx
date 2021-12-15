@@ -31,11 +31,15 @@ export const Radio: React.VFC<InputProps> = (props) => {
               id={`${props.keyforid}-${index}`}
               name={`${props.keyforid}`}
               value={correctForBooleans(value)}
-              className="mr-2 text-content focus:ring-content"
+              className="hidden"
               {...props}
             />
-            <label htmlFor={`${props.keyforid}-${index}`} className="radio">
-              {value}
+            <label
+              htmlFor={`${props.keyforid}-${index}`}
+              className="radio flex items-center"
+            >
+              <span className="w-6 h-6 inline-block mr-2 rounded-full border border-grey"></span>
+              <p>{value}</p>
             </label>
           </div>
         ))}
