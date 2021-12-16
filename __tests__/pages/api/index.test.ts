@@ -273,15 +273,15 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
     expect(res.body.gis.missingFields).toEqual([
-      'partnerIncome',
       'partnerReceivingOas',
+      'partnerIncome',
     ])
     expect(res.body.visibleFields).toEqual([
       'income',
       'age',
       'maritalStatus',
-      'partnerIncome',
       'partnerReceivingOas',
+      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
@@ -307,8 +307,8 @@ describe('field requirement analysis', () => {
       'income',
       'age',
       'maritalStatus',
-      'partnerIncome',
       'partnerReceivingOas',
+      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
@@ -335,8 +335,8 @@ describe('field requirement analysis', () => {
       'income',
       'age',
       'maritalStatus',
-      'partnerIncome',
       'partnerReceivingOas',
+      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',

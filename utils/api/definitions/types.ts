@@ -22,7 +22,7 @@ export interface CalculationInput {
 
 export interface BenefitResult {
   eligibilityResult: ResultKey
-  entitlementResult: Number
+  entitlementResult: number
   reason: ResultReason
   detail: String
   missingFields?: Array<FieldKey>

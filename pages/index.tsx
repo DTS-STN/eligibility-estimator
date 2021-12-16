@@ -1,10 +1,7 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import { Alert } from '../components/Alert'
 import { Input } from '../components/Forms/Input'
 import { Layout } from '../components/Layout'
-import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
   return (
@@ -50,9 +47,10 @@ const Home: NextPage = () => {
       </div>
       <form action="/eligibility" className="mb-10">
         <Input
-          type="number"
+          type="text"
           name="income"
           label="What is your current annual net income in Canadian dollars"
+          placeholder="$20,000"
           required
         />
         <div className="mt-10 flex space-x-5">

@@ -4,7 +4,7 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      lg: '1200px',
+      lg: '1136px',
       md: '992px',
       sm: '768px',
     },
@@ -63,6 +63,8 @@ module.exports = {
       'form-highlighted': '#66afe9;',
 
       'header-rule': '#AF3C43',
+
+      'emphasis': '#edf9ff',
     },
     extend: {
       fontFamily: {
