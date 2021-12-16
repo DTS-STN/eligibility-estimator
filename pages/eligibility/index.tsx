@@ -40,7 +40,7 @@ const Eligiblity: NextPage = () => {
 
   // show progress under certain circumstances
   const showProgress = (() => {
-    if (query && validateIncome(query.income as string)) return false
+    if (incomeTooHigh) return false
     return true
   })()
 
