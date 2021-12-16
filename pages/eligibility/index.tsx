@@ -14,6 +14,7 @@ import { useState } from 'react'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import { FAQ } from '../../components/FAQ'
+import { validateIncome } from '../../utils/api/helpers/validator'
 
 const dataFetcher = async (url) => {
   const res = await fetch(url)
@@ -35,11 +36,11 @@ const Eligiblity: NextPage = () => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
 
   // check if income is too high to participate in calculation
-  const incomeTooHigh = query && parseInt(query.income as string) > 129757
+  const incomeTooHigh = query && validateIncome(query.income as string)
 
   // show progress under certain circumstances
   const showProgress = (() => {
-    if (query && parseInt(query.income as string) > 129757) return false
+    if (query && validateIncome(query.income as string)) return false
     return true
   })()
 

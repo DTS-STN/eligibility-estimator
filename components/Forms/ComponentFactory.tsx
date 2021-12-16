@@ -12,7 +12,10 @@ import type {
 } from '../../utils/api/definitions/types'
 import { FieldData } from '../../utils/api/definitions/fields'
 import { Tooltip } from '../Tooltip/tooltip'
+import { validateIncome } from '../../utils/api/helpers/validator'
 
+// can probably use .env for this
+const API_URL = `api/calculateEligibility`
 let formCompletion = {}
 
 export const ComponentFactory: React.VFC<{
@@ -34,49 +37,43 @@ export const ComponentFactory: React.VFC<{
   const [formState, setFormState] = useState(orderedFields)
 
   /**
+   * send a GET request to the API, appended with query string data
+   * @param queryString the query string to append to the API's get request
+   */
+  const sendAPIRequest = (queryString: string) => {
+    fetch(`${API_URL}?${queryString}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.error) {
+          console.log(data)
+          setFormState(data.fieldData)
+
+          oas(data.oas)
+          gis(data.gis)
+          allowance(data.allowance)
+          afs(data.afs)
+
+          //set Progress
+          checkCompletion(data.fieldData, formCompletion, setProgress)
+        } else {
+          // handle error - validate per field once validation designs are complete
+        }
+      })
+  }
+
+  /**
    * Global change handler for the dynamic form elements in the eligbility form
-   * @param e {ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>} the change event for the form elements
    */
   const handleChange = async () => {
-    const form: HTMLFormElement = document.querySelector('form[name="ee-form"]')
-    if (!form) return
+    const formData = retrieveFormData()
+    if (!formData) return
+    const qs = buildQueryStringFromFormData(formData)
 
-    const formData = new FormData(form)
-
-    // prepare GET request to send to backend
-    let qs = ''
-    for (const [key, value] of formData.entries()) {
-      if (value == '') {
-        continue
-      }
-      if (qs !== '') qs += '&'
-      qs += `${key}=${value}`
-      formCompletion[key] = value
-    }
-
-    //redirect to exit case if income is too high
-    if (parseInt(formData.get('income') as string) > 129757)
+    // client cannot use calculator, their income is too high
+    if (validateIncome(formData.get('income') as string))
       router.push(`/eligibility?${qs}`)
 
-    const newFormData = await fetch(`api/calculateEligibility?${qs}`).then(
-      (res) => res.json()
-    )
-
-    // if no error, set the formState to the retrieved set of fields
-    if (!newFormData.error) {
-      console.log(newFormData)
-      setFormState(newFormData.fieldData)
-
-      oas(newFormData.oas)
-      gis(newFormData.gis)
-      allowance(newFormData.allowance)
-      afs(newFormData.afs)
-
-      //set Progress
-      checkCompletion(newFormData.fieldData, formCompletion, setProgress)
-    } else {
-      // handle error
-    }
+    sendAPIRequest(qs)
   }
 
   return (
@@ -128,12 +125,10 @@ export const ComponentFactory: React.VFC<{
                   isClearable
                   placeholder="Select from..."
                   defaultValue={
-                    field.key == 'maritalStatus'
-                      ? undefined
-                      : field.values.map((opt) => ({
-                          value: opt,
-                          label: opt,
-                        }))[0]
+                    field.values.map((opt) => ({
+                      value: opt,
+                      label: opt,
+                    }))[0]
                   }
                   name={field.key}
                   options={field.values.map((opt) => ({
@@ -143,48 +138,15 @@ export const ComponentFactory: React.VFC<{
                   onChange={(newValue, _action) => {
                     if (!newValue) return
 
-                    const form: HTMLFormElement = document.querySelector(
-                      'form[name="ee-form"]'
-                    )
-                    if (!form) return
+                    const formData = retrieveFormData()
+                    if (!formData) return
 
-                    const formData = new FormData(form)
+                    // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
+                    //This just stuff the form with the correct information, pverwriting the internal bad state.
+                    formData.set(field.key, newValue.value)
+                    const queryString = buildQueryStringFromFormData(formData)
 
-                    // prepare GET request to send to backend
-                    let qs = ''
-                    for (const [key, value] of formData.entries()) {
-                      if (value == '' && key !== field.key) {
-                        continue
-                      }
-                      if (qs !== '') qs += '&'
-                      if (key == field.key) {
-                        qs += `${key}=${newValue.value}`
-                      } else {
-                        qs += `${key}=${value}`
-                      }
-                      formCompletion[key] = value
-                    }
-
-                    fetch(`api/calculateEligibility?${qs}`)
-                      .then((res) => res.json())
-                      .then((data) => {
-                        if (!data.error) {
-                          console.log(data)
-                          setFormState(data.fieldData)
-
-                          oas(data.oas)
-                          gis(data.gis)
-                          allowance(data.allowance)
-                          afs(data.afs)
-
-                          //set Progress
-                          checkCompletion(
-                            data.fieldData,
-                            formCompletion,
-                            setProgress
-                          )
-                        }
-                      })
+                    sendAPIRequest(queryString)
                   }}
                 />
               </div>
@@ -238,6 +200,13 @@ export const ComponentFactory: React.VFC<{
   )
 }
 
+/**
+ * Checks the completion fo the form
+ *
+ * @param fields The fields retrieved from the API
+ * @param formCompletion the global form completion state
+ * @param setProgress a Dispathc that will set the progress bar's state
+ */
 const checkCompletion = (
   fields: FieldData[],
   formCompletion: any,
@@ -258,4 +227,44 @@ const checkCompletion = (
   const legalComplete = legal.every((item) => formCompletion[item])
 
   setProgress({ personal: personalComplete, legal: legalComplete })
+}
+
+/**
+ * Builds a query string to the API
+ *
+ * @param formData Data residing in the eligibility estimator form
+ * @param updateFormCompletion optionally update global form completion state
+ * @returns
+ */
+const buildQueryStringFromFormData = (
+  formData: FormData,
+  updateFormCompletion = true
+) => {
+  let qs = ''
+  for (const [key, value] of formData.entries()) {
+    if (value == '') {
+      continue
+    }
+
+    // build query string
+    if (qs !== '') qs += '&'
+    qs += `${key}=${value}`
+
+    // update global for completion state
+    if (updateFormCompletion) formCompletion[key] = value
+  }
+  return qs
+}
+
+/**
+ * Retrieves a form's internal representation of itself.
+ *
+ * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
+ * @returns the eligibility estimator's form data
+ */
+const retrieveFormData = (formName = 'form[name="ee-form"]') => {
+  const form: HTMLFormElement = document.querySelector(formName)
+  if (!form) return
+
+  return new FormData(form)
 }
