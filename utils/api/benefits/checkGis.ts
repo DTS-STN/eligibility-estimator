@@ -35,9 +35,9 @@ export default function checkGis(
     value.maritalStatus == MaritalStatus.COMMON_LAW
   const maxIncome = partnered
     ? value.partnerReceivingOas
-      ? 24048
-      : 43680
-    : 18216
+      ? 25440
+      : 46128
+    : 19248
   const meetsReqIncome = value.income <= maxIncome
 
   // main checks
