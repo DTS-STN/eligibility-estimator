@@ -1,15 +1,15 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Eligibility from '../../pages/eligibility/index'
-import React from 'react'
+import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
+import React from 'react'
+import Eligibility from '../../pages/eligibility/index'
 
 describe('index page', () => {
   let useRouter
-  // mocking useRouter, as we'll eventually need it for sedning the correct requests
+  // mocking useRouter, as we'll eventually need it for sending the correct requests
   beforeAll(() => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')
     useRouter.mockImplementation(() => ({
