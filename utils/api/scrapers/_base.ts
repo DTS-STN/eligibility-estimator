@@ -117,7 +117,7 @@ interface Range {
   high: number
 }
 
-interface OutputItem {
+export interface OutputItem {
   range: Range
   gis: number
   // interval: number
