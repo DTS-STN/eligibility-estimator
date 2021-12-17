@@ -1,3 +1,4 @@
+import React from 'react'
 import { BreadcrumbItem } from './BreadcrumbItem'
 
 export const Breadcrumbs: React.VFC<{ items: string[] }> = ({ items }) => {

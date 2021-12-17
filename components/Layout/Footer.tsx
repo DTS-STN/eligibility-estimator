@@ -1,5 +1,5 @@
-import styles from './Footer.module.css'
 import Image from 'next/image'
+import styles from './Footer.module.css'
 
 export const Footer = () => (
   <footer className="text-[14px]">

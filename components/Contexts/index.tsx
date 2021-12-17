@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useStorage } from '../Hooks'
-import { dictionaryList } from '../../i18n'
 
 export const LanguageContext = React.createContext({
   userLanguage: 'en',

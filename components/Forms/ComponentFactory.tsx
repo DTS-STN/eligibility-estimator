@@ -1,18 +1,16 @@
-import { ChangeEvent, Dispatch, useState } from 'react'
-import { Input } from './Input'
-import { Radio } from './Radio'
-import { CustomSelect } from './Select'
-import Select, { InputActionMeta } from 'react-select'
-import { debounce, has } from 'lodash'
+import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
-import { sortBy } from 'lodash'
+import React, { Dispatch, useState } from 'react'
+import Select from 'react-select'
+import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
-import { FieldData } from '../../utils/api/definitions/fields'
-import { Tooltip } from '../Tooltip/tooltip'
 import { validateIncome } from '../../utils/api/helpers/validator'
+import { Tooltip } from '../Tooltip/tooltip'
+import { Input } from './Input'
+import { Radio } from './Radio'
 
 // can probably use .env for this
 const API_URL = `api/calculateEligibility`

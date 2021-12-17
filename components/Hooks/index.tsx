@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
+import { dictionaryList } from '../../i18n'
 import { LanguageContext } from '../Contexts'
-import { languageOptions, dictionaryList } from '../../i18n'
 
 type StorageType = 'session' | 'local'
 
