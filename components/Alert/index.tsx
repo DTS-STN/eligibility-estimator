@@ -13,16 +13,12 @@ export const Alert: React.VFC<{
     switch (type) {
       case 'warning':
         return 'border-warning text-warning'
-        break
       case 'info':
         return 'border-info text-info'
-        break
       case 'danger':
         return 'border-danger text-danger'
-        break
       case 'success':
         return 'border-success text-success'
-        break
       default:
         break
     }

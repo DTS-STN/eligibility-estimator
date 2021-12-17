@@ -52,12 +52,9 @@ const correctForBooleans = (value: string) => {
   switch (value) {
     case 'Yes':
       return 'true'
-      break
     case 'No':
       return 'false'
-      break
     default:
       return value
-      break
   }
 }

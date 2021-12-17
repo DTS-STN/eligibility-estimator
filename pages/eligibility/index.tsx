@@ -40,8 +40,7 @@ const Eligibility: NextPage = () => {
 
   // show progress under certain circumstances
   const showProgress = (() => {
-    if (incomeTooHigh) return false
-    return true
+    return !incomeTooHigh
   })()
 
   // formdata will come from form, going to need a handler function to pass into Component Factory and a useEffect to pull data once the [dependency] changes
