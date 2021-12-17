@@ -523,6 +523,9 @@ describe('basic OAS scenarios', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReason.AGE)
   })
+})
+
+describe('OAS entitlement scenarios', () => {
   it('returns "eligible for $317.63" when 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
