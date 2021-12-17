@@ -1,7 +1,7 @@
+import { CustomSelect } from './Select'
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
-import Select from 'react-select'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
@@ -78,7 +78,7 @@ export const ComponentFactory: React.VFC<{
     <form name="ee-form" data-testid="ee-form" action="/eligibility">
       {formState.map((field) => {
         const content = (
-          <div key={field.key} className="">
+          <div key={field.key}>
             {field.category != lastCategory && (
               <h2 className="h2 mb-8">{field.category}</h2>
             )}
@@ -98,55 +98,7 @@ export const ComponentFactory: React.VFC<{
             )}
             {field.type == 'dropdown' && (
               <div className="mb-12">
-                <span className="text-danger">* </span>
-                <span className="font-semibold inline-block mb-1.5">
-                  <span className="mb-1.5 font-semibold text-content">
-                    {field.label}
-                  </span>
-                  <span className="text-danger font-bold ml-2">(required)</span>
-                  <Tooltip field={field.key} />
-                </span>
-                <Select
-                  styles={{
-                    container: (styles) => ({
-                      ...styles,
-                      width: '320px',
-                      fontSize: '20px',
-                    }),
-                    input: (styles) => ({
-                      ...styles,
-                      boxShadow: 'none',
-                    }),
-                  }}
-                  className="rselect"
-                  isSearchable
-                  isClearable
-                  placeholder="Select from..."
-                  defaultValue={
-                    field.values.map((opt) => ({
-                      value: opt,
-                      label: opt,
-                    }))[0]
-                  }
-                  name={field.key}
-                  options={field.values.map((opt) => ({
-                    value: opt,
-                    label: opt,
-                  }))}
-                  onChange={(newValue, _action) => {
-                    if (!newValue) return
-
-                    const formData = retrieveFormData()
-                    if (!formData) return
-
-                    // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
-                    // This just stuff the form with the correct information, overwriting the internal bad state.
-                    formData.set(field.key, newValue.value)
-                    const queryString = buildQueryStringFromFormData(formData)
-
-                    sendAPIRequest(queryString)
-                  }}
-                />
+                <CustomSelect field={field} sendAPIRequest={sendAPIRequest} />
               </div>
             )}
             {(field.type == 'radio' || field.type == 'boolean') && (
@@ -234,7 +186,7 @@ const checkCompletion = (
  * @param updateFormCompletion optionally update global form completion state
  * @returns
  */
-const buildQueryStringFromFormData = (
+export const buildQueryStringFromFormData = (
   formData: FormData,
   updateFormCompletion = true
 ) => {
@@ -260,7 +212,7 @@ const buildQueryStringFromFormData = (
  * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
  * @returns the eligibility estimator's form data
  */
-const retrieveFormData = (formName = 'form[name="ee-form"]') => {
+export const retrieveFormData = (formName = 'form[name="ee-form"]') => {
   const form: HTMLFormElement = document.querySelector(formName)
   if (!form) return
 

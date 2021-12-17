@@ -135,7 +135,7 @@ const Eligibility: NextPage = () => {
                 for more information.
               </Alert>
             )}
-            <div className="grid md:grid-cols-3 gap-10 mt-14">
+            <div className="container grid grid-cols-1 md:grid-cols-3 gap-10 mt-14">
               <div className="col-span-2">
                 {incomeTooHigh ? (
                   <div>
@@ -344,19 +344,19 @@ const Eligibility: NextPage = () => {
                           <li className="ml-12 text-default-text underline">
                             <Link
                               passHref
-                              target="_blank"
                               href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html"
                             >
-                              <a>You may qualify for the Allowance program</a>
+                              <a target="_blank">
+                                You may qualify for the Allowance program
+                              </a>
                             </Link>
                           </li>
                           <li className="ml-12 text-default-text underline">
                             <Link
                               passHref
-                              target="_blank"
                               href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html"
                             >
-                              <a>
+                              <a target="_blank">
                                 You may qualify for the Allowance for Survivor
                                 program
                               </a>

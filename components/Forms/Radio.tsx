@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, useEffect, useState } from 'react'
 import { Tooltip } from '../Tooltip/tooltip'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -15,7 +15,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
   return (
     <>
       <div className="radio mb-8" data-category={props.category}>
-        <span className="font-semibold inline-block mb-1.5">
+        <span className="font-semibold inline-block mb-1.5 flex-nowrap">
           <span className="text-danger">*</span>
           <span className="mb-1.5 font-semibold text-content">
             {' '}
@@ -38,7 +38,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
               htmlFor={`${props.keyforid}-${index}`}
               className="radio flex items-center"
             >
-              <span className="w-6 h-6 inline-block mr-2 rounded-full border border-grey"></span>
+              <span className="w-6 h-6 inline-block mr-2 rounded-full border border-grey min-w-[24px]"></span>
               <p>{value}</p>
             </label>
           </div>
