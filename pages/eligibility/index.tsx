@@ -276,7 +276,10 @@ const Eligibility: NextPage = () => {
                       </table>
                       <p>
                         For a more accurate assessment, you are encouraged to{' '}
-                        <Link href="#" passHref>
+                        <Link
+                          href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"
+                          passHref
+                        >
                           <a className="text-default-text underline">
                             contact Service Canada{' '}
                           </a>
@@ -288,10 +291,20 @@ const Eligibility: NextPage = () => {
                         <h2 className="h2 mt-8">More Information</h2>
                         <ul className="list-disc">
                           <li className="ml-12 text-default-text underline">
-                            Old Age Security Payment Amounts
+                            <Link
+                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html"
+                              passHref
+                            >
+                              <a>Old Age Security Payment Amounts</a>
+                            </Link>
                           </li>
                           <li className="ml-12 text-default-text underline">
-                            Guaranteed Income Supplement (GIS) amounts
+                            <Link
+                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab1-1.html"
+                              passHref
+                            >
+                              <a>Guaranteed Income Supplement (GIS) amounts</a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -305,7 +318,12 @@ const Eligibility: NextPage = () => {
                             encouraged to contact Service Canada using the link
                             below:
                           </p>
-                          <Link href={'#'} passHref>
+                          <Link
+                            href={
+                              'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'
+                            }
+                            passHref
+                          >
                             <a className="text-default-text underline">
                               Contact Service Canada
                             </a>
@@ -324,29 +342,25 @@ const Eligibility: NextPage = () => {
                         <h2 className="h2 mt-8">More Information</h2>
                         <ul className="list-disc">
                           <li className="ml-12 text-default-text underline">
-                            You may qualify for the Allowance for Survivor
-                            program{' '}
+                            <Link
+                              passHref
+                              target="_blank"
+                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html"
+                            >
+                              <a>You may qualify for the Allowance program</a>
+                            </Link>
                           </li>
                           <li className="ml-12 text-default-text underline">
-                            You may qualify for the Allowance program{' '}
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            Guaranteed Income Supplement (GIS) and Allowance
-                            amounts {' '}
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            Old Age Security: How much you could receive if you
-                            have lived in Canada less than 40 years{' '}
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            Guaranteed Income Supplement: Do you qualify{' '}
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            Lived or living outside Canada - Pensions and
-                            benefits - Overview{' '}
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            Old Age Security: Do you qualify{' '}
+                            <Link
+                              passHref
+                              target="_blank"
+                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html"
+                            >
+                              <a>
+                                You may qualify for the Allowance for Survivor
+                                program
+                              </a>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -355,9 +369,9 @@ const Eligibility: NextPage = () => {
                 </>
               ) : (
                 <div className="flex place-content-center">
-                  <p className="font-bold tracking-wide uppercase my-12">
-                    Please fill out the form to view your Sample benefits
-                    information
+                  <p className="font-semibold tracking-wide my-12">
+                    Please answer the questions to view your benefits assessment
+                    results
                   </p>
                 </div>
               )}
