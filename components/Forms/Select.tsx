@@ -22,13 +22,13 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = (props) => {
-  const { field, sendAPIRequest } = props
+  const { field, sendAPIRequest, name, placeholder } = props
   const defaultValue = (field as any)?.default
   return (
     <>
       <label
-        htmlFor={props.name}
-        aria-label={props.name}
+        htmlFor={name}
+        aria-label={name}
         className="font-semibold inline-block mb-1.5"
       >
         <span className="text-danger">* </span>
