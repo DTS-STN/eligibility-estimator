@@ -26,49 +26,51 @@ export const CustomSelect: React.VFC<SelectProps> = (props) => {
         <span className="text-danger font-bold ml-2">(required)</span>
         <Tooltip field={field.key} />
       </span>
-      <Select
-        styles={{
-          container: (styles) => ({
-            ...styles,
-            width: '320px',
-            fontSize: '20px',
-          }),
-          input: (styles) => ({
-            ...styles,
-            boxShadow: 'none',
-          }),
-        }}
-        className="rselect"
-        isSearchable
-        isClearable
-        placeholder="Select from..."
-        defaultValue={
-          placeholder
-            ? undefined
-            : (field as any).values.map((opt) => ({
-                value: opt,
-                label: opt,
-              }))[0]
-        }
-        name={field.key}
-        options={(field as any).values.map((opt) => ({
-          value: opt,
-          label: opt,
-        }))}
-        onChange={(newValue, _action) => {
-          if (!newValue) return
+      <div className="w-full lg:w-80">
+        <Select
+          closeMenuOnScroll={false}
+          styles={{
+            container: (styles) => ({
+              ...styles,
+              fontSize: '20px',
+            }),
+            input: (styles) => ({
+              ...styles,
+              boxShadow: 'none',
+            }),
+          }}
+          className="rselect"
+          isSearchable
+          isClearable
+          placeholder="Select from..."
+          defaultValue={
+            placeholder == undefined
+              ? placeholder
+              : (field as any).values.map((opt) => ({
+                  value: opt,
+                  label: opt,
+                }))[0]
+          }
+          name={field.key}
+          options={(field as any).values.map((opt) => ({
+            value: opt,
+            label: opt,
+          }))}
+          onChange={(newValue, _action) => {
+            if (!newValue) return
 
-          const formData = retrieveFormData()
-          if (!formData) return
+            const formData = retrieveFormData()
+            if (!formData) return
 
-          // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
-          //This just stuff the form with the correct information, pverwriting the internal bad state.
-          formData.set(field.key, newValue.value)
-          const queryString = buildQueryStringFromFormData(formData)
+            // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
+            //This just stuff the form with the correct information, pverwriting the internal bad state.
+            formData.set(field.key, newValue.value)
+            const queryString = buildQueryStringFromFormData(formData)
 
-          sendAPIRequest(queryString)
-        }}
-      />
+            sendAPIRequest(queryString)
+          }}
+        />
+      </div>
     </>
   )
 }

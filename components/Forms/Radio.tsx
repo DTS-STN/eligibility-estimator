@@ -25,7 +25,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
           <Tooltip field={props.name} />
         </span>
         {props.values.map((value, index) => (
-          <div key={index} className="flex items-center">
+          <div key={index} className="flex items-center my-3 md:my-0">
             <input
               type="radio"
               id={`${props.keyforid}-${index}`}

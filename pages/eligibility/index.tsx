@@ -135,7 +135,7 @@ const Eligibility: NextPage = () => {
                 for more information.
               </Alert>
             )}
-            <div className="container grid grid-cols-1 md:grid-cols-3 gap-10 mt-14">
+            <div className="md:container grid grid-cols-1 md:grid-cols-3 gap-10 mt-14">
               <div className="col-span-2">
                 {incomeTooHigh ? (
                   <div>

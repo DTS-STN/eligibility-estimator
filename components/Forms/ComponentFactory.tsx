@@ -124,20 +124,23 @@ export const ComponentFactory: React.VFC<{
         return content
       })}
 
-      <div className="flex flex-row gap-x-8 mt-20">
+      <div className="flex flex-col md:flex-row gap-x-8 mt-20">
         <button
           type="button"
-          className="btn btn-default w-40"
+          className="btn btn-default w-full md:w-40"
           onClick={(e) => router.push('/')}
         >
           Back
         </button>
-        <button type="reset" className="btn btn-default w-40">
+        <button
+          type="reset"
+          className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
+        >
           Clear
         </button>
         <button
           type="submit"
-          className="btn btn-primary w-40"
+          className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
           onClick={(e) => {
             handleChange()
             selectedTabIndex(1)
