@@ -369,7 +369,7 @@ export const FAQ = () => (
           <li className="ml-12">
             Your income (or in the case of a couple, your income plus the income
             of your spouse/common-law partner) is higher than what is allowed to
-            receive the benefi
+            receive the benefit
           </li>
           <li className="ml-12">
             You are in a federal prison for a sentence of 2 years or longer

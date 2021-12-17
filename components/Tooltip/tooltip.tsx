@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { fieldDefinitions } from '../Tooltip'
+import { fieldDefinitions } from './index'
 
 export const Tooltip: React.FC<{
   field: string

@@ -32,6 +32,7 @@ export default function checkAllowance(
     value.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
     value.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
     value.legalStatus === LegalStatus.INDIAN_STATUS
+  // partner must be getting OAS and GIS
 
   // main checks
   if (

@@ -1,19 +1,19 @@
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import useSWR from 'swr'
-import Link from 'next/link'
-import Image from 'next/image'
 import { Tab } from '@headlessui/react'
-import { Layout } from '../../components/Layout'
-import { ComponentFactory } from '../../components/Forms/ComponentFactory'
-import { NeedHelpList } from '../../components/Layout/NeedHelpList'
-import { Input } from '../../components/Forms/Input'
-import { Alert } from '../../components/Alert'
-import ProgressBar from '../../components/ProgressBar'
+import { NextPage } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { BenefitResult } from '../../utils/api/definitions/types'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import useSWR from 'swr'
+import { Alert } from '../../components/Alert'
 import { FAQ } from '../../components/FAQ'
+import { ComponentFactory } from '../../components/Forms/ComponentFactory'
+import { Input } from '../../components/Forms/Input'
+import { Layout } from '../../components/Layout'
+import { NeedHelpList } from '../../components/Layout/NeedHelpList'
+import ProgressBar from '../../components/ProgressBar'
+import { ResultKey } from '../../utils/api/definitions/enums'
+import { BenefitResult } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
 
 const dataFetcher = async (url) => {
@@ -26,7 +26,7 @@ const dataFetcher = async (url) => {
   return data
 }
 
-const Eligiblity: NextPage = () => {
+const Eligibility: NextPage = () => {
   const { query } = useRouter()
   const [oas, setOAS] = useState<BenefitResult>(null)
   const [gis, setGIS] = useState<BenefitResult>(null)
@@ -40,8 +40,7 @@ const Eligiblity: NextPage = () => {
 
   // show progress under certain circumstances
   const showProgress = (() => {
-    if (incomeTooHigh) return false
-    return true
+    return !incomeTooHigh
   })()
 
   // formdata will come from form, going to need a handler function to pass into Component Factory and a useEffect to pull data once the [dependency] changes
@@ -127,7 +126,7 @@ const Eligiblity: NextPage = () => {
             )}
             {incomeTooHigh && (
               <Alert title="Likely not eligible for Benefits" type="danger">
-                You currently do not appear to be eligiable for the OAS pension
+                You currently do not appear to be eligible for the OAS pension
                 because your annual income is higher than 129,757 CAD. Please
                 contact{' '}
                 <Link href="#" passHref>
@@ -318,7 +317,7 @@ const Eligiblity: NextPage = () => {
                           src="/people.png"
                           width="1139px"
                           height="443px"
-                          alt="A diverse group of Candians"
+                          alt="A diverse group of Canadians"
                         />
                       </div>
                       <div>
@@ -373,4 +372,4 @@ const Eligiblity: NextPage = () => {
   )
 }
 
-export default Eligiblity
+export default Eligibility

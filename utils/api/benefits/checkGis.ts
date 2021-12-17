@@ -171,6 +171,7 @@ class GisEntitlement {
         // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
         return gisTables.partneredNoOas
       }
+      // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
     }
   }
 }

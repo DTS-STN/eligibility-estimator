@@ -1,18 +1,16 @@
-import { ChangeEvent, Dispatch, useState } from 'react'
-import { Input } from './Input'
-import { Radio } from './Radio'
-import { CustomSelect } from './Select'
-import Select, { InputActionMeta } from 'react-select'
-import { debounce, has } from 'lodash'
+import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
-import { sortBy } from 'lodash'
+import React, { Dispatch, useState } from 'react'
+import Select from 'react-select'
+import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
-import { FieldData } from '../../utils/api/definitions/fields'
-import { Tooltip } from '../Tooltip/tooltip'
 import { validateIncome } from '../../utils/api/helpers/validator'
+import { Tooltip } from '../Tooltip/tooltip'
+import { Input } from './Input'
+import { Radio } from './Radio'
 
 // can probably use .env for this
 const API_URL = `api/calculateEligibility`
@@ -38,7 +36,7 @@ export const ComponentFactory: React.VFC<{
 
   /**
    * send a GET request to the API, appended with query string data
-   * @param queryString the query string to append to the API's get request
+   * @param queryString the query string to append to the APIs get request
    */
   const sendAPIRequest = (queryString: string) => {
     fetch(`${API_URL}?${queryString}`)
@@ -53,7 +51,7 @@ export const ComponentFactory: React.VFC<{
           allowance(data.allowance)
           afs(data.afs)
 
-          //set Progress
+          // set progress
           checkCompletion(data.fieldData, formCompletion, setProgress)
         } else {
           // handle error - validate per field once validation designs are complete
@@ -62,7 +60,7 @@ export const ComponentFactory: React.VFC<{
   }
 
   /**
-   * Global change handler for the dynamic form elements in the eligbility form
+   * Global change handler for the dynamic form elements in the eligibility form
    */
   const handleChange = async () => {
     const formData = retrieveFormData()
@@ -142,7 +140,7 @@ export const ComponentFactory: React.VFC<{
                     if (!formData) return
 
                     // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
-                    //This just stuff the form with the correct information, pverwriting the internal bad state.
+                    // This just stuff the form with the correct information, overwriting the internal bad state.
                     formData.set(field.key, newValue.value)
                     const queryString = buildQueryStringFromFormData(formData)
 
