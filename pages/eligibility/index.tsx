@@ -318,7 +318,7 @@ const Eligibility: NextPage = () => {
                           src="/people.png"
                           width="1139px"
                           height="443px"
-                          alt="A diverse group of Candians"
+                          alt="A diverse group of Canadians"
                         />
                       </div>
                       <div>
