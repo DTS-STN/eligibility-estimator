@@ -62,7 +62,7 @@ export const ComponentFactory: React.VFC<{
   }
 
   /**
-   * Global change handler for the dynamic form elements in the eligbility form
+   * Global change handler for the dynamic form elements in the eligibility form
    */
   const handleChange = async () => {
     const formData = retrieveFormData()

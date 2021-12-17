@@ -26,7 +26,7 @@ const dataFetcher = async (url) => {
   return data
 }
 
-const Eligiblity: NextPage = () => {
+const Eligibility: NextPage = () => {
   const { query } = useRouter()
   const [oas, setOAS] = useState<BenefitResult>(null)
   const [gis, setGIS] = useState<BenefitResult>(null)
@@ -127,7 +127,7 @@ const Eligiblity: NextPage = () => {
             )}
             {incomeTooHigh && (
               <Alert title="Likely not eligible for Benefits" type="danger">
-                You currently do not appear to be eligiable for the OAS pension
+                You currently do not appear to be eligible for the OAS pension
                 because your annual income is higher than 129,757 CAD. Please
                 contact{' '}
                 <Link href="#" passHref>
@@ -373,4 +373,4 @@ const Eligiblity: NextPage = () => {
   )
 }
 
-export default Eligiblity
+export default Eligibility
