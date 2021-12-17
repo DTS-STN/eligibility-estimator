@@ -346,19 +346,33 @@ const Eligibility: NextPage = () => {
                           <li className="ml-12 text-default-text underline">
                             <Link
                               passHref
+<<<<<<< HEAD
                               href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html"
                             >
                               <a target="_blank">
                                 You may qualify for the Allowance program
                               </a>
+=======
+                              target="_blank"
+                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html"
+                            >
+                              <a>You may qualify for the Allowance program</a>
+>>>>>>> ce8dba4 (Code cleanup)
                             </Link>
                           </li>
                           <li className="ml-12 text-default-text underline">
                             <Link
                               passHref
+<<<<<<< HEAD
                               href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html"
                             >
                               <a target="_blank">
+=======
+                              target="_blank"
+                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html"
+                            >
+                              <a>
+>>>>>>> ce8dba4 (Code cleanup)
                                 You may qualify for the Allowance for Survivor
                                 program
                               </a>
