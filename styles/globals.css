@@ -10,7 +10,7 @@
     @apply focus-visible:ring-black; */
   }
 
-  main {
+  #elig {
     @apply text-base;
   }
 
@@ -34,7 +34,7 @@
     @apply text-white bg-info hover:bg-info-hover border-info;
   }
   .btn-warning {
-    @apply text-black bg-warning hover:bg-warning-hover border-warning-border;
+    @apply text-content bg-warning hover:bg-warning-hover border-warning-border;
   }
   .btn-danger {
     @apply text-white bg-danger hover:bg-danger-hover border-danger-border;
@@ -57,7 +57,7 @@
     @apply text-h4 font-bold mb-[15px] font-header-gc;
   }
   .h5 {
-    @apply text-h5 font-bold mb-[15px] font-header-gc;
+    @apply font-bold mb-[15px] font-header-gc;
   }
   .h6 {
     @apply text-h6 font-bold mb-[15px] font-header-gc;
@@ -65,18 +65,50 @@
 
   /* form controls */
   .form-control {
-    @apply w-full h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form mb-4;
+    @apply text-base w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form mb-4 mt-1 placeholder-muted/50;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
   }
   .form-control[disabled] {
+    @apply text-muted/60;
     cursor: not-allowed;
     background-color: #eee;
     opacity: 1;
   }
-  label {
-    @apply mb-1.5 font-bold;
-    display: inline-block;
-    max-width: 100%;
+
+  /* css reset for number input types*/
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  input[type='radio']:checked + label span {
+    @apply bg-content;
+    box-shadow: 0px 0px 0px 2px white inset;
+  }
+  .rselect input {
+    box-shadow: none !important;
+  }
+
+  /* Misc */
+  details {
+    @apply cursor-pointer mb-3;
+  }
+  details summary {
+    @apply text-content border border-content rounded py-2 px-3 font-semibold;
+  }
+  details[open] summary {
+    @apply rounded-bl-none rounded-br-none;
+  }
+  details[open] div {
+    @apply border border-t-0 rounded-br rounded-bl border-content;
+  }
+  td {
+    @apply p-2;
   }
 }

@@ -1,14 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Home from '../../pages/index'
-import React from 'react'
+import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
+import React from 'react'
+import Home from '../../pages/index'
 
 describe('index page', () => {
-  let useRouter, data
+  let useRouter
   // mocking useRouter, as we'll eventually need it for sending the correct requests
   beforeAll(() => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')
@@ -21,7 +21,6 @@ describe('index page', () => {
   })
 
   it('should render the home page', async () => {
-    // Once API is ready, fetch here
     render(React.createElement(Home))
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()

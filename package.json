@@ -2,6 +2,7 @@
   "name": "eligibility-estimator-client",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@3.1.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -18,18 +19,25 @@
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci --coverage --silent",
     "prepare": "husky install",
-    "reformat": "prettier --write ."
+    "reformat": "prettier --write .",
+    "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@headlessui/react": "^1.4.2",
     "@tailwindcss/forms": "^0.3.4",
+    "@types/lodash": "^4.14.177",
     "isarray": "^2.0.5",
     "joi": "^17.5.0",
-    "next": "^12.0.7",
+    "lodash": "^4.17.21",
+    "next": "^12.0.3",
     "prom-client": "^14.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "swagger-ui-react": "^4.1.2"
+    "react-select": "^5.2.1",
+    "swagger-ui-react": "^4.1.2",
+    "swr": "^1.1.0",
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.2.0",
@@ -44,7 +52,7 @@
     "cypress-axe": "^0.13.0",
     "cypress-multi-reporters": "^1.5.0",
     "eslint": "^7.32.0",
-    "eslint-config-next": "^12.0.4",
+    "eslint-config-next": "^12.0.7",
     "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.1.0",
@@ -54,15 +62,15 @@
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^6.0.1",
     "node-mocks-http": "^1.11.0",
-    "postcss": "^8.3.6",
+    "postcss": "^8.4.5",
     "prettier": "^2.3.2",
     "react-test-renderer": "^17.0.2",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^2.2.9",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.4"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*": "prettier --ignore-unknown --write"
+    "*.{js,jsx,ts,tsx}": "yarn eslint --cache --fix",
+    "*.{js,ts,jsx,tsx,yaml,yml,json,md}": "yarn prettier --write"
   }
 }

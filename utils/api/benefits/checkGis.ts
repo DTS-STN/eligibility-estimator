@@ -7,6 +7,8 @@ import {
 import { GisSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
+import { OutputItem } from '../scrapers/_base'
+import gisTables from '../scrapers/output'
 
 export default function checkGis(
   params: CalculationInput,
@@ -35,9 +37,9 @@ export default function checkGis(
     value.maritalStatus == MaritalStatus.COMMON_LAW
   const maxIncome = partnered
     ? value.partnerReceivingOas
-      ? 24048
-      : 43680
-    : 18216
+      ? 25440
+      : 46128
+    : 19248
   const meetsReqIncome = value.income <= maxIncome
 
   // main checks
@@ -52,9 +54,14 @@ export default function checkGis(
             'You may be eligible, please contact Service Canada for more information.',
         }
       } else {
+        const entitlementResult = new GisEntitlement(
+          value.income,
+          value.maritalStatus,
+          value.partnerReceivingOas
+        ).getEntitlement()
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
-          entitlementResult: 0,
+          entitlementResult,
           reason: ResultReason.NONE,
           detail:
             'Based on the information provided, you are likely eligible for GIS!',
@@ -68,7 +75,7 @@ export default function checkGis(
         detail: 'You will likely be eligible for GIS when you turn 65.',
       }
     }
-  } else if (!meetsReqLiving) {
+  } else if (!meetsReqLiving && value.livingCountry !== undefined) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
@@ -113,6 +120,58 @@ export default function checkGis(
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
       detail: 'You need to complete the OAS eligibility check first.',
+    }
+  }
+}
+
+class GisEntitlement {
+  income: number
+  maritalStatus: MaritalStatus
+  partnerReceivingOas: boolean
+
+  constructor(
+    income: number,
+    maritalStatus: MaritalStatus,
+    partnerReceivingOas: boolean
+  ) {
+    this.income = income
+    this.maritalStatus = maritalStatus
+    this.partnerReceivingOas = partnerReceivingOas
+  }
+
+  getEntitlement(): number {
+    const gisEntitlementItem = this.getTableItem()
+    return gisEntitlementItem ? gisEntitlementItem.gis : 0
+  }
+
+  getTableItem(): OutputItem | undefined {
+    const array: OutputItem[] = this.getTable()
+    return array.find((x) => {
+      if (x.range.low <= this.income && this.income <= x.range.high) return x
+    })
+  }
+
+  getTable(): OutputItem[] {
+    if (
+      this.maritalStatus === MaritalStatus.SINGLE ||
+      this.maritalStatus === MaritalStatus.WIDOWED ||
+      this.maritalStatus === MaritalStatus.DIVORCED ||
+      this.maritalStatus === MaritalStatus.SEPARATED
+    ) {
+      // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
+      return gisTables.single
+    } else if (
+      this.maritalStatus === MaritalStatus.MARRIED ||
+      this.maritalStatus === MaritalStatus.COMMON_LAW
+    ) {
+      if (this.partnerReceivingOas) {
+        // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
+        return gisTables.partneredAndOas
+      } else if (!this.partnerReceivingOas) {
+        // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
+        return gisTables.partneredNoOas
+      }
+      // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
     }
   }
 }

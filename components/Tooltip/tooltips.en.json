@@ -1,0 +1,43 @@
+{
+  "income": [
+    "Annual Net Income",
+    "You can find your total annual net income on line 236 of your tax return document. If you do not have tax filing income information, you may use an estimate of your income. If you have more than one source of income (e.g., salary, investment income, pension income), you should add all of the net income estimates together before entering the total amount. Do not include any income from a partner or dependant."
+  ],
+
+  "age": ["Age", "Please enter your current age."],
+
+  "maritalStatus": [
+    "Marital Status",
+    "Common-Law: You have lived continuously with your partner in a marital-type relationship for a minimum of one year. Divorced: You are officially separated and have legally ended your marriage. Married: You and your spouse have had a ceremony that legally binds you to each other. Your marriage must be legally recognized in the country where it was performed and in Canada. Single: You have never been married and are not in a common-law relationship. Surviving Partner/Widowed: Your spouse has died and that you have not remarried or entered into a common-law relationship."
+  ],
+
+  "partnerReceivingOas": [
+    "Partner's Eligibility to OAS",
+    "A person is eligible to receive full OAS if they have lived in Canada for 40 years or more after the age of 18."
+  ],
+
+  "partnerIncome": [
+    "Partner's Annual Net Income",
+    "To determine your eligibility, you will need your partner's total annual net income from last year."
+  ],
+
+  "livingCountry": [
+    "Current Residency",
+    "The name of the country or territory you live in, if you have been lawfully admitted to that country or territory."
+  ],
+
+  "legalStatus": [
+    "Legal Status",
+    "<p><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen who was themselves either born in Canada or granted citizenship) or you have applied for a grant of citizenship and have received Canadian citizenship.</p><br /><p><span style='font-weight: bold;'>A permanent resident or landed immigrant (non-sponsored immigrant):</span> You have been given permanent resident status by immigrating to Canada, but is not a Canadian citizen.</p><br /><p><span style='font-weight: bold;'>A permanent resident or landed immigrant (sponsored immigrant):</span> You are a foreign national who has applied for permanent residence under the Family Class, has an approved Canadian sponsor, and meets the requirements of the Family Class.</p><br /><p><span style='font-weight: bold;'>Indian status or status card:</span> You are registered as an Indian under the Indian Act.</p>"
+  ],
+
+  "yearsInCanadaSince18": [
+    "Years Lived in Canada",
+    "This includes periods when you normally lived in Canada. If you have not lived in Canada all of your life, any absences from Canada longer than 6 months are not included. "
+  ],
+
+  "everLivedSocialCountry": [
+    "Social Agreement Countries",
+    "You may still qualify if you have you lived in one of the countries Canada has established a social security agreement."
+  ]
+}

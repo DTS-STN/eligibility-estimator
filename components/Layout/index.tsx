@@ -9,12 +9,11 @@ export const Layout: React.VFC<{
   children: React.ReactNode
 }> = ({ children }) => {
   const otherLang = useInternationalization('otherLang')
-  const otherLangNameFull = useInternationalization('otherLangFull')
 
   const { userLanguageChange } = useContext(LanguageContext)
 
   return (
-    <main>
+    <main id="elig">
       <div className="mx-4 min-h-screen">
         <div className="container mx-auto">
           <div className="flex justify-end my-4">
@@ -22,7 +21,7 @@ export const Layout: React.VFC<{
               className="btn-link btn underline"
               onClick={(e) => userLanguageChange(otherLang)}
             >
-              {otherLangNameFull}
+              Français
             </button>
           </div>
         </div>

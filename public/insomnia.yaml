@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-12-01T19:32:12.963Z
-__export_source: insomnia.desktop.app:v2021.6.0
+__export_date: 2021-12-13T21:52:14.756Z
+__export_source: insomnia.desktop.app:v2021.7.0
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1638385826962
+    modified: 1639432322903
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -14,33 +14,23 @@ resources:
     body: {}
     parameters:
       - name: income
-        disabled: false
         value: '10000'
-        id: pair_c030ced1f6734091bee59776c93029c4
       - name: age
-        disabled: false
         value: '65'
-        id: pair_042513af58dc49779bbacdc070a93a42
-      - name: livingCountry
-        disabled: false
-        value: Canada
-        id: pair_be1b9002a3d4425e9d54ca78e70ccd6b
-      - name: legalStatus
-        disabled: false
-        value: Canadian citizen
-        id: pair_ceb261ba61bc4451a3692f48b970b44f
-      - name: yearsInCanadaSince18
-        disabled: false
-        value: '40'
-        id: pair_6d9f6c31e8c242e68eece534e7608b30
       - name: maritalStatus
-        disabled: false
         value: Married
-        id: pair_c7ac12a3165840fa9ee705de6c0cbf8f
+      - name: partnerIncome
+        value: '10000'
       - name: partnerReceivingOas
-        disabled: false
         value: 'true'
-        id: pair_df8f848c110249b7a81e21cc2e6bb455
+      - name: livingCountry
+        value: Canada
+      - name: legalStatus
+        value: Canadian citizen
+      - name: yearsInCanadaSince18
+        value: '40'
+      - name: everLivedSocialCountry
+        value: 'true'
     headers: []
     authentication: {}
     metaSortKey: -1637965624524
@@ -83,7 +73,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1638387124412
+    modified: 1639432326196
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -128,7 +118,9 @@ resources:
               - $ref: '#/components/parameters/legalStatus'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
               - $ref: '#/components/parameters/maritalStatus'
+              - $ref: '#/components/parameters/partnerIncome'
               - $ref: '#/components/parameters/partnerReceivingOas'
+              - $ref: '#/components/parameters/everLivedSocialCountry'
             responses:
               '200':
                 $ref: '#/components/responses/200'
@@ -150,6 +142,7 @@ resources:
                 - maritalStatus
                 - partnerReceivingOas
                 - income
+                - everLivedSocialCountry
 
           ResultOptions:
             type: string
@@ -421,11 +414,11 @@ resources:
             schema:
               type: string
               enum:
-              - Canadian citizen
-              - Permanent resident or landed immigrant (non-sponsored)
-              - Permanent resident or landed immigrant (sponsored)
-              - Indian status or status card
-              - Other
+                - Canadian citizen
+                - Permanent resident or landed immigrant (non-sponsored)
+                - Permanent resident or landed immigrant (sponsored)
+                - Indian status or status card
+                - Other
               description: The current legal status of the client.
             allowEmptyValue: false
 
@@ -450,7 +443,7 @@ resources:
             in: query
             description: The current marital status of the client.
             required: false
-            example: 'Married'
+            example: Married
             schema:
               type: string
               enum:
@@ -463,6 +456,21 @@ resources:
               description: The current marital status of the client.
             allowEmptyValue: false
 
+          partnerIncome:
+            name: partnerIncome
+            in: query
+            description: >
+              What is your partner's annual net income in Canadian dollars?
+
+
+              _Note: This can be provided only when marital status is Married or Common-Law._
+            required: false
+            example: 10000
+            schema:
+              type: integer
+              description: Income in Canadian dollars.
+            allowEmptyValue: false
+
           partnerReceivingOas:
             name: partnerReceivingOas
             in: query
@@ -470,7 +478,17 @@ resources:
               Is the client's partner receiving OAS?
 
 
-              _Note: You select "false" here when your marital status is Single, Widowed, Divorced, or Separated._
+              _Note: This can be "true" only when marital status is Married or Common-Law._
+            required: false
+            example: false
+            schema:
+              type: boolean
+            allowEmptyValue: false
+
+          everLivedSocialCountry:
+            name: everLivedSocialCountry
+            in: query
+            description: Has the client ever lived in a country with a social agreement? [link of countries to be included]
             required: false
             example: true
             schema:
@@ -480,7 +498,7 @@ resources:
     _type: api_spec
   - _id: env_env_e85c84355a7e428ff3e7002e5d1e8146fed429b0_sub
     parentId: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
-    modified: 1637965572928
+    modified: 1639429002812
     created: 1637342147321
     name: Prod env
     data:
@@ -498,7 +516,7 @@ resources:
     _type: environment
   - _id: env_e4bbab0d34a74edb8c6d1c0ae7ad0cf2
     parentId: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
-    modified: 1637963610302
+    modified: 1639429004155
     created: 1637633131081
     name: Local env
     data:
@@ -516,7 +534,7 @@ resources:
     _type: environment
   - _id: env_caaf3e25e5e1424ebecd70a3666e20ed
     parentId: env_e85c84355a7e428ff3e7002e5d1e8146fed429b0
-    modified: 1637965579015
+    modified: 1639429003487
     created: 1637965573028
     name: Dev env
     data:

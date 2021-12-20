@@ -1,5 +1,5 @@
-import styles from './Footer.module.css'
 import Image from 'next/image'
+import styles from './Footer.module.css'
 
 export const Footer = () => (
   <footer className="text-[14px]">
@@ -66,7 +66,7 @@ export const Footer = () => (
     <div className="my-8">
       <div className="container mx-auto flex justify-between items-center">
         <nav className="">
-          <ul className="flex flex-row list-disc space-x-6">
+          <ul className="flex flex-col md:flex-row items-start md:items-center list-disc space-x-6">
             <li className="list-none">
               <a href="#">Social media</a>
             </li>

@@ -80,6 +80,25 @@ describe('sanity checks', () => {
     })
     expect(res.status).toEqual(200)
   })
+  it('fails when not partnered and "partnerIncome" provided', async () => {
+    let res = await mockGetRequestError({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      partnerIncome: 10000,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+  })
+  it('accepts not partnered and "partnerIncome" provided', async () => {
+    let res = await mockGetRequestError({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 10000,
+    })
+    expect(res.status).toEqual(200)
+  })
 })
 
 describe('field requirement analysis', () => {
@@ -93,12 +112,13 @@ describe('field requirement analysis', () => {
     expect(res.body.gis.missingFields).toEqual(['income'])
     expect(res.body.visibleFields).toEqual(['income'])
   })
-  it('requires 3 OAS and 1 GIS fields when only income provided', async () => {
+  it('required fields when only income provided', async () => {
     const res = await mockGetRequest({ income: 10000 })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
     expect(res.body.oas.missingFields).toEqual([
       'age',
+      'maritalStatus',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
@@ -124,6 +144,7 @@ describe('field requirement analysis', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
     expect(res.body.oas.missingFields).toEqual([
+      'maritalStatus',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
@@ -149,6 +170,7 @@ describe('field requirement analysis', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
     expect(res.body.oas.missingFields).toEqual([
+      'maritalStatus',
       'legalStatus',
       'yearsInCanadaSince18',
     ])
@@ -173,7 +195,10 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
-    expect(res.body.oas.missingFields).toEqual(['yearsInCanadaSince18'])
+    expect(res.body.oas.missingFields).toEqual([
+      'maritalStatus',
+      'yearsInCanadaSince18',
+    ])
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
     expect(res.body.gis.missingFields).toBeUndefined()
@@ -194,12 +219,12 @@ describe('field requirement analysis', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
     })
-    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.oas.reason).toEqual(ResultReason.NONE)
-    expect(res.body.oas.missingFields).toBeUndefined()
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
+    expect(res.body.oas.missingFields).toEqual(['maritalStatus'])
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
-    expect(res.body.gis.missingFields).toEqual(['maritalStatus'])
+    expect(res.body.gis.missingFields).toBeUndefined()
     expect(res.body.visibleFields).toEqual([
       'income',
       'age',
@@ -242,17 +267,48 @@ describe('field requirement analysis', () => {
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatus.MARRIED,
     })
-    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.oas.reason).toEqual(ResultReason.NONE)
-    expect(res.body.oas.missingFields).toBeUndefined()
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
+    expect(res.body.oas.missingFields).toEqual(['partnerIncome'])
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
-    expect(res.body.gis.missingFields).toEqual(['partnerReceivingOas'])
+    expect(res.body.gis.missingFields).toEqual([
+      'partnerReceivingOas',
+      'partnerIncome',
+    ])
     expect(res.body.visibleFields).toEqual([
       'income',
       'age',
       'maritalStatus',
       'partnerReceivingOas',
+      'partnerIncome',
+      'livingCountry',
+      'legalStatus',
+      'yearsInCanadaSince18',
+    ])
+  })
+  it('required fields when only income/age/country/legal/years/marital=married/partnerOas provided', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerReceivingOas: true,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
+    expect(res.body.oas.missingFields).toEqual(['partnerIncome'])
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
+    expect(res.body.gis.missingFields).toEqual(['partnerIncome'])
+    expect(res.body.visibleFields).toEqual([
+      'income',
+      'age',
+      'maritalStatus',
+      'partnerReceivingOas',
+      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
@@ -266,6 +322,7 @@ describe('field requirement analysis', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 10000,
       partnerReceivingOas: true,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
@@ -279,6 +336,7 @@ describe('field requirement analysis', () => {
       'age',
       'maritalStatus',
       'partnerReceivingOas',
+      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
@@ -298,6 +356,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       yearsInCanadaSince18: 20,
@@ -309,6 +368,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
       yearsInCanadaSince18: 20,
@@ -331,6 +391,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
@@ -343,6 +404,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
@@ -355,6 +417,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
@@ -366,6 +429,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
@@ -377,6 +441,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
@@ -388,6 +453,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
@@ -410,6 +476,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
@@ -422,6 +489,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 64,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
@@ -434,6 +502,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 19,
@@ -446,6 +515,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 55,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
@@ -457,6 +527,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
@@ -469,6 +540,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 39,
@@ -481,6 +553,7 @@ describe('basic OAS scenarios', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 40,
@@ -531,6 +604,26 @@ describe('basic GIS scenarios', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
   })
+  it('returns "ineligible" when income 1,000,000', async () => {
+    const res = await mockGetRequest({
+      income: 1000000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReason.OAS)
+  })
+  it('returns "needs more info" when missing country', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.SINGLE,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
+  })
   it('returns "ineligible" when not living in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -555,9 +648,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.CONDITIONAL)
     expect(res.body.gis.reason).toEqual(ResultReason.LEGAL_STATUS)
   })
-  it('returns "ineligible" when single and income over 18216', async () => {
+  it('returns "ineligible" when single and income over 19248', async () => {
     const res = await mockGetRequest({
-      income: 18217,
+      income: 19249,
       age: 65,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -567,9 +660,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "eligible" when single and income under 18216', async () => {
+  it('returns "eligible" when single and income under 19248', async () => {
     const res = await mockGetRequest({
-      income: 18216,
+      income: 19247,
       age: 65,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -579,9 +672,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "ineligible" when married and no partner OAS and income over 43680', async () => {
+  it('returns "ineligible" when married and no partner OAS and income over 46128', async () => {
     const res = await mockGetRequest({
-      income: 43681,
+      income: 46129,
       age: 65,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -592,9 +685,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "eligible" when married and no partner OAS and income under 43680', async () => {
+  it('returns "needs more info" when married and no partner OAS and income under 46128', async () => {
     const res = await mockGetRequest({
-      income: 43680,
+      income: 46127,
       age: 65,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -602,25 +695,67 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       partnerReceivingOas: false,
     })
-    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.gis.reason).toEqual(ResultReason.NONE)
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
   })
-  it('returns "ineligible" when married and partner OAS and income over 24048', async () => {
+  it('returns "eligible" when married and no partner OAS and income under 45128 and partner income 1000', async () => {
     const res = await mockGetRequest({
-      income: 24049,
+      income: 45127,
       age: 65,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 1000,
+      partnerReceivingOas: false,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReason.NONE)
+  })
+  it('returns "needs more info" when married and partner OAS and income over 25440', async () => {
+    const res = await mockGetRequest({
+      income: 25441,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
+  })
+  it('returns "ineligible" when married and partner OAS and income over 25440 and partner income 0', async () => {
+    const res = await mockGetRequest({
+      income: 25441,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "eligible" when married and partner OAS and income under 24048', async () => {
+  it('returns "ineligible" when married and partner OAS and income over 24440 and partner income 1000', async () => {
     const res = await mockGetRequest({
-      income: 24048,
+      income: 24441,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 1000,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.gis.reason).toEqual(ResultReason.INCOME)
+  })
+  it('returns "needs more info" when married and partner OAS and income under 25440', async () => {
+    const res = await mockGetRequest({
+      income: 25439,
       age: 65,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -628,8 +763,137 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       partnerReceivingOas: true,
     })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.gis.reason).toEqual(ResultReason.MORE_INFO)
+  })
+  it('returns "eligible" when married and partner OAS and income under 25440 and partner income 0', async () => {
+    const res = await mockGetRequest({
+      income: 25439,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
+      partnerReceivingOas: true,
+    })
     expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.gis.reason).toEqual(ResultReason.NONE)
+  })
+})
+
+describe('GIS entitlement scenarios', () => {
+  it('returns "$0" when single and 1,000,000 income', async () => {
+    const res = await mockGetRequest({
+      income: 1000000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.SINGLE,
+      partnerIncome: 0,
+      partnerReceivingOas: undefined,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(0)
+  })
+  it('returns "$385.86" when single and 10000 income', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.SINGLE,
+      partnerIncome: 0,
+      partnerReceivingOas: undefined,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(385.86)
+  })
+  it('returns "$948.82" when single and 0 income', async () => {
+    const res = await mockGetRequest({
+      income: 0,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.SINGLE,
+      partnerIncome: 0,
+      partnerReceivingOas: undefined,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(948.82)
+  })
+  it('returns "$837.82" when married and 10000 income and no partner OAS', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
+      partnerReceivingOas: false,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(837.82)
+  })
+  it('returns "$948.82" when married and 0 income and no partner OAS', async () => {
+    const res = await mockGetRequest({
+      income: 0,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
+      partnerReceivingOas: false,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(948.82)
+  })
+  it('returns "$806.82" when married and 10000 income + 1000 partner income and no partner OAS', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 1000,
+      partnerReceivingOas: false,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(806.82)
+  })
+  it('returns "$300.51" when married and 10000 income + 1000 partner income and partner OAS', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 1000,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(300.51)
+  })
+  it('returns "$571.15" when married and 0 income + 0 partner income and partner OAS', async () => {
+    const res = await mockGetRequest({
+      income: 0,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.gis.entitlementResult).toEqual(571.15)
   })
 })
 
@@ -664,6 +928,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
@@ -677,6 +942,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
@@ -690,6 +956,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.OTHER,
       yearsInCanadaSince18: 20,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.CONDITIONAL)
@@ -703,6 +970,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
@@ -742,6 +1010,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: false,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
@@ -755,6 +1024,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
@@ -768,6 +1038,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
@@ -781,6 +1052,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.CONDITIONAL)
@@ -794,6 +1066,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 10,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
@@ -807,6 +1080,7 @@ describe('basic Allowance scenarios', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 9,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
@@ -978,6 +1252,7 @@ describe('thorough personas', () => {
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       yearsInCanadaSince18: 47,
       maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
       partnerReceivingOas: true,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)

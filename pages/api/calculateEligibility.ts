@@ -11,11 +11,11 @@ import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import normalizeLivingCountry from '../../utils/api/helpers/countryUtils'
 import {
   buildFieldData,
   buildVisibleFields,
 } from '../../utils/api/helpers/fieldUtils'
-import normalizeLivingCountry from '../../utils/api/helpers/socialAgreement'
 
 export default function handler(
   req: NextApiRequest,
@@ -30,6 +30,13 @@ export default function handler(
       req.query.livingCountry = normalizeLivingCountry(
         req.query.livingCountry as string
       )
+    }
+    // adds partner income to main income
+    if (req.query.partnerIncome) {
+      req.query.income = (
+        parseInt(req.query.income as string) +
+        parseInt(req.query.partnerIncome as string)
+      ).toString()
     }
 
     // validation

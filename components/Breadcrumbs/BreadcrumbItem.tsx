@@ -1,3 +1,6 @@
+import Link from 'next/link'
+import React from 'react'
+
 export const BreadcrumbItem: React.VFC<{
   breadcrumb: string
   showDelimiter: boolean
@@ -8,11 +11,10 @@ export const BreadcrumbItem: React.VFC<{
       showDelimiter && `before:content-[attr(data-delimiter)] before:px-3`
     }`}
   >
-    <a
-      href="#"
-      className="text-sm text-primary underline inline-flex items-center dark:text-gray-400 dark:hover:text-white "
-    >
-      {breadcrumb}
-    </a>
+    <Link href="/" passHref>
+      <a className="text-sm text-primary underline inline-flex items-center dark:text-gray-400 dark:hover:text-white ">
+        {breadcrumb}
+      </a>
+    </Link>
   </li>
 )

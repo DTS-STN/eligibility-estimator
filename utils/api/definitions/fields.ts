@@ -1,9 +1,5 @@
-import {
-  FieldCategory,
-  LegalStatus,
-  LivingCountry,
-  MaritalStatus,
-} from './enums'
+import { ALL_COUNTRIES } from '../helpers/countryUtils'
+import { FieldCategory, LegalStatus, MaritalStatus } from './enums'
 
 export enum FieldKey {
   INCOME = 'income',
@@ -13,6 +9,7 @@ export enum FieldKey {
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   MARITAL_STATUS = 'maritalStatus',
   PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
+  PARTNER_INCOME = 'partnerIncome',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
 }
 
@@ -26,11 +23,11 @@ enum FieldType {
 export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
-    label: 'What is your current net income?',
+    label: 'What is your current annual net income in Canadian Dollars?',
     category: FieldCategory.INCOME_DETAILS,
     order: 1,
     type: FieldType.NUMBER,
-    placeholder: '20000',
+    placeholder: '$20,000',
   },
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
@@ -51,26 +48,34 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_RECEIVING_OAS]: {
     key: FieldKey.PARTNER_RECEIVING_OAS,
-    label: 'Is your partner currently receiving OAS?',
+    label: 'Does your partner receive a full OAS pension?',
     category: FieldCategory.PARTNER_DETAILS,
     order: 4,
     type: FieldType.BOOLEAN,
     default: undefined,
   },
+  [FieldKey.PARTNER_INCOME]: {
+    key: FieldKey.PARTNER_INCOME,
+    label: "What is your partner's annual net income in Canadian dollars?",
+    category: FieldCategory.PARTNER_DETAILS,
+    order: 5,
+    type: FieldType.NUMBER,
+    placeholder: '20000',
+  },
   [FieldKey.LIVING_COUNTRY]: {
     key: FieldKey.LIVING_COUNTRY,
     label: 'What country are you currently living in?',
     category: FieldCategory.LEGAL_STATUS,
-    order: 5,
+    order: 6,
     type: FieldType.DROPDOWN,
-    values: Object.values(LivingCountry),
+    values: ALL_COUNTRIES,
     default: 'Canada',
   },
   [FieldKey.LEGAL_STATUS]: {
     key: FieldKey.LEGAL_STATUS,
-    label: 'What is your current legal status in Canada?',
+    label: 'What is your current legal status?',
     category: FieldCategory.LEGAL_STATUS,
-    order: 6,
+    order: 7,
     type: FieldType.RADIO,
     values: Object.values(LegalStatus),
     default: undefined,
@@ -79,15 +84,16 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
     label: 'How many years have you lived in Canada since the age of 18?',
     category: FieldCategory.LEGAL_STATUS,
-    order: 7,
+    order: 8,
     type: FieldType.NUMBER,
     placeholder: '40',
   },
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-    label: 'Have you ever lived in a country with a social agreement?',
+    label:
+      'Have you lived in a country with an established social security agreement before?',
     category: FieldCategory.LEGAL_STATUS,
-    order: 8,
+    order: 9,
     type: FieldType.BOOLEAN,
     default: undefined,
   },

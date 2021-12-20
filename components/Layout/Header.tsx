@@ -1,9 +1,7 @@
-import React from 'react'
 import Image from 'next/image'
-import { useInternationalization } from '../Hooks'
+import React from 'react'
 
 export const Header = () => {
-  const searchPlaceholder = useInternationalization('search')
   return (
     <header className="border-b border-black/20 pb-10 -mx-4">
       <div className="container mx-auto">
@@ -18,10 +16,10 @@ export const Header = () => {
             <input
               type="search"
               id="search-gc"
-              placeholder={searchPlaceholder}
+              placeholder={'Search Canada.ca'}
               className="h-auto min-h-9 py-1.5 px-3 align-middle text-muted bg-white rounded-tl rounded-bl border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form"
             />
-            <button className="py-1.5 px-3 h-[38px] rounded-tr rounded-br text-white bg-primary hover:bg-primary-hover border-primary-border font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid">
+            <button className="py-1.5 px-3 h-9 rounded-tr rounded-br text-white bg-primary hover:bg-primary-hover border-primary-border font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

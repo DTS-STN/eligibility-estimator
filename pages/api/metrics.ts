@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { register, collectDefaultMetrics } from 'prom-client'
+import { collectDefaultMetrics, register } from 'prom-client'
 
 collectDefaultMetrics({ prefix: 'omnidevfrontend_' })
 
