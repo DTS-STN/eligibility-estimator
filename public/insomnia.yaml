@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-12-13T21:52:14.756Z
-__export_source: insomnia.desktop.app:v2021.7.0
+__export_date: 2021-12-20T23:00:18.475Z
+__export_source: insomnia.desktop.app:v2021.7.2
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1639432322903
+    modified: 1640040712815
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -15,22 +15,35 @@ resources:
     parameters:
       - name: income
         value: '10000'
+        id: pair_fb0b82ef746c4ce4b929e530cfa3d1f2
       - name: age
         value: '65'
+        id: pair_6f4181f755e64285aaa60142e3ae1e05
       - name: maritalStatus
         value: Married
+        id: pair_51639d9d4bf34c258dfa9f98b6c03afb
       - name: partnerIncome
         value: '10000'
+        id: pair_f0dcd97315bf4beba2ddb1ce4ebceabc
       - name: partnerReceivingOas
         value: 'true'
+        id: pair_47e7162d84e041ef8186fc3b096fa9b4
       - name: livingCountry
         value: Canada
+        id: pair_0368845da6f94c46926b6d410bce3053
       - name: legalStatus
         value: Canadian citizen
+        id: pair_0dcea805fe1340d0bac2e95a33dfb2f7
+      - name: legalStatusOther
+        value: some legal status
+        id: pair_e896a6f6b90e424e99ac48908a3a1f6e
+        disabled: false
       - name: yearsInCanadaSince18
         value: '40'
+        id: pair_e9f8ae75b3d44a33816d6ddfafaa9df2
       - name: everLivedSocialCountry
         value: 'true'
+        id: pair_5cf929dd50334c0e9922afc644e558b7
     headers: []
     authentication: {}
     metaSortKey: -1637965624524
@@ -73,7 +86,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1639432326196
+    modified: 1640041201374
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -116,6 +129,7 @@ resources:
               - $ref: '#/components/parameters/age'
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
+              - $ref: '#/components/parameters/legalStatusOther'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
               - $ref: '#/components/parameters/maritalStatus'
               - $ref: '#/components/parameters/partnerIncome'
@@ -129,33 +143,35 @@ resources:
 
       components:
         schemas:
-          Fields:
+          FieldKey:
             type: array
             description: A list of fields that the frontend should display.
             items:
               type: string
               enum:
+                - income
                 - age
                 - livingCountry
                 - legalStatus
+                - legalStatusOther
                 - yearsInCanadaSince18
                 - maritalStatus
+                - partnerIncome
                 - partnerReceivingOas
-                - income
                 - everLivedSocialCountry
 
-          ResultOptions:
+          ResultKey:
             type: string
             description: A summary of the resulting eligibility calculation
             format: string
             enum:
               - Eligible!
-              - Ineligible!
+              - Not eligible!
               - Conditionally eligible...
               - Need more information...
               - Request is invalid!
 
-          ResultReasons:
+          ResultReason:
             type: string
             description: The reason for the provided outcome
             format: string
@@ -163,7 +179,8 @@ resources:
               - You meet the criteria
               - Age does not meet requirement for this benefit
               - Not enough years in Canada
-              - Not a Canadian citizen
+              - Not living in Canada
+              - Legal status does not meet requirement for this benefit
               - Not in a country with a social agreement
               - Need more information...
               - Not eligible for OAS
@@ -180,17 +197,17 @@ resources:
               - detail
             properties:
               eligibilityResult:
-                $ref: '#/components/schemas/ResultOptions'
+                $ref: '#/components/schemas/ResultKey'
               entitlementResult:
                 type: number
                 example: 500
               reason:
-                $ref: '#/components/schemas/ResultReasons'
+                $ref: '#/components/schemas/ResultReason'
               detail:
                 type: string
                 example: Based on the information provided, you are eligible!
               missingFields:
-                $ref: '#/components/schemas/Fields'
+                $ref: '#/components/schemas/FieldKey'
 
           ResponseObject:
             type: object
@@ -211,7 +228,7 @@ resources:
               afs:
                 $ref: '#/components/schemas/ResultObject'
               visibleFields:
-                $ref: '#/components/schemas/Fields'
+                $ref: '#/components/schemas/FieldKey'
 
           ErrorResponseObject:
             type: object
@@ -251,12 +268,12 @@ resources:
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for GIS!
                       allowance:
-                        eligibilityResult: Ineligible!
+                        eligibilityResult: Not eligible!
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        eligibilityResult: Ineligible!
+                        eligibilityResult: Not eligible!
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -305,22 +322,22 @@ resources:
                   'Ineligible case':
                     value:
                       oas:
-                        eligibilityResult: Ineligible!
+                        eligibilityResult: Not eligible!
                         entitlementResult: 0
                         reason: Income too high
                         detail: Your income is too high to be eligible for OAS.
                       gis:
-                        eligibilityResult: Ineligible!
+                        eligibilityResult: Not eligible!
                         entitlementResult: 0
                         reason: Not eligible for OAS
                         detail: You need to be eligible for OAS to be eligible for GIS.
                       allowance:
-                        eligibilityResult: Ineligible!
+                        eligibilityResult: Not eligible!
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        eligibilityResult: Ineligible!
+                        eligibilityResult: Not eligible!
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -418,8 +435,22 @@ resources:
                 - Permanent resident or landed immigrant (non-sponsored)
                 - Permanent resident or landed immigrant (sponsored)
                 - Indian status or status card
-                - Other
+                - 'Other (Example: Temporary resident, student, temporary worker, etc.)'
               description: The current legal status of the client.
+            allowEmptyValue: false
+
+          legalStatusOther:
+            name: legalStatusOther
+            in: query
+            description: >
+              The current legal status of the client.
+
+
+              _Note that this is only required when legalStatus is "Other"._
+            required: false
+            example: Some legal status
+            schema:
+              type: string
             allowEmptyValue: false
 
           yearsInCanadaSince18:
