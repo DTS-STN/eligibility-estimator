@@ -1170,6 +1170,54 @@ describe('basic Allowance scenarios', () => {
   })
 })
 
+describe('Allowance entitlement scenarios', () => {
+  it('returns "eligible for $325.51" when 40 years in Canada and income=20000', async () => {
+    const res = await mockGetRequest({
+      income: 20000,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerReceivingOas: true,
+      partnerIncome: 0,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.allowance.entitlementResult).toEqual(325.51)
+    expect(res.body.allowance.reason).toEqual(ResultReason.NONE)
+  })
+  it('returns "eligible for $540.77" when 40 years in Canada and income=10000', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerReceivingOas: true,
+      partnerIncome: 0,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.allowance.entitlementResult).toEqual(540.77)
+    expect(res.body.allowance.reason).toEqual(ResultReason.NONE)
+  })
+  it('returns "eligible for $1206.41" when 40 years in Canada and income=0', async () => {
+    const res = await mockGetRequest({
+      income: 0,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerReceivingOas: true,
+      partnerIncome: 0,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.allowance.entitlementResult).toEqual(1206.41)
+    expect(res.body.allowance.reason).toEqual(ResultReason.NONE)
+  })
+})
+
 describe('basic Allowance for Survivor scenarios', () => {
   it('returns "ineligible" when income over (or equal to) 25920', async () => {
     const res = await mockGetRequest({
@@ -1336,6 +1384,48 @@ describe('basic Allowance for Survivor scenarios', () => {
     })
     expect(res.body.afs.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReason.AGE)
+  })
+})
+
+describe('AFS entitlement scenarios', () => {
+  it('returns "eligible for $246.89" when 40 years in Canada and income=20000', async () => {
+    const res = await mockGetRequest({
+      income: 20000,
+      age: 60,
+      maritalStatus: MaritalStatus.WIDOWED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.afs.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.afs.entitlementResult).toEqual(246.89)
+    expect(res.body.afs.reason).toEqual(ResultReason.NONE)
+  })
+  it('returns "eligible for $667.15" when 40 years in Canada and income=10000', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 60,
+      maritalStatus: MaritalStatus.WIDOWED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.afs.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.afs.entitlementResult).toEqual(667.15)
+    expect(res.body.afs.reason).toEqual(ResultReason.NONE)
+  })
+  it('returns "eligible for $1438.11" when 40 years in Canada and income=0', async () => {
+    const res = await mockGetRequest({
+      income: 0,
+      age: 60,
+      maritalStatus: MaritalStatus.WIDOWED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 40,
+    })
+    expect(res.body.afs.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.afs.entitlementResult).toEqual(1438.11)
+    expect(res.body.afs.reason).toEqual(ResultReason.NONE)
   })
 })
 
