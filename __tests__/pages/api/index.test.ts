@@ -10,7 +10,10 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
-import { FieldKey } from '../../../utils/api/definitions/fields'
+import {
+  fieldDefinitions,
+  FieldKey,
+} from '../../../utils/api/definitions/fields'
 import {
   AfsSchema,
   AllowanceSchema,
@@ -24,6 +27,14 @@ describe('code checks', () => {
   it('produces a list of 196 countries', async () => {
     expect(ALL_COUNTRIES.length).toEqual(195)
     expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  })
+  it('produces a list of fields with unique ordering', async () => {
+    const ordersOrig = []
+    for (const key in fieldDefinitions) {
+      ordersOrig.push(fieldDefinitions[key].order)
+    }
+    const ordersUnique = [...new Set(ordersOrig)]
+    expect(ordersUnique).toEqual(ordersOrig)
   })
 })
 
