@@ -8,8 +8,8 @@ export enum FieldKey {
   LEGAL_STATUS = 'legalStatus',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   MARITAL_STATUS = 'maritalStatus',
-  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
   PARTNER_INCOME = 'partnerIncome',
+  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
 }
 

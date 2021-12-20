@@ -1,6 +1,7 @@
 // noinspection DuplicatedCode
 
 import fs from 'fs'
+import Joi from 'joi'
 import YAML from 'yaml'
 import {
   LegalStatus,
@@ -10,6 +11,12 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import { FieldKey } from '../../../utils/api/definitions/fields'
+import {
+  AfsSchema,
+  AllowanceSchema,
+  GisSchema,
+  OasSchema,
+} from '../../../utils/api/definitions/schemas'
 import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
@@ -17,6 +24,38 @@ describe('code checks', () => {
   it('produces a list of 196 countries', async () => {
     expect(ALL_COUNTRIES.length).toEqual(195)
     expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  })
+})
+
+describe('schema checks', () => {
+  function getJoiKeys(schema: Joi.ObjectSchema) {
+    // @ts-ignore
+    const joiEntries = schema._ids._byKey.entries()
+    const joiKeys = []
+    for (const joiEntry of joiEntries) joiKeys.push(joiEntry[0])
+    return joiKeys
+  }
+
+  it('OAS: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(OasSchema)
+    const enumKeys = Object.values(FieldKey)
+    expect(joiKeys).toEqual(enumKeys)
+  })
+  it('GIS: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(GisSchema)
+    const enumKeys: string[] = Object.values(FieldKey)
+    enumKeys.push('_oasEligible')
+    expect(joiKeys).toEqual(enumKeys)
+  })
+  it('Allowance: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(AllowanceSchema)
+    const enumKeys = Object.values(FieldKey)
+    expect(joiKeys).toEqual(enumKeys)
+  })
+  it('AFS: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(AfsSchema)
+    const enumKeys = Object.values(FieldKey)
+    expect(joiKeys).toEqual(enumKeys)
   })
 })
 
