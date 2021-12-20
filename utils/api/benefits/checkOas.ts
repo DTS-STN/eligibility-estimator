@@ -92,13 +92,21 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       }
     }
   } else if (!meetsReqLegal) {
-    if (value.legalStatus === LegalStatus.SPONSORED) {
+    if (!meetsReqAge) {
+      return {
+        eligibilityResult: ResultKey.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.AGE,
+        detail:
+          'You may be eligible when you turn 65, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      }
+    } else if (value.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
         detail:
-          'You may be eligible for OAS, please contact Service Canada to confirm.',
+          'You may be eligible for OAS, and should contact Service Canada to confirm due to your legal status in Canada.',
       }
     } else {
       return {
@@ -106,7 +114,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
         detail:
-          'You may be eligible for the OAS pension, and should contact Service Canada to confirm due to your legal status in Canada.',
+          'You may be eligible for OAS, and should contact Service Canada to confirm due to your legal status in Canada.',
       }
     }
   } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {

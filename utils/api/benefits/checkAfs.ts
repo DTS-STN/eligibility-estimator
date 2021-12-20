@@ -125,7 +125,15 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       }
     }
   } else if (!meetsReqLegal) {
-    if (value.legalStatus === LegalStatus.SPONSORED) {
+    if (underAgeReq) {
+      return {
+        eligibilityResult: ResultKey.INELIGIBLE,
+        entitlementResult: 0,
+        reason: ResultReason.AGE,
+        detail:
+          'You may be eligible when you turn 60, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      }
+    } else if (value.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,

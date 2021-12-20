@@ -531,6 +531,30 @@ describe('basic OAS scenarios', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReason.AGE)
   })
+  it('returns "ineligible" when age 55 and legal=sponsored and 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.SPONSORED,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.oas.reason).toEqual(ResultReason.AGE)
+  })
+  it('returns "ineligible" when age 55 and legal=other and 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.oas.reason).toEqual(ResultReason.AGE)
+  })
 })
 
 describe('OAS entitlement scenarios', () => {
@@ -1097,6 +1121,20 @@ describe('basic Allowance scenarios', () => {
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.allowance.reason).toEqual(ResultReason.YEARS_IN_CANADA)
   })
+  it('returns "ineligible" when under 60, legal=other', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 10,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.allowance.reason).toEqual(ResultReason.AGE)
+  })
 })
 
 describe('basic Allowance for Survivor scenarios', () => {
@@ -1251,6 +1289,20 @@ describe('basic Allowance for Survivor scenarios', () => {
     })
     expect(res.body.afs.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReason.YEARS_IN_CANADA)
+  })
+  it('returns "ineligible" when under 60, legal=other', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 10,
+      maritalStatus: MaritalStatus.WIDOWED,
+      partnerIncome: 0,
+      partnerReceivingOas: false,
+    })
+    expect(res.body.afs.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.afs.reason).toEqual(ResultReason.AGE)
   })
 })
 
