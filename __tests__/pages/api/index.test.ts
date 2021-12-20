@@ -87,6 +87,17 @@ describe('openapi checks', () => {
       Object.values(ResultReason)
     )
   })
+  it('matches parameters', async () => {
+    const openApiParams = Object.keys(openapi.components.parameters)
+    const enumKeys = Object.values(FieldKey)
+    expect(openApiParams).toEqual(Object.values(enumKeys))
+    const openApiPathParams =
+      openapi.paths['/calculateEligibility'].get.parameters
+    const openApiPathParamsStripped = openApiPathParams.map((x) =>
+      x['$ref'].replace('#/components/parameters/', '')
+    )
+    expect(openApiPathParamsStripped).toEqual(Object.values(enumKeys))
+  })
 })
 
 describe('sanity checks', () => {
