@@ -7,7 +7,15 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
+import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
+
+describe('code checks', () => {
+  it('produces a list of 196 countries', async () => {
+    expect(ALL_COUNTRIES.length).toEqual(195)
+    expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  })
+})
 
 describe('sanity checks', () => {
   it('fails on income with letters', async () => {

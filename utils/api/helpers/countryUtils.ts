@@ -7,7 +7,18 @@ export default function normalizeLivingCountry(country: string): LivingCountry {
     ? LivingCountry.AGREEMENT
     : LivingCountry.NO_AGREEMENT
 }
+
+/**
+ * Returns a list of countries with a social agreement.
+ */
 const AGREEMENT_COUNTRIES: string[] = countryList.map((item) => {
   if (item.agreement) return item.country
 })
-export const ALL_COUNTRIES: string[] = countryList.map((item) => item.country)
+
+/**
+ * Returns a list of countries, but specifically excludes "Agreement" from the list.
+ * We are keeping "Agreement" as a country since it makes testing easier.
+ */
+export const ALL_COUNTRIES: string[] = countryList.flatMap((item) =>
+  item.country === LivingCountry.AGREEMENT ? [] : item.country
+)
