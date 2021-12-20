@@ -60,7 +60,7 @@ export const fieldDefinitions: FieldDefinitions = {
     category: FieldCategory.PARTNER_DETAILS,
     order: 5,
     type: FieldType.NUMBER,
-    placeholder: '20000',
+    placeholder: '$20,000',
   },
   [FieldKey.LIVING_COUNTRY]: {
     key: FieldKey.LIVING_COUNTRY,

@@ -15,14 +15,11 @@ export enum MaritalStatus {
 }
 
 export enum LegalStatus {
-  // regular cases
   CANADIAN_CITIZEN = 'Canadian citizen',
   PERMANENT_RESIDENT = 'Permanent resident or landed immigrant (non-sponsored)',
-  INDIAN_STATUS = 'Indian status or status card',
-  // edge cases, bail!
-  // or not? (TBD...)
   SPONSORED = 'Permanent resident or landed immigrant (sponsored)',
-  OTHER = 'Other',
+  INDIAN_STATUS = 'Indian status or status card',
+  OTHER = 'Other (Example: Temporary resident, student, temporary worker, etc.)',
 }
 
 export enum LivingCountry {
@@ -33,7 +30,7 @@ export enum LivingCountry {
 
 export enum ResultKey {
   ELIGIBLE = `Eligible!`,
-  INELIGIBLE = `Ineligible!`,
+  INELIGIBLE = `Not eligible!`,
   CONDITIONAL = `Conditionally eligible...`,
   MORE_INFO = 'Need more information...',
   INVALID = 'Request is invalid!',

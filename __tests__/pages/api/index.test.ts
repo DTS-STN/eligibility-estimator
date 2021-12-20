@@ -1,5 +1,7 @@
 // noinspection DuplicatedCode
 
+import fs from 'fs'
+import YAML from 'yaml'
 import {
   LegalStatus,
   LivingCountry,
@@ -7,7 +9,46 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
+import { FieldKey } from '../../../utils/api/definitions/fields'
+import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
+
+describe('code checks', () => {
+  it('produces a list of 196 countries', async () => {
+    expect(ALL_COUNTRIES.length).toEqual(195)
+    expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  })
+})
+
+describe('openapi checks', () => {
+  const file = fs.readFileSync('./public/openapi.yaml', 'utf-8')
+  const openapi = YAML.parse(file)
+  it('matches LegalStatus enum', async () => {
+    expect(openapi.components.parameters.legalStatus.schema.enum).toEqual(
+      Object.values(LegalStatus)
+    )
+  })
+  it('matches MaritalStatus enum', async () => {
+    expect(openapi.components.parameters.maritalStatus.schema.enum).toEqual(
+      Object.values(MaritalStatus)
+    )
+  })
+  it('matches FieldKey enum', async () => {
+    expect(openapi.components.schemas.FieldKey.items.enum).toEqual(
+      Object.values(FieldKey)
+    )
+  })
+  it('matches ResultKey enum', async () => {
+    expect(openapi.components.schemas.ResultKey.enum).toEqual(
+      Object.values(ResultKey)
+    )
+  })
+  it('matches ResultReason enum', async () => {
+    expect(openapi.components.schemas.ResultReason.enum).toEqual(
+      Object.values(ResultReason)
+    )
+  })
+})
 
 describe('sanity checks', () => {
   it('fails on income with letters', async () => {
@@ -523,6 +564,33 @@ describe('basic OAS scenarios', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReason.AGE)
   })
+  it('returns "ineligible" when age 55 and legal=sponsored and 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.SPONSORED,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.oas.reason).toEqual(ResultReason.AGE)
+  })
+  it('returns "ineligible" when age 55 and legal=other and 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.oas.reason).toEqual(ResultReason.AGE)
+  })
+})
+
+describe('OAS entitlement scenarios', () => {
   it('returns "eligible for $317.63" when 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -1086,6 +1154,20 @@ describe('basic Allowance scenarios', () => {
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.allowance.reason).toEqual(ResultReason.YEARS_IN_CANADA)
   })
+  it('returns "ineligible" when under 60, legal=other', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 10,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 0,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.allowance.reason).toEqual(ResultReason.AGE)
+  })
 })
 
 describe('basic Allowance for Survivor scenarios', () => {
@@ -1240,6 +1322,20 @@ describe('basic Allowance for Survivor scenarios', () => {
     })
     expect(res.body.afs.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.afs.reason).toEqual(ResultReason.YEARS_IN_CANADA)
+  })
+  it('returns "ineligible" when under 60, legal=other', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 55,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 10,
+      maritalStatus: MaritalStatus.WIDOWED,
+      partnerIncome: 0,
+      partnerReceivingOas: false,
+    })
+    expect(res.body.afs.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.afs.reason).toEqual(ResultReason.AGE)
   })
 })
 

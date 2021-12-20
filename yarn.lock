@@ -3653,6 +3653,7 @@ __metadata:
     tailwindcss: ^2.2.9
     ts-node: ^10.4.0
     typescript: ^4.5.4
+    yaml: ^1.10.2
   languageName: unknown
   linkType: soft
 
