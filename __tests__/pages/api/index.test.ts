@@ -454,13 +454,26 @@ describe('basic OAS scenarios', () => {
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.oas.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "conditionally eligible" when not citizen', async () => {
+  it('returns "more info" when not citizen (other not provided)', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.body.oas.eligibilityResult).toEqual(ResultKey.MORE_INFO)
+    expect(res.body.oas.reason).toEqual(ResultReason.MORE_INFO)
+  })
+  it('returns "conditionally eligible" when not citizen (other provided)', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.OTHER,
+      legalStatusOther: 'some legal status',
       yearsInCanadaSince18: 20,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.CONDITIONAL)
@@ -644,6 +657,7 @@ describe('basic OAS scenarios', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
+      legalStatusOther: 'some legal status',
       yearsInCanadaSince18: 20,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)

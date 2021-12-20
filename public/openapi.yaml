@@ -36,6 +36,7 @@ paths:
         - $ref: '#/components/parameters/age'
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
+        - $ref: '#/components/parameters/legalStatusOther'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/partnerIncome'
@@ -59,6 +60,7 @@ components:
           - age
           - livingCountry
           - legalStatus
+          - legalStatusOther
           - yearsInCanadaSince18
           - maritalStatus
           - partnerIncome
@@ -342,6 +344,20 @@ components:
           - Indian status or status card
           - 'Other (Example: Temporary resident, student, temporary worker, etc.)'
         description: The current legal status of the client.
+      allowEmptyValue: false
+
+    legalStatusOther:
+      name: legalStatusOther
+      in: query
+      description: >
+        The current legal status of the client.
+
+
+        _Note that this is only required when legalStatus is "Other"._
+      required: false
+      example: Some legal status
+      schema:
+        type: string
       allowEmptyValue: false
 
     yearsInCanadaSince18:
