@@ -338,7 +338,7 @@ components:
           - Permanent resident or landed immigrant (non-sponsored)
           - Permanent resident or landed immigrant (sponsored)
           - Indian status or status card
-          - Other
+          - 'Other (Example: Temporary resident, student, temporary worker, etc.)'
         description: The current legal status of the client.
       allowEmptyValue: false
 
