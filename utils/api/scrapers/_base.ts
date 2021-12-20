@@ -1,6 +1,8 @@
 import fs from 'fs'
 import https from 'https'
 import { JSDOM } from 'jsdom'
+import { OutputItemAllowance } from './partneredAllowanceScraper'
+import { OutputItemAfs } from './partneredSurvivorScraper'
 
 export class BaseScraper {
   private readonly tableUrl: (pageNo: number) => string
@@ -49,7 +51,7 @@ export class BaseScraper {
   //   return high + 0.01 - low
   // }
 
-  getGis(row) {
+  getCellValue(row) {
     const gisStr = row.children[1].textContent
     const gisStrStripped = gisStr.replace(/\$\s?|(,*)/g, '')
     return parseFloat(gisStrStripped)
@@ -60,7 +62,7 @@ export class BaseScraper {
     return {
       range: this.getIncomeRange(incomeRangeStr),
       // interval: this.getIncomeInterval(incomeRangeStr),
-      gis: this.getGis(row),
+      gis: this.getCellValue(row),
     }
   }
 
@@ -117,8 +119,13 @@ interface Range {
   high: number
 }
 
-export interface OutputItem {
+export type OutputItem = OutputItemGis | OutputItemAllowance | OutputItemAfs
+
+export interface OutputItemGeneric {
   range: Range
-  gis: number
   // interval: number
+}
+
+export interface OutputItemGis extends OutputItemGeneric {
+  gis: number
 }

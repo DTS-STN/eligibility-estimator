@@ -1,4 +1,4 @@
-import { BaseScraper } from './_base'
+import { BaseScraper, OutputItemGeneric } from './_base'
 
 class PartneredSurvivorScraper extends BaseScraper {
   constructor() {
@@ -9,5 +9,16 @@ class PartneredSurvivorScraper extends BaseScraper {
       numIterations: 57,
     })
   }
+
+  dataExtractor(row): OutputItemAfs {
+    const orig = super.dataExtractor(row)
+    const afs = this.getCellValue(row)
+    return { range: orig.range, afs }
+  }
 }
+
+export interface OutputItemAfs extends OutputItemGeneric {
+  afs: number
+}
+
 export default PartneredSurvivorScraper
