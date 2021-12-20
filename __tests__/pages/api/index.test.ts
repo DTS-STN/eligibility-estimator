@@ -1,5 +1,7 @@
 // noinspection DuplicatedCode
 
+import fs from 'fs'
+import YAML from 'yaml'
 import {
   LegalStatus,
   LivingCountry,
@@ -7,6 +9,7 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
+import { FieldKey } from '../../../utils/api/definitions/fields'
 import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
@@ -14,6 +17,36 @@ describe('code checks', () => {
   it('produces a list of 196 countries', async () => {
     expect(ALL_COUNTRIES.length).toEqual(195)
     expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  })
+})
+
+describe('openapi checks', () => {
+  const file = fs.readFileSync('./public/openapi.yaml', 'utf-8')
+  const openapi = YAML.parse(file)
+  it('matches LegalStatus enum', async () => {
+    expect(openapi.components.parameters.legalStatus.schema.enum).toEqual(
+      Object.values(LegalStatus)
+    )
+  })
+  it('matches MaritalStatus enum', async () => {
+    expect(openapi.components.parameters.maritalStatus.schema.enum).toEqual(
+      Object.values(MaritalStatus)
+    )
+  })
+  it('matches FieldKey enum', async () => {
+    expect(openapi.components.schemas.FieldKey.items.enum).toEqual(
+      Object.values(FieldKey)
+    )
+  })
+  it('matches ResultKey enum', async () => {
+    expect(openapi.components.schemas.ResultKey.enum).toEqual(
+      Object.values(ResultKey)
+    )
+  })
+  it('matches ResultReason enum', async () => {
+    expect(openapi.components.schemas.ResultReason.enum).toEqual(
+      Object.values(ResultReason)
+    )
   })
 })
 

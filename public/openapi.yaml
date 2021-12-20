@@ -49,33 +49,34 @@ paths:
 
 components:
   schemas:
-    Fields:
+    FieldKey:
       type: array
       description: A list of fields that the frontend should display.
       items:
         type: string
         enum:
+          - income
           - age
           - livingCountry
           - legalStatus
           - yearsInCanadaSince18
           - maritalStatus
           - partnerReceivingOas
-          - income
+          - partnerIncome
           - everLivedSocialCountry
 
-    ResultOptions:
+    ResultKey:
       type: string
       description: A summary of the resulting eligibility calculation
       format: string
       enum:
         - Eligible!
-        - Ineligible!
+        - Not eligible!
         - Conditionally eligible...
         - Need more information...
         - Request is invalid!
 
-    ResultReasons:
+    ResultReason:
       type: string
       description: The reason for the provided outcome
       format: string
@@ -83,7 +84,8 @@ components:
         - You meet the criteria
         - Age does not meet requirement for this benefit
         - Not enough years in Canada
-        - Not a Canadian citizen
+        - Not living in Canada
+        - Legal status does not meet requirement for this benefit
         - Not in a country with a social agreement
         - Need more information...
         - Not eligible for OAS
@@ -100,17 +102,17 @@ components:
         - detail
       properties:
         eligibilityResult:
-          $ref: '#/components/schemas/ResultOptions'
+          $ref: '#/components/schemas/ResultKey'
         entitlementResult:
           type: number
           example: 500
         reason:
-          $ref: '#/components/schemas/ResultReasons'
+          $ref: '#/components/schemas/ResultReason'
         detail:
           type: string
           example: Based on the information provided, you are eligible!
         missingFields:
-          $ref: '#/components/schemas/Fields'
+          $ref: '#/components/schemas/FieldKey'
 
     ResponseObject:
       type: object
@@ -131,7 +133,7 @@ components:
         afs:
           $ref: '#/components/schemas/ResultObject'
         visibleFields:
-          $ref: '#/components/schemas/Fields'
+          $ref: '#/components/schemas/FieldKey'
 
     ErrorResponseObject:
       type: object
