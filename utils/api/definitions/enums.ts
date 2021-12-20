@@ -30,7 +30,7 @@ export enum LivingCountry {
 
 export enum ResultKey {
   ELIGIBLE = `Eligible!`,
-  INELIGIBLE = `Ineligible!`,
+  INELIGIBLE = `Not eligible!`,
   CONDITIONAL = `Conditionally eligible...`,
   MORE_INFO = 'Need more information...',
   INVALID = 'Request is invalid!',
