@@ -86,9 +86,15 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
     if (!formData) return
     const qs = buildQueryStringFromFormData(formData, true)
 
+    const income = formData
+      .get('income')
+      .toString()
+      .replace('$', '')
+      .replace(',', '')
+
     // client cannot use calculator, their income is too high
-    if (validateIncome(formData.get('income') as string))
-      router.push(`/eligibility?${qs}`)
+    if (validateIncome(income)) router.push(`/eligibility?${qs}`)
+    router.push(`/eligibility?${qs}`)
 
     sendAPIRequest(qs)
   }
