@@ -15,7 +15,8 @@ interface SelectProps
   field: FieldData
   sendAPIRequest: (queryString: string) => void
 }
-export const CustomSelect: React.VFC<SelectProps> = (props) => {
+
+export const FormSelect: React.VFC<SelectProps> = (props) => {
   const { field, sendAPIRequest } = props
   const placeholder = (field as any)?.placeholder
   return (
@@ -32,11 +33,11 @@ export const CustomSelect: React.VFC<SelectProps> = (props) => {
           styles={{
             container: (styles) => ({
               ...styles,
-              fontSize: '20px',
+              fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
             }),
             input: (styles) => ({
               ...styles,
-              boxShadow: 'none',
+              boxShadow: 'none', // remove a blue inset box from react-select
             }),
           }}
           className="rselect"
@@ -65,7 +66,7 @@ export const CustomSelect: React.VFC<SelectProps> = (props) => {
             // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
             //This just stuff the form with the correct information, pverwriting the internal bad state.
             formData.set(field.key, newValue.value)
-            const queryString = buildQueryStringFromFormData(formData)
+            const queryString = buildQueryStringFromFormData(formData, true)
 
             sendAPIRequest(queryString)
           }}

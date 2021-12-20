@@ -1,8 +1,8 @@
 {
-  "otherLang": "fr",
-  "search": "Search Canada.ca",
+  "lang": "EN",
+  "otherLang": "FR",
   "otherLangFull": "Français",
+  "search": "Search Canada.ca",
   "welcome": "Welcome",
-  "branch": "Branch number",
   "req": "required"
 }

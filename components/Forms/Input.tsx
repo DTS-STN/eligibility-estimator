@@ -1,4 +1,5 @@
 import { InputHTMLAttributes, useEffect } from 'react'
+import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -32,13 +33,27 @@ export const Input: React.VFC<InputProps> = (props) => {
         )}
         <Tooltip field={props.name} />
       </label>
-      <input
-        name={props.name}
-        data-testid={props.name}
-        {...props}
-        min={0}
-        className="form-control text-content"
-      />
+      {props.name == 'income' || props.name == 'partnerReceivingOas' ? (
+        <NumberFormat
+          name={props.name}
+          thousandSeparator={true}
+          prefix="$"
+          className="form-control text-content"
+          data-testid={props.name}
+          min={0}
+          value={props.value as string}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+        />
+      ) : (
+        <input
+          name={props.name}
+          data-testid={props.name}
+          {...props}
+          min={0}
+          className="form-control text-content"
+        />
+      )}
     </div>
   )
 }

@@ -1,18 +1,19 @@
-import { CustomSelect } from './Select'
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
+import Select from 'react-select'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
-import { Tooltip } from '../Tooltip/tooltip'
 import { Input } from './Input'
 import { Radio } from './Radio'
+import { Tooltip } from '../Tooltip/tooltip'
+import { useInternationalization } from '../Hooks'
+import { FormSelect } from './Select'
 
-// can probably use .env for this
 const API_URL = `api/calculateEligibility`
 let formCompletion = {}
 
@@ -29,7 +30,7 @@ export const ComponentFactory: React.VFC<{
 
   const router = useRouter()
   const query = router.query
-  formCompletion = { ...query }
+  formCompletion = { ...query, ...formCompletion }
 
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)
@@ -43,7 +44,6 @@ export const ComponentFactory: React.VFC<{
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
@@ -65,7 +65,7 @@ export const ComponentFactory: React.VFC<{
   const handleChange = async () => {
     const formData = retrieveFormData()
     if (!formData) return
-    const qs = buildQueryStringFromFormData(formData)
+    const qs = buildQueryStringFromFormData(formData, true)
 
     // client cannot use calculator, their income is too high
     if (validateIncome(formData.get('income') as string))
@@ -76,6 +76,11 @@ export const ComponentFactory: React.VFC<{
 
   return (
     <form name="ee-form" data-testid="ee-form" action="/eligibility">
+      {/* <input
+        type="hidden"
+        name="lang"
+        value={useInternationalization('lang')}
+      /> */}
       {formState.map((field) => {
         const content = (
           <div key={field.key}>
@@ -98,7 +103,7 @@ export const ComponentFactory: React.VFC<{
             )}
             {field.type == 'dropdown' && (
               <div className="mb-12">
-                <CustomSelect field={field} sendAPIRequest={sendAPIRequest} />
+                <FormSelect field={field} sendAPIRequest={sendAPIRequest} />
               </div>
             )}
             {(field.type == 'radio' || field.type == 'boolean') && (
@@ -198,13 +203,16 @@ export const buildQueryStringFromFormData = (
     if (value == '') {
       continue
     }
+    // remove masking from currency
+    let val = value.toString().replace('$', '').replace(',', '')
+    console.log(val)
 
     // build query string
     if (qs !== '') qs += '&'
-    qs += `${key}=${value}`
+    qs += `${key}=${val}`
 
     // update global for completion state
-    if (updateFormCompletion) formCompletion[key] = value
+    if (updateFormCompletion) formCompletion[key] = val
   }
   return qs
 }
