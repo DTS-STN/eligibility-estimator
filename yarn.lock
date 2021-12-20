@@ -3516,7 +3516,11 @@ __metadata:
     prom-client: ^14.0.1
     react: 17.0.2
     react-dom: 17.0.2
+<<<<<<< HEAD
     react-number-format: ^4.9.1
+=======
+    react-number-format: ^4.9.0
+>>>>>>> bb2c476 (Added currency masking and cleanup from form submissio nto backend)
     react-select: ^5.2.1
     swagger-ui-react: ^4.1.2
     swr: ^1.1.0
@@ -7711,15 +7715,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 "react-number-format@npm:^4.9.1":
   version: 4.9.1
   resolution: "react-number-format@npm:4.9.1"
+=======
+"react-number-format@npm:^4.9.0":
+  version: 4.9.0
+  resolution: "react-number-format@npm:4.9.0"
+>>>>>>> bb2c476 (Added currency masking and cleanup from form submissio nto backend)
   dependencies:
     prop-types: ^15.7.2
   peerDependencies:
     react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0
     react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0
+<<<<<<< HEAD
   checksum: f057e7c9b1ce7f551610fff1298413c6d1ea5a0abb0c98825da32c60ef061105d2d320300068640d1c72a4364d16485d0222765c23e436ef02fc7f56daf81e33
+=======
+  checksum: 3ed720d97a67f1ce2b135406a4fd41a65b1d1309814844a2ec11aa2e3c626ae69824be63feac5f2e630aaf282b360018989bf92dafd247b3b33c5db89bd4bcc1
+>>>>>>> bb2c476 (Added currency masking and cleanup from form submissio nto backend)
   languageName: node
   linkType: hard
 

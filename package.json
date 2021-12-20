@@ -28,7 +28,11 @@
     "prom-client": "^14.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+<<<<<<< HEAD
     "react-number-format": "^4.9.1",
+=======
+    "react-number-format": "^4.9.0",
+>>>>>>> bb2c476 (Added currency masking and cleanup from form submissio nto backend)
     "react-select": "^5.2.1",
     "swagger-ui-react": "^4.1.2",
     "swr": "^1.1.0",

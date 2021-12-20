@@ -1,6 +1,7 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
+import Select from 'react-select'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
@@ -60,7 +61,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
