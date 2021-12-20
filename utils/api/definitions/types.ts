@@ -1,4 +1,5 @@
 import {
+  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -40,4 +41,17 @@ export interface ResponseSuccess {
 export interface ResponseError {
   error: string
   detail: any
+}
+
+export interface Link {
+  url: string
+  text: string
+  order: number
+}
+
+export interface SummaryObject {
+  state: EstimationSummaryState
+  title: string
+  details: string
+  links: Link[]
 }
