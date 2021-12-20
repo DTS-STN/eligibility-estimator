@@ -1,5 +1,5 @@
-import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
-import Select, { InputActionMeta } from 'react-select'
+import { DetailedHTMLProps, SelectHTMLAttributes, useState } from 'react'
+import Select from 'react-select'
 import { FieldData, fieldDefinitions } from '../../utils/api/definitions/fields'
 import { Tooltip } from '../Tooltip/tooltip'
 import {
@@ -16,17 +16,26 @@ interface SelectProps
   sendAPIRequest: (queryString: string) => void
 }
 
+/**
+ * A form select field rendered by the component factory. Powered by `react-select`.
+ * @param props {SelectProps}
+ * @returns
+ */
 export const FormSelect: React.VFC<SelectProps> = (props) => {
   const { field, sendAPIRequest } = props
   const placeholder = (field as any)?.placeholder
   return (
     <>
-      <span className="font-semibold inline-block mb-1.5">
+      <label
+        htmlFor={props.name}
+        aria-label={props.name}
+        className="font-semibold inline-block mb-1.5"
+      >
         <span className="text-danger">* </span>
         <span className="mb-1.5 font-semibold text-content">{field.label}</span>
         <span className="text-danger font-bold ml-2">(required)</span>
         <Tooltip field={field.key} />
-      </span>
+      </label>
       <div className="w-full lg:w-80">
         <Select
           closeMenuOnScroll={false}
@@ -41,8 +50,6 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
             }),
           }}
           className="rselect"
-          isSearchable
-          isClearable
           placeholder="Select from..."
           defaultValue={
             placeholder == undefined
@@ -57,8 +64,10 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
             value: opt,
             label: opt,
           }))}
-          onChange={(newValue, _action) => {
-            if (!newValue) return
+          onChange={(newValue, action) => {
+            if (!newValue) {
+              return
+            }
 
             const formData = retrieveFormData()
             if (!formData) return
@@ -70,6 +79,8 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
 
             sendAPIRequest(queryString)
           }}
+          isSearchable
+          isClearable
         />
       </div>
     </>

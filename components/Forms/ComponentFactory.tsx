@@ -14,10 +14,7 @@ import { Tooltip } from '../Tooltip/tooltip'
 import { useInternationalization } from '../Hooks'
 import { FormSelect } from './Select'
 
-const API_URL = `api/calculateEligibility`
-let formCompletion = {}
-
-export const ComponentFactory: React.VFC<{
+interface FactoryProps {
   data: ResponseSuccess
   oas: Dispatch<BenefitResult>
   gis: Dispatch<BenefitResult>
@@ -25,7 +22,29 @@ export const ComponentFactory: React.VFC<{
   afs: Dispatch<BenefitResult>
   setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
-}> = ({ data, oas, gis, allowance, afs, selectedTabIndex, setProgress }) => {
+}
+
+/** API endpoint for eligibility*/
+const API_URL = `api/calculateEligibility`
+
+/** form completion state */
+let formCompletion = {}
+
+/**
+ * A component that will receive backend props from an API call and render the data as an interactive form.
+ * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
+ * @param props {FactoryProps}
+ * @returns
+ */
+export const ComponentFactory: React.VFC<FactoryProps> = ({
+  data,
+  oas,
+  gis,
+  allowance,
+  afs,
+  selectedTabIndex,
+  setProgress,
+}) => {
   let lastCategory = null
 
   const router = useRouter()
@@ -132,6 +151,7 @@ export const ComponentFactory: React.VFC<{
       <div className="flex flex-col md:flex-row gap-x-8 mt-20">
         <button
           type="button"
+          role="button"
           className="btn btn-default w-full md:w-40"
           onClick={(e) => router.push('/')}
         >
@@ -140,11 +160,18 @@ export const ComponentFactory: React.VFC<{
         <button
           type="reset"
           className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
+          onClick={(e) => {
+            const form: HTMLFormElement = document.querySelector(
+              "form[name='ee-form']"
+            )
+            form.reset()
+          }}
         >
           Clear
         </button>
         <button
           type="submit"
+          role="button"
           className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
           onClick={(e) => {
             handleChange()
@@ -205,7 +232,6 @@ export const buildQueryStringFromFormData = (
     }
     // remove masking from currency
     let val = value.toString().replace('$', '').replace(',', '')
-    console.log(val)
 
     // build query string
     if (qs !== '') qs += '&'
