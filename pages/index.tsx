@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Alert } from '../components/Alert'
 import { Input } from '../components/Forms/Input'
 import { Layout } from '../components/Layout'
 
 const Home: NextPage = () => {
+  const router = useRouter()
   return (
     <Layout>
       <div className="mt-18 text-content">
@@ -46,7 +48,17 @@ const Home: NextPage = () => {
         </p>
         <h2 className="h2 mt-10">Income details</h2>
       </div>
-      <form action="/eligibility" className="mb-10">
+      <form
+        className="mb-10"
+        onSubmit={(e) => {
+          e.preventDefault()
+          const input = document.querySelector(
+            'input[name="income"]'
+          ) as HTMLInputElement
+          const sanitizedValue = input.value.replace('$', '').replace(',', '')
+          router.push(`/eligibility?income=${sanitizedValue}`)
+        }}
+      >
         <Input
           type="text"
           name="income"

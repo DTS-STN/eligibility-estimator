@@ -63,6 +63,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
+          console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
@@ -92,20 +93,26 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .replace('$', '')
       .replace(',', '')
 
-    // client cannot use calculator, their income is too high
+    // validate against a client's income and if it's too high, push to the eligibility page with an error
     if (validateIncome(income)) router.push(`/eligibility?${qs}`)
-    router.push(`/eligibility?${qs}`)
 
     sendAPIRequest(qs)
   }
 
   return (
-    <form name="ee-form" data-testid="ee-form" action="/eligibility">
-      {/* <input
+    <form
+      name="ee-form"
+      data-testid="ee-form"
+      action="/eligibility"
+      onSubmit={(e) => e.preventDefault()}
+    >
+      {/* 
+      <input
         type="hidden"
         name="lang"
         value={useInternationalization('lang')}
-      /> */}
+      /> 
+      */}
       {formState.map((field) => {
         const content = (
           <div key={field.key}>
@@ -120,7 +127,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
-                  defaultValue={formCompletion[field.key]}
+                  defaultValue={query[field.key]}
                   data-category={field.category}
                   required
                 />

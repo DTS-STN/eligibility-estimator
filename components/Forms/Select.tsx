@@ -23,7 +23,7 @@ interface SelectProps
  */
 export const FormSelect: React.VFC<SelectProps> = (props) => {
   const { field, sendAPIRequest } = props
-  const placeholder = (field as any)?.placeholder
+  const defaultValue = (field as any)?.default
   return (
     <>
       <label
@@ -52,12 +52,9 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
           className="rselect"
           placeholder="Select from..."
           defaultValue={
-            placeholder == undefined
-              ? placeholder
-              : (field as any).values.map((opt) => ({
-                  value: opt,
-                  label: opt,
-                }))[0]
+            defaultValue !== undefined
+              ? { label: defaultValue, value: defaultValue }
+              : undefined
           }
           name={field.key}
           options={(field as any).values.map((opt) => ({
