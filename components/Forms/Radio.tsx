@@ -39,10 +39,10 @@ export const Radio: React.VFC<InputProps> = (props) => {
               type="radio"
               id={`${props.keyforid}-${index}`}
               name={`${props.keyforid}`}
+              value={correctForBooleans(value)}
               // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
               className="opacity-0 -ml-4"
               {...props}
-              value={correctForBooleans(value)}
             />
             <label
               htmlFor={`${props.keyforid}-${index}`}

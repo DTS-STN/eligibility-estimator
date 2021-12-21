@@ -48,7 +48,6 @@ export const Input: React.VFC<InputProps> = (props) => {
           className="form-control text-content"
           data-testid={props.name}
           min={0}
-          value={props.value as string}
           defaultValue={props.defaultValue as string}
           placeholder={props.placeholder}
           onChange={props.onChange}
