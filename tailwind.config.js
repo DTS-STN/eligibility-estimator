@@ -4,9 +4,10 @@ module.exports = {
   darkMode: false,
   theme: {
     screens: {
-      lg: '1136px',
+      lg: '1200px',
       md: '992px',
       sm: '768px',
+      xs: '320px',
     },
     fontSize: {
       // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76

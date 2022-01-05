@@ -3238,6 +3238,7 @@ __metadata:
     prom-client: ^14.0.1
     react: 17.0.2
     react-dom: 17.0.2
+    react-number-format: ^4.9.0
     react-select: ^5.2.1
     swagger-ui-react: ^4.1.2
     swr: ^1.1.0
@@ -7420,6 +7421,18 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-number-format@npm:^4.9.0":
+  version: 4.9.0
+  resolution: "react-number-format@npm:4.9.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 3ed720d97a67f1ce2b135406a4fd41a65b1d1309814844a2ec11aa2e3c626ae69824be63feac5f2e630aaf282b360018989bf92dafd247b3b33c5db89bd4bcc1
   languageName: node
   linkType: hard
 

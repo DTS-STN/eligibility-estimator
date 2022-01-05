@@ -1,22 +1,17 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
-import Select from 'react-select'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
-import { Tooltip } from '../Tooltip/tooltip'
 import { Input } from './Input'
 import { Radio } from './Radio'
+import { FormSelect } from './Select'
 
-// can probably use .env for this
-const API_URL = `api/calculateEligibility`
-let formCompletion = {}
-
-export const ComponentFactory: React.VFC<{
+interface FactoryProps {
   data: ResponseSuccess
   oas: Dispatch<BenefitResult>
   gis: Dispatch<BenefitResult>
@@ -24,12 +19,34 @@ export const ComponentFactory: React.VFC<{
   afs: Dispatch<BenefitResult>
   setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
-}> = ({ data, oas, gis, allowance, afs, selectedTabIndex, setProgress }) => {
+}
+
+/** API endpoint for eligibility*/
+const API_URL = `api/calculateEligibility`
+
+/** form completion state */
+let formCompletion = {}
+
+/**
+ * A component that will receive backend props from an API call and render the data as an interactive form.
+ * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
+ * @param props {FactoryProps}
+ * @returns
+ */
+export const ComponentFactory: React.VFC<FactoryProps> = ({
+  data,
+  oas,
+  gis,
+  allowance,
+  afs,
+  selectedTabIndex,
+  setProgress,
+}) => {
   let lastCategory = null
 
   const router = useRouter()
   const query = router.query
-  formCompletion = { ...query }
+  formCompletion = { ...query, ...formCompletion }
 
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)
@@ -65,20 +82,37 @@ export const ComponentFactory: React.VFC<{
   const handleChange = async () => {
     const formData = retrieveFormData()
     if (!formData) return
-    const qs = buildQueryStringFromFormData(formData)
+    const qs = buildQueryStringFromFormData(formData, true)
 
-    // client cannot use calculator, their income is too high
-    if (validateIncome(formData.get('income') as string))
-      router.push(`/eligibility?${qs}`)
+    const income = formData
+      .get('income')
+      .toString()
+      .replace('$', '')
+      .replace(',', '')
+
+    // validate against a client's income and if it's too high, push to the eligibility page with an error
+    if (validateIncome(income)) router.push(`/eligibility?${qs}`)
 
     sendAPIRequest(qs)
   }
 
   return (
-    <form name="ee-form" data-testid="ee-form" action="/eligibility">
+    <form
+      name="ee-form"
+      data-testid="ee-form"
+      action="/eligibility"
+      onSubmit={(e) => e.preventDefault()}
+    >
+      {/* 
+      <input
+        type="hidden"
+        name="lang"
+        value={useInternationalization('lang')}
+      /> 
+      */}
       {formState.map((field) => {
         const content = (
-          <div key={field.key} className="">
+          <div key={field.key}>
             {field.category != lastCategory && (
               <h2 className="h2 mb-8">{field.category}</h2>
             )}
@@ -90,7 +124,7 @@ export const ComponentFactory: React.VFC<{
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
-                  defaultValue={formCompletion[field.key]}
+                  defaultValue={query[field.key]}
                   data-category={field.category}
                   required
                 />
@@ -98,55 +132,7 @@ export const ComponentFactory: React.VFC<{
             )}
             {field.type == 'dropdown' && (
               <div className="mb-12">
-                <span className="text-danger">* </span>
-                <span className="font-semibold inline-block mb-1.5">
-                  <span className="mb-1.5 font-semibold text-content">
-                    {field.label}
-                  </span>
-                  <span className="text-danger font-bold ml-2">(required)</span>
-                  <Tooltip field={field.key} />
-                </span>
-                <Select
-                  styles={{
-                    container: (styles) => ({
-                      ...styles,
-                      width: '320px',
-                      fontSize: '20px',
-                    }),
-                    input: (styles) => ({
-                      ...styles,
-                      boxShadow: 'none',
-                    }),
-                  }}
-                  className="rselect"
-                  isSearchable
-                  isClearable
-                  placeholder="Select from..."
-                  defaultValue={
-                    field.values.map((opt) => ({
-                      value: opt,
-                      label: opt,
-                    }))[0]
-                  }
-                  name={field.key}
-                  options={field.values.map((opt) => ({
-                    value: opt,
-                    label: opt,
-                  }))}
-                  onChange={(newValue, _action) => {
-                    if (!newValue) return
-
-                    const formData = retrieveFormData()
-                    if (!formData) return
-
-                    // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
-                    // This just stuff the form with the correct information, overwriting the internal bad state.
-                    formData.set(field.key, newValue.value)
-                    const queryString = buildQueryStringFromFormData(formData)
-
-                    sendAPIRequest(queryString)
-                  }}
-                />
+                <FormSelect field={field} sendAPIRequest={sendAPIRequest} />
               </div>
             )}
             {(field.type == 'radio' || field.type == 'boolean') && (
@@ -172,20 +158,31 @@ export const ComponentFactory: React.VFC<{
         return content
       })}
 
-      <div className="flex flex-row gap-x-8 mt-20">
+      <div className="flex flex-col md:flex-row gap-x-8 mt-20">
         <button
           type="button"
-          className="btn btn-default w-40"
+          role="button"
+          className="btn btn-default w-full md:w-40"
           onClick={(e) => router.push('/')}
         >
           Back
         </button>
-        <button type="reset" className="btn btn-default w-40">
+        <button
+          type="reset"
+          className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
+          onClick={(e) => {
+            const form: HTMLFormElement = document.querySelector(
+              "form[name='ee-form']"
+            )
+            form.reset()
+          }}
+        >
           Clear
         </button>
         <button
           type="submit"
-          className="btn btn-primary w-40"
+          role="button"
+          className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
           onClick={(e) => {
             handleChange()
             selectedTabIndex(1)
@@ -203,7 +200,7 @@ export const ComponentFactory: React.VFC<{
  *
  * @param fields The fields retrieved from the API
  * @param formCompletion the global form completion state
- * @param setProgress a Dispathc that will set the progress bar's state
+ * @param setProgress a Dispatch that will set the progress bar's state
  */
 const checkCompletion = (
   fields: FieldData[],
@@ -234,7 +231,7 @@ const checkCompletion = (
  * @param updateFormCompletion optionally update global form completion state
  * @returns
  */
-const buildQueryStringFromFormData = (
+export const buildQueryStringFromFormData = (
   formData: FormData,
   updateFormCompletion = true
 ) => {
@@ -243,13 +240,15 @@ const buildQueryStringFromFormData = (
     if (value == '') {
       continue
     }
+    // remove masking from currency
+    let val = value.toString().replace('$', '').replace(',', '')
 
     // build query string
     if (qs !== '') qs += '&'
-    qs += `${key}=${value}`
+    qs += `${key}=${val}`
 
     // update global for completion state
-    if (updateFormCompletion) formCompletion[key] = value
+    if (updateFormCompletion) formCompletion[key] = val
   }
   return qs
 }
@@ -260,7 +259,7 @@ const buildQueryStringFromFormData = (
  * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
  * @returns the eligibility estimator's form data
  */
-const retrieveFormData = (formName = 'form[name="ee-form"]') => {
+export const retrieveFormData = (formName = 'form[name="ee-form"]') => {
   const form: HTMLFormElement = document.querySelector(formName)
   if (!form) return
 
