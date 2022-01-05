@@ -1,6 +1,7 @@
 // noinspection DuplicatedCode
 
 import fs from 'fs'
+import Joi from 'joi'
 import YAML from 'yaml'
 import {
   LegalStatus,
@@ -9,7 +10,16 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
-import { FieldKey } from '../../../utils/api/definitions/fields'
+import {
+  fieldDefinitions,
+  FieldKey,
+} from '../../../utils/api/definitions/fields'
+import {
+  AfsSchema,
+  AllowanceSchema,
+  GisSchema,
+  OasSchema,
+} from '../../../utils/api/definitions/schemas'
 import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
@@ -17,6 +27,46 @@ describe('code checks', () => {
   it('produces a list of 196 countries', async () => {
     expect(ALL_COUNTRIES.length).toEqual(195)
     expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  })
+  it('produces a list of fields with unique ordering', async () => {
+    const ordersOrig = []
+    for (const key in fieldDefinitions) {
+      ordersOrig.push(fieldDefinitions[key].order)
+    }
+    const ordersUnique = [...new Set(ordersOrig)]
+    expect(ordersUnique).toEqual(ordersOrig)
+  })
+})
+
+describe('schema checks', () => {
+  function getJoiKeys(schema: Joi.ObjectSchema) {
+    // @ts-ignore
+    const joiEntries = schema._ids._byKey.entries()
+    const joiKeys = []
+    for (const joiEntry of joiEntries) joiKeys.push(joiEntry[0])
+    return joiKeys
+  }
+
+  it('OAS: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(OasSchema)
+    const enumKeys = Object.values(FieldKey)
+    expect(joiKeys).toEqual(enumKeys)
+  })
+  it('GIS: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(GisSchema)
+    const enumKeys: string[] = Object.values(FieldKey)
+    enumKeys.push('_oasEligible')
+    expect(joiKeys).toEqual(enumKeys)
+  })
+  it('Allowance: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(AllowanceSchema)
+    const enumKeys = Object.values(FieldKey)
+    expect(joiKeys).toEqual(enumKeys)
+  })
+  it('AFS: matches between field definitions and schema', async () => {
+    const joiKeys = getJoiKeys(AfsSchema)
+    const enumKeys = Object.values(FieldKey)
+    expect(joiKeys).toEqual(enumKeys)
   })
 })
 
@@ -47,6 +97,17 @@ describe('openapi checks', () => {
     expect(openapi.components.schemas.ResultReason.enum).toEqual(
       Object.values(ResultReason)
     )
+  })
+  it('matches parameters', async () => {
+    const openApiParams = Object.keys(openapi.components.parameters)
+    const enumKeys = Object.values(FieldKey)
+    expect(openApiParams).toEqual(Object.values(enumKeys))
+    const openApiPathParams =
+      openapi.paths['/calculateEligibility'].get.parameters
+    const openApiPathParamsStripped = openApiPathParams.map((x) =>
+      x['$ref'].replace('#/components/parameters/', '')
+    )
+    expect(openApiPathParamsStripped).toEqual(Object.values(enumKeys))
   })
 })
 

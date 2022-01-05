@@ -8,8 +8,8 @@ export enum FieldKey {
   LEGAL_STATUS = 'legalStatus',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   MARITAL_STATUS = 'maritalStatus',
-  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
   PARTNER_INCOME = 'partnerIncome',
+  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
 }
 
@@ -91,7 +91,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     label:
-      'Have you lived in a country with an established social security agreement before?',
+      'Have you ever lived in a country with an established social security agreement?',
     category: FieldCategory.LEGAL_STATUS,
     order: 9,
     type: FieldType.BOOLEAN,

@@ -61,8 +61,8 @@ components:
           - legalStatus
           - yearsInCanadaSince18
           - maritalStatus
-          - partnerReceivingOas
           - partnerIncome
+          - partnerReceivingOas
           - everLivedSocialCountry
 
     ResultKey:
