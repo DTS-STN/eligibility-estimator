@@ -1,7 +1,6 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
-import Select from 'react-select'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
@@ -10,8 +9,6 @@ import type {
 import { validateIncome } from '../../utils/api/helpers/validator'
 import { Input } from './Input'
 import { Radio } from './Radio'
-import { Tooltip } from '../Tooltip/tooltip'
-import { useInternationalization } from '../Hooks'
 import { FormSelect } from './Select'
 
 interface FactoryProps {
@@ -203,7 +200,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
  *
  * @param fields The fields retrieved from the API
  * @param formCompletion the global form completion state
- * @param setProgress a Dispathc that will set the progress bar's state
+ * @param setProgress a Dispatch that will set the progress bar's state
  */
 const checkCompletion = (
   fields: FieldData[],
