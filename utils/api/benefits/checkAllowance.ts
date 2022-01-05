@@ -12,11 +12,12 @@ import { validateRequestForBenefit } from '../helpers/validator'
 import gisTables from '../scrapers/output'
 import { OutputItemAllowance } from '../scrapers/partneredAllowanceScraper'
 
-const lang = 'en'
-
 export default function checkAllowance(
   params: CalculationInput
 ): BenefitResult {
+  // parse language
+  const lang = params._french ? 'fr' : 'en'
+
   // validation
   const { result, value } = validateRequestForBenefit(AllowanceSchema, params)
   // if the validation was able to return an error result, return it

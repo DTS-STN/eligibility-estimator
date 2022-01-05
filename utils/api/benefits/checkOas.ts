@@ -9,9 +9,10 @@ import { OasSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
 
-const lang = 'en'
-
 export default function checkOas(params: CalculationInput): BenefitResult {
+  // parse language
+  const lang = params._french ? 'fr' : 'en'
+
   // validation
   const { result, value } = validateRequestForBenefit(OasSchema, params)
   // if the validation was able to return an error result, return it

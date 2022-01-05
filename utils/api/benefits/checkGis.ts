@@ -12,9 +12,10 @@ import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
 import checkOas from './checkOas'
 
-const lang = 'en'
-
 export default function checkGis(params: CalculationInput): BenefitResult {
+  // parse language
+  const lang = params._french ? 'fr' : 'en'
+
   // include OAS result
   const oasResult = checkOas(params)
   const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }

@@ -20,6 +20,7 @@ export interface CalculationInput {
   partnerReceivingOas?: boolean
   everLivedSocialCountry?: boolean
   _oasEligible?: ResultKey
+  _french?: boolean
 }
 
 export interface BenefitResult {

@@ -57,7 +57,7 @@ export default function handler(
     console.log('Results: ', results)
 
     const visibleFields: Array<FieldKey> = buildVisibleFields([
-      Object.keys(params) as Array<FieldKey>,
+      Object.keys(params),
       results.oas.missingFields,
       results.gis.missingFields,
       results.allowance.missingFields,

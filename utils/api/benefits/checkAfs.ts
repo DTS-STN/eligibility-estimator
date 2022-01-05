@@ -12,8 +12,10 @@ import { validateRequestForBenefit } from '../helpers/validator'
 import gisTables from '../scrapers/output'
 import { OutputItemAfs } from '../scrapers/partneredSurvivorScraper'
 
-const lang = 'en'
 export default function checkAfs(params: CalculationInput): BenefitResult {
+  // parse language
+  const lang = params._french ? 'fr' : 'en'
+
   // validation
   const { result, value } = validateRequestForBenefit(AfsSchema, params)
   // if the validation was able to return an error result, return it
