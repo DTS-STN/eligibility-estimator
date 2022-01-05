@@ -29,11 +29,19 @@ export interface BenefitResult {
   missingFields?: Array<FieldKey>
 }
 
+export interface BenefitResultObject {
+  oas: BenefitResult
+  gis: BenefitResult
+  allowance: BenefitResult
+  afs: BenefitResult
+}
+
 export interface ResponseSuccess {
   oas: BenefitResult
   gis: BenefitResult
   allowance: BenefitResult
   afs: BenefitResult
+  summary: SummaryObject
   visibleFields: Array<FieldKey>
   fieldData: Array<FieldData>
 }

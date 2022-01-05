@@ -8,6 +8,7 @@ import { ResultKey } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import { RequestSchema } from '../../utils/api/definitions/schemas'
 import {
+  BenefitResultObject,
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
@@ -16,6 +17,7 @@ import {
   buildFieldData,
   buildVisibleFields,
 } from '../../utils/api/helpers/fieldUtils'
+import { SummaryBuilder } from '../../utils/api/helpers/summaryUtils'
 
 export default function handler(
   req: NextApiRequest,
@@ -46,34 +48,31 @@ export default function handler(
     console.log('Passed validation.')
 
     // processing
-    const resultOas = checkOas(params)
-    console.log('OAS Result: ', resultOas)
-
-    const resultGis = checkGis(params, resultOas)
-    console.log('GIS Result: ', resultGis)
-
-    const resultAllowance = checkAllowance(params)
-    console.log('Allowance Result: ', resultAllowance)
-
-    const resultAfs = checkAfs(params)
-    console.log('Allowance for Survivor Result: ', resultAfs)
+    const results: BenefitResultObject = {
+      oas: checkOas(params),
+      gis: checkGis(params),
+      allowance: checkAllowance(params),
+      afs: checkAfs(params),
+    }
+    console.log('Results: ', results)
 
     const visibleFields: Array<FieldKey> = buildVisibleFields([
       Object.keys(params) as Array<FieldKey>,
-      resultOas.missingFields,
-      resultGis.missingFields,
-      resultAllowance.missingFields,
-      resultAfs.missingFields,
+      results.oas.missingFields,
+      results.gis.missingFields,
+      results.allowance.missingFields,
+      results.afs.missingFields,
     ])
-
     const fieldData: Array<FieldData> = buildFieldData(visibleFields)
+    const summary = SummaryBuilder.buildSummaryObject(results)
 
     // completion
     res.status(200).json({
-      oas: resultOas,
-      gis: resultGis,
-      allowance: resultAllowance,
-      afs: resultAfs,
+      oas: results.oas,
+      gis: results.gis,
+      allowance: results.allowance,
+      afs: results.afs,
+      summary,
       visibleFields,
       fieldData,
     })
