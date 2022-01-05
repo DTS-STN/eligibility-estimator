@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useEffect } from 'react'
+import { InputHTMLAttributes, useEffect, WheelEvent } from 'react'
 import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 
@@ -15,11 +15,11 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Input: React.VFC<InputProps> = (props) => {
-  // only need to ru nthis once at component render, so no need for deps
+  // only need to run this once at component render, so no need for deps
   useEffect(() => {
-    // blur the input element on scroll instead of changing the value!
+    // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
     document.addEventListener('wheel', function (event) {
-      const el = document.activeElement as any
+      const el = document.activeElement as HTMLInputElement
       if (el?.type === 'number') {
         el.blur()
       }
