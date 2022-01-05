@@ -5,6 +5,18 @@
     "allowance": "Allowance",
     "afs": "Allowance for Survivor"
   },
+  "reason": {
+    "eligible": "You meet the criteria",
+    "age": "Age does not meet requirement",
+    "yearsInCanada": "Not enough years in Canada",
+    "livingCountry": "Not living in Canada",
+    "legalStatus": "Legal status does not meet requirement",
+    "socialAgreement": "Not living in a country with a social agreement",
+    "moreInfo": "Need more information...",
+    "oas": "Not eligible for OAS",
+    "income": "Income too high",
+    "marital": "Your marital status does not meet the requirement"
+  },
   "detail": {
     "eligible": "Based on the information provided, you are likely eligible for this benefit.",
     "eligibleWhen60ApplyNow": "You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.",
