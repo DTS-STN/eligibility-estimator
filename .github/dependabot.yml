@@ -8,3 +8,4 @@ updates:
     reviewers:
       - JeremyKennedy
       - KhalidAdan
+    open-pull-requests-limit: 0
