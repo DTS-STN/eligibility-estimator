@@ -1,3 +1,4 @@
+import { apiDict } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
@@ -11,6 +12,7 @@ import { validateRequestForBenefit } from '../helpers/validator'
 import gisTables from '../scrapers/output'
 import { OutputItemAfs } from '../scrapers/partneredSurvivorScraper'
 
+const lang = 'en'
 export default function checkAfs(params: CalculationInput): BenefitResult {
   // validation
   const { result, value } = validateRequestForBenefit(AfsSchema, params)
@@ -40,31 +42,28 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason: ResultReason.NONE,
-        detail:
-          'Based on the information provided, you are likely eligible for Allowance for Survivor!',
+        detail: apiDict[lang].detail.eligible,
       }
     } else if (value.age == 59) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail:
-          'You will likely be eligible when you turn 60, however you may be able to apply now, please contact Service Canada for more information.',
+        detail: apiDict[lang].detail.eligibleWhen60ApplyNow,
       }
     } else if (underAgeReq) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: 'You will likely be eligible when you turn 60.',
+        detail: apiDict[lang].detail.eligibleWhen60,
       }
     } else {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail:
-          'You must be between 60 and 64 to be eligible for Allowance for Survivor.',
+        detail: apiDict[lang].detail.mustBe60to64,
       }
     }
   } else if (!meetsReqIncome) {
@@ -72,24 +71,21 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail:
-        'Your income is too high to be eligible for Allowance for Survivor.',
+      detail: apiDict[lang].detail.mustMeetIncomeReq,
     }
   } else if (overAgeReq) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.AGE,
-      detail:
-        'You must be between 60 and 64 to be eligible for Allowance for Survivor.',
+      detail: apiDict[lang].detail.mustBe60to64,
     }
   } else if (!meetsReqMarital) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.MARITAL,
-      detail:
-        'You must be a surviving partner or widowed to be eligible for Allowance for Survivor.',
+      detail: apiDict[lang].detail.mustBeWidowed,
     }
   } else if (!meetsReqYears) {
     if (
@@ -101,24 +97,21 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.YEARS_IN_CANADA,
-          detail:
-            "Depending on Canada's agreement with this country, you may be eligible to receive Allowance for Survivor. You are encouraged to contact Service Canada.",
+          detail: apiDict[lang].detail.dependingOnAgreement,
         }
       } else if (underAgeReq) {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail:
-            "You may be eligible when you turn 60, depending on Canada's agreement with this country. You are encouraged to contact Service Canada.",
+          detail: apiDict[lang].detail.dependingOnAgreementWhen60,
         }
       } else {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail:
-            'You must be between 60 and 64 to be eligible for Allowance for Survivor.',
+          detail: apiDict[lang].detail.mustBe60to64,
         }
       }
     } else {
@@ -126,7 +119,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.YEARS_IN_CANADA,
-        detail: `You currently do not appear to be eligible for the Allowance for Survivor as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.`,
+        detail: apiDict[lang].detail.mustMeetYearReq,
       }
     }
   } else if (!meetsReqLegal) {
@@ -135,24 +128,21 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail:
-          'You may be eligible when you turn 60, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+        detail: apiDict[lang].detail.dependingOnLegalWhen60,
       }
     } else if (value.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail:
-          'You may be eligible for Allowance for Survivor, please contact Service Canada to confirm.',
+        detail: apiDict[lang].detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail:
-          'You may be eligible for Allowance for Survivor, and should contact Service Canada to confirm due to your legal status in Canada.',
+        detail: apiDict[lang].detail.dependingOnLegal,
       }
     }
   } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {
@@ -160,8 +150,7 @@ export default function checkAfs(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.SOCIAL_AGREEMENT,
-      detail:
-        'You currently do not appear to be eligible for the Allowance for Survivor as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.',
+      detail: apiDict[lang].detail.ineligibleYearsOrCountry,
     }
   }
   // fallback

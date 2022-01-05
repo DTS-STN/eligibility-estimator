@@ -1,0 +1,33 @@
+{
+  "benefit": {
+    "oas": "Old Age Security",
+    "gis": "Guaranteed Income Supplement",
+    "allowance": "Allowance",
+    "afs": "Allowance for Survivor"
+  },
+  "detail": {
+    "eligible": "Based on the information provided, you are likely eligible for this benefit.",
+    "eligibleWhen60ApplyNow": "You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.",
+    "eligibleWhen65ApplyNow": "You will likely be eligible when you turn 65, however you may be able to apply now. Please contact Service Canada for more information.",
+    "eligibleWhen60": "You will likely be eligible when you turn 60.",
+    "eligibleWhen65": "You will likely be eligible when you turn 65.",
+    "mustBe60to64": "You must be between the ages of 60 and 64 to be eligible for this benefit.",
+    "mustBeInCanada": "You need to live in Canada to be eligible for this benefit.",
+    "mustBeOasEligible": "You need to be eligible for OAS to be eligible for this benefit.",
+    "mustCompleteOasCheck": "You need to complete the OAS eligibility check first.",
+    "mustBeWidowed": "You must be a surviving partner or widowed to be eligible for this benefit.",
+    "mustBePartnered": "You must be common-law or married to be eligible for this benefit.",
+    "mustHavePartnerWithOas": "Your partner must be receiving OAS to be eligible for this benefit.",
+    "mustMeetIncomeReq": "Your income is too high to be eligible for this benefit.",
+    "mustMeetYearReq": "You have not lived in Canada for the required number of years to be eligible for this benefit.",
+    "ineligibleYearsOrCountry": "You currently do not appear to be eligible for this benefit as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.",
+    "conditional": "You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.",
+    "dependingOnAgreement": "You may be eligible to receive this benefit, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+    "dependingOnAgreementWhen60": "You may be eligible to receive this benefit when you turn 60, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+    "dependingOnAgreementWhen65": "You may be eligible to receive this benefit when you turn 65, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+    "dependingOnLegal": "You may be eligible to receive this benefit, depending on your legal status in Canada. You are encouraged to contact Service Canada.",
+    "dependingOnLegalSponsored": "You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.",
+    "dependingOnLegalWhen60": "You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. You are encouraged to contact Service Canada.",
+    "dependingOnLegalWhen65": "You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. You are encouraged to contact Service Canada."
+  }
+}
