@@ -111,4 +111,7 @@
   td {
     @apply p-2;
   }
+  .question-link a {
+    @apply text-default-text underline font-semibold;
+  }
 }

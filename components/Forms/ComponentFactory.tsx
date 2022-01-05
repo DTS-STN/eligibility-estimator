@@ -72,6 +72,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
           checkCompletion(data.fieldData, formCompletion, setProgress)
         } else {
           // handle error - validate per field once validation designs are complete
+          console.log(data)
         }
       })
   }
@@ -186,6 +187,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
           onClick={(e) => {
             handleChange()
             selectedTabIndex(1)
+
+            // TODO: validate against empty inputs in the form
           }}
         >
           Estimate
