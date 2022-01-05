@@ -1659,12 +1659,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/swagger-ui-react@npm:^3.35.3":
-  version: 3.35.3
-  resolution: "@types/swagger-ui-react@npm:3.35.3"
+"@types/swagger-ui-react@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@types/swagger-ui-react@npm:4.1.1"
   dependencies:
     "@types/react": "*"
-  checksum: d26e1f8c5e03774d2b363448b15cb28ab00ca32acc8679f04538135e392bf5c21584443623630a0a91005a54e7eb05a77c024d98e9df95a9a752942c010fdd38
+  checksum: 45888b93de441be5f9b3bb2acb8cdbc2f0dc9b88be3120bc5d1b8e9a2b8c37f66adb1b25a833e26983d91892c71bb6d2e92e3d4df3ad329394720be4c44e2924
   languageName: node
   linkType: hard
 
@@ -3496,7 +3496,7 @@ __metadata:
     "@testing-library/react": ^12.0.0
     "@types/lodash": ^4.14.177
     "@types/react": ^17.0.38
-    "@types/swagger-ui-react": ^3.35.3
+    "@types/swagger-ui-react": ^4.1.1
     autoprefixer: ^10.4.1
     axe-core: ^4.3.3
     babel-jest: ^27.1.0
