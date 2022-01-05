@@ -91,7 +91,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     label:
-      'Have you lived in a country with an established social security agreement before?',
+      'Have you ever lived in a country with an established social security agreement?',
     category: FieldCategory.LEGAL_STATUS,
     order: 9,
     type: FieldType.BOOLEAN,
