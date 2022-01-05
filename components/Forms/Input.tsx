@@ -5,7 +5,6 @@ import { Tooltip } from '../Tooltip/tooltip'
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
-  extraClasses?: string
 }
 
 /**
@@ -27,12 +26,12 @@ export const Input: React.VFC<InputProps> = (props) => {
   }, [])
 
   return (
-    <div className={`${props.extraClasses}`}>
+    <>
       <label
         htmlFor={props.name}
         aria-label={props.name}
         data-testid="input-label"
-        className="text-content font-bold mb-12"
+        className="text-content font-bold"
       >
         {props.required && <span className="text-danger">*</span>} {props.label}
         {props.required && (
@@ -61,6 +60,6 @@ export const Input: React.VFC<InputProps> = (props) => {
           className="form-control text-content"
         />
       )}
-    </div>
+    </>
   )
 }

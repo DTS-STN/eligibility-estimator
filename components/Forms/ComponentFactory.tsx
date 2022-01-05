@@ -112,13 +112,23 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       /> 
       */}
       {formState.map((field) => {
+        const isChildQuestion =
+          field.category == ('Partner Details' || 'Social Agreement Countries')
+            ? true
+            : false
+
         const content = (
-          <div key={field.key}>
+          <div
+            key={field.key}
+            className={isChildQuestion ? `bg-emphasis px-10` : ``}
+          >
             {field.category != lastCategory && (
-              <h2 className="h2 mb-8">{field.category}</h2>
+              <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
+                {field.category}
+              </h2>
             )}
             {field.type == 'number' && (
-              <div className="mb-10">
+              <div className="pb-8">
                 <Input
                   type={field.type}
                   name={field.key}
@@ -132,12 +142,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
               </div>
             )}
             {field.type == 'dropdown' && (
-              <div className="mb-12">
+              <div className="pb-8">
                 <FormSelect field={field} sendAPIRequest={sendAPIRequest} />
               </div>
             )}
             {(field.type == 'radio' || field.type == 'boolean') && (
-              <div className="mb-12">
+              <div className="pb-8">
                 <Radio
                   name={field.key}
                   values={

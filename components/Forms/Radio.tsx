@@ -19,7 +19,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
 
   return (
     <>
-      <div className="radio mb-8" data-category={props.category}>
+      <div className="radio" data-category={props.category}>
         <label
           htmlFor={props.name}
           aria-label={props.name}
