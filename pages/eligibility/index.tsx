@@ -12,6 +12,7 @@ import { Input } from '../../components/Forms/Input'
 import { Layout } from '../../components/Layout'
 import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 import ProgressBar from '../../components/ProgressBar'
+import { Tooltip } from '../../components/Tooltip/tooltip'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
@@ -125,14 +126,9 @@ const Eligibility: NextPage = () => {
               />
             )}
             {incomeTooHigh && (
-              <Alert title="Likely not eligible for Benefits" type="danger">
+              <Alert title="Annual net income" type="danger">
                 You currently do not appear to be eligible for the OAS pension
-                because your annual income is higher than 129,757 CAD. Please
-                contact{' '}
-                <Link href="#" passHref>
-                  <a className="text-default-text underline">Service Canada</a>
-                </Link>{' '}
-                for more information.
+                because your annual income is higher than 129,757 CAD .
               </Alert>
             )}
             <div className="md:container grid grid-cols-1 md:grid-cols-3 gap-10 mt-14">
@@ -140,15 +136,21 @@ const Eligibility: NextPage = () => {
                 {incomeTooHigh ? (
                   <div>
                     <h2 className="h2 mb-8">Income Details</h2>
-                    <Input
-                      type="text"
-                      name="income"
-                      label="What is your current annual net income in Canadian Dollars"
-                      value={query.income}
-                      extraClasses="mt-6 mb-10"
-                      disabled
-                      required
-                    />
+                    <label
+                      htmlFor=""
+                      aria-label=""
+                      data-testid="input-label"
+                      className="text-content font-bold mb-12"
+                    >
+                      <span className="text-danger">*</span>
+                      What is your current annual net income in Canadian
+                      dollars?
+                      <span className="text-danger font-bold ml-2">
+                        (required)
+                      </span>
+                      <Tooltip field={'income'} />
+                    </label>
+                    <p>${query.income}</p>
                     <Link href="/" passHref>
                       <a className="btn btn-default px-8 py-3">Back</a>
                     </Link>

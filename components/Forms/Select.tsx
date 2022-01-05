@@ -36,7 +36,7 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
         <span className="text-danger font-bold ml-2">(required)</span>
         <Tooltip field={field.key} />
       </label>
-      <div className="w-full lg:w-80">
+      <div className="w-full md:w-80">
         <Select
           closeMenuOnScroll={false}
           styles={{
@@ -70,7 +70,7 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
             if (!formData) return
 
             // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
-            //This just stuff the form with the correct information, pverwriting the internal bad state.
+            //This just stuff the form with the correct information, overwriting the internal bad state.
             formData.set(field.key, newValue.value)
             const queryString = buildQueryStringFromFormData(formData, true)
 
