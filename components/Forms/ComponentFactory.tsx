@@ -1,7 +1,6 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
-import Select from 'react-select'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
