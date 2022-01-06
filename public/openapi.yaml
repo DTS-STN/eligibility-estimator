@@ -175,12 +175,12 @@ components:
                   reason: You meet the criteria
                   detail: Based on the information provided, you are eligible for GIS!
                 allowance:
-                  eligibilityResult: Ineligible!
+                  eligibilityResult: Not eligible!
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance.
                 afs:
-                  eligibilityResult: Ineligible!
+                  eligibilityResult: Not eligible!
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -229,22 +229,22 @@ components:
             'Ineligible case':
               value:
                 oas:
-                  eligibilityResult: Ineligible!
+                  eligibilityResult: Not eligible!
                   entitlementResult: 0
                   reason: Income too high
                   detail: Your income is too high to be eligible for OAS.
                 gis:
-                  eligibilityResult: Ineligible!
+                  eligibilityResult: Not eligible!
                   entitlementResult: 0
                   reason: Not eligible for OAS
                   detail: You need to be eligible for OAS to be eligible for GIS.
                 allowance:
-                  eligibilityResult: Ineligible!
+                  eligibilityResult: Not eligible!
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance.
                 afs:
-                  eligibilityResult: Ineligible!
+                  eligibilityResult: Not eligible!
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -334,15 +334,15 @@ components:
       in: query
       description: The current legal status of the client.
       required: false
-      example: Canadian citizen
+      example: canadianCitizen
       schema:
         type: string
         enum:
-          - Canadian citizen
-          - Permanent resident or landed immigrant (non-sponsored)
-          - Permanent resident or landed immigrant (sponsored)
-          - Indian status or status card
-          - 'Other (Example: Temporary resident, student, temporary worker, etc.)'
+          - canadianCitizen
+          - permanentResident
+          - sponsored
+          - indianStatus
+          - other
         description: The current legal status of the client.
       allowEmptyValue: false
 
@@ -381,16 +381,16 @@ components:
       in: query
       description: The current marital status of the client.
       required: false
-      example: Married
+      example: married
       schema:
         type: string
         enum:
-          - Single
-          - Married
-          - Common-law
-          - Widowed
-          - Divorced
-          - Separated
+          - single
+          - married
+          - commonLaw
+          - widowed
+          - divorced
+          - separated
         description: The current marital status of the client.
       allowEmptyValue: false
 

@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2021-12-20T23:00:18.475Z
+__export_date: 2022-01-06T20:34:45.148Z
 __export_source: insomnia.desktop.app:v2021.7.2
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1640040712815
+    modified: 1641501262624
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -15,35 +15,39 @@ resources:
     parameters:
       - name: income
         value: '10000'
-        id: pair_fb0b82ef746c4ce4b929e530cfa3d1f2
+        id: pair_edc3ce39c6db465b8b80c813dca19a6e
       - name: age
         value: '65'
-        id: pair_6f4181f755e64285aaa60142e3ae1e05
+        id: pair_84541f873d914d749d6cf112c4cc16eb
       - name: maritalStatus
-        value: Married
-        id: pair_51639d9d4bf34c258dfa9f98b6c03afb
+        value: married
+        id: pair_0f25d73846b145069244d10be7499176
       - name: partnerIncome
         value: '10000'
-        id: pair_f0dcd97315bf4beba2ddb1ce4ebceabc
+        id: pair_dce82b2f938f4959a5356d227087ec39
       - name: partnerReceivingOas
         value: 'true'
-        id: pair_47e7162d84e041ef8186fc3b096fa9b4
+        id: pair_f1f80cf306204822bc87b185249e74aa
       - name: livingCountry
         value: Canada
-        id: pair_0368845da6f94c46926b6d410bce3053
+        id: pair_9418a2180810412e80138d6f36c766c3
       - name: legalStatus
-        value: Canadian citizen
-        id: pair_0dcea805fe1340d0bac2e95a33dfb2f7
+        value: canadianCitizen
+        id: pair_e6b9468ca4f24ef5999728073314b1a9
       - name: legalStatusOther
         value: some legal status
-        id: pair_e896a6f6b90e424e99ac48908a3a1f6e
-        disabled: false
+        id: pair_3f2d6e3e23984613b935281338540dad
       - name: yearsInCanadaSince18
         value: '40'
-        id: pair_e9f8ae75b3d44a33816d6ddfafaa9df2
+        id: pair_d636895c2d134084ab85ab3d662c4ae8
       - name: everLivedSocialCountry
         value: 'true'
-        id: pair_5cf929dd50334c0e9922afc644e558b7
+        id: pair_7b72b564cc8945c09ff81178a6443c3e
+      - id: pair_eb948386202649eba09db6d35b8a81a7
+        name: _language
+        value: FR
+        description: ''
+        disabled: true
     headers: []
     authentication: {}
     metaSortKey: -1637965624524
@@ -86,7 +90,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1640041201374
+    modified: 1641501246002
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -427,15 +431,15 @@ resources:
             in: query
             description: The current legal status of the client.
             required: false
-            example: Canadian citizen
+            example: canadianCitizen
             schema:
               type: string
               enum:
-                - Canadian citizen
-                - Permanent resident or landed immigrant (non-sponsored)
-                - Permanent resident or landed immigrant (sponsored)
-                - Indian status or status card
-                - 'Other (Example: Temporary resident, student, temporary worker, etc.)'
+                - canadianCitizen
+                - permanentResident
+                - sponsored
+                - indianStatus
+                - other
               description: The current legal status of the client.
             allowEmptyValue: false
 
@@ -474,16 +478,16 @@ resources:
             in: query
             description: The current marital status of the client.
             required: false
-            example: Married
+            example: married
             schema:
               type: string
               enum:
-                - Single
-                - Married
-                - Common-law
-                - Widowed
-                - Divorced
-                - Separated
+                - single
+                - married
+                - commonLaw
+                - widowed
+                - divorced
+                - separated
               description: The current marital status of the client.
             allowEmptyValue: false
 
@@ -533,7 +537,8 @@ resources:
     created: 1637342147321
     name: Prod env
     data:
-      scheme: https
+      scheme:
+        - http
       base_path: /api
       host: eligibility-estimator.vercel.app
     dataPropertyOrder:
