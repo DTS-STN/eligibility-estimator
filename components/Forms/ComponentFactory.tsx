@@ -61,7 +61,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data)
+          //console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
@@ -110,6 +110,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       data-testid="ee-form"
       action="/eligibility"
       onSubmit={(e) => e.preventDefault()}
+      noValidate
     >
       {/* 
       <input
@@ -212,11 +213,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
 
             // validate against empty inputs in the form and setError
             const emptyFields = validateAgainstEmptyFormFields(
-              formCompletion,
-              retrieveFormData()
+              formState,
+              formCompletion
             )
 
-            if (!emptyFields) {
+            if (Object.keys(emptyFields).length === 0) {
               selectedTabIndex(1)
             } else {
               setError(emptyFields)
@@ -232,19 +233,24 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
 
 /**
  *
+ * @param formElements the field data array from the current form
  * @param formCompletion the global form completion state
- * @param formData
  * @returns true if the form is valid, false if it has empty fields
  */
 const validateAgainstEmptyFormFields = (
-  formCompletion: Record<string, any>,
-  formData: FormData
+  formElements: FieldData[],
+  formCompletion: Record<string, any>
 ): Record<string, string> => {
-  console.log(formData, formCompletion)
-  return {
-    income: 'This field is required',
-    livingCountry: 'This field is required',
+  const emptyFields: Record<string, string> = {}
+
+  // find the empty form fields and create the expected shape
+  for (const element of formElements) {
+    if (formCompletion[element.key] === undefined) {
+      emptyFields[element.key] = 'This field is required'
+    }
   }
+
+  return emptyFields
 }
 
 /**
@@ -316,4 +322,17 @@ export const retrieveFormData = (formName = 'form[name="ee-form"]') => {
   if (!form) return
 
   return new FormData(form)
+}
+
+/**
+ * Retrieves a form's internal representation of itself.
+ *
+ * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
+ * @returns the eligibility estimator's form data
+ */
+export const retrieveFormElements = (formName = 'form[name="ee-form"]') => {
+  const form: HTMLFormElement = document.querySelector(formName)
+  if (!form) return
+
+  return form.elements
 }
