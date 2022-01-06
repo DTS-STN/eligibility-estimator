@@ -1,4 +1,4 @@
-import { apiDict } from '../../../i18n/api'
+import { Translations } from '../../../i18n/api'
 import {
   FieldData,
   fieldDefinitions,
@@ -8,17 +8,16 @@ import {
 
 export function buildFieldData(
   fieldList: Array<FieldKey>,
-  french: boolean
+  translations: Translations
 ): Array<FieldData> {
   // takes list of keys, builds list of definitions
   const fieldDataList = fieldList.map((x) => fieldDefinitions[x])
 
   // applies translations
-  const lang = french ? 'fr' : 'en'
   fieldDataList.map((value) => {
-    value.label = apiDict[lang].question[value.key]
+    value.label = translations.question[value.key]
     if (value.type === FieldType.DROPDOWN || value.type === FieldType.RADIO) {
-      value.values = apiDict[lang].questionOptions[value.key]
+      value.values = translations.questionOptions[value.key]
     }
     return value
   })

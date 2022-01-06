@@ -1,4 +1,4 @@
-import { apiDict } from '../../../i18n/api'
+import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
@@ -9,10 +9,10 @@ import { OasSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
 
-export default function checkOas(params: CalculationInput): BenefitResult {
-  // parse language
-  const lang = params._french ? 'fr' : 'en'
-
+export default function checkOas(
+  params: CalculationInput,
+  translations: Translations
+): BenefitResult {
   // validation
   const { result, value } = validateRequestForBenefit(OasSchema, params)
   // if the validation was able to return an error result, return it
@@ -39,21 +39,21 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason: ResultReason.NONE,
-        detail: apiDict[lang].detail.eligible,
+        detail: translations.detail.eligible,
       }
     } else if (value.age == 64) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: apiDict[lang].detail.eligibleWhen65ApplyNow,
+        detail: translations.detail.eligibleWhen65ApplyNow,
       }
     } else {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: apiDict[lang].detail.eligibleWhen65,
+        detail: translations.detail.eligibleWhen65,
       }
     }
   } else if (!meetsReqIncome) {
@@ -61,7 +61,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: apiDict[lang].detail.mustMeetIncomeReq,
+      detail: translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqYears) {
     if (
@@ -73,14 +73,14 @@ export default function checkOas(params: CalculationInput): BenefitResult {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.YEARS_IN_CANADA,
-          detail: apiDict[lang].detail.dependingOnAgreement,
+          detail: translations.detail.dependingOnAgreement,
         }
       } else {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail: apiDict[lang].detail.dependingOnAgreementWhen65,
+          detail: translations.detail.dependingOnAgreementWhen65,
         }
       }
     } else {
@@ -88,7 +88,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.YEARS_IN_CANADA,
-        detail: apiDict[lang].detail.mustMeetYearReq,
+        detail: translations.detail.mustMeetYearReq,
       }
     }
   } else if (!meetsReqLegal) {
@@ -97,21 +97,21 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: apiDict[lang].detail.dependingOnLegalWhen65,
+        detail: translations.detail.dependingOnLegalWhen65,
       }
     } else if (value.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: apiDict[lang].detail.dependingOnLegalSponsored,
+        detail: translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: apiDict[lang].detail.dependingOnLegal,
+        detail: translations.detail.dependingOnLegal,
       }
     }
   } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {
@@ -119,7 +119,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.SOCIAL_AGREEMENT,
-      detail: apiDict[lang].detail.ineligibleYearsOrCountry,
+      detail: translations.detail.ineligibleYearsOrCountry,
     }
   }
   // fallback

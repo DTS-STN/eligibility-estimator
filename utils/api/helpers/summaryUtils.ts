@@ -1,3 +1,4 @@
+import { Translations } from '../../../i18n/api'
 import { EstimationSummaryState, ResultKey } from '../definitions/enums'
 import {
   BenefitResult,
@@ -11,9 +12,11 @@ export class SummaryBuilder {
   private readonly state: EstimationSummaryState
   private readonly title: string
   private readonly details: string
+  private translations: Translations
 
-  constructor(results: BenefitResultObject) {
+  constructor(results: BenefitResultObject, translations: Translations) {
     this.results = results
+    this.translations = translations
     this.resultsArr = Object.keys(results).map((key) => results[key])
     this.state = this.getState()
     this.title = this.getTitle()
@@ -81,8 +84,11 @@ export class SummaryBuilder {
     return matchingItems.length > 0
   }
 
-  static buildSummaryObject(results: BenefitResultObject): SummaryObject {
-    const summaryBuilder = new SummaryBuilder(results)
+  static buildSummaryObject(
+    results: BenefitResultObject,
+    translations: Translations
+  ): SummaryObject {
+    const summaryBuilder = new SummaryBuilder(results, translations)
     return summaryBuilder.build()
   }
 }

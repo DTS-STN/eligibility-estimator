@@ -1,5 +1,6 @@
 import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getTranslations } from '../../i18n/api'
 import checkAfs from '../../utils/api/benefits/checkAfs'
 import checkAllowance from '../../utils/api/benefits/checkAllowance'
 import checkGis from '../../utils/api/benefits/checkGis'
@@ -11,6 +12,7 @@ import {
   BenefitResultObject,
   ResponseError,
   ResponseSuccess,
+  SummaryObject,
 } from '../../utils/api/definitions/types'
 import normalizeLivingCountry from '../../utils/api/helpers/countryUtils'
 import {
@@ -48,11 +50,12 @@ export default function handler(
     console.log('Passed validation.')
 
     // processing
+    const translations = getTranslations(params._language)
     const results: BenefitResultObject = {
-      oas: checkOas(params),
-      gis: checkGis(params),
-      allowance: checkAllowance(params),
-      afs: checkAfs(params),
+      oas: checkOas(params, translations),
+      gis: checkGis(params, translations),
+      allowance: checkAllowance(params, translations),
+      afs: checkAfs(params, translations),
     }
     console.log('Results: ', results)
 
@@ -65,9 +68,12 @@ export default function handler(
     ])
     const fieldData: Array<FieldData> = buildFieldData(
       visibleFields,
-      params._french
+      translations
     )
-    const summary = SummaryBuilder.buildSummaryObject(results)
+    const summary: SummaryObject = SummaryBuilder.buildSummaryObject(
+      results,
+      translations
+    )
 
     // completion
     res.status(200).json({

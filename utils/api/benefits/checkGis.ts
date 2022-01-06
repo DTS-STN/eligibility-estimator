@@ -1,4 +1,4 @@
-import { apiDict } from '../../../i18n/api'
+import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   MaritalStatus,
@@ -12,12 +12,12 @@ import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
 import checkOas from './checkOas'
 
-export default function checkGis(params: CalculationInput): BenefitResult {
-  // parse language
-  const lang = params._french ? 'fr' : 'en'
-
+export default function checkGis(
+  params: CalculationInput,
+  translations: Translations
+): BenefitResult {
   // include OAS result
-  const oasResult = checkOas(params)
+  const oasResult = checkOas(params, translations)
   const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }
 
   // validation
@@ -53,7 +53,7 @@ export default function checkGis(params: CalculationInput): BenefitResult {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.OAS,
-          detail: apiDict[lang].detail.conditional,
+          detail: translations.detail.conditional,
         }
       } else {
         const entitlementResult = new GisEntitlement(
@@ -65,7 +65,7 @@ export default function checkGis(params: CalculationInput): BenefitResult {
           eligibilityResult: ResultKey.ELIGIBLE,
           entitlementResult,
           reason: ResultReason.NONE,
-          detail: apiDict[lang].detail.eligible,
+          detail: translations.detail.eligible,
         }
       }
     } else {
@@ -73,7 +73,7 @@ export default function checkGis(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: apiDict[lang].detail.eligibleWhen65,
+        detail: translations.detail.eligibleWhen65,
       }
     }
   } else if (!meetsReqLiving && value.livingCountry !== undefined) {
@@ -81,21 +81,21 @@ export default function checkGis(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.LIVING_COUNTRY,
-      detail: apiDict[lang].detail.mustBeInCanada,
+      detail: translations.detail.mustBeInCanada,
     }
   } else if (oasResult.eligibilityResult == ResultKey.INELIGIBLE) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: apiDict[lang].detail.mustBeOasEligible,
+      detail: translations.detail.mustBeOasEligible,
     }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: apiDict[lang].detail.mustMeetIncomeReq,
+      detail: translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqLegal) {
     if (value.legalStatus === LegalStatus.SPONSORED) {
@@ -103,14 +103,14 @@ export default function checkGis(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: apiDict[lang].detail.dependingOnLegalSponsored,
+        detail: translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: apiDict[lang].detail.dependingOnLegal,
+        detail: translations.detail.dependingOnLegal,
       }
     }
   } else if (oasResult.eligibilityResult == ResultKey.MORE_INFO) {
@@ -118,7 +118,7 @@ export default function checkGis(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.MORE_INFO,
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
-      detail: apiDict[lang].detail.mustCompleteOasCheck,
+      detail: translations.detail.mustCompleteOasCheck,
     }
   }
 }
