@@ -10,6 +10,7 @@
     "age": "FRENCH: What is your current age?",
     "livingCountry": "FRENCH: What country are you currently living in?",
     "legalStatus": "FRENCH: What is your current legal status?",
+    "legalStatusOther": "FRENCH: Please specify your current legal status:",
     "yearsInCanadaSince18": "FRENCH: How many years have you lived in Canada since the age of 18?",
     "maritalStatus": "FRENCH: What is current marital status?",
     "partnerIncome": "FRENCH: What is your partner's annual net income in Canadian dollars?",

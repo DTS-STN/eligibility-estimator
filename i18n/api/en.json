@@ -10,6 +10,7 @@
     "age": "What is your current age?",
     "livingCountry": "What country are you currently living in?",
     "legalStatus": "What is your current legal status?",
+    "legalStatusOther": "Please specify your current legal status:",
     "yearsInCanadaSince18": "How many years have you lived in Canada since the age of 18?",
     "maritalStatus": "What is current marital status?",
     "partnerIncome": "What is your partner's annual net income in Canadian dollars?",

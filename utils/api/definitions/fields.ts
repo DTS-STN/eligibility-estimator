@@ -80,7 +80,6 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.LEGAL_STATUS_OTHER]: {
     key: FieldKey.LEGAL_STATUS_OTHER,
-    label: 'Please specify your current legal status:',
     category: FieldCategory.LEGAL_STATUS,
     order: 8,
     type: FieldType.STRING,
