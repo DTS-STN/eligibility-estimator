@@ -28,6 +28,8 @@ export enum LivingCountry {
   NO_AGREEMENT = 'NO_AGREEMENT',
 }
 
+// todo i18n
+// consider removing from UI
 export enum ResultKey {
   ELIGIBLE = `Eligible!`,
   INELIGIBLE = `Not eligible!`,
@@ -36,6 +38,8 @@ export enum ResultKey {
   INVALID = 'Request is invalid!',
 }
 
+// todo i18n
+// consider removing from UI
 export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
