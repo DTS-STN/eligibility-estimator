@@ -61,7 +61,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
-          //console.log(data)
+          console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
