@@ -25,7 +25,7 @@ interface FactoryProps {
 const API_URL = `api/calculateEligibility`
 
 /** form completion state */
-let formCompletion = {}
+let formCompletion: Record<string, any> = {}
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -50,6 +50,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
 
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)
+  const [error, setError] = useState<Record<string, string>>({})
 
   /**
    * send a GET request to the API, appended with query string data
@@ -73,6 +74,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
         } else {
           // handle error - validate per field once validation designs are complete
           console.log(data)
+          // error object would be like:
+          // error = {
+          //  income: string,
+          //  ...
+          //  [key]: value,
+          // }
         }
       })
   }
@@ -137,13 +144,18 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   onChange={debounce(handleChange, 1000)}
                   defaultValue={formCompletion[field.key]}
                   data-category={field.category}
+                  error={error[field.key] ?? undefined}
                   required
                 />
               </div>
             )}
             {field.type == 'dropdown' && (
               <div className="pb-8">
-                <FormSelect field={field} sendAPIRequest={sendAPIRequest} />
+                <FormSelect
+                  field={field}
+                  sendAPIRequest={sendAPIRequest}
+                  error={error[field.key] ?? undefined}
+                />
               </div>
             )}
             {(field.type == 'radio' || field.type == 'boolean') && (
@@ -158,6 +170,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   onChange={handleChange}
                   category={field.category}
                   defaultValue={formCompletion[field.key]}
+                  error={error[field.key] ?? undefined}
                   required
                 />
               </div>
@@ -196,9 +209,18 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
           className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
           onClick={(e) => {
             handleChange()
-            selectedTabIndex(1)
 
-            // TODO: validate against empty inputs in the form
+            // validate against empty inputs in the form and setError
+            const emptyFields = validateAgainstEmptyFormFields(
+              formCompletion,
+              retrieveFormData()
+            )
+
+            if (!emptyFields) {
+              selectedTabIndex(1)
+            } else {
+              setError(emptyFields)
+            }
           }}
         >
           Estimate
@@ -206,6 +228,23 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       </div>
     </form>
   )
+}
+
+/**
+ *
+ * @param formCompletion the global form completion state
+ * @param formData
+ * @returns true if the form is valid, false if it has empty fields
+ */
+const validateAgainstEmptyFormFields = (
+  formCompletion: Record<string, any>,
+  formData: FormData
+): Record<string, string> => {
+  console.log(formData, formCompletion)
+  return {
+    income: 'This field is required',
+    livingCountry: 'This field is required',
+  }
 }
 
 /**
@@ -217,8 +256,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
  */
 const checkCompletion = (
   fields: FieldData[],
-  formCompletion: any,
-  setProgress: any
+  formCompletion: Record<string, any>,
+  setProgress: Dispatch<any>
 ) => {
   const personal = fields
     .filter(

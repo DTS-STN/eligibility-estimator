@@ -1,10 +1,12 @@
 import { InputHTMLAttributes, useEffect, WheelEvent } from 'react'
 import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
+import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
+  error?: string
 }
 
 /**
@@ -14,7 +16,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Input: React.VFC<InputProps> = (props) => {
-  const { name, label, required, defaultValue, placeholder, onChange } = props
+  const { name, label, required, defaultValue, placeholder, onChange, error } =
+    props
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
@@ -40,6 +43,7 @@ export const Input: React.VFC<InputProps> = (props) => {
         )}
         <Tooltip field={name} />
       </label>
+      {error && <ErrorLabel errorMessage={error} />}
       {name == 'income' || name == 'partnerIncome' ? (
         <NumberFormat
           name={name}

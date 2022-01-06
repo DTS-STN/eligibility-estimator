@@ -6,6 +6,7 @@ import {
   buildQueryStringFromFormData,
   retrieveFormData,
 } from './ComponentFactory'
+import { ErrorLabel } from './validation/ErrorLabel'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -14,6 +15,7 @@ interface SelectProps
   > {
   field: FieldData
   sendAPIRequest: (queryString: string) => void
+  error?: string
 }
 
 /**
@@ -22,7 +24,7 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = (props) => {
-  const { field, sendAPIRequest, name } = props
+  const { field, sendAPIRequest, name , error } = props
   const defaultValue = (field as any)?.default
 
   return (
@@ -37,6 +39,7 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
         <span className="text-danger font-bold ml-2">(required)</span>
         <Tooltip field={field.key} />
       </label>
+      {error && <ErrorLabel errorMessage={error} />}
       <div className="w-full md:w-80">
         <Select
           styles={{
