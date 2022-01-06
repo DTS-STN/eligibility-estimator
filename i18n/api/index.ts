@@ -14,6 +14,12 @@ interface KeyAndText {
 
 export interface Translations {
   benefit: { oas: string; gis: string; allowance: string; afs: string }
+  category: {
+    incomeDetails: string
+    personalInformation: string
+    partnerDetails: string
+    legalStatus: string
+  }
   question: {
     income: string
     age: string

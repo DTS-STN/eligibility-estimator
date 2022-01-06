@@ -7,6 +7,12 @@ const en: Translations = {
     allowance: 'Allowance',
     afs: 'Allowance for Survivor',
   },
+  category: {
+    incomeDetails: 'Income Details',
+    personalInformation: 'Personal Information',
+    partnerDetails: 'Partner Details',
+    legalStatus: 'Legal Status',
+  },
   question: {
     income: 'What is your current annual net income in Canadian Dollars?',
     age: 'What is your current age?',

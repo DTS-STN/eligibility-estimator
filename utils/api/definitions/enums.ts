@@ -1,8 +1,8 @@
 export enum FieldCategory {
-  INCOME_DETAILS = 'Income Details',
-  PERSONAL_INFORMATION = 'Personal Information',
-  PARTNER_DETAILS = 'Partner Details',
-  LEGAL_STATUS = 'Legal Status',
+  INCOME_DETAILS = 'incomeDetails',
+  PERSONAL_INFORMATION = 'personalInformation',
+  PARTNER_DETAILS = 'partnerDetails',
+  LEGAL_STATUS = 'legalStatus',
 }
 
 export enum MaritalStatus {

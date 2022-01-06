@@ -14,17 +14,29 @@ export function buildFieldData(
   const fieldDataList = fieldList.map((x) => fieldDefinitions[x])
 
   // applies translations
-  fieldDataList.map((value) => {
-    const label = translations.question[value.key]
-    if (!label) throw new Error(`no question for key ${value.key}`)
-    value.label = label
-    if (value.type === FieldType.DROPDOWN || value.type === FieldType.RADIO) {
-      const questionOptions = translations.questionOptions[value.key]
+  fieldDataList.map((fieldData) => {
+    // translate category
+    const category = translations.category[fieldData.category.key]
+    if (!category) throw new Error(`no category for key ${fieldData.category}`)
+    fieldData.category.text = category
+
+    // translate label
+    const label = translations.question[fieldData.key]
+    if (!label) throw new Error(`no question for key ${fieldData.key}`)
+    fieldData.label = label
+
+    // translate values/questionOptions
+    if (
+      fieldData.type === FieldType.DROPDOWN ||
+      fieldData.type === FieldType.RADIO
+    ) {
+      const questionOptions = translations.questionOptions[fieldData.key]
       if (!questionOptions)
-        throw new Error(`no questionOptions for key ${value.key}`)
-      value.values = questionOptions
+        throw new Error(`no questionOptions for key ${fieldData.key}`)
+      fieldData.values = questionOptions
     }
-    return value
+
+    return fieldData
   })
 
   return fieldDataList
