@@ -3219,6 +3219,8 @@ __metadata:
     joi: ^17.5.0
     lint-staged: ^12.1.5
     lodash: ^4.17.21
+    mobx: ^6.3.12
+    mobx-state-tree: ^5.1.0
     next: ^12.0.3
     node-mocks-http: ^1.11.0
     postcss: ^8.4.5
@@ -6214,6 +6216,22 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
+  languageName: node
+  linkType: hard
+
+"mobx-state-tree@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "mobx-state-tree@npm:5.1.0"
+  peerDependencies:
+    mobx: ^6.3.0
+  checksum: 6f4d17e40108ace6d6660c64fd272e6fed96468b41f992e8cffcac7e772be49f7adc9457aeef011ebf594cd544860e3fb71b4729c59b78bed72d16c277d56abd
+  languageName: node
+  linkType: hard
+
+"mobx@npm:^6.3.12":
+  version: 6.3.12
+  resolution: "mobx@npm:6.3.12"
+  checksum: 1f1e414ffa1ed1efa92ff91e470d08e2a602d07dcf316ea12dc48d1077adb291643148badee4a052170260e3b0161842ddeae3cf3fdedd13599fee72cdf85c38
   languageName: node
   linkType: hard
 

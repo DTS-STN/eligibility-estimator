@@ -7,6 +7,7 @@ import type {
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
+import { useStore } from '../Hooks'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
@@ -47,6 +48,9 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
   const router = useRouter()
   const query = router.query
   formCompletion = { ...query, ...formCompletion }
+
+  const test = useStore()
+  console.log(test)
 
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)

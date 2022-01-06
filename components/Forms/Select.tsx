@@ -24,7 +24,7 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = (props) => {
-  const { field, sendAPIRequest, name , error } = props
+  const { field, sendAPIRequest, name, error, value } = props
   const defaultValue = (field as any)?.default
 
   return (
