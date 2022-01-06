@@ -5,6 +5,34 @@
     "allowance": "Allowance",
     "afs": "Allowance for Survivor"
   },
+  "question": {
+    "income": "What is your current annual net income in Canadian Dollars?",
+    "age": "What is your current age?",
+    "livingCountry": "What country are you currently living in?",
+    "legalStatus": "What is your current legal status?",
+    "yearsInCanadaSince18": "How many years have you lived in Canada since the age of 18?",
+    "maritalStatus": "What is current marital status?",
+    "partnerIncome": "What is your partner's annual net income in Canadian dollars?",
+    "partnerReceivingOas": "Does your partner receive a full OAS pension?",
+    "everLivedSocialCountry": "Have you ever lived in a country with an established social security agreement?"
+  },
+  "questionOptions": {
+    "legalStatus": {
+      "canadianCitizen": "Canadian citizen",
+      "permanentResident": "Permanent resident or landed immigrant (non-sponsored)",
+      "sponsored": "Permanent resident or landed immigrant (sponsored)",
+      "indianStatus": "Indian status or status card",
+      "other": "Other (Example: Temporary resident, student, temporary worker, etc.)"
+    },
+    "maritalStatus": {
+      "single": "Single",
+      "married": "Married",
+      "commonLaw": "Common-law",
+      "widowed": "Widowed",
+      "divorced": "Divorced",
+      "separated": "Separated"
+    }
+  },
   "reason": {
     "eligible": "You meet the criteria",
     "age": "Age does not meet requirement",

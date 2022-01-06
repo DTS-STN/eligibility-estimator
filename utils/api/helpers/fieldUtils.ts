@@ -1,7 +1,29 @@
-import { FieldData, fieldDefinitions, FieldKey } from '../definitions/fields'
+import { apiDict } from '../../../i18n/api'
+import {
+  FieldData,
+  fieldDefinitions,
+  FieldKey,
+  FieldType,
+} from '../definitions/fields'
 
-export function buildFieldData(fieldList: Array<FieldKey>): Array<FieldData> {
-  return fieldList.map((x) => fieldDefinitions[x])
+export function buildFieldData(
+  fieldList: Array<FieldKey>,
+  french: boolean
+): Array<FieldData> {
+  // takes list of keys, builds list of definitions
+  const fieldDataList = fieldList.map((x) => fieldDefinitions[x])
+
+  // applies translations
+  const lang = french ? 'fr' : 'en'
+  fieldDataList.map((value) => {
+    value.label = apiDict[lang].question[value.key]
+    if (value.type === FieldType.DROPDOWN || value.type === FieldType.RADIO) {
+      value.values = apiDict[lang].questionOptions[value.key]
+    }
+    return value
+  })
+
+  return fieldDataList
 }
 
 export function buildVisibleFields(

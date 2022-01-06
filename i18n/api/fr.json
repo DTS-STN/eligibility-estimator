@@ -5,6 +5,34 @@
     "allowance": "FRENCH: Allowance",
     "afs": "FRENCH: Allowance for Survivor"
   },
+  "question": {
+    "income": "FRENCH: What is your current annual net income in Canadian Dollars?",
+    "age": "FRENCH: What is your current age?",
+    "livingCountry": "FRENCH: What country are you currently living in?",
+    "legalStatus": "FRENCH: What is your current legal status?",
+    "yearsInCanadaSince18": "FRENCH: How many years have you lived in Canada since the age of 18?",
+    "maritalStatus": "FRENCH: What is current marital status?",
+    "partnerIncome": "FRENCH: What is your partner's annual net income in Canadian dollars?",
+    "partnerReceivingOas": "FRENCH: Does your partner receive a full OAS pension?",
+    "everLivedSocialCountry": "FRENCH: Have you ever lived in a country with an established social security agreement?"
+  },
+  "questionOptions": {
+    "legalStatus": {
+      "canadianCitizen": "FRENCH: Canadian citizen",
+      "permanentResident": "FRENCH: Permanent resident or landed immigrant (non-sponsored)",
+      "sponsored": "FRENCH: Permanent resident or landed immigrant (sponsored)",
+      "indianStatus": "FRENCH: Indian status or status card",
+      "other": "FRENCH: Other (Example: Temporary resident, student, temporary worker, etc.)"
+    },
+    "maritalStatus": {
+      "single": "FRENCH: Single",
+      "married": "FRENCH: Married",
+      "commonLaw": "FRENCH: Common-law",
+      "widowed": "FRENCH: Widowed",
+      "divorced": "FRENCH: Divorced",
+      "separated": "FRENCH: Separated"
+    }
+  },
   "detail": {
     "eligible": "FRENCH: Based on the information provided, you are likely eligible for this benefit.",
     "eligibleWhen60ApplyNow": "FRENCH: You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.",

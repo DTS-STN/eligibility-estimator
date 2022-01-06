@@ -6,20 +6,20 @@ export enum FieldCategory {
 }
 
 export enum MaritalStatus {
-  SINGLE = 'Single',
-  MARRIED = 'Married',
-  COMMON_LAW = 'Common-law',
-  WIDOWED = 'Widowed',
-  DIVORCED = 'Divorced',
-  SEPARATED = 'Separated',
+  SINGLE = 'single',
+  MARRIED = 'married',
+  COMMON_LAW = 'commonLaw',
+  WIDOWED = 'widowed',
+  DIVORCED = 'divorced',
+  SEPARATED = 'separated',
 }
 
 export enum LegalStatus {
-  CANADIAN_CITIZEN = 'Canadian citizen',
-  PERMANENT_RESIDENT = 'Permanent resident or landed immigrant (non-sponsored)',
-  SPONSORED = 'Permanent resident or landed immigrant (sponsored)',
-  INDIAN_STATUS = 'Indian status or status card',
-  OTHER = 'Other (Example: Temporary resident, student, temporary worker, etc.)',
+  CANADIAN_CITIZEN = 'canadianCitizen',
+  PERMANENT_RESIDENT = 'permanentResident',
+  SPONSORED = 'sponsored',
+  INDIAN_STATUS = 'indianStatus',
+  OTHER = 'other',
 }
 
 export enum LivingCountry {

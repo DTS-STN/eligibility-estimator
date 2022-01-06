@@ -63,7 +63,10 @@ export default function handler(
       results.allowance.missingFields,
       results.afs.missingFields,
     ])
-    const fieldData: Array<FieldData> = buildFieldData(visibleFields)
+    const fieldData: Array<FieldData> = buildFieldData(
+      visibleFields,
+      params._french
+    )
     const summary = SummaryBuilder.buildSummaryObject(results)
 
     // completion
