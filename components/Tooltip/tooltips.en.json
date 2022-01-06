@@ -31,6 +31,11 @@
     "<p><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen who was themselves either born in Canada or granted citizenship) or you have applied for a grant of citizenship and have received Canadian citizenship.</p><br /><p><span style='font-weight: bold;'>A permanent resident or landed immigrant (non-sponsored immigrant):</span> You have been given permanent resident status by immigrating to Canada, but is not a Canadian citizen.</p><br /><p><span style='font-weight: bold;'>A permanent resident or landed immigrant (sponsored immigrant):</span> You are a foreign national who has applied for permanent residence under the Family Class, has an approved Canadian sponsor, and meets the requirements of the Family Class.</p><br /><p><span style='font-weight: bold;'>Indian status or status card:</span> You are registered as an Indian under the Indian Act.</p>"
   ],
 
+  "legalStatusOther": [
+    "Other Legal Status",
+    "<p>Example: Temporary resident, student, temporary worker, etc</p>"
+  ],
+
   "yearsInCanadaSince18": [
     "Years Lived in Canada",
     "This includes periods when you normally lived in Canada. If you have not lived in Canada all of your life, any absences from Canada longer than 6 months are not included. "

@@ -13,6 +13,7 @@ export interface CalculationInput {
   age?: number
   livingCountry?: LivingCountry
   legalStatus?: LegalStatus
+  legalStatusOther?: string
   yearsInCanadaSince18?: number
   maritalStatus?: MaritalStatus
   partnerIncome?: number

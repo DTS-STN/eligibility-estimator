@@ -6,6 +6,7 @@ export enum FieldKey {
   AGE = 'age',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
+  LEGAL_STATUS_OTHER = 'legalStatusOther',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   MARITAL_STATUS = 'maritalStatus',
   PARTNER_INCOME = 'partnerIncome',
@@ -18,6 +19,7 @@ enum FieldType {
   BOOLEAN = 'boolean',
   DROPDOWN = 'dropdown',
   RADIO = 'radio',
+  STRING = 'string',
 }
 
 export const fieldDefinitions: FieldDefinitions = {
@@ -80,11 +82,19 @@ export const fieldDefinitions: FieldDefinitions = {
     values: Object.values(LegalStatus),
     default: undefined,
   },
+  [FieldKey.LEGAL_STATUS_OTHER]: {
+    key: FieldKey.LEGAL_STATUS_OTHER,
+    label: 'Please specify your current legal status:',
+    category: FieldCategory.LEGAL_STATUS,
+    order: 8,
+    type: FieldType.STRING,
+    placeholder: undefined,
+  },
   [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
     label: 'How many years have you lived in Canada since the age of 18?',
     category: FieldCategory.LEGAL_STATUS,
-    order: 8,
+    order: 9,
     type: FieldType.NUMBER,
     placeholder: '40',
   },
@@ -93,7 +103,7 @@ export const fieldDefinitions: FieldDefinitions = {
     label:
       'Have you ever lived in a country with an established social security agreement?',
     category: FieldCategory.LEGAL_STATUS,
-    order: 9,
+    order: 10,
     type: FieldType.BOOLEAN,
     default: undefined,
   },
@@ -104,6 +114,7 @@ export type FieldData =
   | FieldDataBoolean
   | FieldDataRadio
   | FieldDataDropdown
+  | FieldDataString
 
 interface FieldDataGeneric {
   key: FieldKey
@@ -132,6 +143,11 @@ interface FieldDataDropdown extends FieldDataGeneric {
   type: FieldType.DROPDOWN
   values: Array<string>
   default?: string
+}
+
+interface FieldDataString extends FieldDataGeneric {
+  type: FieldType.STRING
+  placeholder?: string
 }
 
 type FieldDefinitions = {
