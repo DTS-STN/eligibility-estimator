@@ -326,8 +326,7 @@ components:
         enum:
           - Canada
           - Agreement
-          - No agreement
-          - Any other country
+          - No Agreement
 
     legalStatus:
       name: legalStatus

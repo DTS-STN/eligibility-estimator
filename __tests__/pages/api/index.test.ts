@@ -86,6 +86,11 @@ describe('openapi checks', () => {
       Object.values(MaritalStatus)
     )
   })
+  it('matches Country enum', async () => {
+    expect(openapi.components.parameters.livingCountry.schema.enum).toEqual(
+      Object.values(LivingCountry)
+    )
+  })
   it('matches FieldKey enum', async () => {
     expect(openapi.components.schemas.FieldKey.items.enum).toEqual(
       Object.values(FieldKey)
