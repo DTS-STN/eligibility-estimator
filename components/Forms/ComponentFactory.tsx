@@ -7,6 +7,7 @@ import type {
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
+import { fixedEncodeURIComponent } from '../../utils/api/helpers/webUtils'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
@@ -72,6 +73,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
           checkCompletion(data.fieldData, formCompletion, setProgress)
         } else {
           // handle error - validate per field once validation designs are complete
+          console.log(data)
         }
       })
   }
@@ -150,6 +152,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   required
                 />
               </div>
+            )}
+            {field.type == 'string' && (
+              <textarea
+                name={field.key}
+                className="form-control min-w-[420px]"
+              />
             )}
           </div>
         )
@@ -240,16 +248,23 @@ export const buildQueryStringFromFormData = (
     if (value == '') {
       continue
     }
+    let val = ''
     // remove masking from currency
-    let val = value.toString().replace('$', '').replace(',', '')
+    if (key == 'income' || key == 'partnerIncome') {
+      val = value.toString().replace('$', '').replace(',', '')
+    } else {
+      val = value.toString()
+    }
 
     // build query string
     if (qs !== '') qs += '&'
-    qs += `${key}=${val}`
+    //encodeURI and fix for encodeURIComponent and circle brackets
+    qs += `${key}=${fixedEncodeURIComponent(val)}`
 
     // update global for completion state
     if (updateFormCompletion) formCompletion[key] = val
   }
+  console.log(qs)
   return qs
 }
 
