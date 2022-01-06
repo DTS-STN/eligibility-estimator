@@ -56,6 +56,18 @@ export interface Translations {
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
   }
+  summaryTitle: {
+    moreInfo: string
+    unavailable: string
+    availableEligible: string
+    availableIneligible: string
+  }
+  summaryDetails: {
+    moreInfo: string
+    unavailable: string
+    availableEligible: string
+    availableIneligible: string
+  }
 }
 
 export function getTranslations(language: Language): Translations {

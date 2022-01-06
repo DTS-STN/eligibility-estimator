@@ -290,5 +290,21 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'FRENCH: You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
   },
+  summaryTitle: {
+    moreInfo: 'FRENCH: More information needed',
+    unavailable: 'FRENCH: Unable to provide an estimation',
+    availableEligible: 'FRENCH: Likely eligible for benefits!',
+    availableIneligible: 'FRENCH: Likely not eligible for benefits',
+  },
+  summaryDetails: {
+    moreInfo:
+      'FRENCH: You need to answer the remaining questions on the previous tab before an estimation can be provided.',
+    unavailable:
+      "FRENCH: Given the answers you've provided, this tool is unable to provide an accurate estimation. You are recommended to contact Service Canada for more information.",
+    availableEligible:
+      "FRENCH: Given the answers you've provided, you are likely eligible for benefits! See the details below for more information.",
+    availableIneligible:
+      "FRENCH: Given the answers you've provided, you are likely not eligible for any benefits. See the details below for more information.",
+  },
 }
 export default fr
