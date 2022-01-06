@@ -5,7 +5,7 @@ export const Tooltip: React.FC<{
   field: string
   size?: number
 }> = ({ field, size }) => {
-  const [fieldDef, setFieldDef] = useState(fieldDefinitions.data[field])
+  const [fieldDef] = useState(fieldDefinitions.data[field])
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
 

@@ -118,7 +118,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
             {field.category != lastCategory && (
               <h2 className="h2 mb-8">{field.category}</h2>
             )}
-            {field.type == 'number' && (
+            {(field.type == 'number' || field.type == 'string') && (
               <div className="mb-10">
                 <Input
                   type={field.type}
@@ -152,12 +152,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   required
                 />
               </div>
-            )}
-            {field.type == 'string' && (
-              <textarea
-                name={field.key}
-                className="form-control min-w-[420px]"
-              />
             )}
           </div>
         )
