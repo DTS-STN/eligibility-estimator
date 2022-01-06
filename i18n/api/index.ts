@@ -1,7 +1,7 @@
-import en from './en.json'
-import fr from './fr.json'
+import en from './en'
+import fr from './fr'
 
-const apiDict = { en, fr }
+const apiTranslationsDict = { en, fr }
 
 export enum Language {
   EN = 'EN',
@@ -69,8 +69,8 @@ export interface Translations {
 export function getTranslations(language: Language): Translations {
   switch (language) {
     case Language.EN:
-      return apiDict.en
+      return apiTranslationsDict.en
     case Language.FR:
-      return apiDict.fr
+      return apiTranslationsDict.fr
   }
 }
