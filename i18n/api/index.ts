@@ -7,6 +7,10 @@ export enum Language {
   EN = 'EN',
   FR = 'FR',
 }
+interface KeyAndText {
+  key: string
+  text: string
+}
 
 export interface Translations {
   benefit: { oas: string; gis: string; allowance: string; afs: string }
@@ -23,21 +27,9 @@ export interface Translations {
     everLivedSocialCountry: string
   }
   questionOptions: {
-    legalStatus: {
-      canadianCitizen: string
-      permanentResident: string
-      sponsored: string
-      indianStatus: string
-      other: string
-    }
-    maritalStatus: {
-      single: string
-      married: string
-      commonLaw: string
-      widowed: string
-      divorced: string
-      separated: string
-    }
+    legalStatus: KeyAndText[]
+    maritalStatus: KeyAndText[]
+    livingCountry: KeyAndText[]
   }
   detail: {
     eligible: string

@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-01-06T20:34:45.148Z
+__export_date: 2022-01-06T22:22:49.034Z
 __export_source: insomnia.desktop.app:v2021.7.2
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1641501262624
+    modified: 1641507751580
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -15,39 +15,38 @@ resources:
     parameters:
       - name: income
         value: '10000'
-        id: pair_edc3ce39c6db465b8b80c813dca19a6e
+        id: pair_ca28e5ff404d4d8abb1251dab6d0a343
       - name: age
         value: '65'
-        id: pair_84541f873d914d749d6cf112c4cc16eb
+        id: pair_de9e393ca88f4d90a8f70f3907924bc2
       - name: maritalStatus
         value: married
-        id: pair_0f25d73846b145069244d10be7499176
+        id: pair_e5304db95dc94807af024ca1723c1787
       - name: partnerIncome
         value: '10000'
-        id: pair_dce82b2f938f4959a5356d227087ec39
+        id: pair_78749bcf72b84a1cb9740efac5b0e585
       - name: partnerReceivingOas
         value: 'true'
-        id: pair_f1f80cf306204822bc87b185249e74aa
+        id: pair_51ad0f7ae3514c99a5a346c7b19b873c
       - name: livingCountry
-        value: Canada
-        id: pair_9418a2180810412e80138d6f36c766c3
+        value: CAN
+        id: pair_232801cb965f498d89c27b6c09f263c2
       - name: legalStatus
         value: canadianCitizen
-        id: pair_e6b9468ca4f24ef5999728073314b1a9
+        id: pair_915eec24717a41e8a1bc4e34b2e096f9
       - name: legalStatusOther
         value: some legal status
-        id: pair_3f2d6e3e23984613b935281338540dad
+        id: pair_e9b341c440f243a6a5da8526af8b346d
       - name: yearsInCanadaSince18
         value: '40'
-        id: pair_d636895c2d134084ab85ab3d662c4ae8
+        id: pair_b4281eae19d14dd5a555204bae1f3029
       - name: everLivedSocialCountry
         value: 'true'
-        id: pair_7b72b564cc8945c09ff81178a6443c3e
-      - id: pair_eb948386202649eba09db6d35b8a81a7
+        id: pair_3b98aa9c4012467d8da58c46e2167150
+      - id: pair_ba8d46f72128414c831f19d64ec65a6a
         name: _language
-        value: FR
+        value: EN
         description: ''
-        disabled: true
     headers: []
     authentication: {}
     metaSortKey: -1637965624524

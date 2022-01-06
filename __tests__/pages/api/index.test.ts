@@ -25,9 +25,9 @@ import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('code checks', () => {
-  it('produces a list of 196 countries', async () => {
-    expect(ALL_COUNTRIES.length).toEqual(195)
-    expect(ALL_COUNTRIES[0]).toEqual('Canada')
+  it('produces a list of 176 countries', async () => {
+    expect(ALL_COUNTRIES.length).toEqual(175) // remember the count starts at zero
+    expect(ALL_COUNTRIES[0]).toEqual('CAN')
   })
   it('produces a list of fields with unique ordering', async () => {
     const ordersOrig = []

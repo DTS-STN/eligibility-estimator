@@ -23,9 +23,9 @@ export enum LegalStatus {
 }
 
 export enum LivingCountry {
-  CANADA = 'Canada',
-  AGREEMENT = 'Agreement',
-  NO_AGREEMENT = 'No Agreement',
+  CANADA = 'CAN',
+  AGREEMENT = 'AGREEMENT',
+  NO_AGREEMENT = 'NO_AGREEMENT',
 }
 
 export enum ResultKey {

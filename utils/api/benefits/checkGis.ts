@@ -1,6 +1,7 @@
 import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
+  LivingCountry,
   MaritalStatus,
   ResultKey,
   ResultReason,
@@ -27,7 +28,7 @@ export default function checkGis(
 
   // helpers
   const meetsReqAge = value.age >= 65
-  const meetsReqLiving = value.livingCountry === 'Canada'
+  const meetsReqLiving = value.livingCountry === LivingCountry.CANADA
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL

@@ -322,11 +322,11 @@ components:
       schema:
         type: string
         description: Any country
-        example: Canada
+        example: CAN
         enum:
-          - Canada
-          - Agreement
-          - No Agreement
+          - CAN
+          - AGREEMENT
+          - NO_AGREEMENT
 
     legalStatus:
       name: legalStatus

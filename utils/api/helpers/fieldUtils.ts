@@ -15,9 +15,14 @@ export function buildFieldData(
 
   // applies translations
   fieldDataList.map((value) => {
-    value.label = translations.question[value.key]
+    const label = translations.question[value.key]
+    if (!label) throw new Error(`no question for key ${value.key}`)
+    value.label = label
     if (value.type === FieldType.DROPDOWN || value.type === FieldType.RADIO) {
-      value.values = translations.questionOptions[value.key]
+      const questionOptions = translations.questionOptions[value.key]
+      if (!questionOptions)
+        throw new Error(`no questionOptions for key ${value.key}`)
+      value.values = questionOptions
     }
     return value
   })
