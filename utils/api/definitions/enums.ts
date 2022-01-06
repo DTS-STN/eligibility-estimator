@@ -48,3 +48,11 @@ export enum ResultReason {
   INCOME = 'Income too high',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
 }
+
+// used to determine color+type of alert dialog
+export enum EstimationSummaryState {
+  AVAILABLE_ELIGIBLE = 'AVAILABLE_ELIGIBLE', // green, display results (eligible for at least one)
+  MORE_INFO = 'MORE_INFO', // yellow, need to answer more
+  UNAVAILABLE = 'UNAVAILABLE', // yellow, can not provide any results, contact Service Canada (conditionally eligible)
+  AVAILABLE_INELIGIBLE = 'AVAILABLE_INELIGIBLE', // red, display results (ineligible)
+}

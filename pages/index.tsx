@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { Alert } from '../components/Alert'
 import { Input } from '../components/Forms/Input'
 import { Layout } from '../components/Layout'
+import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -73,7 +74,7 @@ const Home: NextPage = () => {
           <button className="btn btn-primary w-28">Next</button>
         </div>
       </form>
-      <Alert title="Disclaimer" type="warning">
+      <Alert title="Disclaimer" type={EstimationSummaryState.UNAVAILABLE}>
         These results are rough estimates. For a more accurate assessment of
         your eligibility, please contact{' '}
         <Link

@@ -9,12 +9,11 @@ import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
 import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
+import checkOas from './checkOas'
 
-export default function checkGis(
-  params: CalculationInput,
-  oasResult: BenefitResult
-): BenefitResult {
+export default function checkGis(params: CalculationInput): BenefitResult {
   // include OAS result
+  const oasResult = checkOas(params)
   const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }
 
   // validation

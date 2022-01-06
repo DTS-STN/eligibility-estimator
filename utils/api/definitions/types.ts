@@ -1,4 +1,5 @@
 import {
+  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -28,11 +29,19 @@ export interface BenefitResult {
   missingFields?: Array<FieldKey>
 }
 
+export interface BenefitResultObject {
+  oas: BenefitResult
+  gis: BenefitResult
+  allowance: BenefitResult
+  afs: BenefitResult
+}
+
 export interface ResponseSuccess {
   oas: BenefitResult
   gis: BenefitResult
   allowance: BenefitResult
   afs: BenefitResult
+  summary: SummaryObject
   visibleFields: Array<FieldKey>
   fieldData: Array<FieldData>
 }
@@ -40,4 +49,17 @@ export interface ResponseSuccess {
 export interface ResponseError {
   error: string
   detail: any
+}
+
+export interface Link {
+  url: string
+  text: string
+  order: number
+}
+
+export interface SummaryObject {
+  state: EstimationSummaryState
+  title: string
+  details: string
+  links: Link[]
 }
