@@ -135,7 +135,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
-                  defaultValue={query[field.key]}
+                  defaultValue={formCompletion[field.key]}
                   data-category={field.category}
                   required
                 />

@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, SelectHTMLAttributes, useState } from 'react'
+import { DetailedHTMLProps, SelectHTMLAttributes, useRef } from 'react'
 import Select from 'react-select'
 import { FieldData, fieldDefinitions } from '../../utils/api/definitions/fields'
 import { Tooltip } from '../Tooltip/tooltip'
@@ -24,6 +24,7 @@ interface SelectProps
 export const FormSelect: React.VFC<SelectProps> = (props) => {
   const { field, sendAPIRequest, name } = props
   const defaultValue = (field as any)?.default
+
   return (
     <>
       <label
@@ -38,7 +39,6 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
       </label>
       <div className="w-full md:w-80">
         <Select
-          closeMenuOnScroll={false}
           styles={{
             container: (styles) => ({
               ...styles,
@@ -76,6 +76,7 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
 
             sendAPIRequest(queryString)
           }}
+          closeMenuOnScroll={false}
           isSearchable
           isClearable
         />

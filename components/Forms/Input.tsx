@@ -14,6 +14,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Input: React.VFC<InputProps> = (props) => {
+  const { name, label, required, defaultValue, placeholder, onChange } = props
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
@@ -28,33 +29,33 @@ export const Input: React.VFC<InputProps> = (props) => {
   return (
     <>
       <label
-        htmlFor={props.name}
-        aria-label={props.name}
+        htmlFor={name}
+        aria-label={name}
         data-testid="input-label"
         className="text-content font-bold"
       >
-        {props.required && <span className="text-danger">*</span>} {props.label}
-        {props.required && (
+        {required && <span className="text-danger">*</span>} {label}
+        {required && (
           <span className="text-danger font-bold ml-2">(required)</span>
         )}
-        <Tooltip field={props.name} />
+        <Tooltip field={name} />
       </label>
-      {props.name == 'income' || props.name == 'partnerIncome' ? (
+      {name == 'income' || name == 'partnerIncome' ? (
         <NumberFormat
-          name={props.name}
+          name={name}
           thousandSeparator={true}
           prefix="$"
           className="form-control text-content"
-          data-testid={props.name}
+          data-testid={name}
           min={0}
-          defaultValue={props.defaultValue as string}
-          placeholder={props.placeholder}
-          onChange={props.onChange}
+          defaultValue={defaultValue as string}
+          placeholder={placeholder}
+          onChange={onChange}
         />
       ) : (
         <input
-          name={props.name}
-          data-testid={props.name}
+          name={name}
+          data-testid={name}
           {...props}
           min={0}
           className="form-control text-content"
