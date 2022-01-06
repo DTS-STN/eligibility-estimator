@@ -44,7 +44,10 @@ describe('schema checks', () => {
     // @ts-ignore
     const joiEntries = schema._ids._byKey.entries()
     const joiKeys = []
-    for (const joiEntry of joiEntries) joiKeys.push(joiEntry[0])
+    for (const joiEntry of joiEntries) {
+      if (joiEntry[0][0] === '_') continue // ignore system fields
+      joiKeys.push(joiEntry[0])
+    }
     return joiKeys
   }
 
@@ -56,7 +59,6 @@ describe('schema checks', () => {
   it('GIS: matches between field definitions and schema', async () => {
     const joiKeys = getJoiKeys(GisSchema)
     const enumKeys: string[] = Object.values(FieldKey)
-    enumKeys.push('_oasEligible')
     expect(joiKeys).toEqual(enumKeys)
   })
   it('Allowance: matches between field definitions and schema', async () => {
