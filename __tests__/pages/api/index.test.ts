@@ -4,6 +4,7 @@ import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
 import {
+  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -443,6 +444,64 @@ describe('field requirement analysis', () => {
       'legalStatus',
       'yearsInCanadaSince18',
     ])
+  })
+})
+
+describe('summary object checks', () => {
+  it('returns "available eligible"', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 10000,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_ELIGIBLE
+    )
+  })
+  it('returns "available ineligible"', async () => {
+    const res = await mockGetRequest({
+      income: 1000000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 10000,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_INELIGIBLE
+    )
+  })
+  it('returns "unavailable"', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.SPONSORED,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 10000,
+      partnerReceivingOas: true,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
+  })
+  it('returns "more info"', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      yearsInCanadaSince18: 20,
+      maritalStatus: MaritalStatus.MARRIED,
+      partnerIncome: 10000,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
   })
 })
 
