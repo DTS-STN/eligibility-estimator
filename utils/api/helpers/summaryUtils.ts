@@ -21,13 +21,12 @@ export class SummaryBuilder {
   }
 
   build(): SummaryObject {
-    const summary: SummaryObject = {
+    return {
       state: this.state,
       title: this.title,
       details: this.details,
-      links: [{ url: 'test', text: 'test', order: 0 }],
+      links: [{ url: 'https://canada.ca', text: 'Canada.ca', order: 1 }],
     }
-    return summary
   }
 
   private getState(): EstimationSummaryState {
@@ -43,24 +42,24 @@ export class SummaryBuilder {
 
   private getTitle() {
     if (this.state === EstimationSummaryState.MORE_INFO)
-      return 'More info title'
+      return 'More information needed'
     else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return 'Unavailable title'
+      return 'Unable to provide an estimation'
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return 'Eligible title'
+      return 'Likely eligible for benefits!'
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return 'Ineligible title'
+      return 'Likely not eligible for benefits'
   }
 
   private getDetails() {
     if (this.state === EstimationSummaryState.MORE_INFO)
-      return 'More info details... stuff, things, text.'
+      return 'You need to answer the remaining questions on the previous tab before an estimation can be provided.'
     else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return 'Unavailable details... stuff, things, text.'
+      return "Given the answers you've provided, this tool is unable to provide an accurate estimation. You are recommended to contact Service Canada for more information."
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return 'Eligible details... stuff, things, text.'
+      return "Given the answers you've provided, you are likely eligible for benefits! See the details below for more information."
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return 'Ineligible details... stuff, things, text.'
+      return "Given the answers you've provided, you are likely not eligible for any benefits. See the details below for more information."
   }
 
   detectNeedsInfo(): boolean {
