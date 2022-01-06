@@ -32,7 +32,7 @@ export const Layout: React.VFC<{
             <h3 className="text-h3 py-3 text-white font-bold">
               Service Canada
             </h3>
-            <p className="font-bold text-white">Sign out</p>
+            <p></p>
           </div>
         </div>
         <div className="sm:container mx-auto flex flex-col mb-16">

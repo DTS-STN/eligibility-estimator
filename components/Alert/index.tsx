@@ -1,24 +1,23 @@
 import { useRouter } from 'next/router'
 import React from 'react'
-
-type AlertType = 'warning' | 'info' | 'danger' | 'success'
+import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 
 export const Alert: React.VFC<{
   title: string
   children: React.ReactNode
-  type: AlertType
+  type: EstimationSummaryState // TODO: remove AlertType once summary type is ready
 }> = ({ title, children, type }) => {
   const { query, pathname } = useRouter()
   const className = (() => {
     switch (type) {
-      case 'warning':
+      case EstimationSummaryState.UNAVAILABLE:
         return 'border-warning text-warning'
-      case 'info':
-        return 'border-info text-info'
-      case 'danger':
+      case EstimationSummaryState.AVAILABLE_INELIGIBLE:
         return 'border-danger text-danger'
-      case 'success':
+      case EstimationSummaryState.AVAILABLE_ELIGIBLE:
         return 'border-success text-success'
+      // case 'info':
+      //   return 'border-info text-info'
       default:
         break
     }

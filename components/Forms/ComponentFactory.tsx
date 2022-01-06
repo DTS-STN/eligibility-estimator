@@ -15,6 +15,7 @@ interface FactoryProps {
   data: ResponseSuccess
   oas: Dispatch<BenefitResult>
   gis: Dispatch<BenefitResult>
+  summary: Dispatch<any>
   allowance: Dispatch<BenefitResult>
   afs: Dispatch<BenefitResult>
   setProgress: Dispatch<any>
@@ -37,6 +38,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
   data,
   oas,
   gis,
+  summary,
   allowance,
   afs,
   selectedTabIndex,
@@ -65,6 +67,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
 
           oas(data.oas)
           gis(data.gis)
+          summary(data.summary)
           allowance(data.allowance)
           afs(data.afs)
 

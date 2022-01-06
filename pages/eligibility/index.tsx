@@ -6,6 +6,8 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import useSWR from 'swr'
 import { Alert } from '../../components/Alert'
+import { ConditionalLinks } from '../../components/ConditionalLinks'
+import { ContactCTA } from '../../components/ContactCTA'
 import { FAQ } from '../../components/FAQ'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 import { Input } from '../../components/Forms/Input'
@@ -13,7 +15,10 @@ import { Layout } from '../../components/Layout'
 import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 import ProgressBar from '../../components/ProgressBar'
 import { Tooltip } from '../../components/Tooltip/tooltip'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import {
+  EstimationSummaryState,
+  ResultKey,
+} from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
 
@@ -31,6 +36,7 @@ const Eligibility: NextPage = () => {
   const { query } = useRouter()
   const [oas, setOAS] = useState<BenefitResult>(null)
   const [gis, setGIS] = useState<BenefitResult>(null)
+  const [summary, setSummary] = useState<any>(null)
   const [allowance, setAllowance] = useState<BenefitResult>(null)
   const [afs, setAFS] = useState<BenefitResult>(null)
   const [progress, setProgress] = useState({ personal: false, legal: false })
@@ -126,9 +132,12 @@ const Eligibility: NextPage = () => {
               />
             )}
             {incomeTooHigh && (
-              <Alert title="Annual net income" type="danger">
+              <Alert
+                title="Annual net income"
+                type={EstimationSummaryState.AVAILABLE_INELIGIBLE}
+              >
                 You currently do not appear to be eligible for the OAS pension
-                because your annual income is higher than 129,757 CAD .
+                because your annual income is higher than 129,757 CAD.
               </Alert>
             )}
             <div className="md:container grid grid-cols-1 md:grid-cols-3 gap-10 mt-14">
@@ -160,6 +169,7 @@ const Eligibility: NextPage = () => {
                     data={data}
                     oas={setOAS}
                     gis={setGIS}
+                    summary={setSummary}
                     allowance={setAllowance}
                     afs={setAFS}
                     selectedTabIndex={setSelectedTabIndex}
@@ -186,7 +196,7 @@ const Eligibility: NextPage = () => {
           </Tab.Panel>
           <Tab.Panel className="mt-10">
             <div className="flex flex-col space-y-12">
-              {oas && gis ? (
+              {summary ? (
                 <>
                   <ProgressBar
                     sections={[
@@ -196,178 +206,78 @@ const Eligibility: NextPage = () => {
                     ]}
                     estimateSection
                   />
-                  {(oas.eligibilityResult == ResultKey.ELIGIBLE &&
-                    gis.eligibilityResult == ResultKey.ELIGIBLE) ||
-                  (allowance &&
-                    allowance.eligibilityResult == ResultKey.ELIGIBLE) ? (
-                    <>
-                      {' '}
-                      <Alert title="Eligibility" type="info">
-                        Based on the information you have provided, you are
-                        likely eligible for the following benefits.
-                      </Alert>
-                      <table>
-                        <thead className="font-semibold text-content border-b border-content">
-                          <tr className=" ">
-                            <th>Sample Benefits</th>
-                            <th>Eligibility</th>
-                            <th>Estimated Monthly Amount (CAD)</th>
-                          </tr>
-                        </thead>
-                        <tbody className="align-top">
-                          <tr className="">
-                            <td>Old Age Security (OAS)</td>
-                            <td>
-                              <p>{oas.eligibilityResult.replace('!', '')}</p>
-                              <p>Details: {oas.detail}</p>
-                            </td>
-                            <td>${oas.entitlementResult}</td>
-                          </tr>
-                          <tr className="bg-[#E8F2F4]">
-                            <td>Guaranteed Income Supplement (GIS)</td>
-                            <td>
-                              <p>{gis.eligibilityResult.replace('!', '')}</p>
-                              <p>Details: {gis.detail}</p>
-                            </td>
-                            <td>${gis.entitlementResult}</td>
-                          </tr>
-                          <tr>
-                            <td>Allowance</td>
-                            <td>
-                              <p>
-                                {allowance &&
-                                  allowance.eligibilityResult.replace('!', '')}
-                              </p>
-                              {allowance &&
-                                (allowance.eligibilityResult ==
-                                  ResultKey.INELIGIBLE ||
-                                  allowance.eligibilityResult ==
-                                    ResultKey.CONDITIONAL) && (
-                                  <p>Details: {allowance.detail}</p>
-                                )}
-                            </td>
-                            <td>${allowance && allowance.entitlementResult}</td>
-                          </tr>
-                          <tr className="bg-[#E8F2F4]">
-                            <td>Allowance for Survivor</td>
-                            <td>
-                              <p>
-                                {afs && afs.eligibilityResult.replace('!', '')}
-                              </p>
-                              {afs &&
-                                (afs.eligibilityResult ==
-                                  ResultKey.INELIGIBLE ||
-                                  afs.eligibilityResult ==
-                                    ResultKey.CONDITIONAL) && (
-                                  <p>Details: {afs.detail}</p>
-                                )}
-                            </td>
-                            <td>${afs && afs.entitlementResult}</td>
-                          </tr>
-                          <tr className="border-t border-content font-semibold ">
-                            <td colSpan={2}>Total Monthly Benefit Amount</td>
-                            <td>
-                              $
-                              {oas.entitlementResult +
-                                gis.entitlementResult +
-                                allowance?.entitlementResult +
-                                afs?.entitlementResult}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <p>
-                        For a more accurate assessment, you are encouraged to{' '}
-                        <Link
-                          href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"
-                          passHref
-                        >
-                          <a className="text-default-text underline">
-                            contact Service Canada{' '}
-                          </a>
-                        </Link>
-                        and check out the FAQ on documents you may be required
-                        to provide.
-                      </p>
-                      <div>
-                        <h2 className="h2 mt-8">More Information</h2>
-                        <ul className="list-disc">
-                          <li className="ml-12 text-default-text underline">
-                            <Link
-                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html"
-                              passHref
-                            >
-                              <a>Old Age Security Payment Amounts</a>
-                            </Link>
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            <Link
-                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab1-1.html"
-                              passHref
-                            >
-                              <a>Guaranteed Income Supplement (GIS) amounts</a>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="flex flex-col space-y-4">
-                      <Alert title="Eligibility" type="warning">
-                        <div>
+                  <Alert title={summary.title} type={summary.state}>
+                    {summary.details}
+                  </Alert>
+                  <table>
+                    <thead className="font-semibold text-content border-b border-content">
+                      <tr className=" ">
+                        <th>Sample Benefits</th>
+                        <th>Eligibility</th>
+                        <th>Estimated Monthly Amount (CAD)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="align-top">
+                      <tr className="">
+                        <td>Old Age Security (OAS)</td>
+                        <td>
+                          <p>{oas.eligibilityResult.replace('!', '')}</p>
+                          <p>Details: {oas.detail}</p>
+                        </td>
+                        <td>${oas.entitlementResult}</td>
+                      </tr>
+                      <tr className="bg-[#E8F2F4]">
+                        <td>Guaranteed Income Supplement (GIS)</td>
+                        <td>
+                          <p>{gis.eligibilityResult.replace('!', '')}</p>
+                          <p>Details: {gis.detail}</p>
+                        </td>
+                        <td>${gis.entitlementResult}</td>
+                      </tr>
+                      <tr>
+                        <td>Allowance</td>
+                        <td>
                           <p>
-                            Based on the information provided, you are
-                            encouraged to contact Service Canada using the link
-                            below:
+                            {allowance &&
+                              allowance.eligibilityResult.replace('!', '')}
                           </p>
-                          <Link
-                            href={
-                              'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'
-                            }
-                            passHref
-                          >
-                            <a className="text-default-text underline">
-                              Contact Service Canada
-                            </a>
-                          </Link>
-                        </div>
-                      </Alert>
-                      <div className="pt-12">
-                        <Image
-                          src="/people.png"
-                          width="1139px"
-                          height="443px"
-                          alt="A diverse group of Canadians"
-                        />
-                      </div>
-                      <div>
-                        <h2 className="h2 mt-8">More Information</h2>
-                        <ul className="list-disc">
-                          <li className="ml-12 text-default-text underline">
-                            <Link
-                              passHref
-                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html"
-                            >
-                              <a target="_blank">
-                                You may qualify for the Allowance program
-                              </a>
-                            </Link>
-                          </li>
-                          <li className="ml-12 text-default-text underline">
-                            <Link
-                              passHref
-                              href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html"
-                            >
-                              <a target="_blank">
-                                You may qualify for the Allowance for Survivor
-                                program
-                              </a>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  )}
+                          {allowance &&
+                            (allowance.eligibilityResult ==
+                              ResultKey.INELIGIBLE ||
+                              allowance.eligibilityResult ==
+                                ResultKey.CONDITIONAL) && (
+                              <p>Details: {allowance.detail}</p>
+                            )}
+                        </td>
+                        <td>${allowance && allowance.entitlementResult}</td>
+                      </tr>
+                      <tr className="bg-[#E8F2F4]">
+                        <td>Allowance for Survivor</td>
+                        <td>
+                          <p>{afs && afs.eligibilityResult.replace('!', '')}</p>
+                          {afs &&
+                            (afs.eligibilityResult == ResultKey.INELIGIBLE ||
+                              afs.eligibilityResult ==
+                                ResultKey.CONDITIONAL) && (
+                              <p>Details: {afs.detail}</p>
+                            )}
+                        </td>
+                        <td>${afs && afs.entitlementResult}</td>
+                      </tr>
+                      <tr className="border-t border-content font-semibold ">
+                        <td colSpan={2}>Total Monthly Benefit Amount</td>
+                        <td>
+                          $
+                          {oas.entitlementResult +
+                            gis.entitlementResult +
+                            allowance?.entitlementResult +
+                            afs?.entitlementResult}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <ContactCTA />
+                  <ConditionalLinks links={summary.links} />
                 </>
               ) : (
                 <div className="flex place-content-center">
