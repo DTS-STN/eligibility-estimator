@@ -323,16 +323,3 @@ export const retrieveFormData = (formName = 'form[name="ee-form"]') => {
 
   return new FormData(form)
 }
-
-/**
- * Retrieves a form's internal representation of itself.
- *
- * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
- * @returns the eligibility estimator's form data
- */
-export const retrieveFormElements = (formName = 'form[name="ee-form"]') => {
-  const form: HTMLFormElement = document.querySelector(formName)
-  if (!form) return
-
-  return form.elements
-}
