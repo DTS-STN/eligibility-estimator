@@ -12,6 +12,9 @@ const FormField = types
     value: types.maybe(types.string),
   })
   .actions((self) => ({
+    setValue(value: string) {
+      self.value = value
+    },
     clearValue() {
       self.value = null
     },
@@ -27,15 +30,12 @@ const Form = types
     },
   }))
   .actions((self) => ({
-    /**
-     * clears all field values in a form
-     */
-    clear() {
+    clearForm() {
       for (const field of self.fields) {
         field.clearValue()
       }
     },
-    setupForm(data: any[]) {
+    setupForm(data: FieldData[]) {
       data.map((field) =>
         self.addField({
           key: field.key,
