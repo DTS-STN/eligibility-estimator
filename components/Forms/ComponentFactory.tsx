@@ -74,12 +74,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
         } else {
           // handle error - validate per field once validation designs are complete
           console.log(data)
-          // error object would be like:
-          // error = {
-          //  income: string,
-          //  ...
-          //  [key]: value,
-          // }
+          const invalidFields = validateFieldsAgainstAPIErrors(data.detail)
+          setError(invalidFields)
         }
       })
   }
@@ -251,6 +247,15 @@ const validateAgainstEmptyFormFields = (
   }
 
   return emptyFields
+}
+
+const validateFieldsAgainstAPIErrors = (
+  detailedErrorData: any
+): Record<string, string> => {
+  return {
+    age: 'Age must be less than or equal to 150',
+    yearsInCanadaSince18: 'Years in Canada should be no more than age minus 18',
+  }
 }
 
 /**
