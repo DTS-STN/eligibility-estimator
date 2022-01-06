@@ -1,6 +1,7 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
+import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
@@ -45,7 +46,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
   selectedTabIndex,
   setProgress,
 }) => {
-  let lastCategory = null
+  let lastCategory: string = null
 
   const router = useRouter()
   const query = router.query
@@ -53,6 +54,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
 
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)
+
+  console.log(data)
 
   /**
    * send a GET request to the API, appended with query string data
@@ -63,7 +66,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
@@ -76,7 +78,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
           checkCompletion(data.fieldData, formCompletion, setProgress)
         } else {
           // handle error - validate per field once validation designs are complete
-          console.log(data)
         }
       })
   }
@@ -108,18 +109,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       action="/eligibility"
       onSubmit={(e) => e.preventDefault()}
     >
-      {/* 
-      <input
-        type="hidden"
-        name="lang"
-        value={useInternationalization('lang')}
-      /> 
-      */}
+      <input type="hidden" name="_language" value="EN" />
       {formState.map((field) => {
         const content = (
           <div key={field.key}>
-            {field.category != lastCategory && (
-              <h2 className="h2 mb-8">{field.category}</h2>
+            {field.category.key != lastCategory && (
+              <h2 className="h2 mb-8">{field.category.text}</h2>
             )}
             {(field.type == 'number' || field.type == 'string') && (
               <div className="mb-10">
@@ -130,7 +125,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                   placeholder={field.placeholder ?? ''}
                   onChange={debounce(handleChange, 1000)}
                   defaultValue={query[field.key]}
-                  data-category={field.category}
+                  data-category={field.category.key}
                   required
                 />
               </div>
@@ -145,12 +140,17 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                 <Radio
                   name={field.key}
                   values={
-                    field.type == 'boolean' ? ['Yes', 'No'] : field.values
+                    field.type == 'boolean'
+                      ? [
+                          { key: true, text: 'Yes' },
+                          { key: false, text: 'No' },
+                        ]
+                      : field.values
                   }
                   keyforid={field.key}
                   label={field.label}
                   onChange={handleChange}
-                  category={field.category}
+                  category={field.category.key}
                   defaultValue={formCompletion[field.key]}
                   required
                 />
@@ -158,7 +158,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
             )}
           </div>
         )
-        lastCategory = field.category
+        lastCategory = field.category.key
 
         return content
       })}
@@ -215,14 +215,14 @@ const checkCompletion = (
   const personal = fields
     .filter(
       (field) =>
-        field.category == 'Personal Information' ||
-        field.category == 'Partner Details'
+        field.category.key == FieldCategory.PERSONAL_INFORMATION ||
+        field.category.key == FieldCategory.PARTNER_DETAILS
     )
     .map((p) => p.key)
   const personalComplete = personal.every((item) => formCompletion[item])
 
   const legal = fields
-    .filter((field) => field.category == 'Legal Status')
+    .filter((field) => field.category.key == FieldCategory.LEGAL_STATUS)
     .map((p) => p.key)
   const legalComplete = legal.every((item) => formCompletion[item])
 
