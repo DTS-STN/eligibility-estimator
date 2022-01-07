@@ -157,10 +157,6 @@ const Eligibility: NextPage = () => {
                 ) : (
                   <ComponentFactory
                     data={data}
-                    oas={setOAS}
-                    gis={setGIS}
-                    allowance={setAllowance}
-                    afs={setAFS}
                     selectedTabIndex={setSelectedTabIndex}
                     setProgress={setProgress}
                   />
@@ -205,6 +201,9 @@ const Eligibility: NextPage = () => {
                         Based on the information you have provided, you are
                         likely eligible for the following benefits.
                       </Alert>
+                      {/**
+                       // TODO: use new summary object and RootStore 
+                       */}
                       <table>
                         <thead className="font-semibold text-content border-b border-content">
                           <tr className=" ">

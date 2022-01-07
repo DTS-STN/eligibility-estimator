@@ -24,7 +24,7 @@ export interface BenefitResult {
   eligibilityResult: ResultKey
   entitlementResult: number
   reason: ResultReason
-  detail: String
+  detail: string
   missingFields?: Array<FieldKey>
 }
 

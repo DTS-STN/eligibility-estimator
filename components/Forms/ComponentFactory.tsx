@@ -1,7 +1,7 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, Dispatch, useState } from 'react'
-import { FieldData } from '../../utils/api/definitions/fields'
+import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
   ResponseSuccess,
@@ -14,13 +14,10 @@ import { FormSelect } from './Select'
 import { observer } from 'mobx-react'
 import { Form, FormField, RootStore } from '../../client-state/store'
 import type { Instance } from 'mobx-state-tree'
+import { FieldCategory } from '../../utils/api/definitions/enums'
 
 interface FactoryProps {
   data: ResponseSuccess
-  oas: Dispatch<BenefitResult>
-  gis: Dispatch<BenefitResult>
-  allowance: Dispatch<BenefitResult>
-  afs: Dispatch<BenefitResult>
   setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
 }
@@ -31,6 +28,8 @@ const API_URL = `api/calculateEligibility`
 /** form completion state */
 let formCompletion: Record<string, any> = {}
 
+// TODO: merge develop
+
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
@@ -38,69 +37,22 @@ let formCompletion: Record<string, any> = {}
  * @returns
  */
 export const ComponentFactory: React.VFC<FactoryProps> = observer(
-  ({ data, oas, gis, allowance, afs, selectedTabIndex, setProgress }) => {
+  ({ data, selectedTabIndex, setProgress }) => {
     let lastCategory = null
 
     const router = useRouter()
     const query = router.query
-    formCompletion = { ...query, ...formCompletion }
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
 
-    const orderedFields = sortBy(data.fieldData, 'order')
-    form.setupForm(orderedFields)
-    console.log(root)
-
-    const [formState, setFormState] = useState(orderedFields)
-    const [error, setError] = useState<Record<string, string>>({})
-
-    /**
-     * send a GET request to the API, appended with query string data
-     * @param queryString the query string to append to the APIs get request
-     */
-    const sendAPIRequest = (queryString: string) => {
-      form.sendAPIRequest()
-      fetch(`${API_URL}?${queryString}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (!data.error) {
-            setFormState(data.fieldData)
-            form.setupForm(data.fieldData)
-
-            oas(data.oas)
-            gis(data.gis)
-            allowance(data.allowance)
-            afs(data.afs)
-
-            // set progress
-            checkCompletion(data.fieldData, formCompletion, setProgress)
-          } else {
-            // handle error - validate per field once validation designs are complete
-            const invalidFields = validateFieldsAgainstAPIErrors(data.detail)
-            setError(invalidFields)
-          }
-        })
+    if (form.empty) {
+      form.setupForm(data.fieldData)
     }
 
-    /**
-     * Global change handler for the dynamic form elements in the eligibility form
-     */
-    const handleChange = async (e) => {
-      const formData = retrieveFormData()
-      if (!formData) return
-      const qs = buildQueryStringFromFormData(formData, form, true)
-
-      const income = formData
-        .get('income')
-        .toString()
-        .replace('$', '')
-        .replace(',', '')
-
-      // validate against a client's income and if it's too high, push to the eligibility page with an error
-      if (validateIncome(income)) router.push(`/eligibility?${qs}`)
-
-      sendAPIRequest(qs)
+    //set income from query parameter if exists
+    if (query[FieldKey.INCOME] !== '') {
+      form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
     }
 
     return (
@@ -121,7 +73,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         {form.fields.map((field: Instance<typeof FormField>) => {
           const isChildQuestion =
             field.category ==
-            ('Partner Details' || 'Social Agreement Countries')
+            (FieldCategory.PARTNER_DETAILS || 'Social Agreement Countries') // TODO: need to add this category on the API
               ? true
               : false
 
@@ -142,9 +94,9 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     name={field.key}
                     label={field.label}
                     placeholder={field.placeholder ?? ''}
-                    onChange={debounce(handleChange, 1000)}
+                    onChange={debounce(field.handleChange, 1000)}
                     value={field?.value}
-                    data-category={field.category ?? query[field.key]}
+                    data-category={field.category}
                     // error={error[field.key] ?? undefined}
                     required
                   />
@@ -154,8 +106,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 <div className="pb-8">
                   <FormSelect
                     field={field}
-                    form={form}
-                    sendAPIRequest={sendAPIRequest}
                     // error={error[field.key] ?? undefined}
                     value={field.value}
                   />
@@ -171,7 +121,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     }
                     keyforid={field.key}
                     label={field.label}
-                    onChange={handleChange}
+                    onChange={field.handleChange}
                     category={field.category}
                     //error={error[field.key] ?? undefined}
                     required
@@ -210,19 +160,17 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             role="button"
             className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
             onClick={(e) => {
-              handleChange(e)
-
-              // validate against empty inputs in the form and setError
-              const emptyFields = validateAgainstEmptyFormFields(
-                formState,
-                formCompletion
-              )
-
-              if (Object.keys(emptyFields).length === 0) {
-                selectedTabIndex(1)
-              } else {
-                setError(emptyFields)
-              }
+              // field.handleChange()
+              // // validate against empty inputs in the form and setError
+              // const emptyFields = validateAgainstEmptyFormFields(
+              //   formState,
+              //   formCompletion
+              // )
+              // if (Object.keys(emptyFields).length === 0) {
+              //   selectedTabIndex(1)
+              // } else {
+              //   setError(emptyFields)
+              // }
             }}
           >
             Estimate
@@ -291,51 +239,4 @@ const checkCompletion = (
   const legalComplete = legal.every((item) => formCompletion[item])
 
   setProgress({ personal: personalComplete, legal: legalComplete })
-}
-
-/**
- * Builds a query string to the API
- *
- * @param formData Data residing in the eligibility estimator form
- * @param updateFormCompletion optionally update global form completion state
- * @returns
- */
-export const buildQueryStringFromFormData = (
-  formData: FormData,
-  form: Instance<typeof Form>,
-  updateFormCompletion = true
-) => {
-  let qs = ''
-  for (const [key, value] of formData.entries()) {
-    if (value == '') {
-      continue
-    }
-    // remove masking from currency
-    let val = value.toString().replace('$', '').replace(',', '')
-
-    // build query string
-    if (qs !== '') qs += '&'
-    qs += `${key}=${val}`
-
-    // update global for completion state
-    if (updateFormCompletion) {
-      formCompletion[key] = val
-      const formField: Instance<typeof FormField> = form.getField(key)
-      formField.setValue(val)
-    }
-  }
-  return qs
-}
-
-/**
- * Retrieves a form's internal representation of itself.
- *
- * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
- * @returns the eligibility estimator's form data
- */
-export const retrieveFormData = (formName = 'form[name="ee-form"]') => {
-  const form: HTMLFormElement = document.querySelector(formName)
-  if (!form) return
-
-  return new FormData(form)
 }

@@ -3,6 +3,7 @@ import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
+import { FieldKey } from '../../utils/api/definitions/fields'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -44,7 +45,7 @@ export const Input: React.VFC<InputProps> = observer((props) => {
         <Tooltip field={name} />
       </label>
       {error && <ErrorLabel errorMessage={error} />}
-      {name == 'income' || name == 'partnerIncome' ? (
+      {name == FieldKey.INCOME || name == FieldKey.PARTNER_INCOME ? (
         <NumberFormat
           name={name}
           thousandSeparator={true}

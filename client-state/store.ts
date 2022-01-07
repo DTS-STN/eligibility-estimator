@@ -1,10 +1,10 @@
-import { fill } from 'lodash'
 import {
   types,
   SnapshotIn,
   Instance,
   flow,
   getParentOfType,
+  getSnapshot,
   IMaybe,
   ISimpleType,
   ModelCreationType,
@@ -12,6 +12,7 @@ import {
 import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
 import { ResultKey } from '../utils/api/definitions/enums'
 import { FieldData } from '../utils/api/definitions/fields'
+import { ResponseError, ResponseSuccess } from '../utils/api/definitions/types'
 
 type FormProgress = {
   income: boolean
@@ -31,6 +32,7 @@ export const FormField = types
     category: types.string,
     order: types.number,
     placeholder: types.maybe(types.string),
+    default: types.maybe(types.string),
     value: types.maybeNull(types.string),
     options: types.optional(types.array(types.string), []),
     // error on a field
@@ -48,6 +50,17 @@ export const FormField = types
       self.value = null
     },
   }))
+  .actions((self) => ({
+    handleChange: flow(function* (e) {
+      const inputVal = e?.target?.value ?? e.value
+
+      // remove income masking and set field value
+      const value = inputVal.replace('$', '').replace(',', '')
+      self.setValue(value)
+
+      yield getParentOfType(self, Form).sendAPIRequest()
+    }),
+  }))
 
 export const Form = types
   .model({
@@ -55,8 +68,18 @@ export const Form = types
     // all errors on form
   })
   .views((self) => ({
-    fieldsByCategory(category: string) {
+    fieldsByCategory(category: string): Instance<typeof FormField>[] {
       return self.fields.filter((field) => field.category == category)
+    },
+    get empty(): boolean {
+      return self.fields.length === 0
+    },
+    get previouslySavedValues(): { key: string; value: string }[] {
+      // TODO: remove function, for debugging purposes
+      return self.fields.map((field) => ({
+        key: field.key,
+        value: field.value,
+      }))
     },
   }))
   .views((self) => ({
@@ -78,42 +101,67 @@ export const Form = types
     },
   }))
   .actions((self) => ({
-    getField(key: string): Instance<typeof FormField> {
+    getFieldByKey(key: string): Instance<typeof FormField> {
       return self.fields.find((field) => field.key == key)
     },
-    addField(data: SnapshotIn<typeof FormField>) {
+    removeFields(fields: Instance<typeof FormField>[]): void {
+      for (const field of fields) {
+        self.fields.remove(field)
+      }
+    },
+  }))
+  .actions((self) => ({
+    addField(data: SnapshotIn<typeof FormField>): void {
       self.fields.push({ ...data })
     },
-    removeAllFields() {
+    removeAllFields(): void {
       self.fields.clear()
     },
   }))
   .actions((self) => ({
-    clearForm() {
+    removeUnnecessaryFieldsFromForm(fieldData: FieldData[]): void {
+      const unnecessaryFields = self.fields
+        .map((f) => {
+          const field = fieldData.find((fd) => fd.key == f.key)
+
+          if (!field) return f
+        })
+        .filter((f) => FormField.is(f))
+      self.removeFields(unnecessaryFields)
+    },
+  }))
+  .actions((self) => ({
+    clearForm(): void {
       for (const field of self.fields) {
         field.clearValue()
       }
     },
     setupForm(data: FieldData[]) {
-      data.map((field) => {
-        const fieldExists = self.getField(field.key)
+      data.map((fieldData) => {
+        const field = self.getFieldByKey(fieldData?.key)
 
-        if (!fieldExists)
+        const defaultValue = (fieldData as any).default
+
+        if (!field) {
           self.addField({
-            key: field.key,
-            type: field.type,
-            label: field.label,
-            category: field.category,
-            order: field.order,
-            placeholder: (field as any).placeholder,
-            options: (field as any).values,
+            key: fieldData.key,
+            type: fieldData.type,
+            label: fieldData.label,
+            category: fieldData.category,
+            order: fieldData.order,
+            placeholder: (fieldData as any).placeholder,
+            default: (fieldData as any).default,
+            options: (fieldData as any).values,
+            value: defaultValue ?? null,
           })
+        }
+        self.fields.sort((a, b) => a.order - b.order)
       })
     },
     buildQueryStringWithFormData(): string {
       let qs = ''
       for (const field of self.fields) {
-        if (field.value == undefined) continue
+        if (!field.value) continue
 
         if (qs !== '') qs += '&'
         qs += `${field.key}=${encodeURIComponent(field.value)}`
@@ -127,13 +175,21 @@ export const Form = types
       const queryString = self.buildQueryStringWithFormData()
 
       const apiData = yield fetch(`${API_URL}?${queryString}`)
-      const data = yield apiData.json()
+      const data: ResponseSuccess | ResponseError = yield apiData.json()
 
-      const parent = getParentOfType(self, RootStore)
-      parent.setOAS(data.oas)
-      parent.setGIS(data.gis)
-      parent.setAFS(data.afs)
-      parent.setAllowance(data.allowance)
+      if ('error' in data) {
+        // validate errors
+        console.log(data.error)
+      } else {
+        const parent = getParentOfType(self, RootStore)
+        parent.setOAS(data.oas)
+        parent.setGIS(data.gis)
+        parent.setAFS(data.afs)
+        parent.setAllowance(data.allowance)
+
+        self.removeUnnecessaryFieldsFromForm(data.fieldData)
+        self.setupForm(data.fieldData)
+      }
     }),
   }))
 
