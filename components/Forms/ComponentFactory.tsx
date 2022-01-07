@@ -1,6 +1,6 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { Dispatch, useState } from 'react'
+import React, { ChangeEvent, Dispatch, useState } from 'react'
 import { FieldData } from '../../utils/api/definitions/fields'
 import type {
   BenefitResult,
@@ -12,6 +12,8 @@ import { Input } from './Input'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { observer } from 'mobx-react'
+import { Form, FormField } from '../../client-state/store'
+import type { Instance } from 'mobx-state-tree'
 
 interface FactoryProps {
   data: ResponseSuccess
@@ -43,9 +45,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     const query = router.query
     formCompletion = { ...query, ...formCompletion }
 
-    const form = useStore().form
+    const form: Instance<typeof Form> = useStore().form
 
     const orderedFields = sortBy(data.fieldData, 'order')
+    form.setupForm(orderedFields)
+    console.log(form)
+
     const [formState, setFormState] = useState(orderedFields)
     const [error, setError] = useState<Record<string, string>>({})
 
@@ -58,8 +63,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         .then((res) => res.json())
         .then((data) => {
           if (!data.error) {
-            console.log(data)
             setFormState(data.fieldData)
+            form.setupForm(data.fieldData)
 
             oas(data.oas)
             gis(data.gis)
@@ -70,7 +75,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             checkCompletion(data.fieldData, formCompletion, setProgress)
           } else {
             // handle error - validate per field once validation designs are complete
-            console.log(data)
             const invalidFields = validateFieldsAgainstAPIErrors(data.detail)
             setError(invalidFields)
           }
@@ -80,10 +84,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     /**
      * Global change handler for the dynamic form elements in the eligibility form
      */
-    const handleChange = async () => {
+    const handleChange = async (e) => {
+      console.log(e.target.value)
+
       const formData = retrieveFormData()
       if (!formData) return
-      const qs = buildQueryStringFromFormData(formData, true)
+      const qs = buildQueryStringFromFormData(formData, form, true)
 
       const income = formData
         .get('income')
@@ -113,6 +119,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       /> 
       */}
         {formState.map((field) => {
+          const formField: Instance<typeof FormField> = form.getField(field.key)
           const isChildQuestion =
             field.category ==
             ('Partner Details' || 'Social Agreement Countries')
@@ -137,7 +144,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     label={field.label}
                     placeholder={field.placeholder ?? ''}
                     onChange={debounce(handleChange, 1000)}
-                    defaultValue={formCompletion[field.key]}
+                    value={formField?.value}
                     data-category={field.category}
                     error={error[field.key] ?? undefined}
                     required
@@ -150,6 +157,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     field={field}
                     sendAPIRequest={sendAPIRequest}
                     error={error[field.key] ?? undefined}
+                    form={form as any}
+                    value={formField.value}
                   />
                 </div>
               )}
@@ -193,7 +202,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               const form: HTMLFormElement = document.querySelector(
                 "form[name='ee-form']"
               )
-              form.reset()
             }}
           >
             Clear
@@ -203,7 +211,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             role="button"
             className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
             onClick={(e) => {
-              handleChange()
+              handleChange(e)
 
               // validate against empty inputs in the form and setError
               const emptyFields = validateAgainstEmptyFormFields(
@@ -295,6 +303,7 @@ const checkCompletion = (
  */
 export const buildQueryStringFromFormData = (
   formData: FormData,
+  form: Instance<typeof Form>,
   updateFormCompletion = true
 ) => {
   let qs = ''
@@ -310,7 +319,11 @@ export const buildQueryStringFromFormData = (
     qs += `${key}=${val}`
 
     // update global for completion state
-    if (updateFormCompletion) formCompletion[key] = val
+    if (updateFormCompletion) {
+      formCompletion[key] = val
+      const formField: Instance<typeof FormField> = form.getField(key)
+      formField.setValue(val)
+    }
   }
   return qs
 }

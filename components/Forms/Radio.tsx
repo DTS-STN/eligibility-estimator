@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { InputHTMLAttributes, useEffect, useState } from 'react'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { observer } from 'mobx-react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
@@ -16,7 +17,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props {InputProps}
  * @returns
  */
-export const Radio: React.VFC<InputProps> = (props) => {
+export const Radio: React.VFC<InputProps> = observer((props) => {
   const { query } = useRouter()
   const { category, name, label, values, keyforid, error } = props
   return (
@@ -59,7 +60,7 @@ export const Radio: React.VFC<InputProps> = (props) => {
       </div>
     </>
   )
-}
+})
 
 const correctForBooleans = (value: string) => {
   switch (value) {

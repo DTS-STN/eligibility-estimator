@@ -7,6 +7,9 @@ import {
   retrieveFormData,
 } from './ComponentFactory'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { observer } from 'mobx-react'
+import { Form, FormField } from '../../client-state/store'
+import type { Instance } from 'mobx-state-tree'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -23,8 +26,12 @@ interface SelectProps
  * @param props {SelectProps}
  * @returns
  */
-export const FormSelect: React.VFC<SelectProps> = (props) => {
-  const { field, sendAPIRequest, name, error, value } = props
+export const FormSelect: React.VFC<
+  SelectProps & {
+    form: Instance<typeof Form>
+  }
+> = observer((props) => {
+  const { field, sendAPIRequest, name, error, form, value } = props
   const defaultValue = (field as any)?.default
 
   return (
@@ -68,6 +75,10 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
             if (!newValue) {
               return
             }
+            const formField: Instance<typeof FormField> = form.getField(
+              field.key
+            )
+            formField.setValue(newValue.value)
 
             const formData = retrieveFormData()
             if (!formData) return
@@ -75,7 +86,11 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
             // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
             //This just stuff the form with the correct information, overwriting the internal bad state.
             formData.set(field.key, newValue.value)
-            const queryString = buildQueryStringFromFormData(formData, true)
+            const queryString = buildQueryStringFromFormData(
+              formData,
+              form,
+              true
+            )
 
             sendAPIRequest(queryString)
           }}
@@ -86,4 +101,4 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
       </div>
     </>
   )
-}
+})
