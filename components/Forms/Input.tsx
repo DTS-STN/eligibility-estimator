@@ -57,13 +57,13 @@ export const Input: React.VFC<InputProps> = observer((props) => {
           onChange={onChange}
         />
       ) : (
-        <input
+        <NumberFormat
           name={name}
-          data-testid={name}
-          {...props}
-          value={value as string}
-          min={0}
           className="form-control text-content"
+          data-testid={name}
+          min={0}
+          value={value as string}
+          onChange={onChange}
         />
       )}
     </>

@@ -33,7 +33,15 @@ export const RootStoreContext = React.createContext<null | Instance<
 
 export function StoreProvider({ children }) {
   return (
-    <RootStoreContext.Provider value={RootStore.create({ form: {} })}>
+    <RootStoreContext.Provider
+      value={RootStore.create({
+        form: {},
+        oas: {},
+        gis: {},
+        afs: {},
+        allowance: {},
+      })}
+    >
       {children}
     </RootStoreContext.Provider>
   )

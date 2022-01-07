@@ -19,7 +19,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
   const { query } = useRouter()
-  const { category, name, label, values, keyforid, error } = props
+  const { category, name, value, label, values, keyforid, error } = props
   return (
     <>
       <div className="radio" data-category={category}>
@@ -37,13 +37,13 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           <Tooltip field={name} />
         </label>
         {error && <ErrorLabel errorMessage={error} />}
-        {values.map((value, index) => (
+        {values.map((val, index) => (
           <div key={index} className="flex items-center my-3 md:my-0">
             <input
               type="radio"
               id={`${keyforid}-${index}`}
               name={`${keyforid}`}
-              value={correctForBooleans(value)}
+              value={correctForBooleans(val)}
               // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
               className="opacity-0 -ml-4"
               {...props}
@@ -53,7 +53,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               className="radio flex items-center"
             >
               <span className="w-6 h-6 inline-block mr-2 rounded-full border border-grey min-w-[24px]"></span>
-              <p>{value}</p>
+              <p>{val}</p>
             </label>
           </div>
         ))}

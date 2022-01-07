@@ -12,7 +12,7 @@ import { Input } from './Input'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { observer } from 'mobx-react'
-import { Form, FormField } from '../../client-state/store'
+import { Form, FormField, RootStore } from '../../client-state/store'
 import type { Instance } from 'mobx-state-tree'
 
 interface FactoryProps {
@@ -45,11 +45,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     const query = router.query
     formCompletion = { ...query, ...formCompletion }
 
-    const form: Instance<typeof Form> = useStore().form
+    const root: Instance<typeof RootStore> = useStore()
+    const form: Instance<typeof Form> = root.form
 
     const orderedFields = sortBy(data.fieldData, 'order')
     form.setupForm(orderedFields)
-    console.log(form)
+    console.log(root)
 
     const [formState, setFormState] = useState(orderedFields)
     const [error, setError] = useState<Record<string, string>>({})
@@ -59,6 +60,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
      * @param queryString the query string to append to the APIs get request
      */
     const sendAPIRequest = (queryString: string) => {
+      form.sendAPIRequest()
       fetch(`${API_URL}?${queryString}`)
         .then((res) => res.json())
         .then((data) => {
@@ -85,8 +87,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
      * Global change handler for the dynamic form elements in the eligibility form
      */
     const handleChange = async (e) => {
-      console.log(e.target.value)
-
       const formData = retrieveFormData()
       if (!formData) return
       const qs = buildQueryStringFromFormData(formData, form, true)
@@ -118,8 +118,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         value={useInternationalization('lang')}
       /> 
       */}
-        {formState.map((field) => {
-          const formField: Instance<typeof FormField> = form.getField(field.key)
+        {form.fields.map((field: Instance<typeof FormField>) => {
           const isChildQuestion =
             field.category ==
             ('Partner Details' || 'Social Agreement Countries')
@@ -144,9 +143,9 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     label={field.label}
                     placeholder={field.placeholder ?? ''}
                     onChange={debounce(handleChange, 1000)}
-                    value={formField?.value}
-                    data-category={field.category}
-                    error={error[field.key] ?? undefined}
+                    value={field?.value}
+                    data-category={field.category ?? query[field.key]}
+                    // error={error[field.key] ?? undefined}
                     required
                   />
                 </div>
@@ -155,10 +154,10 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 <div className="pb-8">
                   <FormSelect
                     field={field}
+                    form={form}
                     sendAPIRequest={sendAPIRequest}
-                    error={error[field.key] ?? undefined}
-                    form={form as any}
-                    value={formField.value}
+                    // error={error[field.key] ?? undefined}
+                    value={field.value}
                   />
                 </div>
               )}
@@ -166,15 +165,15 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 <div className="pb-8">
                   <Radio
                     name={field.key}
+                    value={field.value}
                     values={
-                      field.type == 'boolean' ? ['Yes', 'No'] : field.values
+                      field.type == 'boolean' ? ['Yes', 'No'] : field.options
                     }
                     keyforid={field.key}
                     label={field.label}
                     onChange={handleChange}
                     category={field.category}
-                    defaultValue={formCompletion[field.key]}
-                    error={error[field.key] ?? undefined}
+                    //error={error[field.key] ?? undefined}
                     required
                   />
                 </div>
