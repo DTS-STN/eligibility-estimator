@@ -101,7 +101,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     label:
-      'Have you ever lived in a country with an established social security agreement?',
+      'Have you ever lived in a country with an <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a> before?',
     category: FieldCategory.LEGAL_STATUS,
     order: 10,
     type: FieldType.BOOLEAN,

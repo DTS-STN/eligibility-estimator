@@ -167,11 +167,6 @@ const Eligibility: NextPage = () => {
                 ) : (
                   <ComponentFactory
                     data={data}
-                    oas={setOAS}
-                    gis={setGIS}
-                    summary={setSummary}
-                    allowance={setAllowance}
-                    afs={setAFS}
                     selectedTabIndex={setSelectedTabIndex}
                     setProgress={setProgress}
                   />
@@ -209,6 +204,9 @@ const Eligibility: NextPage = () => {
                   <Alert title={summary.title} type={summary.state}>
                     {summary.details}
                   </Alert>
+                  {/**
+                   // TODO: use new summary object and RootStore 
+                  */}
                   <table>
                     <thead className="font-semibold text-content border-b border-content">
                       <tr className=" ">

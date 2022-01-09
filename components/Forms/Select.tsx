@@ -1,19 +1,18 @@
-import { DetailedHTMLProps, SelectHTMLAttributes, useState } from 'react'
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
 import Select from 'react-select'
-import { FieldData, fieldDefinitions } from '../../utils/api/definitions/fields'
 import { Tooltip } from '../Tooltip/tooltip'
-import {
-  buildQueryStringFromFormData,
-  retrieveFormData,
-} from './ComponentFactory'
+import { ErrorLabel } from './validation/ErrorLabel'
+import { observer } from 'mobx-react'
+import { Form, FormField } from '../../client-state/store'
+import { getParentOfType, Instance } from 'mobx-state-tree'
 
 interface SelectProps
   extends DetailedHTMLProps<
     SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
   > {
-  field: FieldData
-  sendAPIRequest: (queryString: string) => void
+  field: Instance<typeof FormField>
+  error?: string
 }
 
 /**
@@ -21,14 +20,15 @@ interface SelectProps
  * @param props {SelectProps}
  * @returns
  */
-export const FormSelect: React.VFC<SelectProps> = (props) => {
-  const { field, sendAPIRequest } = props
-  const defaultValue = (field as any)?.default
+export const FormSelect: React.VFC<SelectProps> = observer((props) => {
+  const { field, name, error, form, value } = props
+  const defaultValue = value ?? field.default
+
   return (
     <>
       <label
-        htmlFor={props.name}
-        aria-label={props.name}
+        htmlFor={name}
+        aria-label={name}
         className="font-semibold inline-block mb-1.5"
       >
         <span className="text-danger">* </span>
@@ -36,9 +36,9 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
         <span className="text-danger font-bold ml-2">(required)</span>
         <Tooltip field={field.key} />
       </label>
+      {error && <ErrorLabel errorMessage={error} />}
       <div className="w-full md:w-80">
         <Select
-          closeMenuOnScroll={false}
           styles={{
             container: (styles) => ({
               ...styles,
@@ -57,29 +57,22 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
               : undefined
           }
           name={field.key}
-          options={(field as any).values.map((opt) => ({
+          options={field.options.map((opt) => ({
             value: opt,
             label: opt,
           }))}
-          onChange={(newValue, action) => {
+          onChange={async (newValue: { value: string; label: string }) => {
             if (!newValue) {
+              field.clearValue()
               return
             }
-
-            const formData = retrieveFormData()
-            if (!formData) return
-
-            // react select calls this function THEN updates the internal representation of the form so the form element is always out of sync
-            //This just stuff the form with the correct information, overwriting the internal bad state.
-            formData.set(field.key, newValue.value)
-            const queryString = buildQueryStringFromFormData(formData, true)
-
-            sendAPIRequest(queryString)
+            field.handleChange(newValue)
           }}
+          closeMenuOnScroll={false}
           isSearchable
           isClearable
         />
       </div>
     </>
   )
-}
+})

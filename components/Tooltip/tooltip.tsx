@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { fieldDefinitions } from './index'
 
 export const Tooltip: React.FC<{
@@ -21,7 +21,7 @@ export const Tooltip: React.FC<{
     }
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keyup', handleEscPress)
   })
