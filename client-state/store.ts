@@ -143,8 +143,9 @@ export const Form = types
   }))
   .actions((self) => ({
     clearForm(): void {
+      console.log('clearing form!')
       for (const field of self.fields) {
-        field.clearValue()
+        field.setValue('')
       }
     },
     setupForm(data: FieldData[]) {

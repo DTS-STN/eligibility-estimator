@@ -47,6 +47,7 @@ export const Input: React.VFC<InputProps> = observer((props) => {
       {error && <ErrorLabel errorMessage={error} />}
       {name == FieldKey.INCOME || name == FieldKey.PARTNER_INCOME ? (
         <NumberFormat
+          id={name}
           name={name}
           thousandSeparator={true}
           prefix="$"
@@ -59,6 +60,7 @@ export const Input: React.VFC<InputProps> = observer((props) => {
         />
       ) : (
         <NumberFormat
+          id={name}
           name={name}
           className="form-control text-content"
           data-testid={name}

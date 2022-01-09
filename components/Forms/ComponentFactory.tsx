@@ -1,6 +1,6 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { Dispatch, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
@@ -41,10 +41,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       form.setupForm(data.fieldData)
     }
 
-    //set income from query parameter if exists
-    if (query[FieldKey.INCOME] !== '') {
-      form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
-    }
+    useEffect(() => {
+      //set income from query parameter if exists and only run on initial draw
+      if (query[FieldKey.INCOME] !== '') {
+        form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
+      }
+    }, [query[FieldKey.INCOME]])
 
     return (
       <form
@@ -97,7 +99,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   <FormSelect
                     field={field}
                     // error={error[field.key] ?? undefined}
-                    value={field.value}
+                    value={null}
                   />
                 </div>
               )}
@@ -140,6 +142,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
             onClick={(e) => {
               form.clearForm()
+              const x: HTMLFormElement = document.querySelector(
+                "form[name='ee-form']"
+              )
+
+              x.reset()
             }}
           >
             Clear

@@ -1,10 +1,10 @@
-import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
+import { DetailedHTMLProps, SelectHTMLAttributes, useRef } from 'react'
 import Select from 'react-select'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
-import { Form, FormField } from '../../client-state/store'
-import { getParentOfType, Instance } from 'mobx-state-tree'
+import { FormField } from '../../client-state/store'
+import { Instance } from 'mobx-state-tree'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -21,8 +21,11 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = observer((props) => {
-  const { field, name, error, form, value } = props
-  const defaultValue = value ?? field.default
+  const { field, name, error } = props
+  const defaultValue = field.value ?? field.default
+
+  const stateValue =
+    field.value !== null ? { label: field.value, value: field.value } : null
 
   return (
     <>
@@ -51,6 +54,7 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
           }}
           className="rselect"
           placeholder="Select from..."
+          value={stateValue}
           defaultValue={
             defaultValue !== undefined
               ? { label: defaultValue, value: defaultValue }
