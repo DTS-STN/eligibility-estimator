@@ -9,10 +9,20 @@ import {
   ISimpleType,
   ModelCreationType,
 } from 'mobx-state-tree'
-import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
-import { ResultKey } from '../utils/api/definitions/enums'
-import { FieldData } from '../utils/api/definitions/fields'
+import {
+  ExtractCFromProps,
+  IArrayType,
+  IModelType,
+  _NotCustomized,
+} from 'mobx-state-tree/dist/internal'
+import {
+  EstimationSummaryState,
+  FieldCategory,
+  ResultKey,
+} from '../utils/api/definitions/enums'
+import { FieldData, FieldKey } from '../utils/api/definitions/fields'
 import { ResponseError, ResponseSuccess } from '../utils/api/definitions/types'
+import { fixedEncodeURIComponent } from '../utils/web/helpers/utils'
 
 type FormProgress = {
   income: boolean
@@ -39,7 +49,7 @@ export const FormField = types
   })
   .views((self) => ({
     get filled() {
-      return self.value !== undefined
+      return self.value !== undefined && self.value !== null
     },
   }))
   .actions((self) => ({
@@ -85,12 +95,12 @@ export const Form = types
   .views((self) => ({
     get progress(): FormProgress {
       const iComplete = self
-        .fieldsByCategory('Income Details')
+        .fieldsByCategory(FieldCategory.INCOME_DETAILS)
         .every((field) => field.filled)
 
       const pComplete = [
-        ...self.fieldsByCategory('Personal Information'),
-        ...self.fieldsByCategory('Partner Details'),
+        ...self.fieldsByCategory(FieldCategory.PERSONAL_INFORMATION),
+        ...self.fieldsByCategory(FieldCategory.PARTNER_DETAILS),
       ].every((field) => field.filled)
 
       const lComplete = self
@@ -119,6 +129,7 @@ export const Form = types
     },
   }))
   .actions((self) => ({
+    // TODO: update using 'visible fields' from API
     removeUnnecessaryFieldsFromForm(fieldData: FieldData[]): void {
       const unnecessaryFields = self.fields
         .map((f) => {
@@ -163,8 +174,20 @@ export const Form = types
       for (const field of self.fields) {
         if (!field.value) continue
 
+        let val = ''
+        // remove masking from currency
+        if (
+          field.key == FieldKey.INCOME ||
+          field.key == FieldKey.PARTNER_INCOME
+        ) {
+          val = field.value.toString().replace('$', '').replace(',', '')
+        } else {
+          val = field.value.toString()
+        }
+
         if (qs !== '') qs += '&'
-        qs += `${field.key}=${encodeURIComponent(field.value)}`
+        //encodeURI and fix for encodeURIComponent and circle brackets
+        qs += `${field.key}=${fixedEncodeURIComponent(val)}`
       }
       return qs
     },
@@ -179,13 +202,14 @@ export const Form = types
 
       if ('error' in data) {
         // validate errors
-        console.log(data.error)
       } else {
         const parent = getParentOfType(self, RootStore)
         parent.setOAS(data.oas)
         parent.setGIS(data.gis)
         parent.setAFS(data.afs)
         parent.setAllowance(data.allowance)
+
+        parent.setSummary(data.summary)
 
         self.removeUnnecessaryFieldsFromForm(data.fieldData)
         self.setupForm(data.fieldData)
@@ -205,6 +229,19 @@ export const GIS = Eligibility.named('GIS')
 export const AFS = Eligibility.named('AFS')
 export const Allowance = Eligibility.named('Allowance')
 
+export const SummaryLink = types.model({
+  url: types.string,
+  text: types.string,
+  order: types.number,
+})
+
+export const Summary = types.model({
+  state: types.maybe(types.enumeration(Object.values(EstimationSummaryState))),
+  detail: types.maybe(types.string),
+  title: types.maybe(types.string),
+  links: types.maybe(types.array(SummaryLink)),
+})
+
 export const RootStore = types
   .model({
     form: Form,
@@ -212,7 +249,7 @@ export const RootStore = types
     gis: GIS,
     afs: AFS,
     allowance: Allowance,
-    //summary
+    summary: Summary,
   })
   .actions((self) => ({
     setOAS(
@@ -262,5 +299,30 @@ export const RootStore = types
       >
     ) {
       self.allowance = Allowance.create(input)
+    },
+    setSummary(
+      input: ModelCreationType<
+        ExtractCFromProps<{
+          state: IMaybe<ISimpleType<EstimationSummaryState>>
+          detail: IMaybe<ISimpleType<string>>
+          title: IMaybe<ISimpleType<string>>
+          links: IMaybe<
+            IArrayType<
+              IModelType<
+                {
+                  url: ISimpleType<string>
+                  text: ISimpleType<string>
+                  order: ISimpleType<number>
+                },
+                {},
+                _NotCustomized,
+                _NotCustomized
+              >
+            >
+          >
+        }>
+      >
+    ) {
+      self.summary = Summary.create(input)
     },
   }))

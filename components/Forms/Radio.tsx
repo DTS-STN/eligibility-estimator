@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router'
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { InputHTMLAttributes } from 'react'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
@@ -9,6 +8,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   values: any[]
   label: string
   category: string
+  checkedValue?: string
   error?: string
 }
 
@@ -18,8 +18,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
-  const { query } = useRouter()
-  const { category, name, label, onChange, values, keyforid, error } = props
+  const {
+    category,
+    name,
+    label,
+    checkedValue,
+    onChange,
+    values,
+    keyforid,
+    error,
+  } = props
   return (
     <>
       <div className="radio" data-category={category}>
@@ -48,6 +56,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               value={correctForBooleans(val)}
               onChange={onChange}
               required
+              defaultChecked={checkedValue === correctForBooleans(val)}
             />
             <label
               htmlFor={`${keyforid}-${index}`}

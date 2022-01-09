@@ -40,6 +40,7 @@ export function StoreProvider({ children }) {
         gis: {},
         afs: {},
         allowance: {},
+        summary: {},
       })}
     >
       {children}

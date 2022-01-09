@@ -1,14 +1,10 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useState } from 'react'
-import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
-import type {
-  BenefitResult,
-  ResponseSuccess,
-} from '../../utils/api/definitions/types'
+import { FieldKey } from '../../utils/api/definitions/fields'
+import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
 import { useStore } from '../Hooks'
-import { fixedEncodeURIComponent } from '../../utils/api/helpers/webUtils'
 import { Input } from './Input'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
@@ -19,7 +15,6 @@ import { FieldCategory } from '../../utils/api/definitions/enums'
 
 interface FactoryProps {
   data: ResponseSuccess
-  setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
 }
 
@@ -33,7 +28,7 @@ const API_URL = `api/calculateEligibility`
  * @returns
  */
 export const ComponentFactory: React.VFC<FactoryProps> = observer(
-  ({ data, selectedTabIndex, setProgress }) => {
+  ({ data, selectedTabIndex }) => {
     let lastCategory = null
 
     const router = useRouter()
@@ -41,8 +36,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
-
-    console.log(data)
 
     if (form.empty) {
       form.setupForm(data.fieldData)
@@ -112,7 +105,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 <div className="pb-8">
                   <Radio
                     name={field.key}
-                    value={field.value}
+                    checkedValue={field.value}
                     values={
                       field.type == 'boolean' ? ['Yes', 'No'] : field.options
                     }
@@ -135,19 +128,18 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         <div className="flex flex-col md:flex-row gap-x-8 mt-20">
           <button
             type="button"
-            role="button"
+            role="navigation"
             className="btn btn-default w-full md:w-40"
             onClick={(e) => router.push('/')}
           >
             Back
           </button>
           <button
-            type="reset"
+            type="button"
+            role="button"
             className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
             onClick={(e) => {
-              const form: HTMLFormElement = document.querySelector(
-                "form[name='ee-form']"
-              )
+              form.clearForm()
             }}
           >
             Clear
@@ -157,17 +149,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             role="button"
             className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
             onClick={(e) => {
-              // field.handleChange()
-              // // validate against empty inputs in the form and setError
-              // const emptyFields = validateAgainstEmptyFormFields(
-              //   formState,
-              //   formCompletion
-              // )
-              // if (Object.keys(emptyFields).length === 0) {
-              //   selectedTabIndex(1)
-              // } else {
-              //   setError(emptyFields)
-              // }
+              selectedTabIndex(1)
             }}
           >
             Estimate
@@ -177,34 +159,3 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     )
   }
 )
-
-/**
- *
- * @param formElements the field data array from the current form
- * @param formCompletion the global form completion state
- * @returns true if the form is valid, false if it has empty fields
- */
-const validateAgainstEmptyFormFields = (
-  formElements: FieldData[],
-  formCompletion: Record<string, any>
-): Record<string, string> => {
-  const emptyFields: Record<string, string> = {}
-
-  // find the empty form fields and create the expected shape
-  for (const element of formElements) {
-    if (formCompletion[element.key] === undefined) {
-      emptyFields[element.key] = 'This field is required'
-    }
-  }
-
-  return emptyFields
-}
-
-const validateFieldsAgainstAPIErrors = (
-  detailedErrorData: any
-): Record<string, string> => {
-  return {
-    age: 'Age must be less than or equal to 150',
-    yearsInCanadaSince18: 'Years in Canada should be no more than age minus 18',
-  }
-}

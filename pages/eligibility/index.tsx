@@ -11,6 +11,7 @@ import { ContactCTA } from '../../components/ContactCTA'
 import { FAQ } from '../../components/FAQ'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 import { Input } from '../../components/Forms/Input'
+import { useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 import ProgressBar from '../../components/ProgressBar'
@@ -21,25 +22,14 @@ import {
 } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
-
-const dataFetcher = async (url) => {
-  const res = await fetch(url)
-  const data = await res.json()
-
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-  return data
-}
+import { dataFetcher } from '../../utils/web/helpers/utils'
+import { Instance } from 'mobx-state-tree'
+import { RootStore, Form } from '../../client-state/store'
+import { linearBuckets } from 'prom-client'
+import { observer } from 'mobx-react'
 
 const Eligibility: NextPage = () => {
   const { query } = useRouter()
-  const [oas, setOAS] = useState<BenefitResult>(null)
-  const [gis, setGIS] = useState<BenefitResult>(null)
-  const [summary, setSummary] = useState<any>(null)
-  const [allowance, setAllowance] = useState<BenefitResult>(null)
-  const [afs, setAFS] = useState<BenefitResult>(null)
-  const [progress, setProgress] = useState({ personal: false, legal: false })
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
 
   // check if income is too high to participate in calculation
@@ -59,6 +49,8 @@ const Eligibility: NextPage = () => {
     () => query && `api/calculateEligibility?${params && params}`,
     dataFetcher
   )
+
+  const root: Instance<typeof RootStore> = useStore()
 
   if (error)
     return (
@@ -80,9 +72,9 @@ const Eligibility: NextPage = () => {
         key={selectedTabIndex}
         defaultIndex={selectedTabIndex}
         onChange={(index) => {
-          if (index == 0) {
-            setProgress({ legal: false, personal: false })
-          }
+          // if (index == 0) {
+          //   setProgress({ legal: false, personal: false })
+          // }
           setSelectedTabIndex(index)
         }}
       >
@@ -122,12 +114,19 @@ const Eligibility: NextPage = () => {
             {showProgress && (
               <ProgressBar
                 sections={[
-                  { title: 'Income Details', complete: true },
+                  {
+                    // TODO: progress needs to be fixed!
+                    title: 'Income Details',
+                    complete: root.form.progress.income,
+                  },
                   {
                     title: 'Personal Information',
-                    complete: progress.personal,
+                    complete: root.form.progress.personal,
                   },
-                  { title: 'Legal Status', complete: progress.legal },
+                  {
+                    title: 'Legal Status',
+                    complete: root.form.progress.legal,
+                  },
                 ]}
               />
             )}
@@ -168,7 +167,6 @@ const Eligibility: NextPage = () => {
                   <ComponentFactory
                     data={data}
                     selectedTabIndex={setSelectedTabIndex}
-                    setProgress={setProgress}
                   />
                 )}
               </div>
@@ -191,7 +189,8 @@ const Eligibility: NextPage = () => {
           </Tab.Panel>
           <Tab.Panel className="mt-10">
             <div className="flex flex-col space-y-12">
-              {summary ? (
+              {root.summary.state &&
+              root.summary.state !== EstimationSummaryState.MORE_INFO ? (
                 <>
                   <ProgressBar
                     sections={[
@@ -201,8 +200,8 @@ const Eligibility: NextPage = () => {
                     ]}
                     estimateSection
                   />
-                  <Alert title={summary.title} type={summary.state}>
-                    {summary.details}
+                  <Alert title={root.summary.title} type={root.summary.state}>
+                    {root.summary.detail}
                   </Alert>
                   {/**
                    // TODO: use new summary object and RootStore 
@@ -219,63 +218,67 @@ const Eligibility: NextPage = () => {
                       <tr className="">
                         <td>Old Age Security (OAS)</td>
                         <td>
-                          <p>{oas.eligibilityResult.replace('!', '')}</p>
-                          <p>Details: {oas.detail}</p>
+                          <p>{root.oas.eligibilityResult}</p>
+                          <p>Details: {root.oas.detail}</p>
                         </td>
-                        <td>${oas.entitlementResult}</td>
+                        <td>${root.oas.entitlementResult}</td>
                       </tr>
                       <tr className="bg-[#E8F2F4]">
                         <td>Guaranteed Income Supplement (GIS)</td>
                         <td>
-                          <p>{gis.eligibilityResult.replace('!', '')}</p>
-                          <p>Details: {gis.detail}</p>
+                          <p>{root.gis.eligibilityResult}</p>
+                          <p>Details: {root.gis.detail}</p>
                         </td>
-                        <td>${gis.entitlementResult}</td>
+                        <td>${root.gis.entitlementResult}</td>
                       </tr>
                       <tr>
                         <td>Allowance</td>
                         <td>
                           <p>
-                            {allowance &&
-                              allowance.eligibilityResult.replace('!', '')}
+                            {root.allowance && root.allowance.eligibilityResult}
                           </p>
-                          {allowance &&
-                            (allowance.eligibilityResult ==
+                          {root.allowance &&
+                            (root.allowance.eligibilityResult ==
                               ResultKey.INELIGIBLE ||
-                              allowance.eligibilityResult ==
+                              root.allowance.eligibilityResult ==
                                 ResultKey.CONDITIONAL) && (
-                              <p>Details: {allowance.detail}</p>
+                              <p>Details: {root.allowance.detail}</p>
                             )}
                         </td>
-                        <td>${allowance && allowance.entitlementResult}</td>
+                        <td>
+                          ${root.allowance && root.allowance.entitlementResult}
+                        </td>
                       </tr>
                       <tr className="bg-[#E8F2F4]">
                         <td>Allowance for Survivor</td>
                         <td>
-                          <p>{afs && afs.eligibilityResult.replace('!', '')}</p>
-                          {afs &&
-                            (afs.eligibilityResult == ResultKey.INELIGIBLE ||
-                              afs.eligibilityResult ==
+                          <p>{root.afs && root.afs.eligibilityResult}</p>
+                          {root.afs &&
+                            (root.afs.eligibilityResult ==
+                              ResultKey.INELIGIBLE ||
+                              root.afs.eligibilityResult ==
                                 ResultKey.CONDITIONAL) && (
-                              <p>Details: {afs.detail}</p>
+                              <p>Details: {root.afs.detail}</p>
                             )}
                         </td>
-                        <td>${afs && afs.entitlementResult}</td>
+                        <td>${root.afs && root.afs.entitlementResult}</td>
                       </tr>
                       <tr className="border-t border-content font-semibold ">
                         <td colSpan={2}>Total Monthly Benefit Amount</td>
                         <td>
                           $
-                          {oas.entitlementResult +
-                            gis.entitlementResult +
-                            allowance?.entitlementResult +
-                            afs?.entitlementResult}
+                          {root.oas.entitlementResult +
+                            root.gis.entitlementResult +
+                            root.allowance?.entitlementResult +
+                            root.afs?.entitlementResult}
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   <ContactCTA />
-                  <ConditionalLinks links={summary.links} />
+                  {root.summary?.links?.length && (
+                    <ConditionalLinks links={root.summary.links} />
+                  )}
                 </>
               ) : (
                 <div className="flex place-content-center">
@@ -296,4 +299,4 @@ const Eligibility: NextPage = () => {
   )
 }
 
-export default Eligibility
+export default observer(Eligibility)
