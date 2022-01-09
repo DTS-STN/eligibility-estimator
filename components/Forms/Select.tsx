@@ -25,7 +25,9 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
   const defaultValue = field.value ?? field.default
 
   const stateValue =
-    field.value !== null ? { label: field.value, value: field.value } : null
+    field.value !== null && field.value !== ''
+      ? { label: field.value, value: field.value }
+      : null
 
   return (
     <>

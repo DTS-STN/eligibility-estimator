@@ -129,7 +129,6 @@ export const Form = types
     },
   }))
   .actions((self) => ({
-    // TODO: update using 'visible fields' from API
     removeUnnecessaryFieldsFromForm(fieldData: FieldData[]): void {
       const unnecessaryFields = self.fields
         .map((f) => {
@@ -145,7 +144,13 @@ export const Form = types
     clearForm(): void {
       console.log('clearing form!')
       for (const field of self.fields) {
-        field.setValue('')
+        field.setValue(null)
+        if (
+          field.key === FieldKey.PARTNER_RECEIVING_OAS ||
+          field.key === FieldKey.PARTNER_INCOME ||
+          field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY
+        )
+          self.fields.remove(field)
       }
     },
     setupForm(data: FieldData[]) {

@@ -19,6 +19,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 export const Input: React.VFC<InputProps> = observer((props) => {
   const { name, label, required, value, placeholder, onChange, error } = props
+
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
@@ -54,7 +55,7 @@ export const Input: React.VFC<InputProps> = observer((props) => {
           className="form-control text-content"
           data-testid={name}
           min={0}
-          value={value as string}
+          value={value != null ? (value as string) : ''}
           placeholder={placeholder}
           onChange={onChange}
         />
@@ -65,7 +66,7 @@ export const Input: React.VFC<InputProps> = observer((props) => {
           className="form-control text-content"
           data-testid={name}
           min={0}
-          value={value as string}
+          value={value != null ? (value as string) : ''}
           onChange={onChange}
         />
       )}
