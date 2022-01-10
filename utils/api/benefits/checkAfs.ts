@@ -75,19 +75,19 @@ export default function checkAfs(
       reason: ResultReason.AGE,
       detail: translations.detail.mustBe60to64,
     }
+  } else if (!meetsReqMarital && value.maritalStatus !== undefined) {
+    return {
+      eligibilityResult: ResultKey.INELIGIBLE,
+      entitlementResult: 0,
+      reason: ResultReason.MARITAL,
+      detail: translations.detail.mustBeWidowed,
+    }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
       detail: translations.detail.mustMeetIncomeReq,
-    }
-  } else if (!meetsReqMarital) {
-    return {
-      eligibilityResult: ResultKey.INELIGIBLE,
-      entitlementResult: 0,
-      reason: ResultReason.MARITAL,
-      detail: translations.detail.mustBeWidowed,
     }
   } else if (!meetsReqYears) {
     if (
