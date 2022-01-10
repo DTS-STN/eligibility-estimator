@@ -1,3 +1,4 @@
+import { Translations } from '../../../i18n/api'
 import { EstimationSummaryState, ResultKey } from '../definitions/enums'
 import {
   BenefitResult,
@@ -11,9 +12,11 @@ export class SummaryBuilder {
   private readonly state: EstimationSummaryState
   private readonly title: string
   private readonly details: string
+  private translations: Translations
 
-  constructor(results: BenefitResultObject) {
+  constructor(results: BenefitResultObject, translations: Translations) {
     this.results = results
+    this.translations = translations
     this.resultsArr = Object.keys(results).map((key) => results[key])
     this.state = this.getState()
     this.title = this.getTitle()
@@ -42,24 +45,24 @@ export class SummaryBuilder {
 
   private getTitle() {
     if (this.state === EstimationSummaryState.MORE_INFO)
-      return 'More information needed'
+      return this.translations.summaryTitle.moreInfo
     else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return 'Unable to provide an estimation'
+      return this.translations.summaryTitle.unavailable
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return 'Likely eligible for benefits!'
+      return this.translations.summaryTitle.availableEligible
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return 'Likely not eligible for benefits'
+      return this.translations.summaryTitle.availableIneligible
   }
 
   private getDetails() {
     if (this.state === EstimationSummaryState.MORE_INFO)
-      return 'You need to answer the remaining questions on the previous tab before an estimation can be provided.'
+      return this.translations.summaryDetails.moreInfo
     else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return "Given the answers you've provided, this tool is unable to provide an accurate estimation. You are recommended to contact Service Canada for more information."
+      return this.translations.summaryDetails.unavailable
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return "Given the answers you've provided, you are likely eligible for benefits! See the details below for more information."
+      return this.translations.summaryDetails.availableEligible
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return "Given the answers you've provided, you are likely not eligible for any benefits. See the details below for more information."
+      return this.translations.summaryDetails.availableIneligible
   }
 
   detectNeedsInfo(): boolean {
@@ -81,8 +84,11 @@ export class SummaryBuilder {
     return matchingItems.length > 0
   }
 
-  static buildSummaryObject(results: BenefitResultObject): SummaryObject {
-    const summaryBuilder = new SummaryBuilder(results)
+  static buildSummaryObject(
+    results: BenefitResultObject,
+    translations: Translations
+  ): SummaryObject {
+    const summaryBuilder = new SummaryBuilder(results, translations)
     return summaryBuilder.build()
   }
 }

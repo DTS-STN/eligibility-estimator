@@ -3,6 +3,8 @@
 import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
+import { getTranslations, Language, Translations } from '../../../i18n/api'
+import { countryList } from '../../../utils/api/definitions/countries'
 import {
   EstimationSummaryState,
   LegalStatus,
@@ -12,6 +14,7 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import {
+  FieldDataDropdown,
   fieldDefinitions,
   FieldKey,
 } from '../../../utils/api/definitions/fields'
@@ -21,14 +24,10 @@ import {
   GisSchema,
   OasSchema,
 } from '../../../utils/api/definitions/schemas'
-import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
+import { buildFieldData } from '../../../utils/api/helpers/fieldUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('code checks', () => {
-  it('produces a list of 196 countries', async () => {
-    expect(ALL_COUNTRIES.length).toEqual(195)
-    expect(ALL_COUNTRIES[0]).toEqual('Canada')
-  })
   it('produces a list of fields with unique ordering', async () => {
     const ordersOrig = []
     for (const key in fieldDefinitions) {
@@ -39,12 +38,44 @@ describe('code checks', () => {
   })
 })
 
+describe('country checks', () => {
+  const COUNTRY_COUNT = 195
+  const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
+  const translationsEn: Translations = getTranslations(Language.EN)
+  const fieldDataEn = buildFieldData(
+    fieldList,
+    translationsEn
+  ) as Array<FieldDataDropdown>
+  const translationsFr: Translations = getTranslations(Language.FR)
+  const fieldDataFr = buildFieldData(
+    fieldList,
+    translationsFr
+  ) as Array<FieldDataDropdown>
+  it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {
+    expect(fieldDataEn[0].values.length).toEqual(COUNTRY_COUNT)
+    expect(fieldDataFr[0].values.length).toEqual(COUNTRY_COUNT)
+  })
+  it(`produces a list of countries with Canada first and AFG second (EN and FR)`, async () => {
+    expect(fieldDataEn[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
+    expect(fieldDataEn[0].values[1].key).toEqual('AFG') // ensure Agreement is not in the list (AFG should be next)
+    expect(fieldDataFr[0].values[0].key).toEqual('CAN')
+    expect(fieldDataFr[0].values[1].key).toEqual('AFG')
+  })
+  it(`includes Agreement in "agreement countries" list`, async () => {
+    expect(countryList[0].code).toEqual('CAN') // ensure Canada is first in the list
+    expect(countryList[1].code).toEqual('AGREEMENT') // ensure Agreement is second in the list
+  })
+})
+
 describe('schema checks', () => {
   function getJoiKeys(schema: Joi.ObjectSchema) {
     // @ts-ignore
     const joiEntries = schema._ids._byKey.entries()
     const joiKeys = []
-    for (const joiEntry of joiEntries) joiKeys.push(joiEntry[0])
+    for (const joiEntry of joiEntries) {
+      if (joiEntry[0][0] === '_') continue // ignore system fields
+      joiKeys.push(joiEntry[0])
+    }
     return joiKeys
   }
 
@@ -56,7 +87,6 @@ describe('schema checks', () => {
   it('GIS: matches between field definitions and schema', async () => {
     const joiKeys = getJoiKeys(GisSchema)
     const enumKeys: string[] = Object.values(FieldKey)
-    enumKeys.push('_oasEligible')
     expect(joiKeys).toEqual(enumKeys)
   })
   it('Allowance: matches between field definitions and schema', async () => {
@@ -82,6 +112,11 @@ describe('openapi checks', () => {
   it('matches MaritalStatus enum', async () => {
     expect(openapi.components.parameters.maritalStatus.schema.enum).toEqual(
       Object.values(MaritalStatus)
+    )
+  })
+  it('matches Country enum', async () => {
+    expect(openapi.components.parameters.livingCountry.schema.enum).toEqual(
+      Object.values(LivingCountry)
     )
   })
   it('matches FieldKey enum', async () => {

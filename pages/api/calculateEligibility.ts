@@ -1,5 +1,6 @@
 import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getTranslations } from '../../i18n/api'
 import checkAfs from '../../utils/api/benefits/checkAfs'
 import checkAllowance from '../../utils/api/benefits/checkAllowance'
 import checkGis from '../../utils/api/benefits/checkGis'
@@ -11,12 +12,14 @@ import {
   BenefitResultObject,
   ResponseError,
   ResponseSuccess,
+  SummaryObject,
 } from '../../utils/api/definitions/types'
 import normalizeLivingCountry from '../../utils/api/helpers/countryUtils'
 import {
   buildFieldData,
   buildVisibleFields,
 } from '../../utils/api/helpers/fieldUtils'
+import { ResultsProcessor } from '../../utils/api/helpers/resultsUtils'
 import { SummaryBuilder } from '../../utils/api/helpers/summaryUtils'
 
 export default function handler(
@@ -48,23 +51,31 @@ export default function handler(
     console.log('Passed validation.')
 
     // processing
+    const translations = getTranslations(params._language)
     const results: BenefitResultObject = {
-      oas: checkOas(params),
-      gis: checkGis(params),
-      allowance: checkAllowance(params),
-      afs: checkAfs(params),
+      oas: checkOas(params, translations),
+      gis: checkGis(params, translations),
+      allowance: checkAllowance(params, translations),
+      afs: checkAfs(params, translations),
     }
     console.log('Results: ', results)
 
     const visibleFields: Array<FieldKey> = buildVisibleFields([
-      Object.keys(params) as Array<FieldKey>,
+      Object.keys(params),
       results.oas.missingFields,
       results.gis.missingFields,
       results.allowance.missingFields,
       results.afs.missingFields,
     ])
-    const fieldData: Array<FieldData> = buildFieldData(visibleFields)
-    const summary = SummaryBuilder.buildSummaryObject(results)
+    const fieldData: Array<FieldData> = buildFieldData(
+      visibleFields,
+      translations
+    )
+    const summary: SummaryObject = SummaryBuilder.buildSummaryObject(
+      results,
+      translations
+    )
+    ResultsProcessor.processResultsObject(results, translations)
 
     // completion
     res.status(200).json({

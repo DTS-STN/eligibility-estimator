@@ -1,41 +1,43 @@
 export enum FieldCategory {
-  INCOME_DETAILS = 'Income Details',
-  PERSONAL_INFORMATION = 'Personal Information',
-  PARTNER_DETAILS = 'Partner Details',
-  LEGAL_STATUS = 'Legal Status',
+  INCOME_DETAILS = 'incomeDetails',
+  PERSONAL_INFORMATION = 'personalInformation',
+  PARTNER_DETAILS = 'partnerDetails',
+  LEGAL_STATUS = 'legalStatus',
 }
 
 export enum MaritalStatus {
-  SINGLE = 'Single',
-  MARRIED = 'Married',
-  COMMON_LAW = 'Common-law',
-  WIDOWED = 'Widowed',
-  DIVORCED = 'Divorced',
-  SEPARATED = 'Separated',
+  SINGLE = 'single',
+  MARRIED = 'married',
+  COMMON_LAW = 'commonLaw',
+  WIDOWED = 'widowed',
+  DIVORCED = 'divorced',
+  SEPARATED = 'separated',
 }
 
 export enum LegalStatus {
-  CANADIAN_CITIZEN = 'Canadian citizen',
-  PERMANENT_RESIDENT = 'Permanent resident or landed immigrant (non-sponsored)',
-  SPONSORED = 'Permanent resident or landed immigrant (sponsored)',
-  INDIAN_STATUS = 'Indian status or status card',
-  OTHER = 'Other (Example: Temporary resident, student, temporary worker, etc.)',
+  CANADIAN_CITIZEN = 'canadianCitizen',
+  PERMANENT_RESIDENT = 'permanentResident',
+  SPONSORED = 'sponsored',
+  INDIAN_STATUS = 'indianStatus',
+  OTHER = 'other',
 }
 
 export enum LivingCountry {
-  CANADA = 'Canada',
-  AGREEMENT = 'Agreement',
-  NO_AGREEMENT = 'No Agreement',
+  CANADA = 'CAN',
+  AGREEMENT = 'AGREEMENT',
+  NO_AGREEMENT = 'NO_AGREEMENT',
 }
 
+// not displayed in the UI
 export enum ResultKey {
-  ELIGIBLE = `Eligible!`,
-  INELIGIBLE = `Not eligible!`,
-  CONDITIONAL = `Conditionally eligible...`,
-  MORE_INFO = 'Need more information...',
-  INVALID = 'Request is invalid!',
+  ELIGIBLE = `eligible`,
+  INELIGIBLE = `ineligible`,
+  CONDITIONAL = `conditional`,
+  MORE_INFO = 'moreInfo',
+  INVALID = 'invalid',
 }
 
+// not displayed in the UI
 export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
