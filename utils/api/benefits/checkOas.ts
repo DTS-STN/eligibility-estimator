@@ -35,11 +35,15 @@ export default function checkOas(
       const entitlementResult = roundToTwo(
         Math.min(value.yearsInCanadaSince18 / 40, 1) * 635.26
       )
+      const partialOas = value.yearsInCanadaSince18 < 40
+      const detail = partialOas
+        ? translations.detail.eligiblePartialOas
+        : translations.detail.eligible
       return {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason: ResultReason.NONE,
-        detail: translations.detail.eligible,
+        detail,
       }
     } else if (value.age == 64) {
       return {

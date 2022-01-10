@@ -262,6 +262,8 @@ const en: Translations = {
   detail: {
     eligible:
       'Based on the information provided, you are likely eligible for this benefit.',
+    eligiblePartialOas:
+      'Based on the information you or your partner have provided, you are entitled to a partial Old Age Security pension. You should contact Service Canada for more information about Allowance/Guaranteed Income Supplement payment amounts.',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.',
     eligibleWhen65ApplyNow:

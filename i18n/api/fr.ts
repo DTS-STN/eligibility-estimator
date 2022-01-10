@@ -265,6 +265,8 @@ const fr: Translations = {
   detail: {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligiblePartialOas:
+      "D'après les informations que vous ou votre partenaire avez fournies, vous avez droit à une pension partielle de la Sécurité de la vieillesse. Vous devriez communiquer avec Service Canada pour obtenir plus d'information sur les montants des paiements de l'Allocation/Supplément de revenu garanti.",
     eligibleWhen60ApplyNow:
       "Vous serez probablement admissible quand vous aurez 60 ans, mais il se peut que vous puissiez présenter une demande dès maintenant. Veuillez contacter Service Canada pour plus d'informations",
     eligibleWhen65ApplyNow:
