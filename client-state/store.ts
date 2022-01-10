@@ -142,16 +142,18 @@ export const Form = types
   }))
   .actions((self) => ({
     clearForm(): void {
-      console.log('clearing form!')
+      const fieldsToRemove: Instance<typeof FormField> = []
       for (const field of self.fields) {
         field.setValue(null)
         if (
-          field.key === FieldKey.PARTNER_RECEIVING_OAS ||
           field.key === FieldKey.PARTNER_INCOME ||
+          field.key === FieldKey.PARTNER_RECEIVING_OAS ||
           field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-        )
-          self.fields.remove(field)
+        ) {
+          fieldsToRemove.push(field)
+        }
       }
+      self.removeFields(fieldsToRemove)
     },
     setupForm(data: FieldData[]) {
       data.map((fieldData) => {
