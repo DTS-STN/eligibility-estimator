@@ -223,7 +223,7 @@ const Eligibility: NextPage = () => {
                         <td>
                           <>
                             {oas.detail.split('\n').map((str, i) => (
-                              <p key={i}>{str.replace('!', '')}</p>
+                              <p key={i}>{str}</p>
                             ))}
                           </>
                         </td>
@@ -234,7 +234,7 @@ const Eligibility: NextPage = () => {
                         <td>
                           <>
                             {gis.detail.split('\n').map((str, i) => (
-                              <p key={i}>{str.replace('!', '')}</p>
+                              <p key={i}>{str}</p>
                             ))}
                           </>
                         </td>
@@ -250,7 +250,7 @@ const Eligibility: NextPage = () => {
                                 ResultKey.CONDITIONAL) && (
                               <>
                                 {allowance.detail.split('\n').map((str, i) => (
-                                  <p key={i}>{str.replace('!', '')}</p>
+                                  <p key={i}>{str}</p>
                                 ))}
                               </>
                             )}
@@ -266,7 +266,7 @@ const Eligibility: NextPage = () => {
                                 ResultKey.CONDITIONAL) && (
                               <>
                                 {afs.detail.split('\n').map((str, i) => (
-                                  <p key={i}>{str.replace('!', '')}</p>
+                                  <p key={i}>{str}</p>
                                 ))}
                               </>
                             )}
