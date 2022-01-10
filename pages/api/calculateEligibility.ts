@@ -19,6 +19,7 @@ import {
   buildFieldData,
   buildVisibleFields,
 } from '../../utils/api/helpers/fieldUtils'
+import { ResultsProcessor } from '../../utils/api/helpers/resultsUtils'
 import { SummaryBuilder } from '../../utils/api/helpers/summaryUtils'
 
 export default function handler(
@@ -74,6 +75,7 @@ export default function handler(
       results,
       translations
     )
+    ResultsProcessor.processResultsObject(results, translations)
 
     // completion
     res.status(200).json({

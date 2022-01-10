@@ -13,6 +13,13 @@ const en: Translations = {
     partnerDetails: 'Partner Details',
     legalStatus: 'Legal Status',
   },
+  result: {
+    eligible: `Eligible!`,
+    ineligible: `Not eligible!`,
+    conditional: `Conditionally eligible...`,
+    moreInfo: 'Need more information...',
+    invalid: 'Request is invalid!',
+  },
   question: {
     income: 'What is your current annual net income in Canadian Dollars?',
     age: 'What is your current age?',

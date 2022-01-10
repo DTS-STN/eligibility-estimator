@@ -21,6 +21,13 @@ export interface Translations {
     partnerDetails: string
     legalStatus: string
   }
+  result: {
+    eligible: string
+    ineligible: string
+    conditional: string
+    moreInfo: string
+    invalid: string
+  }
   question: {
     income: string
     age: string
