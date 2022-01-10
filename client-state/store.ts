@@ -170,6 +170,10 @@ export const Form = types
         }
       }
       self.removeFields(fieldsToRemove)
+
+      // remove the now invalid summary object
+      const parent = getParentOfType(self, RootStore)
+      parent.setSummary({})
     },
     clearAllErrors() {
       self.fields.map((field) => field.setError(undefined))

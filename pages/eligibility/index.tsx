@@ -73,9 +73,6 @@ const Eligibility: NextPage = () => {
         key={selectedTabIndex}
         defaultIndex={selectedTabIndex}
         onChange={(index) => {
-          // if (index == 0) {
-          //   setProgress({ legal: false, personal: false })
-          // }
           setSelectedTabIndex(index)
         }}
       >
@@ -217,7 +214,9 @@ const Eligibility: NextPage = () => {
                     <ResultsTable />
                   )}
                   {root.summary.state !==
-                    EstimationSummaryState.UNAVAILABLE && <ContactCTA />}
+                    EstimationSummaryState.UNAVAILABLE && (
+                    <ContactCTA setSelectedTab={setSelectedTabIndex} />
+                  )}
                   {root.summary?.links?.length && (
                     <ConditionalLinks links={root.summary.links} />
                   )}
