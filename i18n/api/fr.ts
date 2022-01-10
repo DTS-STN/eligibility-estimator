@@ -37,7 +37,7 @@ const fr: Translations = {
     partnerReceivingOas:
       'FRENCH: Does your partner receive a full OAS pension?',
     everLivedSocialCountry:
-      'Avez-vous déjà vécu dans un pays avec un accord de sécurité sociale établi?',
+      'Avez-vous déjà vécu dans un pays avec un accord de <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">sécurité sociale</a> établi?',
   },
   questionOptions: {
     legalStatus: [

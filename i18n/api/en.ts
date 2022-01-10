@@ -34,7 +34,7 @@ const en: Translations = {
       "What is your partner's annual net income in Canadian dollars?",
     partnerReceivingOas: 'Does your partner receive a full OAS pension?',
     everLivedSocialCountry:
-      'Have you ever lived in a country with an established social security agreement?',
+      'Have you ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
   },
   questionOptions: {
     legalStatus: [
