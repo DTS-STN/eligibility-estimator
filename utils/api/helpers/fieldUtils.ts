@@ -55,7 +55,7 @@ export function buildVisibleFields(
   return filteredFields
 }
 
-// removes items not specified in the field definitions, such as "_french"
+// removes items not specified in the field definitions, such as "_language"
 function filterInvalid(array: Array<string>): Array<FieldKey> {
   const validKeys = Object.values(FieldKey) as Array<string>
   const filtered = array.filter((item) => validKeys.includes(item))
