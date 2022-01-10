@@ -53,13 +53,13 @@ export const FormSelect: React.VFC<SelectProps> = (props) => {
           placeholder="Select from..."
           defaultValue={
             defaultValue !== undefined
-              ? { label: defaultValue, value: defaultValue }
+              ? { label: defaultValue.text, value: defaultValue.key }
               : undefined
           }
           name={field.key}
           options={(field as any).values.map((opt) => ({
-            value: opt,
-            label: opt,
+            value: opt.key,
+            label: opt.text,
           }))}
           onChange={(newValue, action) => {
             if (!newValue) {

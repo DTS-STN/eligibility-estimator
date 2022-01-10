@@ -55,6 +55,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
   const orderedFields = sortBy(data.fieldData, 'order')
   const [formState, setFormState] = useState(orderedFields)
 
+  console.log(data)
+
   /**
    * send a GET request to the API, appended with query string data
    * @param queryString the query string to append to the APIs get request
@@ -64,7 +66,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
-          console.log(data)
           setFormState(data.fieldData)
 
           oas(data.oas)
@@ -77,7 +78,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
           checkCompletion(data.fieldData, formCompletion, setProgress)
         } else {
           // handle error - validate per field once validation designs are complete
-          console.log(data)
         }
       })
   }
@@ -109,13 +109,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
       action="/eligibility"
       onSubmit={(e) => e.preventDefault()}
     >
-      {/* 
-      <input
-        type="hidden"
-        name="lang"
-        value={useInternationalization('lang')}
-      /> 
-      */}
+      <input type="hidden" name="_language" value="EN" />
       {formState.map((field) => {
         const content = (
           <div key={field.key}>
@@ -146,7 +140,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = ({
                 <Radio
                   name={field.key}
                   values={
-                    field.type == 'boolean' ? ['Yes', 'No'] : field.values
+                    field.type == 'boolean'
+                      ? [
+                          { key: true, text: 'Yes' },
+                          { key: false, text: 'No' },
+                        ]
+                      : field.values
                   }
                   keyforid={field.key}
                   label={field.label}
