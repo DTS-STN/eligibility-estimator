@@ -418,11 +418,11 @@ describe('field requirement analysis', () => {
       'income',
       'age',
       'maritalStatus',
-      'partnerReceivingOas',
-      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
+      'partnerReceivingOas',
+      'partnerIncome',
     ])
   })
   it('required fields when only income/age/country/legal/years/marital=married/partnerOas provided', async () => {
@@ -445,11 +445,11 @@ describe('field requirement analysis', () => {
       'income',
       'age',
       'maritalStatus',
-      'partnerReceivingOas',
-      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
+      'partnerReceivingOas',
+      'partnerIncome',
     ])
   })
   it('required no fields when all provided', async () => {
@@ -473,11 +473,11 @@ describe('field requirement analysis', () => {
       'income',
       'age',
       'maritalStatus',
-      'partnerReceivingOas',
-      'partnerIncome',
       'livingCountry',
       'legalStatus',
       'yearsInCanadaSince18',
+      'partnerReceivingOas',
+      'partnerIncome',
     ])
   })
 })
