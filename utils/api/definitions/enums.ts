@@ -28,18 +28,16 @@ export enum LivingCountry {
   NO_AGREEMENT = 'NO_AGREEMENT',
 }
 
-// todo i18n
-// consider removing from UI
+// not displayed in the UI
 export enum ResultKey {
-  ELIGIBLE = `Eligible!`,
-  INELIGIBLE = `Not eligible!`,
-  CONDITIONAL = `Conditionally eligible...`,
-  MORE_INFO = 'Need more information...',
-  INVALID = 'Request is invalid!',
+  ELIGIBLE = `eligible`,
+  INELIGIBLE = `ineligible`,
+  CONDITIONAL = `conditional`,
+  MORE_INFO = 'moreInfo',
+  INVALID = 'invalid',
 }
 
-// todo i18n
-// consider removing from UI
+// not displayed in the UI
 export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,

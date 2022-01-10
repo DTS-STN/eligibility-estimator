@@ -13,6 +13,13 @@ const fr: Translations = {
     partnerDetails: 'FRENCH: Partner Details',
     legalStatus: 'FRENCH: Legal Status',
   },
+  result: {
+    eligible: `FRENCH: Eligible!`,
+    ineligible: `FRENCH: Not eligible!`,
+    conditional: `FRENCH: Conditionally eligible...`,
+    moreInfo: 'FRENCH: Need more information...',
+    invalid: 'FRENCH: Request is invalid!',
+  },
   question: {
     income:
       'FRENCH: What is your current annual net income in Canadian Dollars?',

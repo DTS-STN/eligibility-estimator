@@ -72,11 +72,11 @@ components:
       description: A summary of the resulting eligibility calculation
       format: string
       enum:
-        - Eligible!
-        - Not eligible!
-        - Conditionally eligible...
-        - Need more information...
-        - Request is invalid!
+        - eligible
+        - ineligible
+        - conditional
+        - moreInfo
+        - invalid
 
     ResultReason:
       type: string
