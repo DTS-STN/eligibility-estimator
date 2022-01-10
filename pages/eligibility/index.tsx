@@ -214,7 +214,8 @@ const Eligibility: NextPage = () => {
                   ) : (
                     <ResultsTable />
                   )}
-                  <ContactCTA />
+                  {root.summary.state !==
+                    EstimationSummaryState.UNAVAILABLE && <ContactCTA />}
                   {root.summary?.links?.length && (
                     <ConditionalLinks links={root.summary.links} />
                   )}
