@@ -14,7 +14,7 @@ export class ResultsProcessor {
     Object.keys(this.results).forEach((key) => {
       let result = this.results[key]
       const eligibilityText = this.translations.result[result.eligibilityResult]
-      result.detail = `${eligibilityText}\nDetails:${result.detail}`
+      result.detail = `${eligibilityText}\nDetails: ${result.detail}`
     })
   }
 

@@ -221,32 +221,38 @@ const Eligibility: NextPage = () => {
                       <tr className="">
                         <td>Old Age Security (OAS)</td>
                         <td>
-                          <p>{oas.eligibilityResult.replace('!', '')}</p>
-                          <p>Details: {oas.detail}</p>
+                          <>
+                            {oas.detail.split('\n').map((str, i) => (
+                              <p key={i}>{str.replace('!', '')}</p>
+                            ))}
+                          </>
                         </td>
                         <td>${oas.entitlementResult}</td>
                       </tr>
                       <tr className="bg-[#E8F2F4]">
                         <td>Guaranteed Income Supplement (GIS)</td>
                         <td>
-                          <p>{gis.eligibilityResult.replace('!', '')}</p>
-                          <p>Details: {gis.detail}</p>
+                          <>
+                            {gis.detail.split('\n').map((str, i) => (
+                              <p key={i}>{str.replace('!', '')}</p>
+                            ))}
+                          </>
                         </td>
                         <td>${gis.entitlementResult}</td>
                       </tr>
                       <tr>
                         <td>Allowance</td>
                         <td>
-                          <p>
-                            {allowance &&
-                              allowance.eligibilityResult.replace('!', '')}
-                          </p>
                           {allowance &&
                             (allowance.eligibilityResult ==
                               ResultKey.INELIGIBLE ||
                               allowance.eligibilityResult ==
                                 ResultKey.CONDITIONAL) && (
-                              <p>Details: {allowance.detail}</p>
+                              <>
+                                {allowance.detail.split('\n').map((str, i) => (
+                                  <p key={i}>{str.replace('!', '')}</p>
+                                ))}
+                              </>
                             )}
                         </td>
                         <td>${allowance && allowance.entitlementResult}</td>
@@ -254,12 +260,15 @@ const Eligibility: NextPage = () => {
                       <tr className="bg-[#E8F2F4]">
                         <td>Allowance for Survivor</td>
                         <td>
-                          <p>{afs && afs.eligibilityResult.replace('!', '')}</p>
                           {afs &&
                             (afs.eligibilityResult == ResultKey.INELIGIBLE ||
                               afs.eligibilityResult ==
                                 ResultKey.CONDITIONAL) && (
-                              <p>Details: {afs.detail}</p>
+                              <>
+                                {afs.detail.split('\n').map((str, i) => (
+                                  <p key={i}>{str.replace('!', '')}</p>
+                                ))}
+                              </>
                             )}
                         </td>
                         <td>${afs && afs.entitlementResult}</td>
