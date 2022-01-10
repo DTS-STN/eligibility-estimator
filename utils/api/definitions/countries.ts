@@ -3,6 +3,8 @@ interface CountryConfig {
   agreement: boolean
 }
 
+// the ordering here is not used - to order things, update the translations.
+// ensure AGREEMENT exists here as a country.
 export const countryList: CountryConfig[] = [
   { code: 'CAN', agreement: true },
   { code: 'AGREEMENT', agreement: true },

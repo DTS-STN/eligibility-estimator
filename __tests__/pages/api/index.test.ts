@@ -3,6 +3,7 @@
 import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
+import { getTranslations, Language, Translations } from '../../../i18n/api'
 import {
   EstimationSummaryState,
   LegalStatus,
@@ -12,6 +13,7 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import {
+  FieldDataDropdown,
   fieldDefinitions,
   FieldKey,
 } from '../../../utils/api/definitions/fields'
@@ -21,13 +23,30 @@ import {
   GisSchema,
   OasSchema,
 } from '../../../utils/api/definitions/schemas'
-import { ALL_COUNTRIES } from '../../../utils/api/helpers/countryUtils'
+import { buildFieldData } from '../../../utils/api/helpers/fieldUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('code checks', () => {
-  it('produces a list of 176 countries', async () => {
-    expect(ALL_COUNTRIES.length).toEqual(175) // remember the count starts at zero
-    expect(ALL_COUNTRIES[0]).toEqual('CAN')
+  const COUNTRY_COUNT = 176 // normal human counting of countries (count starts at one)
+  it(`produces a list of ${COUNTRY_COUNT} countries (English)`, async () => {
+    const translations: Translations = getTranslations(Language.EN)
+    const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
+    const fieldData = buildFieldData(
+      fieldList,
+      translations
+    ) as Array<FieldDataDropdown>
+    expect(fieldData[0].values.length).toEqual(COUNTRY_COUNT - 1) // remember the count starts at zero
+    expect(fieldData[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
+  })
+  it(`produces a list of ${COUNTRY_COUNT} countries (French)`, async () => {
+    const translations: Translations = getTranslations(Language.FR)
+    const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
+    const fieldData = buildFieldData(
+      fieldList,
+      translations
+    ) as Array<FieldDataDropdown>
+    expect(fieldData[0].values.length).toEqual(COUNTRY_COUNT - 1) // remember the count starts at zero
+    expect(fieldData[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
   })
   it('produces a list of fields with unique ordering', async () => {
     const ordersOrig = []
