@@ -84,11 +84,11 @@ const fr: Translations = {
       { key: 'BLZ', text: 'Belize' },
       { key: 'BEN', text: 'Bénin' },
       { key: 'BTN', text: 'Bhoutan' },
-
+      { key: 'BOL', text: 'Bolivie' },
       { key: 'BIH', text: 'Bosnie-Herzégovine' },
       { key: 'BWA', text: 'Botswana' },
       { key: 'BRA', text: 'Brésil' },
-
+      { key: 'BRN', text: 'Brunei' },
       { key: 'BGR', text: 'Bulgarie' },
       { key: 'BFA', text: 'Burkina Faso' },
       { key: 'BDI', text: 'Burundi' },
@@ -101,13 +101,14 @@ const fr: Translations = {
       { key: 'CHN', text: 'Chine' },
       { key: 'COL', text: 'Colombie' },
       { key: 'COM', text: 'Comores' },
-
+      { key: 'COG', text: 'Congo (Congo-Brazzaville)' },
       { key: 'CRI', text: 'Costa Rica' },
       { key: 'CIV', text: "Côte d'Ivoire" },
       { key: 'HRV', text: 'Croatie' },
       { key: 'CUB', text: 'Cuba' },
       { key: 'CYP', text: 'Chypre (Cyprus)' },
-
+      { key: 'CZE', text: 'Tchécoslovaquie (République tchèque)' },
+      { key: 'COD', text: 'La République démocratique du Congo' },
       { key: 'DNK', text: 'Danemark' },
       { key: 'DJI', text: 'Djibouti' },
       { key: 'DMA', text: 'Dominique' },
@@ -118,7 +119,7 @@ const fr: Translations = {
       { key: 'GNQ', text: 'Guinée équatoriale' },
       { key: 'ERI', text: 'Erythrée' },
       { key: 'EST', text: 'Estonie' },
-
+      { key: 'SWZ', text: 'Eswatini ' },
       { key: 'ETH', text: 'Éthiopie' },
       { key: 'FJI', text: 'Fidji' },
       { key: 'FIN', text: 'Finlande' },
@@ -141,7 +142,7 @@ const fr: Translations = {
       { key: 'ISL', text: 'Islande' },
       { key: 'IND', text: 'Inde' },
       { key: 'IDN', text: 'Indonésie' },
-
+      { key: 'IRN', text: 'Iran' },
       { key: 'IRQ', text: 'Irak' },
       { key: 'IRL', text: 'Irlande' },
       { key: 'ISR', text: 'Israël' },
@@ -154,7 +155,7 @@ const fr: Translations = {
       { key: 'KIR', text: 'Kiribati' },
       { key: 'KWT', text: 'Koweït' },
       { key: 'KGZ', text: 'Kirghizistan' },
-
+      { key: 'LAO', text: 'Laos' },
       { key: 'LVA', text: 'Lettonie' },
       { key: 'LBN', text: 'Liban' },
       { key: 'LSO', text: 'Lesotho' },
@@ -173,13 +174,14 @@ const fr: Translations = {
       { key: 'MRT', text: 'Mauritanie' },
       { key: 'MUS', text: 'Maurice' },
       { key: 'MEX', text: 'Mexique' },
-
+      { key: 'FSM', text: 'Micronésie' },
+      { key: 'MDA', text: 'Moldavie' },
       { key: 'MCO', text: 'Monaco' },
       { key: 'MNG', text: 'Mongolie' },
       { key: 'MNE', text: 'Monténégro' },
       { key: 'MAR', text: 'Maroc' },
       { key: 'MOZ', text: 'Mozambique' },
-
+      { key: 'MMR', text: 'Myanmar (anciennement Birmanie)' },
       { key: 'NAM', text: 'Namibie' },
       { key: 'NRU', text: 'Nauru' },
       { key: 'NPL', text: 'Népal' },
@@ -188,13 +190,13 @@ const fr: Translations = {
       { key: 'NIC', text: 'Nicaragua' },
       { key: 'NER', text: 'Niger' },
       { key: 'NGA', text: 'Nigeria' },
-
+      { key: 'PRK', text: 'Corée du Nord' },
       { key: 'MKD', text: 'Macédoine du Nord' },
       { key: 'NOR', text: 'Norvège' },
       { key: 'OMN', text: 'Oman' },
       { key: 'PAK', text: 'Pakistan' },
       { key: 'PLW', text: 'Palau' },
-
+      { key: 'PSE', text: 'Palestine (État)' },
       { key: 'PAN', text: 'Panama' },
       { key: 'PNG', text: 'Papouasie-Nouvelle-Guinée' },
       { key: 'PRY', text: 'Paraguay' },
@@ -204,7 +206,7 @@ const fr: Translations = {
       { key: 'PRT', text: 'Portugal' },
       { key: 'QAT', text: 'Qatar' },
       { key: 'ROU', text: 'Roumanie' },
-
+      { key: 'RUS', text: 'Russie' },
       { key: 'RWA', text: 'Rwanda' },
       { key: 'KNA', text: 'Saint-Kitts-et-Nevis' },
       { key: 'LCA', text: 'Sainte-Lucie' },
@@ -223,7 +225,7 @@ const fr: Translations = {
       { key: 'SLB', text: 'Salomon (Îles)' },
       { key: 'SOM', text: 'Somalie' },
       { key: 'ZAF', text: 'Afrique du Sud' },
-
+      { key: 'KOR', text: 'Corée du Sud' },
       { key: 'SSD', text: 'Soudan du Sud' },
       { key: 'ESP', text: 'Espagne' },
       { key: 'LKA', text: 'Sri Lanka' },
@@ -231,9 +233,9 @@ const fr: Translations = {
       { key: 'SUR', text: 'Suriname' },
       { key: 'SWE', text: 'Suède' },
       { key: 'CHE', text: 'Suisse' },
-
+      { key: 'SYR', text: 'Syrie' },
       { key: 'TJK', text: 'Tadjikistan' },
-
+      { key: 'TZA', text: 'Tanzanie' },
       { key: 'THA', text: 'Thaïlande' },
       { key: 'TLS', text: 'Timor-Leste' },
       { key: 'TGO', text: 'Togo' },
@@ -246,12 +248,13 @@ const fr: Translations = {
       { key: 'UGA', text: 'Ouganda' },
       { key: 'UKR', text: 'Ukraine' },
       { key: 'ARE', text: 'Emirats Arabes Unis' },
-
+      { key: 'GBR', text: 'Royaume-Uni' },
       { key: 'USA', text: "Etats-Unis d'Amérique" },
       { key: 'URY', text: 'Uruguay' },
       { key: 'UZB', text: 'Ouzbékistan' },
       { key: 'VUT', text: 'Vanuatu' },
-
+      { key: 'VEN', text: 'Venezuela' },
+      { key: 'VNM', text: 'Vietnam' },
       { key: 'YEM', text: 'Yémen' },
       { key: 'ZMB', text: 'Zambie' },
       { key: 'ZWE', text: 'Zimbabwe' },

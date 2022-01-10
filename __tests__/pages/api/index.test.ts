@@ -4,6 +4,7 @@ import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
 import { getTranslations, Language, Translations } from '../../../i18n/api'
+import { countryList } from '../../../utils/api/definitions/countries'
 import {
   EstimationSummaryState,
   LegalStatus,
@@ -27,27 +28,6 @@ import { buildFieldData } from '../../../utils/api/helpers/fieldUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('code checks', () => {
-  const COUNTRY_COUNT = 176 // normal human counting of countries (count starts at one)
-  it(`produces a list of ${COUNTRY_COUNT} countries (English)`, async () => {
-    const translations: Translations = getTranslations(Language.EN)
-    const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
-    const fieldData = buildFieldData(
-      fieldList,
-      translations
-    ) as Array<FieldDataDropdown>
-    expect(fieldData[0].values.length).toEqual(COUNTRY_COUNT - 1) // remember the count starts at zero
-    expect(fieldData[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
-  })
-  it(`produces a list of ${COUNTRY_COUNT} countries (French)`, async () => {
-    const translations: Translations = getTranslations(Language.FR)
-    const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
-    const fieldData = buildFieldData(
-      fieldList,
-      translations
-    ) as Array<FieldDataDropdown>
-    expect(fieldData[0].values.length).toEqual(COUNTRY_COUNT - 1) // remember the count starts at zero
-    expect(fieldData[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
-  })
   it('produces a list of fields with unique ordering', async () => {
     const ordersOrig = []
     for (const key in fieldDefinitions) {
@@ -55,6 +35,35 @@ describe('code checks', () => {
     }
     const ordersUnique = [...new Set(ordersOrig)]
     expect(ordersUnique).toEqual(ordersOrig)
+  })
+})
+
+describe('country checks', () => {
+  const COUNTRY_COUNT = 195
+  const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
+  const translationsEn: Translations = getTranslations(Language.EN)
+  const fieldDataEn = buildFieldData(
+    fieldList,
+    translationsEn
+  ) as Array<FieldDataDropdown>
+  const translationsFr: Translations = getTranslations(Language.FR)
+  const fieldDataFr = buildFieldData(
+    fieldList,
+    translationsFr
+  ) as Array<FieldDataDropdown>
+  it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {
+    expect(fieldDataEn[0].values.length).toEqual(COUNTRY_COUNT)
+    expect(fieldDataFr[0].values.length).toEqual(COUNTRY_COUNT)
+  })
+  it(`produces a list of countries with Canada first and AFG second (EN and FR)`, async () => {
+    expect(fieldDataEn[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
+    expect(fieldDataEn[0].values[1].key).toEqual('AFG') // ensure Agreement is not in the list (AFG should be next)
+    expect(fieldDataFr[0].values[0].key).toEqual('CAN')
+    expect(fieldDataFr[0].values[1].key).toEqual('AFG')
+  })
+  it(`includes Agreement in "agreement countries" list`, async () => {
+    expect(countryList[0].code).toEqual('CAN') // ensure Canada is first in the list
+    expect(countryList[1].code).toEqual('AGREEMENT') // ensure Agreement is second in the list
   })
 })
 

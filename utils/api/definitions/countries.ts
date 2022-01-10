@@ -28,11 +28,11 @@ export const countryList: CountryConfig[] = [
   { code: 'BLZ', agreement: false },
   { code: 'BEN', agreement: false },
   { code: 'BTN', agreement: false },
-
+  { code: 'BOL', agreement: false },
   { code: 'BIH', agreement: false },
   { code: 'BWA', agreement: false },
   { code: 'BRA', agreement: true },
-
+  { code: 'BRN', agreement: false },
   { code: 'BGR', agreement: true },
   { code: 'BFA', agreement: false },
   { code: 'BDI', agreement: false },
@@ -45,13 +45,14 @@ export const countryList: CountryConfig[] = [
   { code: 'CHN', agreement: true },
   { code: 'COL', agreement: false },
   { code: 'COM', agreement: false },
-
+  { code: 'COG', agreement: false },
   { code: 'CRI', agreement: false },
   { code: 'CIV', agreement: false },
   { code: 'HRV', agreement: true },
   { code: 'CUB', agreement: false },
   { code: 'CYP', agreement: true },
-
+  { code: 'CZE', agreement: false },
+  { code: 'COD', agreement: false },
   { code: 'DNK', agreement: true },
   { code: 'DJI', agreement: false },
   { code: 'DMA', agreement: true },
@@ -62,7 +63,7 @@ export const countryList: CountryConfig[] = [
   { code: 'GNQ', agreement: false },
   { code: 'ERI', agreement: false },
   { code: 'EST', agreement: true },
-
+  { code: 'SWZ', agreement: false },
   { code: 'ETH', agreement: false },
   { code: 'FJI', agreement: false },
   { code: 'FIN', agreement: true },
@@ -85,7 +86,7 @@ export const countryList: CountryConfig[] = [
   { code: 'ISL', agreement: true },
   { code: 'IND', agreement: true },
   { code: 'IDN', agreement: false },
-
+  { code: 'IRN', agreement: false },
   { code: 'IRQ', agreement: false },
   { code: 'IRL', agreement: true },
   { code: 'ISR', agreement: true },
@@ -98,7 +99,7 @@ export const countryList: CountryConfig[] = [
   { code: 'KIR', agreement: false },
   { code: 'KWT', agreement: false },
   { code: 'KGZ', agreement: false },
-
+  { code: 'LAO', agreement: false },
   { code: 'LVA', agreement: true },
   { code: 'LBN', agreement: false },
   { code: 'LSO', agreement: false },
@@ -117,13 +118,14 @@ export const countryList: CountryConfig[] = [
   { code: 'MRT', agreement: false },
   { code: 'MUS', agreement: false },
   { code: 'MEX', agreement: true },
-
+  { code: 'FSM', agreement: false },
+  { code: 'MDA', agreement: false },
   { code: 'MCO', agreement: false },
   { code: 'MNG', agreement: false },
   { code: 'MNE', agreement: false },
   { code: 'MAR', agreement: true },
   { code: 'MOZ', agreement: false },
-
+  { code: 'MMR', agreement: false },
   { code: 'NAM', agreement: false },
   { code: 'NRU', agreement: false },
   { code: 'NPL', agreement: false },
@@ -132,13 +134,13 @@ export const countryList: CountryConfig[] = [
   { code: 'NIC', agreement: false },
   { code: 'NER', agreement: false },
   { code: 'NGA', agreement: false },
-
+  { code: 'PRK', agreement: false },
   { code: 'MKD', agreement: false },
   { code: 'NOR', agreement: true },
   { code: 'OMN', agreement: false },
   { code: 'PAK', agreement: false },
   { code: 'PLW', agreement: false },
-
+  { code: 'PSE', agreement: false },
   { code: 'PAN', agreement: false },
   { code: 'PNG', agreement: false },
   { code: 'PRY', agreement: false },
@@ -148,7 +150,7 @@ export const countryList: CountryConfig[] = [
   { code: 'PRT', agreement: true },
   { code: 'QAT', agreement: false },
   { code: 'ROU', agreement: true },
-
+  { code: 'RUS', agreement: false },
   { code: 'RWA', agreement: false },
   { code: 'KNA', agreement: true },
   { code: 'LCA', agreement: true },
@@ -167,7 +169,7 @@ export const countryList: CountryConfig[] = [
   { code: 'SLB', agreement: false },
   { code: 'SOM', agreement: false },
   { code: 'ZAF', agreement: false },
-
+  { code: 'KOR', agreement: false },
   { code: 'SSD', agreement: false },
   { code: 'ESP', agreement: true },
   { code: 'LKA', agreement: false },
@@ -175,9 +177,9 @@ export const countryList: CountryConfig[] = [
   { code: 'SUR', agreement: false },
   { code: 'SWE', agreement: true },
   { code: 'CHE', agreement: true },
-
+  { code: 'SYR', agreement: false },
   { code: 'TJK', agreement: false },
-
+  { code: 'TZA', agreement: false },
   { code: 'THA', agreement: false },
   { code: 'TLS', agreement: false },
   { code: 'TGO', agreement: false },
@@ -190,12 +192,13 @@ export const countryList: CountryConfig[] = [
   { code: 'UGA', agreement: false },
   { code: 'UKR', agreement: false },
   { code: 'ARE', agreement: false },
-
+  { code: 'GBR', agreement: false },
   { code: 'USA', agreement: true },
   { code: 'URY', agreement: true },
   { code: 'UZB', agreement: false },
   { code: 'VUT', agreement: false },
-
+  { code: 'VEN', agreement: false },
+  { code: 'VNM', agreement: false },
   { code: 'YEM', agreement: false },
   { code: 'ZMB', agreement: false },
   { code: 'ZWE', agreement: false },
