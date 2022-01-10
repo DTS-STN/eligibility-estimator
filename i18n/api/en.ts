@@ -2,10 +2,10 @@ import { Translations } from './index'
 
 const en: Translations = {
   benefit: {
-    oas: 'Old Age Security',
-    gis: 'Guaranteed Income Supplement',
+    oas: 'Old Age Security (OAS)',
+    gis: 'Guaranteed Income Supplement (GIS)',
     allowance: 'Allowance',
-    afs: 'Allowance for Survivor',
+    afs: 'Allowance for the Survivor',
   },
   category: {
     incomeDetails: 'Income Details',
@@ -14,9 +14,9 @@ const en: Translations = {
     legalStatus: 'Legal Status',
   },
   result: {
-    eligible: `Eligible!`,
-    ineligible: `Not eligible!`,
-    conditional: `Conditionally eligible...`,
+    eligible: 'Eligible',
+    ineligible: 'Not eligible',
+    conditional: 'Conditionally eligible...',
     moreInfo: 'Need more information...',
     invalid: 'Request is invalid!',
   },
@@ -25,10 +25,10 @@ const en: Translations = {
     age: 'What is your current age?',
     livingCountry: 'What country are you currently living in?',
     legalStatus: 'What is your current legal status?',
-    legalStatusOther: 'Please specify your current legal status:',
+    legalStatusOther: 'Please specify:',
     yearsInCanadaSince18:
       'How many years have you lived in Canada since the age of 18?',
-    maritalStatus: 'What is current marital status?',
+    maritalStatus: 'What is your current marital status?',
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
     partnerReceivingOas: 'Does your partner receive a full OAS pension?',
@@ -272,15 +272,15 @@ const en: Translations = {
     mustBeInCanada:
       'You need to live in Canada to be eligible for this benefit.',
     mustBeOasEligible:
-      'You need to be eligible for OAS to be eligible for this benefit.',
+      'You need to be eligible for Old Age Security to be eligible for this benefit.',
     mustCompleteOasCheck:
-      'You need to complete the OAS eligibility check first.',
+      'You need to complete the Old Age Security eligibility assessment first.',
     mustBeWidowed:
       'You must be a surviving partner or widowed to be eligible for this benefit.',
     mustBePartnered:
       'You must be common-law or married to be eligible for this benefit.',
     mustHavePartnerWithOas:
-      'Your partner must be receiving OAS to be eligible for this benefit.',
+      'Your partner must be receiving Old Age Security to be eligible for this benefit.',
     mustMeetIncomeReq:
       'Your income is too high to be eligible for this benefit.',
     mustMeetYearReq:
@@ -307,18 +307,18 @@ const en: Translations = {
   summaryTitle: {
     moreInfo: 'More information needed',
     unavailable: 'Unable to provide an estimation',
-    availableEligible: 'Likely eligible for benefits!',
+    availableEligible: 'Likely eligible for benefits',
     availableIneligible: 'Likely not eligible for benefits',
   },
   summaryDetails: {
     moreInfo:
       'You need to answer the remaining questions on the previous tab before an estimation can be provided.',
     unavailable:
-      "Given the answers you've provided, this tool is unable to provide an accurate estimation. You are recommended to contact Service Canada for more information.",
+      'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.\nContact Service Canada',
     availableEligible:
-      "Given the answers you've provided, you are likely eligible for benefits! See the details below for more information.",
+      'Based on the information you have provided, you are likely eligible for the following benefits.',
     availableIneligible:
-      "Given the answers you've provided, you are likely not eligible for any benefits. See the details below for more information.",
+      'Based on the information you have provided, you are likely not eligible for any benefits. See the details below for more information.',
   },
 }
 export default en

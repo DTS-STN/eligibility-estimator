@@ -1,66 +1,67 @@
+// noinspection SpellCheckingInspection
+
 import { Translations } from './index'
 
 const fr: Translations = {
   benefit: {
-    oas: 'FRENCH: Old Age Security',
-    gis: 'FRENCH: Guaranteed Income Supplement',
-    allowance: 'FRENCH: Allowance',
-    afs: 'FRENCH: Allowance for Survivor',
+    oas: 'Sécurité de la vieillesse (SV)',
+    gis: 'Supplément de revenu garanti (SRG)',
+    allowance: 'Allocation',
+    afs: 'Allocation au survivant',
   },
   category: {
-    incomeDetails: 'FRENCH: Income Details',
-    personalInformation: 'FRENCH: Personal Information',
-    partnerDetails: 'FRENCH: Partner Details',
-    legalStatus: 'FRENCH: Legal Status',
+    incomeDetails: 'Revenu',
+    personalInformation: 'Renseignements personnels',
+    partnerDetails: 'Renseignements sur votre partenaire',
+    legalStatus: 'Statut légal',
   },
   result: {
-    eligible: `FRENCH: Eligible!`,
-    ineligible: `FRENCH: Not eligible!`,
-    conditional: `FRENCH: Conditionally eligible...`,
+    eligible: 'Admissible',
+    ineligible: 'Non admissible',
+    conditional: 'FRENCH: Conditionally eligible...',
     moreInfo: 'FRENCH: Need more information...',
     invalid: 'FRENCH: Request is invalid!',
   },
   question: {
-    income:
-      'FRENCH: What is your current annual net income in Canadian Dollars?',
-    age: 'FRENCH: What is your current age?',
-    livingCountry: 'FRENCH: What country are you currently living in?',
-    legalStatus: 'FRENCH: What is your current legal status?',
-    legalStatusOther: 'FRENCH: Please specify your current legal status:',
+    income: 'Quel est votre revenu net annuel actuel en dollars canadiens?',
+    age: 'Quel est votre âge actuel?',
+    livingCountry: 'Dans quel pays résidez-vous actuellement?',
+    legalStatus: 'Quel est votre statut légal actuel?',
+    legalStatusOther: 'Veuillez préciser:',
     yearsInCanadaSince18:
-      'FRENCH: How many years have you lived in Canada since the age of 18?',
-    maritalStatus: 'FRENCH: What is current marital status?',
+      "Combien d'années avez-vous vécu au Canada après avoir atteint l'âge de 18 ans?",
+    maritalStatus: 'Quel est votre état civil actuel?',
     partnerIncome:
-      "FRENCH: What is your partner's annual net income in Canadian dollars?",
+      'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
     partnerReceivingOas:
       'FRENCH: Does your partner receive a full OAS pension?',
     everLivedSocialCountry:
-      'FRENCH: Have you ever lived in a country with an established social security agreement?',
+      'Avez-vous déjà vécu dans un pays avec un accord de sécurité sociale établi?',
   },
   questionOptions: {
     legalStatus: [
-      { key: 'canadianCitizen', text: 'FRENCH: Canadian citizen' },
+      { key: 'canadianCitizen', text: 'Citoyen canadien' },
       {
         key: 'permanentResident',
-        text: 'FRENCH: Permanent resident or landed immigrant (non-sponsored)',
+        text: 'Résident permanent ou immigrant reçu (non parrainé)',
       },
       {
         key: 'sponsored',
-        text: 'FRENCH: Permanent resident or landed immigrant (sponsored)',
+        text: 'Résident permanent ou immigrant admis (parrainé)',
       },
-      { key: 'indianStatus', text: 'FRENCH: Indian status or status card' },
+      { key: 'indianStatus', text: "Statut d'Indien ou carte de statut" },
       {
         key: 'other',
-        text: 'FRENCH: Other (Example: Temporary resident, student, temporary worker, etc.)',
+        text: 'Autre (exemple: résident temporaire, étudiant, travailleur temporaire, etc.)',
       },
     ],
     maritalStatus: [
-      { key: 'single', text: 'FRENCH: Single' },
-      { key: 'married', text: 'FRENCH: Married' },
-      { key: 'commonLaw', text: 'FRENCH: Common-law' },
-      { key: 'widowed', text: 'FRENCH: Widowed' },
-      { key: 'divorced', text: 'FRENCH: Divorced' },
-      { key: 'separated', text: 'FRENCH: Separated' },
+      { key: 'single', text: 'Célibataire' },
+      { key: 'married', text: 'Marié(e)' },
+      { key: 'commonLaw', text: 'Conjoint(e) de fait' },
+      { key: 'widowed', text: 'Partenaire survivant/veuf(ve)' },
+      { key: 'divorced', text: 'Divorcé(e)' },
+      { key: 'separated', text: 'Séparé(e)' },
     ],
     livingCountry: [
       { key: 'CAN', text: 'Canada' },
@@ -262,63 +263,65 @@ const fr: Translations = {
   },
   detail: {
     eligible:
-      'FRENCH: Based on the information provided, you are likely eligible for this benefit.',
+      "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
     eligibleWhen60ApplyNow:
-      'FRENCH: You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.',
+      "Vous serez probablement admissible quand vous aurez 60 ans, mais il se peut que vous puissiez présenter une demande dès maintenant. Veuillez contacter Service Canada pour plus d'informations",
     eligibleWhen65ApplyNow:
-      'FRENCH: You will likely be eligible when you turn 65, however you may be able to apply now. Please contact Service Canada for more information.',
-    eligibleWhen60: 'FRENCH: You will likely be eligible when you turn 60.',
-    eligibleWhen65: 'FRENCH: You will likely be eligible when you turn 65.',
+      'Vous serez probablement admissible lorsque vous aurez 65 ans. Cependant, vous pouvez peut-être faire une demande dès maintenant. Veuillez communiquer avec Service Canada pour obtenir de plus amples informations.',
+    eligibleWhen60:
+      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
+    eligibleWhen65:
+      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
     mustBe60to64:
-      'FRENCH: You must be between the ages of 60 and 64 to be eligible for this benefit.',
+      'Vous devez avoir entre 60 et 64 ans pour être admissible à cette prestation.',
     mustBeInCanada:
-      'FRENCH: You need to live in Canada to be eligible for this benefit.',
+      'Vous devez vivre au Canada pour être admissible à cette prestation.',
     mustBeOasEligible:
-      'FRENCH: You need to be eligible for OAS to be eligible for this benefit.',
+      'Vous devez être admissible à la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
-      'FRENCH: You need to complete the OAS eligibility check first.',
+      "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
     mustBeWidowed:
-      'FRENCH: You must be a surviving partner or widowed to be eligible for this benefit.',
+      'Vous devez être un partenaire survivant ou un veuf pour être admissible à cette prestation.',
     mustBePartnered:
-      'FRENCH: You must be common-law or married to be eligible for this benefit.',
+      'Vous devez être conjoint de fait ou marié pour être admissible à cette prestation.',
     mustHavePartnerWithOas:
-      'FRENCH: Your partner must be receiving OAS to be eligible for this benefit.',
+      'Votre partenaire doit recevoir la prestation de sécurité de la vieillesse pour être admissible à cette prestation.',
     mustMeetIncomeReq:
-      'FRENCH: Your income is too high to be eligible for this benefit.',
+      'Votre revenu est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
-      'FRENCH: You have not lived in Canada for the required number of years to be eligible for this benefit.',
+      "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
     ineligibleYearsOrCountry:
-      'FRENCH: You currently do not appear to be eligible for this benefit as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.',
+      "Vous ne semblez pas actuellement avoir droit à cette prestation, puisque vous avez indiqué que vous n'avez pas habité au Canada pendant la période minimale requise ou que vous avez habité dans un pays avec lequel le Canada a un accord de sécurité sociale. Cependant, vous pourriez devenir admissible à l'avenir si vous résidez au Canada pendant le nombre minimum d'années requis.",
     conditional:
-      'FRENCH: You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.',
+      'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
     dependingOnAgreement:
-      "FRENCH: You may be eligible to receive this benefit, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+      "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous encourageons à communiquer avec Service Canada.",
     dependingOnAgreementWhen60:
-      "FRENCH: You may be eligible to receive this benefit when you turn 60, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+      "Vous pourriez avoir droit à cette prestation à l'âge de 60 ans, selon l'entente entre le Canada et ce pays. Nous vous encourageons à communiquer avec Service Canada.",
     dependingOnAgreementWhen65:
-      "FRENCH: You may be eligible to receive this benefit when you turn 65, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+      "Vous pourriez être admissible à cette prestation quand vous aurez 65 ans, selon l'entente entre le Canada et ce pays. Nous vous encourageons à communiquer avec Service Canada.",
     dependingOnLegal:
-      'FRENCH: You may be eligible to receive this benefit, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
     dependingOnLegalSponsored:
-      'FRENCH: You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.',
+      'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
     dependingOnLegalWhen60:
-      'FRENCH: You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      'Vous pourriez être admissible à cette prestation quand vous aurez 60 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
     dependingOnLegalWhen65:
-      'FRENCH: You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      'Vous pourriez avoir droit à cette prestation quand vous aurez 65 ans, selon votre statut juridique au Canada. Nous vous encourageons à communiquer avec Service Canada.',
   },
   summaryTitle: {
     moreInfo: 'FRENCH: More information needed',
     unavailable: 'FRENCH: Unable to provide an estimation',
-    availableEligible: 'FRENCH: Likely eligible for benefits!',
+    availableEligible: 'FRENCH: Likely eligible for benefits',
     availableIneligible: 'FRENCH: Likely not eligible for benefits',
   },
   summaryDetails: {
     moreInfo:
       'FRENCH: You need to answer the remaining questions on the previous tab before an estimation can be provided.',
     unavailable:
-      "FRENCH: Given the answers you've provided, this tool is unable to provide an accurate estimation. You are recommended to contact Service Canada for more information.",
+      "D'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.\nContactez Service Canada",
     availableEligible:
-      "FRENCH: Given the answers you've provided, you are likely eligible for benefits! See the details below for more information.",
+      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes.',
     availableIneligible:
       "FRENCH: Given the answers you've provided, you are likely not eligible for any benefits. See the details below for more information.",
   },
