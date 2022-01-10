@@ -50,6 +50,7 @@ export enum ResultReason {
   OAS = 'Not eligible for OAS',
   INCOME = 'Income too high',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
+  PARTIAL_OAS = 'Only eligible for Partial OAS due to years in Canada',
 }
 
 // used to determine color+type of alert dialog
