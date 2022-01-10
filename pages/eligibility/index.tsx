@@ -202,9 +202,18 @@ const Eligibility: NextPage = () => {
                     estimateSection
                   />
                   <Alert title={root.summary.title} type={root.summary.state}>
-                    {root.summary.detail}
+                    {root.summary.details}
                   </Alert>
-                  <ResultsTable />
+                  {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
+                    <Image
+                      src={'/people.png'}
+                      width="1139"
+                      height="443"
+                      alt="People of all walks of life, happy together."
+                    />
+                  ) : (
+                    <ResultsTable />
+                  )}
                   <ContactCTA />
                   {root.summary?.links?.length && (
                     <ConditionalLinks links={root.summary.links} />

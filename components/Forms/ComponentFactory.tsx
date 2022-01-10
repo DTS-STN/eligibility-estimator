@@ -54,6 +54,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         data-testid="ee-form"
         action="/eligibility"
         onSubmit={(e) => e.preventDefault()}
+        noValidate
       >
         {/* 
       <input
@@ -89,18 +90,14 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     onChange={debounce(field.handleChange, 1000)}
                     value={field?.value}
                     data-category={field.category}
-                    // error={error[field.key] ?? undefined}
+                    error={field.error}
                     required
                   />
                 </div>
               )}
               {field.type == 'dropdown' && (
                 <div className="pb-8">
-                  <FormSelect
-                    field={field}
-                    // error={error[field.key] ?? undefined}
-                    value={null}
-                  />
+                  <FormSelect field={field} error={field.error} value={null} />
                 </div>
               )}
               {(field.type == 'radio' || field.type == 'boolean') && (
@@ -115,7 +112,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     label={field.label}
                     onChange={field.handleChange}
                     category={field.category}
-                    //error={error[field.key] ?? undefined}
+                    error={field.error}
                     required
                   />
                 </div>
@@ -142,11 +139,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
             onClick={(e) => {
               form.clearForm()
-              const x: HTMLFormElement = document.querySelector(
-                "form[name='ee-form']"
-              )
-
-              x.reset()
             }}
           >
             Clear
@@ -155,8 +147,10 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             type="submit"
             role="button"
             className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
-            onClick={(e) => {
-              selectedTabIndex(1)
+            onClick={async (e) => {
+              if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
+                selectedTabIndex(1)
+              }
             }}
           >
             Estimate

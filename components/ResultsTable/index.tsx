@@ -5,7 +5,7 @@ import { useStore } from '../Hooks'
 export const ResultsTable = observer(() => {
   const root = useStore()
   return (
-    <table>
+    <table className=" text-left">
       <thead className="font-semibold text-content border-b border-content">
         <tr className=" ">
           <th>Sample Benefits</th>

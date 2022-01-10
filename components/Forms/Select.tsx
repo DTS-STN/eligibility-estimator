@@ -48,6 +48,8 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             container: (styles) => ({
               ...styles,
               fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
+              border: error ? '1px solid red' : undefined,
+              borderRadius: '4px',
             }),
             input: (styles) => ({
               ...styles,

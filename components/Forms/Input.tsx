@@ -52,22 +52,28 @@ export const Input: React.VFC<InputProps> = observer((props) => {
           name={name}
           thousandSeparator={true}
           prefix="$"
-          className="form-control text-content"
+          className={`form-control text-content ${
+            error ? ' border-danger' : ''
+          }`}
           data-testid={name}
           min={0}
           value={value != null ? (value as string) : ''}
           placeholder={placeholder}
           onChange={onChange}
+          required
         />
       ) : (
         <NumberFormat
           id={name}
           name={name}
-          className="form-control text-content"
+          className={`form-control text-content ${
+            error ? ' border-danger' : ''
+          }`}
           data-testid={name}
           min={0}
           value={value != null ? (value as string) : ''}
           onChange={onChange}
+          required
         />
       )}
     </>

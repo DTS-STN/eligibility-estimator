@@ -45,16 +45,24 @@ export const FormField = types
     default: types.maybe(types.string),
     value: types.maybeNull(types.string),
     options: types.optional(types.array(types.string), []),
-    // error on a field
+    error: types.maybe(types.string),
   })
   .views((self) => ({
     get filled() {
-      return self.value !== undefined && self.value !== null
+      return (
+        self.value !== undefined && self.value !== null && self.value !== ''
+      )
+    },
+    get hasError() {
+      return self.error !== undefined
     },
   }))
   .actions((self) => ({
     setValue(value: string) {
       self.value = value
+    },
+    setError(error: string) {
+      self.error = error
     },
     clearValue() {
       self.value = null
@@ -63,11 +71,7 @@ export const FormField = types
   .actions((self) => ({
     handleChange: flow(function* (e) {
       const inputVal = e?.target?.value ?? e.value
-
-      // remove income masking and set field value
-      const value = inputVal.replace('$', '').replace(',', '')
-      self.setValue(value)
-
+      self.setValue(inputVal)
       yield getParentOfType(self, Form).sendAPIRequest()
     }),
   }))
@@ -75,9 +79,11 @@ export const FormField = types
 export const Form = types
   .model({
     fields: types.array(FormField),
-    // all errors on form
   })
   .views((self) => ({
+    get hasErrors() {
+      return self.fields.some((field) => field.hasError)
+    },
     fieldsByCategory(category: string): Instance<typeof FormField>[] {
       return self.fields.filter((field) => field.category == category)
     },
@@ -85,7 +91,6 @@ export const Form = types
       return self.fields.length === 0
     },
     get previouslySavedValues(): { key: string; value: string }[] {
-      // TODO: remove function, for debugging purposes
       return self.fields.map((field) => ({
         key: field.key,
         value: field.value,
@@ -139,6 +144,17 @@ export const Form = types
         .filter((f) => FormField.is(f))
       self.removeFields(unnecessaryFields)
     },
+    validateAgainstEmptyFields(): boolean {
+      let errorsExist = false
+      self.fields.map((field) => {
+        if (!field.filled) {
+          field.setError('This field is required')
+          errorsExist = true
+        }
+        return field
+      })
+      return errorsExist
+    },
   }))
   .actions((self) => ({
     clearForm(): void {
@@ -154,6 +170,9 @@ export const Form = types
         }
       }
       self.removeFields(fieldsToRemove)
+    },
+    clearAllErrors() {
+      self.fields.map((field) => field.setError(undefined))
     },
     setupForm(data: FieldData[]) {
       data.map((fieldData) => {
@@ -204,13 +223,21 @@ export const Form = types
     sendAPIRequest: flow(function* () {
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
+      console.log(queryString)
 
       const apiData = yield fetch(`${API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {
+        self.clearAllErrors()
         // validate errors
+        for (const d of data.detail) {
+          const field = self.getFieldByKey(d.context.key)
+          field.setError(d.message)
+        }
       } else {
+        self.clearAllErrors()
+        console.log(data)
         const parent = getParentOfType(self, RootStore)
         parent.setOAS(data.oas)
         parent.setGIS(data.gis)
@@ -245,7 +272,7 @@ export const SummaryLink = types.model({
 
 export const Summary = types.model({
   state: types.maybe(types.enumeration(Object.values(EstimationSummaryState))),
-  detail: types.maybe(types.string),
+  details: types.maybe(types.string),
   title: types.maybe(types.string),
   links: types.maybe(types.array(SummaryLink)),
 })
@@ -312,7 +339,7 @@ export const RootStore = types
       input: ModelCreationType<
         ExtractCFromProps<{
           state: IMaybe<ISimpleType<EstimationSummaryState>>
-          detail: IMaybe<ISimpleType<string>>
+          details: IMaybe<ISimpleType<string>>
           title: IMaybe<ISimpleType<string>>
           links: IMaybe<
             IArrayType<
