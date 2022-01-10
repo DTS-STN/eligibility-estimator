@@ -205,12 +205,14 @@ const Eligibility: NextPage = () => {
                     {root.summary.details}
                   </Alert>
                   {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-                    <Image
-                      src={'/people.png'}
-                      width="1139"
-                      height="443"
-                      alt="People of all walks of life, happy together."
-                    />
+                    <div className="mt-10">
+                      <Image
+                        src={'/people.png'}
+                        width="1139"
+                        height="443"
+                        alt="People of all walks of life, happy together."
+                      />
+                    </div>
                   ) : (
                     <ResultsTable />
                   )}
