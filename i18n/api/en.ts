@@ -12,6 +12,7 @@ const en: Translations = {
     personalInformation: 'Personal Information',
     partnerDetails: 'Partner Details',
     legalStatus: 'Legal Status',
+    socialAgreement: 'Social Agreement Countries',
   },
   result: {
     eligible: 'Eligible',

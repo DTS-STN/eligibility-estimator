@@ -20,6 +20,7 @@ export interface Translations {
     personalInformation: string
     partnerDetails: string
     legalStatus: string
+    socialAgreement: string
   }
   result: {
     eligible: string

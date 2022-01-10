@@ -88,7 +88,7 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-    category: { key: FieldCategory.LEGAL_STATUS },
+    category: { key: FieldCategory.SOCIAL_AGREEMENT },
     order: 10,
     type: FieldType.BOOLEAN,
     default: undefined,
