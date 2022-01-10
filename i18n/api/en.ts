@@ -61,6 +61,7 @@ const en: Translations = {
       { key: 'separated', text: 'Separated' },
     ],
     livingCountry: [
+      { key: 'CAN', text: 'Canada' },
       { key: 'AFG', text: 'Afghanistan' },
       { key: 'ALB', text: 'Albania' },
       { key: 'DZA', text: 'Algeria' },
@@ -92,7 +93,6 @@ const en: Translations = {
       { key: 'CPV', text: 'Cabo Verde' },
       { key: 'KHM', text: 'Cambodia' },
       { key: 'CMR', text: 'Cameroon' },
-      { key: 'CAN', text: 'Canada' },
       { key: 'CAF', text: 'Central African Republic' },
       { key: 'TCD', text: 'Chad' },
       { key: 'CHL', text: 'Chile' },
