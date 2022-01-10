@@ -1,3 +1,4 @@
+import { KeyAndText } from '../../../i18n/api'
 import { ALL_COUNTRIES } from '../helpers/countryUtils'
 import { FieldCategory } from './enums'
 
@@ -69,7 +70,7 @@ export const fieldDefinitions: FieldDefinitions = {
         text: value,
       }
     }),
-    default: 'Canada',
+    default: { key: 'CAN', text: 'Canada' },
   },
   [FieldKey.LEGAL_STATUS]: {
     key: FieldKey.LEGAL_STATUS,
@@ -130,14 +131,14 @@ interface FieldDataBoolean extends FieldDataGeneric {
 
 interface FieldDataRadio extends FieldDataGeneric {
   type: FieldType.RADIO
-  values?: Array<{ key: string; text: string }> // applied via translator
-  default?: string
+  values?: Array<KeyAndText> // applied via translator
+  default?: KeyAndText
 }
 
 interface FieldDataDropdown extends FieldDataGeneric {
   type: FieldType.DROPDOWN
-  values?: Array<{ key: string; text: string }> // applied via translator
-  default?: string
+  values?: Array<KeyAndText> // applied via translator
+  default?: KeyAndText
 }
 
 interface FieldDataString extends FieldDataGeneric {

@@ -7,7 +7,8 @@ export enum Language {
   EN = 'EN',
   FR = 'FR',
 }
-interface KeyAndText {
+
+export interface KeyAndText {
   key: string
   text: string
 }
