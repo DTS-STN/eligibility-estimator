@@ -68,13 +68,6 @@ export default function checkAfs(
         detail: translations.detail.mustBe60to64,
       }
     }
-  } else if (!meetsReqIncome) {
-    return {
-      eligibilityResult: ResultKey.INELIGIBLE,
-      entitlementResult: 0,
-      reason: ResultReason.INCOME,
-      detail: translations.detail.mustMeetIncomeReq,
-    }
   } else if (overAgeReq) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
@@ -82,12 +75,19 @@ export default function checkAfs(
       reason: ResultReason.AGE,
       detail: translations.detail.mustBe60to64,
     }
-  } else if (!meetsReqMarital) {
+  } else if (!meetsReqMarital && value.maritalStatus !== undefined) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.MARITAL,
       detail: translations.detail.mustBeWidowed,
+    }
+  } else if (!meetsReqIncome) {
+    return {
+      eligibilityResult: ResultKey.INELIGIBLE,
+      entitlementResult: 0,
+      reason: ResultReason.INCOME,
+      detail: translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqYears) {
     if (

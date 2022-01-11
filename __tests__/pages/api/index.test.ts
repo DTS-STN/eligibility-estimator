@@ -1157,6 +1157,14 @@ describe('basic Allowance scenarios', () => {
     expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.allowance.reason).toEqual(ResultReason.MORE_INFO)
   })
+  it('returns "ineligible due to age" when age 65 and high income', async () => {
+    const res = await mockGetRequest({
+      income: 1000000,
+      age: 65,
+    })
+    expect(res.body.allowance.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.allowance.reason).toEqual(ResultReason.AGE)
+  })
   it('returns "ineligible" when age over 64', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -1409,6 +1417,14 @@ describe('basic Allowance for Survivor scenarios', () => {
     })
     expect(res.body.afs.eligibilityResult).toEqual(ResultKey.MORE_INFO)
     expect(res.body.afs.reason).toEqual(ResultReason.MORE_INFO)
+  })
+  it('returns "ineligible due to age" when age 65 and high income', async () => {
+    const res = await mockGetRequest({
+      income: 1000000,
+      age: 65,
+    })
+    expect(res.body.afs.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
+    expect(res.body.afs.reason).toEqual(ResultReason.AGE)
   })
   it('returns "ineligible" when age over 64', async () => {
     const res = await mockGetRequest({
