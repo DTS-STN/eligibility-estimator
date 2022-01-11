@@ -76,10 +76,30 @@ export const FormField = types
     clearValue() {
       self.value = null
     },
+    sanitizeInput() {
+      let val = ''
+
+      if (KeyValue.is(self.value)) {
+        if (self.key == FieldKey.LIVING_COUNTRY || FieldKey.MARITAL_STATUS) {
+          val = self.value.key
+        }
+      } else {
+        if (
+          self.key == FieldKey.INCOME ||
+          self.key == FieldKey.PARTNER_INCOME
+        ) {
+          val = self.value.toString().replace('$', '').replace(',', '')
+        } else {
+          val = self.value.toString()
+        }
+      }
+
+      return val
+    },
   }))
   .actions((self) => ({
     handleChange: flow(function* (e) {
-      const inputVal = e?.target?.value ?? e.value
+      const inputVal = e?.target?.value ?? { key: e.value, text: e.label }
       self.setValue(inputVal)
       yield getParentOfType(self, Form).sendAPIRequest()
     }),
@@ -221,20 +241,8 @@ export const Form = types
       for (const field of self.fields) {
         if (!field.value) continue
 
-        let val = ''
-        // remove masking from currency
-        if (
-          field.key == FieldKey.INCOME ||
-          field.key == FieldKey.PARTNER_INCOME
-        ) {
-          val = field.value.toString().replace('$', '').replace(',', '')
-        } else {
-          val = field.value.toString()
-        }
-
-        if (field.key == FieldKey.LIVING_COUNTRY) {
-          val = field.value.key
-        }
+        // remove masking from currency and use object keys for react-select
+        let val = field.sanitizeInput()
 
         if (qs !== '') qs += '&'
         //encodeURI and fix for encodeURIComponent and circle brackets
