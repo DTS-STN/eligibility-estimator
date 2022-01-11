@@ -1,11 +1,11 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { Dispatch, useEffect, useState } from 'react'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
 import { useStore } from '../Hooks'
-import { Input } from './Input'
+import { CurrencyField } from './CurrencyField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { observer } from 'mobx-react'
@@ -14,6 +14,8 @@ import type { Instance } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
+import { NumberField } from './NumberField'
+import { TextField } from './TextField'
 
 interface FactoryProps {
   data: ResponseSuccess
@@ -79,9 +81,37 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   {field.category.text}
                 </h2>
               )}
-              {(field.type == 'number' || field.type == 'string') && (
+              {field.type == FieldType.CURRENCY && (
                 <div className="pb-8">
-                  <Input
+                  <CurrencyField
+                    type={field.type}
+                    name={field.key}
+                    label={field.label}
+                    placeholder={field.placeholder ?? ''}
+                    onChange={debounce(field.handleChange, 1000)}
+                    value={field.value}
+                    error={field.error}
+                    required
+                  />
+                </div>
+              )}
+              {field.type == FieldType.NUMBER && (
+                <div className="pb-8">
+                  <NumberField
+                    type={field.type}
+                    name={field.key}
+                    label={field.label}
+                    placeholder={field.placeholder ?? ''}
+                    onChange={debounce(field.handleChange, 1000)}
+                    value={field.value}
+                    error={field.error}
+                    required
+                  />
+                </div>
+              )}
+              {field.type == FieldType.STRING && (
+                <div className="pb-8">
+                  <TextField
                     type={field.type}
                     name={field.key}
                     label={field.label}

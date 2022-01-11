@@ -5,7 +5,7 @@ import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   error?: string
@@ -14,12 +14,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 /**
  * A form input field rendered by the component factory. If the field is a currency field (income / partner receiving OAS) then use a NumberFormat to render the number masked as a currency
  * Currently support text and number fields
- * @param props {InputProps}
+ * @param props {TextFieldProps}
  * @returns
  */
-export const Input: React.VFC<InputProps> = observer((props) => {
+export const TextField: React.VFC<TextFieldProps> = observer((props) => {
   const { name, type, label, required, value, placeholder, onChange, error } =
     props
+
+  console.log(type)
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -47,50 +49,14 @@ export const Input: React.VFC<InputProps> = observer((props) => {
         <Tooltip field={name} />
       </label>
       {error && <ErrorLabel errorMessage={error} />}
-      {(name == FieldKey.INCOME || name == FieldKey.PARTNER_INCOME) && (
-        <NumberFormat
-          id={name}
-          name={name}
-          thousandSeparator={true}
-          prefix="$"
-          className={`form-control text-content ${
-            error ? ' border-danger' : ''
-          }`}
-          data-testid={name}
-          min={0}
-          value={value != null ? (value as string) : ''}
-          placeholder={placeholder}
-          onChange={onChange}
-          required
-        />
-      )}
-      {(name == FieldKey.AGE || name == FieldKey.YEARS_IN_CANADA_SINCE_18) && (
-        <NumberFormat
-          id={name}
-          name={name}
-          className={`form-control text-content ${
-            error ? ' border-danger' : ''
-          }`}
-          data-testid={name}
-          min={0}
-          value={value != null ? (value as string) : ''}
-          placeholder={placeholder}
-          onChange={onChange}
-          required
-        />
-      )}
-      {type == FieldType.STRING && (
-        <input
-          type="text"
-          className={`form-control text-content ${
-            error ? ' border-danger' : ''
-          }`}
-          placeholder={placeholder}
-          onChange={onChange}
-          defaultValue={value}
-          required
-        />
-      )}
+      <input
+        type="text"
+        className={`form-control text-content ${error ? ' border-danger' : ''}`}
+        placeholder={placeholder}
+        onChange={onChange}
+        defaultValue={value}
+        required
+      />
     </>
   )
 })

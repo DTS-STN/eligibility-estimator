@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Alert } from '../components/Alert'
-import { Input } from '../components/Forms/Input'
+import { CurrencyField } from '../components/Forms/CurrencyField'
 import { Layout } from '../components/Layout'
 import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
@@ -66,7 +66,7 @@ const Home: NextPage = () => {
           input.setAttribute('value', '')
         }}
       >
-        <Input
+        <CurrencyField
           type="text"
           name="income"
           label="What is your current annual net income in Canadian dollars"

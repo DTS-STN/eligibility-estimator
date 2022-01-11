@@ -97,6 +97,7 @@ export const fieldDefinitions: FieldDefinitions = {
 }
 
 export type FieldData =
+  | FieldDataCurrency
   | FieldDataNumber
   | FieldDataBoolean
   | FieldDataRadio
@@ -111,6 +112,11 @@ interface FieldDataGeneric {
     text?: string // applied via translator
   }
   order: number
+}
+
+interface FieldDataCurrency extends FieldDataGeneric {
+  type: FieldType.CURRENCY
+  placeholder?: string
 }
 
 interface FieldDataNumber extends FieldDataGeneric {
