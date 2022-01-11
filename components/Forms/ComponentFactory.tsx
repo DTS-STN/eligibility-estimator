@@ -61,16 +61,19 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         <input type="hidden" name="_language" value={'EN'} />
         {form.fields.map((field: Instance<typeof FormField>) => {
           const isChildQuestion =
-            field.category.key ==
-            (FieldCategory.PARTNER_DETAILS || 'Social Agreement Countries')
+            field.category.key == FieldCategory.PARTNER_DETAILS ||
+            field.category.key == FieldCategory.SOCIAL_AGREEMENT
               ? true
               : false
-
+          const styling = isChildQuestion
+            ? `bg-emphasis px-10 ${
+                field.category.key == FieldCategory.SOCIAL_AGREEMENT
+                  ? ' mb-4'
+                  : ''
+              }`
+            : ``
           const content = (
-            <div
-              key={field.key}
-              className={isChildQuestion ? `bg-emphasis px-10` : ``}
-            >
+            <div key={field.key} className={styling}>
               {field.category.key != lastCategory && (
                 <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
                   {field.category.text}
@@ -103,8 +106,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     values={
                       field.type == 'boolean'
                         ? [
-                            { key: true, text: 'Yes' },
-                            { key: false, text: 'No' },
+                            { key: 'true', text: 'Yes' },
+                            { key: 'false', text: 'No' },
                           ]
                         : field.options
                     }
