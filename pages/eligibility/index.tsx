@@ -113,7 +113,6 @@ const Eligibility: NextPage = () => {
               <ProgressBar
                 sections={[
                   {
-                    // TODO: progress needs to be fixed!
                     title: 'Income Details',
                     complete: root.form.progress.income,
                   },

@@ -65,7 +65,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       */}
         {form.fields.map((field: Instance<typeof FormField>) => {
           const isChildQuestion =
-            field.category ==
+            field.category.key ==
             (FieldCategory.PARTNER_DETAILS || 'Social Agreement Countries') // TODO: need to add this category on the API
               ? true
               : false
@@ -75,7 +75,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               key={field.key}
               className={isChildQuestion ? `bg-emphasis px-10` : ``}
             >
-              {field.category != lastCategory && (
+              {field.category.key != lastCategory && (
                 <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
                   {field.category}
                 </h2>
@@ -89,7 +89,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     placeholder={field.placeholder ?? ''}
                     onChange={debounce(field.handleChange, 1000)}
                     value={field?.value}
-                    data-category={field.category}
+                    data-category={field.category.key}
                     error={field.error}
                     required
                   />
@@ -106,12 +106,17 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     name={field.key}
                     checkedValue={field.value}
                     values={
-                      field.type == 'boolean' ? ['Yes', 'No'] : field.options
+                      field.type == 'boolean'
+                        ? [
+                            { key: true, text: 'Yes' },
+                            { key: false, text: 'No' },
+                          ]
+                        : field.options
                     }
                     keyforid={field.key}
                     label={field.label}
                     onChange={field.handleChange}
-                    category={field.category}
+                    category={field.category.key}
                     error={field.error}
                     required
                   />

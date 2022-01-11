@@ -17,40 +17,44 @@ export const ResultsTable = observer(() => {
         <tr className="">
           <td>Old Age Security (OAS)</td>
           <td>
-            <p>{root.oas.eligibilityResult}</p>
-            <p>Details: {root.oas.detail}</p>
+            <>
+              {root.oas.detail.split('\n').map((str, i) => (
+                <p key={i}>{str}</p>
+              ))}
+            </>
           </td>
           <td>${root.oas.entitlementResult}</td>
         </tr>
         <tr className="bg-[#E8F2F4]">
           <td>Guaranteed Income Supplement (GIS)</td>
           <td>
-            <p>{root.gis.eligibilityResult}</p>
-            <p>Details: {root.gis.detail}</p>
+            <>
+              {root.gis.detail.split('\n').map((str, i) => (
+                <p key={i}>{str}</p>
+              ))}
+            </>
           </td>
           <td>${root.gis.entitlementResult}</td>
         </tr>
         <tr>
           <td>Allowance</td>
           <td>
-            <p>{root.allowance && root.allowance.eligibilityResult}</p>
-            {root.allowance &&
-              (root.allowance.eligibilityResult == ResultKey.INELIGIBLE ||
-                root.allowance.eligibilityResult == ResultKey.CONDITIONAL) && (
-                <p>Details: {root.allowance.detail}</p>
-              )}
+            <>
+              {root.allowance.detail.split('\n').map((str, i) => (
+                <p key={i}>{str}</p>
+              ))}
+            </>
           </td>
           <td>${root.allowance && root.allowance.entitlementResult}</td>
         </tr>
         <tr className="bg-[#E8F2F4]">
           <td>Allowance for Survivor</td>
           <td>
-            <p>{root.afs && root.afs.eligibilityResult}</p>
-            {root.afs &&
-              (root.afs.eligibilityResult == ResultKey.INELIGIBLE ||
-                root.afs.eligibilityResult == ResultKey.CONDITIONAL) && (
-                <p>Details: {root.afs.detail}</p>
-              )}
+            <>
+              {root.afs.detail.split('\n').map((str, i) => (
+                <p key={i}>{str}</p>
+              ))}
+            </>
           </td>
           <td>${root.afs && root.afs.entitlementResult}</td>
         </tr>

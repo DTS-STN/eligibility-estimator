@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { Language } from '../../../i18n/api'
 import { LegalStatus, LivingCountry, MaritalStatus, ResultKey } from './enums'
 
 /**
@@ -16,6 +17,9 @@ import { LegalStatus, LivingCountry, MaritalStatus, ResultKey } from './enums'
  * Note: Do not require fields here, do it in the benefit-specific schemas.
  */
 export const RequestSchema = Joi.object({
+  _language: Joi.string()
+    .valid(...Object.values(Language))
+    .default(Language.EN),
   income: Joi.number().integer().min(0),
   age: Joi.number().integer().max(150),
   livingCountry: Joi.string().valid(...Object.values(LivingCountry)),
@@ -24,7 +28,7 @@ export const RequestSchema = Joi.object({
   yearsInCanadaSince18: Joi.number()
     .integer()
     .ruleset.max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message('Years in Canada should be no more than age minus 18'),
+    .message('Years in Canada should be no more than age minus 18'), // todo i18n
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   partnerIncome: Joi.number().integer(),
   partnerReceivingOas: Joi.boolean(),

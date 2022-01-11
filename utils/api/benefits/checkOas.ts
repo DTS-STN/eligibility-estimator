@@ -1,3 +1,4 @@
+import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
@@ -8,7 +9,10 @@ import { OasSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
 
-export default function checkOas(params: CalculationInput): BenefitResult {
+export default function checkOas(
+  params: CalculationInput,
+  translations: Translations
+): BenefitResult {
   // validation
   const { result, value } = validateRequestForBenefit(OasSchema, params)
   // if the validation was able to return an error result, return it
@@ -35,23 +39,21 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason: ResultReason.NONE,
-        detail:
-          'Based on the information provided, you are likely eligible for OAS!',
+        detail: translations.detail.eligible,
       }
     } else if (value.age == 64) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail:
-          'You will likely be eligible when you turn 65, however you may be able to apply now, please contact Service Canada for more information.',
+        detail: translations.detail.eligibleWhen65ApplyNow,
       }
     } else {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: 'You will likely be eligible when you turn 65.',
+        detail: translations.detail.eligibleWhen65,
       }
     }
   } else if (!meetsReqIncome) {
@@ -59,7 +61,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: 'Your income is too high to be eligible for OAS.',
+      detail: translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqYears) {
     if (
@@ -71,16 +73,14 @@ export default function checkOas(params: CalculationInput): BenefitResult {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.YEARS_IN_CANADA,
-          detail:
-            "Depending on Canada's agreement with this country, you may be eligible to receive the OAS pension. You are encouraged to contact Service Canada.",
+          detail: translations.detail.dependingOnAgreement,
         }
       } else {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail:
-            "You may be eligible when you turn 65, depending on Canada's agreement with this country. You are encouraged to contact Service Canada.",
+          detail: translations.detail.dependingOnAgreementWhen65,
         }
       }
     } else {
@@ -88,7 +88,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.YEARS_IN_CANADA,
-        detail: `You currently do not appear to be eligible for the OAS pension as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.`,
+        detail: translations.detail.mustMeetYearReq,
       }
     }
   } else if (!meetsReqLegal) {
@@ -97,24 +97,21 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail:
-          'You may be eligible when you turn 65, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+        detail: translations.detail.dependingOnLegalWhen65,
       }
     } else if (value.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail:
-          'You may be eligible for OAS, and should contact Service Canada to confirm due to your legal status in Canada.',
+        detail: translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail:
-          'You may be eligible for OAS, and should contact Service Canada to confirm due to your legal status in Canada.',
+        detail: translations.detail.dependingOnLegal,
       }
     }
   } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {
@@ -122,8 +119,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.SOCIAL_AGREEMENT,
-      detail:
-        'You currently do not appear to be eligible for the OAS pension as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.',
+      detail: translations.detail.ineligibleYearsOrCountry,
     }
   }
   // fallback

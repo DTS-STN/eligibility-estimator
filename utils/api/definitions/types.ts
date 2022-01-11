@@ -1,3 +1,4 @@
+import { Language } from '../../../i18n/api'
 import {
   EstimationSummaryState,
   LegalStatus,
@@ -19,7 +20,8 @@ export interface CalculationInput {
   partnerIncome?: number
   partnerReceivingOas?: boolean
   everLivedSocialCountry?: boolean
-  _oasEligible?: ResultKey
+  _language?: Language
+  _oasEligible?: ResultKey // added by GIS check
 }
 
 export interface BenefitResult {

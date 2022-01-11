@@ -61,13 +61,13 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
           value={stateValue}
           defaultValue={
             defaultValue !== undefined
-              ? { label: defaultValue, value: defaultValue }
+              ? { label: defaultValue.text, value: defaultValue.key }
               : undefined
           }
           name={field.key}
           options={field.options.map((opt) => ({
-            value: opt,
-            label: opt,
+            value: opt.key,
+            label: opt.text,
           }))}
           onChange={async (newValue: { value: string; label: string }) => {
             if (!newValue) {

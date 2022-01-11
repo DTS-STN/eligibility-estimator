@@ -53,7 +53,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               name={`${keyforid}`}
               // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
               className="opacity-0 -ml-4"
-              value={correctForBooleans(val)}
+              value={val.key}
               onChange={onChange}
               required
               defaultChecked={checkedValue === correctForBooleans(val)}
@@ -63,7 +63,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               className="radio flex items-center"
             >
               <span className="w-6 h-6 inline-block mr-2 rounded-full border border-grey min-w-[24px]"></span>
-              <p>{val}</p>
+              <p>{val.text}</p>
             </label>
           </div>
         ))}
