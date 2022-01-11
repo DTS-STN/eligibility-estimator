@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { dictionaryList } from '../../i18n'
-import { LanguageContext } from '../Contexts'
+import { LanguageContext, RootStoreContext } from '../Contexts'
 
 type StorageType = 'session' | 'local'
 
@@ -55,4 +55,12 @@ export const useInternationalization = (key: string) => {
   const { userLanguage } = useContext(LanguageContext)
   if (dictionaryList[userLanguage] == undefined) return ''
   return dictionaryList[userLanguage][key]
+}
+
+export function useStore() {
+  const store = useContext(RootStoreContext)
+  if (store === null) {
+    throw new Error('Store cannot be null, please add a context provider')
+  }
+  return store
 }

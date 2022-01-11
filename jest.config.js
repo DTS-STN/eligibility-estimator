@@ -1,6 +1,6 @@
 module.exports = {
   // custom
-  testMatch: ['**/__tests__/**/*.test.{js,ts}'],
+  testMatch: ['**/__tests__/**/*.test.{js,ts,tsx}'],
   modulePathIgnorePatterns: ['./cypress'],
 
   // straight from Next, source: https://nextjs.org/docs/testing#jest-and-react-testing-library

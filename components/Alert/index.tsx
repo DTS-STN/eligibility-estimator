@@ -15,7 +15,7 @@ export const Alert: React.VFC<{
       case EstimationSummaryState.AVAILABLE_INELIGIBLE:
         return 'border-danger text-danger'
       case EstimationSummaryState.AVAILABLE_ELIGIBLE:
-        return 'border-success text-success'
+        return 'borde[#278400] text-[#278400]'
       // case 'info':
       //   return 'border-info text-info'
       default:

@@ -10,36 +10,21 @@ import { ConditionalLinks } from '../../components/ConditionalLinks'
 import { ContactCTA } from '../../components/ContactCTA'
 import { FAQ } from '../../components/FAQ'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
-import { Input } from '../../components/Forms/Input'
+import { useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 import ProgressBar from '../../components/ProgressBar'
 import { Tooltip } from '../../components/Tooltip/tooltip'
-import {
-  EstimationSummaryState,
-  ResultKey,
-} from '../../utils/api/definitions/enums'
-import { BenefitResult } from '../../utils/api/definitions/types'
+import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { validateIncome } from '../../utils/api/helpers/validator'
-
-const dataFetcher = async (url) => {
-  const res = await fetch(url)
-  const data = await res.json()
-
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-  return data
-}
+import { dataFetcher } from '../../utils/web/helpers/utils'
+import { Instance } from 'mobx-state-tree'
+import { RootStore } from '../../client-state/store'
+import { observer } from 'mobx-react'
+import { ResultsTable } from '../../components/ResultsTable'
 
 const Eligibility: NextPage = () => {
   const { query } = useRouter()
-  const [oas, setOAS] = useState<BenefitResult>(null)
-  const [gis, setGIS] = useState<BenefitResult>(null)
-  const [summary, setSummary] = useState<any>(null)
-  const [allowance, setAllowance] = useState<BenefitResult>(null)
-  const [afs, setAFS] = useState<BenefitResult>(null)
-  const [progress, setProgress] = useState({ personal: false, legal: false })
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
 
   // check if income is too high to participate in calculation
@@ -59,6 +44,8 @@ const Eligibility: NextPage = () => {
     () => query && `api/calculateEligibility?${params && params}`,
     dataFetcher
   )
+
+  const root: Instance<typeof RootStore> = useStore()
 
   if (error)
     return (
@@ -80,9 +67,6 @@ const Eligibility: NextPage = () => {
         key={selectedTabIndex}
         defaultIndex={selectedTabIndex}
         onChange={(index) => {
-          if (index == 0) {
-            setProgress({ legal: false, personal: false })
-          }
           setSelectedTabIndex(index)
         }}
       >
@@ -122,12 +106,18 @@ const Eligibility: NextPage = () => {
             {showProgress && (
               <ProgressBar
                 sections={[
-                  { title: 'Income Details', complete: true },
+                  {
+                    title: 'Income Details',
+                    complete: root.form.progress.income,
+                  },
                   {
                     title: 'Personal Information',
-                    complete: progress.personal,
+                    complete: root.form.progress.personal,
                   },
-                  { title: 'Legal Status', complete: progress.legal },
+                  {
+                    title: 'Legal Status',
+                    complete: root.form.progress.legal,
+                  },
                 ]}
               />
             )}
@@ -167,13 +157,7 @@ const Eligibility: NextPage = () => {
                 ) : (
                   <ComponentFactory
                     data={data}
-                    oas={setOAS}
-                    gis={setGIS}
-                    summary={setSummary}
-                    allowance={setAllowance}
-                    afs={setAFS}
                     selectedTabIndex={setSelectedTabIndex}
-                    setProgress={setProgress}
                   />
                 )}
               </div>
@@ -196,7 +180,8 @@ const Eligibility: NextPage = () => {
           </Tab.Panel>
           <Tab.Panel className="mt-10">
             <div className="flex flex-col space-y-12">
-              {summary ? (
+              {root.summary.state &&
+              root.summary.state !== EstimationSummaryState.MORE_INFO ? (
                 <>
                   <ProgressBar
                     sections={[
@@ -206,87 +191,28 @@ const Eligibility: NextPage = () => {
                     ]}
                     estimateSection
                   />
-                  <Alert title={summary.title} type={summary.state}>
-                    {summary.details}
+                  <Alert title={root.summary.title} type={root.summary.state}>
+                    {root.summary.details}
                   </Alert>
-                  <table>
-                    <thead className="font-semibold text-content border-b border-content">
-                      <tr className=" ">
-                        <th>Sample Benefits</th>
-                        <th>Eligibility</th>
-                        <th>Estimated Monthly Amount (CAD)</th>
-                      </tr>
-                    </thead>
-                    <tbody className="align-top">
-                      <tr className="">
-                        <td>Old Age Security (OAS)</td>
-                        <td>
-                          <>
-                            {oas.detail.split('\n').map((str, i) => (
-                              <p key={i}>{str}</p>
-                            ))}
-                          </>
-                        </td>
-                        <td>${oas.entitlementResult}</td>
-                      </tr>
-                      <tr className="bg-[#E8F2F4]">
-                        <td>Guaranteed Income Supplement (GIS)</td>
-                        <td>
-                          <>
-                            {gis.detail.split('\n').map((str, i) => (
-                              <p key={i}>{str}</p>
-                            ))}
-                          </>
-                        </td>
-                        <td>${gis.entitlementResult}</td>
-                      </tr>
-                      <tr>
-                        <td>Allowance</td>
-                        <td>
-                          {allowance &&
-                            (allowance.eligibilityResult ==
-                              ResultKey.INELIGIBLE ||
-                              allowance.eligibilityResult ==
-                                ResultKey.CONDITIONAL) && (
-                              <>
-                                {allowance.detail.split('\n').map((str, i) => (
-                                  <p key={i}>{str}</p>
-                                ))}
-                              </>
-                            )}
-                        </td>
-                        <td>${allowance && allowance.entitlementResult}</td>
-                      </tr>
-                      <tr className="bg-[#E8F2F4]">
-                        <td>Allowance for Survivor</td>
-                        <td>
-                          {afs &&
-                            (afs.eligibilityResult == ResultKey.INELIGIBLE ||
-                              afs.eligibilityResult ==
-                                ResultKey.CONDITIONAL) && (
-                              <>
-                                {afs.detail.split('\n').map((str, i) => (
-                                  <p key={i}>{str}</p>
-                                ))}
-                              </>
-                            )}
-                        </td>
-                        <td>${afs && afs.entitlementResult}</td>
-                      </tr>
-                      <tr className="border-t border-content font-semibold ">
-                        <td colSpan={2}>Total Monthly Benefit Amount</td>
-                        <td>
-                          $
-                          {oas.entitlementResult +
-                            gis.entitlementResult +
-                            allowance?.entitlementResult +
-                            afs?.entitlementResult}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <ContactCTA />
-                  <ConditionalLinks links={summary.links} />
+                  {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
+                    <div className="mt-10">
+                      <Image
+                        src={'/people.png'}
+                        width="1139"
+                        height="443"
+                        alt="People of all walks of life, happy together."
+                      />
+                    </div>
+                  ) : (
+                    <ResultsTable />
+                  )}
+                  {root.summary.state !==
+                    EstimationSummaryState.UNAVAILABLE && (
+                    <ContactCTA setSelectedTab={setSelectedTabIndex} />
+                  )}
+                  {root.summary?.links?.length && (
+                    <ConditionalLinks links={root.summary.links} />
+                  )}
                 </>
               ) : (
                 <div className="flex place-content-center">
@@ -307,4 +233,4 @@ const Eligibility: NextPage = () => {
   )
 }
 
-export default Eligibility
+export default observer(Eligibility)

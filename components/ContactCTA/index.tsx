@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import { Dispatch } from 'react'
 
-export const ContactCTA = () => (
+export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
+  setSelectedTab,
+}) => (
   <p>
     For a more accurate assessment, you are encouraged to{' '}
     <Link
@@ -9,6 +12,13 @@ export const ContactCTA = () => (
     >
       <a className="text-default-text underline">contact Service Canada </a>
     </Link>
-    and check out the FAQ on documents you may be required to provide.
+    and check out the{' '}
+    <span
+      className="underline text-default-text cursor-pointer"
+      onClick={(e) => setSelectedTab(2)}
+    >
+      FAQ
+    </span>{' '}
+    on documents you may be required to provide.
   </p>
 )

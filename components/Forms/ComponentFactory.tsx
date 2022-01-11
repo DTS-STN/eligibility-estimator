@@ -1,34 +1,29 @@
 import { debounce, sortBy } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { Dispatch, useState } from 'react'
-import { FieldCategory } from '../../utils/api/definitions/enums'
-import { FieldData } from '../../utils/api/definitions/fields'
-import type {
-  BenefitResult,
-  ResponseSuccess,
-} from '../../utils/api/definitions/types'
+import React, { Dispatch, useEffect, useState } from 'react'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/api/helpers/validator'
-import { fixedEncodeURIComponent } from '../../utils/api/helpers/webUtils'
-import { Input } from './Input'
+import { useStore } from '../Hooks'
+import { CurrencyField } from './CurrencyField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
+import { observer } from 'mobx-react'
+import { RootStore } from '../../client-state/store'
+import type { Instance } from 'mobx-state-tree'
+import { FieldCategory } from '../../utils/api/definitions/enums'
+import type { Form } from '../../client-state/models/Form'
+import type { FormField } from '../../client-state/models/FormField'
+import { NumberField } from './NumberField'
+import { TextField } from './TextField'
 
 interface FactoryProps {
   data: ResponseSuccess
-  oas: Dispatch<BenefitResult>
-  gis: Dispatch<BenefitResult>
-  summary: Dispatch<any>
-  allowance: Dispatch<BenefitResult>
-  afs: Dispatch<BenefitResult>
-  setProgress: Dispatch<any>
   selectedTabIndex: Dispatch<number>
 }
 
 /** API endpoint for eligibility*/
 const API_URL = `api/calculateEligibility`
-
-/** form completion state */
-let formCompletion = {}
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -36,244 +31,164 @@ let formCompletion = {}
  * @param props {FactoryProps}
  * @returns
  */
-export const ComponentFactory: React.VFC<FactoryProps> = ({
-  data,
-  oas,
-  gis,
-  summary,
-  allowance,
-  afs,
-  selectedTabIndex,
-  setProgress,
-}) => {
-  let lastCategory: string = null
+export const ComponentFactory: React.VFC<FactoryProps> = observer(
+  ({ data, selectedTabIndex }) => {
+    let lastCategory = null
 
-  const router = useRouter()
-  const query = router.query
-  formCompletion = { ...query, ...formCompletion }
+    const router = useRouter()
+    const query = router.query
 
-  const orderedFields = sortBy(data.fieldData, 'order')
-  const [formState, setFormState] = useState(orderedFields)
+    const root: Instance<typeof RootStore> = useStore()
+    const form: Instance<typeof Form> = root.form
 
-  console.log(data)
+    if (form.empty) {
+      form.setupForm(data.fieldData)
+    }
 
-  /**
-   * send a GET request to the API, appended with query string data
-   * @param queryString the query string to append to the APIs get request
-   */
-  const sendAPIRequest = (queryString: string) => {
-    fetch(`${API_URL}?${queryString}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.error) {
-          setFormState(data.fieldData)
+    useEffect(() => {
+      //set income from query parameter if exists and only run on initial draw
+      if (query[FieldKey.INCOME] !== '') {
+        form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
+      }
+    }, [query[FieldKey.INCOME]])
 
-          oas(data.oas)
-          gis(data.gis)
-          summary(data.summary)
-          allowance(data.allowance)
-          afs(data.afs)
+    return (
+      <form
+        name="ee-form"
+        data-testid="ee-form"
+        action="/eligibility"
+        onSubmit={(e) => e.preventDefault()}
+        noValidate
+      >
+        <input type="hidden" name="_language" value={'EN'} />
+        {form.fields.map((field: Instance<typeof FormField>) => {
+          const isChildQuestion =
+            field.category.key == FieldCategory.PARTNER_DETAILS ||
+            field.category.key == FieldCategory.SOCIAL_AGREEMENT
+              ? true
+              : false
+          const styling = isChildQuestion
+            ? `bg-emphasis px-10 ${
+                field.category.key == FieldCategory.SOCIAL_AGREEMENT
+                  ? ' mb-4'
+                  : ''
+              }`
+            : ``
+          const content = (
+            <div key={field.key} className={styling}>
+              {field.category.key != lastCategory && (
+                <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
+                  {field.category.text}
+                </h2>
+              )}
+              {field.type == FieldType.CURRENCY && (
+                <div className="pb-8">
+                  <CurrencyField
+                    type={field.type}
+                    name={field.key}
+                    label={field.label}
+                    placeholder={field.placeholder ?? ''}
+                    onChange={debounce(field.handleChange, 1000)}
+                    value={field.value}
+                    error={field.error}
+                    required
+                  />
+                </div>
+              )}
+              {field.type == FieldType.NUMBER && (
+                <div className="pb-8">
+                  <NumberField
+                    type={field.type}
+                    name={field.key}
+                    label={field.label}
+                    placeholder={field.placeholder ?? ''}
+                    onChange={debounce(field.handleChange, 1000)}
+                    value={field.value}
+                    error={field.error}
+                    required
+                  />
+                </div>
+              )}
+              {field.type == FieldType.STRING && (
+                <div className="pb-8">
+                  <TextField
+                    type={field.type}
+                    name={field.key}
+                    label={field.label}
+                    placeholder={field.placeholder ?? ''}
+                    onChange={debounce(field.handleChange, 1000)}
+                    value={field.value}
+                    error={field.error}
+                    required
+                  />
+                </div>
+              )}
+              {field.type == 'dropdown' && (
+                <div className="pb-8">
+                  <FormSelect field={field} error={field.error} value={null} />
+                </div>
+              )}
+              {(field.type == 'radio' || field.type == 'boolean') && (
+                <div className="pb-8">
+                  <Radio
+                    name={field.key}
+                    checkedValue={field.value}
+                    values={
+                      field.type == 'boolean'
+                        ? [
+                            { key: 'true', text: 'Yes' },
+                            { key: 'false', text: 'No' },
+                          ]
+                        : field.options
+                    }
+                    keyforid={field.key}
+                    label={field.label}
+                    onChange={field.handleChange}
+                    error={field.error}
+                    required
+                  />
+                </div>
+              )}
+            </div>
+          )
+          lastCategory = field.category.key
 
-          // set progress
-          checkCompletion(data.fieldData, formCompletion, setProgress)
-        } else {
-          // handle error - validate per field once validation designs are complete
-        }
-      })
-  }
+          return content
+        })}
 
-  /**
-   * Global change handler for the dynamic form elements in the eligibility form
-   */
-  const handleChange = async () => {
-    const formData = retrieveFormData()
-    if (!formData) return
-    const qs = buildQueryStringFromFormData(formData, true)
-
-    const income = formData
-      .get('income')
-      .toString()
-      .replace('$', '')
-      .replace(',', '')
-
-    // validate against a client's income and if it's too high, push to the eligibility page with an error
-    if (validateIncome(income)) router.push(`/eligibility?${qs}`)
-
-    sendAPIRequest(qs)
-  }
-
-  return (
-    <form
-      name="ee-form"
-      data-testid="ee-form"
-      action="/eligibility"
-      onSubmit={(e) => e.preventDefault()}
-    >
-      <input type="hidden" name="_language" value="EN" />
-      {formState.map((field) => {
-        const content = (
-          <div key={field.key}>
-            {field.category.key != lastCategory && (
-              <h2 className="h2 mb-8">{field.category.text}</h2>
-            )}
-            {(field.type == 'number' || field.type == 'string') && (
-              <div className="mb-10">
-                <Input
-                  type={field.type}
-                  name={field.key}
-                  label={field.label}
-                  placeholder={field.placeholder ?? ''}
-                  onChange={debounce(handleChange, 1000)}
-                  defaultValue={query[field.key]}
-                  data-category={field.category.key}
-                  required
-                />
-              </div>
-            )}
-            {field.type == 'dropdown' && (
-              <div className="mb-12">
-                <FormSelect field={field} sendAPIRequest={sendAPIRequest} />
-              </div>
-            )}
-            {(field.type == 'radio' || field.type == 'boolean') && (
-              <div className="mb-12">
-                <Radio
-                  name={field.key}
-                  values={
-                    field.type == 'boolean'
-                      ? [
-                          { key: true, text: 'Yes' },
-                          { key: false, text: 'No' },
-                        ]
-                      : field.values
-                  }
-                  keyforid={field.key}
-                  label={field.label}
-                  onChange={handleChange}
-                  category={field.category.key}
-                  defaultValue={formCompletion[field.key]}
-                  required
-                />
-              </div>
-            )}
-          </div>
-        )
-        lastCategory = field.category.key
-
-        return content
-      })}
-
-      <div className="flex flex-col md:flex-row gap-x-8 mt-20">
-        <button
-          type="button"
-          role="button"
-          className="btn btn-default w-full md:w-40"
-          onClick={(e) => router.push('/')}
-        >
-          Back
-        </button>
-        <button
-          type="reset"
-          className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
-          onClick={(e) => {
-            const form: HTMLFormElement = document.querySelector(
-              "form[name='ee-form']"
-            )
-            form.reset()
-          }}
-        >
-          Clear
-        </button>
-        <button
-          type="submit"
-          role="button"
-          className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
-          onClick={(e) => {
-            handleChange()
-            selectedTabIndex(1)
-          }}
-        >
-          Estimate
-        </button>
-      </div>
-    </form>
-  )
-}
-
-/**
- * Checks the completion fo the form
- *
- * @param fields The fields retrieved from the API
- * @param formCompletion the global form completion state
- * @param setProgress a Dispatch that will set the progress bar's state
- */
-const checkCompletion = (
-  fields: FieldData[],
-  formCompletion: any,
-  setProgress: any
-) => {
-  const personal = fields
-    .filter(
-      (field) =>
-        field.category.key == FieldCategory.PERSONAL_INFORMATION ||
-        field.category.key == FieldCategory.PARTNER_DETAILS
+        <div className="flex flex-col md:flex-row gap-x-8 mt-20">
+          <button
+            type="button"
+            role="navigation"
+            className="btn btn-default w-full md:w-40"
+            onClick={(e) => router.push('/')}
+          >
+            Back
+          </button>
+          <button
+            type="button"
+            role="button"
+            className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
+            onClick={(e) => {
+              form.clearForm()
+            }}
+          >
+            Clear
+          </button>
+          <button
+            type="submit"
+            role="button"
+            className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
+            onClick={async (e) => {
+              if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
+                selectedTabIndex(1)
+              }
+            }}
+          >
+            Estimate
+          </button>
+        </div>
+      </form>
     )
-    .map((p) => p.key)
-  const personalComplete = personal.every((item) => formCompletion[item])
-
-  const legal = fields
-    .filter((field) => field.category.key == FieldCategory.LEGAL_STATUS)
-    .map((p) => p.key)
-  const legalComplete = legal.every((item) => formCompletion[item])
-
-  setProgress({ personal: personalComplete, legal: legalComplete })
-}
-
-/**
- * Builds a query string to the API
- *
- * @param formData Data residing in the eligibility estimator form
- * @param updateFormCompletion optionally update global form completion state
- * @returns
- */
-export const buildQueryStringFromFormData = (
-  formData: FormData,
-  updateFormCompletion = true
-) => {
-  let qs = ''
-  for (const [key, value] of formData.entries()) {
-    if (value == '') {
-      continue
-    }
-    let val = ''
-    // remove masking from currency
-    if (key == 'income' || key == 'partnerIncome') {
-      val = value.toString().replace('$', '').replace(',', '')
-    } else {
-      val = value.toString()
-    }
-
-    // build query string
-    if (qs !== '') qs += '&'
-    //encodeURI and fix for encodeURIComponent and circle brackets
-    qs += `${key}=${fixedEncodeURIComponent(val)}`
-
-    // update global for completion state
-    if (updateFormCompletion) formCompletion[key] = val
   }
-  console.log(qs)
-  return qs
-}
-
-/**
- * Retrieves a form's internal representation of itself.
- *
- * @param formName The form to retrieve, if no option given it will attempt to retrieve the ee-form
- * @returns the eligibility estimator's form data
- */
-export const retrieveFormData = (formName = 'form[name="ee-form"]') => {
-  const form: HTMLFormElement = document.querySelector(formName)
-  if (!form) return
-
-  return new FormData(form)
-}
+)

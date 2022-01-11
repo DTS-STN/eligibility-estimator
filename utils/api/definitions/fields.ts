@@ -16,6 +16,7 @@ export enum FieldKey {
 
 export enum FieldType {
   NUMBER = 'number',
+  CURRENCY = 'currency',
   BOOLEAN = 'boolean',
   DROPDOWN = 'dropdown',
   RADIO = 'radio',
@@ -27,7 +28,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.INCOME,
     category: { key: FieldCategory.INCOME_DETAILS },
     order: 1,
-    type: FieldType.NUMBER,
+    type: FieldType.CURRENCY,
     placeholder: '$20,000',
   },
   [FieldKey.AGE]: {
@@ -90,12 +91,13 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.PARTNER_INCOME,
     category: { key: FieldCategory.PARTNER_DETAILS },
     order: 10,
-    type: FieldType.NUMBER,
+    type: FieldType.CURRENCY,
     placeholder: '$20,000',
   },
 }
 
 export type FieldData =
+  | FieldDataCurrency
   | FieldDataNumber
   | FieldDataBoolean
   | FieldDataRadio
@@ -110,6 +112,11 @@ interface FieldDataGeneric {
     text?: string // applied via translator
   }
   order: number
+}
+
+interface FieldDataCurrency extends FieldDataGeneric {
+  type: FieldType.CURRENCY
+  placeholder?: string
 }
 
 interface FieldDataNumber extends FieldDataGeneric {
