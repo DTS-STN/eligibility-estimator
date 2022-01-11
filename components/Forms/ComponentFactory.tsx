@@ -9,9 +9,11 @@ import { Input } from './Input'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { observer } from 'mobx-react'
-import { Form, FormField, RootStore } from '../../client-state/store'
+import { RootStore } from '../../client-state/store'
 import type { Instance } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
+import type { Form } from '../../client-state/models/Form'
+import type { FormField } from '../../client-state/models/FormField'
 
 interface FactoryProps {
   data: ResponseSuccess
@@ -41,12 +43,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       form.setupForm(data.fieldData)
     }
 
-    // useEffect(() => {
-    //   //set income from query parameter if exists and only run on initial draw
-    //   if (query[FieldKey.INCOME] !== '') {
-    //     form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
-    //   }
-    // }, [query[FieldKey.INCOME]])
+    useEffect(() => {
+      //set income from query parameter if exists and only run on initial draw
+      if (query[FieldKey.INCOME] !== '') {
+        form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
+      }
+    }, [query[FieldKey.INCOME]])
 
     return (
       <form

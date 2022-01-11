@@ -3,8 +3,8 @@ import Select from 'react-select'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
-import { FormField } from '../../client-state/store'
 import { Instance } from 'mobx-state-tree'
+import { FormField } from '../../client-state/models/FormField'
 
 interface SelectProps
   extends DetailedHTMLProps<
