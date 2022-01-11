@@ -20,6 +20,7 @@ export interface Translations {
     personalInformation: string
     partnerDetails: string
     legalStatus: string
+    socialAgreement: string
   }
   result: {
     eligible: string
@@ -47,6 +48,7 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    eligiblePartialOas: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
     eligibleWhen60: string

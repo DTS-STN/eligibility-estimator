@@ -93,6 +93,7 @@ components:
         - Not eligible for OAS
         - Income too high
         - Your marital status does not meet the requirement for this benefit
+        - Only eligible for Partial OAS due to years in Canada
 
     ResultObject:
       type: object
