@@ -7,7 +7,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
   values: any[]
   label: string
-  category: string
   checkedValue?: string
   error?: string
 }
@@ -18,19 +17,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
-  const {
-    category,
-    name,
-    label,
-    checkedValue,
-    onChange,
-    values,
-    keyforid,
-    error,
-  } = props
+  const { name, label, checkedValue, onChange, values, keyforid, error } = props
   return (
     <>
-      <div className="radio" data-category={category}>
+      <div className="radio">
         <label
           htmlFor={name}
           aria-label={name}

@@ -56,17 +56,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         onSubmit={(e) => e.preventDefault()}
         noValidate
       >
-        {/* 
-      <input
-        type="hidden"
-        name="lang"
-        value={useInternationalization('lang')}
-      /> 
-      */}
+        <input type="hidden" name="_language" value={'EN'} />
         {form.fields.map((field: Instance<typeof FormField>) => {
           const isChildQuestion =
             field.category.key ==
-            (FieldCategory.PARTNER_DETAILS || 'Social Agreement Countries') // TODO: need to add this category on the API
+            (FieldCategory.PARTNER_DETAILS || 'Social Agreement Countries')
               ? true
               : false
 
@@ -77,7 +71,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             >
               {field.category.key != lastCategory && (
                 <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
-                  {field.category}
+                  {field.category.text}
                 </h2>
               )}
               {field.type == 'number' && (
@@ -89,7 +83,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     placeholder={field.placeholder ?? ''}
                     onChange={debounce(field.handleChange, 1000)}
                     value={field?.value}
-                    data-category={field.category.key}
                     error={field.error}
                     required
                   />
@@ -116,7 +109,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     keyforid={field.key}
                     label={field.label}
                     onChange={field.handleChange}
-                    category={field.category.key}
                     error={field.error}
                     required
                   />
@@ -124,7 +116,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               )}
             </div>
           )
-          lastCategory = field.category
+          lastCategory = field.category.key
 
           return content
         })}

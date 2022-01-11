@@ -34,17 +34,26 @@ type FormProgress = {
 /** API endpoint for eligibility*/
 const API_URL = `api/calculateEligibility`
 
+const KeyValue = types.model({
+  key: types.string,
+  text: types.string,
+})
+
+const Category = KeyValue.named('Category')
+const Options = KeyValue.named('Options')
+const Default = KeyValue.named('Default')
+
 export const FormField = types
   .model({
     key: types.string,
     type: types.string,
     label: types.string,
-    category: types.string,
+    category: Category,
     order: types.number,
     placeholder: types.maybe(types.string),
-    default: types.maybe(types.string),
-    value: types.maybeNull(types.string),
-    options: types.optional(types.array(types.string), []),
+    default: types.maybe(Default),
+    value: types.maybeNull(types.union(types.string, KeyValue)),
+    options: types.optional(types.array(Options), []),
     error: types.maybe(types.string),
   })
   .views((self) => ({
@@ -85,7 +94,7 @@ export const Form = types
       return self.fields.some((field) => field.hasError)
     },
     fieldsByCategory(category: string): Instance<typeof FormField>[] {
-      return self.fields.filter((field) => field.category == category)
+      return self.fields.filter((field) => field.category.key == category)
     },
     get empty(): boolean {
       return self.fields.length === 0
@@ -127,7 +136,11 @@ export const Form = types
   }))
   .actions((self) => ({
     addField(data: SnapshotIn<typeof FormField>): void {
-      self.fields.push({ ...data })
+      try {
+        self.fields.push({ ...data })
+      } catch (error) {
+        console.log('error occurred while adding field to self.fields', error)
+      }
     },
     removeAllFields(): void {
       self.fields.clear()
@@ -178,18 +191,22 @@ export const Form = types
     clearAllErrors() {
       self.fields.map((field) => field.setError(undefined))
     },
-    setupForm(data: FieldData[]) {
+    setupForm(data: FieldData[]): void {
       data.map((fieldData) => {
         const field = self.getFieldByKey(fieldData?.key)
 
         const defaultValue = (fieldData as any).default
+        console.log(defaultValue)
 
         if (!field) {
           self.addField({
             key: fieldData.key,
             type: fieldData.type,
             label: fieldData.label,
-            category: fieldData.category,
+            category: {
+              key: fieldData.category.key,
+              text: fieldData.category.text,
+            },
             order: fieldData.order,
             placeholder: (fieldData as any).placeholder,
             default: (fieldData as any).default,
@@ -289,8 +306,12 @@ export const RootStore = types
     afs: AFS,
     allowance: Allowance,
     summary: Summary,
+    activeTab: types.optional(types.number, 0),
   })
   .actions((self) => ({
+    setActiveTab(num: number) {
+      self.activeTab = num
+    },
     setOAS(
       input: ModelCreationType<
         ExtractCFromProps<{
