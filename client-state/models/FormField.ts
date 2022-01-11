@@ -48,14 +48,9 @@ export const FormField = types
       let val = ''
 
       if (KeyValue.is(self.value)) {
-        if (self.key == FieldKey.LIVING_COUNTRY || FieldKey.MARITAL_STATUS) {
-          val = self.value.key
-        }
+        val = self.value.key
       } else {
-        if (
-          self.key == FieldKey.INCOME ||
-          self.key == FieldKey.PARTNER_INCOME
-        ) {
+        if (self.value.includes('$')) {
           val = self.value.toString().replace('$', '').replace(',', '')
         } else {
           val = self.value.toString()
