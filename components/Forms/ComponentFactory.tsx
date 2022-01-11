@@ -41,12 +41,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       form.setupForm(data.fieldData)
     }
 
-    useEffect(() => {
-      //set income from query parameter if exists and only run on initial draw
-      if (query[FieldKey.INCOME] !== '') {
-        form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
-      }
-    }, [query[FieldKey.INCOME]])
+    // useEffect(() => {
+    //   //set income from query parameter if exists and only run on initial draw
+    //   if (query[FieldKey.INCOME] !== '') {
+    //     form.getFieldByKey(FieldKey.INCOME).setValue(query[FieldKey.INCOME])
+    //   }
+    // }, [query[FieldKey.INCOME]])
 
     return (
       <form

@@ -3,7 +3,7 @@ import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -47,7 +47,7 @@ export const Input: React.VFC<InputProps> = observer((props) => {
         <Tooltip field={name} />
       </label>
       {error && <ErrorLabel errorMessage={error} />}
-      {name == FieldKey.INCOME || name == FieldKey.PARTNER_INCOME ? (
+      {(name == FieldKey.INCOME || name == FieldKey.PARTNER_INCOME) && (
         <NumberFormat
           id={name}
           name={name}
@@ -63,13 +63,31 @@ export const Input: React.VFC<InputProps> = observer((props) => {
           onChange={onChange}
           required
         />
-      ) : (
+      )}
+      {(name == FieldKey.AGE || name == FieldKey.YEARS_IN_CANADA_SINCE_18) && (
+        <NumberFormat
+          id={name}
+          name={name}
+          className={`form-control text-content ${
+            error ? ' border-danger' : ''
+          }`}
+          data-testid={name}
+          min={0}
+          value={value != null ? (value as string) : ''}
+          placeholder={placeholder}
+          onChange={onChange}
+          required
+        />
+      )}
+      {type == FieldType.STRING && (
         <input
           type="text"
           className={`form-control text-content ${
             error ? ' border-danger' : ''
           }`}
+          placeholder={placeholder}
           onChange={onChange}
+          defaultValue={value}
           required
         />
       )}

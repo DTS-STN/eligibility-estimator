@@ -197,7 +197,8 @@ export const Form = types
         if (
           field.key === FieldKey.PARTNER_INCOME ||
           field.key === FieldKey.PARTNER_RECEIVING_OAS ||
-          field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY
+          field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY ||
+          field.key === FieldKey.LEGAL_STATUS_OTHER
         ) {
           fieldsToRemove.push(field)
         }
