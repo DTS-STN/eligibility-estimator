@@ -23,8 +23,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
     const { name, type, label, required, value, placeholder, onChange, error } =
       props
 
-    console.log(type)
-
     // only need to run this once at component render, so no need for deps
     useEffect(() => {
       // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.

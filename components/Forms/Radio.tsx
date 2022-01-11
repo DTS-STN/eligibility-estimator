@@ -18,7 +18,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
   const { name, label, checkedValue, onChange, values, keyforid, error } = props
-  console.log(checkedValue)
+
   return (
     <>
       <div className="radio">

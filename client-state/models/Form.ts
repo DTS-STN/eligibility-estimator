@@ -134,9 +134,23 @@ export const Form = types
     },
     setupForm(data: FieldData[]): void {
       data.map((fieldData) => {
+        let placeholder,
+          defaultValue,
+          options = undefined
+
         const field = self.getFieldByKey(fieldData?.key)
 
-        const defaultValue = (fieldData as any).default
+        if ('default' in fieldData) {
+          defaultValue = fieldData.default
+        }
+
+        if ('placeholder' in fieldData) {
+          placeholder = fieldData.placeholder
+        }
+
+        if ('values' in fieldData) {
+          options = fieldData.values
+        }
 
         if (!field) {
           self.addField({
@@ -148,9 +162,9 @@ export const Form = types
               text: fieldData.category.text,
             },
             order: fieldData.order,
-            placeholder: (fieldData as any).placeholder,
-            default: (fieldData as any).default,
-            options: (fieldData as any).values,
+            placeholder: placeholder,
+            default: defaultValue,
+            options: options,
             value: defaultValue ?? null,
           })
         }
@@ -176,7 +190,6 @@ export const Form = types
     sendAPIRequest: flow(function* () {
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
-      console.log(queryString)
 
       const apiData = yield fetch(`${API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
@@ -190,7 +203,6 @@ export const Form = types
         }
       } else {
         self.clearAllErrors()
-        console.log(data)
         const parent = getParentOfType(self, RootStore)
         parent.setOAS(data.oas)
         parent.setGIS(data.gis)
