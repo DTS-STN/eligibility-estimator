@@ -74,7 +74,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   {field.category.text}
                 </h2>
               )}
-              {field.type == 'number' && (
+              {(field.type == 'number' || field.type == 'string') && (
                 <div className="pb-8">
                   <Input
                     type={field.type}
@@ -82,7 +82,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     label={field.label}
                     placeholder={field.placeholder ?? ''}
                     onChange={debounce(field.handleChange, 1000)}
-                    value={field?.value}
+                    value={field.value}
                     error={field.error}
                     required
                   />

@@ -18,7 +18,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Input: React.VFC<InputProps> = observer((props) => {
-  const { name, label, required, value, placeholder, onChange, error } = props
+  const { name, type, label, required, value, placeholder, onChange, error } =
+    props
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -63,15 +64,11 @@ export const Input: React.VFC<InputProps> = observer((props) => {
           required
         />
       ) : (
-        <NumberFormat
-          id={name}
-          name={name}
+        <input
+          type="text"
           className={`form-control text-content ${
             error ? ' border-danger' : ''
           }`}
-          data-testid={name}
-          min={0}
-          value={value != null ? (value as string) : ''}
           onChange={onChange}
           required
         />

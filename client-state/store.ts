@@ -196,7 +196,6 @@ export const Form = types
         const field = self.getFieldByKey(fieldData?.key)
 
         const defaultValue = (fieldData as any).default
-        console.log(defaultValue)
 
         if (!field) {
           self.addField({
@@ -231,6 +230,10 @@ export const Form = types
           val = field.value.toString().replace('$', '').replace(',', '')
         } else {
           val = field.value.toString()
+        }
+
+        if (field.key == FieldKey.LIVING_COUNTRY) {
+          val = field.value.key
         }
 
         if (qs !== '') qs += '&'
