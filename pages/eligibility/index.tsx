@@ -149,7 +149,13 @@ const Eligibility: NextPage = () => {
                       </span>
                       <Tooltip field={'income'} />
                     </label>
-                    <p>${query.income}</p>
+                    <p className="mt-2 mb-4">
+                      $
+                      {(query.income as string).replace(
+                        /\B(?=(\d{3})+(?!\d))/g,
+                        ','
+                      )}
+                    </p>
                     <Link href="/" passHref>
                       <a className="btn btn-default px-8 py-3">Back</a>
                     </Link>
