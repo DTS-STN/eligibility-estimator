@@ -33,8 +33,16 @@ export const Form = types
     get hasErrors() {
       return self.fields.some((field) => field.hasError)
     },
-    fieldsByCategory(category: string): Instance<typeof FormField>[] {
-      return self.fields.filter((field) => field.category.key == category)
+    fieldsByCategory(
+      category: string | string[]
+    ): Instance<typeof FormField>[] {
+      if (typeof category === 'string') {
+        return self.fields.filter((field) => field.category.key == category)
+      } else if (Array.isArray(category)) {
+        return self.fields.filter((field) =>
+          category.includes(field.category.key)
+        )
+      }
     },
     get empty(): boolean {
       return self.fields.length === 0
@@ -48,18 +56,20 @@ export const Form = types
   }))
   .views((self) => ({
     get progress(): FormProgress {
-      const iComplete = self
-        .fieldsByCategory(FieldCategory.INCOME_DETAILS)
-        .every((field) => field.filled)
+      const incomeFields = self.fieldsByCategory(FieldCategory.INCOME_DETAILS)
+      const legalFields = self.fieldsByCategory(FieldCategory.LEGAL_STATUS)
+      const personalFields = self.fieldsByCategory([
+        FieldCategory.PERSONAL_INFORMATION,
+        FieldCategory.PARTNER_DETAILS,
+      ])
 
-      const pComplete = [
-        ...self.fieldsByCategory(FieldCategory.PERSONAL_INFORMATION),
-        ...self.fieldsByCategory(FieldCategory.PARTNER_DETAILS),
-      ].every((field) => field.filled)
-
-      const lComplete = self
-        .fieldsByCategory('Legal Status')
-        .every((field) => field.filled)
+      const iComplete =
+        incomeFields.length > 0 && incomeFields.every((field) => field.filled)
+      const pComplete =
+        personalFields.length > 0 &&
+        personalFields.every((field) => field.filled)
+      const lComplete =
+        legalFields.length > 0 && legalFields.every((field) => field.filled)
 
       return { income: iComplete, personal: pComplete, legal: lComplete }
     },
