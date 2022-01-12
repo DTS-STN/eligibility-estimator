@@ -1,15 +1,15 @@
 import {
-  types,
   flow,
   getParentOfType,
   Instance,
   SnapshotIn,
+  types,
 } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import {
-  ResponseSuccess,
   ResponseError,
+  ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
@@ -126,7 +126,7 @@ export const Form = types
         field.setValue(null)
         if (
           field.key === FieldKey.PARTNER_INCOME ||
-          field.key === FieldKey.PARTNER_RECEIVING_OAS ||
+          field.key === FieldKey.PARTNER_BENEFIT_STATUS ||
           field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY ||
           field.key === FieldKey.LEGAL_STATUS_OTHER
         ) {
