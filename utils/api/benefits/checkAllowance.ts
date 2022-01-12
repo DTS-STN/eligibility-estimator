@@ -13,7 +13,8 @@ export default function checkAllowance(
 ): BenefitResult {
   // helpers
   const meetsReqMarital = params.maritalStatus.partnered
-  const meetsReqPartner = params.partnerBenefitStatus.anyOas
+  const meetsReqPartner =
+    params.partnerBenefitStatus.anyOas && params.partnerBenefitStatus.gis
   const meetsReqAge = 60 <= params.age && params.age <= 64
   const overAgeReq = 65 <= params.age
   const underAgeReq = params.age < 60
