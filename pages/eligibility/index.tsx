@@ -149,7 +149,13 @@ const Eligibility: NextPage = () => {
                       </span>
                       <Tooltip field={'income'} />
                     </label>
-                    <p>${query.income}</p>
+                    <p className="mt-2 mb-4">
+                      $
+                      {(query.income as string).replace(
+                        /\B(?=(\d{3})+(?!\d))/g,
+                        ','
+                      )}
+                    </p>
                     <Link href="/" passHref>
                       <a className="btn btn-default px-8 py-3">Back</a>
                     </Link>
@@ -217,8 +223,10 @@ const Eligibility: NextPage = () => {
               ) : (
                 <div className="flex place-content-center">
                   <p className="font-semibold tracking-wide my-12">
-                    Please answer the questions to view your benefits assessment
-                    results
+                    Please fill out the form. Based on the information you
+                    provide, the application will estimate your eligibility. If
+                    you are a qualified candidate, the application will also
+                    provide an estimate for your monthly payment.
                   </p>
                 </div>
               )}
