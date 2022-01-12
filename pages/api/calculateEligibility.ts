@@ -1,29 +1,24 @@
 import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getTranslations } from '../../i18n/api'
-import checkAfs from '../../utils/api/benefits/checkAfs'
-import checkAllowance from '../../utils/api/benefits/checkAllowance'
-import checkGis from '../../utils/api/benefits/checkGis'
-import checkOas from '../../utils/api/benefits/checkOas'
-import {
-  MaritalStatusHelper,
-  PartnerBenefitStatusHelper,
-  ResultKey,
-} from '../../utils/api/definitions/enums'
-import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import { BenefitHandler } from '../../utils/api/benefits/_base'
+import { ResultKey } from '../../utils/api/definitions/enums'
+import { FieldData } from '../../utils/api/definitions/fields'
 import { RequestSchema } from '../../utils/api/definitions/schemas'
 import {
   BenefitResultObject,
   CalculationInput,
+  RequestInput,
   ResponseError,
   ResponseSuccess,
   SummaryObject,
 } from '../../utils/api/definitions/types'
 import normalizeLivingCountry from '../../utils/api/helpers/countryUtils'
 import {
-  buildFieldData,
-  buildVisibleFields,
-} from '../../utils/api/helpers/fieldUtils'
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
+} from '../../utils/api/helpers/fieldClasses'
+import { buildFieldData } from '../../utils/api/helpers/fieldUtils'
 import { ResultsProcessor } from '../../utils/api/helpers/resultsUtils'
 import { SummaryBuilder } from '../../utils/api/helpers/summaryUtils'
 
@@ -34,69 +29,48 @@ export default function handler(
   try {
     console.log(`Processing request: `, req.query)
 
-    // normalization
-    // takes a country string, normalizes to Canada/Agreement/NoAgreement
-    if (req.query.livingCountry) {
-      req.query.livingCountry = normalizeLivingCountry(
-        req.query.livingCountry as string
-      )
-    }
-    // adds partner income to main income
-    if (req.query.partnerIncome) {
-      req.query.income = (
-        parseInt(req.query.income as string) +
-        parseInt(req.query.partnerIncome as string)
-      ).toString()
-    }
-
     // validation
-    const params: CalculationInput = Joi.attempt(req.query, RequestSchema, {
+    const params: RequestInput = Joi.attempt(req.query, RequestSchema, {
       abortEarly: false,
     })
-    console.log('Passed validation.')
 
-    // pre-processing
-    // add helper classes
-    params._maritalStatus = new MaritalStatusHelper(params.maritalStatus)
-    params._partnerBenefitStatus = new PartnerBenefitStatusHelper(
-      params.partnerBenefitStatus
-    )
+    // pre-processing (adding helpers and normalization)
+    const translations = getTranslations(params._language)
+    const processed: CalculationInput = {
+      ...params,
+      income: params.partnerIncome
+        ? params.income + params.partnerIncome
+        : params.income,
+      livingCountry: normalizeLivingCountry(params.livingCountry),
+      maritalStatus: new MaritalStatusHelper(params.maritalStatus),
+      partnerBenefitStatus: new PartnerBenefitStatusHelper(
+        params.partnerBenefitStatus
+      ),
+      _translations: translations,
+    }
 
     // processing
-    const translations = getTranslations(params._language)
-    const results: BenefitResultObject = {
-      oas: checkOas(params, translations),
-      gis: checkGis(params, translations),
-      allowance: checkAllowance(params, translations),
-      afs: checkAfs(params, translations),
-    }
+    const handler = new BenefitHandler(processed)
+    const results: BenefitResultObject = handler.getBenefitResultObject()
     console.log('Results: ', results)
 
-    const visibleFields: Array<FieldKey> = buildVisibleFields([
-      Object.keys(params),
-      results.oas.missingFields,
-      results.gis.missingFields,
-      results.allowance.missingFields,
-      results.afs.missingFields,
-    ])
     const fieldData: Array<FieldData> = buildFieldData(
-      visibleFields,
+      handler.requiredFields,
       translations
     )
     const summary: SummaryObject = SummaryBuilder.buildSummaryObject(
       results,
+      handler.missingFields,
       translations
     )
     ResultsProcessor.processResultsObject(results, translations)
 
     // completion
     res.status(200).json({
-      oas: results.oas,
-      gis: results.gis,
-      allowance: results.allowance,
-      afs: results.afs,
+      results,
       summary,
-      visibleFields,
+      visibleFields: handler.requiredFields,
+      missingFields: handler.missingFields,
       fieldData,
     })
   } catch (error) {

@@ -2,13 +2,10 @@ import { Translations } from '../../../i18n/api'
 import { BenefitResultObject } from '../definitions/types'
 
 export class ResultsProcessor {
-  private readonly results: BenefitResultObject
-  private translations: Translations
-
-  constructor(results: BenefitResultObject, translations: Translations) {
-    this.results = results
-    this.translations = translations
-  }
+  constructor(
+    private readonly results: BenefitResultObject,
+    private readonly translations: Translations
+  ) {}
 
   process(): void {
     Object.keys(this.results).forEach((key) => {

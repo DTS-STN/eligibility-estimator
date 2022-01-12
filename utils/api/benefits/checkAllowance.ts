@@ -1,39 +1,29 @@
-import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { AllowanceSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
-import { validateRequestForBenefit } from '../helpers/validator'
 import gisTables from '../scrapers/output'
 import { OutputItemAllowance } from '../scrapers/partneredAllowanceScraper'
 
 export default function checkAllowance(
-  params: CalculationInput,
-  translations: Translations
+  params: CalculationInput
 ): BenefitResult {
-  // validation
-  const { result, value } = validateRequestForBenefit(AllowanceSchema, params)
-  // if the validation was able to return an error result, return it
-  if (result) return result
-
   // helpers
-  const meetsReqMarital = value._maritalStatus.partnered
-  const meetsReqPartner = value._partnerBenefitStatus.anyOas
-  const meetsReqAge = 60 <= value.age && value.age <= 64
-  const overAgeReq = 65 <= value.age
-  const underAgeReq = value.age < 60
-  const meetsReqIncome = value.income < 35616
+  const meetsReqMarital = params.maritalStatus.partnered
+  const meetsReqPartner = params.partnerBenefitStatus.anyOas
+  const meetsReqAge = 60 <= params.age && params.age <= 64
+  const overAgeReq = 65 <= params.age
+  const underAgeReq = params.age < 60
+  const meetsReqIncome = params.income < 35616
   const requiredYearsInCanada = 10
-  const meetsReqYears = value.yearsInCanadaSince18 >= requiredYearsInCanada
+  const meetsReqYears = params.yearsInCanadaSince18 >= requiredYearsInCanada
   const meetsReqLegal =
-    value.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    value.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    value.legalStatus === LegalStatus.INDIAN_STATUS
-  // partner must be getting OAS and GIS
+    params.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
+    params.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
+    params.legalStatus === LegalStatus.INDIAN_STATUS
 
   // main checks
   if (
@@ -45,34 +35,34 @@ export default function checkAllowance(
   ) {
     if (meetsReqAge) {
       const entitlementResult = new AllowanceEntitlement(
-        value.income
+        params.income
       ).getEntitlement()
       return {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason: ResultReason.NONE,
-        detail: translations.detail.eligible,
+        detail: params._translations.detail.eligible,
       }
-    } else if (value.age == 59) {
+    } else if (params.age == 59) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: translations.detail.eligibleWhen60ApplyNow,
+        detail: params._translations.detail.eligibleWhen60ApplyNow,
       }
     } else if (underAgeReq) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: translations.detail.eligibleWhen60,
+        detail: params._translations.detail.eligibleWhen60,
       }
     } else {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: translations.detail.mustBe60to64,
+        detail: params._translations.detail.mustBe60to64,
       }
     }
   } else if (overAgeReq) {
@@ -80,54 +70,54 @@ export default function checkAllowance(
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.AGE,
-      detail: translations.detail.mustBe60to64,
+      detail: params._translations.detail.mustBe60to64,
     }
-  } else if (!meetsReqMarital && value.maritalStatus !== undefined) {
+  } else if (!meetsReqMarital && params.maritalStatus.provided) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.MARITAL,
-      detail: translations.detail.mustBePartnered,
+      detail: params._translations.detail.mustBePartnered,
     }
-  } else if (!meetsReqPartner && value.partnerBenefitStatus !== undefined) {
+  } else if (!meetsReqPartner && params.partnerBenefitStatus.provided) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: translations.detail.mustHavePartnerWithOas,
+      detail: params._translations.detail.mustHavePartnerWithOas,
     }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: translations.detail.mustMeetIncomeReq,
+      detail: params._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqYears) {
     if (
-      value.livingCountry === LivingCountry.AGREEMENT ||
-      value.everLivedSocialCountry
+      params.livingCountry === LivingCountry.AGREEMENT ||
+      params.everLivedSocialCountry
     ) {
       if (meetsReqAge) {
         return {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.YEARS_IN_CANADA,
-          detail: translations.detail.dependingOnAgreement,
+          detail: params._translations.detail.dependingOnAgreement,
         }
       } else if (underAgeReq) {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail: translations.detail.dependingOnAgreementWhen60,
+          detail: params._translations.detail.dependingOnAgreementWhen60,
         }
       } else {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail: translations.detail.mustBe60to64,
+          detail: params._translations.detail.mustBe60to64,
         }
       }
     } else {
@@ -135,7 +125,7 @@ export default function checkAllowance(
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.YEARS_IN_CANADA,
-        detail: translations.detail.mustMeetYearReq,
+        detail: params._translations.detail.mustMeetYearReq,
       }
     }
   } else if (!meetsReqLegal) {
@@ -144,29 +134,29 @@ export default function checkAllowance(
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: translations.detail.dependingOnLegalWhen60,
+        detail: params._translations.detail.dependingOnLegalWhen60,
       }
-    } else if (value.legalStatus === LegalStatus.SPONSORED) {
+    } else if (params.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: translations.detail.dependingOnLegalSponsored,
+        detail: params._translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: translations.detail.dependingOnLegal,
+        detail: params._translations.detail.dependingOnLegal,
       }
     }
-  } else if (value.livingCountry === LivingCountry.NO_AGREEMENT) {
+  } else if (params.livingCountry === LivingCountry.NO_AGREEMENT) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.SOCIAL_AGREEMENT,
-      detail: translations.detail.ineligibleYearsOrCountry,
+      detail: params._translations.detail.ineligibleYearsOrCountry,
     }
   }
   // fallback

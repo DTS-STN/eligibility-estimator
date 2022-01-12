@@ -1,7 +1,7 @@
 import { createMocks } from 'node-mocks-http'
 import handler from '../../../pages/api/calculateEligibility'
 import {
-  CalculationInput,
+  RequestInput,
   ResponseError,
   ResponseSuccess,
 } from '../../../utils/api/definitions/types'
@@ -12,7 +12,7 @@ interface MockResponseObject<T extends ResponseSuccess | ResponseError> {
 }
 
 async function mockGetRequestGeneric<T extends ResponseSuccess | ResponseError>(
-  params: CalculationInput
+  params: RequestInput
 ): Promise<MockResponseObject<T>> {
   const { req, res } = createMocks({ method: 'GET', query: params })
   handler(req, res)
@@ -20,13 +20,13 @@ async function mockGetRequestGeneric<T extends ResponseSuccess | ResponseError>(
 }
 
 export async function mockGetRequest(
-  params: CalculationInput
+  params: RequestInput
 ): Promise<MockResponseObject<ResponseSuccess>> {
   return mockGetRequestGeneric<ResponseSuccess>(params)
 }
 
 export async function mockGetRequestError(
-  params: CalculationInput
+  params: RequestInput
 ): Promise<MockResponseObject<ResponseError>> {
   return mockGetRequestGeneric<ResponseError>(params)
 }

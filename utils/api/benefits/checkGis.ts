@@ -1,49 +1,39 @@
-import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
-  MaritalStatusHelper,
-  PartnerBenefitStatusHelper,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { GisSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
-import { validateRequestForBenefit } from '../helpers/validator'
+import {
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
+} from '../helpers/fieldClasses'
 import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
 import checkOas from './checkOas'
 
-export default function checkGis(
-  params: CalculationInput,
-  translations: Translations
-): BenefitResult {
-  // include OAS result
-  const oasResult = checkOas(params, translations)
-  const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }
-
-  // validation
-  const { result, value } = validateRequestForBenefit(GisSchema, paramsWithOas)
-  // if the validation was able to return an error result, return it
-  if (result) return result
+export default function checkGis(params: CalculationInput): BenefitResult {
+  // fetch OAS result
+  const oasResult = checkOas(params)
 
   // helpers
-  const meetsReqAge = value.age >= 65
-  const meetsReqLiving = value.livingCountry === LivingCountry.CANADA
+  const meetsReqAge = params.age >= 65
+  const meetsReqLiving = params.livingCountry === LivingCountry.CANADA
   const oasResultIsPartial = oasResult.reason == ResultReason.PARTIAL_OAS
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
   const meetsReqLegal =
-    value.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    value.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    value.legalStatus === LegalStatus.INDIAN_STATUS
-  const maxIncome = value._maritalStatus.partnered
-    ? value._partnerBenefitStatus.anyOas
+    params.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
+    params.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
+    params.legalStatus === LegalStatus.INDIAN_STATUS
+  const maxIncome = params.maritalStatus.partnered
+    ? params.partnerBenefitStatus.anyOas
       ? 25440
       : 46128
     : 19248
-  const meetsReqIncome = value.income <= maxIncome
+  const meetsReqIncome = params.income <= maxIncome
 
   // main checks
   if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
@@ -53,20 +43,20 @@ export default function checkGis(
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.OAS,
-          detail: translations.detail.conditional,
+          detail: params._translations.detail.conditional,
         }
       } else {
         const entitlementResult = new GisEntitlement(
-          value.income,
+          params.income,
           oasResultIsPartial,
-          value._maritalStatus,
-          value._partnerBenefitStatus
+          params.maritalStatus,
+          params.partnerBenefitStatus
         ).getEntitlement()
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
           entitlementResult,
           reason: ResultReason.NONE,
-          detail: translations.detail.eligible,
+          detail: params._translations.detail.eligible,
         }
       }
     } else {
@@ -74,44 +64,44 @@ export default function checkGis(
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: translations.detail.eligibleWhen65,
+        detail: params._translations.detail.eligibleWhen65,
       }
     }
-  } else if (!meetsReqLiving && value.livingCountry !== undefined) {
+  } else if (!meetsReqLiving && params.livingCountry !== undefined) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.LIVING_COUNTRY,
-      detail: translations.detail.mustBeInCanada,
+      detail: params._translations.detail.mustBeInCanada,
     }
   } else if (oasResult.eligibilityResult == ResultKey.INELIGIBLE) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: translations.detail.mustBeOasEligible,
+      detail: params._translations.detail.mustBeOasEligible,
     }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: translations.detail.mustMeetIncomeReq,
+      detail: params._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqLegal) {
-    if (value.legalStatus === LegalStatus.SPONSORED) {
+    if (params.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: translations.detail.dependingOnLegalSponsored,
+        detail: params._translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: translations.detail.dependingOnLegal,
+        detail: params._translations.detail.dependingOnLegal,
       }
     }
   } else if (oasResult.eligibilityResult == ResultKey.MORE_INFO) {
@@ -119,7 +109,7 @@ export default function checkGis(
       eligibilityResult: ResultKey.MORE_INFO,
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
-      detail: translations.detail.mustCompleteOasCheck,
+      detail: params._translations.detail.mustCompleteOasCheck,
     }
   }
 }

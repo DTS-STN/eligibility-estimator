@@ -1,23 +1,18 @@
 import { Translations } from '../../../i18n/api'
 import { EstimationSummaryState, ResultKey } from '../definitions/enums'
-import {
-  BenefitResult,
-  BenefitResultObject,
-  SummaryObject,
-} from '../definitions/types'
+import { FieldKey } from '../definitions/fields'
+import { BenefitResultObject, SummaryObject } from '../definitions/types'
 
 export class SummaryBuilder {
-  private results: BenefitResultObject
-  private resultsArr: BenefitResult[]
   private readonly state: EstimationSummaryState
   private readonly title: string
   private readonly details: string
-  private translations: Translations
 
-  constructor(results: BenefitResultObject, translations: Translations) {
-    this.results = results
-    this.translations = translations
-    this.resultsArr = Object.keys(results).map((key) => results[key])
+  constructor(
+    private results: BenefitResultObject,
+    private missingFields: FieldKey[],
+    private translations: Translations
+  ) {
     this.state = this.getState()
     this.title = this.getTitle()
     this.details = this.getDetails()
@@ -66,7 +61,7 @@ export class SummaryBuilder {
   }
 
   detectNeedsInfo(): boolean {
-    return this.getResultExistsInAnyBenefit(ResultKey.MORE_INFO)
+    return this.missingFields.length > 0
   }
 
   detectConditional(): boolean {
@@ -77,18 +72,23 @@ export class SummaryBuilder {
     return this.getResultExistsInAnyBenefit(ResultKey.ELIGIBLE)
   }
 
-  getResultExistsInAnyBenefit(result: ResultKey): boolean {
-    const matchingItems = this.resultsArr.filter(
-      (value) => value.eligibilityResult === result
+  getResultExistsInAnyBenefit(expectedResult: ResultKey): boolean {
+    const matchingItems = Object.keys(this.results).filter(
+      (key) => this.results[key].eligibilityResult === expectedResult
     )
     return matchingItems.length > 0
   }
 
   static buildSummaryObject(
     results: BenefitResultObject,
+    missingFields: FieldKey[],
     translations: Translations
   ): SummaryObject {
-    const summaryBuilder = new SummaryBuilder(results, translations)
+    const summaryBuilder = new SummaryBuilder(
+      results,
+      missingFields,
+      translations
+    )
     return summaryBuilder.build()
   }
 }

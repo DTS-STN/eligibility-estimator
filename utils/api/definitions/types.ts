@@ -1,32 +1,51 @@
-import { Language } from '../../../i18n/api'
+import { Language, Translations } from '../../../i18n/api'
+import {
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
+} from '../helpers/fieldClasses'
 import {
   EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
-  MaritalStatusHelper,
   PartnerBenefitStatus,
-  PartnerBenefitStatusHelper,
   ResultKey,
   ResultReason,
 } from './enums'
 import { FieldData, FieldKey } from './fields'
 
+/**
+ * What the API expects to receive. This is passed to Joi for validation.
+ */
+export interface RequestInput {
+  income?: number // personal income
+  age?: number
+  livingCountry?: string // country code
+  legalStatus?: LegalStatus
+  legalStatusOther?: string
+  yearsInCanadaSince18?: number
+  maritalStatus?: MaritalStatus
+  partnerIncome?: number // partner income
+  partnerBenefitStatus?: PartnerBenefitStatus
+  everLivedSocialCountry?: boolean
+  _language?: Language
+}
+
+/**
+ * After Joi validation and additional pre-processing, this is the object passed around to provide app logic.
+ */
 export interface CalculationInput {
-  income?: number
+  income?: number // sum of personal and partner
   age?: number
   livingCountry?: LivingCountry
   legalStatus?: LegalStatus
   legalStatusOther?: string
   yearsInCanadaSince18?: number
-  maritalStatus?: MaritalStatus
-  partnerIncome?: number
-  partnerBenefitStatus?: PartnerBenefitStatus
+  maritalStatus: MaritalStatusHelper
+  partnerBenefitStatus: PartnerBenefitStatusHelper
   everLivedSocialCountry?: boolean
-  _language?: Language
+  _translations: Translations
   _oasEligible?: ResultKey // added by GIS check
-  _maritalStatus?: MaritalStatusHelper // added by pre-processing
-  _partnerBenefitStatus?: PartnerBenefitStatusHelper // added by pre-processing
 }
 
 export interface BenefitResult {
@@ -34,23 +53,20 @@ export interface BenefitResult {
   entitlementResult: number // -1 here means unavailable
   reason: ResultReason
   detail: string
-  missingFields?: Array<FieldKey>
 }
 
 export interface BenefitResultObject {
-  oas: BenefitResult
-  gis: BenefitResult
-  allowance: BenefitResult
-  afs: BenefitResult
+  oas?: BenefitResult
+  gis?: BenefitResult
+  allowance?: BenefitResult
+  afs?: BenefitResult
 }
 
 export interface ResponseSuccess {
-  oas: BenefitResult
-  gis: BenefitResult
-  allowance: BenefitResult
-  afs: BenefitResult
+  results: BenefitResultObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
+  missingFields: Array<FieldKey>
   fieldData: Array<FieldData>
 }
 
