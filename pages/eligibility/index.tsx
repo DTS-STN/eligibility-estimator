@@ -130,58 +130,40 @@ const Eligibility: NextPage = () => {
                 because your annual income is higher than 129,757 CAD.
               </Alert>
             )}
-            <div className="md:container grid grid-cols-1 md:grid-cols-3 gap-10 mt-14">
-              <div className="col-span-2">
-                {incomeTooHigh ? (
-                  <div>
-                    <h2 className="h2 mb-8">Income Details</h2>
-                    <label
-                      htmlFor=""
-                      aria-label=""
-                      data-testid="input-label"
-                      className="text-content font-bold mb-12"
-                    >
-                      <span className="text-danger">*</span>
-                      What is your current annual net income in Canadian
-                      dollars?
-                      <span className="text-danger font-bold ml-2">
-                        (required)
-                      </span>
-                      <Tooltip field={'income'} />
-                    </label>
-                    <p className="mt-2 mb-4">
-                      $
-                      {(query.income as string).replace(
-                        /\B(?=(\d{3})+(?!\d))/g,
-                        ','
-                      )}
-                    </p>
-                    <Link href="/" passHref>
-                      <a className="btn btn-default px-8 py-3">Back</a>
-                    </Link>
-                  </div>
-                ) : (
-                  <ComponentFactory
-                    data={data}
-                    selectedTabIndex={setSelectedTabIndex}
-                  />
-                )}
-              </div>
-              <NeedHelpList
-                title="Need Help?"
-                links={[
-                  {
-                    label: 'OAS Overview',
-                    location:
-                      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-                  },
-                  {
-                    label: 'Old Age Security: How much you could receive',
-                    location:
-                      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
-                  },
-                ]}
-              />
+            <div className="md:container mt-14">
+              {incomeTooHigh ? (
+                <div>
+                  <h2 className="h2 mb-8">Income Details</h2>
+                  <label
+                    htmlFor=""
+                    aria-label=""
+                    data-testid="input-label"
+                    className="text-content font-bold mb-12"
+                  >
+                    <span className="text-danger">*</span>
+                    What is your current annual net income in Canadian dollars?
+                    <span className="text-danger font-bold ml-2">
+                      (required)
+                    </span>
+                    <Tooltip field={'income'} />
+                  </label>
+                  <p className="mt-2 mb-4">
+                    $
+                    {(query.income as string).replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ','
+                    )}
+                  </p>
+                  <Link href="/" passHref>
+                    <a className="btn btn-default px-8 py-3">Back</a>
+                  </Link>
+                </div>
+              ) : (
+                <ComponentFactory
+                  data={data}
+                  selectedTabIndex={setSelectedTabIndex}
+                />
+              )}
             </div>
           </Tab.Panel>
           <Tab.Panel className="mt-10">
