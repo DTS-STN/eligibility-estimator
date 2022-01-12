@@ -201,11 +201,10 @@ const Eligibility: NextPage = () => {
                     {root.summary.details}
                   </Alert>
                   {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-                    <div className="mt-10">
+                    <div className="mt-10 w-full h-[450px] relative">
                       <Image
                         src={'/people.png'}
-                        width="1139"
-                        height="443"
+                        layout="fill"
                         alt="People of all walks of life, happy together."
                       />
                     </div>
