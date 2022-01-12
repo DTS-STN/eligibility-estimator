@@ -40,7 +40,7 @@ paths:
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/partnerIncome'
-        - $ref: '#/components/parameters/partnerReceivingOas'
+        - $ref: '#/components/parameters/partnerBenefitStatus'
         - $ref: '#/components/parameters/everLivedSocialCountry'
       responses:
         '200':
@@ -64,7 +64,7 @@ components:
           - yearsInCanadaSince18
           - maritalStatus
           - partnerIncome
-          - partnerReceivingOas
+          - partnerBenefitStatus
           - everLivedSocialCountry
 
     ResultKey:
@@ -192,7 +192,7 @@ components:
                   - legalStatus
                   - yearsInCanadaSince18
                   - maritalStatus
-                  - partnerReceivingOas
+                  - partnerBenefitStatus
 
             'Blank request':
               value:
@@ -256,7 +256,7 @@ components:
                   - legalStatus
                   - yearsInCanadaSince18
                   - maritalStatus
-                  - partnerReceivingOas
+                  - partnerBenefitStatus
 
     '400':
       description: Invalid request, typically because the input did not pass the validation rules.
@@ -409,8 +409,8 @@ components:
         description: Income in Canadian dollars.
       allowEmptyValue: false
 
-    partnerReceivingOas:
-      name: partnerReceivingOas
+    partnerBenefitStatus:
+      name: partnerBenefitStatus
       in: query
       description: >
         Is the client's partner receiving OAS?

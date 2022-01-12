@@ -2,7 +2,6 @@ import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
-  MaritalStatus,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -22,10 +21,8 @@ export default function checkAllowance(
   if (result) return result
 
   // helpers
-  const meetsReqMarital =
-    value.maritalStatus == MaritalStatus.MARRIED ||
-    value.maritalStatus == MaritalStatus.COMMON_LAW
-  const meetsReqPartner = value.partnerReceivingOas !== false
+  const meetsReqMarital = value._maritalStatus.partnered
+  const meetsReqPartner = value._partnerBenefitStatus.anyOas
   const meetsReqAge = 60 <= value.age && value.age <= 64
   const overAgeReq = 65 <= value.age
   const underAgeReq = value.age < 60
@@ -92,7 +89,7 @@ export default function checkAllowance(
       reason: ResultReason.MARITAL,
       detail: translations.detail.mustBePartnered,
     }
-  } else if (!meetsReqPartner && value.partnerReceivingOas !== undefined) {
+  } else if (!meetsReqPartner && value.partnerBenefitStatus !== undefined) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,

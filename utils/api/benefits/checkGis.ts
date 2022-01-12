@@ -2,7 +2,8 @@ import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
   LivingCountry,
-  MaritalStatus,
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -29,6 +30,7 @@ export default function checkGis(
   // helpers
   const meetsReqAge = value.age >= 65
   const meetsReqLiving = value.livingCountry === LivingCountry.CANADA
+  const oasResultIsPartial = oasResult.reason == ResultReason.PARTIAL_OAS
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
@@ -36,11 +38,8 @@ export default function checkGis(
     value.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
     value.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
     value.legalStatus === LegalStatus.INDIAN_STATUS
-  const partnered =
-    value.maritalStatus == MaritalStatus.MARRIED ||
-    value.maritalStatus == MaritalStatus.COMMON_LAW
-  const maxIncome = partnered
-    ? value.partnerReceivingOas
+  const maxIncome = value._maritalStatus.partnered
+    ? value._partnerBenefitStatus.anyOas
       ? 25440
       : 46128
     : 19248
@@ -59,8 +58,9 @@ export default function checkGis(
       } else {
         const entitlementResult = new GisEntitlement(
           value.income,
-          value.maritalStatus,
-          value.partnerReceivingOas
+          oasResultIsPartial,
+          value._maritalStatus,
+          value._partnerBenefitStatus
         ).getEntitlement()
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
@@ -126,20 +126,25 @@ export default function checkGis(
 
 class GisEntitlement {
   income: number
-  maritalStatus: MaritalStatus
-  partnerReceivingOas: boolean
+  oasResultIsPartial: boolean
+  maritalStatus: MaritalStatusHelper
+  partnerBenefitStatus: PartnerBenefitStatusHelper
 
   constructor(
     income: number,
-    maritalStatus: MaritalStatus,
-    partnerReceivingOas: boolean
+    oasResultIsPartial: boolean,
+    maritalStatus: MaritalStatusHelper,
+    partnerBenefitStatus: PartnerBenefitStatusHelper
   ) {
     this.income = income
+    this.oasResultIsPartial = oasResultIsPartial
     this.maritalStatus = maritalStatus
-    this.partnerReceivingOas = partnerReceivingOas
+    this.partnerBenefitStatus = partnerBenefitStatus
   }
 
   getEntitlement(): number {
+    if (this.oasResultIsPartial) return -1
+    if (this.partnerBenefitStatus.partialOas) return -1
     const gisEntitlementItem = this.getTableItem()
     return gisEntitlementItem ? gisEntitlementItem.gis : 0
   }
@@ -152,26 +157,20 @@ class GisEntitlement {
   }
 
   getTable(): OutputItemGis[] {
-    if (
-      this.maritalStatus === MaritalStatus.SINGLE ||
-      this.maritalStatus === MaritalStatus.WIDOWED ||
-      this.maritalStatus === MaritalStatus.DIVORCED ||
-      this.maritalStatus === MaritalStatus.SEPARATED
-    ) {
+    if (this.maritalStatus.single) {
       // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
       return gisTables.single
-    } else if (
-      this.maritalStatus === MaritalStatus.MARRIED ||
-      this.maritalStatus === MaritalStatus.COMMON_LAW
-    ) {
-      if (this.partnerReceivingOas) {
+    } else if (this.maritalStatus.partnered) {
+      if (this.partnerBenefitStatus.fullOas) {
         // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
         return gisTables.partneredAndOas
-      } else if (!this.partnerReceivingOas) {
+      } else if (this.partnerBenefitStatus.allowance) {
+        // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
+        return gisTables.partneredAllowance
+      } else if (!this.partnerBenefitStatus.anyOas) {
         // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
         return gisTables.partneredNoOas
       }
-      // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
     }
   }
 }

@@ -15,12 +15,54 @@ export enum MaritalStatus {
   SEPARATED = 'separated',
 }
 
+export class MaritalStatusHelper {
+  partnered: boolean
+  single: boolean
+  constructor(maritalStatus: MaritalStatus) {
+    this.partnered =
+      maritalStatus === MaritalStatus.MARRIED ||
+      maritalStatus === MaritalStatus.COMMON_LAW
+    this.single =
+      maritalStatus === MaritalStatus.SINGLE ||
+      maritalStatus === MaritalStatus.WIDOWED ||
+      maritalStatus === MaritalStatus.DIVORCED ||
+      maritalStatus === MaritalStatus.SEPARATED
+  }
+}
+
 export enum LegalStatus {
   CANADIAN_CITIZEN = 'canadianCitizen',
   PERMANENT_RESIDENT = 'permanentResident',
   SPONSORED = 'sponsored',
   INDIAN_STATUS = 'indianStatus',
   OTHER = 'other',
+}
+
+export enum PartnerBenefitStatus {
+  FULL_OAS = 'fullOas',
+  FULL_OAS_GIS = 'fullOasGis',
+  PARTIAL_OAS = 'partialOas',
+  PARTIAL_OAS_GIS = 'partialOasGis',
+  ALLOWANCE = 'allowance',
+  NONE = 'none',
+  HELP_ME = 'helpMe',
+}
+
+export class PartnerBenefitStatusHelper {
+  anyOas: boolean
+  fullOas: boolean
+  partialOas: boolean
+  allowance: boolean
+  constructor(partnerBenefitStatus: PartnerBenefitStatus) {
+    this.fullOas =
+      partnerBenefitStatus == PartnerBenefitStatus.FULL_OAS ||
+      partnerBenefitStatus == PartnerBenefitStatus.FULL_OAS_GIS
+    this.partialOas =
+      partnerBenefitStatus == PartnerBenefitStatus.PARTIAL_OAS ||
+      partnerBenefitStatus == PartnerBenefitStatus.PARTIAL_OAS_GIS
+    this.anyOas = this.fullOas || this.partialOas
+    this.allowance = partnerBenefitStatus == PartnerBenefitStatus.ALLOWANCE
+  }
 }
 
 export enum LivingCountry {

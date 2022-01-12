@@ -1,6 +1,14 @@
 import Joi from 'joi'
 import { Language } from '../../../i18n/api'
-import { LegalStatus, LivingCountry, MaritalStatus, ResultKey } from './enums'
+import {
+  LegalStatus,
+  LivingCountry,
+  MaritalStatus,
+  MaritalStatusHelper,
+  PartnerBenefitStatus,
+  PartnerBenefitStatusHelper,
+  ResultKey,
+} from './enums'
 
 /**
  * This is what the API expects to receive, with the below exceptions due to normalization:
@@ -17,9 +25,6 @@ import { LegalStatus, LivingCountry, MaritalStatus, ResultKey } from './enums'
  * Note: Do not require fields here, do it in the benefit-specific schemas.
  */
 export const RequestSchema = Joi.object({
-  _language: Joi.string()
-    .valid(...Object.values(Language))
-    .default(Language.EN),
   income: Joi.number().integer().min(0),
   age: Joi.number().integer().max(150),
   livingCountry: Joi.string().valid(...Object.values(LivingCountry)),
@@ -31,8 +36,15 @@ export const RequestSchema = Joi.object({
     .message('Years in Canada should be no more than age minus 18'), // todo i18n
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   partnerIncome: Joi.number().integer(),
-  partnerReceivingOas: Joi.boolean(),
+  partnerBenefitStatus: Joi.string().valid(
+    ...Object.values(PartnerBenefitStatus)
+  ),
   everLivedSocialCountry: Joi.boolean(),
+  _language: Joi.string()
+    .valid(...Object.values(Language))
+    .default(Language.EN),
+  _maritalStatus: Joi.object().instance(MaritalStatusHelper),
+  _partnerBenefitStatus: Joi.object().instance(PartnerBenefitStatusHelper),
 })
 
 export const OasSchema = RequestSchema.concat(
@@ -60,7 +72,7 @@ export const OasSchema = RequestSchema.concat(
     }),
     partnerIncome: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(129757),
-      then: Joi.number().when('maritalStatus', {
+      then: Joi.when('maritalStatus', {
         is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
         then: Joi.required(),
         otherwise: Joi.number().min(0).max(0),
@@ -112,29 +124,25 @@ export const GisSchema = RequestSchema.concat(
     maritalStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(43680),
       then: Joi.when('_oasEligible', {
-        not: Joi.valid(ResultKey.INELIGIBLE, ResultKey.MORE_INFO),
+        not: Joi.valid(ResultKey.INELIGIBLE),
         then: Joi.required(),
       }),
     }),
     partnerIncome: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(43680),
-      then: Joi.number().when('maritalStatus', {
+      then: Joi.when('maritalStatus', {
         is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
         then: Joi.required(),
         otherwise: Joi.number().min(0).max(0),
       }),
     }),
-    partnerReceivingOas: Joi.when('income', {
+    partnerBenefitStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(43680),
-      then: Joi.boolean().when('maritalStatus', {
+      then: Joi.when('maritalStatus', {
         is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
         then: Joi.required(),
-        otherwise: Joi.boolean().falsy().valid(false),
+        otherwise: Joi.forbidden(),
       }),
-      // })
-      // .when('_oasEligible', {
-      // is: Joi.valid(ResultKey.INELIGIBLE, ResultKey.MORE_INFO),
-      // then: Joi.optional(),
     }),
   })
 )
@@ -162,15 +170,15 @@ export const AllowanceSchema = RequestSchema.concat(
       is: Joi.number().exist().greater(0).less(35616),
       then: Joi.required(),
     }),
-    partnerIncome: Joi.number().when('maritalStatus', {
+    partnerIncome: Joi.when('maritalStatus', {
       is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
       then: Joi.required(),
       otherwise: Joi.number().min(0).max(0),
     }),
-    partnerReceivingOas: Joi.when('maritalStatus', {
+    partnerBenefitStatus: Joi.when('maritalStatus', {
       is: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
       then: Joi.required(),
-      otherwise: Joi.boolean().falsy().valid(false),
+      otherwise: Joi.forbidden(),
     }),
   })
 )

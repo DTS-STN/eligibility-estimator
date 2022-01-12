@@ -32,7 +32,7 @@ const en: Translations = {
     maritalStatus: 'What is your current marital status?',
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
-    partnerReceivingOas: 'Does your partner receive a full OAS pension?',
+    partnerBenefitStatus: 'Which of the following applies to you?',
     everLivedSocialCountry:
       'Have you ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
   },
@@ -60,6 +60,15 @@ const en: Translations = {
       { key: 'widowed', text: 'Widowed' },
       { key: 'divorced', text: 'Divorced' },
       { key: 'separated', text: 'Separated' },
+    ],
+    partnerBenefitStatus: [
+      { key: 'fullOas', text: 'My partner receives full OAS' },
+      { key: 'fullOasGis', text: 'My partner receives full OAS and GIS' },
+      { key: 'partialOas', text: 'My partner receives partial OAS' },
+      { key: 'partialOasGis', text: 'My partner receives partial OAS and GIS' },
+      { key: 'allowance', text: 'My partner receives the Allowance' },
+      { key: 'none', text: 'None of the above' },
+      { key: 'helpMe', text: 'Help me find out' },
     ],
     livingCountry: [
       { key: 'CAN', text: 'Canada' },

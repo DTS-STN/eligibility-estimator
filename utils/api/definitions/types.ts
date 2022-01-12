@@ -4,6 +4,9 @@ import {
   LegalStatus,
   LivingCountry,
   MaritalStatus,
+  MaritalStatusHelper,
+  PartnerBenefitStatus,
+  PartnerBenefitStatusHelper,
   ResultKey,
   ResultReason,
 } from './enums'
@@ -18,15 +21,17 @@ export interface CalculationInput {
   yearsInCanadaSince18?: number
   maritalStatus?: MaritalStatus
   partnerIncome?: number
-  partnerReceivingOas?: boolean
+  partnerBenefitStatus?: PartnerBenefitStatus
   everLivedSocialCountry?: boolean
   _language?: Language
   _oasEligible?: ResultKey // added by GIS check
+  _maritalStatus?: MaritalStatusHelper // added by pre-processing
+  _partnerBenefitStatus?: PartnerBenefitStatusHelper // added by pre-processing
 }
 
 export interface BenefitResult {
   eligibilityResult: ResultKey
-  entitlementResult: number
+  entitlementResult: number // -1 here means unavailable
   reason: ResultReason
   detail: string
   missingFields?: Array<FieldKey>

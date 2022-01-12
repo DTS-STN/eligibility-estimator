@@ -5,11 +5,16 @@ import checkAfs from '../../utils/api/benefits/checkAfs'
 import checkAllowance from '../../utils/api/benefits/checkAllowance'
 import checkGis from '../../utils/api/benefits/checkGis'
 import checkOas from '../../utils/api/benefits/checkOas'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import {
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
+  ResultKey,
+} from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import { RequestSchema } from '../../utils/api/definitions/schemas'
 import {
   BenefitResultObject,
+  CalculationInput,
   ResponseError,
   ResponseSuccess,
   SummaryObject,
@@ -45,10 +50,17 @@ export default function handler(
     }
 
     // validation
-    const params = Joi.attempt(req.query, RequestSchema, {
+    const params: CalculationInput = Joi.attempt(req.query, RequestSchema, {
       abortEarly: false,
     })
     console.log('Passed validation.')
+
+    // pre-processing
+    // add helper classes
+    params._maritalStatus = new MaritalStatusHelper(params.maritalStatus)
+    params._partnerBenefitStatus = new PartnerBenefitStatusHelper(
+      params.partnerBenefitStatus
+    )
 
     // processing
     const translations = getTranslations(params._language)
