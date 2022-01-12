@@ -5,6 +5,7 @@ import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 import { FormField } from '../../client-state/models/FormField'
+import { FieldKey } from '../../utils/api/definitions/fields'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -55,6 +56,10 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
               ...styles,
               boxShadow: 'none', // remove a blue inset box from react-select
             }),
+            indicatorSeparator: (styles) => ({
+              ...styles,
+              display: field.key == FieldKey.MARITAL_STATUS ? 'none' : 'block',
+            }),
           }}
           className="rselect"
           placeholder="Select from..."
@@ -77,8 +82,8 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             field.handleChange(newValue)
           }}
           closeMenuOnScroll={false}
-          isSearchable
-          isClearable
+          isSearchable={field.key == FieldKey.MARITAL_STATUS ? false : true}
+          isClearable={field.key == FieldKey.MARITAL_STATUS ? false : true}
         />
       </div>
     </>
