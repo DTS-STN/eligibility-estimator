@@ -48,11 +48,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           )}
           <Tooltip field={name} />
         </label>
-        {error && (
-          <span className="mb-1.5 mt-2.5">
-            <ErrorLabel errorMessage={error} />
-          </span>
-        )}
+        {error && <ErrorLabel errorMessage={error} />}
 
         <NumberFormat
           id={name}
