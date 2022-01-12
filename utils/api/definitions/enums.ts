@@ -75,7 +75,7 @@ export enum LivingCountry {
 export enum ResultKey {
   ELIGIBLE = `eligible`,
   INELIGIBLE = `ineligible`,
-  CONDITIONAL = `conditional`,
+  CONDITIONAL = `unavailable`,
   MORE_INFO = 'moreInfo',
   INVALID = 'invalid',
 }

@@ -17,7 +17,7 @@ const en: Translations = {
   result: {
     eligible: 'Eligible',
     ineligible: 'Not eligible',
-    conditional: 'Conditionally eligible...',
+    conditional: 'Unavailable',
     moreInfo: 'Need more information...',
     invalid: 'Request is invalid!',
   },
