@@ -4,7 +4,7 @@ import { Dispatch } from 'react'
 export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
   setSelectedTab,
 }) => (
-  <p className="!mt-8">
+  <p className="!mt-6 !md:mt-8">
     For a more accurate assessment, you are encouraged to{' '}
     <Link
       href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"

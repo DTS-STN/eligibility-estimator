@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useMediaQuery } from '../Hooks'
 import { fieldDefinitions } from './index'
 
 export const Tooltip: React.FC<{
@@ -26,6 +27,8 @@ export const Tooltip: React.FC<{
     document.addEventListener('keyup', handleEscPress)
   })
 
+  const isMobile = useMediaQuery(992)
+
   return (
     <span className="ml-2 absolute" ref={wrapperRef}>
       <svg
@@ -33,7 +36,7 @@ export const Tooltip: React.FC<{
         width="25"
         height="25"
         fill="none"
-        className="cursor-pointer"
+        className="cursor-pointer z-20"
         onClick={(e) => setShow(true)}
       >
         <path
@@ -41,9 +44,20 @@ export const Tooltip: React.FC<{
           className="text-primary fill-current"
         />
       </svg>
-      <div className={`${show ? '' : 'hidden'}`} tabIndex={-1}>
+      <div
+        className={`${
+          show
+            ? isMobile
+              ? 'fixed inset-0 flex items-center justify-center'
+              : ''
+            : 'hidden'
+        } z-50`}
+        tabIndex={-1}
+      >
         <div
-          className={`max-w-[525px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white relative z-10 -top-10 left-10`}
+          className={`max-w-[525px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
+            isMobile ? '' : 'relative -top-10 left-10'
+          } z-40`}
         >
           <header className="flex items-center justify-between gap-x-4 bg-primary text-white rounded-t-xl px-5 py-3">
             <div className="flex gap-x-4 items-center">
@@ -79,7 +93,7 @@ export const Tooltip: React.FC<{
           </header>
 
           <p
-            className="font-normal z p-5"
+            className="font-normal p-5 max-h-[700px] overflow-y-auto md:max-h-[100%] md:overflow-y-hidden"
             dangerouslySetInnerHTML={{ __html: fieldDef[1] }}
           ></p>
         </div>
