@@ -34,14 +34,14 @@ paths:
       parameters:
         - $ref: '#/components/parameters/income'
         - $ref: '#/components/parameters/age'
+        - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
         - $ref: '#/components/parameters/legalStatusOther'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
-        - $ref: '#/components/parameters/maritalStatus'
-        - $ref: '#/components/parameters/partnerIncome'
-        - $ref: '#/components/parameters/partnerBenefitStatus'
         - $ref: '#/components/parameters/everLivedSocialCountry'
+        - $ref: '#/components/parameters/partnerBenefitStatus'
+        - $ref: '#/components/parameters/partnerIncome'
       responses:
         '200':
           $ref: '#/components/responses/200'
@@ -58,14 +58,14 @@ components:
         enum:
           - income
           - age
+          - maritalStatus
           - livingCountry
           - legalStatus
           - legalStatusOther
           - yearsInCanadaSince18
-          - maritalStatus
-          - partnerIncome
-          - partnerBenefitStatus
           - everLivedSocialCountry
+          - partnerBenefitStatus
+          - partnerIncome
 
     ResultKey:
       type: string
@@ -166,22 +166,22 @@ components:
             'Standard case':
               value:
                 oas:
-                  eligibilityResult: Eligible!
+                  eligibilityResult: eligible
                   entitlementResult: 0
                   reason: You meet the criteria
                   detail: Based on the information provided, you are eligible for OAS!
                 gis:
-                  eligibilityResult: Eligible!
+                  eligibilityResult: eligible
                   entitlementResult: 0
                   reason: You meet the criteria
                   detail: Based on the information provided, you are eligible for GIS!
                 allowance:
-                  eligibilityResult: Not eligible!
+                  eligibilityResult: ineligible
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance.
                 afs:
-                  eligibilityResult: Not eligible!
+                  eligibilityResult: ineligible
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -197,28 +197,28 @@ components:
             'Blank request':
               value:
                 oas:
-                  eligibilityResult: Need more information...
+                  eligibilityResult: moreInfo
                   entitlementResult: 0
                   reason: Need more information...
                   detail: Missing 1 required field.
                   missingFields:
                     - income
                 gis:
-                  eligibilityResult: Need more information...
+                  eligibilityResult: moreInfo
                   entitlementResult: 0
                   reason: Need more information...
                   detail: Missing 1 required field.
                   missingFields:
                     - income
                 allowance:
-                  eligibilityResult: Need more information...
+                  eligibilityResult: moreInfo
                   entitlementResult: 0
                   reason: Need more information...
                   detail: Missing 1 required field.
                   missingFields:
                     - income
                 afs:
-                  eligibilityResult: Need more information...
+                  eligibilityResult: moreInfo
                   entitlementResult: 0
                   reason: Need more information...
                   detail: Missing 1 required field.
@@ -230,22 +230,22 @@ components:
             'Ineligible case':
               value:
                 oas:
-                  eligibilityResult: Not eligible!
+                  eligibilityResult: ineligible
                   entitlementResult: 0
                   reason: Income too high
                   detail: Your income is too high to be eligible for OAS.
                 gis:
-                  eligibilityResult: Not eligible!
+                  eligibilityResult: ineligible
                   entitlementResult: 0
                   reason: Not eligible for OAS
                   detail: You need to be eligible for OAS to be eligible for GIS.
                 allowance:
-                  eligibilityResult: Not eligible!
+                  eligibilityResult: ineligible
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance.
                 afs:
-                  eligibilityResult: Not eligible!
+                  eligibilityResult: ineligible
                   entitlementResult: 0
                   reason: Age does not meet requirement for this benefit
                   detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -308,6 +308,24 @@ components:
         description: Age, up to a max of 150.
         example: 65
         maximum: 150
+      allowEmptyValue: false
+
+    maritalStatus:
+      name: maritalStatus
+      in: query
+      description: The current marital status of the client.
+      required: false
+      example: married
+      schema:
+        type: string
+        enum:
+          - single
+          - married
+          - commonLaw
+          - widowed
+          - divorced
+          - separated
+        description: The current marital status of the client.
       allowEmptyValue: false
 
     livingCountry:
@@ -376,37 +394,14 @@ components:
         maximum: 100
       allowEmptyValue: false
 
-    maritalStatus:
-      name: maritalStatus
+    everLivedSocialCountry:
+      name: everLivedSocialCountry
       in: query
-      description: The current marital status of the client.
+      description: Has the client ever lived in a country with a social agreement? [link of countries to be included]
       required: false
-      example: married
+      example: true
       schema:
-        type: string
-        enum:
-          - single
-          - married
-          - commonLaw
-          - widowed
-          - divorced
-          - separated
-        description: The current marital status of the client.
-      allowEmptyValue: false
-
-    partnerIncome:
-      name: partnerIncome
-      in: query
-      description: >
-        What is your partner's annual net income in Canadian dollars?
-
-
-        _Note: This can be provided only when marital status is Married or Common-Law._
-      required: false
-      example: 10000
-      schema:
-        type: integer
-        description: Income in Canadian dollars.
+        type: boolean
       allowEmptyValue: false
 
     partnerBenefitStatus:
@@ -423,12 +418,17 @@ components:
         type: boolean
       allowEmptyValue: false
 
-    everLivedSocialCountry:
-      name: everLivedSocialCountry
+    partnerIncome:
+      name: partnerIncome
       in: query
-      description: Has the client ever lived in a country with a social agreement? [link of countries to be included]
+      description: >
+        What is your partner's annual net income in Canadian dollars?
+
+
+        _Note: This can be provided only when marital status is Married or Common-Law._
       required: false
-      example: true
+      example: 10000
       schema:
-        type: boolean
+        type: integer
+        description: Income in Canadian dollars.
       allowEmptyValue: false

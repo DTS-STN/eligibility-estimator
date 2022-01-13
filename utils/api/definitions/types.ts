@@ -19,16 +19,16 @@ import { FieldData, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
-  income?: number // personal income
-  age?: number
-  livingCountry?: string // country code
-  legalStatus?: LegalStatus
-  legalStatusOther?: string
-  yearsInCanadaSince18?: number
-  maritalStatus?: MaritalStatus
-  partnerIncome?: number // partner income
-  partnerBenefitStatus?: PartnerBenefitStatus
-  everLivedSocialCountry?: boolean
+  income: number // personal income
+  age: number
+  maritalStatus: MaritalStatus
+  livingCountry: string // country code
+  legalStatus: LegalStatus
+  legalStatusOther: string
+  yearsInCanadaSince18: number
+  everLivedSocialCountry: boolean
+  partnerIncome: number // partner income
+  partnerBenefitStatus: PartnerBenefitStatus
   _language?: Language
 }
 
@@ -38,15 +38,14 @@ export interface RequestInput {
 export interface ProcessedInput {
   income?: number // sum of personal and partner
   age?: number
+  maritalStatus: MaritalStatusHelper
   livingCountry?: LivingCountry
   legalStatus: LegalStatusHelper
   legalStatusOther?: string
   yearsInCanadaSince18?: number
-  maritalStatus: MaritalStatusHelper
-  partnerBenefitStatus: PartnerBenefitStatusHelper
   everLivedSocialCountry?: boolean
+  partnerBenefitStatus: PartnerBenefitStatusHelper
   _translations: Translations
-  _oasEligible?: ResultKey // added by GIS check
 }
 
 export interface BenefitResult {
