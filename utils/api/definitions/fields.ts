@@ -19,6 +19,7 @@ export enum FieldType {
   CURRENCY = 'currency',
   BOOLEAN = 'boolean',
   DROPDOWN = 'dropdown',
+  DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
   STRING = 'string',
 }
@@ -49,7 +50,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.LIVING_COUNTRY,
     category: { key: FieldCategory.LEGAL_STATUS },
     order: 4,
-    type: FieldType.DROPDOWN,
+    type: FieldType.DROPDOWN_SEARCHABLE,
     default: { key: 'CAN', text: 'Canada' },
   },
   [FieldKey.LEGAL_STATUS]: {
@@ -136,7 +137,7 @@ interface FieldDataRadio extends FieldDataGeneric {
 }
 
 export interface FieldDataDropdown extends FieldDataGeneric {
-  type: FieldType.DROPDOWN
+  type: FieldType.DROPDOWN | FieldType.DROPDOWN_SEARCHABLE
   values?: Array<KeyAndText> // applied via translator
   default?: KeyAndText
 }
