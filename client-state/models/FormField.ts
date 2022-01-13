@@ -51,7 +51,7 @@ export const FormField = types
         val = self.value.key
       } else {
         if (self.value.includes('$')) {
-          val = self.value.toString().replace('$', '').replace(',', '')
+          val = self.value.toString().replaceAll('$', '').replaceAll(',', '')
         } else {
           val = self.value.toString()
         }
