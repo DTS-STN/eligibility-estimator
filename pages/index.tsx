@@ -55,7 +55,9 @@ const Home: NextPage = () => {
           const input = document.querySelector(
             'input[name="income"]'
           ) as HTMLInputElement
-          const sanitizedValue = input.value.replace('$', '').replace(',', '')
+          const sanitizedValue = input.value
+            .replaceAll('$', '')
+            .replaceAll(',', '')
           router.push(`/eligibility?income=${sanitizedValue}`)
         }}
         onReset={(e) => {
