@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useMediaQuery } from '../Hooks'
 
 type Section = {
   title: string
@@ -18,6 +19,8 @@ const ProgressSection: React.FC<Section> = ({
   first,
   last,
 }) => {
+  const isBreakpoint = useMediaQuery(992)
+
   return (
     <>
       {!first && (
@@ -53,14 +56,16 @@ const ProgressSection: React.FC<Section> = ({
             stroke={complete ? '#fff' : 'text-[#B7B7B7]'}
           />
         </svg>
-        <svg
-          className={`${
-            complete ? 'text-primary' : 'text-[#B7B7B7]'
-          } fill-current stroke-white absolute`}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {!last && <rect x="11.5" y="83" width="6" height="22" />}
-        </svg>
+        {isBreakpoint && (
+          <svg
+            className={`${
+              complete ? 'text-primary' : 'text-[#B7B7B7]'
+            } fill-current stroke-white absolute`}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {!last && <rect x="11.5" y="83" width="6" height="22" />}
+          </svg>
+        )}
         <span
           className={`whitespace-nowrap mx-1.5 font-semibold ${
             complete ? 'text-primary' : 'text-[#B7B7B7]'
