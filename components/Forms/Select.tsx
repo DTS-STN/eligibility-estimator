@@ -58,7 +58,7 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             }),
             indicatorSeparator: (styles) => ({
               ...styles,
-              display: field.key == FieldKey.MARITAL_STATUS ? 'none' : 'block',
+              opacity: field.key == FieldKey.MARITAL_STATUS ? 0 : 1,
             }),
           }}
           className="rselect"
@@ -82,8 +82,8 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             field.handleChange(newValue)
           }}
           closeMenuOnScroll={false}
-          isSearchable={field.key == FieldKey.MARITAL_STATUS ? false : true}
-          isClearable={field.key == FieldKey.MARITAL_STATUS ? false : true}
+          isSearchable={field.key == FieldKey.MARITAL_STATUS ? undefined : true}
+          isClearable={field.key == FieldKey.MARITAL_STATUS ? undefined : true}
         />
       </div>
     </>
