@@ -1,9 +1,4 @@
-import {
-  LegalStatus,
-  LivingCountry,
-  ResultKey,
-  ResultReason,
-} from '../definitions/enums'
+import { LivingCountry, ResultKey, ResultReason } from '../definitions/enums'
 import MAX_OAS_ENTITLEMENT from '../definitions/oasEntitlement'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 
@@ -14,10 +9,7 @@ export default function checkOas(input: ProcessedInput): BenefitResult {
   const requiredYearsInCanada =
     input.livingCountry === LivingCountry.CANADA ? 10 : 20
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
-  const meetsReqLegal =
-    input.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    input.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    input.legalStatus === LegalStatus.INDIAN_STATUS
+  const meetsReqLegal = input.legalStatus.canadian
 
   // main checks
   if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
@@ -94,7 +86,7 @@ export default function checkOas(input: ProcessedInput): BenefitResult {
         reason: ResultReason.AGE,
         detail: input._translations.detail.dependingOnLegalWhen65,
       }
-    } else if (input.legalStatus === LegalStatus.SPONSORED) {
+    } else if (input.legalStatus.sponsored) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,

@@ -3,7 +3,7 @@ import checkAfs from '../benefits/checkAfs'
 import checkAllowance from '../benefits/checkAllowance'
 import checkGis from '../benefits/checkGis'
 import checkOas from '../benefits/checkOas'
-import { LegalStatus, LivingCountry } from '../definitions/enums'
+import { LivingCountry } from '../definitions/enums'
 import {
   FieldData,
   fieldDefinitions,
@@ -19,6 +19,7 @@ import {
 import normalizeLivingCountry from './countryUtils'
 import {
   FieldHelper,
+  LegalStatusHelper,
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from './fieldClasses'
@@ -69,6 +70,7 @@ export class RequestHandler {
         ? sanitizedInput.income + sanitizedInput.partnerIncome
         : sanitizedInput.income,
       livingCountry: normalizeLivingCountry(sanitizedInput.livingCountry),
+      legalStatus: new LegalStatusHelper(sanitizedInput.legalStatus),
       maritalStatus: new MaritalStatusHelper(sanitizedInput.maritalStatus),
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         sanitizedInput.partnerBenefitStatus
@@ -92,7 +94,7 @@ export class RequestHandler {
         FieldKey.YEARS_IN_CANADA_SINCE_18
       )
     }
-    if (input.legalStatus == LegalStatus.OTHER) {
+    if (input.legalStatus.other) {
       requiredFields.push(FieldKey.LEGAL_STATUS_OTHER)
     }
     if (input.maritalStatus.partnered) {

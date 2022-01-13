@@ -1,9 +1,29 @@
-import { MaritalStatus, PartnerBenefitStatus } from '../definitions/enums'
+import {
+  LegalStatus,
+  MaritalStatus,
+  PartnerBenefitStatus,
+} from '../definitions/enums'
 
 export class FieldHelper {
   provided: boolean
   constructor(public value: any) {
     this.provided = !(value === undefined)
+  }
+}
+
+export class LegalStatusHelper extends FieldHelper {
+  canadian: boolean
+  sponsored: boolean
+  other: boolean
+
+  constructor(public value: LegalStatus) {
+    super(value)
+    this.canadian =
+      value === LegalStatus.CANADIAN_CITIZEN ||
+      value === LegalStatus.PERMANENT_RESIDENT ||
+      value === LegalStatus.INDIAN_STATUS
+    this.sponsored = value === LegalStatus.SPONSORED
+    this.other = value === LegalStatus.OTHER
   }
 }
 

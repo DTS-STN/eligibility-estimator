@@ -1,9 +1,4 @@
-import {
-  LegalStatus,
-  LivingCountry,
-  ResultKey,
-  ResultReason,
-} from '../definitions/enums'
+import { LivingCountry, ResultKey, ResultReason } from '../definitions/enums'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 import gisTables from '../scrapers/output'
 import { OutputItemAllowance } from '../scrapers/partneredAllowanceScraper'
@@ -19,10 +14,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
   const meetsReqIncome = input.income < 35616
   const requiredYearsInCanada = 10
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
-  const meetsReqLegal =
-    input.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    input.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    input.legalStatus === LegalStatus.INDIAN_STATUS
+  const meetsReqLegal = input.legalStatus.canadian
 
   // main checks
   if (
@@ -135,7 +127,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
         reason: ResultReason.AGE,
         detail: input._translations.detail.dependingOnLegalWhen60,
       }
-    } else if (input.legalStatus === LegalStatus.SPONSORED) {
+    } else if (input.legalStatus.sponsored) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,

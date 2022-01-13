@@ -1,5 +1,4 @@
 import {
-  LegalStatus,
   LivingCountry,
   MaritalStatus,
   ResultKey,
@@ -18,10 +17,7 @@ export default function checkAfs(input: ProcessedInput): BenefitResult {
   const meetsReqIncome = input.income < 25920
   const requiredYearsInCanada = 10
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
-  const meetsReqLegal =
-    input.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    input.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    input.legalStatus === LegalStatus.INDIAN_STATUS
+  const meetsReqLegal = input.legalStatus.canadian
 
   // main checks
   if (meetsReqLegal && meetsReqYears && meetsReqMarital && meetsReqIncome) {
@@ -121,7 +117,7 @@ export default function checkAfs(input: ProcessedInput): BenefitResult {
         reason: ResultReason.AGE,
         detail: input._translations.detail.dependingOnLegalWhen60,
       }
-    } else if (input.legalStatus === LegalStatus.SPONSORED) {
+    } else if (input.legalStatus.sponsored) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,

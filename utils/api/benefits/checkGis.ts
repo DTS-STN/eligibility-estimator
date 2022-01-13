@@ -1,9 +1,4 @@
-import {
-  LegalStatus,
-  LivingCountry,
-  ResultKey,
-  ResultReason,
-} from '../definitions/enums'
+import { LivingCountry, ResultKey, ResultReason } from '../definitions/enums'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 import {
   MaritalStatusHelper,
@@ -24,10 +19,7 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
-  const meetsReqLegal =
-    input.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    input.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    input.legalStatus === LegalStatus.INDIAN_STATUS
+  const meetsReqLegal = input.legalStatus.canadian
   const maxIncome = input.maritalStatus.partnered
     ? input.partnerBenefitStatus.anyOas
       ? 25440
@@ -89,7 +81,7 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
       detail: input._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqLegal) {
-    if (input.legalStatus === LegalStatus.SPONSORED) {
+    if (input.legalStatus.sponsored) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
