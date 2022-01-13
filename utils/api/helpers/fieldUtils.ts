@@ -28,6 +28,7 @@ export function buildFieldData(
     // translate values/questionOptions
     if (
       fieldData.type === FieldType.DROPDOWN ||
+      fieldData.type === FieldType.DROPDOWN_SEARCHABLE ||
       fieldData.type === FieldType.RADIO
     ) {
       const questionOptions = translations.questionOptions[fieldData.key]

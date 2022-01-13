@@ -5,6 +5,7 @@ import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 import { FormField } from '../../client-state/models/FormField'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -55,6 +56,10 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
               ...styles,
               boxShadow: 'none', // remove a blue inset box from react-select
             }),
+            indicatorSeparator: (styles) => ({
+              ...styles,
+              opacity: field.key == FieldType.DROPDOWN_SEARCHABLE ? 1 : 0,
+            }),
           }}
           className="rselect"
           placeholder="Select from..."
@@ -77,8 +82,12 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             field.handleChange(newValue)
           }}
           closeMenuOnScroll={false}
-          isSearchable
-          isClearable
+          isSearchable={
+            field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
+          }
+          isClearable={
+            field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
+          }
         />
       </div>
     </>

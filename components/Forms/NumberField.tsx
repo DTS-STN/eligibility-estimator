@@ -39,7 +39,7 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         htmlFor={name}
         aria-label={name}
         data-testid="input-label"
-        className="text-content font-bold"
+        className="text-content inline-block font-bold mb-1.5"
       >
         {required && <span className="text-danger">*</span>} {label}
         {required && (
