@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { Alert } from '../components/Alert'
 import { CurrencyField } from '../components/Forms/CurrencyField'
 import { Layout } from '../components/Layout'
@@ -8,6 +9,7 @@ import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
 const Home: NextPage = () => {
   const router = useRouter()
+  const [error, setError] = useState(null)
   return (
     <Layout>
       <div className="mt-18 text-content">
@@ -56,20 +58,27 @@ const Home: NextPage = () => {
             'input[name="income"]'
           ) as HTMLInputElement
           const sanitizedValue = input.value.replace('$', '').replace(',', '')
-          router.push(`/eligibility?income=${sanitizedValue}`)
+          if (sanitizedValue == null || sanitizedValue == '') {
+            setError('This field is required')
+          } else {
+            router.push(`/eligibility?income=${sanitizedValue}`)
+          }
         }}
         onReset={(e) => {
           const input = document.querySelector(
             'input[name="income"]'
           ) as HTMLInputElement
           input.setAttribute('value', '')
+          setError('')
         }}
+        noValidate
       >
         <CurrencyField
           type="text"
           name="income"
           label="What is your current annual net income in Canadian dollars"
           placeholder="$20,000"
+          error={error}
           required
         />
         <div className="mt-10 flex space-x-5">
