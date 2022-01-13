@@ -7,7 +7,7 @@ export const Footer = () => (
       className={`w-full h-auto bg-custom-blue-dark ${styles.footerBackground}`}
     >
       <div
-        className="py-7 container mx-auto"
+        className="py-7 sm:container mx-auto"
         role="navigation"
         aria-labelledby="footerNav1"
       >
@@ -64,7 +64,7 @@ export const Footer = () => (
       </div>
     </div>
     <div className="my-8">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="sm:container mx-auto flex justify-between items-center">
         <nav className="">
           <ul className="flex flex-col md:flex-row items-start md:items-center list-disc space-x-6">
             <li className="list-none">

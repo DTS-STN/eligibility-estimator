@@ -1,5 +1,7 @@
+import { Translations } from '../../../i18n/api'
 import {
   LegalStatus,
+  LivingCountry,
   MaritalStatus,
   ResultKey,
   ResultReason,
@@ -7,14 +9,16 @@ import {
 import { GisSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
-import { OutputItem } from '../scrapers/_base'
+import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
+import checkOas from './checkOas'
 
 export default function checkGis(
   params: CalculationInput,
-  oasResult: BenefitResult
+  translations: Translations
 ): BenefitResult {
   // include OAS result
+  const oasResult = checkOas(params, translations)
   const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }
 
   // validation
@@ -24,7 +28,7 @@ export default function checkGis(
 
   // helpers
   const meetsReqAge = value.age >= 65
-  const meetsReqLiving = value.livingCountry === 'Canada'
+  const meetsReqLiving = value.livingCountry === LivingCountry.CANADA
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
@@ -50,8 +54,7 @@ export default function checkGis(
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.OAS,
-          detail:
-            'You may be eligible, please contact Service Canada for more information.',
+          detail: translations.detail.conditional,
         }
       } else {
         const entitlementResult = new GisEntitlement(
@@ -63,8 +66,7 @@ export default function checkGis(
           eligibilityResult: ResultKey.ELIGIBLE,
           entitlementResult,
           reason: ResultReason.NONE,
-          detail:
-            'Based on the information provided, you are likely eligible for GIS!',
+          detail: translations.detail.eligible,
         }
       }
     } else {
@@ -72,7 +74,7 @@ export default function checkGis(
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: 'You will likely be eligible for GIS when you turn 65.',
+        detail: translations.detail.eligibleWhen65,
       }
     }
   } else if (!meetsReqLiving && value.livingCountry !== undefined) {
@@ -80,21 +82,21 @@ export default function checkGis(
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.LIVING_COUNTRY,
-      detail: 'You need to live in Canada to be eligible for GIS.',
+      detail: translations.detail.mustBeInCanada,
     }
   } else if (oasResult.eligibilityResult == ResultKey.INELIGIBLE) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: 'You need to be eligible for OAS to be eligible for GIS.',
+      detail: translations.detail.mustBeOasEligible,
     }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: 'Your income is too high to be eligible for GIS.',
+      detail: translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqLegal) {
     if (value.legalStatus === LegalStatus.SPONSORED) {
@@ -102,16 +104,14 @@ export default function checkGis(
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail:
-          'You may be eligible for Allowance for Survivor, please contact Service Canada to confirm.',
+        detail: translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail:
-          'You may be eligible for GIS, and should contact Service Canada to confirm due to your legal status in Canada.',
+        detail: translations.detail.dependingOnLegal,
       }
     }
   } else if (oasResult.eligibilityResult == ResultKey.MORE_INFO) {
@@ -119,7 +119,7 @@ export default function checkGis(
       eligibilityResult: ResultKey.MORE_INFO,
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
-      detail: 'You need to complete the OAS eligibility check first.',
+      detail: translations.detail.mustCompleteOasCheck,
     }
   }
 }
@@ -144,14 +144,14 @@ class GisEntitlement {
     return gisEntitlementItem ? gisEntitlementItem.gis : 0
   }
 
-  getTableItem(): OutputItem | undefined {
-    const array: OutputItem[] = this.getTable()
+  getTableItem(): OutputItemGis | undefined {
+    const array: OutputItemGis[] = this.getTable()
     return array.find((x) => {
       if (x.range.low <= this.income && this.income <= x.range.high) return x
     })
   }
 
-  getTable(): OutputItem[] {
+  getTable(): OutputItemGis[] {
     if (
       this.maritalStatus === MaritalStatus.SINGLE ||
       this.maritalStatus === MaritalStatus.WIDOWED ||

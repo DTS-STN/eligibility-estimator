@@ -1,19 +1,22 @@
 import type { NextPage } from 'next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Alert } from '../components/Alert'
-import { Input } from '../components/Forms/Input'
+import { CurrencyField } from '../components/Forms/CurrencyField'
 import { Layout } from '../components/Layout'
+import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
 const Home: NextPage = () => {
+  const router = useRouter()
   return (
     <Layout>
       <div className="mt-18 text-content">
         <p className="mb-4 text-content">
-          This prototype is an online, web-based application that enables people
-          to plan their finances for the 60-65+ phase of life. By answering a
-          limited number of questions regarding age, legal and relationship
-          status and income level, the client will be made aware of the the
-          benefit they may be qualified to receive and an estimated dollar value
-          for their monthly payment.{' '}
+          *ACTUAL NAME* is a prototype. This is not a real service. Based on the
+          information you provide, this will estimate your eligibility for the
+          Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If
+          eligible to receive the benefit, the application will also estimate
+          your monthly payment.{' '}
         </p>
         <p className="mb-4 text-content">
           This prototype covers four benefits programs:
@@ -45,8 +48,26 @@ const Home: NextPage = () => {
         </p>
         <h2 className="h2 mt-10">Income details</h2>
       </div>
-      <form action="/eligibility" className="mb-10">
-        <Input
+      <form
+        className="mb-10"
+        onSubmit={(e) => {
+          e.preventDefault()
+          const input = document.querySelector(
+            'input[name="income"]'
+          ) as HTMLInputElement
+          const sanitizedValue = input.value
+            .replaceAll('$', '')
+            .replaceAll(',', '')
+          router.push(`/eligibility?income=${sanitizedValue}`)
+        }}
+        onReset={(e) => {
+          const input = document.querySelector(
+            'input[name="income"]'
+          ) as HTMLInputElement
+          input.setAttribute('value', '')
+        }}
+      >
+        <CurrencyField
           type="text"
           name="income"
           label="What is your current annual net income in Canadian dollars"
@@ -60,11 +81,20 @@ const Home: NextPage = () => {
           <button className="btn btn-primary w-28">Next</button>
         </div>
       </form>
-      <Alert title="Disclaimer" type="warning">
-        These results are rough estimates. For a more accurate assessment of
-        your eligibility, please contact Service Canada. The results should not
-        be considered financial advice. This application does not collect
-        information that would enable personal identification.
+      <Alert title="Disclaimer" type={EstimationSummaryState.UNAVAILABLE}>
+        Please be reminded that this is not a real service. It is a prototype.
+        The results are estimates and not a final decision. For a more accurate
+        assessment of your eligibility, contact{' '}
+        <Link
+          href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"
+          passHref
+        >
+          <a className="text-default-text underline" target="_blank">
+            Service Canada
+          </a>
+        </Link>
+        . The results are not financial advice. This application does not
+        collect and does not save the information you have provided.
       </Alert>
     </Layout>
   )

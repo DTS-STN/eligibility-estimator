@@ -1,21 +1,34 @@
 import Joi from 'joi'
+import { Language } from '../../../i18n/api'
 import { LegalStatus, LivingCountry, MaritalStatus, ResultKey } from './enums'
 
-// This is what the API expects to receive, with the below exceptions due to normalization:
-// - livingCountry accepts a string
-// - partnerIncome will be added to income if it is present
-//
-// Note: When updating this, don't forget to update OpenAPI!
-// Note: Do not require fields here, do it in the benefit-specific schemas.
+/**
+ * This is what the API expects to receive, with the below exceptions due to normalization:
+ * - livingCountry accepts a string
+ * - partnerIncome will be added to income if it is present
+ *
+ * When updating this, ensure you update:
+ * - openapi.yaml
+ * - insomnia.yaml (optional as it is infrequently used)
+ * - fields.ts
+ * - types.ts
+ * - index.test.ts
+ *
+ * Note: Do not require fields here, do it in the benefit-specific schemas.
+ */
 export const RequestSchema = Joi.object({
+  _language: Joi.string()
+    .valid(...Object.values(Language))
+    .default(Language.EN),
   income: Joi.number().integer().min(0),
   age: Joi.number().integer().max(150),
   livingCountry: Joi.string().valid(...Object.values(LivingCountry)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
+  legalStatusOther: Joi.string(),
   yearsInCanadaSince18: Joi.number()
     .integer()
     .ruleset.max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message('Years in Canada should be no more than age minus 18'),
+    .message('Years in Canada should be no more than age minus 18'), // todo i18n
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   partnerIncome: Joi.number().integer(),
   partnerReceivingOas: Joi.boolean(),
@@ -35,6 +48,10 @@ export const OasSchema = RequestSchema.concat(
     }),
     legalStatus: Joi.when('income', {
       is: Joi.number().exist().greater(0).less(129757),
+      then: Joi.required(),
+    }),
+    legalStatusOther: Joi.when('legalStatus', {
+      is: Joi.exist().valid(LegalStatus.OTHER),
       then: Joi.required(),
     }),
     maritalStatus: Joi.when('income', {

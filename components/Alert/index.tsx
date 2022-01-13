@@ -1,36 +1,45 @@
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 
-type AlertType = 'warning' | 'info' | 'danger' | 'success'
+/** offset padding and margin of the component, used to calculate svg height responsively */
+const OFFSET_WIDTH = 28
 
 export const Alert: React.VFC<{
   title: string
   children: React.ReactNode
-  type: AlertType
+  type: EstimationSummaryState
 }> = ({ title, children, type }) => {
-  const { query, pathname } = useRouter()
+  const [height, setHeight] = useState<number>(null)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (ref.current) {
+      const height = ref.current.clientHeight
+      setHeight(height)
+    }
+  }, [ref.current])
+
   const className = (() => {
     switch (type) {
-      case 'warning':
+      case EstimationSummaryState.UNAVAILABLE:
         return 'border-warning text-warning'
-      case 'info':
-        return 'border-info text-info'
-      case 'danger':
+      case EstimationSummaryState.AVAILABLE_INELIGIBLE:
         return 'border-danger text-danger'
-      case 'success':
-        return 'border-success text-success'
+      case EstimationSummaryState.AVAILABLE_ELIGIBLE:
+        return 'border-[#278400] text-[#278400]'
       default:
         break
     }
   })()
 
   return (
-    <div className={`py-2.5 pl-2 border-[3px] ${className} rounded`}>
-      <div className="flex flex-row justify-start items-center">
+    <div className={`py-2.5 pl-2 border-[3px] ${className} rounded`} ref={ref}>
+      <div className="flex flex-row justify-start items-start">
         <div>
           <svg
             width="26"
-            height={pathname == '/' ? 157 : 107}
+            height={height - OFFSET_WIDTH}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -39,7 +48,7 @@ export const Alert: React.VFC<{
               x="10"
               y="47"
               width="6"
-              height="127"
+              height={height - OFFSET_WIDTH}
               className="fill-current"
             />
             <path
@@ -50,7 +59,7 @@ export const Alert: React.VFC<{
         </div>
         <div className="ml-3 flex flex-col pt-2">
           <h5 className="h5 mb-3 text-content">{title}</h5>
-          <p className="text-content">{children}</p>
+          <div className="text-content">{children}</div>
         </div>
       </div>
     </div>

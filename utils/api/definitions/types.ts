@@ -1,4 +1,6 @@
+import { Language } from '../../../i18n/api'
 import {
+  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -12,20 +14,29 @@ export interface CalculationInput {
   age?: number
   livingCountry?: LivingCountry
   legalStatus?: LegalStatus
+  legalStatusOther?: string
   yearsInCanadaSince18?: number
   maritalStatus?: MaritalStatus
   partnerIncome?: number
   partnerReceivingOas?: boolean
   everLivedSocialCountry?: boolean
-  _oasEligible?: ResultKey
+  _language?: Language
+  _oasEligible?: ResultKey // added by GIS check
 }
 
 export interface BenefitResult {
   eligibilityResult: ResultKey
   entitlementResult: number
   reason: ResultReason
-  detail: String
+  detail: string
   missingFields?: Array<FieldKey>
+}
+
+export interface BenefitResultObject {
+  oas: BenefitResult
+  gis: BenefitResult
+  allowance: BenefitResult
+  afs: BenefitResult
 }
 
 export interface ResponseSuccess {
@@ -33,6 +44,7 @@ export interface ResponseSuccess {
   gis: BenefitResult
   allowance: BenefitResult
   afs: BenefitResult
+  summary: SummaryObject
   visibleFields: Array<FieldKey>
   fieldData: Array<FieldData>
 }
@@ -40,4 +52,17 @@ export interface ResponseSuccess {
 export interface ResponseError {
   error: string
   detail: any
+}
+
+export interface Link {
+  url: string
+  text: string
+  order: number
+}
+
+export interface SummaryObject {
+  state: EstimationSummaryState
+  title: string
+  details: string
+  links: Link[]
 }

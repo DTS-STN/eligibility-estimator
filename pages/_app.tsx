@@ -1,12 +1,14 @@
 import type { AppProps } from 'next/app'
-import { LanguageProvider } from '../components/Contexts'
+import { LanguageProvider, StoreProvider } from '../components/Contexts'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <LanguageProvider>
-      <Component {...pageProps} />
-    </LanguageProvider>
+    <StoreProvider>
+      <LanguageProvider>
+        <Component {...pageProps} />
+      </LanguageProvider>
+    </StoreProvider>
   )
 }
 
