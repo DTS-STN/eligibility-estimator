@@ -16,6 +16,7 @@ import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { NumberField } from './NumberField'
 import { TextField } from './TextField'
+import { NeedHelpList } from '../Layout/NeedHelpList'
 
 interface FactoryProps {
   data: ResponseSuccess
@@ -53,142 +54,166 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     }, [query[FieldKey.INCOME]])
 
     return (
-      <form
-        name="ee-form"
-        data-testid="ee-form"
-        action="/eligibility"
-        onSubmit={(e) => e.preventDefault()}
-        noValidate
-      >
-        <input type="hidden" name="_language" value={'EN'} />
-        {form.fields.map((field: Instance<typeof FormField>) => {
-          const isChildQuestion =
-            field.category.key == FieldCategory.PARTNER_DETAILS ||
-            field.category.key == FieldCategory.SOCIAL_AGREEMENT
-              ? true
-              : false
-          const styling = isChildQuestion
-            ? `bg-emphasis px-10 ${
-                field.category.key == FieldCategory.SOCIAL_AGREEMENT
-                  ? ' mb-4'
-                  : ''
-              }`
-            : ``
-          const content = (
-            <div key={field.key} className={styling}>
-              {field.category.key != lastCategory && (
-                <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
-                  {field.category.text}
-                </h2>
-              )}
-              {field.type == FieldType.CURRENCY && (
-                <div className="pb-8">
-                  <CurrencyField
-                    type={field.type}
-                    name={field.key}
-                    label={field.label}
-                    placeholder={field.placeholder ?? ''}
-                    onChange={debounce(field.handleChange, 1000)}
-                    value={field.value}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-              {field.type == FieldType.NUMBER && (
-                <div className="pb-8">
-                  <NumberField
-                    type={field.type}
-                    name={field.key}
-                    label={field.label}
-                    placeholder={field.placeholder ?? ''}
-                    onChange={debounce(field.handleChange, 1000)}
-                    value={field.value}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-              {field.type == FieldType.STRING && (
-                <div className="pb-8">
-                  <TextField
-                    type={field.type}
-                    name={field.key}
-                    label={field.label}
-                    placeholder={field.placeholder ?? ''}
-                    onChange={debounce(field.handleChange, 1000)}
-                    value={field.value}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-              {field.type == 'dropdown' && (
-                <div className="pb-8">
-                  <FormSelect field={field} error={field.error} value={null} />
-                </div>
-              )}
-              {(field.type == 'radio' || field.type == 'boolean') && (
-                <div className="pb-8">
-                  <Radio
-                    name={field.key}
-                    checkedValue={field.value}
-                    values={
-                      field.type == 'boolean'
-                        ? [
-                            { key: 'true', text: 'Yes' },
-                            { key: 'false', text: 'No' },
-                          ]
-                        : field.options
-                    }
-                    keyforid={field.key}
-                    label={field.label}
-                    onChange={field.handleChange}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-            </div>
-          )
-          lastCategory = field.category.key
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 ">
+        <form
+          name="ee-form"
+          data-testid="ee-form"
+          action="/eligibility"
+          onSubmit={(e) => e.preventDefault()}
+          className="col-span-2"
+          noValidate
+        >
+          <input type="hidden" name="_language" value={'EN'} />
+          {form.fields.map((field: Instance<typeof FormField>) => {
+            const isChildQuestion =
+              field.category.key == FieldCategory.PARTNER_DETAILS ||
+              field.category.key == FieldCategory.SOCIAL_AGREEMENT
+                ? true
+                : false
+            const styling = isChildQuestion
+              ? `bg-emphasis px-10 lg:w-[1200px] md:w-[992px]  ${
+                  field.category.key == FieldCategory.SOCIAL_AGREEMENT
+                    ? ' mb-10'
+                    : ''
+                }`
+              : ``
+            const content = (
+              <div key={field.key} className={styling}>
+                {field.category.key != lastCategory && (
+                  <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
+                    {field.category.text}
+                  </h2>
+                )}
+                {field.type == FieldType.CURRENCY && (
+                  <div className="pb-8">
+                    <CurrencyField
+                      type={field.type}
+                      name={field.key}
+                      label={field.label}
+                      placeholder={field.placeholder ?? ''}
+                      onChange={debounce(field.handleChange, 1000)}
+                      value={field.value}
+                      error={field.error}
+                      required
+                    />
+                  </div>
+                )}
+                {field.type == FieldType.NUMBER && (
+                  <div className="pb-8">
+                    <NumberField
+                      type={field.type}
+                      name={field.key}
+                      label={field.label}
+                      placeholder={field.placeholder ?? ''}
+                      onChange={debounce(field.handleChange, 1000)}
+                      value={field.value}
+                      error={field.error}
+                      required
+                    />
+                  </div>
+                )}
+                {field.type == FieldType.STRING && (
+                  <div className="pb-8">
+                    <TextField
+                      type={field.type}
+                      name={field.key}
+                      label={field.label}
+                      placeholder={field.placeholder ?? ''}
+                      onChange={debounce(field.handleChange, 1000)}
+                      value={field.value}
+                      error={field.error}
+                      required
+                    />
+                  </div>
+                )}
+                {(field.type == FieldType.DROPDOWN ||
+                  field.type == FieldType.DROPDOWN_SEARCHABLE) && (
+                  <div className="pb-8">
+                    <FormSelect
+                      field={field}
+                      error={field.error}
+                      value={null}
+                    />
+                  </div>
+                )}
+                {(field.type == FieldType.RADIO ||
+                  field.type == FieldType.BOOLEAN) && (
+                  <div className="pb-8">
+                    <Radio
+                      name={field.key}
+                      checkedValue={field.value}
+                      values={
+                        field.type == 'boolean'
+                          ? [
+                              { key: 'true', text: 'Yes' },
+                              { key: 'false', text: 'No' },
+                            ]
+                          : field.options
+                      }
+                      keyforid={field.key}
+                      label={field.label}
+                      onChange={field.handleChange}
+                      error={field.error}
+                      required
+                    />
+                  </div>
+                )}
+              </div>
+            )
+            lastCategory = field.category.key
 
-          return content
-        })}
+            return content
+          })}
 
-        <div className="flex flex-col md:flex-row gap-x-8 mt-20">
-          <button
-            type="button"
-            role="navigation"
-            className="btn btn-default w-full md:w-40"
-            onClick={(e) => router.push('/')}
-          >
-            Back
-          </button>
-          <button
-            type="button"
-            role="button"
-            className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
-            onClick={(e) => {
-              form.clearForm()
-            }}
-          >
-            Clear
-          </button>
-          <button
-            type="submit"
-            role="button"
-            className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
-            onClick={async (e) => {
-              if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
-                selectedTabIndex(1)
-              }
-            }}
-          >
-            Estimate
-          </button>
-        </div>
-      </form>
+          <div className="flex flex-col md:flex-row gap-x-8 mt-20">
+            <button
+              type="button"
+              role="navigation"
+              className="btn btn-default w-full md:w-40"
+              onClick={(e) => router.push('/')}
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              role="button"
+              className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
+              onClick={(e) => {
+                form.clearForm()
+              }}
+            >
+              Clear
+            </button>
+            <button
+              type="submit"
+              role="button"
+              className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
+              onClick={async (e) => {
+                if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
+                  selectedTabIndex(1)
+                }
+              }}
+            >
+              Estimate
+            </button>
+          </div>
+        </form>
+        <NeedHelpList
+          title="Need Help?"
+          links={[
+            {
+              label: 'OAS Overview',
+              location:
+                'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
+            },
+            {
+              label: 'Old Age Security: How much you could receive',
+              location:
+                'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
+            },
+          ]}
+        />
+      </div>
     )
   }
 )
