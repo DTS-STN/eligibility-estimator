@@ -770,7 +770,7 @@ describe('OAS entitlement scenarios', () => {
       yearsInCanadaSince18: 20,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.oas.entitlementResult).toEqual(317.63)
+    expect(res.body.oas.entitlementResult).toEqual(321.13)
     expect(res.body.oas.reason).toEqual(ResultReason.PARTIAL_OAS)
   })
   it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {
@@ -783,7 +783,7 @@ describe('OAS entitlement scenarios', () => {
       yearsInCanadaSince18: 39,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.oas.entitlementResult).toEqual(619.38)
+    expect(res.body.oas.entitlementResult).toEqual(626.19)
     expect(res.body.oas.reason).toEqual(ResultReason.PARTIAL_OAS)
   })
   it('returns "eligible for $635.26" when 40 years in Canada', async () => {
@@ -796,7 +796,7 @@ describe('OAS entitlement scenarios', () => {
       yearsInCanadaSince18: 40,
     })
     expect(res.body.oas.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.oas.entitlementResult).toEqual(635.26)
+    expect(res.body.oas.entitlementResult).toEqual(642.25)
     expect(res.body.oas.reason).toEqual(ResultReason.NONE)
   })
 })
