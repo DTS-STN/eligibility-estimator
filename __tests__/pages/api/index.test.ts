@@ -20,7 +20,7 @@ import {
   FieldKey,
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
-import { buildFieldData } from '../../../utils/api/helpers/fieldUtils'
+import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('code checks', () => {
@@ -38,12 +38,12 @@ describe('country checks', () => {
   const COUNTRY_COUNT = 195
   const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
   const translationsEn: Translations = getTranslations(Language.EN)
-  const fieldDataEn = buildFieldData(
+  const fieldDataEn = RequestHandler.getFieldData(
     fieldList,
     translationsEn
   ) as Array<FieldDataDropdown>
   const translationsFr: Translations = getTranslations(Language.FR)
-  const fieldDataFr = buildFieldData(
+  const fieldDataFr = RequestHandler.getFieldData(
     fieldList,
     translationsFr
   ) as Array<FieldDataDropdown>

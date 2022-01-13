@@ -34,7 +34,7 @@ export interface RequestInput {
 /**
  * After Joi validation and additional pre-processing, this is the object passed around to provide app logic.
  */
-export interface CalculationInput {
+export interface ProcessedInput {
   income?: number // sum of personal and partner
   age?: number
   livingCountry?: LivingCountry
@@ -55,7 +55,7 @@ export interface BenefitResult {
   detail: string
 }
 
-export interface BenefitResultObject {
+export interface BenefitResultsObject {
   oas?: BenefitResult
   gis?: BenefitResult
   allowance?: BenefitResult
@@ -63,7 +63,7 @@ export interface BenefitResultObject {
 }
 
 export interface ResponseSuccess {
-  results: BenefitResultObject
+  results: BenefitResultsObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>

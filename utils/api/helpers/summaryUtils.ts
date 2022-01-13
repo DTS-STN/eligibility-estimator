@@ -1,7 +1,7 @@
 import { Translations } from '../../../i18n/api'
 import { EstimationSummaryState, ResultKey } from '../definitions/enums'
 import { FieldKey } from '../definitions/fields'
-import { BenefitResultObject, SummaryObject } from '../definitions/types'
+import { BenefitResultsObject, SummaryObject } from '../definitions/types'
 
 export class SummaryBuilder {
   private readonly state: EstimationSummaryState
@@ -9,7 +9,7 @@ export class SummaryBuilder {
   private readonly details: string
 
   constructor(
-    private results: BenefitResultObject,
+    private results: BenefitResultsObject,
     private missingFields: FieldKey[],
     private translations: Translations
   ) {
@@ -80,7 +80,7 @@ export class SummaryBuilder {
   }
 
   static buildSummaryObject(
-    results: BenefitResultObject,
+    results: BenefitResultsObject,
     missingFields: FieldKey[],
     translations: Translations
   ): SummaryObject {

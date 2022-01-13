@@ -5,50 +5,50 @@ import {
   ResultReason,
 } from '../definitions/enums'
 import MAX_OAS_ENTITLEMENT from '../definitions/oasEntitlement'
-import { BenefitResult, CalculationInput } from '../definitions/types'
+import { BenefitResult, ProcessedInput } from '../definitions/types'
 
-export default function checkOas(params: CalculationInput): BenefitResult {
+export default function checkOas(input: ProcessedInput): BenefitResult {
   // helpers
-  const meetsReqAge = params.age >= 65
-  const meetsReqIncome = params.income < 129757
+  const meetsReqAge = input.age >= 65
+  const meetsReqIncome = input.income < 129757
   const requiredYearsInCanada =
-    params.livingCountry === LivingCountry.CANADA ? 10 : 20
-  const meetsReqYears = params.yearsInCanadaSince18 >= requiredYearsInCanada
+    input.livingCountry === LivingCountry.CANADA ? 10 : 20
+  const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
   const meetsReqLegal =
-    params.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    params.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    params.legalStatus === LegalStatus.INDIAN_STATUS
+    input.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
+    input.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
+    input.legalStatus === LegalStatus.INDIAN_STATUS
 
   // main checks
   if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
     if (meetsReqAge) {
       const entitlementResult = roundToTwo(
-        Math.min(params.yearsInCanadaSince18 / 40, 1) * MAX_OAS_ENTITLEMENT
+        Math.min(input.yearsInCanadaSince18 / 40, 1) * MAX_OAS_ENTITLEMENT
       )
-      const partialOas = params.yearsInCanadaSince18 < 40
+      const partialOas = input.yearsInCanadaSince18 < 40
       const reason = partialOas ? ResultReason.PARTIAL_OAS : ResultReason.NONE
       const detail = partialOas
-        ? params._translations.detail.eligiblePartialOas
-        : params._translations.detail.eligible
+        ? input._translations.detail.eligiblePartialOas
+        : input._translations.detail.eligible
       return {
         eligibilityResult: ResultKey.ELIGIBLE,
         entitlementResult,
         reason,
         detail,
       }
-    } else if (params.age == 64) {
+    } else if (input.age == 64) {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: params._translations.detail.eligibleWhen65ApplyNow,
+        detail: input._translations.detail.eligibleWhen65ApplyNow,
       }
     } else {
       return {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: params._translations.detail.eligibleWhen65,
+        detail: input._translations.detail.eligibleWhen65,
       }
     }
   } else if (!meetsReqIncome) {
@@ -56,26 +56,26 @@ export default function checkOas(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: params._translations.detail.mustMeetIncomeReq,
+      detail: input._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqYears) {
     if (
-      params.livingCountry === LivingCountry.AGREEMENT ||
-      params.everLivedSocialCountry
+      input.livingCountry === LivingCountry.AGREEMENT ||
+      input.everLivedSocialCountry
     ) {
       if (meetsReqAge) {
         return {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.YEARS_IN_CANADA,
-          detail: params._translations.detail.dependingOnAgreement,
+          detail: input._translations.detail.dependingOnAgreement,
         }
       } else {
         return {
           eligibilityResult: ResultKey.INELIGIBLE,
           entitlementResult: 0,
           reason: ResultReason.AGE,
-          detail: params._translations.detail.dependingOnAgreementWhen65,
+          detail: input._translations.detail.dependingOnAgreementWhen65,
         }
       }
     } else {
@@ -83,7 +83,7 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.YEARS_IN_CANADA,
-        detail: params._translations.detail.mustMeetYearReq,
+        detail: input._translations.detail.mustMeetYearReq,
       }
     }
   } else if (!meetsReqLegal) {
@@ -92,29 +92,29 @@ export default function checkOas(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: params._translations.detail.dependingOnLegalWhen65,
+        detail: input._translations.detail.dependingOnLegalWhen65,
       }
-    } else if (params.legalStatus === LegalStatus.SPONSORED) {
+    } else if (input.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: params._translations.detail.dependingOnLegalSponsored,
+        detail: input._translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: params._translations.detail.dependingOnLegal,
+        detail: input._translations.detail.dependingOnLegal,
       }
     }
-  } else if (params.livingCountry === LivingCountry.NO_AGREEMENT) {
+  } else if (input.livingCountry === LivingCountry.NO_AGREEMENT) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.SOCIAL_AGREEMENT,
-      detail: params._translations.detail.ineligibleYearsOrCountry,
+      detail: input._translations.detail.ineligibleYearsOrCountry,
     }
   }
   // fallback

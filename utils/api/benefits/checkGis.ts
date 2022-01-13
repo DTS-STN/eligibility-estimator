@@ -4,7 +4,7 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { BenefitResult, CalculationInput } from '../definitions/types'
+import { BenefitResult, ProcessedInput } from '../definitions/types'
 import {
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
@@ -13,27 +13,27 @@ import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
 import checkOas from './checkOas'
 
-export default function checkGis(params: CalculationInput): BenefitResult {
+export default function checkGis(input: ProcessedInput): BenefitResult {
   // fetch OAS result
-  const oasResult = checkOas(params)
+  const oasResult = checkOas(input)
 
   // helpers
-  const meetsReqAge = params.age >= 65
-  const meetsReqLiving = params.livingCountry === LivingCountry.CANADA
+  const meetsReqAge = input.age >= 65
+  const meetsReqLiving = input.livingCountry === LivingCountry.CANADA
   const oasResultIsPartial = oasResult.reason == ResultReason.PARTIAL_OAS
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
   const meetsReqLegal =
-    params.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    params.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    params.legalStatus === LegalStatus.INDIAN_STATUS
-  const maxIncome = params.maritalStatus.partnered
-    ? params.partnerBenefitStatus.anyOas
+    input.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
+    input.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
+    input.legalStatus === LegalStatus.INDIAN_STATUS
+  const maxIncome = input.maritalStatus.partnered
+    ? input.partnerBenefitStatus.anyOas
       ? 25440
       : 46128
     : 19248
-  const meetsReqIncome = params.income <= maxIncome
+  const meetsReqIncome = input.income <= maxIncome
 
   // main checks
   if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
@@ -43,20 +43,20 @@ export default function checkGis(params: CalculationInput): BenefitResult {
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.OAS,
-          detail: params._translations.detail.conditional,
+          detail: input._translations.detail.conditional,
         }
       } else {
         const entitlementResult = new GisEntitlement(
-          params.income,
+          input.income,
           oasResultIsPartial,
-          params.maritalStatus,
-          params.partnerBenefitStatus
+          input.maritalStatus,
+          input.partnerBenefitStatus
         ).getEntitlement()
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
           entitlementResult,
           reason: ResultReason.NONE,
-          detail: params._translations.detail.eligible,
+          detail: input._translations.detail.eligible,
         }
       }
     } else {
@@ -64,44 +64,44 @@ export default function checkGis(params: CalculationInput): BenefitResult {
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: params._translations.detail.eligibleWhen65,
+        detail: input._translations.detail.eligibleWhen65,
       }
     }
-  } else if (!meetsReqLiving && params.livingCountry !== undefined) {
+  } else if (!meetsReqLiving && input.livingCountry !== undefined) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.LIVING_COUNTRY,
-      detail: params._translations.detail.mustBeInCanada,
+      detail: input._translations.detail.mustBeInCanada,
     }
   } else if (oasResult.eligibilityResult == ResultKey.INELIGIBLE) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: params._translations.detail.mustBeOasEligible,
+      detail: input._translations.detail.mustBeOasEligible,
     }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: params._translations.detail.mustMeetIncomeReq,
+      detail: input._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqLegal) {
-    if (params.legalStatus === LegalStatus.SPONSORED) {
+    if (input.legalStatus === LegalStatus.SPONSORED) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: params._translations.detail.dependingOnLegalSponsored,
+        detail: input._translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: params._translations.detail.dependingOnLegal,
+        detail: input._translations.detail.dependingOnLegal,
       }
     }
   } else if (oasResult.eligibilityResult == ResultKey.MORE_INFO) {
@@ -109,7 +109,7 @@ export default function checkGis(params: CalculationInput): BenefitResult {
       eligibilityResult: ResultKey.MORE_INFO,
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
-      detail: params._translations.detail.mustCompleteOasCheck,
+      detail: input._translations.detail.mustCompleteOasCheck,
     }
   }
 }
