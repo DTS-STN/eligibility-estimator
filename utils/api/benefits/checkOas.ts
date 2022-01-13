@@ -5,6 +5,7 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
+import MAX_OAS_ENTITLEMENT from '../definitions/oasEntitlement'
 import { OasSchema } from '../definitions/schemas'
 import { BenefitResult, CalculationInput } from '../definitions/types'
 import { validateRequestForBenefit } from '../helpers/validator'
@@ -33,7 +34,7 @@ export default function checkOas(
   if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
     if (meetsReqAge) {
       const entitlementResult = roundToTwo(
-        Math.min(value.yearsInCanadaSince18 / 40, 1) * 635.26
+        Math.min(value.yearsInCanadaSince18 / 40, 1) * MAX_OAS_ENTITLEMENT
       )
       const partialOas = value.yearsInCanadaSince18 < 40
       const reason = partialOas ? ResultReason.PARTIAL_OAS : ResultReason.NONE
