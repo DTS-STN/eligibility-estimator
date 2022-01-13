@@ -1,13 +1,23 @@
 import * as React from 'react'
 
-type Section = { title: string; complete: boolean; first?: boolean }
+type Section = {
+  title: string
+  complete: boolean
+  first?: boolean
+  last?: boolean
+}
 
 interface ProgressBarProps {
   sections: Section[]
   estimateSection?: boolean
 }
 
-const ProgressSection: React.FC<Section> = ({ title, complete, first }) => {
+const ProgressSection: React.FC<Section> = ({
+  title,
+  complete,
+  first,
+  last,
+}) => {
   return (
     <>
       {!first && (
@@ -17,7 +27,6 @@ const ProgressSection: React.FC<Section> = ({ title, complete, first }) => {
           }`}
         ></div>
       )}
-
       <div className="flex items-center">
         <svg
           width="28"
@@ -26,7 +35,7 @@ const ProgressSection: React.FC<Section> = ({ title, complete, first }) => {
           xmlns="http://www.w3.org/2000/svg"
           className={`${
             complete ? 'text-primary' : 'text-[#B7B7B7]'
-          } fill-current stroke-white`}
+          } fill-current stroke-white z-10`}
         >
           <rect
             x="1.5"
@@ -43,6 +52,14 @@ const ProgressSection: React.FC<Section> = ({ title, complete, first }) => {
             strokeLinejoin="round"
             stroke={complete ? '#fff' : 'text-[#B7B7B7]'}
           />
+        </svg>
+        <svg
+          className={`${
+            complete ? 'text-primary' : 'text-[#B7B7B7]'
+          } fill-current stroke-white absolute`}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {!last && <rect x="11.5" y="83" width="6" height="22" />}
         </svg>
         <span
           className={`whitespace-nowrap mx-1.5 font-semibold ${
@@ -79,6 +96,7 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
         title="Estimation"
         complete={estimateSection}
         first={false}
+        last={true}
       />
     </div>
   )
