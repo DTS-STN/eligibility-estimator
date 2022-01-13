@@ -126,7 +126,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     />
                   </div>
                 )}
-                {field.type == 'dropdown' && (
+                {(field.type == FieldType.DROPDOWN ||
+                  field.type == FieldType.DROPDOWN_SEARCHABLE) && (
                   <div className="pb-8">
                     <FormSelect
                       field={field}
@@ -135,7 +136,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     />
                   </div>
                 )}
-                {(field.type == 'radio' || field.type == 'boolean') && (
+                {(field.type == FieldType.RADIO ||
+                  field.type == FieldType.BOOLEAN) && (
                   <div className="pb-8">
                     <Radio
                       name={field.key}

@@ -5,7 +5,7 @@ import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 import { FormField } from '../../client-state/models/FormField'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -58,7 +58,7 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             }),
             indicatorSeparator: (styles) => ({
               ...styles,
-              opacity: field.key == FieldKey.MARITAL_STATUS ? 0 : 1,
+              opacity: field.key == FieldType.DROPDOWN_SEARCHABLE ? 1 : 0,
             }),
           }}
           className="rselect"
@@ -82,8 +82,12 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
             field.handleChange(newValue)
           }}
           closeMenuOnScroll={false}
-          isSearchable={field.key == FieldKey.MARITAL_STATUS ? undefined : true}
-          isClearable={field.key == FieldKey.MARITAL_STATUS ? undefined : true}
+          isSearchable={
+            field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
+          }
+          isClearable={
+            field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
+          }
         />
       </div>
     </>
