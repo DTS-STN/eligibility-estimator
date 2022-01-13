@@ -77,15 +77,17 @@ export const useMediaQuery = (width) => {
   }, [])
 
   useEffect(() => {
-    const media = window.matchMedia(`(max-width: ${width}px)`)
-    media.addEventListener('change', updateTarget)
+    if (process.browser) {
+      const media = window.matchMedia(`(max-width: ${width}px)`)
+      media.addEventListener('change', updateTarget)
 
-    // Check on mount (callback is not called until a change occurs)
-    if (media.matches) {
-      setTargetReached(true)
+      // Check on mount (callback is not called until a change occurs)
+      if (media.matches) {
+        setTargetReached(true)
+      }
+
+      return () => media.removeEventListener('change', updateTarget)
     }
-
-    return () => media.removeEventListener('change', updateTarget)
   }, [])
 
   return targetReached
