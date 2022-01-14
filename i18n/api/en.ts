@@ -328,7 +328,7 @@ const en: Translations = {
     moreInfo:
       'You need to answer the remaining questions on the previous tab before an estimation can be provided.',
     unavailable:
-      'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.\nContact Service Canada',
+      'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.\n<a href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html" target="_blank">Contact Service Canada</a>',
     availableEligible:
       'Based on the information you have provided, you are likely eligible for the following benefits.',
     availableIneligible:
