@@ -49,8 +49,16 @@ export const ResultsTable = observer(() => {
             <td>${root.afs && root.afs.entitlementResult}</td>
           </tr>
           <tr className="border-t border-content font-semibold ">
-            <td colSpan={2}>Total Monthly Benefit Amount</td>
-            <td>${root.totalEntitlementInDollars}</td>
+            <td colSpan={2}>Estimated Total Monthly Benefit Amount</td>
+            <td>
+              $
+              {(
+                root.oas.entitlementResult +
+                root.gis.entitlementResult +
+                root.allowance.entitlementResult +
+                root.afs.entitlementResult
+              ).toFixed(2)}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -105,6 +113,20 @@ export const ResultsTable = observer(() => {
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
             {root.afs.entitlementResult}
+          </p>
+        </div>
+        <div className="mb-4">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-[#111]">
+            Estimated Total Monthly Benefit Amount
+          </p>
+          <p className="px-1.5 py-1.5 font-bold">
+            $
+            {(
+              root.oas.entitlementResult +
+              root.gis.entitlementResult +
+              root.allowance.entitlementResult +
+              root.afs.entitlementResult
+            ).toFixed(2)}
           </p>
         </div>
       </div>

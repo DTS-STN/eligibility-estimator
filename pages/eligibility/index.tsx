@@ -13,7 +13,7 @@ import { ConditionalLinks } from '../../components/ConditionalLinks'
 import { ContactCTA } from '../../components/ContactCTA'
 import { FAQ } from '../../components/FAQ'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
-import { useStore } from '../../components/Hooks'
+import { useMediaQuery, useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 import ProgressBar from '../../components/ProgressBar'
@@ -26,7 +26,7 @@ import { validateIncome } from '../../utils/web/helpers/validator'
 const Eligibility: NextPage = () => {
   const { query } = useRouter()
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
-
+  const isMobile = useMediaQuery(992)
   // check if income is too high to participate in calculation
   const incomeTooHigh = query && validateIncome(query.income as string)
 
@@ -187,7 +187,11 @@ const Eligibility: NextPage = () => {
                     {root.summary.details}
                   </Alert>
                   {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-                    <div className="mt-10 w-full h-[450px] relative">
+                    <div
+                      className={`mt-10 w-full relative ${
+                        !isMobile ? 'h-[450px]' : 'h-[180px]'
+                      }`}
+                    >
                       <Image
                         src={'/people.png'}
                         layout="fill"
