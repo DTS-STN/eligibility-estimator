@@ -330,7 +330,7 @@ const en: Translations = {
     unavailable:
       'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.\nContact Service Canada',
     availableEligible:
-      'Based on the information you have provided, you are likely eligible for the following benefits.',
+      'Based on the information you have provided, you are likely eligible for the following benefits. Note that this only provides an estimate of your monthly payment.',
     availableIneligible:
       'Based on the information you have provided, you are likely not eligible for any benefits. See the details below for more information.',
   },
