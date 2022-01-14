@@ -46,6 +46,16 @@ export const RootStore = types
     summary: Summary,
     activeTab: types.optional(types.number, 0),
   })
+  .views((self) => ({
+    get totalEntitlementInDollars() {
+      return (
+        self.oas.entitlementResult +
+        self.gis.entitlementResult +
+        self.allowance?.entitlementResult +
+        self.afs?.entitlementResult
+      ).toFixed(2)
+    },
+  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num
