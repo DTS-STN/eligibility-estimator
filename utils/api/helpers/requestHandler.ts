@@ -60,6 +60,10 @@ export class RequestHandler {
     )
   }
 
+  /**
+   * Takes the sanitizedInput provided by Joi, and transforms it into a more convenient object to work with.
+   * Adds FieldHelpers, normalizes income, adds translations.
+   */
   static processSanitizedInput(sanitizedInput: RequestInput): ProcessedInput {
     const translations = getTranslations(sanitizedInput._language)
 
@@ -78,6 +82,9 @@ export class RequestHandler {
     }
   }
 
+  /**
+   * Accepts the ProcessedInput and builds a list of required fields based on that input.
+   */
   static getRequiredFields(input: ProcessedInput): FieldKey[] {
     const requiredFields = [FieldKey.INCOME]
     if (input.income >= 129757) {
@@ -112,6 +119,9 @@ export class RequestHandler {
     return requiredFields
   }
 
+  /**
+   * Compares the required fields with what has been provided, and builds a list of what is missing.
+   */
   static getMissingFields(
     input: ProcessedInput,
     requiredFields: Array<FieldKey>
