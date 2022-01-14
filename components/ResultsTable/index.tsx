@@ -50,15 +50,7 @@ export const ResultsTable = observer(() => {
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>Estimated Total Monthly Benefit Amount</td>
-            <td>
-              $
-              {(
-                root.oas.entitlementResult +
-                root.gis.entitlementResult +
-                root.allowance.entitlementResult +
-                root.afs.entitlementResult
-              ).toFixed(2)}
-            </td>
+            <td>${root.totalEntitlementInDollars}</td>
           </tr>
         </tbody>
       </table>
@@ -120,13 +112,7 @@ export const ResultsTable = observer(() => {
             Estimated Total Monthly Benefit Amount
           </p>
           <p className="px-1.5 py-1.5 font-bold">
-            $
-            {(
-              root.oas.entitlementResult +
-              root.gis.entitlementResult +
-              root.allowance.entitlementResult +
-              root.afs.entitlementResult
-            ).toFixed(2)}
+            ${root.totalEntitlementInDollars}
           </p>
         </div>
       </div>
