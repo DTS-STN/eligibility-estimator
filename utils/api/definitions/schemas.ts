@@ -1,10 +1,6 @@
 import Joi from 'joi'
 import { Language } from '../../../i18n/api'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
-import {
-  MaritalStatusHelper,
-  PartnerBenefitStatusHelper,
-} from '../helpers/fieldClasses'
 import { LegalStatus, MaritalStatus, PartnerBenefitStatus } from './enums'
 
 /**
@@ -51,6 +47,4 @@ export const RequestSchema = Joi.object({
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
-  _maritalStatus: Joi.object().instance(MaritalStatusHelper),
-  _partnerBenefitStatus: Joi.object().instance(PartnerBenefitStatusHelper),
 })
