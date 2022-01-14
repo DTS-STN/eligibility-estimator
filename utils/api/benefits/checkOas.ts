@@ -1,11 +1,11 @@
 import { ResultKey, ResultReason } from '../definitions/enums'
-import MAX_OAS_ENTITLEMENT from '../definitions/oasEntitlement'
+import { MAX_OAS_ENTITLEMENT, MAX_OAS_INCOME } from '../definitions/legalValues'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 
 export default function checkOas(input: ProcessedInput): BenefitResult {
   // helpers
   const meetsReqAge = input.age >= 65
-  const meetsReqIncome = input.income < 129757
+  const meetsReqIncome = input.income < MAX_OAS_INCOME
   const requiredYearsInCanada = input.livingCountry.canada ? 10 : 20
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
   const meetsReqLegal = input.legalStatus.canadian
