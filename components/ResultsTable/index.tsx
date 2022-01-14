@@ -63,10 +63,12 @@ export const ResultsTable = observer(() => {
             <td colSpan={2}>Total Monthly Benefit Amount</td>
             <td>
               $
-              {root.oas.entitlementResult +
+              {(
+                root.oas.entitlementResult +
                 root.gis.entitlementResult +
                 root.allowance?.entitlementResult +
-                root.afs?.entitlementResult}
+                root.afs?.entitlementResult
+              ).toFixed(2)}
             </td>
           </tr>
         </tbody>
