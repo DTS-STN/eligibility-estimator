@@ -21,6 +21,8 @@ import {
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
 import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
+import { OutputItem } from '../../../utils/api/scrapers/_base'
+import scraperData from '../../../utils/api/scrapers/output'
 import {
   mockGetRequest,
   mockGetRequestError,
@@ -129,6 +131,22 @@ describe('openapi checks', () => {
       x['$ref'].replace('#/components/parameters/', '')
     )
     expect(openApiPathParamsStripped).toEqual(Object.values(enumKeys))
+  })
+})
+
+describe('scraper tests', () => {
+  it("the scraped data's last entry is less than one", async () => {
+    const toVerify: { data: OutputItem[]; key: string }[] = [
+      { data: scraperData.single, key: 'gis' },
+      { data: scraperData.partneredAndOas, key: 'gis' },
+      { data: scraperData.partneredNoOas, key: 'gis' },
+      { data: scraperData.partneredAllowance, key: 'allowance' },
+      { data: scraperData.partneredSurvivor, key: 'afs' },
+    ]
+    toVerify.forEach((value) => {
+      const last = value.data[value.data.length - 1][value.key]
+      expect(last).toBeLessThan(1)
+    })
   })
 })
 
