@@ -15,7 +15,7 @@ interface ScraperCollection {
   partneredSurvivor: OutputItemAfs[]
 }
 
-const data: ScraperCollection = {
+const scraperData: ScraperCollection = {
   single,
   partneredAndOas,
   partneredNoOas,
@@ -23,4 +23,4 @@ const data: ScraperCollection = {
   partneredSurvivor,
 }
 
-export default data
+export default scraperData

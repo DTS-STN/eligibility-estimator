@@ -6,7 +6,7 @@ class SingleScraper extends BaseScraper {
       tableUrl: (pageNo) =>
         `https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab1-${pageNo}.html`,
       outputFileName: 'single',
-      numIterations: 53,
+      numIterations: 54,
     })
   }
 }
