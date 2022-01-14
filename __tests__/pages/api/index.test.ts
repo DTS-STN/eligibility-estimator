@@ -596,9 +596,9 @@ describe('summary object checks', () => {
 })
 
 describe('basic OAS scenarios', () => {
-  it('returns "ineligible" when income over 129757', async () => {
+  it('returns "ineligible" when income equal to 133141', async () => {
     const res = await mockPartialGetRequest({
-      income: 129758,
+      income: 133141,
     })
     expect(res.body.results.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.oas.reason).toEqual(ResultReason.INCOME)
@@ -953,9 +953,9 @@ describe('basic GIS scenarios', () => {
     )
     expect(res.body.results.gis.reason).toEqual(ResultReason.LEGAL_STATUS)
   })
-  it('returns "ineligible" when single and income over 19248', async () => {
+  it('returns "ineligible" when single and income equal to 19464', async () => {
     const res = await mockGetRequest({
-      income: 19249,
+      income: 19464,
       age: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
@@ -985,9 +985,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "ineligible" when married and no partner OAS and income over 46128', async () => {
+  it('returns "ineligible" when married and no partner OAS and income equal to 46656', async () => {
     const res = await mockGetRequest({
-      income: 46129,
+      income: 46656,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1001,9 +1001,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "eligible" when married and no partner OAS and income under 45128 and partner income 1000', async () => {
+  it('returns "eligible" when married and no partner OAS and income under 45656 and partner income 1000', async () => {
     const res = await mockGetRequest({
-      income: 45127,
+      income: 45655,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1017,9 +1017,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "ineligible" when married and partner OAS and income over 25440 and partner income 0', async () => {
+  it('returns "ineligible" when married and partner OAS and income equal to 25728 and partner income 0', async () => {
     const res = await mockGetRequest({
-      income: 25441,
+      income: 25728,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1033,9 +1033,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "ineligible" when married and partner OAS and income over 24440 and partner income 1000', async () => {
+  it('returns "ineligible" when married and partner OAS and income equal to 24728 and partner income 1000', async () => {
     const res = await mockGetRequest({
-      income: 24441,
+      income: 24728,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1247,9 +1247,9 @@ describe('GIS entitlement scenarios', () => {
 })
 
 describe('basic Allowance scenarios', () => {
-  it('returns "ineligible" when income over (or equal to) 35616', async () => {
+  it('returns "ineligible" when income equal to 36048', async () => {
     const res = await mockGetRequest({
-      income: 35616,
+      income: 36048,
       age: 60,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1578,9 +1578,9 @@ describe('Allowance entitlement scenarios', () => {
 })
 
 describe('basic Allowance for Survivor scenarios', () => {
-  it('returns "ineligible" when income over (or equal to) 25920', async () => {
+  it('returns "ineligible" when income equal to 26256', async () => {
     const res = await mockGetRequest({
-      income: 25920,
+      income: 26256,
       age: 60,
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
