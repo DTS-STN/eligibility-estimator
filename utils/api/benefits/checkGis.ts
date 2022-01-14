@@ -1,4 +1,4 @@
-import { LivingCountry, ResultKey, ResultReason } from '../definitions/enums'
+import { ResultKey, ResultReason } from '../definitions/enums'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 import {
   MaritalStatusHelper,
@@ -14,7 +14,7 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
 
   // helpers
   const meetsReqAge = input.age >= 65
-  const meetsReqLiving = input.livingCountry === LivingCountry.CANADA
+  const meetsReqLiving = input.livingCountry.canada
   const oasResultIsPartial = oasResult.reason == ResultReason.PARTIAL_OAS
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
@@ -59,7 +59,7 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
         detail: input._translations.detail.eligibleWhen65,
       }
     }
-  } else if (!meetsReqLiving && input.livingCountry !== undefined) {
+  } else if (!meetsReqLiving && input.livingCountry.provided) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,

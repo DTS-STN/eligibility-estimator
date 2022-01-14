@@ -1,4 +1,4 @@
-import { LivingCountry, ResultKey, ResultReason } from '../definitions/enums'
+import { ResultKey, ResultReason } from '../definitions/enums'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 import gisTables from '../scrapers/output'
 import { OutputItemAllowance } from '../scrapers/partneredAllowanceScraper'
@@ -85,10 +85,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
       detail: input._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqYears) {
-    if (
-      input.livingCountry === LivingCountry.AGREEMENT ||
-      input.everLivedSocialCountry
-    ) {
+    if (input.livingCountry.agreement || input.everLivedSocialCountry) {
       if (meetsReqAge) {
         return {
           eligibilityResult: ResultKey.CONDITIONAL,
@@ -142,7 +139,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
         detail: input._translations.detail.dependingOnLegal,
       }
     }
-  } else if (input.livingCountry === LivingCountry.NO_AGREEMENT) {
+  } else if (input.livingCountry.noAgreement) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,

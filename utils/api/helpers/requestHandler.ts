@@ -3,7 +3,6 @@ import checkAfs from '../benefits/checkAfs'
 import checkAllowance from '../benefits/checkAllowance'
 import checkGis from '../benefits/checkGis'
 import checkOas from '../benefits/checkOas'
-import { LivingCountry } from '../definitions/enums'
 import {
   FieldData,
   fieldDefinitions,
@@ -16,10 +15,10 @@ import {
   RequestInput,
   SummaryObject,
 } from '../definitions/types'
-import normalizeLivingCountry from './countryUtils'
 import {
   FieldHelper,
   LegalStatusHelper,
+  LivingCountryHelper,
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from './fieldClasses'
@@ -69,7 +68,7 @@ export class RequestHandler {
       income: sanitizedInput.partnerIncome
         ? sanitizedInput.income + sanitizedInput.partnerIncome
         : sanitizedInput.income,
-      livingCountry: normalizeLivingCountry(sanitizedInput.livingCountry),
+      livingCountry: new LivingCountryHelper(sanitizedInput.livingCountry),
       legalStatus: new LegalStatusHelper(sanitizedInput.legalStatus),
       maritalStatus: new MaritalStatusHelper(sanitizedInput.maritalStatus),
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
@@ -104,10 +103,8 @@ export class RequestHandler {
       )
     }
     if (
-      (input.livingCountry === LivingCountry.CANADA &&
-        input.yearsInCanadaSince18 < 10) ||
-      (input.livingCountry === LivingCountry.NO_AGREEMENT &&
-        input.yearsInCanadaSince18 < 20)
+      (input.livingCountry.canada && input.yearsInCanadaSince18 < 10) ||
+      (input.livingCountry.noAgreement && input.yearsInCanadaSince18 < 20)
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }

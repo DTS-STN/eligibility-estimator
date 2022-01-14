@@ -1,13 +1,13 @@
 import { Language, Translations } from '../../../i18n/api'
 import {
   LegalStatusHelper,
+  LivingCountryHelper,
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from '../helpers/fieldClasses'
 import {
   EstimationSummaryState,
   LegalStatus,
-  LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
@@ -39,7 +39,7 @@ export interface ProcessedInput {
   income?: number // sum of personal and partner
   age?: number
   maritalStatus: MaritalStatusHelper
-  livingCountry?: LivingCountry
+  livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
   legalStatusOther?: string
   yearsInCanadaSince18?: number
