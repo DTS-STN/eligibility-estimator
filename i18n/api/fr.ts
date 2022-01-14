@@ -20,8 +20,8 @@ const fr: Translations = {
     eligible: 'Admissible',
     ineligible: 'Non admissible',
     conditional: 'FRENCH: Unavailable',
-    moreInfo: 'FRENCH: Need more information...',
-    invalid: 'FRENCH: Request is invalid!',
+    moreInfo: "Besoin de plus d'informations...",
+    invalid: "Votre demande n'est pas valide!",
   },
   question: {
     income: 'Quel est votre revenu net annuel actuel en dollars canadiens?',
@@ -332,23 +332,23 @@ const fr: Translations = {
     dependingOnLegalWhen60:
       'Vous pourriez être admissible à cette prestation quand vous aurez 60 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
     dependingOnLegalWhen65:
-      'Vous pourriez avoir droit à cette prestation quand vous aurez 65 ans, selon votre statut juridique au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation quand vous aurez 65 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
   },
   summaryTitle: {
-    moreInfo: 'FRENCH: More information needed',
-    unavailable: 'FRENCH: Unable to provide an estimation',
-    availableEligible: 'FRENCH: Likely eligible for benefits',
-    availableIneligible: 'FRENCH: Likely not eligible for benefits',
+    moreInfo: "Plus d'informations nécessaires",
+    unavailable: 'Il est impossible de fournir une estimation',
+    availableEligible: 'Probablement admissible aux prestations',
+    availableIneligible: 'Probablement non admissible aux prestations',
   },
   summaryDetails: {
     moreInfo:
-      'FRENCH: You need to answer the remaining questions on the previous tab before an estimation can be provided.',
+      "Vous devez répondre aux autres questions de l'onglet précédent avant qu'une estimation puisse être fournie.",
     unavailable:
       "D'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.\nContactez Service Canada",
     availableEligible:
       'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes.',
     availableIneligible:
-      "FRENCH: Given the answers you've provided, you are likely not eligible for any benefits. See the details below for more information.",
+      "D'après les informations que vous avez fournies, vous n'avez probablement pas droit à des prestations. Consultez les détails ci-dessous pour plus d'informations.",
   },
 }
 export default fr
