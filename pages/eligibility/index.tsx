@@ -179,7 +179,11 @@ const Eligibility: NextPage = () => {
                     ]}
                     estimateSection
                   />
-                  <Alert title={root.summary.title} type={root.summary.state}>
+                  <Alert
+                    title={root.summary.title}
+                    type={root.summary.state}
+                    insertHTML
+                  >
                     {root.summary.details}
                   </Alert>
                   {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (

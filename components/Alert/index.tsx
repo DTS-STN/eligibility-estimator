@@ -7,9 +7,10 @@ const OFFSET_WIDTH = 28
 
 export const Alert: React.VFC<{
   title: string
-  children: React.ReactNode
+  children: React.ReactNode | string
   type: EstimationSummaryState
-}> = ({ title, children, type }) => {
+  insertHTML?: boolean
+}> = ({ title, children, type, insertHTML }) => {
   const [height, setHeight] = useState<number>(null)
   const ref = useRef(null)
 
@@ -59,7 +60,14 @@ export const Alert: React.VFC<{
         </div>
         <div className="ml-3 flex flex-col pt-2">
           <h5 className="h5 mb-3 text-content">{title}</h5>
-          <div className="text-content">{children}</div>
+          {!insertHTML ? (
+            <div className="text-content">{children}</div>
+          ) : (
+            <div
+              className="summary-link text-content"
+              dangerouslySetInnerHTML={{ __html: children as string }}
+            ></div>
+          )}
         </div>
       </div>
     </div>

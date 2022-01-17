@@ -114,4 +114,7 @@
   .question-link a {
     @apply text-default-text underline font-semibold;
   }
+  .summary-link a {
+    @apply text-default-text underline;
+  }
 }
