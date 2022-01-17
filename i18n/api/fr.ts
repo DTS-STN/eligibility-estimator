@@ -19,7 +19,7 @@ const fr: Translations = {
   result: {
     eligible: 'Admissible',
     ineligible: 'Non admissible',
-    conditional: 'FRENCH: Conditionally eligible...',
+    conditional: 'FRENCH: Unavailable',
     moreInfo: 'FRENCH: Need more information...',
     invalid: 'FRENCH: Request is invalid!',
   },
@@ -34,8 +34,7 @@ const fr: Translations = {
     maritalStatus: 'Quel est votre état civil actuel?',
     partnerIncome:
       'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
-    partnerReceivingOas:
-      'FRENCH: Does your partner receive a full OAS pension?',
+    partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     everLivedSocialCountry:
       'Avez-vous déjà vécu dans un pays avec un accord de <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">sécurité sociale</a> établi?',
   },
@@ -63,6 +62,27 @@ const fr: Translations = {
       { key: 'widowed', text: 'Partenaire survivant/veuf(ve)' },
       { key: 'divorced', text: 'Divorcé(e)' },
       { key: 'separated', text: 'Séparé(e)' },
+    ],
+    partnerBenefitStatus: [
+      {
+        key: 'fullOas',
+        text: 'Mon partenaire reçoit la pleine pension de la SV',
+      },
+      {
+        key: 'fullOasGis',
+        text: 'Mon partenaire reçoit la pleine pension de la SV et le SRG',
+      },
+      {
+        key: 'partialOas',
+        text: 'Mon partenaire reçoit une pension partielle de la SV',
+      },
+      {
+        key: 'partialOasGis',
+        text: 'Mon partenaire reçoit une pension partielle de la SV et le SRG',
+      },
+      { key: 'allowance', text: "Mon partenaire reçoit l'Allocation" },
+      { key: 'none', text: 'Aucune de ces réponses' },
+      { key: 'helpMe', text: 'Aidez-moi à savoir' },
     ],
     livingCountry: [
       { key: 'CAN', text: 'Canada' },
@@ -265,6 +285,8 @@ const fr: Translations = {
   detail: {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligibleEntitlementUnavailable:
+      'FRENCH: Based on the information provided, you are likely eligible for this benefit. However, an entitlement estimation could not be provided, you are encouraged to contact Service Canada for more information.',
     eligiblePartialOas:
       "D'après les informations que vous ou votre partenaire avez fournies, vous avez droit à une pension partielle de la Sécurité de la vieillesse. Vous devriez communiquer avec Service Canada pour obtenir plus d'information sur les montants des paiements de l'Allocation/Supplément de revenu garanti.",
     eligibleWhen60ApplyNow:

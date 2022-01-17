@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import { useStore } from '../Hooks'
+import { EligibilityDetails } from './EligibilityDetails'
 
 export const ResultsTable = observer(() => {
   const root = useStore()
@@ -18,58 +19,38 @@ export const ResultsTable = observer(() => {
           <tr className="">
             <td>Old Age Security (OAS)</td>
             <td>
-              <>
-                {root.oas.detail.split('\n').map((str, i) => (
-                  <p key={i}>{str}</p>
-                ))}
-              </>
+              <EligibilityDetails eligibilityType={root.oas} />
             </td>
             <td>${root.oas.entitlementResult}</td>
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>Guaranteed Income Supplement (GIS)</td>
             <td>
-              <>
-                {root.gis.detail.split('\n').map((str, i) => (
-                  <p key={i}>{str}</p>
-                ))}
-              </>
+              <EligibilityDetails eligibilityType={root.gis} />
             </td>
-            <td>${root.gis.entitlementResult}</td>
+            <td>
+              {root.gis.entitlementResult !== -1
+                ? `$${root.gis.entitlementResult}`
+                : 'Unavailable'}
+            </td>
           </tr>
           <tr>
             <td>Allowance</td>
             <td>
-              <>
-                {root.allowance.detail.split('\n').map((str, i) => (
-                  <p key={i}>{str}</p>
-                ))}
-              </>
+              <EligibilityDetails eligibilityType={root.allowance} />
             </td>
             <td>${root.allowance && root.allowance.entitlementResult}</td>
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>Allowance for Survivor</td>
             <td>
-              <>
-                {root.afs.detail.split('\n').map((str, i) => (
-                  <p key={i}>{str}</p>
-                ))}
-              </>
+              <EligibilityDetails eligibilityType={root.afs} />
             </td>
             <td>${root.afs && root.afs.entitlementResult}</td>
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>Total Monthly Benefit Amount</td>
-            <td>
-              $
-              {(
-                root.oas.entitlementResult +
-                root.gis.entitlementResult +
-                root.allowance?.entitlementResult +
-                root.afs?.entitlementResult
-              ).toFixed(2)}
-            </td>
+            <td>${root.totalEntitlementInDollars}</td>
           </tr>
         </tbody>
       </table>
@@ -80,13 +61,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Eligibility: </span>
-            {root.oas.detail.split('\n').map((str, i) => {
-              return (
-                <p key={i} className={i == 0 ? `inline` : ''}>
-                  {str}
-                </p>
-              )
-            })}
+            <EligibilityDetails eligibilityType={root.oas} />
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
@@ -99,11 +74,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Eligibility: </span>
-            {root.gis.detail.split('\n').map((str, i) => (
-              <p key={i} className={i == 0 ? `inline` : ''}>
-                {str}
-              </p>
-            ))}
+            <EligibilityDetails eligibilityType={root.gis} />
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
@@ -116,11 +87,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Eligibility: </span>
-            {root.allowance.detail.split('\n').map((str, i) => (
-              <p key={i} className={i == 0 ? `inline` : ''}>
-                {str}
-              </p>
-            ))}
+            <EligibilityDetails eligibilityType={root.allowance} />
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
@@ -133,11 +100,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Eligibility: </span>
-            {root.afs.detail.split('\n').map((str, i) => (
-              <p key={i} className={i == 0 ? `inline` : ''}>
-                {str}
-              </p>
-            ))}
+            <EligibilityDetails eligibilityType={root.afs} />
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$

@@ -11,7 +11,7 @@ import {
 } from '../utils/api/definitions/enums'
 import { Form } from './models/Form'
 
-const Eligibility = types.model({
+export const Eligibility = types.model({
   eligibilityResult: types.maybe(types.enumeration(Object.values(ResultKey))),
   entitlementResult: types.maybe(types.number),
   reason: types.maybe(types.string),
@@ -46,6 +46,16 @@ export const RootStore = types
     summary: Summary,
     activeTab: types.optional(types.number, 0),
   })
+  .views((self) => ({
+    get totalEntitlementInDollars() {
+      return (
+        self.oas.entitlementResult +
+        (self.gis.entitlementResult !== -1 ? self.gis.entitlementResult : 0) + // gis can return a -1 for an unavailable calculation, correct for this
+        self.allowance?.entitlementResult +
+        self.afs?.entitlementResult
+      ).toFixed(2)
+    },
+  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num

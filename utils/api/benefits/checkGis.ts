@@ -1,50 +1,31 @@
-import { Translations } from '../../../i18n/api'
+import { ResultKey, ResultReason } from '../definitions/enums'
+import { BenefitResult, ProcessedInput } from '../definitions/types'
 import {
-  LegalStatus,
-  LivingCountry,
-  MaritalStatus,
-  ResultKey,
-  ResultReason,
-} from '../definitions/enums'
-import { GisSchema } from '../definitions/schemas'
-import { BenefitResult, CalculationInput } from '../definitions/types'
-import { validateRequestForBenefit } from '../helpers/validator'
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
+} from '../helpers/fieldClasses'
 import { OutputItemGis } from '../scrapers/_base'
 import gisTables from '../scrapers/output'
 import checkOas from './checkOas'
 
-export default function checkGis(
-  params: CalculationInput,
-  translations: Translations
-): BenefitResult {
-  // include OAS result
-  const oasResult = checkOas(params, translations)
-  const paramsWithOas = { ...params, _oasEligible: oasResult.eligibilityResult }
-
-  // validation
-  const { result, value } = validateRequestForBenefit(GisSchema, paramsWithOas)
-  // if the validation was able to return an error result, return it
-  if (result) return result
+export default function checkGis(input: ProcessedInput): BenefitResult {
+  // fetch OAS result
+  const oasResult = checkOas(input)
 
   // helpers
-  const meetsReqAge = value.age >= 65
-  const meetsReqLiving = value.livingCountry === LivingCountry.CANADA
+  const meetsReqAge = input.age >= 65
+  const meetsReqLiving = input.livingCountry.canada
+  const oasResultIsPartial = oasResult.reason == ResultReason.PARTIAL_OAS
   const meetsReqOas =
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
-  const meetsReqLegal =
-    value.legalStatus === LegalStatus.CANADIAN_CITIZEN ||
-    value.legalStatus === LegalStatus.PERMANENT_RESIDENT ||
-    value.legalStatus === LegalStatus.INDIAN_STATUS
-  const partnered =
-    value.maritalStatus == MaritalStatus.MARRIED ||
-    value.maritalStatus == MaritalStatus.COMMON_LAW
-  const maxIncome = partnered
-    ? value.partnerReceivingOas
+  const meetsReqLegal = input.legalStatus.canadian
+  const maxIncome = input.maritalStatus.partnered
+    ? input.partnerBenefitStatus.anyOas
       ? 25440
       : 46128
     : 19248
-  const meetsReqIncome = value.income <= maxIncome
+  const meetsReqIncome = input.income <= maxIncome
 
   // main checks
   if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
@@ -54,19 +35,24 @@ export default function checkGis(
           eligibilityResult: ResultKey.CONDITIONAL,
           entitlementResult: 0,
           reason: ResultReason.OAS,
-          detail: translations.detail.conditional,
+          detail: input._translations.detail.conditional,
         }
       } else {
         const entitlementResult = new GisEntitlement(
-          value.income,
-          value.maritalStatus,
-          value.partnerReceivingOas
+          input.income,
+          oasResultIsPartial,
+          input.maritalStatus,
+          input.partnerBenefitStatus
         ).getEntitlement()
+        const detail =
+          entitlementResult == -1
+            ? input._translations.detail.eligibleEntitlementUnavailable
+            : input._translations.detail.eligible
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
           entitlementResult,
           reason: ResultReason.NONE,
-          detail: translations.detail.eligible,
+          detail,
         }
       }
     } else {
@@ -74,44 +60,44 @@ export default function checkGis(
         eligibilityResult: ResultKey.INELIGIBLE,
         entitlementResult: 0,
         reason: ResultReason.AGE,
-        detail: translations.detail.eligibleWhen65,
+        detail: input._translations.detail.eligibleWhen65,
       }
     }
-  } else if (!meetsReqLiving && value.livingCountry !== undefined) {
+  } else if (!meetsReqLiving && input.livingCountry.provided) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.LIVING_COUNTRY,
-      detail: translations.detail.mustBeInCanada,
+      detail: input._translations.detail.mustBeInCanada,
     }
   } else if (oasResult.eligibilityResult == ResultKey.INELIGIBLE) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: translations.detail.mustBeOasEligible,
+      detail: input._translations.detail.mustBeOasEligible,
     }
   } else if (!meetsReqIncome) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.INCOME,
-      detail: translations.detail.mustMeetIncomeReq,
+      detail: input._translations.detail.mustMeetIncomeReq,
     }
   } else if (!meetsReqLegal) {
-    if (value.legalStatus === LegalStatus.SPONSORED) {
+    if (input.legalStatus.sponsored) {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: translations.detail.dependingOnLegalSponsored,
+        detail: input._translations.detail.dependingOnLegalSponsored,
       }
     } else {
       return {
         eligibilityResult: ResultKey.CONDITIONAL,
         entitlementResult: 0,
         reason: ResultReason.LEGAL_STATUS,
-        detail: translations.detail.dependingOnLegal,
+        detail: input._translations.detail.dependingOnLegal,
       }
     }
   } else if (oasResult.eligibilityResult == ResultKey.MORE_INFO) {
@@ -119,27 +105,32 @@ export default function checkGis(
       eligibilityResult: ResultKey.MORE_INFO,
       entitlementResult: 0,
       reason: ResultReason.MORE_INFO,
-      detail: translations.detail.mustCompleteOasCheck,
+      detail: input._translations.detail.mustCompleteOasCheck,
     }
   }
 }
 
 class GisEntitlement {
   income: number
-  maritalStatus: MaritalStatus
-  partnerReceivingOas: boolean
+  oasResultIsPartial: boolean
+  maritalStatus: MaritalStatusHelper
+  partnerBenefitStatus: PartnerBenefitStatusHelper
 
   constructor(
     income: number,
-    maritalStatus: MaritalStatus,
-    partnerReceivingOas: boolean
+    oasResultIsPartial: boolean,
+    maritalStatus: MaritalStatusHelper,
+    partnerBenefitStatus: PartnerBenefitStatusHelper
   ) {
     this.income = income
+    this.oasResultIsPartial = oasResultIsPartial
     this.maritalStatus = maritalStatus
-    this.partnerReceivingOas = partnerReceivingOas
+    this.partnerBenefitStatus = partnerBenefitStatus
   }
 
   getEntitlement(): number {
+    if (this.oasResultIsPartial) return -1
+    if (this.partnerBenefitStatus.partialOas) return -1
     const gisEntitlementItem = this.getTableItem()
     return gisEntitlementItem ? gisEntitlementItem.gis : 0
   }
@@ -152,26 +143,20 @@ class GisEntitlement {
   }
 
   getTable(): OutputItemGis[] {
-    if (
-      this.maritalStatus === MaritalStatus.SINGLE ||
-      this.maritalStatus === MaritalStatus.WIDOWED ||
-      this.maritalStatus === MaritalStatus.DIVORCED ||
-      this.maritalStatus === MaritalStatus.SEPARATED
-    ) {
+    if (this.maritalStatus.single) {
       // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
       return gisTables.single
-    } else if (
-      this.maritalStatus === MaritalStatus.MARRIED ||
-      this.maritalStatus === MaritalStatus.COMMON_LAW
-    ) {
-      if (this.partnerReceivingOas) {
+    } else if (this.maritalStatus.partnered) {
+      if (this.partnerBenefitStatus.fullOas) {
         // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
         return gisTables.partneredAndOas
-      } else if (!this.partnerReceivingOas) {
+      } else if (this.partnerBenefitStatus.allowance) {
+        // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
+        return gisTables.partneredAllowance
+      } else if (!this.partnerBenefitStatus.anyOas) {
         // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
         return gisTables.partneredNoOas
       }
-      // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
     }
   }
 }

@@ -23,6 +23,16 @@ export enum LegalStatus {
   OTHER = 'other',
 }
 
+export enum PartnerBenefitStatus {
+  FULL_OAS = 'fullOas',
+  FULL_OAS_GIS = 'fullOasGis',
+  PARTIAL_OAS = 'partialOas',
+  PARTIAL_OAS_GIS = 'partialOasGis',
+  ALLOWANCE = 'allowance',
+  NONE = 'none',
+  HELP_ME = 'helpMe',
+}
+
 export enum LivingCountry {
   CANADA = 'CAN',
   AGREEMENT = 'AGREEMENT',
@@ -33,7 +43,7 @@ export enum LivingCountry {
 export enum ResultKey {
   ELIGIBLE = `eligible`,
   INELIGIBLE = `ineligible`,
-  CONDITIONAL = `conditional`,
+  CONDITIONAL = `unavailable`,
   MORE_INFO = 'moreInfo',
   INVALID = 'invalid',
 }

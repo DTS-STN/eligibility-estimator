@@ -4,14 +4,14 @@ import { FieldCategory } from './enums'
 export enum FieldKey {
   INCOME = 'income',
   AGE = 'age',
+  MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
   LEGAL_STATUS_OTHER = 'legalStatusOther',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
-  MARITAL_STATUS = 'maritalStatus',
-  PARTNER_INCOME = 'partnerIncome',
-  PARTNER_RECEIVING_OAS = 'partnerReceivingOas',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
+  PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
+  PARTNER_INCOME = 'partnerIncome',
 }
 
 export enum FieldType {
@@ -81,11 +81,11 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.BOOLEAN,
     default: undefined,
   },
-  [FieldKey.PARTNER_RECEIVING_OAS]: {
-    key: FieldKey.PARTNER_RECEIVING_OAS,
+  [FieldKey.PARTNER_BENEFIT_STATUS]: {
+    key: FieldKey.PARTNER_BENEFIT_STATUS,
     category: { key: FieldCategory.PARTNER_DETAILS },
     order: 9,
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.PARTNER_INCOME]: {

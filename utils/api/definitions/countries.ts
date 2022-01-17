@@ -3,11 +3,15 @@ interface CountryConfig {
   agreement: boolean
 }
 
-// the ordering here is not used - to order things, update the translations.
-// ensure AGREEMENT exists here as a country.
+/**
+ * The master list of countries. Countries need to exist here, and have a translation in both language files.
+ * The ordering here is not used - to order things, update the translations.
+ * Ensure AGREEMENT and NO_AGREEMENT exists here as a country code.
+ */
 export const countryList: CountryConfig[] = [
   { code: 'CAN', agreement: true },
   { code: 'AGREEMENT', agreement: true },
+  { code: 'NO_AGREEMENT', agreement: false },
   { code: 'AFG', agreement: false },
   { code: 'ALB', agreement: false },
   { code: 'DZA', agreement: false },

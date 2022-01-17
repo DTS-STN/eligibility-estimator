@@ -11,8 +11,8 @@
     "<p><span style='font-weight: bold;'>Common-Law</span>: You have lived continuously with your partner in a marital-type relationship for a minimum of one year.</p><br /> <p><span style='font-weight: bold;'>Divorced</span>: You are officially separated and have legally ended your marriage.</p><br /> <p><span style='font-weight: bold;'>Married</span>: You and your spouse have had a ceremony that legally binds you to each other. Your marriage must be legally recognized in the country where it was performed and in Canada.</p><br /> <p><span style='font-weight: bold;'>Single</span>: You have never been married and are not in a common-law relationship.</p><br /> <p><span style='font-weight: bold;'>Surviving Partner/Widowed</span>: Your spouse has died and that you have not remarried or entered into a common-law relationship.</p><br/><p><span style='font-weight: bold;'>Separated:</span> You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled.</p>"
   ],
 
-  "partnerReceivingOas": [
-    "Partner's Eligibility to OAS",
+  "partnerBenefitStatus": [
+    "Partner's eligibility to benefits",
     "A person is eligible to receive full OAS if they have lived in Canada for 40 years or more after the age of 18."
   ],
 

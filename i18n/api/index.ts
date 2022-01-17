@@ -38,16 +38,18 @@ export interface Translations {
     yearsInCanadaSince18: string
     maritalStatus: string
     partnerIncome: string
-    partnerReceivingOas: string
+    partnerBenefitStatus: string
     everLivedSocialCountry: string
   }
   questionOptions: {
     legalStatus: KeyAndText[]
     maritalStatus: KeyAndText[]
+    partnerBenefitStatus: KeyAndText[]
     livingCountry: KeyAndText[]
   }
   detail: {
     eligible: string
+    eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
