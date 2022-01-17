@@ -1,3 +1,4 @@
+import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
 
@@ -85,6 +86,24 @@ export interface Translations {
     unavailable: string
     availableEligible: string
     availableIneligible: string
+  }
+  links: {
+    oasOverview: Link
+    oasEntitlement: Link
+    outsideCanada: Link
+    oasQualify: Link
+    oasPartial: Link
+    gisQualify: Link
+    allowanceQualify: Link
+    afsQualify: Link
+    workingOutsideCanada: Link
+    gisEntitlement: Link
+    oasEntitlement2: Link
+    allowanceGisEntitlement: Link
+    allowanceInfo: Link
+    afsEntitlement: Link
+    oasRecoveryTax: Link
+    oasDefer: Link
   }
 }
 
