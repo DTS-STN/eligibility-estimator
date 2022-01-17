@@ -344,7 +344,7 @@ const fr: Translations = {
     moreInfo:
       'FRENCH: You need to answer the remaining questions on the previous tab before an estimation can be provided.',
     unavailable:
-      'D\'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.\n<a href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html" target="_blank">Contactez Service Canada</a>',
+      'D\'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.</br><a href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html" target="_blank">Contactez Service Canada</a>',
     availableEligible:
       'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes.',
     availableIneligible:
