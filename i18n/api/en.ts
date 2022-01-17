@@ -57,7 +57,7 @@ const en: Translations = {
       { key: 'single', text: 'Single' },
       { key: 'married', text: 'Married' },
       { key: 'commonLaw', text: 'Common-law' },
-      { key: 'widowed', text: 'Widowed' },
+      { key: 'widowed', text: 'Surviving Partner/Widowed' },
       { key: 'divorced', text: 'Divorced' },
       { key: 'separated', text: 'Separated' },
     ],
