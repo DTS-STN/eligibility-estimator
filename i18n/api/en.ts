@@ -57,7 +57,7 @@ const en: Translations = {
       { key: 'single', text: 'Single' },
       { key: 'married', text: 'Married' },
       { key: 'commonLaw', text: 'Common-law' },
-      { key: 'widowed', text: 'Widowed' },
+      { key: 'widowed', text: 'Surviving Partner/Widowed' },
       { key: 'divorced', text: 'Divorced' },
       { key: 'separated', text: 'Separated' },
     ],
@@ -330,7 +330,7 @@ const en: Translations = {
     unavailable:
       'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.</br><a href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html" target="_blank">Contact Service Canada</a>',
     availableEligible:
-      'Based on the information you have provided, you are likely eligible for the following benefits.',
+      'Based on the information you have provided, you are likely eligible for the following benefits. Note that this only provides an estimate of your monthly payment.',
     availableIneligible:
       'Based on the information you have provided, you are likely not eligible for any benefits. See the details below for more information.',
   },

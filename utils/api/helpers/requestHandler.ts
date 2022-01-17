@@ -169,7 +169,7 @@ export class RequestHandler {
     Object.keys(results).forEach((key) => {
       let result = results[key]
       const eligibilityText = translations.result[result.eligibilityResult]
-      result.detail = `${eligibilityText}\nDetails: ${result.detail}`
+      result.detail = `${eligibilityText}\n${result.detail}`
     })
   }
 
