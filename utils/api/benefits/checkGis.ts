@@ -44,11 +44,15 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
           input.maritalStatus,
           input.partnerBenefitStatus
         ).getEntitlement()
+        const detail =
+          entitlementResult == -1
+            ? input._translations.detail.eligibleEntitlementUnavailable
+            : input._translations.detail.eligible
         return {
           eligibilityResult: ResultKey.ELIGIBLE,
           entitlementResult,
           reason: ResultReason.NONE,
-          detail: input._translations.detail.eligible,
+          detail,
         }
       }
     } else {

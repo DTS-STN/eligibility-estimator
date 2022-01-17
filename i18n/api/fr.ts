@@ -285,6 +285,8 @@ const fr: Translations = {
   detail: {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligibleEntitlementUnavailable:
+      'FRENCH: Based on the information provided, you are likely eligible for this benefit. However, an entitlement estimation could not be provided, you are encouraged to contact Service Canada for more information.',
     eligiblePartialOas:
       "D'après les informations que vous ou votre partenaire avez fournies, vous avez droit à une pension partielle de la Sécurité de la vieillesse. Vous devriez communiquer avec Service Canada pour obtenir plus d'information sur les montants des paiements de l'Allocation/Supplément de revenu garanti.",
     eligibleWhen60ApplyNow:
