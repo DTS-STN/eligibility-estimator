@@ -1,4 +1,5 @@
 import { MaritalStatus, ResultKey, ResultReason } from '../definitions/enums'
+import { MAX_AFS_INCOME } from '../definitions/legalValues'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 import gisTables from '../scrapers/output'
 import { OutputItemAfs } from '../scrapers/partneredSurvivorScraper'
@@ -9,7 +10,7 @@ export default function checkAfs(input: ProcessedInput): BenefitResult {
   const meetsReqAge = 60 <= input.age && input.age <= 64
   const overAgeReq = 65 <= input.age
   const underAgeReq = input.age < 60
-  const meetsReqIncome = input.income < 25920
+  const meetsReqIncome = input.income < MAX_AFS_INCOME
   const requiredYearsInCanada = 10
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
   const meetsReqLegal = input.legalStatus.canadian

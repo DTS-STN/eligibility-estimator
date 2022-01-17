@@ -1,4 +1,9 @@
 import { ResultKey, ResultReason } from '../definitions/enums'
+import {
+  MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALLOWANCE,
+  MAX_GIS_INCOME_PARTNER_OAS,
+  MAX_GIS_INCOME_SINGLE,
+} from '../definitions/legalValues'
 import { BenefitResult, ProcessedInput } from '../definitions/types'
 import {
   MaritalStatusHelper,
@@ -22,10 +27,10 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
   const meetsReqLegal = input.legalStatus.canadian
   const maxIncome = input.maritalStatus.partnered
     ? input.partnerBenefitStatus.anyOas
-      ? 25440
-      : 46128
-    : 19248
-  const meetsReqIncome = input.income <= maxIncome
+      ? MAX_GIS_INCOME_PARTNER_OAS
+      : MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALLOWANCE
+    : MAX_GIS_INCOME_SINGLE
+  const meetsReqIncome = input.income < maxIncome
 
   // main checks
   if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {

@@ -21,6 +21,8 @@ import {
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
 import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
+import { OutputItem } from '../../../utils/api/scrapers/_base'
+import scraperData from '../../../utils/api/scrapers/output'
 import {
   mockGetRequest,
   mockGetRequestError,
@@ -129,6 +131,22 @@ describe('openapi checks', () => {
       x['$ref'].replace('#/components/parameters/', '')
     )
     expect(openApiPathParamsStripped).toEqual(Object.values(enumKeys))
+  })
+})
+
+describe('scraper tests', () => {
+  it("the scraped data's last entry is less than one", async () => {
+    const toVerify: { data: OutputItem[]; key: string }[] = [
+      { data: scraperData.single, key: 'gis' },
+      { data: scraperData.partneredAndOas, key: 'gis' },
+      { data: scraperData.partneredNoOas, key: 'gis' },
+      { data: scraperData.partneredAllowance, key: 'allowance' },
+      { data: scraperData.partneredSurvivor, key: 'afs' },
+    ]
+    toVerify.forEach((value) => {
+      const last = value.data[value.data.length - 1][value.key]
+      expect(last).toBeLessThan(1)
+    })
   })
 })
 
@@ -596,9 +614,9 @@ describe('summary object checks', () => {
 })
 
 describe('basic OAS scenarios', () => {
-  it('returns "ineligible" when income over 129757', async () => {
+  it('returns "ineligible" when income equal to 133141', async () => {
     const res = await mockPartialGetRequest({
-      income: 129758,
+      income: 133141,
     })
     expect(res.body.results.oas.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.oas.reason).toEqual(ResultReason.INCOME)
@@ -953,9 +971,9 @@ describe('basic GIS scenarios', () => {
     )
     expect(res.body.results.gis.reason).toEqual(ResultReason.LEGAL_STATUS)
   })
-  it('returns "ineligible" when single and income over 19248', async () => {
+  it('returns "ineligible" when single and income equal to 19464', async () => {
     const res = await mockGetRequest({
-      income: 19249,
+      income: 19464,
       age: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
@@ -985,9 +1003,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "ineligible" when married and no partner OAS and income over 46128', async () => {
+  it('returns "ineligible" when married and no partner OAS and income equal to 46656', async () => {
     const res = await mockGetRequest({
-      income: 46129,
+      income: 46656,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1001,9 +1019,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "eligible" when married and no partner OAS and income under 45128 and partner income 1000', async () => {
+  it('returns "eligible" when married and no partner OAS and income under 45656 and partner income 1000', async () => {
     const res = await mockGetRequest({
-      income: 45127,
+      income: 45655,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1017,9 +1035,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "ineligible" when married and partner OAS and income over 25440 and partner income 0', async () => {
+  it('returns "ineligible" when married and partner OAS and income equal to 25728 and partner income 0', async () => {
     const res = await mockGetRequest({
-      income: 25441,
+      income: 25728,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1033,9 +1051,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.INCOME)
   })
-  it('returns "ineligible" when married and partner OAS and income over 24440 and partner income 1000', async () => {
+  it('returns "ineligible" when married and partner OAS and income equal to 24728 and partner income 1000', async () => {
     const res = await mockGetRequest({
-      income: 24441,
+      income: 24728,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1100,7 +1118,7 @@ describe('GIS entitlement scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.entitlementResult).toEqual(-1)
   })
-  it('returns "$385.86" when single and 10000 income', async () => {
+  it('returns "$394.68" when single and 10000 income', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -1114,9 +1132,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: undefined,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(385.86)
+    expect(res.body.results.gis.entitlementResult).toEqual(394.68)
   })
-  it('returns "$948.82" when single and 0 income', async () => {
+  it('returns "$959.26" when single and 0 income', async () => {
     const res = await mockGetRequest({
       income: 0,
       age: 65,
@@ -1130,9 +1148,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: undefined,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(948.82)
+    expect(res.body.results.gis.entitlementResult).toEqual(959.26)
   })
-  it('returns "$837.82" when married and 10000 income and no partner OAS', async () => {
+  it('returns "$850.26" when married and 10000 income and no partner OAS', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -1146,9 +1164,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 0,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(837.82)
+    expect(res.body.results.gis.entitlementResult).toEqual(850.26)
   })
-  it('returns "$948.82" when married and 0 income and no partner OAS', async () => {
+  it('returns "$959.26" when married and 0 income and no partner OAS', async () => {
     const res = await mockGetRequest({
       income: 0,
       age: 65,
@@ -1162,9 +1180,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 0,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(948.82)
+    expect(res.body.results.gis.entitlementResult).toEqual(959.26)
   })
-  it('returns "$806.82" when married and 10000 income + 1000 partner income and no partner OAS', async () => {
+  it('returns "$819.26" when married and 10000 income + 1000 partner income and no partner OAS', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -1178,9 +1196,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 1000,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(806.82)
+    expect(res.body.results.gis.entitlementResult).toEqual(819.26)
   })
-  it('returns "$300.51" when married and 10000 income + 1000 partner income and partner OAS', async () => {
+  it('returns "$306.33" when married and 10000 income + 1000 partner income and partner OAS', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -1194,9 +1212,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 1000,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(300.51)
+    expect(res.body.results.gis.entitlementResult).toEqual(306.33)
   })
-  it('returns "$512.51" when married and 10000 income + 1000 partner income and partner Allowance', async () => {
+  it('returns "$521.33" when married and 10000 income + 1000 partner income and partner Allowance', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -1210,9 +1228,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 1000,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(512.51)
+    expect(res.body.results.gis.entitlementResult).toEqual(521.33)
   })
-  it('returns "$571.15" when married and 0 income + 0 partner income and partner OAS', async () => {
+  it('returns "$577.43" when married and 0 income + 0 partner income and partner OAS', async () => {
     const res = await mockGetRequest({
       income: 0,
       age: 65,
@@ -1226,9 +1244,9 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 0,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(571.15)
+    expect(res.body.results.gis.entitlementResult).toEqual(577.43)
   })
-  it('returns "$571.15" when married and 0 income + 0 partner income and partner Allowance', async () => {
+  it('returns "$577.43" when married and 0 income + 0 partner income and partner Allowance', async () => {
     const res = await mockGetRequest({
       income: 0,
       age: 65,
@@ -1242,14 +1260,14 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 0,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlementResult).toEqual(571.15)
+    expect(res.body.results.gis.entitlementResult).toEqual(577.43)
   })
 })
 
 describe('basic Allowance scenarios', () => {
-  it('returns "ineligible" when income over (or equal to) 35616', async () => {
+  it('returns "ineligible" when income equal to 36048', async () => {
     const res = await mockGetRequest({
-      income: 35616,
+      income: 36048,
       age: 60,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1518,7 +1536,7 @@ describe('basic Allowance scenarios', () => {
 })
 
 describe('Allowance entitlement scenarios', () => {
-  it('returns "eligible for $325.51" when 40 years in Canada and income=20000', async () => {
+  it('returns "eligible for $334.33" when 40 years in Canada and income=20000', async () => {
     const res = await mockGetRequest({
       income: 20000,
       age: 60,
@@ -1534,10 +1552,10 @@ describe('Allowance entitlement scenarios', () => {
     expect(res.body.results.allowance.eligibilityResult).toEqual(
       ResultKey.ELIGIBLE
     )
-    expect(res.body.results.allowance.entitlementResult).toEqual(325.51)
+    expect(res.body.results.allowance.entitlementResult).toEqual(334.33)
     expect(res.body.results.allowance.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "eligible for $540.77" when 40 years in Canada and income=10000', async () => {
+  it('returns "eligible for $553.58" when 40 years in Canada and income=10000', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -1553,10 +1571,10 @@ describe('Allowance entitlement scenarios', () => {
     expect(res.body.results.allowance.eligibilityResult).toEqual(
       ResultKey.ELIGIBLE
     )
-    expect(res.body.results.allowance.entitlementResult).toEqual(540.77)
+    expect(res.body.results.allowance.entitlementResult).toEqual(553.58)
     expect(res.body.results.allowance.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "eligible for $1206.41" when 40 years in Canada and income=0', async () => {
+  it('returns "eligible for $1219.68" when 40 years in Canada and income=0', async () => {
     const res = await mockGetRequest({
       income: 0,
       age: 60,
@@ -1572,15 +1590,15 @@ describe('Allowance entitlement scenarios', () => {
     expect(res.body.results.allowance.eligibilityResult).toEqual(
       ResultKey.ELIGIBLE
     )
-    expect(res.body.results.allowance.entitlementResult).toEqual(1206.41)
+    expect(res.body.results.allowance.entitlementResult).toEqual(1219.68)
     expect(res.body.results.allowance.reason).toEqual(ResultReason.NONE)
   })
 })
 
 describe('basic Allowance for Survivor scenarios', () => {
-  it('returns "ineligible" when income over (or equal to) 25920', async () => {
+  it('returns "ineligible" when income equal to 26256', async () => {
     const res = await mockGetRequest({
-      income: 25920,
+      income: 26256,
       age: 60,
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
@@ -1785,7 +1803,7 @@ describe('basic Allowance for Survivor scenarios', () => {
 })
 
 describe('AFS entitlement scenarios', () => {
-  it('returns "eligible for $246.89" when 40 years in Canada and income=20000', async () => {
+  it('returns "eligible for $260.10" when 40 years in Canada and income=20000', async () => {
     const res = await mockGetRequest({
       income: 20000,
       age: 60,
@@ -1799,10 +1817,10 @@ describe('AFS entitlement scenarios', () => {
       partnerIncome: undefined,
     })
     expect(res.body.results.afs.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.afs.entitlementResult).toEqual(246.89)
+    expect(res.body.results.afs.entitlementResult).toEqual(260.1)
     expect(res.body.results.afs.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "eligible for $667.15" when 40 years in Canada and income=10000', async () => {
+  it('returns "eligible for $681.35" when 40 years in Canada and income=10000', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -1816,10 +1834,10 @@ describe('AFS entitlement scenarios', () => {
       partnerIncome: undefined,
     })
     expect(res.body.results.afs.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.afs.entitlementResult).toEqual(667.15)
+    expect(res.body.results.afs.entitlementResult).toEqual(681.35)
     expect(res.body.results.afs.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "eligible for $1438.11" when 40 years in Canada and income=0', async () => {
+  it('returns "eligible for $1453.93" when 40 years in Canada and income=0', async () => {
     const res = await mockGetRequest({
       income: 0,
       age: 60,
@@ -1833,7 +1851,7 @@ describe('AFS entitlement scenarios', () => {
       partnerIncome: undefined,
     })
     expect(res.body.results.afs.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.afs.entitlementResult).toEqual(1438.11)
+    expect(res.body.results.afs.entitlementResult).toEqual(1453.93)
     expect(res.body.results.afs.reason).toEqual(ResultReason.NONE)
   })
 })
