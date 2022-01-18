@@ -30,7 +30,7 @@ export const Tooltip: React.FC<{
   const isMobile = useMediaQuery(992)
 
   return (
-    <span className="ml-2 absolute" ref={wrapperRef}>
+    <span className="ml-2 absolute inline-block" ref={wrapperRef}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
