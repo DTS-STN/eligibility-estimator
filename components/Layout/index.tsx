@@ -46,7 +46,7 @@ export const Layout: React.VFC<{
               items={['Canada.ca', 'Service Canada', 'Eligibility Estimator']}
             />
             <h1 className="h1 mt-8 mb-10 border-b border-header-rule">
-              Benefits Eligibility Estimator
+              Canadian Old Age Benefits Estimator
             </h1>
             {children}
           </div>
