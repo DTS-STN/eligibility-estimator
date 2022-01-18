@@ -1,14 +1,30 @@
 import { Translations } from '../../../i18n/api'
-import { EstimationSummaryState, ResultKey } from '../definitions/enums'
+import {
+  EstimationSummaryState,
+  MaritalStatus,
+  ResultKey,
+  ResultReason,
+} from '../definitions/enums'
 import { FieldKey } from '../definitions/fields'
-import { BenefitResultsObject, SummaryObject } from '../definitions/types'
+import {
+  MAX_OAS_INCOME,
+  OAS_RECOVERY_TAX_CUTOFF,
+} from '../definitions/legalValues'
+import {
+  BenefitResultsObject,
+  Link,
+  ProcessedInput,
+  SummaryObject,
+} from '../definitions/types'
 
 export class SummaryBuilder {
   private readonly state: EstimationSummaryState
   private readonly title: string
   private readonly details: string
+  private readonly links: Link[]
 
   constructor(
+    private input: ProcessedInput,
     private results: BenefitResultsObject,
     private missingFields: FieldKey[],
     private translations: Translations
@@ -16,6 +32,7 @@ export class SummaryBuilder {
     this.state = this.getState()
     this.title = this.getTitle()
     this.details = this.getDetails()
+    this.links = this.getLinks()
   }
 
   build(): SummaryObject {
@@ -23,7 +40,7 @@ export class SummaryBuilder {
       state: this.state,
       title: this.title,
       details: this.details,
-      links: [{ url: 'https://canada.ca', text: 'Canada.ca', order: 1 }],
+      links: this.links,
     }
   }
 
@@ -60,6 +77,53 @@ export class SummaryBuilder {
       return this.translations.summaryDetails.availableIneligible
   }
 
+  private getLinks(): Link[] {
+    const links = [
+      this.translations.links.oasOverview,
+      this.translations.links.oasEntitlement,
+    ]
+    if (this.input.livingCountry.provided && !this.input.livingCountry.canada) {
+      links.push(this.translations.links.outsideCanada)
+      links.push(this.translations.links.workingOutsideCanada)
+    }
+    if (this.input.age >= 65) {
+      links.push(this.translations.links.oasQualify)
+      links.push(this.translations.links.gisQualify)
+    }
+    if (this.results.oas?.reason === ResultReason.PARTIAL_OAS)
+      links.push(this.translations.links.oasPartial)
+    if (
+      this.input.age > 60 &&
+      this.input.age <= 64 &&
+      this.input.maritalStatus.partnered
+    )
+      links.push(this.translations.links.allowanceQualify)
+    if (
+      this.input.age > 60 &&
+      this.input.age <= 64 &&
+      this.input.maritalStatus.value === MaritalStatus.WIDOWED
+    )
+      links.push(this.translations.links.afsQualify)
+    if (this.results.gis?.eligibilityResult === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.gisEntitlement)
+    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.oasEntitlement2)
+    if (this.results.allowance?.eligibilityResult === ResultKey.ELIGIBLE) {
+      links.push(this.translations.links.allowanceGisEntitlement)
+      links.push(this.translations.links.allowanceInfo)
+    }
+    if (this.results.afs?.eligibilityResult === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.afsEntitlement)
+    if (
+      this.input.income > OAS_RECOVERY_TAX_CUTOFF &&
+      this.input.income < MAX_OAS_INCOME
+    )
+      links.push(this.translations.links.oasRecoveryTax)
+    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.oasDefer)
+    return links
+  }
+
   detectNeedsInfo(): boolean {
     return this.missingFields.length > 0
   }
@@ -80,11 +144,13 @@ export class SummaryBuilder {
   }
 
   static buildSummaryObject(
+    input: ProcessedInput,
     results: BenefitResultsObject,
     missingFields: FieldKey[],
     translations: Translations
   ): SummaryObject {
     const summaryBuilder = new SummaryBuilder(
+      input,
       results,
       missingFields,
       translations

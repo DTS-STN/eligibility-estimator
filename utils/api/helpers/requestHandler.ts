@@ -54,6 +54,7 @@ export class RequestHandler {
       this.processedInput._translations
     )
     this.summary = SummaryBuilder.buildSummaryObject(
+      this.processedInput,
       this.benefitResults,
       this.missingFields,
       this.processedInput._translations

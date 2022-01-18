@@ -76,8 +76,8 @@ export interface ResponseError {
 }
 
 export interface Link {
-  url: string
   text: string
+  url: string
   order: number
 }
 
