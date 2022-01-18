@@ -26,6 +26,7 @@ const fr: Translations = {
   question: {
     income: 'Quel est votre revenu net annuel actuel en dollars canadiens?',
     age: 'Quel est votre âge actuel?',
+    maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
     legalStatus: 'Quel est votre statut légal actuel?',
     legalStatusOther: 'Veuillez préciser:',
@@ -33,12 +34,11 @@ const fr: Translations = {
       "Avez-vous seulement habité au Canada depuis l'âge de 18 ans?",
     yearsInCanadaSince18:
       "Combien d'années avez-vous vécu au Canada après avoir atteint l'âge de 18 ans?",
-    maritalStatus: 'Quel est votre état civil actuel?',
-    partnerIncome:
-      'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
-    partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     everLivedSocialCountry:
       'Avez-vous déjà vécu dans un pays avec un accord de <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">sécurité sociale</a> établi?',
+    partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
+    partnerIncome:
+      'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
   },
   questionOptions: {
     legalStatus: [

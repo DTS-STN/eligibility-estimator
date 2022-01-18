@@ -40,6 +40,18 @@ describe('code checks', () => {
   })
 })
 
+describe('translation checks', () => {
+  it('matches between question translations and available questions', async () => {
+    const translationsEn: Translations = getTranslations(Language.EN)
+    const translationsFr: Translations = getTranslations(Language.FR)
+    const translationKeysEn = Object.keys(translationsEn.question)
+    const translationKeysFr = Object.keys(translationsFr.question)
+    const enumKeys = Object.values(FieldKey)
+    expect(translationKeysEn).toEqual(enumKeys)
+    expect(translationKeysFr).toEqual(enumKeys)
+  })
+})
+
 describe('country checks', () => {
   const COUNTRY_COUNT = 195
   const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
