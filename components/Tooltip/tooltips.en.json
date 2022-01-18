@@ -36,6 +36,11 @@
     "<p>Example: Temporary resident, student, temporary worker, etc</p>"
   ],
 
+  "canadaWholeLife": [
+    "Residency in Canada",
+    "Note that periods where you resided in a foreign country for less than 6 months do not count"
+  ],
+
   "yearsInCanadaSince18": [
     "Years Lived in Canada",
     "This includes periods when you normally lived in Canada. If you have not lived in Canada all of your life, any absences from Canada longer than 6 months are not included. "
