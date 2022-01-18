@@ -38,6 +38,7 @@ paths:
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
         - $ref: '#/components/parameters/legalStatusOther'
+        - $ref: '#/components/parameters/canadaWholeLife'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/everLivedSocialCountry'
         - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -62,6 +63,7 @@ components:
           - livingCountry
           - legalStatus
           - legalStatusOther
+          - canadaWholeLife
           - yearsInCanadaSince18
           - everLivedSocialCountry
           - partnerBenefitStatus
@@ -376,6 +378,16 @@ components:
       example: Some legal status
       schema:
         type: string
+      allowEmptyValue: false
+
+    canadaWholeLife:
+      name: canadaWholeLife
+      in: query
+      description: Have you only lived in Canada since the age of 18?
+      required: false
+      example: true
+      schema:
+        type: boolean
       allowEmptyValue: false
 
     yearsInCanadaSince18:

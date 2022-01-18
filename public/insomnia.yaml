@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-01-13T23:56:50.523Z
+__export_date: 2022-01-18T23:18:10.424Z
 __export_source: insomnia.desktop.app:v2021.7.2
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1642118195145
+    modified: 1642547879876
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -16,46 +16,47 @@ resources:
       - name: income
         disabled: false
         value: '10000'
-        id: pair_5df8e2e5c4d846b2ad59cd4a68a0262b
+        id: pair_2f8aced01f9a4d128fa36282aa45c6b5
       - name: age
         disabled: false
         value: '65'
-        id: pair_bf4d7045fae04034a682c45f9eda0a67
+        id: pair_1d25f7cb27f94d35817e9226538c63a3
       - name: maritalStatus
         disabled: false
         value: married
-        id: pair_4bd42e47efe640e198ae70d242769ee4
+        id: pair_c78fbe94847b4b34ab8a089a2e579527
       - name: livingCountry
         disabled: false
         value: CAN
-        id: pair_54115767a89e4b639cca5ab13fdb6e37
+        id: pair_9542c2acc6cd40b9a98d058ea5a81406
       - name: legalStatus
         disabled: false
         value: canadianCitizen
-        id: pair_98f8e880f9ce47a48f690ff87b693dde
-      - name: legalStatusOther
-        disabled: true
-        value: some legal status
-        id: pair_307ac26062e74a89a38fb40136b7bbba
+        id: pair_c9d0beae8e8146919a4da6a722ea0157
+      - name: canadaWholeLife
+        disabled: false
+        value: 'false'
+        id: pair_98766dee942443a082abebe796f9692a
       - name: yearsInCanadaSince18
         disabled: false
         value: '40'
-        id: pair_095198a670d74b05a0168c6756ede391
+        id: pair_62528c7ec4014b889ee75b1803efca38
       - name: everLivedSocialCountry
         disabled: false
         value: 'true'
-        id: pair_d677107d2f0445b89c0354e86530a8e9
+        id: pair_61dbd67490104aed967462240b1f10f2
       - name: partnerBenefitStatus
         disabled: false
         value: fullOasGis
-        id: pair_a726b2b6763342e9ba6fa8448de4a727
+        id: pair_c52d5778ca724b2e96fd84a88a81b692
       - name: partnerIncome
         disabled: false
         value: '10000'
-        id: pair_435aa3f2d5b24e6e88a96885b26061cc
+        id: pair_d0962370ae2d4ab0bedac2726499adab
       - name: _language
+        disabled: false
         value: EN
-        id: pair_df9de4891fc94fcda99027a7de6cf82f
+        id: pair_13187d812646456ab9fd55f7dbd735ff
     headers: []
     authentication: {}
     metaSortKey: -1637965624524
@@ -98,7 +99,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1642118182980
+    modified: 1642547870832
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -143,6 +144,7 @@ resources:
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
               - $ref: '#/components/parameters/legalStatusOther'
+              - $ref: '#/components/parameters/canadaWholeLife'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
               - $ref: '#/components/parameters/everLivedSocialCountry'
               - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -167,6 +169,7 @@ resources:
                 - livingCountry
                 - legalStatus
                 - legalStatusOther
+                - canadaWholeLife
                 - yearsInCanadaSince18
                 - everLivedSocialCountry
                 - partnerBenefitStatus
@@ -481,6 +484,16 @@ resources:
             example: Some legal status
             schema:
               type: string
+            allowEmptyValue: false
+
+          canadaWholeLife:
+            name: canadaWholeLife
+            in: query
+            description: Have you only lived in Canada since the age of 18?
+            required: false
+            example: true
+            schema:
+              type: boolean
             allowEmptyValue: false
 
           yearsInCanadaSince18:

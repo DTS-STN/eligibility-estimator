@@ -27,10 +27,15 @@ export const RequestSchema = Joi.object({
     not: Joi.exist().valid(LegalStatus.OTHER),
     then: Joi.forbidden(),
   }),
+  canadaWholeLife: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
     .ruleset.max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message('Years in Canada should be no more than age minus 18'), // todo i18n
+    .message('Years in Canada should be no more than age minus 18') // todo i18n
+    .when('canadaWholeLife', {
+      is: Joi.boolean().valid(true),
+      then: Joi.forbidden(),
+    }),
   everLivedSocialCountry: Joi.boolean(),
   partnerBenefitStatus: Joi.string()
     .valid(...Object.values(PartnerBenefitStatus))

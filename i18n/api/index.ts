@@ -36,6 +36,7 @@ export interface Translations {
     livingCountry: string
     legalStatus: string
     legalStatusOther: string
+    canadaWholeLife: string
     yearsInCanadaSince18: string
     maritalStatus: string
     partnerIncome: string

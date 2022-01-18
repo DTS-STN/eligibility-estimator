@@ -70,9 +70,14 @@ export class RequestHandler {
 
     return {
       ...sanitizedInput,
+      // adds client and partner income into a single combined income
       income: sanitizedInput.partnerIncome
         ? sanitizedInput.income + sanitizedInput.partnerIncome
         : sanitizedInput.income,
+      // if canadaWholeLife, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: sanitizedInput.canadaWholeLife
+        ? 40
+        : sanitizedInput.yearsInCanadaSince18,
       livingCountry: new LivingCountryHelper(sanitizedInput.livingCountry),
       legalStatus: new LegalStatusHelper(sanitizedInput.legalStatus),
       maritalStatus: new MaritalStatusHelper(sanitizedInput.maritalStatus),
@@ -98,11 +103,14 @@ export class RequestHandler {
         FieldKey.LIVING_COUNTRY,
         FieldKey.LEGAL_STATUS,
         FieldKey.MARITAL_STATUS,
-        FieldKey.YEARS_IN_CANADA_SINCE_18
+        FieldKey.CANADA_WHOLE_LIFE
       )
     }
     if (input.legalStatus.other) {
       requiredFields.push(FieldKey.LEGAL_STATUS_OTHER)
+    }
+    if (input.canadaWholeLife === false) {
+      requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (input.maritalStatus.partnered) {
       requiredFields.push(
