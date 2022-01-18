@@ -8,7 +8,7 @@ export const Breadcrumbs: React.VFC<{ items: string[] }> = ({ items }) => {
         {items.map((breadcrumb, index) => (
           <BreadcrumbItem
             key={index}
-            showDelimiter={index > 0}
+            showDelimiter={index < items.length - 1}
             breadcrumb={`${breadcrumb}`}
           />
         ))}

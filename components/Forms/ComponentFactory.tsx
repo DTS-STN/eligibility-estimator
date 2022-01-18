@@ -22,9 +22,6 @@ interface FactoryProps {
   selectedTabIndex: Dispatch<number>
 }
 
-/** API endpoint for eligibility*/
-const API_URL = `api/calculateEligibility`
-
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
@@ -90,7 +87,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                       name={field.key}
                       label={field.label}
                       placeholder={field.placeholder ?? ''}
-                      onChange={debounce(field.handleChange, 1000)}
+                      onChange={field.handleChange}
                       value={field.value}
                       error={field.error}
                       required
@@ -104,7 +101,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                       name={field.key}
                       label={field.label}
                       placeholder={field.placeholder ?? ''}
-                      onChange={debounce(field.handleChange, 1000)}
+                      onChange={field.handleChange}
                       value={field.value}
                       error={field.error}
                       required
@@ -118,7 +115,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                       name={field.key}
                       label={field.label}
                       placeholder={field.placeholder ?? ''}
-                      onChange={debounce(field.handleChange, 1000)}
+                      onChange={field.handleChange}
                       value={field.value}
                       error={field.error}
                       required
@@ -164,19 +161,20 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             return content
           })}
 
-          <div className="flex flex-col md:flex-row gap-x-8 mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3.5 md:gap-x-8 mt-20">
             <button
               type="button"
               role="navigation"
-              className="btn btn-default w-full md:w-40"
+              className="btn btn-default"
               onClick={(e) => router.push('/')}
             >
               Back
             </button>
+            <span className="col-span-1 block md:hidden"></span>
             <button
               type="button"
               role="button"
-              className="btn btn-default w-full md:w-40 mt-4 md:mt-0"
+              className="btn btn-default mt-4 md:mt-0"
               onClick={(e) => {
                 form.clearForm()
               }}
@@ -186,7 +184,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             <button
               type="submit"
               role="button"
-              className="btn btn-primary w-full md:w-40 mt-4 md:mt-0"
+              className="btn btn-primary mt-4 md:mt-0"
               onClick={async (e) => {
                 if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
                   selectedTabIndex(1)

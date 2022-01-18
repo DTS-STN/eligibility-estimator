@@ -14,11 +14,11 @@ const Home: NextPage = () => {
     <Layout>
       <div className="mt-18 text-content">
         <p className="mb-4 text-content">
-          *ACTUAL NAME* is a prototype. This is not a real service. Based on the
-          information you provide, this will estimate your eligibility for the
-          Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If
-          eligible to receive the benefit, the application will also estimate
-          your monthly payment.{' '}
+          Canadian Old Age Benefits Estimator is a prototype. This is not a real
+          service. Based on the information you provide, this will estimate your
+          eligibility for the Old Age Security (OAS) and Guaranteed Income
+          Supplement (GIS). If eligible to receive the benefit, the application
+          will also estimate your monthly payment.{' '}
         </p>
         <p className="mb-4 text-content">
           This prototype covers four benefits programs:
@@ -57,7 +57,9 @@ const Home: NextPage = () => {
           const input = document.querySelector(
             'input[name="income"]'
           ) as HTMLInputElement
-          const sanitizedValue = input.value.replaceAll('$', '').replaceAll(',', '')
+          const sanitizedValue = input.value
+            .replaceAll('$', '')
+            .replaceAll(',', '')
           if (sanitizedValue == null || sanitizedValue == '') {
             setError('This field is required')
           } else {

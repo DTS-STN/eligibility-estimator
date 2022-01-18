@@ -30,7 +30,7 @@ export const Tooltip: React.FC<{
   const isMobile = useMediaQuery(992)
 
   return (
-    <span className="ml-2 absolute" ref={wrapperRef}>
+    <span className="ml-2 relative md:absolute inline-block" ref={wrapperRef}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
@@ -55,7 +55,9 @@ export const Tooltip: React.FC<{
         tabIndex={-1}
       >
         <div
-          className={`max-w-[525px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
+          className={`${
+            isMobile ? 'max-w-[525px]' : 'max-w-[725px]'
+          } shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
             isMobile ? '' : 'relative -top-10 left-10'
           } z-40`}
         >

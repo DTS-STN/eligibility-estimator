@@ -1,6 +1,6 @@
-import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
+import { useWindowWidth } from '../Hooks'
 
 /** offset padding and margin of the component, used to calculate svg height responsively */
 const OFFSET_WIDTH = 28
@@ -12,6 +12,7 @@ export const Alert: React.VFC<{
   insertHTML?: boolean
 }> = ({ title, children, type, insertHTML }) => {
   const [height, setHeight] = useState<number>(null)
+  const windowWidth = useWindowWidth()
   const ref = useRef(null)
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export const Alert: React.VFC<{
       const height = ref.current.clientHeight
       setHeight(height)
     }
-  }, [ref.current])
+  }, [windowWidth])
 
   const className = (() => {
     switch (type) {

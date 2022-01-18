@@ -92,3 +92,13 @@ export const useMediaQuery = (width) => {
 
   return targetReached
 }
+
+export const useWindowWidth = () => {
+  const [width, setWidth] = useState(0)
+  const handleResize = () => setWidth(window.innerWidth)
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [width])
+  return width
+}

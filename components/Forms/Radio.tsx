@@ -37,7 +37,10 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         </label>
         {error && <ErrorLabel errorMessage={error} />}
         {values.map((val, index) => (
-          <div key={index} className="flex items-center md:mb-[12px] last:mb-0">
+          <div
+            key={index}
+            className="flex items-center mb-2 md:mb-[12px] last:mb-0"
+          >
             <input
               type="radio"
               id={`${keyforid}-${index}`}
@@ -53,7 +56,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               htmlFor={`${keyforid}-${index}`}
               className="radio flex items-center"
             >
-              <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[24px]"></span>
+              <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
               <p>{val.text}</p>
             </label>
           </div>
