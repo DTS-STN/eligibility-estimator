@@ -22,9 +22,6 @@ interface FactoryProps {
   selectedTabIndex: Dispatch<number>
 }
 
-/** API endpoint for eligibility*/
-const API_URL = `api/calculateEligibility`
-
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
@@ -90,7 +87,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                       name={field.key}
                       label={field.label}
                       placeholder={field.placeholder ?? ''}
-                      onChange={debounce(field.handleChange, 1000)}
+                      onChange={field.handleChange}
                       value={field.value}
                       error={field.error}
                       required
@@ -104,7 +101,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                       name={field.key}
                       label={field.label}
                       placeholder={field.placeholder ?? ''}
-                      onChange={debounce(field.handleChange, 1000)}
+                      onChange={field.handleChange}
                       value={field.value}
                       error={field.error}
                       required
@@ -118,7 +115,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                       name={field.key}
                       label={field.label}
                       placeholder={field.placeholder ?? ''}
-                      onChange={debounce(field.handleChange, 1000)}
+                      onChange={field.handleChange}
                       value={field.value}
                       error={field.error}
                       required
