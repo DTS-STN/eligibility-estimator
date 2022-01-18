@@ -47,7 +47,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               value={val.key}
               onChange={onChange}
               required
-              defaultChecked={checkedValue === correctForBooleans(val.key)}
+              checked={checkedValue === correctForBooleans(val.key)}
             />
             <label
               htmlFor={`${keyforid}-${index}`}
