@@ -12,7 +12,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
   const meetsReqAge = 60 <= input.age && input.age <= 64
   const overAgeReq = 65 <= input.age
   const underAgeReq = input.age < 60
-  const meetsReqIncome = input.income < MAX_ALLOWANCE_INCOME
+  const meetsReqIncome = input.income.relevant < MAX_ALLOWANCE_INCOME
   const requiredYearsInCanada = 10
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
   const meetsReqLegal = input.legalStatus.canadian
@@ -27,7 +27,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
   ) {
     if (meetsReqAge) {
       const entitlementResult = new AllowanceEntitlement(
-        input.income
+        input.income.relevant
       ).getEntitlement()
       return {
         eligibilityResult: ResultKey.ELIGIBLE,

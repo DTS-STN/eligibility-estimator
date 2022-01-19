@@ -1,5 +1,6 @@
 import { Language, Translations } from '../../../i18n/api'
 import {
+  IncomeHelper,
   LegalStatusHelper,
   LivingCountryHelper,
   MaritalStatusHelper,
@@ -37,7 +38,7 @@ export interface RequestInput {
  * After Joi validation and additional pre-processing, this is the object passed around to provide app logic.
  */
 export interface ProcessedInput {
-  income?: number // sum of personal and partner
+  income: IncomeHelper
   age?: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper

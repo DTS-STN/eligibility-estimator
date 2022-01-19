@@ -115,8 +115,8 @@ export class SummaryBuilder {
     if (this.results.afs?.eligibilityResult === ResultKey.ELIGIBLE)
       links.push(this.translations.links.afsEntitlement)
     if (
-      this.input.income > OAS_RECOVERY_TAX_CUTOFF &&
-      this.input.income < MAX_OAS_INCOME
+      this.input.income.relevant > OAS_RECOVERY_TAX_CUTOFF &&
+      this.input.income.relevant < MAX_OAS_INCOME
     )
       links.push(this.translations.links.oasRecoveryTax)
     if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)

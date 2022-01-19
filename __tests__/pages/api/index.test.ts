@@ -210,61 +210,6 @@ describe('sanity checks', () => {
     })
     expect(res.status).toEqual(200)
   })
-  it('fails when not partnered and "partnerBenefitStatus" FULL_OAS_GIS', async () => {
-    let res = await mockGetRequestError({
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
-    })
-    expect(res.body.error).toEqual(ResultKey.INVALID)
-    expect(res.status).toEqual(400)
-  })
-  it('fails when not partnered and "partnerBenefitStatus" NONE', async () => {
-    let res = await mockGetRequestError({
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      partnerBenefitStatus: PartnerBenefitStatus.NONE,
-    })
-    expect(res.body.error).toEqual(ResultKey.INVALID)
-    expect(res.status).toEqual(400)
-  })
-  it('accepts when partnered and "partnerReceivingOas" present', async () => {
-    const res = await mockPartialGetRequest({
-      age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
-    })
-    expect(res.status).toEqual(200)
-  })
-  it('fails when not partnered and "partnerIncome" provided', async () => {
-    let res = await mockGetRequestError({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      partnerIncome: 10000,
-    })
-    expect(res.status).toEqual(400)
-    expect(res.body.error).toEqual(ResultKey.INVALID)
-  })
-  it('accepts not partnered and "partnerIncome" provided', async () => {
-    let res = await mockGetRequestError({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
-      partnerIncome: 10000,
-    })
-    expect(res.status).toEqual(200)
-  })
-  it('fails when lifeCanada=true and "yearsInCanadaSince18" provided', async () => {
-    let res = await mockGetRequestError({
-      income: 10000,
-      age: 65,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: 20,
-    })
-    expect(res.status).toEqual(400)
-    expect(res.body.error).toEqual(ResultKey.INVALID)
-  })
 })
 
 describe('field requirement analysis', () => {

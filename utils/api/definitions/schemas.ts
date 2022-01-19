@@ -23,32 +23,17 @@ export const RequestSchema = Joi.object({
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  legalStatusOther: Joi.string().when('legalStatus', {
-    not: Joi.exist().valid(LegalStatus.OTHER),
-    then: Joi.forbidden(),
-  }),
+  legalStatusOther: Joi.string(),
   canadaWholeLife: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
     .ruleset.max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message('Years in Canada should be no more than age minus 18') // todo i18n
-    .when('canadaWholeLife', {
-      is: Joi.boolean().valid(true),
-      then: Joi.forbidden(),
-    }),
+    .message('Years in Canada should be no more than age minus 18'), // todo i18n
   everLivedSocialCountry: Joi.boolean(),
-  partnerBenefitStatus: Joi.string()
-    .valid(...Object.values(PartnerBenefitStatus))
-    .when('maritalStatus', {
-      not: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
-      then: Joi.forbidden(),
-    }),
-  partnerIncome: Joi.number()
-    .integer()
-    .when('maritalStatus', {
-      not: Joi.exist().valid(MaritalStatus.MARRIED, MaritalStatus.COMMON_LAW),
-      then: Joi.forbidden(),
-    }),
+  partnerBenefitStatus: Joi.string().valid(
+    ...Object.values(PartnerBenefitStatus)
+  ),
+  partnerIncome: Joi.number().integer(),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

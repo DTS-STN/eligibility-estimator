@@ -13,6 +13,37 @@ export class FieldHelper {
   }
 }
 
+export class IncomeHelper extends FieldHelper {
+  constructor(
+    public client: number,
+    public partner: number,
+    public maritalStatus: MaritalStatusHelper
+  ) {
+    super(client === undefined ? undefined : -1) // send either undefined or -1, as we should never use this property
+  }
+
+  /**
+   * Returns the relevant income, depending on marital status.
+   * Returns the client's income when single, or the sum of client+partner when partnered.
+   */
+  get relevant(): number {
+    if (
+      this.maritalStatus.provided &&
+      this.maritalStatus.partnered &&
+      this.partner !== undefined
+    ) {
+      return this.sum
+    }
+    return this.client
+  }
+
+  get sum(): number {
+    const a = this.client ? this.client : 0
+    const b = this.partner ? this.partner : 0
+    return a + b
+  }
+}
+
 export class LivingCountryHelper extends FieldHelper {
   normalized: LivingCountry
   canada: boolean
