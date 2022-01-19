@@ -9,6 +9,7 @@ import {
   FieldKey,
   FieldType,
 } from '../definitions/fields'
+import { MAX_OAS_INCOME } from '../definitions/legalValues'
 import {
   BenefitResultsObject,
   ProcessedInput,
@@ -93,10 +94,10 @@ export class RequestHandler {
    */
   static getRequiredFields(input: ProcessedInput): FieldKey[] {
     const requiredFields = [FieldKey.INCOME]
-    if (input.income >= 129757) {
+    if (input.income >= MAX_OAS_INCOME) {
       // over highest income, therefore don't need anything else
       return requiredFields
-    } else if (input.income < 129757) {
+    } else if (input.income < MAX_OAS_INCOME) {
       // meets max income req, open up main form
       requiredFields.push(
         FieldKey.AGE,
