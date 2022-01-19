@@ -29,6 +29,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
   const isMobile = useMediaQuery(992)
   const root: Instance<typeof RootStore> = useStore()
+  console.log(props)
 
   if ('error' in props) {
     return (
