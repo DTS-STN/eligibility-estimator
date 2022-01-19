@@ -213,7 +213,6 @@ export const Form = types
         }
       } else {
         self.clearAllErrors()
-        console.log(data)
         const parent = getParentOfType(self, RootStore)
         parent.setOAS(data.results.oas)
         parent.setGIS(data.results.gis)
