@@ -56,7 +56,7 @@ export default function checkAfs(input: ProcessedInput): BenefitResult {
       reason: ResultReason.AGE,
       detail: input._translations.detail.mustBe60to64,
     }
-  } else if (!meetsReqMarital && input.maritalStatus !== undefined) {
+  } else if (!meetsReqMarital && input.maritalStatus.provided) {
     return {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,

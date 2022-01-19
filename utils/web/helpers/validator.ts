@@ -1,4 +1,4 @@
-const MAX_ALLOWED_INCOME = 129757
+import { MAX_OAS_INCOME } from '../../api/definitions/legalValues'
 
 export const validateIncome = (income: number | string) => {
   let validIncome
@@ -8,5 +8,5 @@ export const validateIncome = (income: number | string) => {
     validIncome = income
   }
 
-  return validIncome > MAX_ALLOWED_INCOME
+  return validIncome > MAX_OAS_INCOME
 }
