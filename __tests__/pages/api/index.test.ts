@@ -1265,6 +1265,22 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.NONE)
   })
+  it('returns "eligible" when married and partner partial OAS and income under 46656 and partner income 0', async () => {
+    const res = await mockGetRequest({
+      income: 46655,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      yearsInCanadaSince18: 40,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.PARTIAL_OAS_GIS,
+      partnerIncome: 0,
+    })
+    expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.reason).toEqual(ResultReason.NONE)
+  })
 })
 
 describe('GIS entitlement scenarios', () => {

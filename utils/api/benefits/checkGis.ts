@@ -25,8 +25,13 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
     oasResult.eligibilityResult === ResultKey.ELIGIBLE ||
     oasResult.eligibilityResult === ResultKey.CONDITIONAL
   const meetsReqLegal = input.legalStatus.canadian
+  /*
+   Please note that the logic below is currently imperfect. Specifically, when partnerBenefitStatus == partialOas,
+   we do not know the correct income limit. As a compromise, we are going with the higher limit,
+   which may result in us returning "eligible" when in fact they are not.
+  */
   const maxIncome = input.maritalStatus.partnered
-    ? input.partnerBenefitStatus.anyOas
+    ? input.partnerBenefitStatus.fullOas
       ? MAX_GIS_INCOME_PARTNER_OAS
       : MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALLOWANCE
     : MAX_GIS_INCOME_SINGLE
