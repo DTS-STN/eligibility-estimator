@@ -5,7 +5,7 @@ import { BenefitResult, ProcessedInput } from '../definitions/types'
 export default function checkOas(input: ProcessedInput): BenefitResult {
   // helpers
   const meetsReqAge = input.age >= 65
-  const meetsReqIncome = input.income < MAX_OAS_INCOME
+  const meetsReqIncome = input.income.relevant < MAX_OAS_INCOME
   const requiredYearsInCanada = input.livingCountry.canada ? 10 : 20
   const meetsReqYears = input.yearsInCanadaSince18 >= requiredYearsInCanada
   const meetsReqLegal = input.legalStatus.canadian

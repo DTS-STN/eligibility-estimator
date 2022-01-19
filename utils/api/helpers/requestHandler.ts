@@ -18,6 +18,7 @@ import {
 } from '../definitions/types'
 import {
   FieldHelper,
+  IncomeHelper,
   LegalStatusHelper,
   LivingCountryHelper,
   MaritalStatusHelper,
@@ -69,19 +70,23 @@ export class RequestHandler {
   static processSanitizedInput(sanitizedInput: RequestInput): ProcessedInput {
     const translations = getTranslations(sanitizedInput._language)
 
+    const maritalStatusHelper = new MaritalStatusHelper(
+      sanitizedInput.maritalStatus
+    )
     return {
       ...sanitizedInput,
-      // adds client and partner income into a single combined income
-      income: sanitizedInput.partnerIncome
-        ? sanitizedInput.income + sanitizedInput.partnerIncome
-        : sanitizedInput.income,
+      income: new IncomeHelper(
+        sanitizedInput.income,
+        sanitizedInput.partnerIncome,
+        maritalStatusHelper
+      ),
       // if canadaWholeLife, assume yearsInCanadaSince18 is 40
       yearsInCanadaSince18: sanitizedInput.canadaWholeLife
         ? 40
         : sanitizedInput.yearsInCanadaSince18,
       livingCountry: new LivingCountryHelper(sanitizedInput.livingCountry),
       legalStatus: new LegalStatusHelper(sanitizedInput.legalStatus),
-      maritalStatus: new MaritalStatusHelper(sanitizedInput.maritalStatus),
+      maritalStatus: maritalStatusHelper,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         sanitizedInput.partnerBenefitStatus
       ),
@@ -94,10 +99,10 @@ export class RequestHandler {
    */
   static getRequiredFields(input: ProcessedInput): FieldKey[] {
     const requiredFields = [FieldKey.INCOME]
-    if (input.income >= MAX_OAS_INCOME) {
+    if (input.income.client >= MAX_OAS_INCOME) {
       // over highest income, therefore don't need anything else
       return requiredFields
-    } else if (input.income < MAX_OAS_INCOME) {
+    } else if (input.income.client < MAX_OAS_INCOME) {
       // meets max income req, open up main form
       requiredFields.push(
         FieldKey.AGE,

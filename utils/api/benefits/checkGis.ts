@@ -35,7 +35,7 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
       ? MAX_GIS_INCOME_PARTNER_OAS
       : MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALLOWANCE
     : MAX_GIS_INCOME_SINGLE
-  const meetsReqIncome = input.income < maxIncome
+  const meetsReqIncome = input.income.relevant < maxIncome
 
   // main checks
   if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
@@ -49,7 +49,7 @@ export default function checkGis(input: ProcessedInput): BenefitResult {
         }
       } else {
         const entitlementResult = new GisEntitlement(
-          input.income,
+          input.income.relevant,
           oasResultIsPartial,
           input.maritalStatus,
           input.partnerBenefitStatus
