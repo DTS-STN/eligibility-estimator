@@ -38,7 +38,9 @@ export class IncomeHelper extends FieldHelper {
   }
 
   get sum(): number {
-    return this.client + this.partner
+    const a = this.client ? this.client : 0
+    const b = this.partner ? this.partner : 0
+    return a + b
   }
 }
 
