@@ -25,6 +25,7 @@ export interface RequestInput {
   livingCountry: string // country code
   legalStatus: LegalStatus
   legalStatusOther: string
+  canadaWholeLife: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerIncome: number // partner income
@@ -42,6 +43,7 @@ export interface ProcessedInput {
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
   legalStatusOther?: string
+  canadaWholeLife?: boolean
   yearsInCanadaSince18?: number
   everLivedSocialCountry?: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper

@@ -40,6 +40,18 @@ describe('code checks', () => {
   })
 })
 
+describe('translation checks', () => {
+  it('matches between question translations and available questions', async () => {
+    const translationsEn: Translations = getTranslations(Language.EN)
+    const translationsFr: Translations = getTranslations(Language.FR)
+    const translationKeysEn = Object.keys(translationsEn.question)
+    const translationKeysFr = Object.keys(translationsFr.question)
+    const enumKeys = Object.values(FieldKey)
+    expect(translationKeysEn).toEqual(enumKeys)
+    expect(translationKeysFr).toEqual(enumKeys)
+  })
+})
+
 describe('country checks', () => {
   const COUNTRY_COUNT = 195
   const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
@@ -184,6 +196,7 @@ describe('sanity checks', () => {
   it('fails when years in Canada is greater than age minus 18', async () => {
     const res = await mockGetRequestError({
       age: 65,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 48,
     })
     expect(res.status).toEqual(400)
@@ -192,6 +205,7 @@ describe('sanity checks', () => {
   it('accepts when years in Canada is equal to age minus 18', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 47,
     })
     expect(res.status).toEqual(200)
@@ -241,6 +255,16 @@ describe('sanity checks', () => {
     })
     expect(res.status).toEqual(200)
   })
+  it('fails when lifeCanada=true and "yearsInCanadaSince18" provided', async () => {
+    let res = await mockGetRequestError({
+      income: 10000,
+      age: 65,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: 20,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+  })
 })
 
 describe('field requirement analysis', () => {
@@ -252,14 +276,15 @@ describe('field requirement analysis', () => {
       livingCountry: undefined,
       legalStatus: undefined,
       legalStatusOther: undefined,
+      canadaWholeLife: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual(['income'])
-    expect(res.body.visibleFields).toEqual(['income'])
+    expect(res.body.missingFields).toEqual([FieldKey.INCOME])
+    expect(res.body.visibleFields).toEqual([FieldKey.INCOME])
   })
   it('requires fields when only income provided', async () => {
     const res = await mockGetRequest({
@@ -269,6 +294,7 @@ describe('field requirement analysis', () => {
       livingCountry: undefined,
       legalStatus: undefined,
       legalStatusOther: undefined,
+      canadaWholeLife: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -276,19 +302,19 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
     ])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
     ])
   })
   it('requires fields when only income/age provided', async () => {
@@ -299,6 +325,7 @@ describe('field requirement analysis', () => {
       livingCountry: undefined,
       legalStatus: undefined,
       legalStatusOther: undefined,
+      canadaWholeLife: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -306,28 +333,62 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
     ])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
     ])
   })
-  it('requires fields when only income/age/country provided', async () => {
+  it('requires fields when only income/age/marital provided', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      maritalStatus: undefined,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: undefined,
+      legalStatus: undefined,
+      legalStatusOther: undefined,
+      canadaWholeLife: undefined,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
+    expect(res.body.missingFields).toEqual([
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+    expect(res.body.visibleFields).toEqual([
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+  })
+  it('requires fields when only income/age/marital/country provided', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: undefined,
       legalStatusOther: undefined,
+      canadaWholeLife: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -335,27 +396,31 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      'maritalStatus',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
   })
-  it('requires fields when only income/age/country/legal provided', async () => {
+  it('requires fields when only income/age/marital/country/legal provided', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      maritalStatus: undefined,
+      maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -363,70 +428,22 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      'maritalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
   })
-  it('requires fields when only income/age/country/legal/years provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: undefined,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      legalStatusOther: undefined,
-      partnerIncome: undefined,
-      yearsInCanadaSince18: 40,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual(['maritalStatus'])
-
-    expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
-    ])
-  })
-  it('requires no fields when only income/age/country/legal/years/marital=single provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      legalStatusOther: undefined,
-      partnerIncome: undefined,
-      yearsInCanadaSince18: 40,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-    })
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
-    expect(res.body.missingFields).toEqual([])
-    expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
-    ])
-  })
-  it('requires fields when only income/age/country/legal/years/marital=married provided', async () => {
+  it('requires fields when only income/age/marital/country/legal/lifeCanada provided', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -434,28 +451,31 @@ describe('field requirement analysis', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      partnerIncome: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      'partnerBenefitStatus',
-      'partnerIncome',
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
-      'partnerBenefitStatus',
-      'partnerIncome',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
   })
-  it('requires fields when only income/age/country/legal/years/marital=married/partnerBenefitStatus provided', async () => {
+  it('requires fields when only income/age/marital/country/legal/lifeCanada/years provided', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -463,22 +483,90 @@ describe('field requirement analysis', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 5,
       everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
+    expect(res.body.missingFields).toEqual([
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+    expect(res.body.visibleFields).toEqual([
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+  })
+  it('requires fields when only income/age/marital/country/legal/lifeCanada/years/socialCountry provided', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 5,
+      everLivedSocialCountry: true,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
+    expect(res.body.missingFields).toEqual([
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+    expect(res.body.visibleFields).toEqual([
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+  })
+  it('requires fields when only income/age/marital/country/legal/lifeCanada/years/socialCountry/partnerBenefits provided', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 5,
+      everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: undefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual(['partnerIncome'])
+    expect(res.body.missingFields).toEqual([FieldKey.PARTNER_INCOME])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
-      'partnerBenefitStatus',
-      'partnerIncome',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
   })
   it('requires no fields when all provided', async () => {
@@ -489,24 +577,54 @@ describe('field requirement analysis', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
-      everLivedSocialCountry: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 5,
+      everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 10000,
     })
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
-      'partnerBenefitStatus',
-      'partnerIncome',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+  })
+})
+
+describe('field requirements analysis: conditional fields', () => {
+  it('requires "yearsInCanadaSince18" when lifeCanada=false', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
+    expect(res.body.missingFields).toEqual([FieldKey.YEARS_IN_CANADA_SINCE_18])
+    expect(res.body.visibleFields).toEqual([
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
     ])
   })
   it('requires "everLivedSocialCountry" when citizen and under 10 years in Canada', async () => {
@@ -517,21 +635,23 @@ describe('field requirement analysis', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 9,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 5,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual(['everLivedSocialCountry'])
+    expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'yearsInCanadaSince18',
-      'everLivedSocialCountry',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     ])
   })
   it('requires "legalStatusOther" when legal=other', async () => {
@@ -542,21 +662,52 @@ describe('field requirement analysis', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual(['legalStatusOther'])
+    expect(res.body.missingFields).toEqual([FieldKey.LEGAL_STATUS_OTHER])
     expect(res.body.visibleFields).toEqual([
-      'income',
-      'age',
-      'maritalStatus',
-      'livingCountry',
-      'legalStatus',
-      'legalStatusOther',
-      'yearsInCanadaSince18',
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LEGAL_STATUS_OTHER,
+      FieldKey.CANADA_WHOLE_LIFE,
+    ])
+  })
+  it('requires partner questions when marital=married', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+    })
+    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
+    expect(res.body.missingFields).toEqual([
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
+    ])
+    expect(res.body.visibleFields).toEqual([
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
   })
 })
@@ -570,7 +721,8 @@ describe('summary object checks', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 10000,
@@ -587,7 +739,8 @@ describe('summary object checks', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 10000,
@@ -604,7 +757,8 @@ describe('summary object checks', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 10000,
@@ -629,7 +783,8 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: 'some legal status',
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -647,7 +802,8 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -665,6 +821,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
       partnerBenefitStatus: undefined,
@@ -683,6 +840,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -699,6 +857,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -715,6 +874,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -731,6 +891,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -749,6 +910,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -765,6 +927,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -780,6 +943,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -796,6 +960,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
       partnerBenefitStatus: undefined,
@@ -812,6 +977,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
       partnerBenefitStatus: undefined,
@@ -830,6 +996,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -846,6 +1013,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -862,6 +1030,7 @@ describe('basic OAS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: 'some legal status',
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -881,6 +1050,7 @@ describe('OAS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -898,6 +1068,7 @@ describe('OAS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 39,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -915,7 +1086,8 @@ describe('OAS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -932,7 +1104,8 @@ describe('basic GIS scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       income: 1000000,
       age: 65,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
     })
     expect(res.body.results.gis.eligibilityResult).toEqual(ResultKey.INELIGIBLE)
     expect(res.body.results.gis.reason).toEqual(ResultReason.OAS)
@@ -945,7 +1118,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -961,7 +1135,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -979,7 +1154,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -995,7 +1171,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1011,7 +1188,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
@@ -1027,7 +1205,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 1000,
@@ -1043,7 +1222,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1059,7 +1239,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 1000,
@@ -1075,7 +1256,8 @@ describe('basic GIS scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1094,7 +1276,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1110,6 +1293,7 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1126,7 +1310,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1142,7 +1327,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1158,7 +1344,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
@@ -1174,7 +1361,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
@@ -1190,7 +1378,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 1000,
@@ -1206,7 +1395,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 1000,
@@ -1222,7 +1412,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.ALLOWANCE,
       partnerIncome: 1000,
@@ -1238,7 +1429,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1254,7 +1446,8 @@ describe('GIS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.ALLOWANCE,
       partnerIncome: 0,
@@ -1273,7 +1466,8 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1301,6 +1495,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1319,6 +1514,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1337,6 +1533,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: 'some legal status',
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1355,6 +1552,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1375,6 +1573,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1393,6 +1592,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1411,6 +1611,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1429,6 +1630,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1447,6 +1649,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1465,6 +1668,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1485,6 +1689,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1503,6 +1708,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1523,6 +1729,7 @@ describe('basic Allowance scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: 'some legal status',
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
@@ -1544,7 +1751,8 @@ describe('Allowance entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1563,7 +1771,8 @@ describe('Allowance entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1582,7 +1791,8 @@ describe('Allowance entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1604,7 +1814,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1628,6 +1839,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1644,6 +1856,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1660,6 +1873,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: 'some legal status',
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1678,6 +1892,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -1694,6 +1909,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1710,6 +1926,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1726,6 +1943,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1742,6 +1960,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1760,6 +1979,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -1776,6 +1996,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -1792,6 +2013,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
       legalStatusOther: 'some legal status',
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -1811,7 +2033,8 @@ describe('AFS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1828,7 +2051,8 @@ describe('AFS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1845,7 +2069,8 @@ describe('AFS entitlement scenarios', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 40,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
       partnerIncome: undefined,
@@ -1865,7 +2090,8 @@ describe('thorough personas', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
-      yearsInCanadaSince18: 47,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
       partnerIncome: 0,
@@ -1883,6 +2109,7 @@ describe('thorough personas', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 18,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1903,6 +2130,7 @@ describe('thorough personas', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 30,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1921,6 +2149,7 @@ describe('thorough personas', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.PERMANENT_RESIDENT,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 15,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -1942,6 +2171,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -1960,6 +2190,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
       partnerBenefitStatus: undefined,
@@ -1982,6 +2213,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -2002,6 +2234,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,
@@ -2020,6 +2253,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
       partnerBenefitStatus: undefined,
@@ -2040,6 +2274,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -2058,6 +2293,7 @@ describe('thorough extras', () => {
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       legalStatusOther: undefined,
+      canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: undefined,

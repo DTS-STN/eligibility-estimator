@@ -24,17 +24,18 @@ const en: Translations = {
   question: {
     income: 'What is your current annual net income in Canadian Dollars?',
     age: 'What is your current age?',
+    maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country are you currently living in?',
     legalStatus: 'What is your current legal status?',
     legalStatusOther: 'Please specify:',
+    canadaWholeLife: 'Have you only lived in Canada since the age of 18?',
     yearsInCanadaSince18:
       'How many years have you lived in Canada since the age of 18?',
-    maritalStatus: 'What is your current marital status?',
-    partnerIncome:
-      "What is your partner's annual net income in Canadian dollars?",
-    partnerBenefitStatus: 'Which of the following applies to you?',
     everLivedSocialCountry:
       'Have you ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
+    partnerBenefitStatus: 'Which of the following applies to you?',
+    partnerIncome:
+      "What is your partner's annual net income in Canadian dollars?",
   },
   questionOptions: {
     legalStatus: [
