@@ -138,6 +138,9 @@ export class RequestHandler {
         FieldKey.PARTNER_CANADA_WHOLE_LIFE
       )
     }
+    if (input.partnerCanadaWholeLife === false) {
+      requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+    }
     requiredFields.sort(RequestHandler.sortFields)
     return requiredFields
   }

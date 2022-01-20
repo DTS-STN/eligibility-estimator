@@ -53,6 +53,7 @@ export interface ProcessedInput {
   yearsInCanadaSince18?: number
   everLivedSocialCountry?: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper
+  partnerCanadaWholeLife?: boolean
   _translations: Translations
 }
 
