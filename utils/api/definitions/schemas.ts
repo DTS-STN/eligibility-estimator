@@ -18,7 +18,7 @@ import { LegalStatus, MaritalStatus, PartnerBenefitStatus } from './enums'
  * Note: Do not require fields here, do it in the benefit-specific schemas.
  */
 export const RequestSchema = Joi.object({
-  income: Joi.number().integer().min(0),
+  income: Joi.number().precision(2).min(0),
   age: Joi.number().integer().max(150),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
@@ -33,7 +33,7 @@ export const RequestSchema = Joi.object({
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
   ),
-  partnerIncome: Joi.number().integer(),
+  partnerIncome: Joi.number().precision(2),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
