@@ -33,15 +33,20 @@ export interface Translations {
   question: {
     income: string
     age: string
+    maritalStatus: string
     livingCountry: string
     legalStatus: string
     legalStatusOther: string
     canadaWholeLife: string
     yearsInCanadaSince18: string
-    maritalStatus: string
-    partnerIncome: string
-    partnerBenefitStatus: string
     everLivedSocialCountry: string
+    partnerBenefitStatus: string
+    partnerIncome: string
+    partnerAge: string
+    partnerLivingCountry: string
+    partnerLegalStatus: string
+    partnerCanadaWholeLife: string
+    partnerYearsInCanadaSince18: string
   }
   questionOptions: {
     legalStatus: KeyAndText[]

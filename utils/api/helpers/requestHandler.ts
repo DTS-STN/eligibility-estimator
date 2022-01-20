@@ -130,6 +130,14 @@ export class RequestHandler {
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
+    if (input.partnerBenefitStatus.helpMe) {
+      requiredFields.push(
+        FieldKey.PARTNER_AGE,
+        FieldKey.PARTNER_LEGAL_STATUS,
+        FieldKey.PARTNER_LIVING_COUNTRY,
+        FieldKey.PARTNER_CANADA_WHOLE_LIFE
+      )
+    }
     requiredFields.sort(RequestHandler.sortFields)
     return requiredFields
   }
@@ -217,9 +225,15 @@ export class RequestHandler {
         fieldData.type === FieldType.DROPDOWN_SEARCHABLE ||
         fieldData.type === FieldType.RADIO
       ) {
-        const questionOptions = translations.questionOptions[fieldData.key]
+        // looks up using the main key first
+        let questionOptions = translations.questionOptions[fieldData.key]
         if (!questionOptions)
-          throw new Error(`no questionOptions for key ${fieldData.key}`)
+          // if that fails, uses the relatedKey instead
+          questionOptions = translations.questionOptions[fieldData.relatedKey]
+        if (!questionOptions)
+          throw new Error(
+            `no questionOptions for key ${fieldData.key} or relatedKey ${fieldData.relatedKey}`
+          )
         fieldData.values = questionOptions
       }
 

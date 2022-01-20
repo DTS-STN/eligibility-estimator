@@ -29,8 +29,13 @@ export interface RequestInput {
   canadaWholeLife: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
-  partnerIncome: number // partner income
   partnerBenefitStatus: PartnerBenefitStatus
+  partnerIncome: number // partner income
+  partnerAge: number
+  partnerLivingCountry: string // country code
+  partnerLegalStatus: LegalStatus
+  partnerCanadaWholeLife: boolean
+  partnerYearsInCanadaSince18: number
   _language?: Language
 }
 

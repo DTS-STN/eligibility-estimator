@@ -107,8 +107,9 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
   anyOas: boolean
   fullOas: boolean
   partialOas: boolean
-  allowance: boolean
   gis: boolean
+  allowance: boolean
+  helpMe: boolean
 
   constructor(public value: PartnerBenefitStatus) {
     super(value)
@@ -123,5 +124,6 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
       value == PartnerBenefitStatus.FULL_OAS_GIS ||
       value == PartnerBenefitStatus.PARTIAL_OAS_GIS
     this.allowance = value == PartnerBenefitStatus.ALLOWANCE
+    this.helpMe = value == PartnerBenefitStatus.HELP_ME
   }
 }

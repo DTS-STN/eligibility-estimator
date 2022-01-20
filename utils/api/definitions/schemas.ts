@@ -34,6 +34,14 @@ export const RequestSchema = Joi.object({
     ...Object.values(PartnerBenefitStatus)
   ),
   partnerIncome: Joi.number().precision(2),
+  partnerAge: Joi.number().integer().max(150),
+  partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
+  partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
+  partnerCanadaWholeLife: Joi.boolean(),
+  partnerYearsInCanadaSince18: Joi.number()
+    .integer()
+    .ruleset.max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
+    .message('Years in Canada should be no more than partnerAge minus 18'),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

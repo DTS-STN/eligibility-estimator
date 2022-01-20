@@ -39,6 +39,14 @@ const fr: Translations = {
     partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     partnerIncome:
       'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
+    partnerAge: "Quel est l'âge actuel de votre partenaire?",
+    partnerLivingCountry:
+      'Dans quel pays habite actuellement votre partenaire?',
+    partnerLegalStatus: 'Quel est le statut légal actuel de votre partenaire?',
+    partnerCanadaWholeLife:
+      "Est-ce que votre partenaire a seulement habité au Canada depuis l'âge de 18 ans?",
+    partnerYearsInCanadaSince18:
+      "Combien d'années votre partenaire a-t-il(elle) habité au Canada depuis l'âge de 18 ans?",
   },
   questionOptions: {
     legalStatus: [
