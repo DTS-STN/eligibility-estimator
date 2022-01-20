@@ -22,12 +22,10 @@ type FormProgress = {
   estimation?: boolean
 }
 
-/** API endpoint for eligibility*/
-const API_URL = `api/calculateEligibility`
-
 export const Form = types
   .model({
     fields: types.array(FormField),
+    API_URL: `api/calculateEligibility`,
   })
   .views((self) => ({
     get hasErrors() {
@@ -46,12 +44,6 @@ export const Form = types
     },
     get empty(): boolean {
       return self.fields.length === 0
-    },
-    get previouslySavedValues(): { key: string; value: string }[] {
-      return self.fields.map((field) => ({
-        key: field.key,
-        value: field.value,
-      }))
     },
   }))
   .views((self) => ({
@@ -201,7 +193,7 @@ export const Form = types
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
 
-      const apiData = yield fetch(`${API_URL}?${queryString}`)
+      const apiData = yield fetch(`${self.API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {

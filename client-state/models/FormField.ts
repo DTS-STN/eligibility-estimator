@@ -7,9 +7,9 @@ export const KeyValue = types.model({
   text: types.string,
 })
 
-const Category = KeyValue.named('Category')
-const Options = KeyValue.named('Options')
-const Default = KeyValue.named('Default')
+export const Category = KeyValue.named('Category')
+export const Options = KeyValue.named('Options')
+export const Default = KeyValue.named('Default')
 
 export const FormField = types
   .model({

@@ -38,12 +38,12 @@ export const Summary = types.model({
 
 export const RootStore = types
   .model({
-    form: Form,
-    oas: OAS,
-    gis: GIS,
-    afs: AFS,
-    allowance: Allowance,
-    summary: Summary,
+    form: types.maybe(Form),
+    oas: types.maybe(OAS),
+    gis: types.maybe(GIS),
+    afs: types.maybe(AFS),
+    allowance: types.maybe(Allowance),
+    summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
   })
   .views((self) => ({
