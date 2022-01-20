@@ -7,8 +7,7 @@ import { OutputItemAllowance } from '../scrapers/partneredAllowanceScraper'
 export default function checkAllowance(input: ProcessedInput): BenefitResult {
   // helpers
   const meetsReqMarital = input.maritalStatus.partnered
-  const meetsReqPartner =
-    input.partnerBenefitStatus.anyOas && input.partnerBenefitStatus.gis
+  const meetsReqPartner = input.partnerBenefitStatus.gis
   const meetsReqAge = 60 <= input.age && input.age <= 64
   const overAgeReq = 65 <= input.age
   const underAgeReq = input.age < 60
