@@ -218,13 +218,13 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const query = context.query
 
+  const host = context.req.headers.host
+
   const params = Object.keys(query)
     .map((key) => key + '=' + query[key])
     .join('&')
 
-  const path = `http://localhost:3000/api/calculateEligibility?${
-    params && params
-  }`
+  const path = `http://${host}/api/calculateEligibility?${params && params}`
 
   const res = await fetch(path)
   const data = await res.json()
