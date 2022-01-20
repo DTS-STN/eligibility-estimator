@@ -224,7 +224,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .map((key) => key + '=' + query[key])
     .join('&')
 
-  const path = `http://${host}/api/calculateEligibility?${params && params}`
+  const path = `http://${host}/api/calculateEligibility?${params}`
 
   const res = await fetch(path)
   const data = await res.json()

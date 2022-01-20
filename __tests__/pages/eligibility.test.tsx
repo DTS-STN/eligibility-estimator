@@ -25,7 +25,7 @@ describe('index page', () => {
 
   it('should render the eligibility page', async () => {
     const res = await mockPartialGetRequest({
-      income: '20000' as unknown as number,
+      income: 20000,
     })
 
     const ui = (
