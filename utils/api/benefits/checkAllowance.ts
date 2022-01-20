@@ -75,7 +75,7 @@ export default function checkAllowance(input: ProcessedInput): BenefitResult {
       eligibilityResult: ResultKey.INELIGIBLE,
       entitlementResult: 0,
       reason: ResultReason.OAS,
-      detail: input._translations.detail.mustHavePartnerWithOas,
+      detail: input._translations.detail.mustHavePartnerWithGis,
     }
   } else if (!meetsReqIncome) {
     return {

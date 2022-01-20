@@ -68,7 +68,7 @@ export interface Translations {
     mustCompleteOasCheck: string
     mustBeWidowed: string
     mustBePartnered: string
-    mustHavePartnerWithOas: string
+    mustHavePartnerWithGis: string
     mustMeetIncomeReq: string
     mustMeetYearReq: string
     ineligibleYearsOrCountry: string

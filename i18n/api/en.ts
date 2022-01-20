@@ -301,8 +301,8 @@ const en: Translations = {
       'You must be a surviving partner or widowed to be eligible for this benefit.',
     mustBePartnered:
       'You must be common-law or married to be eligible for this benefit.',
-    mustHavePartnerWithOas:
-      'Your partner must be receiving Old Age Security to be eligible for this benefit.',
+    mustHavePartnerWithGis:
+      'Your partner must be receiving the Guaranteed Income Supplement to be eligible for this benefit.',
     mustMeetIncomeReq:
       'Your income is too high to be eligible for this benefit.',
     mustMeetYearReq:

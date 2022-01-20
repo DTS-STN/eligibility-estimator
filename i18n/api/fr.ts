@@ -319,8 +319,8 @@ const fr: Translations = {
       'Vous devez être un partenaire survivant ou un veuf pour être admissible à cette prestation.',
     mustBePartnered:
       'Vous devez être conjoint de fait ou marié pour être admissible à cette prestation.',
-    mustHavePartnerWithOas:
-      'Votre partenaire doit recevoir la prestation de sécurité de la vieillesse pour être admissible à cette prestation.',
+    mustHavePartnerWithGis:
+      'Votre partenaire doit recevoir le supplément de revenu garanti pour être admissible à cette prestation.',
     mustMeetIncomeReq:
       'Votre revenu est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
