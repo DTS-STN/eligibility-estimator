@@ -3,7 +3,6 @@ import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
-import { FieldType } from '../../utils/api/definitions/fields'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {

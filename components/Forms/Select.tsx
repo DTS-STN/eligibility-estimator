@@ -35,6 +35,7 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
       <label
         htmlFor={name}
         aria-label={name}
+        data-testid="select-label"
         className="font-semibold inline-block mb-1.5"
       >
         <span className="text-danger">* </span>
@@ -63,6 +64,7 @@ export const FormSelect: React.VFC<SelectProps> = observer((props) => {
           }}
           className="rselect"
           placeholder="Select from..."
+          data-testid="select"
           value={stateValue}
           defaultValue={
             defaultValue !== undefined
