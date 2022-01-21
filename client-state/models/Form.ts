@@ -1,10 +1,4 @@
-import {
-  flow,
-  getParentOfType,
-  Instance,
-  SnapshotIn,
-  types,
-} from 'mobx-state-tree'
+import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import {
@@ -128,7 +122,7 @@ export const Form = types
       self.removeFields(fieldsToRemove)
 
       // remove the now invalid summary object
-      const parent = getParentOfType(self, RootStore)
+      const parent = getParent(self) as Instance<typeof RootStore>
       parent.setSummary({})
     },
     clearAllErrors() {
@@ -205,7 +199,7 @@ export const Form = types
         }
       } else {
         self.clearAllErrors()
-        const parent = getParentOfType(self, RootStore)
+        const parent = getParent(self) as Instance<typeof RootStore>
         parent.setOAS(data.results.oas)
         parent.setGIS(data.results.gis)
         parent.setAFS(data.results.afs)

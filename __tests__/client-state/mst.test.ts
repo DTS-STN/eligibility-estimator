@@ -1,5 +1,6 @@
-import { Instance } from 'mobx-state-tree'
+import { getSnapshot, Instance } from 'mobx-state-tree'
 import { Form } from '../../client-state/models/Form'
+import { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import {
   LegalStatus,
@@ -30,7 +31,7 @@ describe('test the mobx state tree nodes', () => {
     form.fields[5].setValue('true') // Lived in Canada whole life
   }
 
-  async function instantiateField() {
+  async function instantiateFormFields() {
     return await mockPartialGetRequest({
       income: '20000' as unknown as number,
     })
@@ -54,7 +55,7 @@ describe('test the mobx state tree nodes', () => {
   })
 
   it('can report if a form field is filled out or not', async () => {
-    const res = await instantiateField()
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     expect(form.fields[0].filled).toBe(false)
@@ -63,14 +64,14 @@ describe('test the mobx state tree nodes', () => {
   })
 
   it('can create a form via an api request', async () => {
-    const res = await instantiateField()
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     expect(form.fields).toHaveLength(6)
   })
 
-  it('can clear an entire form', async () => {
-    const res = await instantiateField()
+  it("can clear an entire form's fields", async () => {
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     expect(form.fields).toHaveLength(6)
@@ -79,7 +80,7 @@ describe('test the mobx state tree nodes', () => {
   })
 
   it('can clear all values from a form', async () => {
-    const res = await instantiateField()
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     expect(form.fields).toHaveLength(6)
@@ -90,8 +91,40 @@ describe('test the mobx state tree nodes', () => {
     }
   })
 
+  it.only("can predictably retrieve a form field by it's key", async () => {
+    const form: Instance<typeof Form> = root.form
+    form.addField({
+      key: 'income',
+      type: 'currency',
+      label: 'What is your current annual net income in Canadian Dollars?',
+      category: { key: 'incomeDetails', text: 'Income Details' },
+      order: 1,
+      placeholder: '$20,000',
+      default: undefined,
+      value: null,
+      options: [],
+      error: undefined,
+    })
+
+    const field = form.getFieldByKey('income')
+
+    expect(field.key).toEqual('income')
+    expect(field.label).toEqual(
+      'What is your current annual net income in Canadian Dollars?'
+    )
+  })
+
+  it("can sanitize a form field's value as expected", async () => {
+    const res = await instantiateFormFields()
+    const field: Instance<typeof FormField> = FormField.create(
+      res.body.fieldData[0]
+    )
+    field.setValue('$20,000.00')
+    expect(field.sanitizeInput()).toEqual('20000.00')
+  })
+
   it('can report on empty fields in a form as expected', async () => {
-    const res = await instantiateField()
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     fillOutForm(form)
@@ -101,7 +134,7 @@ describe('test the mobx state tree nodes', () => {
   })
 
   it('can report on the forms progress', async () => {
-    const res = await instantiateField()
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     expect(form.progress.income).toBe(false)
@@ -114,7 +147,7 @@ describe('test the mobx state tree nodes', () => {
   })
 
   it('can build a consistent querystring', async () => {
-    const res = await instantiateField()
+    const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     let qs = form.buildQueryStringWithFormData()
