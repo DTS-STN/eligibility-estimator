@@ -3,7 +3,7 @@
  */
 import '@testing-library/jest-dom'
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { LanguageProvider, StoreProvider } from '../../components/Contexts'
 import { NumberField } from '../../components/Forms/NumberField'
 

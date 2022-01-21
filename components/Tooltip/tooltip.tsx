@@ -29,8 +29,18 @@ export const Tooltip: React.FC<{
 
   const isMobile = useMediaQuery(992)
 
+  if (!fieldDef) {
+    throw new Error(
+      `Tooltip with key "${field}" not found in internationalization file.`
+    )
+  }
+
   return (
-    <span className="ml-2 relative md:absolute inline-block" ref={wrapperRef}>
+    <span
+      className="ml-2 relative md:absolute inline-block"
+      ref={wrapperRef}
+      data-testid="tooltip"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"

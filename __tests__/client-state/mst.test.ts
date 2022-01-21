@@ -91,7 +91,7 @@ describe('test the mobx state tree nodes', () => {
     }
   })
 
-  it.only("can predictably retrieve a form field by it's key", async () => {
+  it("can predictably retrieve a form field by it's key", async () => {
     const form: Instance<typeof Form> = root.form
     form.addField({
       key: 'income',
