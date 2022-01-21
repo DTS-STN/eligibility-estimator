@@ -19,8 +19,7 @@ export interface TextFieldProps
  * @returns
  */
 export const TextField: React.VFC<TextFieldProps> = observer((props) => {
-  const { name, type, label, required, value, placeholder, onChange, error } =
-    props
+  const { name, label, required, value, placeholder, onChange, error } = props
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -38,7 +37,7 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
       <label
         htmlFor={name}
         aria-label={name}
-        data-testid="input-label"
+        data-testid="text-input-label"
         className="text-content font-bold inline-block mb-1.5"
       >
         {required && <span className="text-danger">*</span>} {label}
@@ -49,12 +48,13 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
       </label>
       {error && <ErrorLabel errorMessage={error} />}
       <textarea
+        data-testid="text-input"
         className={`form-control text-content ${error ? ' border-danger' : ''}`}
         placeholder={placeholder}
         onChange={onChange}
         defaultValue={value}
         rows={3}
-        required
+        required={required}
       />
     </>
   )
