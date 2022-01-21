@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -7,7 +7,7 @@ import { CurrencyField } from '../components/Forms/CurrencyField'
 import { Layout } from '../components/Layout'
 import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
   const router = useRouter()
   const [error, setError] = useState(null)
   return (
@@ -107,6 +107,12 @@ const Home: NextPage = () => {
       </Alert>
     </Layout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {},
+  }
 }
 
 export default Home

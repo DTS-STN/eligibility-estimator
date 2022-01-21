@@ -3522,7 +3522,6 @@ __metadata:
     react-number-format: ^4.9.1
     react-select: ^5.2.1
     swagger-ui-react: ^4.1.2
-    swr: ^1.1.0
     tailwindcss: ^2.2.9
     ts-node: ^10.4.0
     typescript: ^4.5.4
@@ -8821,15 +8820,6 @@ __metadata:
     react: ">=17.0.0"
     react-dom: ">=17.0.0"
   checksum: dd02f1193dab228f05b5aaf5534747375c0a079914343954a2058fc624ee6446b363ad1e626a4d98d95a2a411442d9cdd178b6de2ab3f0d4824064d37f711fe6
-  languageName: node
-  linkType: hard
-
-"swr@npm:^1.1.0":
-  version: 1.1.1
-  resolution: "swr@npm:1.1.1"
-  peerDependencies:
-    react: ^16.11.0 || ^17.0.0 || ^18.0.0
-  checksum: 6ac1af4f7ad512c6de4dda2be4f18efe95f338dd2d0235c7de70e8c44df15c27a42ced48f2668dd2c3f6466d10eb51f3d8c21748d0f16a9a50683f6fa1db426d
   languageName: node
   linkType: hard
 

@@ -1,12 +1,11 @@
 import { Tab } from '@headlessui/react'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import useSWR from 'swr'
 import { RootStore } from '../../client-state/store'
 import { Alert } from '../../components/Alert'
 import { ConditionalLinks } from '../../components/ConditionalLinks'
@@ -15,18 +14,30 @@ import { FAQ } from '../../components/FAQ'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 import { useMediaQuery, useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
-import { NeedHelpList } from '../../components/Layout/NeedHelpList'
 import ProgressBar from '../../components/ProgressBar'
 import { ResultsTable } from '../../components/ResultsTable'
 import { Tooltip } from '../../components/Tooltip/tooltip'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { dataFetcher } from '../../utils/web/helpers/utils'
+import {
+  ResponseError,
+  ResponseSuccess,
+} from '../../utils/api/definitions/types'
 import { validateIncome } from '../../utils/web/helpers/validator'
 
-const Eligibility: NextPage = () => {
+const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const { query } = useRouter()
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
   const isMobile = useMediaQuery(992)
+  const root: Instance<typeof RootStore> = useStore()
+
+  if ('error' in props) {
+    return (
+      <Layout>
+        <div>{props.error}</div>
+      </Layout>
+    )
+  }
+
   // check if income is too high to participate in calculation
   const incomeTooHigh = query && validateIncome(query.income as string)
 
@@ -34,32 +45,6 @@ const Eligibility: NextPage = () => {
   const showProgress = (() => {
     return !incomeTooHigh
   })()
-
-  // formdata will come from form, going to need a handler function to pass into Component Factory and a useEffect to pull data once the [dependency] changes
-  const params = Object.keys(query)
-    .map((key) => key + '=' + query[key])
-    .join('&')
-
-  const { data, error } = useSWR(
-    () => query && `api/calculateEligibility?${params && params}`,
-    dataFetcher
-  )
-
-  const root: Instance<typeof RootStore> = useStore()
-
-  if (error)
-    return (
-      <Layout>
-        <div>{error.message}</div>
-      </Layout>
-    )
-
-  if (!data)
-    return (
-      <Layout>
-        <div>Loading form...</div>
-      </Layout>
-    )
 
   return (
     <Layout>
@@ -160,7 +145,7 @@ const Eligibility: NextPage = () => {
                 </div>
               ) : (
                 <ComponentFactory
-                  data={data}
+                  data={props}
                   selectedTabIndex={setSelectedTabIndex}
                 />
               )}
@@ -228,6 +213,27 @@ const Eligibility: NextPage = () => {
       </Tab.Group>
     </Layout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const query = context.query
+
+  const host = context.req.headers.host
+
+  const params = Object.keys(query)
+    .map((key) => key + '=' + query[key])
+    .join('&')
+
+  const path = `http://${host}/api/calculateEligibility?${params}`
+
+  const res = await fetch(path)
+  const data = await res.json()
+
+  return {
+    props: {
+      ...data,
+    },
+  }
 }
 
 export default observer(Eligibility)
