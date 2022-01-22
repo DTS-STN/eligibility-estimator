@@ -18,6 +18,7 @@ export enum FieldKey {
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
   PARTNER_CANADA_WHOLE_LIFE = 'partnerCanadaWholeLife',
   PARTNER_YEARS_IN_CANADA_SINCE_18 = 'partnerYearsInCanadaSince18',
+  PARTNER_EVER_LIVED_SOCIAL_COUNTRY = 'partnerEverLivedSocialCountry',
 }
 
 export enum FieldType {
@@ -146,6 +147,13 @@ export const fieldDefinitions: FieldDefinitions = {
     order: 16,
     type: FieldType.NUMBER,
     placeholder: '40',
+  },
+  [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
+    key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
+    category: { key: FieldCategory.SOCIAL_AGREEMENT },
+    order: 17,
+    type: FieldType.BOOLEAN,
+    default: undefined,
   },
 }
 

@@ -47,6 +47,8 @@ const fr: Translations = {
       "Est-ce que votre partenaire a seulement habité au Canada depuis l'âge de 18 ans?",
     partnerYearsInCanadaSince18:
       "Combien d'années votre partenaire a-t-il(elle) habité au Canada depuis l'âge de 18 ans?",
+    partnerEverLivedSocialCountry:
+      'FRENCH: Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
   },
   questionOptions: {
     legalStatus: [
@@ -90,7 +92,7 @@ const fr: Translations = {
         key: 'partialOasGis',
         text: 'Mon partenaire reçoit une pension partielle de la SV et le SRG',
       },
-      { key: 'allowance', text: "Mon partenaire reçoit l'Allocation" },
+      { key: 'alw', text: "Mon partenaire reçoit l'Allocation" },
       { key: 'none', text: 'Aucune de ces réponses' },
       { key: 'helpMe', text: 'Aidez-moi à savoir' },
     ],
@@ -391,7 +393,7 @@ const fr: Translations = {
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/admissibilite.html',
       order: 6,
     },
-    allowanceQualify: {
+    alwQualify: {
       text: "Vous pourriez être admissible à l'Allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
       order: 7,
@@ -416,12 +418,12 @@ const fr: Translations = {
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
       order: 11,
     },
-    allowanceGisEntitlement: {
+    alwGisEntitlement: {
       text: "Montants du Supplément de revenu garanti (SRG) et de l'allocation ",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab4-1.html',
       order: 12,
     },
-    allowanceInfo: {
+    alwInfo: {
       text: 'Supplément de revenu garanti : Allocation',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/montant-prestation.html',
       order: 13,

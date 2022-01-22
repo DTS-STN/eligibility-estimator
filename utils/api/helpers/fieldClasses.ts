@@ -1,9 +1,12 @@
 import {
+  EntitlementResultType,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
+  ResultKey,
 } from '../definitions/enums'
+import { EligibilityResult, EntitlementResult } from '../definitions/types'
 import { AGREEMENT_COUNTRIES } from './countryUtils'
 
 export class FieldHelper {
@@ -104,26 +107,73 @@ export class MaritalStatusHelper extends FieldHelper {
 }
 
 export class PartnerBenefitStatusHelper extends FieldHelper {
-  anyOas: boolean
-  fullOas: boolean
-  partialOas: boolean
-  gis: boolean
-  allowance: boolean
   helpMe: boolean
+  oasEligibility: EntitlementResultType
+  gisEligibility: EntitlementResultType
+  alwEligibility: EntitlementResultType
 
   constructor(public value: PartnerBenefitStatus) {
     super(value)
-    this.fullOas =
-      value == PartnerBenefitStatus.FULL_OAS ||
-      value == PartnerBenefitStatus.FULL_OAS_GIS
-    this.partialOas =
-      value == PartnerBenefitStatus.PARTIAL_OAS ||
-      value == PartnerBenefitStatus.PARTIAL_OAS_GIS
-    this.anyOas = this.fullOas || this.partialOas
-    this.gis =
-      value == PartnerBenefitStatus.FULL_OAS_GIS ||
-      value == PartnerBenefitStatus.PARTIAL_OAS_GIS
-    this.allowance = value == PartnerBenefitStatus.ALLOWANCE
-    this.helpMe = value == PartnerBenefitStatus.HELP_ME
+    this.helpMe = this.value == PartnerBenefitStatus.HELP_ME
+    this.oasEligibility = EntitlementResultType.NONE
+    this.gisEligibility = EntitlementResultType.NONE
+    this.alwEligibility = EntitlementResultType.NONE
+    switch (this.value) {
+      case PartnerBenefitStatus.FULL_OAS:
+        this.oasEligibility = EntitlementResultType.FULL
+        break
+      case PartnerBenefitStatus.FULL_OAS_GIS:
+        this.oasEligibility = EntitlementResultType.FULL
+        this.gisEligibility = EntitlementResultType.FULL
+        break
+      case PartnerBenefitStatus.PARTIAL_OAS:
+        this.oasEligibility = EntitlementResultType.PARTIAL
+        break
+      case PartnerBenefitStatus.PARTIAL_OAS_GIS:
+        this.oasEligibility = EntitlementResultType.PARTIAL
+        this.gisEligibility = EntitlementResultType.FULL
+        break
+      case PartnerBenefitStatus.ALW:
+        this.alwEligibility = EntitlementResultType.FULL
+        break
+      case PartnerBenefitStatus.HELP_ME:
+        break
+      case PartnerBenefitStatus.NONE:
+        break
+    }
+  }
+
+  get fullOas(): boolean {
+    return this.oasEligibility === EntitlementResultType.FULL
+  }
+  get partialOas(): boolean {
+    return this.oasEligibility === EntitlementResultType.PARTIAL
+  }
+  get anyOas(): boolean {
+    return this.fullOas || this.partialOas
+  }
+  get gis(): boolean {
+    return this.gisEligibility === EntitlementResultType.FULL
+  }
+  get alw(): boolean {
+    return this.alwEligibility === EntitlementResultType.FULL
+  }
+
+  // when we calculate results for the partner, the below functions will be used to store the results
+
+  set oasResultEntitlement(value: EntitlementResult) {
+    this.oasEligibility = value.type
+  }
+  set gisResultEligibility(value: EligibilityResult) {
+    this.gisEligibility =
+      value.result === ResultKey.ELIGIBLE
+        ? EntitlementResultType.FULL
+        : EntitlementResultType.NONE
+  }
+  set alwResultEligibility(value: EligibilityResult) {
+    this.alwEligibility =
+      value.result === ResultKey.ELIGIBLE
+        ? EntitlementResultType.FULL
+        : EntitlementResultType.NONE
   }
 }

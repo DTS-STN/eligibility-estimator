@@ -1,7 +1,7 @@
-import PartneredAllowanceScraper from './partneredAllowanceScraper'
+import PartneredAfsScraper from './partneredAfsScraper'
+import PartneredAlwScraper from './partneredAlwScraper'
 import PartneredAndOasScraper from './partneredAndOasScraper'
 import PartneredNoOasScraper from './partneredNoOasScraper'
-import PartneredSurvivorScraper from './partneredSurvivorScraper'
 import SingleScraper from './singleScraper'
 
 const singleScraper = new SingleScraper()
@@ -13,8 +13,8 @@ partneredAndOasScraper.main().then(() => {})
 const partneredNoOasScraper = new PartneredNoOasScraper()
 partneredNoOasScraper.main().then(() => {})
 
-const partneredAllowance = new PartneredAllowanceScraper()
-partneredAllowance.main().then(() => {})
+const partneredAlw = new PartneredAlwScraper()
+partneredAlw.main().then(() => {})
 
-const partneredSurvivor = new PartneredSurvivorScraper()
-partneredSurvivor.main().then(() => {})
+const partneredAfs = new PartneredAfsScraper()
+partneredAfs.main().then(() => {})

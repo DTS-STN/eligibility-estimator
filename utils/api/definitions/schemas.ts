@@ -42,6 +42,7 @@ export const RequestSchema = Joi.object({
     .integer()
     .ruleset.max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
     .message('Years in Canada should be no more than partnerAge minus 18'),
+  partnerEverLivedSocialCountry: Joi.boolean(),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

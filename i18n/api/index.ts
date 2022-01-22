@@ -47,6 +47,7 @@ export interface Translations {
     partnerLegalStatus: string
     partnerCanadaWholeLife: string
     partnerYearsInCanadaSince18: string
+    partnerEverLivedSocialCountry: string
   }
   questionOptions: {
     legalStatus: KeyAndText[]
@@ -100,13 +101,13 @@ export interface Translations {
     oasQualify: Link
     oasPartial: Link
     gisQualify: Link
-    allowanceQualify: Link
+    alwQualify: Link
     afsQualify: Link
     workingOutsideCanada: Link
     gisEntitlement: Link
     oasEntitlement2: Link
-    allowanceGisEntitlement: Link
-    allowanceInfo: Link
+    alwGisEntitlement: Link
+    alwInfo: Link
     afsEntitlement: Link
     oasRecoveryTax: Link
     oasDefer: Link

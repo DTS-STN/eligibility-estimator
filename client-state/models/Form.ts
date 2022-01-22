@@ -203,7 +203,7 @@ export const Form = types
         parent.setOAS(data.results.oas)
         parent.setGIS(data.results.gis)
         parent.setAFS(data.results.afs)
-        parent.setAllowance(data.results.allowance)
+        parent.setAllowance(data.results.alw)
 
         parent.setSummary(data.summary)
 

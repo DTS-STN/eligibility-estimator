@@ -43,6 +43,12 @@ paths:
         - $ref: '#/components/parameters/everLivedSocialCountry'
         - $ref: '#/components/parameters/partnerBenefitStatus'
         - $ref: '#/components/parameters/partnerIncome'
+        - $ref: '#/components/parameters/partnerAge'
+        - $ref: '#/components/parameters/partnerLivingCountry'
+        - $ref: '#/components/parameters/partnerLegalStatus'
+        - $ref: '#/components/parameters/partnerCanadaWholeLife'
+        - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
+        - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
       responses:
         '200':
           $ref: '#/components/responses/200'
@@ -68,6 +74,12 @@ components:
           - everLivedSocialCountry
           - partnerBenefitStatus
           - partnerIncome
+          - partnerAge
+          - partnerLivingCountry
+          - partnerLegalStatus
+          - partnerCanadaWholeLife
+          - partnerYearsInCanadaSince18
+          - partnerEverLivedSocialCountry
 
     ResultKey:
       type: string
@@ -95,7 +107,6 @@ components:
         - Not eligible for OAS
         - Income too high
         - Your marital status does not meet the requirement for this benefit
-        - Only eligible for Partial OAS due to years in Canada
 
     ResultObject:
       type: object
@@ -443,4 +454,88 @@ components:
       schema:
         type: integer
         description: Income in Canadian dollars.
+      allowEmptyValue: false
+
+    partnerAge:
+      name: partnerAge
+      in: query
+      description: The current age of the partner, up to a max of 150.
+      required: false
+      schema:
+        type: integer
+        description: Age, up to a max of 150.
+        example: 65
+        maximum: 150
+      allowEmptyValue: false
+
+    partnerLivingCountry:
+      name: partnerLivingCountry
+      in: query
+      description: >
+        The country that the partner is currently living in.
+
+
+        _For testing purposes, "Agreement" and "No agreement" are options._
+      required: false
+      allowEmptyValue: false
+      schema:
+        type: string
+        description: Any country
+        example: CAN
+        enum:
+          - CAN
+          - AGREEMENT
+          - NO_AGREEMENT
+
+    partnerLegalStatus:
+      name: partnerLegalStatus
+      in: query
+      description: The current legal status of the partner.
+      required: false
+      example: canadianCitizen
+      schema:
+        type: string
+        enum:
+          - canadianCitizen
+          - permanentResident
+          - sponsored
+          - indianStatus
+          - other
+        description: The current legal status of the partner.
+      allowEmptyValue: false
+
+    partnerCanadaWholeLife:
+      name: partnerCanadaWholeLife
+      in: query
+      description: Have you only lived in Canada since the age of 18?
+      required: false
+      example: true
+      schema:
+        type: boolean
+      allowEmptyValue: false
+
+    partnerYearsInCanadaSince18:
+      name: partnerYearsInCanadaSince18
+      in: query
+      description: >
+        How many years the partner has lived in Canada since the age of 18.
+
+
+        _Note that this can not be greater than `age - 18`._
+      required: false
+      example: 40
+      schema:
+        type: integer
+        description: Years, up to a max of 100.
+        maximum: 100
+      allowEmptyValue: false
+
+    partnerEverLivedSocialCountry:
+      name: partnerEverLivedSocialCountry
+      in: query
+      description: Has the partner ever lived in a country with a social agreement? [link of countries to be included]
+      required: false
+      example: true
+      schema:
+        type: boolean
       allowEmptyValue: false
