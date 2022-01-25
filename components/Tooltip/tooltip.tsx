@@ -112,7 +112,7 @@ export const Tooltip: React.FC<{
 
 /**
  * Given the language and field, returns a single Tooltip configuration.
- * If useTextFromKey is set, it will override text.
+ * If useDataFromKey is set, it will override text and heading.
  */
 export function getTooltipTranslationByField(
   language: Language,
@@ -123,7 +123,10 @@ export function getTooltipTranslationByField(
     throw new Error(
       `Tooltip with key "${field}" not found in internationalization file.`
     )
-  if (data.useTextFromKey)
-    data.text = getTooltipTranslations(language)[data.useTextFromKey].text
+  if (data.useDataFromKey) {
+    const relatedData = getTooltipTranslations(language)[data.useDataFromKey]
+    data.text = relatedData.text
+    data.heading = relatedData.heading
+  }
   return data
 }

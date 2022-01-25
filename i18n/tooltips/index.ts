@@ -4,12 +4,12 @@ import en from './en'
 import fr from './fr'
 
 /**
- * A single Tooltip. If useTextFromKey is set, it will override text.
+ * A single Tooltip. If useDataFromKey is set, it will override text and heading.
  */
 export interface TooltipTranslation {
-  heading: string
+  heading?: string
   text?: string
-  useTextFromKey?: string
+  useDataFromKey?: string
 }
 
 /**
