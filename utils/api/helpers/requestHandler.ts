@@ -266,7 +266,7 @@ export class RequestHandler {
       const partnerGis = new GisBenefit(
         input.partner,
         translations,
-        allResults.client.oas
+        allResults.partner.oas
       )
       allResults.partner.gis.eligibility = partnerGis.eligibility
 
