@@ -45,6 +45,24 @@ const en: TooltipTranslations = {
     heading: 'Social Agreement Countries',
     text: 'You may still qualify if you have you lived in one of the countries Canada has established a social security agreement.',
   },
+  partnerAge: {
+    useDataFromKey: 'age',
+  },
+  partnerLivingCountry: {
+    useDataFromKey: 'livingCountry',
+  },
+  partnerLegalStatus: {
+    useDataFromKey: 'legalStatus',
+  },
+  partnerCanadaWholeLife: {
+    useDataFromKey: 'canadaWholeLife',
+  },
+  partnerYearsInCanadaSince18: {
+    useDataFromKey: 'yearsInCanadaSince18',
+  },
+  partnerEverLivedSocialCountry: {
+    useDataFromKey: 'everLivedSocialCountry',
+  },
 }
 
 export default en
