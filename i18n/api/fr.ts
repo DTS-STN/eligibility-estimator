@@ -1,5 +1,6 @@
 // noinspection SpellCheckingInspection
 
+import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
 import { Translations } from './index'
 
 const fr: Translations = {
@@ -361,6 +362,7 @@ const fr: Translations = {
       'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes.',
     availableIneligible:
       "D'après les informations que vous avez fournies, vous n'avez probablement pas droit à des prestations. Consultez les détails ci-dessous pour plus d'informations.",
+    availableIneligibleIncome: `FRENCH You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
   },
   links: {
     oasOverview: {
