@@ -43,53 +43,13 @@ const Home: NextPage = (props) => {
           aged 60 to 64 whose spouse or common-law partner receives the
           Guaranteed Income Supplement.
         </p>
-        <p className="mb-4 text-content">
+        <p className="mb-10 text-content">
           Allowance for the Survivor is a monthly benefit available to
           individuals aged 60 to 64 who have a low income, who are living in
           Canada, and whose spouse or common-law partner has passed away.{' '}
         </p>
-        <h2 className="h2 mt-10">Income details</h2>
       </div>
-      <form
-        className="mb-10"
-        onSubmit={(e) => {
-          e.preventDefault()
-          const input = document.querySelector(
-            'input[name="income"]'
-          ) as HTMLInputElement
-          const sanitizedValue = input.value
-            .replaceAll('$', '')
-            .replaceAll(',', '')
-          if (sanitizedValue == null || sanitizedValue == '') {
-            setError('This field is required')
-          } else {
-            router.push(`/eligibility?income=${sanitizedValue}`)
-          }
-        }}
-        onReset={(e) => {
-          const input = document.querySelector(
-            'input[name="income"]'
-          ) as HTMLInputElement
-          input.setAttribute('value', '')
-          setError('')
-        }}
-        noValidate
-      >
-        <CurrencyField
-          type="text"
-          name="income"
-          label="What is your current annual net income in Canadian dollars"
-          placeholder="$20,000"
-          error={error}
-          required
-        />
-        <div className="mt-10 flex space-x-5">
-          <button type="reset" className="btn-default btn w-28">
-            Clear
-          </button>
-          <button className="btn btn-primary w-28">Next</button>
-        </div>
-      </form>
+
       <Alert title="Disclaimer" type={EstimationSummaryState.UNAVAILABLE}>
         Please be reminded that this is not a real service. It is a prototype.
         The results are estimates and not a final decision. For a more accurate
@@ -105,6 +65,13 @@ const Home: NextPage = (props) => {
         . The results are not financial advice. This application does not
         collect and does not save the information you have provided.
       </Alert>
+
+      <button
+        className="btn btn-primary w-28 mt-8"
+        onClick={(e) => router.push('/eligibility')}
+      >
+        Next
+      </button>
     </Layout>
   )
 }

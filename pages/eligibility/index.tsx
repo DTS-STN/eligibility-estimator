@@ -38,14 +38,6 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     )
   }
 
-  // check if income is too high to participate in calculation
-  const incomeTooHigh = query && validateIncome(query.income as string)
-
-  // show progress under certain circumstances
-  const showProgress = (() => {
-    return !incomeTooHigh
-  })()
-
   return (
     <Layout>
       <Tab.Group
@@ -55,9 +47,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
           setSelectedTabIndex(index)
         }}
       >
-        <Tab.List
-          className={`${!showProgress && 'hidden'} border-b border-muted/20`}
-        >
+        <Tab.List className={`border-b border-muted/20`}>
           <Tab
             className={({ selected }) =>
               selected
@@ -88,67 +78,11 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel className="mt-10">
-            {showProgress && (
-              <ProgressBar
-                sections={[
-                  {
-                    title: 'Income Details',
-                    complete: root.form.progress.income,
-                  },
-                  {
-                    title: 'Personal Information',
-                    complete: root.form.progress.personal,
-                  },
-                  {
-                    title: 'Legal Status',
-                    complete: root.form.progress.legal,
-                  },
-                ]}
-              />
-            )}
-            {incomeTooHigh && (
-              <Alert
-                title="Annual net income"
-                type={EstimationSummaryState.AVAILABLE_INELIGIBLE}
-              >
-                You currently do not appear to be eligible for the OAS pension
-                because your annual income is higher than 129,757 CAD.
-              </Alert>
-            )}
             <div className="md:container mt-14">
-              {incomeTooHigh ? (
-                <div>
-                  <h2 className="h2 mb-8">Income Details</h2>
-                  <label
-                    htmlFor=""
-                    aria-label=""
-                    data-testid="input-label"
-                    className="text-content font-bold mb-12"
-                  >
-                    <span className="text-danger">*</span>
-                    What is your current annual net income in Canadian dollars?
-                    <span className="text-danger font-bold ml-2">
-                      (required)
-                    </span>
-                    <Tooltip field={'income'} />
-                  </label>
-                  <p className="mt-2 mb-4">
-                    $
-                    {(query.income as string).replace(
-                      /\B(?=(\d{3})+(?!\d))/g,
-                      ','
-                    )}
-                  </p>
-                  <Link href="/" passHref>
-                    <a className="btn btn-default px-8 py-3">Back</a>
-                  </Link>
-                </div>
-              ) : (
-                <ComponentFactory
-                  data={props}
-                  selectedTabIndex={setSelectedTabIndex}
-                />
-              )}
+              <ComponentFactory
+                data={props}
+                selectedTabIndex={setSelectedTabIndex}
+              />
             </div>
           </Tab.Panel>
           <Tab.Panel className="mt-10">
