@@ -2,11 +2,14 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
 import { LanguageProvider, StoreProvider } from '../../components/Contexts'
-import { Tooltip } from '../../components/Tooltip/tooltip'
-import { fieldDefinitions } from '../../components/Tooltip/index'
+import {
+  getTooltipTranslationByField,
+  Tooltip,
+} from '../../components/Tooltip/tooltip'
+import { Language } from '../../i18n/api'
 
 // gets data correctly and presents it
 describe('Tooltip component', () => {
@@ -26,8 +29,12 @@ describe('Tooltip component', () => {
     render(ui)
 
     const tooltip = screen.getByTestId('tooltip')
-    expect(tooltip.textContent).toContain(fieldDefinitions.data[props.field][0]) // tooltip title
-    expect(tooltip.innerHTML).toContain(fieldDefinitions.data[props.field][0]) // tooltip content
+    expect(tooltip.textContent).toContain(
+      getTooltipTranslationByField(Language.EN, props.field).heading
+    )
+    expect(tooltip.innerHTML).toContain(
+      getTooltipTranslationByField(Language.EN, props.field).text
+    )
   })
 
   // throws if tooltip not found
