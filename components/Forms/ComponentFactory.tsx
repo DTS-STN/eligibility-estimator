@@ -52,12 +52,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     return (
       <>
         {incomeTooHigh ? (
-          <Alert
-            title="Annual net income"
-            type={EstimationSummaryState.AVAILABLE_INELIGIBLE}
-          >
-            You currently do not appear to be eligible for the OAS pension
-            because your annual income is higher than 129,757 CAD.
+          <Alert title={root.summary.title} type={root.summary.state}>
+            {root.summary.details}
           </Alert>
         ) : (
           <ProgressBar
