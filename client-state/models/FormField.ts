@@ -64,6 +64,6 @@ export const FormField = types
     handleChange: flow(function* (e) {
       const inputVal = e?.target?.value ?? { key: e.value, text: e.label }
       self.setValue(inputVal)
-      yield (getParent(self) as Instance<typeof Form>).sendAPIRequest()
+      yield (getParent(self, 2) as Instance<typeof Form>).sendAPIRequest()
     }),
   }))

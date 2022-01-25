@@ -5,8 +5,7 @@ import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 
-export interface TextFieldProps
-  extends InputHTMLAttributes<HTMLTextAreaElement> {
+export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   error?: string
@@ -25,10 +24,8 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
     document.addEventListener('wheel', function (event) {
-      const el = document.activeElement as HTMLTextAreaElement
-      if (el?.type === 'number') {
-        el.blur()
-      }
+      const el = document.activeElement as HTMLInputElement
+      el.blur()
     })
   }, [])
 
@@ -47,14 +44,13 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
         <Tooltip field={name} />
       </label>
       {error && <ErrorLabel errorMessage={error} />}
-      <textarea
-        data-testid="text-input"
+      <input
+        type="text"
         className={`form-control text-content ${error ? ' border-danger' : ''}`}
         placeholder={placeholder}
         onChange={onChange}
         defaultValue={value}
-        rows={3}
-        required={required}
+        required
       />
     </>
   )

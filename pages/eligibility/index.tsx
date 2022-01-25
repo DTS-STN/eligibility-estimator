@@ -22,7 +22,6 @@ import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
-import { validateIncome } from '../../utils/web/helpers/validator'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const { query } = useRouter()
