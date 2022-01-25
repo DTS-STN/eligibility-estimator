@@ -328,7 +328,7 @@ const en: Translations = {
   },
   summaryDetails: {
     moreInfo:
-      'You need to answer the remaining questions on the previous tab before an estimation can be provided.',
+      'Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     unavailable:
       'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.</br><a href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html" target="_blank">Contact Service Canada</a>',
     availableEligible:

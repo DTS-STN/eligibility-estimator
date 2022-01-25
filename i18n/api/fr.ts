@@ -345,11 +345,11 @@ const fr: Translations = {
   },
   summaryDetails: {
     moreInfo:
-      "Vous devez répondre aux autres questions de l'onglet précédent avant qu'une estimation puisse être fournie.",
+      'FRENCH: Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     unavailable:
       'D\'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.</br><a href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html" target="_blank">Contactez Service Canada</a>',
     availableEligible:
-      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes.',
+      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes. (To French: Note that this only provides an estimate of your monthly payment.)',
     availableIneligible:
       "D'après les informations que vous avez fournies, vous n'avez probablement pas droit à des prestations. Consultez les détails ci-dessous pour plus d'informations.",
     availableIneligibleIncome: `FRENCH You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
