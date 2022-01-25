@@ -25,6 +25,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         <label
           htmlFor={name}
           aria-label={name}
+          data-testid="radio-label"
           className="font-semibold inline-block mb-1.5 flex-nowrap"
         >
           <span className="text-danger">* </span>
@@ -43,6 +44,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           >
             <input
               type="radio"
+              data-testid="radio"
               id={`${keyforid}-${index}`}
               name={`${keyforid}`}
               // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable

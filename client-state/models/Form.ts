@@ -1,10 +1,4 @@
-import {
-  flow,
-  getParentOfType,
-  Instance,
-  SnapshotIn,
-  types,
-} from 'mobx-state-tree'
+import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import {
@@ -22,12 +16,10 @@ type FormProgress = {
   estimation?: boolean
 }
 
-/** API endpoint for eligibility*/
-const API_URL = `api/calculateEligibility`
-
 export const Form = types
   .model({
     fields: types.array(FormField),
+    API_URL: `api/calculateEligibility`,
   })
   .views((self) => ({
     get hasErrors() {
@@ -46,12 +38,6 @@ export const Form = types
     },
     get empty(): boolean {
       return self.fields.length === 0
-    },
-    get previouslySavedValues(): { key: string; value: string }[] {
-      return self.fields.map((field) => ({
-        key: field.key,
-        value: field.value,
-      }))
     },
   }))
   .views((self) => ({
@@ -136,7 +122,7 @@ export const Form = types
       self.removeFields(fieldsToRemove)
 
       // remove the now invalid summary object
-      const parent = getParentOfType(self, RootStore)
+      const parent = getParent(self) as Instance<typeof RootStore>
       parent.setSummary({})
     },
     clearAllErrors() {
@@ -201,7 +187,7 @@ export const Form = types
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
 
-      const apiData = yield fetch(`${API_URL}?${queryString}`)
+      const apiData = yield fetch(`${self.API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {
@@ -213,7 +199,7 @@ export const Form = types
         }
       } else {
         self.clearAllErrors()
-        const parent = getParentOfType(self, RootStore)
+        const parent = getParent(self) as Instance<typeof RootStore>
         parent.setOAS(data.results.oas)
         parent.setGIS(data.results.gis)
         parent.setAFS(data.results.afs)

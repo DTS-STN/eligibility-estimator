@@ -3,7 +3,6 @@ import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
-import { FieldType } from '../../utils/api/definitions/fields'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -20,8 +19,7 @@ export interface CurrencyFieldProps
  */
 export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
   (props) => {
-    const { name, type, label, required, value, placeholder, onChange, error } =
-      props
+    const { name, label, required, value, placeholder, onChange, error } = props
 
     // only need to run this once at component render, so no need for deps
     useEffect(() => {
@@ -35,11 +33,11 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
     }, [])
 
     return (
-      <>
+      <div>
         <label
           htmlFor={name}
           aria-label={name}
-          data-testid="input-label"
+          data-testid="currency-input-label"
           className="text-content inline-block font-bold mb-1.5"
         >
           {required && <span className="text-danger">*</span>} {label}
@@ -53,19 +51,19 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
         <NumberFormat
           id={name}
           name={name}
+          data-testid="currency-input"
           thousandSeparator={true}
           prefix="$"
           className={`form-control text-content ${
             error ? ' border-danger' : ''
           }`}
-          data-testid={name}
           min={0}
           value={value != null ? (value as string) : ''}
           placeholder={placeholder}
           onChange={onChange}
-          required
+          required={required}
         />
-      </>
+      </div>
     )
   }
 )

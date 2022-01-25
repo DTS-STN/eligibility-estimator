@@ -1,4 +1,4 @@
-import { types, flow, getParentOfType } from 'mobx-state-tree'
+import { types, flow, getParent, Instance } from 'mobx-state-tree'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { Form } from './Form'
 
@@ -7,9 +7,9 @@ export const KeyValue = types.model({
   text: types.string,
 })
 
-const Category = KeyValue.named('Category')
-const Options = KeyValue.named('Options')
-const Default = KeyValue.named('Default')
+export const Category = KeyValue.named('Category')
+export const Options = KeyValue.named('Options')
+export const Default = KeyValue.named('Default')
 
 export const FormField = types
   .model({
@@ -64,6 +64,6 @@ export const FormField = types
     handleChange: flow(function* (e) {
       const inputVal = e?.target?.value ?? { key: e.value, text: e.label }
       self.setValue(inputVal)
-      yield getParentOfType(self, Form).sendAPIRequest()
+      yield (getParent(self) as Instance<typeof Form>).sendAPIRequest()
     }),
   }))
