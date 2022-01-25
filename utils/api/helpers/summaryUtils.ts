@@ -73,6 +73,11 @@ export class SummaryBuilder {
       return this.translations.summaryDetails.unavailable
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
       return this.translations.summaryDetails.availableEligible
+    else if (
+      this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE &&
+      this.results.oas.reason === ResultReason.INCOME
+    )
+      return this.translations.summaryDetails.availableIneligibleIncome
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
       return this.translations.summaryDetails.availableIneligible
   }

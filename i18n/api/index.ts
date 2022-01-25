@@ -87,6 +87,7 @@ export interface Translations {
     unavailable: string
     availableEligible: string
     availableIneligible: string
+    availableIneligibleIncome: string
   }
   links: {
     oasOverview: Link
