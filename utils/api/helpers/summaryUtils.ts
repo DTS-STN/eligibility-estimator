@@ -84,17 +84,23 @@ export class SummaryBuilder {
 
   private getLinks(): Link[] {
     const links = [
+      this.translations.links.contactSC,
       this.translations.links.oasOverview,
-      this.translations.links.oasEntitlement,
     ]
-    if (this.input.livingCountry.provided && !this.input.livingCountry.canada) {
-      links.push(this.translations.links.outsideCanada)
-      links.push(this.translations.links.workingOutsideCanada)
-    }
-    if (this.input.age >= 65) {
-      links.push(this.translations.links.oasQualify)
-      links.push(this.translations.links.gisQualify)
-    }
+    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.oasEntitlement)
+    if (this.input.income.relevant >= MAX_OAS_INCOME)
+      links.push(this.translations.links.oasMaxIncome)
+    if (this.input.livingCountry.provided && !this.input.livingCountry.canada)
+      links.push(
+        this.translations.links.outsideCanada,
+        this.translations.links.workingOutsideCanada
+      )
+    if (this.input.age >= 65)
+      links.push(
+        this.translations.links.oasQualify,
+        this.translations.links.gisQualify
+      )
     if (this.results.oas?.reason === ResultReason.PARTIAL_OAS)
       links.push(this.translations.links.oasPartial)
     if (
@@ -111,11 +117,14 @@ export class SummaryBuilder {
       links.push(this.translations.links.afsQualify)
     if (this.results.gis?.eligibilityResult === ResultKey.ELIGIBLE)
       links.push(this.translations.links.gisEntitlement)
-    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)
+    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE) {
       links.push(this.translations.links.oasEntitlement2)
+    }
     if (this.results.allowance?.eligibilityResult === ResultKey.ELIGIBLE) {
-      links.push(this.translations.links.allowanceGisEntitlement)
-      links.push(this.translations.links.allowanceInfo)
+      links.push(
+        this.translations.links.allowanceGisEntitlement,
+        this.translations.links.allowanceInfo
+      )
     }
     if (this.results.afs?.eligibilityResult === ResultKey.ELIGIBLE)
       links.push(this.translations.links.afsEntitlement)
