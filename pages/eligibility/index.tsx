@@ -128,13 +128,14 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
                   )}
                 </>
               ) : (
-                <div className="flex place-content-center">
-                  <p className="font-semibold tracking-wide my-12">
-                    Please fill out the form. Based on the information you
-                    provide, the application will estimate your eligibility. If
-                    you are a qualified candidate, the application will also
-                    provide an estimate for your monthly payment.
-                  </p>
+                <div className="w-full">
+                  <Alert
+                    title={root.summary.title}
+                    type={EstimationSummaryState.MORE_INFO}
+                    insertHTML
+                  >
+                    {root.summary.details}
+                  </Alert>
                 </div>
               )}
             </div>
