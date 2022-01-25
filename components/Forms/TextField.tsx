@@ -46,7 +46,6 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
       </label>
       {error && <ErrorLabel errorMessage={error} />}
       <textarea
-        data-testid="text-input"
         className={`form-control text-content ${error ? ' border-danger' : ''}`}
         placeholder={placeholder}
         onChange={onChange}
