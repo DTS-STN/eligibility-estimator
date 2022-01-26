@@ -50,13 +50,6 @@ const Home: NextPage = (props) => {
         </p>
       </div>
 
-      <button
-        className="btn btn-primary w-28 mb-20 md:mb-40"
-        onClick={(e) => router.push('/eligibility')}
-      >
-        Next
-      </button>
-
       <Alert title="Disclaimer" type={EstimationSummaryState.UNAVAILABLE}>
         Please be reminded that this is not a real service. It is a prototype.
         The results are estimates and not a final decision. For a more accurate
@@ -72,6 +65,13 @@ const Home: NextPage = (props) => {
         . The results are not financial advice. This application does not
         collect and does not save the information you have provided.
       </Alert>
+
+      <button
+        className="btn btn-primary w-28 mt-8"
+        onClick={(e) => router.push('/eligibility')}
+      >
+        Next
+      </button>
     </Layout>
   )
 }
