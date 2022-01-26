@@ -20,6 +20,11 @@ import {
   fieldDefinitions,
   FieldKey,
 } from '../../../utils/api/definitions/fields'
+import {
+  MAX_ALW_INCOME,
+  MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+  MAX_GIS_INCOME_PARTNER_OAS,
+} from '../../../utils/api/definitions/legalValues'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
 import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
 import { OutputItem } from '../../../utils/api/scrapers/_base'
@@ -2996,9 +3001,9 @@ describe('thorough extras', () => {
 })
 
 describe('Help Me Find Out scenarios', () => {
-  it('works when client old, partner old (partner=noOas, therefore gis income limit 46656)', async () => {
+  it(`works when client old, partner old (partner=noOas, therefore gis income limit ${MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table 3)`, async () => {
     const input = {
-      income: 46656,
+      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3028,7 +3033,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: 46655,
+      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
@@ -3036,7 +3041,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(0.68)
   })
-  it('works when client old, partner old (partner=partialOas, therefore gis income limit 46656)', async () => {
+  it('works when client old, partner old (partner=partialOas, therefore gis income limit 46656, gis table unavailable)', async () => {
     const input = {
       income: 46656,
       age: 65,
@@ -3076,9 +3081,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(-1)
   })
-  it('works when client old, partner old (partner=fullOas, therefore gis income limit 25728)', async () => {
+  it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
     const input = {
-      income: 25728,
+      income: MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3108,12 +3113,72 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: 25727,
+      income: MAX_GIS_INCOME_PARTNER_OAS - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(0.33)
+  })
+  it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
+    const input = {
+      income: MAX_ALW_INCOME, // too high for allowance
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncome: 0,
+      partnerAge: 60,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerCanadaWholeLife: false,
+      partnerYearsInCanadaSince18: 40,
+      partnerEverLivedSocialCountry: undefined,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_ELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.entitlement.result).toEqual(220.68) // table 3
+  })
+  it('works when client old, partner young (partner=allowance, therefore gis table 4)', async () => {
+    const input = {
+      income: MAX_ALW_INCOME - 1, // okay for allowance
+      age: 65,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncome: 0,
+      partnerAge: 60,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerCanadaWholeLife: false,
+      partnerYearsInCanadaSince18: 40,
+      partnerEverLivedSocialCountry: undefined,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_ELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.entitlement.result).toEqual(221.35) // table 4
   })
 })

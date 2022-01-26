@@ -242,7 +242,6 @@ export class RequestHandler {
 
     // If the client needs help, check their partner's OAS.
     if (input.client.partnerBenefitStatus.helpMe) {
-      console.log('helping oas')
       const partnerOas = new OasBenefit(input.partner, translations)
       allResults.partner.oas.eligibility = partnerOas.eligibility
       allResults.partner.oas.entitlement = partnerOas.entitlement
@@ -262,7 +261,6 @@ export class RequestHandler {
 
     // If the client needs help, check their partner's GIS eligibility.
     if (input.client.partnerBenefitStatus.helpMe) {
-      console.log('helping gis')
       const partnerGis = new GisBenefit(
         input.partner,
         translations,
@@ -273,6 +271,9 @@ export class RequestHandler {
       // Save the result to the client's partnerBenefitStatus field, which is used TBD
       input.client.partnerBenefitStatus.gisResultEligibility =
         partnerGis.eligibility
+      // Save the result to the partner's partnerBenefitStatus field, which is used for partner's alw eligibility
+      input.partner.partnerBenefitStatus.gisResultEligibility =
+        clientGis.eligibility
     }
 
     // Moving onto ALW, again only doing eligibility.
@@ -281,7 +282,6 @@ export class RequestHandler {
 
     // If the client needs help, check their partner's ALW eligibility.
     if (input.client.partnerBenefitStatus.helpMe) {
-      console.log('helping alw')
       const partnerAlw = new AlwBenefit(input.partner, translations)
 
       allResults.partner.alw.eligibility = partnerAlw.eligibility
