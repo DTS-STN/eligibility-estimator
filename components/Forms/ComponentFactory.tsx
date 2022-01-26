@@ -188,12 +188,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               <button
                 type="button"
                 role="navigation"
-                className="btn btn-default"
+                className="btn btn-default mt-4 md:mt-0"
                 onClick={(e) => router.push('/')}
               >
                 Back
               </button>
-              <span className="col-span-1 block md:hidden"></span>
               <button
                 type="button"
                 role="button"
@@ -207,7 +206,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               <button
                 type="submit"
                 role="button"
-                className="btn btn-primary mt-4 md:mt-0 disabled:cursor-not-allowed disabled:bg-muted"
+                className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-muted"
                 onClick={async (e) => {
                   if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
                     selectedTabIndex(1)
