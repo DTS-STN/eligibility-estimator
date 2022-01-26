@@ -21,7 +21,7 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
-            <td>${root.oas.entitlementResult}</td>
+            <td>${root.oas.entitlement.result}</td>
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>Guaranteed Income Supplement (GIS)</td>
@@ -29,8 +29,8 @@ export const ResultsTable = observer(() => {
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
             <td>
-              {root.gis.entitlementResult !== -1
-                ? `$${root.gis.entitlementResult}`
+              {root.gis.entitlement.result !== -1
+                ? `$${root.gis.entitlement.result}`
                 : 'Unavailable'}
             </td>
           </tr>
@@ -39,14 +39,14 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
-            <td>${root.allowance && root.allowance.entitlementResult}</td>
+            <td>${root.allowance && root.allowance.entitlement.result}</td>
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>Allowance for Survivor</td>
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
-            <td>${root.afs && root.afs.entitlementResult}</td>
+            <td>${root.afs && root.afs.entitlement.result}</td>
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>Estimated Total Monthly Benefit Amount</td>
@@ -65,7 +65,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.oas.entitlementResult}
+            {root.oas.entitlement.result}
           </p>
         </div>
         <div className="mb-4">
@@ -78,7 +78,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.gis.entitlementResult}
+            {root.gis.entitlement.result}
           </p>
         </div>
         <div className="mb-4">
@@ -91,7 +91,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.allowance.entitlementResult}
+            {root.allowance.entitlement.result}
           </p>
         </div>
         <div className="mb-4">
@@ -104,7 +104,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.afs.entitlementResult}
+            {root.afs.entitlement.result}
           </p>
         </div>
         <div className="mb-4">

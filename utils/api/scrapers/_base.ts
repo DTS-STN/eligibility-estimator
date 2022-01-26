@@ -1,8 +1,8 @@
 import fs from 'fs'
 import https from 'https'
 import { JSDOM } from 'jsdom'
-import { OutputItemAllowance } from './partneredAllowanceScraper'
-import { OutputItemAfs } from './partneredSurvivorScraper'
+import { OutputItemAfs } from './partneredAfsScraper'
+import { OutputItemAlw } from './partneredAlwScraper'
 
 export class BaseScraper {
   private readonly tableUrl: (pageNo: number) => string
@@ -119,7 +119,7 @@ interface Range {
   high: number
 }
 
-export type OutputItem = OutputItemGis | OutputItemAllowance | OutputItemAfs
+export type OutputItem = OutputItemGis | OutputItemAlw | OutputItemAfs
 
 export interface OutputItemGeneric {
   range: Range

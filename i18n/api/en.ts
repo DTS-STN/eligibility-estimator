@@ -37,6 +37,15 @@ const en: Translations = {
     partnerBenefitStatus: 'Which of the following applies to you?',
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
+    partnerAge: "What is your partner's current age?",
+    partnerLivingCountry: 'What country is your partner currently living in?',
+    partnerLegalStatus: "What is your partner's current legal status?",
+    partnerCanadaWholeLife:
+      'Has your partner only lived in Canada since the age of 18?',
+    partnerYearsInCanadaSince18:
+      'How many years has your partner lived in Canada since the age of 18?',
+    partnerEverLivedSocialCountry:
+      'Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
   },
   questionOptions: {
     legalStatus: [
@@ -68,7 +77,7 @@ const en: Translations = {
       { key: 'fullOasGis', text: 'My partner receives full OAS and GIS' },
       { key: 'partialOas', text: 'My partner receives partial OAS' },
       { key: 'partialOasGis', text: 'My partner receives partial OAS and GIS' },
-      { key: 'allowance', text: 'My partner receives the Allowance' },
+      { key: 'alw', text: 'My partner receives the Allowance' },
       { key: 'none', text: 'None of the above' },
       { key: 'helpMe', text: 'Help me find out' },
     ],
@@ -295,8 +304,8 @@ const en: Translations = {
       'You must be a surviving partner or widowed to be eligible for this benefit.',
     mustBePartnered:
       'You must be common-law or married to be eligible for this benefit.',
-    mustHavePartnerWithOas:
-      'Your partner must be receiving Old Age Security to be eligible for this benefit.',
+    mustHavePartnerWithGis:
+      'Your partner must be receiving the Guaranteed Income Supplement to be eligible for this benefit.',
     mustMeetIncomeReq:
       'Your income is too high to be eligible for this benefit.',
     mustMeetYearReq:
@@ -378,7 +387,7 @@ const en: Translations = {
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.htm',
       order: 8,
     },
-    allowanceQualify: {
+    alwQualify: {
       text: 'You may qualify for the Allowance program',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.htm',
       order: 9,
@@ -403,12 +412,12 @@ const en: Translations = {
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.htm',
       order: 13,
     },
-    allowanceGisEntitlement: {
+    alwGisEntitlement: {
       text: 'Guaranteed Income Supplement (GIS) and Allowance amounts ',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab4-1.htm',
       order: 14,
     },
-    allowanceInfo: {
+    alwInfo: {
       text: 'Guaranteed Income Supplement (GIS) - Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/benefit-amount.htm',
       order: 15,

@@ -1,5 +1,6 @@
 import { Translations } from '../../../i18n/api'
 import {
+  EntitlementResultType,
   EstimationSummaryState,
   MaritalStatus,
   ResultKey,
@@ -75,7 +76,7 @@ export class SummaryBuilder {
       return this.translations.summaryDetails.availableEligible
     else if (
       this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE &&
-      this.results.oas.reason === ResultReason.INCOME
+      this.results.oas.eligibility.reason === ResultReason.INCOME
     )
       return this.translations.summaryDetails.availableIneligibleIncome
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
@@ -87,7 +88,7 @@ export class SummaryBuilder {
       this.translations.links.contactSC,
       this.translations.links.oasOverview,
     ]
-    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)
+    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.oasEntitlement)
     if (this.input.income.relevant >= MAX_OAS_INCOME)
       links.push(this.translations.links.oasMaxIncome)
@@ -101,39 +102,36 @@ export class SummaryBuilder {
         this.translations.links.oasQualify,
         this.translations.links.gisQualify
       )
-    if (this.results.oas?.reason === ResultReason.PARTIAL_OAS)
+    if (this.results.oas?.entitlement.type === EntitlementResultType.PARTIAL)
       links.push(this.translations.links.oasPartial)
     if (
       this.input.age > 60 &&
       this.input.age <= 64 &&
       this.input.maritalStatus.partnered
     )
-      links.push(this.translations.links.allowanceQualify)
+      links.push(this.translations.links.alwQualify)
     if (
       this.input.age > 60 &&
       this.input.age <= 64 &&
       this.input.maritalStatus.value === MaritalStatus.WIDOWED
     )
       links.push(this.translations.links.afsQualify)
-    if (this.results.gis?.eligibilityResult === ResultKey.ELIGIBLE)
+    if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.gisEntitlement)
-    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE) {
+    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.oasEntitlement2)
+    if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE) {
+      links.push(this.translations.links.alwGisEntitlement)
+      links.push(this.translations.links.alwInfo)
     }
-    if (this.results.allowance?.eligibilityResult === ResultKey.ELIGIBLE) {
-      links.push(
-        this.translations.links.allowanceGisEntitlement,
-        this.translations.links.allowanceInfo
-      )
-    }
-    if (this.results.afs?.eligibilityResult === ResultKey.ELIGIBLE)
+    if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.afsEntitlement)
     if (
       this.input.income.relevant > OAS_RECOVERY_TAX_CUTOFF &&
       this.input.income.relevant < MAX_OAS_INCOME
     )
       links.push(this.translations.links.oasRecoveryTax)
-    if (this.results.oas?.eligibilityResult === ResultKey.ELIGIBLE)
+    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.oasDefer)
     return links
   }
@@ -152,7 +150,7 @@ export class SummaryBuilder {
 
   getResultExistsInAnyBenefit(expectedResult: ResultKey): boolean {
     const matchingItems = Object.keys(this.results).filter(
-      (key) => this.results[key].eligibilityResult === expectedResult
+      (key) => this.results[key].eligibility.result === expectedResult
     )
     return matchingItems.length > 0
   }

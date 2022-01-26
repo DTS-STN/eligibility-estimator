@@ -28,7 +28,7 @@ export enum PartnerBenefitStatus {
   FULL_OAS_GIS = 'fullOasGis',
   PARTIAL_OAS = 'partialOas',
   PARTIAL_OAS_GIS = 'partialOasGis',
-  ALLOWANCE = 'allowance',
+  ALW = 'alw',
   NONE = 'none',
   HELP_ME = 'helpMe',
 }
@@ -37,6 +37,14 @@ export enum LivingCountry {
   CANADA = 'CAN',
   AGREEMENT = 'AGREEMENT',
   NO_AGREEMENT = 'NO_AGREEMENT',
+}
+
+// not displayed in the UI
+export enum EntitlementResultType {
+  NONE = 'none',
+  FULL = 'full',
+  PARTIAL = 'partial', // oas only
+  UNAVAILABLE = 'unavailable', // for example when gis unavailable due to partial oas
 }
 
 // not displayed in the UI
@@ -60,7 +68,7 @@ export enum ResultReason {
   OAS = 'Not eligible for OAS',
   INCOME = 'Income too high',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
-  PARTIAL_OAS = 'Only eligible for Partial OAS due to years in Canada',
+  PARTNER = 'Your partner does not receive the required benefits',
 }
 
 // used to determine color+type of alert dialog

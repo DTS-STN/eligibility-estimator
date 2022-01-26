@@ -7,7 +7,7 @@ export const EligibilityDetails: React.VFC<{
   eligibilityType: EligibilityType
 }> = ({ eligibilityType }) => (
   <>
-    {eligibilityType.detail.split('\n').map((str, i) => (
+    {eligibilityType.eligibility.detail.split('\n').map((str, i) => (
       <p key={i} className={i == 0 ? `inline` : ''}>
         {str}
       </p>

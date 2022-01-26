@@ -40,6 +40,16 @@ const fr: Translations = {
     partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     partnerIncome:
       'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
+    partnerAge: "Quel est l'âge actuel de votre partenaire?",
+    partnerLivingCountry:
+      'Dans quel pays habite actuellement votre partenaire?',
+    partnerLegalStatus: 'Quel est le statut légal actuel de votre partenaire?',
+    partnerCanadaWholeLife:
+      "Est-ce que votre partenaire a seulement habité au Canada depuis l'âge de 18 ans?",
+    partnerYearsInCanadaSince18:
+      "Combien d'années votre partenaire a-t-il(elle) habité au Canada depuis l'âge de 18 ans?",
+    partnerEverLivedSocialCountry:
+      'FRENCH: Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
   },
   questionOptions: {
     legalStatus: [
@@ -83,7 +93,7 @@ const fr: Translations = {
         key: 'partialOasGis',
         text: 'Mon partenaire reçoit une pension partielle de la SV et le SRG',
       },
-      { key: 'allowance', text: "Mon partenaire reçoit l'Allocation" },
+      { key: 'alw', text: "Mon partenaire reçoit l'Allocation" },
       { key: 'none', text: 'Aucune de ces réponses' },
       { key: 'helpMe', text: 'Aidez-moi à savoir' },
     ],
@@ -312,8 +322,8 @@ const fr: Translations = {
       'Vous devez être un partenaire survivant ou un veuf pour être admissible à cette prestation.',
     mustBePartnered:
       'Vous devez être conjoint de fait ou marié pour être admissible à cette prestation.',
-    mustHavePartnerWithOas:
-      'Votre partenaire doit recevoir la prestation de sécurité de la vieillesse pour être admissible à cette prestation.',
+    mustHavePartnerWithGis:
+      'Votre partenaire doit recevoir le supplément de revenu garanti pour être admissible à cette prestation.',
     mustMeetIncomeReq:
       'Votre revenu est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
@@ -395,7 +405,7 @@ const fr: Translations = {
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/admissibilite.html',
       order: 8,
     },
-    allowanceQualify: {
+    alwQualify: {
       text: "Vous pourriez être admissible à l'Allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
       order: 9,
@@ -420,12 +430,12 @@ const fr: Translations = {
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
       order: 13,
     },
-    allowanceGisEntitlement: {
+    alwGisEntitlement: {
       text: "Montants du Supplément de revenu garanti (SRG) et de l'allocation ",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab4-1.html',
       order: 14,
     },
-    allowanceInfo: {
+    alwInfo: {
       text: 'Supplément de revenu garanti : Allocation',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/montant-prestation.html',
       order: 15,

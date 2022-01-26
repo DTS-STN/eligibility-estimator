@@ -7,6 +7,7 @@ import {
   PartnerBenefitStatusHelper,
 } from '../helpers/fieldClasses'
 import {
+  EntitlementResultType,
   EstimationSummaryState,
   LegalStatus,
   MaritalStatus,
@@ -29,8 +30,14 @@ export interface RequestInput {
   canadaWholeLife: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
-  partnerIncome: number // partner income
   partnerBenefitStatus: PartnerBenefitStatus
+  partnerIncome: number // partner income
+  partnerAge: number
+  partnerLivingCountry: string // country code
+  partnerLegalStatus: LegalStatus
+  partnerCanadaWholeLife: boolean
+  partnerYearsInCanadaSince18: number
+  partnerEverLivedSocialCountry: boolean
   _language?: Language
 }
 
@@ -39,30 +46,49 @@ export interface RequestInput {
  */
 export interface ProcessedInput {
   income: IncomeHelper
-  age?: number
+  age: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
-  legalStatusOther?: string
-  canadaWholeLife?: boolean
-  yearsInCanadaSince18?: number
-  everLivedSocialCountry?: boolean
+  canadaWholeLife: boolean
+  yearsInCanadaSince18: number
+  everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper
+}
+
+export interface ProcessedInputWithPartner {
+  client: ProcessedInput
+  partner: ProcessedInput
   _translations: Translations
 }
 
-export interface BenefitResult {
-  eligibilityResult: ResultKey
-  entitlementResult: number // -1 here means unavailable
+export interface EligibilityResult {
+  result: ResultKey
   reason: ResultReason
   detail: string
+}
+
+export interface EntitlementResult {
+  result: number
+  type: EntitlementResultType
+  detailOverride?: string // overrides details provided by EligibilityResult
+}
+
+export interface BenefitResult {
+  eligibility: EligibilityResult
+  entitlement: EntitlementResult
 }
 
 export interface BenefitResultsObject {
   oas?: BenefitResult
   gis?: BenefitResult
-  allowance?: BenefitResult
+  alw?: BenefitResult
   afs?: BenefitResult
+}
+
+export interface BenefitResultsObjectWithPartner {
+  client: BenefitResultsObject
+  partner: BenefitResultsObject
 }
 
 export interface ResponseSuccess {
