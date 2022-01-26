@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Language } from '../../i18n/api'
+import { getTooltipTranslations, TooltipTranslation } from '../../i18n/tooltips'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import { useMediaQuery } from '../Hooks'
-import { fieldDefinitions } from './index'
 
 export const Tooltip: React.FC<{
   field: string
   size?: number
 }> = ({ field, size }) => {
-  const [fieldDef] = useState(fieldDefinitions.data[field])
+  const tooltipData = getTooltipTranslationByField(Language.EN, field) // todo: do not simply default to english
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
 
@@ -28,12 +30,6 @@ export const Tooltip: React.FC<{
   })
 
   const isMobile = useMediaQuery(992)
-
-  if (!fieldDef) {
-    throw new Error(
-      `Tooltip with key "${field}" not found in internationalization file.`
-    )
-  }
 
   return (
     <span
@@ -84,7 +80,7 @@ export const Tooltip: React.FC<{
                   className="text-white fill-current"
                 />
               </svg>
-              <h4>{fieldDef[0]}</h4>
+              <h4>{tooltipData.heading}</h4>
             </div>
             <div className="cursor-pointer" onClick={(e) => setShow(false)}>
               <svg
@@ -106,10 +102,31 @@ export const Tooltip: React.FC<{
 
           <p
             className="font-normal p-5 max-h-[700px] overflow-y-auto md:max-h-[100%] md:overflow-y-hidden"
-            dangerouslySetInnerHTML={{ __html: fieldDef[1] }}
-          ></p>
+            dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+          />
         </div>
       </div>
     </span>
   )
+}
+
+/**
+ * Given the language and field, returns a single Tooltip configuration.
+ * If useDataFromKey is set, it will override text and heading.
+ */
+export function getTooltipTranslationByField(
+  language: Language,
+  field: string | FieldKey
+): TooltipTranslation {
+  const data: TooltipTranslation = getTooltipTranslations(language)[field]
+  if (!data)
+    throw new Error(
+      `Tooltip with key "${field}" not found in internationalization file.`
+    )
+  if (data.useDataFromKey) {
+    const relatedData = getTooltipTranslations(language)[data.useDataFromKey]
+    data.text = relatedData.text
+    data.heading = relatedData.heading
+  }
+  return data
 }
