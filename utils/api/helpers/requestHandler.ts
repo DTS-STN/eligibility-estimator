@@ -246,9 +246,12 @@ export class RequestHandler {
       allResults.partner.oas.eligibility = partnerOas.eligibility
       allResults.partner.oas.entitlement = partnerOas.entitlement
 
-      // Save the result to the client's partnerBenefitStatus field, which is used TBD
+      // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       input.client.partnerBenefitStatus.oasResultEntitlement =
         partnerOas.entitlement
+      // Save the client result to the partner's partnerBenefitStatus field, which is not yet used for anything
+      input.partner.partnerBenefitStatus.oasResultEntitlement =
+        clientOas.entitlement
     }
 
     // All done with OAS, move onto GIS, but only do GIS eligibility for now.
@@ -268,10 +271,10 @@ export class RequestHandler {
       )
       allResults.partner.gis.eligibility = partnerGis.eligibility
 
-      // Save the result to the client's partnerBenefitStatus field, which is used TBD
+      // Save the partner result to the client's partnerBenefitStatus field, which is used for client's ALW
       input.client.partnerBenefitStatus.gisResultEligibility =
         partnerGis.eligibility
-      // Save the result to the partner's partnerBenefitStatus field, which is used for partner's alw eligibility
+      // Save the client result to the partner's partnerBenefitStatus field, which is used for partner's ALW, and therefore client's GIS
       input.partner.partnerBenefitStatus.gisResultEligibility =
         clientGis.eligibility
     }
@@ -283,12 +286,14 @@ export class RequestHandler {
     // If the client needs help, check their partner's ALW eligibility.
     if (input.client.partnerBenefitStatus.helpMe) {
       const partnerAlw = new AlwBenefit(input.partner, translations)
-
       allResults.partner.alw.eligibility = partnerAlw.eligibility
 
-      // Save the result to the client's partnerBenefitStatus field, which is used TBD
+      // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       input.client.partnerBenefitStatus.alwResultEligibility =
         partnerAlw.eligibility
+      // Save the client result to the partner's partnerBenefitStatus field, which is not yet used for anything
+      input.partner.partnerBenefitStatus.alwResultEligibility =
+        clientAlw.eligibility
     }
 
     // Moving onto AFS, again only doing eligibility.
@@ -325,7 +330,7 @@ export class RequestHandler {
         ? detailOverrideText
         : detailText
       result.eligibility.detail = `${eligibilityText}\n${usedDetailText}`
-      delete result.entitlement.detailOverride
+      delete result.entitlement.detailOverride // so this is not passed into the response
     })
   }
 

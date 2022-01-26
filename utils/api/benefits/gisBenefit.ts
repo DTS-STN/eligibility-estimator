@@ -46,7 +46,6 @@ export class GisBenefit extends BaseBenefit {
         ? MAX_GIS_INCOME_PARTNER_OAS
         : MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
       : MAX_GIS_INCOME_SINGLE
-    console.log('using max income ', maxIncome)
     const meetsReqIncome = this.income < maxIncome
 
     // main checks

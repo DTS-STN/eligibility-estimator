@@ -3041,11 +3041,11 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0.68)
+    expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 3
   })
-  it('works when client old, partner old (partner=partialOas, therefore gis income limit 46656, gis table unavailable)', async () => {
+  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table unavailable)`, async () => {
     const input = {
-      income: 46656,
+      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3075,7 +3075,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: 46655,
+      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
@@ -3121,7 +3121,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0.33)
+    expect(res.body.results.gis.entitlement.result).toEqual(0.33) // table 2
   })
   it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
     const input = {
@@ -3198,6 +3198,93 @@ describe('Help Me Find Out scenarios', () => {
       partnerIncome: 0,
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerCanadaWholeLife: false,
+      partnerYearsInCanadaSince18: 40,
+      partnerEverLivedSocialCountry: undefined,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_INELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.PARTNER
+    )
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+  })
+  it('works when client young, partner old (partner=gis, therefore client alw eligible)', async () => {
+    const input = {
+      income: 0,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncome: 0,
+      partnerAge: 65,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerCanadaWholeLife: false,
+      partnerYearsInCanadaSince18: 40,
+      partnerEverLivedSocialCountry: undefined,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_ELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.alw.entitlement.result).toEqual(1219.68) // table 4
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+  })
+  it('works when client young, partner old (partner=noGis, therefore client alw ineligible)', async () => {
+    const input = {
+      income: 0,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncome: 0,
+      partnerAge: 65,
+      partnerLivingCountry: LivingCountry.NO_AGREEMENT, // gis ineligible
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
       partnerCanadaWholeLife: false,
       partnerYearsInCanadaSince18: 40,
