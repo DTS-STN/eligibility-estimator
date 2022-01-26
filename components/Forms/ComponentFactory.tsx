@@ -44,6 +44,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     if (form.empty) {
       form.setupForm(data.fieldData)
+      root.setSummary(data.summary)
     }
 
     // check if income is too high to participate in calculation
@@ -206,7 +207,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               <button
                 type="submit"
                 role="button"
-                className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-muted"
+                className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
                 onClick={async (e) => {
                   if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
                     selectedTabIndex(1)

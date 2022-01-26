@@ -58,7 +58,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
             className={({ selected }) =>
               selected
                 ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20 mr-2'
-                : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled mr-2 disabled:cursor-not-allowed disabled:bg-muted disabled:text-white'
+                : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2 disabled:cursor-not-allowed disabled:bg-[#949494]'
             }
             disabled={root.form.validateIncome()}
           >

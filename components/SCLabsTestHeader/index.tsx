@@ -5,14 +5,14 @@ export const SCLabsTestHeader = () => (
         <div className="block lg:flex py-4 layout-container">
           <div className="flex justify-between lg:block lg:w-max ">
             <span
-              className="text-xs text-white border block w-max px-4 py-1 my-auto leading-6"
+              className="text-white border block w-max px-4 py-1 my-auto leading-6"
               role="alert"
             >
               TEST SITE
             </span>
           </div>
           <div className="lg:ml-4 xl:ml-8 xxl:ml-12">
-            <p className="font-body text-xs lg:text-sm mt-5 lg:mt-auto text-white lg:ml-4 pt-1 my-auto lg:mb-0 lg:pb-1">
+            <p className="font-body mt-5 lg:mt-auto text-white lg:ml-4 pt-1 my-auto lg:mb-0 lg:pb-1">
               You cannot apply for services or benefits through this test site.
               Parts of this site may not work and will change.
             </p>
