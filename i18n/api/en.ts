@@ -337,7 +337,7 @@ const en: Translations = {
   },
   summaryDetails: {
     moreInfo:
-      'You need to answer the remaining questions on the previous tab before an estimation can be provided.',
+      'Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     unavailable:
       'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.</br><a href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html" target="_blank">Contact Service Canada</a>',
     availableEligible:
@@ -347,85 +347,95 @@ const en: Translations = {
     availableIneligibleIncome: `You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
   },
   links: {
+    contactSC: {
+      text: 'Contact Service Canada',
+      url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
+      order: 1,
+    },
     oasOverview: {
       text: 'OAS Overview',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.htm',
-      order: 1,
+      order: 2,
     },
     oasEntitlement: {
       text: 'Old Age Security: How much you could receive',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
-      order: 2,
+      order: 3,
+    },
+    oasMaxIncome: {
+      text: 'Old Age Security: Maximum Income',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
+      order: 4,
     },
     outsideCanada: {
       text: 'Lived or living outside Canada - Pensions and benefits - Overview',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international.htm',
-      order: 3,
+      order: 5,
     },
     oasQualify: {
       text: 'Old Age Security: Do you qualify',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.htm',
-      order: 4,
+      order: 6,
     },
     oasPartial: {
       text: 'Old Age Security: How much you could receive if you have lived in Canada less than 40 years',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
-      order: 5,
+      order: 7,
     },
     gisQualify: {
       text: 'Guaranteed Income Supplement: Do you qualify',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.htm',
-      order: 6,
+      order: 8,
     },
     alwQualify: {
       text: 'You may qualify for the Allowance program',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.htm',
-      order: 7,
+      order: 9,
     },
     afsQualify: {
       text: 'You may qualify for the Allowance for Survivor program',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.htm',
-      order: 8,
+      order: 10,
     },
     workingOutsideCanada: {
       text: 'Canadians working outside Canada for Canadian employers',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.htm',
-      order: 9,
+      order: 11,
     },
     gisEntitlement: {
       text: 'Guaranteed Income Supplement (GIS) amounts',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab1-1.htm',
-      order: 10,
+      order: 12,
     },
     oasEntitlement2: {
       text: 'Old Age Security Payments Amounts',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.htm',
-      order: 11,
+      order: 13,
     },
     alwGisEntitlement: {
       text: 'Guaranteed Income Supplement (GIS) and Allowance amounts ',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab4-1.htm',
-      order: 12,
+      order: 14,
     },
     alwInfo: {
       text: 'Guaranteed Income Supplement (GIS) - Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/benefit-amount.htm',
-      order: 13,
+      order: 15,
     },
     afsEntitlement: {
       text: 'Allowance for the survivor amounts',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab5-35.htm',
-      order: 14,
+      order: 16,
     },
     oasRecoveryTax: {
       text: 'Old Age Security pension recovery tax',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
-      order: 15,
+      order: 17,
     },
     oasDefer: {
       text: 'Should you wait to start collecting Old Age Security',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
-      order: 16,
+      order: 18,
     },
   },
 }

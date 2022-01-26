@@ -85,17 +85,23 @@ export class SummaryBuilder {
 
   private getLinks(): Link[] {
     const links = [
+      this.translations.links.contactSC,
       this.translations.links.oasOverview,
-      this.translations.links.oasEntitlement,
     ]
-    if (this.input.livingCountry.provided && !this.input.livingCountry.canada) {
-      links.push(this.translations.links.outsideCanada)
-      links.push(this.translations.links.workingOutsideCanada)
-    }
-    if (this.input.age >= 65) {
-      links.push(this.translations.links.oasQualify)
-      links.push(this.translations.links.gisQualify)
-    }
+    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.oasEntitlement)
+    if (this.input.income.relevant >= MAX_OAS_INCOME)
+      links.push(this.translations.links.oasMaxIncome)
+    if (this.input.livingCountry.provided && !this.input.livingCountry.canada)
+      links.push(
+        this.translations.links.outsideCanada,
+        this.translations.links.workingOutsideCanada
+      )
+    if (this.input.age >= 65)
+      links.push(
+        this.translations.links.oasQualify,
+        this.translations.links.gisQualify
+      )
     if (this.results.oas?.entitlement.type === EntitlementResultType.PARTIAL)
       links.push(this.translations.links.oasPartial)
     if (

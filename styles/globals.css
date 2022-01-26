@@ -117,4 +117,10 @@
   .summary-link a {
     @apply text-default-text underline;
   }
+  .is-sticky {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
+  }
 }

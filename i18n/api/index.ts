@@ -96,8 +96,10 @@ export interface Translations {
     availableIneligibleIncome: string
   }
   links: {
+    contactSC: Link
     oasOverview: Link
     oasEntitlement: Link
+    oasMaxIncome: Link
     outsideCanada: Link
     oasQualify: Link
     oasPartial: Link
