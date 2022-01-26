@@ -3,7 +3,6 @@ import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 import { GetServerSideProps, NextPage } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { RootStore } from '../../client-state/store'
@@ -16,7 +15,6 @@ import { useMediaQuery, useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import ProgressBar from '../../components/ProgressBar'
 import { ResultsTable } from '../../components/ResultsTable'
-import { Tooltip } from '../../components/Tooltip/tooltip'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import {
   ResponseError,
@@ -60,8 +58,9 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
             className={({ selected }) =>
               selected
                 ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20 mr-2'
-                : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled mr-2'
+                : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled mr-2 disabled:cursor-not-allowed disabled:bg-muted disabled:text-white'
             }
+            disabled={root.form.validateIncome()}
           >
             Results
           </Tab>

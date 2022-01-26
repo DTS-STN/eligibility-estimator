@@ -207,12 +207,13 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               <button
                 type="submit"
                 role="button"
-                className="btn btn-primary mt-4 md:mt-0"
+                className="btn btn-primary mt-4 md:mt-0 disabled:cursor-not-allowed disabled:bg-muted"
                 onClick={async (e) => {
                   if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
                     selectedTabIndex(1)
                   }
                 }}
+                disabled={form.validateIncome()}
               >
                 Estimate
               </button>
