@@ -5,6 +5,7 @@ import { useInternationalization } from '../Hooks'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import Head from 'next/head'
+import { SCLabsTestHeader } from '../SCLabsTestHeader'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -20,6 +21,7 @@ export const Layout: React.VFC<{
         <title>Benefits Eligibility Estimator</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <SCLabsTestHeader />
       <main id="elig">
         <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
