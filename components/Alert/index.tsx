@@ -30,6 +30,8 @@ export const Alert: React.VFC<{
         return 'border-danger text-danger'
       case EstimationSummaryState.AVAILABLE_ELIGIBLE:
         return 'border-[#278400] text-[#278400]'
+      case EstimationSummaryState.MORE_INFO:
+        return 'border-[#269ABC] text-[#269ABC]'
       default:
         break
     }

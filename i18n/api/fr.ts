@@ -1,5 +1,6 @@
 // noinspection SpellCheckingInspection
 
+import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
 import { Translations } from './index'
 
 const fr: Translations = {
@@ -344,94 +345,105 @@ const fr: Translations = {
   },
   summaryDetails: {
     moreInfo:
-      "Vous devez répondre aux autres questions de l'onglet précédent avant qu'une estimation puisse être fournie.",
+      'FRENCH: Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     unavailable:
       'D\'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.</br><a href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html" target="_blank">Contactez Service Canada</a>',
     availableEligible:
-      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes.',
+      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes. (To French: Note that this only provides an estimate of your monthly payment.)',
     availableIneligible:
       "D'après les informations que vous avez fournies, vous n'avez probablement pas droit à des prestations. Consultez les détails ci-dessous pour plus d'informations.",
+    availableIneligibleIncome: `FRENCH You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
   },
   links: {
+    contactSC: {
+      text: 'Communiquer avec Service Canada',
+      url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
+      order: 1,
+    },
     oasOverview: {
       text: 'SV Aperçu',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.ht',
-      order: 1,
+      order: 2,
     },
     oasEntitlement: {
       text: 'Pension de la Sécurité de vieillesse: Combien vous pourriez recevoir',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
-      order: 2,
+      order: 3,
+    },
+    oasMaxIncome: {
+      text: 'FRENCH',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
+      order: 4,
     },
     outsideCanada: {
       text: 'Personnes ayant vécu ou vivant à l’étranger – Pensions et prestations – Aperçu',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/rpc-internationales.html',
-      order: 3,
+      order: 5,
     },
     oasQualify: {
       text: 'Pension de la Sécurité de vieillesse: Êtes-vous admissible',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.htm',
-      order: 4,
+      order: 6,
     },
     oasPartial: {
       text: 'Pension de la Sécurité de vieillesse: Combien vous pourriez recevoir si vous avez vécu au Canada moins de 40 ans',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
-      order: 5,
+      order: 7,
     },
     gisQualify: {
       text: 'Supplément de revenu garanti: Êtes-vous admissible',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/admissibilite.html',
-      order: 6,
+      order: 8,
     },
     allowanceQualify: {
       text: "Vous pourriez être admissible à l'Allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
-      order: 7,
+      order: 9,
     },
     afsQualify: {
       text: 'Vous pourriez être admissible à l’Allocation au survivant',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
-      order: 8,
+      order: 10,
     },
     workingOutsideCanada: {
       text: 'Canadiens travaillant à l’extérieur du Canada pour les employeurs canadiens',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.htm',
-      order: 9,
+      order: 11,
     },
     gisEntitlement: {
       text: 'Montants du Supplément de revenu garanti (SRG)',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab1-1.html',
-      order: 10,
+      order: 12,
     },
     oasEntitlement2: {
       text: 'Montant des paiements de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
-      order: 11,
+      order: 13,
     },
     allowanceGisEntitlement: {
       text: "Montants du Supplément de revenu garanti (SRG) et de l'allocation ",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab4-1.html',
-      order: 12,
+      order: 14,
     },
     allowanceInfo: {
       text: 'Supplément de revenu garanti : Allocation',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/montant-prestation.html',
-      order: 13,
+      order: 15,
     },
     afsEntitlement: {
       text: "Montants de l'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab5-35.html',
-      order: 14,
+      order: 16,
     },
     oasRecoveryTax: {
       text: 'Impôt de récupération de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
-      order: 15,
+      order: 17,
     },
     oasDefer: {
       text: 'Devriez-vous attendez pour commencer à recevoir la sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
-      order: 16,
+      order: 18,
     },
   },
 }

@@ -26,9 +26,7 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
     document.addEventListener('wheel', function (event) {
       const el = document.activeElement as HTMLTextAreaElement
-      if (el?.type === 'number') {
-        el.blur()
-      }
+      el.blur()
     })
   }, [])
 
@@ -53,8 +51,8 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
         placeholder={placeholder}
         onChange={onChange}
         defaultValue={value}
-        rows={3}
-        required={required}
+        rows={2}
+        required
       />
     </>
   )
