@@ -73,7 +73,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             ]}
           />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
           <form
             name="ee-form"
             data-testid="ee-form"
@@ -218,21 +218,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               </button>
             </div>
           </form>
-          <NeedHelpList
-            title="Need Help?"
-            links={[
-              {
-                label: 'OAS Overview',
-                location:
-                  'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-              },
-              {
-                label: 'Old Age Security: How much you could receive',
-                location:
-                  'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
-              },
-            ]}
-          />
+          <NeedHelpList title="Need Help?" links={root.summary.links} />
         </div>
       </>
     )
