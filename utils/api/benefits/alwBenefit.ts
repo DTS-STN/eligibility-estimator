@@ -80,7 +80,7 @@ export class AlwBenefit extends BaseBenefit {
     } else if (!meetsReqPartner && this.input.partnerBenefitStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
-        reason: ResultReason.OAS,
+        reason: ResultReason.PARTNER,
         detail: this.translations.detail.mustHavePartnerWithGis,
       }
     } else if (!meetsReqIncome) {

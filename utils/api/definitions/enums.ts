@@ -68,6 +68,7 @@ export enum ResultReason {
   OAS = 'Not eligible for OAS',
   INCOME = 'Income too high',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
+  PARTNER = 'Your partner does not receive the required benefits',
 }
 
 // used to determine color+type of alert dialog

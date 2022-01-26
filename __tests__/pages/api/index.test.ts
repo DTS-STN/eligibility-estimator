@@ -2040,7 +2040,9 @@ describe('basic Allowance scenarios', () => {
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.OAS)
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.PARTNER
+    )
   })
   it('returns "eligible" when citizen and 10 years in Canada', async () => {
     const res = await mockGetRequest({
@@ -3180,5 +3182,50 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(221.35) // table 4
+  })
+  it('works when client young, partner young (no one gets anything)', async () => {
+    const input = {
+      income: 0,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncome: 0,
+      partnerAge: 60,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerCanadaWholeLife: false,
+      partnerYearsInCanadaSince18: 40,
+      partnerEverLivedSocialCountry: undefined,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.summary.state).toEqual(
+      EstimationSummaryState.AVAILABLE_INELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.PARTNER
+    )
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
   })
 })

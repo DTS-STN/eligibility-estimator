@@ -107,6 +107,7 @@ components:
         - Not eligible for OAS
         - Income too high
         - Your marital status does not meet the requirement for this benefit
+        - Your partner does not receive the required benefits
 
     ResultObject:
       type: object
