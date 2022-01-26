@@ -35,7 +35,7 @@ describe('TextField component', () => {
 
     const field = screen.getByTestId('text-input')
     expect(field).toBeInTheDocument()
-    expect(field.tagName).toBe('INPUT')
+    expect(field.tagName).toBe('TEXTAREA')
     expect(field).toBeDefined()
     expect(field).toBeRequired()
   })
@@ -69,7 +69,7 @@ describe('TextField component', () => {
 
     const field = screen.getByTestId('text-input')
     expect(field).toBeInTheDocument()
-    expect(field.tagName).toBe('INPUT')
+    expect(field.tagName).toBe('TEXTAREA')
     expect(field).toBeDefined()
     expect(field).toBeRequired()
 
