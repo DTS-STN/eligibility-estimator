@@ -9,6 +9,9 @@
     @apply focus-visible:ring-1;
     @apply focus-visible:ring-black; */
   }
+  html {
+    scroll-behavior: smooth;
+  }
 
   #elig {
     @apply text-base;

@@ -14,6 +14,7 @@ import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 import { useMediaQuery, useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import ProgressBar from '../../components/ProgressBar'
+import { ResultsPage } from '../../components/ResultsPage'
 import { ResultsTable } from '../../components/ResultsTable'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import {
@@ -85,58 +86,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
           </Tab.Panel>
           <Tab.Panel className="mt-10">
             <div className="flex flex-col space-y-12">
-              {root.summary.state &&
-              root.summary.state !== EstimationSummaryState.MORE_INFO ? (
-                <>
-                  <ProgressBar
-                    sections={[
-                      { title: 'Income Details', complete: true },
-                      { title: 'Personal Information', complete: true },
-                      { title: 'Legal Status', complete: true },
-                    ]}
-                    estimateSection
-                  />
-                  <Alert
-                    title={root.summary.title}
-                    type={root.summary.state}
-                    insertHTML
-                  >
-                    {root.summary.details}
-                  </Alert>
-                  {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-                    <div
-                      className={`mt-10 w-full relative ${
-                        !isMobile ? 'h-[450px]' : 'h-[180px]'
-                      }`}
-                    >
-                      <Image
-                        src={'/people.png'}
-                        layout="fill"
-                        alt="People of all walks of life, happy together."
-                      />
-                    </div>
-                  ) : (
-                    <ResultsTable />
-                  )}
-                  {root.summary.state !==
-                    EstimationSummaryState.UNAVAILABLE && (
-                    <ContactCTA setSelectedTab={setSelectedTabIndex} />
-                  )}
-                  {root.summary?.links?.length && (
-                    <ConditionalLinks links={root.summary.links} />
-                  )}
-                </>
-              ) : (
-                <div className="w-full">
-                  <Alert
-                    title={root.summary.title}
-                    type={EstimationSummaryState.MORE_INFO}
-                    insertHTML
-                  >
-                    {root.summary.details}
-                  </Alert>
-                </div>
-              )}
+              <ResultsPage root={root} setSelectedTab={setSelectedTabIndex} />
             </div>
           </Tab.Panel>
           <Tab.Panel className="mt-10">

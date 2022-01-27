@@ -6,11 +6,12 @@ import { useWindowWidth } from '../Hooks'
 const OFFSET_WIDTH = 28
 
 export const Alert: React.VFC<{
+  id?: string
   title: string
   children: React.ReactNode | string
   type: EstimationSummaryState
   insertHTML?: boolean
-}> = ({ title, children, type, insertHTML }) => {
+}> = ({ id, title, children, type, insertHTML }) => {
   const [height, setHeight] = useState<number>(null)
   const windowWidth = useWindowWidth()
   const ref = useRef(null)
@@ -38,7 +39,11 @@ export const Alert: React.VFC<{
   })()
 
   return (
-    <div className={`py-2.5 pl-2 border-[3px] ${className} rounded`} ref={ref}>
+    <div
+      className={`py-2.5 pl-2 border-[3px] ${className} rounded`}
+      ref={ref}
+      id={id}
+    >
       <div className="flex flex-row justify-start items-start">
         <div>
           <svg
