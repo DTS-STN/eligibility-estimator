@@ -23,8 +23,12 @@ export const ResultsPage: React.FC<{
   useEffect(() => {
     if (process.browser) {
       const results = document.getElementById('elig-results')
-      const componentInViewport = isElementInViewport(results as HTMLDivElement)
-      if (results && !componentInViewport) results.scrollIntoView(true)
+      if (results) {
+        const componentInViewport = isElementInViewport(
+          results as HTMLDivElement
+        )
+        if (!componentInViewport) results.scrollIntoView(true)
+      }
     }
   })
 
