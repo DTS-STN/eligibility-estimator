@@ -91,7 +91,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   ? true
                   : false
               const styling = isChildQuestion
-                ? `bg-emphasis px-10 lg:w-[1200px] md:w-[992px]  ${
+                ? `bg-emphasis px-10 ${
                     field.category.key == FieldCategory.SOCIAL_AGREEMENT
                       ? ' mb-10'
                       : ''
