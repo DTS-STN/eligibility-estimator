@@ -18,22 +18,28 @@ export const ResultsPage: React.FC<{
   const isMobile = useMediaQuery(992)
 
   /**
-   * runs once on mount to process the scrolling behaviour; does a check to prevent any serverside process from throwing any warnings / errors
+   * Runs once on mount to process the scrolling behaviour. Does a check to prevent any serverside process from throwing any warnings / errors
    */
   useEffect(() => {
+    const html = document.getElementsByTagName('html')[0]
+    html.setAttribute('style', 'scroll-behavior: smooth;')
+
     if (process.browser) {
       const results = document.getElementById('elig-results')
       if (results) {
         const componentInViewport = isElementInViewport(
           results as HTMLDivElement
         )
-        if (!componentInViewport) results.scrollIntoView(true)
+        if (!componentInViewport) {
+          results.scrollIntoView(true)
+        }
       }
+      html.removeAttribute('style')
     }
   })
 
   return (
-    <div ref={ref}>
+    <div className="flex flex-col space-y-12" ref={ref}>
       {root.summary.state &&
       root.summary.state !== EstimationSummaryState.MORE_INFO ? (
         <>

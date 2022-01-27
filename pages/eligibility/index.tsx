@@ -85,9 +85,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
             </div>
           </Tab.Panel>
           <Tab.Panel className="mt-10">
-            <div className="flex flex-col space-y-12">
-              <ResultsPage root={root} setSelectedTab={setSelectedTabIndex} />
-            </div>
+            <ResultsPage root={root} setSelectedTab={setSelectedTabIndex} />
           </Tab.Panel>
           <Tab.Panel className="mt-10">
             <FAQ />
