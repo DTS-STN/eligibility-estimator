@@ -10,6 +10,7 @@ import {
   EntitlementResultType,
   EstimationSummaryState,
   LegalStatus,
+  LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
@@ -108,6 +109,7 @@ export interface Link {
   text: string
   url: string
   order: number
+  location: LinkLocation
 }
 
 export interface SummaryObject {
