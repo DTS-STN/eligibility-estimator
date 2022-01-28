@@ -222,3 +222,8 @@ export const Form = types
       return parseInt(validIncome) > MAX_OAS_INCOME
     },
   }))
+  .views((self) => ({
+    get isIncomeTooHigh() {
+      return self.validateIncome()
+    },
+  }))

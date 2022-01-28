@@ -19,8 +19,7 @@ export interface NumberFieldProps
  * @returns
  */
 export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
-  const { name, type, label, required, value, placeholder, onChange, error } =
-    props
+  const { name, label, required, value, placeholder, onChange, error } = props
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -57,7 +56,8 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}
-        required
+        required={required}
+        autoComplete="off"
       />
     </>
   )
