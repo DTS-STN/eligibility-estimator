@@ -4,7 +4,7 @@ import styles from './Footer.module.css'
 export const Footer = () => (
   <footer className="text-[14px]">
     <div
-      className={`w-full h-auto bg-custom-blue-dark ${styles.footerBackground}`}
+      className={`w-full h-auto bg-custom-blue-dark px-4 py-8 ${styles.footerBackground}`}
     >
       <div
         className="py-7 sm:container mx-auto"
@@ -63,39 +63,64 @@ export const Footer = () => (
         </ul>
       </div>
     </div>
-    <div className="my-8">
-      <div className="sm:container mx-auto flex justify-between items-center">
-        <nav className="">
-          <ul className="flex flex-col md:flex-row items-start md:items-center list-disc space-x-6">
-            <li className="list-none">
-              <a href="#">Social media</a>
-            </li>
+    <div className="flex justify-between px-4 py-8 sm:container mx-auto">
+      <ul className="flex flex-col md:flex-row md:space-x-6 list-disc px-4">
+        <li>
+          <a href="#">Social media</a>
+        </li>
 
-            <li>
-              <a href="#">Mobile applications</a>
-            </li>
+        <li>
+          <a href="#">Mobile applications</a>
+        </li>
 
-            <li>
-              <a href="#">About Canada.ca</a>
-            </li>
+        <li>
+          <a href="#">About Canada.ca</a>
+        </li>
 
-            <li>
-              <a href="#">Terms and conditions</a>
-            </li>
+        <li>
+          <a href="#">Terms and conditions</a>
+        </li>
 
-            <li>
-              <a href="#">Privacy</a>
-            </li>
-          </ul>
-        </nav>
-        <div>
-          <Image
-            width="200px"
-            height="40px"
-            src="/wmms-blk.svg"
-            alt="Symbol of the Government of Canada"
-          />
-        </div>
+        <li>
+          <a href="#">Privacy</a>
+        </li>
+      </ul>
+      <div className="hidden md:block">
+        <Image
+          width="200px"
+          height="40px"
+          src="/wmms-blk.svg"
+          alt="Symbol of the Government of Canada"
+        />
+      </div>
+    </div>
+    <div className="flex justify-between">
+      <div className="flex items-center md:hidden py-8 md:pt-0">
+        <p className="px-4">Top of page</p>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 15l7-7 7 7"
+            />
+          </svg>
+        </span>
+      </div>
+      <div className="flex items-center px-4 md:hidden">
+        <Image
+          width="135px"
+          height="45px"
+          src="/wmms-blk.svg"
+          alt="Symbol of the Government of Canada"
+        />
       </div>
     </div>
   </footer>
