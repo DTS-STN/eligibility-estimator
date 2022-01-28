@@ -1,51 +1,101 @@
-import { Language } from '../../../i18n/api'
+import { Language, Translations } from '../../../i18n/api'
 import {
+  IncomeHelper,
+  LegalStatusHelper,
+  LivingCountryHelper,
+  MaritalStatusHelper,
+  PartnerBenefitStatusHelper,
+} from '../helpers/fieldClasses'
+import {
+  EntitlementResultType,
   EstimationSummaryState,
   LegalStatus,
-  LivingCountry,
   MaritalStatus,
+  PartnerBenefitStatus,
   ResultKey,
   ResultReason,
 } from './enums'
 import { FieldData, FieldKey } from './fields'
 
-export interface CalculationInput {
-  income?: number
-  age?: number
-  livingCountry?: LivingCountry
-  legalStatus?: LegalStatus
-  legalStatusOther?: string
-  yearsInCanadaSince18?: number
-  maritalStatus?: MaritalStatus
-  partnerIncome?: number
-  partnerReceivingOas?: boolean
-  everLivedSocialCountry?: boolean
+/**
+ * What the API expects to receive. This is passed to Joi for validation.
+ */
+export interface RequestInput {
+  income: number // personal income
+  age: number
+  maritalStatus: MaritalStatus
+  livingCountry: string // country code
+  legalStatus: LegalStatus
+  legalStatusOther: string
+  canadaWholeLife: boolean
+  yearsInCanadaSince18: number
+  everLivedSocialCountry: boolean
+  partnerBenefitStatus: PartnerBenefitStatus
+  partnerIncome: number // partner income
+  partnerAge: number
+  partnerLivingCountry: string // country code
+  partnerLegalStatus: LegalStatus
+  partnerCanadaWholeLife: boolean
+  partnerYearsInCanadaSince18: number
+  partnerEverLivedSocialCountry: boolean
   _language?: Language
-  _oasEligible?: ResultKey // added by GIS check
+}
+
+/**
+ * After Joi validation and additional pre-processing, this is the object passed around to provide app logic.
+ */
+export interface ProcessedInput {
+  income: IncomeHelper
+  age: number
+  maritalStatus: MaritalStatusHelper
+  livingCountry: LivingCountryHelper
+  legalStatus: LegalStatusHelper
+  canadaWholeLife: boolean
+  yearsInCanadaSince18: number
+  everLivedSocialCountry: boolean
+  partnerBenefitStatus: PartnerBenefitStatusHelper
+}
+
+export interface ProcessedInputWithPartner {
+  client: ProcessedInput
+  partner: ProcessedInput
+  _translations: Translations
+}
+
+export interface EligibilityResult {
+  result: ResultKey
+  reason: ResultReason
+  detail: string
+}
+
+export interface EntitlementResult {
+  result: number
+  type: EntitlementResultType
+  detailOverride?: string // overrides details provided by EligibilityResult
 }
 
 export interface BenefitResult {
-  eligibilityResult: ResultKey
-  entitlementResult: number
-  reason: ResultReason
-  detail: string
-  missingFields?: Array<FieldKey>
+  eligibility: EligibilityResult
+  entitlement: EntitlementResult
 }
 
-export interface BenefitResultObject {
-  oas: BenefitResult
-  gis: BenefitResult
-  allowance: BenefitResult
-  afs: BenefitResult
+export interface BenefitResultsObject {
+  oas?: BenefitResult
+  gis?: BenefitResult
+  alw?: BenefitResult
+  afs?: BenefitResult
+}
+
+export interface BenefitResultsObjectWithPartner {
+  client: BenefitResultsObject
+  partner: BenefitResultsObject
 }
 
 export interface ResponseSuccess {
-  oas: BenefitResult
-  gis: BenefitResult
-  allowance: BenefitResult
-  afs: BenefitResult
+  results: BenefitResultsObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
+  missingFields: Array<FieldKey>
   fieldData: Array<FieldData>
 }
 
@@ -55,8 +105,8 @@ export interface ResponseError {
 }
 
 export interface Link {
-  url: string
   text: string
+  url: string
   order: number
 }
 

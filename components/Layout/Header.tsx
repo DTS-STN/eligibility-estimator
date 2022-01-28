@@ -5,7 +5,7 @@ export const Header = () => {
   return (
     <header className="border-b border-black/20 pb-10 -mx-4">
       <div className="md:container mx-auto">
-        <div className="flex justify-between items-start sm:items-center flex-col sm:flex-row space-y-4 sm:space-y-0">
+        <div className="flex justify-between items-start sm:items-center flex-col sm:flex-row space-y-4 sm:space-y-0 px-4 md:px-0">
           <Image
             src="/gc-sig.png"
             width="360px"

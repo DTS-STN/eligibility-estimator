@@ -1,15 +1,10 @@
-import {
-  types,
-  flow,
-  getParentOfType,
-  Instance,
-  SnapshotIn,
-} from 'mobx-state-tree'
+import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
 import {
-  ResponseSuccess,
   ResponseError,
+  ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
@@ -22,12 +17,10 @@ type FormProgress = {
   estimation?: boolean
 }
 
-/** API endpoint for eligibility*/
-const API_URL = `api/calculateEligibility`
-
 export const Form = types
   .model({
     fields: types.array(FormField),
+    API_URL: `api/calculateEligibility`,
   })
   .views((self) => ({
     get hasErrors() {
@@ -46,12 +39,6 @@ export const Form = types
     },
     get empty(): boolean {
       return self.fields.length === 0
-    },
-    get previouslySavedValues(): { key: string; value: string }[] {
-      return self.fields.map((field) => ({
-        key: field.key,
-        value: field.value,
-      }))
     },
   }))
   .views((self) => ({
@@ -126,7 +113,7 @@ export const Form = types
         field.setValue(null)
         if (
           field.key === FieldKey.PARTNER_INCOME ||
-          field.key === FieldKey.PARTNER_RECEIVING_OAS ||
+          field.key === FieldKey.PARTNER_BENEFIT_STATUS ||
           field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY ||
           field.key === FieldKey.LEGAL_STATUS_OTHER
         ) {
@@ -136,7 +123,7 @@ export const Form = types
       self.removeFields(fieldsToRemove)
 
       // remove the now invalid summary object
-      const parent = getParentOfType(self, RootStore)
+      const parent = getParent(self) as Instance<typeof RootStore>
       parent.setSummary({})
     },
     clearAllErrors() {
@@ -201,7 +188,7 @@ export const Form = types
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
 
-      const apiData = yield fetch(`${API_URL}?${queryString}`)
+      const apiData = yield fetch(`${self.API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {
@@ -213,11 +200,11 @@ export const Form = types
         }
       } else {
         self.clearAllErrors()
-        const parent = getParentOfType(self, RootStore)
-        parent.setOAS(data.oas)
-        parent.setGIS(data.gis)
-        parent.setAFS(data.afs)
-        parent.setAllowance(data.allowance)
+        const parent = getParent(self) as Instance<typeof RootStore>
+        parent.setOAS(data.results.oas)
+        parent.setGIS(data.results.gis)
+        parent.setAFS(data.results.afs)
+        parent.setAllowance(data.results.alw)
 
         parent.setSummary(data.summary)
 
@@ -225,4 +212,18 @@ export const Form = types
         self.setupForm(data.fieldData)
       }
     }),
+    validateIncome(): boolean {
+      const incomeField = self.getFieldByKey(FieldKey.INCOME)
+      // null income is valid by default
+      if (!incomeField || self.getFieldByKey(FieldKey.INCOME).value == null)
+        return false
+
+      const validIncome = self.getFieldByKey(FieldKey.INCOME).sanitizeInput()
+      return parseInt(validIncome) > MAX_OAS_INCOME
+    },
+  }))
+  .views((self) => ({
+    get isIncomeTooHigh() {
+      return self.validateIncome()
+    },
   }))

@@ -5,6 +5,7 @@ import { useInternationalization } from '../Hooks'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import Head from 'next/head'
+import { SCLabsTestHeader } from '../SCLabsTestHeader'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -17,9 +18,10 @@ export const Layout: React.VFC<{
   return (
     <>
       <Head>
-        <title>Benefits Eligibility Estimator</title>
+        <title>Canadian Old Age Benefits Estimator</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
+      <SCLabsTestHeader />
       <main id="elig">
         <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
@@ -35,7 +37,7 @@ export const Layout: React.VFC<{
           <Header />
           <div className="bg-primary -mx-4">
             <div className="flex flex-row justify-between items-center sm:container mx-auto">
-              <h3 className="text-h3 py-3 text-white font-bold">
+              <h3 className="text-h3 py-3 text-white font-bold px-4 md:px-0">
                 Service Canada
               </h3>
               <p></p>
@@ -46,7 +48,7 @@ export const Layout: React.VFC<{
               items={['Canada.ca', 'Service Canada', 'Eligibility Estimator']}
             />
             <h1 className="h1 mt-8 mb-10 border-b border-header-rule">
-              Benefits Eligibility Estimator
+              Canadian Old Age Benefits Estimator
             </h1>
             {children}
           </div>

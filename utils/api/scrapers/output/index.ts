@@ -1,26 +1,26 @@
 import { OutputItemGis } from '../_base'
-import { OutputItemAllowance } from '../partneredAllowanceScraper'
-import { OutputItemAfs } from '../partneredSurvivorScraper'
-import partneredAllowance from './partneredAllowance.json'
+import { OutputItemAfs } from '../partneredAfsScraper'
+import { OutputItemAlw } from '../partneredAlwScraper'
+import partneredAfs from './partneredAfs.json'
+import partneredAlw from './partneredAlw.json'
 import partneredAndOas from './partneredAndOas.json'
 import partneredNoOas from './partneredNoOas.json'
-import partneredSurvivor from './partneredSurvivor.json'
 import single from './single.json'
 
 interface ScraperCollection {
   single: OutputItemGis[]
   partneredAndOas: OutputItemGis[]
   partneredNoOas: OutputItemGis[]
-  partneredAllowance: OutputItemAllowance[]
-  partneredSurvivor: OutputItemAfs[]
+  partneredAlw: OutputItemAlw[]
+  partneredAfs: OutputItemAfs[]
 }
 
-const data: ScraperCollection = {
+const scraperData: ScraperCollection = {
   single,
   partneredAndOas,
   partneredNoOas,
-  partneredAllowance,
-  partneredSurvivor,
+  partneredAlw,
+  partneredAfs,
 }
 
-export default data
+export default scraperData

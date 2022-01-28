@@ -11,11 +11,20 @@ import {
 } from '../utils/api/definitions/enums'
 import { Form } from './models/Form'
 
-const Eligibility = types.model({
-  eligibilityResult: types.maybe(types.enumeration(Object.values(ResultKey))),
-  entitlementResult: types.maybe(types.number),
-  reason: types.maybe(types.string),
+export const EligibilityResult = types.model({
   detail: types.maybe(types.string),
+  reason: types.maybe(types.string),
+  result: types.maybe(types.enumeration(Object.values(ResultKey))),
+})
+
+export const EntitlementResult = types.model({
+  type: types.maybe(types.string),
+  result: types.maybe(types.number),
+})
+
+export const Eligibility = types.model({
+  eligibility: types.maybe(EligibilityResult),
+  entitlement: types.maybe(EntitlementResult),
 })
 
 export const OAS = Eligibility.named('OAS')
@@ -38,64 +47,38 @@ export const Summary = types.model({
 
 export const RootStore = types
   .model({
-    form: Form,
-    oas: OAS,
-    gis: GIS,
-    afs: AFS,
-    allowance: Allowance,
-    summary: Summary,
+    form: types.maybe(Form),
+    oas: types.maybe(OAS),
+    gis: types.maybe(GIS),
+    afs: types.maybe(AFS),
+    allowance: types.maybe(Allowance),
+    summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
   })
+  .views((self) => ({
+    get totalEntitlementInDollars() {
+      return (
+        self.oas.entitlement.result +
+        (self.gis.entitlement.result !== -1 ? self.gis.entitlement.result : 0) + // gis can return a -1 for an unavailable calculation, correct for this
+        self.allowance?.entitlement.result +
+        self.afs?.entitlement.result
+      ).toFixed(2)
+    },
+  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num
     },
-    setOAS(
-      input: ModelCreationType<
-        ExtractCFromProps<{
-          eligibilityResult: IMaybe<ISimpleType<ResultKey>>
-          entitlementResult: IMaybe<ISimpleType<number>>
-          reason: IMaybe<ISimpleType<string>>
-          detail: IMaybe<ISimpleType<string>>
-        }>
-      >
-    ) {
+    setOAS(input) {
       self.oas = OAS.create(input)
     },
-    setGIS(
-      input: ModelCreationType<
-        ExtractCFromProps<{
-          eligibilityResult: IMaybe<ISimpleType<ResultKey>>
-          entitlementResult: IMaybe<ISimpleType<number>>
-          reason: IMaybe<ISimpleType<string>>
-          detail: IMaybe<ISimpleType<string>>
-        }>
-      >
-    ) {
+    setGIS(input) {
       self.gis = GIS.create(input)
     },
-    setAFS(
-      input: ModelCreationType<
-        ExtractCFromProps<{
-          eligibilityResult: IMaybe<ISimpleType<ResultKey>>
-          entitlementResult: IMaybe<ISimpleType<number>>
-          reason: IMaybe<ISimpleType<string>>
-          detail: IMaybe<ISimpleType<string>>
-        }>
-      >
-    ) {
+    setAFS(input) {
       self.afs = AFS.create(input)
     },
-    setAllowance(
-      input: ModelCreationType<
-        ExtractCFromProps<{
-          eligibilityResult: IMaybe<ISimpleType<ResultKey>>
-          entitlementResult: IMaybe<ISimpleType<number>>
-          reason: IMaybe<ISimpleType<string>>
-          detail: IMaybe<ISimpleType<string>>
-        }>
-      >
-    ) {
+    setAllowance(input) {
       self.allowance = Allowance.create(input)
     },
     setSummary(

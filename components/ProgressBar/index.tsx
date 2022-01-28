@@ -30,14 +30,17 @@ const ProgressSection: React.FC<Section> = ({
           }`}
         ></div>
       )}
-      <div className="flex items-center">
+      <div className="flex items-center mb-3.5 md:mb-0">
         <svg
           width="28"
           height="28"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          data-testid="progress"
           className={`${
-            complete ? 'text-primary' : 'text-[#B7B7B7]'
+            complete
+              ? 'text-primary complete-progress-section'
+              : 'text-[#B7B7B7] incomplete-progress-section'
           } fill-current stroke-white z-10`}
         >
           <rect
@@ -63,7 +66,7 @@ const ProgressSection: React.FC<Section> = ({
             } fill-current stroke-white absolute`}
             xmlns="http://www.w3.org/2000/svg"
           >
-            {!last && <rect x="11.5" y="83" width="6" height="22" />}
+            {!last && <rect x="11.5" y="83" width="5" height="34" />}
           </svg>
         )}
         <span

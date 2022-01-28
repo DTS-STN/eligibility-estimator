@@ -25,6 +25,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         <label
           htmlFor={name}
           aria-label={name}
+          data-testid="radio-label"
           className="font-semibold inline-block mb-1.5 flex-nowrap"
         >
           <span className="text-danger">* </span>
@@ -37,9 +38,13 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         </label>
         {error && <ErrorLabel errorMessage={error} />}
         {values.map((val, index) => (
-          <div key={index} className="flex items-center md:mb-[12px] last:mb-0">
+          <div
+            key={index}
+            className="flex items-center mb-2 md:mb-[12px] last:mb-0"
+          >
             <input
               type="radio"
+              data-testid="radio"
               id={`${keyforid}-${index}`}
               name={`${keyforid}`}
               // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
@@ -47,13 +52,13 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               value={val.key}
               onChange={onChange}
               required
-              defaultChecked={checkedValue === correctForBooleans(val.key)}
+              checked={checkedValue === correctForBooleans(val.key)}
             />
             <label
               htmlFor={`${keyforid}-${index}`}
               className="radio flex items-center"
             >
-              <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[24px]"></span>
+              <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
               <p>{val.text}</p>
             </label>
           </div>

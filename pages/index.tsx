@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -7,18 +7,18 @@ import { CurrencyField } from '../components/Forms/CurrencyField'
 import { Layout } from '../components/Layout'
 import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
   const router = useRouter()
   const [error, setError] = useState(null)
   return (
     <Layout>
       <div className="mt-18 text-content">
         <p className="mb-4 text-content">
-          *ACTUAL NAME* is a prototype. This is not a real service. Based on the
-          information you provide, this will estimate your eligibility for the
-          Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If
-          eligible to receive the benefit, the application will also estimate
-          your monthly payment.{' '}
+          Canadian Old Age Benefits Estimator is a prototype. This is not a real
+          service. Based on the information you provide, this will estimate your
+          eligibility for the Old Age Security (OAS) and Guaranteed Income
+          Supplement (GIS). If eligible to receive the benefit, the application
+          will also estimate your monthly payment.{' '}
         </p>
         <p className="mb-4 text-content">
           This prototype covers four benefits programs:
@@ -43,51 +43,13 @@ const Home: NextPage = () => {
           aged 60 to 64 whose spouse or common-law partner receives the
           Guaranteed Income Supplement.
         </p>
-        <p className="mb-4 text-content">
+        <p className="mb-10 text-content">
           Allowance for the Survivor is a monthly benefit available to
           individuals aged 60 to 64 who have a low income, who are living in
           Canada, and whose spouse or common-law partner has passed away.{' '}
         </p>
-        <h2 className="h2 mt-10">Income details</h2>
       </div>
-      <form
-        className="mb-10"
-        onSubmit={(e) => {
-          e.preventDefault()
-          const input = document.querySelector(
-            'input[name="income"]'
-          ) as HTMLInputElement
-          const sanitizedValue = input.value.replaceAll('$', '').replaceAll(',', '')
-          if (sanitizedValue == null || sanitizedValue == '') {
-            setError('This field is required')
-          } else {
-            router.push(`/eligibility?income=${sanitizedValue}`)
-          }
-        }}
-        onReset={(e) => {
-          const input = document.querySelector(
-            'input[name="income"]'
-          ) as HTMLInputElement
-          input.setAttribute('value', '')
-          setError('')
-        }}
-        noValidate
-      >
-        <CurrencyField
-          type="text"
-          name="income"
-          label="What is your current annual net income in Canadian dollars"
-          placeholder="$20,000"
-          error={error}
-          required
-        />
-        <div className="mt-10 flex space-x-5">
-          <button type="reset" className="btn-default btn w-28">
-            Clear
-          </button>
-          <button className="btn btn-primary w-28">Next</button>
-        </div>
-      </form>
+
       <Alert title="Disclaimer" type={EstimationSummaryState.UNAVAILABLE}>
         Please be reminded that this is not a real service. It is a prototype.
         The results are estimates and not a final decision. For a more accurate
@@ -103,8 +65,21 @@ const Home: NextPage = () => {
         . The results are not financial advice. This application does not
         collect and does not save the information you have provided.
       </Alert>
+
+      <button
+        className="btn btn-primary w-28 mt-8"
+        onClick={(e) => router.push('/eligibility')}
+      >
+        Next
+      </button>
     </Layout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {},
+  }
 }
 
 export default Home

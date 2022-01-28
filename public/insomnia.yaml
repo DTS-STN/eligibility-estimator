@@ -1,11 +1,11 @@
 _type: export
 __export_format: 4
-__export_date: 2022-01-06T22:22:49.034Z
+__export_date: 2022-01-22T01:27:53.504Z
 __export_source: insomnia.desktop.app:v2021.7.2
 resources:
   - _id: req_wrk_90d4d590fb5a4034b3d98b7c089648520e5d7dae
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1641507751580
+    modified: 1642814835908
     created: 1637965624524
     url: '{{ base_url }}/calculateEligibility'
     name: Calculate eligibility
@@ -14,39 +14,80 @@ resources:
     body: {}
     parameters:
       - name: income
-        value: '10000'
-        id: pair_ca28e5ff404d4d8abb1251dab6d0a343
+        disabled: false
+        value: '1000'
+        id: pair_2f8aced01f9a4d128fa36282aa45c6b5
       - name: age
+        disabled: false
         value: '65'
-        id: pair_de9e393ca88f4d90a8f70f3907924bc2
+        id: pair_1d25f7cb27f94d35817e9226538c63a3
       - name: maritalStatus
+        disabled: false
         value: married
-        id: pair_e5304db95dc94807af024ca1723c1787
-      - name: partnerIncome
-        value: '10000'
-        id: pair_78749bcf72b84a1cb9740efac5b0e585
-      - name: partnerReceivingOas
-        value: 'true'
-        id: pair_51ad0f7ae3514c99a5a346c7b19b873c
+        id: pair_c78fbe94847b4b34ab8a089a2e579527
       - name: livingCountry
+        disabled: false
         value: CAN
-        id: pair_232801cb965f498d89c27b6c09f263c2
+        id: pair_9542c2acc6cd40b9a98d058ea5a81406
       - name: legalStatus
+        disabled: false
         value: canadianCitizen
-        id: pair_915eec24717a41e8a1bc4e34b2e096f9
-      - name: legalStatusOther
-        value: some legal status
-        id: pair_e9b341c440f243a6a5da8526af8b346d
+        id: pair_c9d0beae8e8146919a4da6a722ea0157
+      - name: canadaWholeLife
+        disabled: false
+        value: 'false'
+        id: pair_98766dee942443a082abebe796f9692a
       - name: yearsInCanadaSince18
+        disabled: true
         value: '40'
-        id: pair_b4281eae19d14dd5a555204bae1f3029
-      - name: everLivedSocialCountry
-        value: 'true'
-        id: pair_3b98aa9c4012467d8da58c46e2167150
-      - id: pair_ba8d46f72128414c831f19d64ec65a6a
-        name: _language
-        value: EN
+        id: pair_ef57fba8d2fd47c69c73a6d3e4f10ef1
         description: ''
+      - name: everLivedSocialCountry
+        disabled: false
+        value: 'true'
+        id: pair_61dbd67490104aed967462240b1f10f2
+      - name: partnerBenefitStatus
+        disabled: false
+        value: helpMe
+        id: pair_c52d5778ca724b2e96fd84a88a81b692
+      - name: partnerIncome
+        disabled: false
+        value: '0'
+        id: pair_d0962370ae2d4ab0bedac2726499adab
+      - name: partnerAge
+        disabled: false
+        value: '65'
+        id: pair_6baff6ad68d04ff1a23e6c971b26aebe
+        description: ''
+      - name: partnerLivingCountry
+        disabled: false
+        value: CAN
+        id: pair_01b3d3f7535c442fa8fce1e9cefdfa8e
+        description: ''
+      - name: partnerLegalStatus
+        disabled: false
+        value: canadianCitizen
+        id: pair_d4dc755da0d04758a5040ba154b16687
+        description: ''
+      - name: partnerCanadaWholeLife
+        disabled: false
+        value: 'false'
+        id: pair_530a2572ff674192860e5a81fe42fb2d
+        description: ''
+      - name: partnerYearsInCanadaSince18
+        disabled: false
+        value: '40'
+        id: pair_123d63271caa497d91ff48b3b56e1662
+        description: ''
+      - name: partnerEverLivedSocialCountry
+        disabled: false
+        value: 'true'
+        id: pair_4ef870a388ea4b608bfed6b7a227b303
+        description: ''
+      - name: _language
+        disabled: false
+        value: EN
+        id: pair_13187d812646456ab9fd55f7dbd735ff
     headers: []
     authentication: {}
     metaSortKey: -1637965624524
@@ -89,7 +130,7 @@ resources:
     _type: cookie_jar
   - _id: spc_8baaccaea9424f4b84a71dd08f84ee16
     parentId: wrk_90d4d590fb5a4034b3d98b7c08964852
-    modified: 1641501246002
+    modified: 1642814863431
     created: 1637016450877
     fileName: eligibility-estimator-openapi
     contents: >
@@ -130,14 +171,21 @@ resources:
             parameters:
               - $ref: '#/components/parameters/income'
               - $ref: '#/components/parameters/age'
+              - $ref: '#/components/parameters/maritalStatus'
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
               - $ref: '#/components/parameters/legalStatusOther'
+              - $ref: '#/components/parameters/canadaWholeLife'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
-              - $ref: '#/components/parameters/maritalStatus'
-              - $ref: '#/components/parameters/partnerIncome'
-              - $ref: '#/components/parameters/partnerReceivingOas'
               - $ref: '#/components/parameters/everLivedSocialCountry'
+              - $ref: '#/components/parameters/partnerBenefitStatus'
+              - $ref: '#/components/parameters/partnerIncome'
+              - $ref: '#/components/parameters/partnerAge'
+              - $ref: '#/components/parameters/partnerLivingCountry'
+              - $ref: '#/components/parameters/partnerLegalStatus'
+              - $ref: '#/components/parameters/partnerCanadaWholeLife'
+              - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
+              - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
             responses:
               '200':
                 $ref: '#/components/responses/200'
@@ -154,25 +202,32 @@ resources:
               enum:
                 - income
                 - age
+                - maritalStatus
                 - livingCountry
                 - legalStatus
                 - legalStatusOther
+                - canadaWholeLife
                 - yearsInCanadaSince18
-                - maritalStatus
-                - partnerIncome
-                - partnerReceivingOas
                 - everLivedSocialCountry
+                - partnerBenefitStatus
+                - partnerIncome
+                - partnerAge
+                - partnerLivingCountry
+                - partnerLegalStatus
+                - partnerCanadaWholeLife
+                - partnerYearsInCanadaSince18
+                - partnerEverLivedSocialCountry
 
           ResultKey:
             type: string
             description: A summary of the resulting eligibility calculation
             format: string
             enum:
-              - Eligible!
-              - Not eligible!
-              - Conditionally eligible...
-              - Need more information...
-              - Request is invalid!
+              - eligible
+              - ineligible
+              - unavailable
+              - moreInfo
+              - invalid
 
           ResultReason:
             type: string
@@ -189,6 +244,7 @@ resources:
               - Not eligible for OAS
               - Income too high
               - Your marital status does not meet the requirement for this benefit
+              - Your partner does not receive the required benefits
 
           ResultObject:
             type: object
@@ -261,22 +317,22 @@ resources:
                   'Standard case':
                     value:
                       oas:
-                        eligibilityResult: Eligible!
+                        eligibilityResult: eligible
                         entitlementResult: 0
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for OAS!
                       gis:
-                        eligibilityResult: Eligible!
+                        eligibilityResult: eligible
                         entitlementResult: 0
                         reason: You meet the criteria
                         detail: Based on the information provided, you are eligible for GIS!
                       allowance:
-                        eligibilityResult: Not eligible!
+                        eligibilityResult: ineligible
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        eligibilityResult: Not eligible!
+                        eligibilityResult: ineligible
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -287,33 +343,33 @@ resources:
                         - legalStatus
                         - yearsInCanadaSince18
                         - maritalStatus
-                        - partnerReceivingOas
+                        - partnerBenefitStatus
 
                   'Blank request':
                     value:
                       oas:
-                        eligibilityResult: Need more information...
+                        eligibilityResult: moreInfo
                         entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       gis:
-                        eligibilityResult: Need more information...
+                        eligibilityResult: moreInfo
                         entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       allowance:
-                        eligibilityResult: Need more information...
+                        eligibilityResult: moreInfo
                         entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
                         missingFields:
                           - income
                       afs:
-                        eligibilityResult: Need more information...
+                        eligibilityResult: moreInfo
                         entitlementResult: 0
                         reason: Need more information...
                         detail: Missing 1 required field.
@@ -325,22 +381,22 @@ resources:
                   'Ineligible case':
                     value:
                       oas:
-                        eligibilityResult: Not eligible!
+                        eligibilityResult: ineligible
                         entitlementResult: 0
                         reason: Income too high
                         detail: Your income is too high to be eligible for OAS.
                       gis:
-                        eligibilityResult: Not eligible!
+                        eligibilityResult: ineligible
                         entitlementResult: 0
                         reason: Not eligible for OAS
                         detail: You need to be eligible for OAS to be eligible for GIS.
                       allowance:
-                        eligibilityResult: Not eligible!
+                        eligibilityResult: ineligible
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance.
                       afs:
-                        eligibilityResult: Not eligible!
+                        eligibilityResult: ineligible
                         entitlementResult: 0
                         reason: Age does not meet requirement for this benefit
                         detail: You must be between 60 and 64 to be eligible for Allowance for Survivor.
@@ -351,7 +407,7 @@ resources:
                         - legalStatus
                         - yearsInCanadaSince18
                         - maritalStatus
-                        - partnerReceivingOas
+                        - partnerBenefitStatus
 
           '400':
             description: Invalid request, typically because the input did not pass the validation rules.
@@ -405,6 +461,24 @@ resources:
               maximum: 150
             allowEmptyValue: false
 
+          maritalStatus:
+            name: maritalStatus
+            in: query
+            description: The current marital status of the client.
+            required: false
+            example: married
+            schema:
+              type: string
+              enum:
+                - single
+                - married
+                - commonLaw
+                - widowed
+                - divorced
+                - separated
+              description: The current marital status of the client.
+            allowEmptyValue: false
+
           livingCountry:
             name: livingCountry
             in: query
@@ -418,12 +492,11 @@ resources:
             schema:
               type: string
               description: Any country
-              example: Canada
+              example: CAN
               enum:
-                - Canada
-                - Agreement
-                - No agreement
-                - Any other country
+                - CAN
+                - AGREEMENT
+                - NO_AGREEMENT
 
           legalStatus:
             name: legalStatus
@@ -456,6 +529,16 @@ resources:
               type: string
             allowEmptyValue: false
 
+          canadaWholeLife:
+            name: canadaWholeLife
+            in: query
+            description: Have you only lived in Canada since the age of 18?
+            required: false
+            example: true
+            schema:
+              type: boolean
+            allowEmptyValue: false
+
           yearsInCanadaSince18:
             name: yearsInCanadaSince18
             in: query
@@ -472,22 +555,28 @@ resources:
               maximum: 100
             allowEmptyValue: false
 
-          maritalStatus:
-            name: maritalStatus
+          everLivedSocialCountry:
+            name: everLivedSocialCountry
             in: query
-            description: The current marital status of the client.
+            description: Has the client ever lived in a country with a social agreement? [link of countries to be included]
             required: false
-            example: married
+            example: true
             schema:
-              type: string
-              enum:
-                - single
-                - married
-                - commonLaw
-                - widowed
-                - divorced
-                - separated
-              description: The current marital status of the client.
+              type: boolean
+            allowEmptyValue: false
+
+          partnerBenefitStatus:
+            name: partnerBenefitStatus
+            in: query
+            description: >
+              Is the client's partner receiving OAS?
+
+
+              _Note: This can be "true" only when marital status is Married or Common-Law._
+            required: false
+            example: false
+            schema:
+              type: boolean
             allowEmptyValue: false
 
           partnerIncome:
@@ -505,24 +594,84 @@ resources:
               description: Income in Canadian dollars.
             allowEmptyValue: false
 
-          partnerReceivingOas:
-            name: partnerReceivingOas
+          partnerAge:
+            name: partnerAge
+            in: query
+            description: The current age of the partner, up to a max of 150.
+            required: false
+            schema:
+              type: integer
+              description: Age, up to a max of 150.
+              example: 65
+              maximum: 150
+            allowEmptyValue: false
+
+          partnerLivingCountry:
+            name: partnerLivingCountry
             in: query
             description: >
-              Is the client's partner receiving OAS?
+              The country that the partner is currently living in.
 
 
-              _Note: This can be "true" only when marital status is Married or Common-Law._
+              _For testing purposes, "Agreement" and "No agreement" are options._
             required: false
-            example: false
+            allowEmptyValue: false
+            schema:
+              type: string
+              description: Any country
+              example: CAN
+              enum:
+                - CAN
+                - AGREEMENT
+                - NO_AGREEMENT
+
+          partnerLegalStatus:
+            name: partnerLegalStatus
+            in: query
+            description: The current legal status of the partner.
+            required: false
+            example: canadianCitizen
+            schema:
+              type: string
+              enum:
+                - canadianCitizen
+                - permanentResident
+                - sponsored
+                - indianStatus
+                - other
+              description: The current legal status of the partner.
+            allowEmptyValue: false
+
+          partnerCanadaWholeLife:
+            name: partnerCanadaWholeLife
+            in: query
+            description: Have you only lived in Canada since the age of 18?
+            required: false
+            example: true
             schema:
               type: boolean
             allowEmptyValue: false
 
-          everLivedSocialCountry:
-            name: everLivedSocialCountry
+          partnerYearsInCanadaSince18:
+            name: partnerYearsInCanadaSince18
             in: query
-            description: Has the client ever lived in a country with a social agreement? [link of countries to be included]
+            description: >
+              How many years the partner has lived in Canada since the age of 18.
+
+
+              _Note that this can not be greater than `age - 18`._
+            required: false
+            example: 40
+            schema:
+              type: integer
+              description: Years, up to a max of 100.
+              maximum: 100
+            allowEmptyValue: false
+
+          partnerEverLivedSocialCountry:
+            name: partnerEverLivedSocialCountry
+            in: query
+            description: Has the partner ever lived in a country with a social agreement? [link of countries to be included]
             required: false
             example: true
             schema:

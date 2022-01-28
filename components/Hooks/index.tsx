@@ -78,7 +78,7 @@ export const useMediaQuery = (width) => {
 
   useEffect(() => {
     if (process.browser) {
-      const media = window.matchMedia(`(max-width: ${width}px)`)
+      const media = window.matchMedia(`(max-width: ${width - 1}px)`)
       media.addEventListener('change', updateTarget)
 
       // Check on mount (callback is not called until a change occurs)
@@ -91,4 +91,14 @@ export const useMediaQuery = (width) => {
   }, [])
 
   return targetReached
+}
+
+export const useWindowWidth = () => {
+  const [width, setWidth] = useState(0)
+  const handleResize = () => setWidth(window.innerWidth)
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [width])
+  return width
 }

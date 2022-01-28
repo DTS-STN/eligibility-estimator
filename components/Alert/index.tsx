@@ -1,16 +1,19 @@
-import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
+import { useWindowWidth } from '../Hooks'
 
 /** offset padding and margin of the component, used to calculate svg height responsively */
 const OFFSET_WIDTH = 28
 
 export const Alert: React.VFC<{
+  id?: string
   title: string
-  children: React.ReactNode
+  children: React.ReactNode | string
   type: EstimationSummaryState
-}> = ({ title, children, type }) => {
+  insertHTML?: boolean
+}> = ({ id, title, children, type, insertHTML }) => {
   const [height, setHeight] = useState<number>(null)
+  const windowWidth = useWindowWidth()
   const ref = useRef(null)
 
   useEffect(() => {
@@ -18,7 +21,7 @@ export const Alert: React.VFC<{
       const height = ref.current.clientHeight
       setHeight(height)
     }
-  }, [ref.current])
+  }, [windowWidth])
 
   const className = (() => {
     switch (type) {
@@ -28,13 +31,19 @@ export const Alert: React.VFC<{
         return 'border-danger text-danger'
       case EstimationSummaryState.AVAILABLE_ELIGIBLE:
         return 'border-[#278400] text-[#278400]'
+      case EstimationSummaryState.MORE_INFO:
+        return 'border-[#269ABC] text-[#269ABC]'
       default:
         break
     }
   })()
 
   return (
-    <div className={`py-2.5 pl-2 border-[3px] ${className} rounded`} ref={ref}>
+    <div
+      className={`py-2.5 pl-2 border-[3px] ${className} rounded`}
+      ref={ref}
+      id={id}
+    >
       <div className="flex flex-row justify-start items-start">
         <div>
           <svg
@@ -59,7 +68,14 @@ export const Alert: React.VFC<{
         </div>
         <div className="ml-3 flex flex-col pt-2">
           <h5 className="h5 mb-3 text-content">{title}</h5>
-          <div className="text-content">{children}</div>
+          {!insertHTML ? (
+            <div className="text-content">{children}</div>
+          ) : (
+            <div
+              className="summary-link text-content"
+              dangerouslySetInnerHTML={{ __html: children as string }}
+            ></div>
+          )}
         </div>
       </div>
     </div>

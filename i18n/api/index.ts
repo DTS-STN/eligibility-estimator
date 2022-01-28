@@ -1,3 +1,4 @@
+import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
 
@@ -32,22 +33,31 @@ export interface Translations {
   question: {
     income: string
     age: string
+    maritalStatus: string
     livingCountry: string
     legalStatus: string
     legalStatusOther: string
+    canadaWholeLife: string
     yearsInCanadaSince18: string
-    maritalStatus: string
-    partnerIncome: string
-    partnerReceivingOas: string
     everLivedSocialCountry: string
+    partnerBenefitStatus: string
+    partnerIncome: string
+    partnerAge: string
+    partnerLivingCountry: string
+    partnerLegalStatus: string
+    partnerCanadaWholeLife: string
+    partnerYearsInCanadaSince18: string
+    partnerEverLivedSocialCountry: string
   }
   questionOptions: {
     legalStatus: KeyAndText[]
     maritalStatus: KeyAndText[]
+    partnerBenefitStatus: KeyAndText[]
     livingCountry: KeyAndText[]
   }
   detail: {
     eligible: string
+    eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
@@ -59,7 +69,7 @@ export interface Translations {
     mustCompleteOasCheck: string
     mustBeWidowed: string
     mustBePartnered: string
-    mustHavePartnerWithOas: string
+    mustHavePartnerWithGis: string
     mustMeetIncomeReq: string
     mustMeetYearReq: string
     ineligibleYearsOrCountry: string
@@ -83,6 +93,27 @@ export interface Translations {
     unavailable: string
     availableEligible: string
     availableIneligible: string
+    availableIneligibleIncome: string
+  }
+  links: {
+    contactSC: Link
+    oasOverview: Link
+    oasEntitlement: Link
+    oasMaxIncome: Link
+    outsideCanada: Link
+    oasQualify: Link
+    oasPartial: Link
+    gisQualify: Link
+    alwQualify: Link
+    afsQualify: Link
+    workingOutsideCanada: Link
+    gisEntitlement: Link
+    oasEntitlement2: Link
+    alwGisEntitlement: Link
+    alwInfo: Link
+    afsEntitlement: Link
+    oasRecoveryTax: Link
+    oasDefer: Link
   }
 }
 
