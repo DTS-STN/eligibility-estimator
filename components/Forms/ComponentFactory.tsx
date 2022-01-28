@@ -47,8 +47,20 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       root.setSummary(data.summary)
     }
 
-    // check if income is too high to participate in calculation
+    // check if income is too high to participate in calculation, and fix a bug with headless ui tabs where they only re-render on interaction
     const incomeTooHigh = form.validateIncome()
+    useEffect(() => {
+      if (process.browser) {
+        const results = document.getElementsByClassName('results-tab')[0]
+        if (results) {
+          if (form.isIncomeTooHigh) {
+            results.setAttribute('disabled', 'disabled')
+          } else {
+            results.removeAttribute('disabled')
+          }
+        }
+      }
+    }, [incomeTooHigh])
 
     return (
       <>
@@ -214,7 +226,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     selectedTabIndex(1)
                   }
                 }}
-                disabled={form.validateIncome()}
+                disabled={incomeTooHigh}
               >
                 Estimate
               </button>

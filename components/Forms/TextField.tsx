@@ -52,7 +52,8 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
         onChange={onChange}
         defaultValue={value}
         rows={2}
-        required
+        required={required}
+        autoComplete="off"
       />
     </>
   )

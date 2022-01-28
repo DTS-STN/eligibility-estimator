@@ -62,6 +62,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           placeholder={placeholder}
           onChange={onChange}
           required={required}
+          autoComplete="off"
         />
       </div>
     )

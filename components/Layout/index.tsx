@@ -18,7 +18,7 @@ export const Layout: React.VFC<{
   return (
     <>
       <Head>
-        <title>Benefits Eligibility Estimator</title>
+        <title>Canadian Old Age Benefits Estimator</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <SCLabsTestHeader />
