@@ -21,77 +21,81 @@ interface SelectProps
  * @param props {SelectProps}
  * @returns
  */
-export const FormSelect: React.VFC<SelectProps> = observer((props) => {
-  const { field, name, error } = props
-  const defaultValue = field.value ?? field.default
+export const FormSelect: React.VFC<SelectProps> = observer(
+  ({ field, name, error }) => {
+    const defaultValue = field.value ?? field.default
 
-  const stateValue =
-    field.value !== null && field.value !== ''
-      ? { label: field.value.text, value: field.value.text }
-      : null
+    const stateValue =
+      field.value !== null && field.value !== ''
+        ? { label: field.value.text, value: field.value.text }
+        : null
 
-  return (
-    <>
-      <label
-        htmlFor={name}
-        aria-label={name}
-        data-testid="select-label"
-        className="font-semibold inline-block mb-1.5"
-      >
-        <span className="text-danger">* </span>
-        <span className="mb-1.5 font-semibold text-content">{field.label}</span>
-        <span className="text-danger font-bold ml-2">(required)</span>
-        <Tooltip field={field.key} />
-      </label>
-      {error && <ErrorLabel errorMessage={error} />}
-      <div className="w-full md:w-80">
-        <Select
-          styles={{
-            container: (styles) => ({
-              ...styles,
-              fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
-              border: error ? '1px solid red' : undefined,
-              borderRadius: '4px',
-            }),
-            input: (styles) => ({
-              ...styles,
-              boxShadow: 'none', // remove a blue inset box from react-select
-            }),
-            indicatorSeparator: (styles) => ({
-              ...styles,
-              opacity: field.key == FieldType.DROPDOWN_SEARCHABLE ? 1 : 0,
-            }),
-          }}
-          className="rselect"
-          placeholder="Select from..."
-          data-testid="select"
-          value={stateValue}
-          defaultValue={
-            defaultValue !== undefined
-              ? { label: defaultValue.text, value: defaultValue.key }
-              : undefined
-          }
-          name={field.key}
-          options={field.options.map((opt) => ({
-            value: opt.key,
-            label: opt.text,
-          }))}
-          onChange={async (newValue: { value: string; label: string }) => {
-            if (!newValue) {
-              field.clearValue()
-              return
+    return (
+      <>
+        <label
+          htmlFor={name}
+          aria-label={name}
+          data-testid="select-label"
+          className="font-semibold inline-block mb-1.5"
+        >
+          <span className="text-danger">* </span>
+          <span className="mb-1.5 font-semibold text-content">
+            {field.label}
+          </span>
+          <span className="text-danger font-bold ml-2">(required)</span>
+          <Tooltip field={field.key} />
+        </label>
+        {error && <ErrorLabel errorMessage={error} />}
+        <div className="w-full md:w-80">
+          <Select
+            aria-labelledby={name}
+            styles={{
+              container: (styles) => ({
+                ...styles,
+                fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
+                border: error ? '1px solid red' : undefined,
+                borderRadius: '4px',
+              }),
+              input: (styles) => ({
+                ...styles,
+                boxShadow: 'none', // remove a blue inset box from react-select
+              }),
+              indicatorSeparator: (styles) => ({
+                ...styles,
+                opacity: field.key == FieldType.DROPDOWN_SEARCHABLE ? 1 : 0,
+              }),
+            }}
+            className="rselect"
+            placeholder="Select from..."
+            data-testid="select"
+            value={stateValue}
+            defaultValue={
+              defaultValue !== undefined
+                ? { label: defaultValue.text, value: defaultValue.key }
+                : undefined
             }
-            field.handleChange(newValue)
-          }}
-          closeMenuOnScroll={false}
-          isSearchable={
-            field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
-          }
-          isClearable={
-            field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
-          }
-        />
-      </div>
-    </>
-  )
-})
+            name={field.key}
+            options={field.options.map((opt) => ({
+              value: opt.key,
+              label: opt.text,
+            }))}
+            onChange={async (newValue: { value: string; label: string }) => {
+              if (!newValue) {
+                field.clearValue()
+                return
+              }
+              field.handleChange(newValue)
+            }}
+            closeMenuOnScroll={false}
+            isSearchable={
+              field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
+            }
+            isClearable={
+              field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
+            }
+          />
+        </div>
+      </>
+    )
+  }
+)
