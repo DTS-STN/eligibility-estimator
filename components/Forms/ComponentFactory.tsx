@@ -150,6 +150,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     field.type == FieldType.DROPDOWN_SEARCHABLE) && (
                     <div className="pb-8">
                       <FormSelect
+                        name={field.key}
                         field={field}
                         error={field.error}
                         value={null}
