@@ -53,19 +53,19 @@ export const Tabs: React.FC<PropsWithChildren<any>> = observer((props) => {
           FAQ
         </Tab>
       </Tab.List>
-      <Tab.Panels>
-        <Tab.Panel className="mt-10">
-          <div className="md:container mt-14">
+      <Tab.Panels className="focus-visible:outline-none">
+        <Tab.Panel className="mt-10 focus-visible:outline-none">
+          <div className="md:container mt-14 focus-visible:outline-none">
             <ComponentFactory
               data={props}
               selectedTabIndex={setSelectedTabIndex}
             />
           </div>
         </Tab.Panel>
-        <Tab.Panel className="mt-10">
+        <Tab.Panel className="mt-10 focus-visible:outline-none">
           <ResultsPage root={root} setSelectedTab={setSelectedTabIndex} />
         </Tab.Panel>
-        <Tab.Panel className="mt-10">
+        <Tab.Panel className="mt-10 focus-visible:outline-none">
           <FAQ />
         </Tab.Panel>
       </Tab.Panels>

@@ -86,7 +86,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             ]}
           />
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10 focus-visible:outline-none">
           <form
             name="ee-form"
             data-testid="ee-form"
