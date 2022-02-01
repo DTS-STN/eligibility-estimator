@@ -66,7 +66,7 @@ export const Footer = () => (
     </div>
     <div className="flex justify-between px-4 py-8 sm:container mx-auto">
       <ul className="flex flex-col md:flex-row md:space-x-6 list-disc px-4 text-[#284162]">
-        <li>
+        <li className="md:list-none">
           <a href="#">Social media</a>
         </li>
         <li>
