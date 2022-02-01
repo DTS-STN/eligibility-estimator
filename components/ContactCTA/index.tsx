@@ -25,12 +25,16 @@ export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
         </span>{' '}
         on documents you may be required to provide.
       </p>
-      <h2 className="h2 mt-8">Next steps</h2>
-      <Link href={root.summary.nextStepsLink.url} passHref>
-        <a className="btn btn-primary w-96" target="_blank">
-          {root.summary.nextStepsLink.text}
-        </a>
-      </Link>
+      {root.summary.nextStepsLink?.url && (
+        <>
+          <h2 className="h2 mt-8">Next steps</h2>
+          <Link href={root.summary.nextStepsLink.url} passHref>
+            <a className="btn btn-primary w-96" target="_blank">
+              {root.summary.nextStepsLink.text}
+            </a>
+          </Link>
+        </>
+      )}
     </>
   )
 }
