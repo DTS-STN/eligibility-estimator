@@ -98,14 +98,16 @@ export interface Translations {
   links: {
     contactSC: Link
     oasOverview: Link
+    cpp: Link
+    cric: Link
+    oasApply: Link
+    gisApply: Link
+    alwApply: Link
+    afsApply: Link
     oasEntitlement: Link
     oasMaxIncome: Link
     outsideCanada: Link
-    oasQualify: Link
     oasPartial: Link
-    gisQualify: Link
-    alwQualify: Link
-    afsQualify: Link
     workingOutsideCanada: Link
     gisEntitlement: Link
     oasEntitlement2: Link
@@ -114,6 +116,7 @@ export interface Translations {
     afsEntitlement: Link
     oasRecoveryTax: Link
     oasDefer: Link
+    oasRetroactive: Link
   }
 }
 
