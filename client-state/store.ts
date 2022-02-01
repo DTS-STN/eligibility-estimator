@@ -7,6 +7,7 @@ import {
 } from 'mobx-state-tree/dist/internal'
 import {
   EstimationSummaryState,
+  LinkLocation,
   ResultKey,
 } from '../utils/api/definitions/enums'
 import { Form } from './models/Form'
@@ -36,14 +37,35 @@ export const SummaryLink = types.model({
   url: types.string,
   text: types.string,
   order: types.number,
+  location: types.enumeration(Object.values(LinkLocation)),
 })
 
-export const Summary = types.model({
-  state: types.maybe(types.enumeration(Object.values(EstimationSummaryState))),
-  details: types.maybe(types.string),
-  title: types.maybe(types.string),
-  links: types.maybe(types.array(SummaryLink)),
-})
+export const Summary = types
+  .model({
+    state: types.maybe(
+      types.enumeration(Object.values(EstimationSummaryState))
+    ),
+    details: types.maybe(types.string),
+    title: types.maybe(types.string),
+    links: types.maybe(types.array(SummaryLink)),
+  })
+  .views((self) => ({
+    get nextStepsLink() {
+      return self.links.find(
+        (link) => link.location === LinkLocation.RESULTS_APPLY
+      )
+    },
+    get needHelpLinks() {
+      return self.links.filter(
+        (link) => link.location === LinkLocation.STANDARD
+      )
+    },
+    get moreInfoLinks() {
+      return self.links.filter(
+        (link) => link.location !== LinkLocation.RESULTS_APPLY
+      )
+    },
+  }))
 
 export const RootStore = types
   .model({
