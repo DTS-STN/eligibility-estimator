@@ -81,6 +81,7 @@ export enum EstimationSummaryState {
 
 export enum LinkLocation {
   STANDARD = 'STANDARD', // Questions > NeedHelp, and Results > MoreInfo
+  QUESTIONS_ONLY = 'QUESTIONS_ONLY', // Questions > NeedHelp
   RESULTS_ONLY = 'RESULTS_ONLY', // Results > MoreInfo only
   RESULTS_APPLY = 'RESULTS_APPLY', // new section above Results > MoreInfo
 }

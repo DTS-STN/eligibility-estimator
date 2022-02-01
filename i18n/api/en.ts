@@ -352,7 +352,7 @@ const en: Translations = {
       text: 'Contact Service Canada',
       url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
       order: 1,
-      location: LinkLocation.STANDARD,
+      location: LinkLocation.QUESTIONS_ONLY,
     },
     oasOverview: {
       text: 'Old Age Security Overview',

@@ -370,7 +370,7 @@ const fr: Translations = {
       text: 'Communiquer avec Service Canada',
       url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
       order: 1,
-      location: LinkLocation.STANDARD,
+      location: LinkLocation.QUESTIONS_ONLY,
     },
     oasOverview: {
       text: 'SV Aperçu',
