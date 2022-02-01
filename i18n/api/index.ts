@@ -98,6 +98,8 @@ export interface Translations {
   links: {
     contactSC: Link
     oasOverview: Link
+    cpp: Link
+    cric: Link
     oasEntitlement: Link
     oasMaxIncome: Link
     outsideCanada: Link
