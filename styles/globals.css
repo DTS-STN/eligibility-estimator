@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  /* consistent focus styles on all components -- overriding */
+  /* consistent focus styles on all components */
   * {
-    /* @apply focus:outline-none;
+    @apply focus:outline-none;
     @apply focus-visible:ring-1;
-    @apply focus-visible:ring-black; */
+    @apply focus-visible:ring-black;
   }
 
   #elig {
