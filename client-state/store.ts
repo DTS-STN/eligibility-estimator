@@ -52,17 +52,17 @@ export const Summary = types
   .views((self) => ({
     get nextStepsLink() {
       return self.links.find(
-        (link) => link.location === LinkLocation.RESULTS_APPLY
+        (link) => link.location === LinkLocation.RESULTS_APPLY 
       )
     },
     get needHelpLinks() {
       return self.links.filter(
-        (link) => link.location === LinkLocation.STANDARD
+        (link) => link.location === LinkLocation.STANDARD || link.location === LinkLocation.QUESTIONS_ONLY
       )
     },
     get moreInfoLinks() {
       return self.links.filter(
-        (link) => link.location !== LinkLocation.RESULTS_APPLY
+        (link) => link.location === LinkLocation.STANDARD || link.location === LinkLocation.RESULTS_ONLY
       )
     },
   }))
