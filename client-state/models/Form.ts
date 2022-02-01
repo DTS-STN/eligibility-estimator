@@ -1,4 +1,11 @@
-import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
+import {
+  flow,
+  getParent,
+  getSnapshot,
+  Instance,
+  SnapshotIn,
+  types,
+} from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
@@ -108,6 +115,7 @@ export const Form = types
   }))
   .actions((self) => ({
     clearForm(): void {
+      const parent = getParent(self) as Instance<typeof RootStore>
       const fieldsToRemove: Instance<typeof FormField> = []
       for (const field of self.fields) {
         field.setValue(null)
@@ -122,9 +130,10 @@ export const Form = types
       }
       self.removeFields(fieldsToRemove)
 
-      // remove the now invalid summary object
-      const parent = getParent(self) as Instance<typeof RootStore>
-      parent.setSummary({})
+      // remove the now invalid summary data, not links
+      parent.setSummary({
+        links: getSnapshot(parent.summary.links),
+      })
     },
     clearAllErrors() {
       self.fields.map((field) => field.setError(undefined))
