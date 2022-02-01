@@ -69,7 +69,6 @@ export const Footer = () => (
         <li>
           <a href="#">Social media</a>
         </li>
-        #284162
         <li>
           <a href="#">Mobile applications</a>
         </li>
