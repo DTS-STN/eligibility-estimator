@@ -156,12 +156,16 @@ export class AlwBenefit extends BaseBenefit {
       return { result: 0, type: EntitlementResultType.NONE }
 
     const result = this.getEntitlementAmount()
-    const type = EntitlementResultType.FULL
+    const type =
+      result === -1
+        ? EntitlementResultType.UNAVAILABLE
+        : EntitlementResultType.FULL
 
     return { result, type }
   }
 
   private getEntitlementAmount(): number {
+    if (this.input.partnerBenefitStatus.partialOas) return -1
     const tableItem = this.getTableItem()
     return tableItem ? tableItem.alw : 0
   }
