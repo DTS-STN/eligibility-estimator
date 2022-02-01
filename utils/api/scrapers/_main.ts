@@ -1,20 +1,24 @@
-import PartneredAfsScraper from './partneredAfsScraper'
-import PartneredAlwScraper from './partneredAlwScraper'
-import PartneredAndOasScraper from './partneredAndOasScraper'
-import PartneredNoOasScraper from './partneredNoOasScraper'
-import SingleScraper from './singleScraper'
+import LegalValuesScraper from './legalValuesScraper'
+import Tbl1SingleScraper from './tbl1SingleScraper'
+import Tbl2PartneredAndOasScraper from './tbl2PartneredAndOasScraper'
+import Tbl3PartneredNoOasScraper from './tbl3PartneredNoOasScraper'
+import Tbl4PartneredAlwScraper from './tbl4PartneredAlwScraper'
+import Tbl5PartneredAfsScraper from './tbl5PartneredAfsScraper'
 
-const singleScraper = new SingleScraper()
-singleScraper.main().then(() => {})
+const legalValuesScraper = new LegalValuesScraper()
+legalValuesScraper.main().then(() => {})
 
-const partneredAndOasScraper = new PartneredAndOasScraper()
-partneredAndOasScraper.main().then(() => {})
+const tbl1SingleScraper = new Tbl1SingleScraper()
+tbl1SingleScraper.main().then(() => {})
 
-const partneredNoOasScraper = new PartneredNoOasScraper()
-partneredNoOasScraper.main().then(() => {})
+const tbl2PartneredAndOasScraper = new Tbl2PartneredAndOasScraper()
+tbl2PartneredAndOasScraper.main().then(() => {})
 
-const partneredAlw = new PartneredAlwScraper()
-partneredAlw.main().then(() => {})
+const tbl3PartneredNoOasScraper = new Tbl3PartneredNoOasScraper()
+tbl3PartneredNoOasScraper.main().then(() => {})
 
-const partneredAfs = new PartneredAfsScraper()
-partneredAfs.main().then(() => {})
+const tbl4PartneredAlwScraper = new Tbl4PartneredAlwScraper()
+tbl4PartneredAlwScraper.main().then(() => {})
+
+const tbl5PartneredAfsScraper = new Tbl5PartneredAfsScraper()
+tbl5PartneredAfsScraper.main().then(() => {})

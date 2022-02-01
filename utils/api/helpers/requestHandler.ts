@@ -10,7 +10,6 @@ import {
   FieldKey,
   FieldType,
 } from '../definitions/fields'
-import { MAX_OAS_INCOME } from '../definitions/legalValues'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -20,6 +19,7 @@ import {
   RequestInput,
   SummaryObject,
 } from '../definitions/types'
+import { legalValues } from '../scrapers/output'
 import {
   IncomeHelper,
   LegalStatusHelper,
@@ -131,10 +131,10 @@ export class RequestHandler {
    */
   static getRequiredFields(input: ProcessedInputWithPartner): FieldKey[] {
     const requiredFields = [FieldKey.INCOME]
-    if (input.client.income.client >= MAX_OAS_INCOME) {
+    if (input.client.income.client >= legalValues.MAX_OAS_INCOME) {
       // over highest income, therefore don't need anything else
       return requiredFields
-    } else if (input.client.income.client < MAX_OAS_INCOME) {
+    } else if (input.client.income.client < legalValues.MAX_OAS_INCOME) {
       // meets max income req, open up main form
       requiredFields.push(
         FieldKey.AGE,

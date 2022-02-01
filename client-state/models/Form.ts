@@ -1,11 +1,11 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
-import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
 import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import { legalValues } from '../../utils/api/scrapers/output'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
@@ -219,7 +219,7 @@ export const Form = types
         return false
 
       const validIncome = self.getFieldByKey(FieldKey.INCOME).sanitizeInput()
-      return parseInt(validIncome) > MAX_OAS_INCOME
+      return parseInt(validIncome) > legalValues.MAX_OAS_INCOME
     },
   }))
   .views((self) => ({

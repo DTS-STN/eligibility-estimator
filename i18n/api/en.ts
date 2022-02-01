@@ -1,4 +1,4 @@
-import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
+import { legalValues } from '../../utils/api/scrapers/output'
 import { Translations } from './index'
 
 const en: Translations = {
@@ -344,7 +344,7 @@ const en: Translations = {
       'Based on the information you have provided, you are likely eligible for the following benefits. Note that this only provides an estimate of your monthly payment.',
     availableIneligible:
       'Based on the information you have provided, you are likely not eligible for any benefits. See the details below for more information.',
-    availableIneligibleIncome: `You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
+    availableIneligibleIncome: `You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${legalValues.MAX_OAS_INCOME.toLocaleString()} CAD.`,
   },
   links: {
     contactSC: {

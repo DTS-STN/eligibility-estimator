@@ -1,11 +1,11 @@
-import { BaseScraper, OutputItemGeneric } from './_base'
+import { OutputItemGeneric, TableScraper } from './_baseTable'
 
-class PartneredAfsScraper extends BaseScraper {
+class Tbl5PartneredAfsScraper extends TableScraper {
   constructor() {
     super({
       tableUrl: (pageNo) =>
         `https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab5-${pageNo}.html`,
-      outputFileName: 'partneredAfs',
+      outputFileName: 'tbl5_partneredAfs',
       numIterations: 58,
     })
   }
@@ -21,4 +21,4 @@ export interface OutputItemAfs extends OutputItemGeneric {
   afs: number
 }
 
-export default PartneredAfsScraper
+export default Tbl5PartneredAfsScraper

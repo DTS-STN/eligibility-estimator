@@ -1,20 +1,11 @@
 import fs from 'fs'
 import https from 'https'
-import { JSDOM } from 'jsdom'
-import { OutputItemAfs } from './partneredAfsScraper'
-import { OutputItemAlw } from './partneredAlwScraper'
 
-export class BaseScraper {
-  private readonly tableUrl: (pageNo: number) => string
-  private readonly outputFileName: string
-  private readonly numIterations: number
-  private readonly logHeader
+export abstract class BaseScraper {
+  protected readonly logHeader: string
 
-  constructor(props) {
-    this.tableUrl = props.tableUrl
-    this.outputFileName = props.outputFileName
-    this.numIterations = props.numIterations
-    this.logHeader = `${this.outputFileName}:`.padEnd(20)
+  protected constructor(protected readonly outputFileName: string) {
+    this.logHeader = `${this.outputFileName}:`.padEnd(22)
   }
 
   fetchPage(url: string): Promise<string> {
@@ -37,95 +28,28 @@ export class BaseScraper {
     })
   }
 
-  getIncomeRange(incomeRangeStr: string): Range {
-    const range = incomeRangeStr.split(' - ')
-    const regExp = /\$\s?|(,*)/g // strip money formatting characters
-    const low = range[0].replace(regExp, '')
-    const high = range[1].replace(regExp, '')
-
-    return { low: parseFloat(low), high: parseFloat(high) }
-  }
-
-  // getIncomeInterval(incomeRangeStr: string) {
-  //   let { high, low } = this.getIncomeRange(incomeRangeStr)
-  //   return high + 0.01 - low
-  // }
-
-  getCellValue(row) {
-    const gisStr = row.children[1].textContent
-    const gisStrStripped = gisStr.replace(/\$\s?|(,*)/g, '')
-    return parseFloat(gisStrStripped)
-  }
-
-  dataExtractor(row): OutputItem {
-    const incomeRangeStr = row.children[0].textContent
-    return {
-      range: this.getIncomeRange(incomeRangeStr),
-      // interval: this.getIncomeInterval(incomeRangeStr),
-      gis: this.getCellValue(row),
-    }
-  }
-
-  /* Returns an array of things. One thing per row
-   * Composable function
-   *
-   * data = HTML string of the page
-   * extractor = function that takes in a "row" and spits out a thing
-   *
-   * returns [thing, thing, thing]
+  /**
+   * A sanitizer function able to be used for many elements, specifically text like "Less than $10,000".
+   * Takes a string and returns a number.
    */
-  parseTable(data: string): OutputItem[] {
-    const { document } = new JSDOM(data).window
-    const rows = document.querySelector('.table tbody').children
-    const intervals = []
-    for (let i = 0; i < rows.length; i++) {
-      intervals.push(this.dataExtractor(rows[i]))
-    }
-    return intervals
+  static sanitizeFnStandard(input: string): number {
+    const sanitized = input
+      .replace(/Less than/g, '')
+      .replace(/\$/g, '')
+      .replace(/,/g, '')
+      .replace(/ /g, '')
+    return parseFloat(sanitized)
   }
 
   async main() {
-    let remaining = this.numIterations
-    console.log(`${this.logHeader} Loading ${remaining} pages...`)
-    const promises = []
-    for (let i = 1; i <= this.numIterations; i++) {
-      const pageUrl = this.tableUrl(i)
-      promises.push(
-        this.fetchPage(pageUrl).then((pageData) => {
-          remaining = remaining - 1
-          console.log(`${this.logHeader} ${remaining} pages remaining`)
-          return {
-            index: i,
-            tableData: this.parseTable(pageData),
-          }
-        })
-      )
-    }
-    const parsedTables = await Promise.all(promises)
-    parsedTables.sort((a, b) => a.index - b.index)
-    const tableData = []
-    parsedTables.forEach((result) => tableData.push(...result.tableData))
+    return undefined
+  }
 
-    const jsonStr = JSON.stringify(tableData, null, 2)
+  saveAndComplete(data: any) {
+    const jsonStr = JSON.stringify(data, null, 2)
     const filename = `./utils/api/scrapers/output/${this.outputFileName}.json`
-    fs.writeFileSync(filename, jsonStr, { flag: 'w' })
+    fs.writeFileSync(filename, `${jsonStr}\n`, { flag: 'w' })
 
     console.log(`${this.logHeader} Complete!`)
   }
-}
-
-interface Range {
-  low: number
-  high: number
-}
-
-export type OutputItem = OutputItemGis | OutputItemAlw | OutputItemAfs
-
-export interface OutputItemGeneric {
-  range: Range
-  // interval: number
-}
-
-export interface OutputItemGis extends OutputItemGeneric {
-  gis: number
 }
