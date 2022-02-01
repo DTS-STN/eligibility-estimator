@@ -60,7 +60,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           }
         }
       }
-    }, [incomeTooHigh])
+    }, [form.isIncomeTooHigh])
 
     return (
       <>
