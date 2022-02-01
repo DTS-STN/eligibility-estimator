@@ -16,7 +16,7 @@ export const ResultsTable = observer(() => {
           </tr>
         </thead>
         <tbody className="align-top">
-          <tr className="">
+          <tr>
             <td>Old Age Security (OAS)</td>
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
