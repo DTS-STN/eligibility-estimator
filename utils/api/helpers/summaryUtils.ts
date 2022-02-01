@@ -87,6 +87,8 @@ export class SummaryBuilder {
     const links = [
       this.translations.links.contactSC,
       this.translations.links.oasOverview,
+      this.translations.links.cpp,
+      this.translations.links.cric,
     ]
     if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.oasEntitlement)
