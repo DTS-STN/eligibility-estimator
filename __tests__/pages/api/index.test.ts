@@ -20,15 +20,10 @@ import {
   fieldDefinitions,
   FieldKey,
 } from '../../../utils/api/definitions/fields'
-import {
-  MAX_ALW_INCOME,
-  MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
-  MAX_GIS_INCOME_PARTNER_OAS,
-} from '../../../utils/api/definitions/legalValues'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
 import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
-import { OutputItem } from '../../../utils/api/scrapers/_base'
-import scraperData from '../../../utils/api/scrapers/output'
+import { OutputItem } from '../../../utils/api/scrapers/_baseTable'
+import { legalValues, scraperData } from '../../../utils/api/scrapers/output'
 import {
   mockGetRequest,
   mockGetRequestError,
@@ -155,11 +150,11 @@ describe('openapi checks', () => {
 describe('scraper tests', () => {
   it("the scraped data's last entry is less than one", async () => {
     const toVerify: { data: OutputItem[]; key: string }[] = [
-      { data: scraperData.single, key: 'gis' },
-      { data: scraperData.partneredAndOas, key: 'gis' },
-      { data: scraperData.partneredNoOas, key: 'gis' },
-      { data: scraperData.partneredAlw, key: 'alw' },
-      { data: scraperData.partneredAfs, key: 'afs' },
+      { data: scraperData.tbl1_single, key: 'gis' },
+      { data: scraperData.tbl2_partneredAndOas, key: 'gis' },
+      { data: scraperData.tbl3_partneredNoOas, key: 'gis' },
+      { data: scraperData.tbl4_partneredAlw, key: 'alw' },
+      { data: scraperData.tbl5_partneredAfs, key: 'afs' },
     ]
     toVerify.forEach((value) => {
       const last = value.data[value.data.length - 1][value.key]
@@ -3003,9 +2998,9 @@ describe('thorough extras', () => {
 })
 
 describe('Help Me Find Out scenarios', () => {
-  it(`works when client old, partner old (partner=noOas, therefore gis income limit ${MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table 3)`, async () => {
+  it(`works when client old, partner old (partner=noOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table 3)`, async () => {
     const input = {
-      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3035,7 +3030,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
@@ -3043,9 +3038,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 3
   })
-  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table unavailable)`, async () => {
+  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table unavailable)`, async () => {
     const input = {
-      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3075,7 +3070,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
@@ -3083,9 +3078,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(-1)
   })
-  it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
+  it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
     const input = {
-      income: MAX_GIS_INCOME_PARTNER_OAS,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3115,7 +3110,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: MAX_GIS_INCOME_PARTNER_OAS - 1,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
@@ -3125,7 +3120,7 @@ describe('Help Me Find Out scenarios', () => {
   })
   it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
     const input = {
-      income: MAX_ALW_INCOME, // too high for allowance
+      income: legalValues.MAX_ALW_INCOME, // too high for allowance
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3155,7 +3150,7 @@ describe('Help Me Find Out scenarios', () => {
   })
   it('works when client old, partner young (partner=allowance, therefore gis table 4)', async () => {
     const input = {
-      income: MAX_ALW_INCOME - 1, // okay for allowance
+      income: legalValues.MAX_ALW_INCOME - 1, // okay for allowance
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,

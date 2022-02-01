@@ -7,15 +7,12 @@ import {
 } from '../definitions/enums'
 import { FieldKey } from '../definitions/fields'
 import {
-  MAX_OAS_INCOME,
-  OAS_RECOVERY_TAX_CUTOFF,
-} from '../definitions/legalValues'
-import {
   BenefitResultsObject,
   Link,
   ProcessedInput,
   SummaryObject,
 } from '../definitions/types'
+import { legalValues } from '../scrapers/output'
 
 export class SummaryBuilder {
   private readonly state: EstimationSummaryState
@@ -134,7 +131,7 @@ export class SummaryBuilder {
       )
     if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(availableLinks.afsApply, availableLinks.afsEntitlement)
-    if (this.input.income.relevant >= MAX_OAS_INCOME)
+    if (this.input.income.relevant >= legalValues.MAX_OAS_INCOME)
       links.push(availableLinks.oasMaxIncome)
     if (this.input.livingCountry.provided && !this.input.livingCountry.canada)
       links.push(
@@ -144,8 +141,8 @@ export class SummaryBuilder {
     if (this.results.oas?.entitlement.type === EntitlementResultType.PARTIAL)
       links.push(availableLinks.oasPartial)
     if (
-      this.input.income.relevant > OAS_RECOVERY_TAX_CUTOFF &&
-      this.input.income.relevant < MAX_OAS_INCOME
+      this.input.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF &&
+      this.input.income.relevant < legalValues.MAX_OAS_INCOME
     )
       links.push(availableLinks.oasRecoveryTax)
     if (this.input.age >= 65) links.push(availableLinks.oasRetroactive)

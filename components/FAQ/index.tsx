@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const FAQ = () => (
-  <div className="">
+  <div>
     <details>
       <summary>How does the OAS program differ from CPP or QPP?</summary>
       <div className="p-4">

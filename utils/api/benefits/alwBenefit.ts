@@ -4,14 +4,13 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { MAX_ALW_INCOME } from '../definitions/legalValues'
 import {
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
-import gisTables from '../scrapers/output'
-import { OutputItemAlw } from '../scrapers/partneredAlwScraper'
+import { legalValues, scraperData } from '../scrapers/output'
+import { OutputItemAlw } from '../scrapers/tbl4PartneredAlwScraper'
 import { BaseBenefit } from './_base'
 
 export class AlwBenefit extends BaseBenefit {
@@ -26,7 +25,7 @@ export class AlwBenefit extends BaseBenefit {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < MAX_ALW_INCOME
+    const meetsReqIncome = this.income < legalValues.MAX_ALW_INCOME
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -174,6 +173,6 @@ export class AlwBenefit extends BaseBenefit {
   }
 
   private getTable(): OutputItemAlw[] {
-    return gisTables.partneredAlw
+    return scraperData.tbl4_partneredAlw
   }
 }

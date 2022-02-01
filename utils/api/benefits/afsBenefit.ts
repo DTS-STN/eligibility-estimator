@@ -5,14 +5,13 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { MAX_AFS_INCOME } from '../definitions/legalValues'
 import {
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
-import gisTables from '../scrapers/output'
-import { OutputItemAfs } from '../scrapers/partneredAfsScraper'
+import { legalValues, scraperData } from '../scrapers/output'
+import { OutputItemAfs } from '../scrapers/tbl5PartneredAfsScraper'
 import { BaseBenefit } from './_base'
 
 export class AfsBenefit extends BaseBenefit {
@@ -27,7 +26,7 @@ export class AfsBenefit extends BaseBenefit {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < MAX_AFS_INCOME
+    const meetsReqIncome = this.income < legalValues.MAX_AFS_INCOME
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -163,6 +162,6 @@ export class AfsBenefit extends BaseBenefit {
   }
 
   private getTable(): OutputItemAfs[] {
-    return gisTables.partneredAfs
+    return scraperData.tbl5_partneredAfs
   }
 }

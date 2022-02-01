@@ -5,18 +5,13 @@ import {
   ResultReason,
 } from '../definitions/enums'
 import {
-  MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
-  MAX_GIS_INCOME_PARTNER_OAS,
-  MAX_GIS_INCOME_SINGLE,
-} from '../definitions/legalValues'
-import {
   BenefitResult,
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
-import { OutputItemGis } from '../scrapers/_base'
-import gisTables from '../scrapers/output'
+import { OutputItemGis } from '../scrapers/_baseTable'
+import { legalValues, scraperData } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
 export class GisBenefit extends BaseBenefit {
@@ -43,9 +38,9 @@ export class GisBenefit extends BaseBenefit {
     */
     const maxIncome = this.input.maritalStatus.partnered
       ? this.input.partnerBenefitStatus.fullOas
-        ? MAX_GIS_INCOME_PARTNER_OAS
-        : MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
-      : MAX_GIS_INCOME_SINGLE
+        ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
+        : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
+      : legalValues.MAX_GIS_INCOME_SINGLE
     const meetsReqIncome = this.income < maxIncome
 
     // main checks
@@ -145,18 +140,18 @@ export class GisBenefit extends BaseBenefit {
   private getTable(): OutputItemGis[] {
     if (this.input.maritalStatus.single) {
       // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
-      return gisTables.single
+      return scraperData.tbl1_single
     } else if (this.input.maritalStatus.partnered) {
       if (this.input.partnerBenefitStatus.fullOas) {
         // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
-        return gisTables.partneredAndOas
+        return scraperData.tbl2_partneredAndOas
       } else if (this.input.partnerBenefitStatus.alw) {
         // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
-        return gisTables.partneredAlw
+        return scraperData.tbl4_partneredAlw
       } else {
         // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
         // this is used when partner is not getting allowance or any OAS
-        return gisTables.partneredNoOas
+        return scraperData.tbl3_partneredNoOas
       }
     }
   }
