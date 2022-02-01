@@ -1,13 +1,14 @@
-import { BaseScraper } from './_base'
+import { TableScraper } from './_baseTable'
 
-class PartneredAndOasScraper extends BaseScraper {
+class Tbl2PartneredAndOasScraper extends TableScraper {
   constructor() {
     super({
       tableUrl: (pageNo) =>
         `https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab2-${pageNo}.html`,
-      outputFileName: 'partneredAndOas',
+      outputFileName: 'tbl2_partneredAndOas',
       numIterations: 33,
     })
   }
 }
-export default PartneredAndOasScraper
+
+export default Tbl2PartneredAndOasScraper

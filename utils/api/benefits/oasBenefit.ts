@@ -4,12 +4,12 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { MAX_OAS_ENTITLEMENT, MAX_OAS_INCOME } from '../definitions/legalValues'
 import {
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
+import { legalValues } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit {
@@ -20,7 +20,7 @@ export class OasBenefit extends BaseBenefit {
   protected getEligibility(): EligibilityResult {
     // helpers
     const meetsReqAge = this.input.age >= 65
-    const meetsReqIncome = this.income < MAX_OAS_INCOME
+    const meetsReqIncome = this.income < legalValues.MAX_OAS_INCOME
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -128,7 +128,8 @@ export class OasBenefit extends BaseBenefit {
 
   private getEntitlementAmount(): number {
     return this.roundToTwo(
-      Math.min(this.input.yearsInCanadaSince18 / 40, 1) * MAX_OAS_ENTITLEMENT
+      Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
+        legalValues.MAX_OAS_ENTITLEMENT
     )
   }
 }
