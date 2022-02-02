@@ -59,6 +59,20 @@ const fr: WebTranslations = {
     personalInformation: 'Renseignements personnels',
     legalStatus: 'Statut légal',
   },
+
+  contactCTA:
+    'Pour une évaluation plus précise de votre demande, nous vous invitons à <a className="text-default-text underline" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">communiquer avec Service Canada</a>. Consultez la foire aux questions (FAQ) pour obtenir la liste les documents que vous devrez peut-être fournir.',
+  resultsPage: {
+    tableHeader1: 'Exemples de prestations',
+    tableHeader2: 'Admissibilité',
+    tableHeader3: 'Montant mensuel estimé (CAD)',
+    tableTotalAmount: 'Montant total des prestations mensuelles',
+  },
+  moreInfoHeader: 'FRENCH: More Information',
+
+  errors: {
+    empty: 'Ce renseignement est requis',
+  },
 }
 
 export default fr

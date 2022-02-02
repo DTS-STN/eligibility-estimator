@@ -52,4 +52,18 @@ export type WebTranslations = {
     personalInformation: string
     legalStatus: string
   }
+
+  //results page
+  contactCTA: string
+  resultsPage: {
+    tableHeader1: string
+    tableHeader2: string
+    tableHeader3: string
+    tableTotalAmount: string
+  }
+  moreInfoHeader: string
+
+  errors: {
+    empty: string
+  }
 }

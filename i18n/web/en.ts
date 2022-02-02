@@ -60,6 +60,20 @@ const en: WebTranslations = {
     personalInformation: 'Personal Information',
     legalStatus: 'Legal Status',
   },
+
+  contactCTA:
+    'For a more accurate assessment, you are encouraged to <a className="text-default-text underline" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"> contact Service Canada </a> and check out the',
+  resultsPage: {
+    tableHeader1: 'Sample Benefits',
+    tableHeader2: 'Eligibility',
+    tableHeader3: 'Estimated monthly amount (CAD)',
+    tableTotalAmount: 'Total estimated monthly benefit amount',
+  },
+  moreInfoHeader: 'More Information',
+
+  errors: {
+    empty: 'This information is required',
+  },
 }
 
 export default en

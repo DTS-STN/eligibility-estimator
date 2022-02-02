@@ -1,5 +1,6 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import router from 'next/router'
+import { webDictionary } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import {
@@ -99,7 +100,7 @@ export const Form = types
       let errorsExist = false
       self.fields.map((field) => {
         if (!field.filled) {
-          field.setError('This field is required')
+          field.setError(webDictionary[router.locale].errors.empty)
           errorsExist = true
         }
         return field

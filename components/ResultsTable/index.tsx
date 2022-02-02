@@ -4,19 +4,21 @@ import {
   EntitlementResultType,
   Locale,
 } from '../../utils/api/definitions/enums'
-import { useStore } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { EligibilityDetails } from './EligibilityDetails'
 
 export const ResultsTable = observer(() => {
   const root = useStore()
+  const tsln = useTranslation()
+
   return (
     <>
       <table className="hidden md:block text-left">
         <thead className="font-semibold text-content border-b border-content">
           <tr className=" ">
-            <th>Sample Benefits</th>
-            <th>Eligibility</th>
-            <th>Estimated Monthly Amount (CAD)</th>
+            <th>{tsln.resultsPage.tableHeader1}</th>
+            <th>{tsln.resultsPage.tableHeader2}</th>
+            <th>{tsln.resultsPage.tableHeader3}</th>
           </tr>
         </thead>
         <tbody className="align-top">
@@ -71,13 +73,8 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="border-t border-content font-semibold ">
-            <td colSpan={2}>Estimated Total Monthly Benefit Amount</td>
-            <td>
-              {numberToStringCurrency(
-                root.summary.entitlementSum,
-                Locale.EN // todo: i18n
-              )}
-            </td>
+            <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
+            <td>$0</td>
           </tr>
         </tbody>
       </table>
