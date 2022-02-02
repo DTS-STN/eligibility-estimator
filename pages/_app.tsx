@@ -5,9 +5,7 @@ import '../styles/globals.css'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StoreProvider>
-      <LanguageProvider>
-        <Component {...pageProps} />
-      </LanguageProvider>
+      <Component {...pageProps} />
     </StoreProvider>
   )
 }

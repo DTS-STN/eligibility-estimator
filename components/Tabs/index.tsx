@@ -3,10 +3,6 @@ import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
 import { PropsWithChildren, useState } from 'react'
 import { RootStore } from '../../client-state/store'
-import {
-  ResponseSuccess,
-  ResponseError,
-} from '../../utils/api/definitions/types'
 import { FAQ } from '../FAQ'
 import { ComponentFactory } from '../Forms/ComponentFactory'
 import { useStore } from '../Hooks'

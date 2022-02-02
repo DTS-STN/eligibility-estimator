@@ -1,24 +1,23 @@
 import React, { useContext } from 'react'
 import { Breadcrumbs } from '../Breadcrumbs'
-import { LanguageContext } from '../Contexts'
-import { useInternationalization } from '../Hooks'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import Head from 'next/head'
 import { SCLabsTestHeader } from '../SCLabsTestHeader'
+import { useRouter } from 'next/router'
+import { useTranslation } from '../Hooks'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
 }> = ({ children }) => {
-  const otherLang = useInternationalization('otherLang')
-  const otherLangFull = useInternationalization('otherLangFull')
-
-  const { userLanguageChange } = useContext(LanguageContext)
+  const router = useRouter()
+  const oppositeLocale = router.locales.find((l) => l !== router.locale)
+  const tsln = useTranslation()
 
   return (
     <>
       <Head>
-        <title>Canadian Old Age Benefits Estimator</title>
+        <title>{tsln.title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <SCLabsTestHeader />
@@ -28,9 +27,13 @@ export const Layout: React.VFC<{
             <div className="flex justify-end my-4">
               <button
                 className="btn-link btn underline"
-                onClick={(e) => userLanguageChange(otherLang)}
+                onClick={(e) => {
+                  router.push(router.pathname, router.pathname, {
+                    locale: oppositeLocale,
+                  })
+                }}
               >
-                {otherLangFull}
+                {tsln.otherLang}
               </button>
             </div>
           </div>
@@ -38,17 +41,21 @@ export const Layout: React.VFC<{
           <div className="bg-primary -mx-4">
             <div className="flex flex-row justify-between items-center sm:container mx-auto">
               <h3 className="text-h3 py-3 text-white font-bold px-4 md:px-0">
-                Service Canada
+                {tsln.menuTitle}
               </h3>
               <p></p>
             </div>
           </div>
           <div className="sm:container mx-auto flex flex-col mb-16">
             <Breadcrumbs
-              items={['Canada.ca', 'Service Canada', 'Eligibility Estimator']}
+              items={[
+                tsln.breadcrumb1Title,
+                tsln.breadcrumb2Title,
+                tsln.breadcrumb3Title,
+              ]}
             />
             <h1 className="h1 mt-8 mb-10 border-b border-header-rule">
-              Canadian Old Age Benefits Estimator
+              {tsln.title}
             </h1>
             {children}
           </div>
