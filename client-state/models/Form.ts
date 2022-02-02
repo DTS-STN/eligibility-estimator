@@ -107,25 +107,6 @@ export const Form = types
     },
   }))
   .actions((self) => ({
-    clearForm(): void {
-      const fieldsToRemove: Instance<typeof FormField> = []
-      for (const field of self.fields) {
-        field.setValue(null)
-        if (
-          field.key === FieldKey.PARTNER_INCOME ||
-          field.key === FieldKey.PARTNER_BENEFIT_STATUS ||
-          field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY ||
-          field.key === FieldKey.LEGAL_STATUS_OTHER
-        ) {
-          fieldsToRemove.push(field)
-        }
-      }
-      self.removeFields(fieldsToRemove)
-
-      // remove the now invalid summary object
-      const parent = getParent(self) as Instance<typeof RootStore>
-      parent.setSummary({})
-    },
     clearAllErrors() {
       self.fields.map((field) => field.setError(undefined))
     },
@@ -220,6 +201,20 @@ export const Form = types
 
       const validIncome = self.getFieldByKey(FieldKey.INCOME).sanitizeInput()
       return parseInt(validIncome) > legalValues.MAX_OAS_INCOME
+    },
+  }))
+  .actions((self) => ({
+    clearForm(): void {
+      const fieldsToRemove: Instance<typeof FormField> = []
+      for (const field of self.fields) {
+        field.setValue(null)
+      }
+      self.removeFields(fieldsToRemove)
+
+      // remove the now invalid summary object
+      const parent = getParent(self) as Instance<typeof RootStore>
+      parent.setSummary({})
+      self.sendAPIRequest()
     },
   }))
   .views((self) => ({
