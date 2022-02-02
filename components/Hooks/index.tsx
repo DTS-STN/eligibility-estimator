@@ -90,9 +90,9 @@ export const useWindowWidth = () => {
   return width
 }
 
-export const useInternationalization = (key: string): WebTranslations => {
+export const useInternationalization = (key: string): string => {
   const { locale } = useRouter()
-  return webDictionary[locale]
+  return webDictionary[locale][key]
 }
 
 export const useTranslation = (): WebTranslations => {

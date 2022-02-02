@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react'
 import { GetStaticProps, NextPage } from 'next'
-import { mockPartialGetRequest } from '../../__tests__/pages/api/factory'
 import { Layout } from '../../components/Layout'
 import { Tabs } from '../../components/Tabs'
 import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import { mockPartialGetRequest } from '../../__tests__/pages/api/factory'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   if ('error' in props) {

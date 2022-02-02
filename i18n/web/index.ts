@@ -50,8 +50,6 @@ export type WebTranslations = {
   category: {
     incomeDetails: string
     personalInformation: string
-    partnerDetails: string
     legalStatus: string
-    socialAgreement: string
   }
 }

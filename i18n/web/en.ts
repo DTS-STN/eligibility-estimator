@@ -58,9 +58,7 @@ const en: WebTranslations = {
   category: {
     incomeDetails: 'Income Details',
     personalInformation: 'Personal Information',
-    partnerDetails: 'Partner Details',
     legalStatus: 'Legal Status',
-    socialAgreement: 'Social Agreement Countries',
   },
 }
 

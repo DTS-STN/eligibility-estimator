@@ -1,4 +1,5 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
+import router from 'next/router'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import {
@@ -150,7 +151,8 @@ export const Form = types
       })
     },
     buildQueryStringWithFormData(): string {
-      let qs = ''
+      let qs = `_language=${router.locale.toLocaleUpperCase()}`
+
       for (const field of self.fields) {
         if (!field.value) continue
 
@@ -161,6 +163,7 @@ export const Form = types
         //encodeURI and fix for encodeURIComponent and circle brackets
         qs += `${field.key}=${fixedEncodeURIComponent(val)}`
       }
+      console.log(qs)
       return qs
     },
   }))
@@ -169,7 +172,7 @@ export const Form = types
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
 
-      const apiData = yield fetch(`${self.API_URL}?${queryString}`)
+      const apiData = yield fetch(`/${self.API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {

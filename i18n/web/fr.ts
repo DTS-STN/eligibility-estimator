@@ -57,9 +57,7 @@ const fr: WebTranslations = {
   category: {
     incomeDetails: 'Revenu',
     personalInformation: 'Renseignements personnels',
-    partnerDetails: 'Renseignements sur votre partenaire',
     legalStatus: 'Statut légal',
-    socialAgreement: "Pays de l'accords de sécurité sociale",
   },
 }
 

@@ -9,7 +9,7 @@ import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
-import { useStore } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
@@ -34,6 +34,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     let lastCategory = null
 
     const router = useRouter()
+    const tsln = useTranslation()
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
@@ -68,15 +69,15 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           <ProgressBar
             sections={[
               {
-                title: 'Income Details',
+                title: tsln.category.incomeDetails,
                 complete: root.form.progress.income,
               },
               {
-                title: 'Personal Information',
+                title: tsln.category.personalInformation,
                 complete: root.form.progress.personal,
               },
               {
-                title: 'Legal Status',
+                title: tsln.category.legalStatus,
                 complete: root.form.progress.legal,
               },
             ]}
@@ -91,7 +92,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             className="col-span-2"
             noValidate
           >
-            <input type="hidden" name="_language" value={'EN'} />
             {form.fields.map((field: Instance<typeof FormField>) => {
               const isChildQuestion =
                 field.category.key == FieldCategory.PARTNER_DETAILS ||
@@ -199,7 +199,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 className="btn btn-default mt-4 md:mt-0"
                 onClick={() => router.push('/')}
               >
-                Back
+                {tsln.next}
               </button>
               <button
                 type="button"
@@ -209,7 +209,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   form.clearForm()
                 }}
               >
-                Clear
+                {tsln.clear}
               </button>
               <button
                 type="submit"
@@ -222,7 +222,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 }}
                 disabled={incomeTooHigh}
               >
-                Estimate
+                {tsln.estimate}
               </button>
             </div>
           </form>
