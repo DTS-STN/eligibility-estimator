@@ -53,6 +53,14 @@ const fr: WebTranslations = {
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
   privacyDisclaimer: 'NEED TRANSLATION (FR)',
+
+  category: {
+    incomeDetails: 'Revenu',
+    personalInformation: 'Renseignements personnels',
+    partnerDetails: 'Renseignements sur votre partenaire',
+    legalStatus: 'Statut légal',
+    socialAgreement: "Pays de l'accords de sécurité sociale",
+  },
 }
 
 export default fr

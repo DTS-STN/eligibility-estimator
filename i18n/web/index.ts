@@ -47,4 +47,11 @@ export type WebTranslations = {
   socialLink4: string
   socialLink5: string
   privacyDisclaimer: string
+  category: {
+    incomeDetails: string
+    personalInformation: string
+    partnerDetails: string
+    legalStatus: string
+    socialAgreement: string
+  }
 }

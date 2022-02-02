@@ -5,12 +5,13 @@ import { PropsWithChildren, useState } from 'react'
 import { RootStore } from '../../client-state/store'
 import { FAQ } from '../FAQ'
 import { ComponentFactory } from '../Forms/ComponentFactory'
-import { useStore } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { ResultsPage } from '../ResultsPage'
 
-export const Tabs: React.FC<PropsWithChildren<any>> = observer((props) => {
+export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
   const root: Instance<typeof RootStore> = useStore()
+  const tsln = useTranslation()
 
   return (
     <Tab.Group
@@ -28,7 +29,7 @@ export const Tabs: React.FC<PropsWithChildren<any>> = observer((props) => {
               : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2'
           }
         >
-          Questions
+          {tsln.questions}
         </Tab>
         <Tab
           className={({ selected }) =>
@@ -37,7 +38,7 @@ export const Tabs: React.FC<PropsWithChildren<any>> = observer((props) => {
               : 'results-tab bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2 disabled:cursor-not-allowed disabled:bg-[#949494]'
           }
         >
-          Results
+          {tsln.results}
         </Tab>
         <Tab
           className={({ selected }) =>

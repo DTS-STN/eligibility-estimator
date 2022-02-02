@@ -54,6 +54,14 @@ const en: WebTranslations = {
   socialLink5: 'Privacy',
   privacyDisclaimer:
     'The personal information provided is governed in accordance with the Privacy Act. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes. ',
+
+  category: {
+    incomeDetails: 'Income Details',
+    personalInformation: 'Personal Information',
+    partnerDetails: 'Partner Details',
+    legalStatus: 'Legal Status',
+    socialAgreement: 'Social Agreement Countries',
+  },
 }
 
 export default en
