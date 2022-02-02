@@ -78,3 +78,10 @@ export enum EstimationSummaryState {
   UNAVAILABLE = 'UNAVAILABLE', // yellow, can not provide any results, contact Service Canada (conditionally eligible)
   AVAILABLE_INELIGIBLE = 'AVAILABLE_INELIGIBLE', // red, display results (ineligible)
 }
+
+export enum LinkLocation {
+  STANDARD = 'STANDARD', // Questions > NeedHelp, and Results > MoreInfo
+  QUESTIONS_ONLY = 'QUESTIONS_ONLY', // Questions > NeedHelp
+  RESULTS_ONLY = 'RESULTS_ONLY', // Results > MoreInfo only
+  RESULTS_APPLY = 'RESULTS_APPLY', // new section above Results > MoreInfo
+}

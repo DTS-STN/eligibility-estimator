@@ -2,7 +2,6 @@ import { Translations } from '../../../i18n/api'
 import {
   EntitlementResultType,
   EstimationSummaryState,
-  MaritalStatus,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -81,55 +80,72 @@ export class SummaryBuilder {
   }
 
   private getLinks(): Link[] {
+    /*
+     This object is useless and a waste of lines, but it makes it easier to identify which links
+     are missing conditions in the logic below, by putting your cursor on the key,
+     looking for the highlight in the conditions from your IDE, and continuing down.
+    */
+    const availableLinks = {
+      contactSC: this.translations.links.contactSC,
+      oasOverview: this.translations.links.oasOverview,
+      cpp: this.translations.links.cpp,
+      cric: this.translations.links.cric,
+      oasApply: this.translations.links.oasApply,
+      gisApply: this.translations.links.gisApply,
+      alwApply: this.translations.links.alwApply,
+      afsApply: this.translations.links.afsApply,
+      oasMaxIncome: this.translations.links.oasMaxIncome,
+      outsideCanada: this.translations.links.outsideCanada,
+      oasPartial: this.translations.links.oasPartial,
+      workingOutsideCanada: this.translations.links.workingOutsideCanada,
+      oasEntitlement: this.translations.links.oasEntitlement,
+      oasEntitlement2: this.translations.links.oasEntitlement2,
+      gisEntitlement: this.translations.links.gisEntitlement,
+      alwGisEntitlement: this.translations.links.alwGisEntitlement,
+      alwInfo: this.translations.links.alwInfo,
+      afsEntitlement: this.translations.links.afsEntitlement,
+      oasRecoveryTax: this.translations.links.oasRecoveryTax,
+      oasDefer: this.translations.links.oasDefer,
+      oasRetroactive: this.translations.links.oasRetroactive,
+    }
     const links = [
-      this.translations.links.contactSC,
-      this.translations.links.oasOverview,
+      availableLinks.contactSC,
+      availableLinks.oasOverview,
+      availableLinks.cpp,
+      availableLinks.cric,
     ]
     if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(this.translations.links.oasEntitlement)
+      links.push(
+        availableLinks.oasApply,
+        availableLinks.oasEntitlement,
+        availableLinks.oasEntitlement2,
+        availableLinks.oasDefer
+      )
+    if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
+      links.push(availableLinks.gisApply, availableLinks.gisEntitlement)
+    if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE)
+      links.push(
+        availableLinks.alwApply,
+        availableLinks.alwGisEntitlement,
+        availableLinks.alwInfo
+      )
+    if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
+      links.push(availableLinks.afsApply, availableLinks.afsEntitlement)
     if (this.input.income.relevant >= legalValues.MAX_OAS_INCOME)
-      links.push(this.translations.links.oasMaxIncome)
+      links.push(availableLinks.oasMaxIncome)
     if (this.input.livingCountry.provided && !this.input.livingCountry.canada)
       links.push(
-        this.translations.links.outsideCanada,
-        this.translations.links.workingOutsideCanada
-      )
-    if (this.input.age >= 65)
-      links.push(
-        this.translations.links.oasQualify,
-        this.translations.links.gisQualify
+        availableLinks.outsideCanada,
+        availableLinks.workingOutsideCanada
       )
     if (this.results.oas?.entitlement.type === EntitlementResultType.PARTIAL)
-      links.push(this.translations.links.oasPartial)
-    if (
-      this.input.age > 60 &&
-      this.input.age <= 64 &&
-      this.input.maritalStatus.partnered
-    )
-      links.push(this.translations.links.alwQualify)
-    if (
-      this.input.age > 60 &&
-      this.input.age <= 64 &&
-      this.input.maritalStatus.value === MaritalStatus.WIDOWED
-    )
-      links.push(this.translations.links.afsQualify)
-    if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(this.translations.links.gisEntitlement)
-    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(this.translations.links.oasEntitlement2)
-    if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE) {
-      links.push(this.translations.links.alwGisEntitlement)
-      links.push(this.translations.links.alwInfo)
-    }
-    if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(this.translations.links.afsEntitlement)
+      links.push(availableLinks.oasPartial)
     if (
       this.input.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF &&
       this.input.income.relevant < legalValues.MAX_OAS_INCOME
     )
-      links.push(this.translations.links.oasRecoveryTax)
-    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(this.translations.links.oasDefer)
+      links.push(availableLinks.oasRecoveryTax)
+    if (this.input.age >= 65) links.push(availableLinks.oasRetroactive)
     return links
   }
 

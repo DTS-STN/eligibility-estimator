@@ -232,7 +232,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               </button>
             </div>
           </form>
-          <NeedHelpList title="Need Help?" links={root.summary.links} />
+          <NeedHelpList title="Need Help?" links={root.summary.needHelpLinks} />
         </div>
       </>
     )

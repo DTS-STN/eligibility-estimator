@@ -77,8 +77,8 @@ export const ResultsPage: React.FC<{
           {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
             <ContactCTA setSelectedTab={setSelectedTab} />
           )}
-          {root.summary?.links?.length && (
-            <ConditionalLinks links={root.summary.links} />
+          {root.summary?.moreInfoLinks?.length && (
+            <ConditionalLinks links={root.summary.moreInfoLinks} />
           )}
         </>
       ) : (
