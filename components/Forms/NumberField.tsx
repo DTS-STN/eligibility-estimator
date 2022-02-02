@@ -1,9 +1,8 @@
-import { InputHTMLAttributes, useEffect, WheelEvent } from 'react'
+import { observer } from 'mobx-react'
+import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-import { observer } from 'mobx-react'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 
 export interface NumberFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {

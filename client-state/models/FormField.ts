@@ -1,5 +1,4 @@
-import { types, flow, getParent, Instance } from 'mobx-state-tree'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { flow, getParent, Instance, types } from 'mobx-state-tree'
 import { Form } from './Form'
 
 export const KeyValue = types.model({

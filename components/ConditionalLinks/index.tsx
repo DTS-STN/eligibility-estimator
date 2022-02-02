@@ -1,12 +1,12 @@
-import React from 'react'
 import Link from 'next/link'
+import React from 'react'
 import type { Link as InfoLink } from '../../utils/api/definitions/types'
-import { useInternationalization } from '../Hooks'
+import { useTranslation } from '../Hooks'
 
 export const ConditionalLinks: React.VFC<{ links: InfoLink[] }> = ({
   links,
 }) => {
-  const moreInfo = useInternationalization('moreInfoHeader')
+  const moreInfo = useTranslation<string>('moreInfoHeader')
   return (
     <>
       <h2 className="h2 mt-8">{moreInfo}</h2>

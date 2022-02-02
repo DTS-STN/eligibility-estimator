@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react'
 import { numberToStringCurrency } from '../../i18n/api'
+import { WebTranslations } from '../../i18n/web'
 import {
   EntitlementResultType,
   Locale,
@@ -9,7 +10,7 @@ import { EligibilityDetails } from './EligibilityDetails'
 
 export const ResultsTable = observer(() => {
   const root = useStore()
-  const tsln = useTranslation()
+  const tsln = useTranslation<WebTranslations>()
 
   return (
     <>

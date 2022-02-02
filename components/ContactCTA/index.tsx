@@ -1,11 +1,12 @@
 import Link from 'next/link'
 import { Dispatch } from 'react'
-import { useStore } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 
 export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
   setSelectedTab,
 }) => {
   const root = useStore()
+  const contactCTA = useTranslation<string>('contactCTA')
   return (
     <>
       <p className="!mt-6 !md:mt-8">

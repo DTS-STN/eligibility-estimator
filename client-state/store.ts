@@ -6,7 +6,6 @@ import {
   ISimpleType,
   ModelCreationType,
   types,
-  _NotCustomized,
 } from 'mobx-state-tree'
 import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
 import {

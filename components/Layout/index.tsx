@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import React from 'react'
+import { WebTranslations } from '../../i18n/web'
 import { Breadcrumbs } from '../Breadcrumbs'
+import { useTranslation } from '../Hooks'
+import { SCLabsTestHeader } from '../SCLabsTestHeader'
 import { Footer } from './Footer'
 import { Header } from './Header'
-import Head from 'next/head'
-import { SCLabsTestHeader } from '../SCLabsTestHeader'
-import { useRouter } from 'next/router'
-import { useTranslation } from '../Hooks'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
 }> = ({ children }) => {
   const router = useRouter()
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
-  const tsln = useTranslation()
+  const tsln = useTranslation<WebTranslations>()
 
   return (
     <>

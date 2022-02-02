@@ -5,6 +5,7 @@ import React, { Dispatch, useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
+import { WebTranslations } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
@@ -34,7 +35,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     let lastCategory = null
 
     const router = useRouter()
-    const tsln = useTranslation()
+    const tsln = useTranslation<WebTranslations>()
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
@@ -226,7 +227,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               </button>
             </div>
           </form>
-          <NeedHelpList title="Need Help?" links={root.summary.needHelpLinks} />
+          <NeedHelpList title={tsln.needHelp} links={root.summary.links} />
         </div>
       </>
     )

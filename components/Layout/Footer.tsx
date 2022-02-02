@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import styles from './Footer.module.css'
 
 export const Footer = () => {
-  const tsln = useTranslation()
+  const tsln = useTranslation<WebTranslations>()
   return (
     <footer className="text-[14px]">
       <div

@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useCallback, useContext, useEffect, useState } from 'react'
-import { dictionaryList } from '../../i18n'
 import { webDictionary, WebTranslations } from '../../i18n/web'
 import { RootStoreContext } from '../Contexts'
 
@@ -90,12 +89,10 @@ export const useWindowWidth = () => {
   return width
 }
 
-export const useInternationalization = (key: string): string => {
+export function useTranslation<T = string | WebTranslations>(key?: string): T {
   const { locale } = useRouter()
-  return webDictionary[locale][key]
-}
-
-export const useTranslation = (): WebTranslations => {
-  const { locale } = useRouter()
+  if (key) {
+    return webDictionary[locale][key]
+  }
   return webDictionary[locale]
 }

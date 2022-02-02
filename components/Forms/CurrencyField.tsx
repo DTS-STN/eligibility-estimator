@@ -1,8 +1,8 @@
-import { InputHTMLAttributes, useEffect, WheelEvent } from 'react'
+import { observer } from 'mobx-react'
+import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-import { observer } from 'mobx-react'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {

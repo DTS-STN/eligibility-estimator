@@ -1,11 +1,11 @@
-import { DetailedHTMLProps, SelectHTMLAttributes, useRef } from 'react'
-import Select from 'react-select'
-import { Tooltip } from '../Tooltip/tooltip'
-import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
+import Select from 'react-select'
 import { FormField } from '../../client-state/models/FormField'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import { FieldType } from '../../utils/api/definitions/fields'
+import { Tooltip } from '../Tooltip/tooltip'
+import { ErrorLabel } from './validation/ErrorLabel'
 
 interface SelectProps
   extends DetailedHTMLProps<
