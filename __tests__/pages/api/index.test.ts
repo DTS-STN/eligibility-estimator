@@ -2190,6 +2190,33 @@ describe('basic Allowance scenarios', () => {
 })
 
 describe('Allowance entitlement scenarios', () => {
+  it('returns "unavailable" when partner=partialOas', async () => {
+    const res = await mockGetRequest({
+      income: 20000,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.PARTIAL_OAS_GIS,
+      partnerIncome: 0,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.alw.entitlement.result).toEqual(-1)
+    expect(res.body.results.alw.entitlement.type).toEqual(
+      EntitlementResultType.UNAVAILABLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+  })
   it('returns "eligible for $334.33" when 40 years in Canada and income=20000', async () => {
     const res = await mockGetRequest({
       income: 20000,
