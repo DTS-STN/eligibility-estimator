@@ -14,41 +14,40 @@ const fr: Translations = {
   category: {
     incomeDetails: 'Revenu',
     personalInformation: 'Renseignements personnels',
-    partnerDetails: 'Renseignements sur votre partenaire',
+    partnerDetails: 'Renseignements sur votre conjoint',
     legalStatus: 'Statut légal',
     socialAgreement: "Pays de l'accords de sécurité sociale",
   },
   result: {
     eligible: 'Admissible',
     ineligible: 'Non admissible',
-    conditional: 'FRENCH: Unavailable',
-    moreInfo: "Besoin de plus d'informations...",
+    conditional: 'Non disponible',
+    moreInfo: "Besoin de plus d'information...",
     invalid: "Votre demande n'est pas valide!",
   },
   question: {
-    income: 'Quel est votre revenu net annuel actuel en dollars canadiens?',
+    income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
     age: 'Quel est votre âge actuel?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
     legalStatus: 'Quel est votre statut légal actuel?',
     legalStatusOther: 'Veuillez préciser:',
     canadaWholeLife:
-      "Avez-vous seulement habité au Canada depuis l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, avez-vous seulement habité au Canada?",
     yearsInCanadaSince18:
-      "Combien d'années avez-vous vécu au Canada après avoir atteint l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     everLivedSocialCountry:
-      'Avez-vous déjà vécu dans un pays avec un accord de <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">sécurité sociale</a> établi?',
+      'Avez-vous déjà vécu dans un pays ayant un <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">accord de sécurité sociale</a> avec le Canada?',
     partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     partnerIncome:
-      'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
-    partnerAge: "Quel est l'âge actuel de votre partenaire?",
-    partnerLivingCountry:
-      'Dans quel pays habite actuellement votre partenaire?',
-    partnerLegalStatus: 'Quel est le statut légal actuel de votre partenaire?',
+      'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
+    partnerAge: "Quel est l'âge actuel de votre conjoint?",
+    partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
+    partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
     partnerCanadaWholeLife:
-      "Est-ce que votre partenaire a seulement habité au Canada depuis l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, est-ce que votre conjoint a seulement habité au Canada?",
     partnerYearsInCanadaSince18:
-      "Combien d'années votre partenaire a-t-il(elle) habité au Canada depuis l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
       'FRENCH: Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
   },
@@ -61,42 +60,42 @@ const fr: Translations = {
       },
       {
         key: 'sponsored',
-        text: 'Résident permanent ou immigrant admis (parrainé)',
+        text: 'Résident permanent ou immigrant reçu (parrainé)',
       },
       { key: 'indianStatus', text: "Statut d'Indien ou carte de statut" },
       {
         key: 'other',
-        text: 'Autre (exemple: résident temporaire, étudiant, travailleur temporaire, etc.)',
+        text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
       },
     ],
     maritalStatus: [
       { key: 'single', text: 'Célibataire' },
       { key: 'married', text: 'Marié(e)' },
       { key: 'commonLaw', text: 'Conjoint(e) de fait' },
-      { key: 'widowed', text: 'Partenaire survivant/veuf(ve)' },
+      { key: 'widowed', text: 'Partenaire survivant(e)/veuf(ve)' },
       { key: 'divorced', text: 'Divorcé(e)' },
       { key: 'separated', text: 'Séparé(e)' },
     ],
     partnerBenefitStatus: [
       {
         key: 'fullOas',
-        text: 'Mon partenaire reçoit la pleine pension de la SV',
+        text: 'Mon conjoint reçoit la pleine pension de la Sécurité de la vieillesse',
       },
       {
         key: 'fullOasGis',
-        text: 'Mon partenaire reçoit la pleine pension de la SV et le SRG',
+        text: 'Mon conjoint reçoit la pleine pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
       },
       {
         key: 'partialOas',
-        text: 'Mon partenaire reçoit une pension partielle de la SV',
+        text: 'Mon conjoint reçoit une pension partielle de la Sécurité de la vieillesse',
       },
       {
         key: 'partialOasGis',
-        text: 'Mon partenaire reçoit une pension partielle de la SV et le SRG',
+        text: 'Mon conjoint reçoit une pension partielle de la Sécurité de la vieillesse et le Supplément de revenu garanti',
       },
-      { key: 'alw', text: "Mon partenaire reçoit l'Allocation" },
+      { key: 'alw', text: "Mon conjoint reçoit l'Allocation" },
       { key: 'none', text: 'Aucune de ces réponses' },
-      { key: 'helpMe', text: 'Aidez-moi à savoir' },
+      { key: 'helpMe', text: 'Aidez-moi à trouver' },
     ],
     livingCountry: [
       { key: 'CAN', text: 'Canada' },
@@ -300,17 +299,17 @@ const fr: Translations = {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
     eligibleEntitlementUnavailable:
-      'FRENCH: Based on the information provided, you are likely eligible for this benefit. However, an entitlement estimation could not be provided, you are encouraged to contact Service Canada for more information.',
+      "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec Service Canada pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
-      "D'après les informations que vous ou votre partenaire avez fournies, vous avez droit à une pension partielle de la Sécurité de la vieillesse. Vous devriez communiquer avec Service Canada pour obtenir plus d'information sur les montants des paiements de l'Allocation/Supplément de revenu garanti.",
+      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     eligibleWhen60ApplyNow:
-      "Vous serez probablement admissible quand vous aurez 60 ans, mais il se peut que vous puissiez présenter une demande dès maintenant. Veuillez contacter Service Canada pour plus d'informations",
-    eligibleWhen65ApplyNow:
-      'Vous serez probablement admissible lorsque vous aurez 65 ans. Cependant, vous pouvez peut-être faire une demande dès maintenant. Veuillez communiquer avec Service Canada pour obtenir de plus amples informations.',
+      'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec Service Canada pour en savoir plus.',
+    eligibleWhen65ApplyNowOas:
+      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec Service Canada pour en savoir plus.', // TODO: link
     eligibleWhen60:
-      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
+      'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
-      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
+      'Vous serez probablement admissible à votre 65e anniversaire.',
     mustBe60to64:
       'Vous devez avoir entre 60 et 64 ans pour être admissible à cette prestation.',
     mustBeInCanada:
@@ -330,38 +329,38 @@ const fr: Translations = {
     mustMeetYearReq:
       "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
     conditional:
-      'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
+      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnAgreement:
-      "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous encourageons à communiquer avec Service Canada.",
+      "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen60:
-      "Vous pourriez avoir droit à cette prestation à l'âge de 60 ans, selon l'entente entre le Canada et ce pays. Nous vous encourageons à communiquer avec Service Canada.",
+      "Vous pourriez avoir droit à cette prestation à votre 60e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada  pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen65:
-      "Vous pourriez être admissible à cette prestation quand vous aurez 65 ans, selon l'entente entre le Canada et ce pays. Nous vous encourageons à communiquer avec Service Canada.",
+      "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnLegal:
-      'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalSponsored:
-      'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
+      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen60:
-      'Vous pourriez être admissible à cette prestation quand vous aurez 60 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
-      'Vous pourriez être admissible à cette prestation quand vous aurez 65 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
   },
   summaryTitle: {
-    moreInfo: "Plus d'informations nécessaires",
-    unavailable: 'Il est impossible de fournir une estimation',
+    moreInfo: 'Plus de renseignements sont nécessaires',
+    unavailable: 'Impossible de fournir une estimation',
     availableEligible: 'Probablement admissible aux prestations',
     availableIneligible: 'Probablement non admissible aux prestations',
   },
   summaryDetails: {
     moreInfo:
-      'FRENCH: Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
+      "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
     unavailable:
-      'D\'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.</br><a href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html" target="_blank">Contactez Service Canada</a>',
+      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec Service Canada.", // TODO: link
     availableEligible:
-      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes. (To French: Note that this only provides an estimate of your monthly payment.)',
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à XXXX $.  Des changements dans votre situation peuvent affecter vos résultats. Notez que les montants ne sont qu'une estimation de votre paiement mensuel.", // TODO: set entitlement
     availableIneligible:
-      "D'après les informations que vous avez fournies, vous n'avez probablement pas droit à des prestations. Consultez les détails ci-dessous pour plus d'informations.",
-    availableIneligibleIncome: `FRENCH You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${legalValues.MAX_OAS_INCOME.toLocaleString()} CAD.`,
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
+    availableIneligibleIncome: `Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à ${legalValues.MAX_OAS_INCOME.toLocaleString()} $ CAD.`,
   },
   links: {
     contactSC: {

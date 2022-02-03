@@ -60,7 +60,7 @@ export interface Translations {
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     eligibleWhen60ApplyNow: string
-    eligibleWhen65ApplyNow: string
+    eligibleWhen65ApplyNowOas: string
     eligibleWhen60: string
     eligibleWhen65: string
     mustBe60to64: string

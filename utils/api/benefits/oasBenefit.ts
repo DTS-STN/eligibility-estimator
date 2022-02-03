@@ -38,7 +38,7 @@ export class OasBenefit extends BaseBenefit {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE,
-          detail: this.translations.detail.eligibleWhen65ApplyNow,
+          detail: this.translations.detail.eligibleWhen65ApplyNowOas,
         }
       } else {
         return {
