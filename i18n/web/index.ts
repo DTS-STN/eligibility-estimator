@@ -4,6 +4,8 @@ import fr from './fr'
 export const webDictionary = { en, fr }
 
 export type WebTranslations = {
+  testSiteTitle: string
+  testSiteHeader: string
   otherLang: string
   search: string
   breadcrumb1Title: string

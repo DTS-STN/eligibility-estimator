@@ -1,6 +1,9 @@
 import { WebTranslations } from '.'
 
 const fr: WebTranslations = {
+  testSiteTitle: "SITE D'ESSAI",
+  testSiteHeader:
+    'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
@@ -17,7 +20,7 @@ const fr: WebTranslations = {
   next: 'Suivant',
   questions: 'Questions',
   results: 'Résultats',
-  needHelp: "Besoin d'aide",
+  needHelp: "Besoin d'aide?",
   faq: 'Foire aux questions (FAQ)',
   estimate: 'Estimer',
   required: 'obligatoire',

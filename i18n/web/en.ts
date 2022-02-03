@@ -1,6 +1,9 @@
 import { WebTranslations } from '.'
 
 const en: WebTranslations = {
+  testSiteTitle: 'TEST SITE',
+  testSiteHeader:
+    'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   search: 'Search Canada.ca',
   breadcrumb1Title: 'Canada.ca',
@@ -17,7 +20,7 @@ const en: WebTranslations = {
   next: 'Next',
   questions: 'Questions',
   results: 'Results',
-  needHelp: 'Need help',
+  needHelp: 'Need help?',
   faq: 'Frequently asked questions (FAQ)',
   estimate: 'Estimate',
   required: 'required',

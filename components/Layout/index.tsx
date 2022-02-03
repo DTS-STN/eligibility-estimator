@@ -20,6 +20,12 @@ export const Layout: React.VFC<{
       <Head>
         <title>{tsln.title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Noto+Sans&family=Patua+One&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
       <SCLabsTestHeader />
       <main id="elig">
@@ -55,9 +61,7 @@ export const Layout: React.VFC<{
                 tsln.breadcrumb3Title,
               ]}
             />
-            <h1 className="h1 mt-8 mb-10 border-b border-header-rule">
-              {tsln.title}
-            </h1>
+            <h1 className="h1 mt-10 mb-8">{tsln.title}</h1>
             {children}
           </div>
         </div>

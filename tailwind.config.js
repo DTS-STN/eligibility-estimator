@@ -69,7 +69,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'header-gc': 'Lato, sans-serif',
+        'header-gc': '"Lato", sans-serif',
         'sans': '"Noto Sans", sans-serif',
       },
       minHeight: {
