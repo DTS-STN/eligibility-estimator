@@ -36,6 +36,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     const router = useRouter()
     const tsln = useTranslation<WebTranslations>()
+    const { query } = router
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
@@ -43,6 +44,18 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     if (form.empty) {
       form.setupForm(data.fieldData)
       root.setSummary(data.summary)
+    }
+
+    // returns true if the form has any empty fields that are present in the query string
+    const qsContainsNeededField: boolean = Object.keys(query).some((queryKey) =>
+      form.emptyFields.includes(queryKey)
+    )
+    if (qsContainsNeededField) {
+      try {
+        form.setFieldsToURLValues(query)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     // check if income is too high to participate in calculation, and fix a bug with headless ui tabs where they only re-render on interaction

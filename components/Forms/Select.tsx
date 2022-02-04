@@ -29,7 +29,15 @@ export const FormSelect: React.VFC<SelectProps> = observer(
 
     const stateValue =
       field.value !== null && field.value !== ''
-        ? { label: field.value.text, value: field.value.text }
+        ? {
+            // if there is a string field value then the key was passed to this component from mobx after parsing the URL
+            label:
+              typeof field.value === 'string'
+                ? getLabel(field.value, field).text
+                : field.value.text,
+            value:
+              typeof field.value === 'string' ? field.value : field.value.text,
+          }
         : null
 
     return (
@@ -115,3 +123,6 @@ export const FormSelect: React.VFC<SelectProps> = observer(
     )
   }
 )
+
+const getLabel = (val: string, field: any) =>
+  field.options.find((opt) => opt.key === val)

@@ -41,6 +41,13 @@ export const Form = types
     get empty(): boolean {
       return self.fields.length === 0
     },
+    get emptyFields(): string[] {
+      let emptyFields = []
+      self.fields.forEach((field) => {
+        if (!field.filled) emptyFields.push(field.key)
+      })
+      return emptyFields
+    },
   }))
   .views((self) => ({
     get progress(): FormProgress {
@@ -212,6 +219,15 @@ export const Form = types
     },
   }))
   .actions((self) => ({
+    setFieldsToURLValues(query): void {
+      Object.keys(query).map((key) => {
+        const field: Instance<typeof FormField> = self.getFieldByKey(key)
+        if (field && query[field.key]) {
+          field.setValue(query[field.key])
+        }
+      })
+      self.sendAPIRequest()
+    },
     clearForm(): void {
       const fieldsToRemove: Instance<typeof FormField> = []
       for (const field of self.fields) {
