@@ -52,10 +52,10 @@ export const Form = types
       const iComplete =
         incomeFields.length > 0 && incomeFields.every((field) => field.filled)
       const pComplete =
-        personalFields.length > 0 &&
+        personalFields.length > 0 && iComplete &&
         personalFields.every((field) => field.filled)
       const lComplete =
-        legalFields.length > 0 && legalFields.every((field) => field.filled)
+        legalFields.length > 0 && pComplete && legalFields.every((field) => field.filled)
 
       return { income: iComplete, personal: pComplete, legal: lComplete }
     },
