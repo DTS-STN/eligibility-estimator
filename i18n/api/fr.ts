@@ -1,9 +1,15 @@
 // noinspection SpellCheckingInspection
 
-import { LinkLocation } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  LinkLocation,
+  Locale,
+} from '../../utils/api/definitions/enums'
 import { Translations } from './index'
 
 const fr: Translations = {
+  _language: Language.FR,
+  _locale: Locale.FR,
   benefit: {
     oas: 'Sécurité de la vieillesse (SV)',
     gis: 'Supplément de revenu garanti (SRG)',
@@ -356,11 +362,11 @@ const fr: Translations = {
     unavailable:
       "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
     availableEligible:
-      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT} $.  Des changements dans votre situation peuvent affecter vos résultats. Notez que les montants ne sont qu'une estimation de votre paiement mensuel.",
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}.  Des changements dans votre situation peuvent affecter vos résultats. Notez que les montants ne sont qu'une estimation de votre paiement mensuel.",
     availableIneligible:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
     availableIneligibleIncome:
-      "Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à {MAX_OAS_INCOME} $ CAD.",
+      "Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à {MAX_OAS_INCOME}.",
   },
   links: {
     SC: {

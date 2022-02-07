@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Language } from '../../i18n/api'
 import { getTooltipTranslations, TooltipTranslation } from '../../i18n/tooltips'
+import { Language } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { useMediaQuery } from '../Hooks'
 

@@ -1,13 +1,9 @@
+import { Language, Locale } from '../../utils/api/definitions/enums'
 import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
 
 const apiTranslationsDict = { en, fr }
-
-export enum Language {
-  EN = 'EN',
-  FR = 'FR',
-}
 
 export interface KeyAndText {
   key: string
@@ -15,6 +11,8 @@ export interface KeyAndText {
 }
 
 export interface Translations {
+  _language: Language
+  _locale: Locale
   benefit: { oas: string; gis: string; allowance: string; afs: string }
   category: {
     incomeDetails: string
@@ -127,4 +125,22 @@ export function getTranslations(language: Language): Translations {
     case Language.FR:
       return apiTranslationsDict.fr
   }
+}
+
+/**
+ * Reusable utility function that accepts a string, and outputs a locale-formatted currency string.
+ * It rounds, it determines where to put the $ sign, it will use spaces or commas, all depending on the locale.
+ */
+export function numberToStringCurrency(
+  number: number,
+  locale: Locale,
+  options?: { rounding?: number }
+): string {
+  const rounding = options?.rounding === undefined ? 2 : options.rounding
+  return number.toLocaleString(locale, {
+    style: 'currency',
+    currency: 'CAD',
+    currencyDisplay: 'narrowSymbol',
+    minimumFractionDigits: rounding,
+  })
 }

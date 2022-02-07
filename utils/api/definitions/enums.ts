@@ -86,3 +86,14 @@ export enum LinkLocation {
   RESULTS_APPLY = 'RESULTS_APPLY', // new section above Results > MoreInfo
   HIDDEN = 'HIDDEN', // won't show anywhere (used internally for linkifying strings)
 }
+
+export enum Language {
+  EN = 'EN',
+  FR = 'FR',
+}
+
+// must be one of: https://www.techonthenet.com/js/language_tags.php
+export enum Locale {
+  EN = 'en-CA',
+  FR = 'fr-CA',
+}

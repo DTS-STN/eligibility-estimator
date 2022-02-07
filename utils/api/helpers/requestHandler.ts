@@ -1,4 +1,8 @@
-import { getTranslations, Translations } from '../../../i18n/api'
+import {
+  getTranslations,
+  numberToStringCurrency,
+  Translations,
+} from '../../../i18n/api'
 import { AfsBenefit } from '../benefits/afsBenefit'
 import { AlwBenefit } from '../benefits/alwBenefit'
 import { GisBenefit } from '../benefits/gisBenefit'
@@ -381,8 +385,18 @@ export class RequestHandler {
     translations: Translations
   ): string {
     textToProcess = textToProcess
-      .replace('{ENTITLEMENT_AMOUNT}', summary.entitlementSum.toLocaleString())
-      .replace('{MAX_OAS_INCOME}', legalValues.MAX_OAS_INCOME.toLocaleString())
+      .replace(
+        '{ENTITLEMENT_AMOUNT}',
+        numberToStringCurrency(summary.entitlementSum, translations._locale)
+      )
+      .replace(
+        '{MAX_OAS_INCOME}',
+        numberToStringCurrency(
+          legalValues.MAX_OAS_INCOME,
+          translations._locale,
+          { rounding: 0 }
+        )
+      )
       .replace(
         '{LINK_SERVICE_CANADA}',
         `<a href="${translations.links.SC.url}" target="_blank">${translations.links.SC.text}</a>`

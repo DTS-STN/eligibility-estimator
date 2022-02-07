@@ -1,7 +1,13 @@
-import { LinkLocation } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  LinkLocation,
+  Locale,
+} from '../../utils/api/definitions/enums'
 import { Translations } from './index'
 
 const en: Translations = {
+  _language: Language.EN,
+  _locale: Locale.EN,
   benefit: {
     oas: 'Old Age Security (OAS)',
     gis: 'Guaranteed Income Supplement (GIS)',
@@ -350,11 +356,11 @@ const en: Translations = {
     unavailable:
       'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
     availableEligible:
-      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of ${ENTITLEMENT_AMOUNT}. Changes in your circumstances may impact your results. Note that this only provides an estimate of your monthly payment.',
+      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Changes in your circumstances may impact your results. Note that this only provides an estimate of your monthly payment.',
     availableIneligible:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
     availableIneligibleIncome:
-      'You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME} CAD.',
+      'You currently do not appear to be eligible for any of these benefits, as your annual income is higher than {MAX_OAS_INCOME}.',
   },
   links: {
     SC: {

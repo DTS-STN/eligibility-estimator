@@ -1,5 +1,5 @@
+import { Language } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { Language } from '../api'
 import en from './en'
 import fr from './fr'
 
