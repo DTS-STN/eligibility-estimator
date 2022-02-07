@@ -299,6 +299,8 @@ const en: Translations = {
   },
   detail: {
     eligible: 'You are likely eligible for this benefit.',
+    eligibleOas65to69:
+      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
@@ -306,7 +308,7 @@ const en: Translations = {
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.',
     eligibleWhen65ApplyNowOas:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. To learn more about your option to delay your first payment, click here.', // TODO: link
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBe60to64:
@@ -494,6 +496,12 @@ const en: Translations = {
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
       order: 21,
       location: LinkLocation.STANDARD,
+    },
+    oasDeferClickHere: {
+      text: 'click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
+      order: -1,
+      location: LinkLocation.HIDDEN,
     },
   },
 }

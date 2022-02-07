@@ -55,6 +55,7 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    eligibleOas65to69: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     eligibleWhen60ApplyNow: string
@@ -115,6 +116,7 @@ export interface Translations {
     oasRecoveryTax: Link
     oasDefer: Link
     oasRetroactive: Link
+    oasDeferClickHere: Link
   }
 }
 

@@ -405,6 +405,10 @@ export class RequestHandler {
         '{LINK_SOCIAL_AGREEMENT}',
         `<a href="${translations.links.socialAgreement.url}" target="_blank">${translations.links.socialAgreement.text}</a>`
       )
+      .replace(
+        '{LINK_OAS_DEFER}',
+        `<a href="${translations.links.oasDeferClickHere.url}" target="_blank">${translations.links.oasDeferClickHere.text}</a>`
+      )
     return textToProcess
   }
 

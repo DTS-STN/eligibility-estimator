@@ -303,14 +303,15 @@ const fr: Translations = {
   detail: {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligibleOas65to69:
+      'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, cliquez ici.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     eligibleWhen60ApplyNow:
       'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec Service Canada pour en savoir plus.',
-    eligibleWhen65ApplyNowOas:
-      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec Service Canada pour en savoir plus.', // TODO: link
+    eligibleWhen65ApplyNowOas: 'FRENCH', // TODO: link
     eligibleWhen60:
       'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
@@ -500,6 +501,12 @@ const fr: Translations = {
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
       order: 21,
       location: LinkLocation.STANDARD,
+    },
+    oasDeferClickHere: {
+      text: 'cliquez ici',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
+      order: -1,
+      location: LinkLocation.HIDDEN,
     },
   },
 }
