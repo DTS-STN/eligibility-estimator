@@ -376,12 +376,6 @@ const en: Translations = {
       order: 5,
       location: LinkLocation.RESULTS_APPLY,
     },
-    gisApply: {
-      text: 'Guaranteed Income Supplement: Application',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
-      order: 6,
-      location: LinkLocation.RESULTS_APPLY,
-    },
     alwApply: {
       text: 'Guaranteed Income Supplement - Allowance application',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',

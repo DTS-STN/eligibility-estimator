@@ -91,7 +91,6 @@ export class SummaryBuilder {
       cpp: this.translations.links.cpp,
       cric: this.translations.links.cric,
       oasApply: this.translations.links.oasApply,
-      gisApply: this.translations.links.gisApply,
       alwApply: this.translations.links.alwApply,
       afsApply: this.translations.links.afsApply,
       oasMaxIncome: this.translations.links.oasMaxIncome,
@@ -122,7 +121,7 @@ export class SummaryBuilder {
         availableLinks.oasDefer
       )
     if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.gisApply, availableLinks.gisEntitlement)
+      links.push(availableLinks.gisEntitlement)
     if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(
         availableLinks.alwApply,
