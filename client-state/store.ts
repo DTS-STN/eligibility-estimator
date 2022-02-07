@@ -10,6 +10,7 @@ import {
 } from 'mobx-state-tree'
 import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
 import {
+  EntitlementResultType,
   EstimationSummaryState,
   LinkLocation,
   ResultKey,
@@ -23,7 +24,7 @@ export const EligibilityResult = types.model({
 })
 
 export const EntitlementResult = types.model({
-  type: types.maybe(types.string),
+  type: types.maybe(types.enumeration(Object.values(EntitlementResultType))),
   result: types.maybe(types.number),
 })
 
@@ -52,6 +53,7 @@ export const Summary = types
     details: types.maybe(types.string),
     title: types.maybe(types.string),
     links: types.maybe(types.array(SummaryLink)),
+    entitlementSum: types.maybe(types.number),
   })
   .views((self) => ({
     get nextStepsLink(): Instance<typeof SummaryLink> {
@@ -91,16 +93,6 @@ export const RootStore = types
     summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
   })
-  .views((self) => ({
-    get totalEntitlementInDollars() {
-      return (
-        self.oas.entitlement.result +
-        (self.gis.entitlement.result !== -1 ? self.gis.entitlement.result : 0) + // gis can return a -1 for an unavailable calculation, correct for this
-        self.allowance?.entitlement.result +
-        self.afs?.entitlement.result
-      ).toFixed(2)
-    },
-  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num
@@ -131,12 +123,11 @@ export const RootStore = types
                   text: ISimpleType<string>
                   order: ISimpleType<number>
                 },
-                {},
-                _NotCustomized,
-                _NotCustomized
+                {}
               >
             >
           >
+          entitlementSum: IMaybe<ISimpleType<number>>
         }>
       >
     ) {

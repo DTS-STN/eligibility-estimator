@@ -1,5 +1,9 @@
 import { observer } from 'mobx-react'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import { numberToStringCurrency } from '../../i18n/api'
+import {
+  EntitlementResultType,
+  Locale,
+} from '../../utils/api/definitions/enums'
 import { useStore } from '../Hooks'
 import { EligibilityDetails } from './EligibilityDetails'
 
@@ -21,7 +25,12 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
-            <td>${root.oas.entitlement.result}</td>
+            <td>
+              {numberToStringCurrency(
+                root.oas.entitlement.result,
+                Locale.EN // todo: i18n
+              )}
+            </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>Guaranteed Income Supplement (GIS)</td>
@@ -29,8 +38,11 @@ export const ResultsTable = observer(() => {
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
             <td>
-              {root.gis.entitlement.result !== -1
-                ? `$${root.gis.entitlement.result}`
+              {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
+                ? numberToStringCurrency(
+                    root.gis.entitlement.result,
+                    Locale.EN // todo: i18n
+                  )
                 : 'Unavailable'}
             </td>
           </tr>
@@ -39,18 +51,33 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
-            <td>${root.allowance && root.allowance.entitlement.result}</td>
+            <td>
+              {numberToStringCurrency(
+                root.allowance.entitlement.result,
+                Locale.EN // todo: i18n
+              )}
+            </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>Allowance for Survivor</td>
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
-            <td>${root.afs && root.afs.entitlement.result}</td>
+            <td>
+              {numberToStringCurrency(
+                root.afs.entitlement.result,
+                Locale.EN // todo: i18n
+              )}
+            </td>
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>Estimated Total Monthly Benefit Amount</td>
-            <td>${root.totalEntitlementInDollars}</td>
+            <td>
+              {numberToStringCurrency(
+                root.summary.entitlementSum,
+                Locale.EN // todo: i18n
+              )}
+            </td>
           </tr>
         </tbody>
       </table>
@@ -64,8 +91,11 @@ export const ResultsTable = observer(() => {
             <EligibilityDetails eligibilityType={root.oas} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.oas.entitlement.result}
+            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            {numberToStringCurrency(
+              root.oas.entitlement.result,
+              Locale.EN // todo: i18n
+            )}
           </p>
         </div>
         <div className="mb-4">
@@ -77,8 +107,13 @@ export const ResultsTable = observer(() => {
             <EligibilityDetails eligibilityType={root.gis} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.gis.entitlement.result}
+            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
+              ? numberToStringCurrency(
+                  root.gis.entitlement.result,
+                  Locale.EN // todo: i18n
+                )
+              : 'Unavailable'}
           </p>
         </div>
         <div className="mb-4">
@@ -90,8 +125,11 @@ export const ResultsTable = observer(() => {
             <EligibilityDetails eligibilityType={root.allowance} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.allowance.entitlement.result}
+            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            {numberToStringCurrency(
+              root.allowance.entitlement.result,
+              Locale.EN // todo: i18n
+            )}
           </p>
         </div>
         <div className="mb-4">
@@ -103,8 +141,11 @@ export const ResultsTable = observer(() => {
             <EligibilityDetails eligibilityType={root.afs} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>$
-            {root.afs.entitlement.result}
+            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            {numberToStringCurrency(
+              root.afs.entitlement.result,
+              Locale.EN // todo: i18n
+            )}
           </p>
         </div>
         <div className="mb-4">
@@ -112,7 +153,10 @@ export const ResultsTable = observer(() => {
             Estimated Total Monthly Benefit Amount
           </p>
           <p className="px-1.5 py-1.5 font-bold">
-            ${root.totalEntitlementInDollars}
+            {numberToStringCurrency(
+              root.summary.entitlementSum,
+              Locale.EN // todo: i18n
+            )}
           </p>
         </div>
       </div>
