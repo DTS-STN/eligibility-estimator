@@ -1,5 +1,4 @@
 import { LinkLocation } from '../../utils/api/definitions/enums'
-import { legalValues } from '../../utils/api/scrapers/output'
 import { Translations } from './index'
 
 const en: Translations = {
@@ -34,7 +33,7 @@ const en: Translations = {
     yearsInCanadaSince18:
       'Since the age of 18, how many years have you lived in Canada?',
     everLivedSocialCountry:
-      'Have you ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a> with Canada?',
+      'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
     partnerBenefitStatus: 'Which of the following applies to you?',
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
@@ -46,7 +45,7 @@ const en: Translations = {
     partnerYearsInCanadaSince18:
       'Since the age of 18, how many years has your partner lived in Canada?',
     partnerEverLivedSocialCountry:
-      'Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a> with Canada?',
+      'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
   questionOptions: {
     legalStatus: [
@@ -295,7 +294,7 @@ const en: Translations = {
   detail: {
     eligible: 'You are likely eligible for this benefit.',
     eligibleEntitlementUnavailable:
-      'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact Service Canada for more information about your payment amounts.',
+      'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
       'You are likely eligible to a partial Old Age Security pension.',
     eligibleWhen60ApplyNow:
@@ -349,14 +348,27 @@ const en: Translations = {
     moreInfo:
       'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     unavailable:
-      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact <a href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html" target="_blank">Service Canada</a>.',
+      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
     availableEligible:
-      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of $XXXX. Changes in your circumstances may impact your results. Note that this only provides an estimate of your monthly payment.', // TODO: set entitlement
+      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of ${ENTITLEMENT_AMOUNT}. Changes in your circumstances may impact your results. Note that this only provides an estimate of your monthly payment.',
     availableIneligible:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
-    availableIneligibleIncome: `You currently do not appear to be eligible for any of these benefits, as your annual income is higher than $${legalValues.MAX_OAS_INCOME.toLocaleString()} CAD.`,
+    availableIneligibleIncome:
+      'You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME} CAD.',
   },
   links: {
+    SC: {
+      text: 'Service Canada',
+      url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    socialAgreement: {
+      text: 'social security agreement',
+      url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
     contactSC: {
       text: 'Contact Service Canada',
       url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',

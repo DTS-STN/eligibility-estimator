@@ -1,7 +1,6 @@
 // noinspection SpellCheckingInspection
 
 import { LinkLocation } from '../../utils/api/definitions/enums'
-import { legalValues } from '../../utils/api/scrapers/output'
 import { Translations } from './index'
 
 const fr: Translations = {
@@ -37,7 +36,7 @@ const fr: Translations = {
     yearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     everLivedSocialCountry:
-      'Avez-vous déjà vécu dans un pays ayant un <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">accord de sécurité sociale</a> avec le Canada?',
+      'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     partnerIncome:
       'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
@@ -49,7 +48,7 @@ const fr: Translations = {
     partnerYearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
-      'FRENCH: Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
+      'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
   },
   questionOptions: {
     legalStatus: [
@@ -299,7 +298,7 @@ const fr: Translations = {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
     eligibleEntitlementUnavailable:
-      "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec Service Canada pour obtenir plus de renseignements sur le montant de vos paiements.",
+      "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     eligibleWhen60ApplyNow:
@@ -355,14 +354,27 @@ const fr: Translations = {
     moreInfo:
       "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
     unavailable:
-      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec Service Canada.", // TODO: link
+      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
     availableEligible:
-      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à XXXX $.  Des changements dans votre situation peuvent affecter vos résultats. Notez que les montants ne sont qu'une estimation de votre paiement mensuel.", // TODO: set entitlement
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT} $.  Des changements dans votre situation peuvent affecter vos résultats. Notez que les montants ne sont qu'une estimation de votre paiement mensuel.",
     availableIneligible:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
-    availableIneligibleIncome: `Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à ${legalValues.MAX_OAS_INCOME.toLocaleString()} $ CAD.`,
+    availableIneligibleIncome:
+      "Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à {MAX_OAS_INCOME} $ CAD.",
   },
   links: {
+    SC: {
+      text: 'Service Canada',
+      url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    socialAgreement: {
+      text: 'accord de sécurité sociale',
+      url: 'https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
     contactSC: {
       text: 'Communiquer avec Service Canada',
       url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',

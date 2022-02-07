@@ -65,6 +65,12 @@ export class RequestHandler {
       this.missingFields,
       this.processedInput._translations
     )
+    RequestHandler.replaceAllTextVariables(
+      this.benefitResults,
+      this.summary,
+      this.fieldData,
+      this.processedInput._translations
+    )
   }
 
   /**
@@ -321,7 +327,7 @@ export class RequestHandler {
     results: BenefitResultsObject,
     translations: Translations
   ): void {
-    Object.keys(results).forEach((key) => {
+    for (const key in results) {
       const result: BenefitResult = results[key]
       const eligibilityText = translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
       const detailText = result.eligibility.detail // ex. "likely eligible for this benefit"
@@ -331,7 +337,61 @@ export class RequestHandler {
         : detailText
       result.eligibility.detail = `${eligibilityText}\n${usedDetailText}`
       delete result.entitlement.detailOverride // so this is not passed into the response
-    })
+    }
+  }
+
+  /**
+   * Processes all text generated thus far, and replaces any {VARIABLES} with the appropriate value.
+   */
+  private static replaceAllTextVariables(
+    benefitResults: BenefitResultsObject,
+    summary: SummaryObject,
+    fieldData: FieldData[],
+    translations: Translations
+  ) {
+    for (const key in benefitResults) {
+      const result: BenefitResult = benefitResults[key]
+      result.eligibility.detail = RequestHandler.replaceTextVariables(
+        result.eligibility.detail,
+        summary,
+        translations
+      )
+    }
+    for (const key in fieldData) {
+      const result: FieldData = fieldData[key]
+      result.label = RequestHandler.replaceTextVariables(
+        result.label,
+        summary,
+        translations
+      )
+    }
+    summary.details = RequestHandler.replaceTextVariables(
+      summary.details,
+      summary,
+      translations
+    )
+  }
+
+  /**
+   * Utility function for the above, will accept a single string and replace any {VARIABLES} with the appropriate value.
+   */
+  private static replaceTextVariables(
+    textToProcess: string,
+    summary: SummaryObject,
+    translations: Translations
+  ): string {
+    textToProcess = textToProcess
+      .replace('{ENTITLEMENT_AMOUNT}', summary.entitlementSum.toLocaleString())
+      .replace('{MAX_OAS_INCOME}', legalValues.MAX_OAS_INCOME.toLocaleString())
+      .replace(
+        '{LINK_SERVICE_CANADA}',
+        `<a href="${translations.links.SC.url}" target="_blank">${translations.links.SC.text}</a>`
+      )
+      .replace(
+        '{LINK_SOCIAL_AGREEMENT}',
+        `<a href="${translations.links.socialAgreement.url}" target="_blank">${translations.links.socialAgreement.text}</a>`
+      )
+    return textToProcess
   }
 
   /**

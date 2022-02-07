@@ -7,6 +7,7 @@ import {
 } from '../definitions/enums'
 import { FieldKey } from '../definitions/fields'
 import {
+  BenefitResult,
   BenefitResultsObject,
   Link,
   ProcessedInput,
@@ -19,6 +20,7 @@ export class SummaryBuilder {
   private readonly title: string
   private readonly details: string
   private readonly links: Link[]
+  private readonly entitlementSum: number
 
   constructor(
     private input: ProcessedInput,
@@ -30,6 +32,7 @@ export class SummaryBuilder {
     this.title = this.getTitle()
     this.details = this.getDetails()
     this.links = this.getLinks()
+    this.entitlementSum = this.getEntitlementSum()
   }
 
   build(): SummaryObject {
@@ -38,6 +41,7 @@ export class SummaryBuilder {
       title: this.title,
       details: this.details,
       links: this.links,
+      entitlementSum: this.entitlementSum,
     }
   }
 
@@ -165,6 +169,15 @@ export class SummaryBuilder {
       (key) => this.results[key].eligibility.result === expectedResult
     )
     return matchingItems.length > 0
+  }
+
+  getEntitlementSum(): number {
+    let sum = 0
+    for (const resultsKey in this.results) {
+      let result: BenefitResult = this.results[resultsKey]
+      sum += result.entitlement.result
+    }
+    return sum
   }
 
   static buildSummaryObject(

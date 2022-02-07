@@ -95,6 +95,8 @@ export interface Translations {
     availableIneligibleIncome: string
   }
   links: {
+    SC: Link
+    socialAgreement: Link
     contactSC: Link
     oasOverview: Link
     cpp: Link

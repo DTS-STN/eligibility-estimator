@@ -117,4 +117,5 @@ export interface SummaryObject {
   title: string
   details: string
   links: Link[]
+  entitlementSum: number
 }
