@@ -7,7 +7,7 @@ import { AfsBenefit } from '../benefits/afsBenefit'
 import { AlwBenefit } from '../benefits/alwBenefit'
 import { GisBenefit } from '../benefits/gisBenefit'
 import { OasBenefit } from '../benefits/oasBenefit'
-import { PartnerBenefitStatus } from '../definitions/enums'
+import { PartnerBenefitStatus, ResultKey } from '../definitions/enums'
 import {
   FieldData,
   fieldDefinitions,
@@ -334,13 +334,28 @@ export class RequestHandler {
     for (const key in results) {
       const result: BenefitResult = results[key]
       const eligibilityText = translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
+
+      // uses the detail text from the eligibility result, or the entitlement result's override if provided
       const detailText = result.eligibility.detail // ex. "likely eligible for this benefit"
       const detailOverrideText = result.entitlement.detailOverride // ex. "likely eligible, but partial oas"
+      delete result.entitlement.detailOverride // so this is not passed into the response
       const usedDetailText = detailOverrideText
         ? detailOverrideText
         : detailText
-      result.eligibility.detail = `${eligibilityText}\n${usedDetailText}`
-      delete result.entitlement.detailOverride // so this is not passed into the response
+
+      // if client is ineligible, the table will be populated with a link to view more reasons
+      const ineligibilityText =
+        result.eligibility.result === ResultKey.INELIGIBLE
+          ? ` ${translations.detail.additionalReasons}`
+          : ''
+
+      // replaces LINK_MORE_REASONS with LINK_MORE_REASONS_OAS, which is then replaced with a link during replaceAllTextVariables()
+      const ineligibilityTextWithBenefit = ineligibilityText.replace(
+        '{LINK_MORE_REASONS}',
+        `{LINK_MORE_REASONS_${key.toUpperCase()}}`
+      )
+
+      result.eligibility.detail = `${eligibilityText}\n${usedDetailText}${ineligibilityTextWithBenefit}`
     }
   }
 
@@ -408,6 +423,22 @@ export class RequestHandler {
       .replace(
         '{LINK_OAS_DEFER}',
         `<a href="${translations.links.oasDeferClickHere.url}" target="_blank">${translations.links.oasDeferClickHere.text}</a>`
+      )
+      .replace(
+        '{LINK_MORE_REASONS_OAS}',
+        `<a href="${translations.links.oasReasons.url}" target="_blank">${translations.links.oasReasons.text}</a>`
+      )
+      .replace(
+        '{LINK_MORE_REASONS_GIS}',
+        `<a href="${translations.links.gisReasons.url}" target="_blank">${translations.links.gisReasons.text}</a>`
+      )
+      .replace(
+        '{LINK_MORE_REASONS_ALW}',
+        `<a href="${translations.links.alwReasons.url}" target="_blank">${translations.links.alwReasons.text}</a>`
+      )
+      .replace(
+        '{LINK_MORE_REASONS_AFS}',
+        `<a href="${translations.links.afsReasons.url}" target="_blank">${translations.links.afsReasons.text}</a>`
       )
     return textToProcess
   }

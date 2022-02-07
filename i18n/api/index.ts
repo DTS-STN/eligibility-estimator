@@ -79,6 +79,7 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
+    additionalReasons: string
   }
   summaryTitle: {
     moreInfo: string
@@ -117,6 +118,10 @@ export interface Translations {
     oasDefer: Link
     oasRetroactive: Link
     oasDeferClickHere: Link
+    oasReasons: Link
+    gisReasons: Link
+    alwReasons: Link
+    afsReasons: Link
   }
 }
 
