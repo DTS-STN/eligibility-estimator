@@ -1,4 +1,3 @@
-import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
@@ -6,21 +5,18 @@ import React, { Dispatch, useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
-import {
-  EstimationSummaryState,
-  FieldCategory,
-} from '../../utils/api/definitions/enums'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import { FieldCategory } from '../../utils/api/definitions/enums'
+import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
+import { Alert } from '../Alert'
 import { useStore } from '../Hooks'
+import { NeedHelpList } from '../Layout/NeedHelpList'
+import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
 import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
-import { NeedHelpList } from '../Layout/NeedHelpList'
-import { Alert } from '../Alert'
-import ProgressBar from '../ProgressBar'
 
 interface FactoryProps {
   data: ResponseSuccess
@@ -90,7 +86,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           <form
             name="ee-form"
             data-testid="ee-form"
-            action="/eligibility"
+            action="../../pages/eligibility"
             onSubmit={(e) => e.preventDefault()}
             className="col-span-2"
             noValidate
@@ -100,8 +96,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               const isChildQuestion =
                 field.category.key == FieldCategory.PARTNER_DETAILS ||
                 field.category.key == FieldCategory.SOCIAL_AGREEMENT
-                  ? true
-                  : false
               const styling = isChildQuestion
                 ? `bg-emphasis px-10 ${
                     field.category.key == FieldCategory.SOCIAL_AGREEMENT
@@ -203,7 +197,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 type="button"
                 role="navigation"
                 className="btn btn-default mt-4 md:mt-0"
-                onClick={(e) => router.push('/')}
+                onClick={() => router.push('/')}
               >
                 Back
               </button>
@@ -211,7 +205,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 type="button"
                 role="button"
                 className="btn btn-default mt-4 md:mt-0"
-                onClick={(e) => {
+                onClick={() => {
                   form.clearForm()
                 }}
               >
@@ -221,7 +215,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 type="submit"
                 role="button"
                 className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
-                onClick={async (e) => {
+                onClick={async () => {
                   if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
                     selectedTabIndex(1)
                   }
