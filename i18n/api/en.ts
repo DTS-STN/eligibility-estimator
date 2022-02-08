@@ -345,6 +345,8 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    additionalReasons:
+      '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',
@@ -358,25 +360,13 @@ const en: Translations = {
     unavailable:
       'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
     availableEligible:
-      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Changes in your circumstances may impact your results. Note that this only provides an estimate of your monthly payment.',
+      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     availableIneligible:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
     availableIneligibleIncome:
       'You currently do not appear to be eligible for any of these benefits, as your annual income is higher than {MAX_OAS_INCOME}.',
   },
   links: {
-    SC: {
-      text: 'Service Canada',
-      url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
-      order: -1,
-      location: LinkLocation.HIDDEN,
-    },
-    socialAgreement: {
-      text: 'social security agreement',
-      url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',
-      order: -1,
-      location: LinkLocation.HIDDEN,
-    },
     contactSC: {
       text: 'Contact Service Canada',
       url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
@@ -497,9 +487,45 @@ const en: Translations = {
       order: 21,
       location: LinkLocation.STANDARD,
     },
+    SC: {
+      text: 'Service Canada',
+      url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
     oasDeferClickHere: {
       text: 'click here',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    socialAgreement: {
+      text: 'social security agreement',
+      url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.html#gc-document-nav',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    gisReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    alwReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    afsReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
       order: -1,
       location: LinkLocation.HIDDEN,
     },

@@ -350,6 +350,8 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+    additionalReasons:
+      "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',
@@ -363,25 +365,13 @@ const fr: Translations = {
     unavailable:
       "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
     availableEligible:
-      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}.  Des changements dans votre situation peuvent affecter vos résultats. Notez que les montants ne sont qu'une estimation de votre paiement mensuel.",
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     availableIneligible:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
     availableIneligibleIncome:
       "Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à {MAX_OAS_INCOME}.",
   },
   links: {
-    SC: {
-      text: 'Service Canada',
-      url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
-      order: -1,
-      location: LinkLocation.HIDDEN,
-    },
-    socialAgreement: {
-      text: 'accord de sécurité sociale',
-      url: 'https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html',
-      order: -1,
-      location: LinkLocation.HIDDEN,
-    },
     contactSC: {
       text: 'Communiquer avec Service Canada',
       url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
@@ -502,9 +492,45 @@ const fr: Translations = {
       order: 21,
       location: LinkLocation.STANDARD,
     },
+    SC: {
+      text: 'Service Canada',
+      url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
     oasDeferClickHere: {
       text: 'cliquez ici',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    socialAgreement: {
+      text: 'accord de sécurité sociale',
+      url: 'https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    gisReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    alwReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    afsReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
       order: -1,
       location: LinkLocation.HIDDEN,
     },
