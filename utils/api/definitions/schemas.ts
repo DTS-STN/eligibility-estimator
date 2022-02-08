@@ -1,7 +1,11 @@
 import Joi from 'joi'
-import { Language } from '../../../i18n/api'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
-import { LegalStatus, MaritalStatus, PartnerBenefitStatus } from './enums'
+import {
+  Language,
+  LegalStatus,
+  MaritalStatus,
+  PartnerBenefitStatus,
+} from './enums'
 
 /**
  * This is what the API expects to receive, with the below exceptions due to normalization:

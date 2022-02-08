@@ -3,11 +3,12 @@
 import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
-import { getTranslations, Language, Translations } from '../../../i18n/api'
+import { getTranslations, Translations } from '../../../i18n/api'
 import { countryList } from '../../../utils/api/definitions/countries'
 import {
   EntitlementResultType,
   EstimationSummaryState,
+  Language,
   LegalStatus,
   LivingCountry,
   MaritalStatus,

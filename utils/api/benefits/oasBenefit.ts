@@ -28,17 +28,23 @@ export class OasBenefit extends BaseBenefit {
 
     // main checks
     if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
-      if (meetsReqAge) {
+      if (this.input.age >= 70) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.eligible,
         }
+      } else if (this.input.age >= 65 && this.input.age < 70) {
+        return {
+          result: ResultKey.ELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.eligibleOas65to69,
+        }
       } else if (this.input.age == 64) {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE,
-          detail: this.translations.detail.eligibleWhen65ApplyNow,
+          detail: this.translations.detail.eligibleWhen65ApplyNowOas,
         }
       } else {
         return {

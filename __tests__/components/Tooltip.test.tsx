@@ -9,7 +9,7 @@ import {
   getTooltipTranslationByField,
   Tooltip,
 } from '../../components/Tooltip/tooltip'
-import { Language } from '../../i18n/api'
+import { Language } from '../../utils/api/definitions/enums'
 
 // gets data correctly and presents it
 describe('Tooltip component', () => {
