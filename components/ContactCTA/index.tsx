@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useLayoutEffect } from 'react'
 import { WebTranslations } from '../../i18n/web'
+import { ActionDropdown } from '../ActionDropdown'
 import { useStore, useTranslation } from '../Hooks'
 
 export const ContactCTA: React.VFC = () => {
@@ -40,6 +41,7 @@ export const ContactCTA: React.VFC = () => {
           ))}
         </div>
       )}
+      <ActionDropdown />
     </>
   )
 }
