@@ -1,10 +1,14 @@
-import { types, IMaybe, ISimpleType, ModelCreationType } from 'mobx-state-tree'
 import {
-  ExtractCFromProps,
   IArrayType,
+  IMaybe,
   IModelType,
+  Instance,
+  ISimpleType,
+  ModelCreationType,
+  types,
   _NotCustomized,
-} from 'mobx-state-tree/dist/internal'
+} from 'mobx-state-tree'
+import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
 import {
   EstimationSummaryState,
   LinkLocation,
@@ -50,20 +54,30 @@ export const Summary = types
     links: types.maybe(types.array(SummaryLink)),
   })
   .views((self) => ({
-    get nextStepsLink() {
-      return self.links.find(
-        (link) => link.location === LinkLocation.RESULTS_APPLY 
-      )
+    get nextStepsLink(): Instance<typeof SummaryLink> {
+      return self.links
+        ? self.links.find(
+            (link) => link.location === LinkLocation.RESULTS_APPLY
+          )
+        : null
     },
     get needHelpLinks() {
-      return self.links.filter(
-        (link) => link.location === LinkLocation.STANDARD || link.location === LinkLocation.QUESTIONS_ONLY
-      )
+      return self.links
+        ? self.links.filter(
+            (link) =>
+              link.location === LinkLocation.STANDARD ||
+              link.location === LinkLocation.QUESTIONS_ONLY
+          )
+        : []
     },
     get moreInfoLinks() {
-      return self.links.filter(
-        (link) => link.location === LinkLocation.STANDARD || link.location === LinkLocation.RESULTS_ONLY
-      )
+      return self.links
+        ? self.links.filter(
+            (link) =>
+              link.location === LinkLocation.STANDARD ||
+              link.location === LinkLocation.RESULTS_ONLY
+          )
+        : []
     },
   }))
 
