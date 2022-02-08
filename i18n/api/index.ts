@@ -72,7 +72,6 @@ export interface Translations {
     mustHavePartnerWithGis: string
     mustMeetIncomeReq: string
     mustMeetYearReq: string
-    ineligibleYearsOrCountry: string
     conditional: string
     dependingOnAgreement: string
     dependingOnAgreementWhen60: string
@@ -101,7 +100,6 @@ export interface Translations {
     cpp: Link
     cric: Link
     oasApply: Link
-    gisApply: Link
     alwApply: Link
     afsApply: Link
     oasEntitlement: Link

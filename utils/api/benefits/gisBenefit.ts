@@ -105,6 +105,7 @@ export class GisBenefit extends BaseBenefit {
         detail: this.translations.detail.mustCompleteOasCheck,
       }
     }
+    throw new Error('entitlement logic failed to produce a result')
   }
 
   protected getEntitlement(): EntitlementResult {

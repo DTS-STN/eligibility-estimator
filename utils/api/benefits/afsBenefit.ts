@@ -128,15 +128,8 @@ export class AfsBenefit extends BaseBenefit {
           detail: this.translations.detail.dependingOnLegal,
         }
       }
-    } else if (this.input.livingCountry.noAgreement) {
-      return {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.SOCIAL_AGREEMENT,
-        detail: this.translations.detail.ineligibleYearsOrCountry,
-      }
     }
-    // fallback
-    throw new Error('should not be here')
+    throw new Error('entitlement logic failed to produce a result')
   }
 
   protected getEntitlement(): EntitlementResult {

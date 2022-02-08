@@ -311,8 +311,6 @@ const en: Translations = {
       'Your income is too high to be eligible for this benefit.',
     mustMeetYearReq:
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
-    ineligibleYearsOrCountry:
-      'You currently do not appear to be eligible for this benefit as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.',
     conditional:
       'You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.',
     dependingOnAgreement:
@@ -376,12 +374,6 @@ const en: Translations = {
       text: 'Old Age Security: Application',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
       order: 5,
-      location: LinkLocation.RESULTS_APPLY,
-    },
-    gisApply: {
-      text: 'Guaranteed Income Supplement: Application',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
-      order: 6,
       location: LinkLocation.RESULTS_APPLY,
     },
     alwApply: {

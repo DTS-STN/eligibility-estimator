@@ -329,8 +329,6 @@ const fr: Translations = {
       'Votre revenu est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
       "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
-    ineligibleYearsOrCountry:
-      "Vous ne semblez pas actuellement avoir droit à cette prestation, puisque vous avez indiqué que vous n'avez pas habité au Canada pendant la période minimale requise ou que vous avez habité dans un pays avec lequel le Canada a un accord de sécurité sociale. Cependant, vous pourriez devenir admissible à l'avenir si vous résidez au Canada pendant le nombre minimum d'années requis.",
     conditional:
       'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
     dependingOnAgreement:
@@ -394,12 +392,6 @@ const fr: Translations = {
       text: 'Pension de la Sécurité de vieillesse: Demande',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
       order: 5,
-      location: LinkLocation.RESULTS_APPLY,
-    },
-    gisApply: {
-      text: 'Supplément de revenu garanti: Demande',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
-      order: 6,
       location: LinkLocation.RESULTS_APPLY,
     },
     alwApply: {
