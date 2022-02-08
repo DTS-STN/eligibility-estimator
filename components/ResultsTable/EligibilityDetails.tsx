@@ -9,6 +9,7 @@ export const EligibilityDetails: React.VFC<{
   <>
     {eligibilityType.eligibility.detail.split('\n').map((str, i) => (
       <p
+        className=".question-link"
         key={i}
         className={i == 0 ? `inline` : ''}
         dangerouslySetInnerHTML={{ __html: str }}
