@@ -29,7 +29,7 @@ export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
         <>
           <h2 className="h2 mt-8">Next steps</h2>
           <Link href={root.summary.nextStepsLink.url} passHref>
-            <a className="btn btn-primary w-96" target="_blank">
+            <a className="btn btn-primary md:w-96 !mt-3 mx-1" target="_blank">
               {root.summary.nextStepsLink.text}
             </a>
           </Link>

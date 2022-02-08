@@ -13,6 +13,7 @@ export const NeedHelpList: React.VFC<{
   // handler on scroll for sticky need help
   const shouldBeSticky = (e) => {
     const self = document.querySelector('.fixedElement')
+    if (!self) return
 
     // do not add this behaviour on mobile
     if (isMobile) return

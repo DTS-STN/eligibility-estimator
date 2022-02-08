@@ -6,21 +6,18 @@ import React, { Dispatch, useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
-import {
-  EstimationSummaryState,
-  FieldCategory,
-} from '../../utils/api/definitions/enums'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import { FieldCategory } from '../../utils/api/definitions/enums'
+import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
+import { Alert } from '../Alert'
 import { useStore } from '../Hooks'
+import { NeedHelpList } from '../Layout/NeedHelpList'
+import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
 import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
-import { NeedHelpList } from '../Layout/NeedHelpList'
-import { Alert } from '../Alert'
-import ProgressBar from '../ProgressBar'
 
 interface FactoryProps {
   data: ResponseSuccess
@@ -123,7 +120,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -137,7 +134,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -151,7 +148,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required

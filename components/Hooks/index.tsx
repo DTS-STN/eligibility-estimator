@@ -1,4 +1,6 @@
+import { Instance } from 'mobx-state-tree'
 import { useCallback, useContext, useEffect, useState } from 'react'
+import { RootStore } from '../../client-state/store'
 import { dictionaryList } from '../../i18n'
 import { LanguageContext, RootStoreContext } from '../Contexts'
 
@@ -57,7 +59,7 @@ export const useInternationalization = (key: string) => {
   return dictionaryList[userLanguage][key]
 }
 
-export function useStore() {
+export function useStore(): Instance<typeof RootStore> {
   const store = useContext(RootStoreContext)
   if (store === null) {
     throw new Error('Store cannot be null, please add a context provider')
