@@ -18,6 +18,8 @@ describe('index page', () => {
       pathname: '/',
       query: '',
       asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
     }))
   })
 

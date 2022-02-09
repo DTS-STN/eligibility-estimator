@@ -19,6 +19,8 @@ describe('index page', () => {
       pathname: '/eligibility?income=20000',
       query: { income: '20000' },
       asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
     }))
   })
 
