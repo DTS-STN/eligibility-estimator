@@ -70,7 +70,9 @@ export const ResultsTable = observer(() => {
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
-            <td>${root.totalEntitlementInDollars}</td>
+            <td>
+              {numberToStringCurrency(root.summary.entitlementSum, locale)}
+            </td>
           </tr>
         </tbody>
       </table>
