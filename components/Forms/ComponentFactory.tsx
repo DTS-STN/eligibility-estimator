@@ -6,7 +6,7 @@ import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
-import { FieldCategory } from '../../utils/api/definitions/enums'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
@@ -93,6 +93,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             className="col-span-2"
             noValidate
           >
+            <input
+              type="hidden"
+              name="_language"
+              id="_language"
+              value={router.locale == 'en' ? Language.EN : Language.FR}
+            />
             {form.fields.map((field: Instance<typeof FormField>) => {
               const isChildQuestion =
                 field.category.key == FieldCategory.PARTNER_DETAILS ||
