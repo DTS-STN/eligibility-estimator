@@ -74,6 +74,10 @@ const correctForBooleans = (value: string) => {
       return 'true'
     case 'No':
       return 'false'
+    case 'Oui':
+      return 'true'
+    case 'Non':
+      return 'false'
     default:
       return value
   }

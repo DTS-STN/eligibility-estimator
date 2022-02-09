@@ -5,9 +5,8 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
+import { StoreProvider } from '../../components/Contexts'
 import Eligibility from '../../pages/eligibility/index'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
-import { ResponseSuccess } from '../../utils/api/definitions/types'
 import { mockPartialGetRequest } from './api/factory'
 
 describe('index page', () => {
@@ -30,9 +29,7 @@ describe('index page', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <Eligibility {...res.body} />
-        </LanguageProvider>
+        <Eligibility {...res.body} />
       </StoreProvider>
     )
     render(ui)

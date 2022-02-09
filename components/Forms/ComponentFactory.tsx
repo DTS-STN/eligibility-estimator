@@ -173,8 +173,14 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         values={
                           field.type == 'boolean'
                             ? [
-                                { key: 'true', text: 'Yes' },
-                                { key: 'false', text: 'No' },
+                                {
+                                  key: 'true',
+                                  text: router.locale == 'en' ? 'Yes' : 'Oui',
+                                },
+                                {
+                                  key: 'false',
+                                  text: router.locale == 'en' ? 'No' : 'Non',
+                                },
                               ]
                             : field.options
                         }

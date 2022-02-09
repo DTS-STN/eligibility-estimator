@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider, LanguageProvider } from '../../components/Contexts'
+import { StoreProvider } from '../../components/Contexts'
 import Home from '../../pages/index'
 
 describe('index page', () => {
@@ -24,9 +24,7 @@ describe('index page', () => {
   it('should render the home page', async () => {
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <Home />
-        </LanguageProvider>
+        <Home />
       </StoreProvider>
     )
     render(ui)

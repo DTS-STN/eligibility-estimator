@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
+import { StoreProvider } from '../../components/Contexts'
 import { CurrencyField } from '../../components/Forms/CurrencyField'
 
 describe('CurrencyField component', () => {
@@ -17,13 +17,11 @@ describe('CurrencyField component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <CurrencyField
-            name={props.name}
-            label={props.label}
-            required={props.required}
-          />
-        </LanguageProvider>
+        <CurrencyField
+          name={props.name}
+          label={props.label}
+          required={props.required}
+        />
       </StoreProvider>
     )
 
@@ -50,14 +48,12 @@ describe('CurrencyField component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <CurrencyField
-            name={props.name}
-            label={props.label}
-            error={props.error}
-            required={props.required}
-          />
-        </LanguageProvider>
+        <CurrencyField
+          name={props.name}
+          label={props.label}
+          error={props.error}
+          required={props.required}
+        />
       </StoreProvider>
     )
 

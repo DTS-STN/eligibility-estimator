@@ -4,7 +4,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
+import { StoreProvider } from '../../components/Contexts'
 import {
   getTooltipTranslationByField,
   Tooltip,
@@ -20,9 +20,7 @@ describe('Tooltip component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <Tooltip field={props.field} />
-        </LanguageProvider>
+        <Tooltip field={props.field} />
       </StoreProvider>
     )
 
@@ -45,9 +43,7 @@ describe('Tooltip component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <Tooltip field={props.field} />
-        </LanguageProvider>
+        <Tooltip field={props.field} />
       </StoreProvider>
     )
 

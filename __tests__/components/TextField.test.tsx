@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
+import { StoreProvider } from '../../components/Contexts'
 import { TextField } from '../../components/Forms/TextField'
 
 describe('TextField component', () => {
@@ -17,13 +17,11 @@ describe('TextField component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <TextField
-            name={props.name}
-            label={props.label}
-            required={props.required}
-          />
-        </LanguageProvider>
+        <TextField
+          name={props.name}
+          label={props.label}
+          required={props.required}
+        />
       </StoreProvider>
     )
 
@@ -50,14 +48,12 @@ describe('TextField component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <TextField
-            name={props.name}
-            label={props.label}
-            error={props.error}
-            required={props.required}
-          />
-        </LanguageProvider>
+        <TextField
+          name={props.name}
+          label={props.label}
+          error={props.error}
+          required={props.required}
+        />
       </StoreProvider>
     )
 
