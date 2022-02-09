@@ -77,6 +77,8 @@ const en: WebTranslations = {
   errors: {
     empty: 'This information is required',
   },
+  unavailableImageAltText: 'Happy people',
+  govt: 'Government of Canada',
 }
 
 export default en

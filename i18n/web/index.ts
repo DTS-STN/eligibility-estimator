@@ -68,4 +68,7 @@ export type WebTranslations = {
   errors: {
     empty: string
   }
+
+  unavailableImageAltText: string
+  govt: string
 }

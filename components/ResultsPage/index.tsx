@@ -70,7 +70,7 @@ export const ResultsPage: React.FC<{
               <Image
                 src={'/people.png'}
                 layout="fill"
-                alt="People of all walks of life, happy together."
+                alt={tsln.unavailableImageAltText}
               />
             </div>
           ) : (

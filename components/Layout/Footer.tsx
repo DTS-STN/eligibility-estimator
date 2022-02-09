@@ -91,7 +91,7 @@ export const Footer = () => {
             width="200px"
             height="40px"
             src="/wmms-blk.svg"
-            alt="Symbol of the Government of Canada"
+            alt={tsln.govt}
           />
         </div>
       </div>
@@ -124,7 +124,7 @@ export const Footer = () => {
             width="135px"
             height="45px"
             src="/wmms-blk.svg"
-            alt="Symbol of the Government of Canada"
+            alt={tsln.govt}
           />
         </div>
       </div>

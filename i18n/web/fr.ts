@@ -76,6 +76,8 @@ const fr: WebTranslations = {
   errors: {
     empty: 'Ce renseignement est requis',
   },
+  unavailableImageAltText: 'Gens Heureux',
+  govt: 'Gouvernement du Canada',
 }
 
 export default fr
