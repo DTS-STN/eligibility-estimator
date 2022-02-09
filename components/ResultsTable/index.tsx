@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react'
+import { useRouter } from 'next/router'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -11,6 +12,9 @@ import { EligibilityDetails } from './EligibilityDetails'
 export const ResultsTable = observer(() => {
   const root = useStore()
   const tsln = useTranslation<WebTranslations>()
+  const currentLocale = useRouter().locale
+
+  const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   return (
     <>
@@ -29,10 +33,7 @@ export const ResultsTable = observer(() => {
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
             <td>
-              {numberToStringCurrency(
-                root.oas.entitlement.result,
-                Locale.EN // todo: i18n
-              )}
+              {numberToStringCurrency(root.oas.entitlement.result, locale)}
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
@@ -42,10 +43,7 @@ export const ResultsTable = observer(() => {
             </td>
             <td>
               {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-                ? numberToStringCurrency(
-                    root.gis.entitlement.result,
-                    Locale.EN // todo: i18n
-                  )
+                ? numberToStringCurrency(root.gis.entitlement.result, locale)
                 : 'Unavailable'}
             </td>
           </tr>
@@ -57,7 +55,7 @@ export const ResultsTable = observer(() => {
             <td>
               {numberToStringCurrency(
                 root.allowance.entitlement.result,
-                Locale.EN // todo: i18n
+                locale
               )}
             </td>
           </tr>
@@ -67,10 +65,7 @@ export const ResultsTable = observer(() => {
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
             <td>
-              {numberToStringCurrency(
-                root.afs.entitlement.result,
-                Locale.EN // todo: i18n
-              )}
+              {numberToStringCurrency(root.afs.entitlement.result, locale)}
             </td>
           </tr>
           <tr className="border-t border-content font-semibold ">
@@ -90,10 +85,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>
-            {numberToStringCurrency(
-              root.oas.entitlement.result,
-              Locale.EN // todo: i18n
-            )}
+            {numberToStringCurrency(root.oas.entitlement.result, locale)}
           </p>
         </div>
         <div className="mb-4">
@@ -107,10 +99,7 @@ export const ResultsTable = observer(() => {
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>
             {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-              ? numberToStringCurrency(
-                  root.gis.entitlement.result,
-                  Locale.EN // todo: i18n
-                )
+              ? numberToStringCurrency(root.gis.entitlement.result, locale)
               : 'Unavailable'}
           </p>
         </div>
@@ -124,10 +113,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>
-            {numberToStringCurrency(
-              root.allowance.entitlement.result,
-              Locale.EN // todo: i18n
-            )}
+            {numberToStringCurrency(root.allowance.entitlement.result, locale)}
           </p>
         </div>
         <div className="mb-4">
@@ -140,10 +126,7 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">Estimated Monthly Amount (CAD): </span>
-            {numberToStringCurrency(
-              root.afs.entitlement.result,
-              Locale.EN // todo: i18n
-            )}
+            {numberToStringCurrency(root.afs.entitlement.result, locale)}
           </p>
         </div>
         <div className="mb-4">
@@ -151,10 +134,7 @@ export const ResultsTable = observer(() => {
             Estimated Total Monthly Benefit Amount
           </p>
           <p className="px-1.5 py-1.5 font-bold">
-            {numberToStringCurrency(
-              root.summary.entitlementSum,
-              Locale.EN // todo: i18n
-            )}
+            {numberToStringCurrency(root.summary.entitlementSum, locale)}
           </p>
         </div>
       </div>
