@@ -1,5 +1,4 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
-import router from 'next/router'
 import { webDictionary } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
@@ -99,11 +98,11 @@ export const Form = types
         .filter((f) => FormField.is(f))
       self.removeFields(unnecessaryFields)
     },
-    validateAgainstEmptyFields(): boolean {
+    validateAgainstEmptyFields(locale: string): boolean {
       let errorsExist = false
       self.fields.map((field) => {
         if (!field.filled) {
-          field.setError(webDictionary[router.locale].errors.empty)
+          field.setError(webDictionary[locale].errors.empty)
           errorsExist = true
         }
         return field
@@ -155,7 +154,7 @@ export const Form = types
       })
     },
     buildQueryStringWithFormData(): string {
-      let qs = `_language=${router.locale.toLocaleUpperCase()}`
+      let qs = ''
 
       for (const field of self.fields) {
         if (!field.value) continue
@@ -186,6 +185,7 @@ export const Form = types
           field.setError(d.message)
         }
       } else {
+        console.log(data)
         self.clearAllErrors()
         const parent = getParent(self) as Instance<typeof RootStore>
         parent.setOAS(data.results.oas)

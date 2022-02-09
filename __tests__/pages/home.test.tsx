@@ -10,7 +10,6 @@ import Home from '../../pages/index'
 
 describe('index page', () => {
   let useRouter
-  // mocking useRouter, as we'll eventually need it for sending the correct requests
   beforeAll(() => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')
     useRouter.mockImplementation(() => ({

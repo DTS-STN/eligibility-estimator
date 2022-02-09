@@ -4,6 +4,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import { Instance } from 'mobx-state-tree'
+import * as nextRouter from 'next/router'
 import React from 'react'
 import { RootStore } from '../../client-state/store'
 import { StoreProvider } from '../../components/Contexts'
@@ -12,6 +13,20 @@ import { FieldCategory } from '../../utils/api/definitions/enums'
 
 describe('ProgressBar component', () => {
   let root: Instance<typeof RootStore>
+  let useRouter
+
+  beforeAll(() => {
+    useRouter = jest.spyOn(nextRouter, 'useRouter')
+    useRouter.mockImplementation(() => ({
+      route: '/',
+      pathname: '/',
+      query: '',
+      asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
+    }))
+  })
+
   beforeEach(() => {
     root = RootStore.create({
       form: {

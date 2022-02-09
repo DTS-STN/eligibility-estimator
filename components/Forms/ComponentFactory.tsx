@@ -229,7 +229,10 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 role="button"
                 className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
                 onClick={async () => {
-                  if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
+                  if (
+                    !form.validateAgainstEmptyFields(router.locale) &&
+                    !form.hasErrors
+                  ) {
                     selectedTabIndex(1)
                   }
                 }}
