@@ -26,7 +26,7 @@ const en: WebTranslations = {
   required: 'required',
   homePageP1:
     'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If eligible to receive the benefit, it will also estimate your monthly payment.',
-  homePageP2: 'The estimator covers 4 benefits programs:',
+  homePageP2: 'The estimator covers four benefits programs:',
   homePageP3:
     'Old Age Security pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
