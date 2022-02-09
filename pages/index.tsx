@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Alert } from '../components/Alert'
-import { CurrencyField } from '../components/Forms/CurrencyField'
 import { Layout } from '../components/Layout'
 import { EstimationSummaryState } from '../utils/api/definitions/enums'
 
@@ -24,29 +23,31 @@ const Home: NextPage = (props) => {
           This prototype covers four benefits programs:
         </p>
         <p className="mb-4 text-content">
-          The Old Age Security (OAS) pension is a monthly payment you can get if
-          you are 65 and older. In some cases, Service Canada will be able to
-          automatically enroll you for the OAS pension. In other cases, you will
-          have to apply for the Old Age Security pension. Service Canada will
-          inform you if you have been automatically enrolled.
+          <span className="font-bold">The Old Age Security (OAS)</span> pension
+          is a monthly payment you can get if you are 65 and older. In some
+          cases, Service Canada will be able to automatically enroll you for the
+          OAS pension. In other cases, you will have to apply for the Old Age
+          Security pension. Service Canada will inform you if you have been
+          automatically enrolled.
         </p>
         <p className="mb-4 text-content">
           In most cases, you do not have to apply to get this benefit.
         </p>
         <p className="mb-4 text-content">
-          Guaranteed Income Supplement (GIS) is a monthly non-taxable benefit
-          for OAS pension recipients who have a low income and are living in
-          Canada.
+          <span className="font-bold">Guaranteed Income Supplement (GIS)</span>{' '}
+          is a monthly non-taxable benefit for OAS pension recipients who have a
+          low income and are living in Canada.
         </p>
         <p className="mb-4 text-content">
-          Allowance is a monthly benefit available to low-income individuals
-          aged 60 to 64 whose spouse or common-law partner receives the
-          Guaranteed Income Supplement.
+          <span className="font-bold">Allowance</span> is a monthly benefit
+          available to low-income individuals aged 60 to 64 whose spouse or
+          common-law partner receives the Guaranteed Income Supplement.
         </p>
         <p className="mb-10 text-content">
-          Allowance for the Survivor is a monthly benefit available to
-          individuals aged 60 to 64 who have a low income, who are living in
-          Canada, and whose spouse or common-law partner has passed away.{' '}
+          <span className="font-bold">Allowance for the Survivor</span> is a
+          monthly benefit available to individuals aged 60 to 64 who have a low
+          income, who are living in Canada, and whose spouse or common-law
+          partner has passed away.{' '}
         </p>
       </div>
 
