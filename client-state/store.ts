@@ -92,6 +92,16 @@ export const RootStore = types
     summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
   })
+  .views((self) => ({
+    get totalEntitlementInDollars() {
+      return (
+        self.oas.entitlement.result +
+        (self.gis.entitlement.result !== -1 ? self.gis.entitlement.result : 0) + // gis can return a -1 for an unavailable calculation, correct for this
+        self.allowance?.entitlement.result +
+        self.afs?.entitlement.result
+      ).toFixed(2)
+    },
+  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num

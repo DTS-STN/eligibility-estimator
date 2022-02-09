@@ -75,7 +75,7 @@ export const ResultsTable = observer(() => {
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
-            <td>$0</td>
+            <td>${root.totalEntitlementInDollars}</td>
           </tr>
         </tbody>
       </table>
