@@ -402,7 +402,10 @@ export class RequestHandler {
     textToProcess = textToProcess
       .replace(
         '{ENTITLEMENT_AMOUNT}',
-        numberToStringCurrency(summary.entitlementSum, translations._locale)
+        `<strong>${numberToStringCurrency(
+          summary.entitlementSum,
+          translations._locale
+        )}</strong>`
       )
       .replace(
         '{MAX_OAS_INCOME}',
