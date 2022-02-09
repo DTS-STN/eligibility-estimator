@@ -17,7 +17,7 @@ export const Footer = () => {
           aria-labelledby="footerNav1"
         >
           <h3 className="sr-only" id="footerNav1">
-            About government
+            {tsln.footerlink8}
           </h3>
           <ul className="flex flex-col text-xs md:grid md:grid-cols-3 md:gap-1">
             <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
