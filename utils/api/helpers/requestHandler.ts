@@ -402,7 +402,7 @@ export class RequestHandler {
     textToProcess = textToProcess
       .replace(
         '{ENTITLEMENT_AMOUNT}',
-        `<strong>${numberToStringCurrency(
+        `<strong className="font-bold">${numberToStringCurrency(
           summary.entitlementSum,
           translations._locale
         )}</strong>`
