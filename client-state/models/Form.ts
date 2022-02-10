@@ -154,7 +154,9 @@ export const Form = types
       })
     },
     buildQueryStringWithFormData(): string {
-      let qs = ''
+      const parent = getParent(self) as Instance<typeof RootStore>
+
+      let qs = `_language=${parent.lang}`
 
       for (const field of self.fields) {
         if (!field.value) continue

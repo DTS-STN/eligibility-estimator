@@ -232,6 +232,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     !form.validateAgainstEmptyFields(router.locale) &&
                     !form.hasErrors
                   ) {
+                    const language = document.querySelector(
+                      '#_language'
+                    ) as HTMLInputElement
+                    root.setCurrentLang(
+                      language.value == 'EN' ? Language.EN : Language.FR
+                    )
                     root.setActiveTab(1)
                   }
                 }}
