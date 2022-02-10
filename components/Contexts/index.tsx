@@ -1,37 +1,15 @@
-import React from 'react'
-import { useStorage } from '../Hooks'
-import { RootStore } from '../../client-state/store'
 import { Instance } from 'mobx-state-tree'
-
-export const LanguageContext = React.createContext({
-  userLanguage: 'en',
-  userLanguageChange: (selected) => void 0,
-})
-
-export function LanguageProvider({ children }) {
-  const [userLanguage, setUserLanguage] = useStorage<string>(
-    'local',
-    'lang',
-    'en'
-  )
-
-  return (
-    <LanguageContext.Provider
-      value={{
-        userLanguage,
-        userLanguageChange: (selected) => setUserLanguage(selected),
-      }}
-    >
-      {children}
-    </LanguageContext.Provider>
-  )
-}
+import { useRouter } from 'next/router'
+import React from 'react'
+import { RootStore } from '../../client-state/store'
+import { Language } from '../../utils/api/definitions/enums'
 
 export const RootStoreContext = React.createContext<null | Instance<
   typeof RootStore
 >>(null)
 
 export function StoreProvider({ children }) {
+  const router = useRouter()
   return (
     <RootStoreContext.Provider
       value={RootStore.create({
@@ -41,6 +19,7 @@ export function StoreProvider({ children }) {
         afs: {},
         allowance: {},
         summary: {},
+        lang: router.locale == 'en' ? Language.EN : Language.FR,
       })}
     >
       {children}

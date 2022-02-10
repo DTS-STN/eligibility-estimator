@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
+import { WebTranslations } from '../../i18n/web'
+import { useTranslation } from '../Hooks'
 
 export const Header = () => {
+  const tsln = useTranslation<WebTranslations>()
   return (
     <header className="border-b border-black/20 pb-10 -mx-4">
       <div className="md:container mx-auto">
@@ -10,13 +13,13 @@ export const Header = () => {
             src="/gc-sig.png"
             width="360px"
             height="34px"
-            alt="Government of Canada banner image"
+            alt={tsln.govt}
           />
           <label htmlFor="search-gc" className="block mb-2">
             <input
               type="search"
               id="search-gc"
-              placeholder={'Search Canada.ca'}
+              placeholder={tsln.search}
               className="h-auto min-h-9 py-1.5 px-3 align-middle text-muted bg-white rounded-tl rounded-bl border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form"
             />
             <button className="py-1.5 px-3 h-9 rounded-tr rounded-br text-white bg-primary hover:bg-primary-hover border-primary-border font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid">

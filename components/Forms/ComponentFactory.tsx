@@ -1,15 +1,16 @@
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { Dispatch, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
-import { FieldCategory } from '../../utils/api/definitions/enums'
+import { WebTranslations } from '../../i18n/web'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
-import { useStore } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
@@ -20,7 +21,6 @@ import { TextField } from './TextField'
 
 interface FactoryProps {
   data: ResponseSuccess
-  selectedTabIndex: Dispatch<number>
 }
 
 /**
@@ -30,10 +30,11 @@ interface FactoryProps {
  * @returns
  */
 export const ComponentFactory: React.VFC<FactoryProps> = observer(
-  ({ data, selectedTabIndex }) => {
+  ({ data }) => {
     let lastCategory = null
 
     const router = useRouter()
+    const tsln = useTranslation<WebTranslations>()
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
@@ -68,15 +69,15 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           <ProgressBar
             sections={[
               {
-                title: 'Income Details',
+                title: tsln.category.incomeDetails,
                 complete: root.form.progress.income,
               },
               {
-                title: 'Personal Information',
+                title: tsln.category.personalInformation,
                 complete: root.form.progress.personal,
               },
               {
-                title: 'Legal Status',
+                title: tsln.category.legalStatus,
                 complete: root.form.progress.legal,
               },
             ]}
@@ -91,7 +92,12 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             className="col-span-2"
             noValidate
           >
-            <input type="hidden" name="_language" value={'EN'} />
+            <input
+              type="hidden"
+              name="_language"
+              id="_language"
+              value={router.locale == 'en' ? Language.EN : Language.FR}
+            />
             {form.fields.map((field: Instance<typeof FormField>) => {
               const isChildQuestion =
                 field.category.key == FieldCategory.PARTNER_DETAILS ||
@@ -172,8 +178,14 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         values={
                           field.type == 'boolean'
                             ? [
-                                { key: 'true', text: 'Yes' },
-                                { key: 'false', text: 'No' },
+                                {
+                                  key: 'true',
+                                  text: tsln.yes,
+                                },
+                                {
+                                  key: 'false',
+                                  text: tsln.no,
+                                },
                               ]
                             : field.options
                         }
@@ -199,7 +211,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 className="btn btn-default mt-4 md:mt-0"
                 onClick={() => router.push('/')}
               >
-                Back
+                {tsln.next}
               </button>
               <button
                 type="button"
@@ -209,24 +221,31 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   form.clearForm()
                 }}
               >
-                Clear
+                {tsln.clear}
               </button>
               <button
                 type="submit"
                 role="button"
                 className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
                 onClick={async () => {
-                  if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
-                    selectedTabIndex(1)
+                  if (
+                    !form.validateAgainstEmptyFields(router.locale) &&
+                    !form.hasErrors
+                  ) {
+                    const language = document.querySelector(
+                      '#_language'
+                    ) as HTMLInputElement
+                    root.setCurrentLang(language.value as Language)
+                    root.setActiveTab(1)
                   }
                 }}
                 disabled={incomeTooHigh}
               >
-                Estimate
+                {tsln.estimate}
               </button>
             </div>
           </form>
-          <NeedHelpList title="Need Help?" links={root.summary.needHelpLinks} />
+          <NeedHelpList title={tsln.needHelp} links={root.summary.links} />
         </div>
       </>
     )

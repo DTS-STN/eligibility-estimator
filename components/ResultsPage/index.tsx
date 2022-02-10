@@ -1,21 +1,19 @@
-import { Instance } from 'mobx-state-tree'
-import { Dispatch, useEffect, useRef } from 'react'
-import { RootStore } from '../../client-state/store'
+import Image from 'next/image'
+import { useEffect, useRef } from 'react'
+import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { Alert } from '../Alert'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
-import { useMediaQuery } from '../Hooks'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import ProgressBar from '../ProgressBar'
 import { ResultsTable } from '../ResultsTable'
-import Image from 'next/image'
 
-export const ResultsPage: React.FC<{
-  root: Instance<typeof RootStore>
-  setSelectedTab: Dispatch<number>
-}> = ({ root, setSelectedTab }) => {
+export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
+  const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
+  const root = useStore()
 
   /**
    * Runs once on mount to process the scrolling behaviour. Does a check to prevent any serverside process from throwing any warnings / errors
@@ -45,9 +43,9 @@ export const ResultsPage: React.FC<{
         <>
           <ProgressBar
             sections={[
-              { title: 'Income Details', complete: true },
-              { title: 'Personal Information', complete: true },
-              { title: 'Legal Status', complete: true },
+              { title: tsln.category.incomeDetails, complete: true },
+              { title: tsln.category.personalInformation, complete: true },
+              { title: tsln.category.legalStatus, complete: true },
             ]}
             estimateSection
           />
@@ -68,14 +66,14 @@ export const ResultsPage: React.FC<{
               <Image
                 src={'/people.png'}
                 layout="fill"
-                alt="People of all walks of life, happy together."
+                alt={tsln.unavailableImageAltText}
               />
             </div>
           ) : (
             <ResultsTable />
           )}
           {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
-            <ContactCTA setSelectedTab={setSelectedTab} />
+            <ContactCTA />
           )}
           {root.summary?.moreInfoLinks?.length && (
             <ConditionalLinks links={root.summary.moreInfoLinks} />

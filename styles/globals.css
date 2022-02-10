@@ -45,7 +45,7 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px] font-header-gc;
+    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule;
   }
   .h2 {
     @apply text-h2 font-bold mb-[15px] font-header-gc;
@@ -100,13 +100,13 @@
     @apply cursor-pointer mb-3;
   }
   details summary {
-    @apply text-content border border-content rounded py-2 px-3 font-semibold;
+    @apply text-content border border-content rounded py-2 px-3;
   }
   details[open] summary {
     @apply rounded-bl-none rounded-br-none;
   }
   details[open] div {
-    @apply border border-t-0 rounded-br rounded-bl border-content;
+    @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   }
   td {
     @apply p-2;

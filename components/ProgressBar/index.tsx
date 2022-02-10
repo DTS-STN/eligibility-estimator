@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useMediaQuery } from '../Hooks'
+import { useMediaQuery, useTranslation } from '../Hooks'
 
 type Section = {
   title: string
@@ -85,6 +85,7 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
   sections,
   estimateSection,
 }) => {
+  const estimate = useTranslation<string>('estimate')
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center">
       {sections.map(({ title, complete }, index: number) => (
@@ -101,7 +102,7 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
         }`}
       ></div>
       <ProgressSection
-        title="Estimation"
+        title={estimate}
         complete={estimateSection}
         first={false}
         last={true}

@@ -1,4 +1,5 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
+import { webDictionary } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import {
@@ -53,10 +54,13 @@ export const Form = types
       const iComplete =
         incomeFields.length > 0 && incomeFields.every((field) => field.filled)
       const pComplete =
-        personalFields.length > 0 && iComplete &&
+        personalFields.length > 0 &&
+        iComplete &&
         personalFields.every((field) => field.filled)
       const lComplete =
-        legalFields.length > 0 && pComplete && legalFields.every((field) => field.filled)
+        legalFields.length > 0 &&
+        pComplete &&
+        legalFields.every((field) => field.filled)
 
       return { income: iComplete, personal: pComplete, legal: lComplete }
     },
@@ -94,11 +98,11 @@ export const Form = types
         .filter((f) => FormField.is(f))
       self.removeFields(unnecessaryFields)
     },
-    validateAgainstEmptyFields(): boolean {
+    validateAgainstEmptyFields(locale: string): boolean {
       let errorsExist = false
       self.fields.map((field) => {
         if (!field.filled) {
-          field.setError('This field is required')
+          field.setError(webDictionary[locale].errors.empty)
           errorsExist = true
         }
         return field
@@ -150,7 +154,10 @@ export const Form = types
       })
     },
     buildQueryStringWithFormData(): string {
-      let qs = ''
+      const parent = getParent(self) as Instance<typeof RootStore>
+
+      let qs = `_language=${parent.lang}`
+
       for (const field of self.fields) {
         if (!field.value) continue
 
@@ -169,7 +176,7 @@ export const Form = types
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
 
-      const apiData = yield fetch(`${self.API_URL}?${queryString}`)
+      const apiData = yield fetch(`/${self.API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {

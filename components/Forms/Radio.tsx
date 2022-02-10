@@ -1,7 +1,7 @@
+import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-import { observer } from 'mobx-react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
@@ -73,6 +73,10 @@ const correctForBooleans = (value: string) => {
     case 'Yes':
       return 'true'
     case 'No':
+      return 'false'
+    case 'Oui':
+      return 'true'
+    case 'Non':
       return 'false'
     default:
       return value

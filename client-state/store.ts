@@ -6,12 +6,12 @@ import {
   ISimpleType,
   ModelCreationType,
   types,
-  _NotCustomized,
 } from 'mobx-state-tree'
 import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
 import {
   EntitlementResultType,
   EstimationSummaryState,
+  Language,
   LinkLocation,
   ResultKey,
 } from '../utils/api/definitions/enums'
@@ -92,10 +92,14 @@ export const RootStore = types
     allowance: types.maybe(Allowance),
     summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
+    lang: types.enumeration(Object.values(Language)),
   })
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num
+    },
+    setCurrentLang(lang: Language) {
+      self.lang = lang
     },
     setOAS(input) {
       self.oas = OAS.create(input)

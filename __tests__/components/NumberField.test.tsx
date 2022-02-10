@@ -2,12 +2,26 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
+import * as nextRouter from 'next/router'
 import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
+import { StoreProvider } from '../../components/Contexts'
 import { NumberField } from '../../components/Forms/NumberField'
 
 describe('NumberField component', () => {
+  let useRouter
+
+  beforeAll(() => {
+    useRouter = jest.spyOn(nextRouter, 'useRouter')
+    useRouter.mockImplementation(() => ({
+      route: '/',
+      pathname: '/',
+      query: '',
+      asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
+    }))
+  })
   it('should render an input component that is required component', () => {
     const props = {
       name: 'age',
@@ -17,13 +31,11 @@ describe('NumberField component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <NumberField
-            name={props.name}
-            label={props.label}
-            required={props.required}
-          />
-        </LanguageProvider>
+        <NumberField
+          name={props.name}
+          label={props.label}
+          required={props.required}
+        />
       </StoreProvider>
     )
 
@@ -50,14 +62,12 @@ describe('NumberField component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <NumberField
-            name={props.name}
-            label={props.label}
-            error={props.error}
-            required={props.required}
-          />
-        </LanguageProvider>
+        <NumberField
+          name={props.name}
+          label={props.label}
+          error={props.error}
+          required={props.required}
+        />
       </StoreProvider>
     )
 
