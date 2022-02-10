@@ -1,23 +1,19 @@
-import { Instance } from 'mobx-state-tree'
 import Image from 'next/image'
-import { Dispatch, useEffect, useRef } from 'react'
-import { RootStore } from '../../client-state/store'
+import { useEffect, useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { Alert } from '../Alert'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
-import { useMediaQuery, useTranslation } from '../Hooks'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import ProgressBar from '../ProgressBar'
 import { ResultsTable } from '../ResultsTable'
 
-export const ResultsPage: React.FC<{
-  root: Instance<typeof RootStore>
-  setSelectedTab: Dispatch<number>
-}> = ({ root, setSelectedTab }) => {
+export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
+  const root = useStore()
 
   /**
    * Runs once on mount to process the scrolling behaviour. Does a check to prevent any serverside process from throwing any warnings / errors
@@ -77,7 +73,7 @@ export const ResultsPage: React.FC<{
             <ResultsTable />
           )}
           {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
-            <ContactCTA setSelectedTab={setSelectedTab} />
+            <ContactCTA />
           )}
           {root.summary?.moreInfoLinks?.length && (
             <ConditionalLinks links={root.summary.moreInfoLinks} />

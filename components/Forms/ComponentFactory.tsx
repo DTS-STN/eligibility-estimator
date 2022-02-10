@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { Dispatch, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
@@ -21,7 +21,6 @@ import { TextField } from './TextField'
 
 interface FactoryProps {
   data: ResponseSuccess
-  selectedTabIndex: Dispatch<number>
 }
 
 /**
@@ -31,7 +30,7 @@ interface FactoryProps {
  * @returns
  */
 export const ComponentFactory: React.VFC<FactoryProps> = observer(
-  ({ data, selectedTabIndex }) => {
+  ({ data }) => {
     let lastCategory = null
 
     const router = useRouter()
@@ -233,7 +232,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     !form.validateAgainstEmptyFields(router.locale) &&
                     !form.hasErrors
                   ) {
-                    selectedTabIndex(1)
+                    root.setActiveTab(1)
                   }
                 }}
                 disabled={incomeTooHigh}

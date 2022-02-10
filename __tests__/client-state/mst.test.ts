@@ -10,89 +10,6 @@ import {
 } from '../../utils/api/definitions/enums'
 import { mockPartialGetRequest } from '../pages/api/factory'
 
-// global.fetch = jest.fn((endpoint) =>
-//   Promise.resolve({
-//     json: () =>
-//       Promise.resolve({
-//         status: 200,
-//         body: {
-//           results: {
-//             oas: {
-//               eligibility: {
-//                 result: 'eligible',
-//                 reason: 'You meet the criteria',
-//                 detail:
-//                   'Eligible\nYou are likely eligible for this benefit. To learn more about your option to delay your first payment, <a href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2" target="_blank">click here</a>.',
-//               },
-//               entitlement: {
-//                 result: 642.25,
-//                 type: 'full',
-//               },
-//             },
-//             gis: {
-//               eligibility: {
-//                 result: 'ineligible',
-//                 reason: 'Income too high',
-//                 detail:
-//                   'Not eligible\nYour income is too high to be eligible for this benefit. <a href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html" target="_blank">Click here</a> for possible additional ineligibility reasons.',
-//               },
-//               entitlement: {
-//                 result: 0,
-//                 type: 'none',
-//               },
-//             },
-//             alw: {
-//               eligibility: {
-//                 result: 'ineligible',
-//                 reason: 'Age does not meet requirement for this benefit',
-//                 detail:
-//                   'Not eligible\nYou must be between the ages of 60 and 64 to be eligible for this benefit. <a href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/eligibility.html" target="_blank">Click here</a> for possible additional ineligibility reasons.',
-//               },
-//               entitlement: {
-//                 result: 0,
-//                 type: 'none',
-//               },
-//             },
-//             afs: {
-//               eligibility: {
-//                 result: 'ineligible',
-//                 reason: 'Age does not meet requirement for this benefit',
-//                 detail:
-//                   'Not eligible\nYou must be between the ages of 60 and 64 to be eligible for this benefit. <a href="https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html" target="_blank">Click here</a> for possible additional ineligibility reasons.',
-//               },
-//               entitlement: {
-//                 result: 0,
-//                 type: 'none',
-//               },
-//             },
-//           },
-//           summary: {
-//             state: 'MORE_INFO',
-//             title: 'More information needed',
-//             details:
-//               'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
-//             entitlementSum: 0,
-//           },
-//           visibleFields: [
-//             'income',
-//             'age',
-//             'maritalStatus',
-//             'livingCountry',
-//             'legalStatus',
-//             'canadaWholeLife',
-//           ],
-//           missingFields: [
-//             'age',
-//             'maritalStatus',
-//             'livingCountry',
-//             'legalStatus',
-//             'canadaWholeLife',
-//           ],
-//         },
-//       }),
-//   })
-// ) as any
-
 describe('test the mobx state tree nodes', () => {
   let root: Instance<typeof RootStore>
   let useRouter
@@ -177,18 +94,18 @@ describe('test the mobx state tree nodes', () => {
     expect(form.fields).toHaveLength(0)
   })
 
-  // it('can clear all values from a form', async () => {
-  //   const res = await instantiateFormFields()
-  //   console.log(res)
-  //   const form: Instance<typeof Form> = root.form
-  //   form.setupForm(res.body.fieldData)
-  //   expect(form.fields).toHaveLength(6)
-  //   form.clearForm()
+  it.skip('can clear all values from a form', async () => {
+    const res = await instantiateFormFields()
+    console.log(res)
+    const form: Instance<typeof Form> = root.form
+    form.setupForm(res.body.fieldData)
+    expect(form.fields).toHaveLength(6)
+    form.clearForm()
 
-  //   for (const field of form.fields) {
-  //     expect(field.value).toBeNull()
-  //   }
-  // })
+    for (const field of form.fields) {
+      expect(field.value).toBeNull()
+    }
+  })
 
   it("can predictably retrieve a form field by it's key", async () => {
     const form: Instance<typeof Form> = root.form
@@ -261,5 +178,3 @@ describe('test the mobx state tree nodes', () => {
     expect(qs).toContain('canadaWholeLife=true')
   })
 })
-
-// delete global.fetch

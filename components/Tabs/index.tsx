@@ -1,7 +1,6 @@
 import { Tab } from '@headlessui/react'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
-import { useState } from 'react'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { ResponseSuccess } from '../../utils/api/definitions/types'
@@ -11,16 +10,15 @@ import { useStore, useTranslation } from '../Hooks'
 import { ResultsPage } from '../ResultsPage'
 
 export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
-  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
   const root: Instance<typeof RootStore> = useStore()
   const tsln = useTranslation<WebTranslations>()
 
   return (
     <Tab.Group
-      key={selectedTabIndex}
-      defaultIndex={selectedTabIndex}
+      key={root.activeTab}
+      defaultIndex={root.activeTab}
       onChange={(index) => {
-        setSelectedTabIndex(index)
+        root.setActiveTab(index)
       }}
     >
       <Tab.List className={`border-b border-muted/20`}>
@@ -59,7 +57,7 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
           </div>
         </Tab.Panel>
         <Tab.Panel className="mt-10">
-          <ResultsPage root={root} setSelectedTab={setSelectedTabIndex} />
+          <ResultsPage />
         </Tab.Panel>
         <Tab.Panel className="mt-10">
           <FAQ />

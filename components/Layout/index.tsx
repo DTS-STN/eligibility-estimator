@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { Breadcrumbs } from '../Breadcrumbs'
-import { useTranslation } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { SCLabsTestHeader } from '../SCLabsTestHeader'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -12,6 +12,7 @@ export const Layout: React.VFC<{
   children: React.ReactNode
 }> = ({ children }) => {
   const router = useRouter()
+  const root = useStore()
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
   const tsln = useTranslation<WebTranslations>()
 
@@ -38,6 +39,7 @@ export const Layout: React.VFC<{
                   router.push(router.pathname, router.pathname, {
                     locale: oppositeLocale,
                   })
+                  root.setActiveTab(0)
                 }}
               >
                 {tsln.otherLang}

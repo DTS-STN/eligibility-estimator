@@ -1,10 +1,7 @@
 import Link from 'next/link'
-import { Dispatch } from 'react'
 import { useStore, useTranslation } from '../Hooks'
 
-export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
-  setSelectedTab,
-}) => {
+export const ContactCTA: React.VFC = () => {
   const root = useStore()
   const contactCTA = useTranslation<string>('contactCTA')
   return (
@@ -20,7 +17,7 @@ export const ContactCTA: React.VFC<{ setSelectedTab: Dispatch<any> }> = ({
         and check out the{' '}
         <span
           className="underline text-default-text cursor-pointer"
-          onClick={(e) => setSelectedTab(2)}
+          onClick={(e) => root.setActiveTab(2)}
         >
           FAQ
         </span>{' '}
