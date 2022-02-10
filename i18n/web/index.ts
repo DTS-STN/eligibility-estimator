@@ -72,4 +72,6 @@ export type WebTranslations = {
 
   unavailableImageAltText: string
   govt: string
+  yes: string
+  no: string
 }

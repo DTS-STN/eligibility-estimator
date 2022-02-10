@@ -80,6 +80,8 @@ const en: WebTranslations = {
   },
   unavailableImageAltText: 'Happy people',
   govt: 'Government of Canada',
+  yes: 'Yes',
+  no: 'No',
 }
 
 export default en

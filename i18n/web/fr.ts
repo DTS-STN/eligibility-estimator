@@ -79,6 +79,8 @@ const fr: WebTranslations = {
   },
   unavailableImageAltText: 'Gens Heureux',
   govt: 'Gouvernement du Canada',
+  yes: 'Oui',
+  no: 'Non',
 }
 
 export default fr

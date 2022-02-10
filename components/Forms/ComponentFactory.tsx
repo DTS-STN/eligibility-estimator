@@ -180,11 +180,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                             ? [
                                 {
                                   key: 'true',
-                                  text: router.locale == 'en' ? 'Yes' : 'Oui',
+                                  text: tsln.yes,
                                 },
                                 {
                                   key: 'false',
-                                  text: router.locale == 'en' ? 'No' : 'Non',
+                                  text: tsln.no,
                                 },
                               ]
                             : field.options
@@ -235,9 +235,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     const language = document.querySelector(
                       '#_language'
                     ) as HTMLInputElement
-                    root.setCurrentLang(
-                      language.value == 'EN' ? Language.EN : Language.FR
-                    )
+                    root.setCurrentLang(language.value as Language)
                     root.setActiveTab(1)
                   }
                 }}
