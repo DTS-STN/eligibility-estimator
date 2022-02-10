@@ -96,10 +96,13 @@ describe('test the mobx state tree nodes', () => {
     expect(form.fields).toHaveLength(0)
   })
 
-  it.skip('can clear all values from a form', async () => {
+  it('can clear all values from a form', async () => {
     const res = await instantiateFormFields()
-    console.log(res)
     const form: Instance<typeof Form> = root.form
+
+    const sendReq = jest.spyOn(form, 'sendAPIRequest')
+    sendReq.mockImplementationOnce(async () => res)
+
     form.setupForm(res.body.fieldData)
     expect(form.fields).toHaveLength(6)
     form.clearForm()
