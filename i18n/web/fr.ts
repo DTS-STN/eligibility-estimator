@@ -37,6 +37,7 @@ const fr: WebTranslations = {
     "l'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
   emptyResultsMessage:
     "Veuillez remplir le formulaire. L'estimateur évaluera votre admissibilité en fonction des renseignements fournis. Si vous êtes admissible, il fournira également une estimation de votre paiement mensuel. ",
+  disclaimerTitle: 'Avertissement',
   disclaimer:
     "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
   contactSC:

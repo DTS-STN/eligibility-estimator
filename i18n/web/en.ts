@@ -37,6 +37,7 @@ const en: WebTranslations = {
     'Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   emptyResultsMessage:
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
+  disclaimerTitle: 'Disclaimer',
   disclaimer:
     "Please be reminded that this is a prototype in development. The results are estimates and not a final decision. For a more accurate assessment of your eligibility, <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>. The results are not financial advice. The estimator does not collect and does not save the information you provide.",
   contactSC:

@@ -33,6 +33,7 @@ export type WebTranslations = {
   homePageP6: string
   emptyResultsMessage: string
   disclaimer: string
+  disclaimerTitle: string
   contactSC: string
   footerlink1: string
   footerlink2: string
