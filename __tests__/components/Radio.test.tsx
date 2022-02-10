@@ -3,11 +3,26 @@
  */
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
+import * as nextRouter from 'next/router'
 import React from 'react'
 import { StoreProvider } from '../../components/Contexts'
 import { Radio } from '../../components/Forms/Radio'
 
 describe('Radio component', () => {
+  let useRouter
+
+  beforeAll(() => {
+    useRouter = jest.spyOn(nextRouter, 'useRouter')
+    useRouter.mockImplementation(() => ({
+      route: '/',
+      pathname: '/',
+      query: '',
+      asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
+    }))
+  })
+
   it('should render an input component that is required component', () => {
     const props = {
       name: 'everLivedSocialCountry',

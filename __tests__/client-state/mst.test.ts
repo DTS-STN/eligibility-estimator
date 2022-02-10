@@ -4,6 +4,7 @@ import { Form } from '../../client-state/models/Form'
 import { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import {
+  Language,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -34,6 +35,7 @@ describe('test the mobx state tree nodes', () => {
       afs: {},
       allowance: {},
       summary: {},
+      lang: Language.EN,
     })
   })
 
@@ -167,7 +169,7 @@ describe('test the mobx state tree nodes', () => {
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     let qs = form.buildQueryStringWithFormData()
-    expect(qs).toBe('livingCountry=CAN') // Canada is selected by default
+    expect(qs).toBe('_language=EN&livingCountry=CAN') // Canada is selected by default, and locale is EN
     fillOutForm(form)
     qs = form.buildQueryStringWithFormData()
     expect(qs).toContain('income=20000')

@@ -9,7 +9,7 @@ import React from 'react'
 import { RootStore } from '../../client-state/store'
 import { StoreProvider } from '../../components/Contexts'
 import ProgressBar from '../../components/ProgressBar'
-import { FieldCategory } from '../../utils/api/definitions/enums'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 
 describe('ProgressBar component', () => {
   let root: Instance<typeof RootStore>
@@ -86,6 +86,7 @@ describe('ProgressBar component', () => {
       afs: {},
       allowance: {},
       summary: {},
+      lang: Language.EN,
     })
   })
   it('renders progress for an incomplete form', () => {
