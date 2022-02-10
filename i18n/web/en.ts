@@ -66,13 +66,14 @@ const en: WebTranslations = {
   },
 
   contactCTA:
-    'For a more accurate assessment, you are encouraged to <a className="text-default-text underline" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"> contact Service Canada </a> and check out the',
+    'For a more accurate assessment, you are encouraged to contact <a className="text-default-text underline" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html"> Service Canada </a> and check out the',
   resultsPage: {
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
     tableHeader3: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total estimated monthly benefit amount',
   },
+  nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
 
   errors: {

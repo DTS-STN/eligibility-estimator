@@ -14,7 +14,7 @@ const fr: WebTranslations = {
   breadcrumb3Title: 'Estimateur Canadien des Prestations de Vieillesse',
   breadcrumb3URL: '/',
   title: 'Estimateur Canadien des Prestations de Vieillesse',
-  menuTitle: 'Canadian Old Age Benefits Estimator',
+  menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
   next: 'Suivant',
@@ -65,13 +65,14 @@ const fr: WebTranslations = {
   },
 
   contactCTA:
-    'Pour une évaluation plus précise de votre demande, nous vous invitons à <a className="text-default-text underline" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">communiquer avec Service Canada</a>. Consultez la foire aux questions (FAQ) pour obtenir la liste les documents que vous devrez peut-être fournir.',
+    'Pour une évaluation plus précise de votre demande, nous vous invitons à communiquer avec <a className="text-default-text underline" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a>. Consultez la foire aux questions (FAQ) pour obtenir la liste les documents que vous devrez peut-être fournir.',
   resultsPage: {
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
     tableHeader3: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Montant total des prestations mensuelles',
   },
+  nextSteps: 'La prochaine étape',
   moreInfoHeader: 'FRENCH: More Information',
 
   errors: {
