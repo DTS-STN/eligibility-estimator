@@ -175,7 +175,8 @@ export class SummaryBuilder {
     let sum = 0
     for (const resultsKey in this.results) {
       let result: BenefitResult = this.results[resultsKey]
-      sum += result.entitlement.result
+      if (result.entitlement.type != EntitlementResultType.UNAVAILABLE)
+        sum += result.entitlement.result
     }
     return sum
   }
