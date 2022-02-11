@@ -56,17 +56,12 @@ describe('translation checks', () => {
 
 describe('country checks', () => {
   const COUNTRY_COUNT = 195
-  const fieldList: Array<FieldKey> = [FieldKey.LIVING_COUNTRY]
-  const translationsEn: Translations = getTranslations(Language.EN)
-  const fieldDataEn = RequestHandler.getFieldData(
-    fieldList,
-    translationsEn
-  ) as Array<FieldDataDropdown>
-  const translationsFr: Translations = getTranslations(Language.FR)
-  const fieldDataFr = RequestHandler.getFieldData(
-    fieldList,
-    translationsFr
-  ) as Array<FieldDataDropdown>
+  const handlerEn = new RequestHandler({ _language: Language.EN })
+  handlerEn.requiredFields = [FieldKey.LIVING_COUNTRY]
+  const fieldDataEn = handlerEn.fieldData as Array<FieldDataDropdown>
+  const handlerFr = new RequestHandler({ _language: Language.FR })
+  handlerFr.requiredFields = [FieldKey.LIVING_COUNTRY]
+  const fieldDataFr = handlerFr.fieldData as Array<FieldDataDropdown>
   it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {
     expect(fieldDataEn[0].values.length).toEqual(COUNTRY_COUNT)
     expect(fieldDataFr[0].values.length).toEqual(COUNTRY_COUNT)
