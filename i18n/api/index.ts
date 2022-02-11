@@ -24,7 +24,7 @@ export interface Translations {
   result: {
     eligible: string
     ineligible: string
-    conditional: string
+    unavailable: string
     moreInfo: string
     invalid: string
   }

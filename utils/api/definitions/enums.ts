@@ -51,7 +51,7 @@ export enum EntitlementResultType {
 export enum ResultKey {
   ELIGIBLE = `eligible`,
   INELIGIBLE = `ineligible`,
-  CONDITIONAL = `unavailable`,
+  UNAVAILABLE = `unavailable`,
   MORE_INFO = 'moreInfo',
   INVALID = 'invalid',
 }

@@ -84,7 +84,7 @@ export class AfsBenefit extends BaseBenefit {
       ) {
         if (meetsReqAge) {
           return {
-            result: ResultKey.CONDITIONAL,
+            result: ResultKey.UNAVAILABLE,
             reason: ResultReason.YEARS_IN_CANADA,
             detail: this.translations.detail.dependingOnAgreement,
           }
@@ -117,13 +117,13 @@ export class AfsBenefit extends BaseBenefit {
         }
       } else if (this.input.legalStatus.sponsored) {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegalSponsored,
         }
       } else {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegal,
         }
