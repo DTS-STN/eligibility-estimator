@@ -2,48 +2,48 @@ import { TooltipTranslations } from './index'
 
 const fr: TooltipTranslations = {
   income: {
-    heading: 'Annual Net Income',
-    text: '<p>You can find your total annual net income on line 236 of your tax return document.<br> Old Age Security, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments should not be included in your income.<br> If you do not have tax filing income information, you may use an estimate of your income. If you have more than one source of income (e.g., salary, investment income, pension income), you should add all of the net income estimates together before entering the total amount. Do not include any income from a partner or dependant.</p>',
+    heading: 'Revenu annuel net',
+    text: "<p>Votre revenu annuel net est votre revenu après impôt. Vous pouvez trouver votre revenu annuel net total à la ligne 236 de votre déclaration de revenus. <br  /> Les paiements de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l'Allocation ou de l'Allocation au survivant ne sont pas inclus dans votre revenu.<br  />déclaration de revenus, vous pouvez utiliser une estimation de votre revenu. Si vous avez plus d'une source de revenu (par exemple, salaire, revenu de placement, revenu de pension), vous devez additionner toutes les estimations de revenu net avant d'inscrire le montant total. N'incluez pas les revenus de votre conjoint ou d'une personne à charge.</p>",
   },
   age: {
-    heading: 'Age',
-    text: 'Please enter your current age.',
+    heading: 'Âge',
+    text: 'Veuillez indiquer votre âge actuel.',
   },
   maritalStatus: {
-    heading: 'Marital Status',
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Common-Law</span>: You have lived continuously with your partner in a marital-type relationship for a minimum of one year.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Divorced</span>: You are officially separated and have legally ended your marriage.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Married</span>: You and your spouse have had a ceremony that legally binds you to each other. Your marriage must be legally recognized in the country where it was performed and in Canada.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Single</span>: You have never been married and are not in a common-law relationship.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Surviving Partner/Widowed</span>: Your spouse has died and that you have not remarried or entered into a common-law relationship.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Separated:</span> You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled.</p>",
+    heading: 'État civil actuel',
+    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint(e) de fait</span>: Vous vivez avec une autre personne dans une relation conjugale depuis au moins un an. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Divorcé(e)</span>: Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Marié(e)</span>: Vous êtes unies officiellement au cours d’une cérémonie. Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Célibataire </span>: Vous n'avez jamais été marié et ne vivez pas en union de fait. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint survivant/veuf</span>: Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Séparé(e):</span> Vous vivez séparé de votre époux ou de votre conjoint à cause de la rupture de votre relation depuis au moins 90 jours et vous ne vous êtes pas réconcilié.</p>",
   },
   partnerBenefitStatus: {
-    heading: "Partner's eligibility to benefits",
-    text: 'A person is eligible to receive full OAS if they have lived in Canada for 40 years or more after the age of 18.',
+    heading: 'Eligibilité de votre conjoint aux prestations',
+    text: 'Une personne a droit à la pleine pension de la Sécurité de la vieillesse seulement si elle a habité au Canada pendant au moins 40 ans après l’âge de 18 ans.',
   },
   partnerIncome: {
-    heading: "Partner's Annual Net Income",
-    text: "<p style='padding-bottom: 12px;'>You can find your total annual net income on line 236 of your tax return document.<br> Old Age Security, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments should not be included in your income.<br> If you do not have tax filing income information, you may use an estimate of your income. If you have more than one source of income (e.g., salary, investment income, pension income), you should add all of the net income estimates together before entering the total amount. Do not include any income from a partner or dependant.</p>",
+    heading: 'Revenu annuel net de votre conjoint',
+    text: "<p style='padding-bottom: 12px;'>Votre revenu annuel net est votre revenu après impôt. Vous pouvez trouver votre revenu annuel net total à la ligne 236 de votre déclaration de revenus. Les paiements de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l'Allocation ou de l'Allocation au survivant ne sont pas inclus dans votre revenu. Si vous n'avez pas de renseignements sur votre revenu dans votre déclaration de revenus, vous pouvez utiliser une estimation de votre revenu. Si vous avez plus d'une source de revenu (par exemple, salaire, revenu de placement, revenu de pension), vous devez additionner toutes les estimations de revenu net avant d'inscrire le montant total. N'incluez pas les revenus de votre conjoint ou d'une personne à charge.</p>",
   },
   livingCountry: {
-    heading: 'Current Residency',
+    heading: 'Lieu de résidence actuel',
     text: 'The name of the country or territory you live in, if you have been lawfully admitted to that country or territory.',
   },
   legalStatus: {
-    heading: 'Legal Status',
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen who was themselves either born in Canada or granted citizenship) or you have applied for a grant of citizenship and have received Canadian citizenship.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (non-sponsored immigrant):</span> You have been given permanent resident status by immigrating to Canada, but is not a Canadian citizen.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (sponsored immigrant):</span> You are a foreign national who has applied for permanent residence under the Family Class, has an approved Canadian sponsor, and meets the requirements of the Family Class.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Indian status or status card:</span> You are registered as an Indian under the Indian Act.</p>",
+    heading: 'Statut légal',
+    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Citoyen canadien:</span> Vous êtes Canadien de naissance (née au Canada ou née à l’extérieur du Canada d’un parent citoyen canadien qui est lui-même né au Canada ou qui a obtenu la citoyenneté) ou vous avez  demandé et obtenu la citoyenneté canadienne.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (non parrainé):</span> Vous avez obtenu le statut de résident permanent en immigrant au Canada, mais qui n’êtes pas encore citoyen canadien.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (parrainé):</span>Vous êtes un étranger qui a présenté une demande de résidence permanente au titre de la catégorie du regroupement familial, qui est parrainé par un répondant canadien approuvé et qui satisfait aux exigences de la catégorie du regroupement familial.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Statut d'Indien ou carte de statut:</span>  Vous êtes inscrits en tant qu'Indien selon la définition qu'en donne la Loi sur les Indiens.</p>",
   },
   legalStatusOther: {
     heading: 'Other Legal Status',
     text: '<p>Example: Temporary resident, student, temporary worker, etc</p>',
   },
   canadaWholeLife: {
-    heading: 'Residency in Canada',
-    text: 'Note that periods where you resided in a foreign country for less than 6 months do not count',
+    heading: 'Lieu de résidence au Canadaa',
+    text: 'Notez que les périodes où vous avez résidé dans un pays étranger pendant moins de 6 mois ne comptent pas.',
   },
   yearsInCanadaSince18: {
-    heading: 'Years Lived in Canada',
-    text: 'This includes periods when you normally lived in Canada. If you have not lived in Canada all of your life, any absences from Canada longer than 6 months are not included. ',
+    heading: 'Années vécues au Canada',
+    text: "Ceci inclut les périodes pendant lesquelles vous avez vécu au Canada. Si vous n'avez pas habité au Canada toute votre vie, toute absence du Canada de plus de 6 mois n'est pas incluse. ",
   },
   everLivedSocialCountry: {
-    heading: 'Social Agreement Countries',
-    text: 'You may still qualify if you have you lived in one of the countries Canada has established a social security agreement.',
+    heading: 'Pays ayant un accord de sécurité sociale',
+    text: 'Vous pourriez être admissible si vous avez vécu dans l’un des pays ayant un accord de sécurité sociale avec le Canada.',
   },
   partnerAge: {
     useDataFromKey: 'age',

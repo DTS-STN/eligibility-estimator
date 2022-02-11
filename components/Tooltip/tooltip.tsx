@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useRef, useState } from 'react'
 import { getTooltipTranslations, TooltipTranslation } from '../../i18n/tooltips'
 import { Language } from '../../utils/api/definitions/enums'
@@ -8,7 +9,11 @@ export const Tooltip: React.FC<{
   field: string
   size?: number
 }> = ({ field, size }) => {
-  const tooltipData = getTooltipTranslationByField(Language.EN, field) // todo: do not simply default to english
+  const router = useRouter()
+  const tooltipData = getTooltipTranslationByField(
+    router.locale == 'en' ? Language.EN : Language.FR,
+    field
+  )
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
 
