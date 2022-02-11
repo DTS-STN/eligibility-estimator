@@ -119,7 +119,9 @@ export class OasBenefit extends BaseBenefit {
         : EntitlementResultType.FULL
     const detailOverride =
       type === EntitlementResultType.PARTIAL
-        ? this.translations.detail.eligiblePartialOas
+        ? this.input.age >= 65 && this.input.age < 70
+          ? this.translations.detail.eligiblePartialOas65to69
+          : this.translations.detail.eligiblePartialOas
         : undefined
 
     return { result, type, detailOverride }

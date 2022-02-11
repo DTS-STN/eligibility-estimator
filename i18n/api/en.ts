@@ -305,6 +305,8 @@ const en: Translations = {
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
       'You are likely eligible to a partial Old Age Security pension.',
+    eligiblePartialOas65to69:
+      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.',
     eligibleWhen65ApplyNowOas:
