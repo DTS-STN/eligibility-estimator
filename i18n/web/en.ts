@@ -28,13 +28,13 @@ const en: WebTranslations = {
     'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If eligible to receive the benefit, it will also estimate your monthly payment.',
   homePageP2: 'The estimator covers four benefits programs:',
   homePageP3:
-    'Old Age Security pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    'Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients who have a low income and are living in Canada.',
+    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients who have a low income and are living in Canada.',
   homePageP5:
-    'Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    'Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    '<strong className="font-bold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   emptyResultsMessage:
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
   disclaimerTitle: 'Disclaimer',

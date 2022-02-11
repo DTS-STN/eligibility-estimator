@@ -12,12 +12,30 @@ const Home: NextPage = (props) => {
   return (
     <Layout>
       <div className="mt-18 text-content">
-        <p className="mb-4 text-content">{tsln.homePageP1}</p>
-        <p className="mb-4 text-content">{tsln.homePageP2}</p>
-        <p className="mb-4 text-content">{tsln.homePageP3}</p>
-        <p className="mb-4 text-content">{tsln.homePageP4}</p>
-        <p className="mb-4 text-content">{tsln.homePageP5}</p>
-        <p className="mb-4 text-content">{tsln.homePageP6}</p>
+        <p
+          className="mb-4 text-content"
+          dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
+        />
+        <p
+          className="mb-4 text-content"
+          dangerouslySetInnerHTML={{ __html: tsln.homePageP2 }}
+        />
+        <p
+          className="mb-4 text-content"
+          dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
+        />
+        <p
+          className="mb-4 text-content"
+          dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
+        />
+        <p
+          className="mb-4 text-content"
+          dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
+        />
+        <p
+          className="mb-4 text-content"
+          dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
+        />
       </div>
 
       <Alert
