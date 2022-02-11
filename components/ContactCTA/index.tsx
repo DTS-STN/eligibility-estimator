@@ -10,7 +10,7 @@ export const ContactCTA: React.VFC = () => {
       <p
         className="!mt-6 !md:mt-8 summary-link"
         dangerouslySetInnerHTML={{ __html: tsln.contactCTA }}
-      ></p>
+      />
       {root.summary?.nextStepsLink?.url && (
         <>
           <h2 className="h2 mt-8">{tsln.nextSteps}</h2>
