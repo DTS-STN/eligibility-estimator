@@ -1161,7 +1161,9 @@ describe('basic OAS scenarios', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
   })
   it('returns "ineligible" when age 55 and legal=sponsored and 20 years in Canada', async () => {
     const res = await mockGetRequest({
@@ -1898,7 +1900,9 @@ describe('basic Allowance scenarios', () => {
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
   })
   it('returns "conditionally eligible" when not citizen', async () => {
     const res = await mockGetRequest({
@@ -2371,7 +2375,9 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
   })
   it('returns "conditionally eligible" when not citizen (other)', async () => {
     const res = await mockGetRequest({
@@ -2761,7 +2767,9 @@ describe('thorough personas', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -2790,7 +2798,9 @@ describe('thorough personas', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -3228,7 +3238,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -3273,7 +3285,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -3315,7 +3329,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )

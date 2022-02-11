@@ -7,7 +7,11 @@ import { AfsBenefit } from '../benefits/afsBenefit'
 import { AlwBenefit } from '../benefits/alwBenefit'
 import { GisBenefit } from '../benefits/gisBenefit'
 import { OasBenefit } from '../benefits/oasBenefit'
-import { PartnerBenefitStatus, ResultKey } from '../definitions/enums'
+import {
+  PartnerBenefitStatus,
+  ResultKey,
+  ResultReason,
+} from '../definitions/enums'
 import {
   FieldData,
   fieldDefinitions,
@@ -361,7 +365,8 @@ export class RequestHandler {
 
       // if client is ineligible, the table will be populated with a link to view more reasons
       const ineligibilityText =
-        result.eligibility.result === ResultKey.INELIGIBLE
+        result.eligibility.result === ResultKey.INELIGIBLE &&
+        result.eligibility.reason !== ResultReason.AGE_YOUNG // do not add additional reasons when they will be eligible in the future
           ? ` ${this.translations.detail.additionalReasons}`
           : ''
 
