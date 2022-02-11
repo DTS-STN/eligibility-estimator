@@ -58,6 +58,7 @@ export interface Translations {
     eligibleOas65to69: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
+    eligiblePartialOas65to69: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNowOas: string
     eligibleWhen60: string
