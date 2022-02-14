@@ -56,7 +56,6 @@ const fr: WebTranslations = {
   socialLink3: 'À propos de Canada.ca',
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
-  privacyDisclaimer: 'NEED TRANSLATION (FR)',
 
   category: {
     incomeDetails: 'Revenu',
@@ -74,7 +73,9 @@ const fr: WebTranslations = {
   },
   nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
-
+  privacyDiscTitle: 'FRENCH: Privacy Notice',
+  privacyDisc:
+    "Les renseignements personnels fournis sont régis conformément à la Loi sur la protection des renseignements personnels. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
   errors: {
     empty: 'Ce renseignement est requis',
   },

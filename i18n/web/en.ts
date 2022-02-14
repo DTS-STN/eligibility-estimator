@@ -56,8 +56,6 @@ const en: WebTranslations = {
   socialLink3: 'About Canada.ca',
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
-  privacyDisclaimer:
-    'The personal information provided is governed in accordance with the Privacy Act. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes. ',
 
   category: {
     incomeDetails: 'Income Details',
@@ -75,7 +73,9 @@ const en: WebTranslations = {
   },
   nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
-
+  privacyDiscTitle: 'Privacy Disclaimer',
+  privacyDisc:
+    'The personal information provided is governed in accordance with the Privacy Act. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
     empty: 'This information is required',
   },
