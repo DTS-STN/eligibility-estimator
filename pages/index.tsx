@@ -11,29 +11,29 @@ const Home: NextPage = (props) => {
   const tsln = useTranslation<WebTranslations>()
   return (
     <Layout>
-      <div className="mt-18 text-content">
+      <div className="mt-18 text-black">
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP2 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
         />
       </div>
