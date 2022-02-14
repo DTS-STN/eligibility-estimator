@@ -1,3 +1,4 @@
+import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
@@ -123,7 +124,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -137,7 +138,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -151,7 +152,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required

@@ -18,6 +18,7 @@ module.exports = {
       h3: ['24px', '26px'],
       h2: ['32px', '36px'],
       h1: ['34px', '48px'], // requires red <hr /> below
+      small: ['14px', '16px'],
     },
     colors: {
       'white': '#FFF',

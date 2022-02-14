@@ -26,6 +26,7 @@ export const Layout: React.VFC<{
         <link
           href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Noto+Sans&family=Patua+One&display=swap"
           rel="stylesheet"
+          crossOrigin="anonymous"
         ></link>
       </Head>
       <SCLabsTestHeader />
