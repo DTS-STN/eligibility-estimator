@@ -73,7 +73,7 @@ const fr: WebTranslations = {
     tableTotalAmount: 'Montant total des prestations mensuelles',
   },
   nextSteps: 'La prochaine étape',
-  moreInfoHeader: 'FRENCH: More Information',
+  moreInfoHeader: "Besoin de plus d'information",
 
   errors: {
     empty: 'Ce renseignement est requis',
