@@ -308,9 +308,9 @@ const en: Translations = {
     eligiblePartialOas65to69:
       'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60ApplyNow:
-      'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.',
+      'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNowOas:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBe60to64:
