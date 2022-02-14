@@ -7,7 +7,7 @@ import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
-import { FieldType } from '../../utils/api/definitions/fields'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
 import { useStore, useTranslation } from '../Hooks'
@@ -165,6 +165,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         field={field}
                         error={field.error}
+                        placeholder={getPlaceholderForSelect(field, tsln)}
                         value={null}
                       />
                     </div>
@@ -251,3 +252,21 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     )
   }
 )
+
+const getPlaceholderForSelect = (
+  field: Instance<typeof FormField>,
+  tsln: WebTranslations
+) => {
+  switch (field.key) {
+    case FieldKey.MARITAL_STATUS:
+      return tsln.selectMaritalStatus
+    case FieldKey.LEGAL_STATUS:
+      return tsln.selectLegalStatus
+    case FieldKey.LIVING_COUNTRY:
+      return tsln.selectCountry
+    case FieldKey.PARTNER_LIVING_COUNTRY:
+      return tsln.selectCountry
+    default:
+      throw new Error('No translation for fieldKey')
+  }
+}

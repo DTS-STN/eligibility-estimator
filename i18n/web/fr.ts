@@ -82,6 +82,10 @@ const fr: WebTranslations = {
   govt: 'Gouvernement du Canada',
   yes: 'Oui',
   no: 'Non',
+  selectMaritalStatus: 'Sélectionner un état civil',
+  selectCountry: 'Sélectionner un pays',
+  selectFrom: 'Sélectionnez parmi',
+  selectLegalStatus: 'Sélectionner un statut légal',
 }
 
 export default fr
