@@ -36,12 +36,10 @@ export const FormSelect: React.VFC<SelectProps> = observer(
           htmlFor={name}
           aria-label={name}
           data-testid="select-label"
-          className="font-semibold inline-block mb-1.5"
+          className="inline-block mb-1.5"
         >
           <span className="text-danger">* </span>
-          <span className="mb-1.5 font-semibold text-content">
-            {field.label}
-          </span>
+          <span className="mb-1.5 text-content">{field.label}</span>
           <span className="text-danger font-bold ml-2">(required)</span>
           <Tooltip field={field.key} />
         </label>

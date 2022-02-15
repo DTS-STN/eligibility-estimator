@@ -26,11 +26,11 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           htmlFor={name}
           aria-label={name}
           data-testid="radio-label"
-          className="font-semibold inline-block mb-1.5 flex-nowrap"
+          className="inline-block mb-2 flex-nowrap"
         >
           <span className="text-danger">* </span>
           <span
-            className="mb-1.5 font-semibold text-content question-link"
+            className="mb-1.5 text-content question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
           <span className="text-danger font-bold ml-2">(required)</span>
