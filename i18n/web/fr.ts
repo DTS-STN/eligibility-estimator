@@ -65,7 +65,7 @@ const fr: WebTranslations = {
   },
 
   contactCTA:
-    'Pour une évaluation plus précise de votre demande, nous vous invitons à communiquer avec <a className="text-default-text underline" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a>. Consultez la foire aux questions (FAQ) pour obtenir la liste les documents que vous devrez peut-être fournir.',
+    'Pour une évaluation plus précise de votre demande, nous vous invitons à communiquer avec <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a>. Consultez la foire aux questions (<a className="underline text-default-text" href="#tabList">FAQ</a>) pour obtenir la liste les documents que vous devrez peut-être fournir.',
   resultsPage: {
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
