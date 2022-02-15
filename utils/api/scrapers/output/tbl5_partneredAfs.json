@@ -2,7196 +2,8224 @@
   {
     "range": {
       "low": 0,
-      "high": 47.99
+      "high": 47.99,
+      "interval": 48
     },
     "afs": 1453.93
   },
   {
     "range": {
       "low": 48,
-      "high": 95.99
+      "high": 95.99,
+      "interval": 48
     },
     "afs": 1450.93
   },
   {
     "range": {
       "low": 96,
-      "high": 143.99
+      "high": 143.99,
+      "interval": 48
     },
     "afs": 1447.93
   },
   {
     "range": {
       "low": 144,
-      "high": 191.99
+      "high": 191.99,
+      "interval": 48
     },
     "afs": 1444.93
   },
   {
     "range": {
       "low": 192,
-      "high": 239.99
+      "high": 239.99,
+      "interval": 48
     },
     "afs": 1441.93
   },
   {
     "range": {
       "low": 240,
-      "high": 287.99
+      "high": 287.99,
+      "interval": 48
     },
     "afs": 1438.93
   },
   {
     "range": {
       "low": 288,
-      "high": 335.99
+      "high": 335.99,
+      "interval": 48
     },
     "afs": 1435.93
   },
   {
     "range": {
       "low": 336,
-      "high": 383.99
+      "high": 383.99,
+      "interval": 48
     },
     "afs": 1432.93
   },
   {
     "range": {
       "low": 384,
-      "high": 431.99
+      "high": 431.99,
+      "interval": 48
     },
     "afs": 1429.93
   },
   {
     "range": {
       "low": 432,
-      "high": 479.99
+      "high": 479.99,
+      "interval": 48
     },
     "afs": 1426.93
   },
   {
     "range": {
       "low": 480,
-      "high": 527.99
+      "high": 527.99,
+      "interval": 48
     },
     "afs": 1423.93
   },
   {
     "range": {
       "low": 528,
-      "high": 575.99
+      "high": 575.99,
+      "interval": 48
     },
     "afs": 1420.93
   },
   {
     "range": {
       "low": 576,
-      "high": 623.99
+      "high": 623.99,
+      "interval": 48
     },
     "afs": 1417.93
   },
   {
     "range": {
       "low": 624,
-      "high": 671.99
+      "high": 671.99,
+      "interval": 48
     },
     "afs": 1414.93
   },
   {
     "range": {
       "low": 672,
-      "high": 719.99
+      "high": 719.99,
+      "interval": 48
     },
     "afs": 1411.93
   },
   {
     "range": {
       "low": 720,
-      "high": 767.99
+      "high": 767.99,
+      "interval": 48
     },
     "afs": 1408.93
   },
   {
     "range": {
       "low": 768,
-      "high": 815.99
+      "high": 815.99,
+      "interval": 48
     },
     "afs": 1405.93
   },
   {
     "range": {
       "low": 816,
-      "high": 863.99
+      "high": 863.99,
+      "interval": 48
     },
     "afs": 1402.93
   },
   {
     "range": {
       "low": 864,
-      "high": 911.99
+      "high": 911.99,
+      "interval": 48
     },
     "afs": 1399.93
   },
   {
     "range": {
       "low": 912,
-      "high": 959.99
+      "high": 959.99,
+      "interval": 48
     },
     "afs": 1396.93
   },
   {
     "range": {
       "low": 960,
-      "high": 1007.99
+      "high": 1007.99,
+      "interval": 48
     },
     "afs": 1393.93
   },
   {
     "range": {
       "low": 1008,
-      "high": 1055.99
+      "high": 1055.99,
+      "interval": 48
     },
     "afs": 1390.93
   },
   {
     "range": {
       "low": 1056,
-      "high": 1103.99
+      "high": 1103.99,
+      "interval": 48
     },
     "afs": 1387.93
   },
   {
     "range": {
       "low": 1104,
-      "high": 1151.99
+      "high": 1151.99,
+      "interval": 48
     },
     "afs": 1384.93
   },
   {
     "range": {
       "low": 1152,
-      "high": 1199.99
+      "high": 1199.99,
+      "interval": 48
     },
     "afs": 1381.93
   },
   {
     "range": {
       "low": 1200,
-      "high": 1247.99
+      "high": 1247.99,
+      "interval": 48
     },
     "afs": 1378.93
   },
   {
     "range": {
       "low": 1248,
-      "high": 1295.99
+      "high": 1295.99,
+      "interval": 48
     },
     "afs": 1375.93
   },
   {
     "range": {
       "low": 1296,
-      "high": 1343.99
+      "high": 1343.99,
+      "interval": 48
     },
     "afs": 1372.93
   },
   {
     "range": {
       "low": 1344,
-      "high": 1391.99
+      "high": 1391.99,
+      "interval": 48
     },
     "afs": 1369.93
   },
   {
     "range": {
       "low": 1392,
-      "high": 1439.99
+      "high": 1439.99,
+      "interval": 48
     },
     "afs": 1366.93
   },
   {
     "range": {
       "low": 1440,
-      "high": 1487.99
+      "high": 1487.99,
+      "interval": 48
     },
     "afs": 1363.93
   },
   {
     "range": {
       "low": 1488,
-      "high": 1535.99
+      "high": 1535.99,
+      "interval": 48
     },
     "afs": 1360.93
   },
   {
     "range": {
       "low": 1536,
-      "high": 1583.99
+      "high": 1583.99,
+      "interval": 48
     },
     "afs": 1357.93
   },
   {
     "range": {
       "low": 1584,
-      "high": 1631.99
+      "high": 1631.99,
+      "interval": 48
     },
     "afs": 1354.93
   },
   {
     "range": {
       "low": 1632,
-      "high": 1679.99
+      "high": 1679.99,
+      "interval": 48
     },
     "afs": 1351.93
   },
   {
     "range": {
       "low": 1680,
-      "high": 1727.99
+      "high": 1727.99,
+      "interval": 48
     },
     "afs": 1348.93
   },
   {
     "range": {
       "low": 1728,
-      "high": 1775.99
+      "high": 1775.99,
+      "interval": 48
     },
     "afs": 1345.93
   },
   {
     "range": {
       "low": 1776,
-      "high": 1823.99
+      "high": 1823.99,
+      "interval": 48
     },
     "afs": 1342.93
   },
   {
     "range": {
       "low": 1824,
-      "high": 1871.99
+      "high": 1871.99,
+      "interval": 48
     },
     "afs": 1339.93
   },
   {
     "range": {
       "low": 1872,
-      "high": 1919.99
+      "high": 1919.99,
+      "interval": 48
     },
     "afs": 1336.93
   },
   {
     "range": {
       "low": 1920,
-      "high": 1967.99
+      "high": 1967.99,
+      "interval": 48
     },
     "afs": 1333.93
   },
   {
     "range": {
       "low": 1968,
-      "high": 2015.99
+      "high": 2015.99,
+      "interval": 48
     },
     "afs": 1330.93
   },
   {
     "range": {
       "low": 2016,
-      "high": 2047.99
+      "high": 2047.99,
+      "interval": 32
     },
     "afs": 1327.93
   },
   {
     "range": {
       "low": 2048,
-      "high": 2063.99
+      "high": 2063.99,
+      "interval": 16
     },
     "afs": 1326.93
   },
   {
     "range": {
       "low": 2064,
-      "high": 2095.99
+      "high": 2095.99,
+      "interval": 32
     },
     "afs": 1323.93
   },
   {
     "range": {
       "low": 2096,
-      "high": 2111.99
+      "high": 2111.99,
+      "interval": 16
     },
     "afs": 1322.93
   },
   {
     "range": {
       "low": 2112,
-      "high": 2143.99
+      "high": 2143.99,
+      "interval": 32
     },
     "afs": 1319.93
   },
   {
     "range": {
       "low": 2144,
-      "high": 2159.99
+      "high": 2159.99,
+      "interval": 16
     },
     "afs": 1318.93
   },
   {
     "range": {
       "low": 2160,
-      "high": 2191.99
+      "high": 2191.99,
+      "interval": 32
     },
     "afs": 1315.93
   },
   {
     "range": {
       "low": 2192,
-      "high": 2207.99
+      "high": 2207.99,
+      "interval": 16
     },
     "afs": 1314.93
   },
   {
     "range": {
       "low": 2208,
-      "high": 2239.99
+      "high": 2239.99,
+      "interval": 32
     },
     "afs": 1311.93
   },
   {
     "range": {
       "low": 2240,
-      "high": 2255.99
+      "high": 2255.99,
+      "interval": 16
     },
     "afs": 1310.93
   },
   {
     "range": {
       "low": 2256,
-      "high": 2287.99
+      "high": 2287.99,
+      "interval": 32
     },
     "afs": 1307.93
   },
   {
     "range": {
       "low": 2288,
-      "high": 2303.99
+      "high": 2303.99,
+      "interval": 16
     },
     "afs": 1306.93
   },
   {
     "range": {
       "low": 2304,
-      "high": 2335.99
+      "high": 2335.99,
+      "interval": 32
     },
     "afs": 1303.93
   },
   {
     "range": {
       "low": 2336,
-      "high": 2351.99
+      "high": 2351.99,
+      "interval": 16
     },
     "afs": 1302.93
   },
   {
     "range": {
       "low": 2352,
-      "high": 2383.99
+      "high": 2383.99,
+      "interval": 32
     },
     "afs": 1299.93
   },
   {
     "range": {
       "low": 2384,
-      "high": 2399.99
+      "high": 2399.99,
+      "interval": 16
     },
     "afs": 1298.93
   },
   {
     "range": {
       "low": 2400,
-      "high": 2431.99
+      "high": 2431.99,
+      "interval": 32
     },
     "afs": 1295.93
   },
   {
     "range": {
       "low": 2432,
-      "high": 2447.99
+      "high": 2447.99,
+      "interval": 16
     },
     "afs": 1294.93
   },
   {
     "range": {
       "low": 2448,
-      "high": 2479.99
+      "high": 2479.99,
+      "interval": 32
     },
     "afs": 1291.93
   },
   {
     "range": {
       "low": 2480,
-      "high": 2495.99
+      "high": 2495.99,
+      "interval": 16
     },
     "afs": 1290.93
   },
   {
     "range": {
       "low": 2496,
-      "high": 2527.99
+      "high": 2527.99,
+      "interval": 32
     },
     "afs": 1287.93
   },
   {
     "range": {
       "low": 2528,
-      "high": 2543.99
+      "high": 2543.99,
+      "interval": 16
     },
     "afs": 1286.93
   },
   {
     "range": {
       "low": 2544,
-      "high": 2575.99
+      "high": 2575.99,
+      "interval": 32
     },
     "afs": 1283.93
   },
   {
     "range": {
       "low": 2576,
-      "high": 2591.99
+      "high": 2591.99,
+      "interval": 16
     },
     "afs": 1282.93
   },
   {
     "range": {
       "low": 2592,
-      "high": 2623.99
+      "high": 2623.99,
+      "interval": 32
     },
     "afs": 1279.93
   },
   {
     "range": {
       "low": 2624,
-      "high": 2639.99
+      "high": 2639.99,
+      "interval": 16
     },
     "afs": 1278.93
   },
   {
     "range": {
       "low": 2640,
-      "high": 2671.99
+      "high": 2671.99,
+      "interval": 32
     },
     "afs": 1275.93
   },
   {
     "range": {
       "low": 2672,
-      "high": 2687.99
+      "high": 2687.99,
+      "interval": 16
     },
     "afs": 1274.93
   },
   {
     "range": {
       "low": 2688,
-      "high": 2719.99
+      "high": 2719.99,
+      "interval": 32
     },
     "afs": 1271.93
   },
   {
     "range": {
       "low": 2720,
-      "high": 2735.99
+      "high": 2735.99,
+      "interval": 16
     },
     "afs": 1270.93
   },
   {
     "range": {
       "low": 2736,
-      "high": 2767.99
+      "high": 2767.99,
+      "interval": 32
     },
     "afs": 1267.93
   },
   {
     "range": {
       "low": 2768,
-      "high": 2783.99
+      "high": 2783.99,
+      "interval": 16
     },
     "afs": 1266.93
   },
   {
     "range": {
       "low": 2784,
-      "high": 2815.99
+      "high": 2815.99,
+      "interval": 32
     },
     "afs": 1263.93
   },
   {
     "range": {
       "low": 2816,
-      "high": 2831.99
+      "high": 2831.99,
+      "interval": 16
     },
     "afs": 1262.93
   },
   {
     "range": {
       "low": 2832,
-      "high": 2863.99
+      "high": 2863.99,
+      "interval": 32
     },
     "afs": 1259.93
   },
   {
     "range": {
       "low": 2864,
-      "high": 2879.99
+      "high": 2879.99,
+      "interval": 16
     },
     "afs": 1258.93
   },
   {
     "range": {
       "low": 2880,
-      "high": 2911.99
+      "high": 2911.99,
+      "interval": 32
     },
     "afs": 1255.93
   },
   {
     "range": {
       "low": 2912,
-      "high": 2927.99
+      "high": 2927.99,
+      "interval": 16
     },
     "afs": 1254.93
   },
   {
     "range": {
       "low": 2928,
-      "high": 2959.99
+      "high": 2959.99,
+      "interval": 32
     },
     "afs": 1251.93
   },
   {
     "range": {
       "low": 2960,
-      "high": 2975.99
+      "high": 2975.99,
+      "interval": 16
     },
     "afs": 1250.93
   },
   {
     "range": {
       "low": 2976,
-      "high": 3007.99
+      "high": 3007.99,
+      "interval": 32
     },
     "afs": 1247.93
   },
   {
     "range": {
       "low": 3008,
-      "high": 3023.99
+      "high": 3023.99,
+      "interval": 16
     },
     "afs": 1246.93
   },
   {
     "range": {
       "low": 3024,
-      "high": 3055.99
+      "high": 3055.99,
+      "interval": 32
     },
     "afs": 1243.93
   },
   {
     "range": {
       "low": 3056,
-      "high": 3071.99
+      "high": 3071.99,
+      "interval": 16
     },
     "afs": 1242.93
   },
   {
     "range": {
       "low": 3072,
-      "high": 3103.99
+      "high": 3103.99,
+      "interval": 32
     },
     "afs": 1239.93
   },
   {
     "range": {
       "low": 3104,
-      "high": 3119.99
+      "high": 3119.99,
+      "interval": 16
     },
     "afs": 1238.93
   },
   {
     "range": {
       "low": 3120,
-      "high": 3151.99
+      "high": 3151.99,
+      "interval": 32
     },
     "afs": 1235.93
   },
   {
     "range": {
       "low": 3152,
-      "high": 3167.99
+      "high": 3167.99,
+      "interval": 16
     },
     "afs": 1234.93
   },
   {
     "range": {
       "low": 3168,
-      "high": 3199.99
+      "high": 3199.99,
+      "interval": 32
     },
     "afs": 1231.93
   },
   {
     "range": {
       "low": 3200,
-      "high": 3215.99
+      "high": 3215.99,
+      "interval": 16
     },
     "afs": 1230.93
   },
   {
     "range": {
       "low": 3216,
-      "high": 3247.99
+      "high": 3247.99,
+      "interval": 32
     },
     "afs": 1227.93
   },
   {
     "range": {
       "low": 3248,
-      "high": 3263.99
+      "high": 3263.99,
+      "interval": 16
     },
     "afs": 1226.93
   },
   {
     "range": {
       "low": 3264,
-      "high": 3295.99
+      "high": 3295.99,
+      "interval": 32
     },
     "afs": 1223.93
   },
   {
     "range": {
       "low": 3296,
-      "high": 3311.99
+      "high": 3311.99,
+      "interval": 16
     },
     "afs": 1222.93
   },
   {
     "range": {
       "low": 3312,
-      "high": 3343.99
+      "high": 3343.99,
+      "interval": 32
     },
     "afs": 1219.93
   },
   {
     "range": {
       "low": 3344,
-      "high": 3359.99
+      "high": 3359.99,
+      "interval": 16
     },
     "afs": 1218.93
   },
   {
     "range": {
       "low": 3360,
-      "high": 3391.99
+      "high": 3391.99,
+      "interval": 32
     },
     "afs": 1215.93
   },
   {
     "range": {
       "low": 3392,
-      "high": 3407.99
+      "high": 3407.99,
+      "interval": 16
     },
     "afs": 1214.93
   },
   {
     "range": {
       "low": 3408,
-      "high": 3439.99
+      "high": 3439.99,
+      "interval": 32
     },
     "afs": 1211.93
   },
   {
     "range": {
       "low": 3440,
-      "high": 3455.99
+      "high": 3455.99,
+      "interval": 16
     },
     "afs": 1210.93
   },
   {
     "range": {
       "low": 3456,
-      "high": 3487.99
+      "high": 3487.99,
+      "interval": 32
     },
     "afs": 1207.93
   },
   {
     "range": {
       "low": 3488,
-      "high": 3503.99
+      "high": 3503.99,
+      "interval": 16
     },
     "afs": 1206.93
   },
   {
     "range": {
       "low": 3504,
-      "high": 3535.99
+      "high": 3535.99,
+      "interval": 32
     },
     "afs": 1203.93
   },
   {
     "range": {
       "low": 3536,
-      "high": 3551.99
+      "high": 3551.99,
+      "interval": 16
     },
     "afs": 1202.93
   },
   {
     "range": {
       "low": 3552,
-      "high": 3583.99
+      "high": 3583.99,
+      "interval": 32
     },
     "afs": 1199.93
   },
   {
     "range": {
       "low": 3584,
-      "high": 3599.99
+      "high": 3599.99,
+      "interval": 16
     },
     "afs": 1198.93
   },
   {
     "range": {
       "low": 3600,
-      "high": 3631.99
+      "high": 3631.99,
+      "interval": 32
     },
     "afs": 1195.93
   },
   {
     "range": {
       "low": 3632,
-      "high": 3647.99
+      "high": 3647.99,
+      "interval": 16
     },
     "afs": 1194.93
   },
   {
     "range": {
       "low": 3648,
-      "high": 3679.99
+      "high": 3679.99,
+      "interval": 32
     },
     "afs": 1191.93
   },
   {
     "range": {
       "low": 3680,
-      "high": 3695.99
+      "high": 3695.99,
+      "interval": 16
     },
     "afs": 1190.93
   },
   {
     "range": {
       "low": 3696,
-      "high": 3727.99
+      "high": 3727.99,
+      "interval": 32
     },
     "afs": 1187.93
   },
   {
     "range": {
       "low": 3728,
-      "high": 3743.99
+      "high": 3743.99,
+      "interval": 16
     },
     "afs": 1186.93
   },
   {
     "range": {
       "low": 3744,
-      "high": 3775.99
+      "high": 3775.99,
+      "interval": 32
     },
     "afs": 1183.93
   },
   {
     "range": {
       "low": 3776,
-      "high": 3791.99
+      "high": 3791.99,
+      "interval": 16
     },
     "afs": 1182.93
   },
   {
     "range": {
       "low": 3792,
-      "high": 3823.99
+      "high": 3823.99,
+      "interval": 32
     },
     "afs": 1179.93
   },
   {
     "range": {
       "low": 3824,
-      "high": 3839.99
+      "high": 3839.99,
+      "interval": 16
     },
     "afs": 1178.93
   },
   {
     "range": {
       "low": 3840,
-      "high": 3871.99
+      "high": 3871.99,
+      "interval": 32
     },
     "afs": 1175.93
   },
   {
     "range": {
       "low": 3872,
-      "high": 3887.99
+      "high": 3887.99,
+      "interval": 16
     },
     "afs": 1174.93
   },
   {
     "range": {
       "low": 3888,
-      "high": 3919.99
+      "high": 3919.99,
+      "interval": 32
     },
     "afs": 1171.93
   },
   {
     "range": {
       "low": 3920,
-      "high": 3935.99
+      "high": 3935.99,
+      "interval": 16
     },
     "afs": 1170.93
   },
   {
     "range": {
       "low": 3936,
-      "high": 3967.99
+      "high": 3967.99,
+      "interval": 32
     },
     "afs": 1167.93
   },
   {
     "range": {
       "low": 3968,
-      "high": 3983.99
+      "high": 3983.99,
+      "interval": 16
     },
     "afs": 1166.93
   },
   {
     "range": {
       "low": 3984,
-      "high": 4015.99
+      "high": 4015.99,
+      "interval": 32
     },
     "afs": 1163.93
   },
   {
     "range": {
       "low": 4016,
-      "high": 4031.99
+      "high": 4031.99,
+      "interval": 16
     },
     "afs": 1162.93
   },
   {
     "range": {
       "low": 4032,
-      "high": 4063.99
+      "high": 4063.99,
+      "interval": 32
     },
     "afs": 1159.93
   },
   {
     "range": {
       "low": 4064,
-      "high": 4079.99
+      "high": 4079.99,
+      "interval": 16
     },
     "afs": 1158.93
   },
   {
     "range": {
       "low": 4080,
-      "high": 4111.99
+      "high": 4111.99,
+      "interval": 32
     },
     "afs": 1155.93
   },
   {
     "range": {
       "low": 4112,
-      "high": 4127.99
+      "high": 4127.99,
+      "interval": 16
     },
     "afs": 1154.93
   },
   {
     "range": {
       "low": 4128,
-      "high": 4159.99
+      "high": 4159.99,
+      "interval": 32
     },
     "afs": 1151.93
   },
   {
     "range": {
       "low": 4160,
-      "high": 4175.99
+      "high": 4175.99,
+      "interval": 16
     },
     "afs": 1150.93
   },
   {
     "range": {
       "low": 4176,
-      "high": 4207.99
+      "high": 4207.99,
+      "interval": 32
     },
     "afs": 1147.93
   },
   {
     "range": {
       "low": 4208,
-      "high": 4223.99
+      "high": 4223.99,
+      "interval": 16
     },
     "afs": 1146.93
   },
   {
     "range": {
       "low": 4224,
-      "high": 4255.99
+      "high": 4255.99,
+      "interval": 32
     },
     "afs": 1143.93
   },
   {
     "range": {
       "low": 4256,
-      "high": 4271.99
+      "high": 4271.99,
+      "interval": 16
     },
     "afs": 1142.93
   },
   {
     "range": {
       "low": 4272,
-      "high": 4303.99
+      "high": 4303.99,
+      "interval": 32
     },
     "afs": 1139.93
   },
   {
     "range": {
       "low": 4304,
-      "high": 4319.99
+      "high": 4319.99,
+      "interval": 16
     },
     "afs": 1138.93
   },
   {
     "range": {
       "low": 4320,
-      "high": 4351.99
+      "high": 4351.99,
+      "interval": 32
     },
     "afs": 1135.93
   },
   {
     "range": {
       "low": 4352,
-      "high": 4367.99
+      "high": 4367.99,
+      "interval": 16
     },
     "afs": 1134.93
   },
   {
     "range": {
       "low": 4368,
-      "high": 4399.99
+      "high": 4399.99,
+      "interval": 32
     },
     "afs": 1131.93
   },
   {
     "range": {
       "low": 4400,
-      "high": 4415.99
+      "high": 4415.99,
+      "interval": 16
     },
     "afs": 1130.93
   },
   {
     "range": {
       "low": 4416,
-      "high": 4447.99
+      "high": 4447.99,
+      "interval": 32
     },
     "afs": 1127.93
   },
   {
     "range": {
       "low": 4448,
-      "high": 4463.99
+      "high": 4463.99,
+      "interval": 16
     },
     "afs": 1126.93
   },
   {
     "range": {
       "low": 4464,
-      "high": 4495.99
+      "high": 4495.99,
+      "interval": 32
     },
     "afs": 1123.93
   },
   {
     "range": {
       "low": 4496,
-      "high": 4511.99
+      "high": 4511.99,
+      "interval": 16
     },
     "afs": 1122.93
   },
   {
     "range": {
       "low": 4512,
-      "high": 4543.99
+      "high": 4543.99,
+      "interval": 32
     },
     "afs": 1119.93
   },
   {
     "range": {
       "low": 4544,
-      "high": 4559.99
+      "high": 4559.99,
+      "interval": 16
     },
     "afs": 1118.93
   },
   {
     "range": {
       "low": 4560,
-      "high": 4591.99
+      "high": 4591.99,
+      "interval": 32
     },
     "afs": 1115.93
   },
   {
     "range": {
       "low": 4592,
-      "high": 4607.99
+      "high": 4607.99,
+      "interval": 16
     },
     "afs": 1114.93
   },
   {
     "range": {
       "low": 4608,
-      "high": 4639.99
+      "high": 4639.99,
+      "interval": 32
     },
     "afs": 1111.93
   },
   {
     "range": {
       "low": 4640,
-      "high": 4655.99
+      "high": 4655.99,
+      "interval": 16
     },
     "afs": 1110.93
   },
   {
     "range": {
       "low": 4656,
-      "high": 4687.99
+      "high": 4687.99,
+      "interval": 32
     },
     "afs": 1107.93
   },
   {
     "range": {
       "low": 4688,
-      "high": 4703.99
+      "high": 4703.99,
+      "interval": 16
     },
     "afs": 1106.93
   },
   {
     "range": {
       "low": 4704,
-      "high": 4735.99
+      "high": 4735.99,
+      "interval": 32
     },
     "afs": 1103.93
   },
   {
     "range": {
       "low": 4736,
-      "high": 4751.99
+      "high": 4751.99,
+      "interval": 16
     },
     "afs": 1102.93
   },
   {
     "range": {
       "low": 4752,
-      "high": 4783.99
+      "high": 4783.99,
+      "interval": 32
     },
     "afs": 1099.93
   },
   {
     "range": {
       "low": 4784,
-      "high": 4799.99
+      "high": 4799.99,
+      "interval": 16
     },
     "afs": 1098.93
   },
   {
     "range": {
       "low": 4800,
-      "high": 4831.99
+      "high": 4831.99,
+      "interval": 32
     },
     "afs": 1095.93
   },
   {
     "range": {
       "low": 4832,
-      "high": 4847.99
+      "high": 4847.99,
+      "interval": 16
     },
     "afs": 1094.93
   },
   {
     "range": {
       "low": 4848,
-      "high": 4879.99
+      "high": 4879.99,
+      "interval": 32
     },
     "afs": 1091.93
   },
   {
     "range": {
       "low": 4880,
-      "high": 4895.99
+      "high": 4895.99,
+      "interval": 16
     },
     "afs": 1090.93
   },
   {
     "range": {
       "low": 4896,
-      "high": 4927.99
+      "high": 4927.99,
+      "interval": 32
     },
     "afs": 1087.93
   },
   {
     "range": {
       "low": 4928,
-      "high": 4943.99
+      "high": 4943.99,
+      "interval": 16
     },
     "afs": 1086.93
   },
   {
     "range": {
       "low": 4944,
-      "high": 4975.99
+      "high": 4975.99,
+      "interval": 32
     },
     "afs": 1083.93
   },
   {
     "range": {
       "low": 4976,
-      "high": 4991.99
+      "high": 4991.99,
+      "interval": 16
     },
     "afs": 1082.93
   },
   {
     "range": {
       "low": 4992,
-      "high": 5023.99
+      "high": 5023.99,
+      "interval": 32
     },
     "afs": 1079.93
   },
   {
     "range": {
       "low": 5024,
-      "high": 5039.99
+      "high": 5039.99,
+      "interval": 16
     },
     "afs": 1078.93
   },
   {
     "range": {
       "low": 5040,
-      "high": 5071.99
+      "high": 5071.99,
+      "interval": 32
     },
     "afs": 1075.93
   },
   {
     "range": {
       "low": 5072,
-      "high": 5087.99
+      "high": 5087.99,
+      "interval": 16
     },
     "afs": 1074.93
   },
   {
     "range": {
       "low": 5088,
-      "high": 5119.99
+      "high": 5119.99,
+      "interval": 32
     },
     "afs": 1071.93
   },
   {
     "range": {
       "low": 5120,
-      "high": 5135.99
+      "high": 5135.99,
+      "interval": 16
     },
     "afs": 1070.93
   },
   {
     "range": {
       "low": 5136,
-      "high": 5167.99
+      "high": 5167.99,
+      "interval": 32
     },
     "afs": 1067.93
   },
   {
     "range": {
       "low": 5168,
-      "high": 5183.99
+      "high": 5183.99,
+      "interval": 16
     },
     "afs": 1066.93
   },
   {
     "range": {
       "low": 5184,
-      "high": 5215.99
+      "high": 5215.99,
+      "interval": 32
     },
     "afs": 1063.93
   },
   {
     "range": {
       "low": 5216,
-      "high": 5231.99
+      "high": 5231.99,
+      "interval": 16
     },
     "afs": 1062.93
   },
   {
     "range": {
       "low": 5232,
-      "high": 5263.99
+      "high": 5263.99,
+      "interval": 32
     },
     "afs": 1059.93
   },
   {
     "range": {
       "low": 5264,
-      "high": 5279.99
+      "high": 5279.99,
+      "interval": 16
     },
     "afs": 1058.93
   },
   {
     "range": {
       "low": 5280,
-      "high": 5311.99
+      "high": 5311.99,
+      "interval": 32
     },
     "afs": 1055.93
   },
   {
     "range": {
       "low": 5312,
-      "high": 5327.99
+      "high": 5327.99,
+      "interval": 16
     },
     "afs": 1054.93
   },
   {
     "range": {
       "low": 5328,
-      "high": 5359.99
+      "high": 5359.99,
+      "interval": 32
     },
     "afs": 1051.93
   },
   {
     "range": {
       "low": 5360,
-      "high": 5375.99
+      "high": 5375.99,
+      "interval": 16
     },
     "afs": 1050.93
   },
   {
     "range": {
       "low": 5376,
-      "high": 5407.99
+      "high": 5407.99,
+      "interval": 32
     },
     "afs": 1047.93
   },
   {
     "range": {
       "low": 5408,
-      "high": 5423.99
+      "high": 5423.99,
+      "interval": 16
     },
     "afs": 1046.93
   },
   {
     "range": {
       "low": 5424,
-      "high": 5455.99
+      "high": 5455.99,
+      "interval": 32
     },
     "afs": 1043.93
   },
   {
     "range": {
       "low": 5456,
-      "high": 5471.99
+      "high": 5471.99,
+      "interval": 16
     },
     "afs": 1042.93
   },
   {
     "range": {
       "low": 5472,
-      "high": 5503.99
+      "high": 5503.99,
+      "interval": 32
     },
     "afs": 1039.93
   },
   {
     "range": {
       "low": 5504,
-      "high": 5519.99
+      "high": 5519.99,
+      "interval": 16
     },
     "afs": 1038.93
   },
   {
     "range": {
       "low": 5520,
-      "high": 5551.99
+      "high": 5551.99,
+      "interval": 32
     },
     "afs": 1035.93
   },
   {
     "range": {
       "low": 5552,
-      "high": 5567.99
+      "high": 5567.99,
+      "interval": 16
     },
     "afs": 1034.93
   },
   {
     "range": {
       "low": 5568,
-      "high": 5599.99
+      "high": 5599.99,
+      "interval": 32
     },
     "afs": 1031.93
   },
   {
     "range": {
       "low": 5600,
-      "high": 5615.99
+      "high": 5615.99,
+      "interval": 16
     },
     "afs": 1030.93
   },
   {
     "range": {
       "low": 5616,
-      "high": 5647.99
+      "high": 5647.99,
+      "interval": 32
     },
     "afs": 1027.93
   },
   {
     "range": {
       "low": 5648,
-      "high": 5663.99
+      "high": 5663.99,
+      "interval": 16
     },
     "afs": 1026.93
   },
   {
     "range": {
       "low": 5664,
-      "high": 5695.99
+      "high": 5695.99,
+      "interval": 32
     },
     "afs": 1023.93
   },
   {
     "range": {
       "low": 5696,
-      "high": 5711.99
+      "high": 5711.99,
+      "interval": 16
     },
     "afs": 1022.93
   },
   {
     "range": {
       "low": 5712,
-      "high": 5743.99
+      "high": 5743.99,
+      "interval": 32
     },
     "afs": 1019.93
   },
   {
     "range": {
       "low": 5744,
-      "high": 5759.99
+      "high": 5759.99,
+      "interval": 16
     },
     "afs": 1018.93
   },
   {
     "range": {
       "low": 5760,
-      "high": 5791.99
+      "high": 5791.99,
+      "interval": 32
     },
     "afs": 1015.93
   },
   {
     "range": {
       "low": 5792,
-      "high": 5807.99
+      "high": 5807.99,
+      "interval": 16
     },
     "afs": 1014.93
   },
   {
     "range": {
       "low": 5808,
-      "high": 5839.99
+      "high": 5839.99,
+      "interval": 32
     },
     "afs": 1011.93
   },
   {
     "range": {
       "low": 5840,
-      "high": 5855.99
+      "high": 5855.99,
+      "interval": 16
     },
     "afs": 1010.93
   },
   {
     "range": {
       "low": 5856,
-      "high": 5887.99
+      "high": 5887.99,
+      "interval": 32
     },
     "afs": 1007.93
   },
   {
     "range": {
       "low": 5888,
-      "high": 5903.99
+      "high": 5903.99,
+      "interval": 16
     },
     "afs": 1006.93
   },
   {
     "range": {
       "low": 5904,
-      "high": 5935.99
+      "high": 5935.99,
+      "interval": 32
     },
     "afs": 1003.93
   },
   {
     "range": {
       "low": 5936,
-      "high": 5951.99
+      "high": 5951.99,
+      "interval": 16
     },
     "afs": 1002.93
   },
   {
     "range": {
       "low": 5952,
-      "high": 5983.99
+      "high": 5983.99,
+      "interval": 32
     },
     "afs": 999.93
   },
   {
     "range": {
       "low": 5984,
-      "high": 5999.99
+      "high": 5999.99,
+      "interval": 16
     },
     "afs": 998.93
   },
   {
     "range": {
       "low": 6000,
-      "high": 6031.99
+      "high": 6031.99,
+      "interval": 32
     },
     "afs": 995.93
   },
   {
     "range": {
       "low": 6032,
-      "high": 6047.99
+      "high": 6047.99,
+      "interval": 16
     },
     "afs": 994.93
   },
   {
     "range": {
       "low": 6048,
-      "high": 6079.99
+      "high": 6079.99,
+      "interval": 32
     },
     "afs": 991.93
   },
   {
     "range": {
       "low": 6080,
-      "high": 6095.99
+      "high": 6095.99,
+      "interval": 16
     },
     "afs": 990.93
   },
   {
     "range": {
       "low": 6096,
-      "high": 6127.99
+      "high": 6127.99,
+      "interval": 32
     },
     "afs": 987.93
   },
   {
     "range": {
       "low": 6128,
-      "high": 6143.99
+      "high": 6143.99,
+      "interval": 16
     },
     "afs": 986.93
   },
   {
     "range": {
       "low": 6144,
-      "high": 6175.99
+      "high": 6175.99,
+      "interval": 32
     },
     "afs": 983.93
   },
   {
     "range": {
       "low": 6176,
-      "high": 6191.99
+      "high": 6191.99,
+      "interval": 16
     },
     "afs": 982.93
   },
   {
     "range": {
       "low": 6192,
-      "high": 6223.99
+      "high": 6223.99,
+      "interval": 32
     },
     "afs": 979.93
   },
   {
     "range": {
       "low": 6224,
-      "high": 6239.99
+      "high": 6239.99,
+      "interval": 16
     },
     "afs": 978.93
   },
   {
     "range": {
       "low": 6240,
-      "high": 6271.99
+      "high": 6271.99,
+      "interval": 32
     },
     "afs": 975.93
   },
   {
     "range": {
       "low": 6272,
-      "high": 6287.99
+      "high": 6287.99,
+      "interval": 16
     },
     "afs": 974.93
   },
   {
     "range": {
       "low": 6288,
-      "high": 6319.99
+      "high": 6319.99,
+      "interval": 32
     },
     "afs": 971.93
   },
   {
     "range": {
       "low": 6320,
-      "high": 6335.99
+      "high": 6335.99,
+      "interval": 16
     },
     "afs": 970.93
   },
   {
     "range": {
       "low": 6336,
-      "high": 6367.99
+      "high": 6367.99,
+      "interval": 32
     },
     "afs": 967.93
   },
   {
     "range": {
       "low": 6368,
-      "high": 6383.99
+      "high": 6383.99,
+      "interval": 16
     },
     "afs": 966.93
   },
   {
     "range": {
       "low": 6384,
-      "high": 6415.99
+      "high": 6415.99,
+      "interval": 32
     },
     "afs": 963.93
   },
   {
     "range": {
       "low": 6416,
-      "high": 6431.99
+      "high": 6431.99,
+      "interval": 16
     },
     "afs": 962.93
   },
   {
     "range": {
       "low": 6432,
-      "high": 6463.99
+      "high": 6463.99,
+      "interval": 32
     },
     "afs": 959.93
   },
   {
     "range": {
       "low": 6464,
-      "high": 6479.99
+      "high": 6479.99,
+      "interval": 16
     },
     "afs": 958.93
   },
   {
     "range": {
       "low": 6480,
-      "high": 6511.99
+      "high": 6511.99,
+      "interval": 32
     },
     "afs": 955.93
   },
   {
     "range": {
       "low": 6512,
-      "high": 6527.99
+      "high": 6527.99,
+      "interval": 16
     },
     "afs": 954.93
   },
   {
     "range": {
       "low": 6528,
-      "high": 6559.99
+      "high": 6559.99,
+      "interval": 32
     },
     "afs": 951.93
   },
   {
     "range": {
       "low": 6560,
-      "high": 6575.99
+      "high": 6575.99,
+      "interval": 16
     },
     "afs": 950.93
   },
   {
     "range": {
       "low": 6576,
-      "high": 6607.99
+      "high": 6607.99,
+      "interval": 32
     },
     "afs": 947.93
   },
   {
     "range": {
       "low": 6608,
-      "high": 6623.99
+      "high": 6623.99,
+      "interval": 16
     },
     "afs": 946.93
   },
   {
     "range": {
       "low": 6624,
-      "high": 6655.99
+      "high": 6655.99,
+      "interval": 32
     },
     "afs": 943.93
   },
   {
     "range": {
       "low": 6656,
-      "high": 6671.99
+      "high": 6671.99,
+      "interval": 16
     },
     "afs": 942.93
   },
   {
     "range": {
       "low": 6672,
-      "high": 6703.99
+      "high": 6703.99,
+      "interval": 32
     },
     "afs": 939.93
   },
   {
     "range": {
       "low": 6704,
-      "high": 6719.99
+      "high": 6719.99,
+      "interval": 16
     },
     "afs": 938.93
   },
   {
     "range": {
       "low": 6720,
-      "high": 6751.99
+      "high": 6751.99,
+      "interval": 32
     },
     "afs": 935.93
   },
   {
     "range": {
       "low": 6752,
-      "high": 6767.99
+      "high": 6767.99,
+      "interval": 16
     },
     "afs": 934.93
   },
   {
     "range": {
       "low": 6768,
-      "high": 6799.99
+      "high": 6799.99,
+      "interval": 32
     },
     "afs": 931.93
   },
   {
     "range": {
       "low": 6800,
-      "high": 6815.99
+      "high": 6815.99,
+      "interval": 16
     },
     "afs": 930.93
   },
   {
     "range": {
       "low": 6816,
-      "high": 6847.99
+      "high": 6847.99,
+      "interval": 32
     },
     "afs": 927.93
   },
   {
     "range": {
       "low": 6848,
-      "high": 6863.99
+      "high": 6863.99,
+      "interval": 16
     },
     "afs": 926.93
   },
   {
     "range": {
       "low": 6864,
-      "high": 6895.99
+      "high": 6895.99,
+      "interval": 32
     },
     "afs": 923.93
   },
   {
     "range": {
       "low": 6896,
-      "high": 6911.99
+      "high": 6911.99,
+      "interval": 16
     },
     "afs": 922.93
   },
   {
     "range": {
       "low": 6912,
-      "high": 6943.99
+      "high": 6943.99,
+      "interval": 32
     },
     "afs": 919.93
   },
   {
     "range": {
       "low": 6944,
-      "high": 6959.99
+      "high": 6959.99,
+      "interval": 16
     },
     "afs": 918.93
   },
   {
     "range": {
       "low": 6960,
-      "high": 6991.99
+      "high": 6991.99,
+      "interval": 32
     },
     "afs": 915.93
   },
   {
     "range": {
       "low": 6992,
-      "high": 7007.99
+      "high": 7007.99,
+      "interval": 16
     },
     "afs": 914.93
   },
   {
     "range": {
       "low": 7008,
-      "high": 7039.99
+      "high": 7039.99,
+      "interval": 32
     },
     "afs": 911.93
   },
   {
     "range": {
       "low": 7040,
-      "high": 7055.99
+      "high": 7055.99,
+      "interval": 16
     },
     "afs": 910.93
   },
   {
     "range": {
       "low": 7056,
-      "high": 7087.99
+      "high": 7087.99,
+      "interval": 32
     },
     "afs": 907.93
   },
   {
     "range": {
       "low": 7088,
-      "high": 7103.99
+      "high": 7103.99,
+      "interval": 16
     },
     "afs": 906.93
   },
   {
     "range": {
       "low": 7104,
-      "high": 7135.99
+      "high": 7135.99,
+      "interval": 32
     },
     "afs": 903.93
   },
   {
     "range": {
       "low": 7136,
-      "high": 7151.99
+      "high": 7151.99,
+      "interval": 16
     },
     "afs": 902.93
   },
   {
     "range": {
       "low": 7152,
-      "high": 7183.99
+      "high": 7183.99,
+      "interval": 32
     },
     "afs": 899.93
   },
   {
     "range": {
       "low": 7184,
-      "high": 7199.99
+      "high": 7199.99,
+      "interval": 16
     },
     "afs": 898.93
   },
   {
     "range": {
       "low": 7200,
-      "high": 7231.99
+      "high": 7231.99,
+      "interval": 32
     },
     "afs": 895.93
   },
   {
     "range": {
       "low": 7232,
-      "high": 7247.99
+      "high": 7247.99,
+      "interval": 16
     },
     "afs": 894.93
   },
   {
     "range": {
       "low": 7248,
-      "high": 7279.99
+      "high": 7279.99,
+      "interval": 32
     },
     "afs": 891.93
   },
   {
     "range": {
       "low": 7280,
-      "high": 7295.99
+      "high": 7295.99,
+      "interval": 16
     },
     "afs": 890.93
   },
   {
     "range": {
       "low": 7296,
-      "high": 7327.99
+      "high": 7327.99,
+      "interval": 32
     },
     "afs": 887.93
   },
   {
     "range": {
       "low": 7328,
-      "high": 7343.99
+      "high": 7343.99,
+      "interval": 16
     },
     "afs": 886.93
   },
   {
     "range": {
       "low": 7344,
-      "high": 7375.99
+      "high": 7375.99,
+      "interval": 32
     },
     "afs": 883.93
   },
   {
     "range": {
       "low": 7376,
-      "high": 7391.99
+      "high": 7391.99,
+      "interval": 16
     },
     "afs": 882.93
   },
   {
     "range": {
       "low": 7392,
-      "high": 7423.99
+      "high": 7423.99,
+      "interval": 32
     },
     "afs": 879.93
   },
   {
     "range": {
       "low": 7424,
-      "high": 7439.99
+      "high": 7439.99,
+      "interval": 16
     },
     "afs": 878.93
   },
   {
     "range": {
       "low": 7440,
-      "high": 7471.99
+      "high": 7471.99,
+      "interval": 32
     },
     "afs": 875.93
   },
   {
     "range": {
       "low": 7472,
-      "high": 7487.99
+      "high": 7487.99,
+      "interval": 16
     },
     "afs": 874.93
   },
   {
     "range": {
       "low": 7488,
-      "high": 7519.99
+      "high": 7519.99,
+      "interval": 32
     },
     "afs": 871.93
   },
   {
     "range": {
       "low": 7520,
-      "high": 7535.99
+      "high": 7535.99,
+      "interval": 16
     },
     "afs": 870.93
   },
   {
     "range": {
       "low": 7536,
-      "high": 7567.99
+      "high": 7567.99,
+      "interval": 32
     },
     "afs": 867.93
   },
   {
     "range": {
       "low": 7568,
-      "high": 7583.99
+      "high": 7583.99,
+      "interval": 16
     },
     "afs": 866.93
   },
   {
     "range": {
       "low": 7584,
-      "high": 7615.99
+      "high": 7615.99,
+      "interval": 32
     },
     "afs": 863.93
   },
   {
     "range": {
       "low": 7616,
-      "high": 7631.99
+      "high": 7631.99,
+      "interval": 16
     },
     "afs": 862.93
   },
   {
     "range": {
       "low": 7632,
-      "high": 7663.99
+      "high": 7663.99,
+      "interval": 32
     },
     "afs": 859.93
   },
   {
     "range": {
       "low": 7664,
-      "high": 7679.99
+      "high": 7679.99,
+      "interval": 16
     },
     "afs": 858.93
   },
   {
     "range": {
       "low": 7680,
-      "high": 7711.99
+      "high": 7711.99,
+      "interval": 32
     },
     "afs": 855.93
   },
   {
     "range": {
       "low": 7712,
-      "high": 7727.99
+      "high": 7727.99,
+      "interval": 16
     },
     "afs": 854.93
   },
   {
     "range": {
       "low": 7728,
-      "high": 7759.99
+      "high": 7759.99,
+      "interval": 32
     },
     "afs": 851.93
   },
   {
     "range": {
       "low": 7760,
-      "high": 7775.99
+      "high": 7775.99,
+      "interval": 16
     },
     "afs": 850.93
   },
   {
     "range": {
       "low": 7776,
-      "high": 7807.99
+      "high": 7807.99,
+      "interval": 32
     },
     "afs": 847.93
   },
   {
     "range": {
       "low": 7808,
-      "high": 7823.99
+      "high": 7823.99,
+      "interval": 16
     },
     "afs": 846.93
   },
   {
     "range": {
       "low": 7824,
-      "high": 7855.99
+      "high": 7855.99,
+      "interval": 32
     },
     "afs": 843.93
   },
   {
     "range": {
       "low": 7856,
-      "high": 7871.99
+      "high": 7871.99,
+      "interval": 16
     },
     "afs": 842.93
   },
   {
     "range": {
       "low": 7872,
-      "high": 7903.99
+      "high": 7903.99,
+      "interval": 32
     },
     "afs": 839.93
   },
   {
     "range": {
       "low": 7904,
-      "high": 7919.99
+      "high": 7919.99,
+      "interval": 16
     },
     "afs": 838.93
   },
   {
     "range": {
       "low": 7920,
-      "high": 7951.99
+      "high": 7951.99,
+      "interval": 32
     },
     "afs": 835.93
   },
   {
     "range": {
       "low": 7952,
-      "high": 7967.99
+      "high": 7967.99,
+      "interval": 16
     },
     "afs": 834.93
   },
   {
     "range": {
       "low": 7968,
-      "high": 7999.99
+      "high": 7999.99,
+      "interval": 32
     },
     "afs": 831.93
   },
   {
     "range": {
       "low": 8000,
-      "high": 8015.99
+      "high": 8015.99,
+      "interval": 16
     },
     "afs": 830.93
   },
   {
     "range": {
       "low": 8016,
-      "high": 8047.99
+      "high": 8047.99,
+      "interval": 32
     },
     "afs": 827.93
   },
   {
     "range": {
       "low": 8048,
-      "high": 8063.99
+      "high": 8063.99,
+      "interval": 16
     },
     "afs": 826.93
   },
   {
     "range": {
       "low": 8064,
-      "high": 8095.99
+      "high": 8095.99,
+      "interval": 32
     },
     "afs": 823.93
   },
   {
     "range": {
       "low": 8096,
-      "high": 8111.99
+      "high": 8111.99,
+      "interval": 16
     },
     "afs": 822.93
   },
   {
     "range": {
       "low": 8112,
-      "high": 8143.99
+      "high": 8143.99,
+      "interval": 32
     },
     "afs": 819.93
   },
   {
     "range": {
       "low": 8144,
-      "high": 8159.99
+      "high": 8159.99,
+      "interval": 16
     },
     "afs": 818.93
   },
   {
     "range": {
       "low": 8160,
-      "high": 8191.99
+      "high": 8191.99,
+      "interval": 32
     },
     "afs": 815.93
   },
   {
     "range": {
       "low": 8192,
-      "high": 8207.99
+      "high": 8207.99,
+      "interval": 16
     },
     "afs": 814.93
   },
   {
     "range": {
       "low": 8208,
-      "high": 8239.99
+      "high": 8239.99,
+      "interval": 32
     },
     "afs": 811.93
   },
   {
     "range": {
       "low": 8240,
-      "high": 8255.99
+      "high": 8255.99,
+      "interval": 16
     },
     "afs": 810.93
   },
   {
     "range": {
       "low": 8256,
-      "high": 8287.99
+      "high": 8287.99,
+      "interval": 32
     },
     "afs": 807.93
   },
   {
     "range": {
       "low": 8288,
-      "high": 8303.99
+      "high": 8303.99,
+      "interval": 16
     },
     "afs": 806.93
   },
   {
     "range": {
       "low": 8304,
-      "high": 8335.99
+      "high": 8335.99,
+      "interval": 32
     },
     "afs": 803.93
   },
   {
     "range": {
       "low": 8336,
-      "high": 8351.99
+      "high": 8351.99,
+      "interval": 16
     },
     "afs": 802.93
   },
   {
     "range": {
       "low": 8352,
-      "high": 8383.99
+      "high": 8383.99,
+      "interval": 32
     },
     "afs": 799.93
   },
   {
     "range": {
       "low": 8384,
-      "high": 8399.99
+      "high": 8399.99,
+      "interval": 16
     },
     "afs": 798.93
   },
   {
     "range": {
       "low": 8400,
-      "high": 8431.99
+      "high": 8431.99,
+      "interval": 32
     },
     "afs": 795.93
   },
   {
     "range": {
       "low": 8432,
-      "high": 8447.99
+      "high": 8447.99,
+      "interval": 16
     },
     "afs": 794.93
   },
   {
     "range": {
       "low": 8448,
-      "high": 8479.99
+      "high": 8479.99,
+      "interval": 32
     },
     "afs": 791.93
   },
   {
     "range": {
       "low": 8480,
-      "high": 8495.99
+      "high": 8495.99,
+      "interval": 16
     },
     "afs": 790.93
   },
   {
     "range": {
       "low": 8496,
-      "high": 8527.99
+      "high": 8527.99,
+      "interval": 32
     },
     "afs": 787.93
   },
   {
     "range": {
       "low": 8528,
-      "high": 8543.99
+      "high": 8543.99,
+      "interval": 16
     },
     "afs": 786.93
   },
   {
     "range": {
       "low": 8544,
-      "high": 8575.99
+      "high": 8575.99,
+      "interval": 32
     },
     "afs": 783.93
   },
   {
     "range": {
       "low": 8576,
-      "high": 8591.99
+      "high": 8591.99,
+      "interval": 16
     },
     "afs": 782.93
   },
   {
     "range": {
       "low": 8592,
-      "high": 8623.99
+      "high": 8623.99,
+      "interval": 32
     },
     "afs": 779.93
   },
   {
     "range": {
       "low": 8624,
-      "high": 8639.99
+      "high": 8639.99,
+      "interval": 16
     },
     "afs": 778.93
   },
   {
     "range": {
       "low": 8640,
-      "high": 8671.99
+      "high": 8671.99,
+      "interval": 32
     },
     "afs": 775.93
   },
   {
     "range": {
       "low": 8672,
-      "high": 8687.99
+      "high": 8687.99,
+      "interval": 16
     },
     "afs": 774.93
   },
   {
     "range": {
       "low": 8688,
-      "high": 8719.99
+      "high": 8719.99,
+      "interval": 32
     },
     "afs": 771.93
   },
   {
     "range": {
       "low": 8720,
-      "high": 8735.99
+      "high": 8735.99,
+      "interval": 16
     },
     "afs": 770.93
   },
   {
     "range": {
       "low": 8736,
-      "high": 8767.99
+      "high": 8767.99,
+      "interval": 32
     },
     "afs": 767.93
   },
   {
     "range": {
       "low": 8768,
-      "high": 8783.99
+      "high": 8783.99,
+      "interval": 16
     },
     "afs": 766.93
   },
   {
     "range": {
       "low": 8784,
-      "high": 8815.99
+      "high": 8815.99,
+      "interval": 32
     },
     "afs": 763.93
   },
   {
     "range": {
       "low": 8816,
-      "high": 8831.99
+      "high": 8831.99,
+      "interval": 16
     },
     "afs": 762.93
   },
   {
     "range": {
       "low": 8832,
-      "high": 8863.99
+      "high": 8863.99,
+      "interval": 32
     },
     "afs": 759.93
   },
   {
     "range": {
       "low": 8864,
-      "high": 8879.99
+      "high": 8879.99,
+      "interval": 16
     },
     "afs": 758.93
   },
   {
     "range": {
       "low": 8880,
-      "high": 8911.99
+      "high": 8911.99,
+      "interval": 32
     },
     "afs": 755.93
   },
   {
     "range": {
       "low": 8912,
-      "high": 8927.99
+      "high": 8927.99,
+      "interval": 16
     },
     "afs": 754.93
   },
   {
     "range": {
       "low": 8928,
-      "high": 8959.99
+      "high": 8959.99,
+      "interval": 32
     },
     "afs": 751.93
   },
   {
     "range": {
       "low": 8960,
-      "high": 8975.99
+      "high": 8975.99,
+      "interval": 16
     },
     "afs": 750.93
   },
   {
     "range": {
       "low": 8976,
-      "high": 9007.99
+      "high": 9007.99,
+      "interval": 32
     },
     "afs": 747.93
   },
   {
     "range": {
       "low": 9008,
-      "high": 9023.99
+      "high": 9023.99,
+      "interval": 16
     },
     "afs": 746.93
   },
   {
     "range": {
       "low": 9024,
-      "high": 9055.99
+      "high": 9055.99,
+      "interval": 32
     },
     "afs": 743.93
   },
   {
     "range": {
       "low": 9056,
-      "high": 9071.99
+      "high": 9071.99,
+      "interval": 16
     },
     "afs": 742.93
   },
   {
     "range": {
       "low": 9072,
-      "high": 9103.99
+      "high": 9103.99,
+      "interval": 32
     },
     "afs": 739.93
   },
   {
     "range": {
       "low": 9104,
-      "high": 9119.99
+      "high": 9119.99,
+      "interval": 16
     },
     "afs": 738.93
   },
   {
     "range": {
       "low": 9120,
-      "high": 9151.99
+      "high": 9151.99,
+      "interval": 32
     },
     "afs": 735.93
   },
   {
     "range": {
       "low": 9152,
-      "high": 9167.99
+      "high": 9167.99,
+      "interval": 16
     },
     "afs": 735.35
   },
   {
     "range": {
       "low": 9168,
-      "high": 9215.99
+      "high": 9215.99,
+      "interval": 48
     },
     "afs": 732.35
   },
   {
     "range": {
       "low": 9216,
-      "high": 9263.99
+      "high": 9263.99,
+      "interval": 48
     },
     "afs": 729.35
   },
   {
     "range": {
       "low": 9264,
-      "high": 9311.99
+      "high": 9311.99,
+      "interval": 48
     },
     "afs": 726.35
   },
   {
     "range": {
       "low": 9312,
-      "high": 9359.99
+      "high": 9359.99,
+      "interval": 48
     },
     "afs": 723.35
   },
   {
     "range": {
       "low": 9360,
-      "high": 9407.99
+      "high": 9407.99,
+      "interval": 48
     },
     "afs": 720.35
   },
   {
     "range": {
       "low": 9408,
-      "high": 9455.99
+      "high": 9455.99,
+      "interval": 48
     },
     "afs": 717.35
   },
   {
     "range": {
       "low": 9456,
-      "high": 9503.99
+      "high": 9503.99,
+      "interval": 48
     },
     "afs": 714.35
   },
   {
     "range": {
       "low": 9504,
-      "high": 9551.99
+      "high": 9551.99,
+      "interval": 48
     },
     "afs": 711.35
   },
   {
     "range": {
       "low": 9552,
-      "high": 9599.99
+      "high": 9599.99,
+      "interval": 48
     },
     "afs": 708.35
   },
   {
     "range": {
       "low": 9600,
-      "high": 9647.99
+      "high": 9647.99,
+      "interval": 48
     },
     "afs": 705.35
   },
   {
     "range": {
       "low": 9648,
-      "high": 9695.99
+      "high": 9695.99,
+      "interval": 48
     },
     "afs": 702.35
   },
   {
     "range": {
       "low": 9696,
-      "high": 9743.99
+      "high": 9743.99,
+      "interval": 48
     },
     "afs": 699.35
   },
   {
     "range": {
       "low": 9744,
-      "high": 9791.99
+      "high": 9791.99,
+      "interval": 48
     },
     "afs": 696.35
   },
   {
     "range": {
       "low": 9792,
-      "high": 9839.99
+      "high": 9839.99,
+      "interval": 48
     },
     "afs": 693.35
   },
   {
     "range": {
       "low": 9840,
-      "high": 9887.99
+      "high": 9887.99,
+      "interval": 48
     },
     "afs": 690.35
   },
   {
     "range": {
       "low": 9888,
-      "high": 9935.99
+      "high": 9935.99,
+      "interval": 48
     },
     "afs": 687.35
   },
   {
     "range": {
       "low": 9936,
-      "high": 9983.99
+      "high": 9983.99,
+      "interval": 48
     },
     "afs": 684.35
   },
   {
     "range": {
       "low": 9984,
-      "high": 10031.99
+      "high": 10031.99,
+      "interval": 48
     },
     "afs": 681.35
   },
   {
     "range": {
       "low": 10032,
-      "high": 10079.99
+      "high": 10079.99,
+      "interval": 48
     },
     "afs": 678.35
   },
   {
     "range": {
       "low": 10080,
-      "high": 10127.99
+      "high": 10127.99,
+      "interval": 48
     },
     "afs": 675.35
   },
   {
     "range": {
       "low": 10128,
-      "high": 10175.99
+      "high": 10175.99,
+      "interval": 48
     },
     "afs": 672.35
   },
   {
     "range": {
       "low": 10176,
-      "high": 10223.99
+      "high": 10223.99,
+      "interval": 48
     },
     "afs": 669.35
   },
   {
     "range": {
       "low": 10224,
-      "high": 10271.99
+      "high": 10271.99,
+      "interval": 48
     },
     "afs": 666.35
   },
   {
     "range": {
       "low": 10272,
-      "high": 10319.99
+      "high": 10319.99,
+      "interval": 48
     },
     "afs": 663.35
   },
   {
     "range": {
       "low": 10320,
-      "high": 10343.99
+      "high": 10343.99,
+      "interval": 24
     },
     "afs": 663.1
   },
   {
     "range": {
       "low": 10344,
-      "high": 10367.99
+      "high": 10367.99,
+      "interval": 24
     },
     "afs": 662.1
   },
   {
     "range": {
       "low": 10368,
-      "high": 10391.99
+      "high": 10391.99,
+      "interval": 24
     },
     "afs": 661.1
   },
   {
     "range": {
       "low": 10392,
-      "high": 10415.99
+      "high": 10415.99,
+      "interval": 24
     },
     "afs": 660.1
   },
   {
     "range": {
       "low": 10416,
-      "high": 10439.99
+      "high": 10439.99,
+      "interval": 24
     },
     "afs": 659.1
   },
   {
     "range": {
       "low": 10440,
-      "high": 10463.99
+      "high": 10463.99,
+      "interval": 24
     },
     "afs": 658.1
   },
   {
     "range": {
       "low": 10464,
-      "high": 10487.99
+      "high": 10487.99,
+      "interval": 24
     },
     "afs": 657.1
   },
   {
     "range": {
       "low": 10488,
-      "high": 10511.99
+      "high": 10511.99,
+      "interval": 24
     },
     "afs": 656.1
   },
   {
     "range": {
       "low": 10512,
-      "high": 10535.99
+      "high": 10535.99,
+      "interval": 24
     },
     "afs": 655.1
   },
   {
     "range": {
       "low": 10536,
-      "high": 10559.99
+      "high": 10559.99,
+      "interval": 24
     },
     "afs": 654.1
   },
   {
     "range": {
       "low": 10560,
-      "high": 10583.99
+      "high": 10583.99,
+      "interval": 24
     },
     "afs": 653.1
   },
   {
     "range": {
       "low": 10584,
-      "high": 10607.99
+      "high": 10607.99,
+      "interval": 24
     },
     "afs": 652.1
   },
   {
     "range": {
       "low": 10608,
-      "high": 10631.99
+      "high": 10631.99,
+      "interval": 24
     },
     "afs": 651.1
   },
   {
     "range": {
       "low": 10632,
-      "high": 10655.99
+      "high": 10655.99,
+      "interval": 24
     },
     "afs": 650.1
   },
   {
     "range": {
       "low": 10656,
-      "high": 10679.99
+      "high": 10679.99,
+      "interval": 24
     },
     "afs": 649.1
   },
   {
     "range": {
       "low": 10680,
-      "high": 10703.99
+      "high": 10703.99,
+      "interval": 24
     },
     "afs": 648.1
   },
   {
     "range": {
       "low": 10704,
-      "high": 10727.99
+      "high": 10727.99,
+      "interval": 24
     },
     "afs": 647.1
   },
   {
     "range": {
       "low": 10728,
-      "high": 10751.99
+      "high": 10751.99,
+      "interval": 24
     },
     "afs": 646.1
   },
   {
     "range": {
       "low": 10752,
-      "high": 10775.99
+      "high": 10775.99,
+      "interval": 24
     },
     "afs": 645.1
   },
   {
     "range": {
       "low": 10776,
-      "high": 10799.99
+      "high": 10799.99,
+      "interval": 24
     },
     "afs": 644.1
   },
   {
     "range": {
       "low": 10800,
-      "high": 10823.99
+      "high": 10823.99,
+      "interval": 24
     },
     "afs": 643.1
   },
   {
     "range": {
       "low": 10824,
-      "high": 10847.99
+      "high": 10847.99,
+      "interval": 24
     },
     "afs": 642.1
   },
   {
     "range": {
       "low": 10848,
-      "high": 10871.99
+      "high": 10871.99,
+      "interval": 24
     },
     "afs": 641.1
   },
   {
     "range": {
       "low": 10872,
-      "high": 10895.99
+      "high": 10895.99,
+      "interval": 24
     },
     "afs": 640.1
   },
   {
     "range": {
       "low": 10896,
-      "high": 10919.99
+      "high": 10919.99,
+      "interval": 24
     },
     "afs": 639.1
   },
   {
     "range": {
       "low": 10920,
-      "high": 10943.99
+      "high": 10943.99,
+      "interval": 24
     },
     "afs": 638.1
   },
   {
     "range": {
       "low": 10944,
-      "high": 10967.99
+      "high": 10967.99,
+      "interval": 24
     },
     "afs": 637.1
   },
   {
     "range": {
       "low": 10968,
-      "high": 10991.99
+      "high": 10991.99,
+      "interval": 24
     },
     "afs": 636.1
   },
   {
     "range": {
       "low": 10992,
-      "high": 11015.99
+      "high": 11015.99,
+      "interval": 24
     },
     "afs": 635.1
   },
   {
     "range": {
       "low": 11016,
-      "high": 11039.99
+      "high": 11039.99,
+      "interval": 24
     },
     "afs": 634.1
   },
   {
     "range": {
       "low": 11040,
-      "high": 11063.99
+      "high": 11063.99,
+      "interval": 24
     },
     "afs": 633.1
   },
   {
     "range": {
       "low": 11064,
-      "high": 11087.99
+      "high": 11087.99,
+      "interval": 24
     },
     "afs": 632.1
   },
   {
     "range": {
       "low": 11088,
-      "high": 11111.99
+      "high": 11111.99,
+      "interval": 24
     },
     "afs": 631.1
   },
   {
     "range": {
       "low": 11112,
-      "high": 11135.99
+      "high": 11135.99,
+      "interval": 24
     },
     "afs": 630.1
   },
   {
     "range": {
       "low": 11136,
-      "high": 11159.99
+      "high": 11159.99,
+      "interval": 24
     },
     "afs": 629.1
   },
   {
     "range": {
       "low": 11160,
-      "high": 11183.99
+      "high": 11183.99,
+      "interval": 24
     },
     "afs": 628.1
   },
   {
     "range": {
       "low": 11184,
-      "high": 11207.99
+      "high": 11207.99,
+      "interval": 24
     },
     "afs": 627.1
   },
   {
     "range": {
       "low": 11208,
-      "high": 11231.99
+      "high": 11231.99,
+      "interval": 24
     },
     "afs": 626.1
   },
   {
     "range": {
       "low": 11232,
-      "high": 11255.99
+      "high": 11255.99,
+      "interval": 24
     },
     "afs": 625.1
   },
   {
     "range": {
       "low": 11256,
-      "high": 11279.99
+      "high": 11279.99,
+      "interval": 24
     },
     "afs": 624.1
   },
   {
     "range": {
       "low": 11280,
-      "high": 11303.99
+      "high": 11303.99,
+      "interval": 24
     },
     "afs": 623.1
   },
   {
     "range": {
       "low": 11304,
-      "high": 11327.99
+      "high": 11327.99,
+      "interval": 24
     },
     "afs": 622.1
   },
   {
     "range": {
       "low": 11328,
-      "high": 11351.99
+      "high": 11351.99,
+      "interval": 24
     },
     "afs": 621.1
   },
   {
     "range": {
       "low": 11352,
-      "high": 11375.99
+      "high": 11375.99,
+      "interval": 24
     },
     "afs": 620.1
   },
   {
     "range": {
       "low": 11376,
-      "high": 11399.99
+      "high": 11399.99,
+      "interval": 24
     },
     "afs": 619.1
   },
   {
     "range": {
       "low": 11400,
-      "high": 11423.99
+      "high": 11423.99,
+      "interval": 24
     },
     "afs": 618.1
   },
   {
     "range": {
       "low": 11424,
-      "high": 11447.99
+      "high": 11447.99,
+      "interval": 24
     },
     "afs": 617.1
   },
   {
     "range": {
       "low": 11448,
-      "high": 11471.99
+      "high": 11471.99,
+      "interval": 24
     },
     "afs": 616.1
   },
   {
     "range": {
       "low": 11472,
-      "high": 11495.99
+      "high": 11495.99,
+      "interval": 24
     },
     "afs": 615.1
   },
   {
     "range": {
       "low": 11496,
-      "high": 11519.99
+      "high": 11519.99,
+      "interval": 24
     },
     "afs": 614.1
   },
   {
     "range": {
       "low": 11520,
-      "high": 11543.99
+      "high": 11543.99,
+      "interval": 24
     },
     "afs": 613.1
   },
   {
     "range": {
       "low": 11544,
-      "high": 11567.99
+      "high": 11567.99,
+      "interval": 24
     },
     "afs": 612.1
   },
   {
     "range": {
       "low": 11568,
-      "high": 11591.99
+      "high": 11591.99,
+      "interval": 24
     },
     "afs": 611.1
   },
   {
     "range": {
       "low": 11592,
-      "high": 11615.99
+      "high": 11615.99,
+      "interval": 24
     },
     "afs": 610.1
   },
   {
     "range": {
       "low": 11616,
-      "high": 11639.99
+      "high": 11639.99,
+      "interval": 24
     },
     "afs": 609.1
   },
   {
     "range": {
       "low": 11640,
-      "high": 11663.99
+      "high": 11663.99,
+      "interval": 24
     },
     "afs": 608.1
   },
   {
     "range": {
       "low": 11664,
-      "high": 11687.99
+      "high": 11687.99,
+      "interval": 24
     },
     "afs": 607.1
   },
   {
     "range": {
       "low": 11688,
-      "high": 11711.99
+      "high": 11711.99,
+      "interval": 24
     },
     "afs": 606.1
   },
   {
     "range": {
       "low": 11712,
-      "high": 11735.99
+      "high": 11735.99,
+      "interval": 24
     },
     "afs": 605.1
   },
   {
     "range": {
       "low": 11736,
-      "high": 11759.99
+      "high": 11759.99,
+      "interval": 24
     },
     "afs": 604.1
   },
   {
     "range": {
       "low": 11760,
-      "high": 11783.99
+      "high": 11783.99,
+      "interval": 24
     },
     "afs": 603.1
   },
   {
     "range": {
       "low": 11784,
-      "high": 11807.99
+      "high": 11807.99,
+      "interval": 24
     },
     "afs": 602.1
   },
   {
     "range": {
       "low": 11808,
-      "high": 11831.99
+      "high": 11831.99,
+      "interval": 24
     },
     "afs": 601.1
   },
   {
     "range": {
       "low": 11832,
-      "high": 11855.99
+      "high": 11855.99,
+      "interval": 24
     },
     "afs": 600.1
   },
   {
     "range": {
       "low": 11856,
-      "high": 11879.99
+      "high": 11879.99,
+      "interval": 24
     },
     "afs": 599.1
   },
   {
     "range": {
       "low": 11880,
-      "high": 11903.99
+      "high": 11903.99,
+      "interval": 24
     },
     "afs": 598.1
   },
   {
     "range": {
       "low": 11904,
-      "high": 11927.99
+      "high": 11927.99,
+      "interval": 24
     },
     "afs": 597.1
   },
   {
     "range": {
       "low": 11928,
-      "high": 11951.99
+      "high": 11951.99,
+      "interval": 24
     },
     "afs": 596.1
   },
   {
     "range": {
       "low": 11952,
-      "high": 11975.99
+      "high": 11975.99,
+      "interval": 24
     },
     "afs": 595.1
   },
   {
     "range": {
       "low": 11976,
-      "high": 11999.99
+      "high": 11999.99,
+      "interval": 24
     },
     "afs": 594.1
   },
   {
     "range": {
       "low": 12000,
-      "high": 12023.99
+      "high": 12023.99,
+      "interval": 24
     },
     "afs": 593.1
   },
   {
     "range": {
       "low": 12024,
-      "high": 12047.99
+      "high": 12047.99,
+      "interval": 24
     },
     "afs": 592.1
   },
   {
     "range": {
       "low": 12048,
-      "high": 12071.99
+      "high": 12071.99,
+      "interval": 24
     },
     "afs": 591.1
   },
   {
     "range": {
       "low": 12072,
-      "high": 12095.99
+      "high": 12095.99,
+      "interval": 24
     },
     "afs": 590.1
   },
   {
     "range": {
       "low": 12096,
-      "high": 12119.99
+      "high": 12119.99,
+      "interval": 24
     },
     "afs": 589.1
   },
   {
     "range": {
       "low": 12120,
-      "high": 12143.99
+      "high": 12143.99,
+      "interval": 24
     },
     "afs": 588.1
   },
   {
     "range": {
       "low": 12144,
-      "high": 12167.99
+      "high": 12167.99,
+      "interval": 24
     },
     "afs": 587.1
   },
   {
     "range": {
       "low": 12168,
-      "high": 12191.99
+      "high": 12191.99,
+      "interval": 24
     },
     "afs": 586.1
   },
   {
     "range": {
       "low": 12192,
-      "high": 12215.99
+      "high": 12215.99,
+      "interval": 24
     },
     "afs": 585.1
   },
   {
     "range": {
       "low": 12216,
-      "high": 12239.99
+      "high": 12239.99,
+      "interval": 24
     },
     "afs": 584.1
   },
   {
     "range": {
       "low": 12240,
-      "high": 12263.99
+      "high": 12263.99,
+      "interval": 24
     },
     "afs": 583.1
   },
   {
     "range": {
       "low": 12264,
-      "high": 12287.99
+      "high": 12287.99,
+      "interval": 24
     },
     "afs": 582.1
   },
   {
     "range": {
       "low": 12288,
-      "high": 12311.99
+      "high": 12311.99,
+      "interval": 24
     },
     "afs": 581.1
   },
   {
     "range": {
       "low": 12312,
-      "high": 12335.99
+      "high": 12335.99,
+      "interval": 24
     },
     "afs": 580.1
   },
   {
     "range": {
       "low": 12336,
-      "high": 12359.99
+      "high": 12359.99,
+      "interval": 24
     },
     "afs": 579.1
   },
   {
     "range": {
       "low": 12360,
-      "high": 12383.99
+      "high": 12383.99,
+      "interval": 24
     },
     "afs": 578.1
   },
   {
     "range": {
       "low": 12384,
-      "high": 12407.99
+      "high": 12407.99,
+      "interval": 24
     },
     "afs": 577.1
   },
   {
     "range": {
       "low": 12408,
-      "high": 12431.99
+      "high": 12431.99,
+      "interval": 24
     },
     "afs": 576.1
   },
   {
     "range": {
       "low": 12432,
-      "high": 12455.99
+      "high": 12455.99,
+      "interval": 24
     },
     "afs": 575.1
   },
   {
     "range": {
       "low": 12456,
-      "high": 12479.99
+      "high": 12479.99,
+      "interval": 24
     },
     "afs": 574.1
   },
   {
     "range": {
       "low": 12480,
-      "high": 12503.99
+      "high": 12503.99,
+      "interval": 24
     },
     "afs": 573.1
   },
   {
     "range": {
       "low": 12504,
-      "high": 12527.99
+      "high": 12527.99,
+      "interval": 24
     },
     "afs": 572.1
   },
   {
     "range": {
       "low": 12528,
-      "high": 12551.99
+      "high": 12551.99,
+      "interval": 24
     },
     "afs": 571.1
   },
   {
     "range": {
       "low": 12552,
-      "high": 12575.99
+      "high": 12575.99,
+      "interval": 24
     },
     "afs": 570.1
   },
   {
     "range": {
       "low": 12576,
-      "high": 12599.99
+      "high": 12599.99,
+      "interval": 24
     },
     "afs": 569.1
   },
   {
     "range": {
       "low": 12600,
-      "high": 12623.99
+      "high": 12623.99,
+      "interval": 24
     },
     "afs": 568.1
   },
   {
     "range": {
       "low": 12624,
-      "high": 12647.99
+      "high": 12647.99,
+      "interval": 24
     },
     "afs": 567.1
   },
   {
     "range": {
       "low": 12648,
-      "high": 12671.99
+      "high": 12671.99,
+      "interval": 24
     },
     "afs": 566.1
   },
   {
     "range": {
       "low": 12672,
-      "high": 12695.99
+      "high": 12695.99,
+      "interval": 24
     },
     "afs": 565.1
   },
   {
     "range": {
       "low": 12696,
-      "high": 12719.99
+      "high": 12719.99,
+      "interval": 24
     },
     "afs": 564.1
   },
   {
     "range": {
       "low": 12720,
-      "high": 12743.99
+      "high": 12743.99,
+      "interval": 24
     },
     "afs": 563.1
   },
   {
     "range": {
       "low": 12744,
-      "high": 12767.99
+      "high": 12767.99,
+      "interval": 24
     },
     "afs": 562.1
   },
   {
     "range": {
       "low": 12768,
-      "high": 12791.99
+      "high": 12791.99,
+      "interval": 24
     },
     "afs": 561.1
   },
   {
     "range": {
       "low": 12792,
-      "high": 12815.99
+      "high": 12815.99,
+      "interval": 24
     },
     "afs": 560.1
   },
   {
     "range": {
       "low": 12816,
-      "high": 12839.99
+      "high": 12839.99,
+      "interval": 24
     },
     "afs": 559.1
   },
   {
     "range": {
       "low": 12840,
-      "high": 12863.99
+      "high": 12863.99,
+      "interval": 24
     },
     "afs": 558.1
   },
   {
     "range": {
       "low": 12864,
-      "high": 12887.99
+      "high": 12887.99,
+      "interval": 24
     },
     "afs": 557.1
   },
   {
     "range": {
       "low": 12888,
-      "high": 12911.99
+      "high": 12911.99,
+      "interval": 24
     },
     "afs": 556.1
   },
   {
     "range": {
       "low": 12912,
-      "high": 12935.99
+      "high": 12935.99,
+      "interval": 24
     },
     "afs": 555.1
   },
   {
     "range": {
       "low": 12936,
-      "high": 12959.99
+      "high": 12959.99,
+      "interval": 24
     },
     "afs": 554.1
   },
   {
     "range": {
       "low": 12960,
-      "high": 12983.99
+      "high": 12983.99,
+      "interval": 24
     },
     "afs": 553.1
   },
   {
     "range": {
       "low": 12984,
-      "high": 13007.99
+      "high": 13007.99,
+      "interval": 24
     },
     "afs": 552.1
   },
   {
     "range": {
       "low": 13008,
-      "high": 13031.99
+      "high": 13031.99,
+      "interval": 24
     },
     "afs": 551.1
   },
   {
     "range": {
       "low": 13032,
-      "high": 13055.99
+      "high": 13055.99,
+      "interval": 24
     },
     "afs": 550.1
   },
   {
     "range": {
       "low": 13056,
-      "high": 13079.99
+      "high": 13079.99,
+      "interval": 24
     },
     "afs": 549.1
   },
   {
     "range": {
       "low": 13080,
-      "high": 13103.99
+      "high": 13103.99,
+      "interval": 24
     },
     "afs": 548.1
   },
   {
     "range": {
       "low": 13104,
-      "high": 13127.99
+      "high": 13127.99,
+      "interval": 24
     },
     "afs": 547.1
   },
   {
     "range": {
       "low": 13128,
-      "high": 13151.99
+      "high": 13151.99,
+      "interval": 24
     },
     "afs": 546.1
   },
   {
     "range": {
       "low": 13152,
-      "high": 13175.99
+      "high": 13175.99,
+      "interval": 24
     },
     "afs": 545.1
   },
   {
     "range": {
       "low": 13176,
-      "high": 13199.99
+      "high": 13199.99,
+      "interval": 24
     },
     "afs": 544.1
   },
   {
     "range": {
       "low": 13200,
-      "high": 13223.99
+      "high": 13223.99,
+      "interval": 24
     },
     "afs": 543.1
   },
   {
     "range": {
       "low": 13224,
-      "high": 13247.99
+      "high": 13247.99,
+      "interval": 24
     },
     "afs": 542.1
   },
   {
     "range": {
       "low": 13248,
-      "high": 13271.99
+      "high": 13271.99,
+      "interval": 24
     },
     "afs": 541.1
   },
   {
     "range": {
       "low": 13272,
-      "high": 13295.99
+      "high": 13295.99,
+      "interval": 24
     },
     "afs": 540.1
   },
   {
     "range": {
       "low": 13296,
-      "high": 13319.99
+      "high": 13319.99,
+      "interval": 24
     },
     "afs": 539.1
   },
   {
     "range": {
       "low": 13320,
-      "high": 13343.99
+      "high": 13343.99,
+      "interval": 24
     },
     "afs": 538.1
   },
   {
     "range": {
       "low": 13344,
-      "high": 13367.99
+      "high": 13367.99,
+      "interval": 24
     },
     "afs": 537.1
   },
   {
     "range": {
       "low": 13368,
-      "high": 13391.99
+      "high": 13391.99,
+      "interval": 24
     },
     "afs": 536.1
   },
   {
     "range": {
       "low": 13392,
-      "high": 13415.99
+      "high": 13415.99,
+      "interval": 24
     },
     "afs": 535.1
   },
   {
     "range": {
       "low": 13416,
-      "high": 13439.99
+      "high": 13439.99,
+      "interval": 24
     },
     "afs": 534.1
   },
   {
     "range": {
       "low": 13440,
-      "high": 13463.99
+      "high": 13463.99,
+      "interval": 24
     },
     "afs": 533.1
   },
   {
     "range": {
       "low": 13464,
-      "high": 13487.99
+      "high": 13487.99,
+      "interval": 24
     },
     "afs": 532.1
   },
   {
     "range": {
       "low": 13488,
-      "high": 13511.99
+      "high": 13511.99,
+      "interval": 24
     },
     "afs": 531.1
   },
   {
     "range": {
       "low": 13512,
-      "high": 13535.99
+      "high": 13535.99,
+      "interval": 24
     },
     "afs": 530.1
   },
   {
     "range": {
       "low": 13536,
-      "high": 13559.99
+      "high": 13559.99,
+      "interval": 24
     },
     "afs": 529.1
   },
   {
     "range": {
       "low": 13560,
-      "high": 13583.99
+      "high": 13583.99,
+      "interval": 24
     },
     "afs": 528.1
   },
   {
     "range": {
       "low": 13584,
-      "high": 13607.99
+      "high": 13607.99,
+      "interval": 24
     },
     "afs": 527.1
   },
   {
     "range": {
       "low": 13608,
-      "high": 13631.99
+      "high": 13631.99,
+      "interval": 24
     },
     "afs": 526.1
   },
   {
     "range": {
       "low": 13632,
-      "high": 13655.99
+      "high": 13655.99,
+      "interval": 24
     },
     "afs": 525.1
   },
   {
     "range": {
       "low": 13656,
-      "high": 13679.99
+      "high": 13679.99,
+      "interval": 24
     },
     "afs": 524.1
   },
   {
     "range": {
       "low": 13680,
-      "high": 13703.99
+      "high": 13703.99,
+      "interval": 24
     },
     "afs": 523.1
   },
   {
     "range": {
       "low": 13704,
-      "high": 13727.99
+      "high": 13727.99,
+      "interval": 24
     },
     "afs": 522.1
   },
   {
     "range": {
       "low": 13728,
-      "high": 13751.99
+      "high": 13751.99,
+      "interval": 24
     },
     "afs": 521.1
   },
   {
     "range": {
       "low": 13752,
-      "high": 13775.99
+      "high": 13775.99,
+      "interval": 24
     },
     "afs": 520.1
   },
   {
     "range": {
       "low": 13776,
-      "high": 13799.99
+      "high": 13799.99,
+      "interval": 24
     },
     "afs": 519.1
   },
   {
     "range": {
       "low": 13800,
-      "high": 13823.99
+      "high": 13823.99,
+      "interval": 24
     },
     "afs": 518.1
   },
   {
     "range": {
       "low": 13824,
-      "high": 13847.99
+      "high": 13847.99,
+      "interval": 24
     },
     "afs": 517.1
   },
   {
     "range": {
       "low": 13848,
-      "high": 13871.99
+      "high": 13871.99,
+      "interval": 24
     },
     "afs": 516.1
   },
   {
     "range": {
       "low": 13872,
-      "high": 13895.99
+      "high": 13895.99,
+      "interval": 24
     },
     "afs": 515.1
   },
   {
     "range": {
       "low": 13896,
-      "high": 13919.99
+      "high": 13919.99,
+      "interval": 24
     },
     "afs": 514.1
   },
   {
     "range": {
       "low": 13920,
-      "high": 13943.99
+      "high": 13943.99,
+      "interval": 24
     },
     "afs": 513.1
   },
   {
     "range": {
       "low": 13944,
-      "high": 13967.99
+      "high": 13967.99,
+      "interval": 24
     },
     "afs": 512.1
   },
   {
     "range": {
       "low": 13968,
-      "high": 13991.99
+      "high": 13991.99,
+      "interval": 24
     },
     "afs": 511.1
   },
   {
     "range": {
       "low": 13992,
-      "high": 14015.99
+      "high": 14015.99,
+      "interval": 24
     },
     "afs": 510.1
   },
   {
     "range": {
       "low": 14016,
-      "high": 14039.99
+      "high": 14039.99,
+      "interval": 24
     },
     "afs": 509.1
   },
   {
     "range": {
       "low": 14040,
-      "high": 14063.99
+      "high": 14063.99,
+      "interval": 24
     },
     "afs": 508.1
   },
   {
     "range": {
       "low": 14064,
-      "high": 14087.99
+      "high": 14087.99,
+      "interval": 24
     },
     "afs": 507.1
   },
   {
     "range": {
       "low": 14088,
-      "high": 14111.99
+      "high": 14111.99,
+      "interval": 24
     },
     "afs": 506.1
   },
   {
     "range": {
       "low": 14112,
-      "high": 14135.99
+      "high": 14135.99,
+      "interval": 24
     },
     "afs": 505.1
   },
   {
     "range": {
       "low": 14136,
-      "high": 14159.99
+      "high": 14159.99,
+      "interval": 24
     },
     "afs": 504.1
   },
   {
     "range": {
       "low": 14160,
-      "high": 14183.99
+      "high": 14183.99,
+      "interval": 24
     },
     "afs": 503.1
   },
   {
     "range": {
       "low": 14184,
-      "high": 14207.99
+      "high": 14207.99,
+      "interval": 24
     },
     "afs": 502.1
   },
   {
     "range": {
       "low": 14208,
-      "high": 14231.99
+      "high": 14231.99,
+      "interval": 24
     },
     "afs": 501.1
   },
   {
     "range": {
       "low": 14232,
-      "high": 14255.99
+      "high": 14255.99,
+      "interval": 24
     },
     "afs": 500.1
   },
   {
     "range": {
       "low": 14256,
-      "high": 14279.99
+      "high": 14279.99,
+      "interval": 24
     },
     "afs": 499.1
   },
   {
     "range": {
       "low": 14280,
-      "high": 14303.99
+      "high": 14303.99,
+      "interval": 24
     },
     "afs": 498.1
   },
   {
     "range": {
       "low": 14304,
-      "high": 14327.99
+      "high": 14327.99,
+      "interval": 24
     },
     "afs": 497.1
   },
   {
     "range": {
       "low": 14328,
-      "high": 14351.99
+      "high": 14351.99,
+      "interval": 24
     },
     "afs": 496.1
   },
   {
     "range": {
       "low": 14352,
-      "high": 14375.99
+      "high": 14375.99,
+      "interval": 24
     },
     "afs": 495.1
   },
   {
     "range": {
       "low": 14376,
-      "high": 14399.99
+      "high": 14399.99,
+      "interval": 24
     },
     "afs": 494.1
   },
   {
     "range": {
       "low": 14400,
-      "high": 14423.99
+      "high": 14423.99,
+      "interval": 24
     },
     "afs": 493.1
   },
   {
     "range": {
       "low": 14424,
-      "high": 14447.99
+      "high": 14447.99,
+      "interval": 24
     },
     "afs": 492.1
   },
   {
     "range": {
       "low": 14448,
-      "high": 14471.99
+      "high": 14471.99,
+      "interval": 24
     },
     "afs": 491.1
   },
   {
     "range": {
       "low": 14472,
-      "high": 14495.99
+      "high": 14495.99,
+      "interval": 24
     },
     "afs": 490.1
   },
   {
     "range": {
       "low": 14496,
-      "high": 14519.99
+      "high": 14519.99,
+      "interval": 24
     },
     "afs": 489.1
   },
   {
     "range": {
       "low": 14520,
-      "high": 14543.99
+      "high": 14543.99,
+      "interval": 24
     },
     "afs": 488.1
   },
   {
     "range": {
       "low": 14544,
-      "high": 14567.99
+      "high": 14567.99,
+      "interval": 24
     },
     "afs": 487.1
   },
   {
     "range": {
       "low": 14568,
-      "high": 14591.99
+      "high": 14591.99,
+      "interval": 24
     },
     "afs": 486.1
   },
   {
     "range": {
       "low": 14592,
-      "high": 14615.99
+      "high": 14615.99,
+      "interval": 24
     },
     "afs": 485.1
   },
   {
     "range": {
       "low": 14616,
-      "high": 14639.99
+      "high": 14639.99,
+      "interval": 24
     },
     "afs": 484.1
   },
   {
     "range": {
       "low": 14640,
-      "high": 14663.99
+      "high": 14663.99,
+      "interval": 24
     },
     "afs": 483.1
   },
   {
     "range": {
       "low": 14664,
-      "high": 14687.99
+      "high": 14687.99,
+      "interval": 24
     },
     "afs": 482.1
   },
   {
     "range": {
       "low": 14688,
-      "high": 14711.99
+      "high": 14711.99,
+      "interval": 24
     },
     "afs": 481.1
   },
   {
     "range": {
       "low": 14712,
-      "high": 14735.99
+      "high": 14735.99,
+      "interval": 24
     },
     "afs": 480.1
   },
   {
     "range": {
       "low": 14736,
-      "high": 14759.99
+      "high": 14759.99,
+      "interval": 24
     },
     "afs": 479.1
   },
   {
     "range": {
       "low": 14760,
-      "high": 14783.99
+      "high": 14783.99,
+      "interval": 24
     },
     "afs": 478.1
   },
   {
     "range": {
       "low": 14784,
-      "high": 14807.99
+      "high": 14807.99,
+      "interval": 24
     },
     "afs": 477.1
   },
   {
     "range": {
       "low": 14808,
-      "high": 14831.99
+      "high": 14831.99,
+      "interval": 24
     },
     "afs": 476.1
   },
   {
     "range": {
       "low": 14832,
-      "high": 14855.99
+      "high": 14855.99,
+      "interval": 24
     },
     "afs": 475.1
   },
   {
     "range": {
       "low": 14856,
-      "high": 14879.99
+      "high": 14879.99,
+      "interval": 24
     },
     "afs": 474.1
   },
   {
     "range": {
       "low": 14880,
-      "high": 14903.99
+      "high": 14903.99,
+      "interval": 24
     },
     "afs": 473.1
   },
   {
     "range": {
       "low": 14904,
-      "high": 14927.99
+      "high": 14927.99,
+      "interval": 24
     },
     "afs": 472.1
   },
   {
     "range": {
       "low": 14928,
-      "high": 14951.99
+      "high": 14951.99,
+      "interval": 24
     },
     "afs": 471.1
   },
   {
     "range": {
       "low": 14952,
-      "high": 14975.99
+      "high": 14975.99,
+      "interval": 24
     },
     "afs": 470.1
   },
   {
     "range": {
       "low": 14976,
-      "high": 14999.99
+      "high": 14999.99,
+      "interval": 24
     },
     "afs": 469.1
   },
   {
     "range": {
       "low": 15000,
-      "high": 15023.99
+      "high": 15023.99,
+      "interval": 24
     },
     "afs": 468.1
   },
   {
     "range": {
       "low": 15024,
-      "high": 15047.99
+      "high": 15047.99,
+      "interval": 24
     },
     "afs": 467.1
   },
   {
     "range": {
       "low": 15048,
-      "high": 15071.99
+      "high": 15071.99,
+      "interval": 24
     },
     "afs": 466.1
   },
   {
     "range": {
       "low": 15072,
-      "high": 15095.99
+      "high": 15095.99,
+      "interval": 24
     },
     "afs": 465.1
   },
   {
     "range": {
       "low": 15096,
-      "high": 15119.99
+      "high": 15119.99,
+      "interval": 24
     },
     "afs": 464.1
   },
   {
     "range": {
       "low": 15120,
-      "high": 15143.99
+      "high": 15143.99,
+      "interval": 24
     },
     "afs": 463.1
   },
   {
     "range": {
       "low": 15144,
-      "high": 15167.99
+      "high": 15167.99,
+      "interval": 24
     },
     "afs": 462.1
   },
   {
     "range": {
       "low": 15168,
-      "high": 15191.99
+      "high": 15191.99,
+      "interval": 24
     },
     "afs": 461.1
   },
   {
     "range": {
       "low": 15192,
-      "high": 15215.99
+      "high": 15215.99,
+      "interval": 24
     },
     "afs": 460.1
   },
   {
     "range": {
       "low": 15216,
-      "high": 15239.99
+      "high": 15239.99,
+      "interval": 24
     },
     "afs": 459.1
   },
   {
     "range": {
       "low": 15240,
-      "high": 15263.99
+      "high": 15263.99,
+      "interval": 24
     },
     "afs": 458.1
   },
   {
     "range": {
       "low": 15264,
-      "high": 15287.99
+      "high": 15287.99,
+      "interval": 24
     },
     "afs": 457.1
   },
   {
     "range": {
       "low": 15288,
-      "high": 15311.99
+      "high": 15311.99,
+      "interval": 24
     },
     "afs": 456.1
   },
   {
     "range": {
       "low": 15312,
-      "high": 15335.99
+      "high": 15335.99,
+      "interval": 24
     },
     "afs": 455.1
   },
   {
     "range": {
       "low": 15336,
-      "high": 15359.99
+      "high": 15359.99,
+      "interval": 24
     },
     "afs": 454.1
   },
   {
     "range": {
       "low": 15360,
-      "high": 15383.99
+      "high": 15383.99,
+      "interval": 24
     },
     "afs": 453.1
   },
   {
     "range": {
       "low": 15384,
-      "high": 15407.99
+      "high": 15407.99,
+      "interval": 24
     },
     "afs": 452.1
   },
   {
     "range": {
       "low": 15408,
-      "high": 15431.99
+      "high": 15431.99,
+      "interval": 24
     },
     "afs": 451.1
   },
   {
     "range": {
       "low": 15432,
-      "high": 15455.99
+      "high": 15455.99,
+      "interval": 24
     },
     "afs": 450.1
   },
   {
     "range": {
       "low": 15456,
-      "high": 15479.99
+      "high": 15479.99,
+      "interval": 24
     },
     "afs": 449.1
   },
   {
     "range": {
       "low": 15480,
-      "high": 15503.99
+      "high": 15503.99,
+      "interval": 24
     },
     "afs": 448.1
   },
   {
     "range": {
       "low": 15504,
-      "high": 15527.99
+      "high": 15527.99,
+      "interval": 24
     },
     "afs": 447.1
   },
   {
     "range": {
       "low": 15528,
-      "high": 15551.99
+      "high": 15551.99,
+      "interval": 24
     },
     "afs": 446.1
   },
   {
     "range": {
       "low": 15552,
-      "high": 15575.99
+      "high": 15575.99,
+      "interval": 24
     },
     "afs": 445.1
   },
   {
     "range": {
       "low": 15576,
-      "high": 15599.99
+      "high": 15599.99,
+      "interval": 24
     },
     "afs": 444.1
   },
   {
     "range": {
       "low": 15600,
-      "high": 15623.99
+      "high": 15623.99,
+      "interval": 24
     },
     "afs": 443.1
   },
   {
     "range": {
       "low": 15624,
-      "high": 15647.99
+      "high": 15647.99,
+      "interval": 24
     },
     "afs": 442.1
   },
   {
     "range": {
       "low": 15648,
-      "high": 15671.99
+      "high": 15671.99,
+      "interval": 24
     },
     "afs": 441.1
   },
   {
     "range": {
       "low": 15672,
-      "high": 15695.99
+      "high": 15695.99,
+      "interval": 24
     },
     "afs": 440.1
   },
   {
     "range": {
       "low": 15696,
-      "high": 15719.99
+      "high": 15719.99,
+      "interval": 24
     },
     "afs": 439.1
   },
   {
     "range": {
       "low": 15720,
-      "high": 15743.99
+      "high": 15743.99,
+      "interval": 24
     },
     "afs": 438.1
   },
   {
     "range": {
       "low": 15744,
-      "high": 15767.99
+      "high": 15767.99,
+      "interval": 24
     },
     "afs": 437.1
   },
   {
     "range": {
       "low": 15768,
-      "high": 15791.99
+      "high": 15791.99,
+      "interval": 24
     },
     "afs": 436.1
   },
   {
     "range": {
       "low": 15792,
-      "high": 15815.99
+      "high": 15815.99,
+      "interval": 24
     },
     "afs": 435.1
   },
   {
     "range": {
       "low": 15816,
-      "high": 15839.99
+      "high": 15839.99,
+      "interval": 24
     },
     "afs": 434.1
   },
   {
     "range": {
       "low": 15840,
-      "high": 15863.99
+      "high": 15863.99,
+      "interval": 24
     },
     "afs": 433.1
   },
   {
     "range": {
       "low": 15864,
-      "high": 15887.99
+      "high": 15887.99,
+      "interval": 24
     },
     "afs": 432.1
   },
   {
     "range": {
       "low": 15888,
-      "high": 15911.99
+      "high": 15911.99,
+      "interval": 24
     },
     "afs": 431.1
   },
   {
     "range": {
       "low": 15912,
-      "high": 15935.99
+      "high": 15935.99,
+      "interval": 24
     },
     "afs": 430.1
   },
   {
     "range": {
       "low": 15936,
-      "high": 15959.99
+      "high": 15959.99,
+      "interval": 24
     },
     "afs": 429.1
   },
   {
     "range": {
       "low": 15960,
-      "high": 15983.99
+      "high": 15983.99,
+      "interval": 24
     },
     "afs": 428.1
   },
   {
     "range": {
       "low": 15984,
-      "high": 16007.99
+      "high": 16007.99,
+      "interval": 24
     },
     "afs": 427.1
   },
   {
     "range": {
       "low": 16008,
-      "high": 16031.99
+      "high": 16031.99,
+      "interval": 24
     },
     "afs": 426.1
   },
   {
     "range": {
       "low": 16032,
-      "high": 16055.99
+      "high": 16055.99,
+      "interval": 24
     },
     "afs": 425.1
   },
   {
     "range": {
       "low": 16056,
-      "high": 16079.99
+      "high": 16079.99,
+      "interval": 24
     },
     "afs": 424.1
   },
   {
     "range": {
       "low": 16080,
-      "high": 16103.99
+      "high": 16103.99,
+      "interval": 24
     },
     "afs": 423.1
   },
   {
     "range": {
       "low": 16104,
-      "high": 16127.99
+      "high": 16127.99,
+      "interval": 24
     },
     "afs": 422.1
   },
   {
     "range": {
       "low": 16128,
-      "high": 16151.99
+      "high": 16151.99,
+      "interval": 24
     },
     "afs": 421.1
   },
   {
     "range": {
       "low": 16152,
-      "high": 16175.99
+      "high": 16175.99,
+      "interval": 24
     },
     "afs": 420.1
   },
   {
     "range": {
       "low": 16176,
-      "high": 16199.99
+      "high": 16199.99,
+      "interval": 24
     },
     "afs": 419.1
   },
   {
     "range": {
       "low": 16200,
-      "high": 16223.99
+      "high": 16223.99,
+      "interval": 24
     },
     "afs": 418.1
   },
   {
     "range": {
       "low": 16224,
-      "high": 16247.99
+      "high": 16247.99,
+      "interval": 24
     },
     "afs": 417.1
   },
   {
     "range": {
       "low": 16248,
-      "high": 16271.99
+      "high": 16271.99,
+      "interval": 24
     },
     "afs": 416.1
   },
   {
     "range": {
       "low": 16272,
-      "high": 16295.99
+      "high": 16295.99,
+      "interval": 24
     },
     "afs": 415.1
   },
   {
     "range": {
       "low": 16296,
-      "high": 16319.99
+      "high": 16319.99,
+      "interval": 24
     },
     "afs": 414.1
   },
   {
     "range": {
       "low": 16320,
-      "high": 16343.99
+      "high": 16343.99,
+      "interval": 24
     },
     "afs": 413.1
   },
   {
     "range": {
       "low": 16344,
-      "high": 16367.99
+      "high": 16367.99,
+      "interval": 24
     },
     "afs": 412.1
   },
   {
     "range": {
       "low": 16368,
-      "high": 16391.99
+      "high": 16391.99,
+      "interval": 24
     },
     "afs": 411.1
   },
   {
     "range": {
       "low": 16392,
-      "high": 16415.99
+      "high": 16415.99,
+      "interval": 24
     },
     "afs": 410.1
   },
   {
     "range": {
       "low": 16416,
-      "high": 16439.99
+      "high": 16439.99,
+      "interval": 24
     },
     "afs": 409.1
   },
   {
     "range": {
       "low": 16440,
-      "high": 16463.99
+      "high": 16463.99,
+      "interval": 24
     },
     "afs": 408.1
   },
   {
     "range": {
       "low": 16464,
-      "high": 16487.99
+      "high": 16487.99,
+      "interval": 24
     },
     "afs": 407.1
   },
   {
     "range": {
       "low": 16488,
-      "high": 16511.99
+      "high": 16511.99,
+      "interval": 24
     },
     "afs": 406.1
   },
   {
     "range": {
       "low": 16512,
-      "high": 16535.99
+      "high": 16535.99,
+      "interval": 24
     },
     "afs": 405.1
   },
   {
     "range": {
       "low": 16536,
-      "high": 16559.99
+      "high": 16559.99,
+      "interval": 24
     },
     "afs": 404.1
   },
   {
     "range": {
       "low": 16560,
-      "high": 16583.99
+      "high": 16583.99,
+      "interval": 24
     },
     "afs": 403.1
   },
   {
     "range": {
       "low": 16584,
-      "high": 16607.99
+      "high": 16607.99,
+      "interval": 24
     },
     "afs": 402.1
   },
   {
     "range": {
       "low": 16608,
-      "high": 16631.99
+      "high": 16631.99,
+      "interval": 24
     },
     "afs": 401.1
   },
   {
     "range": {
       "low": 16632,
-      "high": 16655.99
+      "high": 16655.99,
+      "interval": 24
     },
     "afs": 400.1
   },
   {
     "range": {
       "low": 16656,
-      "high": 16679.99
+      "high": 16679.99,
+      "interval": 24
     },
     "afs": 399.1
   },
   {
     "range": {
       "low": 16680,
-      "high": 16703.99
+      "high": 16703.99,
+      "interval": 24
     },
     "afs": 398.1
   },
   {
     "range": {
       "low": 16704,
-      "high": 16727.99
+      "high": 16727.99,
+      "interval": 24
     },
     "afs": 397.1
   },
   {
     "range": {
       "low": 16728,
-      "high": 16751.99
+      "high": 16751.99,
+      "interval": 24
     },
     "afs": 396.1
   },
   {
     "range": {
       "low": 16752,
-      "high": 16775.99
+      "high": 16775.99,
+      "interval": 24
     },
     "afs": 395.1
   },
   {
     "range": {
       "low": 16776,
-      "high": 16799.99
+      "high": 16799.99,
+      "interval": 24
     },
     "afs": 394.1
   },
   {
     "range": {
       "low": 16800,
-      "high": 16823.99
+      "high": 16823.99,
+      "interval": 24
     },
     "afs": 393.1
   },
   {
     "range": {
       "low": 16824,
-      "high": 16847.99
+      "high": 16847.99,
+      "interval": 24
     },
     "afs": 392.1
   },
   {
     "range": {
       "low": 16848,
-      "high": 16871.99
+      "high": 16871.99,
+      "interval": 24
     },
     "afs": 391.1
   },
   {
     "range": {
       "low": 16872,
-      "high": 16895.99
+      "high": 16895.99,
+      "interval": 24
     },
     "afs": 390.1
   },
   {
     "range": {
       "low": 16896,
-      "high": 16919.99
+      "high": 16919.99,
+      "interval": 24
     },
     "afs": 389.1
   },
   {
     "range": {
       "low": 16920,
-      "high": 16943.99
+      "high": 16943.99,
+      "interval": 24
     },
     "afs": 388.1
   },
   {
     "range": {
       "low": 16944,
-      "high": 16967.99
+      "high": 16967.99,
+      "interval": 24
     },
     "afs": 387.1
   },
   {
     "range": {
       "low": 16968,
-      "high": 16991.99
+      "high": 16991.99,
+      "interval": 24
     },
     "afs": 386.1
   },
   {
     "range": {
       "low": 16992,
-      "high": 17015.99
+      "high": 17015.99,
+      "interval": 24
     },
     "afs": 385.1
   },
   {
     "range": {
       "low": 17016,
-      "high": 17039.99
+      "high": 17039.99,
+      "interval": 24
     },
     "afs": 384.1
   },
   {
     "range": {
       "low": 17040,
-      "high": 17063.99
+      "high": 17063.99,
+      "interval": 24
     },
     "afs": 383.1
   },
   {
     "range": {
       "low": 17064,
-      "high": 17087.99
+      "high": 17087.99,
+      "interval": 24
     },
     "afs": 382.1
   },
   {
     "range": {
       "low": 17088,
-      "high": 17111.99
+      "high": 17111.99,
+      "interval": 24
     },
     "afs": 381.1
   },
   {
     "range": {
       "low": 17112,
-      "high": 17135.99
+      "high": 17135.99,
+      "interval": 24
     },
     "afs": 380.1
   },
   {
     "range": {
       "low": 17136,
-      "high": 17159.99
+      "high": 17159.99,
+      "interval": 24
     },
     "afs": 379.1
   },
   {
     "range": {
       "low": 17160,
-      "high": 17183.99
+      "high": 17183.99,
+      "interval": 24
     },
     "afs": 378.1
   },
   {
     "range": {
       "low": 17184,
-      "high": 17207.99
+      "high": 17207.99,
+      "interval": 24
     },
     "afs": 377.1
   },
   {
     "range": {
       "low": 17208,
-      "high": 17231.99
+      "high": 17231.99,
+      "interval": 24
     },
     "afs": 376.1
   },
   {
     "range": {
       "low": 17232,
-      "high": 17255.99
+      "high": 17255.99,
+      "interval": 24
     },
     "afs": 375.1
   },
   {
     "range": {
       "low": 17256,
-      "high": 17279.99
+      "high": 17279.99,
+      "interval": 24
     },
     "afs": 374.1
   },
   {
     "range": {
       "low": 17280,
-      "high": 17303.99
+      "high": 17303.99,
+      "interval": 24
     },
     "afs": 373.1
   },
   {
     "range": {
       "low": 17304,
-      "high": 17327.99
+      "high": 17327.99,
+      "interval": 24
     },
     "afs": 372.1
   },
   {
     "range": {
       "low": 17328,
-      "high": 17351.99
+      "high": 17351.99,
+      "interval": 24
     },
     "afs": 371.1
   },
   {
     "range": {
       "low": 17352,
-      "high": 17375.99
+      "high": 17375.99,
+      "interval": 24
     },
     "afs": 370.1
   },
   {
     "range": {
       "low": 17376,
-      "high": 17399.99
+      "high": 17399.99,
+      "interval": 24
     },
     "afs": 369.1
   },
   {
     "range": {
       "low": 17400,
-      "high": 17423.99
+      "high": 17423.99,
+      "interval": 24
     },
     "afs": 368.1
   },
   {
     "range": {
       "low": 17424,
-      "high": 17447.99
+      "high": 17447.99,
+      "interval": 24
     },
     "afs": 367.1
   },
   {
     "range": {
       "low": 17448,
-      "high": 17471.99
+      "high": 17471.99,
+      "interval": 24
     },
     "afs": 366.1
   },
   {
     "range": {
       "low": 17472,
-      "high": 17495.99
+      "high": 17495.99,
+      "interval": 24
     },
     "afs": 365.1
   },
   {
     "range": {
       "low": 17496,
-      "high": 17519.99
+      "high": 17519.99,
+      "interval": 24
     },
     "afs": 364.1
   },
   {
     "range": {
       "low": 17520,
-      "high": 17543.99
+      "high": 17543.99,
+      "interval": 24
     },
     "afs": 363.1
   },
   {
     "range": {
       "low": 17544,
-      "high": 17567.99
+      "high": 17567.99,
+      "interval": 24
     },
     "afs": 362.1
   },
   {
     "range": {
       "low": 17568,
-      "high": 17591.99
+      "high": 17591.99,
+      "interval": 24
     },
     "afs": 361.1
   },
   {
     "range": {
       "low": 17592,
-      "high": 17615.99
+      "high": 17615.99,
+      "interval": 24
     },
     "afs": 360.1
   },
   {
     "range": {
       "low": 17616,
-      "high": 17639.99
+      "high": 17639.99,
+      "interval": 24
     },
     "afs": 359.1
   },
   {
     "range": {
       "low": 17640,
-      "high": 17663.99
+      "high": 17663.99,
+      "interval": 24
     },
     "afs": 358.1
   },
   {
     "range": {
       "low": 17664,
-      "high": 17687.99
+      "high": 17687.99,
+      "interval": 24
     },
     "afs": 357.1
   },
   {
     "range": {
       "low": 17688,
-      "high": 17711.99
+      "high": 17711.99,
+      "interval": 24
     },
     "afs": 356.1
   },
   {
     "range": {
       "low": 17712,
-      "high": 17735.99
+      "high": 17735.99,
+      "interval": 24
     },
     "afs": 355.1
   },
   {
     "range": {
       "low": 17736,
-      "high": 17759.99
+      "high": 17759.99,
+      "interval": 24
     },
     "afs": 354.1
   },
   {
     "range": {
       "low": 17760,
-      "high": 17783.99
+      "high": 17783.99,
+      "interval": 24
     },
     "afs": 353.1
   },
   {
     "range": {
       "low": 17784,
-      "high": 17807.99
+      "high": 17807.99,
+      "interval": 24
     },
     "afs": 352.1
   },
   {
     "range": {
       "low": 17808,
-      "high": 17831.99
+      "high": 17831.99,
+      "interval": 24
     },
     "afs": 351.1
   },
   {
     "range": {
       "low": 17832,
-      "high": 17855.99
+      "high": 17855.99,
+      "interval": 24
     },
     "afs": 350.1
   },
   {
     "range": {
       "low": 17856,
-      "high": 17879.99
+      "high": 17879.99,
+      "interval": 24
     },
     "afs": 349.1
   },
   {
     "range": {
       "low": 17880,
-      "high": 17903.99
+      "high": 17903.99,
+      "interval": 24
     },
     "afs": 348.1
   },
   {
     "range": {
       "low": 17904,
-      "high": 17927.99
+      "high": 17927.99,
+      "interval": 24
     },
     "afs": 347.1
   },
   {
     "range": {
       "low": 17928,
-      "high": 17951.99
+      "high": 17951.99,
+      "interval": 24
     },
     "afs": 346.1
   },
   {
     "range": {
       "low": 17952,
-      "high": 17975.99
+      "high": 17975.99,
+      "interval": 24
     },
     "afs": 345.1
   },
   {
     "range": {
       "low": 17976,
-      "high": 17999.99
+      "high": 17999.99,
+      "interval": 24
     },
     "afs": 344.1
   },
   {
     "range": {
       "low": 18000,
-      "high": 18023.99
+      "high": 18023.99,
+      "interval": 24
     },
     "afs": 343.1
   },
   {
     "range": {
       "low": 18024,
-      "high": 18047.99
+      "high": 18047.99,
+      "interval": 24
     },
     "afs": 342.1
   },
   {
     "range": {
       "low": 18048,
-      "high": 18071.99
+      "high": 18071.99,
+      "interval": 24
     },
     "afs": 341.1
   },
   {
     "range": {
       "low": 18072,
-      "high": 18095.99
+      "high": 18095.99,
+      "interval": 24
     },
     "afs": 340.1
   },
   {
     "range": {
       "low": 18096,
-      "high": 18119.99
+      "high": 18119.99,
+      "interval": 24
     },
     "afs": 339.1
   },
   {
     "range": {
       "low": 18120,
-      "high": 18143.99
+      "high": 18143.99,
+      "interval": 24
     },
     "afs": 338.1
   },
   {
     "range": {
       "low": 18144,
-      "high": 18167.99
+      "high": 18167.99,
+      "interval": 24
     },
     "afs": 337.1
   },
   {
     "range": {
       "low": 18168,
-      "high": 18191.99
+      "high": 18191.99,
+      "interval": 24
     },
     "afs": 336.1
   },
   {
     "range": {
       "low": 18192,
-      "high": 18215.99
+      "high": 18215.99,
+      "interval": 24
     },
     "afs": 335.1
   },
   {
     "range": {
       "low": 18216,
-      "high": 18239.99
+      "high": 18239.99,
+      "interval": 24
     },
     "afs": 334.1
   },
   {
     "range": {
       "low": 18240,
-      "high": 18263.99
+      "high": 18263.99,
+      "interval": 24
     },
     "afs": 333.1
   },
   {
     "range": {
       "low": 18264,
-      "high": 18287.99
+      "high": 18287.99,
+      "interval": 24
     },
     "afs": 332.1
   },
   {
     "range": {
       "low": 18288,
-      "high": 18311.99
+      "high": 18311.99,
+      "interval": 24
     },
     "afs": 331.1
   },
   {
     "range": {
       "low": 18312,
-      "high": 18335.99
+      "high": 18335.99,
+      "interval": 24
     },
     "afs": 330.1
   },
   {
     "range": {
       "low": 18336,
-      "high": 18359.99
+      "high": 18359.99,
+      "interval": 24
     },
     "afs": 329.1
   },
   {
     "range": {
       "low": 18360,
-      "high": 18383.99
+      "high": 18383.99,
+      "interval": 24
     },
     "afs": 328.1
   },
   {
     "range": {
       "low": 18384,
-      "high": 18407.99
+      "high": 18407.99,
+      "interval": 24
     },
     "afs": 327.1
   },
   {
     "range": {
       "low": 18408,
-      "high": 18431.99
+      "high": 18431.99,
+      "interval": 24
     },
     "afs": 326.1
   },
   {
     "range": {
       "low": 18432,
-      "high": 18455.99
+      "high": 18455.99,
+      "interval": 24
     },
     "afs": 325.1
   },
   {
     "range": {
       "low": 18456,
-      "high": 18479.99
+      "high": 18479.99,
+      "interval": 24
     },
     "afs": 324.1
   },
   {
     "range": {
       "low": 18480,
-      "high": 18503.99
+      "high": 18503.99,
+      "interval": 24
     },
     "afs": 323.1
   },
   {
     "range": {
       "low": 18504,
-      "high": 18527.99
+      "high": 18527.99,
+      "interval": 24
     },
     "afs": 322.1
   },
   {
     "range": {
       "low": 18528,
-      "high": 18551.99
+      "high": 18551.99,
+      "interval": 24
     },
     "afs": 321.1
   },
   {
     "range": {
       "low": 18552,
-      "high": 18575.99
+      "high": 18575.99,
+      "interval": 24
     },
     "afs": 320.1
   },
   {
     "range": {
       "low": 18576,
-      "high": 18599.99
+      "high": 18599.99,
+      "interval": 24
     },
     "afs": 319.1
   },
   {
     "range": {
       "low": 18600,
-      "high": 18623.99
+      "high": 18623.99,
+      "interval": 24
     },
     "afs": 318.1
   },
   {
     "range": {
       "low": 18624,
-      "high": 18647.99
+      "high": 18647.99,
+      "interval": 24
     },
     "afs": 317.1
   },
   {
     "range": {
       "low": 18648,
-      "high": 18671.99
+      "high": 18671.99,
+      "interval": 24
     },
     "afs": 316.1
   },
   {
     "range": {
       "low": 18672,
-      "high": 18695.99
+      "high": 18695.99,
+      "interval": 24
     },
     "afs": 315.1
   },
   {
     "range": {
       "low": 18696,
-      "high": 18719.99
+      "high": 18719.99,
+      "interval": 24
     },
     "afs": 314.1
   },
   {
     "range": {
       "low": 18720,
-      "high": 18743.99
+      "high": 18743.99,
+      "interval": 24
     },
     "afs": 313.1
   },
   {
     "range": {
       "low": 18744,
-      "high": 18767.99
+      "high": 18767.99,
+      "interval": 24
     },
     "afs": 312.1
   },
   {
     "range": {
       "low": 18768,
-      "high": 18791.99
+      "high": 18791.99,
+      "interval": 24
     },
     "afs": 311.1
   },
   {
     "range": {
       "low": 18792,
-      "high": 18815.99
+      "high": 18815.99,
+      "interval": 24
     },
     "afs": 310.1
   },
   {
     "range": {
       "low": 18816,
-      "high": 18839.99
+      "high": 18839.99,
+      "interval": 24
     },
     "afs": 309.1
   },
   {
     "range": {
       "low": 18840,
-      "high": 18863.99
+      "high": 18863.99,
+      "interval": 24
     },
     "afs": 308.1
   },
   {
     "range": {
       "low": 18864,
-      "high": 18887.99
+      "high": 18887.99,
+      "interval": 24
     },
     "afs": 307.1
   },
   {
     "range": {
       "low": 18888,
-      "high": 18911.99
+      "high": 18911.99,
+      "interval": 24
     },
     "afs": 306.1
   },
   {
     "range": {
       "low": 18912,
-      "high": 18935.99
+      "high": 18935.99,
+      "interval": 24
     },
     "afs": 305.1
   },
   {
     "range": {
       "low": 18936,
-      "high": 18959.99
+      "high": 18959.99,
+      "interval": 24
     },
     "afs": 304.1
   },
   {
     "range": {
       "low": 18960,
-      "high": 18983.99
+      "high": 18983.99,
+      "interval": 24
     },
     "afs": 303.1
   },
   {
     "range": {
       "low": 18984,
-      "high": 19007.99
+      "high": 19007.99,
+      "interval": 24
     },
     "afs": 302.1
   },
   {
     "range": {
       "low": 19008,
-      "high": 19031.99
+      "high": 19031.99,
+      "interval": 24
     },
     "afs": 301.1
   },
   {
     "range": {
       "low": 19032,
-      "high": 19055.99
+      "high": 19055.99,
+      "interval": 24
     },
     "afs": 300.1
   },
   {
     "range": {
       "low": 19056,
-      "high": 19079.99
+      "high": 19079.99,
+      "interval": 24
     },
     "afs": 299.1
   },
   {
     "range": {
       "low": 19080,
-      "high": 19103.99
+      "high": 19103.99,
+      "interval": 24
     },
     "afs": 298.1
   },
   {
     "range": {
       "low": 19104,
-      "high": 19127.99
+      "high": 19127.99,
+      "interval": 24
     },
     "afs": 297.1
   },
   {
     "range": {
       "low": 19128,
-      "high": 19151.99
+      "high": 19151.99,
+      "interval": 24
     },
     "afs": 296.1
   },
   {
     "range": {
       "low": 19152,
-      "high": 19175.99
+      "high": 19175.99,
+      "interval": 24
     },
     "afs": 295.1
   },
   {
     "range": {
       "low": 19176,
-      "high": 19199.99
+      "high": 19199.99,
+      "interval": 24
     },
     "afs": 294.1
   },
   {
     "range": {
       "low": 19200,
-      "high": 19223.99
+      "high": 19223.99,
+      "interval": 24
     },
     "afs": 293.1
   },
   {
     "range": {
       "low": 19224,
-      "high": 19247.99
+      "high": 19247.99,
+      "interval": 24
     },
     "afs": 292.1
   },
   {
     "range": {
       "low": 19248,
-      "high": 19271.99
+      "high": 19271.99,
+      "interval": 24
     },
     "afs": 291.1
   },
   {
     "range": {
       "low": 19272,
-      "high": 19295.99
+      "high": 19295.99,
+      "interval": 24
     },
     "afs": 290.1
   },
   {
     "range": {
       "low": 19296,
-      "high": 19319.99
+      "high": 19319.99,
+      "interval": 24
     },
     "afs": 289.1
   },
   {
     "range": {
       "low": 19320,
-      "high": 19343.99
+      "high": 19343.99,
+      "interval": 24
     },
     "afs": 288.1
   },
   {
     "range": {
       "low": 19344,
-      "high": 19367.99
+      "high": 19367.99,
+      "interval": 24
     },
     "afs": 287.1
   },
   {
     "range": {
       "low": 19368,
-      "high": 19391.99
+      "high": 19391.99,
+      "interval": 24
     },
     "afs": 286.1
   },
   {
     "range": {
       "low": 19392,
-      "high": 19415.99
+      "high": 19415.99,
+      "interval": 24
     },
     "afs": 285.1
   },
   {
     "range": {
       "low": 19416,
-      "high": 19439.99
+      "high": 19439.99,
+      "interval": 24
     },
     "afs": 284.1
   },
   {
     "range": {
       "low": 19440,
-      "high": 19463.99
+      "high": 19463.99,
+      "interval": 24
     },
     "afs": 283.1
   },
   {
     "range": {
       "low": 19464,
-      "high": 19487.99
+      "high": 19487.99,
+      "interval": 24
     },
     "afs": 282.1
   },
   {
     "range": {
       "low": 19488,
-      "high": 19511.99
+      "high": 19511.99,
+      "interval": 24
     },
     "afs": 281.1
   },
   {
     "range": {
       "low": 19512,
-      "high": 19535.99
+      "high": 19535.99,
+      "interval": 24
     },
     "afs": 280.1
   },
   {
     "range": {
       "low": 19536,
-      "high": 19559.99
+      "high": 19559.99,
+      "interval": 24
     },
     "afs": 279.1
   },
   {
     "range": {
       "low": 19560,
-      "high": 19583.99
+      "high": 19583.99,
+      "interval": 24
     },
     "afs": 278.1
   },
   {
     "range": {
       "low": 19584,
-      "high": 19607.99
+      "high": 19607.99,
+      "interval": 24
     },
     "afs": 277.1
   },
   {
     "range": {
       "low": 19608,
-      "high": 19631.99
+      "high": 19631.99,
+      "interval": 24
     },
     "afs": 276.1
   },
   {
     "range": {
       "low": 19632,
-      "high": 19655.99
+      "high": 19655.99,
+      "interval": 24
     },
     "afs": 275.1
   },
   {
     "range": {
       "low": 19656,
-      "high": 19679.99
+      "high": 19679.99,
+      "interval": 24
     },
     "afs": 274.1
   },
   {
     "range": {
       "low": 19680,
-      "high": 19703.99
+      "high": 19703.99,
+      "interval": 24
     },
     "afs": 273.1
   },
   {
     "range": {
       "low": 19704,
-      "high": 19727.99
+      "high": 19727.99,
+      "interval": 24
     },
     "afs": 272.1
   },
   {
     "range": {
       "low": 19728,
-      "high": 19751.99
+      "high": 19751.99,
+      "interval": 24
     },
     "afs": 271.1
   },
   {
     "range": {
       "low": 19752,
-      "high": 19775.99
+      "high": 19775.99,
+      "interval": 24
     },
     "afs": 270.1
   },
   {
     "range": {
       "low": 19776,
-      "high": 19799.99
+      "high": 19799.99,
+      "interval": 24
     },
     "afs": 269.1
   },
   {
     "range": {
       "low": 19800,
-      "high": 19823.99
+      "high": 19823.99,
+      "interval": 24
     },
     "afs": 268.1
   },
   {
     "range": {
       "low": 19824,
-      "high": 19847.99
+      "high": 19847.99,
+      "interval": 24
     },
     "afs": 267.1
   },
   {
     "range": {
       "low": 19848,
-      "high": 19871.99
+      "high": 19871.99,
+      "interval": 24
     },
     "afs": 266.1
   },
   {
     "range": {
       "low": 19872,
-      "high": 19895.99
+      "high": 19895.99,
+      "interval": 24
     },
     "afs": 265.1
   },
   {
     "range": {
       "low": 19896,
-      "high": 19919.99
+      "high": 19919.99,
+      "interval": 24
     },
     "afs": 264.1
   },
   {
     "range": {
       "low": 19920,
-      "high": 19943.99
+      "high": 19943.99,
+      "interval": 24
     },
     "afs": 263.1
   },
   {
     "range": {
       "low": 19944,
-      "high": 19967.99
+      "high": 19967.99,
+      "interval": 24
     },
     "afs": 262.1
   },
   {
     "range": {
       "low": 19968,
-      "high": 19991.99
+      "high": 19991.99,
+      "interval": 24
     },
     "afs": 261.1
   },
   {
     "range": {
       "low": 19992,
-      "high": 20015.99
+      "high": 20015.99,
+      "interval": 24
     },
     "afs": 260.1
   },
   {
     "range": {
       "low": 20016,
-      "high": 20039.99
+      "high": 20039.99,
+      "interval": 24
     },
     "afs": 259.1
   },
   {
     "range": {
       "low": 20040,
-      "high": 20063.99
+      "high": 20063.99,
+      "interval": 24
     },
     "afs": 258.1
   },
   {
     "range": {
       "low": 20064,
-      "high": 20087.99
+      "high": 20087.99,
+      "interval": 24
     },
     "afs": 257.1
   },
   {
     "range": {
       "low": 20088,
-      "high": 20111.99
+      "high": 20111.99,
+      "interval": 24
     },
     "afs": 256.1
   },
   {
     "range": {
       "low": 20112,
-      "high": 20135.99
+      "high": 20135.99,
+      "interval": 24
     },
     "afs": 255.1
   },
   {
     "range": {
       "low": 20136,
-      "high": 20159.99
+      "high": 20159.99,
+      "interval": 24
     },
     "afs": 254.1
   },
   {
     "range": {
       "low": 20160,
-      "high": 20183.99
+      "high": 20183.99,
+      "interval": 24
     },
     "afs": 253.1
   },
   {
     "range": {
       "low": 20184,
-      "high": 20207.99
+      "high": 20207.99,
+      "interval": 24
     },
     "afs": 252.1
   },
   {
     "range": {
       "low": 20208,
-      "high": 20231.99
+      "high": 20231.99,
+      "interval": 24
     },
     "afs": 251.1
   },
   {
     "range": {
       "low": 20232,
-      "high": 20255.99
+      "high": 20255.99,
+      "interval": 24
     },
     "afs": 250.1
   },
   {
     "range": {
       "low": 20256,
-      "high": 20279.99
+      "high": 20279.99,
+      "interval": 24
     },
     "afs": 249.1
   },
   {
     "range": {
       "low": 20280,
-      "high": 20303.99
+      "high": 20303.99,
+      "interval": 24
     },
     "afs": 248.1
   },
   {
     "range": {
       "low": 20304,
-      "high": 20327.99
+      "high": 20327.99,
+      "interval": 24
     },
     "afs": 247.1
   },
   {
     "range": {
       "low": 20328,
-      "high": 20351.99
+      "high": 20351.99,
+      "interval": 24
     },
     "afs": 246.1
   },
   {
     "range": {
       "low": 20352,
-      "high": 20375.99
+      "high": 20375.99,
+      "interval": 24
     },
     "afs": 245.1
   },
   {
     "range": {
       "low": 20376,
-      "high": 20399.99
+      "high": 20399.99,
+      "interval": 24
     },
     "afs": 244.1
   },
   {
     "range": {
       "low": 20400,
-      "high": 20423.99
+      "high": 20423.99,
+      "interval": 24
     },
     "afs": 243.1
   },
   {
     "range": {
       "low": 20424,
-      "high": 20447.99
+      "high": 20447.99,
+      "interval": 24
     },
     "afs": 242.1
   },
   {
     "range": {
       "low": 20448,
-      "high": 20471.99
+      "high": 20471.99,
+      "interval": 24
     },
     "afs": 241.1
   },
   {
     "range": {
       "low": 20472,
-      "high": 20495.99
+      "high": 20495.99,
+      "interval": 24
     },
     "afs": 240.1
   },
   {
     "range": {
       "low": 20496,
-      "high": 20519.99
+      "high": 20519.99,
+      "interval": 24
     },
     "afs": 239.1
   },
   {
     "range": {
       "low": 20520,
-      "high": 20543.99
+      "high": 20543.99,
+      "interval": 24
     },
     "afs": 238.1
   },
   {
     "range": {
       "low": 20544,
-      "high": 20567.99
+      "high": 20567.99,
+      "interval": 24
     },
     "afs": 237.1
   },
   {
     "range": {
       "low": 20568,
-      "high": 20591.99
+      "high": 20591.99,
+      "interval": 24
     },
     "afs": 236.1
   },
   {
     "range": {
       "low": 20592,
-      "high": 20615.99
+      "high": 20615.99,
+      "interval": 24
     },
     "afs": 235.1
   },
   {
     "range": {
       "low": 20616,
-      "high": 20639.99
+      "high": 20639.99,
+      "interval": 24
     },
     "afs": 234.1
   },
   {
     "range": {
       "low": 20640,
-      "high": 20663.99
+      "high": 20663.99,
+      "interval": 24
     },
     "afs": 233.1
   },
   {
     "range": {
       "low": 20664,
-      "high": 20687.99
+      "high": 20687.99,
+      "interval": 24
     },
     "afs": 232.1
   },
   {
     "range": {
       "low": 20688,
-      "high": 20711.99
+      "high": 20711.99,
+      "interval": 24
     },
     "afs": 231.1
   },
   {
     "range": {
       "low": 20712,
-      "high": 20735.99
+      "high": 20735.99,
+      "interval": 24
     },
     "afs": 230.1
   },
   {
     "range": {
       "low": 20736,
-      "high": 20759.99
+      "high": 20759.99,
+      "interval": 24
     },
     "afs": 229.1
   },
   {
     "range": {
       "low": 20760,
-      "high": 20783.99
+      "high": 20783.99,
+      "interval": 24
     },
     "afs": 228.1
   },
   {
     "range": {
       "low": 20784,
-      "high": 20807.99
+      "high": 20807.99,
+      "interval": 24
     },
     "afs": 227.1
   },
   {
     "range": {
       "low": 20808,
-      "high": 20831.99
+      "high": 20831.99,
+      "interval": 24
     },
     "afs": 226.1
   },
   {
     "range": {
       "low": 20832,
-      "high": 20855.99
+      "high": 20855.99,
+      "interval": 24
     },
     "afs": 225.1
   },
   {
     "range": {
       "low": 20856,
-      "high": 20879.99
+      "high": 20879.99,
+      "interval": 24
     },
     "afs": 224.1
   },
   {
     "range": {
       "low": 20880,
-      "high": 20903.99
+      "high": 20903.99,
+      "interval": 24
     },
     "afs": 223.1
   },
   {
     "range": {
       "low": 20904,
-      "high": 20927.99
+      "high": 20927.99,
+      "interval": 24
     },
     "afs": 222.1
   },
   {
     "range": {
       "low": 20928,
-      "high": 20951.99
+      "high": 20951.99,
+      "interval": 24
     },
     "afs": 221.1
   },
   {
     "range": {
       "low": 20952,
-      "high": 20975.99
+      "high": 20975.99,
+      "interval": 24
     },
     "afs": 220.1
   },
   {
     "range": {
       "low": 20976,
-      "high": 20999.99
+      "high": 20999.99,
+      "interval": 24
     },
     "afs": 219.1
   },
   {
     "range": {
       "low": 21000,
-      "high": 21023.99
+      "high": 21023.99,
+      "interval": 24
     },
     "afs": 218.1
   },
   {
     "range": {
       "low": 21024,
-      "high": 21047.99
+      "high": 21047.99,
+      "interval": 24
     },
     "afs": 217.1
   },
   {
     "range": {
       "low": 21048,
-      "high": 21071.99
+      "high": 21071.99,
+      "interval": 24
     },
     "afs": 216.1
   },
   {
     "range": {
       "low": 21072,
-      "high": 21095.99
+      "high": 21095.99,
+      "interval": 24
     },
     "afs": 215.1
   },
   {
     "range": {
       "low": 21096,
-      "high": 21119.99
+      "high": 21119.99,
+      "interval": 24
     },
     "afs": 214.1
   },
   {
     "range": {
       "low": 21120,
-      "high": 21143.99
+      "high": 21143.99,
+      "interval": 24
     },
     "afs": 213.1
   },
   {
     "range": {
       "low": 21144,
-      "high": 21167.99
+      "high": 21167.99,
+      "interval": 24
     },
     "afs": 212.1
   },
   {
     "range": {
       "low": 21168,
-      "high": 21191.99
+      "high": 21191.99,
+      "interval": 24
     },
     "afs": 211.1
   },
   {
     "range": {
       "low": 21192,
-      "high": 21215.99
+      "high": 21215.99,
+      "interval": 24
     },
     "afs": 210.1
   },
   {
     "range": {
       "low": 21216,
-      "high": 21239.99
+      "high": 21239.99,
+      "interval": 24
     },
     "afs": 209.1
   },
   {
     "range": {
       "low": 21240,
-      "high": 21263.99
+      "high": 21263.99,
+      "interval": 24
     },
     "afs": 208.1
   },
   {
     "range": {
       "low": 21264,
-      "high": 21287.99
+      "high": 21287.99,
+      "interval": 24
     },
     "afs": 207.1
   },
   {
     "range": {
       "low": 21288,
-      "high": 21311.99
+      "high": 21311.99,
+      "interval": 24
     },
     "afs": 206.1
   },
   {
     "range": {
       "low": 21312,
-      "high": 21335.99
+      "high": 21335.99,
+      "interval": 24
     },
     "afs": 205.1
   },
   {
     "range": {
       "low": 21336,
-      "high": 21359.99
+      "high": 21359.99,
+      "interval": 24
     },
     "afs": 204.1
   },
   {
     "range": {
       "low": 21360,
-      "high": 21383.99
+      "high": 21383.99,
+      "interval": 24
     },
     "afs": 203.1
   },
   {
     "range": {
       "low": 21384,
-      "high": 21407.99
+      "high": 21407.99,
+      "interval": 24
     },
     "afs": 202.1
   },
   {
     "range": {
       "low": 21408,
-      "high": 21431.99
+      "high": 21431.99,
+      "interval": 24
     },
     "afs": 201.1
   },
   {
     "range": {
       "low": 21432,
-      "high": 21455.99
+      "high": 21455.99,
+      "interval": 24
     },
     "afs": 200.1
   },
   {
     "range": {
       "low": 21456,
-      "high": 21479.99
+      "high": 21479.99,
+      "interval": 24
     },
     "afs": 199.1
   },
   {
     "range": {
       "low": 21480,
-      "high": 21503.99
+      "high": 21503.99,
+      "interval": 24
     },
     "afs": 198.1
   },
   {
     "range": {
       "low": 21504,
-      "high": 21527.99
+      "high": 21527.99,
+      "interval": 24
     },
     "afs": 197.1
   },
   {
     "range": {
       "low": 21528,
-      "high": 21551.99
+      "high": 21551.99,
+      "interval": 24
     },
     "afs": 196.1
   },
   {
     "range": {
       "low": 21552,
-      "high": 21575.99
+      "high": 21575.99,
+      "interval": 24
     },
     "afs": 195.1
   },
   {
     "range": {
       "low": 21576,
-      "high": 21599.99
+      "high": 21599.99,
+      "interval": 24
     },
     "afs": 194.1
   },
   {
     "range": {
       "low": 21600,
-      "high": 21623.99
+      "high": 21623.99,
+      "interval": 24
     },
     "afs": 193.1
   },
   {
     "range": {
       "low": 21624,
-      "high": 21647.99
+      "high": 21647.99,
+      "interval": 24
     },
     "afs": 192.1
   },
   {
     "range": {
       "low": 21648,
-      "high": 21671.99
+      "high": 21671.99,
+      "interval": 24
     },
     "afs": 191.1
   },
   {
     "range": {
       "low": 21672,
-      "high": 21695.99
+      "high": 21695.99,
+      "interval": 24
     },
     "afs": 190.1
   },
   {
     "range": {
       "low": 21696,
-      "high": 21719.99
+      "high": 21719.99,
+      "interval": 24
     },
     "afs": 189.1
   },
   {
     "range": {
       "low": 21720,
-      "high": 21743.99
+      "high": 21743.99,
+      "interval": 24
     },
     "afs": 188.1
   },
   {
     "range": {
       "low": 21744,
-      "high": 21767.99
+      "high": 21767.99,
+      "interval": 24
     },
     "afs": 187.1
   },
   {
     "range": {
       "low": 21768,
-      "high": 21791.99
+      "high": 21791.99,
+      "interval": 24
     },
     "afs": 186.1
   },
   {
     "range": {
       "low": 21792,
-      "high": 21815.99
+      "high": 21815.99,
+      "interval": 24
     },
     "afs": 185.1
   },
   {
     "range": {
       "low": 21816,
-      "high": 21839.99
+      "high": 21839.99,
+      "interval": 24
     },
     "afs": 184.1
   },
   {
     "range": {
       "low": 21840,
-      "high": 21863.99
+      "high": 21863.99,
+      "interval": 24
     },
     "afs": 183.1
   },
   {
     "range": {
       "low": 21864,
-      "high": 21887.99
+      "high": 21887.99,
+      "interval": 24
     },
     "afs": 182.1
   },
   {
     "range": {
       "low": 21888,
-      "high": 21911.99
+      "high": 21911.99,
+      "interval": 24
     },
     "afs": 181.1
   },
   {
     "range": {
       "low": 21912,
-      "high": 21935.99
+      "high": 21935.99,
+      "interval": 24
     },
     "afs": 180.1
   },
   {
     "range": {
       "low": 21936,
-      "high": 21959.99
+      "high": 21959.99,
+      "interval": 24
     },
     "afs": 179.1
   },
   {
     "range": {
       "low": 21960,
-      "high": 21983.99
+      "high": 21983.99,
+      "interval": 24
     },
     "afs": 178.1
   },
   {
     "range": {
       "low": 21984,
-      "high": 22007.99
+      "high": 22007.99,
+      "interval": 24
     },
     "afs": 177.1
   },
   {
     "range": {
       "low": 22008,
-      "high": 22031.99
+      "high": 22031.99,
+      "interval": 24
     },
     "afs": 176.1
   },
   {
     "range": {
       "low": 22032,
-      "high": 22055.99
+      "high": 22055.99,
+      "interval": 24
     },
     "afs": 175.1
   },
   {
     "range": {
       "low": 22056,
-      "high": 22079.99
+      "high": 22079.99,
+      "interval": 24
     },
     "afs": 174.1
   },
   {
     "range": {
       "low": 22080,
-      "high": 22103.99
+      "high": 22103.99,
+      "interval": 24
     },
     "afs": 173.1
   },
   {
     "range": {
       "low": 22104,
-      "high": 22127.99
+      "high": 22127.99,
+      "interval": 24
     },
     "afs": 172.1
   },
   {
     "range": {
       "low": 22128,
-      "high": 22151.99
+      "high": 22151.99,
+      "interval": 24
     },
     "afs": 171.1
   },
   {
     "range": {
       "low": 22152,
-      "high": 22175.99
+      "high": 22175.99,
+      "interval": 24
     },
     "afs": 170.1
   },
   {
     "range": {
       "low": 22176,
-      "high": 22199.99
+      "high": 22199.99,
+      "interval": 24
     },
     "afs": 169.1
   },
   {
     "range": {
       "low": 22200,
-      "high": 22223.99
+      "high": 22223.99,
+      "interval": 24
     },
     "afs": 168.1
   },
   {
     "range": {
       "low": 22224,
-      "high": 22247.99
+      "high": 22247.99,
+      "interval": 24
     },
     "afs": 167.1
   },
   {
     "range": {
       "low": 22248,
-      "high": 22271.99
+      "high": 22271.99,
+      "interval": 24
     },
     "afs": 166.1
   },
   {
     "range": {
       "low": 22272,
-      "high": 22295.99
+      "high": 22295.99,
+      "interval": 24
     },
     "afs": 165.1
   },
   {
     "range": {
       "low": 22296,
-      "high": 22319.99
+      "high": 22319.99,
+      "interval": 24
     },
     "afs": 164.1
   },
   {
     "range": {
       "low": 22320,
-      "high": 22343.99
+      "high": 22343.99,
+      "interval": 24
     },
     "afs": 163.1
   },
   {
     "range": {
       "low": 22344,
-      "high": 22367.99
+      "high": 22367.99,
+      "interval": 24
     },
     "afs": 162.1
   },
   {
     "range": {
       "low": 22368,
-      "high": 22391.99
+      "high": 22391.99,
+      "interval": 24
     },
     "afs": 161.1
   },
   {
     "range": {
       "low": 22392,
-      "high": 22415.99
+      "high": 22415.99,
+      "interval": 24
     },
     "afs": 160.1
   },
   {
     "range": {
       "low": 22416,
-      "high": 22439.99
+      "high": 22439.99,
+      "interval": 24
     },
     "afs": 159.1
   },
   {
     "range": {
       "low": 22440,
-      "high": 22463.99
+      "high": 22463.99,
+      "interval": 24
     },
     "afs": 158.1
   },
   {
     "range": {
       "low": 22464,
-      "high": 22487.99
+      "high": 22487.99,
+      "interval": 24
     },
     "afs": 157.1
   },
   {
     "range": {
       "low": 22488,
-      "high": 22511.99
+      "high": 22511.99,
+      "interval": 24
     },
     "afs": 156.1
   },
   {
     "range": {
       "low": 22512,
-      "high": 22535.99
+      "high": 22535.99,
+      "interval": 24
     },
     "afs": 155.1
   },
   {
     "range": {
       "low": 22536,
-      "high": 22559.99
+      "high": 22559.99,
+      "interval": 24
     },
     "afs": 154.1
   },
   {
     "range": {
       "low": 22560,
-      "high": 22583.99
+      "high": 22583.99,
+      "interval": 24
     },
     "afs": 153.1
   },
   {
     "range": {
       "low": 22584,
-      "high": 22607.99
+      "high": 22607.99,
+      "interval": 24
     },
     "afs": 152.1
   },
   {
     "range": {
       "low": 22608,
-      "high": 22631.99
+      "high": 22631.99,
+      "interval": 24
     },
     "afs": 151.1
   },
   {
     "range": {
       "low": 22632,
-      "high": 22655.99
+      "high": 22655.99,
+      "interval": 24
     },
     "afs": 150.1
   },
   {
     "range": {
       "low": 22656,
-      "high": 22679.99
+      "high": 22679.99,
+      "interval": 24
     },
     "afs": 149.1
   },
   {
     "range": {
       "low": 22680,
-      "high": 22703.99
+      "high": 22703.99,
+      "interval": 24
     },
     "afs": 148.1
   },
   {
     "range": {
       "low": 22704,
-      "high": 22727.99
+      "high": 22727.99,
+      "interval": 24
     },
     "afs": 147.1
   },
   {
     "range": {
       "low": 22728,
-      "high": 22751.99
+      "high": 22751.99,
+      "interval": 24
     },
     "afs": 146.1
   },
   {
     "range": {
       "low": 22752,
-      "high": 22775.99
+      "high": 22775.99,
+      "interval": 24
     },
     "afs": 145.1
   },
   {
     "range": {
       "low": 22776,
-      "high": 22799.99
+      "high": 22799.99,
+      "interval": 24
     },
     "afs": 144.1
   },
   {
     "range": {
       "low": 22800,
-      "high": 22823.99
+      "high": 22823.99,
+      "interval": 24
     },
     "afs": 143.1
   },
   {
     "range": {
       "low": 22824,
-      "high": 22847.99
+      "high": 22847.99,
+      "interval": 24
     },
     "afs": 142.1
   },
   {
     "range": {
       "low": 22848,
-      "high": 22871.99
+      "high": 22871.99,
+      "interval": 24
     },
     "afs": 141.1
   },
   {
     "range": {
       "low": 22872,
-      "high": 22895.99
+      "high": 22895.99,
+      "interval": 24
     },
     "afs": 140.1
   },
   {
     "range": {
       "low": 22896,
-      "high": 22919.99
+      "high": 22919.99,
+      "interval": 24
     },
     "afs": 139.1
   },
   {
     "range": {
       "low": 22920,
-      "high": 22943.99
+      "high": 22943.99,
+      "interval": 24
     },
     "afs": 138.1
   },
   {
     "range": {
       "low": 22944,
-      "high": 22967.99
+      "high": 22967.99,
+      "interval": 24
     },
     "afs": 137.1
   },
   {
     "range": {
       "low": 22968,
-      "high": 22991.99
+      "high": 22991.99,
+      "interval": 24
     },
     "afs": 136.1
   },
   {
     "range": {
       "low": 22992,
-      "high": 23015.99
+      "high": 23015.99,
+      "interval": 24
     },
     "afs": 135.1
   },
   {
     "range": {
       "low": 23016,
-      "high": 23039.99
+      "high": 23039.99,
+      "interval": 24
     },
     "afs": 134.1
   },
   {
     "range": {
       "low": 23040,
-      "high": 23063.99
+      "high": 23063.99,
+      "interval": 24
     },
     "afs": 133.1
   },
   {
     "range": {
       "low": 23064,
-      "high": 23087.99
+      "high": 23087.99,
+      "interval": 24
     },
     "afs": 132.1
   },
   {
     "range": {
       "low": 23088,
-      "high": 23111.99
+      "high": 23111.99,
+      "interval": 24
     },
     "afs": 131.1
   },
   {
     "range": {
       "low": 23112,
-      "high": 23135.99
+      "high": 23135.99,
+      "interval": 24
     },
     "afs": 130.1
   },
   {
     "range": {
       "low": 23136,
-      "high": 23159.99
+      "high": 23159.99,
+      "interval": 24
     },
     "afs": 129.1
   },
   {
     "range": {
       "low": 23160,
-      "high": 23183.99
+      "high": 23183.99,
+      "interval": 24
     },
     "afs": 128.1
   },
   {
     "range": {
       "low": 23184,
-      "high": 23207.99
+      "high": 23207.99,
+      "interval": 24
     },
     "afs": 127.1
   },
   {
     "range": {
       "low": 23208,
-      "high": 23231.99
+      "high": 23231.99,
+      "interval": 24
     },
     "afs": 126.1
   },
   {
     "range": {
       "low": 23232,
-      "high": 23255.99
+      "high": 23255.99,
+      "interval": 24
     },
     "afs": 125.1
   },
   {
     "range": {
       "low": 23256,
-      "high": 23279.99
+      "high": 23279.99,
+      "interval": 24
     },
     "afs": 124.1
   },
   {
     "range": {
       "low": 23280,
-      "high": 23303.99
+      "high": 23303.99,
+      "interval": 24
     },
     "afs": 123.1
   },
   {
     "range": {
       "low": 23304,
-      "high": 23327.99
+      "high": 23327.99,
+      "interval": 24
     },
     "afs": 122.1
   },
   {
     "range": {
       "low": 23328,
-      "high": 23351.99
+      "high": 23351.99,
+      "interval": 24
     },
     "afs": 121.1
   },
   {
     "range": {
       "low": 23352,
-      "high": 23375.99
+      "high": 23375.99,
+      "interval": 24
     },
     "afs": 120.1
   },
   {
     "range": {
       "low": 23376,
-      "high": 23399.99
+      "high": 23399.99,
+      "interval": 24
     },
     "afs": 119.1
   },
   {
     "range": {
       "low": 23400,
-      "high": 23423.99
+      "high": 23423.99,
+      "interval": 24
     },
     "afs": 118.1
   },
   {
     "range": {
       "low": 23424,
-      "high": 23447.99
+      "high": 23447.99,
+      "interval": 24
     },
     "afs": 117.1
   },
   {
     "range": {
       "low": 23448,
-      "high": 23471.99
+      "high": 23471.99,
+      "interval": 24
     },
     "afs": 116.1
   },
   {
     "range": {
       "low": 23472,
-      "high": 23495.99
+      "high": 23495.99,
+      "interval": 24
     },
     "afs": 115.1
   },
   {
     "range": {
       "low": 23496,
-      "high": 23519.99
+      "high": 23519.99,
+      "interval": 24
     },
     "afs": 114.1
   },
   {
     "range": {
       "low": 23520,
-      "high": 23543.99
+      "high": 23543.99,
+      "interval": 24
     },
     "afs": 113.1
   },
   {
     "range": {
       "low": 23544,
-      "high": 23567.99
+      "high": 23567.99,
+      "interval": 24
     },
     "afs": 112.1
   },
   {
     "range": {
       "low": 23568,
-      "high": 23591.99
+      "high": 23591.99,
+      "interval": 24
     },
     "afs": 111.1
   },
   {
     "range": {
       "low": 23592,
-      "high": 23615.99
+      "high": 23615.99,
+      "interval": 24
     },
     "afs": 110.1
   },
   {
     "range": {
       "low": 23616,
-      "high": 23639.99
+      "high": 23639.99,
+      "interval": 24
     },
     "afs": 109.1
   },
   {
     "range": {
       "low": 23640,
-      "high": 23663.99
+      "high": 23663.99,
+      "interval": 24
     },
     "afs": 108.1
   },
   {
     "range": {
       "low": 23664,
-      "high": 23687.99
+      "high": 23687.99,
+      "interval": 24
     },
     "afs": 107.1
   },
   {
     "range": {
       "low": 23688,
-      "high": 23711.99
+      "high": 23711.99,
+      "interval": 24
     },
     "afs": 106.1
   },
   {
     "range": {
       "low": 23712,
-      "high": 23735.99
+      "high": 23735.99,
+      "interval": 24
     },
     "afs": 105.1
   },
   {
     "range": {
       "low": 23736,
-      "high": 23759.99
+      "high": 23759.99,
+      "interval": 24
     },
     "afs": 104.1
   },
   {
     "range": {
       "low": 23760,
-      "high": 23783.99
+      "high": 23783.99,
+      "interval": 24
     },
     "afs": 103.1
   },
   {
     "range": {
       "low": 23784,
-      "high": 23807.99
+      "high": 23807.99,
+      "interval": 24
     },
     "afs": 102.1
   },
   {
     "range": {
       "low": 23808,
-      "high": 23831.99
+      "high": 23831.99,
+      "interval": 24
     },
     "afs": 101.1
   },
   {
     "range": {
       "low": 23832,
-      "high": 23855.99
+      "high": 23855.99,
+      "interval": 24
     },
     "afs": 100.1
   },
   {
     "range": {
       "low": 23856,
-      "high": 23879.99
+      "high": 23879.99,
+      "interval": 24
     },
     "afs": 99.1
   },
   {
     "range": {
       "low": 23880,
-      "high": 23903.99
+      "high": 23903.99,
+      "interval": 24
     },
     "afs": 98.1
   },
   {
     "range": {
       "low": 23904,
-      "high": 23927.99
+      "high": 23927.99,
+      "interval": 24
     },
     "afs": 97.1
   },
   {
     "range": {
       "low": 23928,
-      "high": 23951.99
+      "high": 23951.99,
+      "interval": 24
     },
     "afs": 96.1
   },
   {
     "range": {
       "low": 23952,
-      "high": 23975.99
+      "high": 23975.99,
+      "interval": 24
     },
     "afs": 95.1
   },
   {
     "range": {
       "low": 23976,
-      "high": 23999.99
+      "high": 23999.99,
+      "interval": 24
     },
     "afs": 94.1
   },
   {
     "range": {
       "low": 24000,
-      "high": 24023.99
+      "high": 24023.99,
+      "interval": 24
     },
     "afs": 93.1
   },
   {
     "range": {
       "low": 24024,
-      "high": 24047.99
+      "high": 24047.99,
+      "interval": 24
     },
     "afs": 92.1
   },
   {
     "range": {
       "low": 24048,
-      "high": 24071.99
+      "high": 24071.99,
+      "interval": 24
     },
     "afs": 91.1
   },
   {
     "range": {
       "low": 24072,
-      "high": 24095.99
+      "high": 24095.99,
+      "interval": 24
     },
     "afs": 90.1
   },
   {
     "range": {
       "low": 24096,
-      "high": 24119.99
+      "high": 24119.99,
+      "interval": 24
     },
     "afs": 89.1
   },
   {
     "range": {
       "low": 24120,
-      "high": 24143.99
+      "high": 24143.99,
+      "interval": 24
     },
     "afs": 88.1
   },
   {
     "range": {
       "low": 24144,
-      "high": 24167.99
+      "high": 24167.99,
+      "interval": 24
     },
     "afs": 87.1
   },
   {
     "range": {
       "low": 24168,
-      "high": 24191.99
+      "high": 24191.99,
+      "interval": 24
     },
     "afs": 86.1
   },
   {
     "range": {
       "low": 24192,
-      "high": 24215.99
+      "high": 24215.99,
+      "interval": 24
     },
     "afs": 85.1
   },
   {
     "range": {
       "low": 24216,
-      "high": 24239.99
+      "high": 24239.99,
+      "interval": 24
     },
     "afs": 84.1
   },
   {
     "range": {
       "low": 24240,
-      "high": 24263.99
+      "high": 24263.99,
+      "interval": 24
     },
     "afs": 83.1
   },
   {
     "range": {
       "low": 24264,
-      "high": 24287.99
+      "high": 24287.99,
+      "interval": 24
     },
     "afs": 82.1
   },
   {
     "range": {
       "low": 24288,
-      "high": 24311.99
+      "high": 24311.99,
+      "interval": 24
     },
     "afs": 81.1
   },
   {
     "range": {
       "low": 24312,
-      "high": 24335.99
+      "high": 24335.99,
+      "interval": 24
     },
     "afs": 80.1
   },
   {
     "range": {
       "low": 24336,
-      "high": 24359.99
+      "high": 24359.99,
+      "interval": 24
     },
     "afs": 79.1
   },
   {
     "range": {
       "low": 24360,
-      "high": 24383.99
+      "high": 24383.99,
+      "interval": 24
     },
     "afs": 78.1
   },
   {
     "range": {
       "low": 24384,
-      "high": 24407.99
+      "high": 24407.99,
+      "interval": 24
     },
     "afs": 77.1
   },
   {
     "range": {
       "low": 24408,
-      "high": 24431.99
+      "high": 24431.99,
+      "interval": 24
     },
     "afs": 76.1
   },
   {
     "range": {
       "low": 24432,
-      "high": 24455.99
+      "high": 24455.99,
+      "interval": 24
     },
     "afs": 75.1
   },
   {
     "range": {
       "low": 24456,
-      "high": 24479.99
+      "high": 24479.99,
+      "interval": 24
     },
     "afs": 74.1
   },
   {
     "range": {
       "low": 24480,
-      "high": 24503.99
+      "high": 24503.99,
+      "interval": 24
     },
     "afs": 73.1
   },
   {
     "range": {
       "low": 24504,
-      "high": 24527.99
+      "high": 24527.99,
+      "interval": 24
     },
     "afs": 72.1
   },
   {
     "range": {
       "low": 24528,
-      "high": 24551.99
+      "high": 24551.99,
+      "interval": 24
     },
     "afs": 71.1
   },
   {
     "range": {
       "low": 24552,
-      "high": 24575.99
+      "high": 24575.99,
+      "interval": 24
     },
     "afs": 70.1
   },
   {
     "range": {
       "low": 24576,
-      "high": 24599.99
+      "high": 24599.99,
+      "interval": 24
     },
     "afs": 69.1
   },
   {
     "range": {
       "low": 24600,
-      "high": 24623.99
+      "high": 24623.99,
+      "interval": 24
     },
     "afs": 68.1
   },
   {
     "range": {
       "low": 24624,
-      "high": 24647.99
+      "high": 24647.99,
+      "interval": 24
     },
     "afs": 67.1
   },
   {
     "range": {
       "low": 24648,
-      "high": 24671.99
+      "high": 24671.99,
+      "interval": 24
     },
     "afs": 66.1
   },
   {
     "range": {
       "low": 24672,
-      "high": 24695.99
+      "high": 24695.99,
+      "interval": 24
     },
     "afs": 65.1
   },
   {
     "range": {
       "low": 24696,
-      "high": 24719.99
+      "high": 24719.99,
+      "interval": 24
     },
     "afs": 64.1
   },
   {
     "range": {
       "low": 24720,
-      "high": 24743.99
+      "high": 24743.99,
+      "interval": 24
     },
     "afs": 63.1
   },
   {
     "range": {
       "low": 24744,
-      "high": 24767.99
+      "high": 24767.99,
+      "interval": 24
     },
     "afs": 62.1
   },
   {
     "range": {
       "low": 24768,
-      "high": 24791.99
+      "high": 24791.99,
+      "interval": 24
     },
     "afs": 61.1
   },
   {
     "range": {
       "low": 24792,
-      "high": 24815.99
+      "high": 24815.99,
+      "interval": 24
     },
     "afs": 60.1
   },
   {
     "range": {
       "low": 24816,
-      "high": 24839.99
+      "high": 24839.99,
+      "interval": 24
     },
     "afs": 59.1
   },
   {
     "range": {
       "low": 24840,
-      "high": 24863.99
+      "high": 24863.99,
+      "interval": 24
     },
     "afs": 58.1
   },
   {
     "range": {
       "low": 24864,
-      "high": 24887.99
+      "high": 24887.99,
+      "interval": 24
     },
     "afs": 57.1
   },
   {
     "range": {
       "low": 24888,
-      "high": 24911.99
+      "high": 24911.99,
+      "interval": 24
     },
     "afs": 56.1
   },
   {
     "range": {
       "low": 24912,
-      "high": 24935.99
+      "high": 24935.99,
+      "interval": 24
     },
     "afs": 55.1
   },
   {
     "range": {
       "low": 24936,
-      "high": 24959.99
+      "high": 24959.99,
+      "interval": 24
     },
     "afs": 54.1
   },
   {
     "range": {
       "low": 24960,
-      "high": 24983.99
+      "high": 24983.99,
+      "interval": 24
     },
     "afs": 53.1
   },
   {
     "range": {
       "low": 24984,
-      "high": 25007.99
+      "high": 25007.99,
+      "interval": 24
     },
     "afs": 52.1
   },
   {
     "range": {
       "low": 25008,
-      "high": 25031.99
+      "high": 25031.99,
+      "interval": 24
     },
     "afs": 51.1
   },
   {
     "range": {
       "low": 25032,
-      "high": 25055.99
+      "high": 25055.99,
+      "interval": 24
     },
     "afs": 50.1
   },
   {
     "range": {
       "low": 25056,
-      "high": 25079.99
+      "high": 25079.99,
+      "interval": 24
     },
     "afs": 49.1
   },
   {
     "range": {
       "low": 25080,
-      "high": 25103.99
+      "high": 25103.99,
+      "interval": 24
     },
     "afs": 48.1
   },
   {
     "range": {
       "low": 25104,
-      "high": 25127.99
+      "high": 25127.99,
+      "interval": 24
     },
     "afs": 47.1
   },
   {
     "range": {
       "low": 25128,
-      "high": 25151.99
+      "high": 25151.99,
+      "interval": 24
     },
     "afs": 46.1
   },
   {
     "range": {
       "low": 25152,
-      "high": 25175.99
+      "high": 25175.99,
+      "interval": 24
     },
     "afs": 45.1
   },
   {
     "range": {
       "low": 25176,
-      "high": 25199.99
+      "high": 25199.99,
+      "interval": 24
     },
     "afs": 44.1
   },
   {
     "range": {
       "low": 25200,
-      "high": 25223.99
+      "high": 25223.99,
+      "interval": 24
     },
     "afs": 43.1
   },
   {
     "range": {
       "low": 25224,
-      "high": 25247.99
+      "high": 25247.99,
+      "interval": 24
     },
     "afs": 42.1
   },
   {
     "range": {
       "low": 25248,
-      "high": 25271.99
+      "high": 25271.99,
+      "interval": 24
     },
     "afs": 41.1
   },
   {
     "range": {
       "low": 25272,
-      "high": 25295.99
+      "high": 25295.99,
+      "interval": 24
     },
     "afs": 40.1
   },
   {
     "range": {
       "low": 25296,
-      "high": 25319.99
+      "high": 25319.99,
+      "interval": 24
     },
     "afs": 39.1
   },
   {
     "range": {
       "low": 25320,
-      "high": 25343.99
+      "high": 25343.99,
+      "interval": 24
     },
     "afs": 38.1
   },
   {
     "range": {
       "low": 25344,
-      "high": 25367.99
+      "high": 25367.99,
+      "interval": 24
     },
     "afs": 37.1
   },
   {
     "range": {
       "low": 25368,
-      "high": 25391.99
+      "high": 25391.99,
+      "interval": 24
     },
     "afs": 36.1
   },
   {
     "range": {
       "low": 25392,
-      "high": 25415.99
+      "high": 25415.99,
+      "interval": 24
     },
     "afs": 35.1
   },
   {
     "range": {
       "low": 25416,
-      "high": 25439.99
+      "high": 25439.99,
+      "interval": 24
     },
     "afs": 34.1
   },
   {
     "range": {
       "low": 25440,
-      "high": 25463.99
+      "high": 25463.99,
+      "interval": 24
     },
     "afs": 33.1
   },
   {
     "range": {
       "low": 25464,
-      "high": 25487.99
+      "high": 25487.99,
+      "interval": 24
     },
     "afs": 32.1
   },
   {
     "range": {
       "low": 25488,
-      "high": 25511.99
+      "high": 25511.99,
+      "interval": 24
     },
     "afs": 31.1
   },
   {
     "range": {
       "low": 25512,
-      "high": 25535.99
+      "high": 25535.99,
+      "interval": 24
     },
     "afs": 30.1
   },
   {
     "range": {
       "low": 25536,
-      "high": 25559.99
+      "high": 25559.99,
+      "interval": 24
     },
     "afs": 29.1
   },
   {
     "range": {
       "low": 25560,
-      "high": 25583.99
+      "high": 25583.99,
+      "interval": 24
     },
     "afs": 28.1
   },
   {
     "range": {
       "low": 25584,
-      "high": 25607.99
+      "high": 25607.99,
+      "interval": 24
     },
     "afs": 27.1
   },
   {
     "range": {
       "low": 25608,
-      "high": 25631.99
+      "high": 25631.99,
+      "interval": 24
     },
     "afs": 26.1
   },
   {
     "range": {
       "low": 25632,
-      "high": 25655.99
+      "high": 25655.99,
+      "interval": 24
     },
     "afs": 25.1
   },
   {
     "range": {
       "low": 25656,
-      "high": 25679.99
+      "high": 25679.99,
+      "interval": 24
     },
     "afs": 24.1
   },
   {
     "range": {
       "low": 25680,
-      "high": 25703.99
+      "high": 25703.99,
+      "interval": 24
     },
     "afs": 23.1
   },
   {
     "range": {
       "low": 25704,
-      "high": 25727.99
+      "high": 25727.99,
+      "interval": 24
     },
     "afs": 22.1
   },
   {
     "range": {
       "low": 25728,
-      "high": 25751.99
+      "high": 25751.99,
+      "interval": 24
     },
     "afs": 21.1
   },
   {
     "range": {
       "low": 25752,
-      "high": 25775.99
+      "high": 25775.99,
+      "interval": 24
     },
     "afs": 20.1
   },
   {
     "range": {
       "low": 25776,
-      "high": 25799.99
+      "high": 25799.99,
+      "interval": 24
     },
     "afs": 19.1
   },
   {
     "range": {
       "low": 25800,
-      "high": 25823.99
+      "high": 25823.99,
+      "interval": 24
     },
     "afs": 18.1
   },
   {
     "range": {
       "low": 25824,
-      "high": 25847.99
+      "high": 25847.99,
+      "interval": 24
     },
     "afs": 17.1
   },
   {
     "range": {
       "low": 25848,
-      "high": 25871.99
+      "high": 25871.99,
+      "interval": 24
     },
     "afs": 16.1
   },
   {
     "range": {
       "low": 25872,
-      "high": 25895.99
+      "high": 25895.99,
+      "interval": 24
     },
     "afs": 15.1
   },
   {
     "range": {
       "low": 25896,
-      "high": 25919.99
+      "high": 25919.99,
+      "interval": 24
     },
     "afs": 14.1
   },
   {
     "range": {
       "low": 25920,
-      "high": 25943.99
+      "high": 25943.99,
+      "interval": 24
     },
     "afs": 13.1
   },
   {
     "range": {
       "low": 25944,
-      "high": 25967.99
+      "high": 25967.99,
+      "interval": 24
     },
     "afs": 12.1
   },
   {
     "range": {
       "low": 25968,
-      "high": 25991.99
+      "high": 25991.99,
+      "interval": 24
     },
     "afs": 11.1
   },
   {
     "range": {
       "low": 25992,
-      "high": 26015.99
+      "high": 26015.99,
+      "interval": 24
     },
     "afs": 10.1
   },
   {
     "range": {
       "low": 26016,
-      "high": 26039.99
+      "high": 26039.99,
+      "interval": 24
     },
     "afs": 9.1
   },
   {
     "range": {
       "low": 26040,
-      "high": 26063.99
+      "high": 26063.99,
+      "interval": 24
     },
     "afs": 8.1
   },
   {
     "range": {
       "low": 26064,
-      "high": 26087.99
+      "high": 26087.99,
+      "interval": 24
     },
     "afs": 7.1
   },
   {
     "range": {
       "low": 26088,
-      "high": 26111.99
+      "high": 26111.99,
+      "interval": 24
     },
     "afs": 6.1
   },
   {
     "range": {
       "low": 26112,
-      "high": 26135.99
+      "high": 26135.99,
+      "interval": 24
     },
     "afs": 5.1
   },
   {
     "range": {
       "low": 26136,
-      "high": 26159.99
+      "high": 26159.99,
+      "interval": 24
     },
     "afs": 4.1
   },
   {
     "range": {
       "low": 26160,
-      "high": 26183.99
+      "high": 26183.99,
+      "interval": 24
     },
     "afs": 3.1
   },
   {
     "range": {
       "low": 26184,
-      "high": 26207.99
+      "high": 26207.99,
+      "interval": 24
     },
     "afs": 2.1
   },
   {
     "range": {
       "low": 26208,
-      "high": 26231.99
+      "high": 26231.99,
+      "interval": 24
     },
     "afs": 1.1
   },
   {
     "range": {
       "low": 26232,
-      "high": 26255.99
+      "high": 26255.99,
+      "interval": 24
     },
     "afs": 0.1
   }
