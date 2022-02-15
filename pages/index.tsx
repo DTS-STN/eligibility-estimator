@@ -38,19 +38,12 @@ const Home: NextPage = (props) => {
         />
       </div>
 
-      <details>
+      <details className="py-4">
         <summary className="text-default-text">{tsln.privacyDiscTitle}</summary>
         <div className="p-4">
           <p>{tsln.privacyDisc}</p>
         </div>
       </details>
-
-      <button
-        className="btn btn-primary w-28 my-8"
-        onClick={(e) => router.push('/eligibility')}
-      >
-        {tsln.next}
-      </button>
 
       <Alert
         title={tsln.disclaimerTitle}
@@ -59,6 +52,13 @@ const Home: NextPage = (props) => {
       >
         {tsln.disclaimer}
       </Alert>
+
+      <button
+        className="btn btn-primary w-28 my-8"
+        onClick={(e) => router.push('/eligibility')}
+      >
+        {tsln.next}
+      </button>
     </Layout>
   )
 }

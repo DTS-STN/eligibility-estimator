@@ -39,7 +39,7 @@ const en: WebTranslations = {
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
   disclaimerTitle: 'Disclaimer',
   disclaimer:
-    "Please be reminded that this is a prototype in development. The results are estimates and not a final decision. For a more accurate assessment of your eligibility, <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>. The results are not financial advice. The estimator does not collect and does not save the information you provide.",
+    "Please be reminded that this is a prototype in development. The results are estimates and not a final decision. For a more accurate assessment of your eligibility, contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>. The results are not financial advice. The estimator does not collect and does not save the information you provide.",
   contactSC:
     'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
   footerlink1: 'Contact Us',
@@ -73,7 +73,7 @@ const en: WebTranslations = {
   },
   nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
-  privacyDiscTitle: 'Privacy Disclaimer',
+  privacyDiscTitle: 'Privacy Notice',
   privacyDisc:
     'The personal information provided is governed in accordance with the Privacy Act. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
