@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
+import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -18,6 +19,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
   const { name, label, checkedValue, onChange, values, keyforid, error } = props
+  const requiredText = useTranslation<string>('required')
 
   return (
     <>
@@ -33,7 +35,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
             className="mb-1.5 text-content question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-2">({requiredText})</span>
           <Tooltip field={name} />
         </label>
         {error && <ErrorLabel errorMessage={error} />}

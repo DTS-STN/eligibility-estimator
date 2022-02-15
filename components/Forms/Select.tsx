@@ -4,6 +4,7 @@ import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
 import Select from 'react-select'
 import { FormField } from '../../client-state/models/FormField'
 import { FieldType } from '../../utils/api/definitions/fields'
+import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -23,6 +24,7 @@ interface SelectProps
  */
 export const FormSelect: React.VFC<SelectProps> = observer(
   ({ field, name, error, placeholder }) => {
+    const requiredText = useTranslation<string>('required')
     const defaultValue = field.value ?? field.default
 
     const stateValue =
@@ -40,7 +42,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
         >
           <span className="text-danger">* </span>
           <span className="mb-1.5 text-content">{field.label}</span>
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-2">({requiredText})</span>
           <Tooltip field={field.key} />
         </label>
         {error && <ErrorLabel errorMessage={error} />}
