@@ -21,7 +21,7 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         root.setActiveTab(index)
       }}
     >
-      <Tab.List className={`border-b border-muted/20`}>
+      <Tab.List className={`border-b border-muted/20`} id="tabList">
         <Tab
           className={({ selected }) =>
             selected
