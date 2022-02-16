@@ -48,7 +48,7 @@ export class SummaryBuilder {
   private getState(): EstimationSummaryState {
     if (this.detectNeedsInfo()) {
       return EstimationSummaryState.MORE_INFO
-    } else if (this.detectConditional()) {
+    } else if (this.detectUnavailable()) {
       return EstimationSummaryState.UNAVAILABLE
     } else if (this.detectEligible()) {
       return EstimationSummaryState.AVAILABLE_ELIGIBLE
@@ -156,8 +156,8 @@ export class SummaryBuilder {
     return this.missingFields.length > 0
   }
 
-  detectConditional(): boolean {
-    return this.getResultExistsInAnyBenefit(ResultKey.CONDITIONAL)
+  detectUnavailable(): boolean {
+    return this.getResultExistsInAnyBenefit(ResultKey.UNAVAILABLE)
   }
 
   detectEligible(): boolean {

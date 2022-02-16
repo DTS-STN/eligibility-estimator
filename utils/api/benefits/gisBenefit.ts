@@ -29,7 +29,7 @@ export class GisBenefit extends BaseBenefit {
     const meetsReqLiving = this.input.livingCountry.canada
     const meetsReqOas =
       this.oasResult.eligibility.result === ResultKey.ELIGIBLE ||
-      this.oasResult.eligibility.result === ResultKey.CONDITIONAL
+      this.oasResult.eligibility.result === ResultKey.UNAVAILABLE
     const meetsReqLegal = this.input.legalStatus.canadian
     /*
      Please note that the logic below is currently imperfect. Specifically, when partnerBenefitStatus == partialOas,
@@ -46,9 +46,9 @@ export class GisBenefit extends BaseBenefit {
     // main checks
     if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
       if (meetsReqAge) {
-        if (this.oasResult.eligibility.result == ResultKey.CONDITIONAL) {
+        if (this.oasResult.eligibility.result == ResultKey.UNAVAILABLE) {
           return {
-            result: ResultKey.CONDITIONAL,
+            result: ResultKey.UNAVAILABLE,
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
@@ -87,13 +87,13 @@ export class GisBenefit extends BaseBenefit {
     } else if (!meetsReqLegal) {
       if (this.input.legalStatus.sponsored) {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegalSponsored,
         }
       } else {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegal,
         }
