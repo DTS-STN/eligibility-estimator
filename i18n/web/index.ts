@@ -7,6 +7,7 @@ export type WebTranslations = {
   testSiteTitle: string
   testSiteHeader: string
   otherLang: string
+  otherLangCode: string
   search: string
   breadcrumb1Title: string
   breadcrumb1URL: string

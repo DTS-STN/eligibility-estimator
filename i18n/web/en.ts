@@ -5,6 +5,7 @@ const en: WebTranslations = {
   testSiteHeader:
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
+  otherLangCode: 'FR',
   search: 'Search Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',

@@ -113,7 +113,13 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               const content = (
                 <div key={field.key} className={styling}>
                   {field.category.key != lastCategory && (
-                    <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
+                    <h2
+                      className={
+                        isChildQuestion
+                          ? 'h2 pt-10 text-content'
+                          : 'h2 my-8 text-content'
+                      }
+                    >
                       {field.category.text}
                     </h2>
                   )}

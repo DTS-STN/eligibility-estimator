@@ -26,7 +26,7 @@ module.exports = {
       'content': '#333',
 
       // default
-      'default-text': '#335075',
+      'default-text': '#284162',
       'default': '#eaebed',
       'default-hover': '#cfd1d5',
       'default-border': '#dcdee1',
@@ -61,12 +61,12 @@ module.exports = {
 
       // misc
       'muted': '#555',
-      'form-border': '#ccc',
+      'form-border': '#6F6F6F',
       'form-highlighted': '#66afe9;',
 
       'header-rule': '#AF3C43',
 
-      'emphasis': '#edf9ff',
+      'emphasis': '#F2F8FF',
     },
     extend: {
       fontFamily: {
