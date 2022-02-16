@@ -165,6 +165,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         field={field}
                         error={field.error}
+                        placeholder={getPlaceholderForSelect(field, tsln)}
                         value={null}
                       />
                     </div>
@@ -251,3 +252,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     )
   }
 )
+
+const getPlaceholderForSelect = (
+  field: Instance<typeof FormField>,
+  tsln: WebTranslations
+) => {
+  let text = tsln.selectText[field.key]
+  return text ? text : tsln.selectText.default
+}

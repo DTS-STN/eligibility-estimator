@@ -73,7 +73,7 @@ const fr: WebTranslations = {
     tableTotalAmount: 'Montant total des prestations mensuelles',
   },
   nextSteps: 'La prochaine étape',
-  moreInfoHeader: 'FRENCH: More Information',
+  moreInfoHeader: "Besoin de plus d'information",
 
   errors: {
     empty: 'Ce renseignement est requis',
@@ -82,6 +82,13 @@ const fr: WebTranslations = {
   govt: 'Gouvernement du Canada',
   yes: 'Oui',
   no: 'Non',
+
+  selectText: {
+    maritalStatus: 'Sélectionner un état civil',
+    livingCountry: 'Sélectionner un pays',
+    partnerLivingCountry: 'Sélectionner un pays',
+    default: 'Sélectionnez parmi',
+  },
 }
 
 export default fr

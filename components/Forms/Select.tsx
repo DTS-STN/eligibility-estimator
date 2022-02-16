@@ -22,7 +22,7 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = observer(
-  ({ field, name, error }) => {
+  ({ field, name, error, placeholder }) => {
     const defaultValue = field.value ?? field.default
 
     const stateValue =
@@ -66,7 +66,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
               }),
             }}
             className="rselect"
-            placeholder="Select from..."
+            placeholder={placeholder}
             data-testid="select"
             value={stateValue}
             defaultValue={

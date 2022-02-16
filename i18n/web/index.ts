@@ -75,4 +75,11 @@ export type WebTranslations = {
   govt: string
   yes: string
   no: string
+
+  selectText: {
+    maritalStatus: string
+    livingCountry: string
+    partnerLivingCountry: string
+    default: string
+  }
 }
