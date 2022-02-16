@@ -48,13 +48,13 @@ export class AlwBenefit extends BaseBenefit {
       } else if (this.input.age == 59) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen60ApplyNow,
         }
       } else if (underAgeReq) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen60,
         }
       } else {

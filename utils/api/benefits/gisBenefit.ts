@@ -62,7 +62,7 @@ export class GisBenefit extends BaseBenefit {
       } else {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen65,
         }
       }

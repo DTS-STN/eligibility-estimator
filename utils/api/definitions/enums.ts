@@ -60,6 +60,7 @@ export enum ResultKey {
 export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
+  AGE_YOUNG = `Age does not meet yet requirement for this benefit, will in the future`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
   LIVING_COUNTRY = `Not living in Canada`,
   LEGAL_STATUS = `Legal status does not meet requirement for this benefit`,

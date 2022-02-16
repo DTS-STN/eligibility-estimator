@@ -43,13 +43,13 @@ export class OasBenefit extends BaseBenefit {
       } else if (this.input.age == 64) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen65ApplyNowOas,
         }
       } else {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen65,
         }
       }

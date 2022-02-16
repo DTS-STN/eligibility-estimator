@@ -236,6 +236,7 @@ resources:
             enum:
               - You meet the criteria
               - Age does not meet requirement for this benefit
+              - Age does not meet yet requirement for this benefit, will in the future
               - Not enough years in Canada
               - Not living in Canada
               - Legal status does not meet requirement for this benefit
