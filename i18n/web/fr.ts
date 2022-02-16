@@ -87,8 +87,6 @@ const fr: WebTranslations = {
     maritalStatus: 'Sélectionner un état civil',
     livingCountry: 'Sélectionner un pays',
     partnerLivingCountry: 'Sélectionner un pays',
-    legalStatus: 'Sélectionner un statut légal',
-    partnerLegalStatus: 'Sélectionner un statut légal',
     default: 'Sélectionnez parmi',
   },
 }

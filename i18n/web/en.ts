@@ -88,8 +88,6 @@ const en: WebTranslations = {
     maritalStatus: 'Select a marital status',
     livingCountry: 'Select a country',
     partnerLivingCountry: 'Select a country',
-    legalStatus: 'Select a legal status',
-    partnerLegalStatus: 'Select a legal status',
     default: 'Select from',
   },
 }

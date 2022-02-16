@@ -80,8 +80,6 @@ export type WebTranslations = {
     maritalStatus: string
     livingCountry: string
     partnerLivingCountry: string
-    legalStatus: string
-    partnerLegalStatus: string
     default: string
   }
 }
