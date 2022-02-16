@@ -22,7 +22,7 @@ const en: WebTranslations = {
   questions: 'Questions',
   results: 'Results',
   needHelp: 'Need help?',
-  faq: 'Frequently asked questions (FAQ)',
+  faq: 'Frequently asked questions',
   estimate: 'Estimate',
   required: 'required',
   homePageP1:

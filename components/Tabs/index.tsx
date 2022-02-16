@@ -50,7 +50,7 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
               : 'bg-white rounded text-muted border border-[#DDDDDD] px-4 py-3 underline'
           }
         >
-          FAQ
+          {tsln.faq}
         </Tab>
       </Tab.List>
       <Tab.Panels>
