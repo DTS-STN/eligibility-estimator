@@ -26,7 +26,7 @@ const ProgressSection: React.FC<Section> = ({
       {!first && (
         <div
           className={`flex-auto border-t-4 ${
-            complete ? 'text-primary' : 'text-default-border'
+            complete ? 'text-primary' : 'text-[#6F6F6F]'
           }`}
         ></div>
       )}
@@ -40,7 +40,7 @@ const ProgressSection: React.FC<Section> = ({
           className={`${
             complete
               ? 'text-primary complete-progress-section'
-              : 'text-default-border incomplete-progress-section'
+              : 'text-[#6F6F6F] incomplete-progress-section'
           } fill-current stroke-white z-10`}
         >
           <rect
@@ -56,13 +56,13 @@ const ProgressSection: React.FC<Section> = ({
             d="m6 14.214 5.321 5.179L22.571 8"
             strokeWidth="3"
             strokeLinejoin="round"
-            stroke={complete ? '#fff' : 'text-default-border'}
+            stroke={complete ? '#fff' : 'text-[#6F6F6F]'}
           />
         </svg>
         {isBreakpoint && (
           <svg
             className={`${
-              complete ? 'text-primary' : 'text-default-border'
+              complete ? 'text-primary' : 'text-[#6F6F6F]'
             } fill-current stroke-white absolute`}
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -71,7 +71,7 @@ const ProgressSection: React.FC<Section> = ({
         )}
         <span
           className={`whitespace-nowrap mx-1.5 font-semibold ${
-            complete ? 'text-primary' : 'text-default-border'
+            complete ? 'text-primary' : 'text-[#6F6F6F]'
           }`}
         >
           {title}
@@ -98,7 +98,7 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
       ))}
       <div
         className={`flex-auto border-t-4 ${
-          estimateSection ? 'text-primary' : 'text-default-border'
+          estimateSection ? 'text-primary' : 'text-[#6F6F6F]'
         }`}
       ></div>
       <ProgressSection

@@ -58,11 +58,17 @@ export const FormSelect: React.VFC<SelectProps> = observer(
                 border: error ? '1px solid red' : '1px solid #333',
                 borderRadius: '4px',
               }),
+              control: (styles) => ({
+                ...styles,
+                border: 'none',
+              }),
               dropdownIndicator: (styles) => ({
+                ...styles,
                 color: '#333',
                 paddingRight: '6px',
               }),
               clearIndicator: (styles) => ({
+                ...styles,
                 color: '#333',
                 paddingRight: '6px',
               }),

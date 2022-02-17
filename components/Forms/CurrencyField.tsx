@@ -56,7 +56,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           data-testid="currency-input"
           thousandSeparator={true}
           prefix="$"
-          className={`form-control text-content ${
+          className={`form-control text-content border-[#333] ${
             error ? ' border-danger' : ''
           }`}
           min={0}

@@ -26,10 +26,10 @@ module.exports = {
       'content': '#333',
 
       // default
-      'default-text': '#284162',
+      'default-text': '#335075',
       'default': '#eaebed',
       'default-hover': '#cfd1d5',
-      'default-border': '#6f6f6f',
+      'default-border': '#dcdee1',
 
       // primary
       'primary': '#293749',
@@ -61,12 +61,12 @@ module.exports = {
 
       // misc
       'muted': '#555',
-      'form-border': '#6F6F6F',
+      'form-border': '#6f6f6f',
       'form-highlighted': '#66afe9;',
 
       'header-rule': '#AF3C43',
 
-      'emphasis': '#F2F8FF',
+      'emphasis': '#edf9ff',
     },
     extend: {
       fontFamily: {

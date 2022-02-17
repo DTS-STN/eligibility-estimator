@@ -51,7 +51,9 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
       <NumberFormat
         id={name}
         name={name}
-        className={`form-control text-content ${error ? ' border-danger' : ''}`}
+        className={`form-control text-content border-[#333] ${
+          error ? ' border-danger' : ''
+        }`}
         data-testid="number-input"
         min={0}
         value={value != null ? (value as string) : ''}
