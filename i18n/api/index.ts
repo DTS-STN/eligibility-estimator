@@ -13,7 +13,7 @@ export interface KeyAndText {
 export interface Translations {
   _language: Language
   _locale: Locale
-  benefit: { oas: string; gis: string; allowance: string; afs: string }
+  benefit: { oas: string; gis: string; alw: string; afs: string }
   category: {
     incomeDetails: string
     personalInformation: string
