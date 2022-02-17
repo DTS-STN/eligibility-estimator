@@ -1,11 +1,12 @@
-import { DetailedHTMLProps, SelectHTMLAttributes, useRef } from 'react'
-import Select from 'react-select'
-import { Tooltip } from '../Tooltip/tooltip'
-import { ErrorLabel } from './validation/ErrorLabel'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
+import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
+import Select from 'react-select'
 import { FormField } from '../../client-state/models/FormField'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import { FieldType } from '../../utils/api/definitions/fields'
+import { useTranslation } from '../Hooks'
+import { Tooltip } from '../Tooltip/tooltip'
+import { ErrorLabel } from './validation/ErrorLabel'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -22,7 +23,8 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = observer(
-  ({ field, name, error }) => {
+  ({ field, name, error, placeholder }) => {
+    const requiredText = useTranslation<string>('required')
     const defaultValue = field.value ?? field.default
 
     const stateValue =
@@ -36,13 +38,13 @@ export const FormSelect: React.VFC<SelectProps> = observer(
           htmlFor={name}
           aria-label={name}
           data-testid="select-label"
-          className="font-semibold inline-block mb-1.5"
+          className="inline-block mb-1.5"
         >
           <span className="text-danger">* </span>
           <span className="mb-1.5 font-semibold text-content">
             {field.label}
           </span>
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-2">({requiredText})</span>
           <Tooltip field={field.key} />
         </label>
         {error && <ErrorLabel errorMessage={error} />}
@@ -53,8 +55,22 @@ export const FormSelect: React.VFC<SelectProps> = observer(
               container: (styles) => ({
                 ...styles,
                 fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
-                border: error ? '1px solid red' : undefined,
+                border: error ? '1px solid red' : '1px solid #333',
                 borderRadius: '4px',
+              }),
+              control: (styles) => ({
+                ...styles,
+                border: 'none',
+              }),
+              dropdownIndicator: (styles) => ({
+                ...styles,
+                color: '#333',
+                paddingRight: '6px',
+              }),
+              clearIndicator: (styles) => ({
+                ...styles,
+                color: '#333',
+                paddingRight: '6px',
               }),
               input: (styles) => ({
                 ...styles,
@@ -66,7 +82,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
               }),
             }}
             className="rselect"
-            placeholder="Select from..."
+            placeholder={placeholder}
             data-testid="select"
             value={stateValue}
             defaultValue={

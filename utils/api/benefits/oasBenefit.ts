@@ -4,12 +4,12 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { MAX_OAS_ENTITLEMENT, MAX_OAS_INCOME } from '../definitions/legalValues'
 import {
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
+import { legalValues } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit {
@@ -20,7 +20,7 @@ export class OasBenefit extends BaseBenefit {
   protected getEligibility(): EligibilityResult {
     // helpers
     const meetsReqAge = this.input.age >= 65
-    const meetsReqIncome = this.income < MAX_OAS_INCOME
+    const meetsReqIncome = this.income < legalValues.MAX_OAS_INCOME
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -28,22 +28,28 @@ export class OasBenefit extends BaseBenefit {
 
     // main checks
     if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
-      if (meetsReqAge) {
+      if (this.input.age >= 70) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.eligible,
         }
+      } else if (this.input.age >= 65 && this.input.age < 70) {
+        return {
+          result: ResultKey.ELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.eligibleOas65to69,
+        }
       } else if (this.input.age == 64) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
-          detail: this.translations.detail.eligibleWhen65ApplyNow,
+          reason: ResultReason.AGE_YOUNG,
+          detail: this.translations.detail.eligibleWhen65ApplyNowOas,
         }
       } else {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen65,
         }
       }
@@ -60,7 +66,7 @@ export class OasBenefit extends BaseBenefit {
       ) {
         if (meetsReqAge) {
           return {
-            result: ResultKey.CONDITIONAL,
+            result: ResultKey.UNAVAILABLE,
             reason: ResultReason.YEARS_IN_CANADA,
             detail: this.translations.detail.dependingOnAgreement,
           }
@@ -87,26 +93,19 @@ export class OasBenefit extends BaseBenefit {
         }
       } else if (this.input.legalStatus.sponsored) {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegalSponsored,
         }
       } else {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegal,
         }
       }
-    } else if (this.input.livingCountry.noAgreement) {
-      return {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.SOCIAL_AGREEMENT,
-        detail: this.translations.detail.ineligibleYearsOrCountry,
-      }
     }
-    // fallback
-    throw new Error('should not be here')
+    throw new Error('entitlement logic failed to produce a result')
   }
 
   protected getEntitlement(): EntitlementResult {
@@ -120,7 +119,9 @@ export class OasBenefit extends BaseBenefit {
         : EntitlementResultType.FULL
     const detailOverride =
       type === EntitlementResultType.PARTIAL
-        ? this.translations.detail.eligiblePartialOas
+        ? this.input.age >= 65 && this.input.age < 70
+          ? this.translations.detail.eligiblePartialOas65to69
+          : this.translations.detail.eligiblePartialOas
         : undefined
 
     return { result, type, detailOverride }
@@ -128,7 +129,8 @@ export class OasBenefit extends BaseBenefit {
 
   private getEntitlementAmount(): number {
     return this.roundToTwo(
-      Math.min(this.input.yearsInCanadaSince18 / 40, 1) * MAX_OAS_ENTITLEMENT
+      Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
+        legalValues.MAX_OAS_ENTITLEMENT
     )
   }
 }

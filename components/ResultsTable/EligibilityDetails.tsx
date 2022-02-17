@@ -8,9 +8,11 @@ export const EligibilityDetails: React.VFC<{
 }> = ({ eligibilityType }) => (
   <>
     {eligibilityType.eligibility.detail.split('\n').map((str, i) => (
-      <p key={i} className={i == 0 ? `inline` : ''}>
-        {str}
-      </p>
+      <p
+        key={i}
+        className={i == 0 ? 'inline summary-link' : 'summary-link'}
+        dangerouslySetInnerHTML={{ __html: str }}
+      />
     ))}
   </>
 )

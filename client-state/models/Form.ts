@@ -1,11 +1,12 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
+import { webDictionary } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
-import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
 import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import { legalValues } from '../../utils/api/scrapers/output'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
@@ -54,9 +55,12 @@ export const Form = types
         incomeFields.length > 0 && incomeFields.every((field) => field.filled)
       const pComplete =
         personalFields.length > 0 &&
+        iComplete &&
         personalFields.every((field) => field.filled)
       const lComplete =
-        legalFields.length > 0 && legalFields.every((field) => field.filled)
+        legalFields.length > 0 &&
+        pComplete &&
+        legalFields.every((field) => field.filled)
 
       return { income: iComplete, personal: pComplete, legal: lComplete }
     },
@@ -94,11 +98,11 @@ export const Form = types
         .filter((f) => FormField.is(f))
       self.removeFields(unnecessaryFields)
     },
-    validateAgainstEmptyFields(): boolean {
+    validateAgainstEmptyFields(locale: string): boolean {
       let errorsExist = false
       self.fields.map((field) => {
         if (!field.filled) {
-          field.setError('This field is required')
+          field.setError(webDictionary[locale].errors.empty)
           errorsExist = true
         }
         return field
@@ -107,25 +111,6 @@ export const Form = types
     },
   }))
   .actions((self) => ({
-    clearForm(): void {
-      const fieldsToRemove: Instance<typeof FormField> = []
-      for (const field of self.fields) {
-        field.setValue(null)
-        if (
-          field.key === FieldKey.PARTNER_INCOME ||
-          field.key === FieldKey.PARTNER_BENEFIT_STATUS ||
-          field.key === FieldKey.EVER_LIVED_SOCIAL_COUNTRY ||
-          field.key === FieldKey.LEGAL_STATUS_OTHER
-        ) {
-          fieldsToRemove.push(field)
-        }
-      }
-      self.removeFields(fieldsToRemove)
-
-      // remove the now invalid summary object
-      const parent = getParent(self) as Instance<typeof RootStore>
-      parent.setSummary({})
-    },
     clearAllErrors() {
       self.fields.map((field) => field.setError(undefined))
     },
@@ -169,7 +154,10 @@ export const Form = types
       })
     },
     buildQueryStringWithFormData(): string {
-      let qs = ''
+      const parent = getParent(self) as Instance<typeof RootStore>
+
+      let qs = `_language=${parent.lang}`
+
       for (const field of self.fields) {
         if (!field.value) continue
 
@@ -188,7 +176,7 @@ export const Form = types
       // build query  string
       const queryString = self.buildQueryStringWithFormData()
 
-      const apiData = yield fetch(`${self.API_URL}?${queryString}`)
+      const apiData = yield fetch(`/${self.API_URL}?${queryString}`)
       const data: ResponseSuccess | ResponseError = yield apiData.json()
 
       if ('error' in data) {
@@ -219,7 +207,21 @@ export const Form = types
         return false
 
       const validIncome = self.getFieldByKey(FieldKey.INCOME).sanitizeInput()
-      return parseInt(validIncome) > MAX_OAS_INCOME
+      return parseInt(validIncome) > legalValues.MAX_OAS_INCOME
+    },
+  }))
+  .actions((self) => ({
+    clearForm(): void {
+      const fieldsToRemove: Instance<typeof FormField> = []
+      for (const field of self.fields) {
+        field.setValue(null)
+      }
+      self.removeFields(fieldsToRemove)
+
+      // remove the now invalid summary object
+      const parent = getParent(self) as Instance<typeof RootStore>
+      parent.setSummary({})
+      self.sendAPIRequest()
     },
   }))
   .views((self) => ({

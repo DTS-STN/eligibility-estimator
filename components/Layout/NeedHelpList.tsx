@@ -38,7 +38,7 @@ export const NeedHelpList: React.VFC<{
 
   return (
     <div className="fixedElement z-10" ref={ref}>
-      <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 max-w-[380px]">
+      <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
         <h2 className="h2">{title}</h2>
         <ul className="pl-5 list-disc">
           {links &&

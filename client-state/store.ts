@@ -1,12 +1,18 @@
-import { types, IMaybe, ISimpleType, ModelCreationType } from 'mobx-state-tree'
 import {
-  ExtractCFromProps,
   IArrayType,
+  IMaybe,
   IModelType,
-  _NotCustomized,
-} from 'mobx-state-tree/dist/internal'
+  Instance,
+  ISimpleType,
+  ModelCreationType,
+  types,
+} from 'mobx-state-tree'
+import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
 import {
+  EntitlementResultType,
   EstimationSummaryState,
+  Language,
+  LinkLocation,
   ResultKey,
 } from '../utils/api/definitions/enums'
 import { Form } from './models/Form'
@@ -18,7 +24,7 @@ export const EligibilityResult = types.model({
 })
 
 export const EntitlementResult = types.model({
-  type: types.maybe(types.string),
+  type: types.maybe(types.enumeration(Object.values(EntitlementResultType))),
   result: types.maybe(types.number),
 })
 
@@ -36,14 +42,46 @@ export const SummaryLink = types.model({
   url: types.string,
   text: types.string,
   order: types.number,
+  location: types.enumeration(Object.values(LinkLocation)),
 })
 
-export const Summary = types.model({
-  state: types.maybe(types.enumeration(Object.values(EstimationSummaryState))),
-  details: types.maybe(types.string),
-  title: types.maybe(types.string),
-  links: types.maybe(types.array(SummaryLink)),
-})
+export const Summary = types
+  .model({
+    state: types.maybe(
+      types.enumeration(Object.values(EstimationSummaryState))
+    ),
+    details: types.maybe(types.string),
+    title: types.maybe(types.string),
+    links: types.maybe(types.array(SummaryLink)),
+    entitlementSum: types.maybe(types.number),
+  })
+  .views((self) => ({
+    get nextStepsLink(): Instance<typeof SummaryLink> {
+      return self.links
+        ? self.links.find(
+            (link) => link.location === LinkLocation.RESULTS_APPLY
+          )
+        : null
+    },
+    get needHelpLinks() {
+      return self.links
+        ? self.links.filter(
+            (link) =>
+              link.location === LinkLocation.STANDARD ||
+              link.location === LinkLocation.QUESTIONS_ONLY
+          )
+        : []
+    },
+    get moreInfoLinks() {
+      return self.links
+        ? self.links.filter(
+            (link) =>
+              link.location === LinkLocation.STANDARD ||
+              link.location === LinkLocation.RESULTS_ONLY
+          )
+        : []
+    },
+  }))
 
 export const RootStore = types
   .model({
@@ -54,20 +92,14 @@ export const RootStore = types
     allowance: types.maybe(Allowance),
     summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
+    lang: types.enumeration(Object.values(Language)),
   })
-  .views((self) => ({
-    get totalEntitlementInDollars() {
-      return (
-        self.oas.entitlement.result +
-        (self.gis.entitlement.result !== -1 ? self.gis.entitlement.result : 0) + // gis can return a -1 for an unavailable calculation, correct for this
-        self.allowance?.entitlement.result +
-        self.afs?.entitlement.result
-      ).toFixed(2)
-    },
-  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num
+    },
+    setCurrentLang(lang: Language) {
+      self.lang = lang
     },
     setOAS(input) {
       self.oas = OAS.create(input)
@@ -95,12 +127,11 @@ export const RootStore = types
                   text: ISimpleType<string>
                   order: ISimpleType<number>
                 },
-                {},
-                _NotCustomized,
-                _NotCustomized
+                {}
               >
             >
           >
+          entitlementSum: IMaybe<ISimpleType<number>>
         }>
       >
     ) {

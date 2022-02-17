@@ -1,7 +1,11 @@
 import Joi from 'joi'
-import { Language } from '../../../i18n/api'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
-import { LegalStatus, MaritalStatus, PartnerBenefitStatus } from './enums'
+import {
+  Language,
+  LegalStatus,
+  MaritalStatus,
+  PartnerBenefitStatus,
+} from './enums'
 
 /**
  * This is what the API expects to receive, with the below exceptions due to normalization:
@@ -19,7 +23,7 @@ import { LegalStatus, MaritalStatus, PartnerBenefitStatus } from './enums'
  */
 export const RequestSchema = Joi.object({
   income: Joi.number().precision(2).min(0),
-  age: Joi.number().integer().max(150),
+  age: Joi.number().integer().min(18).max(150),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),

@@ -1,6 +1,7 @@
+import { useRouter } from 'next/router'
 import { useCallback, useContext, useEffect, useState } from 'react'
-import { dictionaryList } from '../../i18n'
-import { LanguageContext, RootStoreContext } from '../Contexts'
+import { webDictionary, WebTranslations } from '../../i18n/web'
+import { RootStoreContext } from '../Contexts'
 
 type StorageType = 'session' | 'local'
 
@@ -42,21 +43,6 @@ export const useStorage = <T,>(
   return [storedValue, setValue] as const
 }
 
-// For text heavy components, just pull in the correct language's dictionary and use dot notation to get your values in the component
-export const useTranslation = () => {
-  const { userLanguage } = useContext(LanguageContext)
-
-  // use current language to fetch the correct i18n data
-  return dictionaryList[userLanguage]
-}
-
-// For one off text needs where you want a specific text value internationalized
-export const useInternationalization = (key: string) => {
-  const { userLanguage } = useContext(LanguageContext)
-  if (dictionaryList[userLanguage] == undefined) return ''
-  return dictionaryList[userLanguage][key]
-}
-
 export function useStore() {
   const store = useContext(RootStoreContext)
   if (store === null) {
@@ -88,7 +74,7 @@ export const useMediaQuery = (width) => {
 
       return () => media.removeEventListener('change', updateTarget)
     }
-  }, [])
+  }, [width, updateTarget])
 
   return targetReached
 }
@@ -101,4 +87,12 @@ export const useWindowWidth = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [width])
   return width
+}
+
+export function useTranslation<T = string | WebTranslations>(key?: string): T {
+  const { locale } = useRouter()
+  if (key) {
+    return webDictionary[locale][key]
+  }
+  return webDictionary[locale]
 }

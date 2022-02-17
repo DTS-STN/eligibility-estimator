@@ -1,7 +1,8 @@
+import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
+import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-import { observer } from 'mobx-react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
@@ -18,6 +19,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
   const { name, label, checkedValue, onChange, values, keyforid, error } = props
+  const requiredText = useTranslation<string>('required')
 
   return (
     <>
@@ -26,14 +28,14 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           htmlFor={name}
           aria-label={name}
           data-testid="radio-label"
-          className="font-semibold inline-block mb-1.5 flex-nowrap"
+          className="inline-block mb-2 flex-nowrap"
         >
           <span className="text-danger">* </span>
           <span
-            className="mb-1.5 font-semibold text-content question-link"
+            className="mb-1.5 text-content font-semibold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-2">({requiredText})</span>
           <Tooltip field={name} />
         </label>
         {error && <ErrorLabel errorMessage={error} />}
@@ -59,7 +61,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               className="radio flex items-center"
             >
               <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
-              <p>{val.text}</p>
+              <p className="text-content ">{val.text}</p>
             </label>
           </div>
         ))}
@@ -73,6 +75,10 @@ const correctForBooleans = (value: string) => {
     case 'Yes':
       return 'true'
     case 'No':
+      return 'false'
+    case 'Oui':
+      return 'true'
+    case 'Non':
       return 'false'
     default:
       return value

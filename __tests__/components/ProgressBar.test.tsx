@@ -2,16 +2,31 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
-import React from 'react'
-import { cleanup, render, screen } from '@testing-library/react'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
-import ProgressBar from '../../components/ProgressBar'
-import { RootStore } from '../../client-state/store'
+import { render, screen } from '@testing-library/react'
 import { Instance } from 'mobx-state-tree'
-import { FieldCategory } from '../../utils/api/definitions/enums'
+import * as nextRouter from 'next/router'
+import React from 'react'
+import { RootStore } from '../../client-state/store'
+import { StoreProvider } from '../../components/Contexts'
+import ProgressBar from '../../components/ProgressBar'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 
 describe('ProgressBar component', () => {
   let root: Instance<typeof RootStore>
+  let useRouter
+
+  beforeAll(() => {
+    useRouter = jest.spyOn(nextRouter, 'useRouter')
+    useRouter.mockImplementation(() => ({
+      route: '/',
+      pathname: '/',
+      query: '',
+      asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
+    }))
+  })
+
   beforeEach(() => {
     root = RootStore.create({
       form: {
@@ -71,6 +86,7 @@ describe('ProgressBar component', () => {
       afs: {},
       allowance: {},
       summary: {},
+      lang: Language.EN,
     })
   })
   it('renders progress for an incomplete form', () => {
@@ -78,24 +94,22 @@ describe('ProgressBar component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <ProgressBar
-            sections={[
-              {
-                title: 'Income Details',
-                complete: root.form.progress.income,
-              },
-              {
-                title: 'Personal Information',
-                complete: root.form.progress.personal,
-              },
-              {
-                title: 'Legal Status',
-                complete: root.form.progress.legal,
-              },
-            ]}
-          />
-        </LanguageProvider>
+        <ProgressBar
+          sections={[
+            {
+              title: 'Income Details',
+              complete: root.form.progress.income,
+            },
+            {
+              title: 'Personal Information',
+              complete: root.form.progress.personal,
+            },
+            {
+              title: 'Legal Status',
+              complete: root.form.progress.legal,
+            },
+          ]}
+        />
       </StoreProvider>
     )
     render(ui)
@@ -113,24 +127,22 @@ describe('ProgressBar component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <ProgressBar
-            sections={[
-              {
-                title: 'Income Details',
-                complete: root.form.progress.income,
-              },
-              {
-                title: 'Personal Information',
-                complete: root.form.progress.personal,
-              },
-              {
-                title: 'Legal Status',
-                complete: root.form.progress.legal,
-              },
-            ]}
-          />
-        </LanguageProvider>
+        <ProgressBar
+          sections={[
+            {
+              title: 'Income Details',
+              complete: root.form.progress.income,
+            },
+            {
+              title: 'Personal Information',
+              complete: root.form.progress.personal,
+            },
+            {
+              title: 'Legal Status',
+              complete: root.form.progress.legal,
+            },
+          ]}
+        />
       </StoreProvider>
     )
     render(ui)

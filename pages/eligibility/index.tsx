@@ -1,11 +1,13 @@
-import { Layout } from '../../components/Layout'
 import { observer } from 'mobx-react'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
+import { Layout } from '../../components/Layout'
+import { Tabs } from '../../components/Tabs'
+import { Language } from '../../utils/api/definitions/enums'
 import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
-import { Tabs } from '../../components/Tabs'
+import { mockPartialGetRequest } from '../../__tests__/pages/api/factory'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   if ('error' in props) {
@@ -23,23 +25,20 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const query = context.query
-
-  const host = context.req.headers.host
-
-  const params = Object.keys(query)
-    .map((key) => key + '=' + query[key])
-    .join('&')
-
-  const path = `http://${host}/api/calculateEligibility?${params}`
-
-  const res = await fetch(path)
-  const data = await res.json()
+/**
+ * This function appears unused, but it is called by Next.js and then passed to the above as the props parameter.
+ * Some documentation: https://vercel.com/blog/nextjs-server-side-rendering-vs-static-generation
+ */
+export const getStaticProps: GetStaticProps = async (context) => {
+  // using mockPartialGetRequest() is simply a convenient way of calling
+  // the backend function, as it expects specific request/response objects
+  const data = await mockPartialGetRequest({
+    _language: context.locale == 'en' ? Language.EN : Language.FR,
+  })
 
   return {
     props: {
-      ...data,
+      ...data.body,
     },
   }
 }

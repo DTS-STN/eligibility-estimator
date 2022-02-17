@@ -1,8 +1,10 @@
-import { getSnapshot, Instance } from 'mobx-state-tree'
+import { Instance } from 'mobx-state-tree'
+import * as nextRouter from 'next/router'
 import { Form } from '../../client-state/models/Form'
 import { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import {
+  Language,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -11,6 +13,20 @@ import { mockPartialGetRequest } from '../pages/api/factory'
 
 describe('test the mobx state tree nodes', () => {
   let root: Instance<typeof RootStore>
+  let useRouter
+
+  beforeAll(() => {
+    useRouter = jest.spyOn(nextRouter, 'useRouter')
+    useRouter.mockImplementation(() => ({
+      route: '/',
+      pathname: '/',
+      query: '',
+      asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
+    }))
+  })
+
   beforeEach(() => {
     root = RootStore.create({
       form: {},
@@ -19,6 +35,7 @@ describe('test the mobx state tree nodes', () => {
       afs: {},
       allowance: {},
       summary: {},
+      lang: Language.EN,
     })
   })
 
@@ -82,6 +99,10 @@ describe('test the mobx state tree nodes', () => {
   it('can clear all values from a form', async () => {
     const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
+
+    const sendReq = jest.spyOn(form, 'sendAPIRequest')
+    sendReq.mockImplementationOnce(async () => res)
+
     form.setupForm(res.body.fieldData)
     expect(form.fields).toHaveLength(6)
     form.clearForm()
@@ -128,9 +149,9 @@ describe('test the mobx state tree nodes', () => {
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     fillOutForm(form)
-    expect(form.validateAgainstEmptyFields()).toBe(false) // no errors exist
+    expect(form.validateAgainstEmptyFields('en')).toBe(false) // no errors exist
     form.fields[0].setValue(null)
-    expect(form.validateAgainstEmptyFields()).toBe(true)
+    expect(form.validateAgainstEmptyFields('en')).toBe(true)
   })
 
   it('can report on the forms progress', async () => {
@@ -151,7 +172,7 @@ describe('test the mobx state tree nodes', () => {
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     let qs = form.buildQueryStringWithFormData()
-    expect(qs).toBe('livingCountry=CAN') // Canada is selected by default
+    expect(qs).toBe('_language=EN&livingCountry=CAN') // Canada is selected by default, and locale is EN
     fillOutForm(form)
     qs = form.buildQueryStringWithFormData()
     expect(qs).toContain('income=20000')

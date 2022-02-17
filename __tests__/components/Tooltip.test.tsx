@@ -3,16 +3,31 @@
  */
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
+import * as nextRouter from 'next/router'
 import React from 'react'
-import { LanguageProvider, StoreProvider } from '../../components/Contexts'
+import { StoreProvider } from '../../components/Contexts'
 import {
   getTooltipTranslationByField,
   Tooltip,
 } from '../../components/Tooltip/tooltip'
-import { Language } from '../../i18n/api'
+import { Language } from '../../utils/api/definitions/enums'
 
 // gets data correctly and presents it
 describe('Tooltip component', () => {
+  let useRouter
+
+  beforeAll(() => {
+    useRouter = jest.spyOn(nextRouter, 'useRouter')
+    useRouter.mockImplementation(() => ({
+      route: '/',
+      pathname: '/',
+      query: '',
+      asPath: '',
+      locale: 'en',
+      locales: ['en', 'fr'],
+    }))
+  })
+
   it('can render an input component that is required component', () => {
     const props = {
       field: 'income',
@@ -20,9 +35,7 @@ describe('Tooltip component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <Tooltip field={props.field} />
-        </LanguageProvider>
+        <Tooltip field={props.field} />
       </StoreProvider>
     )
 
@@ -45,9 +58,7 @@ describe('Tooltip component', () => {
 
     const ui = (
       <StoreProvider>
-        <LanguageProvider>
-          <Tooltip field={props.field} />
-        </LanguageProvider>
+        <Tooltip field={props.field} />
       </StoreProvider>
     )
 

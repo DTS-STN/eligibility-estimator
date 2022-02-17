@@ -1,4 +1,4 @@
-import { Language, Translations } from '../../../i18n/api'
+import { Translations } from '../../../i18n/api'
 import {
   IncomeHelper,
   LegalStatusHelper,
@@ -9,7 +9,9 @@ import {
 import {
   EntitlementResultType,
   EstimationSummaryState,
+  Language,
   LegalStatus,
+  LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
@@ -108,6 +110,7 @@ export interface Link {
   text: string
   url: string
   order: number
+  location: LinkLocation
 }
 
 export interface SummaryObject {
@@ -115,4 +118,5 @@ export interface SummaryObject {
   title: string
   details: string
   links: Link[]
+  entitlementSum: number
 }

@@ -4,14 +4,13 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { MAX_ALW_INCOME } from '../definitions/legalValues'
 import {
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
-import gisTables from '../scrapers/output'
-import { OutputItemAlw } from '../scrapers/partneredAlwScraper'
+import { legalValues, scraperData } from '../scrapers/output'
+import { OutputItemAlw } from '../scrapers/tbl4PartneredAlwScraper'
 import { BaseBenefit } from './_base'
 
 export class AlwBenefit extends BaseBenefit {
@@ -26,7 +25,7 @@ export class AlwBenefit extends BaseBenefit {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < MAX_ALW_INCOME
+    const meetsReqIncome = this.income < legalValues.MAX_ALW_INCOME
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -49,13 +48,13 @@ export class AlwBenefit extends BaseBenefit {
       } else if (this.input.age == 59) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen60ApplyNow,
         }
       } else if (underAgeReq) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen60,
         }
       } else {
@@ -96,7 +95,7 @@ export class AlwBenefit extends BaseBenefit {
       ) {
         if (meetsReqAge) {
           return {
-            result: ResultKey.CONDITIONAL,
+            result: ResultKey.UNAVAILABLE,
             reason: ResultReason.YEARS_IN_CANADA,
             detail: this.translations.detail.dependingOnAgreement,
           }
@@ -129,26 +128,19 @@ export class AlwBenefit extends BaseBenefit {
         }
       } else if (this.input.legalStatus.sponsored) {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegalSponsored,
         }
       } else {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegal,
         }
       }
-    } else if (this.input.livingCountry.noAgreement) {
-      return {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.SOCIAL_AGREEMENT,
-        detail: this.translations.detail.ineligibleYearsOrCountry,
-      }
     }
-    // fallback
-    throw new Error('should not be here')
+    throw new Error('entitlement logic failed to produce a result')
   }
 
   protected getEntitlement(): EntitlementResult {
@@ -156,12 +148,16 @@ export class AlwBenefit extends BaseBenefit {
       return { result: 0, type: EntitlementResultType.NONE }
 
     const result = this.getEntitlementAmount()
-    const type = EntitlementResultType.FULL
+    const type =
+      result === -1
+        ? EntitlementResultType.UNAVAILABLE
+        : EntitlementResultType.FULL
 
     return { result, type }
   }
 
   private getEntitlementAmount(): number {
+    if (this.input.partnerBenefitStatus.partialOas) return -1
     const tableItem = this.getTableItem()
     return tableItem ? tableItem.alw : 0
   }
@@ -174,6 +170,6 @@ export class AlwBenefit extends BaseBenefit {
   }
 
   private getTable(): OutputItemAlw[] {
-    return gisTables.partneredAlw
+    return scraperData.tbl4_partneredAlw
   }
 }

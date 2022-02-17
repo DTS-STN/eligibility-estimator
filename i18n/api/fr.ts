@@ -1,9 +1,15 @@
 // noinspection SpellCheckingInspection
 
-import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
+import {
+  Language,
+  LinkLocation,
+  Locale,
+} from '../../utils/api/definitions/enums'
 import { Translations } from './index'
 
 const fr: Translations = {
+  _language: Language.FR,
+  _locale: Locale.FR,
   benefit: {
     oas: 'Sécurité de la vieillesse (SV)',
     gis: 'Supplément de revenu garanti (SRG)',
@@ -13,43 +19,42 @@ const fr: Translations = {
   category: {
     incomeDetails: 'Revenu',
     personalInformation: 'Renseignements personnels',
-    partnerDetails: 'Renseignements sur votre partenaire',
+    partnerDetails: 'Renseignements sur votre conjoint',
     legalStatus: 'Statut légal',
     socialAgreement: "Pays de l'accords de sécurité sociale",
   },
   result: {
     eligible: 'Admissible',
     ineligible: 'Non admissible',
-    conditional: 'FRENCH: Unavailable',
-    moreInfo: "Besoin de plus d'informations...",
+    unavailable: 'Non disponible',
+    moreInfo: "Besoin de plus d'information...",
     invalid: "Votre demande n'est pas valide!",
   },
   question: {
-    income: 'Quel est votre revenu net annuel actuel en dollars canadiens?',
+    income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
     age: 'Quel est votre âge actuel?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
     legalStatus: 'Quel est votre statut légal actuel?',
     legalStatusOther: 'Veuillez préciser:',
     canadaWholeLife:
-      "Avez-vous seulement habité au Canada depuis l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, avez-vous seulement habité au Canada?",
     yearsInCanadaSince18:
-      "Combien d'années avez-vous vécu au Canada après avoir atteint l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     everLivedSocialCountry:
-      'Avez-vous déjà vécu dans un pays avec un accord de <a href="https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html" target="_blank">sécurité sociale</a> établi?',
+      'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
     partnerIncome:
-      'Quel est le revenu net annuel de votre partenaire en dollars canadiens?',
-    partnerAge: "Quel est l'âge actuel de votre partenaire?",
-    partnerLivingCountry:
-      'Dans quel pays habite actuellement votre partenaire?',
-    partnerLegalStatus: 'Quel est le statut légal actuel de votre partenaire?',
+      'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
+    partnerAge: "Quel est l'âge actuel de votre conjoint?",
+    partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
+    partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
     partnerCanadaWholeLife:
-      "Est-ce que votre partenaire a seulement habité au Canada depuis l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, est-ce que votre conjoint a seulement habité au Canada?",
     partnerYearsInCanadaSince18:
-      "Combien d'années votre partenaire a-t-il(elle) habité au Canada depuis l'âge de 18 ans?",
+      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
-      'FRENCH: Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
+      'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
   },
   questionOptions: {
     legalStatus: [
@@ -60,42 +65,42 @@ const fr: Translations = {
       },
       {
         key: 'sponsored',
-        text: 'Résident permanent ou immigrant admis (parrainé)',
+        text: 'Résident permanent ou immigrant reçu (parrainé)',
       },
       { key: 'indianStatus', text: "Statut d'Indien ou carte de statut" },
       {
         key: 'other',
-        text: 'Autre (exemple: résident temporaire, étudiant, travailleur temporaire, etc.)',
+        text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
       },
     ],
     maritalStatus: [
       { key: 'single', text: 'Célibataire' },
       { key: 'married', text: 'Marié(e)' },
       { key: 'commonLaw', text: 'Conjoint(e) de fait' },
-      { key: 'widowed', text: 'Partenaire survivant/veuf(ve)' },
+      { key: 'widowed', text: 'Partenaire survivant(e)/veuf(ve)' },
       { key: 'divorced', text: 'Divorcé(e)' },
       { key: 'separated', text: 'Séparé(e)' },
     ],
     partnerBenefitStatus: [
       {
         key: 'fullOas',
-        text: 'Mon partenaire reçoit la pleine pension de la SV',
+        text: 'Mon conjoint reçoit la pleine pension de la Sécurité de la vieillesse',
       },
       {
         key: 'fullOasGis',
-        text: 'Mon partenaire reçoit la pleine pension de la SV et le SRG',
+        text: 'Mon conjoint reçoit la pleine pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
       },
       {
         key: 'partialOas',
-        text: 'Mon partenaire reçoit une pension partielle de la SV',
+        text: 'Mon conjoint reçoit une pension partielle de la Sécurité de la vieillesse',
       },
       {
         key: 'partialOasGis',
-        text: 'Mon partenaire reçoit une pension partielle de la SV et le SRG',
+        text: 'Mon conjoint reçoit une pension partielle de la Sécurité de la vieillesse et le Supplément de revenu garanti',
       },
-      { key: 'alw', text: "Mon partenaire reçoit l'Allocation" },
+      { key: 'alw', text: "Mon conjoint reçoit l'Allocation" },
       { key: 'none', text: 'Aucune de ces réponses' },
-      { key: 'helpMe', text: 'Aidez-moi à savoir' },
+      { key: 'helpMe', text: 'Aidez-moi à trouver' },
     ],
     livingCountry: [
       { key: 'CAN', text: 'Canada' },
@@ -298,18 +303,22 @@ const fr: Translations = {
   detail: {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligibleOas65to69:
+      'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER}.',
     eligibleEntitlementUnavailable:
-      'FRENCH: Based on the information provided, you are likely eligible for this benefit. However, an entitlement estimation could not be provided, you are encouraged to contact Service Canada for more information.',
+      "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
-      "D'après les informations que vous ou votre partenaire avez fournies, vous avez droit à une pension partielle de la Sécurité de la vieillesse. Vous devriez communiquer avec Service Canada pour obtenir plus d'information sur les montants des paiements de l'Allocation/Supplément de revenu garanti.",
+      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
+    eligiblePartialOas65to69:
+      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER}.',
     eligibleWhen60ApplyNow:
-      "Vous serez probablement admissible quand vous aurez 60 ans, mais il se peut que vous puissiez présenter une demande dès maintenant. Veuillez contacter Service Canada pour plus d'informations",
-    eligibleWhen65ApplyNow:
-      'Vous serez probablement admissible lorsque vous aurez 65 ans. Cependant, vous pouvez peut-être faire une demande dès maintenant. Veuillez communiquer avec Service Canada pour obtenir de plus amples informations.',
+      'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
+    eligibleWhen65ApplyNowOas:
+      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER}.',
     eligibleWhen60:
-      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
+      'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
-      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
+      'Vous serez probablement admissible à votre 65e anniversaire.',
     mustBe60to64:
       'Vous devez avoir entre 60 et 64 ans pour être admissible à cette prestation.',
     mustBeInCanada:
@@ -328,132 +337,205 @@ const fr: Translations = {
       'Votre revenu est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
       "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
-    ineligibleYearsOrCountry:
-      "Vous ne semblez pas actuellement avoir droit à cette prestation, puisque vous avez indiqué que vous n'avez pas habité au Canada pendant la période minimale requise ou que vous avez habité dans un pays avec lequel le Canada a un accord de sécurité sociale. Cependant, vous pourriez devenir admissible à l'avenir si vous résidez au Canada pendant le nombre minimum d'années requis.",
     conditional:
-      'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
+      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnAgreement:
-      "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous encourageons à communiquer avec Service Canada.",
+      "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen60:
-      "Vous pourriez avoir droit à cette prestation à l'âge de 60 ans, selon l'entente entre le Canada et ce pays. Nous vous encourageons à communiquer avec Service Canada.",
+      "Vous pourriez avoir droit à cette prestation à votre 60e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada  pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen65:
-      "Vous pourriez être admissible à cette prestation quand vous aurez 65 ans, selon l'entente entre le Canada et ce pays. Nous vous encourageons à communiquer avec Service Canada.",
+      "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnLegal:
-      'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalSponsored:
-      'Vous pourriez être admissible à cette prestation, mais nous vous invitons à communiquer avec Service Canada pour le confirmer.',
+      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen60:
-      'Vous pourriez être admissible à cette prestation quand vous aurez 60 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
-      'Vous pourriez être admissible à cette prestation quand vous aurez 65 ans, selon votre statut légal au Canada. Nous vous encourageons à communiquer avec Service Canada.',
+      'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+    additionalReasons:
+      "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
   },
   summaryTitle: {
-    moreInfo: "Plus d'informations nécessaires",
-    unavailable: 'Il est impossible de fournir une estimation',
+    moreInfo: 'Plus de renseignements sont nécessaires',
+    unavailable: 'Impossible de fournir une estimation',
     availableEligible: 'Probablement admissible aux prestations',
     availableIneligible: 'Probablement non admissible aux prestations',
   },
   summaryDetails: {
     moreInfo:
-      'FRENCH: Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
+      "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
     unavailable:
-      'D\'après les informations fournies, nous ne sommes pas en mesure de déterminer votre admissibilité. Nous vous encourageons à communiquer avec Service Canada en utilisant le lien ci-dessous.</br><a href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html" target="_blank">Contactez Service Canada</a>',
+      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
     availableEligible:
-      'Selon les détails que vous avez indiqués, vous êtes probablement admissible aux prestations suivantes. (To French: Note that this only provides an estimate of your monthly payment.)',
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     availableIneligible:
-      "D'après les informations que vous avez fournies, vous n'avez probablement pas droit à des prestations. Consultez les détails ci-dessous pour plus d'informations.",
-    availableIneligibleIncome: `FRENCH You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
+    availableIneligibleIncome:
+      "Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à {MAX_OAS_INCOME}.",
   },
   links: {
     contactSC: {
       text: 'Communiquer avec Service Canada',
       url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
       order: 1,
+      location: LinkLocation.QUESTIONS_ONLY,
     },
     oasOverview: {
-      text: 'SV Aperçu',
+      text: 'Pension de la Sécurité de vieillesse: Aperçu',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.ht',
       order: 2,
+      location: LinkLocation.STANDARD,
     },
-    oasEntitlement: {
-      text: 'Pension de la Sécurité de vieillesse: Combien vous pourriez recevoir',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
+    cpp: {
+      text: 'Pension de retraite du RPC: Aperçu',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc.html',
       order: 3,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    cric: {
+      text: 'Calculatrice du revenu de retraite canadienne',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/calculatrice-revenu-retraite.html',
+      order: 4,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    oasApply: {
+      text: 'Pension de la Sécurité de vieillesse: Demande',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
+      order: 5,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    alwApply: {
+      text: 'Supplément de revenu garanti : Allocation',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
+      order: 7,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    afsApply: {
+      text: 'Allocation au survivant: Demande',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
+      order: 8,
+      location: LinkLocation.RESULTS_APPLY,
     },
     oasMaxIncome: {
       text: 'FRENCH',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
-      order: 4,
+      order: 9,
+      location: LinkLocation.STANDARD,
     },
     outsideCanada: {
       text: 'Personnes ayant vécu ou vivant à l’étranger – Pensions et prestations – Aperçu',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/rpc-internationales.html',
-      order: 5,
-    },
-    oasQualify: {
-      text: 'Pension de la Sécurité de vieillesse: Êtes-vous admissible',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.htm',
-      order: 6,
-    },
-    oasPartial: {
-      text: 'Pension de la Sécurité de vieillesse: Combien vous pourriez recevoir si vous avez vécu au Canada moins de 40 ans',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
-      order: 7,
-    },
-    gisQualify: {
-      text: 'Supplément de revenu garanti: Êtes-vous admissible',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/admissibilite.html',
-      order: 8,
-    },
-    alwQualify: {
-      text: "Vous pourriez être admissible à l'Allocation",
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
-      order: 9,
-    },
-    afsQualify: {
-      text: 'Vous pourriez être admissible à l’Allocation au survivant',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
       order: 10,
+      location: LinkLocation.STANDARD,
     },
     workingOutsideCanada: {
       text: 'Canadiens travaillant à l’extérieur du Canada pour les employeurs canadiens',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.htm',
       order: 11,
+      location: LinkLocation.STANDARD,
     },
-    gisEntitlement: {
-      text: 'Montants du Supplément de revenu garanti (SRG)',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab1-1.html',
+    oasPartial: {
+      text: 'Pension de la Sécurité de vieillesse: Combien vous pourriez recevoir si vous avez vécu au Canada moins de 40 ans',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
       order: 12,
+      location: LinkLocation.STANDARD,
+    },
+    oasEntitlement: {
+      text: 'Pension de la Sécurité de vieillesse: Combien vous pourriez recevoir',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
+      order: 13,
+      location: LinkLocation.STANDARD,
     },
     oasEntitlement2: {
       text: 'Montant des paiements de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
-      order: 13,
+      order: 14,
+      location: LinkLocation.STANDARD,
+    },
+    gisEntitlement: {
+      text: 'Montants du Supplément de revenu garanti (SRG)',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab1-1.html',
+      order: 15,
+      location: LinkLocation.STANDARD,
     },
     alwGisEntitlement: {
       text: "Montants du Supplément de revenu garanti (SRG) et de l'allocation ",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab4-1.html',
-      order: 14,
+      order: 16,
+      location: LinkLocation.STANDARD,
     },
     alwInfo: {
       text: 'Supplément de revenu garanti : Allocation',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/montant-prestation.html',
-      order: 15,
+      order: 17,
+      location: LinkLocation.STANDARD,
     },
     afsEntitlement: {
       text: "Montants de l'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements/tab5-35.html',
-      order: 16,
+      order: 18,
+      location: LinkLocation.STANDARD,
     },
     oasRecoveryTax: {
       text: 'Impôt de récupération de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
-      order: 17,
+      order: 19,
+      location: LinkLocation.STANDARD,
     },
     oasDefer: {
       text: 'Devriez-vous attendez pour commencer à recevoir la sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
-      order: 18,
+      order: 20,
+      location: LinkLocation.STANDARD,
+    },
+    oasRetroactive: {
+      text: 'TBD',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
+      order: 21,
+      location: LinkLocation.STANDARD,
+    },
+    SC: {
+      text: 'Service Canada',
+      url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasDeferClickHere: {
+      text: 'cliquez ici',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    socialAgreement: {
+      text: 'accord de sécurité sociale',
+      url: 'https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    gisReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    alwReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    afsReasons: {
+      text: 'Cliquez ici',
+      url: 'TBD',
+      order: -1,
+      location: LinkLocation.HIDDEN,
     },
   },
 }

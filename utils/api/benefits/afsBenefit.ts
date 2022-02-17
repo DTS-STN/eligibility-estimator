@@ -5,14 +5,13 @@ import {
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
-import { MAX_AFS_INCOME } from '../definitions/legalValues'
 import {
   EligibilityResult,
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
-import gisTables from '../scrapers/output'
-import { OutputItemAfs } from '../scrapers/partneredAfsScraper'
+import { legalValues, scraperData } from '../scrapers/output'
+import { OutputItemAfs } from '../scrapers/tbl5PartneredAfsScraper'
 import { BaseBenefit } from './_base'
 
 export class AfsBenefit extends BaseBenefit {
@@ -27,7 +26,7 @@ export class AfsBenefit extends BaseBenefit {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < MAX_AFS_INCOME
+    const meetsReqIncome = this.income < legalValues.MAX_AFS_INCOME
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -44,13 +43,13 @@ export class AfsBenefit extends BaseBenefit {
       } else if (this.input.age == 59) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen60ApplyNow,
         }
       } else if (underAgeReq) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.eligibleWhen60,
         }
       } else {
@@ -85,7 +84,7 @@ export class AfsBenefit extends BaseBenefit {
       ) {
         if (meetsReqAge) {
           return {
-            result: ResultKey.CONDITIONAL,
+            result: ResultKey.UNAVAILABLE,
             reason: ResultReason.YEARS_IN_CANADA,
             detail: this.translations.detail.dependingOnAgreement,
           }
@@ -118,26 +117,19 @@ export class AfsBenefit extends BaseBenefit {
         }
       } else if (this.input.legalStatus.sponsored) {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegalSponsored,
         }
       } else {
         return {
-          result: ResultKey.CONDITIONAL,
+          result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
           detail: this.translations.detail.dependingOnLegal,
         }
       }
-    } else if (this.input.livingCountry.noAgreement) {
-      return {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.SOCIAL_AGREEMENT,
-        detail: this.translations.detail.ineligibleYearsOrCountry,
-      }
     }
-    // fallback
-    throw new Error('should not be here')
+    throw new Error('entitlement logic failed to produce a result')
   }
 
   protected getEntitlement(): EntitlementResult {
@@ -163,6 +155,6 @@ export class AfsBenefit extends BaseBenefit {
   }
 
   private getTable(): OutputItemAfs[] {
-    return gisTables.partneredAfs
+    return scraperData.tbl5_partneredAfs
   }
 }

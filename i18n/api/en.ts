@@ -1,7 +1,13 @@
-import { MAX_OAS_INCOME } from '../../utils/api/definitions/legalValues'
+import {
+  Language,
+  LinkLocation,
+  Locale,
+} from '../../utils/api/definitions/enums'
 import { Translations } from './index'
 
 const en: Translations = {
+  _language: Language.EN,
+  _locale: Locale.EN,
   benefit: {
     oas: 'Old Age Security (OAS)',
     gis: 'Guaranteed Income Supplement (GIS)',
@@ -9,31 +15,31 @@ const en: Translations = {
     afs: 'Allowance for the Survivor',
   },
   category: {
-    incomeDetails: 'Income Details',
-    personalInformation: 'Personal Information',
-    partnerDetails: 'Partner Details',
-    legalStatus: 'Legal Status',
+    incomeDetails: 'Income details',
+    personalInformation: 'Personal information',
+    partnerDetails: "Partner's information",
+    legalStatus: 'Legal status',
     socialAgreement: 'Social Agreement Countries',
   },
   result: {
     eligible: 'Eligible',
     ineligible: 'Not eligible',
-    conditional: 'Unavailable',
+    unavailable: 'Unavailable',
     moreInfo: 'Need more information...',
     invalid: 'Request is invalid!',
   },
   question: {
-    income: 'What is your current annual net income in Canadian Dollars?',
+    income: 'What is your current annual net income in Canadian dollars?',
     age: 'What is your current age?',
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country are you currently living in?',
     legalStatus: 'What is your current legal status?',
     legalStatusOther: 'Please specify:',
-    canadaWholeLife: 'Have you only lived in Canada since the age of 18?',
+    canadaWholeLife: 'Since the age of 18, have you only lived in Canada?',
     yearsInCanadaSince18:
-      'How many years have you lived in Canada since the age of 18?',
+      'Since the age of 18, how many years have you lived in Canada?',
     everLivedSocialCountry:
-      'Have you ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
+      'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
     partnerBenefitStatus: 'Which of the following applies to you?',
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
@@ -41,11 +47,11 @@ const en: Translations = {
     partnerLivingCountry: 'What country is your partner currently living in?',
     partnerLegalStatus: "What is your partner's current legal status?",
     partnerCanadaWholeLife:
-      'Has your partner only lived in Canada since the age of 18?',
+      'Since the age of 18, has your partner only lived in Canada?',
     partnerYearsInCanadaSince18:
-      'How many years has your partner lived in Canada since the age of 18?',
+      'Since the age of 18, how many years has your partner lived in Canada?',
     partnerEverLivedSocialCountry:
-      'Has your partner ever lived in a country with an established <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html" target="_blank">social security agreement</a>?',
+      'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
   questionOptions: {
     legalStatus: [
@@ -61,7 +67,7 @@ const en: Translations = {
       { key: 'indianStatus', text: 'Indian status or status card' },
       {
         key: 'other',
-        text: 'Other (Example: Temporary resident, student, temporary worker, etc.)',
+        text: 'Other (for example, temporary resident, student, temporary worker)',
       },
     ],
     maritalStatus: [
@@ -73,10 +79,22 @@ const en: Translations = {
       { key: 'separated', text: 'Separated' },
     ],
     partnerBenefitStatus: [
-      { key: 'fullOas', text: 'My partner receives full OAS' },
-      { key: 'fullOasGis', text: 'My partner receives full OAS and GIS' },
-      { key: 'partialOas', text: 'My partner receives partial OAS' },
-      { key: 'partialOasGis', text: 'My partner receives partial OAS and GIS' },
+      {
+        key: 'fullOas',
+        text: 'My partner receives full Old Age Security pension',
+      },
+      {
+        key: 'fullOasGis',
+        text: 'My partner receives full Old Age Security pension and Guaranteed Income Supplement',
+      },
+      {
+        key: 'partialOas',
+        text: 'My partner receives partial Old Age Security pension',
+      },
+      {
+        key: 'partialOasGis',
+        text: 'My partner receives partial Old Age Security pension and Guaranteed Income Supplement',
+      },
       { key: 'alw', text: 'My partner receives the Allowance' },
       { key: 'none', text: 'None of the above' },
       { key: 'helpMe', text: 'Help me find out' },
@@ -280,16 +298,19 @@ const en: Translations = {
     ],
   },
   detail: {
-    eligible:
-      'Based on the information provided, you are likely eligible for this benefit.',
+    eligible: 'You are likely eligible for this benefit.',
+    eligibleOas65to69:
+      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleEntitlementUnavailable:
-      'Based on the information provided, you are likely eligible for this benefit. However, an entitlement estimation could not be provided, you are encouraged to contact Service Canada for more information.',
+      'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
-      'Based on the information you or your partner have provided, you are entitled to a partial Old Age Security pension. You should contact Service Canada for more information about Allowance/Guaranteed Income Supplement payment amounts.',
+      'You are likely eligible to a partial Old Age Security pension.',
+    eligiblePartialOas65to69:
+      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60ApplyNow:
-      'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact Service Canada for more information.',
-    eligibleWhen65ApplyNow:
-      'You will likely be eligible when you turn 65, however you may be able to apply now. Please contact Service Canada for more information.',
+      'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
+    eligibleWhen65ApplyNowOas:
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBe60to64:
@@ -310,24 +331,24 @@ const en: Translations = {
       'Your income is too high to be eligible for this benefit.',
     mustMeetYearReq:
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
-    ineligibleYearsOrCountry:
-      'You currently do not appear to be eligible for this benefit as you have indicated that you have not lived in Canada for the minimum period of time or lived in a country that Canada has a social security agreement with. However, you may be in the future if you reside in Canada for the minimum required number of years.',
     conditional:
-      'You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.',
+      'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
     dependingOnAgreement:
-      "You may be eligible to receive this benefit, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+      "You may be eligible to receive this benefit, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnAgreementWhen60:
-      "You may be eligible to receive this benefit when you turn 60, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+      "You may be eligible to receive this benefit when you turn 60, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnAgreementWhen65:
-      "You may be eligible to receive this benefit when you turn 65, depending Canada's agreement with this country. You are encouraged to contact Service Canada.",
+      "You may be eligible to receive this benefit when you turn 65, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnLegal:
-      'You may be eligible to receive this benefit, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      'You may be eligible to receive this benefit, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalSponsored:
-      'You may be eligible for this benefit, you are encouraged to contact Service Canada to confirm.',
+      'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen60:
-      'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
-      'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. You are encouraged to contact Service Canada.',
+      'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    additionalReasons:
+      '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',
@@ -337,105 +358,178 @@ const en: Translations = {
   },
   summaryDetails: {
     moreInfo:
-      'Please fill out the form. Based on the information you provide, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
+      'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     unavailable:
-      'Based on the information provided, we are unable to determine your eligibility. We encourage you to contact Service Canada using the link below.</br><a href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html" target="_blank">Contact Service Canada</a>',
+      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
     availableEligible:
-      'Based on the information you have provided, you are likely eligible for the following benefits. Note that this only provides an estimate of your monthly payment.',
+      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     availableIneligible:
-      'Based on the information you have provided, you are likely not eligible for any benefits. See the details below for more information.',
-    availableIneligibleIncome: `You currently do not appear to be eligible for any of these benefits, as your annual income is higher than ${MAX_OAS_INCOME.toLocaleString()} CAD.`,
+      'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
+    availableIneligibleIncome:
+      'You currently do not appear to be eligible for any of these benefits, as your annual income is higher than {MAX_OAS_INCOME}.',
   },
   links: {
     contactSC: {
       text: 'Contact Service Canada',
       url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
       order: 1,
+      location: LinkLocation.QUESTIONS_ONLY,
     },
     oasOverview: {
-      text: 'OAS Overview',
+      text: 'Old Age Security: Overview',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.htm',
       order: 2,
+      location: LinkLocation.STANDARD,
     },
-    oasEntitlement: {
-      text: 'Old Age Security: How much you could receive',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
+    cpp: {
+      text: 'CPP retirement pension: Overview',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp.html',
       order: 3,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    cric: {
+      text: 'Canadian Retirement Income Calculator',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/retirement-income-calculator.html',
+      order: 4,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    oasApply: {
+      text: 'Old Age Security: Application',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
+      order: 5,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    alwApply: {
+      text: 'Guaranteed Income Supplement - Allowance application',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
+      order: 7,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    afsApply: {
+      text: 'Allowance for the Survivor: Application',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
+      order: 8,
+      location: LinkLocation.RESULTS_APPLY,
     },
     oasMaxIncome: {
       text: 'Old Age Security: Maximum Income',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
-      order: 4,
+      order: 9,
+      location: LinkLocation.STANDARD,
     },
     outsideCanada: {
       text: 'Lived or living outside Canada - Pensions and benefits - Overview',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international.htm',
-      order: 5,
-    },
-    oasQualify: {
-      text: 'Old Age Security: Do you qualify',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.htm',
-      order: 6,
-    },
-    oasPartial: {
-      text: 'Old Age Security: How much you could receive if you have lived in Canada less than 40 years',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
-      order: 7,
-    },
-    gisQualify: {
-      text: 'Guaranteed Income Supplement: Do you qualify',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.htm',
-      order: 8,
-    },
-    alwQualify: {
-      text: 'You may qualify for the Allowance program',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.htm',
-      order: 9,
-    },
-    afsQualify: {
-      text: 'You may qualify for the Allowance for Survivor program',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.htm',
       order: 10,
+      location: LinkLocation.STANDARD,
     },
     workingOutsideCanada: {
       text: 'Canadians working outside Canada for Canadian employers',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.htm',
       order: 11,
+      location: LinkLocation.STANDARD,
+    },
+    oasPartial: {
+      text: 'Old Age Security: How much you could receive if you have lived in Canada less than 40 years',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
+      order: 12,
+      location: LinkLocation.STANDARD,
+    },
+    oasEntitlement: {
+      text: 'Old Age Security: How much you could receive',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
+      order: 13,
+      location: LinkLocation.STANDARD,
+    },
+    oasEntitlement2: {
+      text: 'Old Age Security Payments amounts',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.htm',
+      order: 14,
+      location: LinkLocation.STANDARD,
     },
     gisEntitlement: {
       text: 'Guaranteed Income Supplement (GIS) amounts',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab1-1.htm',
-      order: 12,
-    },
-    oasEntitlement2: {
-      text: 'Old Age Security Payments Amounts',
-      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.htm',
-      order: 13,
+      order: 15,
+      location: LinkLocation.STANDARD,
     },
     alwGisEntitlement: {
       text: 'Guaranteed Income Supplement (GIS) and Allowance amounts ',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab4-1.htm',
-      order: 14,
+      order: 16,
+      location: LinkLocation.STANDARD,
     },
     alwInfo: {
-      text: 'Guaranteed Income Supplement (GIS) - Allowance',
+      text: 'Guaranteed Income Supplement (GIS) - Allowance - How much you could receive',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/benefit-amount.htm',
-      order: 15,
+      order: 17,
+      location: LinkLocation.STANDARD,
     },
     afsEntitlement: {
       text: 'Allowance for the survivor amounts',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments/tab5-35.htm',
-      order: 16,
+      order: 18,
+      location: LinkLocation.STANDARD,
     },
     oasRecoveryTax: {
       text: 'Old Age Security pension recovery tax',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
-      order: 17,
+      order: 19,
+      location: LinkLocation.STANDARD,
     },
     oasDefer: {
       text: 'Should you wait to start collecting Old Age Security',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.htm',
-      order: 18,
+      order: 20,
+      location: LinkLocation.STANDARD,
+    },
+    oasRetroactive: {
+      text: 'OAS retroactive payment and deferrals',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
+      order: 21,
+      location: LinkLocation.STANDARD,
+    },
+    SC: {
+      text: 'Service Canada',
+      url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasDeferClickHere: {
+      text: 'click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    socialAgreement: {
+      text: 'social security agreement',
+      url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.html#gc-document-nav',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    gisReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    alwReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    afsReasons: {
+      text: 'Click here',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
     },
   },
 }

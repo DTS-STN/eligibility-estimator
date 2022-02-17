@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  /* consistent focus styles on all components -- overriding */
+  /* consistent focus styles on all components */
   * {
-    /* @apply focus:outline-none;
+    @apply focus:outline-none;
     @apply focus-visible:ring-1;
-    @apply focus-visible:ring-black; */
+    @apply focus-visible:ring-black;
   }
 
   #elig {
@@ -45,7 +45,7 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px] font-header-gc;
+    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule;
   }
   .h2 {
     @apply text-h2 font-bold mb-[15px] font-header-gc;
@@ -65,7 +65,7 @@
 
   /* form controls */
   .form-control {
-    @apply text-base w-full md:w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form placeholder-muted/50;
+    @apply text-base w-full md:w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form placeholder-muted/70;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
   }
@@ -100,13 +100,13 @@
     @apply cursor-pointer mb-3;
   }
   details summary {
-    @apply text-content border border-content rounded py-2 px-3 font-semibold;
+    @apply text-content border border-content rounded py-2 px-3;
   }
   details[open] summary {
     @apply rounded-bl-none rounded-br-none;
   }
   details[open] div {
-    @apply border border-t-0 rounded-br rounded-bl border-content;
+    @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   }
   td {
     @apply p-2;

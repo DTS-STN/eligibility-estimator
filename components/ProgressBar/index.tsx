@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useMediaQuery } from '../Hooks'
+import { useMediaQuery, useTranslation } from '../Hooks'
 
 type Section = {
   title: string
@@ -26,7 +26,7 @@ const ProgressSection: React.FC<Section> = ({
       {!first && (
         <div
           className={`flex-auto border-t-4 ${
-            complete ? 'text-primary' : 'text-[#B7B7B7]'
+            complete ? 'text-primary' : 'text-[#6F6F6F]'
           }`}
         ></div>
       )}
@@ -40,7 +40,7 @@ const ProgressSection: React.FC<Section> = ({
           className={`${
             complete
               ? 'text-primary complete-progress-section'
-              : 'text-[#B7B7B7] incomplete-progress-section'
+              : 'text-[#6F6F6F] incomplete-progress-section'
           } fill-current stroke-white z-10`}
         >
           <rect
@@ -56,13 +56,13 @@ const ProgressSection: React.FC<Section> = ({
             d="m6 14.214 5.321 5.179L22.571 8"
             strokeWidth="3"
             strokeLinejoin="round"
-            stroke={complete ? '#fff' : 'text-[#B7B7B7]'}
+            stroke={complete ? '#fff' : 'text-[#6F6F6F]'}
           />
         </svg>
         {isBreakpoint && (
           <svg
             className={`${
-              complete ? 'text-primary' : 'text-[#B7B7B7]'
+              complete ? 'text-primary' : 'text-[#6F6F6F]'
             } fill-current stroke-white absolute`}
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -71,7 +71,7 @@ const ProgressSection: React.FC<Section> = ({
         )}
         <span
           className={`whitespace-nowrap mx-1.5 font-semibold ${
-            complete ? 'text-primary' : 'text-[#B7B7B7]'
+            complete ? 'text-primary' : 'text-[#6F6F6F]'
           }`}
         >
           {title}
@@ -85,6 +85,7 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
   sections,
   estimateSection,
 }) => {
+  const estimate = useTranslation<string>('estimate')
   return (
     <div className="flex flex-col md:flex-row items-start md:items-center">
       {sections.map(({ title, complete }, index: number) => (
@@ -97,11 +98,11 @@ export const ProgressBar: React.VFC<ProgressBarProps> = ({
       ))}
       <div
         className={`flex-auto border-t-4 ${
-          estimateSection ? 'text-primary' : 'text-[#B7B7B7]'
+          estimateSection ? 'text-primary' : 'text-[#6F6F6F]'
         }`}
       ></div>
       <ProgressSection
-        title="Estimation"
+        title={estimate}
         complete={estimateSection}
         first={false}
         last={true}

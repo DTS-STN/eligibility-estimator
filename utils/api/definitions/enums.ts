@@ -51,7 +51,7 @@ export enum EntitlementResultType {
 export enum ResultKey {
   ELIGIBLE = `eligible`,
   INELIGIBLE = `ineligible`,
-  CONDITIONAL = `unavailable`,
+  UNAVAILABLE = `unavailable`,
   MORE_INFO = 'moreInfo',
   INVALID = 'invalid',
 }
@@ -60,6 +60,7 @@ export enum ResultKey {
 export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
+  AGE_YOUNG = `Age does not meet yet requirement for this benefit, will in the future`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
   LIVING_COUNTRY = `Not living in Canada`,
   LEGAL_STATUS = `Legal status does not meet requirement for this benefit`,
@@ -77,4 +78,23 @@ export enum EstimationSummaryState {
   MORE_INFO = 'MORE_INFO', // yellow, need to answer more
   UNAVAILABLE = 'UNAVAILABLE', // yellow, can not provide any results, contact Service Canada (conditionally eligible)
   AVAILABLE_INELIGIBLE = 'AVAILABLE_INELIGIBLE', // red, display results (ineligible)
+}
+
+export enum LinkLocation {
+  STANDARD = 'STANDARD', // Questions > NeedHelp, and Results > MoreInfo
+  QUESTIONS_ONLY = 'QUESTIONS_ONLY', // Questions > NeedHelp
+  RESULTS_ONLY = 'RESULTS_ONLY', // Results > MoreInfo only
+  RESULTS_APPLY = 'RESULTS_APPLY', // new section above Results > MoreInfo
+  HIDDEN = 'HIDDEN', // won't show anywhere (used internally for linkifying strings)
+}
+
+export enum Language {
+  EN = 'EN',
+  FR = 'FR',
+}
+
+// must be one of: https://www.techonthenet.com/js/language_tags.php
+export enum Locale {
+  EN = 'en-CA',
+  FR = 'fr-CA',
 }

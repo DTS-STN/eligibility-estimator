@@ -2,29 +2,26 @@ import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { Dispatch, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
-import {
-  EstimationSummaryState,
-  FieldCategory,
-} from '../../utils/api/definitions/enums'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import { WebTranslations } from '../../i18n/web'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
+import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
-import { useStore } from '../Hooks'
+import { Alert } from '../Alert'
+import { useStore, useTranslation } from '../Hooks'
+import { NeedHelpList } from '../Layout/NeedHelpList'
+import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
 import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
-import { NeedHelpList } from '../Layout/NeedHelpList'
-import { Alert } from '../Alert'
-import ProgressBar from '../ProgressBar'
 
 interface FactoryProps {
   data: ResponseSuccess
-  selectedTabIndex: Dispatch<number>
 }
 
 /**
@@ -34,10 +31,11 @@ interface FactoryProps {
  * @returns
  */
 export const ComponentFactory: React.VFC<FactoryProps> = observer(
-  ({ data, selectedTabIndex }) => {
+  ({ data }) => {
     let lastCategory = null
 
     const router = useRouter()
+    const tsln = useTranslation<WebTranslations>()
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
@@ -60,7 +58,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           }
         }
       }
-    }, [incomeTooHigh])
+    }, [form.isIncomeTooHigh])
 
     return (
       <>
@@ -72,15 +70,15 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           <ProgressBar
             sections={[
               {
-                title: 'Income Details',
+                title: tsln.category.incomeDetails,
                 complete: root.form.progress.income,
               },
               {
-                title: 'Personal Information',
+                title: tsln.category.personalInformation,
                 complete: root.form.progress.personal,
               },
               {
-                title: 'Legal Status',
+                title: tsln.category.legalStatus,
                 complete: root.form.progress.legal,
               },
             ]}
@@ -90,18 +88,21 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           <form
             name="ee-form"
             data-testid="ee-form"
-            action="/eligibility"
+            action="../../pages/eligibility"
             onSubmit={(e) => e.preventDefault()}
             className="col-span-2"
             noValidate
           >
-            <input type="hidden" name="_language" value={'EN'} />
+            <input
+              type="hidden"
+              name="_language"
+              id="_language"
+              value={router.locale == 'en' ? Language.EN : Language.FR}
+            />
             {form.fields.map((field: Instance<typeof FormField>) => {
               const isChildQuestion =
                 field.category.key == FieldCategory.PARTNER_DETAILS ||
                 field.category.key == FieldCategory.SOCIAL_AGREEMENT
-                  ? true
-                  : false
               const styling = isChildQuestion
                 ? `bg-emphasis px-10 ${
                     field.category.key == FieldCategory.SOCIAL_AGREEMENT
@@ -112,7 +113,13 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               const content = (
                 <div key={field.key} className={styling}>
                   {field.category.key != lastCategory && (
-                    <h2 className={isChildQuestion ? 'h2 pt-10' : 'h2 my-8'}>
+                    <h2
+                      className={
+                        isChildQuestion
+                          ? 'h2 pt-10 text-content'
+                          : 'h2 my-8 text-content'
+                      }
+                    >
                       {field.category.text}
                     </h2>
                   )}
@@ -123,7 +130,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -137,7 +144,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -151,7 +158,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         label={field.label}
                         placeholder={field.placeholder ?? ''}
-                        onChange={field.handleChange}
+                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -165,6 +172,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         name={field.key}
                         field={field}
                         error={field.error}
+                        placeholder={getPlaceholderForSelect(field, tsln)}
                         value={null}
                       />
                     </div>
@@ -178,8 +186,14 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         values={
                           field.type == 'boolean'
                             ? [
-                                { key: 'true', text: 'Yes' },
-                                { key: 'false', text: 'No' },
+                                {
+                                  key: 'true',
+                                  text: tsln.yes,
+                                },
+                                {
+                                  key: 'false',
+                                  text: tsln.no,
+                                },
                               ]
                             : field.options
                         }
@@ -203,38 +217,53 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 type="button"
                 role="navigation"
                 className="btn btn-default mt-4 md:mt-0"
-                onClick={(e) => router.push('/')}
+                onClick={() => router.push('/')}
               >
-                Back
+                {tsln.next}
               </button>
               <button
                 type="button"
                 role="button"
                 className="btn btn-default mt-4 md:mt-0"
-                onClick={(e) => {
+                onClick={() => {
                   form.clearForm()
                 }}
               >
-                Clear
+                {tsln.clear}
               </button>
               <button
                 type="submit"
                 role="button"
                 className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
-                onClick={async (e) => {
-                  if (!form.validateAgainstEmptyFields() && !form.hasErrors) {
-                    selectedTabIndex(1)
+                onClick={async () => {
+                  if (
+                    !form.validateAgainstEmptyFields(router.locale) &&
+                    !form.hasErrors
+                  ) {
+                    const language = document.querySelector(
+                      '#_language'
+                    ) as HTMLInputElement
+                    root.setCurrentLang(language.value as Language)
+                    root.setActiveTab(1)
                   }
                 }}
                 disabled={incomeTooHigh}
               >
-                Estimate
+                {tsln.estimate}
               </button>
             </div>
           </form>
-          <NeedHelpList title="Need Help?" links={root.summary.links} />
+          <NeedHelpList title={tsln.needHelp} links={root.summary.links} />
         </div>
       </>
     )
   }
 )
+
+const getPlaceholderForSelect = (
+  field: Instance<typeof FormField>,
+  tsln: WebTranslations
+) => {
+  let text = tsln.selectText[field.key]
+  return text ? text : tsln.selectText.default
+}

@@ -1,69 +1,66 @@
 import { Tab } from '@headlessui/react'
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
-import { PropsWithChildren, useState } from 'react'
 import { RootStore } from '../../client-state/store'
-import {
-  ResponseSuccess,
-  ResponseError,
-} from '../../utils/api/definitions/types'
+import { WebTranslations } from '../../i18n/web'
+import { ResponseSuccess } from '../../utils/api/definitions/types'
 import { FAQ } from '../FAQ'
 import { ComponentFactory } from '../Forms/ComponentFactory'
-import { useStore } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { ResultsPage } from '../ResultsPage'
 
-export const Tabs: React.FC<PropsWithChildren<any>> = observer((props) => {
-  const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0)
+export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
   const root: Instance<typeof RootStore> = useStore()
+  const tsln = useTranslation<WebTranslations>()
 
   return (
     <Tab.Group
-      key={selectedTabIndex}
-      defaultIndex={selectedTabIndex}
+      key={root.activeTab}
+      defaultIndex={root.activeTab}
       onChange={(index) => {
-        setSelectedTabIndex(index)
+        root.setActiveTab(index)
       }}
     >
-      <Tab.List className={`border-b border-muted/20`}>
+      <Tab.List
+        className={`flex flex-col md:flex-row gap-x-5 gap-y-4 pb-4 border-b border-muted/20 `}
+        id="tabList"
+      >
         <Tab
           className={({ selected }) =>
             selected
-              ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20 border-l-muted/20 mr-2'
-              : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2'
+              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
-          Questions
+          {tsln.questions}
         </Tab>
         <Tab
           className={({ selected }) =>
             selected
-              ? 'results-tab bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20 mr-2'
-              : 'results-tab bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2 disabled:cursor-not-allowed disabled:bg-[#949494]'
+              ? 'results-tab bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'results-tab bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
-          Results
+          {tsln.results}
         </Tab>
         <Tab
           className={({ selected }) =>
             selected
-              ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20'
-              : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled'
+              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
-          FAQ
+          {tsln.faq}
         </Tab>
       </Tab.List>
       <Tab.Panels>
         <Tab.Panel className="mt-10">
           <div className="md:container mt-14">
-            <ComponentFactory
-              data={props}
-              selectedTabIndex={setSelectedTabIndex}
-            />
+            <ComponentFactory data={props} />
           </div>
         </Tab.Panel>
         <Tab.Panel className="mt-10">
-          <ResultsPage root={root} setSelectedTab={setSelectedTabIndex} />
+          <ResultsPage />
         </Tab.Panel>
         <Tab.Panel className="mt-10">
           <FAQ />

@@ -1,13 +1,9 @@
+import { Language, Locale } from '../../utils/api/definitions/enums'
 import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
 
 const apiTranslationsDict = { en, fr }
-
-export enum Language {
-  EN = 'EN',
-  FR = 'FR',
-}
 
 export interface KeyAndText {
   key: string
@@ -15,6 +11,8 @@ export interface KeyAndText {
 }
 
 export interface Translations {
+  _language: Language
+  _locale: Locale
   benefit: { oas: string; gis: string; allowance: string; afs: string }
   category: {
     incomeDetails: string
@@ -26,7 +24,7 @@ export interface Translations {
   result: {
     eligible: string
     ineligible: string
-    conditional: string
+    unavailable: string
     moreInfo: string
     invalid: string
   }
@@ -57,10 +55,12 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    eligibleOas65to69: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
+    eligiblePartialOas65to69: string
     eligibleWhen60ApplyNow: string
-    eligibleWhen65ApplyNow: string
+    eligibleWhen65ApplyNowOas: string
     eligibleWhen60: string
     eligibleWhen65: string
     mustBe60to64: string
@@ -72,7 +72,6 @@ export interface Translations {
     mustHavePartnerWithGis: string
     mustMeetIncomeReq: string
     mustMeetYearReq: string
-    ineligibleYearsOrCountry: string
     conditional: string
     dependingOnAgreement: string
     dependingOnAgreementWhen60: string
@@ -81,6 +80,7 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
+    additionalReasons: string
   }
   summaryTitle: {
     moreInfo: string
@@ -96,16 +96,19 @@ export interface Translations {
     availableIneligibleIncome: string
   }
   links: {
+    SC: Link
+    socialAgreement: Link
     contactSC: Link
     oasOverview: Link
+    cpp: Link
+    cric: Link
+    oasApply: Link
+    alwApply: Link
+    afsApply: Link
     oasEntitlement: Link
     oasMaxIncome: Link
     outsideCanada: Link
-    oasQualify: Link
     oasPartial: Link
-    gisQualify: Link
-    alwQualify: Link
-    afsQualify: Link
     workingOutsideCanada: Link
     gisEntitlement: Link
     oasEntitlement2: Link
@@ -114,6 +117,12 @@ export interface Translations {
     afsEntitlement: Link
     oasRecoveryTax: Link
     oasDefer: Link
+    oasRetroactive: Link
+    oasDeferClickHere: Link
+    oasReasons: Link
+    gisReasons: Link
+    alwReasons: Link
+    afsReasons: Link
   }
 }
 
@@ -124,4 +133,22 @@ export function getTranslations(language: Language): Translations {
     case Language.FR:
       return apiTranslationsDict.fr
   }
+}
+
+/**
+ * Reusable utility function that accepts a string, and outputs a locale-formatted currency string.
+ * It rounds, it determines where to put the $ sign, it will use spaces or commas, all depending on the locale.
+ */
+export function numberToStringCurrency(
+  number: number,
+  locale: Locale,
+  options?: { rounding?: number }
+): string {
+  const rounding = options?.rounding === undefined ? 2 : options.rounding
+  return number.toLocaleString(locale, {
+    style: 'currency',
+    currency: 'CAD',
+    currencyDisplay: 'narrowSymbol',
+    minimumFractionDigits: rounding,
+  })
 }
