@@ -41,7 +41,9 @@ export const FormSelect: React.VFC<SelectProps> = observer(
           className="inline-block mb-1.5"
         >
           <span className="text-danger">* </span>
-          <span className="mb-1.5 text-content">{field.label}</span>
+          <span className="mb-1.5 font-semibold text-content">
+            {field.label}
+          </span>
           <span className="text-danger font-bold ml-2">({requiredText})</span>
           <Tooltip field={field.key} />
         </label>
@@ -53,8 +55,16 @@ export const FormSelect: React.VFC<SelectProps> = observer(
               container: (styles) => ({
                 ...styles,
                 fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
-                border: error ? '1px solid red' : undefined,
+                border: error ? '1px solid red' : '1px solid #333',
                 borderRadius: '4px',
+              }),
+              dropdownIndicator: (styles) => ({
+                color: '#333',
+                paddingRight: '6px',
+              }),
+              clearIndicator: (styles) => ({
+                color: '#333',
+                paddingRight: '6px',
               }),
               input: (styles) => ({
                 ...styles,

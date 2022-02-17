@@ -29,7 +29,7 @@ module.exports = {
       'default-text': '#284162',
       'default': '#eaebed',
       'default-hover': '#cfd1d5',
-      'default-border': '#dcdee1',
+      'default-border': '#6f6f6f',
 
       // primary
       'primary': '#293749',

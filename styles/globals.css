@@ -65,7 +65,7 @@
 
   /* form controls */
   .form-control {
-    @apply text-base w-full md:w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form placeholder-muted/50;
+    @apply text-base w-full md:w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form placeholder-muted/80;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
   }

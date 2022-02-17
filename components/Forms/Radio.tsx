@@ -32,7 +32,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         >
           <span className="text-danger">* </span>
           <span
-            className="mb-1.5 text-content question-link"
+            className="mb-1.5 text-content font-semibold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
           <span className="text-danger font-bold ml-2">({requiredText})</span>
@@ -61,7 +61,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
               className="radio flex items-center"
             >
               <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
-              <p>{val.text}</p>
+              <p className="text-content ">{val.text}</p>
             </label>
           </div>
         ))}

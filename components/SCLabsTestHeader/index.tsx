@@ -7,7 +7,7 @@ export const SCLabsTestHeader = () => {
     <div className="bg-[#063056]">
       <div className="container mx-auto">
         <div className="flex items-center">
-          <div className="block lg:flex py-4 text-small md:text-base">
+          <div className="block lg:flex md:items-center py-4 text-small md:text-base">
             <div className="flex justify-between lg:block lg:w-max">
               <span
                 className="text-white border block w-max px-4 py-1 my-auto leading-6"
