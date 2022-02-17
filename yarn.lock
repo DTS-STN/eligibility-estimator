@@ -3197,6 +3197,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"csv-writer@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "csv-writer@npm:1.6.0"
+  checksum: 2e62cb46f00b674f0710eb90586000601f3a467aabe529464dcb402d453a1322a716d7522ef3282dd6551f1059305c7dd3db49def1201caaf340597dcf7b4c7e
+  languageName: node
+  linkType: hard
+
 "d@npm:1, d@npm:^1.0.1":
   version: 1.0.1
   resolution: "d@npm:1.0.1"
@@ -3500,6 +3507,7 @@ __metadata:
     autoprefixer: ^10.4.1
     axe-core: ^4.3.3
     babel-jest: ^27.1.0
+    csv-writer: ^1.6.0
     eslint: ^8.6.0
     eslint-config-next: ^12.0.7
     husky: ^7.0.0
@@ -3521,6 +3529,7 @@ __metadata:
     react-dom: 17.0.2
     react-number-format: ^4.9.1
     react-select: ^5.2.1
+    string-strip-html: ^9.1.6
     string.prototype.replaceall: ^1.0.6
     swagger-ui-react: ^4.1.2
     tailwindcss: ^2.2.9
@@ -4684,6 +4693,13 @@ __metadata:
   dependencies:
     whatwg-encoding: ^1.0.5
   checksum: bf30cce461015ed7e365736fcd6a3063c7bc016a91f74398ef6158886970a96333938f7c02417ab3c12aa82e3e53b40822145facccb9ddfbcdc15a879ae4d7ba
+  languageName: node
+  linkType: hard
+
+"html-entities@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "html-entities@npm:2.3.2"
+  checksum: 522d8d202df301ff51b517a379e642023ed5c81ea9fb5674ffad88cff386165733d00b6089d5c2fcc644e44777d6072017b6216d8fa40f271d3610420d00a886
   languageName: node
   linkType: hard
 
@@ -6177,10 +6193,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.clonedeep@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "lodash.clonedeep@npm:4.5.0"
+  checksum: 92c46f094b064e876a23c97f57f81fbffd5d760bf2d8a1c61d85db6d1e488c66b0384c943abee4f6af7debf5ad4e4282e74ff83177c9e63d8ff081a4837c3489
+  languageName: node
+  linkType: hard
+
 "lodash.debounce@npm:^4":
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: a3f527d22c548f43ae31c861ada88b2637eb48ac6aa3eb56e82d44917971b8aa96fbb37aa60efea674dc4ee8c42074f90f7b1f772e9db375435f6c83a19b3bc6
+  languageName: node
+  linkType: hard
+
+"lodash.isplainobject@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "lodash.isplainobject@npm:4.0.6"
+  checksum: 29c6351f281e0d9a1d58f1a4c8f4400924b4c79f18dfc4613624d7d54784df07efaff97c1ff2659f3e085ecf4fff493300adc4837553104cef2634110b0d5337
   languageName: node
   linkType: hard
 
@@ -6202,6 +6232,20 @@ __metadata:
   version: 4.5.2
   resolution: "lodash.topath@npm:4.5.2"
   checksum: 04583e220f4bb1c4ac0008ff8f46d9cb4ddce0ea1090085790da30a41f4cb1b904d885cb73257fca619fa825cd96f9bb97c67d039635cb76056e18f5e08bfdee
+  languageName: node
+  linkType: hard
+
+"lodash.trim@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "lodash.trim@npm:4.5.1"
+  checksum: 64b08e97d94d4c7620159371e6fe6cbb706514a41d737db2f189d9ec738305eb08cb772a9bbd2459e90f1c22f96174ec1047ceb8272f2f6040cb5bd63d8f9f2b
+  languageName: node
+  linkType: hard
+
+"lodash.without@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "lodash.without@npm:4.4.0"
+  checksum: 8cef752edd4ed4065be2a8fd30ea52c0bb27b0cb6c34742f595263c72ee0c3a188572affb477ef18a4dd4d0347fe1a4e580b70d4e36f37323d7924d2e6046bd6
   languageName: node
   linkType: hard
 
@@ -7664,6 +7708,43 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ranges-apply@npm:^6.0.12":
+  version: 6.0.12
+  resolution: "ranges-apply@npm:6.0.12"
+  dependencies:
+    ranges-merge: ^8.0.12
+    tiny-invariant: ^1.2.0
+  checksum: 819961beaa8148bc1df65e099303e14063fc41369031f0c777efed1099eccbdfa8d659f1e979e30392820476a699cf72bfdd692bddf73913a7b3fd79fb2f1355
+  languageName: node
+  linkType: hard
+
+"ranges-merge@npm:^8.0.12":
+  version: 8.0.12
+  resolution: "ranges-merge@npm:8.0.12"
+  dependencies:
+    ranges-push: ^6.0.12
+    ranges-sort: ^5.0.12
+  checksum: e8f1a40d96e82092a57045b05cb152bc2b9a6749f51497dbf23c63818876ec59ed572c3f2a242500e1f356892fa269e6a0a39b1b5eece124e3bee94e3c9806f6
+  languageName: node
+  linkType: hard
+
+"ranges-push@npm:^6.0.12":
+  version: 6.0.12
+  resolution: "ranges-push@npm:6.0.12"
+  dependencies:
+    string-collapse-leading-whitespace: ^6.0.12
+    string-trim-spaces-only: ^4.0.12
+  checksum: bf67115b3a99ac8402f5a6befbb93033f7e69173e1ab37b9d7fefffd2c052a2627281c247b5e14406557936e6e5b2720a7c251eb610cdadcab7633b17ddb5f6d
+  languageName: node
+  linkType: hard
+
+"ranges-sort@npm:^5.0.12":
+  version: 5.0.12
+  resolution: "ranges-sort@npm:5.0.12"
+  checksum: 6d2b3587daa8796d520216f0bf2040aaeeb2d050ca90bdd2b61b8f1c2a8f7d96af60247844342cbcf83954f22ce3c40353ef7b1e4ebfcf477c0c4a0bcc136b55
+  languageName: node
+  linkType: hard
+
 "raw-body@npm:2.4.1":
   version: 2.4.1
   resolution: "raw-body@npm:2.4.1"
@@ -8532,10 +8613,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"string-collapse-leading-whitespace@npm:^6.0.12":
+  version: 6.0.12
+  resolution: "string-collapse-leading-whitespace@npm:6.0.12"
+  checksum: bfcbe2e460f05b0c7db10afe4b2d467be26e8844ecdc93a167b10f8898f7076c0061894f0c9c5d805dea79dfbf3da29ea4a74277a622ca73f4b9bdd2d3cf3497
+  languageName: node
+  linkType: hard
+
 "string-hash@npm:1.1.3":
   version: 1.1.3
   resolution: "string-hash@npm:1.1.3"
   checksum: 104b8667a5e0dc71bfcd29fee09cb88c6102e27bfb07c55f95535d90587d016731d52299380052e514266f4028a7a5172e0d9ac58e2f8f5001be61dc77c0754d
+  languageName: node
+  linkType: hard
+
+"string-left-right@npm:^5.0.12":
+  version: 5.0.12
+  resolution: "string-left-right@npm:5.0.12"
+  dependencies:
+    lodash.clonedeep: ^4.5.0
+    lodash.isplainobject: ^4.0.6
+  checksum: 84132fe5e0f23cd04dbb77e55cf8c08cee78d696abb9314d33feaaf0de0583e7d0f97f0f2ecf2bada959b0b301b453cc97d79a94b1f80d5f3fc1a70aab8a262e
   languageName: node
   linkType: hard
 
@@ -8546,6 +8644,28 @@ __metadata:
     char-regex: ^1.0.2
     strip-ansi: ^6.0.0
   checksum: ce85533ef5113fcb7e522bcf9e62cb33871aa99b3729cec5595f4447f660b0cefd542ca6df4150c97a677d58b0cb727a3fe09ac1de94071d05526c73579bf505
+  languageName: node
+  linkType: hard
+
+"string-strip-html@npm:^9.1.6":
+  version: 9.1.6
+  resolution: "string-strip-html@npm:9.1.6"
+  dependencies:
+    html-entities: ^2.3.2
+    lodash.isplainobject: ^4.0.6
+    lodash.trim: ^4.5.1
+    lodash.without: ^4.4.0
+    ranges-apply: ^6.0.12
+    ranges-push: ^6.0.12
+    string-left-right: ^5.0.12
+  checksum: 82f9c3e77e79726e2aa780ab1560a97b55b9d543cf776149ce3ac8766b2aa2c6b2e45a78a6ef9267fc0f9941c19036ce820ce03e4e3a18b67ddf6886bf7dfe01
+  languageName: node
+  linkType: hard
+
+"string-trim-spaces-only@npm:^4.0.12":
+  version: 4.0.12
+  resolution: "string-trim-spaces-only@npm:4.0.12"
+  checksum: ad30fb3f85cc07e6f0f12350580e4a057dc5041879cd0dae6c671b2bcd952ee830538c06a4a197cc9123de4eebaf440ef67edde759ac3f06203949ac11405604
   languageName: node
   linkType: hard
 
@@ -8972,6 +9092,13 @@ __metadata:
     es5-ext: ~0.10.46
     next-tick: 1
   checksum: ef3f27a0702a88d885bcbb0317c3e3ecd094ce644da52e7f7d362394a125d9e3578292a8f8966071a980d8abbc3395725333b1856f3ae93835b46589f700d938
+  languageName: node
+  linkType: hard
+
+"tiny-invariant@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "tiny-invariant@npm:1.2.0"
+  checksum: e09a718a7c4a499ba592cdac61f015d87427a0867ca07f50c11fd9b623f90cdba18937b515d4a5e4f43dac92370498d7bdaee0d0e7a377a61095e02c4a92eade
   languageName: node
   linkType: hard
 
