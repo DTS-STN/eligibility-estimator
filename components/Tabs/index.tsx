@@ -28,8 +28,8 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         <Tab
           className={({ selected }) =>
             selected
-              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3'
-              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline'
+              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
           {tsln.questions}
@@ -37,8 +37,8 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         <Tab
           className={({ selected }) =>
             selected
-              ? 'results-tab bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3'
-              : 'results-tab bg-white rounded text-muted border border-muted px-4 py-3 underline'
+              ? 'results-tab bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'results-tab bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
           {tsln.results}
@@ -46,8 +46,8 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         <Tab
           className={({ selected }) =>
             selected
-              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3'
-              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline'
+              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
           {tsln.faq}
