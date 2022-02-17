@@ -23,7 +23,9 @@ export const ResultsTable = observer(() => {
           <tr className=" ">
             <th>{tsln.resultsPage.tableHeader1}</th>
             <th>{tsln.resultsPage.tableHeader2}</th>
-            <th>{tsln.resultsPage.tableHeader3}</th>
+            <th className="text-right min-w-[68px]">
+              {tsln.resultsPage.tableHeader3}
+            </th>
           </tr>
         </thead>
         <tbody className="align-top">
@@ -32,7 +34,7 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
-            <td>
+            <td className="text-right min-w-[68px]">
               {numberToStringCurrency(root.oas.entitlement.result, locale)}
             </td>
           </tr>
@@ -41,7 +43,7 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
-            <td>
+            <td className="text-right min-w-[68px]">
               {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
                 ? numberToStringCurrency(root.gis.entitlement.result, locale)
                 : 'Unavailable'}
@@ -52,7 +54,7 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
-            <td>
+            <td className="text-right min-w-[68px]">
               {numberToStringCurrency(
                 root.allowance.entitlement.result,
                 locale
@@ -64,13 +66,13 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
-            <td>
+            <td className="text-right min-w-[68px]">
               {numberToStringCurrency(root.afs.entitlement.result, locale)}
             </td>
           </tr>
           <tr className="border-t border-content font-semibold ">
             <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
-            <td>
+            <td className="text-right min-w-[68px]">
               {numberToStringCurrency(root.summary.entitlementSum, locale)}
             </td>
           </tr>
@@ -78,7 +80,7 @@ export const ResultsTable = observer(() => {
       </table>
       <div className="block md:hidden">
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-[#111]">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             Old Age Security (OAS)
           </p>
           <p className="px-1.5 py-1.5">
@@ -91,7 +93,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-[#111]">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             Guaranteed Income Supplement (GIS)
           </p>
           <p className="px-1.5 py-1.5">
@@ -106,7 +108,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-[#111]">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             Allowance
           </p>
           <p className="px-1.5 py-1.5">
@@ -119,7 +121,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-[#111]">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             Allowance for the Survivor
           </p>
           <p className="px-1.5 py-1.5">
@@ -132,7 +134,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-[#111]">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             Estimated Total Monthly Benefit Amount
           </p>
           <p className="px-1.5 py-1.5 font-bold">

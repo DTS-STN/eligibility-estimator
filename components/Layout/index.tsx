@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { Breadcrumbs } from '../Breadcrumbs'
-import { useStore, useTranslation } from '../Hooks'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { SCLabsTestHeader } from '../SCLabsTestHeader'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -13,6 +13,7 @@ export const Layout: React.VFC<{
 }> = ({ children }) => {
   const router = useRouter()
   const root = useStore()
+  const isMobile = useMediaQuery(400)
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
   const tsln = useTranslation<WebTranslations>()
 
@@ -26,6 +27,7 @@ export const Layout: React.VFC<{
         <link
           href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Noto+Sans&family=Patua+One&display=swap"
           rel="stylesheet"
+          crossOrigin="anonymous"
         ></link>
       </Head>
       <SCLabsTestHeader />
@@ -42,7 +44,7 @@ export const Layout: React.VFC<{
                   root.setActiveTab(0)
                 }}
               >
-                {tsln.otherLang}
+                {isMobile ? tsln.otherLangCode : tsln.otherLang}
               </button>
             </div>
           </div>

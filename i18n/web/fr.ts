@@ -5,6 +5,7 @@ const fr: WebTranslations = {
   testSiteHeader:
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
+  otherLangCode: 'EN',
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca/fr.html',
@@ -21,7 +22,7 @@ const fr: WebTranslations = {
   questions: 'Questions',
   results: 'Résultats',
   needHelp: "Besoin d'aide?",
-  faq: 'Foire aux questions (FAQ)',
+  faq: 'Foire Aux Questions',
   estimate: 'Estimer',
   required: 'obligatoire',
   homePageP1:
@@ -56,7 +57,6 @@ const fr: WebTranslations = {
   socialLink3: 'À propos de Canada.ca',
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
-  privacyDisclaimer: 'NEED TRANSLATION (FR)',
 
   category: {
     incomeDetails: 'Revenu',
@@ -74,7 +74,9 @@ const fr: WebTranslations = {
   },
   nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
-
+  privacyDiscTitle: 'FRENCH: Privacy Notice',
+  privacyDisc:
+    "Les renseignements personnels fournis sont régis conformément à la Loi sur la protection des renseignements personnels. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
   errors: {
     empty: 'Ce renseignement est requis',
   },

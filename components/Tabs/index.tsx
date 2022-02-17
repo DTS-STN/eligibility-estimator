@@ -21,12 +21,15 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         root.setActiveTab(index)
       }}
     >
-      <Tab.List className={`border-b border-muted/20`} id="tabList">
+      <Tab.List
+        className={`flex flex-col md:flex-row gap-x-5 gap-y-4 pb-4 border-b border-muted/20 `}
+        id="tabList"
+      >
         <Tab
           className={({ selected }) =>
             selected
-              ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20 border-l-muted/20 mr-2'
-              : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2'
+              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
           {tsln.questions}
@@ -34,8 +37,8 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         <Tab
           className={({ selected }) =>
             selected
-              ? 'results-tab bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20 mr-2'
-              : 'results-tab bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 mr-2 disabled:cursor-not-allowed disabled:bg-[#949494]'
+              ? 'results-tab bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'results-tab bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
           {tsln.results}
@@ -43,11 +46,11 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         <Tab
           className={({ selected }) =>
             selected
-              ? 'bg-white font-semibold p-2.5 pt-1.5 border border-t-4 border-content/90 border-r-muted/20 border-b-muted/20  border-l-muted/20'
-              : 'bg-[#EBF2FC] font-semibold p-2.5 border border-muted/20 disabled'
+              ? 'bg-[#26374A] rounded text-white border border-[#2572B4] px-4 py-3 text-left md:text-center'
+              : 'bg-white rounded text-muted border border-muted px-4 py-3 underline text-left md:text-center'
           }
         >
-          FAQ
+          {tsln.faq}
         </Tab>
       </Tab.List>
       <Tab.Panels>

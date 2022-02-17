@@ -11,32 +11,39 @@ const Home: NextPage = (props) => {
   const tsln = useTranslation<WebTranslations>()
   return (
     <Layout>
-      <div className="mt-18 text-content">
+      <div className="mt-18 text-black">
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP2 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
         />
         <p
-          className="mb-4 text-content"
+          className="mb-4 text-black"
           dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
         />
       </div>
+
+      <details className="py-4">
+        <summary className="text-default-text">{tsln.privacyDiscTitle}</summary>
+        <div className="p-4">
+          <p>{tsln.privacyDisc}</p>
+        </div>
+      </details>
 
       <Alert
         title={tsln.disclaimerTitle}
@@ -47,7 +54,7 @@ const Home: NextPage = (props) => {
       </Alert>
 
       <button
-        className="btn btn-primary w-28 mt-8"
+        className="btn btn-primary w-28 my-8"
         onClick={(e) => router.push('/eligibility')}
       >
         {tsln.next}

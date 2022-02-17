@@ -7,6 +7,7 @@ export type WebTranslations = {
   testSiteTitle: string
   testSiteHeader: string
   otherLang: string
+  otherLangCode: string
   search: string
   breadcrumb1Title: string
   breadcrumb1URL: string
@@ -49,7 +50,6 @@ export type WebTranslations = {
   socialLink3: string
   socialLink4: string
   socialLink5: string
-  privacyDisclaimer: string
   category: {
     incomeDetails: string
     personalInformation: string
@@ -70,7 +70,8 @@ export type WebTranslations = {
   errors: {
     empty: string
   }
-
+  privacyDiscTitle: string
+  privacyDisc: string
   unavailableImageAltText: string
   govt: string
   yes: string

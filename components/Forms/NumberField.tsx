@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
+import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -19,6 +20,7 @@ export interface NumberFieldProps
  */
 export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
   const { name, label, required, value, placeholder, onChange, error } = props
+  const requiredText = useTranslation<string>('required')
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -37,11 +39,11 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         htmlFor={name}
         aria-label={name}
         data-testid="number-input-label"
-        className="text-content inline-block font-bold mb-1.5"
+        className="text-content font-semibold inline-block mb-1.5"
       >
         {required && <span className="text-danger">*</span>} {label}
         {required && (
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-2">({requiredText})</span>
         )}
         <Tooltip field={name} />
       </label>
@@ -49,7 +51,9 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
       <NumberFormat
         id={name}
         name={name}
-        className={`form-control text-content ${error ? ' border-danger' : ''}`}
+        className={`form-control text-content border-[#333] ${
+          error ? ' border-danger' : ''
+        }`}
         data-testid="number-input"
         min={0}
         value={value != null ? (value as string) : ''}
