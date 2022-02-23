@@ -103,7 +103,7 @@ export const RootStore = types
       } else if (index == 2) {
         return 'faq'
       }
-      return '' // TODO: throw? Or unknown?
+      return 'unknown'
     },
   }))
   .actions((self) => ({

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { ResponseSuccess } from '../../utils/api/definitions/types'
+import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
 import { FAQ } from '../FAQ'
 import { ComponentFactory } from '../Forms/ComponentFactory'
 import { useStore, useTranslation } from '../Hooks'
@@ -24,26 +25,14 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         if (process.browser) {
           const win = window as Window &
             typeof globalThis & { adobeDataLayer: any; _satellite: any }
-          const lang = locale == 'en' ? 'eng' : 'fra'
+          const lang = tsln.langLong
+          const creator = tsln.creator
           const title =
             lang +
             '-sc labs-eligibility estimator-' +
             root.getTabNameForAnalytics(index)
 
-          console.log(win._satellite.getVar('jsAbort'))
-          console.log(title)
-
-          win.adobeDataLayer.push({
-            event: 'pageLoad',
-            page: {
-              title: title,
-              language: lang,
-              creator: 'Employment and Social Development Canada',
-              accessRights: '2',
-              service:
-                'ESDC-EDSC_OldAgeBenefitsEstimator-EstimateurDePrestationsDeVieillesse',
-            },
-          })
+          sendAnalyticsRequest(lang, title, creator, win)
         }
       }}
     >
