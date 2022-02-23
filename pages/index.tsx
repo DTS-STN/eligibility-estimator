@@ -1,6 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import Script from 'next/script'
 import { Alert } from '../components/Alert'
 import { HeadDoc } from '../components/Document'
 import { useTranslation } from '../components/Hooks'
@@ -14,7 +13,6 @@ const Home: NextPage = (props) => {
   return (
     <>
       <HeadDoc />
-      <Script id="aa-push" src="/scripts/adobe.js"></Script>
       <Layout>
         <div className="mt-18 text-black">
           <p
@@ -67,9 +65,8 @@ const Home: NextPage = (props) => {
           {tsln.next}
         </button>
       </Layout>
-      <Script id="aa-body" type="text/javascript">
-        _satellite.pageBottom();
-      </Script>
+      <script src="/scripts/adobe.js"></script>
+      <script type="text/javascript">_satellite.pageBottom()</script>
     </>
   )
 }

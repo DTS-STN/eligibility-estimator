@@ -36,8 +36,8 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
           win.adobeDataLayer.push({
             event: 'pageLoad',
             page: {
-              title: 'eng-sc-labs eligibility-estimator test',
-              language: 'eng',
+              title: title,
+              language: lang,
               creator: 'Employment and Social Development Canada',
               accessRights: '2',
               service:
