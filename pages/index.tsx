@@ -2,7 +2,7 @@ import type { GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { Alert } from '../components/Alert'
-import { Document } from '../components/Document'
+import { HeadDoc } from '../components/Document'
 import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
@@ -13,11 +13,7 @@ const Home: NextPage = (props) => {
   const tsln = useTranslation<WebTranslations>()
   return (
     <>
-      <Document />
-      <Script
-        id="aa-id"
-        src="//assets.adobedtm.com/be5dfd287373/0127575cd23a/launch-913b1beddf7a-staging.min.js"
-      ></Script>
+      <HeadDoc />
       <Script id="aa-push" src="/scripts/adobe.js"></Script>
       <Layout>
         <div className="mt-18 text-black">

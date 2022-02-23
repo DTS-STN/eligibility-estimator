@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 
-export const Document = () => {
+export const HeadDoc = () => {
   const tsln = useTranslation<WebTranslations>()
 
   return (
@@ -16,6 +16,7 @@ export const Document = () => {
         rel="stylesheet"
         crossOrigin="anonymous"
       ></link>
+      <script src="//assets.adobedtm.com/be5dfd287373/0127575cd23a/launch-913b1beddf7a-staging.min.js"></script>
     </Head>
   )
 }

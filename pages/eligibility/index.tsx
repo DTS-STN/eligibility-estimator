@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react'
 import { GetStaticProps, NextPage } from 'next'
 import Script from 'next/script'
+import { HeadDoc } from '../../components/Document'
 import { Layout } from '../../components/Layout'
 import { Tabs } from '../../components/Tabs'
 import { Language } from '../../utils/api/definitions/enums'
@@ -20,13 +21,20 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   }
 
   return (
-    <Layout>
+    <>
+      <HeadDoc />
       <Script
         id="aa-id"
         src="//assets.adobedtm.com/be5dfd287373/0127575cd23a/launch-913b1beddf7a-staging.min.js"
       ></Script>
-      <Tabs {...props} />
-    </Layout>
+
+      <Layout>
+        <Tabs {...props} />
+      </Layout>
+
+      <script src="/scripts/adobe.js"></script>
+      <script type="text/javascript"></script>
+    </>
   )
 }
 
