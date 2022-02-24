@@ -22,7 +22,7 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
       }}
     >
       <Tab.List
-        className={`flex flex-col md:flex-row gap-x-5 gap-y-4 pb-4 border-b border-muted/20 `}
+        className={`flex flex-col md:flex-row gap-x-5 gap-y-4 pb-4 border-b border-form-border`}
         id="tabList"
       >
         <Tab
