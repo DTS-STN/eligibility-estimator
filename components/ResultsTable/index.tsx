@@ -30,7 +30,7 @@ export const ResultsTable = observer(() => {
         </thead>
         <tbody className="align-top">
           <tr>
-            <td>Old Age Security (OAS)</td>
+            <td>{tsln.oas}</td>
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
@@ -39,7 +39,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
-            <td>Guaranteed Income Supplement (GIS)</td>
+            <td>{tsln.gis}</td>
             <td>
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
@@ -50,7 +50,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr>
-            <td>Allowance</td>
+            <td>{tsln.alw}</td>
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
@@ -62,7 +62,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
-            <td>Allowance for Survivor</td>
+            <td>{tsln.afs}</td>
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
@@ -81,27 +81,27 @@ export const ResultsTable = observer(() => {
       <div className="block md:hidden">
         <div className="mb-4">
           <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            Old Age Security (OAS)
+            {tsln.oas}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Eligibility: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
             <EligibilityDetails eligibilityType={root.oas} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
             {numberToStringCurrency(root.oas.entitlement.result, locale)}
           </p>
         </div>
         <div className="mb-4">
           <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            Guaranteed Income Supplement (GIS)
+            {tsln.gis}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Eligibility: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
             <EligibilityDetails eligibilityType={root.gis} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
             {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
               ? numberToStringCurrency(root.gis.entitlement.result, locale)
               : 'Unavailable'}
@@ -109,33 +109,33 @@ export const ResultsTable = observer(() => {
         </div>
         <div className="mb-4">
           <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            Allowance
+            {tsln.alw}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Eligibility: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
             <EligibilityDetails eligibilityType={root.allowance} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
             {numberToStringCurrency(root.allowance.entitlement.result, locale)}
           </p>
         </div>
         <div className="mb-4">
           <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            Allowance for the Survivor
+            {tsln.afs}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Eligibility: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
             <EligibilityDetails eligibilityType={root.afs} />
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">Estimated Monthly Amount (CAD): </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
             {numberToStringCurrency(root.afs.entitlement.result, locale)}
           </p>
         </div>
         <div className="mb-4">
           <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            Estimated Total Monthly Benefit Amount
+            {tsln.resultsPage.tableTotalAmount}
           </p>
           <p className="px-1.5 py-1.5 font-bold">
             {numberToStringCurrency(root.summary.entitlementSum, locale)}

@@ -1,6 +1,10 @@
 import { WebTranslations } from '.'
 
 const en: WebTranslations = {
+  oas: 'Old Age Security (OAS)',
+  gis: 'Guaranteed Income Supplement (GIS)',
+  alw: 'Allowance',
+  afs: 'Allowance for the Survivor',
   testSiteTitle: 'TEST SITE',
   testSiteHeader:
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',

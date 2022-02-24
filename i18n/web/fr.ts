@@ -1,6 +1,10 @@
 import { WebTranslations } from '.'
 
 const fr: WebTranslations = {
+  oas: 'Sécurité de la vieillesse (SV)',
+  gis: 'Supplément de revenu garanti (SRG)',
+  alw: 'Allocation',
+  afs: 'Allocation au survivant',
   testSiteTitle: "SITE D'ESSAI",
   testSiteHeader:
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
