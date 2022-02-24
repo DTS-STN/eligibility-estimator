@@ -27,9 +27,14 @@ export default function handler(
     // processing
     const handler = new RequestHandler(requestInput)
     const records: string[][] = []
-    records.push(['Canadian Old Age Benefits Estimator'])
+    const csvTranslations = handler.translations.csv
+    records.push([csvTranslations.appName])
 
-    records.push([''], ['FORM RESPONSES'], ['Question', 'Answer'])
+    records.push(
+      [''],
+      [csvTranslations.formResponses],
+      [csvTranslations.question, csvTranslations.answer]
+    )
     for (const value of handler.fieldData) {
       let question = stripHtml(value.label).result
       let response = handler.rawInput[value.key].toString()
@@ -38,8 +43,13 @@ export default function handler(
 
     records.push(
       [''],
-      ['ESTIMATION RESULTS'],
-      ['Benefit', 'Eligibility', 'Details', 'Entitlement']
+      [csvTranslations.estimationResults],
+      [
+        csvTranslations.benefit,
+        csvTranslations.eligibility,
+        csvTranslations.details,
+        csvTranslations.entitlement,
+      ]
     )
     for (const resultKey in handler.benefitResults) {
       const result: BenefitResult = handler.benefitResults[resultKey]
@@ -54,7 +64,11 @@ export default function handler(
       records.push([benefitName, eligibility, detail, entitlement])
     }
 
-    records.push([''], ['LINKS'], ['Description', 'URL'])
+    records.push(
+      [''],
+      [csvTranslations.links],
+      [csvTranslations.description, csvTranslations.url]
+    )
     for (const link of handler.summary.links) {
       records.push([link.text, link.url])
     }
