@@ -24,9 +24,9 @@ export const sendAnalyticsRequest = (
     window.adobeDataLayer.push({
       event: 'pageLoad',
       page: {
-        title: title,
-        language: lang,
-        creator: creator,
+        title: title.trim(),
+        language: lang.trim(),
+        creator: creator.trim(),
         accessRights: '2',
         service:
           'ESDC-EDSC_OldAgeBenefitsEstimator-EstimateurDePrestationsDeVieillesse',
