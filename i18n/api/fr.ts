@@ -405,6 +405,12 @@ const fr: Translations = {
       order: 5,
       location: LinkLocation.RESULTS_APPLY,
     },
+    gisApply: {
+      text: 'Supplément de revenu garanti: Demande',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
+      order: 6,
+      location: LinkLocation.RESULTS_APPLY,
+    },
     alwApply: {
       text: 'Supplément de revenu garanti : Allocation',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
