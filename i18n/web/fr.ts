@@ -30,7 +30,7 @@ const fr: WebTranslations = {
   estimate: 'Estimer',
   required: 'obligatoire',
   homePageP1:
-    "L'estimateur canadien des prestations de vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV) et au Supplément de revenu garanti (SRG). Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
+    "L'Estimateur Canadien des Prestations de Vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV) et au Supplément de revenu garanti (SRG). Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
   homePageP2: "L'estimateur couvre quatre programmes de prestations :",
   homePageP3:
     '<strong className="font-bold">la pension de la Sécurité de la vieillesse</strong> est un paiement mensuel que vous pouvez recevoir si vous avez <strong className="font-bold">65 ans et plus</strong>. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
