@@ -129,8 +129,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         type={field.type}
                         name={field.key}
                         label={field.label}
-                        placeholder={field.placeholder ?? ''}
                         onChange={field.handleChange}
+                        placeholder={field.placeholder ?? ''}
                         value={field.value}
                         error={field.error}
                         required
