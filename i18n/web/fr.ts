@@ -76,7 +76,7 @@ const fr: WebTranslations = {
   moreInfoHeader: "Besoin de plus d'information",
   privacyDiscTitle: 'FRENCH: Privacy Notice',
   privacyDisc:
-    "Les renseignements personnels fournis sont régis conformément à la Loi sur la protection des renseignements personnels. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
+    "Les renseignements personnels fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
   errors: {
     empty: 'Ce renseignement est requis',
   },

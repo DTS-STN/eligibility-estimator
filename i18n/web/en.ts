@@ -76,7 +76,7 @@ const en: WebTranslations = {
   moreInfoHeader: 'More Information',
   privacyDiscTitle: 'Privacy Notice',
   privacyDisc:
-    'The personal information provided is governed in accordance with the Privacy Act. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
+    'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
     empty: 'This information is required',
   },
