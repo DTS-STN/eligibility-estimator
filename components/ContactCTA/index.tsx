@@ -27,7 +27,7 @@ export const ContactCTA: React.VFC = () => {
         dangerouslySetInnerHTML={{ __html: tsln.contactCTA }}
       />
       {root.summary?.nextStepsLink?.url && (
-        <>
+        <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 mt-4">
           <Link href={root.summary.nextStepsLink.url} passHref>
             <a
               className="btn btn-primary md:w-96 !mt-5 mx-1 min-w-min"
@@ -36,7 +36,7 @@ export const ContactCTA: React.VFC = () => {
               {root.summary.nextStepsLink.text}
             </a>
           </Link>
-        </>
+        </div>
       )}
     </>
   )
