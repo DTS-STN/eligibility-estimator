@@ -496,7 +496,7 @@ const fr: Translations = {
       location: LinkLocation.STANDARD,
     },
     oasRetroactive: {
-      text: 'TBD',
+      text: 'Paiement rétroactif et reports de la pension de Sécurité de vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
       order: 21,
       location: LinkLocation.STANDARD,
