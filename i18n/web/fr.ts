@@ -40,7 +40,7 @@ const fr: WebTranslations = {
     "Veuillez remplir le formulaire. L'estimateur évaluera votre admissibilité en fonction des renseignements fournis. Si vous êtes admissible, il fournira également une estimation de votre paiement mensuel. ",
   disclaimerTitle: 'Avertissement',
   disclaimer:
-    "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
+    "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, communiquez avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
   contactSC:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
   footerlink1: 'Contactez-nous',
@@ -74,7 +74,7 @@ const fr: WebTranslations = {
   },
   nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
-  privacyDiscTitle: 'FRENCH: Privacy Notice',
+  privacyDiscTitle: 'Avis de confidentialité',
   privacyDisc:
     "Les renseignements personnels fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
   errors: {
