@@ -23,7 +23,7 @@ const fr: TooltipTranslations = {
   },
   livingCountry: {
     heading: 'Lieu de résidence actuel',
-    text: 'The name of the country or territory you live in, if you have been lawfully admitted to that country or territory.',
+    text: 'Le nom du pays ou du territoire où vous résidez, si vous avez été légalement admis dans ce pays ou ce territoire.',
   },
   legalStatus: {
     heading: 'Statut légal',
