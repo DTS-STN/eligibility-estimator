@@ -187,6 +187,7 @@ export const Form = types
           field.setError(d.message)
         }
       } else {
+        console.log(data)
         self.clearAllErrors()
         const parent = getParent(self) as Instance<typeof RootStore>
         parent.setOAS(data.results.oas)
