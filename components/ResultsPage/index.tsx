@@ -5,6 +5,7 @@ import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { Alert } from '../Alert'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
+import { DownloadCSVButton } from '../DownloadCSVButton'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { ResultsTable } from '../ResultsTable'
 
@@ -37,6 +38,7 @@ export const ResultsPage: React.VFC = () => {
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
+      {isMobile && <DownloadCSVButton />}
       {root.summary.state &&
       root.summary.state !== EstimationSummaryState.MORE_INFO ? (
         <>

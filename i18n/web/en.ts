@@ -29,6 +29,7 @@ const en: WebTranslations = {
   results: 'Results',
   needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
+  saveToCsv: 'Download',
   getResults: 'Get Results',
   required: 'required',
   homePageP1:
