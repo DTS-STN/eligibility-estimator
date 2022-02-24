@@ -29,7 +29,10 @@ export const ContactCTA: React.VFC = () => {
       {root.summary?.nextStepsLink?.url && (
         <>
           <Link href={root.summary.nextStepsLink.url} passHref>
-            <a className="btn btn-primary md:w-96 !mt-5 mx-1" target="_blank">
+            <a
+              className="btn btn-primary md:w-96 !mt-5 mx-1 min-w-min"
+              target="_blank"
+            >
               {root.summary.nextStepsLink.text}
             </a>
           </Link>
