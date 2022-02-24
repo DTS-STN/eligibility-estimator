@@ -22,7 +22,7 @@ export class IncomeHelper extends FieldHelper {
     public partner: number,
     public maritalStatus: MaritalStatusHelper
   ) {
-    super(client === undefined ? undefined : -1) // send either undefined or -1, as we should never use this property
+    super(client === undefined ?? -1) // send either undefined or -1, as we should never use this property
   }
 
   /**
@@ -41,8 +41,8 @@ export class IncomeHelper extends FieldHelper {
   }
 
   get sum(): number {
-    const a = this.client ? this.client : 0
-    const b = this.partner ? this.partner : 0
+    const a = this.client ?? 0
+    const b = this.partner ?? 0
     return a + b
   }
 }

@@ -359,9 +359,7 @@ export class RequestHandler {
       const detailText = result.eligibility.detail // ex. "likely eligible for this benefit"
       const detailOverrideText = result.entitlement.detailOverride // ex. "likely eligible, but partial oas"
       delete result.entitlement.detailOverride // so this is not passed into the response
-      const usedDetailText = detailOverrideText
-        ? detailOverrideText
-        : detailText
+      const usedDetailText = detailOverrideText ?? detailText
 
       // if client is ineligible, the table will be populated with a link to view more reasons
       const ineligibilityText =
