@@ -50,7 +50,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.MARITAL_STATUS,
     category: { key: FieldCategory.PERSONAL_INFORMATION },
     order: 3,
-    type: FieldType.DROPDOWN,
+    type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.LIVING_COUNTRY]: {

@@ -11,7 +11,7 @@ const en: Translations = {
   benefit: {
     oas: 'Old Age Security (OAS)',
     gis: 'Guaranteed Income Supplement (GIS)',
-    allowance: 'Allowance',
+    alw: 'Allowance',
     afs: 'Allowance for the Survivor',
   },
   category: {

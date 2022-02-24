@@ -13,7 +13,7 @@ const fr: Translations = {
   benefit: {
     oas: 'Sécurité de la vieillesse (SV)',
     gis: 'Supplément de revenu garanti (SRG)',
-    allowance: 'Allocation',
+    alw: 'Allocation',
     afs: 'Allocation au survivant',
   },
   category: {
