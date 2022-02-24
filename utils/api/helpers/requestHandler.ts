@@ -392,11 +392,11 @@ export class RequestHandler {
       )
       .replace(
         '{MAX_OAS_INCOME}',
-        numberToStringCurrency(
+        `<strong className="font-bold">${numberToStringCurrency(
           legalValues.MAX_OAS_INCOME,
           this.translations._locale,
           { rounding: 0 }
-        )
+        )}</strong>`
       )
       .replace(
         '{LINK_SERVICE_CANADA}',
