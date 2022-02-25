@@ -42,7 +42,15 @@ export class GisBenefit extends BaseBenefit {
         ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
         : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
       : legalValues.MAX_GIS_INCOME_SINGLE
-    const meetsReqIncome = this.income < maxIncome
+    const meetsReqIncome =
+      this.income < maxIncome ||
+      /*
+       This exception is pretty weird, but necessary to work around the fact that a client can be entitled to GIS
+       while being above the GIS income limit. This scenario can happen when the client gets Partial OAS, as
+       GIS "top-up" will come into effect. Later, in RequestHandler.translateResults(), we will correct for
+       this if the client is indeed above the true (undocumented) max income.
+      */
+      this.oasResult.entitlement.type === EntitlementResultType.PARTIAL
 
     // main checks
     if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
@@ -114,10 +122,12 @@ export class GisBenefit extends BaseBenefit {
       return { result: 0, type: EntitlementResultType.NONE }
 
     const result = roundToTwo(this.getEntitlementAmount())
-    const type =
-      result === -1
-        ? EntitlementResultType.UNAVAILABLE
-        : EntitlementResultType.FULL
+
+    let type: EntitlementResultType
+    if (result === -1) type = EntitlementResultType.UNAVAILABLE
+    else if (result === 0) type = EntitlementResultType.NONE
+    else type = EntitlementResultType.FULL
+
     const detailOverride =
       type === EntitlementResultType.UNAVAILABLE
         ? this.translations.detail.eligibleEntitlementUnavailable
@@ -140,15 +150,21 @@ export class GisBenefit extends BaseBenefit {
     if (this.oasResult.entitlement.type === EntitlementResultType.PARTIAL) {
       const lastIncome = gisEntitlementItemLast.range.high
       const oasEntitlement = this.oasResult.entitlement.result
+      let result, combinedOasGis
       if (this.income <= lastIncome) {
         // partial oas when income below max
-        let combinedOasGis = gisEntitlementItem.combinedOasGis
-        const result = combinedOasGis - oasEntitlement
-        return Math.max(0, result)
+        combinedOasGis = gisEntitlementItem.combinedOasGis
       } else {
         // partial oas when income above max
-        throw new Error('unsupported')
+        const lastInterval = gisEntitlementItemLast.range.interval
+        const lastCombinedOasGis = gisEntitlementItemLast.combinedOasGis
+        const numIntervalsOverLast = Math.ceil(
+          (this.income - lastIncome) / lastInterval
+        )
+        combinedOasGis = lastCombinedOasGis - numIntervalsOverLast
       }
+      result = combinedOasGis - oasEntitlement
+      return Math.max(0, result)
     }
     if (
       this.oasResult.entitlement.type === EntitlementResultType.UNAVAILABLE ||
