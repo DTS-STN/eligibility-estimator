@@ -12,7 +12,7 @@ export const ConditionalLinks: React.VFC<{ links: InfoLink[] }> = ({
       <h2 className="h2 mt-8">{moreInfo}</h2>
       <ul className="list-disc !mt-3">
         {links.map((link, index) => (
-          <li key={index} className="ml-12 text-default-text underline">
+          <li key={index} className="ml-10 text-default-text underline">
             <Link href={link.url} passHref>
               <a>{link.text}</a>
             </Link>

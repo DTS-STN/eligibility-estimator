@@ -56,9 +56,9 @@ export const Summary = types
     entitlementSum: types.maybe(types.number),
   })
   .views((self) => ({
-    get nextStepsLink(): Instance<typeof SummaryLink> {
+    get nextStepsLinks(): Instance<typeof SummaryLink>[] {
       return self.links
-        ? self.links.find(
+        ? self.links.filter(
             (link) => link.location === LinkLocation.RESULTS_APPLY
           )
         : null

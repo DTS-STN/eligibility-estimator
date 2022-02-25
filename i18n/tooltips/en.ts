@@ -17,10 +17,6 @@ const en: TooltipTranslations = {
     heading: "Partner's eligibility to benefits",
     text: 'A person is eligible to receive full OAS if they have lived in Canada for 40 years or more after the age of 18.',
   },
-  partnerIncome: {
-    heading: "Partner's Annual Net Income",
-    text: "<p style='padding-bottom: 12px;'>You can find your total annual net income on line 236 of your tax return document.<br> Old Age Security, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments should not be included in your income.<br> If you do not have tax filing income information, you may use an estimate of your income. If you have more than one source of income (e.g., salary, investment income, pension income), you should add all of the net income estimates together before entering the total amount. Do not include any income from a partner or dependant.</p>",
-  },
   livingCountry: {
     heading: 'Current Residency',
     text: 'The name of the country or territory you live in, if you have been lawfully admitted to that country or territory.',
@@ -44,6 +40,9 @@ const en: TooltipTranslations = {
   everLivedSocialCountry: {
     heading: 'Social Agreement Countries',
     text: 'You may still qualify if you have you lived in one of the countries Canada has established a social security agreement.',
+  },
+  partnerIncome: {
+    useDataFromKey: 'income',
   },
   partnerAge: {
     useDataFromKey: 'age',

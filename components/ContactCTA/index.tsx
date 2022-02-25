@@ -26,14 +26,19 @@ export const ContactCTA: React.VFC = () => {
         className="!mt-6 !md:mt-8 summary-link"
         dangerouslySetInnerHTML={{ __html: tsln.contactCTA }}
       />
-      {root.summary?.nextStepsLink?.url && (
-        <>
-          <Link href={root.summary.nextStepsLink.url} passHref>
-            <a className="btn btn-primary md:w-96 !mt-5 mx-1" target="_blank">
-              {root.summary.nextStepsLink.text}
-            </a>
-          </Link>
-        </>
+      {root.summary?.nextStepsLinks && (
+        <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 mt-4">
+          {root.summary.nextStepsLinks.map((link, index) => (
+            <Link key={index} href={link.url} passHref>
+              <a
+                className="btn btn-primary md:w-96 !mt-5 mx-1 min-w-min"
+                target="_blank"
+              >
+                {link.text}
+              </a>
+            </Link>
+          ))}
+        </div>
       )}
     </>
   )

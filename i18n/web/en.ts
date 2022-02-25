@@ -1,6 +1,10 @@
 import { WebTranslations } from '.'
 
 const en: WebTranslations = {
+  oas: 'Old Age Security (OAS)',
+  gis: 'Guaranteed Income Supplement (GIS)',
+  alw: 'Allowance',
+  afs: 'Allowance for the Survivor',
   testSiteTitle: 'TEST SITE',
   testSiteHeader:
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
@@ -29,13 +33,13 @@ const en: WebTranslations = {
     'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If eligible to receive the benefit, it will also estimate your monthly payment.',
   homePageP2: 'The estimator covers four benefits programs:',
   homePageP3:
-    '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients who have a low income and are living in Canada.',
+    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
   homePageP5:
-    '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    '<strong className="font-bold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    '<strong className="font-bold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   emptyResultsMessage:
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
   disclaimerTitle: 'Disclaimer',
@@ -65,7 +69,7 @@ const en: WebTranslations = {
   },
 
   contactCTA:
-    'For a more accurate assessment, you are encouraged to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> and check out the <a className="underline text-default-text" href="#tabList">FAQ</a> on documents you may be required to provide.',
+    'For a more accurate assessment, you are encouraged to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> and check out the <a className="underline text-default-text" href="#tabList">Frequently Asked Questions</a> on documents you may be required to provide.',
   resultsPage: {
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
@@ -76,7 +80,7 @@ const en: WebTranslations = {
   moreInfoHeader: 'More Information',
   privacyDiscTitle: 'Privacy Notice',
   privacyDisc:
-    'The personal information provided is governed in accordance with the Privacy Act. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
+    'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
     empty: 'This information is required',
   },

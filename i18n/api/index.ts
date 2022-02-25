@@ -103,6 +103,7 @@ export interface Translations {
     cpp: Link
     cric: Link
     oasApply: Link
+    gisApply: Link
     alwApply: Link
     afsApply: Link
     oasEntitlement: Link
