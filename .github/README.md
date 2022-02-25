@@ -1,8 +1,5 @@
 ## Description
 
-Quick starter template for DTS projects making use of one of our commonly-used [Next.js](https://nextjs.org/) setups.
-This template uses the basic Next.js [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) bootstrap template.
-
 ### Technologies Implemented
 
 This project uses
@@ -10,37 +7,8 @@ This project uses
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Jest](https://jestjs.io/) for unit testing
-- [Cypress](https://www.cypress.io/) for end-to-end testing.
-
-## How to Implement/Get Started
-
-### Values that need to be configured:
-
-#### Replace eligibility-estimator-client name to new project name
-
-Search "eligibility-estimator-client", replace in package.json, run "npm i" in terminal and confirm package-lock.json is updated
-
-#### Configuring Helm
-
-In the helm template, the application name is single-tier-application. this will need to be changed by the current application name.
-
-For every Kubernetes cluster, a context.sh file needs to be defined. For example, one might be called context-dev.sh and the other context-prod.sh.
-
-For more information, please visit the [DTS SRE deployment templates](https://github.com/DTS-STN/dts-sre-deployment-templates/tree/main/kubernetes-helm-template).
-
-## Deployments
-
-Write something about how deployments are done
-
-## PR Procedures/Definition of done
-
-We need to have at least one person reviewing each PR before it can be merged. Also, each branch should be prefixed by the relevant Jira issue, if possible e.g. **DC-13**-comprehensive-readme
-
-## Useful Links
-
-[TeamCity Link](https://teamcity.dts-stn.com/)
-
---- Default Create Next App text: remove or keep or re-use at your discretion ---
+- [React testing library](https://testing-library.com/docs/react-testing-library/intro/) for easy component testing.
+- [Mobx state tree](https://mobx-state-tree.js.org/intro/welcome) for state management.
 
 ## Getting Started
 
@@ -60,11 +28,26 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Frontend
 
-To learn more about Next.js, take a look at the following resources:
+### Approach
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Because the user experience was captured as a decision tree the front end needed to, at any point, render a specific form field / form layout without any previous knowledge of the form. The way we accomplish this was to build a component factory that was responsible for receiving a payload that followed a very specific interface and render components based on some payload data.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The payload would then have a key called field data that could be parsed into an array of fields that the component factory would know how to render.
+
+A user enters an answer into the form a payload is sent to the back end, processed, and a new payload is sent back defining the current state of the form.
+
+The component factory currently supports select components, number field components, currency components, radio button components, and a text field component.
+
+Top of a set of fields there is also the concept of child form fields. This is essentially when a form field is tied to the logic of another form field and renders based on a selection that can occur.
+
+For example, there are partner detail questions that only render when the user is in a common law or marriage relationship.
+
+### Technology
+
+Because of react's form issues, mobx-state-tree and mobx-react were used to only re-render when necessary and to control the current state of user inputted data what component's are currently rendered on screen.
+
+You may come across `observer` components, which will observe to the mobx data in the form and only re-render a component if it needs to instead of react's default re-rendering scheme where the parent and all children are automatically re-rendered.
+
+## Backend
