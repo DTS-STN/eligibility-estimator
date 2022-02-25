@@ -57,7 +57,7 @@
     "prettier": "^2.3.2",
     "string.prototype.replaceall": "^1.0.6",
     "tailwindcss": "^2.2.9",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "yarn eslint --cache --fix",
