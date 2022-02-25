@@ -125,9 +125,8 @@ export class LegalValuesScraper extends BaseScraper {
   private static parseItem(data: string, config: ScraperConfig): number {
     const document: Document = new JSDOM(data).window.document
     const selectedData = document.querySelector(config.selector)
-    const sanitizeFn: (string: string) => number = config.sanitizeFn
-      ? config.sanitizeFn
-      : LegalValuesScraper.sanitizeFnStandard
+    const sanitizeFn: (string: string) => number =
+      config.sanitizeFn ?? LegalValuesScraper.sanitizeFnStandard
     return sanitizeFn(selectedData.textContent)
   }
 

@@ -11,7 +11,7 @@ const en: Translations = {
   benefit: {
     oas: 'Old Age Security (OAS)',
     gis: 'Guaranteed Income Supplement (GIS)',
-    allowance: 'Allowance',
+    alw: 'Allowance',
     afs: 'Allowance for the Survivor',
   },
   category: {
@@ -394,19 +394,25 @@ const en: Translations = {
       location: LinkLocation.RESULTS_ONLY,
     },
     oasApply: {
-      text: 'Old Age Security: Application',
+      text: 'Apply for Old Age Security',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
       order: 5,
       location: LinkLocation.RESULTS_APPLY,
     },
+    gisApply: {
+      text: 'Apply for Guaranteed Income Supplement',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
+      order: 6,
+      location: LinkLocation.RESULTS_APPLY,
+    },
     alwApply: {
-      text: 'Guaranteed Income Supplement - Allowance application',
+      text: 'Apply for Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
       order: 7,
       location: LinkLocation.RESULTS_APPLY,
     },
     afsApply: {
-      text: 'Allowance for the Survivor: Application',
+      text: 'Apply for Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
       order: 8,
       location: LinkLocation.RESULTS_APPLY,

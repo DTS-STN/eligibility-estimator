@@ -1,6 +1,10 @@
 import { WebTranslations } from '.'
 
 const fr: WebTranslations = {
+  oas: 'Sécurité de la vieillesse (SV)',
+  gis: 'Supplément de revenu garanti (SRG)',
+  alw: 'Allocation',
+  afs: 'Allocation au survivant',
   testSiteTitle: "SITE D'ESSAI",
   testSiteHeader:
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
@@ -26,21 +30,21 @@ const fr: WebTranslations = {
   estimate: 'Estimer',
   required: 'obligatoire',
   homePageP1:
-    "L'estimateur canadien des prestations de vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV) et au Supplément de revenu garanti (SRG). Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
+    "L'Estimateur Canadien des Prestations de Vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV) et au Supplément de revenu garanti (SRG). Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
   homePageP2: "L'estimateur couvre quatre programmes de prestations :",
   homePageP3:
-    '<strong className="font-bold">la pension de la Sécurité de la vieillesse</strong> est un paiement mensuel que vous pouvez recevoir si vous avez 65 ans et plus. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
+    '<strong className="font-bold">la pension de la Sécurité de la vieillesse</strong> est un paiement mensuel que vous pouvez recevoir si vous avez <strong className="font-bold">65 ans et plus</strong>. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
   homePageP4:
     '<strong className="font-bold">le Supplément de revenu garanti</strong> est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse qui ont un faible revenu et qui vivent au Canada.',
   homePageP5:
-    '<strong className="font-bold">l\'Allocation</strong> est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l\'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.',
+    '<strong className="font-bold">l\'Allocation</strong> est une prestation mensuelle offerte aux personnes à faible revenu âgées de <strong className="font-bold">60 à 64 ans</strong> dont l\'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.',
   homePageP6:
-    '<strong className="font-bold">l\'Allocation au survivant</strong> est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l\'époux ou le conjoint de fait est décédé.',
+    '<strong className="font-bold">l\'Allocation au survivant</strong> est une prestation mensuelle offerte aux personnes âgées de <strong className="font-bold">60 à 64 ans</strong> qui ont un faible revenu, qui vivent au Canada et dont l\'époux ou le conjoint de fait est décédé.',
   emptyResultsMessage:
     "Veuillez remplir le formulaire. L'estimateur évaluera votre admissibilité en fonction des renseignements fournis. Si vous êtes admissible, il fournira également une estimation de votre paiement mensuel. ",
   disclaimerTitle: 'Avertissement',
   disclaimer:
-    "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
+    "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, communiquez avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
   contactSC:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
   footerlink1: 'Contactez-nous',
@@ -65,7 +69,7 @@ const fr: WebTranslations = {
   },
 
   contactCTA:
-    'Pour une évaluation plus précise de votre demande, nous vous invitons à communiquer avec <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a>. Consultez la foire aux questions (<a className="underline text-default-text" href="#tabList">FAQ</a>) pour obtenir la liste les documents que vous devrez peut-être fournir.',
+    'Pour une évaluation plus précise de votre demande, nous vous invitons à communiquer avec <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a>. Consultez la foire aux questions (<a className="underline text-default-text" href="#tabList">Foire aux questions</a>) pour obtenir la liste les documents que vous devrez peut-être fournir.',
   resultsPage: {
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
@@ -74,9 +78,9 @@ const fr: WebTranslations = {
   },
   nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
-  privacyDiscTitle: 'FRENCH: Privacy Notice',
+  privacyDiscTitle: 'Avis de confidentialité',
   privacyDisc:
-    "Les renseignements personnels fournis sont régis conformément à la Loi sur la protection des renseignements personnels. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
+    "Les renseignements personnels fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
   errors: {
     empty: 'Ce renseignement est requis',
   },

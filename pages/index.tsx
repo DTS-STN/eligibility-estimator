@@ -41,7 +41,10 @@ const Home: NextPage = (props) => {
       <details className="py-4">
         <summary className="text-default-text">{tsln.privacyDiscTitle}</summary>
         <div className="p-4">
-          <p>{tsln.privacyDisc}</p>
+          <p
+            className="summary-link"
+            dangerouslySetInnerHTML={{ __html: tsln.privacyDisc }}
+          ></p>
         </div>
       </details>
 

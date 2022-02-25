@@ -13,7 +13,7 @@ const fr: Translations = {
   benefit: {
     oas: 'Sécurité de la vieillesse (SV)',
     gis: 'Supplément de revenu garanti (SRG)',
-    allowance: 'Allocation',
+    alw: 'Allocation',
     afs: 'Allocation au survivant',
   },
   category: {
@@ -400,19 +400,25 @@ const fr: Translations = {
       location: LinkLocation.RESULTS_ONLY,
     },
     oasApply: {
-      text: 'Pension de la Sécurité de vieillesse: Demande',
+      text: 'Présenter une demande de Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
       order: 5,
       location: LinkLocation.RESULTS_APPLY,
     },
+    gisApply: {
+      text: 'Présenter une demande de Supplément de revenu garanti',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
+      order: 6,
+      location: LinkLocation.RESULTS_APPLY,
+    },
     alwApply: {
-      text: 'Supplément de revenu garanti : Allocation',
+      text: "Présenter une demande d'allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
       order: 7,
       location: LinkLocation.RESULTS_APPLY,
     },
     afsApply: {
-      text: 'Allocation au survivant: Demande',
+      text: "Présenter une demande d'allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
       order: 8,
       location: LinkLocation.RESULTS_APPLY,
@@ -490,7 +496,7 @@ const fr: Translations = {
       location: LinkLocation.STANDARD,
     },
     oasRetroactive: {
-      text: 'TBD',
+      text: 'Paiement rétroactif et reports de la pension de Sécurité de vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
       order: 21,
       location: LinkLocation.STANDARD,

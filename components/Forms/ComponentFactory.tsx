@@ -129,8 +129,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                         type={field.type}
                         name={field.key}
                         label={field.label}
+                        onChange={field.handleChange}
                         placeholder={field.placeholder ?? ''}
-                        onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
                         required
@@ -219,7 +219,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 className="btn btn-default mt-4 md:mt-0"
                 onClick={() => router.push('/')}
               >
-                {tsln.next}
+                {tsln.back}
               </button>
               <button
                 type="button"

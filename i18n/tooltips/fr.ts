@@ -17,13 +17,9 @@ const fr: TooltipTranslations = {
     heading: 'Eligibilité de votre conjoint aux prestations',
     text: 'Une personne a droit à la pleine pension de la Sécurité de la vieillesse seulement si elle a habité au Canada pendant au moins 40 ans après l’âge de 18 ans.',
   },
-  partnerIncome: {
-    heading: 'Revenu annuel net de votre conjoint',
-    text: "<p style='padding-bottom: 12px;'>Votre revenu annuel net est votre revenu après impôt. Vous pouvez trouver votre revenu annuel net total à la ligne 236 de votre déclaration de revenus. Les paiements de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l'Allocation ou de l'Allocation au survivant ne sont pas inclus dans votre revenu. Si vous n'avez pas de renseignements sur votre revenu dans votre déclaration de revenus, vous pouvez utiliser une estimation de votre revenu. Si vous avez plus d'une source de revenu (par exemple, salaire, revenu de placement, revenu de pension), vous devez additionner toutes les estimations de revenu net avant d'inscrire le montant total. N'incluez pas les revenus de votre conjoint ou d'une personne à charge.</p>",
-  },
   livingCountry: {
     heading: 'Lieu de résidence actuel',
-    text: 'The name of the country or territory you live in, if you have been lawfully admitted to that country or territory.',
+    text: 'Le nom du pays ou du territoire où vous résidez, si vous avez été légalement admis dans ce pays ou ce territoire.',
   },
   legalStatus: {
     heading: 'Statut légal',
@@ -44,6 +40,9 @@ const fr: TooltipTranslations = {
   everLivedSocialCountry: {
     heading: 'Pays ayant un accord de sécurité sociale',
     text: 'Vous pourriez être admissible si vous avez vécu dans l’un des pays ayant un accord de sécurité sociale avec le Canada.',
+  },
+  partnerIncome: {
+    useDataFromKey: 'income',
   },
   partnerAge: {
     useDataFromKey: 'age',
