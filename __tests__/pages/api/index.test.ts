@@ -1584,29 +1584,6 @@ describe('GIS entitlement scenarios', () => {
     )
     expect(res.body.results.gis.entitlement.result).toEqual(0)
   })
-  it('returns "-1" when single and 10000 income, only 20 years in Canada (Partial OAS)', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      legalStatusOther: undefined,
-      canadaWholeLife: false,
-      yearsInCanadaSince18: 20,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-    })
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(-1)
-  })
   it('returns "$394.68" when single and 10000 income', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -1813,6 +1790,52 @@ describe('GIS entitlement scenarios', () => {
     })
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.entitlement.result).toEqual(577.43)
+  })
+  it('returns "$1239.38" when single and 1000 income, only 20 years in Canada (Partial OAS)', async () => {
+    const res = await mockGetRequest({
+      income: 1000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 20,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.entitlement.result).toEqual(1239.38)
+  })
+  it('returns "$1399.95" when single and 1000 income, only 10 years in Canada (Partial OAS)', async () => {
+    const res = await mockGetRequest({
+      income: 1000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 10,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.entitlement.result).toEqual(1399.95)
   })
 })
 

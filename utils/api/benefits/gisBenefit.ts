@@ -10,6 +10,7 @@ import {
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
+import roundToTwo from '../helpers/roundToTwo'
 import { OutputItemGis } from '../scrapers/_baseTable'
 import { legalValues, scraperData } from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -112,7 +113,7 @@ export class GisBenefit extends BaseBenefit {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const result = this.getEntitlementAmount()
+    const result = roundToTwo(this.getEntitlementAmount())
     const type =
       result === -1
         ? EntitlementResultType.UNAVAILABLE
@@ -126,13 +127,35 @@ export class GisBenefit extends BaseBenefit {
   }
 
   private getEntitlementAmount(): number {
-    if (
-      this.oasResult.entitlement.type === EntitlementResultType.PARTIAL ||
-      this.input.partnerBenefitStatus.partialOas
-    )
-      return -1
     const gisEntitlementItem = this.getTableItem()
-    return gisEntitlementItem ? gisEntitlementItem.gis : 0
+    const gisEntitlementItemLast = this.getLastTableItem()
+    if (this.input.partnerBenefitStatus.partialOas) {
+      // unavailable
+      return -1
+    }
+    if (this.oasResult.entitlement.type === EntitlementResultType.FULL) {
+      // standard
+      return gisEntitlementItem ? gisEntitlementItem.gis : 0
+    }
+    if (this.oasResult.entitlement.type === EntitlementResultType.PARTIAL) {
+      const lastIncome = gisEntitlementItemLast.range.high
+      const oasEntitlement = this.oasResult.entitlement.result
+      if (this.income <= lastIncome) {
+        // partial oas when income below max
+        let combinedOasGis = gisEntitlementItem.combinedOasGis
+        const result = combinedOasGis - oasEntitlement
+        return Math.max(0, result)
+      } else {
+        // partial oas when income above max
+        throw new Error('unsupported')
+      }
+    }
+    if (
+      this.oasResult.entitlement.type === EntitlementResultType.UNAVAILABLE ||
+      this.oasResult.entitlement.type === EntitlementResultType.NONE
+    ) {
+      throw new Error('unsupported')
+    }
   }
 
   private getTableItem(): OutputItemGis | undefined {
@@ -140,6 +163,11 @@ export class GisBenefit extends BaseBenefit {
     return array.find((x) => {
       if (x.range.low <= this.income && this.income <= x.range.high) return x
     })
+  }
+
+  private getLastTableItem(): OutputItemGis | undefined {
+    const array: OutputItemGis[] = this.getTable()
+    return array[array.length - 1]
   }
 
   private getTable(): OutputItemGis[] {
