@@ -81,8 +81,6 @@ const Home: NextPage = (props) => {
           {tsln.next}
         </button>
       </Layout>
-      <script src="/scripts/adobe.js"></script>
-      <script type="text/javascript">_satellite.pageBottom()</script>
     </>
   )
 }

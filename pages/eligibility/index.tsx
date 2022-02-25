@@ -47,9 +47,6 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
       <Layout>
         <Tabs {...props} />
       </Layout>
-
-      <script src="/scripts/adobe.js"></script>
-      <script type="text/javascript">_satellite.pageBottom()</script>
     </>
   )
 }
