@@ -10,6 +10,8 @@ const fr: WebTranslations = {
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   otherLangCode: 'EN',
+  langLong: 'fra',
+  creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca/fr.html',
