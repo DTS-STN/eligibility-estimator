@@ -54,7 +54,7 @@ export const Layout: React.VFC<{
           <Header />
           <div className="bg-primary -mx-4">
             <div className="flex flex-row justify-between items-center sm:container mx-auto">
-              <h3 className="text-h3 py-3 text-white font-bold px-4 md:px-0">
+              <h3 className="text-h3 py-3 text-white font-semibold px-4 md:px-0">
                 {tsln.menuTitle}
               </h3>
               <p></p>
