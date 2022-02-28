@@ -1,15 +1,38 @@
 import { observer } from 'mobx-react'
 import { GetStaticProps, NextPage } from 'next'
+import { useEffect } from 'react'
+import { HeadDoc } from '../../components/Document'
+import { useStore, useTranslation } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { Tabs } from '../../components/Tabs'
+import { WebTranslations } from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
 import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
 import { mockPartialGetRequest } from '../../__tests__/pages/api/factory'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
+  const root = useStore()
+  const tsln = useTranslation<WebTranslations>()
+
+  useEffect(() => {
+    if (process.browser) {
+      const win = window as Window &
+        typeof globalThis & { adobeDataLayer: any; _satellite: any }
+      const lang = tsln.langLong
+      const creator = tsln.creator
+      const title =
+        lang +
+        '-sc labs-eligibility estimator-' +
+        root.getTabNameForAnalytics(0)
+
+      sendAnalyticsRequest(lang, title, creator, win)
+    }
+  })
+
   if ('error' in props) {
     return (
       <Layout>
@@ -19,9 +42,12 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   }
 
   return (
-    <Layout>
-      <Tabs {...props} />
-    </Layout>
+    <>
+      <HeadDoc />
+      <Layout>
+        <Tabs {...props} />
+      </Layout>
+    </>
   )
 }
 
