@@ -14,6 +14,7 @@ import { Alert } from '../Alert'
 import { useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { CurrencyField } from './CurrencyField'
+import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
@@ -198,46 +199,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               return content
             })}
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3.5 md:gap-x-8 mt-20">
-              <button
-                type="submit"
-                role="button"
-                className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
-                onClick={async () => {
-                  if (
-                    !form.validateAgainstEmptyFields(router.locale) &&
-                    !form.hasErrors
-                  ) {
-                    const language = document.querySelector(
-                      '#_language'
-                    ) as HTMLInputElement
-                    root.setCurrentLang(language.value as Language)
-                    root.setActiveTab(1)
-                  }
-                }}
-                disabled={incomeTooHigh}
-              >
-                {tsln.getResults}
-              </button>
-              <button
-                type="button"
-                role="navigation"
-                className="btn btn-default mt-4 md:mt-0"
-                onClick={() => router.push('/')}
-              >
-                {tsln.back}
-              </button>
-              <button
-                type="button"
-                role="button"
-                className="btn btn-default mt-4 md:mt-0"
-                onClick={() => {
-                  form.clearForm()
-                }}
-              >
-                {tsln.clear}
-              </button>
-            </div>
+            <FormButtons incomeTooHigh={incomeTooHigh} />
           </form>
           <NeedHelpList title={tsln.needHelp} links={root.summary.links} />
         </div>
