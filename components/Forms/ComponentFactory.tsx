@@ -200,24 +200,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3.5 md:gap-x-8 mt-20">
               <button
-                type="button"
-                role="navigation"
-                className="btn btn-default mt-4 md:mt-0"
-                onClick={() => router.push('/')}
-              >
-                {tsln.back}
-              </button>
-              <button
-                type="button"
-                role="button"
-                className="btn btn-default mt-4 md:mt-0"
-                onClick={() => {
-                  form.clearForm()
-                }}
-              >
-                {tsln.clear}
-              </button>
-              <button
                 type="submit"
                 role="button"
                 className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
@@ -236,6 +218,24 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 disabled={incomeTooHigh}
               >
                 {tsln.getResults}
+              </button>
+              <button
+                type="button"
+                role="navigation"
+                className="btn btn-default mt-4 md:mt-0"
+                onClick={() => router.push('/')}
+              >
+                {tsln.back}
+              </button>
+              <button
+                type="button"
+                role="button"
+                className="btn btn-default mt-4 md:mt-0"
+                onClick={() => {
+                  form.clearForm()
+                }}
+              >
+                {tsln.clear}
               </button>
             </div>
           </form>
