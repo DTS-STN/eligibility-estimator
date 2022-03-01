@@ -185,6 +185,7 @@ export class SummaryBuilder {
     if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(availableLinks.afsApply)
 
+    links.sort((a, b) => a.order - b.order)
     return links
   }
 
