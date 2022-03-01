@@ -96,30 +96,31 @@ export interface Translations {
     availableIneligibleIncome: string
   }
   links: {
-    SC: Link
-    socialAgreement: Link
     contactSC: Link
     oasOverview: Link
+    gisOverview: Link
+    alwOverview: Link
+    afsOverview: Link
+    oasMaxIncome: Link
     cpp: Link
     cric: Link
-    oasApply: Link
-    gisApply: Link
-    alwApply: Link
-    afsApply: Link
-    oasEntitlement: Link
-    oasMaxIncome: Link
     outsideCanada: Link
+    outsideCanadaOas: Link
     oasPartial: Link
-    workingOutsideCanada: Link
+    paymentOverview: Link
     gisEntitlement: Link
-    oasEntitlement2: Link
-    alwGisEntitlement: Link
-    alwInfo: Link
+    alwEntitlement: Link
     afsEntitlement: Link
     oasRecoveryTax: Link
     oasDefer: Link
     oasRetroactive: Link
+    oasApply: Link
+    gisApply: Link
+    alwApply: Link
+    afsApply: Link
+    SC: Link
     oasDeferClickHere: Link
+    socialAgreement: Link
     oasReasons: Link
     gisReasons: Link
     alwReasons: Link
