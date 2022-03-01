@@ -63,7 +63,11 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
     return (
       <>
         {incomeTooHigh ? (
-          <Alert title={root.summary.title} type={root.summary.state}>
+          <Alert
+            title={root.summary.title}
+            type={root.summary.state}
+            insertHTML
+          >
             {root.summary.details}
           </Alert>
         ) : (
