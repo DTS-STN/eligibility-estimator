@@ -30,7 +30,7 @@ export type WebTranslations = {
   results: string
   needHelp: string
   faq: string
-  estimate: string
+  getResults: string
   required: string
   homePageP1: string
   homePageP2: string

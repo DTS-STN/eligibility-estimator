@@ -235,7 +235,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 }}
                 disabled={incomeTooHigh}
               >
-                {tsln.estimate}
+                {tsln.getResults}
               </button>
             </div>
           </form>

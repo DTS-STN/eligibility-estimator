@@ -29,7 +29,7 @@ const en: WebTranslations = {
   results: 'Results',
   needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
-  estimate: 'Estimate',
+  getResults: 'Get Results',
   required: 'required',
   homePageP1:
     'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If eligible to receive the benefit, it will also estimate your monthly payment.',
