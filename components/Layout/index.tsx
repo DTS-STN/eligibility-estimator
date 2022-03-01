@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -19,20 +18,6 @@ export const Layout: React.VFC<{
 
   return (
     <>
-      <Head>
-        <title>{tsln.title}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        ></link>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-        ></link>
-      </Head>
       <SCLabsTestHeader />
       <main id="elig">
         <div className="mx-4 min-h-screen">

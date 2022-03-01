@@ -94,6 +94,18 @@ export const RootStore = types
     activeTab: types.optional(types.number, 0),
     lang: types.enumeration(Object.values(Language)),
   })
+  .views((self) => ({
+    getTabNameForAnalytics(index: number) {
+      if (index == 0) {
+        return 'questions'
+      } else if (index == 1) {
+        return 'results'
+      } else if (index == 2) {
+        return 'faq'
+      }
+      return 'unknown'
+    },
+  }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num

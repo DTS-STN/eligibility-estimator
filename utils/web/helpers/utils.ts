@@ -13,3 +13,24 @@ export async function dataFetcher(url) {
   }
   return data
 }
+
+export const sendAnalyticsRequest = (
+  lang: string,
+  title: string,
+  creator: string,
+  window: Window & typeof globalThis & { adobeDataLayer: any; _satellite: any }
+) => {
+  if (process.browser) {
+    window.adobeDataLayer.push({
+      event: 'pageLoad',
+      page: {
+        title: title.trim(),
+        language: lang.trim(),
+        creator: creator.trim(),
+        accessRights: '2',
+        service:
+          'ESDC-EDSC_OldAgeBenefitsEstimator-EstimateurDePrestationsDeVieillesse',
+      },
+    })
+  }
+}
