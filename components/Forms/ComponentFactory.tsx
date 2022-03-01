@@ -201,7 +201,10 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
             <FormButtons incomeTooHigh={incomeTooHigh} />
           </form>
-          <NeedHelpList title={tsln.needHelp} links={root.summary.links} />
+          <NeedHelpList
+            title={tsln.needHelp}
+            links={root.summary.needHelpLinks}
+          />
         </div>
       </>
     )
