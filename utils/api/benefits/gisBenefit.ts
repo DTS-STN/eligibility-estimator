@@ -38,7 +38,7 @@ export class GisBenefit extends BaseBenefit {
      which may result in us returning "eligible" when in fact they are not.
     */
     const maxIncome = this.input.maritalStatus.partnered
-      ? this.input.partnerBenefitStatus.fullOas
+      ? this.input.partnerBenefitStatus.anyOas
         ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
         : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
       : legalValues.MAX_GIS_INCOME_SINGLE
@@ -139,10 +139,10 @@ export class GisBenefit extends BaseBenefit {
   private getEntitlementAmount(): number {
     const gisEntitlementItem = this.getTableItem()
     const gisEntitlementItemLast = this.getLastTableItem()
-    if (this.input.partnerBenefitStatus.partialOas) {
-      // unavailable
-      return -1
-    }
+    // if (this.input.partnerBenefitStatus.partialOas) {
+    //   // unavailable
+    //   return -1
+    // }
     if (this.oasResult.entitlement.type === EntitlementResultType.FULL) {
       // standard
       return gisEntitlementItem ? gisEntitlementItem.gis : 0
@@ -191,7 +191,7 @@ export class GisBenefit extends BaseBenefit {
       // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
       return scraperData.tbl1_single
     } else if (this.input.maritalStatus.partnered) {
-      if (this.input.partnerBenefitStatus.fullOas) {
+      if (this.input.partnerBenefitStatus.anyOas) {
         // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
         return scraperData.tbl2_partneredAndOas
       } else if (this.input.partnerBenefitStatus.alw) {
