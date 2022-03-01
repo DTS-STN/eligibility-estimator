@@ -13,8 +13,8 @@ import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
 import { useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
-import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
+import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
@@ -62,27 +62,14 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     return (
       <>
-        {incomeTooHigh ? (
-          <Alert title={root.summary.title} type={root.summary.state}>
+        {incomeTooHigh && (
+          <Alert
+            title={root.summary.title}
+            type={root.summary.state}
+            insertHTML
+          >
             {root.summary.details}
           </Alert>
-        ) : (
-          <ProgressBar
-            sections={[
-              {
-                title: tsln.category.incomeDetails,
-                complete: root.form.progress.income,
-              },
-              {
-                title: tsln.category.personalInformation,
-                complete: root.form.progress.personal,
-              },
-              {
-                title: tsln.category.legalStatus,
-                complete: root.form.progress.legal,
-              },
-            ]}
-          />
         )}
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
           <form
@@ -212,46 +199,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               return content
             })}
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-3.5 md:gap-x-8 mt-20">
-              <button
-                type="button"
-                role="navigation"
-                className="btn btn-default mt-4 md:mt-0"
-                onClick={() => router.push('/')}
-              >
-                {tsln.back}
-              </button>
-              <button
-                type="button"
-                role="button"
-                className="btn btn-default mt-4 md:mt-0"
-                onClick={() => {
-                  form.clearForm()
-                }}
-              >
-                {tsln.clear}
-              </button>
-              <button
-                type="submit"
-                role="button"
-                className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
-                onClick={async () => {
-                  if (
-                    !form.validateAgainstEmptyFields(router.locale) &&
-                    !form.hasErrors
-                  ) {
-                    const language = document.querySelector(
-                      '#_language'
-                    ) as HTMLInputElement
-                    root.setCurrentLang(language.value as Language)
-                    root.setActiveTab(1)
-                  }
-                }}
-                disabled={incomeTooHigh}
-              >
-                {tsln.estimate}
-              </button>
-            </div>
+            <FormButtons incomeTooHigh={incomeTooHigh} />
           </form>
           <NeedHelpList title={tsln.needHelp} links={root.summary.links} />
         </div>

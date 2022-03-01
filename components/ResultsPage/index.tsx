@@ -6,7 +6,6 @@ import { Alert } from '../Alert'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import ProgressBar from '../ProgressBar'
 import { ResultsTable } from '../ResultsTable'
 
 export const ResultsPage: React.VFC = () => {
@@ -41,14 +40,6 @@ export const ResultsPage: React.VFC = () => {
       {root.summary.state &&
       root.summary.state !== EstimationSummaryState.MORE_INFO ? (
         <>
-          <ProgressBar
-            sections={[
-              { title: tsln.category.incomeDetails, complete: true },
-              { title: tsln.category.personalInformation, complete: true },
-              { title: tsln.category.legalStatus, complete: true },
-            ]}
-            estimateSection
-          />
           <Alert
             id="elig-results"
             title={root.summary.title}
