@@ -13,7 +13,6 @@ import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
 import { useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
-import ProgressBar from '../ProgressBar'
 import { CurrencyField } from './CurrencyField'
 import { NumberField } from './NumberField'
 import { Radio } from './Radio'
@@ -62,7 +61,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     return (
       <>
-        {incomeTooHigh ? (
+        {incomeTooHigh && (
           <Alert
             title={root.summary.title}
             type={root.summary.state}
@@ -70,23 +69,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
           >
             {root.summary.details}
           </Alert>
-        ) : (
-          <ProgressBar
-            sections={[
-              {
-                title: tsln.category.incomeDetails,
-                complete: root.form.progress.income,
-              },
-              {
-                title: tsln.category.personalInformation,
-                complete: root.form.progress.personal,
-              },
-              {
-                title: tsln.category.legalStatus,
-                complete: root.form.progress.legal,
-              },
-            ]}
-          />
         )}
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
           <form
