@@ -547,7 +547,7 @@ const en: Translations = {
     benefit: 'Benefit',
     eligibility: 'Eligibility',
     details: 'Details',
-    entitlement: 'Entitlement',
+    entitlement: 'Estimated monthly amount',
     links: 'LINKS',
     description: 'Description',
     url: 'URL',
