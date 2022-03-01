@@ -484,13 +484,13 @@ const fr: Translations = {
       location: LinkLocation.RESULTS_ONLY,
     },
     oasApply: {
-      text: 'Présenter une demande de Sécurité de la vieillesse',
+      text: 'Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
       order: 19,
       location: LinkLocation.RESULTS_APPLY,
     },
     gisApply: {
-      text: 'Présenter une demande de Supplément de revenu garanti',
+      text: 'Supplément de revenu garanti',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
       order: 20,
       location: LinkLocation.RESULTS_APPLY,

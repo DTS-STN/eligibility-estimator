@@ -31,6 +31,9 @@ const fr: WebTranslations = {
   faq: 'Foire Aux Questions',
   saveToCsv: 'Télécharger',
   getResults: 'Obtenir les résultats',
+  applyHeader: 'FRENCH: Apply for benefits',
+  applyText:
+    'FRENCH: Now that you have estimated your benefits, please use the button(s) below to apply for your benefits.',
   required: 'obligatoire',
   homePageP1:
     "L'Estimateur Canadien des Prestations de Vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV) et au Supplément de revenu garanti (SRG). Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
