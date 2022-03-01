@@ -46,7 +46,7 @@ export class RequestHandler {
   private _benefitResults: BenefitResultsObject
   private _summary: SummaryObject
 
-  constructor(private readonly rawInput: Partial<RequestInput>) {}
+  constructor(readonly rawInput: Partial<RequestInput>) {}
 
   get translations(): Translations {
     if (this._translations === undefined)

@@ -125,6 +125,20 @@ export interface Translations {
     alwReasons: Link
     afsReasons: Link
   }
+  csv: {
+    appName: string
+    formResponses: string
+    question: string
+    answer: string
+    estimationResults: string
+    benefit: string
+    eligibility: string
+    details: string
+    entitlement: string
+    links: string
+    description: string
+    url: string
+  }
 }
 
 export function getTranslations(language: Language): Translations {

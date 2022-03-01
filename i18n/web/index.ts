@@ -30,6 +30,7 @@ export type WebTranslations = {
   results: string
   needHelp: string
   faq: string
+  saveToCsv: string
   getResults: string
   required: string
   homePageP1: string
