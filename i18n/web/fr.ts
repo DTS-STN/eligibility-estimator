@@ -38,7 +38,7 @@ const fr: WebTranslations = {
   homePageP3:
     '<strong className="font-bold">la pension de la Sécurité de la vieillesse</strong> est un paiement mensuel que vous pouvez recevoir si vous avez <strong className="font-bold">65 ans et plus</strong>. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
   homePageP4:
-    '<strong className="font-bold">le Supplément de revenu garanti</strong> est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse qui ont un faible revenu et qui vivent au Canada.',
+    '<strong className="font-bold">le Supplément de revenu garanti</strong> est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse âgées de <strong className="font-bold">65 et plus</strong> qui ont un faible revenu et qui vivent au Canada.',
   homePageP5:
     '<strong className="font-bold">l\'Allocation</strong> est une prestation mensuelle offerte aux personnes à faible revenu âgées de <strong className="font-bold">60 à 64 ans</strong> dont l\'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.',
   homePageP6:

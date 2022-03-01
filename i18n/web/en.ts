@@ -38,7 +38,7 @@ const en: WebTranslations = {
   homePageP3:
     '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
+    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-bold">65 and older</strong> who have a low income and are living in Canada.',
   homePageP5:
     '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
