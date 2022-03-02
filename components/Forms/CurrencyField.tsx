@@ -39,7 +39,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           el.blur()
         }
       })
-    }, [])
+    }, [isMobile])
 
     return (
       <div>
