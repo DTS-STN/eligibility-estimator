@@ -29,7 +29,7 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
       >
         {required && <span className="text-danger">*</span>} {label}
         {required && (
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-1">(required)</span>
         )}
         <Tooltip field={name} />
       </label>
