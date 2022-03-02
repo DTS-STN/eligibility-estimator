@@ -1,4 +1,3 @@
-// this is intended to be the main entrypoint of the benefit processor logic
 import Joi from 'joi'
 import { BenefitProcessor } from './benefitProcessor'
 import { ResultKey } from './definitions/enums'
@@ -9,29 +8,32 @@ import {
   ResponseSuccess,
 } from './definitions/types'
 
-export function mainProcessor(query: {
-  [key: string]: string | string[]
-}): ResponseSuccess | ResponseError {
-  try {
-    console.log(`Processing: `, query)
-    const requestInput: RequestInput = Joi.attempt(query, RequestSchema, {
-      abortEarly: false,
-    })
-    const handler = new BenefitProcessor(requestInput)
-    const results: ResponseSuccess = {
-      results: handler.benefitResults,
-      summary: handler.summary,
-      visibleFields: handler.requiredFields,
-      missingFields: handler.missingFields,
-      fieldData: handler.fieldData,
-    }
-    console.log('Results: ', results)
-    return results
-  } catch (error) {
-    console.log(error)
-    return {
-      error: ResultKey.INVALID,
-      detail: error.details || String(error),
+// this is intended to be the main entrypoint of the benefit processor logic
+export default class MainProcessor {
+  private readonly requestInput: RequestInput
+  readonly handler: BenefitProcessor
+  readonly results: ResponseSuccess | ResponseError
+  constructor(query: { [key: string]: string | string[] }) {
+    try {
+      console.log(`Processing: `, query)
+      this.requestInput = Joi.attempt(query, RequestSchema, {
+        abortEarly: false,
+      })
+      this.handler = new BenefitProcessor(this.requestInput)
+      this.results = {
+        results: this.handler.benefitResults,
+        summary: this.handler.summary,
+        visibleFields: this.handler.requiredFields,
+        missingFields: this.handler.missingFields,
+        fieldData: this.handler.fieldData,
+      }
+      console.log('Results: ', this.results)
+    } catch (error) {
+      console.log(error)
+      this.results = {
+        error: ResultKey.INVALID,
+        detail: error.details || String(error),
+      }
     }
   }
 }
