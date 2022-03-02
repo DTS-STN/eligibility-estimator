@@ -34,6 +34,16 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           el.blur()
         }
       })
+      document.addEventListener('keydown', function (event) {
+        if (event.key == 'Next') {
+          const el = document.activeElement as HTMLInputElement
+          el.blur()
+        }
+        if (event.key == 'Enter') {
+          const el = document.activeElement as HTMLInputElement
+          el.blur()
+        }
+      })
     }, [])
 
     return (
