@@ -66,9 +66,7 @@ export const Tooltip: React.FC<{
         tabIndex={-1}
       >
         <div
-          className={`${
-            isMobile ? 'max-w-[525px]' : 'max-w-[600px]'
-          } shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
+          className={`max-w-[440px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
             isMobile ? '' : 'relative -top-10 left-10'
           } z-40`}
         >
