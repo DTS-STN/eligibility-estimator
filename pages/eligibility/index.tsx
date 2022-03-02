@@ -10,7 +10,7 @@ import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
-import MainProcessor from '../../utils/api/mainProcessor'
+import MainHandler from '../../utils/api/mainHandler'
 import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
@@ -32,7 +32,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     }
   })
 
-  const data = new MainProcessor({ _language: tsln._language }).results
+  const data = new MainHandler({ _language: tsln._language }).results
 
   if ('error' in data) {
     return (

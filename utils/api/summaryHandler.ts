@@ -16,7 +16,7 @@ import {
 } from './definitions/types'
 import { legalValues } from './scrapers/output'
 
-export class SummaryProcessor {
+export class SummaryHandler {
   private readonly state: EstimationSummaryState
   private readonly title: string
   private readonly details: string
@@ -224,7 +224,7 @@ export class SummaryProcessor {
     missingFields: FieldKey[],
     translations: Translations
   ): SummaryObject {
-    const summaryBuilder = new SummaryProcessor(
+    const summaryBuilder = new SummaryHandler(
       input,
       results,
       missingFields,

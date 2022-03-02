@@ -36,9 +36,9 @@ import {
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
 import { legalValues } from './scrapers/output'
-import { SummaryProcessor } from './summaryProcessor'
+import { SummaryHandler } from './summaryHandler'
 
-export class BenefitProcessor {
+export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
   private _missingFields: FieldKey[]
@@ -104,7 +104,7 @@ export class BenefitProcessor {
 
   get summary(): SummaryObject {
     if (this._summary === undefined) {
-      this._summary = SummaryProcessor.buildSummaryObject(
+      this._summary = SummaryHandler.buildSummaryObject(
         this.input,
         this.benefitResults,
         this.missingFields,
@@ -228,7 +228,7 @@ export class BenefitProcessor {
       }
     }
 
-    requiredFields.sort(BenefitProcessor.sortFields)
+    requiredFields.sort(BenefitHandler.sortFields)
     return requiredFields
   }
 
@@ -240,7 +240,7 @@ export class BenefitProcessor {
     this.requiredFields.forEach((key) => {
       if (this.rawInput[key] === undefined) missingFields.push(key)
     })
-    missingFields.sort(BenefitProcessor.sortFields)
+    missingFields.sort(BenefitHandler.sortFields)
     return missingFields
   }
 

@@ -4,7 +4,7 @@ import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
 import { getTranslations, Translations } from '../../../i18n/api'
-import { BenefitProcessor } from '../../../utils/api/benefitProcessor'
+import { BenefitHandler } from '../../../utils/api/benefitHandler'
 import { countryList } from '../../../utils/api/definitions/countries'
 import {
   EntitlementResultType,
@@ -56,10 +56,10 @@ describe('translation checks', () => {
 
 describe('country checks', () => {
   const COUNTRY_COUNT = 195
-  const handlerEn = new BenefitProcessor({ _language: Language.EN })
+  const handlerEn = new BenefitHandler({ _language: Language.EN })
   handlerEn.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataEn = handlerEn.fieldData as Array<FieldDataDropdown>
-  const handlerFr = new BenefitProcessor({ _language: Language.FR })
+  const handlerFr = new BenefitHandler({ _language: Language.FR })
   handlerFr.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataFr = handlerFr.fieldData as Array<FieldDataDropdown>
   it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {

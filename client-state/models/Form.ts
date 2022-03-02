@@ -2,7 +2,7 @@ import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { webDictionary } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
-import MainProcessor from '../../utils/api/mainProcessor'
+import MainHandler from '../../utils/api/mainHandler'
 import { legalValues } from '../../utils/api/scrapers/output'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
@@ -170,7 +170,7 @@ export const Form = types
   .actions((self) => ({
     sendAPIRequest: flow(function* () {
       const input = self.buildObjectWithFormData()
-      const data = new MainProcessor(input).results
+      const data = new MainHandler(input).results
 
       if ('error' in data) {
         self.clearAllErrors()

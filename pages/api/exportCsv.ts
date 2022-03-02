@@ -9,14 +9,14 @@ import {
   FieldType,
 } from '../../utils/api/definitions/fields'
 import { BenefitResult, ResponseError } from '../../utils/api/definitions/types'
-import MainProcessor from '../../utils/api/mainProcessor'
+import MainHandler from '../../utils/api/mainHandler'
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | ResponseError>
 ) {
   try {
-    const handler = new MainProcessor(req.query).handler
+    const handler = new MainHandler(req.query).handler
     const records: string[][] = []
     const csvTranslations = handler.translations.csv
     records.push([csvTranslations.appName])

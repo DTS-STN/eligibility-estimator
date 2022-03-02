@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { BenefitProcessor } from './benefitProcessor'
+import { BenefitHandler } from './benefitHandler'
 import { ResultKey } from './definitions/enums'
 import { RequestSchema } from './definitions/schemas'
 import {
@@ -9,9 +9,9 @@ import {
 } from './definitions/types'
 
 // this is intended to be the main entrypoint of the benefit processor logic
-export default class MainProcessor {
+export default class MainHandler {
   private readonly requestInput: RequestInput
-  readonly handler: BenefitProcessor
+  readonly handler: BenefitHandler
   readonly results: ResponseSuccess | ResponseError
   constructor(query: { [key: string]: string | string[] }) {
     try {
@@ -19,7 +19,7 @@ export default class MainProcessor {
       this.requestInput = Joi.attempt(query, RequestSchema, {
         abortEarly: false,
       })
-      this.handler = new BenefitProcessor(this.requestInput)
+      this.handler = new BenefitHandler(this.requestInput)
       this.results = {
         results: this.handler.benefitResults,
         summary: this.handler.summary,

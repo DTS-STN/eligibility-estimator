@@ -3,14 +3,14 @@ import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
-import MainProcessor from '../../utils/api/mainProcessor'
+import MainHandler from '../../utils/api/mainHandler'
 
 // this is a simple entrypoint for api requests
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseSuccess | ResponseError>
 ) {
-  const result = new MainProcessor(req.query).results
+  const result = new MainHandler(req.query).results
   if ('error' in result) res.status(400).json(result)
   else res.status(200).json(result)
 }
