@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import { useMediaQuery, useTranslation } from '../Hooks'
+import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -22,7 +22,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
   (props) => {
     const { name, label, required, value, placeholder, onChange, error } = props
     const requiredText = useTranslation<string>('required')
-    const isMobile = useMediaQuery(992)
 
     // only need to run this once at component render, so no need for deps
     useEffect(() => {
@@ -33,13 +32,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           el.blur()
         }
       })
-      document.addEventListener('keydown', function (event) {
-        if (isMobile && event.key == 'Enter') {
-          const el = document.activeElement as HTMLInputElement
-          el.blur()
-        }
-      })
-    }, [isMobile])
+    }, [])
 
     return (
       <div>
