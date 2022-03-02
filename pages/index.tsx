@@ -39,22 +39,24 @@ const Home: NextPage = (props) => {
             className="mb-4 text-black"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP2 }}
           />
-          <p
-            className="mb-4 text-black"
-            dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
-          />
-          <p
-            className="mb-4 text-black"
-            dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
-          />
-          <p
-            className="mb-4 text-black"
-            dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
-          />
-          <p
-            className="mb-4 text-black"
-            dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
-          />
+          <ul className="list-disc">
+            <li
+              className="mb-4 text-black ml-6"
+              dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
+            />
+            <li
+              className="mb-4 text-black ml-6"
+              dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
+            />
+            <li
+              className="mb-4 text-black ml-6"
+              dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
+            />
+            <li
+              className="mb-4 text-black ml-6"
+              dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
+            />
+          </ul>
         </div>
 
         <details className="py-4">
