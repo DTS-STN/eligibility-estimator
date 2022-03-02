@@ -38,7 +38,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
           htmlFor={name}
           aria-label={name}
           data-testid="select-label"
-          className="inline-block mb-1.5"
+          className="inline-block mb-2.5"
         >
           <span className="text-danger">* </span>
           <span className="mb-1.5 font-bold text-content">{field.label}</span>
