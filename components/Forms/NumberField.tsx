@@ -63,6 +63,7 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         onChange={onChange}
         required={required}
         autoComplete="off"
+        enterKeyHint="done"
       />
     </>
   )

@@ -11,7 +11,7 @@ import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
 import { Alert } from '../Alert'
-import { useStore, useTranslation } from '../Hooks'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { CurrencyField } from './CurrencyField'
 import { FormButtons } from './FormButtons'
@@ -36,6 +36,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     const router = useRouter()
     const tsln = useTranslation<WebTranslations>()
+    const isMobile = useMediaQuery(992)
 
     const root: Instance<typeof RootStore> = useStore()
     const form: Instance<typeof Form> = root.form
@@ -59,6 +60,16 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
         }
       }
     }, [form.isIncomeTooHigh])
+
+    // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
+    useEffect(() => {
+      document.addEventListener('keydown', function (event) {
+        if (isMobile && event.key == 'Enter') {
+          const el = document.activeElement as HTMLInputElement
+          el.blur()
+        }
+      })
+    }, [isMobile])
 
     return (
       <>
