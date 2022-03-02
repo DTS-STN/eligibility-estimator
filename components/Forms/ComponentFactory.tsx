@@ -61,6 +61,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       }
     }, [form.isIncomeTooHigh])
 
+    // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
     useEffect(() => {
       document.addEventListener('keydown', function (event) {
         if (isMobile && event.key == 'Enter') {
