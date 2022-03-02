@@ -66,7 +66,6 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         required={required}
         autoComplete="off"
         tabIndex={tabIndex}
-        enterKeyHint="next"
       />
     </>
   )
