@@ -183,7 +183,7 @@ export const FAQE = () => (
           relationship.
         </p>
         <ul className="list-disc">
-          <p className="font-semibold mb-4"> Proof of marriage can include:</p>
+          <p className="font-bold mb-4"> Proof of marriage can include:</p>
           <li className="ml-12">A marriage certificate</li>
           <li className="ml-12">
             An official copy or extract of the church, synagogue, mosque,
@@ -201,7 +201,7 @@ export const FAQE = () => (
           </li>
         </ul>
         <ul className="list-disc">
-          <p className="font-semibold mb-4">
+          <p className="font-bold mb-4">
             Proof of common-law union can include:
           </p>
           <li className="ml-12">

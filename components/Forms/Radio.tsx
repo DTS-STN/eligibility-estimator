@@ -32,12 +32,10 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         >
           <span className="text-danger">* </span>
           <span
-            className="mb-1.5 text-content font-semibold question-link"
+            className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
-          <span className="text-danger font-semibold ml-2">
-            ({requiredText})
-          </span>
+          <span className="text-danger font-bold ml-2">({requiredText})</span>
           <Tooltip field={name} />
         </label>
         {error && <ErrorLabel errorMessage={error} />}

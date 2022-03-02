@@ -210,9 +210,7 @@ export const FAQF = () => (
           de fait et une autre preuve de la relation.
         </p>
         <ul className="list-disc">
-          <p className="font-semibold mb-4">
-            La preuve de mariage peut inclure:
-          </p>
+          <p className="font-bold mb-4">La preuve de mariage peut inclure:</p>
           <li className="ml-12">un certificat de mariage;</li>
           <li className="ml-12">
             une copie officielle ou un extrait officiel des registres de
@@ -231,7 +229,7 @@ export const FAQF = () => (
           </li>
         </ul>
         <ul className="list-disc">
-          <p className="font-semibold mb-4">
+          <p className="font-bold mb-4">
             La preuve de l&apos;union de fait peut inclure:
           </p>
           <li className="ml-12">
