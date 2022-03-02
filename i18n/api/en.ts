@@ -552,5 +552,7 @@ const en: Translations = {
     description: 'Description',
     url: 'URL',
   },
+  yes: 'Yes',
+  no: 'No',
 }
 export default en
