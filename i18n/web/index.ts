@@ -1,9 +1,13 @@
+import { Language, Locale } from '../../utils/api/definitions/enums'
 import en from './en'
 import fr from './fr'
 
 export const webDictionary = { en, fr }
 
 export type WebTranslations = {
+  _language: Language
+  _locale: Locale
+
   oas: string
   gis: string
   alw: string

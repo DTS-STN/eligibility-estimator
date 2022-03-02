@@ -1,6 +1,10 @@
 import { WebTranslations } from '.'
+import { Language, Locale } from '../../utils/api/definitions/enums'
 
 const en: WebTranslations = {
+  _language: Language.EN,
+  _locale: Locale.EN,
+
   oas: 'Old Age Security (OAS)',
   gis: 'Guaranteed Income Supplement (GIS)',
   alw: 'Allowance',

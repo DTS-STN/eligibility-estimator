@@ -1,6 +1,10 @@
 import { WebTranslations } from '.'
+import { Language, Locale } from '../../utils/api/definitions/enums'
 
 const fr: WebTranslations = {
+  _language: Language.FR,
+  _locale: Locale.FR,
+
   oas: 'Sécurité de la vieillesse (SV)',
   gis: 'Supplément de revenu garanti (SRG)',
   alw: 'Allocation',
