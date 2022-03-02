@@ -2,7 +2,6 @@ import { observer } from 'mobx-react'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { isMobileDevice } from 'react-select/dist/declarations/src/utils'
-import { useTabIndex } from 'react-tabindex'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
@@ -24,7 +23,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
   (props) => {
     const { name, label, required, value, placeholder, onChange, error } = props
     const requiredText = useTranslation<string>('required')
-    const tabIndex = useTabIndex()
 
     // only need to run this once at component render, so no need for deps
     useEffect(() => {
@@ -78,7 +76,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           onChange={onChange}
           required={required}
           autoComplete="off"
-          tabIndex={tabIndex}
           enterKeyHint="done"
         />
       </div>
