@@ -2,12 +2,8 @@ import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { webDictionary } from '../../i18n/web'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
-import {
-  ResponseError,
-  ResponseSuccess,
-} from '../../utils/api/definitions/types'
+import { mainProcessor } from '../../utils/api/mainProcessor'
 import { legalValues } from '../../utils/api/scrapers/output'
-import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
 
@@ -160,39 +156,21 @@ export const Form = types
         self.fields.sort((a, b) => a.order - b.order)
       })
     },
-    buildQueryStringWithFormData(): string {
+    buildObjectWithFormData(): { [key: string]: string } {
       const parent = getParent(self) as Instance<typeof RootStore>
-
-      let qs = `_language=${parent.lang}`
-
-      // guard against income being empty
-      const income: Instance<typeof FormField> = self.getFieldByKey(
-        FieldKey.INCOME
-      )
-      if (!income.filled) {
-        return qs
-      }
-
+      let input = { _language: parent.lang }
+      if (!self.getFieldByKey(FieldKey.INCOME).filled) return input // guard against income being empty
       for (const field of self.fields) {
         if (!field.value) continue
-
-        // remove masking from currency and use object keys for react-select
-        let val = field.sanitizeInput()
-
-        if (qs !== '') qs += '&'
-        //encodeURI and fix for encodeURIComponent and circle brackets
-        qs += `${field.key}=${fixedEncodeURIComponent(val)}`
+        input[field.key] = field.sanitizeInput()
       }
-      return qs
+      return input
     },
   }))
   .actions((self) => ({
     sendAPIRequest: flow(function* () {
-      // build query  string
-      const queryString = self.buildQueryStringWithFormData()
-
-      const apiData = yield fetch(`/${self.API_URL}?${queryString}`)
-      const data: ResponseSuccess | ResponseError = yield apiData.json()
+      const input = self.buildObjectWithFormData()
+      const data = mainProcessor(input)
 
       if ('error' in data) {
         self.clearAllErrors()
@@ -202,7 +180,6 @@ export const Form = types
           field.setError(d.message)
         }
       } else {
-        console.log(data)
         self.clearAllErrors()
         const parent = getParent(self) as Instance<typeof RootStore>
         parent.setOAS(data.results.oas)
