@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
+import { isMobileDevice } from 'react-select/dist/declarations/src/utils'
 import { useTabIndex } from 'react-tabindex'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
@@ -35,11 +36,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
         }
       })
       document.addEventListener('keydown', function (event) {
-        if (event.key == 'Next') {
-          const el = document.activeElement as HTMLInputElement
-          el.blur()
-        }
-        if (event.key == 'Enter') {
+        if (isMobileDevice() && event.key == 'Enter') {
           const el = document.activeElement as HTMLInputElement
           el.blur()
         }
