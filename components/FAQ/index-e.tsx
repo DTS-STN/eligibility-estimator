@@ -2,20 +2,164 @@ import Link from 'next/link'
 
 export const FAQE = () => (
   <div>
+    <h2 className="h2 mt-10">Old Age Security</h2>
     <details>
       <summary>
-        How does the Old Age Security (OAS) program differ from Canada Pension
-        Plan (CPP) or Quebec Pension Plan (QPP)?
+        Do I have to apply to start receiving my Old Age Security pension?
       </summary>
       <div className="p-4">
         <p>
-          The Canada Pension Plan and Quebec Pension Plan are not funded by the
-          Government, but through the contributions of employees and employers.
-          To receive Canada Pension Plan or Quebec Pension Plan, you must have
-          worked and contributed to either plan.
+          For many pensioners, your Old Age Security pension does not start
+          automatically. You must apply for benefits. In April 2013, Service
+          Canada implemented a process to automatically enroll seniors who are
+          eligible to receive the Old Age Security pension. If you can be
+          automatically enrolled, Service Canada will send you a notification
+          letter the month after you turn 64. If you do not receive this letter,
+          you must apply for your Old Age Security pension.
         </p>
       </div>
     </details>
+
+    <details>
+      <summary>Can I defer my Old Age Security (OAS) pension amount?</summary>
+      <div className="p-4">
+        <p>
+          You are eligible to the Old Age Security pension at 65. Unlike the
+          Canada Pension Plan (CPP), there is no option to take Old Age Security
+          early, such as at age 60. However, you can defer it up to five years
+          for an enhanced benefit. You&apos;ll receive 7.2% more each year (0.6%
+          more each month) that you delay taking the Old Age Security. After age
+          70, there is no advantage in delaying your first payment. In fact, you
+          risk losing benefits. If you are over the age of 70 and not receiving
+          an Old Age Security pension, apply now.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Can I receive a retroactive payment if I&apos;m over 65?
+      </summary>
+      <div className="p-4">
+        <p>
+          If you are already over 65, we may be able to give you a retroactive
+          payment for up to a maximum of 11 months from the date we receive your
+          application. If you delayed receiving your Old Age Security pension
+          you will not be able to receive retroactive payment during the
+          deferral period. You might also be eligible to receive extra payments
+          based on your income such as Guaranteed Income Supplement, Allowance,
+          Allowance for the Survivor.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How can I qualify for full pension?</summary>
+      <div className="p-4">
+        <p>
+          You can qualify for a full OAS pension if you have lived in Canada for
+          at least 40 years after the age of 18. Otherwise, you will receive
+          partial pension.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is a partial pension?</summary>
+      <div className="p-4">
+        <p>
+          A partial pension is calculated at the rate of 1/40th of the full
+          pension for each complete year of residence in Canada after age
+          eighteen. The minimum period of residence necessary to qualify for a
+          partial pension is 10 years of residence in Canada.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is my Old Age Security taxable?</summary>
+      <div className="p-4">
+        <p>
+          Yes. The basic Old Age Security pension is taxable and must be
+          reported as income on your tax return. The Guaranteed Income
+          Supplement and Allowance are not taxable. They must also be reported
+          on your tax return. If your net world income exceeds the threshold
+          amount $79,845 CAD for 2021, you must repay part or your entire Old
+          Age Security pension. Please visit Service Canada for more details.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Is an Old Age Security pension indexed to an increase in prices?
+      </summary>
+      <div className="p-4">
+        <p>
+          Yes, the payment amounts for Old Age Security, Guaranteed Income
+          Supplement, Allowance and Allowance for the Survivor are reviewed
+          every three months (in January, April, July, and October) to reflect
+          increases in the cost of living as measured by the Consumer Price
+          Index.
+        </p>
+      </div>
+    </details>
+
+    <h2 className="h2 mt-10">Guaranteed Income Supplement</h2>
+    <details>
+      <summary>
+        Do I continue receiving the Guaranteed Income Supplement if I leave
+        Canada?
+      </summary>
+      <div className="p-4 space-y-4">
+        <p>
+          You cannot collect the Guaranteed Income Supplement if you are outside
+          of Canada for more than 6 months. Service Canada compares information
+          with the Canada Border Services Agency. If you leave Canada for more
+          than 6 months while collecting the Guaranteed Income Supplement,
+          we&apos;ll determine if you&apos;re eligible to those payments. If
+          not, we&apos;ll calculate how much we overpaid you, and you will then
+          have to repay that amount.
+        </p>
+        <p>
+          Note: You could be fined for giving false, misleading, or purposely
+          omitted information.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>My Guaranteed Income Supplement payment stopped, why?</summary>
+      <div className="p-4">
+        <ul className="list-disc">
+          Your Guaranteed Income Supplement payment can stop for any of the
+          following reasons:
+          <li className="ml-12">You did not file a tax return by April 30</li>
+          <li className="ml-12">
+            by the end of June, you did not give us the information about your
+            income (or in the case of a couple, Your income plus the income of
+            your spouse/common-law partner) for the previous year
+          </li>
+          <li className="ml-12">
+            You leave Canada for more than 6 consecutive months
+          </li>
+          <li className="ml-12">
+            Your income (or in the case of a couple, your income plus the income
+            of your spouse/common-law partner) is higher than what is allowed to
+            receive the benefit
+          </li>
+          <li className="ml-12">
+            You are in a federal prison for a sentence of 2 years or longer
+          </li>
+          <li className="ml-12">
+            You die (it is important that someone notify us about your death to
+            avoid overpayment)
+          </li>
+        </ul>
+      </div>
+    </details>
+
+    <h2 className="h2 mt-10">Application</h2>
     <details>
       <summary>What are the required documents for my application?</summary>
       <div className="p-4 space-y-4">
@@ -82,6 +226,74 @@ export const FAQE = () => (
         </ul>
       </div>
     </details>
+
+    <details>
+      <summary>What should I include in my annual net income?</summary>
+      <div className="p-4">
+        <p>
+          You can find your total annual net income on line 236 of your tax
+          return document. If you do not have tax filing income information, you
+          may use an estimate of your income. If you have more than one source
+          of income (e.g., salary, investment income, pension income), you
+          should add all the net income estimates together before entering the
+          total amount. Do not include any income from a partner or dependent.
+        </p>
+        <ul className="list-disc">
+          Sources of income can include one or more of the following:
+          <li className="ml-12">
+            Pension Income such as: Employer pension benefits, Annuity payments,
+            Alimony and maintenance payments, Employment insurance benefits,
+            Disability benefits deriving from a private insurance plan, Any
+            benefits under the Canada Pension Plan or Quebec pension Plan,
+            Superannuation or pension payments or Employee&apos;s or
+            worker&apos;s compensation in respect of an injury, disability or
+            death.
+          </li>
+          <li className="ml-12">
+            Employment Insurance (EI), Canada Emergency Response benefit and
+            Provincial and territorial Worker&apos;s Compensation Board benefits
+          </li>
+          <li className="ml-12">
+            Net Interest and Other Investment Income, including Foreign
+            Dividends
+          </li>
+          <li className="ml-12">Canadian Dividends and Capital Gains</li>
+          <li className="ml-12">Net Rental Income</li>
+          <li className="ml-12">Net Employment Income</li>
+          <li className="ml-12">Net Self-Employment Income</li>
+          <li className="ml-12">
+            Foreign income includes income from wages, employer pensions, social
+            security benefits, dividends, investments, and rental income
+            received from another country
+          </li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is exempt as income?</summary>
+      <div className="p-4">
+        <ul className="list-disc">
+          <li className="ml-12">
+            Old Age Security, Guaranteed Income Supplement, Allowance or
+            Allowance for the Survivor payments
+          </li>
+          <li className="ml-12">
+            Canada Pension Plan or Quebec Pension Plan contributions and your
+            Employment Insurance premiums
+          </li>
+          <li className="ml-12">
+            Canada Pension Plan or Quebec Pension Plan contributions and your
+            Employment Insurance premiums of net self-employment income
+          </li>
+          <li className="ml-12">
+            Deductions, such as union dues, RRSP deduction, moving expenses and
+            other employment expenses
+          </li>
+        </ul>
+      </div>
+    </details>
+
     <details>
       <summary>
         What are the eligible categories of legal status in Canada?
@@ -115,7 +327,7 @@ export const FAQE = () => (
           </span>
           - (formerly known as a Minister&apos;s Permit prior to June 2002): A
           permit that may be granted in exceptional circumstances to a person
-          who does not meet the requirements of Canada’s immigration law to
+          who does not meet the requirements of Canada&apos;s immigration law to
           enter or remain temporarily in Canada.
         </p>
         <p>
@@ -157,99 +369,25 @@ export const FAQE = () => (
         </p>
       </div>
     </details>
+
     <details>
-      <summary>Can I defer my OAS pension amount?</summary>
+      <summary>
+        Is there a difference between years of residence and presence in Canada?
+      </summary>
       <div className="p-4">
         <p>
-          You are eligible to the OAS pension at 65. Unlike CPP, there is no
-          option to take OAS early, such as at age 60. However, you can defer it
-          up to five years for an enhanced benefit. You’ll receive 7.2% more
-          each year (0.6% more each month) that you delay taking OAS. After age
-          70, there is no advantage in delaying your first payment. In fact, you
-          risk losing benefits. If you are over the age of 70 and not receiving
-          an Old Age Security pension.
+          In determining your residence, only actual residence and not periods
+          of presence in Canada are counted.
+          <br />
+          <span className="font-bold">Residence</span>: Residence means that a
+          person makes his home here and ordinarily lives in Canada.
+          <br />
+          <span className="font-bold">Presence</span>: Presence means that a
+          person is physically present in any part of Canada.
         </p>
       </div>
     </details>
-    <details>
-      <summary>Can I defer my Old Age Security (OAS) pension amount?</summary>
-      <div className="p-4">
-        <p>
-          You are eligible to the Old Age Security pension at 65. Unlike the
-          Canada Pension Plan (CPP), there is no option to take Old Age Security
-          early, such as at age 60. However, you can defer it up to five years
-          for an enhanced benefit. You’ll receive 7.2% more each year (0.6% more
-          each month) that you delay taking the Old Age Security. After age 70,
-          there is no advantage in delaying your first payment. In fact, you
-          risk losing benefits. If you are over the age of 70 and not receiving
-          an Old Age Security pension, apply now.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>What should I include in my annual net income?</summary>
-      <div className="p-4">
-        <p>
-          You can find your total annual net income on line 236 of your tax
-          return document. If you do not have tax filing income information, you
-          may use an estimate of your income. If you have more than one source
-          of income (e.g., salary, investment income, pension income), you
-          should add all the net income estimates together before entering the
-          total amount. Do not include any income from a partner or dependent.
-        </p>
-        <ul className="list-disc">
-          Sources of income can include one or more of the following:
-          <li className="ml-12">
-            Pension Income such as: Employer pension benefits, Annuity payments,
-            Alimony and maintenance payments, Employment insurance benefits,
-            Disability benefits deriving from a private insurance plan, Any
-            benefits under the Canada Pension Plan or Quebec pension Plan,
-            Superannuation or pension payments or Employee’s or worker’s
-            compensation in respect of an injury, disability or death.
-          </li>
-          <li className="ml-12">
-            Employment Insurance (EI), Canada Emergency Response benefit and
-            Provincial and territorial Worker’s Compensation Board benefits
-          </li>
-          <li className="ml-12">
-            Net Interest and Other Investment Income, including Foreign
-            Dividends
-          </li>
-          <li className="ml-12">Canadian Dividends and Capital Gains</li>
-          <li className="ml-12">Net Rental Income</li>
-          <li className="ml-12">Net Employment Income</li>
-          <li className="ml-12">Net Self-Employment Income</li>
-          <li className="ml-12">
-            Foreign income includes income from wages, employer pensions, social
-            security benefits, dividends, investments, and rental income
-            received from another country
-          </li>
-        </ul>
-      </div>
-    </details>
-    <details>
-      <summary>What is exempt as income?</summary>
-      <div className="p-4">
-        <ul className="list-disc">
-          <li className="ml-12">
-            Old Age Security, Guaranteed Income Supplement, Allowance or
-            Allowance for the Survivor payments
-          </li>
-          <li className="ml-12">
-            Canada Pension Plan or Quebec Pension Plan contributions and your
-            Employment Insurance premiums
-          </li>
-          <li className="ml-12">
-            Canada Pension Plan or Quebec Pension Plan contributions and your
-            Employment Insurance premiums of net self-employment income
-          </li>
-          <li className="ml-12">
-            Deductions, such as union dues, RRSP deduction, moving expenses and
-            other employment expenses
-          </li>
-        </ul>
-      </div>
-    </details>
+
     <details>
       <summary>
         What countries have a social security agreement with Canada?
@@ -271,6 +409,7 @@ export const FAQE = () => (
         </p>
       </div>
     </details>
+
     <details>
       <summary>What happens if I lived or worked outside of Canada?</summary>
       <div className="p-4">
@@ -285,59 +424,7 @@ export const FAQE = () => (
         </p>
       </div>
     </details>
-    <details>
-      <summary>How can I qualify for full pension?</summary>
-      <div className="p-4">
-        <p>
-          You can qualify for a full OAS pension if you have lived in Canada for
-          at least 40 years after the age of 18. Otherwise, you will receive
-          partial pension.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>
-        Do I have to apply to start receiving my Old Age Security pension?
-      </summary>
-      <div className="p-4">
-        <p>
-          For many pensioners, your Old Age Security pension does not start
-          automatically. You must apply for benefits. In April 2013, Service
-          Canada implemented a process to automatically enroll seniors who are
-          eligible to receive the Old Age Security pension. If you can be
-          automatically enrolled, Service Canada will send you a notification
-          letter the month after you turn 64. If you do not receive this letter,
-          you must apply for your Old Age Security pension.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>Is my Old Age Security taxable?</summary>
-      <div className="p-4">
-        <p>
-          Yes. The basic Old Age Security pension is taxable and must be
-          reported as income on your tax return. The Guaranteed Income
-          Supplement and Allowance are not taxable. They must also be reported
-          on your tax return. If your net world income exceeds the threshold
-          amount $79,845 CAD for 2021, you must repay part or your entire Old
-          Age Security pension. Please visit Service Canada for more details.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>
-        Is an Old Age Security pension indexed to an increase in prices?
-      </summary>
-      <div className="p-4">
-        <p>
-          Yes, the payment amounts for Old Age Security, Guaranteed Income
-          Supplement, Allowance and Allowance for the Survivor are reviewed
-          every three months (in January, April, July, and October) to reflect
-          increases in the cost of living as measured by the Consumer Price
-          Index.
-        </p>
-      </div>
-    </details>
+
     <details>
       <summary>
         What can I do if I disagree with a decision made on my application?
@@ -352,59 +439,11 @@ export const FAQE = () => (
         </p>
       </div>
     </details>
+
     <details>
       <summary>
-        Do I continue receiving the Guaranteed Income Supplement if I leave
-        Canada?
+        Are benefits cancelled after a beneficiary&apos;s death?
       </summary>
-      <div className="p-4 space-y-4">
-        <p>
-          You cannot collect the Guaranteed Income Supplement if you are outside
-          of Canada for more than 6 months. Service Canada compares information
-          with the Canada Border Services Agency. If you leave Canada for more
-          than 6 months while collecting the Guaranteed Income Supplement, we’ll
-          determine if you’re eligible to those payments. If not, we’ll
-          calculate how much we overpaid you, and you will then have to repay
-          that amount.
-        </p>
-        <p>
-          Note: You could be fined for giving false, misleading, or purposely
-          omitted information.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>My Guaranteed Income Supplement payment stopped, why?</summary>
-      <div className="p-4">
-        <ul className="list-disc">
-          Your Guaranteed Income Supplement payment can stop for any of the
-          following reasons:
-          <li className="ml-12">You did not file a tax return by April 30</li>
-          <li className="ml-12">
-            by the end of June, you did not give us the information about your
-            income (or in the case of a couple, Your income plus the income of
-            your spouse/common-law partner) for the previous year
-          </li>
-          <li className="ml-12">
-            You leave Canada for more than 6 consecutive months
-          </li>
-          <li className="ml-12">
-            Your income (or in the case of a couple, your income plus the income
-            of your spouse/common-law partner) is higher than what is allowed to
-            receive the benefit
-          </li>
-          <li className="ml-12">
-            You are in a federal prison for a sentence of 2 years or longer
-          </li>
-          <li className="ml-12">
-            You die (it is important that someone notify us about your death to
-            avoid overpayment)
-          </li>
-        </ul>
-      </div>
-    </details>
-    <details>
-      <summary>Are benefits cancelled after a beneficiary’s death?</summary>
       <div className="p-4 space-y-4">
         <p>
           If you&apos;re reading this following the loss of a loved one, please
@@ -444,6 +483,59 @@ export const FAQE = () => (
               handling the deceased&apos;s affairs (if known)
             </li>
           </ul>
+        </p>
+      </div>
+    </details>
+
+    <h2 className="h2 mt-10">Canada Pension Plan</h2>
+    <details>
+      <summary>What is The Canada Pension Plan (CPP)?</summary>
+      <div className="p-4">
+        <p>
+          The Canada Pension Plan (CPP) retirement pension is a monthly, taxable
+          benefit that replaces part of your income when you retire. If you
+          qualify, you&apos;ll receive the CPP retirement pension for the rest
+          of your life. To qualify you must be at least 60 years old and have
+          made at least one valid contribution to the CPP
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        How does the Old Age Security (OAS) program differ from Canada Pension
+        Plan (CPP) or Quebec Pension Plan (QPP)?
+      </summary>
+      <div className="p-4">
+        <p>
+          The Canada Pension Plan and Quebec Pension Plan are not funded by the
+          Government, but through the contributions of employees and employers.
+          To receive Canada Pension Plan or Quebec Pension Plan, you must have
+          worked and contributed to either plan.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        How many years do you need to work to get Canada Pension Plan (CPP)?
+      </summary>
+      <div className="p-4">
+        <p>
+          Everyone is entitled to CPP regardless of how many years you have
+          worked. How much you receive depends on your earnings as well as your
+          contributions.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Should I take my Canada pension at 60 or 65?</summary>
+      <div className="p-4">
+        <p>
+          Deciding when to start collecting CPP should be based on your
+          finances, health, life expectancy and taxes. The main reason to delay
+          CPP is that you will receive a larger benefit.
         </p>
       </div>
     </details>

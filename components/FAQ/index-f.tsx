@@ -2,22 +2,189 @@ import Link from 'next/link'
 
 export const FAQF = () => (
   <div>
+    <h2 className="h2 mt-10">Sécurité de la vieillesse</h2>
     <details>
       <summary>
-        En quoi le programme de la Sécurité de la vieillesse (SV) diffère-t-il
-        du Régime de pensions du Canada (RPC) ou du Régime de rentes du Québec
-        (RRQ)?
+        Dois-je faire une demande pour commencer à recevoir ma pension de la
+        Sécurité de la vieillesse?
       </summary>
       <div className="p-4">
         <p>
-          Le Régime de pensions du Canada et le Régime de rentes du Québec ne
-          sont pas financés par le gouvernement, mais par les cotisations des
-          employés et des employeurs. Pour recevoir des prestations du Régime de
-          pensions du Canada ou du Régime de rentes du Québec, vous devez avoir
-          travaillé et cotisé à l&apos;un ou l&apos;autre de ces régimes.
+          Pour de nombreux pensionnés, votre pension de la Sécurité de la
+          vieillesse ne commence pas automatiquement. En avril 2013, Service
+          Canada a mis en œuvre un processus visant à inscrire automatiquement
+          les personnes âgées qui sont admissibles à la pension de la Sécurité
+          de la vieillesse. Si vous n&apos;avez reçu aucune lettre au sujet de
+          votre pension le mois suivant votre 64e anniversaire, vous devez faire
+          une demande de prestations.
         </p>
       </div>
     </details>
+
+    <details>
+      <summary>
+        Puis-je reporter le montant de ma pension de la Sécurité de la
+        vieillesse (SV)?
+      </summary>
+      <div className="p-4">
+        <p>
+          Vous avez droit à la pension de la Sécurité de la vieillesse à 65 ans.
+          Contrairement au Régime de pensions du Canada (RPC), il n&apos;est pas
+          possible de prendre la Sécurité de la vieillesse plus tôt, par exemple
+          à 60 ans. Cependant, vous pouvez la différer jusqu&apos;à cinq ans
+          pour bénéficier d&apos;une prestation améliorée. Vous recevrez 7,2 %
+          de plus chaque année (0,6 % de plus chaque mois) si vous retardez le
+          versement de la Sécurité de la vieillesse. Après 70 ans, il n&apos;y a
+          aucun avantage à retarder votre premier versement. En fait, vous
+          risquez de perdre des prestations. Si vous avez plus de 70 ans et que
+          vous ne recevez pas de pension de la Sécurité de la vieillesse, faites
+          une demande.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Puis-je bénéficier d&apos;un paiement rétroactif si j&apos;ai plus de 65
+        ans ?
+      </summary>
+      <div className="p-4">
+        <p>
+          Si vous avez déjà plus de 65 ans, nous pourrons peut-être vous donner
+          un paiement rétroactif jusqu&apos;à concurrence de 11 mois à partir de
+          la date à laquelle nous recevons votre demande. Si vous avez reporté
+          la réception de votre pension de la Sécurité de la vieillesse, vous ne
+          pourrez pas recevoir de paiement rétroactif pendant cette période
+          reportée. Vous pourriez également être admissible à recevoir des
+          paiements supplémentaires en fonction de votre revenu, comme le
+          Supplément de revenu garanti, l&apos;allocation et l&apos;allocation
+          pour le survivant.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Comment puis-je avoir droit à une pension complète?</summary>
+      <div className="p-4">
+        <p>
+          Vous pouvez avoir droit à une pension complète de la Sécurité de la
+          vieillesse si vous avez vécu au Canada pendant au moins 40 ans après
+          l&apos;âge de 18 ans. Sinon, vous recevrez une pension partielle.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Qu&apos;est-ce qu&apos;une pension partielle?</summary>
+      <div className="p-4">
+        <p>
+          La pension partielle est calculée à un taux de 1/40e de la pension
+          complète pour chaque année complète de résidence au Canada après
+          l&apos;âge de 18 ans. de résidence au Canada après l&apos;âge de
+          dix-huit ans. La période minimale de résidence nécessaire pour avoir
+          droit pour avoir droit à une pension partielle est de 10 ans de
+          résidence au Canada.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Ma pension de la Sécurité de la vieillesse est-elle imposable?
+      </summary>
+      <div className="p-4">
+        <p>
+          Oui. La pension de base de la Sécurité de la vieillesse est imposable
+          et doit être déclarée comme un revenu dans votre déclaration de
+          revenus. Le Supplément de revenu garanti et l&apos;Allocation ne sont
+          pas imposables. Ils doivent également être déclarés dans votre
+          déclaration de revenus. Si votre revenu mondial net dépasse le seuil
+          de 79 845 $ CAD pour 2021, vous devez rembourser une partie ou la
+          totalité de votre pension de la Sécurité de la vieillesse. Veuillez
+          consulter le site de Service Canada pour plus de détails.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        La pension de la Sécurité de la vieillesse est-elle indexée à la hausse
+        des prix?
+      </summary>
+      <div className="p-4">
+        <p>
+          Oui, les montants des paiements de la Sécurité de la vieillesse, du
+          Supplément de revenu garanti, de l&apos;Allocation et de
+          l&apos;Allocation au survivant sont révisés tous les trois mois (en
+          janvier, avril, juillet et octobre) pour refléter les augmentations du
+          coût de la vie mesurées par l&apos;indice des prix à la consommation.
+        </p>
+      </div>
+    </details>
+
+    <h2 className="h2 mt-10">Supplément de revenu garanti</h2>
+    <details>
+      <summary>
+        Vais-je continuer à recevoir le Supplément de revenu garanti si je
+        quitte le Canada?
+      </summary>
+      <div className="p-4 space-y-4">
+        <p>
+          Vous ne pouvez pas percevoir le Supplément de revenu garanti si vous
+          êtes à l&apos;extérieur du Canada pendant plus de 6 mois. Service
+          Canada compare l&apos;information avec l&apos;Agence des services
+          frontaliers du Canada. Si vous quittez le Canada pendant plus de 6
+          mois alors que vous recevez le Supplément de revenu garanti, nous
+          déterminerons si vous êtes admissible à ces paiements. Si ce
+          n&apos;est pas le cas, nous calculerons combien nous vous avons payé
+          en trop, et vous devrez alors rembourser ce montant.
+        </p>
+        <p>
+          Remarque: Vous pourriez être condamné à une amende pour avoir donné
+          des renseignements faux, trompeurs ou si vous omettez délibérément des
+          renseignements.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Mon paiement du Supplément de revenu garanti a été arrêté, pourquoi?
+      </summary>
+      <div className="p-4">
+        <ul className="list-disc">
+          Votre paiement du Supplément de revenu garanti peut s&apos;arrêter
+          pour l&apos;une ou l&apos;autre des raisons suivantes:
+          <li className="ml-12">
+            vous n&apos;avez pas complété de déclaration d&apos;impôt sur le
+            revenu avant le 30 avril;
+          </li>
+          <li className="ml-12">
+            à la fin du mois de juin, vous ne nous avez pas donné les
+            renseignements sur votre revenu (ou dans le cas d&apos;un couple,
+            votre revenu plus le revenu de votre conjoint/conjoint de fait) pour
+            l&apos;année précédente;
+          </li>
+          <li className="ml-12">
+            vous quittez le Canada pendant plus de 6 mois consécutifs;
+          </li>
+          <li className="ml-12">
+            votre revenu (ou dans le cas d&apos;un couple, votre revenu plus le
+            revenu de votre conjoint/conjoint de fait) est plus élevé que ce qui
+            est autorisé pour recevoir la prestation;
+          </li>
+          <li className="ml-12">
+            vous êtes dans une prison fédérale pour une peine de 2 ans ou plus;
+          </li>
+          <li className="ml-12">
+            vous décédez (il est important que quelqu&apos;un nous informe de
+            votre mort pour éviter le trop-payé).
+          </li>
+        </ul>
+      </div>
+    </details>
+
+    <h2 className="h2 mt-10">Application</h2>
     <details>
       <summary>Quels sont les documents requis pour ma demande?</summary>
       <div className="p-4 space-y-4">
@@ -44,7 +211,6 @@ export const FAQF = () => (
         </p>
         <ul className="list-disc">
           <p className="font-semibold mb-4">
-            {' '}
             La preuve de mariage peut inclure:
           </p>
           <li className="ml-12">un certificat de mariage;</li>
@@ -99,6 +265,88 @@ export const FAQF = () => (
         </ul>
       </div>
     </details>
+
+    <details>
+      <summary>Que dois-je inclure dans mon revenu annuel net?</summary>
+      <div className="p-4">
+        <p>
+          Vous pouvez trouver votre revenu annuel net total à la ligne 236 de
+          votre déclaration de revenus. Les paiements de la Sécurité de la
+          vieillesse, du Supplément de revenu garanti, de l&apos;Allocation ou
+          de l&apos;Allocation au survivant ne sont pas inclus dans votre
+          revenu. Si vous n&apos;avez pas de renseignements sur votre revenu
+          dans votre déclaration de revenus, vous pouvez utiliser une estimation
+          de votre revenu. Si vous avez plus d&apos;une source de revenu (par
+          exemple, salaire, revenu de placement, revenu de pension), vous devez
+          additionner toutes les estimations de revenu net avant d&apos;inscrire
+          le montant total. N&apos;incluez pas les revenus de votre conjoint ou
+          d&apos;une personne à charge.
+        </p>
+        <ul className="list-disc">
+          Les sources de revenus peuvent inclure une ou plusieurs des éléments
+          suivants:
+          <li className="ml-12">
+            les revenus de pension tels que les prestations de retraite de
+            l&apos;employeur, les paiements de rente, les pensions alimentaires
+            et les paiements d&apos;entretien, les prestations
+            d&apos;assurance-emploi, les prestations d&apos;invalidité découlant
+            d&apos;un régime d&apos;assurance privé, toute prestation en vertu
+            du Régime de pensions du Canada ou du Régime de rentes du Québec,
+            les pensions de retraite ou les paiements de pension ou
+            l&apos;indemnisation d&apos;un employé ou d&apos;un travailleur pour
+            une blessure, une invalidité ou un décès;
+          </li>
+          <li className="ml-12">
+            l&apos;assurance-emploi, la prestation d&apos;intervention
+            d&apos;urgence du Canada et les prestations des commissions
+            provinciales et territoriales des accidents du travail;
+          </li>
+          <li className="ml-12">
+            les intérêts nets et autres revenus de placement, y compris les
+            dividendes étrangers;
+          </li>
+          <li className="ml-12">
+            les dividendes et gains en capital canadiens;
+          </li>
+          <li className="ml-12">le revenu net de location;</li>
+          <li className="ml-12">le revenu net d&apos;emploi;</li>
+          <li className="ml-12">le revenu net du travail indépendant;</li>
+          <li className="ml-12">
+            les revenus étrangers comprennent les revenus provenant de salaires,
+            de pensions d&apos;employeur, de prestations de sécurité sociale, de
+            dividendes, d&apos;investissements et de revenus locatifs reçus
+            d&apos;un autre pays.
+          </li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary>Qu&apos;est-ce qui est exempté comme revenu?</summary>
+      <div className="p-4">
+        <ul className="list-disc">
+          <li className="ml-12">
+            La Sécurité de la vieillesse, le Supplément de revenu garanti,
+            l&apos;Allocation ou l&apos;Allocation au survivant.
+          </li>
+          <li className="ml-12">
+            Les cotisations au Régime de pensions du Canada ou au Régime de
+            rentes du Québec et vos cotisations à l&apos;assurance-emploi
+          </li>
+          <li className="ml-12">
+            Les Cotisations au Régime de pensions du Canada ou au Régime de
+            rentes du Québec et vos cotisations d&apos;assurance-emploi du
+            revenu net d&apos;un travail indépendant.
+          </li>
+          <li className="ml-12">
+            Des déductions, telles que les cotisations syndicales, les
+            déductions pour les REER, les frais de déménagement et les autres
+            dépenses d&apos;emploi
+          </li>
+        </ul>
+      </div>
+    </details>
+
     <details>
       <summary>
         Quelles sont les catégories de statut légal admissible aux pensions au
@@ -184,106 +432,27 @@ export const FAQF = () => (
         </p>
       </div>
     </details>
+
     <details>
       <summary>
-        Puis-je reporter le montant de ma pension de la Sécurité de la
-        vieillesse (SV)?
+        Y a-t-il une différence entre les années de résidence et la présence au
+        Canada ?
       </summary>
       <div className="p-4">
         <p>
-          Vous avez droit à la pension de la Sécurité de la vieillesse à 65 ans.
-          Contrairement au Régime de pensions du Canada (RPC), il n&apos;est pas
-          possible de prendre la Sécurité de la vieillesse plus tôt, par exemple
-          à 60 ans. Cependant, vous pouvez la différer jusqu&apos;à cinq ans
-          pour bénéficier d&apos;une prestation améliorée. Vous recevrez 7,2 %
-          de plus chaque année (0,6 % de plus chaque mois) si vous retardez le
-          versement de la Sécurité de la vieillesse. Après 70 ans, il n&apos;y a
-          aucun avantage à retarder votre premier versement. En fait, vous
-          risquez de perdre des prestations. Si vous avez plus de 70 ans et que
-          vous ne recevez pas de pension de la Sécurité de la vieillesse, faites
-          une demande.
+          Pour déterminer votre résidence, seule la résidence effective et non
+          les périodes de présence au Canada sont comptabilisées.
+          <br />
+          <span className="font-bold">Résidence</span>: La résidence signifie qu
+          &apos;une personne fait son foyer ici et vit ordinairement au Canada.
+          <br />
+          <span className="font-bold">Présence</span>: La présence signifie
+          qu&apos;une personne est physiquement présente dans une partie du
+          Canada.
         </p>
       </div>
     </details>
-    <details>
-      <summary>Que dois-je inclure dans mon revenu annuel net?</summary>
-      <div className="p-4">
-        <p>
-          Vous pouvez trouver votre revenu annuel net total à la ligne 236 de
-          votre déclaration de revenus. Les paiements de la Sécurité de la
-          vieillesse, du Supplément de revenu garanti, de l&apos;Allocation ou
-          de l&apos;Allocation au survivant ne sont pas inclus dans votre
-          revenu. Si vous n&apos;avez pas de renseignements sur votre revenu
-          dans votre déclaration de revenus, vous pouvez utiliser une estimation
-          de votre revenu. Si vous avez plus d&apos;une source de revenu (par
-          exemple, salaire, revenu de placement, revenu de pension), vous devez
-          additionner toutes les estimations de revenu net avant d&apos;inscrire
-          le montant total. N&apos;incluez pas les revenus de votre conjoint ou
-          d&apos;une personne à charge.
-        </p>
-        <ul className="list-disc">
-          Les sources de revenus peuvent inclure une ou plusieurs des éléments
-          suivants:
-          <li className="ml-12">
-            les revenus de pension tels que les prestations de retraite de
-            l&apos;employeur, les paiements de rente, les pensions alimentaires
-            et les paiements d&apos;entretien, les prestations
-            d&apos;assurance-emploi, les prestations d&apos;invalidité découlant
-            d&apos;un régime d&apos;assurance privé, toute prestation en vertu
-            du Régime de pensions du Canada ou du Régime de rentes du Québec,
-            les pensions de retraite ou les paiements de pension ou
-            l&apos;indemnisation d&apos;un employé ou d&apos;un travailleur pour
-            une blessure, une invalidité ou un décès;
-          </li>
-          <li className="ml-12">
-            l&apos;assurance-emploi, la prestation d&apos;intervention
-            d&apos;urgence du Canada et les prestations des commissions
-            provinciales et territoriales des accidents du travail;
-          </li>
-          <li className="ml-12">
-            les intérêts nets et autres revenus de placement, y compris les
-            dividendes étrangers;
-          </li>
-          <li className="ml-12">
-            les dividendes et gains en capital canadiens;
-          </li>
-          <li className="ml-12">le revenu net de location;</li>
-          <li className="ml-12">le revenu net d&apos;emploi;</li>
-          <li className="ml-12">le revenu net du travail indépendant;</li>
-          <li className="ml-12">
-            les revenus étrangers comprennent les revenus provenant de salaires,
-            de pensions d&apos;employeur, de prestations de sécurité sociale, de
-            dividendes, d&apos;investissements et de revenus locatifs reçus
-            d&apos;un autre pays.
-          </li>
-        </ul>
-      </div>
-    </details>
-    <details>
-      <summary>Qu&apos;est-ce qui est exempté comme revenu?</summary>
-      <div className="p-4">
-        <ul className="list-disc">
-          <li className="ml-12">
-            La Sécurité de la vieillesse, le Supplément de revenu garanti,
-            l&apos;Allocation ou l&apos;Allocation au survivant.
-          </li>
-          <li className="ml-12">
-            Les cotisations au Régime de pensions du Canada ou au Régime de
-            rentes du Québec et vos cotisations à l&apos;assurance-emploi
-          </li>
-          <li className="ml-12">
-            Les Cotisations au Régime de pensions du Canada ou au Régime de
-            rentes du Québec et vos cotisations d&apos;assurance-emploi du
-            revenu net d&apos;un travail indépendant.
-          </li>
-          <li className="ml-12">
-            Des déductions, telles que les cotisations syndicales, les
-            déductions pour les REER, les frais de déménagement et les autres
-            dépenses d&apos;emploi
-          </li>
-        </ul>
-      </div>
-    </details>
+
     <details>
       <summary>
         Quels pays ont conclu un accord de sécurité sociale avec le Canada?
@@ -291,20 +460,21 @@ export const FAQF = () => (
       <div className="p-4">
         <p>
           Le Canada a des accords avec plus de 50 pays. Pour savoir les pays en
-          question, vous pouvez contacter Service Canada ou consulter le site
-          Web du
+          question, vous pouvez contacter
           <Link
             href={
               'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html'
             }
           >
             <a className="text-default-text underline" target="_blank">
-              gouvernement du Canada.
+              Service Canada
             </a>
           </Link>
+          ou consulter le site Web du gouvernement du Canada.
         </p>
       </div>
     </details>
+
     <details>
       <summary>
         Que se passe-t-il si j&apos;ai vécu ou travaillé à l&apos;extérieur du
@@ -326,65 +496,7 @@ export const FAQF = () => (
         </p>
       </div>
     </details>
-    <details>
-      <summary>Comment puis-je avoir droit à une pension complète?</summary>
-      <div className="p-4">
-        <p>
-          Vous pouvez avoir droit à une pension complète de la Sécurité de la
-          vieillesse si vous avez vécu au Canada pendant au moins 40 ans après
-          l&apos;âge de 18 ans. Sinon, vous recevrez une pension partielle.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>
-        Dois-je faire une demande pour commencer à recevoir ma pension de la
-        Sécurité de la vieillesse?
-      </summary>
-      <div className="p-4">
-        <p>
-          Pour de nombreux pensionnés, votre pension de la Sécurité de la
-          vieillesse ne commence pas automatiquement. En avril 2013, Service
-          Canada a mis en œuvre un processus visant à inscrire automatiquement
-          les personnes âgées qui sont admissibles à la pension de la Sécurité
-          de la vieillesse. Si vous n&apos;avez reçu aucune lettre au sujet de
-          votre pension le mois suivant votre 64e anniversaire, vous devez faire
-          une demande de prestations.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>
-        Ma pension de la Sécurité de la vieillesse est-elle imposable?
-      </summary>
-      <div className="p-4">
-        <p>
-          Oui. La pension de base de la Sécurité de la vieillesse est imposable
-          et doit être déclarée comme un revenu dans votre déclaration de
-          revenus. Le Supplément de revenu garanti et l&apos;Allocation ne sont
-          pas imposables. Ils doivent également être déclarés dans votre
-          déclaration de revenus. Si votre revenu mondial net dépasse le seuil
-          de 79 845 $ CAD pour 2021, vous devez rembourser une partie ou la
-          totalité de votre pension de la Sécurité de la vieillesse. Veuillez
-          consulter le site de Service Canada pour plus de détails.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>
-        La pension de la Sécurité de la vieillesse est-elle indexée à la hausse
-        des prix?
-      </summary>
-      <div className="p-4">
-        <p>
-          Oui, les montants des paiements de la Sécurité de la vieillesse, du
-          Supplément de revenu garanti, de l&apos;Allocation et de
-          l&apos;Allocation au survivant sont révisés tous les trois mois (en
-          janvier, avril, juillet et octobre) pour refléter les augmentations du
-          coût de la vie mesurées par l&apos;indice des prix à la consommation.
-        </p>
-      </div>
-    </details>
+
     <details>
       <summary>
         Que puis-je faire si je suis en désaccord avec une décision prise au
@@ -401,67 +513,7 @@ export const FAQF = () => (
         </p>
       </div>
     </details>
-    <details>
-      <summary>
-        Vais-je continuer à recevoir le Supplément de revenu garanti si je
-        quitte le Canada?
-      </summary>
-      <div className="p-4 space-y-4">
-        <p>
-          Vous ne pouvez pas percevoir le Supplément de revenu garanti si vous
-          êtes à l&apos;extérieur du Canada pendant plus de 6 mois. Service
-          Canada compare l&apos;information avec l&apos;Agence des services
-          frontaliers du Canada. Si vous quittez le Canada pendant plus de 6
-          mois alors que vous recevez le Supplément de revenu garanti, nous
-          déterminerons si vous êtes admissible à ces paiements. Si ce
-          n&apos;est pas le cas, nous calculerons combien nous vous avons payé
-          en trop, et vous devrez alors rembourser ce montant. Remarque : Vous
-          pourriez être condamné à une amende pour avoir donné des
-          renseignements faux, trompeurs ou si vous omettez délibérément des
-          renseignements.
-        </p>
-        <p>
-          Note: You could be fined for giving false, misleading, or purposely
-          omitted information.
-        </p>
-      </div>
-    </details>
-    <details>
-      <summary>
-        Mon paiement du Supplément de revenu garanti a été arrêté, pourquoi?
-      </summary>
-      <div className="p-4">
-        <ul className="list-disc">
-          Votre paiement du Supplément de revenu garanti peut s&apos;arrêter
-          pour l&apos;une ou l&apos;autre des raisons suivantes:
-          <li className="ml-12">
-            vous n&apos;avez pas complété de déclaration d&apos;impôt sur le
-            revenu avant le 30 avril;
-          </li>
-          <li className="ml-12">
-            à la fin du mois de juin, vous ne nous avez pas donné les
-            renseignements sur votre revenu (ou dans le cas d&apos;un couple,
-            votre revenu plus le revenu de votre conjoint/conjoint de fait) pour
-            l&apos;année précédente;
-          </li>
-          <li className="ml-12">
-            vous quittez le Canada pendant plus de 6 mois consécutifs;
-          </li>
-          <li className="ml-12">
-            votre revenu (ou dans le cas d&apos;un couple, votre revenu plus le
-            revenu de votre conjoint/conjoint de fait) est plus élevé que ce qui
-            est autorisé pour recevoir la prestation;
-          </li>
-          <li className="ml-12">
-            vous êtes dans une prison fédérale pour une peine de 2 ans ou plus;
-          </li>
-          <li className="ml-12">
-            vous décédez (il est important que quelqu&apos;un nous informe de
-            votre mort pour éviter le trop-payé).
-          </li>
-        </ul>
-      </div>
-    </details>
+
     <details>
       <summary>
         Les prestations sont-elles annulées après le décès d&apos;un
@@ -511,6 +563,69 @@ export const FAQF = () => (
               affaires de la personne décédée (si vous les connaissez).
             </li>
           </ul>
+        </p>
+      </div>
+    </details>
+
+    <h2 className="h2 mt-10">Régime de pensions du Canada (RPC)</h2>
+    <details>
+      <summary>
+        Qu&apos;est ce que la pension de retraite du Régime de pensions du
+        Canada (RPC)?
+      </summary>
+      <div className="p-4">
+        <p>
+          La pension de retraite du Régime de pensions du Canada (RPC) est une
+          prestation mensuelle imposable qui assure un remplacement partiel du
+          revenu au moment de la retraite. Si vous êtes admissible, vous
+          recevrez la pension de retraite du RPC pour le reste de votre vie.
+          Pour être admissible, vous devez avoir au moins 60 ans et avoir versé
+          au moins une cotisation valide au RPC.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        En quoi le programme de la Sécurité de la vieillesse (SV) diffère-t-il
+        du Régime de pensions du Canada (RPC) ou du Régime de rentes du Québec
+        (RRQ)?
+      </summary>
+      <div className="p-4">
+        <p>
+          Le Régime de pensions du Canada et le Régime de rentes du Québec ne
+          sont pas financés par le gouvernement, mais par les cotisations des
+          employés et des employeurs. Pour recevoir des prestations du Régime de
+          pensions du Canada ou du Régime de rentes du Québec, vous devez avoir
+          travaillé et cotisé à l&apos;un ou l&apos;autre de ces régimes.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Combien d &apos;années faut-il travailler pour toucher les prestations
+        du RPC?
+      </summary>
+      <div className="p-4">
+        <p>
+          Tout le monde a droit au RPC, peu importe le nombre d’années
+          travaillées. Le montant que vous recevez dépend de vos revenus et de
+          vos cotisations.
+        </p>
+      </div>
+    </details>
+
+    <details>
+      <summary>
+        Devrais-je toucher ma pension du Canada à 60 ans ou à 65 ans?
+      </summary>
+      <div className="p-4">
+        <p>
+          La décision de commencer à toucher des prestations du RPC dépend de
+          vos finances, de votre santé, de votre espérance de vie et de vos
+          impôts. On retarde le versement des prestations du RPC principalement
+          pour recevoir des prestations plus élevées.
         </p>
       </div>
     </details>
