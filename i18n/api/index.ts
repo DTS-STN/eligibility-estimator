@@ -140,6 +140,8 @@ export interface Translations {
     description: string
     url: string
   }
+  yes: string
+  no: string
 }
 
 export function getTranslations(language: Language): Translations {

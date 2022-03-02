@@ -564,5 +564,7 @@ const fr: Translations = {
     description: 'Description',
     url: 'URL',
   },
+  yes: 'Oui',
+  no: 'Non',
 }
 export default fr
