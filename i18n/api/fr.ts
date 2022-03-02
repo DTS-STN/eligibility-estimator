@@ -544,5 +544,19 @@ const fr: Translations = {
       location: LinkLocation.HIDDEN,
     },
   },
+  csv: {
+    appName: 'Estimateur Canadien des Prestations de Vieillesse',
+    formResponses: 'RÉPONSES DU FORMULAIRE',
+    question: 'Question',
+    answer: 'Réponse',
+    estimationResults: "RÉSULTATS DE L'ESTIMATION",
+    benefit: 'Prestation',
+    eligibility: 'Admissibilité',
+    details: 'Détails',
+    entitlement: 'Montant mensuel estimé',
+    links: 'LIENS',
+    description: 'Description',
+    url: 'URL',
+  },
 }
 export default fr

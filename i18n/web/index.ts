@@ -12,6 +12,8 @@ export type WebTranslations = {
   testSiteHeader: string
   otherLang: string
   otherLangCode: string
+  langLong: string
+  creator: string
   search: string
   breadcrumb1Title: string
   breadcrumb1URL: string
@@ -28,7 +30,8 @@ export type WebTranslations = {
   results: string
   needHelp: string
   faq: string
-  estimate: string
+  saveToCsv: string
+  getResults: string
   required: string
   homePageP1: string
   homePageP2: string

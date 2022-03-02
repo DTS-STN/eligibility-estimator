@@ -34,11 +34,11 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
         htmlFor={name}
         aria-label={name}
         data-testid="text-input-label"
-        className="text-content font-bold inline-block mb-1.5"
+        className="text-content font-semibold inline-block mb-1.5"
       >
         {required && <span className="text-danger">*</span>} {label}
         {required && (
-          <span className="text-danger font-bold ml-2">(required)</span>
+          <span className="text-danger font-semibold ml-2">(required)</span>
         )}
         <Tooltip field={name} />
       </label>

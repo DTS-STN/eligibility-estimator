@@ -27,11 +27,11 @@ export const ContactCTA: React.VFC = () => {
         dangerouslySetInnerHTML={{ __html: tsln.contactCTA }}
       />
       {root.summary?.nextStepsLinks && (
-        <div className="flex flex-col gap-y-4 md:flex-row md:gap-x-4 mt-4 justify-center">
+        <div className="flex flex-col gap-y-1">
           {root.summary.nextStepsLinks.map((link, index) => (
             <Link key={index} href={link.url} passHref>
               <a
-                className="btn btn-primary !mt-5 whitespace-normal md:whitespace-nowrap md:min-w-min md:px-8"
+                className="btn btn-primary !mt-5 whitespace-normal md:whitespace-nowrap md:min-w-min md:px-8 md:max-w-[480px]"
                 target="_blank"
               >
                 {link.text}

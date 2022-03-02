@@ -10,6 +10,8 @@ const en: WebTranslations = {
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   otherLangCode: 'FR',
+  langLong: 'eng',
+  creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
@@ -27,19 +29,20 @@ const en: WebTranslations = {
   results: 'Results',
   needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
-  estimate: 'Estimate',
+  saveToCsv: 'Download',
+  getResults: 'Get Results',
   required: 'required',
   homePageP1:
     'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS) and Guaranteed Income Supplement (GIS). If eligible to receive the benefit, it will also estimate your monthly payment.',
   homePageP2: 'The estimator covers four benefits programs:',
   homePageP3:
-    '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    '<strong className="font-semibold">Old Age Security</strong> pension is a monthly payment you can get if you are <strong className="font-semibold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
+    '<strong className="font-semibold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-semibold">65 and older</strong> who have a low income and are living in Canada.',
   homePageP5:
-    '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    '<strong className="font-semibold">Allowance</strong> is a monthly benefit available to low-income individuals aged <strong className="font-semibold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    '<strong className="font-bold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    '<strong className="font-semibold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged <strong className="font-semibold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   emptyResultsMessage:
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
   disclaimerTitle: 'Disclaimer',

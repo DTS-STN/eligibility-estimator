@@ -43,7 +43,9 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
       >
         {required && <span className="text-danger">*</span>} {label}
         {required && (
-          <span className="text-danger font-bold ml-2">({requiredText})</span>
+          <span className="text-danger font-semibold ml-2">
+            ({requiredText})
+          </span>
         )}
         <Tooltip field={name} />
       </label>

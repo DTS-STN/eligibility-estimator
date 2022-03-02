@@ -538,5 +538,19 @@ const en: Translations = {
       location: LinkLocation.HIDDEN,
     },
   },
+  csv: {
+    appName: 'Canadian Old Age Benefits Estimator',
+    formResponses: 'FORM RESPONSES',
+    question: 'Question',
+    answer: 'Answer',
+    estimationResults: 'ESTIMATION RESULTS',
+    benefit: 'Benefit',
+    eligibility: 'Eligibility',
+    details: 'Details',
+    entitlement: 'Estimated monthly amount',
+    links: 'LINKS',
+    description: 'Description',
+    url: 'URL',
+  },
 }
 export default en

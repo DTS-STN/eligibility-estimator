@@ -41,6 +41,13 @@ export const Form = types
     get empty(): boolean {
       return self.fields.length === 0
     },
+    get emptyFields(): string[] {
+      let emptyFields = []
+      self.fields.forEach((field) => {
+        if (!field.filled) emptyFields.push(field.key)
+      })
+      return emptyFields
+    },
   }))
   .views((self) => ({
     get progress(): FormProgress {

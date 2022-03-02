@@ -40,7 +40,7 @@ export const NeedHelpList: React.VFC<{
     <div className="fixedElement z-10" ref={ref}>
       <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
         <h2 className="h2">{title}</h2>
-        <ul className="pl-5 list-disc">
+        <ul className="pl-5 list-disc text-content">
           {links &&
             links.map(({ text, url }, index) => (
               <li key={index}>

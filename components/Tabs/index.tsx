@@ -4,14 +4,17 @@ import { Instance } from 'mobx-state-tree'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { ResponseSuccess } from '../../utils/api/definitions/types'
+import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
+import { DownloadCSVButton } from '../DownloadCSVButton'
 import { FAQ } from '../FAQ'
 import { ComponentFactory } from '../Forms/ComponentFactory'
-import { useStore, useTranslation } from '../Hooks'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { ResultsPage } from '../ResultsPage'
 
 export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
   const root: Instance<typeof RootStore> = useStore()
   const tsln = useTranslation<WebTranslations>()
+  const isMobile = useMediaQuery(992)
 
   return (
     <Tab.Group
@@ -19,10 +22,22 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
       defaultIndex={root.activeTab}
       onChange={(index) => {
         root.setActiveTab(index)
+        if (process.browser) {
+          const win = window as Window &
+            typeof globalThis & { adobeDataLayer: any; _satellite: any }
+          const lang = tsln.langLong
+          const creator = tsln.creator
+          const title =
+            lang +
+            '-sc labs-eligibility estimator-' +
+            root.getTabNameForAnalytics(index)
+
+          sendAnalyticsRequest(lang, title, creator, win)
+        }
       }}
     >
       <Tab.List
-        className={`flex flex-col md:flex-row gap-x-5 gap-y-4 pb-4 border-b border-form-border`}
+        className={`flex flex-col md:flex-row gap-x-5 gap-y-4 pb-4 border-b border-muted/20 relative `}
         id="tabList"
       >
         <Tab
@@ -52,6 +67,11 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
         >
           {tsln.faq}
         </Tab>
+        {!isMobile && root.activeTab == 1 && (
+          <div className="absolute right-0">
+            <DownloadCSVButton />
+          </div>
+        )}
       </Tab.List>
       <Tab.Panels>
         <Tab.Panel className="mt-10">
