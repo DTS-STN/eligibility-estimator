@@ -45,22 +45,22 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule;
+    @apply text-h1 font-semibold mb-[15px] font-header-gc border-b border-header-rule;
   }
   .h2 {
-    @apply text-h2 font-bold mb-[15px] font-header-gc;
+    @apply text-h2 font-semibold mb-[15px] font-header-gc;
   }
   .h3 {
-    @apply text-h3 font-bold mb-[15px] font-header-gc;
+    @apply text-h3 font-semibold mb-[15px] font-header-gc;
   }
   .h4 {
-    @apply text-h4 font-bold mb-[15px] font-header-gc;
+    @apply text-h4 font-semibold mb-[15px] font-header-gc;
   }
   .h5 {
-    @apply font-bold mb-[15px] font-header-gc;
+    @apply font-semibold mb-[15px] font-header-gc;
   }
   .h6 {
-    @apply text-h6 font-bold mb-[15px] font-header-gc;
+    @apply text-h6 font-semibold mb-[15px] font-header-gc;
   }
 
   /* form controls */

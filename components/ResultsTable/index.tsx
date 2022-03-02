@@ -80,7 +80,7 @@ export const ResultsTable = observer(() => {
       </table>
       <div className="block md:hidden">
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
             {tsln.oas}
           </p>
           <p className="px-1.5 py-1.5">
@@ -93,7 +93,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
             {tsln.gis}
           </p>
           <p className="px-1.5 py-1.5">
@@ -108,7 +108,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
             {tsln.alw}
           </p>
           <p className="px-1.5 py-1.5">
@@ -121,7 +121,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
             {tsln.afs}
           </p>
           <p className="px-1.5 py-1.5">
@@ -134,7 +134,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
             {tsln.resultsPage.tableTotalAmount}
           </p>
           <p className="px-1.5 py-1.5 font-bold">
