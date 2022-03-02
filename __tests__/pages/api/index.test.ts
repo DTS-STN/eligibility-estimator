@@ -4,6 +4,7 @@ import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
 import { getTranslations, Translations } from '../../../i18n/api'
+import { BenefitProcessor } from '../../../utils/api/benefitProcessor'
 import { countryList } from '../../../utils/api/definitions/countries'
 import {
   EntitlementResultType,
@@ -22,7 +23,6 @@ import {
   FieldKey,
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
-import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
 import { OutputItem } from '../../../utils/api/scrapers/_baseTable'
 import { legalValues, scraperData } from '../../../utils/api/scrapers/output'
 import {
@@ -56,10 +56,10 @@ describe('translation checks', () => {
 
 describe('country checks', () => {
   const COUNTRY_COUNT = 195
-  const handlerEn = new RequestHandler({ _language: Language.EN })
+  const handlerEn = new BenefitProcessor({ _language: Language.EN })
   handlerEn.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataEn = handlerEn.fieldData as Array<FieldDataDropdown>
-  const handlerFr = new RequestHandler({ _language: Language.FR })
+  const handlerFr = new BenefitProcessor({ _language: Language.FR })
   handlerFr.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataFr = handlerFr.fieldData as Array<FieldDataDropdown>
   it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {

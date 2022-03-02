@@ -3,6 +3,7 @@ import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { stripHtml } from 'string-strip-html'
 import { numberToStringCurrency, Translations } from '../../i18n/api'
+import { BenefitProcessor } from '../../utils/api/benefitProcessor'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import {
   fieldDefinitions,
@@ -15,7 +16,6 @@ import {
   RequestInput,
   ResponseError,
 } from '../../utils/api/definitions/types'
-import { RequestHandler } from '../../utils/api/helpers/requestHandler'
 
 export default function handler(
   req: NextApiRequest,
@@ -30,7 +30,7 @@ export default function handler(
     })
 
     // processing
-    const handler = new RequestHandler(requestInput)
+    const handler = new BenefitProcessor(requestInput)
     const records: string[][] = []
     const csvTranslations = handler.translations.csv
     records.push([csvTranslations.appName])
