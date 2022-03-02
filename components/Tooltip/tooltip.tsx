@@ -62,11 +62,11 @@ export const Tooltip: React.FC<{
               ? 'fixed inset-0 flex items-center justify-center'
               : ''
             : 'hidden'
-        } z-50`}
+        } z-50 m-2.5`}
         tabIndex={-1}
       >
         <div
-          className={`max-w-[440px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
+          className={`w-full md:w-auto max-w-[440px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
             isMobile ? '' : 'relative -top-10 left-10'
           } z-40`}
         >
