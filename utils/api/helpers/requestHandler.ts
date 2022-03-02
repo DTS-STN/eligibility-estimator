@@ -104,7 +104,7 @@ export class RequestHandler {
   get summary(): SummaryObject {
     if (this._summary === undefined) {
       this._summary = SummaryBuilder.buildSummaryObject(
-        this.input.client,
+        this.input,
         this.benefitResults,
         this.missingFields,
         this.translations
