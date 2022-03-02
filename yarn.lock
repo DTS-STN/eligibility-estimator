@@ -3529,6 +3529,7 @@ __metadata:
     react-dom: 17.0.2
     react-number-format: ^4.9.1
     react-select: ^5.2.1
+    react-tabindex: ^1.0.3
     string-strip-html: ^9.1.6
     string.prototype.replaceall: ^1.0.6
     swagger-ui-react: ^4.1.2
@@ -7913,6 +7914,13 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: 120bac5cfbd65eb47e513b8057e3cb71843ce15241bbf933c1818c294965b87d8e074c7929a8fc2ced66c3e3f38c4cc6bf04365a8345e3a382cd524d0093949f
+  languageName: node
+  linkType: hard
+
+"react-tabindex@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "react-tabindex@npm:1.0.3"
+  checksum: 7f744ca645578848920bfbc06c5096f87b86fdd6f049690aaf745f471ab3431b8b00b70cfb9b23c3096a6e9ab64752e435ee21d02bc98db50f49a36745fca3d5
   languageName: node
   linkType: hard
 
