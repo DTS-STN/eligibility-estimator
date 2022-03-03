@@ -165,6 +165,14 @@ export const Form = types
 
       let qs = `_language=${parent.lang}`
 
+      // guard against income being empty
+      const income: Instance<typeof FormField> = self.getFieldByKey(
+        FieldKey.INCOME
+      )
+      if (!income.filled) {
+        return qs
+      }
+
       for (const field of self.fields) {
         if (!field.value) continue
 
