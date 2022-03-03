@@ -3093,9 +3093,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 3
   })
-  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table unavailable)`, async () => {
+  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
     const input = {
-      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3125,13 +3125,13 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-    expect(res.body.results.gis.entitlement.result).toEqual(-1)
+    expect(res.body.results.gis.entitlement.result).toEqual(0.33) // table 2
   })
   it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
     const input = {

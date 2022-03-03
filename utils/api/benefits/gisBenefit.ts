@@ -189,7 +189,7 @@ export class GisBenefit extends BaseBenefit {
       return scraperData.tbl1_single
     } else if (this.input.maritalStatus.partnered) {
       if (this.input.partnerBenefitStatus.anyOas) {
-        // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
+        // Table 2: If you are married or common-law partners, both receiving ANY Old Age Security pension
         return scraperData.tbl2_partneredAndOas
       } else if (this.input.partnerBenefitStatus.alw) {
         // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
