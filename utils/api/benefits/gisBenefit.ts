@@ -166,7 +166,8 @@ export class GisBenefit extends BaseBenefit {
       this.oasResult.entitlement.type === EntitlementResultType.UNAVAILABLE ||
       this.oasResult.entitlement.type === EntitlementResultType.NONE
     ) {
-      throw new Error('unsupported')
+      // this should never happen, so let's just say it's unavailable
+      return -1
     }
   }
 
