@@ -139,10 +139,6 @@ export class GisBenefit extends BaseBenefit {
   private getEntitlementAmount(): number {
     const gisEntitlementItem = this.getTableItem()
     const gisEntitlementItemLast = this.getLastTableItem()
-    // if (this.input.partnerBenefitStatus.partialOas) {
-    //   // unavailable
-    //   return -1
-    // }
     if (this.oasResult.entitlement.type === EntitlementResultType.FULL) {
       // standard
       return gisEntitlementItem ? gisEntitlementItem.gis : 0
