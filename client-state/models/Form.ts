@@ -4,6 +4,7 @@ import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { legalValues } from '../../utils/api/scrapers/output'
+import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
 
@@ -156,6 +157,7 @@ export const Form = types
         self.fields.sort((a, b) => a.order - b.order)
       })
     },
+    // used for calling the main benefit processor
     buildObjectWithFormData(): { [key: string]: string } {
       const parent = getParent(self) as Instance<typeof RootStore>
       let input = { _language: parent.lang }
@@ -165,6 +167,17 @@ export const Form = types
         input[field.key] = field.sanitizeInput()
       }
       return input
+    },
+    // used for API requests, which is currently for the CSV function
+    buildQueryStringWithFormData(): string {
+      const parent = getParent(self) as Instance<typeof RootStore>
+      let qs = `_language=${parent.lang}`
+      if (!self.getFieldByKey(FieldKey.INCOME).filled) return qs // guard against income being empty
+      for (const field of self.fields) {
+        if (!field.value) continue
+        qs += `&${field.key}=${fixedEncodeURIComponent(field.sanitizeInput())}`
+      }
+      return qs
     },
   }))
   .actions((self) => ({
