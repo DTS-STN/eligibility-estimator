@@ -395,7 +395,7 @@ export const FAQE = () => (
       <div className="p-4">
         <p>
           Canada has agreements with over 50 countries. To find out what
-          countries these are, you can contact or visit the
+          countries these are, you can contact or visit the{' '}
           <Link
             href={
               'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html'
@@ -404,7 +404,7 @@ export const FAQE = () => (
             <a className="text-default-text underline" target="_blank">
               Government of Canada
             </a>
-          </Link>
+          </Link>{' '}
           website
         </p>
       </div>

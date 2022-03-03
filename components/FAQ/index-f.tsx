@@ -458,7 +458,7 @@ export const FAQF = () => (
       <div className="p-4">
         <p>
           Le Canada a des accords avec plus de 50 pays. Pour savoir les pays en
-          question, vous pouvez contacter
+          question, vous pouvez contacter{' '}
           <Link
             href={
               'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html'
@@ -467,7 +467,7 @@ export const FAQF = () => (
             <a className="text-default-text underline" target="_blank">
               Service Canada
             </a>
-          </Link>
+          </Link>{' '}
           ou consulter le site Web du gouvernement du Canada.
         </p>
       </div>
