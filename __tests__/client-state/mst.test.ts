@@ -172,7 +172,7 @@ describe('test the mobx state tree nodes', () => {
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     let qs = form.buildQueryStringWithFormData()
-    expect(qs).toBe('_language=EN&livingCountry=CAN') // Canada is selected by default, and locale is EN
+    expect(qs).toBe('_language=EN')
     fillOutForm(form)
     qs = form.buildQueryStringWithFormData()
     expect(qs).toContain('income=20000')
