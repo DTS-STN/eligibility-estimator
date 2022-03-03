@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const FAQE = () => (
   <div>
-    <h2 className="h2 mt-10">Old Age Security</h2>
+    <h2 className="h3 mt-10">Old Age Security</h2>
     <details>
       <summary>
         Do I have to apply to start receiving my Old Age Security pension?
@@ -105,7 +105,7 @@ export const FAQE = () => (
       </div>
     </details>
 
-    <h2 className="h2 mt-10">Guaranteed Income Supplement</h2>
+    <h2 className="h3 mt-10">Guaranteed Income Supplement</h2>
     <details>
       <summary>
         Do I continue receiving the Guaranteed Income Supplement if I leave
@@ -159,7 +159,7 @@ export const FAQE = () => (
       </div>
     </details>
 
-    <h2 className="h2 mt-10">Application</h2>
+    <h2 className="h3 mt-10">Application</h2>
     <details>
       <summary>What are the required documents for my application?</summary>
       <div className="p-4 space-y-4">
@@ -487,7 +487,7 @@ export const FAQE = () => (
       </div>
     </details>
 
-    <h2 className="h2 mt-10">Canada Pension Plan</h2>
+    <h2 className="h3 mt-10">Canada Pension Plan (CPP)</h2>
     <details>
       <summary>What is The Canada Pension Plan (CPP)?</summary>
       <div className="p-4">

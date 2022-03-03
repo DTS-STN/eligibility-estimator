@@ -30,7 +30,7 @@ export const ResultsTable = observer(() => {
         </thead>
         <tbody className="align-top">
           <tr>
-            <td>{tsln.oas}</td>
+            <td className="font-bold text-content">{tsln.oas}</td>
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
@@ -39,7 +39,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
-            <td>{tsln.gis}</td>
+            <td className="font-bold text-content">{tsln.gis}</td>
             <td>
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
@@ -50,7 +50,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr>
-            <td>{tsln.alw}</td>
+            <td className="font-bold text-content">{tsln.alw}</td>
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
@@ -62,7 +62,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
-            <td>{tsln.afs}</td>
+            <td className="font-bold text-content">{tsln.afs}</td>
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
