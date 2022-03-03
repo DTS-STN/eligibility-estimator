@@ -83,23 +83,15 @@ const fr: Translations = {
     ],
     partnerBenefitStatus: [
       {
-        key: 'fullOas',
-        text: 'Mon conjoint reçoit la pleine pension de la Sécurité de la vieillesse',
+        key: 'oas',
+        text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
       },
       {
-        key: 'fullOasGis',
-        text: 'Mon conjoint reçoit la pleine pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
-      },
-      {
-        key: 'partialOas',
-        text: 'Mon conjoint reçoit une pension partielle de la Sécurité de la vieillesse',
-      },
-      {
-        key: 'partialOasGis',
-        text: 'Mon conjoint reçoit une pension partielle de la Sécurité de la vieillesse et le Supplément de revenu garanti',
+        key: 'oasGis',
+        text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
       },
       { key: 'alw', text: "Mon conjoint reçoit l'Allocation" },
-      { key: 'none', text: 'Aucune de ces réponses' },
+      { key: 'none', text: 'Aucune des réponses' },
       { key: 'helpMe', text: 'Aidez-moi à trouver' },
     ],
     livingCountry: [
