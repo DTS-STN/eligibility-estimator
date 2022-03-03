@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 
@@ -20,7 +19,7 @@ export const Header = () => {
               type="search"
               id="search-gc"
               placeholder={tsln.search}
-              className="h-auto min-h-9 py-1.5 px-3 align-middle text-muted bg-white rounded-tl rounded-bl border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form"
+              className="md:min-w-[250px] h-9 py-1.5 px-3 align-middle text-muted bg-white rounded-tl rounded-bl border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form border-r-0"
             />
             <button className="py-1.5 px-3 h-9 rounded-tr rounded-br text-white bg-primary hover:bg-primary-hover border-primary-border font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid">
               <svg

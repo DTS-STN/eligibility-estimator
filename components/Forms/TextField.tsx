@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react'
-import { InputHTMLAttributes, useEffect } from 'react'
+import { InputHTMLAttributes } from 'react'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -19,26 +19,17 @@ export interface TextFieldProps
 export const TextField: React.VFC<TextFieldProps> = observer((props) => {
   const { name, label, required, value, placeholder, onChange, error } = props
 
-  // only need to run this once at component render, so no need for deps
-  useEffect(() => {
-    // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
-    document.addEventListener('wheel', function (event) {
-      const el = document.activeElement as HTMLTextAreaElement
-      el.blur()
-    })
-  }, [])
-
   return (
     <>
       <label
         htmlFor={name}
         aria-label={name}
         data-testid="text-input-label"
-        className="text-content font-semibold inline-block mb-1.5"
+        className="text-content font-bold inline-block mb-2.5"
       >
         {required && <span className="text-danger">*</span>} {label}
         {required && (
-          <span className="text-danger font-semibold ml-2">(required)</span>
+          <span className="text-danger font-bold ml-1">(required)</span>
         )}
         <Tooltip field={name} />
       </label>

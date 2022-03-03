@@ -32,6 +32,8 @@ export type WebTranslations = {
   faq: string
   saveToCsv: string
   getResults: string
+  applyHeader: string
+  applyText: string
   required: string
   homePageP1: string
   homePageP2: string

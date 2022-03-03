@@ -102,7 +102,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                 field.category.key == FieldCategory.PARTNER_DETAILS ||
                 field.category.key == FieldCategory.SOCIAL_AGREEMENT
               const styling = isChildQuestion
-                ? `bg-emphasis px-10 ${
+                ? `bg-emphasis px-10 pt-4 ${
                     field.category.key == FieldCategory.SOCIAL_AGREEMENT
                       ? ' mb-10'
                       : ''
@@ -114,7 +114,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     <h2
                       className={
                         isChildQuestion
-                          ? 'h2 pt-10 text-content'
+                          ? 'h2 pt-5 mb-8 text-content'
                           : 'h2 my-8 text-content'
                       }
                     >
@@ -122,7 +122,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     </h2>
                   )}
                   {field.type == FieldType.CURRENCY && (
-                    <div className="pb-8">
+                    <div className="pb-10">
                       <CurrencyField
                         type={field.type}
                         name={field.key}
@@ -136,7 +136,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     </div>
                   )}
                   {field.type == FieldType.NUMBER && (
-                    <div className="pb-8">
+                    <div className="pb-10">
                       <NumberField
                         type={field.type}
                         name={field.key}
@@ -150,7 +150,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                     </div>
                   )}
                   {field.type == FieldType.STRING && (
-                    <div className="pb-8">
+                    <div className="pb-10">
                       <TextField
                         type={field.type}
                         name={field.key}
@@ -165,7 +165,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   )}
                   {(field.type == FieldType.DROPDOWN ||
                     field.type == FieldType.DROPDOWN_SEARCHABLE) && (
-                    <div className="pb-8">
+                    <div className="pb-10">
                       <FormSelect
                         name={field.key}
                         field={field}
@@ -177,7 +177,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
                   )}
                   {(field.type == FieldType.RADIO ||
                     field.type == FieldType.BOOLEAN) && (
-                    <div className="pb-8">
+                    <div className="pb-10">
                       <Radio
                         name={field.key}
                         checkedValue={field.value}

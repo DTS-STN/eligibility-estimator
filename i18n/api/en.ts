@@ -478,13 +478,13 @@ const en: Translations = {
       location: LinkLocation.RESULTS_ONLY,
     },
     oasApply: {
-      text: 'Apply for Old Age Security',
+      text: 'Old Age Security',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
       order: 19,
       location: LinkLocation.RESULTS_APPLY,
     },
     gisApply: {
-      text: 'Apply for Guaranteed Income Supplement',
+      text: 'Guaranteed Income Supplement',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
       order: 20,
       location: LinkLocation.RESULTS_APPLY,
