@@ -17,7 +17,7 @@ export const ResultsTable = observer(() => {
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   return (
-    <div className="text-content">
+    <div>
       <table className="hidden md:block text-left">
         <thead className="font-bold  border-b border-content">
           <tr className=" ">

@@ -30,30 +30,30 @@ const Home: NextPage = (props) => {
     <>
       <HeadDoc />
       <Layout>
-        <div className="mt-18 text-black">
+        <div className="mt-18 ">
           <p
-            className="mb-4 text-black"
+            className="mb-4 "
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
           <p
-            className="mb-4 text-black"
+            className="mb-4 "
             dangerouslySetInnerHTML={{ __html: tsln.homePageP2 }}
           />
           <ul className="list-disc">
             <li
-              className="mb-4 text-black ml-6"
+              className="mb-4  ml-6"
               dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
             />
             <li
-              className="mb-4 text-black ml-6"
+              className="mb-4  ml-6"
               dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
             />
             <li
-              className="mb-4 text-black ml-6"
+              className="mb-4  ml-6"
               dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
             />
             <li
-              className="mb-4 text-black ml-6"
+              className="mb-4  ml-6"
               dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
             />
           </ul>
