@@ -30,12 +30,12 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
         >
           {required && <span className="text-danger">*</span>} {label}
         </label>
-        <div>
+        <span>
           {required && (
             <span className="text-danger font-bold ml-1">(required)</span>
           )}
           <Tooltip field={name} />
-        </div>
+        </span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}
       <textarea

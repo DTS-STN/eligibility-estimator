@@ -45,12 +45,14 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           >
             {required && <span className="text-danger">*</span>} {label}
           </label>
-          <div>
+          <span>
             {required && (
-              <span className="text-danger ml-1">({requiredText})</span>
+              <span className="font-bold text-danger ml-1">
+                ({requiredText})
+              </span>
             )}
             <Tooltip field={name} />
-          </div>
+          </span>
         </div>
         {error && <ErrorLabel errorMessage={error} />}
         <NumberFormat

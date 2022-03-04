@@ -44,12 +44,12 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         >
           {required && <span className="text-danger">*</span>} {label}
         </label>
-        <div>
+        <span>
           {required && (
             <span className="text-danger font-bold ml-1">({requiredText})</span>
           )}
           <Tooltip field={name} />
-        </div>
+        </span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}
       <NumberFormat

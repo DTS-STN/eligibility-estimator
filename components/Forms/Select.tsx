@@ -44,10 +44,10 @@ export const FormSelect: React.VFC<SelectProps> = observer(
             <span className="text-danger">* </span>
             <span className="mb-1.5 font-bold text-content">{field.label}</span>
           </label>
-          <div>
+          <span>
             <span className="text-danger font-bold ml-1">({requiredText})</span>
             <Tooltip field={field.key} />
-          </div>
+          </span>
         </div>
         {error && <ErrorLabel errorMessage={error} />}
         <div className="w-full md:w-80">
