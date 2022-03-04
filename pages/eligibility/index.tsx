@@ -1,18 +1,17 @@
 import { observer } from 'mobx-react'
-import { GetStaticProps, NextPage } from 'next'
+import { NextPage } from 'next'
 import { useEffect } from 'react'
 import { HeadDoc } from '../../components/Document'
 import { useStore, useTranslation } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { Tabs } from '../../components/Tabs'
 import { WebTranslations } from '../../i18n/web'
-import { Language } from '../../utils/api/definitions/enums'
 import {
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
+import MainHandler from '../../utils/api/mainHandler'
 import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
-import { mockPartialGetRequest } from '../../__tests__/pages/api/factory'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const root = useStore()
@@ -33,10 +32,12 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     }
   })
 
-  if ('error' in props) {
+  const data = new MainHandler({ _language: tsln._language }).results
+
+  if ('error' in data) {
     return (
       <Layout>
-        <div>{props.error}</div>
+        <div>{data.error}</div>
       </Layout>
     )
   }
@@ -45,28 +46,10 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     <>
       <HeadDoc />
       <Layout>
-        <Tabs {...props} />
+        <Tabs {...data} />
       </Layout>
     </>
   )
-}
-
-/**
- * This function appears unused, but it is called by Next.js and then passed to the above as the props parameter.
- * Some documentation: https://vercel.com/blog/nextjs-server-side-rendering-vs-static-generation
- */
-export const getStaticProps: GetStaticProps = async (context) => {
-  // using mockPartialGetRequest() is simply a convenient way of calling
-  // the backend function, as it expects specific request/response objects
-  const data = await mockPartialGetRequest({
-    _language: context.locale == 'en' ? Language.EN : Language.FR,
-  })
-
-  return {
-    props: {
-      ...data.body,
-    },
-  }
 }
 
 export default observer(Eligibility)

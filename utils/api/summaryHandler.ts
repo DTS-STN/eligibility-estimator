@@ -1,22 +1,22 @@
-import { Translations } from '../../../i18n/api'
+import { Translations } from '../../i18n/api'
 import {
   EntitlementResultType,
   EstimationSummaryState,
   MaritalStatus,
   ResultKey,
   ResultReason,
-} from '../definitions/enums'
-import { FieldKey } from '../definitions/fields'
+} from './definitions/enums'
+import { FieldKey } from './definitions/fields'
 import {
   BenefitResult,
   BenefitResultsObject,
   Link,
   ProcessedInputWithPartner,
   SummaryObject,
-} from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+} from './definitions/types'
+import { legalValues } from './scrapers/output'
 
-export class SummaryBuilder {
+export class SummaryHandler {
   private readonly state: EstimationSummaryState
   private readonly title: string
   private readonly details: string
@@ -224,7 +224,7 @@ export class SummaryBuilder {
     missingFields: FieldKey[],
     translations: Translations
   ): SummaryObject {
-    const summaryBuilder = new SummaryBuilder(
+    const summaryBuilder = new SummaryHandler(
       input,
       results,
       missingFields,

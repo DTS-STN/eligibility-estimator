@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { Alert } from '../components/Alert'
@@ -88,12 +88,6 @@ const Home: NextPage = (props) => {
       </Layout>
     </>
   )
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  return {
-    props: {},
-  }
 }
 
 export default Home

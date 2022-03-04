@@ -1,5 +1,4 @@
 import { createArrayCsvStringifier } from 'csv-writer'
-import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { stripHtml } from 'string-strip-html'
 import { numberToStringCurrency, Translations } from '../../i18n/api'
@@ -9,28 +8,15 @@ import {
   FieldKey,
   FieldType,
 } from '../../utils/api/definitions/fields'
-import { RequestSchema } from '../../utils/api/definitions/schemas'
-import {
-  BenefitResult,
-  RequestInput,
-  ResponseError,
-} from '../../utils/api/definitions/types'
-import { RequestHandler } from '../../utils/api/helpers/requestHandler'
+import { BenefitResult, ResponseError } from '../../utils/api/definitions/types'
+import MainHandler from '../../utils/api/mainHandler'
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | ResponseError>
 ) {
   try {
-    console.log(`Processing CSV request: `, req.query)
-
-    // validation
-    const requestInput: RequestInput = Joi.attempt(req.query, RequestSchema, {
-      abortEarly: false,
-    })
-
-    // processing
-    const handler = new RequestHandler(requestInput)
+    const handler = new MainHandler(req.query).handler
     const records: string[][] = []
     const csvTranslations = handler.translations.csv
     records.push([csvTranslations.appName])

@@ -2,23 +2,23 @@ import {
   getTranslations,
   numberToStringCurrency,
   Translations,
-} from '../../../i18n/api'
-import { AfsBenefit } from '../benefits/afsBenefit'
-import { AlwBenefit } from '../benefits/alwBenefit'
-import { GisBenefit } from '../benefits/gisBenefit'
-import { OasBenefit } from '../benefits/oasBenefit'
+} from '../../i18n/api'
+import { AfsBenefit } from './benefits/afsBenefit'
+import { AlwBenefit } from './benefits/alwBenefit'
+import { GisBenefit } from './benefits/gisBenefit'
+import { OasBenefit } from './benefits/oasBenefit'
 import {
   EntitlementResultType,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
-} from '../definitions/enums'
+} from './definitions/enums'
 import {
   FieldData,
   fieldDefinitions,
   FieldKey,
   FieldType,
-} from '../definitions/fields'
+} from './definitions/fields'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -27,18 +27,18 @@ import {
   ProcessedInputWithPartner,
   RequestInput,
   SummaryObject,
-} from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+} from './definitions/types'
 import {
   IncomeHelper,
   LegalStatusHelper,
   LivingCountryHelper,
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
-} from './fieldClasses'
-import { SummaryBuilder } from './summaryUtils'
+} from './helpers/fieldClasses'
+import { legalValues } from './scrapers/output'
+import { SummaryHandler } from './summaryHandler'
 
-export class RequestHandler {
+export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
   private _missingFields: FieldKey[]
@@ -104,7 +104,7 @@ export class RequestHandler {
 
   get summary(): SummaryObject {
     if (this._summary === undefined) {
-      this._summary = SummaryBuilder.buildSummaryObject(
+      this._summary = SummaryHandler.buildSummaryObject(
         this.input,
         this.benefitResults,
         this.missingFields,
@@ -228,7 +228,7 @@ export class RequestHandler {
       }
     }
 
-    requiredFields.sort(RequestHandler.sortFields)
+    requiredFields.sort(BenefitHandler.sortFields)
     return requiredFields
   }
 
@@ -240,7 +240,7 @@ export class RequestHandler {
     this.requiredFields.forEach((key) => {
       if (this.rawInput[key] === undefined) missingFields.push(key)
     })
-    missingFields.sort(RequestHandler.sortFields)
+    missingFields.sort(BenefitHandler.sortFields)
     return missingFields
   }
 
