@@ -157,7 +157,6 @@ export class AlwBenefit extends BaseBenefit {
   }
 
   private getEntitlementAmount(): number {
-    if (this.input.partnerBenefitStatus.partialOas) return -1
     const tableItem = this.getTableItem()
     return tableItem ? tableItem.alw : 0
   }

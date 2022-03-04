@@ -79,21 +79,10 @@ const en: Translations = {
       { key: 'separated', text: 'Separated' },
     ],
     partnerBenefitStatus: [
+      { key: 'oas', text: 'My partner receives an Old Age Security pension' },
       {
-        key: 'fullOas',
-        text: 'My partner receives full Old Age Security pension',
-      },
-      {
-        key: 'fullOasGis',
-        text: 'My partner receives full Old Age Security pension and Guaranteed Income Supplement',
-      },
-      {
-        key: 'partialOas',
-        text: 'My partner receives partial Old Age Security pension',
-      },
-      {
-        key: 'partialOasGis',
-        text: 'My partner receives partial Old Age Security pension and Guaranteed Income Supplement',
+        key: 'oasGis',
+        text: 'My partner receives an Old Age Security pension and the Guaranteed Income Supplement',
       },
       { key: 'alw', text: 'My partner receives the Allowance' },
       { key: 'none', text: 'None of the above' },

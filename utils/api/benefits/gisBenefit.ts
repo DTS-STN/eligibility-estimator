@@ -10,6 +10,7 @@ import {
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
+import roundToTwo from '../helpers/roundToTwo'
 import { OutputItemGis } from '../scrapers/_baseTable'
 import { legalValues, scraperData } from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -37,11 +38,19 @@ export class GisBenefit extends BaseBenefit {
      which may result in us returning "eligible" when in fact they are not.
     */
     const maxIncome = this.input.maritalStatus.partnered
-      ? this.input.partnerBenefitStatus.fullOas
+      ? this.input.partnerBenefitStatus.anyOas
         ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
         : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
       : legalValues.MAX_GIS_INCOME_SINGLE
-    const meetsReqIncome = this.income < maxIncome
+    const meetsReqIncome =
+      this.income < maxIncome ||
+      /*
+       This exception is pretty weird, but necessary to work around the fact that a client can be entitled to GIS
+       while being above the GIS income limit. This scenario can happen when the client gets Partial OAS, as
+       GIS "top-up" will come into effect. Later, in RequestHandler.translateResults(), we will correct for
+       this if the client is indeed above the true (undocumented) max income.
+      */
+      this.oasResult.entitlement.type === EntitlementResultType.PARTIAL
 
     // main checks
     if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
@@ -112,11 +121,13 @@ export class GisBenefit extends BaseBenefit {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const result = this.getEntitlementAmount()
-    const type =
-      result === -1
-        ? EntitlementResultType.UNAVAILABLE
-        : EntitlementResultType.FULL
+    const result = roundToTwo(this.getEntitlementAmount())
+
+    let type: EntitlementResultType
+    if (result === -1) type = EntitlementResultType.UNAVAILABLE
+    else if (result === 0) type = EntitlementResultType.NONE
+    else type = EntitlementResultType.FULL
+
     const detailOverride =
       type === EntitlementResultType.UNAVAILABLE
         ? this.translations.detail.eligibleEntitlementUnavailable
@@ -126,13 +137,38 @@ export class GisBenefit extends BaseBenefit {
   }
 
   private getEntitlementAmount(): number {
-    if (
-      this.oasResult.entitlement.type === EntitlementResultType.PARTIAL ||
-      this.input.partnerBenefitStatus.partialOas
-    )
-      return -1
     const gisEntitlementItem = this.getTableItem()
-    return gisEntitlementItem ? gisEntitlementItem.gis : 0
+    const gisEntitlementItemLast = this.getLastTableItem()
+    if (this.oasResult.entitlement.type === EntitlementResultType.FULL) {
+      // standard
+      return gisEntitlementItem ? gisEntitlementItem.gis : 0
+    }
+    if (this.oasResult.entitlement.type === EntitlementResultType.PARTIAL) {
+      const lastIncome = gisEntitlementItemLast.range.high
+      const oasEntitlement = this.oasResult.entitlement.result
+      let result, combinedOasGis
+      if (this.income <= lastIncome) {
+        // partial oas when income below max
+        combinedOasGis = gisEntitlementItem.combinedOasGis
+      } else {
+        // partial oas when income above max
+        const lastInterval = gisEntitlementItemLast.range.interval
+        const lastCombinedOasGis = gisEntitlementItemLast.combinedOasGis
+        const numIntervalsOverLast = Math.ceil(
+          (this.income - lastIncome) / lastInterval
+        )
+        combinedOasGis = lastCombinedOasGis - numIntervalsOverLast
+      }
+      result = combinedOasGis - oasEntitlement
+      return Math.max(0, result)
+    }
+    if (
+      this.oasResult.entitlement.type === EntitlementResultType.UNAVAILABLE ||
+      this.oasResult.entitlement.type === EntitlementResultType.NONE
+    ) {
+      // this should never happen, so let's just say it's unavailable
+      return -1
+    }
   }
 
   private getTableItem(): OutputItemGis | undefined {
@@ -142,13 +178,18 @@ export class GisBenefit extends BaseBenefit {
     })
   }
 
+  private getLastTableItem(): OutputItemGis | undefined {
+    const array: OutputItemGis[] = this.getTable()
+    return array[array.length - 1]
+  }
+
   private getTable(): OutputItemGis[] {
     if (this.input.maritalStatus.single) {
       // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
       return scraperData.tbl1_single
     } else if (this.input.maritalStatus.partnered) {
-      if (this.input.partnerBenefitStatus.fullOas) {
-        // Table 2: If you are married or common-law partners, both receiving a full Old Age Security pension
+      if (this.input.partnerBenefitStatus.anyOas) {
+        // Table 2: If you are married or common-law partners, both receiving ANY Old Age Security pension
         return scraperData.tbl2_partneredAndOas
       } else if (this.input.partnerBenefitStatus.alw) {
         // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64

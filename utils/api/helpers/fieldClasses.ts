@@ -119,18 +119,11 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
     this.gisEligibility = EntitlementResultType.NONE
     this.alwEligibility = EntitlementResultType.NONE
     switch (this.value) {
-      case PartnerBenefitStatus.FULL_OAS:
-        this.oasEligibility = EntitlementResultType.FULL
+      case PartnerBenefitStatus.OAS:
+        this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         break
-      case PartnerBenefitStatus.FULL_OAS_GIS:
-        this.oasEligibility = EntitlementResultType.FULL
-        this.gisEligibility = EntitlementResultType.FULL
-        break
-      case PartnerBenefitStatus.PARTIAL_OAS:
-        this.oasEligibility = EntitlementResultType.PARTIAL
-        break
-      case PartnerBenefitStatus.PARTIAL_OAS_GIS:
-        this.oasEligibility = EntitlementResultType.PARTIAL
+      case PartnerBenefitStatus.OAS_GIS:
+        this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         this.gisEligibility = EntitlementResultType.FULL
         break
       case PartnerBenefitStatus.ALW:
@@ -144,10 +137,16 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
   }
 
   get fullOas(): boolean {
-    return this.oasEligibility === EntitlementResultType.FULL
+    return (
+      this.oasEligibility === EntitlementResultType.FULL ||
+      this.oasEligibility === EntitlementResultType.PARTIAL_OR_FULL
+    )
   }
   get partialOas(): boolean {
-    return this.oasEligibility === EntitlementResultType.PARTIAL
+    return (
+      this.oasEligibility === EntitlementResultType.PARTIAL ||
+      this.oasEligibility === EntitlementResultType.PARTIAL_OR_FULL
+    )
   }
   get anyOas(): boolean {
     return this.fullOas || this.partialOas

@@ -10,9 +10,9 @@ class Tbl5PartneredAfsScraper extends TableScraper {
     })
   }
 
-  dataExtractor(row): OutputItemAfs {
+  dataExtractor(row: Element): OutputItemAfs {
     const orig = super.dataExtractor(row)
-    const afs = this.getCellValue(row)
+    const afs = this.getCellValue(row, 1)
     return { range: orig.range, afs }
   }
 }
