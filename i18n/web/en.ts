@@ -75,7 +75,7 @@ const en: WebTranslations = {
   },
 
   contactCTA:
-    'For a more accurate assessment, you are encouraged to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> and check out the <a className="underline text-default-text" href="#tabList">Frequently Asked Questions</a> on documents you may be required to provide.',
+    'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',

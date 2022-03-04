@@ -42,13 +42,13 @@ export const FAQE = () => (
       </summary>
       <div className="p-4">
         <p>
-          If you are already over 65, we may be able to give you a retroactive
-          payment for up to a maximum of 11 months from the date we receive your
-          application. If you delayed receiving your Old Age Security pension
-          you will not be able to receive retroactive payment during the
-          deferral period. You might also be eligible to receive extra payments
-          based on your income such as Guaranteed Income Supplement, Allowance,
-          Allowance for the Survivor.
+          If you are already over 65, you may be eligible to receive a
+          retroactive payment for up to a maximum of 11 months from the date we
+          receive your application. If you delayed receiving your Old Age
+          Security pension you will not be able to receive retroactive payment
+          during this period. You might also be eligible to receive extra
+          payments based on your income such as Guaranteed Income Supplement,
+          Allowance, Allowance for the Survivor.
         </p>
       </div>
     </details>
@@ -69,9 +69,9 @@ export const FAQE = () => (
       <div className="p-4">
         <p>
           A partial pension is calculated at the rate of 1/40th of the full
-          pension for each complete year of residence in Canada after age
-          eighteen. The minimum period of residence necessary to qualify for a
-          partial pension is 10 years of residence in Canada.
+          pension for each complete year of residence in Canada after age 18.
+          The minimum period of residence necessary to qualify for a partial
+          pension is 10 years.
         </p>
       </div>
     </details>
@@ -492,11 +492,11 @@ export const FAQE = () => (
       <summary>What is The Canada Pension Plan (CPP)?</summary>
       <div className="p-4">
         <p>
-          The Canada Pension Plan (CPP) retirement pension is a monthly, taxable
+          The Canada Pension Plan retirement pension is a monthly, taxable
           benefit that replaces part of your income when you retire. If you
-          qualify, you&apos;ll receive the CPP retirement pension for the rest
-          of your life. To qualify you must be at least 60 years old and have
-          made at least one valid contribution to the CPP
+          qualify, you&apos;ll receive this pension for the rest of your life.
+          To qualify you must be at least 60 years old and have made at least
+          one valid contribution.
         </p>
       </div>
     </details>
@@ -518,24 +518,27 @@ export const FAQE = () => (
 
     <details>
       <summary>
-        How many years do you need to work to get Canada Pension Plan (CPP)?
+        How many years do you need to work to get the Canada Pension Plan (CPP)?
       </summary>
       <div className="p-4">
         <p>
-          Everyone is entitled to CPP regardless of how many years you have
-          worked. How much you receive depends on your earnings as well as your
-          contributions.
+          Everyone is entitled the Canada Pension Plan regardless of how many
+          years you have worked. How much you receive depends on your earnings
+          as well as your contributions.
         </p>
       </div>
     </details>
 
     <details>
-      <summary>Should I take my Canada pension at 60 or 65?</summary>
+      <summary>
+        Should I take my pension from the Canada Pension Plan at 60 or 65?
+      </summary>
       <div className="p-4">
         <p>
-          Deciding when to start collecting CPP should be based on your
-          finances, health, life expectancy and taxes. The main reason to delay
-          CPP is that you will receive a larger benefit.
+          Deciding when to start collecting the Canada Pension Plan should be
+          based on your finances, health, life expectancy and taxes. The main
+          reason to delay your payments is that you will receive a larger
+          benefit.
         </p>
       </div>
     </details>

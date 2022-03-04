@@ -46,18 +46,18 @@ export const FAQF = () => (
     <details>
       <summary>
         Puis-je bénéficier d&apos;un paiement rétroactif si j&apos;ai plus de 65
-        ans ?
+        ans?
       </summary>
       <div className="p-4">
         <p>
-          Si vous avez déjà plus de 65 ans, nous pourrons peut-être vous donner
-          un paiement rétroactif jusqu&apos;à concurrence de 11 mois à partir de
-          la date à laquelle nous recevons votre demande. Si vous avez reporté
-          la réception de votre pension de la Sécurité de la vieillesse, vous ne
-          pourrez pas recevoir de paiement rétroactif pendant cette période
-          reportée. Vous pourriez également être admissible à recevoir des
+          Si vous avez déjà plus de 65 ans, vous êtes peut-être admissible pour
+          recevoir un paiement rétroactif jusqu&apos;à concurrence de 11 mois à
+          partir de la date à laquelle nous recevons votre demande. Si vous avez
+          reporté la réception de votre pension de la Sécurité de la vieillesse,
+          vous ne pourrez pas recevoir de paiement rétroactif pendant cette
+          période. Vous pourriez également être admissible à recevoir des
           paiements supplémentaires en fonction de votre revenu, comme le
-          Supplément de revenu garanti, l&apos;allocation et l&apos;allocation
+          Supplément de revenu garanti, l&apos;Allocation et l&apos;Allocation
           pour le survivant.
         </p>
       </div>
@@ -78,12 +78,10 @@ export const FAQF = () => (
       <summary>Qu&apos;est-ce qu&apos;une pension partielle?</summary>
       <div className="p-4">
         <p>
-          La pension partielle est calculée à un taux de 1/40e de la pension
-          complète pour chaque année complète de résidence au Canada après
-          l&apos;âge de 18 ans. de résidence au Canada après l&apos;âge de
-          dix-huit ans. La période minimale de résidence nécessaire pour avoir
-          droit pour avoir droit à une pension partielle est de 10 ans de
-          résidence au Canada.
+          La pension partielle est calculée à un taux de 1/40e de la pleine
+          pension pour chaque année complète de résidence au Canada après
+          l&apos;âge de 18 ans. La période minimale de résidence nécessaire pour
+          avoir droit à une pension partielle est de 10 ans.
         </p>
       </div>
     </details>
@@ -434,15 +432,15 @@ export const FAQF = () => (
     <details>
       <summary>
         Y a-t-il une différence entre les années de résidence et la présence au
-        Canada ?
+        Canada?
       </summary>
       <div className="p-4">
         <p>
-          Pour déterminer votre résidence, seule la résidence effective et non
-          les périodes de présence au Canada sont comptabilisées.
+          Seule la résidence véritable et non les périodes de présence au Canada
+          est comptabilisée pour déterminer votre résidence.
           <br />
-          <span className="font-bold">Résidence</span>: La résidence signifie qu
-          &apos;une personne fait son foyer ici et vit ordinairement au Canada.
+          <span className="font-bold">Résidence</span>: La résidence signifie
+          qu&apos;une personne fait son foyer ici et vit normalement au Canada.
           <br />
           <span className="font-bold">Présence</span>: La présence signifie
           qu&apos;une personne est physiquement présente dans une partie du
@@ -573,12 +571,12 @@ export const FAQF = () => (
       </summary>
       <div className="p-4">
         <p>
-          La pension de retraite du Régime de pensions du Canada (RPC) est une
+          La pension de retraite du Régime de pensions du Canada est une
           prestation mensuelle imposable qui assure un remplacement partiel du
           revenu au moment de la retraite. Si vous êtes admissible, vous
-          recevrez la pension de retraite du RPC pour le reste de votre vie.
-          Pour être admissible, vous devez avoir au moins 60 ans et avoir versé
-          au moins une cotisation valide au RPC.
+          recevrez cette pension pour le reste de votre vie. Pour être
+          admissible, vous devez avoir au moins 60 ans et y avoir versé au moins
+          une cotisation valide.
         </p>
       </div>
     </details>
@@ -602,12 +600,12 @@ export const FAQF = () => (
 
     <details>
       <summary>
-        Combien d &apos;années faut-il travailler pour toucher les prestations
-        du RPC?
+        Combien d&apos;années faut-il travailler pour toucher les prestations du
+        Régime de pensions du Canada (RPC)?
       </summary>
       <div className="p-4">
         <p>
-          Tout le monde a droit au RPC, peu importe le nombre d’années
+          Tout le monde a droit au RPC, peu importe le nombre d&apos;années
           travaillées. Le montant que vous recevez dépend de vos revenus et de
           vos cotisations.
         </p>
@@ -616,14 +614,15 @@ export const FAQF = () => (
 
     <details>
       <summary>
-        Devrais-je toucher ma pension du Canada à 60 ans ou à 65 ans?
+        Devrais-je toucher ma pension du Régime de pensions du Canada à 60 ans
+        ou à 65 ans?
       </summary>
       <div className="p-4">
         <p>
-          La décision de commencer à toucher des prestations du RPC dépend de
-          vos finances, de votre santé, de votre espérance de vie et de vos
-          impôts. On retarde le versement des prestations du RPC principalement
-          pour recevoir des prestations plus élevées.
+          La décision de commencer à toucher des prestations du Régime de
+          pensions du Canada dépend de vos finances, de votre santé, de votre
+          espérance de vie et de vos impôts. La principale raison de retarder
+          vos paiements est de recevoir des prestations plus élevées.
         </p>
       </div>
     </details>

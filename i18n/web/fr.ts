@@ -33,11 +33,11 @@ const fr: WebTranslations = {
   getResults: 'Obtenir les résultats',
   applyHeader: 'Faire une demande de prestations',
   applyText:
-    'Puisque vous avez estimé vos prestations, veuillez utiliser le(s) bouton(s) ci-dessous pour faire une demande.',
+    'Maintenant que vous avez estimé vos prestations, veuillez utiliser le(s) bouton(s) ci-dessous pour faire votre demande.',
   required: 'obligatoire',
   homePageP1:
     "L'Estimateur Canadien des Prestations de Vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV), au Supplément de revenu garanti (SRG), l'Allocation, et L'Allocation au survivant. Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
-  homePageP2: "L'estimateur couvre quatre programmes de prestations :",
+  homePageP2: "L'estimateur couvre quatre programmes de prestations:",
   homePageP3:
     '<strong className="font-bold">la pension de la Sécurité de la vieillesse</strong> est un paiement mensuel que vous pouvez recevoir si vous avez <strong className="font-bold">65 ans et plus</strong>. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
   homePageP4:
@@ -75,7 +75,7 @@ const fr: WebTranslations = {
   },
 
   contactCTA:
-    'Pour une évaluation plus précise de votre demande, nous vous invitons à communiquer avec <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a>. Consultez la <a className="underline text-default-text" href="#tabList">Foire aux questions</a> pour obtenir la liste les documents que vous devrez peut-être fournir.',
+    'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
