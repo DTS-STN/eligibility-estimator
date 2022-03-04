@@ -17,9 +17,9 @@ export const ResultsTable = observer(() => {
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   return (
-    <>
+    <div className="text-content">
       <table className="hidden md:block text-left">
-        <thead className="font-bold text-content border-b border-content">
+        <thead className="font-bold  border-b border-content">
           <tr className=" ">
             <th>{tsln.resultsPage.tableHeader1}</th>
             <th>{tsln.resultsPage.tableHeader2}</th>
@@ -30,7 +30,7 @@ export const ResultsTable = observer(() => {
         </thead>
         <tbody className="align-top">
           <tr>
-            <td className=" text-content">{tsln.oas}</td>
+            <td className=" ">{tsln.oas}</td>
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
@@ -39,7 +39,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
-            <td className="text-content">{tsln.gis}</td>
+            <td className="">{tsln.gis}</td>
             <td>
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
@@ -50,7 +50,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr>
-            <td className="text-content">{tsln.alw}</td>
+            <td className="">{tsln.alw}</td>
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
@@ -62,7 +62,7 @@ export const ResultsTable = observer(() => {
             </td>
           </tr>
           <tr className="bg-[#E8F2F4]">
-            <td className=" text-content">{tsln.afs}</td>
+            <td className="">{tsln.afs}</td>
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
@@ -142,6 +142,6 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   )
 })
