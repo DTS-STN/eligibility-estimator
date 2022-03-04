@@ -9,6 +9,20 @@
     @apply focus-visible:ring-1;
     @apply focus-visible:ring-black;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  table,
+  p,
+  span,
+  label,
+  ul,
+  li {
+    @apply text-content;
+  }
 
   #elig {
     @apply text-base;

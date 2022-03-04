@@ -97,118 +97,120 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               id="_language"
               value={router.locale == 'en' ? Language.EN : Language.FR}
             />
-            {form.fields.map((field: Instance<typeof FormField>) => {
-              const isChildQuestion =
-                field.category.key == FieldCategory.PARTNER_DETAILS ||
-                field.category.key == FieldCategory.SOCIAL_AGREEMENT
-              const styling = isChildQuestion
-                ? `bg-emphasis px-10 pt-4 ${
-                    field.category.key == FieldCategory.SOCIAL_AGREEMENT
-                      ? ' mb-10'
-                      : ''
-                  }`
-                : ``
-              const content = (
-                <div key={field.key} className={styling}>
-                  {field.category.key != lastCategory && (
-                    <h2
-                      className={
-                        isChildQuestion
-                          ? 'h2 pt-5 mb-8 text-content'
-                          : 'h2 my-8 text-content'
-                      }
-                    >
-                      {field.category.text}
-                    </h2>
-                  )}
-                  {field.type == FieldType.CURRENCY && (
-                    <div className="pb-10">
-                      <CurrencyField
-                        type={field.type}
-                        name={field.key}
-                        label={field.label}
-                        onChange={field.handleChange}
-                        placeholder={field.placeholder ?? ''}
-                        value={field.value}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                  {field.type == FieldType.NUMBER && (
-                    <div className="pb-10">
-                      <NumberField
-                        type={field.type}
-                        name={field.key}
-                        label={field.label}
-                        placeholder={field.placeholder ?? ''}
-                        onChange={debounce(field.handleChange, 300)}
-                        value={field.value}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                  {field.type == FieldType.STRING && (
-                    <div className="pb-10">
-                      <TextField
-                        type={field.type}
-                        name={field.key}
-                        label={field.label}
-                        placeholder={field.placeholder ?? ''}
-                        onChange={debounce(field.handleChange, 300)}
-                        value={field.value}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                  {(field.type == FieldType.DROPDOWN ||
-                    field.type == FieldType.DROPDOWN_SEARCHABLE) && (
-                    <div className="pb-10">
-                      <FormSelect
-                        name={field.key}
-                        field={field}
-                        error={field.error}
-                        placeholder={getPlaceholderForSelect(field, tsln)}
-                        value={null}
-                      />
-                    </div>
-                  )}
-                  {(field.type == FieldType.RADIO ||
-                    field.type == FieldType.BOOLEAN) && (
-                    <div className="pb-10">
-                      <Radio
-                        name={field.key}
-                        checkedValue={field.value}
-                        values={
-                          field.type == 'boolean'
-                            ? [
-                                {
-                                  key: 'true',
-                                  text: tsln.yes,
-                                },
-                                {
-                                  key: 'false',
-                                  text: tsln.no,
-                                },
-                              ]
-                            : field.options
+            {form.fields.map(
+              (field: Instance<typeof FormField>, index: number) => {
+                const isChildQuestion =
+                  field.category.key == FieldCategory.PARTNER_DETAILS ||
+                  field.category.key == FieldCategory.SOCIAL_AGREEMENT
+                const styling = isChildQuestion
+                  ? `bg-emphasis px-10 pt-4 ${
+                      field.category.key == FieldCategory.SOCIAL_AGREEMENT
+                        ? ' mb-10'
+                        : ''
+                    }`
+                  : ``
+                const content = (
+                  <div key={field.key} className={styling}>
+                    {field.category.key != lastCategory && (
+                      <h2
+                        className={
+                          isChildQuestion
+                            ? 'h2 mb-8 text-content'
+                            : `h2 text-content ${index == 0 ? 'mb-8' : 'my-8'}`
                         }
-                        keyforid={field.key}
-                        label={field.label}
-                        onChange={field.handleChange}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                </div>
-              )
-              lastCategory = field.category.key
+                      >
+                        {field.category.text}
+                      </h2>
+                    )}
+                    {field.type == FieldType.CURRENCY && (
+                      <div className="pb-10">
+                        <CurrencyField
+                          type={field.type}
+                          name={field.key}
+                          label={field.label}
+                          onChange={field.handleChange}
+                          placeholder={field.placeholder ?? ''}
+                          value={field.value}
+                          error={field.error}
+                          required
+                        />
+                      </div>
+                    )}
+                    {field.type == FieldType.NUMBER && (
+                      <div className="pb-10">
+                        <NumberField
+                          type={field.type}
+                          name={field.key}
+                          label={field.label}
+                          placeholder={field.placeholder ?? ''}
+                          onChange={debounce(field.handleChange, 300)}
+                          value={field.value}
+                          error={field.error}
+                          required
+                        />
+                      </div>
+                    )}
+                    {field.type == FieldType.STRING && (
+                      <div className="pb-10">
+                        <TextField
+                          type={field.type}
+                          name={field.key}
+                          label={field.label}
+                          placeholder={field.placeholder ?? ''}
+                          onChange={debounce(field.handleChange, 300)}
+                          value={field.value}
+                          error={field.error}
+                          required
+                        />
+                      </div>
+                    )}
+                    {(field.type == FieldType.DROPDOWN ||
+                      field.type == FieldType.DROPDOWN_SEARCHABLE) && (
+                      <div className="pb-10">
+                        <FormSelect
+                          name={field.key}
+                          field={field}
+                          error={field.error}
+                          placeholder={getPlaceholderForSelect(field, tsln)}
+                          value={null}
+                        />
+                      </div>
+                    )}
+                    {(field.type == FieldType.RADIO ||
+                      field.type == FieldType.BOOLEAN) && (
+                      <div className="pb-10">
+                        <Radio
+                          name={field.key}
+                          checkedValue={field.value}
+                          values={
+                            field.type == 'boolean'
+                              ? [
+                                  {
+                                    key: 'true',
+                                    text: tsln.yes,
+                                  },
+                                  {
+                                    key: 'false',
+                                    text: tsln.no,
+                                  },
+                                ]
+                              : field.options
+                          }
+                          keyforid={field.key}
+                          label={field.label}
+                          onChange={field.handleChange}
+                          error={field.error}
+                          required
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
+                lastCategory = field.category.key
 
-              return content
-            })}
+                return content
+              }
+            )}
 
             <FormButtons incomeTooHigh={incomeTooHigh} />
           </form>

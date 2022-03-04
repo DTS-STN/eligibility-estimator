@@ -36,22 +36,25 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
 
     return (
       <div>
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="currency-input-label"
-          className="text-content font-bold inline-block mb-2.5"
-        >
-          {required && <span className="text-danger">*</span>} {label}
+        <div className="mb-2.5">
+          <label
+            htmlFor={name}
+            aria-label={name}
+            data-testid="currency-input-label"
+            className="text-content font-bold inline"
+          >
+            {required && <span className="text-danger">*</span>} {label}
+          </label>
           <span>
             {required && (
-              <span className="text-danger ml-1">({requiredText})</span>
+              <span className="font-bold text-danger ml-1">
+                ({requiredText})
+              </span>
             )}
             <Tooltip field={name} />
           </span>
-        </label>
+        </div>
         {error && <ErrorLabel errorMessage={error} />}
-
         <NumberFormat
           id={name}
           name={name}

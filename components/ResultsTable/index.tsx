@@ -17,10 +17,10 @@ export const ResultsTable = observer(() => {
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   return (
-    <>
+    <div>
       <table className="hidden md:block text-left">
-        <thead className="font-bold text-content border-b border-content">
-          <tr className=" ">
+        <thead className="font-bold border-b border-content">
+          <tr>
             <th>{tsln.resultsPage.tableHeader1}</th>
             <th>{tsln.resultsPage.tableHeader2}</th>
             <th className="text-right min-w-[68px]">
@@ -142,6 +142,6 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   )
 })

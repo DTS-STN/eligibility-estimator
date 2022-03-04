@@ -32,6 +32,11 @@ export const Tooltip: React.FC<{
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keyup', handleEscPress)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keyup', handleEscPress)
+    }
   })
 
   const isMobile = useMediaQuery(992)

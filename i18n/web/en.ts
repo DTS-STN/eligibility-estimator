@@ -33,7 +33,7 @@ const en: WebTranslations = {
   getResults: 'Get Results',
   applyHeader: 'Apply for benefits',
   applyText:
-    'Now that you have estimated your benefits, please use the button(s) below to apply for your benefits.',
+    'Now that you have estimated your benefits, please use the button(s) below to apply.',
   required: 'required',
   homePageP1:
     'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
@@ -75,7 +75,7 @@ const en: WebTranslations = {
   },
 
   contactCTA:
-    'For a more accurate assessment, you are encouraged to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> and check out the <a className="underline text-default-text" href="#tabList">Frequently Asked Questions</a> on documents you may be required to provide.',
+    'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
@@ -84,7 +84,7 @@ const en: WebTranslations = {
   },
   nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
-  privacyDiscTitle: 'Privacy Notice',
+  privacyDiscTitle: 'Privacy notice',
   privacyDisc:
     'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
