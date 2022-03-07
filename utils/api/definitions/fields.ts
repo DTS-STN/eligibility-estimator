@@ -37,14 +37,12 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.INCOME_DETAILS },
     order: 1,
     type: FieldType.CURRENCY,
-    placeholder: '$20,000',
   },
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.PERSONAL_INFORMATION },
     order: 2,
     type: FieldType.NUMBER,
-    placeholder: '65',
   },
   [FieldKey.MARITAL_STATUS]: {
     key: FieldKey.MARITAL_STATUS,
@@ -85,7 +83,6 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.LEGAL_STATUS },
     order: 8,
     type: FieldType.NUMBER,
-    placeholder: '40',
   },
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
@@ -107,7 +104,6 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.PARTNER_DETAILS },
     order: 11,
     type: FieldType.CURRENCY,
-    placeholder: '$20,000',
   },
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,
@@ -115,7 +111,6 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.PARTNER_DETAILS },
     order: 12,
     type: FieldType.NUMBER,
-    placeholder: '65',
   },
   [FieldKey.PARTNER_LIVING_COUNTRY]: {
     key: FieldKey.PARTNER_LIVING_COUNTRY,

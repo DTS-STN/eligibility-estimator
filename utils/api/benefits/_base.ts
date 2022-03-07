@@ -35,8 +35,4 @@ export abstract class BaseBenefit {
   protected getEntitlement(): EntitlementResult {
     return undefined
   }
-
-  protected roundToTwo(num: number): number {
-    return Math.round((num + Number.EPSILON) * 100) / 100
-  }
 }

@@ -21,19 +21,12 @@ export const ResultsPage: React.VFC = () => {
   useEffect(() => {
     const html = document.getElementsByTagName('html')[0]
     html.setAttribute('style', 'scroll-behavior: smooth;')
-
     if (process.browser) {
-      const results = document.getElementById('elig-results')
-      if (results) {
-        const componentInViewport = isElementInViewport(
-          results as HTMLDivElement
-        )
-        if (!componentInViewport) {
-          results.scrollIntoView(true)
-        }
-      }
-      html.removeAttribute('style')
+      const tabs = document.getElementById('tabList') as HTMLDivElement
+      const tabsVisible = isElementInViewport(tabs)
+      if (!tabsVisible) tabs.scrollIntoView(true)
     }
+    html.removeAttribute('style')
   })
 
   return (

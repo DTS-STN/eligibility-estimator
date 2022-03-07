@@ -24,10 +24,8 @@ export enum LegalStatus {
 }
 
 export enum PartnerBenefitStatus {
-  FULL_OAS = 'fullOas',
-  FULL_OAS_GIS = 'fullOasGis',
-  PARTIAL_OAS = 'partialOas',
-  PARTIAL_OAS_GIS = 'partialOasGis',
+  OAS = 'oas',
+  OAS_GIS = 'oasGis',
   ALW = 'alw',
   NONE = 'none',
   HELP_ME = 'helpMe',
@@ -44,6 +42,7 @@ export enum EntitlementResultType {
   NONE = 'none',
   FULL = 'full',
   PARTIAL = 'partial', // oas only
+  PARTIAL_OR_FULL = 'partialOrFull', // oas only
   UNAVAILABLE = 'unavailable', // for example when gis unavailable due to partial oas
 }
 

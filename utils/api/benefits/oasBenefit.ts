@@ -9,6 +9,7 @@ import {
   EntitlementResult,
   ProcessedInput,
 } from '../definitions/types'
+import roundToTwo from '../helpers/roundToTwo'
 import { legalValues } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
@@ -128,7 +129,7 @@ export class OasBenefit extends BaseBenefit {
   }
 
   private getEntitlementAmount(): number {
-    return this.roundToTwo(
+    return roundToTwo(
       Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
         legalValues.MAX_OAS_ENTITLEMENT
     )

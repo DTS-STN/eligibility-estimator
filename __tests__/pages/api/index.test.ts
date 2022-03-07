@@ -4,6 +4,7 @@ import fs from 'fs'
 import Joi from 'joi'
 import YAML from 'yaml'
 import { getTranslations, Translations } from '../../../i18n/api'
+import { BenefitHandler } from '../../../utils/api/benefitHandler'
 import { countryList } from '../../../utils/api/definitions/countries'
 import {
   EntitlementResultType,
@@ -22,7 +23,6 @@ import {
   FieldKey,
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
-import { RequestHandler } from '../../../utils/api/helpers/requestHandler'
 import { OutputItem } from '../../../utils/api/scrapers/_baseTable'
 import { legalValues, scraperData } from '../../../utils/api/scrapers/output'
 import {
@@ -56,10 +56,10 @@ describe('translation checks', () => {
 
 describe('country checks', () => {
   const COUNTRY_COUNT = 195
-  const handlerEn = new RequestHandler({ _language: Language.EN })
+  const handlerEn = new BenefitHandler({ _language: Language.EN })
   handlerEn.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataEn = handlerEn.fieldData as Array<FieldDataDropdown>
-  const handlerFr = new RequestHandler({ _language: Language.FR })
+  const handlerFr = new BenefitHandler({ _language: Language.FR })
   handlerFr.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataFr = handlerFr.fieldData as Array<FieldDataDropdown>
   it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {
@@ -547,7 +547,7 @@ describe('field requirement analysis', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 5,
       everLivedSocialCountry: true,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: undefined,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -582,7 +582,7 @@ describe('field requirement analysis', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 5,
       everLivedSocialCountry: true,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -756,7 +756,7 @@ describe('summary object checks', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -780,7 +780,7 @@ describe('summary object checks', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -804,7 +804,7 @@ describe('summary object checks', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1471,7 +1471,7 @@ describe('basic GIS scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1496,7 +1496,7 @@ describe('basic GIS scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 1000,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1521,7 +1521,7 @@ describe('basic GIS scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1533,9 +1533,9 @@ describe('basic GIS scenarios', () => {
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
   })
-  it('returns "eligible" when married and partner partial OAS and income under 46656 and partner income 0', async () => {
+  it('returns "ineligible" when married and partner partial OAS and income equal to 25728 and partner income 0', async () => {
     const res = await mockGetRequest({
-      income: 46655,
+      income: 25728,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -1544,7 +1544,7 @@ describe('basic GIS scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.PARTIAL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1553,8 +1553,10 @@ describe('basic GIS scenarios', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
   })
 })
 
@@ -1583,29 +1585,6 @@ describe('GIS entitlement scenarios', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.results.gis.entitlement.result).toEqual(0)
-  })
-  it('returns "-1" when single and 10000 income, only 20 years in Canada (Partial OAS)', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      legalStatusOther: undefined,
-      canadaWholeLife: false,
-      yearsInCanadaSince18: 20,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-    })
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(-1)
   })
   it('returns "$394.68" when single and 10000 income', async () => {
     const res = await mockGetRequest({
@@ -1733,7 +1712,7 @@ describe('GIS entitlement scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 1000,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1779,7 +1758,7 @@ describe('GIS entitlement scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1814,6 +1793,52 @@ describe('GIS entitlement scenarios', () => {
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.entitlement.result).toEqual(577.43)
   })
+  it('returns "$1239.38" when single and 1000 income, only 20 years in Canada (Partial OAS)', async () => {
+    const res = await mockGetRequest({
+      income: 1000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 20,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.entitlement.result).toEqual(1239.38)
+  })
+  it('returns "$1399.95" when single and 1000 income, only 10 years in Canada (Partial OAS)', async () => {
+    const res = await mockGetRequest({
+      income: 1000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 10,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.entitlement.result).toEqual(1399.95)
+  })
 })
 
 describe('basic Allowance scenarios', () => {
@@ -1828,7 +1853,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1863,7 +1888,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1888,7 +1913,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1915,7 +1940,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -1942,7 +1967,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2050,7 +2075,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2073,7 +2098,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2096,7 +2121,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2123,7 +2148,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2146,7 +2171,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2173,7 +2198,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2190,33 +2215,6 @@ describe('basic Allowance scenarios', () => {
 })
 
 describe('Allowance entitlement scenarios', () => {
-  it('returns "unavailable" when partner=partialOas', async () => {
-    const res = await mockGetRequest({
-      income: 20000,
-      age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      legalStatusOther: undefined,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.PARTIAL_OAS_GIS,
-      partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-    })
-    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.entitlement.result).toEqual(-1)
-    expect(res.body.results.alw.entitlement.type).toEqual(
-      EntitlementResultType.UNAVAILABLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
-  })
   it('returns "eligible for $334.33" when 40 years in Canada and income=20000', async () => {
     const res = await mockGetRequest({
       income: 20000,
@@ -2228,7 +2226,31 @@ describe('Allowance entitlement scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncome: 0,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.alw.entitlement.result).toEqual(334.33)
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+  })
+  it('returns "eligible for $334.33" when 40 years in Canada and income=20000 and partner=partialOas', async () => {
+    const res = await mockGetRequest({
+      income: 20000,
+      age: 60,
+      maritalStatus: MaritalStatus.MARRIED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatusOther: undefined,
+      canadaWholeLife: true,
+      yearsInCanadaSince18: undefined,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2252,7 +2274,7 @@ describe('Allowance entitlement scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2276,7 +2298,7 @@ describe('Allowance entitlement scenarios', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -2697,7 +2719,7 @@ describe('thorough personas', () => {
       canadaWholeLife: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: PartnerBenefitStatus.FULL_OAS_GIS,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
       partnerAge: undefined,
       partnerLivingCountry: undefined,
@@ -3071,9 +3093,9 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 3
   })
-  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table unavailable)`, async () => {
+  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
     const input = {
-      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
@@ -3103,13 +3125,13 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS - 1,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-    expect(res.body.results.gis.entitlement.result).toEqual(-1)
+    expect(res.body.results.gis.entitlement.result).toEqual(0.33) // table 2
   })
   it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
     const input = {

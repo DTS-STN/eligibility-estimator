@@ -36,24 +36,25 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
 
     return (
       <div>
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="currency-input-label"
-          className="text-content font-semibold inline-block mb-1.5"
-        >
-          {required && <span className="text-danger">*</span>} {label}
-          <div>
+        <div className="mb-2.5">
+          <label
+            htmlFor={name}
+            aria-label={name}
+            data-testid="currency-input-label"
+            className="text-content font-bold inline"
+          >
+            {required && <span className="text-danger">*</span>} {label}
+          </label>
+          <span>
             {required && (
-              <span className="text-danger font-semibold ml-2">
+              <span className="font-bold text-danger ml-1">
                 ({requiredText})
               </span>
             )}
             <Tooltip field={name} />
-          </div>
-        </label>
+          </span>
+        </div>
         {error && <ErrorLabel errorMessage={error} />}
-
         <NumberFormat
           id={name}
           name={name}
@@ -69,6 +70,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           onChange={onChange}
           required={required}
           autoComplete="off"
+          enterKeyHint="done"
         />
       </div>
     )

@@ -22,53 +22,53 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
   const requiredText = useTranslation<string>('required')
 
   return (
-    <>
-      <div className="radio">
+    <div className="radio">
+      <div className="mb-2.5">
         <label
           htmlFor={name}
           aria-label={name}
           data-testid="radio-label"
-          className="inline-block mb-2 flex-nowrap"
+          className="inline mb-2.5 flex-nowrap"
         >
           <span className="text-danger">* </span>
           <span
-            className="mb-1.5 text-content font-semibold question-link"
+            className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
-          <span className="text-danger font-semibold ml-2">
-            ({requiredText})
-          </span>
-          <Tooltip field={name} />
         </label>
-        {error && <ErrorLabel errorMessage={error} />}
-        {values.map((val, index) => (
-          <div
-            key={index}
-            className="flex items-center mb-2 md:mb-[12px] last:mb-0"
-          >
-            <input
-              type="radio"
-              data-testid="radio"
-              id={`${keyforid}-${index}`}
-              name={`${keyforid}`}
-              // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
-              className="opacity-0 -ml-4"
-              value={val.key}
-              onChange={onChange}
-              required
-              checked={checkedValue === correctForBooleans(val.key)}
-            />
-            <label
-              htmlFor={`${keyforid}-${index}`}
-              className="radio flex items-center"
-            >
-              <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
-              <p className="text-content ">{val.text}</p>
-            </label>
-          </div>
-        ))}
+        <span>
+          <span className="text-danger font-bold ml-1">({requiredText})</span>
+          <Tooltip field={name} />
+        </span>
       </div>
-    </>
+      {error && <ErrorLabel errorMessage={error} />}
+      {values.map((val, index) => (
+        <div
+          key={index}
+          className="flex items-center mb-2 md:mb-[12px] last:mb-0"
+        >
+          <input
+            type="radio"
+            data-testid="radio"
+            id={`${keyforid}-${index}`}
+            name={`${keyforid}`}
+            // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
+            className="opacity-0 -ml-4"
+            value={val.key}
+            onChange={onChange}
+            required
+            checked={checkedValue === correctForBooleans(val.key)}
+          />
+          <label
+            htmlFor={`${keyforid}-${index}`}
+            className="radio flex items-center"
+          >
+            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
+            <p className="text-content ">{val.text}</p>
+          </label>
+        </div>
+      ))}
+    </div>
   )
 })
 

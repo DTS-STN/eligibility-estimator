@@ -2,22 +2,23 @@ import {
   getTranslations,
   numberToStringCurrency,
   Translations,
-} from '../../../i18n/api'
-import { AfsBenefit } from '../benefits/afsBenefit'
-import { AlwBenefit } from '../benefits/alwBenefit'
-import { GisBenefit } from '../benefits/gisBenefit'
-import { OasBenefit } from '../benefits/oasBenefit'
+} from '../../i18n/api'
+import { AfsBenefit } from './benefits/afsBenefit'
+import { AlwBenefit } from './benefits/alwBenefit'
+import { GisBenefit } from './benefits/gisBenefit'
+import { OasBenefit } from './benefits/oasBenefit'
 import {
+  EntitlementResultType,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
-} from '../definitions/enums'
+} from './definitions/enums'
 import {
   FieldData,
   fieldDefinitions,
   FieldKey,
   FieldType,
-} from '../definitions/fields'
+} from './definitions/fields'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -26,18 +27,18 @@ import {
   ProcessedInputWithPartner,
   RequestInput,
   SummaryObject,
-} from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+} from './definitions/types'
 import {
   IncomeHelper,
   LegalStatusHelper,
   LivingCountryHelper,
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
-} from './fieldClasses'
-import { SummaryBuilder } from './summaryUtils'
+} from './helpers/fieldClasses'
+import { legalValues } from './scrapers/output'
+import { SummaryHandler } from './summaryHandler'
 
-export class RequestHandler {
+export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
   private _missingFields: FieldKey[]
@@ -103,8 +104,8 @@ export class RequestHandler {
 
   get summary(): SummaryObject {
     if (this._summary === undefined) {
-      this._summary = SummaryBuilder.buildSummaryObject(
-        this.input.client,
+      this._summary = SummaryHandler.buildSummaryObject(
+        this.input,
         this.benefitResults,
         this.missingFields,
         this.translations
@@ -227,7 +228,7 @@ export class RequestHandler {
       }
     }
 
-    requiredFields.sort(RequestHandler.sortFields)
+    requiredFields.sort(BenefitHandler.sortFields)
     return requiredFields
   }
 
@@ -239,7 +240,7 @@ export class RequestHandler {
     this.requiredFields.forEach((key) => {
       if (this.rawInput[key] === undefined) missingFields.push(key)
     })
-    missingFields.sort(RequestHandler.sortFields)
+    missingFields.sort(BenefitHandler.sortFields)
     return missingFields
   }
 
@@ -348,10 +349,23 @@ export class RequestHandler {
   /**
    * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
    * If the entitlement result provides a detailOverride, that will take precedence over the eligibility result's detail.
+   * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
     for (const key in this.benefitResults) {
       const result: BenefitResult = this.benefitResults[key]
+
+      // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
+      // this happens when high income results in no entitlement.
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.type === EntitlementResultType.NONE
+      ) {
+        result.eligibility.result = ResultKey.INELIGIBLE
+        result.eligibility.reason = ResultReason.INCOME
+      }
+
+      // start detail processing...
       const eligibilityText =
         this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
 
@@ -374,6 +388,7 @@ export class RequestHandler {
         `{LINK_MORE_REASONS_${key.toUpperCase()}}`
       )
 
+      // finish with detail processing
       result.eligibility.detail = `${eligibilityText}\n${usedDetailText}${ineligibilityTextWithBenefit}`
     }
   }

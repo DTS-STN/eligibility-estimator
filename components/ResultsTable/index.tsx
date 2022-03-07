@@ -17,10 +17,10 @@ export const ResultsTable = observer(() => {
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   return (
-    <>
+    <div>
       <table className="hidden md:block text-left">
-        <thead className="font-semibold text-content border-b border-content">
-          <tr className=" ">
+        <thead className="font-bold border-b border-content">
+          <tr>
             <th>{tsln.resultsPage.tableHeader1}</th>
             <th>{tsln.resultsPage.tableHeader2}</th>
             <th className="text-right min-w-[68px]">
@@ -70,7 +70,7 @@ export const ResultsTable = observer(() => {
               {numberToStringCurrency(root.afs.entitlement.result, locale)}
             </td>
           </tr>
-          <tr className="border-t border-content font-semibold ">
+          <tr className="border-t border-content font-bold ">
             <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
             <td className="text-right min-w-[68px]">
               {numberToStringCurrency(root.summary.entitlementSum, locale)}
@@ -80,7 +80,7 @@ export const ResultsTable = observer(() => {
       </table>
       <div className="block md:hidden">
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             {tsln.oas}
           </p>
           <p className="px-1.5 py-1.5">
@@ -93,7 +93,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             {tsln.gis}
           </p>
           <p className="px-1.5 py-1.5">
@@ -108,7 +108,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             {tsln.alw}
           </p>
           <p className="px-1.5 py-1.5">
@@ -121,7 +121,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             {tsln.afs}
           </p>
           <p className="px-1.5 py-1.5">
@@ -134,7 +134,7 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
         <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-semibold px-1.5 py-2 border-b border-muted">
+          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
             {tsln.resultsPage.tableTotalAmount}
           </p>
           <p className="px-1.5 py-1.5 font-bold">
@@ -142,6 +142,6 @@ export const ResultsTable = observer(() => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   )
 })

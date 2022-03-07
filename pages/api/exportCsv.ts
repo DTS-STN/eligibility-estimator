@@ -1,31 +1,22 @@
 import { createArrayCsvStringifier } from 'csv-writer'
-import Joi from 'joi'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { stripHtml } from 'string-strip-html'
-import { numberToStringCurrency } from '../../i18n/api'
+import { numberToStringCurrency, Translations } from '../../i18n/api'
 import { ResultKey } from '../../utils/api/definitions/enums'
-import { RequestSchema } from '../../utils/api/definitions/schemas'
 import {
-  BenefitResult,
-  RequestInput,
-  ResponseError,
-} from '../../utils/api/definitions/types'
-import { RequestHandler } from '../../utils/api/helpers/requestHandler'
+  fieldDefinitions,
+  FieldKey,
+  FieldType,
+} from '../../utils/api/definitions/fields'
+import { BenefitResult, ResponseError } from '../../utils/api/definitions/types'
+import MainHandler from '../../utils/api/mainHandler'
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<string | ResponseError>
 ) {
   try {
-    console.log(`Processing CSV request: `, req.query)
-
-    // validation
-    const requestInput: RequestInput = Joi.attempt(req.query, RequestSchema, {
-      abortEarly: false,
-    })
-
-    // processing
-    const handler = new RequestHandler(requestInput)
+    const handler = new MainHandler(req.query).handler
     const records: string[][] = []
     const csvTranslations = handler.translations.csv
     records.push([csvTranslations.appName])
@@ -35,10 +26,15 @@ export default function handler(
       [csvTranslations.formResponses],
       [csvTranslations.question, csvTranslations.answer]
     )
-    for (const value of handler.fieldData) {
-      let question = stripHtml(value.label).result
-      let response = handler.rawInput[value.key].toString()
-      records.push([question, response])
+    for (const field of handler.fieldData) {
+      let question = stripHtml(field.label).result
+      let response = handler.rawInput[field.key].toString()
+      let responseHuman = humanizeResponse(
+        response,
+        field.key,
+        handler.translations
+      )
+      records.push([question, responseHuman])
     }
 
     records.push(
@@ -84,5 +80,32 @@ export default function handler(
     })
     console.log(error)
     return
+  }
+}
+
+function humanizeResponse(
+  response: string,
+  fieldKey: FieldKey,
+  translations: Translations
+): string {
+  const questionType = fieldDefinitions[fieldKey].type
+  switch (questionType) {
+    case FieldType.BOOLEAN:
+      return response.toLowerCase() === 'false'
+        ? translations.no
+        : translations.yes
+    case FieldType.RADIO:
+    case FieldType.DROPDOWN:
+    case FieldType.DROPDOWN_SEARCHABLE:
+      const questionOptions = translations.questionOptions[fieldKey]
+      const foundOption = questionOptions.find(
+        (option) => option.key === response
+      )
+      return foundOption.text
+    case FieldType.CURRENCY:
+      return numberToStringCurrency(Number(response), translations._locale)
+    case FieldType.NUMBER:
+    case FieldType.STRING:
+      return response
   }
 }

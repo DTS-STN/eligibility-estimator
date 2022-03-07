@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom'
+import roundToTwo from '../helpers/roundToTwo'
 import { BaseScraper } from './_base'
 import { OutputItemAlw } from './tbl4PartneredAlwScraper'
 import { OutputItemAfs } from './tbl5PartneredAfsScraper'
@@ -17,19 +18,23 @@ export class TableScraper extends BaseScraper {
     const range = incomeRangeStr.split(' - ')
     const low = TableScraper.sanitizeFnStandard(range[0])
     const high = TableScraper.sanitizeFnStandard(range[1])
-    return { low, high }
+    const interval = roundToTwo(high - low + 0.01)
+    return { low, high, interval }
   }
 
-  getCellValue(row) {
-    const gisStr = row.children[1].textContent
+  getCellValue(row: Element, colNum: number): number {
+    const cell = row.children[colNum]
+    if (!cell) return undefined
+    const gisStr = cell.textContent
     return TableScraper.sanitizeFnStandard(gisStr)
   }
 
-  dataExtractor(row): OutputItem {
+  dataExtractor(row: Element): OutputItem {
     const incomeRangeStr = row.children[0].textContent
     return {
       range: this.getIncomeRange(incomeRangeStr),
-      gis: this.getCellValue(row),
+      gis: this.getCellValue(row, 1),
+      combinedOasGis: this.getCellValue(row, 2),
     }
   }
 
@@ -76,6 +81,7 @@ export class TableScraper extends BaseScraper {
 interface Range {
   low: number
   high: number
+  interval: number
 }
 
 export type OutputItem = OutputItemGis | OutputItemAlw | OutputItemAfs
@@ -86,4 +92,5 @@ export interface OutputItemGeneric {
 
 export interface OutputItemGis extends OutputItemGeneric {
   gis: number
+  combinedOasGis: number
 }

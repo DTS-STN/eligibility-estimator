@@ -32,6 +32,11 @@ export const Tooltip: React.FC<{
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keyup', handleEscPress)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keyup', handleEscPress)
+    }
   })
 
   const isMobile = useMediaQuery(992)
@@ -62,13 +67,11 @@ export const Tooltip: React.FC<{
               ? 'fixed inset-0 flex items-center justify-center'
               : ''
             : 'hidden'
-        } z-50`}
+        } z-50 m-2.5`}
         tabIndex={-1}
       >
         <div
-          className={`${
-            isMobile ? 'max-w-[525px]' : 'max-w-[600px]'
-          } shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
+          className={`w-full md:w-auto max-w-[440px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
             isMobile ? '' : 'relative -top-10 left-10'
           } z-40`}
         >
