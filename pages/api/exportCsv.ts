@@ -4,8 +4,8 @@ import { stripHtml } from 'string-strip-html'
 import { numberToStringCurrency, Translations } from '../../i18n/api'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import {
+  FieldData,
   fieldDefinitions,
-  FieldKey,
   FieldType,
 } from '../../utils/api/definitions/fields'
 import { BenefitResult, ResponseError } from '../../utils/api/definitions/types'
@@ -31,7 +31,7 @@ export default function handler(
       let response = handler.rawInput[field.key].toString()
       let responseHuman = humanizeResponse(
         response,
-        field.key,
+        field,
         handler.translations
       )
       records.push([question, responseHuman])
@@ -85,10 +85,10 @@ export default function handler(
 
 function humanizeResponse(
   response: string,
-  fieldKey: FieldKey,
+  field: FieldData,
   translations: Translations
 ): string {
-  const questionType = fieldDefinitions[fieldKey].type
+  const questionType = fieldDefinitions[field.key].type
   switch (questionType) {
     case FieldType.BOOLEAN:
       return response.toLowerCase() === 'false'
@@ -97,7 +97,10 @@ function humanizeResponse(
     case FieldType.RADIO:
     case FieldType.DROPDOWN:
     case FieldType.DROPDOWN_SEARCHABLE:
-      const questionOptions = translations.questionOptions[fieldKey]
+      let questionOptions = translations.questionOptions[field.key]
+      if (!questionOptions)
+        questionOptions = translations.questionOptions[field.relatedKey]
+      if (!questionOptions) return 'UNKNOWN'
       const foundOption = questionOptions.find(
         (option) => option.key === response
       )
