@@ -479,13 +479,13 @@ const en: Translations = {
       location: LinkLocation.RESULTS_APPLY,
     },
     alwApply: {
-      text: 'Apply for Allowance',
+      text: 'Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
       order: 21,
       location: LinkLocation.RESULTS_APPLY,
     },
     afsApply: {
-      text: 'Apply for Allowance for the Survivor',
+      text: 'Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
       order: 22,
       location: LinkLocation.RESULTS_APPLY,
