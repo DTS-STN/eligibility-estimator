@@ -375,7 +375,7 @@ const fr: Translations = {
     },
     oasOverview: {
       text: 'Pension de la Sécurité de vieillesse: Aperçu',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.ht',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
       order: 2,
       location: LinkLocation.STANDARD,
     },
@@ -399,7 +399,7 @@ const fr: Translations = {
     },
     oasMaxIncome: {
       text: 'Pension de la Sécurité de vieillesse: Revenu Maximum',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html',
       order: 6,
       location: LinkLocation.STANDARD,
     },
@@ -447,13 +447,13 @@ const fr: Translations = {
     },
     outsideCanadaOas: {
       text: 'Personnes vivant à l’étranger: Pension de la Sécurité de vieillesse',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.htm',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.html',
       order: 14,
       location: LinkLocation.RESULTS_ONLY,
     },
     oasPartial: {
       text: 'Pension de la Sécurité de vieillesse: Moins de 40 ans au Canada',
-      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.htm#h2.3-3.1',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.3-3.1',
       order: 15,
       location: LinkLocation.RESULTS_ONLY,
     },
@@ -476,7 +476,7 @@ const fr: Translations = {
       location: LinkLocation.RESULTS_ONLY,
     },
     oasApply: {
-      text: 'Sécurité de la vieillesse',
+      text: 'Pension de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
       order: 19,
       location: LinkLocation.RESULTS_APPLY,
@@ -488,13 +488,13 @@ const fr: Translations = {
       location: LinkLocation.RESULTS_APPLY,
     },
     alwApply: {
-      text: "Présenter une demande d'allocation",
+      text: 'Allocation',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
       order: 21,
       location: LinkLocation.RESULTS_APPLY,
     },
     afsApply: {
-      text: "Présenter une demande d'allocation au survivant",
+      text: 'Allocation au survivant',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
       order: 22,
       location: LinkLocation.RESULTS_APPLY,
