@@ -161,7 +161,6 @@ export const Form = types
     buildObjectWithFormData(): { [key: string]: string } {
       const parent = getParent(self) as Instance<typeof RootStore>
       let input = { _language: parent.lang }
-      if (!self.getFieldByKey(FieldKey.INCOME).filled) return input // guard against income being empty
       for (const field of self.fields) {
         if (!field.value) continue
         input[field.key] = field.sanitizeInput()
@@ -172,7 +171,6 @@ export const Form = types
     buildQueryStringWithFormData(): string {
       const parent = getParent(self) as Instance<typeof RootStore>
       let qs = `_language=${parent.lang}`
-      if (!self.getFieldByKey(FieldKey.INCOME).filled) return qs // guard against income being empty
       for (const field of self.fields) {
         if (!field.value) continue
         qs += `&${field.key}=${fixedEncodeURIComponent(field.sanitizeInput())}`

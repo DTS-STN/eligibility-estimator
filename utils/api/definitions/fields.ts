@@ -32,63 +32,63 @@ export enum FieldType {
 }
 
 export const fieldDefinitions: FieldDefinitions = {
-  [FieldKey.INCOME]: {
-    key: FieldKey.INCOME,
-    category: { key: FieldCategory.INCOME_DETAILS },
-    order: 1,
-    type: FieldType.CURRENCY,
-  },
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 2,
+    order: 1,
     type: FieldType.NUMBER,
-  },
-  [FieldKey.MARITAL_STATUS]: {
-    key: FieldKey.MARITAL_STATUS,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 3,
-    type: FieldType.RADIO,
-    default: undefined,
   },
   [FieldKey.LIVING_COUNTRY]: {
     key: FieldKey.LIVING_COUNTRY,
-    category: { key: FieldCategory.LEGAL_STATUS },
-    order: 4,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 2,
     type: FieldType.DROPDOWN_SEARCHABLE,
     default: { key: 'CAN', text: 'Canada' },
   },
   [FieldKey.LEGAL_STATUS]: {
     key: FieldKey.LEGAL_STATUS,
-    category: { key: FieldCategory.LEGAL_STATUS },
-    order: 5,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 3,
     type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.LEGAL_STATUS_OTHER]: {
     key: FieldKey.LEGAL_STATUS_OTHER,
-    category: { key: FieldCategory.LEGAL_STATUS },
-    order: 6,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 4,
     type: FieldType.STRING,
     placeholder: undefined,
   },
   [FieldKey.CANADA_WHOLE_LIFE]: {
     key: FieldKey.CANADA_WHOLE_LIFE,
-    category: { key: FieldCategory.LEGAL_STATUS },
-    order: 7,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 5,
     type: FieldType.BOOLEAN,
   },
   [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
-    category: { key: FieldCategory.LEGAL_STATUS },
-    order: 8,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 6,
     type: FieldType.NUMBER,
   },
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-    category: { key: FieldCategory.SOCIAL_AGREEMENT },
-    order: 9,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 7,
     type: FieldType.BOOLEAN,
+    default: undefined,
+  },
+  [FieldKey.INCOME]: {
+    key: FieldKey.INCOME,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 8,
+    type: FieldType.CURRENCY,
+  },
+  [FieldKey.MARITAL_STATUS]: {
+    key: FieldKey.MARITAL_STATUS,
+    category: { key: FieldCategory.PERSONAL_INFORMATION },
+    order: 9,
+    type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.PARTNER_BENEFIT_STATUS]: {
@@ -97,13 +97,6 @@ export const fieldDefinitions: FieldDefinitions = {
     order: 10,
     type: FieldType.RADIO,
     default: undefined,
-  },
-  [FieldKey.PARTNER_INCOME]: {
-    key: FieldKey.PARTNER_INCOME,
-    relatedKey: FieldKey.INCOME,
-    category: { key: FieldCategory.PARTNER_DETAILS },
-    order: 11,
-    type: FieldType.CURRENCY,
   },
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,
@@ -145,10 +138,17 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
-    category: { key: FieldCategory.SOCIAL_AGREEMENT },
+    category: { key: FieldCategory.PARTNER_DETAILS },
     order: 17,
     type: FieldType.BOOLEAN,
     default: undefined,
+  },
+  [FieldKey.PARTNER_INCOME]: {
+    key: FieldKey.PARTNER_INCOME,
+    relatedKey: FieldKey.INCOME,
+    category: { key: FieldCategory.PARTNER_DETAILS },
+    order: 11,
+    type: FieldType.CURRENCY,
   },
 }
 
