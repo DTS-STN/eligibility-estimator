@@ -48,9 +48,8 @@ export const Layout: React.VFC<{
           <div className="sm:container mx-auto flex flex-col mb-16">
             <Breadcrumbs
               items={[
-                tsln.breadcrumb1Title,
-                tsln.breadcrumb2Title,
-                tsln.breadcrumb3Title,
+                { title: tsln.breadcrumb1Title, link: '#' },
+                { title: tsln.breadcrumb2Title, link: '#' },
               ]}
             />
             <h1 className="h1 mt-10 mb-8">{tsln.title}</h1>

@@ -2,13 +2,13 @@ import Link from 'next/link'
 import React from 'react'
 
 export const BreadcrumbItem: React.VFC<{
-  breadcrumb: string
+  breadcrumb: { title: string; link: string }
   showDelimiter: boolean
 }> = ({ breadcrumb, showDelimiter }) => (
   <li className={`inline-flex items-center`}>
-    <Link href="/" passHref>
+    <Link href={breadcrumb.link} passHref>
       <a className="text-sm text-primary underline inline-flex items-center dark:text-gray-400 dark:hover:text-white ">
-        {breadcrumb}
+        {breadcrumb.title}
       </a>
     </Link>
     {showDelimiter && (
