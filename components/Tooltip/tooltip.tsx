@@ -30,8 +30,18 @@ export const Tooltip: React.FC<{
   }
 
   useEffect(() => {
+    const body = document.getElementsByTagName('body')[0]
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keyup', handleEscPress)
+
+    // stop the main content from scrolling when the tooltip is open
+    if (isMobile) {
+      if (show) {
+        body.style.overflowY = 'hidden'
+      } else {
+        body.style.overflowY = 'auto'
+      }
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
@@ -109,7 +119,7 @@ export const Tooltip: React.FC<{
           </header>
 
           <p
-            className="font-normal p-5 max-h-[700px] overflow-y-auto md:max-h-[100%] md:overflow-y-hidden"
+            className="font-normal p-5 overflow-y-auto max-h-[75vh] md:max-h-[100%] md:overflow-y-hidden"
             dangerouslySetInnerHTML={{ __html: tooltipData.text }}
           />
         </div>
