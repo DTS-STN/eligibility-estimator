@@ -4,4 +4,8 @@ module.exports = {
     defaultLocale: 'en',
   },
   reactStrictMode: true,
+  experimental: {
+    // https://nextjs.org/docs/advanced-features/output-file-tracing
+    outputStandalone: true,
+  },
 }
