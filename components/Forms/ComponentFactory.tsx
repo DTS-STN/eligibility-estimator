@@ -10,7 +10,6 @@ import { WebTranslations } from '../../i18n/web'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
-import { Alert } from '../Alert'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { CurrencyField } from './CurrencyField'
@@ -73,15 +72,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     return (
       <>
-        {incomeTooHigh && (
-          <Alert
-            title={root.summary.title}
-            type={root.summary.state}
-            insertHTML
-          >
-            {root.summary.details}
-          </Alert>
-        )}
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
           <form
             name="ee-form"
