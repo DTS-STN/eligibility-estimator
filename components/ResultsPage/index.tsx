@@ -2,11 +2,11 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { Alert } from '../Alert'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
 import { DownloadCSVButton } from '../DownloadCSVButton'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
+import { NeedHelpList } from '../Layout/NeedHelpList'
 import { ResultsTable } from '../ResultsTable'
 
 export const ResultsPage: React.VFC = () => {
@@ -30,52 +30,42 @@ export const ResultsPage: React.VFC = () => {
   })
 
   return (
-    <div className="flex flex-col space-y-12" ref={ref}>
-      {isMobile && <DownloadCSVButton />}
-      {root.summary.state &&
-      root.summary.state !== EstimationSummaryState.MORE_INFO ? (
-        <>
-          <Alert
-            id="elig-results"
-            title={root.summary.title}
-            type={root.summary.state}
-            insertHTML
-          >
-            {root.summary.details}
-          </Alert>
-          {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-            <div
-              className={`mt-10 w-full relative ${
-                !isMobile ? 'h-[450px]' : 'h-[180px]'
-              }`}
-            >
-              <Image
-                src={'/people.png'}
-                layout="fill"
-                alt={tsln.unavailableImageAltText}
-              />
+    <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-14">
+      <div className="flex flex-col space-y-12 md:col-span-2" ref={ref}>
+        {isMobile && <DownloadCSVButton />}
+        {root.summary.state &&
+          root.summary.state !== EstimationSummaryState.MORE_INFO && (
+            <div className="">
+              {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
+                <div
+                  className={`mt-10 w-full relative ${
+                    !isMobile ? 'h-[450px]' : 'h-[180px]'
+                  }`}
+                >
+                  <Image
+                    src={'/people.png'}
+                    layout="fill"
+                    alt={tsln.unavailableImageAltText}
+                  />
+                </div>
+              ) : (
+                <ResultsTable />
+              )}
+              {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
+                <ContactCTA />
+              )}
+              {root.summary?.moreInfoLinks?.length && (
+                <ConditionalLinks links={root.summary.moreInfoLinks} />
+              )}
             </div>
-          ) : (
-            <ResultsTable />
           )}
-          {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
-            <ContactCTA />
-          )}
-          {root.summary?.moreInfoLinks?.length && (
-            <ConditionalLinks links={root.summary.moreInfoLinks} />
-          )}
-        </>
-      ) : (
-        <div className="w-full">
-          <Alert
-            title={root.summary.title}
-            type={EstimationSummaryState.MORE_INFO}
-            insertHTML
-          >
-            {root.summary.details}
-          </Alert>
-        </div>
-      )}
+      </div>
+      <div className="md:col-span-1">
+        <NeedHelpList
+          title={tsln.needHelp}
+          links={root.summary.needHelpLinks}
+        />
+      </div>
     </div>
   )
 }
