@@ -43,8 +43,6 @@ Because of react's form issues, mobx-state-tree and mobx-react were used to only
 
 You may come across `observer` components, which will observe to the mobx data in the form and only re-render a component if it needs to instead of react's default re-rendering scheme where the parent and all children are automatically re-rendered.
 
-### Testing
-
 ### File Structure
 
 Below you'll find the file structure as it pertains to the front end.
