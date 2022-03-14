@@ -93,7 +93,7 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_BENEFIT_STATUS]: {
     key: FieldKey.PARTNER_BENEFIT_STATUS,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 10,
     type: FieldType.RADIO,
     default: undefined,
@@ -101,14 +101,14 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 12,
     type: FieldType.NUMBER,
   },
   [FieldKey.PARTNER_LIVING_COUNTRY]: {
     key: FieldKey.PARTNER_LIVING_COUNTRY,
     relatedKey: FieldKey.LIVING_COUNTRY,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 13,
     type: FieldType.DROPDOWN_SEARCHABLE,
     default: { key: 'CAN', text: 'Canada' },
@@ -116,7 +116,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
     relatedKey: FieldKey.LEGAL_STATUS,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 14,
     type: FieldType.RADIO,
     default: undefined,
@@ -124,21 +124,21 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_CANADA_WHOLE_LIFE]: {
     key: FieldKey.PARTNER_CANADA_WHOLE_LIFE,
     relatedKey: FieldKey.CANADA_WHOLE_LIFE,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 15,
     type: FieldType.BOOLEAN,
   },
   [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_18,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 16,
     type: FieldType.NUMBER,
     placeholder: '40',
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 17,
     type: FieldType.BOOLEAN,
     default: undefined,
@@ -146,7 +146,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_INCOME]: {
     key: FieldKey.PARTNER_INCOME,
     relatedKey: FieldKey.INCOME,
-    category: { key: FieldCategory.PARTNER_DETAILS },
+    category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 11,
     type: FieldType.CURRENCY,
   },

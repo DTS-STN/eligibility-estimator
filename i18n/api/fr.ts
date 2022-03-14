@@ -17,11 +17,8 @@ const fr: Translations = {
     afs: 'Allocation au survivant',
   },
   category: {
-    incomeDetails: 'Revenu',
-    personalInformation: 'Renseignements personnels',
-    partnerDetails: 'Renseignements sur votre conjoint',
-    legalStatus: 'Statut légal',
-    socialAgreement: "Pays de l'accords de sécurité sociale",
+    personalInformation: 'Vos renseignements',
+    partnerInformation: 'Les renseignements de votre conjoint',
   },
   result: {
     eligible: 'Admissible',

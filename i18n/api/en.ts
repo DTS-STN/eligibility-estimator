@@ -15,11 +15,8 @@ const en: Translations = {
     afs: 'Allowance for the Survivor',
   },
   category: {
-    incomeDetails: 'Income details',
-    personalInformation: 'Personal information',
-    partnerDetails: "Partner's information",
-    legalStatus: 'Legal status',
-    socialAgreement: 'Social Agreement Countries',
+    personalInformation: 'Your information',
+    partnerInformation: "Your partner's information",
   },
   result: {
     eligible: 'Eligible',
