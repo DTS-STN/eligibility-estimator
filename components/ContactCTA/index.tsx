@@ -1,9 +1,11 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useLayoutEffect } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useStore, useTranslation } from '../Hooks'
 
 export const ContactCTA: React.VFC = () => {
+  const router = useRouter()
   const root = useStore()
   const tsln = useTranslation<WebTranslations>()
 
@@ -39,7 +41,7 @@ export const ContactCTA: React.VFC = () => {
               )}
               <Link key={index} href={link.url} passHref>
                 <a
-                  className="btn btn-primary !mt-5 whitespace-normal md:whitespace-nowrap md:min-w-min md:px-8 md:max-w-[400px]"
+                  className="btn btn-primary !mt-5 whitespace-normal md:whitespace-nowrap md:px-8 md:max-w-[400px]"
                   target="_blank"
                 >
                   {link.text}
@@ -47,6 +49,12 @@ export const ContactCTA: React.VFC = () => {
               </Link>
             </>
           ))}
+          <button
+            className="btn btn-default md:w-48 mt-6"
+            onClick={(e) => router.push('/eligibility')}
+          >
+            Modify answers
+          </button>
         </div>
       )}
     </>

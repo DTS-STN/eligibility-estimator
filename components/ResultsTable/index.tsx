@@ -16,6 +16,7 @@ export const ResultsTable = observer(() => {
 
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
+  // Send the details and eligibility results seperately and create a new column
   return (
     <div>
       <table className="hidden md:block text-left">
