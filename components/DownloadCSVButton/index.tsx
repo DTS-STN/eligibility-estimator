@@ -4,7 +4,8 @@ import { useStore, useTranslation } from '../Hooks'
 
 export const DownloadCSVButton = () => {
   const form = useStore().form
-  const disabled = form.emptyFields.length > 0
+  // const disabled = form.emptyFields.length > 0
+  const disabled = true // force disable for now
   const saveToCsv = useTranslation<WebTranslations>('saveToCsv')
 
   if (disabled) {
