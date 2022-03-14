@@ -79,7 +79,7 @@ export type WebTranslations = {
   }
   nextSteps: string
   moreInfoHeader: string
-
+  modifyAnswers: string
   errors: {
     empty: string
   }

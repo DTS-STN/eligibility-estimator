@@ -81,6 +81,7 @@ const en: WebTranslations = {
   contactCTA:
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
+    header: 'Estimation results',
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
     tableHeader3: 'Estimated monthly amount (CAD)',
@@ -88,6 +89,7 @@ const en: WebTranslations = {
   },
   nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
+  modifyAnswers: 'Modify Answers',
   privacyDiscTitle: 'Privacy notice',
   privacyDisc:
     'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',

@@ -19,6 +19,7 @@ export const ResultsTable = observer(() => {
   // Send the details and eligibility results seperately and create a new column
   return (
     <div>
+      <h3 className="h3 mb-5">{tsln.resultsPage.header}</h3>
       <table className="hidden md:block text-left">
         <thead className="font-bold border-b border-content">
           <tr>

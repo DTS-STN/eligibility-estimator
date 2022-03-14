@@ -2,10 +2,8 @@ import Image from 'next/image'
 import { useEffect, useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { Alert } from '../Alert'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
-import { DownloadCSVButton } from '../DownloadCSVButton'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { ResultsTable } from '../ResultsTable'
@@ -30,7 +28,7 @@ export const ResultsPage: React.VFC = () => {
     html.removeAttribute('style')
   })
 
-  // TODO: No mobile designs yet, where does Need Help go?
+  // TODO: No mobile designs yet, where does Need Help go on mobile?
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
@@ -45,43 +43,32 @@ export const ResultsPage: React.VFC = () => {
           />
         </div>
       </div>
-      {isMobile && <DownloadCSVButton />}
       {root.summary.state &&
-      root.summary.state !== EstimationSummaryState.MORE_INFO ? (
-        <>
-          {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-            <div
-              className={`mt-10 w-full relative ${
-                !isMobile ? 'h-[450px]' : 'h-[180px]'
-              }`}
-            >
-              <Image
-                src={'/people.png'}
-                layout="fill"
-                alt={tsln.unavailableImageAltText}
-              />
-            </div>
-          ) : (
-            <ResultsTable />
-          )}
-          {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
-            <ContactCTA />
-          )}
-          {root.summary?.moreInfoLinks?.length && (
-            <ConditionalLinks links={root.summary.moreInfoLinks} />
-          )}
-        </>
-      ) : (
-        <div className="w-full">
-          <Alert
-            title={root.summary.title}
-            type={EstimationSummaryState.MORE_INFO}
-            insertHTML
-          >
-            {root.summary.details}
-          </Alert>
-        </div>
-      )}
+        root.summary.state !== EstimationSummaryState.MORE_INFO && (
+          <>
+            {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
+              <div
+                className={`mt-10 w-full relative ${
+                  !isMobile ? 'h-[450px]' : 'h-[180px]'
+                }`}
+              >
+                <Image
+                  src={'/people.png'}
+                  layout="fill"
+                  alt={tsln.unavailableImageAltText}
+                />
+              </div>
+            ) : (
+              <ResultsTable />
+            )}
+            {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
+              <ContactCTA />
+            )}
+            {root.summary?.moreInfoLinks?.length && (
+              <ConditionalLinks links={root.summary.moreInfoLinks} />
+            )}
+          </>
+        )}
     </div>
   )
 }

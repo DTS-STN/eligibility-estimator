@@ -81,6 +81,7 @@ const fr: WebTranslations = {
   contactCTA:
     'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
+    header: "Résultats de l'estimation",
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
     tableHeader3: 'Montant mensuel estimé (CAD)',
@@ -88,6 +89,7 @@ const fr: WebTranslations = {
   },
   nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
+  modifyAnswers: 'Modifier vos réponses',
   privacyDiscTitle: 'Avis de confidentialité',
   privacyDisc:
     "Les renseignements personnels fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
