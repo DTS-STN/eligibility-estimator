@@ -43,6 +43,8 @@ export const ContactCTA: React.VFC = () => {
                 <a
                   className="btn btn-primary !mt-5 whitespace-normal md:whitespace-nowrap md:px-8 md:max-w-[400px]"
                   target="_blank"
+                  role="navigation"
+                  aria-label={link.text} // TODO: Are we making the Apply for change? If not can delete
                 >
                   {link.text}
                 </a>
