@@ -30,19 +30,13 @@ export const Tooltip: React.FC<{
   }
 
   useEffect(() => {
+    // stop the main content from scrolling when the tooltip is open
     const body = document.getElementsByTagName('body')[0]
+    if (isMobile) body.style.overflowY = show ? 'hidden' : 'auto'
+
+    // handles closing tooltip via Esc or ClickOutside
     document.addEventListener('mousedown', handleClickOutside)
     document.addEventListener('keyup', handleEscPress)
-
-    // stop the main content from scrolling when the tooltip is open
-    if (isMobile) {
-      if (show) {
-        body.style.overflowY = 'hidden'
-      } else {
-        body.style.overflowY = 'auto'
-      }
-    }
-
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('keyup', handleEscPress)
