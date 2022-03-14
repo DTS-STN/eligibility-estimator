@@ -30,6 +30,7 @@ export const ResultsPage: React.VFC = () => {
     html.removeAttribute('style')
   })
 
+  // TODO: No mobile designs yet, where does Need Help go?
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
