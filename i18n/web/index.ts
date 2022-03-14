@@ -39,8 +39,8 @@ export type WebTranslations = {
   applyHeader: string
   applyText: string
   required: string
+  homePageHeader1: string
   homePageP1: string
-  homePageP2: string
   homePageP3: string
   homePageP4: string
   homePageP5: string
