@@ -40,12 +40,13 @@ describe('test the mobx state tree nodes', () => {
   })
 
   function fillOutForm(form: Instance<typeof Form>) {
-    form.fields[0].setValue('20000') // income
-    form.fields[1].setValue('65') //age
-    form.fields[2].setValue(MaritalStatus.SINGLE)
-    form.fields[3].setValue(LivingCountry.CANADA)
-    form.fields[4].setValue(LegalStatus.CANADIAN_CITIZEN)
-    form.fields[5].setValue('true') // Lived in Canada whole life
+    // TODO: this should NOT use numbered indexes to fill the form, as that makes ordering changes cause tests to fail.
+    form.fields[0].setValue('65') //age
+    form.fields[1].setValue(LivingCountry.CANADA)
+    form.fields[2].setValue(LegalStatus.CANADIAN_CITIZEN)
+    form.fields[3].setValue('true') // Lived in Canada whole life
+    form.fields[4].setValue('20000') // income
+    form.fields[5].setValue(MaritalStatus.SINGLE)
   }
 
   async function instantiateFormFields() {
@@ -154,25 +155,12 @@ describe('test the mobx state tree nodes', () => {
     expect(form.validateAgainstEmptyFields('en')).toBe(true)
   })
 
-  it('can report on the forms progress', async () => {
-    const res = await instantiateFormFields()
-    const form: Instance<typeof Form> = root.form
-    form.setupForm(res.body.fieldData)
-    expect(form.progress.income).toBe(false)
-    expect(form.progress.personal).toBe(false)
-    expect(form.progress.legal).toBe(false)
-    fillOutForm(form)
-    expect(form.progress.income).toBe(true) // do not store progress in a const, there is a caching point in mst and it needs to be observed directly to re-derive it's state
-    expect(form.progress.personal).toBe(true)
-    expect(form.progress.legal).toBe(true)
-  })
-
   it('can build a consistent input object', async () => {
     const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
     let input = form.buildObjectWithFormData()
-    expect(input).toEqual({ _language: 'EN' })
+    expect(input).toEqual({ _language: 'EN', livingCountry: 'CAN' }) // blank form includes default livingCountry
     fillOutForm(form)
     input = form.buildObjectWithFormData()
     expect(input.income).toEqual('20000')
