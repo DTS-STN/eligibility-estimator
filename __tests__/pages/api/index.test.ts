@@ -231,8 +231,22 @@ describe('field requirement analysis', () => {
       partnerEverLivedSocialCountry: undefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([FieldKey.INCOME])
-    expect(res.body.visibleFields).toEqual([FieldKey.INCOME])
+    expect(res.body.missingFields).toEqual([
+      FieldKey.AGE,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
+    ])
+    expect(res.body.visibleFields).toEqual([
+      FieldKey.AGE,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
+    ])
   })
   it('requires fields when only income provided', async () => {
     const res = await mockGetRequest({
@@ -257,18 +271,18 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
     ])
   })
   it('requires fields when only income/age provided', async () => {
@@ -293,18 +307,18 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
     ])
   })
   it('requires fields when only income/age/marital provided', async () => {
@@ -336,12 +350,12 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -374,12 +388,12 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -411,12 +425,12 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -448,13 +462,13 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -486,14 +500,14 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -524,14 +538,14 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -559,14 +573,14 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.PARTNER_INCOME])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -594,14 +608,14 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
@@ -632,13 +646,13 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.YEARS_IN_CANADA_SINCE_18])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
     ])
   })
   it('requires "everLivedSocialCountry" when citizen and under 10 years in Canada', async () => {
@@ -664,14 +678,14 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
     ])
   })
   it('requires "legalStatusOther" when legal=other', async () => {
@@ -697,13 +711,13 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.LEGAL_STATUS_OTHER])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.LEGAL_STATUS_OTHER,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
     ])
   })
   it('requires partner questions when marital=married', async () => {
@@ -732,12 +746,12 @@ describe('field requirements analysis: conditional fields', () => {
       FieldKey.PARTNER_INCOME,
     ])
     expect(res.body.visibleFields).toEqual([
-      FieldKey.INCOME,
       FieldKey.AGE,
-      FieldKey.MARITAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.INCOME,
+      FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
     ])
