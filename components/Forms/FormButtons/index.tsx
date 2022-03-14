@@ -6,9 +6,7 @@ import { WebTranslations } from '../../../i18n/web'
 import { Language } from '../../../utils/api/definitions/enums'
 import { useMediaQuery, useStore, useTranslation } from '../../Hooks'
 
-export const FormButtons: React.FC<{ incomeTooHigh: boolean }> = ({
-  incomeTooHigh,
-}) => {
+export const FormButtons: React.FC<{}> = ({}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
   const root = useStore()
@@ -23,7 +21,6 @@ export const FormButtons: React.FC<{ incomeTooHigh: boolean }> = ({
           router={router}
           root={root}
           form={form}
-          incomeTooHigh={incomeTooHigh}
         />
       )}
       <button
@@ -50,7 +47,6 @@ export const FormButtons: React.FC<{ incomeTooHigh: boolean }> = ({
           router={router}
           root={root}
           form={form}
-          incomeTooHigh={incomeTooHigh}
         />
       )}
     </div>
@@ -62,8 +58,7 @@ const SubmitButton: React.FC<{
   form: Instance<typeof Form>
   root: Instance<typeof RootStore>
   label: string
-  incomeTooHigh: boolean
-}> = ({ router, form, root, label, incomeTooHigh }) => {
+}> = ({ router, form, root, label }) => {
   return (
     <button
       type="submit"
@@ -81,7 +76,6 @@ const SubmitButton: React.FC<{
           root.setActiveTab(1)
         }
       }}
-      disabled={incomeTooHigh}
     >
       {label}
     </button>

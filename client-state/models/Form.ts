@@ -1,6 +1,5 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { webDictionary } from '../../i18n/web'
-import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { legalValues } from '../../utils/api/scrapers/output'
@@ -46,29 +45,7 @@ export const Form = types
       return emptyFields
     },
   }))
-  .views((self) => ({
-    get progress(): FormProgress {
-      const incomeFields = self.fieldsByCategory(FieldCategory.INCOME_DETAILS)
-      const legalFields = self.fieldsByCategory(FieldCategory.LEGAL_STATUS)
-      const personalFields = self.fieldsByCategory([
-        FieldCategory.PERSONAL_INFORMATION,
-        FieldCategory.PARTNER_DETAILS,
-      ])
-
-      const iComplete =
-        incomeFields.length > 0 && incomeFields.every((field) => field.filled)
-      const pComplete =
-        personalFields.length > 0 &&
-        iComplete &&
-        personalFields.every((field) => field.filled)
-      const lComplete =
-        legalFields.length > 0 &&
-        pComplete &&
-        legalFields.every((field) => field.filled)
-
-      return { income: iComplete, personal: pComplete, legal: lComplete }
-    },
-  }))
+  .views((self) => ({}))
   .actions((self) => ({
     getFieldByKey(key: string): Instance<typeof FormField> {
       return self.fields.find((field) => field.key == key)
