@@ -360,8 +360,6 @@ const fr: Translations = {
       "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     availableIneligible:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
-    availableIneligibleIncome:
-      "Vous ne semblez pas avoir droit à l'une de ces prestations parce que votre revenu annuel est supérieur à {MAX_OAS_INCOME}.",
   },
   links: {
     contactSC: {

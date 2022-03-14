@@ -91,7 +91,6 @@ export interface Translations {
     unavailable: string
     availableEligible: string
     availableIneligible: string
-    availableIneligibleIncome: string
   }
   links: {
     contactSC: Link
