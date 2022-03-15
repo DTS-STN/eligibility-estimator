@@ -53,7 +53,7 @@ export const ContactCTA: React.VFC = () => {
           ))}
           <button
             className="btn btn-default md:w-48 mt-6"
-            onClick={(e) => router.push('/eligibility')}
+            onClick={(e) => root.setActiveTab(0)}
           >
             Modify answers
           </button>
