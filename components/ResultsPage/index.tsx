@@ -39,7 +39,7 @@ export const ResultsPage: React.VFC = () => {
         <div className="col-span-1">
           <NeedHelpList
             title={tsln.needHelp}
-            links={root.summary.links.slice(0, 2)} // TODO: send correct items from API
+            links={root.summary.needHelpLinks}
           />
         </div>
       </div>
