@@ -23,8 +23,6 @@ export type WebTranslations = {
   breadcrumb1URL: string
   breadcrumb2Title: string
   breadcrumb2URL: string
-  breadcrumb3Title: string
-  breadcrumb3URL: string
   title: string
   menuTitle: string
   clear: string
@@ -38,17 +36,16 @@ export type WebTranslations = {
   getResults: string
   applyHeader: string
   applyText: string
+  applyForLabel: string
   required: string
+  homePageHeader1: string
   homePageP1: string
-  homePageP2: string
   homePageP3: string
   homePageP4: string
   homePageP5: string
   homePageP6: string
-  emptyResultsMessage: string
   disclaimer: string
   disclaimerTitle: string
-  contactSC: string
   footerlink1: string
   footerlink2: string
   footerlink3: string
@@ -72,19 +69,17 @@ export type WebTranslations = {
   //results page
   contactCTA: string
   resultsPage: {
+    header: string
     tableHeader1: string
     tableHeader2: string
     tableHeader3: string
     tableTotalAmount: string
   }
-  nextSteps: string
   moreInfoHeader: string
-
+  modifyAnswers: string
   errors: {
     empty: string
   }
-  privacyDiscTitle: string
-  privacyDisc: string
   unavailableImageAltText: string
   govt: string
   yes: string

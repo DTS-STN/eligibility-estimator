@@ -92,6 +92,7 @@ export class SummaryHandler {
     */
     const availableLinks = {
       contactSC: this.translations.links.contactSC,
+      faq: this.translations.links.faq,
       oasOverview: this.translations.links.oasOverview,
       gisOverview: this.translations.links.gisOverview,
       alwOverview: this.translations.links.alwOverview,
@@ -125,6 +126,7 @@ export class SummaryHandler {
     // static links
     const links = [
       availableLinks.contactSC,
+      availableLinks.faq,
       availableLinks.oasOverview,
       availableLinks.gisOverview,
       availableLinks.cpp,

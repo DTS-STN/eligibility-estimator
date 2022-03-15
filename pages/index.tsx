@@ -1,12 +1,10 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { Alert } from '../components/Alert'
 import { HeadDoc } from '../components/Document'
 import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
-import { EstimationSummaryState } from '../utils/api/definitions/enums'
 import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
 
 const Home: NextPage = (props) => {
@@ -35,56 +33,42 @@ const Home: NextPage = (props) => {
             className="mb-4"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
+          <h2 className="h2 mt-8 mb-2">{tsln.homePageHeader1}</h2>
+          <h3 className="h3 mt-6 mb-2">{tsln.oas}</h3>
           <p
-            className="mb-4"
-            dangerouslySetInnerHTML={{ __html: tsln.homePageP2 }}
+            className="my-6"
+            dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
           />
-          <ul className="list-disc">
-            <li
-              className="mb-4 ml-6"
-              dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
-            />
-            <li
-              className="mb-4 ml-6"
-              dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
-            />
-            <li
-              className="mb-4 ml-6"
-              dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
-            />
-            <li
-              className="mb-4 ml-6"
-              dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
-            />
-          </ul>
+          <h3 className="h3 mt-6 mb-2">{tsln.gis}</h3>
+          <p
+            className="my-6"
+            dangerouslySetInnerHTML={{ __html: tsln.homePageP4 }}
+          />
+          <h3 className="h3 mt-6 mb-2">{tsln.alw}</h3>
+          <p
+            className="my-6"
+            dangerouslySetInnerHTML={{ __html: tsln.homePageP5 }}
+          />
+          <h3 className="h3 mt-6 mb-2">{tsln.afs}</h3>
+          <p
+            className="my-6"
+            dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
+          />
+          <h2 className="h2 mt-8 mb-2">{tsln.disclaimerTitle}</h2>
+          <p
+            className="summary-link mt-6"
+            dangerouslySetInnerHTML={{ __html: tsln.disclaimer }}
+          />
         </div>
 
-        <details className="py-4">
-          <summary className="text-default-text">
-            {tsln.privacyDiscTitle}
-          </summary>
-          <div className="p-4">
-            <p
-              className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.privacyDisc }}
-            />
-          </div>
-        </details>
-
-        <Alert
-          title={tsln.disclaimerTitle}
-          type={EstimationSummaryState.UNAVAILABLE}
-          insertHTML
-        >
-          {tsln.disclaimer}
-        </Alert>
-
-        <button
-          className="btn btn-primary w-28 my-8"
-          onClick={(e) => router.push('/eligibility')}
-        >
-          {tsln.next}
-        </button>
+        <div className="flex justify-end">
+          <button
+            className="btn btn-primary w-28 my-8"
+            onClick={(e) => router.push('/eligibility')}
+          >
+            {tsln.next}
+          </button>
+        </div>
       </Layout>
     </>
   )

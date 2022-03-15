@@ -5,7 +5,7 @@ const fr: WebTranslations = {
   _language: Language.FR,
   _locale: Locale.FR,
 
-  oas: 'Sécurité de la vieillesse (SV)',
+  oas: 'Pension de la Sécurité de la vieillesse (SV)',
   gis: 'Supplément de revenu garanti (SRG)',
   alw: 'Allocation',
   afs: 'Allocation au survivant',
@@ -22,8 +22,6 @@ const fr: WebTranslations = {
   breadcrumb2Title: 'Service Canada',
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
-  breadcrumb3Title: 'Estimateur Canadien des Prestations de Vieillesse',
-  breadcrumb3URL: '/',
   title: 'Estimateur Canadien des Prestations de Vieillesse',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
@@ -38,25 +36,21 @@ const fr: WebTranslations = {
   applyHeader: 'Faire une demande de prestations',
   applyText:
     'Maintenant que vous avez estimé vos prestations, veuillez utiliser le(s) bouton(s) ci-dessous pour faire votre demande.',
+  applyForLabel: 'Demander',
   required: 'obligatoire',
   homePageP1:
     "L'Estimateur Canadien des Prestations de Vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV), au Supplément de revenu garanti (SRG), l'Allocation, et L'Allocation au survivant. Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
-  homePageP2: "L'estimateur couvre quatre programmes de prestations:",
+  homePageHeader1: 'Types de programmes de prestations',
   homePageP3:
-    '<strong className="font-bold">la pension de la Sécurité de la vieillesse</strong> est un paiement mensuel que vous pouvez recevoir si vous avez <strong className="font-bold">65 ans et plus</strong>. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
+    'La pension de la Sécurité de la vieillesse est un paiement mensuel que vous pouvez recevoir si vous avez <strong className="font-bold">65 ans et plus</strong>. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d\'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.',
   homePageP4:
-    '<strong className="font-bold">le Supplément de revenu garanti</strong> est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse âgées de <strong className="font-bold">65 et plus</strong> qui ont un faible revenu et qui vivent au Canada.',
+    'Le Supplément de revenu garanti est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse âgées de <strong className="font-bold">65 et plus</strong> qui ont un faible revenu et qui vivent au Canada.',
   homePageP5:
-    '<strong className="font-bold">l\'Allocation</strong> est une prestation mensuelle offerte aux personnes à faible revenu âgées de <strong className="font-bold">60 à 64 ans</strong> dont l\'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.',
+    'L\'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de <strong className="font-bold">60 à 64 ans</strong> dont l\'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.',
   homePageP6:
-    '<strong className="font-bold">l\'Allocation au survivant</strong> est une prestation mensuelle offerte aux personnes âgées de <strong className="font-bold">60 à 64 ans</strong> qui ont un faible revenu, qui vivent au Canada et dont l\'époux ou le conjoint de fait est décédé.',
-  emptyResultsMessage:
-    "Veuillez remplir le formulaire. L'estimateur évaluera votre admissibilité en fonction des renseignements fournis. Si vous êtes admissible, il fournira également une estimation de votre paiement mensuel. ",
-  disclaimerTitle: 'Avertissement',
-  disclaimer:
-    "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, communiquez avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
-  contactSC:
-    'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
+    'L\'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de <strong className="font-bold">60 à 64 ans</strong> qui ont un faible revenu, qui vivent au Canada et dont l\'époux ou le conjoint de fait est décédé.',
+  disclaimerTitle: "Confidentialité et conditions d'utilisation",
+  disclaimer: `L'Estimateur canadien de prestations de vieillesse ne recueille ni ne transmet aucun renseignement personnel. Les données d'utilisation anonymes peuvent être recueillies à des fins de recherche. Les renseignements fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>.</br></br>Veuillez noter que toutes les informations fournies par cet outil ne sont qu'une estimation et ne doivent pas être considérées comme des conseils financiers. Pour une évaluation officielle, nous vous encourageons à communiquer avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>.`,
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
   footerlink3: 'Traités, lois et règlements',
@@ -81,16 +75,14 @@ const fr: WebTranslations = {
   contactCTA:
     'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
+    header: "Résultats de l'estimation",
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
     tableHeader3: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Montant total des prestations mensuelles',
   },
-  nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
-  privacyDiscTitle: 'Avis de confidentialité',
-  privacyDisc:
-    "Les renseignements personnels fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
+  modifyAnswers: 'Modifier vos réponses',
   errors: {
     empty: 'Ce renseignement est requis',
   },

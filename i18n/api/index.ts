@@ -97,6 +97,7 @@ export interface Translations {
   }
   links: {
     contactSC: Link
+    faq: Link
     oasOverview: Link
     gisOverview: Link
     alwOverview: Link

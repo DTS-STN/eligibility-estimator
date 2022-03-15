@@ -22,8 +22,6 @@ const en: WebTranslations = {
   breadcrumb2Title: 'Service Canada',
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
-  breadcrumb3Title: 'Canadian Old Age Benefits Estimator',
-  breadcrumb3URL: '/',
   title: 'Canadian Old Age Benefits Estimator',
   menuTitle: 'Service Canada',
   clear: 'Clear',
@@ -38,25 +36,21 @@ const en: WebTranslations = {
   applyHeader: 'Apply for benefits',
   applyText:
     'Now that you have estimated your benefits, please use the button(s) below to apply.',
+  applyForLabel: 'Apply for',
   required: 'required',
   homePageP1:
-    'Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
-  homePageP2: 'The estimator covers four benefits programs:',
+    'The Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
+  homePageHeader1: 'Types of benefits programs',
   homePageP3:
-    '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    'The Old Age Security pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-bold">65 and older</strong> who have a low income and are living in Canada.',
+    'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-bold">65 and older</strong> who have a low income and are living in Canada.',
   homePageP5:
-    '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    'The Allowance is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    '<strong className="font-bold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  emptyResultsMessage:
-    'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
-  disclaimerTitle: 'Disclaimer',
-  disclaimer:
-    "Please be reminded that this is a prototype in development. The results are estimates and not a final decision. For a more accurate assessment of your eligibility, contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>. The results are not financial advice. The estimator does not collect and does not save the information you provide.",
-  contactSC:
-    'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
+    'The Allowance for the Survivor is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+  disclaimerTitle: 'Privacy and terms of use',
+  disclaimer: `The Canadian Old Age Benefits Estimator does not collect or transmit any personal information. Anonymous usage data may be collected for research purposes. The information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.</br></br>Please note that any information provided by this tool is only an estimate, and should not be considered financial advice. For an official assessment, you are encouraged to contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>.`,
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',
   footerlink3: 'Treaties, laws and regulations',
@@ -81,16 +75,14 @@ const en: WebTranslations = {
   contactCTA:
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
+    header: 'Estimation results',
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
     tableHeader3: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total estimated monthly benefit amount',
   },
-  nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
-  privacyDiscTitle: 'Privacy notice',
-  privacyDisc:
-    'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
+  modifyAnswers: 'Modify answers',
   errors: {
     empty: 'This information is required',
   },

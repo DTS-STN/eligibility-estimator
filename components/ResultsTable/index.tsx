@@ -16,16 +16,20 @@ export const ResultsTable = observer(() => {
 
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
+  // Send the details and eligibility results seperately and create a new column
   return (
     <div>
+      <h3 className="h3 mb-5">{tsln.resultsPage.header}</h3>
       <table className="hidden md:block text-left">
         <thead className="font-bold border-b border-content">
           <tr>
             <th>{tsln.resultsPage.tableHeader1}</th>
             <th>{tsln.resultsPage.tableHeader2}</th>
-            <th className="text-right min-w-[68px]">
-              {tsln.resultsPage.tableHeader3}
-            </th>
+            {!root.summary.zeroEntitlements && (
+              <th className="text-right min-w-[68px]">
+                {tsln.resultsPage.tableHeader3}
+              </th>
+            )}
           </tr>
         </thead>
         <tbody className="align-top">
@@ -34,48 +38,58 @@ export const ResultsTable = observer(() => {
             <td>
               <EligibilityDetails eligibilityType={root.oas} />
             </td>
-            <td className="text-right min-w-[68px]">
-              {numberToStringCurrency(root.oas.entitlement.result, locale)}
-            </td>
+            {!root.summary.zeroEntitlements && (
+              <td className="text-right min-w-[68px]">
+                {numberToStringCurrency(root.oas.entitlement.result, locale)}
+              </td>
+            )}
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>{tsln.gis}</td>
             <td>
               <EligibilityDetails eligibilityType={root.gis} />
             </td>
-            <td className="text-right min-w-[68px]">
-              {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-                ? numberToStringCurrency(root.gis.entitlement.result, locale)
-                : 'Unavailable'}
-            </td>
+            {!root.summary.zeroEntitlements && (
+              <td className="text-right min-w-[68px]">
+                {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
+                  ? numberToStringCurrency(root.gis.entitlement.result, locale)
+                  : 'Unavailable'}
+              </td>
+            )}
           </tr>
           <tr>
             <td>{tsln.alw}</td>
             <td>
               <EligibilityDetails eligibilityType={root.allowance} />
             </td>
-            <td className="text-right min-w-[68px]">
-              {numberToStringCurrency(
-                root.allowance.entitlement.result,
-                locale
-              )}
-            </td>
+            {!root.summary.zeroEntitlements && (
+              <td className="text-right min-w-[68px]">
+                {numberToStringCurrency(
+                  root.allowance.entitlement.result,
+                  locale
+                )}
+              </td>
+            )}
           </tr>
           <tr className="bg-[#E8F2F4]">
             <td>{tsln.afs}</td>
             <td>
               <EligibilityDetails eligibilityType={root.afs} />
             </td>
-            <td className="text-right min-w-[68px]">
-              {numberToStringCurrency(root.afs.entitlement.result, locale)}
-            </td>
+            {!root.summary.zeroEntitlements && (
+              <td className="text-right min-w-[68px]">
+                {numberToStringCurrency(root.afs.entitlement.result, locale)}
+              </td>
+            )}
           </tr>
-          <tr className="border-t border-content font-bold ">
-            <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
-            <td className="text-right min-w-[68px]">
-              {numberToStringCurrency(root.summary.entitlementSum, locale)}
-            </td>
-          </tr>
+          {!root.summary.zeroEntitlements && (
+            <tr className="border-t border-content font-bold ">
+              <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
+              <td className="text-right min-w-[68px]">
+                {numberToStringCurrency(root.summary.entitlementSum, locale)}
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <div className="block md:hidden">

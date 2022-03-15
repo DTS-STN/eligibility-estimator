@@ -1,43 +1,30 @@
 import { Instance } from 'mobx-state-tree'
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect } from 'react'
 import { SummaryLink } from '../../client-state/store'
-import { useMediaQuery } from '../Hooks'
+import { useStore } from '../Hooks'
 
 export const NeedHelpList: React.VFC<{
   title: string
   links: Instance<typeof SummaryLink>[]
 }> = ({ title, links }) => {
-  const ref = useRef<HTMLDivElement>()
-  const isMobile = useMediaQuery(992)
+  const root = useStore()
 
-  // handler on scroll for sticky need help
-  const shouldBeSticky = (e) => {
-    const self = document.querySelector('.fixedElement')
-
-    // do not add this behaviour on mobile
-    if (isMobile) return
-
-    const data = ref.current ? ref.current.getBoundingClientRect() : null
-
-    if (data) {
-      self.setAttribute('style', `left: ${data.x.toString()}px`)
-
-      const scrollTop = window.scrollY
-      scrollTop >= 700
-        ? self.classList.add('is-sticky')
-        : self.classList.remove('is-sticky')
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', shouldBeSticky)
-    return () => {
-      window.removeEventListener('scroll', shouldBeSticky)
+  // scan for a link with "#faqLink" and once found, block the link and set the active tab
+  useLayoutEffect(() => {
+    const allLinks = document.querySelectorAll('a')
+    for (const link of allLinks) {
+      if (link.outerHTML.includes('#faqLink')) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault()
+          root.setActiveTab(2)
+        })
+        return
+      }
     }
   })
 
   return (
-    <div className="fixedElement z-10" ref={ref}>
+    <div className="fz-10">
       <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
         <h2 className="h2">{title}</h2>
         <ul className="pl-5 list-disc text-content">
