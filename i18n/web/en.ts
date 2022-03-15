@@ -39,17 +39,17 @@ const en: WebTranslations = {
   applyText:
     'Now that you have estimated your benefits, please use the button(s) below to apply.',
   required: 'required',
-  homePageHeader1: 'Types of Old Age Payments',
   homePageP1:
     'The Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
+  homePageHeader1: 'Types of benefits programs',
   homePageP3:
-    '<strong className="font-bold">Old Age Security</strong> pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    'The Old Age Security pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    '<strong className="font-bold">Guaranteed Income Supplement</strong> is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-bold">65 and older</strong> who have a low income and are living in Canada.',
+    'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-bold">65 and older</strong> who have a low income and are living in Canada.',
   homePageP5:
-    '<strong className="font-bold">Allowance</strong> is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    'The Allowance is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    '<strong className="font-bold">Allowance for the Survivor</strong> is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    'The Allowance for the Survivor is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   emptyResultsMessage:
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
   disclaimerTitle: 'Disclaimer',
@@ -90,7 +90,7 @@ const en: WebTranslations = {
   nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
   modifyAnswers: 'Modify Answers',
-  privacyDiscTitle: 'Privacy notice',
+  privacyDiscTitle: 'Privacy and terms of use',
   privacyDisc:
     'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
