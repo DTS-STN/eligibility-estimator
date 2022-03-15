@@ -35,7 +35,7 @@ const fr: Translations = {
     age: 'Quel est votre âge actuel?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
-    legalStatus: 'Quel est votre statut légal actuel?',
+    legalStatus: 'Quel est votre statut légal actuel au Canada?',
     legalStatusOther: 'Veuillez préciser:',
     canadaWholeLife:
       "Depuis l'âge de 18 ans, avez-vous seulement habité au Canada?",
@@ -43,7 +43,8 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     everLivedSocialCountry:
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
-    partnerBenefitStatus: "Laquelle des options suivantes s'applique à vous?",
+    partnerBenefitStatus:
+      "Laquelle des options suivantes s'applique à votre conjoint?",
     partnerIncome:
       'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
     partnerAge: "Quel est l'âge actuel de votre conjoint?",
