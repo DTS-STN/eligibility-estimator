@@ -81,7 +81,7 @@ const en: WebTranslations = {
     tableTotalAmount: 'Total estimated monthly benefit amount',
   },
   moreInfoHeader: 'More Information',
-  modifyAnswers: 'Modify Answers',
+  modifyAnswers: 'Modify answers',
   errors: {
     empty: 'This information is required',
   },
