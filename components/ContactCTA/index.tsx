@@ -9,7 +9,7 @@ export const ContactCTA: React.VFC = () => {
   const root = useStore()
   const tsln = useTranslation<WebTranslations>()
 
-  const handleClick = () => {
+  const handleFaqClick = () => {
     root.setActiveTab(2)
   }
 
@@ -17,8 +17,8 @@ export const ContactCTA: React.VFC = () => {
     const self = document.querySelectorAll('#faqLink a')[1]
     if (!self) return
 
-    self.addEventListener('click', handleClick)
-    return () => self && self.removeEventListener('click', handleClick)
+    self.addEventListener('click', handleFaqClick)
+    return () => self && self.removeEventListener('click', handleFaqClick)
   })
 
   return (
