@@ -4,7 +4,6 @@ import {
   EstimationSummaryState,
   MaritalStatus,
   ResultKey,
-  ResultReason,
 } from './definitions/enums'
 import { FieldKey } from './definitions/fields'
 import {
@@ -75,11 +74,6 @@ export class SummaryHandler {
       return this.translations.summaryDetails.unavailable
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
       return this.translations.summaryDetails.availableEligible
-    else if (
-      this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE &&
-      this.results.oas.eligibility.reason === ResultReason.INCOME
-    )
-      return this.translations.summaryDetails.availableIneligibleIncome
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
       return this.translations.summaryDetails.availableIneligible
   }

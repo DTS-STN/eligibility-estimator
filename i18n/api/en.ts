@@ -15,11 +15,8 @@ const en: Translations = {
     afs: 'Allowance for the Survivor',
   },
   category: {
-    incomeDetails: 'Income details',
-    personalInformation: 'Personal information',
-    partnerDetails: "Partner's information",
-    legalStatus: 'Legal status',
-    socialAgreement: 'Social Agreement Countries',
+    personalInformation: 'Your information',
+    partnerInformation: "Your partner's information",
   },
   result: {
     eligible: 'Eligible',
@@ -354,8 +351,6 @@ const en: Translations = {
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     availableIneligible:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
-    availableIneligibleIncome:
-      'You currently do not appear to be eligible for any of these benefits, as your annual income is higher than {MAX_OAS_INCOME}.',
   },
   links: {
     faq: {

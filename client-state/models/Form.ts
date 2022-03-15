@@ -1,6 +1,5 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { webDictionary } from '../../i18n/web'
-import { FieldCategory } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { legalValues } from '../../utils/api/scrapers/output'
@@ -46,29 +45,7 @@ export const Form = types
       return emptyFields
     },
   }))
-  .views((self) => ({
-    get progress(): FormProgress {
-      const incomeFields = self.fieldsByCategory(FieldCategory.INCOME_DETAILS)
-      const legalFields = self.fieldsByCategory(FieldCategory.LEGAL_STATUS)
-      const personalFields = self.fieldsByCategory([
-        FieldCategory.PERSONAL_INFORMATION,
-        FieldCategory.PARTNER_DETAILS,
-      ])
-
-      const iComplete =
-        incomeFields.length > 0 && incomeFields.every((field) => field.filled)
-      const pComplete =
-        personalFields.length > 0 &&
-        iComplete &&
-        personalFields.every((field) => field.filled)
-      const lComplete =
-        legalFields.length > 0 &&
-        pComplete &&
-        legalFields.every((field) => field.filled)
-
-      return { income: iComplete, personal: pComplete, legal: lComplete }
-    },
-  }))
+  .views((self) => ({}))
   .actions((self) => ({
     getFieldByKey(key: string): Instance<typeof FormField> {
       return self.fields.find((field) => field.key == key)
@@ -161,7 +138,6 @@ export const Form = types
     buildObjectWithFormData(): { [key: string]: string } {
       const parent = getParent(self) as Instance<typeof RootStore>
       let input = { _language: parent.lang }
-      if (!self.getFieldByKey(FieldKey.INCOME).filled) return input // guard against income being empty
       for (const field of self.fields) {
         if (!field.value) continue
         input[field.key] = field.sanitizeInput()
@@ -172,7 +148,6 @@ export const Form = types
     buildQueryStringWithFormData(): string {
       const parent = getParent(self) as Instance<typeof RootStore>
       let qs = `_language=${parent.lang}`
-      if (!self.getFieldByKey(FieldKey.INCOME).filled) return qs // guard against income being empty
       for (const field of self.fields) {
         if (!field.value) continue
         qs += `&${field.key}=${fixedEncodeURIComponent(field.sanitizeInput())}`
