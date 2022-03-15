@@ -36,6 +36,7 @@ export type WebTranslations = {
   getResults: string
   applyHeader: string
   applyText: string
+  applyForLabel: string
   required: string
   homePageHeader1: string
   homePageP1: string

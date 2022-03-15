@@ -36,6 +36,7 @@ const en: WebTranslations = {
   applyHeader: 'Apply for benefits',
   applyText:
     'Now that you have estimated your benefits, please use the button(s) below to apply.',
+  applyForLabel: 'Apply for',
   required: 'required',
   homePageP1:
     'The Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
