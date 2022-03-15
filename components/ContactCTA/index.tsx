@@ -1,25 +1,10 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useLayoutEffect } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useStore, useTranslation } from '../Hooks'
 
 export const ContactCTA: React.VFC = () => {
-  const router = useRouter()
   const root = useStore()
   const tsln = useTranslation<WebTranslations>()
-
-  const handleFaqClick = () => {
-    root.setActiveTab(2)
-  }
-
-  useLayoutEffect(() => {
-    const self = document.querySelectorAll('#faqLink a')[1]
-    if (!self) return
-
-    self.addEventListener('click', handleFaqClick)
-    return () => self && self.removeEventListener('click', handleFaqClick)
-  })
 
   return (
     <>
