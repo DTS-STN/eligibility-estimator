@@ -46,6 +46,9 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       root.setSummary(data.summary)
     }
 
+    // defaults to the questions tab
+    if (location.hash === '') window.history.pushState(null, null, '#questions')
+
     // check if income is too high to participate in calculation, and fix a bug with headless ui tabs where they only re-render on interaction
     const incomeTooHigh = form.validateIncome()
     useEffect(() => {

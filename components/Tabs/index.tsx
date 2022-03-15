@@ -22,6 +22,9 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
       defaultIndex={root.activeTab}
       onChange={(index) => {
         root.setActiveTab(index)
+        const tabName = index === 1 ? '#results' : '#questions'
+        window.history.pushState(null, null, tabName)
+
         if (process.browser) {
           const win = window as Window &
             typeof globalThis & { adobeDataLayer: any; _satellite: any }
