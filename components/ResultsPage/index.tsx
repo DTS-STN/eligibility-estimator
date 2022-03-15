@@ -64,6 +64,12 @@ export const ResultsPage: React.VFC = () => {
             {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
               <ContactCTA />
             )}
+            <button
+              className="btn btn-default md:w-48 mt-6"
+              onClick={(e) => root.setActiveTab(0)}
+            >
+              {tsln.modifyAnswers}
+            </button>
             {root.summary?.moreInfoLinks?.length && (
               <ConditionalLinks links={root.summary.moreInfoLinks} />
             )}
