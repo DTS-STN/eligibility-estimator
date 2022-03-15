@@ -79,6 +79,7 @@ const SubmitButton: React.FC<{
           ) as HTMLInputElement
           root.setCurrentLang(language.value as Language)
           root.setActiveTab(1)
+          window.history.pushState(null, null, '#results')
         }
       }}
       disabled={incomeTooHigh}

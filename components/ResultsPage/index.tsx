@@ -43,6 +43,15 @@ export const ResultsPage: React.VFC = () => {
           />
         </div>
       </div>
+      <button
+        className="btn btn-default md:w-48 mt-6"
+        onClick={(e) => {
+          window.history.pushState(null, null, '#questions')
+          return root.setActiveTab(0)
+        }}
+      >
+        {tsln.modifyAnswers}
+      </button>
       {root.summary.state &&
         root.summary.state !== EstimationSummaryState.MORE_INFO && (
           <>
@@ -64,12 +73,6 @@ export const ResultsPage: React.VFC = () => {
             {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
               <ContactCTA />
             )}
-            <button
-              className="btn btn-default md:w-48 mt-6"
-              onClick={(e) => root.setActiveTab(0)}
-            >
-              {tsln.modifyAnswers}
-            </button>
             {root.summary?.moreInfoLinks?.length && (
               <ConditionalLinks links={root.summary.moreInfoLinks} />
             )}
