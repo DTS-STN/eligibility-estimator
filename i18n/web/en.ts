@@ -22,8 +22,6 @@ const en: WebTranslations = {
   breadcrumb2Title: 'Service Canada',
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
-  breadcrumb3Title: 'Canadian Old Age Benefits Estimator',
-  breadcrumb3URL: '/',
   title: 'Canadian Old Age Benefits Estimator',
   menuTitle: 'Service Canada',
   clear: 'Clear',
@@ -50,12 +48,8 @@ const en: WebTranslations = {
     'The Allowance is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
     'The Allowance for the Survivor is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  emptyResultsMessage:
-    'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
   disclaimerTitle: 'Privacy and terms of use',
   disclaimer: `The Canadian Old Age Benefits Estimator does not collect or transmit any personal information. Anonymous usage data may be collected for research purposes. The information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.</br></br>Please note that any information provided by this tool is only an estimate, and should not be considered financial advice. For an official assessment, you are encouraged to contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>.`,
-  contactSC:
-    'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',
   footerlink3: 'Treaties, laws and regulations',
@@ -86,7 +80,6 @@ const en: WebTranslations = {
     tableHeader3: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total estimated monthly benefit amount',
   },
-  nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
   modifyAnswers: 'Modify Answers',
   errors: {
