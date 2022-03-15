@@ -52,9 +52,8 @@ const fr: WebTranslations = {
     'L\'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de <strong className="font-bold">60 à 64 ans</strong> qui ont un faible revenu, qui vivent au Canada et dont l\'époux ou le conjoint de fait est décédé.',
   emptyResultsMessage:
     "Veuillez remplir le formulaire. L'estimateur évaluera votre admissibilité en fonction des renseignements fournis. Si vous êtes admissible, il fournira également une estimation de votre paiement mensuel. ",
-  disclaimerTitle: 'Avertissement',
-  disclaimer:
-    "Veuillez noter que l'estimateur est un prototype en construction. Les résultats sont des estimations et non une décision finale. Pour une évaluation plus précise de votre admissibilité, communiquez avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>. Les résultats ne sont pas des conseils financiers. L'estimateur ne collecte pas et ne sauvegarde pas les renseignements que vous fournissez. ",
+  disclaimerTitle: "Confidentialité et conditions d'utilisation",
+  disclaimer: `L'Estimateur canadien de prestations de vieillesse ne recueille ni ne transmet aucun renseignement personnel. Les données d'utilisation anonymes peuvent être recueillies à des fins de recherche. Les renseignements fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>.</br></br>Veuillez noter que toutes les informations fournies par cet outil ne sont qu'une estimation et ne doivent pas être considérées comme des conseils financiers. Pour une évaluation officielle, nous vous encourageons à communiquer avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>.`,
   contactSC:
     'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
   footerlink1: 'Contactez-nous',
@@ -90,9 +89,6 @@ const fr: WebTranslations = {
   nextSteps: 'La prochaine étape',
   moreInfoHeader: "Besoin de plus d'information",
   modifyAnswers: 'Modifier vos réponses',
-  privacyDiscTitle: "Confidentialité et conditions d'utilisation",
-  privacyDisc:
-    "Les renseignements personnels fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>. L'estimateur ne collecte pas d'informations qui permettraient une identification personnelle. Vos résultats anonymes peuvent être collectés à des fins de recherche.",
   errors: {
     empty: 'Ce renseignement est requis',
   },

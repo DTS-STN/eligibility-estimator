@@ -54,10 +54,10 @@ const Home: NextPage = (props) => {
             className="my-6"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP6 }}
           />
-          <h2 className="h2 mt-8 mb-2">{tsln.privacyDiscTitle}</h2>
+          <h2 className="h2 mt-8 mb-2">{tsln.disclaimerTitle}</h2>
           <p
             className="summary-link mt-6"
-            dangerouslySetInnerHTML={{ __html: tsln.privacyDisc }}
+            dangerouslySetInnerHTML={{ __html: tsln.disclaimer }}
           />
         </div>
 

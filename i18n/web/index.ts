@@ -84,8 +84,6 @@ export type WebTranslations = {
   errors: {
     empty: string
   }
-  privacyDiscTitle: string
-  privacyDisc: string
   unavailableImageAltText: string
   govt: string
   yes: string

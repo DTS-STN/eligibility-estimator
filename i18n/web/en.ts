@@ -52,9 +52,8 @@ const en: WebTranslations = {
     'The Allowance for the Survivor is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   emptyResultsMessage:
     'Please fill out the form. The estimator will estimate your eligibility based on the information you provide. If you qualify, it will also provide an estimate for your monthly payment.',
-  disclaimerTitle: 'Disclaimer',
-  disclaimer:
-    "Please be reminded that this is a prototype in development. The results are estimates and not a final decision. For a more accurate assessment of your eligibility, contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>. The results are not financial advice. The estimator does not collect and does not save the information you provide.",
+  disclaimerTitle: 'Privacy and terms of use',
+  disclaimer: `The Canadian Old Age Benefits Estimator does not collect or transmit any personal information. Anonymous usage data may be collected for research purposes. The information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.</br></br>Please note that any information provided by this tool is only an estimate, and should not be considered financial advice. For an official assessment, you are encouraged to contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>.`,
   contactSC:
     'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
   footerlink1: 'Contact Us',
@@ -90,9 +89,6 @@ const en: WebTranslations = {
   nextSteps: 'Next Steps',
   moreInfoHeader: 'More Information',
   modifyAnswers: 'Modify Answers',
-  privacyDiscTitle: 'Privacy and terms of use',
-  privacyDisc:
-    'The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   errors: {
     empty: 'This information is required',
   },
