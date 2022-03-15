@@ -1,6 +1,7 @@
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
@@ -82,6 +83,9 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             {root.summary.details}
           </Alert>
         )}
+        <Link href="?results=5" replace shallow={true}>
+          <a>PLEASE WORK</a>
+        </Link>
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
           <form
             name="ee-form"
