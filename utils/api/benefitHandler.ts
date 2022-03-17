@@ -174,20 +174,14 @@ export class BenefitHandler {
    * Accepts the ProcessedInput and builds a list of required fields based on that input.
    */
   private getRequiredFields(): FieldKey[] {
-    const requiredFields = [FieldKey.INCOME]
-    if (this.input.client.income.client >= legalValues.MAX_OAS_INCOME) {
-      // over highest income, therefore don't need anything else
-      return requiredFields
-    } else if (this.input.client.income.client < legalValues.MAX_OAS_INCOME) {
-      // meets max income req, open up main form
-      requiredFields.push(
-        FieldKey.AGE,
-        FieldKey.LIVING_COUNTRY,
-        FieldKey.LEGAL_STATUS,
-        FieldKey.MARITAL_STATUS,
-        FieldKey.CANADA_WHOLE_LIFE
-      )
-    }
+    const requiredFields = [
+      FieldKey.INCOME,
+      FieldKey.AGE,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.MARITAL_STATUS,
+      FieldKey.CANADA_WHOLE_LIFE,
+    ]
     if (this.input.client.legalStatus.other) {
       requiredFields.push(FieldKey.LEGAL_STATUS_OTHER)
     }

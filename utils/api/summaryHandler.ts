@@ -4,7 +4,6 @@ import {
   EstimationSummaryState,
   MaritalStatus,
   ResultKey,
-  ResultReason,
 } from './definitions/enums'
 import { FieldKey } from './definitions/fields'
 import {
@@ -75,11 +74,6 @@ export class SummaryHandler {
       return this.translations.summaryDetails.unavailable
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
       return this.translations.summaryDetails.availableEligible
-    else if (
-      this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE &&
-      this.results.oas.eligibility.reason === ResultReason.INCOME
-    )
-      return this.translations.summaryDetails.availableIneligibleIncome
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
       return this.translations.summaryDetails.availableIneligible
   }
@@ -92,6 +86,7 @@ export class SummaryHandler {
     */
     const availableLinks = {
       contactSC: this.translations.links.contactSC,
+      faq: this.translations.links.faq,
       oasOverview: this.translations.links.oasOverview,
       gisOverview: this.translations.links.gisOverview,
       alwOverview: this.translations.links.alwOverview,
@@ -125,6 +120,7 @@ export class SummaryHandler {
     // static links
     const links = [
       availableLinks.contactSC,
+      availableLinks.faq,
       availableLinks.oasOverview,
       availableLinks.gisOverview,
       availableLinks.cpp,

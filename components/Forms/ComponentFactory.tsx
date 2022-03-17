@@ -10,7 +10,6 @@ import { WebTranslations } from '../../i18n/web'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import type { ResponseSuccess } from '../../utils/api/definitions/types'
-import { Alert } from '../Alert'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { CurrencyField } from './CurrencyField'
@@ -46,21 +45,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
       root.setSummary(data.summary)
     }
 
-    // check if income is too high to participate in calculation, and fix a bug with headless ui tabs where they only re-render on interaction
-    const incomeTooHigh = form.validateIncome()
-    useEffect(() => {
-      if (process.browser) {
-        const results = document.getElementsByClassName('results-tab')[0]
-        if (results) {
-          if (form.isIncomeTooHigh) {
-            results.setAttribute('disabled', 'disabled')
-          } else {
-            results.removeAttribute('disabled')
-          }
-        }
-      }
-    }, [form.isIncomeTooHigh])
-
     // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
     useEffect(() => {
       document.addEventListener('keydown', function (event) {
@@ -73,15 +57,6 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
 
     return (
       <>
-        {incomeTooHigh && (
-          <Alert
-            title={root.summary.title}
-            type={root.summary.state}
-            insertHTML
-          >
-            {root.summary.details}
-          </Alert>
-        )}
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
           <form
             name="ee-form"
@@ -100,15 +75,8 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
             {form.fields.map(
               (field: Instance<typeof FormField>, index: number) => {
                 const isChildQuestion =
-                  field.category.key == FieldCategory.PARTNER_DETAILS ||
-                  field.category.key == FieldCategory.SOCIAL_AGREEMENT
-                const styling = isChildQuestion
-                  ? `bg-emphasis px-10 pt-4 ${
-                      field.category.key == FieldCategory.SOCIAL_AGREEMENT
-                        ? ' mb-10'
-                        : ''
-                    }`
-                  : ``
+                  field.category.key == FieldCategory.PARTNER_INFORMATION
+                const styling = isChildQuestion ? 'bg-emphasis px-10 pt-4' : ''
                 const content = (
                   <div key={field.key} className={styling}>
                     {field.category.key != lastCategory && (
@@ -212,7 +180,7 @@ export const ComponentFactory: React.VFC<FactoryProps> = observer(
               }
             )}
 
-            <FormButtons incomeTooHigh={incomeTooHigh} />
+            <FormButtons />
           </form>
           <NeedHelpList
             title={tsln.needHelp}

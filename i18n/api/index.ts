@@ -1,4 +1,8 @@
-import { Language, Locale } from '../../utils/api/definitions/enums'
+import {
+  FieldCategory,
+  Language,
+  Locale,
+} from '../../utils/api/definitions/enums'
 import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
@@ -14,13 +18,7 @@ export interface Translations {
   _language: Language
   _locale: Locale
   benefit: { oas: string; gis: string; alw: string; afs: string }
-  category: {
-    incomeDetails: string
-    personalInformation: string
-    partnerDetails: string
-    legalStatus: string
-    socialAgreement: string
-  }
+  category: { [key in FieldCategory]: string }
   result: {
     eligible: string
     ineligible: string
@@ -93,10 +91,10 @@ export interface Translations {
     unavailable: string
     availableEligible: string
     availableIneligible: string
-    availableIneligibleIncome: string
   }
   links: {
     contactSC: Link
+    faq: Link
     oasOverview: Link
     gisOverview: Link
     alwOverview: Link
