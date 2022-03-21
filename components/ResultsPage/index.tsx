@@ -4,10 +4,10 @@ import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { ConditionalLinks } from '../ConditionalLinks'
-import { ContactCTA } from '../ContactCTA'
 import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
+import { ResultsApply } from '../ResultsApply'
 import { ResultsTable } from '../ResultsTable'
 
 export const ResultsPage: React.VFC = () => {
@@ -48,9 +48,7 @@ export const ResultsPage: React.VFC = () => {
             ) : (
               <ResultsTable />
             )}
-            {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
-              <ContactCTA />
-            )}
+            <ResultsApply />
             <p>{tsln.modifyAnswersText}</p>
             <Link href="/eligibility" passHref={true}>
               <button className="btn btn-default md:w-[fit-content] mt-6">
