@@ -20,6 +20,7 @@ export const useStorage = <T,>(
     try {
       if (isBrowser) {
         const item = window[store].getItem(key)
+        console.log(`store is here`, item)
         return item ? JSON.parse(item) : initialValue
       }
       return ''

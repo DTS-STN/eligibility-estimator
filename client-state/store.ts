@@ -1,4 +1,5 @@
 import {
+  getSnapshot,
   IArrayType,
   IMaybe,
   IModelType,
@@ -7,7 +8,7 @@ import {
   ModelCreationType,
   types,
 } from 'mobx-state-tree'
-import { ExtractCFromProps } from 'mobx-state-tree/dist/internal'
+import { ExtractCFromProps, SnapshotIn } from 'mobx-state-tree/dist/internal'
 import {
   EntitlementResultType,
   EstimationSummaryState,
@@ -151,5 +152,17 @@ export const RootStore = types
       >
     ) {
       self.summary = Summary.create(input)
+    },
+    saveStoreState() {
+      window.sessionStorage.setItem('store', JSON.stringify(getSnapshot(self)))
+    },
+    bootstrapStoreState(store: SnapshotIn<typeof RootStore>) {
+      self.form = Form.create(store.form)
+      self.oas = OAS.create(store.oas)
+      self.gis = GIS.create(store.gis)
+      self.allowance = Allowance.create(store.allowance)
+      self.afs = AFS.create(store.afs)
+      self.lang = store.lang ?? Language.EN
+      self.summary = Summary.create(store.summary)
     },
   }))

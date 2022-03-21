@@ -2,9 +2,9 @@ import { observer } from 'mobx-react'
 import { NextPage } from 'next'
 import { useEffect } from 'react'
 import { HeadDoc } from '../../components/Document'
-import { useStore, useTranslation } from '../../components/Hooks'
+import { ComponentFactory } from '../../components/Forms/ComponentFactory'
+import { useStorage, useStore, useTranslation } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
-import { Tabs } from '../../components/Tabs'
 import { WebTranslations } from '../../i18n/web'
 import {
   ResponseError,
@@ -15,6 +15,10 @@ import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
 
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const root = useStore()
+  const [storeFromSession] = useStorage('session', 'store', {})
+  if (process.browser) {
+    root.bootstrapStoreState(storeFromSession)
+  }
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
@@ -46,7 +50,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     <>
       <HeadDoc />
       <Layout>
-        <Tabs {...data} />
+        <ComponentFactory data={data} />
       </Layout>
     </>
   )

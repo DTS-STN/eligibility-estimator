@@ -73,7 +73,8 @@ const SubmitButton: React.FC<{
             '#_language'
           ) as HTMLInputElement
           root.setCurrentLang(language.value as Language)
-          root.setActiveTab(1)
+          root.saveStoreState()
+          router.push('/results')
         }
       }}
     >
