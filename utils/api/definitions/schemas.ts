@@ -40,7 +40,6 @@ export const RequestSchema = Joi.object({
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  legalStatusOther: Joi.string(),
   canadaWholeLife: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
