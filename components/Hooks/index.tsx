@@ -64,7 +64,7 @@ export const useMediaQuery = (width) => {
   }, [])
 
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== undefined && window.matchMedia) {
       const media = window.matchMedia(`(max-width: ${width - 1}px)`)
       media.addEventListener('change', updateTarget)
 
