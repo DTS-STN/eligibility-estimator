@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
@@ -13,6 +14,7 @@ export const ResultsPage: React.VFC = () => {
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
   const root = useStore()
+  const router = useRouter()
   console.log('allowance!', root.allowance)
 
   return (
@@ -52,7 +54,12 @@ export const ResultsPage: React.VFC = () => {
             )}
             <button
               className="btn btn-default md:w-48 mt-6"
-              onClick={(e) => root.setActiveTab(0)}
+              onClick={(e) => {
+                if (typeof window === undefined) {
+                  window.sessionStorage.removeItem('store')
+                }
+                router.push('/eligibility')
+              }}
             >
               {tsln.modifyAnswers}
             </button>

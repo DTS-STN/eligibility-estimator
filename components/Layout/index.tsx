@@ -26,10 +26,12 @@ export const Layout: React.VFC<{
               <button
                 className="btn-link btn underline"
                 onClick={(e) => {
-                  router.push(router.pathname, router.pathname, {
+                  if (typeof window === undefined) {
+                    window.sessionStorage.removeItem('store')
+                  }
+                  router.push('/eligibility', '/eligibility', {
                     locale: oppositeLocale,
                   })
-                  root.setActiveTab(0)
                 }}
               >
                 {isMobile ? tsln.otherLangCode : tsln.otherLang}

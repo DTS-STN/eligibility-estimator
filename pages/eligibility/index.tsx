@@ -16,13 +16,13 @@ import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const root = useStore()
   const [storeFromSession] = useStorage('session', 'store', {})
-  if (process.browser) {
+  if (typeof window === undefined) {
     root.bootstrapStoreState(storeFromSession)
   }
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
-    if (process.browser) {
+    if (typeof window === undefined) {
       const win = window as Window &
         typeof globalThis & { adobeDataLayer: any; _satellite: any }
       const lang = tsln.langLong
@@ -34,6 +34,10 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
 
       sendAnalyticsRequest(lang, title, creator, win)
     }
+  })
+
+  useEffect(() => {
+    //
   })
 
   const data = new MainHandler({ _language: tsln._language }).results

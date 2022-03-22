@@ -13,7 +13,7 @@ const Home: NextPage = (props) => {
 
   useEffect(() => {
     // only run on mount on the client
-    if (process.browser) {
+    if (typeof window === undefined) {
       const win = window as Window &
         typeof globalThis & { adobeDataLayer: any; _satellite: any }
       const lang = tsln.langLong

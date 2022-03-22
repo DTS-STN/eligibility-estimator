@@ -7,7 +7,7 @@ import { ResultsPage } from '../../components/ResultsPage'
 const Results: NextPage = (props) => {
   const root = useStore()
   const [storeFromSession] = useStorage('session', 'store', {})
-  if (process.browser) {
+  if (typeof window === undefined) {
     root.bootstrapStoreState(storeFromSession)
   }
   return (

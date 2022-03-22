@@ -162,7 +162,6 @@ export const RootStore = types
       self.gis = GIS.create(store.gis)
       self.allowance = Allowance.create(store.allowance)
       self.afs = AFS.create(store.afs)
-      self.lang = store.lang ?? Language.EN
       self.summary = Summary.create(store.summary)
     },
   }))
