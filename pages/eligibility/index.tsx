@@ -36,10 +36,6 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     }
   })
 
-  useEffect(() => {
-    //
-  })
-
   const data = new MainHandler({ _language: tsln._language }).results
 
   if ('error' in data) {
