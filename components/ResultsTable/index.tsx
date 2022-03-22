@@ -16,8 +16,6 @@ export const ResultsTable = observer(() => {
 
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
-  console.log('table', root)
-
   // Send the details and eligibility results seperately and create a new column
   return (
     <div>

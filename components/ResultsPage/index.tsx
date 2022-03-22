@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
@@ -15,8 +14,6 @@ export const ResultsPage: React.VFC = () => {
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
   const root = useStore()
-  const router = useRouter()
-  console.log('allowance!', root.allowance)
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
