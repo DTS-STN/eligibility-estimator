@@ -7,9 +7,7 @@ import { ResultsPage } from '../../components/ResultsPage'
 const Results: NextPage = (props) => {
   const root = useStore()
   const [storeFromSession] = useStorage('session', 'store', {})
-  if (typeof window === undefined) {
-    root.bootstrapStoreState(storeFromSession)
-  }
+  root.bootstrapStoreState(storeFromSession)
   return (
     <>
       <HeadDoc />

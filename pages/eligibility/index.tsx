@@ -16,9 +16,7 @@ import { sendAnalyticsRequest } from '../../utils/web/helpers/utils'
 const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const root = useStore()
   const [storeFromSession] = useStorage('session', 'store', {})
-  if (typeof window === undefined) {
-    root.bootstrapStoreState(storeFromSession)
-  }
+  root.bootstrapStoreState(storeFromSession)
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
