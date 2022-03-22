@@ -29,6 +29,7 @@ export const Layout: React.VFC<{
                   if (typeof window !== undefined) {
                     window.sessionStorage.removeItem('store')
                   }
+                  // TODO: do not clear state, but instead update data preserving while existing user inputs
                   router.push('/eligibility', '/eligibility', {
                     locale: oppositeLocale,
                   })
