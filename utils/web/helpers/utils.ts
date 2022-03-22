@@ -20,7 +20,7 @@ export const sendAnalyticsRequest = (
   creator: string,
   window: Window & typeof globalThis & { adobeDataLayer: any; _satellite: any }
 ) => {
-  if (typeof window === undefined) {
+  if (typeof window !== undefined) {
     window.adobeDataLayer.push({
       event: 'pageLoad',
       page: {

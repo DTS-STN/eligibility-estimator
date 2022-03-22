@@ -55,7 +55,7 @@ export const ResultsPage: React.VFC = () => {
             <button
               className="btn btn-default md:w-48 mt-6"
               onClick={(e) => {
-                if (typeof window === undefined) {
+                if (typeof window !== undefined) {
                   window.sessionStorage.removeItem('store')
                 }
                 router.push('/eligibility')

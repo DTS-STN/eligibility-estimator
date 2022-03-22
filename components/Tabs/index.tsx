@@ -22,7 +22,7 @@ export const Tabs: React.FC<ResponseSuccess> = observer((props) => {
       defaultIndex={root.activeTab}
       onChange={(index) => {
         root.setActiveTab(index)
-        if (typeof window === undefined) {
+        if (typeof window !== undefined) {
           const win = window as Window &
             typeof globalThis & { adobeDataLayer: any; _satellite: any }
           const lang = tsln.langLong

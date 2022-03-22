@@ -26,7 +26,7 @@ export const Layout: React.VFC<{
               <button
                 className="btn-link btn underline"
                 onClick={(e) => {
-                  if (typeof window === undefined) {
+                  if (typeof window !== undefined) {
                     window.sessionStorage.removeItem('store')
                   }
                   router.push('/eligibility', '/eligibility', {

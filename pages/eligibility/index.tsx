@@ -20,7 +20,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
-    if (typeof window === undefined) {
+    if (typeof window !== undefined) {
       const win = window as Window &
         typeof globalThis & { adobeDataLayer: any; _satellite: any }
       const lang = tsln.langLong
