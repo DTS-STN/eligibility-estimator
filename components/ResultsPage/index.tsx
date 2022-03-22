@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -52,17 +53,11 @@ export const ResultsPage: React.VFC = () => {
             {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
               <ContactCTA />
             )}
-            <button
-              className="btn btn-default md:w-48 mt-6"
-              onClick={(e) => {
-                if (typeof window !== undefined) {
-                  window.sessionStorage.removeItem('store')
-                }
-                router.push('/eligibility')
-              }}
-            >
-              {tsln.modifyAnswers}
-            </button>
+            <Link href="/eligibility" passHref={true}>
+              <button className="btn btn-default md:w-48 mt-6">
+                {tsln.modifyAnswers}
+              </button>
+            </Link>
             {root.summary?.moreInfoLinks?.length && (
               <ConditionalLinks links={root.summary.moreInfoLinks} />
             )}
