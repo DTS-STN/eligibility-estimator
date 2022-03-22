@@ -688,38 +688,6 @@ describe('field requirements analysis: conditional fields', () => {
       FieldKey.MARITAL_STATUS,
     ])
   })
-  it('requires "legalStatusOther" when legal=other', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.OTHER,
-      legalStatusOther: undefined,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([FieldKey.LEGAL_STATUS_OTHER])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LEGAL_STATUS_OTHER,
-      FieldKey.CANADA_WHOLE_LIFE,
-      FieldKey.INCOME,
-      FieldKey.MARITAL_STATUS,
-    ])
-  })
   it('requires partner questions when marital=married', async () => {
     const res = await mockGetRequest({
       income: 10000,

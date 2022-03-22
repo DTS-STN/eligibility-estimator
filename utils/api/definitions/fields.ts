@@ -7,7 +7,6 @@ export enum FieldKey {
   MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
-  LEGAL_STATUS_OTHER = 'legalStatusOther',
   CANADA_WHOLE_LIFE = 'canadaWholeLife',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
@@ -51,13 +50,6 @@ export const fieldDefinitions: FieldDefinitions = {
     order: 3,
     type: FieldType.RADIO,
     default: undefined,
-  },
-  [FieldKey.LEGAL_STATUS_OTHER]: {
-    key: FieldKey.LEGAL_STATUS_OTHER,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 4,
-    type: FieldType.STRING,
-    placeholder: undefined,
   },
   [FieldKey.CANADA_WHOLE_LIFE]: {
     key: FieldKey.CANADA_WHOLE_LIFE,
