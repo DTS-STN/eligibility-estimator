@@ -39,13 +39,6 @@ export const ComponentFactory: React.VFC = observer(({}) => {
   input._language = locale
   const data = new MainHandler(input).results
 
-  if ('error' in data) {
-    return <div>{data.error}</div>
-  }
-
-  form.setupForm(data.fieldData)
-  root.setSummary(data.summary)
-
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
     document.addEventListener('keydown', function (event) {
@@ -55,6 +48,18 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       }
     })
   }, [isMobile])
+
+  if ('error' in data) {
+    // typeof data == ResponseError
+    // TODO: when error, the form does not update. Repro: set age to 200, change marital from single to married, notice partner questions don't show
+    console.log('Data update resulted in error:', data)
+  }
+
+  if ('fieldData' in data) {
+    // typeof data == ResponseSuccess
+    form.setupForm(data.fieldData)
+    root.setSummary(data.summary)
+  }
 
   return (
     <>
