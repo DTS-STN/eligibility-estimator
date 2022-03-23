@@ -96,7 +96,12 @@ export const RootStore = types
     allowance: types.maybe(Allowance),
     summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
-    lang: types.enumeration(Object.values(Language)),
+    // a [key, value] array of the user's form inputs
+    inputs: types.array(types.array(types.string)),
+    // the language of the data currently stored in the state
+    langData: types.enumeration(Object.values(Language)),
+    // the language of the client's browser
+    langBrowser: types.enumeration(Object.values(Language)),
   })
   .views((self) => ({
     getTabNameForAnalytics(index: number) {
@@ -109,13 +114,27 @@ export const RootStore = types
       }
       return 'unknown'
     },
+    // converts the input data from an array to an object
+    getInputObject() {
+      let input = {}
+      for (const field of self.inputs) {
+        input[field[0]] = field[1]
+      }
+      console.log('generated input object', input)
+      return input
+    },
   }))
   .actions((self) => ({
     setActiveTab(num: number) {
       self.activeTab = num
     },
-    setCurrentLang(lang: Language) {
-      self.lang = lang
+    setLangData(lang: Language) {
+      console.log('set langData to', lang)
+      self.langData = lang
+    },
+    setLangBrowser(lang: Language) {
+      console.log('set langBrowser to', lang)
+      self.langBrowser = lang
     },
     setOAS(input) {
       self.oas = OAS.create(input)
@@ -128,6 +147,10 @@ export const RootStore = types
     },
     setAllowance(input) {
       self.allowance = Allowance.create(input)
+    },
+    setInputs(input) {
+      console.log('set inputs to', input)
+      self.inputs = input
     },
     setSummary(
       input: ModelCreationType<
@@ -151,9 +174,15 @@ export const RootStore = types
         }>
       >
     ) {
-      self.summary = Summary.create(input)
+      const newSummary = Summary.create(input)
+      // we will only update the summary if there is a difference, otherwise we will trigger an unnecessary re-render
+      if (JSON.stringify(self.summary) !== JSON.stringify(newSummary)) {
+        console.log('updating summary')
+        self.summary = newSummary
+      } else console.log('not updating summary')
     },
     saveStoreState() {
+      console.log('saved snapshot', getSnapshot(self))
       window.sessionStorage.setItem('store', JSON.stringify(getSnapshot(self)))
     },
     bootstrapStoreState(store: SnapshotIn<typeof RootStore>) {
@@ -163,5 +192,9 @@ export const RootStore = types
       self.allowance = Allowance.create(store.allowance)
       self.afs = AFS.create(store.afs)
       self.summary = Summary.create(store.summary)
+      console.log('loading store with inputs', store.inputs)
+      self.inputs = store.inputs
+      console.log(`loading store with langData ${store.langData}`)
+      if (store.langData) self.langData = store.langData
     },
   }))

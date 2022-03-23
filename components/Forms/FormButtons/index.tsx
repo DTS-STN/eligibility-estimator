@@ -3,7 +3,6 @@ import { NextRouter, useRouter } from 'next/router'
 import { Form } from '../../../client-state/models/Form'
 import { RootStore } from '../../../client-state/store'
 import { WebTranslations } from '../../../i18n/web'
-import { Language } from '../../../utils/api/definitions/enums'
 import { useMediaQuery, useStore, useTranslation } from '../../Hooks'
 
 export const FormButtons: React.FC<{}> = ({}) => {
@@ -69,10 +68,6 @@ const SubmitButton: React.FC<{
           !form.validateAgainstEmptyFields(router.locale) &&
           !form.hasErrors
         ) {
-          const language = document.querySelector(
-            '#_language'
-          ) as HTMLInputElement
-          root.setCurrentLang(language.value as Language)
           root.saveStoreState()
           router.push('/results')
         }

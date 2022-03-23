@@ -1,5 +1,6 @@
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import { webDictionary } from '../../i18n/web'
+import { Language } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { legalValues } from '../../utils/api/scrapers/output'
@@ -96,25 +97,19 @@ export const Form = types
       self.fields.map((field) => field.setError(undefined))
     },
     setupForm(data: FieldData[]): void {
+      console.log('setting up form')
       data.map((fieldData) => {
+        const field = self.getFieldByKey(fieldData?.key)
+        console.log('setting up field', fieldData.label)
+
         let placeholder,
           defaultValue,
           options = undefined
+        if ('default' in fieldData) defaultValue = fieldData.default
+        if ('placeholder' in fieldData) placeholder = fieldData.placeholder
+        if ('values' in fieldData) options = fieldData.values
 
-        const field = self.getFieldByKey(fieldData?.key)
-
-        if ('default' in fieldData) {
-          defaultValue = fieldData.default
-        }
-
-        if ('placeholder' in fieldData) {
-          placeholder = fieldData.placeholder
-        }
-
-        if ('values' in fieldData) {
-          options = fieldData.values
-        }
-
+        // field does not exist, add it
         if (!field) {
           self.addField({
             key: fieldData.key,
@@ -130,24 +125,43 @@ export const Form = types
             options: options,
             value: defaultValue ?? null,
           })
+          self.fields.sort((a, b) => a.order - b.order)
         }
-        self.fields.sort((a, b) => a.order - b.order)
+        // field does exist, update if any data has changed
+        else if (field.label !== fieldData.label) {
+          console.log('updating field ', fieldData.label)
+          field.label = fieldData.label
+          field.category = fieldData.category
+          field.options = options
+          field.placeholder = placeholder
+        }
       })
     },
     // used for calling the main benefit processor
-    buildObjectWithFormData(): { [key: string]: string } {
-      const parent = getParent(self) as Instance<typeof RootStore>
-      let input = { _language: parent.lang }
+    buildObjectWithFormData(language: Language): { [key: string]: string } {
+      console.log('buildObjectWithFormData')
+      let input = { _language: language }
       for (const field of self.fields) {
         if (!field.value) continue
         input[field.key] = field.sanitizeInput()
       }
       return input
     },
+    // used for calling the main benefit processor using the array from the internal state
+    buildArrayWithFormData(language: Language): [string, string][] {
+      console.log('buildArrayWithFormData')
+      let input = []
+      input.push(['_language', language])
+      for (const field of self.fields) {
+        if (!field.value) continue
+        input.push([field.key, field.sanitizeInput()])
+      }
+      return input
+    },
     // used for API requests, which is currently for the CSV function
     buildQueryStringWithFormData(): string {
       const parent = getParent(self) as Instance<typeof RootStore>
-      let qs = `_language=${parent.lang}`
+      let qs = `_language=${parent.langBrowser}`
       for (const field of self.fields) {
         if (!field.value) continue
         qs += `&${field.key}=${fixedEncodeURIComponent(field.sanitizeInput())}`
@@ -156,8 +170,18 @@ export const Form = types
     },
   }))
   .actions((self) => ({
+    saveInputsToState: flow(function* () {
+      const parent = getParent(self) as Instance<typeof RootStore>
+      const inputArray = self.buildArrayWithFormData(parent.langBrowser)
+      parent.setInputs(inputArray)
+      parent.saveStoreState()
+    }),
+  }))
+  .actions((self) => ({
     sendAPIRequest: flow(function* () {
-      const input = self.buildObjectWithFormData()
+      const parent = getParent(self) as Instance<typeof RootStore>
+      self.saveInputsToState()
+      const input = self.buildObjectWithFormData(parent.langBrowser)
       const data = new MainHandler(input).results
 
       if ('error' in data) {
@@ -169,16 +193,15 @@ export const Form = types
         }
       } else {
         self.clearAllErrors()
-        const parent = getParent(self) as Instance<typeof RootStore>
         parent.setOAS(data.results.oas)
         parent.setGIS(data.results.gis)
         parent.setAFS(data.results.afs)
         parent.setAllowance(data.results.alw)
-
         parent.setSummary(data.summary)
-
+        parent.setLangData(parent.langBrowser)
         self.removeUnnecessaryFieldsFromForm(data.fieldData)
         self.setupForm(data.fieldData)
+        parent.saveStoreState()
       }
     }),
     validateIncome(): boolean {
