@@ -17,6 +17,13 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   const root = useStore()
   const [storeFromSession] = useStorage('session', 'store', {})
   root.bootstrapStoreState(storeFromSession)
+
+  /*
+   This will ensure that the internal state of the results matches the internal state of the form inputs.
+   This is especially important when changing languages, as a language change requires the internal state to update its translated strings.
+  */
+  root.form.sendAPIRequest()
+
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {

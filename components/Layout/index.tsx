@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -23,20 +24,15 @@ export const Layout: React.VFC<{
         <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
             <div className="flex justify-end my-4">
-              <button
-                className="btn-link btn underline"
-                onClick={(e) => {
-                  if (typeof window !== undefined) {
-                    window.sessionStorage.removeItem('store')
-                  }
-                  // TODO: do not clear state, but instead update data preserving while existing user inputs
-                  router.push('/eligibility', '/eligibility', {
-                    locale: oppositeLocale,
-                  })
-                }}
+              <Link
+                href={router.asPath}
+                locale={oppositeLocale}
+                passHref={true}
               >
-                {isMobile ? tsln.otherLangCode : tsln.otherLang}
-              </button>
+                <button className="btn-link btn underline">
+                  {isMobile ? tsln.otherLangCode : tsln.otherLang}
+                </button>
+              </Link>
             </div>
           </div>
           <Header />
