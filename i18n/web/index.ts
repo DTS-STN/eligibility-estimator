@@ -77,6 +77,7 @@ export type WebTranslations = {
   }
   moreInfoHeader: string
   modifyAnswers: string
+  modifyAnswersText: string
   errors: {
     empty: string
   }

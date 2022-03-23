@@ -83,6 +83,8 @@ const fr: WebTranslations = {
   },
   moreInfoHeader: "Besoin de plus d'information",
   modifyAnswers: 'Modifier vos réponses',
+  modifyAnswersText:
+    'Si vous avez fait une erreur en remplissant le formulaire, ou si vous souhaitez modifier vos réponses pour voir ce qui se passerait dans un scénario différent, veuillez utiliser le bouton ci-dessous pour modifier vos réponses.',
   errors: {
     empty: 'Ce renseignement est requis',
   },
