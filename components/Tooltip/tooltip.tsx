@@ -55,7 +55,7 @@ export const Tooltip: React.FC<{
         xmlns="http://www.w3.org/2000/svg"
         width="25"
         height="25"
-        fill="none"
+        fill="primary"
         className="cursor-pointer z-20"
         onClick={(e) => setShow(true)}
       >
@@ -82,6 +82,7 @@ export const Tooltip: React.FC<{
           <header className="flex items-center justify-between gap-x-4 bg-primary text-white rounded-t-xl px-5 py-3">
             <div className="flex gap-x-4 items-center">
               <svg
+                fill="white"
                 xmlns="http://www.w3.org/2000/svg"
                 width={`${size ? size : 25}`}
                 height={`${size ? size : 25}`}
