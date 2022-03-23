@@ -74,7 +74,7 @@ export const Alert: React.VFC<{
             <div
               className="summary-link text-content"
               dangerouslySetInnerHTML={{ __html: children as string }}
-            ></div>
+            />
           )}
         </div>
       </div>

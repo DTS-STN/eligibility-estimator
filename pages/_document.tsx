@@ -7,7 +7,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script src="/scripts/adobe.js"></script>
+        <script src="/scripts/adobe.js" />
         <script type="text/javascript">_satellite.pageBottom()</script>
       </body>
     </Html>
