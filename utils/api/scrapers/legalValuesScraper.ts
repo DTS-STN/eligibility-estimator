@@ -58,7 +58,7 @@ export class LegalValuesScraper extends BaseScraper {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
         selector:
-          'body > main > div:nth-child(2) > div > table > tbody > tr:nth-child(2) > td',
+          'body > main > div:nth-child(2) > table > tbody > tr:nth-child(2) > td',
       },
       /**
        * OAS Recovery Tax. Updates periodically. Not used yet.
@@ -67,7 +67,7 @@ export class LegalValuesScraper extends BaseScraper {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.html',
         selector:
-          'body > main > div:nth-child(2) > div > div > table > tbody > tr:nth-child(3) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > div > table > tbody > tr:nth-child(3) > td:nth-child(3)',
       },
       /**
        * Income maximums. Updates periodically.
@@ -76,43 +76,43 @@ export class LegalValuesScraper extends BaseScraper {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table.table.table-bordered.text-right > tbody > tr:nth-child(2) > td:nth-child(2)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table.table.table-bordered.text-right > tbody > tr:nth-child(2) > td:nth-child(2)',
       },
       [ScraperKeys.MAX_GIS_INCOME_SINGLE]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table:nth-child(4) > tbody > tr:nth-child(2) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table:nth-child(4) > tbody > tr:nth-child(2) > td:nth-child(3)',
       },
       [ScraperKeys.MAX_GIS_INCOME_PARTNER_OAS]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table:nth-child(5) > tbody > tr:nth-child(2) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table:nth-child(5) > tbody  tr:nth-child(2) > td:nth-child(3)',
       },
       [ScraperKeys.MAX_GIS_INCOME_PARTNER_ALW]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table:nth-child(5) > tbody > tr:nth-child(4) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table:nth-child(5) > tbody > tr:nth-child(4) > td:nth-child(3)',
       },
       [ScraperKeys.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table:nth-child(5) > tbody > tr:nth-child(3) > td:nth-child(3)',
       },
       [ScraperKeys.MAX_ALW_INCOME]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table:nth-child(6) > tbody > tr:nth-child(2) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table:nth-child(6) > tbody > tr:nth-child(2) > td:nth-child(3)',
       },
       [ScraperKeys.MAX_AFS_INCOME]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
         selector:
-          'body > main > div:nth-child(2) > div > section:nth-child(11) > table:nth-child(7) > tbody > tr:nth-child(2) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > section:nth-child(11) > table:nth-child(7) > tbody > tr:nth-child(2) > td:nth-child(3)',
       },
     }
   }
@@ -125,6 +125,7 @@ export class LegalValuesScraper extends BaseScraper {
   private static parseItem(data: string, config: ScraperConfig): number {
     const document: Document = new JSDOM(data).window.document
     const selectedData = document.querySelector(config.selector)
+    if (!selectedData) throw new Error(`Selector was unable to parse any data`)
     const sanitizeFn: (string: string) => number =
       config.sanitizeFn ?? LegalValuesScraper.sanitizeFnStandard
     return sanitizeFn(selectedData.textContent)
@@ -137,19 +138,35 @@ export class LegalValuesScraper extends BaseScraper {
       const config = this.scraperConfigs[key]
       console.log(`${this.logHeader} Fetching ${key}...`)
       promises.push(
-        this.fetchPage(config.pageUrl).then((pageData) => {
-          const value = LegalValuesScraper.parseItem(pageData, config)
-          console.log(`${this.logHeader} Received ${value} for ${key}`)
-          return { key, value }
-        })
+        this.fetchPage(config.pageUrl)
+          .then((pageData) => {
+            const value = LegalValuesScraper.parseItem(pageData, config)
+            console.log(`${this.logHeader} Received ${value} for ${key}`)
+            return { key, value }
+          })
+          .catch((e) => {
+            const err = `Failed scraping ${key}: ${e}`
+            console.log(err)
+            throw new Error(err)
+          })
       )
     }
-    const parsedData = await Promise.all(promises)
-    const results = {}
-    parsedData.forEach((x) => (results[x.key] = x.value))
-    console.log(`${this.logHeader} Final results: `, results)
-
-    this.saveAndComplete(results)
+    const successResults = {}
+    const failedResults = []
+    const promiseResults = await Promise.allSettled(promises)
+    promiseResults.forEach((x) => {
+      if (x.status === 'fulfilled') successResults[x.value.key] = x.value.value
+      else if (x.status === 'rejected') failedResults.push(x.reason.message)
+    })
+    if (failedResults.length > 0) {
+      console.log(
+        `${this.logHeader} Failed to parse all items, scraping aborted:`,
+        failedResults
+      )
+    } else {
+      this.saveAndComplete(successResults)
+      console.log(`${this.logHeader} Final results: `, successResults)
+    }
   }
 }
 
