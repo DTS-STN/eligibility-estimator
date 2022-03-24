@@ -30,11 +30,11 @@ export const RequestSchema = Joi.object({
     .min(0)
     .ruleset.less(legalValues.MAX_OAS_INCOME)
     .message(
-      `Your income must be less than ${numberToStringCurrency(
+      `Your annual income must be less than ${numberToStringCurrency(
         legalValues.MAX_OAS_INCOME,
         Locale.EN,
         { rounding: 0 }
-      )} to be eligible for any of the benefits covered by this tool.`
+      )} to receive any of the benefits covered by this tool.`
     ), // todo i18n,
   age: Joi.number().integer().min(18).max(150),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
@@ -59,11 +59,11 @@ export const RequestSchema = Joi.object({
       })
     )
     .message(
-      `The sum of you and your partner's income income must be less than ${numberToStringCurrency(
+      `The sum of you and your partner's annual income must be less than ${numberToStringCurrency(
         legalValues.MAX_OAS_INCOME,
         Locale.EN,
         { rounding: 0 }
-      )} to be eligible for any of the benefits covered by this tool.`
+      )} to receive any of the benefits covered by this tool.`
     ), // todo i18n,
   partnerAge: Joi.number().integer().max(150),
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),

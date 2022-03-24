@@ -75,7 +75,7 @@ const en: WebTranslations = {
   contactCTA:
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
-    header: 'Estimation results',
+    header: 'Table of estimation results',
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
     tableHeader3: 'Estimated monthly amount (CAD)',
@@ -83,6 +83,8 @@ const en: WebTranslations = {
   },
   moreInfoHeader: 'More Information',
   modifyAnswers: 'Modify answers',
+  modifyAnswersText:
+    'If you think you have made a mistake in filling out the form, or you would like to change your answers to see what would happen in a different scenario, please use the button below to modify your answers.',
   errors: {
     empty: 'This information is required',
   },
