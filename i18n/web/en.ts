@@ -42,13 +42,13 @@ const en: WebTranslations = {
     'The Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
   homePageHeader1: 'Types of benefits programs',
   homePageP3:
-    'The Old Age Security pension is a monthly payment you can get if you are <strong className="font-bold">65 and older</strong>. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    'The Old Age Security pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
-    'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged <strong className="font-bold">65 and older</strong> who have a low income and are living in Canada.',
+    'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
   homePageP5:
-    'The Allowance is a monthly benefit available to low-income individuals aged <strong className="font-bold">60 to 64</strong> whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    'The Allowance for the Survivor is a monthly benefit available to individuals aged <strong className="font-bold">60 to 64</strong> who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   disclaimerTitle: 'Privacy and terms of use',
   disclaimer: `The Canadian Old Age Benefits Estimator does not collect or transmit any personal information. Anonymous usage data may be collected for research purposes. The information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.</br></br>Please note that any information provided by this tool is only an estimate, and should not be considered financial advice. For an official assessment, you are encouraged to contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>.`,
   footerlink1: 'Contact Us',
