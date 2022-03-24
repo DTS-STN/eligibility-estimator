@@ -85,8 +85,8 @@ export enum LinkLocation {
 }
 
 export enum Language {
-  EN = 'EN',
-  FR = 'FR',
+  EN = 'en',
+  FR = 'fr',
 }
 
 // must be one of: https://www.techonthenet.com/js/language_tags.php

@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
+import Link from 'next/link'
+import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { ConditionalLinks } from '../ConditionalLinks'
@@ -14,21 +15,6 @@ export const ResultsPage: React.VFC = () => {
   const isMobile = useMediaQuery(992)
   const root = useStore()
 
-  /**
-   * Runs once on mount to process the scrolling behaviour. Does a check to prevent any serverside process from throwing any warnings / errors
-   */
-  useEffect(() => {
-    const html = document.getElementsByTagName('html')[0]
-    html.setAttribute('style', 'scroll-behavior: smooth;')
-    if (process.browser) {
-      const tabs = document.getElementById('tabList') as HTMLDivElement
-      const tabsVisible = isElementInViewport(tabs)
-      if (!tabsVisible) tabs.scrollIntoView(true)
-    }
-    html.removeAttribute('style')
-  })
-
-  // TODO: No mobile designs yet, where does Need Help go on mobile?
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
@@ -65,12 +51,11 @@ export const ResultsPage: React.VFC = () => {
               <ContactCTA />
             )}
             <p>{tsln.modifyAnswersText}</p>
-            <button
-              className="btn btn-default md:w-48 mt-6"
-              onClick={(e) => root.setActiveTab(0)}
-            >
-              {tsln.modifyAnswers}
-            </button>
+            <Link href="/eligibility" passHref={true}>
+              <button className="btn btn-default md:w-48 mt-6">
+                {tsln.modifyAnswers}
+              </button>
+            </Link>
             {root.summary?.moreInfoLinks?.length && (
               <ConditionalLinks links={root.summary.moreInfoLinks} />
             )}

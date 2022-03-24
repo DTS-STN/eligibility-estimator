@@ -36,7 +36,9 @@ export const ResultsTable = observer(() => {
           <tr>
             <td>{tsln.oas}</td>
             <td>
-              <EligibilityDetails eligibilityType={root.oas} />
+              {root.oas?.eligibility && (
+                <EligibilityDetails eligibilityType={root.oas} />
+              )}
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
@@ -47,12 +49,17 @@ export const ResultsTable = observer(() => {
           <tr className="bg-[#E8F2F4]">
             <td>{tsln.gis}</td>
             <td>
-              <EligibilityDetails eligibilityType={root.gis} />
+              {root.gis?.eligibility && (
+                <EligibilityDetails eligibilityType={root.gis} />
+              )}
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
                 {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-                  ? numberToStringCurrency(root.gis.entitlement.result, locale)
+                  ? numberToStringCurrency(
+                      root.gis.entitlement.result ?? 0,
+                      locale
+                    )
                   : 'Unavailable'}
               </td>
             )}
@@ -60,12 +67,14 @@ export const ResultsTable = observer(() => {
           <tr>
             <td>{tsln.alw}</td>
             <td>
-              <EligibilityDetails eligibilityType={root.allowance} />
+              {root.allowance?.eligibility && (
+                <EligibilityDetails eligibilityType={root.allowance} />
+              )}
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
                 {numberToStringCurrency(
-                  root.allowance.entitlement.result,
+                  root.allowance?.entitlement?.result ?? 0,
                   locale
                 )}
               </td>
@@ -74,11 +83,16 @@ export const ResultsTable = observer(() => {
           <tr className="bg-[#E8F2F4]">
             <td>{tsln.afs}</td>
             <td>
-              <EligibilityDetails eligibilityType={root.afs} />
+              {root.afs?.eligibility && (
+                <EligibilityDetails eligibilityType={root.afs} />
+              )}
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
-                {numberToStringCurrency(root.afs.entitlement.result, locale)}
+                {numberToStringCurrency(
+                  root.afs?.entitlement?.result ?? 0,
+                  locale
+                )}
               </td>
             )}
           </tr>
@@ -99,11 +113,13 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            <EligibilityDetails eligibilityType={root.oas} />
+            {root.oas?.eligibility && (
+              <EligibilityDetails eligibilityType={root.oas} />
+            )}
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
-            {numberToStringCurrency(root.oas.entitlement.result, locale)}
+            {numberToStringCurrency(root.oas?.entitlement?.result ?? 0, locale)}
           </p>
         </div>
         <div className="mb-4">
@@ -112,12 +128,17 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            <EligibilityDetails eligibilityType={root.gis} />
+            {root.gis?.eligibility && (
+              <EligibilityDetails eligibilityType={root.gis} />
+            )}
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
             {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-              ? numberToStringCurrency(root.gis.entitlement.result, locale)
+              ? numberToStringCurrency(
+                  root.gis?.entitlement?.result ?? 0,
+                  locale
+                )
               : 'Unavailable'}
           </p>
         </div>
@@ -127,11 +148,16 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            <EligibilityDetails eligibilityType={root.allowance} />
+            {root.allowance?.eligibility && (
+              <EligibilityDetails eligibilityType={root.allowance} />
+            )}
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
-            {numberToStringCurrency(root.allowance.entitlement.result, locale)}
+            {numberToStringCurrency(
+              root.allowance?.entitlement?.result ?? 0,
+              locale
+            )}
           </p>
         </div>
         <div className="mb-4">
@@ -140,11 +166,13 @@ export const ResultsTable = observer(() => {
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            <EligibilityDetails eligibilityType={root.afs} />
+            {root.afs?.eligibility && (
+              <EligibilityDetails eligibilityType={root.afs} />
+            )}
           </p>
           <p className="px-1.5 py-1.5">
             <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
-            {numberToStringCurrency(root.afs.entitlement.result, locale)}
+            {numberToStringCurrency(root.afs?.entitlement?.result ?? 0, locale)}
           </p>
         </div>
         <div className="mb-4">

@@ -35,7 +35,9 @@ describe('test the mobx state tree nodes', () => {
       afs: {},
       allowance: {},
       summary: {},
-      lang: Language.EN,
+      langData: Language.EN,
+      langBrowser: Language.EN,
+      inputs: [],
     })
   })
 
@@ -159,8 +161,8 @@ describe('test the mobx state tree nodes', () => {
     const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
-    let input = form.buildObjectWithFormData()
-    expect(input).toEqual({ _language: 'EN', livingCountry: 'CAN' }) // blank form includes default livingCountry
+    let input = form.buildObjectWithFormData(Language.EN)
+    expect(input).toEqual({ _language: 'en', livingCountry: 'CAN' }) // blank form includes default livingCountry
     fillOutForm(form)
     input = form.buildObjectWithFormData()
     expect(input.income).toEqual('20000')
