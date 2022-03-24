@@ -182,8 +182,11 @@ export const RootStore = types
       } else console.log('not updating summary')
     },
     saveStoreState() {
-      console.log('saved snapshot', getSnapshot(self))
-      window.sessionStorage.setItem('store', JSON.stringify(getSnapshot(self)))
+      if (typeof window !== 'undefined') {
+        const snapshot = getSnapshot(self)
+        window.sessionStorage.setItem('store', JSON.stringify(snapshot))
+        console.log('saved snapshot', snapshot)
+      }
     },
     bootstrapStoreState(store: SnapshotIn<typeof RootStore>) {
       self.form = Form.create(store.form)
