@@ -25,8 +25,8 @@ describe('TextField component', () => {
 
   it('should render an input component that is required component', () => {
     const props = {
-      name: 'legalStatusOther',
-      label: 'Describe your legal status?',
+      name: 'age', // this is really a NumberField, but since we currently have no TextFields, we will use age
+      label: 'Some question label?',
       required: true,
     }
 
@@ -55,8 +55,8 @@ describe('TextField component', () => {
 
   it('should render an input component that is required and has a custom error message', () => {
     const props = {
-      name: 'legalStatusOther',
-      label: 'Describe your legal status?',
+      name: 'age', // this is really a NumberField, but since we currently have no TextFields, we will use age
+      label: 'Some question label?',
       error: 'This field is required.',
       required: true,
     }

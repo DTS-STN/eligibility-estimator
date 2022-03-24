@@ -135,7 +135,6 @@ resources:
     fileName: eligibility-estimator-openapi
     contents: >
       openapi: 3.0.3
-
       info:
         title: Benefits Eligibility Estimator API
         version: '1.0'
@@ -174,7 +173,6 @@ resources:
               - $ref: '#/components/parameters/maritalStatus'
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
-              - $ref: '#/components/parameters/legalStatusOther'
               - $ref: '#/components/parameters/canadaWholeLife'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
               - $ref: '#/components/parameters/everLivedSocialCountry'
@@ -205,7 +203,6 @@ resources:
                 - maritalStatus
                 - livingCountry
                 - legalStatus
-                - legalStatusOther
                 - canadaWholeLife
                 - yearsInCanadaSince18
                 - everLivedSocialCountry
@@ -514,20 +511,6 @@ resources:
                 - indianStatus
                 - other
               description: The current legal status of the client.
-            allowEmptyValue: false
-
-          legalStatusOther:
-            name: legalStatusOther
-            in: query
-            description: >
-              The current legal status of the client.
-
-
-              _Note that this is only required when legalStatus is "Other"._
-            required: false
-            example: Some legal status
-            schema:
-              type: string
             allowEmptyValue: false
 
           canadaWholeLife:

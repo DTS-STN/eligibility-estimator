@@ -75,7 +75,7 @@ const fr: WebTranslations = {
   contactCTA:
     'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
-    header: "Résultats de l'estimation",
+    header: "Tableau des résultats d'estimation",
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
     tableHeader3: 'Montant mensuel estimé (CAD)',
@@ -83,6 +83,8 @@ const fr: WebTranslations = {
   },
   moreInfoHeader: "Besoin de plus d'information",
   modifyAnswers: 'Modifier vos réponses',
+  modifyAnswersText:
+    'Si vous avez fait une erreur en remplissant le formulaire, ou si vous souhaitez modifier vos réponses pour voir ce qui se passerait dans un scénario différent, veuillez utiliser le bouton ci-dessous pour modifier vos réponses.',
   errors: {
     empty: 'Ce renseignement est requis',
   },

@@ -3,6 +3,7 @@ import {
   Language,
   Locale,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
@@ -26,25 +27,7 @@ export interface Translations {
     moreInfo: string
     invalid: string
   }
-  question: {
-    income: string
-    age: string
-    maritalStatus: string
-    livingCountry: string
-    legalStatus: string
-    legalStatusOther: string
-    canadaWholeLife: string
-    yearsInCanadaSince18: string
-    everLivedSocialCountry: string
-    partnerBenefitStatus: string
-    partnerIncome: string
-    partnerAge: string
-    partnerLivingCountry: string
-    partnerLegalStatus: string
-    partnerCanadaWholeLife: string
-    partnerYearsInCanadaSince18: string
-    partnerEverLivedSocialCountry: string
-  }
+  question: { [key in FieldKey]: string }
   questionOptions: {
     legalStatus: KeyAndText[]
     maritalStatus: KeyAndText[]

@@ -55,13 +55,12 @@ export const Tooltip: React.FC<{
         xmlns="http://www.w3.org/2000/svg"
         width="25"
         height="25"
-        fill="none"
         className="cursor-pointer z-20"
         onClick={(e) => setShow(true)}
       >
         <path
           d="M12.5 0C5.597 0 0 5.599 0 12.5 0 19.405 5.597 25 12.5 25S25 19.405 25 12.5C25 5.599 19.403 0 12.5 0Zm0 5.544a2.117 2.117 0 1 1 0 4.234 2.117 2.117 0 0 1 0-4.234Zm2.823 12.803c0 .334-.271.605-.605.605h-4.436a.605.605 0 0 1-.605-.605v-1.21c0-.334.271-.605.605-.605h.605v-3.226h-.605a.605.605 0 0 1-.605-.604v-1.21c0-.334.271-.605.605-.605h3.226c.334 0 .605.27.605.605v5.04h.605c.334 0 .605.271.605.605v1.21Z"
-          className="text-primary fill-current"
+          className="text-primary fill-primary"
         />
       </svg>
       <div
@@ -82,6 +81,7 @@ export const Tooltip: React.FC<{
           <header className="flex items-center justify-between gap-x-4 bg-primary text-white rounded-t-xl px-5 py-3">
             <div className="flex gap-x-4 items-center">
               <svg
+                fill="white"
                 xmlns="http://www.w3.org/2000/svg"
                 width={`${size ? size : 25}`}
                 height={`${size ? size : 25}`}
