@@ -182,9 +182,6 @@ export class BenefitHandler {
       FieldKey.MARITAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
     ]
-    if (this.input.client.legalStatus.other) {
-      requiredFields.push(FieldKey.LEGAL_STATUS_OTHER)
-    }
     if (this.input.client.canadaWholeLife === false) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }

@@ -9,12 +9,6 @@
     @apply focus-visible:ring-1;
     @apply focus-visible:ring-black;
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
   table,
   p,
   label,
@@ -58,22 +52,22 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule;
+    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content;
   }
   .h2 {
-    @apply text-h2 font-bold mb-[15px] font-header-gc;
+    @apply text-h2 font-bold mb-[15px] font-header-gc text-content;
   }
   .h3 {
-    @apply text-h3 font-bold mb-[15px] font-header-gc;
+    @apply text-h3 font-bold mb-[15px] font-header-gc text-content;
   }
   .h4 {
-    @apply text-h4 font-bold mb-[15px] font-header-gc;
+    @apply text-h4 font-bold mb-[15px] font-header-gc text-content;
   }
   .h5 {
-    @apply font-bold mb-[15px] font-header-gc;
+    @apply font-bold mb-[15px] font-header-gc text-content;
   }
   .h6 {
-    @apply text-h6 font-bold mb-[15px] font-header-gc;
+    @apply text-h6 font-bold mb-[15px] font-header-gc text-content;
   }
 
   /* form controls */

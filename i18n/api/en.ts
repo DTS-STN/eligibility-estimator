@@ -31,7 +31,6 @@ const en: Translations = {
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country are you currently living in?',
     legalStatus: 'What is your current legal status in Canada?',
-    legalStatusOther: 'Please specify:',
     canadaWholeLife: 'Since the age of 18, have you only lived in Canada?',
     yearsInCanadaSince18:
       'Since the age of 18, how many years have you lived in Canada?',

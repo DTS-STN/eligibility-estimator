@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -23,17 +24,15 @@ export const Layout: React.VFC<{
         <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
             <div className="flex justify-end my-4">
-              <button
-                className="btn-link btn underline"
-                onClick={(e) => {
-                  router.push(router.pathname, router.pathname, {
-                    locale: oppositeLocale,
-                  })
-                  root.setActiveTab(0)
-                }}
+              <Link
+                href={router.asPath}
+                locale={oppositeLocale}
+                passHref={true}
               >
-                {isMobile ? tsln.otherLangCode : tsln.otherLang}
-              </button>
+                <button className="btn-link btn underline">
+                  {isMobile ? tsln.otherLangCode : tsln.otherLang}
+                </button>
+              </Link>
             </div>
           </div>
           <Header />
