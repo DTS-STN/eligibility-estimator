@@ -442,6 +442,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dts-stn/decd-design-system@npm:^1.24.0":
+  version: 1.24.0
+  resolution: "@dts-stn/decd-design-system@npm:1.24.0"
+  dependencies:
+    prop-types: ^15.7.2
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    user: ^0.0.0
+  checksum: 1d96de344f84cb6153f40c28c06d6e39c1b8615b4a55555f67d028bbdd9e51f5cc26251dc210e0ed2d8ccb9df87b51c5ae75895723a2e368487d018d6ef388b9
+  languageName: node
+  linkType: hard
+
 "@emotion/cache@npm:^11.4.0, @emotion/cache@npm:^11.7.1":
   version: 11.7.1
   resolution: "@emotion/cache@npm:11.7.1"
@@ -2701,6 +2713,7 @@ __metadata:
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
     "@babel/core": ^7.17.8
+    "@dts-stn/decd-design-system": ^1.24.0
     "@headlessui/react": ^1.5.0
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/dom": ^8.11.4
@@ -6245,7 +6258,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:17.0.2":
+"react-dom@npm:17.0.2, react-dom@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-dom@npm:17.0.2"
   dependencies:
@@ -6388,7 +6401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:17.0.2":
+"react@npm:17.0.2, react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -7675,6 +7688,13 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
   checksum: 96e64977a573244fd11350a3141b2cf57fb72dd9dd902f387c8a0a565d0a948bc81588bd7378c6ef6defc0d1119f37f73aac4a7a287c8443abd444bd4e7bbea8
+  languageName: node
+  linkType: hard
+
+"user@npm:^0.0.0":
+  version: 0.0.0
+  resolution: "user@npm:0.0.0"
+  checksum: 28efcfc63ca4596512eee3a9d0b6f08faffcd573aa48ffd4e892b0792f3bc781b40c60b38bb29d64710ef8b6fa258eec9363178665c7e7ed4e6595b7072899e5
   languageName: node
   linkType: hard
 
