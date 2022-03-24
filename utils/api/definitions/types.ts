@@ -28,7 +28,6 @@ export interface RequestInput {
   maritalStatus: MaritalStatus
   livingCountry: string // country code
   legalStatus: LegalStatus
-  legalStatusOther: string
   canadaWholeLife: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
