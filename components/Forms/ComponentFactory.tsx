@@ -18,6 +18,7 @@ import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
+import { FAQ } from '../FAQ'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -193,6 +194,13 @@ export const ComponentFactory: React.VFC = observer(({}) => {
           title={tsln.needHelp}
           links={root.summary.needHelpLinks}
         />
+      </div>
+
+      <div>
+        <h2 className="h2 text-content mt-16 mb-8">
+          Frequently Asked Questions
+        </h2>
+        <FAQ />
       </div>
     </>
   )
