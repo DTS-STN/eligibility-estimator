@@ -80,6 +80,7 @@ const fr: WebTranslations = {
     tableHeader1: 'Exemples de prestations',
     tableHeader2: 'Admissibilité',
     tableHeader3: 'Montant mensuel estimé (CAD)',
+    tableHeader4: 'Details',
     tableTotalAmount: 'Montant total des prestations mensuelles',
   },
   moreInfoHeader: "Besoin de plus d'information",

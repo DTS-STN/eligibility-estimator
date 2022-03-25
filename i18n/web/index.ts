@@ -79,6 +79,7 @@ export type WebTranslations = {
     tableHeader1: string
     tableHeader2: string
     tableHeader3: string
+    tableHeader4: string
     tableTotalAmount: string
   }
   moreInfoHeader: string

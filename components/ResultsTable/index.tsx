@@ -25,9 +25,10 @@ export const ResultsTable = observer(() => {
           <tr>
             <th>{tsln.resultsPage.tableHeader1}</th>
             <th>{tsln.resultsPage.tableHeader2}</th>
+            <th>{tsln.resultsPage.tableHeader3}</th>
             {!root.summary.zeroEntitlements && (
               <th className="text-right min-w-[68px]">
-                {tsln.resultsPage.tableHeader3}
+                {tsln.resultsPage.tableHeader4}
               </th>
             )}
           </tr>
@@ -37,8 +38,21 @@ export const ResultsTable = observer(() => {
             <td>{tsln.oas}</td>
             <td>
               {root.oas?.eligibility && (
-                <EligibilityDetails eligibilityType={root.oas} />
+                <p
+                  className="summary-link"
+                  dangerouslySetInnerHTML={{
+                    __html: root.oas.eligibility.detail.split('\n')[0],
+                  }}
+                />
               )}
+            </td>
+            <td>
+              <p
+                className="summary-link"
+                dangerouslySetInnerHTML={{
+                  __html: root.oas.eligibility.detail.split('\n')[1],
+                }}
+              />
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
@@ -50,8 +64,21 @@ export const ResultsTable = observer(() => {
             <td>{tsln.gis}</td>
             <td>
               {root.gis?.eligibility && (
-                <EligibilityDetails eligibilityType={root.gis} />
+                <p
+                  className="summary-link"
+                  dangerouslySetInnerHTML={{
+                    __html: root.gis.eligibility.detail.split('\n')[0],
+                  }}
+                />
               )}
+            </td>
+            <td>
+              <p
+                className="summary-link"
+                dangerouslySetInnerHTML={{
+                  __html: root.gis.eligibility.detail.split('\n')[1],
+                }}
+              />
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
@@ -68,8 +95,21 @@ export const ResultsTable = observer(() => {
             <td>{tsln.alw}</td>
             <td>
               {root.allowance?.eligibility && (
-                <EligibilityDetails eligibilityType={root.allowance} />
+                <p
+                  className="summary-link"
+                  dangerouslySetInnerHTML={{
+                    __html: root.allowance.eligibility.detail.split('\n')[0],
+                  }}
+                />
               )}
+            </td>
+            <td>
+              <p
+                className="summary-link"
+                dangerouslySetInnerHTML={{
+                  __html: root.allowance.eligibility.detail.split('\n')[1],
+                }}
+              />
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
@@ -84,8 +124,21 @@ export const ResultsTable = observer(() => {
             <td>{tsln.afs}</td>
             <td>
               {root.afs?.eligibility && (
-                <EligibilityDetails eligibilityType={root.afs} />
+                <p
+                  className="summary-link"
+                  dangerouslySetInnerHTML={{
+                    __html: root.afs.eligibility.detail.split('\n')[0],
+                  }}
+                />
               )}
+            </td>
+            <td>
+              <p
+                className="summary-link"
+                dangerouslySetInnerHTML={{
+                  __html: root.afs.eligibility.detail.split('\n')[1],
+                }}
+              />
             </td>
             {!root.summary.zeroEntitlements && (
               <td className="text-right min-w-[68px]">
@@ -99,6 +152,7 @@ export const ResultsTable = observer(() => {
           {!root.summary.zeroEntitlements && (
             <tr className="border-t border-content font-bold ">
               <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
+              <td></td>
               <td className="text-right min-w-[68px]">
                 {numberToStringCurrency(root.summary.entitlementSum, locale)}
               </td>
@@ -118,7 +172,7 @@ export const ResultsTable = observer(() => {
             )}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
             {numberToStringCurrency(root.oas?.entitlement?.result ?? 0, locale)}
           </p>
         </div>
@@ -133,7 +187,7 @@ export const ResultsTable = observer(() => {
             )}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
             {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
               ? numberToStringCurrency(
                   root.gis?.entitlement?.result ?? 0,
@@ -153,7 +207,7 @@ export const ResultsTable = observer(() => {
             )}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
             {numberToStringCurrency(
               root.allowance?.entitlement?.result ?? 0,
               locale
@@ -171,7 +225,7 @@ export const ResultsTable = observer(() => {
             )}
           </p>
           <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader3}: </span>
+            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
             {numberToStringCurrency(root.afs?.entitlement?.result ?? 0, locale)}
           </p>
         </div>
