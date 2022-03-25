@@ -104,12 +104,17 @@
 
   /* Misc */
   details {
-    @apply cursor-pointer mb-3;
+    @apply cursor-pointer mb-4 pl-6;
   }
   details summary {
-    @apply text-content border border-content rounded py-2 px-3;
+    @apply text-content border border-content rounded py-1 px-4;
   }
-  details[open] summary {
+
+  summary::marker,
+  summary::-webkit-details-marker {
+  }
+
+  details[open] > summary {
     @apply rounded-bl-none rounded-br-none;
   }
   details[open] div {
