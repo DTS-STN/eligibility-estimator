@@ -3,10 +3,12 @@ import Link from 'next/link'
 export const FAQF = () => (
   <div>
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Sécurité de la vieillesse</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Sécurité de la vieillesse
+        </h2>
       </summary>
-      <details>
+      <details className="mt-4">
         <summary>
           Dois-je faire une demande pour commencer à recevoir ma pension de la
           Sécurité de la vieillesse?
@@ -127,11 +129,14 @@ export const FAQF = () => (
     </details>
 
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Supplément de revenu garanti</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Supplément de revenu garanti
+        </h2>
       </summary>
+
       <details>
-        <summary>
+        <summary className="mt-4">
           Vais-je continuer à recevoir le Supplément de revenu garanti si je
           quitte le Canada?
         </summary>
@@ -194,11 +199,16 @@ export const FAQF = () => (
     </details>
 
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Application</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Application
+        </h2>
       </summary>
+
       <details>
-        <summary>Quels sont les documents requis pour ma demande?</summary>
+        <summary className="mt-4">
+          Quels sont les documents requis pour ma demande?
+        </summary>
         <div className="p-4 space-y-4">
           <p>
             <span className="font-bold">Preuve de naissance:</span> Si vous êtes
@@ -590,11 +600,14 @@ export const FAQF = () => (
     </details>
 
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Régime de pensions du Canada (RPC)</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Régime de pensions du Canada (RPC)
+        </h2>
       </summary>
+
       <details>
-        <summary>
+        <summary className="mt-4">
           Qu&apos;est ce que la pension de retraite du Régime de pensions du
           Canada (RPC)?
         </summary>

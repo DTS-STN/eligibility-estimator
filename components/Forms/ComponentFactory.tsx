@@ -196,10 +196,8 @@ export const ComponentFactory: React.VFC = observer(({}) => {
         />
       </div>
 
-      <div>
-        <h2 className="h2 text-content mt-16 mb-8">
-          Frequently Asked Questions
-        </h2>
+      <div className="mt-16">
+        <h2 className="h2 text-content mb-8">Frequently Asked Questions</h2>
         <FAQ />
       </div>
     </>

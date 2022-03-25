@@ -104,15 +104,21 @@
 
   /* Misc */
   details {
-    @apply cursor-pointer mb-4 pl-6;
+    @apply cursor-pointer mb-4;
   }
+
+  details > details {
+    @apply pl-12;
+  }
+
   details summary {
     @apply text-content border border-content rounded py-1 px-4;
   }
 
-  summary::marker,
+  /* summary::marker,
   summary::-webkit-details-marker {
-  }
+    @apply text-details-link;
+  } */
 
   details[open] > summary {
     @apply rounded-bl-none rounded-br-none;
@@ -120,6 +126,7 @@
   details[open] div {
     @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   }
+
   td {
     @apply p-2;
   }

@@ -3,10 +3,12 @@ import Link from 'next/link'
 export const FAQE = () => (
   <div>
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Old Age Security</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Old Age Security
+        </h2>
       </summary>
-      <details>
+      <details className="mt-4">
         <summary>
           Do I have to apply to start receiving my Old Age Security pension?
         </summary>
@@ -109,12 +111,14 @@ export const FAQE = () => (
     </details>
 
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Guaranteed Income Supplement</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Guaranteed Income Supplement
+        </h2>
       </summary>
 
       <details>
-        <summary>
+        <summary className="mt-4">
           Do I continue receiving the Guaranteed Income Supplement if I leave
           Canada?
         </summary>
@@ -168,12 +172,16 @@ export const FAQE = () => (
     </details>
 
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Application</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Application
+        </h2>
       </summary>
 
       <details>
-        <summary>What are the required documents for my application?</summary>
+        <summary className="mt-4">
+          What are the required documents for my application?
+        </summary>
         <div className="p-4 space-y-4">
           <p>
             <span className="font-bold">Proof of Birth:</span> If born inside or
@@ -508,12 +516,16 @@ export const FAQE = () => (
     </details>
 
     <details>
-      <summary>
-        <h2 className="inline h3 mt-10">Canada Pension Plan (CPP)</h2>
+      <summary className="border-none text-details-link">
+        <h2 className="text-details-link border-b-[3px] inline h3 mt-10 pb-1">
+          Canada Pension Plan (CPP)
+        </h2>
       </summary>
 
       <details>
-        <summary>What is The Canada Pension Plan (CPP)?</summary>
+        <summary className="mt-4">
+          What is The Canada Pension Plan (CPP)?
+        </summary>
         <div className="p-4">
           <p>
             The Canada Pension Plan retirement pension is a monthly, taxable
