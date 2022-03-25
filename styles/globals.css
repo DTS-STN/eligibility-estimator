@@ -115,11 +115,6 @@
     @apply text-content border border-content rounded py-1 px-4;
   }
 
-  /* summary::marker,
-  summary::-webkit-details-marker {
-    @apply text-details-link;
-  } */
-
   details[open] > summary {
     @apply rounded-bl-none rounded-br-none;
   }
