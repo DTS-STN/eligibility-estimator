@@ -1,13 +1,12 @@
 import Joi from 'joi'
-import { numberToStringCurrency } from '../../../i18n/api'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import { legalValues } from '../scrapers/output'
 import {
   Language,
   LegalStatus,
-  Locale,
   MaritalStatus,
   PartnerBenefitStatus,
+  ValidationErrors,
 } from './enums'
 
 /**
@@ -28,23 +27,23 @@ export const RequestSchema = Joi.object({
   income: Joi.number()
     .precision(2)
     .min(0)
-    .ruleset.less(legalValues.MAX_OAS_INCOME)
-    .message(
-      `Your annual income must be less than ${numberToStringCurrency(
-        legalValues.MAX_OAS_INCOME,
-        Locale.EN,
-        { rounding: 0 }
-      )} to receive any of the benefits covered by this tool.`
-    ), // todo i18n,
-  age: Joi.number().integer().min(18).max(150),
+    .message(ValidationErrors.incomeBelowZero)
+    .less(legalValues.MAX_OAS_INCOME)
+    .message(ValidationErrors.incomeTooHigh),
+  age: Joi.number()
+    .integer()
+    .min(18)
+    .message(ValidationErrors.ageUnder18)
+    .max(150)
+    .message(ValidationErrors.ageOver150),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
   canadaWholeLife: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
-    .ruleset.max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message('Years in Canada should be no more than age minus 18'), // todo i18n
+    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
+    .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean(),
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
@@ -52,26 +51,26 @@ export const RequestSchema = Joi.object({
   partnerIncome: Joi.number()
     .precision(2)
     .min(0)
-    .ruleset.less(
+    .message(ValidationErrors.partnerIncomeBelowZero)
+    .less(
       Joi.ref('income', {
         adjust: (income) => legalValues.MAX_OAS_INCOME - income,
       })
     )
-    .message(
-      `The sum of you and your partner's annual income must be less than ${numberToStringCurrency(
-        legalValues.MAX_OAS_INCOME,
-        Locale.EN,
-        { rounding: 0 }
-      )} to receive any of the benefits covered by this tool.`
-    ), // todo i18n,
-  partnerAge: Joi.number().integer().max(150),
+    .message(ValidationErrors.partnerIncomeTooHigh),
+  partnerAge: Joi.number()
+    .integer()
+    .min(18)
+    .message(ValidationErrors.partnerAgeUnder18)
+    .max(150)
+    .message(ValidationErrors.partnerAgeOver150),
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
   partnerCanadaWholeLife: Joi.boolean(),
   partnerYearsInCanadaSince18: Joi.number()
     .integer()
-    .ruleset.max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
-    .message('Years in Canada should be no more than partnerAge minus 18'), // todo i18n
+    .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
+    .message(ValidationErrors.partnerYearsInCanadaMinusAge),
   partnerEverLivedSocialCountry: Joi.boolean(),
   _language: Joi.string()
     .valid(...Object.values(Language))

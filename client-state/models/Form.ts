@@ -1,5 +1,11 @@
+import Joi from 'joi'
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
-import { webDictionary } from '../../i18n/web'
+import {
+  applyReplacements,
+  getWebTranslations,
+  webDictionary,
+  WebTranslations,
+} from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
@@ -186,10 +192,16 @@ export const Form = types
 
       if ('error' in data) {
         self.clearAllErrors()
-        // validate errors
-        for (const d of data.detail) {
-          const field = self.getFieldByKey(d.context.key)
-          field.setError(d.message)
+        if (!('details' in data.detail))
+          return console.error('Unexpected error:', data.detail)
+        const allErrors: Joi.ValidationErrorItem[] = data.detail.details
+        for (const err of allErrors) {
+          const language: Language = parent.langBrowser
+          const tsln: WebTranslations = getWebTranslations(language)
+          let translatedError: string = tsln.validationErrors[err.message]
+          translatedError = applyReplacements(translatedError, language)
+          const errorText: string = translatedError ?? err.message
+          self.getFieldByKey(err.context.key).setError(errorText)
         }
       } else {
         self.clearAllErrors()

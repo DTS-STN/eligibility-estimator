@@ -1,3 +1,4 @@
+// noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
 
@@ -87,6 +88,26 @@ const fr: WebTranslations = {
     'Si vous avez fait une erreur en remplissant le formulaire, ou si vous souhaitez modifier vos réponses pour voir ce qui se passerait dans un scénario différent, veuillez utiliser le bouton ci-dessous pour modifier vos réponses.',
   errors: {
     empty: 'Ce renseignement est requis',
+  },
+  validationErrors: {
+    incomeBelowZero: 'Vos revenus doivent être supérieurs à zéro.',
+    incomeTooHigh:
+      "Votre revenu annuel doit être inférieur à {MAX_OAS_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
+    partnerIncomeBelowZero:
+      'Les revenus de votre partenaire doivent être supérieurs à zéro.',
+    partnerIncomeTooHigh:
+      "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {MAX_OAS_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
+    ageUnder18:
+      'Vous devez avoir plus de 18 ans pour pouvoir utiliser cet outil.',
+    ageOver150: 'Votre âge doit être inférieur à 150 ans.',
+    partnerAgeUnder18:
+      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
+    partnerAgeOver150:
+      "L'âge de votre partenaire doit être inférieur à 150 ans.",
+    yearsInCanadaMinusAge:
+      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
+    partnerYearsInCanadaMinusAge:
+      "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
   },
   unavailableImageAltText: 'Gens Heureux',
   govt: 'Gouvernement du Canada',
