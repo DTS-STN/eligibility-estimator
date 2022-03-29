@@ -789,7 +789,8 @@ describe('basic OAS scenarios', () => {
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
-    expect(res.body.detail[0].path[0]).toEqual(FieldKey.INCOME)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(FieldKey.INCOME)
   })
   it('returns "unavailable" when not citizen (other provided)', async () => {
     const res = await mockGetRequest({
@@ -1253,7 +1254,8 @@ describe('basic GIS scenarios', () => {
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
-    expect(res.body.detail[0].path[0]).toEqual(FieldKey.INCOME)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(FieldKey.INCOME)
   })
   it('returns "ineligible" when not living in Canada', async () => {
     const res = await mockGetRequest({
