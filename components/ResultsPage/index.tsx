@@ -8,6 +8,7 @@ import { ContactCTA } from '../ContactCTA'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { ResultsTable } from '../ResultsTable'
+import { FAQ } from '../FAQ'
 
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
@@ -59,6 +60,13 @@ export const ResultsPage: React.VFC = () => {
             {root.summary?.moreInfoLinks?.length && (
               <ConditionalLinks links={root.summary.moreInfoLinks} />
             )}
+
+            <div>
+              <h2 className="h2 text-content mb-8 mt-8">
+                Frequently Asked Questions
+              </h2>
+              <FAQ />
+            </div>
           </>
         )}
     </div>
