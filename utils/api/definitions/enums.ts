@@ -84,6 +84,20 @@ export enum LinkLocation {
   HIDDEN = 'HIDDEN', // won't show anywhere (used internally for linkifying strings)
 }
 
+// all "custom" Joi Validation errors that we properly handle and translate for the end user
+export enum ValidationErrors {
+  incomeBelowZero = 'incomeBelowZero',
+  incomeTooHigh = 'incomeTooHigh',
+  partnerIncomeTooHigh = 'partnerIncomeTooHigh',
+  partnerIncomeBelowZero = 'partnerIncomeBelowZero',
+  ageUnder18 = 'ageUnder18',
+  ageOver150 = 'ageOver150',
+  partnerAgeUnder18 = 'partnerAgeUnder18',
+  partnerAgeOver150 = 'partnerAgeOver150',
+  yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
+  partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
+}
+
 export enum Language {
   EN = 'en',
   FR = 'fr',

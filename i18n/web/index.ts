@@ -1,8 +1,14 @@
-import { Language, Locale } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  Locale,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
+import { legalValues } from '../../utils/api/scrapers/output'
+import { numberToStringCurrency } from '../api'
 import en from './en'
 import fr from './fr'
 
-export const webDictionary = { en, fr }
+export const webDictionary = { [Language.EN]: en, [Language.FR]: fr }
 
 export type WebTranslations = {
   _language: Language
@@ -81,6 +87,7 @@ export type WebTranslations = {
   errors: {
     empty: string
   }
+  validationErrors: { [key in ValidationErrors]: string }
   unavailableImageAltText: string
   govt: string
   yes: string
@@ -92,4 +99,24 @@ export type WebTranslations = {
     partnerLivingCountry: string
     default: string
   }
+}
+
+export function getWebTranslations(language: Language): WebTranslations {
+  switch (language) {
+    case Language.EN:
+      return webDictionary.en
+    case Language.FR:
+      return webDictionary.fr
+  }
+}
+
+/**
+ * Takes an input string, and applies variable replacements according to the current language.
+ */
+export function applyReplacements(input: string, language: Language): string {
+  const locale = language === Language.EN ? Locale.EN : Locale.FR
+  return input.replace(
+    '{MAX_OAS_INCOME}',
+    numberToStringCurrency(legalValues.MAX_OAS_INCOME, locale, { rounding: 0 })
+  )
 }

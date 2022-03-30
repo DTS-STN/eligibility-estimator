@@ -32,7 +32,7 @@ export default class MainHandler {
       console.log(error)
       this.results = {
         error: ResultKey.INVALID,
-        detail: error.details || String(error),
+        detail: error,
       }
     }
   }
