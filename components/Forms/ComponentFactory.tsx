@@ -10,6 +10,7 @@ import { WebTranslations } from '../../i18n/web'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
+import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { CurrencyField } from './CurrencyField'
@@ -18,7 +19,6 @@ import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
-import { FAQ } from '../FAQ'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -197,7 +197,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       </div>
 
       <div className="mt-16">
-        <h2 className="h2 text-content mb-8">Frequently Asked Questions</h2>
+        <h2 className="h2 text-content mb-8">{tsln.faq}</h2>
         <FAQ />
       </div>
     </>
