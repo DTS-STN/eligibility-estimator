@@ -150,9 +150,8 @@ export const ResultsTable = observer(() => {
             )}
           </tr>
           {!root.summary.zeroEntitlements && (
-            <tr className="border-t border-content font-bold ">
-              <td colSpan={2}>{tsln.resultsPage.tableTotalAmount}</td>
-              <td></td>
+            <tr className="border-t border-content font-bold">
+              <td colSpan={3}>{tsln.resultsPage.tableTotalAmount}</td>
               <td className="text-right min-w-[68px]">
                 {numberToStringCurrency(root.summary.entitlementSum, locale)}
               </td>
