@@ -5,6 +5,7 @@ import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { ConditionalLinks } from '../ConditionalLinks'
 import { ContactCTA } from '../ContactCTA'
+import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { NeedHelpList } from '../Layout/NeedHelpList'
 import { ResultsTable } from '../ResultsTable'
@@ -59,6 +60,11 @@ export const ResultsPage: React.VFC = () => {
             {root.summary?.moreInfoLinks?.length && (
               <ConditionalLinks links={root.summary.moreInfoLinks} />
             )}
+
+            <div>
+              <h2 className="h2 text-content mb-8 mt-8">{tsln.faq}</h2>
+              <FAQ />
+            </div>
           </>
         )}
     </div>
