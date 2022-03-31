@@ -50,7 +50,13 @@ export const FormField = types
         val = self.value.key
       } else {
         if (self.value.includes('$')) {
-          val = self.value.toString().replaceAll('$', '').replaceAll(',', '')
+          // income handling
+          val = self.value
+            .toString()
+            .replaceAll(' ', '')
+            .replace(/(\d+),(\d+)\$/, '$1.$2') // replaces commas with decimals, but only in French!
+            .replaceAll(',', '')
+            .replaceAll('$', '')
         } else {
           val = self.value.toString()
         }

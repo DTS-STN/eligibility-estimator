@@ -1,6 +1,8 @@
 import { observer } from 'mobx-react'
+import { useRouter } from 'next/router'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
+import { Language } from '../../utils/api/definitions/enums'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
@@ -22,6 +24,12 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
   (props) => {
     const { name, label, required, value, placeholder, onChange, error } = props
     const requiredText = useTranslation<string>('required')
+    const locale = useRouter().locale
+
+    const localizedIncome =
+      locale == Language.EN
+        ? { thousandSeparator: true, prefix: '$' }
+        : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
 
     // only need to run this once at component render, so no need for deps
     useEffect(() => {
@@ -58,9 +66,8 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
         <NumberFormat
           id={name}
           name={name}
+          {...localizedIncome}
           data-testid="currency-input"
-          thousandSeparator={true}
-          prefix="$"
           className={`form-control text-content border-[#333] ${
             error ? ' border-danger' : ''
           }`}
