@@ -53,7 +53,7 @@ export const ResultsPage: React.VFC = () => {
             )}
             <p>{tsln.modifyAnswersText}</p>
             <Link href="/eligibility" passHref={true}>
-              <button className="btn btn-default md:w-48 mt-6">
+              <button className="btn btn-default md:w-[fit-content] mt-6">
                 {tsln.modifyAnswers}
               </button>
             </Link>
