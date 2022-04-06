@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { SummaryLink } from '../../client-state/store'
 import { useStore } from '../Hooks'
 
-export const NeedHelpList: React.VFC<{
+export const NeedHelp: React.VFC<{
   title: string
   links: Instance<typeof SummaryLink>[]
 }> = ({ title, links }) => {

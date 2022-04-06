@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { ConditionalLinks } from '../ConditionalLinks'
 import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import { NeedHelpList } from '../Layout/NeedHelpList'
-import { ResultsApply } from '../ResultsApply'
-import { ResultsTable } from '../ResultsTable'
+import { NeedHelp } from '../NeedHelp'
+import { MoreInfoLinks } from './MoreInfoLinks'
+import { ResultsApply } from './ResultsApply'
+import { ResultsTable } from './ResultsTable'
 
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
@@ -24,10 +24,7 @@ export const ResultsPage: React.VFC = () => {
           <p dangerouslySetInnerHTML={{ __html: root.summary.details }} />
         </div>
         <div className="col-span-1">
-          <NeedHelpList
-            title={tsln.needHelp}
-            links={root.summary.needHelpLinks}
-          />
+          <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
         </div>
       </div>
       {root.summary.state &&
@@ -56,7 +53,7 @@ export const ResultsPage: React.VFC = () => {
               </button>
             </Link>
             {root.summary?.moreInfoLinks?.length && (
-              <ConditionalLinks links={root.summary.moreInfoLinks} />
+              <MoreInfoLinks links={root.summary.moreInfoLinks} />
             )}
 
             <div>

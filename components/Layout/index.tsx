@@ -4,9 +4,9 @@ import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { useMediaQuery, useTranslation } from '../Hooks'
-import { SCLabsTestHeader } from '../SCLabsTestHeader'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { SCLabsTestHeader } from './ScTestHeader'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
