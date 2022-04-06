@@ -19,7 +19,7 @@ export const Layout: React.VFC<{
   return (
     <>
       <SCLabsTestHeader />
-      <main id="elig">
+      <main className="mainContent">
         <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
             <div className="flex justify-end my-4">
