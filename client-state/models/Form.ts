@@ -7,19 +7,11 @@ import {
   WebTranslations,
 } from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
-import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import { FieldData } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { legalValues } from '../../utils/api/scrapers/output'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
-
-type FormProgress = {
-  income: boolean
-  personal: boolean
-  legal: boolean
-  estimation?: boolean
-}
 
 export const Form = types
   .model({
@@ -216,15 +208,6 @@ export const Form = types
         parent.saveStoreState()
       }
     }),
-    validateIncome(): boolean {
-      const incomeField = self.getFieldByKey(FieldKey.INCOME)
-      // null income is valid by default
-      if (!incomeField || self.getFieldByKey(FieldKey.INCOME).value == null)
-        return false
-
-      const validIncome = self.getFieldByKey(FieldKey.INCOME).sanitizeInput()
-      return parseInt(validIncome) > legalValues.MAX_OAS_INCOME
-    },
   }))
   .actions((self) => ({
     clearForm(): void {
@@ -238,10 +221,5 @@ export const Form = types
       const parent = getParent(self) as Instance<typeof RootStore>
       parent.setSummary({})
       self.sendAPIRequest()
-    },
-  }))
-  .views((self) => ({
-    get isIncomeTooHigh() {
-      return self.validateIncome()
     },
   }))

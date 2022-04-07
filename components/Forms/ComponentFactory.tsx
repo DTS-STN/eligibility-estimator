@@ -12,7 +12,7 @@ import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import { NeedHelpList } from '../Layout/NeedHelpList'
+import { NeedHelp } from '../NeedHelp'
 import { CurrencyField } from './CurrencyField'
 import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
@@ -190,10 +190,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
 
           <FormButtons />
         </form>
-        <NeedHelpList
-          title={tsln.needHelp}
-          links={root.summary.needHelpLinks}
-        />
+        <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
       </div>
 
       <div className="mt-16">

@@ -9,6 +9,7 @@
     @apply focus-visible:ring-1;
     @apply focus-visible:ring-black;
   }
+
   table,
   p,
   label,
@@ -17,7 +18,7 @@
     @apply text-content;
   }
 
-  #elig {
+  .mainContent {
     @apply text-base;
   }
 
@@ -37,15 +38,19 @@
   .btn-success {
     @apply text-white bg-success hover:bg-success-hover border-success-border;
   }
+
   .btn-info {
     @apply text-white bg-info hover:bg-info-hover border-info;
   }
+
   .btn-warning {
     @apply text-content bg-warning hover:bg-warning-hover border-warning-border;
   }
+
   .btn-danger {
     @apply text-white bg-danger hover:bg-danger-hover border-danger-border;
   }
+
   .btn-link {
     @apply text-default-text bg-transparent border-0 hover:underline;
   }
@@ -54,18 +59,23 @@
   .h1 {
     @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content;
   }
+
   .h2 {
     @apply text-h2 font-bold mb-[15px] font-header-gc text-content;
   }
+
   .h3 {
     @apply text-h3 font-bold mb-[15px] font-header-gc text-content;
   }
+
   .h4 {
     @apply text-h4 font-bold mb-[15px] font-header-gc text-content;
   }
+
   .h5 {
     @apply font-bold mb-[15px] font-header-gc text-content;
   }
+
   .h6 {
     @apply text-h6 font-bold mb-[15px] font-header-gc text-content;
   }
@@ -76,6 +86,7 @@
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
     outline: none;
   }
+
   .form-control[disabled] {
     @apply text-muted/60;
     cursor: not-allowed;
@@ -90,14 +101,17 @@
     -webkit-appearance: none;
     margin: 0;
   }
+
   /* Firefox */
   input[type='number'] {
     -moz-appearance: textfield;
   }
+
   input[type='radio']:checked + label span {
     @apply bg-content;
     box-shadow: 0px 0px 0px 2px white inset;
   }
+
   .rselect input {
     box-shadow: none !important;
   }
@@ -118,6 +132,7 @@
   details[open] > summary {
     @apply rounded-bl-none rounded-br-none;
   }
+
   details[open] div {
     @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   }
@@ -125,12 +140,15 @@
   td {
     @apply p-2;
   }
+
   .question-link a {
     @apply text-default-text underline font-bold;
   }
+
   .summary-link a {
     @apply text-default-text underline;
   }
+
   .is-sticky {
     position: fixed;
     z-index: 999;
