@@ -57,8 +57,7 @@ export class LegalValuesScraper extends BaseScraper {
       [ScraperKeys.MAX_OAS_ENTITLEMENT]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
-        selector:
-          'body > main > div:nth-child(2) > table > tbody > tr:nth-child(2) > td',
+        selector: '[headers=tbl1-6]',
       },
       /**
        * OAS Recovery Tax. Updates periodically. Not used yet.
@@ -67,7 +66,7 @@ export class LegalValuesScraper extends BaseScraper {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.html',
         selector:
-          'body > main > div:nth-child(2) > div > table > tbody > tr:nth-child(3) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > div > table > tbody > tr:nth-child(1) > td:nth-child(3)',
       },
       /**
        * Income maximums. Updates periodically.
