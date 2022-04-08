@@ -42,11 +42,11 @@ export type OutputItemLegalValues = {
   [x in ScraperKeys]: number
 }
 
-export class LegalValuesScraper extends BaseScraper {
+export class LegalValuesScraperHtml extends BaseScraper {
   private readonly scraperConfigs: { [x in ScraperKeys]: ScraperConfig }
 
   constructor() {
-    super('legalValues')
+    super('legalValuesHtml')
 
     // warning: the selectors here are very delicate, if things move around on the page, there will be issues.
     this.scraperConfigs = {
@@ -126,7 +126,7 @@ export class LegalValuesScraper extends BaseScraper {
     const selectedData = document.querySelector(config.selector)
     if (!selectedData) throw new Error(`Selector was unable to parse any data`)
     const sanitizeFn: (string: string) => number =
-      config.sanitizeFn ?? LegalValuesScraper.sanitizeFnStandard
+      config.sanitizeFn ?? LegalValuesScraperHtml.sanitizeFnStandard
     return sanitizeFn(selectedData.textContent)
   }
 
@@ -139,7 +139,7 @@ export class LegalValuesScraper extends BaseScraper {
       promises.push(
         this.fetchPage(config.pageUrl)
           .then((pageData) => {
-            const value = LegalValuesScraper.parseItem(pageData, config)
+            const value = LegalValuesScraperHtml.parseItem(pageData, config)
             console.log(`${this.logHeader} Received ${value} for ${key}`)
             return { key, value }
           })
@@ -169,4 +169,4 @@ export class LegalValuesScraper extends BaseScraper {
   }
 }
 
-export default LegalValuesScraper
+export default LegalValuesScraperHtml
