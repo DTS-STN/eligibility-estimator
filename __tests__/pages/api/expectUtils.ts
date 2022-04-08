@@ -99,3 +99,29 @@ export function expectOasGisEligible(
   expectOasEligible(res, oasType, oasEntitlement)
   expectGisEligible(res, gisEntitlement)
 }
+
+export const partnerUndefined = {
+  partnerBenefitStatus: undefined,
+  partnerIncome: undefined,
+  partnerAge: undefined,
+  partnerLivingCountry: undefined,
+  partnerLegalStatus: undefined,
+  partnerCanadaWholeLife: undefined,
+  partnerYearsInCanadaSince18: undefined,
+  partnerEverLivedSocialCountry: undefined,
+}
+
+export const partnerNoHelpNeeded = {
+  partnerAge: undefined,
+  partnerLivingCountry: undefined,
+  partnerLegalStatus: undefined,
+  partnerCanadaWholeLife: undefined,
+  partnerYearsInCanadaSince18: undefined,
+  partnerEverLivedSocialCountry: undefined,
+}
+
+export const canadaWholeLife = {
+  canadaWholeLife: true,
+  yearsInCanadaSince18: undefined,
+  everLivedSocialCountry: undefined,
+}

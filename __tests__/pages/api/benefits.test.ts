@@ -12,6 +12,7 @@ import { FieldKey } from '../../../utils/api/definitions/fields'
 import roundToTwo from '../../../utils/api/helpers/roundToTwo'
 import { legalValues } from '../../../utils/api/scrapers/output'
 import {
+  canadaWholeLife,
   expectAllIneligible,
   expectAlwAfsTooOld,
   expectAlwEligible,
@@ -19,6 +20,8 @@ import {
   expectOasEligible,
   expectOasGisEligible,
   expectOasGisTooYoung,
+  partnerNoHelpNeeded,
+  partnerUndefined,
 } from './expectUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
@@ -30,17 +33,8 @@ describe('consolidated benefit tests: unavailable', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
@@ -65,17 +59,8 @@ describe('consolidated benefit tests: unavailable', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.OTHER,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
@@ -103,14 +88,7 @@ describe('consolidated benefit tests: unavailable', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
@@ -136,14 +114,7 @@ describe('consolidated benefit tests: unavailable', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
@@ -171,14 +142,7 @@ describe('consolidated benefit tests: unavailable', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
@@ -207,12 +171,7 @@ describe('consolidated benefit tests: unavailable', () => {
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
@@ -244,17 +203,10 @@ describe('consolidated benefit tests: ineligible', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAllIneligible(res)
     expectOasGisTooYoung(res)
@@ -272,17 +224,10 @@ describe('consolidated benefit tests: ineligible', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.SPONSORED,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAllIneligible(res)
     expectOasGisTooYoung(res)
@@ -306,12 +251,7 @@ describe('consolidated benefit tests: ineligible', () => {
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAllIneligible(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
@@ -336,14 +276,7 @@ describe('consolidated benefit tests: ineligible', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectAllIneligible(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
@@ -379,17 +312,8 @@ describe('consolidated benefit tests: max income checks', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(
@@ -409,17 +333,10 @@ describe('consolidated benefit tests: max income checks', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(
@@ -439,17 +356,10 @@ describe('consolidated benefit tests: max income checks', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(
@@ -469,17 +379,10 @@ describe('consolidated benefit tests: max income checks', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.alw.eligibility.result).toEqual(
@@ -505,14 +408,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectOasGisEligible(
       res,
@@ -532,14 +428,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectOasEligible(
       res,
@@ -565,14 +454,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectOasEligible(
       res,
@@ -595,17 +477,10 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectOasGisEligible(res)
     expectAlwAfsTooOld(res)
@@ -617,17 +492,10 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectOasEligible(res)
     expect(res.body.results.gis.eligibility.result).toEqual(
@@ -651,12 +519,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectOasGisTooYoung(res)
     expectAlwEligible(res)
@@ -674,12 +537,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -708,12 +566,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectOasGisTooYoung(res)
     expectAlwEligible(res)

@@ -9,10 +9,13 @@ import {
 } from '../../../utils/api/definitions/enums'
 import { legalValues } from '../../../utils/api/scrapers/output'
 import {
+  canadaWholeLife,
   expectAfsEligible,
   expectAlwEligible,
   expectGisEligible,
   expectOasEligible,
+  partnerNoHelpNeeded,
+  partnerUndefined,
 } from './expectUtils'
 import { mockGetRequest, mockPartialGetRequest } from './factory'
 
@@ -27,14 +30,7 @@ describe('OAS entitlement scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 39,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectOasEligible(res, EntitlementResultType.PARTIAL, 632.45)
   })
@@ -48,17 +44,8 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expectGisEligible(res, 402.79)
   })
@@ -69,17 +56,8 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expectGisEligible(res, 968.86)
   })
@@ -90,17 +68,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 861.86)
   })
@@ -111,17 +82,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 968.86)
   })
@@ -132,17 +96,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 1000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 830.86)
   })
@@ -153,17 +110,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 1000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 311.68)
   })
@@ -174,17 +124,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
       partnerIncome: 1000,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 528.68)
   })
@@ -195,17 +138,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 583.2)
   })
@@ -216,17 +152,10 @@ describe('GIS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 583.2)
   })
@@ -240,14 +169,7 @@ describe('GIS entitlement scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectGisEligible(res, 1252.2)
   })
@@ -261,14 +183,7 @@ describe('GIS entitlement scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectGisEligible(res, 1414.36)
   })
@@ -285,14 +200,7 @@ describe('basic Allowance scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -314,12 +222,7 @@ describe('basic Allowance scenarios', () => {
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -341,12 +244,7 @@ describe('basic Allowance scenarios', () => {
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res)
   })
@@ -362,12 +260,7 @@ describe('basic Allowance scenarios', () => {
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -386,17 +279,10 @@ describe('Allowance entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res, 341.68)
   })
@@ -408,17 +294,10 @@ describe('Allowance entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res, 565.35)
   })
@@ -429,17 +308,10 @@ describe('Allowance entitlement scenarios', () => {
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
+      ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res, 1231.87)
   })
@@ -453,17 +325,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -477,17 +340,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -504,14 +358,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -528,14 +375,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -554,14 +394,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.UNAVAILABLE
@@ -580,14 +413,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -608,12 +434,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       partnerIncome: 0,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerNoHelpNeeded,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -632,14 +453,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectAfsEligible(res)
   })
@@ -653,14 +467,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectAfsEligible(res)
   })
@@ -674,14 +481,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.UNAVAILABLE
@@ -700,14 +500,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expectAfsEligible(res)
   })
@@ -721,14 +514,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -747,14 +533,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...partnerUndefined,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -773,17 +552,8 @@ describe('AFS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expectAfsEligible(res, 270.73)
   })
@@ -794,17 +564,8 @@ describe('AFS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expectAfsEligible(res, 694.4)
   })
@@ -815,17 +576,8 @@ describe('AFS entitlement scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
+      ...canadaWholeLife,
+      ...partnerUndefined,
     })
     expectAfsEligible(res, 1468.47)
   })
