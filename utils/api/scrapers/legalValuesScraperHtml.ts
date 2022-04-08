@@ -1,3 +1,8 @@
+/**
+ * This file and approach is now obsolete, see legalValuesScraperJson.ts for the replacement.
+ * Will keep this code in case the JSON approach has issues in the future.
+ */
+
 import { JSDOM } from 'jsdom'
 import { BaseScraper } from './_base'
 
