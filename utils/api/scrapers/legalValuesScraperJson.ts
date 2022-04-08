@@ -7,41 +7,28 @@ export class LegalValuesScraperJson extends BaseScraper {
     super('legalValuesJson')
   }
 
-  private static sanitizeObject(input: object): object {
-    console.log(`Got object `, input)
-    for (const jsonObjectKey in input) {
-      const data = input[jsonObjectKey]
-      const type = typeof data
-      console.log(jsonObjectKey, type)
-      if (type === 'object') {
-        LegalValuesScraperJson.sanitizeObject(data)
-      } else {
-        const sanitizedData = LegalValuesScraperJson.parseItem(data)
-        if (!isNaN(sanitizedData)) input[jsonObjectKey] = sanitizedData
+  /**
+   * Accepts a JSON object, iterates through all its properties, and sanitizes it to a sane state.
+   * Specifically, converts strings with commas into typical numbers.
+   */
+  private static sanitizeObject(jsonObject: object): object {
+    for (const key in jsonObject) {
+      const data: object | string = jsonObject[key]
+      if (typeof data === 'object') {
+        this.sanitizeObject(data)
+      } else if (typeof data === 'string') {
+        const sanitizedData = this.sanitizeFnStandard(data)
+        if (!isNaN(sanitizedData)) jsonObject[key] = sanitizedData
       }
     }
-    return input
-  }
-
-  private static parseItem(data: string): number {
-    return this.sanitizeFnStandard(data)
+    return jsonObject
   }
 
   async main() {
     console.log(`${this.logHeader} Starting...`)
     const jsonString = await this.fetchPage(this.JSON_URL)
-      .then((pageData) => {
-        console.log(`${this.logHeader} Received ${pageData}`)
-        return pageData
-      })
-      .catch((e) => {
-        const err = `Failed scraping: ${e}`
-        console.log(err)
-        throw new Error(err)
-      })
     const jsonObject = JSON.parse(jsonString)
     const jsonSanitized = LegalValuesScraperJson.sanitizeObject(jsonObject)
-
     this.saveAndComplete(jsonSanitized)
     console.log(`${this.logHeader} Final results: `, jsonSanitized)
   }
