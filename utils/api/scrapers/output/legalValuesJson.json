@@ -1,0 +1,29 @@
+{
+  "lastupdatedYear": 2022,
+  "lastupdatedQuarter": "April to June 2022",
+  "oas": {
+    "average": 648.67,
+    "maximum": 133527,
+    "clawback": 79054
+  },
+  "gis": {
+    "single-amount": 968.86,
+    "single-limit": 19656,
+    "spouse-oas-amount": 583.2,
+    "spouse-oas-limit": 25968,
+    "spouse-no-oas-amount": 968.86,
+    "spouse-no-oas-limit": 47136,
+    "spouse-allowance-amount": 583.2,
+    "spouse-allowance-limit": 47136
+  },
+  "allowance": {
+    "spouse-gis-amount": 1231.87,
+    "spouse-gis-limit": 36384,
+    "survivor-amount": 1468.47,
+    "survivor-limit": 26496
+  },
+  "topup": {
+    "single": 150.07,
+    "married": 42.52
+  }
+}
