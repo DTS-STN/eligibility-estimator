@@ -26,7 +26,7 @@ import {
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('consolidated benefit tests: unavailable', () => {
-  it('returns "unavailable" when sponsored', async () => {
+  it('returns "unavailable" - sponsored', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -52,7 +52,7 @@ describe('consolidated benefit tests: unavailable', () => {
     expectAlwAfsTooOld(res)
   })
 
-  it('returns "unavailable" when legal other', async () => {
+  it('returns "unavailable" - legal other', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -78,7 +78,7 @@ describe('consolidated benefit tests: unavailable', () => {
     expectAlwAfsTooOld(res)
   })
 
-  it('returns "unavailable" when living in Canada and under 10 years in Canada and lived in social country', async () => {
+  it('returns "unavailable" - living in Canada, under 10 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -104,7 +104,7 @@ describe('consolidated benefit tests: unavailable', () => {
     expectAlwAfsTooOld(res)
   })
 
-  it('returns "unavailable" when living in No Agreement and under 20 years in Canada and lived in social country', async () => {
+  it('returns "unavailable" - living in No Agreement, under 20 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -132,7 +132,7 @@ describe('consolidated benefit tests: unavailable', () => {
     expectAlwAfsTooOld(res)
   })
 
-  it('returns "unavailable" when age 60 living in Agreement and under 20 years in Canada', async () => {
+  it('returns "unavailable" - age 60, living in Agreement, under 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -159,7 +159,7 @@ describe('consolidated benefit tests: unavailable', () => {
     )
     expectAlwAfsTooOld(res)
   })
-  it('returns "unavailable" when age 60 living in Agreement and under 10 years in Canada', async () => {
+  it('returns "unavailable" - age 60, living in Agreement, under 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -196,7 +196,7 @@ describe('consolidated benefit tests: unavailable', () => {
 })
 
 describe('consolidated benefit tests: ineligible', () => {
-  it('returns "ineligible" when age 50', async () => {
+  it('returns "ineligible" - age 50', async () => {
     const res = await mockGetRequest({
       income: 20000,
       age: 50,
@@ -239,7 +239,7 @@ describe('consolidated benefit tests: ineligible', () => {
     )
   })
 
-  it('returns "ineligible" when living in Canada and under 10 years in Canada and not lived in social country', async () => {
+  it('returns "ineligible" - living in Canada, under 10 years in Canada, not lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -266,7 +266,7 @@ describe('consolidated benefit tests: ineligible', () => {
     )
   })
 
-  it('returns "ineligible" when single and not living in Canada and under 20 years in Canada and not lived in social country', async () => {
+  it('returns "ineligible" - single, not living in Canada, under 20 years in Canada, not lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -507,7 +507,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
 })
 
 describe('consolidated benefit tests: eligible: 60-64', () => {
-  it('returns "eligible" when citizen and 10 years in Canada', async () => {
+  it('returns "eligible" - citizen, 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -525,7 +525,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     expectAlwEligible(res)
   })
 
-  it('returns "ALW eligible" when living in Agreement and 10 years in Canada', async () => {
+  it('returns "ALW eligible" - living in Agreement, 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
@@ -554,7 +554,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     expectAlwEligible(res)
   })
 
-  it('returns "ALW eligible" when 64 and 19 years in Canada and lived in social country', async () => {
+  it('returns "ALW eligible" - age 64, 19 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 64,
