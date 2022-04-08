@@ -178,25 +178,6 @@ describe('GIS entitlement scenarios', () => {
 })
 
 describe('basic Allowance scenarios', () => {
-  it('returns "ineligible" when widowed', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      maritalStatus: MaritalStatus.WIDOWED,
-      ...canadian,
-      canadaWholeLife: false,
-      yearsInCanadaSince18: 10,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-  })
-
   it('returns "ineligible" when partner not receiving OAS', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -215,44 +196,6 @@ describe('basic Allowance scenarios', () => {
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.PARTNER
-    )
-  })
-
-  it('returns "eligible" when living in No Agreement and 10 years in Canada', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
-      livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
-      yearsInCanadaSince18: 10,
-      everLivedSocialCountry: false,
-      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 0,
-      ...partnerNoHelpNeeded,
-    })
-    expectAlwEligible(res)
-  })
-  it('returns "ineligible" when living in No Agreement and under 10 years in Canada', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
-      livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
-      yearsInCanadaSince18: 9,
-      everLivedSocialCountry: false,
-      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 0,
-      ...partnerNoHelpNeeded,
-    })
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
     )
   })
 })

@@ -9,6 +9,7 @@ import {
 } from '../../../utils/api/definitions/enums'
 import { legalValues } from '../../../utils/api/scrapers/output'
 import {
+  canadian,
   expectAlwEligible,
   expectOasEligible,
   expectOasGisEligible,

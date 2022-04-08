@@ -8,6 +8,7 @@ import {
 import { FieldKey } from '../../../utils/api/definitions/fields'
 import {
   canadaWholeLife,
+  canadian,
   partnerNoHelpNeeded,
   partnerUndefined,
 } from './expectUtils'
