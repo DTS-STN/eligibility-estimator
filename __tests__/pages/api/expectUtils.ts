@@ -1,6 +1,8 @@
 import {
   EntitlementResultType,
   EstimationSummaryState,
+  LegalStatus,
+  LivingCountry,
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
@@ -132,4 +134,8 @@ export const canadaWholeLife = {
   canadaWholeLife: true,
   yearsInCanadaSince18: undefined,
   everLivedSocialCountry: undefined,
+}
+export const canadian = {
+  livingCountry: LivingCountry.CANADA,
+  legalStatus: LegalStatus.CANADIAN_CITIZEN,
 }
