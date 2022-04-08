@@ -1,28 +1,28 @@
 {
-  "lastupdatedYear": 2022,
-  "lastupdatedQuarter": "April to June 2022",
+  "lastUpdatedYear": 2022,
+  "lastUpdatedQuarter": "April to June 2022",
   "oas": {
     "average": 648.67,
     "maximum": 133527,
     "clawback": 79054
   },
   "gis": {
-    "single-amount": 968.86,
-    "single-limit": 19656,
-    "spouse-oas-amount": 583.2,
-    "spouse-oas-limit": 25968,
-    "spouse-no-oas-amount": 968.86,
-    "spouse-no-oas-limit": 47136,
-    "spouse-allowance-amount": 583.2,
-    "spouse-allowance-limit": 47136
+    "singleAmount": 968.86,
+    "singleLimit": 19656,
+    "spouseOasAmount": 583.2,
+    "spouseOasLimit": 25968,
+    "spouseNoOasAmount": 968.86,
+    "spouseNoOasLimit": 47136,
+    "spouseAllowanceAmount": 583.2,
+    "spouseAllowanceLimit": 47136
   },
   "allowance": {
-    "spouse-gis-amount": 1231.87,
-    "spouse-gis-limit": 36384,
-    "survivor-amount": 1468.47,
-    "survivor-limit": 26496
+    "spouseGisAmount": 1231.87,
+    "spouseGisLimit": 36384,
+    "survivorAmount": 1468.47,
+    "survivorLimit": 26496
   },
-  "topup": {
+  "topUp": {
     "single": 150.07,
     "married": 42.52
   }

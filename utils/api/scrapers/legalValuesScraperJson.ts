@@ -12,16 +12,25 @@ export class LegalValuesScraperJson extends BaseScraper {
    * Specifically, converts strings with commas into typical numbers.
    */
   private static sanitizeObject(jsonObject: object): object {
+    const newObject = {}
     for (const key in jsonObject) {
       const data: object | string = jsonObject[key]
-      if (typeof data === 'object') {
-        this.sanitizeObject(data)
-      } else if (typeof data === 'string') {
-        const sanitizedData = this.sanitizeFnStandard(data)
-        if (!isNaN(sanitizedData)) jsonObject[key] = sanitizedData
-      }
+      newObject[this.sanitizeKey(key)] =
+        typeof data === 'object'
+          ? this.sanitizeObject(data)
+          : this.sanitizeFnStandard(data) ?? data
     }
-    return jsonObject
+    return newObject
+  }
+
+  /**
+   * Fixes typos in the source file, and moves to consistent variable naming using camelCase instead of underscore_syntax.
+   */
+  private static sanitizeKey(key: string) {
+    return key
+      .replace(/lastupdated/g, 'lastUpdated')
+      .replace(/topup/g, 'topUp')
+      .replace(/-\w/g, (x) => x[1].toUpperCase())
   }
 
   async main() {
