@@ -13,6 +13,7 @@ import roundToTwo from '../../../utils/api/helpers/roundToTwo'
 import { legalValues } from '../../../utils/api/scrapers/output'
 import {
   canadaWholeLife,
+  expectAfsEligible,
   expectAllIneligible,
   expectAlwAfsTooOld,
   expectAlwEligible,
@@ -20,6 +21,7 @@ import {
   expectOasEligible,
   expectOasGisEligible,
   expectOasGisTooYoung,
+  expectOasGisUnavailable,
   partnerNoHelpNeeded,
   partnerUndefined,
 } from './expectUtils'
@@ -36,15 +38,9 @@ describe('consolidated benefit tests: unavailable', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
-    )
+    expectOasGisUnavailable(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
       ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LEGAL_STATUS
@@ -62,15 +58,9 @@ describe('consolidated benefit tests: unavailable', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
-    )
+    expectOasGisUnavailable(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
       ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LEGAL_STATUS
@@ -90,15 +80,9 @@ describe('consolidated benefit tests: unavailable', () => {
       everLivedSocialCountry: true,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
-    )
+    expectOasGisUnavailable(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
       ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
     expectAlwAfsTooOld(res)
@@ -295,14 +279,26 @@ describe('consolidated benefit tests: ineligible', () => {
 })
 
 describe('consolidated benefit tests: max income checks', () => {
-  it(`returns income error when income equal to ${legalValues.MAX_OAS_INCOME}`, async () => {
-    const res = await mockGetRequestError({
+  it(`OAS: max income is ${legalValues.MAX_OAS_INCOME}`, async () => {
+    const input = {
       income: legalValues.MAX_OAS_INCOME,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      ...canadaWholeLife,
+      ...partnerUndefined,
+    }
+    let resError = await mockGetRequestError(input)
+    expect(resError.status).toEqual(400)
+    expect(resError.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in resError.body.detail)) throw Error('missing details')
+    expect(resError.body.detail.details[0].path[0]).toEqual(FieldKey.INCOME)
+    let resSuccess = await mockGetRequest({
+      ...input,
+      income: legalValues.MAX_OAS_INCOME - 1,
     })
-    expect(res.status).toEqual(400)
-    expect(res.body.error).toEqual(ResultKey.INVALID)
-    if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(FieldKey.INCOME)
+    expectOasEligible(resSuccess)
   })
 
   it(`GIS: max income when single is ${legalValues.MAX_GIS_INCOME_SINGLE}`, async () => {
@@ -394,6 +390,28 @@ describe('consolidated benefit tests: max income checks', () => {
       income: legalValues.MAX_ALW_INCOME - 1,
     })
     expectAlwEligible(res)
+  })
+
+  it(`AFS: max income when widowed is ${legalValues.MAX_AFS_INCOME}`, async () => {
+    const input = {
+      income: legalValues.MAX_AFS_INCOME,
+      age: 60,
+      maritalStatus: MaritalStatus.WIDOWED,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      ...canadaWholeLife,
+      ...partnerUndefined,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.INCOME)
+    res = await mockGetRequest({
+      ...input,
+      income: legalValues.MAX_AFS_INCOME - 1,
+    })
+    expectAfsEligible(res)
   })
 })
 

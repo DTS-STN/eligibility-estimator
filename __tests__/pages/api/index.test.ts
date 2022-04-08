@@ -7,7 +7,6 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
-import { legalValues } from '../../../utils/api/scrapers/output'
 import {
   canadaWholeLife,
   expectAfsEligible,
@@ -318,21 +317,6 @@ describe('Allowance entitlement scenarios', () => {
 })
 
 describe('basic Allowance for Survivor scenarios', () => {
-  it(`returns "ineligible" when income equal to ${legalValues.MAX_AFS_INCOME}`, async () => {
-    const res = await mockGetRequest({
-      income: legalValues.MAX_AFS_INCOME,
-      age: 60,
-      maritalStatus: MaritalStatus.WIDOWED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      ...canadaWholeLife,
-      ...partnerUndefined,
-    })
-    expect(res.body.results.afs.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.INCOME)
-  })
   it('returns "ineligible due to age" when age 65 and high income', async () => {
     const res = await mockPartialGetRequest({
       income: 26257,

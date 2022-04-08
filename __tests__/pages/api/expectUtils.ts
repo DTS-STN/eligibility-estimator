@@ -24,6 +24,14 @@ export function expectOasGisTooYoung(res: MockResponseObject<ResponseSuccess>) {
   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
 }
 
+export function expectOasGisUnavailable(
+  res: MockResponseObject<ResponseSuccess>
+) {
+  expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
+  expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.UNAVAILABLE)
+  expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.UNAVAILABLE)
+}
+
 export function expectAllIneligible(res: MockResponseObject<ResponseSuccess>) {
   expect(res.body.summary.state).toEqual(
     EstimationSummaryState.AVAILABLE_INELIGIBLE
