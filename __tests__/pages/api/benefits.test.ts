@@ -13,7 +13,10 @@ import { legalValues } from '../../../utils/api/scrapers/output'
 import {
   expectAllIneligible,
   expectAlwAfsTooOld,
+  expectAlwEligible,
+  expectGisEligible,
   expectOasEligible,
+  expectOasGisEligible,
   expectOasGisTooYoung,
 } from './expectUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
@@ -253,10 +256,7 @@ describe('consolidated benefit tests: ineligible', () => {
       partnerEverLivedSocialCountry: undefined,
     })
     expectAllIneligible(res)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.AGE_YOUNG
     )
@@ -284,10 +284,7 @@ describe('consolidated benefit tests: ineligible', () => {
       partnerEverLivedSocialCountry: undefined,
     })
     expectAllIneligible(res)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.AGE_YOUNG
     )
@@ -402,8 +399,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...input,
       income: legalValues.MAX_GIS_INCOME_SINGLE - 1,
     })
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expectGisEligible(res)
   })
   it(`GIS: max income when married and no partner OAS is ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}`, async () => {
     const input = {
@@ -433,8 +429,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...input,
       income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
     })
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expectGisEligible(res)
   })
   it(`GIS: max income when married and partner OAS is ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}`, async () => {
     const input = {
@@ -464,8 +459,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...input,
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS - 1,
     })
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expectGisEligible(res)
   })
   it(`ALW: max income when married and partner OAS is ${legalValues.MAX_ALW_INCOME}`, async () => {
     const input = {
@@ -495,8 +489,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...input,
       income: legalValues.MAX_ALW_INCOME - 1,
     })
-    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+    expectAlwEligible(res)
   })
 })
 
@@ -520,15 +513,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expectOasGisEligible(res, EntitlementResultType.PARTIAL)
     expectAlwAfsTooOld(res)
   })
 
@@ -551,13 +536,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
+    expectOasEligible(res, EntitlementResultType.PARTIAL)
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -586,9 +565,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expectOasEligible(res)
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expectOasGisEligible(res)
     expectAlwAfsTooOld(res)
   })
   it('returns "eligible" - married, income high so OAS only', async () => {
@@ -610,13 +587,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
+    expectOasEligible(res)
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -646,8 +617,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       partnerEverLivedSocialCountry: undefined,
     })
     expectOasGisTooYoung(res)
-    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+    expectAlwEligible(res)
   })
 
   it('returns "ALW eligible" when living in Agreement and 10 years in Canada', async () => {
@@ -681,8 +651,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+    expectAlwEligible(res)
   })
 
   it('returns "ALW eligible" when 64 and 19 years in Canada and lived in social country', async () => {
@@ -705,7 +674,6 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       partnerEverLivedSocialCountry: undefined,
     })
     expectOasGisTooYoung(res)
-    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+    expectAlwEligible(res)
   })
 })
