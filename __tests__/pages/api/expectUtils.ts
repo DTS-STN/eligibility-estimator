@@ -36,7 +36,7 @@ export function expectAllIneligible(res: MockResponseObject<ResponseSuccess>) {
 
 export function expectOasEligible(
   res: MockResponseObject<ResponseSuccess>,
-  oasType?: EntitlementResultType = EntitlementResultType.FULL,
+  oasType: EntitlementResultType = EntitlementResultType.FULL,
   entitlement?: number
 ) {
   expect(res.body.summary.state).toEqual(
@@ -92,9 +92,10 @@ export function expectAfsEligible(
 
 export function expectOasGisEligible(
   res: MockResponseObject<ResponseSuccess>,
-  oasType: EntitlementResultType = EntitlementResultType.FULL
+  oasType: EntitlementResultType = EntitlementResultType.FULL,
+  oasEntitlement?: number,
+  gisEntitlement?: number
 ) {
-  expectOasEligible(res, oasType)
-  expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+  expectOasEligible(res, oasType, oasEntitlement)
+  expectGisEligible(res, gisEntitlement)
 }

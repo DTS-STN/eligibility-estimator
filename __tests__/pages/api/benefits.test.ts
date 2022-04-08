@@ -9,6 +9,7 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import { FieldKey } from '../../../utils/api/definitions/fields'
+import roundToTwo from '../../../utils/api/helpers/roundToTwo'
 import { legalValues } from '../../../utils/api/scrapers/output'
 import {
   expectAllIneligible,
@@ -513,7 +514,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expectOasGisEligible(res, EntitlementResultType.PARTIAL)
+    expectOasGisEligible(
+      res,
+      EntitlementResultType.PARTIAL,
+      roundToTwo(legalValues.MAX_OAS_ENTITLEMENT / 4)
+    )
     expectAlwAfsTooOld(res)
   })
 
@@ -536,7 +541,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expectOasEligible(res, EntitlementResultType.PARTIAL)
+    expectOasEligible(
+      res,
+      EntitlementResultType.PARTIAL,
+      roundToTwo(legalValues.MAX_OAS_ENTITLEMENT / 2)
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -565,7 +574,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerYearsInCanadaSince18: undefined,
       partnerEverLivedSocialCountry: undefined,
     })
-    expectOasEligible(res, EntitlementResultType.PARTIAL)
+    expectOasEligible(
+      res,
+      EntitlementResultType.PARTIAL,
+      roundToTwo(legalValues.MAX_OAS_ENTITLEMENT / 2)
+    )
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )

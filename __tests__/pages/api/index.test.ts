@@ -17,27 +17,6 @@ import {
 import { mockGetRequest, mockPartialGetRequest } from './factory'
 
 describe('OAS entitlement scenarios', () => {
-  it('returns "eligible for $317.63" when 20 years in Canada', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
-      yearsInCanadaSince18: 20,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-    })
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 324.33)
-  })
   it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -58,27 +37,6 @@ describe('OAS entitlement scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     })
     expectOasEligible(res, EntitlementResultType.PARTIAL, 632.45)
-  })
-  it('returns "eligible for $635.26" when 40 years in Canada', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      partnerBenefitStatus: undefined,
-      partnerIncome: undefined,
-      partnerAge: undefined,
-      partnerLivingCountry: undefined,
-      partnerLegalStatus: undefined,
-      partnerCanadaWholeLife: undefined,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-    })
-    expectOasEligible(res)
   })
 })
 
