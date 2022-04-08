@@ -546,6 +546,35 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expectAlwAfsTooOld(res)
   })
 
+  it('returns "eligible" - single, living in No Agreement, 20 years in Canada', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 65,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.NO_AGREEMENT,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      canadaWholeLife: false,
+      yearsInCanadaSince18: 20,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: undefined,
+      partnerIncome: undefined,
+      partnerAge: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerCanadaWholeLife: undefined,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+    expectOasEligible(res, EntitlementResultType.PARTIAL)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.LIVING_COUNTRY
+    )
+    expectAlwAfsTooOld(res)
+  })
+
   it('returns "eligible" - married, full oas', async () => {
     const res = await mockGetRequest({
       income: 10000,
