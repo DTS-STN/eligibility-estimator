@@ -432,15 +432,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dts-stn/decd-design-system@npm:^1.24.0":
-  version: 1.24.0
-  resolution: "@dts-stn/decd-design-system@npm:1.24.0"
+"@dts-stn/decd-design-system@npm:^1.25.0":
+  version: 1.25.0
+  resolution: "@dts-stn/decd-design-system@npm:1.25.0"
   dependencies:
     prop-types: ^15.7.2
     react: ^17.0.2
     react-dom: ^17.0.2
     user: ^0.0.0
-  checksum: 1d96de344f84cb6153f40c28c06d6e39c1b8615b4a55555f67d028bbdd9e51f5cc26251dc210e0ed2d8ccb9df87b51c5ae75895723a2e368487d018d6ef388b9
+  checksum: 7b752025ab52ab85130bc1c34a0279bc802c52c6f129c5396823340ff10c0e9bc185050a64dd2bbb60e73ad0d855917a3f14cef0ffe529a0c4e3e349e1915dd8
   languageName: node
   linkType: hard
 
@@ -2710,7 +2710,7 @@ __metadata:
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
     "@babel/core": ^7.17.9
-    "@dts-stn/decd-design-system": ^1.24.0
+    "@dts-stn/decd-design-system": ^1.25.0
     "@headlessui/react": ^1.5.0
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/dom": ^8.13.0
