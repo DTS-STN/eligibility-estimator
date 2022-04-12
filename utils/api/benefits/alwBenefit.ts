@@ -102,7 +102,7 @@ export class AlwBenefit extends BaseBenefit {
         } else if (underAgeReq) {
           return {
             result: ResultKey.INELIGIBLE,
-            reason: ResultReason.AGE,
+            reason: ResultReason.AGE_YOUNG,
             detail: this.translations.detail.dependingOnAgreementWhen60,
           }
         } else {
@@ -123,7 +123,7 @@ export class AlwBenefit extends BaseBenefit {
       if (underAgeReq) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.dependingOnLegalWhen60,
         }
       } else if (this.input.legalStatus.sponsored) {

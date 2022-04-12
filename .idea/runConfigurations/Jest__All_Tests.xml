@@ -2,7 +2,7 @@
   <configuration default="false" name="Jest: All Tests" type="JavaScriptTestRunnerJest">
     <node-interpreter value="project" />
     <node-options value="" />
-    <jest-package value="yarn:package.json:jest" />
+    <jest-package value="$PROJECT_DIR$/node_modules/jest" />
     <working-dir value="$PROJECT_DIR$" />
     <envs />
     <scope-kind value="ALL" />
