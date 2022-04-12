@@ -4,6 +4,7 @@ import { Form } from '../../../client-state/models/Form'
 import { RootStore } from '../../../client-state/store'
 import { WebTranslations } from '../../../i18n/web'
 import { useMediaQuery, useStore, useTranslation } from '../../Hooks'
+import { Button } from '@dts-stn/decd-design-system'
 
 export const FormButtons: React.FC<{}> = ({}) => {
   const router = useRouter()
@@ -22,24 +23,22 @@ export const FormButtons: React.FC<{}> = ({}) => {
           form={form}
         />
       )}
-      <button
-        type="button"
-        role="navigation"
-        className="btn btn-default mt-4 md:mt-0"
+      <Button
+        text={tsln.back}
+        styling="secondary"
+        className="mt-4 md:mt-0 justify-center items-center"
         onClick={() => router.push('/')}
-      >
-        {tsln.back}
-      </button>
-      <button
-        type="button"
-        role="button"
-        className="btn btn-default mt-4 md:mt-0"
+      />
+
+      <Button
+        text={tsln.clear}
+        styling="secondary"
+        className="mt-4 md:mt-0 justify-center items-center"
         onClick={() => {
           form.clearForm()
         }}
-      >
-        {tsln.clear}
-      </button>
+      />
+
       {!isMobile && (
         <SubmitButton
           label={tsln.getResults}
@@ -59,10 +58,10 @@ const SubmitButton: React.FC<{
   label: string
 }> = ({ router, form, root, label }) => {
   return (
-    <button
-      type="submit"
-      role="button"
-      className="btn btn-primary mt-4 md:mt-0 col-span-2 md:col-span-1 disabled:cursor-not-allowed disabled:bg-[#949494] disabled:border-0"
+    <Button
+      text={label}
+      styling="primary"
+      className="justify-center col-span-2 md:col-span-1"
       onClick={async () => {
         if (
           !form.validateAgainstEmptyFields(router.locale) &&
@@ -72,8 +71,6 @@ const SubmitButton: React.FC<{
           router.push('/results')
         }
       }}
-    >
-      {label}
-    </button>
+    />
   )
 }

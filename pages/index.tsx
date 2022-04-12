@@ -6,6 +6,7 @@ import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
 import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
+import { Button } from '@dts-stn/decd-design-system'
 
 const Home: NextPage = (props) => {
   const router = useRouter()
@@ -62,12 +63,12 @@ const Home: NextPage = (props) => {
         </div>
 
         <div className="flex justify-end">
-          <button
-            className="btn btn-primary w-28 my-8"
+          <Button
+            text={tsln.next}
+            styling="primary"
             onClick={(e) => router.push('/eligibility')}
-          >
-            {tsln.next}
-          </button>
+            className="my-8 w-28 justify-center"
+          />
         </div>
       </Layout>
     </>
