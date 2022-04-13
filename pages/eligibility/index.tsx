@@ -2,7 +2,6 @@ import { observer } from 'mobx-react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { HeadDoc } from '../../components/Document'
 import { ComponentFactory } from '../../components/Forms/ComponentFactory'
 import { useStorage, useStore, useTranslation } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
@@ -41,7 +40,6 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
 
   return (
     <>
-      <HeadDoc />
       <Layout>
         <ComponentFactory />
       </Layout>
