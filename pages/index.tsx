@@ -1,14 +1,13 @@
+import { Button } from '@dts-stn/decd-design-system'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { HeadDoc } from '../components/Document'
 import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
 import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
-import { Button } from '@dts-stn/decd-design-system'
 
-const Home: NextPage = (props) => {
+const Home: NextPage = () => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
 
@@ -27,7 +26,6 @@ const Home: NextPage = (props) => {
 
   return (
     <>
-      <HeadDoc />
       <Layout>
         <div className="mt-18">
           <p

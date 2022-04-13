@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
+import { HeadDoc } from '../Document'
 import { useMediaQuery, useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -18,6 +19,7 @@ export const Layout: React.VFC<{
 
   return (
     <>
+      <HeadDoc />
       <SCLabsTestHeader />
       <main className="mainContent">
         <div className="mx-4 min-h-screen">
