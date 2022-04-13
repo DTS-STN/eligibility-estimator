@@ -1,13 +1,13 @@
+import { ErrorPage } from '@dts-stn/decd-design-system'
+import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { WebTranslations } from '../i18n/web'
-import { useMediaQuery, useTranslation } from '../components/Hooks'
-import { NextPage } from 'next'
 import { HeadDoc } from '../components/Document'
+import { useMediaQuery, useTranslation } from '../components/Hooks'
 import { Footer } from '../components/Layout/Footer'
 import { Header } from '../components/Layout/Header'
 import { SCLabsTestHeader } from '../components/Layout/ScTestHeader'
-import { ErrorPage } from '@dts-stn/decd-design-system'
+import { WebTranslations } from '../i18n/web'
 
 const Custom404: NextPage = (props) => {
   const router = useRouter()
@@ -23,11 +23,7 @@ const Custom404: NextPage = (props) => {
           <div className="mx-4 min-h-screen">
             <div className="sm:container mx-auto">
               <div className="flex justify-end my-4">
-                <Link
-                  href={router.asPath}
-                  locale={oppositeLocale}
-                  passHref={true}
-                >
+                <Link href={router.asPath} locale={oppositeLocale} passHref>
                   <button className="btn-link btn underline">
                     {isMobile ? tsln.otherLangCode : tsln.otherLang}
                   </button>

@@ -23,11 +23,7 @@ export const Layout: React.VFC<{
         <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
             <div className="flex justify-end my-4">
-              <Link
-                href={router.asPath}
-                locale={oppositeLocale}
-                passHref={true}
-              >
+              <Link href={router.asPath} locale={oppositeLocale} passHref>
                 <button className="btn-link btn underline">
                   {isMobile ? tsln.otherLangCode : tsln.otherLang}
                 </button>
