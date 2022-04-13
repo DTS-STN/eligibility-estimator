@@ -1,3 +1,4 @@
+import { Breadcrumb } from '@dts-stn/decd-design-system'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -6,7 +7,6 @@ import { useMediaQuery, useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { SCLabsTestHeader } from './ScTestHeader'
-import { Breadcrumb } from '@dts-stn/decd-design-system'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -43,16 +43,14 @@ export const Layout: React.VFC<{
               <p />
             </div>
           </div>
-          <div className="sm:container mx-auto flex flex-col mb-16">
-            <div className="mt-8">
-              <Breadcrumb
-                id="navBreadcrumb"
-                items={[
-                  { text: tsln.breadcrumb1Title, link: '#' },
-                  { text: tsln.breadcrumb2Title, link: '#' },
-                ]}
-              />
-            </div>
+          <div className="sm:container mx-auto flex flex-col mb-16 mt-8">
+            <Breadcrumb
+              id="navBreadcrumb"
+              items={[
+                { text: tsln.breadcrumb1Title, link: '#' },
+                { text: tsln.breadcrumb2Title, link: '#' },
+              ]}
+            />
             <h1 className="h1 mt-10 mb-8">{tsln.title}</h1>
             {children}
           </div>
