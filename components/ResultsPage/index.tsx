@@ -1,6 +1,7 @@
+import { Button } from '@dts-stn/decd-design-system'
 import Image from 'next/image'
-import { useRef } from 'react'
 import { useRouter } from 'next/router'
+import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
 import { FAQ } from '../FAQ'
@@ -9,7 +10,6 @@ import { NeedHelp } from '../NeedHelp'
 import { MoreInfoLinks } from './MoreInfoLinks'
 import { ResultsApply } from './ResultsApply'
 import { ResultsTable } from './ResultsTable'
-import { Button } from '@dts-stn/decd-design-system'
 
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
