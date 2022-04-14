@@ -353,6 +353,7 @@ export class BenefitHandler {
       ) {
         result.eligibility.result = ResultKey.INELIGIBLE
         result.eligibility.reason = ResultReason.INCOME
+        result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
 
       // start detail processing...
