@@ -6,14 +6,14 @@ import {
 } from '../definitions/enums'
 import {
   EligibilityResult,
-  EntitlementResult,
+  EntitlementResultOas,
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
 import { legalValues } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
-export class OasBenefit extends BaseBenefit {
+export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   constructor(input: ProcessedInput, translations: Translations) {
     super(input, translations)
   }
@@ -109,11 +109,12 @@ export class OasBenefit extends BaseBenefit {
     throw new Error('entitlement logic failed to produce a result')
   }
 
-  protected getEntitlement(): EntitlementResult {
+  protected getEntitlement(): EntitlementResultOas {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
-      return { result: 0, type: EntitlementResultType.NONE }
+      return { result: 0, clawback: 0, type: EntitlementResultType.NONE }
 
     const result = this.getEntitlementAmount()
+    const clawback = this.getClawbackAmount()
     const type =
       this.input.yearsInCanadaSince18 < 40
         ? EntitlementResultType.PARTIAL
@@ -125,7 +126,10 @@ export class OasBenefit extends BaseBenefit {
           ? this.translations.detail.eligiblePartialOas65to69
           : this.translations.detail.eligiblePartialOas
 
-    return { result, type }
+    if (this.input.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF)
+      this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
+
+    return { result, clawback, type }
   }
 
   private getEntitlementAmount(): number {
@@ -133,5 +137,16 @@ export class OasBenefit extends BaseBenefit {
       Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
         legalValues.MAX_OAS_ENTITLEMENT
     )
+  }
+
+  private getClawbackAmount(): number {
+    if (this.input.income.relevant < legalValues.OAS_RECOVERY_TAX_CUTOFF)
+      return 0
+    const incomeOverCutoff =
+      this.input.income.relevant - legalValues.OAS_RECOVERY_TAX_CUTOFF
+    const repaymentAmount = incomeOverCutoff * 0.15
+    const oasYearly = this.getEntitlementAmount() * 12
+    const result = Math.min(oasYearly, repaymentAmount)
+    return roundToTwo(result)
   }
 }

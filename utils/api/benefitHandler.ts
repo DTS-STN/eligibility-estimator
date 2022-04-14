@@ -391,6 +391,21 @@ export class BenefitHandler {
         )}</strong>`
       )
       .replace(
+        '{OAS_CLAWBACK}',
+        numberToStringCurrency(
+          this.benefitResults.oas.entitlement.clawback,
+          this.translations._locale
+        )
+      )
+      .replace(
+        '{OAS_RECOVERY_TAX_CUTOFF}',
+        numberToStringCurrency(
+          legalValues.OAS_RECOVERY_TAX_CUTOFF,
+          this.translations._locale,
+          { rounding: 0 }
+        )
+      )
+      .replace(
         '{MAX_OAS_INCOME}',
         `<strong className="font-bold">${numberToStringCurrency(
           legalValues.MAX_OAS_INCOME,
