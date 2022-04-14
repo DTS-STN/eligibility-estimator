@@ -393,7 +393,7 @@ export class BenefitHandler {
       .replace(
         '{OAS_CLAWBACK}',
         numberToStringCurrency(
-          this.benefitResults.oas.entitlement.clawback,
+          this.benefitResults.oas?.entitlement.clawback ?? 0,
           this.translations._locale
         )
       )
