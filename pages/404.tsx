@@ -8,7 +8,7 @@ const Custom404: NextPage = () => {
   const router = useRouter()
   return (
     <>
-      <Layout>
+      <Layout hideBreadcrumbHeader={true}>
         <ErrorPage lang={router.locale} errType="404" isAuth={false} />
       </Layout>
     </>
