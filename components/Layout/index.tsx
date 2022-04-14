@@ -10,8 +10,9 @@ import { Header } from './Header'
 import { SCLabsTestHeader } from './ScTestHeader'
 
 export const Layout: React.VFC<{
+  hideBreadcrumbHeader: boolean
   children: React.ReactNode
-}> = ({ children }) => {
+}> = ({ hideBreadcrumbHeader = false, children }) => {
   const router = useRouter()
   const isMobile = useMediaQuery(400)
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
@@ -42,14 +43,18 @@ export const Layout: React.VFC<{
             </div>
           </div>
           <div className="sm:container mx-auto flex flex-col mb-16 mt-8">
-            <Breadcrumb
-              id="navBreadcrumb"
-              items={[
-                { text: tsln.breadcrumb1Title, link: '#' },
-                { text: tsln.breadcrumb2Title, link: '#' },
-              ]}
-            />
-            <h1 className="h1 mt-10 mb-8">{tsln.title}</h1>
+            {hideBreadcrumbHeader || (
+              <>
+                <Breadcrumb
+                  id="navBreadcrumb"
+                  items={[
+                    { text: tsln.breadcrumb1Title, link: '#' },
+                    { text: tsln.breadcrumb2Title, link: '#' },
+                  ]}
+                />
+                <h1 className="h1 mt-10 mb-8">{tsln.title}</h1>
+              </>
+            )}
             {children}
           </div>
         </div>
