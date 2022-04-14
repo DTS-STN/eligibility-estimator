@@ -10,9 +10,9 @@ import { Header } from './Header'
 import { SCLabsTestHeader } from './ScTestHeader'
 
 export const Layout: React.VFC<{
-  hideBreadcrumbHeader: boolean
   children: React.ReactNode
-}> = ({ hideBreadcrumbHeader = false, children }) => {
+  hideBreadcrumbHeader?: boolean
+}> = ({ children, hideBreadcrumbHeader = false }) => {
   const router = useRouter()
   const isMobile = useMediaQuery(400)
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
