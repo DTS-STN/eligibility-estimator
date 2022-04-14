@@ -59,10 +59,7 @@ export const ResultsPage: React.VFC = () => {
               <MoreInfoLinks links={root.summary.moreInfoLinks} />
             )}
 
-            <div>
-              <h2 className="h2 text-content mb-8 mt-8">{tsln.faq}</h2>
-              <FAQ />
-            </div>
+            <FAQ />
           </>
         )}
     </div>
