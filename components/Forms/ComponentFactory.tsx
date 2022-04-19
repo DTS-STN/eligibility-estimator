@@ -10,8 +10,9 @@ import { WebTranslations } from '../../i18n/web'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
+import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import { NeedHelpList } from '../Layout/NeedHelpList'
+import { NeedHelp } from '../NeedHelp'
 import { CurrencyField } from './CurrencyField'
 import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
@@ -189,10 +190,12 @@ export const ComponentFactory: React.VFC = observer(({}) => {
 
           <FormButtons />
         </form>
-        <NeedHelpList
-          title={tsln.needHelp}
-          links={root.summary.needHelpLinks}
-        />
+        <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
+      </div>
+
+      <div className="mt-16">
+        <h2 className="h2 text-content mb-8">{tsln.faq}</h2>
+        <FAQ />
       </div>
     </>
   )

@@ -1,19 +1,17 @@
+import Joi from 'joi'
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
-import { webDictionary } from '../../i18n/web'
+import {
+  applyReplacements,
+  getWebTranslations,
+  webDictionary,
+  WebTranslations,
+} from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
-import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import { FieldData } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { legalValues } from '../../utils/api/scrapers/output'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
-
-type FormProgress = {
-  income: boolean
-  personal: boolean
-  legal: boolean
-  estimation?: boolean
-}
 
 export const Form = types
   .model({
@@ -186,10 +184,16 @@ export const Form = types
 
       if ('error' in data) {
         self.clearAllErrors()
-        // validate errors
-        for (const d of data.detail) {
-          const field = self.getFieldByKey(d.context.key)
-          field.setError(d.message)
+        if (!('details' in data.detail))
+          return console.error('Unexpected error:', data.detail)
+        const allErrors: Joi.ValidationErrorItem[] = data.detail.details
+        for (const err of allErrors) {
+          const language: Language = parent.langBrowser
+          const tsln: WebTranslations = getWebTranslations(language)
+          let translatedError: string = tsln.validationErrors[err.message]
+          translatedError = applyReplacements(translatedError, language)
+          const errorText: string = translatedError ?? err.message
+          self.getFieldByKey(err.context.key).setError(errorText)
         }
       } else {
         self.clearAllErrors()
@@ -204,15 +208,6 @@ export const Form = types
         parent.saveStoreState()
       }
     }),
-    validateIncome(): boolean {
-      const incomeField = self.getFieldByKey(FieldKey.INCOME)
-      // null income is valid by default
-      if (!incomeField || self.getFieldByKey(FieldKey.INCOME).value == null)
-        return false
-
-      const validIncome = self.getFieldByKey(FieldKey.INCOME).sanitizeInput()
-      return parseInt(validIncome) > legalValues.MAX_OAS_INCOME
-    },
   }))
   .actions((self) => ({
     clearForm(): void {
@@ -226,10 +221,5 @@ export const Form = types
       const parent = getParent(self) as Instance<typeof RootStore>
       parent.setSummary({})
       self.sendAPIRequest()
-    },
-  }))
-  .views((self) => ({
-    get isIncomeTooHigh() {
-      return self.validateIncome()
     },
   }))

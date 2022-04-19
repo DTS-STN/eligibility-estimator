@@ -1,8 +1,8 @@
 import { OutputItemGis } from '../_baseTable'
-import { OutputItemLegalValues } from '../legalValuesScraper'
+import { OutputItemLegalValues } from '../legalValuesScraperHtml'
 import { OutputItemAlw } from '../tbl4PartneredAlwScraper'
 import { OutputItemAfs } from '../tbl5PartneredAfsScraper'
-import _legalValues from './legalValues.json'
+import _legalValues from './legalValuesJson.json'
 import tbl1_single from './tbl1_single.json'
 import tbl2_partneredAndOas from './tbl2_partneredAndOas.json'
 import tbl3_partneredNoOas from './tbl3_partneredNoOas.json'
@@ -24,4 +24,15 @@ export const scraperData: ScraperCollection = {
   tbl4_partneredAlw,
   tbl5_partneredAfs,
 }
-export const legalValues: OutputItemLegalValues = _legalValues
+
+export const legalValues: OutputItemLegalValues = {
+  MAX_OAS_ENTITLEMENT: _legalValues.oas.average,
+  OAS_RECOVERY_TAX_CUTOFF: _legalValues.oas.clawback,
+  MAX_OAS_INCOME: _legalValues.oas.maximum,
+  MAX_GIS_INCOME_SINGLE: _legalValues.gis.singleLimit,
+  MAX_GIS_INCOME_PARTNER_OAS: _legalValues.gis.spouseOasLimit,
+  MAX_GIS_INCOME_PARTNER_ALW: _legalValues.gis.spouseAllowanceLimit,
+  MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW: _legalValues.gis.spouseNoOasLimit,
+  MAX_ALW_INCOME: _legalValues.allowance.spouseGisLimit,
+  MAX_AFS_INCOME: _legalValues.allowance.survivorLimit,
+}

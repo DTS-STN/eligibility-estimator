@@ -1,3 +1,8 @@
+/**
+ * This file and approach is now obsolete, see legalValuesScraperJson.ts for the replacement.
+ * Will keep this code in case the JSON approach has issues in the future.
+ */
+
 import { JSDOM } from 'jsdom'
 import { BaseScraper } from './_base'
 
@@ -42,11 +47,11 @@ export type OutputItemLegalValues = {
   [x in ScraperKeys]: number
 }
 
-export class LegalValuesScraper extends BaseScraper {
+export class LegalValuesScraperHtml extends BaseScraper {
   private readonly scraperConfigs: { [x in ScraperKeys]: ScraperConfig }
 
   constructor() {
-    super('legalValues')
+    super('legalValuesHtml')
 
     // warning: the selectors here are very delicate, if things move around on the page, there will be issues.
     this.scraperConfigs = {
@@ -57,8 +62,7 @@ export class LegalValuesScraper extends BaseScraper {
       [ScraperKeys.MAX_OAS_ENTITLEMENT]: {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html',
-        selector:
-          'body > main > div:nth-child(2) > table > tbody > tr:nth-child(2) > td',
+        selector: '[headers=tbl1-6]',
       },
       /**
        * OAS Recovery Tax. Updates periodically. Not used yet.
@@ -67,7 +71,7 @@ export class LegalValuesScraper extends BaseScraper {
         pageUrl:
           'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.html',
         selector:
-          'body > main > div:nth-child(2) > div > table > tbody > tr:nth-child(3) > td:nth-child(3)',
+          'body > main > div:nth-child(2) > div > table > tbody > tr:nth-child(1) > td:nth-child(3)',
       },
       /**
        * Income maximums. Updates periodically.
@@ -127,7 +131,7 @@ export class LegalValuesScraper extends BaseScraper {
     const selectedData = document.querySelector(config.selector)
     if (!selectedData) throw new Error(`Selector was unable to parse any data`)
     const sanitizeFn: (string: string) => number =
-      config.sanitizeFn ?? LegalValuesScraper.sanitizeFnStandard
+      config.sanitizeFn ?? LegalValuesScraperHtml.sanitizeFnStandard
     return sanitizeFn(selectedData.textContent)
   }
 
@@ -140,7 +144,7 @@ export class LegalValuesScraper extends BaseScraper {
       promises.push(
         this.fetchPage(config.pageUrl)
           .then((pageData) => {
-            const value = LegalValuesScraper.parseItem(pageData, config)
+            const value = LegalValuesScraperHtml.parseItem(pageData, config)
             console.log(`${this.logHeader} Received ${value} for ${key}`)
             return { key, value }
           })
@@ -170,4 +174,4 @@ export class LegalValuesScraper extends BaseScraper {
   }
 }
 
-export default LegalValuesScraper
+export default LegalValuesScraperHtml

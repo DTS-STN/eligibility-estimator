@@ -3,9 +3,7 @@ import React from 'react'
 import type { Link as InfoLink } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 
-export const ConditionalLinks: React.VFC<{ links: InfoLink[] }> = ({
-  links,
-}) => {
+export const MoreInfoLinks: React.VFC<{ links: InfoLink[] }> = ({ links }) => {
   const moreInfo = useTranslation<string>('moreInfoHeader')
   return (
     <>

@@ -1,12 +1,15 @@
-import LegalValuesScraper from './legalValuesScraper'
+import LegalValuesScraperJson from './legalValuesScraperJson'
 import Tbl1SingleScraper from './tbl1SingleScraper'
 import Tbl2PartneredAndOasScraper from './tbl2PartneredAndOasScraper'
 import Tbl3PartneredNoOasScraper from './tbl3PartneredNoOasScraper'
 import Tbl4PartneredAlwScraper from './tbl4PartneredAlwScraper'
 import Tbl5PartneredAfsScraper from './tbl5PartneredAfsScraper'
 
-const legalValuesScraper = new LegalValuesScraper()
-legalValuesScraper.main().then(() => {})
+// const legalValuesScraperHtml = new LegalValuesScraperHtml()
+// legalValuesScraperHtml.main().then(() => {})
+
+const legalValuesScraperJson = new LegalValuesScraperJson()
+legalValuesScraperJson.main().then(() => {})
 
 const tbl1SingleScraper = new Tbl1SingleScraper()
 tbl1SingleScraper.main().then(() => {})

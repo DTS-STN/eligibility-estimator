@@ -74,7 +74,7 @@ export class OasBenefit extends BaseBenefit {
         } else {
           return {
             result: ResultKey.INELIGIBLE,
-            reason: ResultReason.AGE,
+            reason: ResultReason.AGE_YOUNG,
             detail: this.translations.detail.dependingOnAgreementWhen65,
           }
         }
@@ -89,7 +89,7 @@ export class OasBenefit extends BaseBenefit {
       if (!meetsReqAge) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
+          reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.dependingOnLegalWhen65,
         }
       } else if (this.input.legalStatus.sponsored) {

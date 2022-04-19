@@ -1,19 +1,22 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRef } from 'react'
+import { useRouter } from 'next/router'
 import { WebTranslations } from '../../i18n/web'
 import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { ConditionalLinks } from '../ConditionalLinks'
-import { ContactCTA } from '../ContactCTA'
+import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import { NeedHelpList } from '../Layout/NeedHelpList'
-import { ResultsTable } from '../ResultsTable'
+import { NeedHelp } from '../NeedHelp'
+import { MoreInfoLinks } from './MoreInfoLinks'
+import { ResultsApply } from './ResultsApply'
+import { ResultsTable } from './ResultsTable'
+import { Button } from '@dts-stn/decd-design-system'
 
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
   const root = useStore()
+  const router = useRouter()
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
@@ -23,10 +26,7 @@ export const ResultsPage: React.VFC = () => {
           <p dangerouslySetInnerHTML={{ __html: root.summary.details }} />
         </div>
         <div className="col-span-1">
-          <NeedHelpList
-            title={tsln.needHelp}
-            links={root.summary.needHelpLinks}
-          />
+          <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
         </div>
       </div>
       {root.summary.state &&
@@ -47,18 +47,22 @@ export const ResultsPage: React.VFC = () => {
             ) : (
               <ResultsTable />
             )}
-            {root.summary.state !== EstimationSummaryState.UNAVAILABLE && (
-              <ContactCTA />
-            )}
+            <ResultsApply />
             <p>{tsln.modifyAnswersText}</p>
-            <Link href="/eligibility" passHref={true}>
-              <button className="btn btn-default md:w-48 mt-6">
-                {tsln.modifyAnswers}
-              </button>
-            </Link>
+            <Button
+              text={tsln.modifyAnswers}
+              styling="secondary"
+              className="mt-6 justify-center md:w-[fit-content]"
+              onClick={(e) => router.push('/eligibility')}
+            />
             {root.summary?.moreInfoLinks?.length && (
-              <ConditionalLinks links={root.summary.moreInfoLinks} />
+              <MoreInfoLinks links={root.summary.moreInfoLinks} />
             )}
+
+            <div>
+              <h2 className="h2 text-content mb-8 mt-8">{tsln.faq}</h2>
+              <FAQ />
+            </div>
           </>
         )}
     </div>

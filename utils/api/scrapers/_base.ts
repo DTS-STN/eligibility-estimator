@@ -38,7 +38,8 @@ export abstract class BaseScraper {
       .replace(/\$/g, '')
       .replace(/,/g, '')
       .replace(/ /g, '')
-    return parseFloat(sanitized)
+    const result = parseFloat(sanitized)
+    return !isNaN(result) ? result : undefined
   }
 
   async main() {

@@ -78,7 +78,8 @@ const en: WebTranslations = {
     header: 'Table of estimation results',
     tableHeader1: 'Sample Benefits',
     tableHeader2: 'Eligibility',
-    tableHeader3: 'Estimated monthly amount (CAD)',
+    tableHeader3: 'Details',
+    tableHeader4: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total estimated monthly benefit amount',
   },
   moreInfoHeader: 'More Information',
@@ -87,6 +88,23 @@ const en: WebTranslations = {
     'If you think you have made a mistake in filling out the form, or you would like to change your answers to see what would happen in a different scenario, please use the button below to modify your answers.',
   errors: {
     empty: 'This information is required',
+  },
+  validationErrors: {
+    incomeBelowZero: 'Your income must be above zero.',
+    incomeTooHigh:
+      'Your annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.',
+    partnerIncomeBelowZero: "Your partner's income must be above zero.",
+    partnerIncomeTooHigh:
+      "The sum of you and your partner's annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.",
+    ageUnder18: 'You must be over 18 to be able to use this tool.',
+    ageOver150: 'Your age should be less than 150.',
+    partnerAgeUnder18:
+      "Your partner's age must be over 18 to be able to use this tool.",
+    partnerAgeOver150: "Your partner's age should be less than 150.",
+    yearsInCanadaMinusAge:
+      'The number of years you have lived in Canada should be no more than your age minus 18.',
+    partnerYearsInCanadaMinusAge:
+      "Your partner's number of years in Canada should be no more than their age minus 18.",
   },
   unavailableImageAltText: 'Happy people',
   govt: 'Government of Canada',

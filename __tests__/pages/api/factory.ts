@@ -6,7 +6,7 @@ import {
   ResponseSuccess,
 } from '../../../utils/api/definitions/types'
 
-interface MockResponseObject<T extends ResponseSuccess | ResponseError> {
+export interface MockResponseObject<T extends ResponseSuccess | ResponseError> {
   status: number
   body: T
 }

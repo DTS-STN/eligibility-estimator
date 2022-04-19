@@ -1,3 +1,4 @@
+import Joi from 'joi'
 import { Translations } from '../../../i18n/api'
 import {
   IncomeHelper,
@@ -102,7 +103,7 @@ export interface ResponseSuccess {
 
 export interface ResponseError {
   error: string
-  detail: any
+  detail: Joi.ValidationError | Error
 }
 
 export interface Link {

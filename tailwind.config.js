@@ -60,6 +60,7 @@ module.exports = {
 
       // link
       'transparent': 'transparent',
+      'details-link': '#2b4380',
 
       // misc
       'muted': '#555',

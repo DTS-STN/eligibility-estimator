@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import { HeadDoc } from '../../components/Document'
 import { useStorage, useStore } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { ResultsPage } from '../../components/ResultsPage'
@@ -17,7 +16,6 @@ const Results: NextPage = (props) => {
 
   return (
     <>
-      <HeadDoc />
       <Layout>
         <ResultsPage />
       </Layout>
