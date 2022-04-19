@@ -52,7 +52,11 @@ export const Layout: React.VFC<{
                     { text: tsln.breadcrumb2Title, link: '#' },
                   ]}
                 />
-                <Heading title={tsln.title} className="mt-10 mb-8" />
+                <Heading
+                  id="oldAgeTitle"
+                  title={tsln.title}
+                  className="mt-10 mb-8"
+                />
               </>
             )}
             {children}
