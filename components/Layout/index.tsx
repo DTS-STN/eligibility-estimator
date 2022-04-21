@@ -53,7 +53,7 @@ export const Layout: React.VFC<{
                   ]}
                 />
                 <Heading
-                  id="oldAgeTitle"
+                  id="applicationTitle"
                   title={tsln.title}
                   className="mt-10 mb-8"
                 />
