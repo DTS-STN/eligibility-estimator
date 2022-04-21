@@ -13,7 +13,11 @@ export const MoreInfoLinks: React.VFC<{ links: InfoLink[] }> = ({ links }) => {
         {links.map((link, index) => (
           <li key={index} className="ml-10">
             <Link href={link.url} passHref>
-              <DSLink id={`moreInfo${index}`} text={link.text} />
+              <DSLink
+                id={`moreInfo${index}`}
+                text={link.text}
+                target="_blank"
+              />
             </Link>
           </li>
         ))}
