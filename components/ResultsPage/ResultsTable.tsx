@@ -1,13 +1,12 @@
 import { observer } from 'mobx-react'
 import { useRouter } from 'next/router'
+import React from 'react'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import {
-  EntitlementResultType,
-  Locale,
-} from '../../utils/api/definitions/enums'
+import { Locale } from '../../utils/api/definitions/enums'
 import { useStore, useTranslation } from '../Hooks'
-import { EligibilityDetails } from './EligibilityDetails'
+import { ResultsTableRowDesktop } from './ResultsTableRowDesktop'
+import { ResultsTableRowMobile } from './ResultsTableRowMobile'
 
 export const ResultsTable = observer(() => {
   const root = useStore()
@@ -16,10 +15,11 @@ export const ResultsTable = observer(() => {
 
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
-  // Send the details and eligibility results seperately and create a new column
+  // Send the details and eligibility results separately and create a new column
   return (
     <div>
       <h3 className="h3 mb-5">{tsln.resultsPage.header}</h3>
+      {/* desktop only */}
       <table className="hidden md:block text-left">
         <thead className="font-bold border-b border-content">
           <tr>
@@ -34,121 +34,34 @@ export const ResultsTable = observer(() => {
           </tr>
         </thead>
         <tbody className="align-top">
-          <tr>
-            <td>{tsln.oas}</td>
-            <td>
-              {root.oas?.eligibility && (
-                <p
-                  className="summary-link"
-                  dangerouslySetInnerHTML={{
-                    __html: root.oas.eligibility.detail.split('\n')[0],
-                  }}
-                />
-              )}
-            </td>
-            <td>
-              <p
-                className="summary-link"
-                dangerouslySetInnerHTML={{
-                  __html: root.oas.eligibility.detail.split('\n')[1],
-                }}
-              />
-            </td>
-            {!root.summary.zeroEntitlements && (
-              <td className="text-right min-w-[68px]">
-                {numberToStringCurrency(root.oas.entitlement.result, locale)}
-              </td>
-            )}
-          </tr>
-          <tr className="bg-[#E8F2F4]">
-            <td>{tsln.gis}</td>
-            <td>
-              {root.gis?.eligibility && (
-                <p
-                  className="summary-link"
-                  dangerouslySetInnerHTML={{
-                    __html: root.gis.eligibility.detail.split('\n')[0],
-                  }}
-                />
-              )}
-            </td>
-            <td>
-              <p
-                className="summary-link"
-                dangerouslySetInnerHTML={{
-                  __html: root.gis.eligibility.detail.split('\n')[1],
-                }}
-              />
-            </td>
-            {!root.summary.zeroEntitlements && (
-              <td className="text-right min-w-[68px]">
-                {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-                  ? numberToStringCurrency(
-                      root.gis.entitlement.result ?? 0,
-                      locale
-                    )
-                  : 'Unavailable'}
-              </td>
-            )}
-          </tr>
-          <tr>
-            <td>{tsln.alw}</td>
-            <td>
-              {root.allowance?.eligibility && (
-                <p
-                  className="summary-link"
-                  dangerouslySetInnerHTML={{
-                    __html: root.allowance.eligibility.detail.split('\n')[0],
-                  }}
-                />
-              )}
-            </td>
-            <td>
-              <p
-                className="summary-link"
-                dangerouslySetInnerHTML={{
-                  __html: root.allowance.eligibility.detail.split('\n')[1],
-                }}
-              />
-            </td>
-            {!root.summary.zeroEntitlements && (
-              <td className="text-right min-w-[68px]">
-                {numberToStringCurrency(
-                  root.allowance?.entitlement?.result ?? 0,
-                  locale
-                )}
-              </td>
-            )}
-          </tr>
-          <tr className="bg-[#E8F2F4]">
-            <td>{tsln.afs}</td>
-            <td>
-              {root.afs?.eligibility && (
-                <p
-                  className="summary-link"
-                  dangerouslySetInnerHTML={{
-                    __html: root.afs.eligibility.detail.split('\n')[0],
-                  }}
-                />
-              )}
-            </td>
-            <td>
-              <p
-                className="summary-link"
-                dangerouslySetInnerHTML={{
-                  __html: root.afs.eligibility.detail.split('\n')[1],
-                }}
-              />
-            </td>
-            {!root.summary.zeroEntitlements && (
-              <td className="text-right min-w-[68px]">
-                {numberToStringCurrency(
-                  root.afs?.entitlement?.result ?? 0,
-                  locale
-                )}
-              </td>
-            )}
-          </tr>
+          <ResultsTableRowDesktop
+            heading={tsln.oas}
+            data={root.oas}
+            locale={locale}
+            showEntitlement={!root.summary.zeroEntitlements}
+            tintedBackground={false}
+          />
+          <ResultsTableRowDesktop
+            heading={tsln.gis}
+            data={root.gis}
+            locale={locale}
+            showEntitlement={!root.summary.zeroEntitlements}
+            tintedBackground={true}
+          />
+          <ResultsTableRowDesktop
+            heading={tsln.alw}
+            data={root.allowance}
+            locale={locale}
+            showEntitlement={!root.summary.zeroEntitlements}
+            tintedBackground={false}
+          />
+          <ResultsTableRowDesktop
+            heading={tsln.afs}
+            data={root.afs}
+            locale={locale}
+            showEntitlement={!root.summary.zeroEntitlements}
+            tintedBackground={true}
+          />
           {!root.summary.zeroEntitlements && (
             <tr className="border-t border-content font-bold">
               <td colSpan={3}>{tsln.resultsPage.tableTotalAmount}</td>
@@ -159,83 +72,46 @@ export const ResultsTable = observer(() => {
           )}
         </tbody>
       </table>
+      {/* mobile only */}
       <div className="block md:hidden">
-        <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            {tsln.oas}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            {root.oas?.eligibility && (
-              <EligibilityDetails eligibilityType={root.oas} />
-            )}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
-            {numberToStringCurrency(root.oas?.entitlement?.result ?? 0, locale)}
-          </p>
-        </div>
-        <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            {tsln.gis}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            {root.gis?.eligibility && (
-              <EligibilityDetails eligibilityType={root.gis} />
-            )}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
-            {root.gis.entitlement.type !== EntitlementResultType.UNAVAILABLE
-              ? numberToStringCurrency(
-                  root.gis?.entitlement?.result ?? 0,
-                  locale
-                )
-              : 'Unavailable'}
-          </p>
-        </div>
-        <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            {tsln.alw}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            {root.allowance?.eligibility && (
-              <EligibilityDetails eligibilityType={root.allowance} />
-            )}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
-            {numberToStringCurrency(
-              root.allowance?.entitlement?.result ?? 0,
-              locale
-            )}
-          </p>
-        </div>
-        <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            {tsln.afs}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader2}: </span>
-            {root.afs?.eligibility && (
-              <EligibilityDetails eligibilityType={root.afs} />
-            )}
-          </p>
-          <p className="px-1.5 py-1.5">
-            <span className="font-bold">{tsln.resultsPage.tableHeader4}: </span>
-            {numberToStringCurrency(root.afs?.entitlement?.result ?? 0, locale)}
-          </p>
-        </div>
-        <div className="mb-4">
-          <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
-            {tsln.resultsPage.tableTotalAmount}
-          </p>
-          <p className="px-1.5 py-1.5 font-bold">
-            {numberToStringCurrency(root.summary.entitlementSum, locale)}
-          </p>
-        </div>
+        <ResultsTableRowMobile
+          heading={tsln.oas}
+          tsln={tsln}
+          data={root.oas}
+          locale={locale}
+          showEntitlement={!root.summary.zeroEntitlements}
+        />
+        <ResultsTableRowMobile
+          heading={tsln.gis}
+          tsln={tsln}
+          data={root.gis}
+          locale={locale}
+          showEntitlement={!root.summary.zeroEntitlements}
+        />
+        <ResultsTableRowMobile
+          heading={tsln.alw}
+          tsln={tsln}
+          data={root.allowance}
+          locale={locale}
+          showEntitlement={!root.summary.zeroEntitlements}
+        />
+        <ResultsTableRowMobile
+          heading={tsln.afs}
+          tsln={tsln}
+          data={root.afs}
+          locale={locale}
+          showEntitlement={!root.summary.zeroEntitlements}
+        />
+        {!root.summary.zeroEntitlements && (
+          <div className="mb-4">
+            <p className="bg-[#E8F2F4] font-bold px-1.5 py-2 border-b border-muted">
+              {tsln.resultsPage.tableTotalAmount}
+            </p>
+            <p className="px-1.5 py-1.5 font-bold">
+              {numberToStringCurrency(root.summary.entitlementSum, locale)}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   )

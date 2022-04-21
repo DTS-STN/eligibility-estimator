@@ -554,47 +554,45 @@ export const FAQF = () => (
           <p>
             Si vous lisez ceci suite à la perte d&apos;un être cher, veuillez
             accepter nos condoléances.
-            <ul className="list-disc">
-              Lorsqu&apos;un bénéficiaire de la Sécurité de la vieillesse
-              décède, ses prestations doivent être annulées. Les prestations
-              sont payables pour le mois au cours duquel le décès survient. Les
-              prestations reçues après ce mois devront être remboursées. Cela
-              comprend les prestations suivantes:
-              <li className="ml-12">
-                la pension de la Sécurité de la vieillesse
-              </li>
-              <li className="ml-12">Supplément de revenu garanti;</li>
-              <li className="ml-12">Allocation</li>
-              <li className="ml-12">Allocation au survivant.</li>
-            </ul>
-            <p>
-              Veuillez communique avec
-              <Link
-                href="https://www.canada.ca/en/employment-social-development/corporate/contact.html"
-                passHref
-              >
-                <a className="text-default-text underline" target="_blank">
-                  Service Canada
-                </a>
-              </Link>
-              le plus tôt possible pour nous informer de la date du décès du
-              bénéficiaire. Veuillez inclure les renseignements suivants sur la
-              personne décédée:
-            </p>
-            <ul className="list-disc">
-              <li className="ml-12">nom complet;</li>
-              <li className="ml-12">date de naissance;</li>
-              <li className="ml-12">date du décès;</li>
-              <li className="ml-12">
-                numéro d&apos;assurance sociale (si vous le connaissez);
-              </li>
-              <li className="ml-12">adresse précédente;</li>
-              <li className="ml-12">
-                nom et adresse de la succession ou de la personne responsable
-                des affaires de la personne décédée (si vous les connaissez).
-              </li>
-            </ul>
           </p>
+          <ul className="list-disc">
+            Lorsqu&apos;un bénéficiaire de la Sécurité de la vieillesse décède,
+            ses prestations doivent être annulées. Les prestations sont payables
+            pour le mois au cours duquel le décès survient. Les prestations
+            reçues après ce mois devront être remboursées. Cela comprend les
+            prestations suivantes:
+            <li className="ml-12">
+              la pension de la Sécurité de la vieillesse
+            </li>
+            <li className="ml-12">Supplément de revenu garanti;</li>
+            <li className="ml-12">Allocation</li>
+            <li className="ml-12">Allocation au survivant.</li>
+          </ul>
+          <ul className="list-disc">
+            Veuillez communique avec{' '}
+            <Link
+              href="https://www.canada.ca/en/employment-social-development/corporate/contact.html"
+              passHref
+            >
+              <a className="text-default-text underline" target="_blank">
+                Service Canada
+              </a>
+            </Link>{' '}
+            le plus tôt possible pour nous informer de la date du décès du
+            bénéficiaire. Veuillez inclure les renseignements suivants sur la
+            personne décédée:
+            <li className="ml-12">nom complet;</li>
+            <li className="ml-12">date de naissance;</li>
+            <li className="ml-12">date du décès;</li>
+            <li className="ml-12">
+              numéro d&apos;assurance sociale (si vous le connaissez);
+            </li>
+            <li className="ml-12">adresse précédente;</li>
+            <li className="ml-12">
+              nom et adresse de la succession ou de la personne responsable des
+              affaires de la personne décédée (si vous les connaissez).
+            </li>
+          </ul>
         </div>
       </details>
     </details>

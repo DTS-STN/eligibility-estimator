@@ -339,7 +339,6 @@ export class BenefitHandler {
 
   /**
    * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
-   * If the entitlement result provides a detailOverride, that will take precedence over the eligibility result's detail.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
@@ -354,17 +353,12 @@ export class BenefitHandler {
       ) {
         result.eligibility.result = ResultKey.INELIGIBLE
         result.eligibility.reason = ResultReason.INCOME
+        result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
 
       // start detail processing...
       const eligibilityText =
         this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
-
-      // uses the detail text from the eligibility result, or the entitlement result's override if provided
-      const detailText = result.eligibility.detail // ex. "likely eligible for this benefit"
-      const detailOverrideText = result.entitlement.detailOverride // ex. "likely eligible, but partial oas"
-      delete result.entitlement.detailOverride // so this is not passed into the response
-      const usedDetailText = detailOverrideText ?? detailText
 
       // if client is ineligible, the table will be populated with a link to view more reasons
       const ineligibilityText =
@@ -380,7 +374,7 @@ export class BenefitHandler {
       )
 
       // finish with detail processing
-      result.eligibility.detail = `${eligibilityText}\n${usedDetailText}${ineligibilityTextWithBenefit}`
+      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityTextWithBenefit}`
     }
   }
 
