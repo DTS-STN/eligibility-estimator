@@ -25,6 +25,9 @@ export type WebTranslations = {
   langLong: string
   creator: string
   search: string
+  skipToMain: string
+  skipToAbout: string
+  switchToBasic: string
   breadcrumb1Title: string
   breadcrumb1URL: string
   breadcrumb2Title: string
