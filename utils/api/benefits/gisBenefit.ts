@@ -128,12 +128,11 @@ export class GisBenefit extends BaseBenefit {
     else if (result === 0) type = EntitlementResultType.NONE
     else type = EntitlementResultType.FULL
 
-    const detailOverride =
-      type === EntitlementResultType.UNAVAILABLE
-        ? this.translations.detail.eligibleEntitlementUnavailable
-        : undefined
+    if (type === EntitlementResultType.UNAVAILABLE)
+      this.eligibility.detail =
+        this.translations.detail.eligibleEntitlementUnavailable
 
-    return { result, type, detailOverride }
+    return { result, type }
   }
 
   private getEntitlementAmount(): number {

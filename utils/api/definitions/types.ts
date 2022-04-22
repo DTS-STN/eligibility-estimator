@@ -73,7 +73,6 @@ export interface EligibilityResult {
 export interface EntitlementResult {
   result: number
   type: EntitlementResultType
-  detailOverride?: string // overrides details provided by EligibilityResult
 }
 
 export interface BenefitResult {

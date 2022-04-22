@@ -1,4 +1,4 @@
-import { Breadcrumb } from '@dts-stn/decd-design-system'
+import { Breadcrumb, Heading } from '@dts-stn/decd-design-system'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -67,7 +67,11 @@ export const Layout: React.VFC<{
                     { text: tsln.breadcrumb2Title, link: '#' },
                   ]}
                 />
-                <h1 className="h1 mt-10 mb-8">{tsln.title}</h1>
+                <Heading
+                  id="applicationTitle"
+                  title={tsln.title}
+                  className="mt-10 mb-8"
+                />
               </>
             )}
             {children}

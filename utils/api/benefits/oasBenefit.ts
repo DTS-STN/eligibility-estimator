@@ -118,14 +118,14 @@ export class OasBenefit extends BaseBenefit {
       this.input.yearsInCanadaSince18 < 40
         ? EntitlementResultType.PARTIAL
         : EntitlementResultType.FULL
-    const detailOverride =
-      type === EntitlementResultType.PARTIAL
-        ? this.input.age >= 65 && this.input.age < 70
+
+    if (type === EntitlementResultType.PARTIAL)
+      this.eligibility.detail =
+        this.input.age >= 65 && this.input.age < 70
           ? this.translations.detail.eligiblePartialOas65to69
           : this.translations.detail.eligiblePartialOas
-        : undefined
 
-    return { result, type, detailOverride }
+    return { result, type }
   }
 
   private getEntitlementAmount(): number {
