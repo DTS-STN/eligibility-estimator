@@ -24,16 +24,16 @@ export const Layout: React.VFC<{
       <SCLabsTestHeader />
 
       <nav>
-        <ul id="wb-tphp" className="z-10">
+        <ul id="applicationTitle" className="z-10">
           <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
             <a className="focus:bg-[#26374a] font-bold p-1 text-white" href="#wb-cont">{tsln.skipToMain}</a>
           </li>
           <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
             <a className="focus:bg-[#26374a] font-bold p-1 text-white" href="#wb-info">{tsln.skipToAbout}</a>
           </li>
-          <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
+          {/* <li className="left-0 top-2 absolute text-center box-border w-full -z-50 focus-within:z-50 ">
             <a className="focus:bg-[#26374a] font-bold p-1 text-white" href="?wbdisable=true" rel="alternate">{tsln.switchToBasic}</a>
-          </li>
+          </li> */}
         </ul>
       </nav>
 

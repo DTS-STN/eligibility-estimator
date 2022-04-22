@@ -7,7 +7,7 @@ import styles from './Footer.module.css'
 export const Footer = () => {
   const tsln = useTranslation<WebTranslations>()
   return (
-    <footer className="text-[14px]">
+    <footer id="wb-info" className="text-[14px]">
       <div
         className={`w-full h-auto px-4 py-8 bg-custom-blue-dark ${styles.footerBackground}`}
       >
