@@ -1,0 +1,27 @@
+
+image:
+  repository: mtscontainers.azurecr.io/eligibility-estimator
+  tag: "{{ env "DOCKER_TAG" | default "latest" }}" 
+  pullPolicy: Always
+
+ingress:
+    enabled: true
+    path: /
+    annotations: {}
+    hosts:
+    {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
+          - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
+    {{ else }}
+          - {{ requiredEnv "PROJECT" }}-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
+          - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
+    {{ end }} 
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+healthChecks:
+    livenessDelay: 15
+    readinessDelay: 15
+    livenessPath: /
+    readinessPath: /
+port: 3000
