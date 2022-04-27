@@ -90,6 +90,15 @@ components:
         - moreInfo
         - invalid
 
+    ResultType:
+      type: string
+      description: The type of the entitlement result.
+      format: string
+      enum:
+        - full
+        - partial
+        - none
+
     ResultReason:
       type: string
       description: The reason for the provided outcome
@@ -108,47 +117,64 @@ components:
         - Your marital status does not meet the requirement for this benefit
         - Your partner does not receive the required benefits
 
-    ResultObject:
+    EligibilityResult:
       type: object
-      description: The calculated results for a given benefit
+      description: The eligibility result for a given benefit
       required:
-        - eligibilityResult
-        - entitlementResult
+        - result
         - reason
         - detail
       properties:
-        eligibilityResult:
+        result:
           $ref: '#/components/schemas/ResultKey'
-        entitlementResult:
-          type: number
-          example: 500
         reason:
           $ref: '#/components/schemas/ResultReason'
         detail:
           type: string
           example: Based on the information provided, you are eligible!
-        missingFields:
-          $ref: '#/components/schemas/FieldKey'
+
+    EntitlementResult:
+      type: object
+      description: The entitlement result for a given benefit
+      required:
+        - result
+        - reason
+        - type
+      properties:
+        result:
+          $ref: '#/components/schemas/ResultKey'
+        reason:
+          $ref: '#/components/schemas/ResultReason'
+        type:
+          $ref: '#/components/schemas/ResultType'
+
+    ResultObject:
+      type: object
+      description: The calculated results for a given benefit
+      required:
+        - eligibility
+        - entitlement
+      properties:
+        eligibility:
+          $ref: '#/components/schemas/EligibilityResult'
+        entitlement:
+          $ref: '#/components/schemas/EntitlementResult'
 
     ResponseObject:
       type: object
       description: The overall eligibility results, plus a list of fields that the frontend should display
       required:
-        - oas
-        - gis
-        - allowance
-        - afs
+        - results
+        - summary
         - visibleFields
+        - missingFields
+        - fieldData
       properties:
-        oas:
-          $ref: '#/components/schemas/ResultObject'
-        gis:
-          $ref: '#/components/schemas/ResultObject'
-        allowance:
-          $ref: '#/components/schemas/ResultObject'
-        afs:
+        results:
           $ref: '#/components/schemas/ResultObject'
         visibleFields:
+          $ref: '#/components/schemas/FieldKey'
+        missingFields:
           $ref: '#/components/schemas/FieldKey'
 
     ErrorResponseObject:
@@ -417,14 +443,22 @@ components:
       name: partnerBenefitStatus
       in: query
       description: >
-        Is the client's partner receiving OAS?
+        What best describes the partner's situation?
 
 
-        _Note: This can be "true" only when marital status is Married or Common-Law._
+        _Note: This can be provided only when marital status is Married or Common-Law._
       required: false
-      example: false
+      example: oasGis
       schema:
-        type: boolean
+        type: string
+        description: Any country
+        example: CAN
+        enum:
+          - oas
+          - oasGis
+          - alw
+          - none
+          - helpMe
       allowEmptyValue: false
 
     partnerIncome:
