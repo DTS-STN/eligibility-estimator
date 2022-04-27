@@ -107,6 +107,7 @@ export interface Translations {
     gisReasons: Link
     alwReasons: Link
     afsReasons: Link
+    oasRecoveryTaxInline: Link
   }
   csv: {
     appName: string

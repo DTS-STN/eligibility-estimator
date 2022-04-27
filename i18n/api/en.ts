@@ -335,7 +335,7 @@ const en: Translations = {
     additionalReasons:
       '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
     oasClawback:
-      'You may have to repay {OAS_CLAWBACK} as you are above the maximum of {OAS_RECOVERY_TAX_CUTOFF}.',
+      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as your income is over {OAS_RECOVERY_TAX_CUTOFF}.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',
@@ -531,6 +531,12 @@ const en: Translations = {
     afsReasons: {
       text: 'Click here',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasRecoveryTaxInline: {
+      text: 'recovery tax',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
       order: -1,
       location: LinkLocation.HIDDEN,
     },

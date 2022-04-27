@@ -441,6 +441,10 @@ export class BenefitHandler {
         '{LINK_MORE_REASONS_AFS}',
         `<a href="${this.translations.links.afsReasons.url}" target="_blank">${this.translations.links.afsReasons.text}</a>`
       )
+      .replace(
+        '{LINK_RECOVERY_TAX}',
+        `<a href="${this.translations.links.oasRecoveryTaxInline.url}" target="_blank">${this.translations.links.oasRecoveryTaxInline.text}</a>`
+      )
     return textToProcess
   }
 
