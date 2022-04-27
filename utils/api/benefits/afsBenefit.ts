@@ -13,6 +13,7 @@ import {
 import { legalValues, scraperData } from '../scrapers/output'
 import { OutputItemAfs } from '../scrapers/tbl5PartneredAfsScraper'
 import { BaseBenefit } from './_base'
+import { EntitlementFormula } from './entitlementFormula'
 
 export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
@@ -136,10 +137,20 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const result = this.getEntitlementAmount()
+    const tableResult = this.getEntitlementAmount()
+    const formulaResult = new EntitlementFormula(
+      this.income,
+      this.input.maritalStatus,
+      this.input.partnerBenefitStatus,
+      this.input.age
+    ).getEntitlementAmount()
+    console.log(
+      `\ntableResult: ${tableResult}\nformulaResult: ${formulaResult}`
+    )
+
     const type = EntitlementResultType.FULL
 
-    return { result, type }
+    return { result: formulaResult, type }
   }
 
   private getEntitlementAmount(): number {
