@@ -1,4 +1,5 @@
-import { MaritalStatus } from '../definitions/enums'
+import { EntitlementResultType, MaritalStatus } from '../definitions/enums'
+import { BenefitResult, EntitlementResultOas } from '../definitions/types'
 import {
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
@@ -70,11 +71,18 @@ export class EntitlementFormula {
       legalValues.MAX_OAS_ENTITLEMENT
   )
 
+  /**
+   * Note that oasResult is optional. If it is provided, then the calculations
+   * will consider Partial OAS. Meaning, when there is Partial OAS, the output
+   * here will compensate for the reduction in OAS. Currently this is only used
+   * for GIS, though it is unconfirmed if ALW/AFS should use this.
+   */
   constructor(
     private income: number,
     private maritalStatus: MaritalStatusHelper,
     private partnerBenefitStatus: PartnerBenefitStatusHelper,
-    private age: number
+    private age: number,
+    private oasResult: BenefitResult<EntitlementResultOas> = undefined
   ) {
     this.gisStatus = this.maritalStatus.single ? 1 : 2
   }
@@ -83,9 +91,19 @@ export class EntitlementFormula {
    * The main entrypoint for all the processing.
    */
   getEntitlementAmount(): number {
-    return this.calculationMethod === 'STATIC'
-      ? this.staticResult
-      : roundToTwo(this.actualAmount() + this.actualTopup)
+    const preOasAmount =
+      this.calculationMethod === 'STATIC'
+        ? this.staticResult
+        : roundToTwo(this.actualAmount() + this.actualTopup)
+
+    // This covers the impact of Partial OAS on GIS entitlement.
+    // When a client has Partial OAS and is eligible for GIS, the GIS will compensate for any reduction in the OAS amount.
+    // It is assumed that this does not affect ALW/AFS, though this is not confirmed.
+    if (this.oasResult?.entitlement.type === EntitlementResultType.PARTIAL) {
+      const oasCoverageAmount =
+        legalValues.MAX_OAS_ENTITLEMENT - this.oasResult.entitlement.result
+      return roundToTwo(preOasAmount + oasCoverageAmount)
+    } else return preOasAmount
   }
 
   /**

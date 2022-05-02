@@ -8,6 +8,7 @@ import {
   BenefitResult,
   EligibilityResult,
   EntitlementResultGeneric,
+  EntitlementResultOas,
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
@@ -20,7 +21,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(
     input: ProcessedInput,
     translations: Translations,
-    private oasResult: BenefitResult
+    private oasResult: BenefitResult<EntitlementResultOas>
   ) {
     super(input, translations)
   }
@@ -127,7 +128,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.income,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
-      this.input.age
+      this.input.age,
+      this.oasResult
     ).getEntitlementAmount()
     console.log(
       `\ntableResult: ${tableResult}\nformulaResult: ${formulaResult}`
