@@ -1,8 +1,9 @@
+import { AccordionForm } from '@dts-stn/decd-design-system'
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
@@ -62,8 +63,109 @@ export const ComponentFactory: React.VFC = observer(({}) => {
     root.setSummary(data.summary)
   }
 
+  // accordion form stuff
+  const [cardsValid, setCardsValid] = useState({
+    step1: { isValid: false },
+    step2: { isValid: false },
+    step3: { isValid: false },
+    step4: { isValid: false },
+  })
+
+  const onInputChange = useCallback((sectionId) => {
+    return (e) => {
+      console.log(e.target.value)
+      if (e.target.value === 'valid') {
+        setCardsValid((currentCardsData) => {
+          const updatedCardsData = { ...currentCardsData }
+          updatedCardsData[sectionId].isValid = true
+          return updatedCardsData
+        })
+      } else {
+        setCardsValid((currentCardsData) => {
+          const updatedCardsData = { ...currentCardsData }
+          updatedCardsData[sectionId].isValid = false
+          return updatedCardsData
+        })
+      }
+    }
+  }, [])
+
+  const cards = [
+    {
+      id: 'step1',
+      title: 'Age',
+      buttonLabel: 'Income',
+      children: [
+        <div key="step1">
+          <p>Random text for testing purposes. Test test testest testing</p>
+          <input
+            type="text"
+            style={{
+              border: '1px solid black',
+            }}
+            onChange={onInputChange('step1')}
+          />
+        </div>,
+      ],
+    },
+    {
+      id: 'step2',
+      title: 'Income',
+      children: [
+        <div key="step2">
+          <input
+            type="text"
+            style={{
+              border: '1px solid black',
+            }}
+            onChange={onInputChange('step2')}
+          />
+        </div>,
+      ],
+      buttonLabel: 'Residency',
+    },
+    {
+      id: 'step3',
+      title: 'Residency',
+      children: [
+        <div key="step3">
+          <input
+            type="text"
+            style={{
+              border: '1px solid black',
+            }}
+            onChange={onInputChange('step3')}
+          />
+        </div>,
+      ],
+      buttonLabel: 'Marital Status',
+    },
+
+    {
+      id: 'step4',
+      title: 'Marital Status',
+      children: [
+        <div key="step4">
+          <input
+            type="text"
+            style={{
+              border: '1px solid black',
+            }}
+            onChange={onInputChange('step4')}
+          />
+          <p>random text</p>
+        </div>,
+      ],
+      buttonLabel: 'Submit',
+      buttonOnChange: () => {
+        console.log('HI THERE') // seems that buttonOnChange only triggers on last card
+      },
+    },
+  ]
+
   return (
     <>
+      <AccordionForm id="mainForm" cardsState={cardsValid} cards={cards} />
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
         <form
           name="ee-form"
