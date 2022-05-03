@@ -1,7 +1,7 @@
 
 image:
-  repository: mtscontainers.azurecr.io/eligibility-estimator
-  tag: "{{ env "DOCKER_TAG" | default "latest" }}" 
+  repository: mtscontainers.azurecr.io/coabe
+  tag: "{{ env "DOCKER_TAG" | default "latest" }}"
   pullPolicy: Always
 
 ingress:
@@ -14,7 +14,7 @@ ingress:
     {{ else }}
           - {{ requiredEnv "PROJECT" }}-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN" }}
           - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
-    {{ end }} 
+    {{ end }}
 resources:
   requests:
     cpu: 200m
