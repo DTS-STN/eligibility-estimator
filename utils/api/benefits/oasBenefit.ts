@@ -126,7 +126,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           ? this.translations.detail.eligiblePartialOas65to69
           : this.translations.detail.eligiblePartialOas
 
-    if (this.input.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF)
+    if (clawback)
       this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
 
     return { result, clawback, type }
