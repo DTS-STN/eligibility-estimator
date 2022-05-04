@@ -76,6 +76,7 @@ export interface EntitlementResultGeneric {
 }
 
 export interface EntitlementResultOas extends EntitlementResultGeneric {
+  resultAt75: number
   clawback: number
 }
 

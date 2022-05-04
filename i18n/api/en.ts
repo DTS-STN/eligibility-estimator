@@ -336,6 +336,8 @@ const en: Translations = {
       '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
     oasClawback:
       'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as your income is over {OAS_RECOVERY_TAX_CUTOFF}.',
+    oasIncreaseAt75:
+      'Once you reach the age of 75, this will increase by 10%, to {OAS_75_AMOUNT}.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',

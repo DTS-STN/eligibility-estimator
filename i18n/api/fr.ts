@@ -346,6 +346,8 @@ const fr: Translations = {
       "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
     oasClawback:
       'Vous devrez peut-être rembourser {OAS_CLAWBACK} {LINK_RECOVERY_TAX} car vous revenus sont supérieurs à {OAS_RECOVERY_TAX_CUTOFF}.',
+    oasIncreaseAt75:
+      "Une fois que vous atteignez l'âge de 75 ans, cela augmentera de 10%, à {OAS_75_AMOUNT}",
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',

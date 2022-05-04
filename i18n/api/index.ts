@@ -63,6 +63,7 @@ export interface Translations {
     dependingOnLegalWhen65: string
     additionalReasons: string
     oasClawback: string
+    oasIncreaseAt75: string
   }
   summaryTitle: {
     moreInfo: string
