@@ -1,3 +1,4 @@
+import { Link as DSLink } from '@dts-stn/decd-design-system'
 import { Instance } from 'mobx-state-tree'
 import { useEffect } from 'react'
 import { SummaryLink } from '../../client-state/store'
@@ -31,14 +32,12 @@ export const NeedHelp: React.VFC<{
           {links &&
             links.map(({ text, url }, index) => (
               <li key={index}>
-                <a
+                <DSLink
+                  id={`helpLink${index}`}
                   href={url}
+                  text={text}
                   target="_blank"
-                  className="text-default-text underline"
-                  rel="noreferrer"
-                >
-                  {text}
-                </a>
+                />
               </li>
             ))}
         </ul>
