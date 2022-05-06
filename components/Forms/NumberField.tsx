@@ -1,15 +1,17 @@
 import { observer } from 'mobx-react'
-import { InputHTMLAttributes, useEffect } from 'react'
+import { InputHTMLAttributes, Ref, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
+import React from 'react'
 
 export interface NumberFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   error?: string
+  passedRef: Ref<HTMLInputElement>
 }
 
 /**
@@ -19,7 +21,16 @@ export interface NumberFieldProps
  * @returns
  */
 export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
-  const { name, label, required, value, placeholder, onChange, error } = props
+  const {
+    name,
+    label,
+    required,
+    value,
+    placeholder,
+    onChange,
+    error,
+    passedRef,
+  } = props
   const requiredText = useTranslation<string>('required')
 
   // only need to run this once at component render, so no need for deps
@@ -66,6 +77,7 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         required={required}
         autoComplete="off"
         enterKeyHint="done"
+        getInputRef={passedRef}
       />
     </>
   )

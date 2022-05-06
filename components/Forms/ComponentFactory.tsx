@@ -2,7 +2,7 @@ import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, createRef } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
@@ -39,6 +39,16 @@ export const ComponentFactory: React.VFC = observer(({}) => {
   const input = root.getInputObject()
   input._language = locale
   const data = new MainHandler(input).results
+
+  //handle focusing first error field
+  const eleRefs = React.useRef([])
+  const fieldsLength = form.fields.length
+  if (eleRefs.current.length !== fieldsLength) {
+    // add or remove refs
+    eleRefs.current = Array(fieldsLength)
+      .fill(null)
+      .map((_, i) => eleRefs.current[i] || createRef())
+  }
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -108,6 +118,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
                         placeholder={field.placeholder ?? ''}
                         value={field.value}
                         error={field.error}
+                        passedRef={eleRefs.current[index]}
                         required
                       />
                     </div>
@@ -122,6 +133,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
                         onChange={debounce(field.handleChange, 300)}
                         value={field.value}
                         error={field.error}
+                        passedRef={eleRefs.current[index]}
                         required
                       />
                     </div>
@@ -149,6 +161,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
                         error={field.error}
                         placeholder={getPlaceholderForSelect(field, tsln)}
                         value={null}
+                        passedRef={eleRefs.current[index]}
                       />
                     </div>
                   )}
@@ -175,8 +188,10 @@ export const ComponentFactory: React.VFC = observer(({}) => {
                         keyforid={field.key}
                         label={field.label}
                         onChange={field.handleChange}
+                        setValue={field.setValue}
                         error={field.error}
                         required
+                        passedRef={eleRefs.current[index]}
                       />
                     </div>
                   )}
@@ -188,7 +203,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
             }
           )}
 
-          <FormButtons />
+          <FormButtons focusableRefs={eleRefs.current} />
         </form>
         <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
       </div>

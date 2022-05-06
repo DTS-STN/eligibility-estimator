@@ -3,6 +3,7 @@ import { InputHTMLAttributes } from 'react'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { Ref } from 'react'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
@@ -10,6 +11,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   checkedValue?: string
   error?: string
+  setValue(value: string): void
+  passedRef: Ref<HTMLLabelElement>
 }
 
 /**
@@ -18,9 +21,18 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
-  const { name, label, checkedValue, onChange, values, keyforid, error } = props
+  const {
+    name,
+    label,
+    checkedValue,
+    onChange,
+    values,
+    keyforid,
+    error,
+    setValue,
+    passedRef,
+  } = props
   const requiredText = useTranslation<string>('required')
-
   return (
     <div className="radio">
       <div className="mb-2.5">
@@ -53,7 +65,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
             id={`${keyforid}-${index}`}
             name={`${keyforid}`}
             // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
-            className="opacity-0 -ml-4"
+            className="hidden -ml-4"
             value={val.key}
             onChange={onChange}
             required
@@ -61,7 +73,12 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           />
           <label
             htmlFor={`${keyforid}-${index}`}
-            className="radio flex items-center"
+            className="radio flex items-center focus:outline-black"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              e.key === 'Enter' && setValue(val.key)
+            }}
+            ref={index === 0 ? passedRef : null}
           >
             <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
             <p className="text-content ">{val.text}</p>

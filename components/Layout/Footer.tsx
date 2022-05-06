@@ -20,48 +20,48 @@ export const Footer = () => {
             {tsln.footerlink8}
           </h3>
           <ul className="flex flex-col text-xs md:grid md:grid-cols-3 md:gap-1">
-            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline ">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink1}
               </a>
             </li>
-            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline focus:outline-white">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink6}
               </a>
             </li>
-            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline focus:outline-white">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink2}
               </a>
             </li>
-            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+            <li className="text-white w-64 md:w-56 lg:w-80 hover:underline focus:outline-white">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink7}
               </a>
             </li>
             <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink3}
               </a>
             </li>
             <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink8}
               </a>
             </li>
             <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink4}
               </a>
             </li>
             <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink9}
               </a>
             </li>
             <li className="text-white w-64 md:w-56 lg:w-80 hover:underline">
-              <a className="font-body" href="#">
+              <a className="font-body focus-visible:outline-white" href="#">
                 {tsln.footerlink5}
               </a>
             </li>

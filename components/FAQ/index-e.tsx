@@ -202,8 +202,8 @@ export const FAQE = () => (
             please provide a statutory declaration of your union and other proof
             of the relationship.
           </p>
+          <p className="font-bold mb-4"> Proof of marriage can include:</p>
           <ul className="list-disc">
-            <p className="font-bold mb-4"> Proof of marriage can include:</p>
             <li className="ml-12">A marriage certificate</li>
             <li className="ml-12">
               An official copy or extract of the church, synagogue, mosque,
@@ -220,10 +220,10 @@ export const FAQE = () => (
               A completed Statutory Declaration of Legal Marriage (ISP1809B).
             </li>
           </ul>
+          <p className="font-bold mb-4">
+            Proof of common-law union can include:
+          </p>
           <ul className="list-disc">
-            <p className="font-bold mb-4">
-              Proof of common-law union can include:
-            </p>
             <li className="ml-12">
               Statutory Declaration of Common-law Union (ISP3004) must be
               witnessed by a Commissioner of Oaths (offered for free in a

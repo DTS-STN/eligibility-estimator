@@ -1,12 +1,13 @@
 import { observer } from 'mobx-react'
 import { Instance } from 'mobx-state-tree'
-import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
-import Select from 'react-select'
+import { DetailedHTMLProps, SelectHTMLAttributes, useRef } from 'react'
+import Select, { SelectInstance } from 'react-select'
 import { FormField } from '../../client-state/models/FormField'
 import { FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { Ref } from 'react'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -15,6 +16,7 @@ interface SelectProps
   > {
   field: Instance<typeof FormField>
   error?: string
+  passedRef: Ref<SelectInstance>
 }
 
 /**
@@ -23,7 +25,7 @@ interface SelectProps
  * @returns
  */
 export const FormSelect: React.VFC<SelectProps> = observer(
-  ({ field, name, error, placeholder }) => {
+  ({ field, name, error, placeholder, passedRef }) => {
     const requiredText = useTranslation<string>('required')
     const defaultValue = field.value ?? field.default
 
@@ -31,6 +33,8 @@ export const FormSelect: React.VFC<SelectProps> = observer(
       field.value !== null && field.value !== ''
         ? { label: field.value.text, value: field.value.text }
         : null
+
+    const selectRef = useRef(passedRef)
 
     return (
       <>
@@ -53,6 +57,10 @@ export const FormSelect: React.VFC<SelectProps> = observer(
         <div className="w-full md:w-80">
           <Select
             aria-labelledby={name}
+            id={name}
+            aria-label={name}
+            aria-controls={name}
+            aria-expended={false}
             styles={{
               container: (styles) => ({
                 ...styles,
@@ -111,6 +119,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
             isClearable={
               field.type !== FieldType.DROPDOWN_SEARCHABLE ? undefined : true
             }
+            ref={passedRef}
           />
         </div>
       </>

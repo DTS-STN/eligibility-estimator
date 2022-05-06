@@ -6,7 +6,15 @@ import { WebTranslations } from '../../../i18n/web'
 import { useMediaQuery, useStore, useTranslation } from '../../Hooks'
 import { Button } from '@dts-stn/decd-design-system'
 
-export const FormButtons: React.FC<{}> = ({}) => {
+interface refObject {
+  current: HTMLElement
+}
+
+export interface FormButtonProps {
+  focusableRefs: Array<refObject>
+}
+
+export const FormButtons: React.FC<FormButtonProps> = ({ focusableRefs }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
   const root = useStore()
@@ -21,9 +29,11 @@ export const FormButtons: React.FC<{}> = ({}) => {
           router={router}
           root={root}
           form={form}
+          refs={focusableRefs}
         />
       )}
       <Button
+        id={`${tsln.back}-btn`}
         text={tsln.back}
         styling="secondary"
         className="mt-4 md:mt-0 justify-center items-center"
@@ -31,6 +41,7 @@ export const FormButtons: React.FC<{}> = ({}) => {
       />
 
       <Button
+        id={`${tsln.clear}-btn`}
         text={tsln.clear}
         styling="secondary"
         className="mt-4 md:mt-0 justify-center items-center"
@@ -45,6 +56,7 @@ export const FormButtons: React.FC<{}> = ({}) => {
           router={router}
           root={root}
           form={form}
+          refs={focusableRefs}
         />
       )}
     </div>
@@ -56,9 +68,11 @@ const SubmitButton: React.FC<{
   form: Instance<typeof Form>
   root: Instance<typeof RootStore>
   label: string
-}> = ({ router, form, root, label }) => {
+  refs: Array<refObject>
+}> = ({ router, form, root, label, refs }) => {
   return (
     <Button
+      id={'submit-button'}
       text={label}
       styling="primary"
       className="justify-center col-span-2 md:col-span-1"
@@ -69,6 +83,14 @@ const SubmitButton: React.FC<{
         ) {
           root.saveStoreState()
           router.push('/results')
+        } else {
+          const len = form.fields.length
+          for (let index = 0; index < len; index++) {
+            if (form.fields[index].error) {
+              refs[index].current.focus()
+              return
+            }
+          }
         }
       }}
     />

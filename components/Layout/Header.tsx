@@ -18,10 +18,14 @@ export const Header = () => {
             <input
               type="search"
               id="search-gc"
+              aria-label="search-input"
               placeholder={tsln.search}
               className="md:min-w-[250px] h-9 py-1.5 px-3 align-middle text-muted bg-white rounded-tl rounded-bl border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form border-r-0"
             />
-            <button className="py-1.5 px-3 h-9 rounded-tr rounded-br text-white bg-primary hover:bg-primary-hover border-primary-border font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid">
+            <button
+              aria-label="search-button"
+              className="py-1.5 px-3 h-9 rounded-tr rounded-br text-white bg-primary hover:bg-primary-hover border-primary-border font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
