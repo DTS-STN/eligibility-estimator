@@ -1,4 +1,4 @@
-import { Breadcrumb, Heading } from '@dts-stn/decd-design-system'
+import { Breadcrumb, Heading, Header } from '@dts-stn/decd-design-system'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -6,7 +6,7 @@ import { WebTranslations } from '../../i18n/web'
 import { HeadDoc } from '../Document'
 import { useMediaQuery, useTranslation } from '../Hooks'
 import { Footer } from './Footer'
-import { Header } from './Header'
+// import { Header } from './Header'
 import { SCLabsTestHeader } from './ScTestHeader'
 
 export const Layout: React.VFC<{
@@ -18,12 +18,50 @@ export const Layout: React.VFC<{
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
   const tsln = useTranslation<WebTranslations>()
 
+  const menuProps = {
+    onSignOut: () => {
+    },
+    isAuthenticated: true,
+    signOutPath: '/',
+    dashboardPath: '/',
+    securityPath: '/',
+    profilePath: '/',
+    craPath: '/',
+    hasNoMenu: true
+  }
+
+  const topnavProps = {
+    skipToMainPath : "#applicationTitle",
+    skipToAboutPath : "#footer-info",
+    switchToBasicPath : "",
+    displayAlternateLink : false,
+    }
+
+  const searchProps = {
+    onChange: () => {
+    },
+    onSubmit: () => {
+    }
+  }
+
+  const breadcrumbs = [
+    {
+      "text":  tsln.breadcrumb1Title,
+      "link": tsln.breadcrumb1URL
+    },
+    {
+      "text":  tsln.breadcrumb2Title,
+      "link": tsln.breadcrumb2URL
+    },
+  ]
+
   return (
     <>
       <HeadDoc />
       <SCLabsTestHeader />
       <main className="mainContent">
-        <div className="mx-4 min-h-screen">
+
+        {/* <div className="mx-4 min-h-screen">
           <div className="sm:container mx-auto">
             <div className="flex justify-end my-4">
               <Link href={router.asPath} locale={oppositeLocale} passHref>
@@ -42,7 +80,21 @@ export const Layout: React.VFC<{
               <p />
             </div>
           </div>
-          <div className="sm:container mx-auto flex flex-col mb-16 mt-8">
+        </div> */}
+
+        <Header id = "mainHeader" 
+          lang = {oppositeLocale} 
+          linkPath = "/" 
+          isAuthenticated = {false} 
+          menuProps = {menuProps} 
+          topnavProps = {topnavProps} 
+          searchProps = {searchProps}
+          breadcrumbs = {breadcrumbs}
+        />
+
+        <div className="sm:container mx-auto flex flex-col mb-16 mt-8">
+
+          {/* 
             {hideBreadcrumbHeader || (
               <>
                 <Breadcrumb
@@ -58,10 +110,18 @@ export const Layout: React.VFC<{
                   className="mt-10 mb-8"
                 />
               </>
-            )}
-            {children}
-          </div>
+            )} 
+          */}
+
+          <Heading
+            id="applicationTitle"
+            title={tsln.title}
+            className="mt-10 mb-8"
+          />
+
+          {children}
         </div>
+
         <Footer />
       </main>
     </>
