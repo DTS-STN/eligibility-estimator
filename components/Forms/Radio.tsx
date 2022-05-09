@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
 import { useTranslation } from '../Hooks'
-import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -30,15 +29,13 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           data-testid="radio-label"
           className="inline mb-2.5 flex-nowrap"
         >
-          <span className="text-danger">* </span>
           <span
             className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
         </label>
         <span>
-          <span className="text-danger font-bold ml-1">({requiredText})</span>
-          <Tooltip field={name} />
+          <span className="ml-1">({requiredText})</span>
         </span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}

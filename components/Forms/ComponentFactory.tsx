@@ -1,4 +1,4 @@
-import { AccordionForm } from '@dts-stn/decd-design-system'
+import { FileWriter } from 'csv-writer/src/lib/file-writer'
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
@@ -20,12 +20,14 @@ import { NumberField } from './NumberField'
 import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
+import { AccordionForm, Message } from '@dts-stn/decd-design-system'
+import { colors } from 'react-select/dist/declarations/src/theme'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const ComponentFactory: React.VFC = observer(({}) => {
+export const ComponentFactory: React.VFC = ({}) => {
   console.log('rendering factory ')
   let lastCategory = null
 
@@ -63,109 +65,348 @@ export const ComponentFactory: React.VFC = observer(({}) => {
     root.setSummary(data.summary)
   }
 
-  // accordion form stuff
+  useEffect(() => {
+    console.log(
+      'LOST OBSERVE NOW JUST WATCHIBNG CHANGING FORM. THIS MEANS FORM CHANGED!!!!'
+    )
+  }, [form])
+
+  const generateForm = () => {
+    return form.fields.map(
+      (field: Instance<typeof FormField>, index: number) => {
+        // console.log('rendering ', field.label)
+        const isChildQuestion =
+          field.category.key == FieldCategory.PARTNER_INFORMATION
+        const styling = isChildQuestion ? 'bg-emphasis px-10 pt-4' : ''
+        const content = (
+          <div key={field.key} className={styling}>
+            {field.category.key != lastCategory && (
+              <h2
+                className={
+                  isChildQuestion
+                    ? 'h2 mb-8 text-content'
+                    : `h2 text-content ${index == 0 ? 'mb-8' : 'my-8'}`
+                }
+              >
+                {field.category.text}
+              </h2>
+            )}
+            {field.type == FieldType.CURRENCY && (
+              <div className="pb-10">
+                <CurrencyField
+                  type={field.type}
+                  name={field.key}
+                  label={field.label}
+                  onChange={field.handleChange}
+                  placeholder={field.placeholder ?? ''}
+                  value={field.value}
+                  error={field.error}
+                  required
+                />
+              </div>
+            )}
+            {field.type == FieldType.NUMBER && (
+              <div className="pb-10">
+                <NumberField
+                  type={field.type}
+                  name={field.key}
+                  label={field.label}
+                  placeholder={field.placeholder ?? ''}
+                  onChange={debounce(field.handleChange, 300)}
+                  value={field.value}
+                  error={field.error}
+                  required
+                />
+              </div>
+            )}
+            {field.type == FieldType.STRING && (
+              <div className="pb-10">
+                <TextField
+                  type={field.type}
+                  name={field.key}
+                  label={field.label}
+                  placeholder={field.placeholder ?? ''}
+                  onChange={debounce(field.handleChange, 300)}
+                  value={field.value}
+                  error={field.error}
+                  required
+                />
+              </div>
+            )}
+            {(field.type == FieldType.DROPDOWN ||
+              field.type == FieldType.DROPDOWN_SEARCHABLE) && (
+              <div className="pb-10">
+                <FormSelect
+                  name={field.key}
+                  field={field}
+                  error={field.error}
+                  placeholder={getPlaceholderForSelect(field, tsln)}
+                  value={null}
+                />
+              </div>
+            )}
+            {(field.type == FieldType.RADIO ||
+              field.type == FieldType.BOOLEAN) && (
+              <div className="pb-10">
+                <Radio
+                  name={field.key}
+                  checkedValue={field.value}
+                  values={
+                    field.type == 'boolean'
+                      ? [
+                          {
+                            key: 'true',
+                            text: tsln.yes,
+                          },
+                          {
+                            key: 'false',
+                            text: tsln.no,
+                          },
+                        ]
+                      : field.options
+                  }
+                  keyforid={field.key}
+                  label={field.label}
+                  onChange={field.handleChange}
+                  error={field.error}
+                  required
+                />
+              </div>
+            )}
+          </div>
+        )
+        lastCategory = field.category.key
+
+        return content
+      }
+    )
+  }
+
+  const keyStepMap = {
+    step1: { title: 'Age', buttonLabel: 'Income', keys: ['age'] },
+    step2: {
+      title: 'Income',
+      buttonLabel: 'Legal Status',
+      keys: ['income', 'skipIncome'],
+    },
+    step3: {
+      title: 'Legal status',
+      buttonLabel: 'Residence history',
+      keys: ['legalStatus'],
+    },
+    step4: {
+      title: 'Residence history',
+      buttonLabel: 'Marital status',
+      keys: [
+        'canadaWholeLife',
+        'yearsInCanadaSince18',
+        'everLivedSocialCountry',
+      ],
+    },
+    step5: {
+      title: 'Marital status',
+      buttonLabel: 'Submit',
+      keys: [
+        'maritalStatus',
+        'partnerBenefitStatus',
+        'partnerAge',
+        'partnerLivingCountry',
+        'partnerLegalStatus',
+        'partnerCanadaWholeLife',
+        'partnerYearsInCanadaSince18',
+        'partnerIncome',
+      ],
+    },
+  }
+
   const [cardsValid, setCardsValid] = useState({
-    step1: { isValid: false },
-    step2: { isValid: false },
-    step3: { isValid: false },
-    step4: { isValid: false },
+    step1: { isValid: true },
+    step2: { isValid: true },
+    step3: { isValid: true },
+    step4: { isValid: true },
+    step5: { isValid: true },
   })
 
-  const onInputChange = useCallback((sectionId) => {
-    return (e) => {
-      console.log(e.target.value)
-      if (e.target.value === 'valid') {
-        setCardsValid((currentCardsData) => {
-          const updatedCardsData = { ...currentCardsData }
-          updatedCardsData[sectionId].isValid = true
-          return updatedCardsData
-        })
-      } else {
-        setCardsValid((currentCardsData) => {
-          const updatedCardsData = { ...currentCardsData }
-          updatedCardsData[sectionId].isValid = false
-          return updatedCardsData
-        })
-      }
+  const handleOnChange = (step, field, event) => {
+    console.log(`event.target.value`, event.target.value)
+    // if (event.target.value === '23') {
+    //   console.log('INSIDE SUCCESS')
+    //   setCardsValid((currentCardsData) => {
+    //     const updatedCardsData = { ...currentCardsData }
+    //     updatedCardsData[step].isValid = true
+    //     return updatedCardsData
+    //   })
+    // } else {
+    //   setCardsValid((currentCardsData) => {
+    //     const updatedCardsData = { ...currentCardsData }
+    //     updatedCardsData[step].isValid = false
+    //     return updatedCardsData
+    //   })
+    // }
+
+    field.handleChange(event.target.value)
+  }
+
+  const generateCards = (formFields) => {
+    const generateChildren = (step, keys) => {
+      const fields = formFields.filter((field) => keys.includes(field.key))
+      return fields.map((field) => {
+        return (
+          <div key={field.key}>
+            {field.type === FieldType.NUMBER && (
+              <div className="pb-4">
+                <NumberField
+                  type={field.type}
+                  name={field.key}
+                  label={field.label}
+                  placeholder={field.placeholder ?? ''}
+                  onChange={debounce(field.handleChange, 300)}
+                  value={field.value}
+                  required
+                />
+              </div>
+            )}
+            {field.type == FieldType.CURRENCY && (
+              <div className="pb-4">
+                <CurrencyField
+                  type={field.type}
+                  name={field.key}
+                  label={field.label}
+                  onChange={field.handleChange}
+                  placeholder={field.placeholder ?? ''}
+                  value={field.value}
+                  required
+                />
+              </div>
+            )}
+            {field.type == FieldType.STRING && (
+              <div className="pb-4">
+                <TextField
+                  type={field.type}
+                  name={field.key}
+                  label={field.label}
+                  placeholder={field.placeholder ?? ''}
+                  onChange={debounce(field.handleChange, 300)}
+                  value={field.value}
+                  error={field.error}
+                  required
+                />
+              </div>
+            )}
+            {(field.type == FieldType.DROPDOWN ||
+              field.type == FieldType.DROPDOWN_SEARCHABLE) && (
+              <div className="pb-4">
+                <FormSelect
+                  name={field.key}
+                  field={field}
+                  placeholder={getPlaceholderForSelect(field, tsln)}
+                  value={null}
+                />
+              </div>
+            )}
+            {(field.type == FieldType.RADIO ||
+              field.type == FieldType.BOOLEAN) && (
+              <div className="pb-4">
+                <Radio
+                  name={field.key}
+                  checkedValue={field.value}
+                  values={
+                    field.type == 'boolean'
+                      ? [
+                          {
+                            key: 'true',
+                            text: tsln.yes,
+                          },
+                          {
+                            key: 'false',
+                            text: tsln.no,
+                          },
+                        ]
+                      : field.options
+                  }
+                  keyforid={field.key}
+                  label={field.label}
+                  onChange={field.handleChange}
+                  required
+                />
+              </div>
+            )}
+            {field.error && (
+              <div className="mt-6 md:pr-12">
+                <Message
+                  id={field.key}
+                  type="warning"
+                  message_heading={field.error}
+                  message_body="I need to get the message body for this warning from Figma and add to en/fr tarnslation docs"
+                />
+              </div>
+            )}
+            {field.info && (
+              <div className="mt-6 md:pr-12">
+                <Message
+                  id={field.key}
+                  type="info"
+                  message_heading={field.info}
+                  message_body="I need to get the message body for this info from Figma and add to en/fr tarnslation docs"
+                />
+              </div>
+            )}
+          </div>
+        )
+      })
     }
-  }, [])
 
-  const cards = [
-    {
-      id: 'step1',
-      title: 'Age',
-      buttonLabel: 'Income',
-      children: [
-        <div key="step1">
-          <p>Random text for testing purposes. Test test testest testing</p>
-          <input
-            type="text"
-            style={{
-              border: '1px solid black',
-            }}
-            onChange={onInputChange('step1')}
-          />
-        </div>,
-      ],
-    },
-    {
-      id: 'step2',
-      title: 'Income',
-      children: [
-        <div key="step2">
-          <input
-            type="text"
-            style={{
-              border: '1px solid black',
-            }}
-            onChange={onInputChange('step2')}
-          />
-        </div>,
-      ],
-      buttonLabel: 'Residency',
-    },
-    {
-      id: 'step3',
-      title: 'Residency',
-      children: [
-        <div key="step3">
-          <input
-            type="text"
-            style={{
-              border: '1px solid black',
-            }}
-            onChange={onInputChange('step3')}
-          />
-        </div>,
-      ],
-      buttonLabel: 'Marital Status',
-    },
+    const cards = Object.keys(keyStepMap).map((step) => {
+      const cardMeta = keyStepMap[step]
+      const children = generateChildren(step, cardMeta.keys) // ex. ("step1", ["age"])
 
-    {
-      id: 'step4',
-      title: 'Marital Status',
-      children: [
-        <div key="step4">
-          <input
-            type="text"
-            style={{
-              border: '1px solid black',
-            }}
-            onChange={onInputChange('step4')}
-          />
-          <p>random text</p>
-        </div>,
-      ],
-      buttonLabel: 'Submit',
-      buttonOnChange: () => {
-        console.log('HI THERE') // seems that buttonOnChange only triggers on last card
-      },
-    },
-  ]
+      // card with all form fields from the Result object that pertaining to a given section
+      return {
+        id: step,
+        title: cardMeta.title,
+        buttonLabel: cardMeta.buttonLabel,
+        children,
+      }
+    })
+
+    return cards
+  }
+
+  const generateCardsValid = (formFields) => {
+    const cardsValid = {}
+    Object.keys(keyStepMap).forEach((step) => {
+      const stepKeys = keyStepMap[step].keys
+      const fields = formFields.filter((field) => stepKeys.includes(field.key))
+      const isValid = !fields.some((field) => field.error)
+
+      cardsValid[step] = { isValid }
+    })
+
+    console.log(cardsValid)
+    return cardsValid
+  }
+
+  const renderAccordionForm = (formFields) => {
+    console.log('INSIDE RENDER ACCORDION FORM')
+    const cards = generateCards(formFields)
+    // const cardsValid = generateCardsValid(formFields)
+    const ObservedAccordionForm = observer(AccordionForm)
+
+    console.log(`cardsValid`, cardsValid)
+    return (
+      <div className="md:w-2/3">
+        <ObservedAccordionForm
+          id="mainForm"
+          cardsState={cardsValid}
+          cards={cards}
+        />
+      </div>
+    )
+  }
 
   return (
     <>
-      <AccordionForm id="mainForm" cardsState={cardsValid} cards={cards} />
+      {renderAccordionForm(form.fields)}
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
         <form
           name="ee-form"
@@ -181,124 +422,17 @@ export const ComponentFactory: React.VFC = observer(({}) => {
             id="_language"
             value={router.locale == 'en' ? Language.EN : Language.FR}
           />
-          {form.fields.map(
-            (field: Instance<typeof FormField>, index: number) => {
-              console.log('rendering ', field.label)
-              const isChildQuestion =
-                field.category.key == FieldCategory.PARTNER_INFORMATION
-              const styling = isChildQuestion ? 'bg-emphasis px-10 pt-4' : ''
-              const content = (
-                <div key={field.key} className={styling}>
-                  {field.category.key != lastCategory && (
-                    <h2
-                      className={
-                        isChildQuestion
-                          ? 'h2 mb-8 text-content'
-                          : `h2 text-content ${index == 0 ? 'mb-8' : 'my-8'}`
-                      }
-                    >
-                      {field.category.text}
-                    </h2>
-                  )}
-                  {field.type == FieldType.CURRENCY && (
-                    <div className="pb-10">
-                      <CurrencyField
-                        type={field.type}
-                        name={field.key}
-                        label={field.label}
-                        onChange={field.handleChange}
-                        placeholder={field.placeholder ?? ''}
-                        value={field.value}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                  {field.type == FieldType.NUMBER && (
-                    <div className="pb-10">
-                      <NumberField
-                        type={field.type}
-                        name={field.key}
-                        label={field.label}
-                        placeholder={field.placeholder ?? ''}
-                        onChange={debounce(field.handleChange, 300)}
-                        value={field.value}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                  {field.type == FieldType.STRING && (
-                    <div className="pb-10">
-                      <TextField
-                        type={field.type}
-                        name={field.key}
-                        label={field.label}
-                        placeholder={field.placeholder ?? ''}
-                        onChange={debounce(field.handleChange, 300)}
-                        value={field.value}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                  {(field.type == FieldType.DROPDOWN ||
-                    field.type == FieldType.DROPDOWN_SEARCHABLE) && (
-                    <div className="pb-10">
-                      <FormSelect
-                        name={field.key}
-                        field={field}
-                        error={field.error}
-                        placeholder={getPlaceholderForSelect(field, tsln)}
-                        value={null}
-                      />
-                    </div>
-                  )}
-                  {(field.type == FieldType.RADIO ||
-                    field.type == FieldType.BOOLEAN) && (
-                    <div className="pb-10">
-                      <Radio
-                        name={field.key}
-                        checkedValue={field.value}
-                        values={
-                          field.type == 'boolean'
-                            ? [
-                                {
-                                  key: 'true',
-                                  text: tsln.yes,
-                                },
-                                {
-                                  key: 'false',
-                                  text: tsln.no,
-                                },
-                              ]
-                            : field.options
-                        }
-                        keyforid={field.key}
-                        label={field.label}
-                        onChange={field.handleChange}
-                        error={field.error}
-                        required
-                      />
-                    </div>
-                  )}
-                </div>
-              )
-              lastCategory = field.category.key
 
-              return content
-            }
-          )}
+          {/* {generateForm()} */}
 
-          <FormButtons />
+          {/* <FormButtons /> */}
         </form>
-        <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
       </div>
 
-      <FAQ />
+      {/* <FAQ /> */}
     </>
   )
-})
+}
 
 const getPlaceholderForSelect = (
   field: Instance<typeof FormField>,

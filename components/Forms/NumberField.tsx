@@ -42,13 +42,10 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
           data-testid="number-input-label"
           className="text-content font-bold inline mb-2.5"
         >
-          {required && <span className="text-danger">*</span>} {label}
+          {label}
         </label>
         <span>
-          {required && (
-            <span className="text-danger font-bold ml-1">({requiredText})</span>
-          )}
-          <Tooltip field={name} />
+          {required && <span className="ml-1">({requiredText})</span>}
         </span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}
