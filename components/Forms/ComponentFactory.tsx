@@ -1,19 +1,16 @@
-import { FileWriter } from 'csv-writer/src/lib/file-writer'
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
-import { FieldCategory, Language } from '../../utils/api/definitions/enums'
+import { Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import { NeedHelp } from '../NeedHelp'
 import { CurrencyField } from './CurrencyField'
 import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
@@ -28,7 +25,6 @@ import { AccordionForm, Message } from '@dts-stn/decd-design-system'
  */
 export const ComponentFactory: React.VFC = observer(({}) => {
   console.log('rendering factory ')
-  let lastCategory = null
 
   const router = useRouter()
   const locale = router.locale
@@ -65,20 +61,24 @@ export const ComponentFactory: React.VFC = observer(({}) => {
   }
 
   const keyStepMap = {
-    step1: { title: 'Age', buttonLabel: 'Income', keys: ['age'] },
+    step1: {
+      title: tsln.category.age,
+      buttonLabel: tsln.category.incomeDetails,
+      keys: ['age'],
+    },
     step2: {
-      title: 'Income',
-      buttonLabel: 'Legal Status',
+      title: tsln.category.incomeDetails,
+      buttonLabel: tsln.category.legalStatus,
       keys: ['income', 'skipIncome'],
     },
     step3: {
-      title: 'Legal status',
-      buttonLabel: 'Residence history',
+      title: tsln.category.legalStatus,
+      buttonLabel: tsln.category.residence,
       keys: ['legalStatus'],
     },
     step4: {
-      title: 'Residence history',
-      buttonLabel: 'Marital status',
+      title: tsln.category.residence,
+      buttonLabel: tsln.category.marital,
       keys: [
         'livingCountry',
         'canadaWholeLife',
@@ -87,8 +87,8 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       ],
     },
     step5: {
-      title: 'Marital status',
-      buttonLabel: 'Submit',
+      title: tsln.category.marital,
+      buttonLabel: tsln.results,
       keys: [
         'maritalStatus',
         'partnerBenefitStatus',
@@ -111,8 +111,6 @@ export const ComponentFactory: React.VFC = observer(({}) => {
   })
 
   const handleOnChange = (step, field, event) => {
-    console.log(`event.target.value`, event.target.value)
-
     if (event.target.value === 23) {
       setCardsValid((currentCardsData) => {
         const updatedCardsData = { ...currentCardsData }
@@ -141,10 +139,8 @@ export const ComponentFactory: React.VFC = observer(({}) => {
 
   const generateCards = (formFields) => {
     const generateChildren = (step, keys) => {
-      const fields = form.fields.filter((field) => keys.includes(field.key))
-
+      const fields = formFields.filter((field) => keys.includes(field.key))
       const children = fields.map((field) => {
-        console.log(`${field.key} - ${field.value}`)
         return (
           <div key={field.key}>
             {field.type === FieldType.NUMBER && (
@@ -239,7 +235,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
                   alert_icon_alt_text="warning icon"
                   type="warning"
                   message_heading={field.error}
-                  message_body="I need to get the message body for this warning from Figma and add to en/fr tarnslation docs"
+                  message_body={field.error}
                 />
               </div>
             )}
@@ -251,7 +247,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
                   alert_icon_alt_text="info icon"
                   type="info"
                   message_heading={field.info}
-                  message_body="I need to get the message body for this info from Figma and add to en/fr tarnslation docs"
+                  message_body={field.info}
                 />
               </div>
             )}
@@ -287,17 +283,13 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       cardsValid[step] = { isValid }
     })
 
-    console.log(cardsValid)
     return cardsValid
   }
 
   const renderAccordionForm = (formFields) => {
-    console.log('INSIDE RENDER ACCORDION FORM')
     const cards = generateCards(formFields)
-    // const cardsValid = generateCardsValid(formFields)
     const ObservedAccordionForm = observer(AccordionForm)
 
-    console.log(`cardsValid`, cardsValid)
     return (
       <div className="md:w-2/3">
         <ObservedAccordionForm
@@ -314,23 +306,9 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       {renderAccordionForm(form.fields)}
 
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
-        <form
-          name="ee-form"
-          data-testid="ee-form"
-          action="../../pages/eligibility"
-          onSubmit={(e) => e.preventDefault()}
-          className="col-span-2"
-          noValidate
-        >
-          <input
-            type="hidden"
-            name="_language"
-            id="_language"
-            value={router.locale == 'en' ? Language.EN : Language.FR}
-          />
-
+        <div className="col-span-2">
           <FormButtons />
-        </form>
+        </div>
       </div>
     </>
   )

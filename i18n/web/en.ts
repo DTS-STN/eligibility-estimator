@@ -67,9 +67,12 @@ const en: WebTranslations = {
   socialLink5: 'Privacy',
 
   category: {
-    incomeDetails: 'Income Details',
+    age: 'Age',
+    incomeDetails: 'Income',
     personalInformation: 'Personal Information',
     legalStatus: 'Legal Status',
+    residence: 'Residence history',
+    marital: 'Marital status',
   },
 
   contactCTA:
@@ -96,7 +99,9 @@ const en: WebTranslations = {
     partnerIncomeBelowZero: "Your partner's income must be above zero.",
     partnerIncomeTooHigh:
       "The sum of you and your partner's annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.",
-    ageUnder18: 'You must be over 18 to be able to use this tool.',
+    age: 'The entered age is not eligible for benefits',
+    ageUnder18:
+      'You must be at least 60 years old to receive Canadian old age benefits.',
     ageOver150: 'Your age should be less than 150.',
     partnerAgeUnder18:
       "Your partner's age must be over 18 to be able to use this tool.",

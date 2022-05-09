@@ -67,9 +67,12 @@ export type WebTranslations = {
   socialLink4: string
   socialLink5: string
   category: {
+    age: string
     incomeDetails: string
     personalInformation: string
     legalStatus: string
+    residence: string
+    marital: string
   }
 
   //results page

@@ -68,9 +68,12 @@ const fr: WebTranslations = {
   socialLink5: 'Confidentialité',
 
   category: {
+    age: 'Âge',
     incomeDetails: 'Revenu',
     personalInformation: 'Renseignements personnels',
     legalStatus: 'Statut légal',
+    residence: 'Historique des résidences',
+    marital: 'État civil',
   },
 
   contactCTA:
@@ -98,8 +101,9 @@ const fr: WebTranslations = {
       'Les revenus de votre partenaire doivent être supérieurs à zéro.',
     partnerIncomeTooHigh:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {MAX_OAS_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
+    age: `L'âge inscrit ne donne pas droit à des prestations`,
     ageUnder18:
-      'Vous devez avoir plus de 18 ans pour pouvoir utiliser cet outil.',
+      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
     ageOver150: 'Votre âge doit être inférieur à 150 ans.',
     partnerAgeUnder18:
       "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",

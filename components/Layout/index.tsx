@@ -54,7 +54,11 @@ export const Layout: React.VFC<{
                 />
                 <Heading
                   id="applicationTitle"
-                  title={tsln.title}
+                  title={
+                    router.route === '/eligibility'
+                      ? `${tsln.title} - ${tsln.questions}`
+                      : tsln.title
+                  }
                   className="mt-10 mb-8"
                 />
               </>
