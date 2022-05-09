@@ -21,13 +21,12 @@ import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
 import { AccordionForm, Message } from '@dts-stn/decd-design-system'
-import { colors } from 'react-select/dist/declarations/src/theme'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const ComponentFactory: React.VFC = ({}) => {
+export const ComponentFactory: React.VFC = observer(({}) => {
   console.log('rendering factory ')
   let lastCategory = null
 
@@ -65,123 +64,6 @@ export const ComponentFactory: React.VFC = ({}) => {
     root.setSummary(data.summary)
   }
 
-  useEffect(() => {
-    console.log(
-      'LOST OBSERVE NOW JUST WATCHIBNG CHANGING FORM. THIS MEANS FORM CHANGED!!!!'
-    )
-  }, [form])
-
-  const generateForm = () => {
-    return form.fields.map(
-      (field: Instance<typeof FormField>, index: number) => {
-        // console.log('rendering ', field.label)
-        const isChildQuestion =
-          field.category.key == FieldCategory.PARTNER_INFORMATION
-        const styling = isChildQuestion ? 'bg-emphasis px-10 pt-4' : ''
-        const content = (
-          <div key={field.key} className={styling}>
-            {field.category.key != lastCategory && (
-              <h2
-                className={
-                  isChildQuestion
-                    ? 'h2 mb-8 text-content'
-                    : `h2 text-content ${index == 0 ? 'mb-8' : 'my-8'}`
-                }
-              >
-                {field.category.text}
-              </h2>
-            )}
-            {field.type == FieldType.CURRENCY && (
-              <div className="pb-10">
-                <CurrencyField
-                  type={field.type}
-                  name={field.key}
-                  label={field.label}
-                  onChange={field.handleChange}
-                  placeholder={field.placeholder ?? ''}
-                  value={field.value}
-                  error={field.error}
-                  required
-                />
-              </div>
-            )}
-            {field.type == FieldType.NUMBER && (
-              <div className="pb-10">
-                <NumberField
-                  type={field.type}
-                  name={field.key}
-                  label={field.label}
-                  placeholder={field.placeholder ?? ''}
-                  onChange={debounce(field.handleChange, 300)}
-                  value={field.value}
-                  error={field.error}
-                  required
-                />
-              </div>
-            )}
-            {field.type == FieldType.STRING && (
-              <div className="pb-10">
-                <TextField
-                  type={field.type}
-                  name={field.key}
-                  label={field.label}
-                  placeholder={field.placeholder ?? ''}
-                  onChange={debounce(field.handleChange, 300)}
-                  value={field.value}
-                  error={field.error}
-                  required
-                />
-              </div>
-            )}
-            {(field.type == FieldType.DROPDOWN ||
-              field.type == FieldType.DROPDOWN_SEARCHABLE) && (
-              <div className="pb-10">
-                <FormSelect
-                  name={field.key}
-                  field={field}
-                  error={field.error}
-                  placeholder={getPlaceholderForSelect(field, tsln)}
-                  value={null}
-                />
-              </div>
-            )}
-            {(field.type == FieldType.RADIO ||
-              field.type == FieldType.BOOLEAN) && (
-              <div className="pb-10">
-                <Radio
-                  name={field.key}
-                  checkedValue={field.value}
-                  values={
-                    field.type == 'boolean'
-                      ? [
-                          {
-                            key: 'true',
-                            text: tsln.yes,
-                          },
-                          {
-                            key: 'false',
-                            text: tsln.no,
-                          },
-                        ]
-                      : field.options
-                  }
-                  keyforid={field.key}
-                  label={field.label}
-                  onChange={field.handleChange}
-                  error={field.error}
-                  required
-                />
-              </div>
-            )}
-          </div>
-        )
-        lastCategory = field.category.key
-
-        return content
-      }
-    )
-  }
-
   const keyStepMap = {
     step1: { title: 'Age', buttonLabel: 'Income', keys: ['age'] },
     step2: {
@@ -198,6 +80,7 @@ export const ComponentFactory: React.VFC = ({}) => {
       title: 'Residence history',
       buttonLabel: 'Marital status',
       keys: [
+        'livingCountry',
         'canadaWholeLife',
         'yearsInCanadaSince18',
         'everLivedSocialCountry',
@@ -229,6 +112,15 @@ export const ComponentFactory: React.VFC = ({}) => {
 
   const handleOnChange = (step, field, event) => {
     console.log(`event.target.value`, event.target.value)
+
+    if (event.target.value === 23) {
+      setCardsValid((currentCardsData) => {
+        const updatedCardsData = { ...currentCardsData }
+        updatedCardsData['step1'].isValid = true
+        return updatedCardsData
+      })
+    }
+
     // if (event.target.value === '23') {
     //   console.log('INSIDE SUCCESS')
     //   setCardsValid((currentCardsData) => {
@@ -244,13 +136,15 @@ export const ComponentFactory: React.VFC = ({}) => {
     //   })
     // }
 
-    field.handleChange(event.target.value)
+    field.handleChange(event)
   }
 
   const generateCards = (formFields) => {
     const generateChildren = (step, keys) => {
-      const fields = formFields.filter((field) => keys.includes(field.key))
-      return fields.map((field) => {
+      const fields = form.fields.filter((field) => keys.includes(field.key))
+
+      const children = fields.map((field) => {
+        console.log(`${field.key} - ${field.value}`)
         return (
           <div key={field.key}>
             {field.type === FieldType.NUMBER && (
@@ -260,7 +154,10 @@ export const ComponentFactory: React.VFC = ({}) => {
                   name={field.key}
                   label={field.label}
                   placeholder={field.placeholder ?? ''}
-                  onChange={debounce(field.handleChange, 300)}
+                  onChange={debounce(
+                    (e) => handleOnChange(step, field, e),
+                    500
+                  )}
                   value={field.value}
                   required
                 />
@@ -272,7 +169,10 @@ export const ComponentFactory: React.VFC = ({}) => {
                   type={field.type}
                   name={field.key}
                   label={field.label}
-                  onChange={field.handleChange}
+                  onChange={debounce(
+                    (e) => handleOnChange(step, field, e),
+                    500
+                  )}
                   placeholder={field.placeholder ?? ''}
                   value={field.value}
                   required
@@ -335,6 +235,8 @@ export const ComponentFactory: React.VFC = ({}) => {
               <div className="mt-6 md:pr-12">
                 <Message
                   id={field.key}
+                  alert_icon_id={field.key}
+                  alert_icon_alt_text="warning icon"
                   type="warning"
                   message_heading={field.error}
                   message_body="I need to get the message body for this warning from Figma and add to en/fr tarnslation docs"
@@ -345,6 +247,8 @@ export const ComponentFactory: React.VFC = ({}) => {
               <div className="mt-6 md:pr-12">
                 <Message
                   id={field.key}
+                  alert_icon_id={field.key}
+                  alert_icon_alt_text="info icon"
                   type="info"
                   message_heading={field.info}
                   message_body="I need to get the message body for this info from Figma and add to en/fr tarnslation docs"
@@ -354,18 +258,19 @@ export const ComponentFactory: React.VFC = ({}) => {
           </div>
         )
       })
+
+      return { [step]: children }
     }
 
     const cards = Object.keys(keyStepMap).map((step) => {
       const cardMeta = keyStepMap[step]
       const children = generateChildren(step, cardMeta.keys) // ex. ("step1", ["age"])
 
-      // card with all form fields from the Result object that pertaining to a given section
       return {
         id: step,
         title: cardMeta.title,
         buttonLabel: cardMeta.buttonLabel,
-        children,
+        children: children[step],
       }
     })
 
@@ -407,6 +312,7 @@ export const ComponentFactory: React.VFC = ({}) => {
   return (
     <>
       {renderAccordionForm(form.fields)}
+
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
         <form
           name="ee-form"
@@ -423,16 +329,12 @@ export const ComponentFactory: React.VFC = ({}) => {
             value={router.locale == 'en' ? Language.EN : Language.FR}
           />
 
-          {/* {generateForm()} */}
-
-          {/* <FormButtons /> */}
+          <FormButtons />
         </form>
       </div>
-
-      {/* <FAQ /> */}
     </>
   )
-}
+})
 
 const getPlaceholderForSelect = (
   field: Instance<typeof FormField>,

@@ -15,10 +15,8 @@ import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
 
-export const ObservedAccordionForm: React.VFC<any> = observer(({}) => {
+export const ObservedAccordionForm: React.VFC<any> = observer(({ form }) => {
   const tsln = useTranslation<WebTranslations>()
-  const root: Instance<typeof RootStore> = useStore()
-  const form: Instance<typeof Form> = root.form
 
   const [cardsValid, setCardsValid] = useState({
     step1: { isValid: false },
@@ -27,11 +25,11 @@ export const ObservedAccordionForm: React.VFC<any> = observer(({}) => {
     step4: { isValid: false },
   })
 
-  const [localFormState, setLocalFormState] = useState({ a: 1, b: 2 })
-
   useEffect(() => {
     console.log('INSIDE USE EFFECT OF OBSERVED ACCORDION FORM')
   }, [])
+
+  // we need an object to iterate over that is based on the 5 cards.
 
   const onInputChange = (sectionId, value) => {
     if (value === 'valid') {
@@ -305,14 +303,12 @@ export const ObservedAccordionForm: React.VFC<any> = observer(({}) => {
     return cards
   }
 
-  const renderAccordionForm = (formFields) => {
-    const OForm = observer(AccordionForm)
-    const cards = generateCards(formFields)
-
-    return <OForm id="mainForm" cardsState={cardsValid} cards={cards} />
-  }
-
-  return <div>{renderAccordionForm(form.fields)}</div>
+  const cards = generateCards(form.fields)
+  return (
+    <div>
+      <AccordionForm id="mainForm" cardsState={cardsValid} cards={cards} />
+    </div>
+  )
 })
 
 const getPlaceholderForSelect = (

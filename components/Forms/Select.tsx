@@ -41,15 +41,12 @@ export const FormSelect: React.VFC<SelectProps> = observer(
             data-testid="select-label"
             className="inline mb-2.5"
           >
-            <span className="text-danger">* </span>
             <span className="mb-1.5 font-bold text-content">{field.label}</span>
           </label>
           <span>
-            <span className="text-danger font-bold ml-1">({requiredText})</span>
-            <Tooltip field={field.key} />
+            <span className="ml-1">({requiredText})</span>
           </span>
         </div>
-        {error && <ErrorLabel errorMessage={error} />}
         <div className="w-full md:w-80">
           <Select
             aria-labelledby={name}
