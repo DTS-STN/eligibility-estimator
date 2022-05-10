@@ -18,6 +18,7 @@ import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
 import { AccordionForm, Message } from '@dts-stn/decd-design-system'
+import { ObservedAccordionForm } from './ObservedAccordionForm'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -304,6 +305,8 @@ export const ComponentFactory: React.VFC = observer(({}) => {
   return (
     <>
       {renderAccordionForm(form.fields)}
+
+      {/* <ObservedAccordionForm form={form} /> */}
 
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
         <div className="col-span-2">

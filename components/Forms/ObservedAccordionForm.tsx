@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { AccordionForm } from '@dts-stn/decd-design-system'
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
@@ -15,35 +15,57 @@ import { Radio } from './Radio'
 import { FormSelect } from './Select'
 import { TextField } from './TextField'
 
+// this component is meant as a playground to experiment and test AccordionForm component and mobx-state-tree
 export const ObservedAccordionForm: React.VFC<any> = observer(({ form }) => {
   const tsln = useTranslation<WebTranslations>()
 
   const [cardsValid, setCardsValid] = useState({
-    step1: { isValid: false },
-    step2: { isValid: false },
-    step3: { isValid: false },
-    step4: { isValid: false },
+    step1: { isValid: true },
+    step2: { isValid: true },
+    step3: { isValid: true },
+    step4: { isValid: true },
   })
 
-  useEffect(() => {
-    console.log('INSIDE USE EFFECT OF OBSERVED ACCORDION FORM')
-  }, [])
+  const getNewTestChildren = () => {
+    return <p>CHILDREN HAVE CHANGED</p>
+  }
 
-  // we need an object to iterate over that is based on the 5 cards.
+  const onInputChange = (fieldKey, value) => {
+    if (fieldKey === 'income') {
+      value = value.replace(/\D/g, '')
+    }
 
-  const onInputChange = (sectionId, value) => {
-    if (value === 'valid') {
-      setCardsValid((currentCardsData) => {
-        const updatedCardsData = { ...currentCardsData }
-        updatedCardsData[sectionId].isValid = true
-        return updatedCardsData
-      })
-    } else {
-      setCardsValid((currentCardsData) => {
-        const updatedCardsData = { ...currentCardsData }
-        updatedCardsData[sectionId].isValid = false
-        return updatedCardsData
-      })
+    console.log(`value`, value)
+    console.log(`fieldKey`, fieldKey)
+
+    // if (value === '25') {
+    //   console.log('inside card is VALID')
+    //   setCardsValid((currentCardsData) => {
+    //     const updatedCardsData = { ...currentCardsData }
+    //     updatedCardsData['step1'].isValid = true
+    //     return updatedCardsData
+    //   })
+    // } else {
+    //   setCardsValid((currentCardsData) => {
+    //     const updatedCardsData = { ...currentCardsData }
+    //     updatedCardsData['step1'].isValid = false
+    //     return updatedCardsData
+    //   })
+    // }
+
+    // setting local state and using it to show values in components
+    if (fieldKey === 'age' || fieldKey === 'income') {
+      const allButKey = formState.filter((field) => field.key !== fieldKey)
+      const foundField = formState.find((field) => field.key === fieldKey)
+      setFormState([...allButKey, { ...foundField, fieldValue: value }])
+    }
+
+    // or changing the cards directly
+    if (fieldKey === 'legalStatus') {
+      const findCard = cards.find((card) => card.id === 'step3')
+      const newChildren = getNewTestChildren()
+      const newCard = { ...findCard, children: [newChildren] }
+      setCards(cards.map((card) => (card.id === findCard.id ? newCard : card)))
     }
   }
 
@@ -142,13 +164,13 @@ export const ObservedAccordionForm: React.VFC<any> = observer(({ form }) => {
         return {
           key: field.key,
           categoryText: field.category.text,
-          fieldType: field.type,
-          fieldLabel: field.label,
-          fieldValue: field.value,
-          fieldPlaceholder: field.placeholder,
-          fieldError: field.error,
-          fieldHandler: field.handleChange,
-          fieldOptions: field.options,
+          type: field.type,
+          label: field.label,
+          value: field.value,
+          placeholder: field.placeholder,
+          error: field.error,
+          handleChange: field.handleChange,
+          options: field.options,
         }
       }
     )
@@ -169,122 +191,109 @@ export const ObservedAccordionForm: React.VFC<any> = observer(({ form }) => {
       buttonLabel: 'Residence history',
       keys: ['legalStatus'],
     },
-    step4: {
-      title: 'Residence history',
-      buttonLabel: 'Marital status',
-      keys: [
-        'canadaWholeLife',
-        'yearsInCanadaSince18',
-        'everLivedSocialCountry',
-      ],
-    },
-    step5: {
-      title: 'Marital status',
-      buttonLabel: 'Submit',
-      keys: [
-        'maritalStatus',
-        'partnerBenefitStatus',
-        'partnerAge',
-        'partnerLivingCountry',
-        'partnerLegalStatus',
-        'partnerCanadaWholeLife',
-        'partnerYearsInCanadaSince18',
-        'partnerIncome',
-      ],
-    },
+    // step4: {
+    //   title: 'Residence history',
+    //   buttonLabel: 'Marital status',
+    //   keys: [
+    //     'livingCountry',
+    //     'canadaWholeLife',
+    //     'yearsInCanadaSince18',
+    //     'everLivedSocialCountry',
+    //   ],
+    // },
+    // step5: {
+    //   title: 'Marital status',
+    //   buttonLabel: 'Submit',
+    //   keys: [
+    //     'maritalStatus',
+    //     'partnerBenefitStatus',
+    //     'partnerAge',
+    //     'partnerLivingCountry',
+    //     'partnerLegalStatus',
+    //     'partnerCanadaWholeLife',
+    //     'partnerYearsInCanadaSince18',
+    //     'partnerIncome',
+    //   ],
+    // },
   }
 
-  const generateCards = (formFields) => {
+  const getValue = (fieldKey) => {
+    const foundField = formState.find((field) => field.key === fieldKey)
+    // console.log('FOUND FIELD', foundField)
+    return foundField.value
+  }
+
+  const generateCards = () => {
     const generateChildren = (step, keys) => {
-      const fields = formFields.filter((field) => keys.includes(field.key))
-      return fields.map((field) => {
+      const fields = form.fields.filter((field) => keys.includes(field.key))
+      const children = fields.map((field) => {
+        console.log(field.key)
         return (
-          <div key={step}>
-            <div key={field.key}>
-              {field.type === FieldType.NUMBER && (
-                <NumberField
+          <div key={field.key}>
+            {field.type === FieldType.NUMBER && (
+              <NumberField
+                type={field.type}
+                name={field.key}
+                label={field.label}
+                placeholder={field.placeholder ?? ''}
+                onChange={(e) =>
+                  onInputChange(field.key, e.currentTarget.value)
+                }
+                value={field.value}
+                error={field.error}
+                required
+              />
+            )}
+            {field.type == FieldType.CURRENCY && (
+              <div className="pb-10">
+                <CurrencyField
                   type={field.type}
                   name={field.key}
                   label={field.label}
+                  onChange={(e) =>
+                    onInputChange(field.key, e.currentTarget.value)
+                  }
                   placeholder={field.placeholder ?? ''}
-                  onChange={debounce(field.handleChange, 3000)}
                   value={field.value}
                   error={field.error}
                   required
                 />
-              )}
-              {field.type == FieldType.CURRENCY && (
-                <div className="pb-10">
-                  <CurrencyField
-                    type={field.type}
-                    name={field.key}
-                    label={field.label}
-                    onChange={field.handleChange}
-                    placeholder={field.placeholder ?? ''}
-                    value={field.value}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-              {field.type == FieldType.STRING && (
-                <div className="pb-10">
-                  <TextField
-                    type={field.type}
-                    name={field.key}
-                    label={field.label}
-                    placeholder={field.placeholder ?? ''}
-                    onChange={debounce(field.handleChange, 300)}
-                    value={field.value}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-              {(field.type == FieldType.DROPDOWN ||
-                field.type == FieldType.DROPDOWN_SEARCHABLE) && (
-                <div className="pb-10">
-                  <FormSelect
-                    name={field.key}
-                    field={field}
-                    error={field.error}
-                    placeholder={getPlaceholderForSelect(field, tsln)}
-                    value={null}
-                  />
-                </div>
-              )}
-              {(field.type == FieldType.RADIO ||
-                field.type == FieldType.BOOLEAN) && (
-                <div className="pb-10">
-                  <Radio
-                    name={field.key}
-                    checkedValue={field.value}
-                    values={
-                      field.type == 'boolean'
-                        ? [
-                            {
-                              key: 'true',
-                              text: tsln.yes,
-                            },
-                            {
-                              key: 'false',
-                              text: tsln.no,
-                            },
-                          ]
-                        : field.options
-                    }
-                    keyforid={field.key}
-                    label={field.label}
-                    onChange={field.handleChange}
-                    error={field.error}
-                    required
-                  />
-                </div>
-              )}
-            </div>
+              </div>
+            )}
+            {(field.type == FieldType.RADIO ||
+              field.type == FieldType.BOOLEAN) && (
+              <div className="pb-4">
+                <Radio
+                  name={field.key}
+                  checkedValue={field.value}
+                  values={
+                    field.type == 'boolean'
+                      ? [
+                          {
+                            key: 'true',
+                            text: tsln.yes,
+                          },
+                          {
+                            key: 'false',
+                            text: tsln.no,
+                          },
+                        ]
+                      : field.options
+                  }
+                  keyforid={field.key}
+                  label={field.label}
+                  onChange={(e) =>
+                    onInputChange(field.key, e.currentTarget.value)
+                  }
+                  required
+                />
+              </div>
+            )}
           </div>
         )
       })
+
+      return { [step]: children }
     }
 
     const cards = Object.keys(keyStepMap).map((step) => {
@@ -296,14 +305,25 @@ export const ObservedAccordionForm: React.VFC<any> = observer(({ form }) => {
         id: step,
         title: cardMeta.title,
         buttonLabel: cardMeta.buttonLabel,
-        children,
+        children: children[step],
       }
     })
 
     return cards
   }
 
-  const cards = generateCards(form.fields)
+  const [formState, setFormState] = useState(getFormState())
+  const [cards, setCards] = useState(generateCards())
+
+  useEffect(() => {
+    console.log('CARDS', cards)
+  }, [cards])
+
+  useEffect(() => {
+    console.log('CHANGED FORM STATE', formState)
+    // setCards(generateCards(useLocalState))
+  }, [formState])
+
   return (
     <div>
       <AccordionForm id="mainForm" cardsState={cardsValid} cards={cards} />
