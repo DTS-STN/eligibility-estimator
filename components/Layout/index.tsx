@@ -82,9 +82,30 @@ export const Layout: React.VFC<{
           </div>
         </div> */}
 
+          {/* This link works */}
+
+          <h2 className="ds-sr-only">Language Selection</h2>
+          {oppositeLocale === "en" ? (
+            <Link
+              href={router.asPath}
+              locale={oppositeLocale}
+              passHref
+            ><a className="ds-language-toggle-text">Français</a></Link>
+          ) : (
+            <Link
+              href={router.asPath}
+              locale={oppositeLocale}
+              passHref
+            ><a className="ds-language-toggle-text">English</a></Link>
+          )}
+
+        {console.log(`router as path = ${router.asPath}${oppositeLocale}`)}
+
+        {/* This does not work */}
+
         <Header id = "mainHeader" 
           lang = {oppositeLocale} 
-          linkPath = "/" 
+          linkPath = {router.asPath}
           isAuthenticated = {false} 
           menuProps = {menuProps} 
           topnavProps = {topnavProps} 
