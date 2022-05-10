@@ -133,6 +133,7 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      oasAge: this.rawInput.age >= 70 ? 70 : this.rawInput.oasAge, // if current age is >= 70, oasAge defaults to 70
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -149,6 +150,7 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
@@ -184,6 +186,11 @@ export class BenefitHandler {
     ]
     if (this.input.client.canadaWholeLife === false) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    }
+    if (this.input.client.age >= 65 && this.input.client.age < 70) {
+      // below 65 we don't need this as we don't do OAS calculations
+      // above 70 we don't need this as there is no option to defer further
+      requiredFields.push(FieldKey.OAS_AGE)
     }
     if (
       (this.input.client.livingCountry.canada &&

@@ -1,4 +1,5 @@
 import {
+  FieldCategory,
   Language,
   LinkLocation,
   Locale,
@@ -15,8 +16,9 @@ const en: Translations = {
     afs: 'Allowance for the Survivor',
   },
   category: {
-    personalInformation: 'Your information',
-    partnerInformation: "Your partner's information",
+    [FieldCategory.PERSONAL_INFORMATION]: 'Your information',
+    [FieldCategory.OAS_DEFERRAL]: 'OAS deferral',
+    [FieldCategory.PARTNER_INFORMATION]: "Your partner's information",
   },
   result: {
     eligible: 'Eligible',
@@ -28,6 +30,7 @@ const en: Translations = {
   question: {
     income: 'What is your current annual net income in Canadian dollars?',
     age: 'What is your current age?',
+    oasAge: 'At what age would you like to start receiving OAS?',
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country are you currently living in?',
     legalStatus: 'What is your current legal status in Canada?',

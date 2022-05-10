@@ -98,6 +98,9 @@ const en: WebTranslations = {
       "The sum of you and your partner's annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.",
     ageUnder18: 'You must be over 18 to be able to use this tool.',
     ageOver150: 'Your age should be less than 150.',
+    oasAge65to70: 'You must enter an age between 65 and 70.',
+    oasAgeGreaterThanCurrent:
+      'You must enter an age equal to or above your current age.',
     partnerAgeUnder18:
       "Your partner's age must be over 18 to be able to use this tool.",
     partnerAgeOver150: "Your partner's age should be less than 150.",

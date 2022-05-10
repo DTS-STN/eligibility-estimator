@@ -1,5 +1,6 @@
 export enum FieldCategory {
   PERSONAL_INFORMATION = 'personalInformation',
+  OAS_DEFERRAL = 'oasDeferral',
   PARTNER_INFORMATION = 'partnerInformation',
 }
 
@@ -92,6 +93,8 @@ export enum ValidationErrors {
   partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   ageUnder18 = 'ageUnder18',
   ageOver150 = 'ageOver150',
+  oasAge65to70 = 'oasAge65to70',
+  oasAgeGreaterThanCurrent = 'oasAgeGreaterThanCurrent',
   partnerAgeUnder18 = 'partnerAgeUnder18',
   partnerAgeOver150 = 'partnerAgeOver150',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',

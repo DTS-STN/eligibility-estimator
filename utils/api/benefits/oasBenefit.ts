@@ -147,10 +147,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The expected OAS amount, ignoring age.
    */
   private getBaseEntitlementAmount(): number {
-    return roundToTwo(
+    const baseAmount =
       Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
-        legalValues.MAX_OAS_ENTITLEMENT
-    )
+      legalValues.MAX_OAS_ENTITLEMENT // the base amount before deferral calculations
+    const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
+    const deferralIncreaseByYear = deferralIncreaseByMonth * 12 // the increase to the monthly payment per year deferred
+    const deferralYears = Math.max(0, this.input.oasAge - 65) // the number of years deferred (between zero and five)
+    const deferralIncrease = deferralYears * deferralIncreaseByYear * baseAmount // the extra entitlement received because of the deferral
+    const amountWithDeferralIncrease = baseAmount + deferralIncrease // the final amount
+    return roundToTwo(amountWithDeferralIncrease)
   }
 
   /**

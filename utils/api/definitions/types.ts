@@ -26,6 +26,7 @@ import { FieldData, FieldKey } from './fields'
 export interface RequestInput {
   income: number // personal income
   age: number
+  oasAge: number
   maritalStatus: MaritalStatus
   livingCountry: string // country code
   legalStatus: LegalStatus
@@ -49,6 +50,7 @@ export interface RequestInput {
 export interface ProcessedInput {
   income: IncomeHelper
   age: number
+  oasAge: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper

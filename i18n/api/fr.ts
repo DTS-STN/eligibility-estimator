@@ -1,6 +1,7 @@
 // noinspection SpellCheckingInspection
 
 import {
+  FieldCategory,
   Language,
   LinkLocation,
   Locale,
@@ -17,8 +18,9 @@ const fr: Translations = {
     afs: 'Allocation au survivant',
   },
   category: {
-    personalInformation: 'Vos renseignements',
-    partnerInformation: 'Les renseignements de votre conjoint',
+    [FieldCategory.PERSONAL_INFORMATION]: 'Vos renseignements',
+    [FieldCategory.OAS_DEFERRAL]: 'Report de la SV',
+    [FieldCategory.PARTNER_INFORMATION]: 'Les renseignements de votre conjoint',
   },
   result: {
     eligible: 'Admissible',
@@ -30,6 +32,7 @@ const fr: Translations = {
   question: {
     income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
     age: 'Quel est votre âge actuel?',
+    oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
     legalStatus: 'Quel est votre statut légal actuel au Canada?',

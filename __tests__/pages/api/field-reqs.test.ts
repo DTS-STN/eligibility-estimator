@@ -19,6 +19,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: undefined,
       age: undefined,
+      oasAge: undefined,
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -50,6 +51,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: undefined,
+      oasAge: undefined,
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -80,6 +82,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -109,6 +112,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -141,6 +145,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: undefined,
@@ -172,6 +177,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: undefined,
@@ -201,6 +207,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -231,6 +238,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -262,6 +270,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -292,6 +301,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -321,6 +331,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -352,6 +363,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       canadaWholeLife: false,
@@ -376,6 +388,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       canadaWholeLife: false,
@@ -401,6 +414,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -427,6 +441,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       ...canadaWholeLife,
