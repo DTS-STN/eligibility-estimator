@@ -7,14 +7,14 @@ import {
 } from '../definitions/enums'
 import {
   EligibilityResult,
-  EntitlementResult,
+  EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
 import { legalValues, scraperData } from '../scrapers/output'
 import { OutputItemAfs } from '../scrapers/tbl5PartneredAfsScraper'
 import { BaseBenefit } from './_base'
 
-export class AfsBenefit extends BaseBenefit {
+export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
     super(input, translations)
   }
@@ -132,7 +132,7 @@ export class AfsBenefit extends BaseBenefit {
     throw new Error('entitlement logic failed to produce a result')
   }
 
-  protected getEntitlement(): EntitlementResult {
+  protected getEntitlement(): EntitlementResultGeneric {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 

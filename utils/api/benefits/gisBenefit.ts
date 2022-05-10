@@ -7,7 +7,7 @@ import {
 import {
   BenefitResult,
   EligibilityResult,
-  EntitlementResult,
+  EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
@@ -15,7 +15,7 @@ import { OutputItemGis } from '../scrapers/_baseTable'
 import { legalValues, scraperData } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
-export class GisBenefit extends BaseBenefit {
+export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -117,7 +117,7 @@ export class GisBenefit extends BaseBenefit {
     throw new Error('entitlement logic failed to produce a result')
   }
 
-  protected getEntitlement(): EntitlementResult {
+  protected getEntitlement(): EntitlementResultGeneric {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 

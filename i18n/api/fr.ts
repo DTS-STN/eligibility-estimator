@@ -344,6 +344,8 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     additionalReasons:
       "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
+    oasClawback:
+      'Vous devrez peut-être rembourser {OAS_CLAWBACK} {LINK_RECOVERY_TAX} car vous revenus sont supérieurs à {OAS_RECOVERY_TAX_CUTOFF}.',
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',
@@ -539,6 +541,12 @@ const fr: Translations = {
     afsReasons: {
       text: 'Cliquez ici',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/admissibilite.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasRecoveryTaxInline: {
+      text: "d'impôt de récupération",
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
       order: -1,
       location: LinkLocation.HIDDEN,
     },

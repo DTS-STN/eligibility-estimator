@@ -70,21 +70,29 @@ export interface EligibilityResult {
   detail: string
 }
 
-export interface EntitlementResult {
+export interface EntitlementResultGeneric {
   result: number
   type: EntitlementResultType
 }
 
-export interface BenefitResult {
+export interface EntitlementResultOas extends EntitlementResultGeneric {
+  clawback: number
+}
+
+export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
+
+export interface BenefitResult<
+  T extends EntitlementResult = EntitlementResult
+> {
   eligibility: EligibilityResult
-  entitlement: EntitlementResult
+  entitlement: T
 }
 
 export interface BenefitResultsObject {
-  oas?: BenefitResult
-  gis?: BenefitResult
-  alw?: BenefitResult
-  afs?: BenefitResult
+  oas?: BenefitResult<EntitlementResultOas>
+  gis?: BenefitResult<EntitlementResultGeneric>
+  alw?: BenefitResult<EntitlementResultGeneric>
+  afs?: BenefitResult<EntitlementResultGeneric>
 }
 
 export interface BenefitResultsObjectWithPartner {
