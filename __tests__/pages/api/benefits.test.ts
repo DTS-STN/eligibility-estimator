@@ -508,7 +508,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expectAlwAfsTooOld(res)
   })
 
-  it('returns "eligible" - married, full oas', async () => {
+  it('returns "eligible" - married, full oas (no clawback)', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -520,9 +520,10 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerNoHelpNeeded,
     })
     expectOasGisEligible(res)
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
     expectAlwAfsTooOld(res)
   })
-  it('returns "eligible" - married, income high so OAS only', async () => {
+  it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {
     const res = await mockGetRequest({
       income: legalValues.MAX_OAS_INCOME - 1,
       age: 65,
@@ -534,6 +535,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerNoHelpNeeded,
     })
     expectOasEligible(res)
+    expect(res.body.results.oas.entitlement.clawback).toEqual(7784.04)
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
