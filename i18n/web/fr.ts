@@ -40,8 +40,50 @@ const fr: WebTranslations = {
   applyForLabel: 'Demander',
   required: 'obligatoire',
   homePageP1:
-    "L'Estimateur Canadien des Prestations de Vieillesse est un prototype en construction. À partir des renseignements que vous fournissez, cet outil estime votre admissibilité à la Sécurité de la vieillesse (SV), au Supplément de revenu garanti (SRG), l'Allocation, et L'Allocation au survivant. Si vous êtes admissible à la prestation, il estime également votre paiement mensuel.",
-  homePageHeader1: 'Types de programmes de prestations',
+    "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
+  homePageHeader1: 'Qui peut recevoir ces prestations',
+  youMayBeEligible:
+    'Vous pourriez être admisible aux prestations de vieillesse si : ',
+  atleast60: 'vous avez au moins 60 ans',
+  haveNetIncomeLess: 'votre revenu net est moins de 133 141 $ CAD',
+  headerWhatToKnow: 'Ce que vous devez savoir avant de commencer',
+  pleaseNodeText:
+    "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
+  estimatorIncludeQuestionText: 'The estimator includes questions about your:',
+  ageText: 'age',
+  netIncomeText: 'net income',
+  legalStatusText: 'legal status',
+  residenceHistoryText: 'residence history',
+  maritalStatusText: 'marital status',
+  partnerText: `(if applicable) your partner's income, legal status, and residence history`,
+  timeToCompleteText: 'Time to complete',
+  startBenefitsEstimator: 'Start benefits estimator',
+  estimatorTake5mins:
+    'This estimator will take about 5 to 10 minutes to complete.',
+  whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
+  benefitAvailable: 'A benefit available to those 65 and older',
+  learnMoreAboutOldAgeSecurity:
+    '<a className="underline text-default-text" href="#" target="_blank">Learn more about old age security</a>',
+  gisDefinationText:
+    'A benefit available to those who receive Old Age Security benefits, and who are aged 65 and older, have a low income, and are living in Canada.',
+  learnMoreAboutGIS:
+    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Guaranteed Income Supplement</a>',
+  alwDefinationText:
+    'A benefit available to low-income individuals aged 60 to 64, whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+  learnMoreAboutAlw:
+    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Allowance</a>',
+  afsDefinationText:
+    'A benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away.',
+  learnMoreAboutAfs:
+    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Allowance for the Survivor</a>',
+  notIncludeCPP:
+    'This estimator tool does not include the Canada Pension Plan (CPP) retirement pension.',
+  learnMoreAboutCpp:
+    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Canada Pension Plan</a>',
+  aboutResultText: 'About the results',
+  resultDefination: `The results are estimates and not a final decision. For a more accurate assessment of your estimated benefits amount, please contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>. The results are not financial advice.`,
+  privacyDefination:
+    'Your information is private. The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   homePageP3:
     "La pension de la Sécurité de la vieillesse est un paiement mensuel que vous pouvez recevoir si vous avez 65 ans et plus. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.",
   homePageP4:

@@ -53,9 +53,10 @@ export const Layout: React.VFC<{
                   ]}
                 />
                 <Heading
-                  id="applicationTitle"
+                  //id="applicationTitle"
+                  id="withoutLink"
                   title={tsln.title}
-                  className="mt-10 mb-8"
+                  className="mb-2 mt-8 md:mt-14 md:mb-3 "
                 />
               </>
             )}

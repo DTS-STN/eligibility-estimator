@@ -18,14 +18,15 @@ module.exports = {
       h5: ['20px', '22px'],
       h4: ['22px', '24px'],
       h3: ['24px', '26px'],
-      h2: ['32px', '36px'],
-      h1: ['34px', '48px'], // requires red <hr /> below
+      h2: ['36px', '40px'],
+      h1: ['38px', '42px'], // requires red <hr /> below
       small: ['14px', '16px'],
     },
     colors: {
       'white': '#FFF',
       'black': '#000',
       'content': '#333',
+      'light-green': '#D8EECA',
 
       // default
       'default-text': '#335075',
