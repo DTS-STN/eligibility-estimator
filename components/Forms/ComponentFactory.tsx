@@ -23,7 +23,12 @@ import { ObservedAccordionForm } from './ObservedAccordionForm'
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const ComponentFactory: React.VFC = ({}) => {
+export const ComponentFactory: React.VFC = () => {
+  const [storeFromSession] = useStorage('session', 'store', {})
+  const inputs = storeFromSession['inputs']
+  console.log(`storeFromSession`, storeFromSession)
+  console.log('INPUTS FROM SESSION', inputs)
+
   useEffect(() => {
     // const inputs = storeFromSession.input
     // const inputs = storeFromSession.input
@@ -31,21 +36,30 @@ export const ComponentFactory: React.VFC = ({}) => {
     // setCards(generateCards(storeFromSession))
   }, [])
 
-  const [storeFromSession] = useStorage('session', 'store', {})
-  // const inputs = storeFromSession.input
-  console.log('STORE FROM SESSION', storeFromSession)
-
   const router = useRouter()
-  const locale = router.locale
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
 
-  const root: Instance<typeof RootStore> = useStore()
-  const form: Instance<typeof Form> = root.form
+  const getInputObj = (inputs) => {
+    let input = {}
+    for (const field of inputs) {
+      input[field[0]] = field[1]
+    }
 
-  const input = root.getInputObject()
-  input._language = locale
-  const data = new MainHandler(input).results
+    return input
+  }
+
+  let data
+  if (inputs) {
+    const inputObj = getInputObj(inputs)
+    console.log('generated input object', inputObj)
+    data = new MainHandler(inputObj).results
+    console.log(`data`, data)
+  }
+
+  // const input = root.getInputObject()
+  // input._language = locale
+  // const data = new MainHandler(input).results
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -57,17 +71,20 @@ export const ComponentFactory: React.VFC = ({}) => {
     })
   }, [isMobile])
 
-  if ('error' in data) {
-    // typeof data == ResponseError
-    // TODO: when error, the form does not update. Repro: set age to 200, change marital from single to married, notice partner questions don't show
-    console.log('Data update resulted in error:', data)
-  }
+  // if ('error' in data) {
+  //   // typeof data == ResponseError
+  //   // TODO: when error, the form does not update. Repro: set age to 200, change marital from single to married, notice partner questions don't show
+  //   console.log('Data update resulted in error:', data)
+  // }
 
-  if ('fieldData' in data) {
-    // typeof data == ResponseSuccess
-    form.setupForm(data.fieldData)
-    root.setSummary(data.summary)
-  }
+  // const root: Instance<typeof RootStore> = useStore()
+  // const form: Instance<typeof Form> = root.form
+
+  // if ('fieldData' in data) {
+  //   // typeof data == ResponseSuccess
+  //   form.setupForm(data.fieldData)
+  //   root.setSummary(data.summary)
+  // }
 
   const keyStepMap = {
     step1: {
@@ -305,9 +322,11 @@ export const ComponentFactory: React.VFC = ({}) => {
     )
   }
 
+  // console.log(`form.fields`, form.fields)
+  // console.log(`data['fieldData]`, data['fieldData'])
   return (
     <>
-      {renderAccordionForm(form.fields)}
+      {/* {data && renderAccordionForm(data['fieldData'])} */}
 
       {/* <ObservedAccordionForm form={form} /> */}
 
