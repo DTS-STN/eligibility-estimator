@@ -5,5 +5,5 @@ import { useTranslation } from '../Hooks'
 export const Footer = () => {
   const tsln = useTranslation<WebTranslations>()
 
-  return <DSFooter btnLink="#" id="footer" lang={tsln._language} />
+  return <DSFooter btnLink="#" id="footer-info" lang={tsln._language} />
 }
