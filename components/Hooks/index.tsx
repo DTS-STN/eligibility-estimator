@@ -98,6 +98,7 @@ export function useTranslation<T = string | WebTranslations>(key?: string): T {
 }
 
 export const usePersistentState = <T,>(defaultValue: T, key: string) => {
+  const isBrowser: boolean = ((): boolean => typeof window !== 'undefined')()
   const [value, setValue] = useState(() => {
     const stickyValue = window.localStorage.getItem(key)
     return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue

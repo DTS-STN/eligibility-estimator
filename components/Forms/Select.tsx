@@ -27,9 +27,8 @@ export const FormSelect: React.VFC<SelectProps> = observer(
     const requiredText = useTranslation<string>('required')
     const defaultValue = field.value ?? field.default
 
-    console.log('FIELD VALUE', field.value)
     const stateValue =
-      field.value !== null && field.value !== ''
+      field.value !== null && field.value !== '' && field.value !== undefined
         ? { label: field.value.text, value: field.value.text }
         : null
 

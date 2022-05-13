@@ -35,7 +35,7 @@ export const ComponentFactory: React.VFC = () => {
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
 
-  const [data, setData] = useStorage('session', 'data', {})
+  const [data, setData] = useState(null)
 
   useEffect(() => {
     if (sessionStorage.getItem('data')) {
@@ -43,6 +43,7 @@ export const ComponentFactory: React.VFC = () => {
     } else {
       const dataObj = new MainHandler({ _language: locale })
       sessionStorage.setItem('data', JSON.stringify(dataObj))
+      setData(dataObj)
     }
   }, [])
 
@@ -204,7 +205,7 @@ export const ComponentFactory: React.VFC = () => {
                 />
               </div>
             )}
-            {/* {(field.type == FieldType.DROPDOWN ||
+            {(field.type == FieldType.DROPDOWN ||
               field.type == FieldType.DROPDOWN_SEARCHABLE) && (
               <div className="pb-4">
                 <FormSelect
@@ -214,8 +215,8 @@ export const ComponentFactory: React.VFC = () => {
                   value={null}
                 />
               </div>
-            )} */}
-            {/* {(field.type == FieldType.RADIO ||
+            )}
+            {(field.type == FieldType.RADIO ||
               field.type == FieldType.BOOLEAN) && (
               <div className="pb-4">
                 <Radio
@@ -265,7 +266,7 @@ export const ComponentFactory: React.VFC = () => {
                   message_body={field.info}
                 />
               </div>
-            )} */}
+            )}
           </div>
         )
       })
@@ -329,7 +330,6 @@ export const ComponentFactory: React.VFC = () => {
       {/* {data && renderAccordionForm(data['fieldData'])} */}
 
       {/* <ObservedAccordionForm form={form} /> */}
-
       {data && renderAccordionForm(data['results']['fieldData'])}
 
       {/* {data && renderData()} */}
