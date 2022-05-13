@@ -9,7 +9,13 @@ import { WebTranslations } from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { useMediaQuery, useStore, useTranslation, useStorage } from '../Hooks'
+import {
+  useMediaQuery,
+  useStore,
+  useTranslation,
+  useStorage,
+  usePersistentState,
+} from '../Hooks'
 import { CurrencyField } from './CurrencyField'
 import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
@@ -24,42 +30,25 @@ import { ObservedAccordionForm } from './ObservedAccordionForm'
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
 export const ComponentFactory: React.VFC = () => {
-  const [storeFromSession] = useStorage('session', 'store', {})
-  const inputs = storeFromSession['inputs']
-  console.log(`storeFromSession`, storeFromSession)
-  console.log('INPUTS FROM SESSION', inputs)
-
-  useEffect(() => {
-    // const inputs = storeFromSession.input
-    // const inputs = storeFromSession.input
-    console.log('STORE FROM SESSION', storeFromSession)
-    // setCards(generateCards(storeFromSession))
-  }, [])
-
   const router = useRouter()
+  const locale = router.locale
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
 
-  const getInputObj = (inputs) => {
-    let input = {}
-    for (const field of inputs) {
-      input[field[0]] = field[1]
+  const [data, setData] = useStorage('session', 'data', {})
+
+  useEffect(() => {
+    if (sessionStorage.getItem('data')) {
+      setData(JSON.parse(sessionStorage.getItem('data')))
+    } else {
+      const dataObj = new MainHandler({ _language: locale })
+      sessionStorage.setItem('data', JSON.stringify(dataObj))
     }
+  }, [])
 
-    return input
-  }
-
-  let data
-  if (inputs) {
-    const inputObj = getInputObj(inputs)
-    console.log('generated input object', inputObj)
-    data = new MainHandler(inputObj).results
-    console.log(`data`, data)
-  }
-
-  // const input = root.getInputObject()
-  // input._language = locale
-  // const data = new MainHandler(input).results
+  // useEffect(() => {
+  //   setData(JSON.stringify(data))
+  // }, [data])
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -215,7 +204,7 @@ export const ComponentFactory: React.VFC = () => {
                 />
               </div>
             )}
-            {(field.type == FieldType.DROPDOWN ||
+            {/* {(field.type == FieldType.DROPDOWN ||
               field.type == FieldType.DROPDOWN_SEARCHABLE) && (
               <div className="pb-4">
                 <FormSelect
@@ -225,8 +214,8 @@ export const ComponentFactory: React.VFC = () => {
                   value={null}
                 />
               </div>
-            )}
-            {(field.type == FieldType.RADIO ||
+            )} */}
+            {/* {(field.type == FieldType.RADIO ||
               field.type == FieldType.BOOLEAN) && (
               <div className="pb-4">
                 <Radio
@@ -244,7 +233,7 @@ export const ComponentFactory: React.VFC = () => {
                             text: tsln.no,
                           },
                         ]
-                      : field.options
+                      : field.values
                   }
                   keyforid={field.key}
                   label={field.label}
@@ -276,7 +265,7 @@ export const ComponentFactory: React.VFC = () => {
                   message_body={field.info}
                 />
               </div>
-            )}
+            )} */}
           </div>
         )
       })
@@ -322,6 +311,17 @@ export const ComponentFactory: React.VFC = () => {
     )
   }
 
+  const renderData = () => {
+    console.log(data['results'])
+
+    const results = data['results']
+
+    results.fieldData.forEach((field) => {
+      console.log(field.key)
+      console.log(`field.type`, field.type)
+    })
+  }
+
   // console.log(`form.fields`, form.fields)
   // console.log(`data['fieldData]`, data['fieldData'])
   return (
@@ -329,6 +329,10 @@ export const ComponentFactory: React.VFC = () => {
       {/* {data && renderAccordionForm(data['fieldData'])} */}
 
       {/* <ObservedAccordionForm form={form} /> */}
+
+      {data && renderAccordionForm(data['results']['fieldData'])}
+
+      {/* {data && renderData()} */}
 
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
         <div className="col-span-2">
@@ -346,3 +350,41 @@ const getPlaceholderForSelect = (
   let text = tsln.selectText[field.key]
   return text ? text : tsln.selectText.default
 }
+
+// const sanitizeForm = (data) => {
+//   data.map((fieldData) => {
+//     let placeholder,
+//       defaultValue,
+//       options = undefined
+//     if ('default' in fieldData) defaultValue = fieldData.default
+//     if ('placeholder' in fieldData) placeholder = fieldData.placeholder
+//     if ('values' in fieldData) options = fieldData.values
+
+//     // field does not exist, add it
+//     if (!field) {
+//       self.addField({
+//         key: fieldData.key,
+//         type: fieldData.type,
+//         label: fieldData.label,
+//         category: {
+//           key: fieldData.category.key,
+//           text: fieldData.category.text,
+//         },
+//         order: fieldData.order,
+//         placeholder: placeholder,
+//         default: defaultValue,
+//         options: options,
+//         value: defaultValue ?? null,
+//       })
+//       self.fields.sort((a, b) => a.order - b.order)
+//     }
+//     // field does exist, update if any data has changed
+//     else if (field.label !== fieldData.label) {
+//       console.log('updating field ', fieldData.label)
+//       field.label = fieldData.label
+//       field.category = fieldData.category
+//       field.options = options
+//       field.placeholder = placeholder
+//     }
+//   })
+// }

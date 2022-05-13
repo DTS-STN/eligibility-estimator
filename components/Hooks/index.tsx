@@ -96,3 +96,15 @@ export function useTranslation<T = string | WebTranslations>(key?: string): T {
   }
   return webDictionary[locale]
 }
+
+export const usePersistentState = <T,>(defaultValue: T, key: string) => {
+  const [value, setValue] = useState(() => {
+    const stickyValue = window.localStorage.getItem(key)
+    return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue
+  })
+
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value))
+  }, [key, value])
+  return [value, setValue]
+}

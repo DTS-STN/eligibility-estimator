@@ -27,6 +27,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
     const requiredText = useTranslation<string>('required')
     const defaultValue = field.value ?? field.default
 
+    console.log('FIELD VALUE', field.value)
     const stateValue =
       field.value !== null && field.value !== ''
         ? { label: field.value.text, value: field.value.text }
@@ -90,7 +91,7 @@ export const FormSelect: React.VFC<SelectProps> = observer(
                 : undefined
             }
             name={field.key}
-            options={field.options.map((opt) => ({
+            options={field.values.map((opt) => ({
               value: opt.key,
               label: opt.text,
             }))}
