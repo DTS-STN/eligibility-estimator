@@ -1,5 +1,4 @@
 import { debounce } from 'lodash'
-import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
@@ -10,7 +9,7 @@ import { WebTranslations } from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { useMediaQuery, useStore, useTranslation } from '../Hooks'
+import { useMediaQuery, useStore, useTranslation, useStorage } from '../Hooks'
 import { CurrencyField } from './CurrencyField'
 import { FormButtons } from './FormButtons'
 import { NumberField } from './NumberField'
@@ -24,8 +23,17 @@ import { ObservedAccordionForm } from './ObservedAccordionForm'
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const ComponentFactory: React.VFC = observer(({}) => {
-  console.log('rendering factory ')
+export const ComponentFactory: React.VFC = ({}) => {
+  useEffect(() => {
+    // const inputs = storeFromSession.input
+    // const inputs = storeFromSession.input
+    console.log('STORE FROM SESSION', storeFromSession)
+    // setCards(generateCards(storeFromSession))
+  }, [])
+
+  const [storeFromSession] = useStorage('session', 'store', {})
+  // const inputs = storeFromSession.input
+  console.log('STORE FROM SESSION', storeFromSession)
 
   const router = useRouter()
   const locale = router.locale
@@ -289,15 +297,10 @@ export const ComponentFactory: React.VFC = observer(({}) => {
 
   const renderAccordionForm = (formFields) => {
     const cards = generateCards(formFields)
-    const ObservedAccordionForm = observer(AccordionForm)
 
     return (
       <div className="md:w-2/3">
-        <ObservedAccordionForm
-          id="mainForm"
-          cardsState={cardsValid}
-          cards={cards}
-        />
+        <AccordionForm id="mainForm" cardsState={cardsValid} cards={cards} />
       </div>
     )
   }
@@ -315,7 +318,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       </div>
     </>
   )
-})
+}
 
 const getPlaceholderForSelect = (
   field: Instance<typeof FormField>,
