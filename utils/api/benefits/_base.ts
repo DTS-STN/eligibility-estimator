@@ -5,9 +5,9 @@ import {
   ProcessedInput,
 } from '../definitions/types'
 
-export abstract class BaseBenefit {
+export abstract class BaseBenefit<T extends EntitlementResult> {
   private _eligibility: EligibilityResult
-  private _entitlement: EntitlementResult
+  private _entitlement: T
   protected readonly income: number
   protected constructor(
     protected input: ProcessedInput,
@@ -22,7 +22,7 @@ export abstract class BaseBenefit {
     return this._eligibility
   }
 
-  get entitlement(): EntitlementResult {
+  get entitlement(): T {
     if (this._entitlement === undefined)
       this._entitlement = this.getEntitlement()
     return this._entitlement
@@ -32,7 +32,7 @@ export abstract class BaseBenefit {
     return undefined
   }
 
-  protected getEntitlement(): EntitlementResult {
+  protected getEntitlement(): T {
     return undefined
   }
 }

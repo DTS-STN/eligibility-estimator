@@ -7,19 +7,21 @@ import {
 import {
   BenefitResult,
   EligibilityResult,
-  EntitlementResult,
+  EntitlementResultGeneric,
+  EntitlementResultOas,
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
 import { OutputItemGis } from '../scrapers/_baseTable'
 import { legalValues, scraperData } from '../scrapers/output'
 import { BaseBenefit } from './_base'
+import { EntitlementFormula } from './entitlementFormula'
 
-export class GisBenefit extends BaseBenefit {
+export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(
     input: ProcessedInput,
     translations: Translations,
-    private oasResult: BenefitResult
+    private oasResult: BenefitResult<EntitlementResultOas>
   ) {
     super(input, translations)
   }
@@ -117,22 +119,32 @@ export class GisBenefit extends BaseBenefit {
     throw new Error('entitlement logic failed to produce a result')
   }
 
-  protected getEntitlement(): EntitlementResult {
+  protected getEntitlement(): EntitlementResultGeneric {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const result = roundToTwo(this.getEntitlementAmount())
+    const tableResult = this.getEntitlementAmount()
+    const formulaResult = new EntitlementFormula(
+      this.income,
+      this.input.maritalStatus,
+      this.input.partnerBenefitStatus,
+      this.input.age,
+      this.oasResult
+    ).getEntitlementAmount()
+    console.log(
+      `\ntableResult: ${tableResult}\nformulaResult: ${formulaResult}`
+    )
 
     let type: EntitlementResultType
-    if (result === -1) type = EntitlementResultType.UNAVAILABLE
-    else if (result === 0) type = EntitlementResultType.NONE
+    if (formulaResult === -1) type = EntitlementResultType.UNAVAILABLE
+    else if (formulaResult === 0) type = EntitlementResultType.NONE
     else type = EntitlementResultType.FULL
 
     if (type === EntitlementResultType.UNAVAILABLE)
       this.eligibility.detail =
         this.translations.detail.eligibleEntitlementUnavailable
 
-    return { result, type }
+    return { result: formulaResult, type }
   }
 
   private getEntitlementAmount(): number {
@@ -159,7 +171,7 @@ export class GisBenefit extends BaseBenefit {
         combinedOasGis = lastCombinedOasGis - numIntervalsOverLast
       }
       result = combinedOasGis - oasEntitlement
-      return Math.max(0, result)
+      return roundToTwo(Math.max(0, result))
     }
     if (
       this.oasResult.entitlement.type === EntitlementResultType.UNAVAILABLE ||

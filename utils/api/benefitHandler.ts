@@ -391,6 +391,21 @@ export class BenefitHandler {
         )}</strong>`
       )
       .replace(
+        '{OAS_CLAWBACK}',
+        numberToStringCurrency(
+          this.benefitResults.oas?.entitlement.clawback ?? 0,
+          this.translations._locale
+        )
+      )
+      .replace(
+        '{OAS_RECOVERY_TAX_CUTOFF}',
+        numberToStringCurrency(
+          legalValues.OAS_RECOVERY_TAX_CUTOFF,
+          this.translations._locale,
+          { rounding: 0 }
+        )
+      )
+      .replace(
         '{MAX_OAS_INCOME}',
         `<strong className="font-bold">${numberToStringCurrency(
           legalValues.MAX_OAS_INCOME,
@@ -425,6 +440,10 @@ export class BenefitHandler {
       .replace(
         '{LINK_MORE_REASONS_AFS}',
         `<a href="${this.translations.links.afsReasons.url}" target="_blank">${this.translations.links.afsReasons.text}</a>`
+      )
+      .replace(
+        '{LINK_RECOVERY_TAX}',
+        `<a href="${this.translations.links.oasRecoveryTaxInline.url}" target="_blank">${this.translations.links.oasRecoveryTaxInline.text}</a>`
       )
     return textToProcess
   }
