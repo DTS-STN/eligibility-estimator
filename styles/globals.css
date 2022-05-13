@@ -81,6 +81,10 @@
     @apply text-h6 font-bold mb-[15px] font-header-gc text-content;
   }
 
+  .text-xs {
+    @apply font-bold mb-[15px] font-header-gc text-content;
+  }
+
   /* form controls */
   .form-control {
     @apply text-base w-full md:w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form placeholder-muted/70;
@@ -148,6 +152,10 @@
 
   .summary-link a {
     @apply text-default-text underline;
+  }
+
+  ul > li {
+    margin-left: 1rem;
   }
 
   .is-sticky {

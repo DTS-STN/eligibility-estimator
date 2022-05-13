@@ -41,6 +41,7 @@ export type WebTranslations = {
   learnMoreAboutCpp: string
   aboutResultText: string
   resultDefination: string
+  privacyHeading: string
   privacyDefination: string
   oas: string
   gis: string
