@@ -100,6 +100,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -131,6 +132,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -163,6 +165,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -193,6 +196,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -223,6 +227,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -254,6 +259,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -285,6 +291,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -315,6 +322,7 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([FieldKey.PARTNER_INCOME])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -345,6 +353,7 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -375,6 +384,7 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([FieldKey.YEARS_IN_CANADA_SINCE_18])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -400,6 +410,7 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -427,6 +438,7 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -454,6 +466,7 @@ describe('field requirements analysis: conditional fields', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,

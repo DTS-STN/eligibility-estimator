@@ -584,6 +584,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 75,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       ...canadaWholeLife,
