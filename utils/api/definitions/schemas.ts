@@ -38,10 +38,8 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.ageOver150),
   oasAge: Joi.number()
     .integer()
-    .greater(64) // could also say .min(65) but Joi doesn't like duplicate rules
+    .min(65)
     .message(ValidationErrors.oasAge65to70)
-    .min(Joi.ref('age'))
-    .message(ValidationErrors.oasAgeGreaterThanCurrent)
     .max(70)
     .message(ValidationErrors.oasAge65to70),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
