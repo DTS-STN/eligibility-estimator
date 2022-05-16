@@ -1,6 +1,8 @@
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
 
+import api_translation from '../api/en'
+
 const en: WebTranslations = {
   _language: Language.EN,
   _locale: Locale.EN,
@@ -65,24 +67,19 @@ const en: WebTranslations = {
     'This estimator will take about 5 to 10 minutes to complete.',
   whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
   benefitAvailable: 'A benefit available to those 65 and older',
-  learnMoreAboutOldAgeSecurity:
-    '<a className="underline text-default-text" href="#" target="_blank">Learn more about Old Age Security</a>',
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${api_translation.links.oasOverview.url}" target="_blank">Learn more about Old Age Security</a>`,
   gisDefinationText:
     'A benefit available to those 65 and older. Learn more about Old Age Security Guaranteed Income Supplement A benefit available to those who receive Old Age Security benefits, are aged 65 and older, have a low income, and are living in Canada.',
-  learnMoreAboutGIS:
-    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Guaranteed Income Supplement</a>',
+  learnMoreAboutGIS: `<a className="underline text-default-text" href="${api_translation.links.gisOverview.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
   alwDefinationText:
     'A benefit available to low-income individuals aged 60 to 64, whose spouse or common-law partner receives the Guaranteed Income Supplement.',
-  learnMoreAboutAlw:
-    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Allowance</a>',
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${api_translation.links.alwOverview.url}" target="_blank">Learn more about the Allowance</a>`,
   afsDefinationText:
     'A benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  learnMoreAboutAfs:
-    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Allowance for the Survivor</a>',
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${api_translation.links.afsOverview.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
   notIncludeCPP:
     'This estimator tool does not include the Canada Pension Plan (CPP) retirement pension.',
-  learnMoreAboutCpp:
-    '<a className="underline text-default-text" href="#" target="_blank">Learn more about the Canada Pension Plan</a>',
+  learnMoreAboutCpp: `<a className="underline text-default-text" href="${api_translation.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
   aboutResultText: 'About the results',
   resultDefination: `The results are estimates and not a final decision. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>. The results are not financial advice.`,
   privacyHeading: 'Privacy',

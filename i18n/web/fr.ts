@@ -1,6 +1,7 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
+import api_translation from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
@@ -67,25 +68,22 @@ const fr: WebTranslations = {
   whatBenefitsTheEstimatorIsFor: "Prestations incluses dans l'estimateur",
   benefitAvailable:
     'Une prestation disponible aux personnes de 65 ans et plus.',
-  learnMoreAboutOldAgeSecurity:
-    '<a className="underline text-default-text" href="#" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>',
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${api_translation.links.oasOverview.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
   gisDefinationText:
     'Une prestation disponible aux personnes qui reçoivent la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada.',
-  learnMoreAboutGIS:
-    '<a className="underline text-default-text" href="#" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>',
+  learnMoreAboutGIS: `<a className="underline text-default-text" href="${api_translation.links.gisOverview.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
   alwDefinationText:
     'Une prestation disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu et dont le conjoint reçoit le Supplément de revenu garanti.',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="#" target="_blank">En savoir plus sur l'Allocation</a>`,
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${api_translation.links.alwOverview.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
   afsDefinationText:
     'Une prestation disponible aux personnes âgées entre entre 60 et 64 ans ayant un faible revenu et dont le conjoint est décédé.',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="#" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${api_translation.links.afsOverview.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
-  learnMoreAboutCpp:
-    '<a className="underline text-default-text" href="#" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>',
+  learnMoreAboutCpp: `<a className="underline text-default-text" href="${api_translation.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des estimations',
-  resultDefination: `Les estimations ne sont pas des décisions finales. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>communiquer avec Service Canada.</a> Les estimations ne doivent pas être considérées comme des conseils financiers.`,
+  resultDefination: `Les estimations ne sont pas des décisions finales. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada.</a> Les estimations ne doivent pas être considérées comme des conseils financiers.`,
   privacyHeading: 'Confidentialité',
-  privacyDefination: `Vos renseignements sont confidentiels. Les renseignements personnels que vous fournissez sont régis conformément à la <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Loi sur la protection des renseignements personnels.</a> L'Estimateur de prestations de vieillesse canadiennes ne recueille et ne transmet aucun renseignement pouvant vous identifer. Vos estimations anonymes peuvent être utilisées pour des fins de recherche.`,
+  privacyDefination: `Vos renseignements sont confidentiels. Les renseignements personnels que vous fournissez sont régis conformément à la <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html" target="_blank">Loi sur la protection des renseignements personnels.</a> L'Estimateur de prestations de vieillesse canadiennes ne recueille et ne transmet aucun renseignement pouvant vous identifer. Vos estimations anonymes peuvent être utilisées pour des fins de recherche.`,
   homePageP3:
     "La pension de la Sécurité de la vieillesse est un paiement mensuel que vous pouvez recevoir si vous avez 65 ans et plus. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.",
   homePageP4:
