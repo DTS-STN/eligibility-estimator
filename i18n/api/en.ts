@@ -108,7 +108,7 @@ const en: Translations = {
       { key: MaritalStatus.SINGLE, text: 'Single' },
       { key: MaritalStatus.MARRIED, text: 'Married' },
       { key: MaritalStatus.COMMON_LAW, text: 'Common-law' },
-      { key: MaritalStatus.WIDOWED, text: 'Surviving Partner/Widowed' },
+      { key: MaritalStatus.WIDOWED, text: 'Surviving partner/widowed' },
       { key: MaritalStatus.DIVORCED, text: 'Divorced' },
       { key: MaritalStatus.SEPARATED, text: 'Separated' },
       {
