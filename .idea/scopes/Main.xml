@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Main" pattern="file[eligibility-estimator]:__tests__//*||file[eligibility-estimator]:client-state//*||file[eligibility-estimator]:components//*||file[eligibility-estimator]:i18n//*||file[eligibility-estimator]:styles//*||file[eligibility-estimator]:utils//*||file[eligibility-estimator]:pages//*||file:package.json||file:public/openapi.yaml||file:public/insomnia.yaml" />
+</component>
