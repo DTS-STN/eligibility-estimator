@@ -115,6 +115,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         result: 0,
         resultAt75: 0,
         clawback: 0,
+        deferral: { years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
       }
 
@@ -137,10 +138,19 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     else
       this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
 
+    if (this.deferralIncrease)
+      this.eligibility.detail += ` ${this.translations.detail.oasDeferralIncrease}`
+
     if (clawback)
       this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
 
-    return { result: resultCurrent, resultAt75: resultAt75, clawback, type }
+    return {
+      result: resultCurrent,
+      resultAt75: resultAt75,
+      clawback,
+      deferral: { years: this.deferralYears, increase: this.deferralIncrease },
+      type,
+    }
   }
 
   /**
@@ -167,7 +177,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
     const deferralIncreaseByYear = deferralIncreaseByMonth * 12 // the increase to the monthly payment per year deferred
     // the extra entitlement received because of the deferral
-    return this.deferralYears * deferralIncreaseByYear * this.baseAmount
+    return roundToTwo(
+      this.deferralYears * deferralIncreaseByYear * this.baseAmount
+    )
   }
 
   /**

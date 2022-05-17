@@ -353,6 +353,8 @@ const fr: Translations = {
       "Une fois que vous atteignez l'âge de 75 ans, cela augmentera de 10%, à {OAS_75_AMOUNT}",
     oasIncreaseAt75Applied:
       'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
+    oasDeferralIncrease:
+      'En différant de {OAS_DEFERRAL_YEARS} ans, votre pension de la SV est augmentée de {OAS_DEFERRAL_INCREASE}.',
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',

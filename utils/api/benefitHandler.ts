@@ -415,6 +415,17 @@ export class BenefitHandler {
         )
       )
       .replace(
+        '{OAS_DEFERRAL_YEARS}',
+        String(this.benefitResults.oas?.entitlement.deferral.years ?? 0)
+      )
+      .replace(
+        '{OAS_DEFERRAL_INCREASE}',
+        numberToStringCurrency(
+          this.benefitResults.oas?.entitlement.deferral.increase ?? 0,
+          this.translations._locale
+        )
+      )
+      .replace(
         '{OAS_RECOVERY_TAX_CUTOFF}',
         numberToStringCurrency(
           legalValues.OAS_RECOVERY_TAX_CUTOFF,

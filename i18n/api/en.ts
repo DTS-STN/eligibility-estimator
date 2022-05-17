@@ -343,6 +343,8 @@ const en: Translations = {
       'Once you reach the age of 75, this will increase by 10%, to {OAS_75_AMOUNT}.',
     oasIncreaseAt75Applied:
       'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
+    oasDeferralIncrease:
+      'By deferring for {OAS_DEFERRAL_YEARS} years, your OAS pension has increased by {OAS_DEFERRAL_INCREASE}.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',
