@@ -13,6 +13,7 @@ export enum MaritalStatus {
   WIDOWED = 'widowed',
   DIVORCED = 'divorced',
   SEPARATED = 'separated',
+  SEPARATED_INVOLUNTARY = 'separatedInvoluntary',
 }
 
 export enum LegalStatus {
