@@ -64,6 +64,7 @@ export interface Translations {
     additionalReasons: string
     oasClawback: string
     oasIncreaseAt75: string
+    oasIncreaseAt75Applied: string
   }
   summaryTitle: {
     moreInfo: string

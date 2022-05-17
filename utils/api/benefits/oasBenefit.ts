@@ -134,6 +134,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     if (resultCurrent !== resultAt75)
       this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75}`
+    else
+      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
 
     if (clawback)
       this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
