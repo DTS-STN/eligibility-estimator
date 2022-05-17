@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import MainHandler from '../../utils/api/mainHandler'
 import { useMediaQuery, useTranslation } from '../Hooks'
-import { FormButtons } from './FormButtons'
+import { FormButtons } from '../Forms/FormButtons'
 import { AccordionFormContainer } from './AccordionFormContainer'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const ComponentFactory: React.VFC = () => {
+export const EligibilityPage: React.VFC = () => {
   const router = useRouter()
   const locale = router.locale
   const isMobile = useMediaQuery(992)
