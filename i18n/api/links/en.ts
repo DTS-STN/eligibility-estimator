@@ -1,6 +1,7 @@
 import { LinkLocation } from '../../../utils/api/definitions/enums'
+import { LinkDefinitions } from './index'
 
-export const links = {
+export const links: LinkDefinitions = {
   faq: {
     text: 'Frequently asked questions',
     url: '#faqLink',

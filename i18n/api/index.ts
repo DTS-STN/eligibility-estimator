@@ -4,9 +4,9 @@ import {
   Locale,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
+import { LinkDefinitions } from './links'
 
 const apiTranslationsDict = { en, fr }
 
@@ -79,39 +79,7 @@ export interface Translations {
     availableEligible: string
     availableIneligible: string
   }
-  links: {
-    contactSC: Link
-    faq: Link
-    oasOverview: Link
-    gisOverview: Link
-    alwOverview: Link
-    afsOverview: Link
-    oasMaxIncome: Link
-    cpp: Link
-    cric: Link
-    outsideCanada: Link
-    outsideCanadaOas: Link
-    oasPartial: Link
-    paymentOverview: Link
-    gisEntitlement: Link
-    alwEntitlement: Link
-    afsEntitlement: Link
-    oasRecoveryTax: Link
-    oasDefer: Link
-    oasRetroactive: Link
-    oasApply: Link
-    gisApply: Link
-    alwApply: Link
-    afsApply: Link
-    SC: Link
-    oasDeferClickHere: Link
-    socialAgreement: Link
-    oasReasons: Link
-    gisReasons: Link
-    alwReasons: Link
-    afsReasons: Link
-    oasRecoveryTaxInline: Link
-  }
+  links: LinkDefinitions
   csv: {
     appName: string
     formResponses: string
