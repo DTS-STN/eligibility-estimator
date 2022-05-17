@@ -81,15 +81,17 @@ const fr: Translations = {
       },
     ],
     maritalStatus: [
-      { key: MaritalStatus.SINGLE, text: 'Célibataire' },
-      { key: MaritalStatus.MARRIED, text: 'Marié(e)' },
-      { key: MaritalStatus.COMMON_LAW, text: 'Conjoint(e) de fait' },
-      { key: MaritalStatus.WIDOWED, text: 'Partenaire survivant(e)/veuf(ve)' },
-      { key: MaritalStatus.DIVORCED, text: 'Divorcé(e)' },
-      { key: MaritalStatus.SEPARATED, text: 'Séparé(e)' },
       {
-        key: MaritalStatus.SEPARATED_INVOLUNTARY,
-        text: 'Involontairement séparé(e)',
+        key: MaritalStatus.SINGLE,
+        text: 'Célibataire, divorcé(e), ou séparé(e)',
+      },
+      {
+        key: MaritalStatus.PARTNERED,
+        text: 'Marié(e), Conjoint(e) de fait, ou involontairement séparé(e)',
+      },
+      {
+        key: MaritalStatus.WIDOWED,
+        text: 'Partenaire survivant(e), ou veuf(ve)',
       },
     ],
     partnerBenefitStatus: [

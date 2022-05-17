@@ -96,14 +96,9 @@ export class MaritalStatusHelper extends FieldHelper {
 
   constructor(public value: MaritalStatus) {
     super(value)
-    this.partnered =
-      value === MaritalStatus.MARRIED || value === MaritalStatus.COMMON_LAW
+    this.partnered = value === MaritalStatus.PARTNERED
     this.single =
-      value === MaritalStatus.SINGLE ||
-      value === MaritalStatus.WIDOWED ||
-      value === MaritalStatus.DIVORCED ||
-      value === MaritalStatus.SEPARATED ||
-      value === MaritalStatus.SEPARATED_INVOLUNTARY
+      value === MaritalStatus.SINGLE || value === MaritalStatus.WIDOWED
   }
 }
 
