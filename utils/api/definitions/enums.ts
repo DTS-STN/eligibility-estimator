@@ -8,12 +8,8 @@ export enum FieldCategory {
 
 export enum MaritalStatus {
   SINGLE = 'single',
-  MARRIED = 'married',
-  COMMON_LAW = 'commonLaw',
+  PARTNERED = 'partnered',
   WIDOWED = 'widowed',
-  DIVORCED = 'divorced',
-  SEPARATED = 'separated',
-  SEPARATED_INVOLUNTARY = 'separatedInvoluntary',
 }
 
 export enum LegalStatus {
