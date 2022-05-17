@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { AccordionForm } from '@dts-stn/decd-design-system'
+import { AccordionForm } from '@solosphere/decd-design-system'
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
