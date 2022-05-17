@@ -1,8 +1,4 @@
-import {
-  getTranslations,
-  numberToStringCurrency,
-  Translations,
-} from '../../i18n/api'
+import { getTranslations, Translations } from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { GisBenefit } from './benefits/gisBenefit'
@@ -19,6 +15,7 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
+import { textReplacementRules } from './definitions/textReplacementRules'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -35,7 +32,6 @@ import {
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
-import { legalValues } from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
 
 export class BenefitHandler {
@@ -392,87 +388,23 @@ export class BenefitHandler {
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    */
   private replaceTextVariables(textToProcess: string): string {
-    textToProcess = textToProcess
-      .replace(
-        '{ENTITLEMENT_AMOUNT}',
-        `<strong className="font-bold">${numberToStringCurrency(
-          this.summary.entitlementSum,
-          this.translations._locale
-        )}</strong>`
-      )
-      .replace(
-        '{OAS_CLAWBACK}',
-        numberToStringCurrency(
-          this.benefitResults.oas?.entitlement.clawback ?? 0,
-          this.translations._locale
+    const re = new RegExp(/{\w*?}/)
+
+    // only run when necessary
+    if (re.test(textToProcess))
+      for (const key in textReplacementRules) {
+        textToProcess = textToProcess.replace(
+          `{${key}}`,
+          textReplacementRules[key](this)
         )
+      }
+
+    // validate that no replacements were missed
+    if (re.test(textToProcess))
+      throw new Error(
+        `Unprocessed replacement variable: ${re.exec(textToProcess)}`
       )
-      .replace(
-        '{OAS_75_AMOUNT}',
-        numberToStringCurrency(
-          this.benefitResults.oas?.entitlement.resultAt75 ?? 0,
-          this.translations._locale
-        )
-      )
-      .replace(
-        '{OAS_DEFERRAL_YEARS}',
-        String(this.benefitResults.oas?.entitlement.deferral.years ?? 0)
-      )
-      .replace(
-        '{OAS_DEFERRAL_INCREASE}',
-        numberToStringCurrency(
-          this.benefitResults.oas?.entitlement.deferral.increase ?? 0,
-          this.translations._locale
-        )
-      )
-      .replace(
-        '{OAS_RECOVERY_TAX_CUTOFF}',
-        numberToStringCurrency(
-          legalValues.OAS_RECOVERY_TAX_CUTOFF,
-          this.translations._locale,
-          { rounding: 0 }
-        )
-      )
-      .replace(
-        '{MAX_OAS_INCOME}',
-        `<strong className="font-bold">${numberToStringCurrency(
-          legalValues.MAX_OAS_INCOME,
-          this.translations._locale,
-          { rounding: 0 }
-        )}</strong>`
-      )
-      .replace(
-        '{LINK_SERVICE_CANADA}',
-        `<a href="${this.translations.links.SC.url}" target="_blank">${this.translations.links.SC.text}</a>`
-      )
-      .replace(
-        '{LINK_SOCIAL_AGREEMENT}',
-        `<a href="${this.translations.links.socialAgreement.url}" target="_blank">${this.translations.links.socialAgreement.text}</a>`
-      )
-      .replace(
-        '{LINK_OAS_DEFER}',
-        `<a href="${this.translations.links.oasDeferClickHere.url}" target="_blank">${this.translations.links.oasDeferClickHere.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_OAS}',
-        `<a href="${this.translations.links.oasReasons.url}" target="_blank">${this.translations.links.oasReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_GIS}',
-        `<a href="${this.translations.links.gisReasons.url}" target="_blank">${this.translations.links.gisReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_ALW}',
-        `<a href="${this.translations.links.alwReasons.url}" target="_blank">${this.translations.links.alwReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_AFS}',
-        `<a href="${this.translations.links.afsReasons.url}" target="_blank">${this.translations.links.afsReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_RECOVERY_TAX}',
-        `<a href="${this.translations.links.oasRecoveryTaxInline.url}" target="_blank">${this.translations.links.oasRecoveryTaxInline.text}</a>`
-      )
+
     return textToProcess
   }
 
