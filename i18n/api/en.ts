@@ -80,6 +80,10 @@ const en: Translations = {
       { key: MaritalStatus.WIDOWED, text: 'Surviving Partner/Widowed' },
       { key: MaritalStatus.DIVORCED, text: 'Divorced' },
       { key: MaritalStatus.SEPARATED, text: 'Separated' },
+      {
+        key: MaritalStatus.SEPARATED_INVOLUNTARY,
+        text: 'Involuntarily separated',
+      },
     ],
     partnerBenefitStatus: [
       {

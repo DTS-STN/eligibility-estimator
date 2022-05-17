@@ -102,7 +102,8 @@ export class MaritalStatusHelper extends FieldHelper {
       value === MaritalStatus.SINGLE ||
       value === MaritalStatus.WIDOWED ||
       value === MaritalStatus.DIVORCED ||
-      value === MaritalStatus.SEPARATED
+      value === MaritalStatus.SEPARATED ||
+      value === MaritalStatus.SEPARATED_INVOLUNTARY
   }
 }
 
