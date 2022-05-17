@@ -1,7 +1,10 @@
 import {
   FieldCategory,
   Language,
+  LegalStatus,
   Locale,
+  MaritalStatus,
+  PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import en from './en'
@@ -12,6 +15,11 @@ const apiTranslationsDict = { en, fr }
 
 export interface KeyAndText {
   key: string
+  text: string
+}
+
+export interface TypedKeyAndText<T> {
+  key: T
   text: string
 }
 
@@ -29,9 +37,9 @@ export interface Translations {
   }
   question: { [key in FieldKey]: string }
   questionOptions: {
-    legalStatus: KeyAndText[]
-    maritalStatus: KeyAndText[]
-    partnerBenefitStatus: KeyAndText[]
+    legalStatus: TypedKeyAndText<LegalStatus>[]
+    maritalStatus: TypedKeyAndText<MaritalStatus>[]
+    partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
   }
   detail: {

@@ -3,7 +3,10 @@
 import {
   FieldCategory,
   Language,
+  LegalStatus,
   Locale,
+  MaritalStatus,
+  PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
 import { livingCountry } from './countries/fr'
 import { Translations } from './index'
@@ -59,41 +62,47 @@ const fr: Translations = {
   },
   questionOptions: {
     legalStatus: [
-      { key: 'canadianCitizen', text: 'Citoyen canadien' },
+      { key: LegalStatus.CANADIAN_CITIZEN, text: 'Citoyen canadien' },
       {
-        key: 'permanentResident',
+        key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Résident permanent ou immigrant reçu (non parrainé)',
       },
       {
-        key: 'sponsored',
+        key: LegalStatus.SPONSORED,
         text: 'Résident permanent ou immigrant reçu (parrainé)',
       },
-      { key: 'indianStatus', text: "Statut d'Indien ou carte de statut" },
       {
-        key: 'other',
+        key: LegalStatus.INDIAN_STATUS,
+        text: "Statut d'Indien ou carte de statut",
+      },
+      {
+        key: LegalStatus.OTHER,
         text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
       },
     ],
     maritalStatus: [
-      { key: 'single', text: 'Célibataire' },
-      { key: 'married', text: 'Marié(e)' },
-      { key: 'commonLaw', text: 'Conjoint(e) de fait' },
-      { key: 'widowed', text: 'Partenaire survivant(e)/veuf(ve)' },
-      { key: 'divorced', text: 'Divorcé(e)' },
-      { key: 'separated', text: 'Séparé(e)' },
+      { key: MaritalStatus.SINGLE, text: 'Célibataire' },
+      { key: MaritalStatus.MARRIED, text: 'Marié(e)' },
+      { key: MaritalStatus.COMMON_LAW, text: 'Conjoint(e) de fait' },
+      { key: MaritalStatus.WIDOWED, text: 'Partenaire survivant(e)/veuf(ve)' },
+      { key: MaritalStatus.DIVORCED, text: 'Divorcé(e)' },
+      { key: MaritalStatus.SEPARATED, text: 'Séparé(e)' },
     ],
     partnerBenefitStatus: [
       {
-        key: 'oas',
+        key: PartnerBenefitStatus.OAS,
         text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
       },
       {
-        key: 'oasGis',
+        key: PartnerBenefitStatus.OAS_GIS,
         text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
       },
-      { key: 'alw', text: "Mon conjoint reçoit l'Allocation" },
-      { key: 'none', text: 'Aucune des réponses' },
-      { key: 'helpMe', text: 'Aidez-moi à trouver' },
+      {
+        key: PartnerBenefitStatus.ALW,
+        text: "Mon conjoint reçoit l'Allocation",
+      },
+      { key: PartnerBenefitStatus.NONE, text: 'Aucune des réponses' },
+      { key: PartnerBenefitStatus.HELP_ME, text: 'Aidez-moi à trouver' },
     ],
     livingCountry,
   },

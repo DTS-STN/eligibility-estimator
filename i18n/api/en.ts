@@ -1,7 +1,10 @@
 import {
   FieldCategory,
   Language,
+  LegalStatus,
   Locale,
+  MaritalStatus,
+  PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
 import { livingCountry } from './countries/en'
 import { Translations } from './index'
@@ -55,38 +58,44 @@ const en: Translations = {
   },
   questionOptions: {
     legalStatus: [
-      { key: 'canadianCitizen', text: 'Canadian citizen' },
+      { key: LegalStatus.CANADIAN_CITIZEN, text: 'Canadian citizen' },
       {
-        key: 'permanentResident',
+        key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Permanent resident or landed immigrant (non-sponsored)',
       },
       {
-        key: 'sponsored',
+        key: LegalStatus.SPONSORED,
         text: 'Permanent resident or landed immigrant (sponsored)',
       },
-      { key: 'indianStatus', text: 'Indian status or status card' },
+      { key: LegalStatus.INDIAN_STATUS, text: 'Indian status or status card' },
       {
-        key: 'other',
+        key: LegalStatus.OTHER,
         text: 'Other (for example, temporary resident, student, temporary worker)',
       },
     ],
     maritalStatus: [
-      { key: 'single', text: 'Single' },
-      { key: 'married', text: 'Married' },
-      { key: 'commonLaw', text: 'Common-law' },
-      { key: 'widowed', text: 'Surviving Partner/Widowed' },
-      { key: 'divorced', text: 'Divorced' },
-      { key: 'separated', text: 'Separated' },
+      { key: MaritalStatus.SINGLE, text: 'Single' },
+      { key: MaritalStatus.MARRIED, text: 'Married' },
+      { key: MaritalStatus.COMMON_LAW, text: 'Common-law' },
+      { key: MaritalStatus.WIDOWED, text: 'Surviving Partner/Widowed' },
+      { key: MaritalStatus.DIVORCED, text: 'Divorced' },
+      { key: MaritalStatus.SEPARATED, text: 'Separated' },
     ],
     partnerBenefitStatus: [
-      { key: 'oas', text: 'My partner receives an Old Age Security pension' },
       {
-        key: 'oasGis',
+        key: PartnerBenefitStatus.OAS,
+        text: 'My partner receives an Old Age Security pension',
+      },
+      {
+        key: PartnerBenefitStatus.OAS_GIS,
         text: 'My partner receives an Old Age Security pension and the Guaranteed Income Supplement',
       },
-      { key: 'alw', text: 'My partner receives the Allowance' },
-      { key: 'none', text: 'None of the above' },
-      { key: 'helpMe', text: 'Help me find out' },
+      {
+        key: PartnerBenefitStatus.ALW,
+        text: 'My partner receives the Allowance',
+      },
+      { key: PartnerBenefitStatus.NONE, text: 'None of the above' },
+      { key: PartnerBenefitStatus.HELP_ME, text: 'Help me find out' },
     ],
     livingCountry,
   },
