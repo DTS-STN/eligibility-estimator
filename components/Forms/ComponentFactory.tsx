@@ -208,10 +208,7 @@ export const ComponentFactory: React.VFC = observer(({}) => {
         <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
       </div>
 
-      <div className="mt-16">
-        <h2 className="h2 text-content mb-8">{tsln.faq}</h2>
-        <FAQ />
-      </div>
+      <FAQ />
     </>
   )
 })

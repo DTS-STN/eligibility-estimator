@@ -62,6 +62,7 @@ export interface Translations {
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
     additionalReasons: string
+    oasClawback: string
   }
   summaryTitle: {
     moreInfo: string
@@ -106,6 +107,7 @@ export interface Translations {
     gisReasons: Link
     alwReasons: Link
     afsReasons: Link
+    oasRecoveryTaxInline: Link
   }
   csv: {
     appName: string

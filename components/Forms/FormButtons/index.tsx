@@ -1,10 +1,10 @@
+import { Button } from '@dts-stn/decd-design-system'
 import { Instance } from 'mobx-state-tree'
 import { NextRouter, useRouter } from 'next/router'
 import { Form } from '../../../client-state/models/Form'
 import { RootStore } from '../../../client-state/store'
 import { WebTranslations } from '../../../i18n/web'
 import { useMediaQuery, useStore, useTranslation } from '../../Hooks'
-import { Button } from '@dts-stn/decd-design-system'
 
 interface refObject {
   current: HTMLElement

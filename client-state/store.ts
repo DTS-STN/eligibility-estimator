@@ -27,6 +27,7 @@ export const EligibilityResult = types.model({
 export const EntitlementResult = types.model({
   type: types.maybe(types.enumeration(Object.values(EntitlementResultType))),
   result: types.maybe(types.number),
+  clawback: types.maybe(types.number),
 })
 
 export const Eligibility = types.model({

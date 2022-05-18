@@ -1,3 +1,4 @@
+import { Link as DSLink } from '@dts-stn/decd-design-system'
 import Link from 'next/link'
 import React from 'react'
 import type { Link as InfoLink } from '../../utils/api/definitions/types'
@@ -12,7 +13,11 @@ export const MoreInfoLinks: React.VFC<{ links: InfoLink[] }> = ({ links }) => {
         {links.map((link, index) => (
           <li key={index} className="ml-10">
             <Link href={link.url} passHref>
-              <a className="text-default-text underline">{link.text}</a>
+              <DSLink
+                id={`moreInfo${index}`}
+                text={link.text}
+                target="_blank"
+              />
             </Link>
           </li>
         ))}
