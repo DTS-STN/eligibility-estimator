@@ -34,8 +34,6 @@ export const FormSelect: React.VFC<SelectProps> = observer(
         ? { label: field.value.text, value: field.value.text }
         : null
 
-    const selectRef = useRef(passedRef)
-
     return (
       <>
         <div className="mb-2 5">
@@ -70,7 +68,6 @@ export const FormSelect: React.VFC<SelectProps> = observer(
               }),
               control: (styles) => ({
                 ...styles,
-                border: 'none',
               }),
               dropdownIndicator: (styles) => ({
                 ...styles,

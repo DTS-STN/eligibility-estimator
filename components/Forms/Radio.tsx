@@ -73,7 +73,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           />
           <label
             htmlFor={`${keyforid}-${index}`}
-            className="radio flex items-center focus:outline-black"
+            className="radio flex items-center focus:inherit"
             tabIndex={0}
             onKeyDown={(e) => {
               e.key === 'Enter' && setValue(val.key)
