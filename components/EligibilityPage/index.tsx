@@ -9,13 +9,12 @@ import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { useMediaQuery, useStore, useTranslation, useStorage } from '../Hooks'
-import { CurrencyField } from './CurrencyField'
-import { FormButtons } from './FormButtons'
-import { NumberField } from './NumberField'
-import { Radio } from './Radio'
-import { FormSelect } from './Select'
-import { TextField } from './TextField'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
+import { CurrencyField } from '../Forms/CurrencyField'
+import { NumberField } from '../Forms/NumberField'
+import { Radio } from '../Forms/Radio'
+import { FormSelect } from '../Forms/Select'
+import { TextField } from '../Forms/TextField'
 import { Message } from '@dts-stn/decd-design-system'
 import { AccordionForm } from '@solosphere/decd-design-system'
 
@@ -23,7 +22,7 @@ import { AccordionForm } from '@solosphere/decd-design-system'
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const ComponentFactory: React.VFC = observer(({}) => {
+export const EligibilityPage: React.VFC = observer(({}) => {
   console.log('rendering factory ')
 
   const router = useRouter()
@@ -106,19 +105,19 @@ export const ComponentFactory: React.VFC = observer(({}) => {
 
   const generateCardsValid = () => {
     const inputs = root.getInputObject()
-    const cardsValid = {}
+    const cardsValidObj = {}
 
     Object.keys(keyStepMap).forEach((step, index) => {
       const stepKeys = keyStepMap[step].keys
       const someKeysPresent = stepKeys.some((key) => inputs[key])
-      const previousStep = cardsValid[`step${index}`]
+      const previousStep = cardsValidObj[`step${index}`]
       const previousTrue = previousStep?.isValid
 
       const isValid = someKeysPresent && (!previousStep || previousTrue)
-      cardsValid[step] = { isValid }
+      cardsValidObj[step] = { isValid }
     })
 
-    return cardsValid
+    return cardsValidObj
   }
 
   useEffect(() => {
@@ -127,11 +126,9 @@ export const ComponentFactory: React.VFC = observer(({}) => {
 
   const handleOnChange = (step, field, event) => {
     field.handleChange(event)
-
-    // After the field handleChange, the root store is updated
     const inputs = root.getInputObject()
-
     const isValid = inputs[field.key] && !field.error
+
     setCardsValid((currentCardsData) => {
       const updatedCardsData = { ...currentCardsData }
       updatedCardsData[step].isValid = isValid
@@ -139,9 +136,9 @@ export const ComponentFactory: React.VFC = observer(({}) => {
     })
   }
 
-  const generateCards = (formFields) => {
+  const generateCards = () => {
     const generateChildren = (step, keys) => {
-      const fields = formFields.filter((field) => keys.includes(field.key))
+      const fields = form.fields.filter((field) => keys.includes(field.key))
       const children = fields.map((field) => {
         return (
           <div key={field.key}>
@@ -277,7 +274,16 @@ export const ComponentFactory: React.VFC = observer(({}) => {
       if (index === Object.keys(keyStepMap).length - 1) {
         return {
           ...card,
-          buttonOnChange: () => router.push('/results'),
+          buttonOnChange: (e) => {
+            e.preventDefault()
+            if (
+              !form.validateAgainstEmptyFields(router.locale) &&
+              !form.hasErrors
+            ) {
+              root.saveStoreState()
+              router.push('/results')
+            }
+          },
         }
       }
 
@@ -285,24 +291,17 @@ export const ComponentFactory: React.VFC = observer(({}) => {
     })
   }
 
-  const renderAccordionForm = (formFields) => {
-    const cards = generateCards(formFields)
-
-    return (
-      <div className="md:w-2/3">
-        <AccordionForm id="mainForm" cardsState={cardsValid} cards={cards} />
-      </div>
-    )
-  }
-
   return (
     <>
-      {cardsValid && renderAccordionForm(form.fields)}
-      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 mt-10">
-        <div className="col-span-2">
-          <FormButtons />
+      {cardsValid && (
+        <div className="md:w-2/3">
+          <AccordionForm
+            id="mainForm"
+            cardsState={cardsValid}
+            cards={generateCards()}
+          />
         </div>
-      </div>
+      )}
     </>
   )
 })

@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { HeadDoc } from '../../components/Document'
-import { ComponentFactory } from '../../components/Forms/ComponentFactory'
+import { EligibilityPage } from '../../components/EligibilityPage'
 import { useStorage, useStore, useTranslation } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { WebTranslations } from '../../i18n/web'
@@ -43,7 +43,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
     <>
       <HeadDoc />
       <Layout>
-        <ComponentFactory />
+        <EligibilityPage />
       </Layout>
     </>
   )
