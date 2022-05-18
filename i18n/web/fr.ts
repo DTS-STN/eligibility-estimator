@@ -33,7 +33,7 @@ const fr: WebTranslations = {
   needHelp: "Besoin d'aide?",
   faq: 'Foire Aux Questions',
   saveToCsv: 'Télécharger',
-  nextStep: 'Estimer mes prestations',
+  nextStep: 'Prochaine étape',
   getResults: 'Obtenir les résultats',
   getEstimate: 'Estimer mes prestations',
   applyHeader: 'Faire une demande de prestations',
