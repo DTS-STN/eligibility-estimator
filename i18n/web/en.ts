@@ -32,7 +32,9 @@ const en: WebTranslations = {
   needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
   saveToCsv: 'Download',
+  nextStep: 'Next step',
   getResults: 'Get Results',
+  getEstimate: 'Estimate my benefits',
   applyHeader: 'Apply for benefits',
   applyText:
     'Now that you have estimated your benefits, please use the button(s) below to apply.',

@@ -39,7 +39,9 @@ export type WebTranslations = {
   needHelp: string
   faq: string
   saveToCsv: string
+  nextStep: string
   getResults: string
+  getEstimate: string
   applyHeader: string
   applyText: string
   applyForLabel: string
