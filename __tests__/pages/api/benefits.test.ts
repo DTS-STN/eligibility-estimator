@@ -454,12 +454,12 @@ describe('consolidated benefit tests: max income checks', () => {
 })
 
 describe('consolidated benefit tests: eligible: 65+', () => {
-  it('returns "eligible" - single, partial oas', async () => {
+  it('returns "eligible" - separated, partial oas', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.SINGLE,
+      maritalStatus: MaritalStatus.SEPARATED,
       ...canadian,
       canadaWholeLife: false,
       yearsInCanadaSince18: 10,
