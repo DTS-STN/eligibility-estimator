@@ -18,9 +18,8 @@
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
-    "@dts-stn/decd-design-system": "^1.28.0",
+    "@dts-stn/decd-design-system": "^1.36.0",
     "@headlessui/react": "^1.5.0",
-    "@solosphere/decd-design-system": "^1.35.0",
     "@tailwindcss/forms": "^0.5.0",
     "@types/lodash": "^4.14.181",
     "csv-writer": "^1.6.0",

@@ -15,8 +15,7 @@ import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
-import { Message } from '@dts-stn/decd-design-system'
-import { AccordionForm } from '@solosphere/decd-design-system'
+import { AccordionForm, Message } from '@dts-stn/decd-design-system'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
