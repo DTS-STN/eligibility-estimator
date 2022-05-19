@@ -58,22 +58,22 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
       <HeadDoc />
       <SCLabsTestHeader />
       <main className="mainContent">
-        <Header
-          id="mainHeader"
-          lang={router.locale}
-          linkPath={langToggleLink}
-          isAuthenticated={false}
-          menuProps={menuProps}
-          topnavProps={topnavProps}
-          searchProps={searchProps}
-          breadcrumbs={breadcrumbs}
-        />
+        <div className="w-11/12 sm:container mx-auto flex flex-col mb-16 mt-8">
+          <Header
+            id="mainHeader"
+            lang={router.locale}
+            linkPath={langToggleLink}
+            isAuthenticated={false}
+            menuProps={menuProps}
+            topnavProps={topnavProps}
+            searchProps={searchProps}
+            breadCrumbItems={breadcrumbs}
+          />
 
-        <div className="sm:container mx-auto flex flex-col mb-16 mt-8">
           <Heading
             id="applicationTitle"
             title={tsln.title}
-            className="mt-10 mb-8"
+            className="mb-8 mt-4 sm:mt-12"
           />
 
           {children}

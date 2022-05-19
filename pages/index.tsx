@@ -63,7 +63,10 @@ const Home: NextPage = () => {
           </h2>
           <p className="mt-3 mb-8 font-bold  md:w-3/5">{tsln.pleaseNodeText}</p>
           <p className="">{tsln.estimatorIncludeQuestionText}</p>
-          <ul className="list-disc list-outside ml-5 w-full sm:w-3/5">
+          <ul
+            id="information-list"
+            className="list-disc list-outside ml-5 w-full sm:w-3/5"
+          >
             <li dangerouslySetInnerHTML={{ __html: tsln.ageText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.netIncomeText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.legalStatusText }} />
