@@ -520,9 +520,17 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerNoHelpNeeded,
     })
     expectOasGisEligible(res)
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
     expectAlwAfsTooOld(res)
+
+    // test clawback: expect none due to low income
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+
+    // test oas increase at 75
+    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+      roundToTwo(res.body.results.oas.entitlement.result * 1.1)
+    )
   })
+
   it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {
     const res = await mockGetRequest({
       income: legalValues.MAX_OAS_INCOME - 1,
@@ -535,12 +543,46 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerNoHelpNeeded,
     })
     expectOasEligible(res)
-    expect(res.body.results.oas.entitlement.clawback).toEqual(7784.04)
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwAfsTooOld(res)
+
+    // test clawback: expect some due to high income
+    expect(res.body.results.oas.entitlement.clawback).toEqual(7784.04)
+
+    // test oas increase at 75
+    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+      roundToTwo(res.body.results.oas.entitlement.result * 1.1)
+    )
+  })
+
+  it('returns "eligible" - married, full oas, age 75', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 75,
+      maritalStatus: MaritalStatus.MARRIED,
+      ...canadian,
+      ...canadaWholeLife,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncome: 10000,
+      ...partnerNoHelpNeeded,
+    })
+    expectOasGisEligible(
+      res,
+      EntitlementResultType.FULL,
+      roundToTwo(legalValues.MAX_OAS_ENTITLEMENT * 1.1)
+    )
+    expectAlwAfsTooOld(res)
+
+    // test clawback: expect none due to low income
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+
+    // test oas increase at 75: expect same result since current age is 75
+    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+      roundToTwo(res.body.results.oas.entitlement.result)
+    )
   })
 })
 

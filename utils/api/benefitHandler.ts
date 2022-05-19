@@ -398,6 +398,13 @@ export class BenefitHandler {
         )
       )
       .replace(
+        '{OAS_75_AMOUNT}',
+        numberToStringCurrency(
+          this.benefitResults.oas?.entitlement.resultAt75 ?? 0,
+          this.translations._locale
+        )
+      )
+      .replace(
         '{OAS_RECOVERY_TAX_CUTOFF}',
         numberToStringCurrency(
           legalValues.OAS_RECOVERY_TAX_CUTOFF,
