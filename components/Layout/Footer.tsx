@@ -67,7 +67,7 @@ export const Footer = () => {
 
   return (
     <DSFooter
-      id="footer"
+      id="footer-info"
       btnLink="#"
       landscapeLinks={landscapeLinks}
       brandLinks={brandLinks}
