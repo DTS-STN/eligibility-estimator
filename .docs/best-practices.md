@@ -21,17 +21,19 @@
 
 ## Code checks
 
-- We have a number of tests/checks/fixes that run automatically, ensuring code quality:
-  - ESLint: runs automatically on commit locally (?), and automatically on PRs/deployment through GitHub
-    - This covers dozens/hundreds of common issues, validates best practices, and so on.
-  - Prettier: runs automatically on commit locally
-    - This automatically formats all changes code, ensuring consistent syntax.
-  - CodeQL: runs automatically on PRs/deployment
-    - This runs a number of deep code quality checks, and validates best practices.
-    - For example, it caught us using .replace() rather than .replaceAll() – the former only replaces the first instance, which was a problem because we wanted to remove all commas from the string rather than only the first one.
-  - Automated tests: this is run manually by the developer in their local environment, as well as automatically on PRs/deployment
-    - Tests written by us covering frontend rendering as well as logic/processing/output
-  - Any failures in the above checks will block merging/deployment until resolved.
+We have a number of tests/checks/fixes that run automatically, ensuring code quality:
+
+- **ESLint**: runs automatically on commit locally (?), and automatically on PRs/deployment through GitHub
+  - This covers dozens/hundreds of common issues, validates best practices, and so on.
+- **Prettier**: runs automatically on commit locally
+  - This automatically formats all changes code, ensuring consistent syntax.
+- **CodeQL**: runs automatically on PRs/deployment
+  - This runs a number of deep code quality checks, and validates best practices.
+  - For example, it caught us using .replace() rather than .replaceAll() – the former only replaces the first instance, which was a problem because we wanted to remove all commas from the string rather than only the first one.
+- **Automated tests**: this is run manually by the developer in their local environment, as well as automatically on PRs/deployment
+  - Tests written by us covering frontend rendering as well as logic/processing/output
+
+Any failures in the above checks will block merging/deployment until resolved.
 
 ## Application security
 
