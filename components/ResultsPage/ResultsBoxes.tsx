@@ -6,9 +6,9 @@ import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Locale } from '../../utils/api/definitions/enums'
 import { useStore, useTranslation } from '../Hooks'
-import { ResultsTableRowDesktop } from './ResultsTableRowDesktop'
+//import { ResultsTableRowDesktop } from './ResultsTableRowDesktop'
 import { ResultsTableRowNew } from './ResultsTableRowNew'
-import { ResultsTableRowMobile } from './ResultsTableRowMobile'
+//import { ResultsTableRowMobile } from './ResultsTableRowMobile'
 import { MessageBox } from './MessageBox'
 
 export const ResultsBoxes = observer(() => {
@@ -29,11 +29,16 @@ export const ResultsBoxes = observer(() => {
       <div className='pl-12'>
         {tsln.resultsPage.basedOnYourInfo}
 
+        { console.log('oas', root.oas?.eligibility?.detail) }
+        { console.log('gis', root.gis?.eligibility?.detail) }
+        { console.log('allowance', root.allowance?.eligibility?.detail) }
+        { console.log('afs', root.afs?.eligibility?.detail) }
+
         <ul className="pl-5 list-disc text-content font-semibold">
-          {root.oas.eligibility.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.oas}>{tsln.oas}</li> : ''}
-          {root.gis.eligibility.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.gis}>{tsln.gis}</li> : ''}
-          {root.allowance.eligibility.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.allowance}>{tsln.alw}</li> : ''}
-          {root.afs.eligibility.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.afs}>{tsln.afs}</li> : ''}
+          {root.oas?.eligibility?.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.oas}>{tsln.oas}</li> : ''}
+          {root.gis?.eligibility?.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.gis}>{tsln.gis}</li> : ''}
+          {root.allowance?.eligibility?.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.allowance}>{tsln.alw}</li> : ''}
+          {root.afs?.eligibility?.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.afs}>{tsln.afs}</li> : ''}
         </ul>
       </div>
 
@@ -119,7 +124,7 @@ export const ResultsBoxes = observer(() => {
 
 
       {/* desktop only */}
-      <table className="hidden md:block text-left">
+      {/* <table className="hidden md:block text-left">
         <thead className="font-bold border-b border-content">
           <tr>
             <th>{tsln.resultsPage.tableHeader1}</th>
@@ -172,6 +177,8 @@ export const ResultsBoxes = observer(() => {
         </tbody>
       </table>
       {/* mobile only */}
+
+      {/* 
       <div className="block md:hidden">
         <ResultsTableRowMobile
           heading={tsln.oas}
@@ -211,7 +218,8 @@ export const ResultsBoxes = observer(() => {
             </p>
           </div>
         )}
-      </div>
+      </div> 
+       */}
     </div>
   )
 })

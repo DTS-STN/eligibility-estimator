@@ -1,5 +1,4 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
-import { Image as DSImage } from '@dts-stn/decd-design-system'
 
 export const ListLinks: React.VFC<{
   title: string

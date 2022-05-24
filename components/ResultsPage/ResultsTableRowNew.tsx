@@ -14,7 +14,7 @@ export const ResultsTableRowNew: React.VFC<{
 }> = ({ heading, data, locale, showEntitlement }) => {
   return (
     <>
-    {data.entitlement.result !== 0 ? (
+    {data.entitlement?.result !== 0 ? (
       <tr className='border border-[#DDDDDD]'>
         <td>{heading}</td>
         {showEntitlement && (

@@ -9,7 +9,7 @@ import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { ListLinks } from './ListLinks'
 import { MoreInfoLinks } from './MoreInfoLinks'
 import { ResultsApply } from './ResultsApply'
-import { ResultsTable } from './ResultsTable'
+//import { ResultsTable } from './ResultsTable'
 import { ResultsBoxes } from './ResultsBoxes'
 import { NeedHelp } from '../NeedHelp'
 
