@@ -78,9 +78,13 @@ export type WebTranslations = {
     header: string
     tableHeader1: string
     tableHeader2: string
-    tableHeader3: string
-    tableHeader4: string
     tableTotalAmount: string
+    youMayBeEligible: string
+    basedOnYourInfo: string
+    yourEstimatedTotal: string
+    basedOnYourInfoTotal: string
+    nextSteps: string
+    youMayNotBeEligible: string    
   }
   moreInfoHeader: string
   modifyAnswers: string
