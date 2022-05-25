@@ -22,6 +22,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -53,6 +54,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -84,6 +86,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -115,6 +118,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME, // too high for allowance
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -138,6 +142,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME - 1, // okay for allowance
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -160,6 +165,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: 0,
       age: 60,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -196,6 +202,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: 0,
       age: 60,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,
@@ -227,6 +234,7 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: 0,
       age: 60,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: true,

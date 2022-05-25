@@ -111,10 +111,17 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
   protected getEntitlement(): EntitlementResultOas {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
-      return { result: 0, clawback: 0, type: EntitlementResultType.NONE }
+      return {
+        result: 0,
+        resultAt75: 0,
+        clawback: 0,
+        deferral: { years: 0, increase: 0 },
+        type: EntitlementResultType.NONE,
+      }
 
-    const result = this.getEntitlementAmount()
-    const clawback = this.getClawbackAmount()
+    const resultCurrent = this.currentEntitlementAmount
+    const resultAt75 = this.age75EntitlementAmount
+    const clawback = this.clawbackAmount
     const type =
       this.input.yearsInCanadaSince18 < 40
         ? EntitlementResultType.PARTIAL
@@ -126,26 +133,91 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           ? this.translations.detail.eligiblePartialOas65to69
           : this.translations.detail.eligiblePartialOas
 
+    if (resultCurrent !== resultAt75)
+      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75}`
+    else
+      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
+
+    if (this.deferralIncrease)
+      this.eligibility.detail += ` ${this.translations.detail.oasDeferralIncrease}`
+
     if (clawback)
       this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
 
-    return { result, clawback, type }
+    return {
+      result: resultCurrent,
+      resultAt75: resultAt75,
+      clawback,
+      deferral: { years: this.deferralYears, increase: this.deferralIncrease },
+      type,
+    }
   }
 
-  private getEntitlementAmount(): number {
-    return roundToTwo(
+  /**
+   * The "base" OAS amount, considering yearsInCanada, ignoring deferral.
+   */
+  private get baseAmount() {
+    return (
       Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
-        legalValues.MAX_OAS_ENTITLEMENT
+      legalValues.MAX_OAS_ENTITLEMENT
     )
   }
 
-  private getClawbackAmount(): number {
+  /**
+   * The number of years the client has chosen to defer their OAS pension.
+   */
+  private get deferralYears(): number {
+    return Math.max(0, this.input.oasAge - 65) // the number of years deferred (between zero and five)
+  }
+
+  /**
+   * The dollar amount by which the OAS entitlement will increase due to deferral.
+   */
+  private get deferralIncrease() {
+    const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
+    const deferralIncreaseByYear = deferralIncreaseByMonth * 12 // the increase to the monthly payment per year deferred
+    // the extra entitlement received because of the deferral
+    return roundToTwo(
+      this.deferralYears * deferralIncreaseByYear * this.baseAmount
+    )
+  }
+
+  /**
+   * The expected OAS amount at age 65, considering yearsInCanada and deferral.
+   */
+  private get age65EntitlementAmount(): number {
+    const baseAmount = this.baseAmount // the base amount before deferral calculations
+    const deferralIncrease = this.deferralIncrease
+    const amountWithDeferralIncrease = baseAmount + deferralIncrease // the final amount
+    return roundToTwo(amountWithDeferralIncrease)
+  }
+
+  /**
+   * The expected OAS amount at age 75.
+   */
+  private get age75EntitlementAmount(): number {
+    return roundToTwo(this.age65EntitlementAmount * 1.1)
+  }
+
+  /**
+   * The expected OAS amount, taking into account the client's age.
+   * At age 75, OAS increases by 10%.
+   */
+  private get currentEntitlementAmount(): number {
+    if (this.input.age < 75) return this.age65EntitlementAmount
+    else return this.age75EntitlementAmount
+  }
+
+  /**
+   * The amount of "clawback" aka "repayment tax" the client will have to repay.
+   */
+  private get clawbackAmount(): number {
     if (this.input.income.relevant < legalValues.OAS_RECOVERY_TAX_CUTOFF)
       return 0
     const incomeOverCutoff =
       this.input.income.relevant - legalValues.OAS_RECOVERY_TAX_CUTOFF
     const repaymentAmount = incomeOverCutoff * 0.15
-    const oasYearly = this.getEntitlementAmount() * 12
+    const oasYearly = this.currentEntitlementAmount * 12
     const result = Math.min(oasYearly, repaymentAmount)
     return roundToTwo(result)
   }

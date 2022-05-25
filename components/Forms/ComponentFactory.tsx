@@ -83,7 +83,8 @@ export const ComponentFactory: React.VFC = observer(({}) => {
             (field: Instance<typeof FormField>, index: number) => {
               console.log('rendering ', field.label)
               const isChildQuestion =
-                field.category.key == FieldCategory.PARTNER_INFORMATION
+                field.category.key == FieldCategory.PARTNER_INFORMATION ||
+                field.category.key == FieldCategory.OAS_DEFERRAL
               const styling = isChildQuestion ? 'bg-emphasis px-10 pt-4' : ''
               const content = (
                 <div key={field.key} className={styling}>

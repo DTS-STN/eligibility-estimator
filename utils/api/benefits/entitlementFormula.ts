@@ -111,10 +111,9 @@ export class EntitlementFormula {
    */
   private get gisSituation(): GisSituation {
     if (this.maritalStatus.single) {
-      if (this.maritalStatus.value === MaritalStatus.SINGLE)
-        return GisSituation.SINGLE
-      else if (this.maritalStatus.value === MaritalStatus.WIDOWED)
+      if (this.maritalStatus.value === MaritalStatus.WIDOWED)
         return GisSituation.AFS
+      else return GisSituation.SINGLE
     } else {
       if (this.partnerBenefitStatus.anyOas)
         return this.age >= 65 ? GisSituation.PARTNER_OAS : GisSituation.ALW
@@ -153,6 +152,8 @@ export class EntitlementFormula {
       case GisSituation.PARTNER_NO_OAS:
         // these cases don't have different behavior based on income, so use -1
         return { low: -1, high: -1 }
+      default:
+        throw new Error('marital status or gis situation is not handled')
     }
   }
 

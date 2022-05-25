@@ -105,6 +105,7 @@ const fr: WebTranslations = {
     ageUnder18:
       'Vous devez avoir plus de 18 ans pour pouvoir utiliser cet outil.',
     ageOver150: 'Votre âge doit être inférieur à 150 ans.',
+    oasAge65to70: 'Vous devez saisir un âge compris entre 65 et 70 ans.',
     partnerAgeUnder18:
       "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
     partnerAgeOver150:
