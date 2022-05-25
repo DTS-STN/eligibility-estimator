@@ -8,6 +8,7 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  OutsideCanada,
 } from './definitions/enums'
 import {
   FieldData,
@@ -129,18 +130,19 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
-      oasAge:
-        this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
-          ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
-          : this.rawInput.oasAge,
+      // oasAge:
+      //   this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
+      //     ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
+      //     : this.rawInput.oasAge,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
       canadaWholeLife: this.rawInput.canadaWholeLife,
       // if canadaWholeLife, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18: this.rawInput.canadaWholeLife
-        ? 40
-        : this.rawInput.yearsInCanadaSince18,
+      yearsInCanadaSince18:
+        this.rawInput.canadaWholeLife === OutsideCanada.NO
+          ? 40
+          : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         this.rawInput.partnerBenefitStatus
@@ -149,16 +151,17 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
-      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
+      // oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
       ),
       legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
       canadaWholeLife: this.rawInput.partnerCanadaWholeLife,
-      yearsInCanadaSince18: this.rawInput.partnerCanadaWholeLife
-        ? 40
-        : this.rawInput.partnerYearsInCanadaSince18,
+      yearsInCanadaSince18:
+        this.rawInput.partnerCanadaWholeLife === OutsideCanada.NO
+          ? 40
+          : this.rawInput.partnerYearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
@@ -183,7 +186,7 @@ export class BenefitHandler {
       FieldKey.MARITAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
     ]
-    if (this.input.client.canadaWholeLife === false) {
+    if (this.input.client.canadaWholeLife === OutsideCanada.YES) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.age >= 65 && this.input.client.age < 70) {
@@ -212,7 +215,7 @@ export class BenefitHandler {
           FieldKey.PARTNER_CANADA_WHOLE_LIFE
         )
       }
-      if (this.input.partner.canadaWholeLife === false) {
+      if (this.input.partner.canadaWholeLife === OutsideCanada.YES) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
       if (

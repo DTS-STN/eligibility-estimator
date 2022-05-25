@@ -62,7 +62,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.CANADA_WHOLE_LIFE,
     category: { key: FieldCategory.PERSONAL_INFORMATION },
     order: 6,
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
   },
   [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
@@ -125,7 +125,7 @@ export const fieldDefinitions: FieldDefinitions = {
     relatedKey: FieldKey.CANADA_WHOLE_LIFE,
     category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 15,
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
   },
   [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,

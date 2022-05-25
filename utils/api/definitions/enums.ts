@@ -13,6 +13,11 @@ export enum MaritalStatus {
   SEPARATED = 'separated',
 }
 
+export enum OutsideCanada {
+  YES = 'yes',
+  NO = 'no',
+}
+
 export enum LegalStatus {
   CANADIAN_CITIZEN = 'canadianCitizen',
   PERMANENT_RESIDENT = 'permanentResident',

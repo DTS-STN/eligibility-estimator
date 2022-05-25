@@ -30,14 +30,15 @@ const fr: Translations = {
     invalid: "Votre demande n'est pas valide!",
   },
   question: {
-    income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
+    income:
+      'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     age: 'Quel âge avez-vous?',
     oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
-    livingCountry: 'Dans quel pays résidez-vous actuellement?',
-    legalStatus: 'Quel est votre statut légal actuel au Canada?',
+    livingCountry: 'Dans quel pays résidez-vous?',
+    legalStatus: 'Quel est votre statut légal au Canada?',
     canadaWholeLife:
-      "Depuis l'âge de 18 ans, avez-vous seulement habité au Canada?",
+      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
     yearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     everLivedSocialCountry:
@@ -60,7 +61,8 @@ const fr: Translations = {
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
     income:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
-    yearsInCanadaSince18: `Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.`,
+    yearsInCanadaSince18:
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
   },
   questionOptions: {
     legalStatus: [
@@ -77,6 +79,16 @@ const fr: Translations = {
       {
         key: 'other',
         text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
+      },
+    ],
+    canadaWholeLife: [
+      {
+        key: 'no',
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+      },
+      {
+        key: 'yes',
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
     ],
     maritalStatus: [

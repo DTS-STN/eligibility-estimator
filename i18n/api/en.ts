@@ -28,13 +28,15 @@ const en: Translations = {
     invalid: 'Request is invalid!',
   },
   question: {
-    income: 'What is your current annual net income in Canadian dollars?',
+    income:
+      'What is your annual net income (income after taxes) in Canadian dollars?',
     age: 'How old are you?',
     oasAge: 'At what age would you like to start receiving OAS?',
     maritalStatus: 'What is your current marital status?',
-    livingCountry: 'What country are you currently living in?',
-    legalStatus: 'What is your current legal status in Canada?',
-    canadaWholeLife: 'Since the age of 18, have you only lived in Canada?',
+    livingCountry: 'What country do you live in?',
+    legalStatus: 'What is your legal status in Canada?',
+    canadaWholeLife:
+      'Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?',
     yearsInCanadaSince18:
       'Since the age of 18, how many years have you lived in Canada?',
     everLivedSocialCountry:
@@ -74,6 +76,16 @@ const en: Translations = {
       {
         key: 'other',
         text: 'Other (for example, temporary resident, student, temporary worker)',
+      },
+    ],
+    canadaWholeLife: [
+      {
+        key: 'no',
+        text: 'No, I have not lived outside of Canada for longer than 6 months',
+      },
+      {
+        key: 'yes',
+        text: 'Yes, I have lived outside of Canada for longer than 6 months',
       },
     ],
     maritalStatus: [

@@ -7,6 +7,7 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
   ValidationErrors,
+  OutsideCanada,
 } from './enums'
 
 /**
@@ -45,7 +46,7 @@ export const RequestSchema = Joi.object({
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  canadaWholeLife: Joi.boolean(),
+  canadaWholeLife: Joi.string().valid(...Object.values(OutsideCanada)),
   yearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
@@ -72,7 +73,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.partnerAgeOver150),
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  partnerCanadaWholeLife: Joi.boolean(),
+  partnerCanadaWholeLife: Joi.string().valid(...Object.values(OutsideCanada)),
   partnerYearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))

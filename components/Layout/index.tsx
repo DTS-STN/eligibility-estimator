@@ -14,7 +14,7 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
   const langToggleLink =
     oppositeLocale === 'fr'
-      ? `${router.asPath}${oppositeLocale}`
+      ? `${oppositeLocale}/${router.asPath}`
       : `${router.asPath}`
 
   const tsln = useTranslation<WebTranslations>()
