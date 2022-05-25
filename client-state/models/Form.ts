@@ -181,7 +181,6 @@ export const Form = types
       self.saveInputsToState()
       const input = self.buildObjectWithFormData(parent.langBrowser)
       const data = new MainHandler(input).results
-
       if ('error' in data) {
         self.clearAllErrors()
         if (!('details' in data.detail))

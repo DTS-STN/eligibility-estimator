@@ -1,17 +1,18 @@
 import { observer } from 'mobx-react'
 import { useRouter } from 'next/router'
-import { InputHTMLAttributes, useEffect } from 'react'
+import React, { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-
+import { Ref } from 'react'
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   error?: string
+  passedRef: Ref<HTMLInputElement>
 }
 
 /**
@@ -22,7 +23,16 @@ export interface CurrencyFieldProps
  */
 export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
   (props) => {
-    const { name, label, required, value, placeholder, onChange, error } = props
+    const {
+      name,
+      label,
+      required,
+      value,
+      placeholder,
+      onChange,
+      error,
+      passedRef,
+    } = props
     const requiredText = useTranslation<string>('required')
     const locale = useRouter().locale
 
@@ -78,6 +88,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           required={required}
           autoComplete="off"
           enterKeyHint="done"
+          getInputRef={passedRef}
         />
       </div>
     )

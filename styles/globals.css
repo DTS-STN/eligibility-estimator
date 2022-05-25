@@ -3,13 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-  /* consistent focus styles on all components */
-  * {
-    @apply focus:outline-none;
-    @apply focus-visible:ring-1;
-    @apply focus-visible:ring-black;
-  }
-
+  
   table,
   p,
   label,
