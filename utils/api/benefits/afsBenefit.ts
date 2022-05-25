@@ -7,14 +7,15 @@ import {
 } from '../definitions/enums'
 import {
   EligibilityResult,
-  EntitlementResult,
+  EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
 import { legalValues, scraperData } from '../scrapers/output'
 import { OutputItemAfs } from '../scrapers/tbl5PartneredAfsScraper'
 import { BaseBenefit } from './_base'
+import { EntitlementFormula } from './entitlementFormula'
 
-export class AfsBenefit extends BaseBenefit {
+export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
     super(input, translations)
   }
@@ -132,14 +133,24 @@ export class AfsBenefit extends BaseBenefit {
     throw new Error('entitlement logic failed to produce a result')
   }
 
-  protected getEntitlement(): EntitlementResult {
+  protected getEntitlement(): EntitlementResultGeneric {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const result = this.getEntitlementAmount()
+    const tableResult = this.getEntitlementAmount()
+    const formulaResult = new EntitlementFormula(
+      this.income,
+      this.input.maritalStatus,
+      this.input.partnerBenefitStatus,
+      this.input.age
+    ).getEntitlementAmount()
+    console.log(
+      `\ntableResult: ${tableResult}\nformulaResult: ${formulaResult}`
+    )
+
     const type = EntitlementResultType.FULL
 
-    return { result, type }
+    return { result: formulaResult, type }
   }
 
   private getEntitlementAmount(): number {

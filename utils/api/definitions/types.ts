@@ -26,6 +26,7 @@ import { FieldData, FieldKey } from './fields'
 export interface RequestInput {
   income: number // personal income
   age: number
+  oasAge: number
   maritalStatus: MaritalStatus
   livingCountry: string // country code
   legalStatus: LegalStatus
@@ -49,6 +50,7 @@ export interface RequestInput {
 export interface ProcessedInput {
   income: IncomeHelper
   age: number
+  oasAge: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
@@ -70,21 +72,31 @@ export interface EligibilityResult {
   detail: string
 }
 
-export interface EntitlementResult {
+export interface EntitlementResultGeneric {
   result: number
   type: EntitlementResultType
 }
 
-export interface BenefitResult {
+export interface EntitlementResultOas extends EntitlementResultGeneric {
+  resultAt75: number
+  clawback: number
+  deferral: { years: number; increase: number }
+}
+
+export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
+
+export interface BenefitResult<
+  T extends EntitlementResult = EntitlementResult
+> {
   eligibility: EligibilityResult
-  entitlement: EntitlementResult
+  entitlement: T
 }
 
 export interface BenefitResultsObject {
-  oas?: BenefitResult
-  gis?: BenefitResult
-  alw?: BenefitResult
-  afs?: BenefitResult
+  oas?: BenefitResult<EntitlementResultOas>
+  gis?: BenefitResult<EntitlementResultGeneric>
+  alw?: BenefitResult<EntitlementResultGeneric>
+  afs?: BenefitResult<EntitlementResultGeneric>
 }
 
 export interface BenefitResultsObjectWithPartner {

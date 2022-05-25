@@ -1,6 +1,7 @@
 // noinspection SpellCheckingInspection
 
 import {
+  FieldCategory,
   Language,
   LinkLocation,
   Locale,
@@ -17,8 +18,9 @@ const fr: Translations = {
     afs: 'Allocation au survivant',
   },
   category: {
-    personalInformation: 'Vos renseignements',
-    partnerInformation: 'Les renseignements de votre conjoint',
+    [FieldCategory.PERSONAL_INFORMATION]: 'Vos renseignements',
+    [FieldCategory.OAS_DEFERRAL]: 'Report de la SV',
+    [FieldCategory.PARTNER_INFORMATION]: 'Les renseignements de votre conjoint',
   },
   result: {
     eligible: 'Admissible',
@@ -30,6 +32,7 @@ const fr: Translations = {
   question: {
     income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
     age: 'Quel âge avez-vous?',
+    oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
     legalStatus: 'Quel est votre statut légal actuel au Canada?',
@@ -350,6 +353,14 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     additionalReasons:
       "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
+    oasClawback:
+      'Vous devrez peut-être rembourser {OAS_CLAWBACK} {LINK_RECOVERY_TAX} car vous revenus sont supérieurs à {OAS_RECOVERY_TAX_CUTOFF}.',
+    oasIncreaseAt75:
+      "Une fois que vous atteignez l'âge de 75 ans, cela augmentera de 10%, à {OAS_75_AMOUNT}",
+    oasIncreaseAt75Applied:
+      'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
+    oasDeferralIncrease:
+      'En différant de {OAS_DEFERRAL_YEARS} ans, votre pension de la SV est augmentée de {OAS_DEFERRAL_INCREASE}.',
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',
@@ -545,6 +556,12 @@ const fr: Translations = {
     afsReasons: {
       text: 'Cliquez ici',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/admissibilite.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    oasRecoveryTaxInline: {
+      text: "d'impôt de récupération",
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
       order: -1,
       location: LinkLocation.HIDDEN,
     },

@@ -1,8 +1,4 @@
-import {
-  getTranslations,
-  numberToStringCurrency,
-  Translations,
-} from '../../i18n/api'
+import { getTranslations, Translations } from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { GisBenefit } from './benefits/gisBenefit'
@@ -19,6 +15,7 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
+import { textReplacementRules } from './definitions/textReplacementRules'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -35,7 +32,6 @@ import {
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
-import { legalValues } from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
 
 export class BenefitHandler {
@@ -133,6 +129,10 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      oasAge:
+        this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
+          ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
+          : this.rawInput.oasAge,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -149,6 +149,7 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
@@ -184,6 +185,11 @@ export class BenefitHandler {
     ]
     if (this.input.client.canadaWholeLife === false) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    }
+    if (this.input.client.age >= 65 && this.input.client.age < 70) {
+      // below 65 we don't need this as we don't do OAS calculations
+      // above 70 we don't need this as there is no option to defer further
+      requiredFields.push(FieldKey.OAS_AGE)
     }
     if (
       (this.input.client.livingCountry.canada &&
@@ -382,50 +388,23 @@ export class BenefitHandler {
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    */
   private replaceTextVariables(textToProcess: string): string {
-    textToProcess = textToProcess
-      .replace(
-        '{ENTITLEMENT_AMOUNT}',
-        `<strong className="font-bold">${numberToStringCurrency(
-          this.summary.entitlementSum,
-          this.translations._locale
-        )}</strong>`
+    const re = new RegExp(/{\w*?}/)
+
+    // only run when necessary
+    if (re.test(textToProcess))
+      for (const key in textReplacementRules) {
+        textToProcess = textToProcess.replace(
+          `{${key}}`,
+          textReplacementRules[key](this)
+        )
+      }
+
+    // validate that no replacements were missed
+    if (re.test(textToProcess))
+      throw new Error(
+        `Unprocessed replacement variable: ${re.exec(textToProcess)}`
       )
-      .replace(
-        '{MAX_OAS_INCOME}',
-        `<strong className="font-bold">${numberToStringCurrency(
-          legalValues.MAX_OAS_INCOME,
-          this.translations._locale,
-          { rounding: 0 }
-        )}</strong>`
-      )
-      .replace(
-        '{LINK_SERVICE_CANADA}',
-        `<a href="${this.translations.links.SC.url}" target="_blank">${this.translations.links.SC.text}</a>`
-      )
-      .replace(
-        '{LINK_SOCIAL_AGREEMENT}',
-        `<a href="${this.translations.links.socialAgreement.url}" target="_blank">${this.translations.links.socialAgreement.text}</a>`
-      )
-      .replace(
-        '{LINK_OAS_DEFER}',
-        `<a href="${this.translations.links.oasDeferClickHere.url}" target="_blank">${this.translations.links.oasDeferClickHere.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_OAS}',
-        `<a href="${this.translations.links.oasReasons.url}" target="_blank">${this.translations.links.oasReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_GIS}',
-        `<a href="${this.translations.links.gisReasons.url}" target="_blank">${this.translations.links.gisReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_ALW}',
-        `<a href="${this.translations.links.alwReasons.url}" target="_blank">${this.translations.links.alwReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_AFS}',
-        `<a href="${this.translations.links.afsReasons.url}" target="_blank">${this.translations.links.afsReasons.text}</a>`
-      )
+
     return textToProcess
   }
 

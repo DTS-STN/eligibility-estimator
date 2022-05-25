@@ -55,7 +55,7 @@ export function expectOasEligible(
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(res.body.results.oas.entitlement.type).toEqual(oasType)
-  if (oasType === EntitlementResultType.FULL)
+  if (oasType === EntitlementResultType.FULL && !entitlement)
     entitlement = legalValues.MAX_OAS_ENTITLEMENT
   if (entitlement)
     expect(res.body.results.oas.entitlement.result).toEqual(entitlement)

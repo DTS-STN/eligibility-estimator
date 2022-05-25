@@ -9,6 +9,10 @@ const en: TooltipTranslations = {
     heading: 'Age',
     text: 'Please enter your current age.',
   },
+  oasAge: {
+    heading: 'OAS Deferral Age',
+    text: 'Please enter the age you would like to start receiving OAS, between 65 and 70. If you enter something over 65, this is OAS deferral. The longer you defer your pension, the higher your payments will be. If you are unsure, enter 65.',
+  },
   maritalStatus: {
     heading: 'Marital Status',
     text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Common-Law</span>: You have lived continuously with your partner in a marital-type relationship for a minimum of one year.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Divorced</span>: You are officially separated and have legally ended your marriage.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Married</span>: You and your spouse have had a ceremony that legally binds you to each other. Your marriage must be legally recognized in the country where it was performed and in Canada.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Single</span>: You have never been married and are not in a common-law relationship.</p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Surviving Partner/Widowed</span>: Your spouse has died and that you have not remarried or entered into a common-law relationship.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Separated:</span> You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled.</p>",

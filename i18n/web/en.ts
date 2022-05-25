@@ -105,6 +105,7 @@ const en: WebTranslations = {
     ageUnder18:
       'You must be at least 60 years old to receive Canadian old age benefits.',
     ageOver150: 'Your age should be less than 150.',
+    oasAge65to70: 'You must enter an age between 65 and 70.',
     partnerAgeUnder18:
       "Your partner's age must be over 18 to be able to use this tool.",
     partnerAgeOver150: "Your partner's age should be less than 150.",
