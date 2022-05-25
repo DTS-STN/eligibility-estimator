@@ -1044,6 +1044,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solosphere/decd-design-system@npm:^1.37.0":
+  version: 1.37.0
+  resolution: "@solosphere/decd-design-system@npm:1.37.0"
+  dependencies:
+    prop-types: ^15.7.2
+    react: ^17.0.2
+    react-app-polyfill: ^3.0.0
+    react-dom: ^17.0.2
+    user: ^0.0.0
+  checksum: c6d47c1d55a2579330fbbdb27c0510466e3fd8d73d76406d604d492a5f71ec10f69f0984b256a7a28ebf8b9cdf2dde914d198f3bac22411824ec88512eb551f4
+  languageName: node
+  linkType: hard
+
 "@tailwindcss/forms@npm:^0.5.0":
   version: 0.5.0
   resolution: "@tailwindcss/forms@npm:0.5.0"
@@ -2727,6 +2740,7 @@ __metadata:
     "@babel/core": ^7.17.9
     "@dts-stn/decd-design-system": ^1.36.0
     "@headlessui/react": ^1.5.0
+    "@solosphere/decd-design-system": ^1.37.0
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/dom": ^8.13.0
     "@testing-library/jest-dom": ^5.16.4
