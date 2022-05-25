@@ -28,6 +28,7 @@ export interface Translations {
     invalid: string
   }
   question: { [key in FieldKey]: string }
+  questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     legalStatus: KeyAndText[]
     maritalStatus: KeyAndText[]

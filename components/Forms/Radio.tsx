@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
 import { useTranslation } from '../Hooks'
+import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -9,6 +10,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string
   checkedValue?: string
   error?: string
+  showTooltip?: boolean
 }
 
 /**
@@ -17,7 +19,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
-  const { name, label, checkedValue, onChange, values, keyforid, error } = props
+  const {
+    name,
+    label,
+    checkedValue,
+    onChange,
+    values,
+    keyforid,
+    error,
+    showTooltip,
+  } = props
   const requiredText = useTranslation<string>('required')
 
   return (
@@ -36,6 +47,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         </label>
         <span>
           <span className="ml-1">({requiredText})</span>
+          {showTooltip && <Tooltip field={name} />}
         </span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}
@@ -60,7 +72,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
             htmlFor={`${keyforid}-${index}`}
             className="radio flex items-center"
           >
-            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
+            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white"></span>
             <p className="text-content ">{val.text}</p>
           </label>
         </div>

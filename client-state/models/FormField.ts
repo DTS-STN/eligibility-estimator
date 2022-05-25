@@ -15,6 +15,7 @@ export const FormField = types
     key: types.string,
     type: types.string,
     label: types.string,
+    helpText: types.string,
     category: Category,
     order: types.number,
     placeholder: types.maybe(types.string),
@@ -72,9 +73,3 @@ export const FormField = types
       yield (getParent(self, 2) as Instance<typeof Form>).sendAPIRequest() // the form field is 2 children from the form e.g. Form -> fields Object -> current form field instance
     }),
   }))
-
-// handleChange: flow(function* (e) {
-//   const inputVal = e?.target?.value ?? { key: e.value, text: e.label }
-//   self.setValue(inputVal)
-//   yield (getParent(self, 2) as Instance<typeof Form>).sendAPIRequest() // the form field is 2 children from the form e.g. Form -> fields Object -> current form field instance
-// }),

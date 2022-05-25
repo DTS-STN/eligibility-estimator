@@ -156,6 +156,7 @@ interface FieldDataGeneric {
   key: FieldKey
   relatedKey?: FieldKey // in case certain props should use those of another key when missing
   label?: string // applied via translator
+  helpText?: string
   category: {
     key: FieldCategory
     text?: string // applied via translator

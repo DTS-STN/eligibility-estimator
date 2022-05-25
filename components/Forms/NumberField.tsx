@@ -9,6 +9,7 @@ export interface NumberFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
+  helpText?: string
   error?: string
 }
 
@@ -19,7 +20,16 @@ export interface NumberFieldProps
  * @returns
  */
 export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
-  const { name, label, required, value, placeholder, onChange, error } = props
+  const {
+    name,
+    label,
+    required,
+    value,
+    placeholder,
+    onChange,
+    helpText,
+    error,
+  } = props
   const requiredText = useTranslation<string>('required')
 
   // only need to run this once at component render, so no need for deps
@@ -44,15 +54,21 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         >
           {label}
         </label>
+
         <span>
           {required && <span className="ml-1">({requiredText})</span>}
         </span>
+        {helpText && (
+          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
+            {helpText}
+          </div>
+        )}
       </div>
       {error && <ErrorLabel errorMessage={error} />}
       <NumberFormat
         id={name}
         name={name}
-        className={`form-control text-content border-[#333] ${
+        className={`form-control text-content border-form-border ${
           error ? ' border-danger' : ''
         }`}
         data-testid="number-input"

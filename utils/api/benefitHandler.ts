@@ -449,6 +449,10 @@ export class BenefitHandler {
       if (!label) throw new Error(`no question for key ${fieldData.key}`)
       fieldData.label = label
 
+      // translate question help text
+      const helpText = this.translations.questionHelp[fieldData.key]
+      fieldData.helpText = helpText || ''
+
       // translate values/questionOptions
       if (
         fieldData.type === FieldType.DROPDOWN ||
@@ -470,7 +474,6 @@ export class BenefitHandler {
 
       return fieldData
     })
-
     return fieldDataList
   }
 

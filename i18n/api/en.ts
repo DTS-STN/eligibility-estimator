@@ -27,7 +27,7 @@ const en: Translations = {
   },
   question: {
     income: 'What is your current annual net income in Canadian dollars?',
-    age: 'What is your current age?',
+    age: 'How old are you?',
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country are you currently living in?',
     legalStatus: 'What is your current legal status in Canada?',
@@ -48,6 +48,13 @@ const en: Translations = {
       'Since the age of 18, how many years has your partner lived in Canada?',
     partnerEverLivedSocialCountry:
       'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
+  },
+  questionHelp: {
+    age: 'You can enter your current age, or a future age for planning purposes.',
+    income:
+      'You can find your net income on line 23600 of your personal income tax return (T1).',
+    yearsInCanadaSince18:
+      'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
   questionOptions: {
     legalStatus: [

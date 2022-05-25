@@ -102,10 +102,12 @@ export const Form = types
 
         let placeholder,
           defaultValue,
-          options = undefined
+          options = undefined,
+          helpText = undefined
         if ('default' in fieldData) defaultValue = fieldData.default
         if ('placeholder' in fieldData) placeholder = fieldData.placeholder
         if ('values' in fieldData) options = fieldData.values
+        if ('helpText' in fieldData) helpText = fieldData.helpText
 
         // field does not exist, add it
         if (!field) {
@@ -122,6 +124,7 @@ export const Form = types
             default: defaultValue,
             options: options,
             value: defaultValue ?? null,
+            helpText: helpText ?? null,
           })
           self.fields.sort((a, b) => a.order - b.order)
         }
@@ -129,6 +132,7 @@ export const Form = types
         else if (field.label !== fieldData.label) {
           console.log('updating field ', fieldData.label)
           field.label = fieldData.label
+          field.helpText = fieldData.helpText
           field.category = fieldData.category
           field.options = options
           field.placeholder = placeholder

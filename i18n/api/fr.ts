@@ -29,7 +29,7 @@ const fr: Translations = {
   },
   question: {
     income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
-    age: 'Quel est votre âge actuel?',
+    age: 'Quel âge avez-vous?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous actuellement?',
     legalStatus: 'Quel est votre statut légal actuel au Canada?',
@@ -52,6 +52,12 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
       'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
+  },
+  questionHelp: {
+    age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
+    income:
+      'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
+    yearsInCanadaSince18: `Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.`,
   },
   questionOptions: {
     legalStatus: [
