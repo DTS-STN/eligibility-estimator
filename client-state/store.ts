@@ -24,10 +24,17 @@ export const EligibilityResult = types.model({
   result: types.maybe(types.enumeration(Object.values(ResultKey))),
 })
 
+export const DeferralResult = types.model({
+  increase: types.maybe(types.number),
+  years: types.maybe(types.number),
+})
+
 export const EntitlementResult = types.model({
   type: types.maybe(types.enumeration(Object.values(EntitlementResultType))),
   result: types.maybe(types.number),
+  resultAt75: types.maybe(types.number),
   clawback: types.maybe(types.number),
+  deferral: types.maybe(DeferralResult),
 })
 
 export const Eligibility = types.model({
