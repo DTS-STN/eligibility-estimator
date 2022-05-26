@@ -34,6 +34,8 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   const input = root.getInputObject()
   input._language = locale
+  // TODO: Remove this placeholder
+  input.oasAge = 66
   const data = new MainHandler(input).results
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard

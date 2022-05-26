@@ -130,10 +130,10 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
-      // oasAge:
-      //   this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
-      //     ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
-      //     : this.rawInput.oasAge,
+      oasAge:
+        this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
+          ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
+          : this.rawInput.oasAge,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -151,7 +151,7 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
-      // oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
+      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
