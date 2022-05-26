@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useCallback, useContext, useEffect, useState, useRef } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { webDictionary, WebTranslations } from '../../i18n/web'
 import { RootStoreContext } from '../Contexts'
 
