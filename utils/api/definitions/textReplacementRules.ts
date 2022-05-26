@@ -1,4 +1,5 @@
 import { numberToStringCurrency } from '../../../i18n/api'
+import { LinkKey } from '../../../i18n/api/links'
 import { BenefitHandler } from '../benefitHandler'
 import { legalValues } from '../scrapers/output'
 
@@ -41,20 +42,18 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._locale,
       { rounding: 0 }
     )}</strong>`,
-  LINK_SERVICE_CANADA: (handler) =>
-    `<a href="${handler.translations.links.SC.url}" target="_blank">${handler.translations.links.SC.text}</a>`,
+  LINK_SERVICE_CANADA: (handler) => generateLink(handler, LinkKey.SC),
   LINK_SOCIAL_AGREEMENT: (handler) =>
-    `<a href="${handler.translations.links.socialAgreement.url}" target="_blank">${handler.translations.links.socialAgreement.text}</a>`,
-  LINK_MORE_REASONS_OAS: (handler) =>
-    `<a href="${handler.translations.links.oasReasons.url}" target="_blank">${handler.translations.links.oasReasons.text}</a>`,
-  LINK_MORE_REASONS_GIS: (handler) =>
-    `<a href="${handler.translations.links.gisReasons.url}" target="_blank">${handler.translations.links.gisReasons.text}</a>`,
-  LINK_MORE_REASONS_ALW: (handler) =>
-    `<a href="${handler.translations.links.alwReasons.url}" target="_blank">${handler.translations.links.alwReasons.text}</a>`,
-  LINK_MORE_REASONS_AFS: (handler) =>
-    `<a href="${handler.translations.links.afsReasons.url}" target="_blank">${handler.translations.links.afsReasons.text}</a>`,
-  LINK_OAS_DEFER: (handler) =>
-    `<a href="${handler.translations.links.oasDeferClickHere.url}" target="_blank">${handler.translations.links.oasDeferClickHere.text}</a>`,
+    generateLink(handler, LinkKey.socialAgreement),
+  LINK_MORE_REASONS_OAS: (handler) => generateLink(handler, LinkKey.oasReasons),
+  LINK_MORE_REASONS_GIS: (handler) => generateLink(handler, LinkKey.gisReasons),
+  LINK_MORE_REASONS_ALW: (handler) => generateLink(handler, LinkKey.alwReasons),
+  LINK_MORE_REASONS_AFS: (handler) => generateLink(handler, LinkKey.afsReasons),
+  LINK_OAS_DEFER: (handler) => generateLink(handler, LinkKey.oasDeferClickHere),
   LINK_RECOVERY_TAX: (handler) =>
-    `<a href="${handler.translations.links.oasRecoveryTaxInline.url}" target="_blank">${handler.translations.links.oasRecoveryTaxInline.text}</a>`,
+    generateLink(handler, LinkKey.oasRecoveryTaxInline),
+}
+
+function generateLink(handler: BenefitHandler, linkKey: LinkKey): string {
+  return `<a href="${handler.translations.links[linkKey].url}" target="_blank">${handler.translations.links[linkKey].text}</a>`
 }
