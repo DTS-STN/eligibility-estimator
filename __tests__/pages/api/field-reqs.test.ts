@@ -19,6 +19,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: undefined,
       age: undefined,
+      oasAge: undefined,
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -50,6 +51,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: undefined,
+      oasAge: undefined,
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -80,6 +82,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -97,6 +100,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -109,6 +113,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: undefined,
       legalStatus: undefined,
@@ -127,6 +132,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -141,6 +147,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       livingCountry: LivingCountry.CANADA,
       legalStatus: undefined,
@@ -158,6 +165,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -172,6 +180,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: undefined,
@@ -187,6 +196,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -201,6 +211,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -216,6 +227,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -231,6 +243,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -246,6 +259,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -262,6 +276,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -276,6 +291,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -292,6 +308,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -305,6 +322,7 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([FieldKey.PARTNER_INCOME])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -321,6 +339,7 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       canadaWholeLife: false,
@@ -334,6 +353,7 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -352,6 +372,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       canadaWholeLife: false,
@@ -363,6 +384,7 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([FieldKey.YEARS_IN_CANADA_SINCE_18])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -376,6 +398,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       canadaWholeLife: false,
@@ -387,6 +410,7 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -401,6 +425,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -413,6 +438,7 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,
@@ -427,6 +453,7 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.MARRIED,
       ...canadian,
       ...canadaWholeLife,
@@ -439,6 +466,7 @@ describe('field requirements analysis: conditional fields', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_AGE,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.CANADA_WHOLE_LIFE,

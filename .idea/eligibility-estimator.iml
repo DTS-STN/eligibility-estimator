@@ -12,7 +12,10 @@
       <excludeFolder url="file://$MODULE_DIR$/.husky/_" />
       <excludeFolder url="file://$MODULE_DIR$/.vscode" />
       <excludeFolder url="file://$MODULE_DIR$/.yarn" />
+      <excludeFolder url="file://$MODULE_DIR$/out" />
       <excludePattern pattern=".eslintcache" />
+      <excludePattern pattern="yarn-error.log" />
+      <excludePattern pattern="LICENSE" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

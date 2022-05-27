@@ -36,6 +36,12 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.ageUnder18)
     .max(150)
     .message(ValidationErrors.ageOver150),
+  oasAge: Joi.number()
+    .integer()
+    .min(65)
+    .message(ValidationErrors.oasAge65to70)
+    .max(70)
+    .message(ValidationErrors.oasAge65to70),
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
