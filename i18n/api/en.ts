@@ -5,6 +5,7 @@ import {
   Locale,
   MaritalStatus,
   PartnerBenefitStatus,
+  OutsideCanada,
 } from '../../utils/api/definitions/enums'
 import { livingCountry } from './countries/en'
 import { Translations } from './index'
@@ -52,7 +53,7 @@ const en: Translations = {
     partnerLivingCountry: 'What country is your partner currently living in?',
     partnerLegalStatus: "What is your partner's current legal status?",
     partnerCanadaWholeLife:
-      'Since the age of 18, has your partner only lived in Canada?',
+      'Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?',
     partnerYearsInCanadaSince18:
       'Since the age of 18, how many years has your partner lived in Canada?',
     partnerEverLivedSocialCountry:
@@ -84,12 +85,22 @@ const en: Translations = {
     ],
     canadaWholeLife: [
       {
-        key: 'no',
+        key: OutsideCanada.NO,
         text: 'No, I have not lived outside of Canada for longer than 6 months',
       },
       {
-        key: 'yes',
+        key: OutsideCanada.YES,
         text: 'Yes, I have lived outside of Canada for longer than 6 months',
+      },
+    ],
+    partnerCanadaWholeLife: [
+      {
+        key: OutsideCanada.NO,
+        text: 'No, my partner has not lived outside of Canada for longer than 6 months',
+      },
+      {
+        key: OutsideCanada.YES,
+        text: 'Yes, my partner has lived outside of Canada for longer than 6 months',
       },
     ],
     maritalStatus: [

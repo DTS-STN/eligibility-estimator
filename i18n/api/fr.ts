@@ -7,6 +7,7 @@ import {
   Locale,
   MaritalStatus,
   PartnerBenefitStatus,
+  OutsideCanada,
 } from '../../utils/api/definitions/enums'
 import { livingCountry } from './countries/fr'
 import { Translations } from './index'
@@ -55,7 +56,7 @@ const fr: Translations = {
     partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
     partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
     partnerCanadaWholeLife:
-      "Depuis l'âge de 18 ans, est-ce que votre conjoint a seulement habité au Canada?",
+      "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
     partnerYearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
@@ -90,12 +91,22 @@ const fr: Translations = {
     ],
     canadaWholeLife: [
       {
-        key: 'no',
+        key: OutsideCanada.NO,
         text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
       {
-        key: 'yes',
+        key: OutsideCanada.YES,
         text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+      },
+    ],
+    partnerCanadaWholeLife: [
+      {
+        key: OutsideCanada.NO,
+        text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+      },
+      {
+        key: OutsideCanada.YES,
+        text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
     ],
     maritalStatus: [

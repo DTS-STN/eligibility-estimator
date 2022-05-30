@@ -105,7 +105,6 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   const generateCardsValid = () => {
     const inputs = root.getInputObject()
     const cardsValidObj = {}
-
     Object.keys(keyStepMap).forEach((step, index) => {
       const stepKeys = keyStepMap[step].keys
       const someKeysPresent = stepKeys.some((key) => inputs[key])

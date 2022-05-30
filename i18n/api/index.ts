@@ -40,6 +40,7 @@ export interface Translations {
   questionOptions: {
     legalStatus: TypedKeyAndText<LegalStatus>[]
     canadaWholeLife: KeyAndText[]
+    partnerCanadaWholeLife: KeyAndText[]
     maritalStatus: TypedKeyAndText<MaritalStatus>[]
     partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
