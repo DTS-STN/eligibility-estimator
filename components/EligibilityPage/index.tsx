@@ -34,8 +34,6 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   const input = root.getInputObject()
   input._language = locale
-  // TODO: Remove this placeholder
-  input.oasAge = 66
   const data = new MainHandler(input).results
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
@@ -64,7 +62,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     step1: {
       title: tsln.category.age,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.incomeDetails}`,
-      keys: ['age'],
+      keys: ['age', 'oasAge'],
     },
     step2: {
       title: tsln.category.incomeDetails,
