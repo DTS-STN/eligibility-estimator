@@ -15,7 +15,7 @@ export const FormField = types
     key: types.string,
     type: types.string,
     label: types.string,
-    helpText: types.string,
+    helpText: types.maybe(types.string),
     category: Category,
     order: types.number,
     placeholder: types.maybe(types.string),

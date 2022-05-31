@@ -65,7 +65,6 @@ describe('test the mobx state tree nodes', () => {
       key: 'income',
       type: 'currency',
       label: 'What is your net annual income?',
-      helpText: '',
       category: {
         key: 'incomeDetails',
         text: 'Income Details',
@@ -122,7 +121,6 @@ describe('test the mobx state tree nodes', () => {
       key: 'income',
       type: 'currency',
       label: 'What is your current annual net income in Canadian Dollars?',
-      helpText: '',
       category: { key: 'incomeDetails', text: 'Income Details' },
       order: 1,
       placeholder: '$20,000',
