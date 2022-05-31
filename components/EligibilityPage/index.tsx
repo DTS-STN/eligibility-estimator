@@ -103,6 +103,10 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     },
   }
 
+  /**
+   * Checks the validity of all steps.
+   * If a step has an error or is missing a field, it will be invalid.
+   */
   function getStepValidity(): StepValidity {
     const inputs = root.getInputObject()
     return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
@@ -128,11 +132,17 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   const [cardsValid, setCardsValid] = useState(getStepValidity())
 
+  /**
+   * On every change to a field, this will check the validity of all fields.
+   */
   function handleOnChange(step: Steps, field: FormFieldType, event) {
     field.handleChange(event)
     setCardsValid(getStepValidity())
   }
 
+  /**
+   * Generates the raw HTML for each field (aka. child).
+   */
   function generateChildren(step: Steps, keys: FieldKey[]): CardChildren {
     const fields: FormFieldType[] = form.fields.filter((field) =>
       keys.includes(field.key)
@@ -249,6 +259,10 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     })
   }
 
+  /**
+   * Submits the form, saves inputs, and navigates to the results page.
+   * This happens only when all fields are filled, and there are no errors.
+   */
   function submitForm(e) {
     e.preventDefault()
     if (!form.validateAgainstEmptyFields(router.locale) && !form.hasErrors) {
@@ -257,6 +271,10 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     }
   }
 
+  /**
+   * Generates the card configuration.
+   * Each card will contain children. Each child represents a field and contains its HTML.
+   */
   function generateCards(): Card[] {
     return Object.keys(keyStepMap).map((step: Steps, index) => {
       const cardConfig: CardConfig = keyStepMap[step]
