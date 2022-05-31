@@ -8,7 +8,9 @@ import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
-import { FieldType } from '../../utils/api/definitions/fields'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { FieldCategory } from '../../utils/api/definitions/enums'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
 import { NumberField } from '../Forms/NumberField'
@@ -58,45 +60,42 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     root.setSummary(data.summary)
   }
 
-  const keyStepMap = {
+  // allFieldData is the full configuration for ALL fields - not only the visible ones.
+  const allFieldData = BenefitHandler.getAllFieldData(root.langBrowser)
+
+  function getKeysByCategory(category: FieldCategory): FieldKey[] {
+    return allFieldData
+      .filter((value) => value.category.key === category)
+      .map((value) => value.key)
+  }
+
+  const keyStepMap: {
+    [x in string]: { title: string; buttonLabel: string; keys: string[] }
+  } = {
     step1: {
       title: tsln.category.age,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.incomeDetails}`,
-      keys: ['age', 'oasAge'],
+      keys: getKeysByCategory(FieldCategory.AGE),
     },
     step2: {
       title: tsln.category.incomeDetails,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.legalStatus}`,
-      keys: ['income', 'skipIncome'],
+      keys: getKeysByCategory(FieldCategory.INCOME),
     },
     step3: {
       title: tsln.category.legalStatus,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.residence}`,
-      keys: ['legalStatus'],
+      keys: getKeysByCategory(FieldCategory.LEGAL),
     },
     step4: {
       title: tsln.category.residence,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.marital}`,
-      keys: [
-        'livingCountry',
-        'livedOutsideCanada',
-        'yearsInCanadaSince18',
-        'everLivedSocialCountry',
-      ],
+      keys: getKeysByCategory(FieldCategory.RESIDENCE),
     },
     step5: {
       title: tsln.category.marital,
       buttonLabel: tsln.getEstimate,
-      keys: [
-        'maritalStatus',
-        'partnerBenefitStatus',
-        'partnerAge',
-        'partnerLivingCountry',
-        'partnerLegalStatus',
-        'partnerLivedOutsideCanada',
-        'partnerYearsInCanadaSince18',
-        'partnerIncome',
-      ],
+      keys: getKeysByCategory(FieldCategory.MARITAL),
     },
   }
 

@@ -31,18 +31,18 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -63,17 +63,17 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
-      FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -93,18 +93,18 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -124,22 +124,22 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -160,19 +160,19 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -191,19 +191,19 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -222,20 +222,20 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -254,21 +254,21 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -286,21 +286,21 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -323,15 +323,15 @@ describe('field requirement analysis', () => {
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -354,15 +354,15 @@ describe('field requirement analysis', () => {
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 })
@@ -385,11 +385,11 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -411,12 +411,12 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -439,12 +439,12 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.INCOME,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -461,19 +461,19 @@ describe('field requirements analysis: conditional fields', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.OAS_AGE,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.INCOME,
+      FieldKey.LEGAL_STATUS,
+      FieldKey.LIVING_COUNTRY,
+      FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 })

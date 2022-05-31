@@ -22,9 +22,11 @@ const fr: Translations = {
     afs: 'Allocation au survivant',
   },
   category: {
-    [FieldCategory.PERSONAL_INFORMATION]: 'Vos renseignements',
-    [FieldCategory.OAS_DEFERRAL]: 'Report de la SV',
-    [FieldCategory.PARTNER_INFORMATION]: 'Les renseignements de votre conjoint',
+    [FieldCategory.AGE]: 'Âge',
+    [FieldCategory.INCOME]: 'Revenu',
+    [FieldCategory.LEGAL]: 'Statut légal',
+    [FieldCategory.RESIDENCE]: 'Historique des résidences',
+    [FieldCategory.MARITAL]: 'État civil',
   },
   result: {
     eligible: 'Admissible',

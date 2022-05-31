@@ -5,6 +5,7 @@ import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
 import {
   EntitlementResultType,
+  Language,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -75,7 +76,10 @@ export class BenefitHandler {
 
   get fieldData(): FieldData[] {
     if (this._fieldData === undefined) {
-      this._fieldData = this.getFieldData()
+      this._fieldData = BenefitHandler.getFieldData(
+        this.requiredFields,
+        this.translations
+      )
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
@@ -409,27 +413,32 @@ export class BenefitHandler {
   }
 
   /**
-   * Accepts a list of requiredFields, transforms that into a full list of field configurations for the frontend to use.
+   * Accepts a list of FieldKeys, transforms that into a full list of field configurations for the frontend to use.
    */
-  private getFieldData(): FieldData[] {
+  static getFieldData(
+    fields: FieldKey[],
+    translations: Translations
+  ): FieldData[] {
     // takes list of keys, builds list of definitions
-    const fieldDataList = this.requiredFields.map((x) => fieldDefinitions[x])
+    const fieldDataList = fields
+      .sort(this.sortFields)
+      .map((x) => fieldDefinitions[x])
 
     // applies translations
     fieldDataList.map((fieldData) => {
       // translate category
-      const category = this.translations.category[fieldData.category.key]
+      const category = translations.category[fieldData.category.key]
       if (!category)
         throw new Error(`no category for key ${fieldData.category}`)
       fieldData.category.text = category
 
       // translate label/question
-      const label = this.translations.question[fieldData.key]
+      const label = translations.question[fieldData.key]
       if (!label) throw new Error(`no question for key ${fieldData.key}`)
       fieldData.label = label
 
       // translate question help text
-      const helpText = this.translations.questionHelp[fieldData.key]
+      const helpText = translations.questionHelp[fieldData.key]
       fieldData.helpText = helpText || ''
 
       // translate values/questionOptions
@@ -439,11 +448,10 @@ export class BenefitHandler {
         fieldData.type === FieldType.RADIO
       ) {
         // looks up using the main key first
-        let questionOptions = this.translations.questionOptions[fieldData.key]
+        let questionOptions = translations.questionOptions[fieldData.key]
         if (!questionOptions)
           // if that fails, uses the relatedKey instead
-          questionOptions =
-            this.translations.questionOptions[fieldData.relatedKey]
+          questionOptions = translations.questionOptions[fieldData.relatedKey]
         if (!questionOptions)
           throw new Error(
             `no questionOptions for key ${fieldData.key} or relatedKey ${fieldData.relatedKey}`
@@ -463,9 +471,20 @@ export class BenefitHandler {
   }
 
   /**
+   * Returns the field data for all fields.
+   * This is so that the UI can be aware of everything right away, rather than waiting for inputs to know the upcoming fields.
+   */
+  static getAllFieldData(language: Language): FieldData[] {
+    return this.getFieldData(Object.values(FieldKey), getTranslations(language))
+  }
+
+  /**
    * Sorts fields by the order specified in fieldDefinitions.
    */
   static sortFields(a: string, b: string): number {
-    return fieldDefinitions[a].order - fieldDefinitions[b].order
+    const keyList = Object.keys(fieldDefinitions)
+    const indexA = keyList.findIndex((value) => value === a)
+    const indexB = keyList.findIndex((value) => value === b)
+    return indexA - indexB
   }
 }

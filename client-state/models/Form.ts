@@ -6,6 +6,7 @@ import {
   webDictionary,
   WebTranslations,
 } from '../../i18n/web'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldData } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
@@ -119,14 +120,13 @@ export const Form = types
               key: fieldData.category.key,
               text: fieldData.category.text,
             },
-            order: fieldData.order,
             placeholder: placeholder,
             default: defaultValue,
             options: options,
             value: defaultValue ?? null,
             helpText: helpText ?? null,
           })
-          self.fields.sort((a, b) => a.order - b.order)
+          self.fields.sort(BenefitHandler.sortFields)
         }
         // field does exist, update if any data has changed
         else if (field.label !== fieldData.label) {

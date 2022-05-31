@@ -1,7 +1,9 @@
 export enum FieldCategory {
-  PERSONAL_INFORMATION = 'personalInformation',
-  OAS_DEFERRAL = 'oasDeferral',
-  PARTNER_INFORMATION = 'partnerInformation',
+  AGE = 'age',
+  INCOME = 'income',
+  LEGAL = 'legal',
+  RESIDENCE = 'residence',
+  MARITAL = 'marital',
 }
 
 export enum MaritalStatus {

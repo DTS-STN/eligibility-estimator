@@ -20,9 +20,11 @@ const en: Translations = {
     afs: 'Allowance for the Survivor',
   },
   category: {
-    [FieldCategory.PERSONAL_INFORMATION]: 'Your information',
-    [FieldCategory.OAS_DEFERRAL]: 'OAS deferral',
-    [FieldCategory.PARTNER_INFORMATION]: "Your partner's information",
+    [FieldCategory.AGE]: 'Age',
+    [FieldCategory.INCOME]: 'Income',
+    [FieldCategory.LEGAL]: 'Legal status',
+    [FieldCategory.RESIDENCE]: 'Residence history',
+    [FieldCategory.MARITAL]: 'Marital status',
   },
   result: {
     eligible: 'Eligible',
