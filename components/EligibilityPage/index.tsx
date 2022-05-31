@@ -103,37 +103,34 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     },
   }
 
-  const [cardsValid, setCardsValid] = useState(null)
-
-  function generateCardsValid(): { [x in Steps]?: { isValid: boolean } } {
+  function getStepValidity(): StepValidity {
     const inputs = root.getInputObject()
     return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
       const stepKeys: FieldKey[] = keyStepMap[step].keys
-      const someKeysPresent: boolean = stepKeys.some((key) => inputs[key])
+      const stepFields: FormFieldType[] = form.fields.filter((field) =>
+        stepKeys.includes(field.key)
+      )
+      const allFieldsFilled: boolean = stepKeys.every((key) => inputs[key])
+      const allFieldsNoError: boolean = stepFields.every(
+        (field) => !field.error
+      )
       const previousStep: { isValid: boolean } = result[`step${index}`]
       const previousStepExists: boolean = previousStep !== undefined
       const previousStepValid: boolean = previousStep?.isValid
       const isValid: boolean =
-        someKeysPresent && (!previousStepExists || previousStepValid)
+        allFieldsFilled &&
+        allFieldsNoError &&
+        (!previousStepExists || previousStepValid)
       result[step] = { isValid }
       return result
     }, {})
   }
 
-  useEffect(() => {
-    setCardsValid(generateCardsValid())
-  }, [])
+  const [cardsValid, setCardsValid] = useState(getStepValidity())
 
   function handleOnChange(step: Steps, field: FormFieldType, event) {
     field.handleChange(event)
-    const inputs = root.getInputObject()
-    const isValid = inputs[field.key] && !field.error
-
-    setCardsValid((currentCardsData) => {
-      const updatedCardsData = { ...currentCardsData }
-      updatedCardsData[step].isValid = isValid
-      return updatedCardsData
-    })
+    setCardsValid(getStepValidity())
   }
 
   function generateChildren(step: Steps, keys: FieldKey[]): CardChildren {
@@ -284,7 +281,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   return (
     <>
-      {cardsValid && (
+      {
         <div className="md:w-2/3">
           <AccordionForm
             id="mainForm"
@@ -292,7 +289,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
             cards={generateCards()}
           />
         </div>
-      )}
+      }
     </>
   )
 })
@@ -318,6 +315,8 @@ type Card = {
 type CardChildren = JSX.Element[]
 
 type FormFieldType = Instance<typeof FormField>
+
+type StepValidity = { [x in Steps]?: { isValid: boolean } }
 
 enum Steps {
   STEP_1 = 'step1',
