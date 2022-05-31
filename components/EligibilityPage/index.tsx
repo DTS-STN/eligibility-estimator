@@ -225,9 +225,6 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                   label={field.label}
                   onChange={(e) => handleOnChange(step, field, e)}
                   required
-                  showTooltip={['legalStatus', 'maritalStatus'].includes(
-                    field.key
-                  )}
                 />
               </div>
             )}

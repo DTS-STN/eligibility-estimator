@@ -10,10 +10,6 @@ export const Tooltip: React.FC<{
   size?: number
 }> = ({ field, size }) => {
   const router = useRouter()
-  const tooltipData = getTooltipTranslationByField(
-    router.locale == 'en' ? Language.EN : Language.FR,
-    field
-  )
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
 
@@ -44,6 +40,12 @@ export const Tooltip: React.FC<{
   })
 
   const isMobile = useMediaQuery(992)
+
+  const tooltipData = getTooltipTranslationByField(
+    router.locale == 'en' ? Language.EN : Language.FR,
+    field
+  )
+  if (!tooltipData) return <></>
 
   return (
     <span
@@ -131,10 +133,7 @@ export function getTooltipTranslationByField(
   field: string | FieldKey
 ): TooltipTranslation {
   const data: TooltipTranslation = getTooltipTranslations(language)[field]
-  if (!data)
-    throw new Error(
-      `Tooltip with key "${field}" not found in internationalization file.`
-    )
+  if (!data) return undefined
   if (data.useDataFromKey) {
     const relatedData = getTooltipTranslations(language)[data.useDataFromKey]
     data.text = relatedData.text
