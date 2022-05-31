@@ -10,7 +10,11 @@ import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldCategory } from '../../utils/api/definitions/enums'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import {
+  FieldData,
+  FieldKey,
+  FieldType,
+} from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
 import { NumberField } from '../Forms/NumberField'
@@ -61,7 +65,9 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   }
 
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
-  const allFieldData = BenefitHandler.getAllFieldData(root.langBrowser)
+  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
+    root.langBrowser
+  )
 
   function getKeysByCategory(category: FieldCategory): FieldKey[] {
     return allFieldData
@@ -69,30 +75,28 @@ export const EligibilityPage: React.VFC = observer(({}) => {
       .map((value) => value.key)
   }
 
-  const keyStepMap: {
-    [x in string]: { title: string; buttonLabel: string; keys: string[] }
-  } = {
-    step1: {
+  const keyStepMap: { [x in Steps]: CardConfig } = {
+    [Steps.STEP_1]: {
       title: tsln.category.age,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
     },
-    step2: {
+    [Steps.STEP_2]: {
       title: tsln.category.income,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
     },
-    step3: {
+    [Steps.STEP_3]: {
       title: tsln.category.legal,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
     },
-    step4: {
+    [Steps.STEP_4]: {
       title: tsln.category.residence,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
     },
-    step5: {
+    [Steps.STEP_5]: {
       title: tsln.category.marital,
       buttonLabel: tsln.getEstimate,
       keys: getKeysByCategory(FieldCategory.MARITAL),
@@ -101,15 +105,16 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   const [cardsValid, setCardsValid] = useState(null)
 
-  function generateCardsValid(): { [x in string]: { isValid: boolean } } {
+  function generateCardsValid(): { [x in Steps]?: { isValid: boolean } } {
     const inputs = root.getInputObject()
-    return Object.keys(keyStepMap).reduce((result, step, index) => {
-      const stepKeys: string[] = keyStepMap[step].keys
+    return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
+      const stepKeys: FieldKey[] = keyStepMap[step].keys
       const someKeysPresent: boolean = stepKeys.some((key) => inputs[key])
       const previousStep: { isValid: boolean } = result[`step${index}`]
-      const previousTrue: boolean = previousStep?.isValid
+      const previousStepExists: boolean = previousStep !== undefined
+      const previousStepValid: boolean = previousStep?.isValid
       const isValid: boolean =
-        someKeysPresent && (!previousStep || previousTrue)
+        someKeysPresent && (!previousStepExists || previousStepValid)
       result[step] = { isValid }
       return result
     }, {})
@@ -119,7 +124,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     setCardsValid(generateCardsValid())
   }, [])
 
-  function handleOnChange(step, field, event) {
+  function handleOnChange(step: Steps, field: FormFieldType, event) {
     field.handleChange(event)
     const inputs = root.getInputObject()
     const isValid = inputs[field.key] && !field.error
@@ -131,9 +136,11 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     })
   }
 
-  function generateChildren(step, keys) {
-    const fields = form.fields.filter((field) => keys.includes(field.key))
-    const children = fields.map((field) => {
+  function generateChildren(step: Steps, keys: FieldKey[]): CardChildren {
+    const fields: FormFieldType[] = form.fields.filter((field) =>
+      keys.includes(field.key)
+    )
+    return fields.map((field: FormFieldType) => {
       return (
         <div key={field.key}>
           {field.type === FieldType.NUMBER && (
@@ -243,38 +250,34 @@ export const EligibilityPage: React.VFC = observer(({}) => {
         </div>
       )
     })
-
-    return { [step]: children }
   }
 
-  function generateCards() {
-    return Object.keys(keyStepMap).map((step, index) => {
-      const cardMeta = keyStepMap[step]
-      const children = generateChildren(step, cardMeta.keys) // ex. ("step1", ["age"])
+  function submitForm(e) {
+    e.preventDefault()
+    if (!form.validateAgainstEmptyFields(router.locale) && !form.hasErrors) {
+      root.saveStoreState()
+      router.push('/results')
+    }
+  }
 
-      const card = {
+  function generateCards(): Card[] {
+    return Object.keys(keyStepMap).map((step: Steps, index) => {
+      const cardConfig: CardConfig = keyStepMap[step]
+      const children = generateChildren(step, cardConfig.keys)
+      const card: Card = {
         id: step,
-        title: cardMeta.title,
-        buttonLabel: cardMeta.buttonLabel,
-        children: children[step],
+        title: cardConfig.title,
+        buttonLabel: cardConfig.buttonLabel,
+        children,
       }
 
-      if (index === Object.keys(keyStepMap).length - 1) {
+      const processingLastCard = index === Object.keys(keyStepMap).length - 1
+      if (processingLastCard) {
         return {
           ...card,
-          buttonOnChange: (e) => {
-            e.preventDefault()
-            if (
-              !form.validateAgainstEmptyFields(router.locale) &&
-              !form.hasErrors
-            ) {
-              root.saveStoreState()
-              router.push('/results')
-            }
-          },
+          buttonOnChange: submitForm,
         }
       }
-
       return card
     })
   }
@@ -295,9 +298,31 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 })
 
 function getPlaceholderForSelect(
-  field: Instance<typeof FormField>,
+  field: FormFieldType,
   tsln: WebTranslations
 ): string {
   const text: string = tsln.selectText[field.key]
   return text ?? tsln.selectText.default
+}
+
+type CardConfig = { title: string; buttonLabel: string; keys: FieldKey[] }
+
+type Card = {
+  children: CardChildren
+  id: string
+  title: string
+  buttonLabel: string
+  buttonOnChange?: (e) => void
+}
+
+type CardChildren = JSX.Element[]
+
+type FormFieldType = Instance<typeof FormField>
+
+enum Steps {
+  STEP_1 = 'step1',
+  STEP_2 = 'step2',
+  STEP_3 = 'step3',
+  STEP_4 = 'step4',
+  STEP_5 = 'step5',
 }
