@@ -114,9 +114,6 @@ export function getWebTranslations(language: Language): WebTranslations {
  * Takes an input string, and applies variable replacements according to the current language.
  */
 export function applyReplacements(input: string, language: Language): string {
-  console.log('inside APPLY REPLACEMENTS')
-  console.log(`input`, input)
-  console.log(`language`, language)
   const locale = language === Language.EN ? Locale.EN : Locale.FR
   return input.replace(
     '{MAX_OAS_INCOME}',
