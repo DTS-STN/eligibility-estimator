@@ -93,7 +93,6 @@ export enum ValidationErrors {
   incomeTooHigh = 'incomeTooHigh',
   partnerIncomeTooHigh = 'partnerIncomeTooHigh',
   partnerIncomeBelowZero = 'partnerIncomeBelowZero',
-  age = 'age',
   ageUnder18 = 'ageUnder18',
   ageOver150 = 'ageOver150',
   oasAge65to70 = 'oasAge65to70',
