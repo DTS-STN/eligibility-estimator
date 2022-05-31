@@ -11,7 +11,6 @@ import {
   MaritalStatus,
   ResultKey,
   ResultReason,
-  OutsideCanada,
 } from '../../../utils/api/definitions/enums'
 import {
   FieldDataDropdown,
@@ -185,7 +184,7 @@ describe('sanity checks', () => {
   it('fails when years in Canada is greater than age minus 18', async () => {
     const res = await mockGetRequestError({
       age: 65,
-      canadaWholeLife: OutsideCanada.YES,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 48,
     })
     expect(res.status).toEqual(400)
@@ -194,7 +193,7 @@ describe('sanity checks', () => {
   it('accepts when years in Canada is equal to age minus 18', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
-      canadaWholeLife: OutsideCanada.YES,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 47,
     })
     expect(res.status).toEqual(200)

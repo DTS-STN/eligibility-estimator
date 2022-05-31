@@ -1,21 +1,21 @@
+import { AccordionForm, Message } from '@dts-stn/decd-design-system'
 import { debounce } from 'lodash'
 import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { Form } from '../../client-state/models/Form'
 import type { FormField } from '../../client-state/models/FormField'
 import { RootStore } from '../../client-state/store'
 import { WebTranslations } from '../../i18n/web'
 import { FieldType } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { CurrencyField } from '../Forms/CurrencyField'
 import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
-import { AccordionForm, Message } from '@dts-stn/decd-design-system'
+import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -79,7 +79,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
       buttonLabel: `${tsln.nextStep} - ${tsln.category.marital}`,
       keys: [
         'livingCountry',
-        'canadaWholeLife',
+        'livedOutsideCanada',
         'yearsInCanadaSince18',
         'everLivedSocialCountry',
       ],
@@ -93,7 +93,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
         'partnerAge',
         'partnerLivingCountry',
         'partnerLegalStatus',
-        'partnerCanadaWholeLife',
+        'partnerLivedOutsideCanada',
         'partnerYearsInCanadaSince18',
         'partnerIncome',
       ],

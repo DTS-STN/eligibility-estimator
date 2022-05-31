@@ -7,7 +7,6 @@ import {
   Locale,
   MaritalStatus,
   PartnerBenefitStatus,
-  OutsideCanada,
 } from '../../utils/api/definitions/enums'
 import { livingCountry } from './countries/fr'
 import { Translations } from './index'
@@ -42,7 +41,7 @@ const fr: Translations = {
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous?',
     legalStatus: 'Quel est votre statut légal au Canada?',
-    canadaWholeLife:
+    livedOutsideCanada:
       "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
     yearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
@@ -55,7 +54,7 @@ const fr: Translations = {
     partnerAge: "Quel est l'âge actuel de votre conjoint?",
     partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
     partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
-    partnerCanadaWholeLife:
+    partnerLivedOutsideCanada:
       "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
     partnerYearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
@@ -89,23 +88,23 @@ const fr: Translations = {
         text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
       },
     ],
-    canadaWholeLife: [
+    livedOutsideCanada: [
       {
-        key: OutsideCanada.NO,
+        key: false,
         text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
       {
-        key: OutsideCanada.YES,
+        key: true,
         text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
     ],
-    partnerCanadaWholeLife: [
+    partnerLivedOutsideCanada: [
       {
-        key: OutsideCanada.NO,
+        key: false,
         text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
       {
-        key: OutsideCanada.YES,
+        key: true,
         text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
     ],

@@ -29,7 +29,7 @@ const en: TooltipTranslations = {
     heading: 'Legal Status',
     text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen who was themselves either born in Canada or granted citizenship) or you have applied for a grant of citizenship and have received Canadian citizenship.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (non-sponsored immigrant):</span> You have been given permanent resident status by immigrating to Canada, but is not a Canadian citizen.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (sponsored immigrant):</span> You are a foreign national who has applied for permanent residence under the Family Class, has an approved Canadian sponsor, and meets the requirements of the Family Class.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Indian status or status card:</span> You are registered as an Indian under the Indian Act.</p>",
   },
-  canadaWholeLife: {
+  livedOutsideCanada: {
     heading: 'Residency in Canada',
     text: 'Note that periods where you resided in a foreign country for less than 6 months do not count',
   },
@@ -53,8 +53,8 @@ const en: TooltipTranslations = {
   partnerLegalStatus: {
     useDataFromKey: 'legalStatus',
   },
-  partnerCanadaWholeLife: {
-    useDataFromKey: 'canadaWholeLife',
+  partnerLivedOutsideCanada: {
+    useDataFromKey: 'livedOutsideCanada',
   },
   partnerYearsInCanadaSince18: {
     useDataFromKey: 'yearsInCanadaSince18',

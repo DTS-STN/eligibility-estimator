@@ -46,7 +46,7 @@ describe('test the mobx state tree nodes', () => {
     form.fields[0].setValue('65') //age
     form.fields[1].setValue(LivingCountry.CANADA)
     form.fields[2].setValue(LegalStatus.CANADIAN_CITIZEN)
-    form.fields[3].setValue('true') // Lived in Canada whole life
+    form.fields[3].setValue('false') // never lived outside Canada
     form.fields[4].setValue('20000') // income
     form.fields[5].setValue(MaritalStatus.SINGLE)
   }
@@ -172,6 +172,6 @@ describe('test the mobx state tree nodes', () => {
     expect(input.maritalStatus).toEqual('single')
     expect(input.livingCountry).toEqual('CAN')
     expect(input.legalStatus).toEqual('canadianCitizen')
-    expect(input.canadaWholeLife).toEqual('true')
+    expect(input.livedOutsideCanada).toEqual('false')
   })
 })

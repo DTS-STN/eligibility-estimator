@@ -8,7 +8,6 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
-  OutsideCanada,
 } from './definitions/enums'
 import {
   FieldData,
@@ -137,12 +136,11 @@ export class BenefitHandler {
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
-      canadaWholeLife: this.rawInput.canadaWholeLife,
-      // if canadaWholeLife, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18:
-        this.rawInput.canadaWholeLife === OutsideCanada.NO
-          ? 40
-          : this.rawInput.yearsInCanadaSince18,
+      livedOutsideCanada: this.rawInput.livedOutsideCanada,
+      // if not livedOutsideCanada, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: !this.rawInput.livedOutsideCanada
+        ? 40
+        : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         this.rawInput.partnerBenefitStatus
@@ -157,11 +155,10 @@ export class BenefitHandler {
         this.rawInput.partnerLivingCountry
       ),
       legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
-      canadaWholeLife: this.rawInput.partnerCanadaWholeLife,
-      yearsInCanadaSince18:
-        this.rawInput.partnerCanadaWholeLife === OutsideCanada.NO
-          ? 40
-          : this.rawInput.partnerYearsInCanadaSince18,
+      livedOutsideCanada: this.rawInput.partnerLivedOutsideCanada,
+      yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
+        ? 40
+        : this.rawInput.partnerYearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
@@ -184,9 +181,9 @@ export class BenefitHandler {
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
-      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.LIVED_OUTSIDE_CANADA,
     ]
-    if (this.input.client.canadaWholeLife === OutsideCanada.YES) {
+    if (this.input.client.livedOutsideCanada) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.age >= 65 && this.input.client.age < 70) {
@@ -212,10 +209,10 @@ export class BenefitHandler {
           FieldKey.PARTNER_AGE,
           FieldKey.PARTNER_LEGAL_STATUS,
           FieldKey.PARTNER_LIVING_COUNTRY,
-          FieldKey.PARTNER_CANADA_WHOLE_LIFE
+          FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
         )
       }
-      if (this.input.partner.canadaWholeLife === OutsideCanada.YES) {
+      if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
       if (
@@ -451,7 +448,13 @@ export class BenefitHandler {
           throw new Error(
             `no questionOptions for key ${fieldData.key} or relatedKey ${fieldData.relatedKey}`
           )
-        fieldData.values = questionOptions
+
+        fieldData.values =
+          // sometimes we use booleans as keys, this normalizes all these into strings
+          questionOptions.map((option) => ({
+            ...option,
+            key: String(option.key),
+          }))
       }
 
       return fieldData

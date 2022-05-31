@@ -5,7 +5,6 @@ import {
   Locale,
   MaritalStatus,
   PartnerBenefitStatus,
-  OutsideCanada,
 } from '../../utils/api/definitions/enums'
 import { livingCountry } from './countries/en'
 import { Translations } from './index'
@@ -40,7 +39,7 @@ const en: Translations = {
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country do you live in?',
     legalStatus: 'What is your legal status in Canada?',
-    canadaWholeLife:
+    livedOutsideCanada:
       'Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?',
     yearsInCanadaSince18:
       'Since the age of 18, how many years have you lived in Canada?',
@@ -52,7 +51,7 @@ const en: Translations = {
     partnerAge: "What is your partner's current age?",
     partnerLivingCountry: 'What country is your partner currently living in?',
     partnerLegalStatus: "What is your partner's current legal status?",
-    partnerCanadaWholeLife:
+    partnerLivedOutsideCanada:
       'Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?',
     partnerYearsInCanadaSince18:
       'Since the age of 18, how many years has your partner lived in Canada?',
@@ -83,23 +82,23 @@ const en: Translations = {
         text: 'Other (for example, temporary resident, student, temporary worker)',
       },
     ],
-    canadaWholeLife: [
+    livedOutsideCanada: [
       {
-        key: OutsideCanada.NO,
+        key: false,
         text: 'No, I have not lived outside of Canada for longer than 6 months',
       },
       {
-        key: OutsideCanada.YES,
+        key: true,
         text: 'Yes, I have lived outside of Canada for longer than 6 months',
       },
     ],
-    partnerCanadaWholeLife: [
+    partnerLivedOutsideCanada: [
       {
-        key: OutsideCanada.NO,
+        key: false,
         text: 'No, my partner has not lived outside of Canada for longer than 6 months',
       },
       {
-        key: OutsideCanada.YES,
+        key: true,
         text: 'Yes, my partner has lived outside of Canada for longer than 6 months',
       },
     ],

@@ -17,7 +17,6 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
-  OutsideCanada,
 } from './enums'
 import { FieldData, FieldKey } from './fields'
 
@@ -31,7 +30,7 @@ export interface RequestInput {
   maritalStatus: MaritalStatus
   livingCountry: string // country code
   legalStatus: LegalStatus
-  canadaWholeLife: OutsideCanada
+  livedOutsideCanada: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
@@ -39,7 +38,7 @@ export interface RequestInput {
   partnerAge: number
   partnerLivingCountry: string // country code
   partnerLegalStatus: LegalStatus
-  partnerCanadaWholeLife: OutsideCanada
+  partnerLivedOutsideCanada: boolean
   partnerYearsInCanadaSince18: number
   partnerEverLivedSocialCountry: boolean
   _language?: Language
@@ -55,7 +54,7 @@ export interface ProcessedInput {
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
-  canadaWholeLife: OutsideCanada
+  livedOutsideCanada: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper

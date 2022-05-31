@@ -5,7 +5,6 @@ import {
   LivingCountry,
   ResultKey,
   ResultReason,
-  OutsideCanada,
 } from '../../../utils/api/definitions/enums'
 import { ResponseSuccess } from '../../../utils/api/definitions/types'
 import { legalValues } from '../../../utils/api/scrapers/output'
@@ -117,7 +116,7 @@ export const partnerUndefined = {
   partnerAge: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
-  partnerCanadaWholeLife: undefined,
+  partnerLivedOutsideCanada: undefined,
   partnerYearsInCanadaSince18: undefined,
   partnerEverLivedSocialCountry: undefined,
 }
@@ -126,13 +125,13 @@ export const partnerNoHelpNeeded = {
   partnerAge: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
-  partnerCanadaWholeLife: undefined,
+  partnerLivedOutsideCanada: undefined,
   partnerYearsInCanadaSince18: undefined,
   partnerEverLivedSocialCountry: undefined,
 }
 
 export const canadaWholeLife = {
-  canadaWholeLife: OutsideCanada.NO,
+  livedOutsideCanada: false,
   yearsInCanadaSince18: undefined,
   everLivedSocialCountry: undefined,
 }

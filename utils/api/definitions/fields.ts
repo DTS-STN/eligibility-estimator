@@ -8,7 +8,7 @@ export enum FieldKey {
   MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
-  CANADA_WHOLE_LIFE = 'canadaWholeLife',
+  LIVED_OUTSIDE_CANADA = 'livedOutsideCanada',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
@@ -16,7 +16,7 @@ export enum FieldKey {
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
-  PARTNER_CANADA_WHOLE_LIFE = 'partnerCanadaWholeLife',
+  PARTNER_LIVED_OUTSIDE_CANADA = 'partnerLivedOutsideCanada',
   PARTNER_YEARS_IN_CANADA_SINCE_18 = 'partnerYearsInCanadaSince18',
   PARTNER_EVER_LIVED_SOCIAL_COUNTRY = 'partnerEverLivedSocialCountry',
 }
@@ -58,8 +58,8 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.RADIO,
     default: undefined,
   },
-  [FieldKey.CANADA_WHOLE_LIFE]: {
-    key: FieldKey.CANADA_WHOLE_LIFE,
+  [FieldKey.LIVED_OUTSIDE_CANADA]: {
+    key: FieldKey.LIVED_OUTSIDE_CANADA,
     category: { key: FieldCategory.PERSONAL_INFORMATION },
     order: 6,
     type: FieldType.RADIO,
@@ -120,9 +120,9 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.RADIO,
     default: undefined,
   },
-  [FieldKey.PARTNER_CANADA_WHOLE_LIFE]: {
-    key: FieldKey.PARTNER_CANADA_WHOLE_LIFE,
-    relatedKey: FieldKey.CANADA_WHOLE_LIFE,
+  [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: {
+    key: FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
+    relatedKey: FieldKey.LIVED_OUTSIDE_CANADA,
     category: { key: FieldCategory.PARTNER_INFORMATION },
     order: 15,
     type: FieldType.RADIO,
