@@ -101,19 +101,19 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   const [cardsValid, setCardsValid] = useState(null)
 
-  const generateCardsValid = () => {
+  function generateCardsValid(): { [x in string]: { isValid: boolean } } {
     const inputs = root.getInputObject()
-    const cardsValidObj = {}
+    const cardsValidObj: { [x in string]: { isValid: boolean } } = {}
     Object.keys(keyStepMap).forEach((step, index) => {
-      const stepKeys = keyStepMap[step].keys
-      const someKeysPresent = stepKeys.some((key) => inputs[key])
-      const previousStep = cardsValidObj[`step${index}`]
-      const previousTrue = previousStep?.isValid
+      const stepKeys: string[] = keyStepMap[step].keys
+      const someKeysPresent: boolean = stepKeys.some((key) => inputs[key])
+      const previousStep: { isValid: boolean } = cardsValidObj[`step${index}`]
+      const previousTrue: boolean = previousStep?.isValid
 
-      const isValid = someKeysPresent && (!previousStep || previousTrue)
+      const isValid: boolean =
+        someKeysPresent && (!previousStep || previousTrue)
       cardsValidObj[step] = { isValid }
     })
-
     return cardsValidObj
   }
 
@@ -121,7 +121,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     setCardsValid(generateCardsValid())
   }, [])
 
-  const handleOnChange = (step, field, event) => {
+  function handleOnChange(step, field, event) {
     field.handleChange(event)
     const inputs = root.getInputObject()
     const isValid = inputs[field.key] && !field.error
@@ -133,8 +133,8 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     })
   }
 
-  const generateCards = () => {
-    const generateChildren = (step, keys) => {
+  function generateCards() {
+    function generateChildren(step, keys) {
       const fields = form.fields.filter((field) => keys.includes(field.key))
       const children = fields.map((field) => {
         return (
@@ -305,10 +305,10 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   )
 })
 
-const getPlaceholderForSelect = (
+function getPlaceholderForSelect(
   field: Instance<typeof FormField>,
   tsln: WebTranslations
-) => {
-  let text = tsln.selectText[field.key]
-  return text ? text : tsln.selectText.default
+): string {
+  const text: string = tsln.selectText[field.key]
+  return text ?? tsln.selectText.default
 }
