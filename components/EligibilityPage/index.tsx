@@ -103,18 +103,16 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   function generateCardsValid(): { [x in string]: { isValid: boolean } } {
     const inputs = root.getInputObject()
-    const cardsValidObj: { [x in string]: { isValid: boolean } } = {}
-    Object.keys(keyStepMap).forEach((step, index) => {
+    return Object.keys(keyStepMap).reduce((result, step, index) => {
       const stepKeys: string[] = keyStepMap[step].keys
       const someKeysPresent: boolean = stepKeys.some((key) => inputs[key])
-      const previousStep: { isValid: boolean } = cardsValidObj[`step${index}`]
+      const previousStep: { isValid: boolean } = result[`step${index}`]
       const previousTrue: boolean = previousStep?.isValid
-
       const isValid: boolean =
         someKeysPresent && (!previousStep || previousTrue)
-      cardsValidObj[step] = { isValid }
-    })
-    return cardsValidObj
+      result[step] = { isValid }
+      return result
+    }, {})
   }
 
   useEffect(() => {
