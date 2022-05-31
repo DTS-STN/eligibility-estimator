@@ -74,16 +74,16 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   } = {
     step1: {
       title: tsln.category.age,
-      buttonLabel: `${tsln.nextStep} - ${tsln.category.incomeDetails}`,
+      buttonLabel: `${tsln.nextStep} - ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
     },
     step2: {
-      title: tsln.category.incomeDetails,
-      buttonLabel: `${tsln.nextStep} - ${tsln.category.legalStatus}`,
+      title: tsln.category.income,
+      buttonLabel: `${tsln.nextStep} - ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
     },
     step3: {
-      title: tsln.category.legalStatus,
+      title: tsln.category.legal,
       buttonLabel: `${tsln.nextStep} - ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
     },

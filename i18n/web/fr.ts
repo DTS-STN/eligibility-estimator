@@ -1,6 +1,7 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
+import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
@@ -69,14 +70,7 @@ const fr: WebTranslations = {
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
 
-  category: {
-    age: 'Âge',
-    incomeDetails: 'Revenu',
-    personalInformation: 'Renseignements personnels',
-    legalStatus: 'Statut légal',
-    residence: 'Historique des résidences',
-    marital: 'État civil',
-  },
+  category: apiFr.category,
 
   contactCTA:
     'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',

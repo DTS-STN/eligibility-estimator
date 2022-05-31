@@ -4,7 +4,7 @@ import {
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
 import { legalValues } from '../../utils/api/scrapers/output'
-import { numberToStringCurrency } from '../api'
+import { numberToStringCurrency, Translations } from '../api'
 import en from './en'
 import fr from './fr'
 
@@ -68,14 +68,8 @@ export type WebTranslations = {
   socialLink3: string
   socialLink4: string
   socialLink5: string
-  category: {
-    age: string
-    incomeDetails: string
-    personalInformation: string
-    legalStatus: string
-    residence: string
-    marital: string
-  }
+
+  category: Translations['category']
 
   //results page
   contactCTA: string

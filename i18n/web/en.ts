@@ -1,5 +1,6 @@
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
+import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
@@ -68,14 +69,7 @@ const en: WebTranslations = {
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
 
-  category: {
-    age: 'Age',
-    incomeDetails: 'Income',
-    personalInformation: 'Personal Information',
-    legalStatus: 'Legal Status',
-    residence: 'Residence history',
-    marital: 'Marital status',
-  },
+  category: apiEn.category,
 
   contactCTA:
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
