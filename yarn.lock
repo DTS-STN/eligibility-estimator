@@ -560,6 +560,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@getify/eslint-plugin-proper-arrows@npm:^11.0.3":
+  version: 11.0.3
+  resolution: "@getify/eslint-plugin-proper-arrows@npm:11.0.3"
+  peerDependencies:
+    eslint: ">= 7.25.0"
+  checksum: 264ffa907d279ee1e2c54d5e1a7143a5e559f01e307c182fd226cd69e7324486639b0f5eb127c1247333d39bd7f164c515b675cdf06ecfb414297ac51b4a5da2
+  languageName: node
+  linkType: hard
+
 "@hapi/hoek@npm:^9.0.0":
   version: 9.2.1
   resolution: "@hapi/hoek@npm:9.2.1"
@@ -2838,6 +2847,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.17.9
     "@dts-stn/decd-design-system": "JeremyKennedy/DECD-Design-System#fix_card_state"
+    "@getify/eslint-plugin-proper-arrows": ^11.0.3
     "@headlessui/react": ^1.5.0
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/dom": ^8.13.0

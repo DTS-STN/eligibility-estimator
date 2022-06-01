@@ -35,6 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@babel/core", "npm:7.17.9"],\
             ["@dts-stn/decd-design-system", "https://github.com/JeremyKennedy/DECD-Design-System.git#commit=14194eeb22f430119eee734f68c26ca289c5a114"],\
+            ["@getify/eslint-plugin-proper-arrows", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:11.0.3"],\
             ["@headlessui/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:1.5.0"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/dom", "npm:8.13.0"],\
@@ -1032,6 +1033,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@gar-promisify-npm-1.1.2-2343f94380-d05081e088.zip/node_modules/@gar/promisify/",\
           "packageDependencies": [\
             ["@gar/promisify", "npm:1.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@getify/eslint-plugin-proper-arrows", [\
+        ["npm:11.0.3", {\
+          "packageLocation": "./.yarn/cache/@getify-eslint-plugin-proper-arrows-npm-11.0.3-2db12ac498-264ffa907d.zip/node_modules/@getify/eslint-plugin-proper-arrows/",\
+          "packageDependencies": [\
+            ["@getify/eslint-plugin-proper-arrows", "npm:11.0.3"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:11.0.3", {\
+          "packageLocation": "./.yarn/__virtual__/@getify-eslint-plugin-proper-arrows-virtual-34792c0b41/0/cache/@getify-eslint-plugin-proper-arrows-npm-11.0.3-2db12ac498-264ffa907d.zip/node_modules/@getify/eslint-plugin-proper-arrows/",\
+          "packageDependencies": [\
+            ["@getify/eslint-plugin-proper-arrows", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:11.0.3"],\
+            ["@types/eslint", null],\
+            ["eslint", "npm:8.16.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/eslint",\
+            "eslint"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -3820,6 +3843,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eligibility-estimator-client", "workspace:."],\
             ["@babel/core", "npm:7.17.9"],\
             ["@dts-stn/decd-design-system", "https://github.com/JeremyKennedy/DECD-Design-System.git#commit=14194eeb22f430119eee734f68c26ca289c5a114"],\
+            ["@getify/eslint-plugin-proper-arrows", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:11.0.3"],\
             ["@headlessui/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:1.5.0"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/dom", "npm:8.13.0"],\

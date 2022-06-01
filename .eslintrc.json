@@ -1,6 +1,8 @@
 {
   "extends": "next",
+  "plugins": ["@getify/proper-arrows"],
   "rules": {
-    "func-style": ["error", "declaration"]
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "@getify/proper-arrows/where": ["error", { "global": true }]
   }
 }
