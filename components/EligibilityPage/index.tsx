@@ -110,12 +110,18 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   function getStepValidity(): StepValidity {
     const inputs = root.getInputObject()
     return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
-      const stepKeys: FieldKey[] = keyStepMap[step].keys
-      const stepFields: FormFieldType[] = form.fields.filter((field) =>
-        stepKeys.includes(field.key)
+      const stepKeys: FieldKey[] = keyStepMap[step].keys // all keys for a step, including keys that are not visible!
+      const visibleKeys: FieldKey[] = form.fields.map((field) => field.key) // all keys that are visible (ie. exist in the form)
+      const visibleStepKeys: FieldKey[] = stepKeys.filter(
+        (value) => visibleKeys.includes(value) // all keys for a step that are visible
       )
-      const allFieldsFilled: boolean = stepKeys.every((key) => inputs[key])
-      const allFieldsNoError: boolean = stepFields.every(
+      const allFieldsFilled: boolean = visibleStepKeys.every(
+        (key) => inputs[key]
+      )
+      const visibleStepFields: FormFieldType[] = form.fields.filter((field) =>
+        visibleStepKeys.includes(field.key)
+      )
+      const allFieldsNoError: boolean = visibleStepFields.every(
         (field) => !field.error
       )
       const previousStep: { isValid: boolean } = result[`step${index}`]
