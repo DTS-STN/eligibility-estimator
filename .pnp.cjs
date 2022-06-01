@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@babel/core", "npm:7.17.9"],\
-            ["@dts-stn/decd-design-system", "file:./.deps/dts-stn-decd-design-system-1.36.0.tgz::locator=eligibility-estimator-client%40workspace%3A."],\
+            ["@dts-stn/decd-design-system", "https://github.com/JeremyKennedy/DECD-Design-System.git#commit=14194eeb22f430119eee734f68c26ca289c5a114"],\
             ["@headlessui/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:1.5.0"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/dom", "npm:8.13.0"],\
@@ -878,14 +878,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@dts-stn/decd-design-system", [\
-        ["file:./.deps/dts-stn-decd-design-system-1.36.0.tgz::locator=eligibility-estimator-client%40workspace%3A.", {\
-          "packageLocation": "./.yarn/cache/@dts-stn-decd-design-system-file-5a7a6bc6dc-7bbcbe8919.zip/node_modules/@dts-stn/decd-design-system/",\
+        ["https://github.com/JeremyKennedy/DECD-Design-System.git#commit=14194eeb22f430119eee734f68c26ca289c5a114", {\
+          "packageLocation": "./.yarn/cache/@dts-stn-decd-design-system-https-6a4270b9cb-7bbcbe8919.zip/node_modules/@dts-stn/decd-design-system/",\
           "packageDependencies": [\
-            ["@dts-stn/decd-design-system", "file:./.deps/dts-stn-decd-design-system-1.36.0.tgz::locator=eligibility-estimator-client%40workspace%3A."],\
+            ["@dts-stn/decd-design-system", "https://github.com/JeremyKennedy/DECD-Design-System.git#commit=14194eeb22f430119eee734f68c26ca289c5a114"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-app-polyfill", "npm:3.0.0"],\
-            ["react-dom", "virtual:5a7a6bc6dc396bed544c432f91fdbeefc4b76d968c335e26760cfeeda38c556794f60707bc1b157256c78e69bdfe26f54f08b599c1f6fb4fb9afa54ff2a5b482#npm:17.0.2"],\
+            ["react-dom", "virtual:6a4270b9cbc28e90ec17f4223c6f85bdad00179e8b784c9513518049354b30d16c7feb2ff6487d31749e270e0f86242558937910ff38b30c9711f7a3e5cf35f0#npm:17.0.2"],\
             ["user", "npm:0.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -3760,7 +3760,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["eligibility-estimator-client", "workspace:."],\
             ["@babel/core", "npm:7.17.9"],\
-            ["@dts-stn/decd-design-system", "file:./.deps/dts-stn-decd-design-system-1.36.0.tgz::locator=eligibility-estimator-client%40workspace%3A."],\
+            ["@dts-stn/decd-design-system", "https://github.com/JeremyKennedy/DECD-Design-System.git#commit=14194eeb22f430119eee734f68c26ca289c5a114"],\
             ["@headlessui/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:1.5.0"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/dom", "npm:8.13.0"],\
@@ -8119,11 +8119,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:5a7a6bc6dc396bed544c432f91fdbeefc4b76d968c335e26760cfeeda38c556794f60707bc1b157256c78e69bdfe26f54f08b599c1f6fb4fb9afa54ff2a5b482#npm:17.0.2", {\
-          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-b38eebd97c/0/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",\
+        ["virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2", {\
+          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-53c6e62d95/0/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",\
           "packageDependencies": [\
-            ["react-dom", "virtual:5a7a6bc6dc396bed544c432f91fdbeefc4b76d968c335e26760cfeeda38c556794f60707bc1b157256c78e69bdfe26f54f08b599c1f6fb4fb9afa54ff2a5b482#npm:17.0.2"],\
-            ["@types/react", null],\
+            ["react-dom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2"],\
+            ["@types/react", "npm:17.0.42"],\
             ["loose-envify", "npm:1.4.0"],\
             ["object-assign", "npm:4.1.1"],\
             ["react", "npm:17.0.2"],\
@@ -8135,11 +8135,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2", {\
-          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-53c6e62d95/0/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",\
+        ["virtual:6a4270b9cbc28e90ec17f4223c6f85bdad00179e8b784c9513518049354b30d16c7feb2ff6487d31749e270e0f86242558937910ff38b30c9711f7a3e5cf35f0#npm:17.0.2", {\
+          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-5e79ee3a7c/0/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",\
           "packageDependencies": [\
-            ["react-dom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2"],\
-            ["@types/react", "npm:17.0.42"],\
+            ["react-dom", "virtual:6a4270b9cbc28e90ec17f4223c6f85bdad00179e8b784c9513518049354b30d16c7feb2ff6487d31749e270e0f86242558937910ff38b30c9711f7a3e5cf35f0#npm:17.0.2"],\
+            ["@types/react", null],\
             ["loose-envify", "npm:1.4.0"],\
             ["object-assign", "npm:4.1.1"],\
             ["react", "npm:17.0.2"],\
