@@ -137,7 +137,16 @@ export const EligibilityPage: React.VFC = observer(({}) => {
    */
   function handleOnChange(step: Steps, field: FormFieldType, event) {
     field.handleChange(event)
-    setCardsValid(getStepValidity())
+
+    // for some reason we can't just say setCardsValid(getStepValidity()) ...
+    // perhaps because the form is watching the existing object and is never passed a new one?
+    // the implementation here is technically wrong, because we should be returning a new object, not updating the existing one.
+    // see here: https://blog.logrocket.com/a-guide-to-usestate-in-react-ecb9952e406c/#usinganobjectasastatevariablewithusestatehook
+    // I think the form has some issue preventing this from working as expected!
+    setCardsValid((stepValidity) => {
+      stepValidity[step].isValid = getStepValidity()[step].isValid
+      return stepValidity
+    })
   }
 
   /**
