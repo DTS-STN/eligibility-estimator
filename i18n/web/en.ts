@@ -41,9 +41,7 @@ const en: WebTranslations = {
   applyForLabel: 'Apply for',
   required: 'required',
   homePageP1:
-    //'The Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
     'Use this estimator to find out how much money you could get from old age benefit programs. You can enter your current information, or you can enter future information for planning purposes.',
-  //homePageHeader1: 'Types of benefits programs',
   homePageHeader1: 'Who these benefits are for',
   youMayBeEligible: 'You may be eligible for old age benefits if you are:',
   atleast60: 'at least 60 years old',
