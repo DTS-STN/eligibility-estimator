@@ -14,7 +14,7 @@ export type WebTranslations = {
   _language: Language
   _locale: Locale
 
-  atleast60: string
+  atLeast60: string
   haveNetIncomeLess: string
   headerWhatToKnow: string
   pleaseNodeText: string
@@ -27,22 +27,22 @@ export type WebTranslations = {
   partnerText: string
   timeToCompleteText: string
   startBenefitsEstimator: string
-  estimatorTake5mins: string
+  estimatorTimeEstimate: string
   whatBenefitsTheEstimatorIsFor: string
   benefitAvailable: string
   learnMoreAboutOldAgeSecurity: string
-  gisDefinationText: string
-  learnMoreAboutGIS: string
-  alwDefinationText: string
+  gisDefinitionText: string
+  learnMoreAboutGis: string
+  alwDefinitionText: string
   learnMoreAboutAlw: string
-  afsDefinationText: string
+  afsDefinitionText: string
   learnMoreAboutAfs: string
   notIncludeCPP: string
   learnMoreAboutCpp: string
   aboutResultText: string
-  resultDefination: string
+  resultDefinition: string
   privacyHeading: string
-  privacyDefination: string
+  privacyDefinition: string
   oas: string
   gis: string
   alw: string

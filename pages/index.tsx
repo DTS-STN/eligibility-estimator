@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                 src="/green-check-mark.svg"
                 alt={'green check mark'}
               />
-              <p className="ml-2">{tsln.atleast60}</p>
+              <p className="ml-2">{tsln.atLeast60}</p>
             </div>
             <div className="flex">
               <img
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
           <h2 className="text-xs sm:h2 mt-8 sm:mt-12 mb-2">
             {tsln.timeToCompleteText}
           </h2>
-          <p className="sm:w-3/5">{tsln.estimatorTake5mins}</p>
+          <p className="sm:w-3/5">{tsln.estimatorTimeEstimate}</p>
 
           <div className="flex justify-start mt-8 sm:mt-12">
             <Button
@@ -105,21 +105,21 @@ const Home: NextPage = () => {
             />
 
             <h3 className="h3 mt-6 mb-2">{tsln.gis}</h3>
-            <p>{tsln.gisDefinationText}</p>
+            <p>{tsln.gisDefinitionText}</p>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutGIS }}
+              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutGis }}
             />
 
             <h3 className="h3 mt-6 mb-2">{tsln.alw}</h3>
-            <p>{tsln.alwDefinationText}</p>
+            <p>{tsln.alwDefinitionText}</p>
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAlw }}
             />
 
             <h3 className="h3 mt-6 mb-2">{tsln.afs}</h3>
-            <p>{tsln.afsDefinationText}</p>
+            <p>{tsln.afsDefinitionText}</p>
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAfs }}
@@ -134,13 +134,13 @@ const Home: NextPage = () => {
             <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.resultDefination }}
+              dangerouslySetInnerHTML={{ __html: tsln.resultDefinition }}
             />
 
             <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.privacyDefination }}
+              dangerouslySetInnerHTML={{ __html: tsln.privacyDefinition }}
             />
           </div>
         </div>
