@@ -32,7 +32,7 @@ const Home: NextPage = () => {
             className="mb-4 md:w-3/5"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
-          <h2 className="text-xs  sm:h2 xs:mt-6 sm:mt-14 mb-2">
+          <h2 className="text-xs sm:h2 xs:mt-6 sm:mt-14 mb-2">
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
               <p className="ml-2">{tsln.haveNetIncomeLess}</p>
             </div>
           </div>
-          <h2 className="text-xs  sm:h2 xs:mt-8 sm:mt-14 mb-2">
+          <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.headerWhatToKnow}
           </h2>
           <p className="mt-3 mb-8 font-bold  md:w-3/5">{tsln.pleaseNodeText}</p>
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
             <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
           </ul>
 
-          <h2 className="text-xs  sm:h2 mt-8 sm:mt-12 mb-2">
+          <h2 className="text-xs sm:h2 mt-8 sm:mt-12 mb-2">
             {tsln.timeToCompleteText}
           </h2>
           <p className="sm:w-3/5">{tsln.estimatorTake5mins}</p>
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
               className=" w-auto justify-center"
             />
           </div>
-          <h2 className="text-xs  font-bold sm:h2 mt-12 sm:mt-16 mb-2">
+          <h2 className="text-xs font-bold sm:h2 mt-12 sm:mt-16 mb-2">
             {tsln.whatBenefitsTheEstimatorIsFor}
           </h2>
 
@@ -131,15 +131,13 @@ const Home: NextPage = () => {
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutCpp }}
             />
 
-            <h2 className="text-xs  sm:h2 mt-12 mb-2">
-              {tsln.aboutResultText}
-            </h2>
+            <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.resultDefination }}
             />
 
-            <h2 className="text-xs  sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>
+            <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.privacyDefination }}
