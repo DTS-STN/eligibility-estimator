@@ -22,9 +22,11 @@ const fr: Translations = {
     afs: 'Allocation au survivant',
   },
   category: {
-    [FieldCategory.PERSONAL_INFORMATION]: 'Vos renseignements',
-    [FieldCategory.OAS_DEFERRAL]: 'Report de la SV',
-    [FieldCategory.PARTNER_INFORMATION]: 'Les renseignements de votre conjoint',
+    [FieldCategory.AGE]: 'Âge',
+    [FieldCategory.INCOME]: 'Revenu',
+    [FieldCategory.LEGAL]: 'Statut légal',
+    [FieldCategory.RESIDENCE]: 'Historique des résidences',
+    [FieldCategory.MARITAL]: 'État civil',
   },
   result: {
     eligible: 'Admissible',
@@ -34,14 +36,15 @@ const fr: Translations = {
     invalid: "Votre demande n'est pas valide!",
   },
   question: {
-    income: 'Quel est votre revenu annuel net actuel en dollars canadiens?',
-    age: 'Quel est votre âge actuel?',
+    income:
+      'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
+    age: 'Quel âge avez-vous?',
     oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
-    livingCountry: 'Dans quel pays résidez-vous actuellement?',
-    legalStatus: 'Quel est votre statut légal actuel au Canada?',
-    canadaWholeLife:
-      "Depuis l'âge de 18 ans, avez-vous seulement habité au Canada?",
+    livingCountry: 'Dans quel pays résidez-vous?',
+    legalStatus: 'Quel est votre statut légal au Canada?',
+    livedOutsideCanada:
+      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
     yearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     everLivedSocialCountry:
@@ -53,12 +56,19 @@ const fr: Translations = {
     partnerAge: "Quel est l'âge actuel de votre conjoint?",
     partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
     partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
-    partnerCanadaWholeLife:
-      "Depuis l'âge de 18 ans, est-ce que votre conjoint a seulement habité au Canada?",
+    partnerLivedOutsideCanada:
+      "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
     partnerYearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
       'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
+  },
+  questionHelp: {
+    age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
+    income:
+      'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
+    yearsInCanadaSince18:
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
   },
   questionOptions: {
     legalStatus: [
@@ -78,6 +88,26 @@ const fr: Translations = {
       {
         key: LegalStatus.OTHER,
         text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
+      },
+    ],
+    livedOutsideCanada: [
+      {
+        key: false,
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+      },
+      {
+        key: true,
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+      },
+    ],
+    partnerLivedOutsideCanada: [
+      {
+        key: false,
+        text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+      },
+      {
+        key: true,
+        text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
       },
     ],
     maritalStatus: [

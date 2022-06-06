@@ -1,5 +1,6 @@
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
+import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
@@ -32,7 +33,9 @@ const en: WebTranslations = {
   needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
   saveToCsv: 'Download',
+  nextStep: 'Next step',
   getResults: 'Get Results',
+  getEstimate: 'Estimate my benefits',
   applyHeader: 'Apply for benefits',
   applyText:
     'Now that you have estimated your benefits, please use the button(s) below to apply.',
@@ -66,11 +69,7 @@ const en: WebTranslations = {
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
 
-  category: {
-    incomeDetails: 'Income Details',
-    personalInformation: 'Personal Information',
-    legalStatus: 'Legal Status',
-  },
+  category: apiEn.category,
 
   contactCTA:
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
@@ -96,7 +95,8 @@ const en: WebTranslations = {
     partnerIncomeBelowZero: "Your partner's income must be above zero.",
     partnerIncomeTooHigh:
       "The sum of you and your partner's annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.",
-    ageUnder18: 'You must be over 18 to be able to use this tool.',
+    ageUnder18:
+      'You must be at least 60 years old to receive Canadian old age benefits.',
     ageOver150: 'Your age should be less than 150.',
     oasAge65to70: 'You must enter an age between 65 and 70.',
     partnerAgeUnder18:

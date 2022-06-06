@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
-import { Tooltip } from '../Tooltip/tooltip'
+import { useTranslation } from '../Hooks'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface TextFieldProps
@@ -18,6 +18,7 @@ export interface TextFieldProps
  */
 export const TextField: React.VFC<TextFieldProps> = observer((props) => {
   const { name, label, required, value, placeholder, onChange, error } = props
+  const requiredText = useTranslation<string>('required')
 
   return (
     <>
@@ -28,14 +29,9 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
           data-testid="text-input-label"
           className="text-content font-bold inline mb-2.5"
         >
-          {required && <span className="text-danger">*</span>} {label}
+          {label}
         </label>
-        <span>
-          {required && (
-            <span className="text-danger font-bold ml-1">(required)</span>
-          )}
-          <Tooltip field={name} />
-        </span>
+        <span>{required && <span className="ml-1">{requiredText}</span>}</span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}
       <textarea

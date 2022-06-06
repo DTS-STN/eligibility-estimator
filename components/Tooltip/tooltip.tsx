@@ -10,10 +10,6 @@ export const Tooltip: React.FC<{
   size?: number
 }> = ({ field, size }) => {
   const router = useRouter()
-  const tooltipData = getTooltipTranslationByField(
-    router.locale == 'en' ? Language.EN : Language.FR,
-    field
-  )
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
 
@@ -45,6 +41,12 @@ export const Tooltip: React.FC<{
 
   const isMobile = useMediaQuery(992)
 
+  const tooltipData = getTooltipTranslationByField(
+    router.locale == 'en' ? Language.EN : Language.FR,
+    field
+  )
+  if (!tooltipData) return <></>
+
   return (
     <span
       className="ml-2 relative md:absolute inline-block"
@@ -60,7 +62,7 @@ export const Tooltip: React.FC<{
       >
         <path
           d="M12.5 0C5.597 0 0 5.599 0 12.5 0 19.405 5.597 25 12.5 25S25 19.405 25 12.5C25 5.599 19.403 0 12.5 0Zm0 5.544a2.117 2.117 0 1 1 0 4.234 2.117 2.117 0 0 1 0-4.234Zm2.823 12.803c0 .334-.271.605-.605.605h-4.436a.605.605 0 0 1-.605-.605v-1.21c0-.334.271-.605.605-.605h.605v-3.226h-.605a.605.605 0 0 1-.605-.604v-1.21c0-.334.271-.605.605-.605h3.226c.334 0 .605.27.605.605v5.04h.605c.334 0 .605.271.605.605v1.21Z"
-          className="text-primary fill-primary"
+          className="text-primary fill-info"
         />
       </svg>
       <div
@@ -131,10 +133,7 @@ export function getTooltipTranslationByField(
   field: string | FieldKey
 ): TooltipTranslation {
   const data: TooltipTranslation = getTooltipTranslations(language)[field]
-  if (!data)
-    throw new Error(
-      `Tooltip with key "${field}" not found in internationalization file.`
-    )
+  if (!data) return undefined
   if (data.useDataFromKey) {
     const relatedData = getTooltipTranslations(language)[data.useDataFromKey]
     data.text = relatedData.text

@@ -6,6 +6,7 @@ import {
   webDictionary,
   WebTranslations,
 } from '../../i18n/web'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldData } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
@@ -102,10 +103,12 @@ export const Form = types
 
         let placeholder,
           defaultValue,
-          options = undefined
+          options = undefined,
+          helpText = undefined
         if ('default' in fieldData) defaultValue = fieldData.default
         if ('placeholder' in fieldData) placeholder = fieldData.placeholder
         if ('values' in fieldData) options = fieldData.values
+        if ('helpText' in fieldData) helpText = fieldData.helpText
 
         // field does not exist, add it
         if (!field) {
@@ -117,18 +120,19 @@ export const Form = types
               key: fieldData.category.key,
               text: fieldData.category.text,
             },
-            order: fieldData.order,
             placeholder: placeholder,
             default: defaultValue,
             options: options,
             value: defaultValue ?? null,
+            helpText: helpText ?? null,
           })
-          self.fields.sort((a, b) => a.order - b.order)
+          self.fields.sort(BenefitHandler.sortFields)
         }
         // field does exist, update if any data has changed
         else if (field.label !== fieldData.label) {
           console.log('updating field ', fieldData.label)
           field.label = fieldData.label
+          field.helpText = fieldData.helpText
           field.category = fieldData.category
           field.options = options
           field.placeholder = placeholder

@@ -8,7 +8,7 @@ export enum FieldKey {
   MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
-  CANADA_WHOLE_LIFE = 'canadaWholeLife',
+  LIVED_OUTSIDE_CANADA = 'livedOutsideCanada',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
@@ -16,7 +16,7 @@ export enum FieldKey {
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
-  PARTNER_CANADA_WHOLE_LIFE = 'partnerCanadaWholeLife',
+  PARTNER_LIVED_OUTSIDE_CANADA = 'partnerLivedOutsideCanada',
   PARTNER_YEARS_IN_CANADA_SINCE_18 = 'partnerYearsInCanadaSince18',
   PARTNER_EVER_LIVED_SOCIAL_COUNTRY = 'partnerEverLivedSocialCountry',
 }
@@ -31,123 +31,107 @@ export enum FieldType {
   STRING = 'string',
 }
 
+// the order of fields here will define the order within the application
 export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 1,
+    category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
   },
   [FieldKey.OAS_AGE]: {
     key: FieldKey.OAS_AGE,
-    category: { key: FieldCategory.OAS_DEFERRAL },
-    order: 2,
+    category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
   },
-  [FieldKey.LIVING_COUNTRY]: {
-    key: FieldKey.LIVING_COUNTRY,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 3,
-    type: FieldType.DROPDOWN_SEARCHABLE,
-    default: { key: 'CAN', text: 'Canada' },
+  [FieldKey.INCOME]: {
+    key: FieldKey.INCOME,
+    category: { key: FieldCategory.INCOME },
+    type: FieldType.CURRENCY,
   },
   [FieldKey.LEGAL_STATUS]: {
     key: FieldKey.LEGAL_STATUS,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 5,
+    category: { key: FieldCategory.LEGAL },
     type: FieldType.RADIO,
     default: undefined,
   },
-  [FieldKey.CANADA_WHOLE_LIFE]: {
-    key: FieldKey.CANADA_WHOLE_LIFE,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 6,
-    type: FieldType.BOOLEAN,
+  [FieldKey.LIVING_COUNTRY]: {
+    key: FieldKey.LIVING_COUNTRY,
+    category: { key: FieldCategory.RESIDENCE },
+    type: FieldType.DROPDOWN_SEARCHABLE,
+    default: { key: 'CAN', text: 'Canada' },
+  },
+  [FieldKey.LIVED_OUTSIDE_CANADA]: {
+    key: FieldKey.LIVED_OUTSIDE_CANADA,
+    category: { key: FieldCategory.RESIDENCE },
+    type: FieldType.RADIO,
   },
   [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 7,
+    category: { key: FieldCategory.RESIDENCE },
     type: FieldType.NUMBER,
   },
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 8,
+    category: { key: FieldCategory.RESIDENCE },
     type: FieldType.BOOLEAN,
     default: undefined,
   },
-  [FieldKey.INCOME]: {
-    key: FieldKey.INCOME,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 9,
-    type: FieldType.CURRENCY,
-  },
   [FieldKey.MARITAL_STATUS]: {
     key: FieldKey.MARITAL_STATUS,
-    category: { key: FieldCategory.PERSONAL_INFORMATION },
-    order: 10,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
   },
+  [FieldKey.PARTNER_INCOME]: {
+    key: FieldKey.PARTNER_INCOME,
+    relatedKey: FieldKey.INCOME,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.CURRENCY,
+  },
   [FieldKey.PARTNER_BENEFIT_STATUS]: {
     key: FieldKey.PARTNER_BENEFIT_STATUS,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 11,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 12,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.NUMBER,
-  },
-  [FieldKey.PARTNER_LIVING_COUNTRY]: {
-    key: FieldKey.PARTNER_LIVING_COUNTRY,
-    relatedKey: FieldKey.LIVING_COUNTRY,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 13,
-    type: FieldType.DROPDOWN_SEARCHABLE,
-    default: { key: 'CAN', text: 'Canada' },
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
     relatedKey: FieldKey.LEGAL_STATUS,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 14,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
   },
-  [FieldKey.PARTNER_CANADA_WHOLE_LIFE]: {
-    key: FieldKey.PARTNER_CANADA_WHOLE_LIFE,
-    relatedKey: FieldKey.CANADA_WHOLE_LIFE,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 15,
-    type: FieldType.BOOLEAN,
+  [FieldKey.PARTNER_LIVING_COUNTRY]: {
+    key: FieldKey.PARTNER_LIVING_COUNTRY,
+    relatedKey: FieldKey.LIVING_COUNTRY,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.DROPDOWN_SEARCHABLE,
+    default: { key: 'CAN', text: 'Canada' },
+  },
+  [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: {
+    key: FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
+    relatedKey: FieldKey.LIVED_OUTSIDE_CANADA,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
   },
   [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_18,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 16,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.NUMBER,
     placeholder: '40',
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 17,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.BOOLEAN,
     default: undefined,
-  },
-  [FieldKey.PARTNER_INCOME]: {
-    key: FieldKey.PARTNER_INCOME,
-    relatedKey: FieldKey.INCOME,
-    category: { key: FieldCategory.PARTNER_INFORMATION },
-    order: 18,
-    type: FieldType.CURRENCY,
   },
 }
 
@@ -163,11 +147,11 @@ interface FieldDataGeneric {
   key: FieldKey
   relatedKey?: FieldKey // in case certain props should use those of another key when missing
   label?: string // applied via translator
+  helpText?: string
   category: {
     key: FieldCategory
     text?: string // applied via translator
   }
-  order: number
 }
 
 interface FieldDataCurrency extends FieldDataGeneric {

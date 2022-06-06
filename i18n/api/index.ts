@@ -36,8 +36,11 @@ export interface Translations {
     invalid: string
   }
   question: { [key in FieldKey]: string }
+  questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     legalStatus: TypedKeyAndText<LegalStatus>[]
+    livedOutsideCanada: TypedKeyAndText<boolean>[]
+    partnerLivedOutsideCanada: TypedKeyAndText<boolean>[]
     maritalStatus: TypedKeyAndText<MaritalStatus>[]
     partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]

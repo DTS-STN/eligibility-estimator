@@ -43,11 +43,12 @@ describe('test the mobx state tree nodes', () => {
 
   function fillOutForm(form: Instance<typeof Form>) {
     // TODO: this should NOT use numbered indexes to fill the form, as that makes ordering changes cause tests to fail.
-    form.fields[0].setValue('65') //age
-    form.fields[1].setValue(LivingCountry.CANADA)
+    form.fields[0].setValue('65') // age
+    // form.fields[1].setValue('65') // oasAge
+    form.fields[1].setValue('20000') // income
     form.fields[2].setValue(LegalStatus.CANADIAN_CITIZEN)
-    form.fields[3].setValue('true') // Lived in Canada whole life
-    form.fields[4].setValue('20000') // income
+    form.fields[3].setValue(LivingCountry.CANADA)
+    form.fields[4].setValue('false') // never lived outside Canada
     form.fields[5].setValue(MaritalStatus.SINGLE)
   }
 
@@ -69,7 +70,6 @@ describe('test the mobx state tree nodes', () => {
         key: 'incomeDetails',
         text: 'Income Details',
       },
-      order: 1,
     })
     expect(form.fields).toHaveLength(1)
   })
@@ -122,7 +122,6 @@ describe('test the mobx state tree nodes', () => {
       type: 'currency',
       label: 'What is your current annual net income in Canadian Dollars?',
       category: { key: 'incomeDetails', text: 'Income Details' },
-      order: 1,
       placeholder: '$20,000',
       default: undefined,
       value: null,
@@ -170,6 +169,6 @@ describe('test the mobx state tree nodes', () => {
     expect(input.maritalStatus).toEqual('single')
     expect(input.livingCountry).toEqual('CAN')
     expect(input.legalStatus).toEqual('canadianCitizen')
-    expect(input.canadaWholeLife).toEqual('true')
+    expect(input.livedOutsideCanada).toEqual('false')
   })
 })

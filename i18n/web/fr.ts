@@ -1,6 +1,7 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
+import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
@@ -33,7 +34,9 @@ const fr: WebTranslations = {
   needHelp: "Besoin d'aide?",
   faq: 'Foire Aux Questions',
   saveToCsv: 'Télécharger',
+  nextStep: 'Prochaine étape',
   getResults: 'Obtenir les résultats',
+  getEstimate: 'Estimer mes prestations',
   applyHeader: 'Faire une demande de prestations',
   applyText:
     'Maintenant que vous avez estimé vos prestations, veuillez utiliser le(s) bouton(s) ci-dessous pour faire votre demande.',
@@ -67,11 +70,7 @@ const fr: WebTranslations = {
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
 
-  category: {
-    incomeDetails: 'Revenu',
-    personalInformation: 'Renseignements personnels',
-    legalStatus: 'Statut légal',
-  },
+  category: apiFr.category,
 
   contactCTA:
     'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
@@ -99,7 +98,7 @@ const fr: WebTranslations = {
     partnerIncomeTooHigh:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {MAX_OAS_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
     ageUnder18:
-      'Vous devez avoir plus de 18 ans pour pouvoir utiliser cet outil.',
+      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
     ageOver150: 'Votre âge doit être inférieur à 150 ans.',
     oasAge65to70: 'Vous devez saisir un âge compris entre 65 et 70 ans.',
     partnerAgeUnder18:
