@@ -348,11 +348,9 @@ components:
         type: string
         enum:
           - single
-          - married
-          - commonLaw
+          - partnered
           - widowed
-          - divorced
-          - separated
+          - invSeparated
         description: The current marital status of the client.
       allowEmptyValue: false
 
