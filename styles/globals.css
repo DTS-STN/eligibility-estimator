@@ -161,10 +161,6 @@
     animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
   }
   
-  li.ds-inline-block.ds-w-100 {
-    margin-left: 0px;
-  }
-
   ul#information-list > li {
     margin-left: 1rem;
   }
