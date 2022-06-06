@@ -36,10 +36,6 @@ const Home: NextPage = () => {
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
-          {/* <p
-            className="my-6"
-            dangerouslySetInnerHTML={{ __html: tsln.homePageP3 }}
-          /> */}
           <div className="md:w-1/2 h-35 sm:h-20 bg-light-green py-2 px-8">
             <div className="flex">
               <img
