@@ -27,7 +27,7 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
     securityPath: '/',
     profilePath: '/',
     craPath: '/',
-    hasNoMenu: false,
+    hasNoMenu: true,
   }
 
   const topnavProps = {
