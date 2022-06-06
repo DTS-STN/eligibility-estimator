@@ -99,6 +99,7 @@ export enum ValidationErrors {
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
   maritalUnavailable = 'maritalUnavailable',
+  legalUnavailable = 'legalUnavailable',
 }
 
 export enum Language {

@@ -195,4 +195,11 @@ describe('sanity checks', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
   })
+  it('fails when legal status is sponsored', async () => {
+    const res = await mockGetRequestError({
+      legalStatus: LegalStatus.SPONSORED,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+  })
 })
