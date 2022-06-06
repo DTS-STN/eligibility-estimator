@@ -93,12 +93,15 @@ export class LegalStatusHelper extends FieldHelper {
 export class MaritalStatusHelper extends FieldHelper {
   partnered: boolean
   single: boolean
+  invSeparated: boolean
 
   constructor(public value: MaritalStatus) {
     super(value)
     this.partnered = value === MaritalStatus.PARTNERED
     this.single =
       value === MaritalStatus.SINGLE || value === MaritalStatus.WIDOWED
+    if (value === MaritalStatus.INV_SEPARATED)
+      throw new Error('involuntarily separated is not implemented yet')
   }
 }
 

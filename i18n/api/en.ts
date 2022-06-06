@@ -111,9 +111,10 @@ const en: Translations = {
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Married, common-law, or involuntarily separated',
+        text: 'Married or common-law',
       },
-      { key: MaritalStatus.WIDOWED, text: 'Surviving partner, or widowed' },
+      { key: MaritalStatus.WIDOWED, text: 'Surviving partner or widowed' },
+      { key: MaritalStatus.INV_SEPARATED, text: 'Involuntarily separated' },
     ],
     partnerBenefitStatus: [
       {

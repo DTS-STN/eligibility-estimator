@@ -10,6 +10,7 @@ export enum MaritalStatus {
   SINGLE = 'single',
   PARTNERED = 'partnered',
   WIDOWED = 'widowed',
+  INV_SEPARATED = 'invSeparated',
 }
 
 export enum LegalStatus {
@@ -97,6 +98,7 @@ export enum ValidationErrors {
   oasAge65to70 = 'oasAge65to70',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
+  maritalUnavailable = 'maritalUnavailable',
 }
 
 export enum Language {

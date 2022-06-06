@@ -117,11 +117,15 @@ const fr: Translations = {
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Marié(e), Conjoint(e) de fait, ou involontairement séparé(e)',
+        text: 'Marié(e) ou conjoint(e) de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire survivant(e), ou veuf(ve)',
+        text: 'Partenaire survivant(e) ou veuf(ve)',
+      },
+      {
+        key: MaritalStatus.INV_SEPARATED,
+        text: 'Involontairement séparé(e)',
       },
     ],
     partnerBenefitStatus: [
