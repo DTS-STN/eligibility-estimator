@@ -391,24 +391,17 @@ export class BenefitHandler {
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    */
-  private replaceTextVariables(textToProcess: string): string {
-    const re = new RegExp(/{\w*?}/)
-
-    // only run when necessary
-    if (re.test(textToProcess))
-      for (const key in textReplacementRules) {
-        textToProcess = textToProcess.replace(
-          `{${key}}`,
-          textReplacementRules[key](this)
-        )
-      }
-
-    // validate that no replacements were missed
-    if (re.test(textToProcess))
-      throw new Error(
-        `Unprocessed replacement variable: ${re.exec(textToProcess)}`
-      )
-
+  replaceTextVariables(textToProcess: string): string {
+    const re: RegExp = new RegExp(/{(\w*?)}/g)
+    const matches: IterableIterator<RegExpMatchArray> =
+      textToProcess.matchAll(re)
+    for (const match of matches) {
+      const key: string = match[1]
+      const replacementRule = textReplacementRules[key]
+      if (!replacementRule)
+        throw new Error(`no text replacement rule for ${key}`)
+      textToProcess = textToProcess.replace(`{${key}}`, replacementRule(this))
+    }
     return textToProcess
   }
 

@@ -243,11 +243,13 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                 alert_icon_id={field.key}
                 alert_icon_alt_text="warning icon"
                 type="warning"
-                message_heading={field.error}
+                message_heading={tsln.unableToProceed}
                 message_body={field.error}
+                asHtml={true}
               />
             </div>
           )}
+          {/* below is never used? */}
           {field.info && (
             <div className="mt-6 md:pr-12">
               <Message
@@ -255,8 +257,10 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                 alert_icon_id={field.key}
                 alert_icon_alt_text="info icon"
                 type="info"
+                /* TODO: this should be something else */
                 message_heading={field.info}
                 message_body={field.info}
+                asHtml={true}
               />
             </div>
           )}

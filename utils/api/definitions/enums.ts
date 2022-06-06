@@ -90,14 +90,14 @@ export enum LinkLocation {
 // all "custom" Joi Validation errors that we properly handle and translate for the end user
 export enum ValidationErrors {
   incomeBelowZero = 'incomeBelowZero',
+  partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   incomeTooHigh = 'incomeTooHigh',
   partnerIncomeTooHigh = 'partnerIncomeTooHigh',
-  partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   ageUnder18 = 'ageUnder18',
-  ageOver150 = 'ageOver150',
-  oasAge65to70 = 'oasAge65to70',
   partnerAgeUnder18 = 'partnerAgeUnder18',
+  ageOver150 = 'ageOver150',
   partnerAgeOver150 = 'partnerAgeOver150',
+  oasAge65to70 = 'oasAge65to70',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
 }

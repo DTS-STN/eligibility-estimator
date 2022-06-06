@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
-    "@dts-stn/decd-design-system": "^1.38.0",
+    "@dts-stn/decd-design-system": "DTS-STN/DECD-Design-System#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32",
     "@headlessui/react": "^1.5.0",
     "@tailwindcss/forms": "^0.5.0",
     "@types/lodash": "^4.14.181",

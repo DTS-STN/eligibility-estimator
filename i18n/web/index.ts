@@ -3,8 +3,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
-import { legalValues } from '../../utils/api/scrapers/output'
-import { numberToStringCurrency, Translations } from '../api'
+import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
 
@@ -118,6 +117,7 @@ export type WebTranslations = {
     empty: string
   }
   validationErrors: { [key in ValidationErrors]: string }
+  unableToProceed: string
   unavailableImageAltText: string
   govt: string
   yes: string
@@ -138,15 +138,4 @@ export function getWebTranslations(language: Language): WebTranslations {
     case Language.FR:
       return webDictionary.fr
   }
-}
-
-/**
- * Takes an input string, and applies variable replacements according to the current language.
- */
-export function applyReplacements(input: string, language: Language): string {
-  const locale = language === Language.EN ? Locale.EN : Locale.FR
-  return input.replace(
-    '{MAX_OAS_INCOME}',
-    numberToStringCurrency(legalValues.MAX_OAS_INCOME, locale, { rounding: 0 })
-  )
 }

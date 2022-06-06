@@ -1,14 +1,13 @@
 import Joi from 'joi'
 import { flow, getParent, Instance, SnapshotIn, types } from 'mobx-state-tree'
 import {
-  applyReplacements,
   getWebTranslations,
   webDictionary,
   WebTranslations,
 } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { Language } from '../../utils/api/definitions/enums'
-import { FieldData } from '../../utils/api/definitions/fields'
+import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
@@ -190,14 +189,32 @@ export const Form = types
         self.clearAllErrors()
         if (!('details' in data.detail))
           return console.error('Unexpected error:', data.detail)
+        // sometimes a single field will return multiple errors, and sometimes certain errors are not handled properly.
+        // this iterates through those errors, and will ultimately only display one error per field, preferring ones handled properly.
         const allErrors: Joi.ValidationErrorItem[] = data.detail.details
-        for (const err of allErrors) {
+        const allErrorsParsed: {
+          [key in FieldKey]?: { text: string; successful: boolean }
+        } = allErrors.reduce((allErrorsParsed, err) => {
           const language: Language = parent.langBrowser
           const tsln: WebTranslations = getWebTranslations(language)
-          let translatedError: string = tsln.validationErrors[err.message]
-          translatedError = applyReplacements(translatedError, language)
-          const errorText: string = translatedError ?? err.message
-          self.getFieldByKey(err.context.key).setError(errorText)
+          let fieldKey: FieldKey = err.context.key as FieldKey
+          let errorKeyOrText: ValidationErrors | string = err.message
+          try {
+            const handler = new BenefitHandler({ _language: language })
+            let text = tsln.validationErrors[errorKeyOrText] // throws error when error not handled/defined in ValidationErrors
+            text = handler.replaceTextVariables(text)
+            allErrorsParsed[fieldKey] = { text, successful: true }
+          } catch {
+            let successfulErrorExists = allErrorsParsed[fieldKey] !== undefined
+            if (!successfulErrorExists) {
+              const text = `Unexpected error: ${errorKeyOrText}`
+              allErrorsParsed[fieldKey] = { text, successful: false }
+            }
+          }
+          return allErrorsParsed
+        }, {})
+        for (const errorKey in allErrorsParsed) {
+          self.getFieldByKey(errorKey).setError(allErrorsParsed[errorKey].text)
         }
       } else {
         self.clearAllErrors()
