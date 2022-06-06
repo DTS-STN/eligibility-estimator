@@ -10,8 +10,7 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
-import { legalValues, scraperData } from '../scrapers/output'
-import { OutputItemAfs } from '../scrapers/tbl5PartneredAfsScraper'
+import { legalValues } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
@@ -137,35 +136,15 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const tableResult = this.getEntitlementAmount()
     const formulaResult = new EntitlementFormula(
       this.income,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age
     ).getEntitlementAmount()
-    console.log(
-      `\ntableResult: ${tableResult}\nformulaResult: ${formulaResult}`
-    )
 
     const type = EntitlementResultType.FULL
 
     return { result: formulaResult, type }
-  }
-
-  private getEntitlementAmount(): number {
-    const tableItem = this.getTableItem()
-    return tableItem ? tableItem.afs : 0
-  }
-
-  private getTableItem(): OutputItemAfs | undefined {
-    const array = this.getTable()
-    return array.find((x) => {
-      if (x.range.low <= this.income && this.income <= x.range.high) return x
-    })
-  }
-
-  private getTable(): OutputItemAfs[] {
-    return scraperData.tbl5_partneredAfs
   }
 }

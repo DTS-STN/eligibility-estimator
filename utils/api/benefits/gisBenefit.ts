@@ -11,9 +11,7 @@ import {
   EntitlementResultOas,
   ProcessedInput,
 } from '../definitions/types'
-import roundToTwo from '../helpers/roundToTwo'
-import { OutputItemGis } from '../scrapers/_baseTable'
-import { legalValues, scraperData } from '../scrapers/output'
+import { legalValues } from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
@@ -123,7 +121,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     if (this.eligibility.result !== ResultKey.ELIGIBLE)
       return { result: 0, type: EntitlementResultType.NONE }
 
-    const tableResult = this.getEntitlementAmount()
     const formulaResult = new EntitlementFormula(
       this.income,
       this.input.maritalStatus,
@@ -131,9 +128,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.input.age,
       this.oasResult
     ).getEntitlementAmount()
-    console.log(
-      `\ntableResult: ${tableResult}\nformulaResult: ${formulaResult}`
-    )
 
     let type: EntitlementResultType
     if (formulaResult === -1) type = EntitlementResultType.UNAVAILABLE
@@ -145,71 +139,5 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         this.translations.detail.eligibleEntitlementUnavailable
 
     return { result: formulaResult, type }
-  }
-
-  private getEntitlementAmount(): number {
-    const gisEntitlementItem = this.getTableItem()
-    const gisEntitlementItemLast = this.getLastTableItem()
-    if (this.oasResult.entitlement.type === EntitlementResultType.FULL) {
-      // standard
-      return gisEntitlementItem ? gisEntitlementItem.gis : 0
-    }
-    if (this.oasResult.entitlement.type === EntitlementResultType.PARTIAL) {
-      const lastIncome = gisEntitlementItemLast.range.high
-      const oasEntitlement = this.oasResult.entitlement.result
-      let result, combinedOasGis
-      if (this.income <= lastIncome) {
-        // partial oas when income below max
-        combinedOasGis = gisEntitlementItem.combinedOasGis
-      } else {
-        // partial oas when income above max
-        const lastInterval = gisEntitlementItemLast.range.interval
-        const lastCombinedOasGis = gisEntitlementItemLast.combinedOasGis
-        const numIntervalsOverLast = Math.ceil(
-          (this.income - lastIncome) / lastInterval
-        )
-        combinedOasGis = lastCombinedOasGis - numIntervalsOverLast
-      }
-      result = combinedOasGis - oasEntitlement
-      return roundToTwo(Math.max(0, result))
-    }
-    if (
-      this.oasResult.entitlement.type === EntitlementResultType.UNAVAILABLE ||
-      this.oasResult.entitlement.type === EntitlementResultType.NONE
-    ) {
-      // this should never happen, so let's just say it's unavailable
-      return -1
-    }
-  }
-
-  private getTableItem(): OutputItemGis | undefined {
-    const array: OutputItemGis[] = this.getTable()
-    return array.find((x) => {
-      if (x.range.low <= this.income && this.income <= x.range.high) return x
-    })
-  }
-
-  private getLastTableItem(): OutputItemGis | undefined {
-    const array: OutputItemGis[] = this.getTable()
-    return array[array.length - 1]
-  }
-
-  private getTable(): OutputItemGis[] {
-    if (this.input.maritalStatus.single) {
-      // Table 1: If you are single, surviving spouse/common-law partner or divorced pensioners receiving a full Old Age Security pension
-      return scraperData.tbl1_single
-    } else if (this.input.maritalStatus.partnered) {
-      if (this.input.partnerBenefitStatus.anyOas) {
-        // Table 2: If you are married or common-law partners, both receiving ANY Old Age Security pension
-        return scraperData.tbl2_partneredAndOas
-      } else if (this.input.partnerBenefitStatus.alw) {
-        // Table 4: If you are receiving a full Old Age Security pension and your spouse or common-law partner is aged 60 to 64
-        return scraperData.tbl4_partneredAlw
-      } else {
-        // Table 3: If you are receiving a full Old Age Security pension whose spouse or common-law partner does not receive an OAS pension
-        // this is used when partner is not getting allowance or any OAS
-        return scraperData.tbl3_partneredNoOas
-      }
-    }
   }
 }
