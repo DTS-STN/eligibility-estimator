@@ -161,10 +161,6 @@
     animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
   }
   
-  #applicationTitle{
-    @apply sm:w-8/12
-  }
-
   li.ds-inline-block.ds-w-100 {
     margin-left: 0px;
   }
