@@ -14,6 +14,35 @@ export type WebTranslations = {
   _language: Language
   _locale: Locale
 
+  atLeast60: string
+  haveNetIncomeLess: string
+  headerWhatToKnow: string
+  pleaseNodeText: string
+  estimatorIncludeQuestionText: string
+  ageText: string
+  netIncomeText: string
+  legalStatusText: string
+  residenceHistoryText: string
+  maritalStatusText: string
+  partnerText: string
+  timeToCompleteText: string
+  startBenefitsEstimator: string
+  estimatorTimeEstimate: string
+  whatBenefitsTheEstimatorIsFor: string
+  benefitAvailable: string
+  learnMoreAboutOldAgeSecurity: string
+  gisDefinitionText: string
+  learnMoreAboutGis: string
+  alwDefinitionText: string
+  learnMoreAboutAlw: string
+  afsDefinitionText: string
+  learnMoreAboutAfs: string
+  notIncludeCPP: string
+  learnMoreAboutCpp: string
+  aboutResultText: string
+  resultDefinition: string
+  privacyHeading: string
+  privacyDefinition: string
   oas: string
   gis: string
   alw: string
@@ -68,6 +97,7 @@ export type WebTranslations = {
   socialLink3: string
   socialLink4: string
   socialLink5: string
+  youMayBeEligible: string
 
   category: Translations['category']
 

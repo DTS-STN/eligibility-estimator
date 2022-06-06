@@ -6,8 +6,8 @@ const en: WebTranslations = {
   _language: Language.EN,
   _locale: Locale.EN,
 
-  oas: 'Old Age Security (OAS)',
-  gis: 'Guaranteed Income Supplement (GIS)',
+  oas: 'Old Age Security',
+  gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
   afs: 'Allowance for the Survivor',
   testSiteTitle: 'TEST SITE',
@@ -42,8 +42,48 @@ const en: WebTranslations = {
   applyForLabel: 'Apply for',
   required: 'required',
   homePageP1:
-    'The Canadian Old Age Benefits Estimator is a prototype in development. Based on the information you provide, this will estimate your eligibility for the Old Age Security (OAS), Guaranteed Income Supplement (GIS), Allowance, and Allowance for the survivor. If eligible to receive the benefit, it will also estimate your monthly payment.',
-  homePageHeader1: 'Types of benefits programs',
+    'Use this estimator to find out how much money you could get from old age benefit programs. You can enter your current information, or you can enter future information for planning purposes.',
+  homePageHeader1: 'Who these benefits are for',
+  youMayBeEligible: 'You may be eligible for old age benefits if you are:',
+  atLeast60: 'at least 60 years old',
+  haveNetIncomeLess: 'have a net income less than $133,141 CAD',
+  headerWhatToKnow: 'What to know before you begin',
+  pleaseNodeText:
+    'Please note that this is an estimator and not an application for benefits.',
+  estimatorIncludeQuestionText: "You'll need information about your:",
+  ageText: '<b>age</b>',
+  netIncomeText:
+    '<b>net income</b> (you can find this on line 23600 of your income tax return)',
+  legalStatusText:
+    '<b>legal status</b> (such as Canadian citizen, Indian Status, or permanent resident)',
+  residenceHistoryText:
+    '<b>residence history</b> (number of years lived in Canada)',
+  maritalStatusText: '<b>marital status</b>',
+  partnerText: `<b>partner</b> (if applicable):income (including their old age benefits), legal status, and residence history`,
+  timeToCompleteText: 'Time to complete',
+  startBenefitsEstimator: 'Start benefits estimator',
+  estimatorTimeEstimate:
+    'This estimator will take about 5 to 10 minutes to complete.',
+  whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
+  benefitAvailable: 'A benefit available to those 65 and older',
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.oasOverview.url}" target="_blank">Learn more about Old Age Security</a>`,
+  gisDefinitionText:
+    'A benefit available to those 65 and older. Learn more about Old Age Security Guaranteed Income Supplement A benefit available to those who receive Old Age Security benefits, are aged 65 and older, have a low income, and are living in Canada.',
+  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.gisOverview.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
+  alwDefinitionText:
+    'A benefit available to low-income individuals aged 60 to 64, whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.alwOverview.url}" target="_blank">Learn more about the Allowance</a>`,
+  afsDefinitionText:
+    'A benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away.',
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiEn.links.afsOverview.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
+  notIncludeCPP:
+    'This estimator tool does not include the Canada Pension Plan (CPP) retirement pension.',
+  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
+  aboutResultText: 'About the results',
+  resultDefinition: `The results are estimates and not a final decision. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>. The results are not financial advice.`,
+  privacyHeading: 'Privacy',
+  privacyDefinition:
+    'Your information is private. The personal information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>. The estimator does not collect information that would enable personal identification. Your anonymous results may be collected for research purposes.',
   homePageP3:
     'The Old Age Security pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
   homePageP4:
