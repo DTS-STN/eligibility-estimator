@@ -161,10 +161,6 @@
     animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
   }
   
-  #applicationTitle{
-    @apply sm:w-8/12
-  }
-
   #mainHeader > header > div {
     padding-left: 0px !important;
     padding-right: 0px !important;
