@@ -45,7 +45,7 @@ export const RequestSchema = Joi.object({
   maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  canadaWholeLife: Joi.boolean(),
+  livedOutsideCanada: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
@@ -72,7 +72,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.partnerAgeOver150),
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  partnerCanadaWholeLife: Joi.boolean(),
+  partnerLivedOutsideCanada: Joi.boolean(),
   partnerYearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))

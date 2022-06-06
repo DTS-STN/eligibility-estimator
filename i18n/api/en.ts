@@ -20,9 +20,11 @@ const en: Translations = {
     afs: 'Allowance for the Survivor',
   },
   category: {
-    [FieldCategory.PERSONAL_INFORMATION]: 'Your information',
-    [FieldCategory.OAS_DEFERRAL]: 'OAS deferral',
-    [FieldCategory.PARTNER_INFORMATION]: "Your partner's information",
+    [FieldCategory.AGE]: 'Age',
+    [FieldCategory.INCOME]: 'Income',
+    [FieldCategory.LEGAL]: 'Legal status',
+    [FieldCategory.RESIDENCE]: 'Residence history',
+    [FieldCategory.MARITAL]: 'Marital status',
   },
   result: {
     eligible: 'Eligible',
@@ -32,13 +34,15 @@ const en: Translations = {
     invalid: 'Request is invalid!',
   },
   question: {
-    income: 'What is your current annual net income in Canadian dollars?',
-    age: 'What is your current age?',
+    income:
+      'What is your annual net income (income after taxes) in Canadian dollars?',
+    age: 'How old are you?',
     oasAge: 'At what age would you like to start receiving OAS?',
     maritalStatus: 'What is your current marital status?',
-    livingCountry: 'What country are you currently living in?',
-    legalStatus: 'What is your current legal status in Canada?',
-    canadaWholeLife: 'Since the age of 18, have you only lived in Canada?',
+    livingCountry: 'What country do you live in?',
+    legalStatus: 'What is your legal status in Canada?',
+    livedOutsideCanada:
+      'Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?',
     yearsInCanadaSince18:
       'Since the age of 18, how many years have you lived in Canada?',
     everLivedSocialCountry:
@@ -49,12 +53,19 @@ const en: Translations = {
     partnerAge: "What is your partner's current age?",
     partnerLivingCountry: 'What country is your partner currently living in?',
     partnerLegalStatus: "What is your partner's current legal status?",
-    partnerCanadaWholeLife:
-      'Since the age of 18, has your partner only lived in Canada?',
+    partnerLivedOutsideCanada:
+      'Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?',
     partnerYearsInCanadaSince18:
       'Since the age of 18, how many years has your partner lived in Canada?',
     partnerEverLivedSocialCountry:
       'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
+  },
+  questionHelp: {
+    age: 'You can enter your current age, or a future age for planning purposes.',
+    income:
+      'You can find your net income on line 23600 of your personal income tax return (T1).',
+    yearsInCanadaSince18:
+      'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
   questionOptions: {
     legalStatus: [
@@ -71,6 +82,26 @@ const en: Translations = {
       {
         key: LegalStatus.OTHER,
         text: 'Other (for example, temporary resident, student, temporary worker)',
+      },
+    ],
+    livedOutsideCanada: [
+      {
+        key: false,
+        text: 'No, I have not lived outside of Canada for longer than 6 months',
+      },
+      {
+        key: true,
+        text: 'Yes, I have lived outside of Canada for longer than 6 months',
+      },
+    ],
+    partnerLivedOutsideCanada: [
+      {
+        key: false,
+        text: 'No, my partner has not lived outside of Canada for longer than 6 months',
+      },
+      {
+        key: true,
+        text: 'Yes, my partner has lived outside of Canada for longer than 6 months',
       },
     ],
     maritalStatus: [

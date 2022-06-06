@@ -1,7 +1,6 @@
 import { WebTranslations } from '.'
 import { Language, Locale } from '../../utils/api/definitions/enums'
-
-import apiTranslation from '../api/en'
+import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
@@ -34,7 +33,9 @@ const en: WebTranslations = {
   needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
   saveToCsv: 'Download',
+  nextStep: 'Next step',
   getResults: 'Get Results',
+  getEstimate: 'Estimate my benefits',
   applyHeader: 'Apply for benefits',
   applyText:
     'Now that you have estimated your benefits, please use the button(s) below to apply.',
@@ -65,19 +66,19 @@ const en: WebTranslations = {
     'This estimator will take about 5 to 10 minutes to complete.',
   whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
   benefitAvailable: 'A benefit available to those 65 and older',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiTranslation.links.oasOverview.url}" target="_blank">Learn more about Old Age Security</a>`,
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.oasOverview.url}" target="_blank">Learn more about Old Age Security</a>`,
   gisDefinitionText:
     'A benefit available to those 65 and older. Learn more about Old Age Security Guaranteed Income Supplement A benefit available to those who receive Old Age Security benefits, are aged 65 and older, have a low income, and are living in Canada.',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiTranslation.links.gisOverview.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
+  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.gisOverview.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
   alwDefinitionText:
     'A benefit available to low-income individuals aged 60 to 64, whose spouse or common-law partner receives the Guaranteed Income Supplement.',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiTranslation.links.alwOverview.url}" target="_blank">Learn more about the Allowance</a>`,
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.alwOverview.url}" target="_blank">Learn more about the Allowance</a>`,
   afsDefinitionText:
     'A benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiTranslation.links.afsOverview.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiEn.links.afsOverview.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
   notIncludeCPP:
     'This estimator tool does not include the Canada Pension Plan (CPP) retirement pension.',
-  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiTranslation.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
+  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
   aboutResultText: 'About the results',
   resultDefinition: `The results are estimates and not a final decision. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>. The results are not financial advice.`,
   privacyHeading: 'Privacy',
@@ -108,11 +109,7 @@ const en: WebTranslations = {
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
 
-  category: {
-    incomeDetails: 'Income Details',
-    personalInformation: 'Personal Information',
-    legalStatus: 'Legal Status',
-  },
+  category: apiEn.category,
 
   contactCTA:
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
@@ -138,7 +135,8 @@ const en: WebTranslations = {
     partnerIncomeBelowZero: "Your partner's income must be above zero.",
     partnerIncomeTooHigh:
       "The sum of you and your partner's annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.",
-    ageUnder18: 'You must be over 18 to be able to use this tool.',
+    ageUnder18:
+      'You must be at least 60 years old to receive Canadian old age benefits.',
     ageOver150: 'Your age should be less than 150.',
     oasAge65to70: 'You must enter an age between 65 and 70.',
     partnerAgeUnder18:
