@@ -154,8 +154,6 @@
     @apply text-default-text underline;
   }
 
- 
-
   .is-sticky {
     position: fixed;
     z-index: 999;

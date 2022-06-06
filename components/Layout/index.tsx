@@ -1,4 +1,4 @@
-import { Heading, Header } from '@dts-stn/decd-design-system'
+import { Header, Heading } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -69,13 +69,11 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
             searchProps={searchProps}
             breadCrumbItems={breadcrumbs}
           />
-
           <Heading
             id="applicationTitle"
             title={tsln.title}
-            className="mb-8 mt-4 sm:mt-12"
+            className="mb-8 mt-4 sm:mt-12 sm:w-8/12"
           />
-
           {children}
         </div>
 

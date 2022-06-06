@@ -32,7 +32,7 @@ const Home: NextPage = () => {
             className="mb-4 md:w-3/5"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
-          <h2 className="text-xs  sm:h2 xs:mt-6 sm:mt-14 mb-2">
+          <h2 className="text-xs sm:h2 xs:mt-6 sm:mt-14 mb-2">
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
                 src="/green-check-mark.svg"
                 alt={'green check mark'}
               />
-              <p className="ml-2">{tsln.atleast60}</p>
+              <p className="ml-2">{tsln.atLeast60}</p>
             </div>
             <div className="flex">
               <img
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
               <p className="ml-2">{tsln.haveNetIncomeLess}</p>
             </div>
           </div>
-          <h2 className="text-xs  sm:h2 xs:mt-8 sm:mt-14 mb-2">
+          <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.headerWhatToKnow}
           </h2>
           <p className="mt-3 mb-8 font-bold  md:w-3/5">{tsln.pleaseNodeText}</p>
@@ -77,10 +77,10 @@ const Home: NextPage = () => {
             <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
           </ul>
 
-          <h2 className="text-xs  sm:h2 mt-8 sm:mt-12 mb-2">
+          <h2 className="text-xs sm:h2 mt-8 sm:mt-12 mb-2">
             {tsln.timeToCompleteText}
           </h2>
-          <p className="sm:w-3/5">{tsln.estimatorTake5mins}</p>
+          <p className="sm:w-3/5">{tsln.estimatorTimeEstimate}</p>
 
           <div className="flex justify-start mt-8 sm:mt-12">
             <Button
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
               className=" w-auto justify-center"
             />
           </div>
-          <h2 className="text-xs  font-bold sm:h2 mt-12 sm:mt-16 mb-2">
+          <h2 className="text-xs font-bold sm:h2 mt-12 sm:mt-16 mb-2">
             {tsln.whatBenefitsTheEstimatorIsFor}
           </h2>
 
@@ -105,21 +105,21 @@ const Home: NextPage = () => {
             />
 
             <h3 className="h3 mt-6 mb-2">{tsln.gis}</h3>
-            <p>{tsln.gisDefinationText}</p>
+            <p>{tsln.gisDefinitionText}</p>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutGIS }}
+              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutGis }}
             />
 
             <h3 className="h3 mt-6 mb-2">{tsln.alw}</h3>
-            <p>{tsln.alwDefinationText}</p>
+            <p>{tsln.alwDefinitionText}</p>
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAlw }}
             />
 
             <h3 className="h3 mt-6 mb-2">{tsln.afs}</h3>
-            <p>{tsln.afsDefinationText}</p>
+            <p>{tsln.afsDefinitionText}</p>
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAfs }}
@@ -131,18 +131,16 @@ const Home: NextPage = () => {
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutCpp }}
             />
 
-            <h2 className="text-xs  sm:h2 mt-12 mb-2">
-              {tsln.aboutResultText}
-            </h2>
+            <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.resultDefination }}
+              dangerouslySetInnerHTML={{ __html: tsln.resultDefinition }}
             />
 
-            <h2 className="text-xs  sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>
+            <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.privacyDefination }}
+              dangerouslySetInnerHTML={{ __html: tsln.privacyDefinition }}
             />
           </div>
         </div>
