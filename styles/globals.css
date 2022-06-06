@@ -167,15 +167,6 @@
     @apply sm:w-8/12
   }
 
-  #mainHeader > header > div {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
-
-  #mainHeader > header > div.ds-container > nav > ul > li {
-    margin-left : 0px !important;
-  }
-
   li.ds-inline-block.ds-w-100 {
     margin-left: 0px;
   }
