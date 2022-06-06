@@ -68,7 +68,7 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
           searchProps={searchProps}
           breadCrumbItems={breadcrumbs}
         />
-        <div className="w-11/12 ds-container mx-auto flex flex-col mb-16 mt-8">
+        <div className="ds-container flex flex-col mb-16 mt-8">
           <Heading
             id="applicationTitle"
             title={tsln.title}
