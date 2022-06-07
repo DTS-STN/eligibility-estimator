@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <name>Dev_single-tier-appliction Config DSL Script</name>
-  <groupId>Dev_single-tier-appliction</groupId>
-  <artifactId>Dev_single-tier-appliction_dsl</artifactId>
+  <name>Dev_next-template Config DSL Script</name>
+  <groupId>Dev_next-template</groupId>
+  <artifactId>Dev_next-template_dsl</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <parent>

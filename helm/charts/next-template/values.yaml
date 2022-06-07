@@ -7,6 +7,9 @@ image:
   tag: stable
   pullPolicy: IfNotPresent
 
+deployment:
+  annotations: {}
+
 healthChecks:
   livenessDelay: 60
   readinessDelay: 60
