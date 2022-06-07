@@ -2,6 +2,11 @@ node_modules/
 .next/
 .yarn/
 coverage/
-helmfile/
-helm/
+out/
 yarn.lock
+
+# unsupported syntax
+helmfile/helmfile.yaml
+helm/charts/next-template/templates/service.yaml
+helm/charts/next-template/templates/ingress.yaml
+helm/charts/next-template/templates/deployment.yaml
