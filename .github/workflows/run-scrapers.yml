@@ -10,8 +10,89 @@ jobs:
     - id: import_gpg
       uses: crazy-max/ghaction-import-gpg@v5
       with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-        passphrase: ${{ secrets.GPG_PASSPHRASE }}
+        gpg_private_key: |
+          -----BEGIN PGP PRIVATE KEY BLOCK-----
+
+          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
+          =q56f
+          -----END PGP PRIVATE KEY BLOCK-----
+        passphrase: ''
         git_user_signingkey: true
         git_commit_gpgsign: true
         git_committer_name: DTS-STN
