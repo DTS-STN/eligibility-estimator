@@ -1,5 +1,9 @@
 import { WebTranslations } from '.'
-import { Language, Locale } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  Locale,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
@@ -129,24 +133,27 @@ const en: WebTranslations = {
     empty: 'This information is required',
   },
   validationErrors: {
-    incomeBelowZero: 'Your income must be above zero.',
-    incomeTooHigh:
-      'Your annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.',
-    partnerIncomeBelowZero: "Your partner's income must be above zero.",
-    partnerIncomeTooHigh:
-      "The sum of you and your partner's annual income must be less than {MAX_OAS_INCOME} to receive any of the benefits covered by this tool.",
-    ageUnder18:
+    [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',
+    [ValidationErrors.partnerIncomeBelowZero]:
+      "Your partner's income must be above zero.",
+    [ValidationErrors.incomeTooHigh]:
+      'Your annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.',
+    [ValidationErrors.partnerIncomeTooHigh]:
+      "The sum of you and your partner's annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.",
+    [ValidationErrors.ageUnder18]:
       'You must be at least 60 years old to receive Canadian old age benefits.',
-    ageOver150: 'Your age should be less than 150.',
-    oasAge65to70: 'You must enter an age between 65 and 70.',
-    partnerAgeUnder18:
+    [ValidationErrors.partnerAgeUnder18]:
       "Your partner's age must be over 18 to be able to use this tool.",
-    partnerAgeOver150: "Your partner's age should be less than 150.",
-    yearsInCanadaMinusAge:
+    [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
+    [ValidationErrors.partnerAgeOver150]:
+      "Your partner's age should be less than 150.",
+    [ValidationErrors.oasAge65to70]: 'You must enter an age between 65 and 70.',
+    [ValidationErrors.yearsInCanadaMinusAge]:
       'The number of years you have lived in Canada should be no more than your age minus 18.',
-    partnerYearsInCanadaMinusAge:
+    [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
   },
+  unableToProceed: 'Unable to proceed',
   unavailableImageAltText: 'Happy people',
   govt: 'Government of Canada',
   yes: 'Yes',

@@ -1,6 +1,10 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
-import { Language, Locale } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  Locale,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
@@ -131,26 +135,29 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
-    incomeBelowZero: 'Vos revenus doivent être supérieurs à zéro.',
-    incomeTooHigh:
-      "Votre revenu annuel doit être inférieur à {MAX_OAS_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
-    partnerIncomeBelowZero:
+    [ValidationErrors.incomeBelowZero]:
+      'Vos revenus doivent être supérieurs à zéro.',
+    [ValidationErrors.partnerIncomeBelowZero]:
       'Les revenus de votre partenaire doivent être supérieurs à zéro.',
-    partnerIncomeTooHigh:
-      "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {MAX_OAS_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
-    ageUnder18:
+    [ValidationErrors.incomeTooHigh]:
+      "Votre revenu annuel doit être inférieur à {OAS_MAX_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
+    [ValidationErrors.partnerIncomeTooHigh]:
+      "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
+    [ValidationErrors.ageUnder18]:
       'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
-    ageOver150: 'Votre âge doit être inférieur à 150 ans.',
-    oasAge65to70: 'Vous devez saisir un âge compris entre 65 et 70 ans.',
-    partnerAgeUnder18:
+    [ValidationErrors.partnerAgeUnder18]:
       "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
-    partnerAgeOver150:
+    [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
+    [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
-    yearsInCanadaMinusAge:
+    [ValidationErrors.oasAge65to70]:
+      'Vous devez saisir un âge compris entre 65 et 70 ans.',
+    [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
-    partnerYearsInCanadaMinusAge:
+    [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
   },
+  unableToProceed: 'Impossible de continuer',
   unavailableImageAltText: 'Gens Heureux',
   govt: 'Gouvernement du Canada',
   yes: 'Oui',
