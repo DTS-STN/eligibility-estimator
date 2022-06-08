@@ -79,14 +79,32 @@ export type WebTranslations = {
     tableHeader1: string
     tableHeader2: string
     tableTotalAmount: string
+    whatYouToldUs: string,
     youMayBeEligible: string
     basedOnYourInfo: string
     yourEstimatedTotal: string
     basedOnYourInfoTotal: string
     nextSteps: string
-    youMayNotBeEligible: string    
+    youMayNotBeEligible: string
+  }
+  resultsQuestions: {
+    age: string
+    livingCountry: string
+    legalStatus: string
+    canadaWholeLife: string
+    yearsInCanadaSince18: string
+    income: string
+    maritalStatus: string
+    partnerBenefitStatus: string 
+    partnerAge: string
+    partnerLivingCountry: string
+    partnerLegalStatus: string
+    partnerCanadaWholeLife: string
+    partnerYearsInCanadaSince18: string
+    partnerIncome: string
   }
   moreInfoHeader: string
+  startOver: string
   modifyAnswers: string
   modifyAnswersText: string
   errors: {

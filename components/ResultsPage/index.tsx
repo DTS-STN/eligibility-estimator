@@ -1,17 +1,18 @@
 import { Button, Message } from '@dts-stn/decd-design-system'
-import Image from 'next/image'
+//import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
-import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { FAQ } from '../FAQ'
+//import { EstimationSummaryState } from '../../utils/api/definitions/enums'
+//import { FAQ } from '../FAQ'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
 import { ListLinks } from './ListLinks'
 import { MoreInfoLinks } from './MoreInfoLinks'
 import { ResultsApply } from './ResultsApply'
 //import { ResultsTable } from './ResultsTable'
 import { ResultsBoxes } from './ResultsBoxes'
-import { NeedHelp } from '../NeedHelp'
+//import { NeedHelp } from '../NeedHelp'
+import { YourAnswers } from './YourAnswers'
 
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
@@ -21,27 +22,44 @@ export const ResultsPage: React.VFC = () => {
   const router = useRouter()
 
   const listLinks = [
-    { text: "You may be eligible at this time", url: "#eligible" },
-    { text: "Your estimated monthly total", url: "#estimated" },
-    { text: "What you told us", url: "#answers" },
-    { text: "Next steps for benefits you may be eligible", url: "#next" },
-    { text: "Benefits you may not be eligible for", url: "#noteligible" }
+    { text: tsln.resultsPage.youMayBeEligible, url: "#eligible" },
+    { text: tsln.resultsPage.yourEstimatedTotal, url: "#estimated" },
+    { text: tsln.resultsPage.whatYouToldUs, url: "#answers" },
+    { text: tsln.resultsPage.nextSteps, url: "#next" },
+    { text: tsln.resultsPage.youMayNotBeEligible, url: "#noteligible" }
   ]
+
+  console.log("Root inputs proxy")
+  console.log(root.inputs)
+  const inputX = root.inputs
+
+  
+  inputX.map(([key,value]) => {
+    console.log('key =', key, ' value=', value)
+    console.log(tsln.resultsQuestions[key])
+  }) 
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
         <div className="col-span-2">
-          <Message id="resultId" type="info" alert_icon_id="resultIdInfo" message_heading={root.summary.title} message_body={root.summary.details} />
+          <Message id="resultId" type="info" alert_icon_id="resultIdInfo" alert_icon_alt_text="Info" message_heading={root.summary.title} message_body={root.summary.details} />
 
           <ListLinks title="On This Page:" links={listLinks} />
           
           <ResultsBoxes />
           
+          <Button
+              text={tsln.startOver}
+              styling="secondary"
+              className="mt-6 justify-center md:w-[fit-content]"
+              onClick={(e) => router.push('/eligibility')}
+            />
+
         </div>
 
         <div className="col-span-1">
-          <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
+          <YourAnswers title={tsln.resultsPage.whatYouToldUs} questions={inputX} />
         </div>
       </div>
       {/* {root.summary.state &&

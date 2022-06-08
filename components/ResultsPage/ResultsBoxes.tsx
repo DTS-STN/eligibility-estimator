@@ -6,9 +6,7 @@ import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Locale } from '../../utils/api/definitions/enums'
 import { useStore, useTranslation } from '../Hooks'
-//import { ResultsTableRowDesktop } from './ResultsTableRowDesktop'
-import { ResultsTableRowNew } from './ResultsTableRowNew'
-//import { ResultsTableRowMobile } from './ResultsTableRowMobile'
+import { ResultsTableRow } from './ResultsTableRow'
 import { MessageBox } from './MessageBox'
 
 export const ResultsBoxes = observer(() => {
@@ -28,11 +26,6 @@ export const ResultsBoxes = observer(() => {
 
       <div className='pl-12'>
         {tsln.resultsPage.basedOnYourInfo}
-
-        { console.log('oas', root.oas?.eligibility?.detail) }
-        { console.log('gis', root.gis?.eligibility?.detail) }
-        { console.log('allowance', root.allowance?.eligibility?.detail) }
-        { console.log('afs', root.afs?.eligibility?.detail) }
 
         <ul className="pl-5 list-disc text-content font-semibold">
           {root.oas?.eligibility?.detail.split('\n')[0] === ('Eligible' || 'Admissible') ? <li key={root.oas}>{tsln.oas}</li> : ''}
@@ -59,31 +52,26 @@ export const ResultsBoxes = observer(() => {
             </tr>
           </thead>
 
-          {console.log('oas eligible =',root.oas)}
-          {console.log('gis eligible =',root.gis)}
-          {console.log('alw eligible =',root.allowance)}
-          {console.log('afs eligible =',root.afs)}
-
           <tbody className="align-top">
-            <ResultsTableRowNew
+            <ResultsTableRow
               heading={tsln.oas}
               data={root.oas}
               locale={locale}
               showEntitlement={!root.summary.zeroEntitlements}
             />
-            <ResultsTableRowNew
+            <ResultsTableRow
               heading={tsln.gis}
               data={root.gis}
               locale={locale}
               showEntitlement={!root.summary.zeroEntitlements}
             />
-            <ResultsTableRowNew
+            <ResultsTableRow
               heading={tsln.alw}
               data={root.allowance}
               locale={locale}
               showEntitlement={!root.summary.zeroEntitlements}
             />
-            <ResultsTableRowNew
+            <ResultsTableRow
               heading={tsln.afs}
               data={root.afs}
               locale={locale}
@@ -107,22 +95,17 @@ export const ResultsBoxes = observer(() => {
 
       <h2 id="next" className="h2 mt-5">{tsln.resultsPage.nextSteps}</h2>
 
-      <MessageBox title={tsln.oas} eligible={true} eligibleText="Eligible" text="Based en what you told us <strong>you do not need to apply</strong> You will ..." links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about OAS" }]} />
-      <MessageBox title={tsln.gis} eligible={true} eligibleText="Eligible" text="Based en what you told us <strong>you may have to apply</strong> for this benefit ..." links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about GIS" }, {icon:'link', url:'canada.ca', alt:'link', text:"Determine if you need to apply to GIS" }]} />
+      <MessageBox title={tsln.oas} eligible={true} eligibleText="Eligible" links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about OAS" }]}> Based en what you told us <strong>you do not need to apply</strong> You will ...</MessageBox>
+      <MessageBox title={tsln.gis} eligible={true} eligibleText="Eligible" links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about GIS" }, {icon:'link', url:'canada.ca', alt:'link', text:"Determine if you need to apply to GIS" }]}> Based en what you told us <strong>you may have to apply</strong> for this benefit ...</MessageBox>
       
       {/* Benefits you may not be eligible */}
 
       <h2 id="next" className="h2 mt-12">{tsln.resultsPage.youMayNotBeEligible}</h2>
       
-      <MessageBox title={tsln.alw} eligible={false} eligibleText="Not eligible" text="The allowance benefit is for indivuduals between the ages of 60 and 64" links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about Allowance benefit" }, , {icon:'note', url:'canada.ca', alt:'note', text:"View the full eligibility criteria for the allowance benefit" }]} />
-      <MessageBox title={tsln.afs} eligible={false} eligibleText="Not eligible" text="The allowance for the survivor is for individuals between ..." links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about the Allowance for the survivor benefit" }, {icon:'note', url:'canada.ca', alt:'note', text:"View the full eligibity critera for AFS" }]} />
+      <MessageBox title={tsln.alw} eligible={false} eligibleText="Not eligible" links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about Allowance benefit" }, , {icon:'note', url:'canada.ca', alt:'note', text:"View the full eligibility criteria for the allowance benefit" }]}> The allowance benefit is for indivuduals between the ages of 60 and 64 </MessageBox>
+      <MessageBox title={tsln.afs} eligible={false} eligibleText="Not eligible" links={[{icon:'info', url:'canada.ca', alt:'info', text:"Learn more about the Allowance for the survivor benefit" }, {icon:'note', url:'canada.ca', alt:'note', text:"View the full eligibity critera for AFS" }]}> The allowance for the survivor is for individuals between ...</MessageBox>
 
-
-      <hr className='my-12 border border-[#BBBFC5]' />
-      <hr className='my-12 border border-[#BBBFC5]' />
-      <hr className='my-12 border border-[#BBBFC5]' />
-
-
+      
       {/* desktop only */}
       {/* <table className="hidden md:block text-left">
         <thead className="font-bold border-b border-content">
