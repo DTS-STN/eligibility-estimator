@@ -29,48 +29,6 @@ import {
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('consolidated benefit tests: unavailable', () => {
-  it('returns "unavailable" - sponsored', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.SPONSORED,
-      ...canadaWholeLife,
-      ...partnerUndefined,
-    })
-    expectOasGisUnavailable(res)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expectAlwAfsTooOld(res)
-  })
-
-  it('returns "unavailable" - legal other', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.OTHER,
-      ...canadaWholeLife,
-      ...partnerUndefined,
-    })
-    expectOasGisUnavailable(res)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expectAlwAfsTooOld(res)
-  })
-
   it('returns "unavailable" - living in Canada, under 10 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -193,28 +151,6 @@ describe('consolidated benefit tests: ineligible', () => {
       oasAge: 65,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      ...canadaWholeLife,
-      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
-    })
-    expectAllIneligible(res)
-    expectOasGisTooYoung(res)
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-  })
-  it('returns "ineligible" - age 50, legal sponsored', async () => {
-    const res = await mockGetRequest({
-      income: 20000,
-      age: 50,
-      oasAge: 65,
-      maritalStatus: MaritalStatus.PARTNERED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.SPONSORED,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
