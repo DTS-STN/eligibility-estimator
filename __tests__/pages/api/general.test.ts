@@ -188,4 +188,11 @@ describe('sanity checks', () => {
     })
     expect(res.status).toEqual(200)
   })
+  it('fails when marital status is involuntarily separated', async () => {
+    const res = await mockGetRequestError({
+      maritalStatus: MaritalStatus.INV_SEPARATED,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+  })
 })

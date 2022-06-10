@@ -105,12 +105,16 @@ const en: Translations = {
       },
     ],
     maritalStatus: [
-      { key: MaritalStatus.SINGLE, text: 'Single' },
-      { key: MaritalStatus.MARRIED, text: 'Married' },
-      { key: MaritalStatus.COMMON_LAW, text: 'Common-law' },
-      { key: MaritalStatus.WIDOWED, text: 'Surviving Partner/Widowed' },
-      { key: MaritalStatus.DIVORCED, text: 'Divorced' },
-      { key: MaritalStatus.SEPARATED, text: 'Separated' },
+      {
+        key: MaritalStatus.SINGLE,
+        text: 'Single, divorced, or separated',
+      },
+      {
+        key: MaritalStatus.PARTNERED,
+        text: 'Married or common-law',
+      },
+      { key: MaritalStatus.WIDOWED, text: 'Surviving partner or widowed' },
+      { key: MaritalStatus.INV_SEPARATED, text: 'Involuntarily separated' },
     ],
     partnerBenefitStatus: [
       {
