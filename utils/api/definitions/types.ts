@@ -30,7 +30,7 @@ export interface RequestInput {
   maritalStatus: MaritalStatus
   livingCountry: string // country code
   legalStatus: LegalStatus
-  canadaWholeLife: boolean
+  livedOutsideCanada: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
@@ -38,7 +38,7 @@ export interface RequestInput {
   partnerAge: number
   partnerLivingCountry: string // country code
   partnerLegalStatus: LegalStatus
-  partnerCanadaWholeLife: boolean
+  partnerLivedOutsideCanada: boolean
   partnerYearsInCanadaSince18: number
   partnerEverLivedSocialCountry: boolean
   _language?: Language
@@ -54,7 +54,7 @@ export interface ProcessedInput {
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
-  canadaWholeLife: boolean
+  livedOutsideCanada: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper

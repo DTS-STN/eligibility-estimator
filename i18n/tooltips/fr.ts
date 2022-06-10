@@ -1,66 +1,18 @@
+import { FieldKey } from '../../utils/api/definitions/fields'
+import apiFr from '../api/fr'
 import { TooltipTranslations } from './index'
 
 const fr: TooltipTranslations = {
-  income: {
-    heading: 'Revenu annuel net',
-    text: "<p>Votre revenu annuel net est votre revenu après impôt. Vous pouvez trouver votre revenu annuel net total à la ligne 236 de votre déclaration de revenus. <br  /> Les paiements de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l'Allocation ou de l'Allocation au survivant ne sont pas inclus dans votre revenu.<br  />déclaration de revenus, vous pouvez utiliser une estimation de votre revenu. Si vous avez plus d'une source de revenu (par exemple, salaire, revenu de placement, revenu de pension), vous devez additionner toutes les estimations de revenu net avant d'inscrire le montant total. N'incluez pas les revenus de votre conjoint ou d'une personne à charge.</p>",
-  },
-  age: {
-    heading: 'Âge',
-    text: 'Veuillez indiquer votre âge actuel.',
-  },
-  oasAge: {
-    heading: 'Âge de report de la SV',
-    text: "Veuillez entrer l'âge auquel vous souhaitez commencer à recevoir la SV, entre 65 et 70 ans. Si vous entrez quelque chose de plus de 65 ans, il s'agit d'un report de la SV. Plus vous différez votre rente, plus vos versements seront élevés. Si vous n'êtes pas sûr, entrez 65.",
-  },
-  maritalStatus: {
-    heading: 'État civil actuel',
+  [FieldKey.MARITAL_STATUS]: {
+    heading: apiFr.category.marital,
     text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint(e) de fait</span>: Vous vivez avec une autre personne dans une relation conjugale depuis au moins un an. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Divorcé(e)</span>: Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Marié(e)</span>: Vous êtes unies officiellement au cours d’une cérémonie. Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Célibataire </span>: Vous n'avez jamais été marié et ne vivez pas en union de fait. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint survivant/veuf</span>: Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Séparé(e):</span> Vous vivez séparé de votre époux ou de votre conjoint à cause de la rupture de votre relation depuis au moins 90 jours et vous ne vous êtes pas réconcilié.</p>",
   },
-  partnerBenefitStatus: {
-    heading: 'Eligibilité de votre conjoint aux prestations',
-    text: 'Une personne a droit à la pleine pension de la Sécurité de la vieillesse seulement si elle a habité au Canada pendant au moins 40 ans après l’âge de 18 ans.',
-  },
-  livingCountry: {
-    heading: 'Lieu de résidence actuel',
-    text: 'Le nom du pays ou du territoire où vous résidez (vous devez avoir été légalement admis dans ce pays ou ce territoire).',
-  },
-  legalStatus: {
-    heading: 'Statut légal',
+  [FieldKey.LEGAL_STATUS]: {
+    heading: apiFr.category.legal,
     text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Citoyen canadien:</span> Vous êtes Canadien de naissance (née au Canada ou née à l’extérieur du Canada d’un parent citoyen canadien qui est lui-même né au Canada ou qui a obtenu la citoyenneté) ou vous avez  demandé et obtenu la citoyenneté canadienne.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (non parrainé):</span> Vous avez obtenu le statut de résident permanent en immigrant au Canada, mais qui n’êtes pas encore citoyen canadien.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (parrainé):</span>Vous êtes un étranger qui a présenté une demande de résidence permanente au titre de la catégorie du regroupement familial, qui est parrainé par un répondant canadien approuvé et qui satisfait aux exigences de la catégorie du regroupement familial.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Statut d'Indien ou carte de statut:</span>  Vous êtes inscrits en tant qu'Indien selon la définition qu'en donne la Loi sur les Indiens.</p>",
   },
-  canadaWholeLife: {
-    heading: 'Lieu de résidence au Canadaa',
-    text: 'Notez que les périodes où vous avez résidé dans un pays étranger pendant moins de 6 mois ne comptent pas.',
-  },
-  yearsInCanadaSince18: {
-    heading: 'Années vécues au Canada',
-    text: "Ceci inclut les périodes pendant lesquelles vous avez vécu au Canada. Si vous n'avez pas habité au Canada toute votre vie, toute absence du Canada de plus de 6 mois n'est pas incluse. ",
-  },
-  everLivedSocialCountry: {
-    heading: 'Pays ayant un accord de sécurité sociale',
-    text: 'Vous pourriez être admissible si vous avez vécu dans l’un des pays ayant un accord de sécurité sociale avec le Canada.',
-  },
-  partnerIncome: {
-    useDataFromKey: 'income',
-  },
-  partnerAge: {
-    useDataFromKey: 'age',
-  },
-  partnerLivingCountry: {
-    useDataFromKey: 'livingCountry',
-  },
-  partnerLegalStatus: {
+  [FieldKey.PARTNER_LEGAL_STATUS]: {
     useDataFromKey: 'legalStatus',
-  },
-  partnerCanadaWholeLife: {
-    useDataFromKey: 'canadaWholeLife',
-  },
-  partnerYearsInCanadaSince18: {
-    useDataFromKey: 'yearsInCanadaSince18',
-  },
-  partnerEverLivedSocialCountry: {
-    useDataFromKey: 'everLivedSocialCountry',
   },
 }
 

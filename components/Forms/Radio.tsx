@@ -30,14 +30,13 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           data-testid="radio-label"
           className="inline mb-2.5 flex-nowrap"
         >
-          <span className="text-danger">* </span>
           <span
             className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
         </label>
         <span>
-          <span className="text-danger font-bold ml-1">({requiredText})</span>
+          <span className="ml-1">({requiredText})</span>
           <Tooltip field={name} />
         </span>
       </div>
@@ -63,7 +62,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
             htmlFor={`${keyforid}-${index}`}
             className="radio flex items-center"
           >
-            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-grey min-w-[32px] bg-white"></span>
+            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white"></span>
             <p className="text-content ">{val.text}</p>
           </label>
         </div>

@@ -5,6 +5,7 @@ import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
 import {
   EntitlementResultType,
+  Language,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -75,7 +76,10 @@ export class BenefitHandler {
 
   get fieldData(): FieldData[] {
     if (this._fieldData === undefined) {
-      this._fieldData = this.getFieldData()
+      this._fieldData = BenefitHandler.getFieldData(
+        this.requiredFields,
+        this.translations
+      )
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
@@ -136,9 +140,9 @@ export class BenefitHandler {
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
-      canadaWholeLife: this.rawInput.canadaWholeLife,
-      // if canadaWholeLife, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18: this.rawInput.canadaWholeLife
+      livedOutsideCanada: this.rawInput.livedOutsideCanada,
+      // if not livedOutsideCanada, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: !this.rawInput.livedOutsideCanada
         ? 40
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
@@ -155,8 +159,8 @@ export class BenefitHandler {
         this.rawInput.partnerLivingCountry
       ),
       legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
-      canadaWholeLife: this.rawInput.partnerCanadaWholeLife,
-      yearsInCanadaSince18: this.rawInput.partnerCanadaWholeLife
+      livedOutsideCanada: this.rawInput.partnerLivedOutsideCanada,
+      yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
@@ -181,9 +185,9 @@ export class BenefitHandler {
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
-      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.LIVED_OUTSIDE_CANADA,
     ]
-    if (this.input.client.canadaWholeLife === false) {
+    if (this.input.client.livedOutsideCanada) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.age >= 65 && this.input.client.age < 70) {
@@ -209,10 +213,10 @@ export class BenefitHandler {
           FieldKey.PARTNER_AGE,
           FieldKey.PARTNER_LEGAL_STATUS,
           FieldKey.PARTNER_LIVING_COUNTRY,
-          FieldKey.PARTNER_CANADA_WHOLE_LIFE
+          FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
         )
       }
-      if (this.input.partner.canadaWholeLife === false) {
+      if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
       if (
@@ -387,46 +391,48 @@ export class BenefitHandler {
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    */
-  private replaceTextVariables(textToProcess: string): string {
-    const re = new RegExp(/{\w*?}/)
-
-    // only run when necessary
-    if (re.test(textToProcess))
-      for (const key in textReplacementRules) {
-        textToProcess = textToProcess.replace(
-          `{${key}}`,
-          textReplacementRules[key](this)
-        )
-      }
-
-    // validate that no replacements were missed
-    if (re.test(textToProcess))
-      throw new Error(
-        `Unprocessed replacement variable: ${re.exec(textToProcess)}`
-      )
-
+  replaceTextVariables(textToProcess: string): string {
+    const re: RegExp = new RegExp(/{(\w*?)}/g)
+    const matches: IterableIterator<RegExpMatchArray> =
+      textToProcess.matchAll(re)
+    for (const match of matches) {
+      const key: string = match[1]
+      const replacementRule = textReplacementRules[key]
+      if (!replacementRule)
+        throw new Error(`no text replacement rule for ${key}`)
+      textToProcess = textToProcess.replace(`{${key}}`, replacementRule(this))
+    }
     return textToProcess
   }
 
   /**
-   * Accepts a list of requiredFields, transforms that into a full list of field configurations for the frontend to use.
+   * Accepts a list of FieldKeys, transforms that into a full list of field configurations for the frontend to use.
    */
-  private getFieldData(): FieldData[] {
+  static getFieldData(
+    fields: FieldKey[],
+    translations: Translations
+  ): FieldData[] {
     // takes list of keys, builds list of definitions
-    const fieldDataList = this.requiredFields.map((x) => fieldDefinitions[x])
+    const fieldDataList = fields
+      .sort(this.sortFields)
+      .map((x) => fieldDefinitions[x])
 
     // applies translations
     fieldDataList.map((fieldData) => {
       // translate category
-      const category = this.translations.category[fieldData.category.key]
+      const category = translations.category[fieldData.category.key]
       if (!category)
         throw new Error(`no category for key ${fieldData.category}`)
       fieldData.category.text = category
 
       // translate label/question
-      const label = this.translations.question[fieldData.key]
+      const label = translations.question[fieldData.key]
       if (!label) throw new Error(`no question for key ${fieldData.key}`)
       fieldData.label = label
+
+      // translate question help text
+      const helpText = translations.questionHelp[fieldData.key]
+      fieldData.helpText = helpText || ''
 
       // translate values/questionOptions
       if (
@@ -435,28 +441,43 @@ export class BenefitHandler {
         fieldData.type === FieldType.RADIO
       ) {
         // looks up using the main key first
-        let questionOptions = this.translations.questionOptions[fieldData.key]
+        let questionOptions = translations.questionOptions[fieldData.key]
         if (!questionOptions)
           // if that fails, uses the relatedKey instead
-          questionOptions =
-            this.translations.questionOptions[fieldData.relatedKey]
+          questionOptions = translations.questionOptions[fieldData.relatedKey]
         if (!questionOptions)
           throw new Error(
             `no questionOptions for key ${fieldData.key} or relatedKey ${fieldData.relatedKey}`
           )
-        fieldData.values = questionOptions
+
+        fieldData.values =
+          // sometimes we use booleans as keys, this normalizes all these into strings
+          questionOptions.map((option) => ({
+            ...option,
+            key: String(option.key),
+          }))
       }
 
       return fieldData
     })
-
     return fieldDataList
+  }
+
+  /**
+   * Returns the field data for all fields.
+   * This is so that the UI can be aware of everything right away, rather than waiting for inputs to know the upcoming fields.
+   */
+  static getAllFieldData(language: Language): FieldData[] {
+    return this.getFieldData(Object.values(FieldKey), getTranslations(language))
   }
 
   /**
    * Sorts fields by the order specified in fieldDefinitions.
    */
   static sortFields(a: string, b: string): number {
-    return fieldDefinitions[a].order - fieldDefinitions[b].order
+    const keyList = Object.keys(fieldDefinitions)
+    const indexA = keyList.findIndex((value) => value === a)
+    const indexB = keyList.findIndex((value) => value === b)
+    return indexA - indexB
   }
 }

@@ -10,9 +10,9 @@ import {
   getTooltipTranslationByField,
   Tooltip,
 } from '../../components/Tooltip/tooltip'
+import { getTooltipTranslations } from '../../i18n/tooltips'
 import { Language } from '../../utils/api/definitions/enums'
 
-// gets data correctly and presents it
 describe('Tooltip component', () => {
   let useRouter
 
@@ -29,41 +29,29 @@ describe('Tooltip component', () => {
   })
 
   it('can render an input component that is required component', () => {
-    const props = {
-      field: 'income',
-    }
-
+    const field = 'legalStatus'
     const ui = (
       <StoreProvider>
-        <Tooltip field={props.field} />
+        <Tooltip field={field} />
       </StoreProvider>
     )
-
     render(ui)
 
     const tooltip = screen.getByTestId('tooltip')
-    expect(tooltip.textContent).toContain(
-      getTooltipTranslationByField(Language.EN, props.field).heading
-    )
-    expect(tooltip.innerHTML).toContain(
-      getTooltipTranslationByField(Language.EN, props.field).text
-    )
+    const tooltipData = getTooltipTranslationByField(Language.EN, field)
+    expect(tooltip.innerHTML).toContain(tooltipData.heading)
+    expect(tooltip.innerHTML).toContain(normalizeHtml(tooltipData.text))
   })
 
-  // throws if tooltip not found
-  it('should throw if the tooltip cannot be found by key', () => {
-    const props = {
-      field: 'fakeKey',
-    }
-
-    const ui = (
-      <StoreProvider>
-        <Tooltip field={props.field} />
-      </StoreProvider>
-    )
-
-    expect(() => render(ui)).toThrowError(
-      `Tooltip with key "fakeKey" not found in internationalization file.`
-    )
+  it('ensures English and French have the same number of tooltip translations', () => {
+    const en = getTooltipTranslations(Language.EN)
+    const fr = getTooltipTranslations(Language.FR)
+    expect(Object.keys(en).length).toEqual(Object.keys(fr).length)
   })
 })
+
+function normalizeHtml(html: string) {
+  let element = document.createElement('div')
+  element.innerHTML = html
+  return element.innerHTML
+}
