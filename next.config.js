@@ -8,4 +8,13 @@ module.exports = {
     // https://nextjs.org/docs/advanced-features/output-file-tracing
     outputStandalone: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/interact',
+        destination: '/interact.html',
+        permanent: false,
+      },
+    ]
+  },
 }
