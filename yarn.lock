@@ -30,7 +30,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.17.9, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+"@babel/core@npm:^7.1.0, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
   version: 7.17.9
   resolution: "@babel/core@npm:7.17.9"
   dependencies:
@@ -569,16 +569,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "@headlessui/react@npm:1.5.0"
-  peerDependencies:
-    react: ^16 || ^17 || ^18
-    react-dom: ^16 || ^17 || ^18
-  checksum: e3373dfb73936950d659a87718fb9fdedc599b344b30cb0d8b1ef0a2ec13d6f405c653fa51284236788658840ece82c6a8538a5a5931e595274e9590b2020079
-  languageName: node
-  linkType: hard
-
 "@humanwhocodes/config-array@npm:^0.9.2":
   version: 0.9.2
   resolution: "@humanwhocodes/config-array@npm:0.9.2"
@@ -1048,7 +1038,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.13.0":
+"@testing-library/dom@npm:^8.0.0":
   version: 8.13.0
   resolution: "@testing-library/dom@npm:8.13.0"
   dependencies:
@@ -1790,7 +1780,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:^4.3.5, axe-core@npm:^4.4.1":
+"axe-core@npm:^4.3.5":
   version: 4.4.1
   resolution: "axe-core@npm:4.4.1"
   checksum: ad14c5b71059dc3d24ef2519b8cd96e98b4a572379396201ce449d1c4262181821d6ca9550df65b22371faf06d28bbe94d391fe5675f2a08e6550f7b5da8416d
@@ -2633,11 +2623,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
-    "@babel/core": ^7.17.9
     "@dts-stn/decd-design-system": "DTS-STN/DECD-Design-System#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32"
-    "@headlessui/react": ^1.5.0
     "@tailwindcss/forms": ^0.5.0
-    "@testing-library/dom": ^8.13.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
     "@types/jest": ^27.5.1
@@ -2646,14 +2633,10 @@ __metadata:
     "@types/react": ^17.0.42
     "@types/testing-library__jest-dom": ^5.14.3
     autoprefixer: ^10.4.4
-    axe-core: ^4.4.1
-    babel-jest: ^27.5.1
     csv-writer: ^1.6.0
     eslint: ^8.17.0
     eslint-config-next: ^12.1.4
     husky: ^7.0.4
-    identity-obj-proxy: ^3.0.0
-    isarray: ^2.0.5
     jest: ^27.5.1
     joi: ^17.6.0
     jsdom: ^19.0.0
@@ -3476,13 +3459,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"harmony-reflect@npm:^1.4.6":
-  version: 1.6.2
-  resolution: "harmony-reflect@npm:1.6.2"
-  checksum: 2e5bae414cd2bfae5476147f9935dc69ee9b9a413206994dcb94c5b3208d4555da3d4313aff6fd14bd9991c1e3ef69cdda5c8fac1eb1d7afc064925839339b8c
-  languageName: node
-  linkType: hard
-
 "has-bigints@npm:^1.0.1":
   version: 1.0.1
   resolution: "has-bigints@npm:1.0.1"
@@ -3656,15 +3632,6 @@ __metadata:
   dependencies:
     safer-buffer: ">= 2.1.2 < 3.0.0"
   checksum: 3f60d47a5c8fc3313317edfd29a00a692cc87a19cac0159e2ce711d0ebc9019064108323b5e493625e25594f11c6236647d8e256fbe7a58f4a3b33b89e6d30bf
-  languageName: node
-  linkType: hard
-
-"identity-obj-proxy@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "identity-obj-proxy@npm:3.0.0"
-  dependencies:
-    harmony-reflect: ^1.4.6
-  checksum: 97559f8ea2aeaa1a880d279d8c49550dce01148321e00a2102cda5ddf9ce622fa1d7f3efc7bed63458af78889de888fdaebaf31c816312298bb3fdd0ef8aaf2c
   languageName: node
   linkType: hard
 
@@ -3960,13 +3927,6 @@ __metadata:
   dependencies:
     call-bind: ^1.0.2
   checksum: 95bd9a57cdcb58c63b1c401c60a474b0f45b94719c30f548c891860f051bc2231575c290a6b420c6bc6e7ed99459d424c652bd5bf9a1d5259505dc35b4bf83de
-  languageName: node
-  linkType: hard
-
-"isarray@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "isarray@npm:2.0.5"
-  checksum: bd5bbe4104438c4196ba58a54650116007fa0262eccef13a4c55b2e09a5b36b59f1e75b9fcc49883dd9d4953892e6fc007eef9e9155648ceea036e184b0f930a
   languageName: node
   linkType: hard
 
