@@ -154,6 +154,8 @@ const en: WebTranslations = {
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:
       'You have indicated a marital status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
+    [ValidationErrors.legalUnavailable]:
+      'You have indicated a legal status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Unable to proceed',
   unavailableImageAltText: 'Happy people',
