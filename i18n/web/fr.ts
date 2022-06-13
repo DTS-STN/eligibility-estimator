@@ -185,6 +185,10 @@ const fr: WebTranslations = {
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
+    [ValidationErrors.maritalUnavailable]:
+      "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+    [ValidationErrors.legalUnavailable]:
+      "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Impossible de continuer',
   unavailableImageAltText: 'Gens Heureux',

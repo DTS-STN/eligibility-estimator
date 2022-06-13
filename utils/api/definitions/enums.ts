@@ -8,11 +8,9 @@ export enum FieldCategory {
 
 export enum MaritalStatus {
   SINGLE = 'single',
-  MARRIED = 'married',
-  COMMON_LAW = 'commonLaw',
+  PARTNERED = 'partnered',
   WIDOWED = 'widowed',
-  DIVORCED = 'divorced',
-  SEPARATED = 'separated',
+  INV_SEPARATED = 'invSeparated',
 }
 
 export enum LegalStatus {
@@ -100,6 +98,8 @@ export enum ValidationErrors {
   oasAge65to70 = 'oasAge65to70',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
+  maritalUnavailable = 'maritalUnavailable',
+  legalUnavailable = 'legalUnavailable',
 }
 
 export enum Language {

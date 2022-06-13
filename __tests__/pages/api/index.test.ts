@@ -66,7 +66,7 @@ describe('GIS entitlement scenarios', () => {
       income: 10000,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -80,7 +80,7 @@ describe('GIS entitlement scenarios', () => {
       income: 0,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -94,7 +94,7 @@ describe('GIS entitlement scenarios', () => {
       income: 10000,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -108,7 +108,7 @@ describe('GIS entitlement scenarios', () => {
       income: 10000,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -122,7 +122,7 @@ describe('GIS entitlement scenarios', () => {
       income: 10000,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
@@ -136,7 +136,7 @@ describe('GIS entitlement scenarios', () => {
       income: 0,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -150,7 +150,7 @@ describe('GIS entitlement scenarios', () => {
       income: 0,
       age: 65,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
@@ -195,7 +195,7 @@ describe('basic Allowance scenarios', () => {
       income: 10000,
       age: 60,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
@@ -219,7 +219,7 @@ describe('Allowance entitlement scenarios', () => {
       income: 20000,
       age: 60,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -234,7 +234,7 @@ describe('Allowance entitlement scenarios', () => {
       income: 10000,
       age: 60,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -248,7 +248,7 @@ describe('Allowance entitlement scenarios', () => {
       income: 0,
       age: 60,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -311,26 +311,6 @@ describe('basic Allowance for Survivor scenarios', () => {
       ResultReason.AGE_YOUNG
     )
   })
-  it('returns "unavailable" when not citizen (other)', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
-      maritalStatus: MaritalStatus.WIDOWED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.OTHER,
-      livedOutsideCanada: true,
-      yearsInCanadaSince18: 20,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.results.afs.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
-    )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-  })
   it('returns "ineligible" when citizen and under 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
@@ -355,7 +335,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       income: 10000,
       age: 60,
       oasAge: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
@@ -453,26 +433,6 @@ describe('basic Allowance for Survivor scenarios', () => {
     )
     expect(res.body.results.afs.eligibility.reason).toEqual(
       ResultReason.YEARS_IN_CANADA
-    )
-  })
-  it('returns "ineligible" when under 60, legal=other', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 55,
-      oasAge: 65,
-      maritalStatus: MaritalStatus.WIDOWED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.OTHER,
-      livedOutsideCanada: true,
-      yearsInCanadaSince18: 10,
-      everLivedSocialCountry: false,
-      ...partnerUndefined,
-    })
-    expect(res.body.results.afs.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
     )
   })
 })

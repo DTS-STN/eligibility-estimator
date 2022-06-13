@@ -42,9 +42,15 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.oasAge65to70)
     .max(70)
     .message(ValidationErrors.oasAge65to70),
-  maritalStatus: Joi.string().valid(...Object.values(MaritalStatus)),
+  maritalStatus: Joi.string()
+    .valid(...Object.values(MaritalStatus))
+    .invalid(MaritalStatus.INV_SEPARATED)
+    .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
-  legalStatus: Joi.string().valid(...Object.values(LegalStatus)),
+  legalStatus: Joi.string()
+    .valid(...Object.values(LegalStatus))
+    .invalid(LegalStatus.SPONSORED, LegalStatus.OTHER)
+    .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
   livedOutsideCanada: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
@@ -71,7 +77,10 @@ export const RequestSchema = Joi.object({
     .max(150)
     .message(ValidationErrors.partnerAgeOver150),
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
-  partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
+  partnerLegalStatus: Joi.string()
+    .valid(...Object.values(LegalStatus))
+    .invalid(LegalStatus.SPONSORED, LegalStatus.OTHER)
+    .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
   partnerLivedOutsideCanada: Joi.boolean(),
   partnerYearsInCanadaSince18: Joi.number()
     .integer()
