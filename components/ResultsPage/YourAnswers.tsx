@@ -57,13 +57,14 @@ export const YourAnswers: React.VFC<{
       return fr.questionOptions.partnerBenefitStatus.find((val) => val.key === status )
   }
 
+  console.log('answersKeys length = ', answersKeys.length)
 
   if (answersKeys.length === 0) 
   return (
     <div className="fz-10">
       <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
         <h3 className="h3">{title}</h3>
-        <div className='py-2'>
+        <div className='py-4'>
           No answers found
         </div>
       </div>
@@ -79,174 +80,195 @@ export const YourAnswers: React.VFC<{
         {console.log('anskeys = ', answersKeys)}
 
         {/* Age */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.AGE)][0]]} <br />
-          <strong>{answers[answersKeys.indexOf(FieldKey.AGE)][1]}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.AGE)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {(answersKeys.indexOf(FieldKey.AGE) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.AGE)][0]]} <br />
+            <strong>{answers[answersKeys.indexOf(FieldKey.AGE)][1]}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.AGE)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Income */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.INCOME)][0]]} <br />
-          <strong>{answers[answersKeys.indexOf(FieldKey.INCOME)][1]}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.INCOME)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {(answersKeys.indexOf(FieldKey.INCOME) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.INCOME)][0]]} <br />
+            <strong>{answers[answersKeys.indexOf(FieldKey.INCOME)][1]}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.INCOME)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Legal Status */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]]} <br />
-          <strong>{getLegalStatus(answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][1]).text}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {(answersKeys.indexOf(FieldKey.LEGAL_STATUS) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]]} <br />
+            <strong>{getLegalStatus(answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][1]).text}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Residence */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]]} <br />
-          <strong>{getLivingCountry(answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][1]).text}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {( answersKeys.indexOf(FieldKey.LIVING_COUNTRY) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]]} <br />
+            <strong>{getLivingCountry(answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][1]).text}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Lived outside of Canada */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][0]]} <br />
-          {answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][1] === 'true' ? (
-            <>
-              <div>
-                <strong>{tsln.yes}</strong> &nbsp;
+        {(answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][0]]} <br />
+            {answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][1] === 'true' ? (
+              <>
+                <div>
+                  <strong>{tsln.yes}</strong> &nbsp;
+                  <DSLink
+                    id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
+                    href=" " 
+                    text="Edit"
+                    target="_blank"
+                  />
+                  <br />
+                  <strong>{answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
+                  {Number(answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
+                  <DSLink
+                    id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
+                    href=" " 
+                    text="Edit"
+                    target="_blank"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <strong>tsln.no</strong>
                 <DSLink
                   id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
                   href=" " 
                   text="Edit"
                   target="_blank"
                 />
-                <br />
-                <strong>{answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
-                {Number(answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
-                <DSLink
-                  id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-                  href=" " 
-                  text="Edit"
-                  target="_blank"
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <strong>tsln.no</strong>
-              <DSLink
-                id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-                href=" " 
-                text="Edit"
-                target="_blank"
-              />
-            </>
-          )}
-        </div>
+              </>
+            )}
+          </div>
+        )}
 
         {/* Marital Status */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]]} <br />
-          <strong>{getMaritalStatus(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1]).text}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {(answersKeys.indexOf(FieldKey.MARITAL_STATUS) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]]} <br />
+            {console.log(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1])}
+            <strong>{getMaritalStatus(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1]).text}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Partner's Income */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]]} <br />
-          <strong>{answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][1]}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {( answersKeys.indexOf(FieldKey.PARTNER_INCOME) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]]} <br />
+            <strong>{answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][1]}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Partner's Old Age Benefit */}
-        <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][0]]} <br />
-          <strong>{getPartnerBenefitStatus(answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][1]).text}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div>
+        {(answersKeys.indexOf(FieldKey.PARTNER_INCOME) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]]} <br />
+            <strong>{getPartnerBenefitStatus(answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][1]).text}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Partner's Legal Status */}
-        {/* <div className='py-2'>
-          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]]} <br />
-          <strong>{getLegalStatus(answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][1]).text}</strong> &nbsp;
-          <DSLink
-            id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]}`}
-            href=" " 
-            text="Edit"
-            target="_blank"
-          />
-        </div> */}
+        {(answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS) > 0 && 
+          <div className='py-4 border-b-2 border-info-border'>
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]]} <br />
+            <strong>{getLegalStatus(answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][1]).text}</strong> &nbsp;
+            <DSLink
+              id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]}`}
+              href=" " 
+              text="Edit"
+              target="_blank"
+            />
+          </div>
+        )}
 
         {/* Partner's Lived Outside of Canada */}
-        {/* <div className='py-2'>
-        {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]]} <br />
-          {answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][1] === 'true' ? (
-            <>
-              <div>
-                <strong>{tsln.yes}</strong> &nbsp;
+        {(answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY) > 0 &&
+          <div className='py-4 border-b-2 border-info-border'>
+          {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]]} <br />
+            {answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][1] === 'true' ? (
+              <>
+                <div>
+                  <strong>{tsln.yes}</strong> &nbsp;
+                  <DSLink
+                    id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
+                    href=" " 
+                    text="Edit"
+                    target="_blank"
+                  />
+                  <br />
+                  <strong>{answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
+                  {Number(answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
+                  <DSLink
+                    id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
+                    href=" " 
+                    text="Edit"
+                    target="_blank"
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <strong>tsln.no</strong>
                 <DSLink
                   id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
                   href=" " 
                   text="Edit"
                   target="_blank"
                 />
-                <br />
-                <strong>{answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
-                {Number(answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
-                <DSLink
-                  id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
-                  href=" " 
-                  text="Edit"
-                  target="_blank"
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <strong>tsln.no</strong>
-              <DSLink
-                id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
-                href=" " 
-                text="Edit"
-                target="_blank"
-              />
-            </>
-          )}
-        </div> */}
+              </>
+            )}
+          </div>
+        )}
 
       </div>
     </div>
