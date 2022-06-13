@@ -35,15 +35,16 @@ export const ResultsPage: React.VFC = () => {
 
   
   inputX.map(([key,value]) => {
-    console.log('key =', key, ' value=', value)
-    console.log(tsln.resultsQuestions[key])
+    console.log('key =',key,'===',tsln.resultsQuestions[key],'| value=', value)
   }) 
+
+  const xxx = <span dangerouslySetInnerHTML={{ __html: root.summary.details }} ></span>
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
         <div className="col-span-2">
-          <Message id="resultId" type="info" alert_icon_id="resultIdInfo" alert_icon_alt_text="Info" message_heading={root.summary.title} message_body={root.summary.details} />
+          <Message id="resultId" type="info" alert_icon_id="resultIdInfo" alert_icon_alt_text="Info" message_heading={root.summary.title} message_body={xxx} />
 
           <ListLinks title="On This Page:" links={listLinks} />
           

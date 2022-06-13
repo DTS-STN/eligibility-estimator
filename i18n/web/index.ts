@@ -1,7 +1,7 @@
 import {
   Language,
   Locale,
-  ValidationErrors,
+  ValidationErrors
 } from '../../utils/api/definitions/enums'
 import { Translations } from '../api'
 import en from './en'
@@ -119,7 +119,7 @@ export type WebTranslations = {
     age: string
     livingCountry: string
     legalStatus: string
-    canadaWholeLife: string
+    livedOutsideCanada: string
     yearsInCanadaSince18: string
     income: string
     maritalStatus: string
@@ -127,9 +127,16 @@ export type WebTranslations = {
     partnerAge: string
     partnerLivingCountry: string
     partnerLegalStatus: string
-    partnerCanadaWholeLife: string
+    partnerlivedOutsideCanada: string
     partnerYearsInCanadaSince18: string
     partnerIncome: string
+  }
+  resultsLegalStatus: {
+    canadianCitizen: string
+    permanentResident: string
+    sponsored: string
+    indianStatus: string
+    other: string
   }
   moreInfoHeader: string
   startOver: string

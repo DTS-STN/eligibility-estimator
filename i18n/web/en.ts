@@ -134,7 +134,7 @@ const en: WebTranslations = {
     age: 'Age',
     livingCountry: 'Residence country',
     legalStatus: 'Legal Status',
-    canadaWholeLife: 'Lived outside Canada for longer of 6 months',
+    livedOutsideCanada: 'Lived outside Canada for longer of 6 months',
     yearsInCanadaSince18: '',
     income: 'Net income',
     maritalStatus: 'Marital status',
@@ -142,9 +142,16 @@ const en: WebTranslations = {
     partnerAge: "Partner's age",
     partnerLivingCountry: "Partner's residence country",
     partnerLegalStatus: "Partner's legal status",
-    partnerCanadaWholeLife: "Partner's lived outside Canada for longer of 6 months",
+    partnerlivedOutsideCanada: "Partner's lived outside Canada for longer of 6 months",
     partnerYearsInCanadaSince18: '',
     partnerIncome: "Partner's net income",
+  },
+  resultsLegalStatus: {
+    canadianCitizen : 'Canadian Resident',
+    permanentResident : 'Permanent Resident',
+    sponsored : 'Permanent Resident Sponsored',
+    indianStatus : 'First Nation',
+    other : 'Other'
   },
   moreInfoHeader: 'More Information',
   startOver: 'Start over',
@@ -180,6 +187,8 @@ const en: WebTranslations = {
   govt: 'Government of Canada',
   yes: 'Yes',
   no: 'No',
+  year: 'Year',
+  years: 'Years',
 
   selectText: {
     maritalStatus: 'Select a marital status',

@@ -136,7 +136,7 @@ const fr: WebTranslations = {
     age: 'Âge',
     livingCountry : 'Pays de résidence',
     legalStatus : 'Statut légal',
-    canadaWholeLife : "A vécu à l'extérieur du Canada pendant plus de 6 mois",
+    livedOutsideCanada : "A vécu à l'extérieur du Canada pendant plus de 6 mois",
     yearsInCanadaSince18 : '',
     income : 'Revenu net',
     maritalStatus : 'État civil',
@@ -144,9 +144,16 @@ const fr: WebTranslations = {
     partnerAge : "Âge du partenaire",
     partnerLivingCountry : "Pays de résidence du partenaire",
     partnerLegalStatus : "Statut juridique du partenaire",
-    partnerCanadaWholeLife : "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
+    partnerlivedOutsideCanada : "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
     partnerYearsInCanadaSince18 : '',
     partnerIncome : "Revenu net du partenaire"
+  },
+  resultsLegalStatus: {
+    canadianCitizen : 'fr - Canadian Resident',
+    permanentResident : 'fr - Permanent Resident',
+    sponsored : 'fr - Permanent Resident Sponsored',
+    indianStatus : 'fr - First Nation',
+    other : 'fr - Other'
   },
   moreInfoHeader: "Besoin de plus d'information",
   startOver: 'Recommencer',
@@ -184,6 +191,8 @@ const fr: WebTranslations = {
   govt: 'Gouvernement du Canada',
   yes: 'Oui',
   no: 'Non',
+  year: 'Anne',
+  years: 'Annes',
 
   selectText: {
     maritalStatus: 'Sélectionner un état civil',
