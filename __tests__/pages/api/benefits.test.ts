@@ -29,53 +29,14 @@ import {
 import { mockGetRequest, mockGetRequestError } from './factory'
 
 describe('consolidated benefit tests: unavailable', () => {
-  it('returns "unavailable" - sponsored', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.SPONSORED,
-      ...canadaWholeLife,
-      ...partnerUndefined,
-    })
-    expectOasGisUnavailable(res)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expectAlwAfsTooOld(res)
-  })
-
-  it('returns "unavailable" - legal other', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      maritalStatus: MaritalStatus.SINGLE,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.OTHER,
-      ...canadaWholeLife,
-      ...partnerUndefined,
-    })
-    expectOasGisUnavailable(res)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expectAlwAfsTooOld(res)
-  })
-
   it('returns "unavailable" - living in Canada, under 10 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
       ...partnerUndefined,
@@ -92,10 +53,11 @@ describe('consolidated benefit tests: unavailable', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
       ...partnerUndefined,
@@ -120,10 +82,11 @@ describe('consolidated benefit tests: unavailable', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -147,10 +110,11 @@ describe('consolidated benefit tests: unavailable', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -184,29 +148,9 @@ describe('consolidated benefit tests: ineligible', () => {
     const res = await mockGetRequest({
       income: 20000,
       age: 50,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      ...canadaWholeLife,
-      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
-    })
-    expectAllIneligible(res)
-    expectOasGisTooYoung(res)
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-  })
-  it('returns "ineligible" - age 50, legal sponsored', async () => {
-    const res = await mockGetRequest({
-      income: 20000,
-      age: 50,
-      maritalStatus: MaritalStatus.MARRIED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.SPONSORED,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
@@ -226,9 +170,10 @@ describe('consolidated benefit tests: ineligible', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -252,10 +197,11 @@ describe('consolidated benefit tests: ineligible', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: false,
       ...partnerUndefined,
@@ -279,10 +225,11 @@ describe('consolidated benefit tests: ineligible', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -310,6 +257,7 @@ describe('consolidated benefit tests: max income checks', () => {
     const input = {
       income: legalValues.MAX_OAS_INCOME,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       ...canadaWholeLife,
@@ -331,6 +279,7 @@ describe('consolidated benefit tests: max income checks', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_SINGLE,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       ...canadaWholeLife,
@@ -351,7 +300,8 @@ describe('consolidated benefit tests: max income checks', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -373,7 +323,8 @@ describe('consolidated benefit tests: max income checks', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -395,7 +346,8 @@ describe('consolidated benefit tests: max income checks', () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -418,6 +370,7 @@ describe('consolidated benefit tests: max income checks', () => {
     const input = {
       income: legalValues.MAX_AFS_INCOME,
       age: 60,
+      oasAge: 65,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,
@@ -437,13 +390,14 @@ describe('consolidated benefit tests: max income checks', () => {
 })
 
 describe('consolidated benefit tests: eligible: 65+', () => {
-  it('returns "eligible" - single, partial oas', async () => {
+  it('returns "eligible" - separated, partial oas', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -460,10 +414,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -486,10 +441,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
+      oasAge: 65,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -508,11 +464,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expectAlwAfsTooOld(res)
   })
 
-  it('returns "eligible" - married, full oas', async () => {
+  it('returns "eligible" - married, full oas (no clawback)', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -521,12 +478,22 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     })
     expectOasGisEligible(res)
     expectAlwAfsTooOld(res)
+
+    // test clawback: expect none due to low income
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+
+    // test oas increase at 75
+    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+      roundToTwo(res.body.results.oas.entitlement.result * 1.1)
+    )
   })
-  it('returns "eligible" - married, income high so OAS only', async () => {
+
+  it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {
     const res = await mockGetRequest({
       income: legalValues.MAX_OAS_INCOME - 1,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -539,6 +506,42 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwAfsTooOld(res)
+
+    // test clawback: expect some due to high income
+    expect(res.body.results.oas.entitlement.clawback).toEqual(7784.04)
+
+    // test oas increase at 75
+    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+      roundToTwo(res.body.results.oas.entitlement.result * 1.1)
+    )
+  })
+
+  it('returns "eligible" - married, full oas, age 75', async () => {
+    const res = await mockGetRequest({
+      income: 10000,
+      age: 75,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
+      ...canadian,
+      ...canadaWholeLife,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncome: 10000,
+      ...partnerNoHelpNeeded,
+    })
+    expectOasGisEligible(
+      res,
+      EntitlementResultType.FULL,
+      roundToTwo(legalValues.MAX_OAS_ENTITLEMENT * 1.1)
+    )
+    expectAlwAfsTooOld(res)
+
+    // test clawback: expect none due to low income
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+
+    // test oas increase at 75: expect same result since current age is 75
+    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+      roundToTwo(res.body.results.oas.entitlement.result)
+    )
   })
 })
 
@@ -547,7 +550,8 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -568,6 +572,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
+      oasAge: 65,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,
@@ -587,9 +592,10 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -603,10 +609,11 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -632,10 +639,11 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -661,9 +669,10 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 64,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,

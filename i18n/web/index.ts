@@ -3,8 +3,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
-import { legalValues } from '../../utils/api/scrapers/output'
-import { numberToStringCurrency } from '../api'
+import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
 
@@ -14,6 +13,35 @@ export type WebTranslations = {
   _language: Language
   _locale: Locale
 
+  atLeast60: string
+  haveNetIncomeLess: string
+  headerWhatToKnow: string
+  pleaseNodeText: string
+  estimatorIncludeQuestionText: string
+  ageText: string
+  netIncomeText: string
+  legalStatusText: string
+  residenceHistoryText: string
+  maritalStatusText: string
+  partnerText: string
+  timeToCompleteText: string
+  startBenefitsEstimator: string
+  estimatorTimeEstimate: string
+  whatBenefitsTheEstimatorIsFor: string
+  benefitAvailable: string
+  learnMoreAboutOldAgeSecurity: string
+  gisDefinitionText: string
+  learnMoreAboutGis: string
+  alwDefinitionText: string
+  learnMoreAboutAlw: string
+  afsDefinitionText: string
+  learnMoreAboutAfs: string
+  notIncludeCPP: string
+  learnMoreAboutCpp: string
+  aboutResultText: string
+  resultDefinition: string
+  privacyHeading: string
+  privacyDefinition: string
   oas: string
   gis: string
   alw: string
@@ -39,7 +67,9 @@ export type WebTranslations = {
   needHelp: string
   faq: string
   saveToCsv: string
+  nextStep: string
   getResults: string
+  getEstimate: string
   applyHeader: string
   applyText: string
   applyForLabel: string
@@ -66,11 +96,9 @@ export type WebTranslations = {
   socialLink3: string
   socialLink4: string
   socialLink5: string
-  category: {
-    incomeDetails: string
-    personalInformation: string
-    legalStatus: string
-  }
+  youMayBeEligible: string
+
+  category: Translations['category']
 
   //results page
   contactCTA: string
@@ -89,6 +117,7 @@ export type WebTranslations = {
     empty: string
   }
   validationErrors: { [key in ValidationErrors]: string }
+  unableToProceed: string
   unavailableImageAltText: string
   govt: string
   yes: string
@@ -109,15 +138,4 @@ export function getWebTranslations(language: Language): WebTranslations {
     case Language.FR:
       return webDictionary.fr
   }
-}
-
-/**
- * Takes an input string, and applies variable replacements according to the current language.
- */
-export function applyReplacements(input: string, language: Language): string {
-  const locale = language === Language.EN ? Locale.EN : Locale.FR
-  return input.replace(
-    '{MAX_OAS_INCOME}',
-    numberToStringCurrency(legalValues.MAX_OAS_INCOME, locale, { rounding: 0 })
-  )
 }

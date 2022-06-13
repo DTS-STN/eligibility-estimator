@@ -1,14 +1,11 @@
-import {
-  getTranslations,
-  numberToStringCurrency,
-  Translations,
-} from '../../i18n/api'
+import { getTranslations, Translations } from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
 import {
   EntitlementResultType,
+  Language,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -19,6 +16,7 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
+import { textReplacementRules } from './definitions/textReplacementRules'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -35,7 +33,6 @@ import {
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
-import { legalValues } from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
 
 export class BenefitHandler {
@@ -79,7 +76,10 @@ export class BenefitHandler {
 
   get fieldData(): FieldData[] {
     if (this._fieldData === undefined) {
-      this._fieldData = this.getFieldData()
+      this._fieldData = BenefitHandler.getFieldData(
+        this.requiredFields,
+        this.translations
+      )
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
@@ -133,12 +133,16 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      oasAge:
+        this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
+          ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
+          : this.rawInput.oasAge,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
-      canadaWholeLife: this.rawInput.canadaWholeLife,
-      // if canadaWholeLife, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18: this.rawInput.canadaWholeLife
+      livedOutsideCanada: this.rawInput.livedOutsideCanada,
+      // if not livedOutsideCanada, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: !this.rawInput.livedOutsideCanada
         ? 40
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
@@ -149,13 +153,14 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
       ),
       legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
-      canadaWholeLife: this.rawInput.partnerCanadaWholeLife,
-      yearsInCanadaSince18: this.rawInput.partnerCanadaWholeLife
+      livedOutsideCanada: this.rawInput.partnerLivedOutsideCanada,
+      yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
@@ -180,10 +185,15 @@ export class BenefitHandler {
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
-      FieldKey.CANADA_WHOLE_LIFE,
+      FieldKey.LIVED_OUTSIDE_CANADA,
     ]
-    if (this.input.client.canadaWholeLife === false) {
+    if (this.input.client.livedOutsideCanada) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    }
+    if (this.input.client.age >= 65 && this.input.client.age < 70) {
+      // below 65 we don't need this as we don't do OAS calculations
+      // above 70 we don't need this as there is no option to defer further
+      requiredFields.push(FieldKey.OAS_AGE)
     }
     if (
       (this.input.client.livingCountry.canada &&
@@ -203,10 +213,10 @@ export class BenefitHandler {
           FieldKey.PARTNER_AGE,
           FieldKey.PARTNER_LEGAL_STATUS,
           FieldKey.PARTNER_LIVING_COUNTRY,
-          FieldKey.PARTNER_CANADA_WHOLE_LIFE
+          FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
         )
       }
-      if (this.input.partner.canadaWholeLife === false) {
+      if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
       if (
@@ -339,7 +349,6 @@ export class BenefitHandler {
 
   /**
    * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
-   * If the entitlement result provides a detailOverride, that will take precedence over the eligibility result's detail.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
@@ -354,17 +363,12 @@ export class BenefitHandler {
       ) {
         result.eligibility.result = ResultKey.INELIGIBLE
         result.eligibility.reason = ResultReason.INCOME
+        result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
 
       // start detail processing...
       const eligibilityText =
         this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
-
-      // uses the detail text from the eligibility result, or the entitlement result's override if provided
-      const detailText = result.eligibility.detail // ex. "likely eligible for this benefit"
-      const detailOverrideText = result.entitlement.detailOverride // ex. "likely eligible, but partial oas"
-      delete result.entitlement.detailOverride // so this is not passed into the response
-      const usedDetailText = detailOverrideText ?? detailText
 
       // if client is ineligible, the table will be populated with a link to view more reasons
       const ineligibilityText =
@@ -380,80 +384,55 @@ export class BenefitHandler {
       )
 
       // finish with detail processing
-      result.eligibility.detail = `${eligibilityText}\n${usedDetailText}${ineligibilityTextWithBenefit}`
+      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityTextWithBenefit}`
     }
   }
 
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    */
-  private replaceTextVariables(textToProcess: string): string {
-    textToProcess = textToProcess
-      .replace(
-        '{ENTITLEMENT_AMOUNT}',
-        `<strong className="font-bold">${numberToStringCurrency(
-          this.summary.entitlementSum,
-          this.translations._locale
-        )}</strong>`
-      )
-      .replace(
-        '{MAX_OAS_INCOME}',
-        `<strong className="font-bold">${numberToStringCurrency(
-          legalValues.MAX_OAS_INCOME,
-          this.translations._locale,
-          { rounding: 0 }
-        )}</strong>`
-      )
-      .replace(
-        '{LINK_SERVICE_CANADA}',
-        `<a href="${this.translations.links.SC.url}" target="_blank">${this.translations.links.SC.text}</a>`
-      )
-      .replace(
-        '{LINK_SOCIAL_AGREEMENT}',
-        `<a href="${this.translations.links.socialAgreement.url}" target="_blank">${this.translations.links.socialAgreement.text}</a>`
-      )
-      .replace(
-        '{LINK_OAS_DEFER}',
-        `<a href="${this.translations.links.oasDeferClickHere.url}" target="_blank">${this.translations.links.oasDeferClickHere.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_OAS}',
-        `<a href="${this.translations.links.oasReasons.url}" target="_blank">${this.translations.links.oasReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_GIS}',
-        `<a href="${this.translations.links.gisReasons.url}" target="_blank">${this.translations.links.gisReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_ALW}',
-        `<a href="${this.translations.links.alwReasons.url}" target="_blank">${this.translations.links.alwReasons.text}</a>`
-      )
-      .replace(
-        '{LINK_MORE_REASONS_AFS}',
-        `<a href="${this.translations.links.afsReasons.url}" target="_blank">${this.translations.links.afsReasons.text}</a>`
-      )
+  replaceTextVariables(textToProcess: string): string {
+    const re: RegExp = new RegExp(/{(\w*?)}/g)
+    const matches: IterableIterator<RegExpMatchArray> =
+      textToProcess.matchAll(re)
+    for (const match of matches) {
+      const key: string = match[1]
+      const replacementRule = textReplacementRules[key]
+      if (!replacementRule)
+        throw new Error(`no text replacement rule for ${key}`)
+      textToProcess = textToProcess.replace(`{${key}}`, replacementRule(this))
+    }
     return textToProcess
   }
 
   /**
-   * Accepts a list of requiredFields, transforms that into a full list of field configurations for the frontend to use.
+   * Accepts a list of FieldKeys, transforms that into a full list of field configurations for the frontend to use.
    */
-  private getFieldData(): FieldData[] {
+  static getFieldData(
+    fields: FieldKey[],
+    translations: Translations
+  ): FieldData[] {
     // takes list of keys, builds list of definitions
-    const fieldDataList = this.requiredFields.map((x) => fieldDefinitions[x])
+    const fieldDataList = fields
+      .sort(this.sortFields)
+      .map((x) => fieldDefinitions[x])
 
     // applies translations
     fieldDataList.map((fieldData) => {
       // translate category
-      const category = this.translations.category[fieldData.category.key]
+      const category = translations.category[fieldData.category.key]
       if (!category)
         throw new Error(`no category for key ${fieldData.category}`)
       fieldData.category.text = category
 
       // translate label/question
-      const label = this.translations.question[fieldData.key]
+      const label = translations.question[fieldData.key]
       if (!label) throw new Error(`no question for key ${fieldData.key}`)
       fieldData.label = label
+
+      // translate question help text
+      const helpText = translations.questionHelp[fieldData.key]
+      fieldData.helpText = helpText || ''
 
       // translate values/questionOptions
       if (
@@ -462,28 +441,43 @@ export class BenefitHandler {
         fieldData.type === FieldType.RADIO
       ) {
         // looks up using the main key first
-        let questionOptions = this.translations.questionOptions[fieldData.key]
+        let questionOptions = translations.questionOptions[fieldData.key]
         if (!questionOptions)
           // if that fails, uses the relatedKey instead
-          questionOptions =
-            this.translations.questionOptions[fieldData.relatedKey]
+          questionOptions = translations.questionOptions[fieldData.relatedKey]
         if (!questionOptions)
           throw new Error(
             `no questionOptions for key ${fieldData.key} or relatedKey ${fieldData.relatedKey}`
           )
-        fieldData.values = questionOptions
+
+        fieldData.values =
+          // sometimes we use booleans as keys, this normalizes all these into strings
+          questionOptions.map((option) => ({
+            ...option,
+            key: String(option.key),
+          }))
       }
 
       return fieldData
     })
-
     return fieldDataList
+  }
+
+  /**
+   * Returns the field data for all fields.
+   * This is so that the UI can be aware of everything right away, rather than waiting for inputs to know the upcoming fields.
+   */
+  static getAllFieldData(language: Language): FieldData[] {
+    return this.getFieldData(Object.values(FieldKey), getTranslations(language))
   }
 
   /**
    * Sorts fields by the order specified in fieldDefinitions.
    */
   static sortFields(a: string, b: string): number {
-    return fieldDefinitions[a].order - fieldDefinitions[b].order
+    const keyList = Object.keys(fieldDefinitions)
+    const indexA = keyList.findIndex((value) => value === a)
+    const indexB = keyList.findIndex((value) => value === b)
+    return indexA - indexB
   }
 }

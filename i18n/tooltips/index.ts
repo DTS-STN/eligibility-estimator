@@ -16,7 +16,7 @@ export interface TooltipTranslation {
  * All the Tooltips for all questions.
  */
 export type TooltipTranslations = {
-  [x in FieldKey]: TooltipTranslation
+  [x in FieldKey]?: TooltipTranslation
 }
 
 /**

@@ -4,13 +4,13 @@ import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { useTranslation } from '../Hooks'
-import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
+  helpText?: string
   error?: string
 }
 
@@ -22,7 +22,16 @@ export interface CurrencyFieldProps
  */
 export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
   (props) => {
-    const { name, label, required, value, placeholder, onChange, error } = props
+    const {
+      name,
+      label,
+      required,
+      value,
+      placeholder,
+      onChange,
+      helpText,
+      error,
+    } = props
     const requiredText = useTranslation<string>('required')
     const locale = useRouter().locale
 
@@ -51,16 +60,16 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
             data-testid="currency-input-label"
             className="text-content font-bold inline"
           >
-            {required && <span className="text-danger">*</span>} {label}
+            {label}
           </label>
           <span>
-            {required && (
-              <span className="font-bold text-danger ml-1">
-                ({requiredText})
-              </span>
-            )}
-            <Tooltip field={name} />
+            {required && <span className="ml-1">({requiredText})</span>}
           </span>
+          {helpText && (
+            <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
+              {helpText}
+            </div>
+          )}
         </div>
         {error && <ErrorLabel errorMessage={error} />}
         <NumberFormat
@@ -68,7 +77,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
           name={name}
           {...localizedIncome}
           data-testid="currency-input"
-          className={`form-control text-content border-[#333] ${
+          className={`form-control text-content border-form-border ${
             error ? ' border-danger' : ''
           }`}
           min={0}

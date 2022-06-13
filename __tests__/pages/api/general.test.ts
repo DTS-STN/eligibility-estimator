@@ -14,7 +14,6 @@ import {
 } from '../../../utils/api/definitions/enums'
 import {
   FieldDataDropdown,
-  fieldDefinitions,
   FieldKey,
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
@@ -22,16 +21,7 @@ import { OutputItem } from '../../../utils/api/scrapers/_baseTable'
 import { scraperData } from '../../../utils/api/scrapers/output'
 import { mockGetRequestError, mockPartialGetRequest } from './factory'
 
-describe('code checks', () => {
-  it('produces a list of fields with unique ordering', async () => {
-    const ordersOrig = []
-    for (const key in fieldDefinitions) {
-      ordersOrig.push(fieldDefinitions[key].order)
-    }
-    const ordersUnique = [...new Set(ordersOrig)]
-    expect(ordersUnique).toEqual(ordersOrig)
-  })
-})
+describe('code checks', () => {})
 
 describe('translation checks', () => {
   it('matches between question translations and available questions', async () => {
@@ -184,7 +174,7 @@ describe('sanity checks', () => {
   it('fails when years in Canada is greater than age minus 18', async () => {
     const res = await mockGetRequestError({
       age: 65,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 48,
     })
     expect(res.status).toEqual(400)
@@ -193,9 +183,28 @@ describe('sanity checks', () => {
   it('accepts when years in Canada is equal to age minus 18', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
-      canadaWholeLife: false,
+      livedOutsideCanada: true,
       yearsInCanadaSince18: 47,
     })
     expect(res.status).toEqual(200)
+  })
+  it('fails when marital status is involuntarily separated', async () => {
+    const res = await mockGetRequestError({
+      maritalStatus: MaritalStatus.INV_SEPARATED,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+  })
+  it('fails when legal status is sponsored or other', async () => {
+    let res = await mockGetRequestError({
+      legalStatus: LegalStatus.SPONSORED,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    res = await mockGetRequestError({
+      legalStatus: LegalStatus.OTHER,
+    })
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
   })
 })

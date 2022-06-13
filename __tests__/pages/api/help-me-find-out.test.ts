@@ -22,9 +22,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -32,7 +33,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 0,
       partnerEverLivedSocialCountry: false,
     }
@@ -53,9 +54,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -63,7 +65,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 20,
       partnerEverLivedSocialCountry: undefined,
     }
@@ -84,9 +86,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -94,7 +97,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
       partnerEverLivedSocialCountry: undefined,
     }
@@ -115,9 +118,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME, // too high for allowance
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -125,7 +129,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
       partnerEverLivedSocialCountry: undefined,
     }
@@ -138,9 +142,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME - 1, // okay for allowance
       age: 65,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -148,7 +153,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
       partnerEverLivedSocialCountry: undefined,
     }
@@ -160,9 +165,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: 0,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -170,7 +176,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
       partnerEverLivedSocialCountry: undefined,
     }
@@ -196,9 +202,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: 0,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -206,7 +213,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
       partnerEverLivedSocialCountry: undefined,
     }
@@ -227,9 +234,10 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       income: 0,
       age: 60,
-      maritalStatus: MaritalStatus.MARRIED,
+      oasAge: 65,
+      maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      canadaWholeLife: true,
+      livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -237,7 +245,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.NO_AGREEMENT, // gis ineligible
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
-      partnerCanadaWholeLife: false,
+      partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
       partnerEverLivedSocialCountry: undefined,
     }

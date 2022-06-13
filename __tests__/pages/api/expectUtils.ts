@@ -55,7 +55,7 @@ export function expectOasEligible(
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(res.body.results.oas.entitlement.type).toEqual(oasType)
-  if (oasType === EntitlementResultType.FULL)
+  if (oasType === EntitlementResultType.FULL && !entitlement)
     entitlement = legalValues.MAX_OAS_ENTITLEMENT
   if (entitlement)
     expect(res.body.results.oas.entitlement.result).toEqual(entitlement)
@@ -116,7 +116,7 @@ export const partnerUndefined = {
   partnerAge: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
-  partnerCanadaWholeLife: undefined,
+  partnerLivedOutsideCanada: undefined,
   partnerYearsInCanadaSince18: undefined,
   partnerEverLivedSocialCountry: undefined,
 }
@@ -125,13 +125,13 @@ export const partnerNoHelpNeeded = {
   partnerAge: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
-  partnerCanadaWholeLife: undefined,
+  partnerLivedOutsideCanada: undefined,
   partnerYearsInCanadaSince18: undefined,
   partnerEverLivedSocialCountry: undefined,
 }
 
 export const canadaWholeLife = {
-  canadaWholeLife: true,
+  livedOutsideCanada: false,
   yearsInCanadaSince18: undefined,
   everLivedSocialCountry: undefined,
 }

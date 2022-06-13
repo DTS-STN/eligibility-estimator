@@ -1,17 +1,25 @@
 import {
   FieldCategory,
   Language,
+  LegalStatus,
   Locale,
+  MaritalStatus,
+  PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { Link } from '../../utils/api/definitions/types'
 import en from './en'
 import fr from './fr'
+import { LinkDefinitions } from './links'
 
 const apiTranslationsDict = { en, fr }
 
 export interface KeyAndText {
   key: string
+  text: string
+}
+
+export interface TypedKeyAndText<T> {
+  key: T
   text: string
 }
 
@@ -28,10 +36,13 @@ export interface Translations {
     invalid: string
   }
   question: { [key in FieldKey]: string }
+  questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
-    legalStatus: KeyAndText[]
-    maritalStatus: KeyAndText[]
-    partnerBenefitStatus: KeyAndText[]
+    legalStatus: TypedKeyAndText<LegalStatus>[]
+    livedOutsideCanada: TypedKeyAndText<boolean>[]
+    partnerLivedOutsideCanada: TypedKeyAndText<boolean>[]
+    maritalStatus: TypedKeyAndText<MaritalStatus>[]
+    partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
   }
   detail: {
@@ -62,6 +73,10 @@ export interface Translations {
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
     additionalReasons: string
+    oasClawback: string
+    oasIncreaseAt75: string
+    oasIncreaseAt75Applied: string
+    oasDeferralIncrease: string
   }
   summaryTitle: {
     moreInfo: string
@@ -75,38 +90,7 @@ export interface Translations {
     availableEligible: string
     availableIneligible: string
   }
-  links: {
-    contactSC: Link
-    faq: Link
-    oasOverview: Link
-    gisOverview: Link
-    alwOverview: Link
-    afsOverview: Link
-    oasMaxIncome: Link
-    cpp: Link
-    cric: Link
-    outsideCanada: Link
-    outsideCanadaOas: Link
-    oasPartial: Link
-    paymentOverview: Link
-    gisEntitlement: Link
-    alwEntitlement: Link
-    afsEntitlement: Link
-    oasRecoveryTax: Link
-    oasDefer: Link
-    oasRetroactive: Link
-    oasApply: Link
-    gisApply: Link
-    alwApply: Link
-    afsApply: Link
-    SC: Link
-    oasDeferClickHere: Link
-    socialAgreement: Link
-    oasReasons: Link
-    gisReasons: Link
-    alwReasons: Link
-    afsReasons: Link
-  }
+  links: LinkDefinitions
   csv: {
     appName: string
     formResponses: string

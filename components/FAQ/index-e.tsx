@@ -475,42 +475,40 @@ export const FAQE = () => (
           <p>
             If you&apos;re reading this following the loss of a loved one,
             please accept our condolences.
-            <ul className="list-disc">
-              When an Old Age Security (OAS) beneficiary dies, their benefits
-              must be cancelled. Benefits are payable for the month in which the
-              death occurs. Benefits received after that will have to be repaid.
-              This includes the following benefits:
-              <li className="ml-12">OAS pension</li>
-              <li className="ml-12">Guaranteed Income Supplement</li>
-              <li className="ml-12">Allowance</li>
-              <li className="ml-12">Allowance for the Survivor</li>
-            </ul>
-            <p>
-              Please contact
-              <Link
-                href="https://www.canada.ca/en/employment-social-development/corporate/contact.html"
-                passHref
-              >
-                <a className="text-default-text underline" target="_blank">
-                  Service Canada
-                </a>
-              </Link>
-              as soon as possible to notify us of the date of death of the
-              beneficiary. Please include the following information about the
-              deceased beneficiary:
-            </p>
-            <ul className="list-disc">
-              <li className="ml-12">Full name</li>
-              <li className="ml-12">Date of birth</li>
-              <li className="ml-12">Date of death</li>
-              <li className="ml-12">Social Insurance Number (if known)</li>
-              <li className="ml-12">Previous address</li>
-              <li className="ml-12">
-                Name and address of the estate or the person responsible for
-                handling the deceased&apos;s affairs (if known)
-              </li>
-            </ul>
           </p>
+          <ul className="list-disc">
+            When an Old Age Security (OAS) beneficiary dies, their benefits must
+            be cancelled. Benefits are payable for the month in which the death
+            occurs. Benefits received after that will have to be repaid. This
+            includes the following benefits:
+            <li className="ml-12">OAS pension</li>
+            <li className="ml-12">Guaranteed Income Supplement</li>
+            <li className="ml-12">Allowance</li>
+            <li className="ml-12">Allowance for the Survivor</li>
+          </ul>
+          <ul className="list-disc">
+            Please contact{' '}
+            <Link
+              href="https://www.canada.ca/en/employment-social-development/corporate/contact.html"
+              passHref
+            >
+              <a className="text-default-text underline" target="_blank">
+                Service Canada
+              </a>
+            </Link>{' '}
+            as soon as possible to notify us of the date of death of the
+            beneficiary. Please include the following information about the
+            deceased beneficiary:
+            <li className="ml-12">Full name</li>
+            <li className="ml-12">Date of birth</li>
+            <li className="ml-12">Date of death</li>
+            <li className="ml-12">Social Insurance Number (if known)</li>
+            <li className="ml-12">Previous address</li>
+            <li className="ml-12">
+              Name and address of the estate or the person responsible for
+              handling the deceased&apos;s affairs (if known)
+            </li>
+          </ul>
         </div>
       </details>
     </details>

@@ -1,15 +1,16 @@
 export enum FieldCategory {
-  PERSONAL_INFORMATION = 'personalInformation',
-  PARTNER_INFORMATION = 'partnerInformation',
+  AGE = 'age',
+  INCOME = 'income',
+  LEGAL = 'legal',
+  RESIDENCE = 'residence',
+  MARITAL = 'marital',
 }
 
 export enum MaritalStatus {
   SINGLE = 'single',
-  MARRIED = 'married',
-  COMMON_LAW = 'commonLaw',
+  PARTNERED = 'partnered',
   WIDOWED = 'widowed',
-  DIVORCED = 'divorced',
-  SEPARATED = 'separated',
+  INV_SEPARATED = 'invSeparated',
 }
 
 export enum LegalStatus {
@@ -87,15 +88,18 @@ export enum LinkLocation {
 // all "custom" Joi Validation errors that we properly handle and translate for the end user
 export enum ValidationErrors {
   incomeBelowZero = 'incomeBelowZero',
+  partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   incomeTooHigh = 'incomeTooHigh',
   partnerIncomeTooHigh = 'partnerIncomeTooHigh',
-  partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   ageUnder18 = 'ageUnder18',
-  ageOver150 = 'ageOver150',
   partnerAgeUnder18 = 'partnerAgeUnder18',
+  ageOver150 = 'ageOver150',
   partnerAgeOver150 = 'partnerAgeOver150',
+  oasAge65to70 = 'oasAge65to70',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
+  maritalUnavailable = 'maritalUnavailable',
+  legalUnavailable = 'legalUnavailable',
 }
 
 export enum Language {

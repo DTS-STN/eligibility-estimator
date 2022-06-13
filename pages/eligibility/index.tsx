@@ -2,7 +2,7 @@ import { observer } from 'mobx-react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { ComponentFactory } from '../../components/Forms/ComponentFactory'
+import { EligibilityPage } from '../../components/EligibilityPage'
 import { useStorage, useStore, useTranslation } from '../../components/Hooks'
 import { Layout } from '../../components/Layout'
 import { WebTranslations } from '../../i18n/web'
@@ -41,7 +41,7 @@ const Eligibility: NextPage<ResponseSuccess | ResponseError> = (props) => {
   return (
     <>
       <Layout>
-        <ComponentFactory />
+        <EligibilityPage />
       </Layout>
     </>
   )

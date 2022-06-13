@@ -34,10 +34,11 @@ paths:
       parameters:
         - $ref: '#/components/parameters/income'
         - $ref: '#/components/parameters/age'
+        - $ref: '#/components/parameters/oasAge'
         - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
-        - $ref: '#/components/parameters/canadaWholeLife'
+        - $ref: '#/components/parameters/livedOutsideCanada'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/everLivedSocialCountry'
         - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -45,7 +46,7 @@ paths:
         - $ref: '#/components/parameters/partnerAge'
         - $ref: '#/components/parameters/partnerLivingCountry'
         - $ref: '#/components/parameters/partnerLegalStatus'
-        - $ref: '#/components/parameters/partnerCanadaWholeLife'
+        - $ref: '#/components/parameters/partnerLivedOutsideCanada'
         - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
         - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
       responses:
@@ -64,10 +65,11 @@ components:
         enum:
           - income
           - age
+          - oasAge
           - maritalStatus
           - livingCountry
           - legalStatus
-          - canadaWholeLife
+          - livedOutsideCanada
           - yearsInCanadaSince18
           - everLivedSocialCountry
           - partnerBenefitStatus
@@ -75,7 +77,7 @@ components:
           - partnerAge
           - partnerLivingCountry
           - partnerLegalStatus
-          - partnerCanadaWholeLife
+          - partnerLivedOutsideCanada
           - partnerYearsInCanadaSince18
           - partnerEverLivedSocialCountry
 
@@ -323,6 +325,19 @@ components:
         maximum: 150
       allowEmptyValue: false
 
+    oasAge:
+      name: oasAge
+      in: query
+      description: The age at which the client would like to start receiving OAS. Can be 65-70.
+      required: false
+      schema:
+        type: integer
+        description: OAS deferral age
+        example: 65
+        minimum: 65
+        maximum: 70
+      allowEmptyValue: false
+
     maritalStatus:
       name: maritalStatus
       in: query
@@ -333,11 +348,9 @@ components:
         type: string
         enum:
           - single
-          - married
-          - commonLaw
+          - partnered
           - widowed
-          - divorced
-          - separated
+          - invSeparated
         description: The current marital status of the client.
       allowEmptyValue: false
 
@@ -377,12 +390,12 @@ components:
         description: The current legal status of the client.
       allowEmptyValue: false
 
-    canadaWholeLife:
-      name: canadaWholeLife
+    livedOutsideCanada:
+      name: livedOutsideCanada
       in: query
-      description: Have you only lived in Canada since the age of 18?
+      description: Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?
       required: false
-      example: true
+      example: false
       schema:
         type: boolean
       allowEmptyValue: false
@@ -490,12 +503,12 @@ components:
         description: The current legal status of the partner.
       allowEmptyValue: false
 
-    partnerCanadaWholeLife:
-      name: partnerCanadaWholeLife
+    partnerLivedOutsideCanada:
+      name: partnerLivedOutsideCanada
       in: query
-      description: Have you only lived in Canada since the age of 18?
+      description: Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?
       required: false
-      example: true
+      example: false
       schema:
         type: boolean
       allowEmptyValue: false

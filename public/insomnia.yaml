@@ -33,7 +33,7 @@ resources:
         disabled: false
         value: canadianCitizen
         id: pair_c9d0beae8e8146919a4da6a722ea0157
-      - name: canadaWholeLife
+      - name: livedOutsideCanada
         disabled: false
         value: 'false'
         id: pair_98766dee942443a082abebe796f9692a
@@ -69,7 +69,7 @@ resources:
         value: canadianCitizen
         id: pair_d4dc755da0d04758a5040ba154b16687
         description: ''
-      - name: partnerCanadaWholeLife
+      - name: partnerLivedOutsideCanada
         disabled: false
         value: 'false'
         id: pair_530a2572ff674192860e5a81fe42fb2d
@@ -173,7 +173,7 @@ resources:
               - $ref: '#/components/parameters/maritalStatus'
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
-              - $ref: '#/components/parameters/canadaWholeLife'
+              - $ref: '#/components/parameters/livedOutsideCanada'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
               - $ref: '#/components/parameters/everLivedSocialCountry'
               - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -181,7 +181,7 @@ resources:
               - $ref: '#/components/parameters/partnerAge'
               - $ref: '#/components/parameters/partnerLivingCountry'
               - $ref: '#/components/parameters/partnerLegalStatus'
-              - $ref: '#/components/parameters/partnerCanadaWholeLife'
+              - $ref: '#/components/parameters/partnerLivedOutsideCanada'
               - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
               - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
             responses:
@@ -203,7 +203,7 @@ resources:
                 - maritalStatus
                 - livingCountry
                 - legalStatus
-                - canadaWholeLife
+                - livedOutsideCanada
                 - yearsInCanadaSince18
                 - everLivedSocialCountry
                 - partnerBenefitStatus
@@ -211,7 +211,7 @@ resources:
                 - partnerAge
                 - partnerLivingCountry
                 - partnerLegalStatus
-                - partnerCanadaWholeLife
+                - partnerLivedOutsideCanada
                 - partnerYearsInCanadaSince18
                 - partnerEverLivedSocialCountry
 
@@ -469,11 +469,9 @@ resources:
               type: string
               enum:
                 - single
-                - married
-                - commonLaw
+                - partnered
                 - widowed
-                - divorced
-                - separated
+                - invSeparated
               description: The current marital status of the client.
             allowEmptyValue: false
 
@@ -513,12 +511,12 @@ resources:
               description: The current legal status of the client.
             allowEmptyValue: false
 
-          canadaWholeLife:
-            name: canadaWholeLife
+          livedOutsideCanada:
+            name: livedOutsideCanada
             in: query
-            description: Have you only lived in Canada since the age of 18?
+            description: Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?
             required: false
-            example: true
+            example: false
             schema:
               type: boolean
             allowEmptyValue: false
@@ -626,12 +624,12 @@ resources:
               description: The current legal status of the partner.
             allowEmptyValue: false
 
-          partnerCanadaWholeLife:
-            name: partnerCanadaWholeLife
+          partnerLivedOutsideCanada:
+            name: partnerLivedOutsideCanada
             in: query
-            description: Have you only lived in Canada since the age of 18?
+            description: Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?
             required: false
-            example: true
+            example: false
             schema:
               type: boolean
             allowEmptyValue: false
