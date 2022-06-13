@@ -11,6 +11,9 @@ module.exports = {
       sm: '768px',
       xs: '320px',
     },
+    container: {
+      center: true,
+    },
     fontSize: {
       // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76
       h6: ['19px', '21px'],
