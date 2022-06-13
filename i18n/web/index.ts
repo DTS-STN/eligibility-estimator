@@ -151,6 +151,8 @@ export type WebTranslations = {
   govt: string
   yes: string
   no: string
+  year: string
+  years: string
 
   selectText: {
     maritalStatus: string
