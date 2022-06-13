@@ -42,5 +42,8 @@ jobs:
           title: Auto-update legal values
           body: This is created by a bot, please review.
           branch: legal-values-autoupdate
+          base: develop
           add-paths: |
             utils/api/scrapers/output/*.json
+          committer: DTS-STN <dts-stn+actions@github.com>
+          author: DTS-STN <dts-stn+actions@github.com>
