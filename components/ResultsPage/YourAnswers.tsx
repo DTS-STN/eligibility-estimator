@@ -78,65 +78,66 @@ export const YourAnswers: React.VFC<{
         <h3 className="h3">{title}</h3>
         {console.log('all the translations', tsln.resultsQuestions)}
         {console.log('anskeys = ', answersKeys)}
+        {console.log('age = ', answersKeys.indexOf('FieldKey.AGE') )}
 
         {/* Age */}
-        {(answersKeys.indexOf(FieldKey.AGE) > 0 &&
+        {(answersKeys.indexOf(FieldKey.AGE) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.AGE)][0]]} <br />
             <strong>{answers[answersKeys.indexOf(FieldKey.AGE)][1]}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.AGE)][0]}`}
-              href=" " 
+              href="/eligibility#age" 
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Income */}
-        {(answersKeys.indexOf(FieldKey.INCOME) > 0 &&
+        {(answersKeys.indexOf(FieldKey.INCOME) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.INCOME)][0]]} <br />
             <strong>{answers[answersKeys.indexOf(FieldKey.INCOME)][1]}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.INCOME)][0]}`}
-              href=" " 
+              href="/eligibility#income"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Legal Status */}
-        {(answersKeys.indexOf(FieldKey.LEGAL_STATUS) > 0 &&
+        {(answersKeys.indexOf(FieldKey.LEGAL_STATUS) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]]} <br />
             <strong>{getLegalStatus(answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][1]).text}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]}`}
-              href=" " 
+              href="/eligibility#legalStatus-0"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Residence */}
-        {( answersKeys.indexOf(FieldKey.LIVING_COUNTRY) > 0 &&
+        {( answersKeys.indexOf(FieldKey.LIVING_COUNTRY) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]]} <br />
             <strong>{getLivingCountry(answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][1]).text}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-              href=" " 
+              href="/eligibility#react-select-3-live-region"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Lived outside of Canada */}
-        {(answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA) > 0 &&
+        {(answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][0]]} <br />
             {answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][1] === 'true' ? (
@@ -145,18 +146,18 @@ export const YourAnswers: React.VFC<{
                   <strong>{tsln.yes}</strong> &nbsp;
                   <DSLink
                     id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-                    href=" " 
+                    href="/eligibility#liveOutsideCanada-0"
                     text="Edit"
-                    target="_blank"
+                    target="_self"
                   />
                   <br />
                   <strong>{answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
                   {Number(answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
                   <DSLink
                     id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-                    href=" " 
+                    href="/eligibility#yearsInCanadaSince18"
                     text="Edit"
-                    target="_blank"
+                    target="_self"
                   />
                 </div>
               </>
@@ -165,9 +166,9 @@ export const YourAnswers: React.VFC<{
                 <strong>tsln.no</strong>
                 <DSLink
                   id={`helpLink${answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]}`}
-                  href=" " 
+                  href="/eligibility#react-select-3-live-region"
                   text="Edit"
-                  target="_blank"
+                  target="_self"
                 />
               </>
             )}
@@ -175,64 +176,64 @@ export const YourAnswers: React.VFC<{
         )}
 
         {/* Marital Status */}
-        {(answersKeys.indexOf(FieldKey.MARITAL_STATUS) > 0 &&
+        {(answersKeys.indexOf(FieldKey.MARITAL_STATUS) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]]} <br />
             {console.log(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1])}
             <strong>{getMaritalStatus(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1]).text}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]}`}
-              href=" " 
+              href="/eligibility#maritalStatus-0"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Partner's Income */}
-        {( answersKeys.indexOf(FieldKey.PARTNER_INCOME) > 0 &&
+        {( answersKeys.indexOf(FieldKey.PARTNER_INCOME) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]]} <br />
             <strong>{answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][1]}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]}`}
-              href=" " 
+              href="/eligibility#partnerIncome"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Partner's Old Age Benefit */}
-        {(answersKeys.indexOf(FieldKey.PARTNER_INCOME) > 0 &&
+        {(answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
-            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]]} <br />
+            {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][0]]} <br />
             <strong>{getPartnerBenefitStatus(answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][1]).text}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)][0]}`}
-              href=" " 
+              href="/eligibility#"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Partner's Legal Status */}
-        {(answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS) > 0 && 
+        {(answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS) >= 0 && 
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]]} <br />
             <strong>{getLegalStatus(answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][1]).text}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]}`}
-              href=" " 
+              href="/eligibility#"
               text="Edit"
-              target="_blank"
+              target="_self"
             />
           </div>
         )}
 
         {/* Partner's Lived Outside of Canada */}
-        {(answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY) > 0 &&
+        {(answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
           {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]]} <br />
             {answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][1] === 'true' ? (
@@ -241,18 +242,18 @@ export const YourAnswers: React.VFC<{
                   <strong>{tsln.yes}</strong> &nbsp;
                   <DSLink
                     id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
-                    href=" " 
+                    href="/eligibility#"
                     text="Edit"
-                    target="_blank"
+                    target="_self"
                   />
                   <br />
-                  <strong>{answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
-                  {Number(answers[answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
+                  <strong>{answers[answersKeys.indexOf(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)][1]}</strong> &nbsp;
+                  {Number(answers[answersKeys.indexOf(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)][1]) > 1 ? tsln.years : tsln.year} &nbsp;
                   <DSLink
                     id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
-                    href=" " 
+                    href="/eligibility#"
                     text="Edit"
-                    target="_blank"
+                    target="_self"
                   />
                 </div>
               </>
@@ -261,9 +262,9 @@ export const YourAnswers: React.VFC<{
                 <strong>tsln.no</strong>
                 <DSLink
                   id={`helpLink${answers[answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)][0]}`}
-                  href=" " 
+                  href="/eligibility#"
                   text="Edit"
-                  target="_blank"
+                  target="_self"
                 />
               </>
             )}
