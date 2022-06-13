@@ -57,7 +57,7 @@ export const YourAnswers: React.VFC<{
       return fr.questionOptions.partnerBenefitStatus.find((val) => val.key === status )
   }
 
-  console.log('answersKeys length = ', answersKeys.length)
+  
 
   if (answersKeys.length === 0) 
   return (
@@ -71,15 +71,14 @@ export const YourAnswers: React.VFC<{
     </div>
   )
 
+  console.log('anskeys = ', answersKeys)
+
   if (answersKeys.length !== 0) 
   return (
     <div className="fz-10">
       <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
         <h3 className="h3">{title}</h3>
-        {console.log('all the translations', tsln.resultsQuestions)}
-        {console.log('anskeys = ', answersKeys)}
-        {console.log('age = ', answersKeys.indexOf('FieldKey.AGE') )}
-
+        
         {/* Age */}
         {(answersKeys.indexOf(FieldKey.AGE) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
@@ -179,7 +178,6 @@ export const YourAnswers: React.VFC<{
         {(answersKeys.indexOf(FieldKey.MARITAL_STATUS) >= 0 &&
           <div className='py-4 border-b-2 border-info-border'>
             {tsln.resultsQuestions[answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]]} <br />
-            {console.log(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1])}
             <strong>{getMaritalStatus(answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1]).text}</strong> &nbsp;
             <DSLink
               id={`helpLink${answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]}`}
