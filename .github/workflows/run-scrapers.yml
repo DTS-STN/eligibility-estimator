@@ -7,6 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v5
         with:
@@ -16,7 +17,6 @@ jobs:
           git_commit_gpgsign: true
           git_committer_name: DTS-STN
           git_committer_email: dts-stn+actions@github.com
-      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
