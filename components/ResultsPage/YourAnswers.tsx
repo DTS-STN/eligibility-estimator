@@ -1,6 +1,4 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
-import { Instance } from 'mobx-state-tree'
-import { SummaryLink } from '../../client-state/store'
 import { useRouter } from 'next/router'
 import { useStore, useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
