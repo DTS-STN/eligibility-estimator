@@ -34,6 +34,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/income'
         - $ref: '#/components/parameters/age'
+        - $ref: '#/components/parameters/oasDefer'
         - $ref: '#/components/parameters/oasAge'
         - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/livingCountry'
@@ -65,6 +66,7 @@ components:
         enum:
           - income
           - age
+          - oasDefer
           - oasAge
           - maritalStatus
           - livingCountry
@@ -323,6 +325,15 @@ components:
         description: Age, up to a max of 150.
         example: 65
         maximum: 150
+      allowEmptyValue: false
+
+    oasDefer:
+      name: oasDefer
+      in: query
+      description: If the client would like to defer OAS.
+      required: false
+      schema:
+        type: boolean
       allowEmptyValue: false
 
     oasAge:
