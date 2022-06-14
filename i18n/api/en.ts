@@ -63,6 +63,7 @@ const en: Translations = {
   },
   questionHelp: {
     age: 'You can enter your current age, or a future age for planning purposes.',
+    oasDefer: 'Learn more about [OAS Deferral].',
     oasAge: 'This should be between 65 and 70.',
     income:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
