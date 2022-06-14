@@ -4,6 +4,7 @@ import { FieldCategory } from './enums'
 export enum FieldKey {
   INCOME = 'income',
   AGE = 'age',
+  OAS_DEFER = 'oasDefer',
   OAS_AGE = 'oasAge',
   MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
@@ -37,6 +38,11 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
+  },
+  [FieldKey.OAS_DEFER]: {
+    key: FieldKey.OAS_DEFER,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.RADIO,
   },
   [FieldKey.OAS_AGE]: {
     key: FieldKey.OAS_AGE,

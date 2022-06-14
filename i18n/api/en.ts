@@ -37,7 +37,8 @@ const en: Translations = {
     income:
       'What is your annual net income (income after taxes) in Canadian dollars?',
     age: 'How old are you?',
-    oasAge: 'At what age would you like to start receiving OAS?',
+    oasDefer: 'When would you like to start receiving OAS?',
+    oasAge: "Enter the age for when you'd like to start receiving OAS.",
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country do you live in?',
     legalStatus: 'What is your legal status in Canada?',
@@ -62,12 +63,23 @@ const en: Translations = {
   },
   questionHelp: {
     age: 'You can enter your current age, or a future age for planning purposes.',
+    oasAge: 'This should be between 65 and 70.',
     income:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
     yearsInCanadaSince18:
       'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
   questionOptions: {
+    oasDefer: [
+      {
+        key: false,
+        text: 'I would like to start receiving OAS when I turn 65 (most common)',
+      },
+      {
+        key: true,
+        text: 'I would like to delay when I start receiving OAS (higher monthly payments)',
+      },
+    ],
     legalStatus: [
       { key: LegalStatus.CANADIAN_CITIZEN, text: 'Canadian citizen' },
       {
