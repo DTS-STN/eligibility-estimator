@@ -44,12 +44,12 @@ describe('test the mobx state tree nodes', () => {
   function fillOutForm(form: Instance<typeof Form>) {
     // TODO: this should NOT use numbered indexes to fill the form, as that makes ordering changes cause tests to fail.
     form.fields[0].setValue('65') // age
-    // form.fields[1].setValue('65') // oasAge
-    form.fields[1].setValue('20000') // income
-    form.fields[2].setValue(LegalStatus.CANADIAN_CITIZEN)
-    form.fields[3].setValue(LivingCountry.CANADA)
-    form.fields[4].setValue('false') // never lived outside Canada
-    form.fields[5].setValue(MaritalStatus.SINGLE)
+    form.fields[1].setValue('false') // oasDefer
+    form.fields[2].setValue('20000') // income
+    form.fields[3].setValue(LegalStatus.CANADIAN_CITIZEN)
+    form.fields[4].setValue(LivingCountry.CANADA)
+    form.fields[5].setValue('false') // never lived outside Canada
+    form.fields[6].setValue(MaritalStatus.SINGLE)
   }
 
   async function instantiateFormFields() {
@@ -87,14 +87,14 @@ describe('test the mobx state tree nodes', () => {
     const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
-    expect(form.fields).toHaveLength(6)
+    expect(form.fields).toHaveLength(7)
   })
 
   it("can clear an entire form's fields", async () => {
     const res = await instantiateFormFields()
     const form: Instance<typeof Form> = root.form
     form.setupForm(res.body.fieldData)
-    expect(form.fields).toHaveLength(6)
+    expect(form.fields).toHaveLength(7)
     form.removeAllFields()
     expect(form.fields).toHaveLength(0)
   })
@@ -107,7 +107,7 @@ describe('test the mobx state tree nodes', () => {
     sendReq.mockImplementationOnce(async () => res)
 
     form.setupForm(res.body.fieldData)
-    expect(form.fields).toHaveLength(6)
+    expect(form.fields).toHaveLength(7)
     form.clearForm()
 
     for (const field of form.fields) {
@@ -166,6 +166,7 @@ describe('test the mobx state tree nodes', () => {
     input = form.buildObjectWithFormData()
     expect(input.income).toEqual('20000')
     expect(input.age).toEqual('65')
+    expect(input.oasDefer).toEqual('false')
     expect(input.maritalStatus).toEqual('single')
     expect(input.livingCountry).toEqual('CAN')
     expect(input.legalStatus).toEqual('canadianCitizen')
