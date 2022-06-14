@@ -13,6 +13,9 @@ module.exports = {
     },
     container: {
       center: true,
+      padding: {
+        DEFAULT: '1rem',
+      },
     },
     fontSize: {
       // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76

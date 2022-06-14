@@ -10,7 +10,7 @@ export const Footer = () => {
       btnLink="#"
       id="footer-info"
       lang={tsln._language}
-      containerClass="sm:container"
+      containerClass="xs:container"
     />
   )
 }
