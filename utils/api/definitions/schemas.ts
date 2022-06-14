@@ -36,6 +36,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.ageUnder18)
     .max(150)
     .message(ValidationErrors.ageOver150),
+  oasDefer: Joi.boolean(),
   oasAge: Joi.number()
     .integer()
     .min(65)

@@ -38,6 +38,7 @@ export interface Translations {
   question: { [key in FieldKey]: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
+    oasDefer: TypedKeyAndText<boolean>[]
     legalStatus: TypedKeyAndText<LegalStatus>[]
     livedOutsideCanada: TypedKeyAndText<boolean>[]
     partnerLivedOutsideCanada: TypedKeyAndText<boolean>[]

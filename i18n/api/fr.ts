@@ -39,7 +39,8 @@ const fr: Translations = {
     income:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     age: 'Quel âge avez-vous?',
-    oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
+    oasDefer: 'Quand souhaitez-vous commencer à recevoir la SV?',
+    oasAge: "Entrez l'âge auquel vous souhaitez commencer à recevoir la SV.",
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous?',
     legalStatus: 'Quel est votre statut légal au Canada?',
@@ -65,12 +66,23 @@ const fr: Translations = {
   },
   questionHelp: {
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
+    oasAge: 'Celui-ci doit être compris entre 65 et 70.',
     income:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
     yearsInCanadaSince18:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
   },
   questionOptions: {
+    oasDefer: [
+      {
+        key: false,
+        text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
+      },
+      {
+        key: true,
+        text: 'Je voudrais retarder le moment où je commencerai à recevoir la SV (paiements mensuels plus élevés)',
+      },
+    ],
     legalStatus: [
       { key: LegalStatus.CANADIAN_CITIZEN, text: 'Citoyen canadien' },
       {
