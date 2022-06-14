@@ -506,6 +506,40 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     )
   })
 
+  it('returns "eligible" - deferral', async () => {
+    const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
+    const oasBaseAmount = legalValues.MAX_OAS_ENTITLEMENT
+    const deferYears = 5
+    const oasDeferredAmount = roundToTwo(
+      oasBaseAmount * (1 + deferYears * 12 * deferralIncreaseByMonth)
+    )
+
+    let inputBase = {
+      income: 10000,
+      maritalStatus: MaritalStatus.PARTNERED,
+      ...canadian,
+      ...canadaWholeLife,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncome: 10000,
+      ...partnerNoHelpNeeded,
+    }
+    let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
+    let res = await mockGetRequest(inputNoDefer65)
+    expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
+
+    let inputNoDefer70 = { ...inputBase, age: 70, oasDefer: false, oasAge: 65 }
+    res = await mockGetRequest(inputNoDefer70)
+    expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
+
+    let input65Defer70 = { ...inputBase, age: 65, oasDefer: true, oasAge: 70 }
+    res = await mockGetRequest(input65Defer70)
+    expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
+
+    let input70Defer70 = { ...inputBase, age: 70, oasDefer: true, oasAge: 70 }
+    res = await mockGetRequest(input70Defer70)
+    expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
+  })
+
   it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {
     const res = await mockGetRequest({
       income: legalValues.MAX_OAS_INCOME - 1,
