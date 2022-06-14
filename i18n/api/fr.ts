@@ -66,6 +66,7 @@ const fr: Translations = {
   },
   questionHelp: {
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
+    oasDefer: 'En savoir plus sur le [report de la SV].',
     oasAge: 'Celui-ci doit être compris entre 65 et 70.',
     income:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',

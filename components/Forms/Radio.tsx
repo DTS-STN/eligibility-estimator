@@ -9,6 +9,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   values: any[]
   label: string
   checkedValue?: string
+  helpText?: string
   error?: string
 }
 
@@ -18,7 +19,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @returns
  */
 export const Radio: React.VFC<InputProps> = observer((props) => {
-  const { name, label, checkedValue, onChange, values, keyforid, error } = props
+  const {
+    name,
+    label,
+    checkedValue,
+    onChange,
+    values,
+    keyforid,
+    helpText,
+    error,
+  } = props
   const requiredText = useTranslation<string>('required')
 
   return (
@@ -39,6 +49,12 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           <span className="ml-1">({requiredText})</span>
           <Tooltip field={name} />
         </span>
+        {helpText && (
+          <div
+            className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
+            dangerouslySetInnerHTML={{ __html: helpText }}
+          ></div>
+        )}
       </div>
       {error && <ErrorLabel errorMessage={error} />}
       {values.map((val, index) => (
