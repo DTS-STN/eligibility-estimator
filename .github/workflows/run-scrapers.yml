@@ -1,49 +1,50 @@
-name: Run scrapers
+name: Legal values auto-update
 on:
-  workflow_dispatch:
+  workflow_dispatch: # so we can run manually
   schedule:
     - cron: '0 0 * * *'
 jobs:
-  legal-values-autoupdate:
+  legal-values-auto-update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-          git_committer_name: DTS-STN
-          git_committer_email: dts-stn+actions@github.com
+      ## Signing with GPG won't work unless we create a "DTS Bot" GitHub account.
+      #- id: import_gpg
+      #  uses: crazy-max/ghaction-import-gpg@v5
+      #  with:
+      #    gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+      #    passphrase: ${{ secrets.GPG_KEY_PASSPHRASE }}
+      #    git_user_signingkey: true
+      #    git_commit_gpgsign: true
+      #    git_committer_name: GitHub Actions
+      #    git_committer_email: actions@github.com
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'yarn'
-      - run: corepack enable
+          cache: 'yarn' # cache seems to not work until yarn is installed, so this might be futile
+      - run: corepack enable # this installs yarn
       - run: yarn install
-      # - run: git checkout -b legal-values-autoupdate
       - run: yarn run run-scraper
-      # - run: echo test > utils/api/scrapers/output/test.json
-      # - uses: EndBug/add-and-commit@v9
-      #   with:
-      #     add: 'utils/api/scrapers/output/*.json'
-      #     new_branch: legal-values-autoupdate
-      #     committer_name: DTS-STN
-      #     committer_email: dts-stn+actions@github.com
-      # - run: |
-      #       git add 'utils/api/scrapers/output/*.json'
-      #       git commit -S -m "update legal values"
-      # - run: git push -v --set-upstream origin legal-values-autoupdate
       - uses: peter-evans/create-pull-request@v4
         with:
           commit-message: auto-update legal values
           title: Auto-update legal values
-          body: This is created by a bot, please review.
-          branch: legal-values-autoupdate
+          body: |
+            This is created by a bot, please review and make any appropriate changes.
+
+            You will have to sign the bot's commit before merging, because it doesn't have permission to do so itself.
+
+            To do this, run the following commands:
+            ```
+            git fetch
+            git switch legal-values-auto-update
+            git pull
+            git rebase --exec 'git commit -S --amend --no-edit' develop
+            git push --force
+            ```
+          branch: legal-values-auto-update
           base: develop
           add-paths: |
             utils/api/scrapers/output/*.json
-          committer: DTS-STN <dts-stn+actions@github.com>
-          author: DTS-STN <dts-stn+actions@github.com>
+          committer: GitHub Actions <actions@github.com>
+          author: GitHub Actions <actions@github.com>
