@@ -63,7 +63,7 @@ const en: Translations = {
   },
   questionHelp: {
     age: 'You can enter your current age, or a future age for planning purposes.',
-    oasDefer: 'Learn more about [OAS Deferral].',
+    oasDefer: 'Learn more about {LINK_OAS_DEFER_INLINE}.',
     oasAge: 'This should be between 65 and 70.',
     income:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
@@ -150,17 +150,17 @@ const en: Translations = {
   detail: {
     eligible: 'You are likely eligible for this benefit.',
     eligibleOas65to69:
-      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
+      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
       'You are likely eligible to a partial Old Age Security pension.',
     eligiblePartialOas65to69:
-      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
+      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNowOas:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBe60to64:

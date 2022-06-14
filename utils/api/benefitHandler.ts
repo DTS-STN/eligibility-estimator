@@ -83,6 +83,7 @@ export class BenefitHandler {
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
+        field.helpText = this.replaceTextVariables(field.helpText)
       }
     }
     return this._fieldData
