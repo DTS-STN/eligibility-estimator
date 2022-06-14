@@ -49,7 +49,10 @@ export const textReplacementRules: TextReplacementRules = {
   LINK_MORE_REASONS_GIS: (handler) => generateLink(handler, LinkKey.gisReasons),
   LINK_MORE_REASONS_ALW: (handler) => generateLink(handler, LinkKey.alwReasons),
   LINK_MORE_REASONS_AFS: (handler) => generateLink(handler, LinkKey.afsReasons),
-  LINK_OAS_DEFER: (handler) => generateLink(handler, LinkKey.oasDeferClickHere),
+  LINK_OAS_DEFER_CLICK_HERE: (handler) =>
+    generateLink(handler, LinkKey.oasDeferClickHere),
+  LINK_OAS_DEFER_INLINE: (handler) =>
+    generateLink(handler, LinkKey.oasDeferInline),
   LINK_RECOVERY_TAX: (handler) =>
     generateLink(handler, LinkKey.oasRecoveryTaxInline),
 }

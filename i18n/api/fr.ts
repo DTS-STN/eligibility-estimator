@@ -66,7 +66,7 @@ const fr: Translations = {
   },
   questionHelp: {
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
-    oasDefer: 'En savoir plus sur le [report de la SV].',
+    oasDefer: 'En savoir plus sur le {LINK_OAS_DEFER_INLINE}.',
     oasAge: 'Celui-ci doit être compris entre 65 et 70.',
     income:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
@@ -163,17 +163,17 @@ const fr: Translations = {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
     eligibleOas65to69:
-      'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER}.',
+      'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     eligiblePartialOas65to69:
-      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER}.',
+      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60ApplyNow:
       'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen65ApplyNowOas:
-      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER}.',
+      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60:
       'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
