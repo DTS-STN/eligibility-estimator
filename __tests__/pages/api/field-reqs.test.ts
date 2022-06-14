@@ -6,16 +6,11 @@ import {
   PartnerBenefitStatus,
 } from '../../../utils/api/definitions/enums'
 import { FieldKey } from '../../../utils/api/definitions/fields'
-import {
-  canadaWholeLife,
-  canadian,
-  partnerNoHelpNeeded,
-  partnerUndefined,
-} from './expectUtils'
+import { canadaWholeLife, canadian, partnerUndefined } from './expectUtils'
 import { mockGetRequest } from './factory'
 
 describe('field requirement analysis', () => {
-  it('requires only income when nothing provided', async () => {
+  it('requires base questions when nothing provided', async () => {
     const res = await mockGetRequest({
       income: undefined,
       age: undefined,
@@ -32,6 +27,7 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_DEFER,
       FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
@@ -40,308 +36,12 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_DEFER,
       FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_OUTSIDE_CANADA,
       FieldKey.MARITAL_STATUS,
-    ])
-  })
-
-  it('requires fields when only income provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: undefined,
-      oasDefer: undefined,
-      oasAge: undefined,
-      maritalStatus: undefined,
-      livingCountry: undefined,
-      legalStatus: undefined,
-      livedOutsideCanada: undefined,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: undefined,
-      livingCountry: undefined,
-      legalStatus: undefined,
-      livedOutsideCanada: undefined,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      livingCountry: undefined,
-      legalStatus: undefined,
-      livedOutsideCanada: undefined,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital/country provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      livingCountry: LivingCountry.CANADA,
-      legalStatus: undefined,
-      livedOutsideCanada: undefined,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital/country/legal provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      ...canadian,
-      livedOutsideCanada: undefined,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital/country/legal/lifeCanada provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      ...canadian,
-      livedOutsideCanada: true,
-      yearsInCanadaSince18: undefined,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital/country/legal/lifeCanada/years provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      ...canadian,
-      livedOutsideCanada: true,
-      yearsInCanadaSince18: 5,
-      everLivedSocialCountry: undefined,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital/country/legal/lifeCanada/years/socialCountry provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      ...canadian,
-      livedOutsideCanada: true,
-      yearsInCanadaSince18: 5,
-      everLivedSocialCountry: true,
-      ...partnerUndefined,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
-  })
-
-  it('requires fields when only income/age/marital/country/legal/lifeCanada/years/socialCountry/partnerBenefits provided', async () => {
-    const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
-      maritalStatus: MaritalStatus.PARTNERED,
-      ...canadian,
-      livedOutsideCanada: true,
-      yearsInCanadaSince18: 5,
-      everLivedSocialCountry: true,
-      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: undefined,
-      ...partnerNoHelpNeeded,
-    })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
-    expect(res.body.missingFields).toEqual([FieldKey.PARTNER_INCOME])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 
@@ -349,8 +49,8 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      oasDefer: true,
+      oasAge: 70,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: true,
@@ -358,12 +58,18 @@ describe('field requirement analysis', () => {
       everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
+      partnerAge: 65,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 5,
+      partnerEverLivedSocialCountry: true,
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.OAS_DEFER,
       FieldKey.OAS_AGE,
       FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
@@ -374,12 +80,14 @@ describe('field requirement analysis', () => {
       FieldKey.MARITAL_STATUS,
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
+      FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
     ])
   })
 })
 
 describe('field requirements analysis: conditional fields', () => {
-  it('requires "yearsInCanadaSince18" when lifeCanada=false', async () => {
+  it('requires "yearsInCanadaSince18" when livedOutsideCanada=true', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -394,16 +102,7 @@ describe('field requirements analysis: conditional fields', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.YEARS_IN_CANADA_SINCE_18])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.MARITAL_STATUS,
-    ])
+    expect(res.body.visibleFields).toContain(FieldKey.YEARS_IN_CANADA_SINCE_18)
   })
 
   it('requires "everLivedSocialCountry" when living in Canada and under 10 years in Canada', async () => {
@@ -421,20 +120,10 @@ describe('field requirements analysis: conditional fields', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.MARITAL_STATUS,
-    ])
+    expect(res.body.visibleFields).toContain(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
   })
 
-  it('requires "everLivedSocialCountry" when living in No Agreement and under 10 years in Canada', async () => {
+  it('requires "everLivedSocialCountry" when living in No Agreement and under 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
       age: 65,
@@ -450,17 +139,7 @@ describe('field requirements analysis: conditional fields', () => {
     })
     expect(res.body.summary.state).toEqual(EstimationSummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([FieldKey.EVER_LIVED_SOCIAL_COUNTRY])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
-      FieldKey.MARITAL_STATUS,
-    ])
+    expect(res.body.visibleFields).toContain(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
   })
 
   it('requires partner questions when marital=married', async () => {
@@ -479,16 +158,7 @@ describe('field requirements analysis: conditional fields', () => {
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_BENEFIT_STATUS,
     ])
-    expect(res.body.visibleFields).toEqual([
-      FieldKey.AGE,
-      FieldKey.OAS_AGE,
-      FieldKey.INCOME,
-      FieldKey.LEGAL_STATUS,
-      FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
-      FieldKey.MARITAL_STATUS,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
-    ])
+    expect(res.body.visibleFields).toContain(FieldKey.PARTNER_INCOME)
+    expect(res.body.visibleFields).toContain(FieldKey.PARTNER_BENEFIT_STATUS)
   })
 })
