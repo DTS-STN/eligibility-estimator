@@ -20,7 +20,7 @@
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@dts-stn/decd-design-system": "DTS-STN/DECD-Design-System#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32",
+    "@dts-stn/decd-design-system": "1.40.0",
     "@tailwindcss/forms": "^0.5.0",
     "csv-writer": "^1.6.0",
     "joi": "^17.6.0",
