@@ -36,7 +36,7 @@ const Home: NextPage = () => {
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
-          <div className="md:w-1/2 h-35 sm:h-20 bg-light-green py-2 px-8">
+          <div className="w-full sm:w-4/5 md:w-[55%] h-35 sm:h-20 bg-light-green py-2 px-8">
             <div className="flex">
               <img
                 className="xs:mt-2 xs:h-5"
