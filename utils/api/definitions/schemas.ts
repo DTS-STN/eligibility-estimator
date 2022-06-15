@@ -24,6 +24,9 @@ import {
  *
  * Note: Do not require fields here, do it in the benefit-specific schemas.
  */
+
+// can also bring in month and year as a date object and validate with Joi like this:
+// Joi.date().format('YYYY-MM-DD').options({ convert: false }),
 export const RequestSchema = Joi.object({
   income: Joi.number()
     .precision(2)
@@ -37,6 +40,14 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.monthInvalid)
     .less(12)
     .message(ValidationErrors.monthInvalid),
+  birthYear: Joi.number().integer().min(1900).max(2013),
+  oasMonth: Joi.number()
+    .integer()
+    .greater(1)
+    .message(ValidationErrors.monthInvalid)
+    .less(12)
+    .message(ValidationErrors.monthInvalid),
+  oasYear: Joi.number().integer().min(1900).max(2013),
   age: Joi.number()
     .integer()
     .min(18)
@@ -78,6 +89,13 @@ export const RequestSchema = Joi.object({
       })
     )
     .message(ValidationErrors.partnerIncomeTooHigh),
+  partnerBirthMonth: Joi.number()
+    .integer()
+    .greater(1)
+    .message(ValidationErrors.monthInvalid)
+    .less(12)
+    .message(ValidationErrors.monthInvalid),
+  partnerBirthYear: Joi.number().integer().min(1900).max(2013),
   partnerAge: Joi.number()
     .integer()
     .min(18)

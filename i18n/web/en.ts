@@ -156,6 +156,7 @@ const en: WebTranslations = {
       'You have indicated a marital status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
     [ValidationErrors.legalUnavailable]:
       'You have indicated a legal status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
+    [ValidationErrors.monthInvalid]: 'Month must be between 1 and 12',
   },
   unableToProceed: 'Unable to proceed',
   unavailableImageAltText: 'Happy people',

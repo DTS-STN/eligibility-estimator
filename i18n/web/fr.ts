@@ -160,6 +160,7 @@ const fr: WebTranslations = {
       "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
       "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+    [ValidationErrors.monthInvalid]: 'Month must be between 1 and 12',
   },
   unableToProceed: 'Impossible de continuer',
   unavailableImageAltText: 'Gens Heureux',
