@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { join } from 'path'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import { legalValues } from '../scrapers/output'
 import {
@@ -30,6 +31,12 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.incomeBelowZero)
     .less(legalValues.MAX_OAS_INCOME)
     .message(ValidationErrors.incomeTooHigh),
+  birthMonth: Joi.number()
+    .integer()
+    .greater(1)
+    .message(ValidationErrors.monthInvalid)
+    .less(12)
+    .message(ValidationErrors.monthInvalid),
   age: Joi.number()
     .integer()
     .min(18)
