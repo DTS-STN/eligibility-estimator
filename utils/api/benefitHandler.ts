@@ -88,7 +88,7 @@ export class BenefitHandler {
     return this._fieldData
   }
 
-  static get benefitResults(): BenefitResultsObject {
+  get benefitResults(): BenefitResultsObject {
     if (this._benefitResults === undefined) {
       this._benefitResults = this.getBenefitResultObject()
       this.translateResults()
