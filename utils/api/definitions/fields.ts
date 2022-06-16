@@ -3,6 +3,8 @@ import { FieldCategory } from './enums'
 
 export enum FieldKey {
   INCOME = 'income',
+  BIRTH_MONTH = 'birthMonth',
+  BIRTH_YEAR = 'birthYear',
   AGE = 'age',
   OAS_DEFER = 'oasDefer',
   OAS_AGE = 'oasAge',
@@ -34,6 +36,16 @@ export enum FieldType {
 
 // the order of fields here will define the order within the application
 export const fieldDefinitions: FieldDefinitions = {
+  [FieldKey.BIRTH_MONTH]: {
+    key: FieldKey.BIRTH_MONTH,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.BIRTH_YEAR]: {
+    key: FieldKey.BIRTH_YEAR,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },

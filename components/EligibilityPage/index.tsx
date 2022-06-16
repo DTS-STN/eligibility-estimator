@@ -40,6 +40,11 @@ export const EligibilityPage: React.VFC = observer(({}) => {
 
   const input = root.getInputObject()
   input._language = locale
+
+  // TODO: delete after testing and this PR is completed:
+  input.birthMonth = 2
+  input.birthYear = 1980
+
   const data = new MainHandler(input).results
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
