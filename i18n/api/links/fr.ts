@@ -153,7 +153,7 @@ export const links: LinkDefinitions = {
     location: LinkLocation.HIDDEN,
   },
   oasDeferInline: {
-    text: 'report de la SV',
+    text: 'le report de la SV',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
     order: -1,
     location: LinkLocation.HIDDEN,

@@ -66,7 +66,8 @@ const fr: Translations = {
   },
   questionHelp: {
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
-    oasDefer: 'En savoir plus sur le {LINK_OAS_DEFER_INLINE}.',
+    oasDefer:
+      'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',
     oasAge: 'Celui-ci doit être compris entre 65 et 70.',
     income:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
