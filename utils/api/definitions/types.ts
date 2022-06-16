@@ -56,8 +56,12 @@ export interface RequestInput {
  */
 export interface ProcessedInput {
   income: IncomeHelper
+  birthMonth: number
+  birthYear: number
   age: number
   oasDefer: boolean
+  oasMonth: number
+  oasYear: number
   oasAge: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper

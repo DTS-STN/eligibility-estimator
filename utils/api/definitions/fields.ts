@@ -7,6 +7,8 @@ export enum FieldKey {
   BIRTH_YEAR = 'birthYear',
   AGE = 'age',
   OAS_DEFER = 'oasDefer',
+  OAS_MONTH = 'oasMonth',
+  OAS_YEAR = 'oasYear',
   OAS_AGE = 'oasAge',
   MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
@@ -16,6 +18,8 @@ export enum FieldKey {
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
   PARTNER_INCOME = 'partnerIncome',
+  PARTNER_BIRTH_MONTH = 'partnerBirthMonth',
+  PARTNER_BIRTH_YEAR = 'partnerBirthYear',
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
@@ -55,6 +59,16 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.OAS_DEFER,
     category: { key: FieldCategory.AGE },
     type: FieldType.RADIO,
+  },
+  [FieldKey.OAS_MONTH]: {
+    key: FieldKey.OAS_MONTH,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.OAS_YEAR]: {
+    key: FieldKey.OAS_YEAR,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
   },
   [FieldKey.OAS_AGE]: {
     key: FieldKey.OAS_AGE,
@@ -111,6 +125,16 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
+  },
+  [FieldKey.PARTNER_BIRTH_MONTH]: {
+    key: FieldKey.PARTNER_BIRTH_MONTH,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.PARTNER_BIRTH_YEAR]: {
+    key: FieldKey.PARTNER_BIRTH_YEAR,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.NUMBER,
   },
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,

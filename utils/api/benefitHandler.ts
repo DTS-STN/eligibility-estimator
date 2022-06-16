@@ -133,8 +133,12 @@ export class BenefitHandler {
     )
     const clientInput: ProcessedInput = {
       income: incomeHelper,
+      birthMonth: this.rawInput.birthMonth,
+      birthYear: this.rawInput.birthYear,
       age: this.rawInput.age,
       oasDefer: this.rawInput.oasDefer,
+      oasMonth: this.rawInput.oasMonth,
+      oasYear: this.rawInput.oasYear,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
@@ -151,8 +155,12 @@ export class BenefitHandler {
     }
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
+      birthMonth: 12,
+      birthYear: 1980,
       age: this.rawInput.partnerAge,
       oasDefer: false, // pass dummy data because we will never use this anyway
+      oasMonth: 12,
+      oasYear: 2022,
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
@@ -181,7 +189,9 @@ export class BenefitHandler {
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
       FieldKey.INCOME,
-      FieldKey.AGE,
+      FieldKey.BIRTH_MONTH,
+      FieldKey.BIRTH_YEAR,
+      // FieldKey.AGE,
       FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
@@ -192,7 +202,8 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.oasDefer) {
-      requiredFields.push(FieldKey.OAS_AGE)
+      requiredFields.push(FieldKey.OAS_MONTH)
+      requiredFields.push(FieldKey.OAS_YEAR)
     }
     if (
       (this.input.client.livingCountry.canada &&
@@ -209,7 +220,9 @@ export class BenefitHandler {
       )
       if (this.input.client.partnerBenefitStatus.helpMe) {
         requiredFields.push(
-          FieldKey.PARTNER_AGE,
+          // FieldKey.PARTNER_AGE,
+          FieldKey.PARTNER_BIRTH_MONTH,
+          FieldKey.PARTNER_BIRTH_YEAR,
           FieldKey.PARTNER_LEGAL_STATUS,
           FieldKey.PARTNER_LIVING_COUNTRY,
           FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
