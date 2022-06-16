@@ -152,6 +152,12 @@ export const links: LinkDefinitions = {
     order: -1,
     location: LinkLocation.HIDDEN,
   },
+  oasDeferInline: {
+    text: 'OAS Deferral',
+    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
+    order: -1,
+    location: LinkLocation.HIDDEN,
+  },
   socialAgreement: {
     text: 'social security agreement',
     url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',

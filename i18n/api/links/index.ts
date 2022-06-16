@@ -26,6 +26,7 @@ export enum LinkKey {
   afsApply = 'afsApply',
   SC = 'SC',
   oasDeferClickHere = 'oasDeferClickHere',
+  oasDeferInline = 'oasDeferInline',
   socialAgreement = 'socialAgreement',
   oasReasons = 'oasReasons',
   gisReasons = 'gisReasons',

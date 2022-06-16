@@ -232,6 +232,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                 keyforid={field.key}
                 label={field.label}
                 onChange={(e) => handleOnChange(step, field, e)}
+                helpText={field.helpText}
                 required
               />
             </div>
