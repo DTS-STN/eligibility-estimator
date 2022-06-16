@@ -36,18 +36,11 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.incomeTooHigh),
   birthMonth: Joi.number()
     .integer()
-    .greater(1)
+    .min(1)
     .message(ValidationErrors.monthInvalid)
-    .less(12)
+    .max(12)
     .message(ValidationErrors.monthInvalid),
   birthYear: Joi.number().integer().min(1900).max(2013),
-  oasMonth: Joi.number()
-    .integer()
-    .greater(1)
-    .message(ValidationErrors.monthInvalid)
-    .less(12)
-    .message(ValidationErrors.monthInvalid),
-  oasYear: Joi.number().integer().min(1900).max(2013),
   age: Joi.number()
     .integer()
     .min(18)
@@ -55,6 +48,13 @@ export const RequestSchema = Joi.object({
     .max(150)
     .message(ValidationErrors.ageOver150),
   oasDefer: Joi.boolean(),
+  oasMonth: Joi.number()
+    .integer()
+    .min(1)
+    .message(ValidationErrors.monthInvalid)
+    .max(12)
+    .message(ValidationErrors.monthInvalid),
+  oasYear: Joi.number().integer().min(1900).max(2013),
   oasAge: Joi.number()
     .integer()
     .min(65)
@@ -91,9 +91,9 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.partnerIncomeTooHigh),
   partnerBirthMonth: Joi.number()
     .integer()
-    .greater(1)
+    .min(1)
     .message(ValidationErrors.monthInvalid)
-    .less(12)
+    .max(12)
     .message(ValidationErrors.monthInvalid),
   partnerBirthYear: Joi.number().integer().min(1900).max(2013),
   partnerAge: Joi.number()

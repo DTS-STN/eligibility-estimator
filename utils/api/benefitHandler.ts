@@ -135,11 +135,13 @@ export class BenefitHandler {
       income: incomeHelper,
       birthMonth: this.rawInput.birthMonth,
       birthYear: this.rawInput.birthYear,
-      age: this.rawInput.age,
+      age: this.calculateAge(this.rawInput.birthMonth, this.rawInput.birthYear),
       oasDefer: this.rawInput.oasDefer,
       oasMonth: this.rawInput.oasMonth,
       oasYear: this.rawInput.oasYear,
-      oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
+      oasAge: this.rawInput.oasDefer
+        ? this.calculateAge(this.rawInput.oasMonth, this.rawInput.oasYear)
+        : 65,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -155,12 +157,15 @@ export class BenefitHandler {
     }
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
-      birthMonth: 12,
-      birthYear: 1980,
-      age: this.rawInput.partnerAge,
+      birthMonth: this.rawInput.partnerBirthMonth,
+      birthYear: this.rawInput.partnerBirthYear,
+      age: this.calculateAge(
+        this.rawInput.partnerBirthMonth,
+        this.rawInput.partnerBirthYear
+      ),
       oasDefer: false, // pass dummy data because we will never use this anyway
-      oasMonth: 12,
-      oasYear: 2022,
+      oasMonth: 12, // pass dummy data because we will never use this anyway
+      oasYear: 2022, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
@@ -398,6 +403,26 @@ export class BenefitHandler {
       // finish with detail processing
       result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityTextWithBenefit}`
     }
+  }
+
+  private calculateAge(birthMonth: number, birthYear: number): number {
+    if (!birthMonth || !birthYear) return null
+
+    const today = new Date()
+    const currentMonth = today.getMonth()
+    const currentYear = today.getFullYear()
+
+    let ageMonths: number
+    let ageYears = currentYear - birthYear
+
+    if (currentMonth >= birthMonth) {
+      ageMonths = currentMonth - birthMonth
+    } else {
+      ageYears -= 1
+      ageMonths = 12 + (currentMonth - birthMonth)
+    }
+
+    return ageYears + Number((ageMonths / 12).toFixed(1))
   }
 
   /**
