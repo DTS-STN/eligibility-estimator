@@ -119,6 +119,7 @@ const en: WebTranslations = {
     'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
     header: 'Table of estimated monthly amounts',
+    onThisPage: 'On This Page:',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total',
@@ -126,9 +127,47 @@ const en: WebTranslations = {
     youMayBeEligible: 'You may be eligible at this time',
     basedOnYourInfo: 'Based on your information, you may be eligible for:',
     yourEstimatedTotal: 'Your estimated monthly total is ',
-    basedOnYourInfoTotal: 'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Suplement is',
+    basedOnYourInfoTotal:
+      'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Suplement is',
     nextSteps: 'Next steps for benefits you may be eligible for',
-    youMayNotBeEligible: 'Benefits you may not be eligible for'
+    youMayNotBeEligible: 'Benefits you may not be eligible for',
+    edit: 'Edit',
+    info: 'info',
+    note: 'note',
+    link: 'link',
+    dollarSign: 'Dollars sign symbol',
+    oasInfoUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
+    oasInfoText: 'Learn more about Old Age Security benefit',
+    oasMessage:
+      'Based en what you told us <strong>you do not need to apply</strong> You will ...',
+    gisInfoUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+    gisInfoText: 'Learn more about Guaranteed Income Supplement ',
+    gisMessage:
+      'Based on income you provided to us, <strong>you are eligible</strong> for this benefit ',
+    gisApplyUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+    gisApplyText:
+      'Determine if you need to apply to get Guaranteed Income Supplement',
+    alwInfoUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
+    alwInfoText: 'Learn more about the allowance benefit',
+    alwMessage:
+      'The allowance benefit is for indivuduals between the ages of 60 and 64',
+    alwApplyUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
+    alwApplyText:
+      'View the full eligibility criteria for the allowance benefit',
+    afsInfoUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
+    afsInfoText: 'Learn more about the allowance for the survivor benefit',
+    afsMessage:
+      'The allowance for the survivor is for individuals between 60 and 64 years old',
+    afsApplyUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
+    afsApplyText:
+      'View the full eligibility criteria for the allowance for the survivor benefit',
   },
   resultsQuestions: {
     age: 'Age',
@@ -142,16 +181,10 @@ const en: WebTranslations = {
     partnerAge: "Partner's age",
     partnerLivingCountry: "Partner's residence country",
     partnerLegalStatus: "Partner's legal status",
-    partnerlivedOutsideCanada: "Partner's lived outside Canada for longer of 6 months",
+    partnerlivedOutsideCanada:
+      "Partner's lived outside Canada for longer of 6 months",
     partnerYearsInCanadaSince18: '',
     partnerIncome: "Partner's net income",
-  },
-  resultsLegalStatus: {
-    canadianCitizen : 'Canadian Resident',
-    permanentResident : 'Permanent Resident',
-    sponsored : 'Permanent Resident Sponsored',
-    indianStatus : 'First Nation',
-    other : 'Other'
   },
   moreInfoHeader: 'More Information',
   startOver: 'Start over',
@@ -193,6 +226,7 @@ const en: WebTranslations = {
   no: 'No',
   year: 'Year',
   years: 'Years',
+  unavailable: 'unavailable',
 
   selectText: {
     maritalStatus: 'Select a marital status',

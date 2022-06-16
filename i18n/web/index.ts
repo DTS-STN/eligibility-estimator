@@ -1,7 +1,7 @@
 import {
   Language,
   Locale,
-  ValidationErrors
+  ValidationErrors,
 } from '../../utils/api/definitions/enums'
 import { Translations } from '../api'
 import en from './en'
@@ -104,16 +104,40 @@ export type WebTranslations = {
   contactCTA: string
   resultsPage: {
     header: string
+    onThisPage: string
     tableHeader1: string
     tableHeader2: string
     tableTotalAmount: string
-    whatYouToldUs: string,
+    whatYouToldUs: string
     youMayBeEligible: string
     basedOnYourInfo: string
     yourEstimatedTotal: string
     basedOnYourInfoTotal: string
     nextSteps: string
     youMayNotBeEligible: string
+    edit: string
+    info: string
+    note: string
+    link: string
+    dollarSign: string
+    oasInfoUrl: string
+    oasInfoText: string
+    oasMessage: string
+    gisInfoUrl: string
+    gisInfoText: string
+    gisMessage: string
+    gisApplyUrl: string
+    gisApplyText: string
+    alwInfoUrl: string
+    alwInfoText: string
+    alwMessage: string
+    alwApplyUrl: string
+    alwApplyText: string
+    afsInfoUrl: string
+    afsInfoText: string
+    afsMessage: string
+    afsApplyUrl: string
+    afsApplyText: string
   }
   resultsQuestions: {
     age: string
@@ -123,20 +147,13 @@ export type WebTranslations = {
     yearsInCanadaSince18: string
     income: string
     maritalStatus: string
-    partnerBenefitStatus: string 
+    partnerBenefitStatus: string
     partnerAge: string
     partnerLivingCountry: string
     partnerLegalStatus: string
     partnerlivedOutsideCanada: string
     partnerYearsInCanadaSince18: string
     partnerIncome: string
-  }
-  resultsLegalStatus: {
-    canadianCitizen: string
-    permanentResident: string
-    sponsored: string
-    indianStatus: string
-    other: string
   }
   moreInfoHeader: string
   startOver: string
@@ -153,6 +170,7 @@ export type WebTranslations = {
   no: string
   year: string
   years: string
+  unavailable: string
 
   selectText: {
     maritalStatus: string

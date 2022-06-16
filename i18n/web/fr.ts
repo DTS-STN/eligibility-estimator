@@ -121,39 +121,74 @@ const fr: WebTranslations = {
     'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
     header: "Tableau des résultats d'estimation",
+    onThisPage: 'sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Total',
     whatYouToldUs: 'Ce que vous nous avez dit',
     youMayBeEligible: 'Vous pouvez être éligible en ce moment',
-    basedOnYourInfo: 'Selon vos informations, vous pourriez être admissible à :',
+    basedOnYourInfo:
+      'Selon vos informations, vous pourriez être admissible à :',
     yourEstimatedTotal: 'Votre total mensuel estimé est de',
-    basedOnYourInfoTotal: 'Selon vos renseignements, votre montant mensuel combiné pour la Sécurité de la vieillesse et le Supplément de revenu garanti est de',
-    nextSteps: 'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
-    youMayNotBeEligible: 'Prestations auxquels vous pourriez ne pas avoir droit'
+    basedOnYourInfoTotal:
+      'Selon vos renseignements, votre montant mensuel combiné pour la Sécurité de la vieillesse et le Supplément de revenu garanti est de',
+    nextSteps:
+      'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
+    youMayNotBeEligible:
+      'Prestations auxquels vous pourriez ne pas avoir droit',
+    edit: 'Éditer',
+    info: 'info',
+    note: 'remarque',
+    link: 'lien',
+    dollarSign: 'symbole du dollar',
+    oasInfoUrl:
+      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
+    oasInfoText: 'en savoir plus sur la Sécurité de la vieillesse',
+    oasMessage:
+      "D'après ce que vous nous avez dit, <strong>vous n'avez pas besoin de postuler</strong> ...",
+    gisInfoUrl:
+      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
+    gisInfoText: 'en savoir plus sur Supplément de revenu garanti',
+    gisMessage:
+      'sur la base des revenus que vous nous avez fournis, <strong>vous êtes éligible</strong> à cet avantage',
+    gisApplyUrl:
+      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+    gisApplyText:
+      'Déterminez si vous devez postuler à Supplément de revenu garanti',
+    alwInfoUrl:
+      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
+    alwInfoText: "en savoir plus sur l'allocation",
+    alwMessage: "L'allocation est destinée aux personnes âgées de 60 à 64 ans",
+    alwApplyUrl:
+      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
+    alwApplyText: "Voir tous les critères d'éligibilité à l'allocation",
+    afsInfoUrl:
+      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
+    afsInfoText:
+      "En savoir plus sur l'allocation pour la prestation de survivant",
+    afsMessage:
+      "L'allocation de survivant s'adresse aux personnes entre 60 à 64 ans",
+    afsApplyUrl:
+      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
+    afsApplyText:
+      "Consultez tous les critères d'admissibilité à l'allocation pour la prestation de survivant",
   },
   resultsQuestions: {
     age: 'Âge',
-    livingCountry : 'Pays de résidence',
-    legalStatus : 'Statut légal',
-    livedOutsideCanada : "A vécu à l'extérieur du Canada pendant plus de 6 mois",
-    yearsInCanadaSince18 : '',
-    income : 'Revenu net',
-    maritalStatus : 'État civil',
-    partnerBenefitStatus : "Prestations de vieillesse du partenaire",
-    partnerAge : "Âge du partenaire",
-    partnerLivingCountry : "Pays de résidence du partenaire",
-    partnerLegalStatus : "Statut juridique du partenaire",
-    partnerlivedOutsideCanada : "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
-    partnerYearsInCanadaSince18 : '',
-    partnerIncome : "Revenu net du partenaire"
-  },
-  resultsLegalStatus: {
-    canadianCitizen : 'fr - Canadian Resident',
-    permanentResident : 'fr - Permanent Resident',
-    sponsored : 'fr - Permanent Resident Sponsored',
-    indianStatus : 'fr - First Nation',
-    other : 'fr - Other'
+    livingCountry: 'Pays de résidence',
+    legalStatus: 'Statut légal',
+    livedOutsideCanada: "A vécu à l'extérieur du Canada pendant plus de 6 mois",
+    yearsInCanadaSince18: '',
+    income: 'Revenu net',
+    maritalStatus: 'État civil',
+    partnerBenefitStatus: 'Prestations de vieillesse du partenaire',
+    partnerAge: 'Âge du partenaire',
+    partnerLivingCountry: 'Pays de résidence du partenaire',
+    partnerLegalStatus: 'Statut juridique du partenaire',
+    partnerlivedOutsideCanada:
+      "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
+    partnerYearsInCanadaSince18: '',
+    partnerIncome: 'Revenu net du partenaire',
   },
   moreInfoHeader: "Besoin de plus d'information",
   startOver: 'Recommencer',
@@ -195,8 +230,9 @@ const fr: WebTranslations = {
   govt: 'Gouvernement du Canada',
   yes: 'Oui',
   no: 'Non',
-  year: 'Anne',
-  years: 'Annes',
+  year: 'an',
+  years: 'ans',
+  unavailable: 'indisponible',
 
   selectText: {
     maritalStatus: 'Sélectionner un état civil',
