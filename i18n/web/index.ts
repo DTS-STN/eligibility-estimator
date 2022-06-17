@@ -45,6 +45,7 @@ export type WebTranslations = {
   oas: string
   gis: string
   alw: string
+  allowance: string
   afs: string
   testSiteTitle: string
   testSiteHeader: string
@@ -120,24 +121,32 @@ export type WebTranslations = {
     note: string
     link: string
     dollarSign: string
-    oasInfoUrl: string
-    oasInfoText: string
-    oasMessage: string
-    gisInfoUrl: string
-    gisInfoText: string
-    gisMessage: string
-    gisApplyUrl: string
-    gisApplyText: string
-    alwInfoUrl: string
-    alwInfoText: string
-    alwMessage: string
-    alwApplyUrl: string
-    alwApplyText: string
-    afsInfoUrl: string
-    afsInfoText: string
-    afsMessage: string
-    afsApplyUrl: string
-    afsApplyText: string
+    oas: {
+      InfoUrl: string
+      InfoText: string
+      Message: string
+    }
+    gis: {
+      InfoUrl: string
+      InfoText: string
+      Message: string
+      ApplyUrl: string
+      ApplyText: string
+    }
+    allowance: {
+      InfoUrl: string
+      InfoText: string
+      Message: string
+      ApplyUrl: string
+      ApplyText: string
+    }
+    afs: {
+      InfoUrl: string
+      InfoText: string
+      Message: string
+      ApplyUrl: string
+      ApplyText: string
+    }
   }
   resultsQuestions: {
     age: string

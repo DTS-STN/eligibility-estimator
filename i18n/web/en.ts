@@ -13,6 +13,7 @@ const en: WebTranslations = {
   oas: 'Old Age Security',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
+  allowance: 'Allowance',
   afs: 'Allowance for the Survivor',
   testSiteTitle: 'TEST SITE',
   testSiteHeader:
@@ -136,38 +137,45 @@ const en: WebTranslations = {
     note: 'note',
     link: 'link',
     dollarSign: 'Dollars sign symbol',
-    oasInfoUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-    oasInfoText: 'Learn more about Old Age Security benefit',
-    oasMessage:
-      'Based en what you told us <strong>you do not need to apply</strong> You will ...',
-    gisInfoUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-    gisInfoText: 'Learn more about Guaranteed Income Supplement ',
-    gisMessage:
-      'Based on income you provided to us, <strong>you are eligible</strong> for this benefit ',
-    gisApplyUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-    gisApplyText:
-      'Determine if you need to apply to get Guaranteed Income Supplement',
-    alwInfoUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
-    alwInfoText: 'Learn more about the allowance benefit',
-    alwMessage:
-      'The allowance benefit is for indivuduals between the ages of 60 and 64',
-    alwApplyUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
-    alwApplyText:
-      'View the full eligibility criteria for the allowance benefit',
-    afsInfoUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
-    afsInfoText: 'Learn more about the allowance for the survivor benefit',
-    afsMessage:
-      'The allowance for the survivor is for individuals between 60 and 64 years old',
-    afsApplyUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
-    afsApplyText:
-      'View the full eligibility criteria for the allowance for the survivor benefit',
+    oas: {
+      InfoUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
+      InfoText: 'Learn more about Old Age Security benefit',
+      Message:
+        'Based en what you told us <strong>you do not need to apply</strong> You will ...',
+    },
+    gis: {
+      InfoUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+      InfoText: 'Learn more about Guaranteed Income Supplement ',
+      Message:
+        'Based on income you provided to us, <strong>you are eligible</strong> for this benefit ',
+      ApplyUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+      ApplyText:
+        'Determine if you need to apply to get Guaranteed Income Supplement',
+    },
+    allowance: {
+      InfoUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
+      InfoText: 'Learn more about the allowance benefit',
+      Message:
+        'The allowance benefit is for indivuduals between the ages of 60 and 64',
+      ApplyUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
+      ApplyText: 'View the full eligibility criteria for the allowance benefit',
+    },
+    afs: {
+      InfoUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
+      InfoText: 'Learn more about the allowance for the survivor benefit',
+      Message:
+        'The allowance for the survivor is for individuals between 60 and 64 years old',
+      ApplyUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
+      ApplyText:
+        'View the full eligibility criteria for the allowance for the survivor benefit',
+    },
   },
   resultsQuestions: {
     age: 'Age',

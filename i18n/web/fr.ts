@@ -14,6 +14,7 @@ const fr: WebTranslations = {
   oas: 'Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
+  allowance: 'Allocation',
   afs: 'Allocation au survivant',
   testSiteTitle: "SITE D'ESSAI",
   testSiteHeader:
@@ -141,37 +142,45 @@ const fr: WebTranslations = {
     note: 'remarque',
     link: 'lien',
     dollarSign: 'symbole du dollar',
-    oasInfoUrl:
-      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
-    oasInfoText: 'en savoir plus sur la Sécurité de la vieillesse',
-    oasMessage:
-      "D'après ce que vous nous avez dit, <strong>vous n'avez pas besoin de postuler</strong> ...",
-    gisInfoUrl:
-      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
-    gisInfoText: 'en savoir plus sur Supplément de revenu garanti',
-    gisMessage:
-      'sur la base des revenus que vous nous avez fournis, <strong>vous êtes éligible</strong> à cet avantage',
-    gisApplyUrl:
-      'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-    gisApplyText:
-      'Déterminez si vous devez postuler à Supplément de revenu garanti',
-    alwInfoUrl:
-      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
-    alwInfoText: "en savoir plus sur l'allocation",
-    alwMessage: "L'allocation est destinée aux personnes âgées de 60 à 64 ans",
-    alwApplyUrl:
-      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
-    alwApplyText: "Voir tous les critères d'éligibilité à l'allocation",
-    afsInfoUrl:
-      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
-    afsInfoText:
-      "En savoir plus sur l'allocation pour la prestation de survivant",
-    afsMessage:
-      "L'allocation de survivant s'adresse aux personnes entre 60 à 64 ans",
-    afsApplyUrl:
-      'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
-    afsApplyText:
-      "Consultez tous les critères d'admissibilité à l'allocation pour la prestation de survivant",
+    oas: {
+      InfoUrl:
+        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
+      InfoText: 'en savoir plus sur la Sécurité de la vieillesse',
+      Message:
+        "D'après ce que vous nous avez dit, <strong>vous n'avez pas besoin de postuler</strong> ...",
+    },
+    gis: {
+      InfoUrl:
+        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
+      InfoText: 'en savoir plus sur Supplément de revenu garanti',
+      Message:
+        'sur la base des revenus que vous nous avez fournis, <strong>vous êtes éligible</strong> à cet avantage',
+      ApplyUrl:
+        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+      ApplyText:
+        'Déterminez si vous devez postuler à Supplément de revenu garanti',
+    },
+    allowance: {
+      InfoUrl:
+        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
+      InfoText: "en savoir plus sur l'allocation",
+      Message: "L'allocation est destinée aux personnes âgées de 60 à 64 ans",
+      ApplyUrl:
+        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
+      ApplyText: "Voir tous les critères d'éligibilité à l'allocation",
+    },
+    afs: {
+      InfoUrl:
+        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
+      InfoText:
+        "En savoir plus sur l'allocation pour la prestation de survivant",
+      Message:
+        "L'allocation de survivant s'adresse aux personnes entre 60 à 64 ans",
+      ApplyUrl:
+        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
+      ApplyText:
+        "Consultez tous les critères d'admissibilité à l'allocation pour la prestation de survivant",
+    },
   },
   resultsQuestions: {
     age: 'Âge',
