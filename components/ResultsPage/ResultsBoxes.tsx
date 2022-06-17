@@ -49,9 +49,15 @@ export const ResultsBoxes = observer(() => {
         {tsln.resultsPage.basedOnYourInfo}
 
         <ul className="pl-5 list-disc text-content font-semibold">
-          {eligibleBenefits.map((benefit) => (
-            <li key={root[benefit]}>{tsln[benefit]}</li>
-          ))}
+          {benefits
+            .filter(
+              (x) =>
+                root[x]?.eligibility?.result ===
+                trans.result.eligible.toLowerCase()
+            )
+            .map((benefit) => (
+              <li key={root[benefit]}>{tsln[benefit]}</li>
+            ))}
         </ul>
       </div>
 
@@ -81,15 +87,21 @@ export const ResultsBoxes = observer(() => {
           </thead>
 
           <tbody className="align-top">
-            {eligibleBenefits.map((benefit, index) => (
-              <ResultsTableRow
-                key={index}
-                heading={tsln[benefit]}
-                data={root[benefit]}
-                locale={locale}
-                showEntitlement={!root.summary.zeroEntitlements}
-              />
-            ))}
+            {benefits
+              .filter(
+                (x) =>
+                  root[x]?.eligibility?.result ===
+                  trans.result.eligible.toLowerCase()
+              )
+              .map((benefit, index) => (
+                <ResultsTableRow
+                  key={index}
+                  heading={tsln[benefit]}
+                  data={root[benefit]}
+                  locale={locale}
+                  showEntitlement={!root.summary.zeroEntitlements}
+                />
+              ))}
             {!root.summary.zeroEntitlements && (
               <tr className="border border-[#DDDDDD]">
                 <td>{tsln.resultsPage.tableTotalAmount}</td>
@@ -106,133 +118,151 @@ export const ResultsBoxes = observer(() => {
 
       {/* Next steps for benefits you may be eligible */}
 
-      {eligibleBenefits.length >= 0 && (
+      {benefits.filter(
+        (x) =>
+          root[x]?.eligibility?.result === trans.result.eligible.toLowerCase()
+      ).length >= 0 && (
         <>
           <h2 id="next" className="h2 mt-5">
             {tsln.resultsPage.nextSteps}
           </h2>
 
-          {eligibleBenefits.map((benefit) => (
-            <>
-              <MessageBox
-                title={tsln[benefit]}
-                eligible={true}
-                eligibleText={trans.result.eligible}
-                links={
-                  benefit == 'oas'
-                    ? [
-                        {
-                          icon: 'info',
-                          alt: tsln.resultsPage.info,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                      ]
-                    : benefit == 'gis'
-                    ? [
-                        {
-                          icon: 'info',
-                          alt: tsln.resultsPage.info,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                        {
-                          icon: 'link',
-                          alt: tsln.resultsPage.link,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                      ]
-                    : [
-                        {
-                          icon: 'info',
-                          alt: tsln.resultsPage.info,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                        {
-                          icon: 'note',
-                          alt: tsln.resultsPage.note,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                      ]
-                }
-              >
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: tsln.resultsPage[benefit].Message,
-                  }}
-                ></span>
-              </MessageBox>
-            </>
-          ))}
+          {benefits
+            .filter(
+              (x) =>
+                root[x]?.eligibility?.result ===
+                trans.result.eligible.toLowerCase()
+            )
+            .map((benefit) => (
+              <>
+                <MessageBox
+                  title={tsln[benefit]}
+                  eligible={true}
+                  eligibleText={trans.result.eligible}
+                  links={
+                    benefit == 'oas'
+                      ? [
+                          {
+                            icon: 'info',
+                            alt: tsln.resultsPage.info,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                        ]
+                      : benefit == 'gis'
+                      ? [
+                          {
+                            icon: 'info',
+                            alt: tsln.resultsPage.info,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                          {
+                            icon: 'link',
+                            alt: tsln.resultsPage.link,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                        ]
+                      : [
+                          {
+                            icon: 'info',
+                            alt: tsln.resultsPage.info,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                          {
+                            icon: 'note',
+                            alt: tsln.resultsPage.note,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                        ]
+                  }
+                >
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: tsln.resultsPage[benefit].Message,
+                    }}
+                  ></span>
+                </MessageBox>
+              </>
+            ))}
         </>
       )}
 
       {/* Benefits you may not be eligible */}
 
-      {nonEligibleBenefits.length >= 0 && (
+      {benefits.filter(
+        (x) =>
+          root[x]?.eligibility?.result !== trans.result.eligible.toLowerCase()
+      ).length >= 0 && (
         <>
           <h2 id="next" className="h2 mt-12">
             {tsln.resultsPage.youMayNotBeEligible}
           </h2>
 
-          {nonEligibleBenefits.map((benefit) => (
-            <>
-              <MessageBox
-                title={tsln[benefit]}
-                eligible={false}
-                eligibleText={trans.result.ineligible}
-                links={
-                  benefit == 'oas'
-                    ? [
-                        {
-                          icon: 'info',
-                          alt: tsln.resultsPage.info,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                      ]
-                    : benefit == 'gis'
-                    ? [
-                        {
-                          icon: 'info',
-                          alt: tsln.resultsPage.info,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                        {
-                          icon: 'link',
-                          alt: tsln.resultsPage.link,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                      ]
-                    : [
-                        {
-                          icon: 'info',
-                          alt: tsln.resultsPage.info,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                        {
-                          icon: 'note',
-                          alt: tsln.resultsPage.note,
-                          url: tsln.resultsPage[benefit].InfoUrl,
-                          text: tsln.resultsPage[benefit].InfoText,
-                        },
-                      ]
-                }
-              >
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: tsln.resultsPage[benefit].Message,
-                  }}
-                ></span>
-              </MessageBox>
-            </>
-          ))}
+          {benefits
+            .filter(
+              (x) =>
+                root[x]?.eligibility?.result !==
+                trans.result.eligible.toLowerCase()
+            )
+            .map((benefit) => (
+              <>
+                <MessageBox
+                  title={tsln[benefit]}
+                  eligible={false}
+                  eligibleText={trans.result.ineligible}
+                  links={
+                    benefit == 'oas'
+                      ? [
+                          {
+                            icon: 'info',
+                            alt: tsln.resultsPage.info,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                        ]
+                      : benefit == 'gis'
+                      ? [
+                          {
+                            icon: 'info',
+                            alt: tsln.resultsPage.info,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                          {
+                            icon: 'link',
+                            alt: tsln.resultsPage.link,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                        ]
+                      : [
+                          {
+                            icon: 'info',
+                            alt: tsln.resultsPage.info,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                          {
+                            icon: 'note',
+                            alt: tsln.resultsPage.note,
+                            url: tsln.resultsPage[benefit].InfoUrl,
+                            text: tsln.resultsPage[benefit].InfoText,
+                          },
+                        ]
+                  }
+                >
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: tsln.resultsPage[benefit].Message,
+                    }}
+                  ></span>
+                </MessageBox>
+              </>
+            ))}
         </>
       )}
     </div>
