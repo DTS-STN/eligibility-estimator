@@ -63,7 +63,7 @@ const en: WebTranslations = {
   residenceHistoryText:
     '<b>residence history</b> (number of years lived in Canada)',
   maritalStatusText: '<b>marital status</b>',
-  partnerText: `<b>partner</b> (if applicable):income (including their old age benefits), legal status, and residence history`,
+  partnerText: `if applicable, <b>your partner's</b> income (including their old age benefits), legal status, and residence history`,
   timeToCompleteText: 'Time to complete',
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate:
