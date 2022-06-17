@@ -49,15 +49,8 @@ export const ResultsBoxes = observer(() => {
         {tsln.resultsPage.basedOnYourInfo}
 
         <ul className="pl-5 list-disc text-content font-semibold">
-          {benefits.map((benefit) => (
-            <>
-              {root[benefit]?.eligibility?.result ===
-              trans.result.eligible.toLowerCase() ? (
-                <li key={root[benefit]}>{tsln[benefit]}</li>
-              ) : (
-                ''
-              )}
-            </>
+          {eligibleBenefits.map((benefit) => (
+            <li key={root[benefit]}>{tsln[benefit]}</li>
           ))}
         </ul>
       </div>
@@ -88,7 +81,7 @@ export const ResultsBoxes = observer(() => {
           </thead>
 
           <tbody className="align-top">
-            {benefits.map((benefit, index) => (
+            {eligibleBenefits.map((benefit, index) => (
               <ResultsTableRow
                 key={index}
                 heading={tsln[benefit]}
