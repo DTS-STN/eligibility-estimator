@@ -30,56 +30,6 @@ export const ResultsBoxes = observer(() => {
     (x) => root[x]?.eligibility?.result !== trans.result.eligible.toLowerCase()
   )
 
-  const oaslinks = {
-    oas: {
-      icon: 'info',
-      url: tsln.resultsPage.oas.InfoUrl,
-      alt: tsln.resultsPage.info,
-      text: tsln.resultsPage.oas.InfoText,
-    },
-  }
-
-  const benefitLinks = benefits.map((benefit) =>
-    benefit == 'oas'
-      ? [
-          {
-            icon: 'info',
-            alt: tsln.resultsPage.info,
-            url: tsln.resultsPage[benefit].InfoUrl,
-            text: tsln.resultsPage[benefit].InfoText,
-          },
-        ]
-      : benefit == 'gis'
-      ? [
-          {
-            icon: 'info',
-            alt: tsln.resultsPage.info,
-            url: tsln.resultsPage[benefit].InfoUrl,
-            text: tsln.resultsPage[benefit].InfoText,
-          },
-          {
-            icon: 'link',
-            alt: tsln.resultsPage.link,
-            url: tsln.resultsPage[benefit].InfoUrl,
-            text: tsln.resultsPage[benefit].InfoText,
-          },
-        ]
-      : [
-          {
-            icon: 'info',
-            alt: tsln.resultsPage.info,
-            url: tsln.resultsPage[benefit].InfoUrl,
-            text: tsln.resultsPage[benefit].InfoText,
-          },
-          {
-            icon: 'note',
-            alt: tsln.resultsPage.note,
-            url: tsln.resultsPage[benefit].InfoUrl,
-            text: tsln.resultsPage[benefit].InfoText,
-          },
-        ]
-  )
-
   // Display the details and eligibility results separately, then create a new column
   return (
     <div>
