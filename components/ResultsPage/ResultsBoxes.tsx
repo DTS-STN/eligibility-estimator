@@ -6,6 +6,7 @@ import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { getTranslations } from '../../i18n/api'
 import { Locale } from '../../utils/api/definitions/enums'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { useStore, useTranslation } from '../Hooks'
 import { ResultsTableRow } from './ResultsTableRow'
 import { MessageBox } from './MessageBox'
@@ -20,14 +21,17 @@ export const ResultsBoxes = observer(() => {
   const currentLocale = useRouter().locale
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
-  let countEligible: number = 0
+  const benefits = ['oas', 'gis', 'allowance', 'afs']
+  let countEligible: number = benefits.filter(
+    (x) => root[x]?.eligibility.result === trans.result.eligible.toLowerCase()
+  ).length
 
-  // Send the details and eligibility results separately and create a new column
+  // Display the details and eligibility results separately, then create a new column
   return (
     <div>
       {/* Your may be eligible */}
 
-      <h2 id="eligible" className="h2 mt-5">
+      <h2 id="eligible" className="h2 mt-8">
         <Image
           src="/eligible.png"
           alt={trans.result.eligible}
@@ -41,45 +45,22 @@ export const ResultsBoxes = observer(() => {
         {tsln.resultsPage.basedOnYourInfo}
 
         <ul className="pl-5 list-disc text-content font-semibold">
-          {root.oas?.eligibility?.detail?.result === trans.result.eligible ? (
+          {benefits.map((benefit) => (
             <>
-              <li key={root.oas}>{tsln.oas}</li>
-              {(countEligible += 1)}
+              {root[benefit]?.eligibility?.result ===
+              trans.result.eligible.toLowerCase() ? (
+                <li key={root[benefit]}>{tsln[benefit]}</li>
+              ) : (
+                ''
+              )}
             </>
-          ) : (
-            ''
-          )}
-          {root.gis?.eligibility?.detail?.result === trans.result.eligible ? (
-            <>
-              <li key={root.gis}>{tsln.gis}</li>
-              {(countEligible += 1)}
-            </>
-          ) : (
-            ''
-          )}
-          {root.allowance?.eligibility?.detail?.result ===
-          trans.result.eligible ? (
-            <>
-              <li key={root.allowance}>{tsln.alw}</li>
-              {(countEligible += 1)}
-            </>
-          ) : (
-            ''
-          )}
-          {root.afs?.eligibility?.detail?.result === trans.result.eligible ? (
-            <>
-              <li key={root.afs}>{tsln.afs}</li>
-              {(countEligible += 1)}
-            </>
-          ) : (
-            ''
-          )}
+          ))}
         </ul>
       </div>
 
       {/* Your estimated monthly total */}
 
-      <h2 id="estimated" className="h2 mt-5">
+      <h2 id="estimated" className="h2 mt-12">
         <Image
           src="/money.png"
           alt={tsln.resultsPage.dollarSign}
@@ -103,30 +84,15 @@ export const ResultsBoxes = observer(() => {
           </thead>
 
           <tbody className="align-top">
-            <ResultsTableRow
-              heading={tsln.oas}
-              data={root.oas}
-              locale={locale}
-              showEntitlement={!root.summary.zeroEntitlements}
-            />
-            <ResultsTableRow
-              heading={tsln.gis}
-              data={root.gis}
-              locale={locale}
-              showEntitlement={!root.summary.zeroEntitlements}
-            />
-            <ResultsTableRow
-              heading={tsln.alw}
-              data={root.allowance}
-              locale={locale}
-              showEntitlement={!root.summary.zeroEntitlements}
-            />
-            <ResultsTableRow
-              heading={tsln.afs}
-              data={root.afs}
-              locale={locale}
-              showEntitlement={!root.summary.zeroEntitlements}
-            />
+            {benefits.map((benefit, index) => (
+              <ResultsTableRow
+                key={index}
+                heading={tsln[benefit]}
+                data={root[benefit]}
+                locale={locale}
+                showEntitlement={!root.summary.zeroEntitlements}
+              />
+            ))}
             {!root.summary.zeroEntitlements && (
               <tr className="border border-[#DDDDDD]">
                 <td>{tsln.resultsPage.tableTotalAmount}</td>
