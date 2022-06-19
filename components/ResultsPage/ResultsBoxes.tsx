@@ -9,6 +9,7 @@ import { Locale } from '../../utils/api/definitions/enums'
 import { useStore, useTranslation } from '../Hooks'
 import { ResultsTableRow } from './ResultsTableRow'
 import { MessageBox } from './MessageBox'
+import { BenefitMessageBox } from './BenefitMessageBox'
 
 export const ResultsBoxes = observer(() => {
   const root = useStore()
@@ -22,13 +23,6 @@ export const ResultsBoxes = observer(() => {
 
   // Didn't find a enum for the current benefits
   const benefits = ['oas', 'gis', 'allowance', 'afs']
-
-  const eligibleBenefits = benefits.filter(
-    (x) => root[x]?.eligibility?.result === trans.result.eligible.toLowerCase()
-  )
-  const nonEligibleBenefits = benefits.filter(
-    (x) => root[x]?.eligibility?.result !== trans.result.eligible.toLowerCase()
-  )
 
   // Display the details and eligibility results separately, then create a new column
   return (
@@ -118,153 +112,11 @@ export const ResultsBoxes = observer(() => {
 
       {/* Next steps for benefits you may be eligible */}
 
-      {benefits.filter(
-        (x) =>
-          root[x]?.eligibility?.result === trans.result.eligible.toLowerCase()
-      ).length >= 0 && (
-        <>
-          <h2 id="next" className="h2 mt-5">
-            {tsln.resultsPage.nextSteps}
-          </h2>
-
-          {benefits
-            .filter(
-              (x) =>
-                root[x]?.eligibility?.result ===
-                trans.result.eligible.toLowerCase()
-            )
-            .map((benefit) => (
-              <>
-                <MessageBox
-                  title={tsln[benefit]}
-                  eligible={true}
-                  eligibleText={trans.result.eligible}
-                  links={
-                    benefit == 'oas'
-                      ? [
-                          {
-                            icon: 'info',
-                            alt: tsln.resultsPage.info,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                        ]
-                      : benefit == 'gis'
-                      ? [
-                          {
-                            icon: 'info',
-                            alt: tsln.resultsPage.info,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                          {
-                            icon: 'link',
-                            alt: tsln.resultsPage.link,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                        ]
-                      : [
-                          {
-                            icon: 'info',
-                            alt: tsln.resultsPage.info,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                          {
-                            icon: 'note',
-                            alt: tsln.resultsPage.note,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                        ]
-                  }
-                >
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: tsln.resultsPage[benefit].Message,
-                    }}
-                  ></span>
-                </MessageBox>
-              </>
-            ))}
-        </>
-      )}
+      <BenefitMessageBox eligible={true} benefits={benefits} />
 
       {/* Benefits you may not be eligible */}
 
-      {benefits.filter(
-        (x) =>
-          root[x]?.eligibility?.result !== trans.result.eligible.toLowerCase()
-      ).length >= 0 && (
-        <>
-          <h2 id="next" className="h2 mt-12">
-            {tsln.resultsPage.youMayNotBeEligible}
-          </h2>
-
-          {benefits
-            .filter(
-              (x) =>
-                root[x]?.eligibility?.result !==
-                trans.result.eligible.toLowerCase()
-            )
-            .map((benefit) => (
-              <>
-                <MessageBox
-                  title={tsln[benefit]}
-                  eligible={false}
-                  eligibleText={trans.result.ineligible}
-                  links={
-                    benefit == 'oas'
-                      ? [
-                          {
-                            icon: 'info',
-                            alt: tsln.resultsPage.info,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                        ]
-                      : benefit == 'gis'
-                      ? [
-                          {
-                            icon: 'info',
-                            alt: tsln.resultsPage.info,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                          {
-                            icon: 'link',
-                            alt: tsln.resultsPage.link,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                        ]
-                      : [
-                          {
-                            icon: 'info',
-                            alt: tsln.resultsPage.info,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                          {
-                            icon: 'note',
-                            alt: tsln.resultsPage.note,
-                            url: tsln.resultsPage[benefit].InfoUrl,
-                            text: tsln.resultsPage[benefit].InfoText,
-                          },
-                        ]
-                  }
-                >
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: tsln.resultsPage[benefit].Message,
-                    }}
-                  ></span>
-                </MessageBox>
-              </>
-            ))}
-        </>
-      )}
+      <BenefitMessageBox eligible={false} benefits={benefits} />
     </div>
   )
 })
