@@ -2,18 +2,12 @@ import { Link as DSLink } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import { useStore, useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
-import { numberToStringCurrency } from '../../i18n/api'
 import { livingCountry as enCountry } from '../../i18n/api/countries/en'
 import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
 import { Locale } from '../../utils/api/definitions/enums'
-import {
-  FieldData,
-  FieldKey,
-  FieldType,
-} from '../../utils/api/definitions/fields'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { FieldKey } from '../../utils/api/definitions/fields'
 
 export const YourAnswers: React.VFC<{
   title: string
@@ -25,11 +19,6 @@ export const YourAnswers: React.VFC<{
 
   const currentLocale = useRouter().locale
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
-
-  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
-    root.langBrowser
-  )
-  console.log('allfieldData : ', allFieldData)
 
   const answers = questions.filter((question) => question[0] !== '_language')
   const answersKeys = answers.map(([key, _]) => key)
@@ -81,7 +70,9 @@ export const YourAnswers: React.VFC<{
       </div>
     )
 
-  console.log('anskeys = ', answersKeys) //TODO removed console.log
+  console.log('answersKeys = ', answersKeys)
+  let fieldValue: string = ''
+  let fieldYearsValue: string = ''
 
   if (answersKeys.length !== 0)
     return (
@@ -89,375 +80,98 @@ export const YourAnswers: React.VFC<{
         <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
           <h3 className="h3">{title}</h3>
 
-          {/* Age */}
-          {answersKeys.indexOf(FieldKey.AGE) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.AGE)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {answers[answersKeys.indexOf(FieldKey.AGE)][1]}
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${answers[answersKeys.indexOf(FieldKey.AGE)][0]}`}
-                href="/eligibility#age"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
+          {answersKeys.map((field, index) => {
+            fieldValue = ''
+            fieldYearsValue = ''
 
-          {/* Income */}
-          {answersKeys.indexOf(FieldKey.INCOME) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.INCOME)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {numberToStringCurrency(
-                  Number(answers[answersKeys.indexOf(FieldKey.INCOME)][1]),
-                  locale
-                )}
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[answersKeys.indexOf(FieldKey.INCOME)][0]
-                }`}
-                href="/eligibility#income"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
-
-          {/* Legal Status */}
-          {answersKeys.indexOf(FieldKey.LEGAL_STATUS) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {
-                  getLegalStatus(
-                    answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][1]
-                  ).text
-                }
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[answersKeys.indexOf(FieldKey.LEGAL_STATUS)][0]
-                }`}
-                href="/eligibility#legalStatus-0"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
-
-          {/* Residence */}
-          {answersKeys.indexOf(FieldKey.LIVING_COUNTRY) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {
-                  getLivingCountry(
-                    answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][1]
-                  ).text
-                }
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]
-                }`}
-                href="/eligibility#react-select-3-live-region"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
-
-          {/* Lived outside of Canada */}
-          {answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)][0]
-                ]
-              }{' '}
-              <br />
-              {answers[
-                answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)
-              ][1] === 'true' ? (
-                <>
-                  <div>
-                    <strong>{tsln.yes}</strong> &nbsp;
-                    <DSLink
-                      id={`helpLink${
-                        answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]
-                      }`}
-                      href="/eligibility#liveOutsideCanada-0"
-                      text={tsln.resultsPage.edit}
-                      target="_self"
-                    />
-                    <br />
-                    <strong>
-                      {
-                        answers[
-                          answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)
-                        ][1]
-                      }
-                    </strong>{' '}
-                    &nbsp;
-                    {Number(
+            {
+              ;(() => {
+                switch (field) {
+                  case FieldKey.LEGAL_STATUS:
+                    fieldValue = getLegalStatus(answers[index][1]).text
+                    break
+                  case FieldKey.LIVING_COUNTRY:
+                    fieldValue = getLivingCountry(answers[index][1]).text
+                    break
+                  case FieldKey.MARITAL_STATUS:
+                    fieldValue = getMaritalStatus(answers[index][1]).text
+                    break
+                  case FieldKey.PARTNER_BENEFIT_STATUS:
+                    fieldValue = getPartnerBenefitStatus(answers[index][1]).text
+                    break
+                  case FieldKey.LIVED_OUTSIDE_CANADA:
+                  case FieldKey.PARTNER_LIVED_OUTSIDE_CANADA:
+                    fieldValue = answers[index][1]
+                    fieldYearsValue =
                       answers[
                         answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)
                       ][1]
-                    ) > 1
-                      ? tsln.years
-                      : tsln.year}{' '}
-                    &nbsp;
-                    <DSLink
-                      id={`helpLink${
-                        answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]
-                      }`}
-                      href="/eligibility#yearsInCanadaSince18"
-                      text={tsln.resultsPage.edit}
-                      target="_self"
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <strong>tsln.no</strong>
-                  <DSLink
-                    id={`helpLink${
-                      answers[answersKeys.indexOf(FieldKey.LIVING_COUNTRY)][0]
-                    }`}
-                    href="/eligibility#react-select-3-live-region"
-                    text={tsln.resultsPage.edit}
-                    target="_self"
-                  />
-                </>
-              )}
-            </div>
-          )}
-
-          {/* Marital Status */}
-          {answersKeys.indexOf(FieldKey.MARITAL_STATUS) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {
-                  getMaritalStatus(
-                    answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][1]
-                  ).text
+                    break
+                  default:
+                    fieldValue = answers[index][1]
                 }
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[answersKeys.indexOf(FieldKey.MARITAL_STATUS)][0]
-                }`}
-                href="/eligibility#maritalStatus-0"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
+              })()
+            }
 
-          {/* Partner's Income */}
-          {answersKeys.indexOf(FieldKey.PARTNER_INCOME) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {numberToStringCurrency(
-                  Number(
-                    answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][1]
-                  ),
-                  locale
-                )}
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[answersKeys.indexOf(FieldKey.PARTNER_INCOME)][0]
-                }`}
-                href="/eligibility#partnerIncome"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
-
-          {/* Partner's Old Age Benefit */}
-          {answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[
-                    answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)
-                  ][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {
-                  getPartnerBenefitStatus(
-                    answers[
-                      answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)
-                    ][1]
-                  ).text
-                }
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[
-                    answersKeys.indexOf(FieldKey.PARTNER_BENEFIT_STATUS)
-                  ][0]
-                }`}
-                href="/eligibility#"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
-
-          {/* Partner's Legal Status */}
-          {answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]
-                ]
-              }{' '}
-              <br />
-              <strong>
-                {
-                  getLegalStatus(
-                    answers[
-                      answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)
-                    ][1]
-                  ).text
-                }
-              </strong>{' '}
-              &nbsp;
-              <DSLink
-                id={`helpLink${
-                  answers[answersKeys.indexOf(FieldKey.PARTNER_LEGAL_STATUS)][0]
-                }`}
-                href="/eligibility#"
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
-            </div>
-          )}
-
-          {/* Partner's Lived Outside of Canada */}
-          {answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY) >= 0 && (
-            <div className="py-4 border-b-2 border-info-border">
-              {
-                tsln.resultsQuestions[
-                  answers[
-                    answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)
-                  ][0]
-                ]
-              }{' '}
-              <br />
-              {answers[
-                answersKeys.indexOf(FieldKey.LIVED_OUTSIDE_CANADA)
-              ][1] === 'true' ? (
-                <>
-                  <div>
+            return field !== FieldKey.YEARS_IN_CANADA_SINCE_18 &&
+              field !== FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 ? (
+              field === FieldKey.LIVED_OUTSIDE_CANADA ||
+              field === FieldKey.PARTNER_LIVED_OUTSIDE_CANADA ? (
+                answers[index][1] === 'true' ? (
+                  <div
+                    key={index}
+                    className="py-4 border-b-2 border-info-border"
+                  >
+                    {tsln.resultsQuestions[answers[index][0]]} <br />
                     <strong>{tsln.yes}</strong> &nbsp;
                     <DSLink
-                      id={`helpLink${
-                        answers[
-                          answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)
-                        ][0]
-                      }`}
-                      href="/eligibility#"
-                      text={tsln.resultsPage.edit}
+                      id={`helpLink${answers[index][0]}`}
+                      href="/eligibility#liveOutsideCanada-0"
+                      text="Edit"
                       target="_self"
                     />
                     <br />
-                    <strong>
-                      {
-                        answers[
-                          answersKeys.indexOf(
-                            FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18
-                          )
-                        ][1]
-                      }
-                    </strong>{' '}
-                    &nbsp;
-                    {Number(
-                      answers[
-                        answersKeys.indexOf(
-                          FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18
-                        )
-                      ][1]
-                    ) > 1
-                      ? tsln.years
-                      : tsln.year}{' '}
+                    <strong>{fieldYearsValue}</strong> &nbsp;
+                    {Number(fieldYearsValue) > 1 ? tsln.years : tsln.year}{' '}
                     &nbsp;
                     <DSLink
-                      id={`helpLink${
-                        answers[
-                          answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)
-                        ][0]
-                      }`}
-                      href="/eligibility#"
-                      text={tsln.resultsPage.edit}
+                      id={`helpLink${answers[index][0]}`}
+                      href="/eligibility#yearsInCanadaSince18"
+                      text="Edit"
                       target="_self"
                     />
                   </div>
-                </>
+                ) : (
+                  <div
+                    key={index}
+                    className="py-4 border-b-2 border-info-border"
+                  >
+                    {tsln.resultsQuestions[answers[index][0]]} <br />
+                    <strong>{tsln.no}</strong>
+                    <DSLink
+                      id={`helpLink${answers[index][0]}`}
+                      href="/eligibility#react-select-3-live-region"
+                      text="Edit"
+                      target="_self"
+                    />
+                  </div>
+                )
               ) : (
-                <>
-                  <strong>tsln.no</strong>
+                <div key={index} className="py-4 border-b-2 border-info-border">
+                  {tsln.resultsQuestions[answers[index][0]]} <br />
+                  <strong>{fieldValue}</strong> &nbsp;
                   <DSLink
-                    id={`helpLink${
-                      answers[
-                        answersKeys.indexOf(FieldKey.PARTNER_LIVING_COUNTRY)
-                      ][0]
-                    }`}
-                    href="/eligibility#"
-                    text={tsln.resultsPage.edit}
+                    id={`helpLink${answers[index][0]}`}
+                    href="/eligibility#age"
+                    text="Edit"
                     target="_self"
                   />
-                </>
-              )}
-            </div>
-          )}
+                </div>
+              )
+            ) : (
+              <span> </span>
+            )
+          })}
         </div>
       </div>
     )
