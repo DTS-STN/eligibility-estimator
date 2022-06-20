@@ -10,7 +10,7 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
@@ -26,7 +26,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < legalValues.MAX_AFS_INCOME
+    const meetsReqIncome = this.income < legalValues.alw.afsIncomeLimit
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada

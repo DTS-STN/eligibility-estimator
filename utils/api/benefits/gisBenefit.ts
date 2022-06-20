@@ -11,7 +11,7 @@ import {
   EntitlementResultOas,
   ProcessedInput,
 } from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
@@ -40,12 +40,12 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
      Specifically, when partnerBenefitStatus == partialOas, we do not know the correct income limit.
     */
     const maxIncome = this.input.maritalStatus.single
-      ? legalValues.MAX_GIS_INCOME_SINGLE
+      ? legalValues.gis.singleIncomeLimit
       : this.input.partnerBenefitStatus.anyOas
-      ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
+      ? legalValues.gis.spouseOasIncomeLimit
       : this.input.partnerBenefitStatus.alw
-      ? legalValues.MAX_GIS_INCOME_PARTNER_ALW
-      : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
+      ? legalValues.gis.spouseAlwIncomeLimit
+      : legalValues.gis.spouseNoOasIncomeLimit
 
     const meetsReqIncome =
       this.income < maxIncome ||

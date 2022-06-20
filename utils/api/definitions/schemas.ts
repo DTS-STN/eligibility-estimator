@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import {
   Language,
   LegalStatus,
@@ -28,7 +28,7 @@ export const RequestSchema = Joi.object({
     .precision(2)
     .min(0)
     .message(ValidationErrors.incomeBelowZero)
-    .less(legalValues.MAX_OAS_INCOME)
+    .less(legalValues.oas.incomeLimit)
     .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
     .integer()
@@ -67,7 +67,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.partnerIncomeBelowZero)
     .less(
       Joi.ref('income', {
-        adjust: (income) => legalValues.MAX_OAS_INCOME - income,
+        adjust: (income) => legalValues.oas.incomeLimit - income,
       })
     )
     .message(ValidationErrors.partnerIncomeTooHigh),
