@@ -8,6 +8,7 @@ import {
   PartnerBenefitStatusHelper,
 } from '../helpers/fieldClasses'
 import {
+  BenefitKey,
   EntitlementResultType,
   EstimationSummaryState,
   Language,
@@ -93,6 +94,7 @@ export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
 export interface BenefitResult<
   T extends EntitlementResult = EntitlementResult
 > {
+  benefitKey: BenefitKey
   eligibility: EligibilityResult
   entitlement: T
 }

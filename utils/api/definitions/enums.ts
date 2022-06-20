@@ -1,3 +1,10 @@
+export enum BenefitKey {
+  oas = 'oas',
+  gis = 'gis',
+  alw = 'alw',
+  afs = 'afs',
+}
+
 export enum FieldCategory {
   AGE = 'age',
   INCOME = 'income',

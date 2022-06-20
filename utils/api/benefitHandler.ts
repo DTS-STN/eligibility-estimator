@@ -1,13 +1,10 @@
-import {
-  getTranslations,
-  numberToStringCurrency,
-  Translations,
-} from '../../i18n/api'
+import { getTranslations, Translations } from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
 import {
+  BenefitKey,
   EntitlementResultType,
   Language,
   PartnerBenefitStatus,
@@ -100,7 +97,8 @@ export class BenefitHandler {
       for (const key in this._benefitResults) {
         const result: BenefitResult = this._benefitResults[key]
         result.eligibility.detail = this.replaceTextVariables(
-          result.eligibility.detail
+          result.eligibility.detail,
+          result
         )
       }
     }
@@ -266,18 +264,26 @@ export class BenefitHandler {
       return {}
     }
 
+    function getBlankObject(benefitKey: BenefitKey) {
+      return {
+        benefitKey: benefitKey,
+        eligibility: undefined,
+        entitlement: undefined,
+      }
+    }
+
     const allResults: BenefitResultsObjectWithPartner = {
       client: {
-        oas: { eligibility: undefined, entitlement: undefined },
-        gis: { eligibility: undefined, entitlement: undefined },
-        alw: { eligibility: undefined, entitlement: undefined },
-        afs: { eligibility: undefined, entitlement: undefined },
+        oas: getBlankObject(BenefitKey.oas),
+        gis: getBlankObject(BenefitKey.gis),
+        alw: getBlankObject(BenefitKey.alw),
+        afs: getBlankObject(BenefitKey.afs),
       },
       partner: {
-        oas: { eligibility: undefined, entitlement: undefined },
-        gis: { eligibility: undefined, entitlement: undefined },
-        alw: { eligibility: undefined, entitlement: undefined },
-        afs: { eligibility: undefined, entitlement: undefined },
+        oas: getBlankObject(BenefitKey.oas),
+        gis: getBlankObject(BenefitKey.gis),
+        alw: getBlankObject(BenefitKey.alw),
+        afs: getBlankObject(BenefitKey.afs),
       },
     }
 
@@ -378,19 +384,6 @@ export class BenefitHandler {
         result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
 
-      // if the result is income dependent (ie. income is not provided),
-      // replace {INCOME_LESS_THAN} with the value stored in result.eligibility.incomeMustBeLessThan
-      if (result.eligibility.result === ResultKey.INCOME_DEPENDENT) {
-        result.eligibility.detail = result.eligibility.detail.replace(
-          '{INCOME_LESS_THAN}',
-          numberToStringCurrency(
-            result.eligibility.incomeMustBeLessThan,
-            this.translations._locale,
-            { rounding: 0 }
-          )
-        )
-      }
-
       // start detail processing...
       const eligibilityText =
         this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
@@ -402,21 +395,19 @@ export class BenefitHandler {
           ? ` ${this.translations.detail.additionalReasons}`
           : ''
 
-      // replaces LINK_MORE_REASONS with LINK_MORE_REASONS_OAS, which is then replaced with a link during replaceAllTextVariables()
-      const ineligibilityTextWithBenefit = ineligibilityText.replace(
-        '{LINK_MORE_REASONS}',
-        `{LINK_MORE_REASONS_${key.toUpperCase()}}`
-      )
-
       // finish with detail processing
-      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityTextWithBenefit}`
+      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityText}`
     }
   }
 
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
+   * Optionally accepts a benefitResult, which will be used as context for certain replacement rules.
    */
-  replaceTextVariables(textToProcess: string): string {
+  replaceTextVariables(
+    textToProcess: string,
+    benefitResult?: BenefitResult
+  ): string {
     const re: RegExp = new RegExp(/{(\w*?)}/g)
     const matches: IterableIterator<RegExpMatchArray> =
       textToProcess.matchAll(re)
@@ -425,7 +416,10 @@ export class BenefitHandler {
       const replacementRule = textReplacementRules[key]
       if (!replacementRule)
         throw new Error(`no text replacement rule for ${key}`)
-      textToProcess = textToProcess.replace(`{${key}}`, replacementRule(this))
+      textToProcess = textToProcess.replace(
+        `{${key}}`,
+        replacementRule(this, benefitResult)
+      )
     }
     return textToProcess
   }
