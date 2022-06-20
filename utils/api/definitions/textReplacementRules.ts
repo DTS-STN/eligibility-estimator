@@ -58,5 +58,5 @@ export const textReplacementRules: TextReplacementRules = {
 }
 
 function generateLink(handler: BenefitHandler, linkKey: LinkKey): string {
-  return `<a href="${handler.translations.links[linkKey].url}" target="_blank">${handler.translations.links[linkKey].text}</a>`
+  return `<a class="underline text-default-text" href="${handler.translations.links[linkKey].url}" target="_blank">${handler.translations.links[linkKey].text}</a>`
 }

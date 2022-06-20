@@ -66,7 +66,7 @@ const fr: WebTranslations = {
   residenceHistoryText:
     '<b>historique de résidence</b> (depuis combien de temps vous vivez au Canada)',
   maritalStatusText: '<b>état civil</b>',
-  partnerText: `<b>conjoint</b> (le cas échéant) : son revenu (y compris les prestations de vieillesse), statut légal et historique de résidence`,
+  partnerText: `le cas échéant, les revenus de <b>votre partenaire</b> (y compris ses prestations de vieillesse), son statut légal et son historique de résidence`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:

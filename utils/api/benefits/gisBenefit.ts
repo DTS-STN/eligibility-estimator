@@ -33,15 +33,20 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.oasResult.eligibility.result === ResultKey.UNAVAILABLE
     const meetsReqLegal = this.input.legalStatus.canadian
     /*
-     Please note that the logic below is currently imperfect. Specifically, when partnerBenefitStatus == partialOas,
-     we do not know the correct income limit. As a compromise, we are going with the higher limit,
-     which may result in us returning "eligible" when in fact they are not.
+     This comment may be out of date, and replaced by the comment below (meetsReqIncome).
+     Since I'm not certain if it's still relevant, I'll keep it here.
+
+     Please note that the logic below is currently imperfect.
+     Specifically, when partnerBenefitStatus == partialOas, we do not know the correct income limit.
     */
-    const maxIncome = this.input.maritalStatus.partnered
-      ? this.input.partnerBenefitStatus.anyOas
-        ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
-        : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
-      : legalValues.MAX_GIS_INCOME_SINGLE
+    const maxIncome = this.input.maritalStatus.single
+      ? legalValues.MAX_GIS_INCOME_SINGLE
+      : this.input.partnerBenefitStatus.anyOas
+      ? legalValues.MAX_GIS_INCOME_PARTNER_OAS
+      : this.input.partnerBenefitStatus.alw
+      ? legalValues.MAX_GIS_INCOME_PARTNER_ALW
+      : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
+
     const meetsReqIncome =
       this.income < maxIncome ||
       /*
