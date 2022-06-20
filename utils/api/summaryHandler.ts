@@ -150,7 +150,10 @@ export class SummaryHandler {
       links.push(availableLinks.afsEntitlement)
 
     // special situation links
-    if (this.input.client.income.relevant >= legalValues.MAX_OAS_INCOME)
+    if (
+      this.input.client.income.provided &&
+      this.input.client.income.relevant >= legalValues.MAX_OAS_INCOME
+    )
       links.push(availableLinks.oasMaxIncome)
     if (
       this.input.client.livingCountry.provided &&
@@ -160,6 +163,7 @@ export class SummaryHandler {
     if (this.results.oas?.entitlement.type === EntitlementResultType.PARTIAL)
       links.push(availableLinks.oasPartial)
     if (
+      this.input.client.income.provided &&
       this.input.client.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF &&
       this.input.client.income.relevant < legalValues.MAX_OAS_INCOME
     )

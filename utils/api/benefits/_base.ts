@@ -8,13 +8,10 @@ import {
 export abstract class BaseBenefit<T extends EntitlementResult> {
   private _eligibility: EligibilityResult
   private _entitlement: T
-  protected readonly income: number
   protected constructor(
     protected input: ProcessedInput,
     protected translations: Translations
-  ) {
-    this.income = input.income.relevant
-  }
+  ) {}
 
   get eligibility(): EligibilityResult {
     if (this._eligibility === undefined)

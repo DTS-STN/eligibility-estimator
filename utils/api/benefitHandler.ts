@@ -1,4 +1,8 @@
-import { getTranslations, Translations } from '../../i18n/api'
+import {
+  getTranslations,
+  numberToStringCurrency,
+  Translations,
+} from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { GisBenefit } from './benefits/gisBenefit'
@@ -127,6 +131,8 @@ export class BenefitHandler {
     )
     // shared between partners
     const incomeHelper = new IncomeHelper(
+      this.rawInput.incomeAvailable,
+      this.rawInput.partnerIncomeAvailable,
       this.rawInput.income,
       this.rawInput.partnerIncome,
       maritalStatusHelper
@@ -177,10 +183,11 @@ export class BenefitHandler {
 
   /**
    * Accepts the ProcessedInput and builds a list of required fields based on that input.
+   * Ordering is not important here.
    */
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
-      FieldKey.INCOME,
+      FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
       FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
@@ -194,6 +201,12 @@ export class BenefitHandler {
     if (this.input.client.oasDefer) {
       requiredFields.push(FieldKey.OAS_AGE)
     }
+    if (this.input.client.income.clientAvailable) {
+      requiredFields.push(FieldKey.INCOME)
+    }
+    if (this.input.client.income.partnerAvailable) {
+      requiredFields.push(FieldKey.PARTNER_INCOME)
+    }
     if (
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
@@ -204,7 +217,7 @@ export class BenefitHandler {
     }
     if (this.input.client.maritalStatus.partnered) {
       requiredFields.push(
-        FieldKey.PARTNER_INCOME,
+        FieldKey.PARTNER_INCOME_AVAILABLE,
         FieldKey.PARTNER_BENEFIT_STATUS
       )
       if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -363,6 +376,19 @@ export class BenefitHandler {
         result.eligibility.result = ResultKey.INELIGIBLE
         result.eligibility.reason = ResultReason.INCOME
         result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+      }
+
+      // if the result is income dependent (ie. income is not provided),
+      // replace {INCOME_LESS_THAN} with the value stored in result.eligibility.incomeMustBeLessThan
+      if (result.eligibility.result === ResultKey.INCOME_DEPENDENT) {
+        result.eligibility.detail = result.eligibility.detail.replace(
+          '{INCOME_LESS_THAN}',
+          numberToStringCurrency(
+            result.eligibility.incomeMustBeLessThan,
+            this.translations._locale,
+            { rounding: 0 }
+          )
+        )
       }
 
       // start detail processing...

@@ -34,8 +34,11 @@ const fr: Translations = {
     unavailable: 'Non disponible',
     moreInfo: "Besoin de plus d'information...",
     invalid: "Votre demande n'est pas valide!",
+    incomeDependent: 'Revenu manquant',
   },
   question: {
+    incomeAvailable:
+      'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     income:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     age: 'Quel âge avez-vous?',
@@ -52,6 +55,8 @@ const fr: Translations = {
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     partnerBenefitStatus:
       "Laquelle des options suivantes s'applique à votre conjoint?",
+    partnerIncomeAvailable:
+      'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
     partnerIncome:
       'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
     partnerAge: "Quel est l'âge actuel de votre conjoint?",
@@ -65,6 +70,8 @@ const fr: Translations = {
       'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
   },
   questionHelp: {
+    incomeAvailable:
+      'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
     oasDefer:
       'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',
@@ -75,6 +82,26 @@ const fr: Translations = {
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
   },
   questionOptions: {
+    incomeAvailable: [
+      {
+        key: true,
+        text: 'Oui, je fournirai mes revenus',
+      },
+      {
+        key: false,
+        text: 'Non, je ne fournirai pas mes revenus pour le moment',
+      },
+    ],
+    partnerIncomeAvailable: [
+      {
+        key: true,
+        text: 'Oui, je fournirai les revenus de mon partenaire',
+      },
+      {
+        key: false,
+        text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
+      },
+    ],
     oasDefer: [
       {
         key: false,
@@ -163,6 +190,10 @@ const fr: Translations = {
   detail: {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligibleDependingOnIncome:
+      'Vous êtes probablement éligible à cette prestation si votre revenu est inférieur à {INCOME_LESS_THAN}.',
+    eligibleDependingOnIncomeNoEntitlement:
+      "Vous êtes probablement éligible à cette prestation si votre revenu est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
     eligibleOas65to69:
       'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:

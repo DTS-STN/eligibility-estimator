@@ -21,7 +21,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   protected getEligibility(): EligibilityResult {
     // helpers
     const meetsReqAge = this.input.age >= 65
-    const meetsReqIncome = this.income < legalValues.MAX_OAS_INCOME
+
+    // if income is not provided, assume they meet the income requirement
+    const skipReqIncome = !this.input.income.provided
+    const meetsReqIncome =
+      skipReqIncome || this.input.income.relevant < legalValues.MAX_OAS_INCOME
+
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -29,7 +34,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     // main checks
     if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
-      if (this.input.age >= 70) {
+      if (meetsReqAge && skipReqIncome)
+        return {
+          result: ResultKey.INCOME_DEPENDENT,
+          reason: ResultReason.INCOME_MISSING,
+          detail: this.translations.detail.eligibleDependingOnIncome,
+          incomeMustBeLessThan: legalValues.MAX_OAS_INCOME,
+        }
+      else if (this.input.age >= 70) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
@@ -110,7 +122,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   protected getEntitlement(): EntitlementResultOas {
-    if (this.eligibility.result !== ResultKey.ELIGIBLE)
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
       return {
         result: 0,
         resultAt75: 0,
@@ -212,6 +227,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The amount of "clawback" aka "repayment tax" the client will have to repay.
    */
   private get clawbackAmount(): number {
+    if (!this.input.income.provided) return 0
     if (this.input.income.relevant < legalValues.OAS_RECOVERY_TAX_CUTOFF)
       return 0
     const incomeOverCutoff =

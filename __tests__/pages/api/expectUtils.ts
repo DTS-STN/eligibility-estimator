@@ -112,6 +112,7 @@ export function expectOasGisEligible(
 
 export const partnerUndefined = {
   partnerBenefitStatus: undefined,
+  partnerIncomeAvailable: undefined,
   partnerIncome: undefined,
   partnerAge: undefined,
   partnerLivingCountry: undefined,

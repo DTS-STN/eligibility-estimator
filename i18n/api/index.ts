@@ -34,20 +34,25 @@ export interface Translations {
     unavailable: string
     moreInfo: string
     invalid: string
+    incomeDependent: string
   }
   question: { [key in FieldKey]: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
+    incomeAvailable: TypedKeyAndText<boolean>[]
     oasDefer: TypedKeyAndText<boolean>[]
     legalStatus: TypedKeyAndText<LegalStatus>[]
     livedOutsideCanada: TypedKeyAndText<boolean>[]
     partnerLivedOutsideCanada: TypedKeyAndText<boolean>[]
     maritalStatus: TypedKeyAndText<MaritalStatus>[]
+    partnerIncomeAvailable: TypedKeyAndText<boolean>[]
     partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
   }
   detail: {
     eligible: string
+    eligibleDependingOnIncome: string
+    eligibleDependingOnIncomeNoEntitlement: string
     eligibleOas65to69: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string

@@ -2,6 +2,7 @@ import { KeyAndText } from '../../../i18n/api'
 import { FieldCategory } from './enums'
 
 export enum FieldKey {
+  INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
   AGE = 'age',
   OAS_DEFER = 'oasDefer',
@@ -13,6 +14,7 @@ export enum FieldKey {
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
+  PARTNER_INCOME_AVAILABLE = 'partnerIncomeAvailable',
   PARTNER_INCOME = 'partnerIncome',
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
@@ -48,6 +50,11 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.OAS_AGE,
     category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
+  },
+  [FieldKey.INCOME_AVAILABLE]: {
+    key: FieldKey.INCOME_AVAILABLE,
+    category: { key: FieldCategory.INCOME },
+    type: FieldType.RADIO,
   },
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
@@ -87,6 +94,11 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
+  },
+  [FieldKey.PARTNER_INCOME_AVAILABLE]: {
+    key: FieldKey.PARTNER_INCOME_AVAILABLE,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
   },
   [FieldKey.PARTNER_INCOME]: {
     key: FieldKey.PARTNER_INCOME,

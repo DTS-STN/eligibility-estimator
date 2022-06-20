@@ -30,6 +30,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqLiving = this.input.livingCountry.canada
     const meetsReqOas =
       this.oasResult.eligibility.result === ResultKey.ELIGIBLE ||
+      this.oasResult.eligibility.result === ResultKey.INCOME_DEPENDENT ||
       this.oasResult.eligibility.result === ResultKey.UNAVAILABLE
     const meetsReqLegal = this.input.legalStatus.canadian
     /*
@@ -47,8 +48,11 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       ? legalValues.MAX_GIS_INCOME_PARTNER_ALW
       : legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW
 
+    // if income is not provided, assume they meet the income requirement
+    const skipReqIncome = !this.input.income.provided
     const meetsReqIncome =
-      this.income < maxIncome ||
+      skipReqIncome ||
+      this.input.income.relevant < maxIncome ||
       /*
        This exception is pretty weird, but necessary to work around the fact that a client can be entitled to GIS
        while being above the GIS income limit. This scenario can happen when the client gets Partial OAS, as
@@ -66,7 +70,15 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
-        } else {
+        } else if (skipReqIncome)
+          return {
+            result: ResultKey.INCOME_DEPENDENT,
+            reason: ResultReason.INCOME_MISSING,
+            detail:
+              this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+            incomeMustBeLessThan: maxIncome,
+          }
+        else {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
@@ -123,11 +135,23 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
-    if (this.eligibility.result !== ResultKey.ELIGIBLE)
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
       return { result: 0, type: EntitlementResultType.NONE }
 
+    if (
+      !this.input.income.provided &&
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    )
+      return {
+        result: -1,
+        type: EntitlementResultType.UNAVAILABLE,
+      }
+
     const formulaResult = new EntitlementFormula(
-      this.income,
+      this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age,
