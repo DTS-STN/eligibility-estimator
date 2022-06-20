@@ -29,7 +29,7 @@ export const YourAnswers: React.VFC<{
   const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
     root.langBrowser
   )
-  console.log('allfieldData', allFieldData)
+  console.log('allfieldData : ', allFieldData)
 
   const answers = questions.filter((question) => question[0] !== '_language')
   const answersKeys = answers.map(([key, _]) => key)

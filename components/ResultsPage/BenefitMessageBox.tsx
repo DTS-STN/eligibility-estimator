@@ -32,9 +32,8 @@ export const BenefitMessageBox: React.VFC<{
                 trans.result.eligible.toLowerCase()
             )
             .map((benefit, index) => (
-              <>
+              <div key={index}>
                 <MessageBox
-                  key={index}
                   title={tsln[benefit]}
                   eligible={eligible}
                   eligibleText={
@@ -89,7 +88,7 @@ export const BenefitMessageBox: React.VFC<{
                     }}
                   ></span>
                 </MessageBox>
-              </>
+              </div>
             ))}
         </>
       )}
