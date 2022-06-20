@@ -27,10 +27,23 @@ export class LegalValuesScraperJson extends BaseScraper {
    * Fixes typos in the source file, and moves to consistent variable naming using camelCase instead of underscore_syntax.
    */
   private static sanitizeKey(key: string) {
-    return key
-      .replace(/lastupdated/g, 'lastUpdated')
-      .replace(/topup/g, 'topUp')
-      .replace(/-\w/g, (x) => x[1].toUpperCase())
+    return (
+      key
+        // case corrections
+        .replace(/lastupdated/g, 'lastUpdated')
+        .replace(/topup/g, 'topUp')
+        // adding clarity
+        .replace(/limit/g, 'incomeLimit')
+        .replace(/maximum/g, 'incomeLimit') // oas
+        .replace(/clawback/g, 'clawbackIncomeLimit') // oas
+        .replace(/average/g, 'amount') // oas
+        .replace(/spouse-gis/g, 'alw')
+        // using abbreviations
+        .replace(/allowance/g, 'alw')
+        .replace(/survivor/g, 'afs')
+        // using camelCase
+        .replace(/-\w/g, (x) => x[1].toUpperCase())
+    )
   }
 
   async main() {
