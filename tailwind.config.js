@@ -6,6 +6,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      // please note that the order here is important, and will determine how some styles are applied
       xs: '320px',
       sm: '768px',
       md: '992px',
