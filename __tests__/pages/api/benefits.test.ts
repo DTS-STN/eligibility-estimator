@@ -354,6 +354,30 @@ describe('consolidated benefit tests: max income checks', () => {
     })
     expectGisEligible(res)
   })
+  it(`GIS: max income when married and partner ALW is ${legalValues.MAX_GIS_INCOME_PARTNER_ALW}`, async () => {
+    const input = {
+      income: legalValues.MAX_GIS_INCOME_PARTNER_ALW,
+      age: 65,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      ...canadian,
+      ...canadaWholeLife,
+      partnerBenefitStatus: PartnerBenefitStatus.ALW,
+      partnerIncome: 0,
+      ...partnerNoHelpNeeded,
+    }
+    let res = await mockGetRequest(input)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    res = await mockGetRequest({
+      ...input,
+      income: legalValues.MAX_GIS_INCOME_PARTNER_ALW - 1,
+    })
+    expectGisEligible(res)
+  })
   it(`ALW: max income when married and partner OAS is ${legalValues.MAX_ALW_INCOME}`, async () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME,
