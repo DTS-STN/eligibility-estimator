@@ -8,7 +8,12 @@ import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
 import { Locale } from '../../utils/api/definitions/enums'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import {
+  FieldData,
+  FieldKey,
+  FieldType,
+} from '../../utils/api/definitions/fields'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
 
 export const YourAnswers: React.VFC<{
   title: string
@@ -20,6 +25,11 @@ export const YourAnswers: React.VFC<{
 
   const currentLocale = useRouter().locale
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
+
+  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
+    root.langBrowser
+  )
+  console.log('allfieldData', allFieldData)
 
   const answers = questions.filter((question) => question[0] !== '_language')
   const answersKeys = answers.map(([key, _]) => key)
