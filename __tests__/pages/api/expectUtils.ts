@@ -131,11 +131,39 @@ export const partnerNoHelpNeeded = {
   partnerEverLivedSocialCountry: undefined,
 }
 
+export const partnerIncomeZero = {
+  partnerIncomeAvailable: true,
+  partnerIncome: 0,
+}
+
+export const incomeZero = {
+  incomeAvailable: true,
+  income: 0,
+}
+
+export const income10k = {
+  incomeAvailable: true,
+  income: 10000,
+}
+
+export const age65NoDefer = {
+  age: 65,
+  oasDefer: false,
+  oasAge: undefined,
+}
+
+export const age60NoDefer = {
+  age: 60,
+  oasDefer: false,
+  oasAge: undefined,
+}
+
 export const canadaWholeLife = {
   livedOutsideCanada: false,
   yearsInCanadaSince18: undefined,
   everLivedSocialCountry: undefined,
 }
+
 export const canadian = {
   livingCountry: LivingCountry.CANADA,
   legalStatus: LegalStatus.CANADIAN_CITIZEN,

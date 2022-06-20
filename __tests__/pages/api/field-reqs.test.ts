@@ -6,7 +6,13 @@ import {
   PartnerBenefitStatus,
 } from '../../../utils/api/definitions/enums'
 import { FieldKey } from '../../../utils/api/definitions/fields'
-import { canadaWholeLife, canadian, partnerUndefined } from './expectUtils'
+import {
+  age65NoDefer,
+  canadaWholeLife,
+  canadian,
+  income10k,
+  partnerUndefined,
+} from './expectUtils'
 import { mockGetRequest } from './factory'
 
 describe('field requirement analysis', () => {
@@ -48,8 +54,7 @@ describe('field requirement analysis', () => {
 
   it('requires no fields when all provided', async () => {
     const res = await mockGetRequest({
-      incomeAvailable: true,
-      income: 10000,
+      ...income10k,
       age: 65,
       oasDefer: true,
       oasAge: 70,
@@ -94,11 +99,8 @@ describe('field requirement analysis', () => {
 describe('field requirements analysis: conditional fields', () => {
   it('requires "yearsInCanadaSince18" when livedOutsideCanada=true', async () => {
     const res = await mockGetRequest({
-      incomeAvailable: true,
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOutsideCanada: true,
@@ -113,11 +115,8 @@ describe('field requirements analysis: conditional fields', () => {
 
   it('requires "everLivedSocialCountry" when living in Canada and under 10 years in Canada', async () => {
     const res = await mockGetRequest({
-      incomeAvailable: true,
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOutsideCanada: true,
@@ -132,11 +131,8 @@ describe('field requirements analysis: conditional fields', () => {
 
   it('requires "everLivedSocialCountry" when living in No Agreement and under 20 years in Canada', async () => {
     const res = await mockGetRequest({
-      incomeAvailable: true,
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -152,11 +148,8 @@ describe('field requirements analysis: conditional fields', () => {
 
   it('requires partner questions when marital=married', async () => {
     const res = await mockGetRequest({
-      incomeAvailable: true,
-      income: 10000,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
