@@ -6,7 +6,6 @@ import { livingCountry as enCountry } from '../../i18n/api/countries/en'
 import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
-//import {  } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 
 export const YourAnswers: React.VFC<{

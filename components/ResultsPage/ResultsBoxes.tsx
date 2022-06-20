@@ -8,7 +8,6 @@ import { getTranslations } from '../../i18n/api'
 import { Locale } from '../../utils/api/definitions/enums'
 import { useStore, useTranslation } from '../Hooks'
 import { ResultsTableRow } from './ResultsTableRow'
-import { MessageBox } from './MessageBox'
 import { BenefitMessageBox } from './BenefitMessageBox'
 
 export const ResultsBoxes = observer(() => {
