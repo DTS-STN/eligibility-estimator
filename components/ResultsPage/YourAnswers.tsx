@@ -1,24 +1,20 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
-import { useStore, useTranslation } from '../Hooks'
+import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
 import { livingCountry as enCountry } from '../../i18n/api/countries/en'
 import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
-import { Locale } from '../../utils/api/definitions/enums'
+//import {  } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 
 export const YourAnswers: React.VFC<{
   title: string
   questions: Array<[string, string]>
 }> = ({ title, questions }) => {
-  const root = useStore()
-
   const tsln = useTranslation<WebTranslations>()
-
   const currentLocale = useRouter().locale
-  const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   const answers = questions.filter((question) => question[0] !== '_language')
   const answersKeys = answers.map(([key, _]) => key)
@@ -70,7 +66,6 @@ export const YourAnswers: React.VFC<{
       </div>
     )
 
-  console.log('answersKeys = ', answersKeys)
   let fieldValue: string = ''
   let fieldYearsValue: string = ''
 
@@ -113,63 +108,77 @@ export const YourAnswers: React.VFC<{
               })()
             }
 
-            return field !== FieldKey.YEARS_IN_CANADA_SINCE_18 &&
-              field !== FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 ? (
-              field === FieldKey.LIVED_OUTSIDE_CANADA ||
-              field === FieldKey.PARTNER_LIVED_OUTSIDE_CANADA ? (
-                answers[index][1] === 'true' ? (
-                  <div
-                    key={index}
-                    className="py-4 border-b-2 border-info-border"
-                  >
-                    {tsln.resultsQuestions[answers[index][0]]} <br />
-                    <strong>{tsln.yes}</strong> &nbsp;
-                    <DSLink
-                      id={`helpLink${answers[index][0]}`}
-                      href="/eligibility#liveOutsideCanada-0"
-                      text="Edit"
-                      target="_self"
-                    />
-                    <br />
-                    <strong>{fieldYearsValue}</strong> &nbsp;
-                    {Number(fieldYearsValue) > 1 ? tsln.years : tsln.year}{' '}
-                    &nbsp;
-                    <DSLink
-                      id={`helpLink${answers[index][0]}`}
-                      href="/eligibility#yearsInCanadaSince18"
-                      text="Edit"
-                      target="_self"
-                    />
-                  </div>
+            return (
+              // field 'Years in Canada' is display with the answer 'Lived Outside Canada'
+
+              field !== FieldKey.YEARS_IN_CANADA_SINCE_18 &&
+                field !== FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 ? (
+                // process answer 'Lived Outside Canada'
+
+                field === FieldKey.LIVED_OUTSIDE_CANADA ||
+                field === FieldKey.PARTNER_LIVED_OUTSIDE_CANADA ? (
+                  answers[index][1] === 'true' ? (
+                    <div
+                      key={index}
+                      className="py-4 border-b-2 border-info-border"
+                    >
+                      {tsln.resultsQuestions[answers[index][0]]} <br />
+                      <strong>{tsln.yes}</strong> &nbsp;
+                      <DSLink
+                        id={`helpLink${answers[index][0]}`}
+                        href="/eligibility#liveOutsideCanada-0"
+                        text="Edit"
+                        target="_self"
+                      />
+                      <br />
+                      <strong>{fieldYearsValue}</strong> &nbsp;
+                      {Number(fieldYearsValue) > 1
+                        ? tsln.years
+                        : tsln.year}{' '}
+                      &nbsp;
+                      <DSLink
+                        id={`helpLink${answers[index][0]}`}
+                        href="/eligibility#yearsInCanadaSince18"
+                        text="Edit"
+                        target="_self"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      key={index}
+                      className="py-4 border-b-2 border-info-border"
+                    >
+                      {tsln.resultsQuestions[answers[index][0]]} <br />
+                      <strong>{tsln.no}</strong>
+                      <DSLink
+                        id={`helpLink${answers[index][0]}`}
+                        href="/eligibility#react-select-3-live-region"
+                        text="Edit"
+                        target="_self"
+                      />
+                    </div>
+                  )
                 ) : (
+                  // default display for all others types of answers
+
                   <div
                     key={index}
                     className="py-4 border-b-2 border-info-border"
                   >
                     {tsln.resultsQuestions[answers[index][0]]} <br />
-                    <strong>{tsln.no}</strong>
+                    <strong>{fieldValue}</strong> &nbsp;
                     <DSLink
                       id={`helpLink${answers[index][0]}`}
-                      href="/eligibility#react-select-3-live-region"
+                      href="/eligibility#age"
                       text="Edit"
                       target="_self"
                     />
                   </div>
                 )
               ) : (
-                <div key={index} className="py-4 border-b-2 border-info-border">
-                  {tsln.resultsQuestions[answers[index][0]]} <br />
-                  <strong>{fieldValue}</strong> &nbsp;
-                  <DSLink
-                    id={`helpLink${answers[index][0]}`}
-                    href="/eligibility#age"
-                    text="Edit"
-                    target="_self"
-                  />
-                </div>
+                // do nothing when the field is 'Years in Canada'
+                <span key={index}> </span>
               )
-            ) : (
-              <span> </span>
             )
           })}
         </div>

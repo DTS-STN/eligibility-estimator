@@ -22,20 +22,9 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.youMayNotBeEligible, url: '#noteligible' },
   ]
 
-  const inputX = root.inputs
+  const questionsAndAnswers = root.inputs
 
-  inputX.map(([key, value]) => {
-    console.log(
-      'key =',
-      key,
-      '===',
-      tsln.resultsQuestions[key],
-      '| value=',
-      value
-    )
-  })
-
-  const tempFix = (
+  const tempUntilNewComponentIsFixed = (
     <span dangerouslySetInnerHTML={{ __html: root.summary.details }}></span>
   )
 
@@ -49,7 +38,7 @@ export const ResultsPage: React.VFC = () => {
             alert_icon_id="resultIdInfo"
             alert_icon_alt_text="Info"
             message_heading={root.summary.title}
-            message_body={tempFix}
+            message_body={tempUntilNewComponentIsFixed}
           />
 
           <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
@@ -67,7 +56,7 @@ export const ResultsPage: React.VFC = () => {
         <div className="col-span-1">
           <YourAnswers
             title={tsln.resultsPage.whatYouToldUs}
-            questions={inputX}
+            questions={questionsAndAnswers}
           />
         </div>
       </div>
