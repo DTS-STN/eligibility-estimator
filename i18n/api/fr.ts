@@ -249,7 +249,7 @@ const fr: Translations = {
     oasClawback:
       'Vous devrez peut-être rembourser {OAS_CLAWBACK} {LINK_RECOVERY_TAX} car vous revenus sont supérieurs à {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:
-      "Une fois que vous atteignez l'âge de 75 ans, cela augmentera de 10%, à {OAS_75_AMOUNT}",
+      "Une fois que vous atteignez l'âge de 75 ans, votre montant mensuel augmentera de 10 %, à {OAS_75_AMOUNT}",
     oasIncreaseAt75Applied:
       'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
     oasDeferralIncrease:
