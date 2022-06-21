@@ -9,7 +9,7 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
@@ -25,7 +25,13 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < legalValues.MAX_ALW_INCOME
+
+    // if income is not provided, assume they meet the income requirement
+    const skipReqIncome = !this.input.income.provided
+    const maxIncome = legalValues.alw.alwIncomeLimit
+    const meetsReqIncome =
+      skipReqIncome || this.input.income.relevant < maxIncome
+
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -39,7 +45,15 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqIncome &&
       meetsReqPartner
     ) {
-      if (meetsReqAge) {
+      if (meetsReqAge && skipReqIncome) {
+        return {
+          result: ResultKey.INCOME_DEPENDENT,
+          reason: ResultReason.INCOME_MISSING,
+          detail:
+            this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+          incomeMustBeLessThan: maxIncome,
+        }
+      } else if (meetsReqAge) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
@@ -144,11 +158,23 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
-    if (this.eligibility.result !== ResultKey.ELIGIBLE)
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
       return { result: 0, type: EntitlementResultType.NONE }
 
+    if (
+      !this.input.income.provided &&
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    )
+      return {
+        result: -1,
+        type: EntitlementResultType.UNAVAILABLE,
+      }
+
     const formulaResult = new EntitlementFormula(
-      this.income,
+      this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age

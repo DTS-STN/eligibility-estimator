@@ -176,7 +176,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                 type={field.type}
                 name={field.key}
                 label={field.label}
-                onChange={debounce((e) => handleOnChange(step, field, e), 500)}
+                onChange={debounce((e) => handleOnChange(step, field, e), 100)}
                 placeholder={field.placeholder ?? ''}
                 value={field.value}
                 helpText={field.helpText}

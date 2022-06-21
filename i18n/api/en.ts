@@ -32,8 +32,10 @@ const en: Translations = {
     unavailable: 'Unavailable',
     moreInfo: 'Need more information...',
     invalid: 'Request is invalid!',
+    incomeDependent: 'Missing income',
   },
   question: {
+    incomeAvailable: 'Are you able to provide us your annual net income?',
     income:
       'What is your annual net income (income after taxes) in Canadian dollars?',
     age: 'How old are you?',
@@ -49,6 +51,8 @@ const en: Translations = {
     everLivedSocialCountry:
       'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
     partnerBenefitStatus: 'Which of the following applies to your partner?',
+    partnerIncomeAvailable:
+      "Are you able to provide us your partner's annual net income?",
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
     partnerAge: "What is your partner's current age?",
@@ -62,6 +66,10 @@ const en: Translations = {
       'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
   questionHelp: {
+    incomeAvailable:
+      'Providing your income will give you more helpful and accurate results.',
+    partnerIncomeAvailable:
+      "Providing your partner's income will give you more helpful and accurate results.",
     age: 'You can enter your current age, or a future age for planning purposes.',
     oasDefer:
       'If you already receive OAS, enter when you started receiving it.</br>Learn more about {LINK_OAS_DEFER_INLINE}.',
@@ -72,6 +80,26 @@ const en: Translations = {
       'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
   questionOptions: {
+    incomeAvailable: [
+      {
+        key: true,
+        text: 'Yes, I will provide my income',
+      },
+      {
+        key: false,
+        text: 'No, I will not provide my income at this time',
+      },
+    ],
+    partnerIncomeAvailable: [
+      {
+        key: true,
+        text: "Yes, I will provide my partner's income",
+      },
+      {
+        key: false,
+        text: "No, I will not provide my partner's income at this time",
+      },
+    ],
     oasDefer: [
       {
         key: false,
@@ -150,6 +178,10 @@ const en: Translations = {
   },
   detail: {
     eligible: 'You are likely eligible for this benefit.',
+    eligibleDependingOnIncome:
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}.',
+    eligibleDependingOnIncomeNoEntitlement:
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
     eligibleOas65to69:
       'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
@@ -179,7 +211,7 @@ const en: Translations = {
     mustHavePartnerWithGis:
       'Your partner must be receiving the Guaranteed Income Supplement to be eligible for this benefit.',
     mustMeetIncomeReq:
-      'Your income is too high to be eligible for this benefit.',
+      '{INCOME_SINGLE_OR_COMBINED} is too high to be eligible for this benefit.',
     mustMeetYearReq:
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
     conditional:
@@ -201,9 +233,9 @@ const en: Translations = {
     additionalReasons:
       '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
     oasClawback:
-      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as your income is over {OAS_RECOVERY_TAX_CUTOFF}.',
+      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:
-      'Once you reach the age of 75, this will increase by 10%, to {OAS_75_AMOUNT}.',
+      'Once you reach the age of 75, your monthly amount will increase by 10%, to {OAS_75_AMOUNT}.',
     oasIncreaseAt75Applied:
       'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
     oasDeferralIncrease:
@@ -226,6 +258,8 @@ const en: Translations = {
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
   },
   links,
+  incomeSingle: 'your income',
+  incomeCombined: "you and your partner's combined income",
   csv: {
     appName: 'Canadian Old Age Benefits Estimator',
     formResponses: 'FORM RESPONSES',

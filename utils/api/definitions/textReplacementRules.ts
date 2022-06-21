@@ -1,10 +1,14 @@
 import { numberToStringCurrency } from '../../../i18n/api'
 import { LinkKey } from '../../../i18n/api/links'
 import { BenefitHandler } from '../benefitHandler'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
+import { BenefitResult } from './types'
 
 type TextReplacementRules = {
-  [x: string]: (handler: BenefitHandler) => string
+  [x: string]: (
+    handler: BenefitHandler,
+    benefitResult?: BenefitResult
+  ) => string
 }
 
 export const textReplacementRules: TextReplacementRules = {
@@ -32,23 +36,31 @@ export const textReplacementRules: TextReplacementRules = {
     ),
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
     numberToStringCurrency(
-      legalValues.OAS_RECOVERY_TAX_CUTOFF,
+      legalValues.oas.clawbackIncomeLimit,
       handler.translations._locale,
       { rounding: 0 }
     ),
   OAS_MAX_INCOME: (handler) =>
     `<strong className="font-bold">${numberToStringCurrency(
-      legalValues.MAX_OAS_INCOME,
+      legalValues.oas.incomeLimit,
       handler.translations._locale,
       { rounding: 0 }
     )}</strong>`,
+  INCOME_LESS_THAN: (handler, benefitResult) =>
+    `<strong className="font-bold">${numberToStringCurrency(
+      benefitResult.eligibility.incomeMustBeLessThan,
+      handler.translations._locale,
+      { rounding: 0 }
+    )}</strong>`,
+  INCOME_SINGLE_OR_COMBINED: (handler) =>
+    handler.input.client.maritalStatus.partnered
+      ? "you and your partner's combined income"
+      : 'your income',
   LINK_SERVICE_CANADA: (handler) => generateLink(handler, LinkKey.SC),
   LINK_SOCIAL_AGREEMENT: (handler) =>
     generateLink(handler, LinkKey.socialAgreement),
-  LINK_MORE_REASONS_OAS: (handler) => generateLink(handler, LinkKey.oasReasons),
-  LINK_MORE_REASONS_GIS: (handler) => generateLink(handler, LinkKey.gisReasons),
-  LINK_MORE_REASONS_ALW: (handler) => generateLink(handler, LinkKey.alwReasons),
-  LINK_MORE_REASONS_AFS: (handler) => generateLink(handler, LinkKey.afsReasons),
+  LINK_MORE_REASONS: (handler, benefitResult) =>
+    generateLink(handler, LinkKey[`${benefitResult.benefitKey}Reasons`]),
   LINK_OAS_DEFER_CLICK_HERE: (handler) =>
     generateLink(handler, LinkKey.oasDeferClickHere),
   LINK_OAS_DEFER_INLINE: (handler) =>

@@ -13,7 +13,7 @@ import {
   ProcessedInputWithPartner,
   SummaryObject,
 } from './definitions/types'
-import { legalValues } from './scrapers/output'
+import legalValues from './scrapers/output'
 
 export class SummaryHandler {
   private readonly state: EstimationSummaryState
@@ -150,7 +150,10 @@ export class SummaryHandler {
       links.push(availableLinks.afsEntitlement)
 
     // special situation links
-    if (this.input.client.income.relevant >= legalValues.MAX_OAS_INCOME)
+    if (
+      this.input.client.income.provided &&
+      this.input.client.income.relevant >= legalValues.oas.incomeLimit
+    )
       links.push(availableLinks.oasMaxIncome)
     if (
       this.input.client.livingCountry.provided &&
@@ -160,8 +163,9 @@ export class SummaryHandler {
     if (this.results.oas?.entitlement.type === EntitlementResultType.PARTIAL)
       links.push(availableLinks.oasPartial)
     if (
-      this.input.client.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF &&
-      this.input.client.income.relevant < legalValues.MAX_OAS_INCOME
+      this.input.client.income.provided &&
+      this.input.client.income.relevant > legalValues.oas.clawbackIncomeLimit &&
+      this.input.client.income.relevant < legalValues.oas.incomeLimit
     )
       links.push(availableLinks.oasRecoveryTax)
     if (
@@ -172,14 +176,14 @@ export class SummaryHandler {
     if (this.input.client.age >= 65) links.push(availableLinks.oasRetroactive)
 
     // apply links
-    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.oasApply)
-    if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.gisApply)
-    if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.alwApply)
-    if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.afsApply)
+    for (const benefitKey in this.results) {
+      const resultKey: ResultKey = this.results[benefitKey]?.eligibility.result
+      if (
+        resultKey === ResultKey.ELIGIBLE ||
+        resultKey === ResultKey.INCOME_DEPENDENT
+      )
+        links.push(availableLinks[`${benefitKey}Apply`])
+    }
 
     links.sort((a, b) => a.order - b.order)
     return links
