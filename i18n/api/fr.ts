@@ -69,6 +69,31 @@ const fr: Translations = {
     partnerEverLivedSocialCountry:
       'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
   },
+  questionShortText: {
+    age: 'Âge',
+    oasDefer: 'Report de la SV',
+    oasAge: 'Âge de report de la SV',
+    incomeAvailable: 'Revenu fourni',
+    income: 'Revenu net',
+    legalStatus: 'Statut légal',
+    livingCountry: 'Pays de résidence',
+    livedOutsideCanada: "A vécu à l'extérieur du Canada pendant plus de 6 mois",
+    yearsInCanadaSince18: "Années vécues à l'extérieur du Canada",
+    everLivedSocialCountry: 'A vécu dans un pays avec un accord social',
+    maritalStatus: 'État civil',
+    partnerIncomeAvailable: 'Revenu du partenaire fourni',
+    partnerIncome: 'Revenu net du partenaire',
+    partnerBenefitStatus: 'Prestations de vieillesse du partenaire',
+    partnerAge: 'Âge du partenaire',
+    partnerLegalStatus: 'Statut juridique du partenaire',
+    partnerLivingCountry: 'Pays de résidence du partenaire',
+    partnerLivedOutsideCanada:
+      "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
+    partnerYearsInCanadaSince18:
+      "Années du partenaire vécues à l'extérieur du Canada",
+    partnerEverLivedSocialCountry:
+      'Le partenaire vivait dans un pays avec un accord social',
+  },
   questionHelp: {
     incomeAvailable:
       'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',

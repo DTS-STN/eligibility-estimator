@@ -37,6 +37,7 @@ export interface Translations {
     incomeDependent: string
   }
   question: { [key in FieldKey]: string }
+  questionShortText: { [key in FieldKey]: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     incomeAvailable: TypedKeyAndText<boolean>[]

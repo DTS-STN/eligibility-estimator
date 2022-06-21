@@ -3,7 +3,6 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
-import { FieldKey } from '../../utils/api/definitions/fields'
 import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
@@ -149,7 +148,7 @@ export type WebTranslations = {
       ApplyText: string
     }
   }
-  resultsQuestions: { [key in FieldKey]: string }
+  resultsQuestions: Translations['questionShortText']
   moreInfoHeader: string
   startOver: string
   modifyAnswers: string

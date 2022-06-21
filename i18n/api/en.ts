@@ -65,6 +65,30 @@ const en: Translations = {
     partnerEverLivedSocialCountry:
       'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
+  questionShortText: {
+    age: 'Age',
+    oasDefer: 'OAS deferral',
+    oasAge: 'OAS deferral age',
+    incomeAvailable: 'Income provided',
+    income: 'Net income',
+    legalStatus: 'Legal status',
+    livingCountry: 'Residence country',
+    livedOutsideCanada: 'Lived outside Canada for longer of 6 months',
+    yearsInCanadaSince18: 'Years lived outside Canada',
+    everLivedSocialCountry: 'Lived in country with social agreement',
+    maritalStatus: 'Marital status',
+    partnerIncomeAvailable: 'Partner income provided',
+    partnerIncome: "Partner's net income",
+    partnerBenefitStatus: "Partner's old age benefits",
+    partnerAge: "Partner's age",
+    partnerLegalStatus: "Partner's legal status",
+    partnerLivingCountry: "Partner's residence country",
+    partnerLivedOutsideCanada:
+      "Partner's lived outside Canada for longer of 6 months",
+    partnerYearsInCanadaSince18: "Partner's years lived outside Canada",
+    partnerEverLivedSocialCountry:
+      'Partner lived in country with social agreement',
+  },
   questionHelp: {
     incomeAvailable:
       'Providing your income will give you more helpful and accurate results.',
