@@ -22,8 +22,6 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.youMayNotBeEligible, url: '#noteligible' },
   ]
 
-  const questionsAndAnswers = root.inputs
-
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
@@ -53,7 +51,7 @@ export const ResultsPage: React.VFC = () => {
         <div className="col-span-1">
           <YourAnswers
             title={tsln.resultsPage.whatYouToldUs}
-            questions={questionsAndAnswers}
+            inputs={root.inputs}
           />
         </div>
       </div>

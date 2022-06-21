@@ -1,25 +1,27 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
-import { useTranslation } from '../Hooks'
-import { WebTranslations } from '../../i18n/web'
 import { numberToStringCurrency } from '../../i18n/api'
 import { livingCountry as enCountry } from '../../i18n/api/countries/en'
 import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { WebTranslations } from '../../i18n/web'
 import { Locale } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
+import { useTranslation } from '../Hooks'
 
 export const YourAnswers: React.VFC<{
   title: string
-  questions: Array<[string, string]>
-}> = ({ title, questions }) => {
+  inputs: Array<[string, string]>
+}> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
   const currentLocale = useRouter().locale
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
-  const answers = questions.filter((question) => question[0] !== '_language')
-  const answersKeys = answers.map(([key, _]) => key)
+  const inputsFiltered: Array<[string, string]> = inputs.filter(
+    (input) => input[0] !== '_language'
+  )
+  const answersKeys: string[] = inputsFiltered.map(([key, _]) => key)
 
   function getLivingCountry(country: string): { key: string; text: string } {
     if (country === undefined) return undefined
@@ -85,33 +87,35 @@ export const YourAnswers: React.VFC<{
               ;(() => {
                 switch (field) {
                   case FieldKey.LEGAL_STATUS:
-                    fieldValue = getLegalStatus(answers[index][1]).text
+                    fieldValue = getLegalStatus(inputsFiltered[index][1]).text
                     break
                   case FieldKey.LIVING_COUNTRY:
-                    fieldValue = getLivingCountry(answers[index][1]).text
+                    fieldValue = getLivingCountry(inputsFiltered[index][1]).text
                     break
                   case FieldKey.MARITAL_STATUS:
-                    fieldValue = getMaritalStatus(answers[index][1]).text
+                    fieldValue = getMaritalStatus(inputsFiltered[index][1]).text
                     break
                   case FieldKey.PARTNER_BENEFIT_STATUS:
-                    fieldValue = getPartnerBenefitStatus(answers[index][1]).text
+                    fieldValue = getPartnerBenefitStatus(
+                      inputsFiltered[index][1]
+                    ).text
                     break
                   case FieldKey.INCOME:
                     fieldValue = numberToStringCurrency(
-                      Number(answers[index][1]),
+                      Number(inputsFiltered[index][1]),
                       locale
                     )
                     break
                   case FieldKey.LIVED_OUTSIDE_CANADA:
                   case FieldKey.PARTNER_LIVED_OUTSIDE_CANADA:
-                    fieldValue = answers[index][1]
+                    fieldValue = inputsFiltered[index][1]
                     break
                   case FieldKey.YEARS_IN_CANADA_SINCE_18:
                   case FieldKey.YEARS_IN_CANADA_SINCE_18:
-                    fieldYearsValue = answers[index][1]
+                    fieldYearsValue = inputsFiltered[index][1]
                     break
                   default:
-                    fieldValue = answers[index][1]
+                    fieldValue = inputsFiltered[index][1]
                 }
               })()
             }
@@ -125,15 +129,15 @@ export const YourAnswers: React.VFC<{
 
                 field === FieldKey.LIVED_OUTSIDE_CANADA ||
                 field === FieldKey.PARTNER_LIVED_OUTSIDE_CANADA ? (
-                  answers[index][1] === 'true' ? (
+                  inputsFiltered[index][1] === 'true' ? (
                     <div
                       key={index}
                       className="py-4 border-b-2 border-info-border"
                     >
-                      {tsln.resultsQuestions[answers[index][0]]} <br />
+                      {tsln.resultsQuestions[inputsFiltered[index][0]]} <br />
                       <strong>{tsln.yes}</strong> &nbsp;
                       <DSLink
-                        id={`helpLink${answers[index][0]}`}
+                        id={`helpLink${inputsFiltered[index][0]}`}
                         href="/eligibility#liveOutsideCanada-0"
                         text="Edit"
                         target="_self"
@@ -145,7 +149,7 @@ export const YourAnswers: React.VFC<{
                         : tsln.year}{' '}
                       &nbsp;
                       <DSLink
-                        id={`helpLink${answers[index][0]}`}
+                        id={`helpLink${inputsFiltered[index][0]}`}
                         href="/eligibility#yearsInCanadaSince18"
                         text="Edit"
                         target="_self"
@@ -156,10 +160,10 @@ export const YourAnswers: React.VFC<{
                       key={index}
                       className="py-4 border-b-2 border-info-border"
                     >
-                      {tsln.resultsQuestions[answers[index][0]]} <br />
+                      {tsln.resultsQuestions[inputsFiltered[index][0]]} <br />
                       <strong>{tsln.no}</strong> &nbsp;
                       <DSLink
-                        id={`helpLink${answers[index][0]}`}
+                        id={`helpLink${inputsFiltered[index][0]}`}
                         href="/eligibility#react-select-3-live-region"
                         text="Edit"
                         target="_self"
@@ -173,10 +177,10 @@ export const YourAnswers: React.VFC<{
                     key={index}
                     className="py-4 border-b-2 border-info-border"
                   >
-                    {tsln.resultsQuestions[answers[index][0]]} <br />
+                    {tsln.resultsQuestions[inputsFiltered[index][0]]} <br />
                     <strong>{fieldValue}</strong> &nbsp;
                     <DSLink
-                      id={`helpLink${answers[index][0]}`}
+                      id={`helpLink${inputsFiltered[index][0]}`}
                       href="/eligibility#age"
                       text="Edit"
                       target="_self"
