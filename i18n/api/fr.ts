@@ -191,9 +191,9 @@ const fr: Translations = {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
     eligibleDependingOnIncome:
-      'Vous êtes probablement éligible à cette prestation si votre revenu est inférieur à {INCOME_LESS_THAN}.',
+      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}.',
     eligibleDependingOnIncomeNoEntitlement:
-      "Vous êtes probablement éligible à cette prestation si votre revenu est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
+      "Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
     eligibleOas65to69:
       'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
@@ -225,7 +225,7 @@ const fr: Translations = {
     mustHavePartnerWithGis:
       'Votre partenaire doit recevoir le supplément de revenu garanti pour être admissible à cette prestation.',
     mustMeetIncomeReq:
-      'Votre revenu est trop élevé pour que vous soyez admissible à cette prestation.',
+      '{INCOME_SINGLE_OR_COMBINED} est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
       "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
     conditional:
@@ -247,7 +247,7 @@ const fr: Translations = {
     additionalReasons:
       "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
     oasClawback:
-      'Vous devrez peut-être rembourser {OAS_CLAWBACK} {LINK_RECOVERY_TAX} car vous revenus sont supérieurs à {OAS_RECOVERY_TAX_CUTOFF}.',
+      'Vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX} car {INCOME_SINGLE_OR_COMBINED} est supérieur à {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:
       "Une fois que vous atteignez l'âge de 75 ans, votre montant mensuel augmentera de 10 %, à {OAS_75_AMOUNT}",
     oasIncreaseAt75Applied:
@@ -272,6 +272,8 @@ const fr: Translations = {
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
   },
   links,
+  incomeSingle: 'votre revenu',
+  incomeCombined: 'le revenu combiné de vous et de votre partenaire',
   csv: {
     appName: 'Estimateur Canadien des Prestations de Vieillesse',
     formResponses: 'RÉPONSES DU FORMULAIRE',

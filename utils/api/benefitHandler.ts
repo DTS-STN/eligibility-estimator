@@ -96,9 +96,8 @@ export class BenefitHandler {
       this.translateResults()
       for (const key in this._benefitResults) {
         const result: BenefitResult = this._benefitResults[key]
-        result.eligibility.detail = this.replaceTextVariables(
-          result.eligibility.detail,
-          result
+        result.eligibility.detail = BenefitHandler.capitalizeEachLine(
+          this.replaceTextVariables(result.eligibility.detail, result)
         )
       }
     }
@@ -498,5 +497,24 @@ export class BenefitHandler {
     const indexA = keyList.findIndex((value) => value === a)
     const indexB = keyList.findIndex((value) => value === b)
     return indexA - indexB
+  }
+
+  /**
+   * Accepts a string, generally containing newlines (\n), and capitalizes the first character of each line.
+   */
+  static capitalizeEachLine(s: string): string {
+    const lines: string[] = s.split('\n')
+    return lines
+      .reduce((result, line) => {
+        return result + this.capitalizeFirstChar(line) + '\n'
+      }, '')
+      .trim()
+  }
+
+  /**
+   * Accepts a string, and capitalizes the first character.
+   */
+  static capitalizeFirstChar(s: string): string {
+    return s[0].toUpperCase() + s.slice(1)
   }
 }

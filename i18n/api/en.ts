@@ -177,9 +177,9 @@ const en: Translations = {
   detail: {
     eligible: 'You are likely eligible for this benefit.',
     eligibleDependingOnIncome:
-      'You are likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}.',
     eligibleDependingOnIncomeNoEntitlement:
-      'You are likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
     eligibleOas65to69:
       'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
@@ -209,7 +209,7 @@ const en: Translations = {
     mustHavePartnerWithGis:
       'Your partner must be receiving the Guaranteed Income Supplement to be eligible for this benefit.',
     mustMeetIncomeReq:
-      'Your income is too high to be eligible for this benefit.',
+      '{INCOME_SINGLE_OR_COMBINED} is too high to be eligible for this benefit.',
     mustMeetYearReq:
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
     conditional:
@@ -231,7 +231,7 @@ const en: Translations = {
     additionalReasons:
       '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
     oasClawback:
-      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as your income is over {OAS_RECOVERY_TAX_CUTOFF}.',
+      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:
       'Once you reach the age of 75, your monthly amount will increase by 10%, to {OAS_75_AMOUNT}.',
     oasIncreaseAt75Applied:
@@ -256,6 +256,8 @@ const en: Translations = {
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
   },
   links,
+  incomeSingle: 'your income',
+  incomeCombined: "you and your partner's combined income",
   csv: {
     appName: 'Canadian Old Age Benefits Estimator',
     formResponses: 'FORM RESPONSES',

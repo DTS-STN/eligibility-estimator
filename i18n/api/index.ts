@@ -97,6 +97,8 @@ export interface Translations {
     availableIneligible: string
   }
   links: LinkDefinitions
+  incomeSingle: string
+  incomeCombined: string
   csv: {
     appName: string
     formResponses: string

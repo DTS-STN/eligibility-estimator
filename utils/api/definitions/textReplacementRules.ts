@@ -52,6 +52,10 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._locale,
       { rounding: 0 }
     )}</strong>`,
+  INCOME_SINGLE_OR_COMBINED: (handler) =>
+    handler.input.client.maritalStatus.partnered
+      ? "you and your partner's combined income"
+      : 'your income',
   LINK_SERVICE_CANADA: (handler) => generateLink(handler, LinkKey.SC),
   LINK_SOCIAL_AGREEMENT: (handler) =>
     generateLink(handler, LinkKey.socialAgreement),
