@@ -33,7 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@dts-stn/decd-design-system", "https://github.com/DTS-STN/DECD-Design-System.git#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32"],\
+            ["@dts-stn/decd-design-system", "npm:1.40.0"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/jest-dom", "npm:5.16.4"],\
             ["@testing-library/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:12.1.4"],\
@@ -863,14 +863,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@dts-stn/decd-design-system", [\
-        ["https://github.com/DTS-STN/DECD-Design-System.git#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32", {\
-          "packageLocation": "./.yarn/cache/@dts-stn-decd-design-system-https-cb4ea9b315-bd4a148c2d.zip/node_modules/@dts-stn/decd-design-system/",\
+        ["npm:1.40.0", {\
+          "packageLocation": "./.yarn/cache/@dts-stn-decd-design-system-npm-1.40.0-7abdd78163-b1a9345604.zip/node_modules/@dts-stn/decd-design-system/",\
           "packageDependencies": [\
-            ["@dts-stn/decd-design-system", "https://github.com/DTS-STN/DECD-Design-System.git#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32"],\
+            ["@dts-stn/decd-design-system", "npm:1.40.0"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:17.0.2"],\
             ["react-app-polyfill", "npm:3.0.0"],\
-            ["react-dom", "virtual:cb4ea9b3154ff76ccc6d003f5f989aa3d8b76d160a81578413341f53bda0e9447e4ad31180defba22b6551c323f01f0ef43ee93c451de5a4ff0767340df8f2bc#npm:17.0.2"],\
+            ["react-dom", "virtual:7abdd781636ab7de03898b26cfa35a52df78632e884cfffeffcd36480b4882d90a9afc55cd68ea86ed10d68e5d602762a3cf2153ea08e348156b3436d9f3b57a#npm:17.0.2"],\
             ["user", "npm:0.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -3511,7 +3511,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["eligibility-estimator-client", "workspace:."],\
-            ["@dts-stn/decd-design-system", "https://github.com/DTS-STN/DECD-Design-System.git#commit=0e2d2e4bbd65eaebb6015c80de4094a928d51e32"],\
+            ["@dts-stn/decd-design-system", "npm:1.40.0"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/jest-dom", "npm:5.16.4"],\
             ["@testing-library/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:12.1.4"],\
@@ -7447,10 +7447,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["virtual:cb4ea9b3154ff76ccc6d003f5f989aa3d8b76d160a81578413341f53bda0e9447e4ad31180defba22b6551c323f01f0ef43ee93c451de5a4ff0767340df8f2bc#npm:17.0.2", {\
-          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-64389c4fde/0/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",\
+        ["virtual:7abdd781636ab7de03898b26cfa35a52df78632e884cfffeffcd36480b4882d90a9afc55cd68ea86ed10d68e5d602762a3cf2153ea08e348156b3436d9f3b57a#npm:17.0.2", {\
+          "packageLocation": "./.yarn/__virtual__/react-dom-virtual-7f62764dcd/0/cache/react-dom-npm-17.0.2-f551215af1-1c1eaa3bca.zip/node_modules/react-dom/",\
           "packageDependencies": [\
-            ["react-dom", "virtual:cb4ea9b3154ff76ccc6d003f5f989aa3d8b76d160a81578413341f53bda0e9447e4ad31180defba22b6551c323f01f0ef43ee93c451de5a4ff0767340df8f2bc#npm:17.0.2"],\
+            ["react-dom", "virtual:7abdd781636ab7de03898b26cfa35a52df78632e884cfffeffcd36480b4882d90a9afc55cd68ea86ed10d68e5d602762a3cf2153ea08e348156b3436d9f3b57a#npm:17.0.2"],\
             ["@types/react", null],\
             ["loose-envify", "npm:1.4.0"],\
             ["object-assign", "npm:4.1.1"],\
