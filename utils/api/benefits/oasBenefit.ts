@@ -10,7 +10,7 @@ import {
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
@@ -25,7 +25,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
     const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant < legalValues.MAX_OAS_INCOME
+      skipReqIncome || this.input.income.relevant < legalValues.oas.incomeLimit
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
@@ -39,7 +39,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           result: ResultKey.INCOME_DEPENDENT,
           reason: ResultReason.INCOME_MISSING,
           detail: this.translations.detail.eligibleDependingOnIncome,
-          incomeMustBeLessThan: legalValues.MAX_OAS_INCOME,
+          incomeMustBeLessThan: legalValues.oas.incomeLimit,
         }
       else if (this.input.age >= 70) {
         return {
@@ -173,8 +173,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    */
   private get baseAmount() {
     return (
-      Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
-      legalValues.MAX_OAS_ENTITLEMENT
+      Math.min(this.input.yearsInCanadaSince18 / 40, 1) * legalValues.oas.amount
     )
   }
 
@@ -228,10 +227,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    */
   private get clawbackAmount(): number {
     if (!this.input.income.provided) return 0
-    if (this.input.income.relevant < legalValues.OAS_RECOVERY_TAX_CUTOFF)
+    if (this.input.income.relevant < legalValues.oas.clawbackIncomeLimit)
       return 0
     const incomeOverCutoff =
-      this.input.income.relevant - legalValues.OAS_RECOVERY_TAX_CUTOFF
+      this.input.income.relevant - legalValues.oas.clawbackIncomeLimit
     const repaymentAmount = incomeOverCutoff * 0.15
     const oasYearly = this.currentEntitlementAmount * 12
     const result = Math.min(oasYearly, repaymentAmount)

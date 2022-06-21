@@ -9,7 +9,7 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
@@ -28,7 +28,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
-    const maxIncome = legalValues.MAX_ALW_INCOME
+    const maxIncome = legalValues.alw.alwIncomeLimit
     const meetsReqIncome =
       skipReqIncome || this.input.income.relevant < maxIncome
 

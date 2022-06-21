@@ -1,7 +1,7 @@
 import { numberToStringCurrency } from '../../../i18n/api'
 import { LinkKey } from '../../../i18n/api/links'
 import { BenefitHandler } from '../benefitHandler'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BenefitResult } from './types'
 
 type TextReplacementRules = {
@@ -36,13 +36,13 @@ export const textReplacementRules: TextReplacementRules = {
     ),
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
     numberToStringCurrency(
-      legalValues.OAS_RECOVERY_TAX_CUTOFF,
+      legalValues.oas.clawbackIncomeLimit,
       handler.translations._locale,
       { rounding: 0 }
     ),
   OAS_MAX_INCOME: (handler) =>
     `<strong className="font-bold">${numberToStringCurrency(
-      legalValues.MAX_OAS_INCOME,
+      legalValues.oas.incomeLimit,
       handler.translations._locale,
       { rounding: 0 }
     )}</strong>`,

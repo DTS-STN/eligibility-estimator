@@ -7,7 +7,7 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
-import { legalValues } from '../../../utils/api/scrapers/output'
+import legalValues from '../../../utils/api/scrapers/output'
 import {
   age60NoDefer,
   age65NoDefer,
@@ -22,10 +22,10 @@ import {
 import { mockGetRequest } from './factory'
 
 describe('Help Me Find Out scenarios', () => {
-  it(`works when client old, partner old (partner=noOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}, gis table 3)`, async () => {
+  it(`works when client old, partner old (partner=noOas, therefore gis income limit ${legalValues.gis.spouseNoOasIncomeLimit}, gis table 3)`, async () => {
     const input = {
       incomeAvailable: true,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+      income: legalValues.gis.spouseNoOasIncomeLimit,
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -49,15 +49,15 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW - 1,
+      income: legalValues.gis.spouseNoOasIncomeLimit - 1,
     })
     expectOasGisEligible(res)
     expect(res.body.results.gis.entitlement.result).toEqual(0.79) // table 3
   })
-  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
+  it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.gis.spouseOasIncomeLimit}, gis table 2)`, async () => {
     const input = {
       incomeAvailable: true,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
+      income: legalValues.gis.spouseOasIncomeLimit,
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -81,15 +81,15 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS - 1,
+      income: legalValues.gis.spouseOasIncomeLimit - 1,
     })
     expectOasGisEligible(res)
     expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 2
   })
-  it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}, gis table 2)`, async () => {
+  it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.gis.spouseOasIncomeLimit}, gis table 2)`, async () => {
     const input = {
       incomeAvailable: true,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
+      income: legalValues.gis.spouseOasIncomeLimit,
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -113,7 +113,7 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
-      income: legalValues.MAX_GIS_INCOME_PARTNER_OAS - 1,
+      income: legalValues.gis.spouseOasIncomeLimit - 1,
     })
     expectOasGisEligible(res)
     expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 2
@@ -121,7 +121,7 @@ describe('Help Me Find Out scenarios', () => {
   it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
     const input = {
       incomeAvailable: true,
-      income: legalValues.MAX_ALW_INCOME, // too high for allowance
+      income: legalValues.alw.alwIncomeLimit, // too high for allowance
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -145,7 +145,7 @@ describe('Help Me Find Out scenarios', () => {
   it('works when client old, partner young (partner=allowance, therefore gis table 4)', async () => {
     const input = {
       incomeAvailable: true,
-      income: legalValues.MAX_ALW_INCOME - 1, // okay for allowance
+      income: legalValues.alw.alwIncomeLimit - 1, // okay for allowance
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,

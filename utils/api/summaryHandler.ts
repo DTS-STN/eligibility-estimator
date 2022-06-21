@@ -13,7 +13,7 @@ import {
   ProcessedInputWithPartner,
   SummaryObject,
 } from './definitions/types'
-import { legalValues } from './scrapers/output'
+import legalValues from './scrapers/output'
 
 export class SummaryHandler {
   private readonly state: EstimationSummaryState
@@ -152,7 +152,7 @@ export class SummaryHandler {
     // special situation links
     if (
       this.input.client.income.provided &&
-      this.input.client.income.relevant >= legalValues.MAX_OAS_INCOME
+      this.input.client.income.relevant >= legalValues.oas.incomeLimit
     )
       links.push(availableLinks.oasMaxIncome)
     if (
@@ -164,8 +164,8 @@ export class SummaryHandler {
       links.push(availableLinks.oasPartial)
     if (
       this.input.client.income.provided &&
-      this.input.client.income.relevant > legalValues.OAS_RECOVERY_TAX_CUTOFF &&
-      this.input.client.income.relevant < legalValues.MAX_OAS_INCOME
+      this.input.client.income.relevant > legalValues.oas.clawbackIncomeLimit &&
+      this.input.client.income.relevant < legalValues.oas.incomeLimit
     )
       links.push(availableLinks.oasRecoveryTax)
     if (

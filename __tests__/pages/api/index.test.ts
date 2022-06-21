@@ -7,7 +7,7 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
-import { legalValues } from '../../../utils/api/scrapers/output'
+import legalValues from '../../../utils/api/scrapers/output'
 import {
   age60NoDefer,
   age65NoDefer,
@@ -259,7 +259,7 @@ describe('basic Allowance for Survivor scenarios', () => {
   it('returns "ineligible due to age" when age 65 and high income', async () => {
     const res = await mockPartialGetRequest({
       incomeAvailable: true,
-      income: legalValues.MAX_AFS_INCOME + 1,
+      income: legalValues.alw.afsIncomeLimit + 1,
       ...age65NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,

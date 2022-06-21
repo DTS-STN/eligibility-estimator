@@ -7,7 +7,7 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import { ResponseSuccess } from '../../../utils/api/definitions/types'
-import { legalValues } from '../../../utils/api/scrapers/output'
+import legalValues from '../../../utils/api/scrapers/output'
 import { MockResponseObject } from './factory'
 
 export function expectAlwAfsTooOld(res: MockResponseObject<ResponseSuccess>) {
@@ -56,7 +56,7 @@ export function expectOasEligible(
   expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(res.body.results.oas.entitlement.type).toEqual(oasType)
   if (oasType === EntitlementResultType.FULL && !entitlement)
-    entitlement = legalValues.MAX_OAS_ENTITLEMENT
+    entitlement = legalValues.oas.amount
   if (entitlement)
     expect(res.body.results.oas.entitlement.result).toEqual(entitlement)
 }
