@@ -157,7 +157,6 @@ export const Form = types
     },
     // used for calling the main benefit processor
     buildObjectWithFormData(language: Language): { [key: string]: string } {
-      console.log('buildObjectWithFormData')
       let input = { _language: language }
       for (const field of self.fields) {
         if (!field.value) continue
@@ -165,16 +164,22 @@ export const Form = types
       }
       return input
     },
-    // used for calling the main benefit processor using the array from the internal state
-    buildArrayWithFormData(language: Language): [string, string][] {
-      console.log('buildArrayWithFormData')
+    // used internally for the UI
+    buildArrayWithFormData(): [FieldKey, string][] {
       let input = []
-      input.push(['_language', language])
       self.sortFields()
       for (const field of self.fields) {
         if (!field.value) continue
         input.push([field.key, field.sanitizeInput()])
       }
+      return input
+    },
+  }))
+  .actions((self) => ({
+    // used for calling the main benefit processor using the array from the internal state
+    buildArrayWithFormDataAndLanguage(language: Language): [string, string][] {
+      let input: [string, string][] = self.buildArrayWithFormData()
+      input.push(['_language', language])
       return input
     },
     // used for API requests, which is currently for the CSV function
@@ -191,7 +196,9 @@ export const Form = types
   .actions((self) => ({
     saveInputsToState: flow(function* () {
       const parent = getParent(self) as Instance<typeof RootStore>
-      const inputArray = self.buildArrayWithFormData(parent.langBrowser)
+      const inputArray = self.buildArrayWithFormDataAndLanguage(
+        parent.langBrowser
+      )
       parent.setInputs(inputArray)
       parent.saveStoreState()
     }),

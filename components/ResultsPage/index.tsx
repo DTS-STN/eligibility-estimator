@@ -51,7 +51,7 @@ export const ResultsPage: React.VFC = () => {
         <div className="col-span-1">
           <YourAnswers
             title={tsln.resultsPage.whatYouToldUs}
-            inputs={root.form.buildArrayWithFormData(tsln._language)}
+            inputs={root.form.buildArrayWithFormData()}
           />
         </div>
       </div>

@@ -11,14 +11,9 @@ import { useTranslation } from '../Hooks'
 
 export const YourAnswers: React.VFC<{
   title: string
-  inputs: Array<[string, string]>
+  inputs: Array<[FieldKey, string]>
 }> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
-
-  // remove language from the array, we don't need to display that to the user
-  const inputsFiltered: Array<[FieldKey, string]> = inputs.filter(
-    (input) => input[0] !== '_language'
-  ) as Array<[FieldKey, string]>
 
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
   const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
@@ -30,11 +25,10 @@ export const YourAnswers: React.VFC<{
    * Otherwise, the content will be built.
    */
   function getMainContent(): JSX.Element {
-    if (inputsFiltered.length === 0)
-      return <div className="py-4">No answers found</div>
+    if (inputs.length === 0) return <div className="py-4">No answers found</div>
     return (
       <>
-        {inputsFiltered.map((input) => {
+        {inputs.map((input) => {
           const fieldKey: FieldKey = input[0]
           return (
             <div key={fieldKey} className="py-4 border-b-2 border-info-border">
