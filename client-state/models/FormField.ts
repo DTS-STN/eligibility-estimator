@@ -3,18 +3,23 @@ import { Form } from './Form'
 
 export const KeyValue = types.model({
   key: types.string,
-  text: types.string,
+  text: types.maybe(types.string),
 })
 
 export const Category = KeyValue.named('Category')
 export const Options = KeyValue.named('Options')
 export const Default = KeyValue.named('Default')
 
+// const Node: IModelType<Partial<INode>, INode> = types.model({
+//   childs: types.optional(types.array(types.late(() => Node)), [])
+// })
+
 export const FormField = types
   .model({
     key: types.string,
     type: types.string,
-    label: types.string,
+    subFields: types.optional(types.array(types.late(() => FormField)), []),
+    label: types.maybe(types.string),
     helpText: types.maybe(types.string),
     category: Category,
     placeholder: types.maybe(types.string),

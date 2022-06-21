@@ -163,6 +163,13 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     return fields.map((field: FormFieldType) => {
       return (
         <div key={field.key}>
+          {field.type === FieldType.CONTAINER &&
+            console.log(
+              'SUBFIELDS',
+              field.subFields
+            )
+            // console.log(`field.subFields`, field.subFields)
+          }
           {field.type === FieldType.NUMBER && (
             <div className="pb-4">
               <NumberField

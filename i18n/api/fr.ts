@@ -40,11 +40,11 @@ const fr: Translations = {
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     birthMonth: 'What month were you born?',
     birthYear: 'What year were you born?',
-    age: 'Quel âge avez-vous?',
+    age: 'What month and year were you born?', // TODO: replace with French
     oasDefer: 'Quand souhaitez-vous commencer à recevoir la SV?',
-    oasMonth: 'Month',
-    oasYear: 'Year',
-    oasAge: "Entrez l'âge auquel vous souhaitez commencer à recevoir la SV.",
+    oasMonth: 'Month', // TODO: replace with French
+    oasYear: 'Year', // TODO: replace with French
+    oasAge: '',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous?',
     legalStatus: 'Quel est votre statut légal au Canada?',

@@ -96,6 +96,7 @@ export const Form = types
     },
     setupForm(data: FieldData[]): void {
       console.log('setting up form')
+      console.log(`data`, data)
       data.map((fieldData) => {
         const field = self.getFieldByKey(fieldData?.key)
         console.log('setting up field', fieldData.label)
@@ -103,14 +104,17 @@ export const Form = types
         let placeholder,
           defaultValue,
           options = undefined,
-          helpText = undefined
+          helpText = undefined,
+          subFields = undefined
         if ('default' in fieldData) defaultValue = fieldData.default
         if ('placeholder' in fieldData) placeholder = fieldData.placeholder
         if ('values' in fieldData) options = fieldData.values
         if ('helpText' in fieldData) helpText = fieldData.helpText
-
+        if ('subFields' in fieldData) subFields = fieldData.subFields
+        console.log(`subFields`, subFields)
         // field does not exist, add it
         if (!field) {
+          console.log('inside NOT FIELD')
           self.addField({
             key: fieldData.key,
             type: fieldData.type,
@@ -124,6 +128,7 @@ export const Form = types
             options: options,
             value: defaultValue ?? null,
             helpText: helpText ?? null,
+            subFields: subFields,
           })
           self.fields.sort(BenefitHandler.sortFields)
         }

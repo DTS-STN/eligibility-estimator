@@ -194,9 +194,7 @@ export class BenefitHandler {
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
       FieldKey.INCOME,
-      FieldKey.BIRTH_MONTH,
-      FieldKey.BIRTH_YEAR,
-      // FieldKey.AGE,
+      FieldKey.AGE,
       FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
@@ -207,8 +205,7 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.oasDefer) {
-      requiredFields.push(FieldKey.OAS_MONTH)
-      requiredFields.push(FieldKey.OAS_YEAR)
+      requiredFields.push(FieldKey.OAS_AGE)
     }
     if (
       (this.input.client.livingCountry.canada &&
@@ -225,9 +222,7 @@ export class BenefitHandler {
       )
       if (this.input.client.partnerBenefitStatus.helpMe) {
         requiredFields.push(
-          // FieldKey.PARTNER_AGE,
-          FieldKey.PARTNER_BIRTH_MONTH,
-          FieldKey.PARTNER_BIRTH_YEAR,
+          FieldKey.PARTNER_AGE,
           FieldKey.PARTNER_LEGAL_STATUS,
           FieldKey.PARTNER_LIVING_COUNTRY,
           FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
@@ -464,7 +459,8 @@ export class BenefitHandler {
 
       // translate label/question
       const label = translations.question[fieldData.key]
-      if (!label) throw new Error(`no question for key ${fieldData.key}`)
+      if (label === undefined)
+        throw new Error(`no question for key ${fieldData.key}`) // TODO: consider changing type definitions to allow NO label
       fieldData.label = label
 
       // translate question help text

@@ -36,6 +36,7 @@ export enum FieldType {
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
   STRING = 'string',
+  CONTAINER = 'container',
 }
 
 // the order of fields here will define the order within the application
@@ -53,7 +54,19 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
+    type: FieldType.CONTAINER,
+    subFields: [
+      {
+        key: FieldKey.BIRTH_MONTH,
+        category: { key: FieldCategory.AGE },
+        type: FieldType.NUMBER,
+      },
+      {
+        key: FieldKey.BIRTH_YEAR,
+        category: { key: FieldCategory.AGE },
+        type: FieldType.NUMBER,
+      },
+    ],
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
@@ -73,7 +86,19 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.OAS_AGE]: {
     key: FieldKey.OAS_AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
+    type: FieldType.CONTAINER,
+    subFields: [
+      {
+        key: FieldKey.BIRTH_MONTH,
+        category: { key: FieldCategory.AGE },
+        type: FieldType.NUMBER,
+      },
+      {
+        key: FieldKey.BIRTH_YEAR,
+        category: { key: FieldCategory.AGE },
+        type: FieldType.NUMBER,
+      },
+    ],
   },
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
@@ -140,7 +165,19 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.NUMBER,
+    type: FieldType.CONTAINER,
+    subFields: [
+      {
+        key: FieldKey.BIRTH_MONTH,
+        category: { key: FieldCategory.AGE },
+        type: FieldType.NUMBER,
+      },
+      {
+        key: FieldKey.BIRTH_YEAR,
+        category: { key: FieldCategory.AGE },
+        type: FieldType.NUMBER,
+      },
+    ],
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -184,6 +221,7 @@ export type FieldData =
   | FieldDataRadio
   | FieldDataDropdown
   | FieldDataString
+  | FieldDataContainer
 
 interface FieldDataGeneric {
   key: FieldKey
@@ -194,6 +232,11 @@ interface FieldDataGeneric {
     key: FieldCategory
     text?: string // applied via translator
   }
+}
+
+interface FieldDataContainer extends FieldDataGeneric {
+  type: FieldType.CONTAINER
+  subFields: FieldData[]
 }
 
 interface FieldDataCurrency extends FieldDataGeneric {
