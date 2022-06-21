@@ -24,10 +24,6 @@ export const ResultsPage: React.VFC = () => {
 
   const questionsAndAnswers = root.inputs
 
-  const tempUntilNewComponentIsFixed = (
-    <span dangerouslySetInnerHTML={{ __html: root.summary.details }}></span>
-  )
-
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
@@ -38,7 +34,8 @@ export const ResultsPage: React.VFC = () => {
             alert_icon_id="resultIdInfo"
             alert_icon_alt_text="Info"
             message_heading={root.summary.title}
-            message_body={tempUntilNewComponentIsFixed}
+            message_body={root.summary.details}
+            asHtml={true}
           />
 
           <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
