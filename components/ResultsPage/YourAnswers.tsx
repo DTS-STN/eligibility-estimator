@@ -1,13 +1,12 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
-import { useRouter } from 'next/router'
 import { numberToStringCurrency } from '../../i18n/api'
-import { livingCountry as enCountry } from '../../i18n/api/countries/en'
-import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
-import en from '../../i18n/api/en'
-import fr from '../../i18n/api/fr'
 import { WebTranslations } from '../../i18n/web'
-import { Locale } from '../../utils/api/definitions/enums'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
+import {
+  FieldData,
+  FieldKey,
+  FieldType,
+} from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 
 export const YourAnswers: React.VFC<{
@@ -15,184 +14,80 @@ export const YourAnswers: React.VFC<{
   inputs: Array<[string, string]>
 }> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
-  const currentLocale = useRouter().locale
-  const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
-  const inputsFiltered: Array<[string, string]> = inputs.filter(
+  // remove language from the array, we don't need to display that to the user
+  const inputsFiltered: Array<[FieldKey, string]> = inputs.filter(
     (input) => input[0] !== '_language'
+  ) as Array<[FieldKey, string]>
+
+  // allFieldData is the full configuration for ALL fields - not only the visible ones.
+  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
+    tsln._language
   )
-  const answersKeys: string[] = inputsFiltered.map(([key, _]) => key)
 
-  function getLivingCountry(country: string): { key: string; text: string } {
-    if (country === undefined) return undefined
-    if (currentLocale == 'en')
-      return enCountry.find((val) => val.key === country)
-    else return frCountry.find((val) => val.key === country)
-  }
-
-  function getLegalStatus(status: string): { key: string; text: string } {
-    if (status === undefined) return undefined
-    if (currentLocale == 'en')
-      return en.questionOptions.legalStatus.find((val) => val.key === status)
-    else return fr.questionOptions.legalStatus.find((val) => val.key === status)
-  }
-
-  function getMaritalStatus(status: string): { key: string; text: string } {
-    if (status === undefined) return undefined
-    if (currentLocale == 'en')
-      return en.questionOptions.maritalStatus.find((val) => val.key === status)
-    else
-      return fr.questionOptions.maritalStatus.find((val) => val.key === status)
-  }
-
-  function getPartnerBenefitStatus(status: string): {
-    key: string
-    text: string
-  } {
-    if (status === undefined) return undefined
-    if (currentLocale == 'en')
-      return en.questionOptions.partnerBenefitStatus.find(
-        (val) => val.key === status
-      )
-    else
-      return fr.questionOptions.partnerBenefitStatus.find(
-        (val) => val.key === status
-      )
-  }
-
-  if (answersKeys.length === 0)
+  /**
+   * Generates the main content. If no answers are found, we display that.
+   * Otherwise, the content will be built.
+   */
+  function getMainContent(): JSX.Element {
+    if (inputsFiltered.length === 0)
+      return <div className="py-4">No answers found</div>
     return (
-      <div className="fz-10">
-        <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
-          <h3 className="h3">{title}</h3>
-          <div className="py-4">No answers found</div>
-        </div>
-      </div>
+      <>
+        {inputsFiltered.map((input) => {
+          const fieldKey: FieldKey = input[0]
+          return (
+            <div key={fieldKey} className="py-4 border-b-2 border-info-border">
+              {tsln.resultsQuestions[fieldKey]} <br />
+              <strong>{getDisplayValue(input)}</strong> &nbsp;
+              <DSLink
+                id={`edit-${fieldKey}`}
+                href={`/eligibility#${fieldKey}`}
+                text="Edit"
+                target="_self"
+              />
+            </div>
+          )
+        })}
+      </>
     )
+  }
 
-  let fieldValue: string = ''
-  let fieldYearsValue: string = ''
-
-  if (answersKeys.length !== 0)
-    return (
-      <div className="fz-10">
-        <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
-          <h3 className="h3">{title}</h3>
-
-          {answersKeys.map((field, index) => {
-            fieldValue = ''
-            fieldYearsValue = ''
-
-            {
-              ;(() => {
-                switch (field) {
-                  case FieldKey.LEGAL_STATUS:
-                    fieldValue = getLegalStatus(inputsFiltered[index][1]).text
-                    break
-                  case FieldKey.LIVING_COUNTRY:
-                    fieldValue = getLivingCountry(inputsFiltered[index][1]).text
-                    break
-                  case FieldKey.MARITAL_STATUS:
-                    fieldValue = getMaritalStatus(inputsFiltered[index][1]).text
-                    break
-                  case FieldKey.PARTNER_BENEFIT_STATUS:
-                    fieldValue = getPartnerBenefitStatus(
-                      inputsFiltered[index][1]
-                    ).text
-                    break
-                  case FieldKey.INCOME:
-                    fieldValue = numberToStringCurrency(
-                      Number(inputsFiltered[index][1]),
-                      locale
-                    )
-                    break
-                  case FieldKey.LIVED_OUTSIDE_CANADA:
-                  case FieldKey.PARTNER_LIVED_OUTSIDE_CANADA:
-                    fieldValue = inputsFiltered[index][1]
-                    break
-                  case FieldKey.YEARS_IN_CANADA_SINCE_18:
-                    fieldYearsValue = inputsFiltered[index][1]
-                    break
-                  default:
-                    fieldValue = inputsFiltered[index][1]
-                }
-              })()
-            }
-
-            return (
-              // field 'Years in Canada' is display with the answer 'Lived Outside Canada'
-
-              field !== FieldKey.YEARS_IN_CANADA_SINCE_18 &&
-                field !== FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 ? (
-                // process answer 'Lived Outside Canada'
-
-                field === FieldKey.LIVED_OUTSIDE_CANADA ||
-                field === FieldKey.PARTNER_LIVED_OUTSIDE_CANADA ? (
-                  inputsFiltered[index][1] === 'true' ? (
-                    <div
-                      key={index}
-                      className="py-4 border-b-2 border-info-border"
-                    >
-                      {tsln.resultsQuestions[inputsFiltered[index][0]]} <br />
-                      <strong>{tsln.yes}</strong> &nbsp;
-                      <DSLink
-                        id={`helpLink${inputsFiltered[index][0]}`}
-                        href="/eligibility#liveOutsideCanada-0"
-                        text="Edit"
-                        target="_self"
-                      />
-                      <br />
-                      <strong>{fieldYearsValue}</strong> &nbsp;
-                      {Number(fieldYearsValue) > 1
-                        ? tsln.years
-                        : tsln.year}{' '}
-                      &nbsp;
-                      <DSLink
-                        id={`helpLink${inputsFiltered[index][0]}`}
-                        href="/eligibility#yearsInCanadaSince18"
-                        text="Edit"
-                        target="_self"
-                      />
-                    </div>
-                  ) : (
-                    <div
-                      key={index}
-                      className="py-4 border-b-2 border-info-border"
-                    >
-                      {tsln.resultsQuestions[inputsFiltered[index][0]]} <br />
-                      <strong>{tsln.no}</strong> &nbsp;
-                      <DSLink
-                        id={`helpLink${inputsFiltered[index][0]}`}
-                        href="/eligibility#react-select-3-live-region"
-                        text="Edit"
-                        target="_self"
-                      />
-                    </div>
-                  )
-                ) : (
-                  // default display for all others types of answers
-
-                  <div
-                    key={index}
-                    className="py-4 border-b-2 border-info-border"
-                  >
-                    {tsln.resultsQuestions[inputsFiltered[index][0]]} <br />
-                    <strong>{fieldValue}</strong> &nbsp;
-                    <DSLink
-                      id={`helpLink${inputsFiltered[index][0]}`}
-                      href="/eligibility#age"
-                      text="Edit"
-                      target="_self"
-                    />
-                  </div>
-                )
-              ) : (
-                // do nothing when the field is 'Years in Canada'
-                <span key={index}> </span>
-              )
-            )
-          })}
-        </div>
-      </div>
+  /**
+   * Accepts an "input object" (a two-item array with the FieldKey and the user's input),
+   * and returns the string that should be displayed in the UI.
+   */
+  function getDisplayValue(input: [FieldKey, string]): string {
+    const fieldKey: FieldKey = input[0]
+    const fieldValue: string = input[1]
+    const fieldData: FieldData = allFieldData.find(
+      (fieldData) => fieldData.key === fieldKey
     )
+    const fieldType: FieldType = fieldData.type
+    switch (fieldType) {
+      case FieldType.NUMBER:
+      case FieldType.STRING:
+        return fieldValue // no processing needed, display as-is
+      case FieldType.CURRENCY:
+        return numberToStringCurrency(Number(fieldValue), tsln._locale)
+      case FieldType.DROPDOWN:
+      case FieldType.DROPDOWN_SEARCHABLE:
+      case FieldType.RADIO:
+      case FieldType.BOOLEAN:
+        if ('values' in fieldData)
+          return fieldData.values.find((value) => value.key === fieldValue).text
+        throw new Error(`values not found for field: ${fieldKey}`)
+      default:
+        throw new Error(`field type not supported in YourAnswers: ${fieldType}`)
+    }
+  }
+
+  return (
+    <div className="fz-10">
+      <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
+        <h3 className="h3">{title}</h3>
+        {getMainContent()}
+      </div>
+    </div>
+  )
 }
