@@ -72,6 +72,8 @@ const fr: Translations = {
   questionHelp: {
     incomeAvailable:
       'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
+    partnerIncomeAvailable:
+      'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
     age: 'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
     oasDefer:
       'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',

@@ -68,6 +68,8 @@ const en: Translations = {
   questionHelp: {
     incomeAvailable:
       'Providing your income will give you more helpful and accurate results.',
+    partnerIncomeAvailable:
+      "Providing your partner's income will give you more helpful and accurate results.",
     age: 'You can enter your current age, or a future age for planning purposes.',
     oasDefer:
       'If you already receive OAS, enter when you started receiving it.</br>Learn more about {LINK_OAS_DEFER_INLINE}.',
