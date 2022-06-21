@@ -201,9 +201,6 @@ export class BenefitHandler {
     if (this.input.client.income.clientAvailable) {
       requiredFields.push(FieldKey.INCOME)
     }
-    if (this.input.client.income.partnerAvailable) {
-      requiredFields.push(FieldKey.PARTNER_INCOME)
-    }
     if (
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
@@ -213,10 +210,13 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
-      requiredFields.push(
-        FieldKey.PARTNER_INCOME_AVAILABLE,
-        FieldKey.PARTNER_BENEFIT_STATUS
-      )
+      requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+      // only ask for partner income if client income is available
+      if (this.input.client.income.clientAvailable) {
+        requiredFields.push(FieldKey.PARTNER_INCOME_AVAILABLE)
+        if (this.input.client.income.partnerAvailable)
+          requiredFields.push(FieldKey.PARTNER_INCOME)
+      }
       if (this.input.client.partnerBenefitStatus.helpMe) {
         requiredFields.push(
           FieldKey.PARTNER_AGE,
