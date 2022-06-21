@@ -176,14 +176,14 @@ export class SummaryHandler {
     if (this.input.client.age >= 65) links.push(availableLinks.oasRetroactive)
 
     // apply links
-    if (this.results.oas?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.oasApply)
-    if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.gisApply)
-    if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.alwApply)
-    if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(availableLinks.afsApply)
+    for (const benefitKey in this.results) {
+      const resultKey: ResultKey = this.results[benefitKey]?.eligibility.result
+      if (
+        resultKey === ResultKey.ELIGIBLE ||
+        resultKey === ResultKey.INCOME_DEPENDENT
+      )
+        links.push(availableLinks[`${benefitKey}Apply`])
+    }
 
     links.sort((a, b) => a.order - b.order)
     return links
