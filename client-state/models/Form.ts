@@ -7,7 +7,11 @@ import {
 } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import {
+  FieldData,
+  fieldDefinitions,
+  FieldKey,
+} from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
@@ -54,11 +58,25 @@ export const Form = types
         self.fields.remove(field)
       }
     },
+    sortFields(): void {
+      self.fields.sort(
+        (
+          a: Instance<typeof FormField>,
+          b: Instance<typeof FormField>
+        ): number => {
+          const keyList: string[] = Object.keys(fieldDefinitions)
+          const indexA: number = keyList.findIndex((value) => value === a.key)
+          const indexB: number = keyList.findIndex((value) => value === b.key)
+          return indexA - indexB
+        }
+      )
+    },
   }))
   .actions((self) => ({
     addField(data: SnapshotIn<typeof FormField>): void {
       try {
         self.fields.push({ ...data })
+        self.sortFields()
       } catch (error) {
         console.log('error occurred while adding field to self.fields', error)
       }
@@ -125,7 +143,6 @@ export const Form = types
             value: defaultValue ?? null,
             helpText: helpText ?? null,
           })
-          self.fields.sort(BenefitHandler.sortFields)
         }
         // field does exist, update if any data has changed
         else if (field.label !== fieldData.label) {
