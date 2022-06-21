@@ -5,7 +5,7 @@ import {
   PartnerBenefitStatusHelper,
 } from '../helpers/fieldClasses'
 import roundToTwo from '../helpers/roundToTwo'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 
 export enum GisSituation {
   SINGLE = 'SINGLE',
@@ -25,29 +25,26 @@ export class EntitlementFormula {
 
   // 7824
   private incuta3: number =
-    Math.round(legalValues.MAX_OAS_ENTITLEMENT / 4 + 0.5) *
-    (this.gisIncrements * 2)
+    Math.round(legalValues.oas.amount / 4 + 0.5) * (this.gisIncrements * 2)
 
   // 10416
   private incuta5: number =
-    Math.round(legalValues.MAX_OAS_ENTITLEMENT / 3 + 0.5) *
-    (this.gisIncrements * 2)
+    Math.round(legalValues.oas.amount / 3 + 0.5) * (this.gisIncrements * 2)
 
   // 224.11
   private covpam = roundToTwo(
-    legalValues.MAX_GIS_AMOUNT_SINGLE -
-      legalValues.MAX_GIS_TOPUP_SINGLE -
-      (legalValues.MAX_GIS_AMOUNT_PARTNER_OAS -
-        legalValues.MAX_GIS_TOPUP_PARTNER) -
-      (Math.round(legalValues.MAX_OAS_ENTITLEMENT / 3 + 0.5) -
-        Math.round(legalValues.MAX_OAS_ENTITLEMENT / 4 + 0.5))
+    legalValues.gis.singleAmount -
+      legalValues.topUp.single -
+      (legalValues.gis.spouseOasAmount - legalValues.topUp.married) -
+      (Math.round(legalValues.oas.amount / 3 + 0.5) -
+        Math.round(legalValues.oas.amount / 4 + 0.5))
   )
 
   // 25632
   private covpin: number =
     Math.round(
-      legalValues.MAX_GIS_AMOUNT_SINGLE -
-        legalValues.MAX_GIS_TOPUP_SINGLE -
+      legalValues.gis.singleAmount -
+        legalValues.topUp.single -
         2 * this.covpam +
         0.5
     ) *
@@ -58,17 +55,15 @@ export class EntitlementFormula {
   private covpin5: number =
     this.incuta5 +
     Math.round(
-      legalValues.MAX_GIS_AMOUNT_PARTNER_OAS -
-        legalValues.MAX_GIS_TOPUP_PARTNER +
-        0.5
+      legalValues.gis.spouseOasAmount - legalValues.topUp.married + 0.5
     ) *
       (this.gisIncrements * 2)
 
   // 669.73
   private covp5: number = roundToTwo(
-    legalValues.MAX_GIS_AMOUNT_SINGLE_AFS -
-      legalValues.MAX_GIS_TOPUP_SINGLE -
-      legalValues.MAX_OAS_ENTITLEMENT
+    legalValues.alw.afsAmount -
+      legalValues.topUp.single -
+      legalValues.oas.amount
   )
 
   /**
@@ -101,7 +96,7 @@ export class EntitlementFormula {
     // It is assumed that this does not affect ALW/AFS, though this is not confirmed.
     if (this.oasResult?.entitlement.type === EntitlementResultType.PARTIAL) {
       const oasCoverageAmount =
-        legalValues.MAX_OAS_ENTITLEMENT - this.oasResult.entitlement.result
+        legalValues.oas.amount - this.oasResult.entitlement.result
       return roundToTwo(preOasAmount + oasCoverageAmount)
     } else return preOasAmount
   }
@@ -221,17 +216,15 @@ export class EntitlementFormula {
       this.gisSituation === GisSituation.PARTNER_ALW &&
       this.calculationMethod === 'HIGH'
     ) {
-      return roundToTwo(
-        legalValues.MAX_GIS_AMOUNT_SINGLE - legalValues.MAX_GIS_TOPUP_SINGLE
-      )
+      return roundToTwo(legalValues.gis.singleAmount - legalValues.topUp.single)
     } else if (
       this.gisSituation === GisSituation.ALW &&
       this.calculationMethod === 'LOW'
     ) {
       return roundToTwo(
-        legalValues.MAX_GIS_AMOUNT_PARTNER_ALW -
-          legalValues.MAX_GIS_TOPUP_PARTNER +
-          legalValues.MAX_OAS_ENTITLEMENT
+        legalValues.gis.spouseAlwAmount -
+          legalValues.topUp.married +
+          legalValues.oas.amount
       )
     } else if (
       this.gisSituation === GisSituation.AFS &&
@@ -252,17 +245,17 @@ export class EntitlementFormula {
   private get basicMaxAmount() {
     switch (this.gisSituation) {
       case GisSituation.SINGLE:
-        return legalValues.MAX_GIS_AMOUNT_SINGLE
+        return legalValues.gis.singleAmount // high
       case GisSituation.PARTNER_OAS:
-        return legalValues.MAX_GIS_AMOUNT_PARTNER_OAS
+        return legalValues.gis.spouseOasAmount // low
       case GisSituation.PARTNER_NO_OAS:
-        return legalValues.MAX_GIS_AMOUNT_PARTNER_NO_OAS_NO_ALW
+        return legalValues.gis.spouseNoOasAmount // high
       case GisSituation.PARTNER_ALW:
-        return legalValues.MAX_GIS_AMOUNT_PARTNER_ALW
+        return legalValues.gis.spouseAlwAmount // low
       case GisSituation.ALW:
-        return legalValues.MAX_GIS_AMOUNT_SINGLE_ALW
+        return legalValues.gis.spouseAlwAmount // low
       case GisSituation.AFS:
-        return legalValues.MAX_GIS_AMOUNT_SINGLE_AFS
+        return legalValues.alw.afsAmount // highest
     }
   }
 
@@ -276,11 +269,11 @@ export class EntitlementFormula {
       case GisSituation.SINGLE:
       case GisSituation.AFS:
       case GisSituation.PARTNER_NO_OAS:
-        return legalValues.MAX_GIS_TOPUP_SINGLE
+        return legalValues.topUp.single
       case GisSituation.PARTNER_OAS:
       case GisSituation.PARTNER_ALW:
       case GisSituation.ALW:
-        return legalValues.MAX_GIS_TOPUP_PARTNER
+        return legalValues.topUp.married
     }
   }
 
