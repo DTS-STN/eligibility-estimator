@@ -96,10 +96,9 @@ export const YourAnswers: React.VFC<{
                   case FieldKey.LIVED_OUTSIDE_CANADA:
                   case FieldKey.PARTNER_LIVED_OUTSIDE_CANADA:
                     fieldValue = answers[index][1]
-                    fieldYearsValue =
-                      answers[
-                        answersKeys.indexOf(FieldKey.YEARS_IN_CANADA_SINCE_18)
-                      ][1]
+                  case FieldKey.YEARS_IN_CANADA_SINCE_18:
+                  case FieldKey.YEARS_IN_CANADA_SINCE_18:
+                    fieldYearsValue = answers[index][1]
                     break
                   default:
                     fieldValue = answers[index][1]
