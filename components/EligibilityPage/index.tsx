@@ -189,6 +189,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                 </div>
 
                 {field.subFields.map((subField: FormFieldType) => {
+                  console.log('front end subfield', subField.key)
                   return (
                     <div key={subField.key}>
                       <NumberField
@@ -202,7 +203,6 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                         )}
                         value={subField.value}
                         helpText={subField.helpText}
-                        required
                       />
                     </div>
                   )

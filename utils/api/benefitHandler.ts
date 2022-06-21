@@ -76,7 +76,6 @@ export class BenefitHandler {
   }
 
   get fieldData(): FieldData[] {
-    let testFieldData = []
     if (this._fieldData === undefined) {
       this._fieldData = BenefitHandler.getFieldData(
         this.requiredFields,
@@ -85,32 +84,13 @@ export class BenefitHandler {
 
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
-        testFieldData.push(field)
-        // @ts-ignore
-        if (field.subFields) {
-          console.log('has sub fields')
-          const fullSubFields = BenefitHandler.getFieldData(
-            // @ts-ignore
-            field.subFields.map((subField) => subField.key),
-            this.translations
-          )
-
-          console.log(`fullSubFields`, fullSubFields)
-
-          const fullField = { ...field, subFields: fullSubFields }
-          console.log(`fullField`, fullField)
-          // const everythingBut = this._fieldData.filter(f => f.key !== field.key)
-          // console.log(`everythingBut`, everythingBut)
-          // this._fieldData = [...everythingBut, fullField]
-          // testFieldData = testFieldData.map(f => f.key === field.key ? fullField : f) // this line breaks absolutely everything
-        }
         field.label = this.replaceTextVariables(field.label)
         field.helpText = this.replaceTextVariables(field.helpText)
       }
     }
 
     console.log(`this._fieldData`, this._fieldData)
-    return testFieldData
+    return this._fieldData
   }
 
   get benefitResults(): BenefitResultsObject {
@@ -476,6 +456,37 @@ export class BenefitHandler {
 
     // applies translations
     fieldDataList.map((fieldData) => {
+      // @ts-ignore
+      if (fieldData.subFields) {
+        console.log('has sub fields. Inside MAP')
+
+        const subFieldData = BenefitHandler.getFieldData(
+          // @ts-ignore
+          fieldData.subFields.map((subField) => subField.key),
+          translations
+        )
+
+        console.log(`fieldData`, fieldData)
+        console.log('subFieldData', subFieldData)
+        // @ts-ignore
+        fieldData.subFields = [
+          {
+            key: subFieldData[0].key,
+            category: { key: 'age', text: 'Age' },
+            type: 'number',
+            label: 'Month',
+            helpText: '',
+          },
+          {
+            key: 'birthYear',
+            category: { key: 'age', text: 'Age' },
+            type: 'number',
+            label: 'Year',
+            helpText: '',
+          },
+        ]
+      }
+
       // translate category
       const category = translations.category[fieldData.category.key]
       if (!category)
@@ -539,3 +550,23 @@ export class BenefitHandler {
     return indexA - indexB
   }
 }
+
+// console.log(`field`, field)
+//         // @ts-ignore
+//         if (field.subFields) {
+//           console.log('has sub fields')
+//           const fullSubFields = BenefitHandler.getFieldData(
+//             // @ts-ignore
+//             field.subFields.map((subField) => subField.key),
+//             this.translations
+//           )
+
+//           console.log(`fullSubFields`, fullSubFields)
+
+//           const fullField = { ...field, subFields: fullSubFields }
+//           console.log(`fullField`, fullField)
+//           // const everythingBut = this._fieldData.filter(f => f.key !== field.key)
+//           // console.log(`everythingBut`, everythingBut)
+//           // this._fieldData = [...everythingBut, fullField]
+//           this._fieldData = this._fieldData.map(f => f.key === field.key ? fullField : f) // this line breaks absolutely everything
+//         }
