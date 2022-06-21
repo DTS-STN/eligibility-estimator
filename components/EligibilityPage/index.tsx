@@ -161,13 +161,53 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     )
 
     return fields.map((field: FormFieldType) => {
+      const requiredText = useTranslation<string>('required')
       return (
         <div key={field.key}>
           {field.type === FieldType.CONTAINER && (
             <div className="pb-4">
-              {field.subFields.map((subField: FormFieldType) => {
-                return <div key={field.key}>{subField.key}</div>
-              })}
+              <>
+                <div className="mb-2.5">
+                  <label
+                    htmlFor={field.key}
+                    aria-label={field.key}
+                    data-testid="number-input-label"
+                    className="text-content font-bold inline mb-2.5"
+                  >
+                    {field.label}
+                  </label>
+
+                  <span>
+                    <span className="ml-1">({requiredText})</span>
+                  </span>
+
+                  {field.helpText && (
+                    <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
+                      {field.helpText}
+                    </div>
+                  )}
+                </div>
+
+                {field.subFields.map((subField: FormFieldType) => {
+                  return (
+                    <div key={subField.key}>
+                      <NumberField
+                        type={subField.type}
+                        name={subField.key}
+                        label={subField.label}
+                        placeholder={field.placeholder ?? ''}
+                        onChange={debounce(
+                          (e) => handleOnChange(step, field, e),
+                          500
+                        )}
+                        value={subField.value}
+                        helpText={subField.helpText}
+                        required
+                      />
+                    </div>
+                  )
+                })}
+              </>
             </div>
           )}
           {field.type === FieldType.NUMBER && (

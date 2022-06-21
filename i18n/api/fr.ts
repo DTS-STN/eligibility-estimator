@@ -38,8 +38,8 @@ const fr: Translations = {
   question: {
     income:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    birthMonth: 'What month were you born?',
-    birthYear: 'What year were you born?',
+    birthMonth: 'Month', // TODO: replace with French
+    birthYear: 'Year', // TODO: replace with French
     age: 'What month and year were you born?', // TODO: replace with French
     oasDefer: 'Quand souhaitez-vous commencer à recevoir la SV?',
     oasMonth: 'Month', // TODO: replace with French

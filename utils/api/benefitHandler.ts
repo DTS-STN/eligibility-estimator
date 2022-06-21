@@ -1,3 +1,4 @@
+import { throws } from 'assert'
 import { getTranslations, Translations } from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
@@ -75,18 +76,41 @@ export class BenefitHandler {
   }
 
   get fieldData(): FieldData[] {
+    let testFieldData = []
     if (this._fieldData === undefined) {
       this._fieldData = BenefitHandler.getFieldData(
         this.requiredFields,
         this.translations
       )
+
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
+        testFieldData.push(field)
+        // @ts-ignore
+        if (field.subFields) {
+          console.log('has sub fields')
+          const fullSubFields = BenefitHandler.getFieldData(
+            // @ts-ignore
+            field.subFields.map((subField) => subField.key),
+            this.translations
+          )
+
+          console.log(`fullSubFields`, fullSubFields)
+
+          const fullField = { ...field, subFields: fullSubFields }
+          console.log(`fullField`, fullField)
+          // const everythingBut = this._fieldData.filter(f => f.key !== field.key)
+          // console.log(`everythingBut`, everythingBut)
+          // this._fieldData = [...everythingBut, fullField]
+          // testFieldData = testFieldData.map(f => f.key === field.key ? fullField : f) // this line breaks absolutely everything
+        }
         field.label = this.replaceTextVariables(field.label)
         field.helpText = this.replaceTextVariables(field.helpText)
       }
     }
-    return this._fieldData
+
+    console.log(`this._fieldData`, this._fieldData)
+    return testFieldData
   }
 
   get benefitResults(): BenefitResultsObject {
@@ -444,6 +468,7 @@ export class BenefitHandler {
     fields: FieldKey[],
     translations: Translations
   ): FieldData[] {
+    console.log('inside')
     // takes list of keys, builds list of definitions
     const fieldDataList = fields
       .sort(this.sortFields)

@@ -36,8 +36,8 @@ const en: Translations = {
   question: {
     income:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    birthMonth: 'What month were you born?',
-    birthYear: 'What year were you born?',
+    birthMonth: 'Month',
+    birthYear: 'Year',
     age: 'What month and year were you born?',
     oasDefer: 'When would you like to start receiving OAS?',
     oasMonth: 'Month',

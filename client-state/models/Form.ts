@@ -96,7 +96,6 @@ export const Form = types
     },
     setupForm(data: FieldData[]): void {
       console.log('setting up form')
-      console.log(`data`, data)
       data.map((fieldData) => {
         const field = self.getFieldByKey(fieldData?.key)
         console.log('setting up field', fieldData.label)
@@ -111,10 +110,9 @@ export const Form = types
         if ('values' in fieldData) options = fieldData.values
         if ('helpText' in fieldData) helpText = fieldData.helpText
         if ('subFields' in fieldData) subFields = fieldData.subFields
-        console.log(`subFields`, subFields)
+
         // field does not exist, add it
         if (!field) {
-          console.log('inside NOT FIELD')
           self.addField({
             key: fieldData.key,
             type: fieldData.type,
