@@ -2,11 +2,13 @@ import { Link as DSLink } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
+import { numberToStringCurrency } from '../../i18n/api'
 import { livingCountry as enCountry } from '../../i18n/api/countries/en'
 import { livingCountry as frCountry } from '../../i18n/api/countries/fr'
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
 import { FieldKey } from '../../utils/api/definitions/fields'
+import { Locale } from '../../utils/api/definitions/enums'
 
 export const YourAnswers: React.VFC<{
   title: string
@@ -14,6 +16,7 @@ export const YourAnswers: React.VFC<{
 }> = ({ title, questions }) => {
   const tsln = useTranslation<WebTranslations>()
   const currentLocale = useRouter().locale
+  const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
 
   const answers = questions.filter((question) => question[0] !== '_language')
   const answersKeys = answers.map(([key, _]) => key)
@@ -93,9 +96,16 @@ export const YourAnswers: React.VFC<{
                   case FieldKey.PARTNER_BENEFIT_STATUS:
                     fieldValue = getPartnerBenefitStatus(answers[index][1]).text
                     break
+                  case FieldKey.INCOME:
+                    fieldValue = numberToStringCurrency(
+                      Number(answers[index][1]),
+                      locale
+                    )
+                    break
                   case FieldKey.LIVED_OUTSIDE_CANADA:
                   case FieldKey.PARTNER_LIVED_OUTSIDE_CANADA:
                     fieldValue = answers[index][1]
+                    break
                   case FieldKey.YEARS_IN_CANADA_SINCE_18:
                   case FieldKey.YEARS_IN_CANADA_SINCE_18:
                     fieldYearsValue = answers[index][1]
@@ -147,7 +157,7 @@ export const YourAnswers: React.VFC<{
                       className="py-4 border-b-2 border-info-border"
                     >
                       {tsln.resultsQuestions[answers[index][0]]} <br />
-                      <strong>{tsln.no}</strong>
+                      <strong>{tsln.no}</strong> &nbsp;
                       <DSLink
                         id={`helpLink${answers[index][0]}`}
                         href="/eligibility#react-select-3-live-region"

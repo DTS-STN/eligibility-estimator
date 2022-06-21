@@ -3,6 +3,7 @@ import { WebTranslations } from '../../i18n/web'
 import { getTranslations } from '../../i18n/api'
 import { useStore, useTranslation } from '../Hooks'
 import { MessageBox } from './MessageBox'
+import { ResultKey } from '../../utils/api/definitions/enums'
 
 export const BenefitMessageBox: React.VFC<{
   eligible: boolean
@@ -14,23 +15,22 @@ export const BenefitMessageBox: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const trans = getTranslations(answers._language)
 
+  const eligibleBenefit: string =
+    eligible === true
+      ? ResultKey.ELIGIBLE.toString()
+      : ResultKey.INELIGIBLE.toString()
+
   return (
     <div className="my-16">
-      {benefits.filter(
-        (x) =>
-          root[x]?.eligibility?.result === trans.result.eligible.toLowerCase()
-      ).length >= 0 && (
+      {benefits.filter((x) => root[x]?.eligibility?.result === eligibleBenefit)
+        .length >= 0 && (
         <>
           <h2 id="next" className="h2 mt-5">
             {tsln.resultsPage.nextSteps}
           </h2>
 
           {benefits
-            .filter(
-              (x) =>
-                root[x]?.eligibility?.result ===
-                trans.result.eligible.toLowerCase()
-            )
+            .filter((x) => root[x]?.eligibility?.result === eligibleBenefit)
             .map((benefit, index) => (
               <div key={index}>
                 <MessageBox
