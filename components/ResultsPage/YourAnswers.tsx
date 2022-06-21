@@ -111,7 +111,6 @@ export const YourAnswers: React.VFC<{
                     fieldValue = inputsFiltered[index][1]
                     break
                   case FieldKey.YEARS_IN_CANADA_SINCE_18:
-                  case FieldKey.YEARS_IN_CANADA_SINCE_18:
                     fieldYearsValue = inputsFiltered[index][1]
                     break
                   default:
