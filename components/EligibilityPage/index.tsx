@@ -151,10 +151,6 @@ export const EligibilityPage: React.VFC = observer(({}) => {
    * Generates the raw HTML for each field (aka. child).
    */
 
-  // field should have a key "age":
-  //   - has category, label
-  //   - AND sub fields. Add param "hasSubFields". subfields: [fieldObject, fieldObject]
-  // Then here on the FE, as we iterate over fields, can isolate fields with subfields and iterate through subfields the way we want
   function generateChildren(step: Steps, keys: FieldKey[]): CardChildren {
     const fields: FormFieldType[] = form.fields.filter((field) =>
       keys.includes(field.key)
