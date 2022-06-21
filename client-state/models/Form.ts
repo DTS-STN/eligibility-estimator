@@ -170,6 +170,7 @@ export const Form = types
       console.log('buildArrayWithFormData')
       let input = []
       input.push(['_language', language])
+      self.sortFields()
       for (const field of self.fields) {
         if (!field.value) continue
         input.push([field.key, field.sanitizeInput()])
