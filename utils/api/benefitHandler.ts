@@ -448,7 +448,6 @@ export class BenefitHandler {
     fields: FieldKey[],
     translations: Translations
   ): FieldData[] {
-    console.log('inside')
     // takes list of keys, builds list of definitions
     const fieldDataList = fields
       .sort(this.sortFields)
@@ -458,33 +457,22 @@ export class BenefitHandler {
     fieldDataList.map((fieldData) => {
       // @ts-ignore
       if (fieldData.subFields) {
-        console.log('has sub fields. Inside MAP')
-
         const subFieldData = BenefitHandler.getFieldData(
           // @ts-ignore
           fieldData.subFields.map((subField) => subField.key),
           translations
         )
 
-        console.log(`fieldData`, fieldData)
-        console.log('subFieldData', subFieldData)
+        const fullSubFields = []
+        subFieldData.forEach((subField) => {
+          fullSubFields.push({
+            ...subField,
+            category: { ...subField.category },
+          })
+        })
+
         // @ts-ignore
-        fieldData.subFields = [
-          {
-            key: subFieldData[0].key,
-            category: { key: 'age', text: 'Age' },
-            type: 'number',
-            label: 'Month',
-            helpText: '',
-          },
-          {
-            key: 'birthYear',
-            category: { key: 'age', text: 'Age' },
-            type: 'number',
-            label: 'Year',
-            helpText: '',
-          },
-        ]
+        fieldData.subFields = fullSubFields
       }
 
       // translate category
