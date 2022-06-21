@@ -169,12 +169,12 @@ export const fieldDefinitions: FieldDefinitions = {
     subFields: [
       {
         key: FieldKey.BIRTH_MONTH,
-        category: { key: FieldCategory.AGE },
+        category: { key: FieldCategory.MARITAL },
         type: FieldType.NUMBER,
       },
       {
         key: FieldKey.BIRTH_YEAR,
-        category: { key: FieldCategory.AGE },
+        category: { key: FieldCategory.MARITAL },
         type: FieldType.NUMBER,
       },
     ],
