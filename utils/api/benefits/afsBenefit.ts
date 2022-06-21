@@ -26,7 +26,13 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < legalValues.alw.afsIncomeLimit
+
+    // if income is not provided, assume they meet the income requirement
+    const skipReqIncome = !this.input.income.provided
+    const maxIncome = legalValues.alw.afsIncomeLimit
+    const meetsReqIncome =
+      skipReqIncome || this.input.income.relevant < maxIncome
+
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -34,7 +40,15 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // main checks
     if (meetsReqLegal && meetsReqYears && meetsReqMarital && meetsReqIncome) {
-      if (meetsReqAge) {
+      if (meetsReqAge && skipReqIncome) {
+        return {
+          result: ResultKey.INCOME_DEPENDENT,
+          reason: ResultReason.INCOME_MISSING,
+          detail:
+            this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+          incomeMustBeLessThan: maxIncome,
+        }
+      } else if (meetsReqAge) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
@@ -133,11 +147,23 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
-    if (this.eligibility.result !== ResultKey.ELIGIBLE)
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
       return { result: 0, type: EntitlementResultType.NONE }
 
+    if (
+      !this.input.income.provided &&
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    )
+      return {
+        result: -1,
+        type: EntitlementResultType.UNAVAILABLE,
+      }
+
     const formulaResult = new EntitlementFormula(
-      this.income,
+      this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age

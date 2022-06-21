@@ -24,6 +24,7 @@ import {
  * Note: Do not require fields here, do it in the benefit-specific schemas.
  */
 export const RequestSchema = Joi.object({
+  incomeAvailable: Joi.boolean(),
   income: Joi.number()
     .precision(2)
     .min(0)
@@ -61,6 +62,7 @@ export const RequestSchema = Joi.object({
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
   ),
+  partnerIncomeAvailable: Joi.boolean(),
   partnerIncome: Joi.number()
     .precision(2)
     .min(0)

@@ -9,28 +9,31 @@ import {
 } from '../../../utils/api/definitions/enums'
 import legalValues from '../../../utils/api/scrapers/output'
 import {
+  age60NoDefer,
+  age65NoDefer,
   canadian,
   expectAlwEligible,
   expectOasEligible,
   expectOasGisEligible,
   expectOasGisTooYoung,
+  incomeZero,
+  partnerIncomeZero,
 } from './expectUtils'
 import { mockGetRequest } from './factory'
 
 describe('Help Me Find Out scenarios', () => {
   it(`works when client old, partner old (partner=noOas, therefore gis income limit ${legalValues.gis.spouseNoOasIncomeLimit}, gis table 3)`, async () => {
     const input = {
+      incomeAvailable: true,
       income: legalValues.gis.spouseNoOasIncomeLimit,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -53,17 +56,16 @@ describe('Help Me Find Out scenarios', () => {
   })
   it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.gis.spouseOasIncomeLimit}, gis table 2)`, async () => {
     const input = {
+      incomeAvailable: true,
       income: legalValues.gis.spouseOasIncomeLimit,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -86,17 +88,16 @@ describe('Help Me Find Out scenarios', () => {
   })
   it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.gis.spouseOasIncomeLimit}, gis table 2)`, async () => {
     const input = {
+      incomeAvailable: true,
       income: legalValues.gis.spouseOasIncomeLimit,
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -119,17 +120,16 @@ describe('Help Me Find Out scenarios', () => {
   })
   it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
     const input = {
+      incomeAvailable: true,
       income: legalValues.alw.alwIncomeLimit, // too high for allowance
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -144,17 +144,16 @@ describe('Help Me Find Out scenarios', () => {
   })
   it('works when client old, partner young (partner=allowance, therefore gis table 4)', async () => {
     const input = {
+      incomeAvailable: true,
       income: legalValues.alw.alwIncomeLimit - 1, // okay for allowance
-      age: 65,
-      oasDefer: false,
-      oasAge: undefined,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -168,17 +167,15 @@ describe('Help Me Find Out scenarios', () => {
   })
   it('works when client young, partner young (no one gets anything)', async () => {
     const input = {
-      income: 0,
-      age: 60,
-      oasDefer: false,
-      oasAge: undefined,
+      ...incomeZero,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -206,17 +203,15 @@ describe('Help Me Find Out scenarios', () => {
   })
   it('works when client young, partner old (partner=gis, therefore client alw eligible)', async () => {
     const input = {
-      income: 0,
-      age: 60,
-      oasDefer: false,
-      oasAge: undefined,
+      ...incomeZero,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -239,17 +234,15 @@ describe('Help Me Find Out scenarios', () => {
   })
   it('works when client young, partner old (partner=noGis, therefore client alw ineligible)', async () => {
     const input = {
-      income: 0,
-      age: 60,
-      oasDefer: false,
-      oasAge: undefined,
+      ...incomeZero,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.NO_AGREEMENT, // gis ineligible
       partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,

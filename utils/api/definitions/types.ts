@@ -8,6 +8,7 @@ import {
   PartnerBenefitStatusHelper,
 } from '../helpers/fieldClasses'
 import {
+  BenefitKey,
   EntitlementResultType,
   EstimationSummaryState,
   Language,
@@ -24,6 +25,7 @@ import { FieldData, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
+  incomeAvailable: boolean
   income: number // personal income
   age: number
   oasDefer: boolean
@@ -35,6 +37,7 @@ export interface RequestInput {
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
+  partnerIncomeAvailable: boolean
   partnerIncome: number // partner income
   partnerAge: number
   partnerLivingCountry: string // country code
@@ -72,10 +75,11 @@ export interface EligibilityResult {
   result: ResultKey
   reason: ResultReason
   detail: string
+  incomeMustBeLessThan?: number // for use when income is not provided
 }
 
 export interface EntitlementResultGeneric {
-  result: number
+  result: number // when type is unavailable, result should be -1
   type: EntitlementResultType
 }
 
@@ -90,6 +94,7 @@ export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
 export interface BenefitResult<
   T extends EntitlementResult = EntitlementResult
 > {
+  benefitKey: BenefitKey
   eligibility: EligibilityResult
   entitlement: T
 }
