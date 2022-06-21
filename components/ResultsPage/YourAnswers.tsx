@@ -69,7 +69,9 @@ export const YourAnswers: React.VFC<{
       case FieldType.STRING:
         return fieldValue // no processing needed, display as-is
       case FieldType.CURRENCY:
-        return numberToStringCurrency(Number(fieldValue), tsln._locale)
+        return numberToStringCurrency(Number(fieldValue), tsln._locale, {
+          rounding: 0,
+        })
       case FieldType.DROPDOWN:
       case FieldType.DROPDOWN_SEARCHABLE:
       case FieldType.RADIO:
