@@ -83,6 +83,7 @@ export class BenefitHandler {
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
+        field.helpText = this.replaceTextVariables(field.helpText)
       }
     }
     return this._fieldData
@@ -133,10 +134,8 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
-      oasAge:
-        this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
-          ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
-          : this.rawInput.oasAge,
+      oasDefer: this.rawInput.oasDefer,
+      oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -153,7 +152,8 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
-      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
+      oasDefer: false, // pass dummy data because we will never use this anyway
+      oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
@@ -182,6 +182,7 @@ export class BenefitHandler {
     const requiredFields = [
       FieldKey.INCOME,
       FieldKey.AGE,
+      FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
@@ -190,9 +191,7 @@ export class BenefitHandler {
     if (this.input.client.livedOutsideCanada) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
-    if (this.input.client.age >= 65 && this.input.client.age < 70) {
-      // below 65 we don't need this as we don't do OAS calculations
-      // above 70 we don't need this as there is no option to defer further
+    if (this.input.client.oasDefer) {
       requiredFields.push(FieldKey.OAS_AGE)
     }
     if (

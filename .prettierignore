@@ -4,4 +4,7 @@ node_modules/
 coverage/
 helmfile/
 helm/
+out/
 yarn.lock
+.pnp.cjs
+.pnp.loader.mjs

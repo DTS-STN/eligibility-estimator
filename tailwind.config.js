@@ -6,10 +6,17 @@ module.exports = {
   ],
   theme: {
     screens: {
-      lg: '1200px',
-      md: '992px',
-      sm: '768px',
+      // please note that the order here is important, and will determine how some styles are applied
       xs: '320px',
+      sm: '768px',
+      md: '992px',
+      lg: '1200px',
+    },
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+      },
     },
     fontSize: {
       // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76
