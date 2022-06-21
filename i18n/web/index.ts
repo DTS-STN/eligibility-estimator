@@ -3,6 +3,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
@@ -148,22 +149,7 @@ export type WebTranslations = {
       ApplyText: string
     }
   }
-  resultsQuestions: {
-    age: string
-    livingCountry: string
-    legalStatus: string
-    livedOutsideCanada: string
-    yearsInCanadaSince18: string
-    income: string
-    maritalStatus: string
-    partnerBenefitStatus: string
-    partnerAge: string
-    partnerLivingCountry: string
-    partnerLegalStatus: string
-    partnerlivedOutsideCanada: string
-    partnerYearsInCanadaSince18: string
-    partnerIncome: string
-  }
+  resultsQuestions: { [key in FieldKey]: string }
   moreInfoHeader: string
   startOver: string
   modifyAnswers: string
