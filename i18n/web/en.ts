@@ -132,6 +132,8 @@ const en: WebTranslations = {
       'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Suplement is',
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
+    noAnswersFound: 'No answers found',
+    noBenefitsFound: 'No benefits found',
     edit: 'Edit',
     info: 'info',
     note: 'note',

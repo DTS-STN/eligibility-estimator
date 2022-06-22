@@ -116,6 +116,8 @@ export type WebTranslations = {
     basedOnYourInfoTotal: string
     nextSteps: string
     youMayNotBeEligible: string
+    noAnswersFound: string
+    noBenefitsFound: string
     edit: string
     info: string
     note: string

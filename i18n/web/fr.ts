@@ -137,6 +137,8 @@ const fr: WebTranslations = {
       'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
     youMayNotBeEligible:
       'Prestations auxquels vous pourriez ne pas avoir droit',
+    noAnswersFound: 'Aucune réponse trouvée',
+    noBenefitsFound: 'Aucune prestations trouvée',
     edit: 'Éditer',
     info: 'info',
     note: 'remarque',

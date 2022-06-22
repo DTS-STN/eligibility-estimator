@@ -25,7 +25,8 @@ export const YourAnswers: React.VFC<{
    * Otherwise, the content will be built.
    */
   function getMainContent(): JSX.Element {
-    if (inputs.length === 0) return <div className="py-4">No answers found</div>
+    if (inputs.length === 0)
+      return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
     return (
       <>
         {inputs.map((input) => {
