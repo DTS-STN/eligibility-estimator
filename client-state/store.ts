@@ -150,14 +150,6 @@ export const RootStore = types
     getResultArray() {
       return [self.oas, self.gis, self.allowance, self.afs]
     },
-    // getResultObject() {
-    //   return {
-    //     oas: self.oas,
-    //     gis: self.gis,
-    //     alw: self.allowance,
-    //     afs: self.afs,
-    //   }
-    // },
   }))
   .actions((self) => ({
     setActiveTab(num: number) {
