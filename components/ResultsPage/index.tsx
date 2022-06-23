@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
-import { useMediaQuery, useStore, useTranslation } from '../Hooks'
+import { useStore, useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
 import { ListLinks } from './ListLinks'
@@ -14,7 +14,6 @@ import { YourAnswers } from './YourAnswers'
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
-  const isMobile = useMediaQuery(992)
   const root = useStore()
   const router = useRouter()
 
@@ -79,21 +78,5 @@ export const ResultsPage: React.VFC = () => {
         </div>
       </div>
     </div>
-  )
-}
-
-/**
- * @param element The *div element* to check against the document viewport
- * @returns whether or not the element is in the viewport
- */
-const isElementInViewport = (element: HTMLDivElement): boolean => {
-  const rect = element.getBoundingClientRect()
-
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   )
 }
