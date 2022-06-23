@@ -281,6 +281,10 @@ const fr: Translations = {
       'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
     oasDeferralIncrease:
       'En différant de {OAS_DEFERRAL_YEARS} ans, votre pension de la SV est augmentée de {OAS_DEFERRAL_INCREASE}.',
+    autoEnrollTrue:
+      'FRENCH Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
+    autoEnrollFalse:
+      'FRENCH Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',
