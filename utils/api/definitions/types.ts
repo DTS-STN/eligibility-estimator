@@ -81,6 +81,7 @@ export interface EligibilityResult {
 export interface EntitlementResultGeneric {
   result: number // when type is unavailable, result should be -1
   type: EntitlementResultType
+  autoEnrollment: boolean
 }
 
 export interface EntitlementResultOas extends EntitlementResultGeneric {

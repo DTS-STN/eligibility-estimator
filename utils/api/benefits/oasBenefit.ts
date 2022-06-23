@@ -122,6 +122,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   protected getEntitlement(): EntitlementResultOas {
+    const autoEnrollment = this.getAutoEnrollment()
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
@@ -132,6 +133,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         clawback: 0,
         deferral: { years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
+        autoEnrollment,
       }
 
     const resultCurrent = this.currentEntitlementAmount
@@ -165,6 +167,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       clawback,
       deferral: { years: this.deferralYears, increase: this.deferralIncrease },
       type,
+      autoEnrollment,
     }
   }
 

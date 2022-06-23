@@ -147,11 +147,16 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
+    const autoEnrollment = this.getAutoEnrollment()
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
     )
-      return { result: 0, type: EntitlementResultType.NONE }
+      return {
+        result: 0,
+        type: EntitlementResultType.NONE,
+        autoEnrollment,
+      }
 
     if (
       !this.input.income.provided &&
@@ -160,6 +165,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: -1,
         type: EntitlementResultType.UNAVAILABLE,
+        autoEnrollment,
       }
 
     const formulaResult = new EntitlementFormula(
@@ -171,6 +177,13 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     const type = EntitlementResultType.FULL
 
-    return { result: formulaResult, type }
+    return { result: formulaResult, type, autoEnrollment }
+  }
+
+  /**
+   * For this benefit, always return false, because we don't know any better as of now.
+   */
+  protected getAutoEnrollment(): boolean {
+    return false
   }
 }

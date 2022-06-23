@@ -1,4 +1,5 @@
 import { Translations } from '../../../i18n/api'
+import { ResultKey } from '../definitions/enums'
 import {
   EligibilityResult,
   EntitlementResult,
@@ -31,5 +32,13 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
 
   protected getEntitlement(): T {
     return undefined
+  }
+
+  /**
+   * Just say auto-enroll is true if eligible, because we don't know any better right now.
+   * This is overridden by ALW+AFS.
+   */
+  protected getAutoEnrollment(): boolean {
+    return this.eligibility.result === ResultKey.ELIGIBLE
   }
 }

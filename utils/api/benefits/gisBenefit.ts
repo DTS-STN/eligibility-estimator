@@ -135,11 +135,16 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
+    const autoEnrollment = this.getAutoEnrollment()
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
     )
-      return { result: 0, type: EntitlementResultType.NONE }
+      return {
+        result: 0,
+        type: EntitlementResultType.NONE,
+        autoEnrollment,
+      }
 
     if (
       !this.input.income.provided &&
@@ -148,6 +153,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: -1,
         type: EntitlementResultType.UNAVAILABLE,
+        autoEnrollment,
       }
 
     const formulaResult = new EntitlementFormula(
@@ -167,6 +173,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.detail =
         this.translations.detail.eligibleEntitlementUnavailable
 
-    return { result: formulaResult, type }
+    return { result: formulaResult, type, autoEnrollment }
   }
 }
