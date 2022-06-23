@@ -216,20 +216,12 @@ const en: Translations = {
       'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
-    mustBe60to64:
-      'You must be between the ages of 60 and 64 to be eligible for this benefit.',
     mustBeInCanada:
       'You need to live in Canada to be eligible for this benefit.',
     mustBeOasEligible:
       'You need to be eligible for Old Age Security to be eligible for this benefit.',
     mustCompleteOasCheck:
       'You need to complete the Old Age Security eligibility assessment first.',
-    mustBeWidowed:
-      'You must be a surviving partner or widowed to be eligible for this benefit.',
-    mustBePartnered:
-      'You must be common-law or married to be eligible for this benefit.',
-    mustHavePartnerWithGis:
-      'Your partner must be receiving the Guaranteed Income Supplement to be eligible for this benefit.',
     mustMeetIncomeReq:
       '{INCOME_SINGLE_OR_COMBINED} is too high to be eligible for this benefit.',
     mustMeetYearReq:

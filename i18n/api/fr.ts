@@ -233,20 +233,12 @@ const fr: Translations = {
       'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
       'Vous serez probablement admissible à votre 65e anniversaire.',
-    mustBe60to64:
-      'Vous devez avoir entre 60 et 64 ans pour être admissible à cette prestation.',
     mustBeInCanada:
       'Vous devez vivre au Canada pour être admissible à cette prestation.',
     mustBeOasEligible:
       'Vous devez être admissible à la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
       "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
-    mustBeWidowed:
-      'Vous devez être un partenaire survivant ou un veuf pour être admissible à cette prestation.',
-    mustBePartnered:
-      'Vous devez être conjoint de fait ou marié pour être admissible à cette prestation.',
-    mustHavePartnerWithGis:
-      'Votre partenaire doit recevoir le supplément de revenu garanti pour être admissible à cette prestation.',
     mustMeetIncomeReq:
       '{INCOME_SINGLE_OR_COMBINED} est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:

@@ -60,13 +60,9 @@ export interface Translations {
     eligibleWhen65ApplyNow: string
     eligibleWhen60: string
     eligibleWhen65: string
-    mustBe60to64: string
     mustBeInCanada: string
     mustBeOasEligible: string
     mustCompleteOasCheck: string
-    mustBeWidowed: string
-    mustBePartnered: string
-    mustHavePartnerWithGis: string
     mustMeetIncomeReq: string
     mustMeetYearReq: string
     conditional: string

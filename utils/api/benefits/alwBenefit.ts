@@ -124,7 +124,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.INELIGIBLE,
             reason: ResultReason.AGE,
-            detail: this.translations.detail.mustBe60to64,
+            detail: this.translations.detail.alwNotEligible,
           }
         }
       } else {
