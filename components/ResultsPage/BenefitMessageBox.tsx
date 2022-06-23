@@ -5,10 +5,12 @@ import { ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useStore, useTranslation } from '../Hooks'
 import { MessageBox } from './MessageBox'
+import { CustomCollapse } from './CustomCollapse'
 
 export const BenefitMessageBox: React.VFC<{
   results: BenefitResult[]
 }> = ({ results }) => {
+  console.log(`results`, results)
   const root = useStore()
   const answers = root.getInputObject()
 
@@ -26,6 +28,7 @@ export const BenefitMessageBox: React.VFC<{
 
   function generateMessageBox(result: BenefitResult) {
     const titleText: string = trans.benefit[result.benefitKey]
+    const collapsedDetails = result.cardDetail.collapsedText
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
@@ -44,11 +47,22 @@ export const BenefitMessageBox: React.VFC<{
             }
           })}
         >
-          <span
+          <p
             dangerouslySetInnerHTML={{
               __html: result.cardDetail.mainText,
             }}
           />
+
+          {collapsedDetails &&
+            collapsedDetails.map((detail, index) => (
+              <CustomCollapse
+                key={`collapse-${result.benefitKey}-${index}`}
+                id={`collapse-${result.benefitKey}-${index}`}
+                title={detail.heading}
+              >
+                <p>{detail.text}</p>
+              </CustomCollapse>
+            ))}
         </MessageBox>
       </div>
     )

@@ -27,9 +27,7 @@ export const MessageBox: React.VFC<{
         {title} {eligibleFlag}
       </h3>
 
-      <div className={`${eligible ? '' : 'bg-[#F9F4D4]'} py-1 px-10`}>
-        {children}
-      </div>
+      <div className={`${eligible ? '' : 'bg-[#F9F4D4]'} py-1`}>{children}</div>
 
       {links &&
         links.map(({ text, url, icon, alt }, index) => (

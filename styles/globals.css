@@ -121,7 +121,8 @@
   }
 
   /* Misc */
-  details {
+  /* Do we need this still for the FAQ component or is it gone forever? */
+  /* details {
     @apply cursor-pointer mb-4;
   }
 
@@ -139,7 +140,7 @@
 
   details[open] div {
     @apply border border-t-0 rounded-br rounded-bl border-content text-content;
-  }
+  } */
 
   td {
     @apply p-2;
