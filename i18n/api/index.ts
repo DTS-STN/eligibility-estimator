@@ -84,6 +84,8 @@ export interface Translations {
     oasIncreaseAt75: string
     oasIncreaseAt75Applied: string
     oasDeferralIncrease: string
+    autoEnrollTrue: string
+    autoEnrollFalse: string
   }
   summaryTitle: {
     moreInfo: string

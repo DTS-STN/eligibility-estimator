@@ -99,6 +99,9 @@ export class BenefitHandler {
         result.eligibility.detail = BenefitHandler.capitalizeEachLine(
           this.replaceTextVariables(result.eligibility.detail, result)
         )
+        result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
+          this.replaceTextVariables(result.cardDetail.mainText, result)
+        )
       }
     }
     return this._benefitResults

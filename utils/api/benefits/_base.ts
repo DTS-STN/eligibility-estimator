@@ -1,8 +1,8 @@
 import { Translations } from '../../../i18n/api'
 import { BenefitKey, ResultKey } from '../definitions/enums'
 import {
+  CardCollapsedText,
   CardDetail,
-  CollapsedText,
   EligibilityResult,
   EntitlementResult,
   Link,
@@ -46,8 +46,8 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
 
   protected getCardDetail(): CardDetail {
     return {
-      mainText: this.eligibility.detail,
-      collapsedText: this.getCollapsedText(),
+      mainText: this.getCardText(),
+      collapsedText: this.getCardCollapsedText(),
       links: this.getCardLinks(),
     }
   }
@@ -60,6 +60,16 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     return this.eligibility.result === ResultKey.ELIGIBLE
   }
 
+  protected getCardText(): string {
+    let text = this.eligibility.detail
+    if (this.eligibility.result === ResultKey.ELIGIBLE) {
+      if (this.getAutoEnrollment())
+        text += `\n${this.translations.detail.autoEnrollTrue}`
+      else text += `\n${this.translations.detail.autoEnrollFalse}`
+    }
+    return text
+  }
+
   protected getCardLinks(): Link[] {
     const links: Link[] = []
     if (this.eligibility.result === ResultKey.INELIGIBLE)
@@ -68,8 +78,8 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     return links
   }
 
-  protected getCollapsedText(): CollapsedText[] {
-    const texts: CollapsedText[] = []
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    const texts: CardCollapsedText[] = []
     texts.push({ text: 'example', heading: 'example heading' })
     return texts
   }

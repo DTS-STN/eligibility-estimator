@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React from 'react'
-import { numberToStringCurrency } from '../../i18n/api'
+import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { getTranslations } from '../../i18n/api'
 import { Locale } from '../../utils/api/definitions/enums'
+import { BenefitResult } from '../../utils/api/definitions/types'
 import { useStore, useTranslation } from '../Hooks'
-import { ResultsTableRow } from './ResultsTableRow'
 import { BenefitMessageBox } from './BenefitMessageBox'
+import { ResultsTableRow } from './ResultsTableRow'
 
 export const ResultsBoxes = observer(() => {
   const root = useStore()
@@ -22,6 +22,10 @@ export const ResultsBoxes = observer(() => {
 
   // Didn't find a enum for the current benefits
   const benefits = ['oas', 'gis', 'allowance', 'afs']
+
+  const resultsArray = root
+    .getResultArray()
+    .map((x) => x.toJSON()) as BenefitResult[]
 
   // Display the details and eligibility results separately, then create a new column
   return (
@@ -109,13 +113,7 @@ export const ResultsBoxes = observer(() => {
 
       <hr className="my-12 border border-[#BBBFC5]" />
 
-      {/* Next steps for benefits you may be eligible */}
-
-      <BenefitMessageBox eligible={true} benefits={benefits} />
-
-      {/* Benefits you may not be eligible */}
-
-      <BenefitMessageBox eligible={false} benefits={benefits} />
+      <BenefitMessageBox results={resultsArray} />
     </div>
   )
 })

@@ -37,15 +37,10 @@ export const EntitlementResult = types.model({
   deferral: types.maybe(DeferralResult),
 })
 
-export const Eligibility = types.model({
-  eligibility: types.maybe(EligibilityResult),
-  entitlement: types.maybe(EntitlementResult),
+export const CollapsedText = types.model({
+  heading: types.string,
+  text: types.string,
 })
-
-export const OAS = Eligibility.named('OAS')
-export const GIS = Eligibility.named('GIS')
-export const AFS = Eligibility.named('AFS')
-export const Allowance = Eligibility.named('Allowance')
 
 export const SummaryLink = types.model({
   url: types.string,
@@ -53,6 +48,24 @@ export const SummaryLink = types.model({
   order: types.number,
   location: types.enumeration(Object.values(LinkLocation)),
 })
+
+export const CardDetail = types.model({
+  mainText: types.string,
+  collapsedText: types.maybe(types.array(CollapsedText)),
+  links: types.maybe(types.array(SummaryLink)),
+})
+
+export const BenefitResult = types.model({
+  benefitKey: types.maybe(types.string),
+  eligibility: types.maybe(EligibilityResult),
+  entitlement: types.maybe(EntitlementResult),
+  cardDetail: types.maybe(CardDetail),
+})
+
+export const OAS = BenefitResult.named('OAS')
+export const GIS = BenefitResult.named('GIS')
+export const AFS = BenefitResult.named('AFS')
+export const Allowance = BenefitResult.named('Allowance')
 
 export const Summary = types
   .model({
@@ -131,6 +144,17 @@ export const RootStore = types
       console.log('generated input object', input)
       return input
     },
+    getResultArray() {
+      return [self.oas, self.gis, self.allowance, self.afs]
+    },
+    // getResultObject() {
+    //   return {
+    //     oas: self.oas,
+    //     gis: self.gis,
+    //     alw: self.allowance,
+    //     afs: self.afs,
+    //   }
+    // },
   }))
   .actions((self) => ({
     setActiveTab(num: number) {
