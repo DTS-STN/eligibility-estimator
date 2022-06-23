@@ -123,32 +123,6 @@ export type WebTranslations = {
     note: string
     link: string
     dollarSign: string
-    oas: {
-      InfoUrl: string
-      InfoText: string
-      Message: string
-    }
-    gis: {
-      InfoUrl: string
-      InfoText: string
-      Message: string
-      ApplyUrl: string
-      ApplyText: string
-    }
-    allowance: {
-      InfoUrl: string
-      InfoText: string
-      Message: string
-      ApplyUrl: string
-      ApplyText: string
-    }
-    afs: {
-      InfoUrl: string
-      InfoText: string
-      Message: string
-      ApplyUrl: string
-      ApplyText: string
-    }
   }
   resultsQuestions: Translations['questionShortText']
   moreInfoHeader: string

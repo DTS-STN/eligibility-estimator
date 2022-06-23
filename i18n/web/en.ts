@@ -139,42 +139,6 @@ const en: WebTranslations = {
     note: 'note',
     link: 'link',
     dollarSign: 'Dollars sign symbol',
-    oas: {
-      InfoUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-      InfoText: 'Learn more about Old Age Security',
-      Message: 'REMOVED',
-    },
-    gis: {
-      InfoUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-      InfoText: 'Learn more about Guaranteed Income Supplement',
-      Message: 'REMOVED',
-      ApplyUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-      ApplyText:
-        'Determine if you need to apply to get Guaranteed Income Supplement',
-    },
-    allowance: {
-      InfoUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
-      InfoText: 'Learn more about Allowance',
-      Message: 'Allowance is for individuals between the ages of 60 and 64.',
-      ApplyUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
-      ApplyText: 'View the full eligibility criteria for Allowance',
-    },
-    afs: {
-      InfoUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
-      InfoText: 'Learn more about Allowance for the Survivor',
-      Message:
-        'Allowance for the Survivor is for individuals between 60 and 64 years old whose partner (spouse or common-law) has died.',
-      ApplyUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
-      ApplyText:
-        'View the full eligibility criteria for Allowance for the Survivor.',
-    },
   },
   resultsQuestions: apiEn.questionShortText,
   moreInfoHeader: 'More Information',

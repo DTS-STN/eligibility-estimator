@@ -84,6 +84,8 @@ export interface Translations {
     oasIncreaseAt75: string
     oasIncreaseAt75Applied: string
     oasDeferralIncrease: string
+    alwNotEligible: string
+    afsNotEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
   }
