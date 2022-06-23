@@ -267,10 +267,6 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    oasIncreaseAt75:
-      "Une fois que vous atteignez l'âge de 75 ans, votre montant mensuel augmentera de 10 %, à {OAS_75_AMOUNT}",
-    oasIncreaseAt75Applied:
-      'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
     alwNotEligible:
       'FRENCH Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
@@ -294,6 +290,14 @@ const fr: Translations = {
     oasClawback: {
       heading: 'Vous devrez peut-être rembourser une partie de votre pension',
       text: 'Étant donné que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+    },
+    oasIncreaseAt75: {
+      heading: 'Your payments will increase when you turn 75',
+      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+    },
+    oasIncreaseAt75Applied: {
+      heading: 'Your payments have increased because you are over 75',
+      text: 'Puisque vous avez plus de 75 ans, vos versements de la SV ont été augmentés de 10 %.',
     },
   },
   summaryTitle: {

@@ -142,11 +142,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (type === EntitlementResultType.PARTIAL)
       this.eligibility.detail = this.translations.detail.eligiblePartialOas
 
-    if (resultCurrent !== resultAt75)
-      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75}`
-    else
-      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
-
     return {
       result: resultCurrent,
       resultAt75: resultAt75,
@@ -239,6 +234,16 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
+
+    // increase at 75
+    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasIncreaseAt75
+      )
+    else
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasIncreaseAt75Applied
+      )
 
     // deferral
     if (this.deferralIncrease)

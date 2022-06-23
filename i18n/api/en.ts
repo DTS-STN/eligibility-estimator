@@ -250,10 +250,6 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    oasIncreaseAt75:
-      'Once you reach the age of 75, your monthly amount will increase by 10%, to {OAS_75_AMOUNT}.',
-    oasIncreaseAt75Applied:
-      'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
     alwNotEligible:
       'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
@@ -277,6 +273,14 @@ const en: Translations = {
     oasClawback: {
       heading: 'You may have to repay a part of your pension',
       text: 'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+    },
+    oasIncreaseAt75: {
+      heading: 'Your payments will increase when you turn 75',
+      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+    },
+    oasIncreaseAt75Applied: {
+      heading: 'Your payments have increased because you are over 75',
+      text: 'Since you are over the age of 75, your OAS payments have been increased by 10%.',
     },
   },
   summaryTitle: {

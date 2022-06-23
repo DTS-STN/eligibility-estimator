@@ -77,8 +77,6 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
-    oasIncreaseAt75: string
-    oasIncreaseAt75Applied: string
     alwNotEligible: string
     afsNotEligible: string
     autoEnrollTrue: string
@@ -89,6 +87,8 @@ export interface Translations {
     oasDeferralApplied: { heading: string; text: string }
     oasDeferralAvailable: { heading: string; text: string }
     oasClawback: { heading: string; text: string }
+    oasIncreaseAt75: { heading: string; text: string }
+    oasIncreaseAt75Applied: { heading: string; text: string }
   }
   summaryTitle: {
     moreInfo: string

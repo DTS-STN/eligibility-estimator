@@ -17,10 +17,10 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._locale
     )}</strong>`,
   OAS_75_AMOUNT: (handler) =>
-    numberToStringCurrency(
+    `<strong className="font-bold">${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.resultAt75 ?? 0,
       handler.translations._locale
-    ),
+    )}</strong>`,
   OAS_DEFERRAL_INCREASE: (handler) =>
     numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.deferral.increase ?? 0,
