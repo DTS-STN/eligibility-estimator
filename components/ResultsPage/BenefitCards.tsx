@@ -32,7 +32,7 @@ export const BenefitCards: React.VFC<{
       <div key={result.benefitKey}>
         <BenefitCard
           benefitName={titleText}
-          eligible={eligibility}
+          isEligible={eligibility}
           eligibleText={apiTsln.result[result.eligibility.result]}
           links={result.cardDetail.links.map((value) => {
             return {
