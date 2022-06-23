@@ -377,6 +377,7 @@ export class BenefitHandler {
   /**
    * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
+   * Note: most of the functionality of this has been moved elsewhere...
    */
   private translateResults(): void {
     for (const key in this.benefitResults) {
@@ -392,18 +393,6 @@ export class BenefitHandler {
         result.eligibility.reason = ResultReason.INCOME
         result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
-
-      // start detail processing...
-
-      // if client is ineligible, the table will be populated with a link to view more reasons
-      const ineligibilityText =
-        result.eligibility.result === ResultKey.INELIGIBLE &&
-        result.eligibility.reason !== ResultReason.AGE_YOUNG // do not add additional reasons when they will be eligible in the future
-          ? ` ${this.translations.detail.additionalReasons}`
-          : ''
-
-      // finish with detail processing
-      result.eligibility.detail = `${result.eligibility.detail}${ineligibilityText}`
     }
   }
 

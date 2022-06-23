@@ -254,8 +254,6 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    additionalReasons:
-      '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
     oasClawback:
       'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:

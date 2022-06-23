@@ -271,8 +271,6 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    additionalReasons:
-      "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
     oasClawback:
       'Vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX} car {INCOME_SINGLE_OR_COMBINED} est supérieur à {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:

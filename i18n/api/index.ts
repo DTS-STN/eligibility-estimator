@@ -79,7 +79,6 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
-    additionalReasons: string
     oasClawback: string
     oasIncreaseAt75: string
     oasIncreaseAt75Applied: string
