@@ -88,6 +88,7 @@ export interface Translations {
     afsNotEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
+    expectToReceive: string
   }
   summaryTitle: {
     moreInfo: string

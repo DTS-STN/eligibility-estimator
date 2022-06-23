@@ -63,9 +63,10 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
   protected getCardText(): string {
     let text = this.eligibility.detail
     if (this.eligibility.result === ResultKey.ELIGIBLE) {
-      if (this.getAutoEnrollment())
-        text += `</br></br>${this.translations.detail.autoEnrollTrue}`
-      else text += `</br></br>${this.translations.detail.autoEnrollFalse}`
+      text += ` ${this.translations.detail.expectToReceive}`
+      text += this.getAutoEnrollment()
+        ? `</br></br>${this.translations.detail.autoEnrollTrue}`
+        : `</br></br>${this.translations.detail.autoEnrollFalse}`
     }
     return text
   }

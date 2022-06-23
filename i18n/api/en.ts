@@ -272,6 +272,8 @@ const en: Translations = {
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
+    expectToReceive:
+      'You should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',
