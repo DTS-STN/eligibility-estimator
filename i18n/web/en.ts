@@ -59,7 +59,7 @@ const en: WebTranslations = {
   estimatorTimeEstimate:
     'This estimator will take about 5 to 10 minutes to complete.',
   whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
-  benefitAvailable: 'A benefit available to those 65 and older',
+  benefitAvailable: 'A benefit available to those 65 and older.',
   learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about Old Age Security</a>`,
   gisDefinitionText:
     'A benefit available to those 65 and older. Learn more about Old Age Security Guaranteed Income Supplement A benefit available to those who receive Old Age Security benefits, are aged 65 and older, have a low income, and are living in Canada.',
