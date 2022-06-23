@@ -206,18 +206,14 @@ const en: Translations = {
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}.',
     eligibleDependingOnIncomeNoEntitlement:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
-    eligibleOas65to69:
-      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
       'You are likely eligible to a partial Old Age Security pension.',
-    eligiblePartialOas65to69:
-      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
-    eligibleWhen65ApplyNowOas:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+    eligibleWhen65ApplyNow:
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBe60to64:
@@ -254,16 +250,6 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    additionalReasons:
-      '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
-    oasClawback:
-      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}.',
-    oasIncreaseAt75:
-      'Once you reach the age of 75, your monthly amount will increase by 10%, to {OAS_75_AMOUNT}.',
-    oasIncreaseAt75Applied:
-      'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
-    oasDeferralIncrease:
-      'By deferring for {OAS_DEFERRAL_YEARS} years, your OAS pension has increased by {OAS_DEFERRAL_INCREASE}.',
     alwNotEligible:
       'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
@@ -272,6 +258,30 @@ const en: Translations = {
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
+    expectToReceive:
+      'You should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
+  },
+  detailWithHeading: {
+    oasDeferralApplied: {
+      heading: 'How deferral affects your payments',
+      text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
+    },
+    oasDeferralAvailable: {
+      heading: 'You may be able to defer your payments',
+      text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
+    oasClawback: {
+      heading: 'You may have to repay a part of your pension',
+      text: 'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+    },
+    oasIncreaseAt75: {
+      heading: 'Your payments will increase when you turn 75',
+      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+    },
+    oasIncreaseAt75Applied: {
+      heading: 'Your payments have increased because you are over 75',
+      text: 'Since you are over the age of 75, your OAS payments have been increased by 10%.',
+    },
   },
   summaryTitle: {
     moreInfo: 'More information needed',
@@ -308,5 +318,6 @@ const en: Translations = {
   },
   yes: 'Yes',
   no: 'No',
+  years: 'years',
 }
 export default en

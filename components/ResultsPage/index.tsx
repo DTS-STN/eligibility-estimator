@@ -2,9 +2,13 @@ import { Button, Message } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
+import { ResultKey } from '../../utils/api/definitions/enums'
+import { BenefitResult } from '../../utils/api/definitions/types'
 import { useMediaQuery, useStore, useTranslation } from '../Hooks'
+import { BenefitCards } from './BenefitCards'
+import { EstimatedTotal } from './EstimatedTotal'
 import { ListLinks } from './ListLinks'
-import { ResultsBoxes } from './ResultsBoxes'
+import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 
 export const ResultsPage: React.VFC = () => {
@@ -18,18 +22,28 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.youMayBeEligible, url: '#eligible' },
     { text: tsln.resultsPage.yourEstimatedTotal, url: '#estimated' },
     { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
-    { text: tsln.resultsPage.nextSteps, url: '#next' },
-    { text: tsln.resultsPage.youMayNotBeEligible, url: '#noteligible' },
+    { text: tsln.resultsPage.nextSteps, url: '#nextSteps' },
+    { text: tsln.resultsPage.youMayNotBeEligible, url: '#notEligible' },
   ]
+
+  const resultsArray = root
+    .getResultArray()
+    .map((x) => x.toJSON()) as BenefitResult[]
+
+  const resultsEligible = resultsArray.filter(
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+  )
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
         <div className="col-span-2">
           <Message
-            id="resultId"
+            id="resultSummaryBox"
             type="info"
-            alert_icon_id="resultIdInfo"
+            alert_icon_id="resultSummaryBoxIcon"
             alert_icon_alt_text="Info"
             message_heading={root.summary.title}
             message_body={root.summary.details}
@@ -38,7 +52,16 @@ export const ResultsPage: React.VFC = () => {
 
           <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
 
-          <ResultsBoxes />
+          <MayBeEligible resultsEligible={resultsEligible} />
+
+          <EstimatedTotal
+            resultsEligible={resultsEligible}
+            summary={root.summary}
+          />
+
+          <hr className="my-12 border border-[#BBBFC5]" />
+
+          <BenefitCards results={resultsArray} />
 
           <Button
             text={tsln.startOver}

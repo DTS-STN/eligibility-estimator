@@ -54,12 +54,10 @@ export interface Translations {
     eligible: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
-    eligibleOas65to69: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
-    eligiblePartialOas65to69: string
     eligibleWhen60ApplyNow: string
-    eligibleWhen65ApplyNowOas: string
+    eligibleWhen65ApplyNow: string
     eligibleWhen60: string
     eligibleWhen65: string
     mustBe60to64: string
@@ -79,15 +77,18 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
-    additionalReasons: string
-    oasClawback: string
-    oasIncreaseAt75: string
-    oasIncreaseAt75Applied: string
-    oasDeferralIncrease: string
     alwNotEligible: string
     afsNotEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
+    expectToReceive: string
+  }
+  detailWithHeading: {
+    oasDeferralApplied: { heading: string; text: string }
+    oasDeferralAvailable: { heading: string; text: string }
+    oasClawback: { heading: string; text: string }
+    oasIncreaseAt75: { heading: string; text: string }
+    oasIncreaseAt75Applied: { heading: string; text: string }
   }
   summaryTitle: {
     moreInfo: string
@@ -120,6 +121,7 @@ export interface Translations {
   }
   yes: string
   no: string
+  years: string
 }
 
 export function getTranslations(language: Language): Translations {

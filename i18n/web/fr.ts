@@ -132,7 +132,7 @@ const fr: WebTranslations = {
       'Selon vos informations, vous pourriez être admissible à :',
     yourEstimatedTotal: 'Votre total mensuel estimé est de',
     basedOnYourInfoTotal:
-      'Selon vos renseignements, votre montant mensuel combiné pour la Sécurité de la vieillesse et le Supplément de revenu garanti est de',
+      'Selon vos renseignements, votre montant mensuel combiné pour la Sécurité de la vieillesse et le Supplément de revenu garanti est de ',
     nextSteps:
       'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
     youMayNotBeEligible:

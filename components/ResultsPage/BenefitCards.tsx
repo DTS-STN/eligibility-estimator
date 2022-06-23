@@ -3,41 +3,39 @@ import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
-import { useStore, useTranslation } from '../Hooks'
-import { MessageBox } from './MessageBox'
+import { useTranslation } from '../Hooks'
+import { BenefitCard } from './BenefitCard'
 import { CustomCollapse } from './CustomCollapse'
 
-export const BenefitMessageBox: React.VFC<{
+export const BenefitCards: React.VFC<{
   results: BenefitResult[]
 }> = ({ results }) => {
-  console.log(`results`, results)
-  const root = useStore()
-  const answers = root.getInputObject()
+  const tsln = useTranslation<WebTranslations>()
+  const apiTsln = getTranslations(tsln._language)
 
+  // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
+  // TODO: is this a problem?
   const resultsEligible = results.filter(
-    (value) =>
-      value.eligibility?.result === ResultKey.ELIGIBLE ||
-      value.eligibility?.result === ResultKey.INCOME_DEPENDENT
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
   const resultsNotEligible = results.filter(
     (value) => value.eligibility?.result === ResultKey.INELIGIBLE
   )
 
-  const tsln = useTranslation<WebTranslations>()
-  const trans = getTranslations(answers._language)
-
-  function generateMessageBox(result: BenefitResult) {
-    const titleText: string = trans.benefit[result.benefitKey]
+  function generateCard(result: BenefitResult) {
+    const titleText: string = apiTsln.benefit[result.benefitKey]
     const collapsedDetails = result.cardDetail.collapsedText
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
     return (
       <div key={result.benefitKey}>
-        <MessageBox
-          title={titleText}
-          eligible={eligibility}
-          eligibleText={trans.result[result.eligibility.result]}
+        <BenefitCard
+          benefitName={titleText}
+          isEligible={eligibility}
+          eligibleText={apiTsln.result[result.eligibility.result]}
           links={result.cardDetail.links.map((value) => {
             return {
               icon: value.icon,
@@ -52,7 +50,6 @@ export const BenefitMessageBox: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
-
           {collapsedDetails &&
             collapsedDetails.map((detail, index) => (
               <CustomCollapse
@@ -63,7 +60,7 @@ export const BenefitMessageBox: React.VFC<{
                 <p dangerouslySetInnerHTML={{ __html: detail.text }}></p>
               </CustomCollapse>
             ))}
-        </MessageBox>
+        </BenefitCard>
       </div>
     )
   }
@@ -72,10 +69,10 @@ export const BenefitMessageBox: React.VFC<{
     <div className="my-16">
       {resultsEligible.length >= 0 && (
         <>
-          <h2 id="next" className="h2 mt-5">
+          <h2 id="nextSteps" className="h2 mt-5">
             {tsln.resultsPage.nextSteps}
           </h2>
-          <>{resultsEligible.map((result) => generateMessageBox(result))}</>
+          <>{resultsEligible.map((result) => generateCard(result))}</>
         </>
       )}
       {resultsNotEligible.length >= 0 && (
@@ -83,7 +80,7 @@ export const BenefitMessageBox: React.VFC<{
           <h2 id="notEligible" className="h2 mt-5">
             {tsln.resultsPage.youMayNotBeEligible}
           </h2>
-          <>{resultsNotEligible.map((result) => generateMessageBox(result))}</>
+          <>{resultsNotEligible.map((result) => generateCard(result))}</>
         </>
       )}
     </div>

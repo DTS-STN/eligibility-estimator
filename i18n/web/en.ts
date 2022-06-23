@@ -129,7 +129,7 @@ const en: WebTranslations = {
     basedOnYourInfo: 'Based on your information, you may be eligible for:',
     yourEstimatedTotal: 'Your estimated monthly total is ',
     basedOnYourInfoTotal:
-      'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Supplement is',
+      'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Supplement is ',
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',
