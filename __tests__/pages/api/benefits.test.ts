@@ -32,8 +32,12 @@ describe('consolidated benefit tests: unavailable', () => {
   it('returns "unavailable" - living in Canada, under 10 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
@@ -53,8 +57,12 @@ describe('consolidated benefit tests: unavailable', () => {
   it('returns "unavailable" - living in No Agreement, under 20 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -83,8 +91,12 @@ describe('consolidated benefit tests: unavailable', () => {
   it('returns "unavailable" - living in Agreement, under 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
@@ -112,8 +124,12 @@ describe('consolidated benefit tests: unavailable', () => {
   it('returns "unavailable" - age 60, living in Agreement, under 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
@@ -151,8 +167,12 @@ describe('consolidated benefit tests: ineligible', () => {
   it('returns "ineligible" - age 50', async () => {
     const res = await mockGetRequest({
       income: 20000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 50,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -174,8 +194,12 @@ describe('consolidated benefit tests: ineligible', () => {
   it('returns "ineligible" - age 60, married, living in Canada, under 10 years in Canada, not lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -202,8 +226,12 @@ describe('consolidated benefit tests: ineligible', () => {
   it('returns "ineligible" - age 60, single, living in No Agreement, under 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -231,8 +259,12 @@ describe('consolidated benefit tests: ineligible', () => {
   it('returns "ineligible" - age 60, married, living in No Agreement, under 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -264,8 +296,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`OAS: max income is ${legalValues.MAX_OAS_INCOME}`, async () => {
     const input = {
       income: legalValues.MAX_OAS_INCOME,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
@@ -287,8 +323,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`GIS: max income when single is ${legalValues.MAX_GIS_INCOME_SINGLE}`, async () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_SINGLE,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
@@ -309,8 +349,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`GIS: max income when married and no partner OAS is ${legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW}`, async () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_NO_OAS_NO_ALW,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -333,8 +377,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`GIS: max income when married and partner OAS is ${legalValues.MAX_GIS_INCOME_PARTNER_OAS}`, async () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_OAS,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -357,8 +405,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`GIS: max income when married and partner ALW is ${legalValues.MAX_GIS_INCOME_PARTNER_ALW}`, async () => {
     const input = {
       income: legalValues.MAX_GIS_INCOME_PARTNER_ALW,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -381,8 +433,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`ALW: max income when married and partner OAS is ${legalValues.MAX_ALW_INCOME}`, async () => {
     const input = {
       income: legalValues.MAX_ALW_INCOME,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -406,8 +462,12 @@ describe('consolidated benefit tests: max income checks', () => {
   it(`AFS: max income when widowed is ${legalValues.MAX_AFS_INCOME}`, async () => {
     const input = {
       income: legalValues.MAX_AFS_INCOME,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
@@ -431,8 +491,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
   it('returns "eligible" - separated, partial oas', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
@@ -452,8 +516,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
   it('returns "eligible" - single, living in Agreement, 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
@@ -480,8 +548,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
   it('returns "eligible" - single, living in No Agreement, 20 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -508,8 +580,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
   it('returns "eligible" - married, full oas (no clawback)', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -547,19 +623,58 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerIncome: 10000,
       ...partnerNoHelpNeeded,
     }
-    let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
+    let inputNoDefer65 = {
+      ...inputBase,
+      birthMonth: undefined,
+      birthYear: undefined,
+      age: 65,
+      oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
+      oasAge: 65,
+    }
+
     let res = await mockGetRequest(inputNoDefer65)
     expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
 
-    let inputNoDefer70 = { ...inputBase, age: 70, oasDefer: false, oasAge: 65 }
+    let inputNoDefer70 = {
+      ...inputBase,
+      birthMonth: undefined,
+      birthYear: undefined,
+      age: 70,
+      oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
+      oasAge: 65,
+    }
+
     res = await mockGetRequest(inputNoDefer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
 
-    let input65Defer70 = { ...inputBase, age: 65, oasDefer: true, oasAge: 70 }
+    let input65Defer70 = {
+      ...inputBase,
+      birthMonth: undefined,
+      birthYear: undefined,
+      age: 65,
+      oasDefer: true,
+      oasMonth: undefined,
+      oasYear: undefined,
+      oasAge: 70,
+    }
     res = await mockGetRequest(input65Defer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
 
-    let input70Defer70 = { ...inputBase, age: 70, oasDefer: true, oasAge: 70 }
+    let input70Defer70 = {
+      ...inputBase,
+      birthMonth: undefined,
+      birthYear: undefined,
+      age: 70,
+      oasDefer: true,
+      oasMonth: undefined,
+      oasYear: undefined,
+      oasAge: 70,
+    }
+
     res = await mockGetRequest(input70Defer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
   })
@@ -567,8 +682,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
   it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {
     const res = await mockGetRequest({
       income: legalValues.MAX_OAS_INCOME - 1,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 65,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -596,8 +715,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
   it('returns "eligible" - married, full oas, age 75', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 75,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -627,8 +750,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
   it('returns "ALW eligible" - married', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -650,8 +777,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
   it('returns "AFS eligible" - widowed', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
@@ -671,8 +802,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
   it('returns "ALW eligible" - married, 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -689,8 +824,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
   it('returns "ALW eligible" - married, living in Agreement, 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
@@ -720,8 +859,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
   it('returns "ALW eligible" - married, living in No Agreement, 10 years in Canada', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 60,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -751,8 +894,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
   it('returns "ALW eligible" - age 64, married, 19 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       income: 10000,
+      birthMonth: undefined,
+      birthYear: undefined,
       age: 64,
       oasDefer: false,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
