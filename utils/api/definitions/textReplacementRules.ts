@@ -12,45 +12,45 @@ type TextReplacementRules = {
 
 export const textReplacementRules: TextReplacementRules = {
   ENTITLEMENT_AMOUNT: (handler) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.summary.entitlementSum,
       handler.translations._locale
     )}</strong>`,
   OAS_75_AMOUNT: (handler) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.resultAt75 ?? 0,
       handler.translations._locale
     )}</strong>`,
   OAS_DEFERRAL_INCREASE: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.deferral.increase ?? 0,
       handler.translations._locale
-    ),
+    )}</strong>`,
   OAS_DEFERRAL_YEARS: (handler) =>
-    `<strong className="font-bold">${String(
+    `<strong>${String(
       handler.benefitResults.oas?.entitlement.deferral.years ?? 0
     )} ${handler.translations.years}</strong>`,
   OAS_DEFERRAL_AGE: (handler) =>
     String(handler.benefitResults.oas.entitlement.deferral.age),
   OAS_CLAWBACK: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.clawback ?? 0,
       handler.translations._locale
-    ),
+    )}</strong>`,
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       legalValues.oas.clawbackIncomeLimit,
       handler.translations._locale,
       { rounding: 0 }
-    ),
+    )}</strong>`,
   OAS_MAX_INCOME: (handler) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       legalValues.oas.incomeLimit,
       handler.translations._locale,
       { rounding: 0 }
     )}</strong>`,
   INCOME_LESS_THAN: (handler, benefitResult) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       benefitResult.eligibility.incomeMustBeLessThan,
       handler.translations._locale,
       { rounding: 0 }
