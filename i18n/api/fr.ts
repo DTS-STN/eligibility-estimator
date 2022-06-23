@@ -267,8 +267,6 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    oasClawback:
-      'Vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX} car {INCOME_SINGLE_OR_COMBINED} est supérieur à {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:
       "Une fois que vous atteignez l'âge de 75 ans, votre montant mensuel augmentera de 10 %, à {OAS_75_AMOUNT}",
     oasIncreaseAt75Applied:
@@ -292,6 +290,10 @@ const fr: Translations = {
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
       text: 'Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
+    oasClawback: {
+      heading: 'Vous devrez peut-être rembourser une partie de votre pension',
+      text: 'Étant donné que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
     },
   },
   summaryTitle: {

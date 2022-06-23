@@ -77,7 +77,6 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
-    oasClawback: string
     oasIncreaseAt75: string
     oasIncreaseAt75Applied: string
     alwNotEligible: string
@@ -89,6 +88,7 @@ export interface Translations {
   detailWithHeading: {
     oasDeferralApplied: { heading: string; text: string }
     oasDeferralAvailable: { heading: string; text: string }
+    oasClawback: { heading: string; text: string }
   }
   summaryTitle: {
     moreInfo: string

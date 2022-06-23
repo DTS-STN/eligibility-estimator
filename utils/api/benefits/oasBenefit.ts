@@ -134,7 +134,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     const resultCurrent = this.currentEntitlementAmount
     const resultAt75 = this.age75EntitlementAmount
-    const clawback = this.clawbackAmount
     const type =
       this.input.yearsInCanadaSince18 < 40
         ? EntitlementResultType.PARTIAL
@@ -148,13 +147,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     else
       this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
 
-    if (clawback)
-      this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
-
     return {
       result: resultCurrent,
       resultAt75: resultAt75,
-      clawback,
+      clawback: this.clawbackAmount,
       deferral: {
         age: this.deferralYears + 65,
         years: this.deferralYears,
@@ -244,6 +240,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
+    // deferral
     if (this.deferralIncrease)
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasDeferralApplied
@@ -256,6 +253,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasDeferralAvailable
       )
+
+    // clawback
+    if (this.clawbackAmount)
+      cardCollapsedText.push(this.translations.detailWithHeading.oasClawback)
 
     return cardCollapsedText
   }

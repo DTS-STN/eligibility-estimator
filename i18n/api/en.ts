@@ -250,8 +250,6 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    oasClawback:
-      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}.',
     oasIncreaseAt75:
       'Once you reach the age of 75, your monthly amount will increase by 10%, to {OAS_75_AMOUNT}.',
     oasIncreaseAt75Applied:
@@ -275,6 +273,10 @@ const en: Translations = {
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
       text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
+    oasClawback: {
+      heading: 'You may have to repay a part of your pension',
+      text: 'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
     },
   },
   summaryTitle: {
