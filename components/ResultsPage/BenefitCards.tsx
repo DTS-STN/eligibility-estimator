@@ -57,7 +57,7 @@ export const BenefitCards: React.VFC<{
                 id={`collapse-${result.benefitKey}-${index}`}
                 title={detail.heading}
               >
-                <p>{detail.text}</p>
+                <p dangerouslySetInnerHTML={{ __html: detail.text }} />
               </CustomCollapse>
             ))}
         </BenefitCard>
