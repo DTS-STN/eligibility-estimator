@@ -17,6 +17,7 @@ import {
 } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
+import { MonthAndYear } from '../Forms/MonthAndYear'
 import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
@@ -157,55 +158,23 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     )
 
     return fields.map((field: FormFieldType) => {
-      const requiredText = useTranslation<string>('required')
       return (
         <div key={field.key}>
-          {field.type === FieldType.CONTAINER && (
-            <div className="pb-4">
-              <>
-                <div className="mb-2.5">
-                  <label
-                    htmlFor={field.key}
-                    aria-label={field.key}
-                    data-testid="number-input-label"
-                    className="text-content font-bold inline mb-2.5"
-                  >
-                    {field.label}
-                  </label>
-
-                  <span>
-                    <span className="ml-1">({requiredText})</span>
-                  </span>
-
-                  {field.helpText && (
-                    <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-                      {field.helpText}
-                    </div>
+          {field.type === FieldType.CONTAINER &&
+            (field.key === FieldKey.AGE || field.key === FieldKey.OAS_AGE) && (
+              <div className="pb-4">
+                <MonthAndYear
+                  name={field.key}
+                  label={field.label}
+                  helpText={field.helpText}
+                  subFields={field.subFields}
+                  onChange={debounce(
+                    (e) => handleOnChange(step, field, e),
+                    500
                   )}
-                </div>
-
-                {field.subFields.map((subField: FormFieldType) => {
-                  console.log('front end subfield', subField.key)
-                  return (
-                    <div key={subField.key}>
-                      <NumberField
-                        type={subField.type}
-                        name={subField.key}
-                        label={subField.label}
-                        placeholder={field.placeholder ?? ''}
-                        onChange={debounce(
-                          (e) => handleOnChange(step, field, e),
-                          500
-                        )}
-                        value={subField.value}
-                        helpText={subField.helpText}
-                      />
-                    </div>
-                  )
-                })}
-              </>
-            </div>
-          )}
+                />
+              </div>
+            )}
           {field.type === FieldType.NUMBER && (
             <div className="pb-4">
               <NumberField
