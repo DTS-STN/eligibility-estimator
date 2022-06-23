@@ -60,6 +60,9 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     return this.eligibility.result === ResultKey.ELIGIBLE
   }
 
+  /**
+   * The main text content that will always be visible within each benefit's card.
+   */
   protected getCardText(): string {
     let text = this.eligibility.detail
     if (this.eligibility.result === ResultKey.ELIGIBLE) {
@@ -71,6 +74,18 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     return text
   }
 
+  /**
+   * Any items here will be displayed as a collapsed link. Clicking it will expand the text content.
+   * Blank by default, should be overridden if needed. Used by OAS.
+   */
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    return []
+  }
+
+  /**
+   * These are the links visible within each benefit card.
+   * For any links specific to one benefit, override that benefit's class.
+   */
   protected getCardLinks(): Link[] {
     const links: Link[] = []
     if (
@@ -82,9 +97,5 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       links.push(this.translations.links.reasons[this.benefitKey])
     links.push(this.translations.links.overview[this.benefitKey])
     return links
-  }
-
-  protected getCardCollapsedText(): CardCollapsedText[] {
-    return []
   }
 }
