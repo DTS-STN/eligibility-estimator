@@ -18,8 +18,8 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.youMayBeEligible, url: '#eligible' },
     { text: tsln.resultsPage.yourEstimatedTotal, url: '#estimated' },
     { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
-    { text: tsln.resultsPage.nextSteps, url: '#next' },
-    { text: tsln.resultsPage.youMayNotBeEligible, url: '#noteligible' },
+    { text: tsln.resultsPage.nextSteps, url: '#nextSteps' },
+    { text: tsln.resultsPage.youMayNotBeEligible, url: '#notEligible' },
   ]
 
   return (
@@ -27,9 +27,9 @@ export const ResultsPage: React.VFC = () => {
       <div className="grid grid-cols-3 gap-12">
         <div className="col-span-2">
           <Message
-            id="resultId"
+            id="resultSummaryBox"
             type="info"
-            alert_icon_id="resultIdInfo"
+            alert_icon_id="resultSummaryBoxIcon"
             alert_icon_alt_text="Info"
             message_heading={root.summary.title}
             message_body={root.summary.details}

@@ -7,7 +7,7 @@ import { WebTranslations } from '../../i18n/web'
 import { Locale } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useStore, useTranslation } from '../Hooks'
-import { BenefitMessageBox } from './BenefitMessageBox'
+import { BenefitCards } from './BenefitCards'
 import { ResultsTableRow } from './ResultsTableRow'
 
 export const ResultsBoxes = observer(() => {
@@ -15,7 +15,7 @@ export const ResultsBoxes = observer(() => {
   const answers = root.getInputObject()
 
   const tsln = useTranslation<WebTranslations>()
-  const trans = getTranslations(answers._language)
+  const apiTrans = getTranslations(answers._language)
 
   const currentLocale = useRouter().locale
   const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
@@ -30,12 +30,12 @@ export const ResultsBoxes = observer(() => {
   // Display the details and eligibility results separately, then create a new column
   return (
     <div>
-      {/* Your may be eligible */}
+      {/* You may be eligible */}
 
       <h2 id="eligible" className="h2 mt-8">
         <Image
           src="/eligible.png"
-          alt={trans.result.eligible}
+          alt={apiTrans.result.eligible}
           width={30}
           height={30}
         />{' '}
@@ -50,7 +50,7 @@ export const ResultsBoxes = observer(() => {
             .filter(
               (x) =>
                 root[x]?.eligibility?.result ===
-                trans.result.eligible.toLowerCase()
+                apiTrans.result.eligible.toLowerCase()
             )
             .map((benefit) => (
               <li key={root[benefit]}>{tsln[benefit]}</li>
@@ -66,13 +66,13 @@ export const ResultsBoxes = observer(() => {
           alt={tsln.resultsPage.dollarSign}
           width={30}
           height={30}
-        />{' '}
-        {tsln.resultsPage.yourEstimatedTotal}{' '}
+        />
+        {tsln.resultsPage.yourEstimatedTotal}
         {numberToStringCurrency(root.summary.entitlementSum, locale)}
       </h2>
 
       <div className="pl-12">
-        {tsln.resultsPage.basedOnYourInfoTotal}{' '}
+        {tsln.resultsPage.basedOnYourInfoTotal}
         {numberToStringCurrency(root.summary.entitlementSum, locale)}
         <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
         <table className="hidden md:block text-left">
@@ -88,7 +88,7 @@ export const ResultsBoxes = observer(() => {
               .filter(
                 (x) =>
                   root[x]?.eligibility?.result ===
-                  trans.result.eligible.toLowerCase()
+                  apiTrans.result.eligible.toLowerCase()
               )
               .map((benefit, index) => (
                 <ResultsTableRow
@@ -113,7 +113,7 @@ export const ResultsBoxes = observer(() => {
 
       <hr className="my-12 border border-[#BBBFC5]" />
 
-      <BenefitMessageBox results={resultsArray} />
+      <BenefitCards results={resultsArray} />
     </div>
   )
 })

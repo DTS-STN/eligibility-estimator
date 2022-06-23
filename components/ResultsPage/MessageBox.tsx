@@ -3,13 +3,14 @@ import Image from 'next/image'
 import React from 'react'
 
 export const MessageBox: React.VFC<{
-  title: string
+  benefitName: string
   eligible: boolean
   eligibleText: string
   children: React.ReactNode
   links: Array<{ icon: string; url: string; text: string; alt: string }>
-}> = ({ title, eligible, eligibleText, children, links }) => {
-  const eligibleFlag = (
+}> = ({ benefitName, eligible, eligibleText, children, links }) => {
+  // the green/yellow eligible/notEligible
+  const eligibleFlag: JSX.Element = (
     <span
       className={`p-1 ml-2 border-left border-l-4 font-semibold text-small ${
         eligible
@@ -24,7 +25,7 @@ export const MessageBox: React.VFC<{
   return (
     <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded">
       <h3 className="h4">
-        {title} {eligibleFlag}
+        {benefitName} {eligibleFlag}
       </h3>
 
       <div className={`${eligible ? '' : 'bg-[#F9F4D4]'} py-1 px-10`}>
