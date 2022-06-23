@@ -1,5 +1,6 @@
 import { Translations } from '../../../i18n/api'
 import {
+  BenefitKey,
   EntitlementResultType,
   ResultKey,
   ResultReason,
@@ -15,7 +16,7 @@ import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations)
+    super(input, translations, BenefitKey.alw)
   }
 
   protected getEligibility(): EligibilityResult {

@@ -268,6 +268,7 @@ export class BenefitHandler {
         benefitKey: benefitKey,
         eligibility: undefined,
         entitlement: undefined,
+        cardDetail: undefined,
       }
     }
 
@@ -360,6 +361,12 @@ export class BenefitHandler {
     // Finish with AFS entitlement.
     allResults.client.afs.entitlement = clientAfs.entitlement
 
+    // Process all CardDetails
+    allResults.client.oas.cardDetail = clientOas.cardDetail
+    allResults.client.gis.cardDetail = clientGis.cardDetail
+    allResults.client.alw.cardDetail = clientAlw.cardDetail
+    allResults.client.afs.cardDetail = clientAfs.cardDetail
+
     // All done!
     return allResults.client
   }
@@ -384,8 +391,6 @@ export class BenefitHandler {
       }
 
       // start detail processing...
-      const eligibilityText =
-        this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
 
       // if client is ineligible, the table will be populated with a link to view more reasons
       const ineligibilityText =
@@ -395,7 +400,7 @@ export class BenefitHandler {
           : ''
 
       // finish with detail processing
-      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityText}`
+      result.eligibility.detail = `${result.eligibility.detail}${ineligibilityText}`
     }
   }
 

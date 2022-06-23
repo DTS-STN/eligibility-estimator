@@ -1,5 +1,6 @@
 import { Translations } from '../../../i18n/api'
 import {
+  BenefitKey,
   EntitlementResultType,
   ResultKey,
   ResultReason,
@@ -15,7 +16,7 @@ import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations)
+    super(input, translations, BenefitKey.oas)
   }
 
   protected getEligibility(): EligibilityResult {

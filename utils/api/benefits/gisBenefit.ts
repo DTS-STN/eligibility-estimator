@@ -1,5 +1,6 @@
 import { Translations } from '../../../i18n/api'
 import {
+  BenefitKey,
   EntitlementResultType,
   ResultKey,
   ResultReason,
@@ -21,7 +22,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     translations: Translations,
     private oasResult: BenefitResult<EntitlementResultOas>
   ) {
-    super(input, translations)
+    super(input, translations, BenefitKey.gis)
   }
 
   protected getEligibility(): EligibilityResult {

@@ -13,6 +13,7 @@ import {
   EstimationSummaryState,
   Language,
   LegalStatus,
+  LinkIcon,
   LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
@@ -92,12 +93,30 @@ export interface EntitlementResultOas extends EntitlementResultGeneric {
 
 export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
 
+/**
+ * This is text within the cards, that will expand when clicked.
+ */
+export interface CollapsedText {
+  heading: string
+  text: string
+}
+
+/**
+ * This is the object containing everything the UI needs to know to display the benefit result card.
+ */
+export interface CardDetail {
+  mainText: string
+  collapsedText: CollapsedText[]
+  links: Link[]
+}
+
 export interface BenefitResult<
   T extends EntitlementResult = EntitlementResult
 > {
   benefitKey: BenefitKey
   eligibility: EligibilityResult
   entitlement: T
+  cardDetail: CardDetail
 }
 
 export interface BenefitResultsObject {
@@ -130,6 +149,7 @@ export interface Link {
   url: string
   order: number
   location: LinkLocation
+  icon?: LinkIcon
 }
 
 export interface SummaryObject {
