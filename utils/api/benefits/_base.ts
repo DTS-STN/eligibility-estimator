@@ -64,17 +64,22 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     let text = this.eligibility.detail
     if (this.eligibility.result === ResultKey.ELIGIBLE) {
       if (this.getAutoEnrollment())
-        text += `\n${this.translations.detail.autoEnrollTrue}`
-      else text += `\n${this.translations.detail.autoEnrollFalse}`
+        text += `</br></br>${this.translations.detail.autoEnrollTrue}`
+      else text += `</br></br>${this.translations.detail.autoEnrollFalse}`
     }
     return text
   }
 
   protected getCardLinks(): Link[] {
     const links: Link[] = []
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    )
+      links.push(this.translations.links.apply[this.benefitKey])
     if (this.eligibility.result === ResultKey.INELIGIBLE)
       links.push(this.translations.links.reasons[this.benefitKey])
-    else links.push(this.translations.links.SC) // just an example for now
+    links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
 

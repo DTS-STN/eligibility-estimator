@@ -13,6 +13,7 @@ import {
   EntitlementResultType,
   EstimationSummaryState,
   Language,
+  LinkIcon,
   LinkLocation,
   ResultKey,
 } from '../utils/api/definitions/enums'
@@ -47,6 +48,7 @@ export const SummaryLink = types.model({
   text: types.string,
   order: types.number,
   location: types.enumeration(Object.values(LinkLocation)),
+  icon: types.maybe(types.enumeration(Object.values(LinkIcon))),
 })
 
 export const CardDetail = types.model({

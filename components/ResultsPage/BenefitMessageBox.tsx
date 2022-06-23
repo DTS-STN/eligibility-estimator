@@ -42,10 +42,10 @@ export const BenefitMessageBox: React.VFC<{
           eligibleText={trans.result[result.eligibility.result]}
           links={result.cardDetail.links.map((value) => {
             return {
-              icon: 'info',
-              alt: 'TODO',
+              icon: value.icon,
               url: value.url,
               text: value.text,
+              alt: value.text, // TODO: something else?
             }
           })}
         >
