@@ -64,7 +64,7 @@ export const ResultsPage: React.VFC = () => {
           <BenefitCards results={resultsArray} />
 
           <Button
-            text={tsln.startOver}
+            text={tsln.modifyAnswers}
             styling="secondary"
             className="mt-6 justify-center md:w-[fit-content]"
             onClick={(e) => router.push('/eligibility')}

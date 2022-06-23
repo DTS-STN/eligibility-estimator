@@ -141,11 +141,7 @@ const en: WebTranslations = {
     dollarSign: 'Dollars sign symbol',
   },
   resultsQuestions: apiEn.questionShortText,
-  moreInfoHeader: 'More Information',
-  startOver: 'Start over',
   modifyAnswers: 'Modify answers',
-  modifyAnswersText:
-    'If you think you have made a mistake in filling out the form, or you would like to change your answers to see what would happen in a different scenario, please use the button below to modify your answers.',
   errors: {
     empty: 'This information is required',
   },

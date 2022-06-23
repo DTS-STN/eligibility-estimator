@@ -125,10 +125,7 @@ export type WebTranslations = {
     dollarSign: string
   }
   resultsQuestions: Translations['questionShortText']
-  moreInfoHeader: string
-  startOver: string
   modifyAnswers: string
-  modifyAnswersText: string
   errors: {
     empty: string
   }
