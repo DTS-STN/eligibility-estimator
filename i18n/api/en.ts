@@ -206,18 +206,14 @@ const en: Translations = {
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}.',
     eligibleDependingOnIncomeNoEntitlement:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
-    eligibleOas65to69:
-      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
       'You are likely eligible to a partial Old Age Security pension.',
-    eligiblePartialOas65to69:
-      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
-    eligibleWhen65ApplyNowOas:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+    eligibleWhen65ApplyNow:
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBe60to64:
@@ -272,6 +268,16 @@ const en: Translations = {
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
       'You should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
+  },
+  detailWithHeading: {
+    oasDeferralApplied: {
+      heading: 'How deferral affects your payments',
+      text: 'You have deferred your OAS benefits by {DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {DEFERRAL_AGE}, and you will be be receiving an extra {DEFERRAL_INCREASE} per month.',
+    },
+    oasDeferralAvailable: {
+      heading: 'You may be able to defer your payments',
+      text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
   },
   summaryTitle: {
     moreInfo: 'More information needed',

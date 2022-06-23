@@ -221,18 +221,14 @@ const fr: Translations = {
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}.',
     eligibleDependingOnIncomeNoEntitlement:
       "Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
-    eligibleOas65to69:
-      'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
-    eligiblePartialOas65to69:
-      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60ApplyNow:
       'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
-    eligibleWhen65ApplyNowOas:
-      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+    eligibleWhen65ApplyNow:
+      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
       'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
@@ -289,6 +285,16 @@ const fr: Translations = {
       'FRENCH Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
       'Vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT} par mois.',
+  },
+  detailWithHeading: {
+    oasDeferralApplied: {
+      heading: 'Comment le report affecte vos paiements',
+      text: 'Vous avez reporté vos prestations de la SV de {DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {DEFERRAL_AGE} ans et que vous recevrez {DEFERRAL_INCREASE} supplémentaires par mois.',
+    },
+    oasDeferralAvailable: {
+      heading: 'Vous pouvez peut-être différer vos paiements',
+      text: 'Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',

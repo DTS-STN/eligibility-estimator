@@ -6,6 +6,7 @@ import {
   ResultReason,
 } from '../definitions/enums'
 import {
+  CardCollapsedText,
   EligibilityResult,
   EntitlementResultOas,
   ProcessedInput,
@@ -42,23 +43,17 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           detail: this.translations.detail.eligibleDependingOnIncome,
           incomeMustBeLessThan: legalValues.oas.incomeLimit,
         }
-      else if (this.input.age >= 70) {
+      else if (this.input.age >= 65) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.eligible,
         }
-      } else if (this.input.age >= 65 && this.input.age < 70) {
-        return {
-          result: ResultKey.ELIGIBLE,
-          reason: ResultReason.NONE,
-          detail: this.translations.detail.eligibleOas65to69,
-        }
       } else if (this.input.age == 64) {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.eligibleWhen65ApplyNowOas,
+          detail: this.translations.detail.eligibleWhen65ApplyNow,
         }
       } else {
         return {
@@ -146,18 +141,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         : EntitlementResultType.FULL
 
     if (type === EntitlementResultType.PARTIAL)
-      this.eligibility.detail =
-        this.input.age >= 65 && this.input.age < 70
-          ? this.translations.detail.eligiblePartialOas65to69
-          : this.translations.detail.eligiblePartialOas
+      this.eligibility.detail = this.translations.detail.eligiblePartialOas
 
     if (resultCurrent !== resultAt75)
       this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75}`
     else
       this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
-
-    if (this.deferralIncrease)
-      this.eligibility.detail += ` ${this.translations.detail.oasDeferralIncrease}`
 
     if (clawback)
       this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
@@ -239,5 +228,31 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const oasYearly = this.currentEntitlementAmount * 12
     const result = Math.min(oasYearly, repaymentAmount)
     return roundToTwo(result)
+  }
+
+  protected getCardText(): string {
+    let cardText = super.getCardText()
+    if (this.deferralYears > 0) cardText += 'something about deferral'
+    else cardText += 'something else'
+    return cardText
+  }
+
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
+
+    if (this.deferralIncrease)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasDeferralApplied
+      )
+    else if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.input.age <= 65 &&
+      this.input.age < 70
+    )
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasDeferralAvailable
+      )
+
+    return cardCollapsedText
   }
 }

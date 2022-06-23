@@ -54,12 +54,10 @@ export interface Translations {
     eligible: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
-    eligibleOas65to69: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
-    eligiblePartialOas65to69: string
     eligibleWhen60ApplyNow: string
-    eligibleWhen65ApplyNowOas: string
+    eligibleWhen65ApplyNow: string
     eligibleWhen60: string
     eligibleWhen65: string
     mustBe60to64: string
@@ -88,6 +86,10 @@ export interface Translations {
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
+  }
+  detailWithHeading: {
+    oasDeferralApplied: { heading: string; text: string }
+    oasDeferralAvailable: { heading: string; text: string }
   }
   summaryTitle: {
     moreInfo: string
