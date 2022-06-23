@@ -85,8 +85,6 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
   }
 
   protected getCardCollapsedText(): CardCollapsedText[] {
-    const texts: CardCollapsedText[] = []
-    texts.push({ text: 'example', heading: 'example heading' })
-    return texts
+    return []
   }
 }
