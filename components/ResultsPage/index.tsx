@@ -17,7 +17,7 @@ export const ResultsPage: React.VFC = () => {
   const root = useStore()
   const router = useRouter()
 
-  const listLinks = [
+  const listLinks: { text: string; url: string }[] = [
     { text: tsln.resultsPage.youMayBeEligible, url: '#eligible' },
     { text: tsln.resultsPage.yourEstimatedTotal, url: '#estimated' },
     { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
@@ -25,11 +25,11 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.youMayNotBeEligible, url: '#notEligible' },
   ]
 
-  const resultsArray = root
+  const resultsArray: BenefitResult[] = root
     .getResultArray()
     .map((x) => x.toJSON()) as BenefitResult[]
 
-  const resultsEligible = resultsArray.filter(
+  const resultsEligible: BenefitResult[] = resultsArray.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
