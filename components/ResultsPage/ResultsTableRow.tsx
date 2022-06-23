@@ -1,12 +1,12 @@
 import React from 'react'
 import { numberToStringCurrency } from '../../i18n/api'
-import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
 import {
   EntitlementResultType,
   Locale,
 } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
+import { useTranslation } from '../Hooks'
 
 export const ResultsTableRow: React.VFC<{
   heading: string
@@ -16,7 +16,7 @@ export const ResultsTableRow: React.VFC<{
 }> = ({ heading, data, locale, showEntitlement }) => {
   const tsln = useTranslation<WebTranslations>()
 
-  const datax =
+  const html =
     data.entitlement?.result !== 0 ? (
       <tr className="border border-[#DDDDDD]">
         <td>{heading}</td>
@@ -32,6 +32,6 @@ export const ResultsTableRow: React.VFC<{
       ''
     )
 
-  if (datax === '') return null
-  else return <>{datax}</>
+  if (html === '') return null
+  else return <>{html}</>
 }
