@@ -49,7 +49,7 @@ export const EstimatedTotal: React.VFC<{
               <EstimatedTotalRow
                 key={benefit.benefitKey}
                 heading={apiTrans.benefit[benefit.benefitKey]}
-                data={benefit}
+                result={benefit}
                 locale={locale}
                 showEntitlement={!summary.zeroEntitlements}
               />

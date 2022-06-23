@@ -10,28 +10,24 @@ import { useTranslation } from '../Hooks'
 
 export const EstimatedTotalRow: React.VFC<{
   heading: string
-  data: BenefitResult
+  result: BenefitResult
   locale: Locale
   showEntitlement: boolean
-}> = ({ heading, data, locale, showEntitlement }) => {
+}> = ({ heading, result, locale, showEntitlement }) => {
   const tsln = useTranslation<WebTranslations>()
 
-  const html =
-    data.entitlement?.result !== 0 ? (
-      <tr className="border border-[#DDDDDD]">
-        <td className="pl-5">{heading}</td>
-        {showEntitlement && (
-          <td className="text-right pr-5">
-            {data.entitlement.type !== EntitlementResultType.UNAVAILABLE
-              ? numberToStringCurrency(data.entitlement.result ?? 0, locale)
-              : tsln.unavailable}
-          </td>
-        )}
-      </tr>
-    ) : (
-      ''
-    )
+  if (!result.entitlement || result.entitlement.result === 0) return null
 
-  if (html === '') return null
-  else return <>{html}</>
+  return (
+    <tr className="border border-[#DDDDDD]">
+      <td className="pl-5">{heading}</td>
+      {showEntitlement && (
+        <td className="text-right pr-5">
+          {result.entitlement.type !== EntitlementResultType.UNAVAILABLE
+            ? numberToStringCurrency(result.entitlement.result ?? 0, locale)
+            : tsln.unavailable}
+        </td>
+      )}
+    </tr>
+  )
 }
