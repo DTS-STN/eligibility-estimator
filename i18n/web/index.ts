@@ -45,7 +45,6 @@ export type WebTranslations = {
   oas: string
   gis: string
   alw: string
-  allowance: string
   afs: string
   testSiteTitle: string
   testSiteHeader: string
@@ -119,12 +118,8 @@ export type WebTranslations = {
   }
   validationErrors: { [key in ValidationErrors]: string }
   unableToProceed: string
-  unavailableImageAltText: string
-  govt: string
   yes: string
   no: string
-  year: string
-  years: string
   unavailable: string
 
   selectText: {

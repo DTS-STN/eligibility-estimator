@@ -14,7 +14,6 @@ const fr: WebTranslations = {
   oas: 'Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
-  allowance: 'Allocation',
   afs: 'Allocation au survivant',
   testSiteTitle: "SITE D'ESSAI",
   testSiteHeader:
@@ -164,12 +163,8 @@ const fr: WebTranslations = {
       "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Impossible de continuer',
-  unavailableImageAltText: 'Gens Heureux',
-  govt: 'Gouvernement du Canada',
   yes: 'Oui',
   no: 'Non',
-  year: 'an',
-  years: 'ans',
   unavailable: 'indisponible',
 
   selectText: {

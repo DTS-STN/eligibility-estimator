@@ -13,7 +13,6 @@ const en: WebTranslations = {
   oas: 'Old Age Security',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
-  allowance: 'Allowance',
   afs: 'Allowance for the Survivor',
   testSiteTitle: 'TEST SITE',
   testSiteHeader:
@@ -157,12 +156,8 @@ const en: WebTranslations = {
       'You have indicated a legal status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Unable to proceed',
-  unavailableImageAltText: 'Happy people',
-  govt: 'Government of Canada',
   yes: 'Yes',
   no: 'No',
-  year: 'Year',
-  years: 'Years',
   unavailable: 'unavailable',
 
   selectText: {
