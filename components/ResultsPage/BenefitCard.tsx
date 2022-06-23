@@ -2,7 +2,7 @@ import { Link as DSLink } from '@dts-stn/decd-design-system'
 import Image from 'next/image'
 import React from 'react'
 
-export const MessageBox: React.VFC<{
+export const BenefitCard: React.VFC<{
   benefitName: string
   eligible: boolean
   eligibleText: string

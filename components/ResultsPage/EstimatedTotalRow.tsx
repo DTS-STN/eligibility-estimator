@@ -8,7 +8,7 @@ import {
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 
-export const ResultsTableRow: React.VFC<{
+export const EstimatedTotalRow: React.VFC<{
   heading: string
   data: BenefitResult
   locale: Locale

@@ -4,7 +4,7 @@ import { WebTranslations } from '../../i18n/web'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
-import { MessageBox } from './MessageBox'
+import { BenefitCard } from './BenefitCard'
 
 export const BenefitCards: React.VFC<{
   results: BenefitResult[]
@@ -23,14 +23,14 @@ export const BenefitCards: React.VFC<{
     (value) => value.eligibility?.result === ResultKey.INELIGIBLE
   )
 
-  function generateMessageBox(result: BenefitResult) {
+  function generateCard(result: BenefitResult) {
     const titleText: string = apiTsln.benefit[result.benefitKey]
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
     return (
       <div key={result.benefitKey}>
-        <MessageBox
+        <BenefitCard
           benefitName={titleText}
           eligible={eligibility}
           eligibleText={apiTsln.result[result.eligibility.result]}
@@ -48,7 +48,7 @@ export const BenefitCards: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
-        </MessageBox>
+        </BenefitCard>
       </div>
     )
   }
@@ -60,7 +60,7 @@ export const BenefitCards: React.VFC<{
           <h2 id="nextSteps" className="h2 mt-5">
             {tsln.resultsPage.nextSteps}
           </h2>
-          <>{resultsEligible.map((result) => generateMessageBox(result))}</>
+          <>{resultsEligible.map((result) => generateCard(result))}</>
         </>
       )}
       {resultsNotEligible.length >= 0 && (
@@ -68,7 +68,7 @@ export const BenefitCards: React.VFC<{
           <h2 id="notEligible" className="h2 mt-5">
             {tsln.resultsPage.youMayNotBeEligible}
           </h2>
-          <>{resultsNotEligible.map((result) => generateMessageBox(result))}</>
+          <>{resultsNotEligible.map((result) => generateCard(result))}</>
         </>
       )}
     </div>

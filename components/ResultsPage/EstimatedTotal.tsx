@@ -7,7 +7,7 @@ import { WebTranslations } from '../../i18n/web'
 import { Locale } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
-import { ResultsTableRow } from './ResultsTableRow'
+import { EstimatedTotalRow } from './EstimatedTotalRow'
 
 export const EstimatedTotal: React.VFC<{
   resultsEligible: BenefitResult[]
@@ -27,7 +27,7 @@ export const EstimatedTotal: React.VFC<{
           alt={tsln.resultsPage.dollarSign}
           width={30}
           height={30}
-        />
+        />{' '}
         {tsln.resultsPage.yourEstimatedTotal}
         {numberToStringCurrency(summary.entitlementSum, locale)}
       </h2>
@@ -46,7 +46,7 @@ export const EstimatedTotal: React.VFC<{
 
           <tbody className="align-top">
             {resultsEligible.map((benefit) => (
-              <ResultsTableRow
+              <EstimatedTotalRow
                 key={benefit.benefitKey}
                 heading={apiTrans.benefit[benefit.benefitKey]}
                 data={benefit}
