@@ -14,13 +14,11 @@ export const BenefitMessageBox: React.VFC<{
 
   const resultsEligible = results.filter(
     (value) =>
-      value.eligibility.result === ResultKey.ELIGIBLE ||
-      value.eligibility.result === ResultKey.INCOME_DEPENDENT
+      value.eligibility?.result === ResultKey.ELIGIBLE ||
+      value.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
   const resultsNotEligible = results.filter(
-    (value) =>
-      value.eligibility.result !== ResultKey.ELIGIBLE &&
-      value.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    (value) => value.eligibility?.result === ResultKey.INELIGIBLE
   )
 
   const tsln = useTranslation<WebTranslations>()
@@ -28,12 +26,9 @@ export const BenefitMessageBox: React.VFC<{
 
   function generateMessageBox(result: BenefitResult) {
     const titleText: string = trans.benefit[result.benefitKey]
-    console.log(`titleText: `, titleText)
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
-    console.log(`eligibility: `, eligibility)
-    console.log(`result: `, result)
     return (
       <div key={result.benefitKey}>
         <MessageBox
