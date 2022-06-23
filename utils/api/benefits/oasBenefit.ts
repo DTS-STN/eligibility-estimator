@@ -225,13 +225,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     return roundToTwo(result)
   }
 
-  protected getCardText(): string {
-    let cardText = super.getCardText()
-    if (this.deferralYears > 0) cardText += 'something about deferral'
-    else cardText += 'something else'
-    return cardText
-  }
-
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
