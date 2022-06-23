@@ -96,7 +96,7 @@ export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
 /**
  * This is text within the cards, that will expand when clicked.
  */
-export interface CollapsedText {
+export interface CardCollapsedText {
   heading: string
   text: string
 }
@@ -106,7 +106,7 @@ export interface CollapsedText {
  */
 export interface CardDetail {
   mainText: string
-  collapsedText: CollapsedText[]
+  collapsedText: CardCollapsedText[]
   links: Link[]
 }
 

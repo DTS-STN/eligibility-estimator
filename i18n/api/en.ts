@@ -264,6 +264,14 @@ const en: Translations = {
       'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
     oasDeferralIncrease:
       'By deferring for {OAS_DEFERRAL_YEARS} years, your OAS pension has increased by {OAS_DEFERRAL_INCREASE}.',
+    alwNotEligible:
+      'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
+    afsNotEligible:
+      'Allowance for the Survivor is for individuals between 60 and 64 years old whose partner (spouse or common-law) has died.',
+    autoEnrollTrue:
+      'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
+    autoEnrollFalse:
+      'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
   },
   summaryTitle: {
     moreInfo: 'More information needed',

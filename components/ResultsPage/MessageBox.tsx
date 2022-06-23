@@ -17,22 +17,18 @@ export const MessageBox: React.VFC<{
           : ' border-[#EE7100] bg-[#F9F4D4] '
       }`}
     >
-      {' '}
-      {eligibleText}{' '}
+      {eligibleText}
     </span>
   )
 
   return (
     <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded">
       <h3 className="h4">
-        {title} {eligibleFlag}{' '}
+        {title} {eligibleFlag}
       </h3>
 
-      <div
-        className={`${eligible ? '' : 'bg-[#F9F4D4] font-semibold'} py-1 px-10`}
-      >
-        {' '}
-        {children}{' '}
+      <div className={`${eligible ? '' : 'bg-[#F9F4D4]'} py-1 px-10`}>
+        {children}
       </div>
 
       {links &&

@@ -71,20 +71,20 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE,
-          detail: this.translations.detail.mustBe60to64,
+          detail: this.translations.detail.afsNotEligible,
         }
       }
     } else if (overAgeReq) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.AGE,
-        detail: this.translations.detail.mustBe60to64,
+        detail: this.translations.detail.afsNotEligible,
       }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
-        detail: this.translations.detail.mustBeWidowed,
+        detail: this.translations.detail.afsNotEligible,
       }
     } else if (!meetsReqIncome) {
       return {

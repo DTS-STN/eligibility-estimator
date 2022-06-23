@@ -144,45 +144,6 @@ const fr: WebTranslations = {
     note: 'remarque',
     link: 'lien',
     dollarSign: 'symbole du dollar',
-    oas: {
-      InfoUrl:
-        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
-      InfoText: 'En savoir plus sur la Sécurité de la vieillesse',
-      Message:
-        "D'après ce que vous nous avez dit, <strong>vous n'avez pas besoin de postuler</strong> ...",
-    },
-    gis: {
-      InfoUrl:
-        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
-      InfoText: 'En savoir plus sur Supplément de revenu garanti',
-      Message:
-        'sur la base des revenus que vous nous avez fournis, <strong>vous êtes éligible</strong> à cet avantage',
-      ApplyUrl:
-        'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-      ApplyText:
-        'Déterminez si vous devez postuler à Supplément de revenu garanti',
-    },
-    allowance: {
-      InfoUrl:
-        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
-      InfoText: "En savoir plus sur l'allocation",
-      Message: "L'allocation est destinée aux personnes âgées de 60 à 64 ans",
-      ApplyUrl:
-        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
-      ApplyText: "Voir tous les critères d'éligibilité à l'allocation",
-    },
-    afs: {
-      InfoUrl:
-        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
-      InfoText:
-        "En savoir plus sur l'allocation pour la prestation de survivant",
-      Message:
-        "L'allocation de survivant s'adresse aux personnes entre 60 à 64 ans",
-      ApplyUrl:
-        'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
-      ApplyText:
-        "Consultez tous les critères d'admissibilité à l'allocation pour la prestation de survivant",
-    },
   },
   resultsQuestions: apiFr.questionShortText,
   moreInfoHeader: "Besoin de plus d'information",
