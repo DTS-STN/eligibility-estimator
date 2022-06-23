@@ -25,6 +25,7 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.nextSteps, url: '#nextSteps' },
     { text: tsln.resultsPage.youMayNotBeEligible, url: '#notEligible' },
   ]
+
   const resultsArray = root
     .getResultArray()
     .map((x) => x.toJSON()) as BenefitResult[]
