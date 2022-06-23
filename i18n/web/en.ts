@@ -32,19 +32,9 @@ const en: WebTranslations = {
   menuTitle: 'Service Canada',
   clear: 'Clear',
   back: 'Back',
-  next: 'Next',
-  questions: 'Questions',
-  results: 'Results',
-  needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
-  saveToCsv: 'Download',
   nextStep: 'Next step',
-  getResults: 'Get Results',
   getEstimate: 'Estimate my benefits',
-  applyHeader: 'Apply for benefits',
-  applyText:
-    'Now that you have estimated your benefits, please use the button(s) below to apply.',
-  applyForLabel: 'Apply for',
   required: 'required',
   homePageP1:
     'Use this estimator to find out how much money you could get from old age benefit programs. You can enter your current information, or you can enter future information for planning purposes.',
@@ -97,8 +87,6 @@ const en: WebTranslations = {
     'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
     'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  disclaimerTitle: 'Privacy and terms of use',
-  disclaimer: `The Canadian Old Age Benefits Estimator does not collect or transmit any personal information. Anonymous usage data may be collected for research purposes. The information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.</br></br>Please note that any information provided by this tool is only an estimate, and should not be considered financial advice. For an official assessment, you are encouraged to contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>.`,
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',
   footerlink3: 'Treaties, laws and regulations',
@@ -116,8 +104,6 @@ const en: WebTranslations = {
 
   category: apiEn.category,
 
-  contactCTA:
-    'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     onThisPage: 'On This Page:',

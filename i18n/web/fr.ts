@@ -33,19 +33,9 @@ const fr: WebTranslations = {
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
-  next: 'Suivant',
-  questions: 'Questions',
-  results: 'Résultats',
-  needHelp: "Besoin d'aide?",
   faq: 'Foire Aux Questions',
-  saveToCsv: 'Télécharger',
   nextStep: 'Prochaine étape',
-  getResults: 'Obtenir les résultats',
   getEstimate: 'Estimer mes prestations',
-  applyHeader: 'Faire une demande de prestations',
-  applyText:
-    'Maintenant que vous avez estimé vos prestations, veuillez utiliser le(s) bouton(s) ci-dessous pour faire votre demande.',
-  applyForLabel: 'Demander',
   required: 'obligatoire',
   homePageP1:
     "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
@@ -99,8 +89,6 @@ const fr: WebTranslations = {
     "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
   homePageP6:
     "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
-  disclaimerTitle: "Confidentialité et conditions d'utilisation",
-  disclaimer: `L'Estimateur canadien de prestations de vieillesse ne recueille ni ne transmet aucun renseignement personnel. Les données d'utilisation anonymes peuvent être recueillies à des fins de recherche. Les renseignements fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>.</br></br>Veuillez noter que toutes les informations fournies par cet outil ne sont qu'une estimation et ne doivent pas être considérées comme des conseils financiers. Pour une évaluation officielle, nous vous encourageons à communiquer avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>.`,
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
   footerlink3: 'Traités, lois et règlements',
@@ -118,8 +106,6 @@ const fr: WebTranslations = {
 
   category: apiFr.category,
 
-  contactCTA:
-    'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
     header: "Tableau des résultats d'estimation",
     onThisPage: 'sur cette page',

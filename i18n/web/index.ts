@@ -62,18 +62,9 @@ export type WebTranslations = {
   menuTitle: string
   clear: string
   back: string
-  next: string
-  questions: string
-  results: string
-  needHelp: string
   faq: string
-  saveToCsv: string
   nextStep: string
-  getResults: string
   getEstimate: string
-  applyHeader: string
-  applyText: string
-  applyForLabel: string
   required: string
   homePageHeader1: string
   homePageP1: string
@@ -81,8 +72,6 @@ export type WebTranslations = {
   homePageP4: string
   homePageP5: string
   homePageP6: string
-  disclaimer: string
-  disclaimerTitle: string
   footerlink1: string
   footerlink2: string
   footerlink3: string
@@ -102,7 +91,6 @@ export type WebTranslations = {
   category: Translations['category']
 
   //results page
-  contactCTA: string
   resultsPage: {
     header: string
     onThisPage: string
