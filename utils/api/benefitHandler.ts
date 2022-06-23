@@ -94,15 +94,6 @@ export class BenefitHandler {
     if (this._benefitResults === undefined) {
       this._benefitResults = this.getBenefitResultObject()
       this.translateResults()
-      for (const key in this._benefitResults) {
-        const result: BenefitResult = this._benefitResults[key]
-        result.eligibility.detail = BenefitHandler.capitalizeEachLine(
-          this.replaceTextVariables(result.eligibility.detail, result)
-        )
-        result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
-          this.replaceTextVariables(result.cardDetail.mainText, result)
-        )
-      }
     }
     return this._benefitResults
   }
@@ -377,7 +368,6 @@ export class BenefitHandler {
   /**
    * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
-   * Note: most of the functionality of this has been moved elsewhere...
    */
   private translateResults(): void {
     for (const key in this.benefitResults) {
@@ -393,6 +383,24 @@ export class BenefitHandler {
         result.eligibility.reason = ResultReason.INCOME
         result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
+
+      // process detail result
+      result.eligibility.detail = BenefitHandler.capitalizeEachLine(
+        this.replaceTextVariables(result.eligibility.detail, result)
+      )
+
+      // process card main text
+      result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
+        this.replaceTextVariables(result.cardDetail.mainText, result)
+      )
+
+      // process card collapsed content
+      result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
+        (collapsedText) => ({
+          heading: this.replaceTextVariables(collapsedText.heading, result),
+          text: this.replaceTextVariables(collapsedText.text, result),
+        })
+      )
     }
   }
 
