@@ -273,8 +273,6 @@ const fr: Translations = {
       "Une fois que vous atteignez l'âge de 75 ans, votre montant mensuel augmentera de 10 %, à {OAS_75_AMOUNT}",
     oasIncreaseAt75Applied:
       'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
-    oasDeferralIncrease:
-      'En différant de {OAS_DEFERRAL_YEARS} ans, votre pension de la SV est augmentée de {OAS_DEFERRAL_INCREASE}.',
     alwNotEligible:
       'FRENCH Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
@@ -289,7 +287,7 @@ const fr: Translations = {
   detailWithHeading: {
     oasDeferralApplied: {
       heading: 'Comment le report affecte vos paiements',
-      text: 'Vous avez reporté vos prestations de la SV de {DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {DEFERRAL_AGE} ans et que vous recevrez {DEFERRAL_INCREASE} supplémentaires par mois.',
+      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
@@ -331,5 +329,6 @@ const fr: Translations = {
   },
   yes: 'Oui',
   no: 'Non',
+  years: 'ans',
 }
 export default fr

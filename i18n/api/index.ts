@@ -80,7 +80,6 @@ export interface Translations {
     oasClawback: string
     oasIncreaseAt75: string
     oasIncreaseAt75Applied: string
-    oasDeferralIncrease: string
     alwNotEligible: string
     afsNotEligible: string
     autoEnrollTrue: string
@@ -122,6 +121,7 @@ export interface Translations {
   }
   yes: string
   no: string
+  years: string
 }
 
 export function getTranslations(language: Language): Translations {

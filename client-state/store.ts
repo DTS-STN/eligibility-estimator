@@ -26,6 +26,7 @@ export const EligibilityResult = types.model({
 })
 
 export const DeferralResult = types.model({
+  age: types.maybe(types.number),
   increase: types.maybe(types.number),
   years: types.maybe(types.number),
 })

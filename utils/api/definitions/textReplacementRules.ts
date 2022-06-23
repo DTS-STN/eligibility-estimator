@@ -27,7 +27,11 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._locale
     ),
   OAS_DEFERRAL_YEARS: (handler) =>
-    String(handler.benefitResults.oas?.entitlement.deferral.years ?? 0),
+    `<strong className="font-bold">${String(
+      handler.benefitResults.oas?.entitlement.deferral.years ?? 0
+    )} ${handler.translations.years}</strong>`,
+  OAS_DEFERRAL_AGE: (handler) =>
+    String(handler.benefitResults.oas.entitlement.deferral.age),
   OAS_CLAWBACK: (handler) =>
     numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.clawback ?? 0,

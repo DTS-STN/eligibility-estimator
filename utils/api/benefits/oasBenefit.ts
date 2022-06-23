@@ -127,7 +127,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         result: 0,
         resultAt75: 0,
         clawback: 0,
-        deferral: { years: 0, increase: 0 },
+        deferral: { age: 65, years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
         autoEnrollment,
       }
@@ -155,7 +155,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       result: resultCurrent,
       resultAt75: resultAt75,
       clawback,
-      deferral: { years: this.deferralYears, increase: this.deferralIncrease },
+      deferral: {
+        age: this.deferralYears + 65,
+        years: this.deferralYears,
+        increase: this.deferralIncrease,
+      },
       type,
       autoEnrollment,
     }

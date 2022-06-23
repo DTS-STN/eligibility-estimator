@@ -256,8 +256,6 @@ const en: Translations = {
       'Once you reach the age of 75, your monthly amount will increase by 10%, to {OAS_75_AMOUNT}.',
     oasIncreaseAt75Applied:
       'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
-    oasDeferralIncrease:
-      'By deferring for {OAS_DEFERRAL_YEARS} years, your OAS pension has increased by {OAS_DEFERRAL_INCREASE}.',
     alwNotEligible:
       'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
@@ -272,7 +270,7 @@ const en: Translations = {
   detailWithHeading: {
     oasDeferralApplied: {
       heading: 'How deferral affects your payments',
-      text: 'You have deferred your OAS benefits by {DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {DEFERRAL_AGE}, and you will be be receiving an extra {DEFERRAL_INCREASE} per month.',
+      text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
     },
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
@@ -314,5 +312,6 @@ const en: Translations = {
   },
   yes: 'Yes',
   no: 'No',
+  years: 'years',
 }
 export default en
