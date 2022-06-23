@@ -14,29 +14,31 @@ export const links: LinkDefinitions = {
     order: 2,
     location: LinkLocation.QUESTIONS_ONLY,
   },
-  oasOverview: {
-    text: 'Pension de la Sécurité de vieillesse: Aperçu',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
-    order: 3,
-    location: LinkLocation.RESULTS_ONLY,
-  },
-  gisOverview: {
-    text: 'Supplément de revenu garanti: Aperçu',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
-    order: 4,
-    location: LinkLocation.RESULTS_ONLY,
-  },
-  alwOverview: {
-    text: 'Allocation: Aperçu',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
-    order: 5,
-    location: LinkLocation.RESULTS_ONLY,
-  },
-  afsOverview: {
-    text: 'Allocation au survivant: Aperçu',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
-    order: 6,
-    location: LinkLocation.RESULTS_ONLY,
+  overview: {
+    oas: {
+      text: 'Pension de la Sécurité de vieillesse: Aperçu',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
+      order: 3,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    gis: {
+      text: 'Supplément de revenu garanti: Aperçu',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
+      order: 4,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    alw: {
+      text: 'Allocation: Aperçu',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
+      order: 5,
+      location: LinkLocation.RESULTS_ONLY,
+    },
+    afs: {
+      text: 'Allocation au survivant: Aperçu',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
+      order: 6,
+      location: LinkLocation.RESULTS_ONLY,
+    },
   },
   oasMaxIncome: {
     text: 'Pension de la Sécurité de vieillesse: Revenu Maximum',
@@ -116,29 +118,31 @@ export const links: LinkDefinitions = {
     order: 19,
     location: LinkLocation.RESULTS_ONLY,
   },
-  oasApply: {
-    text: 'Pension de la Sécurité de la vieillesse',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
-    order: 20,
-    location: LinkLocation.RESULTS_APPLY,
-  },
-  gisApply: {
-    text: 'Supplément de revenu garanti',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
-    order: 21,
-    location: LinkLocation.RESULTS_APPLY,
-  },
-  alwApply: {
-    text: 'Allocation',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
-    order: 22,
-    location: LinkLocation.RESULTS_APPLY,
-  },
-  afsApply: {
-    text: 'Allocation au survivant',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
-    order: 23,
-    location: LinkLocation.RESULTS_APPLY,
+  apply: {
+    oas: {
+      text: 'Pension de la Sécurité de la vieillesse',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
+      order: 20,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    gis: {
+      text: 'Supplément de revenu garanti',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
+      order: 21,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    alw: {
+      text: 'Allocation',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
+      order: 22,
+      location: LinkLocation.RESULTS_APPLY,
+    },
+    afs: {
+      text: 'Allocation au survivant',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
+      order: 23,
+      location: LinkLocation.RESULTS_APPLY,
+    },
   },
   SC: {
     text: 'Service Canada',
@@ -164,29 +168,31 @@ export const links: LinkDefinitions = {
     order: -1,
     location: LinkLocation.HIDDEN,
   },
-  oasReasons: {
-    text: 'Cliquez ici',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
-  },
-  gisReasons: {
-    text: 'Cliquez ici',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/admissibilite.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
-  },
-  alwReasons: {
-    text: 'Cliquez ici',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/admissibilite.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
-  },
-  afsReasons: {
-    text: 'Cliquez ici',
-    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/admissibilite.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
+  reasons: {
+    oas: {
+      text: 'Cliquez ici',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    gis: {
+      text: 'Cliquez ici',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/admissibilite.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    alw: {
+      text: 'Cliquez ici',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/admissibilite.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
+    afs: {
+      text: 'Cliquez ici',
+      url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/admissibilite.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+    },
   },
   oasRecoveryTaxInline: {
     text: "d'impôt de récupération",

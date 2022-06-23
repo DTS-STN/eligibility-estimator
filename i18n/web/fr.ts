@@ -75,16 +75,16 @@ const fr: WebTranslations = {
   whatBenefitsTheEstimatorIsFor: "Prestations incluses dans l'estimateur",
   benefitAvailable:
     'Une prestation disponible aux personnes de 65 ans et plus.',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.oasOverview.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
   gisDefinitionText:
     'Une prestation disponible aux personnes qui reçoivent la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada.',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.gisOverview.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
+  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
   alwDefinitionText:
     'Une prestation disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu et dont le conjoint reçoit le Supplément de revenu garanti.',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.alwOverview.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
   afsDefinitionText:
     'Une prestation disponible aux personnes âgées entre entre 60 et 64 ans ayant un faible revenu et dont le conjoint est décédé.',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.afsOverview.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des estimations',

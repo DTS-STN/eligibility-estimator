@@ -1,8 +1,7 @@
 import { numberToStringCurrency } from '../../../i18n/api'
-import { LinkKey } from '../../../i18n/api/links'
 import { BenefitHandler } from '../benefitHandler'
 import legalValues from '../scrapers/output'
-import { BenefitResult } from './types'
+import { BenefitResult, Link } from './types'
 
 type TextReplacementRules = {
   [x: string]: (
@@ -56,19 +55,19 @@ export const textReplacementRules: TextReplacementRules = {
     handler.input.client.maritalStatus.partnered
       ? handler.translations.incomeCombined
       : handler.translations.incomeSingle,
-  LINK_SERVICE_CANADA: (handler) => generateLink(handler, LinkKey.SC),
+  LINK_SERVICE_CANADA: (handler) => generateLink(handler.translations.links.SC),
   LINK_SOCIAL_AGREEMENT: (handler) =>
-    generateLink(handler, LinkKey.socialAgreement),
+    generateLink(handler.translations.links.socialAgreement),
   LINK_MORE_REASONS: (handler, benefitResult) =>
-    generateLink(handler, LinkKey[`${benefitResult.benefitKey}Reasons`]),
+    generateLink(handler.translations.links.reasons[benefitResult.benefitKey]),
   LINK_OAS_DEFER_CLICK_HERE: (handler) =>
-    generateLink(handler, LinkKey.oasDeferClickHere),
+    generateLink(handler.translations.links.oasDeferClickHere),
   LINK_OAS_DEFER_INLINE: (handler) =>
-    generateLink(handler, LinkKey.oasDeferInline),
+    generateLink(handler.translations.links.oasDeferInline),
   LINK_RECOVERY_TAX: (handler) =>
-    generateLink(handler, LinkKey.oasRecoveryTaxInline),
+    generateLink(handler.translations.links.oasRecoveryTaxInline),
 }
 
-function generateLink(handler: BenefitHandler, linkKey: LinkKey): string {
-  return `<a class="underline text-default-text" href="${handler.translations.links[linkKey].url}" target="_blank">${handler.translations.links[linkKey].text}</a>`
+function generateLink(link: Link): string {
+  return `<a class="underline text-default-text" href="${link.url}" target="_blank">${link.text}</a>`
 }
