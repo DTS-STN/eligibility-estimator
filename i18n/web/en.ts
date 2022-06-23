@@ -151,7 +151,7 @@ const en: WebTranslations = {
         'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
       InfoText: 'Learn more about Guaranteed Income Supplement',
       Message:
-        'Based on income you told us, <strong>you may hve to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
+        'Based on income you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
       ApplyUrl:
         'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
       ApplyText:
