@@ -19,9 +19,9 @@ export const ResultsTableRow: React.VFC<{
   const datax =
     data.entitlement?.result !== 0 ? (
       <tr className="border border-[#DDDDDD]">
-        <td>{heading}</td>
+        <td className="pl-5">{heading}</td>
         {showEntitlement && (
-          <td className="text-right min-w-[68px]">
+          <td className="text-right pr-5">
             {data.entitlement.type !== EntitlementResultType.UNAVAILABLE
               ? numberToStringCurrency(data.entitlement.result ?? 0, locale)
               : tsln.unavailable}

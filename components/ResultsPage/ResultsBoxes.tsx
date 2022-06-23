@@ -71,11 +71,11 @@ export const ResultsBoxes = observer(() => {
         {tsln.resultsPage.basedOnYourInfoTotal}{' '}
         {numberToStringCurrency(root.summary.entitlementSum, locale)}
         <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
-        <table className="hidden md:block text-left">
+        <table className="w-2/3 hidden md:block text-left">
           <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">
             <tr>
-              <th>{tsln.resultsPage.tableHeader1}</th>
-              <th>{tsln.resultsPage.tableHeader2}</th>
+              <th className="pl-5">{tsln.resultsPage.tableHeader1}</th>
+              <th className="pr-5">{tsln.resultsPage.tableHeader2}</th>
             </tr>
           </thead>
 
@@ -97,8 +97,8 @@ export const ResultsBoxes = observer(() => {
               ))}
             {!root.summary.zeroEntitlements && (
               <tr className="border border-[#DDDDDD]">
-                <td>{tsln.resultsPage.tableTotalAmount}</td>
-                <td className="text-right min-w-[68px]">
+                <td className="pl-5">{tsln.resultsPage.tableTotalAmount}</td>
+                <td className="text-right min-w-[68px] pr-5">
                   {numberToStringCurrency(root.summary.entitlementSum, locale)}
                 </td>
               </tr>
