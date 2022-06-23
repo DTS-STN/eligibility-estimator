@@ -8,7 +8,7 @@ export const ListLinks: React.VFC<{
     <div className="p-4">
       <p className="h4">{title}</p>
 
-      <ul className="pl-5 list-disc text-content">
+      <ul className="pl-[2.5rem] list-disc text-content">
         {links &&
           links.map(({ text, url }, index) => (
             <li key={index}>
