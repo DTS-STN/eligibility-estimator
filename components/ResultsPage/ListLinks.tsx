@@ -5,7 +5,7 @@ export const ListLinks: React.VFC<{
   links: Array<{ url: string; text: string }>
 }> = ({ title, links }) => {
   return (
-    <div className="p-4">
+    <div className="p-4 mt-5">
       <p className="h4">{title}</p>
 
       <ul className="pl-[2.5rem] list-disc text-content">
