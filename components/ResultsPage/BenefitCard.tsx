@@ -60,12 +60,12 @@ export const BenefitCard: React.VFC<{
           links.map(({ text, url, icon, alt }, index) => (
             <div
               key={index}
-              className="py-4 grid grid-cols-8 text-content md:w-1/2"
+              className="flex items-center py-4 text-content md:w-1/2"
             >
-              <div className="col-span-1" key={index}>
+              <div>
                 <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
               </div>
-              <div className="col-span-7">
+              <div className="pl-5 w-full">
                 <DSLink id={`link${index}`} href={url} text={text} />
               </div>
             </div>
