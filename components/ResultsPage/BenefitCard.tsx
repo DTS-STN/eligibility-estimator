@@ -54,21 +54,22 @@ export const BenefitCard: React.VFC<{
             />
           </CustomCollapse>
         ))}
-
-      {links &&
-        links.map(({ text, url, icon, alt }, index) => (
-          <div
-            key={index}
-            className="pt-4 mt-4 grid grid-cols-8 text-content w-1/2"
-          >
-            <div className="col-span-1" key={index}>
-              <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
+      <div className="mt-4">
+        {links &&
+          links.map(({ text, url, icon, alt }, index) => (
+            <div
+              key={index}
+              className="py-4 grid grid-cols-8 text-content md:w-1/2"
+            >
+              <div className="col-span-1" key={index}>
+                <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
+              </div>
+              <div className="col-span-7">
+                <DSLink id={`link${index}`} href={url} text={text} />
+              </div>
             </div>
-            <div className="col-span-7">
-              <DSLink id={`link${index}`} href={url} text={text} />
-            </div>
-          </div>
-        ))}
+          ))}
+      </div>
     </div>
   )
 }
