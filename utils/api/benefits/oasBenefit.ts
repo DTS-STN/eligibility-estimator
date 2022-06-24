@@ -228,6 +228,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
+    // if not eligible, don't bother with any of the below
+    if (this.eligibility.result !== ResultKey.ELIGIBLE) return cardCollapsedText
+
     // increase at 75
     if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
       cardCollapsedText.push(
@@ -243,11 +246,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasDeferralApplied
       )
-    else if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.input.age <= 65 &&
-      this.input.age < 70
-    )
+    else if (this.input.age >= 65 && this.input.age < 70)
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasDeferralAvailable
       )
