@@ -54,6 +54,7 @@ export const BenefitCard: React.VFC<{
             />
           </CustomCollapse>
         ))}
+
       <div className="mt-4">
         {links &&
           links.map(({ text, url, icon, alt }, index) => (
