@@ -72,6 +72,6 @@ export const textReplacementRules: TextReplacementRules = {
     generateLink(handler.translations.links.oasRecoveryTaxInline),
 }
 
-function generateLink(link: Link): string {
+export function generateLink(link: Link): string {
   return `<a class="underline text-default-text" href="${link.url}" target="_blank">${link.text}</a>`
 }

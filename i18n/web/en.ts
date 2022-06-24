@@ -4,6 +4,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
+import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
@@ -111,7 +112,12 @@ const en: WebTranslations = {
     tableTotalAmount: 'Total',
     whatYouToldUs: 'What you told us',
     youMayBeEligible: 'You may be eligible at this time',
-    basedOnYourInfo: 'Based on your information, you may be eligible for:',
+    youAreNotEligible: 'You likely are not eligible at this time',
+    basedOnYourInfoEligible:
+      'Based on your information, you may be eligible for:',
+    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or contact ${generateLink(
+      apiEn.links.SC
+    )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
     basedOnYourInfoTotal:
       'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Supplement is ',

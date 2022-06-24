@@ -9,20 +9,29 @@ export const MayBeEligible: React.VFC<{
 }> = ({ resultsEligible }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
+  const isEligible: boolean = resultsEligible.length > 0
 
   return (
     <>
       <h2 id="eligible" className="h2 mt-8">
         <Image
-          src="/eligible.png"
+          src={isEligible ? '/eligible.png' : '/note.png'}
           alt={apiTrans.result.eligible}
-          width={30}
+          width={isEligible ? 30 : 25}
           height={30}
         />{' '}
-        {tsln.resultsPage.youMayBeEligible}
+        {isEligible
+          ? tsln.resultsPage.youMayBeEligible
+          : tsln.resultsPage.youAreNotEligible}
       </h2>
       <div className="pl-12">
-        {tsln.resultsPage.basedOnYourInfo}
+        <p
+          dangerouslySetInnerHTML={{
+            __html: isEligible
+              ? tsln.resultsPage.basedOnYourInfoEligible
+              : tsln.resultsPage.basedOnYourInfoNotEligible,
+          }}
+        />
         <ul className="pl-5 list-disc text-content font-semibold">
           {resultsEligible.map((benefit) => (
             <li key={benefit.benefitKey}>
