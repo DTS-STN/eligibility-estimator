@@ -37,7 +37,7 @@ export const BenefitCard: React.VFC<{
         {benefitName} {eligibleFlag}
       </h3>
 
-      <div className={`${isEligible ? '' : 'bg-[#F9F4D4]'} py-1 px-8`}>
+      <div className={`${isEligible ? '' : 'bg-[#F9F4D4] px-8'} py-1`}>
         {children}
       </div>
 
