@@ -17,14 +17,14 @@ export const MayBeEligible: React.VFC<{
         <Image
           src={isEligible ? '/eligible.png' : '/note.png'}
           alt={apiTrans.result.eligible}
-          width={isEligible ? 30 : 25}
+          width={30}
           height={30}
         />{' '}
         {isEligible
           ? tsln.resultsPage.youMayBeEligible
           : tsln.resultsPage.youAreNotEligible}
       </h2>
-      <div className="pl-12">
+      <div className="pl-[35px]">
         <p
           dangerouslySetInnerHTML={{
             __html: isEligible

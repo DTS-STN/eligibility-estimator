@@ -33,8 +33,10 @@ export const EstimatedTotal: React.VFC<{
       </h2>
 
       <div>
-        {tsln.resultsPage.basedOnYourInfoTotal}
-        {numberToStringCurrency(summary.entitlementSum, locale)}
+        <p className="pl-[35px]">
+          {tsln.resultsPage.basedOnYourInfoTotal}
+          {numberToStringCurrency(summary.entitlementSum, locale)}
+        </p>
         <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
         <table className="text-left w-full">
           <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">

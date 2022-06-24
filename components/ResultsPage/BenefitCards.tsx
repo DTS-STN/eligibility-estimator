@@ -56,7 +56,7 @@ export const BenefitCards: React.VFC<{
   }
 
   return (
-    <div className="my-16">
+    <div>
       {resultsEligible.length > 0 && (
         <>
           <h2 id="nextSteps" className="h2 mt-5">
