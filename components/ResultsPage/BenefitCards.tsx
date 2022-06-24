@@ -67,7 +67,7 @@ export const BenefitCards: React.VFC<{
 
   return (
     <div className="my-16">
-      {resultsEligible.length >= 0 && (
+      {resultsEligible.length > 0 && (
         <>
           <h2 id="nextSteps" className="h2 mt-5">
             {tsln.resultsPage.nextSteps}
@@ -75,7 +75,7 @@ export const BenefitCards: React.VFC<{
           <>{resultsEligible.map((result) => generateCard(result))}</>
         </>
       )}
-      {resultsNotEligible.length >= 0 && (
+      {resultsNotEligible.length > 0 && (
         <>
           <h2 id="notEligible" className="h2 mt-5">
             {tsln.resultsPage.youMayNotBeEligible}
