@@ -53,10 +53,12 @@ export const ResultsPage: React.VFC = () => {
 
           <MayBeEligible resultsEligible={resultsEligible} />
 
-          <EstimatedTotal
-            resultsEligible={resultsEligible}
-            summary={root.summary}
-          />
+          {resultsEligible.length > 0 && (
+            <EstimatedTotal
+              resultsEligible={resultsEligible}
+              summary={root.summary}
+            />
+          )}
 
           <hr className="my-12 border border-[#BBBFC5]" />
 
