@@ -5,6 +5,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
+import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
@@ -113,8 +114,12 @@ const fr: WebTranslations = {
     tableTotalAmount: 'Total',
     whatYouToldUs: 'Ce que vous nous avez dit',
     youMayBeEligible: 'Vous pouvez être éligible en ce moment',
-    basedOnYourInfo:
+    youAreNotEligible: "Vous n'êtes probablement pas éligible pour le moment",
+    basedOnYourInfoEligible:
       'Selon vos informations, vous pourriez être admissible à :',
+    basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
+      apiFr.links.SC
+    )} pour plus d'informations.`,
     yourEstimatedTotal: 'Votre total mensuel estimé est de',
     basedOnYourInfoTotal:
       'Selon vos renseignements, votre montant mensuel combiné pour la Sécurité de la vieillesse et le Supplément de revenu garanti est de ',

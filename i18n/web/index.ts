@@ -98,7 +98,9 @@ export type WebTranslations = {
     tableTotalAmount: string
     whatYouToldUs: string
     youMayBeEligible: string
-    basedOnYourInfo: string
+    youAreNotEligible: string
+    basedOnYourInfoEligible: string
+    basedOnYourInfoNotEligible: string
     yourEstimatedTotal: string
     basedOnYourInfoTotal: string
     nextSteps: string
