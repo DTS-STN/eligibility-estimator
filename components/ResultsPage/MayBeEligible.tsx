@@ -17,7 +17,7 @@ export const MayBeEligible: React.VFC<{
         <Image
           src={isEligible ? '/eligible.png' : '/note.png'}
           alt={apiTrans.result.eligible}
-          width={30}
+          width={isEligible ? 30 : 25}
           height={30}
         />{' '}
         {isEligible
