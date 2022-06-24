@@ -1,14 +1,23 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
 import Image from 'next/image'
 import React from 'react'
+import { CustomCollapse } from './CustomCollapse'
 
 export const BenefitCard: React.VFC<{
   benefitName: string
   isEligible: boolean
   eligibleText: string
+  collapsedDetails: any
   children: React.ReactNode
   links: Array<{ icon: string; url: string; text: string; alt: string }>
-}> = ({ benefitName, isEligible, eligibleText, children, links }) => {
+}> = ({
+  benefitName,
+  isEligible,
+  eligibleText,
+  collapsedDetails,
+  children,
+  links,
+}) => {
   // the green/yellow eligible/notEligible
   const eligibleFlag: JSX.Element = (
     <span
@@ -31,6 +40,17 @@ export const BenefitCard: React.VFC<{
       <div className={`${isEligible ? '' : 'bg-[#F9F4D4]'} py-1`}>
         {children}
       </div>
+
+      {collapsedDetails &&
+        collapsedDetails.map((detail, index) => (
+          <CustomCollapse
+            key={`collapse-${benefitName}-${index}`}
+            id={`collapse-${benefitName}-${index}`}
+            title={detail.heading}
+          >
+            <p dangerouslySetInnerHTML={{ __html: detail.text }} />
+          </CustomCollapse>
+        ))}
 
       {links &&
         links.map(({ text, url, icon, alt }, index) => (

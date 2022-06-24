@@ -5,7 +5,6 @@ import { ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
-import { CustomCollapse } from './CustomCollapse'
 
 export const BenefitCards: React.VFC<{
   results: BenefitResult[]
@@ -36,6 +35,7 @@ export const BenefitCards: React.VFC<{
           benefitName={titleText}
           isEligible={eligibility}
           eligibleText={apiTsln.result[result.eligibility.result]}
+          collapsedDetails={collapsedDetails}
           links={result.cardDetail.links.map((value) => {
             return {
               icon: value.icon,
@@ -50,16 +50,6 @@ export const BenefitCards: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
-          {collapsedDetails &&
-            collapsedDetails.map((detail, index) => (
-              <CustomCollapse
-                key={`collapse-${result.benefitKey}-${index}`}
-                id={`collapse-${result.benefitKey}-${index}`}
-                title={detail.heading}
-              >
-                <p dangerouslySetInnerHTML={{ __html: detail.text }} />
-              </CustomCollapse>
-            ))}
         </BenefitCard>
       </div>
     )
