@@ -120,7 +120,7 @@ const en: WebTranslations = {
     )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
     basedOnYourInfoTotal:
-      'Based on your information, your combined monthly amount for Old Age Security and Guaranteed Income Supplement is ',
+      "Based on the information you've provided, you should expect to receive around {AMOUNT} per month.",
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',

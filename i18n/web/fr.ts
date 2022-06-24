@@ -122,7 +122,7 @@ const fr: WebTranslations = {
     )} pour plus d'informations.`,
     yourEstimatedTotal: 'Votre total mensuel estimé est de',
     basedOnYourInfoTotal:
-      'Selon vos renseignements, votre montant mensuel combiné pour la Sécurité de la vieillesse et le Supplément de revenu garanti est de ',
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois.",
     nextSteps:
       'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
     youMayNotBeEligible:
