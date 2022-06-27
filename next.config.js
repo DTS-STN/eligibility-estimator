@@ -17,4 +17,32 @@ module.exports = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/fr',
+        destination: '/index',
+      },
+      {
+        source: '/fr/admissibilite',
+        destination: '/eligibility',
+        locale: false,
+      },
+      {
+        source: '/admissibilite',
+        destination: '/eligibility',
+        locale: undefined,
+      },
+      {
+        source: '/fr/resultats',
+        destination: '/results',
+        locale: false,
+      },
+      {
+        source: '/résultats',
+        destination: '/results',
+        locale: undefined,
+      },
+    ]
+  },
 }

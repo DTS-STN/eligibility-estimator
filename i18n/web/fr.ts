@@ -12,6 +12,10 @@ const fr: WebTranslations = {
   _language: Language.FR,
   _locale: Locale.FR,
 
+  // Pages
+  eligibility: 'admissibilite',
+  results: 'resultats',
+
   oas: 'Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',

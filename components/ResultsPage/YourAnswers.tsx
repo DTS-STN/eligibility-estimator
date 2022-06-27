@@ -37,7 +37,7 @@ export const YourAnswers: React.VFC<{
               <strong>{getDisplayValue(input)}</strong> &nbsp;
               <DSLink
                 id={`edit-${fieldKey}`}
-                href={`/eligibility#${fieldKey}`}
+                href={`${tsln.eligibility}#${fieldKey}`}
                 text="Edit"
                 target="_self"
               />

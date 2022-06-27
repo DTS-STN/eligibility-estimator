@@ -278,7 +278,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     e.preventDefault()
     if (!form.validateAgainstEmptyFields(router.locale) && !form.hasErrors) {
       root.saveStoreState()
-      router.push('/results')
+      router.push(tsln.results)
     }
   }
 

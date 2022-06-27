@@ -68,7 +68,7 @@ export const ResultsPage: React.VFC = () => {
             text={tsln.modifyAnswers}
             styling="secondary"
             className="mt-6 justify-center md:w-[fit-content]"
-            onClick={(e) => router.push('/eligibility')}
+            onClick={(e) => router.push(tsln.results)}
           />
         </div>
 
