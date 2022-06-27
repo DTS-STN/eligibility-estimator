@@ -327,6 +327,6 @@ const fr: Translations = {
   },
   yes: 'Oui',
   no: 'Non',
-  years: 'ans',
+  year: 'an',
 }
 export default fr

@@ -182,9 +182,10 @@ export class EntitlementFormula {
       this.calculationMethod === 'LOW'
         ? 3
         : 1
-    return roundToTwo(
+    const calculated = roundToTwo(
       this.actualMaxAmount - this.incomeDifferential * differentialMultiplier
     )
+    return Math.max(0, calculated)
   }
 
   /**

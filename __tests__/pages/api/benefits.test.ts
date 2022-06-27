@@ -433,6 +433,28 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expectAlwAfsTooOld(res)
   })
 
+  it('returns "eligible" - single, 20 years in Canada, high income (partial gis edge case)', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 100000,
+      ...age65NoDefer,
+      maritalStatus: MaritalStatus.SINGLE,
+      livingCountry: LivingCountry.CANADA,
+      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 20,
+      everLivedSocialCountry: undefined,
+      ...partnerUndefined,
+    })
+    expectOasGisEligible(
+      res,
+      EntitlementResultType.PARTIAL,
+      roundToTwo(legalValues.oas.amount / 2),
+      324.34
+    )
+    expectAlwAfsTooOld(res)
+  })
+
   it('returns "eligible" - single, living in Agreement, 20 years in Canada', async () => {
     const res = await mockGetRequest({
       ...income10k,
