@@ -26,10 +26,12 @@ export const textReplacementRules: TextReplacementRules = {
       handler.benefitResults.oas?.entitlement.deferral.increase ?? 0,
       handler.translations._locale
     )}</strong>`,
-  OAS_DEFERRAL_YEARS: (handler) =>
-    `<strong>${String(
-      handler.benefitResults.oas?.entitlement.deferral.years ?? 0
-    )} ${handler.translations.years}</strong>`,
+  OAS_DEFERRAL_YEARS: (handler) => {
+    const years = handler.benefitResults.oas?.entitlement.deferral.years
+    return `<strong>${years ?? 0} ${handler.translations.year}${
+      years > 1 ? 's' : ''
+    }</strong>`
+  },
   OAS_DEFERRAL_AGE: (handler) =>
     String(handler.benefitResults.oas.entitlement.deferral.age),
   OAS_CLAWBACK: (handler) =>
