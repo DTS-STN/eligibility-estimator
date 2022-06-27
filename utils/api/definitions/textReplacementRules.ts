@@ -29,7 +29,7 @@ export const textReplacementRules: TextReplacementRules = {
   OAS_DEFERRAL_YEARS: (handler) => {
     const years = handler.benefitResults.oas?.entitlement.deferral.years
     return `<strong>${years ?? 0} ${handler.translations.year}${
-      years > 1 ? 's' : ''
+      years !== 1 ? 's' : ''
     }</strong>`
   },
   OAS_DEFERRAL_AGE: (handler) =>
