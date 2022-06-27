@@ -13,6 +13,7 @@ import {
   EstimationSummaryState,
   Language,
   LegalStatus,
+  LinkIcon,
   LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
@@ -81,15 +82,33 @@ export interface EligibilityResult {
 export interface EntitlementResultGeneric {
   result: number // when type is unavailable, result should be -1
   type: EntitlementResultType
+  autoEnrollment: boolean
 }
 
 export interface EntitlementResultOas extends EntitlementResultGeneric {
   resultAt75: number
   clawback: number
-  deferral: { years: number; increase: number }
+  deferral: { age: number; years: number; increase: number }
 }
 
 export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
+
+/**
+ * This is text within the cards, that will expand when clicked.
+ */
+export interface CardCollapsedText {
+  heading: string
+  text: string
+}
+
+/**
+ * This is the object containing everything the UI needs to know to display the benefit result card.
+ */
+export interface CardDetail {
+  mainText: string
+  collapsedText: CardCollapsedText[]
+  links: Link[]
+}
 
 export interface BenefitResult<
   T extends EntitlementResult = EntitlementResult
@@ -97,6 +116,7 @@ export interface BenefitResult<
   benefitKey: BenefitKey
   eligibility: EligibilityResult
   entitlement: T
+  cardDetail: CardDetail
 }
 
 export interface BenefitResultsObject {
@@ -129,6 +149,7 @@ export interface Link {
   url: string
   order: number
   location: LinkLocation
+  icon?: LinkIcon
 }
 
 export interface SummaryObject {

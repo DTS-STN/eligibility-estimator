@@ -94,12 +94,6 @@ export class BenefitHandler {
     if (this._benefitResults === undefined) {
       this._benefitResults = this.getBenefitResultObject()
       this.translateResults()
-      for (const key in this._benefitResults) {
-        const result: BenefitResult = this._benefitResults[key]
-        result.eligibility.detail = BenefitHandler.capitalizeEachLine(
-          this.replaceTextVariables(result.eligibility.detail, result)
-        )
-      }
     }
     return this._benefitResults
   }
@@ -268,6 +262,7 @@ export class BenefitHandler {
         benefitKey: benefitKey,
         eligibility: undefined,
         entitlement: undefined,
+        cardDetail: undefined,
       }
     }
 
@@ -360,6 +355,12 @@ export class BenefitHandler {
     // Finish with AFS entitlement.
     allResults.client.afs.entitlement = clientAfs.entitlement
 
+    // Process all CardDetails
+    allResults.client.oas.cardDetail = clientOas.cardDetail
+    allResults.client.gis.cardDetail = clientGis.cardDetail
+    allResults.client.alw.cardDetail = clientAlw.cardDetail
+    allResults.client.afs.cardDetail = clientAfs.cardDetail
+
     // All done!
     return allResults.client
   }
@@ -383,19 +384,23 @@ export class BenefitHandler {
         result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
 
-      // start detail processing...
-      const eligibilityText =
-        this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
+      // process detail result
+      result.eligibility.detail = BenefitHandler.capitalizeEachLine(
+        this.replaceTextVariables(result.eligibility.detail, result)
+      )
 
-      // if client is ineligible, the table will be populated with a link to view more reasons
-      const ineligibilityText =
-        result.eligibility.result === ResultKey.INELIGIBLE &&
-        result.eligibility.reason !== ResultReason.AGE_YOUNG // do not add additional reasons when they will be eligible in the future
-          ? ` ${this.translations.detail.additionalReasons}`
-          : ''
+      // process card main text
+      result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
+        this.replaceTextVariables(result.cardDetail.mainText, result)
+      )
 
-      // finish with detail processing
-      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityText}`
+      // process card collapsed content
+      result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
+        (collapsedText) => ({
+          heading: this.replaceTextVariables(collapsedText.heading, result),
+          text: this.replaceTextVariables(collapsedText.text, result),
+        })
+      )
     }
   }
 
