@@ -1,27 +1,34 @@
 import { Translations } from '../../../i18n/api'
 import {
+  BenefitKey,
   EntitlementResultType,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
 import {
+  CardCollapsedText,
   EligibilityResult,
   EntitlementResultOas,
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations)
+    super(input, translations, BenefitKey.oas)
   }
 
   protected getEligibility(): EligibilityResult {
     // helpers
     const meetsReqAge = this.input.age >= 65
-    const meetsReqIncome = this.income < legalValues.MAX_OAS_INCOME
+
+    // if income is not provided, assume they meet the income requirement
+    const skipReqIncome = !this.input.income.provided
+    const meetsReqIncome =
+      skipReqIncome || this.input.income.relevant < legalValues.oas.incomeLimit
+
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -29,23 +36,24 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     // main checks
     if (meetsReqIncome && meetsReqLegal && meetsReqYears) {
-      if (this.input.age >= 70) {
+      if (meetsReqAge && skipReqIncome)
+        return {
+          result: ResultKey.INCOME_DEPENDENT,
+          reason: ResultReason.INCOME_MISSING,
+          detail: this.translations.detail.eligibleDependingOnIncome,
+          incomeMustBeLessThan: legalValues.oas.incomeLimit,
+        }
+      else if (this.input.age >= 65) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.eligible,
         }
-      } else if (this.input.age >= 65 && this.input.age < 70) {
-        return {
-          result: ResultKey.ELIGIBLE,
-          reason: ResultReason.NONE,
-          detail: this.translations.detail.eligibleOas65to69,
-        }
       } else if (this.input.age == 64) {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.eligibleWhen65ApplyNowOas,
+          detail: this.translations.detail.eligibleWhen65ApplyNow,
         }
       } else {
         return {
@@ -110,46 +118,41 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   protected getEntitlement(): EntitlementResultOas {
-    if (this.eligibility.result !== ResultKey.ELIGIBLE)
+    const autoEnrollment = this.getAutoEnrollment()
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
       return {
         result: 0,
         resultAt75: 0,
         clawback: 0,
-        deferral: { years: 0, increase: 0 },
+        deferral: { age: 65, years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
+        autoEnrollment,
       }
 
     const resultCurrent = this.currentEntitlementAmount
     const resultAt75 = this.age75EntitlementAmount
-    const clawback = this.clawbackAmount
     const type =
       this.input.yearsInCanadaSince18 < 40
         ? EntitlementResultType.PARTIAL
         : EntitlementResultType.FULL
 
     if (type === EntitlementResultType.PARTIAL)
-      this.eligibility.detail =
-        this.input.age >= 65 && this.input.age < 70
-          ? this.translations.detail.eligiblePartialOas65to69
-          : this.translations.detail.eligiblePartialOas
-
-    if (resultCurrent !== resultAt75)
-      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75}`
-    else
-      this.eligibility.detail += ` ${this.translations.detail.oasIncreaseAt75Applied}`
-
-    if (this.deferralIncrease)
-      this.eligibility.detail += ` ${this.translations.detail.oasDeferralIncrease}`
-
-    if (clawback)
-      this.eligibility.detail += ` ${this.translations.detail.oasClawback}`
+      this.eligibility.detail = this.translations.detail.eligiblePartialOas
 
     return {
       result: resultCurrent,
       resultAt75: resultAt75,
-      clawback,
-      deferral: { years: this.deferralYears, increase: this.deferralIncrease },
+      clawback: this.clawbackAmount,
+      deferral: {
+        age: this.deferralYears + 65,
+        years: this.deferralYears,
+        increase: this.deferralIncrease,
+      },
       type,
+      autoEnrollment,
     }
   }
 
@@ -158,8 +161,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    */
   private get baseAmount() {
     return (
-      Math.min(this.input.yearsInCanadaSince18 / 40, 1) *
-      legalValues.MAX_OAS_ENTITLEMENT
+      Math.min(this.input.yearsInCanadaSince18 / 40, 1) * legalValues.oas.amount
     )
   }
 
@@ -212,13 +214,47 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The amount of "clawback" aka "repayment tax" the client will have to repay.
    */
   private get clawbackAmount(): number {
-    if (this.input.income.relevant < legalValues.OAS_RECOVERY_TAX_CUTOFF)
+    if (!this.input.income.provided) return 0
+    if (this.input.income.relevant < legalValues.oas.clawbackIncomeLimit)
       return 0
     const incomeOverCutoff =
-      this.input.income.relevant - legalValues.OAS_RECOVERY_TAX_CUTOFF
+      this.input.income.relevant - legalValues.oas.clawbackIncomeLimit
     const repaymentAmount = incomeOverCutoff * 0.15
     const oasYearly = this.currentEntitlementAmount * 12
     const result = Math.min(oasYearly, repaymentAmount)
     return roundToTwo(result)
+  }
+
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
+
+    // if not eligible, don't bother with any of the below
+    if (this.eligibility.result !== ResultKey.ELIGIBLE) return cardCollapsedText
+
+    // increase at 75
+    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasIncreaseAt75
+      )
+    else
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasIncreaseAt75Applied
+      )
+
+    // deferral
+    if (this.deferralIncrease)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasDeferralApplied
+      )
+    else if (this.input.age >= 65 && this.input.age < 70)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasDeferralAvailable
+      )
+
+    // clawback
+    if (this.clawbackAmount)
+      cardCollapsedText.push(this.translations.detailWithHeading.oasClawback)
+
+    return cardCollapsedText
   }
 }

@@ -2,25 +2,25 @@
   "lastUpdatedYear": 2022,
   "lastUpdatedQuarter": "April to June 2022",
   "oas": {
-    "average": 648.67,
-    "maximum": 133527,
-    "clawback": 79054
+    "amount": 648.67,
+    "incomeLimit": 133527,
+    "clawbackIncomeLimit": 79054
   },
   "gis": {
     "singleAmount": 968.86,
-    "singleLimit": 19656,
+    "singleIncomeLimit": 19656,
     "spouseOasAmount": 583.2,
-    "spouseOasLimit": 25968,
+    "spouseOasIncomeLimit": 25968,
     "spouseNoOasAmount": 968.86,
-    "spouseNoOasLimit": 47136,
-    "spouseAllowanceAmount": 583.2,
-    "spouseAllowanceLimit": 47136
+    "spouseNoOasIncomeLimit": 47136,
+    "spouseAlwAmount": 583.2,
+    "spouseAlwIncomeLimit": 36384
   },
-  "allowance": {
-    "spouseGisAmount": 1231.87,
-    "spouseGisLimit": 36384,
-    "survivorAmount": 1468.47,
-    "survivorLimit": 26496
+  "alw": {
+    "alwAmount": 1231.87,
+    "alwIncomeLimit": 36384,
+    "afsAmount": 1468.47,
+    "afsIncomeLimit": 26496
   },
   "topUp": {
     "single": 150.07,

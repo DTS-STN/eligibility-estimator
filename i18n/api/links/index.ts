@@ -1,39 +1,28 @@
+import { BenefitKey } from '../../../utils/api/definitions/enums'
 import { Link } from '../../../utils/api/definitions/types'
 
-export enum LinkKey {
-  contactSC = 'contactSC',
-  faq = 'faq',
-  oasOverview = 'oasOverview',
-  gisOverview = 'gisOverview',
-  alwOverview = 'alwOverview',
-  afsOverview = 'afsOverview',
-  oasMaxIncome = 'oasMaxIncome',
-  cpp = 'cpp',
-  cric = 'cric',
-  outsideCanada = 'outsideCanada',
-  outsideCanadaOas = 'outsideCanadaOas',
-  oasPartial = 'oasPartial',
-  paymentOverview = 'paymentOverview',
-  gisEntitlement = 'gisEntitlement',
-  alwEntitlement = 'alwEntitlement',
-  afsEntitlement = 'afsEntitlement',
-  oasRecoveryTax = 'oasRecoveryTax',
-  oasDefer = 'oasDefer',
-  oasRetroactive = 'oasRetroactive',
-  oasApply = 'oasApply',
-  gisApply = 'gisApply',
-  alwApply = 'alwApply',
-  afsApply = 'afsApply',
-  SC = 'SC',
-  oasDeferClickHere = 'oasDeferClickHere',
-  socialAgreement = 'socialAgreement',
-  oasReasons = 'oasReasons',
-  gisReasons = 'gisReasons',
-  alwReasons = 'alwReasons',
-  afsReasons = 'afsReasons',
-  oasRecoveryTaxInline = 'oasRecoveryTaxInline',
-}
-
-export type LinkDefinitions = {
-  [x in LinkKey]: Link
+export interface LinkDefinitions {
+  contactSC: Link
+  faq: Link
+  overview: { [key in BenefitKey]: Link }
+  oasMaxIncome: Link
+  cpp: Link
+  cric: Link
+  outsideCanada: Link
+  outsideCanadaOas: Link
+  oasPartial: Link
+  paymentOverview: Link
+  gisEntitlement: Link
+  alwEntitlement: Link
+  afsEntitlement: Link
+  oasRecoveryTax: Link
+  oasDefer: Link
+  oasRetroactive: Link
+  apply: { [key in BenefitKey]: Link }
+  SC: Link
+  oasDeferClickHere: Link
+  oasDeferInline: Link
+  socialAgreement: Link
+  reasons: { [key in BenefitKey]: Link }
+  oasRecoveryTaxInline: Link
 }
