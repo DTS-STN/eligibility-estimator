@@ -310,6 +310,6 @@ const en: Translations = {
   },
   yes: 'Yes',
   no: 'No',
-  years: 'years',
+  year: 'year',
 }
 export default en

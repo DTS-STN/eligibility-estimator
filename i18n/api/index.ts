@@ -117,7 +117,7 @@ export interface Translations {
   }
   yes: string
   no: string
-  years: string
+  year: string
 }
 
 export function getTranslations(language: Language): Translations {
