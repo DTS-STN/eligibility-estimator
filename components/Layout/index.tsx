@@ -59,7 +59,7 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
       <SCLabsTestHeader />
 
       <main className="mainContent">
-        <div className="xs:container mx-auto flex flex-col mb-16 mt-8">
+        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
             id="mainHeader"
             lang={router.locale}

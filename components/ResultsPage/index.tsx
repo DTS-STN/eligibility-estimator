@@ -37,7 +37,7 @@ export const ResultsPage: React.VFC = () => {
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
-      <div className="grid grid-cols-3 gap-12">
+      <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2">
           <Message
             id="resultSummaryBox"
@@ -59,7 +59,14 @@ export const ResultsPage: React.VFC = () => {
               summary={root.summary}
             />
           )}
-
+        </div>
+        <div className="col-span-1">
+          <YourAnswers
+            title={tsln.resultsPage.whatYouToldUs}
+            inputs={root.form.buildArrayWithFormData()}
+          />
+        </div>
+        <div className="col-span-2">
           <hr className="my-12 border border-[#BBBFC5]" />
 
           <BenefitCards results={resultsArray} />
@@ -69,13 +76,6 @@ export const ResultsPage: React.VFC = () => {
             styling="secondary"
             className="mt-6 justify-center md:w-[fit-content]"
             onClick={(e) => router.push('/eligibility')}
-          />
-        </div>
-
-        <div className="col-span-1">
-          <YourAnswers
-            title={tsln.resultsPage.whatYouToldUs}
-            inputs={root.form.buildArrayWithFormData()}
           />
         </div>
       </div>
