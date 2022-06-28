@@ -172,7 +172,7 @@ export const links: LinkDefinitions = {
   },
   socialAgreement: {
     text: 'accord de sécurité sociale',
-    url: 'https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/retenues-paie/retenues-paie-cotisations/regime-pensions-canada-rpc/employes-employeurs-etrangers/accords-sociaux-canada-autres-pays.html',
+    url: 'https://www.canada.ca/fr/agence-revenu/services/impot/decisions-concernant-regime-pensions-canada-rpc-assurance-emploi-ae/accords-internationaux-securite-sociale-regime-pensions-canada/quels-sont-objectifs-accords-internationaux-securite-sociale.html#tbl',
     order: -1,
     location: LinkLocation.HIDDEN,
   },
