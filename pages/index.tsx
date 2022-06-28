@@ -1,5 +1,4 @@
 import { Button } from '@dts-stn/decd-design-system'
-import Link from 'next/link'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
