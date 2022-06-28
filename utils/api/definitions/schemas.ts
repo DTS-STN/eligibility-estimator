@@ -44,7 +44,6 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.oasAge65to70),
   maritalStatus: Joi.string()
     .valid(...Object.values(MaritalStatus))
-    .invalid(MaritalStatus.INV_SEPARATED)
     .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
@@ -54,6 +53,12 @@ export const RequestSchema = Joi.object({
   livedOutsideCanada: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
+    .min(
+      Joi.ref('livingCountry', {
+        adjust: (country) => (country === 'CAN' ? 10 : 20),
+      })
+    )
+    .message(ValidationErrors.yearsInCanadaNotEnough)
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean(),

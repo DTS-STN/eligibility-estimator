@@ -153,6 +153,8 @@ const fr: WebTranslations = {
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
     [ValidationErrors.oasAge65to70]:
       'Vous devez saisir un âge compris entre 65 et 70 ans.',
+    [ValidationErrors.yearsInCanadaNotEnough]:
+      'The number of years you have lived in Canada is not enough to receive any of the benefits', // TODO: change to French
     [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:

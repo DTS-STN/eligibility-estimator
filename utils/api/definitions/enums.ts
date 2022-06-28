@@ -103,6 +103,7 @@ export enum ValidationErrors {
   ageOver150 = 'ageOver150',
   partnerAgeOver150 = 'partnerAgeOver150',
   oasAge65to70 = 'oasAge65to70',
+  yearsInCanadaNotEnough = 'yearsInCanadaNotEnough',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
   maritalUnavailable = 'maritalUnavailable',
