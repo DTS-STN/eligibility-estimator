@@ -200,7 +200,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
           )}
           {(field.type == FieldType.DROPDOWN ||
             field.type == FieldType.DROPDOWN_SEARCHABLE) && (
-            <div className="pb-4">
+            <div id={field.key} className="pb-4">
               <FormSelect
                 name={field.key}
                 field={field}
@@ -211,7 +211,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
           )}
           {(field.type == FieldType.RADIO ||
             field.type == FieldType.BOOLEAN) && (
-            <div className="pb-4">
+            <div id={field.key} className="pb-4">
               <Radio
                 name={field.key}
                 checkedValue={field.value}
