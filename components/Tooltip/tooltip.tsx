@@ -4,6 +4,8 @@ import { getTooltipTranslations, TooltipTranslation } from '../../i18n/tooltips'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { useMediaQuery } from '../Hooks'
+import { WebTranslations } from '../../i18n/web'
+import { useTranslation } from '../Hooks'
 
 export const Tooltip: React.FC<{
   field: string
@@ -12,6 +14,7 @@ export const Tooltip: React.FC<{
   const router = useRouter()
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
+  const tsln = useTranslation<WebTranslations>()
 
   const handleClickOutside = (event) => {
     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -48,12 +51,12 @@ export const Tooltip: React.FC<{
   if (!tooltipData) return <></>
 
   return (
-    <span
-      className="ml-2 relative md:absolute inline-block"
+    <div
+      className="relative inline-block mb-2 cursor-pointer"
       ref={wrapperRef}
       data-testid="tooltip"
     >
-      <svg
+      {/* <svg
         xmlns="http://www.w3.org/2000/svg"
         width="25"
         height="25"
@@ -64,7 +67,13 @@ export const Tooltip: React.FC<{
           d="M12.5 0C5.597 0 0 5.599 0 12.5 0 19.405 5.597 25 12.5 25S25 19.405 25 12.5C25 5.599 19.403 0 12.5 0Zm0 5.544a2.117 2.117 0 1 1 0 4.234 2.117 2.117 0 0 1 0-4.234Zm2.823 12.803c0 .334-.271.605-.605.605h-4.436a.605.605 0 0 1-.605-.605v-1.21c0-.334.271-.605.605-.605h.605v-3.226h-.605a.605.605 0 0 1-.605-.604v-1.21c0-.334.271-.605.605-.605h3.226c.334 0 .605.27.605.605v5.04h.605c.334 0 .605.271.605.605v1.21Z"
           className="text-primary fill-info"
         />
-      </svg>
+      </svg> */}
+      <a
+        className="underline text-default-text text-[16px]"
+        onClick={(e) => setShow(true)}
+      >
+        {tsln.tooltip.moreInformation}
+      </a>
       <div
         className={`${
           show
@@ -77,7 +86,7 @@ export const Tooltip: React.FC<{
       >
         <div
           className={`w-full md:w-auto max-w-[440px] shadow-xl rounded-xl border border-[#C7CFEF] bg-white ${
-            isMobile ? '' : 'relative -top-10 left-10'
+            isMobile ? '' : 'relative -top-4'
           } z-40`}
         >
           <header className="flex items-center justify-between gap-x-4 bg-primary text-white rounded-t-xl px-5 py-3">
@@ -120,7 +129,7 @@ export const Tooltip: React.FC<{
           />
         </div>
       </div>
-    </span>
+    </div>
   )
 }
 
