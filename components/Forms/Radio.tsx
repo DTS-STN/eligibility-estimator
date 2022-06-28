@@ -33,7 +33,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
 
   return (
     <div className="radio">
-      <div className="">
+      <div>
         <label
           htmlFor={name}
           aria-label={name}
