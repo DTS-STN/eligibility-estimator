@@ -33,7 +33,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
 
   return (
     <div className="radio">
-      <div className="mb-2.5">
+      <div>
         <label
           htmlFor={name}
           aria-label={name}
@@ -47,7 +47,6 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
         </label>
         <span>
           <span className="ml-1">({requiredText})</span>
-          <Tooltip field={name} />
         </span>
         {helpText && (
           <div
@@ -56,6 +55,9 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           ></div>
         )}
       </div>
+
+      <Tooltip field={name} />
+
       {error && <ErrorLabel errorMessage={error} />}
       {values.map((val, index) => (
         <div
