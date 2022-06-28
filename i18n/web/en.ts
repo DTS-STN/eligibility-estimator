@@ -4,6 +4,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
+import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
@@ -31,19 +32,9 @@ const en: WebTranslations = {
   menuTitle: 'Service Canada',
   clear: 'Clear',
   back: 'Back',
-  next: 'Next',
-  questions: 'Questions',
-  results: 'Results',
-  needHelp: 'Need help?',
   faq: 'Frequently Asked Questions',
-  saveToCsv: 'Download',
   nextStep: 'Next step',
-  getResults: 'Get Results',
   getEstimate: 'Estimate my benefits',
-  applyHeader: 'Apply for benefits',
-  applyText:
-    'Now that you have estimated your benefits, please use the button(s) below to apply.',
-  applyForLabel: 'Apply for',
   required: 'required',
   homePageP1:
     'Use this estimator to find out how much money you could get from old age benefit programs. You can enter your current information, or you can enter future information for planning purposes.',
@@ -69,17 +60,17 @@ const en: WebTranslations = {
   estimatorTimeEstimate:
     'This estimator will take about 5 to 10 minutes to complete.',
   whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
-  benefitAvailable: 'A benefit available to those 65 and older',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.oasOverview.url}" target="_blank">Learn more about Old Age Security</a>`,
+  benefitAvailable: 'A benefit available to those 65 and older.',
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about Old Age Security</a>`,
   gisDefinitionText:
     'A benefit available to those 65 and older. Learn more about Old Age Security Guaranteed Income Supplement A benefit available to those who receive Old Age Security benefits, are aged 65 and older, have a low income, and are living in Canada.',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.gisOverview.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
+  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.overview.gis.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
   alwDefinitionText:
     'A benefit available to low-income individuals aged 60 to 64, whose spouse or common-law partner receives the Guaranteed Income Supplement.',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.alwOverview.url}" target="_blank">Learn more about the Allowance</a>`,
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.overview.alw.url}" target="_blank">Learn more about the Allowance</a>`,
   afsDefinitionText:
     'A benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiEn.links.afsOverview.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiEn.links.overview.afs.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
   notIncludeCPP:
     'This estimator tool does not include the Canada Pension Plan (CPP) retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
@@ -96,8 +87,6 @@ const en: WebTranslations = {
     'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
     'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
-  disclaimerTitle: 'Privacy and terms of use',
-  disclaimer: `The Canadian Old Age Benefits Estimator does not collect or transmit any personal information. Anonymous usage data may be collected for research purposes. The information provided is governed in accordance with the <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a>.</br></br>Please note that any information provided by this tool is only an estimate, and should not be considered financial advice. For an official assessment, you are encouraged to contact <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Service Canada</a>.`,
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',
   footerlink3: 'Treaties, laws and regulations',
@@ -115,20 +104,35 @@ const en: WebTranslations = {
 
   category: apiEn.category,
 
-  contactCTA:
-    'We encourage you to contact <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html">Service Canada</a> for an official assessment of your application.',
   resultsPage: {
-    header: 'Table of estimation results',
-    tableHeader1: 'Sample Benefits',
-    tableHeader2: 'Eligibility',
-    tableHeader3: 'Details',
-    tableHeader4: 'Estimated monthly amount (CAD)',
-    tableTotalAmount: 'Total estimated monthly benefit amount',
+    header: 'Table of estimated monthly amounts',
+    onThisPage: 'On This Page:',
+    tableHeader1: 'Benefit',
+    tableHeader2: 'Estimated monthly amount (CAD)',
+    tableTotalAmount: 'Total',
+    whatYouToldUs: 'What you told us',
+    youMayBeEligible: 'You may be eligible at this time',
+    youAreNotEligible: 'You likely are not eligible at this time',
+    basedOnYourInfoEligible:
+      'Based on your information, you may be eligible for:',
+    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or contact ${generateLink(
+      apiEn.links.SC
+    )} for more information.`,
+    yourEstimatedTotal: 'Your estimated monthly total is ',
+    basedOnYourInfoTotal:
+      "Based on the information you've provided, you should expect to receive around {AMOUNT} per month.",
+    nextSteps: 'Next steps for benefits you may be eligible for',
+    youMayNotBeEligible: 'Benefits you may not be eligible for',
+    noAnswersFound: 'No answers found',
+    noBenefitsFound: 'No benefits found',
+    edit: 'Edit',
+    info: 'info',
+    note: 'note',
+    link: 'link',
+    dollarSign: 'Dollars sign symbol',
   },
-  moreInfoHeader: 'More Information',
+  resultsQuestions: apiEn.questionShortText,
   modifyAnswers: 'Modify answers',
-  modifyAnswersText:
-    'If you think you have made a mistake in filling out the form, or you would like to change your answers to see what would happen in a different scenario, please use the button below to modify your answers.',
   errors: {
     empty: 'This information is required',
   },
@@ -158,10 +162,9 @@ const en: WebTranslations = {
       'You have indicated a legal status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Unable to proceed',
-  unavailableImageAltText: 'Happy people',
-  govt: 'Government of Canada',
   yes: 'Yes',
   no: 'No',
+  unavailable: 'unavailable',
 
   selectText: {
     maritalStatus: 'Select a marital status',

@@ -1,5 +1,6 @@
 import { Translations } from '../../../i18n/api'
 import {
+  BenefitKey,
   EntitlementResultType,
   ResultKey,
   ResultReason,
@@ -15,7 +16,7 @@ import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations)
+    super(input, translations, BenefitKey.alw)
   }
 
   protected getEligibility(): EligibilityResult {
@@ -75,26 +76,26 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE,
-          detail: this.translations.detail.mustBe60to64,
+          detail: this.translations.detail.alwNotEligible,
         }
       }
     } else if (overAgeReq) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.AGE,
-        detail: this.translations.detail.mustBe60to64,
+        detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
-        detail: this.translations.detail.mustBePartnered,
+        detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqPartner && this.input.partnerBenefitStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
-        detail: this.translations.detail.mustHavePartnerWithGis,
+        detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqIncome) {
       return {
@@ -123,7 +124,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.INELIGIBLE,
             reason: ResultReason.AGE,
-            detail: this.translations.detail.mustBe60to64,
+            detail: this.translations.detail.alwNotEligible,
           }
         }
       } else {
@@ -158,11 +159,16 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
+    const autoEnrollment = this.getAutoEnrollment()
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
     )
-      return { result: 0, type: EntitlementResultType.NONE }
+      return {
+        result: 0,
+        type: EntitlementResultType.NONE,
+        autoEnrollment,
+      }
 
     if (
       !this.input.income.provided &&
@@ -171,6 +177,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: -1,
         type: EntitlementResultType.UNAVAILABLE,
+        autoEnrollment,
       }
 
     const formulaResult = new EntitlementFormula(
@@ -185,6 +192,13 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         ? EntitlementResultType.UNAVAILABLE
         : EntitlementResultType.FULL
 
-    return { result: formulaResult, type }
+    return { result: formulaResult, type, autoEnrollment }
+  }
+
+  /**
+   * For this benefit, always return false, because we don't know any better as of now.
+   */
+  protected getAutoEnrollment(): boolean {
+    return false
   }
 }

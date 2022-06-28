@@ -94,6 +94,12 @@ export enum LinkLocation {
   HIDDEN = 'HIDDEN', // won't show anywhere (used internally for linkifying strings)
 }
 
+export enum LinkIcon {
+  note = 'note',
+  info = 'info',
+  link = 'link',
+}
+
 // all "custom" Joi Validation errors that we properly handle and translate for the end user
 export enum ValidationErrors {
   incomeBelowZero = 'incomeBelowZero',

@@ -61,18 +61,9 @@ export type WebTranslations = {
   menuTitle: string
   clear: string
   back: string
-  next: string
-  questions: string
-  results: string
-  needHelp: string
   faq: string
-  saveToCsv: string
   nextStep: string
-  getResults: string
   getEstimate: string
-  applyHeader: string
-  applyText: string
-  applyForLabel: string
   required: string
   homePageHeader1: string
   homePageP1: string
@@ -80,8 +71,6 @@ export type WebTranslations = {
   homePageP4: string
   homePageP5: string
   homePageP6: string
-  disclaimer: string
-  disclaimerTitle: string
   footerlink1: string
   footerlink2: string
   footerlink3: string
@@ -101,27 +90,39 @@ export type WebTranslations = {
   category: Translations['category']
 
   //results page
-  contactCTA: string
   resultsPage: {
     header: string
+    onThisPage: string
     tableHeader1: string
     tableHeader2: string
-    tableHeader3: string
-    tableHeader4: string
     tableTotalAmount: string
+    whatYouToldUs: string
+    youMayBeEligible: string
+    youAreNotEligible: string
+    basedOnYourInfoEligible: string
+    basedOnYourInfoNotEligible: string
+    yourEstimatedTotal: string
+    basedOnYourInfoTotal: string
+    nextSteps: string
+    youMayNotBeEligible: string
+    noAnswersFound: string
+    noBenefitsFound: string
+    edit: string
+    info: string
+    note: string
+    link: string
+    dollarSign: string
   }
-  moreInfoHeader: string
+  resultsQuestions: Translations['questionShortText']
   modifyAnswers: string
-  modifyAnswersText: string
   errors: {
     empty: string
   }
   validationErrors: { [key in ValidationErrors]: string }
   unableToProceed: string
-  unavailableImageAltText: string
-  govt: string
   yes: string
   no: string
+  unavailable: string
 
   selectText: {
     maritalStatus: string

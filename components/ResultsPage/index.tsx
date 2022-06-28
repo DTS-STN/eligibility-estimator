@@ -1,83 +1,84 @@
-import { Button } from '@dts-stn/decd-design-system'
-import Image from 'next/image'
+import { Button, Message } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { WebTranslations } from '../../i18n/web'
-import { EstimationSummaryState } from '../../utils/api/definitions/enums'
-import { FAQ } from '../FAQ'
-import { useMediaQuery, useStore, useTranslation } from '../Hooks'
-import { NeedHelp } from '../NeedHelp'
-import { MoreInfoLinks } from './MoreInfoLinks'
-import { ResultsApply } from './ResultsApply'
-import { ResultsTable } from './ResultsTable'
+import { ResultKey } from '../../utils/api/definitions/enums'
+import { BenefitResult } from '../../utils/api/definitions/types'
+import { useStore, useTranslation } from '../Hooks'
+import { BenefitCards } from './BenefitCards'
+import { EstimatedTotal } from './EstimatedTotal'
+import { ListLinks } from './ListLinks'
+import { MayBeEligible } from './MayBeEligible'
+import { YourAnswers } from './YourAnswers'
 
 export const ResultsPage: React.VFC = () => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
-  const isMobile = useMediaQuery(992)
   const root = useStore()
   const router = useRouter()
+
+  const listLinks: { text: string; url: string }[] = [
+    { text: tsln.resultsPage.youMayBeEligible, url: '#eligible' },
+    { text: tsln.resultsPage.yourEstimatedTotal, url: '#estimated' },
+    { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
+    { text: tsln.resultsPage.nextSteps, url: '#nextSteps' },
+    { text: tsln.resultsPage.youMayNotBeEligible, url: '#notEligible' },
+  ]
+
+  const resultsArray: BenefitResult[] = root
+    .getResultArray()
+    .map((x) => x.toJSON()) as BenefitResult[]
+
+  const resultsEligible: BenefitResult[] = resultsArray.filter(
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+  )
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="grid grid-cols-3 gap-12">
         <div className="col-span-2">
-          <h2 className="h2">{root.summary.title}</h2>
-          <p dangerouslySetInnerHTML={{ __html: root.summary.details }} />
+          <Message
+            id="resultSummaryBox"
+            type="info"
+            alert_icon_id="resultSummaryBoxIcon"
+            alert_icon_alt_text="Info"
+            message_heading={root.summary.title}
+            message_body={root.summary.details}
+            asHtml={true}
+          />
+
+          <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
+
+          <MayBeEligible resultsEligible={resultsEligible} />
+
+          {resultsEligible.length > 0 && (
+            <EstimatedTotal
+              resultsEligible={resultsEligible}
+              summary={root.summary}
+            />
+          )}
+
+          <hr className="my-12 border border-[#BBBFC5]" />
+
+          <BenefitCards results={resultsArray} />
+
+          <Button
+            text={tsln.modifyAnswers}
+            styling="secondary"
+            className="mt-6 justify-center md:w-[fit-content]"
+            onClick={(e) => router.push('/eligibility')}
+          />
         </div>
+
         <div className="col-span-1">
-          <NeedHelp title={tsln.needHelp} links={root.summary.needHelpLinks} />
+          <YourAnswers
+            title={tsln.resultsPage.whatYouToldUs}
+            inputs={root.form.buildArrayWithFormData()}
+          />
         </div>
       </div>
-      {root.summary.state &&
-        root.summary.state !== EstimationSummaryState.MORE_INFO && (
-          <>
-            {root.summary.state === EstimationSummaryState.UNAVAILABLE ? (
-              <div
-                className={`mt-10 w-full relative ${
-                  !isMobile ? 'h-[450px]' : 'h-[180px]'
-                }`}
-              >
-                <Image
-                  src={'/people.png'}
-                  layout="fill"
-                  alt={tsln.unavailableImageAltText}
-                />
-              </div>
-            ) : (
-              <ResultsTable />
-            )}
-            <ResultsApply />
-            <p>{tsln.modifyAnswersText}</p>
-            <Button
-              text={tsln.modifyAnswers}
-              styling="secondary"
-              className="mt-6 justify-center md:w-[fit-content]"
-              onClick={(e) => router.push('/eligibility')}
-            />
-            {root.summary?.moreInfoLinks?.length && (
-              <MoreInfoLinks links={root.summary.moreInfoLinks} />
-            )}
-
-            <FAQ />
-          </>
-        )}
     </div>
-  )
-}
-
-/**
- * @param element The *div element* to check against the document viewport
- * @returns whether or not the element is in the viewport
- */
-const isElementInViewport = (element: HTMLDivElement): boolean => {
-  const rect = element.getBoundingClientRect()
-
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   )
 }

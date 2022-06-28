@@ -1,8 +1,7 @@
 import { numberToStringCurrency } from '../../../i18n/api'
-import { LinkKey } from '../../../i18n/api/links'
 import { BenefitHandler } from '../benefitHandler'
 import legalValues from '../scrapers/output'
-import { BenefitResult } from './types'
+import { BenefitResult, Link } from './types'
 
 type TextReplacementRules = {
   [x: string]: (
@@ -13,41 +12,47 @@ type TextReplacementRules = {
 
 export const textReplacementRules: TextReplacementRules = {
   ENTITLEMENT_AMOUNT: (handler) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.summary.entitlementSum,
       handler.translations._locale
     )}</strong>`,
   OAS_75_AMOUNT: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.resultAt75 ?? 0,
       handler.translations._locale
-    ),
+    )}</strong>`,
   OAS_DEFERRAL_INCREASE: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.deferral.increase ?? 0,
       handler.translations._locale
-    ),
-  OAS_DEFERRAL_YEARS: (handler) =>
-    String(handler.benefitResults.oas?.entitlement.deferral.years ?? 0),
+    )}</strong>`,
+  OAS_DEFERRAL_YEARS: (handler) => {
+    const years = handler.benefitResults.oas?.entitlement.deferral.years
+    return `<strong>${years ?? 0} ${handler.translations.year}${
+      years !== 1 ? 's' : ''
+    }</strong>`
+  },
+  OAS_DEFERRAL_AGE: (handler) =>
+    String(handler.benefitResults.oas.entitlement.deferral.age),
   OAS_CLAWBACK: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.clawback ?? 0,
       handler.translations._locale
-    ),
+    )}</strong>`,
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
-    numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       legalValues.oas.clawbackIncomeLimit,
       handler.translations._locale,
       { rounding: 0 }
-    ),
+    )}</strong>`,
   OAS_MAX_INCOME: (handler) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       legalValues.oas.incomeLimit,
       handler.translations._locale,
       { rounding: 0 }
     )}</strong>`,
   INCOME_LESS_THAN: (handler, benefitResult) =>
-    `<strong className="font-bold">${numberToStringCurrency(
+    `<strong>${numberToStringCurrency(
       benefitResult.eligibility.incomeMustBeLessThan,
       handler.translations._locale,
       { rounding: 0 }
@@ -56,19 +61,19 @@ export const textReplacementRules: TextReplacementRules = {
     handler.input.client.maritalStatus.partnered
       ? handler.translations.incomeCombined
       : handler.translations.incomeSingle,
-  LINK_SERVICE_CANADA: (handler) => generateLink(handler, LinkKey.SC),
+  LINK_SERVICE_CANADA: (handler) => generateLink(handler.translations.links.SC),
   LINK_SOCIAL_AGREEMENT: (handler) =>
-    generateLink(handler, LinkKey.socialAgreement),
+    generateLink(handler.translations.links.socialAgreement),
   LINK_MORE_REASONS: (handler, benefitResult) =>
-    generateLink(handler, LinkKey[`${benefitResult.benefitKey}Reasons`]),
+    generateLink(handler.translations.links.reasons[benefitResult.benefitKey]),
   LINK_OAS_DEFER_CLICK_HERE: (handler) =>
-    generateLink(handler, LinkKey.oasDeferClickHere),
+    generateLink(handler.translations.links.oasDeferClickHere),
   LINK_OAS_DEFER_INLINE: (handler) =>
-    generateLink(handler, LinkKey.oasDeferInline),
+    generateLink(handler.translations.links.oasDeferInline),
   LINK_RECOVERY_TAX: (handler) =>
-    generateLink(handler, LinkKey.oasRecoveryTaxInline),
+    generateLink(handler.translations.links.oasRecoveryTaxInline),
 }
 
-function generateLink(handler: BenefitHandler, linkKey: LinkKey): string {
-  return `<a class="underline text-default-text" href="${handler.translations.links[linkKey].url}" target="_blank">${handler.translations.links[linkKey].text}</a>`
+export function generateLink(link: Link): string {
+  return `<a class="underline text-default-text" href="${link.url}" target="_blank">${link.text}</a>`
 }

@@ -5,6 +5,7 @@ import {
   Locale,
   ValidationErrors,
 } from '../../utils/api/definitions/enums'
+import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
@@ -32,19 +33,9 @@ const fr: WebTranslations = {
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
-  next: 'Suivant',
-  questions: 'Questions',
-  results: 'Résultats',
-  needHelp: "Besoin d'aide?",
   faq: 'Foire Aux Questions',
-  saveToCsv: 'Télécharger',
   nextStep: 'Prochaine étape',
-  getResults: 'Obtenir les résultats',
   getEstimate: 'Estimer mes prestations',
-  applyHeader: 'Faire une demande de prestations',
-  applyText:
-    'Maintenant que vous avez estimé vos prestations, veuillez utiliser le(s) bouton(s) ci-dessous pour faire votre demande.',
-  applyForLabel: 'Demander',
   required: 'obligatoire',
   homePageP1:
     "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
@@ -74,16 +65,16 @@ const fr: WebTranslations = {
   whatBenefitsTheEstimatorIsFor: "Prestations incluses dans l'estimateur",
   benefitAvailable:
     'Une prestation disponible aux personnes de 65 ans et plus.',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.oasOverview.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
   gisDefinitionText:
     'Une prestation disponible aux personnes qui reçoivent la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada.',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.gisOverview.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
+  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
   alwDefinitionText:
     'Une prestation disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu et dont le conjoint reçoit le Supplément de revenu garanti.',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.alwOverview.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
+  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
   afsDefinitionText:
     'Une prestation disponible aux personnes âgées entre entre 60 et 64 ans ayant un faible revenu et dont le conjoint est décédé.',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.afsOverview.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
+  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des estimations',
@@ -98,8 +89,6 @@ const fr: WebTranslations = {
     "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
   homePageP6:
     "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
-  disclaimerTitle: "Confidentialité et conditions d'utilisation",
-  disclaimer: `L'Estimateur canadien de prestations de vieillesse ne recueille ni ne transmet aucun renseignement personnel. Les données d'utilisation anonymes peuvent être recueillies à des fins de recherche. Les renseignements fournis sont régis conformément à la <a className='underline text-default-text' href='https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html' target='_blank'>Loi sur la protection des renseignements personnels</a>.</br></br>Veuillez noter que toutes les informations fournies par cet outil ne sont qu'une estimation et ne doivent pas être considérées comme des conseils financiers. Pour une évaluation officielle, nous vous encourageons à communiquer avec <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Service Canada</a>.`,
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
   footerlink3: 'Traités, lois et règlements',
@@ -117,20 +106,37 @@ const fr: WebTranslations = {
 
   category: apiFr.category,
 
-  contactCTA:
-    'Nous vous encourageons à contacter <a className="text-default-text underline" target="_blank" href="https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html">Service Canada</a> pour une évaluation officielle de votre demande.',
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    tableHeader1: 'Exemples de prestations',
-    tableHeader2: 'Admissibilité',
-    tableHeader3: 'Montant mensuel estimé (CAD)',
-    tableHeader4: 'Details',
-    tableTotalAmount: 'Montant total des prestations mensuelles',
+    onThisPage: 'sur cette page',
+    tableHeader1: 'Prestations',
+    tableHeader2: 'Montant mensuel estimé (CAD)',
+    tableTotalAmount: 'Total',
+    whatYouToldUs: 'Ce que vous nous avez dit',
+    youMayBeEligible: 'Vous pouvez être éligible en ce moment',
+    youAreNotEligible: "Vous n'êtes probablement pas éligible pour le moment",
+    basedOnYourInfoEligible:
+      'Selon vos informations, vous pourriez être admissible à :',
+    basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
+      apiFr.links.SC
+    )} pour plus d'informations.`,
+    yourEstimatedTotal: 'Votre total mensuel estimé est de',
+    basedOnYourInfoTotal:
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois.",
+    nextSteps:
+      'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
+    youMayNotBeEligible:
+      'Prestations auxquels vous pourriez ne pas avoir droit',
+    noAnswersFound: 'Aucune réponse trouvée',
+    noBenefitsFound: 'Aucune prestations trouvée',
+    edit: 'Éditer',
+    info: 'info',
+    note: 'remarque',
+    link: 'lien',
+    dollarSign: 'symbole du dollar',
   },
-  moreInfoHeader: "Besoin de plus d'information",
+  resultsQuestions: apiFr.questionShortText,
   modifyAnswers: 'Modifier vos réponses',
-  modifyAnswersText:
-    'Si vous avez fait une erreur en remplissant le formulaire, ou si vous souhaitez modifier vos réponses pour voir ce qui se passerait dans un scénario différent, veuillez utiliser le bouton ci-dessous pour modifier vos réponses.',
   errors: {
     empty: 'Ce renseignement est requis',
   },
@@ -162,10 +168,9 @@ const fr: WebTranslations = {
       "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Impossible de continuer',
-  unavailableImageAltText: 'Gens Heureux',
-  govt: 'Gouvernement du Canada',
   yes: 'Oui',
   no: 'Non',
+  unavailable: 'indisponible',
 
   selectText: {
     maritalStatus: 'Sélectionner un état civil',

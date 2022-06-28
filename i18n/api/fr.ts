@@ -67,7 +67,32 @@ const fr: Translations = {
     partnerYearsInCanadaSince18:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     partnerEverLivedSocialCountry:
-      'FRENCH: Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT}?',
+      'Votre conjoint-a-til déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
+  },
+  questionShortText: {
+    age: 'Âge',
+    oasDefer: 'Report de la SV',
+    oasAge: 'Âge de report de la SV',
+    incomeAvailable: 'Revenu fourni',
+    income: 'Revenu net',
+    legalStatus: 'Statut légal',
+    livingCountry: 'Pays de résidence',
+    livedOutsideCanada: "A vécu à l'extérieur du Canada pendant plus de 6 mois",
+    yearsInCanadaSince18: "Années vécues à l'extérieur du Canada",
+    everLivedSocialCountry: 'A vécu dans un pays avec un accord social',
+    maritalStatus: 'État civil',
+    partnerIncomeAvailable: 'Revenu du partenaire fourni',
+    partnerIncome: 'Revenu net du partenaire',
+    partnerBenefitStatus: 'Prestations de vieillesse du partenaire',
+    partnerAge: 'Âge du partenaire',
+    partnerLegalStatus: 'Statut juridique du partenaire',
+    partnerLivingCountry: 'Pays de résidence du partenaire',
+    partnerLivedOutsideCanada:
+      "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
+    partnerYearsInCanadaSince18:
+      "Années du partenaire vécues à l'extérieur du Canada",
+    partnerEverLivedSocialCountry:
+      'Le partenaire vivait dans un pays avec un accord social',
   },
   questionHelp: {
     incomeAvailable:
@@ -196,36 +221,24 @@ const fr: Translations = {
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}.',
     eligibleDependingOnIncomeNoEntitlement:
       "Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
-    eligibleOas65to69:
-      'Vous êtes probablement admissible à cette prestation. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
-    eligiblePartialOas65to69:
-      'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
     eligibleWhen60ApplyNow:
       'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
-    eligibleWhen65ApplyNowOas:
-      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus. Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+    eligibleWhen65ApplyNow:
+      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
       'Vous serez probablement admissible à votre 60e anniversaire.',
     eligibleWhen65:
       'Vous serez probablement admissible à votre 65e anniversaire.',
-    mustBe60to64:
-      'Vous devez avoir entre 60 et 64 ans pour être admissible à cette prestation.',
     mustBeInCanada:
       'Vous devez vivre au Canada pour être admissible à cette prestation.',
     mustBeOasEligible:
       'Vous devez être admissible à la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
       "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
-    mustBeWidowed:
-      'Vous devez être un partenaire survivant ou un veuf pour être admissible à cette prestation.',
-    mustBePartnered:
-      'Vous devez être conjoint de fait ou marié pour être admissible à cette prestation.',
-    mustHavePartnerWithGis:
-      'Votre partenaire doit recevoir le supplément de revenu garanti pour être admissible à cette prestation.',
     mustMeetIncomeReq:
       '{INCOME_SINGLE_OR_COMBINED} est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
@@ -246,16 +259,38 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    additionalReasons:
-      "{LINK_MORE_REASONS} pour les raisons additionnelles possibles d'inéligibilité.",
-    oasClawback:
-      'Vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX} car {INCOME_SINGLE_OR_COMBINED} est supérieur à {OAS_RECOVERY_TAX_CUTOFF}.',
-    oasIncreaseAt75:
-      "Une fois que vous atteignez l'âge de 75 ans, votre montant mensuel augmentera de 10 %, à {OAS_75_AMOUNT}",
-    oasIncreaseAt75Applied:
-      'Comme vous avez plus de 75 ans, votre droit à la SV a été augmenté de 10 %.',
-    oasDeferralIncrease:
-      'En différant de {OAS_DEFERRAL_YEARS} ans, votre pension de la SV est augmentée de {OAS_DEFERRAL_INCREASE}.',
+    alwNotEligible:
+      "L'allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+    afsNotEligible:
+      "L'Allocation au survivant s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) est décédé.",
+    autoEnrollTrue:
+      "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
+    autoEnrollFalse:
+      "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
+    expectToReceive:
+      'Vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT} par mois.',
+  },
+  detailWithHeading: {
+    oasDeferralApplied: {
+      heading: 'Comment le report affecte vos paiements',
+      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
+    },
+    oasDeferralAvailable: {
+      heading: 'Vous pouvez peut-être différer vos paiements',
+      text: 'Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
+    oasClawback: {
+      heading: 'Vous devrez peut-être rembourser une partie de votre pension',
+      text: 'Étant donné que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+    },
+    oasIncreaseAt75: {
+      heading: 'Vos paiements augmenteront lorsque vous atteindrez 75 ans',
+      text: "Une fois que vous aurez atteint l'âge de 75 ans, vos paiements de la SV augmenteront de 10 %, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.",
+    },
+    oasIncreaseAt75Applied: {
+      heading: 'Vos versements ont augmenté car vous avez plus de 75 ans',
+      text: 'Puisque vous avez plus de 75 ans, vos versements de la SV ont été augmentés de 10 %.',
+    },
   },
   summaryTitle: {
     moreInfo: 'Plus de renseignements sont nécessaires',
@@ -292,5 +327,6 @@ const fr: Translations = {
   },
   yes: 'Oui',
   no: 'Non',
+  year: 'an',
 }
 export default fr
