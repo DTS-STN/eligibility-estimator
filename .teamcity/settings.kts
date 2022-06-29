@@ -34,8 +34,8 @@ project {
 }
 
 object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_release"
-    url = "git@github.com:DTS-STN/next-template.git"
+    name = "https://github.com/DTS-STN/coabe/tree/_release"
+    url = "git@github.com:DTS-STN/coabe.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -45,8 +45,8 @@ object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
 })
 
 object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_dynamic"
-    url = "git@github.com:DTS-STN/next-template.git"
+    name = "https://github.com/DTS-STN/coabe/tree/_dynamic"
+    url = "git@github.com:DTS-STN/coabe.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
@@ -63,7 +63,7 @@ object Build_Main: BuildType({
     description = "Deploys main branch code on branch updates"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "coabe")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -76,7 +76,6 @@ object Build_Main: BuildType({
     vcs {
         root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
     }
-   
     steps {
         dockerCommand {
             name = "Build & Tag Docker Image"
@@ -124,7 +123,7 @@ object Build_Performance: BuildType({
     description = "Manually run performance environment"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "coabe")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -138,7 +137,6 @@ object Build_Performance: BuildType({
     vcs {
         root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
     }
-   
     steps {
         dockerCommand {
             name = "Build & Tag Docker Image"
@@ -186,7 +184,7 @@ object Build_Dynamic: BuildType({
     description = "Builds and deploys every branch"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "coabe")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -199,7 +197,6 @@ object Build_Dynamic: BuildType({
     vcs {
         root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
     }
-   
     steps {
         dockerCommand {
             name = "Build & Tag Docker Image"
@@ -242,7 +239,7 @@ object Build_Dynamic: BuildType({
                     -:dev
                     -:main
                     -:gh-pages
-             """.trimIndent()
+            """.trimIndent()
         }
     }
 })
@@ -252,7 +249,7 @@ object CleanUpWeekly: BuildType({
     description = "Deletes deployments every Sunday"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "coabe")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
