@@ -57,8 +57,9 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
     <>
       <HeadDoc />
       <SCLabsTestHeader />
+
       <main className="mainContent">
-        <div className="w-11/12 sm:container mx-auto flex flex-col mb-16 mt-8">
+        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
             id="mainHeader"
             lang={router.locale}
@@ -68,6 +69,7 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
             topnavProps={topnavProps}
             searchProps={searchProps}
             breadCrumbItems={breadcrumbs}
+            useParentContainer={true}
           />
           <Heading
             id="applicationTitle"

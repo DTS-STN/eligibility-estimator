@@ -34,34 +34,35 @@ export interface Translations {
     unavailable: string
     moreInfo: string
     invalid: string
+    incomeDependent: string
   }
   question: { [key in FieldKey]: string }
+  questionShortText: { [key in FieldKey]: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
+    incomeAvailable: TypedKeyAndText<boolean>[]
+    oasDefer: TypedKeyAndText<boolean>[]
     legalStatus: TypedKeyAndText<LegalStatus>[]
     livedOutsideCanada: TypedKeyAndText<boolean>[]
     partnerLivedOutsideCanada: TypedKeyAndText<boolean>[]
     maritalStatus: TypedKeyAndText<MaritalStatus>[]
+    partnerIncomeAvailable: TypedKeyAndText<boolean>[]
     partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
   }
   detail: {
     eligible: string
-    eligibleOas65to69: string
+    eligibleDependingOnIncome: string
+    eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
-    eligiblePartialOas65to69: string
     eligibleWhen60ApplyNow: string
-    eligibleWhen65ApplyNowOas: string
+    eligibleWhen65ApplyNow: string
     eligibleWhen60: string
     eligibleWhen65: string
-    mustBe60to64: string
     mustBeInCanada: string
     mustBeOasEligible: string
     mustCompleteOasCheck: string
-    mustBeWidowed: string
-    mustBePartnered: string
-    mustHavePartnerWithGis: string
     mustMeetIncomeReq: string
     mustMeetYearReq: string
     conditional: string
@@ -72,11 +73,18 @@ export interface Translations {
     dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
-    additionalReasons: string
-    oasClawback: string
-    oasIncreaseAt75: string
-    oasIncreaseAt75Applied: string
-    oasDeferralIncrease: string
+    alwNotEligible: string
+    afsNotEligible: string
+    autoEnrollTrue: string
+    autoEnrollFalse: string
+    expectToReceive: string
+  }
+  detailWithHeading: {
+    oasDeferralApplied: { heading: string; text: string }
+    oasDeferralAvailable: { heading: string; text: string }
+    oasClawback: { heading: string; text: string }
+    oasIncreaseAt75: { heading: string; text: string }
+    oasIncreaseAt75Applied: { heading: string; text: string }
   }
   summaryTitle: {
     moreInfo: string
@@ -91,6 +99,8 @@ export interface Translations {
     availableIneligible: string
   }
   links: LinkDefinitions
+  incomeSingle: string
+  incomeCombined: string
   csv: {
     appName: string
     formResponses: string
@@ -107,6 +117,7 @@ export interface Translations {
   }
   yes: string
   no: string
+  year: string
 }
 
 export function getTranslations(language: Language): Translations {

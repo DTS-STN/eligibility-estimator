@@ -7,13 +7,19 @@ import {
   ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
+import legalValues from '../../../utils/api/scrapers/output'
 import {
+  age60NoDefer,
+  age65NoDefer,
   canadaWholeLife,
   canadian,
   expectAfsEligible,
   expectAlwEligible,
   expectGisEligible,
   expectOasEligible,
+  income10k,
+  incomeZero,
+  partnerIncomeZero,
   partnerNoHelpNeeded,
   partnerUndefined,
 } from './expectUtils'
@@ -22,9 +28,8 @@ import { mockGetRequest, mockPartialGetRequest } from './factory'
 describe('OAS entitlement scenarios', () => {
   it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOutsideCanada: true,
@@ -39,9 +44,8 @@ describe('OAS entitlement scenarios', () => {
 describe('GIS entitlement scenarios', () => {
   it('returns "$394.68" when single and 10000 income', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       ...canadaWholeLife,
@@ -51,9 +55,8 @@ describe('GIS entitlement scenarios', () => {
   })
   it('returns "$959.26" when single and 0 income', async () => {
     const res = await mockGetRequest({
-      income: 0,
-      age: 65,
-      oasAge: 65,
+      ...incomeZero,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       ...canadaWholeLife,
@@ -63,41 +66,39 @@ describe('GIS entitlement scenarios', () => {
   })
   it('returns "$850.26" when married and 10000 income and no partner OAS', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 861.86)
   })
   it('returns "$959.26" when married and 0 income and no partner OAS', async () => {
     const res = await mockGetRequest({
-      income: 0,
-      age: 65,
-      oasAge: 65,
+      ...incomeZero,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 968.86)
   })
   it('returns "$819.26" when married and 10000 income + 1000 partner income and no partner OAS', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: true,
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
     })
@@ -105,13 +106,13 @@ describe('GIS entitlement scenarios', () => {
   })
   it('returns "$306.33" when married and 10000 income + 1000 partner income and partner OAS', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncomeAvailable: true,
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
     })
@@ -119,13 +120,13 @@ describe('GIS entitlement scenarios', () => {
   })
   it('returns "$521.33" when married and 10000 income + 1000 partner income and partner Allowance', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
+      partnerIncomeAvailable: true,
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
     })
@@ -133,37 +134,35 @@ describe('GIS entitlement scenarios', () => {
   })
   it('returns "$577.43" when married and 0 income + 0 partner income and partner OAS', async () => {
     const res = await mockGetRequest({
-      income: 0,
-      age: 65,
-      oasAge: 65,
+      ...incomeZero,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 583.2)
   })
   it('returns "$577.43" when married and 0 income + 0 partner income and partner Allowance', async () => {
     const res = await mockGetRequest({
-      income: 0,
-      age: 65,
-      oasAge: 65,
+      ...incomeZero,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectGisEligible(res, 583.2)
   })
   it('returns "$1239.38" when single and 1000 income, only 20 years in Canada (Partial OAS)', async () => {
     const res = await mockGetRequest({
+      incomeAvailable: true,
       income: 1000,
-      age: 65,
-      oasAge: 65,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOutsideCanada: true,
@@ -175,9 +174,9 @@ describe('GIS entitlement scenarios', () => {
   })
   it('returns "$1399.95" when single and 1000 income, only 10 years in Canada (Partial OAS)', async () => {
     const res = await mockGetRequest({
+      incomeAvailable: true,
       income: 1000,
-      age: 65,
-      oasAge: 65,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOutsideCanada: true,
@@ -192,16 +191,15 @@ describe('GIS entitlement scenarios', () => {
 describe('basic Allowance scenarios', () => {
   it('returns "ineligible" when partner not receiving OAS', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expect(res.body.results.alw.eligibility.result).toEqual(
@@ -216,14 +214,14 @@ describe('basic Allowance scenarios', () => {
 describe('Allowance entitlement scenarios', () => {
   it('returns "eligible for $334.33" when 40 years in Canada and income=20000', async () => {
     const res = await mockGetRequest({
+      incomeAvailable: true,
       income: 20000,
-      age: 60,
-      oasAge: 65,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res, 341.68)
@@ -231,28 +229,26 @@ describe('Allowance entitlement scenarios', () => {
 
   it('returns "eligible for $565.35" when 40 years in Canada and income=10000', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res, 565.35)
   })
   it('returns "eligible for $1231.87" when 40 years in Canada and income=0', async () => {
     const res = await mockGetRequest({
-      income: 0,
-      age: 60,
-      oasAge: 65,
+      ...incomeZero,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expectAlwEligible(res, 1231.87)
@@ -262,9 +258,9 @@ describe('Allowance entitlement scenarios', () => {
 describe('basic Allowance for Survivor scenarios', () => {
   it('returns "ineligible due to age" when age 65 and high income', async () => {
     const res = await mockPartialGetRequest({
-      income: 26257,
-      age: 65,
-      oasAge: 65,
+      incomeAvailable: true,
+      income: legalValues.alw.afsIncomeLimit + 1,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,
@@ -277,9 +273,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "ineligible" when age over 64', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 65,
-      oasAge: 65,
+      ...income10k,
+      ...age65NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       livedOutsideCanada: true,
@@ -294,9 +289,10 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "ineligible" when age under 60', async () => {
     const res = await mockGetRequest({
-      income: 10000,
+      ...income10k,
       age: 59,
-      oasAge: 65,
+      oasDefer: false,
+      oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       livedOutsideCanada: true,
@@ -313,9 +309,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "ineligible" when citizen and under 10 years in Canada', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       livedOutsideCanada: true,
@@ -332,16 +327,15 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "ineligible" when married', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
-      partnerIncome: 0,
+      ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
     expect(res.body.results.afs.eligibility.result).toEqual(
@@ -353,9 +347,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "eligible" when widowed', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       livedOutsideCanada: true,
@@ -367,9 +360,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "eligible" when living in Agreement and 10 years in Canada', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -382,9 +374,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "unavailable" when living in Agreement and under 10 years in Canada', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -402,9 +393,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "eligible" when living in No Agreement and 10 years in Canada', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -417,9 +407,8 @@ describe('basic Allowance for Survivor scenarios', () => {
   })
   it('returns "ineligible" when living in No Agreement and under 10 years in Canada', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
@@ -440,9 +429,9 @@ describe('basic Allowance for Survivor scenarios', () => {
 describe('AFS entitlement scenarios', () => {
   it('returns "eligible for $260.10" when 40 years in Canada and income=20000', async () => {
     const res = await mockGetRequest({
+      incomeAvailable: true,
       income: 20000,
-      age: 60,
-      oasAge: 65,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,
@@ -452,9 +441,8 @@ describe('AFS entitlement scenarios', () => {
   })
   it('returns "eligible for $681.35" when 40 years in Canada and income=10000', async () => {
     const res = await mockGetRequest({
-      income: 10000,
-      age: 60,
-      oasAge: 65,
+      ...income10k,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,
@@ -464,9 +452,8 @@ describe('AFS entitlement scenarios', () => {
   })
   it('returns "eligible for $1468.47" when 40 years in Canada and income=0', async () => {
     const res = await mockGetRequest({
-      income: 0,
-      age: 60,
-      oasAge: 65,
+      ...incomeZero,
+      ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,

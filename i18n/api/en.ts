@@ -32,12 +32,15 @@ const en: Translations = {
     unavailable: 'Unavailable',
     moreInfo: 'Need more information...',
     invalid: 'Request is invalid!',
+    incomeDependent: 'Missing income',
   },
   question: {
+    incomeAvailable: 'Are you able to provide us your annual net income?',
     income:
       'What is your annual net income (income after taxes) in Canadian dollars?',
     age: 'How old are you?',
-    oasAge: 'At what age would you like to start receiving OAS?',
+    oasDefer: 'When would you like to start receiving OAS?',
+    oasAge: "Enter the age for when you'd like to start receiving OAS.",
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country do you live in?',
     legalStatus: 'What is your legal status in Canada?',
@@ -48,6 +51,8 @@ const en: Translations = {
     everLivedSocialCountry:
       'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
     partnerBenefitStatus: 'Which of the following applies to your partner?',
+    partnerIncomeAvailable:
+      "Are you able to provide us your partner's annual net income?",
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
     partnerAge: "What is your partner's current age?",
@@ -60,14 +65,75 @@ const en: Translations = {
     partnerEverLivedSocialCountry:
       'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
+  questionShortText: {
+    age: 'Age',
+    oasDefer: 'OAS deferral',
+    oasAge: 'OAS deferral age',
+    incomeAvailable: 'Income provided',
+    income: 'Net income',
+    legalStatus: 'Legal status',
+    livingCountry: 'Residence country',
+    livedOutsideCanada: 'Lived outside Canada for longer of 6 months',
+    yearsInCanadaSince18: 'Years lived outside Canada',
+    everLivedSocialCountry: 'Lived in country with social agreement',
+    maritalStatus: 'Marital status',
+    partnerIncomeAvailable: 'Partner income provided',
+    partnerIncome: "Partner's net income",
+    partnerBenefitStatus: "Partner's old age benefits",
+    partnerAge: "Partner's age",
+    partnerLegalStatus: "Partner's legal status",
+    partnerLivingCountry: "Partner's residence country",
+    partnerLivedOutsideCanada:
+      "Partner's lived outside Canada for longer of 6 months",
+    partnerYearsInCanadaSince18: "Partner's years lived outside Canada",
+    partnerEverLivedSocialCountry:
+      'Partner lived in country with social agreement',
+  },
   questionHelp: {
+    incomeAvailable:
+      'Providing your income will give you more helpful and accurate results.',
+    partnerIncomeAvailable:
+      "Providing your partner's income will give you more helpful and accurate results.",
     age: 'You can enter your current age, or a future age for planning purposes.',
+    oasDefer:
+      'If you already receive OAS, enter when you started receiving it.</br>Learn more about {LINK_OAS_DEFER_INLINE}.',
+    oasAge: 'This should be between 65 and 70.',
     income:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
     yearsInCanadaSince18:
       'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
   questionOptions: {
+    incomeAvailable: [
+      {
+        key: true,
+        text: 'Yes, I will provide my income',
+      },
+      {
+        key: false,
+        text: 'No, I will not provide my income at this time',
+      },
+    ],
+    partnerIncomeAvailable: [
+      {
+        key: true,
+        text: "Yes, I will provide my partner's income",
+      },
+      {
+        key: false,
+        text: "No, I will not provide my partner's income at this time",
+      },
+    ],
+    oasDefer: [
+      {
+        key: false,
+        text: 'I would like to start receiving OAS when I turn 65 (most common)',
+      },
+      {
+        key: true,
+        text: 'I would like to delay when I start receiving OAS (higher monthly payments)',
+      },
+    ],
     legalStatus: [
       { key: LegalStatus.CANADIAN_CITIZEN, text: 'Canadian citizen' },
       {
@@ -136,36 +202,28 @@ const en: Translations = {
   },
   detail: {
     eligible: 'You are likely eligible for this benefit.',
-    eligibleOas65to69:
-      'You are likely eligible for this benefit. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
+    eligibleDependingOnIncome:
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}.',
+    eligibleDependingOnIncomeNoEntitlement:
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
       'You are likely eligible to a partial Old Age Security pension.',
-    eligiblePartialOas65to69:
-      'You are likely eligible to a partial Old Age Security pension. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
-    eligibleWhen65ApplyNowOas:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information. To learn more about your option to delay your first payment, {LINK_OAS_DEFER}.',
+    eligibleWhen65ApplyNow:
+      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60: 'You will likely be eligible when you turn 60.',
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
-    mustBe60to64:
-      'You must be between the ages of 60 and 64 to be eligible for this benefit.',
     mustBeInCanada:
       'You need to live in Canada to be eligible for this benefit.',
     mustBeOasEligible:
       'You need to be eligible for Old Age Security to be eligible for this benefit.',
     mustCompleteOasCheck:
       'You need to complete the Old Age Security eligibility assessment first.',
-    mustBeWidowed:
-      'You must be a surviving partner or widowed to be eligible for this benefit.',
-    mustBePartnered:
-      'You must be common-law or married to be eligible for this benefit.',
-    mustHavePartnerWithGis:
-      'Your partner must be receiving the Guaranteed Income Supplement to be eligible for this benefit.',
     mustMeetIncomeReq:
-      'Your income is too high to be eligible for this benefit.',
+      '{INCOME_SINGLE_OR_COMBINED} is too high to be eligible for this benefit.',
     mustMeetYearReq:
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
     conditional:
@@ -184,16 +242,38 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    additionalReasons:
-      '{LINK_MORE_REASONS} for possible additional ineligibility reasons.',
-    oasClawback:
-      'You may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX} as your income is over {OAS_RECOVERY_TAX_CUTOFF}.',
-    oasIncreaseAt75:
-      'Once you reach the age of 75, this will increase by 10%, to {OAS_75_AMOUNT}.',
-    oasIncreaseAt75Applied:
-      'As you are over the age of 75, your OAS entitlement has been increased by 10%.',
-    oasDeferralIncrease:
-      'By deferring for {OAS_DEFERRAL_YEARS} years, your OAS pension has increased by {OAS_DEFERRAL_INCREASE}.',
+    alwNotEligible:
+      'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
+    afsNotEligible:
+      'Allowance for the Survivor is for individuals between 60 and 64 years old whose partner (spouse or common-law) has died.',
+    autoEnrollTrue:
+      'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
+    autoEnrollFalse:
+      'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
+    expectToReceive:
+      'You should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
+  },
+  detailWithHeading: {
+    oasDeferralApplied: {
+      heading: 'How deferral affects your payments',
+      text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
+    },
+    oasDeferralAvailable: {
+      heading: 'You may be able to defer your payments',
+      text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+    },
+    oasClawback: {
+      heading: 'You may have to repay a part of your pension',
+      text: 'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+    },
+    oasIncreaseAt75: {
+      heading: 'Your payments will increase when you turn 75',
+      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+    },
+    oasIncreaseAt75Applied: {
+      heading: 'Your payments have increased because you are over 75',
+      text: 'Since you are over the age of 75, your OAS payments have been increased by 10%.',
+    },
   },
   summaryTitle: {
     moreInfo: 'More information needed',
@@ -212,6 +292,8 @@ const en: Translations = {
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
   },
   links,
+  incomeSingle: 'your income',
+  incomeCombined: "you and your partner's combined income",
   csv: {
     appName: 'Canadian Old Age Benefits Estimator',
     formResponses: 'FORM RESPONSES',
@@ -228,5 +310,6 @@ const en: Translations = {
   },
   yes: 'Yes',
   no: 'No',
+  year: 'year',
 }
 export default en

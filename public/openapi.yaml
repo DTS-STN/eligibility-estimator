@@ -32,8 +32,10 @@ paths:
       tags:
         - Endpoints
       parameters:
+        - $ref: '#/components/parameters/incomeAvailable'
         - $ref: '#/components/parameters/income'
         - $ref: '#/components/parameters/age'
+        - $ref: '#/components/parameters/oasDefer'
         - $ref: '#/components/parameters/oasAge'
         - $ref: '#/components/parameters/maritalStatus'
         - $ref: '#/components/parameters/livingCountry'
@@ -42,6 +44,7 @@ paths:
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/everLivedSocialCountry'
         - $ref: '#/components/parameters/partnerBenefitStatus'
+        - $ref: '#/components/parameters/partnerIncomeAvailable'
         - $ref: '#/components/parameters/partnerIncome'
         - $ref: '#/components/parameters/partnerAge'
         - $ref: '#/components/parameters/partnerLivingCountry'
@@ -63,8 +66,10 @@ components:
       items:
         type: string
         enum:
+          - incomeAvailable
           - income
           - age
+          - oasDefer
           - oasAge
           - maritalStatus
           - livingCountry
@@ -73,6 +78,7 @@ components:
           - yearsInCanadaSince18
           - everLivedSocialCountry
           - partnerBenefitStatus
+          - partnerIncomeAvailable
           - partnerIncome
           - partnerAge
           - partnerLivingCountry
@@ -91,6 +97,7 @@ components:
         - unavailable
         - moreInfo
         - invalid
+        - incomeDependent
 
     ResultReason:
       type: string
@@ -107,6 +114,7 @@ components:
         - Need more information...
         - Not eligible for OAS
         - Income too high
+        - Income not provided
         - Your marital status does not meet the requirement for this benefit
         - Your partner does not receive the required benefits
 
@@ -298,6 +306,17 @@ components:
                   type: number.max
 
   parameters:
+    incomeAvailable:
+      name: incomeAvailable
+      in: query
+      description: >
+        If the client is able to provide their income.
+      required: true
+      example: true
+      schema:
+        type: boolean
+      allowEmptyValue: false
+
     income:
       name: income
       in: query
@@ -323,6 +342,15 @@ components:
         description: Age, up to a max of 150.
         example: 65
         maximum: 150
+      allowEmptyValue: false
+
+    oasDefer:
+      name: oasDefer
+      in: query
+      description: If the client would like to defer OAS.
+      required: false
+      schema:
+        type: boolean
       allowEmptyValue: false
 
     oasAge:
@@ -436,6 +464,17 @@ components:
         _Note: This can be "true" only when marital status is Married or Common-Law._
       required: false
       example: false
+      schema:
+        type: boolean
+      allowEmptyValue: false
+
+    partnerIncomeAvailable:
+      name: partnerIncomeAvailable
+      in: query
+      description: >
+        If the client is able to provide their partner's income.
+      required: true
+      example: true
       schema:
         type: boolean
       allowEmptyValue: false

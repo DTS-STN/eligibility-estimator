@@ -7,7 +7,7 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import { ResponseSuccess } from '../../../utils/api/definitions/types'
-import { legalValues } from '../../../utils/api/scrapers/output'
+import legalValues from '../../../utils/api/scrapers/output'
 import { MockResponseObject } from './factory'
 
 export function expectAlwAfsTooOld(res: MockResponseObject<ResponseSuccess>) {
@@ -56,7 +56,7 @@ export function expectOasEligible(
   expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(res.body.results.oas.entitlement.type).toEqual(oasType)
   if (oasType === EntitlementResultType.FULL && !entitlement)
-    entitlement = legalValues.MAX_OAS_ENTITLEMENT
+    entitlement = legalValues.oas.amount
   if (entitlement)
     expect(res.body.results.oas.entitlement.result).toEqual(entitlement)
 }
@@ -112,6 +112,7 @@ export function expectOasGisEligible(
 
 export const partnerUndefined = {
   partnerBenefitStatus: undefined,
+  partnerIncomeAvailable: undefined,
   partnerIncome: undefined,
   partnerAge: undefined,
   partnerLivingCountry: undefined,
@@ -130,11 +131,39 @@ export const partnerNoHelpNeeded = {
   partnerEverLivedSocialCountry: undefined,
 }
 
+export const partnerIncomeZero = {
+  partnerIncomeAvailable: true,
+  partnerIncome: 0,
+}
+
+export const incomeZero = {
+  incomeAvailable: true,
+  income: 0,
+}
+
+export const income10k = {
+  incomeAvailable: true,
+  income: 10000,
+}
+
+export const age65NoDefer = {
+  age: 65,
+  oasDefer: false,
+  oasAge: undefined,
+}
+
+export const age60NoDefer = {
+  age: 60,
+  oasDefer: false,
+  oasAge: undefined,
+}
+
 export const canadaWholeLife = {
   livedOutsideCanada: false,
   yearsInCanadaSince18: undefined,
   everLivedSocialCountry: undefined,
 }
+
 export const canadian = {
   livingCountry: LivingCountry.CANADA,
   legalStatus: LegalStatus.CANADIAN_CITIZEN,

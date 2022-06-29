@@ -1,3 +1,10 @@
+export enum BenefitKey {
+  oas = 'oas',
+  gis = 'gis',
+  alw = 'alw',
+  afs = 'afs',
+}
+
 export enum FieldCategory {
   AGE = 'age',
   INCOME = 'income',
@@ -51,6 +58,7 @@ export enum ResultKey {
   UNAVAILABLE = `unavailable`,
   MORE_INFO = 'moreInfo',
   INVALID = 'invalid',
+  INCOME_DEPENDENT = 'incomeDependent',
 }
 
 // not displayed in the UI
@@ -65,6 +73,7 @@ export enum ResultReason {
   MORE_INFO = 'Need more information...',
   OAS = 'Not eligible for OAS',
   INCOME = 'Income too high',
+  INCOME_MISSING = 'Income not provided',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
   PARTNER = 'Your partner does not receive the required benefits',
 }
@@ -83,6 +92,12 @@ export enum LinkLocation {
   RESULTS_ONLY = 'RESULTS_ONLY', // Results > MoreInfo only
   RESULTS_APPLY = 'RESULTS_APPLY', // new section above Results > MoreInfo
   HIDDEN = 'HIDDEN', // won't show anywhere (used internally for linkifying strings)
+}
+
+export enum LinkIcon {
+  note = 'note',
+  info = 'info',
+  link = 'link',
 }
 
 // all "custom" Joi Validation errors that we properly handle and translate for the end user

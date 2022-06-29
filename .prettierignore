@@ -4,9 +4,13 @@ node_modules/
 coverage/
 out/
 yarn.lock
+.pnp.cjs
+.pnp.loader.mjs
 
 # unsupported syntax
-helmfile/helmfile.yaml
-helm/charts/next-template/templates/service.yaml
-helm/charts/next-template/templates/ingress.yaml
-helm/charts/next-template/templates/deployment.yaml
+helmfile/
+helm/
+#helmfile/helmfile.yaml
+#helm/charts/next-template/templates/service.yaml
+#helm/charts/next-template/templates/ingress.yaml
+#helm/charts/next-template/templates/deployment.yaml

@@ -4,6 +4,7 @@ import { AlwBenefit } from './benefits/alwBenefit'
 import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
 import {
+  BenefitKey,
   EntitlementResultType,
   Language,
   PartnerBenefitStatus,
@@ -83,6 +84,7 @@ export class BenefitHandler {
       for (const key in this._fieldData) {
         const field: FieldData = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
+        field.helpText = this.replaceTextVariables(field.helpText)
       }
     }
     return this._fieldData
@@ -92,12 +94,6 @@ export class BenefitHandler {
     if (this._benefitResults === undefined) {
       this._benefitResults = this.getBenefitResultObject()
       this.translateResults()
-      for (const key in this._benefitResults) {
-        const result: BenefitResult = this._benefitResults[key]
-        result.eligibility.detail = this.replaceTextVariables(
-          result.eligibility.detail
-        )
-      }
     }
     return this._benefitResults
   }
@@ -126,6 +122,8 @@ export class BenefitHandler {
     )
     // shared between partners
     const incomeHelper = new IncomeHelper(
+      this.rawInput.incomeAvailable,
+      this.rawInput.partnerIncomeAvailable,
       this.rawInput.income,
       this.rawInput.partnerIncome,
       maritalStatusHelper
@@ -133,10 +131,8 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
-      oasAge:
-        this.rawInput.age >= 70 && this.rawInput.oasAge === undefined
-          ? 70 // if current age is >= 70 and oasAge not provided, oasAge defaults to 70
-          : this.rawInput.oasAge,
+      oasDefer: this.rawInput.oasDefer,
+      oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -153,7 +149,8 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
-      oasAge: Math.max(this.rawInput.partnerAge, 65), // pass dummy data because we will never use this anyway
+      oasDefer: false, // pass dummy data because we will never use this anyway
+      oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
         this.rawInput.partnerLivingCountry
@@ -177,11 +174,13 @@ export class BenefitHandler {
 
   /**
    * Accepts the ProcessedInput and builds a list of required fields based on that input.
+   * Ordering is not important here.
    */
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
-      FieldKey.INCOME,
+      FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
+      FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
@@ -190,10 +189,11 @@ export class BenefitHandler {
     if (this.input.client.livedOutsideCanada) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
-    if (this.input.client.age >= 65 && this.input.client.age < 70) {
-      // below 65 we don't need this as we don't do OAS calculations
-      // above 70 we don't need this as there is no option to defer further
+    if (this.input.client.oasDefer) {
       requiredFields.push(FieldKey.OAS_AGE)
+    }
+    if (this.input.client.income.clientAvailable) {
+      requiredFields.push(FieldKey.INCOME)
     }
     if (
       (this.input.client.livingCountry.canada &&
@@ -204,10 +204,13 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
-      requiredFields.push(
-        FieldKey.PARTNER_INCOME,
-        FieldKey.PARTNER_BENEFIT_STATUS
-      )
+      requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+      // only ask for partner income if client income is available
+      if (this.input.client.income.clientAvailable) {
+        requiredFields.push(FieldKey.PARTNER_INCOME_AVAILABLE)
+        if (this.input.client.income.partnerAvailable)
+          requiredFields.push(FieldKey.PARTNER_INCOME)
+      }
       if (this.input.client.partnerBenefitStatus.helpMe) {
         requiredFields.push(
           FieldKey.PARTNER_AGE,
@@ -254,18 +257,27 @@ export class BenefitHandler {
       return {}
     }
 
+    function getBlankObject(benefitKey: BenefitKey) {
+      return {
+        benefitKey: benefitKey,
+        eligibility: undefined,
+        entitlement: undefined,
+        cardDetail: undefined,
+      }
+    }
+
     const allResults: BenefitResultsObjectWithPartner = {
       client: {
-        oas: { eligibility: undefined, entitlement: undefined },
-        gis: { eligibility: undefined, entitlement: undefined },
-        alw: { eligibility: undefined, entitlement: undefined },
-        afs: { eligibility: undefined, entitlement: undefined },
+        oas: getBlankObject(BenefitKey.oas),
+        gis: getBlankObject(BenefitKey.gis),
+        alw: getBlankObject(BenefitKey.alw),
+        afs: getBlankObject(BenefitKey.afs),
       },
       partner: {
-        oas: { eligibility: undefined, entitlement: undefined },
-        gis: { eligibility: undefined, entitlement: undefined },
-        alw: { eligibility: undefined, entitlement: undefined },
-        afs: { eligibility: undefined, entitlement: undefined },
+        oas: getBlankObject(BenefitKey.oas),
+        gis: getBlankObject(BenefitKey.gis),
+        alw: getBlankObject(BenefitKey.alw),
+        afs: getBlankObject(BenefitKey.afs),
       },
     }
 
@@ -343,6 +355,12 @@ export class BenefitHandler {
     // Finish with AFS entitlement.
     allResults.client.afs.entitlement = clientAfs.entitlement
 
+    // Process all CardDetails
+    allResults.client.oas.cardDetail = clientOas.cardDetail
+    allResults.client.gis.cardDetail = clientGis.cardDetail
+    allResults.client.alw.cardDetail = clientAlw.cardDetail
+    allResults.client.afs.cardDetail = clientAfs.cardDetail
+
     // All done!
     return allResults.client
   }
@@ -366,32 +384,34 @@ export class BenefitHandler {
         result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       }
 
-      // start detail processing...
-      const eligibilityText =
-        this.translations.result[result.eligibility.result] // ex. "eligible" or "not eligible"
-
-      // if client is ineligible, the table will be populated with a link to view more reasons
-      const ineligibilityText =
-        result.eligibility.result === ResultKey.INELIGIBLE &&
-        result.eligibility.reason !== ResultReason.AGE_YOUNG // do not add additional reasons when they will be eligible in the future
-          ? ` ${this.translations.detail.additionalReasons}`
-          : ''
-
-      // replaces LINK_MORE_REASONS with LINK_MORE_REASONS_OAS, which is then replaced with a link during replaceAllTextVariables()
-      const ineligibilityTextWithBenefit = ineligibilityText.replace(
-        '{LINK_MORE_REASONS}',
-        `{LINK_MORE_REASONS_${key.toUpperCase()}}`
+      // process detail result
+      result.eligibility.detail = BenefitHandler.capitalizeEachLine(
+        this.replaceTextVariables(result.eligibility.detail, result)
       )
 
-      // finish with detail processing
-      result.eligibility.detail = `${eligibilityText}\n${result.eligibility.detail}${ineligibilityTextWithBenefit}`
+      // process card main text
+      result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
+        this.replaceTextVariables(result.cardDetail.mainText, result)
+      )
+
+      // process card collapsed content
+      result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
+        (collapsedText) => ({
+          heading: this.replaceTextVariables(collapsedText.heading, result),
+          text: this.replaceTextVariables(collapsedText.text, result),
+        })
+      )
     }
   }
 
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
+   * Optionally accepts a benefitResult, which will be used as context for certain replacement rules.
    */
-  replaceTextVariables(textToProcess: string): string {
+  replaceTextVariables(
+    textToProcess: string,
+    benefitResult?: BenefitResult
+  ): string {
     const re: RegExp = new RegExp(/{(\w*?)}/g)
     const matches: IterableIterator<RegExpMatchArray> =
       textToProcess.matchAll(re)
@@ -400,7 +420,10 @@ export class BenefitHandler {
       const replacementRule = textReplacementRules[key]
       if (!replacementRule)
         throw new Error(`no text replacement rule for ${key}`)
-      textToProcess = textToProcess.replace(`{${key}}`, replacementRule(this))
+      textToProcess = textToProcess.replace(
+        `{${key}}`,
+        replacementRule(this, benefitResult)
+      )
     }
     return textToProcess
   }
@@ -479,5 +502,24 @@ export class BenefitHandler {
     const indexA = keyList.findIndex((value) => value === a)
     const indexB = keyList.findIndex((value) => value === b)
     return indexA - indexB
+  }
+
+  /**
+   * Accepts a string, generally containing newlines (\n), and capitalizes the first character of each line.
+   */
+  static capitalizeEachLine(s: string): string {
+    const lines: string[] = s.split('\n')
+    return lines
+      .reduce((result, line) => {
+        return result + this.capitalizeFirstChar(line) + '\n'
+      }, '')
+      .trim()
+  }
+
+  /**
+   * Accepts a string, and capitalizes the first character.
+   */
+  static capitalizeFirstChar(s: string): string {
+    return s[0].toUpperCase() + s.slice(1)
   }
 }

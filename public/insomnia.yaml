@@ -170,6 +170,8 @@ resources:
             parameters:
               - $ref: '#/components/parameters/income'
               - $ref: '#/components/parameters/age'
+              - $ref: '#/components/parameters/oasDefer'
+              - $ref: '#/components/parameters/oasAge'
               - $ref: '#/components/parameters/maritalStatus'
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
@@ -200,6 +202,8 @@ resources:
               enum:
                 - income
                 - age
+                - oasDefer
+                - oasAge
                 - maritalStatus
                 - livingCountry
                 - legalStatus
@@ -457,6 +461,28 @@ resources:
               description: Age, up to a max of 150.
               example: 65
               maximum: 150
+            allowEmptyValue: false
+
+          oasDefer:
+            name: oasDefer
+            in: query
+            description: If the client would like to defer OAS.
+            required: false
+            schema:
+              type: boolean
+            allowEmptyValue: false
+
+          oasAge:
+            name: oasAge
+            in: query
+            description: The age at which the client would like to start receiving OAS. Can be 65-70.
+            required: false
+            schema:
+              type: integer
+              description: OAS deferral age
+              example: 65
+              minimum: 65
+              maximum: 70
             allowEmptyValue: false
 
           maritalStatus:
