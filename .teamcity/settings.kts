@@ -25,15 +25,15 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2021.2"
 
 project {
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+    vcsRoot(Dev_Coabe_HttpsGithubComDtsStnCoabeRelease)
+    vcsRoot(Dev_Coabe_HttpsGithubComDtsStnCoabeDynamic)
     buildType(Build_Main)
     buildType(Build_Performance)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
 }
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
+object Dev_Coabe_HttpsGithubComDtsStnCoabeRelease : GitVcsRoot({
     name = "https://github.com/DTS-STN/coabe/tree/_release"
     url = "git@github.com:DTS-STN/coabe.git"
     branch = "refs/heads/main"
@@ -44,7 +44,7 @@ object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
     }
 })
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic : GitVcsRoot({
+object Dev_Coabe_HttpsGithubComDtsStnCoabeDynamic : GitVcsRoot({
     name = "https://github.com/DTS-STN/coabe/tree/_dynamic"
     url = "git@github.com:DTS-STN/coabe.git"
     branch = "refs/heads/main"
@@ -74,7 +74,7 @@ object Build_Main: BuildType({
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_Coabe_HttpsGithubComDtsStnCoabeRelease)
     }
     steps {
         dockerCommand {
@@ -135,7 +135,7 @@ object Build_Performance: BuildType({
     }
     paused = true
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_Coabe_HttpsGithubComDtsStnCoabeRelease)
     }
     steps {
         dockerCommand {
@@ -195,7 +195,7 @@ object Build_Dynamic: BuildType({
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+        root(Dev_Coabe_HttpsGithubComDtsStnCoabeDynamic)
     }
     steps {
         dockerCommand {
@@ -258,8 +258,8 @@ object CleanUpWeekly: BuildType({
         param("env.BRANCH", "%teamcity.build.branch%")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
-    }
+        root(Dev_Coabe_HttpsGithubComDtsStnCoabeDynamic)
+    } 
     steps {
         script {
             name = "Login and Delete Deployment"
