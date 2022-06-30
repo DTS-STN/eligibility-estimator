@@ -13,7 +13,6 @@ import {
   FieldKey,
 } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
-import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
 import { FormField } from './FormField'
 
@@ -26,29 +25,10 @@ export const Form = types
     get hasErrors() {
       return self.fields.some((field) => field.hasError)
     },
-    fieldsByCategory(
-      category: string | string[]
-    ): Instance<typeof FormField>[] {
-      if (typeof category === 'string') {
-        return self.fields.filter((field) => field.category.key == category)
-      } else if (Array.isArray(category)) {
-        return self.fields.filter((field) =>
-          category.includes(field.category.key)
-        )
-      }
-    },
     get empty(): boolean {
       return self.fields.length === 0
     },
-    get emptyFields(): string[] {
-      let emptyFields = []
-      self.fields.forEach((field) => {
-        if (!field.filled) emptyFields.push(field.key)
-      })
-      return emptyFields
-    },
   }))
-  .views((self) => ({}))
   .actions((self) => ({
     getFieldByKey(key: string): Instance<typeof FormField> {
       return self.fields.find((field) => field.key == key)
@@ -113,10 +93,8 @@ export const Form = types
       self.fields.map((field) => field.setError(undefined))
     },
     setupForm(data: FieldData[]): void {
-      console.log('setting up form')
       data.map((fieldData) => {
         const field = self.getFieldByKey(fieldData?.key)
-        console.log('setting up field', fieldData.label)
 
         let placeholder,
           defaultValue,
@@ -146,7 +124,6 @@ export const Form = types
         }
         // field does exist, update if any data has changed
         else if (field.label !== fieldData.label) {
-          console.log('updating field ', fieldData.label)
           field.label = fieldData.label
           field.helpText = fieldData.helpText
           field.category = fieldData.category
@@ -181,16 +158,6 @@ export const Form = types
       let input: [string, string][] = self.buildArrayWithFormData()
       input.push(['_language', language])
       return input
-    },
-    // used for API requests, which is currently for the CSV function
-    buildQueryStringWithFormData(): string {
-      const parent = getParent(self) as Instance<typeof RootStore>
-      let qs = `_language=${parent.langBrowser}`
-      for (const field of self.fields) {
-        if (!field.value) continue
-        qs += `&${field.key}=${fixedEncodeURIComponent(field.sanitizeInput())}`
-      }
-      return qs
     },
   }))
   .actions((self) => ({
