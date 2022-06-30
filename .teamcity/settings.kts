@@ -25,17 +25,17 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2021.2"
 
 project {
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
+    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
     buildType(Build_Main)
     buildType(Build_Performance)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
 }
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/coabe/tree/_release"
-    url = "git@github.com:DTS-STN/coabe.git"
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease : GitVcsRoot({
+    name = "https://github.com/DTS-STN/EligibilityEstimator/tree/_release"
+    url = "git@github.com:DTS-STN/EligibilityEstimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -44,9 +44,9 @@ object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
     }
 })
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic : GitVcsRoot({
-    name = "https://github.com/DTS-STN/coabe/tree/_dynamic"
-    url = "git@github.com:DTS-STN/coabe.git"
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
+    name = "https://github.com/DTS-STN/EligibilityEstimator/tree/_dynamic"
+    url = "git@github.com:DTS-STN/EligibilityEstimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
@@ -63,7 +63,7 @@ object Build_Main: BuildType({
     description = "Deploys main branch code on branch updates"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "coabe")
+        param("env.PROJECT", "EligibilityEstimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -74,7 +74,7 @@ object Build_Main: BuildType({
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
     }
     steps {
         dockerCommand {
@@ -123,7 +123,7 @@ object Build_Performance: BuildType({
     description = "Manually run performance environment"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "coabe")
+        param("env.PROJECT", "EligibilityEstimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -135,7 +135,7 @@ object Build_Performance: BuildType({
     }
     paused = true
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
     }
     steps {
         dockerCommand {
@@ -184,7 +184,7 @@ object Build_Dynamic: BuildType({
     description = "Builds and deploys every branch"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "coabe")
+        param("env.PROJECT", "EligibilityEstimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -195,7 +195,7 @@ object Build_Dynamic: BuildType({
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
     }
     steps {
         dockerCommand {
@@ -249,7 +249,7 @@ object CleanUpWeekly: BuildType({
     description = "Deletes deployments every Sunday"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "coabe")
+        param("env.PROJECT", "EligibilityEstimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -258,8 +258,8 @@ object CleanUpWeekly: BuildType({
         param("env.BRANCH", "%teamcity.build.branch%")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
-    }
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
+    } 
     steps {
         script {
             name = "Login and Delete Deployment"
