@@ -34,8 +34,8 @@ project {
 }
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/EligibilityEstimator/tree/_release"
-    url = "git@github.com:DTS-STN/EligibilityEstimator.git"
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_release"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -45,8 +45,8 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease 
 })
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
-    name = "https://github.com/DTS-STN/EligibilityEstimator/tree/_dynamic"
-    url = "git@github.com:DTS-STN/EligibilityEstimator.git"
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_dynamic"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
@@ -63,7 +63,7 @@ object Build_Main: BuildType({
     description = "Deploys main branch code on branch updates"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "EligibilityEstimator")
+        param("env.PROJECT", "eligibility-estimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -123,7 +123,7 @@ object Build_Performance: BuildType({
     description = "Manually run performance environment"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "EligibilityEstimator")
+        param("env.PROJECT", "eligibility-estimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -184,7 +184,7 @@ object Build_Dynamic: BuildType({
     description = "Builds and deploys every branch"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "EligibilityEstimator")
+        param("env.PROJECT", "eligibility-estimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -249,7 +249,7 @@ object CleanUpWeekly: BuildType({
     description = "Deletes deployments every Sunday"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "EligibilityEstimator")
+        param("env.PROJECT", "eligibility-estimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
