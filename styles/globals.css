@@ -171,4 +171,12 @@
   ul#information-list > li {
     margin-left: 1rem;
   }
+
+  .triangle {
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right: 0;
+    border-left: 12px solid #284162;
+  }
 }
