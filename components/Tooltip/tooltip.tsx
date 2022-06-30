@@ -54,7 +54,7 @@ export const Tooltip: React.FC<{
       </div>
       <div className={`${!show && 'hidden'} mx-[5px] py-1`} tabIndex={-1}>
         <div
-          className={`w-full md:w-auto max-w-[440px] border-l-[2px] bg-white`}
+          className={`w-full xs:w-auto s:max-w-md sm:max-w-[80%] border-l-[2px]`}
         >
           <p
             className="font-normal text-[16px] leading-5 px-5 overflow-y-auto max-h-[75vh] md:max-h-[100%] md:overflow-y-hidden"
