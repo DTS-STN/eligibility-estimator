@@ -1,17 +1,15 @@
-import { Instance } from 'mobx-state-tree'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { Summary } from '../../client-state/store'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Locale } from '../../utils/api/definitions/enums'
-import { BenefitResult } from '../../utils/api/definitions/types'
+import { BenefitResult, SummaryObject } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { EstimatedTotalRow } from './EstimatedTotalRow'
 
 export const EstimatedTotal: React.VFC<{
   resultsEligible: BenefitResult[]
-  summary: Instance<typeof Summary>
+  summary: SummaryObject
 }> = ({ resultsEligible, summary }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -57,10 +55,10 @@ export const EstimatedTotal: React.VFC<{
                 heading={apiTrans.benefit[benefit.benefitKey]}
                 result={benefit}
                 locale={locale}
-                showEntitlement={!summary.zeroEntitlements}
+                showEntitlement={summary.entitlementSum != 0}
               />
             ))}
-            {!summary.zeroEntitlements && (
+            {summary.entitlementSum != 0 && (
               <tr className="border border-[#DDDDDD]">
                 <td className="pl-5">{tsln.resultsPage.tableTotalAmount}</td>
                 <td className="text-right min-w-[68px] pr-5">

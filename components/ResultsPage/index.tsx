@@ -1,20 +1,28 @@
 import { Button, Message } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
+import { FieldInput } from '../../client-state/types'
 import { WebTranslations } from '../../i18n/web'
 import { ResultKey } from '../../utils/api/definitions/enums'
-import { BenefitResult } from '../../utils/api/definitions/types'
-import { useStore, useTranslation } from '../Hooks'
+import {
+  BenefitResult,
+  BenefitResultsObject,
+  SummaryObject,
+} from '../../utils/api/definitions/types'
+import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
 import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 
-export const ResultsPage: React.VFC = () => {
+export const ResultsPage: React.VFC<{
+  inputs: FieldInput[]
+  results: BenefitResultsObject
+  summary: SummaryObject
+}> = ({ inputs, results, summary }) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
-  const root = useStore()
   const router = useRouter()
 
   const listLinks: { text: string; url: string }[] = [
@@ -25,9 +33,9 @@ export const ResultsPage: React.VFC = () => {
     { text: tsln.resultsPage.youMayNotBeEligible, url: '#notEligible' },
   ]
 
-  const resultsArray: BenefitResult[] = root
-    .getResultArray()
-    .map((x) => x.toJSON()) as BenefitResult[]
+  const resultsArray: BenefitResult[] = Object.keys(results).map(
+    (value) => results[value]
+  )
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
     (result) =>
@@ -44,8 +52,8 @@ export const ResultsPage: React.VFC = () => {
             type="info"
             alert_icon_id="resultSummaryBoxIcon"
             alert_icon_alt_text="Info"
-            message_heading={root.summary.title}
-            message_body={root.summary.details}
+            message_heading={summary.title}
+            message_body={summary.details}
             asHtml={true}
           />
 
@@ -56,15 +64,12 @@ export const ResultsPage: React.VFC = () => {
           {resultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
-              summary={root.summary}
+              summary={summary}
             />
           )}
         </div>
         <div className="col-span-1">
-          <YourAnswers
-            title={tsln.resultsPage.whatYouToldUs}
-            inputs={root.form.buildArrayWithFormData()}
-          />
+          <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2">
           <hr className="my-12 border border-[#BBBFC5]" />

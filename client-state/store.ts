@@ -3,7 +3,6 @@ import {
   IArrayType,
   IMaybe,
   IModelType,
-  Instance,
   ISimpleType,
   ModelCreationType,
   types,
@@ -70,46 +69,13 @@ export const GIS = BenefitResult.named('GIS')
 export const AFS = BenefitResult.named('AFS')
 export const Allowance = BenefitResult.named('Allowance')
 
-export const Summary = types
-  .model({
-    state: types.maybe(
-      types.enumeration(Object.values(EstimationSummaryState))
-    ),
-    details: types.maybe(types.string),
-    title: types.maybe(types.string),
-    links: types.maybe(types.array(SummaryLink)),
-    entitlementSum: types.maybe(types.number),
-  })
-  .views((self) => ({
-    get zeroEntitlements(): boolean {
-      return self.entitlementSum == 0
-    },
-    get nextStepsLinks(): Instance<typeof SummaryLink>[] {
-      return self.links
-        ? self.links.filter(
-            (link) => link.location === LinkLocation.RESULTS_APPLY
-          )
-        : null
-    },
-    get needHelpLinks() {
-      return self.links
-        ? self.links.filter(
-            (link) =>
-              link.location === LinkLocation.STANDARD ||
-              link.location === LinkLocation.QUESTIONS_ONLY
-          )
-        : []
-    },
-    get moreInfoLinks() {
-      return self.links
-        ? self.links.filter(
-            (link) =>
-              link.location === LinkLocation.STANDARD ||
-              link.location === LinkLocation.RESULTS_ONLY
-          )
-        : []
-    },
-  }))
+export const Summary = types.model({
+  state: types.maybe(types.enumeration(Object.values(EstimationSummaryState))),
+  details: types.maybe(types.string),
+  title: types.maybe(types.string),
+  links: types.maybe(types.array(SummaryLink)),
+  entitlementSum: types.maybe(types.number),
+})
 
 export const RootStore = types
   .model({
@@ -139,16 +105,13 @@ export const RootStore = types
       return 'unknown'
     },
     // converts the input data from an array to an object
-    getInputObject() {
+    getInputObject(): { [key: string]: string } {
       let input = {}
       for (const field of self.inputs) {
         input[field[0]] = field[1]
       }
       console.log('generated input object', input)
       return input
-    },
-    getResultArray() {
-      return [self.oas, self.gis, self.allowance, self.afs]
     },
   }))
   .actions((self) => ({
