@@ -57,7 +57,7 @@ export const Tooltip: React.FC<{
           className={`w-full xs:w-auto s:max-w-md sm:max-w-[80%] border-l-[2px]`}
         >
           <p
-            className="font-normal text-[16px] leading-5 px-5 overflow-y-auto max-h-[75vh] md:max-h-[100%] md:overflow-y-hidden"
+            className="font-normal text-[16px] leading-5 px-5 max-h-[100%] "
             dangerouslySetInnerHTML={{ __html: tooltipData.text }}
           />
         </div>
