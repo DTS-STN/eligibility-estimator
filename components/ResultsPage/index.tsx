@@ -1,7 +1,7 @@
 import { Button, Message } from '@dts-stn/decd-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { FieldInput } from '../../client-state/models/InputsHelper'
+import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import {

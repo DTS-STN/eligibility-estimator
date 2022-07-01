@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import Eligibility from '../../pages/eligibility/index'
 import { mockPartialGetRequest } from './api/factory'
 
@@ -29,11 +28,7 @@ describe('index page', () => {
       income: 20000,
     })
 
-    const ui = (
-      <StoreProvider>
-        <Eligibility {...res.body} />
-      </StoreProvider>
-    )
+    const ui = <Eligibility {...res.body} />
     render(ui)
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()

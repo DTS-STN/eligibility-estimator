@@ -1,10 +1,7 @@
 import { ErrorPage } from '@dts-stn/decd-design-system'
 import { NextPage } from 'next'
 import { useSessionStorage } from 'react-use'
-import {
-  FieldInputsObject,
-  InputsHelper,
-} from '../../client-state/models/InputsHelper'
+import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { Layout } from '../../components/Layout'
 import { ResultsPage } from '../../components/ResultsPage'
 import { Language } from '../../utils/api/definitions/enums'
@@ -19,10 +16,11 @@ const Results: NextPage = (props) => {
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
+
   const [language, setLanguage]: [Language, (value: Language) => void] =
     useSessionStorage('language', Language.EN)
 
-  const inputsHelper = new InputsHelper(inputs, setInputs, language)
+  const inputsHelper = new InputHelper(inputs, setInputs, language)
 
   const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results

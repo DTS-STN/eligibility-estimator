@@ -1,11 +1,11 @@
-import { FieldConfig } from '../../utils/api/definitions/fields'
-import { InputsHelper } from './InputsHelper'
+import { FieldConfig } from '../utils/api/definitions/fields'
+import { InputHelper } from './InputHelper'
 
-export class FormFieldNew {
+export class FormField {
   visible: boolean
   error?: string
-  inputsHelper: InputsHelper
-  constructor(readonly config: FieldConfig, inputsHelper: InputsHelper) {
+  inputsHelper: InputHelper
+  constructor(readonly config: FieldConfig, inputsHelper: InputHelper) {
     this.inputsHelper = inputsHelper
   }
 

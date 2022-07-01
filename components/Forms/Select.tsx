@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, SelectHTMLAttributes } from 'react'
 import Select from 'react-select'
-import { FormFieldNew } from '../../client-state/models/FormFieldNew'
+import { FormField } from '../../client-state/FormField'
 import { KeyAndText } from '../../i18n/api'
 import { FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
@@ -10,7 +10,7 @@ interface SelectProps
     SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
   > {
-  field: FormFieldNew
+  field: FormField
   error?: string
   customOnChange
 }

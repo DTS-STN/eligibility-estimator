@@ -1,5 +1,5 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
-import { FieldInput } from '../../client-state/models/InputsHelper'
+import { FieldInput } from '../../client-state/InputHelper'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'

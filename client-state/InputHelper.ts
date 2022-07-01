@@ -1,20 +1,23 @@
-import { Language } from '../../utils/api/definitions/enums'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { Language } from '../utils/api/definitions/enums'
+import { FieldKey } from '../utils/api/definitions/fields'
 
 interface LanguageInput {
   key: '_language'
   value: Language
 }
 
+export interface FieldInput {
+  key: FieldKey
+  value: string
+}
+
+type FieldKeyOrLanguage = FieldKey | '_language'
+
 export type FieldInputsObject = {
   [key in FieldKey]?: string
 }
 
-export type FieldInput = { key: FieldKey; value: string }
-
-type FieldKeyOrLanguage = FieldKey | '_language'
-
-export class InputsHelper {
+export class InputHelper {
   private _inputs: FieldInputsObject
   setInputs: (value: FieldInputsObject) => void
   language: Language
@@ -24,7 +27,6 @@ export class InputsHelper {
     language: Language
   ) {
     if (!inputs) throw new Error('no inputs provided')
-    console.log(`constructor inputs: `, inputs)
     this._inputs = inputs
     this.setInputs = setInputs
     this.language = language
@@ -44,7 +46,7 @@ export class InputsHelper {
   }
 
   setInputByKey(key: FieldKey, newValue: string): void {
-    this.inputs[key] = InputsHelper.sanitizeValue(newValue)
+    this.inputs[key] = InputHelper.sanitizeValue(newValue)
   }
 
   get asArray(): FieldInput[] {

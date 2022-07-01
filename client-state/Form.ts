@@ -1,25 +1,25 @@
 import Joi from 'joi'
-import { getWebTranslations, WebTranslations } from '../../i18n/web'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
-import MainHandler from '../../utils/api/mainHandler'
-import { FormFieldNew } from './FormFieldNew'
-import { InputsHelper } from './InputsHelper'
+import { getWebTranslations, WebTranslations } from '../i18n/web'
+import { BenefitHandler } from '../utils/api/benefitHandler'
+import { Language, ValidationErrors } from '../utils/api/definitions/enums'
+import { FieldConfig, FieldKey } from '../utils/api/definitions/fields'
+import MainHandler from '../utils/api/mainHandler'
+import { FormField } from './FormField'
+import { InputHelper } from './InputHelper'
 
-export class FormNew {
+export class Form {
   language: Language
   allFieldConfigs: FieldConfig[]
-  fields: FormFieldNew[]
-  constructor(language: Language, public inputsHelper: InputsHelper) {
+  fields: FormField[]
+  constructor(language: Language, public inputsHelper: InputHelper) {
     this.language = language
     this.allFieldConfigs = BenefitHandler.getAllFieldData(language)
     this.fields = this.allFieldConfigs.map((config) => {
-      return new FormFieldNew(config, this.inputsHelper)
+      return new FormField(config, this.inputsHelper)
     })
   }
 
-  update(inputs: InputsHelper) {
+  update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
     console.log(`form updating data: `, data)
     console.log(`form updating inputs: `, inputs)
@@ -61,7 +61,7 @@ export class FormNew {
     console.log(`this.fields: `, this.fields)
   }
 
-  get visibleFields(): FormFieldNew[] {
+  get visibleFields(): FormField[] {
     return this.fields.filter((value) => value.visible)
   }
 
@@ -69,7 +69,7 @@ export class FormNew {
     return this.visibleFields.map((value) => value.config.key)
   }
 
-  getFieldByKey(key: FieldKey): FormFieldNew {
+  getFieldByKey(key: FieldKey): FormField {
     return this.fields.find((value) => value.config.key === key)
   }
 

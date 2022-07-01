@@ -1,16 +1,11 @@
 import { AccordionForm, Message } from '@dts-stn/decd-design-system'
 import { debounce } from 'lodash'
-import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
-import type { FormField } from '../../client-state/models/FormField'
-import { FormFieldNew } from '../../client-state/models/FormFieldNew'
-import { FormNew } from '../../client-state/models/FormNew'
-import {
-  FieldInputsObject,
-  InputsHelper,
-} from '../../client-state/models/InputsHelper'
+import { Form } from '../../client-state/Form'
+import { FormField } from '../../client-state/FormField'
+import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
@@ -42,8 +37,8 @@ export const EligibilityPage: React.VFC = ({}) => {
   const [language, setLanguage]: [Language, (value: Language) => void] =
     useSessionStorage('language', Language.EN)
 
-  const inputsHelper = new InputsHelper(inputs, setInputs, language)
-  const formNew = new FormNew(language, inputsHelper)
+  const inputsHelper = new InputHelper(inputs, setInputs, language)
+  const formNew = new Form(language, inputsHelper)
   const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results
 
@@ -116,7 +111,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       const allFieldsFilled: boolean = visibleStepKeys.every(
         (key) => inputs[key]
       )
-      const visibleStepFields: FormFieldNew[] = formNew.visibleFields.filter(
+      const visibleStepFields: FormField[] = formNew.visibleFields.filter(
         (field) => visibleStepKeys.includes(field.config.key)
       )
       const allFieldsNoError: boolean = visibleStepFields.every(
@@ -139,7 +134,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   /**
    * On every change to a field, this will check the validity of all fields.
    */
-  function handleOnChange(field: FormFieldNew, newValue: string) {
+  function handleOnChange(field: FormField, newValue: string) {
     field.value = newValue
     inputsHelper.setInputByKey(field.config.key, newValue)
     formNew.update(inputsHelper)
@@ -153,7 +148,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = formNew.visibleFields.filter((field) =>
       stepKeys.includes(field.config.key)
     )
-    return fields.map((field: FormFieldNew) => {
+    return fields.map((field: FormField) => {
       return (
         <div key={field.config.key}>
           {field.config.type === FieldType.NUMBER && (
@@ -319,10 +314,10 @@ export const EligibilityPage: React.VFC = ({}) => {
 }
 
 function getPlaceholderForSelect(
-  field: FormFieldType,
+  field: FormField,
   tsln: WebTranslations
 ): string {
-  const text: string = tsln.selectText[field.key]
+  const text: string = tsln.selectText[field.config.key]
   return text ?? tsln.selectText.default
 }
 
@@ -337,8 +332,6 @@ type Card = {
 }
 
 type CardChildren = JSX.Element[]
-
-type FormFieldType = Instance<typeof FormField>
 
 type StepValidity = { [x in Steps]?: { isValid: boolean } }
 

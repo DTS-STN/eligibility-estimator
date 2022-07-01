@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import { NumberField } from '../../components/Forms/NumberField'
 
 describe('NumberField component', () => {
@@ -30,13 +29,11 @@ describe('NumberField component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <NumberField
-          name={props.name}
-          label={props.label}
-          required={props.required}
-        />
-      </StoreProvider>
+      <NumberField
+        name={props.name}
+        label={props.label}
+        required={props.required}
+      />
     )
 
     render(ui)
@@ -61,14 +58,12 @@ describe('NumberField component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <NumberField
-          name={props.name}
-          label={props.label}
-          error={props.error}
-          required={props.required}
-        />
-      </StoreProvider>
+      <NumberField
+        name={props.name}
+        label={props.label}
+        error={props.error}
+        required={props.required}
+      />
     )
 
     render(ui)

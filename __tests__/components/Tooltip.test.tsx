@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import {
   getTooltipTranslationByField,
   Tooltip,
@@ -30,11 +29,7 @@ describe('Tooltip component', () => {
 
   it('can render an input component that is required component', () => {
     const field = 'legalStatus'
-    const ui = (
-      <StoreProvider>
-        <Tooltip field={field} />
-      </StoreProvider>
-    )
+    const ui = <Tooltip field={field} />
     render(ui)
 
     const tooltip = screen.getByTestId('tooltip')

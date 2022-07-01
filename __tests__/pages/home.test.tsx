@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import Home from '../../pages/index'
 
 describe('index page', () => {
@@ -23,11 +22,7 @@ describe('index page', () => {
   })
 
   it('should render the home page', async () => {
-    const ui = (
-      <StoreProvider>
-        <Home />
-      </StoreProvider>
-    )
+    const ui = <Home />
     render(ui)
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
