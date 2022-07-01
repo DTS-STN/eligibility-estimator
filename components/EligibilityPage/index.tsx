@@ -37,7 +37,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   ] = useSessionStorage('inputs', {})
 
   const inputsHelper = new InputHelper(inputs, setInputs, language)
-  const formNew = new Form(language, inputsHelper)
+  const form = new Form(language, inputsHelper)
   const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results
 
@@ -59,11 +59,11 @@ export const EligibilityPage: React.VFC = ({}) => {
 
   if ('fieldData' in response) {
     // typeof data == ResponseSuccess
-    formNew.update(inputsHelper)
+    form.update(inputsHelper)
   }
 
   function getKeysByCategory(category: FieldCategory): FieldKey[] {
-    return formNew.allFieldConfigs
+    return form.allFieldConfigs
       .filter((value) => value.category.key === category)
       .map((value) => value.key)
   }
@@ -103,14 +103,14 @@ export const EligibilityPage: React.VFC = ({}) => {
   function getStepValidity(): StepValidity {
     return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
       const stepKeys: FieldKey[] = keyStepMap[step].keys // all keys for a step, including keys that are not visible!
-      const visibleKeys: FieldKey[] = formNew.visibleFieldKeys // all keys that are visible (ie. exist in the form)
+      const visibleKeys: FieldKey[] = form.visibleFieldKeys // all keys that are visible (ie. exist in the form)
       const visibleStepKeys: FieldKey[] = stepKeys.filter(
         (value) => visibleKeys.includes(value) // all keys for a step that are visible
       )
       const allFieldsFilled: boolean = visibleStepKeys.every(
         (key) => inputs[key]
       )
-      const visibleStepFields: FormField[] = formNew.visibleFields.filter(
+      const visibleStepFields: FormField[] = form.visibleFields.filter(
         (field) => visibleStepKeys.includes(field.config.key)
       )
       const allFieldsNoError: boolean = visibleStepFields.every(
@@ -136,7 +136,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   function handleOnChange(field: FormField, newValue: string) {
     field.value = newValue
     inputsHelper.setInputByKey(field.config.key, newValue)
-    formNew.update(inputsHelper)
+    form.update(inputsHelper)
     setCardsValid(getStepValidity())
   }
 
@@ -144,7 +144,7 @@ export const EligibilityPage: React.VFC = ({}) => {
    * Generates the raw HTML for each field (aka. child).
    */
   function generateChildren(step: Steps, stepKeys: FieldKey[]): CardChildren {
-    const fields = formNew.visibleFields.filter((field) =>
+    const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.config.key)
     )
     return fields.map((field: FormField) => {
@@ -266,7 +266,7 @@ export const EligibilityPage: React.VFC = ({}) => {
    */
   function submitForm(e) {
     e.preventDefault()
-    if (formNew.isValid) {
+    if (form.isValid) {
       router.push('/results')
     }
   }
