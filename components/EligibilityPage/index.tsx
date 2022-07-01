@@ -1,46 +1,51 @@
 import { AccordionForm, Message } from '@dts-stn/decd-design-system'
 import { debounce } from 'lodash'
-import { observer } from 'mobx-react'
 import type { Instance } from 'mobx-state-tree'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import type { Form } from '../../client-state/models/Form'
+import { useSessionStorage } from 'react-use'
 import type { FormField } from '../../client-state/models/FormField'
-import { RootStore } from '../../client-state/store'
-import { WebTranslations } from '../../i18n/web'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { FieldCategory } from '../../utils/api/definitions/enums'
+import { FormFieldNew } from '../../client-state/models/FormFieldNew'
+import { FormNew } from '../../client-state/models/FormNew'
 import {
-  FieldData,
-  FieldKey,
-  FieldType,
-} from '../../utils/api/definitions/fields'
+  FieldInputsObject,
+  InputsHelper,
+} from '../../client-state/models/InputsHelper'
+import { WebTranslations } from '../../i18n/web'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
+import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
+import {
+  ResponseError,
+  ResponseSuccess,
+} from '../../utils/api/definitions/types'
 import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
 import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
-import { useMediaQuery, useStore, useTranslation } from '../Hooks'
+import { useMediaQuery, useTranslation } from '../Hooks'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-export const EligibilityPage: React.VFC = observer(({}) => {
-  console.log('rendering factory ')
-
+export const EligibilityPage: React.VFC = ({}) => {
   const router = useRouter()
-  const locale = router.locale as Language
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
 
-  const root: Instance<typeof RootStore> = useStore()
-  const form: Instance<typeof Form> = root.form
+  const [inputs, setInputs]: [
+    FieldInputsObject,
+    (value: FieldInputsObject) => void
+  ] = useSessionStorage('inputs', {})
+  const [language, setLanguage]: [Language, (value: Language) => void] =
+    useSessionStorage('language', Language.EN)
 
-  const input = root.getInputObject()
-  input._language = locale
-  const data = new MainHandler(input).results
+  const inputsHelper = new InputsHelper(inputs, setInputs, language)
+  const formNew = new FormNew(language, inputsHelper)
+  const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
+  const response: ResponseSuccess | ResponseError = mainHandler.results
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -52,25 +57,19 @@ export const EligibilityPage: React.VFC = observer(({}) => {
     })
   }, [isMobile])
 
-  if ('error' in data) {
+  if ('error' in response) {
     // typeof data == ResponseError
     // TODO: when error, the form does not update. Repro: set age to 200, change marital from single to married, notice partner questions don't show
-    console.log('Data update resulted in error:', data)
+    console.log('Data update resulted in error:', response)
   }
 
-  if ('fieldData' in data) {
+  if ('fieldData' in response) {
     // typeof data == ResponseSuccess
-    form.setupForm(data.fieldData)
-    root.setSummary(data.summary)
+    formNew.update(inputsHelper)
   }
-
-  // allFieldData is the full configuration for ALL fields - not only the visible ones.
-  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
-    root.langBrowser
-  )
 
   function getKeysByCategory(category: FieldCategory): FieldKey[] {
-    return allFieldData
+    return formNew.allFieldConfigs
       .filter((value) => value.category.key === category)
       .map((value) => value.key)
   }
@@ -108,21 +107,20 @@ export const EligibilityPage: React.VFC = observer(({}) => {
    * If a step has an error or is missing a field, it will be invalid.
    */
   function getStepValidity(): StepValidity {
-    const inputs = root.getInputObject()
     return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
       const stepKeys: FieldKey[] = keyStepMap[step].keys // all keys for a step, including keys that are not visible!
-      const visibleKeys: FieldKey[] = form.fields.map((field) => field.key) // all keys that are visible (ie. exist in the form)
+      const visibleKeys: FieldKey[] = formNew.visibleFieldKeys // all keys that are visible (ie. exist in the form)
       const visibleStepKeys: FieldKey[] = stepKeys.filter(
         (value) => visibleKeys.includes(value) // all keys for a step that are visible
       )
       const allFieldsFilled: boolean = visibleStepKeys.every(
         (key) => inputs[key]
       )
-      const visibleStepFields: FormFieldType[] = form.fields.filter((field) =>
-        visibleStepKeys.includes(field.key)
+      const visibleStepFields: FormFieldNew[] = formNew.visibleFields.filter(
+        (field) => visibleStepKeys.includes(field.config.key)
       )
       const allFieldsNoError: boolean = visibleStepFields.every(
-        (field) => !field.error
+        (field) => field.valid
       )
       const previousStep: { isValid: boolean } = result[`step${index}`]
       const previousStepExists: boolean = previousStep !== undefined
@@ -141,82 +139,95 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   /**
    * On every change to a field, this will check the validity of all fields.
    */
-  function handleOnChange(step: Steps, field: FormFieldType, event) {
-    field.handleChange(event)
+  function handleOnChange(field: FormFieldNew, newValue: string) {
+    field.value = newValue
+    inputsHelper.setInputByKey(field.config.key, newValue)
+    formNew.update(inputsHelper)
     setCardsValid(getStepValidity())
   }
 
   /**
    * Generates the raw HTML for each field (aka. child).
    */
-  function generateChildren(step: Steps, keys: FieldKey[]): CardChildren {
-    const fields: FormFieldType[] = form.fields.filter((field) =>
-      keys.includes(field.key)
+  function generateChildren(step: Steps, stepKeys: FieldKey[]): CardChildren {
+    const fields = formNew.visibleFields.filter((field) =>
+      stepKeys.includes(field.config.key)
     )
-    return fields.map((field: FormFieldType) => {
+    return fields.map((field: FormFieldNew) => {
       return (
-        <div key={field.key}>
-          {field.type === FieldType.NUMBER && (
+        <div key={field.config.key}>
+          {field.config.type === FieldType.NUMBER && (
             <div className="pb-4">
               <NumberField
-                type={field.type}
-                name={field.key}
-                label={field.label}
-                placeholder={field.placeholder ?? ''}
-                onChange={debounce((e) => handleOnChange(step, field, e), 500)}
+                type={field.config.type}
+                name={field.config.key}
+                label={field.config.label}
+                placeholder={field.config.placeholder ?? ''}
+                onChange={debounce(
+                  (e) => handleOnChange(field, e.target.value),
+                  500
+                )}
                 value={field.value}
-                helpText={field.helpText}
+                helpText={field.config.helpText}
                 required
               />
             </div>
           )}
-          {field.type == FieldType.CURRENCY && (
+          {field.config.type == FieldType.CURRENCY && (
             <div className="pb-4">
               <CurrencyField
-                type={field.type}
-                name={field.key}
-                label={field.label}
-                onChange={debounce((e) => handleOnChange(step, field, e), 100)}
-                placeholder={field.placeholder ?? ''}
+                type={field.config.type}
+                name={field.config.key}
+                label={field.config.label}
+                onChange={debounce(
+                  (e) => handleOnChange(field, e.target.value),
+                  100
+                )}
+                placeholder={field.config.placeholder ?? ''}
                 value={field.value}
-                helpText={field.helpText}
+                helpText={field.config.helpText}
                 required
               />
             </div>
           )}
-          {field.type == FieldType.STRING && (
+          {field.config.type == FieldType.STRING && (
             <div className="pb-4">
               <TextField
-                type={field.type}
-                name={field.key}
-                label={field.label}
-                placeholder={field.placeholder ?? ''}
-                onChange={debounce((e) => handleOnChange(step, field, e), 500)}
+                type={field.config.type}
+                name={field.config.key}
+                label={field.config.label}
+                placeholder={field.config.placeholder ?? ''}
+                onChange={debounce((e) => {
+                  handleOnChange(field, e.target.value)
+                }, 500)}
                 value={field.value}
                 error={field.error}
                 required
               />
             </div>
           )}
-          {(field.type == FieldType.DROPDOWN ||
-            field.type == FieldType.DROPDOWN_SEARCHABLE) && (
+          {(field.config.type == FieldType.DROPDOWN ||
+            field.config.type == FieldType.DROPDOWN_SEARCHABLE) && (
             <div className="pb-4">
               <FormSelect
-                name={field.key}
+                name={field.config.key}
                 field={field}
                 placeholder={getPlaceholderForSelect(field, tsln)}
+                customOnChange={(newValue: { value: string; label: string }) =>
+                  handleOnChange(field, newValue.value)
+                }
                 value={null}
               />
             </div>
           )}
-          {(field.type == FieldType.RADIO ||
-            field.type == FieldType.BOOLEAN) && (
+          {(field.config.type == FieldType.RADIO ||
+            field.config.type == FieldType.BOOLEAN) && (
             <div className="pb-4">
               <Radio
-                name={field.key}
+                name={field.config.key}
                 checkedValue={field.value}
                 values={
-                  field.type == 'boolean'
+                  field.config.type == 'boolean'
                     ? [
                         {
                           key: 'true',
@@ -227,12 +238,12 @@ export const EligibilityPage: React.VFC = observer(({}) => {
                           text: tsln.no,
                         },
                       ]
-                    : field.options
+                    : field.config.values
                 }
-                keyforid={field.key}
-                label={field.label}
-                onChange={(e) => handleOnChange(step, field, e)}
-                helpText={field.helpText}
+                keyforid={field.config.key}
+                label={field.config.label}
+                onChange={(e) => handleOnChange(field, e.target.value)}
+                helpText={field.config.helpText}
                 required
               />
             </div>
@@ -240,27 +251,12 @@ export const EligibilityPage: React.VFC = observer(({}) => {
           {field.error && (
             <div className="mt-6 md:pr-12">
               <Message
-                id={field.key}
-                alert_icon_id={field.key}
+                id={field.config.key}
+                alert_icon_id={field.config.key}
                 alert_icon_alt_text="warning icon"
                 type="warning"
                 message_heading={tsln.unableToProceed}
                 message_body={field.error}
-                asHtml={true}
-              />
-            </div>
-          )}
-          {/* below is never used? */}
-          {field.info && (
-            <div className="mt-6 md:pr-12">
-              <Message
-                id={field.key}
-                alert_icon_id={field.key}
-                alert_icon_alt_text="info icon"
-                type="info"
-                /* TODO: this should be something else */
-                message_heading={field.info}
-                message_body={field.info}
                 asHtml={true}
               />
             </div>
@@ -276,8 +272,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
    */
   function submitForm(e) {
     e.preventDefault()
-    if (!form.validateAgainstEmptyFields(router.locale) && !form.hasErrors) {
-      root.saveStoreState()
+    if (formNew.isValid) {
       router.push('/results')
     }
   }
@@ -321,7 +316,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
       }
     </>
   )
-})
+}
 
 function getPlaceholderForSelect(
   field: FormFieldType,

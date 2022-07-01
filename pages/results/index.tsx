@@ -1,12 +1,13 @@
 import { ErrorPage } from '@dts-stn/decd-design-system'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { FieldInput } from '../../client-state/types'
-import { useStorage, useStore } from '../../components/Hooks'
+import { useSessionStorage } from 'react-use'
+import {
+  FieldInputsObject,
+  InputsHelper,
+} from '../../client-state/models/InputsHelper'
 import { Layout } from '../../components/Layout'
 import { ResultsPage } from '../../components/ResultsPage'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { Language } from '../../utils/api/definitions/enums'
 import {
   ResponseError,
   ResponseSuccess,
@@ -14,35 +15,28 @@ import {
 import MainHandler from '../../utils/api/mainHandler'
 
 const Results: NextPage = (props) => {
-  const router = useRouter()
-  const root = useStore()
+  const [inputs, setInputs]: [
+    FieldInputsObject,
+    (value: FieldInputsObject) => void
+  ] = useSessionStorage('inputs', {})
+  const [language, setLanguage]: [Language, (value: Language) => void] =
+    useSessionStorage('language', Language.EN)
 
-  const [storeFromSession] = useStorage('session', 'store', {})
-  root.bootstrapStoreState(storeFromSession)
+  const inputsHelper = new InputsHelper(inputs, setInputs, language)
 
-  const [inputsObj, setInputsObj] = useState({})
-  useEffect(() => setInputsObj(root.getInputObject()), [root])
-
-  const fieldInputsArray: FieldInput[] = Object.values(FieldKey)
-    .map((key: FieldKey) => ({
-      key,
-      value: inputsObj[key],
-    }))
-    .filter((input) => input.value)
-
-  const mainHandler = new MainHandler(inputsObj)
+  const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results
 
   return (
     <Layout>
       {'results' in response ? (
         <ResultsPage
-          inputs={fieldInputsArray}
+          inputs={inputsHelper.asArray}
           results={response.results}
           summary={response.summary}
         />
       ) : (
-        <ErrorPage lang={router.locale} errType="500" isAuth={false} />
+        <ErrorPage lang={language} errType="500" isAuth={false} />
       )}
     </Layout>
   )

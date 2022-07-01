@@ -86,8 +86,6 @@ export const RootStore = types
     allowance: types.maybe(Allowance),
     summary: types.maybe(Summary),
     activeTab: types.optional(types.number, 0),
-    // a [key, value] array of the user's form inputs
-    inputs: types.array(types.array(types.string)),
     // the language of the data currently stored in the state
     langData: types.enumeration(Object.values(Language)),
     // the language of the client's browser
@@ -103,15 +101,6 @@ export const RootStore = types
         return 'faq'
       }
       return 'unknown'
-    },
-    // converts the input data from an array to an object
-    getInputObject(): { [key: string]: string } {
-      let input = {}
-      for (const field of self.inputs) {
-        input[field[0]] = field[1]
-      }
-      console.log('generated input object', input)
-      return input
     },
   }))
   .actions((self) => ({
@@ -137,10 +126,6 @@ export const RootStore = types
     },
     setAllowance(input) {
       self.allowance = Allowance.create(input)
-    },
-    setInputs(input) {
-      console.log('set inputs to', input)
-      self.inputs = input
     },
     setSummary(
       input: ModelCreationType<
@@ -185,8 +170,6 @@ export const RootStore = types
       self.allowance = Allowance.create(store.allowance)
       self.afs = AFS.create(store.afs)
       self.summary = Summary.create(store.summary)
-      console.log('loading store with inputs', store.inputs)
-      self.inputs = store.inputs
       console.log(`loading store with langData ${store.langData}`)
       if (store.langData) self.langData = store.langData
     },
