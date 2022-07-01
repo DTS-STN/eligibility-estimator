@@ -1,8 +1,8 @@
 import {
   FieldCategory,
   Language,
+  LanguageCode,
   LegalStatus,
-  Locale,
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
@@ -25,7 +25,6 @@ export interface TypedKeyAndText<T> {
 
 export interface Translations {
   _language: Language
-  _locale: Locale
   benefit: { oas: string; gis: string; alw: string; afs: string }
   category: { [key in FieldCategory]: string }
   result: {
@@ -135,11 +134,13 @@ export function getTranslations(language: Language): Translations {
  */
 export function numberToStringCurrency(
   number: number,
-  locale: Locale,
+  language: Language,
   options?: { rounding?: number }
 ): string {
+  const languageCode =
+    language === Language.EN ? LanguageCode.EN : LanguageCode.FR
   const rounding = options?.rounding === undefined ? 2 : options.rounding
-  return number.toLocaleString(locale, {
+  return number.toLocaleString(languageCode, {
     style: 'currency',
     currency: 'CAD',
     currencyDisplay: 'narrowSymbol',

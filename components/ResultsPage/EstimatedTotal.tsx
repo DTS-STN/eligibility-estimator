@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { Locale } from '../../utils/api/definitions/enums'
+import { Language } from '../../utils/api/definitions/enums'
 import { BenefitResult, SummaryObject } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { EstimatedTotalRow } from './EstimatedTotalRow'
@@ -14,8 +14,7 @@ export const EstimatedTotal: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
 
-  const currentLocale = useRouter().locale
-  const locale = currentLocale == 'en' ? Locale.EN : Locale.FR
+  const language = useRouter().locale as Language
 
   return (
     <>
@@ -27,14 +26,14 @@ export const EstimatedTotal: React.VFC<{
           height={30}
         />{' '}
         {tsln.resultsPage.yourEstimatedTotal}
-        {numberToStringCurrency(summary.entitlementSum, locale)}
+        {numberToStringCurrency(summary.entitlementSum, language)}
       </h2>
 
       <div>
         <p className="pl-[35px]">
           {tsln.resultsPage.basedOnYourInfoTotal.replace(
             '{AMOUNT}',
-            numberToStringCurrency(summary.entitlementSum, locale)
+            numberToStringCurrency(summary.entitlementSum, language)
           )}
         </p>
         <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
@@ -54,7 +53,6 @@ export const EstimatedTotal: React.VFC<{
                 key={benefit.benefitKey}
                 heading={apiTrans.benefit[benefit.benefitKey]}
                 result={benefit}
-                locale={locale}
                 showEntitlement={summary.entitlementSum != 0}
               />
             ))}
@@ -62,7 +60,7 @@ export const EstimatedTotal: React.VFC<{
               <tr className="border border-[#DDDDDD]">
                 <td className="pl-5">{tsln.resultsPage.tableTotalAmount}</td>
                 <td className="text-right min-w-[68px] pr-5">
-                  {numberToStringCurrency(summary.entitlementSum, locale)}
+                  {numberToStringCurrency(summary.entitlementSum, language)}
                 </td>
               </tr>
             )}

@@ -1,5 +1,6 @@
 import { ErrorPage } from '@dts-stn/decd-design-system'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useSessionStorage } from 'react-use'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { Layout } from '../../components/Layout'
@@ -17,8 +18,7 @@ const Results: NextPage = (props) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
 
-  const [language, setLanguage]: [Language, (value: Language) => void] =
-    useSessionStorage('language', Language.EN)
+  const language = useRouter().locale as Language
 
   const inputsHelper = new InputHelper(inputs, setInputs, language)
 

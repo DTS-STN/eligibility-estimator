@@ -29,13 +29,12 @@ export const EligibilityPage: React.VFC = ({}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
+  const language = useRouter().locale as Language
 
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
-  const [language, setLanguage]: [Language, (value: Language) => void] =
-    useSessionStorage('language', Language.EN)
 
   const inputsHelper = new InputHelper(inputs, setInputs, language)
   const formNew = new Form(language, inputsHelper)
