@@ -153,15 +153,15 @@ export const fieldDefinitions: FieldDefinitions = {
   },
 }
 
-export type FieldData =
-  | FieldDataCurrency
-  | FieldDataNumber
-  | FieldDataBoolean
-  | FieldDataRadio
-  | FieldDataDropdown
-  | FieldDataString
+export type FieldConfig =
+  | FieldConfigCurrency
+  | FieldConfigNumber
+  | FieldConfigBoolean
+  | FieldConfigRadio
+  | FieldConfigDropdown
+  | FieldConfigString
 
-interface FieldDataGeneric {
+interface FieldConfigGeneric {
   key: FieldKey
   relatedKey?: FieldKey // in case certain props should use those of another key when missing
   label?: string // applied via translator
@@ -172,38 +172,38 @@ interface FieldDataGeneric {
   }
 }
 
-interface FieldDataCurrency extends FieldDataGeneric {
+interface FieldConfigCurrency extends FieldConfigGeneric {
   type: FieldType.CURRENCY
   placeholder?: string
 }
 
-interface FieldDataNumber extends FieldDataGeneric {
+interface FieldConfigNumber extends FieldConfigGeneric {
   type: FieldType.NUMBER
   placeholder?: string
 }
 
-interface FieldDataBoolean extends FieldDataGeneric {
+interface FieldConfigBoolean extends FieldConfigGeneric {
   type: FieldType.BOOLEAN
   default?: string
 }
 
-interface FieldDataRadio extends FieldDataGeneric {
+interface FieldConfigRadio extends FieldConfigGeneric {
   type: FieldType.RADIO
   values?: Array<KeyAndText> // applied via translator
   default?: KeyAndText
 }
 
-export interface FieldDataDropdown extends FieldDataGeneric {
+export interface FieldConfigDropdown extends FieldConfigGeneric {
   type: FieldType.DROPDOWN | FieldType.DROPDOWN_SEARCHABLE
   values?: Array<KeyAndText> // applied via translator
   default?: KeyAndText
 }
 
-interface FieldDataString extends FieldDataGeneric {
+interface FieldConfigString extends FieldConfigGeneric {
   type: FieldType.STRING
   placeholder?: string
 }
 
 type FieldDefinitions = {
-  [x in FieldKey]: FieldData
+  [x in FieldKey]: FieldConfig
 }

@@ -1,9 +1,9 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
-import { FieldInput } from '../../client-state/types'
+import { FieldInput } from '../../client-state/models/InputsHelper'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { FieldData, FieldType } from '../../utils/api/definitions/fields'
+import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 
 export const YourAnswers: React.VFC<{
@@ -13,7 +13,7 @@ export const YourAnswers: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
 
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
-  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
+  const allFieldData: FieldConfig[] = BenefitHandler.getAllFieldData(
     tsln._language
   )
 
@@ -49,7 +49,7 @@ export const YourAnswers: React.VFC<{
    * and returns the string that should be displayed in the UI.
    */
   function getDisplayValue(input: FieldInput): string {
-    const fieldData: FieldData = allFieldData.find(
+    const fieldData: FieldConfig = allFieldData.find(
       (fieldData) => fieldData.key === input.key
     )
     const fieldType: FieldType = fieldData.type

@@ -8,7 +8,7 @@ import {
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import {
-  FieldData,
+  FieldConfig,
   fieldDefinitions,
   FieldKey,
 } from '../../utils/api/definitions/fields'
@@ -66,7 +66,7 @@ export const Form = types
     },
   }))
   .actions((self) => ({
-    removeUnnecessaryFieldsFromForm(fieldData: FieldData[]): void {
+    removeUnnecessaryFieldsFromForm(fieldData: FieldConfig[]): void {
       const unnecessaryFields = self.fields
         .map((f) => {
           const field = fieldData.find((fd) => fd.key == f.key)
@@ -92,7 +92,7 @@ export const Form = types
     clearAllErrors() {
       self.fields.map((field) => field.setError(undefined))
     },
-    setupForm(data: FieldData[]): void {
+    setupForm(data: FieldConfig[]): void {
       data.map((fieldData) => {
         const field = self.getFieldByKey(fieldData?.key)
 

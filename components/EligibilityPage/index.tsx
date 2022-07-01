@@ -31,7 +31,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   console.log('rendering factory ')
 
   const router = useRouter()
-  const locale = router.locale
+  const locale = router.locale as Language
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
 

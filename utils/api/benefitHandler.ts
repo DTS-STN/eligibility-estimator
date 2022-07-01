@@ -12,7 +12,7 @@ import {
   ResultReason,
 } from './definitions/enums'
 import {
-  FieldData,
+  FieldConfig,
   fieldDefinitions,
   FieldKey,
   FieldType,
@@ -41,7 +41,7 @@ export class BenefitHandler {
   private _input: ProcessedInputWithPartner
   private _missingFields: FieldKey[]
   private _requiredFields: FieldKey[]
-  private _fieldData: FieldData[]
+  private _fieldData: FieldConfig[]
   private _benefitResults: BenefitResultsObject
   private _summary: SummaryObject
 
@@ -75,14 +75,14 @@ export class BenefitHandler {
     this._requiredFields = value
   }
 
-  get fieldData(): FieldData[] {
+  get fieldData(): FieldConfig[] {
     if (this._fieldData === undefined) {
       this._fieldData = BenefitHandler.getFieldData(
         this.requiredFields,
         this.translations
       )
       for (const key in this._fieldData) {
-        const field: FieldData = this._fieldData[key]
+        const field: FieldConfig = this._fieldData[key]
         field.label = this.replaceTextVariables(field.label)
         field.helpText = this.replaceTextVariables(field.helpText)
       }
@@ -434,7 +434,7 @@ export class BenefitHandler {
   static getFieldData(
     fields: FieldKey[],
     translations: Translations
-  ): FieldData[] {
+  ): FieldConfig[] {
     // takes list of keys, builds list of definitions
     const fieldDataList = fields
       .sort(this.sortFields)
@@ -490,7 +490,7 @@ export class BenefitHandler {
    * Returns the field data for all fields.
    * This is so that the UI can be aware of everything right away, rather than waiting for inputs to know the upcoming fields.
    */
-  static getAllFieldData(language: Language): FieldData[] {
+  static getAllFieldData(language: Language): FieldConfig[] {
     return this.getFieldData(Object.values(FieldKey), getTranslations(language))
   }
 
