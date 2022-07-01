@@ -1,8 +1,6 @@
-import { observer } from 'mobx-react'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { useTranslation } from '../Hooks'
-import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface NumberFieldProps
@@ -19,7 +17,7 @@ export interface NumberFieldProps
  * @param props {NumberFieldProps}
  * @returns
  */
-export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
+export const NumberField: React.VFC<NumberFieldProps> = (props) => {
   const {
     name,
     label,
@@ -82,4 +80,4 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
       />
     </>
   )
-})
+}

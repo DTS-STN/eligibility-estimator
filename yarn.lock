@@ -2668,9 +2668,6 @@ __metadata:
     jsdom: ^19.0.0
     lint-staged: ^12.3.7
     lodash: ^4.17.21
-    mobx: ^6.5.0
-    mobx-react: ^7.3.0
-    mobx-state-tree: ^5.1.3
     next: 12.1.4||^12.1.7
     node-mocks-http: ^1.11.0
     postcss: ^8.4.12
@@ -5233,54 +5230,6 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
-  languageName: node
-  linkType: hard
-
-"mobx-react-lite@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "mobx-react-lite@npm:3.3.0"
-  peerDependencies:
-    mobx: ^6.1.0
-    react: ^16.8.0 || ^17
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 0f55bd2009a9cedc6b81d70b88b57dc4161362a16ba6ae0af341e673ca1c627bc3c4088c0cb13133e57e6fa6748b09b4c26aff7fab26c60ed95d27e939846fa3
-  languageName: node
-  linkType: hard
-
-"mobx-react@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "mobx-react@npm:7.3.0"
-  dependencies:
-    mobx-react-lite: ^3.3.0
-  peerDependencies:
-    mobx: ^6.1.0
-    react: ^16.8.0 || ^17
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 4a53fd45994bfc6d6bcf24072a651f09c15b7afa0f1d0040b92058e6aa55ef0c3a5176986e616a7e791ea0c24561f8c75a964cb08cfe3a1025c550b8a890799a
-  languageName: node
-  linkType: hard
-
-"mobx-state-tree@npm:^5.1.3":
-  version: 5.1.3
-  resolution: "mobx-state-tree@npm:5.1.3"
-  peerDependencies:
-    mobx: ^6.3.0
-  checksum: 8bf429465905e97f100d782a482beff14c2c0570a1a02448ee34dd077add2ed2db3cc1e3982733d491e0fd81af9297ed8bc34fe694cc2e8f89410c94874c5239
-  languageName: node
-  linkType: hard
-
-"mobx@npm:^6.5.0":
-  version: 6.5.0
-  resolution: "mobx@npm:6.5.0"
-  checksum: 1210fb0b1c515b5f0ec2916296c32ca19b733e03b34f180af382d44b90668a15b4143c69bb06ca8785ebc3da3e761c6c60d0e72c945c199efc823088af1941ab
   languageName: node
   linkType: hard
 

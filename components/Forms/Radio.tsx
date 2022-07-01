@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
 import { KeyAndText } from '../../i18n/api'
 import { useTranslation } from '../Hooks'
@@ -19,7 +18,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props {InputProps}
  * @returns
  */
-export const Radio: React.VFC<InputProps> = observer((props) => {
+export const Radio: React.VFC<InputProps> = (props) => {
   const {
     name,
     label,
@@ -86,7 +85,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
       ))}
     </div>
   )
-})
+}
 
 const correctForBooleans = (value: string) => {
   switch (value) {
