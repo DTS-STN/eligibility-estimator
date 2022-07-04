@@ -45,6 +45,9 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
             dangerouslySetInnerHTML={{ __html: label }}
           ></span>
         </label>
+        <span>
+          <Tooltip field={name} />
+        </span>
         {helpText && (
           <div
             className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
