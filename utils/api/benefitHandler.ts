@@ -76,17 +76,11 @@ export class BenefitHandler {
   }
 
   get fieldData(): FieldConfig[] {
-    if (this._fieldData === undefined) {
+    if (this._fieldData === undefined)
       this._fieldData = BenefitHandler.getFieldData(
         this.requiredFields,
         this.translations
       )
-      for (const key in this._fieldData) {
-        const field: FieldConfig = this._fieldData[key]
-        field.label = this.replaceTextVariables(field.label)
-        field.helpText = this.replaceTextVariables(field.helpText)
-      }
-    }
     return this._fieldData
   }
 
@@ -483,6 +477,13 @@ export class BenefitHandler {
 
       return fieldData
     })
+    for (const key in fieldDataList) {
+      const field: FieldConfig = fieldDataList[key]
+      const handler = new BenefitHandler({ _language: translations._language })
+      field.label = handler.replaceTextVariables(field.label)
+      field.helpText = handler.replaceTextVariables(field.helpText)
+    }
+
     return fieldDataList
   }
 
