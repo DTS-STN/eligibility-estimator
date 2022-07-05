@@ -477,6 +477,8 @@ export class BenefitHandler {
 
       return fieldData
     })
+
+    // replace the text variables for Label and HelpText
     for (const key in fieldDataList) {
       const field: FieldConfig = fieldDataList[key]
       const handler = new BenefitHandler({ _language: translations._language })
