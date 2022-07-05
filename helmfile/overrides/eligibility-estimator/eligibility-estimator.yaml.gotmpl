@@ -1,0 +1,58 @@
+{{/* THIS EXAMPLE DEPLOYS SUCCESSFULLY TO DTS CLOUD */}}
+{{/* READ THE COMMENTS TO MAKE ANY MODIFICATIONS FOR YOUR APPLICATION */}}
+
+{{/* EXAMPLE OF HOW TO INCLUDE ENVIRONMENT VARIABLES */}}
+{{/*
+extraEnv:
+    - name: EXAMPLE_STATIC_ENVIRONMENT_VARIABLE
+      value: "hardcodedvalue"
+    - name: EXAMPLE_DYNAMIC_ENVIRONMENT_VARIABLE
+      value: dynamicvalue-{{ .Environment.Name }}
+    - name: EXAMPLE_SECRET_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: web-example-secret
+          key: renamed-example-username
+    - name: EXAMPLE_SECRET_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: web-example-secret
+          key: example-secret-password         
+*/}}
+
+image:
+  repository: mtscontainers.azurecr.io/{{ requiredEnv "PROJECT" }}
+  tag: "{{ env "DOCKER_TAG" | default "latest" }}"
+  pullPolicy: Always
+service:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /api/metrics
+    prometheus.io/port: "3000"
+ingress:
+  enabled: true
+  path: /
+  annotations: {}
+  hosts:
+    {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
+    - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
+    {{ else }}
+    - {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+    {{ end }}
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+healthChecks:
+  livenessDelay: 15
+  readinessDelay: 15
+  livenessPath: /
+  readinessPath: /
+port: 3000
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  volumeMount:
+    path: /mnt/example
+  storageClass: dtsstorageclass
+  size: 2Gi
