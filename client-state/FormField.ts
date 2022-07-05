@@ -1,5 +1,5 @@
 import { VisibleFieldsObject } from '../components/EligibilityPage'
-import { FieldConfig } from '../utils/api/definitions/fields'
+import { FieldConfig, FieldKey } from '../utils/api/definitions/fields'
 import { InputHelper } from './InputHelper'
 
 export class FormField {
@@ -29,5 +29,9 @@ export class FormField {
 
   get valid(): boolean {
     return !this.error
+  }
+
+  get key(): FieldKey {
+    return this.config.key
   }
 }

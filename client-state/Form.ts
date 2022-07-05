@@ -28,7 +28,7 @@ export class Form {
     if ('results' in data) {
       this.clearAllErrors()
       this.fields.forEach((field) => {
-        field.visible = data.visibleFields.includes(field.config.key)
+        field.visible = data.visibleFields.includes(field.key)
         if (!field.visible && field.value) field.value = undefined
       })
     }

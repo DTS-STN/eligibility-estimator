@@ -108,7 +108,7 @@ export const EligibilityPage: React.VFC = ({}) => {
         (key) => inputs[key]
       )
       const visibleStepFields: FormField[] = form.visibleFields.filter(
-        (field) => visibleStepKeys.includes(field.config.key)
+        (field) => visibleStepKeys.includes(field.key)
       )
       const allFieldsNoError: boolean = visibleStepFields.every(
         (field) => field.valid
@@ -132,7 +132,7 @@ export const EligibilityPage: React.VFC = ({}) => {
    */
   function handleOnChange(field: FormField, newValue: string) {
     field.value = newValue
-    inputHelper.setInputByKey(field.config.key, newValue)
+    inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
     setCardsValid(getStepValidity())
   }
@@ -142,16 +142,16 @@ export const EligibilityPage: React.VFC = ({}) => {
    */
   function generateChildren(step: Steps, stepKeys: FieldKey[]): CardChildren {
     const fields = form.visibleFields.filter((field) =>
-      stepKeys.includes(field.config.key)
+      stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
       return (
-        <div key={field.config.key}>
+        <div key={field.key}>
           {field.config.type === FieldType.NUMBER && (
             <div className="pb-4">
               <NumberField
                 type={field.config.type}
-                name={field.config.key}
+                name={field.key}
                 label={field.config.label}
                 placeholder={field.config.placeholder ?? ''}
                 onChange={debounce(
@@ -168,7 +168,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             <div className="pb-4">
               <CurrencyField
                 type={field.config.type}
-                name={field.config.key}
+                name={field.key}
                 label={field.config.label}
                 onChange={debounce(
                   (e) => handleOnChange(field, e.target.value),
@@ -185,7 +185,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             <div className="pb-4">
               <TextField
                 type={field.config.type}
-                name={field.config.key}
+                name={field.key}
                 label={field.config.label}
                 placeholder={field.config.placeholder ?? ''}
                 onChange={debounce((e) => {
@@ -201,7 +201,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             field.config.type == FieldType.DROPDOWN_SEARCHABLE) && (
             <div className="pb-4">
               <FormSelect
-                name={field.config.key}
+                name={field.key}
                 field={field}
                 placeholder={getPlaceholderForSelect(field, tsln)}
                 customOnChange={(newValue: { value: string; label: string }) =>
@@ -215,7 +215,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             field.config.type == FieldType.BOOLEAN) && (
             <div className="pb-4">
               <Radio
-                name={field.config.key}
+                name={field.key}
                 checkedValue={field.value}
                 values={
                   field.config.type == 'boolean'
@@ -231,7 +231,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                       ]
                     : field.config.values
                 }
-                keyforid={field.config.key}
+                keyforid={field.key}
                 label={field.config.label}
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
@@ -242,8 +242,8 @@ export const EligibilityPage: React.VFC = ({}) => {
           {field.error && (
             <div className="mt-6 md:pr-12">
               <Message
-                id={field.config.key}
-                alert_icon_id={field.config.key}
+                id={field.key}
+                alert_icon_id={field.key}
                 alert_icon_alt_text="warning icon"
                 type="warning"
                 message_heading={tsln.unableToProceed}
@@ -345,7 +345,7 @@ function getPlaceholderForSelect(
   field: FormField,
   tsln: WebTranslations
 ): string {
-  const text: string = tsln.selectText[field.config.key]
+  const text: string = tsln.selectText[field.key]
   return text ?? tsln.selectText.default
 }
 

@@ -104,7 +104,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
           placeholder={placeholder}
           data-testid="select"
           value={currentItem}
-          name={field.config.key}
+          name={field.key}
           options={field.config.values.map((opt) => ({
             value: opt.key,
             label: opt.text,
