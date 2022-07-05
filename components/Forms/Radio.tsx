@@ -46,7 +46,7 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           ></span>
         </label>
         <span>
-          <span className="ml-1">({requiredText})</span>
+          <Tooltip field={name} />
         </span>
         {helpText && (
           <div
