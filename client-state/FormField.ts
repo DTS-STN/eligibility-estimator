@@ -1,20 +1,30 @@
+import { VisibleFieldsObject } from '../components/EligibilityPage'
 import { FieldConfig } from '../utils/api/definitions/fields'
 import { InputHelper } from './InputHelper'
 
 export class FormField {
-  visible: boolean
   error?: string
-  inputsHelper: InputHelper
-  constructor(readonly config: FieldConfig, inputsHelper: InputHelper) {
-    this.inputsHelper = inputsHelper
-  }
+
+  constructor(
+    readonly config: FieldConfig,
+    private readonly inputHelper: InputHelper,
+    private readonly visibleFieldsObject: VisibleFieldsObject
+  ) {}
 
   get value(): string {
-    return this.inputsHelper.getInputByKey(this.config.key)
+    return this.inputHelper.getInputByKey(this.config.key)
   }
 
   set value(value: string) {
-    this.inputsHelper.setInputByKey(this.config.key, value)
+    this.inputHelper.setInputByKey(this.config.key, value)
+  }
+
+  get visible(): boolean {
+    return this.visibleFieldsObject[this.config.key]
+  }
+
+  set visible(value: boolean) {
+    this.visibleFieldsObject[this.config.key] = value
   }
 
   get valid(): boolean {

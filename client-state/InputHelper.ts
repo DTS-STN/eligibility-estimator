@@ -1,5 +1,5 @@
 import { Language } from '../utils/api/definitions/enums'
-import { FieldKey } from '../utils/api/definitions/fields'
+import { fieldDefinitions, FieldKey } from '../utils/api/definitions/fields'
 
 interface LanguageInput {
   key: '_language'
@@ -18,27 +18,12 @@ export type FieldInputsObject = {
 }
 
 export class InputHelper {
-  private _inputs: FieldInputsObject
-  setInputs: (value: FieldInputsObject) => void
-  language: Language
   constructor(
-    inputs: FieldInputsObject,
-    setInputs: (value: FieldInputsObject) => void,
-    language: Language
+    private readonly inputs: FieldInputsObject,
+    private readonly setInputs: (value: FieldInputsObject) => void,
+    private readonly language: Language
   ) {
     if (!inputs) throw new Error('no inputs provided')
-    this._inputs = inputs
-    this.setInputs = setInputs
-    this.language = language
-  }
-
-  private get inputs(): FieldInputsObject {
-    return this._inputs
-  }
-
-  private set inputs(value: FieldInputsObject) {
-    this._inputs = value
-    this.setInputs(value)
   }
 
   getInputByKey(key: FieldKey): string {
@@ -46,12 +31,23 @@ export class InputHelper {
   }
 
   setInputByKey(key: FieldKey, newValue: string): void {
-    this.inputs[key] = InputHelper.sanitizeValue(newValue)
+    if (newValue === '' || newValue === undefined) delete this.inputs[key]
+    else this.inputs[key] = InputHelper.sanitizeValue(newValue)
+    this.setInputs(this.inputs)
   }
 
+  /**
+   * Returns the inputs as an array. Useful for when you want the correct order.
+   */
   get asArray(): FieldInput[] {
-    return Object.keys(this.inputs).map((value: FieldKey) => {
-      return { key: value, value: this.inputs[value] }
+    const unsortedArray: FieldInput[] = Object.keys(this.inputs).map(
+      (value: FieldKey) => ({ key: value, value: this.inputs[value] })
+    )
+    const keysSorted: FieldKey[] = Object.keys(fieldDefinitions) as FieldKey[]
+    return unsortedArray.sort((a, b) => {
+      const indexA = keysSorted.findIndex((value) => a.key === value)
+      const indexB = keysSorted.findIndex((value) => b.key === value)
+      return indexA - indexB
     })
   }
 
@@ -59,8 +55,12 @@ export class InputHelper {
     return [...this.asArray, { key: '_language', value: this.language }]
   }
 
+  /**
+   * Returns the inputs as an object. Useful for if you want to get/set a specific item.
+   * Note that these are not in order.
+   */
   get asObject(): { [x in FieldKey]?: string } {
-    return this._inputs
+    return this.inputs
   }
 
   get asObjectWithLanguage(): { [x in FieldKeyOrLanguage]?: string } {
@@ -68,16 +68,14 @@ export class InputHelper {
   }
 
   static sanitizeValue(value: string): string {
-    if (value.includes('$')) {
-      // income handling
+    // income handling
+    if (value.includes('$'))
       return value
         .toString()
         .replaceAll(' ', '')
         .replace(/(\d+),(\d+)\$/, '$1.$2') // replaces commas with decimals, but only in French!
         .replaceAll(',', '')
         .replaceAll('$', '')
-    } else {
-      return value.toString()
-    }
+    else return value
   }
 }

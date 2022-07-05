@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { VisibleFieldsObject } from '../components/EligibilityPage'
 import { getWebTranslations, WebTranslations } from '../i18n/web'
 import { BenefitHandler } from '../utils/api/benefitHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
@@ -8,26 +9,28 @@ import { FormField } from './FormField'
 import { InputHelper } from './InputHelper'
 
 export class Form {
-  language: Language
-  allFieldConfigs: FieldConfig[]
-  fields: FormField[]
-  constructor(language: Language, public inputsHelper: InputHelper) {
-    this.language = language
+  public readonly allFieldConfigs: FieldConfig[]
+  public readonly fields: FormField[]
+
+  constructor(
+    private readonly language: Language,
+    inputHelper: InputHelper,
+    visibleFieldsObject: VisibleFieldsObject
+  ) {
     this.allFieldConfigs = BenefitHandler.getAllFieldData(language)
     this.fields = this.allFieldConfigs.map((config) => {
-      return new FormField(config, this.inputsHelper)
+      return new FormField(config, inputHelper, visibleFieldsObject)
     })
   }
 
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
-    console.log(`form updating data: `, data)
-    console.log(`form updating inputs: `, inputs)
     if ('results' in data) {
-      this.fields.forEach(
-        (value) =>
-          (value.visible = data.visibleFields.includes(value.config.key))
-      )
+      this.clearAllErrors()
+      this.fields.forEach((field) => {
+        field.visible = data.visibleFields.includes(field.config.key)
+        if (!field.visible && field.value) field.value = undefined
+      })
     }
     if ('error' in data) {
       if (!('details' in data.detail))
@@ -58,7 +61,6 @@ export class Form {
           allErrorsParsed[errorKey].text
       }
     }
-    console.log(`this.fields: `, this.fields)
   }
 
   get visibleFields(): FormField[] {
@@ -78,5 +80,9 @@ export class Form {
       if (!value.valid) return false
     })
     return true
+  }
+
+  clearAllErrors(): void {
+    this.fields.forEach((value) => delete value.error)
   }
 }

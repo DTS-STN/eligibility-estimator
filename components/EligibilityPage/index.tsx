@@ -7,12 +7,13 @@ import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldCategory, Language } from '../../utils/api/definitions/enums'
-import { FieldKey, FieldType } from '../../utils/api/definitions/fields'
 import {
-  ResponseError,
-  ResponseSuccess,
-} from '../../utils/api/definitions/types'
+  FieldConfig,
+  FieldKey,
+  FieldType,
+} from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
 import { NumberField } from '../Forms/NumberField'
@@ -30,16 +31,21 @@ export const EligibilityPage: React.VFC = ({}) => {
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
   const language = useRouter().locale as Language
+  const allFieldConfigs: FieldConfig[] =
+    BenefitHandler.getAllFieldData(language)
 
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
-  ] = useSessionStorage('inputs', {})
+  ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
-  const inputsHelper = new InputHelper(inputs, setInputs, language)
-  const form = new Form(language, inputsHelper)
-  const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
-  const response: ResponseSuccess | ResponseError = mainHandler.results
+  const [visibleFields]: [
+    VisibleFieldsObject,
+    (value: VisibleFieldsObject) => void
+  ] = useState(getDefaultVisibleFields(allFieldConfigs))
+
+  const inputHelper = new InputHelper(inputs, setInputs, language)
+  const form = new Form(language, inputHelper, visibleFields)
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -51,19 +57,10 @@ export const EligibilityPage: React.VFC = ({}) => {
     })
   }, [isMobile])
 
-  if ('error' in response) {
-    // typeof data == ResponseError
-    // TODO: when error, the form does not update. Repro: set age to 200, change marital from single to married, notice partner questions don't show
-    console.log('Data update resulted in error:', response)
-  }
-
-  if ('fieldData' in response) {
-    // typeof data == ResponseSuccess
-    form.update(inputsHelper)
-  }
+  form.update(inputHelper)
 
   function getKeysByCategory(category: FieldCategory): FieldKey[] {
-    return form.allFieldConfigs
+    return allFieldConfigs
       .filter((value) => value.category.key === category)
       .map((value) => value.key)
   }
@@ -135,8 +132,8 @@ export const EligibilityPage: React.VFC = ({}) => {
    */
   function handleOnChange(field: FormField, newValue: string) {
     field.value = newValue
-    inputsHelper.setInputByKey(field.config.key, newValue)
-    form.update(inputsHelper)
+    inputHelper.setInputByKey(field.config.key, newValue)
+    form.update(inputHelper)
     setCardsValid(getStepValidity())
   }
 
@@ -310,6 +307,38 @@ export const EligibilityPage: React.VFC = ({}) => {
       }
     </>
   )
+}
+
+/**
+ * Builds the object representing the default inputs object.
+ */
+function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
+  return allFieldConfigs.reduce((result, value) => {
+    if ('default' in value && value.default) {
+      result[value.key] =
+        typeof value.default === 'string' ? value.default : value.default.key
+    }
+    return result
+  }, {})
+}
+
+export type VisibleFieldsObject = {
+  [key in FieldKey]?: boolean
+}
+
+/**
+ * Builds the object representing the default set of visible fields.
+ */
+function getDefaultVisibleFields(
+  allFieldConfigs: FieldConfig[]
+): VisibleFieldsObject {
+  const defaultData = new MainHandler({}).results
+  if ('visibleFields' in defaultData) {
+    return allFieldConfigs.reduce((result, value) => {
+      result[value.key] = defaultData.visibleFields.includes(value.key)
+      return result
+    }, {})
+  }
 }
 
 function getPlaceholderForSelect(

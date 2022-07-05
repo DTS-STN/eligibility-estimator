@@ -20,16 +20,16 @@ const Results: NextPage = (props) => {
 
   const language = useRouter().locale as Language
 
-  const inputsHelper = new InputHelper(inputs, setInputs, language)
+  const inputHelper = new InputHelper(inputs, setInputs, language)
 
-  const mainHandler = new MainHandler(inputsHelper.asObjectWithLanguage)
+  const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results
 
   return (
     <Layout>
       {'results' in response ? (
         <ResultsPage
-          inputs={inputsHelper.asArray}
+          inputs={inputHelper.asArray}
           results={response.results}
           summary={response.summary}
         />
