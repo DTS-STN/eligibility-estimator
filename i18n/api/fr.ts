@@ -213,6 +213,16 @@ const fr: Translations = {
       { key: PartnerBenefitStatus.HELP_ME, text: 'Aidez-moi à trouver' },
     ],
     livingCountry,
+    everLivedSocialCountry: [
+      {
+        key: true,
+        text: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+      },
+    ],
   },
   detail: {
     eligible:

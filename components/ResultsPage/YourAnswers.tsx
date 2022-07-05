@@ -70,7 +70,6 @@ export const YourAnswers: React.VFC<{
       case FieldType.DROPDOWN:
       case FieldType.DROPDOWN_SEARCHABLE:
       case FieldType.RADIO:
-      case FieldType.BOOLEAN:
         if ('values' in fieldData)
           return fieldData.values.find((value) => value.key === fieldValue).text
         throw new Error(`values not found for field: ${fieldKey}`)

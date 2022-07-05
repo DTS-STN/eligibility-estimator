@@ -6,7 +6,7 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
-import { livingCountry } from './countries/en'
+import { livingCountry } from './countries/fr'
 import { Translations } from './index'
 import { links } from './links/en'
 
@@ -199,6 +199,16 @@ const en: Translations = {
       { key: PartnerBenefitStatus.HELP_ME, text: 'Help me find out' },
     ],
     livingCountry,
+    everLivedSocialCountry: [
+      {
+        key: true,
+        text: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+      },
+    ],
   },
   detail: {
     eligible: 'You are likely eligible for this benefit.',
