@@ -39,15 +39,11 @@ export const FormSelect: React.VFC<SelectProps> = ({
   const currentItemKeyText: KeyAndText = field.config.values.find(
     (item) => item.key === field.value
   )
-  const currentItem = currentItemKeyText
-    ? {
-        label: currentItemKeyText.text,
-        value: currentItemKeyText.key,
-      }
-    : {
-        label: field.config.default.text,
-        value: field.config.default.key,
-      }
+
+  const currentItem = {
+    label: currentItemKeyText.text,
+    value: currentItemKeyText.key,
+  }
 
   return (
     <>
