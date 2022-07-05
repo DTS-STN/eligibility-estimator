@@ -27,11 +27,22 @@ version = "2021.2"
 project {
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
-    buildType(Build_Main)
+    buildType(Build_Develop)
     buildType(Build_Performance)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
 }
+
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : GitVcsRoot({
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
+    branch = "refs/heads/main"
+    branchSpec = "+:refs/heads/*"
+    authMethod = uploadedKey {
+        userName = "git"
+        uploadedKey = "dtsrobot"
+    }
+})
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_release"
@@ -58,8 +69,8 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic 
 /* Try and keep env.PROJECT value will be used throughout the helm scripts                 */
 /* to build urls, name the application and many other things.  folders and files in the    */
 /* helmfile directory should also match this value.                                        */
-object Build_Main: BuildType({
-    name = "Build_Main"
+object Build_Develop: BuildType({
+    name = "Build_Develop"
     description = "Deploys main branch code on branch updates"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
@@ -69,7 +80,7 @@ object Build_Main: BuildType({
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
-        param("env.BRANCH", "main")
+        param("env.BRANCH", "develop")
         param("env.ENV_EXAMPLE", "ServerOnlyExampleValue")
         param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
