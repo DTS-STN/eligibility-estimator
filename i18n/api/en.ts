@@ -6,7 +6,7 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
-import { livingCountry } from './countries/fr'
+import { livingCountry } from './countries/en'
 import { Translations } from './index'
 import { links } from './links/en'
 
