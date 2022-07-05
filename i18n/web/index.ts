@@ -130,6 +130,10 @@ export type WebTranslations = {
     partnerLivingCountry: string
     default: string
   }
+
+  tooltip: {
+    moreInformation: string
+  }
 }
 
 export function getWebTranslations(language: Language): WebTranslations {
