@@ -110,7 +110,7 @@ object Build_Develop: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number%"
             }
         }
         script {
@@ -170,7 +170,7 @@ object Build_Dynamic: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number%"
             }
         }
         script {
@@ -221,8 +221,6 @@ object Build_Main: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "prod")
         param("env.BRANCH", "prod")
-        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/eligibilityEstimator!/NEXT_PUBLIC_GRAPHQL_HTTP_PROD%")
-        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/eligibilityEstimator!/NEXT_PUBLIC_GRAPHQL_WS_PROD%")
     }
     vcs {
         root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
@@ -236,7 +234,7 @@ object Build_Main: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number%"
             }
         }
         script {
@@ -299,7 +297,7 @@ object Build_Performance: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number%"
             }
         }
         script {
