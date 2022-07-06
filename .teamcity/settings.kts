@@ -38,7 +38,7 @@ project {
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_performance"
-    url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -49,7 +49,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerforma
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStneligibilityEstimatorMain : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_main"
-    url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
     useTagsAsBranches = true
     branch = "refs/heads/main"
     branchSpec = "+:refs/tags/*"
@@ -61,7 +61,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStneligibilityEstimatorMain : G
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
-    url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -72,7 +72,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop 
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_dynamic"
-    url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    url = "git@github.com:DTS-STN/eligibility-estimator.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
