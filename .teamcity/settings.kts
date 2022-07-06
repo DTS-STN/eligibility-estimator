@@ -87,7 +87,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic 
 /* helmfile directory should also match this value.                                        */
 object Build_Develop: BuildType({
     name = "Build_Develop"
-    description = "Builds and deploys our main branch on update to main url"
+    description = "Builds and deploys our develop branch on update to develop url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "eligibility-estimator")
@@ -211,7 +211,7 @@ object Build_Dynamic: BuildType({
 
 object Build_Main: BuildType({
     name = "Build_Main"
-    description = "Pushes Main tags as defacto Main builds"
+    description = "Builds and deploys our main branch on update to main url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "eligibility-estimator")
