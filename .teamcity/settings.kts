@@ -47,7 +47,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerforma
     }
 })
 
-object Dev_EligibilityEstimator_HttpsGithubComDtsStneligibilityEstimatorMain : GitVcsRoot({
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_main"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
     useTagsAsBranches = true
