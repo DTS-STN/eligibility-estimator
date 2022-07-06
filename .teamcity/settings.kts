@@ -62,8 +62,8 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStneligibilityEstimatorMain : G
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/main"
-    branchSpec = "+:refs/heads/main"
+    branch = "refs/heads/develop"
+    branchSpec = "+:refs/heads/develop"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
@@ -73,7 +73,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_dynamic"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/main"
+    branch = "refs/heads/develop"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
         userName = "git"
@@ -219,8 +219,8 @@ object Build_Main: BuildType({
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
-        param("env.TARGET", "prod")
-        param("env.BRANCH", "prod")
+        param("env.TARGET", "main")
+        param("env.BRANCH", "main")
     }
     vcs {
         root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
