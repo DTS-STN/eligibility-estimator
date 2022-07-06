@@ -62,7 +62,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStneligibilityEstimatorMain : G
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/develop"
+    branch = "refs/heads/main"
     branchSpec = "+:refs/heads/develop"
     authMethod = uploadedKey {
         userName = "git"
