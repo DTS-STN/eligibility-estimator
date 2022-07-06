@@ -22,31 +22,46 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 'Debug' option is available in the context menu for the task.
 */
 
-version = "2021.2"
+version = "2020.2"
 
 project {
-    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
+    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance)
+    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
+    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
-    buildType(Build_Develop)
     buildType(Build_Performance)
+    buildType(Build_Main)
+    buildType(Build_Develop)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
 }
 
-object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : GitVcsRoot({
-    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
-    url = "git@github.com:DTS-STN/eligibility-estimator.git"
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance : GitVcsRoot({
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_performance"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
-    branchSpec = "+:refs/heads/*"
+    branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
     }
 })
 
-object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_release"
-    url = "git@github.com:DTS-STN/eligibility-estimator.git"
+object Dev_EligibilityEstimator_HttpsGithubComDtsStneligibilityEstimatorMain : GitVcsRoot({
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_main"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    useTagsAsBranches = true
+    branch = "refs/heads/main"
+    branchSpec = "+:refs/tags/*"
+    authMethod = uploadedKey {
+        userName = "git"
+        uploadedKey = "dtsrobot"
+    }
+})
+
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop : GitVcsRoot({
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -57,7 +72,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease 
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_dynamic"
-    url = "git@github.com:DTS-STN/eligibility-estimator.git"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
@@ -66,12 +81,13 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic 
     }
 })
 
+
 /* Try and keep env.PROJECT value will be used throughout the helm scripts                 */
 /* to build urls, name the application and many other things.  folders and files in the    */
 /* helmfile directory should also match this value.                                        */
 object Build_Develop: BuildType({
     name = "Build_Develop"
-    description = "Deploys main branch code on branch updates"
+    description = "Builds and deploys our main branch on update to main url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "eligibility-estimator")
@@ -81,12 +97,11 @@ object Build_Develop: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "develop")
-        param("env.ENV_EXAMPLE", "ServerOnlyExampleValue")
-        param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
-        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
     }
+    
     steps {
         dockerCommand {
             name = "Build & Tag Docker Image"
@@ -95,7 +110,7 @@ object Build_Develop: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg BUILD_DATE=%system.build.start.date% --build-arg ENV_EXAMPLE=%env.ENV_EXAMPLE% --build-arg NEXT_PUBLIC_ENV_EXAMPLE=%env.PUBLIC_ENV_EXAMPLE%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
             }
         }
         script {
@@ -117,7 +132,7 @@ object Build_Develop: BuildType({
             scriptContent = """
                 cd ./helmfile
                 az account set -s %env.SUBSCRIPTION%
-                az aks get-credentials --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
+                az aks get-credentials --overwrite-existing --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
                 helmfile -e %env.TARGET% apply
             """.trimIndent()
         }
@@ -129,70 +144,10 @@ object Build_Develop: BuildType({
     }
 })
 
-object Build_Performance: BuildType({
-    name = "Build_Performance"
-    description = "Manually run performance environment"
-    params {
-        param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "eligibility-estimator")
-        param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
-        param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
-        param("env.RG_DEV", "ESdCDPSBDMK8SDev")
-        param("env.TARGET", "main")
-        param("env.BRANCH", "perf")
-        param("env.ENV_EXAMPLE", "ServerOnlyExampleValue")
-        param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
-    }
-    paused = true
-    vcs {
-        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorRelease)
-    }
-    steps {
-        dockerCommand {
-            name = "Build & Tag Docker Image"
-            commandType = build {
-                source = file {
-                    path = "Dockerfile"
-                }
-                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg BUILD_DATE=%system.build.start.date% --build-arg ENV_EXAMPLE=%env.ENV_EXAMPLE% --build-arg NEXT_PUBLIC_ENV_EXAMPLE=%env.PUBLIC_ENV_EXAMPLE%"
-            }
-        }
-        script {
-            name = "Login to Azure and ACR"
-            scriptContent = """
-                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.TENANT-ID%
-                az account set -s %env.SUBSCRIPTION%
-                az acr login -n MTSContainers
-            """.trimIndent()
-        }
-        dockerCommand {
-            name = "Push Image to ACR"
-            commandType = push {
-                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-            }
-        }
-        script {
-            name = "Deploy w/ Helmfile"
-            scriptContent = """
-                cd ./helmfile
-                az account set -s %env.SUBSCRIPTION%
-                az aks get-credentials --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
-                helmfile -e %env.TARGET% apply
-            """.trimIndent()
-        }
-    }
-    triggers {
-        vcs {
-            branchFilter = "+:*"
-        }
-    }
-})
 
 object Build_Dynamic: BuildType({
     name = "Build_Dynamic"
-    description = "Builds and deploys every branch"
+    description = "Dynamic branching; builds and deploys every branch"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "eligibility-estimator")
@@ -202,12 +157,11 @@ object Build_Dynamic: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "dyna-%teamcity.build.branch%")
-        param("env.ENV_EXAMPLE", "ServerOnlyExampleValue")
-        param("env.PUBLIC_ENV_EXAMPLE", "PublicClientExampleValue")
     }
     vcs {
         root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
     }
+    
     steps {
         dockerCommand {
             name = "Build & Tag Docker Image"
@@ -216,7 +170,7 @@ object Build_Dynamic: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg BUILD_DATE=%system.build.start.date% --build-arg ENV_EXAMPLE=%env.ENV_EXAMPLE% --build-arg NEXT_PUBLIC_ENV_EXAMPLE=%env.PUBLIC_ENV_EXAMPLE%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
             }
         }
         script {
@@ -238,7 +192,7 @@ object Build_Dynamic: BuildType({
             scriptContent = """
                 cd ./helmfile
                 az account set -s %env.SUBSCRIPTION%
-                az aks get-credentials --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
+                az aks get-credentials --overwrite-existing --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
                 helmfile -e %env.TARGET% apply
             """.trimIndent()
         }
@@ -247,17 +201,17 @@ object Build_Dynamic: BuildType({
         vcs {
             branchFilter = """
                     +:*
-                    -:dev
                     -:main
                     -:gh-pages
-            """.trimIndent()
+                    """.trimIndent()
         }
     }
 })
 
-object CleanUpWeekly: BuildType({
-    name = "CleanUpWeekly"
-    description = "Deletes deployments every Sunday"
+
+object Build_Main: BuildType({
+    name = "Build_Main"
+    description = "Pushes Main tags as defacto Main builds"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "eligibility-estimator")
@@ -265,12 +219,136 @@ object CleanUpWeekly: BuildType({
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
-        param("env.TARGET", "dev")
+        param("env.TARGET", "prod")
+        param("env.BRANCH", "prod")
+        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/eligibilityEstimator!/NEXT_PUBLIC_GRAPHQL_HTTP_PROD%")
+        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/eligibilityEstimator!/NEXT_PUBLIC_GRAPHQL_WS_PROD%")
+    }
+    vcs {
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
+    }
+    
+    steps {
+        dockerCommand {
+            name = "Build & Tag Docker Image"
+            commandType = build {
+                source = file {
+                    path = "Dockerfile"
+                }
+                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+            }
+        }
+        script {
+            name = "Login to Azure and ACR"
+            scriptContent = """
+                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.TENANT-ID%
+                az account set -s %env.SUBSCRIPTION%
+                az acr login -n MTSContainers
+            """.trimIndent()
+        }
+        dockerCommand {
+            name = "Push Image to ACR"
+            commandType = push {
+                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+            }
+        }
+        script {
+            name = "Deploy w/ Helmfile"
+            scriptContent = """
+                cd ./helmfile
+                az account set -s %env.SUBSCRIPTION%
+                az aks get-credentials --overwrite-existing --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
+                helmfile -e %env.TARGET% apply
+            """.trimIndent()
+        }
+    }
+    triggers {
+        vcs {
+            branchFilter = """
+                    +:*
+                    -:refs/heads/main
+                    """.trimIndent()
+        }
+    }
+})
+
+
+object Build_Performance: BuildType({
+    name = "Build_Performance"
+    description = "Builds and deploys our main branch on update to perf url"
+    params {
+        param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
+        param("env.PROJECT", "eligibility-estimator")
+        param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
+        param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
+        param("env.RG_DEV", "ESdCDPSBDMK8SDev")
+        param("env.TARGET", "main")
+        param("env.BRANCH", "perf")
+    }
+    vcs {
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance)
+    }
+    
+    steps {
+        dockerCommand {
+            name = "Build & Tag Docker Image"
+            commandType = build {
+                source = file {
+                    path = "Dockerfile"
+                }
+                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+            }
+        }
+        script {
+            name = "Login to Azure and ACR"
+            scriptContent = """
+                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.TENANT-ID%
+                az account set -s %env.SUBSCRIPTION%
+                az acr login -n MTSContainers
+            """.trimIndent()
+        }
+        dockerCommand {
+            name = "Push Image to ACR"
+            commandType = push {
+                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+            }
+        }
+        script {
+            name = "Deploy w/ Helmfile"
+            scriptContent = """
+                cd ./helmfile
+                az account set -s %env.SUBSCRIPTION%
+                az aks get-credentials --overwrite-existing --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
+                helmfile -e %env.TARGET% apply
+            """.trimIndent()
+        }
+    }
+    triggers {
+        vcs {
+            branchFilter = "+:*"
+        }
+    }
+})
+
+object CleanUpWeekly: BuildType({
+    name = "CleanUpWeekly"
+    description = "Deletes deployments every saturday"
+    params {
+        param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
+        param("env.PROJECT", "eligibility-estimator")
+        param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
+        param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
+        param("env.RG_DEV", "ESdCDPSBDMK8SDev")
+        param("env.TARGET", "main")
         param("env.BRANCH", "%teamcity.build.branch%")
     }
     vcs {
         root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
-    } 
+    }
     steps {
         script {
             name = "Login and Delete Deployment"
@@ -285,11 +363,11 @@ object CleanUpWeekly: BuildType({
     triggers {
         schedule {
             schedulingPolicy = weekly {
-                dayOfWeek = ScheduleTrigger.DAY.Sunday
+                dayOfWeek = ScheduleTrigger.DAY.Saturday
                 hour = 15
                 minute = 15
                 timezone = "America/New_York"
-            }
+            }  
             branchFilter = "+:main"
             triggerBuild = always()
             withPendingChangesOnly = false
