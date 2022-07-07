@@ -52,7 +52,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : G
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
     useTagsAsBranches = true
     branch = "refs/heads/main"
-    branchSpec = "+:refs/tags/main"
+    branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
@@ -63,7 +63,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop 
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
     branch = "refs/heads/develop"
-    branchSpec = "+:refs/tags/develop"
+    branchSpec = "+:refs/heads/develop"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
