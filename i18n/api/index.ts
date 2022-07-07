@@ -49,6 +49,7 @@ export interface Translations {
     partnerIncomeAvailable: TypedKeyAndText<boolean>[]
     partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
+    everLivedSocialCountry: TypedKeyAndText<boolean>[]
   }
   detail: {
     eligible: string
