@@ -52,7 +52,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : G
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
     useTagsAsBranches = true
     branch = "refs/heads/main"
-    branchSpec = "+:refs/tags/*"
+    branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
@@ -62,7 +62,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : G
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/main"
+    branch = "refs/heads/develop"
     branchSpec = "+:refs/heads/develop"
     authMethod = uploadedKey {
         userName = "git"
@@ -73,7 +73,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_dynamic"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/develop"
+    branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
         userName = "git"
