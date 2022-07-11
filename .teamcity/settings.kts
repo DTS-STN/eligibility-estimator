@@ -73,7 +73,7 @@ object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_dynamic"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/main"
+    branch = "refs/heads/develop"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
         userName = "git"
