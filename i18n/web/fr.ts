@@ -173,6 +173,10 @@ const fr: WebTranslations = {
     partnerLivingCountry: 'Sélectionner un pays',
     default: 'Sélectionnez parmi',
   },
+
+  tooltip: {
+    moreInformation: "Plus d'information",
+  },
 }
 
 export default fr

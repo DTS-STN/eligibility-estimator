@@ -34,7 +34,6 @@ describe('Tooltip component', () => {
 
     const tooltip = screen.getByTestId('tooltip')
     const tooltipData = getTooltipTranslationByField(Language.EN, field)
-    expect(tooltip.innerHTML).toContain(tooltipData.heading)
     expect(tooltip.innerHTML).toContain(normalizeHtml(tooltipData.text))
   })
 

@@ -90,10 +90,6 @@ function humanizeResponse(
 ): string {
   const questionType = fieldDefinitions[field.key].type
   switch (questionType) {
-    case FieldType.BOOLEAN:
-      return response.toLowerCase() === 'false'
-        ? translations.no
-        : translations.yes
     case FieldType.RADIO:
     case FieldType.DROPDOWN:
     case FieldType.DROPDOWN_SEARCHABLE:

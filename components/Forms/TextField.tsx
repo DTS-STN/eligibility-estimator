@@ -30,7 +30,6 @@ export const TextField: React.VFC<TextFieldProps> = (props) => {
         >
           {label}
         </label>
-        <span>{required && <span className="ml-1">{requiredText}</span>}</span>
       </div>
       {error && <ErrorLabel errorMessage={error} />}
       <textarea
