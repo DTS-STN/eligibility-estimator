@@ -62,12 +62,11 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           id: 'formErrorId',
         }}
         formLabelProps={{
-          helpText:
-            'Help text that is always visible under the label to provide users with primary information needed to fill in the form field. Limit of 2 sentences',
+          helpText,
           id: 'requiredWithInfo',
           infoText:
             'Required label style with information icon. You can hide by clicking on icon again.',
-          label: 'Required Label',
+          label,
           required: true,
         }}
         hasDay={false}
