@@ -229,26 +229,12 @@ export const EligibilityPage: React.VFC = observer(({}) => {
               />
             </div>
           )}
-          {(field.type == FieldType.RADIO ||
-            field.type == FieldType.BOOLEAN) && (
+          {field.type == FieldType.RADIO && (
             <div className="pb-4">
               <Radio
                 name={field.key}
                 checkedValue={field.value}
-                values={
-                  field.type == 'boolean'
-                    ? [
-                        {
-                          key: 'true',
-                          text: tsln.yes,
-                        },
-                        {
-                          key: 'false',
-                          text: tsln.no,
-                        },
-                      ]
-                    : field.options
-                }
+                values={field.options}
                 keyforid={field.key}
                 label={field.label}
                 onChange={(e) => handleOnChange(step, field, e)}

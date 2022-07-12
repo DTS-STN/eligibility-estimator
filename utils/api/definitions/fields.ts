@@ -33,7 +33,6 @@ export enum FieldKey {
 export enum FieldType {
   NUMBER = 'number',
   CURRENCY = 'currency',
-  BOOLEAN = 'boolean',
   DROPDOWN = 'dropdown',
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
