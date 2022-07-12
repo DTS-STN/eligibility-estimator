@@ -97,20 +97,6 @@ export interface Translations {
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string
-  csv: {
-    appName: string
-    formResponses: string
-    question: string
-    answer: string
-    estimationResults: string
-    benefit: string
-    eligibility: string
-    details: string
-    entitlement: string
-    links: string
-    description: string
-    url: string
-  }
   yes: string
   no: string
   year: string
