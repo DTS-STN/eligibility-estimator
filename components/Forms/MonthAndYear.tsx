@@ -1,7 +1,6 @@
 import type { Instance } from 'mobx-state-tree'
 import { InputHTMLAttributes } from 'react'
 import type { FormField } from '../../client-state/models/FormField'
-import { useTranslation } from '../Hooks'
 import { NumberField } from './NumberField'
 
 export interface MonthAndYearProps
@@ -20,7 +19,6 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   placeholder,
   onChange,
 }) => {
-  const requiredText = useTranslation<string>('required')
   return (
     <>
       <div className="mb-2.5">
