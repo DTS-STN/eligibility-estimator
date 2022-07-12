@@ -104,6 +104,7 @@ describe('test the mobx state tree nodes', () => {
     const form: Instance<typeof Form> = root.form
 
     const sendReq = jest.spyOn(form, 'sendAPIRequest')
+    // @ts-ignore
     sendReq.mockImplementationOnce(async () => res)
 
     form.setupForm(res.body.fieldData)
@@ -163,7 +164,7 @@ describe('test the mobx state tree nodes', () => {
     let input = form.buildObjectWithFormData(Language.EN)
     expect(input).toEqual({ _language: 'en', livingCountry: 'CAN' }) // blank form includes default livingCountry
     fillOutForm(form)
-    input = form.buildObjectWithFormData()
+    input = form.buildObjectWithFormData(Language.EN)
     expect(input.incomeAvailable).toEqual('true')
     expect(input.age).toEqual('65')
     expect(input.oasDefer).toEqual('false')
