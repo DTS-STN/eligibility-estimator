@@ -43,9 +43,6 @@ export const FormSelect: React.VFC<SelectProps> = observer(
           >
             <span className="mb-1.5 font-bold text-content">{field.label}</span>
           </label>
-          <span>
-            <span className="ml-1">({requiredText})</span>
-          </span>
         </div>
         <div className="w-full md:w-80">
           <Select

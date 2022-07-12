@@ -4,9 +4,6 @@
 name: Lint and Test
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -16,25 +13,25 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🔔
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16.x
           cache: yarn
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build
         run: yarn run build
 
-      - name: Linting
+      - name: Lint
         run: yarn run lint
 
-      - name: Run Unit Tests and Coverage 🧪
+      - name: Run Unit Tests and Coverage
         run: yarn run test:ci
 
       # - name: Extract branch name

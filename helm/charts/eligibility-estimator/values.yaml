@@ -1,4 +1,4 @@
-# Default values for COABE.
+# Default values for EligibilityEstimator.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -6,6 +6,9 @@ image:
   repository: nginx
   tag: stable
   pullPolicy: IfNotPresent
+
+deployment:
+  annotations: {}
 
 healthChecks:
   livenessDelay: 60
@@ -15,8 +18,8 @@ healthChecks:
 
 replicaCount: 1
 
-nameOverride: ''
-fullnameOverride: ''
+nameOverride: ""
+fullnameOverride: ""
 
 service:
   type: ClusterIP

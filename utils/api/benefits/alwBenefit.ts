@@ -1,5 +1,6 @@
 import { Translations } from '../../../i18n/api'
 import {
+  BenefitKey,
   EntitlementResultType,
   ResultKey,
   ResultReason,
@@ -9,13 +10,13 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
 } from '../definitions/types'
-import { legalValues } from '../scrapers/output'
+import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations)
+    super(input, translations, BenefitKey.alw)
   }
 
   protected getEligibility(): EligibilityResult {
@@ -25,7 +26,13 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
-    const meetsReqIncome = this.income < legalValues.MAX_ALW_INCOME
+
+    // if income is not provided, assume they meet the income requirement
+    const skipReqIncome = !this.input.income.provided
+    const maxIncome = legalValues.alw.alwIncomeLimit
+    const meetsReqIncome =
+      skipReqIncome || this.input.income.relevant < maxIncome
+
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -39,7 +46,15 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqIncome &&
       meetsReqPartner
     ) {
-      if (meetsReqAge) {
+      if (meetsReqAge && skipReqIncome) {
+        return {
+          result: ResultKey.INCOME_DEPENDENT,
+          reason: ResultReason.INCOME_MISSING,
+          detail:
+            this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+          incomeMustBeLessThan: maxIncome,
+        }
+      } else if (meetsReqAge) {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
@@ -61,26 +76,26 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE,
-          detail: this.translations.detail.mustBe60to64,
+          detail: this.translations.detail.alwNotEligible,
         }
       }
     } else if (overAgeReq) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.AGE,
-        detail: this.translations.detail.mustBe60to64,
+        detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
-        detail: this.translations.detail.mustBePartnered,
+        detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqPartner && this.input.partnerBenefitStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
-        detail: this.translations.detail.mustHavePartnerWithGis,
+        detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqIncome) {
       return {
@@ -109,7 +124,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.INELIGIBLE,
             reason: ResultReason.AGE,
-            detail: this.translations.detail.mustBe60to64,
+            detail: this.translations.detail.alwNotEligible,
           }
         }
       } else {
@@ -144,11 +159,29 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   protected getEntitlement(): EntitlementResultGeneric {
-    if (this.eligibility.result !== ResultKey.ELIGIBLE)
-      return { result: 0, type: EntitlementResultType.NONE }
+    const autoEnrollment = this.getAutoEnrollment()
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return {
+        result: 0,
+        type: EntitlementResultType.NONE,
+        autoEnrollment,
+      }
+
+    if (
+      !this.input.income.provided &&
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    )
+      return {
+        result: -1,
+        type: EntitlementResultType.UNAVAILABLE,
+        autoEnrollment,
+      }
 
     const formulaResult = new EntitlementFormula(
-      this.income,
+      this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age
@@ -159,6 +192,13 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         ? EntitlementResultType.UNAVAILABLE
         : EntitlementResultType.FULL
 
-    return { result: formulaResult, type }
+    return { result: formulaResult, type, autoEnrollment }
+  }
+
+  /**
+   * For this benefit, always return false, because we don't know any better as of now.
+   */
+  protected getAutoEnrollment(): boolean {
+    return false
   }
 }

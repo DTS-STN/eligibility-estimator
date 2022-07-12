@@ -50,6 +50,8 @@
     "autoprefixer": "^10.4.4",
     "eslint": "^8.17.0",
     "eslint-config-next": "^12.1.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "lint-staged": "^12.3.7",

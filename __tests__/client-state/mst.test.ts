@@ -45,7 +45,7 @@ describe('test the mobx state tree nodes', () => {
     // TODO: this should NOT use numbered indexes to fill the form, as that makes ordering changes cause tests to fail.
     form.fields[0].setValue('65') // age
     form.fields[1].setValue('false') // oasDefer
-    form.fields[2].setValue('20000') // income
+    form.fields[2].setValue('true') // incomeAvailable
     form.fields[3].setValue(LegalStatus.CANADIAN_CITIZEN)
     form.fields[4].setValue(LivingCountry.CANADA)
     form.fields[5].setValue('false') // never lived outside Canada
@@ -164,7 +164,7 @@ describe('test the mobx state tree nodes', () => {
     expect(input).toEqual({ _language: 'en', livingCountry: 'CAN' }) // blank form includes default livingCountry
     fillOutForm(form)
     input = form.buildObjectWithFormData()
-    expect(input.income).toEqual('20000')
+    expect(input.incomeAvailable).toEqual('true')
     expect(input.age).toEqual('65')
     expect(input.oasDefer).toEqual('false')
     expect(input.maritalStatus).toEqual('single')

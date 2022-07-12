@@ -8,10 +8,12 @@ import {
   PartnerBenefitStatusHelper,
 } from '../helpers/fieldClasses'
 import {
+  BenefitKey,
   EntitlementResultType,
   EstimationSummaryState,
   Language,
   LegalStatus,
+  LinkIcon,
   LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
@@ -24,6 +26,7 @@ import { FieldData, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
+  incomeAvailable: boolean
   income: number // personal income
   birthMonth: number
   birthYear: number
@@ -39,6 +42,7 @@ export interface RequestInput {
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
+  partnerIncomeAvailable: boolean
   partnerIncome: number // partner income
   partnerBirthMonth: number
   partnerBirthYear: number
@@ -82,26 +86,47 @@ export interface EligibilityResult {
   result: ResultKey
   reason: ResultReason
   detail: string
+  incomeMustBeLessThan?: number // for use when income is not provided
 }
 
 export interface EntitlementResultGeneric {
-  result: number
+  result: number // when type is unavailable, result should be -1
   type: EntitlementResultType
+  autoEnrollment: boolean
 }
 
 export interface EntitlementResultOas extends EntitlementResultGeneric {
   resultAt75: number
   clawback: number
-  deferral: { years: number; increase: number }
+  deferral: { age: number; years: number; increase: number }
 }
 
 export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas
 
+/**
+ * This is text within the cards, that will expand when clicked.
+ */
+export interface CardCollapsedText {
+  heading: string
+  text: string
+}
+
+/**
+ * This is the object containing everything the UI needs to know to display the benefit result card.
+ */
+export interface CardDetail {
+  mainText: string
+  collapsedText: CardCollapsedText[]
+  links: Link[]
+}
+
 export interface BenefitResult<
   T extends EntitlementResult = EntitlementResult
 > {
+  benefitKey: BenefitKey
   eligibility: EligibilityResult
   entitlement: T
+  cardDetail: CardDetail
 }
 
 export interface BenefitResultsObject {
@@ -134,6 +159,7 @@ export interface Link {
   url: string
   order: number
   location: LinkLocation
+  icon?: LinkIcon
 }
 
 export interface SummaryObject {

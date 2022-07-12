@@ -1,4 +1,4 @@
-import { LinkLocation } from '../../../utils/api/definitions/enums'
+import { LinkIcon, LinkLocation } from '../../../utils/api/definitions/enums'
 import { LinkDefinitions } from './index'
 
 export const links: LinkDefinitions = {
@@ -14,29 +14,35 @@ export const links: LinkDefinitions = {
     order: 2,
     location: LinkLocation.QUESTIONS_ONLY,
   },
-  oasOverview: {
-    text: 'Old Age Security: Overview',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.htm',
-    order: 3,
-    location: LinkLocation.RESULTS_ONLY,
-  },
-  gisOverview: {
-    text: 'Guaranteed Income Supplement: Overview',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
-    order: 4,
-    location: LinkLocation.RESULTS_ONLY,
-  },
-  alwOverview: {
-    text: 'Allowance: Overview',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
-    order: 5,
-    location: LinkLocation.RESULTS_ONLY,
-  },
-  afsOverview: {
-    text: 'Allowance for the Survivor: Overview',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
-    order: 6,
-    location: LinkLocation.RESULTS_ONLY,
+  overview: {
+    oas: {
+      text: 'Learn more about Old Age Security',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.htm',
+      order: 3,
+      location: LinkLocation.RESULTS_ONLY,
+      icon: LinkIcon.info,
+    },
+    gis: {
+      text: 'Learn more about Guaranteed Income Supplement',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
+      order: 4,
+      location: LinkLocation.RESULTS_ONLY,
+      icon: LinkIcon.info,
+    },
+    alw: {
+      text: 'Learn more about Allowance',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
+      order: 5,
+      location: LinkLocation.RESULTS_ONLY,
+      icon: LinkIcon.info,
+    },
+    afs: {
+      text: 'Learn more about Allowance for the Survivor',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
+      order: 6,
+      location: LinkLocation.RESULTS_ONLY,
+      icon: LinkIcon.info,
+    },
   },
   oasMaxIncome: {
     text: 'Old Age Security: Maximum Income',
@@ -116,29 +122,35 @@ export const links: LinkDefinitions = {
     order: 19,
     location: LinkLocation.RESULTS_ONLY,
   },
-  oasApply: {
-    text: 'Old Age Security',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
-    order: 20,
-    location: LinkLocation.RESULTS_APPLY,
-  },
-  gisApply: {
-    text: 'Guaranteed Income Supplement',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
-    order: 21,
-    location: LinkLocation.RESULTS_APPLY,
-  },
-  alwApply: {
-    text: 'Allowance',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
-    order: 22,
-    location: LinkLocation.RESULTS_APPLY,
-  },
-  afsApply: {
-    text: 'Allowance for the Survivor',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
-    order: 23,
-    location: LinkLocation.RESULTS_APPLY,
+  apply: {
+    oas: {
+      text: 'Apply for Old Age Security',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
+      order: 20,
+      location: LinkLocation.RESULTS_APPLY,
+      icon: LinkIcon.link,
+    },
+    gis: {
+      text: 'Apply for Guaranteed Income Supplement',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
+      order: 21,
+      location: LinkLocation.RESULTS_APPLY,
+      icon: LinkIcon.link,
+    },
+    alw: {
+      text: 'Apply for Allowance',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
+      order: 22,
+      location: LinkLocation.RESULTS_APPLY,
+      icon: LinkIcon.link,
+    },
+    afs: {
+      text: 'Apply for Allowance for the Survivor',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
+      order: 23,
+      location: LinkLocation.RESULTS_APPLY,
+      icon: LinkIcon.link,
+    },
   },
   SC: {
     text: 'Service Canada',
@@ -160,33 +172,39 @@ export const links: LinkDefinitions = {
   },
   socialAgreement: {
     text: 'social security agreement',
-    url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',
+    url: 'https://www.canada.ca/en/revenue-agency/services/tax/canada-pension-plan-cpp-employment-insurance-ei-rulings/international-social-security-agreements-canada-pension-plan/what-purpose-international-social-security-agreements.html#tbl',
     order: -1,
     location: LinkLocation.HIDDEN,
   },
-  oasReasons: {
-    text: 'Click here',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.html#gc-document-nav',
-    order: -1,
-    location: LinkLocation.HIDDEN,
-  },
-  gisReasons: {
-    text: 'Click here',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
-  },
-  alwReasons: {
-    text: 'Click here',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/eligibility.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
-  },
-  afsReasons: {
-    text: 'Click here',
-    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
-    order: -1,
-    location: LinkLocation.HIDDEN,
+  reasons: {
+    oas: {
+      text: 'View full eligibility criteria for Old Age Security',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.html#gc-document-nav',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+      icon: LinkIcon.note,
+    },
+    gis: {
+      text: 'View full eligibility criteria for Guaranteed Income Supplement',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+      icon: LinkIcon.note,
+    },
+    alw: {
+      text: 'View full eligibility criteria for Allowance',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+      icon: LinkIcon.note,
+    },
+    afs: {
+      text: 'View full eligibility criteria for Allowance for the Survivor',
+      url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
+      order: -1,
+      location: LinkLocation.HIDDEN,
+      icon: LinkIcon.note,
+    },
   },
   oasRecoveryTaxInline: {
     text: 'recovery tax',

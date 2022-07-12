@@ -2,6 +2,7 @@ import { KeyAndText } from '../../../i18n/api'
 import { FieldCategory } from './enums'
 
 export enum FieldKey {
+  INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
   BIRTH_MONTH = 'birthMonth',
   BIRTH_YEAR = 'birthYear',
@@ -17,6 +18,7 @@ export enum FieldKey {
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
+  PARTNER_INCOME_AVAILABLE = 'partnerIncomeAvailable',
   PARTNER_INCOME = 'partnerIncome',
   PARTNER_BIRTH_MONTH = 'partnerBirthMonth',
   PARTNER_BIRTH_YEAR = 'partnerBirthYear',
@@ -100,6 +102,11 @@ export const fieldDefinitions: FieldDefinitions = {
       },
     ],
   },
+  [FieldKey.INCOME_AVAILABLE]: {
+    key: FieldKey.INCOME_AVAILABLE,
+    category: { key: FieldCategory.INCOME },
+    type: FieldType.RADIO,
+  },
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
     category: { key: FieldCategory.INCOME },
@@ -130,7 +137,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     category: { key: FieldCategory.RESIDENCE },
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.MARITAL_STATUS]: {
@@ -138,6 +145,11 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
+  },
+  [FieldKey.PARTNER_INCOME_AVAILABLE]: {
+    key: FieldKey.PARTNER_INCOME_AVAILABLE,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
   },
   [FieldKey.PARTNER_INCOME]: {
     key: FieldKey.PARTNER_INCOME,
@@ -208,8 +220,9 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
+    relatedKey: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
 }
@@ -217,7 +230,6 @@ export const fieldDefinitions: FieldDefinitions = {
 export type FieldData =
   | FieldDataCurrency
   | FieldDataNumber
-  | FieldDataBoolean
   | FieldDataRadio
   | FieldDataDropdown
   | FieldDataString
@@ -247,11 +259,6 @@ interface FieldDataCurrency extends FieldDataGeneric {
 interface FieldDataNumber extends FieldDataGeneric {
   type: FieldType.NUMBER
   placeholder?: string
-}
-
-interface FieldDataBoolean extends FieldDataGeneric {
-  type: FieldType.BOOLEAN
-  default?: string
 }
 
 interface FieldDataRadio extends FieldDataGeneric {

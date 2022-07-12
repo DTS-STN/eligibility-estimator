@@ -7,7 +7,11 @@ import {
 } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { FieldData, FieldKey } from '../../utils/api/definitions/fields'
+import {
+  FieldData,
+  fieldDefinitions,
+  FieldKey,
+} from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { fixedEncodeURIComponent } from '../../utils/web/helpers/utils'
 import { RootStore } from '../store'
@@ -54,11 +58,25 @@ export const Form = types
         self.fields.remove(field)
       }
     },
+    sortFields(): void {
+      self.fields.sort(
+        (
+          a: Instance<typeof FormField>,
+          b: Instance<typeof FormField>
+        ): number => {
+          const keyList: string[] = Object.keys(fieldDefinitions)
+          const indexA: number = keyList.findIndex((value) => value === a.key)
+          const indexB: number = keyList.findIndex((value) => value === b.key)
+          return indexA - indexB
+        }
+      )
+    },
   }))
   .actions((self) => ({
     addField(data: SnapshotIn<typeof FormField>): void {
       try {
         self.fields.push({ ...data })
+        self.sortFields()
       } catch (error) {
         console.log('error occurred while adding field to self.fields', error)
       }
@@ -128,7 +146,6 @@ export const Form = types
             helpText: helpText ?? null,
             subFields: subFields,
           })
-          self.fields.sort(BenefitHandler.sortFields)
         }
         // field does exist, update if any data has changed
         else if (field.label !== fieldData.label) {
@@ -143,7 +160,6 @@ export const Form = types
     },
     // used for calling the main benefit processor
     buildObjectWithFormData(language: Language): { [key: string]: string } {
-      console.log('buildObjectWithFormData')
       let input = { _language: language }
       for (const field of self.fields) {
         if (!field.value) continue
@@ -151,15 +167,22 @@ export const Form = types
       }
       return input
     },
-    // used for calling the main benefit processor using the array from the internal state
-    buildArrayWithFormData(language: Language): [string, string][] {
-      console.log('buildArrayWithFormData')
+    // used internally for the UI
+    buildArrayWithFormData(): [FieldKey, string][] {
       let input = []
-      input.push(['_language', language])
+      self.sortFields()
       for (const field of self.fields) {
         if (!field.value) continue
         input.push([field.key, field.sanitizeInput()])
       }
+      return input
+    },
+  }))
+  .actions((self) => ({
+    // used for calling the main benefit processor using the array from the internal state
+    buildArrayWithFormDataAndLanguage(language: Language): [string, string][] {
+      let input: [string, string][] = self.buildArrayWithFormData()
+      input.push(['_language', language])
       return input
     },
     // used for API requests, which is currently for the CSV function
@@ -176,7 +199,9 @@ export const Form = types
   .actions((self) => ({
     saveInputsToState: flow(function* () {
       const parent = getParent(self) as Instance<typeof RootStore>
-      const inputArray = self.buildArrayWithFormData(parent.langBrowser)
+      const inputArray = self.buildArrayWithFormDataAndLanguage(
+        parent.langBrowser
+      )
       parent.setInputs(inputArray)
       parent.saveStoreState()
     }),

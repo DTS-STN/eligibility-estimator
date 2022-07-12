@@ -18,11 +18,17 @@ export class FieldHelper {
 
 export class IncomeHelper extends FieldHelper {
   constructor(
+    public clientAvailable: boolean,
+    public partnerAvailable: boolean,
     public client: number,
     public partner: number,
     public maritalStatus: MaritalStatusHelper
   ) {
-    super(client === undefined ?? -1) // send either undefined or -1, as we should never use this property
+    super(undefined) // send undefined, as we should never use this `value` property
+    this.provided =
+      client !== undefined &&
+      (maritalStatus.single ||
+        (maritalStatus.partnered && partner !== undefined))
   }
 
   /**
@@ -30,6 +36,7 @@ export class IncomeHelper extends FieldHelper {
    * Returns the client's income when single, or the sum of client+partner when partnered.
    */
   get relevant(): number {
+    if (!this.provided) throw new Error('income not provided!')
     if (
       this.maritalStatus.provided &&
       this.maritalStatus.partnered &&
@@ -40,7 +47,7 @@ export class IncomeHelper extends FieldHelper {
     return this.client
   }
 
-  get sum(): number {
+  private get sum(): number {
     const a = this.client ?? 0
     const b = this.partner ?? 0
     return a + b
