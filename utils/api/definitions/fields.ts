@@ -49,7 +49,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.OAS_AGE]: {
     key: FieldKey.OAS_AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.DATE,
+    type: FieldType.NUMBER,
   },
   [FieldKey.INCOME_AVAILABLE]: {
     key: FieldKey.INCOME_AVAILABLE,

@@ -41,8 +41,7 @@ const fr: Translations = {
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     age: 'Quel mois et quelle année êtes-vous né?',
     oasDefer: 'Quand souhaitez-vous commencer à recevoir la SV?',
-    oasAge:
-      'Quel mois et quelle année souhaitez-vous commencer à recevoir la SV?',
+    oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous?',
     legalStatus: 'Quel est votre statut légal au Canada?',
