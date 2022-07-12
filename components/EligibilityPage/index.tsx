@@ -133,7 +133,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   /**
    * On every change to a field, this will check the validity of all fields.
    */
-  function handleOnChange(field: FormField, newValue: string) {
+  function handleOnChange(field: FormField, newValue: string): void {
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
