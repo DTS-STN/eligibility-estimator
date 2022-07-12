@@ -291,6 +291,10 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       age: 59,
+      birthMonth: undefined,
+      birthYear: undefined,
+      oasMonth: undefined,
+      oasYear: undefined,
       oasDefer: false,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,

@@ -641,6 +641,8 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     const res = await mockGetRequest({
       ...income10k,
       age: 75,
+      birthMonth: undefined,
+      birthYear: undefined,
       oasDefer: false,
       oasMonth: undefined,
       oasYear: undefined,
@@ -789,6 +791,8 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       ...income10k,
       age: 64,
+      birthMonth: undefined,
+      birthYear: undefined,
       oasDefer: false,
       oasMonth: undefined,
       oasYear: undefined,
