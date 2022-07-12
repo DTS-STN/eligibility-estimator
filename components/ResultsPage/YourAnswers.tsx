@@ -34,7 +34,7 @@ export const YourAnswers: React.VFC<{
               <DSLink
                 id={`edit-${input.key}`}
                 href={`/eligibility#${input.key}`}
-                text="Edit"
+                text={tsln.resultsPage.edit}
                 target="_self"
               />
             </div>

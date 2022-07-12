@@ -187,11 +187,11 @@ const fr: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire survivant(e) ou veuf(ve)',
+        text: 'Partenaire veuf(ve)',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
-        text: 'Involontairement séparé(e)',
+        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
       },
     ],
     partnerBenefitStatus: [
