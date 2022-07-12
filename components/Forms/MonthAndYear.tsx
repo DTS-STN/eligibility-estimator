@@ -1,7 +1,9 @@
 import { DatePicker } from '@dts-stn/decd-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
+import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { useTranslation } from '../Hooks'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -17,6 +19,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   helpText,
   baseOnChange,
 }) => {
+  const tsln = useTranslation<WebTranslations>()
   const [dateInput]: [
     { month: number; year: number },
     (value: { month: number; year: number }) => void
@@ -59,6 +62,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         // onDayChange={function noRefCheck() {}}
         onMonthChange={dateOnChange}
         onYearChange={debounce(dateOnChange, 500)}
+        lang={tsln._language}
       />
     </>
   )
