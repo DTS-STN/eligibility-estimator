@@ -16,8 +16,15 @@ export interface NumberFieldProps
  * @param props {NumberFieldProps}
  * @returns
  */
-export const NumberField: React.VFC<NumberFieldProps> = (props) => {
-  const { name, label, value, placeholder, onChange, helpText, error } = props
+export const NumberField: React.VFC<NumberFieldProps> = ({
+  name,
+  label,
+  value,
+  placeholder,
+  onChange,
+  helpText,
+  error,
+}) => {
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.

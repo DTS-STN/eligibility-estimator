@@ -1,6 +1,5 @@
 import { InputHTMLAttributes } from 'react'
 import { KeyAndText } from '../../i18n/api'
-import { useTranslation } from '../Hooks'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -18,18 +17,16 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props {InputProps}
  * @returns
  */
-export const Radio: React.VFC<InputProps> = (props) => {
-  const {
-    name,
-    label,
-    checkedValue,
-    onChange,
-    values,
-    keyforid,
-    helpText,
-    error,
-  } = props
-
+export const Radio: React.VFC<InputProps> = ({
+  name,
+  label,
+  checkedValue,
+  onChange,
+  values,
+  keyforid,
+  helpText,
+  error,
+}) => {
   return (
     <div className="radio">
       <div>

@@ -18,8 +18,15 @@ export interface CurrencyFieldProps
  * @param props {CurrencyFieldProps}
  * @returns
  */
-export const CurrencyField: React.VFC<CurrencyFieldProps> = (props) => {
-  const { name, label, value, placeholder, onChange, helpText, error } = props
+export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
+  name,
+  label,
+  value,
+  placeholder,
+  onChange,
+  helpText,
+  error,
+}) => {
   const locale = useRouter().locale
 
   const localizedIncome =

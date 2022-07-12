@@ -14,8 +14,14 @@ export interface TextFieldProps
  * @param props {TextFieldProps}
  * @returns
  */
-export const TextField: React.VFC<TextFieldProps> = (props) => {
-  const { name, label, value, placeholder, onChange, error } = props
+export const TextField: React.VFC<TextFieldProps> = ({
+  name,
+  label,
+  value,
+  placeholder,
+  onChange,
+  error,
+}) => {
   return (
     <>
       <div className="mb-2 5">
