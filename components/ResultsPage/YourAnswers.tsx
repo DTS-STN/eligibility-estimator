@@ -38,7 +38,7 @@ export const YourAnswers: React.VFC<{
               <DSLink
                 id={`edit-${fieldKey}`}
                 href={`/eligibility#${fieldKey}`}
-                text="Edit"
+                text={tsln.resultsPage.edit}
                 target="_self"
               />
             </div>
