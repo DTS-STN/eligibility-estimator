@@ -1,3 +1,4 @@
+import { DatePicker } from '@dts-stn/decd-design-system'
 import type { Instance } from 'mobx-state-tree'
 import { InputHTMLAttributes } from 'react'
 import type { FormField } from '../../client-state/models/FormField'
@@ -54,6 +55,31 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           </div>
         )
       })}
+
+      <DatePicker
+        formErrorProps={{
+          errorMessage: 'This is how form error will be displayed',
+          id: 'formErrorId',
+        }}
+        formLabelProps={{
+          helpText:
+            'Help text that is always visible under the label to provide users with primary information needed to fill in the form field. Limit of 2 sentences',
+          id: 'requiredWithInfo',
+          infoText:
+            'Required label style with information icon. You can hide by clicking on icon again.',
+          label: 'Required Label',
+          required: true,
+        }}
+        hasDay={false}
+        hasError
+        hasLabel
+        id="DatePicker"
+        maxYear={2050}
+        minYear={1999}
+        onDayChange={function noRefCheck() {}}
+        onMonthChange={function noRefCheck() {}}
+        onYearChange={function noRefCheck() {}}
+      />
     </>
   )
 }
