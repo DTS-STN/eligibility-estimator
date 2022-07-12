@@ -62,6 +62,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "yarn eslint --cache --fix",
-    "*.{js,ts,jsx,tsx,yaml,yml,json,md,html}": "yarn prettier --write"
+    "*.{js,ts,jsx,tsx,yaml,yml,json,md,html,css}": "yarn prettier --write"
   }
 }
