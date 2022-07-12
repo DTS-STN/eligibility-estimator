@@ -150,18 +150,16 @@ export const EligibilityPage: React.VFC = ({}) => {
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
-          {field.config.type === FieldType.DATE && (
-            <div className="pb-4">
+          <div className="pb-4">
+            {field.config.type === FieldType.DATE && (
               <MonthAndYear
                 name={field.key}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
               />
-            </div>
-          )}
-          {field.config.type === FieldType.NUMBER && (
-            <div className="pb-4">
+            )}
+            {field.config.type === FieldType.NUMBER && (
               <NumberField
                 type={field.config.type}
                 name={field.key}
@@ -174,10 +172,8 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 helpText={field.config.helpText}
               />
-            </div>
-          )}
-          {field.config.type == FieldType.CURRENCY && (
-            <div className="pb-4">
+            )}
+            {field.config.type == FieldType.CURRENCY && (
               <CurrencyField
                 type={field.config.type}
                 name={field.key}
@@ -190,10 +186,8 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 helpText={field.config.helpText}
               />
-            </div>
-          )}
-          {field.config.type == FieldType.STRING && (
-            <div className="pb-4">
+            )}
+            {field.config.type == FieldType.STRING && (
               <TextField
                 type={field.config.type}
                 name={field.key}
@@ -205,11 +199,9 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 error={field.error}
               />
-            </div>
-          )}
-          {(field.config.type == FieldType.DROPDOWN ||
-            field.config.type == FieldType.DROPDOWN_SEARCHABLE) && (
-            <div className="pb-4">
+            )}
+            {(field.config.type == FieldType.DROPDOWN ||
+              field.config.type == FieldType.DROPDOWN_SEARCHABLE) && (
               <FormSelect
                 name={field.key}
                 field={field}
@@ -219,10 +211,8 @@ export const EligibilityPage: React.VFC = ({}) => {
                 }
                 value={null}
               />
-            </div>
-          )}
-          {field.config.type == FieldType.RADIO && (
-            <div className="pb-4">
+            )}
+            {field.config.type == FieldType.RADIO && (
               <Radio
                 name={field.key}
                 checkedValue={field.value}
@@ -232,8 +222,8 @@ export const EligibilityPage: React.VFC = ({}) => {
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
               />
-            </div>
-          )}
+            )}
+          </div>
           {field.error && (
             <div className="mt-6 md:pr-12">
               <Message
