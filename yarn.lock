@@ -436,7 +436,7 @@ __metadata:
 
 "@dts-stn/decd-design-system@https://github.com/DTS-STN/DECD-Design-System#months_to_numbers":
   version: 1.45.0
-  resolution: "@dts-stn/decd-design-system@https://github.com/DTS-STN/DECD-Design-System.git#commit=e2f49dfb19dca0ed8280d01594a8e6e489680a21"
+  resolution: "@dts-stn/decd-design-system@https://github.com/DTS-STN/DECD-Design-System.git#commit=33c1f9f53c4c444fb24ec2180e866055f6dafb54"
   dependencies:
     prop-types: ^15.7.2
     react: ^17.0.2
@@ -445,7 +445,7 @@ __metadata:
     react-full-screen: ^1.1.1
     react-player: ^2.10.1
     user: ^0.0.0
-  checksum: 38677aa6c7d42c41127ee73c2bd55c1fc475bf7b094b9661a02f4f47b9f62d100cffe10a5e9b47e986f9f62875db134a521a50cae44c0e791c6ba28d7bfdd265
+  checksum: 7693de4f6d56ac8ae3a2a5a389849adb4eea7c214f32fc10ad9b3385bf6fc073e2d2ac716f4a7020e451a37a1bbd14d4e93c08aeda698993294c10e9a5ec36f6
   languageName: node
   linkType: hard
 
