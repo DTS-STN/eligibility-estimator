@@ -1,8 +1,8 @@
-import { InputHTMLAttributes } from 'react'
-import { useTranslation } from '../Hooks'
-import { NumberField } from '../Forms/NumberField'
 import type { Instance } from 'mobx-state-tree'
+import { InputHTMLAttributes } from 'react'
 import type { FormField } from '../../client-state/models/FormField'
+import { useTranslation } from '../Hooks'
+import { NumberField } from './NumberField'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -32,12 +32,6 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         >
           {label}
         </label>
-
-        {label && (
-          <span>
-            <span className="ml-1">({requiredText})</span>
-          </span>
-        )}
 
         {label && helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
