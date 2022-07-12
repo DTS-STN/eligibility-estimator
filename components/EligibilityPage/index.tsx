@@ -150,17 +150,16 @@ export const EligibilityPage: React.VFC = ({}) => {
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
-          {field.config.type === FieldType.DATE &&
-            (field.key === FieldKey.AGE || field.key === FieldKey.OAS_AGE) && (
-              <div className="pb-4">
-                <MonthAndYear
-                  name={field.key}
-                  label={field.config.label}
-                  helpText={field.config.helpText}
-                  baseOnChange={(newValue) => handleOnChange(field, newValue)}
-                />
-              </div>
-            )}
+          {field.config.type === FieldType.DATE && (
+            <div className="pb-4">
+              <MonthAndYear
+                name={field.key}
+                label={field.config.label}
+                helpText={field.config.helpText}
+                baseOnChange={(newValue) => handleOnChange(field, newValue)}
+              />
+            </div>
+          )}
           {field.config.type === FieldType.NUMBER && (
             <div className="pb-4">
               <NumberField
