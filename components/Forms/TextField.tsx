@@ -1,5 +1,4 @@
 import { InputHTMLAttributes } from 'react'
-import { useTranslation } from '../Hooks'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface TextFieldProps
@@ -16,9 +15,7 @@ export interface TextFieldProps
  * @returns
  */
 export const TextField: React.VFC<TextFieldProps> = (props) => {
-  const { name, label, required, value, placeholder, onChange, error } = props
-  const requiredText = useTranslation<string>('required')
-
+  const { name, label, value, placeholder, onChange, error } = props
   return (
     <>
       <div className="mb-2 5">
@@ -39,7 +36,7 @@ export const TextField: React.VFC<TextFieldProps> = (props) => {
         onChange={onChange}
         defaultValue={value}
         rows={2}
-        required={required}
+        required
         autoComplete="off"
       />
     </>

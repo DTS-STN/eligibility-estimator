@@ -29,7 +29,6 @@ export const Radio: React.VFC<InputProps> = (props) => {
     helpText,
     error,
   } = props
-  const requiredText = useTranslation<string>('required')
 
   return (
     <div className="radio">

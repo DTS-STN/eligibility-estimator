@@ -3,7 +3,6 @@ import Select from 'react-select'
 import { FormField } from '../../client-state/FormField'
 import { KeyAndText } from '../../i18n/api'
 import { FieldType } from '../../utils/api/definitions/fields'
-import { useTranslation } from '../Hooks'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -33,8 +32,6 @@ export const FormSelect: React.VFC<SelectProps> = ({
     throw new Error('wrong field type encountered')
   if (typeof field.config.default === 'string')
     throw new Error('wrong field type encountered')
-
-  const requiredText = useTranslation<string>('required')
 
   const currentItemKeyText: KeyAndText = field.config.values.find(
     (item) => item.key === field.value

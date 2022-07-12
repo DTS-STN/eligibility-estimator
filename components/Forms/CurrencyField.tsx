@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
-import { useTranslation } from '../Hooks'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface CurrencyFieldProps
@@ -20,17 +19,7 @@ export interface CurrencyFieldProps
  * @returns
  */
 export const CurrencyField: React.VFC<CurrencyFieldProps> = (props) => {
-  const {
-    name,
-    label,
-    required,
-    value,
-    placeholder,
-    onChange,
-    helpText,
-    error,
-  } = props
-  const requiredText = useTranslation<string>('required')
+  const { name, label, value, placeholder, onChange, helpText, error } = props
   const locale = useRouter().locale
 
   const localizedIncome =
@@ -79,7 +68,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = (props) => {
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}
-        required={required}
+        required
         autoComplete="off"
         enterKeyHint="done"
       />

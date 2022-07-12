@@ -173,7 +173,6 @@ export const EligibilityPage: React.VFC = ({}) => {
                 )}
                 value={field.value}
                 helpText={field.config.helpText}
-                required
               />
             </div>
           )}
@@ -190,7 +189,6 @@ export const EligibilityPage: React.VFC = ({}) => {
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
                 helpText={field.config.helpText}
-                required
               />
             </div>
           )}
@@ -206,7 +204,6 @@ export const EligibilityPage: React.VFC = ({}) => {
                 }, 500)}
                 value={field.value}
                 error={field.error}
-                required
               />
             </div>
           )}
@@ -234,7 +231,6 @@ export const EligibilityPage: React.VFC = ({}) => {
                 label={field.config.label}
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
-                required
               />
             </div>
           )}
