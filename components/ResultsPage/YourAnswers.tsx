@@ -1,22 +1,19 @@
 import { Link as DSLink } from '@dts-stn/decd-design-system'
+import { FieldInput } from '../../client-state/InputHelper'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import {
-  FieldData,
-  FieldKey,
-  FieldType,
-} from '../../utils/api/definitions/fields'
+import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 
 export const YourAnswers: React.VFC<{
   title: string
-  inputs: Array<[FieldKey, string]>
+  inputs: FieldInput[]
 }> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
 
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
-  const allFieldData: FieldData[] = BenefitHandler.getAllFieldData(
+  const allFieldData: FieldConfig[] = BenefitHandler.getAllFieldData(
     tsln._language
   )
 
@@ -30,14 +27,13 @@ export const YourAnswers: React.VFC<{
     return (
       <>
         {inputs.map((input) => {
-          const fieldKey: FieldKey = input[0]
           return (
-            <div key={fieldKey} className="py-4 border-b-2 border-info-border">
-              {tsln.resultsQuestions[fieldKey]} <br />
+            <div key={input.key} className="py-4 border-b-2 border-info-border">
+              {tsln.resultsQuestions[input.key]} <br />
               <strong>{getDisplayValue(input)}</strong> &nbsp;
               <DSLink
-                id={`edit-${fieldKey}`}
-                href={`/eligibility#${fieldKey}`}
+                id={`edit-${input.key}`}
+                href={`/eligibility#${input.key}`}
                 text={tsln.resultsPage.edit}
                 target="_self"
               />
@@ -52,27 +48,26 @@ export const YourAnswers: React.VFC<{
    * Accepts an "input object" (a two-item array with the FieldKey and the user's input),
    * and returns the string that should be displayed in the UI.
    */
-  function getDisplayValue(input: [FieldKey, string]): string {
-    const fieldKey: FieldKey = input[0]
-    const fieldValue: string = input[1]
-    const fieldData: FieldData = allFieldData.find(
-      (fieldData) => fieldData.key === fieldKey
+  function getDisplayValue(input: FieldInput): string {
+    const fieldData: FieldConfig = allFieldData.find(
+      (fieldData) => fieldData.key === input.key
     )
     const fieldType: FieldType = fieldData.type
     switch (fieldType) {
       case FieldType.NUMBER:
       case FieldType.STRING:
-        return fieldValue // no processing needed, display as-is
+        return input.value // no processing needed, display as-is
       case FieldType.CURRENCY:
-        return numberToStringCurrency(Number(fieldValue), tsln._locale, {
+        return numberToStringCurrency(Number(input.value), tsln._language, {
           rounding: 0,
         })
       case FieldType.DROPDOWN:
       case FieldType.DROPDOWN_SEARCHABLE:
       case FieldType.RADIO:
         if ('values' in fieldData)
-          return fieldData.values.find((value) => value.key === fieldValue).text
-        throw new Error(`values not found for field: ${fieldKey}`)
+          return fieldData.values.find((value) => value.key === input.value)
+            .text
+        throw new Error(`values not found for field: ${input.key}`)
       default:
         throw new Error(`field type not supported in YourAnswers: ${fieldType}`)
     }

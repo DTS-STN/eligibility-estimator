@@ -1,7 +1,5 @@
 import { DatePicker } from '@dts-stn/decd-design-system'
-import type { Instance } from 'mobx-state-tree'
 import { InputHTMLAttributes, useState } from 'react'
-import type { FormField } from '../../client-state/models/FormField'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -58,5 +56,3 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     </>
   )
 }
-
-type FormFieldType = Instance<typeof FormField>

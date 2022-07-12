@@ -1,4 +1,3 @@
-import { throws } from 'assert'
 import { getTranslations, Translations } from '../../i18n/api'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
@@ -13,7 +12,7 @@ import {
   ResultReason,
 } from './definitions/enums'
 import {
-  FieldData,
+  FieldConfig,
   fieldDefinitions,
   FieldKey,
   FieldType,
@@ -42,7 +41,7 @@ export class BenefitHandler {
   private _input: ProcessedInputWithPartner
   private _missingFields: FieldKey[]
   private _requiredFields: FieldKey[]
-  private _fieldData: FieldData[]
+  private _fieldData: FieldConfig[]
   private _benefitResults: BenefitResultsObject
   private _summary: SummaryObject
 
@@ -76,21 +75,12 @@ export class BenefitHandler {
     this._requiredFields = value
   }
 
-  get fieldData(): FieldData[] {
-    if (this._fieldData === undefined) {
+  get fieldData(): FieldConfig[] {
+    if (this._fieldData === undefined)
       this._fieldData = BenefitHandler.getFieldData(
         this.requiredFields,
         this.translations
       )
-
-      for (const key in this._fieldData) {
-        const field: FieldData = this._fieldData[key]
-        field.label = this.replaceTextVariables(field.label)
-        field.helpText = this.replaceTextVariables(field.helpText)
-      }
-    }
-
-    console.log(`this._fieldData`, this._fieldData)
     return this._fieldData
   }
 
@@ -134,12 +124,8 @@ export class BenefitHandler {
     )
     const clientInput: ProcessedInput = {
       income: incomeHelper,
-      birthMonth: this.rawInput.birthMonth,
-      birthYear: this.rawInput.birthYear,
       age: this.calculateAge(this.rawInput.birthMonth, this.rawInput.birthYear),
       oasDefer: this.rawInput.oasDefer,
-      oasMonth: this.rawInput.oasMonth,
-      oasYear: this.rawInput.oasYear,
       oasAge: this.rawInput.oasDefer
         ? this.calculateAge(this.rawInput.oasMonth, this.rawInput.oasYear)
         : 65,
@@ -158,15 +144,11 @@ export class BenefitHandler {
     }
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
-      birthMonth: this.rawInput.partnerBirthMonth,
-      birthYear: this.rawInput.partnerBirthYear,
       age: this.calculateAge(
         this.rawInput.partnerBirthMonth,
         this.rawInput.partnerBirthYear
       ),
       oasDefer: false, // pass dummy data because we will never use this anyway
-      oasMonth: 12, // pass dummy data because we will never use this anyway
-      oasYear: 2022, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(
@@ -471,7 +453,7 @@ export class BenefitHandler {
   static getFieldData(
     fields: FieldKey[],
     translations: Translations
-  ): FieldData[] {
+  ): FieldConfig[] {
     // takes list of keys, builds list of definitions
     const fieldDataList = fields
       .sort(this.sortFields)
@@ -507,8 +489,7 @@ export class BenefitHandler {
 
       // translate label/question
       const label = translations.question[fieldData.key]
-      if (label === undefined)
-        throw new Error(`no question for key ${fieldData.key}`) // TODO: consider changing type definitions to allow NO label
+      if (!label) throw new Error(`no question for key ${fieldData.key}`)
       fieldData.label = label
 
       // translate question help text
@@ -541,6 +522,15 @@ export class BenefitHandler {
 
       return fieldData
     })
+
+    // replace the text variables for Label and HelpText
+    for (const key in fieldDataList) {
+      const field: FieldConfig = fieldDataList[key]
+      const handler = new BenefitHandler({ _language: translations._language })
+      field.label = handler.replaceTextVariables(field.label)
+      field.helpText = handler.replaceTextVariables(field.helpText)
+    }
+
     return fieldDataList
   }
 
@@ -548,7 +538,7 @@ export class BenefitHandler {
    * Returns the field data for all fields.
    * This is so that the UI can be aware of everything right away, rather than waiting for inputs to know the upcoming fields.
    */
-  static getAllFieldData(language: Language): FieldData[] {
+  static getAllFieldData(language: Language): FieldConfig[] {
     return this.getFieldData(Object.values(FieldKey), getTranslations(language))
   }
 
@@ -581,23 +571,3 @@ export class BenefitHandler {
     return s[0].toUpperCase() + s.slice(1)
   }
 }
-
-// console.log(`field`, field)
-//         // @ts-ignore
-//         if (field.subFields) {
-//           console.log('has sub fields')
-//           const fullSubFields = BenefitHandler.getFieldData(
-//             // @ts-ignore
-//             field.subFields.map((subField) => subField.key),
-//             this.translations
-//           )
-
-//           console.log(`fullSubFields`, fullSubFields)
-
-//           const fullField = { ...field, subFields: fullSubFields }
-//           console.log(`fullField`, fullField)
-//           // const everythingBut = this._fieldData.filter(f => f.key !== field.key)
-//           // console.log(`everythingBut`, everythingBut)
-//           // this._fieldData = [...everythingBut, fullField]
-//           this._fieldData = this._fieldData.map(f => f.key === field.key ? fullField : f) // this line breaks absolutely everything
-//         }

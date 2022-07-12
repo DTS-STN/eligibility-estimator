@@ -1,15 +1,10 @@
 import { WebTranslations } from '.'
-import {
-  Language,
-  Locale,
-  ValidationErrors,
-} from '../../utils/api/definitions/enums'
+import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
-  _locale: Locale.EN,
 
   oas: 'Old Age Security',
   gis: 'Guaranteed Income Supplement',

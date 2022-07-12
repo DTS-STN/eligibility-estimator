@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import { TextField } from '../../components/Forms/TextField'
 
 describe('TextField component', () => {
@@ -31,13 +30,11 @@ describe('TextField component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <TextField
-          name={props.name}
-          label={props.label}
-          required={props.required}
-        />
-      </StoreProvider>
+      <TextField
+        name={props.name}
+        label={props.label}
+        required={props.required}
+      />
     )
 
     render(ui)
@@ -62,14 +59,12 @@ describe('TextField component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <TextField
-          name={props.name}
-          label={props.label}
-          error={props.error}
-          required={props.required}
-        />
-      </StoreProvider>
+      <TextField
+        name={props.name}
+        label={props.label}
+        error={props.error}
+        required={props.required}
+      />
     )
 
     render(ui)

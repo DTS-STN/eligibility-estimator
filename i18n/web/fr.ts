@@ -1,16 +1,11 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
-import {
-  Language,
-  Locale,
-  ValidationErrors,
-} from '../../utils/api/definitions/enums'
+import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
-  _locale: Locale.FR,
 
   oas: 'Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
