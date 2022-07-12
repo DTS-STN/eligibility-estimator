@@ -148,12 +148,8 @@ describe('consolidated benefit tests: ineligible', () => {
     const res = await mockGetRequest({
       incomeAvailable: true,
       income: 20000,
-      birthMonth: undefined,
-      birthYear: undefined,
       age: 50,
       oasDefer: false,
-      oasMonth: undefined,
-      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -553,58 +549,19 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerIncome: 10000,
       ...partnerNoHelpNeeded,
     }
-    let inputNoDefer65 = {
-      ...inputBase,
-      birthMonth: undefined,
-      birthYear: undefined,
-      age: 65,
-      oasDefer: false,
-      oasMonth: undefined,
-      oasYear: undefined,
-      oasAge: 65,
-    }
-
+    let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
     let res = await mockGetRequest(inputNoDefer65)
     expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
 
-    let inputNoDefer70 = {
-      ...inputBase,
-      birthMonth: undefined,
-      birthYear: undefined,
-      age: 70,
-      oasDefer: false,
-      oasMonth: undefined,
-      oasYear: undefined,
-      oasAge: 65,
-    }
-
+    let inputNoDefer70 = { ...inputBase, age: 70, oasDefer: false, oasAge: 65 }
     res = await mockGetRequest(inputNoDefer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
 
-    let input65Defer70 = {
-      ...inputBase,
-      birthMonth: undefined,
-      birthYear: undefined,
-      age: 65,
-      oasDefer: true,
-      oasMonth: undefined,
-      oasYear: undefined,
-      oasAge: 70,
-    }
+    let input65Defer70 = { ...inputBase, age: 65, oasDefer: true, oasAge: 70 }
     res = await mockGetRequest(input65Defer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
 
-    let input70Defer70 = {
-      ...inputBase,
-      birthMonth: undefined,
-      birthYear: undefined,
-      age: 70,
-      oasDefer: true,
-      oasMonth: undefined,
-      oasYear: undefined,
-      oasAge: 70,
-    }
-
+    let input70Defer70 = { ...inputBase, age: 70, oasDefer: true, oasAge: 70 }
     res = await mockGetRequest(input70Defer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
   })
@@ -641,11 +598,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     const res = await mockGetRequest({
       ...income10k,
       age: 75,
-      birthMonth: undefined,
-      birthYear: undefined,
       oasDefer: false,
-      oasMonth: undefined,
-      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -791,11 +744,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     const res = await mockGetRequest({
       ...income10k,
       age: 64,
-      birthMonth: undefined,
-      birthYear: undefined,
       oasDefer: false,
-      oasMonth: undefined,
-      oasYear: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,

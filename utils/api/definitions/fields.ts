@@ -4,12 +4,8 @@ import { FieldCategory } from './enums'
 export enum FieldKey {
   INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
-  BIRTH_MONTH = 'birthMonth',
-  BIRTH_YEAR = 'birthYear',
   AGE = 'age',
   OAS_DEFER = 'oasDefer',
-  OAS_MONTH = 'oasMonth',
-  OAS_YEAR = 'oasYear',
   OAS_AGE = 'oasAge',
   MARITAL_STATUS = 'maritalStatus',
   LIVING_COUNTRY = 'livingCountry',
@@ -20,8 +16,6 @@ export enum FieldKey {
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
   PARTNER_INCOME_AVAILABLE = 'partnerIncomeAvailable',
   PARTNER_INCOME = 'partnerIncome',
-  PARTNER_BIRTH_MONTH = 'partnerBirthMonth',
-  PARTNER_BIRTH_YEAR = 'partnerBirthYear',
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
@@ -37,69 +31,25 @@ export enum FieldType {
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
   STRING = 'string',
-  CONTAINER = 'container',
+  DATE = 'date',
 }
 
 // the order of fields here will define the order within the application
 export const fieldDefinitions: FieldDefinitions = {
-  [FieldKey.BIRTH_MONTH]: {
-    key: FieldKey.BIRTH_MONTH,
-    category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
-  },
-  [FieldKey.BIRTH_YEAR]: {
-    key: FieldKey.BIRTH_YEAR,
-    category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
-  },
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.CONTAINER,
-    subFields: [
-      {
-        key: FieldKey.BIRTH_MONTH,
-        category: { key: FieldCategory.AGE },
-        type: FieldType.NUMBER,
-      },
-      {
-        key: FieldKey.BIRTH_YEAR,
-        category: { key: FieldCategory.AGE },
-        type: FieldType.NUMBER,
-      },
-    ],
+    type: FieldType.DATE,
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
     category: { key: FieldCategory.AGE },
     type: FieldType.RADIO,
   },
-  [FieldKey.OAS_MONTH]: {
-    key: FieldKey.OAS_MONTH,
-    category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
-  },
-  [FieldKey.OAS_YEAR]: {
-    key: FieldKey.OAS_YEAR,
-    category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
-  },
   [FieldKey.OAS_AGE]: {
     key: FieldKey.OAS_AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.CONTAINER,
-    subFields: [
-      {
-        key: FieldKey.BIRTH_MONTH,
-        category: { key: FieldCategory.AGE },
-        type: FieldType.NUMBER,
-      },
-      {
-        key: FieldKey.BIRTH_YEAR,
-        category: { key: FieldCategory.AGE },
-        type: FieldType.NUMBER,
-      },
-    ],
+    type: FieldType.DATE,
   },
   [FieldKey.INCOME_AVAILABLE]: {
     key: FieldKey.INCOME_AVAILABLE,
@@ -162,33 +112,11 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.RADIO,
     default: undefined,
   },
-  [FieldKey.PARTNER_BIRTH_MONTH]: {
-    key: FieldKey.PARTNER_BIRTH_MONTH,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.NUMBER,
-  },
-  [FieldKey.PARTNER_BIRTH_YEAR]: {
-    key: FieldKey.PARTNER_BIRTH_YEAR,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.NUMBER,
-  },
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.CONTAINER,
-    subFields: [
-      {
-        key: FieldKey.BIRTH_MONTH,
-        category: { key: FieldCategory.MARITAL },
-        type: FieldType.NUMBER,
-      },
-      {
-        key: FieldKey.BIRTH_YEAR,
-        category: { key: FieldCategory.MARITAL },
-        type: FieldType.NUMBER,
-      },
-    ],
+    type: FieldType.DATE,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -232,7 +160,7 @@ export type FieldConfig =
   | FieldConfigRadio
   | FieldConfigDropdown
   | FieldConfigString
-  | FieldConfigContainer
+  | FieldConfigDate
 
 interface FieldConfigGeneric {
   key: FieldKey
@@ -245,9 +173,8 @@ interface FieldConfigGeneric {
   }
 }
 
-interface FieldConfigContainer extends FieldConfigGeneric {
-  type: FieldType.CONTAINER
-  subFields: FieldConfig[]
+interface FieldConfigDate extends FieldConfigGeneric {
+  type: FieldType.DATE
 }
 
 interface FieldConfigCurrency extends FieldConfigGeneric {

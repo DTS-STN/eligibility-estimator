@@ -1,5 +1,4 @@
 import Joi from 'joi'
-import { join } from 'path'
 import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import legalValues from '../scrapers/output'
 import {
@@ -24,9 +23,6 @@ import {
  *
  * Note: Do not require fields here, do it in the benefit-specific schemas.
  */
-
-// can also bring in month and year as a date object and validate with Joi like this:
-// Joi.date().format('YYYY-MM-DD').options({ convert: false }),
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean(),
   income: Joi.number()
@@ -35,29 +31,13 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.incomeBelowZero)
     .less(legalValues.oas.incomeLimit)
     .message(ValidationErrors.incomeTooHigh),
-  birthMonth: Joi.number()
-    .integer()
-    .min(1)
-    .message(ValidationErrors.monthInvalid)
-    .max(12)
-    .message(ValidationErrors.monthInvalid),
-  birthYear: Joi.number().integer().min(1900).max(2013),
   age: Joi.number()
-    .integer()
     .min(18)
     .message(ValidationErrors.ageUnder18)
     .max(150)
     .message(ValidationErrors.ageOver150),
   oasDefer: Joi.boolean(),
-  oasMonth: Joi.number()
-    .integer()
-    .min(1)
-    .message(ValidationErrors.monthInvalid)
-    .max(12)
-    .message(ValidationErrors.monthInvalid),
-  oasYear: Joi.number().integer().min(1900).max(2013),
   oasAge: Joi.number()
-    .integer()
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)
@@ -91,15 +71,7 @@ export const RequestSchema = Joi.object({
       })
     )
     .message(ValidationErrors.partnerIncomeTooHigh),
-  partnerBirthMonth: Joi.number()
-    .integer()
-    .min(1)
-    .message(ValidationErrors.monthInvalid)
-    .max(12)
-    .message(ValidationErrors.monthInvalid),
-  partnerBirthYear: Joi.number().integer().min(1900).max(2013),
   partnerAge: Joi.number()
-    .integer()
     .min(18)
     .message(ValidationErrors.partnerAgeUnder18)
     .max(150)

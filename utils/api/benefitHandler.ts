@@ -124,11 +124,9 @@ export class BenefitHandler {
     )
     const clientInput: ProcessedInput = {
       income: incomeHelper,
-      age: this.calculateAge(this.rawInput.birthMonth, this.rawInput.birthYear),
+      age: this.rawInput.age,
       oasDefer: this.rawInput.oasDefer,
-      oasAge: this.rawInput.oasDefer
-        ? this.calculateAge(this.rawInput.oasMonth, this.rawInput.oasYear)
-        : 65,
+      oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
@@ -144,10 +142,7 @@ export class BenefitHandler {
     }
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
-      age: this.calculateAge(
-        this.rawInput.partnerBirthMonth,
-        this.rawInput.partnerBirthYear
-      ),
+      age: this.rawInput.partnerAge,
       oasDefer: false, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
@@ -403,26 +398,6 @@ export class BenefitHandler {
     }
   }
 
-  private calculateAge(birthMonth: number, birthYear: number): number {
-    if (!birthMonth || !birthYear) return null
-
-    const today = new Date()
-    const currentMonth = today.getMonth()
-    const currentYear = today.getFullYear()
-
-    let ageMonths: number
-    let ageYears = currentYear - birthYear
-
-    if (currentMonth >= birthMonth) {
-      ageMonths = currentMonth - birthMonth
-    } else {
-      ageYears -= 1
-      ageMonths = 12 + (currentMonth - birthMonth)
-    }
-
-    return ageYears + Number((ageMonths / 12).toFixed(1))
-  }
-
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    * Optionally accepts a benefitResult, which will be used as context for certain replacement rules.
@@ -447,6 +422,26 @@ export class BenefitHandler {
     return textToProcess
   }
 
+  static calculateAge(birthMonth: number, birthYear: number): number {
+    if (!birthMonth || !birthYear) return null
+
+    const today = new Date()
+    const currentMonth = today.getMonth()
+    const currentYear = today.getFullYear()
+
+    let ageMonths: number
+    let ageYears = currentYear - birthYear
+
+    if (currentMonth >= birthMonth) {
+      ageMonths = currentMonth - birthMonth
+    } else {
+      ageYears -= 1
+      ageMonths = 12 + (currentMonth - birthMonth)
+    }
+
+    return ageYears + Number((ageMonths / 12).toFixed(1))
+  }
+
   /**
    * Accepts a list of FieldKeys, transforms that into a full list of field configurations for the frontend to use.
    */
@@ -461,26 +456,6 @@ export class BenefitHandler {
 
     // applies translations
     fieldDataList.map((fieldData) => {
-      // @ts-ignore
-      if (fieldData.subFields) {
-        const subFieldData = BenefitHandler.getFieldData(
-          // @ts-ignore
-          fieldData.subFields.map((subField) => subField.key),
-          translations
-        )
-
-        const fullSubFields = []
-        subFieldData.forEach((subField) => {
-          fullSubFields.push({
-            ...subField,
-            category: { ...subField.category },
-          })
-        })
-
-        // @ts-ignore
-        fieldData.subFields = fullSubFields
-      }
-
       // translate category
       const category = translations.category[fieldData.category.key]
       if (!category)

@@ -1,31 +1,38 @@
 import { DatePicker } from '@dts-stn/decd-design-system'
-import { InputHTMLAttributes, useState } from 'react'
+import { debounce } from 'lodash'
+import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   helpText?: string
-  subFields?: any
+  baseOnChange: (newValue: string) => void
 }
 
 export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   name,
   label,
   helpText,
-  subFields,
-  placeholder,
-  onChange,
+  baseOnChange,
 }) => {
-  const [dateInput] = useState({ month: 'January', year: undefined })
+  const [dateInput]: [
+    { month: number; year: number },
+    (value: { month: number; year: number }) => void
+  ] = useState({
+    month: 1,
+    year: undefined,
+  })
 
-  const customOnChange = (e) => {
+  const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
-    dateInput[fieldToSet] = e.target.value
+    dateInput[fieldToSet] = Number(e.target.value)
     if (dateInput.year && dateInput.month)
-      console.log('gotta push the change to api now:', dateInput)
-    else console.log('not pushing change')
+      baseOnChange(
+        String(BenefitHandler.calculateAge(dateInput.month, dateInput.year))
+      )
   }
 
   return (
@@ -46,12 +53,12 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         hasDay={false}
         // hasError={false}
         hasLabel
-        id="DatePicker"
+        id={name}
         // maxYear={2050}
         // minYear={1999}
         // onDayChange={function noRefCheck() {}}
-        onMonthChange={customOnChange}
-        onYearChange={customOnChange}
+        onMonthChange={dateOnChange}
+        onYearChange={debounce(dateOnChange, 500)}
       />
     </>
   )

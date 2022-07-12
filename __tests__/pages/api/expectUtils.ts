@@ -115,8 +115,6 @@ export const partnerUndefined = {
   partnerIncomeAvailable: undefined,
   partnerIncome: undefined,
   partnerAge: undefined,
-  partnerBirthMonth: undefined,
-  partnerBirthYear: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
   partnerLivedOutsideCanada: undefined,
@@ -126,8 +124,6 @@ export const partnerUndefined = {
 
 export const partnerNoHelpNeeded = {
   partnerAge: undefined,
-  partnerBirthMonth: undefined,
-  partnerBirthYear: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
   partnerLivedOutsideCanada: undefined,
@@ -154,20 +150,12 @@ export const age65NoDefer = {
   age: 65,
   oasDefer: false,
   oasAge: undefined,
-  birthMonth: undefined,
-  birthYear: undefined,
-  oasMonth: undefined,
-  oasYear: undefined,
 }
 
 export const age60NoDefer = {
   age: 60,
   oasDefer: false,
   oasAge: undefined,
-  birthMonth: undefined,
-  birthYear: undefined,
-  oasMonth: undefined,
-  oasYear: undefined,
 }
 
 export const canadaWholeLife = {

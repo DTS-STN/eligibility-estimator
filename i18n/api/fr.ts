@@ -7,7 +7,6 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
-import { FieldKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/fr'
 import { Translations } from './index'
 import { links } from './links/fr'
@@ -40,13 +39,10 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     income:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    birthMonth: 'Month', // TODO: replace with French
-    birthYear: 'Year', // TODO: replace with French
-    age: 'What month and year were you born?', // TODO: replace with French
+    age: 'Quel mois et quelle année êtes-vous né?',
     oasDefer: 'Quand souhaitez-vous commencer à recevoir la SV?',
-    oasMonth: 'Month', // TODO: replace with French
-    oasYear: 'Year', // TODO: replace with French
-    oasAge: '',
+    oasAge:
+      'Quel mois et quelle année souhaitez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous?',
     legalStatus: 'Quel est votre statut légal au Canada?',
@@ -62,9 +58,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
     partnerIncome:
       'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
-    partnerBirthMonth: 'What month was your partner born?',
-    partnerBirthYear: 'What year was your partner born?',
-    partnerAge: "Quel est l'âge actuel de votre conjoint?",
+    partnerAge: 'Quel mois et quelle année votre partenaire est-il né?',
     partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
     partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
     partnerLivedOutsideCanada:
@@ -76,10 +70,6 @@ const fr: Translations = {
   },
   questionShortText: {
     age: 'Âge',
-    [FieldKey.BIRTH_MONTH]: 'Birth month', // TODO: French
-    [FieldKey.BIRTH_YEAR]: 'Birth year', // TODO: French
-    [FieldKey.OAS_MONTH]: 'OAS month', // TODO: French
-    [FieldKey.OAS_YEAR]: 'OAS year', // TODO: French
     oasDefer: 'Report de la SV',
     oasAge: 'Âge de report de la SV',
     incomeAvailable: 'Revenu fourni',
@@ -94,8 +84,6 @@ const fr: Translations = {
     partnerIncome: 'Revenu net du partenaire',
     partnerBenefitStatus: 'Prestations de vieillesse du partenaire',
     partnerAge: 'Âge du partenaire',
-    [FieldKey.PARTNER_BIRTH_MONTH]: "Partner's birth month", // TODO: French
-    [FieldKey.PARTNER_BIRTH_YEAR]: "Partner's birth year", // TODO: French
     partnerLegalStatus: 'Statut juridique du partenaire',
     partnerLivingCountry: 'Pays de résidence du partenaire',
     partnerLivedOutsideCanada:

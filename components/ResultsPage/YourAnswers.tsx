@@ -61,6 +61,9 @@ export const YourAnswers: React.VFC<{
         return numberToStringCurrency(Number(input.value), tsln._language, {
           rounding: 0,
         })
+      case FieldType.DATE:
+        // this will display the DATE fields as a NUMBER - i.e. the Month/Year will display as AGE!
+        return String(Math.floor(Number(input.value)))
       case FieldType.DROPDOWN:
       case FieldType.DROPDOWN_SEARCHABLE:
       case FieldType.RADIO:
