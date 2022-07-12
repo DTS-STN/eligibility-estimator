@@ -6,6 +6,7 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/en'
 import { Translations } from './index'
 import { links } from './links/en'
@@ -73,6 +74,10 @@ const en: Translations = {
   },
   questionShortText: {
     age: 'Age',
+    [FieldKey.BIRTH_MONTH]: 'Birth month',
+    [FieldKey.BIRTH_YEAR]: 'Birth year',
+    [FieldKey.OAS_MONTH]: 'OAS month',
+    [FieldKey.OAS_YEAR]: 'OAS year',
     oasDefer: 'OAS deferral',
     oasAge: 'OAS deferral age',
     incomeAvailable: 'Income provided',
@@ -87,6 +92,8 @@ const en: Translations = {
     partnerIncome: "Partner's net income",
     partnerBenefitStatus: "Partner's old age benefits",
     partnerAge: "Partner's age",
+    [FieldKey.PARTNER_BIRTH_MONTH]: "Partner's birth month",
+    [FieldKey.PARTNER_BIRTH_YEAR]: "Partner's birth year",
     partnerLegalStatus: "Partner's legal status",
     partnerLivingCountry: "Partner's residence country",
     partnerLivedOutsideCanada:
