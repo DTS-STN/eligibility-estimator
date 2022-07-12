@@ -14,7 +14,6 @@ import {
   Language,
   LegalStatus,
   LinkIcon,
-  LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
@@ -148,7 +147,6 @@ export interface Link {
   text: string
   url: string
   order: number
-  location: LinkLocation
   icon?: LinkIcon
 }
 
