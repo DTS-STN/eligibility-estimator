@@ -70,7 +70,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           required: true,
         }}
         hasDay={false}
-        hasError
+        hasError={false}
         hasLabel
         id="DatePicker"
         maxYear={2050}
