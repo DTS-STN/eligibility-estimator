@@ -1,10 +1,14 @@
 import {
+  BenefitKey,
+  EstimationSummaryState,
   FieldCategory,
   Language,
   LegalStatus,
   MaritalStatus,
   PartnerBenefitStatus,
+  ResultKey,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/en'
 import { Translations } from './index'
 import { links } from './links/en'
@@ -12,10 +16,10 @@ import { links } from './links/en'
 const en: Translations = {
   _language: Language.EN,
   benefit: {
-    oas: 'Old Age Security (OAS)',
-    gis: 'Guaranteed Income Supplement (GIS)',
-    alw: 'Allowance',
-    afs: 'Allowance for the Survivor',
+    [BenefitKey.oas]: 'Old Age Security (OAS)',
+    [BenefitKey.gis]: 'Guaranteed Income Supplement (GIS)',
+    [BenefitKey.alw]: 'Allowance',
+    [BenefitKey.afs]: 'Allowance for the Survivor',
   },
   category: {
     [FieldCategory.AGE]: 'Age',
@@ -25,84 +29,92 @@ const en: Translations = {
     [FieldCategory.MARITAL]: 'Marital status',
   },
   result: {
-    eligible: 'Eligible',
-    ineligible: 'Not eligible',
-    unavailable: 'Unavailable',
-    moreInfo: 'Need more information...',
-    invalid: 'Request is invalid!',
-    incomeDependent: 'Missing income',
+    [ResultKey.ELIGIBLE]: 'Eligible',
+    [ResultKey.INELIGIBLE]: 'Not eligible',
+    [ResultKey.UNAVAILABLE]: 'Unavailable',
+    [ResultKey.MORE_INFO]: 'Need more information...',
+    [ResultKey.INVALID]: 'Request is invalid!',
+    [ResultKey.INCOME_DEPENDENT]: 'Missing income',
   },
   question: {
-    incomeAvailable: 'Are you able to provide us your annual net income?',
-    income:
+    [FieldKey.INCOME_AVAILABLE]:
+      'Are you able to provide us your annual net income?',
+    [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    age: 'What month and year were you born?',
-    oasDefer: 'When would you like to start receiving OAS?',
-    oasAge: 'At what age would you like to start receiving OAS?',
-    maritalStatus: 'What is your current marital status?',
-    livingCountry: 'What country do you live in?',
-    legalStatus: 'What is your legal status in Canada?',
-    livedOutsideCanada:
+    [FieldKey.AGE]: 'What month and year were you born?',
+    [FieldKey.OAS_DEFER]: 'When would you like to start receiving OAS?',
+    [FieldKey.OAS_AGE]: 'At what age would you like to start receiving OAS?',
+    [FieldKey.MARITAL_STATUS]: 'What is your current marital status?',
+    [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
+    [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
       'Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?',
-    yearsInCanadaSince18:
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
-    everLivedSocialCountry:
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
-    partnerBenefitStatus: 'Which of the following applies to your partner?',
-    partnerIncomeAvailable:
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Which of the following applies to your partner?',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Are you able to provide us your partner's annual net income?",
-    partnerIncome:
+    [FieldKey.PARTNER_INCOME]:
       "What is your partner's annual net income in Canadian dollars?",
-    partnerAge: 'What month and year was your partner born?',
-    partnerLivingCountry: 'What country is your partner currently living in?',
-    partnerLegalStatus: "What is your partner's current legal status?",
-    partnerLivedOutsideCanada:
+    [FieldKey.PARTNER_AGE]: 'What month and year was your partner born?',
+    [FieldKey.PARTNER_LIVING_COUNTRY]:
+      'What country is your partner currently living in?',
+    [FieldKey.PARTNER_LEGAL_STATUS]:
+      "What is your partner's current legal status?",
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       'Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?',
-    partnerYearsInCanadaSince18:
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
-    partnerEverLivedSocialCountry:
+    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
   questionShortText: {
-    age: 'Age',
-    oasDefer: 'OAS deferral',
-    oasAge: 'OAS deferral age',
-    incomeAvailable: 'Income provided',
-    income: 'Net income',
-    legalStatus: 'Legal status',
-    livingCountry: 'Residence country',
-    livedOutsideCanada: 'Lived outside Canada for longer of 6 months',
-    yearsInCanadaSince18: 'Years lived outside Canada',
-    everLivedSocialCountry: 'Lived in country with social agreement',
-    maritalStatus: 'Marital status',
-    partnerIncomeAvailable: 'Partner income provided',
-    partnerIncome: "Partner's net income",
-    partnerBenefitStatus: "Partner's old age benefits",
-    partnerAge: "Partner's age",
-    partnerLegalStatus: "Partner's legal status",
-    partnerLivingCountry: "Partner's residence country",
-    partnerLivedOutsideCanada:
+    [FieldKey.AGE]: 'Age',
+    [FieldKey.OAS_DEFER]: 'OAS deferral',
+    [FieldKey.OAS_AGE]: 'OAS deferral age',
+    [FieldKey.INCOME_AVAILABLE]: 'Income provided',
+    [FieldKey.INCOME]: 'Net income',
+    [FieldKey.LEGAL_STATUS]: 'Legal status',
+    [FieldKey.LIVING_COUNTRY]: 'Residence country',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
+      'Lived outside Canada for longer of 6 months',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years lived outside Canada',
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
+      'Lived in country with social agreement',
+    [FieldKey.MARITAL_STATUS]: 'Marital status',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Partner income provided',
+    [FieldKey.PARTNER_INCOME]: "Partner's net income",
+    [FieldKey.PARTNER_BENEFIT_STATUS]: "Partner's old age benefits",
+    [FieldKey.PARTNER_AGE]: "Partner's age",
+    [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
+    [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's residence country",
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       "Partner's lived outside Canada for longer of 6 months",
-    partnerYearsInCanadaSince18: "Partner's years lived outside Canada",
-    partnerEverLivedSocialCountry:
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      "Partner's years lived outside Canada",
+    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Partner lived in country with social agreement',
   },
   questionHelp: {
-    incomeAvailable:
+    [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more helpful and accurate results.',
-    partnerIncomeAvailable:
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
-    age: 'You can enter your current age, or a future age for planning purposes.',
-    oasDefer:
+    [FieldKey.AGE]:
+      'You can enter your current age, or a future age for planning purposes.',
+    [FieldKey.OAS_DEFER]:
       'If you already receive OAS, enter when you started receiving it.</br>Learn more about {LINK_OAS_DEFER_INLINE}.',
-    oasAge: 'This should be between 65 and 70.',
-    income:
+    [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
+    [FieldKey.INCOME]:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
-    yearsInCanadaSince18:
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
   questionOptions: {
-    incomeAvailable: [
+    [FieldKey.INCOME_AVAILABLE]: [
       {
         key: true,
         text: 'Yes, I will provide my income',
@@ -112,7 +124,7 @@ const en: Translations = {
         text: 'No, I will not provide my income at this time',
       },
     ],
-    partnerIncomeAvailable: [
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: [
       {
         key: true,
         text: "Yes, I will provide my partner's income",
@@ -122,7 +134,7 @@ const en: Translations = {
         text: "No, I will not provide my partner's income at this time",
       },
     ],
-    oasDefer: [
+    [FieldKey.OAS_DEFER]: [
       {
         key: false,
         text: 'I would like to start receiving OAS when I turn 65 (most common)',
@@ -132,7 +144,7 @@ const en: Translations = {
         text: 'I would like to delay when I start receiving OAS (higher monthly payments)',
       },
     ],
-    legalStatus: [
+    [FieldKey.LEGAL_STATUS]: [
       { key: LegalStatus.CANADIAN_CITIZEN, text: 'Canadian citizen' },
       {
         key: LegalStatus.PERMANENT_RESIDENT,
@@ -148,7 +160,7 @@ const en: Translations = {
         text: 'Other (for example, temporary resident, student, temporary worker)',
       },
     ],
-    livedOutsideCanada: [
+    [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: 'No, I have not lived outside of Canada for longer than 6 months',
@@ -158,7 +170,7 @@ const en: Translations = {
         text: 'Yes, I have lived outside of Canada for longer than 6 months',
       },
     ],
-    partnerLivedOutsideCanada: [
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: 'No, my partner has not lived outside of Canada for longer than 6 months',
@@ -168,7 +180,7 @@ const en: Translations = {
         text: 'Yes, my partner has lived outside of Canada for longer than 6 months',
       },
     ],
-    maritalStatus: [
+    [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
         text: 'Single, divorced, or separated',
@@ -180,7 +192,7 @@ const en: Translations = {
       { key: MaritalStatus.WIDOWED, text: 'Surviving partner or widowed' },
       { key: MaritalStatus.INV_SEPARATED, text: 'Involuntarily separated' },
     ],
-    partnerBenefitStatus: [
+    [FieldKey.PARTNER_BENEFIT_STATUS]: [
       {
         key: PartnerBenefitStatus.OAS,
         text: 'My partner receives an Old Age Security pension',
@@ -196,8 +208,8 @@ const en: Translations = {
       { key: PartnerBenefitStatus.NONE, text: 'None of the above' },
       { key: PartnerBenefitStatus.HELP_ME, text: 'Help me find out' },
     ],
-    livingCountry,
-    everLivedSocialCountry: [
+    [FieldKey.LIVING_COUNTRY]: livingCountry,
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: [
       {
         key: true,
         text: 'Yes',
@@ -284,19 +296,20 @@ const en: Translations = {
     },
   },
   summaryTitle: {
-    moreInfo: 'More information needed',
-    unavailable: 'Unable to provide an estimation',
-    availableEligible: 'Likely eligible for benefits',
-    availableIneligible: 'Likely not eligible for benefits',
+    [EstimationSummaryState.MORE_INFO]: 'More information needed',
+    [EstimationSummaryState.UNAVAILABLE]: 'Unable to provide an estimation',
+    [EstimationSummaryState.AVAILABLE_ELIGIBLE]: 'Likely eligible for benefits',
+    [EstimationSummaryState.AVAILABLE_INELIGIBLE]:
+      'Likely not eligible for benefits',
   },
   summaryDetails: {
-    moreInfo:
+    [EstimationSummaryState.MORE_INFO]:
       'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
-    unavailable:
+    [EstimationSummaryState.UNAVAILABLE]:
       'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
-    availableEligible:
+    [EstimationSummaryState.AVAILABLE_ELIGIBLE]:
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
-    availableIneligible:
+    [EstimationSummaryState.AVAILABLE_INELIGIBLE]:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
   },
   links,

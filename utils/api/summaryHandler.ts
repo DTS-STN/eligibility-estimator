@@ -57,24 +57,36 @@ export class SummaryHandler {
 
   private getTitle() {
     if (this.state === EstimationSummaryState.MORE_INFO)
-      return this.translations.summaryTitle.moreInfo
+      return this.translations.summaryTitle[
+        EstimationSummaryState.AVAILABLE_ELIGIBLE
+      ]
     else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return this.translations.summaryTitle.unavailable
+      return this.translations.summaryTitle[EstimationSummaryState.UNAVAILABLE]
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return this.translations.summaryTitle.availableEligible
+      return this.translations.summaryTitle[
+        EstimationSummaryState.AVAILABLE_ELIGIBLE
+      ]
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return this.translations.summaryTitle.availableIneligible
+      return this.translations.summaryTitle[
+        EstimationSummaryState.AVAILABLE_INELIGIBLE
+      ]
   }
 
   private getDetails() {
     if (this.state === EstimationSummaryState.MORE_INFO)
-      return this.translations.summaryDetails.moreInfo
+      return this.translations.summaryDetails[EstimationSummaryState.MORE_INFO]
     else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return this.translations.summaryDetails.unavailable
+      return this.translations.summaryDetails[
+        EstimationSummaryState.UNAVAILABLE
+      ]
     else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return this.translations.summaryDetails.availableEligible
+      return this.translations.summaryDetails[
+        EstimationSummaryState.AVAILABLE_ELIGIBLE
+      ]
     else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return this.translations.summaryDetails.availableIneligible
+      return this.translations.summaryDetails[
+        EstimationSummaryState.AVAILABLE_INELIGIBLE
+      ]
   }
 
   private getLinks(): Link[] {
