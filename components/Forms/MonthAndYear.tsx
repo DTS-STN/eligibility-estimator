@@ -41,10 +41,10 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   return (
     <>
       <DatePicker
-        // formErrorProps={{
-        //   errorMessage: 'This is how form error will be displayed',
-        //   id: 'formErrorId',
-        // }}
+        id={name}
+        hasLabel
+        // hasError={false}
+        hasDay={false}
         formLabelProps={{
           helpText,
           // id: 'requiredWithInfo',
@@ -53,16 +53,16 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           label,
           // required: true,
         }}
-        hasDay={false}
-        // hasError={false}
-        hasLabel
-        id={name}
-        // maxYear={2050}
-        // minYear={1999}
+        // formErrorProps={{
+        //   errorMessage: 'This is how form error will be displayed',
+        //   id: 'formErrorId',
+        // }}
         // onDayChange={function noRefCheck() {}}
         onMonthChange={dateOnChange}
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
+        // maxYear={2050}
+        // minYear={1999}
       />
     </>
   )
