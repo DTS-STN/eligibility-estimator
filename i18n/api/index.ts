@@ -1,6 +1,5 @@
 import {
   BenefitKey,
-  EstimationSummaryState,
   FieldCategory,
   Language,
   LanguageCode,
@@ -8,6 +7,7 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
+  SummaryState,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import en from './en'
@@ -83,16 +83,16 @@ export interface Translations {
     oasIncreaseAt75Applied: { heading: string; text: string }
   }
   summaryTitle: {
-    [EstimationSummaryState.MORE_INFO]: string
-    [EstimationSummaryState.UNAVAILABLE]: string
-    [EstimationSummaryState.AVAILABLE_ELIGIBLE]: string
-    [EstimationSummaryState.AVAILABLE_INELIGIBLE]: string
+    [SummaryState.MORE_INFO]: string
+    [SummaryState.UNAVAILABLE]: string
+    [SummaryState.AVAILABLE_ELIGIBLE]: string
+    [SummaryState.AVAILABLE_INELIGIBLE]: string
   }
   summaryDetails: {
-    [EstimationSummaryState.MORE_INFO]: string
-    [EstimationSummaryState.UNAVAILABLE]: string
-    [EstimationSummaryState.AVAILABLE_ELIGIBLE]: string
-    [EstimationSummaryState.AVAILABLE_INELIGIBLE]: string
+    [SummaryState.MORE_INFO]: string
+    [SummaryState.UNAVAILABLE]: string
+    [SummaryState.AVAILABLE_ELIGIBLE]: string
+    [SummaryState.AVAILABLE_INELIGIBLE]: string
   }
   links: LinkDefinitions
   incomeSingle: string

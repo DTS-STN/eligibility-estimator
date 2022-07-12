@@ -1,12 +1,12 @@
 import {
   BenefitKey,
-  EstimationSummaryState,
   FieldCategory,
   Language,
   LegalStatus,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
+  SummaryState,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/en'
@@ -296,20 +296,19 @@ const en: Translations = {
     },
   },
   summaryTitle: {
-    [EstimationSummaryState.MORE_INFO]: 'More information needed',
-    [EstimationSummaryState.UNAVAILABLE]: 'Unable to provide an estimation',
-    [EstimationSummaryState.AVAILABLE_ELIGIBLE]: 'Likely eligible for benefits',
-    [EstimationSummaryState.AVAILABLE_INELIGIBLE]:
-      'Likely not eligible for benefits',
+    [SummaryState.MORE_INFO]: 'More information needed',
+    [SummaryState.UNAVAILABLE]: 'Unable to provide an estimation',
+    [SummaryState.AVAILABLE_ELIGIBLE]: 'Likely eligible for benefits',
+    [SummaryState.AVAILABLE_INELIGIBLE]: 'Likely not eligible for benefits',
   },
   summaryDetails: {
-    [EstimationSummaryState.MORE_INFO]:
+    [SummaryState.MORE_INFO]:
       'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
-    [EstimationSummaryState.UNAVAILABLE]:
+    [SummaryState.UNAVAILABLE]:
       'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
-    [EstimationSummaryState.AVAILABLE_ELIGIBLE]:
+    [SummaryState.AVAILABLE_ELIGIBLE]:
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
-    [EstimationSummaryState.AVAILABLE_INELIGIBLE]:
+    [SummaryState.AVAILABLE_INELIGIBLE]:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
   },
   links,

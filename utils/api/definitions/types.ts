@@ -10,7 +10,6 @@ import {
 import {
   BenefitKey,
   EntitlementResultType,
-  EstimationSummaryState,
   Language,
   LegalStatus,
   LinkIcon,
@@ -18,6 +17,7 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  SummaryState,
 } from './enums'
 import { FieldConfig, FieldKey } from './fields'
 
@@ -151,7 +151,7 @@ export interface Link {
 }
 
 export interface SummaryObject {
-  state: EstimationSummaryState
+  state: SummaryState
   title: string
   details: string
   links: Link[]

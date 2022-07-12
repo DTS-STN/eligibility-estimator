@@ -2,13 +2,13 @@
 
 import {
   BenefitKey,
-  EstimationSummaryState,
   FieldCategory,
   Language,
   LegalStatus,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
+  SummaryState,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/fr'
@@ -311,23 +311,21 @@ const fr: Translations = {
     },
   },
   summaryTitle: {
-    [EstimationSummaryState.MORE_INFO]:
-      'Plus de renseignements sont nécessaires',
-    [EstimationSummaryState.UNAVAILABLE]:
-      'Impossible de fournir une estimation',
-    [EstimationSummaryState.AVAILABLE_ELIGIBLE]:
+    [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',
+    [SummaryState.UNAVAILABLE]: 'Impossible de fournir une estimation',
+    [SummaryState.AVAILABLE_ELIGIBLE]:
       'Probablement admissible aux prestations',
-    [EstimationSummaryState.AVAILABLE_INELIGIBLE]:
+    [SummaryState.AVAILABLE_INELIGIBLE]:
       'Probablement non admissible aux prestations',
   },
   summaryDetails: {
-    [EstimationSummaryState.MORE_INFO]:
+    [SummaryState.MORE_INFO]:
       "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
-    [EstimationSummaryState.UNAVAILABLE]:
+    [SummaryState.UNAVAILABLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
-    [EstimationSummaryState.AVAILABLE_ELIGIBLE]:
+    [SummaryState.AVAILABLE_ELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
-    [EstimationSummaryState.AVAILABLE_INELIGIBLE]:
+    [SummaryState.AVAILABLE_INELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
   },
   links,

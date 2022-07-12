@@ -1,12 +1,12 @@
 import {
   EntitlementResultType,
-  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  SummaryState,
 } from '../../../utils/api/definitions/enums'
 import { FieldKey } from '../../../utils/api/definitions/fields'
 import roundToTwo from '../../../utils/api/helpers/roundToTwo'
@@ -64,7 +64,7 @@ describe('consolidated benefit tests: unavailable', () => {
       everLivedSocialCountry: true,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
+    expect(res.body.summary.state).toEqual(SummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.UNAVAILABLE
     )
@@ -92,7 +92,7 @@ describe('consolidated benefit tests: unavailable', () => {
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
+    expect(res.body.summary.state).toEqual(SummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.UNAVAILABLE
     )
@@ -121,7 +121,7 @@ describe('consolidated benefit tests: unavailable', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
-    expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
+    expect(res.body.summary.state).toEqual(SummaryState.UNAVAILABLE)
     expect(res.body.results.oas.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )

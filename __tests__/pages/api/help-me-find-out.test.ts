@@ -1,11 +1,11 @@
 import {
-  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  SummaryState,
 } from '../../../utils/api/definitions/enums'
 import legalValues from '../../../utils/api/scrapers/output'
 import {
@@ -184,9 +184,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_INELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
     expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -220,9 +218,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
     expectOasGisTooYoung(res)
     expectAlwEligible(res, 1231.87) // table 4
     expect(res.body.results.afs.eligibility.result).toEqual(
@@ -251,9 +247,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_INELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
     expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
