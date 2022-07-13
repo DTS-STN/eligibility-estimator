@@ -41,6 +41,7 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   const input = root.getInputObject()
   input._language = locale
   const data = new MainHandler(input).results
+  const connection = locale === 'en' ? '-' : ':'
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -78,22 +79,22 @@ export const EligibilityPage: React.VFC = observer(({}) => {
   const keyStepMap: { [x in Steps]: CardConfig } = {
     [Steps.STEP_1]: {
       title: tsln.category.age,
-      buttonLabel: `${tsln.nextStep} - ${tsln.category.income}`,
+      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
     },
     [Steps.STEP_2]: {
       title: tsln.category.income,
-      buttonLabel: `${tsln.nextStep} - ${tsln.category.legal}`,
+      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
     },
     [Steps.STEP_3]: {
       title: tsln.category.legal,
-      buttonLabel: `${tsln.nextStep} - ${tsln.category.residence}`,
+      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
     },
     [Steps.STEP_4]: {
       title: tsln.category.residence,
-      buttonLabel: `${tsln.nextStep} - ${tsln.category.marital}`,
+      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
     },
     [Steps.STEP_5]: {
@@ -209,26 +210,12 @@ export const EligibilityPage: React.VFC = observer(({}) => {
               />
             </div>
           )}
-          {(field.type == FieldType.RADIO ||
-            field.type == FieldType.BOOLEAN) && (
-            <div id={field.key} className="pb-4">
+          {field.type == FieldType.RADIO && (
+            <div className="pb-4">
               <Radio
                 name={field.key}
                 checkedValue={field.value}
-                values={
-                  field.type == 'boolean'
-                    ? [
-                        {
-                          key: 'true',
-                          text: tsln.yes,
-                        },
-                        {
-                          key: 'false',
-                          text: tsln.no,
-                        },
-                      ]
-                    : field.options
-                }
+                values={field.options}
                 keyforid={field.key}
                 label={field.label}
                 onChange={(e) => handleOnChange(step, field, e)}

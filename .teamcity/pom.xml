@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <name>Dev_single-tier-appliction Config DSL Script</name>
-  <groupId>Dev_single-tier-appliction</groupId>
-  <artifactId>Dev_single-tier-appliction_dsl</artifactId>
+  <name>Dev_EligibilityEstimator Config DSL Script</name>
+  <groupId>Dev_EligibilityEstimator</groupId>
+  <artifactId>Dev_EligibilityEstimator_dsl</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <parent>

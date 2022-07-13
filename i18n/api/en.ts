@@ -199,6 +199,16 @@ const en: Translations = {
       { key: PartnerBenefitStatus.HELP_ME, text: 'Help me find out' },
     ],
     livingCountry,
+    everLivedSocialCountry: [
+      {
+        key: true,
+        text: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+      },
+    ],
   },
   detail: {
     eligible: 'You are likely eligible for this benefit.',
@@ -310,6 +320,6 @@ const en: Translations = {
   },
   yes: 'Yes',
   no: 'No',
-  years: 'years',
+  year: 'year',
 }
 export default en

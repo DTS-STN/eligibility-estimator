@@ -27,7 +27,6 @@ export enum FieldKey {
 export enum FieldType {
   NUMBER = 'number',
   CURRENCY = 'currency',
-  BOOLEAN = 'boolean',
   DROPDOWN = 'dropdown',
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
@@ -86,7 +85,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     category: { key: FieldCategory.RESIDENCE },
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.MARITAL_STATUS]: {
@@ -147,8 +146,9 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
+    relatedKey: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
 }
@@ -156,7 +156,6 @@ export const fieldDefinitions: FieldDefinitions = {
 export type FieldData =
   | FieldDataCurrency
   | FieldDataNumber
-  | FieldDataBoolean
   | FieldDataRadio
   | FieldDataDropdown
   | FieldDataString
@@ -180,11 +179,6 @@ interface FieldDataCurrency extends FieldDataGeneric {
 interface FieldDataNumber extends FieldDataGeneric {
   type: FieldType.NUMBER
   placeholder?: string
-}
-
-interface FieldDataBoolean extends FieldDataGeneric {
-  type: FieldType.BOOLEAN
-  default?: string
 }
 
 interface FieldDataRadio extends FieldDataGeneric {

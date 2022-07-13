@@ -189,11 +189,11 @@ const fr: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire survivant(e) ou veuf(ve)',
+        text: 'Partenaire veuf(ve)',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
-        text: 'Involontairement séparé(e)',
+        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
       },
     ],
     partnerBenefitStatus: [
@@ -213,6 +213,16 @@ const fr: Translations = {
       { key: PartnerBenefitStatus.HELP_ME, text: 'Aidez-moi à trouver' },
     ],
     livingCountry,
+    everLivedSocialCountry: [
+      {
+        key: true,
+        text: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+      },
+    ],
   },
   detail: {
     eligible:
@@ -327,6 +337,6 @@ const fr: Translations = {
   },
   yes: 'Oui',
   no: 'Non',
-  years: 'ans',
+  year: 'an',
 }
 export default fr

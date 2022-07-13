@@ -172,7 +172,7 @@ export const links: LinkDefinitions = {
   },
   socialAgreement: {
     text: 'social security agreement',
-    url: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/foreign-employees-employers/canada-s-social-agreements-other-countries.html',
+    url: 'https://www.canada.ca/en/revenue-agency/services/tax/canada-pension-plan-cpp-employment-insurance-ei-rulings/international-social-security-agreements-canada-pension-plan/what-purpose-international-social-security-agreements.html#tbl',
     order: -1,
     location: LinkLocation.HIDDEN,
   },

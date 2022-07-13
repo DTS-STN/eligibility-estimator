@@ -2,9 +2,15 @@ node_modules/
 .next/
 .yarn/
 coverage/
-helmfile/
-helm/
 out/
 yarn.lock
 .pnp.cjs
 .pnp.loader.mjs
+
+# unsupported syntax
+helmfile/
+helm/
+#helmfile/helmfile.yaml
+#helm/charts/next-template/templates/service.yaml
+#helm/charts/next-template/templates/ingress.yaml
+#helm/charts/next-template/templates/deployment.yaml

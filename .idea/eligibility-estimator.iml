@@ -7,8 +7,6 @@
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/coverage" />
       <excludeFolder url="file://$MODULE_DIR$/cypress" />
-      <excludeFolder url="file://$MODULE_DIR$/helm" />
-      <excludeFolder url="file://$MODULE_DIR$/helmfile" />
       <excludeFolder url="file://$MODULE_DIR$/.husky/_" />
       <excludeFolder url="file://$MODULE_DIR$/.vscode" />
       <excludeFolder url="file://$MODULE_DIR$/.yarn" />

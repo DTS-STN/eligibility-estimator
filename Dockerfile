@@ -1,43 +1,79 @@
-# source: https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
-# the above is slightly modified to support Yarn v2 (berry)
+# FROM node:16-alpine AS base
 
-# Install dependencies only when needed
-FROM node:16-alpine AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
+# RUN apk add --no-cache libc6-compat
+
+# WORKDIR /base
+# COPY package.json yarn.lock ./
+# COPY . .
+
+# # 
+# # 
+
+# FROM base AS build
+
+# ENV NODE_ENV=production
+# WORKDIR /build
+# COPY --from=base /base ./
+# RUN yarn install
+# RUN yarn build
+
+# # 
+# # 
+
+# FROM node:16-alpine AS production
+
+# ENV NODE_ENV=production
+# SHELL ["/bin/sh", "-c"]
+# RUN apk add --no-cache bash
+
+# ARG user=joker
+# ARG home=/home/node
+# ARG group=thejokers
+# RUN addgroup -S $group
+# RUN adduser \
+#   --disabled-password \
+#   --gecos "" \
+#   --home $home \
+#   --ingroup $group \
+#   $user
+
+# ENV NODE_ENV=production
+# WORKDIR $home
+# COPY --from=build --chown=55:$group /build/next.config.js ./
+# COPY --from=build --chown=55:$group /build/package.json   ./
+# COPY --from=build --chown=55:$group /build/yarn.lock      ./yarn.lock
+# COPY --from=build --chown=55:$group /build/.yarn          ./.yarn
+# COPY --from=build --chown=55:$group /build/.next          ./.next
+# COPY --from=build --chown=55:$group /build/public         ./public
+
+# RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& yarn add next@"$VERSION_NEXT"
+# USER $user
+
+# CMD [ "yarn", "start" ]
+
+FROM node:16-alpine AS production
+ENV NODE_ENV=production
+SHELL ["/bin/sh", "-c"]
+RUN apk add --no-cache bash
+ARG user=joker
+ARG home=/home/node
+ARG group=thejokers
+RUN addgroup -S $group
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home $home \
+  --ingroup $group \
+  $user
+
+ENV NODE_ENV=production
+WORKDIR $home
+COPY --chown=55:$group . . 
 RUN yarn install --immutable
-
-# Rebuild the source code only when needed
-FROM node:16-alpine AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
 RUN yarn build
+COPY --chown=55:$group public ./public
 
-# Production image, copy all the files and run next
-FROM node:16-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& yarn add next@"$VERSION_NEXT"
+USER $user
 
-# You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
-CMD ["node", "server.js"]
+CMD [ "yarn", "start" ]

@@ -49,6 +49,7 @@ export interface Translations {
     partnerIncomeAvailable: TypedKeyAndText<boolean>[]
     partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
     livingCountry: KeyAndText[]
+    everLivedSocialCountry: TypedKeyAndText<boolean>[]
   }
   detail: {
     eligible: string
@@ -117,7 +118,7 @@ export interface Translations {
   }
   yes: string
   no: string
-  years: string
+  year: string
 }
 
 export function getTranslations(language: Language): Translations {
