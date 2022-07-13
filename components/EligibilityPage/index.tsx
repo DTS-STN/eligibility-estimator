@@ -237,6 +237,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 message_heading={tsln.unableToProceed}
                 message_body={field.error}
                 asHtml={true}
+                whiteBG={true}
               />
             </div>
           )}
