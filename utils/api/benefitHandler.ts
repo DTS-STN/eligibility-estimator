@@ -422,6 +422,10 @@ export class BenefitHandler {
     return textToProcess
   }
 
+  /**
+   * Accepts a numerical month+year, and returns the number of years since then.
+   * This can and will return a decimal value, such as "65.5"!
+   */
   static calculateAge(birthMonth: number, birthYear: number): number {
     if (!birthMonth || !birthYear) return null
 
