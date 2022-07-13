@@ -1,5 +1,7 @@
 import { Head, Html, Main, NextScript } from 'next/document'
 
+// This file is executed server-side only, for pre-rendering.
+
 export default function Document() {
   return (
     <Html>
@@ -7,8 +9,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script src="/scripts/adobe.js" />
-        <script type="text/javascript">_satellite.pageBottom()</script>
       </body>
     </Html>
   )
