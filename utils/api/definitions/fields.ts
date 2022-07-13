@@ -31,6 +31,7 @@ export enum FieldType {
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
   STRING = 'string',
+  DATE = 'date',
 }
 
 // the order of fields here will define the order within the application
@@ -38,7 +39,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
+    type: FieldType.DATE,
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
@@ -115,7 +116,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.NUMBER,
+    type: FieldType.DATE,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -159,6 +160,7 @@ export type FieldConfig =
   | FieldConfigRadio
   | FieldConfigDropdown
   | FieldConfigString
+  | FieldConfigDate
 
 interface FieldConfigGeneric {
   key: FieldKey
@@ -169,6 +171,10 @@ interface FieldConfigGeneric {
     key: FieldCategory
     text?: string // applied via translator
   }
+}
+
+interface FieldConfigDate extends FieldConfigGeneric {
+  type: FieldType.DATE
 }
 
 interface FieldConfigCurrency extends FieldConfigGeneric {

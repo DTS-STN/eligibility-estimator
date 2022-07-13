@@ -36,9 +36,9 @@ const en: Translations = {
     incomeAvailable: 'Are you able to provide us your annual net income?',
     income:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    age: 'How old are you?',
+    age: 'What month and year were you born?',
     oasDefer: 'When would you like to start receiving OAS?',
-    oasAge: "Enter the age for when you'd like to start receiving OAS.",
+    oasAge: 'At what age would you like to start receiving OAS?',
     maritalStatus: 'What is your current marital status?',
     livingCountry: 'What country do you live in?',
     legalStatus: 'What is your legal status in Canada?',
@@ -53,7 +53,7 @@ const en: Translations = {
       "Are you able to provide us your partner's annual net income?",
     partnerIncome:
       "What is your partner's annual net income in Canadian dollars?",
-    partnerAge: "What is your partner's current age?",
+    partnerAge: 'What month and year was your partner born?',
     partnerLivingCountry: 'What country is your partner currently living in?',
     partnerLegalStatus: "What is your partner's current legal status?",
     partnerLivedOutsideCanada:

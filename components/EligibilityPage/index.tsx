@@ -16,6 +16,7 @@ import {
 } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
+import { MonthAndYear } from '../Forms/MonthAndYear'
 import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
@@ -149,6 +150,16 @@ export const EligibilityPage: React.VFC = ({}) => {
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
+          {field.config.type === FieldType.DATE && (
+            <div className="pb-4">
+              <MonthAndYear
+                name={field.key}
+                label={field.config.label}
+                helpText={field.config.helpText}
+                baseOnChange={(newValue) => handleOnChange(field, newValue)}
+              />
+            </div>
+          )}
           {field.config.type === FieldType.NUMBER && (
             <div className="pb-4">
               <NumberField

@@ -32,14 +32,12 @@ export const RequestSchema = Joi.object({
     .less(legalValues.oas.incomeLimit)
     .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
-    .integer()
     .min(18)
     .message(ValidationErrors.ageUnder18)
     .max(150)
     .message(ValidationErrors.ageOver150),
   oasDefer: Joi.boolean(),
   oasAge: Joi.number()
-    .integer()
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)
@@ -74,7 +72,6 @@ export const RequestSchema = Joi.object({
     )
     .message(ValidationErrors.partnerIncomeTooHigh),
   partnerAge: Joi.number()
-    .integer()
     .min(18)
     .message(ValidationErrors.partnerAgeUnder18)
     .max(150)

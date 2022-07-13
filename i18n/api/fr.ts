@@ -39,9 +39,9 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     income:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    age: 'Quel âge avez-vous?',
+    age: 'Quel mois et quelle année êtes-vous né?',
     oasDefer: 'Quand souhaitez-vous commencer à recevoir la SV?',
-    oasAge: "Entrez l'âge auquel vous souhaitez commencer à recevoir la SV.",
+    oasAge: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     maritalStatus: 'Quel est votre état civil actuel?',
     livingCountry: 'Dans quel pays résidez-vous?',
     legalStatus: 'Quel est votre statut légal au Canada?',
@@ -57,7 +57,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
     partnerIncome:
       'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
-    partnerAge: "Quel est l'âge actuel de votre conjoint?",
+    partnerAge: 'Quel mois et quelle année votre partenaire est-il né?',
     partnerLivingCountry: 'Dans quel pays habite actuellement votre conjoint?',
     partnerLegalStatus: 'Quel est le statut légal actuel de votre conjoint?',
     partnerLivedOutsideCanada:
