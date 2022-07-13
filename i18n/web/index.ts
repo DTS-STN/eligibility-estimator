@@ -13,6 +13,10 @@ export type WebTranslations = {
   _language: Language
   _locale: Locale
 
+  // Pages
+  eligibility: string
+  results: string
+
   atLeast60: string
   haveNetIncomeLess: string
   headerWhatToKnow: string

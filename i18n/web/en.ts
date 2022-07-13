@@ -11,6 +11,10 @@ const en: WebTranslations = {
   _language: Language.EN,
   _locale: Locale.EN,
 
+  // Pages
+  eligibility: 'eligibility',
+  results: 'results',
+
   oas: 'Old Age Security',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',

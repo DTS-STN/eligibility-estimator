@@ -9,6 +9,7 @@ import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
 
 const Home: NextPage = () => {
   const router = useRouter()
+  const locale = useRouter().locale.toString()
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
@@ -84,7 +85,7 @@ const Home: NextPage = () => {
             <Button
               text={tsln.startBenefitsEstimator}
               styling="supertask"
-              onClick={(e) => router.push('/eligibility')}
+              onClick={(e) => router.push(tsln.eligibility)}
               className=" w-auto justify-center"
             />
           </div>
