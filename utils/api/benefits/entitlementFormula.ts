@@ -80,6 +80,17 @@ export class EntitlementFormula {
     private oasResult: BenefitResult<EntitlementResultOas> = undefined
   ) {
     this.gisStatus = this.maritalStatus.single ? 1 : 2
+
+    /*
+     Don't simply remove this line below, it needs proper handling if to be
+     implemented properly. I think the idea is that we would consider them
+     single for one scenario, consider them partnered for another scenario,
+     and then return whichever scenario is higher.
+    */
+    if (maritalStatus.invSeparated)
+      throw new Error(
+        'involuntarily separated is not implemented in the entitlement logic yet'
+      )
   }
 
   /**
