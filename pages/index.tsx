@@ -1,5 +1,6 @@
 import { Button } from '@dts-stn/decd-design-system'
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useTranslation } from '../components/Hooks'
@@ -38,18 +39,22 @@ const Home: NextPage = () => {
           <p className="my-2">{tsln.youMayBeEligible}</p>
           <div className="w-auto inline-block h-35 sm:h-20 bg-light-green py-2 px-8">
             <div className="flex">
-              <img
+              <Image
                 className="xs:mt-2 xs:h-5"
                 src="/green-check-mark.svg"
                 alt={'green check mark'}
+                height={20}
+                width={20}
               />
               <p className="ml-2">{tsln.atLeast60}</p>
             </div>
             <div className="flex">
-              <img
+              <Image
                 className="xs:mt-2 xs:h-5"
                 src="/green-check-mark.svg"
                 alt={'green check mark'}
+                height={20}
+                width={20}
               />
               <p className="ml-2">{tsln.haveNetIncomeLess}</p>
             </div>

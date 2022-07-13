@@ -1,6 +1,5 @@
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import { useTranslation } from '../Hooks'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface NumberFieldProps
@@ -17,19 +16,15 @@ export interface NumberFieldProps
  * @param props {NumberFieldProps}
  * @returns
  */
-export const NumberField: React.VFC<NumberFieldProps> = (props) => {
-  const {
-    name,
-    label,
-    required,
-    value,
-    placeholder,
-    onChange,
-    helpText,
-    error,
-  } = props
-  const requiredText = useTranslation<string>('required')
-
+export const NumberField: React.VFC<NumberFieldProps> = ({
+  name,
+  label,
+  value,
+  placeholder,
+  onChange,
+  helpText,
+  error,
+}) => {
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
@@ -70,7 +65,7 @@ export const NumberField: React.VFC<NumberFieldProps> = (props) => {
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}
-        required={required}
+        required
         autoComplete="off"
         enterKeyHint="done"
       />

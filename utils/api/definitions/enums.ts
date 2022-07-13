@@ -79,19 +79,11 @@ export enum ResultReason {
 }
 
 // used to determine color+type of alert dialog
-export enum EstimationSummaryState {
+export enum SummaryState {
   AVAILABLE_ELIGIBLE = 'AVAILABLE_ELIGIBLE', // green, display results (eligible for at least one)
   MORE_INFO = 'MORE_INFO', // yellow, need to answer more
   UNAVAILABLE = 'UNAVAILABLE', // yellow, can not provide any results, contact Service Canada (conditionally eligible)
   AVAILABLE_INELIGIBLE = 'AVAILABLE_INELIGIBLE', // red, display results (ineligible)
-}
-
-export enum LinkLocation {
-  STANDARD = 'STANDARD', // Questions > NeedHelp, and Results > MoreInfo
-  QUESTIONS_ONLY = 'QUESTIONS_ONLY', // Questions > NeedHelp
-  RESULTS_ONLY = 'RESULTS_ONLY', // Results > MoreInfo only
-  RESULTS_APPLY = 'RESULTS_APPLY', // new section above Results > MoreInfo
-  HIDDEN = 'HIDDEN', // won't show anywhere (used internally for linkifying strings)
 }
 
 export enum LinkIcon {

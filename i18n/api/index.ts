@@ -1,10 +1,13 @@
 import {
+  BenefitKey,
   FieldCategory,
   Language,
   LanguageCode,
   LegalStatus,
   MaritalStatus,
   PartnerBenefitStatus,
+  ResultKey,
+  SummaryState,
 } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import en from './en'
@@ -25,30 +28,23 @@ export interface TypedKeyAndText<T> {
 
 export interface Translations {
   _language: Language
-  benefit: { oas: string; gis: string; alw: string; afs: string }
+  benefit: { [key in BenefitKey]: string }
   category: { [key in FieldCategory]: string }
-  result: {
-    eligible: string
-    ineligible: string
-    unavailable: string
-    moreInfo: string
-    invalid: string
-    incomeDependent: string
-  }
+  result: { [key in ResultKey]: string }
   question: { [key in FieldKey]: string }
   questionShortText: { [key in FieldKey]: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
-    incomeAvailable: TypedKeyAndText<boolean>[]
-    oasDefer: TypedKeyAndText<boolean>[]
-    legalStatus: TypedKeyAndText<LegalStatus>[]
-    livedOutsideCanada: TypedKeyAndText<boolean>[]
-    partnerLivedOutsideCanada: TypedKeyAndText<boolean>[]
-    maritalStatus: TypedKeyAndText<MaritalStatus>[]
-    partnerIncomeAvailable: TypedKeyAndText<boolean>[]
-    partnerBenefitStatus: TypedKeyAndText<PartnerBenefitStatus>[]
-    livingCountry: KeyAndText[]
-    everLivedSocialCountry: TypedKeyAndText<boolean>[]
+    [FieldKey.INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
+    [FieldKey.OAS_DEFER]: TypedKeyAndText<boolean>[]
+    [FieldKey.LEGAL_STATUS]: TypedKeyAndText<LegalStatus>[]
+    [FieldKey.LIVED_OUTSIDE_CANADA]: TypedKeyAndText<boolean>[]
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: TypedKeyAndText<boolean>[]
+    [FieldKey.MARITAL_STATUS]: TypedKeyAndText<MaritalStatus>[]
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
+    [FieldKey.PARTNER_BENEFIT_STATUS]: TypedKeyAndText<PartnerBenefitStatus>[]
+    [FieldKey.LIVING_COUNTRY]: KeyAndText[]
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: TypedKeyAndText<boolean>[]
   }
   detail: {
     eligible: string
@@ -87,34 +83,20 @@ export interface Translations {
     oasIncreaseAt75Applied: { heading: string; text: string }
   }
   summaryTitle: {
-    moreInfo: string
-    unavailable: string
-    availableEligible: string
-    availableIneligible: string
+    [SummaryState.MORE_INFO]: string
+    [SummaryState.UNAVAILABLE]: string
+    [SummaryState.AVAILABLE_ELIGIBLE]: string
+    [SummaryState.AVAILABLE_INELIGIBLE]: string
   }
   summaryDetails: {
-    moreInfo: string
-    unavailable: string
-    availableEligible: string
-    availableIneligible: string
+    [SummaryState.MORE_INFO]: string
+    [SummaryState.UNAVAILABLE]: string
+    [SummaryState.AVAILABLE_ELIGIBLE]: string
+    [SummaryState.AVAILABLE_INELIGIBLE]: string
   }
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string
-  csv: {
-    appName: string
-    formResponses: string
-    question: string
-    answer: string
-    estimationResults: string
-    benefit: string
-    eligibility: string
-    details: string
-    entitlement: string
-    links: string
-    description: string
-    url: string
-  }
   yes: string
   no: string
   year: string

@@ -21,7 +21,7 @@ import {
  * - types.ts
  * - index.test.ts
  *
- * Note: Do not require fields here, do it in the benefit-specific schemas.
+ * Note: Do not require fields here, do it in the BenefitHandler. This should gladly accept an empty object.
  */
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean(),

@@ -133,7 +133,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   /**
    * On every change to a field, this will check the validity of all fields.
    */
-  function handleOnChange(field: FormField, newValue: string) {
+  function handleOnChange(field: FormField, newValue: string): void {
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
@@ -150,18 +150,16 @@ export const EligibilityPage: React.VFC = ({}) => {
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
-          {field.config.type === FieldType.DATE && (
-            <div className="pb-4">
+          <div className="pb-4">
+            {field.config.type === FieldType.DATE && (
               <MonthAndYear
                 name={field.key}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
               />
-            </div>
-          )}
-          {field.config.type === FieldType.NUMBER && (
-            <div className="pb-4">
+            )}
+            {field.config.type === FieldType.NUMBER && (
               <NumberField
                 type={field.config.type}
                 name={field.key}
@@ -173,12 +171,9 @@ export const EligibilityPage: React.VFC = ({}) => {
                 )}
                 value={field.value}
                 helpText={field.config.helpText}
-                required
               />
-            </div>
-          )}
-          {field.config.type == FieldType.CURRENCY && (
-            <div className="pb-4">
+            )}
+            {field.config.type == FieldType.CURRENCY && (
               <CurrencyField
                 type={field.config.type}
                 name={field.key}
@@ -190,12 +185,9 @@ export const EligibilityPage: React.VFC = ({}) => {
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
                 helpText={field.config.helpText}
-                required
               />
-            </div>
-          )}
-          {field.config.type == FieldType.STRING && (
-            <div className="pb-4">
+            )}
+            {field.config.type == FieldType.STRING && (
               <TextField
                 type={field.config.type}
                 name={field.key}
@@ -206,13 +198,10 @@ export const EligibilityPage: React.VFC = ({}) => {
                 }, 500)}
                 value={field.value}
                 error={field.error}
-                required
               />
-            </div>
-          )}
-          {(field.config.type == FieldType.DROPDOWN ||
-            field.config.type == FieldType.DROPDOWN_SEARCHABLE) && (
-            <div className="pb-4">
+            )}
+            {(field.config.type == FieldType.DROPDOWN ||
+              field.config.type == FieldType.DROPDOWN_SEARCHABLE) && (
               <FormSelect
                 name={field.key}
                 field={field}
@@ -222,10 +211,8 @@ export const EligibilityPage: React.VFC = ({}) => {
                 }
                 value={null}
               />
-            </div>
-          )}
-          {field.config.type == FieldType.RADIO && (
-            <div className="pb-4">
+            )}
+            {field.config.type == FieldType.RADIO && (
               <Radio
                 name={field.key}
                 checkedValue={field.value}
@@ -234,10 +221,9 @@ export const EligibilityPage: React.VFC = ({}) => {
                 label={field.config.label}
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
-                required
               />
-            </div>
-          )}
+            )}
+          </div>
           {field.error && (
             <div className="mt-6 md:pr-12">
               <Message
