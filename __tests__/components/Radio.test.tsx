@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import { Radio } from '../../components/Forms/Radio'
 
 describe('Radio component', () => {
@@ -35,16 +34,14 @@ describe('Radio component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <Radio
-          name={props.name}
-          keyforid={props.name}
-          label={props.label}
-          required={props.required}
-          values={props.values}
-          onChange={(e) => e.preventDefault()}
-        />
-      </StoreProvider>
+      <Radio
+        name={props.name}
+        keyforid={props.name}
+        label={props.label}
+        required={props.required}
+        values={props.values}
+        onChange={(e) => e.preventDefault()}
+      />
     )
     render(ui)
 
@@ -78,17 +75,15 @@ describe('Radio component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <Radio
-          name={props.name}
-          keyforid={props.name}
-          label={props.label}
-          required={props.required}
-          values={props.values}
-          checkedValue={props.checkedValue}
-          onChange={(e) => e.preventDefault()}
-        />
-      </StoreProvider>
+      <Radio
+        name={props.name}
+        keyforid={props.name}
+        label={props.label}
+        required={props.required}
+        values={props.values}
+        checkedValue={props.checkedValue}
+        onChange={(e) => e.preventDefault()}
+      />
     )
     render(ui)
 

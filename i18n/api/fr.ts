@@ -4,7 +4,6 @@ import {
   FieldCategory,
   Language,
   LegalStatus,
-  Locale,
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
@@ -14,7 +13,6 @@ import { links } from './links/fr'
 
 const fr: Translations = {
   _language: Language.FR,
-  _locale: Locale.FR,
   benefit: {
     oas: 'Sécurité de la vieillesse (SV)',
     gis: 'Supplément de revenu garanti (SRG)',

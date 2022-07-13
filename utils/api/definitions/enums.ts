@@ -123,7 +123,7 @@ export enum Language {
 }
 
 // must be one of: https://www.techonthenet.com/js/language_tags.php
-export enum Locale {
+export enum LanguageCode {
   EN = 'en-CA',
   FR = 'fr-CA',
 }

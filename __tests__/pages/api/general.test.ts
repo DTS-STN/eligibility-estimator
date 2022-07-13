@@ -13,7 +13,7 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import {
-  FieldDataDropdown,
+  FieldConfigDropdown,
   FieldKey,
 } from '../../../utils/api/definitions/fields'
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
@@ -39,10 +39,10 @@ describe('country checks', () => {
   const COUNTRY_COUNT = 195
   const handlerEn = new BenefitHandler({ _language: Language.EN })
   handlerEn.requiredFields = [FieldKey.LIVING_COUNTRY]
-  const fieldDataEn = handlerEn.fieldData as Array<FieldDataDropdown>
+  const fieldDataEn = handlerEn.fieldData as Array<FieldConfigDropdown>
   const handlerFr = new BenefitHandler({ _language: Language.FR })
   handlerFr.requiredFields = [FieldKey.LIVING_COUNTRY]
-  const fieldDataFr = handlerFr.fieldData as Array<FieldDataDropdown>
+  const fieldDataFr = handlerFr.fieldData as Array<FieldConfigDropdown>
   it(`produces a list of ${COUNTRY_COUNT} countries (EN and FR)`, async () => {
     expect(fieldDataEn[0].values.length).toEqual(COUNTRY_COUNT)
     expect(fieldDataFr[0].values.length).toEqual(COUNTRY_COUNT)

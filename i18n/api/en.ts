@@ -2,7 +2,6 @@ import {
   FieldCategory,
   Language,
   LegalStatus,
-  Locale,
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
@@ -12,7 +11,6 @@ import { links } from './links/en'
 
 const en: Translations = {
   _language: Language.EN,
-  _locale: Locale.EN,
   benefit: {
     oas: 'Old Age Security (OAS)',
     gis: 'Guaranteed Income Supplement (GIS)',

@@ -4,7 +4,7 @@ import { stripHtml } from 'string-strip-html'
 import { numberToStringCurrency, Translations } from '../../i18n/api'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import {
-  FieldData,
+  FieldConfig,
   fieldDefinitions,
   FieldType,
 } from '../../utils/api/definitions/fields'
@@ -55,7 +55,7 @@ export default function handler(
       ).result.split('\n')
       const entitlement = numberToStringCurrency(
         result.entitlement.result,
-        handler.translations._locale
+        handler.translations._language
       )
       records.push([benefitName, eligibility, detail, entitlement])
     }
@@ -85,7 +85,7 @@ export default function handler(
 
 function humanizeResponse(
   response: string,
-  field: FieldData,
+  field: FieldConfig,
   translations: Translations
 ): string {
   const questionType = fieldDefinitions[field.key].type
@@ -102,7 +102,7 @@ function humanizeResponse(
       )
       return foundOption.text
     case FieldType.CURRENCY:
-      return numberToStringCurrency(Number(response), translations._locale)
+      return numberToStringCurrency(Number(response), translations._language)
     case FieldType.NUMBER:
     case FieldType.STRING:
       return response

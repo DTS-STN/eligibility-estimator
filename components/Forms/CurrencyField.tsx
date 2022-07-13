@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react'
 import { useRouter } from 'next/router'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
@@ -20,72 +19,70 @@ export interface CurrencyFieldProps
  * @param props {CurrencyFieldProps}
  * @returns
  */
-export const CurrencyField: React.VFC<CurrencyFieldProps> = observer(
-  (props) => {
-    const {
-      name,
-      label,
-      required,
-      value,
-      placeholder,
-      onChange,
-      helpText,
-      error,
-    } = props
-    const requiredText = useTranslation<string>('required')
-    const locale = useRouter().locale
+export const CurrencyField: React.VFC<CurrencyFieldProps> = (props) => {
+  const {
+    name,
+    label,
+    required,
+    value,
+    placeholder,
+    onChange,
+    helpText,
+    error,
+  } = props
+  const requiredText = useTranslation<string>('required')
+  const locale = useRouter().locale
 
-    const localizedIncome =
-      locale == Language.EN
-        ? { thousandSeparator: true, prefix: '$' }
-        : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
+  const localizedIncome =
+    locale == Language.EN
+      ? { thousandSeparator: true, prefix: '$' }
+      : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
 
-    // only need to run this once at component render, so no need for deps
-    useEffect(() => {
-      // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
-      document.addEventListener('wheel', function (event) {
-        const el = document.activeElement as HTMLInputElement
-        if (el?.type === 'number') {
-          el.blur()
-        }
-      })
-    }, [])
+  // only need to run this once at component render, so no need for deps
+  useEffect(() => {
+    // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
+    document.addEventListener('wheel', function (event) {
+      const el = document.activeElement as HTMLInputElement
+      if (el?.type === 'number') {
+        el.blur()
+      }
+    })
+  }, [])
 
-    return (
-      <div>
-        <div className="mb-2.5">
-          <label
-            htmlFor={name}
-            aria-label={name}
-            data-testid="currency-input-label"
-            className="text-content font-bold inline"
-          >
-            {label}
-          </label>
-          {helpText && (
-            <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-              {helpText}
-            </div>
-          )}
-        </div>
-        {error && <ErrorLabel errorMessage={error} />}
-        <NumberFormat
-          id={name}
-          name={name}
-          {...localizedIncome}
-          data-testid="currency-input"
-          className={`form-control text-content border-form-border ${
-            error ? ' border-danger' : ''
-          }`}
-          min={0}
-          value={value != null ? (value as string) : ''}
-          placeholder={placeholder}
-          onChange={onChange}
-          required={required}
-          autoComplete="off"
-          enterKeyHint="done"
-        />
+  return (
+    <div>
+      <div className="mb-2.5">
+        <label
+          htmlFor={name}
+          aria-label={name}
+          data-testid="currency-input-label"
+          className="text-content font-bold inline"
+        >
+          {label}
+        </label>
+        {helpText && (
+          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
+            {helpText}
+          </div>
+        )}
       </div>
-    )
-  }
-)
+      {error && <ErrorLabel errorMessage={error} />}
+      <NumberFormat
+        id={name}
+        name={name}
+        {...localizedIncome}
+        data-testid="currency-input"
+        className={`form-control text-content border-form-border ${
+          error ? ' border-danger' : ''
+        }`}
+        min={0}
+        value={value != null ? (value as string) : ''}
+        placeholder={placeholder}
+        onChange={onChange}
+        required={required}
+        autoComplete="off"
+        enterKeyHint="done"
+      />
+    </div>
+  )
+}

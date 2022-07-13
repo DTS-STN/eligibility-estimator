@@ -20,7 +20,7 @@ import {
   ResultKey,
   ResultReason,
 } from './enums'
-import { FieldData, FieldKey } from './fields'
+import { FieldConfig, FieldKey } from './fields'
 
 /**
  * What the API expects to receive. This is passed to Joi for validation.
@@ -136,7 +136,7 @@ export interface ResponseSuccess {
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>
-  fieldData: Array<FieldData>
+  fieldData: Array<FieldConfig>
 }
 
 export interface ResponseError {
