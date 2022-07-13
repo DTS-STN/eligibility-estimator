@@ -434,9 +434,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dts-stn/decd-design-system@https://github.com/DTS-STN/DECD-Design-System#months_to_numbers":
-  version: 1.45.0
-  resolution: "@dts-stn/decd-design-system@https://github.com/DTS-STN/DECD-Design-System.git#commit=33c1f9f53c4c444fb24ec2180e866055f6dafb54"
+"@dts-stn/decd-design-system@npm:1.46.0":
+  version: 1.46.0
+  resolution: "@dts-stn/decd-design-system@npm:1.46.0"
   dependencies:
     prop-types: ^15.7.2
     react: ^17.0.2
@@ -445,7 +445,7 @@ __metadata:
     react-full-screen: ^1.1.1
     react-player: ^2.10.1
     user: ^0.0.0
-  checksum: 7693de4f6d56ac8ae3a2a5a389849adb4eea7c214f32fc10ad9b3385bf6fc073e2d2ac716f4a7020e451a37a1bbd14d4e93c08aeda698993294c10e9a5ec36f6
+  checksum: 4181cc5df3f3fa05b0b5d8f57f31fbe1dc8856d9cd673b14dd24d4c84d9450040c14b18315f7f69eb1c0aeab8a8c24b12af885bd69af8a5d4bfbf57f1b645c13
   languageName: node
   linkType: hard
 
@@ -2649,7 +2649,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
-    "@dts-stn/decd-design-system": "https://github.com/DTS-STN/DECD-Design-System#months_to_numbers"
+    "@dts-stn/decd-design-system": 1.46.0
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
