@@ -28,7 +28,20 @@ export class Form {
     if ('results' in data) {
       this.clearAllErrors()
       this.fields.forEach((field) => {
+        // set visibility
         field.visible = data.visibleFields.includes(field.key)
+
+        // handle default values (currently only select/radio support defaults, which use KeyAndText).
+        if (
+          field.visible &&
+          !field.value &&
+          'default' in field.config &&
+          field.config.default &&
+          field.config.default.key
+        )
+          field.value = field.config.default.key
+
+        // handle fields removed from the form
         if (!field.visible && field.value) field.value = undefined
       })
     }
