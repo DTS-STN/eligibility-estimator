@@ -1,6 +1,7 @@
 import { DatePicker } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
-import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
+import { ChangeEvent, InputHTMLAttributes, useEffect } from 'react'
+import { useSessionStorage } from 'react-use'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { useTranslation } from '../Hooks'
@@ -13,6 +14,11 @@ export interface MonthAndYearProps
   baseOnChange: (newValue: string) => void
 }
 
+type IAgeDateInput = {
+  month: string
+  year?: string
+}
+
 export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   name,
   label,
@@ -20,28 +26,37 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   baseOnChange,
 }) => {
   const tsln = useTranslation<WebTranslations>()
-  const [dateInput]: [
-    { month: number; year: number },
-    (value: { month: number; year: number }) => void
-  ] = useState({
-    month: 1,
-    year: undefined,
-  })
+
+  const [ageDateInput, setAgeDateInput]: [
+    IAgeDateInput,
+    (value: IAgeDateInput) => void
+  ] = useSessionStorage('ageDateInput', { month: '1' })
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
-    dateInput[fieldToSet] = Number(e.target.value)
-    if (dateInput.year && dateInput.month)
-      baseOnChange(
-        String(BenefitHandler.calculateAge(dateInput.month, dateInput.year))
-      )
+    setAgeDateInput({ ...ageDateInput, [fieldToSet]: e.target.value })
   }
+
+  useEffect(() => {
+    if (ageDateInput.year && ageDateInput.month) {
+      baseOnChange(
+        String(
+          BenefitHandler.calculateAge(
+            Number(ageDateInput.month),
+            Number(ageDateInput.year)
+          )
+        )
+      )
+    }
+  }, [ageDateInput])
 
   return (
     <>
       <DatePicker
         id={name}
+        month={Number(ageDateInput.month)}
+        year={Number(ageDateInput.year)}
         hasLabel
         // hasError={false}
         hasDay={false}
