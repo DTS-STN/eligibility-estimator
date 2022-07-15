@@ -16,7 +16,7 @@ import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 
-export const ResultsPage: React.VFC<{
+const ResultsPage: React.VFC<{
   inputs: FieldInput[]
   results: BenefitResultsObject
   summary: SummaryObject
@@ -87,3 +87,5 @@ export const ResultsPage: React.VFC<{
     </div>
   )
 }
+
+export default ResultsPage
