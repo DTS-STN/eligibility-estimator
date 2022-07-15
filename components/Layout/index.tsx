@@ -1,4 +1,4 @@
-import { Header, Heading } from '@dts-stn/decd-design-system'
+import { Header, Heading } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'

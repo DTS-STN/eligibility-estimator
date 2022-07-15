@@ -1,4 +1,4 @@
-import { AccordionForm, Message } from '@dts-stn/decd-design-system'
+import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'

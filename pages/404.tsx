@@ -1,4 +1,4 @@
-import { ErrorPage } from '@dts-stn/decd-design-system'
+import { ErrorPage } from '@dts-stn/service-canada-design-system'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React from 'react'
