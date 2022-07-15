@@ -223,8 +223,7 @@ const en: Translations = {
   detail: {
     eligible: 'You are likely eligible for this benefit.',
     eligibleDependingOnIncome:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around <b>$1,664.23</b> every month',
-    //'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
     eligibleDependingOnIncomeNoEntitlement:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
     eligibleEntitlementUnavailable:
@@ -300,7 +299,6 @@ const en: Translations = {
     [SummaryState.MORE_INFO]: 'More information needed',
     [SummaryState.UNAVAILABLE]: 'Unable to provide an estimation',
     [SummaryState.AVAILABLE_ELIGIBLE]: 'Likely eligible for benefits',
-    //[SummaryState.AVAILABLE_INELIGIBLE]: 'Likely not eligible for benefits',
     [SummaryState.AVAILABLE_INELIGIBLE]: 'You may be eligible for benefits',
   },
   summaryDetails: {
@@ -312,7 +310,6 @@ const en: Translations = {
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     [SummaryState.AVAILABLE_INELIGIBLE]:
       'Depending on your income, you may be eligible for old age benefits. See the details below for more information.',
-    //'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
   },
   links,
   incomeSingle: 'your income',
