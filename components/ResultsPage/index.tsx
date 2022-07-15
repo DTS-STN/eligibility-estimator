@@ -1,4 +1,4 @@
-import { Button, Message } from '@dts-stn/decd-design-system'
+import { Button, Message } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'

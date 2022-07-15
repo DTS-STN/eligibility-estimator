@@ -1,4 +1,4 @@
-import { DatePicker } from '@dts-stn/decd-design-system'
+import { DatePicker } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'

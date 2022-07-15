@@ -1,4 +1,4 @@
-import { Link as DSLink } from '@dts-stn/decd-design-system'
+import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 import Image from 'next/image'
 import React from 'react'
 import { CustomCollapse } from './CustomCollapse'

@@ -1,4 +1,4 @@
-import { Button } from '@dts-stn/decd-design-system'
+import { Button } from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
