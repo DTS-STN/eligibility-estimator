@@ -142,6 +142,12 @@ export const age65NoDefer = {
   oasAge: undefined,
 }
 
+export const age75NoDefer = {
+  age: 75,
+  oasDefer: false,
+  oasAge: undefined,
+}
+
 export const age60NoDefer = {
   age: 60,
   oasDefer: false,

@@ -26,8 +26,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
+
+    // income limit is higher at age 75
+    const incomeLimit =
+      this.input.age >= 75
+        ? legalValues.oas.incomeLimit75
+        : legalValues.oas.incomeLimit
+
     const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant < legalValues.oas.incomeLimit
+      skipReqIncome || this.input.income.relevant < incomeLimit
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
@@ -41,7 +48,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           result: ResultKey.INCOME_DEPENDENT,
           reason: ResultReason.INCOME_MISSING,
           detail: this.translations.detail.eligibleDependingOnIncome,
-          incomeMustBeLessThan: legalValues.oas.incomeLimit,
+          incomeMustBeLessThan: incomeLimit,
         }
       else if (this.input.age >= 65) {
         return {
@@ -195,7 +202,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   /**
-   * The expected OAS amount at age 75.
+   * The expected OAS amount at age 75, considering yearsInCanada and deferral.
+   *
+   * Note that we do not simply take the amount75 from the JSON file because of
+   * the above considerations, and this.age65EntitlementAmount handles these.
    */
   private get age75EntitlementAmount(): number {
     return roundToTwo(this.age65EntitlementAmount * 1.1)
