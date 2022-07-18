@@ -149,6 +149,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
   protected getEntitlement(): EntitlementResultGeneric {
     const autoEnrollment = this.getAutoEnrollment()
+    // client is not eligible, and it's not because income missing? they get nothing.
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
@@ -159,6 +160,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         autoEnrollment,
       }
 
+    // income is not provided, and they are eligible depending on income? entitlement unavailable.
     if (
       !this.input.income.provided &&
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
@@ -168,6 +170,8 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         type: EntitlementResultType.UNAVAILABLE,
         autoEnrollment,
       }
+
+    // otherwise, let's do it!
 
     const formulaResult = new EntitlementFormula(
       this.input.income.relevant,

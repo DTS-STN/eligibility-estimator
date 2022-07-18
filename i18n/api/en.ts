@@ -223,7 +223,7 @@ const en: Translations = {
   detail: {
     eligible: 'You are likely eligible for this benefit.',
     eligibleDependingOnIncome:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     eligibleDependingOnIncomeNoEntitlement:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
     eligibleEntitlementUnavailable:
@@ -271,7 +271,7 @@ const en: Translations = {
     autoEnrollFalse:
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
-      'You should expect to receive around {ENTITLEMENT_AMOUNT} every month.',
+      'You should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
   },
   detailWithHeading: {
     oasDeferralApplied: {
@@ -308,7 +308,7 @@ const en: Translations = {
     [SummaryState.UNAVAILABLE]:
       'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
     [SummaryState.AVAILABLE_ELIGIBLE]:
-      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
+      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT_SUM}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     [SummaryState.AVAILABLE_INELIGIBLE]:
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
     [SummaryState.AVAILABLE_DEPENDING]:

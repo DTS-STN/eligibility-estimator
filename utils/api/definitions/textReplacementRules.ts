@@ -11,9 +11,14 @@ type TextReplacementRules = {
 }
 
 export const textReplacementRules: TextReplacementRules = {
-  ENTITLEMENT_AMOUNT: (handler) =>
+  ENTITLEMENT_AMOUNT_SUM: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.summary.entitlementSum,
+      handler.translations._language
+    )}</strong>`,
+  ENTITLEMENT_AMOUNT_FOR_BENEFIT: (handler, benefitResult) =>
+    `<strong>${numberToStringCurrency(
+      benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
   OAS_75_AMOUNT: (handler) =>

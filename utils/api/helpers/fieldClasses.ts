@@ -106,9 +106,10 @@ export class MaritalStatusHelper extends FieldHelper {
     super(value)
     this.partnered = value === MaritalStatus.PARTNERED
     this.single =
-      value === MaritalStatus.SINGLE || value === MaritalStatus.WIDOWED
-    if (value === MaritalStatus.INV_SEPARATED)
-      throw new Error('involuntarily separated is not implemented yet')
+      value === MaritalStatus.SINGLE ||
+      value === MaritalStatus.WIDOWED ||
+      value === MaritalStatus.INV_SEPARATED // invSeparated doesn't necessarily mean single - be careful with this
+    this.invSeparated = value === MaritalStatus.INV_SEPARATED
   }
 }
 
