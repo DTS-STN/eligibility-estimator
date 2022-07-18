@@ -9,7 +9,7 @@ interface CountryConfig {
  * Ensure AGREEMENT and NO_AGREEMENT exists here as a country code.
  */
 export const countryList: CountryConfig[] = [
-  { code: 'CAN', agreement: true },
+  { code: 'CAN', agreement: false },
   { code: 'AGREEMENT', agreement: true },
   { code: 'NO_AGREEMENT', agreement: false },
   { code: 'AFG', agreement: false },

@@ -6,7 +6,9 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  ValidationErrors,
 } from '../../../utils/api/definitions/enums'
+import { FieldKey } from '../../../utils/api/definitions/fields'
 import legalValues from '../../../utils/api/scrapers/output'
 import {
   age60NoDefer,
@@ -23,7 +25,11 @@ import {
   partnerNoHelpNeeded,
   partnerUndefined,
 } from './expectUtils'
-import { mockGetRequest, mockPartialGetRequest } from './factory'
+import {
+  mockGetRequest,
+  mockGetRequestError,
+  mockPartialGetRequest,
+} from './factory'
 
 describe('OAS entitlement scenarios', () => {
   it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {
@@ -307,8 +313,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       ResultReason.AGE_YOUNG
     )
   })
-  it('returns "ineligible" when citizen and under 10 years in Canada', async () => {
-    const res = await mockGetRequest({
+  it('returns "error ineligible" when citizen and under 10 years in Canada', async () => {
+    const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -318,11 +324,14 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: false,
       ...partnerUndefined,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+    expect(res.body.detail.details[0].message).toEqual(
+      ValidationErrors.yearsInCanadaNotEnough
     )
   })
   it('returns "ineligible" when married', async () => {
@@ -372,8 +381,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     })
     expectAfsEligible(res)
   })
-  it('returns "unavailable" when living in Agreement and under 10 years in Canada', async () => {
-    const res = await mockGetRequest({
+  it('returns "error unavailable" when living in Agreement and under 10 years in Canada', async () => {
+    const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -384,11 +393,14 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(
+      FieldKey.YEARS_IN_CANADA_SINCE_18
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+    expect(res.body.detail.details[0].message).toEqual(
+      ValidationErrors.socialCountryUnavailable
     )
   })
   it('returns "eligible" when living in No Agreement and 10 years in Canada', async () => {
@@ -405,8 +417,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     })
     expectAfsEligible(res)
   })
-  it('returns "ineligible" when living in No Agreement and under 10 years in Canada', async () => {
-    const res = await mockGetRequest({
+  it('returns "error ineligible" when living in No Agreement and under 10 years in Canada', async () => {
+    const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -417,11 +429,14 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: false,
       ...partnerUndefined,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+    expect(res.body.detail.details[0].message).toEqual(
+      ValidationErrors.yearsInCanadaNotEnough
     )
   })
 })

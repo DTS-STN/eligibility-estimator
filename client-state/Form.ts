@@ -25,6 +25,8 @@ export class Form {
 
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
+
+    // handle successful response
     if ('results' in data) {
       this.clearAllErrors()
       this.fields.forEach((field) => {
@@ -40,11 +42,13 @@ export class Form {
           field.config.default.key
         )
           field.value = field.config.default.key
-
-        // handle fields removed from the form
-        if (!field.visible && field.value) field.value = undefined
       })
     }
+
+    // run this AFTER success, and BEFORE error
+    this.clearInvisibleFields()
+
+    // handle error response
     if ('error' in data) {
       if (!('details' in data.detail))
         return console.error('Unexpected error:', data.detail)
@@ -95,7 +99,13 @@ export class Form {
     return true
   }
 
-  clearAllErrors(): void {
+  private clearInvisibleFields() {
+    this.fields.forEach((field) => {
+      if (!field.visible && field.value) field.value = undefined
+    })
+  }
+
+  private clearAllErrors(): void {
     this.fields.forEach((value) => delete value.error)
   }
 }
