@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
+import { AGREEMENT_COUNTRIES, ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import legalValues from '../scrapers/output'
 import {
   Language,
@@ -54,15 +54,23 @@ export const RequestSchema = Joi.object({
   yearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
+    .message(ValidationErrors.yearsInCanadaMinusAge)
+    /*
+     If they are currently living in a country with an agreement, then the
+     everLivedSocialCountry rules below will never apply, as we don't ask that
+     question if they currently live in a country with an agreement.
+     So, we apply the rule here in this case.
+    */
+    .when('livingCountry', {
+      is: Joi.string().valid(...Object.values(AGREEMENT_COUNTRIES)),
+      then: Joi.number()
+        .min(10) // sticking with the "easy" limit of 10, because the 20 only applies to OAS
+        .message(ValidationErrors.socialCountryUnavailable),
+    }),
   everLivedSocialCountry: Joi.boolean()
     // if they haven't lived in Canada long enough,
     .when('yearsInCanadaSince18', {
-      not: Joi.number().min(
-        Joi.ref('livingCountry', {
-          adjust: (country) => (country === 'CAN' ? 10 : 20),
-        })
-      ),
+      not: Joi.number().min(10), // sticking with the "easy" limit of 10, because the 20 only applies to OAS
       // then we'll stop them no matter what.
       // if they put true, they should contact Service Canada.
       // if they put false, we can confidently say they are not eligible for anything.
