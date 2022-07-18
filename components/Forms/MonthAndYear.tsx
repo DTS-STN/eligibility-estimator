@@ -1,6 +1,6 @@
 import { DatePicker } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
-import { ChangeEvent, InputHTMLAttributes, useEffect } from 'react'
+import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
@@ -14,9 +14,9 @@ export interface MonthAndYearProps
   baseOnChange: (newValue: string) => void
 }
 
-type IAgeDateInput = {
-  month: string
-  year?: string
+interface IAgeDateInput {
+  month: number
+  year: number
 }
 
 export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
@@ -27,36 +27,27 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 }) => {
   const tsln = useTranslation<WebTranslations>()
 
-  const [ageDateInput, setAgeDateInput]: [
+  const [dateInput, setDateInput]: [
     IAgeDateInput,
     (value: IAgeDateInput) => void
-  ] = useSessionStorage('ageDateInput', { month: '1' })
+  ] = useSessionStorage('dateInput', { month: 1, year: undefined })
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
-    setAgeDateInput({ ...ageDateInput, [fieldToSet]: e.target.value })
-  }
-
-  useEffect(() => {
-    if (ageDateInput.year && ageDateInput.month) {
+    setDateInput({ ...dateInput, [fieldToSet]: Number(e.target.value) })
+    if (dateInput.year && dateInput.month)
       baseOnChange(
-        String(
-          BenefitHandler.calculateAge(
-            Number(ageDateInput.month),
-            Number(ageDateInput.year)
-          )
-        )
+        String(BenefitHandler.calculateAge(dateInput.month, dateInput.year))
       )
-    }
-  }, [ageDateInput])
+  }
 
   return (
     <>
       <DatePicker
         id={name}
-        month={Number(ageDateInput.month)}
-        year={Number(ageDateInput.year)}
+        month={dateInput.month}
+        year={dateInput.year}
         hasLabel
         // hasError={false}
         hasDay={false}
