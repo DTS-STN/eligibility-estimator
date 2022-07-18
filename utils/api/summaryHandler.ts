@@ -57,7 +57,7 @@ export class SummaryHandler {
 
   private getTitle() {
     if (this.state === SummaryState.MORE_INFO)
-      return this.translations.summaryTitle[SummaryState.AVAILABLE_ELIGIBLE]
+      return this.translations.summaryTitle[SummaryState.MORE_INFO]
     else if (this.state === SummaryState.UNAVAILABLE)
       return this.translations.summaryTitle[SummaryState.UNAVAILABLE]
     else if (this.state === SummaryState.AVAILABLE_ELIGIBLE)
