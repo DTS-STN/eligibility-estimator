@@ -299,7 +299,8 @@ const en: Translations = {
     [SummaryState.MORE_INFO]: 'More information needed',
     [SummaryState.UNAVAILABLE]: 'Unable to provide an estimation',
     [SummaryState.AVAILABLE_ELIGIBLE]: 'Likely eligible for benefits',
-    [SummaryState.AVAILABLE_INELIGIBLE]: 'You may be eligible for benefits',
+    [SummaryState.AVAILABLE_INELIGIBLE]: 'Likely not eligible for benefits',
+    [SummaryState.AVAILABLE_DEPENDING]: 'You may be eligible for benefits',
   },
   summaryDetails: {
     [SummaryState.MORE_INFO]:
@@ -309,6 +310,8 @@ const en: Translations = {
     [SummaryState.AVAILABLE_ELIGIBLE]:
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     [SummaryState.AVAILABLE_INELIGIBLE]:
+      'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
+    [SummaryState.AVAILABLE_DEPENDING]:
       'Depending on your income, you may be eligible for old age benefits. See the details below for more information.',
   },
   links,

@@ -82,18 +82,8 @@ export interface Translations {
     oasIncreaseAt75: { heading: string; text: string }
     oasIncreaseAt75Applied: { heading: string; text: string }
   }
-  summaryTitle: {
-    [SummaryState.MORE_INFO]: string
-    [SummaryState.UNAVAILABLE]: string
-    [SummaryState.AVAILABLE_ELIGIBLE]: string
-    [SummaryState.AVAILABLE_INELIGIBLE]: string
-  }
-  summaryDetails: {
-    [SummaryState.MORE_INFO]: string
-    [SummaryState.UNAVAILABLE]: string
-    [SummaryState.AVAILABLE_ELIGIBLE]: string
-    [SummaryState.AVAILABLE_INELIGIBLE]: string
-  }
+  summaryTitle: { [key in SummaryState]?: string }
+  summaryDetails: { [key in SummaryState]?: string }
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string

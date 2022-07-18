@@ -236,7 +236,7 @@ const fr: Translations = {
     eligible:
       "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
     eligibleDependingOnIncome:
-      'Vous êtes probablement éligible à cet avantage si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de vos revenus, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT} par mois.',
+      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de vos revenus, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
       "Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
     eligibleEntitlementUnavailable:
@@ -316,6 +316,8 @@ const fr: Translations = {
     [SummaryState.AVAILABLE_ELIGIBLE]:
       'Probablement admissible aux prestations',
     [SummaryState.AVAILABLE_INELIGIBLE]:
+      'Probablement non admissible aux prestations',
+    [SummaryState.AVAILABLE_DEPENDING]:
       'Vous pourriez être admissible à des prestations',
   },
   summaryDetails: {
@@ -326,6 +328,8 @@ const fr: Translations = {
     [SummaryState.AVAILABLE_ELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     [SummaryState.AVAILABLE_INELIGIBLE]:
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
+    [SummaryState.AVAILABLE_DEPENDING]:
       "En fonction de vos revenus, vous pouvez être éligible aux prestations de vieillesse. Voir les détails ci-dessous pour plus d'informations.",
   },
   links,
