@@ -49,6 +49,8 @@ export class SummaryHandler {
       return SummaryState.MORE_INFO
     } else if (this.detectUnavailable()) {
       return SummaryState.UNAVAILABLE
+    } else if (this.detectDepending()) {
+      return SummaryState.AVAILABLE_DEPENDING
     } else if (this.detectEligible()) {
       return SummaryState.AVAILABLE_ELIGIBLE
     }
@@ -64,6 +66,8 @@ export class SummaryHandler {
       return this.translations.summaryTitle[SummaryState.AVAILABLE_ELIGIBLE]
     else if (this.state === SummaryState.AVAILABLE_INELIGIBLE)
       return this.translations.summaryTitle[SummaryState.AVAILABLE_INELIGIBLE]
+    else if (this.state === SummaryState.AVAILABLE_DEPENDING)
+      return this.translations.summaryTitle[SummaryState.AVAILABLE_DEPENDING]
   }
 
   private getDetails() {
@@ -75,6 +79,8 @@ export class SummaryHandler {
       return this.translations.summaryDetails[SummaryState.AVAILABLE_ELIGIBLE]
     else if (this.state === SummaryState.AVAILABLE_INELIGIBLE)
       return this.translations.summaryDetails[SummaryState.AVAILABLE_INELIGIBLE]
+    else if (this.state === SummaryState.AVAILABLE_DEPENDING)
+      return this.translations.summaryDetails[SummaryState.AVAILABLE_DEPENDING]
   }
 
   private getLinks(): Link[] {
@@ -150,6 +156,10 @@ export class SummaryHandler {
 
   detectEligible(): boolean {
     return this.getResultExistsInAnyBenefit(ResultKey.ELIGIBLE)
+  }
+
+  detectDepending(): boolean {
+    return this.getResultExistsInAnyBenefit(ResultKey.INCOME_DEPENDENT)
   }
 
   getResultExistsInAnyBenefit(expectedResult: ResultKey): boolean {

@@ -95,9 +95,11 @@ export type WebTranslations = {
     youMayBeEligible: string
     youAreNotEligible: string
     basedOnYourInfoEligible: string
+    basedOnYourInfoAndIncomeEligible: string
     basedOnYourInfoNotEligible: string
     yourEstimatedTotal: string
     basedOnYourInfoTotal: string
+    basedOnYourInfoAndIncomeTotal: string
     nextSteps: string
     youMayNotBeEligible: string
     noAnswersFound: string

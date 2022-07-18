@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { Language } from '../../utils/api/definitions/enums'
+import { Language, SummaryState } from '../../utils/api/definitions/enums'
 import { BenefitResult, SummaryObject } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { EstimatedTotalRow } from './EstimatedTotalRow'
@@ -15,6 +15,11 @@ export const EstimatedTotal: React.VFC<{
   const apiTrans = getTranslations(tsln._language)
 
   const language = useRouter().locale as Language
+
+  const introSentence =
+    summary.state === SummaryState.AVAILABLE_DEPENDING
+      ? tsln.resultsPage.basedOnYourInfoAndIncomeTotal
+      : tsln.resultsPage.basedOnYourInfoTotal
 
   return (
     <>
@@ -31,7 +36,7 @@ export const EstimatedTotal: React.VFC<{
 
       <div>
         <p className="pl-[35px]">
-          {tsln.resultsPage.basedOnYourInfoTotal.replace(
+          {introSentence.replace(
             '{AMOUNT}',
             numberToStringCurrency(summary.entitlementSum, language)
           )}
