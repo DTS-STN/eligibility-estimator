@@ -1,5 +1,6 @@
 import { ErrorPage } from '@dts-stn/decd-design-system'
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useSessionStorage } from 'react-use'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
@@ -10,8 +11,14 @@ import {
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import MainHandler from '../../utils/api/mainHandler'
-import dynamic from 'next/dynamic'
 
+/*
+ It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
+ which causes React Hydration errors. Not sure what needs to change to fix this properly, so this is
+ just a workaround. Updating React seems to help, but also is stricter on these issues.
+ https://nextjs.org/docs/messages/react-hydration-error
+ https://nextjs.org/docs/advanced-features/dynamic-import
+*/
 const ResultsPage = dynamic(
   () => import('../../components/ResultsPage/index'),
   { ssr: false }
