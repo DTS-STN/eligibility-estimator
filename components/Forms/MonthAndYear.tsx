@@ -1,6 +1,7 @@
 import { DatePicker } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
-import { ChangeEvent, InputHTMLAttributes, useState } from 'react'
+import { ChangeEvent, InputHTMLAttributes } from 'react'
+import { useSessionStorage } from 'react-use'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { useTranslation } from '../Hooks'
@@ -13,6 +14,11 @@ export interface MonthAndYearProps
   baseOnChange: (newValue: string) => void
 }
 
+interface IAgeDateInput {
+  month: number
+  year: number
+}
+
 export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   name,
   label,
@@ -20,18 +26,16 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   baseOnChange,
 }) => {
   const tsln = useTranslation<WebTranslations>()
-  const [dateInput]: [
-    { month: number; year: number },
-    (value: { month: number; year: number }) => void
-  ] = useState({
-    month: 1,
-    year: undefined,
-  })
+
+  const [dateInput, setDateInput]: [
+    IAgeDateInput,
+    (value: IAgeDateInput) => void
+  ] = useSessionStorage('dateInput', { month: 1, year: undefined })
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
-    dateInput[fieldToSet] = Number(e.target.value)
+    setDateInput({ ...dateInput, [fieldToSet]: Number(e.target.value) })
     if (dateInput.year && dateInput.month)
       baseOnChange(
         String(BenefitHandler.calculateAge(dateInput.month, dateInput.year))
@@ -42,6 +46,8 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     <>
       <DatePicker
         id={name}
+        month={dateInput.month}
+        year={dateInput.year}
         hasLabel
         // hasError={false}
         hasDay={false}

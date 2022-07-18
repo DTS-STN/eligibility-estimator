@@ -503,7 +503,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       res,
       EntitlementResultType.PARTIAL,
       roundToTwo(legalValues.oas.amount * (19 / 40)),
-      743.34
+      775.81
     )
     expectAlwAfsTooOld(res)
   })
