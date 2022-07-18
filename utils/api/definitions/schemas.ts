@@ -53,15 +53,29 @@ export const RequestSchema = Joi.object({
   livedOutsideCanada: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
     .integer()
-    .min(
-      Joi.ref('livingCountry', {
-        adjust: (country) => (country === 'CAN' ? 10 : 20),
-      })
-    )
-    .message(ValidationErrors.yearsInCanadaNotEnough)
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
-  everLivedSocialCountry: Joi.boolean(),
+  everLivedSocialCountry: Joi.boolean()
+    // if they haven't lived in Canada long enough,
+    .when('yearsInCanadaSince18', {
+      not: Joi.number().min(
+        Joi.ref('livingCountry', {
+          adjust: (country) => (country === 'CAN' ? 10 : 20),
+        })
+      ),
+      // then we'll stop them no matter what.
+      // if they put true, they should contact Service Canada.
+      // if they put false, we can confidently say they are not eligible for anything.
+      then: Joi.boolean().when('.', {
+        is: Joi.boolean().valid(true),
+        then: Joi.forbidden().messages({
+          'any.unknown': ValidationErrors.socialCountryUnavailable,
+        }),
+        otherwise: Joi.forbidden().messages({
+          'any.unknown': ValidationErrors.yearsInCanadaNotEnough,
+        }),
+      }),
+    }),
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
   ),

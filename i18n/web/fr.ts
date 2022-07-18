@@ -154,7 +154,7 @@ const fr: WebTranslations = {
     [ValidationErrors.oasAge65to70]:
       'Vous devez saisir un âge compris entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough]:
-      'The number of years you have lived in Canada is not enough to receive any of the benefits', // TODO: change to French
+      "Le nombre d'années pendant lesquelles vous avez vécu au Canada n'est pas suffisant pour recevoir des prestations de vieillesse.",
     [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
@@ -163,6 +163,8 @@ const fr: WebTranslations = {
       "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
       "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+    [ValidationErrors.socialCountryUnavailable]:
+      "Vous avez indiqué que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, mais que vous n'avez pas vécu au Canada pendant un certain nombre d'années pris en charge par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Impossible de continuer',
   yes: 'Oui',
