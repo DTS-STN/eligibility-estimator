@@ -35,10 +35,14 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
-    setDateInput({ ...dateInput, [fieldToSet]: Number(e.target.value) })
-    if (dateInput.year && dateInput.month)
+    const newDate: IAgeDateInput = {
+      ...dateInput,
+      [fieldToSet]: Number(e.target.value),
+    }
+    setDateInput(newDate)
+    if (newDate.year && newDate.month)
       baseOnChange(
-        String(BenefitHandler.calculateAge(dateInput.month, dateInput.year))
+        String(BenefitHandler.calculateAge(newDate.month, newDate.year))
       )
   }
 
