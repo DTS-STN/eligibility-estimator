@@ -30,7 +30,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   const [dateInput, setDateInput]: [
     IAgeDateInput,
     (value: IAgeDateInput) => void
-  ] = useSessionStorage('dateInput', { month: 1, year: undefined })
+  ] = useSessionStorage(`dateInput-${name}`, { month: 1, year: undefined })
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
