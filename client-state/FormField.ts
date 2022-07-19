@@ -28,7 +28,7 @@ export class FormField {
   }
 
   get valid(): boolean {
-    return !this.error
+    return !this.error && this.value !== undefined
   }
 
   get key(): FieldKey {
