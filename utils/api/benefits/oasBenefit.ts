@@ -239,7 +239,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     let cardCollapsedText = super.getCardCollapsedText()
 
     // if not eligible, don't bother with any of the below
-    if (this.eligibility.result !== ResultKey.ELIGIBLE) return cardCollapsedText
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return cardCollapsedText
 
     // increase at 75
     if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
