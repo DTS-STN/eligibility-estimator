@@ -27,11 +27,11 @@ export enum FieldKey {
 export enum FieldType {
   NUMBER = 'number',
   CURRENCY = 'currency',
-  BOOLEAN = 'boolean',
   DROPDOWN = 'dropdown',
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
   STRING = 'string',
+  DATE = 'date',
 }
 
 // the order of fields here will define the order within the application
@@ -39,7 +39,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
+    type: FieldType.DATE,
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
@@ -86,7 +86,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     category: { key: FieldCategory.RESIDENCE },
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.MARITAL_STATUS]: {
@@ -116,7 +116,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.NUMBER,
+    type: FieldType.DATE,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -147,21 +147,22 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
+    relatedKey: FieldKey.EVER_LIVED_SOCIAL_COUNTRY,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.BOOLEAN,
+    type: FieldType.RADIO,
     default: undefined,
   },
 }
 
-export type FieldData =
-  | FieldDataCurrency
-  | FieldDataNumber
-  | FieldDataBoolean
-  | FieldDataRadio
-  | FieldDataDropdown
-  | FieldDataString
+export type FieldConfig =
+  | FieldConfigCurrency
+  | FieldConfigNumber
+  | FieldConfigRadio
+  | FieldConfigDropdown
+  | FieldConfigString
+  | FieldConfigDate
 
-interface FieldDataGeneric {
+interface FieldConfigGeneric {
   key: FieldKey
   relatedKey?: FieldKey // in case certain props should use those of another key when missing
   label?: string // applied via translator
@@ -172,38 +173,37 @@ interface FieldDataGeneric {
   }
 }
 
-interface FieldDataCurrency extends FieldDataGeneric {
+interface FieldConfigDate extends FieldConfigGeneric {
+  type: FieldType.DATE
+}
+
+interface FieldConfigCurrency extends FieldConfigGeneric {
   type: FieldType.CURRENCY
   placeholder?: string
 }
 
-interface FieldDataNumber extends FieldDataGeneric {
+interface FieldConfigNumber extends FieldConfigGeneric {
   type: FieldType.NUMBER
   placeholder?: string
 }
 
-interface FieldDataBoolean extends FieldDataGeneric {
-  type: FieldType.BOOLEAN
-  default?: string
-}
-
-interface FieldDataRadio extends FieldDataGeneric {
+interface FieldConfigRadio extends FieldConfigGeneric {
   type: FieldType.RADIO
   values?: Array<KeyAndText> // applied via translator
   default?: KeyAndText
 }
 
-export interface FieldDataDropdown extends FieldDataGeneric {
+export interface FieldConfigDropdown extends FieldConfigGeneric {
   type: FieldType.DROPDOWN | FieldType.DROPDOWN_SEARCHABLE
   values?: Array<KeyAndText> // applied via translator
   default?: KeyAndText
 }
 
-interface FieldDataString extends FieldDataGeneric {
+interface FieldConfigString extends FieldConfigGeneric {
   type: FieldType.STRING
   placeholder?: string
 }
 
 type FieldDefinitions = {
-  [x in FieldKey]: FieldData
+  [x in FieldKey]: FieldConfig
 }

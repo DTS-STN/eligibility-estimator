@@ -1,16 +1,11 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
-import {
-  Language,
-  Locale,
-  ValidationErrors,
-} from '../../utils/api/definitions/enums'
+import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
-  _locale: Locale.FR,
 
   oas: 'Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
@@ -117,19 +112,23 @@ const fr: WebTranslations = {
     youAreNotEligible: "Vous n'êtes probablement pas éligible pour le moment",
     basedOnYourInfoEligible:
       'Selon vos informations, vous pourriez être admissible à :',
+    basedOnYourInfoAndIncomeEligible:
+      'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
     basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
       apiFr.links.SC
     )} pour plus d'informations.`,
-    yourEstimatedTotal: 'Votre total mensuel estimé est de',
+    yourEstimatedTotal: 'Votre total mensuel estimé est de ',
     basedOnYourInfoTotal:
       "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois.",
+    basedOnYourInfoAndIncomeTotal:
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
       'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
     youMayNotBeEligible:
       'Prestations auxquels vous pourriez ne pas avoir droit',
     noAnswersFound: 'Aucune réponse trouvée',
     noBenefitsFound: 'Aucune prestations trouvée',
-    edit: 'Éditer',
+    edit: 'Réviser',
     info: 'info',
     note: 'remarque',
     link: 'lien',
@@ -158,6 +157,8 @@ const fr: WebTranslations = {
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
     [ValidationErrors.oasAge65to70]:
       'Vous devez saisir un âge compris entre 65 et 70 ans.',
+    [ValidationErrors.yearsInCanadaNotEnough]:
+      "Le nombre d'années pendant lesquelles vous avez vécu au Canada n'est pas suffisant pour recevoir des prestations de vieillesse.",
     [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
@@ -166,6 +167,8 @@ const fr: WebTranslations = {
       "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
       "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+    [ValidationErrors.socialCountryUnavailable]:
+      "Vous avez indiqué que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, mais que vous n'avez pas vécu au Canada pendant un certain nombre d'années pris en charge par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Impossible de continuer',
   yes: 'Oui',
@@ -177,6 +180,10 @@ const fr: WebTranslations = {
     livingCountry: 'Sélectionner un pays',
     partnerLivingCountry: 'Sélectionner un pays',
     default: 'Sélectionnez parmi',
+  },
+
+  tooltip: {
+    moreInformation: "Plus d'information",
   },
 }
 

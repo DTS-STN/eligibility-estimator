@@ -12,7 +12,7 @@ import {
   ResultReason,
 } from './definitions/enums'
 import {
-  FieldData,
+  FieldConfig,
   fieldDefinitions,
   FieldKey,
   FieldType,
@@ -41,7 +41,7 @@ export class BenefitHandler {
   private _input: ProcessedInputWithPartner
   private _missingFields: FieldKey[]
   private _requiredFields: FieldKey[]
-  private _fieldData: FieldData[]
+  private _fieldData: FieldConfig[]
   private _benefitResults: BenefitResultsObject
   private _summary: SummaryObject
 
@@ -75,18 +75,12 @@ export class BenefitHandler {
     this._requiredFields = value
   }
 
-  get fieldData(): FieldData[] {
-    if (this._fieldData === undefined) {
+  get fieldData(): FieldConfig[] {
+    if (this._fieldData === undefined)
       this._fieldData = BenefitHandler.getFieldData(
         this.requiredFields,
         this.translations
       )
-      for (const key in this._fieldData) {
-        const field: FieldData = this._fieldData[key]
-        field.label = this.replaceTextVariables(field.label)
-        field.helpText = this.replaceTextVariables(field.helpText)
-      }
-    }
     return this._fieldData
   }
 
@@ -429,12 +423,36 @@ export class BenefitHandler {
   }
 
   /**
+   * Accepts a numerical month+year, and returns the number of years since then.
+   * This can and will return a decimal value, such as "65.5"!
+   */
+  static calculateAge(birthMonth: number, birthYear: number): number {
+    if (!birthMonth || !birthYear) return null
+
+    const today = new Date()
+    const currentMonth = today.getMonth()
+    const currentYear = today.getFullYear()
+
+    let ageMonths: number
+    let ageYears = currentYear - birthYear
+
+    if (currentMonth >= birthMonth) {
+      ageMonths = currentMonth - birthMonth
+    } else {
+      ageYears -= 1
+      ageMonths = 12 + (currentMonth - birthMonth)
+    }
+
+    return ageYears + Number((ageMonths / 12).toFixed(1))
+  }
+
+  /**
    * Accepts a list of FieldKeys, transforms that into a full list of field configurations for the frontend to use.
    */
   static getFieldData(
     fields: FieldKey[],
     translations: Translations
-  ): FieldData[] {
+  ): FieldConfig[] {
     // takes list of keys, builds list of definitions
     const fieldDataList = fields
       .sort(this.sortFields)
@@ -483,6 +501,15 @@ export class BenefitHandler {
 
       return fieldData
     })
+
+    // replace the text variables for Label and HelpText
+    for (const key in fieldDataList) {
+      const field: FieldConfig = fieldDataList[key]
+      const handler = new BenefitHandler({ _language: translations._language })
+      field.label = handler.replaceTextVariables(field.label)
+      field.helpText = handler.replaceTextVariables(field.helpText)
+    }
+
     return fieldDataList
   }
 
@@ -490,7 +517,7 @@ export class BenefitHandler {
    * Returns the field data for all fields.
    * This is so that the UI can be aware of everything right away, rather than waiting for inputs to know the upcoming fields.
    */
-  static getAllFieldData(language: Language): FieldData[] {
+  static getAllFieldData(language: Language): FieldConfig[] {
     return this.getFieldData(Object.values(FieldKey), getTranslations(language))
   }
 

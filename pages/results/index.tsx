@@ -1,25 +1,52 @@
+import { ErrorPage } from '@dts-stn/service-canada-design-system'
 import { NextPage } from 'next'
-import { useStorage, useStore } from '../../components/Hooks'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { useSessionStorage } from 'react-use'
+import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { Layout } from '../../components/Layout'
-import { ResultsPage } from '../../components/ResultsPage'
+import { Language } from '../../utils/api/definitions/enums'
+import {
+  ResponseError,
+  ResponseSuccess,
+} from '../../utils/api/definitions/types'
+import MainHandler from '../../utils/api/mainHandler'
+
+/*
+ It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
+ which causes React Hydration errors. Not sure what needs to change to fix this properly, so this is
+ just a workaround. Updating React seems to help, but also is stricter on these issues.
+ https://nextjs.org/docs/messages/react-hydration-error
+ https://nextjs.org/docs/advanced-features/dynamic-import
+*/
+const ResultsPage = dynamic(
+  () => import('../../components/ResultsPage/index'),
+  { ssr: false }
+)
 
 const Results: NextPage = (props) => {
-  const root = useStore()
-  const [storeFromSession] = useStorage('session', 'store', {})
-  root.bootstrapStoreState(storeFromSession)
+  const [inputs, setInputs]: [
+    FieldInputsObject,
+    (value: FieldInputsObject) => void
+  ] = useSessionStorage('inputs', {})
 
-  /*
-   This will ensure that the internal state of the results matches the internal state of the form inputs.
-   This is especially important when changing languages, as a language change requires the internal state to update its translated strings.
-  */
-  root.form.sendAPIRequest()
+  const language = useRouter().locale as Language
+  const inputHelper = new InputHelper(inputs, setInputs, language)
+  const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
+  const response: ResponseSuccess | ResponseError = mainHandler.results
 
   return (
-    <>
-      <Layout>
-        <ResultsPage />
-      </Layout>
-    </>
+    <Layout>
+      {'results' in response ? (
+        <ResultsPage
+          inputs={inputHelper.asArray}
+          results={response.results}
+          summary={response.summary}
+        />
+      ) : (
+        <ErrorPage lang={language} errType="500" isAuth={false} />
+      )}
+    </Layout>
   )
 }
 

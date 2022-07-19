@@ -1,12 +1,11 @@
-import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
-import { useTranslation } from '../Hooks'
+import { KeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
-  values: any[]
+  values: KeyAndText[]
   label: string
   checkedValue?: string
   helpText?: string
@@ -18,22 +17,19 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props {InputProps}
  * @returns
  */
-export const Radio: React.VFC<InputProps> = observer((props) => {
-  const {
-    name,
-    label,
-    checkedValue,
-    onChange,
-    values,
-    keyforid,
-    helpText,
-    error,
-  } = props
-  const requiredText = useTranslation<string>('required')
-
+export const Radio: React.VFC<InputProps> = ({
+  name,
+  label,
+  checkedValue,
+  onChange,
+  values,
+  keyforid,
+  helpText,
+  error,
+}) => {
   return (
     <div className="radio">
-      <div className="mb-2.5">
+      <div>
         <label
           htmlFor={name}
           aria-label={name}
@@ -43,19 +39,18 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
           <span
             className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
-          ></span>
+          />
         </label>
-        <span>
-          <span className="ml-1">({requiredText})</span>
-          <Tooltip field={name} />
-        </span>
         {helpText && (
           <div
             className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
             dangerouslySetInnerHTML={{ __html: helpText }}
-          ></div>
+          />
         )}
       </div>
+
+      <Tooltip field={name} />
+
       {error && <ErrorLabel errorMessage={error} />}
       {values.map((val, index) => (
         <div
@@ -78,14 +73,14 @@ export const Radio: React.VFC<InputProps> = observer((props) => {
             htmlFor={`${keyforid}-${index}`}
             className="radio flex items-center"
           >
-            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white"></span>
+            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white" />
             <p className="text-content ">{val.text}</p>
           </label>
         </div>
       ))}
     </div>
   )
-})
+}
 
 const correctForBooleans = (value: string) => {
   switch (value) {

@@ -1,55 +1,6 @@
 import { useRouter } from 'next/router'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { webDictionary, WebTranslations } from '../../i18n/web'
-import { RootStoreContext } from '../Contexts'
-
-type StorageType = 'session' | 'local'
-
-// Stuff's a user's data into the client side storage of the developer's choosing
-export const useStorage = <T,>(
-  type: StorageType,
-  key: string,
-  initialValue: T
-) => {
-  // NextJs renders component serverside and there is no window available there
-  const isBrowser: boolean = ((): boolean => typeof window !== 'undefined')()
-
-  const store = type == 'local' ? 'localStorage' : 'sessionStorage'
-
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    try {
-      if (isBrowser) {
-        const item = window[store].getItem(key)
-        return item ? JSON.parse(item) : initialValue
-      }
-      return ''
-    } catch (error) {
-      console.log(error)
-      return initialValue
-    }
-  })
-
-  const setValue = (value: T | ((val: T) => T)) => {
-    try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value
-
-      setStoredValue(valueToStore)
-      window[store].setItem(key, JSON.stringify(valueToStore))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  return [storedValue, setValue] as const
-}
-
-export function useStore() {
-  const store = useContext(RootStoreContext)
-  if (store === null) {
-    throw new Error('Store cannot be null, please add a context provider')
-  }
-  return store
-}
 
 export const useMediaQuery = (width) => {
   const [targetReached, setTargetReached] = useState(false)

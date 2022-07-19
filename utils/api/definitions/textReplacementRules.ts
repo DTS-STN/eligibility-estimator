@@ -11,20 +11,25 @@ type TextReplacementRules = {
 }
 
 export const textReplacementRules: TextReplacementRules = {
-  ENTITLEMENT_AMOUNT: (handler) =>
+  ENTITLEMENT_AMOUNT_SUM: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.summary.entitlementSum,
-      handler.translations._locale
+      handler.translations._language
+    )}</strong>`,
+  ENTITLEMENT_AMOUNT_FOR_BENEFIT: (handler, benefitResult) =>
+    `<strong>${numberToStringCurrency(
+      benefitResult.entitlement.result,
+      handler.translations._language
     )}</strong>`,
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.resultAt75 ?? 0,
-      handler.translations._locale
+      handler.translations._language
     )}</strong>`,
   OAS_DEFERRAL_INCREASE: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.deferral.increase ?? 0,
-      handler.translations._locale
+      handler.translations._language
     )}</strong>`,
   OAS_DEFERRAL_YEARS: (handler) => {
     const years = handler.benefitResults.oas?.entitlement.deferral.years
@@ -37,24 +42,24 @@ export const textReplacementRules: TextReplacementRules = {
   OAS_CLAWBACK: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.oas?.entitlement.clawback ?? 0,
-      handler.translations._locale
+      handler.translations._language
     )}</strong>`,
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
     `<strong>${numberToStringCurrency(
       legalValues.oas.clawbackIncomeLimit,
-      handler.translations._locale,
+      handler.translations._language,
       { rounding: 0 }
     )}</strong>`,
   OAS_MAX_INCOME: (handler) =>
     `<strong>${numberToStringCurrency(
       legalValues.oas.incomeLimit,
-      handler.translations._locale,
+      handler.translations._language,
       { rounding: 0 }
     )}</strong>`,
   INCOME_LESS_THAN: (handler, benefitResult) =>
     `<strong>${numberToStringCurrency(
       benefitResult.eligibility.incomeMustBeLessThan,
-      handler.translations._locale,
+      handler.translations._language,
       { rounding: 0 }
     )}</strong>`,
   INCOME_SINGLE_OR_COMBINED: (handler) =>

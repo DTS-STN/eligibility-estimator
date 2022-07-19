@@ -1,15 +1,10 @@
 import { WebTranslations } from '.'
-import {
-  Language,
-  Locale,
-  ValidationErrors,
-} from '../../utils/api/definitions/enums'
+import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
-  _locale: Locale.EN,
 
   oas: 'Old Age Security',
   gis: 'Guaranteed Income Supplement',
@@ -115,12 +110,16 @@ const en: WebTranslations = {
     youAreNotEligible: 'You likely are not eligible at this time',
     basedOnYourInfoEligible:
       'Based on your information, you may be eligible for:',
+    basedOnYourInfoAndIncomeEligible:
+      'Depending on your income and based on your information, you may be eligible for:',
     basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or contact ${generateLink(
       apiEn.links.SC
     )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
     basedOnYourInfoTotal:
       "Based on the information you've provided, you should expect to receive around {AMOUNT} per month.",
+    basedOnYourInfoAndIncomeTotal:
+      "Based on the information you've provided, you should expect to receive around {AMOUNT} per month. However, this amount may be lower or higher depending on your income.",
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',
@@ -152,6 +151,8 @@ const en: WebTranslations = {
     [ValidationErrors.partnerAgeOver150]:
       "Your partner's age should be less than 150.",
     [ValidationErrors.oasAge65to70]: 'You must enter an age between 65 and 70.',
+    [ValidationErrors.yearsInCanadaNotEnough]:
+      'The number of years you have lived in Canada is not enough to receive any old age benefits.',
     [ValidationErrors.yearsInCanadaMinusAge]:
       'The number of years you have lived in Canada should be no more than your age minus 18.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
@@ -160,6 +161,8 @@ const en: WebTranslations = {
       'You have indicated a marital status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
     [ValidationErrors.legalUnavailable]:
       'You have indicated a legal status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
+    [ValidationErrors.socialCountryUnavailable]:
+      'You have indicated that you have lived in a country with a social security agreement with Canada, but have not lived in Canada for a number of years supported by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Unable to proceed',
   yes: 'Yes',
@@ -171,6 +174,10 @@ const en: WebTranslations = {
     livingCountry: 'Select a country',
     partnerLivingCountry: 'Select a country',
     default: 'Select from',
+  },
+
+  tooltip: {
+    moreInformation: 'More information',
   },
 }
 

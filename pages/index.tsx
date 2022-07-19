@@ -1,5 +1,6 @@
-import { Button } from '@dts-stn/decd-design-system'
+import { Button } from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useTranslation } from '../components/Hooks'
@@ -29,27 +30,31 @@ const Home: NextPage = () => {
       <Layout>
         <div className="mt-18">
           <p
-            className="mb-4 md:w-3/5"
+            className="mb-4 sm:w-[65%]"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
           <h2 className="text-xs sm:h2 xs:mt-6 sm:mt-14 mb-2">
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
-          <div className="w-full sm:w-4/5 md:w-[55%] h-35 sm:h-20 bg-light-green py-2 px-8">
+          <div className="w-auto inline-block h-35 sm:h-20 bg-light-green py-2 px-8">
             <div className="flex">
-              <img
+              <Image
                 className="xs:mt-2 xs:h-5"
                 src="/green-check-mark.svg"
                 alt={'green check mark'}
+                height={20}
+                width={20}
               />
               <p className="ml-2">{tsln.atLeast60}</p>
             </div>
             <div className="flex">
-              <img
+              <Image
                 className="xs:mt-2 xs:h-5"
                 src="/green-check-mark.svg"
                 alt={'green check mark'}
+                height={20}
+                width={20}
               />
               <p className="ml-2">{tsln.haveNetIncomeLess}</p>
             </div>
@@ -57,11 +62,13 @@ const Home: NextPage = () => {
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.headerWhatToKnow}
           </h2>
-          <p className="mt-3 mb-8 font-bold  md:w-3/5">{tsln.pleaseNodeText}</p>
+          <p className="mt-3 mb-8 font-bold sm:w-[65%]">
+            {tsln.pleaseNodeText}
+          </p>
           <p className="">{tsln.estimatorIncludeQuestionText}</p>
           <ul
             id="information-list"
-            className="list-disc list-outside ml-5 w-full sm:w-3/5"
+            className="list-disc list-outside ml-5 xs:pr-3 w-full sm:w-3/5"
           >
             <li dangerouslySetInnerHTML={{ __html: tsln.ageText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.netIncomeText }} />

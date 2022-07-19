@@ -1,10 +1,10 @@
-import { Header, Heading } from '@dts-stn/decd-design-system'
+import { Header, Heading } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
-import { HeadDoc } from '../Document'
 import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
+import { Head } from './Head'
 import { SCLabsTestHeader } from './ScTestHeader'
 
 export const Layout: React.VFC<{ children: React.ReactNode }> = ({
@@ -55,11 +55,11 @@ export const Layout: React.VFC<{ children: React.ReactNode }> = ({
 
   return (
     <>
-      <HeadDoc />
+      <Head />
       <SCLabsTestHeader />
 
       <main className="mainContent">
-        <div className="xs:container mx-auto flex flex-col mb-16 mt-8">
+        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
             id="mainHeader"
             lang={router.locale}

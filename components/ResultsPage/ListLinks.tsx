@@ -1,4 +1,4 @@
-import { Link as DSLink } from '@dts-stn/decd-design-system'
+import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 
 export const ListLinks: React.VFC<{
   title: string

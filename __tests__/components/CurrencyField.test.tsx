@@ -5,7 +5,6 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
 import { CurrencyField } from '../../components/Forms/CurrencyField'
 
 describe('CurrencyField component', () => {
@@ -30,13 +29,11 @@ describe('CurrencyField component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <CurrencyField
-          name={props.name}
-          label={props.label}
-          required={props.required}
-        />
-      </StoreProvider>
+      <CurrencyField
+        name={props.name}
+        label={props.label}
+        required={props.required}
+      />
     )
 
     render(ui)
@@ -61,14 +58,12 @@ describe('CurrencyField component', () => {
     }
 
     const ui = (
-      <StoreProvider>
-        <CurrencyField
-          name={props.name}
-          label={props.label}
-          error={props.error}
-          required={props.required}
-        />
-      </StoreProvider>
+      <CurrencyField
+        name={props.name}
+        label={props.label}
+        error={props.error}
+        required={props.required}
+      />
     )
 
     render(ui)

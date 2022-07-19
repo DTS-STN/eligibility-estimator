@@ -1,4 +1,4 @@
-import { Footer as DSFooter } from '@dts-stn/decd-design-system'
+import { Footer as DSFooter } from '@dts-stn/service-canada-design-system'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 

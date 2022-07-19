@@ -10,17 +10,16 @@ import {
 import {
   BenefitKey,
   EntitlementResultType,
-  EstimationSummaryState,
   Language,
   LegalStatus,
   LinkIcon,
-  LinkLocation,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  SummaryState,
 } from './enums'
-import { FieldData, FieldKey } from './fields'
+import { FieldConfig, FieldKey } from './fields'
 
 /**
  * What the API expects to receive. This is passed to Joi for validation.
@@ -136,7 +135,7 @@ export interface ResponseSuccess {
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>
-  fieldData: Array<FieldData>
+  fieldData: Array<FieldConfig>
 }
 
 export interface ResponseError {
@@ -148,12 +147,11 @@ export interface Link {
   text: string
   url: string
   order: number
-  location: LinkLocation
   icon?: LinkIcon
 }
 
 export interface SummaryObject {
-  state: EstimationSummaryState
+  state: SummaryState
   title: string
   details: string
   links: Link[]
