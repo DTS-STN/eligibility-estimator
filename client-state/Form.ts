@@ -93,9 +93,9 @@ export class Form {
   }
 
   get isValid(): boolean {
-    this.visibleFields.forEach((value) => {
-      if (!value.valid) return false
-    })
+    for (const field of this.visibleFields) {
+      if (!field.valid) return false
+    }
     return true
   }
 
