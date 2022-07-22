@@ -103,8 +103,6 @@ const en: Translations = {
       'Providing your income will give you more helpful and accurate results.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
-    [FieldKey.AGE]:
-      'You can enter your current age, or a future age for planning purposes.',
     [FieldKey.OAS_DEFER]:
       'If you already receive OAS, enter when you started receiving it.</br>Learn more about {LINK_OAS_DEFER_INLINE}.',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
