@@ -106,8 +106,6 @@ const fr: Translations = {
       'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
-    [FieldKey.AGE]:
-      'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
     [FieldKey.OAS_DEFER]:
       'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',
     [FieldKey.OAS_AGE]: 'Celui-ci doit être compris entre 65 et 70.',
