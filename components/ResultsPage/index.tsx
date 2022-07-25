@@ -25,10 +25,10 @@ const notEligibleState = [
 ]
 
 // get the link text by current summary state
-const getEligibleLinkText: string = (
+const getEligibleLinkText = (
   currentState: SummaryState,
   tsln: WebTranslations
-) => {
+): string => {
   if (notEligibleState.includes(currentState)) {
     return tsln.resultsPage.youAreNotEligible
   } else {
@@ -36,10 +36,10 @@ const getEligibleLinkText: string = (
   }
 }
 
-const getEstimatedMonthlyTotalLinkText: string = (
+const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
   tsln: WebTranslations
-) => {
+): string => {
   if (entitlementSum !== 0) {
     return `${tsln.resultsPage.yourEstimatedTotal}${numberToStringCurrency(
       entitlementSum,
@@ -49,10 +49,10 @@ const getEstimatedMonthlyTotalLinkText: string = (
   return ''
 }
 
-const getNextStepLinkText: string = (
+const getNextStepLinkText = (
   results: BenefitResultsObject,
   tsln: WebTranslations
-) => {
+): string => {
   for (const key in results) {
     if (results[key]['eligibility']?.result === ResultKey.ELIGIBLE) {
       return tsln.resultsPage.nextSteps
@@ -61,10 +61,10 @@ const getNextStepLinkText: string = (
   return ''
 }
 
-const getBenefitsYouMayNotEligibleForLinkText: string = (
+const getBenefitsYouMayNotEligibleForLinkText = (
   results: BenefitResultsObject,
   tsln: WebTranslations
-) => {
+): string => {
   for (const key in results) {
     if (results[key]['eligibility']?.result === ResultKey.INELIGIBLE) {
       return tsln.resultsPage.youMayNotBeEligible
