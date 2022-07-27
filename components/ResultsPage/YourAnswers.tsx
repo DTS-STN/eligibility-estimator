@@ -30,7 +30,6 @@ export const YourAnswers: React.VFC<{
           return (
             <div key={input.key} className="py-4 border-b-2 border-info-border">
               {tsln.resultsQuestions[input.key]} <br />
-              {console.log(input)}
               <strong>{getDisplayValue(input)}</strong> &nbsp;
               <DSLink
                 id={`edit-${input.key}`}
@@ -72,9 +71,10 @@ export const YourAnswers: React.VFC<{
             .text
         throw new Error(`values not found for field: ${input.key}`)
       case FieldType.RADIO:
-        if ('values' in fieldData)
+        if (fieldData.type === FieldType.RADIO && 'values' in fieldData) {
           return fieldData.values.find((value) => value.key === input.value)
             .shortText
+        }
         throw new Error(`values not found for field: ${input.key}`)
       default:
         throw new Error(`field type not supported in YourAnswers: ${fieldType}`)

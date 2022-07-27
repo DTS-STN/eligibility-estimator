@@ -28,8 +28,8 @@ describe('Radio component', () => {
       label: 'Have you ever live in a social agreement country?',
       required: true,
       values: [
-        { key: 'true', text: 'Yes' },
-        { key: 'false', text: 'No' },
+        { key: 'true', text: 'Yes', shortText: 'Yes' },
+        { key: 'false', text: 'No', shortText: 'No' },
       ],
     }
 
@@ -68,8 +68,8 @@ describe('Radio component', () => {
       label: 'Have you ever live in a social agreement country?',
       required: true,
       values: [
-        { key: 'true', text: 'Yes' },
-        { key: 'false', text: 'No' },
+        { key: 'true', text: 'Yes', shortText: 'Yes' },
+        { key: 'false', text: 'No', shortText: 'No' },
       ],
       checkedValue: 'true',
     }

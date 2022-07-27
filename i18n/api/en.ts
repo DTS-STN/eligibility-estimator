@@ -202,17 +202,17 @@ const en: Translations = {
       {
         key: MaritalStatus.SINGLE,
         text: 'Single, divorced, or separated',
-        shortText: 'Single, divorced or separated',
+        shortText: 'Single / divorced / separated',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Married or common-law',
-        shortText: 'Married or common-law',
+        shortText: 'Married / common-law',
       },
       {
         key: MaritalStatus.WIDOWED,
         text: 'Surviving partner or widowed',
-        shortText: 'Widowed or Partner',
+        shortText: 'Widowed / Partner',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
