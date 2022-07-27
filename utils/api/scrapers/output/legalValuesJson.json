@@ -1,12 +1,12 @@
 {
-  "lastUpdatedYear": 2022,
+  "lastUpdatedYear": 2021,
   "lastUpdatedQuarter": "July to September 2022",
   "oas": {
     "amount": 666.83,
     "amount75": 733.51,
-    "incomeLimit": 134253,
-    "incomeLimit75": 136920,
-    "clawbackIncomeLimit": 81761
+    "incomeLimit": 129757,
+    "incomeLimit75": 129757,
+    "clawbackIncomeLimit": 79845
   },
   "gis": {
     "singleAmount": 995.99,
