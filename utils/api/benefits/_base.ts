@@ -71,7 +71,7 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
   protected getCardText(): string {
     /**
      * The following IF block is a copy from benefitHandler.translateResults,
-     *   the issue is that cardDetail.mainText is updated only once, and could have the wrong information.
+     *   the issue is that cardDetail object is updated only once if undefined, and could have the wrong information.
      *   overwrite eligibility.detail and autoEnrollment when entitlement.type = none.
      */
 
