@@ -179,4 +179,29 @@
     border-right: 0;
     border-left: 12px solid #284162;
   }
+
+  #datePickerMonth {
+    line-height: 30px;
+  }
+
+  select#datePickerMonth {
+    background-image: none;
+  }
+
+  input#datePickerYear {
+    border-radius: 0.25rem;
+    border-width: 1.5px;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Noto sans, font-mono;
+    color: #333333;
+    padding: 5px 10px;
+    line-height: 30px;
+    --tw-border-opacity: 1;
+    border-color: rgb(111 111 111 / var(--tw-border-opacity));
+  }
+
+  input#datePickerYear:focus {
+    border-color: #2563eb;
+  }
 }
