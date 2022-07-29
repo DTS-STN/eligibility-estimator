@@ -79,9 +79,8 @@ const en: Translations = {
     [FieldKey.INCOME]: 'Net income',
     [FieldKey.LEGAL_STATUS]: 'Legal status',
     [FieldKey.LIVING_COUNTRY]: 'Residence country',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Lived outside Canada for longer of 6 months',
-    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years lived outside Canada',
+    [FieldKey.LIVED_OUTSIDE_CANADA]: 'Lived outside Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Lived in country with social agreement',
     [FieldKey.MARITAL_STATUS]: 'Marital status',
@@ -91,10 +90,8 @@ const en: Translations = {
     [FieldKey.PARTNER_AGE]: "Partner's age",
     [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's residence country",
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      "Partner's lived outside Canada for longer of 6 months",
-    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Partner's years lived outside Canada",
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: "Partner's lived outside Canada",
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: 'Years',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Partner lived in country with social agreement',
   },
@@ -116,105 +113,149 @@ const en: Translations = {
       {
         key: true,
         text: 'Yes, I will provide my income',
+        shortText: 'Yes',
       },
       {
         key: false,
         text: 'No, I will not provide my income at this time',
+        shortText: 'No',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
       {
         key: true,
         text: "Yes, I will provide my partner's income",
+        shortText: 'Yes',
       },
       {
         key: false,
         text: "No, I will not provide my partner's income at this time",
+        shortText: 'No',
       },
     ],
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
         text: 'I would like to start receiving OAS when I turn 65 (most common)',
+        shortText: 'Start at 65',
       },
       {
         key: true,
         text: 'I would like to delay when I start receiving OAS (higher monthly payments)',
+        shortText: 'Delay',
       },
     ],
     [FieldKey.LEGAL_STATUS]: [
-      { key: LegalStatus.CANADIAN_CITIZEN, text: 'Canadian citizen' },
+      {
+        key: LegalStatus.CANADIAN_CITIZEN,
+        text: 'Canadian citizen',
+        shortText: 'Canadian',
+      },
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Permanent resident or landed immigrant (non-sponsored)',
+        shortText: 'PR or LI (non-sponsored)',
       },
       {
         key: LegalStatus.SPONSORED,
         text: 'Permanent resident or landed immigrant (sponsored)',
+        shortText: 'PR or LI (sponsored)',
       },
-      { key: LegalStatus.INDIAN_STATUS, text: 'Indian status or status card' },
+      {
+        key: LegalStatus.INDIAN_STATUS,
+        text: 'Indian status or status card',
+        shortText: 'Indian',
+      },
       {
         key: LegalStatus.OTHER,
         text: 'Other (for example, temporary resident, student, temporary worker)',
+        shortText: 'Other',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: 'No, I have not lived outside of Canada for longer than 6 months',
+        shortText: 'No',
       },
       {
         key: true,
         text: 'Yes, I have lived outside of Canada for longer than 6 months',
+        shortText: 'Yes',
       },
     ],
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: 'No, my partner has not lived outside of Canada for longer than 6 months',
+        shortText: 'No',
       },
       {
         key: true,
         text: 'Yes, my partner has lived outside of Canada for longer than 6 months',
+        shortText: 'Yes',
       },
     ],
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
         text: 'Single, divorced, or separated',
+        shortText: 'Single / divorced / separated',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Married or common-law',
+        shortText: 'Married / common-law',
       },
-      { key: MaritalStatus.WIDOWED, text: 'Surviving partner or widowed' },
-      { key: MaritalStatus.INV_SEPARATED, text: 'Involuntarily separated' },
+      {
+        key: MaritalStatus.WIDOWED,
+        text: 'Surviving partner or widowed',
+        shortText: 'Widowed / Partner',
+      },
+      {
+        key: MaritalStatus.INV_SEPARATED,
+        text: 'Involuntarily separated',
+        shortText: 'Separated',
+      },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
       {
         key: PartnerBenefitStatus.OAS,
         text: 'My partner receives an Old Age Security pension',
+        shortText: 'Yes',
       },
       {
         key: PartnerBenefitStatus.OAS_GIS,
         text: 'My partner receives an Old Age Security pension and the Guaranteed Income Supplement',
+        shortText: 'Yes',
       },
       {
         key: PartnerBenefitStatus.ALW,
         text: 'My partner receives the Allowance',
+        shortText: 'Yes',
       },
-      { key: PartnerBenefitStatus.NONE, text: 'None of the above' },
-      { key: PartnerBenefitStatus.HELP_ME, text: 'Help me find out' },
+      {
+        key: PartnerBenefitStatus.NONE,
+        text: 'None of the above',
+        shortText: 'No benefits',
+      },
+      {
+        key: PartnerBenefitStatus.HELP_ME,
+        text: 'Help me find out',
+        shortText: 'Help me find out',
+      },
     ],
     [FieldKey.LIVING_COUNTRY]: livingCountry,
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: [
       {
         key: true,
         text: 'Yes',
+        shortText: 'Yes',
       },
       {
         key: false,
         text: 'No',
+        shortText: 'Yes',
       },
     ],
   },

@@ -1,11 +1,11 @@
 import { InputHTMLAttributes } from 'react'
-import { KeyAndText } from '../../i18n/api'
+import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   keyforid: string
-  values: KeyAndText[]
+  values: TypedKeyAndText<string>[]
   label: string
   checkedValue?: string
   helpText?: string
