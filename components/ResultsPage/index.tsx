@@ -9,7 +9,6 @@ import {
   BenefitResultsObject,
   SummaryObject,
 } from '../../utils/api/definitions/types'
-import Tbl1SingleScraper from '../../utils/api/scrapers/tbl1SingleScraper'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
@@ -21,7 +20,7 @@ import { numberToStringCurrency } from '../../i18n/api'
 const notEligibleState = [
   SummaryState.AVAILABLE_INELIGIBLE,
   SummaryState.MORE_INFO,
-  SummaryState.AVAILABLE_INELIGIBLE,
+  SummaryState.UNAVAILABLE,
 ]
 
 // get the link text by current summary state
