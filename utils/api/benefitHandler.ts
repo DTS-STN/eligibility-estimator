@@ -369,6 +369,7 @@ export class BenefitHandler {
 
       // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
       // this happens when high income results in no entitlement.
+      // this If block was copied to _base and probably not required anymore.
       if (
         result.eligibility.result === ResultKey.ELIGIBLE &&
         result.entitlement.type === EntitlementResultType.NONE
