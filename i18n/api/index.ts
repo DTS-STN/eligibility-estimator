@@ -24,6 +24,7 @@ export interface KeyAndText {
 export interface TypedKeyAndText<T> {
   key: T
   text: string
+  shortText: string
 }
 
 export interface Translations {

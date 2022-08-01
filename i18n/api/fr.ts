@@ -106,8 +106,6 @@ const fr: Translations = {
       'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
-    [FieldKey.AGE]:
-      'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
     [FieldKey.OAS_DEFER]:
       'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',
     [FieldKey.OAS_AGE]: 'Celui-ci doit être compris entre 65 et 70.',
@@ -121,114 +119,149 @@ const fr: Translations = {
       {
         key: true,
         text: 'Oui, je fournirai mes revenus',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non, je ne fournirai pas mes revenus pour le moment',
+        shortText: 'Non',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
       {
         key: true,
         text: 'Oui, je fournirai les revenus de mon partenaire',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
+        shortText: 'Non',
       },
     ],
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
         text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
+        shortText: 'Reçu à',
       },
       {
         key: true,
         text: 'Je voudrais retarder le moment où je commencerai à recevoir la SV (paiements mensuels plus élevés)',
+        shortText: 'Retard',
       },
     ],
     [FieldKey.LEGAL_STATUS]: [
-      { key: LegalStatus.CANADIAN_CITIZEN, text: 'Citoyen canadien' },
+      {
+        key: LegalStatus.CANADIAN_CITIZEN,
+        text: 'Citoyen canadien',
+        shortText: 'Citoyen canadien',
+      },
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Résident permanent ou immigrant reçu (non parrainé)',
+        shortText: 'Résident permanent (non parrainé)',
       },
       {
         key: LegalStatus.SPONSORED,
         text: 'Résident permanent ou immigrant reçu (parrainé)',
+        shortText: 'Résident permanent (parrainé)',
       },
       {
         key: LegalStatus.INDIAN_STATUS,
         text: "Statut d'Indien ou carte de statut",
+        shortText: "Statut d'Indien",
       },
       {
         key: LegalStatus.OTHER,
         text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
+        shortText: 'Other',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Non',
       },
       {
         key: true,
         text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Oui',
       },
     ],
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Non',
       },
       {
         key: true,
         text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Oui',
       },
     ],
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
         text: 'Célibataire, divorcé(e), ou séparé(e)',
+        shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Marié(e) ou conjoint(e) de fait',
+        shortText: 'Marié(e) ou conjoint(e) de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
         text: 'Partenaire veuf(ve)',
+        shortText: 'Partenaire veuf(ve)',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
         text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
+        shortText: 'Conjoints vivants séparément',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
       {
         key: PartnerBenefitStatus.OAS,
         text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+        shortText: 'Oui',
       },
       {
         key: PartnerBenefitStatus.OAS_GIS,
         text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
+        shortText: 'Oui',
       },
       {
         key: PartnerBenefitStatus.ALW,
         text: "Mon conjoint reçoit l'Allocation",
+        shortText: 'Oui',
       },
-      { key: PartnerBenefitStatus.NONE, text: 'Aucune des réponses' },
-      { key: PartnerBenefitStatus.HELP_ME, text: 'Aidez-moi à trouver' },
+      {
+        key: PartnerBenefitStatus.NONE,
+        text: 'Aucune des réponses',
+        shortText: 'No prestations',
+      },
+      {
+        key: PartnerBenefitStatus.HELP_ME,
+        text: 'Aidez-moi à trouver',
+        shortText: 'Aidez-moi à trouver',
+      },
     ],
     [FieldKey.LIVING_COUNTRY]: livingCountry,
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: [
       {
         key: true,
         text: 'Oui',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non',
+        shortText: 'Non',
       },
     ],
   },

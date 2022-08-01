@@ -114,8 +114,8 @@ const ResultsPage: React.VFC<{
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
-      <div className="md:grid md:grid-cols-3 md:gap-12">
-        <div className="col-span-2">
+      <div className="md:grid md:grid-cols-3 md:gap-12 ">
+        <div className="col-span-2 row-span-1">
           <Message
             id="resultSummaryBox"
             type="info"
@@ -137,10 +137,10 @@ const ResultsPage: React.VFC<{
             />
           )}
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 row-span-2">
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 row-span-1">
           <hr className="my-12 border border-[#BBBFC5]" />
 
           <BenefitCards results={resultsArray} />

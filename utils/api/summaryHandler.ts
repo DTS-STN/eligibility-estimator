@@ -173,7 +173,10 @@ export class SummaryHandler {
     let sum = 0
     for (const resultsKey in this.results) {
       let result: BenefitResult = this.results[resultsKey]
-      if (result.entitlement.type != EntitlementResultType.UNAVAILABLE)
+      if (
+        result.entitlement.type != EntitlementResultType.UNAVAILABLE &&
+        result.entitlement.type != EntitlementResultType.NONE
+      )
         sum += result.entitlement.result
     }
     return sum
