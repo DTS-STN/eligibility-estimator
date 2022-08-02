@@ -17,12 +17,6 @@ import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
 
-const notEligibleState = [
-  SummaryState.AVAILABLE_INELIGIBLE,
-  SummaryState.MORE_INFO,
-  SummaryState.UNAVAILABLE,
-]
-
 // get the link text by current summary state
 const getEligibleLinkText = (
   entitlementSum: number,
