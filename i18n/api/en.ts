@@ -175,12 +175,12 @@ const en: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'No, I have not lived outside of Canada for longer than 6 months',
+        text: 'I have not lived outside of Canada for longer than 6 months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'Yes, I have lived outside of Canada for longer than 6 months',
+        text: 'I have lived outside of Canada for longer than 6 months',
         shortText: 'Yes',
       },
     ],
