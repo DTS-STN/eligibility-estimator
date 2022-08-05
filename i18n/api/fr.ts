@@ -75,25 +75,27 @@ const fr: Translations = {
       'Votre conjoint-a-til déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
   },
   questionShortText: {
-    [FieldKey.INCOME_AVAILABLE]: 'Âge',
-    [FieldKey.INCOME]: 'Report de la SV',
-    [FieldKey.AGE]: 'Âge de report de la SV',
-    [FieldKey.OAS_DEFER]: 'Revenu fourni',
-    [FieldKey.OAS_AGE]: 'Revenu net',
-    [FieldKey.MARITAL_STATUS]: 'Statut légal',
+    [FieldKey.INCOME_AVAILABLE]: 'Revenu fourni',
+    [FieldKey.INCOME]: 'Revenu net',
+    [FieldKey.AGE]: 'Âge',
+    [FieldKey.OAS_DEFER]: 'Report de la SV',
+    [FieldKey.OAS_AGE]: 'Âge de report de la SV',
+    [FieldKey.MARITAL_STATUS]: 'État civil',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
-    [FieldKey.LEGAL_STATUS]:
+    [FieldKey.LEGAL_STATUS]: 'Statut légal',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
       "A vécu à l'extérieur du Canada pendant plus de 6 mois",
-    [FieldKey.LIVED_OUTSIDE_CANADA]: "Années vécues à l'extérieur du Canada",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      "Années vécues à l'extérieur du Canada",
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
-    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: 'État civil',
-    [FieldKey.PARTNER_BENEFIT_STATUS]: 'Revenu du partenaire fourni',
-    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu net du partenaire',
-    [FieldKey.PARTNER_INCOME]: 'Prestations de vieillesse du partenaire',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Prestations de vieillesse du partenaire',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du partenaire fourni',
+    [FieldKey.PARTNER_INCOME]: 'Revenu net du partenaire',
     [FieldKey.PARTNER_AGE]: 'Âge du partenaire',
-    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Statut juridique du partenaire',
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Pays de résidence du partenaire',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du partenaire',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut juridique du partenaire',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -143,7 +145,7 @@ const fr: Translations = {
       {
         key: false,
         text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
-        shortText: 'Reçu à',
+        shortText: 'Commencer à 65 ans',
       },
       {
         key: true,
