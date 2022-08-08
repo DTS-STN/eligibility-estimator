@@ -150,7 +150,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
-          <div className="pb-4">
+          <div className="pb-4" id={field.key}>
             {field.config.type === FieldType.DATE && (
               <MonthAndYear
                 name={field.key}
