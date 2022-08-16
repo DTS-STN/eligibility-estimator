@@ -45,8 +45,10 @@ export const EstimatedTotal: React.VFC<{
         <table id="estimate" className="text-left w-full">
           <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">
             <tr>
-              <th className="pl-5">{tsln.resultsPage.tableHeader1}</th>
-              <th className="pr-5 text-right">
+              <th scope="col" className="pl-5">
+                {tsln.resultsPage.tableHeader1}
+              </th>
+              <th scope="col" className="pr-5 text-right">
                 {tsln.resultsPage.tableHeader2}
               </th>
             </tr>
