@@ -221,6 +221,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 label={field.config.label}
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
+                setValue={(val) => handleOnChange(field, val)}
               />
             )}
           </div>

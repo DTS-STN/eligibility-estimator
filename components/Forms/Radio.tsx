@@ -4,12 +4,14 @@ import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string
   keyforid: string
   values: TypedKeyAndText<string>[]
   label: string
   checkedValue?: string
   helpText?: string
   error?: string
+  setValue(value: string): void
 }
 
 /**
@@ -26,6 +28,7 @@ export const Radio: React.VFC<InputProps> = ({
   keyforid,
   helpText,
   error,
+  setValue,
 }) => {
   return (
     <div className="radio">
@@ -62,8 +65,7 @@ export const Radio: React.VFC<InputProps> = ({
             data-testid="radio"
             id={`${keyforid}-${index}`}
             name={`${keyforid}`}
-            // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
-            className="opacity-0 -ml-4"
+            className="hidden -ml-4"
             value={val.key}
             onChange={onChange}
             required
@@ -71,7 +73,9 @@ export const Radio: React.VFC<InputProps> = ({
           />
           <label
             htmlFor={`${keyforid}-${index}`}
-            className="radio flex items-center"
+            className="radio flex items-center focus:inherit"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && setValue(val.key)}
           >
             <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white" />
             <p className="text-content ">{val.text}</p>
