@@ -5,6 +5,7 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
+import { axe } from 'jest-axe'
 import Eligibility from '../../pages/eligibility/index'
 import { mockPartialGetRequest } from './api/factory'
 
@@ -32,5 +33,18 @@ describe('index page', () => {
     render(ui)
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
+  })
+
+  jest.setTimeout(90 * 1000)
+
+  it('has no a11y violations', async () => {
+    const res = await mockPartialGetRequest({
+      income: 20000,
+    })
+
+    const { container } = render(<Eligibility {...res.body} />)
+    const results = await axe(container)
+
+    expect(results).toHaveNoViolations
   })
 })

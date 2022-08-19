@@ -50,6 +50,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:4.0.0"],\
             ["husky", "npm:7.0.4"],\
             ["jest", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:27.5.1"],\
+            ["jest-axe", "npm:6.0.0"],\
             ["joi", "npm:17.6.0"],\
             ["jsdom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:19.0.0"],\
             ["lint-staged", "npm:12.3.7"],\
@@ -2826,6 +2827,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
+        ["npm:4.1.0", {\
+          "packageLocation": "./.yarn/cache/chalk-npm-4.1.0-c746e252ba-5561c7b4c0.zip/node_modules/chalk/",\
+          "packageDependencies": [\
+            ["chalk", "npm:4.1.0"],\
+            ["ansi-styles", "npm:4.3.0"],\
+            ["supports-color", "npm:7.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:4.1.2", {\
           "packageLocation": "./.yarn/cache/chalk-npm-4.1.2-ba8b67ab80-fe75c9d5c7.zip/node_modules/chalk/",\
           "packageDependencies": [\
@@ -3595,6 +3605,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-prettier", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:4.0.0"],\
             ["husky", "npm:7.0.4"],\
             ["jest", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:27.5.1"],\
+            ["jest-axe", "npm:6.0.0"],\
             ["joi", "npm:17.6.0"],\
             ["jsdom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:19.0.0"],\
             ["lint-staged", "npm:12.3.7"],\
@@ -5352,6 +5363,19 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["jest-axe", [\
+        ["npm:6.0.0", {\
+          "packageLocation": "./.yarn/cache/jest-axe-npm-6.0.0-f58bbd0c5a-9efe60394a.zip/node_modules/jest-axe/",\
+          "packageDependencies": [\
+            ["jest-axe", "npm:6.0.0"],\
+            ["axe-core", "npm:4.4.1"],\
+            ["chalk", "npm:4.1.0"],\
+            ["jest-matcher-utils", "npm:27.0.2"],\
+            ["lodash.merge", "npm:4.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["jest-changed-files", [\
         ["npm:27.5.1", {\
           "packageLocation": "./.yarn/cache/jest-changed-files-npm-27.5.1-e3b21b0242-95e9dc74c3.zip/node_modules/jest-changed-files/",\
@@ -5609,6 +5633,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["jest-matcher-utils", [\
+        ["npm:27.0.2", {\
+          "packageLocation": "./.yarn/cache/jest-matcher-utils-npm-27.0.2-e0586ec40a-7c12409e42.zip/node_modules/jest-matcher-utils/",\
+          "packageDependencies": [\
+            ["jest-matcher-utils", "npm:27.0.2"],\
+            ["chalk", "npm:4.1.2"],\
+            ["jest-diff", "npm:27.5.1"],\
+            ["jest-get-type", "npm:27.5.1"],\
+            ["pretty-format", "npm:27.5.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
         ["npm:27.5.1", {\
           "packageLocation": "./.yarn/cache/jest-matcher-utils-npm-27.5.1-0c47b071fb-bb2135fc48.zip/node_modules/jest-matcher-utils/",\
           "packageDependencies": [\
