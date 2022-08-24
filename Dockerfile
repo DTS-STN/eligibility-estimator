@@ -69,7 +69,7 @@ RUN adduser \
 ENV NODE_ENV=production
 WORKDIR $home
 COPY --chown=55:$group . . 
-RUN yarn install --immutable 
+RUN yarn install
 RUN yarn build
 COPY --chown=55:$group public ./public
 
