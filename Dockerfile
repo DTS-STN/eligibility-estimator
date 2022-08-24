@@ -51,7 +51,7 @@
 
 # CMD [ "yarn", "start" ]
 
-FROM node:16.15.1 AS production
+FROM node:16.15.1-alpine AS production
 ENV NODE_ENV=production
 SHELL ["/bin/sh", "-c"]
 RUN apk add --no-cache bash
@@ -69,7 +69,7 @@ RUN adduser \
 ENV NODE_ENV=production
 WORKDIR $home
 COPY --chown=55:$group . . 
-RUN yarn install
+RUN yarn install --immutable
 RUN yarn build
 COPY --chown=55:$group public ./public
 
