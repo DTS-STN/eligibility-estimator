@@ -24,8 +24,6 @@ const ResultsPage = dynamic(
   { ssr: false }
 )
 
-// just for testing docker on teamcity
-
 const Results: NextPage = (props) => {
   const [inputs, setInputs]: [
     FieldInputsObject,
