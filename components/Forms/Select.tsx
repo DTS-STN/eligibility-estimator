@@ -58,6 +58,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
       </div>
       <div className="w-full md:w-80">
         <Select
+          inputId={name}
           aria-labelledby={name}
           styles={{
             container: (styles) => ({
