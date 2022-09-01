@@ -24,12 +24,7 @@ export const EstimatedTotal: React.VFC<{
   return (
     <>
       <h2 id="estimated" className="h2 mt-12">
-        <Image
-          src="/money.png"
-          alt={tsln.resultsPage.dollarSign}
-          width={30}
-          height={30}
-        />{' '}
+        <Image src="/money.png" alt="" width={30} height={30} />{' '}
         {tsln.resultsPage.yourEstimatedTotal}
         {numberToStringCurrency(summary.entitlementSum, language)}
       </h2>
