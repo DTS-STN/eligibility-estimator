@@ -32,12 +32,17 @@ export const YourAnswers: React.VFC<{
               <div>{tsln.resultsQuestions[input.key]}</div>
               <div>
                 <strong>{getDisplayValue(input)}</strong> &nbsp;
-                <DSLink
+                <a
                   id={`edit-${input.key}`}
                   href={`eligibility#${input.key}`}
-                  text={tsln.resultsPage.edit}
+                  className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
                   target="_self"
-                />
+                >
+                  {tsln.resultsPage.edit}
+                  <span className="wb-inv">
+                    {tsln.resultsQuestions[input.key]}
+                  </span>
+                </a>
               </div>
             </div>
           )
