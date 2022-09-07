@@ -2,7 +2,6 @@ import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-import { FormLabel } from '@dts-stn/service-canada-design-system'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
