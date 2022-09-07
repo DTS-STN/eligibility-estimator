@@ -3,6 +3,8 @@ import Select from 'react-select'
 import { FormField } from '../../client-state/FormField'
 import { KeyAndText } from '../../i18n/api'
 import { FieldType } from '../../utils/api/definitions/fields'
+import { WebTranslations } from '../../i18n/web'
+import { useTranslation } from '../Hooks'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -42,6 +44,8 @@ export const FormSelect: React.VFC<SelectProps> = ({
     value: currentItemKeyText.key,
   }
 
+  const tsln = useTranslation<WebTranslations>()
+
   return (
     <>
       <div className="mb-2 5">
@@ -55,9 +59,9 @@ export const FormSelect: React.VFC<SelectProps> = ({
             {field.config.label}
           </span>
         </label>
-        <p className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
-          (Required)
-        </p>
+        <span className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
+          ({tsln.required})
+        </span>
       </div>
       <div className="w-full md:w-80">
         <Select

@@ -1,6 +1,8 @@
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { WebTranslations } from '../../i18n/web'
+import { useTranslation } from '../Hooks'
 
 export interface NumberFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -36,6 +38,8 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
     })
   }, [])
 
+  const tsln = useTranslation<WebTranslations>()
+
   return (
     <>
       <div className="mb-2.5">
@@ -47,9 +51,9 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         >
           {label}
         </label>
-        <p className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
-          (Required)
-        </p>
+        <span className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
+          ({tsln.required})
+        </span>
         {helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
             {helpText}
