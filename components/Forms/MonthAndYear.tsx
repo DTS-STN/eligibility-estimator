@@ -61,7 +61,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           // infoText:
           //   'Required label style with information icon. You can hide by clicking on icon again.',
           label,
-          // required: true,
+          required: true,
         }}
         // formErrorProps={{
         //   errorMessage: 'This is how form error will be displayed',

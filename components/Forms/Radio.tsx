@@ -2,6 +2,7 @@ import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { FormLabel } from '@dts-stn/service-canada-design-system'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -43,6 +44,9 @@ export const Radio: React.VFC<InputProps> = ({
             className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           />
+          <p className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
+            (Required)
+          </p>
         </label>
         {helpText && (
           <div

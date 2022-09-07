@@ -55,6 +55,9 @@ export const FormSelect: React.VFC<SelectProps> = ({
             {field.config.label}
           </span>
         </label>
+        <p className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
+          (Required)
+        </p>
       </div>
       <div className="w-full md:w-80">
         <Select
