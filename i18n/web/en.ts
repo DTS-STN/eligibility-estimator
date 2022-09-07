@@ -24,6 +24,9 @@ const en: WebTranslations = {
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   title: 'Canadian Old Age Benefits Estimator',
+  introPageTitle: 'Canadian Old Age Security Benefits Estimator',
+  questionPageTitle: 'Canadian Old Age Security Benefits Estimator - Questions',
+  resultPageTitle: 'Canadian Old Age Security Benefits Estimator - Results',
   menuTitle: 'Service Canada',
   clear: 'Clear',
   back: 'Back',

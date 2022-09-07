@@ -25,6 +25,12 @@ const fr: WebTranslations = {
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
+  introPageTitle:
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse',
+  questionPageTitle:
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Des questions',
+  resultPageTitle:
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
