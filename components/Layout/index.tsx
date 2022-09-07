@@ -54,8 +54,6 @@ export const Layout: React.VFC<{
     },
   ]
 
-  console.log('page title', tsln.title)
-
   return (
     <>
       <Head title={title} />

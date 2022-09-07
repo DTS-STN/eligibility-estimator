@@ -99,7 +99,7 @@ const en: WebTranslations = {
   socialLink3: 'About Canada.ca',
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
-
+  pageNotFound: 'Page not found',
   category: apiEn.category,
 
   resultsPage: {

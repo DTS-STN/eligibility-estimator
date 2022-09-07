@@ -84,6 +84,7 @@ export type WebTranslations = {
   socialLink4: string
   socialLink5: string
   youMayBeEligible: string
+  pageNotFound: string
 
   category: Translations['category']
 

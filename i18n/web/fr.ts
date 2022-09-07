@@ -104,6 +104,7 @@ const fr: WebTranslations = {
   socialLink3: 'À propos de Canada.ca',
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
+  pageNotFound: 'Page non trouvée',
 
   category: apiFr.category,
 
