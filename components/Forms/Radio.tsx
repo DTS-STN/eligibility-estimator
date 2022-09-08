@@ -2,8 +2,6 @@ import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
-import { WebTranslations } from '../../i18n/web'
-import { useTranslation } from '../Hooks'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -13,6 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   checkedValue?: string
   helpText?: string
   error?: string
+  requiredText?: string
   setValue(value: string): void
 }
 
@@ -30,9 +29,9 @@ export const Radio: React.VFC<InputProps> = ({
   keyforid,
   helpText,
   error,
+  requiredText,
   setValue,
 }) => {
-  const tsln = useTranslation<WebTranslations>()
   return (
     <div className="radio">
       <div>
@@ -46,8 +45,8 @@ export const Radio: React.VFC<InputProps> = ({
             className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           />
-          <span className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
-            ({tsln.required})
+          <span>
+            <span className="ml-1">({requiredText})</span>
           </span>
         </label>
         {helpText && (

@@ -3,8 +3,6 @@ import Select from 'react-select'
 import { FormField } from '../../client-state/FormField'
 import { KeyAndText } from '../../i18n/api'
 import { FieldType } from '../../utils/api/definitions/fields'
-import { WebTranslations } from '../../i18n/web'
-import { useTranslation } from '../Hooks'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -13,6 +11,7 @@ interface SelectProps
   > {
   field: FormField
   error?: string
+  requiredText?: string
   customOnChange
 }
 
@@ -26,6 +25,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
   name,
   customOnChange,
   error,
+  requiredText,
   placeholder,
 }) => {
   if (!('default' in field.config))
@@ -44,8 +44,6 @@ export const FormSelect: React.VFC<SelectProps> = ({
     value: currentItemKeyText.key,
   }
 
-  const tsln = useTranslation<WebTranslations>()
-
   return (
     <>
       <div className="mb-2 5">
@@ -59,8 +57,8 @@ export const FormSelect: React.VFC<SelectProps> = ({
             {field.config.label}
           </span>
         </label>
-        <span className="ds-inline ds-text-error-border-red ds-text-xl ds-font-medium pl-2">
-          ({tsln.required})
+        <span>
+          <span className="ml-1">({requiredText})</span>
         </span>
       </div>
       <div className="w-full md:w-80">
