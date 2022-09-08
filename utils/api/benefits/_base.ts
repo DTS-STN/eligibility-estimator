@@ -94,8 +94,8 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       if (this.entitlement.result > 0)
         text += ` ${this.translations.detail.expectToReceive}`
       text += this.getAutoEnrollment()
-        ? `</br></br>${this.translations.detail.autoEnrollTrue}`
-        : `</br></br>${this.translations.detail.autoEnrollFalse}`
+        ? `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
+        : `<div class="mt-8">${this.translations.detail.autoEnrollFalse}</div>`
     }
 
     return text
