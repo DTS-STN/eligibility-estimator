@@ -2466,7 +2466,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:10.4.4"],\
             ["@types/postcss", null],\
             ["browserslist", "npm:4.20.2"],\
-            ["caniuse-lite", "npm:1.0.30001320"],\
+            ["caniuse-lite", "npm:1.0.30001397"],\
             ["fraction.js", "npm:4.2.0"],\
             ["normalize-range", "npm:0.1.2"],\
             ["picocolors", "npm:1.0.0"],\
@@ -2698,7 +2698,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/browserslist-npm-4.20.2-9e0a0d0265-18e09beeae.zip/node_modules/browserslist/",\
           "packageDependencies": [\
             ["browserslist", "npm:4.20.2"],\
-            ["caniuse-lite", "npm:1.0.30001320"],\
+            ["caniuse-lite", "npm:1.0.30001397"],\
             ["electron-to-chromium", "npm:1.4.92"],\
             ["escalade", "npm:3.1.1"],\
             ["node-releases", "npm:2.0.2"],\
@@ -2799,10 +2799,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["caniuse-lite", [\
-        ["npm:1.0.30001320", {\
-          "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001320-e77e9fa553-d1f52e9d8e.zip/node_modules/caniuse-lite/",\
+        ["npm:1.0.30001397", {\
+          "packageLocation": "./.yarn/cache/caniuse-lite-npm-1.0.30001397-8e146b9b59-29b3178039.zip/node_modules/caniuse-lite/",\
           "packageDependencies": [\
-            ["caniuse-lite", "npm:1.0.30001320"]\
+            ["caniuse-lite", "npm:1.0.30001397"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -6770,7 +6770,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:17.0.42"],\
             ["@types/react-dom", null],\
             ["@types/sass", null],\
-            ["caniuse-lite", "npm:1.0.30001320"],\
+            ["caniuse-lite", "npm:1.0.30001397"],\
             ["fibers", null],\
             ["node-sass", null],\
             ["postcss", "npm:8.4.5"],\
