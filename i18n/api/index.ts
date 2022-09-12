@@ -88,6 +88,7 @@ export interface Translations {
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string
+  opensNewWindow: string
   yes: string
   no: string
   year: string
