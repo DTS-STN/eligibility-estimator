@@ -131,7 +131,6 @@ const en: WebTranslations = {
     info: 'info',
     note: 'note',
     link: 'link',
-    dollarSign: 'Dollars sign symbol',
   },
   resultsQuestions: apiEn.questionShortText,
   modifyAnswers: 'Modify answers',

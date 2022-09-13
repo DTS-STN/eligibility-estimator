@@ -11,6 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   checkedValue?: string
   helpText?: string
   error?: string
+  requiredText?: string
   setValue(value: string): void
 }
 
@@ -28,6 +29,7 @@ export const Radio: React.VFC<InputProps> = ({
   keyforid,
   helpText,
   error,
+  requiredText,
   setValue,
 }) => {
   return (
@@ -43,6 +45,9 @@ export const Radio: React.VFC<InputProps> = ({
             className="mb-1.5 text-content font-bold question-link"
             dangerouslySetInnerHTML={{ __html: label }}
           />
+          <span>
+            <span className="ml-1">({requiredText})</span>
+          </span>
         </label>
         {helpText && (
           <div

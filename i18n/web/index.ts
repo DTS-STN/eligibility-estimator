@@ -112,7 +112,6 @@ export type WebTranslations = {
     info: string
     note: string
     link: string
-    dollarSign: string
   }
   resultsQuestions: Translations['questionShortText']
   modifyAnswers: string

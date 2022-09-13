@@ -37,7 +37,7 @@ const fr: WebTranslations = {
   faq: 'Foire Aux Questions',
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
-  required: 'obligatoire',
+  required: 'requis',
   homePageP1:
     "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
@@ -139,7 +139,6 @@ const fr: WebTranslations = {
     info: 'info',
     note: 'remarque',
     link: 'lien',
-    dollarSign: 'symbole du dollar',
   },
   resultsQuestions: apiFr.questionShortText,
   modifyAnswers: 'Modifier vos réponses',
