@@ -49,7 +49,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   return (
     <>
       <DatePicker
-        id={name}
+        id={`enter-${name}`}
         month={dateInput.month}
         year={dateInput.year}
         hasLabel

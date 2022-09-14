@@ -101,7 +101,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
-      'If you already receive OAS, enter when you started receiving it.</br>Learn more about {LINK_OAS_DEFER_INLINE}.',
+      '<div>If you already receive OAS, enter when you started receiving it.</div> <div>Learn more about {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.INCOME]:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
