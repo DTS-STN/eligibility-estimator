@@ -356,6 +356,7 @@ const en: Translations = {
   links,
   incomeSingle: 'your income',
   incomeCombined: "you and your partner's combined income",
+  opensNewWindow: 'opens a new window',
   yes: 'Yes',
   no: 'No',
   year: 'year',
