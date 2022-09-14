@@ -53,6 +53,9 @@ export type WebTranslations = {
   breadcrumb2Title: string
   breadcrumb2URL: string
   title: string
+  introPageTitle: string
+  questionPageTitle: string
+  resultPageTitle: string
   menuTitle: string
   clear: string
   back: string
@@ -81,6 +84,7 @@ export type WebTranslations = {
   socialLink4: string
   socialLink5: string
   youMayBeEligible: string
+  pageNotFound: string
 
   category: Translations['category']
 

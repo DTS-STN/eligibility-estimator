@@ -370,6 +370,7 @@ const fr: Translations = {
   links,
   incomeSingle: 'votre revenu',
   incomeCombined: 'le revenu combiné de vous et de votre partenaire',
+  opensNewWindow: 'ouvre une nouvelle fenêtre',
   yes: 'Oui',
   no: 'Non',
   year: 'an',

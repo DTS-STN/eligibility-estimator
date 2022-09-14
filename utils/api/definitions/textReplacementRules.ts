@@ -1,4 +1,4 @@
-import { numberToStringCurrency } from '../../../i18n/api'
+import { numberToStringCurrency, Translations } from '../../../i18n/api'
 import { BenefitHandler } from '../benefitHandler'
 import legalValues from '../scrapers/output'
 import { BenefitResult, Link } from './types'
@@ -74,11 +74,18 @@ export const textReplacementRules: TextReplacementRules = {
   LINK_OAS_DEFER_CLICK_HERE: (handler) =>
     generateLink(handler.translations.links.oasDeferClickHere),
   LINK_OAS_DEFER_INLINE: (handler) =>
-    generateLink(handler.translations.links.oasDeferInline),
+    generateLink(
+      handler.translations.links.oasDeferInline,
+      handler.translations.opensNewWindow
+    ),
   LINK_RECOVERY_TAX: (handler) =>
     generateLink(handler.translations.links.oasRecoveryTaxInline),
 }
 
-export function generateLink(link: Link): string {
-  return `<a class="underline text-default-text" href="${link.url}" target="_blank">${link.text}</a>`
+export function generateLink(link: Link, opensNewWindow?: string): string {
+  return `<a class="underline text-default-text" href="${
+    link.url
+  }" target="_blank">${link.text}${
+    opensNewWindow ? ` (${opensNewWindow})` : ''
+  }</a>`
 }
