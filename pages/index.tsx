@@ -27,7 +27,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Layout>
+      <Layout title={tsln.introPageTitle}>
         <div className="mt-18">
           <p
             className="mb-4 sm:w-[65%]"
