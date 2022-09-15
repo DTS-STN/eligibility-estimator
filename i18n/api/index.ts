@@ -24,7 +24,6 @@ export interface KeyAndText {
 export interface TypedKeyAndText<T> {
   key: T
   text: string
-  shortText: string
 }
 
 export interface Translations {
@@ -88,7 +87,6 @@ export interface Translations {
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string
-  opensNewWindow: string
   yes: string
   no: string
   year: string

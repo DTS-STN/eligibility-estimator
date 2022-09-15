@@ -91,7 +91,3 @@ COABE depends on several pieces of occasionally-changing data from [Canada.ca](h
 Note that this is prone to breaking, for example if the scraped website changes its layout. In this case you would have to update the "selector" under `/utils/api/scrapers` to match the new layout, and run the script again.
 
 Unfortunately this scraping should not be fully automated due to the possibility of errors as mentioned above. Any updates require manual review to ensure the scraper is working as intended. That being said, manual review is pretty straightforward, if the numbers are way different or don't exist, there is a problem. Otherwise, it should work as expected.
-
-### Architectural Diagram
-
-![image](./coabe.png?raw=true 'COABE Diagram')

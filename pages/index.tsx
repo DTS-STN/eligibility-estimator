@@ -27,7 +27,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Layout title={tsln.introPageTitle}>
+      <Layout>
         <div className="mt-18">
           <p
             className="mb-4 sm:w-[65%]"
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
               <Image
                 className="xs:mt-2 xs:h-5"
                 src="/green-check-mark.svg"
-                alt=""
+                alt={'green check mark'}
                 height={20}
                 width={20}
               />
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
               <Image
                 className="xs:mt-2 xs:h-5"
                 src="/green-check-mark.svg"
-                alt=""
+                alt={'green check mark'}
                 height={20}
                 width={20}
               />

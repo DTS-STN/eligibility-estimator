@@ -9,7 +9,6 @@ export interface CurrencyFieldProps
   name: string
   label: string
   helpText?: string
-  requiredText?: string
   error?: string
 }
 
@@ -26,7 +25,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   placeholder,
   onChange,
   helpText,
-  requiredText,
   error,
 }) => {
   const locale = useRouter().locale
@@ -58,9 +56,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         >
           {label}
         </label>
-        <span>
-          <span className="ml-1">({requiredText})</span>
-        </span>
         {helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
             {helpText}

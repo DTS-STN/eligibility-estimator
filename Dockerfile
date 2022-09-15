@@ -51,7 +51,7 @@
 
 # CMD [ "yarn", "start" ]
 
-FROM node:16.15.1-alpine AS production
+FROM node:16-alpine AS production
 ENV NODE_ENV=production
 SHELL ["/bin/sh", "-c"]
 RUN apk add --no-cache bash

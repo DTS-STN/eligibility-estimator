@@ -1,4 +1,4 @@
-import { KeyAndText, TypedKeyAndText } from '../../../i18n/api'
+import { KeyAndText } from '../../../i18n/api'
 import { FieldCategory } from './enums'
 
 export enum FieldKey {
@@ -189,8 +189,8 @@ interface FieldConfigNumber extends FieldConfigGeneric {
 
 interface FieldConfigRadio extends FieldConfigGeneric {
   type: FieldType.RADIO
-  values?: Array<TypedKeyAndText<string>> // applied via translator
-  default?: TypedKeyAndText<string>
+  values?: Array<KeyAndText> // applied via translator
+  default?: KeyAndText
 }
 
 export interface FieldConfigDropdown extends FieldConfigGeneric {

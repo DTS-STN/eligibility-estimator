@@ -26,15 +26,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
-
-    // income limit is higher at age 75
-    const incomeLimit =
-      this.input.age >= 75
-        ? legalValues.oas.incomeLimit75
-        : legalValues.oas.incomeLimit
-
     const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant < incomeLimit
+      skipReqIncome || this.input.income.relevant < legalValues.oas.incomeLimit
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
@@ -48,7 +41,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           result: ResultKey.INCOME_DEPENDENT,
           reason: ResultReason.INCOME_MISSING,
           detail: this.translations.detail.eligibleDependingOnIncome,
-          incomeMustBeLessThan: incomeLimit,
+          incomeMustBeLessThan: legalValues.oas.incomeLimit,
         }
       else if (this.input.age >= 65) {
         return {
@@ -202,10 +195,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   /**
-   * The expected OAS amount at age 75, considering yearsInCanada and deferral.
-   *
-   * Note that we do not simply take the amount75 from the JSON file because of
-   * the above considerations, and this.age65EntitlementAmount handles these.
+   * The expected OAS amount at age 75.
    */
   private get age75EntitlementAmount(): number {
     return roundToTwo(this.age65EntitlementAmount * 1.1)
@@ -239,11 +229,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     let cardCollapsedText = super.getCardCollapsedText()
 
     // if not eligible, don't bother with any of the below
-    if (
-      this.eligibility.result !== ResultKey.ELIGIBLE &&
-      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
-    )
-      return cardCollapsedText
+    if (this.eligibility.result !== ResultKey.ELIGIBLE) return cardCollapsedText
 
     // increase at 75
     if (this.currentEntitlementAmount !== this.age75EntitlementAmount)

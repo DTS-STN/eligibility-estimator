@@ -27,6 +27,7 @@ export default class MainHandler {
         missingFields: this.handler.missingFields,
         fieldData: this.handler.fieldData,
       }
+      console.log('Results: ', this.results)
     } catch (error) {
       console.log(error)
       this.results = {

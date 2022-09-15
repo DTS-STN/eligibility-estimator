@@ -1,10 +1,5 @@
 import { Translations } from '../../../i18n/api'
-import {
-  BenefitKey,
-  ResultKey,
-  ResultReason,
-  EntitlementResultType,
-} from '../definitions/enums'
+import { BenefitKey, ResultKey } from '../definitions/enums'
 import {
   CardCollapsedText,
   CardDetail,
@@ -69,35 +64,14 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
    * The main text content that will always be visible within each benefit's card.
    */
   protected getCardText(): string {
-    /**
-     * The following IF block is a copy from benefitHandler.translateResults,
-     *   the issue is that cardDetail object is updated only once if undefined, and could have the wrong information.
-     *   overwrite eligibility.detail and autoEnrollment when entitlement.type = none.
-     */
-
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.entitlement.type === EntitlementResultType.NONE
-    ) {
-      this.eligibility.result = ResultKey.INELIGIBLE
-      this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.mustMeetIncomeReq
-      this.entitlement.autoEnrollment = this.getAutoEnrollment()
-    }
-
     let text = this.eligibility.detail
-
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE ||
-      this.eligibility.result === ResultKey.INCOME_DEPENDENT
-    ) {
+    if (this.eligibility.result === ResultKey.ELIGIBLE) {
       if (this.entitlement.result > 0)
         text += ` ${this.translations.detail.expectToReceive}`
       text += this.getAutoEnrollment()
-        ? `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
-        : `<div class="mt-8">${this.translations.detail.autoEnrollFalse}</div>`
+        ? `</br></br>${this.translations.detail.autoEnrollTrue}`
+        : `</br></br>${this.translations.detail.autoEnrollFalse}`
     }
-
     return text
   }
 

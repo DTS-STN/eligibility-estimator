@@ -25,19 +25,13 @@ const fr: WebTranslations = {
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
-  introPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse',
-  questionPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Des questions',
-  resultPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
   faq: 'Foire Aux Questions',
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
-  required: 'requis',
+  required: 'obligatoire',
   homePageP1:
     "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
@@ -104,7 +98,6 @@ const fr: WebTranslations = {
   socialLink3: 'À propos de Canada.ca',
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
-  pageNotFound: 'Page non trouvée',
 
   category: apiFr.category,
 
@@ -139,6 +132,7 @@ const fr: WebTranslations = {
     info: 'info',
     note: 'remarque',
     link: 'lien',
+    dollarSign: 'symbole du dollar',
   },
   resultsQuestions: apiFr.questionShortText,
   modifyAnswers: 'Modifier vos réponses',

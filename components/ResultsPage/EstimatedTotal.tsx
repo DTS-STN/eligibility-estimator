@@ -24,7 +24,12 @@ export const EstimatedTotal: React.VFC<{
   return (
     <>
       <h2 id="estimated" className="h2 mt-12">
-        <Image src="/money.png" alt="" width={30} height={30} />{' '}
+        <Image
+          src="/money.png"
+          alt={tsln.resultsPage.dollarSign}
+          width={30}
+          height={30}
+        />{' '}
         {tsln.resultsPage.yourEstimatedTotal}
         {numberToStringCurrency(summary.entitlementSum, language)}
       </h2>
@@ -37,13 +42,11 @@ export const EstimatedTotal: React.VFC<{
           )}
         </p>
         <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
-        <table id="estimate" className="text-left w-full">
+        <table className="text-left w-full">
           <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">
             <tr>
-              <th scope="col" className="pl-5">
-                {tsln.resultsPage.tableHeader1}
-              </th>
-              <th scope="col" className="pr-5 text-right">
+              <th className="pl-5">{tsln.resultsPage.tableHeader1}</th>
+              <th className="pr-5 text-right">
                 {tsln.resultsPage.tableHeader2}
               </th>
             </tr>

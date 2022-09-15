@@ -11,8 +11,6 @@ import {
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
 import MainHandler from '../../utils/api/mainHandler'
-import { useTranslation } from '../../components/Hooks'
-import { WebTranslations } from '../../i18n/web'
 
 /*
  It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
@@ -36,10 +34,9 @@ const Results: NextPage = (props) => {
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results
-  const tsln = useTranslation<WebTranslations>()
 
   return (
-    <Layout title={tsln.resultPageTitle}>
+    <Layout>
       {'results' in response ? (
         <ResultsPage
           inputs={inputHelper.asArray}

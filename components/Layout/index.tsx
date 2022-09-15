@@ -7,10 +7,9 @@ import { Footer } from './Footer'
 import { Head } from './Head'
 import { SCLabsTestHeader } from './ScTestHeader'
 
-export const Layout: React.VFC<{
-  children: React.ReactNode
-  title: string
-}> = ({ children, title }) => {
+export const Layout: React.VFC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const router = useRouter()
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
   const langToggleLink =
@@ -56,7 +55,7 @@ export const Layout: React.VFC<{
 
   return (
     <>
-      <Head title={title} />
+      <Head />
       <SCLabsTestHeader />
 
       <main className="mainContent">
@@ -74,8 +73,8 @@ export const Layout: React.VFC<{
           />
           <Heading
             id="applicationTitle"
-            title={title}
-            className="mb-8 mt-4 sm:mt-12 sm:w-[100%]"
+            title={tsln.title}
+            className="mb-8 mt-4 sm:mt-12 sm:w-8/12"
           />
           {children}
         </div>

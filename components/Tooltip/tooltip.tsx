@@ -48,16 +48,7 @@ export const Tooltip: React.FC<{
     >
       <div className="flex items-center gap-x-[10px]" onClick={handleClick}>
         <div className={`triangle ${show && 'origin-center rotate-90'} `} />
-        <a
-          className="underline text-default-text text-[16px]"
-          onKeyDown={(e) => {
-            if ([' ', 'Spacebar', 'Enter'].includes(e.key)) {
-              e.preventDefault()
-              handleClick()
-            }
-          }}
-          tabIndex={0}
-        >
+        <a className="underline text-default-text text-[16px]">
           {tsln.tooltip.moreInformation}
         </a>
       </div>

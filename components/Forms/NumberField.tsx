@@ -7,7 +7,6 @@ export interface NumberFieldProps
   name: string
   label: string
   helpText?: string
-  requiredText?: string
   error?: string
 }
 
@@ -24,7 +23,6 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
   placeholder,
   onChange,
   helpText,
-  requiredText,
   error,
 }) => {
   // only need to run this once at component render, so no need for deps
@@ -49,9 +47,6 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         >
           {label}
         </label>
-        <span>
-          <span className="ml-1">({requiredText})</span>
-        </span>
         {helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
             {helpText}

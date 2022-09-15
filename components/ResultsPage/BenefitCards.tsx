@@ -41,7 +41,7 @@ export const BenefitCards: React.VFC<{
               icon: value.icon,
               url: value.url,
               text: value.text,
-              alt: '', // must make text alts null for images that need to be ignored by assistive technologies (AT)
+              alt: value.text, // TODO: something else?
             }
           })}
         >
