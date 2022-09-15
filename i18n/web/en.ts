@@ -24,6 +24,9 @@ const en: WebTranslations = {
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   title: 'Canadian Old Age Benefits Estimator',
+  introPageTitle: 'Canadian Old Age Security Benefits Estimator',
+  questionPageTitle: 'Canadian Old Age Security Benefits Estimator - Questions',
+  resultPageTitle: 'Canadian Old Age Security Benefits Estimator - Results',
   menuTitle: 'Service Canada',
   clear: 'Clear',
   back: 'Back',
@@ -96,7 +99,7 @@ const en: WebTranslations = {
   socialLink3: 'About Canada.ca',
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
-
+  pageNotFound: 'Page not found',
   category: apiEn.category,
 
   resultsPage: {
@@ -128,7 +131,6 @@ const en: WebTranslations = {
     info: 'info',
     note: 'note',
     link: 'link',
-    dollarSign: 'Dollars sign symbol',
   },
   resultsQuestions: apiEn.questionShortText,
   modifyAnswers: 'Modify answers',

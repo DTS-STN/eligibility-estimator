@@ -29,7 +29,14 @@ export const RequestSchema = Joi.object({
     .precision(2)
     .min(0)
     .message(ValidationErrors.incomeBelowZero)
-    .less(legalValues.oas.incomeLimit)
+    .less(
+      Joi.ref('age', {
+        adjust: (age) =>
+          age >= 75
+            ? legalValues.oas.incomeLimit75
+            : legalValues.oas.incomeLimit,
+      })
+    )
     .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
     .min(18)

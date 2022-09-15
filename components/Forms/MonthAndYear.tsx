@@ -30,22 +30,26 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   const [dateInput, setDateInput]: [
     IAgeDateInput,
     (value: IAgeDateInput) => void
-  ] = useSessionStorage('dateInput', { month: 1, year: undefined })
+  ] = useSessionStorage(`dateInput-${name}`, { month: 1, year: undefined })
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
-    setDateInput({ ...dateInput, [fieldToSet]: Number(e.target.value) })
-    if (dateInput.year && dateInput.month)
+    const newDate: IAgeDateInput = {
+      ...dateInput,
+      [fieldToSet]: Number(e.target.value),
+    }
+    setDateInput(newDate)
+    if (newDate.year && newDate.month)
       baseOnChange(
-        String(BenefitHandler.calculateAge(dateInput.month, dateInput.year))
+        String(BenefitHandler.calculateAge(newDate.month, newDate.year))
       )
   }
 
   return (
     <>
       <DatePicker
-        id={name}
+        id={`enter-${name}`}
         month={dateInput.month}
         year={dateInput.year}
         hasLabel
@@ -57,7 +61,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           // infoText:
           //   'Required label style with information icon. You can hide by clicking on icon again.',
           label,
-          // required: true,
+          required: true,
         }}
         // formErrorProps={{
         //   errorMessage: 'This is how form error will be displayed',

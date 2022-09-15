@@ -15,6 +15,7 @@ import legalValues from '../../../utils/api/scrapers/output'
 import {
   age60NoDefer,
   age65NoDefer,
+  age75NoDefer,
   canadaWholeLife,
   canadian,
   expectAfsEligible,
@@ -307,6 +308,32 @@ describe('consolidated benefit tests: max income checks', () => {
       income: legalValues.oas.incomeLimit - 1,
     })
     expectOasEligible(resSuccess)
+  })
+
+  it(`OAS: max income at 75 is ${legalValues.oas.incomeLimit75}`, async () => {
+    const input = {
+      incomeAvailable: true,
+      income: legalValues.oas.incomeLimit75,
+      ...age75NoDefer,
+      maritalStatus: MaritalStatus.SINGLE,
+      ...canadian,
+      ...canadaWholeLife,
+      ...partnerUndefined,
+    }
+    let resError = await mockGetRequestError(input)
+    expect(resError.status).toEqual(400)
+    expect(resError.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in resError.body.detail)) throw Error('missing details')
+    expect(resError.body.detail.details[0].path[0]).toEqual(FieldKey.INCOME)
+    let resSuccess = await mockGetRequest({
+      ...input,
+      income: legalValues.oas.incomeLimit75 - 1,
+    })
+    expectOasEligible(
+      resSuccess,
+      EntitlementResultType.FULL,
+      legalValues.oas.amount75
+    )
   })
 
   it(`GIS: max income when single is ${legalValues.gis.singleIncomeLimit}`, async () => {
@@ -617,6 +644,12 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     let input70Defer70 = { ...inputBase, age: 70, oasDefer: true, oasAge: 70 }
     res = await mockGetRequest(input70Defer70)
     expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
+
+    let input75Defer70 = { ...inputBase, age: 75, oasDefer: true, oasAge: 70 }
+    res = await mockGetRequest(input75Defer70)
+    expect(res.body.results.oas.entitlement.result).toEqual(
+      roundToTwo(oasDeferredAmount * 1.1) // age 75 gets 10% more
+    )
   })
 
   it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {

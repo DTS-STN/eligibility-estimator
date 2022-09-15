@@ -29,14 +29,16 @@ export const YourAnswers: React.VFC<{
         {inputs.map((input) => {
           return (
             <div key={input.key} className="py-4 border-b-2 border-info-border">
-              {tsln.resultsQuestions[input.key]} <br />
-              <strong>{getDisplayValue(input)}</strong> &nbsp;
-              <DSLink
-                id={`edit-${input.key}`}
-                href={`/eligibility#${input.key}`}
-                text={tsln.resultsPage.edit}
-                target="_self"
-              />
+              <div>{tsln.resultsQuestions[input.key]}</div>
+              <div>
+                <strong>{getDisplayValue(input)}</strong> &nbsp;
+                <DSLink
+                  id={`edit-${input.key}`}
+                  href={`eligibility#${input.key}`}
+                  text={tsln.resultsPage.edit}
+                  target="_self"
+                />
+              </div>
             </div>
           )
         })}
@@ -66,10 +68,15 @@ export const YourAnswers: React.VFC<{
         return String(Math.floor(Number(input.value)))
       case FieldType.DROPDOWN:
       case FieldType.DROPDOWN_SEARCHABLE:
-      case FieldType.RADIO:
         if ('values' in fieldData)
           return fieldData.values.find((value) => value.key === input.value)
             .text
+        throw new Error(`values not found for field: ${input.key}`)
+      case FieldType.RADIO:
+        if (fieldData.type === FieldType.RADIO && 'values' in fieldData) {
+          return fieldData.values.find((value) => value.key === input.value)
+            .shortText
+        }
         throw new Error(`values not found for field: ${input.key}`)
       default:
         throw new Error(`field type not supported in YourAnswers: ${fieldType}`)

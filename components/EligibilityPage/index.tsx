@@ -150,7 +150,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
-          <div className="pb-4">
+          <div className="pb-4" id={field.key}>
             {field.config.type === FieldType.DATE && (
               <MonthAndYear
                 name={field.key}
@@ -170,6 +170,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                   500
                 )}
                 value={field.value}
+                requiredText={tsln.required}
                 helpText={field.config.helpText}
               />
             )}
@@ -185,6 +186,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
                 helpText={field.config.helpText}
+                requiredText={tsln.required}
               />
             )}
             {field.config.type == FieldType.STRING && (
@@ -205,6 +207,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               <FormSelect
                 name={field.key}
                 field={field}
+                requiredText={tsln.required}
                 placeholder={getPlaceholderForSelect(field, tsln)}
                 customOnChange={(newValue: { value: string; label: string }) =>
                   handleOnChange(field, newValue.value)
@@ -219,8 +222,10 @@ export const EligibilityPage: React.VFC = ({}) => {
                 values={field.config.values}
                 keyforid={field.key}
                 label={field.config.label}
+                requiredText={tsln.required}
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
+                setValue={(val) => handleOnChange(field, val)}
               />
             )}
           </div>

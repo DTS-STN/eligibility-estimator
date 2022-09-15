@@ -75,25 +75,27 @@ const fr: Translations = {
       'Votre conjoint-a-til déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
   },
   questionShortText: {
-    [FieldKey.INCOME_AVAILABLE]: 'Âge',
-    [FieldKey.INCOME]: 'Report de la SV',
-    [FieldKey.AGE]: 'Âge de report de la SV',
-    [FieldKey.OAS_DEFER]: 'Revenu fourni',
-    [FieldKey.OAS_AGE]: 'Revenu net',
-    [FieldKey.MARITAL_STATUS]: 'Statut légal',
+    [FieldKey.INCOME_AVAILABLE]: 'Revenu fourni',
+    [FieldKey.INCOME]: 'Revenu net',
+    [FieldKey.AGE]: 'Âge',
+    [FieldKey.OAS_DEFER]: 'Report de la SV',
+    [FieldKey.OAS_AGE]: 'Âge de report de la SV',
+    [FieldKey.MARITAL_STATUS]: 'État civil',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
-    [FieldKey.LEGAL_STATUS]:
+    [FieldKey.LEGAL_STATUS]: 'Statut légal',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
       "A vécu à l'extérieur du Canada pendant plus de 6 mois",
-    [FieldKey.LIVED_OUTSIDE_CANADA]: "Années vécues à l'extérieur du Canada",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      "Années vécues à l'extérieur du Canada",
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
-    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: 'État civil',
-    [FieldKey.PARTNER_BENEFIT_STATUS]: 'Revenu du partenaire fourni',
-    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu net du partenaire',
-    [FieldKey.PARTNER_INCOME]: 'Prestations de vieillesse du partenaire',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Prestations de vieillesse du partenaire',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du partenaire fourni',
+    [FieldKey.PARTNER_INCOME]: 'Revenu net du partenaire',
     [FieldKey.PARTNER_AGE]: 'Âge du partenaire',
-    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Statut juridique du partenaire',
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Pays de résidence du partenaire',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du partenaire',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut juridique du partenaire',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -106,10 +108,8 @@ const fr: Translations = {
       'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
-    [FieldKey.AGE]:
-      'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
     [FieldKey.OAS_DEFER]:
-      'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',
+      '<div>Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</div><div>En savoir plus sur {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'Celui-ci doit être compris entre 65 et 70.',
     [FieldKey.INCOME]:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
@@ -121,114 +121,149 @@ const fr: Translations = {
       {
         key: true,
         text: 'Oui, je fournirai mes revenus',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non, je ne fournirai pas mes revenus pour le moment',
+        shortText: 'Non',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
       {
         key: true,
         text: 'Oui, je fournirai les revenus de mon partenaire',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
+        shortText: 'Non',
       },
     ],
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
         text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
+        shortText: 'Commencer à 65 ans',
       },
       {
         key: true,
         text: 'Je voudrais retarder le moment où je commencerai à recevoir la SV (paiements mensuels plus élevés)',
+        shortText: 'Retard',
       },
     ],
     [FieldKey.LEGAL_STATUS]: [
-      { key: LegalStatus.CANADIAN_CITIZEN, text: 'Citoyen canadien' },
+      {
+        key: LegalStatus.CANADIAN_CITIZEN,
+        text: 'Citoyen canadien',
+        shortText: 'Citoyen canadien',
+      },
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Résident permanent ou immigrant reçu (non parrainé)',
+        shortText: 'Résident permanent (non parrainé)',
       },
       {
         key: LegalStatus.SPONSORED,
         text: 'Résident permanent ou immigrant reçu (parrainé)',
+        shortText: 'Résident permanent (parrainé)',
       },
       {
         key: LegalStatus.INDIAN_STATUS,
         text: "Statut d'Indien ou carte de statut",
+        shortText: "Statut d'Indien",
       },
       {
         key: LegalStatus.OTHER,
         text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
+        shortText: 'Other',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "J'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Oui',
       },
     ],
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
         text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Non',
       },
       {
         key: true,
         text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        shortText: 'Oui',
       },
     ],
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
         text: 'Célibataire, divorcé(e), ou séparé(e)',
+        shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Marié(e) ou conjoint(e) de fait',
+        shortText: 'Marié(e) ou conjoint(e) de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
         text: 'Partenaire veuf(ve)',
+        shortText: 'Partenaire veuf(ve)',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
         text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
+        shortText: 'Conjoints vivants séparément',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
       {
         key: PartnerBenefitStatus.OAS,
         text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+        shortText: 'Oui',
       },
       {
         key: PartnerBenefitStatus.OAS_GIS,
         text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
+        shortText: 'Oui',
       },
       {
         key: PartnerBenefitStatus.ALW,
         text: "Mon conjoint reçoit l'Allocation",
+        shortText: 'Oui',
       },
-      { key: PartnerBenefitStatus.NONE, text: 'Aucune des réponses' },
-      { key: PartnerBenefitStatus.HELP_ME, text: 'Aidez-moi à trouver' },
+      {
+        key: PartnerBenefitStatus.NONE,
+        text: 'Aucune des réponses',
+        shortText: 'No prestations',
+      },
+      {
+        key: PartnerBenefitStatus.HELP_ME,
+        text: 'Aidez-moi à trouver',
+        shortText: 'Aidez-moi à trouver',
+      },
     ],
     [FieldKey.LIVING_COUNTRY]: livingCountry,
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: [
       {
         key: true,
         text: 'Oui',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non',
+        shortText: 'Non',
       },
     ],
   },
@@ -335,6 +370,7 @@ const fr: Translations = {
   links,
   incomeSingle: 'votre revenu',
   incomeCombined: 'le revenu combiné de vous et de votre partenaire',
+  opensNewWindow: 'ouvre une nouvelle fenêtre',
   yes: 'Oui',
   no: 'Non',
   year: 'an',

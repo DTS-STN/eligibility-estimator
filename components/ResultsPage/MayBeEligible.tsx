@@ -15,8 +15,8 @@ export const MayBeEligible: React.VFC<{
     <>
       <h2 id="eligible" className="h2 mt-8">
         <Image
-          src={isEligible ? '/eligible.png' : '/info.svg'}
-          alt={apiTrans.result.eligible}
+          src={isEligible ? '/green-check-mark.svg' : '/info.svg'}
+          alt=""
           width={30}
           height={30}
         />{' '}
