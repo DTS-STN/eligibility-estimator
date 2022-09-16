@@ -1,10 +1,10 @@
 import {
   EntitlementResultType,
-  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   ResultKey,
   ResultReason,
+  SummaryState,
 } from '../../../utils/api/definitions/enums'
 import { ResponseSuccess } from '../../../utils/api/definitions/types'
 import legalValues from '../../../utils/api/scrapers/output'
@@ -29,15 +29,13 @@ export function expectOasGisTooYoung(res: MockResponseObject<ResponseSuccess>) {
 export function expectOasGisUnavailable(
   res: MockResponseObject<ResponseSuccess>
 ) {
-  expect(res.body.summary.state).toEqual(EstimationSummaryState.UNAVAILABLE)
+  expect(res.body.summary.state).toEqual(SummaryState.UNAVAILABLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.UNAVAILABLE)
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.UNAVAILABLE)
 }
 
 export function expectAllIneligible(res: MockResponseObject<ResponseSuccess>) {
-  expect(res.body.summary.state).toEqual(
-    EstimationSummaryState.AVAILABLE_INELIGIBLE
-  )
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
@@ -49,9 +47,7 @@ export function expectOasEligible(
   oasType: EntitlementResultType = EntitlementResultType.FULL,
   entitlement?: number
 ) {
-  expect(res.body.summary.state).toEqual(
-    EstimationSummaryState.AVAILABLE_ELIGIBLE
-  )
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(res.body.results.oas.entitlement.type).toEqual(oasType)
@@ -65,9 +61,7 @@ export function expectGisEligible(
   res: MockResponseObject<ResponseSuccess>,
   entitlement?: number
 ) {
-  expect(res.body.summary.state).toEqual(
-    EstimationSummaryState.AVAILABLE_ELIGIBLE
-  )
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
@@ -78,9 +72,7 @@ export function expectAlwEligible(
   res: MockResponseObject<ResponseSuccess>,
   entitlement?: number
 ) {
-  expect(res.body.summary.state).toEqual(
-    EstimationSummaryState.AVAILABLE_ELIGIBLE
-  )
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
@@ -91,9 +83,7 @@ export function expectAfsEligible(
   res: MockResponseObject<ResponseSuccess>,
   entitlement?: number
 ) {
-  expect(res.body.summary.state).toEqual(
-    EstimationSummaryState.AVAILABLE_ELIGIBLE
-  )
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(res.body.results.afs.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
@@ -148,6 +138,12 @@ export const income10k = {
 
 export const age65NoDefer = {
   age: 65,
+  oasDefer: false,
+  oasAge: undefined,
+}
+
+export const age75NoDefer = {
+  age: 75,
   oasDefer: false,
   oasAge: undefined,
 }

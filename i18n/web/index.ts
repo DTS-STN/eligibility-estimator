@@ -1,8 +1,4 @@
-import {
-  Language,
-  Locale,
-  ValidationErrors,
-} from '../../utils/api/definitions/enums'
+import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
@@ -11,7 +7,6 @@ export const webDictionary = { [Language.EN]: en, [Language.FR]: fr }
 
 export type WebTranslations = {
   _language: Language
-  _locale: Locale
 
   // Pages
   eligibility: string
@@ -62,6 +57,9 @@ export type WebTranslations = {
   breadcrumb2Title: string
   breadcrumb2URL: string
   title: string
+  introPageTitle: string
+  questionPageTitle: string
+  resultPageTitle: string
   menuTitle: string
   clear: string
   back: string
@@ -90,6 +88,7 @@ export type WebTranslations = {
   socialLink4: string
   socialLink5: string
   youMayBeEligible: string
+  pageNotFound: string
 
   category: Translations['category']
 
@@ -104,9 +103,11 @@ export type WebTranslations = {
     youMayBeEligible: string
     youAreNotEligible: string
     basedOnYourInfoEligible: string
+    basedOnYourInfoAndIncomeEligible: string
     basedOnYourInfoNotEligible: string
     yourEstimatedTotal: string
     basedOnYourInfoTotal: string
+    basedOnYourInfoAndIncomeTotal: string
     nextSteps: string
     youMayNotBeEligible: string
     noAnswersFound: string
@@ -115,7 +116,6 @@ export type WebTranslations = {
     info: string
     note: string
     link: string
-    dollarSign: string
   }
   resultsQuestions: Translations['questionShortText']
   modifyAnswers: string

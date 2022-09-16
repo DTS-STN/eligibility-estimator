@@ -137,6 +137,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
   protected getEntitlement(): EntitlementResultGeneric {
     const autoEnrollment = this.getAutoEnrollment()
+    // client is not eligible, and it's not because income missing? they get nothing.
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
@@ -147,6 +148,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         autoEnrollment,
       }
 
+    // income is not provided, and they are eligible depending on income? entitlement unavailable.
     if (
       !this.input.income.provided &&
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
@@ -157,6 +159,19 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         autoEnrollment,
       }
 
+    // marital status is invSeparated? entitlement unavailable.
+    if (this.input.maritalStatus.invSeparated) {
+      this.eligibility.detail =
+        this.translations.detail.eligibleEntitlementUnavailable
+      return {
+        result: -1,
+        type: EntitlementResultType.UNAVAILABLE,
+        autoEnrollment,
+      }
+    }
+
+    // otherwise, let's do it!
+
     const formulaResult = new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
@@ -165,14 +180,28 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.oasResult
     ).getEntitlementAmount()
 
-    let type: EntitlementResultType
-    if (formulaResult === -1) type = EntitlementResultType.UNAVAILABLE
-    else if (formulaResult === 0) type = EntitlementResultType.NONE
-    else type = EntitlementResultType.FULL
+    if (formulaResult === -1)
+      throw new Error(
+        "EntitlementFormula returned -1, this shouldn't happen, if it does uncomment the handling below"
+      )
 
-    if (type === EntitlementResultType.UNAVAILABLE)
-      this.eligibility.detail =
-        this.translations.detail.eligibleEntitlementUnavailable
+    const type: EntitlementResultType =
+      // commenting this out temporarily, if it proves problematic let's bring it back
+      // formulaResult === -1
+      //   ? EntitlementResultType.UNAVAILABLE
+      //   :
+      formulaResult > 0
+        ? EntitlementResultType.FULL
+        : EntitlementResultType.NONE
+
+    // commenting this out temporarily, if it proves problematic let's bring it back
+    // /*
+    //  The Entitlement Formula may return -1 (unavailable) so even though we do
+    //  some unavailable handling above, we have this just in case
+    // */
+    // if (type === EntitlementResultType.UNAVAILABLE)
+    //   this.eligibility.detail =
+    //     this.translations.detail.eligibleEntitlementUnavailable
 
     return { result: formulaResult, type, autoEnrollment }
   }

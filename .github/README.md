@@ -45,7 +45,6 @@ However, while we removed the frontend's usage of the API, it is still fully fun
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/): UI framework
 - [React testing library](https://testing-library.com/docs/react-testing-library/intro/): React component testing
-- [Mobx state tree](https://mobx-state-tree.js.org/intro/welcome): React state management
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Jest](https://jestjs.io/): Unit testing
 - [Yarn](https://yarnpkg.com/): Package manager (note this is Yarn v2, and not the classic v1)
@@ -64,16 +63,16 @@ Top of a set of fields there is also the concept of child form fields. This is e
 
 #### Technology
 
-Because of React's form issues, `mobx-state-tree` and `mobx-react` were used to only re-render when necessary and to control the current state of user inputted data what component's are currently rendered on screen.
+~~Because of React's form issues, `mobx-state-tree` and `mobx-react` were used to only re-render when necessary and to control the current state of user inputted data what component's are currently rendered on screen.~~
 
-You may come across `observer` components, which will observe to the mobx data in the form and only re-render a component if it needs to instead of React's default re-rendering scheme where the parent and all children are automatically re-rendered.
+~~You may come across `observer` components, which will observe to the mobx data in the form and only re-render a component if it needs to instead of React's default re-rendering scheme where the parent and all children are automatically re-rendered.~~
 
 #### File Structure
 
 Below you'll find the file structure as it pertains to the front end.
 
 - `/pages` - Next.js pages, including the API. The structure here determines routing.
-- `/client-state` - state management lives here, all mobx tree node files
+- `/client-state` - state management lives here
 - `/components` - where all the react components live
 - `/public` - any asset or file that needs to be accessible by the application must go here
 - `/styles`
@@ -92,3 +91,7 @@ COABE depends on several pieces of occasionally-changing data from [Canada.ca](h
 Note that this is prone to breaking, for example if the scraped website changes its layout. In this case you would have to update the "selector" under `/utils/api/scrapers` to match the new layout, and run the script again.
 
 Unfortunately this scraping should not be fully automated due to the possibility of errors as mentioned above. Any updates require manual review to ensure the scraper is working as intended. That being said, manual review is pretty straightforward, if the numbers are way different or don't exist, there is a problem. Otherwise, it should work as expected.
+
+### Architectural Diagram
+
+![image](./coabe.png?raw=true 'COABE Diagram')

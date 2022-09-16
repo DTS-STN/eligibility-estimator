@@ -1,0 +1,22 @@
+# This workflow will add a comment to the PR with the development or dynamic site
+
+name: Comment environment in PR
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  comment_environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v3
+
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+
+        with:
+          message: 'Dynamic branch URL: https://eligibility-estimator-dyna-${{ github.head_ref }}.bdm-dev.dts-stn.com'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

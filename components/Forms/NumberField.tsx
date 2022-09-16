@@ -1,8 +1,5 @@
-import { observer } from 'mobx-react'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import { useTranslation } from '../Hooks'
-import { Tooltip } from '../Tooltip/tooltip'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface NumberFieldProps
@@ -10,6 +7,7 @@ export interface NumberFieldProps
   name: string
   label: string
   helpText?: string
+  requiredText?: string
   error?: string
 }
 
@@ -19,19 +17,16 @@ export interface NumberFieldProps
  * @param props {NumberFieldProps}
  * @returns
  */
-export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
-  const {
-    name,
-    label,
-    required,
-    value,
-    placeholder,
-    onChange,
-    helpText,
-    error,
-  } = props
-  const requiredText = useTranslation<string>('required')
-
+export const NumberField: React.VFC<NumberFieldProps> = ({
+  name,
+  label,
+  value,
+  placeholder,
+  onChange,
+  helpText,
+  requiredText,
+  error,
+}) => {
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
     // blur the input element on scroll instead of changing the value! Does not affect Keyboard input.
@@ -54,6 +49,9 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         >
           {label}
         </label>
+        <span>
+          <span className="ml-1">({requiredText})</span>
+        </span>
         {helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
             {helpText}
@@ -72,10 +70,10 @@ export const NumberField: React.VFC<NumberFieldProps> = observer((props) => {
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}
-        required={required}
+        required
         autoComplete="off"
         enterKeyHint="done"
       />
     </>
   )
-})
+}

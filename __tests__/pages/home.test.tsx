@@ -2,10 +2,10 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import React from 'react'
-import { StoreProvider } from '../../components/Contexts'
+import { axe, toHaveNoViolations } from 'jest-axe'
 import Home from '../../pages/index'
 
 describe('index page', () => {
@@ -23,13 +23,26 @@ describe('index page', () => {
   })
 
   it('should render the home page', async () => {
-    const ui = (
-      <StoreProvider>
-        <Home />
-      </StoreProvider>
-    )
+    const ui = <Home />
     render(ui)
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
+  })
+
+  jest.setTimeout(90 * 1000)
+  expect.extend(toHaveNoViolations)
+
+  it('has no a11y violations', async () => {
+    const { container } = render(<Home />)
+
+    //waitFor avoids getting the warning it must wrap in 'act'.
+
+    const results = await waitFor(() => {
+      axe(container)
+    })
+
+    await waitFor(() => {
+      expect(results).toHaveNoViolations
+    })
   })
 })

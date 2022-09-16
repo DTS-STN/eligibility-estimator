@@ -1,4 +1,4 @@
-import { KeyAndText } from '../../../i18n/api'
+import { KeyAndText, TypedKeyAndText } from '../../../i18n/api'
 import { FieldCategory } from './enums'
 
 export enum FieldKey {
@@ -31,6 +31,7 @@ export enum FieldType {
   DROPDOWN_SEARCHABLE = 'dropdownSearchable',
   RADIO = 'radio',
   STRING = 'string',
+  DATE = 'date',
 }
 
 // the order of fields here will define the order within the application
@@ -38,7 +39,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
+    type: FieldType.DATE,
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
@@ -115,7 +116,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
     category: { key: FieldCategory.MARITAL },
-    type: FieldType.NUMBER,
+    type: FieldType.DATE,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -153,14 +154,15 @@ export const fieldDefinitions: FieldDefinitions = {
   },
 }
 
-export type FieldData =
-  | FieldDataCurrency
-  | FieldDataNumber
-  | FieldDataRadio
-  | FieldDataDropdown
-  | FieldDataString
+export type FieldConfig =
+  | FieldConfigCurrency
+  | FieldConfigNumber
+  | FieldConfigRadio
+  | FieldConfigDropdown
+  | FieldConfigString
+  | FieldConfigDate
 
-interface FieldDataGeneric {
+interface FieldConfigGeneric {
   key: FieldKey
   relatedKey?: FieldKey // in case certain props should use those of another key when missing
   label?: string // applied via translator
@@ -171,33 +173,37 @@ interface FieldDataGeneric {
   }
 }
 
-interface FieldDataCurrency extends FieldDataGeneric {
+interface FieldConfigDate extends FieldConfigGeneric {
+  type: FieldType.DATE
+}
+
+interface FieldConfigCurrency extends FieldConfigGeneric {
   type: FieldType.CURRENCY
   placeholder?: string
 }
 
-interface FieldDataNumber extends FieldDataGeneric {
+interface FieldConfigNumber extends FieldConfigGeneric {
   type: FieldType.NUMBER
   placeholder?: string
 }
 
-interface FieldDataRadio extends FieldDataGeneric {
+interface FieldConfigRadio extends FieldConfigGeneric {
   type: FieldType.RADIO
-  values?: Array<KeyAndText> // applied via translator
-  default?: KeyAndText
+  values?: Array<TypedKeyAndText<string>> // applied via translator
+  default?: TypedKeyAndText<string>
 }
 
-export interface FieldDataDropdown extends FieldDataGeneric {
+export interface FieldConfigDropdown extends FieldConfigGeneric {
   type: FieldType.DROPDOWN | FieldType.DROPDOWN_SEARCHABLE
   values?: Array<KeyAndText> // applied via translator
   default?: KeyAndText
 }
 
-interface FieldDataString extends FieldDataGeneric {
+interface FieldConfigString extends FieldConfigGeneric {
   type: FieldType.STRING
   placeholder?: string
 }
 
 type FieldDefinitions = {
-  [x in FieldKey]: FieldData
+  [x in FieldKey]: FieldConfig
 }

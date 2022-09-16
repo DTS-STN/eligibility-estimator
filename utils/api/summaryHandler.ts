@@ -1,8 +1,8 @@
 import { Translations } from '../../i18n/api'
 import {
   EntitlementResultType,
-  EstimationSummaryState,
   ResultKey,
+  SummaryState,
 } from './definitions/enums'
 import { FieldKey } from './definitions/fields'
 import {
@@ -15,7 +15,7 @@ import {
 import legalValues from './scrapers/output'
 
 export class SummaryHandler {
-  private readonly state: EstimationSummaryState
+  private readonly state: SummaryState
   private readonly title: string
   private readonly details: string
   private readonly links: Link[]
@@ -44,37 +44,43 @@ export class SummaryHandler {
     }
   }
 
-  private getState(): EstimationSummaryState {
+  private getState(): SummaryState {
     if (this.detectNeedsInfo()) {
-      return EstimationSummaryState.MORE_INFO
+      return SummaryState.MORE_INFO
     } else if (this.detectUnavailable()) {
-      return EstimationSummaryState.UNAVAILABLE
+      return SummaryState.UNAVAILABLE
+    } else if (this.detectDepending()) {
+      return SummaryState.AVAILABLE_DEPENDING
     } else if (this.detectEligible()) {
-      return EstimationSummaryState.AVAILABLE_ELIGIBLE
+      return SummaryState.AVAILABLE_ELIGIBLE
     }
-    return EstimationSummaryState.AVAILABLE_INELIGIBLE
+    return SummaryState.AVAILABLE_INELIGIBLE
   }
 
   private getTitle() {
-    if (this.state === EstimationSummaryState.MORE_INFO)
-      return this.translations.summaryTitle.moreInfo
-    else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return this.translations.summaryTitle.unavailable
-    else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return this.translations.summaryTitle.availableEligible
-    else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return this.translations.summaryTitle.availableIneligible
+    if (this.state === SummaryState.MORE_INFO)
+      return this.translations.summaryTitle[SummaryState.MORE_INFO]
+    else if (this.state === SummaryState.UNAVAILABLE)
+      return this.translations.summaryTitle[SummaryState.UNAVAILABLE]
+    else if (this.state === SummaryState.AVAILABLE_ELIGIBLE)
+      return this.translations.summaryTitle[SummaryState.AVAILABLE_ELIGIBLE]
+    else if (this.state === SummaryState.AVAILABLE_INELIGIBLE)
+      return this.translations.summaryTitle[SummaryState.AVAILABLE_INELIGIBLE]
+    else if (this.state === SummaryState.AVAILABLE_DEPENDING)
+      return this.translations.summaryTitle[SummaryState.AVAILABLE_DEPENDING]
   }
 
   private getDetails() {
-    if (this.state === EstimationSummaryState.MORE_INFO)
-      return this.translations.summaryDetails.moreInfo
-    else if (this.state === EstimationSummaryState.UNAVAILABLE)
-      return this.translations.summaryDetails.unavailable
-    else if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
-      return this.translations.summaryDetails.availableEligible
-    else if (this.state === EstimationSummaryState.AVAILABLE_INELIGIBLE)
-      return this.translations.summaryDetails.availableIneligible
+    if (this.state === SummaryState.MORE_INFO)
+      return this.translations.summaryDetails[SummaryState.MORE_INFO]
+    else if (this.state === SummaryState.UNAVAILABLE)
+      return this.translations.summaryDetails[SummaryState.UNAVAILABLE]
+    else if (this.state === SummaryState.AVAILABLE_ELIGIBLE)
+      return this.translations.summaryDetails[SummaryState.AVAILABLE_ELIGIBLE]
+    else if (this.state === SummaryState.AVAILABLE_INELIGIBLE)
+      return this.translations.summaryDetails[SummaryState.AVAILABLE_INELIGIBLE]
+    else if (this.state === SummaryState.AVAILABLE_DEPENDING)
+      return this.translations.summaryDetails[SummaryState.AVAILABLE_DEPENDING]
   }
 
   private getLinks(): Link[] {
@@ -87,7 +93,7 @@ export class SummaryHandler {
     ]
 
     // payment overview links
-    if (this.state === EstimationSummaryState.AVAILABLE_ELIGIBLE)
+    if (this.state === SummaryState.AVAILABLE_ELIGIBLE)
       links.push(this.translations.links.paymentOverview)
     if (this.results.gis?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.gisEntitlement)
@@ -152,6 +158,10 @@ export class SummaryHandler {
     return this.getResultExistsInAnyBenefit(ResultKey.ELIGIBLE)
   }
 
+  detectDepending(): boolean {
+    return this.getResultExistsInAnyBenefit(ResultKey.INCOME_DEPENDENT)
+  }
+
   getResultExistsInAnyBenefit(expectedResult: ResultKey): boolean {
     const matchingItems = Object.keys(this.results).filter(
       (key) => this.results[key].eligibility.result === expectedResult
@@ -163,7 +173,10 @@ export class SummaryHandler {
     let sum = 0
     for (const resultsKey in this.results) {
       let result: BenefitResult = this.results[resultsKey]
-      if (result.entitlement.type != EntitlementResultType.UNAVAILABLE)
+      if (
+        result.entitlement.type != EntitlementResultType.UNAVAILABLE &&
+        result.entitlement.type != EntitlementResultType.NONE
+      )
         sum += result.entitlement.result
     }
     return sum

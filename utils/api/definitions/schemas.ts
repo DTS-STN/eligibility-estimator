@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
+import { AGREEMENT_COUNTRIES, ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import legalValues from '../scrapers/output'
 import {
   Language,
@@ -21,7 +21,7 @@ import {
  * - types.ts
  * - index.test.ts
  *
- * Note: Do not require fields here, do it in the benefit-specific schemas.
+ * Note: Do not require fields here, do it in the BenefitHandler. This should gladly accept an empty object.
  */
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean(),
@@ -29,24 +29,28 @@ export const RequestSchema = Joi.object({
     .precision(2)
     .min(0)
     .message(ValidationErrors.incomeBelowZero)
-    .less(legalValues.oas.incomeLimit)
+    .less(
+      Joi.ref('age', {
+        adjust: (age) =>
+          age >= 75
+            ? legalValues.oas.incomeLimit75
+            : legalValues.oas.incomeLimit,
+      })
+    )
     .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
-    .integer()
     .min(18)
     .message(ValidationErrors.ageUnder18)
     .max(150)
     .message(ValidationErrors.ageOver150),
   oasDefer: Joi.boolean(),
   oasAge: Joi.number()
-    .integer()
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)
     .message(ValidationErrors.oasAge65to70),
   maritalStatus: Joi.string()
     .valid(...Object.values(MaritalStatus))
-    .invalid(MaritalStatus.INV_SEPARATED)
     .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
@@ -57,8 +61,36 @@ export const RequestSchema = Joi.object({
   yearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
-  everLivedSocialCountry: Joi.boolean(),
+    .message(ValidationErrors.yearsInCanadaMinusAge)
+    /*
+     If they are currently living in a country with an agreement, then the
+     everLivedSocialCountry rules below will never apply, as we don't ask that
+     question if they currently live in a country with an agreement.
+     So, we apply the rule here in this case.
+    */
+    .when('livingCountry', {
+      is: Joi.string().valid(...Object.values(AGREEMENT_COUNTRIES)),
+      then: Joi.number()
+        .min(10) // sticking with the "easy" limit of 10, because the 20 only applies to OAS
+        .message(ValidationErrors.socialCountryUnavailable),
+    }),
+  everLivedSocialCountry: Joi.boolean()
+    // if they haven't lived in Canada long enough,
+    .when('yearsInCanadaSince18', {
+      not: Joi.number().min(10), // sticking with the "easy" limit of 10, because the 20 only applies to OAS
+      // then we'll stop them no matter what.
+      // if they put true, they should contact Service Canada.
+      // if they put false, we can confidently say they are not eligible for anything.
+      then: Joi.boolean().when('.', {
+        is: Joi.boolean().valid(true),
+        then: Joi.forbidden().messages({
+          'any.unknown': ValidationErrors.socialCountryUnavailable,
+        }),
+        otherwise: Joi.forbidden().messages({
+          'any.unknown': ValidationErrors.yearsInCanadaNotEnough,
+        }),
+      }),
+    }),
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
   ),
@@ -74,7 +106,6 @@ export const RequestSchema = Joi.object({
     )
     .message(ValidationErrors.partnerIncomeTooHigh),
   partnerAge: Joi.number()
-    .integer()
     .min(18)
     .message(ValidationErrors.partnerAgeUnder18)
     .max(150)

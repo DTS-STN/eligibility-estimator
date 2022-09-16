@@ -1,11 +1,11 @@
 import {
-  EstimationSummaryState,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
+  SummaryState,
 } from '../../../utils/api/definitions/enums'
 import legalValues from '../../../utils/api/scrapers/output'
 import {
@@ -52,7 +52,7 @@ describe('Help Me Find Out scenarios', () => {
       income: legalValues.gis.spouseNoOasIncomeLimit - 1,
     })
     expectOasGisEligible(res)
-    expect(res.body.results.gis.entitlement.result).toEqual(0.79) // table 3
+    expect(res.body.results.gis.entitlement.result).toEqual(0.72) // table 3
   })
   it(`works when client old, partner old (partner=partialOas, therefore gis income limit ${legalValues.gis.spouseOasIncomeLimit}, gis table 2)`, async () => {
     const input = {
@@ -84,7 +84,7 @@ describe('Help Me Find Out scenarios', () => {
       income: legalValues.gis.spouseOasIncomeLimit - 1,
     })
     expectOasGisEligible(res)
-    expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 2
+    expect(res.body.results.gis.entitlement.result).toEqual(0.82) // table 2
   })
   it(`works when client old, partner old (partner=fullOas, therefore gis income limit ${legalValues.gis.spouseOasIncomeLimit}, gis table 2)`, async () => {
     const input = {
@@ -116,7 +116,7 @@ describe('Help Me Find Out scenarios', () => {
       income: legalValues.gis.spouseOasIncomeLimit - 1,
     })
     expectOasGisEligible(res)
-    expect(res.body.results.gis.entitlement.result).toEqual(0.68) // table 2
+    expect(res.body.results.gis.entitlement.result).toEqual(0.82) // table 2
   })
   it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
     const input = {
@@ -140,7 +140,7 @@ describe('Help Me Find Out scenarios', () => {
     let res = await mockGetRequest(input)
     expectOasGisEligible(res)
 
-    expect(res.body.results.gis.entitlement.result).toEqual(223.79) // table 3
+    expect(res.body.results.gis.entitlement.result).toEqual(229.72) // table 3
   })
   it('works when client old, partner young (partner=allowance, therefore gis table 4)', async () => {
     const input = {
@@ -163,7 +163,7 @@ describe('Help Me Find Out scenarios', () => {
     }
     let res = await mockGetRequest(input)
     expectOasGisEligible(res)
-    expect(res.body.results.gis.entitlement.result).toEqual(224.11) // table 4
+    expect(res.body.results.gis.entitlement.result).toEqual(229.9) // table 4
   })
   it('works when client young, partner young (no one gets anything)', async () => {
     const input = {
@@ -184,9 +184,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_INELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
     expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -220,11 +218,9 @@ describe('Help Me Find Out scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_ELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
     expectOasGisTooYoung(res)
-    expectAlwEligible(res, 1231.87) // table 4
+    expectAlwEligible(res, 1266.36) // table 4
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -251,9 +247,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.summary.state).toEqual(
-      EstimationSummaryState.AVAILABLE_INELIGIBLE
-    )
+    expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
     expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE

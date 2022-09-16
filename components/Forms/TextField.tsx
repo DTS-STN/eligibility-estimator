@@ -1,6 +1,4 @@
-import { observer } from 'mobx-react'
 import { InputHTMLAttributes } from 'react'
-import { useTranslation } from '../Hooks'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface TextFieldProps
@@ -16,10 +14,14 @@ export interface TextFieldProps
  * @param props {TextFieldProps}
  * @returns
  */
-export const TextField: React.VFC<TextFieldProps> = observer((props) => {
-  const { name, label, required, value, placeholder, onChange, error } = props
-  const requiredText = useTranslation<string>('required')
-
+export const TextField: React.VFC<TextFieldProps> = ({
+  name,
+  label,
+  value,
+  placeholder,
+  onChange,
+  error,
+}) => {
   return (
     <>
       <div className="mb-2 5">
@@ -40,9 +42,9 @@ export const TextField: React.VFC<TextFieldProps> = observer((props) => {
         onChange={onChange}
         defaultValue={value}
         rows={2}
-        required={required}
+        required
         autoComplete="off"
       />
     </>
   )
-})
+}
