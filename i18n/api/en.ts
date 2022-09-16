@@ -168,7 +168,7 @@ const en: Translations = {
       },
       {
         key: LegalStatus.OTHER,
-        text: 'Other (for example, temporary resident, student, temporary worker)',
+        text: 'Other (for example, temporary resident, student, refugee or temporary worker)',
         shortText: 'Other',
       },
     ],
