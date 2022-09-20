@@ -293,6 +293,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             id="mainForm"
             cardsState={cardsValid}
             cards={generateCards()}
+            lang={language}
           />
         </div>
       }
