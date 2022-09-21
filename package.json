@@ -20,7 +20,7 @@
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@dts-stn/service-canada-design-system": "DTS-STN/Service-Canada-Design-System#96fd3c474285934324adbf7f21e2172b535a9bf3",
+    "@dts-stn/service-canada-design-system": "DTS-STN/Service-Canada-Design-System#785886bd07978066e990d6dc518b456837d159bd",
     "@tailwindcss/forms": "^0.5.0",
     "csv-writer": "^1.6.0",
     "joi": "^17.6.0",
