@@ -5,18 +5,24 @@ import React from 'react'
 import { Layout } from '../components/Layout'
 import { useTranslation } from '../components/Hooks'
 import { WebTranslations } from '../i18n/web'
+import Head from 'next/head'
 
-const Custom404: NextPage = () => {
+const Custom404: NextPage<{ adobeAnalyticsUrl: string }> = ({
+  adobeAnalyticsUrl,
+}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
 
   return (
     <>
+      <Head>{adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}</Head>
       <Layout title={tsln.pageNotFound}>
         <ErrorPage lang={router.locale} errType="404" isAuth={false} />
       </Layout>
     </>
   )
 }
+
+export async function getStaticProps() {}
 
 export default Custom404

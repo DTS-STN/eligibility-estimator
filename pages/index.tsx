@@ -27,7 +27,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Layout title={tsln.introPageTitle}>
+      <Layout title={tsln.introPageTitle} adobeAnalyticsUrl={'test.com'}>
         <div className="mt-18">
           <p
             className="mb-4 sm:w-[65%]"

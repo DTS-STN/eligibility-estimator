@@ -1,5 +1,5 @@
 import NextHead from 'next/head'
-// import Script from 'next/script'
+//import Script from 'next/script'
 
 export const Head: React.VFC<{ title: string }> = ({ title }) => {
   return (

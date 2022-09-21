@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       {/* the below line appears to crash the page - to investigate if it's even needed at all */}
       {/*<script type="text/javascript">_satellite.pageBottom()</script>*/}
       <Component {...pageProps} />
+      <p>test</p>
     </>
   )
 }
