@@ -48,7 +48,9 @@ export const Radio: React.VFC<InputProps> = ({
                 dangerouslySetInnerHTML={{ __html: label }}
               />
               <span>
-                <span className="ml-1">({requiredText})</span>
+                <span className="ml-1" aria-label={requiredText}>
+                  ({requiredText})
+                </span>
               </span>
             </label>
           </legend>

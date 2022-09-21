@@ -50,7 +50,9 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
           {label}
         </label>
         <span>
-          <span className="ml-1">({requiredText})</span>
+          <span className="ml-1" aria-label={requiredText}>
+            ({requiredText})
+          </span>
         </span>
         {helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
