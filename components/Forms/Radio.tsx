@@ -35,30 +35,28 @@ export const Radio: React.VFC<InputProps> = ({
   return (
     <div className="radio">
       <fieldset>
-        <div>
-          <legend>
-            <label
-              htmlFor={name}
-              aria-label={name}
-              data-testid="radio-label"
-              className="inline mb-2.5 flex-nowrap"
-            >
-              <span
-                className="mb-1.5 text-content font-bold question-link"
-                dangerouslySetInnerHTML={{ __html: label }}
-              />
-              <span>
-                <span className="ml-1">({requiredText})</span>
-              </span>
-            </label>
-          </legend>
-          {helpText && (
-            <div
-              className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
-              dangerouslySetInnerHTML={{ __html: helpText }}
+        <legend>
+          <label
+            htmlFor={name}
+            aria-label={name}
+            data-testid="radio-label"
+            className="inline mb-2.5 flex-nowrap"
+          >
+            <span
+              className="mb-1.5 text-content font-bold question-link"
+              dangerouslySetInnerHTML={{ __html: label }}
             />
-          )}
-        </div>
+            <span>
+              <span className="ml-1">({requiredText})</span>
+            </span>
+          </label>
+        </legend>
+        {helpText && (
+          <div
+            className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
+            dangerouslySetInnerHTML={{ __html: helpText }}
+          />
+        )}
 
         <Tooltip field={name} />
 
