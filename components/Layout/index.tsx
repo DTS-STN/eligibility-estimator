@@ -1,6 +1,6 @@
 import { Header, Heading } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
@@ -10,8 +10,7 @@ import { SCLabsTestHeader } from './ScTestHeader'
 export const Layout: React.VFC<{
   children: React.ReactNode
   title: string
-  adobeAnalyticsUrl: string
-}> = ({ children, title, adobeAnalyticsUrl }) => {
+}> = ({ children, title }) => {
   const router = useRouter()
   const oppositeLocale = router.locales.find((l) => l !== router.locale)
   const langToggleLink =
@@ -55,16 +54,9 @@ export const Layout: React.VFC<{
     },
   ]
 
-  useEffect(() => {
-    if (adobeAnalyticsUrl) {
-      window.adobeDataLayer = window.adobeDataLayer || []
-      window.adobeDataLayer.push({ event: 'pageLoad' })
-    }
-  }, [])
-
   return (
     <>
-      <Head title={title} adobeAnalyticsUrl="test....."></Head>
+      <Head title={title} />
       <SCLabsTestHeader />
 
       <main className="mainContent">

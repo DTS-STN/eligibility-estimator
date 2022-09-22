@@ -33,7 +33,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer = window.adobeDataLayer || []
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

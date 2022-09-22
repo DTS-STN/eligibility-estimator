@@ -13,6 +13,8 @@ import {
 import MainHandler from '../../utils/api/mainHandler'
 import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
+import { useEffect } from 'react'
+import Head from 'next/head'
 
 /*
  It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
@@ -26,7 +28,9 @@ const ResultsPage = dynamic(
   { ssr: false }
 )
 
-const Results: NextPage = (props) => {
+const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
+  adobeAnalyticsUrl,
+}) => {
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -38,19 +42,52 @@ const Results: NextPage = (props) => {
   const response: ResponseSuccess | ResponseError = mainHandler.results
   const tsln = useTranslation<WebTranslations>()
 
+  useEffect(() => {
+    if (adobeAnalyticsUrl) {
+      window.adobeDataLayer = window.adobeDataLayer || []
+      window.adobeDataLayer.push({ event: 'pageLoad' })
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <Layout title={tsln.resultPageTitle}>
-      {'results' in response ? (
-        <ResultsPage
-          inputs={inputHelper.asArray}
-          results={response.results}
-          summary={response.summary}
-        />
+    <>
+      <Head>
+        {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
+
+        {/* need to set up proper value
+        <meta name="dcterms.title" content="[insert value here]"/> 
+        <meta name="dcterms.language" content="[insert value here]"/> 
+        <meta name="dcterms.creator" content="[insert value here]"/>	
+        <meta name="dcterms.accessRights" content="[insert value here]"/> 
+        <meta name="dcterms.service" content="[insert value here]"/> 
+        */}
+      </Head>
+      <Layout title={tsln.resultPageTitle}>
+        {'results' in response ? (
+          <ResultsPage
+            inputs={inputHelper.asArray}
+            results={response.results}
+            summary={response.summary}
+          />
+        ) : (
+          <ErrorPage lang={language} errType="500" isAuth={false} />
+        )}
+      </Layout>
+      {adobeAnalyticsUrl ? (
+        <script type="text/javascript">_satellite.pageBottom()</script>
       ) : (
-        <ErrorPage lang={language} errType="500" isAuth={false} />
+        ''
       )}
-    </Layout>
+    </>
   )
+}
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,
+    },
+  }
 }
 
 export default Results
