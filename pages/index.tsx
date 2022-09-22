@@ -7,26 +7,47 @@ import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
 import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
+import Head from 'next/head'
 
-const Home: NextPage = () => {
+const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
+  adobeAnalyticsUrl,
+}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
 
-  useEffect(() => {
-    // only run on mount on the client
-    if (typeof window !== undefined) {
-      const win = window as Window &
-        typeof globalThis & { adobeDataLayer: any; _satellite: any }
-      const lang = tsln.langLong
-      const creator = tsln.creator
-      const title = lang + '-sc labs-eligibility estimator-home'
+  // useEffect(() => {
+  //   // only run on mount on the client
+  //   if (typeof window !== undefined) {
+  //     const win = window as Window &
+  //       typeof globalThis & { adobeDataLayer: any; _satellite: any }
+  //     const lang = tsln.langLong
+  //     const creator = tsln.creator
+  //     const title = lang + '-sc labs-eligibility estimator-home'
 
-      sendAnalyticsRequest(lang, title, creator, win)
+  //     sendAnalyticsRequest(lang, title, creator, win)
+  //   }
+  // })
+
+  useEffect(() => {
+    if (adobeAnalyticsUrl) {
+      window.adobeDataLayer = window.adobeDataLayer || []
+      window.adobeDataLayer.push({ event: 'pageLoad' })
     }
-  })
+  }, [])
 
   return (
     <>
+      <Head>
+        {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
+
+        {/* need to set up proper value
+      <meta name="dcterms.title" content="[insert value here]"/> 
+      <meta name="dcterms.language" content="[insert value here]"/> 
+      <meta name="dcterms.creator" content="[insert value here]"/>	
+      <meta name="dcterms.accessRights" content="[insert value here]"/> 
+      <meta name="dcterms.service" content="[insert value here]"/> 
+      */}
+      </Head>
       <Layout title={tsln.introPageTitle} adobeAnalyticsUrl={'test.com'}>
         <div className="mt-18">
           <p
@@ -148,8 +169,21 @@ const Home: NextPage = () => {
           </div>
         </div>
       </Layout>
+      {adobeAnalyticsUrl ? (
+        <script type="text/javascript">_satellite.pageBottom()</script>
+      ) : (
+        ''
+      )}
     </>
   )
+}
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,
+    },
+  }
 }
 
 export default Home
