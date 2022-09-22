@@ -48,7 +48,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <meta name="dcterms.service" content="[insert value here]"/> 
       */}
       </Head>
-      <Layout title={tsln.introPageTitle} adobeAnalyticsUrl={'test.com'}>
+      <Layout title={tsln.introPageTitle}>
         <div className="mt-18">
           <p
             className="mb-4 sm:w-[65%]"
