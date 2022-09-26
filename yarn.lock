@@ -434,9 +434,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dts-stn/service-canada-design-system@DTS-STN/Service-Canada-Design-System#f1b57aefc01a3e53ae1e1d0c2aeeda89f8f76808":
-  version: 1.50.0
-  resolution: "@dts-stn/service-canada-design-system@https://github.com/DTS-STN/Service-Canada-Design-System.git#commit=f1b57aefc01a3e53ae1e1d0c2aeeda89f8f76808"
+"@dts-stn/service-canada-design-system@DTS-STN/Service-Canada-Design-System#75e3041de58532f0d28ec414d52a39594da0136c":
+  version: 1.51.1
+  resolution: "@dts-stn/service-canada-design-system@https://github.com/DTS-STN/Service-Canada-Design-System.git#commit=75e3041de58532f0d28ec414d52a39594da0136c"
   dependencies:
     prop-types: ^15.7.2
     react: ^17.0.2
@@ -445,7 +445,7 @@ __metadata:
     react-full-screen: ^1.1.1
     react-player: ^2.10.1
     user: ^0.0.0
-  checksum: dc4dd7ac1b8e358784ad524054f5c9031874dcf8855113271bdb7a7a702e469627b1dafc10bb2603dc0cecebfd14879ba021cac750f77a0cf2d74b7dec0cb62e
+  checksum: afed764c9f8b2e9a502b4e82029e8df166f153bb101daa7ba5a5a898c588d695d271b9ec3c622f7419eb2951664d150337299ac2732f608f71e65d8f9a259047
   languageName: node
   linkType: hard
 
@@ -2659,7 +2659,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
-    "@dts-stn/service-canada-design-system": "DTS-STN/Service-Canada-Design-System#f1b57aefc01a3e53ae1e1d0c2aeeda89f8f76808"
+    "@dts-stn/service-canada-design-system": "DTS-STN/Service-Canada-Design-System#75e3041de58532f0d28ec414d52a39594da0136c"
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
