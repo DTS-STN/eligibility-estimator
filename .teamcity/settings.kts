@@ -272,7 +272,7 @@ object Build_Main: BuildType({
 })
 
 
-object Build_Performance: BuildType({
+object Build_Staging: BuildType({
     name = "Build_Staging"
     description = "Builds and deploys our main branch on update to staging url"
     params {
