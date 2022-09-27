@@ -139,6 +139,28 @@ const fr: WebTranslations = {
     info: 'info',
     note: 'remarque',
     link: 'lien',
+    yourAnswers: {
+      age: 'Modifier votre âge',
+      oasDefer:
+        'Modifier quand vous souhaitez commencer à recevoir la Sécurité de la vieillesse',
+      incomeAvailable: 'Modifier si vous fournissez votre revenu',
+      income: 'Modifier votre revenu net',
+      legalStatus: 'Modifier votre statut légal',
+      livingCountry: 'Modifier votre pays de résidence',
+      livedOutsideCanada:
+        'Modifier si vous avez vécu à l’extérieur du Canada pendant plus de 6 mois',
+      maritalStatus: 'Modifier votre état civil',
+      partnerIncomeAvailable:
+        'Modifier si vous fournissez les revenus de votre conjoint',
+      partnerIncome: 'Modifier le revenu net de votre conjoint',
+      partnerBenefitStatus:
+        'Modifier les prestations de vieillesse de votre conjoint',
+      partnerAge: "Modifier l'âge de votre conjoint",
+      partnerLegalStatus: 'Modifier le statut légal de votre conjoint',
+      partnerLivingCountry: 'Modifier le pays de résidence de votre conjoint',
+      partnerLivedOutsideCanada:
+        'Modifier si votre conjoint a vécu à l’extérieur du Canada pendant plus de 6 mois',
+    },
   },
   resultsQuestions: apiFr.questionShortText,
   modifyAnswers: 'Modifier vos réponses',
