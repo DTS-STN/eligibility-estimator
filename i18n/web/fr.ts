@@ -151,7 +151,7 @@ const fr: WebTranslations = {
         'Modifier si vous avez vécu à l’extérieur du Canada pendant plus de 6 mois',
       maritalStatus: 'Modifier votre état civil',
       partnerIncomeAvailable:
-        'Modifier si vous fournissez les revenus de votre conjoint',
+        'Modifier si vous fournissez le revenu de votre conjoint',
       partnerIncome: 'Modifier le revenu net de votre conjoint',
       partnerBenefitStatus:
         'Modifier les prestations de vieillesse de votre conjoint',
