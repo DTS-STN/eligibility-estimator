@@ -37,7 +37,7 @@ export const YourAnswers: React.VFC<{
                   href={`eligibility#${input.key}`}
                   text={tsln.resultsPage.edit}
                   target="_self"
-                  ariaLabel={tsln.resultsPage.yourAnswers[input.key]}
+                  ariaLabel={tsln.resultsQuestions[`${input.key}_edit`]}
                 />
               </div>
             </div>

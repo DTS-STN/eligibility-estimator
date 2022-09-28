@@ -8,7 +8,7 @@ import {
   ResultKey,
   SummaryState,
 } from '../../utils/api/definitions/enums'
-import { FieldKey } from '../../utils/api/definitions/fields'
+import { FieldKey, FieldEditKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/en'
 import { Translations } from './index'
 import { links } from './links/en'
@@ -94,6 +94,33 @@ const en: Translations = {
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: 'Years',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Partner lived in country with social agreement',
+    [FieldEditKey.AGE_EDIT]: 'Edit your age',
+    [FieldEditKey.OAS_DEFER_EDIT]:
+      'Edit when you would like to start receiving Old Age Security',
+    [FieldEditKey.INCOME_AVAILABLE_EDIT]:
+      'Edit if you will provide your income',
+    [FieldEditKey.INCOME_EDIT]: 'Edit your net income',
+    [FieldEditKey.LEGAL_STATUS_EDIT]: 'Edit your legal status',
+    [FieldEditKey.LIVING_COUNTRY_EDIT]: 'Edit your country of residence',
+    [FieldEditKey.LIVED_OUTSIDE_CANADA_EDIT]:
+      'Edit if you have lived outside Canada for longer than 6 months',
+    [FieldEditKey.YEARS_IN_CANADA_SINCE_18_EDIT]:
+      'Edit the years you have lived in Canada since 18',
+    [FieldEditKey.MARITAL_STATUS_EDIT]: 'Edit your marital status',
+    [FieldEditKey.PARTNER_INCOME_AVAILABLE_EDIT]:
+      "Edit if you will provide your partner's income",
+    [FieldEditKey.PARTNER_INCOME_EDIT]: "Edit your partner's net income",
+    [FieldEditKey.PARTNER_BENEFIT_STATUS_EDIT]:
+      "Edit your partner's old age benefits",
+    [FieldEditKey.PARTNER_AGE_EDIT]: "Edit your partner's age",
+    [FieldEditKey.PARTNER_LEGAL_STATUS_EDIT]:
+      "Edit your partner's legal status",
+    [FieldEditKey.PARTNER_LIVING_COUNTRY_EDIT]:
+      "Edit your partner's country of residence",
+    [FieldEditKey.PARTNER_LIVED_OUTSIDE_CANADA_EDIT]:
+      'Edit if your partner has lived outside Canada for longer than 6 months',
+    [FieldEditKey.PARTNER_YEARS_IN_CANADA_SINCE_18_EDIT]:
+      'Edit the years your partner have lived in Canada since 18',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:

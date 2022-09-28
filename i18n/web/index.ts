@@ -112,23 +112,6 @@ export type WebTranslations = {
     info: string
     note: string
     link: string
-    yourAnswers: {
-      age: string
-      income: string
-      incomeAvailable: string
-      legalStatus: string
-      livedOutsideCanada: string
-      livingCountry: string
-      maritalStatus: string
-      oasDefer: string
-      partnerAge: string
-      partnerBenefitStatus: string
-      partnerIncome: string
-      partnerIncomeAvailable: string
-      partnerLegalStatus: string
-      partnerLivedOutsideCanada: string
-      partnerLivingCountry: string
-    }
   }
 
   resultsQuestions: Translations['questionShortText']
