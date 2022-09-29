@@ -113,7 +113,9 @@ export type WebTranslations = {
     note: string
     link: string
   }
+
   resultsQuestions: Translations['questionShortText']
+  resultsEditAriaLabels: Translations['questionAriaLabel']
   modifyAnswers: string
   errors: {
     empty: string

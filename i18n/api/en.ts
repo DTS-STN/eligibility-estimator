@@ -95,6 +95,32 @@ const en: Translations = {
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Partner lived in country with social agreement',
   },
+  questionAriaLabel: {
+    [FieldKey.AGE]: 'Edit your age',
+    [FieldKey.OAS_DEFER]:
+      'Edit when you would like to start receiving Old Age Security',
+    [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
+    [FieldKey.INCOME]: 'Edit your net income',
+    [FieldKey.LEGAL_STATUS]: 'Edit your legal status',
+    [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
+      'Edit if you have lived outside Canada for longer than 6 months',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'Edit the years you have lived in Canada since 18',
+    [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
+      "Edit if you will provide your partner's income",
+    [FieldKey.PARTNER_INCOME]: "Edit your partner's net income",
+    [FieldKey.PARTNER_BENEFIT_STATUS]: "Edit your partner's old age benefits",
+    [FieldKey.PARTNER_AGE]: "Edit your partner's age",
+    [FieldKey.PARTNER_LEGAL_STATUS]: "Edit your partner's legal status",
+    [FieldKey.PARTNER_LIVING_COUNTRY]:
+      "Edit your partner's country of residence",
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
+      'Edit if your partner has lived outside Canada for longer than 6 months',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Edit the years your partner have lived in Canada since 18',
+  },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more helpful and accurate results.',

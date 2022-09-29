@@ -103,6 +103,34 @@ const fr: Translations = {
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Le partenaire vivait dans un pays avec un accord social',
   },
+  questionAriaLabel: {
+    [FieldKey.AGE]: 'Modifier votre âge',
+    [FieldKey.OAS_DEFER]:
+      'Modifier quand vous souhaitez commencer à recevoir la Sécurité de la vieillesse',
+    [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
+    [FieldKey.INCOME]: 'Modifier votre revenu net',
+    [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
+    [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
+      'Modifier si vous avez vécu à l’extérieur du Canada pendant plus de 6 mois',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'Modifiez les années où vous avez vécu au Canada depuis le 18',
+    [FieldKey.MARITAL_STATUS]: 'Modifier votre état civil',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
+      'Modifier si vous fournissez le revenu de votre conjoint',
+    [FieldKey.PARTNER_INCOME]: 'Modifier le revenu net de votre conjoint',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Modifier les prestations de vieillesse de votre conjoint',
+    [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
+    [FieldKey.PARTNER_LEGAL_STATUS]:
+      'Modifier le statut légal de votre conjoint',
+    [FieldKey.PARTNER_LIVING_COUNTRY]:
+      'Modifier le pays de résidence de votre conjoint',
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
+      'Modifier si votre conjoint a vécu à l’extérieur du Canada pendant plus de 6 mois',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Modifier les années pendant lesquelles votre partenaire a vécu au Canada depuis le 18',
+  },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
