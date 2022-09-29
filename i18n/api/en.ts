@@ -94,32 +94,31 @@ const en: Translations = {
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: 'Years',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Partner lived in country with social agreement',
-    [FieldEditKey.AGE_EDIT]: 'Edit your age',
-    [FieldEditKey.OAS_DEFER_EDIT]:
+  },
+  questionAriaLabel: {
+    [FieldKey.AGE]: 'Edit your age',
+    [FieldKey.OAS_DEFER]:
       'Edit when you would like to start receiving Old Age Security',
-    [FieldEditKey.INCOME_AVAILABLE_EDIT]:
-      'Edit if you will provide your income',
-    [FieldEditKey.INCOME_EDIT]: 'Edit your net income',
-    [FieldEditKey.LEGAL_STATUS_EDIT]: 'Edit your legal status',
-    [FieldEditKey.LIVING_COUNTRY_EDIT]: 'Edit your country of residence',
-    [FieldEditKey.LIVED_OUTSIDE_CANADA_EDIT]:
+    [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
+    [FieldKey.INCOME]: 'Edit your net income',
+    [FieldKey.LEGAL_STATUS]: 'Edit your legal status',
+    [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
       'Edit if you have lived outside Canada for longer than 6 months',
-    [FieldEditKey.YEARS_IN_CANADA_SINCE_18_EDIT]:
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Edit the years you have lived in Canada since 18',
-    [FieldEditKey.MARITAL_STATUS_EDIT]: 'Edit your marital status',
-    [FieldEditKey.PARTNER_INCOME_AVAILABLE_EDIT]:
+    [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Edit if you will provide your partner's income",
-    [FieldEditKey.PARTNER_INCOME_EDIT]: "Edit your partner's net income",
-    [FieldEditKey.PARTNER_BENEFIT_STATUS_EDIT]:
-      "Edit your partner's old age benefits",
-    [FieldEditKey.PARTNER_AGE_EDIT]: "Edit your partner's age",
-    [FieldEditKey.PARTNER_LEGAL_STATUS_EDIT]:
-      "Edit your partner's legal status",
-    [FieldEditKey.PARTNER_LIVING_COUNTRY_EDIT]:
+    [FieldKey.PARTNER_INCOME]: "Edit your partner's net income",
+    [FieldKey.PARTNER_BENEFIT_STATUS]: "Edit your partner's old age benefits",
+    [FieldKey.PARTNER_AGE]: "Edit your partner's age",
+    [FieldKey.PARTNER_LEGAL_STATUS]: "Edit your partner's legal status",
+    [FieldKey.PARTNER_LIVING_COUNTRY]:
       "Edit your partner's country of residence",
-    [FieldEditKey.PARTNER_LIVED_OUTSIDE_CANADA_EDIT]:
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       'Edit if your partner has lived outside Canada for longer than 6 months',
-    [FieldEditKey.PARTNER_YEARS_IN_CANADA_SINCE_18_EDIT]:
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Edit the years your partner have lived in Canada since 18',
   },
   questionHelp: {

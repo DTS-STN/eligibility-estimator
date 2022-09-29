@@ -102,33 +102,33 @@ const fr: Translations = {
       "Années du partenaire vécues à l'extérieur du Canada",
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Le partenaire vivait dans un pays avec un accord social',
-    [FieldEditKey.AGE_EDIT]: 'Modifier votre âge',
-    [FieldEditKey.OAS_DEFER_EDIT]:
+  },
+  questionAriaLabel: {
+    [FieldKey.AGE]: 'Modifier votre âge',
+    [FieldKey.OAS_DEFER]:
       'Modifier quand vous souhaitez commencer à recevoir la Sécurité de la vieillesse',
-    [FieldEditKey.INCOME_AVAILABLE_EDIT]:
-      'Modifier si vous fournissez votre revenu',
-    [FieldEditKey.INCOME_EDIT]: 'Modifier votre revenu net',
-    [FieldEditKey.LEGAL_STATUS_EDIT]: 'Modifier votre statut légal',
-    [FieldEditKey.LIVING_COUNTRY_EDIT]: 'Modifier votre pays de résidence',
-    [FieldEditKey.LIVED_OUTSIDE_CANADA_EDIT]:
+    [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
+    [FieldKey.INCOME]: 'Modifier votre revenu net',
+    [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
+    [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
+    [FieldKey.LIVED_OUTSIDE_CANADA]:
       'Modifier si vous avez vécu à l’extérieur du Canada pendant plus de 6 mois',
-    [FieldEditKey.YEARS_IN_CANADA_SINCE_18_EDIT]:
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Modifiez les années où vous avez vécu au Canada depuis le 18',
-    [FieldEditKey.MARITAL_STATUS_EDIT]: 'Modifier votre état civil',
-    [FieldEditKey.PARTNER_INCOME_AVAILABLE_EDIT]:
+    [FieldKey.MARITAL_STATUS]: 'Modifier votre état civil',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Modifier si vous fournissez le revenu de votre conjoint',
-    [FieldEditKey.PARTNER_INCOME_EDIT]:
-      'Modifier le revenu net de votre conjoint',
-    [FieldEditKey.PARTNER_BENEFIT_STATUS_EDIT]:
+    [FieldKey.PARTNER_INCOME]: 'Modifier le revenu net de votre conjoint',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Modifier les prestations de vieillesse de votre conjoint',
-    [FieldEditKey.PARTNER_AGE_EDIT]: "Modifier l'âge de votre conjoint",
-    [FieldEditKey.PARTNER_LEGAL_STATUS_EDIT]:
+    [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
+    [FieldKey.PARTNER_LEGAL_STATUS]:
       'Modifier le statut légal de votre conjoint',
-    [FieldEditKey.PARTNER_LIVING_COUNTRY_EDIT]:
+    [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Modifier le pays de résidence de votre conjoint',
-    [FieldEditKey.PARTNER_LIVED_OUTSIDE_CANADA_EDIT]:
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       'Modifier si votre conjoint a vécu à l’extérieur du Canada pendant plus de 6 mois',
-    [FieldEditKey.PARTNER_YEARS_IN_CANADA_SINCE_18_EDIT]:
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Modifier les années pendant lesquelles votre partenaire a vécu au Canada depuis le 18',
   },
   questionHelp: {

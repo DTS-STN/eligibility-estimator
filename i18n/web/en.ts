@@ -133,6 +133,7 @@ const en: WebTranslations = {
     link: 'link',
   },
   resultsQuestions: apiEn.questionShortText,
+  resultsEditAriaLabels: apiEn.questionAriaLabel,
   modifyAnswers: 'Modify answers',
   errors: {
     empty: 'This information is required',

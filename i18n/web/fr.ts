@@ -141,6 +141,7 @@ const fr: WebTranslations = {
     link: 'lien',
   },
   resultsQuestions: apiFr.questionShortText,
+  resultsEditAriaLabels: apiFr.questionAriaLabel,
   modifyAnswers: 'Modifier vos réponses',
   errors: {
     empty: 'Ce renseignement est requis',
