@@ -67,6 +67,7 @@ RUN adduser \
   $user
 
 ENV NODE_ENV=production
+ENV ADOBE_ANALYTICS_URL=$ADOBE_ANALYTICS_URL
 WORKDIR $home
 COPY --chown=55:$group . . 
 RUN yarn install --immutable
