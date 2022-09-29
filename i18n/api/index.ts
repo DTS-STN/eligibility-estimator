@@ -33,7 +33,8 @@ export interface Translations {
   category: { [key in FieldCategory]: string }
   result: { [key in ResultKey]: string }
   question: { [key in FieldKey]: string }
-  questionShortText: { [key in FieldKey]: string }
+  questionShortText: { [key in FieldKey]?: string }
+  questionAriaLabel: { [key in FieldKey]?: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]

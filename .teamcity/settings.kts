@@ -25,22 +25,22 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.2"
 
 project {
-    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance)
+    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorStaging)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
-    buildType(Build_Performance)
+    buildType(Build_Staging)
     buildType(Build_Main)
     buildType(Build_Develop)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
 }
 
-object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance : GitVcsRoot({
-    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_performance"
+object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorStaging : GitVcsRoot({
+    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_staging"
     url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/main"
-    branchSpec = "+:refs/heads/main"
+    branch = "refs/heads/develop"
+    branchSpec = "+:refs/heads/develop"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
@@ -272,9 +272,9 @@ object Build_Main: BuildType({
 })
 
 
-object Build_Performance: BuildType({
-    name = "Build_Performance"
-    description = "Builds and deploys our main branch on update to perf url"
+object Build_Staging: BuildType({
+    name = "Build_Staging"
+    description = "Builds and deploys our main branch on update to staging url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "eligibility-estimator")
@@ -283,10 +283,10 @@ object Build_Performance: BuildType({
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
-        param("env.BRANCH", "perf")
+        param("env.BRANCH", "staging")
     }
     vcs {
-        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorPerformance)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorStaging)
     }
     
     steps {
