@@ -54,13 +54,14 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
-        {/* need to set up proper value
-        <meta name="dcterms.title" content="[insert value here]"/> 
-        <meta name="dcterms.language" content="[insert value here]"/> 
-        <meta name="dcterms.creator" content="[insert value here]"/>	
-        <meta name="dcterms.accessRights" content="[insert value here]"/> 
-        <meta name="dcterms.service" content="[insert value here]"/> 
-        */}
+        <meta name="dcterms.title" content={tsln.resultPageTitle} />
+        <meta name="dcterms.language" content={language} />
+        <meta
+          name="dcterms.creator"
+          content="Employment and Social Development Canada/Emploi et Développement social Canada"
+        />
+        <meta name="dcterms.accessRights" content="2" />
+        <meta name="dcterms.service" content="ESDC-EDSC_DC-CD" />
       </Head>
       <Layout title={tsln.resultPageTitle}>
         {'results' in response ? (

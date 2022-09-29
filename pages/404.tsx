@@ -24,8 +24,10 @@ const Custom404: NextPage<{ adobeAnalyticsUrl: string }> = ({
     <>
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
-
-        <meta name="dcterms.title" content={document.title} />
+        <meta
+          name="dcterms.title"
+          content={`${tsln.introPageTitle} - ${tsln.pageNotFound}`}
+        />
         <meta name="dcterms.language" content={router.locale} />
         <meta
           name="dcterms.creator"
