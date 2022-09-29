@@ -58,6 +58,8 @@ RUN apk add --no-cache bash
 ARG user=joker
 ARG home=/home/node
 ARG group=thejokers
+ARG ADOBE_ANALYTICS_URL
+
 RUN addgroup -S $group
 RUN adduser \
   --disabled-password \
