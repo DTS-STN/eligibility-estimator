@@ -24,27 +24,6 @@ export enum FieldKey {
   PARTNER_EVER_LIVED_SOCIAL_COUNTRY = 'partnerEverLivedSocialCountry',
 }
 
-export enum FieldEditKey {
-  INCOME_AVAILABLE_EDIT = 'incomeAvailable_edit',
-  INCOME_EDIT = 'income_edit',
-  AGE_EDIT = 'age_edit',
-  OAS_DEFER_EDIT = 'oasDefer_edit',
-  OAS_AGE_EDIT = 'oasAge_edit',
-  MARITAL_STATUS_EDIT = 'maritalStatus_edit',
-  LIVING_COUNTRY_EDIT = 'livingCountry_edit',
-  LEGAL_STATUS_EDIT = 'legalStatus_edit',
-  LIVED_OUTSIDE_CANADA_EDIT = 'livedOutsideCanada_edit',
-  YEARS_IN_CANADA_SINCE_18_EDIT = 'yearsInCanadaSince18_edit',
-  PARTNER_BENEFIT_STATUS_EDIT = 'partnerBenefitStatus_edit',
-  PARTNER_INCOME_AVAILABLE_EDIT = 'partnerIncomeAvailable_edit',
-  PARTNER_INCOME_EDIT = 'partnerIncome_edit',
-  PARTNER_AGE_EDIT = 'partnerAge_edit',
-  PARTNER_LIVING_COUNTRY_EDIT = 'partnerLivingCountry_edit',
-  PARTNER_LEGAL_STATUS_EDIT = 'partnerLegalStatus_edit',
-  PARTNER_LIVED_OUTSIDE_CANADA_EDIT = 'partnerLivedOutsideCanada_edit',
-  PARTNER_YEARS_IN_CANADA_SINCE_18_EDIT = 'partnerYearsInCanadaSince18_edit',
-}
-
 export enum FieldType {
   NUMBER = 'number',
   CURRENCY = 'currency',

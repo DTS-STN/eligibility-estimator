@@ -10,7 +10,7 @@ import {
   ResultKey,
   SummaryState,
 } from '../../utils/api/definitions/enums'
-import { FieldKey, FieldEditKey } from '../../utils/api/definitions/fields'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import { livingCountry } from './countries/fr'
 import { Translations } from './index'
 import { links } from './links/fr'

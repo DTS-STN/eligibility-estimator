@@ -9,7 +9,7 @@ import {
   ResultKey,
   SummaryState,
 } from '../../utils/api/definitions/enums'
-import { FieldKey, FieldEditKey } from '../../utils/api/definitions/fields'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import en from './en'
 import fr from './fr'
 import { LinkDefinitions } from './links'
