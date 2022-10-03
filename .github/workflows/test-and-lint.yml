@@ -27,6 +27,8 @@ jobs:
 
       - name: Build
         run: yarn run build
+        env:
+          ADOBE_ANALYTICS_URL: ${{ secrets.ADOBE_ANALYTICS_URL }}
 
       - name: Lint
         run: yarn run lint
