@@ -49,10 +49,6 @@ const Custom404: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }
 
 export const getStaticProps = async () => {
-  console.log(
-    'process.env.ADOBE_ANALYTICS_URL',
-    process.env.ADOBE_ANALYTICS_URL
-  )
   return {
     props: {
       adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,
