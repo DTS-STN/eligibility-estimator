@@ -180,6 +180,12 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }
 
 export const getStaticProps = async () => {
+  console.log(
+    'process.env.ADOBE_ANALYTICS_URL',
+    process.env.ADOBE_ANALYTICS_URL
+      ? process.env.ADOBE_ANALYTICS_URL.substring(0, 27)
+      : 'not loaded'
+  )
   return {
     props: {
       adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,

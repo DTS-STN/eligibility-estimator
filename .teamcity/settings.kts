@@ -93,6 +93,7 @@ object Build_Develop: BuildType({
         param("env.PROJECT", "eligibility-estimator")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
+        param("env.ADOBE_ANALYTICS_URL", "%env.ADOBE_ANALYTICS_URL%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
