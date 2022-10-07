@@ -105,7 +105,7 @@ const fr: WebTranslations = {
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
   pageNotFound: 'Page non trouvée',
-
+  warningText: 'avertissement',
   category: apiFr.category,
 
   resultsPage: {

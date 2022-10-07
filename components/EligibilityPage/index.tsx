@@ -234,7 +234,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               <Message
                 id={field.key}
                 alert_icon_id={field.key}
-                alert_icon_alt_text="warning icon"
+                alert_icon_alt_text={tsln.warningText}
                 type="warning"
                 message_heading={tsln.unableToProceed}
                 message_body={field.error}
