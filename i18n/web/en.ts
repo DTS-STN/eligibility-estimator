@@ -100,6 +100,7 @@ const en: WebTranslations = {
   socialLink4: 'Terms and conditions',
   socialLink5: 'Privacy',
   pageNotFound: 'Page not found',
+  warningText: 'warning',
   category: apiEn.category,
 
   resultsPage: {
