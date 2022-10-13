@@ -328,7 +328,9 @@ object Build_Staging: BuildType({
     }
     triggers {
         vcs {
-            branchFilter = "+:*"
+            branchFilter = "
+                    +:staging
+                    -:refs/heads/staging"
         }
     }
 })
