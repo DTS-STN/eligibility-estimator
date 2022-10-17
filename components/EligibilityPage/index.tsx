@@ -288,7 +288,11 @@ export const EligibilityPage: React.VFC = ({}) => {
   return (
     <>
       {
-        <div className="md:w-2/3">
+        <div
+          className="md:w-2/3"
+          data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
+          data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
+        >
           <AccordionForm
             id="mainForm"
             cardsState={cardsValid}
