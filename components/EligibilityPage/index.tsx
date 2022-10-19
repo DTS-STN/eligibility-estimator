@@ -71,6 +71,15 @@ export const EligibilityPage: React.VFC = ({}) => {
       'data-gc-analytics-collect',
       '[{"value":"input,select","emptyField":"N/A"}]'
     )
+
+    const button = document.querySelector(
+      '#mainForm > fieldset#step5 > div > div.cardContent > div > button'
+    )
+    console.log('button', button)
+
+    if (button) {
+      button.setAttribute('type', 'submit')
+    }
   }, [])
 
   form.update(inputHelper)
