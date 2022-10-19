@@ -76,7 +76,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     const button = document.querySelector(
       '#mainForm > fieldset#step5 > div > div.cardContent > div > button'
     )
-    console.log('button', button)
 
     if (button) {
       button.setAttribute('type', 'submit')
