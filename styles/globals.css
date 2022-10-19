@@ -22,6 +22,10 @@
     @apply text-base;
   }
 
+  #mainForm button {
+    background-color: theme('colors.button-background');
+  }
+
   .btn {
     @apply py-1.5 px-3 min-h-9 min-w-9 font-normal text-base text-center whitespace-nowrap align-middle cursor-pointer border-[1px] border-solid rounded;
     border-style: outset;

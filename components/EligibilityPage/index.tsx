@@ -1,7 +1,7 @@
 import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
@@ -59,6 +59,28 @@ export const EligibilityPage: React.VFC = ({}) => {
       }
     })
   }, [isMobile])
+
+  useEffect(() => {
+    const el = document.getElementById('mainForm')
+    if (el) {
+      el.setAttribute(
+        'data-gc-analytics-formname',
+        'ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form'
+      )
+      el.setAttribute(
+        'data-gc-analytics-collect',
+        '[{"value":"input,select","emptyField":"N/A"}]'
+      )
+    }
+
+    const button = document.querySelector(
+      '#mainForm > fieldset#step5 > div > div.cardContent > div > button'
+    )
+
+    if (button) {
+      button.setAttribute('type', 'submit')
+    }
+  }, [])
 
   form.update(inputHelper)
 
@@ -288,7 +310,11 @@ export const EligibilityPage: React.VFC = ({}) => {
   return (
     <>
       {
-        <div className="md:w-2/3">
+        <div
+          className="md:w-2/3"
+          data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
+          data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
+        >
           <AccordionForm
             id="mainForm"
             cardsState={cardsValid}
