@@ -139,10 +139,6 @@ object Build_Develop: BuildType({
             """.trimIndent()
         }
     }
-    triggers {
-        vcs {
-        }
-    }
 })
 
 
