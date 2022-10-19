@@ -83,6 +83,9 @@ module.exports = {
       'header-rule': '#AF3C43',
 
       'emphasis': '#edf9ff',
+
+      //button background color
+      'button-background': '#26374a',
     },
     extend: {
       fontFamily: {
