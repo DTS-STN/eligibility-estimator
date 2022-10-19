@@ -116,6 +116,29 @@
     box-shadow: 0px 0px 0px 2px white inset;
   }
 
+  input[type='radio'] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0 1rem 0 0;
+    font: inherit;
+    color: #999;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #000;
+    border-radius: 50%;
+  }
+
+  input[type='radio']:checked {
+    background-image: none;
+    background-color: #6f6f6f !important;
+    box-shadow: 0px 0px 0px 3px white inset;
+    border: 1px solid #000;
+  }
+
+  input[type='radio']:focus {
+    box-shadow: 0px 0px 0px 2px #2563eb, 0px 0px 0px 3px white inset;
+  }
+
   .rselect input {
     box-shadow: none !important;
   }

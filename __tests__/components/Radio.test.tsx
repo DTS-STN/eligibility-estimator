@@ -57,7 +57,6 @@ describe('Radio component', () => {
       expect(field).toBeInTheDocument()
       expect(field.tagName).toBe('INPUT')
       expect(field).toBeDefined()
-      expect(field).toBeRequired()
       expect(field.value).toEqual(props.values[index].key)
     }
   })
@@ -99,7 +98,6 @@ describe('Radio component', () => {
       expect(field).toBeInTheDocument()
       expect(field.tagName).toBe('INPUT')
       expect(field).toBeDefined()
-      expect(field).toBeRequired()
       expect(field.value).toEqual(props.values[index].key)
     }
 

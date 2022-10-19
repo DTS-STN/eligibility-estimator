@@ -72,20 +72,15 @@ export const Radio: React.VFC<InputProps> = ({
               data-testid="radio"
               id={`${keyforid}-${index}`}
               name={`${keyforid}`}
-              className="hidden -ml-4"
               value={val.key}
               onChange={onChange}
-              required
               checked={checkedValue === correctForBooleans(val.key)}
             />
             <label
               htmlFor={`${keyforid}-${index}`}
-              className="radio flex items-center focus:inherit"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && setValue(val.key)}
+              className="flex items-center focus:inherit text-content"
             >
-              <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white" />
-              <p className="text-content ">{val.text}</p>
+              {val.text}
             </label>
           </div>
         ))}
