@@ -139,11 +139,6 @@ object Build_Develop: BuildType({
             """.trimIndent()
         }
     }
-    triggers {
-        vcs {
-            branchFilter = "+:*"
-        }
-    }
 })
 
 
@@ -328,9 +323,10 @@ object Build_Staging: BuildType({
     }
     triggers {
         vcs {
-            branchFilter = "
-                    +:staging
-                    -:refs/heads/staging"
+            branchFilter = """
+                    +:develop
+                    -:refs/heads/develop
+                    """.trimIndent()
         }
     }
 })
