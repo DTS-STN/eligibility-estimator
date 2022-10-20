@@ -33,7 +33,7 @@ const en: WebTranslations = {
   faq: 'Frequently Asked Questions',
   nextStep: 'Next step',
   getEstimate: 'Estimate my benefits',
-  required: 'required',
+  required: '(required)',
   homePageP1:
     'Use this estimator to find out how much money you could get from old age benefit programs. You can enter your current information, or you can enter future information for planning purposes.',
   homePageHeader1: 'Who these benefits are for',

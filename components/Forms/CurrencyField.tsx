@@ -57,10 +57,8 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           className="text-content font-bold inline"
         >
           {label}
+          <span className="ml-2 font-medium">{requiredText}</span>
         </label>
-        <span>
-          <span className="ml-1">({requiredText})</span>
-        </span>
         {helpText && (
           <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
             {helpText}
