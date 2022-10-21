@@ -56,10 +56,8 @@ export const FormSelect: React.VFC<SelectProps> = ({
           <span className="mb-1.5 font-bold text-content">
             {field.config.label}
           </span>
+          <span className="ml-2 font-medium">{requiredText}</span>
         </label>
-        <span>
-          <span className="ml-1">({requiredText})</span>
-        </span>
       </div>
       <div className="w-full md:w-80">
         <Select
