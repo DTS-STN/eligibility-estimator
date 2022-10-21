@@ -79,6 +79,7 @@ export const EligibilityPage: React.VFC = ({}) => {
 
     if (button) {
       button.setAttribute('type', 'submit')
+      button.setAttribute('data-gc-analytics-formsubmit', 'submit')
     }
   }, [])
 
