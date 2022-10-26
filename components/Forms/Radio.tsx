@@ -76,7 +76,7 @@ export const Radio: React.VFC<InputProps> = ({
             />
             <label
               htmlFor={`${keyforid}-${index}`}
-              className="flex items-center focus:inherit text-content"
+              className="flex items-center focus:inherit text-content hover:cursor-pointer"
             >
               {val.text}
             </label>
