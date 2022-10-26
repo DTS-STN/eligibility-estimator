@@ -84,9 +84,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.headerWhatToKnow}
           </h2>
-          <p className="mt-3 mb-8 font-bold sm:w-[65%]">
-            {tsln.pleaseNodeText}
-          </p>
           <p className="">{tsln.estimatorIncludeQuestionText}</p>
           <ul
             id="information-list"
@@ -101,7 +98,9 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             <li dangerouslySetInnerHTML={{ __html: tsln.maritalStatusText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
           </ul>
-
+          <p className="xs:mt-0 sm:mt-8 xs:pr-3 w-full sm:w-[73%]">
+            {tsln.youNeedEndingText}
+          </p>
           <h2 className="text-xs sm:h2 mt-8 sm:mt-12 mb-2">
             {tsln.timeToCompleteText}
           </h2>

@@ -45,20 +45,21 @@ const fr: WebTranslations = {
     'Vous pourriez être admisible aux prestations de vieillesse si : ',
   atLeast60: 'vous avez au moins 60 ans',
   haveNetIncomeLess: 'votre revenu net est moins de 133 141 $ CAD',
-  headerWhatToKnow: 'Ce que vous devez savoir avant de commencer',
+  headerWhatToKnow: 'Ce dont vous aurez besoin',
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
   ageText: '<b>âge</b>',
-  netIncomeText:
-    '<b>revenu net</b> (ligne 23600 de votre déclaration de revenus)',
+  netIncomeText: '<b>revenu net</b>',
   legalStatusText:
     "<b>statut légal</b> (par exemple, citoyen canadien, statut d'Indien ou résident permanent)",
   residenceHistoryText:
     '<b>historique de résidence</b> (depuis combien de temps vous vivez au Canada)',
   maritalStatusText: '<b>état civil</b>',
-  partnerText: `le cas échéant, les revenus de <b>votre partenaire</b> (y compris ses prestations de vieillesse), son statut légal et son historique de résidence`,
+  partnerText:
+    'partenaire (revenu, statut légal et historique de résidence), le cas échéant',
+  youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:

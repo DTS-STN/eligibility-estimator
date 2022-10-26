@@ -19,6 +19,7 @@ export type WebTranslations = {
   residenceHistoryText: string
   maritalStatusText: string
   partnerText: string
+  youNeedEndingText: string
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string

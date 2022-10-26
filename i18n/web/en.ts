@@ -40,19 +40,20 @@ const en: WebTranslations = {
   youMayBeEligible: 'You may be eligible for old age benefits if you are:',
   atLeast60: 'at least 60 years old',
   haveNetIncomeLess: 'have a net income less than $133,141 CAD',
-  headerWhatToKnow: 'What to know before you begin',
+  headerWhatToKnow: "What you'll need",
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
   estimatorIncludeQuestionText: "You'll need information about your:",
   ageText: '<b>age</b>',
-  netIncomeText:
-    '<b>net income</b> (you can find this on line 23600 of your income tax return)',
+  netIncomeText: '<b>net income</b>',
   legalStatusText:
     '<b>legal status</b> (such as Canadian citizen, Indian Status, or permanent resident)',
   residenceHistoryText:
     '<b>residence history</b> (number of years lived in Canada)',
   maritalStatusText: '<b>marital status</b>',
-  partnerText: `if applicable, <b>your partner's</b> income (including their old age benefits), legal status, and residence history`,
+  partnerText: `<b>partner</b> (income, legal status, and residence history), if applicable`,
+  youNeedEndingText:
+    'You can enter your current information, or future information for planning purposes.',
   timeToCompleteText: 'Time to complete',
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate:
