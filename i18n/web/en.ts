@@ -37,9 +37,9 @@ const en: WebTranslations = {
   homePageP1:
     'Use this estimator to find out how much money you could get from old age benefit programs. You can enter your current information, or you can enter future information for planning purposes.',
   homePageHeader1: 'Who these benefits are for',
-  youMayBeEligible: 'You may be eligible for old age benefits if you are:',
-  atLeast60: 'at least 60 years old',
-  haveNetIncomeLess: 'have a net income less than $133,141 CAD',
+  youMayBeEligible: 'You may be eligible for old age benefits if:',
+  atLeast60: 'you are at least 60 years old',
+  haveNetIncomeLess: 'your net income is less than $133,141',
   headerWhatToKnow: 'What to know before you begin',
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
