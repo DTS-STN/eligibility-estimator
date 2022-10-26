@@ -42,10 +42,10 @@ const fr: WebTranslations = {
     "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
   youMayBeEligible:
-    'Vous pourriez être admisible aux prestations de vieillesse si : ',
+    'Vous pourriez être admissible aux prestations de vieillesse si : ',
   atLeast60: 'vous avez au moins 60 ans',
-  haveNetIncomeLess: 'votre revenu net est moins de 133 141 $ CAD',
   headerWhatToKnow: 'Ce dont vous aurez besoin',
+  haveNetIncomeLess: 'votre revenu net est moins de 133 141 $',
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
