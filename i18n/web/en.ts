@@ -40,14 +40,14 @@ const en: WebTranslations = {
   youMayBeEligible: 'You may be eligible for old age benefits if:',
   atLeast60: 'you are at least 60 years old',
   haveNetIncomeLess: 'your net income is less than $133,141',
-  headerWhatToKnow: 'What to know before you begin',
+  headerWhatToKnow: "What you'll need",
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
   estimatorIncludeQuestionText: "You'll need information about your:",
   ageText: '<b>age</b>',
   netIncomeText: '<b>net income</b>',
   legalStatusText:
-    '<b>legal status</b> (such as Canadian citizen, Indian Status, or permanent resident)',
+    '<b>legal status</b> (such as Canadian citizen, Indian Status, refugee or permanent resident)',
   residenceHistoryText:
     '<b>residence history</b> (number of years lived in Canada)',
   maritalStatusText: '<b>marital status</b>',
