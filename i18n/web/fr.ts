@@ -79,8 +79,8 @@ const fr: WebTranslations = {
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
-  aboutResultText: 'À propos des estimations',
-  resultDefinition: `Les estimations ne sont pas des décisions finales. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada.</a> Les estimations ne doivent pas être considérées comme des conseils financiers.`,
+  aboutResultText: 'À propos des résultats',
+  resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada.</a>`,
   privacyHeading: 'Confidentialité',
   privacyDefinition: `Vos renseignements sont confidentiels. Les renseignements personnels que vous fournissez sont régis conformément à la <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html" target="_blank">Loi sur la protection des renseignements personnels.</a> L'Estimateur de prestations de vieillesse canadiennes ne recueille et ne transmet aucun renseignement pouvant vous identifer. Vos estimations anonymes peuvent être utilisées pour des fins de recherche.`,
   homePageP3:
