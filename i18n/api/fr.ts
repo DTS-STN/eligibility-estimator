@@ -43,8 +43,9 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    [FieldKey.AGE]: 'Quel mois et quelle année êtes-vous né?',
-    [FieldKey.OAS_DEFER]: 'Quand souhaitez-vous commencer à recevoir la SV?',
+    [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.OAS_DEFER]:
+      'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.OAS_AGE]: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
@@ -137,8 +138,8 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.OAS_DEFER]:
-      '<div>Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</div><div>En savoir plus sur {LINK_OAS_DEFER_INLINE}.</div>',
-    [FieldKey.OAS_AGE]: 'Celui-ci doit être compris entre 65 et 70.',
+      '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
+    [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.INCOME]:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
@@ -172,12 +173,12 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
+        text: 'Je voudrais commencer à 65 ans (le plus commun)',
         shortText: 'Commencer à 65 ans',
       },
       {
         key: true,
-        text: 'Je voudrais retarder le moment où je commencerai à recevoir la SV (paiements mensuels plus élevés)',
+        text: 'Je voudrais retarder mon premier paiement (montants plus élevés)',
         shortText: 'Retard',
       },
     ],

@@ -140,7 +140,7 @@ export const links: LinkDefinitions = {
     order: -1,
   },
   oasDeferInline: {
-    text: 'OAS Deferral',
+    text: 'Learn more about OAS pension deferral',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
     order: -1,
   },
