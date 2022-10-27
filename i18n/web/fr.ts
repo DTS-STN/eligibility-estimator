@@ -64,7 +64,7 @@ const fr: WebTranslations = {
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
     'Il vous faudra environ 5 à 10 minutes pour répondre aux questions et obtenir une estimation.',
-  whatBenefitsTheEstimatorIsFor: "Prestations incluses dans l'estimateur",
+  whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   benefitAvailable:
     'Une prestation imposable disponible aux personnes de 65 ans et plus',
   learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,

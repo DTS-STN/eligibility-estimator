@@ -58,7 +58,7 @@ const en: WebTranslations = {
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate:
     'This estimator will take about 5 to 10 minutes to complete.',
-  whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
+  whatBenefitsIncluded: 'Benefits included in the estimator',
   benefitAvailable: 'A taxable benefit available to those 65 and older',
   learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about the Old Age Security pension</a>`,
   gisDefinitionText:

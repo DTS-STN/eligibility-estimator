@@ -115,7 +115,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             />
           </div>
           <h2 className="text-xs font-bold sm:h2 mt-12 sm:mt-16 mb-2">
-            {tsln.whatBenefitsTheEstimatorIsFor}
+            {tsln.whatBenefitsIncluded}
           </h2>
 
           <div className="w-full sm:w-3/5">
