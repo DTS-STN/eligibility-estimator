@@ -39,7 +39,7 @@ const fr: WebTranslations = {
   getEstimate: 'Estimer mes prestations',
   required: '(requis)',
   homePageP1:
-    "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
+    "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
   youMayBeEligible:
     'Vous pourriez être admissible aux prestations de vieillesse si : ',
