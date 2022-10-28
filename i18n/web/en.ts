@@ -165,7 +165,7 @@ const en: WebTranslations = {
     [ValidationErrors.maritalUnavailable]:
       'You have indicated a marital status that is not covered by this tool. For further help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.legalUnavailable]:
-      'You have selected a legal status that is not eligible to receive any of the benefits by this tool. For help, please {LINK_SERVICE_CANADA}.',
+      'You have selected a legal status that is not eligible to receive any of the benefits covered by this tool. For help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable]:
       'You have indicated that you have lived in a country with a social security agreement with Canada, but have not lived in Canada for a number of years supported by this tool. For further help, please {LINK_SERVICE_CANADA}.',
   },
