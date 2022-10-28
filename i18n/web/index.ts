@@ -23,7 +23,7 @@ export type WebTranslations = {
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
-  whatBenefitsTheEstimatorIsFor: string
+  whatBenefitsIncluded: string
   benefitAvailable: string
   learnMoreAboutOldAgeSecurity: string
   gisDefinitionText: string

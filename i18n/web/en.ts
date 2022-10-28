@@ -6,7 +6,7 @@ import apiEn from '../api/en'
 const en: WebTranslations = {
   _language: Language.EN,
 
-  oas: 'Old Age Security',
+  oas: 'Old Age Security pension',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
   afs: 'Allowance for the Survivor',
@@ -58,17 +58,17 @@ const en: WebTranslations = {
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate:
     'This estimator will take about 5 to 10 minutes to complete.',
-  whatBenefitsTheEstimatorIsFor: 'What benefits the estimator is for',
-  benefitAvailable: 'A benefit available to those 65 and older.',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about Old Age Security</a>`,
+  whatBenefitsIncluded: 'Benefits included in the estimator',
+  benefitAvailable: 'A taxable benefit available to those 65 and older',
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about the Old Age Security pension</a>`,
   gisDefinitionText:
-    'A benefit available to those 65 and older. Learn more about Old Age Security Guaranteed Income Supplement A benefit available to those who receive Old Age Security benefits, are aged 65 and older, have a low income, and are living in Canada.',
+    'A non-taxable benefit available to those who receive the Old Age Security pension, are aged 65 and older, have a low income, and are living in Canada',
   learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.overview.gis.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
   alwDefinitionText:
-    'A benefit available to low-income individuals aged 60 to 64, whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner receives the Guaranteed Income Supplement',
   learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.overview.alw.url}" target="_blank">Learn more about the Allowance</a>`,
   afsDefinitionText:
-    'A benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away',
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiEn.links.overview.afs.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
   notIncludeCPP:
     'This estimator tool does not include the Canada Pension Plan (CPP) retirement pension.',
