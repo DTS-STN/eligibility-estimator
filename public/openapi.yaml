@@ -411,9 +411,9 @@ components:
         type: string
         enum:
           - canadianCitizen
+          - indianStatus
           - permanentResident
           - refugee
-          - indianStatus
           - other
         description: The current legal status of the client.
       allowEmptyValue: false
