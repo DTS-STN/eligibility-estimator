@@ -412,7 +412,7 @@ components:
         enum:
           - canadianCitizen
           - permanentResident
-          - sponsored
+          - refugee
           - indianStatus
           - other
         description: The current legal status of the client.
