@@ -22,9 +22,9 @@ export enum MaritalStatus {
 
 export enum LegalStatus {
   CANADIAN_CITIZEN = 'canadianCitizen',
-  PERMANENT_RESIDENT = 'permanentResident',
-  SPONSORED = 'sponsored',
   INDIAN_STATUS = 'indianStatus',
+  PERMANENT_RESIDENT = 'permanentResident',
+  REFUGEE = 'refugee',
   OTHER = 'other',
 }
 

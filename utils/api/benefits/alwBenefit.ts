@@ -141,12 +141,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.dependingOnLegalWhen60,
         }
-      } else if (this.input.legalStatus.sponsored) {
-        return {
-          result: ResultKey.UNAVAILABLE,
-          reason: ResultReason.LEGAL_STATUS,
-          detail: this.translations.detail.dependingOnLegalSponsored,
-        }
       } else {
         return {
           result: ResultKey.UNAVAILABLE,

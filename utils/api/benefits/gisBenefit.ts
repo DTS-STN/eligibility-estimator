@@ -112,18 +112,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         detail: this.translations.detail.mustMeetIncomeReq,
       }
     } else if (!meetsReqLegal) {
-      if (this.input.legalStatus.sponsored) {
-        return {
-          result: ResultKey.UNAVAILABLE,
-          reason: ResultReason.LEGAL_STATUS,
-          detail: this.translations.detail.dependingOnLegalSponsored,
-        }
-      } else {
-        return {
-          result: ResultKey.UNAVAILABLE,
-          reason: ResultReason.LEGAL_STATUS,
-          detail: this.translations.detail.dependingOnLegal,
-        }
+      return {
+        result: ResultKey.UNAVAILABLE,
+        reason: ResultReason.LEGAL_STATUS,
+        detail: this.translations.detail.dependingOnLegal,
       }
     } else if (this.oasResult.eligibility.result == ResultKey.MORE_INFO) {
       return {

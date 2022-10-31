@@ -178,23 +178,23 @@ const en: Translations = {
         shortText: 'Canadian',
       },
       {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Permanent resident or landed immigrant (non-sponsored)',
-        shortText: 'PR or LI (non-sponsored)',
-      },
-      {
-        key: LegalStatus.SPONSORED,
-        text: 'Permanent resident or landed immigrant (sponsored)',
-        shortText: 'PR or LI (sponsored)',
-      },
-      {
         key: LegalStatus.INDIAN_STATUS,
-        text: 'Indian status or status card',
+        text: 'Indian status',
         shortText: 'Indian',
       },
       {
+        key: LegalStatus.PERMANENT_RESIDENT,
+        text: 'Permanent resident or landed immigrant',
+        shortText: 'PR or LI',
+      },
+      {
+        key: LegalStatus.REFUGEE,
+        text: 'Refugee',
+        shortText: 'Refugee',
+      },
+      {
         key: LegalStatus.OTHER,
-        text: 'Other (for example, temporary resident, student, refugee or temporary worker)',
+        text: 'Other (for example, temporary resident, student or temporary worker)',
         shortText: 'Other',
       },
     ],
@@ -321,8 +321,6 @@ const en: Translations = {
       "You may be eligible to receive this benefit when you turn 65, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnLegal:
       'You may be eligible to receive this benefit, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    dependingOnLegalSponsored:
-      'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen60:
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
