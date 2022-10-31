@@ -41,9 +41,11 @@ const en: Translations = {
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    [FieldKey.AGE]: 'What month and year were you born?',
-    [FieldKey.OAS_DEFER]: 'When would you like to start receiving OAS?',
-    [FieldKey.OAS_AGE]: 'At what age would you like to start receiving OAS?',
+    [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.OAS_DEFER]:
+      'When would you like to start receiving the Old Age Security (OAS) pension?',
+    [FieldKey.OAS_AGE]:
+      'At what age would you like to start receiving the OAS pension?',
     [FieldKey.MARITAL_STATUS]: 'What is your current marital status?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
@@ -127,7 +129,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
-      '<div>If you already receive OAS, enter when you started receiving it.</div> <div>Learn more about {LINK_OAS_DEFER_INLINE}.</div>',
+      '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.INCOME]:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
@@ -162,12 +164,12 @@ const en: Translations = {
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: 'I would like to start receiving OAS when I turn 65 (most common)',
+        text: 'I would like to start at age 65 (most common)',
         shortText: 'Start at 65',
       },
       {
         key: true,
-        text: 'I would like to delay when I start receiving OAS (higher monthly payments)',
+        text: 'I would like to delay my first payment (higher amounts)',
         shortText: 'Delay',
       },
     ],
