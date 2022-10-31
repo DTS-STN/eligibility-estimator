@@ -117,7 +117,7 @@ const en: WebTranslations = {
       'Based on your information, you may be eligible for:',
     basedOnYourInfoAndIncomeEligible:
       'Depending on your income and based on your information, you may be eligible for:',
-    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or contact ${generateLink(
+    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or ${generateLink(
       apiEn.links.SC
     )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
@@ -163,11 +163,11 @@ const en: WebTranslations = {
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:
-      'You have indicated a marital status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
+      'You have indicated a marital status that is not covered by this tool. For further help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.legalUnavailable]:
-      'You have indicated a legal status that is not covered by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
+      'You have selected a legal status that is not eligible to receive any of the benefits covered by this tool. For help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable]:
-      'You have indicated that you have lived in a country with a social security agreement with Canada, but have not lived in Canada for a number of years supported by this tool. For further help, please contact {LINK_SERVICE_CANADA}.',
+      'You have indicated that you have lived in a country with a social security agreement with Canada, but have not lived in Canada for a number of years supported by this tool. For further help, please {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Unable to proceed',
   yes: 'Yes',

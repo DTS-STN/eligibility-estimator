@@ -172,11 +172,11 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
-      "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+      "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
-      "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+      "Vous avez sélectionné un statut légal qui n'est pas admissible aux prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable]:
-      "Vous avez indiqué que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, mais que vous n'avez pas vécu au Canada pendant un certain nombre d'années pris en charge par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+      "Vous avez indiqué que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, mais que vous n'avez pas vécu au Canada pendant un certain nombre d'années pris en charge par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Impossible de continuer',
   yes: 'Oui',

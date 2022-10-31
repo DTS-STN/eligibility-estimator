@@ -130,7 +130,7 @@ export const links: LinkDefinitions = {
     },
   },
   SC: {
-    text: 'Service Canada',
+    text: 'communiquer avec Service Canada',
     url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
     order: -1,
   },

@@ -130,7 +130,7 @@ export const links: LinkDefinitions = {
     },
   },
   SC: {
-    text: 'Service Canada',
+    text: 'contact Service Canada',
     url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
     order: -1,
   },
