@@ -28,9 +28,9 @@ const fr: WebTranslations = {
   introPageTitle:
     'Estimateur des prestations canadiennes de la Sécurité de la vieillesse',
   questionPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Des questions',
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse : Questions',
   resultPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Résultats',
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse : Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
