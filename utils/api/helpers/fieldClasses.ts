@@ -83,7 +83,6 @@ export class LivingCountryHelper extends FieldHelper {
 
 export class LegalStatusHelper extends FieldHelper {
   canadian: boolean
-  sponsored: boolean
   other: boolean
 
   constructor(public value: LegalStatus) {
@@ -91,8 +90,8 @@ export class LegalStatusHelper extends FieldHelper {
     this.canadian =
       value === LegalStatus.CANADIAN_CITIZEN ||
       value === LegalStatus.PERMANENT_RESIDENT ||
-      value === LegalStatus.INDIAN_STATUS
-    this.sponsored = value === LegalStatus.SPONSORED
+      value === LegalStatus.INDIAN_STATUS ||
+      value === LegalStatus.REFUGEE
     this.other = value === LegalStatus.OTHER
   }
 }

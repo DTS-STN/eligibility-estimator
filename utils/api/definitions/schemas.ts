@@ -55,7 +55,7 @@ export const RequestSchema = Joi.object({
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
     .valid(...Object.values(LegalStatus))
-    .invalid(LegalStatus.SPONSORED, LegalStatus.OTHER)
+    .invalid(LegalStatus.OTHER)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
   livedOutsideCanada: Joi.boolean(),
   yearsInCanadaSince18: Joi.number()
@@ -113,7 +113,7 @@ export const RequestSchema = Joi.object({
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string()
     .valid(...Object.values(LegalStatus))
-    .invalid(LegalStatus.SPONSORED, LegalStatus.OTHER)
+    .invalid(LegalStatus.OTHER)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
   partnerLivedOutsideCanada: Joi.boolean(),
   partnerYearsInCanadaSince18: Joi.number()

@@ -189,23 +189,23 @@ const fr: Translations = {
         shortText: 'Citoyen canadien',
       },
       {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Résident permanent ou immigrant reçu (non parrainé)',
-        shortText: 'Résident permanent (non parrainé)',
-      },
-      {
-        key: LegalStatus.SPONSORED,
-        text: 'Résident permanent ou immigrant reçu (parrainé)',
-        shortText: 'Résident permanent (parrainé)',
-      },
-      {
         key: LegalStatus.INDIAN_STATUS,
-        text: "Statut d'Indien ou carte de statut",
+        text: "Statut d'Indien",
         shortText: "Statut d'Indien",
       },
       {
+        key: LegalStatus.PERMANENT_RESIDENT,
+        text: 'Résident permanent ou immigrant reçu',
+        shortText: 'Résident permanent',
+      },
+      {
+        key: LegalStatus.REFUGEE,
+        text: 'Réfugié',
+        shortText: 'Réfugié',
+      },
+      {
         key: LegalStatus.OTHER,
-        text: 'Autre (par exemple, résident temporaire, étudiant, réfugié ou travailleur temporaire)',
+        text: 'Autre (par exemple, résident temporaire, étudiant ou travailleur temporaire)',
         shortText: 'Other',
       },
     ],
@@ -335,8 +335,6 @@ const fr: Translations = {
       "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnLegal:
       'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    dependingOnLegalSponsored:
-      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen60:
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
