@@ -68,7 +68,6 @@ export interface Translations {
     dependingOnAgreementWhen60: string
     dependingOnAgreementWhen65: string
     dependingOnLegal: string
-    dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
     alwNotEligible: string
