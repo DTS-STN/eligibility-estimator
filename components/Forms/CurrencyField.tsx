@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
-import { InputHTMLAttributes, useEffect } from 'react'
+import { InputHTMLAttributes, useEffect, useState } from 'react'
 import NumberFormat from 'react-number-format'
+import Image from 'next/image'
 import { Language } from '../../utils/api/definitions/enums'
 import { ErrorLabel } from './validation/ErrorLabel'
 
@@ -31,6 +32,8 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 }) => {
   const locale = useRouter().locale
 
+  const [displayHelpText, setHelpTextState] = useState(false)
+
   const localizedIncome =
     locale == Language.EN
       ? { thousandSeparator: true, prefix: '$' }
@@ -60,9 +63,28 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           <span className="ml-2 font-medium">{requiredText}</span>
         </label>
         {helpText && (
-          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-            {helpText}
-          </div>
+          <button
+            className="!bg-[#f2f8ff] ds-infoText ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
+            onClick={(e) => {
+              e.preventDefault()
+              setHelpTextState(!displayHelpText)
+            }}
+          >
+            <Image
+              tabIndex={-1}
+              src={'/info.svg'}
+              width="30"
+              height="30"
+              alt="Click on to show info"
+            />
+          </button>
+        )}
+        {displayHelpText && (
+          <div
+            id={'helpText'}
+            className="ds-inline-block ds-rounded ds-font-body ds-text-xl ds-text-multi-neutrals-grey100 ds-p-5px ds-pl-14px ds-pr-14px ds-bg-specific-cyan-cyan5 ds-leading-33px ds-border  ds-border-specific-cyan-cyan50 ds-mb-1.5"
+            dangerouslySetInnerHTML={{ __html: helpText }}
+          />
         )}
       </div>
       {error && <ErrorLabel errorMessage={error} />}

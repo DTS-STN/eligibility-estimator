@@ -123,14 +123,14 @@ const en: Translations = {
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
-      'Providing your income will give you more helpful and accurate results.',
+      'Providing your income will give you more accurate results.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
       '<div>If you already receive OAS, enter when you started receiving it.</div> <div>Learn more about {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.INCOME]:
-      'You can find your net income on line 23600 of your personal income tax return (T1).',
+      '<div>You can find your net income on line 23600 of your personal income tax return (T1).</div><div>For a more accurate estimate, remove from this amount: <ul class="pl-[2.5rem] list-disc"><li>any Old Age Security payments</li><li>your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li</ul></div>',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
   },
