@@ -111,8 +111,8 @@ const en: WebTranslations = {
     tableHeader2: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total',
     whatYouToldUs: 'What you told us',
-    youMayBeEligible: 'You may be eligible at this time',
-    youAreNotEligible: 'You likely are not eligible at this time',
+    youMayBeEligible: 'You may be eligible',
+    youAreNotEligible: 'You are likely not eligible at this time',
     basedOnYourInfoEligible:
       'Based on your information, you may be eligible for:',
     basedOnYourInfoAndIncomeEligible:
