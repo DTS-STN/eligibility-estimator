@@ -82,7 +82,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         {displayHelpText && (
           <div
             id={'helpText'}
-            className="ds-rounded ds-absolute ds-z-1 w-1/3 ml-96 ds-font-body text-small leading-8 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-leading-33px ds-border  ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
+            className="ds-rounded ds-absolute ds-z-1 w-[340px] ml-96 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
             dangerouslySetInnerHTML={{ __html: helpText }}
           />
         )}
