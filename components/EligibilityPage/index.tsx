@@ -171,7 +171,6 @@ export const EligibilityPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
-      console.log(`field.config.type`, field.config.type)
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
