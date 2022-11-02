@@ -39,6 +39,7 @@ module.exports = {
       'black': '#000',
       'content': '#333',
       'light-green': '#D8EECA',
+      'ds-gray5': '#f2f8ff',
 
       // default
       'default-text': '#335075',

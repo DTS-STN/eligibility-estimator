@@ -64,7 +64,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         </label>
         {helpText && (
           <button
-            className="!bg-white ds-infoText ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
+            className="!bg-ds-gray5 ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
             onClick={(e) => {
               e.preventDefault()
               setHelpTextState(!displayHelpText)
@@ -82,7 +82,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         {displayHelpText && (
           <div
             id={'helpText'}
-            className="ds-rounded ds-absolute ds-z-1 w-[340px] ml-96 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
+            className="ds-rounded ds-absolute ds-z-1 w-[340px] ml-96 -mt-10 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
             dangerouslySetInnerHTML={{ __html: helpText }}
           />
         )}
