@@ -64,7 +64,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         </label>
         {helpText && (
           <button
-            className="!ds-bg-multi-neutrals-grey5 ds-infoText ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
+            className="!bg-white ds-infoText ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
             onClick={(e) => {
               e.preventDefault()
               setHelpTextState(!displayHelpText)
