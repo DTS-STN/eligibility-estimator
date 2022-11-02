@@ -2,6 +2,7 @@ import React from 'react'
 
 export interface QuestionLabelProps {
   name: string
+  type: string
   label: string
   helpText?: string
   requiredText?: string
@@ -9,6 +10,7 @@ export interface QuestionLabelProps {
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   name,
+  type,
   label,
   requiredText,
   helpText,
@@ -18,7 +20,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
       <label
         htmlFor={name}
         aria-label={name}
-        data-testid={`${name}-input-label`}
+        data-testid={`${type}-input-label`}
         className="text-content font-bold inline mb-2.5"
       >
         <span dangerouslySetInnerHTML={{ __html: label }} />

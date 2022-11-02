@@ -43,6 +43,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
     <>
       <QuestionLabel
         name={name}
+        type="number"
         label={label}
         requiredText={requiredText}
         helpText={helpText}

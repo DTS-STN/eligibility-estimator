@@ -52,6 +52,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
     <div>
       <QuestionLabel
         name={name}
+        type="currency"
         label={label}
         requiredText={requiredText}
         helpText={helpText}

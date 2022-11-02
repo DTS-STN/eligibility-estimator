@@ -38,6 +38,7 @@ export const Radio: React.VFC<InputProps> = ({
       <fieldset>
         <QuestionLabel
           name={name}
+          type="radio"
           label={label}
           requiredText={requiredText}
           helpText={helpText}

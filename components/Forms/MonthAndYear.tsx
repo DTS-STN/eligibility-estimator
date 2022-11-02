@@ -53,6 +53,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     <>
       <QuestionLabel
         name={name}
+        type="date"
         label={label}
         requiredText={requiredText}
         helpText={helpText}

@@ -49,6 +49,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
     <>
       <QuestionLabel
         name={name}
+        type="select"
         label={field.config.label}
         requiredText={requiredText}
       />
