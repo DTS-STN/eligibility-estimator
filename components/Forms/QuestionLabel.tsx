@@ -18,7 +18,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
       <label
         htmlFor={name}
         aria-label={name}
-        data-testid="number-input-label"
+        data-testid={`${name}-input-label`}
         className="text-content font-bold inline mb-2.5"
       >
         <span dangerouslySetInnerHTML={{ __html: label }} />
