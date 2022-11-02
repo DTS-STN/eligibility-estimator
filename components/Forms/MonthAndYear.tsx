@@ -4,6 +4,7 @@ import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
 
 export interface MonthAndYearProps
@@ -12,6 +13,7 @@ export interface MonthAndYearProps
   label: string
   helpText?: string
   baseOnChange: (newValue: string) => void
+  requiredText?: string
 }
 
 interface IAgeDateInput {
@@ -24,6 +26,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   label,
   helpText,
   baseOnChange,
+  requiredText,
 }) => {
   const tsln = useTranslation<WebTranslations>()
 
@@ -48,31 +51,20 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 
   return (
     <>
+      <QuestionLabel
+        name={name}
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+      />
       <DatePicker
         id={`enter-${name}`}
         month={dateInput.month}
         year={dateInput.year}
-        hasLabel
-        // hasError={false}
         hasDay={false}
-        formLabelProps={{
-          helpText,
-          // id: 'requiredWithInfo',
-          // infoText:
-          //   'Required label style with information icon. You can hide by clicking on icon again.',
-          label,
-          required: true,
-        }}
-        // formErrorProps={{
-        //   errorMessage: 'This is how form error will be displayed',
-        //   id: 'formErrorId',
-        // }}
-        // onDayChange={function noRefCheck() {}}
         onMonthChange={dateOnChange}
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
-        // maxYear={2050}
-        // minYear={1999}
       />
     </>
   )

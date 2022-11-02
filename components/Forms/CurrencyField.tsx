@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
+import { QuestionLabel } from './QuestionLabel'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface CurrencyFieldProps
@@ -49,22 +50,12 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 
   return (
     <div>
-      <div className="mb-2.5">
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="currency-input-label"
-          className="text-content font-bold inline"
-        >
-          {label}
-          <span className="ml-2 font-medium">{requiredText}</span>
-        </label>
-        {helpText && (
-          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-            {helpText}
-          </div>
-        )}
-      </div>
+      <QuestionLabel
+        name={name}
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+      />
       {error && <ErrorLabel errorMessage={error} />}
       <NumberFormat
         id={name}
