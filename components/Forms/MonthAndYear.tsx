@@ -12,6 +12,7 @@ export interface MonthAndYearProps
   label: string
   helpText?: string
   baseOnChange: (newValue: string) => void
+  requiredText?: string
 }
 
 interface IAgeDateInput {
@@ -24,6 +25,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   label,
   helpText,
   baseOnChange,
+  requiredText,
 }) => {
   const tsln = useTranslation<WebTranslations>()
 
@@ -48,31 +50,30 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 
   return (
     <>
+      <div className="mb-2.5">
+        <label
+          htmlFor={name}
+          aria-label={name}
+          data-testid="number-input-label"
+          className="text-content font-bold inline mb-2.5"
+        >
+          {label}
+        </label>
+        <span className="ml-2 font-medium">{requiredText}</span>
+        {helpText && (
+          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
+            {helpText}
+          </div>
+        )}
+      </div>
       <DatePicker
         id={`enter-${name}`}
         month={dateInput.month}
         year={dateInput.year}
-        hasLabel
-        // hasError={false}
         hasDay={false}
-        formLabelProps={{
-          helpText,
-          // id: 'requiredWithInfo',
-          // infoText:
-          //   'Required label style with information icon. You can hide by clicking on icon again.',
-          label,
-          required: true,
-        }}
-        // formErrorProps={{
-        //   errorMessage: 'This is how form error will be displayed',
-        //   id: 'formErrorId',
-        // }}
-        // onDayChange={function noRefCheck() {}}
         onMonthChange={dateOnChange}
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
-        // maxYear={2050}
-        // minYear={1999}
       />
     </>
   )
