@@ -50,7 +50,7 @@ const en: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?',
+      'Since the age of 18, have you lived outside of Canada for longer than 6 months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -134,7 +134,7 @@ const en: Translations = {
     [FieldKey.INCOME]:
       'You can find your net income on line 23600 of your personal income tax return (T1).',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
+      'If you are not sure of the exact number, you may enter an estimate.',
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -203,12 +203,12 @@ const en: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'I have not lived outside of Canada for longer than 6 months',
+        text: 'No, I have not lived outside of Canada for longer than 6 months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'I have lived outside of Canada for longer than 6 months',
+        text: 'Yes, I have lived outside of Canada for longer than 6 months',
         shortText: 'Yes',
       },
     ],

@@ -27,7 +27,7 @@ const fr: Translations = {
     [FieldCategory.AGE]: 'Âge',
     [FieldCategory.INCOME]: 'Revenu',
     [FieldCategory.LEGAL]: 'Statut légal',
-    [FieldCategory.RESIDENCE]: 'Historique des résidences',
+    [FieldCategory.RESIDENCE]: 'Historique de résidence',
     [FieldCategory.MARITAL]: 'État civil',
   },
   result: {
@@ -143,7 +143,7 @@ const fr: Translations = {
     [FieldKey.INCOME]:
       'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -212,12 +212,12 @@ const fr: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "J'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
         shortText: 'Oui',
       },
     ],
