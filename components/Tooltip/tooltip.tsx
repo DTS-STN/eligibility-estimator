@@ -35,36 +35,38 @@ export const Tooltip: React.FC<{
   if (!tooltipData) return <></>
 
   return (
-    <div
-      className="relative inline-block mb-2 cursor-pointer "
-      ref={wrapperRef}
-      data-testid="tooltip"
-    >
-      {tooltipData.text && (
-        <button
-          className="!bg-ds-gray5 ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
-          onClick={(e) => {
-            e.preventDefault()
-            setShow(!show)
-          }}
-        >
-          <Image
-            tabIndex={-1}
-            src={'/info.svg'}
-            width="30"
-            height="30"
-            alt="Click on to show info"
-          />
-        </button>
-      )}
+    <>
+      <div
+        className="relative inline-block cursor-pointer !h-[30px]"
+        ref={wrapperRef}
+        data-testid="tooltip"
+      >
+        {tooltipData.text && (
+          <button
+            className="!bg-ds-gray5 ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px !h-[30px]"
+            onClick={(e) => {
+              e.preventDefault()
+              setShow(!show)
+            }}
+          >
+            <Image
+              tabIndex={-1}
+              src={'/info.svg'}
+              width="30"
+              height="30"
+              alt="Click on to show info"
+            />
+          </button>
+        )}
+      </div>
       <div className={`${!show && 'hidden'}`} tabIndex={-1}>
         <div
           id={'helpText'}
-          className="ds-rounded ds-absolute ds-z-1 w-[340px] ml-60 -mt-10 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
+          className="ds-rounded ds-z-1 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px pb-4"
           dangerouslySetInnerHTML={{ __html: tooltipData.text }}
         />
       </div>
-    </div>
+    </>
   )
 }
 

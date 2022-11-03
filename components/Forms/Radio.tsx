@@ -48,15 +48,15 @@ export const Radio: React.VFC<InputProps> = ({
             />
             <span className="ml-2 font-medium">{requiredText}</span>
           </label>
+          <Tooltip field={name} />
         </legend>
-        {helpText && (
+
+        {/* {helpText && (
           <div
             className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
             dangerouslySetInnerHTML={{ __html: helpText }}
           />
-        )}
-
-        <Tooltip field={name} />
+        )} */}
 
         {error && <ErrorLabel errorMessage={error} />}
         {values.map((val, index) => (

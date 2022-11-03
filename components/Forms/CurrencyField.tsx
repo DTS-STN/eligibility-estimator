@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import Image from 'next/image'
 import { Language } from '../../utils/api/definitions/enums'
 import { ErrorLabel } from './validation/ErrorLabel'
 import { Tooltip } from '../Tooltip/tooltip'
@@ -33,8 +32,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 }) => {
   const locale = useRouter().locale
 
-  const [displayHelpText, setHelpTextState] = useState(false)
-
   const localizedIncome =
     locale == Language.EN
       ? { thousandSeparator: true, prefix: '$' }
@@ -64,13 +61,13 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           <span className="ml-2 font-medium">{requiredText}</span>
         </label>
 
-        {displayHelpText && <Tooltip field={name} />}
+        {helpText && <Tooltip field={name} />}
       </div>
 
       {error && <ErrorLabel errorMessage={error} />}
 
       <NumberFormat
-        id={name}
+        id={`enter-${name}`}
         name={name}
         {...localizedIncome}
         data-testid="currency-input"
