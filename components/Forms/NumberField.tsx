@@ -50,7 +50,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
       />
       {error && <ErrorLabel errorMessage={error} />}
       <NumberFormat
-        id={name}
+        id={`enter-${name}`}
         name={name}
         className={`form-control text-content border-form-border ${
           error ? ' border-danger' : ''
