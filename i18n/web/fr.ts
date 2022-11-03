@@ -115,9 +115,9 @@ const fr: WebTranslations = {
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Total',
-    whatYouToldUs: 'Ce que vous nous avez dit',
-    youMayBeEligible: 'Vous pouvez être éligible en ce moment',
-    youAreNotEligible: "Vous n'êtes probablement pas éligible pour le moment",
+    whatYouToldUs: 'Vos renseignements',
+    youMayBeEligible: 'Vous pouvez être admissible',
+    youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
       'Selon vos informations, vous pourriez être admissible à :',
     basedOnYourInfoAndIncomeEligible:
@@ -131,9 +131,9 @@ const fr: WebTranslations = {
     basedOnYourInfoAndIncomeTotal:
       "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
-      'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
+      'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:
-      'Prestations auxquels vous pourriez ne pas avoir droit',
+      'Prestations auxquelles vous pourriez ne pas être admissible',
     noAnswersFound: 'Aucune réponse trouvée',
     noBenefitsFound: 'Aucune prestations trouvée',
     edit: 'Réviser',
