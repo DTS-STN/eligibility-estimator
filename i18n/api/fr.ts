@@ -18,8 +18,8 @@ import { links } from './links/fr'
 const fr: Translations = {
   _language: Language.FR,
   benefit: {
-    [BenefitKey.oas]: 'Sécurité de la vieillesse (SV)',
-    [BenefitKey.gis]: 'Supplément de revenu garanti (SRG)',
+    [BenefitKey.oas]: 'Pension de la Sécurité de la vieillesse',
+    [BenefitKey.gis]: 'Supplément de revenu garanti',
     [BenefitKey.alw]: 'Allocation',
     [BenefitKey.afs]: 'Allocation au survivant',
   },
@@ -340,7 +340,7 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
     afsNotEligible:
       "L'Allocation au survivant s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) est décédé.",
     autoEnrollTrue:

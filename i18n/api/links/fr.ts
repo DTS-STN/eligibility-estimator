@@ -105,7 +105,7 @@ export const links: LinkDefinitions = {
   },
   apply: {
     oas: {
-      text: 'Faire une demande de la Sécurité de la vieillesse',
+      text: 'Faire une demande pour la pension de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
       order: 20,
       icon: LinkIcon.link,
@@ -151,7 +151,7 @@ export const links: LinkDefinitions = {
   },
   reasons: {
     oas: {
-      text: "Voir tous les critères d'admissibilité pour la Sécurité de la vieillesse",
+      text: "Voir tous les critères d'admissibilité pour la pension de la Sécurité de la vieillesse",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.html',
       order: -1,
       icon: LinkIcon.note,
