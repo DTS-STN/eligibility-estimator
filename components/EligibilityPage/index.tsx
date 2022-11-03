@@ -79,7 +79,6 @@ export const EligibilityPage: React.VFC = ({}) => {
 
     if (button) {
       button.setAttribute('type', 'submit')
-      button.setAttribute('data-gc-analytics-formsubmit', 'submit')
     }
   }, [])
 
@@ -180,6 +179,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
+                requiredText={tsln.required}
               />
             )}
             {field.config.type === FieldType.NUMBER && (
