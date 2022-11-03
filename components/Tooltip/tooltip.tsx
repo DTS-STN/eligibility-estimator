@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { getTooltipTranslations, TooltipTranslation } from '../../i18n/tooltips'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { WebTranslations } from '../../i18n/web'
-import { useTranslation } from '../Hooks'
+import Image from 'next/image'
 
 export const Tooltip: React.FC<{
   field: string
@@ -13,7 +12,6 @@ export const Tooltip: React.FC<{
   const router = useRouter()
   const [show, setShow] = useState<boolean>(false)
   const wrapperRef = useRef(null)
-  const tsln = useTranslation<WebTranslations>()
 
   const handleEscPress = (event) => {
     if (event.keyCode === 27) {
@@ -34,10 +32,6 @@ export const Tooltip: React.FC<{
     field
   )
 
-  const handleClick = () => {
-    setShow(!show)
-  }
-
   if (!tooltipData) return <></>
 
   return (
@@ -46,30 +40,29 @@ export const Tooltip: React.FC<{
       ref={wrapperRef}
       data-testid="tooltip"
     >
-      <div className="flex items-center gap-x-[10px]" onClick={handleClick}>
-        <div className={`triangle ${show && 'origin-center rotate-90'} `} />
-        <a
-          className="underline text-default-text text-[16px]"
-          onKeyDown={(e) => {
-            if ([' ', 'Spacebar', 'Enter'].includes(e.key)) {
-              e.preventDefault()
-              handleClick()
-            }
+      {tooltipData.text && (
+        <button
+          className="!bg-ds-gray5 ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
+          onClick={(e) => {
+            e.preventDefault()
+            setShow(!show)
           }}
-          tabIndex={0}
         >
-          {tsln.tooltip.moreInformation}
-        </a>
-      </div>
-      <div className={`${!show && 'hidden'} mx-[5px] py-1`} tabIndex={-1}>
-        <div
-          className={`w-full xs:w-auto s:max-w-md sm:max-w-[80%] border-l-[2px]`}
-        >
-          <p
-            className="font-normal text-[16px] leading-5 px-5 max-h-[100%] "
-            dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+          <Image
+            tabIndex={-1}
+            src={'/info.svg'}
+            width="30"
+            height="30"
+            alt="Click on to show info"
           />
-        </div>
+        </button>
+      )}
+      <div className={`${!show && 'hidden'}`} tabIndex={-1}>
+        <div
+          id={'helpText'}
+          className="ds-rounded ds-absolute ds-z-1 w-[340px] ml-60 -mt-10 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
+          dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+        />
       </div>
     </div>
   )

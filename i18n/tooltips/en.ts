@@ -11,6 +11,10 @@ const en: TooltipTranslations = {
     heading: apiEn.category.legal,
     text: "<p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen who was themselves either born in Canada or granted citizenship) or you have applied for a grant of citizenship and have received Canadian citizenship.</p><p style='padding-bottom: 20px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (non-sponsored immigrant):</span> You have been given permanent resident status by immigrating to Canada, but is not a Canadian citizen.</p><p style='padding-bottom: 20px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (sponsored immigrant):</span> You are a foreign national who has applied for permanent residence under the Family Class, has an approved Canadian sponsor, and meets the requirements of the Family Class.</p><p><span style='font-weight: bold;'>Indian status or status card:</span> You are registered as an Indian under the Indian Act.</p>",
   },
+  [FieldKey.INCOME]: {
+    heading: apiEn.category.income,
+    text: '<div style="padding-top:8px;">You can find your net income on line 23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left:12px"><li>any Old Age Security payments</li><li>your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul>',
+  },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     useDataFromKey: 'legalStatus',
   },

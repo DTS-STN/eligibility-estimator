@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format'
 import Image from 'next/image'
 import { Language } from '../../utils/api/definitions/enums'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { Tooltip } from '../Tooltip/tooltip'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -62,32 +63,12 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           {label}
           <span className="ml-2 font-medium">{requiredText}</span>
         </label>
-        {helpText && (
-          <button
-            className="!bg-ds-gray5 ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px"
-            onClick={(e) => {
-              e.preventDefault()
-              setHelpTextState(!displayHelpText)
-            }}
-          >
-            <Image
-              tabIndex={-1}
-              src={'/info.svg'}
-              width="30"
-              height="30"
-              alt="Click on to show info"
-            />
-          </button>
-        )}
-        {displayHelpText && (
-          <div
-            id={'helpText'}
-            className="ds-rounded ds-absolute ds-z-1 w-[340px] ml-96 -mt-10 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px "
-            dangerouslySetInnerHTML={{ __html: helpText }}
-          />
-        )}
+
+        {displayHelpText && <Tooltip field={name} />}
       </div>
+
       {error && <ErrorLabel errorMessage={error} />}
+
       <NumberFormat
         id={name}
         name={name}

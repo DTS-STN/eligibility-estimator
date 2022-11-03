@@ -11,6 +11,10 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.legal,
     text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Citoyen canadien:</span> Vous êtes Canadien de naissance (née au Canada ou née à l’extérieur du Canada d’un parent citoyen canadien qui est lui-même né au Canada ou qui a obtenu la citoyenneté) ou vous avez  demandé et obtenu la citoyenneté canadienne.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (non parrainé):</span> Vous avez obtenu le statut de résident permanent en immigrant au Canada, mais qui n’êtes pas encore citoyen canadien.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (parrainé):</span>Vous êtes un étranger qui a présenté une demande de résidence permanente au titre de la catégorie du regroupement familial, qui est parrainé par un répondant canadien approuvé et qui satisfait aux exigences de la catégorie du regroupement familial.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Statut d'Indien ou carte de statut:</span>  Vous êtes inscrits en tant qu'Indien selon la définition qu'en donne la Loi sur les Indiens.</p>",
   },
+  [FieldKey.INCOME]: {
+    heading: apiFr.category.income,
+    text: '<div style="padding-top:8px;">You can find your net income on line 23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left:12px"><li>any Old Age Security payments</li><li>your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul>',
+  },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     useDataFromKey: 'legalStatus',
   },
