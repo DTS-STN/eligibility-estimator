@@ -45,8 +45,9 @@ const fr: Translations = {
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
     [FieldKey.OAS_DEFER]:
+      'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
+    [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.OAS_AGE]: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
