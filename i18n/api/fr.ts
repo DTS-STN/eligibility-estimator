@@ -27,7 +27,7 @@ const fr: Translations = {
     [FieldCategory.AGE]: 'Âge',
     [FieldCategory.INCOME]: 'Revenu',
     [FieldCategory.LEGAL]: 'Statut légal',
-    [FieldCategory.RESIDENCE]: 'Historique des résidences',
+    [FieldCategory.RESIDENCE]: 'Historique de résidence',
     [FieldCategory.MARITAL]: 'État civil',
   },
   result: {
@@ -43,9 +43,11 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    [FieldKey.AGE]: 'Quel mois et quelle année êtes-vous né?',
-    [FieldKey.OAS_DEFER]: 'Quand souhaitez-vous commencer à recevoir la SV?',
-    [FieldKey.OAS_AGE]: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
+    [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.OAS_DEFER]:
+      'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
+    [FieldKey.OAS_AGE]:
+      'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
@@ -137,12 +139,12 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.OAS_DEFER]:
-      '<div>Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</div><div>En savoir plus sur {LINK_OAS_DEFER_INLINE}.</div>',
-    [FieldKey.OAS_AGE]: 'Celui-ci doit être compris entre 65 et 70.',
+      '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
+    [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.INCOME]:
       '<div style="padding-top:8px;">Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus (T1).</div> <div style="padding-top:8px;">Pour une estimation plus précise, retirez de ce montant : </div><ul class="list-disc" style="padding-left:12px"><li>vos prestations de la Sécurité de la vieillesse ;</li><li>les premiers 5 000 $ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et 50 % des prochains 10 000 $.</li></ul>',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -172,12 +174,12 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
+        text: 'Je voudrais commencer à 65 ans (le plus commun)',
         shortText: 'Commencer à 65 ans',
       },
       {
         key: true,
-        text: 'Je voudrais retarder le moment où je commencerai à recevoir la SV (paiements mensuels plus élevés)',
+        text: 'Je voudrais retarder mon premier paiement (montants plus élevés)',
         shortText: 'Retard',
       },
     ],
@@ -188,35 +190,35 @@ const fr: Translations = {
         shortText: 'Citoyen canadien',
       },
       {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Résident permanent ou immigrant reçu (non parrainé)',
-        shortText: 'Résident permanent (non parrainé)',
-      },
-      {
-        key: LegalStatus.SPONSORED,
-        text: 'Résident permanent ou immigrant reçu (parrainé)',
-        shortText: 'Résident permanent (parrainé)',
-      },
-      {
         key: LegalStatus.INDIAN_STATUS,
-        text: "Statut d'Indien ou carte de statut",
+        text: "Statut d'Indien",
         shortText: "Statut d'Indien",
       },
       {
+        key: LegalStatus.PERMANENT_RESIDENT,
+        text: 'Résident permanent ou immigrant reçu',
+        shortText: 'Résident permanent',
+      },
+      {
+        key: LegalStatus.REFUGEE,
+        text: 'Réfugié',
+        shortText: 'Réfugié',
+      },
+      {
         key: LegalStatus.OTHER,
-        text: 'Autre (par exemple, résident temporaire, étudiant, réfugié ou travailleur temporaire)',
+        text: 'Autre (par exemple, résident temporaire, étudiant ou travailleur temporaire)',
         shortText: 'Other',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "J'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
         shortText: 'Oui',
       },
     ],
@@ -334,8 +336,6 @@ const fr: Translations = {
       "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnLegal:
       'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    dependingOnLegalSponsored:
-      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen60:
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
@@ -387,7 +387,7 @@ const fr: Translations = {
     [SummaryState.MORE_INFO]:
       "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
     [SummaryState.UNAVAILABLE]:
-      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
+      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à {LINK_SERVICE_CANADA}.",
     [SummaryState.AVAILABLE_ELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT_SUM}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     [SummaryState.AVAILABLE_INELIGIBLE]:

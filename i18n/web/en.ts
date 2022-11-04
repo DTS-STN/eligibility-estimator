@@ -25,8 +25,8 @@ const en: WebTranslations = {
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   title: 'Canadian Old Age Benefits Estimator',
   introPageTitle: 'Canadian Old Age Security Benefits Estimator',
-  questionPageTitle: 'Canadian Old Age Security Benefits Estimator - Questions',
-  resultPageTitle: 'Canadian Old Age Security Benefits Estimator - Results',
+  questionPageTitle: 'Canadian Old Age Security Benefits Estimator: Questions',
+  resultPageTitle: 'Canadian Old Age Security Benefits Estimator: Results',
   menuTitle: 'Service Canada',
   clear: 'Clear',
   back: 'Back',
@@ -106,13 +106,13 @@ const en: WebTranslations = {
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
-    onThisPage: 'On This Page:',
+    onThisPage: 'On this page:',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total',
     whatYouToldUs: 'What you told us',
-    youMayBeEligible: 'You may be eligible at this time',
-    youAreNotEligible: 'You likely are not eligible at this time',
+    youMayBeEligible: 'You may be eligible',
+    youAreNotEligible: 'You are likely not eligible at this time',
     basedOnYourInfoEligible:
       'Based on your information, you may be eligible for:',
     basedOnYourInfoAndIncomeEligible:

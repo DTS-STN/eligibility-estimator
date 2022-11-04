@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
+import { QuestionLabel } from './QuestionLabel'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface NumberFieldProps
@@ -40,25 +41,16 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
 
   return (
     <>
-      <div className="mb-2.5">
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="number-input-label"
-          className="text-content font-bold inline mb-2.5"
-        >
-          {label}
-        </label>
-        <span className="ml-2 font-medium">{requiredText}</span>
-        {helpText && (
-          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-            {helpText}
-          </div>
-        )}
-      </div>
+      <QuestionLabel
+        name={name}
+        type="number-input"
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+      />
       {error && <ErrorLabel errorMessage={error} />}
       <NumberFormat
-        id={name}
+        id={`enter-${name}`}
         name={name}
         className={`form-control text-content border-form-border ${
           error ? ' border-danger' : ''

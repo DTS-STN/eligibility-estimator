@@ -41,14 +41,16 @@ const en: Translations = {
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    [FieldKey.AGE]: 'What month and year were you born?',
-    [FieldKey.OAS_DEFER]: 'When would you like to start receiving OAS?',
-    [FieldKey.OAS_AGE]: 'At what age would you like to start receiving OAS?',
+    [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.OAS_DEFER]:
+      'When would you like to start receiving the Old Age Security (OAS) pension?',
+    [FieldKey.OAS_AGE]:
+      'At what age would you like to start receiving the OAS pension?',
     [FieldKey.MARITAL_STATUS]: 'What is your current marital status?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?',
+      'Since the age of 18, have you lived outside of Canada for longer than 6 months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -127,12 +129,12 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
-      '<div>If you already receive OAS, enter when you started receiving it.</div> <div>Learn more about {LINK_OAS_DEFER_INLINE}.</div>',
+      '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.INCOME]:
       '<div style="padding-top:8px;">You can find your net income on line 23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left:12px"><li>any Old Age Security payments</li><li>your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul>',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'If you are not sure of the exact number, you may enter an estimate. You will still be able to view your benefits estimation results.',
+      'If you are not sure of the exact number, you may enter an estimate.',
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -162,12 +164,12 @@ const en: Translations = {
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: 'I would like to start receiving OAS when I turn 65 (most common)',
+        text: 'I would like to start at age 65 (most common)',
         shortText: 'Start at 65',
       },
       {
         key: true,
-        text: 'I would like to delay when I start receiving OAS (higher monthly payments)',
+        text: 'I would like to delay my first payment (higher amounts)',
         shortText: 'Delay',
       },
     ],
@@ -178,35 +180,35 @@ const en: Translations = {
         shortText: 'Canadian',
       },
       {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Permanent resident or landed immigrant (non-sponsored)',
-        shortText: 'PR or LI (non-sponsored)',
-      },
-      {
-        key: LegalStatus.SPONSORED,
-        text: 'Permanent resident or landed immigrant (sponsored)',
-        shortText: 'PR or LI (sponsored)',
-      },
-      {
         key: LegalStatus.INDIAN_STATUS,
-        text: 'Indian status or status card',
+        text: 'Indian status',
         shortText: 'Indian',
       },
       {
+        key: LegalStatus.PERMANENT_RESIDENT,
+        text: 'Permanent resident or landed immigrant',
+        shortText: 'PR or LI',
+      },
+      {
+        key: LegalStatus.REFUGEE,
+        text: 'Refugee',
+        shortText: 'Refugee',
+      },
+      {
         key: LegalStatus.OTHER,
-        text: 'Other (for example, temporary resident, student, refugee or temporary worker)',
+        text: 'Other (for example, temporary resident, student or temporary worker)',
         shortText: 'Other',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'I have not lived outside of Canada for longer than 6 months',
+        text: 'No, I have not lived outside of Canada for longer than 6 months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'I have lived outside of Canada for longer than 6 months',
+        text: 'Yes, I have lived outside of Canada for longer than 6 months',
         shortText: 'Yes',
       },
     ],
@@ -321,8 +323,6 @@ const en: Translations = {
       "You may be eligible to receive this benefit when you turn 65, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnLegal:
       'You may be eligible to receive this benefit, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    dependingOnLegalSponsored:
-      'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen60:
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
@@ -371,7 +371,7 @@ const en: Translations = {
     [SummaryState.MORE_INFO]:
       'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     [SummaryState.UNAVAILABLE]:
-      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
+      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to {LINK_SERVICE_CANADA}.',
     [SummaryState.AVAILABLE_ELIGIBLE]:
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT_SUM}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     [SummaryState.AVAILABLE_INELIGIBLE]:

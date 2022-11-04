@@ -42,21 +42,17 @@ export const Tooltip: React.FC<{
         data-testid="tooltip"
       >
         {tooltipData.text && (
-          <button
-            className="!bg-ds-gray5 ds-cursor-pointer ds-ml-auto md:ds-ml-0 ds-pl-8px !h-[30px]"
+          <Image
+            tabIndex={-1}
+            src={'/info.svg'}
+            width="30"
+            height="30"
+            alt="Click on to show info"
             onClick={(e) => {
               e.preventDefault()
               setShow(!show)
             }}
-          >
-            <Image
-              tabIndex={-1}
-              src={'/info.svg'}
-              width="30"
-              height="30"
-              alt="Click on to show info"
-            />
-          </button>
+          />
         )}
       </div>
       <div className={`${!show && 'hidden'}`} tabIndex={-1}>

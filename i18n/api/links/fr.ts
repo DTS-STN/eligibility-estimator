@@ -14,7 +14,7 @@ export const links: LinkDefinitions = {
   },
   overview: {
     oas: {
-      text: 'En savoir plus sur la Sécurité de la vieillesse',
+      text: 'En savoir plus sur la pension de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
       order: 3,
       icon: LinkIcon.info,
@@ -130,7 +130,7 @@ export const links: LinkDefinitions = {
     },
   },
   SC: {
-    text: 'communiquer avec Service Canada',
+    text: 'communiquez avec Service Canada',
     url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
     order: -1,
   },
@@ -140,7 +140,7 @@ export const links: LinkDefinitions = {
     order: -1,
   },
   oasDeferInline: {
-    text: 'le report de la SV',
+    text: 'En savoir plus sur le report de la pension de la SV',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
     order: -1,
   },

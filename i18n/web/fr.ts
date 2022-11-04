@@ -28,16 +28,16 @@ const fr: WebTranslations = {
   introPageTitle:
     'Estimateur des prestations canadiennes de la Sécurité de la vieillesse',
   questionPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Des questions',
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse : Questions',
   resultPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse - Résultats',
+    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse : Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
   faq: 'Foire Aux Questions',
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
-  required: '(requis)',
+  required: '(obligatoire)',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
@@ -67,7 +67,7 @@ const fr: WebTranslations = {
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   benefitAvailable:
     'Une prestation imposable disponible aux personnes de 65 ans et plus',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la pension de la Sécurité de la vieillesse</a>`,
   gisDefinitionText:
     'Une prestation non imposable disponible aux personnes qui reçoivent la pension de la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada',
   learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
@@ -80,7 +80,7 @@ const fr: WebTranslations = {
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
-  resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada.</a>`,
+  resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada</a>.`,
   privacyHeading: 'Confidentialité',
   privacyDefinition: `Nous protégeons vos renseignements en vertu de la <em><a className="underline italic text-default-text" href="https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html" target="_blank">Loi sur la protection des renseignements personnels</a></em>. L'estimateur ne recueille aucun renseignement pouvant vous identifier. Vos résultats anonymes peuvent être utilisés à des fins de recherche.`,
   homePageP3:
@@ -111,13 +111,13 @@ const fr: WebTranslations = {
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    onThisPage: 'sur cette page',
+    onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Total',
-    whatYouToldUs: 'Ce que vous nous avez dit',
-    youMayBeEligible: 'Vous pouvez être éligible en ce moment',
-    youAreNotEligible: "Vous n'êtes probablement pas éligible pour le moment",
+    whatYouToldUs: 'Vos renseignements',
+    youMayBeEligible: 'Vous pourriez être admissible',
+    youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
       'Selon vos informations, vous pourriez être admissible à :',
     basedOnYourInfoAndIncomeEligible:
@@ -131,9 +131,9 @@ const fr: WebTranslations = {
     basedOnYourInfoAndIncomeTotal:
       "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
-      'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
+      'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:
-      'Prestations auxquels vous pourriez ne pas avoir droit',
+      'Prestations auxquelles vous pourriez ne pas être admissible',
     noAnswersFound: 'Aucune réponse trouvée',
     noBenefitsFound: 'Aucune prestations trouvée',
     edit: 'Réviser',
