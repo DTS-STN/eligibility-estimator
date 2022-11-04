@@ -32,7 +32,7 @@ describe('Tooltip component', () => {
     const ui = <Tooltip field={field} />
     render(ui)
 
-    const tooltip = screen.getByTestId('tooltip')
+    const tooltip = screen.getByTestId('tooltip-text')
     const tooltipData = getTooltipTranslationByField(Language.EN, field)
     expect(tooltip.innerHTML).toContain(normalizeHtml(tooltipData.text))
   })

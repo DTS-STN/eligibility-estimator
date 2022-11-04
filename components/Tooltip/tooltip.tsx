@@ -58,6 +58,7 @@ export const Tooltip: React.FC<{
       <div className={`${!show && 'hidden'}`} tabIndex={-1}>
         <div
           id={'helpText'}
+          data-testid="tooltip-text"
           className="ds-rounded ds-z-1 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px pb-4"
           dangerouslySetInnerHTML={{ __html: tooltipData.text }}
         />
