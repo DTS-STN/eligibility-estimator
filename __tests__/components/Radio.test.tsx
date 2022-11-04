@@ -40,7 +40,9 @@ describe('Radio component', () => {
         label={props.label}
         required={props.required}
         values={props.values}
-        onChange={(e) => e.preventDefault()}
+        setValue={() => {
+          return ''
+        }}
       />
     )
     render(ui)
@@ -81,7 +83,9 @@ describe('Radio component', () => {
         required={props.required}
         values={props.values}
         checkedValue={props.checkedValue}
-        onChange={(e) => e.preventDefault()}
+        setValue={(e) => {
+          return ''
+        }}
       />
     )
     render(ui)
