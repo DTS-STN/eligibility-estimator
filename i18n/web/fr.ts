@@ -111,12 +111,12 @@ const fr: WebTranslations = {
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    onThisPage: 'sur cette page',
+    onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Total',
     whatYouToldUs: 'Vos renseignements',
-    youMayBeEligible: 'Vous pouvez être admissible',
+    youMayBeEligible: 'Vous pourriez être admissible',
     youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
       'Selon vos informations, vous pourriez être admissible à :',
