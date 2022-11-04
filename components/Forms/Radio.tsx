@@ -42,9 +42,9 @@ export const Radio: React.VFC<InputProps> = ({
           label={label}
           requiredText={requiredText}
           helpText={helpText}
-        />
-
-        <Tooltip field={name} />
+        >
+          <Tooltip field={name} />
+        </QuestionLabel>
 
         {error && <ErrorLabel errorMessage={error} />}
         {values.map((val, index) => (

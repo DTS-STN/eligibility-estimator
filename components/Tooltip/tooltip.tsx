@@ -37,7 +37,7 @@ export const Tooltip: React.FC<{
   return (
     <>
       <div
-        className="relative inline-block cursor-pointer !h-[30px]"
+        className="relative inline-block cursor-pointer pl-2 !h-[30px]"
         ref={wrapperRef}
         data-testid="tooltip"
       >

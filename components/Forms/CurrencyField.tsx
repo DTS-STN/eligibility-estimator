@@ -56,10 +56,9 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         type="currency-input"
         label={label}
         requiredText={requiredText}
-        // helpText={helpText}
+        helpText={helpText}
       >
-        {' '}
-        {helpText && <Tooltip field={name} />}
+        <Tooltip field={name} />
       </QuestionLabel>
 
       {error && <ErrorLabel errorMessage={error} />}
