@@ -48,7 +48,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
 
-  const connection = tsln._language === Language.EN ? '-' : ':'
+  const connection = tsln._language === Language.EN ? ':' : ' :'
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -93,22 +93,22 @@ export const EligibilityPage: React.VFC = ({}) => {
   const keyStepMap: { [x in Steps]: CardConfig } = {
     [Steps.STEP_1]: {
       title: tsln.category.age,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.income}`,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
     },
     [Steps.STEP_2]: {
       title: tsln.category.income,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.legal}`,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
     },
     [Steps.STEP_3]: {
       title: tsln.category.legal,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.residence}`,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
     },
     [Steps.STEP_4]: {
       title: tsln.category.residence,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.marital}`,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
     },
     [Steps.STEP_5]: {
