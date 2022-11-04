@@ -45,8 +45,9 @@ const fr: Translations = {
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
     [FieldKey.OAS_DEFER]:
+      'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
+    [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.OAS_AGE]: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
@@ -386,7 +387,7 @@ const fr: Translations = {
     [SummaryState.MORE_INFO]:
       "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
     [SummaryState.UNAVAILABLE]:
-      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
+      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à {LINK_SERVICE_CANADA}.",
     [SummaryState.AVAILABLE_ELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT_SUM}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     [SummaryState.AVAILABLE_INELIGIBLE]:

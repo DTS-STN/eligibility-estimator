@@ -1,6 +1,7 @@
 import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
+import { QuestionLabel } from './QuestionLabel'
 import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -35,26 +36,13 @@ export const Radio: React.VFC<InputProps> = ({
   return (
     <div className="radio">
       <fieldset>
-        <legend className="mb-2.5">
-          <label
-            htmlFor={name}
-            aria-label={name}
-            data-testid="radio-label"
-            className="inline flex-nowrap text-content font-bold"
-          >
-            <span
-              className="mb-1.5 text-content font-bold question-link"
-              dangerouslySetInnerHTML={{ __html: label }}
-            />
-            <span className="ml-2 font-medium">{requiredText}</span>
-          </label>
-        </legend>
-        {helpText && (
-          <div
-            className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
-            dangerouslySetInnerHTML={{ __html: helpText }}
-          />
-        )}
+        <QuestionLabel
+          name={name}
+          type="radio"
+          label={label}
+          requiredText={requiredText}
+          helpText={helpText}
+        />
 
         <Tooltip field={name} />
 

@@ -4,6 +4,7 @@ import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
 
 export interface MonthAndYearProps
@@ -50,22 +51,13 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 
   return (
     <>
-      <div className="mb-2.5">
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="number-input-label"
-          className="text-content font-bold inline mb-2.5"
-        >
-          {label}
-        </label>
-        <span className="ml-2 font-medium">{requiredText}</span>
-        {helpText && (
-          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-            {helpText}
-          </div>
-        )}
-      </div>
+      <QuestionLabel
+        name={name}
+        type="date"
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+      />
       <DatePicker
         id={`enter-${name}`}
         month={dateInput.month}
