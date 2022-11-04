@@ -6,6 +6,7 @@ export interface QuestionLabelProps {
   label: string
   helpText?: string
   requiredText?: string
+  children: React.ReactNode
 }
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
@@ -14,6 +15,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   label,
   requiredText,
   helpText,
+  children,
 }) => {
   return (
     <div className="mb-2.5">
@@ -26,6 +28,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
         <span dangerouslySetInnerHTML={{ __html: label }} />
       </label>
       {requiredText && <span className="ml-2 font-medium">{requiredText}</span>}
+      {children}
       {helpText && (
         <div
           className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
