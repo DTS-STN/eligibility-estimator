@@ -371,7 +371,7 @@ const en: Translations = {
     [SummaryState.MORE_INFO]:
       'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
     [SummaryState.UNAVAILABLE]:
-      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to contact {LINK_SERVICE_CANADA}.',
+      'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to {LINK_SERVICE_CANADA}.',
     [SummaryState.AVAILABLE_ELIGIBLE]:
       'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT_SUM}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
     [SummaryState.AVAILABLE_INELIGIBLE]:
