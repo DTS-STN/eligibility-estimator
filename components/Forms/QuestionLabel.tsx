@@ -6,7 +6,7 @@ export interface QuestionLabelProps {
   label: string
   helpText?: string
   requiredText?: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
