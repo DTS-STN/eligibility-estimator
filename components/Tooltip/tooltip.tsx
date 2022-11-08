@@ -37,7 +37,7 @@ export const Tooltip: React.FC<{
   return (
     <>
       <div
-        className="relative inline-block cursor-pointer pl-2 !h-[30px]"
+        className="relative inline-block cursor-pointer pl-2 !h-[30px] align-middle"
         ref={wrapperRef}
         data-testid="tooltip"
       >
@@ -55,7 +55,7 @@ export const Tooltip: React.FC<{
           />
         )}
       </div>
-      <div className={`${!show && 'hidden'}`} tabIndex={-1}>
+      <div className={`${!show && 'hidden'} pt-4`} tabIndex={-1}>
         <div
           id={'helpText'}
           data-testid="tooltip-text"
