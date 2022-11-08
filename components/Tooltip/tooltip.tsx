@@ -52,6 +52,12 @@ export const Tooltip: React.FC<{
               e.preventDefault()
               setShow(!show)
             }}
+            onKeyDown={(e) => {
+              if ([' ', 'Spacebar', 'Enter'].includes(e.key)) {
+                e.preventDefault()
+                setShow(!show)
+              }
+            }}
           />
         )}
       </div>
