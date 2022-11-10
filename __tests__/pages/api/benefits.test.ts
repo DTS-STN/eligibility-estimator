@@ -52,7 +52,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
     expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough
+      ValidationErrors.yearsInCanadaNotEnough10
     )
   })
 
@@ -74,7 +74,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
     expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.socialCountryUnavailable
+      ValidationErrors.socialCountryUnavailable10
     )
   })
 
@@ -97,11 +97,11 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
     expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.socialCountryUnavailable
+      ValidationErrors.socialCountryUnavailable20
     )
   })
 
-  it('returns "unavailable" - living in No Agreement, under 20 years in Canada, lived in social country', async () => {
+  it('returns "error unavailable" - living in No Agreement, under 20 years in Canada, lived in social country', async () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
@@ -113,23 +113,19 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       everLivedSocialCountry: true,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(SummaryState.UNAVAILABLE)
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
+    expect(res.status).toEqual(400)
+
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+    expect(res.body.detail.details[0].message).toEqual(
+      ValidationErrors.socialCountryUnavailable20
     )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
-    expectAlwAfsTooOld(res)
   })
 
-  it('returns "unavailable" - living in Agreement, under 20 years in Canada', async () => {
+  it('returns "Invalid" - living in Agreement, under 20 years in Canada', async () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
@@ -138,23 +134,20 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
-      everLivedSocialCountry: undefined,
+      everLivedSocialCountry: true,
       ...partnerUndefined,
     })
-    expect(res.body.summary.state).toEqual(SummaryState.UNAVAILABLE)
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.UNAVAILABLE
+
+    expect(res.status).toEqual(400)
+
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+    expect(res.body.detail.details[0].message).toEqual(
+      ValidationErrors.socialCountryUnavailable20
     )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
-    expectAlwAfsTooOld(res)
   })
 
   it('returns "error unavailable" - age 60, married, living in Agreement, under 10 years in Canada', async () => {
@@ -166,19 +159,20 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
-      everLivedSocialCountry: undefined,
+      everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
+
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
     expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.YEARS_IN_CANADA_SINCE_18
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
     expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.socialCountryUnavailable
+      ValidationErrors.socialCountryUnavailable20
     )
   })
 
@@ -203,11 +197,11 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
     expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough
+      ValidationErrors.yearsInCanadaNotEnough10
     )
   })
 
-  it('returns "ineligible" - age 60, single, living in No Agreement, under 20 years in Canada', async () => {
+  it('returns "ineligible" - age 60, single, living in No Agreement, 20 years in Canada', async () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
@@ -215,13 +209,13 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
       livedOutsideCanada: true,
-      yearsInCanadaSince18: 19,
+      yearsInCanadaSince18: 20,
       everLivedSocialCountry: false,
       ...partnerUndefined,
     })
     expectAllIneligible(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+      ResultReason.AGE_YOUNG
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
@@ -255,7 +249,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
     expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough
+      ValidationErrors.yearsInCanadaNotEnough20
     )
   })
 })
@@ -783,19 +777,9 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
-    expectAlwEligible(res)
+
+    expect(res.body.summary.state).toEqual('MORE_INFO')
+    expect(res.body.missingFields).toEqual(['everLivedSocialCountry'])
   })
 
   it('returns "ALW eligible" - married, living in No Agreement, 10 years in Canada', async () => {
@@ -812,19 +796,16 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
+
+    expect(res.status).toEqual(400)
+    expect(res.body.error).toEqual(ResultKey.INVALID)
+    if (!('details' in res.body.detail)) throw Error('missing details')
+    expect(res.body.detail.details[0].path[0]).toEqual(
+      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
     )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+    expect(res.body.detail.details[0].message).toEqual(
+      ValidationErrors.yearsInCanadaNotEnough20
     )
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
-    expectAlwEligible(res)
   })
 
   it('returns "ALW eligible" - age 64, married, 19 years in Canada, lived in social country', async () => {
