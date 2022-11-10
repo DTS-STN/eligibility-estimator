@@ -61,35 +61,43 @@ export const RequestSchema = Joi.object({
   yearsInCanadaSince18: Joi.number()
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge)
-    /*
-     If they are currently living in a country with an agreement, then the
-     everLivedSocialCountry rules below will never apply, as we don't ask that
-     question if they currently live in a country with an agreement.
-     So, we apply the rule here in this case.
-    */
-    .when('livingCountry', {
-      is: Joi.string().valid(...Object.values(AGREEMENT_COUNTRIES)),
-      then: Joi.number()
-        .min(10) // sticking with the "easy" limit of 10, because the 20 only applies to OAS
-        .message(ValidationErrors.socialCountryUnavailable),
-    }),
+    .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
     // if they haven't lived in Canada long enough,
-    .when('yearsInCanadaSince18', {
-      not: Joi.number().min(10), // sticking with the "easy" limit of 10, because the 20 only applies to OAS
-      // then we'll stop them no matter what.
-      // if they put true, they should contact Service Canada.
-      // if they put false, we can confidently say they are not eligible for anything.
-      then: Joi.boolean().when('.', {
-        is: Joi.boolean().valid(true),
-        then: Joi.forbidden().messages({
-          'any.unknown': ValidationErrors.socialCountryUnavailable,
-        }),
-        otherwise: Joi.forbidden().messages({
-          'any.unknown': ValidationErrors.yearsInCanadaNotEnough,
-        }),
-      }),
+    .when('livingCountry', {
+      is: Joi.string().valid('CAN'),
+      then: Joi.when(
+        'yearsInCanadaSince18',
+        //9.9 to disable 10,since the input only accepts integer, this is good
+        {
+          is: Joi.number().max(9.9),
+          then: Joi.boolean().when('.', {
+            is: Joi.boolean().valid(true),
+            then: Joi.forbidden().messages({
+              'any.unknown': ValidationErrors.socialCountryUnavailable10,
+            }),
+            otherwise: Joi.forbidden().messages({
+              'any.unknown': ValidationErrors.yearsInCanadaNotEnough10,
+            }),
+          }),
+        }
+      ),
+      otherwise: Joi.when(
+        'yearsInCanadaSince18',
+        //19.9 to disable 20,since the input only accepts integer, this is good
+        {
+          is: Joi.number().max(19.9),
+          then: Joi.boolean().when('.', {
+            is: Joi.boolean().valid(true),
+            then: Joi.forbidden().messages({
+              'any.unknown': ValidationErrors.socialCountryUnavailable20,
+            }),
+            otherwise: Joi.forbidden().messages({
+              'any.unknown': ValidationErrors.yearsInCanadaNotEnough20,
+            }),
+          }),
+        }
+      ),
     }),
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
