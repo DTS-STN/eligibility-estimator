@@ -106,7 +106,7 @@ const en: WebTranslations = {
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
-    onThisPage: 'On this page:',
+    onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total',
