@@ -141,8 +141,8 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
-    [FieldKey.INCOME]:
-      '<div style="padding-top:8px;">Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus (T1).</div><div style="padding-top:8px;">Pour une estimation plus précise, retirez de ce montant :</div> <ul class="list-disc" style="padding-left:12px"><li style="padding-top: 10px; color: #666666">vos prestations de la Sécurité de la vieillesse;</li><li style="padding-top: 10px; color: #666666">les premiers 5 000 $ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et 50 % des prochains 10 000 $.</li></ul>',
+    // [FieldKey.INCOME]:
+    //   '<div style="padding-top:8px;">Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus (T1).</div><div style="padding-top:8px;">Pour une estimation plus précise, retirez de ce montant :</div> <ul class="list-disc" style="padding-left:12px"><li style="padding-top: 10px; color: #666666">vos prestations de la Sécurité de la vieillesse;</li><li style="padding-top: 10px; color: #666666">les premiers 5 000 $ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et 50 % des prochains 10 000 $.</li></ul>',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },

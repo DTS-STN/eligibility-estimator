@@ -14,6 +14,10 @@ const en: TooltipTranslations = {
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     useDataFromKey: 'legalStatus',
   },
+  [FieldKey.INCOME]: {
+    heading: apiEn.category.income,
+    text: '<div style="padding-top:8px;">You can find your net income on line 23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul>',
+  },
 }
 
 export default en
