@@ -54,6 +54,7 @@ export const Radio: React.VFC<InputProps> = ({
             className="flex items-center mb-2 md:mb-[12px] last:mb-0"
           >
             <input
+              className="hover:cursor-pointer"
               type="radio"
               data-testid="radio"
               id={`${keyforid}-${index}`}
