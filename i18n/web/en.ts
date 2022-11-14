@@ -184,6 +184,11 @@ const en: WebTranslations = {
   tooltip: {
     moreInformation: 'More information',
   },
+
+  partnerInformation: "Partner's information",
+  partnerInformationDescription:
+    "Individuals who are married or in common-law relationships need to \
+  provide their partner's information to assess their own eligibility.",
 }
 
 export default en
