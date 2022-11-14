@@ -131,8 +131,6 @@ const en: Translations = {
     [FieldKey.OAS_DEFER]:
       '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
-    // [FieldKey.INCOME]:
-    //   '<div style="padding-top:8px;">You can find your net income on line 23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px"><li style="padding-top: 10px; color: #666666">any Old Age Security payments</li><li style="padding-top: 10px; color: #666666">your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul>',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate.',
   },
