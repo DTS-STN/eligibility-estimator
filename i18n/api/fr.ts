@@ -319,7 +319,7 @@ const fr: Translations = {
     mustBeInCanada:
       'Vous devez vivre au Canada pour être admissible à cette prestation.',
     mustBeOasEligible:
-      'Vous devez être admissible à la Sécurité de la vieillesse pour être admissible à cette prestation.',
+      'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
       "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
     mustMeetIncomeReq:
@@ -341,9 +341,9 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées entre 60 et 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     afsNotEligible:
-      "L'Allocation au survivant s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) est décédé.",
+      "L'Allocation au survivant est une prestation pour les personnes âgées entre 60 et 64 ans dont le conjoint est décédé.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:

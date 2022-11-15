@@ -328,9 +328,9 @@ const en: Translations = {
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
-      'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
+      'The Allowance is for individuals between the ages of 60 and 64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
-      'Allowance for the Survivor is for individuals between 60 and 64 years old whose partner (spouse or common-law) has died.',
+      'The Allowance for the Survivor is for individuals between the ages of 60 and 64 whose spouse or common-law partner has passed away.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
