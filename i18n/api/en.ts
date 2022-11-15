@@ -240,11 +240,6 @@ const en: Translations = {
         text: 'Widowed',
         shortText: 'Widowed / Partner',
       },
-      // {
-      //   key: MaritalStatus.INV_SEPARATED,
-      //   text: 'Involuntarily separated',
-      //   shortText: 'Separated',
-      // },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
       {

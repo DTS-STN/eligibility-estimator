@@ -250,11 +250,6 @@ const fr: Translations = {
         text: 'Conjoint survivant',
         shortText: 'Conjoint survivant',
       },
-      // {
-      //   key: MaritalStatus.INV_SEPARATED,
-      //   text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
-      //   shortText: 'Conjoints vivants séparément',
-      // },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
       {
