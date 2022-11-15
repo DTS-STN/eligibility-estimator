@@ -31,14 +31,16 @@ export const YourAnswers: React.VFC<{
             <div key={input.key} className="py-4 border-b-2 border-info-border">
               <div>{tsln.resultsQuestions[input.key]}</div>
               <div>
-                <strong>{getDisplayValue(input)}</strong> &nbsp;
-                <DSLink
-                  id={`edit-${input.key}`}
-                  href={`eligibility#${input.key}`}
-                  text={tsln.resultsPage.edit}
-                  target="_self"
-                  ariaLabel={tsln.resultsEditAriaLabels[input.key]}
-                />
+                <strong>{getDisplayValue(input)}</strong>
+                <span className="float-right">
+                  <DSLink
+                    id={`edit-${input.key}`}
+                    href={`eligibility#${input.key}`}
+                    text={tsln.resultsPage.edit}
+                    target="_self"
+                    ariaLabel={tsln.resultsEditAriaLabels[input.key]}
+                  />
+                </span>
               </div>
             </div>
           )
