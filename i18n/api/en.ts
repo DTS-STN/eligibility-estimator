@@ -125,14 +125,12 @@ const en: Translations = {
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
-      'Providing your income will give you more helpful and accurate results.',
+      'Providing your income will give you more accurate results.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
       '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
-    [FieldKey.INCOME]:
-      'You can find your net income on line 23600 of your personal income tax return (T1).',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate.',
   },

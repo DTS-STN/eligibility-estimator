@@ -135,14 +135,12 @@ const fr: Translations = {
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
-      'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
+      'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
-    [FieldKey.INCOME]:
-      'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
