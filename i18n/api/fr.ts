@@ -211,12 +211,12 @@ const fr: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois",
         shortText: 'Oui',
       },
     ],
