@@ -356,19 +356,19 @@ const fr: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
-      text: 'Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'Renseignez-vous sur la possibilité de reporter votre premier paiement de la pension de la Sécurité de la vieillesse, {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'Vous devrez peut-être rembourser une partie de votre pension',
-      text: 'Étant donné que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+      text: 'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
     },
     oasIncreaseAt75: {
-      heading: 'Vos paiements augmenteront lorsque vous atteindrez 75 ans',
-      text: "Une fois que vous aurez atteint l'âge de 75 ans, vos paiements de la SV augmenteront de 10 %, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.",
+      heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
+      text: 'Une fois que vous aurez 75 ans, vos paiements augmenteront de 10&nbsp;%, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.',
     },
     oasIncreaseAt75Applied: {
-      heading: 'Vos versements ont augmenté car vous avez plus de 75 ans',
-      text: 'Puisque vous avez plus de 75 ans, vos versements de la SV ont été augmentés de 10 %.',
+      heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
+      text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10&nbsp;%.',
     },
   },
   summaryTitle: {

@@ -343,7 +343,7 @@ const en: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
-      text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'To learn more about your option to delay your first Old Age Security pension payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'You may have to repay a part of your pension',
@@ -351,11 +351,11 @@ const en: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Your payments will increase when you turn 75',
-      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+      text: 'Once you turn 75, your payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
     },
     oasIncreaseAt75Applied: {
       heading: 'Your payments have increased because you are over 75',
-      text: 'Since you are over the age of 75, your OAS payments have been increased by 10%.',
+      text: 'Since you are over the age of 75, your payments have been increased by 10%.',
     },
   },
   summaryTitle: {
