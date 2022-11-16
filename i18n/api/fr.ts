@@ -235,23 +235,18 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Célibataire, divorcé(e), ou séparé(e)',
+        text: 'Célibataire, divorcé ou séparé',
         shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Marié(e) ou conjoint(e) de fait',
-        shortText: 'Marié(e) ou conjoint(e) de fait',
+        text: 'Marié ou conjoint de fait',
+        shortText: 'Marié ou conjoint de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire veuf(ve)',
-        shortText: 'Partenaire veuf(ve)',
-      },
-      {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
-        shortText: 'Conjoints vivants séparément',
+        text: 'Conjoint survivant',
+        shortText: 'Conjoint survivant',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [

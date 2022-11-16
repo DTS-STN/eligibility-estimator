@@ -193,6 +193,11 @@ const fr: WebTranslations = {
   tooltip: {
     moreInformation: "Plus d'information",
   },
+
+  partnerInformation: 'Renseignements sur votre conjoint',
+  partnerInformationDescription:
+    'Les personnes mariées ou vivant en union de fait doivent fournir \
+  des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
 }
 
 export default fr

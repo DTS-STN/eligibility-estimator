@@ -225,7 +225,7 @@ const en: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Single, divorced, or separated',
+        text: 'Single, divorced or separated',
         shortText: 'Single / divorced / separated',
       },
       {
@@ -235,13 +235,8 @@ const en: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Surviving partner or widowed',
+        text: 'Widowed',
         shortText: 'Widowed / Partner',
-      },
-      {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Involuntarily separated',
-        shortText: 'Separated',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
