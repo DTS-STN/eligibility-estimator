@@ -11,7 +11,14 @@ export const BenefitCards: React.VFC<{
 }> = ({ results }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
-
+  const titleArray = [
+    'Old Age Security pension',
+    'Pension de la Sécurité de la vieillesse',
+  ]
+  const titleWithAcronymArray = [
+    'Old Age Security (OAS) pension',
+    'Pension de la Sécurité de la vieillesse (SV)',
+  ]
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
   const resultsEligible = results.filter(
@@ -23,12 +30,24 @@ export const BenefitCards: React.VFC<{
     (value) => value.eligibility?.result === ResultKey.INELIGIBLE
   )
 
+  const transformBenefitName = (benefitName) => {
+    let benefitText = ''
+    const foundIndex = titleArray.findIndex((t) => t === benefitName)
+    benefitText =
+      foundIndex != -1 ? titleWithAcronymArray[foundIndex] : benefitName
+    return benefitText
+  }
+
   function generateCard(result: BenefitResult) {
-    const titleText: string = apiTsln.benefit[result.benefitKey]
+    let titleText: string = apiTsln.benefit[result.benefitKey]
     const collapsedDetails = result.cardDetail.collapsedText
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
+
+    titleText =
+      eligibility === false ? transformBenefitName(titleText) : titleText
+
     return (
       <div key={result.benefitKey}>
         <BenefitCard

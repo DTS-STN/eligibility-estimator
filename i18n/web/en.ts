@@ -106,7 +106,7 @@ const en: WebTranslations = {
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
-    onThisPage: 'On this page:',
+    onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
     tableTotalAmount: 'Total',
@@ -114,7 +114,7 @@ const en: WebTranslations = {
     youMayBeEligible: 'You may be eligible',
     youAreNotEligible: 'You are likely not eligible at this time',
     basedOnYourInfoEligible:
-      'Based on your information, you may be eligible for:',
+      'Based on your information, you may be eligible for the:',
     basedOnYourInfoAndIncomeEligible:
       'Depending on your income and based on your information, you may be eligible for:',
     basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or ${generateLink(
