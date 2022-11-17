@@ -52,7 +52,7 @@ const fr: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
+      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -211,12 +211,12 @@ const fr: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Oui',
       },
     ],
