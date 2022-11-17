@@ -341,7 +341,7 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'Allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées entre 60 et 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes âgées entre 60 et 64 ans dont le conjoint est décédé.",
     autoEnrollTrue:
