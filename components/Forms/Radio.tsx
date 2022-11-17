@@ -51,9 +51,10 @@ export const Radio: React.VFC<InputProps> = ({
           <div
             key={index}
             id={`${name}-r${index}`}
-            className="flex items-center mb-2 md:mb-[12px] last:mb-0"
+            className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
           >
             <input
+              className="hover:cursor-pointer"
               type="radio"
               data-testid="radio"
               id={`${keyforid}-${index}`}
@@ -66,7 +67,7 @@ export const Radio: React.VFC<InputProps> = ({
               htmlFor={`${keyforid}-${index}`}
               className="flex items-center focus:inherit text-content hover:cursor-pointer"
             >
-              {val.text}
+              {<p dangerouslySetInnerHTML={{ __html: val.text }} />}
             </label>
           </div>
         ))}

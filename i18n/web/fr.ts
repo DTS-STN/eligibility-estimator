@@ -119,7 +119,7 @@ const fr: WebTranslations = {
     youMayBeEligible: 'Vous pourriez être admissible',
     youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
-      'Selon vos informations, vous pourriez être admissible à :',
+      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
       'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
     basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
@@ -193,6 +193,11 @@ const fr: WebTranslations = {
   tooltip: {
     moreInformation: "Plus d'information",
   },
+
+  partnerInformation: 'Renseignements sur votre conjoint',
+  partnerInformationDescription:
+    'Les personnes mariées ou vivant en union de fait doivent fournir \
+  des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
 }
 
 export default fr

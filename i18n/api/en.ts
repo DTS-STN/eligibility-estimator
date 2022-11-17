@@ -16,8 +16,8 @@ import { links } from './links/en'
 const en: Translations = {
   _language: Language.EN,
   benefit: {
-    [BenefitKey.oas]: 'Old Age Security (OAS)',
-    [BenefitKey.gis]: 'Guaranteed Income Supplement (GIS)',
+    [BenefitKey.oas]: 'Old Age Security pension',
+    [BenefitKey.gis]: 'Guaranteed Income Supplement',
     [BenefitKey.alw]: 'Allowance',
     [BenefitKey.afs]: 'Allowance for the Survivor',
   },
@@ -51,7 +51,7 @@ const en: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18, have you lived outside of Canada for longer than 6 months?',
+      'Since the age of 18, have you lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -127,14 +127,12 @@ const en: Translations = {
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
-      'Providing your income will give you more helpful and accurate results.',
+      'Providing your income will give you more accurate results.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
       '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
-    [FieldKey.INCOME]:
-      'You can find your net income on line 23600 of your personal income tax return (T1).',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate.',
   },
@@ -205,12 +203,12 @@ const en: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'No, I have not lived outside of Canada for longer than 6 months',
+        text: 'No, I have not lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'Yes, I have lived outside of Canada for longer than 6 months',
+        text: 'Yes, I have lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'Yes',
       },
     ],
@@ -241,11 +239,6 @@ const en: Translations = {
         key: MaritalStatus.WIDOWED,
         text: 'Surviving partner or widowed',
         shortText: 'Widowed',
-      },
-      {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Involuntarily separated',
-        shortText: 'Separated',
       },
     ],
     [FieldKey.INV_SEPARATED]: [
@@ -320,7 +313,7 @@ const en: Translations = {
     mustBeInCanada:
       'You need to live in Canada to be eligible for this benefit.',
     mustBeOasEligible:
-      'You need to be eligible for Old Age Security to be eligible for this benefit.',
+      'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
       'You need to complete the Old Age Security eligibility assessment first.',
     mustMeetIncomeReq:
@@ -342,9 +335,9 @@ const en: Translations = {
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
-      'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
+      'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
-      'Allowance for the Survivor is for individuals between 60 and 64 years old whose partner (spouse or common-law) has died.',
+      'The Allowance for the Survivor is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner has passed away.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -359,7 +352,7 @@ const en: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
-      text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'To learn more about your option to delay your first Old Age Security pension payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'You may have to repay a part of your pension',
@@ -367,11 +360,11 @@ const en: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Your payments will increase when you turn 75',
-      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+      text: 'Once you turn 75, your payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
     },
     oasIncreaseAt75Applied: {
       heading: 'Your payments have increased because you are over 75',
-      text: 'Since you are over the age of 75, your OAS payments have been increased by 10%.',
+      text: 'Since you are over the age of 75, your payments have been increased by 10%.',
     },
   },
   summaryTitle: {

@@ -137,6 +137,9 @@ export type WebTranslations = {
   tooltip: {
     moreInformation: string
   }
+
+  partnerInformation: string
+  partnerInformationDescription: string
 }
 
 export function getWebTranslations(language: Language): WebTranslations {
