@@ -5,7 +5,32 @@ import { TooltipTranslations } from './index'
 const fr: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiFr.category.marital,
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint(e) de fait</span>: Vous vivez avec une autre personne dans une relation conjugale depuis au moins un an. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Divorcé(e)</span>: Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Marié(e)</span>: Vous êtes unies officiellement au cours d’une cérémonie. Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Célibataire </span>: Vous n'avez jamais été marié et ne vivez pas en union de fait. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint survivant/veuf</span>: Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Séparé(e):</span> Vous vivez séparé de votre époux ou de votre conjoint à cause de la rupture de votre relation depuis au moins 90 jours et vous ne vous êtes pas réconcilié.</p>",
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Célibataire </span>: \
+            Vous n'avez jamais été marié et ne vivez pas en union de fait. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Divorcé </span>: \
+            Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Séparé </span>: \
+            Vous vivez séparé de votre conjoint à cause de la rupture de votre relation \
+            depuis au moins 90 jours et vous ne vous êtes pas réconcilié. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Marié </span>: \
+            Vous et votre conjoint avez été unis officiellement au cours d’une cérémonie. \
+            Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Conjoint de fait </span>: \
+            Vous vivez avec une autre personne dans une relation conjugale depuis au moins 1 an. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Conjoint survivant </span>: \
+            Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait. \
+          </p>",
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiFr.category.legal,

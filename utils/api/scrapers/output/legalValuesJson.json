@@ -1,31 +1,31 @@
 {
-  "lastUpdatedYear": 2022,
-  "lastUpdatedQuarter": "July to September 2022",
+  "lastUpdatedYear": 2021,
+  "lastUpdatedQuarter": "October to December 2022",
   "oas": {
-    "amount": 666.83,
-    "amount75": 733.51,
-    "incomeLimit": 134253,
-    "incomeLimit75": 136920,
-    "clawbackIncomeLimit": 81761
+    "amount": 685.5,
+    "amount75": 754.05,
+    "incomeLimit": 129757,
+    "incomeLimit75": 129757,
+    "clawbackIncomeLimit": 79845
   },
   "gis": {
-    "singleAmount": 995.99,
-    "singleIncomeLimit": 20208,
-    "spouseOasAmount": 599.53,
-    "spouseOasIncomeLimit": 26688,
-    "spouseNoOasAmount": 995.99,
-    "spouseNoOasIncomeLimit": 48432,
-    "spouseAlwAmount": 599.53,
-    "spouseAlwIncomeLimit": 37392
+    "singleAmount": 1023.88,
+    "singleIncomeLimit": 20784,
+    "spouseOasAmount": 616.31,
+    "spouseOasIncomeLimit": 27456,
+    "spouseNoOasAmount": 1023.88,
+    "spouseNoOasIncomeLimit": 49824,
+    "spouseAlwAmount": 616.31,
+    "spouseAlwIncomeLimit": 38448
   },
   "alw": {
-    "alwAmount": 1266.36,
-    "alwIncomeLimit": 37392,
-    "afsAmount": 1509.58,
-    "afsIncomeLimit": 27240
+    "alwAmount": 1301.81,
+    "alwIncomeLimit": 38448,
+    "afsAmount": 1551.85,
+    "afsIncomeLimit": 27984
   },
   "topUp": {
-    "single": 154.27,
-    "married": 43.71
+    "single": 158.59,
+    "married": 44.93
   }
 }

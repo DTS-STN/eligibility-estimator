@@ -52,7 +52,7 @@ const fr: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
+      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -211,12 +211,12 @@ const fr: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Oui',
       },
     ],
@@ -235,23 +235,18 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Célibataire, divorcé(e), ou séparé(e)',
+        text: 'Célibataire, divorcé ou séparé',
         shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Marié(e) ou conjoint(e) de fait',
-        shortText: 'Marié(e) ou conjoint(e) de fait',
+        text: 'Marié ou conjoint de fait',
+        shortText: 'Marié ou conjoint de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire veuf(ve)',
-        shortText: 'Partenaire veuf(ve)',
-      },
-      {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
-        shortText: 'Conjoints vivants séparément',
+        text: 'Conjoint survivant',
+        shortText: 'Conjoint survivant',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [

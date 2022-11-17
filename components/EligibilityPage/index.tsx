@@ -8,7 +8,11 @@ import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { FieldCategory, Language } from '../../utils/api/definitions/enums'
+import {
+  FieldCategory,
+  Language,
+  MaritalStatus,
+} from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
   FieldKey,
@@ -266,6 +270,13 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             </div>
           )}
+          {field.key === FieldKey.MARITAL_STATUS &&
+            field.value === MaritalStatus.PARTNERED && (
+              <div className="my-6">
+                <p className="ds-accordion-header">{tsln.partnerInformation}</p>
+                <p>{tsln.partnerInformationDescription}</p>
+              </div>
+            )}
         </div>
       )
     })

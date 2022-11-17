@@ -50,7 +50,7 @@ const en: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18, have you lived outside of Canada for longer than 6 months?',
+      'Since the age of 18, have you lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -201,12 +201,12 @@ const en: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'No, I have not lived outside of Canada for longer than 6 months',
+        text: 'No, I have not lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'Yes, I have lived outside of Canada for longer than 6 months',
+        text: 'Yes, I have lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'Yes',
       },
     ],
@@ -225,7 +225,7 @@ const en: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Single, divorced, or separated',
+        text: 'Single, divorced or separated',
         shortText: 'Single / divorced / separated',
       },
       {
@@ -235,13 +235,8 @@ const en: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Surviving partner or widowed',
+        text: 'Widowed',
         shortText: 'Widowed / Partner',
-      },
-      {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Involuntarily separated',
-        shortText: 'Separated',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [

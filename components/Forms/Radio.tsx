@@ -67,7 +67,7 @@ export const Radio: React.VFC<InputProps> = ({
               htmlFor={`${keyforid}-${index}`}
               className="flex items-center focus:inherit text-content hover:cursor-pointer"
             >
-              {val.text}
+              {<p dangerouslySetInnerHTML={{ __html: val.text }} />}
             </label>
           </div>
         ))}
