@@ -47,6 +47,7 @@ const en: Translations = {
     [FieldKey.OAS_AGE]:
       'At what age would you like to start receiving the OAS pension?',
     [FieldKey.MARITAL_STATUS]: 'What is your current marital status?',
+    [FieldKey.INV_SEPARATED]: 'Involuntarily separated?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -86,6 +87,7 @@ const en: Translations = {
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Lived in country with social agreement',
     [FieldKey.MARITAL_STATUS]: 'Marital status',
+    [FieldKey.INV_SEPARATED]: 'Involuntarily separated',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Partner income provided',
     [FieldKey.PARTNER_INCOME]: "Partner's net income",
     [FieldKey.PARTNER_BENEFIT_STATUS]: "Partner's old age benefits",
@@ -99,29 +101,29 @@ const en: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',
-    [FieldKey.OAS_DEFER]:
-      'Edit when you would like to start receiving Old Age Security',
+    [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
     [FieldKey.LEGAL_STATUS]: 'Edit your legal status',
     [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Edit if you have lived outside Canada for longer than 6 months',
+    [FieldKey.LIVED_OUTSIDE_CANADA]: 'Edit if you have lived outside Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'Edit the years you have lived in Canada since 18',
+      'Edit how long you have lived in Canada',
     [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
+    [FieldKey.INV_SEPARATED]: 'Edit your involuntary separation status',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Edit if you will provide your partner's income",
-    [FieldKey.PARTNER_INCOME]: "Edit your partner's net income",
-    [FieldKey.PARTNER_BENEFIT_STATUS]: "Edit your partner's old age benefits",
+    [FieldKey.PARTNER_INCOME]: 'Edit your partner’s net income',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Edit if your partner receives the OAS pension',
     [FieldKey.PARTNER_AGE]: "Edit your partner's age",
-    [FieldKey.PARTNER_LEGAL_STATUS]: "Edit your partner's legal status",
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit your partner’s legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
-      "Edit your partner's country of residence",
+      'Edit your partner’s country of residence',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Edit if your partner has lived outside Canada for longer than 6 months',
+      'Edit if your partner has lived outside Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Edit the years your partner have lived in Canada since 18',
+      'Edit how long your partner has lived in Canada',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -146,7 +148,7 @@ const en: Translations = {
       {
         key: false,
         text: 'No, I will not provide my income at this time',
-        shortText: 'No',
+        shortText: 'Not provided',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
@@ -158,7 +160,7 @@ const en: Translations = {
       {
         key: false,
         text: "No, I will not provide my partner's income at this time",
-        shortText: 'No',
+        shortText: 'Not provided',
       },
     ],
     [FieldKey.OAS_DEFER]: [
@@ -177,17 +179,17 @@ const en: Translations = {
       {
         key: LegalStatus.CANADIAN_CITIZEN,
         text: 'Canadian citizen',
-        shortText: 'Canadian',
+        shortText: 'Canadian Citizen',
       },
       {
         key: LegalStatus.INDIAN_STATUS,
         text: 'Indian status',
-        shortText: 'Indian',
+        shortText: 'Indian status',
       },
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Permanent resident or landed immigrant',
-        shortText: 'PR or LI',
+        shortText: 'Permanent resident or landed immigrant',
       },
       {
         key: LegalStatus.REFUGEE,
@@ -228,22 +230,34 @@ const en: Translations = {
       {
         key: MaritalStatus.SINGLE,
         text: 'Single, divorced, or separated',
-        shortText: 'Single / divorced / separated',
+        shortText: 'Single, divorced or separated',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Married or common-law',
-        shortText: 'Married / common-law',
+        shortText: 'Married or common-law',
       },
       {
         key: MaritalStatus.WIDOWED,
         text: 'Surviving partner or widowed',
-        shortText: 'Widowed / Partner',
+        shortText: 'Widowed',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
         text: 'Involuntarily separated',
         shortText: 'Separated',
+      },
+    ],
+    [FieldKey.INV_SEPARATED]: [
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
+      },
+      {
+        key: true,
+        text: 'Yes',
+        shortText: 'Yes',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
@@ -283,7 +297,7 @@ const en: Translations = {
       {
         key: false,
         text: 'No',
-        shortText: 'Yes',
+        shortText: 'No',
       },
     ],
   },

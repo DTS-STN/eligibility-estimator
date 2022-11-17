@@ -49,6 +49,7 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
+    [FieldKey.INV_SEPARATED]: 'Séparation involontaire?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -83,6 +84,7 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]: 'Report de la SV',
     [FieldKey.OAS_AGE]: 'Âge de report de la SV',
     [FieldKey.MARITAL_STATUS]: 'État civil',
+    [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -107,31 +109,32 @@ const fr: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',
-    [FieldKey.OAS_DEFER]:
-      'Modifier quand vous souhaitez commencer à recevoir la Sécurité de la vieillesse',
+    [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',
     [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Modifier si vous avez vécu à l’extérieur du Canada pendant plus de 6 mois',
+      'Modifier si vous avez vécu à l’extérieur du Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'Modifiez les années où vous avez vécu au Canada depuis le 18',
+      'Modifier le nombre d’années vécues au Canada',
     [FieldKey.MARITAL_STATUS]: 'Modifier votre état civil',
+    [FieldKey.INV_SEPARATED]:
+      'Modifier votre statut de séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Modifier si vous fournissez le revenu de votre conjoint',
     [FieldKey.PARTNER_INCOME]: 'Modifier le revenu net de votre conjoint',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
-      'Modifier les prestations de vieillesse de votre conjoint',
+      'Modifier si votre conjoint reçoit la pension de la SV',
     [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Modifier le statut légal de votre conjoint',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Modifier le pays de résidence de votre conjoint',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Modifier si votre conjoint a vécu à l’extérieur du Canada pendant plus de 6 mois',
+      'Modifier si votre conjoint a vécu à l’extérieur du Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Modifier les années pendant lesquelles votre partenaire a vécu au Canada depuis le 18',
+      'Modifier le nombre d’années vécues au Canada de votre conjoint',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -156,7 +159,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Non, je ne fournirai pas mes revenus pour le moment',
-        shortText: 'Non',
+        shortText: 'Non fourni',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
@@ -168,7 +171,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
-        shortText: 'Non',
+        shortText: 'Non fourni',
       },
     ],
     [FieldKey.OAS_DEFER]: [
@@ -197,7 +200,7 @@ const fr: Translations = {
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Résident permanent ou immigrant reçu',
-        shortText: 'Résident permanent',
+        shortText: 'Résident permanent ou immigrant reçu',
       },
       {
         key: LegalStatus.REFUGEE,
@@ -207,7 +210,7 @@ const fr: Translations = {
       {
         key: LegalStatus.OTHER,
         text: 'Autre (par exemple, résident temporaire, étudiant ou travailleur temporaire)',
-        shortText: 'Other',
+        shortText: 'Autre',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
@@ -237,23 +240,35 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Célibataire, divorcé(e), ou séparé(e)',
+        text: 'Célibataire, divorcé ou séparé',
         shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Marié(e) ou conjoint(e) de fait',
-        shortText: 'Marié(e) ou conjoint(e) de fait',
+        shortText: 'Marié ou conjoint de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
         text: 'Partenaire veuf(ve)',
-        shortText: 'Partenaire veuf(ve)',
+        shortText: 'Conjoint survivant',
       },
       {
         key: MaritalStatus.INV_SEPARATED,
         text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
         shortText: 'Conjoints vivants séparément',
+      },
+    ],
+    [FieldKey.INV_SEPARATED]: [
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
+      },
+      {
+        key: true,
+        text: 'Oui',
+        shortText: 'Oui',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [

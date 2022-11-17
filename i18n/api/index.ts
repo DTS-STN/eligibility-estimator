@@ -43,6 +43,7 @@ export interface Translations {
     [FieldKey.LIVED_OUTSIDE_CANADA]: TypedKeyAndText<boolean>[]
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: TypedKeyAndText<boolean>[]
     [FieldKey.MARITAL_STATUS]: TypedKeyAndText<MaritalStatus>[]
+    [FieldKey.INV_SEPARATED]: TypedKeyAndText<boolean>[]
     [FieldKey.PARTNER_INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
     [FieldKey.PARTNER_BENEFIT_STATUS]: TypedKeyAndText<PartnerBenefitStatus>[]
     [FieldKey.LIVING_COUNTRY]: KeyAndText[]
