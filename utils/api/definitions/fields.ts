@@ -8,7 +8,7 @@ export enum FieldKey {
   OAS_DEFER = 'oasDefer',
   OAS_AGE = 'oasAge',
   MARITAL_STATUS = 'maritalStatus',
-  INV_SEPARATED = 'involuntarilySeparated',
+  INV_SEPARATED = 'invSeparated',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
   LIVED_OUTSIDE_CANADA = 'livedOutsideCanada',

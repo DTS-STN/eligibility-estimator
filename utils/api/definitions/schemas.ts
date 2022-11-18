@@ -52,6 +52,7 @@ export const RequestSchema = Joi.object({
   maritalStatus: Joi.string()
     .valid(...Object.values(MaritalStatus))
     .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
+  invSeparated: Joi.boolean(),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
     .valid(...Object.values(LegalStatus))
