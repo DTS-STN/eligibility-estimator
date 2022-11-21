@@ -122,9 +122,9 @@ const en: WebTranslations = {
     )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
     basedOnYourInfoTotal:
-      "Based on the information you've provided, you should expect to receive around {AMOUNT} per month.",
+      "Based on the information you've provided, you should expect to receive around <b>{AMOUNT}</b> per month.",
     basedOnYourInfoAndIncomeTotal:
-      "Based on the information you've provided, you should expect to receive around {AMOUNT} per month. However, this amount may be lower or higher depending on your income.",
+      "Based on the information you've provided, you should expect to receive around <b>{AMOUNT}</b> per month. However, this amount may be lower or higher depending on your income.",
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',

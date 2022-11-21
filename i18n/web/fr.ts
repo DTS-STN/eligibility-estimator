@@ -127,9 +127,9 @@ const fr: WebTranslations = {
     )} pour plus d'informations.`,
     yourEstimatedTotal: 'Votre total mensuel estimé est de ',
     basedOnYourInfoTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois.",
     basedOnYourInfoAndIncomeTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
       'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:
