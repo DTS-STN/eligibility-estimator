@@ -48,7 +48,7 @@ const fr: Translations = {
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
+    [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -334,9 +334,9 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'Allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes âgées entre 60 et 64 ans dont le conjoint est décédé.",
+      "L'Allocation au survivant est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint est décédé.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
