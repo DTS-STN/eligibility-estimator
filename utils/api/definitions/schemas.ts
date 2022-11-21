@@ -66,38 +66,30 @@ export const RequestSchema = Joi.object({
     // if they haven't lived in Canada long enough,
     .when('livingCountry', {
       is: Joi.string().valid('CAN'),
-      then: Joi.when(
-        'yearsInCanadaSince18',
-        //9.9 to disable 10,since the input only accepts integer, this is good
-        {
-          is: Joi.number().less(10),
-          then: Joi.boolean().when('.', {
-            is: Joi.boolean().valid(true),
-            then: Joi.forbidden().messages({
-              'any.unknown': ValidationErrors.socialCountryUnavailable10,
-            }),
-            otherwise: Joi.forbidden().messages({
-              'any.unknown': ValidationErrors.yearsInCanadaNotEnough10,
-            }),
+      then: Joi.when('yearsInCanadaSince18', {
+        is: Joi.number().less(10),
+        then: Joi.boolean().when('.', {
+          is: Joi.boolean().valid(true),
+          then: Joi.forbidden().messages({
+            'any.unknown': ValidationErrors.socialCountryUnavailable10,
           }),
-        }
-      ),
-      otherwise: Joi.when(
-        'yearsInCanadaSince18',
-        //19.9 to disable 20,since the input only accepts integer, this is good
-        {
-          is: Joi.number().less(20),
-          then: Joi.boolean().when('.', {
-            is: Joi.boolean().valid(true),
-            then: Joi.forbidden().messages({
-              'any.unknown': ValidationErrors.socialCountryUnavailable20,
-            }),
-            otherwise: Joi.forbidden().messages({
-              'any.unknown': ValidationErrors.yearsInCanadaNotEnough20,
-            }),
+          otherwise: Joi.forbidden().messages({
+            'any.unknown': ValidationErrors.yearsInCanadaNotEnough10,
           }),
-        }
-      ),
+        }),
+      }),
+      otherwise: Joi.when('yearsInCanadaSince18', {
+        is: Joi.number().less(20),
+        then: Joi.boolean().when('.', {
+          is: Joi.boolean().valid(true),
+          then: Joi.forbidden().messages({
+            'any.unknown': ValidationErrors.socialCountryUnavailable20,
+          }),
+          otherwise: Joi.forbidden().messages({
+            'any.unknown': ValidationErrors.yearsInCanadaNotEnough20,
+          }),
+        }),
+      }),
     }),
   partnerBenefitStatus: Joi.string().valid(
     ...Object.values(PartnerBenefitStatus)
