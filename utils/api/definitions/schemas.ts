@@ -70,7 +70,7 @@ export const RequestSchema = Joi.object({
         'yearsInCanadaSince18',
         //9.9 to disable 10,since the input only accepts integer, this is good
         {
-          is: Joi.number().max(9.9),
+          is: Joi.number().less(10),
           then: Joi.boolean().when('.', {
             is: Joi.boolean().valid(true),
             then: Joi.forbidden().messages({
@@ -86,7 +86,7 @@ export const RequestSchema = Joi.object({
         'yearsInCanadaSince18',
         //19.9 to disable 20,since the input only accepts integer, this is good
         {
-          is: Joi.number().max(19.9),
+          is: Joi.number().less(20),
           then: Joi.boolean().when('.', {
             is: Joi.boolean().valid(true),
             then: Joi.forbidden().messages({
