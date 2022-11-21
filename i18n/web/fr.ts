@@ -166,7 +166,6 @@ const fr: WebTranslations = {
     [ValidationErrors.oasAge65to70]:
       'Vous devez saisir un âge compris entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
-      //"Le nombre d'années pendant lesquelles vous avez vécu au Canada n'est pas suffisant pour recevoir des prestations de vieillesse.",
       "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
       "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
@@ -179,7 +178,6 @@ const fr: WebTranslations = {
     [ValidationErrors.legalUnavailable]:
       "Vous avez sélectionné un statut légal qui n'est pas admissible aux prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable10]:
-      // "Vous avez indiqué que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, mais que vous n'avez pas vécu au Canada pendant un certain nombre d'années pris en charge par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
       'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10 ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable20]:
       'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 20 ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
