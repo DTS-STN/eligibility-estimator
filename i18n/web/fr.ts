@@ -119,7 +119,7 @@ const fr: WebTranslations = {
     youMayBeEligible: 'Vous pourriez être admissible',
     youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
-      'Selon vos informations, vous pourriez être admissible à :',
+      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
       'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
     basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
@@ -127,9 +127,9 @@ const fr: WebTranslations = {
     )} pour plus d'informations.`,
     yourEstimatedTotal: 'Votre total mensuel estimé est de ',
     basedOnYourInfoTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois.",
     basedOnYourInfoAndIncomeTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
       'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:
@@ -197,6 +197,11 @@ const fr: WebTranslations = {
   tooltip: {
     moreInformation: "Plus d'information",
   },
+
+  partnerInformation: 'Renseignements sur votre conjoint',
+  partnerInformationDescription:
+    'Les personnes mariées ou vivant en union de fait doivent fournir \
+  des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
 }
 
 export default fr

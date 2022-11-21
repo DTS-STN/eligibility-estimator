@@ -59,26 +59,30 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
-          <div className="w-auto inline-block h-35 sm:h-20 bg-light-green py-2 px-8">
-            <div className="flex">
-              <Image
-                className="xs:mt-2 xs:h-5"
-                src="/green-check-mark.svg"
-                alt=""
-                height={20}
-                width={20}
-              />
-              <p className="ml-2">{tsln.atLeast60}</p>
+          <div className="inline-block sm:w-[500px] bg-light-green py-4 px-8">
+            <div className="flex items-start mb-4">
+              <div className="flex-none w-8 h-8">
+                <Image
+                  src="/green-check-mark.svg"
+                  alt=""
+                  height={30}
+                  width={30}
+                  layout="fixed"
+                />
+              </div>
+              <p className="ml-2 grow">{tsln.atLeast60}</p>
             </div>
-            <div className="flex">
-              <Image
-                className="xs:mt-2 xs:h-5"
-                src="/green-check-mark.svg"
-                alt=""
-                height={20}
-                width={20}
-              />
-              <p className="ml-2">{tsln.haveNetIncomeLess}</p>
+            <div className="flex items-start">
+              <div className="flex-none w-8 h-8">
+                <Image
+                  src="/green-check-mark.svg"
+                  alt=""
+                  height={30}
+                  width={30}
+                  layout="fixed"
+                />
+              </div>
+              <p className="ml-2 grow">{tsln.haveNetIncomeLess}</p>
             </div>
           </div>
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">

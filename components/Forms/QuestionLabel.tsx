@@ -21,11 +21,11 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
         htmlFor={name}
         aria-label={name}
         data-testid={`${type}-label`}
-        className="text-content font-bold inline mb-2.5"
+        className="text-content font-bold inline mb-2.5 mr-2"
       >
         <span dangerouslySetInnerHTML={{ __html: label }} />
       </label>
-      {requiredText && <span className="ml-2 font-medium">{requiredText}</span>}
+      {requiredText && <span className="font-medium">{requiredText}</span>}
       {helpText && (
         <div
           className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
