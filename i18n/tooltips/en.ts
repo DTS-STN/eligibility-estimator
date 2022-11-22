@@ -24,7 +24,7 @@ const en: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Common-Law</span>: \
-             You have lived continuously with your partner in a marital-type relationship for a minimum of one year.\
+             You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Widowed</span>: \

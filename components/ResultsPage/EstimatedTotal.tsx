@@ -30,12 +30,15 @@ export const EstimatedTotal: React.VFC<{
       </h2>
 
       <div>
-        <p className="pl-[35px]">
-          {introSentence.replace(
-            '{AMOUNT}',
-            numberToStringCurrency(summary.entitlementSum, language)
-          )}
-        </p>
+        <p
+          className="pl-[35px]"
+          dangerouslySetInnerHTML={{
+            __html: introSentence.replace(
+              '{AMOUNT}',
+              numberToStringCurrency(summary.entitlementSum, language)
+            ),
+          }}
+        />
         <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
         <table id="estimate" className="text-left w-full">
           <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">
