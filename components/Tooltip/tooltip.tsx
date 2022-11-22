@@ -63,13 +63,11 @@ export const Tooltip: React.FC<{
       </div>
       <div className={`${!show && 'hidden'} mx-[5px] py-1`} tabIndex={-1}>
         <div
-          className={`w-full xs:w-auto s:max-w-md sm:max-w-[80%] border-l-[2px]`}
-        >
-          <p
-            className="font-normal text-[16px] leading-5 px-5 max-h-[100%] "
-            dangerouslySetInnerHTML={{ __html: tooltipData.text }}
-          />
-        </div>
+          className="ds-rounded ds-z-1 ds-font-body text-small leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px pr-4 pb-4"
+          data-testid="tooltip-text"
+          id={'helpText'}
+          dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+        />
       </div>
     </div>
   )
