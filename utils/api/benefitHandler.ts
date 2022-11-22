@@ -198,6 +198,9 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
+      //here goes the question for involuntary separation, but ethere is no logic for processing it
+      //requiredFields.push(FieldKey.INV_SEPARATED)
+
       requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       // only ask for partner income if client income is available
       if (this.input.client.income.clientAvailable) {
