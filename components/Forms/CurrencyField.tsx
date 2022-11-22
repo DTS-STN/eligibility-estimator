@@ -4,6 +4,7 @@ import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { QuestionLabel } from './QuestionLabel'
 import { ErrorLabel } from './validation/ErrorLabel'
+import { Tooltip } from '../Tooltip/tooltip'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -57,9 +58,13 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         requiredText={requiredText}
         helpText={helpText}
       />
+
+      <Tooltip field={name} />
+
       {error && <ErrorLabel errorMessage={error} />}
+
       <NumberFormat
-        id={name}
+        id={`enter-${name}`}
         name={name}
         {...localizedIncome}
         data-testid="currency-input"

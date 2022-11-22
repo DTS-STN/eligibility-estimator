@@ -5,7 +5,6 @@ import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Head } from './Head'
-import { SCLabsTestHeader } from './ScTestHeader'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -57,8 +56,6 @@ export const Layout: React.VFC<{
   return (
     <>
       <Head title={title} />
-      <SCLabsTestHeader />
-
       <main className="mainContent">
         <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header

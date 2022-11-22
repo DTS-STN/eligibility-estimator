@@ -48,11 +48,11 @@ const fr: Translations = {
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
+    [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
+      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -135,14 +135,12 @@ const fr: Translations = {
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
-      'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
+      'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
-    [FieldKey.INCOME]:
-      'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
@@ -213,12 +211,12 @@ const fr: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Oui',
       },
     ],
@@ -237,23 +235,18 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Célibataire, divorcé(e), ou séparé(e)',
+        text: 'Célibataire, divorcé ou séparé',
         shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Marié(e) ou conjoint(e) de fait',
-        shortText: 'Marié(e) ou conjoint(e) de fait',
+        text: 'Marié ou conjoint de fait',
+        shortText: 'Marié ou conjoint de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire veuf(ve)',
-        shortText: 'Partenaire veuf(ve)',
-      },
-      {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
-        shortText: 'Conjoints vivants séparément',
+        text: 'Conjoint survivant',
+        shortText: 'Conjoint survivant',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
@@ -341,9 +334,9 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'Allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes âgées entre 60 et 64 ans dont le conjoint est décédé.",
+      "L'Allocation au survivant est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint est décédé.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:

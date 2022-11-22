@@ -111,7 +111,7 @@ export const links: LinkDefinitions = {
       icon: LinkIcon.link,
     },
     gis: {
-      text: 'Faire une demande de le Supplément de revenu garanti',
+      text: 'Faire une demande pour le Supplément de revenu garanti',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
       order: 21,
       icon: LinkIcon.link,
