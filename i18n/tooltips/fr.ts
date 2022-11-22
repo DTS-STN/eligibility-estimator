@@ -25,7 +25,7 @@ const fr: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Conjoint de fait </span>: \
-            Vous vivez avec une autre personne dans une relation conjugale depuis au moins 1 an. \
+            Vous vivez avec une autre personne dans une relation conjugale depuis au moins 1&nbsp;an. \
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Conjoint survivant </span>: \

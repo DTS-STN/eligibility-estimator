@@ -166,9 +166,9 @@ const fr: WebTranslations = {
     [ValidationErrors.oasAge65to70]:
       'Vous devez saisir un âge compris entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
-      "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
+      "Votre devez avoir vécu au Canada pendant au moins 10&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
+      "Votre devez avoir vécu au Canada pendant au moins 20&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
@@ -178,9 +178,9 @@ const fr: WebTranslations = {
     [ValidationErrors.legalUnavailable]:
       "Vous avez sélectionné un statut légal qui n'est pas admissible aux prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable10]:
-      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10 ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
+      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable20]:
-      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 20 ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
+      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 20&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Impossible de continuer',
   yes: 'Oui',

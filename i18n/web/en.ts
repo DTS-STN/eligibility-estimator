@@ -157,9 +157,9 @@ const en: WebTranslations = {
       "Your partner's age should be less than 150.",
     [ValidationErrors.oasAge65to70]: 'You must enter an age between 65 and 70.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
-      'You need to have lived in Canada for at least 10 years to receive any of the benefits covered by this tool.',
+      'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      'You need to have lived in Canada for at least 20 years to receive any of the benefits covered by this tool.',
+      'You need to have lived in Canada for at least 20&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaMinusAge]:
       'The number of years you have lived in Canada should be no more than your age minus 18.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
@@ -169,9 +169,9 @@ const en: WebTranslations = {
     [ValidationErrors.legalUnavailable]:
       'You have selected a legal status that is not eligible to receive any of the benefits covered by this tool. For help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable10]:
-      "This tool can't estimate your benefits because you have lived in Canada for less than 10 years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
+      "This tool can't estimate your benefits because you have lived in Canada for less than 10&nbsp;years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable20]:
-      "This tool can't estimate your benefits because you have lived in Canada for less than 20 years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
+      "This tool can't estimate your benefits because you have lived in Canada for less than 20&nbsp;years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Unable to proceed',
   yes: 'Yes',

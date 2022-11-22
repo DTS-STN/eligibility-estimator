@@ -46,7 +46,7 @@ const en: Translations = {
       'When would you like to start receiving the Old Age Security (OAS) pension?',
     [FieldKey.OAS_AGE]:
       'At what age would you like to start receiving the OAS pension?',
-    [FieldKey.MARITAL_STATUS]: 'What is your current marital status?',
+    [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
