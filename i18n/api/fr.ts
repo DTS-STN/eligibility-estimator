@@ -366,11 +366,11 @@ const fr: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
-      text: 'Une fois que vous aurez 75 ans, vos paiements augmenteront de 10&nbsp;%, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.',
+      text: 'Une fois que vous aurez 75&nbsp;ans, vos paiements augmenteront de 10&nbsp;%, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.',
     },
     oasIncreaseAt75Applied: {
       heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
-      text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10&nbsp;%.',
+      text: 'Parce que vous avez plus de 75&nbsp;ans, vos paiements ont augmenté de 10&nbsp;%.',
     },
   },
   summaryTitle: {
