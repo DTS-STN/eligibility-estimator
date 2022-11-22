@@ -30,9 +30,11 @@ export const YourAnswers: React.VFC<{
           return (
             <div key={input.key} className="py-4 border-b-2 border-info-border">
               <div>{tsln.resultsQuestions[input.key]}</div>
-              <div>
-                <strong>{getDisplayValue(input)}</strong>
-                <span className="float-right">
+              <div className="grid grid-cols-2">
+                <div>
+                  <strong>{getDisplayValue(input)}</strong>
+                </div>
+                <div className="justify-self-end self-end">
                   <DSLink
                     id={`edit-${input.key}`}
                     href={`eligibility#${input.key}`}
@@ -40,7 +42,7 @@ export const YourAnswers: React.VFC<{
                     target="_self"
                     ariaLabel={tsln.resultsEditAriaLabels[input.key]}
                   />
-                </span>
+                </div>
               </div>
             </div>
           )
