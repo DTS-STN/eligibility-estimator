@@ -30,8 +30,8 @@ export const YourAnswers: React.VFC<{
           return (
             <div key={input.key} className="py-4 border-b-2 border-info-border">
               <div>{tsln.resultsQuestions[input.key]}</div>
-              <div className="grid grid-cols-2">
-                <div>
+              <div className="grid gap-0 grid-cols-3">
+                <div className="col-span-2">
                   <strong>{getDisplayValue(input)}</strong>
                 </div>
                 <div className="justify-self-end self-end">
