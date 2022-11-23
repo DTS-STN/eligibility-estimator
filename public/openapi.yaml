@@ -38,6 +38,7 @@ paths:
         - $ref: '#/components/parameters/oasDefer'
         - $ref: '#/components/parameters/oasAge'
         - $ref: '#/components/parameters/maritalStatus'
+        - $ref: '#/components/parameters/invSeparated'
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
         - $ref: '#/components/parameters/livedOutsideCanada'
@@ -72,6 +73,7 @@ components:
           - oasDefer
           - oasAge
           - maritalStatus
+          - invSeparated
           - livingCountry
           - legalStatus
           - livedOutsideCanada
@@ -380,6 +382,16 @@ components:
           - widowed
           - invSeparated
         description: The current marital status of the client.
+      allowEmptyValue: false
+
+    invSeparated:
+      name: invSeparated
+      in: query
+      description: Separated either Involutarily or Voluntarily.
+      required: false
+      example: false
+      schema:
+        type: boolean
       allowEmptyValue: false
 
     livingCountry:
