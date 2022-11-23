@@ -338,7 +338,7 @@ const en: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
-      text: 'Learn more about the option to delay your first Old Age Security pension payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'Learn more about the {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'You may have to repay a part of your pension',

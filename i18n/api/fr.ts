@@ -351,7 +351,7 @@ const fr: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
-      text: 'Renseignez-vous sur la possibilité de reporter votre premier paiement de la pension de la Sécurité de la vieillesse, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'Renseignez-vous sur la {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'Vous devrez peut-être rembourser une partie de votre pension',

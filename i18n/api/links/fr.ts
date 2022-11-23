@@ -135,7 +135,7 @@ export const links: LinkDefinitions = {
     order: -1,
   },
   oasDeferClickHere: {
-    text: 'cliquez ici',
+    text: 'possibilité de reporter votre premier paiement de la pension de la Sécurité de la vieillesse',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
     order: -1,
   },
