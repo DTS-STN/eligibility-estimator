@@ -61,9 +61,9 @@ export const Tooltip: React.FC<{
           {tsln.tooltip.moreInformation}
         </a>
       </div>
-      <div className={`${!show && 'hidden'} mx-[5px] py-1`} tabIndex={-1}>
+      <div className={`${!show && 'hidden'} mx-[5px] py-2`} tabIndex={-1}>
         <div
-          className="ds-rounded ds-z-1 ds-font-body text-base leading-5 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 ds-p-5px ds-pl-14px pr-4 pb-4"
+          className="ds-rounded ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 px-6 pt-4"
           data-testid="tooltip-text"
           id={'helpText'}
           dangerouslySetInnerHTML={{ __html: tooltipData.text }}
