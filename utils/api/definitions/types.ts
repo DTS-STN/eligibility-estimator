@@ -31,6 +31,7 @@ export interface RequestInput {
   oasDefer: boolean
   oasAge: number
   maritalStatus: MaritalStatus
+  invSeparated: boolean
   livingCountry: string // country code
   legalStatus: LegalStatus
   livedOutsideCanada: boolean

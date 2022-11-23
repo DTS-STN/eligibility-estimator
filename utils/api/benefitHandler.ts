@@ -192,12 +192,15 @@ export class BenefitHandler {
     if (
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
-      (this.input.client.livingCountry.noAgreement &&
+      (!this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 20)
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
+      //here goes the question for involuntary separation, but ethere is no logic for processing it
+      //requiredFields.push(FieldKey.INV_SEPARATED)
+
       requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       // only ask for partner income if client income is available
       if (this.input.client.income.clientAvailable) {
@@ -219,7 +222,7 @@ export class BenefitHandler {
       if (
         (this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 < 10) ||
-        (this.input.partner.livingCountry.noAgreement &&
+        (!this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 < 20)
       ) {
         requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)

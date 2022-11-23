@@ -23,7 +23,7 @@ describe('index page', () => {
   })
 
   it('should render the home page', async () => {
-    const ui = <Home />
+    const ui = <Home adobeAnalyticsUrl={''} />
     render(ui)
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
@@ -33,7 +33,7 @@ describe('index page', () => {
   expect.extend(toHaveNoViolations)
 
   it('has no a11y violations', async () => {
-    const { container } = render(<Home />)
+    const { container } = render(<Home adobeAnalyticsUrl={''} />)
 
     //waitFor avoids getting the warning it must wrap in 'act'.
 

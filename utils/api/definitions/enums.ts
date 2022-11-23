@@ -104,12 +104,14 @@ export enum ValidationErrors {
   ageOver150 = 'ageOver150',
   partnerAgeOver150 = 'partnerAgeOver150',
   oasAge65to70 = 'oasAge65to70',
-  yearsInCanadaNotEnough = 'yearsInCanadaNotEnough',
+  yearsInCanadaNotEnough10 = 'yearsInCanadaNotEnough10',
+  yearsInCanadaNotEnough20 = 'yearsInCanadaNotEnough20',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
   maritalUnavailable = 'maritalUnavailable',
   legalUnavailable = 'legalUnavailable',
-  socialCountryUnavailable = 'socialCountryUnavailable',
+  socialCountryUnavailable10 = 'socialCountryUnavailable10',
+  socialCountryUnavailable20 = 'socialCountryUnavailable20',
 }
 
 export enum Language {

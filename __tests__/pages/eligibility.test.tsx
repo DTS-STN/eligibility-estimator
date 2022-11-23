@@ -29,7 +29,7 @@ describe('index page', () => {
       income: 20000,
     })
 
-    const ui = <Eligibility {...res.body} />
+    const ui = <Eligibility adobeAnalyticsUrl={''} {...res.body} />
     render(ui)
     const main = screen.getByRole('main')
     expect(main).toBeInTheDocument()
@@ -42,7 +42,9 @@ describe('index page', () => {
       income: 20000,
     })
 
-    const { container } = render(<Eligibility {...res.body} />)
+    const { container } = render(
+      <Eligibility adobeAnalyticsUrl={''} {...res.body} />
+    )
     const results = await waitFor(() => {
       axe(container)
     })

@@ -16,8 +16,8 @@ import { links } from './links/en'
 const en: Translations = {
   _language: Language.EN,
   benefit: {
-    [BenefitKey.oas]: 'Old Age Security (OAS)',
-    [BenefitKey.gis]: 'Guaranteed Income Supplement (GIS)',
+    [BenefitKey.oas]: 'Old Age Security pension',
+    [BenefitKey.gis]: 'Guaranteed Income Supplement',
     [BenefitKey.alw]: 'Allowance',
     [BenefitKey.afs]: 'Allowance for the Survivor',
   },
@@ -46,11 +46,12 @@ const en: Translations = {
       'When would you like to start receiving the Old Age Security (OAS) pension?',
     [FieldKey.OAS_AGE]:
       'At what age would you like to start receiving the OAS pension?',
-    [FieldKey.MARITAL_STATUS]: 'What is your current marital status?',
+    [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
+    [FieldKey.INV_SEPARATED]: 'Involuntarily separated?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18, have you lived outside of Canada for longer than 6 months?',
+      'Since the age of 18, have you lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -86,6 +87,7 @@ const en: Translations = {
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Lived in country with social agreement',
     [FieldKey.MARITAL_STATUS]: 'Marital status',
+    [FieldKey.INV_SEPARATED]: 'Involuntarily separated',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Partner income provided',
     [FieldKey.PARTNER_INCOME]: "Partner's net income",
     [FieldKey.PARTNER_BENEFIT_STATUS]: "Partner's old age benefits",
@@ -99,29 +101,29 @@ const en: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',
-    [FieldKey.OAS_DEFER]:
-      'Edit when you would like to start receiving Old Age Security',
+    [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
     [FieldKey.LEGAL_STATUS]: 'Edit your legal status',
     [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Edit if you have lived outside Canada for longer than 6 months',
+    [FieldKey.LIVED_OUTSIDE_CANADA]: 'Edit if you have lived outside Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'Edit the years you have lived in Canada since 18',
+      'Edit how long you have lived in Canada',
     [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
+    [FieldKey.INV_SEPARATED]: 'Edit your involuntary separation status',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Edit if you will provide your partner's income",
-    [FieldKey.PARTNER_INCOME]: "Edit your partner's net income",
-    [FieldKey.PARTNER_BENEFIT_STATUS]: "Edit your partner's old age benefits",
+    [FieldKey.PARTNER_INCOME]: 'Edit your partner’s net income',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Edit if your partner receives the OAS pension',
     [FieldKey.PARTNER_AGE]: "Edit your partner's age",
-    [FieldKey.PARTNER_LEGAL_STATUS]: "Edit your partner's legal status",
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit your partner’s legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
-      "Edit your partner's country of residence",
+      'Edit your partner’s country of residence',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Edit if your partner has lived outside Canada for longer than 6 months',
+      'Edit if your partner has lived outside Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Edit the years your partner have lived in Canada since 18',
+      'Edit how long your partner has lived in Canada',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -144,7 +146,7 @@ const en: Translations = {
       {
         key: false,
         text: 'No, I will not provide my income at this time',
-        shortText: 'No',
+        shortText: 'Not provided',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
@@ -156,7 +158,7 @@ const en: Translations = {
       {
         key: false,
         text: "No, I will not provide my partner's income at this time",
-        shortText: 'No',
+        shortText: 'Not provided',
       },
     ],
     [FieldKey.OAS_DEFER]: [
@@ -175,17 +177,17 @@ const en: Translations = {
       {
         key: LegalStatus.CANADIAN_CITIZEN,
         text: 'Canadian citizen',
-        shortText: 'Canadian',
+        shortText: 'Canadian Citizen',
       },
       {
         key: LegalStatus.INDIAN_STATUS,
         text: 'Indian status',
-        shortText: 'Indian',
+        shortText: 'Indian status',
       },
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Permanent resident or landed immigrant',
-        shortText: 'PR or LI',
+        shortText: 'Permanent resident or landed immigrant',
       },
       {
         key: LegalStatus.REFUGEE,
@@ -201,12 +203,12 @@ const en: Translations = {
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'No, I have not lived outside of Canada for longer than 6 months',
+        text: 'No, I have not lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'Yes, I have lived outside of Canada for longer than 6 months',
+        text: 'Yes, I have lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'Yes',
       },
     ],
@@ -226,22 +228,29 @@ const en: Translations = {
       {
         key: MaritalStatus.SINGLE,
         text: 'Single, divorced, or separated',
-        shortText: 'Single / divorced / separated',
+        shortText: 'Single, divorced or separated',
       },
       {
         key: MaritalStatus.PARTNERED,
         text: 'Married or common-law',
-        shortText: 'Married / common-law',
+        shortText: 'Married or common-law',
       },
       {
         key: MaritalStatus.WIDOWED,
         text: 'Surviving partner or widowed',
-        shortText: 'Widowed / Partner',
+        shortText: 'Widowed',
+      },
+    ],
+    [FieldKey.INV_SEPARATED]: [
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
       },
       {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Involuntarily separated',
-        shortText: 'Separated',
+        key: true,
+        text: 'Yes',
+        shortText: 'Yes',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
@@ -281,7 +290,7 @@ const en: Translations = {
       {
         key: false,
         text: 'No',
-        shortText: 'Yes',
+        shortText: 'No',
       },
     ],
   },
@@ -304,7 +313,7 @@ const en: Translations = {
     mustBeInCanada:
       'You need to live in Canada to be eligible for this benefit.',
     mustBeOasEligible:
-      'You need to be eligible for Old Age Security to be eligible for this benefit.',
+      'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
       'You need to complete the Old Age Security eligibility assessment first.',
     mustMeetIncomeReq:
@@ -326,9 +335,9 @@ const en: Translations = {
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
-      'Allowance is for individuals between the ages of 60 and 64 whose partner (spouse or common-law) is receiving the Guaranteed Income Supplement.',
+      'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     afsNotEligible:
-      'Allowance for the Survivor is for individuals between 60 and 64 years old whose partner (spouse or common-law) has died.',
+      'The Allowance for the Survivor is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner has passed away.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -343,7 +352,7 @@ const en: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
-      text: 'To learn more about your option to delay your first payment, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'To learn more about your option to delay your first Old Age Security pension payment, {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'You may have to repay a part of your pension',
@@ -351,11 +360,11 @@ const en: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Your payments will increase when you turn 75',
-      text: 'Once you turn 75, your OAS payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+      text: 'Once you turn 75, your payments will increase by 10%, meaning you will receive {OAS_75_AMOUNT} per month.',
     },
     oasIncreaseAt75Applied: {
       heading: 'Your payments have increased because you are over 75',
-      text: 'Since you are over the age of 75, your OAS payments have been increased by 10%.',
+      text: 'Since you are over the age of 75, your payments have been increased by 10%.',
     },
   },
   summaryTitle: {

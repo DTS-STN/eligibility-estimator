@@ -18,8 +18,8 @@ import { links } from './links/fr'
 const fr: Translations = {
   _language: Language.FR,
   benefit: {
-    [BenefitKey.oas]: 'Sécurité de la vieillesse (SV)',
-    [BenefitKey.gis]: 'Supplément de revenu garanti (SRG)',
+    [BenefitKey.oas]: 'Pension de la Sécurité de la vieillesse',
+    [BenefitKey.gis]: 'Supplément de revenu garanti',
     [BenefitKey.alw]: 'Allocation',
     [BenefitKey.afs]: 'Allocation au survivant',
   },
@@ -49,10 +49,11 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
+    [FieldKey.INV_SEPARATED]: 'Séparation involontaire?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
+      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -83,6 +84,7 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]: 'Report de la SV',
     [FieldKey.OAS_AGE]: 'Âge de report de la SV',
     [FieldKey.MARITAL_STATUS]: 'État civil',
+    [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -107,31 +109,32 @@ const fr: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',
-    [FieldKey.OAS_DEFER]:
-      'Modifier quand vous souhaitez commencer à recevoir la Sécurité de la vieillesse',
+    [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',
     [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Modifier si vous avez vécu à l’extérieur du Canada pendant plus de 6 mois',
+      'Modifier si vous avez vécu à l’extérieur du Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'Modifiez les années où vous avez vécu au Canada depuis le 18',
+      'Modifier le nombre d’années vécues au Canada',
     [FieldKey.MARITAL_STATUS]: 'Modifier votre état civil',
+    [FieldKey.INV_SEPARATED]:
+      'Modifier votre statut de séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Modifier si vous fournissez le revenu de votre conjoint',
     [FieldKey.PARTNER_INCOME]: 'Modifier le revenu net de votre conjoint',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
-      'Modifier les prestations de vieillesse de votre conjoint',
+      'Modifier si votre conjoint reçoit la pension de la SV',
     [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Modifier le statut légal de votre conjoint',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Modifier le pays de résidence de votre conjoint',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Modifier si votre conjoint a vécu à l’extérieur du Canada pendant plus de 6 mois',
+      'Modifier si votre conjoint a vécu à l’extérieur du Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Modifier les années pendant lesquelles votre partenaire a vécu au Canada depuis le 18',
+      'Modifier le nombre d’années vécues au Canada de votre conjoint',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -154,7 +157,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Non, je ne fournirai pas mon revenu pour le moment',
-        shortText: 'Non',
+        shortText: 'Non fourni',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
@@ -166,7 +169,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
-        shortText: 'Non',
+        shortText: 'Non fourni',
       },
     ],
     [FieldKey.OAS_DEFER]: [
@@ -195,7 +198,7 @@ const fr: Translations = {
       {
         key: LegalStatus.PERMANENT_RESIDENT,
         text: 'Résident permanent ou immigrant reçu',
-        shortText: 'Résident permanent',
+        shortText: 'Résident permanent ou immigrant reçu',
       },
       {
         key: LegalStatus.REFUGEE,
@@ -205,18 +208,18 @@ const fr: Translations = {
       {
         key: LegalStatus.OTHER,
         text: 'Autre (par exemple, résident temporaire, étudiant ou travailleur temporaire)',
-        shortText: 'Other',
+        shortText: 'Autre',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Oui',
       },
     ],
@@ -235,23 +238,30 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Célibataire, divorcé(e), ou séparé(e)',
+        text: 'Célibataire, divorcé ou séparé',
         shortText: 'Célibataire',
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Marié(e) ou conjoint(e) de fait',
-        shortText: 'Marié(e) ou conjoint(e) de fait',
+        text: 'Marié ou conjoint de fait',
+        shortText: 'Marié ou conjoint de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire veuf(ve)',
-        shortText: 'Partenaire veuf(ve)',
+        text: 'Conjoint survivant',
+        shortText: 'Conjoint survivant',
+      },
+    ],
+    [FieldKey.INV_SEPARATED]: [
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
       {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
-        shortText: 'Conjoints vivants séparément',
+        key: true,
+        text: 'Oui',
+        shortText: 'Oui',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
@@ -317,7 +327,7 @@ const fr: Translations = {
     mustBeInCanada:
       'Vous devez vivre au Canada pour être admissible à cette prestation.',
     mustBeOasEligible:
-      'Vous devez être admissible à la Sécurité de la vieillesse pour être admissible à cette prestation.',
+      'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
       "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
     mustMeetIncomeReq:
@@ -339,9 +349,9 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     afsNotEligible:
-      "L'Allocation au survivant s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) est décédé.",
+      "L'Allocation au survivant est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint est décédé.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -356,19 +366,19 @@ const fr: Translations = {
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
-      text: 'Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'Renseignez-vous sur la possibilité de reporter votre premier paiement de la pension de la Sécurité de la vieillesse, {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'Vous devrez peut-être rembourser une partie de votre pension',
-      text: 'Étant donné que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+      text: 'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
     },
     oasIncreaseAt75: {
-      heading: 'Vos paiements augmenteront lorsque vous atteindrez 75 ans',
-      text: "Une fois que vous aurez atteint l'âge de 75 ans, vos paiements de la SV augmenteront de 10 %, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.",
+      heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
+      text: 'Une fois que vous aurez 75 ans, vos paiements augmenteront de 10&nbsp;%, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.',
     },
     oasIncreaseAt75Applied: {
-      heading: 'Vos versements ont augmenté car vous avez plus de 75 ans',
-      text: 'Puisque vous avez plus de 75 ans, vos versements de la SV ont été augmentés de 10 %.',
+      heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
+      text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10&nbsp;%.',
     },
   },
   summaryTitle: {
