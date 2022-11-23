@@ -192,7 +192,7 @@ export class BenefitHandler {
     if (
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
-      (this.input.client.livingCountry.noAgreement &&
+      (!this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 20)
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
@@ -219,7 +219,7 @@ export class BenefitHandler {
       if (
         (this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 < 10) ||
-        (this.input.partner.livingCountry.noAgreement &&
+        (!this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 < 20)
       ) {
         requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)
