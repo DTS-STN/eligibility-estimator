@@ -151,12 +151,12 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]: [
       {
         key: true,
-        text: 'Oui, je fournirai mes revenus',
+        text: 'Oui, je fournirai mon revenu',
         shortText: 'Oui',
       },
       {
         key: false,
-        text: 'Non, je ne fournirai pas mes revenus pour le moment',
+        text: 'Non, je ne fournirai pas mon revenu pour le moment',
         shortText: 'Non fourni',
       },
     ],
