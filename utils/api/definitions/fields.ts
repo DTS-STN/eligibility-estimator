@@ -8,6 +8,7 @@ export enum FieldKey {
   OAS_DEFER = 'oasDefer',
   OAS_AGE = 'oasAge',
   MARITAL_STATUS = 'maritalStatus',
+  INV_SEPARATED = 'invSeparated',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
   LIVED_OUTSIDE_CANADA = 'livedOutsideCanada',
@@ -91,6 +92,12 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.MARITAL_STATUS]: {
     key: FieldKey.MARITAL_STATUS,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
+    default: undefined,
+  },
+  [FieldKey.INV_SEPARATED]: {
+    key: FieldKey.INV_SEPARATED,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,

@@ -15,7 +15,7 @@ const en: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Separated:</span> \
-             You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled. \
+            You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled. \
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Married</span>: \
@@ -24,11 +24,11 @@ const en: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Common-Law</span>: \
-             You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
+            You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Widowed</span>: \
-             Your spouse has died and that you have not remarried or entered into a common-law relationship. \
+            Your spouse has died and that you have not remarried or entered into a common-law relationship. \
           </p> \
           ",
   },
@@ -41,7 +41,7 @@ const en: TooltipTranslations = {
   },
   [FieldKey.INCOME]: {
     heading: apiEn.category.income,
-    text: '<div style="padding-top:8px;">You can find your net income on line 23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul>',
+    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">You can find your net income on line&nbsp;23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">For a more accurate estimate, remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first 5,000$ of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
   },
 }
 

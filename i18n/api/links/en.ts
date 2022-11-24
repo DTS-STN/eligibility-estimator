@@ -135,7 +135,7 @@ export const links: LinkDefinitions = {
     order: -1,
   },
   oasDeferClickHere: {
-    text: 'click here',
+    text: 'option to delay your first Old Age Security pension payment',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
     order: -1,
   },
