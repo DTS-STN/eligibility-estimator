@@ -15,9 +15,9 @@ export enum FieldKey {
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
+  PARTNER_AGE = 'partnerAge',
   PARTNER_INCOME_AVAILABLE = 'partnerIncomeAvailable',
   PARTNER_INCOME = 'partnerIncome',
-  PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
   PARTNER_LIVED_OUTSIDE_CANADA = 'partnerLivedOutsideCanada',
@@ -102,6 +102,12 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.RADIO,
     default: undefined,
   },
+  [FieldKey.PARTNER_AGE]: {
+    key: FieldKey.PARTNER_AGE,
+    relatedKey: FieldKey.AGE,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.DATE,
+  },
   [FieldKey.PARTNER_INCOME_AVAILABLE]: {
     key: FieldKey.PARTNER_INCOME_AVAILABLE,
     category: { key: FieldCategory.MARITAL },
@@ -118,12 +124,6 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
-  },
-  [FieldKey.PARTNER_AGE]: {
-    key: FieldKey.PARTNER_AGE,
-    relatedKey: FieldKey.AGE,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.DATE,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
