@@ -35,6 +35,7 @@ export function expectOasGisUnavailable(
 }
 
 export function expectAllIneligible(res: MockResponseObject<ResponseSuccess>) {
+  expect(res.body.missingFields).toEqual([])
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.INELIGIBLE)
@@ -113,7 +114,6 @@ export const partnerUndefined = {
 }
 
 export const partnerNoHelpNeeded = {
-  partnerAge: undefined,
   partnerLivingCountry: undefined,
   partnerLegalStatus: undefined,
   partnerLivedOutsideCanada: undefined,

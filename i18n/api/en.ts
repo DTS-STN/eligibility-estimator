@@ -57,15 +57,13 @@ const en: Translations = {
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
-    [FieldKey.PARTNER_AGE]: 'What month and year was your partner born?',
-
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Which of the following applies to your partner?',
-
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
       "What is your partner's annual net income (income after taxes) in Canadian dollars?",
+    [FieldKey.PARTNER_AGE]: 'What month and year was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country is your partner currently living in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
