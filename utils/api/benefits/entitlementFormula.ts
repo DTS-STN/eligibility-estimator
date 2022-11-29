@@ -196,7 +196,7 @@ export class EntitlementFormula {
     const calculated = roundToTwo(
       this.actualMaxAmount - this.incomeDifferential * differentialMultiplier
     )
-    return Math.max(0, calculated)
+    return calculated
   }
 
   /**
