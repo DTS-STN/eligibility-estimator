@@ -112,10 +112,7 @@ export const RequestSchema = Joi.object({
     .max(150)
     .message(ValidationErrors.partnerAgeOver150),
   partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
-  partnerLegalStatus: Joi.string()
-    .valid(...Object.values(LegalStatus))
-    .invalid(LegalStatus.OTHER)
-    .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
+  partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
   partnerLivedOutsideCanada: Joi.boolean(),
   partnerYearsInCanadaSince18: Joi.number()
     .integer()

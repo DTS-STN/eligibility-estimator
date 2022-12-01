@@ -403,6 +403,8 @@ describe('consolidated benefit tests: max income checks', () => {
     })
     expectGisEligible(res)
   })
+
+  //partner benefit doesn't contain alw now, hence comment the assert lines.
   it(`GIS: max income when married and partner ALW is ${legalValues.gis.spouseAlwIncomeLimit}`, async () => {
     const input = {
       incomeAvailable: true,
@@ -419,10 +421,10 @@ describe('consolidated benefit tests: max income checks', () => {
     }
     let res = await mockGetRequest(input)
     expect(res.body.missingFields).toEqual([])
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    // expect(res.body.results.gis.eligibility.result).toEqual(
+    //   ResultKey.INELIGIBLE
+    // )
+    //expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
       income: legalValues.gis.spouseAlwIncomeLimit - 1,

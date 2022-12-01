@@ -105,9 +105,8 @@ export class MaritalStatusHelper extends FieldHelper {
     super(value)
     this.partnered = value === MaritalStatus.PARTNERED
     this.single =
-      value === MaritalStatus.SINGLE ||
-      value === MaritalStatus.WIDOWED ||
-      value === MaritalStatus.INV_SEPARATED // invSeparated doesn't necessarily mean single - be careful with this
+      value === MaritalStatus.SINGLE || value === MaritalStatus.WIDOWED
+    //value === MaritalStatus.INV_SEPARATED // invSeparated doesn't necessarily mean single - be careful with this
     this.invSeparated = value === MaritalStatus.INV_SEPARATED
   }
 }
@@ -125,16 +124,18 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
     this.gisEligibility = EntitlementResultType.NONE
     this.alwEligibility = EntitlementResultType.NONE
     switch (this.value) {
-      case PartnerBenefitStatus.OAS:
-        this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
-        break
+      // the following two conditions have been removed as per ado-85201
+      // case PartnerBenefitStatus.OAS:
+      //   this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
+      //   break
+      // case PartnerBenefitStatus.ALW:
+      //   this.alwEligibility = EntitlementResultType.FULL
+      //   break
       case PartnerBenefitStatus.OAS_GIS:
         this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         this.gisEligibility = EntitlementResultType.FULL
         break
-      case PartnerBenefitStatus.ALW:
-        this.alwEligibility = EntitlementResultType.FULL
-        break
+
       case PartnerBenefitStatus.HELP_ME:
         break
       case PartnerBenefitStatus.NONE:

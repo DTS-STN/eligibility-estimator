@@ -150,7 +150,6 @@ export const fieldDefinitions: FieldDefinitions = {
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_18,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.NUMBER,
-    placeholder: '40',
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,

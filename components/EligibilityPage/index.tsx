@@ -6,12 +6,15 @@ import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
+import { livingCountry } from '../../i18n/api/countries/en'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import {
   FieldCategory,
   Language,
   MaritalStatus,
+  LegalStatus,
+  LivingCountry,
 } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
@@ -173,6 +176,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
@@ -262,7 +266,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 id={field.key}
                 alert_icon_id={field.key}
                 alert_icon_alt_text={tsln.warningText}
-                type="warning"
+                type={'warning'}
                 message_heading={tsln.unableToProceed}
                 message_body={field.error}
                 asHtml={true}
@@ -270,6 +274,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             </div>
           )}
+          {showWarningMessage(field, fields)}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
               <div className="my-6">
@@ -280,6 +285,51 @@ export const EligibilityPage: React.VFC = ({}) => {
         </div>
       )
     })
+  }
+
+  const showWarningMessage = (field, fields) => {
+    const messageHeading = tsln.partnerIsNotEligible
+    let messageBody = ''
+    if (
+      field.key === 'partnerLegalStatus' &&
+      field.value === LegalStatus.OTHER
+    ) {
+      messageBody = tsln.partnerLegalStatusNotEligible
+    } else if (
+      field.key === FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 &&
+      field.value < 10
+    ) {
+      messageBody = tsln.partnerYearsLivingCanadaNotEligible
+    } else if (
+      field.key === FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 &&
+      field.value < 20
+    ) {
+      const livingCountryField = fields.find(
+        (f) => f.key === FieldKey.PARTNER_LIVING_COUNTRY
+      )
+      if (livingCountryField.value !== LivingCountry.CANADA) {
+        messageBody = tsln.partnerYearsLivingCanadaNotEligible
+      } else {
+        return
+      }
+    } else {
+      return ''
+    }
+
+    return (
+      <div className="mt-6 md:pr-12">
+        <Message
+          id={field.key}
+          alert_icon_id={field.key}
+          alert_icon_alt_text={tsln.warningText}
+          type={'info'}
+          message_heading={messageHeading}
+          message_body={messageBody}
+          asHtml={true}
+          whiteBG={true}
+        />
+      </div>
+    )
   }
 
   /**
