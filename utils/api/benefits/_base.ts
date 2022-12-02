@@ -88,11 +88,16 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     let text = this.eligibility.detail
 
     if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.result > 0
+    ) {
+      text += ` ${this.translations.detail.expectToReceive}`
+    }
+
+    if (
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     ) {
-      if (this.entitlement.result > 0)
-        text += ` ${this.translations.detail.expectToReceive}`
       text += this.getAutoEnrollment()
         ? `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
         : `<div class="mt-8">${this.translations.detail.autoEnrollFalse}</div>`
