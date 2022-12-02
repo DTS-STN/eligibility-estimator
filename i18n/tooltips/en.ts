@@ -34,10 +34,45 @@ const en: TooltipTranslations = {
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen) or have received Canadian citizenship.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Indian status:</span> You are registered as an Indian under the <em>Indian Act</em>.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Permanent resident or landed immigrant:</span> You have been given permanent resident status or have applied for permanent residence under the Family Class.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Refugee:</span> You are outside of your home country or country where you normally live and fear returning to that country because of a well-founded fear of persecution for reasons of race, religion, nationality, membership in a particular social group or political opinion.</p>",
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Canadian citizen:</span> \
+            You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen) or have received Canadian citizenship. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Indian status:</span> \
+            You are registered as an Indian under the <em>Indian Act</em>. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Permanent resident or landed immigrant:</span> \
+            You have been given permanent resident status or have applied for permanent residence under the Family Class. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Refugee:</span> \
+            You are outside of your home country or country where you normally live and fear returning to that country \
+            because of a well-founded fear of persecution for reasons of race, religion, nationality, membership in a \
+            particular social group or political opinion. \
+          </p>",
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
-    useDataFromKey: 'legalStatus',
+    heading: apiEn.category.legal,
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Canadian citizen:</span> \
+            Your partner is Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen) or has received Canadian citizenship. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Indian status:</span> \
+            Your partner is registered as an Indian under the <em>Indian Act</em>. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Permanent resident or landed immigrant:</span> \
+            Your partner has been been given permanent resident status or has applied for permanent residence under the Family Class. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Refugee:</span> \
+            Your partner is outside of their home country or country where they normally live and fear returning to that country \
+            because of a well-founded fear of persecution for reasons of race, religion, nationality, membership in a \
+            particular social group or political opinion. \
+          </p>",
   },
   [FieldKey.INCOME]: {
     heading: apiEn.category.income,

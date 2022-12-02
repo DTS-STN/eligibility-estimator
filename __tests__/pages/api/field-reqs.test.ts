@@ -72,7 +72,7 @@ describe('field requirement analysis', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 5,
-      partnerEverLivedSocialCountry: true,
+      //partnerEverLivedSocialCountry: true,
     })
     expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
     expect(res.body.missingFields).toEqual([])
@@ -93,8 +93,10 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_LIVING_COUNTRY,
+      FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
       FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
-      FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
+      //FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
     ])
   })
 })
