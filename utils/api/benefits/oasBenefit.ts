@@ -126,6 +126,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     )
       return {
         result: 0,
+        result65To74: 0,
         resultAt75: 0,
         clawback: 0,
         deferral: { age: 65, years: 0, increase: 0 },
@@ -134,6 +135,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       }
 
     const resultCurrent = this.currentEntitlementAmount
+    const result65To74 = this.age65EntitlementAmount
     const resultAt75 = this.age75EntitlementAmount
     const type =
       this.input.yearsInCanadaSince18 < 40
@@ -145,7 +147,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     return {
       result: resultCurrent,
-      resultAt75: resultAt75,
+      result65To74,
+      resultAt75,
       clawback: this.clawbackAmount,
       deferral: {
         age: this.deferralYears + 65,

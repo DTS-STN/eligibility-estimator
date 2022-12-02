@@ -86,6 +86,7 @@ export interface EntitlementResultGeneric {
 }
 
 export interface EntitlementResultOas extends EntitlementResultGeneric {
+  result65To74: number
   resultAt75: number
   clawback: number
   deferral: { age: number; years: number; increase: number }
