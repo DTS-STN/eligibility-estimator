@@ -49,7 +49,8 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
-    [FieldKey.INV_SEPARATED]: 'Séparation involontaire?',
+    [FieldKey.INV_SEPARATED]:
+      'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -63,9 +64,9 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
     [FieldKey.PARTNER_INCOME]:
-      'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
+      'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
     [FieldKey.PARTNER_AGE]:
-      'Quel mois et quelle année votre partenaire est-il né?',
+      'En quel mois et quelle année votre conjoint est-il né?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Dans quel pays habite actuellement votre conjoint?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
@@ -139,8 +140,10 @@ const fr: Translations = {
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
+    [FieldKey.INV_SEPARATED]:
+      "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
+      'Fournir le revenu de votre conjoint vous donnera des résultats plus précis.',
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
@@ -168,7 +171,7 @@ const fr: Translations = {
       },
       {
         key: false,
-        text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
+        text: 'Non, je ne fournirai pas le revenu de mon conjoint pour le moment',
         shortText: 'Non fourni',
       },
     ],
@@ -254,14 +257,14 @@ const fr: Translations = {
     ],
     [FieldKey.INV_SEPARATED]: [
       {
-        key: false,
-        text: 'Non',
-        shortText: 'Non',
-      },
-      {
         key: true,
         text: 'Oui',
         shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [

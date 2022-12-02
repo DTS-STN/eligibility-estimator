@@ -28,7 +28,6 @@ export default class MainHandler {
         fieldData: this.handler.fieldData,
       }
     } catch (error) {
-      console.log(error)
       this.results = {
         error: ResultKey.INVALID,
         detail: error,

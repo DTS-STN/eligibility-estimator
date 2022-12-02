@@ -47,7 +47,8 @@ const en: Translations = {
     [FieldKey.OAS_AGE]:
       'At what age would you like to start receiving the OAS pension?',
     [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
-    [FieldKey.INV_SEPARATED]: 'Involuntarily separated?',
+    [FieldKey.INV_SEPARATED]:
+      'Are you and your partner living apart for reasons beyond your control?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -61,7 +62,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
-      "What is your partner's annual net income in Canadian dollars?",
+      "What is your partner's annual net income (income after taxes) in Canadian dollars?",
     [FieldKey.PARTNER_AGE]: 'What month and year was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country is your partner currently living in?',
@@ -128,6 +129,8 @@ const en: Translations = {
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
+    [FieldKey.INV_SEPARATED]:
+      'An involuntary separation could happen when one partner is living away from work, school or health reasons.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
@@ -243,14 +246,14 @@ const en: Translations = {
     ],
     [FieldKey.INV_SEPARATED]: [
       {
-        key: false,
-        text: 'No',
-        shortText: 'No',
-      },
-      {
         key: true,
         text: 'Yes',
         shortText: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
