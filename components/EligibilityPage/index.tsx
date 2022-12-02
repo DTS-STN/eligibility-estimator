@@ -278,7 +278,9 @@ export const EligibilityPage: React.VFC = ({}) => {
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
               <div className="my-6">
-                <p className="ds-accordion-header">{tsln.partnerInformation}</p>
+                <p className="ds-accordion-header mb-4">
+                  {tsln.partnerInformation}
+                </p>
                 <p>{tsln.partnerInformationDescription}</p>
               </div>
             )}
