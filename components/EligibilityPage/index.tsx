@@ -274,7 +274,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             </div>
           )}
-          {showWarningMessage(field, fields)}
+          {showWarningMessage(field)}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
               <div className="my-6">
@@ -289,7 +289,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     })
   }
 
-  const showWarningMessage = (field, fields) => {
+  const showWarningMessage = (field) => {
     const messageHeading = tsln.partnerIsNotEligible
     let messageBody = ''
     if (
@@ -298,22 +298,10 @@ export const EligibilityPage: React.VFC = ({}) => {
     ) {
       messageBody = tsln.partnerLegalStatusNotEligible
     } else if (
-      field.key === FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 &&
-      field.value < 10
+      field.key === FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY &&
+      field.value === 'false'
     ) {
       messageBody = tsln.partnerYearsLivingCanadaNotEligible
-    } else if (
-      field.key === FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18 &&
-      field.value < 20
-    ) {
-      const livingCountryField = fields.find(
-        (f) => f.key === FieldKey.PARTNER_LIVING_COUNTRY
-      )
-      if (livingCountryField.value !== LivingCountry.CANADA) {
-        messageBody = tsln.partnerYearsLivingCanadaNotEligible
-      } else {
-        return
-      }
     } else {
       return ''
     }

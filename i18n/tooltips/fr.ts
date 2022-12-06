@@ -41,7 +41,7 @@ const fr: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Statut d'Indien :</span> \
-            Vous êtes inscrit en tant qu'Indien selon la définition qu'en donne la <em>Loi sur les Indiens</em>. \
+            Vous êtes inscrit en tant qu'Indien selon la définition qu'en donne la Loi sur les Indiens. \
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Résident permanent ou immigrant reçu :</span> \
@@ -70,7 +70,7 @@ const fr: TooltipTranslations = {
             </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Statut d'Indien : </span> \
-            Votre conjoint est inscrit en tant qu'Indien selon la définition qu'en donne la <em>Loi sur les Indiens<em>. \
+            Votre conjoint est inscrit en tant qu'Indien selon la définition qu'en donne la Loi sur les Indiens. \
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Résident permanent ou immigrant reçu : </span> \

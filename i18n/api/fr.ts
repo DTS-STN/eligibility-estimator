@@ -62,7 +62,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Votre conjoint reçoit-il la pension de la Sécurité de la vieillesse?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
+      'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
       'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
     [FieldKey.PARTNER_AGE]:
@@ -148,6 +148,8 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -165,7 +167,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
       {
         key: true,
-        text: 'Oui, je fournirai les revenus de mon partenaire',
+        text: 'Oui, je fournirai les revenus de mon conjoint',
         shortText: 'Oui',
       },
       {
@@ -228,12 +230,12 @@ const fr: Translations = {
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Non',
       },
       {
         key: true,
-        text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
         shortText: 'Oui',
       },
     ],

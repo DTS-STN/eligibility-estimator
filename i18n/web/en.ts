@@ -192,7 +192,7 @@ const en: WebTranslations = {
   partnerLegalStatusNotEligible:
     "Your partner's legal status indicates that they are not receiving the Old Age Security pension.",
   partnerYearsLivingCanadaNotEligible:
-    'The number of years your partner has lived in Canada indicates that they are not receiving the Old Age Security pension.',
+    'Your partner has not lived in Canada long enough to receive the Old Age Security pension.',
   partnerInformation: "Partner's information",
   partnerInformationDescription:
     "Individuals who are married or in common-law relationships need to \
