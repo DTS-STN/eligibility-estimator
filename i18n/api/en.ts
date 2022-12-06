@@ -63,13 +63,13 @@ const en: Translations = {
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
       "What is your partner's annual net income (income after taxes) in Canadian dollars?",
-    [FieldKey.PARTNER_AGE]: 'What month and year was your partner born?',
+    [FieldKey.PARTNER_AGE]: 'In what month and year was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       "What is your partner's legal status in Canada?",
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?',
+      'Since the age of 18, has your partner lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
@@ -130,13 +130,15 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INV_SEPARATED]:
-      'An involuntary separation could happen when one partner is living away from work, school or health reasons.',
+      'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      "Providing your partner's income will give you more helpful and accurate results.",
+      "Providing your partner's income will give you more accurate results.",
     [FieldKey.OAS_DEFER]:
       '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'If you are not sure of the exact number, you may enter an estimate.',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate.',
   },
   questionOptions: {
@@ -218,12 +220,12 @@ const en: Translations = {
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
       {
         key: false,
-        text: 'No, my partner has not lived outside of Canada for longer than 6 months',
+        text: 'No, my partner has not lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'No',
       },
       {
         key: true,
-        text: 'Yes, my partner has lived outside of Canada for longer than 6 months',
+        text: 'Yes, my partner has lived outside of Canada for longer than 6&nbsp;months',
         shortText: 'Yes',
       },
     ],

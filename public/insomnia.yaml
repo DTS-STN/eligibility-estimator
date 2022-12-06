@@ -653,7 +653,7 @@ resources:
           partnerLivedOutsideCanada:
             name: partnerLivedOutsideCanada
             in: query
-            description: Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?
+            description: Since the age of 18, has your partner lived outside of Canada for longer than 6 months?
             required: false
             example: false
             schema:

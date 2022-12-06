@@ -232,7 +232,7 @@ export class BenefitHandler {
         (!this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 < 20)
       ) {
-        //requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)
+        requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)
       }
     }
 
