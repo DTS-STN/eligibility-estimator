@@ -78,32 +78,29 @@ const fr: Translations = {
       'Votre conjoint-a-til déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
   },
   questionShortText: {
+    [FieldKey.AGE]: 'Âge',
+    [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
+    [FieldKey.OAS_AGE]: 'Âge de report de la SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu fourni',
     [FieldKey.INCOME]: 'Revenu net',
-    [FieldKey.AGE]: 'Âge',
-    [FieldKey.OAS_DEFER]: 'Report de la SV',
-    [FieldKey.OAS_AGE]: 'Âge de report de la SV',
-    [FieldKey.MARITAL_STATUS]: 'État civil',
-    [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
-    [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "A vécu à l'extérieur du Canada pendant plus de 6 mois",
-    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Années vécues à l'extérieur du Canada",
+    [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
+    [FieldKey.LIVED_OUTSIDE_CANADA]: "Vécu à l'extérieur du Canada",
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
-    [FieldKey.PARTNER_BENEFIT_STATUS]:
-      'Prestations de vieillesse du partenaire',
-    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du partenaire fourni',
-    [FieldKey.PARTNER_INCOME]: 'Revenu net du partenaire',
-    [FieldKey.PARTNER_AGE]: 'Âge du partenaire',
-    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du partenaire',
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut juridique du partenaire',
+    [FieldKey.MARITAL_STATUS]: 'État civil',
+    [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
+    [FieldKey.PARTNER_INCOME]: 'Revenu net du conjoint',
+    [FieldKey.PARTNER_BENEFIT_STATUS]: 'Conjoint reçoit la pension de la SV',
+    [FieldKey.PARTNER_AGE]: 'Âge du conjoint',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut légal du conjoint',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du conjoint',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
+      "Conjoint a vécu à l'extérieur du Canada",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Années du partenaire vécues à l'extérieur du Canada",
+      'Années vécues au Canada du conjoint',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Le partenaire vivait dans un pays avec un accord social',
   },

@@ -77,12 +77,12 @@ const en: Translations = {
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
-    [FieldKey.OAS_DEFER]: 'OAS deferral',
+    [FieldKey.OAS_DEFER]: 'OAS pension deferral',
     [FieldKey.OAS_AGE]: 'OAS deferral age',
     [FieldKey.INCOME_AVAILABLE]: 'Income provided',
     [FieldKey.INCOME]: 'Net income',
     [FieldKey.LEGAL_STATUS]: 'Legal status',
-    [FieldKey.LIVING_COUNTRY]: 'Residence country',
+    [FieldKey.LIVING_COUNTRY]: 'Country of residence',
     [FieldKey.LIVED_OUTSIDE_CANADA]: 'Lived outside Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -91,10 +91,10 @@ const en: Translations = {
     [FieldKey.INV_SEPARATED]: 'Involuntarily separated',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Partner income provided',
     [FieldKey.PARTNER_INCOME]: "Partner's net income",
-    [FieldKey.PARTNER_BENEFIT_STATUS]: "Partner's old age benefits",
+    [FieldKey.PARTNER_BENEFIT_STATUS]: 'Partner receives OAS pension',
     [FieldKey.PARTNER_AGE]: "Partner's age",
     [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
-    [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's residence country",
+    [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: "Partner's lived outside Canada",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: 'Years',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
