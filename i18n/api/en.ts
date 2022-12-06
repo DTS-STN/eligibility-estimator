@@ -47,7 +47,8 @@ const en: Translations = {
     [FieldKey.OAS_AGE]:
       'At what age would you like to start receiving the OAS pension?',
     [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
-    [FieldKey.INV_SEPARATED]: 'Involuntarily separated?',
+    [FieldKey.INV_SEPARATED]:
+      'Are you and your partner living apart for reasons beyond your control?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -57,16 +58,16 @@ const en: Translations = {
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
-      'Which of the following applies to your partner?',
+      'Does your partner receive the Old Age Security pension?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
-      "What is your partner's annual net income in Canadian dollars?",
+      "What is your partner's annual net income (income after taxes) in Canadian dollars?",
     [FieldKey.PARTNER_AGE]: 'What month and year was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
-      'What country is your partner currently living in?',
+      'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
-      "What is your partner's current legal status?",
+      "What is your partner's legal status in Canada?",
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       'Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -128,6 +129,8 @@ const en: Translations = {
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
+    [FieldKey.INV_SEPARATED]:
+      'An involuntary separation could happen when one partner is living away from work, school or health reasons.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more helpful and accurate results.",
     [FieldKey.OAS_DEFER]:
@@ -237,47 +240,47 @@ const en: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Surviving partner or widowed',
+        text: 'Widowed',
         shortText: 'Widowed',
       },
     ],
     [FieldKey.INV_SEPARATED]: [
       {
-        key: false,
-        text: 'No',
-        shortText: 'No',
-      },
-      {
         key: true,
         text: 'Yes',
         shortText: 'Yes',
       },
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
+      },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
-      {
-        key: PartnerBenefitStatus.OAS,
-        text: 'My partner receives an Old Age Security pension',
-        shortText: 'Yes',
-      },
+      // {
+      //   key: PartnerBenefitStatus.OAS,
+      //   text: 'My partner receives an Old Age Security pension',
+      //   shortText: 'Yes',
+      // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'My partner receives an Old Age Security pension and the Guaranteed Income Supplement',
+        text: 'Yes, my partner receives the Old Age Security pension',
         shortText: 'Yes',
       },
-      {
-        key: PartnerBenefitStatus.ALW,
-        text: 'My partner receives the Allowance',
-        shortText: 'Yes',
-      },
+      // {
+      //   key: PartnerBenefitStatus.ALW,
+      //   text: 'My partner receives the Allowance',
+      //   shortText: 'Yes',
+      // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'None of the above',
+        text: 'No, my partner does not receive the Old Age Security pension',
         shortText: 'No benefits',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
-        text: 'Help me find out',
-        shortText: 'Help me find out',
+        text: "I don't know",
+        shortText: "I don't know",
       },
     ],
     [FieldKey.LIVING_COUNTRY]: livingCountry,

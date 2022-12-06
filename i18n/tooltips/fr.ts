@@ -34,10 +34,55 @@ const fr: TooltipTranslations = {
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiFr.category.legal,
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Citoyen canadien :</span> Vous êtes Canadien de naissance (né au Canada ou né à l’extérieur du Canada d’un parent citoyen canadien) ou avez obtenu la citoyenneté canadienne.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Statut d'Indien :</span> Vous êtes inscrit en tant qu'Indien selon la définition qu'en donne la <em>Loi sur les Indiens</em>.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou immigrant reçu :</span> Vous avez obtenu le statut de résident permanent ou avez présenté une demande de résidence permanente au titre de la catégorie du regroupement familial.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Réfugié :</span> Vous êtes hors de votre pays d’origine ou de résidence habituelle et ne pouvez y retourner, parce que vous craignez avec raison d’être persécuté pour des motifs liés à votre race, votre religion, votre nationalité, votre appartenance à un groupe social particulier ou vos opinions politiques.</p>",
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Citoyen canadien :</span> \
+            Vous êtes Canadien de naissance (né au Canada ou né à l’extérieur \
+            du Canada d’un parent citoyen canadien) ou avez obtenu la citoyenneté canadienne. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Statut d'Indien :</span> \
+            Vous êtes inscrit en tant qu'Indien selon la définition qu'en donne la <em>Loi sur les Indiens</em>. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Résident permanent ou immigrant reçu :</span> \
+            Vous avez obtenu le statut de résident permanent ou avez présenté une demande de résidence \
+            permanente au titre de la catégorie du regroupement familial. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Réfugié :</span> \
+            Vous êtes hors de votre pays d’origine ou de résidence habituelle et ne pouvez y retourner, \
+            parce que vous craignez avec raison d’être persécuté pour des motifs liés à votre race, \
+            votre religion, votre nationalité, votre appartenance à un groupe social particulier ou vos \
+            opinions politiques. \
+          </p>",
   },
+
+  /*
+
+
+   */
   [FieldKey.PARTNER_LEGAL_STATUS]: {
-    useDataFromKey: 'legalStatus',
+    heading: apiFr.category.legal,
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Citoyen canadien : </span> \
+            Votre conjoint est canadien de naissance (né au Canada ou né à l’extérieur du Canada \
+              d’un parent citoyen canadien) ou a obtenu la citoyenneté canadienne. \
+            </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Statut d'Indien : </span> \
+            Votre conjoint est inscrit en tant qu'Indien selon la définition qu'en donne la <em>Loi sur les Indiens<em>. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Résident permanent ou immigrant reçu : </span> \
+            Votre conjoint a obtenu le statut de résident permanent ou a présenté une demande de résidence \
+            permanente au titre de la catégorie du regroupement familial. \
+            </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Réfugié : </span> \
+            Votre conjoint est hors de son pays d’origine ou de résidence habituelle et ne peut y retourner, \
+            parce qu'il craint avec raison d’être persécuté pour des motifs liés à sa race, \
+            sa religion, sa nationalité, son appartenance à un groupe social particulier ou ses opinions politiques. \
+          </p>",
   },
   [FieldKey.INCOME]: {
     heading: apiFr.category.income,

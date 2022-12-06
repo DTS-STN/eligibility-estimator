@@ -7,6 +7,7 @@ import {
   BenefitKey,
   EntitlementResultType,
   Language,
+  LegalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -198,8 +199,9 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
-      //here goes the question for involuntary separation, but ethere is no logic for processing it
-      //requiredFields.push(FieldKey.INV_SEPARATED)
+      //logic is missing, need to be implemented
+      requiredFields.push(FieldKey.INV_SEPARATED)
+      requiredFields.push(FieldKey.PARTNER_AGE)
 
       requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       // only ask for partner income if client income is available
@@ -209,13 +211,18 @@ export class BenefitHandler {
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
       if (this.input.client.partnerBenefitStatus.helpMe) {
+        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
+      }
+      if (
+        this.input.partner.legalStatus.value &&
+        this.input.partner.legalStatus.value !== LegalStatus.OTHER
+      ) {
         requiredFields.push(
-          FieldKey.PARTNER_AGE,
-          FieldKey.PARTNER_LEGAL_STATUS,
           FieldKey.PARTNER_LIVING_COUNTRY,
           FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
         )
       }
+
       if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
@@ -225,7 +232,7 @@ export class BenefitHandler {
         (!this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 < 20)
       ) {
-        requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)
+        //requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)
       }
     }
 

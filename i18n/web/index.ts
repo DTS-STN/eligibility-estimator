@@ -138,6 +138,9 @@ export type WebTranslations = {
     moreInformation: string
   }
 
+  partnerIsNotEligible: string
+  partnerLegalStatusNotEligible: string
+  partnerYearsLivingCanadaNotEligible: string
   partnerInformation: string
   partnerInformationDescription: string
 }

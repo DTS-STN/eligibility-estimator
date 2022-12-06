@@ -107,7 +107,7 @@ export class EntitlementFormula {
     // It is assumed that this does not affect ALW/AFS, though this is not confirmed.
     if (this.oasResult?.entitlement.type === EntitlementResultType.PARTIAL) {
       const oasCoverageAmount =
-        legalValues.oas.amount - this.oasResult.entitlement.result
+        legalValues.oas.amount - this.oasResult.entitlement.result65To74
       return roundToTwo(preOasAmount + oasCoverageAmount)
     } else return preOasAmount
   }

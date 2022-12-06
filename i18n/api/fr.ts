@@ -49,7 +49,8 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
-    [FieldKey.INV_SEPARATED]: 'Séparation involontaire?',
+    [FieldKey.INV_SEPARATED]:
+      'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
@@ -59,17 +60,16 @@ const fr: Translations = {
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
-      "Laquelle des options suivantes s'applique à votre conjoint?",
+      'Votre conjoint reçoit-il la pension de la Sécurité de la vieillesse?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
     [FieldKey.PARTNER_INCOME]:
-      'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
+      'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
     [FieldKey.PARTNER_AGE]:
-      'Quel mois et quelle année votre partenaire est-il né?',
-    [FieldKey.PARTNER_LIVING_COUNTRY]:
-      'Dans quel pays habite actuellement votre conjoint?',
+      'En quel mois et quelle année votre conjoint est-il né?',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
-      'Quel est le statut légal actuel de votre conjoint?',
+      'Quel est le statut légal de votre conjoint au Canada?',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -139,8 +139,10 @@ const fr: Translations = {
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
+    [FieldKey.INV_SEPARATED]:
+      "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
+      'Fournir le revenu de votre conjoint vous donnera des résultats plus précis.',
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}.</div>',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
@@ -168,7 +170,7 @@ const fr: Translations = {
       },
       {
         key: false,
-        text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
+        text: 'Non, je ne fournirai pas le revenu de mon conjoint pour le moment',
         shortText: 'Non fourni',
       },
     ],
@@ -254,41 +256,41 @@ const fr: Translations = {
     ],
     [FieldKey.INV_SEPARATED]: [
       {
-        key: false,
-        text: 'Non',
-        shortText: 'Non',
-      },
-      {
         key: true,
         text: 'Oui',
         shortText: 'Oui',
       },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
+      },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
-      {
-        key: PartnerBenefitStatus.OAS,
-        text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
-        shortText: 'Oui',
-      },
+      // {
+      //   key: PartnerBenefitStatus.OAS,
+      //   text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+      //   shortText: 'Oui',
+      // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
+        text: 'Oui, mon conjoint reçoit la pension de la Sécurité de la vieillesse',
         shortText: 'Oui',
       },
-      {
-        key: PartnerBenefitStatus.ALW,
-        text: "Mon conjoint reçoit l'Allocation",
-        shortText: 'Oui',
-      },
+      // {
+      //   key: PartnerBenefitStatus.ALW,
+      //   text: "Mon conjoint reçoit l'Allocation",
+      //   shortText: 'Oui',
+      // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'Aucune des réponses',
+        text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
         shortText: 'No prestations',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
-        text: 'Aidez-moi à trouver',
-        shortText: 'Aidez-moi à trouver',
+        text: 'Je ne sais pas',
+        shortText: 'Je ne sais pas',
       },
     ],
     [FieldKey.LIVING_COUNTRY]: livingCountry,

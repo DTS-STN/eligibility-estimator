@@ -63,6 +63,7 @@ describe('field requirement analysis', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: true,
+      invSeparated: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncomeAvailable: true,
       partnerIncome: 10000,
@@ -71,7 +72,7 @@ describe('field requirement analysis', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 5,
-      partnerEverLivedSocialCountry: true,
+      //partnerEverLivedSocialCountry: true,
     })
     expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
     expect(res.body.missingFields).toEqual([])
@@ -87,11 +88,15 @@ describe('field requirement analysis', () => {
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       // FieldKey.EVER_LIVED_SOCIAL_COUNTRY, // this field is odd because when visible, no matter what is selected it will return an error
       FieldKey.MARITAL_STATUS,
+      FieldKey.INV_SEPARATED,
+      FieldKey.PARTNER_AGE,
       FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_LIVING_COUNTRY,
+      FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
       FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
-      FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
+      //FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
     ])
   })
 })
@@ -157,6 +162,8 @@ describe('field requirements analysis: conditional fields', () => {
     })
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
+      FieldKey.INV_SEPARATED,
+      FieldKey.PARTNER_AGE,
       FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_BENEFIT_STATUS,
     ])

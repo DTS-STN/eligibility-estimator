@@ -197,7 +197,11 @@ const fr: WebTranslations = {
   tooltip: {
     moreInformation: "Plus d'information",
   },
-
+  partnerIsNotEligible: "Votre conjoint n'est pas admissible",
+  partnerLegalStatusNotEligible:
+    "Le statut légal de votre conjoint indique qu'il ne reçoit pas la pension de la Sécurité de la vieillesse.",
+  partnerYearsLivingCanadaNotEligible:
+    "Votre conjoint n'a pas vécu au Canada assez longtemps pour recevoir la pension de la Sécurité de la vieillesse.",
   partnerInformation: 'Renseignements sur votre conjoint',
   partnerInformationDescription:
     'Les personnes mariées ou vivant en union de fait doivent fournir \

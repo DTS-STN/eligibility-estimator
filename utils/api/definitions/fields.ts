@@ -102,6 +102,12 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.RADIO,
     default: undefined,
   },
+  [FieldKey.PARTNER_AGE]: {
+    key: FieldKey.PARTNER_AGE,
+    relatedKey: FieldKey.AGE,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.DATE,
+  },
   [FieldKey.PARTNER_INCOME_AVAILABLE]: {
     key: FieldKey.PARTNER_INCOME_AVAILABLE,
     category: { key: FieldCategory.MARITAL },
@@ -118,12 +124,6 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,
-  },
-  [FieldKey.PARTNER_AGE]: {
-    key: FieldKey.PARTNER_AGE,
-    relatedKey: FieldKey.AGE,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.DATE,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -150,7 +150,6 @@ export const fieldDefinitions: FieldDefinitions = {
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_18,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.NUMBER,
-    placeholder: '40',
   },
   [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]: {
     key: FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY,
