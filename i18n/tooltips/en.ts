@@ -28,7 +28,7 @@ const en: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Widowed</span>: \
-            Your spouse has died and that you have not remarried or entered into a common-law relationship. \
+            Your spouse or common-law partner has died and you have not remarried or entered into a common-law relationship. \
           </p> \
           ",
   },
