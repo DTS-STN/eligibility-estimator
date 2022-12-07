@@ -75,7 +75,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Votre conjoint-a-t-il déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
+      'Votre conjoint a-t-il déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
   },
   questionShortText: {
     [FieldKey.INCOME_AVAILABLE]: 'Revenu fourni',
