@@ -61,6 +61,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         placeholder={placeholder}
         onChange={onChange}
         required
+        autoFocus
         autoComplete="off"
         enterKeyHint="done"
       />

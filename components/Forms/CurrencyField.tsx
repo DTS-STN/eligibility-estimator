@@ -76,6 +76,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         placeholder={placeholder}
         onChange={onChange}
         required
+        autoFocus
         autoComplete="off"
         enterKeyHint="done"
       />
