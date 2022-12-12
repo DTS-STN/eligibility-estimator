@@ -365,7 +365,9 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerLivedOutsideCanada: false,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(
