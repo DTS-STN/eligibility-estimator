@@ -160,6 +160,7 @@ export class BenefitHandler {
         PartnerBenefitStatus.HELP_ME
       ),
     }
+
     return {
       client: clientInput,
       partner: partnerInput,
@@ -210,7 +211,11 @@ export class BenefitHandler {
         if (this.input.client.income.partnerAvailable)
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
-      if (this.input.client.partnerBenefitStatus.helpMe) {
+      if (
+        this.input.client.partnerBenefitStatus.helpMe &&
+        this.input.partner.age >= 60 &&
+        this.input.partner.age <= 64
+      ) {
         requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
       }
       if (

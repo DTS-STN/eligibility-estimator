@@ -119,7 +119,9 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
 
   constructor(public value: PartnerBenefitStatus) {
     super(value)
-    this.helpMe = this.value == PartnerBenefitStatus.HELP_ME
+    this.helpMe =
+      this.value === PartnerBenefitStatus.HELP_ME ||
+      this.value === PartnerBenefitStatus.NONE
     this.oasEligibility = EntitlementResultType.NONE
     this.gisEligibility = EntitlementResultType.NONE
     this.alwEligibility = EntitlementResultType.NONE
