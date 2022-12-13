@@ -1,4 +1,4 @@
-import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
+import { AccordionForm } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState, useRef } from 'react'
@@ -28,6 +28,7 @@ import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
+import { Message } from '../Forms/Message'
 import { useMediaQuery, useTranslation } from '../Hooks'
 
 /**

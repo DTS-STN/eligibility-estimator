@@ -55,6 +55,10 @@
     @apply text-white bg-danger hover:bg-danger-hover border-danger-border;
   }
 
+  .msg-container {
+    @apply border-[3px] rounded sm:py-[28px] py-[16px] bg-white;
+  }
+
   .btn-link {
     @apply text-default-text bg-transparent border-0 hover:underline;
   }
