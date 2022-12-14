@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:27.5.1"],\
             ["jest-axe", "npm:6.0.0"],\
             ["joi", "npm:17.6.0"],\
+            ["jquery", "npm:3.6.2"],\
             ["jsdom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:19.0.0"],\
             ["lint-staged", "npm:12.3.7"],\
             ["lodash", "npm:4.17.21"],\
@@ -4386,6 +4387,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:27.5.1"],\
             ["jest-axe", "npm:6.0.0"],\
             ["joi", "npm:17.6.0"],\
+            ["jquery", "npm:3.6.2"],\
             ["jsdom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:19.0.0"],\
             ["lint-staged", "npm:12.3.7"],\
             ["lodash", "npm:4.17.21"],\
@@ -6947,6 +6949,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@sideway/address", "npm:4.1.3"],\
             ["@sideway/formula", "npm:3.0.0"],\
             ["@sideway/pinpoint", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["jquery", [\
+        ["npm:3.6.2", {\
+          "packageLocation": "./.yarn/cache/jquery-npm-3.6.2-73fded3d09-b8ca408b94.zip/node_modules/jquery/",\
+          "packageDependencies": [\
+            ["jquery", "npm:3.6.2"]\
           ],\
           "linkType": "HARD"\
         }]\
