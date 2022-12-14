@@ -1,12 +1,11 @@
 import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
-import { livingCountry } from '../../i18n/api/countries/en'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import {
@@ -14,7 +13,6 @@ import {
   Language,
   MaritalStatus,
   LegalStatus,
-  LivingCountry,
 } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
@@ -261,7 +259,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             )}
           </div>
           {field.error && (
-            <div className="mt-6 md:pr-12">
+            <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
                 alert_icon_id={field.key}
@@ -307,7 +305,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
 
     return (
-      <div className="mt-6 md:pr-12">
+      <div className="mt-6 md:pr-12 msg-container border-info">
         <Message
           id={field.key}
           alert_icon_id={field.key}

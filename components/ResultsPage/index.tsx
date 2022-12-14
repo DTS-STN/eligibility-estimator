@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
+import { ResultKey } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
