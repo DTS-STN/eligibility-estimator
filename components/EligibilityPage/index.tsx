@@ -261,7 +261,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             )}
           </div>
           {field.error && (
-            <div className="mt-6 md:pr-12">
+            <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
                 alert_icon_id={field.key}
@@ -307,7 +307,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
 
     return (
-      <div className="mt-6 md:pr-12">
+      <div className="mt-6 md:pr-12 msg-container border-info">
         <Message
           id={field.key}
           alert_icon_id={field.key}
