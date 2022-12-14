@@ -28,16 +28,16 @@ export const RequestSchema = Joi.object({
   income: Joi.number()
     .precision(2)
     .min(0)
-    .message(ValidationErrors.incomeBelowZero)
-    .less(
-      Joi.ref('age', {
-        adjust: (age) =>
-          age >= 75
-            ? legalValues.oas.incomeLimit75
-            : legalValues.oas.incomeLimit,
-      })
-    )
-    .message(ValidationErrors.incomeTooHigh),
+    .message(ValidationErrors.incomeBelowZero),
+  // .less(
+  //   Joi.ref('age', {
+  //     adjust: (age) =>
+  //       age >= 75
+  //         ? legalValues.oas.incomeLimit75
+  //         : legalValues.oas.incomeLimit,
+  //   })
+  // )
+  // .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
     .min(18)
     .message(ValidationErrors.ageUnder18)
@@ -99,13 +99,13 @@ export const RequestSchema = Joi.object({
   partnerIncome: Joi.number()
     .precision(2)
     .min(0)
-    .message(ValidationErrors.partnerIncomeBelowZero)
-    .less(
-      Joi.ref('income', {
-        adjust: (income) => legalValues.oas.incomeLimit - income,
-      })
-    )
-    .message(ValidationErrors.partnerIncomeTooHigh),
+    .message(ValidationErrors.partnerIncomeBelowZero),
+  // .less(
+  //   Joi.ref('income', {
+  //     adjust: (income) => legalValues.oas.incomeLimit - income,
+  //   })
+  // )
+  // .message(ValidationErrors.partnerIncomeTooHigh),
   partnerAge: Joi.number()
     .min(18)
     .message(ValidationErrors.partnerAgeUnder18)
