@@ -3,14 +3,10 @@ import { EligibilityPage } from '../../components/EligibilityPage'
 import { Layout } from '../../components/Layout'
 import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
-import {
-  ResponseError,
-  ResponseSuccess,
-} from '../../utils/api/definitions/types'
 import { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-//ResponseSuccess | ResponseError
+
 const Eligibility: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
