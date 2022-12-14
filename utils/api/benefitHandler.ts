@@ -214,7 +214,7 @@ export class BenefitHandler {
       if (
         this.input.client.partnerBenefitStatus.helpMe &&
         this.input.partner.age >= 60 &&
-        this.input.partner.age <= 64
+        this.input.partner.age < 65
       ) {
         requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
       }
