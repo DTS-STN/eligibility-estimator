@@ -38,6 +38,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   return (
     <>
       <Head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
         <meta name="dcterms.title" content={tsln.questionPageTitle} />
