@@ -3350,6 +3350,7 @@ __metadata:
     jest: ^27.5.1
     jest-axe: ^6.0.0
     joi: ^17.6.0
+    jquery: ^3.6.2
     jsdom: ^19.0.0
     lint-staged: ^12.3.7
     lodash: ^4.17.21
@@ -5557,6 +5558,13 @@ __metadata:
     "@sideway/formula": ^3.0.0
     "@sideway/pinpoint": ^2.0.0
   checksum: eaf62f6c02f2edb1042f1ab04fc23a5918a2cb8f54bec84c6e1033624d8a462c10ae9518af55a3ba84f1793960450d58094eda308e7ef93c17edd4e3c8ef31d5
+  languageName: node
+  linkType: hard
+
+"jquery@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "jquery@npm:3.6.2"
+  checksum: b8ca408b9447e67e614204dbc4b2e71c6ea76eff281942d233769d969eed97fe28ffa34976e9ad9d3faad9b0a0d947d7e326ed272243679a9f5812a586c84168
   languageName: node
   linkType: hard
 
