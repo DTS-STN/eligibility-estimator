@@ -370,6 +370,7 @@ export class BenefitHandler {
     allResults.client.afs.cardDetail = clientAfs.cardDetail
 
     // All done!
+    console.log(`allResults`, allResults)
     return allResults.client
   }
 

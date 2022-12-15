@@ -207,7 +207,7 @@ describe('GIS entitlement scenarios', () => {
 })
 
 describe('basic Allowance scenarios', () => {
-  it('returns "ineligible" when partner not receiving OAS', async () => {
+  it('returns "eligible" when partner not receiving OAS', async () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
@@ -218,7 +218,7 @@ describe('basic Allowance scenarios', () => {
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       invSeparated: false,
-      partnerAge: 65,
+      partnerAge: 55,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
@@ -366,7 +366,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       invSeparated: false,
-      partnerAge: 65,
+      partnerAge: 55,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
