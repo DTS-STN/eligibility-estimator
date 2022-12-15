@@ -20,7 +20,6 @@ export default class MainHandler {
         abortEarly: false,
       })
 
-      console.log(`this.requestInput`, this.requestInput)
       this.handler = new BenefitHandler(this.requestInput)
       this.results = {
         results: this.handler.benefitResults,
@@ -29,7 +28,6 @@ export default class MainHandler {
         missingFields: this.handler.missingFields,
         fieldData: this.handler.fieldData,
       }
-      console.log('RESULTS', this.results)
     } catch (error) {
       this.results = {
         error: ResultKey.INVALID,
