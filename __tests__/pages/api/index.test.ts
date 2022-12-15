@@ -207,7 +207,7 @@ describe('GIS entitlement scenarios', () => {
 })
 
 describe('basic Allowance scenarios', () => {
-  it('returns "eligible" when partner not receiving OAS', async () => {
+  it('returns "ineligible" when partner not receiving OAS', async () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
