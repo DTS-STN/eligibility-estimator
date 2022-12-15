@@ -24,12 +24,14 @@ export class Form {
   }
 
   update(inputs: InputHelper) {
+    console.log(`inputs.asObjectWithLanguage`, inputs.asObjectWithLanguage)
     const data = new MainHandler(inputs.asObjectWithLanguage).results
-
+    console.log(`data`, data)
     // handle successful response
     if ('results' in data) {
       this.clearAllErrors()
       this.fields.forEach((field) => {
+        console.log(`field`, field)
         // set visibility
         field.visible = data.visibleFields.includes(field.key)
 
