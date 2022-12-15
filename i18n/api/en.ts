@@ -84,7 +84,7 @@ const en: Translations = {
     [FieldKey.LEGAL_STATUS]: 'Legal status',
     [FieldKey.LIVING_COUNTRY]: 'Country of residence',
     [FieldKey.LIVED_OUTSIDE_CANADA]: 'Lived outside Canada',
-    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years lived in Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Lived in country with social agreement',
     [FieldKey.MARITAL_STATUS]: 'Marital status',
@@ -95,8 +95,9 @@ const en: Translations = {
     [FieldKey.PARTNER_AGE]: "Partner's age",
     [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: "Partner's lived outside Canada",
-    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: 'Years',
+    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: 'Partner lived outside Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Years partner lived in Canada',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Partner lived in country with social agreement',
   },
@@ -182,7 +183,7 @@ const en: Translations = {
       {
         key: LegalStatus.CANADIAN_CITIZEN,
         text: 'Canadian citizen',
-        shortText: 'Canadian Citizen',
+        shortText: 'Canadian citizen',
       },
       {
         key: LegalStatus.INDIAN_STATUS,
