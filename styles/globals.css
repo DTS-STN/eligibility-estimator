@@ -235,4 +235,8 @@
   input#datePickerYear:focus {
     border-color: #2563eb;
   }
+
+  summary:hover {
+    color: blue;
+  }
 }

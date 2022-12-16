@@ -72,18 +72,49 @@ export const EligibilityPage: React.VFC = ({}) => {
         'data-gc-analytics-formname',
         'ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form'
       )
-      el.setAttribute(
-        'data-gc-analytics-collect',
-        '[{"value":"input,select","emptyField":"N/A"}]'
-      )
+      // el.setAttribute(
+      //   'data-gc-analytics-collect',
+      //   '[{"value":"input,select","emptyField":"N/A"}]'
+      // )
     }
 
-    const button = document.querySelector(
-      '#mainForm > fieldset#step5 > div > div.cardContent > div > button'
-    )
+    const stepButtons = [
+      {
+        id: '#step1-button',
+        attrValue:
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Income',
+      },
+      {
+        id: '#step2-button',
+        attrValue:
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Legal Status',
+      },
+      {
+        id: '#step3-button',
+        attrValue:
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Residence History',
+      },
+      {
+        id: '#step4-button',
+        attrValue:
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Marital Status',
+      },
+    ]
 
-    if (button) {
-      button.setAttribute('type', 'submit')
+    stepButtons.forEach((button) => {
+      const stepButton = document.querySelector(button.id)
+      stepButton &&
+        stepButton.setAttribute(
+          'data-gc-analytics-customclick',
+          button.attrValue
+        )
+    })
+
+    const submitButton = document.querySelector('#step5-button')
+
+    if (submitButton) {
+      submitButton.setAttribute('type', 'submit')
+      submitButton.setAttribute('data-gc-analytics-formsubmit', 'submit')
     }
   }, [])
 
@@ -363,7 +394,7 @@ export const EligibilityPage: React.VFC = ({}) => {
         <div
           className="md:w-2/3"
           data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
-          data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
+          // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
         >
           <AccordionForm
             id="mainForm"
