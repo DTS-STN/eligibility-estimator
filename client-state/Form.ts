@@ -77,16 +77,6 @@ export class Form {
     }
   }
 
-  getCleanedInputs(inputs) {
-    if (inputs.oasAge && inputs.oasDefer === 'false') {
-      delete inputs.oasAge
-    }
-    if (inputs.incomeAvailable && inputs.income === 'false') {
-      delete inputs.income
-    }
-    return inputs
-  }
-
   get visibleFields(): FormField[] {
     return this.fields.filter((value) => value.visible)
   }

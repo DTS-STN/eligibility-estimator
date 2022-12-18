@@ -376,15 +376,13 @@ export const EligibilityPage: React.VFC = ({}) => {
  * Builds the object representing the default inputs object.
  */
 function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
-  const defaultInputsObject = allFieldConfigs.reduce((result, value) => {
+  return allFieldConfigs.reduce((result, value) => {
     if ('default' in value && value.default) {
       result[value.key] =
         typeof value.default === 'string' ? value.default : value.default.key
     }
     return result
   }, {})
-
-  return defaultInputsObject
 }
 
 export type VisibleFieldsObject = {
@@ -399,13 +397,10 @@ function getDefaultVisibleFields(
 ): VisibleFieldsObject {
   const defaultData = new MainHandler({}).results
   if ('visibleFields' in defaultData) {
-    const reducedReturnObject = allFieldConfigs.reduce((result, value) => {
+    return allFieldConfigs.reduce((result, value) => {
       result[value.key] = defaultData.visibleFields.includes(value.key)
       return result
     }, {})
-
-    // default state of form
-    return reducedReturnObject
   }
 }
 

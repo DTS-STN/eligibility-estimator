@@ -31,11 +31,8 @@ export class InputHelper {
   }
 
   setInputByKey(key: FieldKey, newValue: string): void {
-    if (newValue === '' || newValue === undefined) {
-      delete this.inputs[key]
-    } else {
-      this.inputs[key] = InputHelper.sanitizeValue(newValue)
-    }
+    if (newValue === '' || newValue === undefined) delete this.inputs[key]
+    else this.inputs[key] = InputHelper.sanitizeValue(newValue)
     this.setInputs(this.inputs)
   }
 
