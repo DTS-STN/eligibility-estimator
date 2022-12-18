@@ -141,6 +141,7 @@ export interface ResponseSuccess {
 }
 
 export interface ResponseError {
+  visibleFields: Array<FieldKey>
   error: string
   detail: Joi.ValidationError | Error
 }

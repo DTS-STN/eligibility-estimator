@@ -39,7 +39,6 @@ export const EligibilityPage: React.VFC = ({}) => {
   const language = useRouter().locale as Language
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
-
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -49,10 +48,8 @@ export const EligibilityPage: React.VFC = ({}) => {
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
-
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-
   const connection = tsln._language === Language.EN ? ':' : ' :'
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
@@ -156,13 +153,10 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   const [cardsValid, setCardsValid] = useState(getStepValidity())
-
   /**
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
-    console.log(`newValue`, newValue)
-    console.log('INSIDE FORM UPDATE')
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
@@ -176,7 +170,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
-
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>
@@ -383,13 +376,15 @@ export const EligibilityPage: React.VFC = ({}) => {
  * Builds the object representing the default inputs object.
  */
 function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
-  return allFieldConfigs.reduce((result, value) => {
+  const defaultInputsObject = allFieldConfigs.reduce((result, value) => {
     if ('default' in value && value.default) {
       result[value.key] =
         typeof value.default === 'string' ? value.default : value.default.key
     }
     return result
   }, {})
+
+  return defaultInputsObject
 }
 
 export type VisibleFieldsObject = {
@@ -404,10 +399,13 @@ function getDefaultVisibleFields(
 ): VisibleFieldsObject {
   const defaultData = new MainHandler({}).results
   if ('visibleFields' in defaultData) {
-    return allFieldConfigs.reduce((result, value) => {
+    const reducedReturnObject = allFieldConfigs.reduce((result, value) => {
       result[value.key] = defaultData.visibleFields.includes(value.key)
       return result
     }, {})
+
+    // default state of form
+    return reducedReturnObject
   }
 }
 
