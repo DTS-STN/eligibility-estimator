@@ -237,6 +237,7 @@
   }
 
   summary:hover {
-    color: blue;
+    --tw-border-opacity: 1;
+    color: rgb(5 53 210 / var(--tw-border-opacity));
   }
 }
