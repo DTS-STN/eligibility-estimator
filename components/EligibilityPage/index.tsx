@@ -69,10 +69,6 @@ export const EligibilityPage: React.VFC = ({}) => {
         'data-gc-analytics-formname',
         'ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form'
       )
-      // el.setAttribute(
-      //   'data-gc-analytics-collect',
-      //   '[{"value":"input,select","emptyField":"N/A"}]'
-      // )
     }
 
     const stepButtons = [
@@ -113,7 +109,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       submitButton.setAttribute('type', 'submit')
       submitButton.setAttribute('data-gc-analytics-formsubmit', 'submit')
     }
-  }, [])
+  })
 
   form.update(inputHelper)
 
