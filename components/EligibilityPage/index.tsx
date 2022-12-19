@@ -39,7 +39,6 @@ export const EligibilityPage: React.VFC = ({}) => {
   const language = useRouter().locale as Language
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
-
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -49,10 +48,8 @@ export const EligibilityPage: React.VFC = ({}) => {
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
-
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-
   const connection = tsln._language === Language.EN ? ':' : ' :'
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
@@ -187,7 +184,6 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   const [cardsValid, setCardsValid] = useState(getStepValidity())
-
   /**
    * On every change to a field, this will check the validity of all fields.
    */
@@ -205,7 +201,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
-
     return fields.map((field: FormField) => {
       return (
         <div key={field.key}>

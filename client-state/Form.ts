@@ -26,26 +26,22 @@ export class Form {
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
 
-    // handle successful response
-    if ('results' in data) {
-      this.clearAllErrors()
-      this.fields.forEach((field) => {
-        // set visibility
-        field.visible = data.visibleFields.includes(field.key)
+    // set visibility of fields
+    this.fields.forEach((field) => {
+      // console.log(`field`, field)
+      field.visible = data.visibleFields.includes(field.key)
 
-        // handle default values (currently only select/radio support defaults, which use KeyAndText).
-        if (
-          field.visible &&
-          !field.value &&
-          'default' in field.config &&
-          field.config.default &&
-          field.config.default.key
-        )
-          field.value = field.config.default.key
-      })
-    }
+      // handle default values (currently only select/radio support defaults, which use KeyAndText).
+      if (
+        field.visible &&
+        !field.value &&
+        'default' in field.config &&
+        field.config.default &&
+        field.config.default.key
+      )
+        field.value = field.config.default.key
+    })
 
-    // run this AFTER success, and BEFORE error
     this.clearInvisibleFields()
 
     // handle error response
@@ -73,6 +69,7 @@ export class Form {
         }
         return allErrorsParsed
       }, {})
+
       for (const errorKey in allErrorsParsed) {
         this.getFieldByKey(<FieldKey>errorKey).error =
           allErrorsParsed[errorKey].text
@@ -103,9 +100,5 @@ export class Form {
     this.fields.forEach((field) => {
       if (!field.visible && field.value) field.value = undefined
     })
-  }
-
-  private clearAllErrors(): void {
-    this.fields.forEach((value) => delete value.error)
   }
 }
