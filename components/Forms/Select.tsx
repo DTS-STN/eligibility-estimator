@@ -52,10 +52,11 @@ export const FormSelect: React.VFC<SelectProps> = ({
         type="select"
         label={field.config.label}
         requiredText={requiredText}
+        fieldId={`${name}-select`}
       />
       <div className="w-full md:w-80">
         <Select
-          inputId={name}
+          inputId={`${name}-select`}
           aria-labelledby={name}
           styles={{
             container: (styles) => ({

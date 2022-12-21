@@ -6,6 +6,7 @@ export interface QuestionLabelProps {
   label: string
   helpText?: string
   requiredText?: string
+  fieldId: string
 }
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
@@ -14,11 +15,12 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   label,
   requiredText,
   helpText,
+  fieldId,
 }) => {
   return (
     <div className="mb-2.5">
       <label
-        htmlFor={name}
+        htmlFor={fieldId}
         aria-label={name}
         data-testid={`${type}-label`}
         className="text-content font-bold inline mb-2.5 mr-2"
