@@ -47,6 +47,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         label={label}
         requiredText={requiredText}
         helpText={helpText}
+        fieldId={`enter-${name}`}
       />
       {error && <ErrorLabel errorMessage={error} />}
       <NumberFormat

@@ -57,6 +57,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         label={label}
         requiredText={requiredText}
         helpText={helpText}
+        fieldId={`enter-${name}`}
       />
 
       <Tooltip field={name} />
