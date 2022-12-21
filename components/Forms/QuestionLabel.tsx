@@ -6,7 +6,7 @@ export interface QuestionLabelProps {
   label: string
   helpText?: string
   requiredText?: string
-  fieldId: string
+  fieldId?: string
 }
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
