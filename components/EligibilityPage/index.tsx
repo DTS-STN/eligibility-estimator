@@ -32,6 +32,13 @@ import { useMediaQuery, useTranslation } from '../Hooks'
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
+
+const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
+const AA_BUTTON_CLICK_ATTRIBUTE =
+  'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click'
+const AA_FROM_SUBMIT_ATTRIBUTE = 'data-gc-analytics-formsubmit'
+const AA_FORM_SUBMIT_ACTION = 'submit'
+
 export const EligibilityPage: React.VFC = ({}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
@@ -86,8 +93,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
       buttonAttributes: {
-        'data-gc-analytics-customclick':
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Income',
+        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
       },
     },
     [Steps.STEP_2]: {
@@ -95,8 +101,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
       buttonAttributes: {
-        'data-gc-analytics-customclick':
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Legal Status',
+        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.legal}`,
       },
     },
     [Steps.STEP_3]: {
@@ -104,8 +109,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
       buttonAttributes: {
-        'data-gc-analytics-customclick':
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Residence History',
+        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
       },
     },
     [Steps.STEP_4]: {
@@ -113,8 +117,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
       buttonAttributes: {
-        'data-gc-analytics-customclick':
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Marital Status',
+        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.marital}`,
       },
     },
     [Steps.STEP_5]: {
@@ -122,8 +125,8 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: tsln.getEstimate,
       keys: getKeysByCategory(FieldCategory.MARITAL),
       buttonAttributes: {
-        'data-gc-analytics-formsubmit': 'submit',
-        'type': 'submit',
+        AA_FROM_SUBMIT_ATTRIBUTE: AA_FORM_SUBMIT_ACTION,
+        type: AA_FORM_SUBMIT_ACTION,
       },
     },
   }
