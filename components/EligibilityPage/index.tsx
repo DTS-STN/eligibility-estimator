@@ -93,7 +93,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
       buttonAttributes: {
-        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
       },
     },
     [Steps.STEP_2]: {
@@ -101,7 +101,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
       buttonAttributes: {
-        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.legal}`,
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.legal}`,
       },
     },
     [Steps.STEP_3]: {
@@ -109,7 +109,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
       buttonAttributes: {
-        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
       },
     },
     [Steps.STEP_4]: {
@@ -117,7 +117,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
       buttonAttributes: {
-        AA_CUSTOMCLICK: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.marital}`,
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.marital}`,
       },
     },
     [Steps.STEP_5]: {
@@ -125,7 +125,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       buttonLabel: tsln.getEstimate,
       keys: getKeysByCategory(FieldCategory.MARITAL),
       buttonAttributes: {
-        AA_FROM_SUBMIT_ATTRIBUTE: AA_FORM_SUBMIT_ACTION,
+        [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
         type: AA_FORM_SUBMIT_ACTION,
       },
     },
