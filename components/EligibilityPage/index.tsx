@@ -45,6 +45,12 @@ export const EligibilityPage: React.VFC = ({}) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
+  // TODO: set types
+  const [errorsVisible, setErrorsVisible]: [any, any] = useSessionStorage(
+    'errors-visible',
+    getErrorVisibility()
+  )
+
   const [visibleFields]: [
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
@@ -196,7 +202,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     console.log('INSIDE HANDLE ON CHANGE')
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
-    // form.update(inputHelper)
+    form.update(inputHelper)
     setCardsValid(getStepValidity())
   }
 
@@ -207,6 +213,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+    console.log(`step`, step)
     return fields.map((field: FormField) => {
       console.log(`field`, field)
       return (
@@ -291,7 +298,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             )}
           </div>
-          {field.error && (
+          {errorsVisible[step] && field.error && (
             <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
@@ -358,7 +365,6 @@ export const EligibilityPage: React.VFC = ({}) => {
    * This happens only when all fields are filled, and there are no errors.
    */
   function submitForm(e) {
-    console.log('inside submit form')
     e.preventDefault()
     if (form.isValid) {
       router.push('/results')
@@ -366,11 +372,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   function handleButtonOnChange(step) {
-    // here access the errorsVisible object. Then cycle through the object
-
-    if (true) {
-      console.log('button pressed', step)
-    }
+    setErrorsVisible({ ...errorsVisible, [step]: true })
   }
 
   /**
@@ -386,9 +388,8 @@ export const EligibilityPage: React.VFC = ({}) => {
         title: cardConfig.title,
         buttonLabel: cardConfig.buttonLabel,
         children,
-        buttonOnChange: (e) => {
-          console.log('event', e)
-          handleButtonOnChange
+        buttonOnChange: () => {
+          handleButtonOnChange(step)
         },
       }
 
@@ -437,6 +438,21 @@ function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
     }
     return result
   }, {})
+}
+
+/**
+ * Builds the object representing the default visibility of errors.
+ */
+
+// TODO: set type and return programatically (using keyStepMap or enum Steps)
+function getErrorVisibility(): any {
+  return {
+    step1: false,
+    step2: false,
+    step3: false,
+    step4: false,
+    step5: false,
+  }
 }
 
 export type VisibleFieldsObject = {
