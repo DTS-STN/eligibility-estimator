@@ -1,4 +1,5 @@
-import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
+import { Message } from '@dts-stn/service-canada-design-system'
+import { AccordionForm } from 'pre-release-ds'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -61,6 +62,10 @@ export const EligibilityPage: React.VFC = ({}) => {
       }
     })
   }, [isMobile])
+
+  useEffect(() => {
+    console.log('INSIDE USE EFFECT') // gets triggered after new Form
+  }, [])
 
   useEffect(() => {
     const el = document.getElementById('mainForm')
@@ -188,9 +193,10 @@ export const EligibilityPage: React.VFC = ({}) => {
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
+    console.log('INSIDE HANDLE ON CHANGE')
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
-    form.update(inputHelper)
+    // form.update(inputHelper)
     setCardsValid(getStepValidity())
   }
 
@@ -202,6 +208,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
+      console.log(`field`, field)
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -351,9 +358,18 @@ export const EligibilityPage: React.VFC = ({}) => {
    * This happens only when all fields are filled, and there are no errors.
    */
   function submitForm(e) {
+    console.log('inside submit form')
     e.preventDefault()
     if (form.isValid) {
       router.push('/results')
+    }
+  }
+
+  function handleButtonOnChange(step) {
+    // here access the errorsVisible object. Then cycle through the object
+
+    if (true) {
+      console.log('button pressed', step)
     }
   }
 
@@ -370,13 +386,20 @@ export const EligibilityPage: React.VFC = ({}) => {
         title: cardConfig.title,
         buttonLabel: cardConfig.buttonLabel,
         children,
+        buttonOnChange: (e) => {
+          console.log('event', e)
+          handleButtonOnChange
+        },
       }
 
       const processingLastCard = index === Object.keys(keyStepMap).length - 1
       if (processingLastCard) {
         return {
           ...card,
-          buttonOnChange: submitForm,
+          buttonOnChange: (e) => {
+            handleButtonOnChange('step5')
+            submitForm(e)
+          },
         }
       }
       return card
@@ -443,14 +466,19 @@ function getPlaceholderForSelect(
   return text ?? tsln.selectText.default
 }
 
-type CardConfig = { title: string; buttonLabel: string; keys: FieldKey[] }
+type CardConfig = {
+  title: string
+  buttonLabel: string
+  keys: FieldKey[]
+  buttonOnChange?: any
+}
 
 type Card = {
   children: CardChildren
   id: string
   title: string
   buttonLabel: string
-  buttonOnChange?: (e) => void
+  buttonOnChange?: any
 }
 
 type CardChildren = JSX.Element[]

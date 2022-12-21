@@ -59,6 +59,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:12.1.4"],\
             ["node-mocks-http", "npm:1.11.0"],\
             ["postcss", "npm:8.4.12"],\
+            ["pre-release-ds", [\
+              "@dts-stn/service-canada-design-system",\
+              "npm:1.53.2-dev.f2dd32111"\
+            ]],\
             ["prettier", "npm:2.6.2"],\
             ["prom-client", "npm:14.0.1"],\
             ["react", "npm:17.0.2"],\
@@ -888,6 +892,26 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@dts-stn-service-canada-design-system-npm-1.53.1-42daabcebc-644a7a66cf.zip/node_modules/@dts-stn/service-canada-design-system/",\
           "packageDependencies": [\
             ["@dts-stn/service-canada-design-system", "npm:1.53.1"],\
+            ["git-conventional-commits", "npm:2.1.2"],\
+            ["identity-obj-proxy", "npm:3.0.0"],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:17.0.2"],\
+            ["react-app-polyfill", "npm:3.0.0"],\
+            ["react-dom", "virtual:42daabcebc5b1be9ce4623f8d3e6aea4de0a142f77d1484e8d2edd02b73bff1aaa68f8e3ad5cf8d086a990f908a8f89b9d93252a99f17ad2f176dc68704f7327#npm:17.0.2"],\
+            ["react-full-screen", "virtual:42daabcebc5b1be9ce4623f8d3e6aea4de0a142f77d1484e8d2edd02b73bff1aaa68f8e3ad5cf8d086a990f908a8f89b9d93252a99f17ad2f176dc68704f7327#npm:1.1.1"],\
+            ["react-player", "virtual:42daabcebc5b1be9ce4623f8d3e6aea4de0a142f77d1484e8d2edd02b73bff1aaa68f8e3ad5cf8d086a990f908a8f89b9d93252a99f17ad2f176dc68704f7327#npm:2.10.1"],\
+            ["react-router-dom", "virtual:42daabcebc5b1be9ce4623f8d3e6aea4de0a142f77d1484e8d2edd02b73bff1aaa68f8e3ad5cf8d086a990f908a8f89b9d93252a99f17ad2f176dc68704f7327#npm:6.4.4"],\
+            ["release-please", "npm:14.17.4"],\
+            ["shelljs", "npm:0.8.5"],\
+            ["ts-jest", "virtual:42daabcebc5b1be9ce4623f8d3e6aea4de0a142f77d1484e8d2edd02b73bff1aaa68f8e3ad5cf8d086a990f908a8f89b9d93252a99f17ad2f176dc68704f7327#npm:29.0.3"],\
+            ["user", "npm:0.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.53.2-dev.f2dd32111", {\
+          "packageLocation": "./.yarn/cache/@dts-stn-service-canada-design-system-npm-1.53.2-dev.f2dd32111-96b60b75db-7f6198d431.zip/node_modules/@dts-stn/service-canada-design-system/",\
+          "packageDependencies": [\
+            ["@dts-stn/service-canada-design-system", "npm:1.53.2-dev.f2dd32111"],\
             ["git-conventional-commits", "npm:2.1.2"],\
             ["identity-obj-proxy", "npm:3.0.0"],\
             ["prop-types", "npm:15.8.1"],\
@@ -4394,6 +4418,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:12.1.4"],\
             ["node-mocks-http", "npm:1.11.0"],\
             ["postcss", "npm:8.4.12"],\
+            ["pre-release-ds", [\
+              "@dts-stn/service-canada-design-system",\
+              "npm:1.53.2-dev.f2dd32111"\
+            ]],\
             ["prettier", "npm:2.6.2"],\
             ["prom-client", "npm:14.0.1"],\
             ["react", "npm:17.0.2"],\

@@ -3357,6 +3357,7 @@ __metadata:
     next: 12.1.4||^12.1.7
     node-mocks-http: ^1.11.0
     postcss: ^8.4.12
+    pre-release-ds: "npm:@dts-stn/service-canada-design-system@1.53.2-dev.f2dd32111"
     prettier: ^2.6.2
     prom-client: ^14.0.1
     react: 17.0.2
@@ -7100,6 +7101,27 @@ __metadata:
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
   checksum: 248e3d0f9bbb8efaafcfda7f91627a29bdc9a19f456896886330beb28c5abea0e14c7901b35191928602e2eccbed496b1e94097d27a0b2a980854cd00c7a835f
+  languageName: node
+  linkType: hard
+
+"pre-release-ds@npm:@dts-stn/service-canada-design-system@1.53.2-dev.f2dd32111":
+  version: 1.53.2-dev.f2dd32111
+  resolution: "@dts-stn/service-canada-design-system@npm:1.53.2-dev.f2dd32111"
+  dependencies:
+    git-conventional-commits: ^2.1.2
+    identity-obj-proxy: ^3.0.0
+    prop-types: ^15.7.2
+    react: ^17.0.2
+    react-app-polyfill: ^3.0.0
+    react-dom: ^17.0.2
+    react-full-screen: ^1.1.1
+    react-player: ^2.10.1
+    react-router-dom: ^6.4.3
+    release-please: ^14.13.2
+    shelljs: ^0.8.5
+    ts-jest: ^29.0.3
+    user: ^0.0.0
+  checksum: 7f6198d4311c077fb507148891e4288202acf1a3c737701454f07a88df0fe2df8e7c835baabe01d38f3dfc0d3424fba917f07cc1ac681eab8947d19d260af46e
   languageName: node
   linkType: hard
 
