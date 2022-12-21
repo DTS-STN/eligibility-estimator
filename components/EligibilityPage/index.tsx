@@ -69,49 +69,6 @@ export const EligibilityPage: React.VFC = ({}) => {
         'data-gc-analytics-formname',
         'ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form'
       )
-      // el.setAttribute(
-      //   'data-gc-analytics-collect',
-      //   '[{"value":"input,select","emptyField":"N/A"}]'
-      // )
-    }
-
-    const stepButtons = [
-      {
-        id: '#step1-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Income',
-      },
-      {
-        id: '#step2-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Legal Status',
-      },
-      {
-        id: '#step3-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Residence History',
-      },
-      {
-        id: '#step4-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Marital Status',
-      },
-    ]
-
-    stepButtons.forEach((button) => {
-      const stepButton = document.querySelector(button.id)
-      stepButton &&
-        stepButton.setAttribute(
-          'data-gc-analytics-customclick',
-          button.attrValue
-        )
-    })
-
-    const submitButton = document.querySelector('#step5-button')
-
-    if (submitButton) {
-      submitButton.setAttribute('type', 'submit')
-      submitButton.setAttribute('data-gc-analytics-formsubmit', 'submit')
     }
   }, [])
 
@@ -128,26 +85,46 @@ export const EligibilityPage: React.VFC = ({}) => {
       title: tsln.category.age,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
+      buttonAttributes: {
+        'data-gc-analytics-customclick':
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Income',
+      },
     },
     [Steps.STEP_2]: {
       title: tsln.category.income,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
+      buttonAttributes: {
+        'data-gc-analytics-customclick':
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Legal Status',
+      },
     },
     [Steps.STEP_3]: {
       title: tsln.category.legal,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
+      buttonAttributes: {
+        'data-gc-analytics-customclick':
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Residence History',
+      },
     },
     [Steps.STEP_4]: {
       title: tsln.category.residence,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
+      buttonAttributes: {
+        'data-gc-analytics-customclick':
+          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Marital Status',
+      },
     },
     [Steps.STEP_5]: {
       title: tsln.category.marital,
       buttonLabel: tsln.getEstimate,
       keys: getKeysByCategory(FieldCategory.MARITAL),
+      buttonAttributes: {
+        'data-gc-analytics-formsubmit': 'submit',
+        'type': 'submit',
+      },
     },
   }
 
@@ -369,6 +346,7 @@ export const EligibilityPage: React.VFC = ({}) => {
         id: step,
         title: cardConfig.title,
         buttonLabel: cardConfig.buttonLabel,
+        buttonAttributes: cardConfig.buttonAttributes,
         children,
       }
 
@@ -443,13 +421,19 @@ function getPlaceholderForSelect(
   return text ?? tsln.selectText.default
 }
 
-type CardConfig = { title: string; buttonLabel: string; keys: FieldKey[] }
+type CardConfig = {
+  title: string
+  buttonLabel: string
+  keys: FieldKey[]
+  buttonAttributes: Object
+}
 
 type Card = {
   children: CardChildren
   id: string
   title: string
   buttonLabel: string
+  buttonAttributes: Object
   buttonOnChange?: (e) => void
 }
 
