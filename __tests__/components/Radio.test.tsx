@@ -47,9 +47,9 @@ describe('Radio component', () => {
     )
     render(ui)
 
-    const label = screen.getByTestId('radio-label')
+    const label = screen.getByTestId('radio-legend')
     expect(label).toBeInTheDocument()
-    expect(label.tagName).toBe('LABEL')
+    expect(label.tagName).toBe('LEGEND')
     expect(label.textContent).toContain(props.label)
 
     const fields = screen.getAllByTestId('radio')
@@ -90,9 +90,9 @@ describe('Radio component', () => {
     )
     render(ui)
 
-    const label = screen.getByTestId('radio-label')
+    const label = screen.getByTestId('radio-legend')
     expect(label).toBeInTheDocument()
-    expect(label.tagName).toBe('LABEL')
+    expect(label.tagName).toBe('LEGEND')
     expect(label.textContent).toContain(props.label)
 
     const fields = screen.getAllByTestId('radio')

@@ -43,7 +43,7 @@ export const Radio: React.VFC<InputProps> = ({
           requiredText={requiredText}
           helpText={helpText}
         /> */}
-        <legend>{label}</legend>
+        <legend data-testid="radio-legend">{label}</legend>
 
         <Tooltip field={name} />
 
