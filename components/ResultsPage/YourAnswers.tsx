@@ -91,7 +91,9 @@ export const YourAnswers: React.VFC<{
   return (
     <div className="fz-10">
       <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
-        <h3 className="h3">{title}</h3>
+        <h3 className="h3" id="answers">
+          {title}
+        </h3>
         {getMainContent()}
       </div>
     </div>
