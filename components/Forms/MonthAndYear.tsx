@@ -6,6 +6,7 @@ import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
+import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -14,6 +15,7 @@ export interface MonthAndYearProps
   helpText?: string
   baseOnChange: (newValue: string) => void
   requiredText?: string
+  error?: string
 }
 
 interface IAgeDateInput {
@@ -27,6 +29,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   helpText,
   baseOnChange,
   requiredText,
+  error,
 }) => {
   const tsln = useTranslation<WebTranslations>()
 
@@ -43,10 +46,9 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
       [fieldToSet]: Number(e.target.value),
     }
     setDateInput(newDate)
-    if (newDate.year && newDate.month)
-      baseOnChange(
-        String(BenefitHandler.calculateAge(newDate.month, newDate.year))
-      )
+    baseOnChange(
+      String(BenefitHandler.calculateAge(newDate.month, newDate.year))
+    )
   }
 
   return (
@@ -67,6 +69,8 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
       />
+
+      {error && <ErrorLabel errorMessage={error} />}
     </>
   )
 }

@@ -48,7 +48,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         requiredText={requiredText}
         helpText={helpText}
       />
-      {error && <ErrorLabel errorMessage={error} />}
+
       <NumberFormat
         id={`enter-${name}`}
         name={name}
@@ -64,6 +64,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         autoComplete="off"
         enterKeyHint="done"
       />
+      {error && <ErrorLabel errorMessage={error} />}
     </>
   )
 }

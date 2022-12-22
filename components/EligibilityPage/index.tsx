@@ -48,7 +48,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   // TODO: set types
   const [errorsVisible, setErrorsVisible]: [any, any] = useSessionStorage(
     'errors-visible',
-    getErrorVisibility()
+    getErrorVisibility(allFieldConfigs)
   )
 
   const [visibleFields]: [
@@ -68,10 +68,6 @@ export const EligibilityPage: React.VFC = ({}) => {
       }
     })
   }, [isMobile])
-
-  useEffect(() => {
-    console.log('INSIDE USE EFFECT') // gets triggered after new Form
-  }, [])
 
   useEffect(() => {
     const el = document.getElementById('mainForm')
@@ -195,11 +191,11 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   const [cardsValid, setCardsValid] = useState(getStepValidity())
+
   /**
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
-    console.log('INSIDE HANDLE ON CHANGE')
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
@@ -213,9 +209,9 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
-    console.log(`step`, step)
     return fields.map((field: FormField) => {
       console.log(`field`, field)
+      const error = errorsVisible[field.key] && field.error
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -226,6 +222,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
                 requiredText={tsln.required}
+                error={error}
               />
             )}
             {field.config.type === FieldType.NUMBER && (
@@ -241,6 +238,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 requiredText={tsln.required}
                 helpText={field.config.helpText}
+                error={error}
               />
             )}
             {field.config.type == FieldType.CURRENCY && (
@@ -256,6 +254,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 helpText={field.config.helpText}
                 requiredText={tsln.required}
+                error={error}
               />
             )}
             {field.config.type == FieldType.STRING && (
@@ -295,10 +294,11 @@ export const EligibilityPage: React.VFC = ({}) => {
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
                 setValue={(val) => handleOnChange(field, val)}
+                error={error}
               />
             )}
           </div>
-          {errorsVisible[step] && field.error && (
+          {/* {errorsVisible[step] && field.error && (
             <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
@@ -311,7 +311,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 whiteBG={true}
               />
             </div>
-          )}
+          )} */}
           {showWarningMessage(field)}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
@@ -372,7 +372,16 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   function handleButtonOnChange(step) {
-    setErrorsVisible({ ...errorsVisible, [step]: true })
+    const stepKeys = keyStepMap[step].keys
+    const allVisibleKeys = form.visibleFields.map((field) => field.key)
+    const visibleKeysForStep = stepKeys.filter((key) =>
+      allVisibleKeys.includes(key)
+    )
+
+    const stepErrorsVisible = {}
+    visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
+
+    setErrorsVisible({ ...errorsVisible, ...stepErrorsVisible })
   }
 
   /**
@@ -445,14 +454,11 @@ function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
  */
 
 // TODO: set type and return programatically (using keyStepMap or enum Steps)
-function getErrorVisibility(): any {
-  return {
-    step1: false,
-    step2: false,
-    step3: false,
-    step4: false,
-    step5: false,
-  }
+function getErrorVisibility(fieldConfigs): any {
+  return fieldConfigs.reduce((result, value) => {
+    result[value.key] = false
+    return result
+  }, {})
 }
 
 export type VisibleFieldsObject = {

@@ -61,8 +61,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 
       <Tooltip field={name} />
 
-      {error && <ErrorLabel errorMessage={error} />}
-
       <NumberFormat
         id={`enter-${name}`}
         name={name}
@@ -79,6 +77,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         autoComplete="off"
         enterKeyHint="done"
       />
+      {error && <ErrorLabel errorMessage={error} />}
     </div>
   )
 }

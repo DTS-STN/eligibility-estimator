@@ -46,7 +46,6 @@ export const Radio: React.VFC<InputProps> = ({
 
         <Tooltip field={name} />
 
-        {error && <ErrorLabel errorMessage={error} />}
         {values.map((val, index) => (
           <div
             key={index}
@@ -71,6 +70,7 @@ export const Radio: React.VFC<InputProps> = ({
             </label>
           </div>
         ))}
+        {error && <ErrorLabel errorMessage={error} />}
       </fieldset>
     </div>
   )
