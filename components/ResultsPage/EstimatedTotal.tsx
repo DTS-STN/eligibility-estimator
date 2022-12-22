@@ -63,7 +63,9 @@ export const EstimatedTotal: React.VFC<{
             ))}
             {summary.entitlementSum != 0 && (
               <tr className="border border-[#DDDDDD]">
-                <td className="pl-5">{tsln.resultsPage.tableTotalAmount}</td>
+                <th scope="row" className="pl-5">
+                  {tsln.resultsPage.tableTotalAmount}
+                </th>
                 <td className="text-right min-w-[68px] pr-5">
                   {numberToStringCurrency(summary.entitlementSum, language)}
                 </td>
