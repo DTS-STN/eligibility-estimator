@@ -354,7 +354,7 @@ const en: Translations = {
   detailWithHeading: {
     oasDeferralApplied: {
       heading: 'How deferral affects your payments',
-      text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
+      text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
     },
     oasDeferralAvailable: {
       heading: 'You may be able to defer your payments',
