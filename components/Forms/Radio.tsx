@@ -36,41 +36,48 @@ export const Radio: React.VFC<InputProps> = ({
   return (
     <div className="radio">
       <fieldset>
-        <QuestionLabel
+        {/* <QuestionLabel
           name={name}
           type="radio"
           label={label}
           requiredText={requiredText}
           helpText={helpText}
-        />
+        /> */}
+        <legend>{label}</legend>
 
         <Tooltip field={name} />
 
         {error && <ErrorLabel errorMessage={error} />}
-        {values.map((val, index) => (
-          <div
-            key={index}
-            id={`${name}-r${index}`}
-            className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
-          >
-            <input
-              className="hover:cursor-pointer"
-              type="radio"
-              data-testid="radio"
-              id={`${keyforid}-${index}`}
-              name={`${keyforid}`}
-              value={val.key}
-              onChange={onChange}
-              checked={checkedValue === correctForBooleans(val.key)}
-            />
-            <label
-              htmlFor={`${keyforid}-${index}`}
-              className="flex items-center focus:inherit text-content hover:cursor-pointer"
+
+        <div role="radiogroup">
+          {values.map((val, index) => (
+            <span
+              key={index}
+              id={`${name}-${index}`}
+              className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
+              aria-labelledby={`${keyforid}-lbl-${index}`}
+              aria-checked={checkedValue === correctForBooleans(val.key)}
+              tab-index={index}
+              role="radio"
             >
-              {<p dangerouslySetInnerHTML={{ __html: val.text }} />}
-            </label>
-          </div>
-        ))}
+              <input
+                className="hover:cursor-pointer"
+                type="radio"
+                data-testid="radio"
+                id={`${keyforid}-rad-${index}`}
+                name={`${keyforid}`}
+                value={val.key}
+                onChange={onChange}
+                checked={checkedValue === correctForBooleans(val.key)}
+              />
+              <span
+                id={`${keyforid}-lbl-${index}`}
+                className="flex items-center focus:inherit text-content hover:cursor-pointer"
+                dangerouslySetInnerHTML={{ __html: val.text }}
+              />
+            </span>
+          ))}
+        </div>
       </fieldset>
     </div>
   )

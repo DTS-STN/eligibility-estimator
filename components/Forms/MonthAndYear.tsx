@@ -57,6 +57,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         label={label}
         requiredText={requiredText}
         helpText={helpText}
+        fieldId={`enter-${name}`}
       />
       <DatePicker
         id={`enter-${name}`}
