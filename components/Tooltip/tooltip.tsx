@@ -44,7 +44,7 @@ export const Tooltip: React.FC<{
     <div
       className="relative inline-block mb-2 cursor-pointer "
       ref={wrapperRef}
-      data-testid="tooltip"
+      data-testid={`tooltip-${field}`}
     >
       <div className="flex items-center gap-x-[10px]" onClick={handleClick}>
         <div className={`triangle ${show && 'origin-center rotate-90'} `} />
@@ -65,7 +65,7 @@ export const Tooltip: React.FC<{
         <div
           className="ds-rounded ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 px-6 pt-4"
           data-testid="tooltip-text"
-          id={'helpText'}
+          id={`helpText-${field}`}
           dangerouslySetInnerHTML={{ __html: tooltipData.text }}
         />
       </div>
