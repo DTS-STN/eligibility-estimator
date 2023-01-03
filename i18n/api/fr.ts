@@ -284,7 +284,7 @@ const fr: Translations = {
       {
         key: PartnerBenefitStatus.NONE,
         text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
-        shortText: 'No prestations',
+        shortText: 'No',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,

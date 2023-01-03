@@ -278,7 +278,7 @@ const en: Translations = {
       {
         key: PartnerBenefitStatus.NONE,
         text: 'No, my partner does not receive the Old Age Security pension',
-        shortText: 'No benefits',
+        shortText: 'No',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
