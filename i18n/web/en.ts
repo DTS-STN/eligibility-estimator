@@ -141,6 +141,9 @@ const en: WebTranslations = {
     empty: 'This information is required',
   },
   validationErrors: {
+    [ValidationErrors.yearsSince18Empty]:
+      'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.legalStatusNotSelected]: 'Please select a legal status.',
     [ValidationErrors.incomeEmpty]: 'Please enter your income.',
     [ValidationErrors.optionNotSelected]: 'Please select an option.',
     [ValidationErrors.oasDeferAgeEmpty]:

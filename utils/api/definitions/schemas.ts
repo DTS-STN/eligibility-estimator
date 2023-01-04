@@ -67,12 +67,16 @@ export const RequestSchema = Joi.object({
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
     .required()
+    .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
     .valid(...Object.values(LegalStatus))
     .invalid(LegalStatus.OTHER)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
-  livedOutsideCanada: Joi.boolean().required(),
+  livedOutsideCanada: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   yearsInCanadaSince18: Joi.number()
     .required()
+    .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),

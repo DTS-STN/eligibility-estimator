@@ -148,6 +148,10 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
+    [ValidationErrors.yearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.legalStatusNotSelected]:
+      'Veuillez sélectionner un statut légal.',
     [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
     [ValidationErrors.optionNotSelected]: 'Veuillez sélectionner une option.',
     [ValidationErrors.oasDeferAgeEmpty]:
