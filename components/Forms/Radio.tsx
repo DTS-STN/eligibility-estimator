@@ -1,8 +1,8 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { QuestionLabel } from './QuestionLabel'
-import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -53,7 +53,9 @@ export const Radio: React.VFC<InputProps> = ({
             className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
           >
             <input
-              className="hover:cursor-pointer"
+              className={`hover:cursor-pointer ${
+                error ? '!border-danger' : ''
+              }`}
               type="radio"
               data-testid="radio"
               id={`${keyforid}-${index}`}
@@ -70,7 +72,11 @@ export const Radio: React.VFC<InputProps> = ({
             </label>
           </div>
         ))}
-        {error && <ErrorLabel errorMessage={error} />}
+        {error && (
+          <div className="mt-2">
+            <FormError errorMessage={error} />
+          </div>
+        )}
       </fieldset>
     </div>
   )

@@ -1,7 +1,7 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { QuestionLabel } from './QuestionLabel'
-import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface NumberFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -64,7 +64,12 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         autoComplete="off"
         enterKeyHint="done"
       />
-      {error && <ErrorLabel errorMessage={error} />}
+
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </>
   )
 }

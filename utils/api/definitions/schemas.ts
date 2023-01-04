@@ -21,14 +21,16 @@ import {
  * - types.ts
  * - index.test.ts
  *
- * Note: Do not require fields here, do it in the BenefitHandler. This should gladly accept an empty object.
  */
 
 // TODO: Our inputs for month and year get converted to "age". We need to get year from age or keep track of year input
 export const RequestSchema = Joi.object({
-  incomeAvailable: Joi.boolean().required(),
+  incomeAvailable: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   income: Joi.number()
     .required()
+    .messages({ 'any.required': ValidationErrors.incomeEmpty })
     .precision(2)
     .min(0)
     .message(ValidationErrors.incomeBelowZero),
@@ -47,9 +49,12 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.ageUnder18)
     .max(150)
     .message(ValidationErrors.ageOver150),
-  oasDefer: Joi.boolean().required(),
+  oasDefer: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   oasAge: Joi.number()
     .required()
+    .messages({ 'any.required': ValidationErrors.oasDeferAgeEmpty })
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)

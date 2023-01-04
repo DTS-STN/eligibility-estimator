@@ -1,4 +1,4 @@
-import { DatePicker } from '@dts-stn/service-canada-design-system'
+import { DatePicker, FormError } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
@@ -6,7 +6,6 @@ import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
-import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -70,7 +69,11 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         lang={tsln._language}
       />
 
-      {error && <ErrorLabel errorMessage={error} />}
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </>
   )
 }

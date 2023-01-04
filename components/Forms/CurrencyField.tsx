@@ -1,9 +1,9 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { QuestionLabel } from './QuestionLabel'
-import { ErrorLabel } from './validation/ErrorLabel'
 import { Tooltip } from '../Tooltip/tooltip'
 
 export interface CurrencyFieldProps
@@ -77,7 +77,12 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         autoComplete="off"
         enterKeyHint="done"
       />
-      {error && <ErrorLabel errorMessage={error} />}
+
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </div>
   )
 }

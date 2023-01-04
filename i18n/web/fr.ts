@@ -148,6 +148,10 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
+    [ValidationErrors.optionNotSelected]: 'Veuillez sélectionner une option.',
+    [ValidationErrors.oasDeferAgeEmpty]:
+      'Veuillez entrer un âge entre 65 et 70 ans.',
     [ValidationErrors.incomeBelowZero]:
       'Vos revenus doivent être supérieurs à zéro.',
     [ValidationErrors.partnerIncomeBelowZero]:

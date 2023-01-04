@@ -141,6 +141,10 @@ const en: WebTranslations = {
     empty: 'This information is required',
   },
   validationErrors: {
+    [ValidationErrors.incomeEmpty]: 'Please enter your income.',
+    [ValidationErrors.optionNotSelected]: 'Please select an option.',
+    [ValidationErrors.oasDeferAgeEmpty]:
+      'Please enter an age between 65 and 70.',
     [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',
     [ValidationErrors.partnerIncomeBelowZero]:
       "Your partner's income must be above zero.",
