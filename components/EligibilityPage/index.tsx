@@ -6,7 +6,11 @@ import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
-import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
+import {
+  FieldInputsObject,
+  ErrorsVisibleObject,
+  InputHelper,
+} from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import {
@@ -45,11 +49,10 @@ export const EligibilityPage: React.VFC = ({}) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
-  // TODO: set types
-  const [errorsVisible, setErrorsVisible]: [any, any] = useSessionStorage(
-    'errors-visible',
-    getErrorVisibility(allFieldConfigs)
-  )
+  const [errorsVisible, setErrorsVisible]: [
+    ErrorsVisibleObject,
+    (value: ErrorsVisibleObject) => void
+  ] = useSessionStorage('errors-visible', getErrorVisibility(allFieldConfigs))
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -210,7 +213,6 @@ export const EligibilityPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
-      console.log(`field`, field)
       const error = errorsVisible[field.key] && field.error
       return (
         <div key={field.key}>
@@ -402,12 +404,13 @@ export const EligibilityPage: React.VFC = ({}) => {
         },
       }
 
-      const processingLastCard = index === Object.keys(keyStepMap).length - 1
+      const keysLength = Object.keys(keyStepMap).length
+      const processingLastCard = index === keysLength - 1
       if (processingLastCard) {
         return {
           ...card,
           buttonOnChange: (e) => {
-            handleButtonOnChange('step5')
+            handleButtonOnChange(`step${keysLength}`)
             submitForm(e)
           },
         }
@@ -416,22 +419,53 @@ export const EligibilityPage: React.VFC = ({}) => {
     })
   }
 
+  function renderErrorBox(): JSX.Element {
+    const errorFields = form.visibleFields.filter(
+      (field) => field.error && errorsVisible[field.key]
+    )
+    if (errorFields.length === 0) return null
+
+    const messageBody = (
+      <ol>
+        {errorFields.map((field) => {
+          return (
+            <li key={field.key}>
+              {field.config.category.text} - {field.error}
+            </li>
+          )
+        })}
+      </ol>
+    )
+
+    return (
+      <div className="border-2 border-danger rounded py-4 mb-2">
+        <Message
+          id={`form-errors-${errorFields.length}`}
+          type="danger"
+          message_heading={tsln.errorBoxTitle}
+          message_body={messageBody}
+          alert_icon_id="form-errors"
+          alert_icon_alt_text={tsln.warningText}
+        />
+      </div>
+    )
+  }
+
   return (
     <>
-      {
-        <div
-          className="md:w-2/3"
-          data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
-          // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
-        >
-          <AccordionForm
-            id="mainForm"
-            cardsState={cardsValid}
-            cards={generateCards()}
-            lang={language}
-          />
-        </div>
-      }
+      <div>{renderErrorBox()}</div>
+      <div
+        className="md:w-2/3"
+        data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
+        // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
+      >
+        <AccordionForm
+          id="mainForm"
+          cardsState={cardsValid}
+          cards={generateCards()}
+          lang={language}
+        />
+      </div>
     </>
   )
 }
@@ -453,7 +487,7 @@ function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
  * Builds the object representing the default visibility of errors.
  */
 
-// TODO: set type and return programatically (using keyStepMap or enum Steps)
+// TODO: set type
 function getErrorVisibility(fieldConfigs): any {
   return fieldConfigs.reduce((result, value) => {
     result[value.key] = false

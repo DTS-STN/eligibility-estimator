@@ -103,6 +103,7 @@ const en: WebTranslations = {
   pageNotFound: 'Page not found',
   warningText: 'warning',
   category: apiEn.category,
+  errorBoxTitle: 'The form cannot be submitted because errors were found',
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
