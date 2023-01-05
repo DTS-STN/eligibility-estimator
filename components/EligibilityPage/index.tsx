@@ -442,7 +442,13 @@ export const EligibilityPage: React.VFC = ({}) => {
         <Message
           id={`form-errors-${errorFields.length}`}
           type="danger"
-          message_heading={tsln.errorBoxTitle}
+          message_heading={
+            tsln.errorBoxTitle +
+            errorFields.length +
+            ` error${
+              (errorFields.length === 1 ? ' was ' : 's were ') + 'found'
+            }`
+          }
           message_body={messageBody}
           alert_icon_id="form-errors"
           alert_icon_alt_text={tsln.warningText}

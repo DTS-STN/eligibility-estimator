@@ -23,7 +23,6 @@ import {
  *
  */
 
-// TODO: Our inputs for month and year get converted to "age". We need to get year from age or keep track of year input
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean()
     .required()
