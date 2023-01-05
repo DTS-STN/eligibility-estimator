@@ -487,8 +487,7 @@ function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
  * Builds the object representing the default visibility of errors.
  */
 
-// TODO: set type
-function getErrorVisibility(fieldConfigs): any {
+function getErrorVisibility(fieldConfigs): VisibleFieldsObject {
   return fieldConfigs.reduce((result, value) => {
     result[value.key] = false
     return result
