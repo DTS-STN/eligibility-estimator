@@ -9,6 +9,10 @@ import { WebTranslations } from '../i18n/web'
 import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
 import Head from 'next/head'
 
+const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
+const AA_BUTTON_CLICK_ATTRIBUTE =
+  'ESDC-EDSC:Canadian OAS Benefits Est. Button Click'
+
 const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
@@ -117,6 +121,9 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               styling="supertask"
               onClick={(e) => router.push('/eligibility')}
               className=" w-auto justify-center"
+              attributes={{
+                [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
+              }}
             />
           </div>
           <h2 className="text-xs font-bold sm:h2 mt-12 sm:mt-16 mb-2">
