@@ -1,6 +1,9 @@
 import { WebTranslations } from '.'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { generateLink } from '../../utils/api/definitions/textReplacementRules'
+import {
+  generateLink,
+  getMaxYear,
+} from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
@@ -142,6 +145,12 @@ const en: WebTranslations = {
     empty: 'This information is required',
   },
   validationErrors: {
+    [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
+    [ValidationErrors.partnerIncomeEmpty]:
+      "Please enter your partner's income.",
+    [ValidationErrors.partnerYearsSince18Empty]:
+      "Please enter a number no higher than your partner's age minus 18.",
+    [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsSince18Empty]:
       'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]: 'Please select a legal status.',

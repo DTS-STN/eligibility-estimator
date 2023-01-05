@@ -445,7 +445,7 @@ export class BenefitHandler {
     if (!birthMonth || !birthYear) return null
 
     const today = new Date()
-    const currentMonth = today.getMonth()
+    const currentMonth = today.getMonth() + 1
     const currentYear = today.getFullYear()
 
     let ageMonths: number
