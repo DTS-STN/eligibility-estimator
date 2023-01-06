@@ -1,4 +1,4 @@
-import { Message, Link as DSLink } from '@dts-stn/service-canada-design-system'
+import { Message } from '@dts-stn/service-canada-design-system'
 import { AccordionForm } from 'pre-release-ds'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
@@ -38,6 +38,13 @@ import { useMediaQuery, useTranslation } from '../Hooks'
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
+
+const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
+const AA_BUTTON_CLICK_ATTRIBUTE =
+  'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click'
+const AA_FROM_SUBMIT_ATTRIBUTE = 'data-gc-analytics-formsubmit'
+const AA_FORM_SUBMIT_ACTION = 'submit'
+
 export const EligibilityPage: React.VFC = ({}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
@@ -80,49 +87,6 @@ export const EligibilityPage: React.VFC = ({}) => {
         'data-gc-analytics-formname',
         'ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form'
       )
-      // el.setAttribute(
-      //   'data-gc-analytics-collect',
-      //   '[{"value":"input,select","emptyField":"N/A"}]'
-      // )
-    }
-
-    const stepButtons = [
-      {
-        id: '#step1-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Income',
-      },
-      {
-        id: '#step2-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Legal Status',
-      },
-      {
-        id: '#step3-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Residence History',
-      },
-      {
-        id: '#step4-button',
-        attrValue:
-          'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click:Marital Status',
-      },
-    ]
-
-    stepButtons.forEach((button) => {
-      const stepButton = document.querySelector(button.id)
-      stepButton &&
-        stepButton.setAttribute(
-          'data-gc-analytics-customclick',
-          button.attrValue
-        )
-    })
-
-    const submitButton = document.querySelector('#step5-button')
-
-    if (submitButton) {
-      submitButton.setAttribute('type', 'submit')
-      submitButton.setAttribute('data-gc-analytics-formsubmit', 'submit')
     }
   }, [])
 
@@ -139,26 +103,42 @@ export const EligibilityPage: React.VFC = ({}) => {
       title: tsln.category.age,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
       keys: getKeysByCategory(FieldCategory.AGE),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
+      },
     },
     [Steps.STEP_2]: {
       title: tsln.category.income,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.legal}`,
+      },
     },
     [Steps.STEP_3]: {
       title: tsln.category.legal,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
       keys: getKeysByCategory(FieldCategory.LEGAL),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
+      },
     },
     [Steps.STEP_4]: {
       title: tsln.category.residence,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
       keys: getKeysByCategory(FieldCategory.RESIDENCE),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.marital}`,
+      },
     },
     [Steps.STEP_5]: {
       title: tsln.category.marital,
       buttonLabel: tsln.getEstimate,
       keys: getKeysByCategory(FieldCategory.MARITAL),
+      buttonAttributes: {
+        [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
+        type: AA_FORM_SUBMIT_ACTION,
+      },
     },
   }
 
@@ -385,6 +365,7 @@ export const EligibilityPage: React.VFC = ({}) => {
         id: step,
         title: cardConfig.title,
         buttonLabel: cardConfig.buttonLabel,
+        buttonAttributes: cardConfig.buttonAttributes,
         children,
         buttonOnChange: () => {
           handleButtonOnChange(step)
@@ -485,6 +466,7 @@ type CardConfig = {
   title: string
   buttonLabel: string
   keys: FieldKey[]
+  buttonAttributes: Object
 }
 
 type Card = {
@@ -492,6 +474,7 @@ type Card = {
   id: string
   title: string
   buttonLabel: string
+  buttonAttributes: Object
   buttonOnChange?: (e) => void
 }
 

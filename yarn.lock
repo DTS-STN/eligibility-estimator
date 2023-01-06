@@ -444,9 +444,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dts-stn/service-canada-design-system@npm:^1.53.1":
-  version: 1.53.1
-  resolution: "@dts-stn/service-canada-design-system@npm:1.53.1"
+"@dts-stn/service-canada-design-system@npm:1.53.2-dev.944bfa4df":
+  version: 1.53.2-dev.944bfa4df
+  resolution: "@dts-stn/service-canada-design-system@npm:1.53.2-dev.944bfa4df"
   dependencies:
     git-conventional-commits: ^2.1.2
     identity-obj-proxy: ^3.0.0
@@ -457,11 +457,11 @@ __metadata:
     react-full-screen: ^1.1.1
     react-player: ^2.10.1
     react-router-dom: ^6.4.3
-    release-please: ^14.13.2
+    release-please: ^14.17.3
     shelljs: ^0.8.5
     ts-jest: ^29.0.3
     user: ^0.0.0
-  checksum: 644a7a66cf1de17fb1eda664f6e93d2de6e4f02901904e21c4479bb5d4e0256d3a72eb9997a4b50f8ad4c8ffd4f0acba9107edd702936e7aa78e91f16937e054
+  checksum: fc336e3e88e5768b6ad7a9f9490da3187286fce0a68f4deb352e232a188576e77dcf9497c4203bbdd44fcbd130d3f1209e13ca942ac29b46f1950713ef1b7982
   languageName: node
   linkType: hard
 
@@ -3331,7 +3331,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
-    "@dts-stn/service-canada-design-system": ^1.53.1
+    "@dts-stn/service-canada-design-system": 1.53.2-dev.944bfa4df
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
@@ -7615,9 +7615,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"release-please@npm:^14.13.2":
-  version: 14.17.4
-  resolution: "release-please@npm:14.17.4"
+"release-please@npm:^14.13.2, release-please@npm:^14.17.3":
+  version: 14.17.5
+  resolution: "release-please@npm:14.17.5"
   dependencies:
     "@conventional-commits/parser": ^0.4.1
     "@google-automations/git-file-utils": ^1.2.0
@@ -7655,7 +7655,7 @@ __metadata:
     yargs: ^17.0.0
   bin:
     release-please: build/src/bin/release-please.js
-  checksum: cbc89d28d18f7a99cbc0127c8c3c10fb3af621a30425c1bb57f122c0530bd50fe20b6b72a95347ab88732a52712bcdb90bf84c5d90ef34dcacc6e042e7a547f9
+  checksum: 9c294f4ac7c8ce3023c632e1d4886f793b7cb42748277cde5c18cdd22195491e3061adce0c9da13bc58da7cb8d872e8e96b9eba253b501bbf1f153c798a96ff5
   languageName: node
   linkType: hard
 
