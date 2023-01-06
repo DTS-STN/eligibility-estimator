@@ -56,7 +56,7 @@ const fr: WebTranslations = {
     "<b>statut légal</b> (par exemple, citoyen canadien, statut d'Indien, réfugié ou résident permanent)",
   residenceHistoryText:
     "<b>historique de résidence</b> (nombre d'années vécues au Canada)",
-  maritalStatusText: '<b>état civil</b>',
+  maritalStatusText: '<b>état matrimonial</b>',
   partnerText:
     '<b>partenaire</b> (revenu, statut légal et historique de résidence), le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
@@ -174,7 +174,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
-      "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
+      "Vous avez indiqué un état matrimonial qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
       "Vous avez sélectionné un statut légal qui n'est pas admissible aux prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable10]:
@@ -188,7 +188,7 @@ const fr: WebTranslations = {
   unavailable: 'indisponible',
 
   selectText: {
-    maritalStatus: 'Sélectionner un état civil',
+    maritalStatus: 'Sélectionner un état matrimonial',
     livingCountry: 'Sélectionner un pays',
     partnerLivingCountry: 'Sélectionner un pays',
     default: 'Sélectionnez parmi',
