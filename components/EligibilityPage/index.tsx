@@ -439,7 +439,9 @@ export const EligibilityPage: React.VFC = ({}) => {
 
     const titleTranslation =
       tsln._language === Language.EN
-        ? ` error${(errorFields.length === 1 ? ' was ' : 's were ') + 'found'}`
+        ? errorFields.length === 1
+          ? ' error was found'
+          : ' errors were found'
         : errorFields.length === 1
         ? ' erreur a été trouvée'
         : ' erreurs ont été trouvées'
