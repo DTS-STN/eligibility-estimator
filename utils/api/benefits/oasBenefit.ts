@@ -135,7 +135,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       }
 
     const resultCurrent = this.currentEntitlementAmount
-    const result65To74 = this.age65EntitlementAmount
+    const result65To74 = this.age65to74Amount
     const resultAt75 = this.age75EntitlementAmount
     const type =
       this.input.yearsInCanadaSince18 < 40
@@ -196,6 +196,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const deferralIncrease = this.deferralIncrease
     const amountWithDeferralIncrease = baseAmount + deferralIncrease // the final amount
     return roundToTwo(amountWithDeferralIncrease)
+  }
+
+  /**
+   * The base OAS amount from 65 to 74 used for GIS calculations.
+   */
+  private get age65to74Amount(): number {
+    const baseAmount = this.baseAmount // the base amount before deferral calculations
+    return baseAmount
   }
 
   /**
