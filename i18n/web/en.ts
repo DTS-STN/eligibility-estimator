@@ -156,8 +156,6 @@ const en: WebTranslations = {
     [ValidationErrors.legalStatusNotSelected]: 'Please select a legal status.',
     [ValidationErrors.incomeEmpty]: 'Please enter your income.',
     [ValidationErrors.optionNotSelected]: 'Please select an option.',
-    [ValidationErrors.oasDeferAgeEmpty]:
-      'Please enter an age between 65 and 70.',
     [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',
     [ValidationErrors.partnerIncomeBelowZero]:
       "Your partner's income must be above zero.",
@@ -172,7 +170,7 @@ const en: WebTranslations = {
     [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
     [ValidationErrors.partnerAgeOver150]:
       "Your partner's age should be less than 150.",
-    [ValidationErrors.oasAge65to70]: 'You must enter an age between 65 and 70.',
+    [ValidationErrors.oasAge65to70]: 'Please enter an age between 65 and 70.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:

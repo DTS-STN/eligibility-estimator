@@ -54,7 +54,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   oasAge: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.oasDeferAgeEmpty })
+    .messages({ 'any.required': ValidationErrors.oasAge65to70 })
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)
@@ -132,16 +132,13 @@ export const RequestSchema = Joi.object({
   //   })
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
-  partnerAge: Joi.any()
+  partnerAge: Joi.number()
     .required()
-    .custom((value, helper) => {
-      const lowThreshold = value < 18
-      const highThreshhold = value > new Date().getFullYear() - 1900
-      if (value === 'null' || lowThreshold || highThreshhold) {
-        return helper.message({ custom: ValidationErrors.invalidAge })
-      }
-    })
-    .messages({ 'any.required': ValidationErrors.invalidAge }),
+    .messages({ 'any.required': ValidationErrors.invalidAge })
+    .min(18)
+    .message(ValidationErrors.invalidAge)
+    .max(new Date().getFullYear() - 1900)
+    .message(ValidationErrors.invalidAge),
   partnerLivingCountry: Joi.string()
     .required()
     .valid(...Object.values(ALL_COUNTRY_CODES)),

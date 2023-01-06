@@ -53,7 +53,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         id={`enter-${name}`}
         name={name}
         className={`form-control text-content border-form-border ${
-          error ? ' border-danger' : ''
+          error ? ' !border-danger' : ''
         }`}
         data-testid="number-input"
         min={0}

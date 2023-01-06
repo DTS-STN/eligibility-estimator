@@ -67,7 +67,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         {...localizedIncome}
         data-testid="currency-input"
         className={`form-control text-content border-form-border ${
-          error ? ' border-danger' : ''
+          error ? ' !border-danger' : ''
         }`}
         min={0}
         value={value != null ? (value as string) : ''}

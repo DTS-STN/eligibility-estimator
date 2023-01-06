@@ -103,7 +103,6 @@ export enum ValidationErrors {
   legalStatusNotSelected = 'legalStatusNotSelected',
   incomeEmpty = 'incomeEmpty',
   optionNotSelected = 'optionNotSelected',
-  oasDeferAgeEmpty = 'oasDeferAgeEmpty',
   incomeBelowZero = 'incomeBelowZero',
   partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   incomeTooHigh = 'incomeTooHigh',
