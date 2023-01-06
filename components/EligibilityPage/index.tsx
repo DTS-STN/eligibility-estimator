@@ -301,20 +301,6 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             )}
           </div>
-          {/* {errorsVisible[step] && field.error && (
-            <div className="mt-6 md:pr-12 msg-container border-warning">
-              <Message
-                id={field.key}
-                alert_icon_id={field.key}
-                alert_icon_alt_text={tsln.warningText}
-                type={'warning'}
-                message_heading={tsln.unableToProceed}
-                message_body={field.error}
-                asHtml={true}
-                whiteBG={true}
-              />
-            </div>
-          )} */}
           {showWarningMessage(field)}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
@@ -461,7 +447,6 @@ function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
 /**
  * Builds the object representing the default visibility of errors.
  */
-
 function getErrorVisibility(fieldConfigs): VisibleFieldsObject {
   return fieldConfigs.reduce((result, value) => {
     result[value.key] = false
@@ -500,7 +485,6 @@ type CardConfig = {
   title: string
   buttonLabel: string
   keys: FieldKey[]
-  buttonOnChange?: any
 }
 
 type Card = {
@@ -508,7 +492,7 @@ type Card = {
   id: string
   title: string
   buttonLabel: string
-  buttonOnChange?: any
+  buttonOnChange?: (e) => void
 }
 
 type CardChildren = JSX.Element[]
