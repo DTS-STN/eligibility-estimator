@@ -442,7 +442,7 @@ export class BenefitHandler {
    * This can and will return a decimal value, such as "65.5"!
    */
   static calculateAge(birthMonth: number, birthYear: number): number {
-    if (!birthMonth || !birthYear) return null
+    if (!birthMonth || !birthYear) return 0
 
     const today = new Date()
     const currentMonth = today.getMonth() + 1

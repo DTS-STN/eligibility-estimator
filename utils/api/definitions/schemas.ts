@@ -42,16 +42,13 @@ export const RequestSchema = Joi.object({
   //   })
   // )
   // .message(ValidationErrors.incomeTooHigh),
-  age: Joi.any()
+  age: Joi.number()
     .required()
-    .custom((value, helper) => {
-      const lowThreshold = value < 18
-      const highThreshhold = value > new Date().getFullYear() - 1900
-      if (value === 'null' || lowThreshold || highThreshhold) {
-        return helper.message({ custom: ValidationErrors.invalidAge })
-      }
-    })
-    .messages({ 'any.required': ValidationErrors.invalidAge }),
+    .messages({ 'any.required': ValidationErrors.invalidAge })
+    .min(18)
+    .message(ValidationErrors.invalidAge)
+    .max(new Date().getFullYear() - 1900)
+    .message(ValidationErrors.invalidAge),
   oasDefer: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.optionNotSelected }),

@@ -1,4 +1,4 @@
-import { Message } from '@dts-stn/service-canada-design-system'
+import { Message, Link as DSLink } from '@dts-stn/service-canada-design-system'
 import { AccordionForm } from 'pre-release-ds'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
@@ -31,6 +31,7 @@ import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
+import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { useMediaQuery, useTranslation } from '../Hooks'
 
 /**
@@ -419,52 +420,15 @@ export const EligibilityPage: React.VFC = ({}) => {
     })
   }
 
-  function renderErrorBox(): JSX.Element {
-    const errorFields = form.visibleFields.filter(
-      (field) => field.error && errorsVisible[field.key]
-    )
-    if (errorFields.length === 0) return null
-
-    const messageBody = (
-      <ol>
-        {errorFields.map((field) => {
-          return (
-            <li key={field.key}>
-              {field.config.category.text} - {field.error}
-            </li>
-          )
-        })}
-      </ol>
-    )
-
-    const titleTranslation =
-      tsln._language === Language.EN
-        ? errorFields.length === 1
-          ? ' error was found'
-          : ' errors were found'
-        : errorFields.length === 1
-        ? ' erreur a été trouvée'
-        : ' erreurs ont été trouvées'
-
-    return (
-      <div className="border-2 border-danger rounded py-4 mb-2">
-        <Message
-          id={`form-errors-${errorFields.length}`}
-          type="danger"
-          message_heading={
-            tsln.errorBoxTitle + errorFields.length + titleTranslation
-          }
-          message_body={messageBody}
-          alert_icon_id="form-errors"
-          alert_icon_alt_text={tsln.warningText}
-        />
-      </div>
-    )
-  }
-
   return (
     <>
-      <div>{renderErrorBox()}</div>
+      <div>
+        <ErrorsSummary
+          errorFields={form.visibleFields.filter(
+            (field) => field.error && errorsVisible[field.key]
+          )}
+        />
+      </div>
       <div
         className="md:w-2/3"
         data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
