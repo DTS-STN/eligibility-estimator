@@ -25,5 +25,6 @@ export default class MainHandler {
     }
 
     this.results = resultObj
+    console.log(`this.results`, this.results)
   }
 }

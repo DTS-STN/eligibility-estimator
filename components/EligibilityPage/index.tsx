@@ -61,6 +61,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
   ] = useSessionStorage('errors-visible', getErrorVisibility(allFieldConfigs))
+  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -194,7 +195,14 @@ export const EligibilityPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
-      const error = errorsVisible[field.key] && field.error
+      const formError =
+        !errorsAsAlerts.includes(field.key) &&
+        errorsVisible[field.key] &&
+        field.error
+      const alertError =
+        errorsAsAlerts.includes(field.key) &&
+        errorsVisible[field.key] &&
+        field.error
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -205,7 +213,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
                 requiredText={tsln.required}
-                error={error}
+                error={formError}
               />
             )}
             {field.config.type === FieldType.NUMBER && (
@@ -221,7 +229,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 requiredText={tsln.required}
                 helpText={field.config.helpText}
-                error={error}
+                error={formError}
               />
             )}
             {field.config.type == FieldType.CURRENCY && (
@@ -237,7 +245,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 helpText={field.config.helpText}
                 requiredText={tsln.required}
-                error={error}
+                error={formError}
               />
             )}
             {field.config.type == FieldType.STRING && (
@@ -277,10 +285,24 @@ export const EligibilityPage: React.VFC = ({}) => {
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
                 setValue={(val) => handleOnChange(field, val)}
-                error={error}
+                error={formError}
               />
             )}
           </div>
+          {field.error && alertError && (
+            <div className="mt-6 md:pr-12 msg-container border-warning">
+              <Message
+                id={field.key}
+                alert_icon_id={field.key}
+                alert_icon_alt_text={tsln.warningText}
+                type={'warning'}
+                message_heading={tsln.unableToProceed}
+                message_body={field.error}
+                asHtml={true}
+                whiteBG={true}
+              />
+            </div>
+          )}
           {showWarningMessage(field)}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
@@ -297,12 +319,14 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   const showWarningMessage = (field) => {
+    // console.log('INSIDE SHOW WARNING MESSAGE')
     const messageHeading = tsln.partnerIsNotEligible
     let messageBody = ''
     if (
       field.key === 'partnerLegalStatus' &&
       field.value === LegalStatus.OTHER
     ) {
+      // console.log('INSIDE IF STATEMENT OTHER SELECTED')
       messageBody = tsln.partnerLegalStatusNotEligible
     } else if (
       field.key === FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY &&
@@ -392,7 +416,10 @@ export const EligibilityPage: React.VFC = ({}) => {
       <div>
         <ErrorsSummary
           errorFields={form.visibleFields.filter(
-            (field) => field.error && errorsVisible[field.key]
+            (field) =>
+              field.error &&
+              errorsVisible[field.key] &&
+              !errorsAsAlerts.includes(field.key)
           )}
         />
       </div>
