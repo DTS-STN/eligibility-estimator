@@ -111,8 +111,7 @@ const fr: WebTranslations = {
   pageNotFound: 'Page non trouvée',
   warningText: 'avertissement',
   category: apiFr.category,
-  errorBoxTitle:
-    'Le formulaire ne peut pas être soumis car des erreurs ont été trouvées',
+  errorBoxTitle: "Le formulaire n'a pas pu être soumis car ",
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",

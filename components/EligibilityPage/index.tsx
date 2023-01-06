@@ -437,17 +437,20 @@ export const EligibilityPage: React.VFC = ({}) => {
       </ol>
     )
 
+    const titleTranslation =
+      tsln._language === Language.EN
+        ? ` error${(errorFields.length === 1 ? ' was ' : 's were ') + 'found'}`
+        : errorFields.length === 1
+        ? ' erreur a été trouvée'
+        : ' erreurs ont été trouvées'
+
     return (
       <div className="border-2 border-danger rounded py-4 mb-2">
         <Message
           id={`form-errors-${errorFields.length}`}
           type="danger"
           message_heading={
-            tsln.errorBoxTitle +
-            errorFields.length +
-            ` error${
-              (errorFields.length === 1 ? ' was ' : 's were ') + 'found'
-            }`
+            tsln.errorBoxTitle + errorFields.length + titleTranslation
           }
           message_body={messageBody}
           alert_icon_id="form-errors"
