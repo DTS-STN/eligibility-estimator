@@ -57,6 +57,10 @@ export const EligibilityPage: React.VFC = ({}) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
+  const [nextForStepClicked, setNextForStepClicked]: [
+    NextClickedObject,
+    (value: NextClickedObject) => void
+  ] = useSessionStorage('next-clicked', getNextClickedObj())
   const [errorsVisible, setErrorsVisible]: [
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
@@ -181,6 +185,15 @@ export const EligibilityPage: React.VFC = ({}) => {
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
+    const key: String = field.config.key
+    const step = Object.keys(keyStepMap).find((step) =>
+      keyStepMap[step].keys.includes(key)
+    )
+
+    if (nextForStepClicked[step]) {
+      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    }
+
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
@@ -319,14 +332,12 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   const showWarningMessage = (field) => {
-    // console.log('INSIDE SHOW WARNING MESSAGE')
     const messageHeading = tsln.partnerIsNotEligible
     let messageBody = ''
     if (
       field.key === 'partnerLegalStatus' &&
       field.value === LegalStatus.OTHER
     ) {
-      // console.log('INSIDE IF STATEMENT OTHER SELECTED')
       messageBody = tsln.partnerLegalStatusNotEligible
     } else if (
       field.key === FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY &&
@@ -364,17 +375,22 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }
 
-  function handleButtonOnChange(step) {
+  function getVisisbleErrorsForStep(step) {
     const stepKeys = keyStepMap[step].keys
-    const allVisibleKeys = form.visibleFields.map((field) => field.key)
+    const allVisibleKeys = Object.keys(visibleFields).filter((key) => key)
+
     const visibleKeysForStep = stepKeys.filter((key) =>
       allVisibleKeys.includes(key)
     )
 
     const stepErrorsVisible = {}
     visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
+    return stepErrorsVisible
+  }
 
-    setErrorsVisible({ ...errorsVisible, ...stepErrorsVisible })
+  function handleButtonOnChange(step) {
+    setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    setNextForStepClicked({ ...nextForStepClicked, [step]: true })
   }
 
   /**
@@ -462,6 +478,14 @@ function getErrorVisibility(fieldConfigs): VisibleFieldsObject {
   }, {})
 }
 
+function getNextClickedObj(): NextClickedObject {
+  const result = {}
+  for (const step in Steps) {
+    result[Steps[step]] = false
+  }
+  return result
+}
+
 export type VisibleFieldsObject = {
   [key in FieldKey]?: boolean
 }
@@ -508,6 +532,10 @@ type Card = {
 type CardChildren = JSX.Element[]
 
 type StepValidity = { [x in Steps]?: { isValid: boolean } }
+
+type NextClickedObject = {
+  [x in Steps]?: boolean
+}
 
 enum Steps {
   STEP_1 = 'step1',
