@@ -28,6 +28,7 @@
     "jsdom": "^19.0.0",
     "lodash": "^4.17.21",
     "next": "12.1.4||^12.1.7",
+    "pre-release-ds": "npm:@dts-stn/service-canada-design-system@1.53.2-dev.f2dd32111",
     "prom-client": "^14.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",

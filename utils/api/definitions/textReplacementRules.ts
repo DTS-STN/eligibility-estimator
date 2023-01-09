@@ -85,3 +85,7 @@ export const textReplacementRules: TextReplacementRules = {
 export function generateLink(link: Link, opensNewWindow?: string): string {
   return `<a class="underline text-default-text" href="${link.url}" target="_blank">${link.text}</a>`
 }
+
+export function getMaxYear(): number {
+  return new Date().getFullYear() - 18
+}

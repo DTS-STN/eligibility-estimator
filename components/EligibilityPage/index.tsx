@@ -1,11 +1,16 @@
-import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
+import { Message } from '@dts-stn/service-canada-design-system'
+import { AccordionForm } from 'pre-release-ds'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
-import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
+import {
+  FieldInputsObject,
+  ErrorsVisibleObject,
+  InputHelper,
+} from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import {
@@ -26,6 +31,7 @@ import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
+import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { useMediaQuery, useTranslation } from '../Hooks'
 
 /**
@@ -50,6 +56,16 @@ export const EligibilityPage: React.VFC = ({}) => {
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
+
+  const [nextForStepClicked, setNextForStepClicked]: [
+    NextClickedObject,
+    (value: NextClickedObject) => void
+  ] = useSessionStorage('next-clicked', getNextClickedObj())
+  const [errorsVisible, setErrorsVisible]: [
+    ErrorsVisibleObject,
+    (value: ErrorsVisibleObject) => void
+  ] = useSessionStorage('errors-visible', getErrorVisibility(allFieldConfigs))
+  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -164,10 +180,20 @@ export const EligibilityPage: React.VFC = ({}) => {
   }
 
   const [cardsValid, setCardsValid] = useState(getStepValidity())
+
   /**
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
+    const key: String = field.config.key
+    const step = Object.keys(keyStepMap).find((step) =>
+      keyStepMap[step].keys.includes(key)
+    )
+
+    if (nextForStepClicked[step]) {
+      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    }
+
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
@@ -182,6 +208,14 @@ export const EligibilityPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
+      const formError =
+        !errorsAsAlerts.includes(field.key) &&
+        errorsVisible[field.key] &&
+        field.error
+      const alertError =
+        errorsAsAlerts.includes(field.key) &&
+        errorsVisible[field.key] &&
+        field.error
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -192,6 +226,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
                 requiredText={tsln.required}
+                error={formError}
               />
             )}
             {field.config.type === FieldType.NUMBER && (
@@ -207,6 +242,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 requiredText={tsln.required}
                 helpText={field.config.helpText}
+                error={formError}
               />
             )}
             {field.config.type == FieldType.CURRENCY && (
@@ -222,6 +258,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 value={field.value}
                 helpText={field.config.helpText}
                 requiredText={tsln.required}
+                error={formError}
               />
             )}
             {field.config.type == FieldType.STRING && (
@@ -261,10 +298,11 @@ export const EligibilityPage: React.VFC = ({}) => {
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
                 setValue={(val) => handleOnChange(field, val)}
+                error={formError}
               />
             )}
           </div>
-          {field.error && (
+          {field.error && alertError && (
             <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
@@ -337,6 +375,24 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }
 
+  function getVisisbleErrorsForStep(step) {
+    const stepKeys = keyStepMap[step].keys
+    const allVisibleKeys = Object.keys(visibleFields).filter((key) => key)
+
+    const visibleKeysForStep = stepKeys.filter((key) =>
+      allVisibleKeys.includes(key)
+    )
+
+    const stepErrorsVisible = {}
+    visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
+    return stepErrorsVisible
+  }
+
+  function handleButtonOnChange(step) {
+    setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    setNextForStepClicked({ ...nextForStepClicked, [step]: true })
+  }
+
   /**
    * Generates the card configuration.
    * Each card will contain children. Each child represents a field and contains its HTML.
@@ -351,13 +407,20 @@ export const EligibilityPage: React.VFC = ({}) => {
         buttonLabel: cardConfig.buttonLabel,
         buttonAttributes: cardConfig.buttonAttributes,
         children,
+        buttonOnChange: () => {
+          handleButtonOnChange(step)
+        },
       }
 
-      const processingLastCard = index === Object.keys(keyStepMap).length - 1
+      const keysLength = Object.keys(keyStepMap).length
+      const processingLastCard = index === keysLength - 1
       if (processingLastCard) {
         return {
           ...card,
-          buttonOnChange: submitForm,
+          buttonOnChange: (e) => {
+            handleButtonOnChange(`step${keysLength}`)
+            submitForm(e)
+          },
         }
       }
       return card
@@ -366,20 +429,28 @@ export const EligibilityPage: React.VFC = ({}) => {
 
   return (
     <>
-      {
-        <div
-          className="md:w-2/3"
-          data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
-          // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
-        >
-          <AccordionForm
-            id="mainForm"
-            cardsState={cardsValid}
-            cards={generateCards()}
-            lang={language}
-          />
-        </div>
-      }
+      <div>
+        <ErrorsSummary
+          errorFields={form.visibleFields.filter(
+            (field) =>
+              field.error &&
+              errorsVisible[field.key] &&
+              !errorsAsAlerts.includes(field.key)
+          )}
+        />
+      </div>
+      <div
+        className="md:w-2/3"
+        data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
+        // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
+      >
+        <AccordionForm
+          id="mainForm"
+          cardsState={cardsValid}
+          cards={generateCards()}
+          lang={language}
+        />
+      </div>
     </>
   )
 }
@@ -395,6 +466,24 @@ function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
     }
     return result
   }, {})
+}
+
+/**
+ * Builds the object representing the default visibility of errors.
+ */
+function getErrorVisibility(fieldConfigs): VisibleFieldsObject {
+  return fieldConfigs.reduce((result, value) => {
+    result[value.key] = false
+    return result
+  }, {})
+}
+
+function getNextClickedObj(): NextClickedObject {
+  const result = {}
+  for (const step in Steps) {
+    result[Steps[step]] = false
+  }
+  return result
 }
 
 export type VisibleFieldsObject = {
@@ -443,6 +532,10 @@ type Card = {
 type CardChildren = JSX.Element[]
 
 type StepValidity = { [x in Steps]?: { isValid: boolean } }
+
+type NextClickedObject = {
+  [x in Steps]?: boolean
+}
 
 enum Steps {
   STEP_1 = 'step1',

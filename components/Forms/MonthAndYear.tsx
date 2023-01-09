@@ -1,4 +1,4 @@
-import { DatePicker } from '@dts-stn/service-canada-design-system'
+import { DatePicker, FormError } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
@@ -14,6 +14,7 @@ export interface MonthAndYearProps
   helpText?: string
   baseOnChange: (newValue: string) => void
   requiredText?: string
+  error?: string
 }
 
 interface IAgeDateInput {
@@ -27,6 +28,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   helpText,
   baseOnChange,
   requiredText,
+  error,
 }) => {
   const tsln = useTranslation<WebTranslations>()
 
@@ -43,10 +45,9 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
       [fieldToSet]: Number(e.target.value),
     }
     setDateInput(newDate)
-    if (newDate.year && newDate.month)
-      baseOnChange(
-        String(BenefitHandler.calculateAge(newDate.month, newDate.year))
-      )
+    baseOnChange(
+      String(BenefitHandler.calculateAge(newDate.month, newDate.year))
+    )
   }
 
   return (
@@ -67,6 +68,12 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
       />
+
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </>
   )
 }
