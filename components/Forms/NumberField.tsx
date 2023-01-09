@@ -66,7 +66,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
       />
 
       {error && (
-        <div className="mt-2">
+        <div className="mt-2" role="alert">
           <FormError errorMessage={error} />
         </div>
       )}

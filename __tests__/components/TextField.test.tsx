@@ -55,16 +55,10 @@ describe('TextField component', () => {
       name: 'age', // this is really a NumberField, but since we currently have no TextFields, we will use age
       label: 'Some question label?',
       error: 'This field is required.',
-      required: true,
     }
 
     const ui = (
-      <TextField
-        name={props.name}
-        label={props.label}
-        error={props.error}
-        required={props.required}
-      />
+      <TextField name={props.name} label={props.label} error={props.error} />
     )
 
     render(ui)

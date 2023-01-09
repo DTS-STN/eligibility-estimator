@@ -79,7 +79,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
       />
 
       {error && (
-        <div className="mt-2">
+        <div className="mt-2" role="alert">
           <FormError errorMessage={error} />
         </div>
       )}

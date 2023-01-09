@@ -35,7 +35,7 @@ export const TextField: React.VFC<TextFieldProps> = ({
         </label>
       </div>
       {error && (
-        <div className="mt-2">
+        <div className="mt-2" role="alert">
           <FormError errorMessage={error} />
         </div>
       )}
