@@ -10,6 +10,16 @@ import { ResponseSuccess } from '../../../utils/api/definitions/types'
 import legalValues from '../../../utils/api/scrapers/output'
 import { MockResponseObject } from './factory'
 
+export function expectAfsMarital(res: MockResponseObject<ResponseSuccess>) {
+  expect(res.body.results.afs.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.MARITAL)
+}
+
+export function expectAlwTooOld(res: MockResponseObject<ResponseSuccess>) {
+  expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+}
+
 export function expectAlwAfsTooOld(res: MockResponseObject<ResponseSuccess>) {
   expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
