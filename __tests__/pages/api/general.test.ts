@@ -20,6 +20,7 @@ import { RequestSchema } from '../../../utils/api/definitions/schemas'
 import { OutputItem } from '../../../utils/api/scrapers/_baseTable'
 import { scraperData } from '../../../utils/api/scrapers/output'
 import { mockGetRequestError, mockPartialGetRequest } from './factory'
+import { getErrorDetails } from './expectUtils'
 
 describe('code checks', () => {})
 
@@ -153,23 +154,29 @@ describe('sanity checks', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
   })
-  it('accepts age equal to 150', async () => {
-    const res = await mockPartialGetRequest({ age: 150 })
-    expect(res.status).toEqual(200)
+  it('fails on age less than 18', async () => {
+    const res = await mockPartialGetRequest({ age: 17 })
+    expect(res.status).toEqual(400)
   })
   it('accepts valid Marital Status', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
       maritalStatus: MaritalStatus.SINGLE,
     })
-    expect(res.status).toEqual(200)
+    expect(res.status).toEqual(400)
+
+    const errors = getErrorDetails(res)
+    expect(errors.length).toEqual(0)
   })
   it('accepts valid Legal Status', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
       legalStatus: LegalStatus.CANADIAN_CITIZEN,
     })
-    expect(res.status).toEqual(200)
+    expect(res.status).toEqual(400)
+
+    const errors = getErrorDetails(res)
+    expect(errors.length).toEqual(0)
   })
   it('fails when years in Canada is greater than age minus 18', async () => {
     const res = await mockGetRequestError({
@@ -186,7 +193,10 @@ describe('sanity checks', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 47,
     })
-    expect(res.status).toEqual(200)
+    expect(res.status).toEqual(400)
+
+    const errors = getErrorDetails(res)
+    expect(errors.length).toEqual(0)
   })
   it('fails when legal status is other', async () => {
     let res = await mockGetRequestError({

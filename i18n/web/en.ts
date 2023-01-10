@@ -1,6 +1,9 @@
 import { WebTranslations } from '.'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { generateLink } from '../../utils/api/definitions/textReplacementRules'
+import {
+  generateLink,
+  getMaxYear,
+} from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
 const en: WebTranslations = {
@@ -103,6 +106,7 @@ const en: WebTranslations = {
   pageNotFound: 'Page not found',
   warningText: 'warning',
   category: apiEn.category,
+  errorBoxTitle: 'The form could not be submitted because ',
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
@@ -141,6 +145,17 @@ const en: WebTranslations = {
     empty: 'This information is required',
   },
   validationErrors: {
+    [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
+    [ValidationErrors.partnerIncomeEmpty]:
+      "Please enter your partner's income.",
+    [ValidationErrors.partnerYearsSince18Empty]:
+      "Please enter a number no higher than your partner's age minus 18.",
+    [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
+    [ValidationErrors.yearsSince18Empty]:
+      'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.legalStatusNotSelected]: 'Please select a legal status.',
+    [ValidationErrors.incomeEmpty]: 'Please enter your income.',
+    [ValidationErrors.optionNotSelected]: 'Please select an option.',
     [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',
     [ValidationErrors.partnerIncomeBelowZero]:
       "Your partner's income must be above zero.",
@@ -155,7 +170,7 @@ const en: WebTranslations = {
     [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
     [ValidationErrors.partnerAgeOver150]:
       "Your partner's age should be less than 150.",
-    [ValidationErrors.oasAge65to70]: 'You must enter an age between 65 and 70.',
+    [ValidationErrors.oasAge65to70]: 'Please enter an age between 65 and 70.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:

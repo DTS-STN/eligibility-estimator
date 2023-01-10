@@ -1,7 +1,10 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { generateLink } from '../../utils/api/definitions/textReplacementRules'
+import {
+  generateLink,
+  getMaxYear,
+} from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
@@ -108,6 +111,7 @@ const fr: WebTranslations = {
   pageNotFound: 'Page non trouvée',
   warningText: 'avertissement',
   category: apiFr.category,
+  errorBoxTitle: "Le formulaire n'a pas pu être soumis car ",
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
@@ -148,6 +152,19 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
+    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.partnerIncomeEmpty]:
+      'Veuillez entrer le revenu de votre conjoint.',
+    [ValidationErrors.partnerYearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
+    [ValidationErrors.maritalStatusEmpty]:
+      'Veuillez sélectionner un état civil.',
+    [ValidationErrors.yearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.legalStatusNotSelected]:
+      'Veuillez sélectionner un statut légal.',
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
+    [ValidationErrors.optionNotSelected]: 'Veuillez sélectionner une option.',
     [ValidationErrors.incomeBelowZero]:
       'Vos revenus doivent être supérieurs à zéro.',
     [ValidationErrors.partnerIncomeBelowZero]:
@@ -164,7 +181,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
     [ValidationErrors.oasAge65to70]:
-      'Vous devez saisir un âge compris entre 65 et 70 ans.',
+      'Veuillez entrer un âge entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
       "Votre devez avoir vécu au Canada pendant au moins 10&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:

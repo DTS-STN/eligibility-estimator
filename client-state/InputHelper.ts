@@ -17,6 +17,10 @@ export type FieldInputsObject = {
   [key in FieldKey]?: string
 }
 
+export type ErrorsVisibleObject = {
+  [key in FieldKey]?: boolean
+}
+
 export class InputHelper {
   constructor(
     private readonly inputs: FieldInputsObject,

@@ -21,11 +21,15 @@ import {
  * - types.ts
  * - index.test.ts
  *
- * Note: Do not require fields here, do it in the BenefitHandler. This should gladly accept an empty object.
  */
+
 export const RequestSchema = Joi.object({
-  incomeAvailable: Joi.boolean(),
+  incomeAvailable: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   income: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.incomeEmpty })
     .precision(2)
     .min(0)
     .message(ValidationErrors.incomeBelowZero),
@@ -39,31 +43,48 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.ageUnder18)
-    .max(150)
-    .message(ValidationErrors.ageOver150),
-  oasDefer: Joi.boolean(),
+    .message(ValidationErrors.invalidAge)
+    .max(new Date().getFullYear() - 1900)
+    .message(ValidationErrors.invalidAge),
+  oasDefer: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   oasAge: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.oasAge65to70 })
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)
     .message(ValidationErrors.oasAge65to70),
   maritalStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.maritalStatusEmpty })
     .valid(...Object.values(MaritalStatus))
     .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
-  invSeparated: Joi.boolean(),
+  invSeparated: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
     .valid(...Object.values(LegalStatus))
     .invalid(LegalStatus.OTHER)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
-  livedOutsideCanada: Joi.boolean(),
+  livedOutsideCanada: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   yearsInCanadaSince18: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
+    .required()
     // if they haven't lived in Canada long enough,
     .when('livingCountry', {
       is: Joi.string().valid('CAN'),
@@ -92,11 +113,16 @@ export const RequestSchema = Joi.object({
         }),
       }),
     }),
-  partnerBenefitStatus: Joi.string().valid(
-    ...Object.values(PartnerBenefitStatus)
-  ),
-  partnerIncomeAvailable: Joi.boolean(),
+  partnerBenefitStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected })
+    .valid(...Object.values(PartnerBenefitStatus)),
+  partnerIncomeAvailable: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   partnerIncome: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerIncomeEmpty })
     .precision(2)
     .min(0)
     .message(ValidationErrors.partnerIncomeBelowZero),
@@ -107,18 +133,31 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
   partnerAge: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.partnerAgeUnder18)
-    .max(150)
-    .message(ValidationErrors.partnerAgeOver150),
-  partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
-  partnerLegalStatus: Joi.string().valid(...Object.values(LegalStatus)),
-  partnerLivedOutsideCanada: Joi.boolean(),
+    .message(ValidationErrors.invalidAge)
+    .max(new Date().getFullYear() - 1900)
+    .message(ValidationErrors.invalidAge),
+  partnerLivingCountry: Joi.string()
+    .required()
+    .valid(...Object.values(ALL_COUNTRY_CODES)),
+  partnerLegalStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
+    .valid(...Object.values(LegalStatus)),
+  partnerLivedOutsideCanada: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   partnerYearsInCanadaSince18: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.partnerYearsInCanadaMinusAge),
-  partnerEverLivedSocialCountry: Joi.boolean(),
+  partnerEverLivedSocialCountry: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

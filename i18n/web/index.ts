@@ -88,6 +88,7 @@ export type WebTranslations = {
   pageNotFound: string
   warningText: string
   category: Translations['category']
+  errorBoxTitle: string
 
   //results page
   resultsPage: {

@@ -24,6 +24,7 @@ import {
   partnerIncomeZero,
   partnerNoHelpNeeded,
   partnerUndefined,
+  getErrorDetails,
 } from './expectUtils'
 import {
   mockGetRequest,
@@ -348,12 +349,10 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough10
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })
   it('returns "ineligible" when married', async () => {
     const res = await mockGetRequest({
@@ -409,10 +408,10 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -432,10 +431,10 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -455,12 +454,10 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough20
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
   it('returns "error ineligible" when living in No Agreement and under 10 years in Canada', async () => {
     const res = await mockGetRequestError({
@@ -478,12 +475,10 @@ describe('basic Allowance for Survivor scenarios', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough20
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
 })
 

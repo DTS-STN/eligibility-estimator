@@ -30,6 +30,7 @@ import {
   partnerIncomeZero,
   partnerNoHelpNeeded,
   partnerUndefined,
+  getErrorDetails,
 } from './expectUtils'
 import { mockGetRequest, mockGetRequestError } from './factory'
 
@@ -48,12 +49,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough10
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })
 
   it('returns "error unavailable" - living in Canada, under 10 years in Canada, lived in social country', async () => {
@@ -70,10 +69,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable10
     )
   })
@@ -93,10 +92,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -117,10 +116,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
 
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -142,10 +141,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
 
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -168,10 +167,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -193,12 +192,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough10
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })
 
   it('returns "ineligible" - age 60, single, living in No Agreement, 20 years in Canada', async () => {
@@ -245,12 +242,10 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough20
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
 })
 
@@ -830,12 +825,10 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
-    expect(res.body.detail.details[0].path[0]).toEqual(
-      FieldKey.EVER_LIVED_SOCIAL_COUNTRY
-    )
-    expect(res.body.detail.details[0].message).toEqual(
-      ValidationErrors.yearsInCanadaNotEnough20
-    )
+    const errors = getErrorDetails(res)
+
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
 
   it('returns "ALW eligible" - age 64, married, 19 years in Canada, lived in social country', async () => {

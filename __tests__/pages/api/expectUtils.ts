@@ -164,3 +164,14 @@ export const canadian = {
   livingCountry: LivingCountry.CANADA,
   legalStatus: LegalStatus.CANADIAN_CITIZEN,
 }
+
+export const getErrorDetails = (res) => {
+  const missingFields: Array<string> = res.body.missingFields
+  const visibleFields: Array<string> = res.body.visibleFields
+  const arrOfErrors = res.body.detail.details.filter(
+    (err) =>
+      !missingFields.includes(err.context.key) &&
+      visibleFields.includes(err.context.key)
+  )
+  return arrOfErrors
+}
