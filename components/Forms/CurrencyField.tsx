@@ -77,6 +77,8 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         required
         autoComplete="off"
         enterKeyHint="done"
+        allowNegative={false}
+        decimalSeparator={null}
       />
 
       {error && (
