@@ -50,7 +50,7 @@ const en: WebTranslations = {
   ageText: '<b>age</b>',
   netIncomeText: '<b>net income</b>',
   legalStatusText:
-    '<b>legal status</b> (such as Canadian citizen, Indian Status, refugee or permanent resident)',
+    '<b>legal status</b> (such as Canadian citizen, Indian status, refugee or permanent resident)',
   residenceHistoryText:
     '<b>residence history</b> (number of years lived in Canada)',
   maritalStatusText: '<b>marital status</b>',
