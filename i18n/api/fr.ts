@@ -28,7 +28,7 @@ const fr: Translations = {
     [FieldCategory.INCOME]: 'Revenu',
     [FieldCategory.LEGAL]: 'Statut légal',
     [FieldCategory.RESIDENCE]: 'Historique de résidence',
-    [FieldCategory.MARITAL]: 'État civil',
+    [FieldCategory.MARITAL]: 'État matrimonial',
   },
   result: {
     [ResultKey.ELIGIBLE]: 'Admissible',
@@ -48,7 +48,7 @@ const fr: Translations = {
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
+    [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial actuel?',
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
@@ -115,7 +115,7 @@ const fr: Translations = {
       'Modifier si vous avez vécu à l’extérieur du Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Modifier le nombre d’années vécues au Canada',
-    [FieldKey.MARITAL_STATUS]: 'Modifier votre état civil',
+    [FieldKey.MARITAL_STATUS]: 'Modifier votre état matrimonial',
     [FieldKey.INV_SEPARATED]:
       'Modifier votre statut de séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
