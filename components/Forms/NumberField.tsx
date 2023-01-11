@@ -64,6 +64,8 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         required
         autoComplete="off"
         enterKeyHint="done"
+        allowNegative={false}
+        decimalSeparator={null}
       />
 
       {error && (
