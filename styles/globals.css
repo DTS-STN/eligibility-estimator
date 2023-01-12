@@ -211,15 +211,17 @@
     border-left: 12px solid #284162;
   }
 
-  #datePickerMonth {
+  #enter-age select#age-birth-month,
+  #enter-partnerAge select#partnerAge-birth-month {
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     line-height: 30px;
   }
 
-  select#datePickerMonth {
-    background-image: none;
-  }
-
-  input#datePickerYear {
+  input#age-birth-year,
+  input#partnerAge-birth-year {
     border-radius: 0.25rem;
     border-width: 1.5px;
     font-size: 20px;
@@ -232,7 +234,8 @@
     border-color: rgb(111 111 111 / var(--tw-border-opacity));
   }
 
-  input#datePickerYear:focus {
+  input#age-birth-year:focus,
+  input#partnerAge-birth-year:focus {
     border-color: #2563eb;
   }
 
