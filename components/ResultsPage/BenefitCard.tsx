@@ -4,6 +4,7 @@ import React from 'react'
 import { CustomCollapse } from './CustomCollapse'
 
 export const BenefitCard: React.VFC<{
+  benefitKey: string
   benefitName: string
   isEligible: boolean
   eligibleText: string
@@ -11,6 +12,7 @@ export const BenefitCard: React.VFC<{
   children: React.ReactNode
   links: Array<{ icon: string; url: string; text: string; alt: string }>
 }> = ({
+  benefitKey,
   benefitName,
   isEligible,
   eligibleText,
@@ -33,9 +35,9 @@ export const BenefitCard: React.VFC<{
 
   return (
     <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded">
-      <h3 className="h4">
+      <h2 id={benefitKey} className="h3">
         {benefitName} {eligibleFlag}
-      </h3>
+      </h2>
 
       <div className={`${isEligible ? '' : 'bg-[#F9F4D4] px-8'} py-1`}>
         {children}

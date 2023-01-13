@@ -51,6 +51,7 @@ export const BenefitCards: React.VFC<{
     return (
       <div key={result.benefitKey}>
         <BenefitCard
+          benefitKey={result.benefitKey}
           benefitName={titleText}
           isEligible={eligibility}
           eligibleText={apiTsln.result[result.eligibility.result]}
@@ -78,17 +79,11 @@ export const BenefitCards: React.VFC<{
     <div>
       {resultsEligible.length > 0 && (
         <>
-          <h2 id="nextSteps" className="h2 mt-5">
-            {tsln.resultsPage.nextSteps}
-          </h2>
           <>{resultsEligible.map((result) => generateCard(result))}</>
         </>
       )}
       {resultsNotEligible.length > 0 && (
         <>
-          <h2 id="notEligible" className="h2 mt-5">
-            {tsln.resultsPage.youMayNotBeEligible}
-          </h2>
           <>{resultsNotEligible.map((result) => generateCard(result))}</>
         </>
       )}
