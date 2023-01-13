@@ -398,9 +398,16 @@ export class BenefitHandler {
         this.replaceTextVariables(result.eligibility.detail, result)
       )
 
+      // clawback is only valid for OAS, VSCode marks this as an error but isn't
+      // This adds the oasClawback text as requested on ticket 90284.
+      let newMainText = result?.entitlement?.clawback
+        ? `${result.cardDetail.mainText}` +
+          `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
+        : result.cardDetail.mainText
+
       // process card main text
       result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
-        this.replaceTextVariables(result.cardDetail.mainText, result)
+        this.replaceTextVariables(newMainText, result)
       )
 
       // process card collapsed content
