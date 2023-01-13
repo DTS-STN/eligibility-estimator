@@ -39,7 +39,13 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
-    const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
+    let fieldToSet = ''
+    if (fieldId === `${name}-birth-year`) {
+      fieldToSet = 'year'
+    } else if (fieldId === `${name}-birth-month`) {
+      fieldToSet = 'month'
+    }
+
     const newDate: IAgeDateInput = {
       ...dateInput,
       [fieldToSet]: Number(e.target.value),
@@ -67,6 +73,8 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         onMonthChange={dateOnChange}
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
+        yearId={`${name}-birth-year`}
+        monthId={`${name}-birth-month`}
       />
 
       {error && (
