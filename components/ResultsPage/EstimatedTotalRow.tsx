@@ -16,7 +16,9 @@ export const EstimatedTotalRow: React.VFC<{
 
   return (
     <tr className="border border-[#DDDDDD]">
-      <td className="pl-5">{heading}</td>
+      <th scope="row" className="pl-5">
+        {heading}
+      </th>
       {showEntitlement && (
         <td className="text-right pr-5">
           {result.entitlement.type !== EntitlementResultType.UNAVAILABLE

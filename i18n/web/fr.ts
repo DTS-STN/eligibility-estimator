@@ -1,7 +1,10 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { generateLink } from '../../utils/api/definitions/textReplacementRules'
+import {
+  generateLink,
+  getMaxYear,
+} from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
@@ -56,7 +59,7 @@ const fr: WebTranslations = {
     "<b>statut légal</b> (par exemple, citoyen canadien, statut d'Indien, réfugié ou résident permanent)",
   residenceHistoryText:
     "<b>historique de résidence</b> (nombre d'années vécues au Canada)",
-  maritalStatusText: '<b>état civil</b>',
+  maritalStatusText: '<b>état matrimonial</b>',
   partnerText:
     '<b>partenaire</b> (revenu, statut légal et historique de résidence), le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
@@ -108,6 +111,7 @@ const fr: WebTranslations = {
   pageNotFound: 'Page non trouvée',
   warningText: 'avertissement',
   category: apiFr.category,
+  errorBoxTitle: "Le formulaire n'a pas pu être soumis car ",
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
@@ -148,6 +152,19 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
+    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.partnerIncomeEmpty]:
+      'Veuillez entrer le revenu de votre conjoint.',
+    [ValidationErrors.partnerYearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
+    [ValidationErrors.maritalStatusEmpty]:
+      'Veuillez sélectionner un état civil.',
+    [ValidationErrors.yearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.legalStatusNotSelected]:
+      'Veuillez sélectionner un statut légal.',
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
+    [ValidationErrors.optionNotSelected]: 'Veuillez sélectionner une option.',
     [ValidationErrors.incomeBelowZero]:
       'Vos revenus doivent être supérieurs à zéro.',
     [ValidationErrors.partnerIncomeBelowZero]:
@@ -164,7 +181,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
     [ValidationErrors.oasAge65to70]:
-      'Vous devez saisir un âge compris entre 65 et 70 ans.',
+      'Veuillez entrer un âge entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
       "Votre devez avoir vécu au Canada pendant au moins 10&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
@@ -174,7 +191,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
-      "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
+      "Vous avez indiqué un état matrimonial qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
       "Vous avez sélectionné un statut légal qui n'est pas admissible aux prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable10]:
@@ -188,7 +205,7 @@ const fr: WebTranslations = {
   unavailable: 'indisponible',
 
   selectText: {
-    maritalStatus: 'Sélectionner un état civil',
+    maritalStatus: 'Sélectionner un état matrimonial',
     livingCountry: 'Sélectionner un pays',
     partnerLivingCountry: 'Sélectionner un pays',
     default: 'Sélectionnez parmi',

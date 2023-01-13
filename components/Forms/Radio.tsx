@@ -1,8 +1,8 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
 import { QuestionLabel } from './QuestionLabel'
-import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -53,7 +53,7 @@ export const Radio: React.VFC<InputProps> = ({
 
         <Tooltip field={name} />
 
-        {error && <ErrorLabel errorMessage={error} />}
+        {/* {error && <ErrorLabel errorMessage={error} />} */}
 
         <div role="radiogroup">
           {values.map((val, index) => (

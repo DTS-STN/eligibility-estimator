@@ -1,4 +1,4 @@
-import { DatePicker } from '@dts-stn/service-canada-design-system'
+import { DatePicker, FormError } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
@@ -14,6 +14,7 @@ export interface MonthAndYearProps
   helpText?: string
   baseOnChange: (newValue: string) => void
   requiredText?: string
+  error?: string
 }
 
 interface IAgeDateInput {
@@ -27,6 +28,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   helpText,
   baseOnChange,
   requiredText,
+  error,
 }) => {
   const tsln = useTranslation<WebTranslations>()
 
@@ -37,16 +39,21 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
-    const fieldToSet = fieldId === 'datePickerYear' ? 'year' : 'month'
+    let fieldToSet = ''
+    if (fieldId === `${name}-birth-year`) {
+      fieldToSet = 'year'
+    } else if (fieldId === `${name}-birth-month`) {
+      fieldToSet = 'month'
+    }
+
     const newDate: IAgeDateInput = {
       ...dateInput,
       [fieldToSet]: Number(e.target.value),
     }
     setDateInput(newDate)
-    if (newDate.year && newDate.month)
-      baseOnChange(
-        String(BenefitHandler.calculateAge(newDate.month, newDate.year))
-      )
+    baseOnChange(
+      String(BenefitHandler.calculateAge(newDate.month, newDate.year))
+    )
   }
 
   return (
@@ -67,7 +74,15 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         onMonthChange={dateOnChange}
         onYearChange={debounce(dateOnChange, 500)}
         lang={tsln._language}
+        yearId={`${name}-birth-year`}
+        monthId={`${name}-birth-month`}
       />
+
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </>
   )
 }

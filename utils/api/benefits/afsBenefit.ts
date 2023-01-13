@@ -24,7 +24,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // helpers
     const meetsReqMarital =
       this.input.maritalStatus.value == MaritalStatus.WIDOWED
-    const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
+    const meetsReqAge = 60 <= this.input.age && this.input.age < 65
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
 
@@ -38,107 +38,64 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
     const meetsReqLegal = this.input.legalStatus.canadian
+    const livingCanada = this.input.livingCountry.canada
+    const liveOutsideCanadaMoreThanHalfYear = this.input.livedOutsideCanada
 
     // main checks
-    if (meetsReqLegal && meetsReqYears && meetsReqMarital && meetsReqIncome) {
-      if (meetsReqAge && skipReqIncome) {
-        return {
-          result: ResultKey.INCOME_DEPENDENT,
-          reason: ResultReason.INCOME_MISSING,
-          detail:
-            this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
-          incomeMustBeLessThan: maxIncome,
-        }
-      } else if (meetsReqAge) {
-        return {
-          result: ResultKey.ELIGIBLE,
-          reason: ResultReason.NONE,
-          detail: this.translations.detail.eligible,
-        }
-      } else if (this.input.age == 59) {
-        return {
-          result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.eligibleWhen60ApplyNow,
-        }
-      } else if (underAgeReq) {
-        return {
-          result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.eligibleWhen60,
-        }
-      } else {
-        return {
-          result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE,
-          detail: this.translations.detail.afsNotEligible,
-        }
-      }
-    } else if (overAgeReq) {
-      return {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.AGE,
-        detail: this.translations.detail.afsNotEligible,
-      }
-    } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
+    // if not windowed
+    if (!meetsReqMarital) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
         detail: this.translations.detail.afsNotEligible,
       }
-    } else if (!meetsReqIncome) {
+    }
+    // if age is less than 60
+    else if (underAgeReq) {
       return {
         result: ResultKey.INELIGIBLE,
-        reason: ResultReason.INCOME,
-        detail: this.translations.detail.mustMeetIncomeReq,
-      }
-    } else if (!meetsReqYears) {
-      if (
-        this.input.livingCountry.agreement ||
-        this.input.everLivedSocialCountry
-      ) {
-        if (meetsReqAge) {
-          return {
-            result: ResultKey.UNAVAILABLE,
-            reason: ResultReason.YEARS_IN_CANADA,
-            detail: this.translations.detail.dependingOnAgreement,
-          }
-        } else if (underAgeReq) {
-          return {
-            result: ResultKey.INELIGIBLE,
-            reason: ResultReason.AGE_YOUNG,
-            detail: this.translations.detail.dependingOnAgreementWhen60,
-          }
-        } else {
-          return {
-            result: ResultKey.INELIGIBLE,
-            reason: ResultReason.AGE,
-            detail: this.translations.detail.afsNotEligible,
-          }
-        }
-      } else {
-        return {
-          result: ResultKey.INELIGIBLE,
-          reason: ResultReason.YEARS_IN_CANADA,
-          detail: this.translations.detail.mustMeetYearReq,
-        }
-      }
-    } else if (!meetsReqLegal) {
-      if (underAgeReq) {
-        return {
-          result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.dependingOnLegalWhen60,
-        }
-      } else {
-        return {
-          result: ResultKey.UNAVAILABLE,
-          reason: ResultReason.LEGAL_STATUS,
-          detail: this.translations.detail.dependingOnLegal,
-        }
+        reason: ResultReason.AGE_YOUNG,
+        detail: this.translations.detail.eligibleWhen60,
       }
     }
-    throw new Error('entitlement logic failed to produce a result')
+    // if age is greater or equals to 65
+    else if (overAgeReq) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.AGE,
+        detail: this.translations.detail.afsNotEligible,
+      }
+    }
+    // if legal status not valid
+    else if (!meetsReqLegal) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.LEGAL_STATUS,
+        detail: this.translations.detail.dependingOnLegal,
+      }
+    }
+    //check residency history
+    else if (!livingCanada && liveOutsideCanadaMoreThanHalfYear) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.LIVING_COUNTRY,
+        detail: this.translations.detail.mustBeInCanada,
+      }
+    }
+    // living in Canada but less than 10 years
+    else if (livingCanada && !meetsReqYears) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.YEARS_IN_CANADA,
+        detail: this.translations.detail.mustMeetYearReq,
+      }
+    } else {
+      return {
+        result: ResultKey.ELIGIBLE,
+        reason: ResultReason.NONE,
+        detail: this.translations.detail.eligible,
+      }
+    }
   }
 
   protected getEntitlement(): EntitlementResultGeneric {

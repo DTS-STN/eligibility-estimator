@@ -95,6 +95,14 @@ export enum LinkIcon {
 
 // all "custom" Joi Validation errors that we properly handle and translate for the end user
 export enum ValidationErrors {
+  invalidAge = 'invalidAge',
+  partnerIncomeEmpty = 'partnerIncomeEmpty',
+  partnerYearsSince18Empty = 'partnerYearsSince18Empty',
+  maritalStatusEmpty = 'maritalStatusEmpty',
+  yearsSince18Empty = 'yearsSince18Empty',
+  legalStatusNotSelected = 'legalStatusNotSelected',
+  incomeEmpty = 'incomeEmpty',
+  optionNotSelected = 'optionNotSelected',
   incomeBelowZero = 'incomeBelowZero',
   partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   incomeTooHigh = 'incomeTooHigh',

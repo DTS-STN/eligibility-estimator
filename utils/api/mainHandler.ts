@@ -13,16 +13,15 @@ export default class MainHandler {
 
     const resultObj: any = {
       visibleFields: this.handler.requiredFields,
+      results: this.handler.benefitResults,
+      summary: this.handler.summary,
+      missingFields: this.handler.missingFields,
+      fieldData: this.handler.fieldData,
     }
 
     if (error) {
       resultObj.error = ResultKey.INVALID
       resultObj.detail = error
-    } else {
-      resultObj.results = this.handler.benefitResults
-      resultObj.summary = this.handler.summary
-      resultObj.missingFields = this.handler.missingFields
-      resultObj.fieldData = this.handler.fieldData
     }
 
     this.results = resultObj

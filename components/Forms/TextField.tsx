@@ -1,5 +1,5 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { InputHTMLAttributes } from 'react'
-import { ErrorLabel } from './validation/ErrorLabel'
 
 export interface TextFieldProps
   extends InputHTMLAttributes<HTMLTextAreaElement> {
@@ -34,7 +34,11 @@ export const TextField: React.VFC<TextFieldProps> = ({
           {label}
         </label>
       </div>
-      {error && <ErrorLabel errorMessage={error} />}
+      {error && (
+        <div className="mt-2" role="alert">
+          <FormError errorMessage={error} />
+        </div>
+      )}
       <textarea
         data-testid="text-input"
         className={`form-control text-content ${error ? ' border-danger' : ''}`}

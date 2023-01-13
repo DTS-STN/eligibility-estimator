@@ -10,6 +10,16 @@ import { ResponseSuccess } from '../../../utils/api/definitions/types'
 import legalValues from '../../../utils/api/scrapers/output'
 import { MockResponseObject } from './factory'
 
+export function expectAfsMarital(res: MockResponseObject<ResponseSuccess>) {
+  expect(res.body.results.afs.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.MARITAL)
+}
+
+export function expectAlwTooOld(res: MockResponseObject<ResponseSuccess>) {
+  expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+}
+
 export function expectAlwAfsTooOld(res: MockResponseObject<ResponseSuccess>) {
   expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
@@ -163,4 +173,15 @@ export const canadaWholeLife = {
 export const canadian = {
   livingCountry: LivingCountry.CANADA,
   legalStatus: LegalStatus.CANADIAN_CITIZEN,
+}
+
+export const getErrorDetails = (res) => {
+  const missingFields: Array<string> = res.body.missingFields
+  const visibleFields: Array<string> = res.body.visibleFields
+  const arrOfErrors = res.body.detail.details.filter(
+    (err) =>
+      !missingFields.includes(err.context.key) &&
+      visibleFields.includes(err.context.key)
+  )
+  return arrOfErrors
 }

@@ -20,7 +20,7 @@
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@dts-stn/service-canada-design-system": "1.53.2-dev.944bfa4df",
+    "@dts-stn/service-canada-design-system": "1.53.9-dev.2d75d3a92",
     "@tailwindcss/forms": "^0.5.0",
     "csv-writer": "^1.6.0",
     "joi": "^17.6.0",
@@ -28,6 +28,7 @@
     "jsdom": "^19.0.0",
     "lodash": "^4.17.21",
     "next": "12.1.4||^12.1.7",
+    "pre-release-ds": "npm:@dts-stn/service-canada-design-system@1.53.2-dev.f2dd32111",
     "prom-client": "^14.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",

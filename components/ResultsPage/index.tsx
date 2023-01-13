@@ -16,6 +16,7 @@ import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
+import { Translations, getTranslations } from '../../i18n/api'
 
 // get the link text by current summary state
 const getEligibleLinkText = (
@@ -40,28 +41,17 @@ const getEstimatedMonthlyTotalLinkText = (
   return ''
 }
 
-const getNextStepLinkText = (
+const getEligibility = (
   resultsArray: BenefitResult[],
-  tsln: WebTranslations
+  apiTsln: Translations,
+  key: string
 ): string => {
-  const EligibleBenefits = resultsArray.filter((r) =>
-    [ResultKey.ELIGIBLE, ResultKey.INCOME_DEPENDENT].includes(
-      r.eligibility.result
-    )
-  )
-  return EligibleBenefits.length > 0 ? tsln.resultsPage.nextSteps : ''
-}
+  const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
+    .eligibility.result
 
-const getBenefitsYouMayNotEligibleForLinkText = (
-  resultsArray: BenefitResult[],
-  tsln: WebTranslations
-): string => {
-  const notEligibleBenefits = resultsArray.filter(
-    (r) => r.eligibility.result === ResultKey.INELIGIBLE
-  )
-  return notEligibleBenefits.length > 0
-    ? tsln.resultsPage.youMayNotBeEligible
-    : ''
+  return eligibityResult === ResultKey.ELIGIBLE
+    ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
+    : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
 }
 
 const ResultsPage: React.VFC<{
@@ -71,6 +61,7 @@ const ResultsPage: React.VFC<{
 }> = ({ inputs, results, summary }) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
+  const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
 
   const resultsArray: BenefitResult[] = Object.keys(results).map(
@@ -90,10 +81,21 @@ const ResultsPage: React.VFC<{
       url: '#estimated',
     },
     { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
-    { text: getNextStepLinkText(resultsArray, tsln), url: '#nextSteps' },
     {
-      text: getBenefitsYouMayNotEligibleForLinkText(resultsArray, tsln),
-      url: '#notEligible',
+      text: `${getEligibility(resultsArray, apiTsln, 'oas')}`,
+      url: '#oas',
+    },
+    {
+      text: `${getEligibility(resultsArray, apiTsln, 'gis')}`,
+      url: '#gis',
+    },
+    {
+      text: `${getEligibility(resultsArray, apiTsln, 'alw')}`,
+      url: '#alw',
+    },
+    {
+      text: `${getEligibility(resultsArray, apiTsln, 'afs')}`,
+      url: '#afs',
     },
   ]
 
