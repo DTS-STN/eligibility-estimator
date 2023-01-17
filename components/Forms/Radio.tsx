@@ -36,13 +36,6 @@ export const Radio: React.VFC<InputProps> = ({
   return (
     <div className="radio">
       <fieldset>
-        {/* <QuestionLabel
-          name={name}
-          type="radio"
-          label={label}
-          requiredText={requiredText}
-          helpText={helpText}
-        /> */}
         <legend
           className="text-content font-bold inline mb-2.5 mr-2"
           data-testid="radio-legend"
@@ -53,9 +46,8 @@ export const Radio: React.VFC<InputProps> = ({
 
         <Tooltip field={name} />
 
-        {/* {error && <ErrorLabel errorMessage={error} />} */}
-
         <div role="radiogroup">
+          {/* next block of code meets a11y but it does work on click on the text 
           {values.map((val, index) => (
             <span
               key={index}
@@ -67,10 +59,12 @@ export const Radio: React.VFC<InputProps> = ({
               role="radio"
             >
               <input
-                className="hover:cursor-pointer"
+                className={`hover:cursor-pointer ${
+                  error ? '!border-danger' : ''
+                }`}
                 type="radio"
                 data-testid="radio"
-                id={`${keyforid}-rad-${index}`}
+                id={`${keyforid}-${index}`}
                 name={`${keyforid}`}
                 value={val.key}
                 onChange={onChange}
@@ -82,12 +76,77 @@ export const Radio: React.VFC<InputProps> = ({
                 dangerouslySetInnerHTML={{ __html: val.text }}
               />
             </span>
+          ))} */}
+
+          {values.map((val, index) => (
+            <div
+              key={index}
+              id={`${name}-r${index}`}
+              className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
+              aria-labelledby={`${keyforid}-lbl-${index}`}
+              aria-checked={checkedValue === correctForBooleans(val.key)}
+              tab-index={index}
+              role="radio"
+            >
+              <input
+                className={`hover:cursor-pointer ${
+                  error ? '!border-danger' : ''
+                }`}
+                type="radio"
+                data-testid="radio"
+                id={`${keyforid}-${index}`}
+                name={`${keyforid}`}
+                value={val.key}
+                onChange={onChange}
+                checked={checkedValue === correctForBooleans(val.key)}
+              />
+              <label
+                htmlFor={`${keyforid}-${index}`}
+                className="flex items-center focus:inherit text-content hover:cursor-pointer"
+              >
+                {<span dangerouslySetInnerHTML={{ __html: val.text }} />}
+              </label>
+            </div>
           ))}
+
+          {error && (
+            <div className="mt-2">
+              <FormError errorMessage={error} />
+            </div>
+          )}
         </div>
       </fieldset>
     </div>
   )
 }
+
+// {values.map((val, index) => (
+//   <div
+//     role="radiogroup"
+//     key={index}
+//     id={`${name}-r${index}`}
+//     className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
+//   >
+//     <input
+//       className={`hover:cursor-pointer ${
+//         error ? '!border-danger' : ''
+//       }`}
+//       type="radio"
+//       data-testid="radio"
+//       id={`${keyforid}-${index}`}
+//       name={`${keyforid}`}
+//       value={val.key}
+//       onChange={onChange}
+//       checked={checkedValue === correctForBooleans(val.key)}
+//     />
+//     <label
+//       htmlFor={`${keyforid}-${index}`}
+//       className="flex items-center focus:inherit text-content hover:cursor-pointer"
+//     >
+//       {<span dangerouslySetInnerHTML={{ __html: val.text }} />}
+//     </label>
+//   </div>
+// ))}
 
 const correctForBooleans = (value: string) => {
   switch (value) {
