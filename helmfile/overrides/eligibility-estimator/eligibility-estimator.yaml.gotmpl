@@ -21,9 +21,22 @@ extraEnv:
           key: example-secret-password         
           
 */}}
-
+deployment: 
+  labels: 
+    branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
+    classification: "{{ requiredEnv "APP_LABEL_CLASSIFICATION" | replace " " "-" }}"
+    csd-id: "{{ requiredEnv "APP_LABEL_CSD_ID" | replace " " "-" }}"
+    department: "{{ requiredEnv "APP_LABEL_DEPARTMENT" | replace " " "-" }}"
+    directorate: "{{ requiredEnv "APP_LABEL_DIRECTORATE" | replace " " "-" }}"
+    division: "{{ requiredEnv "APP_LABEL_DIVISION" | replace " " "-" }}"
+    environment: "{{ requiredEnv "BRANCH" | replace " " "-" }}"
+    immutable: "{{ requiredEnv "APP_LABEL_IMMUTABLE" | replace " " "-" }}"
+    product-owner: "{{ requiredEnv "APP_LABEL_PRODUCT_OWNER" | replace " " "-" }}"
+    project-id: "{{ requiredEnv "APP_LABEL_PROJECT_ID" | replace " " "-" }}"
+    project-name: "{{ requiredEnv "PROJECT" | replace " " "-" }}"
+    section: "{{ requiredEnv "APP_LABEL_SECTION" | replace " " "-" }}"
 image:
-  repository: mtscontainers.azurecr.io/{{ requiredEnv "PROJECT" }}
+  repository: {{ requiredEnv "CLOUD_ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}
   tag: "{{ env "DOCKER_TAG" | default "latest" }}"
   pullPolicy: Always
 service:
@@ -34,13 +47,19 @@ service:
 ingress:
   enabled: true
   path: /
-  annotations: {}
-  hosts:
-    {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") }}
-    - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
-    {{ else }}
-    - {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
-    {{ end }}
+    annotations: 
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      appgw.ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.class: azure/application-gateway
+    tls:
+      - hosts:
+          - {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+        secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
+    hosts:
+    - host: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
 resources:
   requests:
     cpu: 200m
