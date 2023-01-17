@@ -47,7 +47,7 @@ export const Radio: React.VFC<InputProps> = ({
           className="text-content font-bold inline mb-2.5 mr-2"
           data-testid="radio-legend"
         >
-          {label}
+          <span dangerouslySetInnerHTML={{ __html: label }} />
           {requiredText && <span className="font-medium"> {requiredText}</span>}
         </legend>
 
