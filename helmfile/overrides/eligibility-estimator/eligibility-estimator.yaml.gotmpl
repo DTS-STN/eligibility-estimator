@@ -45,8 +45,7 @@ service:
     prometheus.io/path: /api/metrics
     prometheus.io/port: "3000"
 ingress:
-  enabled: true
-  path: /
+    enabled: true
     annotations: 
       cert-manager.io/cluster-issuer: letsencrypt-prod
       appgw.ingress.kubernetes.io/ssl-redirect: "true"
