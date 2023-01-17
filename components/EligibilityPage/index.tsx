@@ -65,7 +65,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
   ] = useSessionStorage('errors-visible', getErrorVisibility(allFieldConfigs))
-  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -74,6 +73,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
   const connection = tsln._language === Language.EN ? ':' : ' :'
+  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -200,6 +200,22 @@ export const EligibilityPage: React.VFC = ({}) => {
     setCardsValid(getStepValidity())
   }
 
+  function getErrorForField(field) {
+    let formError
+    let alertError
+
+    if (field.value === undefined) {
+      formError = errorsVisible[field.key] && field.error
+    } else {
+      alertError =
+        errorsAsAlerts.includes(field.key) &&
+        errorsVisible[field.key] &&
+        field.error
+    }
+
+    return [formError, alertError]
+  }
+
   /**
    * Generates the raw HTML for each field (aka. child).
    */
@@ -208,14 +224,7 @@ export const EligibilityPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
     return fields.map((field: FormField) => {
-      const formError =
-        !errorsAsAlerts.includes(field.key) &&
-        errorsVisible[field.key] &&
-        field.error
-      const alertError =
-        errorsAsAlerts.includes(field.key) &&
-        errorsVisible[field.key] &&
-        field.error
+      const [formError, alertError] = getErrorForField(field)
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -435,7 +444,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             (field) =>
               field.error &&
               errorsVisible[field.key] &&
-              !errorsAsAlerts.includes(field.key)
+              (!errorsAsAlerts.includes(field.key) || field.value === undefined)
           )}
         />
       </div>
