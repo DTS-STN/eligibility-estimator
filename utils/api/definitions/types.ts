@@ -64,6 +64,7 @@ export interface ProcessedInput {
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper
+  invSeparated: boolean
 }
 
 export interface ProcessedInputWithPartner {

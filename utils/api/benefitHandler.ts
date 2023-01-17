@@ -137,6 +137,7 @@ export class BenefitHandler {
         ? 40
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
+      invSeparated: this.rawInput.invSeparated,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         this.rawInput.partnerBenefitStatus
       ),
@@ -355,6 +356,27 @@ export class BenefitHandler {
     allResults.client.afs.eligibility = clientAfs.eligibility
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
+    // deal with involuntary separated scenario
+    if (this.input.client.invSeparated) {
+      //get OAS for applicant
+      const clientOASEntitlement = clientOas.entitlement
+      //get OAS for partner
+      if (
+        this.input.client.partnerBenefitStatus === PartnerBenefitStatus.OAS_GIS
+      ) {
+        console.log()
+      }
+      const partnerOas = new OasBenefit(this.input.partner, this.translations)
+      const partnerOASeligibility = partnerOas.eligibility
+      const partnerOASEntitlement = partnerOas.entitlement
+      // if both OAS are greater than 0
+
+      // calculate applicant
+
+      // otherwise
+
+      //
+    }
     allResults.client.gis.entitlement = clientGis.entitlement
 
     // Continue with ALW entitlement.
