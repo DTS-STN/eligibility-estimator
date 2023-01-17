@@ -18,7 +18,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   fieldId,
 }) => {
   return (
-    <div className="mb-2.5">
+    <>
       <legend
         htmlFor={fieldId}
         aria-label={name}
@@ -36,6 +36,6 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
           dangerouslySetInnerHTML={{ __html: helpText }}
         />
       )}
-    </div>
+    </>
   )
 }

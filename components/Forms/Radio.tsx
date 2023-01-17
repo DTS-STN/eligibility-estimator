@@ -44,33 +44,34 @@ export const Radio: React.VFC<InputProps> = ({
           helpText={helpText}
         />
         <Tooltip field={name} />
-        {values.map((val, index) => (
-          <div
-            role="radiogroup"
-            key={index}
-            id={`${name}-r${index}`}
-            className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
-          >
-            <input
-              className={`hover:cursor-pointer ${
-                error ? '!border-danger' : ''
-              }`}
-              type="radio"
-              data-testid="radio"
-              id={`${keyforid}-${index}`}
-              name={`${keyforid}`}
-              value={val.key}
-              onChange={onChange}
-              checked={checkedValue === correctForBooleans(val.key)}
-            />
-            <label
-              htmlFor={`${keyforid}-${index}`}
-              className="flex items-center focus:inherit text-content hover:cursor-pointer"
+        <div role="radiogroup" className="mt-2.5">
+          {values.map((val, index) => (
+            <div
+              key={index}
+              id={`${name}-r${index}`}
+              className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
             >
-              {<span dangerouslySetInnerHTML={{ __html: val.text }} />}
-            </label>
-          </div>
-        ))}
+              <input
+                className={`hover:cursor-pointer ${
+                  error ? '!border-danger' : ''
+                }`}
+                type="radio"
+                data-testid="radio"
+                id={`${keyforid}-${index}`}
+                name={`${keyforid}`}
+                value={val.key}
+                onChange={onChange}
+                checked={checkedValue === correctForBooleans(val.key)}
+              />
+              <label
+                htmlFor={`${keyforid}-${index}`}
+                className="flex items-center focus:inherit text-content hover:cursor-pointer"
+              >
+                {<span dangerouslySetInnerHTML={{ __html: val.text }} />}
+              </label>
+            </div>
+          ))}
+        </div>
         {error && (
           <div className="mt-2">
             <FormError errorMessage={error} />
