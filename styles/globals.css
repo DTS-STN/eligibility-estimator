@@ -119,11 +119,6 @@
     -moz-appearance: textfield;
   }
 
-  input[type='radio']:checked + label span {
-    @apply bg-form-border;
-    box-shadow: 0px 0px 0px 2px white inset;
-  }
-
   input[type='radio'] {
     appearance: none;
     background-color: #fff;

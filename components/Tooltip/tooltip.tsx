@@ -42,7 +42,7 @@ export const Tooltip: React.FC<{
 
   return (
     <div
-      className="relative inline-block mb-2 cursor-pointer "
+      className="relative mb-2 cursor-pointer"
       ref={wrapperRef}
       data-testid={`tooltip-${field}`}
     >

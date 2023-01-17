@@ -18,7 +18,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   fieldId,
 }) => {
   return (
-    <div className="mb-2.5">
+    <>
       <label
         htmlFor={fieldId}
         aria-label={name}
@@ -26,14 +26,16 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
         className="text-content font-bold inline mb-2.5 mr-2"
       >
         <span dangerouslySetInnerHTML={{ __html: label }} />
+        {requiredText && (
+          <span className="font-medium ml-2">{requiredText}</span>
+        )}
       </label>
-      {requiredText && <span className="font-medium">{requiredText}</span>}
       {helpText && (
-        <div
-          className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
+        <span
+          className="ds-font-body block ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
           dangerouslySetInnerHTML={{ __html: helpText }}
         />
       )}
-    </div>
+    </>
   )
 }
