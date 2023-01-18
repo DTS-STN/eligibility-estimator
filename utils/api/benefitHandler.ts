@@ -407,7 +407,7 @@ export class BenefitHandler {
       )
 
       // clawback is only valid for OAS
-      // This adds the oasClawback text as requested on ticket 90284.
+      // This adds the oasClawback text as requested.
       let newMainText =
         clawbackValue > 0
           ? result.cardDetail.mainText +
