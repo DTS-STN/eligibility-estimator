@@ -21,20 +21,6 @@ extraEnv:
           key: example-secret-password         
           
 */}}
-deployment: 
-  labels: 
-    branch: "{{ requiredEnv "APP_LABEL_BRANCH" | replace " " "-" }}"
-    classification: "{{ requiredEnv "APP_LABEL_CLASSIFICATION" | replace " " "-" }}"
-    csd-id: "{{ requiredEnv "APP_LABEL_CSD_ID" | replace " " "-" }}"
-    department: "{{ requiredEnv "APP_LABEL_DEPARTMENT" | replace " " "-" }}"
-    directorate: "{{ requiredEnv "APP_LABEL_DIRECTORATE" | replace " " "-" }}"
-    division: "{{ requiredEnv "APP_LABEL_DIVISION" | replace " " "-" }}"
-    environment: "{{ requiredEnv "BRANCH" | replace " " "-" }}"
-    immutable: "{{ requiredEnv "APP_LABEL_IMMUTABLE" | replace " " "-" }}"
-    product-owner: "{{ requiredEnv "APP_LABEL_PRODUCT_OWNER" | replace " " "-" }}"
-    project-id: "{{ requiredEnv "APP_LABEL_PROJECT_ID" | replace " " "-" }}"
-    project-name: "{{ requiredEnv "PROJECT" | replace " " "-" }}"
-    section: "{{ requiredEnv "APP_LABEL_SECTION" | replace " " "-" }}"
 image:
   repository: {{ requiredEnv "CLOUD_ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}
   tag: "{{ env "DOCKER_TAG" | default "latest" }}"
