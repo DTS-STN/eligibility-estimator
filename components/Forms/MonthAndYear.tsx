@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { DatePicker, FormError } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
@@ -31,11 +32,19 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   error,
 }) => {
   const tsln = useTranslation<WebTranslations>()
+  const [dateInput, setDateInput] = useState(null)
 
-  const [dateInput, setDateInput]: [
-    IAgeDateInput,
-    (value: IAgeDateInput) => void
-  ] = useSessionStorage(`dateInput-${name}`, { month: 1, year: undefined })
+  useEffect(() => {
+    if (`dateInput-${name}` in sessionStorage) {
+      setDateInput(JSON.parse(sessionStorage.getItem(`dateInput-${name}`)))
+    } else {
+      setDateInput({ month: 1, year: undefined })
+    }
+  }, [])
+
+  useEffect(() => {
+    sessionStorage.setItem(`dateInput-${name}`, JSON.stringify(dateInput))
+  }, [dateInput])
 
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
@@ -66,17 +75,19 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         helpText={helpText}
         fieldId={`enter-${name}`}
       />
-      <DatePicker
-        id={`enter-${name}`}
-        month={dateInput.month}
-        year={dateInput.year}
-        hasDay={false}
-        onMonthChange={dateOnChange}
-        onYearChange={debounce(dateOnChange, 500)}
-        lang={tsln._language}
-        yearId={`${name}-birth-year`}
-        monthId={`${name}-birth-month`}
-      />
+      {dateInput && (
+        <DatePicker
+          id={`enter-${name}`}
+          month={dateInput.month}
+          year={dateInput.year}
+          hasDay={false}
+          onMonthChange={dateOnChange}
+          onYearChange={debounce(dateOnChange, 500)}
+          lang={tsln._language}
+          yearId={`${name}-birth-year`}
+          monthId={`${name}-birth-month`}
+        />
+      )}
 
       {error && (
         <div className="mt-2">
