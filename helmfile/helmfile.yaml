@@ -1,8 +1,8 @@
 environments:
   dev:
   staging:
-  perf:
-  pre-prod:
+  dyna:
+  main:
   prod:
 
 releases:
