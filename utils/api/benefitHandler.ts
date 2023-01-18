@@ -8,6 +8,7 @@ import {
   EntitlementResultType,
   Language,
   LegalStatus,
+  MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -36,6 +37,7 @@ import {
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
 import { SummaryHandler } from './summaryHandler'
+import { EntitlementFormula } from './benefits/entitlementFormula'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -212,9 +214,14 @@ export class BenefitHandler {
         if (this.input.client.income.partnerAvailable)
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
+
+      if (this.input.client.invSeparated) {
+      }
+
       if (
-        this.input.client.partnerBenefitStatus.helpMe &&
-        this.input.partner.age >= 60
+        (this.input.client.invSeparated && this.input.partner.age >= 60) ||
+        (this.input.client.partnerBenefitStatus.helpMe &&
+          this.input.partner.age >= 60)
       ) {
         requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
       }
@@ -358,13 +365,81 @@ export class BenefitHandler {
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
     if (this.input.client.invSeparated) {
-      //get OAS for applicant
+      // get OAS for applicant use table 1
+      const partnerBenefitStatus = new PartnerBenefitStatusHelper(
+        PartnerBenefitStatus.NONE
+      )
+      let maritalStatus = new MaritalStatusHelper(MaritalStatus.SINGLE)
+
+      // applicant gis using table1
+      const applicantGisResultT1 = new EntitlementFormula(
+        this.input.client.income.client,
+        maritalStatus,
+        partnerBenefitStatus,
+        this.input.client.age,
+        allResults.client.oas
+      ).getEntitlementAmount()
+
+      console.log(
+        'applicantGisResultTable1',
+        applicantGisResultT1,
+        allResults.client.oas
+      )
+
+      // partner gis using table1
+      const partnerGisResultT1 = new EntitlementFormula(
+        this.input.client.income.partner,
+        maritalStatus,
+        partnerBenefitStatus,
+        this.input.partner.age,
+        allResults.client.oas
+      ).getEntitlementAmount()
+
+      console.log('partnerGisResultTable1', partnerGisResultT1)
+
+      maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
+      // applicant gis using table2
+      const applicantGisResultT2 = new EntitlementFormula(
+        this.input.client.income.relevant,
+        maritalStatus,
+        new PartnerBenefitStatusHelper(
+          this.input.client.partnerBenefitStatus.value
+        ),
+        this.input.client.age,
+        allResults.client.oas
+      ).getEntitlementAmount()
+
+      console.log('applicantGisResultT2', applicantGisResultT2)
+
+      // partner gis using table2
+      const partnerGisResultT2 = new EntitlementFormula(
+        this.input.client.income.relevant,
+        maritalStatus,
+        new PartnerBenefitStatusHelper(
+          this.input.client.partnerBenefitStatus.value
+        ),
+        this.input.partner.age,
+        allResults.client.oas
+      ).getEntitlementAmount()
+
+      console.log('partnerGisResultT2', partnerGisResultT2, this.input.client)
+
+      // calculate Gis enhancement
+
       const clientOASEntitlement = clientOas.entitlement
       //get OAS for partner
       if (
-        this.input.client.partnerBenefitStatus === PartnerBenefitStatus.OAS_GIS
+        this.input.client.partnerBenefitStatus.value ===
+          PartnerBenefitStatus.OAS_GIS &&
+        clientOASEntitlement.result > 0
       ) {
-        console.log()
+        const clientGisEntitlement = clientGis.entitlement.result
+        const partnerGis = new GisBenefit(
+          this.input.partner,
+          this.translations,
+          allResults.client.oas
+        )
+        const partnerGisEntitlement = partnerGis.entitlement.result
       }
       const partnerOas = new OasBenefit(this.input.partner, this.translations)
       const partnerOASeligibility = partnerOas.eligibility
