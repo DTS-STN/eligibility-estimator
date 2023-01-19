@@ -19,24 +19,16 @@ export const YourAnswers: React.VFC<{
 
   /**
    * shouldDisplay
-   *    Returns  False  when Income Provided is Yes or OAS deferral is Delay
+   *    Returns  False  when IncomeAvailable is Yes or OAS deferral is Delay
    *    Returns  True   for any other scenario
    */
   function shouldDisplay(input: FieldInput): boolean {
-    let returnVal: boolean
-
-    input.key !== 'incomeAvailable' &&
-    input.key !== 'partnerIncomeAvailable' &&
-    input.key !== 'oasDefer'
-      ? (returnVal = true)
-      : (input.key === 'incomeAvailable' ||
-          input.key === 'partnerIncomeAvailable' ||
-          input.key === 'oasDefer') &&
-        input.value !== 'true'
-      ? (returnVal = true)
-      : (returnVal = false)
-
-    return returnVal
+    const dontShow: String[] = [
+      'incomeAvailable',
+      'partnerIncomeAvailable',
+      'oasDefer',
+    ]
+    return !dontShow.includes(input.key) && input.value !== 'true'
   }
 
   /**
