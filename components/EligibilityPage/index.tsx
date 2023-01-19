@@ -204,7 +204,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     let formError
     let alertError
 
-    if (field.value === undefined) {
+    if (field.value === undefined || !errorsAsAlerts.includes(field.key)) {
       formError = errorsVisible[field.key] && field.error
     } else {
       alertError =
