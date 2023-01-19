@@ -18,6 +18,20 @@ export const YourAnswers: React.VFC<{
   )
 
   /**
+   * shouldDisplay
+   *    Returns  False  when IncomeAvailable is Yes or OAS deferral is Delay
+   *    Returns  True   for any other scenario
+   */
+  function shouldDisplay(input: FieldInput): boolean {
+    const dontShow: String[] = [
+      'incomeAvailable',
+      'partnerIncomeAvailable',
+      'oasDefer',
+    ]
+    return !dontShow.includes(input.key) && input.value !== 'true'
+  }
+
+  /**
    * Generates the main content. If no answers are found, we display that.
    * Otherwise, the content will be built.
    */
@@ -27,7 +41,7 @@ export const YourAnswers: React.VFC<{
     return (
       <>
         {inputs.map((input) => {
-          return (
+          return shouldDisplay(input) ? (
             <div key={input.key} className="py-4 border-b-2 border-info-border">
               <div>{tsln.resultsQuestions[input.key]}</div>
               <div className="grid gap-0 grid-cols-3">
@@ -45,6 +59,8 @@ export const YourAnswers: React.VFC<{
                 </div>
               </div>
             </div>
+          ) : (
+            ''
           )
         })}
       </>
