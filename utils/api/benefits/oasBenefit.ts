@@ -270,10 +270,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         this.translations.detailWithHeading.oasDeferralAvailable
       )
 
-    // clawback
-    if (this.clawbackAmount)
-      cardCollapsedText.push(this.translations.detailWithHeading.oasClawback)
-
     return cardCollapsedText
   }
 }
