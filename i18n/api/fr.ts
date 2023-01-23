@@ -89,7 +89,7 @@ const fr: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
-    [FieldKey.MARITAL_STATUS]: 'État civil',
+    [FieldKey.MARITAL_STATUS]: 'État matrimonial',
     [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
     [FieldKey.PARTNER_INCOME]: 'Revenu net du conjoint',
