@@ -106,6 +106,7 @@ const fr: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',
+    [FieldKey.OAS_AGE]: 'Commencer à',
     [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',

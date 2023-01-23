@@ -217,8 +217,9 @@ object Build_Dynamic: BuildType({
         vcs {
             branchFilter = """
                     +:*
+                    -:develop
+                    -:staging
                     -:main
-                    -:gh-pages
                     """.trimIndent()
         }
     }
@@ -336,7 +337,7 @@ object Build_Staging: BuildType({
         vcs {
             branchFilter = """
                     +:develop
-                    -:refs/heads/develop
+                    +:refs/heads/develop
                     """.trimIndent()
         }
     }
