@@ -158,7 +158,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerYearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
     [ValidationErrors.maritalStatusEmpty]:
-      'Veuillez sélectionner un état civil.',
+      'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
