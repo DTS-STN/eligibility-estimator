@@ -190,14 +190,14 @@ export const EligibilityPage: React.VFC = ({}) => {
       keyStepMap[step].keys.includes(key)
     )
 
-    if (nextForStepClicked[step]) {
-      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
-    }
-
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
     setCardsValid(getStepValidity())
+
+    if (nextForStepClicked[step]) {
+      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    }
   }
 
   function getErrorForField(field) {
@@ -261,7 +261,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 label={field.config.label}
                 onChange={debounce(
                   (e) => handleOnChange(field, e.target.value),
-                  500
+                  100
                 )}
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
