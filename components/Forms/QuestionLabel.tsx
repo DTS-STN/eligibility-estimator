@@ -26,6 +26,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
         className="text-content font-bold inline mb-2.5 mr-2"
       >
         <span dangerouslySetInnerHTML={{ __html: label }} />
+        &nbsp;
         {requiredText && (
           <span className="font-medium ml-2">{requiredText}</span>
         )}
