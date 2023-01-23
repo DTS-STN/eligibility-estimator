@@ -48,7 +48,7 @@ const fr: Translations = {
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial actuel?',
+    [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial?',
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
