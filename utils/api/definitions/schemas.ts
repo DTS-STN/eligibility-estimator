@@ -85,34 +85,27 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
     .required()
-    // if they haven't lived in Canada long enough,
-    .when('livingCountry', {
-      is: Joi.string().valid('CAN'),
-      then: Joi.when('yearsInCanadaSince18', {
-        is: Joi.number().less(10),
-        then: Joi.boolean().when('.', {
-          is: Joi.boolean().valid(true),
-          then: Joi.forbidden().messages({
-            'any.unknown': ValidationErrors.socialCountryUnavailable10,
-          }),
-          otherwise: Joi.forbidden().messages({
-            'any.unknown': ValidationErrors.yearsInCanadaNotEnough10,
-          }),
-        }),
-      }),
-      otherwise: Joi.when('yearsInCanadaSince18', {
-        is: Joi.number().less(20),
-        then: Joi.boolean().when('.', {
-          is: Joi.boolean().valid(true),
-          then: Joi.forbidden().messages({
-            'any.unknown': ValidationErrors.socialCountryUnavailable20,
-          }),
-          otherwise: Joi.forbidden().messages({
-            'any.unknown': ValidationErrors.yearsInCanadaNotEnough20,
-          }),
-        }),
-      }),
-    }),
+    .messages({ 'any.required': ValidationErrors.optionNotSelected })
+    .custom((value, helpers) => {
+      const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
+      if (livingCountry === 'CAN') {
+        if (yearsInCanadaSince18 < 10) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable10
+              : ValidationErrors.yearsInCanadaNotEnough10,
+          })
+        }
+      } else {
+        if (yearsInCanadaSince18 < 20) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable20
+              : ValidationErrors.yearsInCanadaNotEnough20,
+          })
+        }
+      }
+    }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
     .required()
     .messages({ 'any.required': ValidationErrors.optionNotSelected })
