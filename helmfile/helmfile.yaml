@@ -6,7 +6,7 @@ environments:
   prod:
 
 releases:
-  - name: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}
+  - name: ee-{{ requiredEnv "BRANCH" | lower }}
     chart: ../helm/charts/{{ requiredEnv "PROJECT" }}
     values:
       - overrides/{{ requiredEnv "PROJECT" }}/{{ requiredEnv "PROJECT" }}.yaml.gotmpl
