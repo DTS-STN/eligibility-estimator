@@ -261,7 +261,7 @@ export const EligibilityPage: React.VFC = ({}) => {
                 label={field.config.label}
                 onChange={debounce(
                   (e) => handleOnChange(field, e.target.value),
-                  100
+                  500
                 )}
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
