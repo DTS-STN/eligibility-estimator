@@ -23,20 +23,15 @@ export const YourAnswers: React.VFC<{
    *    Returns  True   for any other scenario
    */
   function shouldDisplay(input: FieldInput): boolean {
-    let returnVal: boolean
     const exceptions: String[] = [
       'incomeAvailable',
       'partnerIncomeAvailable',
       'oasDefer',
     ]
-
-    !exceptions.includes(input.key)
-      ? (returnVal = true)
-      : exceptions.includes(input.key) && input.value !== 'true'
-      ? (returnVal = true)
-      : (returnVal = false)
-
-    return returnVal
+    return (
+      !exceptions.includes(input.key) ||
+      (exceptions.includes(input.key) && input.value === 'false')
+    )
   }
 
   /**
