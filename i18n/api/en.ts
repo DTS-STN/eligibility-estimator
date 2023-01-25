@@ -375,6 +375,10 @@ const en: Translations = {
       heading: 'Your payments have increased because you are over&nbsp;75',
       text: 'Since you are over the age of 75, your payments have increased by&nbsp;10%.',
     },
+    partnerEligible: {
+      heading: 'Your partner may be eligible',
+      text: 'Based on what you told us, your partner could receive {PARTNER_BENEFIT_AMOUNT} every month. They can use the estimator to get detailed results.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'More information needed',

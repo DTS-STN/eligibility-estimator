@@ -384,6 +384,10 @@ const fr: Translations = {
       heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
       text: 'Parce que vous avez plus de 75&nbsp;ans, vos paiements ont augmenté de 10&nbsp;%.',
     },
+    partnerEligible: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: "Selon vos renseignements, votre conjoint pourrait recevoir {PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',

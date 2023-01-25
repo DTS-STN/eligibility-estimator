@@ -297,9 +297,14 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      const partnerOas = new OasBenefit(this.input.partner, this.translations)
+      const partnerOas = new OasBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
       allResults.partner.oas.eligibility = partnerOas.eligibility
       allResults.partner.oas.entitlement = partnerOas.entitlement
+      allResults.partner.oas.cardDetail = partnerOas.cardDetail
 
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =
@@ -325,6 +330,8 @@ export class BenefitHandler {
         allResults.partner.oas
       )
       allResults.partner.gis.eligibility = partnerGis.eligibility
+      allResults.partner.gis.entitlement = partnerGis.entitlement
+      allResults.partner.gis.cardDetail = partnerGis.cardDetail
 
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's ALW
       this.input.client.partnerBenefitStatus.gisResultEligibility =
@@ -342,6 +349,8 @@ export class BenefitHandler {
     if (this.input.client.partnerBenefitStatus.helpMe) {
       const partnerAlw = new AlwBenefit(this.input.partner, this.translations)
       allResults.partner.alw.eligibility = partnerAlw.eligibility
+      allResults.partner.alw.entitlement = partnerAlw.entitlement
+      allResults.partner.alw.cardDetail = partnerAlw.cardDetail
 
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.alwResultEligibility =
@@ -371,6 +380,7 @@ export class BenefitHandler {
     allResults.client.afs.cardDetail = clientAfs.cardDetail
 
     // All done!
+    console.log('allResults', allResults)
     return allResults
   }
 
@@ -379,18 +389,19 @@ export class BenefitHandler {
    * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
-    let clawbackValue: number
-
+    console.log('INSIDE TRANSLATE')
+    console.log('this.benefitResults', this.benefitResults)
     for (const individualBenefits in this.benefitResults) {
+      let clawbackValue: number
       for (const key in this.benefitResults[individualBenefits]) {
         const result: BenefitResult =
           this.benefitResults[individualBenefits][key]
-        if (!result || !result?.eligibility) return
+        if (!result || !result?.eligibility) continue
 
         // clawback is only valid for OAS
         if (key === 'oas') {
           clawbackValue =
-            this.benefitResults[individualBenefits][key].entitlement?.clawback
+            this.benefitResults[individualBenefits][key].entitlement.clawback
         }
 
         // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.

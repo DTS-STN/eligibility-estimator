@@ -80,6 +80,11 @@ export const textReplacementRules: TextReplacementRules = {
     ),
   LINK_RECOVERY_TAX: (handler) =>
     generateLink(handler.translations.links.oasRecoveryTaxInline),
+  PARTNER_BENEFIT_AMOUNT: (handler, benefitResult) =>
+    `<strong>${numberToStringCurrency(
+      benefitResult.entitlement.result,
+      handler.translations._language
+    )}</strong>`,
 }
 
 export function generateLink(link: Link, opensNewWindow?: string): string {
