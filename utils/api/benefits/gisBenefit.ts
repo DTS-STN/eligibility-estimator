@@ -153,16 +153,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // marital status is invSeparated? entitlement unavailable.
     if (this.input.maritalStatus.invSeparated) {
-      //get the OAS for applicant and partner
-
-      // if both OAS are greater than 0
-
-      // calculate applicant
-
-      // otherwise
-
-      //
-
       this.eligibility.detail =
         this.translations.detail.eligibleEntitlementUnavailable
       return {

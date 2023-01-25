@@ -130,9 +130,9 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
       // case PartnerBenefitStatus.OAS:
       //   this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
       //   break
-      // case PartnerBenefitStatus.ALW:
-      //   this.alwEligibility = EntitlementResultType.FULL
-      //   break
+      case PartnerBenefitStatus.ALW:
+        this.alwEligibility = EntitlementResultType.FULL
+        break
       case PartnerBenefitStatus.OAS_GIS:
         this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         this.gisEligibility = EntitlementResultType.FULL
