@@ -44,7 +44,7 @@ export class BenefitHandler {
   private _missingFields: FieldKey[]
   private _requiredFields: FieldKey[]
   private _fieldData: FieldConfig[]
-  private _benefitResults: BenefitResultsObject
+  private _benefitResults: BenefitResultsObjectWithPartner
   private _summary: SummaryObject
 
   constructor(readonly rawInput: Partial<RequestInput>) {}
@@ -86,7 +86,7 @@ export class BenefitHandler {
     return this._fieldData
   }
 
-  get benefitResults(): BenefitResultsObject {
+  get benefitResults(): BenefitResultsObjectWithPartner {
     if (this._benefitResults === undefined) {
       this._benefitResults = this.getBenefitResultObject()
       this.translateResults()
@@ -98,7 +98,7 @@ export class BenefitHandler {
     if (this._summary === undefined) {
       this._summary = SummaryHandler.buildSummaryObject(
         this.input,
-        this.benefitResults,
+        this.benefitResults.client,
         this.missingFields,
         this.translations
       )
@@ -261,9 +261,9 @@ export class BenefitHandler {
    * Returns the BenefitResultObject based on the user's input.
    * If any fields are missing, return no results.
    */
-  private getBenefitResultObject(): BenefitResultsObject {
+  private getBenefitResultObject(): BenefitResultsObjectWithPartner {
     if (this.missingFields.length) {
-      return {}
+      return { client: {}, partner: {} }
     }
 
     function getBlankObject(benefitKey: BenefitKey) {
@@ -371,7 +371,7 @@ export class BenefitHandler {
     allResults.client.afs.cardDetail = clientAfs.cardDetail
 
     // All done!
-    return allResults.client
+    return allResults
   }
 
   /**
@@ -380,10 +380,11 @@ export class BenefitHandler {
    */
   private translateResults(): void {
     let clawbackValue: number
-
+    console.log('this.benefitResults', this.benefitResults)
+    if (Object.keys(this.benefitResults.client).length === 0) return
     for (const key in this.benefitResults) {
       const result: BenefitResult = this.benefitResults[key]
-
+      console.log('result', result)
       // clawback is only valid for OAS
       if (key === 'oas') {
         clawbackValue = this.benefitResults[key].entitlement.clawback
