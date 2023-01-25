@@ -171,7 +171,7 @@ describe('sanity checks', () => {
   it('accepts valid Legal Status', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
     })
     expect(res.status).toEqual(400)
 
@@ -200,7 +200,7 @@ describe('sanity checks', () => {
   })
   it('fails when legal status is other', async () => {
     let res = await mockGetRequestError({
-      legalStatus: LegalStatus.OTHER,
+      legalStatus: LegalStatus.NO,
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)

@@ -188,29 +188,14 @@ const fr: Translations = {
     ],
     [FieldKey.LEGAL_STATUS]: [
       {
-        key: LegalStatus.CANADIAN_CITIZEN,
-        text: 'Citoyen canadien',
-        shortText: 'Citoyen canadien',
+        key: LegalStatus.YES,
+        text: 'Yes',
+        shortText: 'Yes',
       },
       {
-        key: LegalStatus.INDIAN_STATUS,
-        text: "Statut d'Indien",
-        shortText: "Statut d'Indien",
-      },
-      {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Résident permanent ou immigrant reçu',
-        shortText: 'Résident permanent ou immigrant reçu',
-      },
-      {
-        key: LegalStatus.REFUGEE,
-        text: 'Réfugié',
-        shortText: 'Réfugié',
-      },
-      {
-        key: LegalStatus.OTHER,
-        text: 'Autre (par exemple, résident temporaire, étudiant ou travailleur temporaire)',
-        shortText: 'Autre',
+        key: LegalStatus.NO,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [

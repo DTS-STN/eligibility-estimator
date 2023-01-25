@@ -172,7 +172,7 @@ export const canadaWholeLife = {
 
 export const canadian = {
   livingCountry: LivingCountry.CANADA,
-  legalStatus: LegalStatus.CANADIAN_CITIZEN,
+  legalStatus: LegalStatus.YES,
 }
 
 export const getErrorDetails = (res) => {

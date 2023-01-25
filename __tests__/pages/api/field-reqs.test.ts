@@ -29,6 +29,7 @@ describe('field requirement analysis', () => {
       livedOutsideCanada: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
+      invSeparated: undefined,
       ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
@@ -68,7 +69,7 @@ describe('field requirement analysis', () => {
       partnerIncomeAvailable: true,
       partnerIncome: 10000,
       partnerAge: 65,
-      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 5,
@@ -111,6 +112,7 @@ describe('field requirements analysis: conditional fields', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
@@ -127,6 +129,7 @@ describe('field requirements analysis: conditional fields', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
@@ -140,10 +143,11 @@ describe('field requirements analysis: conditional fields', () => {
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
@@ -160,6 +164,7 @@ describe('field requirements analysis: conditional fields', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
+
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.INV_SEPARATED,
