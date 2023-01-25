@@ -375,58 +375,62 @@ export class BenefitHandler {
   }
 
   /**
-   * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
+   * Takes a BenefitResultsObjectWithPartner, and translates the detail property based on the provided translations.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
     let clawbackValue: number
-    console.log('this.benefitResults', this.benefitResults)
-    if (Object.keys(this.benefitResults.client).length === 0) return
-    for (const key in this.benefitResults) {
-      const result: BenefitResult = this.benefitResults[key]
-      console.log('result', result)
-      // clawback is only valid for OAS
-      if (key === 'oas') {
-        clawbackValue = this.benefitResults[key].entitlement.clawback
+
+    for (const individualBenefits in this.benefitResults) {
+      for (const key in this.benefitResults[individualBenefits]) {
+        const result: BenefitResult =
+          this.benefitResults[individualBenefits][key]
+        if (!result || !result?.eligibility) return
+
+        // clawback is only valid for OAS
+        if (key === 'oas') {
+          clawbackValue =
+            this.benefitResults[individualBenefits][key].entitlement?.clawback
+        }
+
+        // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
+        // this happens when high income results in no entitlement.
+        // this If block was copied to _base and probably not required anymore.
+        if (
+          result.eligibility.result === ResultKey.ELIGIBLE &&
+          result.entitlement.type === EntitlementResultType.NONE
+        ) {
+          result.eligibility.result = ResultKey.INELIGIBLE
+          result.eligibility.reason = ResultReason.INCOME
+          result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+        }
+
+        // process detail result
+        result.eligibility.detail = BenefitHandler.capitalizeEachLine(
+          this.replaceTextVariables(result.eligibility.detail, result)
+        )
+
+        // clawback is only valid for OAS
+        // This adds the oasClawback text as requested.
+        let newMainText =
+          clawbackValue > 0
+            ? result.cardDetail.mainText +
+              `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
+            : result.cardDetail.mainText
+
+        // process card main text
+        result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
+          this.replaceTextVariables(newMainText, result)
+        )
+
+        // process card collapsed content
+        result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
+          (collapsedText) => ({
+            heading: this.replaceTextVariables(collapsedText.heading, result),
+            text: this.replaceTextVariables(collapsedText.text, result),
+          })
+        )
       }
-
-      // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
-      // this happens when high income results in no entitlement.
-      // this If block was copied to _base and probably not required anymore.
-      if (
-        result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.type === EntitlementResultType.NONE
-      ) {
-        result.eligibility.result = ResultKey.INELIGIBLE
-        result.eligibility.reason = ResultReason.INCOME
-        result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
-      }
-
-      // process detail result
-      result.eligibility.detail = BenefitHandler.capitalizeEachLine(
-        this.replaceTextVariables(result.eligibility.detail, result)
-      )
-
-      // clawback is only valid for OAS
-      // This adds the oasClawback text as requested.
-      let newMainText =
-        clawbackValue > 0
-          ? result.cardDetail.mainText +
-            `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
-          : result.cardDetail.mainText
-
-      // process card main text
-      result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
-        this.replaceTextVariables(newMainText, result)
-      )
-
-      // process card collapsed content
-      result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
-        (collapsedText) => ({
-          heading: this.replaceTextVariables(collapsedText.heading, result),
-          text: this.replaceTextVariables(collapsedText.text, result),
-        })
-      )
     }
   }
 

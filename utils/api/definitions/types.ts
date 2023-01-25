@@ -128,8 +128,8 @@ export interface BenefitResultsObject {
 }
 
 export interface BenefitResultsObjectWithPartner {
-  client: BenefitResultsObject
-  partner: BenefitResultsObject
+  client?: BenefitResultsObject
+  partner?: BenefitResultsObject
 }
 
 export interface ResponseSuccess {
