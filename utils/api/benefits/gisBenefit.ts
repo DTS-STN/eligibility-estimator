@@ -202,20 +202,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     return { result: formulaResult, type, autoEnrollment }
   }
 
-  // protected getCardCollapsedText(): CardCollapsedText[] {
-  //   let cardCollapsedText = super.getCardCollapsedText()
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
 
-  //   if (
-  //     this.eligibility.result !== ResultKey.ELIGIBLE &&
-  //     this.eligibility.result !== ResultKey.INCOME_DEPENDENT
-  //   )
-  //     return cardCollapsedText
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return cardCollapsedText
 
-  //   if (this.partner) {
-  //     cardCollapsedText.push(
-  //       this.translations.detailWithHeading.partnerEligible
-  //     )
-  //     return cardCollapsedText
-  //   }
-  // }
+    if (this.partner) {
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.partnerEligible
+      )
+    }
+
+    return cardCollapsedText
+  }
 }

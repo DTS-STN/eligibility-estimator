@@ -348,7 +348,11 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's ALW eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      const partnerAlw = new AlwBenefit(this.input.partner, this.translations)
+      const partnerAlw = new AlwBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
       allResults.partner.alw.eligibility = partnerAlw.eligibility
       allResults.partner.alw.entitlement = partnerAlw.entitlement
       allResults.partner.alw.cardDetail = partnerAlw.cardDetail
