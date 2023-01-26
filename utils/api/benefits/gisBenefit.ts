@@ -11,6 +11,7 @@ import {
   EntitlementResultGeneric,
   EntitlementResultOas,
   ProcessedInput,
+  CardCollapsedText,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -196,5 +197,23 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     //     this.translations.detail.eligibleEntitlementUnavailable
 
     return { result: formulaResult, type, autoEnrollment }
+  }
+
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
+
+    // if not eligible, don't bother with any of the below
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return cardCollapsedText
+
+    if (this.input.invSeparated) {
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.calculatedBasedOnIndividualIncome
+      )
+    }
+    return cardCollapsedText
   }
 }

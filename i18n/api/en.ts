@@ -372,6 +372,10 @@ const en: Translations = {
       heading: 'Your payments have increased because you are over&nbsp;75',
       text: 'Since you are over the age of 75, your payments have increased by&nbsp;10%.',
     },
+    calculatedBasedOnIndividualIncome: {
+      heading: 'Your monthly amount was calculated based on individual income',
+      text: `You're eligible for a higher benefit amount since you and your partner are living apart for reasons beyond your control.`,
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'More information needed',

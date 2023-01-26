@@ -381,6 +381,11 @@ const fr: Translations = {
       heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
       text: 'Parce que vous avez plus de 75&nbsp;ans, vos paiements ont augmenté de 10&nbsp;%.',
     },
+    calculatedBasedOnIndividualIncome: {
+      heading:
+        'Votre paiement mensuel a été calculé à partir de votre revenu individuel',
+      text: 'Vous êtes admissible à un montant plus élevé parce que vous ne vivez pas avec votre partenaire pour des raisons hors de votre contrôle.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',

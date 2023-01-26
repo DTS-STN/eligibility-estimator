@@ -83,6 +83,7 @@ export interface Translations {
     oasClawback: { heading: string; text: string }
     oasIncreaseAt75: { heading: string; text: string }
     oasIncreaseAt75Applied: { heading: string; text: string }
+    calculatedBasedOnIndividualIncome: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
