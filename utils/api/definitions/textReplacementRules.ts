@@ -23,25 +23,25 @@ export const textReplacementRules: TextReplacementRules = {
     )}</strong>`,
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
-      handler.benefitResults.oas?.entitlement.resultAt75 ?? 0,
+      handler.benefitResults.client.oas?.entitlement.resultAt75 ?? 0,
       handler.translations._language
     )}</strong>`,
   OAS_DEFERRAL_INCREASE: (handler) =>
     `<strong>${numberToStringCurrency(
-      handler.benefitResults.oas?.entitlement.deferral.increase ?? 0,
+      handler.benefitResults.client.oas?.entitlement.deferral.increase ?? 0,
       handler.translations._language
     )}</strong>`,
   OAS_DEFERRAL_YEARS: (handler) => {
-    const years = handler.benefitResults.oas?.entitlement.deferral.years
+    const years = handler.benefitResults.client.oas?.entitlement.deferral.years
     return `<strong>${years ?? 0} ${handler.translations.year}${
       years !== 1 ? 's' : ''
     }</strong>`
   },
   OAS_DEFERRAL_AGE: (handler) =>
-    String(handler.benefitResults.oas.entitlement.deferral.age),
+    String(handler.benefitResults.client.oas.entitlement.deferral.age),
   OAS_CLAWBACK: (handler) =>
     `<strong>${numberToStringCurrency(
-      handler.benefitResults.oas?.entitlement.clawback ?? 0,
+      handler.benefitResults.client.oas?.entitlement.clawback ?? 0,
       handler.translations._language
     )}</strong>`,
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
