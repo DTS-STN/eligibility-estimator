@@ -11,18 +11,22 @@ import {
   EntitlementResultGeneric,
   EntitlementResultOas,
   ProcessedInput,
+  CardCollapsedText,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
 export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
+  partner: Boolean
   constructor(
     input: ProcessedInput,
     translations: Translations,
-    private oasResult: BenefitResult<EntitlementResultOas>
+    private oasResult: BenefitResult<EntitlementResultOas>,
+    partner?: Boolean
   ) {
     super(input, translations, BenefitKey.gis)
+    this.partner = partner
   }
 
   protected getEligibility(): EligibilityResult {
@@ -197,4 +201,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     return { result: formulaResult, type, autoEnrollment }
   }
+
+  // protected getCardCollapsedText(): CardCollapsedText[] {
+  //   let cardCollapsedText = super.getCardCollapsedText()
+
+  //   if (
+  //     this.eligibility.result !== ResultKey.ELIGIBLE &&
+  //     this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+  //   )
+  //     return cardCollapsedText
+
+  //   if (this.partner) {
+  //     cardCollapsedText.push(
+  //       this.translations.detailWithHeading.partnerEligible
+  //     )
+  //     return cardCollapsedText
+  //   }
+  // }
 }

@@ -327,7 +327,8 @@ export class BenefitHandler {
       const partnerGis = new GisBenefit(
         this.input.partner,
         this.translations,
-        allResults.partner.oas
+        allResults.partner.oas,
+        true
       )
       allResults.partner.gis.eligibility = partnerGis.eligibility
       allResults.partner.gis.entitlement = partnerGis.entitlement
