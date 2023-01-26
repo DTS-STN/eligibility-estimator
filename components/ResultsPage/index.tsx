@@ -57,15 +57,18 @@ const getEligibility = (
 const ResultsPage: React.VFC<{
   inputs: FieldInput[]
   results: BenefitResultsObject
+  partnerResults: BenefitResultsObject
   summary: SummaryObject
-}> = ({ inputs, results, summary }) => {
+}> = ({ inputs, results, partnerResults, summary }) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
-
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
+  )
+  const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
+    (value) => partnerResults[value]
   )
 
   let listLinks: {
@@ -139,7 +142,10 @@ const ResultsPage: React.VFC<{
         <div className="col-span-2 row-span-1">
           <hr className="my-12 border border-[#BBBFC5]" />
 
-          <BenefitCards results={resultsArray} />
+          <BenefitCards
+            results={resultsArray}
+            partnerResults={partnerResultsArray}
+          />
 
           <Button
             text={tsln.modifyAnswers}

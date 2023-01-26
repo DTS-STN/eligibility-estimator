@@ -8,7 +8,8 @@ import { BenefitCard } from './BenefitCard'
 
 export const BenefitCards: React.VFC<{
   results: BenefitResult[]
-}> = ({ results }) => {
+  partnerResults: BenefitResult[]
+}> = ({ results, partnerResults }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const titleArray = [
@@ -26,6 +27,13 @@ export const BenefitCards: React.VFC<{
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
+
+  const partnerResultsEligible = partnerResults.filter(
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+  )
+
   const resultsNotEligible = results.filter(
     (value) => value.eligibility?.result === ResultKey.INELIGIBLE
   )
@@ -40,7 +48,18 @@ export const BenefitCards: React.VFC<{
 
   function generateCard(result: BenefitResult) {
     let titleText: string = apiTsln.benefit[result.benefitKey]
-    const collapsedDetails = result.cardDetail.collapsedText
+    let collapsedDetails = result.cardDetail.collapsedText
+    const eligiblePartnerResult = partnerResultsEligible.find(
+      (benefit) => benefit.benefitKey === result.benefitKey
+    )
+
+    if (eligiblePartnerResult !== undefined) {
+      collapsedDetails = [
+        ...collapsedDetails,
+        eligiblePartnerResult.cardDetail.collapsedText[0],
+      ]
+    }
+
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT

@@ -385,7 +385,6 @@ export class BenefitHandler {
     allResults.client.afs.cardDetail = clientAfs.cardDetail
 
     // All done!
-    console.log('allResults', allResults)
     return allResults
   }
 
@@ -394,8 +393,6 @@ export class BenefitHandler {
    * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
-    console.log('INSIDE TRANSLATE')
-    console.log('this.benefitResults', this.benefitResults)
     for (const individualBenefits in this.benefitResults) {
       let clawbackValue: number
       for (const key in this.benefitResults[individualBenefits]) {

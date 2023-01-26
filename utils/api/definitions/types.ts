@@ -134,6 +134,7 @@ export interface BenefitResultsObjectWithPartner {
 
 export interface ResponseSuccess {
   results: BenefitResultsObject
+  partnerResults: BenefitResultsObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>

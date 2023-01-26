@@ -25,7 +25,6 @@ export default class MainHandler {
       resultObj.detail = error
     }
 
-    console.log('resultObj', resultObj)
     this.results = resultObj
   }
 }

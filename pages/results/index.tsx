@@ -68,6 +68,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           <ResultsPage
             inputs={inputHelper.asArray}
             results={response.results}
+            partnerResults={response.partnerResults}
             summary={response.summary}
           />
         ) : (
