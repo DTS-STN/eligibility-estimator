@@ -112,15 +112,7 @@ const ResultsPage: React.VFC<{
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12 ">
         <div className="col-span-2 row-span-1">
-          <Message
-            id="resultSummaryBox"
-            type="info"
-            alert_icon_id="resultSummaryBoxIcon"
-            alert_icon_alt_text="Info"
-            message_heading={summary.title}
-            message_body={summary.details}
-            asHtml={true}
-          />
+          <div> {tsln.resultsPage.general} </div>
 
           <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
 
