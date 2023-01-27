@@ -110,6 +110,8 @@ const en: WebTranslations = {
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
+    general:
+      'The following is only an estimate of your eligibility and monthly payment. Changes in your circumstances may impact your results.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
