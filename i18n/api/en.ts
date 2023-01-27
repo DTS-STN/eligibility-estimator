@@ -394,6 +394,8 @@ const en: Translations = {
       'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
     [SummaryState.AVAILABLE_DEPENDING]:
       'Depending on your income, you may be eligible for old age benefits. See the details below for more information.',
+    [SummaryState.GENERAL]:
+      'The following is only an estimate of your eligibility and monthly payment. Changes in your circumstances may impact your results.',
   },
   links,
   incomeSingle: 'your income',

@@ -85,6 +85,7 @@ export enum SummaryState {
   UNAVAILABLE = 'UNAVAILABLE', // yellow, can not provide any results, contact Service Canada (conditionally eligible)
   AVAILABLE_INELIGIBLE = 'AVAILABLE_INELIGIBLE', // red, display results (ineligible)
   AVAILABLE_DEPENDING = 'AVAILABLE_DEPENDING', // eligible, depending on income
+  GENERAL = 'GENERAL', // This is a new general message, leaving previous code intact just in case we go back
 }
 
 export enum LinkIcon {

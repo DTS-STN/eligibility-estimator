@@ -406,6 +406,8 @@ const fr: Translations = {
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
     [SummaryState.AVAILABLE_DEPENDING]:
       "En fonction de vos revenus, vous pouvez être éligible aux prestations de vieillesse. Voir les détails ci-dessous pour plus d'informations.",
+    [SummaryState.GENERAL]:
+      "Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.",
   },
   links,
   incomeSingle: 'votre revenu',

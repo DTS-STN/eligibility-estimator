@@ -70,17 +70,19 @@ export class SummaryHandler {
       return this.translations.summaryTitle[SummaryState.AVAILABLE_DEPENDING]
   }
 
+  // This just return a general message, Leaving rest of the code as is in case we need it back, which is ny feeling
   private getDetails() {
-    if (this.state === SummaryState.MORE_INFO)
-      return this.translations.summaryDetails[SummaryState.MORE_INFO]
-    else if (this.state === SummaryState.UNAVAILABLE)
-      return this.translations.summaryDetails[SummaryState.UNAVAILABLE]
-    else if (this.state === SummaryState.AVAILABLE_ELIGIBLE)
-      return this.translations.summaryDetails[SummaryState.AVAILABLE_ELIGIBLE]
-    else if (this.state === SummaryState.AVAILABLE_INELIGIBLE)
-      return this.translations.summaryDetails[SummaryState.AVAILABLE_INELIGIBLE]
-    else if (this.state === SummaryState.AVAILABLE_DEPENDING)
-      return this.translations.summaryDetails[SummaryState.AVAILABLE_DEPENDING]
+    // if (this.state === SummaryState.MORE_INFO)
+    //   return this.translations.summaryDetails[SummaryState.MORE_INFO]
+    // else if (this.state === SummaryState.UNAVAILABLE)
+    //   return this.translations.summaryDetails[SummaryState.UNAVAILABLE]
+    // else if (this.state === SummaryState.AVAILABLE_ELIGIBLE)
+    //   return this.translations.summaryDetails[SummaryState.AVAILABLE_ELIGIBLE]
+    // else if (this.state === SummaryState.AVAILABLE_INELIGIBLE)
+    //   return this.translations.summaryDetails[SummaryState.AVAILABLE_INELIGIBLE]
+    // else if (this.state === SummaryState.AVAILABLE_DEPENDING)
+    //   return this.translations.summaryDetails[SummaryState.AVAILABLE_DEPENDING]
+    return this.translations.summaryDetails[SummaryState.GENERAL]
   }
 
   private getLinks(): Link[] {
