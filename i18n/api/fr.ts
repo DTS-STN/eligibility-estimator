@@ -81,7 +81,7 @@ const fr: Translations = {
     [FieldKey.AGE]: 'Âge',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
     [FieldKey.OAS_AGE]: 'Âge de report de la SV',
-    [FieldKey.INCOME_AVAILABLE]: 'Revenu fourni',
+    [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
     [FieldKey.INCOME]: 'Revenu net',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
