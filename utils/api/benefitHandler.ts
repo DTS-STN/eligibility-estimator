@@ -164,6 +164,7 @@ export class BenefitHandler {
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
       ),
+      invSeparated: this.rawInput.invSeparated,
     }
 
     return {
