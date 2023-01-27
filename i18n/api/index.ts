@@ -76,6 +76,7 @@ export interface Translations {
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
+    oasClawback: string
   }
   detailWithHeading: {
     oasDeferralApplied: { heading: string; text: string }

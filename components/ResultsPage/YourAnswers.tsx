@@ -18,6 +18,28 @@ export const YourAnswers: React.VFC<{
   )
 
   /**
+   * shouldDisplay
+   *    Returns  False  when IncomeAvailable is Yes or OAS deferral is Delay
+   *    Returns  True   for any other scenario
+   */
+  function shouldDisplay(input: FieldInput): boolean {
+    let returnVal: boolean
+    const exceptions: String[] = [
+      'incomeAvailable',
+      'partnerIncomeAvailable',
+      'oasDefer',
+    ]
+
+    !exceptions.includes(input.key)
+      ? (returnVal = true)
+      : exceptions.includes(input.key) && input.value !== 'true'
+      ? (returnVal = true)
+      : (returnVal = false)
+
+    return returnVal
+  }
+
+  /**
    * Generates the main content. If no answers are found, we display that.
    * Otherwise, the content will be built.
    */
@@ -27,7 +49,7 @@ export const YourAnswers: React.VFC<{
     return (
       <>
         {inputs.map((input) => {
-          return (
+          return shouldDisplay(input) ? (
             <div key={input.key} className="py-4 border-b-2 border-info-border">
               <div>{tsln.resultsQuestions[input.key]}</div>
               <div className="grid gap-0 grid-cols-3">
@@ -45,6 +67,8 @@ export const YourAnswers: React.VFC<{
                 </div>
               </div>
             </div>
+          ) : (
+            ''
           )
         })}
       </>
@@ -62,6 +86,9 @@ export const YourAnswers: React.VFC<{
     const fieldType: FieldType = fieldData.type
     switch (fieldType) {
       case FieldType.NUMBER:
+        return input.key === 'oasAge'
+          ? `${tsln.resultsEditAriaLabels[input.key]} ${input.value}`
+          : input.value
       case FieldType.STRING:
         return input.value // no processing needed, display as-is
       case FieldType.CURRENCY:

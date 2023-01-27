@@ -70,7 +70,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         className={`form-control text-content border-form-border ${
           error ? ' !border-danger' : ''
         }`}
-        min={0}
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}

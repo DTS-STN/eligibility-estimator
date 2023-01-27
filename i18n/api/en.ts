@@ -78,7 +78,7 @@ const en: Translations = {
   questionShortText: {
     [FieldKey.AGE]: 'Age',
     [FieldKey.OAS_DEFER]: 'OAS pension deferral',
-    [FieldKey.OAS_AGE]: 'OAS deferral age',
+    [FieldKey.OAS_AGE]: 'OAS pension deferral',
     [FieldKey.INCOME_AVAILABLE]: 'Income provided',
     [FieldKey.INCOME]: 'Net income',
     [FieldKey.LEGAL_STATUS]: 'Legal status',
@@ -103,6 +103,7 @@ const en: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',
+    [FieldKey.OAS_AGE]: 'Start at',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
@@ -135,7 +136,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more accurate results.",
     [FieldKey.OAS_DEFER]:
-      '<div>If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.</div>',
+      'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate.',
@@ -278,7 +279,7 @@ const en: Translations = {
       {
         key: PartnerBenefitStatus.NONE,
         text: 'No, my partner does not receive the Old Age Security pension',
-        shortText: 'No benefits',
+        shortText: 'No',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
@@ -350,6 +351,8 @@ const en: Translations = {
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
       'You should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+    oasClawback:
+      'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
   },
   detailWithHeading: {
     oasDeferralApplied: {

@@ -48,7 +48,7 @@ const fr: Translations = {
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
-    [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial actuel?',
+    [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial?',
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
@@ -89,7 +89,7 @@ const fr: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
-    [FieldKey.MARITAL_STATUS]: 'État civil',
+    [FieldKey.MARITAL_STATUS]: 'État matrimonial',
     [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
     [FieldKey.PARTNER_INCOME]: 'Revenu net du conjoint',
@@ -106,6 +106,7 @@ const fr: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',
+    [FieldKey.OAS_AGE]: 'Commencer à',
     [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',
@@ -284,7 +285,7 @@ const fr: Translations = {
       {
         key: PartnerBenefitStatus.NONE,
         text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
-        shortText: 'No prestations',
+        shortText: 'No',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
@@ -359,6 +360,8 @@ const fr: Translations = {
       "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
     expectToReceive:
       'Vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+    oasClawback:
+      'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
   },
   detailWithHeading: {
     oasDeferralApplied: {

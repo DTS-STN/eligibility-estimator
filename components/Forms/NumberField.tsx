@@ -57,7 +57,6 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
           error ? ' !border-danger' : ''
         }`}
         data-testid="number-input"
-        min={0}
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}

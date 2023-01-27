@@ -1,13 +1,12 @@
 environments:
   dev:
-  int:
+  staging:
+  dyna:
   main:
-  sprint:
-  prod-blue:
-  prod-green:
+  prod:
 
 releases:
-  - name: {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" | lower }}
+  - name: ee-{{ requiredEnv "BRANCH" | lower }}
     chart: ../helm/charts/{{ requiredEnv "PROJECT" }}
     values:
       - overrides/{{ requiredEnv "PROJECT" }}/{{ requiredEnv "PROJECT" }}.yaml.gotmpl
@@ -15,5 +14,5 @@ releases:
         category: dts
         app: {{ requiredEnv "PROJECT" }}
         tier: frontend
-    namespace: {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" | lower }}
+    namespace: {{ requiredEnv "PROJECT" }}
     installed: true
