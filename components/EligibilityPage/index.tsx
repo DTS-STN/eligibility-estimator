@@ -1,5 +1,4 @@
-import { Message } from '@dts-stn/service-canada-design-system'
-import { AccordionForm } from 'pre-release-ds'
+import { Message, AccordionForm } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -190,14 +189,14 @@ export const EligibilityPage: React.VFC = ({}) => {
       keyStepMap[step].keys.includes(key)
     )
 
-    if (nextForStepClicked[step]) {
-      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
-    }
-
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
     setCardsValid(getStepValidity())
+
+    if (nextForStepClicked[step]) {
+      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    }
   }
 
   function getErrorForField(field) {

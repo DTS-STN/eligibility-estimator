@@ -86,6 +86,9 @@ export const YourAnswers: React.VFC<{
     const fieldType: FieldType = fieldData.type
     switch (fieldType) {
       case FieldType.NUMBER:
+        return input.key === 'oasAge'
+          ? `${tsln.resultsEditAriaLabels[input.key]} ${input.value}`
+          : input.value
       case FieldType.STRING:
         return input.value // no processing needed, display as-is
       case FieldType.CURRENCY:

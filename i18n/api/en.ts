@@ -78,7 +78,7 @@ const en: Translations = {
   questionShortText: {
     [FieldKey.AGE]: 'Age',
     [FieldKey.OAS_DEFER]: 'OAS pension deferral',
-    [FieldKey.OAS_AGE]: 'OAS deferral age',
+    [FieldKey.OAS_AGE]: 'OAS pension deferral',
     [FieldKey.INCOME_AVAILABLE]: 'Net income',
     [FieldKey.INCOME]: 'Net income',
     [FieldKey.LEGAL_STATUS]: 'Legal status',
@@ -103,6 +103,7 @@ const en: Translations = {
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',
+    [FieldKey.OAS_AGE]: 'Start at',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
