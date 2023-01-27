@@ -52,7 +52,7 @@ const fr: Translations = {
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
-    [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
+    [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
       "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:

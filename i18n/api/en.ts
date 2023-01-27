@@ -50,7 +50,7 @@ const en: Translations = {
     [FieldKey.INV_SEPARATED]:
       'Are you and your partner living apart for reasons beyond your control?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
-    [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
+    [FieldKey.LEGAL_STATUS]: 'Do you have legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
       'Since the age of 18, have you lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
