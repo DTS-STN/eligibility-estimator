@@ -220,7 +220,7 @@ export class BenefitHandler {
       }
       if (
         this.input.partner.legalStatus.value &&
-        this.input.partner.legalStatus.value !== LegalStatus.OTHER
+        this.input.partner.legalStatus.value !== LegalStatus.NO
       ) {
         requiredFields.push(
           FieldKey.PARTNER_LIVING_COUNTRY,

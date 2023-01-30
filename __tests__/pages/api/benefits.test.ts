@@ -6,7 +6,6 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
-  SummaryState,
   ValidationErrors,
 } from '../../../utils/api/definitions/enums'
 import { FieldKey } from '../../../utils/api/definitions/fields'
@@ -15,13 +14,11 @@ import legalValues from '../../../utils/api/scrapers/output'
 import {
   age60NoDefer,
   age65NoDefer,
-  age75NoDefer,
   canadaWholeLife,
   canadian,
   expectAfsMarital,
   expectAfsEligible,
   expectAllIneligible,
-  expectAlwAfsTooOld,
   expectAlwTooOld,
   expectAlwEligible,
   expectGisEligible,
@@ -85,7 +82,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
@@ -108,10 +105,11 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expect(res.status).toEqual(400)
@@ -132,10 +130,11 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
+      invSeparated: false,
       ...partnerUndefined,
     })
 
@@ -157,7 +156,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
@@ -206,10 +205,11 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       ...age60NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: false,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expectAllIneligible(res)
@@ -233,7 +233,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
@@ -348,6 +348,7 @@ describe('consolidated benefit tests: max income checks', () => {
     res = await mockGetRequest({
       ...input,
       income: legalValues.gis.singleIncomeLimit - 1,
+      invSeparated: false,
     })
     expectGisEligible(res)
   })
@@ -364,7 +365,7 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       partnerLivingCountry: LivingCountry.CANADA,
-      partnerLegalStatus: LegalStatus.CANADIAN_CITIZEN,
+      partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
     }
     let res = await mockGetRequest(input)
@@ -484,6 +485,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expectOasGisEligible(
@@ -501,10 +503,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.CANADA,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
 
@@ -521,6 +524,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: true,
+      invSeparated: false,
       ...partnerUndefined,
     })
 
@@ -534,10 +538,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expectOasEligible(
@@ -562,10 +567,11 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
+      invSeparated: false,
       ...partnerUndefined,
     })
     expectOasEligible(
@@ -748,6 +754,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      invSeparated: true,
     })
     expectOasGisTooYoung(res)
     expect(res.body.results.alw.eligibility.result).toEqual(
@@ -784,7 +791,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
@@ -805,10 +812,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
+      invSeparated: false,
+      partnerAge: 65,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,

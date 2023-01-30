@@ -422,11 +422,8 @@ components:
       schema:
         type: string
         enum:
-          - canadianCitizen
-          - indianStatus
-          - permanentResident
-          - refugee
-          - other
+          - yes
+          - no
         description: The current legal status of the client.
       allowEmptyValue: false
 
@@ -546,11 +543,8 @@ components:
       schema:
         type: string
         enum:
-          - canadianCitizen
-          - permanentResident
-          - sponsored
-          - indianStatus
-          - other
+          - yes
+          - no
         description: The current legal status of the partner.
       allowEmptyValue: false
 

@@ -72,7 +72,7 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
     .valid(...Object.values(LegalStatus))
-    .invalid(LegalStatus.OTHER)
+    .invalid(LegalStatus.NO)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
   livedOutsideCanada: Joi.boolean()
     .required()
