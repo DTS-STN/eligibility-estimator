@@ -13,7 +13,8 @@ export default class MainHandler {
 
     const resultObj: any = {
       visibleFields: this.handler.requiredFields,
-      results: this.handler.benefitResults,
+      results: this.handler.benefitResults.client,
+      partnerResults: this.handler.benefitResults.partner,
       summary: this.handler.summary,
       missingFields: this.handler.missingFields,
       fieldData: this.handler.fieldData,

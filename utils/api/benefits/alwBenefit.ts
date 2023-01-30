@@ -16,8 +16,14 @@ import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
-  constructor(input: ProcessedInput, translations: Translations) {
+  partner: Boolean
+  constructor(
+    input: ProcessedInput,
+    translations: Translations,
+    partner?: Boolean
+  ) {
     super(input, translations, BenefitKey.alw)
+    this.partner = partner
   }
 
   protected getEligibility(): EligibilityResult {
@@ -204,18 +210,24 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
-    // if not eligible, don't bother with any of the below
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
     )
       return cardCollapsedText
 
+    if (this.partner) {
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.partnerEligible
+      )
+    }
+
     if (this.input.invSeparated) {
       cardCollapsedText.push(
         this.translations.detailWithHeading.calculatedBasedOnIndividualIncome
       )
     }
+
     return cardCollapsedText
   }
 }

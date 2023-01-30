@@ -46,7 +46,7 @@ export class BenefitHandler {
   private _missingFields: FieldKey[]
   private _requiredFields: FieldKey[]
   private _fieldData: FieldConfig[]
-  private _benefitResults: BenefitResultsObject
+  private _benefitResults: BenefitResultsObjectWithPartner
   private _summary: SummaryObject
 
   constructor(readonly rawInput: Partial<RequestInput>) {}
@@ -88,7 +88,7 @@ export class BenefitHandler {
     return this._fieldData
   }
 
-  get benefitResults(): BenefitResultsObject {
+  get benefitResults(): BenefitResultsObjectWithPartner {
     if (this._benefitResults === undefined) {
       this._benefitResults = this.getBenefitResultObject()
       this.translateResults()
@@ -102,7 +102,7 @@ export class BenefitHandler {
 
       this._summary = SummaryHandler.buildSummaryObject(
         this.input,
-        this.benefitResults,
+        this.benefitResults.client,
         this.missingFields,
         this.translations
       )
@@ -272,9 +272,9 @@ export class BenefitHandler {
    * Returns the BenefitResultObject based on the user's input.
    * If any fields are missing, return no results.
    */
-  private getBenefitResultObject(): BenefitResultsObject {
+  private getBenefitResultObject(): BenefitResultsObjectWithPartner {
     if (this.missingFields.length) {
-      return {}
+      return { client: {}, partner: {} }
     }
 
     function getBlankObject(benefitKey: BenefitKey) {
@@ -309,13 +309,9 @@ export class BenefitHandler {
     const partnerOas = new OasBenefit(this.input.partner, this.translations)
     allResults.partner.oas.eligibility = partnerOas.eligibility
     allResults.partner.oas.entitlement = partnerOas.entitlement
-
+    allResults.partner.oas.cardDetail = partnerOas.cardDetail
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      // const partnerOas = new OasBenefit(this.input.partner, this.translations)
-      // allResults.partner.oas.eligibility = partnerOas.eligibility
-      // allResults.partner.oas.entitlement = partnerOas.entitlement
-
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =
         partnerOas.entitlement
@@ -346,9 +342,12 @@ export class BenefitHandler {
       const partnerGis = new GisBenefit(
         this.input.partner,
         this.translations,
-        allResults.partner.oas
+        allResults.partner.oas,
+        true
       )
       allResults.partner.gis.eligibility = partnerGis.eligibility
+      allResults.partner.gis.entitlement = partnerGis.entitlement
+      allResults.partner.gis.cardDetail = partnerGis.cardDetail
 
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's ALW
       this.input.client.partnerBenefitStatus.gisResultEligibility =
@@ -385,8 +384,14 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's ALW eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      const partnerAlw = new AlwBenefit(this.input.partner, this.translations)
+      const partnerAlw = new AlwBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
       allResults.partner.alw.eligibility = partnerAlw.eligibility
+      allResults.partner.alw.entitlement = partnerAlw.entitlement
+      allResults.partner.alw.cardDetail = partnerAlw.cardDetail
 
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.alwResultEligibility =
@@ -590,8 +595,6 @@ export class BenefitHandler {
           // Display a note stating when PartnerB turns 65, to determine if it is still
           // advantageous to use the GIS Single Rate (Rate Table 1) instead of Rate Table 4
         } else {
-          console.log()
-
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
         }
@@ -815,62 +818,65 @@ export class BenefitHandler {
     }
 
     // All done!
-    return allResults.client
+    return allResults
   }
 
   /**
-   * Takes a BenefitResultsObject, and translates the detail property based on the provided translations.
+   * Takes a BenefitResultsObjectWithPartner, and translates the detail property based on the provided translations.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
    */
   private translateResults(): void {
-    let clawbackValue: number
+    for (const individualBenefits in this.benefitResults) {
+      let clawbackValue: number
+      for (const key in this.benefitResults[individualBenefits]) {
+        const result: BenefitResult =
+          this.benefitResults[individualBenefits][key]
+        if (!result || !result?.eligibility) continue
 
-    for (const key in this.benefitResults) {
-      const result: BenefitResult = this.benefitResults[key]
+        // clawback is only valid for OAS
+        if (key === 'oas') {
+          clawbackValue =
+            this.benefitResults[individualBenefits][key].entitlement.clawback
+        }
 
-      // clawback is only valid for OAS
-      if (key === 'oas') {
-        clawbackValue = this.benefitResults[key].entitlement.clawback
+        // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
+        // this happens when high income results in no entitlement.
+        // this If block was copied to _base and probably not required anymore.
+        if (
+          result.eligibility.result === ResultKey.ELIGIBLE &&
+          result.entitlement.type === EntitlementResultType.NONE
+        ) {
+          result.eligibility.result = ResultKey.INELIGIBLE
+          result.eligibility.reason = ResultReason.INCOME
+          result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+        }
+
+        // process detail result
+        result.eligibility.detail = BenefitHandler.capitalizeEachLine(
+          this.replaceTextVariables(result.eligibility.detail, result)
+        )
+
+        // clawback is only valid for OAS
+        // This adds the oasClawback text as requested.
+        let newMainText =
+          clawbackValue > 0
+            ? result.cardDetail.mainText +
+              `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
+            : result.cardDetail.mainText
+
+        // process card main text
+        result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
+          this.replaceTextVariables(newMainText, result)
+        )
+
+        // process card collapsed content
+        result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
+          (collapsedText) => ({
+            heading: this.replaceTextVariables(collapsedText.heading, result),
+            text: this.replaceTextVariables(collapsedText.text, result),
+          })
+        )
       }
-
-      // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
-      // this happens when high income results in no entitlement.
-      // this If block was copied to _base and probably not required anymore.
-      if (
-        result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.type === EntitlementResultType.NONE
-      ) {
-        result.eligibility.result = ResultKey.INELIGIBLE
-        result.eligibility.reason = ResultReason.INCOME
-        result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
-      }
-
-      // process detail result
-      result.eligibility.detail = BenefitHandler.capitalizeEachLine(
-        this.replaceTextVariables(result.eligibility.detail, result)
-      )
-
-      // clawback is only valid for OAS
-      // This adds the oasClawback text as requested.
-      let newMainText =
-        clawbackValue > 0
-          ? result.cardDetail.mainText +
-            `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
-          : result.cardDetail.mainText
-
-      // process card main text
-      result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
-        this.replaceTextVariables(newMainText, result)
-      )
-
-      console.log('result.cardDetail', result.cardDetail)
-      // process card collapsed content
-      result.cardDetail.collapsedText = result.cardDetail.collapsedText.map(
-        (collapsedText) => ({
-          heading: this.replaceTextVariables(collapsedText.heading, result),
-          text: this.replaceTextVariables(collapsedText.text, result),
-        })
-      )
     }
   }
 

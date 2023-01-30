@@ -379,6 +379,10 @@ const en: Translations = {
       heading: 'Your monthly amount was calculated based on individual income',
       text: `You're eligible for a higher benefit amount since you and your partner are living apart for reasons beyond your control.`,
     },
+    partnerEligible: {
+      heading: 'Your partner may be eligible',
+      text: 'Based on what you told us, your partner could receive {PARTNER_BENEFIT_AMOUNT} every month. They can use the estimator to get detailed results.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'More information needed',

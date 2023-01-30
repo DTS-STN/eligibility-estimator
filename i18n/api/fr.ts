@@ -389,6 +389,10 @@ const fr: Translations = {
         'Votre paiement mensuel a été calculé à partir de votre revenu individuel',
       text: 'Vous êtes admissible à un montant plus élevé parce que vous ne vivez pas avec votre partenaire pour des raisons hors de votre contrôle.',
     },
+    partnerEligible: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: "Selon vos renseignements, votre conjoint pourrait recevoir {PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',
