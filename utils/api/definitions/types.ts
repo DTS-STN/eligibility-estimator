@@ -128,12 +128,13 @@ export interface BenefitResultsObject {
 }
 
 export interface BenefitResultsObjectWithPartner {
-  client: BenefitResultsObject
-  partner: BenefitResultsObject
+  client?: BenefitResultsObject
+  partner?: BenefitResultsObject
 }
 
 export interface ResponseSuccess {
   results: BenefitResultsObject
+  partnerResults: BenefitResultsObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>

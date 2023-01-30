@@ -9,14 +9,21 @@ import {
   EligibilityResult,
   EntitlementResultGeneric,
   ProcessedInput,
+  CardCollapsedText,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
-  constructor(input: ProcessedInput, translations: Translations) {
+  partner: Boolean
+  constructor(
+    input: ProcessedInput,
+    translations: Translations,
+    partner?: Boolean
+  ) {
     super(input, translations, BenefitKey.alw)
+    this.partner = partner
   }
 
   protected getEligibility(): EligibilityResult {
@@ -198,5 +205,23 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
    */
   protected getAutoEnrollment(): boolean {
     return false
+  }
+
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
+
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return cardCollapsedText
+
+    if (this.partner) {
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.partnerEligible
+      )
+    }
+
+    return cardCollapsedText
   }
 }

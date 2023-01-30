@@ -16,8 +16,14 @@ import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
-  constructor(input: ProcessedInput, translations: Translations) {
+  partner: Boolean
+  constructor(
+    input: ProcessedInput,
+    translations: Translations,
+    partner?: Boolean
+  ) {
     super(input, translations, BenefitKey.oas)
+    this.partner = partner
   }
 
   protected getEligibility(): EligibilityResult {
@@ -249,6 +255,13 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
     )
       return cardCollapsedText
+
+    if (this.partner) {
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.partnerEligible
+      )
+      return cardCollapsedText
+    }
 
     // increase at 75
     if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
