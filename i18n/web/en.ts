@@ -26,10 +26,10 @@ const en: WebTranslations = {
   breadcrumb2Title: 'Service Canada',
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
-  title: 'Canadian Old Age Benefits Estimator',
-  introPageTitle: 'Canadian Old Age Security Benefits Estimator',
-  questionPageTitle: 'Canadian Old Age Security Benefits Estimator: Questions',
-  resultPageTitle: 'Canadian Old Age Security Benefits Estimator: Results',
+  title: 'Old Age Benefits Estimator',
+  introPageTitle: 'Old Age Security Benefits Estimator',
+  questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
+  resultPageTitle: 'Old Age Security Benefits Estimator: Results',
   menuTitle: 'Service Canada',
   clear: 'Clear',
   back: 'Back',
@@ -110,6 +110,8 @@ const en: WebTranslations = {
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
+    general:
+      'The following is only an estimate of your eligibility and monthly payment. Changes in your circumstances may impact your results.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',

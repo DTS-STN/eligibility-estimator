@@ -93,6 +93,7 @@ export type WebTranslations = {
   //results page
   resultsPage: {
     header: string
+    general: string
     onThisPage: string
     tableHeader1: string
     tableHeader2: string

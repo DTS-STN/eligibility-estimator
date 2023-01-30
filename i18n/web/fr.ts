@@ -28,12 +28,11 @@ const fr: WebTranslations = {
   breadcrumb2URL:
     'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
-  introPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse',
+  introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   questionPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse : Questions',
+    'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
   resultPageTitle:
-    'Estimateur des prestations canadiennes de la Sécurité de la vieillesse : Résultats',
+    'Estimateur des prestations de la Sécurité de la vieillesse : Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
@@ -115,6 +114,8 @@ const fr: WebTranslations = {
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
+    general:
+      "Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.",
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
