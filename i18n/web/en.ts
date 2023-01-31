@@ -182,7 +182,7 @@ const en: WebTranslations = {
     [ValidationErrors.maritalUnavailable]:
       'You have indicated a marital status that is not covered by this tool. For further help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.legalUnavailable]:
-      'You have selected a legal status that is not eligible to receive any of the benefits covered by this tool. For help, please {LINK_SERVICE_CANADA}.',
+      'You need to have legal status in Canada to receive any of the benefits covered by this tool. For help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable10]:
       "This tool can't estimate your benefits because you have lived in Canada for less than 10&nbsp;years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable20]:

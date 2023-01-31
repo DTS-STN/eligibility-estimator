@@ -193,7 +193,7 @@ const fr: WebTranslations = {
     [ValidationErrors.maritalUnavailable]:
       "Vous avez indiqué un état matrimonial qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
-      "Vous avez sélectionné un statut légal qui n'est pas admissible aux prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
+      "Vous devez avoir un statut légal au Canada pour recevoir les prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable10]:
       'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable20]:
