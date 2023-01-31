@@ -87,12 +87,8 @@ export class LegalStatusHelper extends FieldHelper {
 
   constructor(public value: LegalStatus) {
     super(value)
-    this.canadian =
-      value === LegalStatus.CANADIAN_CITIZEN ||
-      value === LegalStatus.PERMANENT_RESIDENT ||
-      value === LegalStatus.INDIAN_STATUS ||
-      value === LegalStatus.REFUGEE
-    this.other = value === LegalStatus.OTHER
+    this.canadian = value === LegalStatus.YES
+    this.other = value === LegalStatus.NO
   }
 }
 

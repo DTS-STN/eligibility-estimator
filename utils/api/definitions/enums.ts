@@ -21,11 +21,8 @@ export enum MaritalStatus {
 }
 
 export enum LegalStatus {
-  CANADIAN_CITIZEN = 'canadianCitizen',
-  INDIAN_STATUS = 'indianStatus',
-  PERMANENT_RESIDENT = 'permanentResident',
-  REFUGEE = 'refugee',
-  OTHER = 'other',
+  YES = 'yes',
+  NO = 'no',
 }
 
 export enum PartnerBenefitStatus {

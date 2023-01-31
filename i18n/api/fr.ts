@@ -52,7 +52,7 @@ const fr: Translations = {
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
-    [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
+    [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
       "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
@@ -188,29 +188,14 @@ const fr: Translations = {
     ],
     [FieldKey.LEGAL_STATUS]: [
       {
-        key: LegalStatus.CANADIAN_CITIZEN,
-        text: 'Citoyen canadien',
-        shortText: 'Citoyen canadien',
+        key: LegalStatus.YES,
+        text: 'Yes',
+        shortText: 'Yes',
       },
       {
-        key: LegalStatus.INDIAN_STATUS,
-        text: "Statut d'Indien",
-        shortText: "Statut d'Indien",
-      },
-      {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Résident permanent ou immigrant reçu',
-        shortText: 'Résident permanent ou immigrant reçu',
-      },
-      {
-        key: LegalStatus.REFUGEE,
-        text: 'Réfugié',
-        shortText: 'Réfugié',
-      },
-      {
-        key: LegalStatus.OTHER,
-        text: 'Autre (par exemple, résident temporaire, étudiant ou travailleur temporaire)',
-        shortText: 'Autre',
+        key: LegalStatus.NO,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [

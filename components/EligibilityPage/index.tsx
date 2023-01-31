@@ -342,10 +342,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   const showWarningMessage = (field) => {
     const messageHeading = tsln.partnerIsNotEligible
     let messageBody = ''
-    if (
-      field.key === 'partnerLegalStatus' &&
-      field.value === LegalStatus.OTHER
-    ) {
+    if (field.key === 'partnerLegalStatus' && field.value === LegalStatus.NO) {
       messageBody = tsln.partnerLegalStatusNotEligible
     } else if (
       field.key === FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY &&

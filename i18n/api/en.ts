@@ -50,7 +50,7 @@ const en: Translations = {
     [FieldKey.INV_SEPARATED]:
       'Are you and your partner living apart for reasons beyond your control?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
-    [FieldKey.LEGAL_STATUS]: 'What is your legal status in Canada?',
+    [FieldKey.LEGAL_STATUS]: 'Do you have legal status in Canada?',
     [FieldKey.LIVED_OUTSIDE_CANADA]:
       'Since the age of 18, have you lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
@@ -182,29 +182,14 @@ const en: Translations = {
     ],
     [FieldKey.LEGAL_STATUS]: [
       {
-        key: LegalStatus.CANADIAN_CITIZEN,
-        text: 'Canadian citizen',
-        shortText: 'Canadian citizen',
+        key: LegalStatus.YES,
+        text: 'Yes',
+        shortText: 'Yes',
       },
       {
-        key: LegalStatus.INDIAN_STATUS,
-        text: 'Indian status',
-        shortText: 'Indian status',
-      },
-      {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Permanent resident or landed immigrant',
-        shortText: 'Permanent resident or landed immigrant',
-      },
-      {
-        key: LegalStatus.REFUGEE,
-        text: 'Refugee',
-        shortText: 'Refugee',
-      },
-      {
-        key: LegalStatus.OTHER,
-        text: 'Other (for example, temporary resident, student or temporary worker)',
-        shortText: 'Other',
+        key: LegalStatus.NO,
+        text: 'No',
+        shortText: 'No',
       },
     ],
     [FieldKey.LIVED_OUTSIDE_CANADA]: [
