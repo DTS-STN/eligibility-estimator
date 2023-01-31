@@ -19,6 +19,7 @@ import { EntitlementFormula } from './entitlementFormula'
 
 export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
+  containCalculatedBasedOnIndividual: Boolean
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -27,6 +28,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   ) {
     super(input, translations, BenefitKey.gis)
     this.partner = partner
+    this.containCalculatedBasedOnIndividual = false
   }
 
   protected getEligibility(): EligibilityResult {
@@ -217,10 +219,11 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       )
     }
 
-    if (this.input.invSeparated) {
+    if (this.input.invSeparated && !this.containCalculatedBasedOnIndividual) {
       cardCollapsedText.push(
         this.translations.detailWithHeading.calculatedBasedOnIndividualIncome
       )
+      this.containCalculatedBasedOnIndividual = true
     }
 
     return cardCollapsedText
