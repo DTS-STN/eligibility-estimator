@@ -883,8 +883,6 @@ export class BenefitHandler {
     return allResults
   }
 
-  private getPartnerBenefitStatus(): PartnerBenefitStatusHelper {}
-
   /**
    * Takes a BenefitResultsObjectWithPartner, and translates the detail property based on the provided translations.
    * If the entitlement result provides a NONE type, that will override the eligibility result.
