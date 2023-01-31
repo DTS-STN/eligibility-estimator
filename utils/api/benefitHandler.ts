@@ -411,6 +411,15 @@ export class BenefitHandler {
       allResults.partner.alw.entitlement = partnerAlw.entitlement
       allResults.partner.alw.cardDetail = partnerAlw.cardDetail
 
+      const partnerOas = new OasBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
+      allResults.partner.oas.eligibility = partnerOas.eligibility
+      allResults.partner.oas.entitlement = partnerOas.entitlement
+      allResults.partner.oas.cardDetail = partnerOas.cardDetail
+
       const partnerGis = new GisBenefit(
         this.input.partner,
         this.translations,
@@ -420,15 +429,6 @@ export class BenefitHandler {
       allResults.partner.gis.eligibility = partnerGis.eligibility
       allResults.partner.gis.entitlement = partnerGis.entitlement
       allResults.partner.gis.cardDetail = partnerGis.cardDetail
-
-      const partnerOas = new OasBenefit(
-        this.input.partner,
-        this.translations,
-        true
-      )
-      allResults.partner.oas.eligibility = partnerOas.eligibility
-      allResults.partner.oas.entitlement = partnerOas.entitlement
-      allResults.partner.oas.cardDetail = partnerOas.cardDetail
 
       // set partnerbenefitstatus for client
       if (partnerGis.eligibility.result === ResultKey.ELIGIBLE) {
