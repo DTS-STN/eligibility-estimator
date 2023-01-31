@@ -69,7 +69,7 @@ const fr: Translations = {
       'En quel mois et quelle année votre conjoint est-il né?',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
-      'Quel est le statut légal de votre conjoint au Canada?',
+      'Votre conjoint a-t-il un statut légal au Canada?',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -189,8 +189,8 @@ const fr: Translations = {
     [FieldKey.LEGAL_STATUS]: [
       {
         key: LegalStatus.YES,
-        text: 'Yes',
-        shortText: 'Yes',
+        text: 'Oui',
+        shortText: 'Oui',
       },
       {
         key: LegalStatus.NO,
