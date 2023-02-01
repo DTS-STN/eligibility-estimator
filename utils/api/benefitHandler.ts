@@ -538,9 +538,11 @@ export class BenefitHandler {
             totalAmountCouple
           )
 
-          allResults.client.gis.entitlement.result =
-            applicantGisResultT2 + partnerGisResultT2
+          allResults.client.gis.entitlement.result = applicantGisResultT2
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+
+          allResults.partner.gis.entitlement.result = partnerGisResultT2
+          allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
         } else {
           console.log(
             'both Oas > 0 - totalAmountsingle > totalAmountCouple',
@@ -550,9 +552,10 @@ export class BenefitHandler {
             totalAmountCouple
           )
 
-          allResults.client.gis.entitlement.result =
-            applicantGisResultT1 + partnerGisResultT1
+          allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+          allResults.partner.gis.entitlement.result = partnerGisResultT1
+          allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
         }
         console.log('--- both oas are greater than 0 --- end')
       } // if partner is eligible for alw
@@ -734,7 +737,7 @@ export class BenefitHandler {
         if (totalAmtSingle < totalAmountCouple) {
           // return partnerGisResultT4
           allResults.partner.gis.entitlement.result = partnerGisResultT4
-          allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+          allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
         } else {
           // Display the calculated GIS amounts for Singles - Rate Table 1
           // (GIS_amt_SingleB) for Partner B and ALW amount for PartnerA using PartnerA's income only
