@@ -35,7 +35,7 @@ const fr: TooltipTranslations = {
   [FieldKey.LEGAL_STATUS]: {
     heading: apiFr.category.legal,
     text: "<p style='padding-bottom: 12px;'> \
-              Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
+            Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
@@ -49,7 +49,7 @@ const fr: TooltipTranslations = {
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     heading: apiFr.category.legal,
     text: "<p style='padding-bottom: 12px;'> \
-              Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
+            Avoir un statut légal signifie que votre conjoint est autorisé à entrer et à rester au Canada à titre de : \
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \

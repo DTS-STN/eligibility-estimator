@@ -67,7 +67,7 @@ const en: Translations = {
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
-      "What is your partner's legal status in Canada?",
+      'Does your partner have legal status in Canada?',
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       'Since the age of 18, has your partner lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
