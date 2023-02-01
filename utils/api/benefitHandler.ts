@@ -98,8 +98,6 @@ export class BenefitHandler {
 
   get summary(): SummaryObject {
     if (this._summary === undefined) {
-      console.log('this.benefitResults,', this.benefitResults)
-
       this._summary = SummaryHandler.buildSummaryObject(
         this.input,
         this.benefitResults.client,
@@ -633,28 +631,12 @@ export class BenefitHandler {
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           allResults.partner.alw.entitlement.result = partnerAlwCalcCouple
 
-          const temp = new GisBenefit(
-            this.input.client,
-            this.translations,
-            allResults.client.oas,
-            true
-          )
-          allResults.client.gis.cardDetail = temp.cardDetail
-
           // Display a note stating when PartnerB turns 65, to determine if it is still
           // advantageous to use the GIS Single Rate (Rate Table 1) instead of Rate Table 4
         } else {
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
-
-          const temp = new GisBenefit(
-            this.input.client,
-            this.translations,
-            allResults.client.oas,
-            true
-          )
-          allResults.client.gis.cardDetail = temp.cardDetail
         }
         console.log('--- partner is eligible for alw --- end')
       } // if applicant is eligible for alw
@@ -708,15 +690,11 @@ export class BenefitHandler {
           clientAlw.entitlement.result
         )
 
-        const partnerBenefitStatus = new PartnerBenefitStatusHelper(
-          PartnerBenefitStatus.NONE
-        )
-
         // calculate partner GIS using table 1
         const partnerGisResultT1 = new EntitlementFormula(
           this.input.partner.income.partner,
           new MaritalStatusHelper(MaritalStatus.SINGLE),
-          partnerBenefitStatus,
+          this.input.partner.partnerBenefitStatus,
           this.input.partner.age,
           allResults.partner.oas
         ).getEntitlementAmount()
@@ -763,23 +741,18 @@ export class BenefitHandler {
         const applicantGisResultT3 = new EntitlementFormula(
           this.input.client.income.relevant,
           maritalStatus,
-          //new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
           this.input.client.partnerBenefitStatus,
           this.input.client.age,
           noOAS
         ).getEntitlementAmount()
 
         // get OAS for applicant use table 1
-        const partnerBenefitStatus = new PartnerBenefitStatusHelper(
-          PartnerBenefitStatus.NONE
-        )
         maritalStatus = new MaritalStatusHelper(MaritalStatus.SINGLE)
 
         // applicant gis using table1
         const applicantGisResultT1 = new EntitlementFormula(
           this.input.client.income.client,
           maritalStatus,
-          //partnerBenefitStatus,
           this.input.client.partnerBenefitStatus,
           this.input.client.age,
           allResults.client.oas
@@ -820,7 +793,6 @@ export class BenefitHandler {
         const partnerGisResultT3 = new EntitlementFormula(
           this.input.partner.income.relevant,
           maritalStatus,
-          //new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
           this.input.partner.partnerBenefitStatus,
           this.input.partner.age,
           noOAS
@@ -829,7 +801,6 @@ export class BenefitHandler {
         const partnerGisResultT1 = new EntitlementFormula(
           this.input.client.income.partner,
           new MaritalStatusHelper(MaritalStatus.SINGLE),
-          //new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
           this.input.partner.partnerBenefitStatus,
           this.input.partner.age,
           allResults.partner.oas
@@ -920,8 +891,6 @@ export class BenefitHandler {
         result.eligibility.detail = BenefitHandler.capitalizeEachLine(
           this.replaceTextVariables(result.eligibility.detail, result)
         )
-
-        console.log('result.cardDetail', result)
 
         // clawback is only valid for OAS
         // This adds the oasClawback text as requested.
