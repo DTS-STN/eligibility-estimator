@@ -6,7 +6,7 @@ environments:
   prod:
 
 releases:
-  - name: ee-{{ requiredEnv "BRANCH" | lower }}
+  - name: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}
     chart: ../helm/charts/eligibility-estimator
     values:
       - overrides/eligibility-estimator/eligibility-estimator.yaml.gotmpl
