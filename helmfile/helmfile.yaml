@@ -14,5 +14,5 @@ releases:
         category: dts
         app: {{ requiredEnv "PROJECT" }}
         tier: frontend
-    namespace: {{ requiredEnv "PROJECT" }}
+    namespace: eligibility-estimator
     installed: true
