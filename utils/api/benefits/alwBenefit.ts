@@ -222,12 +222,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       )
     }
 
-    if (this.input.invSeparated) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.calculatedBasedOnIndividualIncome
-      )
-    }
-
     return cardCollapsedText
   }
 }

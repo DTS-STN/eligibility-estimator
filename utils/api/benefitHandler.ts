@@ -550,6 +550,10 @@ export class BenefitHandler {
             totalAmountCouple
           )
 
+          allResults.client.gis.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           allResults.partner.gis.entitlement.result = partnerGisResultT1
@@ -634,8 +638,15 @@ export class BenefitHandler {
           // Display a note stating when PartnerB turns 65, to determine if it is still
           // advantageous to use the GIS Single Rate (Rate Table 1) instead of Rate Table 4
         } else {
+          allResults.client.gis.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+
+          partnerAlw.calculatedBasedOnIndividual = true
+          allResults.partner.alw.cardDetail = partnerAlw.cardDetail
           allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
         }
         console.log('--- partner is eligible for alw --- end')
@@ -721,8 +732,17 @@ export class BenefitHandler {
           // (GIS_amt_SingleB) for Partner B and ALW amount for PartnerA using PartnerA's income only
           allResults.client.alw.entitlement.result = applicantAlwCalcSingle
           allResults.client.alw.entitlement.type = EntitlementResultType.FULL
+          allResults.client.alw.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
+
           allResults.partner.gis.entitlement.result = partnerGisResultT1
           allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+          allResults.partner.gis.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
         }
 
         console.log(' --- applicant is eligible for alw --- end')
@@ -771,7 +791,10 @@ export class BenefitHandler {
           allResults.client.gis.entitlement.result = applicantGisResultT3
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
         } else {
-          // return clientGis.entitlement.result
+          allResults.client.gis.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
         }
@@ -815,11 +838,13 @@ export class BenefitHandler {
         )
 
         if (partnerGisResultT1 < partnerGisResultT3) {
-          //return partnerGisResultT3
           allResults.partner.gis.entitlement.result = partnerGisResultT3
           allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
         } else {
-          //return partnerGisResultT1
+          allResults.partner.gis.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
           allResults.partner.gis.entitlement.result = partnerGisResultT1
           allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
         }

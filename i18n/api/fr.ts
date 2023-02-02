@@ -370,9 +370,8 @@ const fr: Translations = {
       text: 'Parce que vous avez plus de 75&nbsp;ans, vos paiements ont augmenté de 10&nbsp;%.',
     },
     calculatedBasedOnIndividualIncome: {
-      heading:
-        'Votre paiement mensuel a été calculé à partir de votre revenu individuel',
-      text: 'Vous êtes admissible à un montant plus élevé parce que vous ne vivez pas avec votre partenaire pour des raisons hors de votre contrôle.',
+      heading: 'Les montants ont été calculés à partir du revenu individuel',
+      text: 'Parce que vous ne vivez pas avec votre conjoint pour des raisons hors de votre contrôle, vous pouvez recevoir des paiements mensuels plus élevés.',
     },
     partnerEligible: {
       heading: 'Votre conjoint pourrait être admissible',
