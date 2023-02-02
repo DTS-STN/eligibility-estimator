@@ -39,8 +39,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         ? legalValues.oas.incomeLimit75
         : legalValues.oas.incomeLimit
 
-    const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant < incomeLimit
+    // Income is irrelevant therefore next will always be true
+    const meetsReqIncome = skipReqIncome || this.input.income.relevant >= 0
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
