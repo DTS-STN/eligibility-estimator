@@ -7,9 +7,9 @@ environments:
 
 releases:
   - name: ee-{{ requiredEnv "BRANCH" | lower }}
-    chart: ../helm/charts/{{ requiredEnv "PROJECT" }}
+    chart: ../helm/charts/eligibility-estimator
     values:
-      - overrides/{{ requiredEnv "PROJECT" }}/{{ requiredEnv "PROJECT" }}.yaml.gotmpl
+      - overrides/eligibility-estimator/eligibility-estimator.yaml.gotmpl
     labels:
         category: dts
         app: {{ requiredEnv "PROJECT" }}
