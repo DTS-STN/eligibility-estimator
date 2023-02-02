@@ -202,10 +202,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     return { result: formulaResult, type, autoEnrollment }
   }
 
-  public set calculatedIndividual(value) {
-    this._calculatedBasedOnIndividual = value
-  }
-
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
