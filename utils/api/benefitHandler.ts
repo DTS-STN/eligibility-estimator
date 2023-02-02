@@ -644,8 +644,6 @@ export class BenefitHandler {
           )
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
-
-          partnerAlw.calculatedBasedOnIndividual = true
           allResults.partner.alw.cardDetail = partnerAlw.cardDetail
           allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
         }
