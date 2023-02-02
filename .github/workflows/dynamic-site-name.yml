@@ -1,4 +1,4 @@
-# This workflow will add a comment to the PR with the development or dynamic site 
+# This workflow will add a comment to the PR with the development or dynamic site
 
 name: Comment environment in PR
 
@@ -18,5 +18,5 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
 
         with:
-          message: "Dynamic branch URL: https://eligibility-estimator-dyna-${{ github.head_ref }}.bdm-dev.dts-stn.com"
+          message: 'Dynamic branch URL: https://ep-be-dyna-${{ github.head_ref }}.bdm-dev.dts-stn.com'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
