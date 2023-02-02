@@ -35,7 +35,7 @@ const en: TooltipTranslations = {
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,
     text: "<p style='padding-bottom: 12px;'> \
-            Having legal status means your partner is allowed to enter and stay in Canada as: \
+          Having legal status means you're allowed to enter and stay in Canada as: \
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
             <li>a Canadian citizen</li> \
