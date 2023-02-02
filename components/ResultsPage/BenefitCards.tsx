@@ -53,11 +53,17 @@ export const BenefitCards: React.VFC<{
       (benefit) => benefit.benefitKey === result.benefitKey
     )
 
+    const eligibleCardResult = resultsEligible.find(
+      (benefit) => benefit.benefitKey === result.benefitKey
+    )
+
     if (eligiblePartnerResult !== undefined) {
-      collapsedDetails = [
-        ...collapsedDetails,
-        eligiblePartnerResult.cardDetail.collapsedText[0],
-      ]
+      const temp =
+        eligibleCardResult !== undefined
+          ? [eligiblePartnerResult.cardDetail.collapsedText[0]]
+          : [...eligiblePartnerResult.cardDetail.collapsedText]
+
+      collapsedDetails = [...collapsedDetails, ...temp]
     }
 
     const eligibility: boolean =

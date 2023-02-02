@@ -360,6 +360,10 @@ const en: Translations = {
       heading: 'Your payments have increased because you are over&nbsp;75',
       text: 'Since you are over the age of 75, your payments have increased by&nbsp;10%.',
     },
+    calculatedBasedOnIndividualIncome: {
+      heading: 'Amounts were calculated based on individual income',
+      text: `Since you and your partner are living apart for reasons beyond your control, you're eligible for higher monthly payments.`,
+    },
     partnerEligible: {
       heading: 'Your partner may be eligible',
       text: 'Based on what you told us, your partner could receive {PARTNER_BENEFIT_AMOUNT} every month. They can use the estimator to get detailed results.',
