@@ -40,7 +40,7 @@ const en: WebTranslations = {
   homePageP1:
     'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
-  youMayBeEligible: 'You may be eligible for old age benefits if:',
+  youMayBeEligible: 'You may be able to receive old age benefits if:',
   atLeast60: 'you are at least 60 years old',
   haveNetIncomeLess: 'your net income is less than $133,141',
   headerWhatToKnow: "What you'll need",
@@ -110,8 +110,6 @@ const en: WebTranslations = {
 
   resultsPage: {
     header: 'Table of estimated monthly amounts',
-    general:
-      'The following is only an estimate of your eligibility and monthly payment. Changes in your circumstances may impact your results.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
