@@ -43,8 +43,7 @@ const fr: WebTranslations = {
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
-  youMayBeEligible:
-    'Vous pourriez être admissible aux prestations de vieillesse si : ',
+  youMayBeEligible: 'Vous pourriez recevoir des prestations de vieillesse si :',
   atLeast60: 'vous avez au moins 60 ans',
   headerWhatToKnow: 'Ce dont vous aurez besoin',
   haveNetIncomeLess: 'votre revenu net est moins de 133 141 $',
@@ -114,8 +113,7 @@ const fr: WebTranslations = {
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    general:
-      "Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.",
+    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
