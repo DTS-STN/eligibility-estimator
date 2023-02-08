@@ -448,6 +448,8 @@ export class BenefitHandler {
       }
 
       if (
+        this.input.client.income.provided &&
+        this.input.partner.income.provided &&
         clientOas.entitlement.result > 0 &&
         partnerOas.entitlement.result > 0
       ) {
