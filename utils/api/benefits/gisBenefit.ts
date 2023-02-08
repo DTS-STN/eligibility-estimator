@@ -148,13 +148,13 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     if (
       !this.input.income.provided &&
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
-    )
+    ) {
       return {
         result: -1,
         type: EntitlementResultType.UNAVAILABLE,
         autoEnrollment,
       }
-
+    }
     // marital status is invSeparated? entitlement unavailable.
     if (this.input.maritalStatus.invSeparated) {
       this.eligibility.detail =
@@ -211,7 +211,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
-    if (this.partner) {
+    if (this.partner && this.input.income.provided) {
       cardCollapsedText.push(
         this.translations.detailWithHeading.partnerEligible
       )

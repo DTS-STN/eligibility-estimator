@@ -60,7 +60,9 @@ export const BenefitCards: React.VFC<{
     if (eligiblePartnerResult !== undefined) {
       const temp =
         eligibleCardResult !== undefined
-          ? [eligiblePartnerResult.cardDetail.collapsedText[0]]
+          ? eligiblePartnerResult.cardDetail.collapsedText[0]
+            ? [eligiblePartnerResult.cardDetail.collapsedText[0]]
+            : []
           : [...eligiblePartnerResult.cardDetail.collapsedText]
 
       collapsedDetails = [...collapsedDetails, ...temp]
