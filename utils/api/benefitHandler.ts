@@ -353,6 +353,7 @@ export class BenefitHandler {
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
     allResults.client.alw.eligibility = clientAlw.eligibility
     allResults.client.alw.entitlement = clientAlw.entitlement
+    allResults.client.alw.cardDetail = clientAlw.cardDetail
 
     // set partnerbenefitstatus for partner
     if (clientGis.eligibility.result === ResultKey.ELIGIBLE) {
@@ -746,6 +747,7 @@ export class BenefitHandler {
             // (GIS_amt_SingleB) for Partner B and ALW amount for PartnerA using PartnerA's income only
             allResults.client.alw.entitlement.result = applicantAlwCalcSingle
             allResults.client.alw.entitlement.type = EntitlementResultType.FULL
+            console.log('allResults.client.alw', allResults.client.alw)
             allResults.client.alw.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
                 .calculatedBasedOnIndividualIncome
