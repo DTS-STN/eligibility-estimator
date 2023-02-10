@@ -44,9 +44,7 @@ describe('Help Me Find Out scenarios', () => {
     }
     let res = await mockGetRequest(input)
     expectOasEligible(res)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
@@ -77,9 +75,7 @@ describe('Help Me Find Out scenarios', () => {
     }
     let res = await mockGetRequest(input)
     expectOasEligible(res)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
@@ -110,9 +106,7 @@ describe('Help Me Find Out scenarios', () => {
     }
     let res = await mockGetRequest(input)
     expectOasEligible(res)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
