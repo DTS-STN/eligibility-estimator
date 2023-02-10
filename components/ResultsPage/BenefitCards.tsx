@@ -6,7 +6,7 @@ import {
   BenefitKey,
   ResultReason,
 } from '../../utils/api/definitions/enums'
-import { BenefitResult } from '../../utils/api/definitions/types'
+import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 
@@ -51,7 +51,7 @@ export const BenefitCards: React.VFC<{
     return benefitText
   }
 
-  const getNextStepText = (benefitKey, result) => {
+  const getNextStepText = (benefitKey, result): NextStepText => {
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
     if (benefitKey === BenefitKey.gis) {

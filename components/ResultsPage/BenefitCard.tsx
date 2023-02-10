@@ -1,6 +1,7 @@
 import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 import Image from 'next/image'
 import React from 'react'
+import { NextStepText } from '../../utils/api/definitions/types'
 import { CustomCollapse } from './CustomCollapse'
 
 export const BenefitCard: React.VFC<{
@@ -10,7 +11,7 @@ export const BenefitCard: React.VFC<{
   eligibleText: string
   collapsedDetails: any
   children: React.ReactNode
-  nextStepText: object
+  nextStepText: NextStepText
   links: Array<{ icon: string; url: string; text: string; alt: string }>
 }> = ({
   benefitKey,

@@ -163,3 +163,8 @@ export interface SummaryObject {
   links: Link[]
   entitlementSum: number
 }
+
+export interface NextStepText {
+  nextStepTitle: string
+  nextStepContent: string
+}

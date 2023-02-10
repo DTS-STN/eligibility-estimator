@@ -117,7 +117,7 @@ export type WebTranslations = {
     link: string
     nextStepTitle: string
     nextStepGis: string
-    nextStepOas: string
+    //nextStepOas: string
   }
 
   resultsQuestions: Translations['questionShortText']

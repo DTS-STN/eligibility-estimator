@@ -107,7 +107,6 @@ const en: WebTranslations = {
   warningText: 'warning',
   category: apiEn.category,
   errorBoxTitle: 'The form could not be submitted because ',
-
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
