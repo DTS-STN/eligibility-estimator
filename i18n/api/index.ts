@@ -79,6 +79,8 @@ export interface Translations {
     oasClawback: string
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string
+      incomeTooHigh: string
+      ifYouApply: string
     }
   }
   detailWithHeading: {

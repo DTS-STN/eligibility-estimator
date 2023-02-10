@@ -1,7 +1,11 @@
 import React from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey, BenefitKey } from '../../utils/api/definitions/enums'
+import {
+  ResultKey,
+  BenefitKey,
+  ResultReason,
+} from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
@@ -20,6 +24,7 @@ export const BenefitCards: React.VFC<{
     'Old Age Security (OAS) pension',
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
+
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
   const resultsEligible = results.filter(
@@ -46,13 +51,19 @@ export const BenefitCards: React.VFC<{
     return benefitText
   }
 
-  const getNextStepText = (benefitKey, eligibility) => {
+  const getNextStepText = (benefitKey, result) => {
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
     if (benefitKey === BenefitKey.gis) {
-      if (eligibility) {
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE ||
+        result.eligibility.result === ResultKey.INCOME_DEPENDENT
+      ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
+        nextStepText.nextStepContent =
+          result.eligibility.reason === ResultReason.INCOME
+            ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
+            : tsln.resultsPage.nextStepGis
       }
     }
 
@@ -92,7 +103,7 @@ export const BenefitCards: React.VFC<{
       ? apiTsln.result.eligible
       : apiTsln.result.ineligible
 
-    const nextStepText = getNextStepText(result.benefitKey, eligibility)
+    const nextStepText = getNextStepText(result.benefitKey, result)
 
     return (
       <div key={result.benefitKey}>
@@ -121,6 +132,8 @@ export const BenefitCards: React.VFC<{
       </div>
     )
   }
+
+  console.log(resultsEligible)
 
   return (
     <div>

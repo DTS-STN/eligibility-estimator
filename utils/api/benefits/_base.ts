@@ -79,7 +79,7 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.type === EntitlementResultType.NONE
     ) {
-      this.eligibility.result = ResultKey.INELIGIBLE
+      //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
       this.eligibility.detail = this.translations.detail.mustMeetIncomeReq
       this.entitlement.autoEnrollment = this.getAutoEnrollment()

@@ -349,6 +349,10 @@ const fr: Translations = {
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
         'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} revenu pour obtenir une estimation de paiement mensuel.',
+      incomeTooHigh:
+        'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+      ifYouApply:
+        "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est admissible.</>",
     },
   },
   detailWithHeading: {

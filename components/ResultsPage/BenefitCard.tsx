@@ -64,7 +64,9 @@ export const BenefitCard: React.VFC<{
           <p className="mb-2 mt-6  font-bold text-[24px]">
             {nextStepText.nextStepTitle}
           </p>
-          <p>{nextStepText.nextStepContent}</p>
+          <p
+            dangerouslySetInnerHTML={{ __html: nextStepText.nextStepContent }}
+          />
         </div>
       )}
 

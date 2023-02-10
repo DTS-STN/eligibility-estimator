@@ -68,7 +68,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.oasResult.entitlement.type === EntitlementResultType.PARTIAL
 
     // main checks
-    if (meetsReqIncome && meetsReqLiving && meetsReqOas && meetsReqLegal) {
+    if (meetsReqLiving && meetsReqOas && meetsReqLegal) {
       if (meetsReqAge) {
         if (this.oasResult.eligibility.result == ResultKey.UNAVAILABLE) {
           return {
@@ -76,7 +76,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
-        } else if (skipReqIncome)
+        } else if (skipReqIncome) {
           return {
             result: ResultKey.INCOME_DEPENDENT,
             reason: ResultReason.INCOME_MISSING,
@@ -85,7 +85,13 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
                 .eligibleDependingOnIncomeNoEntitlement,
             incomeMustBeLessThan: maxIncome,
           }
-        else {
+        } else if (this.input.income.relevant >= maxIncome) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.INCOME,
+            detail: this.translations.detail.gis.incomeTooHigh,
+          }
+        } else {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
@@ -111,13 +117,15 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.OAS,
         detail: this.translations.detail.mustBeOasEligible,
       }
-    } else if (!meetsReqIncome) {
-      return {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.INCOME,
-        detail: this.translations.detail.mustMeetIncomeReq,
-      }
-    } else if (!meetsReqLegal) {
+    }
+    // } else if (!meetsReqIncome) {
+    //   return {
+    //     result: ResultKey.ELIGIBLE,
+    //     reason: ResultReason.INCOME,
+    //     detail: this.translations.detail.mustMeetIncomeReq,
+    //   }
+    // }
+    else if (!meetsReqLegal) {
       return {
         result: ResultKey.UNAVAILABLE,
         reason: ResultReason.LEGAL_STATUS,
@@ -214,6 +222,35 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     }
     links.push(this.translations.links.overview[BenefitKey.gis])
     return links
+  }
+
+  protected getCardText(): string {
+    /**
+     * The following IF block is a copy from benefitHandler.translateResults,
+     *   the issue is that cardDetail object is updated only once if undefined, and could have the wrong information.
+     *   overwrite eligibility.detail and autoEnrollment when entitlement.type = none.
+     */
+
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.type === EntitlementResultType.NONE
+    ) {
+      //this.eligibility.result = ResultKey.INELIGIBLE
+      this.eligibility.reason = ResultReason.INCOME
+      this.eligibility.detail = this.translations.detail.gis.incomeTooHigh
+      this.entitlement.autoEnrollment = this.getAutoEnrollment()
+    }
+
+    let text = this.eligibility.detail
+
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.result > 0
+    ) {
+      text += ` ${this.translations.detail.expectToReceive}`
+    }
+
+    return text
   }
 
   protected getCardCollapsedText(): CardCollapsedText[] {
