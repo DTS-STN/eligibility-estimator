@@ -136,7 +136,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more accurate results.",
     [FieldKey.OAS_DEFER]:
-      'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}.',
+      'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'If you are not sure of the exact number, you may enter an estimate.',
