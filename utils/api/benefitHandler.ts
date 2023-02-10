@@ -354,16 +354,18 @@ export class BenefitHandler {
     allResults.client.alw.eligibility = clientAlw.eligibility
     allResults.client.alw.entitlement = clientAlw.entitlement
 
+    const eligibleArray = [ResultKey.ELIGIBLE, ResultKey.INCOME_DEPENDENT]
+
     // set partnerbenefitstatus for partner
-    if (clientGis.eligibility.result === ResultKey.ELIGIBLE) {
+    if (eligibleArray.includes(clientGis.eligibility.result)) {
       this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.OAS_GIS
       )
-    } else if (clientAlw.eligibility.result === ResultKey.ELIGIBLE) {
+    } else if (eligibleArray.includes(clientGis.eligibility.result)) {
       this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.ALW
       )
-    } else if (clientOas.eligibility.result === ResultKey.ELIGIBLE) {
+    } else if (eligibleArray.includes(clientGis.eligibility.result)) {
       this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.OAS
       )

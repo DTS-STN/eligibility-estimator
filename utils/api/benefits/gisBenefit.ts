@@ -12,6 +12,7 @@ import {
   EntitlementResultOas,
   ProcessedInput,
   CardCollapsedText,
+  Link,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -80,7 +81,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             result: ResultKey.INCOME_DEPENDENT,
             reason: ResultReason.INCOME_MISSING,
             detail:
-              this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+              this.translations.detail.gis
+                .eligibleDependingOnIncomeNoEntitlement,
             incomeMustBeLessThan: maxIncome,
           }
         else {
@@ -200,6 +202,18 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     //     this.translations.detail.eligibleEntitlementUnavailable
 
     return { result: formulaResult, type, autoEnrollment }
+  }
+
+  protected getCardLinks(): Link[] {
+    const links: Link[] = []
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    ) {
+      links.push(this.translations.links.apply[BenefitKey.gis])
+    }
+    links.push(this.translations.links.overview[BenefitKey.gis])
+    return links
   }
 
   protected getCardCollapsedText(): CardCollapsedText[] {

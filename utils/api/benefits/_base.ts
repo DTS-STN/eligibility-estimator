@@ -94,14 +94,14 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       text += ` ${this.translations.detail.expectToReceive}`
     }
 
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE ||
-      this.eligibility.result === ResultKey.INCOME_DEPENDENT
-    ) {
-      text += this.getAutoEnrollment()
-        ? `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
-        : `<div class="mt-8">${this.translations.detail.autoEnrollFalse}</div>`
-    }
+    // if (
+    //   this.eligibility.result === ResultKey.ELIGIBLE ||
+    //   this.eligibility.result === ResultKey.INCOME_DEPENDENT
+    // ) {
+    //   text += this.getAutoEnrollment()
+    //     ? `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
+    //     : `<div class="mt-8">${this.translations.detail.autoEnrollFalse}</div>`
+    // }
 
     return text
   }

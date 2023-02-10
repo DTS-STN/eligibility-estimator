@@ -143,6 +143,9 @@ const fr: WebTranslations = {
     info: 'info',
     note: 'remarque',
     link: 'lien',
+    nextStepTitle: 'Prochaines étapes',
+    nextStepGis:
+      'Vous pouvez faire une demande pour le Supplément de revenu garanti lorsque vous présentez votre demande pour la pension de la Sécurité de la vieillesse.',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,

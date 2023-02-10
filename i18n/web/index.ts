@@ -115,6 +115,9 @@ export type WebTranslations = {
     info: string
     note: string
     link: string
+    nextStepTitle: string
+    nextStepGis: string
+    nextStepOas: string
   }
 
   resultsQuestions: Translations['questionShortText']

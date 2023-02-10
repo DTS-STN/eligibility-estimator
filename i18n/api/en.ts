@@ -291,7 +291,7 @@ const en: Translations = {
     eligibleDependingOnIncome:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     eligibleDependingOnIncomeNoEntitlement:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. An entitlement estimation is not available unless you provide your income.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide your income to get a monthly payment estimate.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
@@ -335,9 +335,13 @@ const en: Translations = {
     autoEnrollFalse:
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
-      'You should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+      'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawback:
       'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+    gis: {
+      eligibleDependingOnIncomeNoEntitlement:
+        'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income to get a monthly payment estimate.',
+    },
   },
   detailWithHeading: {
     oasDeferralApplied: {
@@ -395,5 +399,7 @@ const en: Translations = {
   yes: 'Yes',
   no: 'No',
   year: 'year',
+  your: 'your',
+  complete: 'complete',
 }
 export default en

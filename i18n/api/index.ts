@@ -77,6 +77,9 @@ export interface Translations {
     autoEnrollFalse: string
     expectToReceive: string
     oasClawback: string
+    gis: {
+      eligibleDependingOnIncomeNoEntitlement: string
+    }
   }
   detailWithHeading: {
     oasDeferralApplied: { heading: string; text: string }
@@ -96,6 +99,8 @@ export interface Translations {
   yes: string
   no: string
   year: string
+  your: string
+  complete: string
 }
 
 export function getTranslations(language: Language): Translations {

@@ -10,6 +10,7 @@ export const BenefitCard: React.VFC<{
   eligibleText: string
   collapsedDetails: any
   children: React.ReactNode
+  nextStepText: object
   links: Array<{ icon: string; url: string; text: string; alt: string }>
 }> = ({
   benefitKey,
@@ -18,6 +19,7 @@ export const BenefitCard: React.VFC<{
   eligibleText,
   collapsedDetails,
   children,
+  nextStepText,
   links,
 }) => {
   // the green/yellow eligible/notEligible
@@ -56,6 +58,15 @@ export const BenefitCard: React.VFC<{
             />
           </CustomCollapse>
         ))}
+
+      {nextStepText && (
+        <div>
+          <p className="mb-2 mt-6  font-bold text-[24px]">
+            {nextStepText.nextStepTitle}
+          </p>
+          <p>{nextStepText.nextStepContent}</p>
+        </div>
+      )}
 
       <div className="mt-4">
         {links &&

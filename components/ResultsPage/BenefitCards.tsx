@@ -1,7 +1,7 @@
 import React from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import { ResultKey, BenefitKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
@@ -46,6 +46,19 @@ export const BenefitCards: React.VFC<{
     return benefitText
   }
 
+  const getNextStepText = (benefitKey, eligibility) => {
+    let nextStepText = { nextStepTitle: '', nextStepContent: '' }
+
+    if (benefitKey === BenefitKey.gis) {
+      if (eligibility) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
+      }
+    }
+
+    return nextStepText
+  }
+
   function generateCard(result: BenefitResult) {
     let titleText: string = apiTsln.benefit[result.benefitKey]
     let collapsedDetails = result.cardDetail.collapsedText
@@ -75,13 +88,20 @@ export const BenefitCards: React.VFC<{
     titleText =
       eligibility === false ? transformBenefitName(titleText) : titleText
 
+    const eligibleText = eligibility
+      ? apiTsln.result.eligible
+      : apiTsln.result.ineligible
+
+    const nextStepText = getNextStepText(result.benefitKey, eligibility)
+
     return (
       <div key={result.benefitKey}>
         <BenefitCard
           benefitKey={result.benefitKey}
           benefitName={titleText}
           isEligible={eligibility}
-          eligibleText={apiTsln.result[result.eligibility.result]}
+          eligibleText={eligibleText}
+          nextStepText={nextStepText}
           collapsedDetails={collapsedDetails}
           links={result.cardDetail.links.map((value) => {
             return {
