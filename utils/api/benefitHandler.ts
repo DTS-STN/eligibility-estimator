@@ -353,6 +353,7 @@ export class BenefitHandler {
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
     allResults.client.alw.eligibility = clientAlw.eligibility
     allResults.client.alw.entitlement = clientAlw.entitlement
+    allResults.client.alw.cardDetail = clientAlw.cardDetail
 
     // set partnerbenefitstatus for partner
     if (clientGis.eligibility.result === ResultKey.ELIGIBLE) {
