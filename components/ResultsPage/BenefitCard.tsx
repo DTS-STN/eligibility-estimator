@@ -38,13 +38,11 @@ export const BenefitCard: React.VFC<{
 
   return (
     <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded">
-      <h2 id={benefitKey} className="h2">
-        {benefitName}&nbsp;{eligibleFlag}
+      <h2 id={benefitKey} className="h2 inline-flex justify-start items-center">
+        <span className="flex-1">{benefitName}</span>&nbsp;{eligibleFlag}
       </h2>
 
-      <div className={`${isEligible ? '' : 'bg-[#F9F4D4] px-8'} py-1`}>
-        {children}
-      </div>
+      <div className={`py-1`}>{children}</div>
 
       {collapsedDetails &&
         collapsedDetails.map((detail, index) => (
@@ -74,10 +72,7 @@ export const BenefitCard: React.VFC<{
       <div className="mt-4">
         {links &&
           links.map(({ text, url, icon, alt }, index) => (
-            <div
-              key={index}
-              className="flex items-center py-4 text-content md:w-1/2"
-            >
+            <div key={index} className="flex items-center py-4 text-content">
               <div>
                 <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
               </div>
