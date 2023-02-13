@@ -802,16 +802,26 @@ export class BenefitHandler {
             applicantGisResultT3
           )
 
-          if (applicantGisResultT1 < applicantGisResultT3) {
-            allResults.client.gis.entitlement.result = applicantGisResultT3
-            allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+          //
+          // wonder if this would cover all cases, it must return 0 when amounts are negative.
+          //
+          if (applicantGisResultT1 >= 0 && applicantGisResultT3 >= 0) {
+            if (applicantGisResultT1 < applicantGisResultT3) {
+              allResults.client.gis.entitlement.result = applicantGisResultT3
+              allResults.client.gis.entitlement.type =
+                EntitlementResultType.FULL
+            } else {
+              allResults.client.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+              allResults.client.gis.entitlement.result = applicantGisResultT1
+              allResults.client.gis.entitlement.type =
+                EntitlementResultType.FULL
+            }
           } else {
-            allResults.client.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
-            allResults.client.gis.entitlement.result = applicantGisResultT1
-            allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+            allResults.client.gis.entitlement.result = 0
+            allResults.client.gis.entitlement.type = EntitlementResultType.NONE
           }
 
           console.log(
@@ -852,16 +862,26 @@ export class BenefitHandler {
             partnerGisResultT3
           )
 
-          if (partnerGisResultT1 < partnerGisResultT3) {
-            allResults.partner.gis.entitlement.result = partnerGisResultT3
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+          //
+          // wonder if this would cover all cases it must return 0 when amounts are negative.
+          //
+          if (partnerGisResultT1 >= 0 && partnerGisResultT3 >= 0) {
+            if (partnerGisResultT1 < partnerGisResultT3) {
+              allResults.partner.gis.entitlement.result = partnerGisResultT3
+              allResults.partner.gis.entitlement.type =
+                EntitlementResultType.FULL
+            } else {
+              allResults.partner.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+              allResults.partner.gis.entitlement.result = partnerGisResultT1
+              allResults.partner.gis.entitlement.type =
+                EntitlementResultType.FULL
+            }
           } else {
-            allResults.partner.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
-            allResults.partner.gis.entitlement.result = partnerGisResultT1
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+            allResults.partner.gis.entitlement.result = 0
+            allResults.partner.gis.entitlement.type = EntitlementResultType.NONE
           }
 
           console.log(
@@ -893,6 +913,9 @@ export class BenefitHandler {
       allResults.client.alw.cardDetail = clientAlw.cardDetail
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
+
+    console.log('all Results: ')
+    console.log(allResults)
 
     // All done!
     return allResults

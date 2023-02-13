@@ -447,10 +447,8 @@ describe('consolidated benefit tests: max income checks', () => {
       ...partnerNoHelpNeeded,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.INCOME)
+    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
     res = await mockGetRequest({
       ...input,
       income: legalValues.alw.alwIncomeLimit - 1,
