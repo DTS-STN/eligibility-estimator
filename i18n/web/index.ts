@@ -30,6 +30,7 @@ export type WebTranslations = {
   learnMoreAboutGis: string
   alwDefinitionText: string
   learnMoreAboutAlw: string
+  inflationInfo: string
   afsDefinitionText: string
   learnMoreAboutAfs: string
   notIncludeCPP: string
