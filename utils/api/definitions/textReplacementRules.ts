@@ -85,6 +85,10 @@ export const textReplacementRules: TextReplacementRules = {
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
+  YOUR_OR_COMPLETE: (handler) =>
+    handler.input.client.maritalStatus.partnered
+      ? handler.translations.complete
+      : handler.translations.your,
 }
 
 export function generateLink(link: Link, opensNewWindow?: string): string {

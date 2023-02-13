@@ -293,8 +293,7 @@ const fr: Translations = {
     ],
   },
   detail: {
-    eligible:
-      "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligible: 'Vous êtes probablement admissible à cette prestation.',
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de vos revenus, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
@@ -344,9 +343,17 @@ const fr: Translations = {
     autoEnrollFalse:
       "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
     expectToReceive:
-      'Vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawback:
       'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+    gis: {
+      eligibleDependingOnIncomeNoEntitlement:
+        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} revenu pour obtenir une estimation de paiement mensuel.',
+      incomeTooHigh:
+        'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+      ifYouApply:
+        "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est admissible.</>",
+    },
   },
   detailWithHeading: {
     oasDeferralApplied: {
@@ -402,10 +409,12 @@ const fr: Translations = {
   },
   links,
   incomeSingle: 'votre revenu',
-  incomeCombined: 'le revenu combiné de vous et de votre partenaire',
+  incomeCombined: 'le revenu combiné de vous et votre conjoint',
   opensNewWindow: 'ouvre une nouvelle fenêtre',
   yes: 'Oui',
   no: 'Non',
   year: 'an',
+  your: 'vos',
+  complete: 'vos',
 }
 export default fr

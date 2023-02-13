@@ -341,9 +341,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...partnerUndefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
@@ -369,9 +367,7 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerLivedOutsideCanada: false,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
@@ -394,9 +390,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...partnerNoHelpNeeded,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     res = await mockGetRequest({
       ...input,
@@ -671,9 +665,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerNoHelpNeeded,
     })
     expectOasEligible(res)
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
     expectAfsMarital(res)

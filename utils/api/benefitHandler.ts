@@ -325,6 +325,7 @@ export class BenefitHandler {
       this.translations,
       allResults.client.oas
     )
+
     allResults.client.gis.eligibility = clientGis.eligibility
     allResults.client.gis.entitlement = clientGis.entitlement
     allResults.client.gis.cardDetail = clientGis.cardDetail
@@ -355,16 +356,18 @@ export class BenefitHandler {
     allResults.client.alw.entitlement = clientAlw.entitlement
     allResults.client.alw.cardDetail = clientAlw.cardDetail
 
+    const eligibleArray = [ResultKey.ELIGIBLE, ResultKey.INCOME_DEPENDENT]
+
     // set partnerbenefitstatus for partner
-    if (clientGis.eligibility.result === ResultKey.ELIGIBLE) {
+    if (eligibleArray.includes(clientGis.eligibility.result)) {
       this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.OAS_GIS
       )
-    } else if (clientAlw.eligibility.result === ResultKey.ELIGIBLE) {
+    } else if (eligibleArray.includes(clientGis.eligibility.result)) {
       this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.ALW
       )
-    } else if (clientOas.eligibility.result === ResultKey.ELIGIBLE) {
+    } else if (eligibleArray.includes(clientGis.eligibility.result)) {
       this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.OAS
       )
@@ -933,12 +936,6 @@ export class BenefitHandler {
           this.benefitResults[individualBenefits][key]
         if (!result || !result?.eligibility) continue
 
-        // clawback is only valid for OAS
-        if (key === 'oas') {
-          clawbackValue =
-            this.benefitResults[individualBenefits][key].entitlement.clawback
-        }
-
         // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
         // this happens when high income results in no entitlement.
         // this If block was copied to _base and probably not required anymore.
@@ -946,7 +943,7 @@ export class BenefitHandler {
           result.eligibility.result === ResultKey.ELIGIBLE &&
           result.entitlement.type === EntitlementResultType.NONE
         ) {
-          result.eligibility.result = ResultKey.INELIGIBLE
+          //result.eligibility.result = ResultKey.INELIGIBLE
           result.eligibility.reason = ResultReason.INCOME
           result.eligibility.detail = this.translations.detail.mustMeetIncomeReq
         }
@@ -958,11 +955,18 @@ export class BenefitHandler {
 
         // clawback is only valid for OAS
         // This adds the oasClawback text as requested.
-        let newMainText =
-          clawbackValue > 0 && result.cardDetail.mainText
-            ? result.cardDetail.mainText +
-              `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
-            : result.cardDetail.mainText
+        let newMainText = result.cardDetail.mainText
+
+        if (key === 'oas') {
+          clawbackValue =
+            this.benefitResults[individualBenefits][key].entitlement.clawback
+
+          newMainText =
+            clawbackValue > 0 && result.cardDetail.mainText
+              ? result.cardDetail.mainText +
+                `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
+              : result.cardDetail.mainText
+        }
 
         // process card main text
         result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(

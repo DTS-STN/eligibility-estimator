@@ -1,8 +1,12 @@
 import React from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
-import { BenefitResult } from '../../utils/api/definitions/types'
+import {
+  ResultKey,
+  BenefitKey,
+  ResultReason,
+} from '../../utils/api/definitions/enums'
+import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 
@@ -20,6 +24,7 @@ export const BenefitCards: React.VFC<{
     'Old Age Security (OAS) pension',
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
+
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
   const resultsEligible = results.filter(
@@ -44,6 +49,25 @@ export const BenefitCards: React.VFC<{
     benefitText =
       foundIndex != -1 ? titleWithAcronymArray[foundIndex] : benefitName
     return benefitText
+  }
+
+  const getNextStepText = (benefitKey, result): NextStepText => {
+    let nextStepText = { nextStepTitle: '', nextStepContent: '' }
+
+    if (benefitKey === BenefitKey.gis) {
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE ||
+        result.eligibility.result === ResultKey.INCOME_DEPENDENT
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent =
+          result.eligibility.reason === ResultReason.INCOME
+            ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
+            : tsln.resultsPage.nextStepGis
+      }
+    }
+
+    return nextStepText
   }
 
   function generateCard(result: BenefitResult) {
@@ -75,13 +99,20 @@ export const BenefitCards: React.VFC<{
     titleText =
       eligibility === false ? transformBenefitName(titleText) : titleText
 
+    const eligibleText = eligibility
+      ? apiTsln.result.eligible
+      : apiTsln.result.ineligible
+
+    const nextStepText = getNextStepText(result.benefitKey, result)
+
     return (
       <div key={result.benefitKey}>
         <BenefitCard
           benefitKey={result.benefitKey}
           benefitName={titleText}
           isEligible={eligibility}
-          eligibleText={apiTsln.result[result.eligibility.result]}
+          eligibleText={eligibleText}
+          nextStepText={nextStepText}
           collapsedDetails={collapsedDetails}
           links={result.cardDetail.links.map((value) => {
             return {
@@ -101,6 +132,8 @@ export const BenefitCards: React.VFC<{
       </div>
     )
   }
+
+  console.log(resultsEligible)
 
   return (
     <div>

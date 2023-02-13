@@ -107,7 +107,6 @@ const en: WebTranslations = {
   warningText: 'warning',
   category: apiEn.category,
   errorBoxTitle: 'The form could not be submitted because ',
-
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
@@ -139,6 +138,9 @@ const en: WebTranslations = {
     info: 'info',
     note: 'note',
     link: 'link',
+    nextStepTitle: 'Next steps',
+    nextStepGis:
+      'You can apply for the Guaranteed Income Supplement when you apply for the Old Age Security pension.',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,
