@@ -75,6 +75,7 @@ const fr: WebTranslations = {
   alwDefinitionText:
     'Une prestation non imposable disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
   learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
+  inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter le coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
     'Une prestation non imposable disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,

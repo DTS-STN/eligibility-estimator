@@ -168,8 +168,9 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             />
 
             <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>
+            <p>{tsln.inflationInfo}</p>
             <p
-              className="summary-link"
+              className="summary-link mt-8"
               dangerouslySetInnerHTML={{ __html: tsln.resultDefinition }}
             />
 
