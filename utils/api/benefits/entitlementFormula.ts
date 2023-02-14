@@ -108,8 +108,12 @@ export class EntitlementFormula {
     if (this.oasResult?.entitlement.type === EntitlementResultType.PARTIAL) {
       const oasCoverageAmount =
         legalValues.oas.amount - this.oasResult.entitlement.result65To74
-      return roundToTwo(preOasAmount + oasCoverageAmount)
-    } else return preOasAmount
+
+      // Always return 0 when result is negative
+      return preOasAmount + oasCoverageAmount > 0
+        ? roundToTwo(preOasAmount + oasCoverageAmount)
+        : 0
+    } else return preOasAmount > 0 ? preOasAmount : 0
   }
 
   /**
