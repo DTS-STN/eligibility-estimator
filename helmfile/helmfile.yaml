@@ -1,4 +1,5 @@
 environments:
+  alpha:
   dev:
   staging:
   dyna:
@@ -6,7 +7,7 @@ environments:
   prod:
 
 releases:
-  - name: {{ requiredEnv "PATH_PREFIX" }}-{{ requiredEnv "BRANCH" | lower }}
+  - name: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}
     chart: ../helm/charts/eligibility-estimator
     values:
       - overrides/eligibility-estimator/eligibility-estimator.yaml.gotmpl
