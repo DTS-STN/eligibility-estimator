@@ -77,6 +77,9 @@ export interface Translations {
     autoEnrollFalse: string
     expectToReceive: string
     oasClawback: string
+    oas: {
+      eligibleIfIncomeIsLessThan: string
+    }
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string
       incomeTooHigh: string

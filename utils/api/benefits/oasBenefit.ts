@@ -53,7 +53,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         return {
           result: ResultKey.INCOME_DEPENDENT,
           reason: ResultReason.INCOME_MISSING,
-          detail: this.translations.detail.eligibleDependingOnIncome,
+          detail: this.translations.detail.oas.eligibleIfIncomeIsLessThan,
           incomeMustBeLessThan: incomeLimit,
         }
       else if (this.input.age >= 65) {
@@ -284,5 +284,28 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       )
 
     return cardCollapsedText
+  }
+
+  protected getCardText(): string {
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.type === EntitlementResultType.NONE
+    ) {
+      //this.eligibility.result = ResultKey.INELIGIBLE
+      this.eligibility.reason = ResultReason.INCOME
+      this.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+      this.entitlement.autoEnrollment = this.getAutoEnrollment()
+    }
+
+    let text = this.eligibility.detail
+
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.result > 0
+    ) {
+      text += ` ${this.translations.detail.expectToReceive}`
+    }
+
+    return text
   }
 }
