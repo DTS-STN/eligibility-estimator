@@ -7,7 +7,7 @@ environments:
   prod:
 
 releases:
-  - name: {{ requiredEnv "SUB_DOMAIN_PATH" }}
+  - name: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}
     chart: ../helm/charts/eligibility-estimator
     values:
       - overrides/eligibility-estimator/eligibility-estimator.yaml.gotmpl
