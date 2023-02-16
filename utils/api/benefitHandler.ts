@@ -413,6 +413,8 @@ export class BenefitHandler {
       allResults.partner.alw.entitlement = partnerAlw.entitlement
       allResults.partner.alw.cardDetail = partnerAlw.cardDetail
 
+      console.log('partnerAlw', partnerAlw)
+
       const partnerOas = new OasBenefit(
         this.input.partner,
         this.translations,
@@ -807,10 +809,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            allResults.client.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
+            if (
+              allResults.client.gis.eligibility.reason === ResultReason.NONE
+            ) {
+              allResults.client.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
