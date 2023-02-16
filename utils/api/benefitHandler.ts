@@ -413,8 +413,6 @@ export class BenefitHandler {
       allResults.partner.alw.entitlement = partnerAlw.entitlement
       allResults.partner.alw.cardDetail = partnerAlw.cardDetail
 
-      console.log('partnerAlw', partnerAlw)
-
       const partnerOas = new OasBenefit(
         this.input.partner,
         this.translations,
