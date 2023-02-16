@@ -79,6 +79,15 @@ export interface Translations {
     oasClawback: string
     oas: {
       eligibleIfIncomeIsLessThan: string
+      dependOnYourIncome: string
+      eligibleIncomeTooHigh: string
+      serviceCanadaReviewYourPayment: string
+      automaticallyBePaid: string
+      youShouldReceiveLetter: string
+      applyOnline: string
+      over70: string
+      eligibleWhenTurn65: string
+      ifNotReceiveLetter64: string
     }
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string

@@ -56,12 +56,15 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._language,
       { rounding: 0 }
     )}</strong>`,
-  INCOME_LESS_THAN: (handler, benefitResult) =>
-    `<strong>${numberToStringCurrency(
+  INCOME_LESS_THAN: (handler, benefitResult) => {
+    console.log('benefitResult --- INCOME_LESS_THAN', benefitResult)
+
+    return `<strong>${numberToStringCurrency(
       benefitResult.eligibility.incomeMustBeLessThan,
       handler.translations._language,
       { rounding: 0 }
-    )}</strong>`,
+    )}</strong>`
+  },
   INCOME_SINGLE_OR_COMBINED: (handler) =>
     handler.input.client.maritalStatus.partnered
       ? handler.translations.incomeCombined
