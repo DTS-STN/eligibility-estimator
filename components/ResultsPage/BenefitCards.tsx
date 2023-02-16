@@ -80,11 +80,11 @@ export const BenefitCards: React.VFC<{
             ? (nextStepText.nextStepContent +=
                 ' ' +
                 apiTsln.detail.oas.automaticallyBePaid +
-                numberToStringCurrency(
+                `<b>${numberToStringCurrency(
                   legalValues.oas.incomeLimit,
                   apiTsln._language,
                   { rounding: 0 }
-                ))
+                )}</b>`)
             : ''
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
