@@ -10,6 +10,7 @@ import {
   EligibilityResult,
   EntitlementResultOas,
   ProcessedInput,
+  Link,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
 import legalValues from '../scrapers/output'
@@ -53,26 +54,34 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         return {
           result: ResultKey.INCOME_DEPENDENT,
           reason: ResultReason.INCOME_MISSING,
-          detail: this.translations.detail.eligibleDependingOnIncome,
+          detail: this.translations.detail.oas.eligibleIfIncomeIsLessThan,
           incomeMustBeLessThan: incomeLimit,
         }
       else if (this.input.age >= 65) {
         return {
           result: ResultKey.ELIGIBLE,
-          reason: ResultReason.NONE,
-          detail: this.translations.detail.eligible,
+          reason:
+            this.input.income.relevant > incomeLimit
+              ? ResultReason.INCOME
+              : this.input.age >= 65 && this.input.age < 70
+              ? ResultReason.AGE_65_TO_69
+              : ResultReason.AGE_70_AND_OVER,
+          detail:
+            this.input.income.relevant > incomeLimit
+              ? this.translations.detail.oas.eligibleIncomeTooHigh
+              : this.translations.detail.eligible,
         }
-      } else if (this.input.age == 64) {
+      } else if (this.input.age >= 64 && this.input.age < 65) {
         return {
           result: ResultKey.INELIGIBLE,
-          reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.eligibleWhen65ApplyNow,
+          reason: ResultReason.AGE_YOUNG_64,
+          detail: this.translations.detail.oas.eligibleWhenTurn65,
         }
       } else {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.eligibleWhen65,
+          detail: this.translations.detail.oas.eligibleWhenTurn65,
         }
       }
     } else if (!meetsReqIncome) {
@@ -263,26 +272,69 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       return cardCollapsedText
     }
 
-    // increase at 75
-    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75
-      )
-    else
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75Applied
-      )
+    // // increase at 75
+    // if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasIncreaseAt75
+    //   )
+    // else
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasIncreaseAt75Applied
+    //   )
 
-    // deferral
-    if (this.deferralIncrease)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasDeferralApplied
-      )
-    else if (this.input.age >= 65 && this.input.age < 70)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasDeferralAvailable
-      )
+    // // deferral
+    // if (this.deferralIncrease)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasDeferralApplied
+    //   )
+    // else if (this.input.age >= 65 && this.input.age < 70)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasDeferralAvailable
+    //   )
 
     return cardCollapsedText
+  }
+
+  protected getCardText(): string {
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.type === EntitlementResultType.NONE
+    ) {
+      //this.eligibility.result = ResultKey.INELIGIBLE
+      this.eligibility.reason = ResultReason.INCOME
+      this.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+      this.entitlement.autoEnrollment = this.getAutoEnrollment()
+    }
+
+    let text = this.eligibility.detail
+
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.eligibility.reason !== ResultReason.INCOME &&
+      this.entitlement.result > 0
+    ) {
+      text += ` ${this.translations.detail.expectToReceive}`
+    } else if (this.eligibility.result === ResultKey.INCOME_DEPENDENT) {
+      text += `<p class="mt-6">${this.translations.detail.oas.dependOnYourIncome}</p>`
+    } else if (
+      this.eligibility.result === ResultKey.INELIGIBLE &&
+      this.eligibility.reason === ResultReason.AGE_YOUNG
+    ) {
+      text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
+    }
+
+    return text
+  }
+
+  protected getCardLinks(): Link[] {
+    const links: Link[] = []
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
+      this.eligibility.reason === ResultReason.AGE_YOUNG_64
+    )
+      links.push(this.translations.links.apply[this.benefitKey])
+    links.push(this.translations.links.overview[this.benefitKey])
+    return links
   }
 }

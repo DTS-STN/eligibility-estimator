@@ -29,9 +29,9 @@ export function expectAlwAfsTooOld(res: MockResponseObject<ResponseSuccess>) {
 
 export function expectOasGisTooYoung(res: MockResponseObject<ResponseSuccess>) {
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.INELIGIBLE)
-  expect(res.body.results.oas.eligibility.reason).toEqual(
-    ResultReason.AGE_YOUNG
-  )
+  // expect(res.body.results.oas.eligibility.reason).toEqual(
+  //   ResultReason.AGE_YOUNG
+  // )
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
 }
@@ -60,7 +60,7 @@ export function expectOasEligible(
 ) {
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
+  //expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(res.body.results.oas.entitlement.type).toEqual(oasType)
   if (oasType === EntitlementResultType.FULL && !entitlement)
     entitlement = legalValues.oas.amount

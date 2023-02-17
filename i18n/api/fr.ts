@@ -350,6 +350,28 @@ const fr: Translations = {
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawback:
       'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+    oas: {
+      eligibleIfIncomeIsLessThan:
+        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
+      dependOnYourIncome:
+        'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
+      eligibleIncomeTooHigh:
+        'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+      serviceCanadaReviewYourPayment:
+        'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
+      automaticallyBePaid:
+        'Vous recevrez automatiquement un paiement si votre revenu est inférieur à ',
+      youShouldReceiveLetter:
+        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+      applyOnline:
+        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
+      over70:
+        'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
+      eligibleWhenTurn65:
+        "Vous serez probablement admissible lorsque vous aurez 65 ans. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
+      ifNotReceiveLetter64:
+        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a class='underline text-default-text' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+    },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
         'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} revenu pour obtenir une estimation de paiement mensuel.',

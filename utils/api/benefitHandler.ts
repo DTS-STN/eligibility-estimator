@@ -807,10 +807,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            allResults.client.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
+            if (
+              allResults.client.gis.eligibility.reason === ResultReason.NONE
+            ) {
+              allResults.client.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
@@ -895,9 +899,6 @@ export class BenefitHandler {
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
 
-    console.log('all Results: ')
-    console.log(allResults)
-
     // All done!
     return allResults
   }
@@ -935,10 +936,13 @@ export class BenefitHandler {
         // This adds the oasClawback text as requested.
         let newMainText = result.cardDetail.mainText
 
-        if (key === 'oas') {
+        if (
+          key === 'oas' &&
+          this.benefitResults[individualBenefits][key].eligibility.reason !==
+            ResultReason.INCOME
+        ) {
           clawbackValue =
             this.benefitResults[individualBenefits][key].entitlement.clawback
-
           newMainText =
             clawbackValue > 0 && result.cardDetail.mainText
               ? result.cardDetail.mainText +
