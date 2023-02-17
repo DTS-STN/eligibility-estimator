@@ -102,6 +102,17 @@ export const BenefitCards: React.VFC<{
           apiTsln.detail.oas.youShouldReceiveLetter
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.ifNotReceiveLetter64}</p>`
       }
+    } else if (benefitKey === BenefitKey.alw) {
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result === 0
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent =
+          result.eligibility.reason === ResultReason.INCOME
+            ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
+            : tsln.resultsPage.nextStepGis
+      }
     }
     return nextStepText
   }

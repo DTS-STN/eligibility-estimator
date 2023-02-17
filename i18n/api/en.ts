@@ -302,10 +302,11 @@ const en: Translations = {
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:
       'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
-    eligibleWhen60: 'You will likely be eligible when you turn 60.',
+    eligibleWhen60:
+      "You'll likely be eligible for this benefit once you turn 60. You can <a class='underline text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBeInCanada:
-      'You need to live in Canada to be eligible for this benefit.',
+      "You need to live in Canada to receive this benefit. You can <a class='underline text-default-text' href='/eligibility/#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:

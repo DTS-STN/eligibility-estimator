@@ -33,6 +33,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
+    const meetsReqCountry = this.input.livingCountry.canada
 
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
@@ -51,7 +52,8 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqYears &&
       meetsReqMarital &&
       meetsReqIncome &&
-      meetsReqPartner
+      meetsReqPartner &&
+      meetsReqCountry
     ) {
       if (meetsReqAge && skipReqIncome) {
         return {
@@ -69,10 +71,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
-            detail:
-              this.translations.detail.eligibleIncomeTooHigh +
-              this.translations.detail.alwIfYouApply,
-            incomeMustBeLessThan: maxIncome,
+            detail: this.translations.detail.eligibleIncomeTooHigh,
           }
         } else {
           return {
@@ -123,6 +122,12 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.INCOME,
         detail: this.translations.detail.mustMeetIncomeReq,
+      }
+    } else if (!meetsReqCountry) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.INCOME,
+        detail: this.translations.detail.mustBeInCanada,
       }
     } else if (!meetsReqYears) {
       if (

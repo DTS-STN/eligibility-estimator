@@ -309,11 +309,11 @@ const fr: Translations = {
     eligibleWhen65ApplyNow:
       'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
-      'Vous serez probablement admissible à votre 60e anniversaire.',
+      "Vous serez probablement admissible lorsque vous aurez 60 ans. Vous pouvez <a class='underline text-default-text' href='/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
     eligibleWhen65:
       'Vous serez probablement admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      'Vous devez vivre au Canada pour être admissible à cette prestation.',
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='underline text-default-text' href='/eligibility/#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
