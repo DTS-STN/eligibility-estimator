@@ -33,14 +33,13 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.2"
 
 project {
-    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorStaging)
-    vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
     vcsRoot(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
-    buildType(Build_Staging)
-    buildType(Build_Main)
     buildType(Build_Develop)
+    buildType(Build_Staging)
     buildType(Build_Dynamic)
+    buildType(Build_Alpha)
+    buildType(Build_Prod)
     buildType(CleanUpWeekly)
     //
     // global parameters
@@ -55,35 +54,12 @@ project {
         param("env.CLOUD_K8S_RG", "%vault:dts-common/data/AZURE_BDM_DEV_SUB!/CLOUD_K8S_RG%")
         param("env.CLOUD_SUBSCRIPTION", "%vault:dts-common/data/AZURE_BDM_DEV_SUB!/CLOUD_SUBSCRIPTION%")
         param("env.CLOUD_TENANT-ID", "%vault:dts-common/data/AZURE_BDM_DEV_SUB!/CLOUD_TENANT_ID%")
-        param("env.PATH_PREFIX", "eligibility-estimator")
+        param("env.ENVIRONMENT", "")
+        param("env.SUB_DOMAIN", "ep-be")
+        param("env.SUB_DOMAIN_PATH", "%env.SUB_DOMAIN%")
         param("env.PROJECT", "eligibility-estimator")
     }
 }
-
-object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorStaging : GitVcsRoot({
-    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_staging"
-    url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    branch = "refs/heads/develop"
-    branchSpec = "+:refs/heads/develop"
-    authMethod = uploadedKey {
-        userName = "git"
-        uploadedKey = "DTS_GITHUB_SSH_KEY"
-        passphrase = "************"
-    }
-})
-
-object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain : GitVcsRoot({
-    name = "https://github.com/DTS-STN/eligibility-estimator/tree/_main"
-    url = "git@github.com:DTS-STN/eligibility-estimator.git"
-    useTagsAsBranches = true
-    branch = "refs/heads/main"
-    branchSpec = "+:refs/heads/main"
-    authMethod = uploadedKey {
-        userName = "git"
-        uploadedKey = "DTS_GITHUB_SSH_KEY"
-        passphrase = "************"
-    }
-})
 
 object Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop : GitVcsRoot({
     name = "https://github.com/DTS-STN/eligibility-estimator/tree/_develop"
@@ -119,8 +95,61 @@ object Build_Develop: BuildType({
     description = "Builds and deploys our develop branch on update to develop url"
     params {
         param("env.TARGET", "dev")
-        param("env.BRANCH", "develop")
         param("env.DOCKER_TAG", "TC-%build.number%-dev")
+        param("env.ENVIRONMENT", "develop")
+        param("env.SUB_DOMAIN_PATH", "%env.SUB_DOMAIN%-%env.ENVIRONMENT%")
+    }
+    vcs {
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
+    }
+    
+    steps {
+        dockerCommand {
+            name = "Build & Tag Docker Image"
+            commandType = build {
+                source = file {
+                    path = "Dockerfile"
+                }
+                namesAndTags = "%env.CLOUD_ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg ADOBE_ANALYTICS_URL=%env.ADOBE_ANALYTICS_URL%"
+            }
+        }
+        script {
+            name = "Login to Azure and ACR"
+            scriptContent = """
+                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.CLOUD_TENANT-ID%
+                az account set -s %env.CLOUD_SUBSCRIPTION%
+                az acr login -n %env.CLOUD_ACR_DOMAIN%
+            """.trimIndent()
+        }
+        dockerCommand {
+            name = "Push Image to ACR"
+            commandType = push {
+                namesAndTags = "%env.CLOUD_ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+            }
+        }
+        script {
+            name = "Deploy w/ Helmfile"
+            scriptContent = """
+                cd ./helmfile
+                az account set -s %env.CLOUD_SUBSCRIPTION%
+                az aks get-credentials --overwrite-existing --admin --resource-group %env.CLOUD_K8S_RG% --name %env.CLOUD_K8S_CLUSTER_NAME%
+                kubectl config use-context %env.CLOUD_K8S_CLUSTER_NAME%-admin
+                helmfile -e %env.TARGET% apply
+            """.trimIndent()
+        }
+    }
+})
+
+
+object Build_Staging: BuildType({
+    name = "Build_Staging"
+    description = "Builds and deploys our main branch on update to staging url"
+    params {
+        param("env.TARGET", "staging")
+        param("env.DOCKER_TAG", "TC-%build.number%-staging")
+        param("env.ENVIRONMENT", "staging")
+        param("env.SUB_DOMAIN_PATH", "%env.SUB_DOMAIN%-%env.ENVIRONMENT%")
     }
     vcs {
         root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
@@ -169,9 +198,11 @@ object Build_Dynamic: BuildType({
     name = "Build_Dynamic"
     description = "Dynamic branching; builds and deploys every branch"
     params {
-        param("env.DOCKER_TAG", "TC-%build.number%-dyna")
-        param("env.BRANCH", "dyna-%teamcity.build.branch%")
         param("env.TARGET", "dyna")
+        param("env.DOCKER_TAG", "TC-%build.number%-dyna")
+        param("env.BRANCH", "%teamcity.build.branch%")
+        param("env.ENVIRONMENT", "dyna")
+        param("env.SUB_DOMAIN_PATH", "%env.SUB_DOMAIN%-%env.ENVIRONMENT%-%env.BRANCH%")
     }
     vcs {
         root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDynamic)
@@ -226,16 +257,18 @@ object Build_Dynamic: BuildType({
 })
 
 
-object Build_Main: BuildType({
-    name = "Build_Main"
-    description = "Builds and deploys our main branch on update to main url"
+object Build_Alpha: BuildType({
+    name = "Build_Alpha"
+    description = "Builds and deploys our develop branch to alpha SC Labs url"
     params {
-        param("env.DOCKER_TAG", "TC-%build.number%-prod")
-        param("env.BRANCH", "main")
-        param("env.TARGET", "main")
+        param("env.TARGET", "alpha")
+        param("env.BASE_DOMAIN", "service.canada.ca")
+        param("env.DOCKER_TAG", "TC-%build.number%-alpha")
+        param("env.ENVIRONMENT", "alpha")
+        param("env.SUB_DOMAIN_PATH", "%env.SUB_DOMAIN%.%env.ENVIRONMENT%")
     }
     vcs {
-        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorMain)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
     }
     
     steps {
@@ -274,27 +307,20 @@ object Build_Main: BuildType({
             """.trimIndent()
         }
     }
-    triggers {
-        vcs {
-            branchFilter = """
-                    +:*
-                    -:refs/heads/main
-                    """.trimIndent()
-        }
-    }
 })
 
 
-object Build_Staging: BuildType({
-    name = "Build_Staging"
-    description = "Builds and deploys our main branch on update to staging url"
+object Build_Prod: BuildType({
+    name = "Build_Prod"
+    description = "Builds and deploys our main develop on command to service canada"
     params {
-        param("env.DOCKER_TAG", "TC-%build.number%-staging")
-        param("env.BRANCH", "staging")
-        param("env.TARGET", "staging")
+        param("env.TARGET", "prod")
+        param("env.BASE_DOMAIN", "service.canada.ca")
+        param("env.DOCKER_TAG", "TC-%build.number%-prod")
+        param("env.SUB_DOMAIN_PATH", "%env.SUB_DOMAIN%")
     }
     vcs {
-        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorStaging)
+        root(Dev_EligibilityEstimator_HttpsGithubComDtsStnEligibilityEstimatorDevelop)
     }
     
     steps {
@@ -305,7 +331,7 @@ object Build_Staging: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.CLOUD_ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg ADOBE_ANALYTICS_URL=%env.ADOBE_ANALYTICS_URL%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number%"
             }
         }
         script {
@@ -333,15 +359,8 @@ object Build_Staging: BuildType({
             """.trimIndent()
         }
     }
-    triggers {
-        vcs {
-            branchFilter = """
-                    +:develop
-                    +:refs/heads/develop
-                    """.trimIndent()
-        }
-    }
 })
+
 
 object CleanUpWeekly: BuildType({
     name = "CleanUpWeekly"

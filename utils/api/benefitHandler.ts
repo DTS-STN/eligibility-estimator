@@ -730,9 +730,7 @@ export class BenefitHandler {
           console.log('partnerGisResultT1', partnerGisResultT1)
 
           // define Total_amt_Single
-          const totalAmtSingle =
-            partnerGisResultT1 + clientAlw.entitlement.result
-
+          const totalAmtSingle = partnerGisResultT1 + applicantAlwCalcSingle
           console.log(
             'applicant is eligible for alw',
             'totalAmtSingle',
@@ -809,10 +807,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            allResults.client.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
+            if (
+              allResults.client.gis.eligibility.reason === ResultReason.NONE
+            ) {
+              allResults.client.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
