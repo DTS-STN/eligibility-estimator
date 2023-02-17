@@ -109,6 +109,7 @@ components:
         - You meet the criteria
         - Age does not meet requirement for this benefit
         - Age does not meet yet requirement for this benefit, will in the future
+        - Age 64 and does not meet the requirement
         - Not enough years in Canada
         - Not living in Canada
         - Legal status does not meet requirement for this benefit
@@ -119,6 +120,8 @@ components:
         - Income not provided
         - Your marital status does not meet the requirement for this benefit
         - Your partner does not receive the required benefits
+        - Age between 65 and 69
+        - Age 70 or over
 
     ResultObject:
       type: object

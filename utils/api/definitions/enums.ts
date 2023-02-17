@@ -63,6 +63,7 @@ export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
   AGE_YOUNG = `Age does not meet yet requirement for this benefit, will in the future`,
+  AGE_YOUNG_64 = `Age 64 and does not meet the requirement`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
   LIVING_COUNTRY = `Not living in Canada`,
   LEGAL_STATUS = `Legal status does not meet requirement for this benefit`,
@@ -73,6 +74,8 @@ export enum ResultReason {
   INCOME_MISSING = 'Income not provided',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
   PARTNER = 'Your partner does not receive the required benefits',
+  AGE_65_TO_69 = 'Age between 65 and 69',
+  AGE_70_AND_OVER = 'Age 70 or over',
 }
 
 // used to determine color+type of alert dialog

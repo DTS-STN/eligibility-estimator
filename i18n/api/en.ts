@@ -338,6 +338,28 @@ const en: Translations = {
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawback:
       'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+    oas: {
+      eligibleIfIncomeIsLessThan:
+        'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.',
+      dependOnYourIncome:
+        'Depending on your income, you can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month. Provide your income to get an accurate estimate.',
+      eligibleIncomeTooHigh:
+        "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+      serviceCanadaReviewYourPayment:
+        'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
+      automaticallyBePaid:
+        "You'll automatically be paid if your income is less than ",
+      youShouldReceiveLetter:
+        'You should have received a letter about your enrolment status the month after you turned 64.',
+      applyOnline:
+        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
+      over70:
+        "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
+      eligibleWhenTurn65:
+        "You'll likely be eligible for this benefit once you turn 65. You can <a class='underline text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age.",
+      ifNotReceiveLetter64:
+        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='underline text-default-text' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+    },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
         'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income to get a monthly payment estimate.',

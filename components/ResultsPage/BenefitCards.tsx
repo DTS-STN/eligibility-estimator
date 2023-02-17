@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations } from '../../i18n/api'
+import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
   ResultKey,
@@ -7,6 +7,7 @@ import {
   ResultReason,
 } from '../../utils/api/definitions/enums'
 import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
+import legalValues from '../../utils/api/scrapers/output'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 
@@ -65,8 +66,43 @@ export const BenefitCards: React.VFC<{
             ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
             : tsln.resultsPage.nextStepGis
       }
+    } else if (benefitKey === BenefitKey.oas) {
+      console.log('result', result)
+      if (result.eligibility.result === ResultKey.ELIGIBLE) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        if (result.entitlement.clawback > 0) {
+          if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+            nextStepText.nextStepContent += `<p class='mb-6'>${apiTsln.detail.oas.over70}</p>`
+          }
+          nextStepText.nextStepContent +=
+            apiTsln.detail.oas.serviceCanadaReviewYourPayment
+          result.eligibility.reason === ResultReason.INCOME
+            ? (nextStepText.nextStepContent +=
+                ' ' +
+                apiTsln.detail.oas.automaticallyBePaid +
+                `<b>${numberToStringCurrency(
+                  legalValues.oas.incomeLimit,
+                  apiTsln._language,
+                  { rounding: 0 }
+                )}</b>`)
+            : ''
+        } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
+          nextStepText.nextStepContent +=
+            apiTsln.detail.oas.youShouldReceiveLetter
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
+        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+          nextStepText.nextStepContent += apiTsln.detail.oas.over70
+        }
+      } else if (
+        result.eligibility.result === ResultKey.INELIGIBLE &&
+        result.eligibility.reason === ResultReason.AGE_YOUNG_64
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent +=
+          apiTsln.detail.oas.youShouldReceiveLetter
+        nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.ifNotReceiveLetter64}</p>`
+      }
     }
-
     return nextStepText
   }
 
@@ -132,8 +168,6 @@ export const BenefitCards: React.VFC<{
       </div>
     )
   }
-
-  console.log(resultsEligible)
 
   return (
     <div>

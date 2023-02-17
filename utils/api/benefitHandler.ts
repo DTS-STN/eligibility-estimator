@@ -899,9 +899,6 @@ export class BenefitHandler {
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
 
-    console.log('all Results: ')
-    console.log(allResults)
-
     // All done!
     return allResults
   }
@@ -939,10 +936,13 @@ export class BenefitHandler {
         // This adds the oasClawback text as requested.
         let newMainText = result.cardDetail.mainText
 
-        if (key === 'oas') {
+        if (
+          key === 'oas' &&
+          this.benefitResults[individualBenefits][key].eligibility.reason !==
+            ResultReason.INCOME
+        ) {
           clawbackValue =
             this.benefitResults[individualBenefits][key].entitlement.clawback
-
           newMainText =
             clawbackValue > 0 && result.cardDetail.mainText
               ? result.cardDetail.mainText +
