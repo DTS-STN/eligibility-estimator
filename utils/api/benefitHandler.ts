@@ -320,7 +320,7 @@ export class BenefitHandler {
     }
 
     // All done with OAS, move onto GIS, but only do GIS eligibility for now.
-    const clientGis = new GisBenefit(
+    let clientGis = new GisBenefit(
       this.input.client,
       this.translations,
       allResults.client.oas
@@ -564,10 +564,20 @@ export class BenefitHandler {
               totalAmountCouple
             )
 
-            allResults.client.gis.cardDetail.collapsedText.push(
+            const clientSingleInput = this.getSingleClientInput()
+
+            clientGis = new GisBenefit(
+              clientSingleInput,
+              this.translations,
+              allResults.client.oas
+            )
+
+            clientGis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
                 .calculatedBasedOnIndividualIncome
             )
+
+            allResults.client.gis.eligibility = clientGis.eligibility
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
             allResults.partner.gis.entitlement.result = partnerGisResultT1
@@ -901,6 +911,38 @@ export class BenefitHandler {
 
     // All done!
     return allResults
+  }
+
+  private getSingleClientInput(): ProcessedInput {
+    const incomeHelper = new IncomeHelper(
+      this.rawInput.incomeAvailable,
+      false,
+      this.rawInput.income,
+      0,
+      new MaritalStatusHelper(MaritalStatus.SINGLE)
+    )
+
+    const clientSingleInput: ProcessedInput = {
+      income: incomeHelper,
+      age: this.rawInput.age,
+      oasDefer: this.rawInput.oasDefer,
+      oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
+      maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
+      livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
+      legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
+      livedOutsideCanada: this.rawInput.livedOutsideCanada,
+      // if not livedOutsideCanada, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: !this.rawInput.livedOutsideCanada
+        ? 40
+        : this.rawInput.yearsInCanadaSince18,
+      everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
+      invSeparated: this.rawInput.invSeparated,
+      partnerBenefitStatus: new PartnerBenefitStatusHelper(
+        this.rawInput.partnerBenefitStatus
+      ),
+    }
+
+    return clientSingleInput
   }
 
   /**
