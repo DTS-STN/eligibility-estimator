@@ -807,10 +807,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            allResults.client.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
+            if (
+              allResults.client.gis.eligibility.reason === ResultReason.NONE
+            ) {
+              allResults.client.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
