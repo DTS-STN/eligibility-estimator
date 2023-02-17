@@ -79,7 +79,7 @@ const ResultsPage: React.VFC<{
     {
       text: getEligibleLinkText(summary.entitlementSum, tsln),
       url: '#eligible',
-      idSuffix: 'eligilble',
+      idSuffix: 'eligible',
     },
     {
       text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
