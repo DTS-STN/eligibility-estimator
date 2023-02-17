@@ -2,7 +2,7 @@ import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 
 export const ListLinks: React.VFC<{
   title: string
-  links: Array<{ url: string; text: string }>
+  links: Array<{ url: string; text: string; idSuffix: string }>
 }> = ({ title, links }) => {
   return (
     <div className="p-4 mt-5">
@@ -10,9 +10,9 @@ export const ListLinks: React.VFC<{
 
       <ul className="pl-[2.5rem] list-disc text-content">
         {links &&
-          links.map(({ text, url }, index) => (
+          links.map(({ text, url, idSuffix }, index) => (
             <li key={index}>
-              <DSLink id={`link${index}`} href={url} text={text} />
+              <DSLink id={`${idSuffix}Link$`} href={url} text={text} />
             </li>
           ))}
       </ul>

@@ -74,31 +74,42 @@ const ResultsPage: React.VFC<{
   let listLinks: {
     text: string
     url: string
+    idSuffix: string
   }[] = [
     {
       text: getEligibleLinkText(summary.entitlementSum, tsln),
       url: '#eligible',
+      idSuffix: 'eligilble',
     },
     {
       text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
       url: '#estimated',
+      idSuffix: 'estimated',
     },
-    { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
+    {
+      text: tsln.resultsPage.whatYouToldUs,
+      url: '#answers',
+      idSuffix: 'answers',
+    },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'oas')}`,
       url: '#oas',
+      idSuffix: 'oas',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'gis')}`,
       url: '#gis',
+      idSuffix: 'gis',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'alw')}`,
       url: '#alw',
+      idSuffix: 'alw',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'afs')}`,
       url: '#afs',
+      idSuffix: 'afs',
     },
   ]
 

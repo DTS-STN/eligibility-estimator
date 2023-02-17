@@ -108,6 +108,7 @@ export const BenefitCards: React.VFC<{
 
   function generateCard(result: BenefitResult) {
     let titleText: string = apiTsln.benefit[result.benefitKey]
+    let idSuffix: string = titleText.replaceAll(' ', '')
     let collapsedDetails = result.cardDetail.collapsedText
     const eligiblePartnerResult = partnerResultsEligible.find(
       (benefit) => benefit.benefitKey === result.benefitKey
@@ -156,6 +157,7 @@ export const BenefitCards: React.VFC<{
               url: value.url,
               text: value.text,
               alt: '', // must make text alts null for images that need to be ignored by assistive technologies (AT)
+              idSuffix: idSuffix,
             }
           })}
         >
