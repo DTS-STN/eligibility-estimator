@@ -66,7 +66,6 @@ export const BenefitCards: React.VFC<{
             : tsln.resultsPage.nextStepGis
       }
     }
-
     return nextStepText
   }
 

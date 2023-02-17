@@ -62,10 +62,24 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           incomeMustBeLessThan: maxIncome,
         }
       } else if (meetsReqAge) {
-        return {
-          result: ResultKey.ELIGIBLE,
-          reason: ResultReason.NONE,
-          detail: this.translations.detail.eligible,
+        const amount = this.formulaResult()
+
+        // client is Eligible however if the amount returned is 0 it requires a different text
+        if (amount === 0) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.NONE,
+            detail:
+              this.translations.detail.eligibleIncomeTooHigh +
+              this.translations.detail.alwIfYouApply,
+            incomeMustBeLessThan: maxIncome,
+          }
+        } else {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.NONE,
+            detail: this.translations.detail.eligible,
+          }
         }
       } else if (this.input.age == 59) {
         return {
@@ -198,6 +212,20 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         : EntitlementResultType.FULL
 
     return { result: formulaResult, type, autoEnrollment }
+  }
+
+  /**
+   * Just the formula to get the amount
+   */
+  protected formulaResult(): number {
+    const formulaResult = new EntitlementFormula(
+      this.input.income.relevant,
+      this.input.maritalStatus,
+      this.input.partnerBenefitStatus,
+      this.input.age
+    ).getEntitlementAmount()
+
+    return formulaResult
   }
 
   /**

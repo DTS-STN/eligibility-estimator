@@ -288,10 +288,12 @@ const en: Translations = {
   },
   detail: {
     eligible: 'You are likely eligible for this benefit.',
+    eligibleIncomeTooHigh:
+      'You are likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.',
     eligibleDependingOnIncome:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     eligibleDependingOnIncomeNoEntitlement:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide your income to get a monthly payment estimate.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide complete income information to get a monthly payment estimate.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
@@ -328,6 +330,8 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
+    alwIfYouApply:
+      "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than {INCOME_LESS_THAN}</p>",
     afsNotEligible:
       'The Allowance for the Survivor is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner has passed away.',
     autoEnrollTrue:

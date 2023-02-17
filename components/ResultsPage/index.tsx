@@ -106,9 +106,7 @@ const ResultsPage: React.VFC<{
   listLinks = listLinks.filter((ll) => ll.text)
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) =>
-      result.eligibility?.result === ResultKey.ELIGIBLE ||
-      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+    (result) => result.eligibility?.result === ResultKey.ELIGIBLE
   )
 
   return (

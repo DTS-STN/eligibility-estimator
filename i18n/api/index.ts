@@ -51,6 +51,7 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    eligibleIncomeTooHigh: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
@@ -72,6 +73,7 @@ export interface Translations {
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
     alwNotEligible: string
+    alwIfYouApply: string
     afsNotEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
