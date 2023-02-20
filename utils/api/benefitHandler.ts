@@ -654,28 +654,61 @@ export class BenefitHandler {
           allResults.partner.alw.eligibility = partnerAlw.eligibility
           allResults.partner.alw.cardDetail = partnerAlw.cardDetail
           allResults.partner.alw.entitlement = partnerAlw.entitlement
-          if (totalAmountSingle < totalAmtCouple) {
-            allResults.client.gis.entitlement.result = applicantGisResultT4
-            allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+
+          let isApplicantGisAvailable = true
+          if (totalAmountSingle > totalAmtCouple) {
+            const clientSingleInput = this.getSingleClientInput()
+
+            clientGis = new GisBenefit(
+              clientSingleInput,
+              this.translations,
+              allResults.client.oas
+            )
+
+            if (clientGis.entitlement.result === 0) {
+              console.log(
+                'clientGis.eligibility',
+                clientGis.eligibility,
+                clientGis.entitlement
+              )
+
+              isApplicantGisAvailable = false
+            } else {
+              clientGis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+              allResults.client.gis.eligibility = clientGis.eligibility
+              allResults.client.gis.entitlement.result = applicantGisResultT1
+              allResults.client.gis.entitlement.type =
+                EntitlementResultType.FULL
+
+              allResults.partner.alw.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+              allResults.partner.alw.cardDetail = partnerAlw.cardDetail
+              allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
+            }
+          }
+
+          if (totalAmountSingle <= totalAmtCouple || !isApplicantGisAvailable) {
+            const clientGisCouple = new GisBenefit(
+              this.input.client,
+              this.translations,
+              allResults.client.oas
+            )
+
+            allResults.client.gis.eligibility = clientGisCouple.eligibility
+            allResults.client.gis.entitlement = clientGisCouple.entitlement
+            allResults.client.gis.cardDetail = clientGisCouple.cardDetail
             allResults.partner.alw.entitlement.result = partnerAlwCalcCouple
 
             // Display a note stating when PartnerB turns 65, to determine if it is still
             // advantageous to use the GIS Single Rate (Rate Table 1) instead of Rate Table 4
-          } else {
-            allResults.client.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
-            allResults.client.gis.entitlement.result = applicantGisResultT1
-            allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+          } //else {
+          isApplicantGisAvailable = true
 
-            allResults.partner.alw.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
-            allResults.partner.alw.cardDetail = partnerAlw.cardDetail
-            allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
-          }
           console.log('--- partner is eligible for alw --- end')
         } // if applicant is eligible for alw
         else if (clientAlw.eligibility.result === ResultKey.ELIGIBLE) {
@@ -890,7 +923,10 @@ export class BenefitHandler {
 
       // Process all CardDetails
       allResults.client.oas.cardDetail = clientOas.cardDetail
-      allResults.client.gis.cardDetail = clientGis.cardDetail
+      allResults.client.gis.cardDetail =
+        undefined === allResults.client.gis.cardDetail
+          ? clientGis.cardDetail
+          : allResults.client.gis.cardDetail
       allResults.client.alw.cardDetail = clientAlw.cardDetail
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     } else {
