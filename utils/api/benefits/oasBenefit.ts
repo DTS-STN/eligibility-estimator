@@ -155,11 +155,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     // monthly entitlement amount minus monthly clawback amount
     const resultCurrent = this.currentEntitlementAmount - MonthlyClawbackAmount
 
-    console.log(`yearly clawback =`, this.clawbackAmount)
-    console.log(`monthly =`, MonthlyClawbackAmount)
-    console.log(`Orig entitlement =`, this.currentEntitlementAmount)
-    console.log(`resultCurrent = `, resultCurrent)
-
     const result65To74 = this.age65to74Amount
     const resultAt75 = this.age75EntitlementAmount
     const type =
