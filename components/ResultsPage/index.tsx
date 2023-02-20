@@ -74,42 +74,34 @@ const ResultsPage: React.VFC<{
   let listLinks: {
     text: string
     url: string
-    idSuffix: string
   }[] = [
     {
       text: getEligibleLinkText(summary.entitlementSum, tsln),
       url: '#eligible',
-      idSuffix: 'eligible',
     },
     {
       text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
       url: '#estimated',
-      idSuffix: 'estimated',
     },
     {
       text: tsln.resultsPage.whatYouToldUs,
       url: '#answers',
-      idSuffix: 'answers',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'oas')}`,
       url: '#oas',
-      idSuffix: 'oas',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'gis')}`,
       url: '#gis',
-      idSuffix: 'gis',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'alw')}`,
       url: '#alw',
-      idSuffix: 'alw',
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'afs')}`,
       url: '#afs',
-      idSuffix: 'afs',
     },
   ]
 
@@ -152,6 +144,7 @@ const ResultsPage: React.VFC<{
 
           <Button
             text={tsln.modifyAnswers}
+            id={'EditAnswers'}
             styling="secondary"
             className="mt-6 justify-center md:w-[fit-content]"
             onClick={(e) => router.push('/eligibility')}
