@@ -108,7 +108,13 @@ export const BenefitCards: React.VFC<{
         result.entitlement.result === 0
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent = apiTsln.detail.alwIfYouApply
+        nextStepText.nextStepContent =
+          apiTsln.detail.alwIfYouApply +
+          `<b>${numberToStringCurrency(
+            legalValues.alw.alwIncomeLimit,
+            apiTsln._language,
+            { rounding: 0 }
+          )}</b>.</p>`
       }
     }
     return nextStepText

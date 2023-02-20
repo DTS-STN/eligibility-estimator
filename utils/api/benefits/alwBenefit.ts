@@ -204,12 +204,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // otherwise, let's do it!
 
-    const formulaResult = new EntitlementFormula(
-      this.input.income.relevant,
-      this.input.maritalStatus,
-      this.input.partnerBenefitStatus,
-      this.input.age
-    ).getEntitlementAmount()
+    const formulaResult = this.formulaResult()
 
     const type =
       formulaResult === -1
