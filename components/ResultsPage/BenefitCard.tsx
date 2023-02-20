@@ -12,7 +12,12 @@ export const BenefitCard: React.VFC<{
   collapsedDetails: any
   children: React.ReactNode
   nextStepText: NextStepText
-  links: Array<{ icon: string; url: string; text: string; alt: string }>
+  links: Array<{
+    icon: string
+    url: string
+    text: string
+    alt: string
+  }>
 }> = ({
   benefitKey,
   benefitName,
@@ -77,7 +82,11 @@ export const BenefitCard: React.VFC<{
                 <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
               </div>
               <div className="pl-5 w-full">
-                <DSLink id={`link${index}`} href={url} text={text} />
+                <DSLink
+                  id={`${benefitKey}Link${index}`}
+                  href={url}
+                  text={text}
+                />
               </div>
             </div>
           ))}
