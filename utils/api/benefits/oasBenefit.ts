@@ -150,10 +150,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       }
 
     // Monthly clawback amount
-    const MonthlyClawbackAmount = roundToTwo(this.clawbackAmount / 12)
+    const monthlyClawbackAmount = roundToTwo(this.clawbackAmount / 12)
 
     // monthly entitlement amount minus monthly clawback amount
-    const resultCurrent = this.currentEntitlementAmount - MonthlyClawbackAmount
+    const resultCurrent = this.currentEntitlementAmount - monthlyClawbackAmount
 
     const result65To74 = this.age65to74Amount
     const resultAt75 = this.age75EntitlementAmount
@@ -169,7 +169,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       result: resultCurrent,
       result65To74,
       resultAt75,
-      clawback: MonthlyClawbackAmount,
+      clawback: monthlyClawbackAmount,
       deferral: {
         age: this.deferralYears + 65,
         years: this.deferralYears,
