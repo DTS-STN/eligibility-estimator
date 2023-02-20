@@ -17,7 +17,6 @@ export const BenefitCard: React.VFC<{
     url: string
     text: string
     alt: string
-    idSuffix: string
   }>
 }> = ({
   benefitKey,
@@ -77,13 +76,17 @@ export const BenefitCard: React.VFC<{
 
       <div className="mt-4">
         {links &&
-          links.map(({ text, url, icon, alt, idSuffix }, index) => (
+          links.map(({ text, url, icon, alt }, index) => (
             <div key={index} className="flex items-center py-4 text-content">
               <div>
                 <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
               </div>
               <div className="pl-5 w-full">
-                <DSLink id={`${idSuffix}Link${index}`} href={url} text={text} />
+                <DSLink
+                  id={`${benefitKey}Link${index}`}
+                  href={url}
+                  text={text}
+                />
               </div>
             </div>
           ))}
