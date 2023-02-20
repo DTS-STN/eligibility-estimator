@@ -108,10 +108,7 @@ export const BenefitCards: React.VFC<{
         result.entitlement.result === 0
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent =
-          result.eligibility.reason === ResultReason.INCOME
-            ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
-            : tsln.resultsPage.nextStepGis
+        nextStepText.nextStepContent = apiTsln.detail.alwIfYouApply
       }
     }
     return nextStepText
