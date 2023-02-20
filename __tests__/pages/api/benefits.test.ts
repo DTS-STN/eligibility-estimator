@@ -674,7 +674,10 @@ describe('consolidated benefit tests: eligible: 65+', () => {
 
     // test oas increase at 75
     expect(res.body.results.oas.entitlement.resultAt75).toEqual(
-      roundToTwo(res.body.results.oas.entitlement.result * 1.1)
+      roundToTwo(
+        res.body.results.oas.entitlement.result * 1.1 -
+          res.body.results.oas.entitlement.clawback
+      )
     )
   })
 
