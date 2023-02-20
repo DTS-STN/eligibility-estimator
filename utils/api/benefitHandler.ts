@@ -666,12 +666,6 @@ export class BenefitHandler {
             )
 
             if (clientGis.entitlement.result === 0) {
-              console.log(
-                'clientGis.eligibility',
-                clientGis.eligibility,
-                clientGis.entitlement
-              )
-
               isApplicantGisAvailable = false
             } else {
               clientGis.cardDetail.collapsedText.push(
@@ -920,15 +914,23 @@ export class BenefitHandler {
 
       // Finish with AFS entitlement.
       allResults.client.afs.entitlement = clientAfs.entitlement
+      allResults.client.afs.cardDetail = clientAfs.cardDetail
 
       // Process all CardDetails
-      allResults.client.oas.cardDetail = clientOas.cardDetail
+      allResults.client.oas.cardDetail =
+        undefined === allResults.client.oas.cardDetail
+          ? clientOas.cardDetail
+          : allResults.client.oas.cardDetail
+
       allResults.client.gis.cardDetail =
         undefined === allResults.client.gis.cardDetail
           ? clientGis.cardDetail
           : allResults.client.gis.cardDetail
-      allResults.client.alw.cardDetail = clientAlw.cardDetail
-      allResults.client.afs.cardDetail = clientAfs.cardDetail
+
+      allResults.client.alw.cardDetail =
+        undefined === allResults.client.alw.cardDetail
+          ? clientAlw.cardDetail
+          : allResults.client.alw.cardDetail
     } else {
       allResults.client.gis.entitlement = clientGis.entitlement
 
