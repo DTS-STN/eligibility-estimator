@@ -237,7 +237,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   /**
-   * The expected OAS amount minus monthly clawback, taking into account the client's age.
+   * The expected OAS amount, taking into account the client's age.
    * At age 75, OAS increases by 10%.
    */
   private get currentEntitlementAmount(): number {
