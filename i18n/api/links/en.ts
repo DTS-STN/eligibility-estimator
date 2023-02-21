@@ -176,7 +176,7 @@ export const links: LinkDefinitions = {
     },
   },
   oasRecoveryTaxInline: {
-    text: 'recovery tax',
+    text: 'Learn more about recovery tax',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
     order: -1,
   },

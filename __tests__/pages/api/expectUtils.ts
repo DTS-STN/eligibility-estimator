@@ -65,7 +65,9 @@ export function expectOasEligible(
   if (oasType === EntitlementResultType.FULL && !entitlement)
     entitlement = legalValues.oas.amount
   if (entitlement)
-    expect(res.body.results.oas.entitlement.result).toEqual(entitlement)
+    expect(res.body.results.oas.entitlement.result).toEqual(
+      entitlement - res.body.results.oas.entitlement.clawback
+    )
 }
 
 export function expectGisEligible(
