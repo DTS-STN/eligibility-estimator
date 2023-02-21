@@ -900,6 +900,7 @@ export class BenefitHandler {
     }
 
     // All done!
+    console.log('allResults', allResults)
     return allResults
   }
 

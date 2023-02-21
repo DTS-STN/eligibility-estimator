@@ -125,8 +125,11 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     )
       links.push(this.translations.links.apply[this.benefitKey])
-    if (this.eligibility.result === ResultKey.INELIGIBLE)
-      links.push(this.translations.links.reasons[this.benefitKey])
+
+    // Commenting out in case we need to bring back links for Full Criteria
+    // if (this.eligibility.result === ResultKey.INELIGIBLE)
+    //   links.push(this.translations.links.reasons[this.benefitKey])
+
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
