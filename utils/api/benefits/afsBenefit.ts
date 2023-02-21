@@ -89,15 +89,33 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.YEARS_IN_CANADA,
         detail: this.translations.detail.mustMeetYearReq,
       }
+    }
+
+    // else {
+    // const amount = this.formulaResult()
+    // console.log('amount', amount)
+    // console.log('skipReqIncome', skipReqIncome)
+
+    // Eligible scenarios
+    if (skipReqIncome) {
+      return {
+        result: ResultKey.INCOME_DEPENDENT,
+        reason: ResultReason.INCOME_MISSING,
+        detail: this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+        incomeMustBeLessThan: maxIncome,
+      }
     } else {
       const amount = this.formulaResult()
+      console.log('amount', amount)
       if (amount === 0) {
+        console.log('AMOUNT IS ZERO')
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.eligibleIncomeTooHigh,
         }
       } else {
+        console.log('IN THE ELSE SCENARIO')
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
