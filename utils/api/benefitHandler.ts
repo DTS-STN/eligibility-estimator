@@ -898,8 +898,7 @@ export class BenefitHandler {
       allResults.client.alw.cardDetail = clientAlw.cardDetail
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
-    console.log('All Results:')
-    console.log(allResults)
+
     // All done!
     return allResults
   }

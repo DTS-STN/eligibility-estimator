@@ -67,7 +67,6 @@ export const BenefitCards: React.VFC<{
             : tsln.resultsPage.nextStepGis
       }
     } else if (benefitKey === BenefitKey.oas) {
-      console.log('result', result)
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         if (result.entitlement.clawback > 0) {
@@ -117,14 +116,19 @@ export const BenefitCards: React.VFC<{
           )}</b>.</p>`
       }
     } else if (benefitKey === BenefitKey.afs) {
-      nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-      nextStepText.nextStepContent =
-        apiTsln.detail.alwIfYouApply +
-        `<b>${numberToStringCurrency(
-          legalValues.alw.afsIncomeLimit,
-          apiTsln._language,
-          { rounding: 0 }
-        )}</b>.</p>`
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result === 0
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent =
+          apiTsln.detail.alwIfYouApply +
+          `<b>${numberToStringCurrency(
+            legalValues.alw.afsIncomeLimit,
+            apiTsln._language,
+            { rounding: 0 }
+          )}</b>.</p>`
+      }
     }
     return nextStepText
   }
