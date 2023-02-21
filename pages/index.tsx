@@ -1,4 +1,4 @@
-import { Button } from '@dts-stn/service-canada-design-system'
+import { Button, Message } from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -56,6 +56,17 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       </Head>
       <Layout title={tsln.introPageTitle}>
         <div className="mt-18">
+          <div className="my-6">
+            <Message
+              id={'overview-wip'}
+              alert_icon_id={'testkey'}
+              alert_icon_alt_text={tsln.warningText}
+              type={'info'}
+              message_heading={tsln.workInProgress}
+              message_body={tsln.workInProgressBody}
+              whiteBG={true}
+            />
+          </div>
           <p
             className="mb-4 sm:w-[65%]"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
