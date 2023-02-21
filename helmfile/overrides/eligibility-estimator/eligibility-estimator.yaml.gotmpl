@@ -43,10 +43,10 @@ ingress:
       kubernetes.io/ingress.class: azure/application-gateway
     tls:
       - hosts:
-          - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
+          - {{ requiredEnv "SUB_DOMAIN_PATH" }}.{{ requiredEnv "BASE_DOMAIN" }}
         secretName: ingress-tls-eligestim-{{ .Environment.Name }}
     hosts:
-    - host: {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
+    - host: {{ requiredEnv "SUB_DOMAIN_PATH" }}.{{ requiredEnv "BASE_DOMAIN" }}
       paths:
         - path: /
           pathType: ImplementationSpecific
