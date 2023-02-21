@@ -287,7 +287,7 @@ const en: Translations = {
     ],
   },
   detail: {
-    eligible: 'You are likely eligible for this benefit.',
+    eligible: "You're likely eligible for this benefit.",
     eligibleIncomeTooHigh:
       'You are likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.',
     eligibleDependingOnIncome:
@@ -367,7 +367,7 @@ const en: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income to get a monthly payment estimate.',
+        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income information to get a monthly payment estimate.",
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:

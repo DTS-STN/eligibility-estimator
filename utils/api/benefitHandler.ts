@@ -39,6 +39,7 @@ import {
 } from './helpers/fieldClasses'
 import { SummaryHandler } from './summaryHandler'
 import { EntitlementFormula } from './benefits/entitlementFormula'
+import legalValues from './scrapers/output'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -356,26 +357,11 @@ export class BenefitHandler {
     allResults.client.alw.entitlement = clientAlw.entitlement
     allResults.client.alw.cardDetail = clientAlw.cardDetail
 
-    const eligibleArray = [ResultKey.ELIGIBLE, ResultKey.INCOME_DEPENDENT]
-
-    // set partnerbenefitstatus for partner
-    if (eligibleArray.includes(clientGis.eligibility.result)) {
-      this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-        PartnerBenefitStatus.OAS_GIS
-      )
-    } else if (eligibleArray.includes(clientGis.eligibility.result)) {
-      this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-        PartnerBenefitStatus.ALW
-      )
-    } else if (eligibleArray.includes(clientGis.eligibility.result)) {
-      this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-        PartnerBenefitStatus.OAS
-      )
-    } else {
-      this.input.partner.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-        PartnerBenefitStatus.NONE
-      )
-    }
+    this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
+      clientGis,
+      clientAlw,
+      clientOas
+    )
 
     // If the client needs help, check their partner's ALW eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -432,23 +418,14 @@ export class BenefitHandler {
       allResults.partner.gis.entitlement = partnerGis.entitlement
       allResults.partner.gis.cardDetail = partnerGis.cardDetail
 
-      // set partnerbenefitstatus for client
-      if (partnerGis.eligibility.result === ResultKey.ELIGIBLE) {
-        this.input.client.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-          PartnerBenefitStatus.OAS_GIS
-        )
-      } else if (partnerAlw.eligibility.result === ResultKey.ELIGIBLE) {
-        this.input.client.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-          PartnerBenefitStatus.ALW
-        )
-      } else if (partnerOas.eligibility.result === ResultKey.ELIGIBLE) {
-        this.input.client.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-          PartnerBenefitStatus.OAS
-        )
-      } else {
-        this.input.client.partnerBenefitStatus = new PartnerBenefitStatusHelper(
-          PartnerBenefitStatus.NONE
-        )
+      this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
+        partnerGis,
+        partnerAlw,
+        partnerOas
+      )
+      if (this.input.client.partnerBenefitStatus.alw) {
+        clientGis.eligibility.incomeMustBeLessThan =
+          legalValues.gis.spouseAlwIncomeLimit
       }
 
       const isIncomeProvided =
@@ -904,6 +881,25 @@ export class BenefitHandler {
     console.log(allResults)
     // All done!
     return allResults
+  }
+
+  private getPartnerBenefitStatus(
+    gisObject: GisBenefit,
+    alwObject: AlwBenefit,
+    oasObject: OasBenefit
+  ): PartnerBenefitStatusHelper {
+    const eligibleArray = [ResultKey.ELIGIBLE, ResultKey.INCOME_DEPENDENT]
+
+    // set partnerbenefitstatus for partner
+    if (eligibleArray.includes(gisObject.eligibility.result)) {
+      return new PartnerBenefitStatusHelper(PartnerBenefitStatus.OAS_GIS)
+    } else if (eligibleArray.includes(alwObject.eligibility.result)) {
+      return new PartnerBenefitStatusHelper(PartnerBenefitStatus.ALW)
+    } else if (eligibleArray.includes(oasObject.eligibility.result)) {
+      return new PartnerBenefitStatusHelper(PartnerBenefitStatus.OAS)
+    } else {
+      return new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE)
+    }
   }
 
   /**
