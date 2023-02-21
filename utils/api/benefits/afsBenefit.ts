@@ -73,6 +73,12 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.LEGAL_STATUS,
         detail: this.translations.detail.dependingOnLegal,
       }
+    } else if (!livingCanada) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.LIVING_COUNTRY,
+        detail: this.translations.detail.mustBeInCanada,
+      }
     }
     //check residency history
     else if (!livingCanada && liveOutsideCanadaMoreThanHalfYear) {
