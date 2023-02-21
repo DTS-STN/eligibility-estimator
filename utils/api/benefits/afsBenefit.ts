@@ -90,10 +90,19 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         detail: this.translations.detail.mustMeetYearReq,
       }
     } else {
-      return {
-        result: ResultKey.ELIGIBLE,
-        reason: ResultReason.NONE,
-        detail: this.translations.detail.eligible,
+      const amount = this.formulaResult()
+      if (amount === 0) {
+        return {
+          result: ResultKey.ELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.eligibleIncomeTooHigh,
+        }
+      } else {
+        return {
+          result: ResultKey.ELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.eligible,
+        }
       }
     }
   }
@@ -124,18 +133,19 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // otherwise, let's do it!
 
-    const formulaResult = new EntitlementFormula(
+    const type = EntitlementResultType.FULL
+
+    return { result: this.formulaResult(), type, autoEnrollment }
+  }
+
+  protected formulaResult(): number {
+    return new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age
     ).getEntitlementAmount()
-
-    const type = EntitlementResultType.FULL
-
-    return { result: formulaResult, type, autoEnrollment }
   }
-
   /**
    * For this benefit, always return false, because we don't know any better as of now.
    */
