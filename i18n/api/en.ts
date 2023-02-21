@@ -342,7 +342,7 @@ const en: Translations = {
     expectToReceive:
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawback:
-      'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+      'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_RECOVERY_TAX}.',
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
@@ -367,7 +367,7 @@ const en: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income to get a monthly payment estimate.',
+        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income information to get a monthly payment estimate.",
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:

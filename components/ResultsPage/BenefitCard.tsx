@@ -31,7 +31,7 @@ export const BenefitCard: React.VFC<{
   // the green/yellow eligible/notEligible
   const eligibleFlag: JSX.Element = (
     <span
-      className={`p-1 ml-2 border-left border-l-4 font-semibold text-small ${
+      className={`px-2 py-1 ml-2 border-left border-l-4 font-semibold text-[15px] ${
         isEligible
           ? ' border-success bg-[#D8EECA] '
           : ' border-[#EE7100] bg-[#F9F4D4] '
@@ -43,9 +43,12 @@ export const BenefitCard: React.VFC<{
 
   return (
     <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded">
-      <h2 id={benefitKey} className="h2 inline-flex justify-start items-center">
-        <span className="flex-1">{benefitName}</span>&nbsp;{eligibleFlag}
-      </h2>
+      <div className="inline">
+        <h2 id={benefitKey} className="inline align-sub h2">
+          {benefitName}
+        </h2>
+        {eligibleFlag}
+      </div>
 
       <div className={`py-1`}>{children}</div>
 
