@@ -43,7 +43,11 @@ ingress:
     tls:
       - hosts:
           - {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+        {{ if (eq .Environment.Name "prototype")}}  
+        secretName: ingress-tls-eeprototype
+        {{ else }}
         secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
+        {{ end }}
     hosts:
     - host: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
       paths:
