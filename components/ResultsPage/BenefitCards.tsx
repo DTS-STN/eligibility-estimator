@@ -67,7 +67,6 @@ export const BenefitCards: React.VFC<{
             : tsln.resultsPage.nextStepGis
       }
     } else if (benefitKey === BenefitKey.oas) {
-      console.log('result', result)
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         if (result.entitlement.clawback > 0) {
@@ -84,7 +83,7 @@ export const BenefitCards: React.VFC<{
                   legalValues.oas.incomeLimit,
                   apiTsln._language,
                   { rounding: 0 }
-                )}</b>`)
+                )}</b>.`)
             : ''
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=

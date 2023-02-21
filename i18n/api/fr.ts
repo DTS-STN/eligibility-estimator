@@ -362,7 +362,7 @@ const fr: Translations = {
       automaticallyBePaid:
         'Vous recevrez automatiquement un paiement si votre revenu est inférieur à ',
       youShouldReceiveLetter:
-        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+        "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       applyOnline:
         "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
       over70:
