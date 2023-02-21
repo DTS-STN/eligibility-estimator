@@ -33,18 +33,27 @@ service:
 ingress:
     enabled: true
     annotations: 
+      {{ if (eq .Environment.Name "prototype")}}  
+      cert-manager.io/cluster-issuer: letsencrypt-prod-alpha-sc
+      {{ else }}
       cert-manager.io/cluster-issuer: letsencrypt-prod
+      {{ end }}
       appgw.ingress.kubernetes.io/ssl-redirect: "true"
       kubernetes.io/ingress.class: azure/application-gateway
     tls:
       - hosts:
           - {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
+        {{ if (eq .Environment.Name "prototype")}}  
+        secretName: ingress-tls-eeprototype
+        {{ else }}
         secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
+        {{ end }}
     hosts:
     - host: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
       paths:
         - path: /
           pathType: ImplementationSpecific
+
 resources:
   requests:
     cpu: 200m
