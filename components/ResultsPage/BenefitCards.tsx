@@ -67,7 +67,6 @@ export const BenefitCards: React.VFC<{
             : tsln.resultsPage.nextStepGis
       }
     } else if (benefitKey === BenefitKey.oas) {
-      console.log('result', result)
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         if (result.entitlement.clawback > 0) {
