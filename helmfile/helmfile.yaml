@@ -1,10 +1,10 @@
 environments:
-  alpha:
   dev:
   staging:
   dyna:
   main:
   prod:
+  prototype:
 
 releases:
   - name: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}
