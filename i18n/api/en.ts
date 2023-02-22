@@ -289,15 +289,15 @@ const en: Translations = {
   detail: {
     eligible: "You're likely eligible for this benefit.",
     eligibleIncomeTooHigh:
-      'You are likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.',
+      "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     eligibleDependingOnIncome:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide your income to get a monthly payment estimate.",
     eligibleEntitlementUnavailable:
-      'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
+      "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
-      'You are likely eligible to a partial Old Age Security pension.',
+      "You're likely eligible to a partial Old Age Security pension.",
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:

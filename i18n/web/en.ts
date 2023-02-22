@@ -120,7 +120,7 @@ const en: WebTranslations = {
     tableTotalAmount: 'Total',
     whatYouToldUs: 'What you told us',
     youMayBeEligible: 'You may be eligible',
-    youAreNotEligible: 'You are likely not eligible at this time',
+    youAreNotEligible: "You're likely not eligible at this time",
     basedOnYourInfoEligible:
       'Based on your information, you may be eligible for the:',
     basedOnYourInfoAndIncomeEligible:
