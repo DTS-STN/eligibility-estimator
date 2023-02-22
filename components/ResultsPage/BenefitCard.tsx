@@ -43,12 +43,15 @@ export const BenefitCard: React.VFC<{
 
   return (
     <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded">
-      <div className="inline">
+      {/* <div className="inline">
         <h2 id={benefitKey} className="inline align-sub h2">
           {benefitName}
         </h2>
         {eligibleFlag}
-      </div>
+      </div> */}
+      <h2 id={benefitKey} className="h2">
+        {benefitName}&nbsp;{eligibleFlag}
+      </h2>
 
       <div className={`py-1`}>{children}</div>
 
