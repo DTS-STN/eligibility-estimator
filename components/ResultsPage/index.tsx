@@ -1,4 +1,4 @@
-import { Button, Message } from '@dts-stn/service-canada-design-system'
+import { Button } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
@@ -113,43 +113,48 @@ const ResultsPage: React.VFC<{
   )
 
   return (
-    <div className="flex flex-col space-y-12" ref={ref}>
-      <div className="md:grid md:grid-cols-3 md:gap-12 ">
-        <div className="col-span-2 row-span-1">
-          <div> {tsln.resultsPage.general} </div>
+    <>
+      <div className="flex flex-col space-y-12" ref={ref}>
+        <div className="md:grid md:grid-cols-3 md:gap-12">
+          <div className="col-span-2 row-span-1">
+            <div> {tsln.resultsPage.general} </div>
 
-          <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
+            <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
 
-          <MayBeEligible resultsEligible={resultsEligible} />
+            <MayBeEligible resultsEligible={resultsEligible} />
 
-          {resultsEligible.length > 0 && (
-            <EstimatedTotal
-              resultsEligible={resultsEligible}
-              summary={summary}
+            {resultsEligible.length > 0 && (
+              <EstimatedTotal
+                resultsEligible={resultsEligible}
+                summary={summary}
+              />
+            )}
+          </div>
+          <div className="col-span-1 row-span-2">
+            <YourAnswers
+              title={tsln.resultsPage.whatYouToldUs}
+              inputs={inputs}
             />
-          )}
-        </div>
-        <div className="col-span-1 row-span-2">
-          <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
-        </div>
-        <div className="col-span-2 row-span-1">
-          <hr className="my-12 border border-[#BBBFC5]" />
+          </div>
+          <div className="col-span-2 row-span-1">
+            <hr className="my-12 border border-[#BBBFC5]" />
 
-          <BenefitCards
-            results={resultsArray}
-            partnerResults={partnerResultsArray}
-          />
+            <BenefitCards
+              results={resultsArray}
+              partnerResults={partnerResultsArray}
+            />
 
-          <Button
-            text={tsln.modifyAnswers}
-            id={'EditAnswers'}
-            styling="secondary"
-            className="mt-6 justify-center md:w-[fit-content]"
-            onClick={(e) => router.push('/eligibility')}
-          />
+            <Button
+              text={tsln.modifyAnswers}
+              id={'EditAnswers'}
+              styling="secondary"
+              className="mt-6 justify-center md:w-[fit-content]"
+              onClick={(e) => router.push('/eligibility')}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

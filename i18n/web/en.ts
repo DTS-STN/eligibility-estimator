@@ -144,6 +144,10 @@ const en: WebTranslations = {
     nextStepTitle: 'Next steps',
     nextStepGis:
       'You can apply for the Guaranteed Income Supplement when you apply for the Old Age Security pension.',
+    CTAFeedbackTitle: 'We would love your feedback!',
+    CTAFeedbackBody:
+      'Complete a 5-minute survey to help us improve the estimator.',
+    CTAFeedbackButton: 'Take our survey',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,

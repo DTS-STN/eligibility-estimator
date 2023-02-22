@@ -120,6 +120,9 @@ export type WebTranslations = {
     link: string
     nextStepTitle: string
     nextStepGis: string
+    CTAFeedbackTitle: string
+    CTAFeedbackBody: string
+    CTAFeedbackButton: string
     //nextStepOas: string
   }
 

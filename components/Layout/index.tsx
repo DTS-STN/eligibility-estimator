@@ -1,4 +1,4 @@
-import { Header, Heading } from '@dts-stn/service-canada-design-system'
+import { Header, Heading, CTA } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -54,6 +54,12 @@ export const Layout: React.VFC<{
     },
   ]
 
+  const handleOnClick = () => {
+    const langStr = router.locale === 'en' ? 'eng' : 'fra'
+    const link = `https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=${langStr}`
+    router.push(link)
+  }
+
   return (
     <>
       <Head title={title} />
@@ -79,6 +85,18 @@ export const Layout: React.VFC<{
           {children}
         </div>
 
+        {router.pathname === '/results' && (
+          <div className="mb-8">
+            <CTA
+              heading={tsln.resultsPage.CTAFeedbackTitle}
+              body={tsln.resultsPage.CTAFeedbackBody}
+              ButtonProps={{
+                text: tsln.resultsPage.CTAFeedbackButton,
+                onClick: handleOnClick,
+              }}
+            />
+          </div>
+        )}
         <Footer />
       </main>
     </>
