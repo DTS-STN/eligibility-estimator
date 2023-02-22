@@ -66,7 +66,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
        this if the client is indeed above the true (undocumented) max income.
       */
       this.oasResult.entitlement.type === EntitlementResultType.PARTIAL
-
     // main checks
     if (meetsReqLiving && meetsReqOas && meetsReqLegal) {
       if (meetsReqAge) {

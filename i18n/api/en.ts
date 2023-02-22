@@ -345,7 +345,7 @@ const en: Translations = {
       'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_RECOVERY_TAX}.',
     oas: {
       eligibleIfIncomeIsLessThan:
-        'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay recovery tax. {LINK_RECOVERY_TAX}.',
+        "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay recovery tax. {LINK_RECOVERY_TAX}.",
       dependOnYourIncome:
         'Depending on your income, you can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month. Provide your income to get an accurate estimate.',
       eligibleIncomeTooHigh:
@@ -355,6 +355,8 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income is less than ",
       youShouldReceiveLetter:
+        'You should receive a letter about your enrolment status the month after you turn 64.',
+      youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       applyOnline:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
