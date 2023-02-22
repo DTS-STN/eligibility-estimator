@@ -403,7 +403,11 @@ const en: Translations = {
     },
     partnerEligible: {
       heading: 'Your partner may be eligible',
-      text: 'Based on what you told us, your partner could receive {PARTNER_BENEFIT_AMOUNT} every month. They can use the estimator to get detailed results.',
+      text: 'Based on what you told us, your partner could receive&nbsp;{PARTNER_BENEFIT_AMOUNT} every month. They can use the estimator to get detailed results.',
+    },
+    partnerDependOnYourIncome: {
+      heading: 'Your partner may be eligible',
+      text: 'Depending on your income, you can expect to receive around&nbsp;{PARTNER_BENEFIT_AMOUNT} every month. Provide your income to get an accurate estimate.',
     },
   },
   summaryTitle: {

@@ -410,7 +410,11 @@ const fr: Translations = {
     },
     partnerEligible: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: "Selon vos renseignements, votre conjoint pourrait recevoir {PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+      text: "Selon vos renseignements, votre conjoint pourrait recevoir&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+    },
+    partnerDependOnYourIncome: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
     },
   },
   summaryTitle: {
