@@ -23,10 +23,10 @@ const fr: WebTranslations = {
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
-  breadcrumb1URL: 'https://www.canada.ca/fr.html',
+  breadcrumb1URL: 'https://www.canada.ca',
   breadcrumb2Title: 'Service Canada',
   breadcrumb2URL:
-    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   questionPageTitle:
