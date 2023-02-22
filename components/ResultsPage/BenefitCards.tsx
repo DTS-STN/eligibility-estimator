@@ -76,6 +76,14 @@ export const BenefitCards: React.VFC<{
           }
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.serviceCanadaReviewYourPayment
+        } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
+          nextStepText.nextStepContent +=
+            apiTsln.detail.oas.youShouldHaveReceivedLetter
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
+        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+          nextStepText.nextStepContent += apiTsln.detail.oas.over70
+        } else if (result.entitlement.clawback === 0) {
+          nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
           result.eligibility.reason === ResultReason.INCOME
             ? (nextStepText.nextStepContent +=
                 ' ' +
@@ -86,14 +94,6 @@ export const BenefitCards: React.VFC<{
                   { rounding: 0 }
                 )}</b>.`)
             : ''
-        } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
-          nextStepText.nextStepContent +=
-            apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
-        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
-          nextStepText.nextStepContent += apiTsln.detail.oas.over70
-        } else if (result.entitlement.clawback === 0) {
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
         }
       } else if (
         result.eligibility.result === ResultKey.INELIGIBLE &&
