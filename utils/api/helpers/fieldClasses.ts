@@ -36,7 +36,6 @@ export class IncomeHelper extends FieldHelper {
    * Returns the client's income when single, or the sum of client+partner when partnered.
    */
   get relevant(): number {
-    if (!this.provided) throw new Error('income not provided!')
     if (
       this.maritalStatus.provided &&
       this.maritalStatus.partnered &&

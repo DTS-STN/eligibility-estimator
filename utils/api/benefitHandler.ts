@@ -924,10 +924,8 @@ export class BenefitHandler {
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
 
-    // remove this two log only until the last day before release
-    console.log('All Results:')
-    console.log(allResults)
     // All done!
+    console.log('allResults', allResults)
     return allResults
   }
 

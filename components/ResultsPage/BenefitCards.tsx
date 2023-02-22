@@ -115,6 +115,20 @@ export const BenefitCards: React.VFC<{
             { rounding: 0 }
           )}</b>.</p>`
       }
+    } else if (benefitKey === BenefitKey.afs) {
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result === 0
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent =
+          apiTsln.detail.alwIfYouApply +
+          `<b>${numberToStringCurrency(
+            legalValues.alw.afsIncomeLimit,
+            apiTsln._language,
+            { rounding: 0 }
+          )}</b>.</p>`
+      }
     }
     return nextStepText
   }
