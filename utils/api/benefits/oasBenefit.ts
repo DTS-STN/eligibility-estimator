@@ -145,7 +145,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         result: 0,
         result65To74: 0,
         resultAt75: 0,
-        clawback: 1, // hack to avoid more Ifs on benefitCards
+        clawback: 0,
         deferral: { age: 65, years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
         autoEnrollment,

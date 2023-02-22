@@ -355,7 +355,9 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income is less than ",
       youShouldReceiveLetter:
-        'You should have received a letter about your enrolment status the month after you turned 64.',
+        'You should receive a letter about your enrolment status the month after you turn 64.',
+      youShouldHaveReceivedLetter:
+        'You should have received a letter about your enrolment status the month after you turned 64',
       applyOnline:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
       over70:

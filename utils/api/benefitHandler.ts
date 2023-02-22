@@ -565,8 +565,8 @@ export class BenefitHandler {
             )
 
             allResults.client.gis.eligibility = clientGis.eligibility
-            allResults.client.gis.entitlement.result = applicantGisResultT1
-            allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+            allResults.client.gis.entitlement = clientGis.entitlement
+            allResults.client.gis.cardDetail = clientGis.cardDetail
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           }
