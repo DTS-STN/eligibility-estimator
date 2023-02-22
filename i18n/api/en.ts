@@ -293,7 +293,7 @@ const en: Translations = {
     eligibleDependingOnIncome:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     eligibleDependingOnIncomeNoEntitlement:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide complete income information to get a monthly payment estimate.',
+      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide your income to get a monthly payment estimate.",
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
@@ -334,7 +334,7 @@ const en: Translations = {
     alwIfYouApply:
       "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
-      'The Allowance for the Survivor is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner has passed away.',
+      'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -345,7 +345,7 @@ const en: Translations = {
       'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_RECOVERY_TAX}.',
     oas: {
       eligibleIfIncomeIsLessThan:
-        "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
+        "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay recovery tax. {LINK_RECOVERY_TAX}.",
       dependOnYourIncome:
         'Depending on your income, you can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month. Provide your income to get an accurate estimate.',
       eligibleIncomeTooHigh:

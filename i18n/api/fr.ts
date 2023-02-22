@@ -299,7 +299,7 @@ const fr: Translations = {
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de vos revenus, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
-      'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez vos revenus pour obtenir une estimation de paiement mensuel.',
+      'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez votre revenus pour obtenir une estimation de paiement mensuel.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
@@ -341,7 +341,7 @@ const fr: Translations = {
     alwIfYouApply:
       "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;",
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint est décédé.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées entre&nbsp;60 et&nbsp;64 ans qui ne se sont pas remarié ou engagé dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -352,7 +352,7 @@ const fr: Translations = {
       'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_RECOVERY_TAX}.',
     oas: {
       eligibleIfIncomeIsLessThan:
-        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
+        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'impôt de récupération.{LINK_RECOVERY_TAX}.",
       dependOnYourIncome:
         'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
       eligibleIncomeTooHigh:
@@ -364,7 +364,7 @@ const fr: Translations = {
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
-        "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire",
+        "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       applyOnline:
         "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
       over70:

@@ -10,6 +10,7 @@ import {
   EligibilityResult,
   EntitlementResultGeneric,
   ProcessedInput,
+  Link,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -73,6 +74,12 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.LEGAL_STATUS,
         detail: this.translations.detail.dependingOnLegal,
       }
+    } else if (!livingCanada) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.LIVING_COUNTRY,
+        detail: this.translations.detail.mustBeInCanada,
+      }
     }
     //check residency history
     else if (!livingCanada && liveOutsideCanadaMoreThanHalfYear) {
@@ -89,11 +96,30 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.YEARS_IN_CANADA,
         detail: this.translations.detail.mustMeetYearReq,
       }
-    } else {
+    }
+
+    // Eligible scenarios
+    if (skipReqIncome) {
       return {
-        result: ResultKey.ELIGIBLE,
-        reason: ResultReason.NONE,
-        detail: this.translations.detail.eligible,
+        result: ResultKey.INCOME_DEPENDENT,
+        reason: ResultReason.INCOME_MISSING,
+        detail: this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+        incomeMustBeLessThan: maxIncome,
+      }
+    } else {
+      const amount = this.formulaResult()
+      if (amount === 0) {
+        return {
+          result: ResultKey.ELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.eligibleIncomeTooHigh,
+        }
+      } else {
+        return {
+          result: ResultKey.ELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.eligible,
+        }
       }
     }
   }
@@ -124,22 +150,37 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // otherwise, let's do it!
 
-    const formulaResult = new EntitlementFormula(
+    const type = EntitlementResultType.FULL
+
+    return { result: this.formulaResult(), type, autoEnrollment }
+  }
+
+  protected formulaResult(): number {
+    return new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age
     ).getEntitlementAmount()
-
-    const type = EntitlementResultType.FULL
-
-    return { result: formulaResult, type, autoEnrollment }
   }
-
   /**
    * For this benefit, always return false, because we don't know any better as of now.
    */
   protected getAutoEnrollment(): boolean {
     return false
+  }
+
+  protected getCardLinks(): Link[] {
+    const links: Link[] = []
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
+      (this.eligibility.result === ResultKey.INELIGIBLE &&
+        this.eligibility.reason === ResultReason.AGE_YOUNG)
+    ) {
+      links.push(this.translations.links.apply[BenefitKey.afs])
+    }
+    links.push(this.translations.links.overview[BenefitKey.afs])
+    return links
   }
 }

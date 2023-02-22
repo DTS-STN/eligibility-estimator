@@ -84,11 +84,11 @@ export const BenefitCards: React.VFC<{
                   legalValues.oas.incomeLimit,
                   apiTsln._language,
                   { rounding: 0 }
-                )}</b>`)
+                )}</b>.`)
             : ''
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
-            apiTsln.detail.oas.youShouldReceiveLetter
+            apiTsln.detail.oas.youShouldHaveReceivedLetter
           nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
           nextStepText.nextStepContent += apiTsln.detail.oas.over70
@@ -114,6 +114,20 @@ export const BenefitCards: React.VFC<{
           apiTsln.detail.alwIfYouApply +
           `<b>${numberToStringCurrency(
             legalValues.alw.alwIncomeLimit,
+            apiTsln._language,
+            { rounding: 0 }
+          )}</b>.</p>`
+      }
+    } else if (benefitKey === BenefitKey.afs) {
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result === 0
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent =
+          apiTsln.detail.alwIfYouApply +
+          `<b>${numberToStringCurrency(
+            legalValues.alw.afsIncomeLimit,
             apiTsln._language,
             { rounding: 0 }
           )}</b>.</p>`
