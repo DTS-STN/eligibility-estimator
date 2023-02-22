@@ -66,6 +66,8 @@ export type WebTranslations = {
   getEstimate: string
   required: string
   homePageHeader1: string
+  workInProgress: string
+  workInProgressBody: string
   homePageP1: string
   homePageP3: string
   homePageP4: string

@@ -31,8 +31,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     // helpers
     const meetsReqAge = this.input.age >= 65
 
-    // if income is not provided, assume they meet the income requirement
-    const skipReqIncome = !this.input.income.provided
+    // if income is not provided (only check client income), assume they meet the income requirement
+    const skipReqIncome = this.input.income.client === undefined
 
     // income limit is higher at age 75
     const incomeLimit =
@@ -41,7 +41,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         : legalValues.oas.incomeLimit
 
     // Income is irrelevant therefore next will always be true
-    const meetsReqIncome = skipReqIncome || this.input.income.relevant >= 0
+    const meetsReqIncome = skipReqIncome || this.input.income.client >= 0
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
     const meetsReqYears =
@@ -57,21 +57,21 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           detail: this.translations.detail.oas.eligibleIfIncomeIsLessThan,
           incomeMustBeLessThan: incomeLimit,
         }
-      else if (this.input.age >= 65) {
+      else if (meetsReqAge) {
         return {
           result: ResultKey.ELIGIBLE,
           reason:
-            this.input.income.relevant > incomeLimit
+            this.input.income.client > incomeLimit
               ? ResultReason.INCOME
               : this.input.age >= 65 && this.input.age < 70
               ? ResultReason.AGE_65_TO_69
               : ResultReason.AGE_70_AND_OVER,
           detail:
-            this.input.income.relevant > incomeLimit
+            this.input.income.client > incomeLimit
               ? this.translations.detail.oas.eligibleIncomeTooHigh
               : this.translations.detail.eligible,
         }
-      } else if (this.input.age >= 64 && this.input.age < 65) {
+      } else if (this.input.age === 64) {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE_YOUNG_64,
@@ -136,20 +136,27 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   protected getEntitlement(): EntitlementResultOas {
     const autoEnrollment = this.getAutoEnrollment()
     if (
-      this.eligibility.result !== ResultKey.ELIGIBLE &&
-      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+      (this.eligibility.result !== ResultKey.ELIGIBLE &&
+        this.eligibility.result !== ResultKey.INCOME_DEPENDENT) ||
+      (this.eligibility.result === ResultKey.ELIGIBLE &&
+        this.eligibility.reason === ResultReason.INCOME)
     )
       return {
         result: 0,
         result65To74: 0,
         resultAt75: 0,
-        clawback: 0,
+        clawback: 1, // hack to avoid more Ifs on benefitCards
         deferral: { age: 65, years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
         autoEnrollment,
       }
 
-    const resultCurrent = this.currentEntitlementAmount
+    // Monthly clawback amount
+    const monthlyClawbackAmount = roundToTwo(this.clawbackAmount / 12)
+
+    // monthly entitlement amount minus monthly clawback amount
+    const resultCurrent = this.currentEntitlementAmount - monthlyClawbackAmount
+
     const result65To74 = this.age65to74Amount
     const resultAt75 = this.age75EntitlementAmount
     const type =
@@ -164,7 +171,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       result: resultCurrent,
       result65To74,
       resultAt75,
-      clawback: this.clawbackAmount,
+      clawback: monthlyClawbackAmount,
       deferral: {
         age: this.deferralYears + 65,
         years: this.deferralYears,
@@ -241,14 +248,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   /**
-   * The amount of "clawback" aka "repayment tax" the client will have to repay.
+   * The yearly amount of "clawback" aka "repayment tax" the client will have to repay.
    */
   private get clawbackAmount(): number {
-    if (!this.input.income.provided) return 0
-    if (this.input.income.relevant < legalValues.oas.clawbackIncomeLimit)
-      return 0
+    if (this.input.income.client < legalValues.oas.clawbackIncomeLimit) return 0
     const incomeOverCutoff =
-      this.input.income.relevant - legalValues.oas.clawbackIncomeLimit
+      this.input.income.client - legalValues.oas.clawbackIncomeLimit
     const repaymentAmount = incomeOverCutoff * 0.15
     const oasYearly = this.currentEntitlementAmount * 12
     const result = Math.min(oasYearly, repaymentAmount)
@@ -302,7 +307,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     ) {
       //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+      this.eligibility.detail = this.translations.detail.eligibleIncomeTooHigh
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 

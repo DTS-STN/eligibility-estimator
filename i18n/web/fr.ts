@@ -23,10 +23,10 @@ const fr: WebTranslations = {
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
-  breadcrumb1URL: 'https://www.canada.ca/fr.html',
+  breadcrumb1URL: 'https://www.canada.ca',
   breadcrumb2Title: 'Service Canada',
   breadcrumb2URL:
-    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   questionPageTitle:
@@ -40,6 +40,9 @@ const fr: WebTranslations = {
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
   required: '(obligatoire)',
+  workInProgress: 'Cet estimateur présente des travaux en cours',
+  workInProgressBody:
+    'Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',

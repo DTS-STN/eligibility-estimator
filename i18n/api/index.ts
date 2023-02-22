@@ -86,6 +86,7 @@ export interface Translations {
       serviceCanadaReviewYourPayment: string
       automaticallyBePaid: string
       youShouldReceiveLetter: string
+      youShouldHaveReceivedLetter: string
       applyOnline: string
       over70: string
       eligibleWhenTurn65: string
