@@ -363,6 +363,11 @@ export class BenefitHandler {
       clientOas
     )
 
+    console.log(
+      'this.input.partner.partnerBenefitStatus',
+      this.input.partner.partnerBenefitStatus
+    )
+
     // If the client needs help, check their partner's ALW eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
       const partnerAlw = new AlwBenefit(
@@ -386,48 +391,53 @@ export class BenefitHandler {
     const clientAfs = new AfsBenefit(this.input.client, this.translations)
     allResults.client.afs.eligibility = clientAfs.eligibility
 
+    const partnerAlw = new AlwBenefit(
+      this.input.partner,
+      this.translations,
+      true
+    )
+    allResults.partner.alw.eligibility = partnerAlw.eligibility
+    allResults.partner.alw.entitlement = partnerAlw.entitlement
+    allResults.partner.alw.cardDetail = partnerAlw.cardDetail
+
+    const partnerOas = new OasBenefit(
+      this.input.partner,
+      this.translations,
+      true
+    )
+    allResults.partner.oas.eligibility = partnerOas.eligibility
+    allResults.partner.oas.entitlement = partnerOas.entitlement
+    allResults.partner.oas.cardDetail = partnerOas.cardDetail
+
+    const partnerGis = new GisBenefit(
+      this.input.partner,
+      this.translations,
+      allResults.partner.oas,
+      true
+    )
+    allResults.partner.gis.eligibility = partnerGis.eligibility
+    allResults.partner.gis.entitlement = partnerGis.entitlement
+    allResults.partner.gis.cardDetail = partnerGis.cardDetail
+
+    this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
+      partnerGis,
+      partnerAlw,
+      partnerOas
+    )
+
+    console.log(
+      'this.input.client.partnerBenefitStatus',
+      this.input.client.partnerBenefitStatus
+    )
+
+    if (this.input.client.partnerBenefitStatus.alw) {
+      clientGis.eligibility.incomeMustBeLessThan =
+        legalValues.gis.spouseAlwIncomeLimit
+    }
+
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
-
     if (this.input.client.invSeparated) {
-      const partnerAlw = new AlwBenefit(
-        this.input.partner,
-        this.translations,
-        true
-      )
-      allResults.partner.alw.eligibility = partnerAlw.eligibility
-      allResults.partner.alw.entitlement = partnerAlw.entitlement
-      allResults.partner.alw.cardDetail = partnerAlw.cardDetail
-
-      const partnerOas = new OasBenefit(
-        this.input.partner,
-        this.translations,
-        true
-      )
-      allResults.partner.oas.eligibility = partnerOas.eligibility
-      allResults.partner.oas.entitlement = partnerOas.entitlement
-      allResults.partner.oas.cardDetail = partnerOas.cardDetail
-
-      const partnerGis = new GisBenefit(
-        this.input.partner,
-        this.translations,
-        allResults.partner.oas,
-        true
-      )
-      allResults.partner.gis.eligibility = partnerGis.eligibility
-      allResults.partner.gis.entitlement = partnerGis.entitlement
-      allResults.partner.gis.cardDetail = partnerGis.cardDetail
-
-      this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
-        partnerGis,
-        partnerAlw,
-        partnerOas
-      )
-      if (this.input.client.partnerBenefitStatus.alw) {
-        clientGis.eligibility.incomeMustBeLessThan =
-          legalValues.gis.spouseAlwIncomeLimit
-      }
-
       const isIncomeProvided =
         this.input.client.income.provided && this.input.partner.income.provided
 
