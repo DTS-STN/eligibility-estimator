@@ -10,6 +10,7 @@ import {
   EligibilityResult,
   EntitlementResultGeneric,
   ProcessedInput,
+  Link,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -167,5 +168,19 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
    */
   protected getAutoEnrollment(): boolean {
     return false
+  }
+
+  protected getCardLinks(): Link[] {
+    const links: Link[] = []
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
+      (this.eligibility.result === ResultKey.INELIGIBLE &&
+        this.eligibility.reason === ResultReason.AGE_YOUNG)
+    ) {
+      links.push(this.translations.links.apply[BenefitKey.afs])
+    }
+    links.push(this.translations.links.overview[BenefitKey.afs])
+    return links
   }
 }
