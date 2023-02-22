@@ -357,7 +357,7 @@ const en: Translations = {
       youShouldReceiveLetter:
         'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldHaveReceivedLetter:
-        'You should have received a letter about your enrolment status the month after you turned 64.',
+        'You should have received a letter about your enrolment status the month after you turned 64',
       applyOnline:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
       over70:
@@ -369,7 +369,7 @@ const en: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income information to get a monthly payment estimate.",
+        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income to get a monthly payment estimate.",
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:
