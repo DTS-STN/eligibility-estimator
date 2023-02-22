@@ -89,13 +89,9 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           lang={tsln._language}
           yearId={`${name}-birth-year`}
           monthId={`${name}-birth-month`}
+          hasError={!!error}
+          formErrorProps={{ id: 'formErrorId', errorMessage: error }}
         />
-      )}
-
-      {error && (
-        <div className="mt-2">
-          <FormError errorMessage={error} />
-        </div>
       )}
     </>
   )
