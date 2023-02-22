@@ -67,7 +67,6 @@ export const BenefitCards: React.VFC<{
             : tsln.resultsPage.nextStepGis
       }
     } else if (benefitKey === BenefitKey.oas) {
-      console.log('result', result)
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         if (result.entitlement.clawback > 0) {
@@ -101,6 +100,20 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepContent +=
           apiTsln.detail.oas.youShouldReceiveLetter
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.ifNotReceiveLetter64}</p>`
+      }
+    } else if (benefitKey === BenefitKey.alw) {
+      if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result === 0
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent =
+          apiTsln.detail.alwIfYouApply +
+          `<b>${numberToStringCurrency(
+            legalValues.alw.alwIncomeLimit,
+            apiTsln._language,
+            { rounding: 0 }
+          )}</b>.</p>`
       }
     }
     return nextStepText

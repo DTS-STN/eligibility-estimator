@@ -287,11 +287,13 @@ const en: Translations = {
     ],
   },
   detail: {
-    eligible: 'You are likely eligible for this benefit.',
+    eligible: "You're likely eligible for this benefit.",
+    eligibleIncomeTooHigh:
+      'You are likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.',
     eligibleDependingOnIncome:
       'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     eligibleDependingOnIncomeNoEntitlement:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide your income to get a monthly payment estimate.',
+      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide complete income information to get a monthly payment estimate.',
     eligibleEntitlementUnavailable:
       'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
     eligiblePartialOas:
@@ -300,10 +302,11 @@ const en: Translations = {
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:
       'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
-    eligibleWhen60: 'You will likely be eligible when you turn 60.',
+    eligibleWhen60:
+      "You'll likely be eligible for this benefit once you turn 60. You can <a class='underline text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBeInCanada:
-      'You need to live in Canada to be eligible for this benefit.',
+      "You need to live in Canada to receive this benefit. You can <a class='underline text-default-text' href='/eligibility/#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
@@ -328,6 +331,8 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
+    alwIfYouApply:
+      "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner has passed away.',
     autoEnrollTrue:
@@ -337,7 +342,7 @@ const en: Translations = {
     expectToReceive:
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawback:
-      'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to repay {OAS_CLAWBACK} in {LINK_RECOVERY_TAX}.',
+      'Since {INCOME_SINGLE_OR_COMBINED} is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_RECOVERY_TAX}.',
     oas: {
       eligibleIfIncomeIsLessThan:
         'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.',
@@ -362,7 +367,7 @@ const en: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income to get a monthly payment estimate.',
+        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} income information to get a monthly payment estimate.",
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:

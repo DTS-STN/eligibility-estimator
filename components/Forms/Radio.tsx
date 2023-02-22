@@ -36,14 +36,16 @@ export const Radio: React.VFC<InputProps> = ({
   return (
     <div className="radio">
       <fieldset>
-        <QuestionLabel
-          name={name}
-          type="radio"
-          label={label}
-          requiredText={requiredText}
-          helpText={helpText}
-        />
-        <Tooltip field={name} />
+        <legend>
+          <QuestionLabel
+            name={name}
+            type="radio"
+            label={label}
+            requiredText={requiredText}
+            helpText={helpText}
+          />
+          <Tooltip field={name} />
+        </legend>
         <div role="radiogroup" className="mt-2.5">
           {values.map((val, index) => (
             <div
@@ -72,12 +74,12 @@ export const Radio: React.VFC<InputProps> = ({
             </div>
           ))}
         </div>
-        {error && (
-          <div className="mt-2">
-            <FormError errorMessage={error} />
-          </div>
-        )}
       </fieldset>
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </div>
   )
 }

@@ -12,7 +12,7 @@ export const ListLinks: React.VFC<{
         {links &&
           links.map(({ text, url }, index) => (
             <li key={index}>
-              <DSLink id={`link${index}`} href={url} text={text} />
+              <DSLink id={`Link${index}`} href={url} text={text} />
             </li>
           ))}
       </ul>

@@ -83,7 +83,10 @@ const ResultsPage: React.VFC<{
       text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
       url: '#estimated',
     },
-    { text: tsln.resultsPage.whatYouToldUs, url: '#answers' },
+    {
+      text: tsln.resultsPage.whatYouToldUs,
+      url: '#answers',
+    },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'oas')}`,
       url: '#oas',
@@ -106,9 +109,7 @@ const ResultsPage: React.VFC<{
   listLinks = listLinks.filter((ll) => ll.text)
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) =>
-      result.eligibility?.result === ResultKey.ELIGIBLE ||
-      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+    (result) => result.eligibility?.result === ResultKey.ELIGIBLE
   )
 
   return (
@@ -141,6 +142,7 @@ const ResultsPage: React.VFC<{
 
           <Button
             text={tsln.modifyAnswers}
+            id={'EditAnswers'}
             styling="secondary"
             className="mt-6 justify-center md:w-[fit-content]"
             onClick={(e) => router.push('/eligibility')}
