@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
-import { DatePicker, FormError } from '@dts-stn/service-canada-design-system'
+import {
+  FormDatePicker,
+  FormError,
+} from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
@@ -76,7 +79,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         fieldId={`enter-${name}`}
       />
       {dateInput && (
-        <DatePicker
+        <FormDatePicker
           id={`enter-${name}`}
           month={dateInput.month}
           year={dateInput.year}

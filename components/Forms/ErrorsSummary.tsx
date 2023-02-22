@@ -1,6 +1,9 @@
 import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
-import { Message, Link as DSLink } from '@dts-stn/service-canada-design-system'
+import {
+  ContextualAlert as Message,
+  Link as DSLink,
+} from '@dts-stn/service-canada-design-system'
 import { Language } from '../../utils/api/definitions/enums'
 
 export const ErrorsSummary: any = ({ errorFields }) => {
