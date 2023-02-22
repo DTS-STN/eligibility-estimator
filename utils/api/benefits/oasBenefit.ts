@@ -136,14 +136,16 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   protected getEntitlement(): EntitlementResultOas {
     const autoEnrollment = this.getAutoEnrollment()
     if (
-      this.eligibility.result !== ResultKey.ELIGIBLE &&
-      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+      (this.eligibility.result !== ResultKey.ELIGIBLE &&
+        this.eligibility.result !== ResultKey.INCOME_DEPENDENT) ||
+      (this.eligibility.result === ResultKey.ELIGIBLE &&
+        this.eligibility.reason === ResultReason.INCOME)
     )
       return {
         result: 0,
         result65To74: 0,
         resultAt75: 0,
-        clawback: 0,
+        clawback: 1, // hack to avoid more Ifs on benefitCards
         deferral: { age: 65, years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
         autoEnrollment,
@@ -305,7 +307,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     ) {
       //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.mustMeetIncomeReq
+      this.eligibility.detail = this.translations.detail.eligibleIncomeTooHigh
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
