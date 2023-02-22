@@ -425,11 +425,6 @@ export class BenefitHandler {
       partnerOas
     )
 
-    console.log(
-      'this.input.client.partnerBenefitStatus',
-      this.input.client.partnerBenefitStatus
-    )
-
     if (this.input.client.partnerBenefitStatus.alw) {
       clientGis.eligibility.incomeMustBeLessThan =
         legalValues.gis.spouseAlwIncomeLimit
