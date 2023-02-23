@@ -1,4 +1,7 @@
-import { Button, Message } from '@dts-stn/service-canada-design-system'
+import {
+  Button,
+  ContextualAlert as Message,
+} from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'

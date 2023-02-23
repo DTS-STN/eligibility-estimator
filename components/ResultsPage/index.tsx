@@ -1,4 +1,4 @@
-import { Button, Message } from '@dts-stn/service-canada-design-system'
+import { Button } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
@@ -116,7 +116,7 @@ const ResultsPage: React.VFC<{
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
-      <div className="md:grid md:grid-cols-3 md:gap-12 ">
+      <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2 row-span-1">
           <div> {tsln.resultsPage.general} </div>
 
