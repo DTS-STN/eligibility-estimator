@@ -304,6 +304,7 @@ export class BenefitHandler {
     const clientOas = new OasBenefit(this.input.client, this.translations)
     allResults.client.oas.eligibility = clientOas.eligibility
     allResults.client.oas.entitlement = clientOas.entitlement
+    allResults.client.oas.cardDetail = clientOas.cardDetail
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
