@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+@layer components {
   /* consistent focus styles on all components */
   * {
     @apply focus:outline-none;
@@ -22,7 +22,8 @@
     @apply text-base;
   }
 
-  #mainForm button {
+  #mainForm button,
+  #cta-feedback button {
     background-color: theme('colors.button-background');
   }
 
@@ -242,5 +243,9 @@
   ol li {
     list-style: decimal;
     list-style-position: inside;
+  }
+
+  #cta-feedback h3 {
+    margin-bottom: 1rem;
   }
 }
