@@ -49,7 +49,8 @@ const getEligibility = (
   const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
     .eligibility.result
 
-  return eligibityResult === ResultKey.ELIGIBLE
+  return eligibityResult === ResultKey.ELIGIBLE ||
+    eligibityResult === ResultKey.INCOME_DEPENDENT
     ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
     : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
 }
@@ -70,7 +71,7 @@ const ResultsPage: React.VFC<{
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
   )
-
+  console.log(summary.entitlementSum)
   let listLinks: {
     text: string
     url: string
@@ -109,7 +110,9 @@ const ResultsPage: React.VFC<{
   listLinks = listLinks.filter((ll) => ll.text)
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) => result.eligibility?.result === ResultKey.ELIGIBLE
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
   return (
