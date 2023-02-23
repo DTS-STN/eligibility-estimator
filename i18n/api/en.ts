@@ -139,9 +139,9 @@ const en: Translations = {
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      'If you are not sure of the exact number, you may enter an estimate.',
+      "If you're not sure of the exact number, you may enter an estimate.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'If you are not sure of the exact number, you may enter an estimate.',
+      "If you're not sure of the exact number, you may enter an estimate.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -289,15 +289,15 @@ const en: Translations = {
   detail: {
     eligible: "You're likely eligible for this benefit.",
     eligibleIncomeTooHigh:
-      'You are likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.',
+      "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     eligibleDependingOnIncome:
-      'You are likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide complete income information to get a monthly payment estimate.",
     eligibleEntitlementUnavailable:
-      'You are likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
+      "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
-      'You are likely eligible to a partial Old Age Security pension.',
+      "You're likely eligible to a partial Old Age Security pension.",
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:
@@ -394,8 +394,8 @@ const en: Translations = {
       text: 'Once you turn 75, your payments will increase by&nbsp;10%, meaning you will receive {OAS_75_AMOUNT} per month.',
     },
     oasIncreaseAt75Applied: {
-      heading: 'Your payments have increased because you are over&nbsp;75',
-      text: 'Since you are over the age of 75, your payments have increased by&nbsp;10%.',
+      heading: "Your payments have increased because you're over&nbsp;75",
+      text: "Since you're over the age of 75, your payments have increased by&nbsp;10%.",
     },
     calculatedBasedOnIndividualIncome: {
       heading: 'Amounts were calculated based on individual income',
@@ -415,13 +415,13 @@ const en: Translations = {
   },
   summaryDetails: {
     [SummaryState.MORE_INFO]:
-      'Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you are a qualified candidate, the application will also provide an estimate for your monthly payment.',
+      "Please fill out the form. Based on the information you will provide today, the application will estimate your eligibility. If you're a qualified candidate, the application will also provide an estimate for your monthly payment.",
     [SummaryState.UNAVAILABLE]:
       'Based on the information you provided today, we are unable to determine your eligibility. We encourage you to {LINK_SERVICE_CANADA}.',
     [SummaryState.AVAILABLE_ELIGIBLE]:
-      'Based on the information you provided today, you are likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT_SUM}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.',
+      "Based on the information you provided today, you're likely eligible for an estimated total monthly amount of {ENTITLEMENT_AMOUNT_SUM}. Note that this only provides an estimate of your monthly payment. Changes in your circumstances may impact your results.",
     [SummaryState.AVAILABLE_INELIGIBLE]:
-      'Based on the information you provided today, you are likely not eligible for any benefits. See the details below for more information.',
+      "Based on the information you provided today, you're likely not eligible for any benefits. See the details below for more information.",
     [SummaryState.AVAILABLE_DEPENDING]:
       'Depending on your income, you may be eligible for old age benefits. See the details below for more information.',
   },
