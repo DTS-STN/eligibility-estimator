@@ -1,7 +1,4 @@
 module.exports = {
-  // corePlugins: {
-  //   preflight: false,
-  // },
   mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -122,7 +119,6 @@ module.exports = {
     },
   },
   plugins: [
-    // require('@tailwindcss/forms'),
     function ({ addComponents }) {
       addComponents({
         '.container': {
