@@ -251,7 +251,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The yearly amount of "clawback" aka "repayment tax" the client will have to repay.
    */
   private get clawbackAmount(): number {
-    if (this.input.income.client < legalValues.oas.clawbackIncomeLimit) return 0
+    if (
+      !this.input.income.client ||
+      this.input.income.client < legalValues.oas.clawbackIncomeLimit
+    )
+      return 0
     const incomeOverCutoff =
       this.input.income.client - legalValues.oas.clawbackIncomeLimit
     const repaymentAmount = incomeOverCutoff * 0.15
