@@ -180,4 +180,9 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
     order: -1,
   },
+  oasLearnAboutRecoveryTax: {
+    text: 'Learn more about recovery tax',
+    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
+    order: -1,
+  },
 }
