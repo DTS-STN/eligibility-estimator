@@ -23,7 +23,7 @@ const getEligibleLinkText = (
   summary: SummaryState,
   tsln: WebTranslations
 ): string => {
-  return summary === SummaryState.AVAILABLE_ELIGIBLE
+  return summary !== SummaryState.AVAILABLE_INELIGIBLE
     ? tsln.resultsPage.youMayBeEligible
     : tsln.resultsPage.youAreNotEligible
 }
