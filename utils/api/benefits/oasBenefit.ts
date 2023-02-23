@@ -253,7 +253,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The expected OAS amount, taking into account the client's age.
    * At age 75, OAS increases by 10%.
    */
-  public get currentEntitlementAmount(): number {
+  private get currentEntitlementAmount(): number {
     if (this.input.age < 75) return this.age65EntitlementAmount
     else return this.age75EntitlementAmount
   }
