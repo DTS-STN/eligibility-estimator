@@ -210,7 +210,6 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.INV_SEPARATED)
       requiredFields.push(FieldKey.PARTNER_AGE)
 
-      requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       // only ask for partner income if client income is available
       if (this.input.client.income.clientAvailable) {
         requiredFields.push(FieldKey.PARTNER_INCOME_AVAILABLE)
@@ -221,13 +220,30 @@ export class BenefitHandler {
       if (this.input.client.invSeparated) {
       }
 
+      console.log('this.input.partner.age', this.input.partner.age)
+
+      /*
+      Make changes to avoid contridictions: 
+        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW
+        therefore, no following question will show up except income
+        2. when partner is older or equals to 60, but younger than 65, partner will not be eligible for 
+        OAS, therefore, hide the partner benefit section
+        3. when partner is older or equals to 65, we show the partner benefit section
+       */
+
       if (
-        (this.input.client.invSeparated && this.input.partner.age >= 60) ||
-        (this.input.client.partnerBenefitStatus.helpMe &&
-          this.input.partner.age >= 60)
+        this.input.partner.age < 60 ||
+        this.input.partner.age > 123 ||
+        this.input.partner.age === undefined
       ) {
-        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
+        requiredFields.sort(BenefitHandler.sortFields)
+        return requiredFields
+      } else if (this.input.partner.age >= 65) {
+        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }
+
+      requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
+
       if (
         this.input.partner.legalStatus.value &&
         this.input.partner.legalStatus.value !== LegalStatus.NO
