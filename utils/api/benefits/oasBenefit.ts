@@ -145,7 +145,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         result: 0,
         result65To74: 0,
         resultAt75: 0,
-        clawback: 1, // hack to avoid more Ifs on benefitCards
+        clawback: 0,
         deferral: { age: 65, years: 0, increase: 0 },
         type: EntitlementResultType.NONE,
         autoEnrollment,
@@ -277,25 +277,25 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       return cardCollapsedText
     }
 
-    // // increase at 75
-    // if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasIncreaseAt75
-    //   )
-    // else
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasIncreaseAt75Applied
-    //   )
+    // increase at 75
+    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasIncreaseAt75
+      )
+    else
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasIncreaseAt75Applied
+      )
 
-    // // deferral
-    // if (this.deferralIncrease)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasDeferralApplied
-    //   )
-    // else if (this.input.age >= 65 && this.input.age < 70)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasDeferralAvailable
-    //   )
+    // deferral
+    if (this.deferralIncrease)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasDeferralApplied
+      )
+    else if (this.input.age >= 65 && this.input.age < 70)
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.oasDeferralAvailable
+      )
 
     return cardCollapsedText
   }

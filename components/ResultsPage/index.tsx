@@ -122,7 +122,7 @@ const ResultsPage: React.VFC<{
 
           <MayBeEligible resultsEligible={resultsEligible} />
 
-          {resultsEligible.length > 0 && (
+          {resultsEligible.length > 0 && summary.entitlementSum > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
               summary={summary}
