@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -20,10 +20,10 @@ import { Translations, getTranslations } from '../../i18n/api'
 
 // get the link text by current summary state
 const getEligibleLinkText = (
-  entitlementSum: number,
+  summary: SummaryState,
   tsln: WebTranslations
 ): string => {
-  return entitlementSum > 0
+  return summary === SummaryState.AVAILABLE_ELIGIBLE
     ? tsln.resultsPage.youMayBeEligible
     : tsln.resultsPage.youAreNotEligible
 }
@@ -49,7 +49,8 @@ const getEligibility = (
   const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
     .eligibility.result
 
-  return eligibityResult === ResultKey.ELIGIBLE
+  return eligibityResult === ResultKey.ELIGIBLE ||
+    eligibityResult === ResultKey.INCOME_DEPENDENT
     ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
     : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
 }
@@ -70,13 +71,12 @@ const ResultsPage: React.VFC<{
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
   )
-
   let listLinks: {
     text: string
     url: string
   }[] = [
     {
-      text: getEligibleLinkText(summary.entitlementSum, tsln),
+      text: getEligibleLinkText(summary.state, tsln),
       url: '#eligible',
     },
     {
@@ -109,7 +109,9 @@ const ResultsPage: React.VFC<{
   listLinks = listLinks.filter((ll) => ll.text)
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) => result.eligibility?.result === ResultKey.ELIGIBLE
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
   return (
@@ -123,7 +125,7 @@ const ResultsPage: React.VFC<{
 
             <MayBeEligible resultsEligible={resultsEligible} />
 
-            {resultsEligible.length > 0 && (
+            {resultsEligible.length > 0 && summary.entitlementSum > 0 && (
               <EstimatedTotal
                 resultsEligible={resultsEligible}
                 summary={summary}

@@ -304,6 +304,7 @@ export class BenefitHandler {
     const clientOas = new OasBenefit(this.input.client, this.translations)
     allResults.client.oas.eligibility = clientOas.eligibility
     allResults.client.oas.entitlement = clientOas.entitlement
+    allResults.client.oas.cardDetail = clientOas.cardDetail
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -386,48 +387,48 @@ export class BenefitHandler {
     const clientAfs = new AfsBenefit(this.input.client, this.translations)
     allResults.client.afs.eligibility = clientAfs.eligibility
 
+    const partnerAlw = new AlwBenefit(
+      this.input.partner,
+      this.translations,
+      true
+    )
+    allResults.partner.alw.eligibility = partnerAlw.eligibility
+    allResults.partner.alw.entitlement = partnerAlw.entitlement
+    allResults.partner.alw.cardDetail = partnerAlw.cardDetail
+
+    const partnerOas = new OasBenefit(
+      this.input.partner,
+      this.translations,
+      true
+    )
+    allResults.partner.oas.eligibility = partnerOas.eligibility
+    allResults.partner.oas.entitlement = partnerOas.entitlement
+    allResults.partner.oas.cardDetail = partnerOas.cardDetail
+
+    const partnerGis = new GisBenefit(
+      this.input.partner,
+      this.translations,
+      allResults.partner.oas,
+      true
+    )
+    allResults.partner.gis.eligibility = partnerGis.eligibility
+    allResults.partner.gis.entitlement = partnerGis.entitlement
+    allResults.partner.gis.cardDetail = partnerGis.cardDetail
+
+    this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
+      partnerGis,
+      partnerAlw,
+      partnerOas
+    )
+
+    if (this.input.client.partnerBenefitStatus.alw) {
+      clientGis.eligibility.incomeMustBeLessThan =
+        legalValues.gis.spouseAlwIncomeLimit
+    }
+
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
-
     if (this.input.client.invSeparated) {
-      const partnerAlw = new AlwBenefit(
-        this.input.partner,
-        this.translations,
-        true
-      )
-      allResults.partner.alw.eligibility = partnerAlw.eligibility
-      allResults.partner.alw.entitlement = partnerAlw.entitlement
-      allResults.partner.alw.cardDetail = partnerAlw.cardDetail
-
-      const partnerOas = new OasBenefit(
-        this.input.partner,
-        this.translations,
-        true
-      )
-      allResults.partner.oas.eligibility = partnerOas.eligibility
-      allResults.partner.oas.entitlement = partnerOas.entitlement
-      allResults.partner.oas.cardDetail = partnerOas.cardDetail
-
-      const partnerGis = new GisBenefit(
-        this.input.partner,
-        this.translations,
-        allResults.partner.oas,
-        true
-      )
-      allResults.partner.gis.eligibility = partnerGis.eligibility
-      allResults.partner.gis.entitlement = partnerGis.entitlement
-      allResults.partner.gis.cardDetail = partnerGis.cardDetail
-
-      this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
-        partnerGis,
-        partnerAlw,
-        partnerOas
-      )
-      if (this.input.client.partnerBenefitStatus.alw) {
-        clientGis.eligibility.incomeMustBeLessThan =
-          legalValues.gis.spouseAlwIncomeLimit
-      }
-
       const isIncomeProvided =
         this.input.client.income.provided && this.input.partner.income.provided
 
@@ -555,8 +556,8 @@ export class BenefitHandler {
             )
 
             allResults.client.gis.eligibility = clientGis.eligibility
-            allResults.client.gis.entitlement.result = applicantGisResultT1
-            allResults.client.gis.entitlement.type = EntitlementResultType.FULL
+            allResults.client.gis.entitlement = clientGis.entitlement
+            allResults.client.gis.cardDetail = clientGis.cardDetail
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           }
