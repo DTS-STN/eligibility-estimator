@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -20,10 +20,10 @@ import { Translations, getTranslations } from '../../i18n/api'
 
 // get the link text by current summary state
 const getEligibleLinkText = (
-  entitlementSum: number,
+  summary: SummaryState,
   tsln: WebTranslations
 ): string => {
-  return entitlementSum > 0
+  return summary === SummaryState.AVAILABLE_ELIGIBLE
     ? tsln.resultsPage.youMayBeEligible
     : tsln.resultsPage.youAreNotEligible
 }
@@ -76,7 +76,7 @@ const ResultsPage: React.VFC<{
     url: string
   }[] = [
     {
-      text: getEligibleLinkText(summary.entitlementSum, tsln),
+      text: getEligibleLinkText(summary.state, tsln),
       url: '#eligible',
     },
     {
