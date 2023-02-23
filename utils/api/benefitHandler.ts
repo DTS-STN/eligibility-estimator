@@ -217,11 +217,6 @@ export class BenefitHandler {
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
 
-      if (this.input.client.invSeparated) {
-      }
-
-      console.log('this.input.partner.age', this.input.partner.age)
-
       /*
       Make changes to avoid contridictions: 
         1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW
