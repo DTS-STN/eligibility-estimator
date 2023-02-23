@@ -10,6 +10,7 @@ import {
   age65NoDefer,
   canadaWholeLife,
   canadian,
+  expectAfsEligible,
   income10k,
   partnerUndefined,
 } from './expectUtils'
@@ -94,6 +95,7 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_LEGAL_STATUS,
       FieldKey.PARTNER_LIVING_COUNTRY,
       FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
       FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
@@ -170,9 +172,10 @@ describe('field requirements analysis: conditional fields', () => {
       FieldKey.INV_SEPARATED,
       FieldKey.PARTNER_AGE,
       FieldKey.PARTNER_INCOME_AVAILABLE,
-      FieldKey.PARTNER_BENEFIT_STATUS,
+      // FieldKey.PARTNER_BENEFIT_STATUS,
     ])
     expect(res.body.visibleFields).toContain(FieldKey.PARTNER_INCOME_AVAILABLE)
-    expect(res.body.visibleFields).toContain(FieldKey.PARTNER_BENEFIT_STATUS)
+    expect(res.body.visibleFields).toContain(FieldKey.PARTNER_AGE)
+    expect(res.body.visibleFields).toContain(FieldKey.INV_SEPARATED)
   })
 })
