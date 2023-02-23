@@ -176,7 +176,7 @@ export const links: LinkDefinitions = {
     },
   },
   oasRecoveryTaxInline: {
-    text: "En apprendre davantage sur l'impôt de récupération",
+    text: 'impôt de récupération',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
     order: -1,
   },

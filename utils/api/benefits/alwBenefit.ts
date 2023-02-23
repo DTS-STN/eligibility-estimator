@@ -31,7 +31,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // helpers
     const meetsReqMarital = this.input.maritalStatus.partnered
     const meetsReqPartner = this.input.partnerBenefitStatus.gis
-    const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
+    const meetsReqAge = 60 <= this.input.age && this.input.age < 65
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
     const meetsReqCountry = this.input.livingCountry.canada

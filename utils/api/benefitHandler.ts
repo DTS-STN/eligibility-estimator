@@ -363,11 +363,6 @@ export class BenefitHandler {
       clientOas
     )
 
-    console.log(
-      'this.input.partner.partnerBenefitStatus',
-      this.input.partner.partnerBenefitStatus
-    )
-
     // If the client needs help, check their partner's ALW eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
       const partnerAlw = new AlwBenefit(
