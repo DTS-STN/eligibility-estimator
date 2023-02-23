@@ -453,9 +453,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dts-stn/service-canada-design-system@npm:1.56.6-dev.a1cc3c34f":
-  version: 1.56.6-dev.a1cc3c34f
-  resolution: "@dts-stn/service-canada-design-system@npm:1.56.6-dev.a1cc3c34f"
+"@dts-stn/service-canada-design-system@npm:1.56.6-dev.73281e9a4":
+  version: 1.56.6-dev.73281e9a4
+  resolution: "@dts-stn/service-canada-design-system@npm:1.56.6-dev.73281e9a4"
   dependencies:
     git-conventional-commits: ^2.1.2
     identity-obj-proxy: ^3.0.0
@@ -471,7 +471,7 @@ __metadata:
     shelljs: ^0.8.5
     ts-jest: ^29.0.5
     user: ^0.0.0
-  checksum: b550810161bc0924d70db95c41c2eaa992d78c48a2094889ab47100c8bbb3acb0f1c1fa973d1e4805f2f1f249358f8ad7c58f9e6fef6dbea9aafa2952e9d9ba0
+  checksum: 9e31cb08355c3895461e748707b01e3766a925f0d827bc37c5c0c84c377878213e7307e8497f50e321ab22a30b3cfdabdff85fa847c11b6d5d1bdec816d1749e
   languageName: node
   linkType: hard
 
@@ -3385,7 +3385,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
-    "@dts-stn/service-canada-design-system": 1.56.6-dev.a1cc3c34f
+    "@dts-stn/service-canada-design-system": 1.56.6-dev.73281e9a4
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
