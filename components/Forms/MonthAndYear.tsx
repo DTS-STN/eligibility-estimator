@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
-import {
-  FormDatePicker,
-  FormError,
-} from '@dts-stn/service-canada-design-system'
+import { FormDatePicker } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { useSessionStorage } from 'react-use'
