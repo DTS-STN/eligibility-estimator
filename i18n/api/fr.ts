@@ -178,7 +178,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Je voudrais commencer à 65 ans (le plus commun)',
-        shortText: 'Commencer à 65 ans',
+        shortText: 'Commencer à 65&nbsp;ans',
       },
       {
         key: true,
@@ -270,7 +270,7 @@ const fr: Translations = {
       {
         key: PartnerBenefitStatus.NONE,
         text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
-        shortText: 'No',
+        shortText: 'Non',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
