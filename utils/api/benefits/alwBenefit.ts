@@ -198,7 +198,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     )
       return {
-        result: -1,
+        result: 0,
         type: EntitlementResultType.UNAVAILABLE,
         autoEnrollment,
       }
@@ -245,10 +245,17 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
+    // partner is eligible, different message if income was not provided
     if (this.partner) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.partnerEligible
-      )
+      if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligible
+        )
+      } else {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerDependOnYourIncome
+        )
+      }
     }
 
     return cardCollapsedText
