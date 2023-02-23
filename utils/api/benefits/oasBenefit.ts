@@ -264,7 +264,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    */
   private get clawbackAmount(): number {
     const OAS_RT_RATE = 0.15
-    if (this.input.income.client < legalValues.oas.clawbackIncomeLimit) return 0
+    if (
+      !this.input.income.client ||
+      this.input.income.client < legalValues.oas.clawbackIncomeLimit
+    )
+      return 0
+
     const incomeOverCutoff =
       this.input.income.client - legalValues.oas.clawbackIncomeLimit
     const repaymentAmount = incomeOverCutoff * OAS_RT_RATE

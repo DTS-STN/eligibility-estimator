@@ -11,7 +11,7 @@ const en: TooltipTranslations = {
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Divorced</span>: \
-            You are officially separated and have legally ended your marriage. \
+            You're officially separated and have legally ended your marriage. \
           </p> \
           <p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Separated:</span> \

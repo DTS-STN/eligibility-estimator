@@ -49,7 +49,9 @@ export const YourAnswers: React.VFC<{
               <div>{tsln.resultsQuestions[input.key]}</div>
               <div className="grid gap-0 grid-cols-3">
                 <div className="col-span-2">
-                  <strong>{getDisplayValue(input)}</strong>
+                  <strong
+                    dangerouslySetInnerHTML={{ __html: getDisplayValue(input) }}
+                  />
                 </div>
                 <div className="justify-self-end self-end">
                   <DSLink
