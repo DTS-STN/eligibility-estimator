@@ -69,12 +69,21 @@ export const BenefitCards: React.VFC<{
     } else if (benefitKey === BenefitKey.oas) {
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+
         if (result.entitlement.clawback > 0) {
           if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
             nextStepText.nextStepContent += `<p class='mb-6'>${apiTsln.detail.oas.over70}</p>`
           }
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.serviceCanadaReviewYourPayment
+        } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
+          nextStepText.nextStepContent +=
+            apiTsln.detail.oas.youShouldHaveReceivedLetter
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
+        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+          nextStepText.nextStepContent += apiTsln.detail.oas.over70
+        } else if (result.entitlement.clawback === 0) {
+          nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
           result.eligibility.reason === ResultReason.INCOME
             ? (nextStepText.nextStepContent +=
                 ' ' +
@@ -85,12 +94,6 @@ export const BenefitCards: React.VFC<{
                   { rounding: 0 }
                 )}</b>.`)
             : ''
-        } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
-          nextStepText.nextStepContent +=
-            apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
-        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
-          nextStepText.nextStepContent += apiTsln.detail.oas.over70
         }
       } else if (
         result.eligibility.result === ResultKey.INELIGIBLE &&

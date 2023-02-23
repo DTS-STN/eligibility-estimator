@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -20,10 +20,10 @@ import { Translations, getTranslations } from '../../i18n/api'
 
 // get the link text by current summary state
 const getEligibleLinkText = (
-  entitlementSum: number,
+  summary: SummaryState,
   tsln: WebTranslations
 ): string => {
-  return entitlementSum > 0
+  return summary === SummaryState.AVAILABLE_ELIGIBLE
     ? tsln.resultsPage.youMayBeEligible
     : tsln.resultsPage.youAreNotEligible
 }
@@ -49,7 +49,8 @@ const getEligibility = (
   const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
     .eligibility.result
 
-  return eligibityResult === ResultKey.ELIGIBLE
+  return eligibityResult === ResultKey.ELIGIBLE ||
+    eligibityResult === ResultKey.INCOME_DEPENDENT
     ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
     : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
 }
@@ -70,13 +71,12 @@ const ResultsPage: React.VFC<{
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
   )
-
   let listLinks: {
     text: string
     url: string
   }[] = [
     {
-      text: getEligibleLinkText(summary.entitlementSum, tsln),
+      text: getEligibleLinkText(summary.state, tsln),
       url: '#eligible',
     },
     {
@@ -109,52 +109,52 @@ const ResultsPage: React.VFC<{
   listLinks = listLinks.filter((ll) => ll.text)
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) => result.eligibility?.result === ResultKey.ELIGIBLE
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
   return (
-    <>
-      <div className="flex flex-col space-y-12" ref={ref}>
-        <div className="md:grid md:grid-cols-3 md:gap-12">
-          <div className="col-span-2 row-span-1">
-            <div> {tsln.resultsPage.general} </div>
+    <div className="flex flex-col space-y-12" ref={ref}>
+      <div className="md:grid md:grid-cols-3 md:gap-12">
+        <div className="col-span-2 row-span-1">
+          <div> {tsln.resultsPage.general} </div>
 
-            <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
+          <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
 
-            <MayBeEligible resultsEligible={resultsEligible} />
+          <MayBeEligible resultsEligible={resultsEligible} />
 
-            {resultsEligible.length > 0 && (
-              <EstimatedTotal
-                resultsEligible={resultsEligible}
-                summary={summary}
-              />
-            )}
-          </div>
-          <div className="col-span-1 row-span-2">
-            <YourAnswers
-              title={tsln.resultsPage.whatYouToldUs}
-              inputs={inputs}
+          {resultsEligible.length > 0 && summary.entitlementSum > 0 && (
+            <EstimatedTotal
+              resultsEligible={resultsEligible}
+              summary={summary}
             />
-          </div>
-          <div className="col-span-2 row-span-1">
-            <hr className="my-12 border border-[#BBBFC5]" />
+          )}
+        </div>
+        <div className="col-span-1 row-span-2">
+          <YourAnswers
+            title={tsln.resultsPage.whatYouToldUs}
+            inputs={inputs}
+          />
+        </div>
+        <div className="col-span-2 row-span-1">
+          <hr className="my-12 border border-[#BBBFC5]" />
 
-            <BenefitCards
-              results={resultsArray}
-              partnerResults={partnerResultsArray}
-            />
+          <BenefitCards
+            results={resultsArray}
+            partnerResults={partnerResultsArray}
+          />
 
-            <Button
-              text={tsln.modifyAnswers}
-              id={'EditAnswers'}
-              styling="secondary"
-              className="mt-6 justify-center md:w-[fit-content]"
-              onClick={(e) => router.push('/eligibility')}
-            />
-          </div>
+          <Button
+            text={tsln.modifyAnswers}
+            id={'EditAnswers'}
+            styling="secondary"
+            className="mt-6 justify-center md:w-[fit-content]"
+            onClick={(e) => router.push('/eligibility')}
+          />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

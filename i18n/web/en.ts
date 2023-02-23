@@ -43,7 +43,7 @@ const en: WebTranslations = {
     'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
   youMayBeEligible: 'You may be able to receive old age benefits if:',
-  atLeast60: 'you are at least 60 years old',
+  atLeast60: "you're at least 60 years old",
   haveNetIncomeLess: 'your net income is less than $133,141',
   headerWhatToKnow: "What you'll need",
   pleaseNodeText:
@@ -85,7 +85,7 @@ const en: WebTranslations = {
   privacyDefinition:
     'We protect your information under the <em><a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a></em>. The estimator does not collect information that can identify you. Your anonymous results may be used for research purposes.',
   homePageP3:
-    'The Old Age Security pension is a monthly payment you can get if you are 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.',
+    "The Old Age Security pension is a monthly payment you can get if you're 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.",
   homePageP4:
     'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
   homePageP5:
@@ -120,7 +120,7 @@ const en: WebTranslations = {
     tableTotalAmount: 'Total',
     whatYouToldUs: 'What you told us',
     youMayBeEligible: 'You may be eligible',
-    youAreNotEligible: 'You are likely not eligible at this time',
+    youAreNotEligible: "You're likely not eligible at this time",
     basedOnYourInfoEligible:
       'Based on your information, you may be eligible for the:',
     basedOnYourInfoAndIncomeEligible:
@@ -195,9 +195,9 @@ const en: WebTranslations = {
     [ValidationErrors.legalUnavailable]:
       'You need to have legal status in Canada to receive any of the benefits covered by this tool. For help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable10]:
-      "This tool can't estimate your benefits because you have lived in Canada for less than 10&nbsp;years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
+      "This tool can't estimate your benefits because you have lived in Canada for less than 10&nbsp;years. To find out if you're eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable20]:
-      "This tool can't estimate your benefits because you have lived in Canada for less than 20&nbsp;years. To find out if you are eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
+      "This tool can't estimate your benefits because you have lived in Canada for less than 20&nbsp;years. To find out if you're eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
   },
   unableToProceed: 'Unable to proceed',
   yes: 'Yes',

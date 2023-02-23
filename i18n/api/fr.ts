@@ -178,7 +178,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Je voudrais commencer à 65 ans (le plus commun)',
-        shortText: 'Commencer à 65 ans',
+        shortText: 'Commencer à 65&nbsp;ans',
       },
       {
         key: true,
@@ -270,7 +270,7 @@ const fr: Translations = {
       {
         key: PartnerBenefitStatus.NONE,
         text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
-        shortText: 'No',
+        shortText: 'Non',
       },
       {
         key: PartnerBenefitStatus.HELP_ME,
@@ -297,9 +297,9 @@ const fr: Translations = {
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     eligibleDependingOnIncome:
-      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de vos revenus, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
-      'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez votre revenus pour obtenir une estimation de paiement mensuel.',
+      'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
@@ -309,11 +309,11 @@ const fr: Translations = {
     eligibleWhen65ApplyNow:
       'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
-      "Vous serez probablement admissible lorsque vous aurez 60 ans. Vous pouvez <a class='underline text-default-text' href='/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
+      "Vous serez probablement admissible lorsque vous aurez 60 ans. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
     eligibleWhen65:
       'Vous serez probablement admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='underline text-default-text' href='/eligibility/#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
@@ -349,10 +349,10 @@ const fr: Translations = {
     expectToReceive:
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawback:
-      'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_RECOVERY_TAX}.',
+      'Parce que votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_RECOVERY_TAX}.',
     oas: {
       eligibleIfIncomeIsLessThan:
-        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'impôt de récupération.{LINK_RECOVERY_TAX}.",
+        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
       dependOnYourIncome:
         'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
       eligibleIncomeTooHigh:
@@ -376,7 +376,7 @@ const fr: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} revenus pour obtenir une estimation de paiement mensuel.',
+        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez votre revenu / vos revenus pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       ifYouApply:
@@ -410,7 +410,11 @@ const fr: Translations = {
     },
     partnerEligible: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: "Selon vos renseignements, votre conjoint pourrait recevoir {PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+      text: "Selon vos renseignements, votre conjoint pourrait recevoir&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+    },
+    partnerDependOnYourIncome: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
     },
   },
   summaryTitle: {
@@ -442,7 +446,7 @@ const fr: Translations = {
   yes: 'Oui',
   no: 'Non',
   year: 'an',
-  your: 'votre',
-  complete: 'vos',
+  your: 'votre revenu',
+  complete: 'vos revenus',
 }
 export default fr
