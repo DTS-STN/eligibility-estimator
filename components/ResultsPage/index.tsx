@@ -71,7 +71,6 @@ const ResultsPage: React.VFC<{
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
   )
-  console.log(summary.entitlementSum)
   let listLinks: {
     text: string
     url: string
