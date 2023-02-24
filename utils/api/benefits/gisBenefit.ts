@@ -54,8 +54,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       ? legalValues.gis.spouseAlwIncomeLimit
       : legalValues.gis.spouseNoOasIncomeLimit
 
-    console.log(this.input)
-
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
     const meetsReqIncome =
