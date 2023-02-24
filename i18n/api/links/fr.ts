@@ -180,4 +180,9 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
     order: -1,
   },
+  oasLearnAboutRecoveryTax: {
+    text: "En apprendre davantage sur l'impôt de récupération",
+    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
+    order: -1,
+  },
 }

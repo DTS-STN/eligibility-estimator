@@ -25,4 +25,5 @@ export interface LinkDefinitions {
   socialAgreement: Link
   reasons: { [key in BenefitKey]: Link }
   oasRecoveryTaxInline: Link
+  oasLearnAboutRecoveryTax: Link
 }
