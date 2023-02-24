@@ -1,9 +1,9 @@
-import { Button, Message } from '@dts-stn/service-canada-design-system'
+import { Button } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -20,10 +20,10 @@ import { Translations, getTranslations } from '../../i18n/api'
 
 // get the link text by current summary state
 const getEligibleLinkText = (
-  entitlementSum: number,
+  summary: SummaryState,
   tsln: WebTranslations
 ): string => {
-  return entitlementSum > 0
+  return summary !== SummaryState.AVAILABLE_INELIGIBLE
     ? tsln.resultsPage.youMayBeEligible
     : tsln.resultsPage.youAreNotEligible
 }
@@ -76,7 +76,7 @@ const ResultsPage: React.VFC<{
     url: string
   }[] = [
     {
-      text: getEligibleLinkText(summary.entitlementSum, tsln),
+      text: getEligibleLinkText(summary.state, tsln),
       url: '#eligible',
     },
     {
@@ -116,7 +116,7 @@ const ResultsPage: React.VFC<{
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
-      <div className="md:grid md:grid-cols-3 md:gap-12 ">
+      <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2 row-span-1">
           <div> {tsln.resultsPage.general} </div>
 

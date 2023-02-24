@@ -20,7 +20,7 @@
     "run-scraper": "ts-node utils/api/scrapers/_main.ts"
   },
   "dependencies": {
-    "@dts-stn/service-canada-design-system": "1.53.9-dev.2d75d3a92",
+    "@dts-stn/service-canada-design-system": "1.56.6-dev.73281e9a4",
     "@tailwindcss/forms": "^0.5.0",
     "csv-writer": "^1.6.0",
     "joi": "^17.6.0",

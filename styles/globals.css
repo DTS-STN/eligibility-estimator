@@ -22,8 +22,17 @@
     @apply text-base;
   }
 
-  #mainForm button {
+  #cta-feedback h3 {
+    margin-bottom: 1rem;
+  }
+
+  #mainForm button,
+  #cta-feedback button {
     background-color: theme('colors.button-background');
+  }
+
+  #cta-feedback button:hover {
+    background-color: theme('colors.primary-hover');
   }
 
   .btn {
@@ -129,6 +138,7 @@
     height: 2rem;
     border: 1px solid #000;
     border-radius: 50%;
+    flex-shrink: 0;
   }
 
   input[type='radio']:checked {
@@ -168,12 +178,12 @@
     @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   } */
 
-  details[open] div {
+  /* details[open] div {
     @apply border border-0 border-content text-content;
     padding: 8px 0 8px 25px;
     margin-left: 5px;
     border-left: 2px solid theme('colors.primary-border');
-  }
+  } */
 
   td {
     @apply p-2;
@@ -212,26 +222,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    line-height: 30px;
-  }
-
-  input#age-birth-year,
-  input#partnerAge-birth-year {
-    border-radius: 0.25rem;
-    border-width: 1.5px;
-    font-size: 20px;
-    font-weight: 400;
-    font-family: Noto sans, font-mono;
-    color: #333333;
-    padding: 5px 10px;
-    line-height: 30px;
-    --tw-border-opacity: 1;
-    border-color: rgb(111 111 111 / var(--tw-border-opacity));
-  }
-
-  input#age-birth-year:focus,
-  input#partnerAge-birth-year:focus {
-    border-color: #2563eb;
+    background-color: #fff;
   }
 
   summary:hover {
