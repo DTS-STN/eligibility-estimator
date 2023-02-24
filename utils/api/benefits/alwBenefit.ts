@@ -106,13 +106,19 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.AGE,
         detail: this.translations.detail.alwNotEligible,
       }
+    } else if (underAgeReq) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.AGE_YOUNG,
+        detail: this.translations.detail.eligibleWhen60,
+      }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
         detail: this.translations.detail.alwNotEligible,
       }
-    } else if (!meetsReqPartner && this.input.partnerBenefitStatus.provided) {
+    } else if (!meetsReqPartner) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
