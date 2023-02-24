@@ -70,7 +70,7 @@ export const Layout: React.VFC<{
             id="mainHeader"
             lang={router.locale}
             linkPath={langToggleLink}
-            isAuthenticated={false}
+            isAuthenticated={true}
             menuProps={menuProps}
             topnavProps={topnavProps}
             searchProps={searchProps}
