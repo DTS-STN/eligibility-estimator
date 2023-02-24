@@ -341,7 +341,7 @@ const fr: Translations = {
     alwIfYouApply:
       "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;",
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes veuves âgées entre&nbsp;60 et&nbsp;64 ans qui ne se sont pas remarié ou engagé dans une nouvelle union de fait.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées entre&nbsp;60 et&nbsp;64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
