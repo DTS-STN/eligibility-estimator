@@ -117,13 +117,13 @@ export const links: LinkDefinitions = {
       icon: LinkIcon.link,
     },
     alw: {
-      text: "Faire une demande de l'Allocation",
+      text: "Faire une demande d'Allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
       order: 22,
       icon: LinkIcon.link,
     },
     afs: {
-      text: "Faire une demande de l'Allocation au survivant",
+      text: "Faire une demande d'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
       order: 23,
       icon: LinkIcon.link,
