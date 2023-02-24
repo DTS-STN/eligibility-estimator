@@ -75,6 +75,18 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
+        } else if (this.input.income.client >= maxIncome) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.INCOME,
+            detail: this.translations.detail.gis.incomeTooHigh,
+          }
+        } else if (this.input.income.partner >= maxIncome) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.INCOME,
+            detail: this.translations.detail.gis.incomeTooHigh,
+          }
         } else if (skipReqIncome) {
           return {
             result: ResultKey.INCOME_DEPENDENT,
