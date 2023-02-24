@@ -133,6 +133,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     throw new Error('entitlement logic failed to produce a result')
   }
 
+  // the calculation piece is missing validation, instead, it directly
+  // calculate with the legal value. Will revist this piece.
   protected getEntitlement(): EntitlementResultOas {
     const autoEnrollment = this.getAutoEnrollment()
     if (
@@ -162,7 +164,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         result65To74: 0,
         resultAt75: 0,
         clawback: 0,
-        deferral: { age: 65, years: 0, increase: 0 },
+        deferral: {
+          age: this.deferralYears + 65,
+          years: this.deferralYears,
+          increase: 0,
+        },
         type: EntitlementResultType.NONE,
         autoEnrollment,
       }
@@ -228,6 +234,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const baseAmount = this.baseAmount // the base amount before deferral calculations
     const deferralIncrease = this.deferralIncrease
     const amountWithDeferralIncrease = baseAmount + deferralIncrease // the final amount
+
     return roundToTwo(amountWithDeferralIncrease)
   }
 
@@ -293,6 +300,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       )
       return cardCollapsedText
     }
+
+    // getCardText reset the eligibility reason
+    if (this.eligibility.reason === ResultReason.INCOME)
+      return cardCollapsedText
 
     // increase at 75
     if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
