@@ -71,7 +71,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
               ? this.translations.detail.oas.eligibleIncomeTooHigh
               : this.translations.detail.eligible,
         }
-      } else if (this.input.age === 64) {
+      } else if (this.input.age >= 64 && this.input.age < 65) {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE_YOUNG_64,
