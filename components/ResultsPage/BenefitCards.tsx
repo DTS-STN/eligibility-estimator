@@ -86,13 +86,7 @@ export const BenefitCards: React.VFC<{
           nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
           result.eligibility.reason === ResultReason.INCOME
             ? (nextStepText.nextStepContent +=
-                ' ' +
-                apiTsln.detail.oas.automaticallyBePaid +
-                `<b>${numberToStringCurrency(
-                  legalValues.oas.incomeLimit,
-                  apiTsln._language,
-                  { rounding: 0 }
-                )}</b>.`)
+                ' ' + apiTsln.detail.oas.automaticallyBePaid)
             : ''
         }
       } else if (

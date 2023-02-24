@@ -353,7 +353,7 @@ const en: Translations = {
       serviceCanadaReviewYourPayment:
         'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
       automaticallyBePaid:
-        "You'll automatically be paid if your income is less than ",
+        "You'll automatically be paid if your income qualifies.",
       youShouldReceiveLetter:
         'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldHaveReceivedLetter:

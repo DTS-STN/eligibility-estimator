@@ -360,7 +360,7 @@ const fr: Translations = {
       serviceCanadaReviewYourPayment:
         'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
-        'Vous recevrez automatiquement un paiement si votre revenu est inférieur à ',
+        'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus. Vous recevrez automatiquement des paiements si votre revenu vous rend admissible.',
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
