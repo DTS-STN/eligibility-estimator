@@ -331,6 +331,8 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
+    alwEligibleIncomeTooHigh:
+      "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
       "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
