@@ -116,7 +116,7 @@ export const BenefitCards: React.VFC<{
             legalValues.alw.alwIncomeLimit,
             apiTsln._language,
             { rounding: 0 }
-          )}</b>.</p>`
+          )}</b>.`
       }
     } else if (benefitKey === BenefitKey.afs) {
       if (
@@ -130,7 +130,7 @@ export const BenefitCards: React.VFC<{
             legalValues.alw.afsIncomeLimit,
             apiTsln._language,
             { rounding: 0 }
-          )}</b>.</p>`
+          )}</b>.`
       }
     }
     return nextStepText

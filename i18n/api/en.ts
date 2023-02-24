@@ -334,7 +334,7 @@ const en: Translations = {
     alwEligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
-      "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
     autoEnrollTrue:
