@@ -416,6 +416,7 @@ export class BenefitHandler {
     allResults.partner.oas.entitlement = partnerOas.entitlement
     allResults.partner.oas.cardDetail = partnerOas.cardDetail
 
+    console.log('handler --- this.input.partner', this.input.partner)
     const partnerGis = new GisBenefit(
       this.input.partner,
       this.translations,
@@ -425,6 +426,8 @@ export class BenefitHandler {
     allResults.partner.gis.eligibility = partnerGis.eligibility
     allResults.partner.gis.entitlement = partnerGis.entitlement
     allResults.partner.gis.cardDetail = partnerGis.cardDetail
+
+    console.log('partnerGis', partnerGis)
 
     this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
       partnerGis,
