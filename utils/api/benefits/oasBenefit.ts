@@ -38,13 +38,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     // if income is not provided (only check client income), assume they meet the income requirement
     const skipReqIncome = income === undefined
 
-    console.log(
-      'this.input.income.client',
-      this.input.income.client,
-      'this.input.income.partner',
-      this.input.income.partner
-    )
-
     // income limit is higher at age 75
     const incomeLimit =
       this.input.age >= 75
