@@ -274,9 +274,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return cardCollapsedText
 
     if (this.partner && this.input.income.provided) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.partnerEligible
-      )
+      this.entitlement.result !== 0 &&
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligible
+        )
     }
 
     return cardCollapsedText
