@@ -453,11 +453,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dts-stn/service-canada-design-system@npm:1.56.6-dev.73281e9a4":
-  version: 1.56.6-dev.73281e9a4
-  resolution: "@dts-stn/service-canada-design-system@npm:1.56.6-dev.73281e9a4"
+"@dts-stn/service-canada-design-system@npm:1.56.6-dev.bdf8433bd":
+  version: 1.56.6-dev.bdf8433bd
+  resolution: "@dts-stn/service-canada-design-system@npm:1.56.6-dev.bdf8433bd"
   dependencies:
-    git-conventional-commits: ^2.1.2
+    git-conventional-commits: ^2.5.0
     identity-obj-proxy: ^3.0.0
     prop-types: ^15.7.2
     react: ^17.0.2
@@ -471,7 +471,7 @@ __metadata:
     shelljs: ^0.8.5
     ts-jest: ^29.0.5
     user: ^0.0.0
-  checksum: 9e31cb08355c3895461e748707b01e3766a925f0d827bc37c5c0c84c377878213e7307e8497f50e321ab22a30b3cfdabdff85fa847c11b6d5d1bdec816d1749e
+  checksum: 8ff602ef7b26794461435cdfca58db9eecac2d7ea0178b98d9411bf04214bc9812aa2e0f46f7555b22553c78a6a99c42b49decf9c6c8ed86b506e382a39d8e1a
   languageName: node
   linkType: hard
 
@@ -3385,7 +3385,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eligibility-estimator-client@workspace:."
   dependencies:
-    "@dts-stn/service-canada-design-system": 1.56.6-dev.73281e9a4
+    "@dts-stn/service-canada-design-system": 1.56.6-dev.bdf8433bd
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4
@@ -4303,6 +4303,18 @@ __metadata:
   bin:
     git-conventional-commits: cli.js
   checksum: c5da3b7e9be17dbe8702c5326df8f03dd986525b5d725dd0482922ec7ea57a01658e9a0450948bf0133b6438158f59f5016417c89a20f770eebd721b21f7854e
+  languageName: node
+  linkType: hard
+
+"git-conventional-commits@npm:^2.5.0":
+  version: 2.5.1
+  resolution: "git-conventional-commits@npm:2.5.1"
+  dependencies:
+    yaml: ^2.1.3
+    yargs: ^17.6.2
+  bin:
+    git-conventional-commits: cli.js
+  checksum: 8e7e5a290203625baac4e8d76a5fe67cce8cb62aa6c5877eb4c0028b397b3db2f614f5f451e31d3e1da2e5a4fef023c623ec7dd1de666b9da90f8321db83d509
   languageName: node
   linkType: hard
 
@@ -9819,6 +9831,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"yaml@npm:^2.1.3":
+  version: 2.2.1
+  resolution: "yaml@npm:2.2.1"
+  checksum: 84f68cbe462d5da4e7ded4a8bded949ffa912bc264472e5a684c3d45b22d8f73a3019963a32164023bdf3d83cfb6f5b58ff7b2b10ef5b717c630f40bd6369a23
+  languageName: node
+  linkType: hard
+
 "yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.3":
   version: 20.2.9
   resolution: "yargs-parser@npm:20.2.9"
@@ -9860,6 +9879,21 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^21.1.1
   checksum: 47da1b0d854fa16d45a3ded57b716b013b2179022352a5f7467409da5a04a1eef5b3b3d97a2dfc13e8bbe5f2ffc0afe3bc6a4a72f8254e60f5a4bd7947138643
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^17.6.2":
+  version: 17.7.1
+  resolution: "yargs@npm:17.7.1"
+  dependencies:
+    cliui: ^8.0.1
+    escalade: ^3.1.1
+    get-caller-file: ^2.0.5
+    require-directory: ^2.1.1
+    string-width: ^4.2.3
+    y18n: ^5.0.5
+    yargs-parser: ^21.1.1
+  checksum: 3d8a43c336a4942bc68080768664aca85c7bd406f018bad362fd255c41c8f4e650277f42fd65d543fce99e084124ddafee7bbfc1a5c6a8fda4cec78609dcf8d4
   languageName: node
   linkType: hard
 
