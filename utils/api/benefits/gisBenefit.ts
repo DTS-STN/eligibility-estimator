@@ -75,6 +75,18 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
+        } else if (this.input.income.client >= maxIncome) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.INCOME,
+            detail: this.translations.detail.gis.incomeTooHigh,
+          }
+        } else if (this.input.income.partner >= maxIncome) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.INCOME,
+            detail: this.translations.detail.gis.incomeTooHigh,
+          }
         } else if (skipReqIncome) {
           return {
             result: ResultKey.INCOME_DEPENDENT,
@@ -262,9 +274,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return cardCollapsedText
 
     if (this.partner && this.input.income.provided) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.partnerEligible
-      )
+      this.entitlement.result !== 0 &&
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligible
+        )
     }
 
     return cardCollapsedText

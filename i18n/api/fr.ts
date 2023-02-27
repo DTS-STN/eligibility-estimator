@@ -338,10 +338,12 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
       "L'Allocation est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
+    alwEligibleIncomeTooHigh:
+      'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
-      "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;",
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes veuves âgées entre&nbsp;60 et&nbsp;64 ans qui ne se sont pas remarié ou engagé dans une nouvelle union de fait.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées entre&nbsp;60 et&nbsp;64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -349,7 +351,7 @@ const fr: Translations = {
     expectToReceive:
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawback:
-      'Parce que votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_LEARN_ABOUT_RECOVERY_TAX}.',
+      'Parce que votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
     oas: {
       eligibleIfIncomeIsLessThan:
         "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
@@ -360,7 +362,7 @@ const fr: Translations = {
       serviceCanadaReviewYourPayment:
         'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
-        'Vous recevrez automatiquement un paiement si votre revenu est inférieur à ',
+        'Vous recevrez automatiquement des paiements si votre revenu vous rend admissible.',
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
@@ -376,7 +378,7 @@ const fr: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez votre revenu / vos revenus pour obtenir une estimation de paiement mensuel.',
+        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       ifYouApply:

@@ -267,7 +267,9 @@ describe('consolidated benefit tests: ineligible', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncomeAvailable: true,
       partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     })
     expectAllIneligible(res)
     expectOasGisTooYoung(res)
@@ -387,7 +389,9 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -412,7 +416,9 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     }
     let res = await mockGetRequest(input)
     expect(res.body.missingFields).toEqual([])
@@ -438,7 +444,9 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -593,7 +601,9 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncomeAvailable: true,
       partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     })
     expectOasGisEligible(res)
     expectAlwTooOld(res)
@@ -625,7 +635,9 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncomeAvailable: true,
       partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     }
     let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
     let res = await mockGetRequest(inputNoDefer65)
@@ -662,7 +674,9 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     })
     expectOasEligible(res)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -696,7 +710,9 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       partnerIncomeAvailable: true,
       partnerIncome: 10000,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     })
     expectOasGisEligible(
       res,
@@ -728,10 +744,14 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     })
+
     expectOasGisTooYoung(res)
     expectAlwEligible(res)
+
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -772,9 +792,12 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       invSeparated: false,
       partnerAge: 60,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerLegalStatus: LegalStatus.YES,
       ...partnerIncomeZero,
-      ...partnerNoHelpNeeded,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: false,
     })
+
     expectOasGisTooYoung(res)
     expectAlwEligible(res)
   })
@@ -797,7 +820,10 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     })
 
     expect(res.body.summary.state).toEqual('MORE_INFO')
-    expect(res.body.missingFields).toEqual(['everLivedSocialCountry'])
+    expect(res.body.missingFields).toEqual([
+      'everLivedSocialCountry',
+      'partnerLegalStatus',
+    ])
   })
 
   it('returns "ALW eligible" - married, living in No Agreement, 10 years in Canada', async () => {
@@ -843,7 +869,8 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
-    expectOasGisTooYoung(res)
-    expectAlwEligible(res)
+
+    expect(res.status).toEqual(400)
+    expect(res.body.missingFields).toEqual(['partnerLegalStatus'])
   })
 })

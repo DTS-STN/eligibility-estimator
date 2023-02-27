@@ -331,8 +331,10 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
+    alwEligibleIncomeTooHigh:
+      "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
-      "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
     autoEnrollTrue:
@@ -342,7 +344,7 @@ const en: Translations = {
     expectToReceive:
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawback:
-      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_LEARN_ABOUT_RECOVERY_TAX}.',
+      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
@@ -353,11 +355,11 @@ const en: Translations = {
       serviceCanadaReviewYourPayment:
         'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
       automaticallyBePaid:
-        "You'll automatically be paid if your income is less than ",
+        "You'll automatically be paid if your income qualifies.",
       youShouldReceiveLetter:
         'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldHaveReceivedLetter:
-        'You should have received a letter about your enrolment status the month after you turned 64',
+        'You should have received a letter about your enrolment status the month after you turned 64.',
       applyOnline:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
       over70:

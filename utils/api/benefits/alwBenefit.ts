@@ -72,7 +72,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
-            detail: this.translations.detail.eligibleIncomeTooHigh,
+            detail: this.translations.detail.alwEligibleIncomeTooHigh,
           }
         } else {
           return {
@@ -106,13 +106,19 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.AGE,
         detail: this.translations.detail.alwNotEligible,
       }
+    } else if (underAgeReq) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.AGE_YOUNG,
+        detail: this.translations.detail.eligibleWhen60,
+      }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
         detail: this.translations.detail.alwNotEligible,
       }
-    } else if (!meetsReqPartner && this.input.partnerBenefitStatus.provided) {
+    } else if (!meetsReqPartner) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
@@ -120,9 +126,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       }
     } else if (!meetsReqIncome) {
       return {
-        result: ResultKey.INELIGIBLE,
+        result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,
-        detail: this.translations.detail.mustMeetIncomeReq,
+        detail: this.translations.detail.alwEligibleIncomeTooHigh,
       }
     } else if (!meetsReqCountry) {
       return {

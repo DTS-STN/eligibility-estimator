@@ -70,7 +70,7 @@ export const Layout: React.VFC<{
             id="mainHeader"
             lang={router.locale}
             linkPath={langToggleLink}
-            isAuthenticated={false}
+            isAuthenticated={true}
             menuProps={menuProps}
             topnavProps={topnavProps}
             searchProps={searchProps}
@@ -90,6 +90,7 @@ export const Layout: React.VFC<{
             <CTA
               heading={tsln.resultsPage.CTAFeedbackTitle}
               body={tsln.resultsPage.CTAFeedbackBody}
+              containerClass="xs:container"
               ButtonProps={{
                 text: tsln.resultsPage.CTAFeedbackButton,
                 onClick: handleOnClick,
