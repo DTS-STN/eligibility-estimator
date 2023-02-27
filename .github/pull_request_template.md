@@ -1,8 +1,10 @@
-## [DC-XXX](https://jira-dev.bdm-dev.dts-stn.com/browse/DC-XXX) (Jira Issue)
+## [NNN](https://dev.azure.com/VP-BD/DECD/_workitems/edit/NNN) (ADO label)
 
 ### Description
 
-List of proposed changes:
+-
+
+#### List of proposed changes:
 
 -
 -
