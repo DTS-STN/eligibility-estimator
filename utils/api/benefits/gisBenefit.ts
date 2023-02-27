@@ -255,7 +255,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // another hack, to avoid adding message expectToReceive
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.eligibility.reason === ResultReason.INCOME
+      this.eligibility.reason === ResultReason.INCOME &&
+      this.entitlement.result > 0
     ) {
       return this.eligibility.detail
     }
