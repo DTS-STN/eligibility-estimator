@@ -90,6 +90,7 @@ export const Layout: React.VFC<{
             <CTA
               heading={tsln.resultsPage.CTAFeedbackTitle}
               body={tsln.resultsPage.CTAFeedbackBody}
+              containerClass="xs:container"
               ButtonProps={{
                 text: tsln.resultsPage.CTAFeedbackButton,
                 onClick: handleOnClick,
