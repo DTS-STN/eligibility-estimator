@@ -252,6 +252,14 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
+    // another hack, to avoid adding message expectToReceive
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.eligibility.reason === ResultReason.INCOME
+    ) {
+      return this.eligibility.detail
+    }
+
     let text = this.eligibility.detail
 
     if (
