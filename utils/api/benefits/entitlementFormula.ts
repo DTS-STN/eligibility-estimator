@@ -121,7 +121,11 @@ export class EntitlementFormula {
    */
   private get gisSituation(): GisSituation {
     if (this.maritalStatus.single) {
-      if (this.maritalStatus.value === MaritalStatus.WIDOWED)
+      if (
+        this.maritalStatus.value === MaritalStatus.WIDOWED &&
+        this.age >= 60 &&
+        this.age < 65
+      )
         return GisSituation.AFS
       else return GisSituation.SINGLE
     } else {
