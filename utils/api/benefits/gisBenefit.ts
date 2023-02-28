@@ -188,7 +188,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     }
 
     // otherwise, let's do it!
-
     const formulaResult = new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
