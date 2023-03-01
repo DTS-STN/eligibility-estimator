@@ -40,11 +40,11 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.oasResult.eligibility.result === ResultKey.UNAVAILABLE
     const meetsReqLegal = this.input.legalStatus.canadian
     /*
-     This comment may be out of date, and replaced by the comment below (meetsReqIncome).
-     Since I'm not certain if it's still relevant, I'll keep it here.
+      This comment may be out of date, and replaced by the comment below (meetsReqIncome).
+      Since I'm not certain if it's still relevant, I'll keep it here.
 
-     Please note that the logic below is currently imperfect.
-     Specifically, when partnerBenefitStatus == partialOas, we do not know the correct income limit.
+      Please note that the logic below is currently imperfect.
+      Specifically, when partnerBenefitStatus == partialOas, we do not know the correct income limit.
     */
     const maxIncome = this.input.maritalStatus.single
       ? legalValues.gis.singleIncomeLimit
@@ -56,17 +56,23 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided
+
     const meetsReqIncome =
       skipReqIncome ||
       this.input.income.relevant < maxIncome ||
       /*
-       This exception is pretty weird, but necessary to work around the fact that a client can be entitled to GIS
-       while being above the GIS income limit. This scenario can happen when the client gets Partial OAS, as
-       GIS "top-up" will come into effect. Later, in RequestHandler.translateResults(), we will correct for
-       this if the client is indeed above the true (undocumented) max income.
+        This exception is pretty weird, but necessary to work around the fact that a client can be entitled to GIS
+        while being above the GIS income limit. This scenario can happen when the client gets Partial OAS, as
+        GIS "top-up" will come into effect. Later, in RequestHandler.translateResults(), we will correct for
+        this if the client is indeed above the true (undocumented) max income.
       */
       this.oasResult.entitlement.type === EntitlementResultType.PARTIAL
-    // main checks
+
+    const amount = this.formulaResult()
+
+    //
+    // Main checks
+    //
     if (meetsReqLiving && meetsReqOas && meetsReqLegal) {
       if (meetsReqAge) {
         if (this.oasResult.eligibility.result == ResultKey.UNAVAILABLE) {
@@ -75,13 +81,13 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
-        } else if (this.input.income.client >= maxIncome) {
+        } else if (this.input.income.client >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
             detail: this.translations.detail.gis.incomeTooHigh,
           }
-        } else if (this.input.income.partner >= maxIncome) {
+        } else if (this.input.income.partner >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
@@ -96,7 +102,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
                 .eligibleDependingOnIncomeNoEntitlement,
             incomeMustBeLessThan: maxIncome,
           }
-        } else if (this.input.income.relevant >= maxIncome) {
+        } else if (this.input.income.relevant >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
@@ -128,15 +134,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.OAS,
         detail: this.translations.detail.mustBeOasEligible,
       }
-    }
-    // } else if (!meetsReqIncome) {
-    //   return {
-    //     result: ResultKey.ELIGIBLE,
-    //     reason: ResultReason.INCOME,
-    //     detail: this.translations.detail.mustMeetIncomeReq,
-    //   }
-    // }
-    else if (!meetsReqLegal) {
+    } else if (!meetsReqLegal) {
       return {
         result: ResultKey.UNAVAILABLE,
         reason: ResultReason.LEGAL_STATUS,
@@ -176,6 +174,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         autoEnrollment,
       }
     }
+
     // marital status is invSeparated? entitlement unavailable.
     if (this.input.maritalStatus.invSeparated) {
       this.eligibility.detail =
@@ -188,14 +187,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     }
 
     // otherwise, let's do it!
-
-    const formulaResult = new EntitlementFormula(
-      this.input.income.relevant,
-      this.input.maritalStatus,
-      this.input.partnerBenefitStatus,
-      this.input.age,
-      this.oasResult
-    ).getEntitlementAmount()
+    const formulaResult = this.formulaResult()
 
     if (formulaResult === -1)
       throw new Error(
@@ -221,6 +213,19 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     //     this.translations.detail.eligibleEntitlementUnavailable
 
     return { result: formulaResult, type, autoEnrollment }
+  }
+
+  /**
+   * Just the formula to get the amount
+   */
+  protected formulaResult(): number {
+    return new EntitlementFormula(
+      this.input.income.relevant,
+      this.input.maritalStatus,
+      this.input.partnerBenefitStatus,
+      this.input.age,
+      this.oasResult
+    ).getEntitlementAmount()
   }
 
   protected getCardLinks(): Link[] {
