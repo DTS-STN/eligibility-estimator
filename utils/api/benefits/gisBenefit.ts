@@ -73,7 +73,13 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     //
     if (meetsReqLiving && meetsReqOas && meetsReqLegal) {
       if (meetsReqAge) {
-        if (skipReqIncome) {
+        if (this.oasResult.eligibility.result == ResultKey.UNAVAILABLE) {
+          return {
+            result: ResultKey.UNAVAILABLE,
+            reason: ResultReason.OAS,
+            detail: this.translations.detail.conditional,
+          }
+        } else if (skipReqIncome) {
           return {
             result: ResultKey.INCOME_DEPENDENT,
             reason: ResultReason.INCOME_MISSING,
@@ -87,13 +93,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         // move get entitlement amount to here, because when income is not provided, it will cause exception
         const amount = this.formulaResult()
 
-        if (this.oasResult.eligibility.result == ResultKey.UNAVAILABLE) {
-          return {
-            result: ResultKey.UNAVAILABLE,
-            reason: ResultReason.OAS,
-            detail: this.translations.detail.conditional,
-          }
-        } else if (this.input.income.client >= maxIncome && amount <= 0) {
+        if (this.input.income.client >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
