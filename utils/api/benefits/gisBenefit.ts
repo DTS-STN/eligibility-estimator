@@ -68,8 +68,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       */
       this.oasResult.entitlement.type === EntitlementResultType.PARTIAL
 
-    const amount = this.formulaResult()
-
     //
     // Main checks
     //
@@ -81,7 +79,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.OAS,
             detail: this.translations.detail.conditional,
           }
-        } else if (this.input.income.client >= maxIncome && amount <= 0) {
+        } else if (skipReqIncome) {
+          return {
+            result: ResultKey.INCOME_DEPENDENT,
+            reason: ResultReason.INCOME_MISSING,
+            detail:
+              this.translations.detail.gis
+                .eligibleDependingOnIncomeNoEntitlement,
+            incomeMustBeLessThan: maxIncome,
+          }
+        }
+
+        // move get entitlement amount to here, because when income is not provided, it will cause exception
+        const amount = this.formulaResult()
+
+        if (this.input.income.client >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
@@ -92,15 +104,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
             detail: this.translations.detail.gis.incomeTooHigh,
-          }
-        } else if (skipReqIncome) {
-          return {
-            result: ResultKey.INCOME_DEPENDENT,
-            reason: ResultReason.INCOME_MISSING,
-            detail:
-              this.translations.detail.gis
-                .eligibleDependingOnIncomeNoEntitlement,
-            incomeMustBeLessThan: maxIncome,
           }
         } else if (this.input.income.relevant >= maxIncome && amount <= 0) {
           return {
