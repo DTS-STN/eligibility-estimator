@@ -23,6 +23,12 @@ import {
  *
  */
 
+const getMinBirthYear = () => {
+  const wholeYear = new Date().getFullYear() - 1900
+  const partialYear = (new Date().getMonth() / 12).toFixed(1)
+  return wholeYear + parseFloat(partialYear)
+}
+
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean()
     .required()
@@ -47,7 +53,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
     .message(ValidationErrors.invalidAge)
-    .max(new Date().getFullYear() - 1900)
+    .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
   oasDefer: Joi.boolean()
     .required()
@@ -130,7 +136,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
     .message(ValidationErrors.invalidAge)
-    .max(new Date().getFullYear() - 1900)
+    .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
   partnerLivingCountry: Joi.string()
     .required()
