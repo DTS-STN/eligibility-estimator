@@ -416,7 +416,7 @@ export class BenefitHandler {
     allResults.partner.oas.entitlement = partnerOas.entitlement
     allResults.partner.oas.cardDetail = partnerOas.cardDetail
 
-    const partnerGis = new GisBenefit(
+    let partnerGis = new GisBenefit(
       this.input.partner,
       this.translations,
       allResults.partner.oas,
@@ -704,7 +704,6 @@ export class BenefitHandler {
             this.input.partner.income.relevant,
             maritalStatus,
             this.input.partner.partnerBenefitStatus,
-            //new PartnerBenefitStatusHelper(PartnerBenefitStatus.ALW),
             this.input.partner.age,
             allResults.partner.oas
           ).getEntitlementAmount()
@@ -714,7 +713,6 @@ export class BenefitHandler {
             this.input.client.income.relevant,
             maritalStatus,
             this.input.client.partnerBenefitStatus,
-            //new PartnerBenefitStatusHelper(PartnerBenefitStatus.OAS_GIS),
             this.input.client.age
           ).getEntitlementAmount()
 
@@ -756,36 +754,77 @@ export class BenefitHandler {
           console.log('partnerGisResultT1', partnerGisResultT1)
 
           // define Total_amt_Single
-          const totalAmtSingle = partnerGisResultT1 + applicantAlwCalcSingle
+          const totalAmountSingle = partnerGisResultT1 + applicantAlwCalcSingle
           console.log(
             'applicant is eligible for alw',
             'totalAmtSingle',
-            totalAmtSingle,
+            totalAmountSingle,
             'totalAmountCouple',
             totalAmountCouple
           )
 
-          if (totalAmtSingle < totalAmountCouple) {
+          let isPartnerGisAvailable = true
+          if (totalAmountSingle > totalAmountCouple) {
+            const partnerSingleInput = this.getSinglePartnerInput()
+
+            partnerGis = new GisBenefit(
+              partnerSingleInput,
+              this.translations,
+              allResults.partner.oas,
+              true
+            )
+
+            if (partnerGis.entitlement.result === 0) {
+              isPartnerGisAvailable = false
+            } else {
+              partnerGis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+              allResults.partner.gis.eligibility = partnerGis.eligibility
+              allResults.partner.gis.entitlement = partnerGis.entitlement
+
+              allResults.partner.alw.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+              allResults.client.alw.entitlement.result = applicantAlwCalcSingle
+              allResults.client.alw.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
+          }
+
+          if (
+            totalAmountSingle <= totalAmountCouple ||
+            !isPartnerGisAvailable
+          ) {
+            console.log('1111111')
             // return partnerGisResultT4
             allResults.partner.gis.entitlement.result = partnerGisResultT4
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-          } else {
-            // Display the calculated GIS amounts for Singles - Rate Table 1
-            // (GIS_amt_SingleB) for Partner B and ALW amount for PartnerA using PartnerA's income only
-            allResults.client.alw.entitlement.result = applicantAlwCalcSingle
-            allResults.client.alw.entitlement.type = EntitlementResultType.FULL
-            allResults.client.alw.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
-
-            allResults.partner.gis.entitlement.result = partnerGisResultT1
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-            allResults.partner.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
+            allResults.client.alw.entitlement.result = applicantAlwCalcCouple
           }
+          isPartnerGisAvailable = true
+          // else {
+
+          //   // Display the calculated GIS amounts for Singles - Rate Table 1
+          //   // (GIS_amt_SingleB) for Partner B and ALW amount for PartnerA using PartnerA's income only
+          //   allResults.client.alw.entitlement.result = applicantAlwCalcSingle
+          //   allResults.client.alw.entitlement.type = EntitlementResultType.FULL
+          //   allResults.client.alw.cardDetail.collapsedText.push(
+          //     this.translations.detailWithHeading
+          //       .calculatedBasedOnIndividualIncome
+          //   )
+
+          //   allResults.partner.gis.entitlement.result = partnerGisResultT1
+          //   allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+          //   allResults.partner.gis.cardDetail.collapsedText.push(
+          //     this.translations.detailWithHeading
+          //       .calculatedBasedOnIndividualIncome
+          //   )
+          // }
 
           console.log(' --- applicant is eligible for alw --- end')
         } else if (
@@ -971,6 +1010,37 @@ export class BenefitHandler {
     }
 
     return clientSingleInput
+  }
+
+  private getSinglePartnerInput(): ProcessedInput {
+    const incomeHelper = new IncomeHelper(
+      true,
+      false,
+      this.rawInput.partnerIncome,
+      0,
+      new MaritalStatusHelper(MaritalStatus.SINGLE)
+    )
+
+    const partnerInput: ProcessedInput = {
+      income: incomeHelper,
+      age: this.rawInput.partnerAge,
+      oasDefer: false, // pass dummy data because we will never use this anyway
+      oasAge: 65, // pass dummy data because we will never use this anyway
+      maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
+      livingCountry: new LivingCountryHelper(
+        this.rawInput.partnerLivingCountry
+      ),
+      legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
+      livedOutsideCanada: this.rawInput.partnerLivedOutsideCanada,
+      yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
+        ? 40
+        : this.rawInput.partnerYearsInCanadaSince18,
+      everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
+      partnerBenefitStatus: this.input.partner.partnerBenefitStatus,
+      invSeparated: this.rawInput.invSeparated,
+    }
+
+    return partnerInput
   }
 
   private getPartnerBenefitStatus(
