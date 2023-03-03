@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import { ContextualAlert as Message } from '@dts-stn/service-canada-design-system'
 import { EligibilityPage } from '../../components/EligibilityPage'
 import { Layout } from '../../components/Layout'
 import { useTranslation } from '../../components/Hooks'

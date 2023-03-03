@@ -1,7 +1,4 @@
-import {
-  ErrorPage,
-  ContextualAlert as Message,
-} from '@dts-stn/service-canada-design-system'
+import { ErrorPage } from '@dts-stn/service-canada-design-system'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
