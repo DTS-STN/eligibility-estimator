@@ -327,7 +327,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             </div>
           )}
-          {showWarningMessage(field)}
+          {/* {showWarningMessage(field)} */}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
               <div className="my-6">
