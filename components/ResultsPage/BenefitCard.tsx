@@ -97,6 +97,7 @@ export const BenefitCard: React.VFC<{
                     id={`${benefitKey}Link${index}`}
                     href={url}
                     text={text}
+                    target="_blank"
                   />
                 </span>
               </div>
