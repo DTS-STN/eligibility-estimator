@@ -11,6 +11,7 @@ import {
   EligibilityResult,
   EntitlementResult,
   Link,
+  LinkWithAction,
   ProcessedInput,
 } from '../definitions/types'
 
@@ -118,8 +119,8 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
    * These are the links visible within each benefit card.
    * For any links specific to one benefit, override that benefit's class.
    */
-  protected getCardLinks(): Link[] {
-    const links: Link[] = []
+  protected getCardLinks(): LinkWithAction[] {
+    const links: LinkWithAction[] = []
     if (
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT

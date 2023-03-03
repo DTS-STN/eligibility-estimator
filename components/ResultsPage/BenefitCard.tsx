@@ -20,6 +20,7 @@ export const BenefitCard: React.VFC<{
     url: string
     text: string
     alt: string
+    action: string
   }>
 }> = ({
   benefitKey,
@@ -79,8 +80,6 @@ export const BenefitCard: React.VFC<{
           />
         </div>
       )}
-
-      {console.log(links)}
 
       <div className="mt-4">
         {links &&
