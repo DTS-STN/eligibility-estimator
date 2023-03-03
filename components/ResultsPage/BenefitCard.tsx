@@ -91,7 +91,6 @@ export const BenefitCard: React.VFC<{
               <div className="pl-5 w-full">
                 <span
                   data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}:${action}`}
-                  onClick={() => console.log('click link')}
                 >
                   <DSLink
                     id={`${benefitKey}Link${index}`}
