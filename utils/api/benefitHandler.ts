@@ -566,11 +566,20 @@ export class BenefitHandler {
                 .calculatedBasedOnIndividualIncome
             )
 
+            const partnerSingleInput = this.getSinglePartnerInput()
+
+            partnerGis = new GisBenefit(
+              partnerSingleInput,
+              this.translations,
+              allResults.partner.oas
+            )
+
             allResults.client.gis.eligibility = clientGis.eligibility
             allResults.client.gis.entitlement = clientGis.entitlement
             allResults.client.gis.cardDetail = clientGis.cardDetail
-            allResults.partner.gis.entitlement.result = partnerGisResultT1
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+            allResults.partner.gis.eligibility = partnerGis.eligibility
+            allResults.partner.gis.entitlement = partnerGis.entitlement
+            allResults.partner.gis.cardDetail = partnerGis.cardDetail
           }
           console.log('--- both oas are greater than 0 --- end')
         } // if partner is eligible for alw
@@ -800,32 +809,12 @@ export class BenefitHandler {
             totalAmountSingle <= totalAmountCouple ||
             !isPartnerGisAvailable
           ) {
-            console.log('1111111')
             // return partnerGisResultT4
             allResults.partner.gis.entitlement.result = partnerGisResultT4
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
             allResults.client.alw.entitlement.result = applicantAlwCalcCouple
           }
           isPartnerGisAvailable = true
-          // else {
-
-          //   // Display the calculated GIS amounts for Singles - Rate Table 1
-          //   // (GIS_amt_SingleB) for Partner B and ALW amount for PartnerA using PartnerA's income only
-          //   allResults.client.alw.entitlement.result = applicantAlwCalcSingle
-          //   allResults.client.alw.entitlement.type = EntitlementResultType.FULL
-          //   allResults.client.alw.cardDetail.collapsedText.push(
-          //     this.translations.detailWithHeading
-          //       .calculatedBasedOnIndividualIncome
-          //   )
-
-          //   allResults.partner.gis.entitlement.result = partnerGisResultT1
-          //   allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-          //   allResults.partner.gis.cardDetail.collapsedText.push(
-          //     this.translations.detailWithHeading
-          //       .calculatedBasedOnIndividualIncome
-          //   )
-          // }
-
           console.log(' --- applicant is eligible for alw --- end')
         } else if (
           clientOas.entitlement.result > 0 &&
