@@ -1,4 +1,7 @@
-import { ErrorPage } from '@dts-stn/service-canada-design-system'
+import {
+  ErrorPage,
+  ContextualAlert as Message,
+} from '@dts-stn/service-canada-design-system'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -65,12 +68,25 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       </Head>
       <Layout title={tsln.resultPageTitle}>
         {'results' in response ? (
-          <ResultsPage
-            inputs={inputHelper.asArray}
-            results={response.results}
-            partnerResults={response.partnerResults}
-            summary={response.summary}
-          />
+          <>
+            <div className="mb-8">
+              <Message
+                id={'results-wip'}
+                alert_icon_id={'testkey'}
+                alert_icon_alt_text={tsln.warningText}
+                type={'info'}
+                message_heading={tsln.workInProgress}
+                message_body={tsln.workInProgressBody}
+                whiteBG={true}
+              />
+            </div>
+            <ResultsPage
+              inputs={inputHelper.asArray}
+              results={response.results}
+              partnerResults={response.partnerResults}
+              summary={response.summary}
+            />
+          </>
         ) : (
           <ErrorPage lang={language} errType="500" isAuth={false} />
         )}

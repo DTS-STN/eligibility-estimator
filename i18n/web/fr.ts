@@ -40,9 +40,9 @@ const fr: WebTranslations = {
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
   required: '(obligatoire)',
-  workInProgress: 'Cet estimateur présente des travaux en cours',
+  workInProgress: 'Cet estimateur est un travail en cours',
   workInProgressBody:
-    'Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
+    'Certaines parties du site, y compris les résultats, pourraient être inexacts ou ne pas fonctionner.',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
