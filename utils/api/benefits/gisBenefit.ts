@@ -13,6 +13,7 @@ import {
   ProcessedInput,
   CardCollapsedText,
   Link,
+  LinkWithAction,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
@@ -231,8 +232,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     ).getEntitlementAmount()
   }
 
-  protected getCardLinks(): Link[] {
-    const links: Link[] = []
+  protected getCardLinks(): LinkWithAction[] {
+    const links: LinkWithAction[] = []
     if (
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
