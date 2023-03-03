@@ -121,10 +121,9 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
     this.gisEligibility = EntitlementResultType.NONE
     this.alwEligibility = EntitlementResultType.NONE
     switch (this.value) {
-      // the following two conditions have been removed as per ado-85201
-      // case PartnerBenefitStatus.OAS:
-      //   this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
-      //   break
+      case PartnerBenefitStatus.OAS:
+        this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
+        break
       case PartnerBenefitStatus.ALW:
         this.alwEligibility = EntitlementResultType.FULL
         break
