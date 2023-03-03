@@ -36,17 +36,6 @@ const Eligibility: NextPage<{ adobeAnalyticsUrl: string }> = ({
         <meta name="dcterms.service" content="ESDC-EDSC_DC-CD" />
       </Head>
       <Layout title={tsln.questionPageTitle}>
-        <div className="mb-6">
-          <Message
-            id={'eligibility-wip'}
-            alert_icon_id={'testkey'}
-            alert_icon_alt_text={tsln.warningText}
-            type={'info'}
-            message_heading={tsln.workInProgress}
-            message_body={tsln.workInProgressBody}
-            whiteBG={true}
-          />
-        </div>
         <EligibilityPage />
       </Layout>
       {adobeAnalyticsUrl ? (

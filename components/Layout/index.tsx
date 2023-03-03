@@ -1,4 +1,9 @@
-import { Header, Heading, CTA } from '@dts-stn/service-canada-design-system'
+import {
+  Header,
+  Heading,
+  CTA,
+  ContextualAlert as Message,
+} from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -82,6 +87,17 @@ export const Layout: React.VFC<{
             title={title}
             className="mb-8 mt-4 sm:mt-12 sm:w-[100%]"
           />
+          <div className="mb-6">
+            <Message
+              id={'wip'}
+              alert_icon_id={'testkey'}
+              alert_icon_alt_text={tsln.warningText}
+              type={'info'}
+              message_heading={tsln.workInProgress}
+              message_body={tsln.workInProgressBody}
+              whiteBG={true}
+            />
+          </div>
           {children}
         </div>
 
