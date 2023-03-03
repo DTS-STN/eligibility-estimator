@@ -11,6 +11,7 @@ import {
   EntitlementResultOas,
   ProcessedInput,
   Link,
+  LinkWithAction,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
 import legalValues from '../scrapers/output'
@@ -360,8 +361,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     return text
   }
 
-  protected getCardLinks(): Link[] {
-    const links: Link[] = []
+  protected getCardLinks(): LinkWithAction[] {
+    const links: LinkWithAction[] = []
     if (
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
