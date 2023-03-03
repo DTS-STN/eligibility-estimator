@@ -109,7 +109,7 @@ export interface CardCollapsedText {
 export interface CardDetail {
   mainText: string
   collapsedText: CardCollapsedText[]
-  links: Link[]
+  links: LinkWithAction[]
 }
 
 export interface BenefitResult<
@@ -154,6 +154,10 @@ export interface Link {
   url: string
   order: number
   icon?: LinkIcon
+}
+
+export interface LinkWithAction extends Link {
+  action: string
 }
 
 export interface SummaryObject {

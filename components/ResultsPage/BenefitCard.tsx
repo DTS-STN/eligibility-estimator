@@ -4,6 +4,9 @@ import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
 import { CustomCollapse } from './CustomCollapse'
 
+const AA_BUTTON_CLICK_ATTRIBUTE =
+  'ESDC-EDSC:Canadian OAS Benefits Est. Result card link click'
+
 export const BenefitCard: React.VFC<{
   benefitKey: string
   benefitName: string
@@ -17,6 +20,7 @@ export const BenefitCard: React.VFC<{
     url: string
     text: string
     alt: string
+    action: string
   }>
 }> = ({
   benefitKey,
@@ -79,17 +83,22 @@ export const BenefitCard: React.VFC<{
 
       <div className="mt-4">
         {links &&
-          links.map(({ text, url, icon, alt }, index) => (
+          links.map(({ text, url, icon, alt, action }, index) => (
             <div key={index} className="flex items-center py-4 text-content">
               <div>
                 <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
               </div>
               <div className="pl-5 w-full">
-                <DSLink
-                  id={`${benefitKey}Link${index}`}
-                  href={url}
-                  text={text}
-                />
+                <span
+                  data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}:${action}`}
+                >
+                  <DSLink
+                    id={`${benefitKey}Link${index}`}
+                    href={url}
+                    text={text}
+                    target="_blank"
+                  />
+                </span>
               </div>
             </div>
           ))}
