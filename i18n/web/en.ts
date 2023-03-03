@@ -37,8 +37,9 @@ const en: WebTranslations = {
   nextStep: 'Next step',
   getEstimate: 'Estimate my benefits',
   required: '(required)',
-  workInProgress: 'This estimator features works in progress',
-  workInProgressBody: 'Parts of this site may not work and will change.',
+  workInProgress: 'This estimator is a work in progress',
+  workInProgressBody:
+    'Parts of this site, including results, may not work or be accurate.',
   homePageP1:
     'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
