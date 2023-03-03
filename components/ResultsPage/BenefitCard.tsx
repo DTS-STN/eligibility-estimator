@@ -4,7 +4,6 @@ import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
 import { CustomCollapse } from './CustomCollapse'
 
-const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
 const AA_BUTTON_CLICK_ATTRIBUTE =
   'ESDC-EDSC:Canadian OAS Benefits Est. Result card link click'
 
