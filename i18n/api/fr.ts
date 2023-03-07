@@ -80,7 +80,7 @@ const fr: Translations = {
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
-    [FieldKey.OAS_AGE]: 'Report de la pension de la SV',
+    [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
     [FieldKey.INCOME]: 'Revenu net',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
