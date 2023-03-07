@@ -32,7 +32,7 @@ const getMinBirthYear = () => {
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.provideIncomeEmpty }),
   income: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.incomeEmpty })
@@ -57,7 +57,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.invalidAge),
   oasDefer: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.oasDeferEmpty }),
   oasAge: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.oasAge65to70 })
@@ -72,7 +72,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
   invSeparated: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.invSeparatedEmpty }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
     .required()
@@ -82,7 +82,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
   livedOutsideCanada: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.outsideCanadaEmpty }),
   yearsInCanadaSince18: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
@@ -91,7 +91,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected })
+    .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
     .custom((value, helpers) => {
       const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
       if (livingCountry === 'CAN') {
@@ -114,11 +114,11 @@ export const RequestSchema = Joi.object({
     }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected })
+    .messages({ 'any.required': ValidationErrors.partnerBenefitStatusEmpty })
     .valid(...Object.values(PartnerBenefitStatus)),
   partnerIncomeAvailable: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.providePartnerIncomeEmpty }),
   partnerIncome: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.partnerIncomeEmpty })
@@ -143,11 +143,13 @@ export const RequestSchema = Joi.object({
     .valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string()
     .required()
-    .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
+    .messages({
+      'any.required': ValidationErrors.partnerLegalStatusNotSelected,
+    })
     .valid(...Object.values(LegalStatus)),
   partnerLivedOutsideCanada: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.partnerOutsideCanadaEmpty }),
   partnerYearsInCanadaSince18: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
@@ -156,7 +158,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.partnerYearsInCanadaMinusAge),
   partnerEverLivedSocialCountry: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.optionNotSelected }),
+    .messages({ 'any.required': ValidationErrors.partnerSocialCountryEmpty }),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

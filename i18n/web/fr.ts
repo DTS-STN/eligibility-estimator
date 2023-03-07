@@ -113,7 +113,7 @@ const fr: WebTranslations = {
   pageNotFound: 'Page non trouvée',
   warningText: 'avertissement',
   category: apiFr.category,
-  errorBoxTitle: "Le formulaire n'a pas pu être soumis car ",
+  errorBoxTitle: "L'information n'a pas pu être soumise car ",
 
   resultsPage: {
     header: "Tableau des résultats d'estimation",
@@ -163,6 +163,8 @@ const fr: WebTranslations = {
   },
   validationErrors: {
     [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.providePartnerIncomeEmpty]:
+      'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:
       'Veuillez entrer le revenu de votre conjoint.',
     [ValidationErrors.partnerYearsSince18Empty]:
@@ -172,9 +174,27 @@ const fr: WebTranslations = {
     [ValidationErrors.yearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
-      'Veuillez sélectionner un statut légal.',
+      'Veuillez indiquer si vous avez un statut légal au Canada.',
+    [ValidationErrors.partnerLegalStatusNotSelected]:
+      'Veuillez indiquer si votre conjoint a un statut légal au Canada.',
+    [ValidationErrors.partnerBenefitStatusEmpty]:
+      'Veuillez indiquer si votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
+
+    [ValidationErrors.outsideCanadaEmpty]:
+      "Veuillez indiquer si vous avez vécu à l'extérieur du Canada pendant plus de 6 mois.",
+    [ValidationErrors.partnerOutsideCanadaEmpty]:
+      "Veuillez indiquer si votre conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
+    [ValidationErrors.invSeparatedEmpty]:
+      'Veuillez indiquer si vous êtes involontairement séparé.',
+    [ValidationErrors.socialCountryEmpty]:
+      'Veuillez indiquer si vous avez déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
+    [ValidationErrors.partnerSocialCountryEmpty]:
+      'Veuillez indiquer si votre conjoint a déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
+    [ValidationErrors.provideIncomeEmpty]:
+      'Veuillez indiquer si vous êtes en mesure de fournir votre revenu.',
     [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
-    [ValidationErrors.optionNotSelected]: 'Veuillez sélectionner une option.',
+    [ValidationErrors.oasDeferEmpty]:
+      'Veuillez sélectionner quand vous souhaitez commencer à recevoir la pension de la SV.',
     [ValidationErrors.incomeBelowZero]:
       'Vos revenus doivent être supérieurs à zéro.',
     [ValidationErrors.partnerIncomeBelowZero]:
