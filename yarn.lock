@@ -1982,13 +1982,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "ansi-styles@npm:6.2.1"
-  checksum: ef940f2f0ced1a6347398da88a91da7930c33ecac3c77b72c5905f8b8fe402c52e6fde304ff5347f616e27a742da3f1dc76de98f6866c69251ad0b07a66776d9
-  languageName: node
-  linkType: hard
-
 "anymatch@npm:^3.0.3, anymatch@npm:~3.1.2":
   version: 3.1.2
   resolution: "anymatch@npm:3.1.2"
@@ -3394,7 +3387,6 @@ __metadata:
     "@types/node": ^17.0.23
     "@types/react": ^17.0.42
     "@types/testing-library__jest-dom": ^5.14.3
-    ansi-styles: ^6.2.1
     autoprefixer: ^10.4.4
     csv-writer: ^1.6.0
     eslint: ^8.17.0

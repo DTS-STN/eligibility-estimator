@@ -42,7 +42,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["@types/react", "npm:17.0.42"],\
             ["@types/testing-library__jest-dom", "npm:5.14.3"],\
-            ["ansi-styles", "npm:6.2.1"],\
             ["autoprefixer", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:10.4.4"],\
             ["csv-writer", "npm:1.6.0"],\
             ["eslint", "npm:8.17.0"],\
@@ -2733,13 +2732,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ansi-styles", "npm:6.1.0"]\
           ],\
           "linkType": "HARD"\
-        }],\
-        ["npm:6.2.1", {\
-          "packageLocation": "./.yarn/cache/ansi-styles-npm-6.2.1-d43647018c-ef940f2f0c.zip/node_modules/ansi-styles/",\
-          "packageDependencies": [\
-            ["ansi-styles", "npm:6.2.1"]\
-          ],\
-          "linkType": "HARD"\
         }]\
       ]],\
       ["anymatch", [\
@@ -4440,7 +4432,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:17.0.23"],\
             ["@types/react", "npm:17.0.42"],\
             ["@types/testing-library__jest-dom", "npm:5.14.3"],\
-            ["ansi-styles", "npm:6.2.1"],\
             ["autoprefixer", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:10.4.4"],\
             ["csv-writer", "npm:1.6.0"],\
             ["eslint", "npm:8.17.0"],\
