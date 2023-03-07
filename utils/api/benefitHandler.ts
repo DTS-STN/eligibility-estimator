@@ -29,6 +29,7 @@ import {
   ProcessedInputWithPartner,
   RequestInput,
   SummaryObject,
+  EntitlementResultGeneric,
 } from './definitions/types'
 import {
   IncomeHelper,
@@ -40,7 +41,7 @@ import {
 import { SummaryHandler } from './summaryHandler'
 import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
-
+import { BaseBenefit } from './benefits/_base'
 export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
@@ -313,17 +314,12 @@ export class BenefitHandler {
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     const clientOas = new OasBenefit(this.input.client, this.translations)
-    allResults.client.oas.eligibility = clientOas.eligibility
-    allResults.client.oas.entitlement = clientOas.entitlement
-    allResults.client.oas.cardDetail = clientOas.cardDetail
+    this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
       const partnerOas = new OasBenefit(this.input.partner, this.translations)
-      allResults.partner.oas.eligibility = partnerOas.eligibility
-      allResults.partner.oas.entitlement = partnerOas.entitlement
-      allResults.partner.oas.cardDetail = partnerOas.cardDetail
-
+      this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =
         partnerOas.entitlement
@@ -339,9 +335,7 @@ export class BenefitHandler {
       allResults.client.oas
     )
 
-    allResults.client.gis.eligibility = clientGis.eligibility
-    allResults.client.gis.entitlement = clientGis.entitlement
-    allResults.client.gis.cardDetail = clientGis.cardDetail
+    this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
     // If the client needs help, check their partner's GIS eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -351,10 +345,7 @@ export class BenefitHandler {
         allResults.partner.oas,
         true
       )
-      allResults.partner.gis.eligibility = partnerGis.eligibility
-      allResults.partner.gis.entitlement = partnerGis.entitlement
-      allResults.partner.gis.cardDetail = partnerGis.cardDetail
-
+      this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's ALW
       this.input.client.partnerBenefitStatus.gisResultEligibility =
         partnerGis.eligibility
@@ -365,10 +356,7 @@ export class BenefitHandler {
 
     // Moving onto ALW, again only doing eligibility.
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
-    allResults.client.alw.eligibility = clientAlw.eligibility
-    allResults.client.alw.entitlement = clientAlw.entitlement
-    allResults.client.alw.cardDetail = clientAlw.cardDetail
-
+    this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
     this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
       clientGis,
       clientAlw,
@@ -382,10 +370,7 @@ export class BenefitHandler {
         this.translations,
         true
       )
-      allResults.partner.alw.eligibility = partnerAlw.eligibility
-      allResults.partner.alw.entitlement = partnerAlw.entitlement
-      allResults.partner.alw.cardDetail = partnerAlw.cardDetail
-
+      this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.alwResultEligibility =
         partnerAlw.eligibility
@@ -403,18 +388,14 @@ export class BenefitHandler {
       this.translations,
       true
     )
-    allResults.partner.alw.eligibility = partnerAlw.eligibility
-    allResults.partner.alw.entitlement = partnerAlw.entitlement
-    allResults.partner.alw.cardDetail = partnerAlw.cardDetail
+    this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
 
     const partnerOas = new OasBenefit(
       this.input.partner,
       this.translations,
       true
     )
-    allResults.partner.oas.eligibility = partnerOas.eligibility
-    allResults.partner.oas.entitlement = partnerOas.entitlement
-    allResults.partner.oas.cardDetail = partnerOas.cardDetail
+    this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
 
     let partnerGis = new GisBenefit(
       this.input.partner,
@@ -422,9 +403,7 @@ export class BenefitHandler {
       allResults.partner.oas,
       true
     )
-    allResults.partner.gis.eligibility = partnerGis.eligibility
-    allResults.partner.gis.entitlement = partnerGis.entitlement
-    allResults.partner.gis.cardDetail = partnerGis.cardDetail
+    this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
 
     this.input.client.partnerBenefitStatus = this.getPartnerBenefitStatus(
       partnerGis,
@@ -435,6 +414,13 @@ export class BenefitHandler {
     if (this.input.client.partnerBenefitStatus.alw) {
       clientGis.eligibility.incomeMustBeLessThan =
         legalValues.gis.spouseAlwIncomeLimit
+
+      clientGis = new GisBenefit(
+        this.input.client,
+        this.translations,
+        allResults.client.oas
+      )
+      this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
@@ -574,12 +560,8 @@ export class BenefitHandler {
               allResults.partner.oas
             )
 
-            allResults.client.gis.eligibility = clientGis.eligibility
-            allResults.client.gis.entitlement = clientGis.entitlement
-            allResults.client.gis.cardDetail = clientGis.cardDetail
-            allResults.partner.gis.eligibility = partnerGis.eligibility
-            allResults.partner.gis.entitlement = partnerGis.entitlement
-            allResults.partner.gis.cardDetail = partnerGis.cardDetail
+            this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
+            this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
           }
           console.log('--- both oas are greater than 0 --- end')
         } // if partner is eligible for alw
@@ -648,10 +630,7 @@ export class BenefitHandler {
             'totalAmtCouple',
             totalAmtCouple
           )
-
-          allResults.partner.alw.eligibility = partnerAlw.eligibility
-          allResults.partner.alw.cardDetail = partnerAlw.cardDetail
-          allResults.partner.alw.entitlement = partnerAlw.entitlement
+          this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
 
           let isApplicantGisAvailable = true
           if (totalAmountSingle > totalAmtCouple) {
@@ -691,9 +670,12 @@ export class BenefitHandler {
               allResults.client.oas
             )
 
-            allResults.client.gis.eligibility = clientGisCouple.eligibility
-            allResults.client.gis.entitlement = clientGisCouple.entitlement
-            allResults.client.gis.cardDetail = clientGisCouple.cardDetail
+            this.setValueForAllResults(
+              allResults,
+              'client',
+              'gis',
+              clientGisCouple
+            )
             allResults.partner.alw.entitlement.result = partnerAlwCalcCouple
 
             // Display a note stating when PartnerB turns 65, to determine if it is still
@@ -967,6 +949,17 @@ export class BenefitHandler {
     // All done!
     console.log('allResults', allResults)
     return allResults
+  }
+
+  private setValueForAllResults(
+    allResults: BenefitResultsObjectWithPartner,
+    prop: string,
+    benefitName: string,
+    benefit: BaseBenefit<EntitlementResultGeneric>
+  ): void {
+    allResults[prop][benefitName].eligibility = benefit.eligibility
+    allResults[prop][benefitName].entitlement = benefit.entitlement
+    allResults[prop][benefitName].cardDetail = benefit.cardDetail
   }
 
   private getSingleClientInput(): ProcessedInput {

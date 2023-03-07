@@ -110,7 +110,7 @@ const en: WebTranslations = {
   pageNotFound: 'Page not found',
   warningText: 'warning',
   category: apiEn.category,
-  errorBoxTitle: 'The form could not be submitted because ',
+  errorBoxTitle: 'The information could not be submitted because ',
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
@@ -158,6 +158,8 @@ const en: WebTranslations = {
   },
   validationErrors: {
     [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
+    [ValidationErrors.providePartnerIncomeEmpty]:
+      "Please indicate if you're able to provide your partner's income.",
     [ValidationErrors.partnerIncomeEmpty]:
       "Please enter your partner's income.",
     [ValidationErrors.partnerYearsSince18Empty]:
@@ -165,9 +167,27 @@ const en: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsSince18Empty]:
       'Please enter a number no higher than your age minus 18.',
-    [ValidationErrors.legalStatusNotSelected]: 'Please select a legal status.',
+    [ValidationErrors.legalStatusNotSelected]:
+      'Please indicate if you have legal status in Canada.',
+    [ValidationErrors.partnerLegalStatusNotSelected]:
+      'Please indicate if your partner has legal status in Canada.',
+    [ValidationErrors.partnerBenefitStatusEmpty]:
+      'Please indicate if your partner receives the Old Age Security pension.',
+    [ValidationErrors.outsideCanadaEmpty]:
+      "Please indicate if you've lived outside of Canada for longer than 6 months.",
+    [ValidationErrors.partnerOutsideCanadaEmpty]:
+      'Please indicate if your partner has lived outside of Canada for longer than 6 months.',
+    [ValidationErrors.socialCountryEmpty]:
+      "Please indicate if you've ever lived in a country with an established social security agreement with Canada.",
+    [ValidationErrors.partnerSocialCountryEmpty]:
+      'Please indicate if your partner has ever lived in a country with an established social security agreement with Canada.',
+    [ValidationErrors.invSeparatedEmpty]:
+      "Please indicate if you're involuntarily separated.",
+    [ValidationErrors.provideIncomeEmpty]:
+      "Please indicate if you're able to provide your income.",
     [ValidationErrors.incomeEmpty]: 'Please enter your income.',
-    [ValidationErrors.optionNotSelected]: 'Please select an option.',
+    [ValidationErrors.oasDeferEmpty]:
+      "Please select when you'd like to start receiving the OAS pension.",
     [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',
     [ValidationErrors.partnerIncomeBelowZero]:
       "Your partner's income must be above zero.",

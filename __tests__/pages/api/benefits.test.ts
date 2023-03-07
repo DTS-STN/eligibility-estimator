@@ -395,7 +395,7 @@ describe('consolidated benefit tests: max income checks', () => {
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
     res = await mockGetRequest({
       ...input,
       income: legalValues.gis.spouseOasIncomeLimit - 1,
