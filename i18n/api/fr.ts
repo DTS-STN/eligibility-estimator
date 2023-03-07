@@ -32,7 +32,7 @@ const fr: Translations = {
   },
   result: {
     [ResultKey.ELIGIBLE]: 'Admissible',
-    [ResultKey.INELIGIBLE]: 'Non admissible',
+    [ResultKey.INELIGIBLE]: 'NonNot\xA0admissible',
     [ResultKey.UNAVAILABLE]: 'Non disponible',
     [ResultKey.MORE_INFO]: "Besoin de plus d'information...",
     [ResultKey.INVALID]: "Votre demande n'est pas valide!",

@@ -30,7 +30,7 @@ const en: Translations = {
   },
   result: {
     [ResultKey.ELIGIBLE]: 'Eligible',
-    [ResultKey.INELIGIBLE]: 'Not eligible',
+    [ResultKey.INELIGIBLE]: 'Not\xA0eligible',
     [ResultKey.UNAVAILABLE]: 'Unavailable',
     [ResultKey.MORE_INFO]: 'Need more information...',
     [ResultKey.INVALID]: 'Request is invalid!',
