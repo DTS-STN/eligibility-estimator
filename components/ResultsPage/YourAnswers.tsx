@@ -84,7 +84,9 @@ export const YourAnswers: React.VFC<{
     switch (fieldType) {
       case FieldType.NUMBER:
         return input.key === 'oasAge'
-          ? `${tsln.resultsEditAriaLabels[input.key]} ${input.value}`
+          ? `${tsln.resultsEditAriaLabels[input.key]} ${input.value}&nbsp;${
+              tsln._language === 'en' ? '' : 'ans'
+            }`
           : input.value
       case FieldType.STRING:
         return input.value // no processing needed, display as-is

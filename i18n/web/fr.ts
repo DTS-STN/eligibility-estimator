@@ -143,7 +143,7 @@ const fr: WebTranslations = {
       'Prestations auxquelles vous pourriez ne pas être admissible',
     noAnswersFound: 'Aucune réponse trouvée',
     noBenefitsFound: 'Aucune prestations trouvée',
-    edit: 'Réviser',
+    edit: 'Modifier',
     info: 'info',
     note: 'remarque',
     link: 'lien',
