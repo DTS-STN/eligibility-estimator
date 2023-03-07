@@ -41,7 +41,7 @@ import {
 import { SummaryHandler } from './summaryHandler'
 import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
-import { BaseBenefit, Entit } from './benefits/_base'
+import { BaseBenefit } from './benefits/_base'
 export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
