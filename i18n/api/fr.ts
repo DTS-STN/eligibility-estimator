@@ -80,7 +80,7 @@ const fr: Translations = {
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
-    [FieldKey.OAS_AGE]: 'Âge de report de la SV',
+    [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
     [FieldKey.INCOME]: 'Revenu net',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
@@ -100,7 +100,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
       "Conjoint a vécu à l'extérieur du Canada",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Années vécues au Canada du conjoint',
+      'Années où le conjoint a vécu au Canada',
     [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
       'Le partenaire vivait dans un pays avec un accord social',
   },
