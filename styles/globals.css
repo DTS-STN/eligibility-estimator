@@ -246,7 +246,8 @@
   #alwLink0,
   #alwLink1,
   #afsLink0,
-  #afsLink1 {
+  #afsLink1,
+  a.generatedLink {
     display: inline;
     background: url('/openNewTab.svg') no-repeat right bottom;
     padding-right: 20px;
