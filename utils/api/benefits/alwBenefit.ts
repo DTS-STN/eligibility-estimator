@@ -254,14 +254,16 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     // partner is eligible, different message if income was not provided
     if (this.partner) {
-      if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligible
-        )
-      } else {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerDependOnYourIncome
-        )
+      if (this.entitlement.result > 0) {
+        if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligible
+          )
+        } else {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerDependOnYourIncome
+          )
+        }
       }
     }
 
