@@ -195,6 +195,9 @@
 
   .summary-link a {
     @apply text-default-text underline;
+    display: inline;
+    background: url('/openNewTab.svg') no-repeat right bottom;
+    padding-right: 20px;
   }
 
   .is-sticky {
@@ -233,5 +236,19 @@
   ol li {
     list-style: decimal;
     list-style-position: inside;
+  }
+
+  #oasDefer a,
+  #oasLink0,
+  #oasLink1,
+  #gisLink0,
+  #gisLink1,
+  #alwLink0,
+  #alwLink1,
+  #afsLink0,
+  #afsLink1 {
+    display: inline;
+    background: url('/openNewTab.svg') no-repeat right bottom;
+    padding-right: 20px;
   }
 }
