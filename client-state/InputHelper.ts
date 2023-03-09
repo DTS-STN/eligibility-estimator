@@ -36,7 +36,7 @@ export class InputHelper {
 
   setInputByKey(key: FieldKey, newValue: string): void {
     if (newValue === '' || newValue === undefined) delete this.inputs[key]
-    else this.inputs[key] = InputHelper.sanitizeValue(newValue)
+    else this.inputs[key] = InputHelper.sanitizeValue(newValue, this.language)
     this.setInputs(this.inputs)
   }
 
@@ -71,14 +71,14 @@ export class InputHelper {
     return { ...this.asObject, _language: this.language }
   }
 
-  static sanitizeValue(value: string): string {
+  static sanitizeValue(value: string, language: string): string {
     // income handling
     if (value.includes('$'))
       return value
         .toString()
         .replaceAll(' ', '')
-        .replace(/(\d+),(\d+)\$/, '$1.$2') // replaces commas with decimals, but only in French!
-        .replaceAll(',', '')
+        .replace(/(\d+),(\d+) \$/, '$1.$2') // replaces commas with decimals, but only in French!
+        .replaceAll(',', language === 'en' ? '' : '.')
         .replaceAll('$', '')
     else return value
   }

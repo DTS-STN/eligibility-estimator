@@ -35,7 +35,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 
   const localizedIncome =
     locale == Language.EN
-      ? { thousandSeparator: true, prefix: '$' }
+      ? { thousandSeparator: ',', prefix: '$', decimalSeparator: '.' }
       : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
 
   // only need to run this once at component render, so no need for deps
@@ -77,7 +77,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         autoComplete="off"
         enterKeyHint="done"
         allowNegative={false}
-        decimalSeparator={null}
+        decimalScale={2}
       />
 
       {error && (
