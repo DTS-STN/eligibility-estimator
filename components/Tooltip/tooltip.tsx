@@ -41,7 +41,7 @@ export const Tooltip: React.FC<{
   if (!tooltipData) return <></>
 
   return (
-    <div
+    /*    <div
       className="relative mb-2 cursor-pointer"
       ref={wrapperRef}
       data-testid={`tooltip-${field}`}
@@ -69,7 +69,28 @@ export const Tooltip: React.FC<{
           dangerouslySetInnerHTML={{ __html: tooltipData.text }}
         />
       </div>
-    </div>
+    </div>*/
+
+    <details
+      className="my-6 text-h6 border-none"
+      data-testid={`tooltip-${field}`}
+    >
+      <summary
+        key={`summary-${field}`}
+        className="border-none pl-0 ds-text-multi-blue-blue70b mb-[15px] ds-cursor-pointer ds-select-none"
+      >
+        <span
+          className="ds-underline"
+          dangerouslySetInnerHTML={{ __html: tsln.tooltip.moreInformation }}
+        />
+      </summary>
+      <div
+        className="ds-rounded ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 px-6 pt-4"
+        data-testid="tooltip-text"
+        id={`helpText-${field}`}
+        dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+      />
+    </details>
   )
 }
 
