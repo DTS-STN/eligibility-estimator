@@ -71,6 +71,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           error ? ' !border-danger' : ''
         }`}
         value={value != null ? (value as string) : ''}
+        isNumericString={true}
         placeholder={placeholder}
         onChange={onChange}
         required
