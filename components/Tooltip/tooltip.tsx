@@ -8,8 +8,7 @@ import { useTranslation } from '../Hooks'
 
 export const Tooltip: React.FC<{
   field: string
-  size?: number
-}> = ({ field, size }) => {
+}> = ({ field }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
   const tooltipData = getTooltipTranslationByField(
