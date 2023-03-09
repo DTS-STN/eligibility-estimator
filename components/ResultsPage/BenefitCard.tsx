@@ -70,7 +70,7 @@ export const BenefitCard: React.VFC<{
           </CustomCollapse>
         ))}
 
-      {nextStepText && (
+      {nextStepText.nextStepTitle && (
         <div>
           <p className="mb-2 mt-6  font-bold text-[24px]">
             {nextStepText.nextStepTitle}
