@@ -46,6 +46,11 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     sessionStorage.setItem(`dateInput-${name}`, JSON.stringify(dateInput))
   }, [dateInput])
 
+  useEffect(() => {
+    if (name === 'partnerAge' && error !== undefined)
+      setDateInput({ month: 1, year: undefined })
+  }, [name])
+
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     let fieldToSet = ''

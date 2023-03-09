@@ -225,8 +225,10 @@ export const EligibilityPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(field)
+
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
