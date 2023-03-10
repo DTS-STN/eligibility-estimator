@@ -1,6 +1,6 @@
 import { FormError } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
-import { InputHTMLAttributes, useEffect } from 'react'
+import { useState, InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { QuestionLabel } from './QuestionLabel'
@@ -32,6 +32,12 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   error,
 }) => {
   const locale = useRouter().locale
+  const [fieldValue, setFieldValue] = useState(value)
+
+  useEffect(() => {
+    console.log('value changed', value)
+    setFieldValue(value)
+  }, [value])
 
   const localizedIncome =
     locale == Language.EN
@@ -48,6 +54,13 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
       }
     })
   }, [])
+
+  const getFieldValue = () => {
+    const field = document.getElementById(`enter-${name}`)
+    const isFocused = document.activeElement === field
+    console.log(isFocused)
+    return fieldValue != null ? (fieldValue as string) : ''
+  }
 
   return (
     <div>
@@ -70,7 +83,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         className={`form-control text-content border-form-border w-44 ${
           error ? ' !border-danger' : ''
         }`}
-        value={value != null ? (value as string) : ''}
+        value={getFieldValue()}
         isNumericString={true}
         placeholder={placeholder}
         onChange={onChange}
