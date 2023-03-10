@@ -1,5 +1,6 @@
 import { Language } from '../utils/api/definitions/enums'
 import { fieldDefinitions, FieldKey } from '../utils/api/definitions/fields'
+import { sanitizeCurrency } from '../components/Forms/validation/utils'
 
 interface LanguageInput {
   key: '_language'
@@ -73,13 +74,6 @@ export class InputHelper {
 
   static sanitizeValue(value: string, language: string): string {
     // income handling
-    if (value.includes('$'))
-      return value
-        .toString()
-        .replaceAll(' ', '')
-        .replace(/(\d+),(\d+) \$/, '$1.$2') // replaces commas with decimals, but only in French!
-        .replaceAll(',', language === 'en' ? '' : '.')
-        .replaceAll('$', '')
-    else return value
+    return sanitizeCurrency(value, language)
   }
 }

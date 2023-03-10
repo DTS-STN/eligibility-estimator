@@ -5,6 +5,7 @@ import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { QuestionLabel } from './QuestionLabel'
 import { Tooltip } from '../Tooltip/tooltip'
+import { sanitizeCurrency } from './validation/utils'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -35,7 +36,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   const [fieldValue, setFieldValue] = useState(value)
 
   useEffect(() => {
-    console.log('value changed', value)
     setFieldValue(value)
   }, [value])
 
@@ -55,13 +55,17 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
     })
   }, [])
 
-  const getFieldValue = () => {
-    const field = document.getElementById(`enter-${name}`)
-    const isFocused = document.activeElement === field
-    console.log(isFocused)
-    return fieldValue != null ? (fieldValue as string) : ''
+  const handleOnChange = (e) => {
+    setFieldValue(sanitizeCurrency(e.target.value, locale))
+    onChange(e)
   }
 
+  const getFieldValue = () => {
+    console.log('field VALUE', fieldValue)
+
+    return fieldValue != null ? (fieldValue as string) : ''
+  }
+  console.log('VALUE FROM PROPS', value)
   return (
     <div>
       <QuestionLabel
@@ -86,7 +90,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         value={getFieldValue()}
         isNumericString={true}
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={(e) => handleOnChange(e)}
         required
         autoComplete="off"
         enterKeyHint="done"
