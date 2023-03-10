@@ -6,6 +6,7 @@ import { Language } from '../../utils/api/definitions/enums'
 import { QuestionLabel } from './QuestionLabel'
 import { Tooltip } from '../Tooltip/tooltip'
 import { sanitizeCurrency } from './validation/utils'
+import { set } from 'lodash'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -35,10 +36,6 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   const locale = useRouter().locale
   const [fieldValue, setFieldValue] = useState(value)
 
-  useEffect(() => {
-    setFieldValue(value)
-  }, [value])
-
   const localizedIncome =
     locale == Language.EN
       ? { thousandSeparator: ',', prefix: '$', decimalSeparator: '.' }
@@ -61,11 +58,11 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   }
 
   const getFieldValue = () => {
-    console.log('field VALUE', fieldValue)
-
-    return fieldValue != null ? (fieldValue as string) : ''
+    const regex = /\d+\.\d{1}$/
+    if (!fieldValue) return ''
+    return fieldValue + (regex.test(fieldValue as string) ? '0' : '')
   }
-  console.log('VALUE FROM PROPS', value)
+
   return (
     <div>
       <QuestionLabel
@@ -96,6 +93,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         enterKeyHint="done"
         allowNegative={false}
         decimalScale={2}
+        onBlur={() => setFieldValue(getFieldValue())}
       />
 
       {error && (
