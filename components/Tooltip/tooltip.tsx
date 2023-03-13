@@ -19,7 +19,7 @@ export const Tooltip: React.FC<{
   if (!tooltipData) return <></>
 
   return (
-    <details className="my-6 text-h6 " data-testid={`tooltip-${field}`}>
+    <details className="my-2 text-h6 " data-testid={`tooltip-${field}`}>
       <summary
         key={`summary-${field}`}
         className="border-none pl-0 ds-text-multi-blue-blue70b mb-[15px] ds-cursor-pointer ds-select-none"
