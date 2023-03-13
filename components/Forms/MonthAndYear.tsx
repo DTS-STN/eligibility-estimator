@@ -71,15 +71,17 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   }
 
   return (
-    <>
-      <QuestionLabel
-        name={name}
-        type="date"
-        label={label}
-        requiredText={requiredText}
-        helpText={helpText}
-        fieldId={`enter-${name}`}
-      />
+    <fieldset>
+      <legend>
+        <QuestionLabel
+          name={name}
+          type="date"
+          label={label}
+          requiredText={requiredText}
+          helpText={helpText}
+          fieldId={`enter-${name}`}
+        />
+      </legend>
       {dateInput && (
         <FormDatePicker
           id={`enter-${name}`}
@@ -95,6 +97,6 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           formErrorProps={{ id: 'formErrorId', errorMessage: error }}
         />
       )}
-    </>
+    </fieldset>
   )
 }
