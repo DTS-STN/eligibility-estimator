@@ -54,15 +54,15 @@ const fr: WebTranslations = {
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
-  ageText: '<b>âge</b>',
-  netIncomeText: '<b>revenu net</b>',
+  ageText: '<strong>âge</strong>',
+  netIncomeText: '<strong>revenu net</strong>',
   legalStatusText:
-    "<b>statut légal</b> (par exemple, citoyen canadien, statut d'Indien, réfugié ou résident permanent)",
+    "<strong>statut légal</strong> (par exemple, citoyen canadien, statut d'Indien, réfugié ou résident permanent)",
   residenceHistoryText:
-    "<b>historique de résidence</b> (nombre d'années vécues au Canada)",
-  maritalStatusText: '<b>état matrimonial</b>',
+    "<strong>historique de résidence</strong> (nombre d'années vécues au Canada)",
+  maritalStatusText: '<strong>état matrimonial</strong>',
   partnerText:
-    '<b>partenaire</b> (revenu, statut légal et historique de résidence), le cas échéant',
+    '<strong>partenaire</strong> (revenu, statut légal et historique de résidence), le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
@@ -134,9 +134,9 @@ const fr: WebTranslations = {
     )} pour plus d'informations.`,
     yourEstimatedTotal: 'Votre total mensuel estimé est de ',
     basedOnYourInfoTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <strong>{AMOUNT}</strong> par mois.",
     basedOnYourInfoAndIncomeTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <strong>{AMOUNT}</strong> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
       'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:
