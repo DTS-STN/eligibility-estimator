@@ -219,15 +219,6 @@
     border-left: 12px solid #284162;
   }
 
-  #enter-age select#age-birth-month,
-  #enter-partnerAge select#partnerAge-birth-month {
-    background-image: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-  }
-
   summary:hover {
     --tw-border-opacity: 1;
     color: rgb(5 53 210 / var(--tw-border-opacity));
@@ -251,5 +242,23 @@
     display: inline;
     background: url('/openNewTab.svg') no-repeat right bottom;
     padding-right: 20px;
+    text-decoration-line: underline;
+    --tw-text-opacity: 1;
+    color: rgb(40 65 98 / var(--tw-text-opacity));
+  }
+
+  #oasDefer a:hover,
+  #oasLink0:hover,
+  #oasLink1:hover,
+  #gisLink0:hover,
+  #gisLink1:hover,
+  #alwLink0:hover,
+  #alwLink1:hover,
+  #afsLink0:hover,
+  #afsLink1:hover,
+  a.generatedLink:hover,
+  .summary-link a:hover {
+    --tw-border-opacity: 1;
+    color: rgb(5 53 210 / var(--tw-border-opacity));
   }
 }

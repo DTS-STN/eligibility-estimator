@@ -1,10 +1,12 @@
 import { FormError } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
-import { InputHTMLAttributes, useEffect } from 'react'
+import { useState, InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { Language } from '../../utils/api/definitions/enums'
 import { QuestionLabel } from './QuestionLabel'
 import { Tooltip } from '../Tooltip/tooltip'
+import { sanitizeCurrency } from './validation/utils'
+import { set } from 'lodash'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -32,10 +34,11 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   error,
 }) => {
   const locale = useRouter().locale
+  const [fieldValue, setFieldValue] = useState(value)
 
   const localizedIncome =
     locale == Language.EN
-      ? { thousandSeparator: true, prefix: '$' }
+      ? { thousandSeparator: ',', prefix: '$', decimalSeparator: '.' }
       : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
 
   // only need to run this once at component render, so no need for deps
@@ -48,6 +51,17 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
       }
     })
   }, [])
+
+  const handleOnChange = (e) => {
+    setFieldValue(sanitizeCurrency(e.target.value, locale))
+    onChange(e)
+  }
+
+  const getFieldValue = () => {
+    const regex = /\d+\.\d{1}$/
+    if (!fieldValue) return ''
+    return fieldValue + (regex.test(fieldValue as string) ? '0' : '')
+  }
 
   return (
     <div>
@@ -67,17 +81,19 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         name={name}
         {...localizedIncome}
         data-testid="currency-input"
-        className={`form-control text-content border-form-border ${
+        className={`form-control text-content border-form-border w-44 ${
           error ? ' !border-danger' : ''
         }`}
-        value={value != null ? (value as string) : ''}
+        value={getFieldValue()}
+        isNumericString={true}
         placeholder={placeholder}
-        onChange={onChange}
+        onChange={(e) => handleOnChange(e)}
         required
         autoComplete="off"
         enterKeyHint="done"
         allowNegative={false}
-        decimalSeparator={null}
+        decimalScale={2}
+        onBlur={() => setFieldValue(getFieldValue())}
       />
 
       {error && (
