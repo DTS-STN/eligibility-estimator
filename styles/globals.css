@@ -219,15 +219,6 @@
     border-left: 12px solid #284162;
   }
 
-  #enter-age select#age-birth-month,
-  #enter-partnerAge select#partnerAge-birth-month {
-    background-image: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-  }
-
   summary:hover {
     --tw-border-opacity: 1;
     color: rgb(5 53 210 / var(--tw-border-opacity));
