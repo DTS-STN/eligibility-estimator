@@ -261,4 +261,11 @@
     --tw-border-opacity: 1;
     color: rgb(5 53 210 / var(--tw-border-opacity));
   }
+
+  @-moz-document url-prefix() {
+    #enter-age select,
+    #enter-partnerAge select {
+      background-color: #fff;
+    }
+  }
 }
