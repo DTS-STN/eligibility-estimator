@@ -8,68 +8,34 @@ import { useTranslation } from '../Hooks'
 
 export const Tooltip: React.FC<{
   field: string
-  size?: number
-}> = ({ field, size }) => {
+}> = ({ field }) => {
   const router = useRouter()
-  const [show, setShow] = useState<boolean>(false)
-  const wrapperRef = useRef(null)
   const tsln = useTranslation<WebTranslations>()
-
-  const handleEscPress = (event) => {
-    if (event.keyCode === 27) {
-      setShow(false)
-    }
-  }
-
-  useEffect(() => {
-    // handles closing tooltip via Esc
-    document.addEventListener('keyup', handleEscPress)
-    return () => {
-      document.removeEventListener('keyup', handleEscPress)
-    }
-  }, [])
-
   const tooltipData = getTooltipTranslationByField(
     router.locale == 'en' ? Language.EN : Language.FR,
     field
   )
 
-  const handleClick = () => {
-    setShow(!show)
-  }
-
   if (!tooltipData) return <></>
 
   return (
-    <div
-      className="relative mb-2 cursor-pointer"
-      ref={wrapperRef}
-      data-testid={`tooltip-${field}`}
-    >
-      <div className="flex items-center gap-x-[10px]" onClick={handleClick}>
-        <div className={`triangle ${show && 'origin-center rotate-90'} `} />
-        <a
-          className="underline text-default-text text-[16px]"
-          onKeyDown={(e) => {
-            if ([' ', 'Spacebar', 'Enter'].includes(e.key)) {
-              e.preventDefault()
-              handleClick()
-            }
-          }}
-          tabIndex={0}
-        >
-          {tsln.tooltip.moreInformation}
-        </a>
-      </div>
-      <div className={`${!show && 'hidden'} mx-[5px] py-2`} tabIndex={-1}>
-        <div
-          className="ds-rounded ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 px-6 pt-4"
-          data-testid="tooltip-text"
-          id={`helpText-${field}`}
-          dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+    <details className="my-2 text-h6 " data-testid={`tooltip-${field}`}>
+      <summary
+        key={`summary-${field}`}
+        className="border-none pl-0 ds-text-multi-blue-blue70b mb-[15px] ds-cursor-pointer ds-select-none"
+      >
+        <span
+          className="ds-underline"
+          dangerouslySetInnerHTML={{ __html: tsln.tooltip.moreInformation }}
         />
-      </div>
-    </div>
+      </summary>
+      <div
+        className="ds-rounded ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100  ds-bg-specific-cyan-cyan5 ds-border ds-border-specific-cyan-cyan50 px-6 pt-4"
+        data-testid="tooltip-text"
+        id={`helpText-${field}`}
+        dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+      />
+    </details>
   )
 }
 

@@ -46,6 +46,12 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     sessionStorage.setItem(`dateInput-${name}`, JSON.stringify(dateInput))
   }, [dateInput])
 
+  useEffect(() => {
+    if (name === 'partnerAge' && error !== undefined && error.length > 0) {
+      setDateInput({ month: 1, year: undefined })
+    }
+  }, [name])
+
   const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldId = e.target.id
     let fieldToSet = ''
@@ -66,15 +72,17 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   }
 
   return (
-    <>
-      <QuestionLabel
-        name={name}
-        type="date"
-        label={label}
-        requiredText={requiredText}
-        helpText={helpText}
-        fieldId={`enter-${name}`}
-      />
+    <fieldset>
+      <legend>
+        <QuestionLabel
+          name={name}
+          type="date"
+          label={label}
+          requiredText={requiredText}
+          helpText={helpText}
+          fieldId={`enter-${name}`}
+        />
+      </legend>
       {dateInput && (
         <FormDatePicker
           id={`enter-${name}`}
@@ -90,6 +98,6 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           formErrorProps={{ id: 'formErrorId', errorMessage: error }}
         />
       )}
-    </>
+    </fieldset>
   )
 }

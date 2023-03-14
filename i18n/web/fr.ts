@@ -54,12 +54,12 @@ const fr: WebTranslations = {
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
-  ageText: '<b>âge</b>',
-  netIncomeText: '<b>revenu net</b>',
-  legalStatusText: '<b>statut légal</b>',
-  residenceHistoryText: '<b>historique de résidence</b>',
-  maritalStatusText: '<b>état matrimonial</b>',
-  partnerText: '<b>partenaire</b>, le cas échéant',
+  ageText: '<strong>âge</strong>',
+  netIncomeText: '<strong>revenu net</strong>',
+  legalStatusText: '<strong>statut légal</strong>',
+  residenceHistoryText: '<strong>historique de résidence</strong>',
+  maritalStatusText: '<strong>état matrimonial</strong>',
+  partnerText: '<strong>partenaire</strong>, le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
@@ -73,11 +73,11 @@ const fr: WebTranslations = {
     'Une prestation non imposable disponible aux personnes qui reçoivent la pension de la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada',
   learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
   alwDefinitionText:
-    'Une prestation non imposable disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
+    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
   learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
   inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter le coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
-    'Une prestation non imposable disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
+    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
@@ -131,9 +131,9 @@ const fr: WebTranslations = {
     )} pour plus d'informations.`,
     yourEstimatedTotal: 'Votre total mensuel estimé est de ',
     basedOnYourInfoTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <strong>{AMOUNT}</strong> par mois.",
     basedOnYourInfoAndIncomeTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <b>{AMOUNT}</b> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
+      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <strong>{AMOUNT}</strong> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
     nextSteps:
       'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:

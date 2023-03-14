@@ -50,12 +50,12 @@ const en: WebTranslations = {
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
   estimatorIncludeQuestionText: "You'll need information about your:",
-  ageText: '<b>age</b>',
-  netIncomeText: '<b>net income</b>',
-  legalStatusText: '<b>legal status</b>',
-  residenceHistoryText: '<b>residence history</b>',
-  maritalStatusText: '<b>marital status</b>',
-  partnerText: `<b>partner</b>, if applicable`,
+  ageText: '<strong>age</strong>',
+  netIncomeText: '<strong>net income</strong>',
+  legalStatusText: '<strong>legal status</strong>',
+  residenceHistoryText: '<strong>residence history</strong>',
+  maritalStatusText: '<strong>marital status</strong>',
+  partnerText: `<strong>partner</strong>, if applicable`,
   youNeedEndingText:
     'You can enter your current information, or future information for planning purposes.',
   timeToCompleteText: 'Time to complete',
@@ -129,9 +129,9 @@ const en: WebTranslations = {
     )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
     basedOnYourInfoTotal:
-      "Based on the information you've provided, you should expect to receive around <b>{AMOUNT}</b> per month.",
+      "Based on the information you've provided, you should expect to receive around <strong>{AMOUNT}</strong> per month.",
     basedOnYourInfoAndIncomeTotal:
-      "Based on the information you've provided, you should expect to receive around <b>{AMOUNT}</b> per month. However, this amount may be lower or higher depending on your income.",
+      "Based on the information you've provided, you should expect to receive around <strong>{AMOUNT}</strong> per month. However, this amount may be lower or higher depending on your income.",
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',

@@ -337,13 +337,13 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'Allocation est une prestation pour les personnes âgées entre&nbsp;60 et&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées de&nbsp;60 à&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     alwEligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
       'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes veuves âgées entre&nbsp;60 et&nbsp;64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées de&nbsp;60 à&nbsp;64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:

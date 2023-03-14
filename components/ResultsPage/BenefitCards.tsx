@@ -106,11 +106,11 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent =
           apiTsln.detail.alwIfYouApply +
-          `<b>${numberToStringCurrency(
+          `<strong>${numberToStringCurrency(
             legalValues.alw.alwIncomeLimit,
             apiTsln._language,
             { rounding: 0 }
-          )}</b>.`
+          )}</strong>.`
       }
     } else if (benefitKey === BenefitKey.afs) {
       if (
@@ -120,11 +120,11 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent =
           apiTsln.detail.alwIfYouApply +
-          `<b>${numberToStringCurrency(
+          `<strong>${numberToStringCurrency(
             legalValues.alw.afsIncomeLimit,
             apiTsln._language,
             { rounding: 0 }
-          )}</b>.`
+          )}</strong>.`
       }
     }
     return nextStepText
