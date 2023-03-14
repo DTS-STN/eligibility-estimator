@@ -32,7 +32,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
       </label>
       {helpText && (
         <span
-          id={`help-text-${fieldId}`}
+          id={fieldId && `help-text-${fieldId}`}
           className="ds-font-body block ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
           dangerouslySetInnerHTML={{ __html: helpText }}
         />
