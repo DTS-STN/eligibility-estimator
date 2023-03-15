@@ -47,7 +47,7 @@ const fr: WebTranslations = {
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
   youMayBeEligible: 'Vous pourriez recevoir des prestations de vieillesse si :',
-  atLeast60: 'vous avez au moins 60 ans',
+  atLeast60: 'vous avez au moins 60 ans',
   headerWhatToKnow: 'Ce dont vous aurez besoin',
   haveNetIncomeLess: 'votre revenu net est moins de 133 141 $',
   pleaseNodeText:
@@ -67,17 +67,17 @@ const fr: WebTranslations = {
     'Il vous faudra environ 5 à 10 minutes pour répondre aux questions et obtenir une estimation.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   benefitAvailable:
-    'Une prestation imposable disponible aux personnes de 65 ans et plus',
+    'Une prestation imposable disponible aux personnes de 65 ans et plus',
   learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la pension de la Sécurité de la vieillesse</a>`,
   gisDefinitionText:
-    'Une prestation non imposable disponible aux personnes qui reçoivent la pension de la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada',
+    'Une prestation non imposable disponible aux personnes qui reçoivent la pension de la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada',
   learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
   alwDefinitionText:
-    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
+    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
   learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
   inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter le coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
-    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
+    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
@@ -165,11 +165,11 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerIncomeEmpty]:
       'Veuillez entrer le revenu de votre conjoint.',
     [ValidationErrors.partnerYearsSince18Empty]:
-      'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
+      'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
     [ValidationErrors.maritalStatusEmpty]:
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsSince18Empty]:
-      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -201,22 +201,22 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerIncomeTooHigh]:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
     [ValidationErrors.ageUnder18]:
-      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
+      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
     [ValidationErrors.partnerAgeUnder18]:
-      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
-    [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
+      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
+    [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
     [ValidationErrors.partnerAgeOver150]:
-      "L'âge de votre partenaire doit être inférieur à 150 ans.",
+      "L'âge de votre partenaire doit être inférieur à 150 ans.",
     [ValidationErrors.oasAge65to70]:
-      'Veuillez entrer un âge entre 65 et 70 ans.',
+      'Veuillez entrer un âge entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
       "Votre devez avoir vécu au Canada pendant au moins 10&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
       "Votre devez avoir vécu au Canada pendant au moins 20&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaMinusAge]:
-      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
+      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
-      "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
+      "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
       "Vous avez indiqué un état matrimonial qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
