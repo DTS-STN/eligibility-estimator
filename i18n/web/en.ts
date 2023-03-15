@@ -52,12 +52,10 @@ const en: WebTranslations = {
   estimatorIncludeQuestionText: "You'll need information about your:",
   ageText: '<strong>age</strong>',
   netIncomeText: '<strong>net income</strong>',
-  legalStatusText:
-    '<strong>legal status</strong> (such as Canadian citizen, Indian status, refugee or permanent resident)',
-  residenceHistoryText:
-    '<strong>residence history</strong> (number of years lived in Canada)',
+  legalStatusText: '<strong>legal status</strong>',
+  residenceHistoryText: '<strong>residence history</strong>',
   maritalStatusText: '<strong>marital status</strong>',
-  partnerText: `<strong>partner</strong> (income, legal status, and residence history), if applicable`,
+  partnerText: `<strong>partner</strong>, if applicable`,
   youNeedEndingText:
     'You can enter your current information, or future information for planning purposes.',
   timeToCompleteText: 'Time to complete',

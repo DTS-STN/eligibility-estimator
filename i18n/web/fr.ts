@@ -56,13 +56,10 @@ const fr: WebTranslations = {
     "L'estimateur vous posera des questions au sujet de votre : ",
   ageText: '<strong>âge</strong>',
   netIncomeText: '<strong>revenu net</strong>',
-  legalStatusText:
-    "<strong>statut légal</strong> (par exemple, citoyen canadien, statut d'Indien, réfugié ou résident permanent)",
-  residenceHistoryText:
-    "<strong>historique de résidence</strong> (nombre d'années vécues au Canada)",
+  legalStatusText: '<strong>statut légal</strong>',
+  residenceHistoryText: '<strong>historique de résidence</strong>',
   maritalStatusText: '<strong>état matrimonial</strong>',
-  partnerText:
-    '<strong>partenaire</strong> (revenu, statut légal et historique de résidence), le cas échéant',
+  partnerText: '<strong>partenaire</strong>, le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
