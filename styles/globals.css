@@ -196,7 +196,7 @@
   .summary-link a {
     @apply text-default-text underline;
     display: inline;
-    background: url('/openNewTab.svg') no-repeat right bottom;
+    background: url('/openNewTab.svg') no-repeat right;
     padding-right: 20px;
   }
 
