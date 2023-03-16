@@ -1,4 +1,3 @@
-import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 import Image from 'next/image'
 import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
@@ -88,16 +87,19 @@ export const BenefitCard: React.VFC<{
               <div>
                 <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
               </div>
-              <div className="pl-5 w-full">
+              <div className="pl-5 w-full block">
                 <span
+                  className="ds-font-body block ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
                   data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}:${action}`}
                 >
-                  <DSLink
+                  <a
                     id={`${benefitKey}Link${index}`}
                     href={url}
-                    text={text}
                     target="_blank"
-                  />
+                    rel="noreferrer"
+                  >
+                    {text}
+                  </a>
                 </span>
               </div>
             </div>
