@@ -196,8 +196,8 @@
   .summary-link a {
     @apply text-default-text underline;
     display: inline;
-    background: url('/openNewTab.svg') no-repeat right bottom;
-    padding-right: 20px;
+    background: url('/openNewTab.svg') no-repeat right;
+    padding-right: 18px;
   }
 
   .is-sticky {
@@ -240,8 +240,8 @@
   #afsLink1,
   a.generatedLink {
     display: inline;
-    background: url('/openNewTab.svg') no-repeat right bottom;
-    padding-right: 20px;
+    background: url('/openNewTab.svg') no-repeat right;
+    padding-right: 18px;
     text-decoration-line: underline;
     --tw-text-opacity: 1;
     color: rgb(40 65 98 / var(--tw-text-opacity));
