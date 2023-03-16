@@ -197,7 +197,7 @@
     @apply text-default-text underline;
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
-    padding-right: 20px;
+    padding-right: 18px;
   }
 
   .is-sticky {
