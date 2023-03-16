@@ -163,7 +163,7 @@ describe('field requirements analysis: conditional fields', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
-      invSeparated: false, //added missing property
+      invSeparated: undefined, //added missing property
     })
 
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
