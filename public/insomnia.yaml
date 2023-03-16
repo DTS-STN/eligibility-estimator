@@ -79,11 +79,6 @@ resources:
         value: '40'
         id: pair_123d63271caa497d91ff48b3b56e1662
         description: ''
-      - name: partnerEverLivedSocialCountry
-        disabled: false
-        value: 'true'
-        id: pair_4ef870a388ea4b608bfed6b7a227b303
-        description: ''
       - name: _language
         disabled: false
         value: EN
@@ -185,7 +180,6 @@ resources:
               - $ref: '#/components/parameters/partnerLegalStatus'
               - $ref: '#/components/parameters/partnerLivedOutsideCanada'
               - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
-              - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
             responses:
               '200':
                 $ref: '#/components/responses/200'
@@ -217,7 +211,6 @@ resources:
                 - partnerLegalStatus
                 - partnerLivedOutsideCanada
                 - partnerYearsInCanadaSince18
-                - partnerEverLivedSocialCountry
 
           ResultKey:
             type: string
@@ -670,15 +663,6 @@ resources:
               maximum: 100
             allowEmptyValue: false
 
-          partnerEverLivedSocialCountry:
-            name: partnerEverLivedSocialCountry
-            in: query
-            description: Has the partner ever lived in a country with a social agreement? [link of countries to be included]
-            required: false
-            example: true
-            schema:
-              type: boolean
-            allowEmptyValue: false
     contentType: yaml
     _type: api_spec
   - _id: env_env_e85c84355a7e428ff3e7002e5d1e8146fed429b0_sub

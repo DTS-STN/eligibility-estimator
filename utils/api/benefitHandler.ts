@@ -161,10 +161,10 @@ export class BenefitHandler {
       yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
-      everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
       ),
+      everLivedSocialCountry: false, // required by ProcessedInput
       invSeparated: this.rawInput.invSeparated,
     }
 
@@ -197,14 +197,6 @@ export class BenefitHandler {
     }
     if (this.input.client.income.clientAvailable) {
       requiredFields.push(FieldKey.INCOME)
-    }
-    if (
-      (this.input.client.livingCountry.canada &&
-        this.input.client.yearsInCanadaSince18 < 10) ||
-      (!this.input.client.livingCountry.canada &&
-        this.input.client.yearsInCanadaSince18 < 20)
-    ) {
-      requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
       //logic is missing, need to be implemented
@@ -252,14 +244,6 @@ export class BenefitHandler {
 
       if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
-      }
-      if (
-        (this.input.partner.livingCountry.canada &&
-          this.input.partner.yearsInCanadaSince18 < 10) ||
-        (!this.input.partner.livingCountry.canada &&
-          this.input.partner.yearsInCanadaSince18 < 20)
-      ) {
-        requiredFields.push(FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY)
       }
     }
 
@@ -1017,8 +1001,8 @@ export class BenefitHandler {
       yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
-      everLivedSocialCountry: this.rawInput.partnerEverLivedSocialCountry,
       partnerBenefitStatus: this.input.partner.partnerBenefitStatus,
+      everLivedSocialCountry: false, //required by ProcessedInput
       invSeparated: this.rawInput.invSeparated,
     }
 

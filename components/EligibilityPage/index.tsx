@@ -349,11 +349,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     let messageBody = ''
     if (field.key === 'partnerLegalStatus' && field.value === LegalStatus.NO) {
       messageBody = tsln.partnerLegalStatusNotEligible
-    } else if (
-      field.key === FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY &&
-      field.value === 'false'
-    ) {
-      messageBody = tsln.partnerYearsLivingCanadaNotEligible
     } else {
       return ''
     }
