@@ -161,10 +161,10 @@ export class BenefitHandler {
       yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
+      everLivedSocialCountry: false, // required by ProcessedInput
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
       ),
-      everLivedSocialCountry: false, // required by ProcessedInput
       invSeparated: this.rawInput.invSeparated,
     }
 
@@ -197,6 +197,14 @@ export class BenefitHandler {
     }
     if (this.input.client.income.clientAvailable) {
       requiredFields.push(FieldKey.INCOME)
+    }
+    if (
+      (this.input.client.livingCountry.canada &&
+        this.input.client.yearsInCanadaSince18 < 10) ||
+      (!this.input.client.livingCountry.canada &&
+        this.input.client.yearsInCanadaSince18 < 20)
+    ) {
+      requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
     if (this.input.client.maritalStatus.partnered) {
       //logic is missing, need to be implemented
@@ -1001,8 +1009,8 @@ export class BenefitHandler {
       yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
-      partnerBenefitStatus: this.input.partner.partnerBenefitStatus,
       everLivedSocialCountry: false, //required by ProcessedInput
+      partnerBenefitStatus: this.input.partner.partnerBenefitStatus,
       invSeparated: this.rawInput.invSeparated,
     }
 
