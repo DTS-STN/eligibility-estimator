@@ -110,7 +110,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             <li dangerouslySetInnerHTML={{ __html: tsln.maritalStatusText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
           </ul>
-          <p className="xs:mt-0 sm:mt-8 xs:pr-3 w-full sm:w-[73%]">
+          <p className="xs:mt-4 sm:mt-12 xs:pr-3 w-full sm:w-[73%]">
             {tsln.youNeedEndingText}
           </p>
           <h2 className="text-xs sm:h2 mt-8 sm:mt-12 mb-2">
