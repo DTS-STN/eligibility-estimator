@@ -13,7 +13,11 @@ import {
 } from '../../../utils/api/definitions/enums'
 
 import { mockGetRequest, mockGetRequestError } from './factory'
-import { expectAfsEligible, getErrorDetails } from './expectUtils'
+import {
+  expectAfsEligible,
+  getErrorDetails,
+  partnerUndefined,
+} from './expectUtils'
 
 describe('EE Sanity Test Scenarios:', () => {
   /* SAN-OAS-01
@@ -300,5 +304,58 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultReason.AGE
     )
     expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+  })
+
+  /*
+    SAN-GIS-S-01
+    client: 
+      - age: 68
+      - delayOAS: 5
+      - income: 2000
+      - Country of Residence: Canada 
+      - years resided in Canada: 40
+      - Legal Status: eligible
+      - marital status: windowed
+  */
+  it('should pass the sanity test - SAN-GIS-S-01', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 2000, // personal income
+      age: 68,
+      oasDefer: true,
+      oasAge: 70,
+      maritalStatus: MaritalStatus.WIDOWED,
+      invSeparated: undefined,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: false,
+      yearsInCanadaSince18: 40,
+      everLivedSocialCountry: false,
+      ...partnerUndefined,
+    })
+
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_65_TO_69
+    )
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('935.08')
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('943.96')
+
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
+
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.afs.entitlement.result).toEqual(0)
   })
 })
