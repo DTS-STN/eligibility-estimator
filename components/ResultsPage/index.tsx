@@ -18,16 +18,6 @@ import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
 import { Translations, getTranslations } from '../../i18n/api'
 
-// get the link text by current summary state
-const getEligibleLinkText = (
-  summary: SummaryState,
-  tsln: WebTranslations
-): string => {
-  return summary !== SummaryState.AVAILABLE_INELIGIBLE
-    ? tsln.resultsPage.youMayBeEligible
-    : tsln.resultsPage.youAreNotEligible
-}
-
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
   tsln: WebTranslations
@@ -75,10 +65,6 @@ const ResultsPage: React.VFC<{
     text: string
     url: string
   }[] = [
-    {
-      text: getEligibleLinkText(summary.state, tsln),
-      url: '#eligible',
-    },
     {
       text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
       url: '#estimated',
@@ -131,12 +117,12 @@ const ResultsPage: React.VFC<{
             />
           )}
         </div>
+
         <div className="col-span-1 row-span-2">
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
-        <div className="col-span-2 row-span-1">
-          <hr className="my-12 border border-[#BBBFC5]" />
 
+        <div className="col-span-2 row-span-1">
           <BenefitCards
             results={resultsArray}
             partnerResults={partnerResultsArray}

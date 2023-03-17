@@ -110,6 +110,8 @@ export type WebTranslations = {
     yourEstimatedTotal: string
     basedOnYourInfoTotal: string
     basedOnYourInfoAndIncomeTotal: string
+    from: string
+    total: string
     nextSteps: string
     youMayNotBeEligible: string
     noAnswersFound: string
