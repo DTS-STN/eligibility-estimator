@@ -27,6 +27,10 @@ export const MayBeEligible: React.VFC<{
     return benefitText
   }
 
+  // Do nothing if eligible
+  if (isEligible) return null
+
+  // Displays only when not eligible
   return (
     <>
       <h2 id="eligible" className="h2 mt-8">
