@@ -28,14 +28,15 @@ export const EstimatedTotal: React.VFC<{
 
   const headerSentence =
     summary.entitlementSum != 0
-      ? tsln.resultsPage.yourEstimatedTotal +
+      ? <Image src="/money.png" alt="" width={30} height={30} /> +
+        tsln.resultsPage.yourEstimatedTotal +
         numberToStringCurrency(summary.entitlementSum, language)
-      : tsln.resultsPage.yourEstimatedNoIncome
+      : <Image src="/green-check-mark.svg" alt="" width={30} height={30} /> +
+        tsln.resultsPage.yourEstimatedNoIncome
 
   return (
     <>
       <h2 id="estimated" className="h2 mt-12">
-        <Image src="/money.png" alt="" width={30} height={30} />{' '}
         {headerSentence}
       </h2>
 
