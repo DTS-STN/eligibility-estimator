@@ -49,7 +49,8 @@ const en: WebTranslations = {
   headerWhatToKnow: "What you'll need",
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
-  estimatorIncludeQuestionText: "You'll need information about your:",
+  estimatorIncludeQuestionText:
+    'The estimator will ask you questions about your:',
   ageText: '<strong>age</strong>',
   netIncomeText: '<strong>net income</strong>',
   legalStatusText: '<strong>legal status</strong>',
