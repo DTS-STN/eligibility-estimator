@@ -128,11 +128,13 @@ const en: WebTranslations = {
       apiEn.links.SC
     )} for more information.`,
     yourEstimatedTotal: 'Your estimated monthly total is ',
-    basedOnYourInfoTotal: 'Based on the information, you could get:',
-    basedOnYourInfoAndIncomeTotal:
-      'Based on the information, you could get: <strong>{AMOUNT}</strong> per month. However, this amount may be lower or higher depending on your income.',
-    from: ' from the ',
+    yourEstimatedNoIncome: "You're likely eligible",
+    basedOnYourInfoTotal: 'Based on your information, you could get:',
+    basedOnYourInfoAndIncomeTotal: 'Based on your information, you could get:',
+    from: ' from ',
     total: 'Your total monthly amount is ',
+    ifIncomeNotProvided:
+      'However, this amount may be lower or higher depending on your income.',
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',

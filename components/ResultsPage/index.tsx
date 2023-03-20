@@ -22,13 +22,14 @@ const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
   tsln: WebTranslations
 ): string => {
-  if (entitlementSum !== 0) {
+  if (entitlementSum > 0) {
     return `${tsln.resultsPage.yourEstimatedTotal}${numberToStringCurrency(
       entitlementSum,
       tsln._language
     )}`
+  } else {
+    return `${tsln.resultsPage.yourEstimatedNoIncome}`
   }
-  return ''
 }
 
 const getEligibility = (
@@ -110,7 +111,7 @@ const ResultsPage: React.VFC<{
 
           <MayBeEligible resultsEligible={resultsEligible} />
 
-          {resultsEligible.length > 0 && summary.entitlementSum > 0 && (
+          {resultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
               summary={summary}
