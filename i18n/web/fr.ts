@@ -129,8 +129,8 @@ const fr: WebTranslations = {
     basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
       apiFr.links.SC
     )} pour plus d'informations.`,
-    yourEstimatedTotal: 'Votre total mensuel estimé est ',
-    yourEstimatedNoIncome: 'Vous êtes probablement admissible',
+    yourEstimatedTotal: ' Votre total mensuel estimé est ',
+    yourEstimatedNoIncome: ' Vous êtes probablement admissible',
     basedOnYourInfoTotal: 'Selon vos informations, vous pourriez recevoir :',
     basedOnYourInfoAndIncomeTotal:
       'Selon vos informations, vous pourriez recevoir :',
