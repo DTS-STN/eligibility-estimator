@@ -1,32 +1,39 @@
 {
-  "lastUpdatedYear": 2021,
-  "lastUpdatedQuarter": "January to March 2023",
-  "renewalYearGIS": 2022,
+  "lastupdatedYear": "2021",
+  "lastupdatedQuarter": "April to June 2023",
+  "renewalYearGIS": "2022",
   "oas": {
-    "amount": 687.56,
-    "amount75": 756.32,
-    "incomeLimit": 129757,
-    "incomeLimit75": 129757,
-    "clawbackIncomeLimit": 79845
+    "average": "691.00",
+    "average75": "760.10",
+    "maximum": "129,757",
+    "maximum75": "129,757",
+    "clawback": "79,845"
   },
   "gis": {
-    "singleAmount": 1026.96,
-    "singleIncomeLimit": 20832,
-    "spouseOasAmount": 618.15,
-    "spouseOasIncomeLimit": 27552,
-    "spouseNoOasAmount": 1026.96,
-    "spouseNoOasIncomeLimit": 49920,
-    "spouseAlwAmount": 618.15,
-    "spouseAlwIncomeLimit": 38592
+    "single-amount": "1,032.10",
+    "single-limit": "20,952",
+    "spouse-oas-amount": "621.25",
+    "spouse-oas-limit": "27,648",
+    "spouse-no-oas-amount": "1,032.10",
+    "spouse-no-oas-limit": "50,208",
+    "spouse-allowance-amount": "621.25",
+    "spouse-allowance-limit": "38,736"
   },
-  "alw": {
-    "alwAmount": 1305.71,
-    "alwIncomeLimit": 38592,
-    "afsAmount": 1556.51,
-    "afsIncomeLimit": 28080
+  "allowance": {
+    "spouse-gis-amount": "1,312.25",
+    "spouse-gis-limit": "38,736",
+    "survivor-amount": "1,564.30",
+    "survivor-limit": "28,224"
   },
-  "topUp": {
-    "single": 159.07,
-    "married": 45.06
+  "topup": {
+    "single": "159.87",
+    "married": "45.29"
+  },
+  "delay": {
+    "oas66": "740.75",
+    "oas67": "790.50",
+    "oas68": "840.26",
+    "oas69": "890.01",
+    "oas70": "939.76"
   }
 }
