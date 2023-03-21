@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
+import { ResultKey } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -20,6 +20,7 @@ import { Translations, getTranslations } from '../../i18n/api'
 
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
+  resultsEligible: BenefitResult[],
   tsln: WebTranslations
 ): string => {
   if (entitlementSum > 0) {
@@ -27,6 +28,8 @@ const getEstimatedMonthlyTotalLinkText = (
       entitlementSum,
       tsln._language
     )}`
+  } else if (resultsEligible.length <= 0) {
+    return `${tsln.resultsPage.youAreNotEligible}`
   } else {
     return `${tsln.resultsPage.yourEstimatedNoIncome}`
   }
@@ -56,18 +59,32 @@ const ResultsPage: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
   )
+
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
   )
+
+  console.log('summary', summary)
+  const resultsEligible: BenefitResult[] = resultsArray.filter(
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+  )
+
   let listLinks: {
     text: string
     url: string
   }[] = [
     {
-      text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
+      text: getEstimatedMonthlyTotalLinkText(
+        summary.entitlementSum,
+        resultsEligible,
+        tsln
+      ),
       url: '#estimated',
     },
     {
@@ -94,12 +111,6 @@ const ResultsPage: React.VFC<{
 
   // filtered out the link item which text is empty.
   listLinks = listLinks.filter((ll) => ll.text)
-
-  const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) =>
-      result.eligibility?.result === ResultKey.ELIGIBLE ||
-      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-  )
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
