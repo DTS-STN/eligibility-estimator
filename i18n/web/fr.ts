@@ -59,7 +59,7 @@ const fr: WebTranslations = {
   legalStatusText: '<strong>statut légal</strong>',
   residenceHistoryText: '<strong>historique de résidence</strong>',
   maritalStatusText: '<strong>état matrimonial</strong>',
-  partnerText: '<strong>partenaire</strong>, le cas échéant',
+  partnerText: '<strong>conjoint</strong>, le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
