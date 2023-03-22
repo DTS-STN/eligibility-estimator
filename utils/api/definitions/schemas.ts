@@ -80,9 +80,9 @@ export const RequestSchema = Joi.object({
     .valid(...Object.values(LegalStatus))
     .invalid(LegalStatus.NO)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
-  livedOutsideCanada: Joi.boolean()
+  livedOnlyInCanada: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.outsideCanadaEmpty }),
+    .messages({ 'any.required': ValidationErrors.onlyInCanadaEmpty }),
   yearsInCanadaSince18: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
@@ -147,9 +147,9 @@ export const RequestSchema = Joi.object({
       'any.required': ValidationErrors.partnerLegalStatusNotSelected,
     })
     .valid(...Object.values(LegalStatus)),
-  partnerLivedOutsideCanada: Joi.boolean()
+  partnerLivedOnlyInCanada: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.partnerOutsideCanadaEmpty }),
+    .messages({ 'any.required': ValidationErrors.partnerOnlyInCanadaEmpty }),
   partnerYearsInCanadaSince18: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })

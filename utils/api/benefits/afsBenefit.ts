@@ -41,7 +41,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
     const meetsReqLegal = this.input.legalStatus.canadian
     const livingCanada = this.input.livingCountry.canada
-    const liveOutsideCanadaMoreThanHalfYear = this.input.livedOutsideCanada
+    const liveOnlyInCanadaMoreThanHalfYear = this.input.livedOnlyInCanada
 
     // main checks
     // if not windowed
@@ -83,7 +83,7 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
       }
     }
     //check residency history
-    else if (!livingCanada && liveOutsideCanadaMoreThanHalfYear) {
+    else if (!livingCanada && !liveOnlyInCanadaMoreThanHalfYear) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.LIVING_COUNTRY,

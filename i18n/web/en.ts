@@ -172,10 +172,10 @@ const en: WebTranslations = {
       'Please indicate if your partner has legal status in Canada.',
     [ValidationErrors.partnerBenefitStatusEmpty]:
       'Please indicate if your partner receives the Old Age Security pension.',
-    [ValidationErrors.outsideCanadaEmpty]:
-      "Please indicate if you've lived outside of Canada for longer than 6 months.",
-    [ValidationErrors.partnerOutsideCanadaEmpty]:
-      'Please indicate if your partner has lived outside of Canada for longer than 6 months.',
+    [ValidationErrors.onlyInCanadaEmpty]:
+      "Please indicate if you've only lived in Canada.",
+    [ValidationErrors.partnerOnlyInCanadaEmpty]:
+      'Please indicate if your partner has only lived in Canada.',
     [ValidationErrors.socialCountryEmpty]:
       "Please indicate if you've ever lived in a country with an established social security agreement with Canada.",
     [ValidationErrors.partnerSocialCountryEmpty]:

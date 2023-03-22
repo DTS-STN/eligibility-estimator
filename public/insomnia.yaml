@@ -33,9 +33,9 @@ resources:
         disabled: false
         value: canadianCitizen
         id: pair_c9d0beae8e8146919a4da6a722ea0157
-      - name: livedOutsideCanada
+      - name: livedOnlyInCanada
         disabled: false
-        value: 'false'
+        value: 'true'
         id: pair_98766dee942443a082abebe796f9692a
       - name: yearsInCanadaSince18
         disabled: true
@@ -69,9 +69,9 @@ resources:
         value: canadianCitizen
         id: pair_d4dc755da0d04758a5040ba154b16687
         description: ''
-      - name: partnerLivedOutsideCanada
+      - name: partnerLivedOnlyInCanada
         disabled: false
-        value: 'false'
+        value: 'true'
         id: pair_530a2572ff674192860e5a81fe42fb2d
         description: ''
       - name: partnerYearsInCanadaSince18
@@ -175,7 +175,7 @@ resources:
               - $ref: '#/components/parameters/maritalStatus'
               - $ref: '#/components/parameters/livingCountry'
               - $ref: '#/components/parameters/legalStatus'
-              - $ref: '#/components/parameters/livedOutsideCanada'
+              - $ref: '#/components/parameters/livedOnlyInCanada'
               - $ref: '#/components/parameters/yearsInCanadaSince18'
               - $ref: '#/components/parameters/everLivedSocialCountry'
               - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -183,7 +183,7 @@ resources:
               - $ref: '#/components/parameters/partnerAge'
               - $ref: '#/components/parameters/partnerLivingCountry'
               - $ref: '#/components/parameters/partnerLegalStatus'
-              - $ref: '#/components/parameters/partnerLivedOutsideCanada'
+              - $ref: '#/components/parameters/partnerLivedOnlyInCanada'
               - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
               - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
             responses:
@@ -207,7 +207,7 @@ resources:
                 - maritalStatus
                 - livingCountry
                 - legalStatus
-                - livedOutsideCanada
+                - livedOnlyInCanada
                 - yearsInCanadaSince18
                 - everLivedSocialCountry
                 - partnerBenefitStatus
@@ -215,7 +215,7 @@ resources:
                 - partnerAge
                 - partnerLivingCountry
                 - partnerLegalStatus
-                - partnerLivedOutsideCanada
+                - partnerLivedOnlyInCanada
                 - partnerYearsInCanadaSince18
                 - partnerEverLivedSocialCountry
 
@@ -534,10 +534,10 @@ resources:
               description: The current legal status of the client.
             allowEmptyValue: false
 
-          livedOutsideCanada:
-            name: livedOutsideCanada
+          livedOnlyInCanada:
+            name: livedOnlyInCanada
             in: query
-            description: Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?
+            description: Since the age of 18 years old, have you lived only in Canada?
             required: false
             example: false
             schema:
@@ -644,10 +644,10 @@ resources:
               description: The current legal status of the partner.
             allowEmptyValue: false
 
-          partnerLivedOutsideCanada:
-            name: partnerLivedOutsideCanada
+          partnerLivedOnlyInCanada:
+            name: partnerLivedOnlyInCanada
             in: query
-            description: Since the age of 18, has your partner lived outside of Canada for longer than 6 months?
+            description: Since the age of 18, has your partner lived only in Canada?
             required: false
             example: false
             schema:

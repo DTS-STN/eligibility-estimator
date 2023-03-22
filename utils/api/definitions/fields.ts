@@ -11,7 +11,7 @@ export enum FieldKey {
   INV_SEPARATED = 'invSeparated',
   LIVING_COUNTRY = 'livingCountry',
   LEGAL_STATUS = 'legalStatus',
-  LIVED_OUTSIDE_CANADA = 'livedOutsideCanada',
+  LIVED_ONLY_IN_CANADA = 'livedOnlyInCanada',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
@@ -20,7 +20,7 @@ export enum FieldKey {
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
-  PARTNER_LIVED_OUTSIDE_CANADA = 'partnerLivedOutsideCanada',
+  PARTNER_LIVED_ONLY_IN_CANADA = 'partnerLivedOnlyInCanada',
   PARTNER_YEARS_IN_CANADA_SINCE_18 = 'partnerYearsInCanadaSince18',
   PARTNER_EVER_LIVED_SOCIAL_COUNTRY = 'partnerEverLivedSocialCountry',
 }
@@ -74,8 +74,8 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.DROPDOWN_SEARCHABLE,
     default: { key: 'CAN', text: 'Canada' },
   },
-  [FieldKey.LIVED_OUTSIDE_CANADA]: {
-    key: FieldKey.LIVED_OUTSIDE_CANADA,
+  [FieldKey.LIVED_ONLY_IN_CANADA]: {
+    key: FieldKey.LIVED_ONLY_IN_CANADA,
     category: { key: FieldCategory.RESIDENCE },
     type: FieldType.RADIO,
   },
@@ -139,9 +139,9 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.DROPDOWN_SEARCHABLE,
     default: { key: 'CAN', text: 'Canada' },
   },
-  [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: {
-    key: FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
-    relatedKey: FieldKey.LIVED_OUTSIDE_CANADA,
+  [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: {
+    key: FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
+    relatedKey: FieldKey.LIVED_ONLY_IN_CANADA,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
   },
