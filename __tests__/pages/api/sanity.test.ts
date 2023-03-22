@@ -50,7 +50,6 @@ describe('EE Sanity Test Scenarios:', () => {
       Partner eligible for GIS but combined income is too high
       Both not eligible for ALW and ALWS
   */
-
   it('should pass the first sanity test - SAN-OAS-01', async () => {
     const res = await mockGetRequest({
       incomeAvailable: true,
@@ -607,11 +606,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerEverLivedSocialCountry: true,
     })
 
-    console.log(res.body.partnerResults.oas)
-    console.log(res.body.partnerResults.gis)
-    console.log(res.body.partnerResults.alw)
-    console.log(res.body.partnerResults.afs)
-
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.eligibility.reason).toEqual(
@@ -825,11 +819,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerYearsInCanadaSince18: 10,
       partnerEverLivedSocialCountry: false,
     })
-
-    console.log(res.body.partnerResults.oas)
-    console.log(res.body.partnerResults.gis)
-    console.log(res.body.partnerResults.alw)
-    console.log(res.body.partnerResults.afs)
 
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -1576,7 +1565,6 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    console.log(res.body.summary)
     expectAlwEligible(res, 1305.71)
     expectAfsMarital(res)
     //partner results
@@ -2178,20 +2166,391 @@ describe('EE Sanity Test Scenarios:', () => {
   /*
     SAN-NI-05
     client: 
+      - age: 68
+      - delayOAS: 4
+      - income: 85000
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 25
+      - Legal Status: yes
+      - marital status: married
+      - inv separated: no
+      - partner benefit: no
+    partner: 
       - age: 64
-      - delayOAS: 0
+      - Legal status: yes
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 30
+  */
+  it('should pass the sanity test - SAN-NI-05', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 85000, // personal income
+      age: 68,
+      oasDefer: true,
+      oasAge: 69,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 25,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: false,
+      partnerIncome: undefined,
+      partnerAge: 64,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: 30,
+      partnerEverLivedSocialCountry: undefined,
+    })
+
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.entitlement.result).toEqual(489.05)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expectAfsMarital(res)
+    //partner results
+    expectOasNotEligible(res, true)
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expectAfsMarital(res)
+  })
+
+  /*
+    SAN-NI-06
+    client: 
+      - age: 68
+      - delayOAS: 3
       - income: not provided
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 35
+      - Legal Status: yes
+      - marital status: married
+      - inv separated: no
+      - partner benefit: no
+    partner: 
+      - age: 56
+      - Legal status: undefined
+      - Country of Residence: undefined
+      - lived outside Canada: undefined
+      - years resided in Canada: undefined
+  */
+
+  it('should pass the sanity test - SAN-NI-06', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: false,
+      income: undefined, // personal income
+      age: 68,
+      oasDefer: true,
+      oasAge: 68,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: false,
+      partnerIncome: undefined,
+      partnerAge: 56,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined,
+      partnerEverLivedSocialCountry: undefined,
+    })
+
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.oas.entitlement.result).toEqual(731.57)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expectAfsMarital(res)
+
+    //partner results
+    expectOasNotEligible(res, true)
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
+    expectAfsMarital(res)
+  })
+
+  /*
+    SAN-NI-07
+    client: 
+      - age: 56
+      - delayOAS: 0
+      - income: 0
       - Country of Residence: Canada
       - lived outside Canada: yes
       - years resided in Canada: 15
       - Legal Status: yes
       - marital status: married
       - inv separated: no
+      - partner benefit: I dont know
+    partner: 
+      - age: 76
+      - income: not provided
+      - Legal status: yes
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 20
+  */
+  it('should pass the sanity test - SAN-NI-07', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 0, // personal income
+      age: 56,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 15,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncomeAvailable: false,
+      partnerIncome: undefined,
+      partnerAge: 76,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 20,
+      partnerEverLivedSocialCountry: undefined,
+    })
+
+    //client results
+    expectOasNotEligible(res)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
+    expect(res.body.results.oas.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.oas.entitlement.result).toEqual(0)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
+    expectAfsMarital(res)
+    //partner results
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.partnerResults.oas.entitlement.result).toEqual(378.16)
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expectAlwTooOld(res, true)
+    expectAfsMarital(res)
+  })
+
+  /*
+    SAN-NI-08
+    client: 
+      - age: 68
+      - delayOAS: 5
+      - income: not provided
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 25
+      - Legal Status: yes
+      - marital status: married
+      - inv separated: no
       - partner benefit: no
     partner: 
-      - age: 78
+      - age: 68
+      - income: not provided
       - Legal status: yes
       - Country of Residence: Canada
       - lived outside Canada: no
+      - years resided in Canada: 40
   */
+  it('should pass the sanity test - SAN-NI-08', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: false,
+      income: undefined, // personal income
+      age: 68,
+      oasDefer: true,
+      oasAge: 70,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 25,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: false,
+      partnerIncome: undefined,
+      partnerAge: 68,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: 40,
+      partnerEverLivedSocialCountry: undefined,
+    })
+
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.results.oas.entitlement.result).toEqual(584.42)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expectAfsMarital(res)
+    //partner results
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.partnerResults.oas.entitlement.result).toEqual(687.56)
+    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expectAlwTooOld(res, true)
+    expectAfsMarital(res)
+  })
+
+  /*
+    SAN-NI-09
+    client: 
+      - age: 78
+      - delayOAS: 1
+      - income: 0
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 35
+      - Legal Status: yes
+      - marital status: married
+      - inv separated: no
+      - partner benefit: no
+    partner: 
+      - age: 78
+      - income: not provided
+      - Legal status: yes
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 30
+  */
+  it('should pass the sanity test - SAN-NI-09', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 0, // personal income
+      age: 78,
+      oasDefer: true,
+      oasAge: 66,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: false,
+      partnerIncome: undefined,
+      partnerAge: 78,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 30,
+      partnerEverLivedSocialCountry: undefined,
+    })
+
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.entitlement.result).toEqual(709.43)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expectAfsMarital(res)
+    //partner results
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expect(res.body.partnerResults.oas.entitlement.result).toEqual(567.24)
+    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expectAlwTooOld(res, true)
+    expectAfsMarital(res)
+  })
 })
