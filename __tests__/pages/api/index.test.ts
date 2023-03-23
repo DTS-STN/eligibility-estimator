@@ -85,6 +85,7 @@ describe('GIS entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     // expectGisEligible(res, 892.99)
   })
@@ -99,6 +100,7 @@ describe('GIS entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     //expectGisEligible(res, 995.99)
   })
@@ -114,6 +116,7 @@ describe('GIS entitlement scenarios', () => {
       partnerIncomeAvailable: true,
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     // expectGisEligible(res, 861.99)
   })
@@ -129,6 +132,7 @@ describe('GIS entitlement scenarios', () => {
       partnerIncomeAvailable: true,
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     // expectGisEligible(res, 326.82)
   })
@@ -144,6 +148,7 @@ describe('GIS entitlement scenarios', () => {
       partnerIncomeAvailable: true,
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     //expectGisEligible(res, 549.82)
   })
@@ -158,6 +163,7 @@ describe('GIS entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     //expectGisEligible(res, 599.53)
   })
@@ -172,6 +178,7 @@ describe('GIS entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.ALW,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     // expectGisEligible(res, 599.53)
   })
@@ -218,7 +225,6 @@ describe('basic Allowance scenarios', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      invSeparated: false,
       partnerAge: 55,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
@@ -246,6 +252,7 @@ describe('Allowance entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     //expectAlwEligible(res, 362.82)
   })
@@ -261,6 +268,7 @@ describe('Allowance entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     //expectAlwEligible(res, 598.65)
   })
@@ -275,6 +283,7 @@ describe('Allowance entitlement scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerAge: undefined, // added missing property
     })
     //expectAlwEligible(res, 1266.36)
   })
@@ -364,7 +373,6 @@ describe('basic Allowance for Survivor scenarios', () => {
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
-      invSeparated: false,
       partnerAge: 55,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
@@ -398,7 +406,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: true,
@@ -422,7 +430,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
@@ -445,7 +453,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
@@ -466,7 +474,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       livingCountry: LivingCountry.NO_AGREEMENT,
-      legalStatus: LegalStatus.CANADIAN_CITIZEN,
+      legalStatus: LegalStatus.YES,
       livedOutsideCanada: true,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
