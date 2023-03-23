@@ -72,7 +72,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: true,
     })
 
     expect(res.status).toEqual(200)
@@ -168,7 +167,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: true,
     })
 
     //client results
@@ -261,7 +259,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 35,
-      partnerEverLivedSocialCountry: true,
     })
 
     //client results
@@ -526,7 +523,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: true,
     })
 
     //client results
@@ -603,7 +599,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: true,
     })
 
     //client results
@@ -713,7 +708,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 20,
-      partnerEverLivedSocialCountry: false,
     })
 
     //client results
@@ -817,7 +811,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 10,
-      partnerEverLivedSocialCountry: false,
     })
 
     //client results
@@ -921,7 +914,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: false,
     })
 
     //client results
@@ -1026,7 +1018,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.NO,
       partnerLivedOutsideCanada: undefined,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1087,7 +1078,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: false,
     })
 
     //client results
@@ -1144,7 +1134,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: undefined,
       partnerLivedOutsideCanada: undefined,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1214,7 +1203,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1281,7 +1269,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1348,7 +1335,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1421,7 +1407,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 25,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1486,7 +1471,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 25,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1555,7 +1539,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 10,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1617,7 +1600,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 35,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1679,7 +1661,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -1742,7 +1723,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 25,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -2144,7 +2124,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -2205,7 +2184,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 30,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -2277,7 +2255,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: undefined,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -2352,7 +2329,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 20,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -2436,7 +2412,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results
@@ -2519,7 +2494,6 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: true,
       partnerYearsInCanadaSince18: 30,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     //client results

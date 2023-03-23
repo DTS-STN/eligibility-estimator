@@ -26,6 +26,6 @@ export const scraperData: ScraperCollection = {
 }
 
 const exportLegalValues =
-  process.env.NODE_ENV === 'test' ? legalValues : legalValuesForTest
+  process.env.NODE_ENV === 'test' ? legalValuesForTest : legalValues
 
 export default exportLegalValues
