@@ -21,12 +21,26 @@ export const EstimatedTotal: React.VFC<{
       ? tsln.resultsPage.basedOnYourInfoAndIncomeTotal
       : tsln.resultsPage.basedOnYourInfoTotal
 
+  const totalSentence =
+    summary.state === SummaryState.AVAILABLE_DEPENDING
+      ? tsln.resultsPage.ifIncomeNotProvided
+      : null
+
+  const headerSentence =
+    summary.entitlementSum != 0
+      ? tsln.resultsPage.yourEstimatedTotal +
+        numberToStringCurrency(summary.entitlementSum, language)
+      : tsln.resultsPage.yourEstimatedNoIncome
+
   return (
     <>
       <h2 id="estimated" className="h2 mt-12">
-        <Image src="/money.png" alt="" width={30} height={30} />{' '}
-        {tsln.resultsPage.yourEstimatedTotal}
-        {numberToStringCurrency(summary.entitlementSum, language)}
+        {summary.entitlementSum != 0 ? (
+          <Image src="/money.png" alt="" width={30} height={30} />
+        ) : (
+          <Image src="/green-check-mark.svg" alt="" width={30} height={30} />
+        )}
+        {headerSentence}
       </h2>
 
       <div>
@@ -46,7 +60,6 @@ export const EstimatedTotal: React.VFC<{
               key={benefit.benefitKey}
               heading={apiTrans.benefit[benefit.benefitKey]}
               result={benefit}
-              showEntitlement={summary.entitlementSum != 0}
             />
           ))}
         </ul>
@@ -57,7 +70,7 @@ export const EstimatedTotal: React.VFC<{
             <strong>
               {numberToStringCurrency(summary.entitlementSum, language)}
             </strong>
-            .
+            . {totalSentence}
           </p>
         )}
       </div>
