@@ -1,32 +1,39 @@
 {
-  "lastUpdatedYear": 2021,
-  "lastUpdatedQuarter": "January to March 2023",
-  "renewalYearGIS": 2022,
+  "lastUpdatedYear": "2021",
+  "lastUpdatedQuarter": "April to June 2023",
+  "renewalYearGIS": "2022",
   "oas": {
-    "amount": 687.56,
-    "amount75": 756.32,
+    "amount": 691.0,
+    "amount75": 760.1,
     "incomeLimit": 129757,
     "incomeLimit75": 129757,
     "clawbackIncomeLimit": 79845
   },
   "gis": {
-    "singleAmount": 1026.96,
-    "singleIncomeLimit": 20832,
-    "spouseOasAmount": 618.15,
-    "spouseOasIncomeLimit": 27552,
-    "spouseNoOasAmount": 1026.96,
-    "spouseNoOasIncomeLimit": 49920,
-    "spouseAlwAmount": 618.15,
-    "spouseAlwIncomeLimit": 38592
+    "singleAmount": 1032.1,
+    "singleIncomeLimit": 20952,
+    "spouseOasAmount": 621.25,
+    "spouseOasIncomeLimit": 27648,
+    "spouseNoOasAmount": 1032.1,
+    "spouseNoOasIncomeLimit": 50208,
+    "spouseAlwAmount": 621.25,
+    "spouseAlwIncomeLimit": 38736
   },
   "alw": {
-    "alwAmount": 1305.71,
-    "alwIncomeLimit": 38592,
-    "afsAmount": 1556.51,
-    "afsIncomeLimit": 28080
+    "alwAmount": 1312.25,
+    "alwIncomeLimit": 38736,
+    "afsAmount": 1564.3,
+    "afsIncomeLimit": 28224
   },
   "topUp": {
-    "single": 159.07,
-    "married": 45.06
+    "single": 159.87,
+    "married": 45.29
+  },
+  "delay": {
+    "oas66": "740.75",
+    "oas67": "790.50",
+    "oas68": "840.26",
+    "oas69": "890.01",
+    "oas70": "939.76"
   }
 }

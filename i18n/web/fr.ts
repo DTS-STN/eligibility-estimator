@@ -59,7 +59,7 @@ const fr: WebTranslations = {
   legalStatusText: '<strong>statut légal</strong>',
   residenceHistoryText: '<strong>historique de résidence</strong>',
   maritalStatusText: '<strong>état matrimonial</strong>',
-  partnerText: '<strong>partenaire</strong>, le cas échéant',
+  partnerText: '<strong>conjoint</strong>, le cas échéant',
   youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
@@ -129,11 +129,15 @@ const fr: WebTranslations = {
     basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
       apiFr.links.SC
     )} pour plus d'informations.`,
-    yourEstimatedTotal: 'Votre total mensuel estimé est de ',
-    basedOnYourInfoTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <strong>{AMOUNT}</strong> par mois.",
+    yourEstimatedTotal: ' Votre total mensuel estimé est ',
+    yourEstimatedNoIncome: ' Vous êtes probablement admissible',
+    basedOnYourInfoTotal: 'Selon vos informations, vous pourriez recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ <strong>{AMOUNT}</strong> par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
+      'Selon vos informations, vous pourriez recevoir :',
+    from: ' de ',
+    total: 'Votre montant total par mois est ',
+    ifIncomeNotProvided:
+      'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:
       'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:

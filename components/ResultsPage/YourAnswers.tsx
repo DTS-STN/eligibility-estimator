@@ -43,9 +43,13 @@ export const YourAnswers: React.VFC<{
       return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
     return (
       <>
-        {inputs.map((input) => {
+        {inputs.map((input, index) => {
+          const showBorder = index != inputs.length - 1
+          const borderStyle = showBorder
+            ? 'py-4 border-b-2 border-info-border'
+            : 'py-4'
           return shouldDisplay(input) ? (
-            <div key={input.key} className="py-4 border-b-2 border-info-border">
+            <div key={input.key} className={borderStyle}>
               <div>{tsln.resultsQuestions[input.key]}</div>
               <div className="grid gap-0 grid-cols-3">
                 <div className="col-span-2">

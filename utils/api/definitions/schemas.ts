@@ -156,9 +156,6 @@ export const RequestSchema = Joi.object({
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.partnerYearsInCanadaMinusAge),
-  partnerEverLivedSocialCountry: Joi.boolean()
-    .required()
-    .messages({ 'any.required': ValidationErrors.partnerSocialCountryEmpty }),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

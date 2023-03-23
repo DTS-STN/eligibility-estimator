@@ -27,11 +27,15 @@ export const MayBeEligible: React.VFC<{
     return benefitText
   }
 
+  // Do nothing if eligible
+  if (isEligible) return null
+
+  // Displays only when not eligible
   return (
     <>
       <h2 id="eligible" className="h2 mt-8">
         <Image
-          src={isEligible ? '/green-check-mark.svg' : '/info.svg'}
+          src={isEligible ? '/green-check-mark.svg' : '/circle-arrow.svg'}
           alt=""
           width={30}
           height={30}

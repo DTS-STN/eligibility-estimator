@@ -72,8 +72,6 @@ const en: Translations = {
       'Since the age of 18, has your partner lived outside of Canada for longer than 6&nbsp;months?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
-    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Has your partner ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
@@ -98,8 +96,6 @@ const en: Translations = {
     [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: 'Partner lived outside Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Years partner lived in Canada',
-    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Partner lived in country with social agreement',
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',

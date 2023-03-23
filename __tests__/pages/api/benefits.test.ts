@@ -270,6 +270,7 @@ describe('consolidated benefit tests: ineligible', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     })
     expectAllIneligible(res)
     expectOasGisTooYoung(res)
@@ -341,6 +342,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      invSeparated: false, //added missing property
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -367,6 +369,7 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -392,6 +395,7 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -419,6 +423,7 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     }
     let res = await mockGetRequest(input)
     expect(res.body.missingFields).toEqual([])
@@ -447,6 +452,7 @@ describe('consolidated benefit tests: max income checks', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -467,6 +473,7 @@ describe('consolidated benefit tests: max income checks', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      invSeparated: false, //added missing property
     }
     let res = await mockGetRequest(input)
     expect(res.body.results.afs.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -604,6 +611,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     })
     expectOasGisEligible(res)
     expectAlwTooOld(res)
@@ -638,6 +646,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, //added missing property
     }
     let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
     let res = await mockGetRequest(inputNoDefer65)
@@ -677,6 +686,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     })
     expectOasEligible(res)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -713,6 +723,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     })
     expectOasGisEligible(
       res,
@@ -747,6 +758,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     })
 
     expectOasGisTooYoung(res)
@@ -796,6 +808,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       ...partnerIncomeZero,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: undefined, // added missing property
     })
 
     expectOasGisTooYoung(res)

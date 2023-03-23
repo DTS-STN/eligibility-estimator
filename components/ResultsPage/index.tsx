@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey, SummaryState } from '../../utils/api/definitions/enums'
+import { ResultKey } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -18,27 +18,21 @@ import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
 import { Translations, getTranslations } from '../../i18n/api'
 
-// get the link text by current summary state
-const getEligibleLinkText = (
-  summary: SummaryState,
-  tsln: WebTranslations
-): string => {
-  return summary !== SummaryState.AVAILABLE_INELIGIBLE
-    ? tsln.resultsPage.youMayBeEligible
-    : tsln.resultsPage.youAreNotEligible
-}
-
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
+  resultsEligible: BenefitResult[],
   tsln: WebTranslations
 ): string => {
-  if (entitlementSum !== 0) {
+  if (entitlementSum > 0) {
     return `${tsln.resultsPage.yourEstimatedTotal}${numberToStringCurrency(
       entitlementSum,
       tsln._language
     )}`
+  } else if (resultsEligible.length <= 0) {
+    return `${tsln.resultsPage.youAreNotEligible}`
+  } else {
+    return `${tsln.resultsPage.yourEstimatedNoIncome}`
   }
-  return ''
 }
 
 const getEligibility = (
@@ -65,22 +59,32 @@ const ResultsPage: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
   )
+
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
   )
+
+  console.log('summary', summary)
+  const resultsEligible: BenefitResult[] = resultsArray.filter(
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+  )
+
   let listLinks: {
     text: string
     url: string
   }[] = [
     {
-      text: getEligibleLinkText(summary.state, tsln),
-      url: '#eligible',
-    },
-    {
-      text: getEstimatedMonthlyTotalLinkText(summary.entitlementSum, tsln),
+      text: getEstimatedMonthlyTotalLinkText(
+        summary.entitlementSum,
+        resultsEligible,
+        tsln
+      ),
       url: '#estimated',
     },
     {
@@ -108,12 +112,6 @@ const ResultsPage: React.VFC<{
   // filtered out the link item which text is empty.
   listLinks = listLinks.filter((ll) => ll.text)
 
-  const resultsEligible: BenefitResult[] = resultsArray.filter(
-    (result) =>
-      result.eligibility?.result === ResultKey.ELIGIBLE ||
-      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-  )
-
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
@@ -124,19 +122,19 @@ const ResultsPage: React.VFC<{
 
           <MayBeEligible resultsEligible={resultsEligible} />
 
-          {resultsEligible.length > 0 && summary.entitlementSum > 0 && (
+          {resultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
               summary={summary}
             />
           )}
         </div>
+
         <div className="col-span-1 row-span-2">
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
-        <div className="col-span-2 row-span-1">
-          <hr className="my-12 border border-[#BBBFC5]" />
 
+        <div className="col-span-2 row-span-1">
           <BenefitCards
             results={resultsArray}
             partnerResults={partnerResultsArray}

@@ -143,10 +143,12 @@ export function numberToStringCurrency(
   const languageCode =
     language === Language.EN ? LanguageCode.EN : LanguageCode.FR
   const rounding = options?.rounding === undefined ? 2 : options.rounding
-  return number.toLocaleString(languageCode, {
-    style: 'currency',
-    currency: 'CAD',
-    currencyDisplay: 'narrowSymbol',
-    minimumFractionDigits: rounding,
-  })
+  return number
+    .toLocaleString(languageCode, {
+      style: 'currency',
+      currency: 'CAD',
+      currencyDisplay: 'narrowSymbol',
+      minimumFractionDigits: rounding,
+    })
+    .replace('.00', '')
 }

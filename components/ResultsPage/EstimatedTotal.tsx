@@ -5,7 +5,7 @@ import { WebTranslations } from '../../i18n/web'
 import { Language, SummaryState } from '../../utils/api/definitions/enums'
 import { BenefitResult, SummaryObject } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
-import { EstimatedTotalRow } from './EstimatedTotalRow'
+import { EstimatedTotalItem } from './EstimatedTotalItem'
 
 export const EstimatedTotal: React.VFC<{
   resultsEligible: BenefitResult[]
@@ -21,12 +21,26 @@ export const EstimatedTotal: React.VFC<{
       ? tsln.resultsPage.basedOnYourInfoAndIncomeTotal
       : tsln.resultsPage.basedOnYourInfoTotal
 
+  const totalSentence =
+    summary.state === SummaryState.AVAILABLE_DEPENDING
+      ? tsln.resultsPage.ifIncomeNotProvided
+      : null
+
+  const headerSentence =
+    summary.entitlementSum != 0
+      ? tsln.resultsPage.yourEstimatedTotal +
+        numberToStringCurrency(summary.entitlementSum, language)
+      : tsln.resultsPage.yourEstimatedNoIncome
+
   return (
     <>
       <h2 id="estimated" className="h2 mt-12">
-        <Image src="/money.png" alt="" width={30} height={30} />{' '}
-        {tsln.resultsPage.yourEstimatedTotal}
-        {numberToStringCurrency(summary.entitlementSum, language)}
+        {summary.entitlementSum != 0 ? (
+          <Image src="/money.png" alt="" width={30} height={30} />
+        ) : (
+          <Image src="/green-check-mark.svg" alt="" width={30} height={30} />
+        )}
+        {headerSentence}
       </h2>
 
       <div>
@@ -39,40 +53,26 @@ export const EstimatedTotal: React.VFC<{
             ),
           }}
         />
-        <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
-        <table id="estimate" className="text-left w-full">
-          <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">
-            <tr>
-              <th scope="col" className="pl-5">
-                {tsln.resultsPage.tableHeader1}
-              </th>
-              <th scope="col" className="pr-5 text-right">
-                {tsln.resultsPage.tableHeader2}
-              </th>
-            </tr>
-          </thead>
 
-          <tbody className="align-top">
-            {resultsEligible.map((benefit) => (
-              <EstimatedTotalRow
-                key={benefit.benefitKey}
-                heading={apiTrans.benefit[benefit.benefitKey]}
-                result={benefit}
-                showEntitlement={summary.entitlementSum != 0}
-              />
-            ))}
-            {summary.entitlementSum != 0 && (
-              <tr className="border border-[#DDDDDD]">
-                <th scope="row" className="pl-5">
-                  {tsln.resultsPage.tableTotalAmount}
-                </th>
-                <td className="text-right min-w-[68px] pr-5">
-                  {numberToStringCurrency(summary.entitlementSum, language)}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <ul className="pl-[35px] ml-[20px] my-2 list-disc text-content">
+          {resultsEligible.map((benefit) => (
+            <EstimatedTotalItem
+              key={benefit.benefitKey}
+              heading={apiTrans.benefit[benefit.benefitKey]}
+              result={benefit}
+            />
+          ))}
+        </ul>
+
+        {summary.entitlementSum != 0 && (
+          <p className="pl-[35px]">
+            {tsln.resultsPage.total}
+            <strong>
+              {numberToStringCurrency(summary.entitlementSum, language)}
+            </strong>
+            . {totalSentence}
+          </p>
+        )}
       </div>
     </>
   )

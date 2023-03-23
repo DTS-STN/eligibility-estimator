@@ -49,7 +49,8 @@ const en: WebTranslations = {
   headerWhatToKnow: "What you'll need",
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
-  estimatorIncludeQuestionText: "You'll need information about your:",
+  estimatorIncludeQuestionText:
+    'The estimator will ask you questions about your:',
   ageText: '<strong>age</strong>',
   netIncomeText: '<strong>net income</strong>',
   legalStatusText: '<strong>legal status</strong>',
@@ -127,11 +128,14 @@ const en: WebTranslations = {
     basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or ${generateLink(
       apiEn.links.SC
     )} for more information.`,
-    yourEstimatedTotal: 'Your estimated monthly total is ',
-    basedOnYourInfoTotal:
-      "Based on the information you've provided, you should expect to receive around <strong>{AMOUNT}</strong> per month.",
-    basedOnYourInfoAndIncomeTotal:
-      "Based on the information you've provided, you should expect to receive around <strong>{AMOUNT}</strong> per month. However, this amount may be lower or higher depending on your income.",
+    yourEstimatedTotal: ' Your estimated monthly total is ',
+    yourEstimatedNoIncome: " You're likely eligible",
+    basedOnYourInfoTotal: 'Based on your information, you could get:',
+    basedOnYourInfoAndIncomeTotal: 'Based on your information, you could get:',
+    from: ' from ',
+    total: 'Your total monthly amount is ',
+    ifIncomeNotProvided:
+      'However, this amount may be lower or higher depending on your income.',
     nextSteps: 'Next steps for benefits you may be eligible for',
     youMayNotBeEligible: 'Benefits you may not be eligible for',
     noAnswersFound: 'No answers found',

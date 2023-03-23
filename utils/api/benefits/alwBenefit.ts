@@ -107,7 +107,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.AGE,
         detail: this.translations.detail.alwNotEligible,
       }
-    } else if (underAgeReq) {
+    } else if (underAgeReq && meetsReqMarital) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.AGE_YOUNG,
