@@ -77,6 +77,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.LIVED_ONLY_IN_CANADA,
     category: { key: FieldCategory.RESIDENCE },
     type: FieldType.RADIO,
+    default: undefined,
   },
   [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
@@ -143,6 +144,7 @@ export const fieldDefinitions: FieldDefinitions = {
     relatedKey: FieldKey.LIVED_ONLY_IN_CANADA,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
+    default: undefined,
   },
   [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,

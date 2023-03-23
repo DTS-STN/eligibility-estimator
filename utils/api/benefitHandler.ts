@@ -189,7 +189,9 @@ export class BenefitHandler {
       FieldKey.MARITAL_STATUS,
       FieldKey.LIVED_ONLY_IN_CANADA,
     ]
-    if (!this.input.client.livedOnlyInCanada) {
+
+    // default value = undefined
+    if (this.input.client.livedOnlyInCanada === false) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.oasDefer) {
@@ -250,7 +252,8 @@ export class BenefitHandler {
         )
       }
 
-      if (!this.input.partner.livedOnlyInCanada) {
+      // default value = undefined
+      if (this.input.partner.livedOnlyInCanada === false) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
     }
