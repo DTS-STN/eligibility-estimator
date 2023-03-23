@@ -41,7 +41,6 @@ describe('field requirement analysis', () => {
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
@@ -51,7 +50,6 @@ describe('field requirement analysis', () => {
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
-      FieldKey.YEARS_IN_CANADA_SINCE_18,
       FieldKey.MARITAL_STATUS,
     ])
   })
