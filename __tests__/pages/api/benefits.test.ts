@@ -271,7 +271,6 @@ describe('consolidated benefit tests: ineligible', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
     expectAllIneligible(res)
     expectOasGisTooYoung(res)
@@ -617,7 +616,6 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
     expectOasGisEligible(res)
     expectAlwTooOld(res)
@@ -694,7 +692,6 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
     expectOasEligible(res)
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -732,7 +729,6 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
     expectOasGisEligible(
       res,
@@ -768,7 +764,6 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     expectOasGisTooYoung(res)
@@ -819,7 +814,6 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
     })
 
     expectOasGisTooYoung(res)

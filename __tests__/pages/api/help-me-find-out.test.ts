@@ -40,7 +40,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 0,
-      partnerEverLivedSocialCountry: false,
     }
     let res = await mockGetRequest(input)
     expectOasEligible(res)
@@ -71,7 +70,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 20,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expectOasEligible(res)
@@ -102,7 +100,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expectOasEligible(res)
@@ -133,7 +130,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expectOasGisEligible(res)
@@ -158,7 +154,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expectOasGisEligible(res)
@@ -181,7 +176,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
@@ -216,7 +210,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
@@ -246,7 +239,6 @@ describe('Help Me Find Out scenarios', () => {
       partnerLegalStatus: LegalStatus.YES,
       partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
-      partnerEverLivedSocialCountry: undefined,
     }
     let res = await mockGetRequest(input)
     expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)

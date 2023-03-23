@@ -45,7 +45,6 @@ export interface RequestInput {
   partnerLegalStatus: LegalStatus
   partnerLivedOnlyInCanada: boolean
   partnerYearsInCanadaSince18: number
-  partnerEverLivedSocialCountry: boolean
   _language?: Language
 }
 

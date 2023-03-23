@@ -74,8 +74,6 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
-    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Votre conjoint a-t-il déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
@@ -101,8 +99,6 @@ const fr: Translations = {
       'Conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Années où le conjoint a vécu au Canada',
-    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Le partenaire vivait dans un pays avec un accord social',
   },
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',

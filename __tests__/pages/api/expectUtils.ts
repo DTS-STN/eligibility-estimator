@@ -122,7 +122,6 @@ export const partnerUndefined = {
   partnerLegalStatus: undefined,
   partnerLivedOnlyInCanada: undefined,
   partnerYearsInCanadaSince18: undefined,
-  partnerEverLivedSocialCountry: undefined,
 }
 
 export const partnerNoHelpNeeded = {
@@ -130,7 +129,6 @@ export const partnerNoHelpNeeded = {
   partnerLegalStatus: undefined,
   partnerLivedOnlyInCanada: undefined,
   partnerYearsInCanadaSince18: undefined,
-  partnerEverLivedSocialCountry: undefined,
 }
 
 export const partnerIncomeZero = {

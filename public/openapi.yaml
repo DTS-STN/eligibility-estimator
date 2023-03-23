@@ -52,7 +52,6 @@ paths:
         - $ref: '#/components/parameters/partnerLegalStatus'
         - $ref: '#/components/parameters/partnerLivedOnlyInCanada'
         - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
-        - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
       responses:
         '200':
           $ref: '#/components/responses/200'
@@ -87,7 +86,6 @@ components:
           - partnerLegalStatus
           - partnerLivedOnlyInCanada
           - partnerYearsInCanadaSince18
-          - partnerEverLivedSocialCountry
 
     ResultKey:
       type: string
@@ -575,14 +573,4 @@ components:
         type: integer
         description: Years, up to a max of 100.
         maximum: 100
-      allowEmptyValue: false
-
-    partnerEverLivedSocialCountry:
-      name: partnerEverLivedSocialCountry
-      in: query
-      description: Has the partner ever lived in a country with a social agreement? [link of countries to be included]
-      required: false
-      example: true
-      schema:
-        type: boolean
       allowEmptyValue: false
