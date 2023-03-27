@@ -11,6 +11,7 @@ import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
 import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
 import Head from 'next/head'
+import { useSession, signIn } from 'next-auth/react'
 
 const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
 const AA_BUTTON_CLICK_ATTRIBUTE =
@@ -21,6 +22,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
+  const { data: session } = useSession()
 
   // useEffect(() => {
   //   // only run on mount on the client
@@ -41,6 +43,12 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (session) {
+    console.log('signed in')
+  } else {
+    console.log('not signed in')
+  }
 
   return (
     <>
