@@ -1076,11 +1076,19 @@ export class BenefitHandler {
         ) {
           clawbackValue =
             this.benefitResults[individualBenefits][key].entitlement.clawback
-          newMainText =
-            clawbackValue > 0 && result.cardDetail.mainText
-              ? result.cardDetail.mainText +
-                `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
-              : result.cardDetail.mainText
+          if (livedOutsideCanada) {
+            newMainText =
+              clawbackValue > 0 && result.cardDetail.mainText
+                ? result.cardDetail.mainText +
+                  `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
+                : result.cardDetail.mainText
+          } else {
+            newMainText =
+              clawbackValue > 0 && result.cardDetail.mainText
+                ? result.cardDetail.mainText +
+                  `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
+                : result.cardDetail.mainText
+          }
         }
 
         // process card main text

@@ -339,8 +339,11 @@ const en: Translations = {
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
-    oasClawback:
+    oasClawbackInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
+    oasClawbackNotInCanada:
+      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
+
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",

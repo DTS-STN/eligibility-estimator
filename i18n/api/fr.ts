@@ -346,7 +346,9 @@ const fr: Translations = {
       "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
     expectToReceive:
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
-    oasClawback:
+    oasClawbackInCanada:
+      'Parce que votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
+    oasClawbackNotInCanada:
       'Parce que votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, nous avons enlevé {OAS_CLAWBACK} de votre montant mensuel. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
     oas: {
       eligibleIfIncomeIsLessThan:
