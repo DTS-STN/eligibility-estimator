@@ -151,5 +151,5 @@ export function numberToStringCurrency(
       minimumFractionDigits: rounding,
     })
     .replace('.00', '')
-    .replace(/,00\s/, '')
+    .replace(/,00\s/, '\xa0')
 }
