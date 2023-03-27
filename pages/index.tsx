@@ -3,6 +3,7 @@ import {
   ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -20,7 +21,18 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
   const router = useRouter()
+  const session = useSession()
   const tsln = useTranslation<WebTranslations>()
+
+  useEffect(() => {
+    if (session.status === 'unauthenticated') router.replace('/auth/signin')
+  }, [session.status])
+
+  useEffect(() => {
+    if (session.status === 'loading') {
+      return null
+    }
+  }, [session.status])
 
   // useEffect(() => {
   //   // only run on mount on the client
