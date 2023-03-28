@@ -162,7 +162,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const monthlyClawbackAmount = roundToTwo(this.clawbackAmount / 12)
 
     // monthly entitlement amount minus monthly clawback amount
-    const resultCurrent = this.currentEntitlementAmount - monthlyClawbackAmount
+    // const resultCurrent = this.currentEntitlementAmount - monthlyClawbackAmount  //Task 114098 original code
+    // task 114098 do not substract the amount from the benefit amount
+    const resultCurrent = this.currentEntitlementAmount //remove this line when a correct recovery process is in place.
+
     if (resultCurrent <= 0) {
       return {
         result: 0,

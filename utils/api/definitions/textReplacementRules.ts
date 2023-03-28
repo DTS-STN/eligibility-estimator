@@ -82,6 +82,8 @@ export const textReplacementRules: TextReplacementRules = {
     generateLink(handler.translations.links.oasRecoveryTaxInline),
   LINK_LEARN_ABOUT_RECOVERY_TAX: (handler) =>
     generateLink(handler.translations.links.oasLearnAboutRecoveryTax),
+  LINK_NON_RESIDENT_TAX: (handler) =>
+    generateLink(handler.translations.links.oasNonResidentTax),
   PARTNER_BENEFIT_AMOUNT: (handler, benefitResult) =>
     `<strong>${numberToStringCurrency(
       benefitResult.entitlement.result,
