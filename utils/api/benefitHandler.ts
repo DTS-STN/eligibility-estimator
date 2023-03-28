@@ -1076,7 +1076,8 @@ export class BenefitHandler {
         ) {
           clawbackValue =
             this.benefitResults[individualBenefits][key].entitlement.clawback
-          if (livedOutsideCanada) {
+
+          if (this.input.client.livingCountry.canada) {
             newMainText =
               clawbackValue > 0 && result.cardDetail.mainText
                 ? result.cardDetail.mainText +
