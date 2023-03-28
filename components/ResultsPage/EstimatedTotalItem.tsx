@@ -12,19 +12,19 @@ export const EstimatedTotalItem: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
 
   /*
-    returns benefit name with proper article
+    returns benefit name with from/de and proper article. ... french nuances.
   */
-  function displayBenefitName(benefitName: string): string {
+  function displayBenefitName(benefitName: string, result: number): string {
     if (tsln._language === Language.EN) {
-      return `the ${benefitName}`
+      return result > 0 ? ` from the ${benefitName}` : ` the ${benefitName}`
     } else {
       switch (benefitName) {
         case tsln.oas:
-          return `la ${benefitName}`
+          return result > 0 ? ` de la ${benefitName}` : ` la ${benefitName}`
         case tsln.gis:
-          return `le ${benefitName}`
+          return result > 0 ? ` du ${benefitName}` : ` le ${benefitName}`
         default:
-          return `l'${benefitName}`
+          return result > 0 ? ` de l'${benefitName}` : ` l'${benefitName}`
       }
     }
   }
@@ -44,9 +44,7 @@ export const EstimatedTotalItem: React.VFC<{
           : ''}
       </strong>
 
-      {result.entitlement.result > 0 ? tsln.resultsPage.from : ''}
-
-      {displayBenefitName(heading)}
+      {displayBenefitName(heading, result.entitlement.result)}
     </li>
   )
 }
