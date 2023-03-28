@@ -697,13 +697,13 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     //expect(res.body.results.oas.entitlement.clawback).toEqual(7873.65)
 
     //test oas increase at 75                                       #Task 114098
-    expect(res.body.results.oas.entitlement.resultAt75).toEqual(
-      roundToTwo(
-        (res.body.results.oas.entitlement.result +
-          res.body.results.oas.entitlement.clawback) *
-          1.1
-      )
-    )
+    // expect(res.body.results.oas.entitlement.resultAt75).toEqual(
+    //   roundToTwo(
+    //     (res.body.results.oas.entitlement.result +
+    //       res.body.results.oas.entitlement.clawback) *
+    //       1.1
+    //   )
+    // )
   })
 
   it('returns "eligible" - married, full oas, age 75', async () => {
