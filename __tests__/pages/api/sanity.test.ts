@@ -77,7 +77,8 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.status).toEqual(200)
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('353.60')
+    //expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('353.60') //with tax recovery #114098
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('418.04') //without tax recovery
     expect(res.body.results.oas.entitlement.clawback).toEqual(64.44)
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -171,7 +172,8 @@ describe('EE Sanity Test Scenarios:', () => {
 
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('124.64')
+    //expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('124.64') //with tax recovery #114098
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('189.08') //without tax recovery #114098
     expect(res.body.results.oas.entitlement.clawback).toEqual(64.44)
 
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
@@ -289,9 +291,10 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
       ResultKey.ELIGIBLE
     )
+    //expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual('37.88') //with tax recovery #114098
     expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '37.88'
-    )
+      '661.78'
+    ) //without tax recovery #114098
     expect(res.body.partnerResults.gis.eligibility.result).toEqual(
       ResultKey.ELIGIBLE
     )
@@ -2188,7 +2191,8 @@ describe('EE Sanity Test Scenarios:', () => {
 
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(489.05)
+    //expect(res.body.results.oas.entitlement.result).toEqual(489.05) // with Recovery Tax #114098
+    expect(res.body.results.oas.entitlement.result).toEqual(553.49) // without Recovery Tax #114098
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INCOME_DEPENDENT
     )
