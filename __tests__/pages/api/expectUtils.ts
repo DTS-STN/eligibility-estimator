@@ -73,7 +73,8 @@ export function expectOasEligible(
     entitlement = legalValues.oas.amount
   if (entitlement)
     expect(results.oas.entitlement.result).toEqual(
-      entitlement - results.oas.entitlement.clawback
+      //entitlement - results.oas.entitlement.clawback //with clawback #114098
+      entitlement //without clawback #114098
     )
 }
 

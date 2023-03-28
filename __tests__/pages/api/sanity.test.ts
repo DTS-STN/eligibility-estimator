@@ -104,9 +104,10 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
       ResultKey.ELIGIBLE
     )
+    //expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual('629.38') //with tax recovery #114098
     expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '629.38'
-    )
+      '756.32'
+    ) //without tax recovery
     expect(res.body.partnerResults.gis.eligibility.result).toEqual(
       ResultKey.ELIGIBLE
     )
@@ -197,9 +198,10 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
       ResultKey.ELIGIBLE
     )
+    //expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual('560.62') //with tax recovery #114098
     expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '560.62'
-    )
+      '687.56'
+    ) //without tax recovery #114098
     expect(res.body.partnerResults.gis.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
