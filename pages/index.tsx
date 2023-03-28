@@ -25,7 +25,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
-    if (session.status === 'unauthenticated') router.replace('/auth/login')
+    if (session.status === 'unauthenticated') router.replace('auth/login')
   }, [session.status])
 
   // useEffect(() => {
@@ -51,9 +51,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   //
   // load page until ready and authenticated
   //
-  if (session.status === 'loading') {
+  if (session.status !== 'authenticated') {
     return (
       <>
+        <h2 className="h1"> Chargement... </h2>
         <h2 className="h1"> Loading ... </h2>
       </>
     )

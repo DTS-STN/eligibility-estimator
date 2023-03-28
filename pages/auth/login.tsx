@@ -3,10 +3,7 @@ import { FormEventHandler, useState } from 'react'
 import { signIn, useSession } from 'next-auth/react'
 import { Layout } from '../../components/Layout'
 
-const Login: NextPage<{ password: string; nextURL: string }> = ({
-  password,
-  nextURL,
-}) => {
+const Login: NextPage<{}> = ({}) => {
   //
   const [userInfo, setUserInfo] = useState({ username: '', password: '' })
 
@@ -106,13 +103,13 @@ const Login: NextPage<{ password: string; nextURL: string }> = ({
   )
 }
 
-export const getStaticProps = async () => {
-  return {
-    props: {
-      password: process.env.PASSWORD,
-      nextURL: process.env.NEXTAUTH_URL,
-    },
-  }
-}
+// export const getStaticProps = async () => {
+//   return {
+//     props: {
+//       password: process.env.PASSWORD,
+//       nextURL: process.env.NEXTAUTH_URL,
+//     },
+//   }
+// }
 
 export default Login
