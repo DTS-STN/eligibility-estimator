@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSession, signIn } from 'next-auth/react'
 
-export const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { status } = useSession()
 
   useEffect(() => {
@@ -21,3 +21,5 @@ enum AUTH {
   UNAUTHENTICATED = 'unauthenticated',
   AUTHENTICATED = 'authenticated',
 }
+
+export default Auth
