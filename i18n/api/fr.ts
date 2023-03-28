@@ -222,7 +222,7 @@ const fr: Translations = {
       {
         key: MaritalStatus.SINGLE,
         text: 'Célibataire, divorcé ou séparé',
-        shortText: 'Célibataire',
+        shortText: 'Célibataire, divorcé ou séparé',
       },
       {
         key: MaritalStatus.PARTNERED,
