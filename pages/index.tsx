@@ -23,6 +23,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer = window.adobeDataLayer || []
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
+    console.log('ADOBE URL', process.env.ADOBE_ANALYTICS_URL)
     console.log('NEXTAUTH_URL', process.env.NEXTAUTH_URL)
     console.log('NEXT_AUTH_USERNAME', process.env.NEXT_AUTH_USERNAME)
     console.log('NEXT_AUTH_PASSWORD', process.env.NEXT_AUTH_PASSWORD)

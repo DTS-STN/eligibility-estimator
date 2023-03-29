@@ -17,6 +17,7 @@ module.exports = {
     ]
   },
   env: {
+    ADOBE_ANALYTICS_URL: process.env.ADOBE_ANALYTICS_URL,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXT_AUTH_USERNAME: process.env.NEXT_AUTH_USERNAME,
