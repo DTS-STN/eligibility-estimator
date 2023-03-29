@@ -55,7 +55,7 @@ project {
         param("env.CLOUD_SUBSCRIPTION", "%vault:dts-common/data/AZURE_BDM_DEV_SUB!/CLOUD_SUBSCRIPTION%")
         param("env.CLOUD_TENANT-ID", "%vault:dts-common/data/AZURE_BDM_DEV_SUB!/CLOUD_TENANT_ID%")
         param("env.ENVIRONMENT", "")
-        param("env.NEXTAUTH_URL", "")
+        param("env.NEXTAUTH_URL", "env.NEXTAUTH_URL", "%vault:bdm-dev-eligibility-estimator/TEAMCITY!/NEXTAUTH_URL%")
         param("env.NEXT_AUTH_USERNAME", "")
         param("env.NEXT_AUTH_PASSWORD", "")
         param("env.SUB_DOMAIN", "ep-be")
