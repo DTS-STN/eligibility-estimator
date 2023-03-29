@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       authorize(credentials) {
-        console.log(process.env.NEXTAUTH_URL)
+        console.log('Auth file:', process.env.NEXTAUTH_URL)
         const user = { id: '1', name: 'Estimator User' }
         const { username, password } = credentials as {
           username: string
