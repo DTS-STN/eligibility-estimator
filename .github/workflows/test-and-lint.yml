@@ -29,7 +29,6 @@ jobs:
         run: yarn run build
         env:
           ADOBE_ANALYTICS_URL: ${{ secrets.ADOBE_ANALYTICS_URL }}
-          NEXTAUTH_USER: ${{ secrets.NEXTAUTH_USER }}
 
       - name: Lint
         run: yarn run lint
