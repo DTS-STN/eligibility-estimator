@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 import Auth from './Auth'
 
-const PRIVATE_PATHS = ['/', '/eligibility', '/results']
+const PRIVATE_PATHS = []
 console.log('App file:', process.env.NEXTAUTH_URL)
 
 function MyApp({
