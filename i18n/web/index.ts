@@ -111,7 +111,6 @@ export type WebTranslations = {
     yourEstimatedNoIncome: string
     basedOnYourInfoTotal: string
     basedOnYourInfoAndIncomeTotal: string
-    from: string
     total: string
     ifIncomeNotProvided: string
     nextSteps: string

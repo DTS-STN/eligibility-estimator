@@ -4,7 +4,8 @@ import '../styles/globals.css'
 import Auth from './Auth'
 
 const PRIVATE_PATHS = ['/', '/eligibility', '/results']
-console.log(process.env.NEXTAUTH_URL)
+console.log('App file:', process.env.NEXTAUTH_URL)
+
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },

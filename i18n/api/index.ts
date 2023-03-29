@@ -79,7 +79,8 @@ export interface Translations {
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
-    oasClawback: string
+    oasClawbackInCanada: string
+    oasClawbackNotInCanada: string
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string
@@ -151,5 +152,5 @@ export function numberToStringCurrency(
       minimumFractionDigits: rounding,
     })
     .replace('.00', '')
-    .replace(/,00\s/, '')
+    .replace(/,00\s/, '\xa0')
 }

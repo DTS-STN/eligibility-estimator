@@ -125,14 +125,13 @@ const en: WebTranslations = {
       'Based on your information, you may be eligible for the:',
     basedOnYourInfoAndIncomeEligible:
       'Depending on your income and based on your information, you may be eligible for:',
-    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or ${generateLink(
+    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age Security benefits. See below, or ${generateLink(
       apiEn.links.SC
     )} for more information.`,
     yourEstimatedTotal: ' Your estimated monthly total is ',
     yourEstimatedNoIncome: " You're likely eligible",
     basedOnYourInfoTotal: 'Based on your information, you could get:',
     basedOnYourInfoAndIncomeTotal: 'Based on your information, you could get:',
-    from: ' from ',
     total: 'Your total monthly amount is ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',

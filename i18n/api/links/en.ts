@@ -193,4 +193,9 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
     order: -1,
   },
+  oasNonResidentTax: {
+    text: 'non-resident tax',
+    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/before-apply.html',
+    order: -1,
+  },
 }

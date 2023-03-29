@@ -193,4 +193,9 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
     order: -1,
   },
+  oasNonResidentTax: {
+    text: 'impôt des non-résidents',
+    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/rpc-internationales/avant-demande.html',
+    order: -1,
+  },
 }
