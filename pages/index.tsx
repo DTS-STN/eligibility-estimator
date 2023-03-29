@@ -12,8 +12,9 @@ const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
 const AA_BUTTON_CLICK_ATTRIBUTE =
   'ESDC-EDSC:Canadian OAS Benefits Est. Button Click'
 
-const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
+const Home: NextPage<{ adobeAnalyticsUrl: string; nextUser: string }> = ({
   adobeAnalyticsUrl,
+  nextUser,
 }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
@@ -24,6 +25,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
     console.log('TESTING')
+    console.log('ADOBE in INDEX PAGE', process.env.ADOBE_ANALYTICS_URL)
+    console.log('adobeURLasPROP', adobeAnalyticsUrl)
+    console.log('nextUserFromENVVAR', process.env.NEXT_AUTH_USERNAME)
+    console.log('nextUser', nextUser)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -187,6 +192,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,
+      nextUser: process.env.NEXT_AUTH_USERNAME,
     },
   }
 }
