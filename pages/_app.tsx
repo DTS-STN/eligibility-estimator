@@ -1,15 +1,29 @@
 import type { AppProps } from 'next/app'
+import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
-// import Script from 'next/script'
+import Auth from './Auth'
 
-function MyApp({ Component, pageProps }: AppProps) {
+const PRIVATE_PATHS = ['/', '/eligibility', '/results']
+
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+  router: { route },
+}: AppProps) {
+  const AuthRequired = PRIVATE_PATHS.some((path) => route.startsWith(path))
   return (
-    <>
+    <SessionProvider session={session}>
       {/*<Script src="/scripts/adobe.js" />*/}
       {/* the below line appears to crash the page - to investigate if it's even needed at all */}
       {/*<script type="text/javascript">_satellite.pageBottom()</script>*/}
-      <Component {...pageProps} />
-    </>
+      {AuthRequired ? (
+        <Auth>
+          <Component {...pageProps} />
+        </Auth>
+      ) : (
+        <Component {...pageProps} />
+      )}
+    </SessionProvider>
   )
 }
 

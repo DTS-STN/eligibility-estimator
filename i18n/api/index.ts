@@ -79,7 +79,8 @@ export interface Translations {
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
-    oasClawback: string
+    oasClawbackInCanada: string
+    oasClawbackNotInCanada: string
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string

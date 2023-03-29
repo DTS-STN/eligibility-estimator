@@ -26,4 +26,5 @@ export interface LinkDefinitions {
   reasons: { [key in BenefitKey]: Link }
   oasRecoveryTaxInline: Link
   oasLearnAboutRecoveryTax: Link
+  oasNonResidentTax: Link
 }
