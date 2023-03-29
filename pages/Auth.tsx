@@ -3,6 +3,7 @@ import { useSession, signIn } from 'next-auth/react'
 
 const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { status } = useSession()
+  console.log('status', status)
 
   useEffect(() => {
     if (status === AUTH.LOADING) return
