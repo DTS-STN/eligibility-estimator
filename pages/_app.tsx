@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 import Auth from './Auth'
 
-const PRIVATE_PATHS = []
+const PRIVATE_PATHS = ['/', '/eligibility', '/results']
 console.log('App file:', process.env.NEXTAUTH_URL)
 
 function MyApp({
@@ -18,9 +18,7 @@ function MyApp({
       {/* the below line appears to crash the page - to investigate if it's even needed at all */}
       {/*<script type="text/javascript">_satellite.pageBottom()</script>*/}
       {AuthRequired ? (
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
+        <Component {...pageProps} />
       ) : (
         <Component {...pageProps} />
       )}
