@@ -17,9 +17,7 @@ function MyApp({
       {/* the below line appears to crash the page - to investigate if it's even needed at all */}
       {/*<script type="text/javascript">_satellite.pageBottom()</script>*/}
       {AuthRequired ? (
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
+        <Component {...pageProps} />
       ) : (
         <Component {...pageProps} />
       )}
