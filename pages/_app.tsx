@@ -5,6 +5,7 @@ import Auth from './Auth'
 
 const PRIVATE_PATHS = ['/', '/eligibility', '/results']
 console.log('App file:', process.env.NEXTAUTH_URL)
+console.log('ADOBE', process.env.ADOBE_ANALYTICS_URL)
 
 function MyApp({
   Component,
