@@ -4,8 +4,6 @@ import '../styles/globals.css'
 import Auth from './Auth'
 
 const PRIVATE_PATHS = ['/', '/eligibility', '/results']
-console.log('App file:', process.env.NEXTAUTH_URL)
-console.log('ADOBE', process.env.ADOBE_ANALYTICS_URL)
 
 function MyApp({
   Component,
@@ -19,7 +17,9 @@ function MyApp({
       {/* the below line appears to crash the page - to investigate if it's even needed at all */}
       {/*<script type="text/javascript">_satellite.pageBottom()</script>*/}
       {AuthRequired ? (
-        <Component {...pageProps} />
+        <Auth>
+          <Component {...pageProps} />
+        </Auth>
       ) : (
         <Component {...pageProps} />
       )}
