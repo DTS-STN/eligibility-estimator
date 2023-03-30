@@ -4,6 +4,7 @@ import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
+  getMaximumIncomeThreshold,
 } from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
@@ -49,7 +50,9 @@ const fr: WebTranslations = {
   youMayBeEligible: 'Vous pourriez recevoir des prestations de vieillesse si :',
   atLeast60: 'vous avez au moins 60 ans',
   headerWhatToKnow: 'Ce dont vous aurez besoin',
-  haveNetIncomeLess: 'votre revenu net est moins de 133 141 $',
+  haveNetIncomeLess: `votre revenu net est moins de ${getMaximumIncomeThreshold(
+    Language.FR
+  )}`,
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
