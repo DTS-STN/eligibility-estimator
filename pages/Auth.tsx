@@ -22,12 +22,4 @@ enum AUTH {
   AUTHENTICATED = 'authenticated',
 }
 
-export const getStaticProps = async () => {
-  return {
-    props: {
-      adobeURL: process.env.ADOBE_ANALYTICS_URL,
-    },
-  }
-}
-
 export default Auth
