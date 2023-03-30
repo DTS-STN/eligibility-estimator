@@ -13,7 +13,7 @@ const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return <>{children}</>
   }
 
-  return <div>...Loading 2</div>
+  return <div>...Loading</div>
 }
 
 enum AUTH {
