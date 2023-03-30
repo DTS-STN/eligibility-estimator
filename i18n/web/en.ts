@@ -3,6 +3,7 @@ import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
+  getMaximumIncomeThreshold,
 } from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
@@ -45,7 +46,9 @@ const en: WebTranslations = {
   homePageHeader1: 'Who these benefits are for',
   youMayBeEligible: 'You may be able to receive old age benefits if:',
   atLeast60: "you're at least 60 years old",
-  haveNetIncomeLess: 'your net income is less than $133,141',
+  haveNetIncomeLess: `your net income is less than ${getMaximumIncomeThreshold(
+    Language.EN
+  )}`,
   headerWhatToKnow: "What you'll need",
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
