@@ -4,7 +4,6 @@ import '../styles/globals.css'
 import Auth from './Auth'
 
 const PRIVATE_PATHS = ['/', '/eligibility', '/results']
-console.log('App file:', process.env.NEXTAUTH_URL)
 
 function MyApp({
   Component,
