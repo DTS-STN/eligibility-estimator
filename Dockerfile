@@ -74,7 +74,7 @@ RUN adduser \
 
 ENV NODE_ENV=production
 ENV ADOBE_ANALYTICS_URL=$ADOBE_ANALYTICS_URL
-ENV NEXTAUTH_URL=https://ep-be-dyna-add-auth.bdm-dev-rhp.dts-stn.com
+ENV NEXTAUTH_URL=https://ep-be-staging.bdm-dev-rhp.dts-stn.com
 ENV NEXTAUTH_SECRET=randomstring
 ENV NEXT_AUTH_USERNAME=$NEXT_AUTH_USERNAME
 ENV NEXT_AUTH_PASSWORD=$NEXT_AUTH_PASSWORD
