@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
 
         if (
           username !== process.env.NEXT_AUTH_USERNAME ||
-          password !== process.env.NEXT_AUTH_USERNAME
+          password !== process.env.NEXT_AUTH_PASSWORD
         ) {
           return null
         }
