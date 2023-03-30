@@ -28,6 +28,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
     console.log('NEXT_AUTH_USERNAME', process.env.NEXT_AUTH_USERNAME)
     console.log('NEXT_AUTH_PASSWORD', process.env.NEXT_AUTH_PASSWORD)
     console.log('NEXTAUTH_SECRET', process.env.NEXTAUTH_SECRET)
+    console.log('UPDATED 1')
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
