@@ -652,6 +652,12 @@ export class BenefitHandler {
               )
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
               allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
+
+              if (partnerAlwCalcSingle > 0) {
+                partnerAlw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading.partnerEligible
+                )
+              }
             }
           }
 
@@ -898,7 +904,7 @@ export class BenefitHandler {
           }
 
           console.log(
-            '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- start'
+            '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )
         }
       }
@@ -1043,11 +1049,12 @@ export class BenefitHandler {
   private translateResults(): void {
     for (const individualBenefits in this.benefitResults) {
       let clawbackValue: number
+
       for (const key in this.benefitResults[individualBenefits]) {
         const result: BenefitResult =
           this.benefitResults[individualBenefits][key]
-        if (!result || !result?.eligibility) continue
 
+        if (!result || !result?.eligibility) continue
         // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
         // this happens when high income results in no entitlement.
         // this If block was copied to _base and probably not required anymore.
