@@ -299,10 +299,25 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     )
       return cardCollapsedText
 
+    console.log(
+      'oasBenefit partnerBenefitStatus: ',
+      this.input.partnerBenefitStatus
+    )
+
     if (this.partner && this.entitlement.result !== 0) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.partnerEligible
-      )
+      console.log('oasBenefit partnerBenefitStatus: partener and $$$ > 0 ')
+      if (this.input.partnerBenefitStatus.value === 'oasGis') {
+        console.log('oasBenefit partnerBenefitStatus: oasgis  ')
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligible
+        )
+      } else {
+        console.log('oasBenefit partnerBenefitStatus: not oasgis ')
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+        )
+      }
+
       return cardCollapsedText
     }
 

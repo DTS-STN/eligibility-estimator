@@ -167,7 +167,7 @@ export class BenefitHandler {
       ),
       invSeparated: this.rawInput.invSeparated,
     }
-
+    console.log('getProcessedInput partner = ', partnerInput)
     return {
       client: clientInput,
       partner: partnerInput,
@@ -218,27 +218,9 @@ export class BenefitHandler {
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
 
-      /*
-      Make changes to avoid contridictions: 
-        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW
-        therefore, no following question will show up except income
-        2. when partner is older or equals to 60, but younger than 65, partner will not be eligible for 
-        OAS, therefore, hide the partner benefit section
-        3. when partner is older or equals to 65, we show the partner benefit section
-       */
-
-      if (
-        this.input.partner.age < 60 ||
-        this.input.partner.age > 123 ||
-        this.input.partner.age === undefined
-      ) {
-        requiredFields.sort(BenefitHandler.sortFields)
-        return requiredFields
-      } else if (this.input.partner.age >= 65) {
-        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+      if (this.input.partner.age >= 60) {
+        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
       }
-
-      requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
 
       if (
         this.input.partner.legalStatus.value &&
@@ -252,6 +234,27 @@ export class BenefitHandler {
 
       if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+      }
+
+      /*
+      Make changes to avoid contridictions when showing the Benefit Partner Question: 
+        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW.
+        2. when partner is between 60 and 65, partner will not be eligible for OAS
+        3. Only show it when: partner is older than 65 AND
+            currently lives in Canada and has lived for 10+ years  OR 
+            currently lives outside Canada and has lived for 20+ years in Canada
+       */
+
+      if (this.input.partner.age > 65) {
+        if (this.input.partner.livingCountry.canada) {
+          if (this.input.partner.yearsInCanadaSince18 > 10) {
+            requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+          }
+        } else {
+          if (this.input.partner.yearsInCanadaSince18 > 20) {
+            requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+          }
+        }
       }
     }
 
@@ -310,6 +313,10 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
+      console.log(
+        '1 client value >>',
+        this.input.client.partnerBenefitStatus.value
+      )
       const partnerOas = new OasBenefit(this.input.partner, this.translations)
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
@@ -381,6 +388,18 @@ export class BenefitHandler {
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
+
+    console.log(
+      '2 >> partner value',
+      this.input.partner.partnerBenefitStatus.value
+    )
+    // this line overrides the partner value that's defaults to oasGis regardless.
+    this.input.partner.partnerBenefitStatus.value =
+      this.input.client.partnerBenefitStatus.value
+    console.log(
+      '2 >>>> partner NEW value',
+      this.input.partner.partnerBenefitStatus.value
+    )
 
     const partnerOas = new OasBenefit(
       this.input.partner,

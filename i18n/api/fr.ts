@@ -416,6 +416,10 @@ const fr: Translations = {
       heading: 'Votre conjoint pourrait être admissible',
       text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
     },
+    partnerEligibleButAnsweredNo: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: 'Vous pouvez <a href="/eligibility/#partnerBenefitStatus" class="!underscore text-default-text">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',

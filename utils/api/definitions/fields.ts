@@ -118,12 +118,6 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.CURRENCY,
   },
-  [FieldKey.PARTNER_BENEFIT_STATUS]: {
-    key: FieldKey.PARTNER_BENEFIT_STATUS,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.RADIO,
-    default: undefined,
-  },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
     relatedKey: FieldKey.LEGAL_STATUS,
@@ -149,6 +143,12 @@ export const fieldDefinitions: FieldDefinitions = {
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_18,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.NUMBER,
+  },
+  [FieldKey.PARTNER_BENEFIT_STATUS]: {
+    key: FieldKey.PARTNER_BENEFIT_STATUS,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
+    default: undefined,
   },
 }
 

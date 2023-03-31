@@ -109,6 +109,7 @@ export interface Translations {
     calculatedBasedOnIndividualIncome: { heading: string; text: string }
     partnerEligible: { heading: string; text: string }
     partnerDependOnYourIncome: { heading: string; text: string }
+    partnerEligibleButAnsweredNo: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }

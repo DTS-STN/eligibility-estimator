@@ -409,6 +409,10 @@ const en: Translations = {
       heading: 'Your partner may be eligible',
       text: 'Depending on your income, you can expect to receive around&nbsp;{PARTNER_BENEFIT_AMOUNT} every month. Provide your income to get an accurate estimate.',
     },
+    partnerEligibleButAnsweredNo: {
+      heading: 'Your partner may be eligible',
+      text: 'You can <a href="/eligibility/#partnerBenefitStatus" class="!underline text-default-text">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension..',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'More information needed',
