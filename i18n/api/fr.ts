@@ -370,7 +370,7 @@ const fr: Translations = {
       over70:
         'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
       eligibleWhenTurn65:
-        "Vous serez probablement admissible lorsque vous aurez 65 ans. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
+        "Vous serez probablement admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
         "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a class='underline text-default-text' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
     },

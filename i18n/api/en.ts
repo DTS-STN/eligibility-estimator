@@ -363,7 +363,7 @@ const en: Translations = {
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
-        "You'll likely be eligible for this benefit once you turn 65. You can <a class='underline text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age.",
+        "You'll likely be eligible for this benefit once you turn 65. You can <a class='text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='underline text-default-text' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
     },
