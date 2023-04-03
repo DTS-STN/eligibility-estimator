@@ -147,6 +147,7 @@ export class BenefitHandler {
         this.rawInput.partnerBenefitStatus
       ),
     }
+
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
@@ -351,7 +352,35 @@ export class BenefitHandler {
 
     // Moving onto ALW, again only doing eligibility.
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
+    console.log('benefit handler = alw client ')
+    console.log('this.input.client = ', this.input.client)
+    console.log(
+      'client partnerBenefits ',
+      this.input.client.partnerBenefitStatus
+    )
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
+    console.log('client after again ', this.input.client.partnerBenefitStatus)
+    console.log('benefit handler = alw ', allResults.client.alw.cardDetail)
+    console.log('benefit partner = oas ', allResults.partner.oas.entitlement)
+    console.log('benefit partner = gis ', allResults.partner.gis.entitlement)
+
+    // task #115349 overwrite eligibility when conditions are met.
+    if (
+      allResults.partner.oas.entitlement.result > 0 &&
+      allResults.partner.gis.entitlement.result > 0 &&
+      allResults.client.alw.entitlement.result > 0 &&
+      this.input.client.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
+    ) {
+      allResults.client.alw.eligibility = {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.NONE,
+        detail: this.translations.detail.conditional,
+      }
+      allResults.client.alw.cardDetail.mainText =
+        this.translations.detail.alwEligibleButPartnerAlreadyIs
+      allResults.client.alw.entitlement.result = 0
+    }
+
     this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
       clientGis,
       clientAlw,
