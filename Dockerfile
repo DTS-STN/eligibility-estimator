@@ -52,7 +52,7 @@
 # CMD [ "yarn", "start" ]
 
 FROM node:16.15.1-alpine AS production
-ENV NODE_ENV=production
+ENV NODE_ENV=$NODE_ENV
 SHELL ["/bin/sh", "-c"]
 RUN apk add --no-cache bash
 ARG user=joker
@@ -72,7 +72,6 @@ RUN adduser \
   --ingroup $group \
   $user
 
-ENV NODE_ENV=$NODE_ENV
 ENV ADOBE_ANALYTICS_URL=$ADOBE_ANALYTICS_URL
 ENV NEXTAUTH_URL=$NEXTAUTH_URL
 ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
