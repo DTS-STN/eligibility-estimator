@@ -10,7 +10,12 @@ function MyApp({
   pageProps: { session, ...pageProps },
   router: { route },
 }: AppProps) {
-  const AuthRequired = PRIVATE_PATHS.some((path) => route.startsWith(path))
+  const AuthRequired =
+    process.env.NODE_ENV !== 'production' &&
+    PRIVATE_PATHS.some((path) => route.startsWith(path))
+
+  // TODO: to delete
+  console.log('NODE ENVIRONMENT', process.env.NODE_ENV)
   return (
     <SessionProvider session={session}>
       {AuthRequired ? (
