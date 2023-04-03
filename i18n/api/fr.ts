@@ -173,7 +173,7 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: 'Je voudrais commencer à 65 ans (le plus commun)',
+        text: 'Je voudrais commencer à 65 ans (le plus commun)',
         shortText: 'Commencer à 65&nbsp;ans',
       },
       {
@@ -333,13 +333,13 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'Allocation est une prestation pour les personnes âgées de&nbsp;60 à&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     alwEligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
       'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes veuves âgées de&nbsp;60 à&nbsp;64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -368,7 +368,7 @@ const fr: Translations = {
       applyOnline:
         "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
       over70:
-        'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
+        'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
       eligibleWhenTurn65:
         "Vous serez probablement admissible lorsque vous aurez 65 ans. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
@@ -386,7 +386,7 @@ const fr: Translations = {
   detailWithHeading: {
     oasDeferralApplied: {
       heading: 'Comment le report affecte vos paiements',
-      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
+      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',

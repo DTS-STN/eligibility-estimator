@@ -88,7 +88,7 @@ export const links: LinkDefinitions = {
     order: 15,
   },
   oasPartial: {
-    text: 'Pension de la Sécurité de vieillesse: Moins de 40 ans au Canada',
+    text: 'Pension de la Sécurité de vieillesse: Moins de 40 ans au Canada',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.3-3.1',
     order: 16,
   },

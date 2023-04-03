@@ -167,7 +167,7 @@ export class BenefitHandler {
       ),
       invSeparated: this.rawInput.invSeparated,
     }
-    console.log('getProcessedInput partner = ', partnerInput)
+
     return {
       client: clientInput,
       partner: partnerInput,
@@ -313,10 +313,6 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      console.log(
-        '1 client value >>',
-        this.input.client.partnerBenefitStatus.value
-      )
       const partnerOas = new OasBenefit(this.input.partner, this.translations)
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
@@ -389,17 +385,9 @@ export class BenefitHandler {
     )
     this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
 
-    console.log(
-      '2 >> partner value',
-      this.input.partner.partnerBenefitStatus.value
-    )
     // this line overrides the partner value that's defaults to oasGis regardless.
     this.input.partner.partnerBenefitStatus.value =
       this.input.client.partnerBenefitStatus.value
-    console.log(
-      '2 >>>> partner NEW value',
-      this.input.partner.partnerBenefitStatus.value
-    )
 
     const partnerOas = new OasBenefit(
       this.input.partner,

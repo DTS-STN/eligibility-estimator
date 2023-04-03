@@ -2,6 +2,7 @@ import { Translations } from '../../../i18n/api'
 import {
   BenefitKey,
   EntitlementResultType,
+  PartnerBenefitStatus,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -299,20 +300,17 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     )
       return cardCollapsedText
 
-    console.log(
-      'oasBenefit partnerBenefitStatus: ',
-      this.input.partnerBenefitStatus
-    )
-
     if (this.partner && this.entitlement.result !== 0) {
-      console.log('oasBenefit partnerBenefitStatus: partener and $$$ > 0 ')
-      if (this.input.partnerBenefitStatus.value === 'oasGis') {
-        console.log('oasBenefit partnerBenefitStatus: oasgis  ')
+      if (
+        // eslint-disable-next-line prettier/prettier
+        this.input.partnerBenefitStatus.value ===
+          PartnerBenefitStatus.OAS_GIS ||
+        this.input.partnerBenefitStatus.value === PartnerBenefitStatus.HELP_ME
+      ) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.partnerEligible
         )
       } else {
-        console.log('oasBenefit partnerBenefitStatus: not oasgis ')
         cardCollapsedText.push(
           this.translations.detailWithHeading.partnerEligibleButAnsweredNo
         )

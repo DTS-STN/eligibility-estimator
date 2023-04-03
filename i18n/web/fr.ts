@@ -216,9 +216,9 @@ const fr: WebTranslations = {
     [ValidationErrors.oasAge65to70]:
       'Veuillez entrer un âge entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
-      "Votre devez avoir vécu au Canada pendant au moins 10&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
+      "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      "Votre devez avoir vécu au Canada pendant au moins 20&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
+      "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
