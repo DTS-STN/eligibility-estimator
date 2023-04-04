@@ -363,26 +363,57 @@ export class BenefitHandler {
     )
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
     console.log('client after again ', this.input.client.partnerBenefitStatus)
+    console.log(
+      'age 60<=x<65 ',
+      this.input.client.age >= 60 && this.input.client.age < 65
+    )
+    console.log('libing in canada = ', !this.input.client.livedOutsideCanada)
+    console.log('legal status ', this.input.client.legalStatus.canadian)
+    console.log('libing in canada =', this.input.client.yearsInCanadaSince18)
+    console.log(
+      'income relevant ',
+      this.input.client.income.relevant,
+      ' is=',
+      this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit
+    )
+    console.log(
+      'benefit status= ',
+      this.input.client.partnerBenefitStatus.value
+    )
     console.log('benefit handler = alw ', allResults.client.alw.cardDetail)
     console.log('benefit partner = oas ', allResults.partner.oas.entitlement)
     console.log('benefit partner = gis ', allResults.partner.gis.entitlement)
 
     // task #115349 overwrite eligibility when conditions are met.
     if (
-      allResults.partner.oas.entitlement.result > 0 &&
-      allResults.partner.gis.entitlement.result > 0 &&
-      allResults.client.alw.entitlement.result > 0 &&
       this.input.client.age >= 60 &&
       this.input.client.age < 65 &&
       !this.input.client.livedOutsideCanada &&
       this.input.client.legalStatus.canadian &&
       this.input.client.yearsInCanadaSince18 > 10 &&
       this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
-      this.input.client.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
+      this.input.client.partnerBenefitStatus.value ===
+        PartnerBenefitStatus.NONE &&
+      allResults.partner.oas.entitlement.result !== undefined &&
+      allResults.partner.gis.entitlement.result !== undefined &&
+      allResults.client.alw.entitlement.result > 0
     ) {
-      allResults.client.alw = getBlankObject(BenefitKey.alw)
-      allResults.client.alw.cardDetail.mainText =
-        this.translations.detail.alwEligibleButPartnerAlreadyIs
+      console.log('made the first log ')
+      if (
+        allResults.partner.oas.entitlement.result > 0 &&
+        allResults.partner.gis.entitlement.result > 0 &&
+        allResults.client.alw.entitlement.result > 0
+      ) {
+        console.log('made the second log ')
+        allResults.client.alw.eligibility = {
+          result: ResultKey.INELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.conditional,
+        }
+        allResults.client.alw.cardDetail.mainText =
+          this.translations.detail.alwEligibleButPartnerAlreadyIs
+        allResults.client.alw.entitlement.result = 0
+      }
     }
 
     this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
