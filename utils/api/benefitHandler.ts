@@ -249,16 +249,14 @@ export class BenefitHandler {
             currently lives outside Canada and has lived for 20+ years in Canada
        */
 
-      if (this.input.partner.age > 65) {
-        if (this.input.partner.livingCountry.canada) {
-          if (this.input.partner.yearsInCanadaSince18 > 10) {
-            requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
-          }
-        } else {
-          if (this.input.partner.yearsInCanadaSince18 > 20) {
-            requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
-          }
-        }
+      if (
+        this.input.partner.age > 65 &&
+        ((this.input.partner.livingCountry.canada &&
+          this.input.partner.yearsInCanadaSince18 > 10) ||
+          (!this.input.partner.livingCountry.canada &&
+            this.input.partner.yearsInCanadaSince18 > 20))
+      ) {
+        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }
     }
 

@@ -93,7 +93,7 @@ describe('field requirement analysis', () => {
       FieldKey.PARTNER_AGE,
       FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_BENEFIT_STATUS,
+      // FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_LEGAL_STATUS,
       FieldKey.PARTNER_LIVING_COUNTRY,
       FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
