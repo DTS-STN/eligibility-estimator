@@ -387,7 +387,7 @@ export class BenefitHandler {
         allResults.client.alw.cardDetail.mainText =
           this.translations.detail.alwEligibleButPartnerAlreadyIs
         allResults.client.alw.entitlement.result = 0
-        allResults.client.alw.cardDetail.links = []
+        allResults.client.alw.cardDetail.links.splice(0, 1)
       }
     }
 
