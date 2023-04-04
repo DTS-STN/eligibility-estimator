@@ -278,11 +278,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       (this.eligibility.result === ResultKey.INELIGIBLE &&
         this.eligibility.reason === ResultReason.AGE_YOUNG)
     ) {
-      console.log(
-        'adding link',
-        this.eligibility.result,
-        this.eligibility.reason
-      )
       links.push(this.translations.links.apply[BenefitKey.alw])
     }
     links.push(this.translations.links.overview[BenefitKey.alw])

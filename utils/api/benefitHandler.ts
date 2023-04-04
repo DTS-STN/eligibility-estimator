@@ -819,15 +819,24 @@ export class BenefitHandler {
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
 
-              allResults.partner.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
-              allResults.client.alw.entitlement.result = applicantAlwCalcSingle
-              allResults.client.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
+              if (
+                this.input.partner.invSeparated &&
+                allResults.partner.gis.entitlement.result > 0 &&
+                clientAlw.entitlement.result > 0
+              ) {
+                allResults.partner.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+
+                allResults.client.alw.entitlement.result =
+                  applicantAlwCalcSingle
+
+                allResults.client.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+              }
             }
           }
 
