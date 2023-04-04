@@ -19,7 +19,10 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
-import { textReplacementRules } from './definitions/textReplacementRules'
+import {
+  getMaximumIncomeThreshold,
+  textReplacementRules,
+} from './definitions/textReplacementRules'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -369,16 +372,17 @@ export class BenefitHandler {
       allResults.partner.oas.entitlement.result > 0 &&
       allResults.partner.gis.entitlement.result > 0 &&
       allResults.client.alw.entitlement.result > 0 &&
+      this.input.client.age >= 60 &&
+      this.input.client.age < 65 &&
+      !this.input.client.livedOutsideCanada &&
+      this.input.client.legalStatus.canadian &&
+      this.input.client.yearsInCanadaSince18 > 10 &&
+      this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
       this.input.client.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
     ) {
-      allResults.client.alw.eligibility = {
-        result: ResultKey.INELIGIBLE,
-        reason: ResultReason.NONE,
-        detail: this.translations.detail.conditional,
-      }
+      allResults.client.alw = getBlankObject(BenefitKey.alw)
       allResults.client.alw.cardDetail.mainText =
         this.translations.detail.alwEligibleButPartnerAlreadyIs
-      allResults.client.alw.entitlement.result = 0
     }
 
     this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
