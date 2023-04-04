@@ -2537,7 +2537,7 @@ describe('EE Sanity Test Scenarios:', () => {
   /*
     SAN-NI-10
     client: 
-      - age: 63
+      - age: 65
       - delayOAS: Yes
       - start at 66
       - income: 1000
@@ -2549,7 +2549,7 @@ describe('EE Sanity Test Scenarios:', () => {
   */
   it('should pass the sanity test - SAN-NI-10', async () => {
     const res = await mockGetRequest({
-      age: 63,
+      age: 65,
       oasDefer: true,
       oasAge: 66,
       incomeAvailable: true,
@@ -2571,7 +2571,7 @@ describe('EE Sanity Test Scenarios:', () => {
   /*
     SAN-NI-11
     client: 
-      - age: 63
+      - age: 65
       - delayOAS: Yes
       - start at 66
       - income: 1000
@@ -2583,7 +2583,7 @@ describe('EE Sanity Test Scenarios:', () => {
   */
   it('should pass the sanity test - SAN-NI-11', async () => {
     const res = await mockGetRequest({
-      age: 63,
+      age: 65,
       oasDefer: true,
       oasAge: 66,
       incomeAvailable: true,
@@ -2605,7 +2605,7 @@ describe('EE Sanity Test Scenarios:', () => {
   /*
     SAN-NI-12
     client: 
-      - age: 63
+      - age: 65
       - delayOAS: Yes
       - starts at 66
       - income: 1000
@@ -2626,7 +2626,7 @@ describe('EE Sanity Test Scenarios:', () => {
   */
   it('should pass the sanity test - SAN-NI-12', async () => {
     const res = await mockGetRequest({
-      age: 63,
+      age: 65,
       oasDefer: true,
       oasAge: 66,
       incomeAvailable: true,
@@ -2639,7 +2639,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       everLivedSocialCountry: undefined,
       partnerIncomeAvailable: false,
-      partnerAge: 66,
+      partnerAge: 63,
       partnerIncome: 2000,
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
