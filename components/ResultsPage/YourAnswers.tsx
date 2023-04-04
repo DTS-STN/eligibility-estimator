@@ -1,10 +1,10 @@
-import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 import { FieldInput } from '../../client-state/InputHelper'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
+import Link from 'next/link'
 
 export const YourAnswers: React.VFC<{
   title: string
@@ -58,13 +58,14 @@ export const YourAnswers: React.VFC<{
                   />
                 </div>
                 <div className="justify-self-end self-end">
-                  <DSLink
-                    id={`edit-${input.key}`}
-                    href={`eligibility#${input.key}`}
-                    text={tsln.resultsPage.edit}
-                    target="_self"
-                    ariaLabel={tsln.resultsEditAriaLabels[input.key]}
-                  />
+                  <Link href={`eligibility#${input.key}`}>
+                    <a
+                      className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
+                      aria-label={tsln.resultsEditAriaLabels[input.key]}
+                    >
+                      {tsln.resultsPage.edit}
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

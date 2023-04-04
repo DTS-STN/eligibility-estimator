@@ -7,6 +7,8 @@ const Auth: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useEffect(() => {
     if (status === AUTH.LOADING) return
     if (status === AUTH.UNAUTHENTICATED) signIn()
+    console.log('INSIDE USE EFFECT')
+    console.log('status', status)
   }, [status])
 
   if (status === AUTH.AUTHENTICATED) {
