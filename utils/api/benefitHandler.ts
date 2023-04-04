@@ -244,13 +244,14 @@ export class BenefitHandler {
       Make changes to avoid contridictions when showing the Benefit Partner Question: 
         1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW.
         2. when partner is between 60 and 65, partner will not be eligible for OAS
-        3. Only show it when: partner is older than 65 AND
+        3. Only show it when: partner is older than 65 and LegalStatus is canadian AND
             currently lives in Canada and has lived for 10+ years  OR 
             currently lives outside Canada and has lived for 20+ years in Canada
        */
 
       if (
         this.input.partner.age > 65 &&
+        this.input.partner.legalStatus.canadian &&
         ((this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 > 10) ||
           (!this.input.partner.livingCountry.canada &&
