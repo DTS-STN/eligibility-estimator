@@ -248,10 +248,12 @@ export class BenefitHandler {
             currently lives in Canada and has lived for 10+ years  OR 
             currently lives outside Canada and has lived for 20+ years in Canada
        */
-
+      console.log('living in canada', this.input.partner.livedOutsideCanada)
+      console.log('years in canada ', this.input.partner.yearsInCanadaSince18)
       if (
         this.input.partner.age > 65 &&
         this.input.partner.legalStatus.canadian &&
+        this.input.partner.livedOutsideCanada !== undefined &&
         ((this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 > 10) ||
           (!this.input.partner.livingCountry.canada &&
@@ -354,36 +356,11 @@ export class BenefitHandler {
 
     // Moving onto ALW, again only doing eligibility.
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
-    console.log('benefit handler = alw client ')
-    console.log('this.input.client = ', this.input.client)
-    console.log(
-      'client partnerBenefits ',
-      this.input.client.partnerBenefitStatus
-    )
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
-    console.log('client after again ', this.input.client.partnerBenefitStatus)
-    console.log(
-      'age 60<=x<65 ',
-      this.input.client.age >= 60 && this.input.client.age < 65
-    )
-    console.log('libing in canada = ', !this.input.client.livedOutsideCanada)
-    console.log('legal status ', this.input.client.legalStatus.canadian)
-    console.log('libing in canada =', this.input.client.yearsInCanadaSince18)
-    console.log(
-      'income relevant ',
-      this.input.client.income.relevant,
-      ' is=',
-      this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit
-    )
-    console.log(
-      'benefit status= ',
-      this.input.client.partnerBenefitStatus.value
-    )
-    console.log('benefit handler = alw ', allResults.client.alw.cardDetail)
-    console.log('benefit partner = oas ', allResults.partner.oas.entitlement)
-    console.log('benefit partner = gis ', allResults.partner.gis.entitlement)
 
     // task #115349 overwrite eligibility when conditions are met.
+    //              all the conditions below are just to make sure
+    //              one and one case is overwritten
     if (
       this.input.client.age >= 60 &&
       this.input.client.age < 65 &&
@@ -395,25 +372,24 @@ export class BenefitHandler {
         PartnerBenefitStatus.NONE &&
       allResults.partner.oas.entitlement.result !== undefined &&
       allResults.partner.gis.entitlement.result !== undefined &&
-      allResults.client.alw.entitlement.result > 0
+      allResults.client.alw.entitlement.result !== undefined
     ) {
       if (
         allResults.partner.oas.entitlement.result > 0 &&
         allResults.partner.gis.entitlement.result > 0 &&
         allResults.client.alw.entitlement.result > 0
       ) {
+        // overwrite eligibility
         allResults.client.alw.eligibility = {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.conditional,
         }
-
+        // cardDetails and remove 'apply...' from the links
         allResults.client.alw.cardDetail.mainText =
           this.translations.detail.alwEligibleButPartnerAlreadyIs
         allResults.client.alw.entitlement.result = 0
-
-        // remove 'apply...' from the array
-        allResults.client.alw.cardDetail.links.splice(0, 1)
+        allResults.client.alw.cardDetail.links = []
       }
     }
 
