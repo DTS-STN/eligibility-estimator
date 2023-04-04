@@ -397,21 +397,23 @@ export class BenefitHandler {
       allResults.partner.gis.entitlement.result !== undefined &&
       allResults.client.alw.entitlement.result > 0
     ) {
-      console.log('made the first log ')
       if (
         allResults.partner.oas.entitlement.result > 0 &&
         allResults.partner.gis.entitlement.result > 0 &&
         allResults.client.alw.entitlement.result > 0
       ) {
-        console.log('made the second log ')
         allResults.client.alw.eligibility = {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.translations.detail.conditional,
         }
+
         allResults.client.alw.cardDetail.mainText =
           this.translations.detail.alwEligibleButPartnerAlreadyIs
         allResults.client.alw.entitlement.result = 0
+
+        // remove 'apply...' from the array
+        allResults.client.alw.cardDetail.links.splice(0, 1)
       }
     }
 

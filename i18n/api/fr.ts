@@ -420,7 +420,7 @@ const fr: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: 'Vous pouvez <a href="/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
+      text: 'Vous pouvez <a href="/fr/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
   },
   summaryTitle: {

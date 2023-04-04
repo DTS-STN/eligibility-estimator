@@ -413,7 +413,7 @@ const en: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Your partner may be eligible',
-      text: 'You can <a href="/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension..',
+      text: 'You can <a href="/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
   },
   summaryTitle: {
