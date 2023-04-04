@@ -68,7 +68,6 @@ const ResultsPage: React.VFC<{
     (value) => partnerResults[value]
   )
 
-  console.log('summary', summary)
   const resultsEligible: BenefitResult[] = resultsArray.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
