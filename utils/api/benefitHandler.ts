@@ -248,8 +248,6 @@ export class BenefitHandler {
             currently lives in Canada and has lived for 10+ years  OR 
             currently lives outside Canada and has lived for 20+ years in Canada
        */
-      console.log('living in canada', this.input.partner.livedOutsideCanada)
-      console.log('years in canada ', this.input.partner.yearsInCanadaSince18)
       if (
         this.input.partner.age > 65 &&
         this.input.partner.legalStatus.canadian &&
