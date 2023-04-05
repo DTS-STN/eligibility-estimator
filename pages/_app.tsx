@@ -14,8 +14,6 @@ function MyApp({
     process.env.APP_ENV !== 'production' &&
     PRIVATE_PATHS.some((path) => route.startsWith(path))
 
-  // TODO: to delete
-  console.log('APP ENVIRONMENT', process.env.APP_ENV)
   return (
     <SessionProvider session={session}>
       {AuthRequired ? (
