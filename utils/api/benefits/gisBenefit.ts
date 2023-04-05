@@ -56,8 +56,11 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       ? legalValues.gis.spouseAlwIncomeLimit
       : legalValues.gis.spouseNoOasIncomeLimit
 
+    console.log('maxIncome', maxIncome)
     // if income is not provided, assume they meet the income requirement
-    const skipReqIncome = !this.input.income.provided
+    const skipReqIncome = !this.input.income.provided // refers to partner income
+    console.log('skipReqIncome', skipReqIncome)
+    console.log('this.input', this.input)
 
     const meetsReqIncome =
       skipReqIncome ||
@@ -101,7 +104,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.INCOME,
             detail: this.translations.detail.gis.incomeTooHigh,
           }
-        } else if (this.input.income.partner >= maxIncome && amount <= 0) {
+        } else if (this.input.income?.partner >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
