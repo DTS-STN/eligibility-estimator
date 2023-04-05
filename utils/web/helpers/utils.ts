@@ -34,3 +34,7 @@ export const sendAnalyticsRequest = (
     })
   }
 }
+
+export const consoleDev = (...messages) => {
+  if (process.env.APP_ENV !== 'production') console.log(...messages)
+}

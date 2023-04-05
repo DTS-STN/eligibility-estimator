@@ -45,6 +45,8 @@ import { SummaryHandler } from './summaryHandler'
 import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
+import { consoleDev } from '../web/helpers/utils'
+
 export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
@@ -472,7 +474,7 @@ export class BenefitHandler {
           clientOas.entitlement.result > 0 &&
           partnerOas.entitlement.result > 0
         ) {
-          console.log('--- both oas are greater than 0 --- start')
+          consoleDev('--- both oas are greater than 0 --- start')
 
           let maritalStatus = new MaritalStatusHelper(MaritalStatus.SINGLE)
 
@@ -485,7 +487,7 @@ export class BenefitHandler {
             allResults.client.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'both Oas > 0 - applicantGisResultTable1',
             applicantGisResultT1
           )
@@ -499,7 +501,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'both Oas > 0 - partnerGisResultTable1',
             partnerGisResultT1
           )
@@ -515,7 +517,7 @@ export class BenefitHandler {
             allResults.client.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'both Oas > 0 - applicantGisResultT2',
             applicantGisResultT2
           )
@@ -529,7 +531,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log('both Oas > 0 - partnerGisResultT2', partnerGisResultT2)
+          consoleDev('both Oas > 0 - partnerGisResultT2', partnerGisResultT2)
 
           // define total_amt_singleA
           const totalAmountSingleApplicant =
@@ -555,21 +557,20 @@ export class BenefitHandler {
           const totalAmountCouple = totalAmountCoupleA + totalAmountCoupleB
 
           if (totalAmountSingle < totalAmountCouple) {
-            console.log(
+            consoleDev(
               'both Oas > 0 - totalAmountsingle < totalAmountCouple',
               'totalAmountSingle',
               totalAmountSingle,
               'totalAmountCouple',
               totalAmountCouple
             )
-
             allResults.client.gis.entitlement.result = applicantGisResultT2
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
 
             allResults.partner.gis.entitlement.result = partnerGisResultT2
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            console.log(
+            consoleDev(
               'both Oas > 0 - totalAmountsingle > totalAmountCouple',
               'totalAmountSingle',
               totalAmountSingle,
@@ -601,10 +602,11 @@ export class BenefitHandler {
             this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
             this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
           }
-          console.log('--- both oas are greater than 0 --- end')
+          consoleDev('--- both oas are greater than 0 --- end')
         } // if partner is eligible for alw
         else if (partnerAlw.eligibility.result === ResultKey.ELIGIBLE) {
-          console.log('--- partner is eligible for alw --- start')
+          consoleDev('--- partner is eligible for alw --- start')
+
           const maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
           //calculate gis entitlement for applicant use table4
           const applicantGisResultT4 = new EntitlementFormula(
@@ -622,7 +624,7 @@ export class BenefitHandler {
             this.input.partner.age
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'T4',
             applicantGisResultT4,
             'partnerAlwCalcCouple',
@@ -651,7 +653,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'T1',
             applicantGisResultT1,
             'partnerAlwCalcSingle',
@@ -661,13 +663,14 @@ export class BenefitHandler {
           // define Total_amt_Single
           const totalAmountSingle = applicantGisResultT1 + partnerAlwCalcSingle
 
-          console.log(
+          consoleDev(
             'Case: partner is eligible for alw',
             'totalAmountSingle',
             totalAmountSingle,
             'totalAmtCouple',
             totalAmtCouple
           )
+
           this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
 
           let isApplicantGisAvailable = true
@@ -727,10 +730,10 @@ export class BenefitHandler {
           } //else {
           isApplicantGisAvailable = true
 
-          console.log('--- partner is eligible for alw --- end')
+          consoleDev('--- partner is eligible for alw --- end')
         } // if applicant is eligible for alw
         else if (clientAlw.eligibility.result === ResultKey.ELIGIBLE) {
-          console.log(' --- applicant is eligible for alw --- start')
+          consoleDev(' --- applicant is eligible for alw --- start')
 
           const maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
 
@@ -760,7 +763,7 @@ export class BenefitHandler {
             this.input.client.age
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'applicantAlwCalc',
             applicantAlwCalcCouple,
             applicantAlwCalcSingle,
@@ -770,7 +773,7 @@ export class BenefitHandler {
           // define Total_amt_Couple
           const totalAmountCouple = partnerGisResultT4 + applicantAlwCalcCouple
 
-          console.log(
+          consoleDev(
             'partnerGisResultT4',
             partnerGisResultT4,
             'clientAlw.entitlement.result',
@@ -786,11 +789,12 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log('partnerGisResultT1', partnerGisResultT1)
+          consoleDev('partnerGisResultT1', partnerGisResultT1)
 
           // define Total_amt_Single
           const totalAmountSingle = partnerGisResultT1 + applicantAlwCalcSingle
-          console.log(
+
+          consoleDev(
             'applicant is eligible for alw',
             'totalAmtSingle',
             totalAmountSingle,
@@ -850,12 +854,13 @@ export class BenefitHandler {
             allResults.client.alw.entitlement.result = applicantAlwCalcCouple
           }
           isPartnerGisAvailable = true
-          console.log(' --- applicant is eligible for alw --- end')
+
+          consoleDev(' --- applicant is eligible for alw --- end')
         } else if (
           clientOas.entitlement.result > 0 &&
           partnerOas.entitlement.result === 0
         ) {
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- start'
           )
 
@@ -883,7 +888,7 @@ export class BenefitHandler {
             allResults.client.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'clientOas > 0 and partnerOas = 0',
             allResults.client.oas,
             'applicantGisTable1',
@@ -907,15 +912,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
-
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- end'
           )
         } else if (
           clientOas.entitlement.result === 0 &&
           partnerOas.entitlement.result > 0
         ) {
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- start'
           )
 
@@ -938,7 +942,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'clientOas = 0 and partnerOas > 0',
             'partnerGisTable1',
             partnerGisResultT1,
@@ -957,8 +961,7 @@ export class BenefitHandler {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           }
-
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )
         }
@@ -999,8 +1002,9 @@ export class BenefitHandler {
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
 
+    consoleDev('allResults', allResults)
+
     // All done!
-    console.log('allResults', allResults)
     return allResults
   }
 
