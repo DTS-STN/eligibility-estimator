@@ -2533,4 +2533,122 @@ describe('EE Sanity Test Scenarios:', () => {
     expectAlwTooOld(res, true)
     expectAfsMarital(res)
   })
+
+  /*
+    SAN-NI-10
+    client: 
+      - age: 65
+      - delayOAS: Yes
+      - start at 66
+      - income: 1000
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 25
+      - Legal Status: yes
+      - marital status: single
+  */
+  it('should pass the sanity test - SAN-NI-10', async () => {
+    const res = await mockGetRequest({
+      age: 65,
+      oasDefer: true,
+      oasAge: 66,
+      incomeAvailable: true,
+      income: 1000,
+      legalStatus: LegalStatus.YES,
+      livingCountry: LivingCountry.CANADA, // country code
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      maritalStatus: MaritalStatus.SINGLE,
+      invSeparated: undefined,
+      everLivedSocialCountry: false,
+      ...partnerUndefined,
+    })
+
+    // Just to verify it does not crash
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  })
+
+  /*
+    SAN-NI-11
+    client: 
+      - age: 65
+      - delayOAS: Yes
+      - start at 66
+      - income: 1000
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 25
+      - Legal Status: yes
+      - marital status: widowed
+  */
+  it('should pass the sanity test - SAN-NI-11', async () => {
+    const res = await mockGetRequest({
+      age: 65,
+      oasDefer: true,
+      oasAge: 66,
+      incomeAvailable: true,
+      income: 1000,
+      legalStatus: LegalStatus.YES,
+      livingCountry: LivingCountry.CANADA, // country code
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 25,
+      maritalStatus: MaritalStatus.WIDOWED,
+      invSeparated: undefined,
+      everLivedSocialCountry: false,
+      ...partnerUndefined,
+    })
+
+    // Just to verify it does not crash
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  })
+
+  /*
+    SAN-NI-12
+    client: 
+      - age: 65
+      - delayOAS: Yes
+      - starts at 66
+      - income: 1000
+      - Legal Status: yes
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 25
+      - marital status: married
+    partner: 
+      - inv separated: no
+      - age: 63
+      - income: 2000
+      - Legal status: yes
+      - Country of Residence: Canada
+      - lived outside Canada: yes
+      - years resided in Canada: 30
+      - partner benefit: no
+  */
+  it('should pass the sanity test - SAN-NI-12', async () => {
+    const res = await mockGetRequest({
+      age: 65,
+      oasDefer: true,
+      oasAge: 66,
+      incomeAvailable: true,
+      income: 1000,
+      legalStatus: LegalStatus.YES,
+      livingCountry: LivingCountry.CANADA, // country code
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      everLivedSocialCountry: undefined,
+      partnerIncomeAvailable: false,
+      partnerAge: 63,
+      partnerIncome: 2000,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 30,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+    })
+
+    // Just to verify it does not crash
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  })
 })

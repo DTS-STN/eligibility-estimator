@@ -2,6 +2,7 @@ import { Translations } from '../../../i18n/api'
 import {
   BenefitKey,
   EntitlementResultType,
+  PartnerBenefitStatus,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -291,11 +292,20 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
-    if (this.partner && this.input.income.provided) {
-      this.entitlement.result !== 0 &&
+    if (
+      this.partner &&
+      this.input.income.provided &&
+      this.entitlement.result !== 0
+    ) {
+      if (this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+        )
+      } else {
         cardCollapsedText.push(
           this.translations.detailWithHeading.partnerEligible
         )
+      }
     }
 
     return cardCollapsedText

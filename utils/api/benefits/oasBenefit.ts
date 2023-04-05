@@ -2,6 +2,7 @@ import { Translations } from '../../../i18n/api'
 import {
   BenefitKey,
   EntitlementResultType,
+  PartnerBenefitStatus,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -300,9 +301,21 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       return cardCollapsedText
 
     if (this.partner && this.entitlement.result !== 0) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.partnerEligible
-      )
+      if (
+        // eslint-disable-next-line prettier/prettier
+        this.input.partnerBenefitStatus.value ===
+          PartnerBenefitStatus.OAS_GIS ||
+        this.input.partnerBenefitStatus.value === PartnerBenefitStatus.HELP_ME
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligible
+        )
+      } else {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+        )
+      }
+
       return cardCollapsedText
     }
 

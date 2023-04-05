@@ -19,7 +19,10 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
-import { textReplacementRules } from './definitions/textReplacementRules'
+import {
+  getMaximumIncomeThreshold,
+  textReplacementRules,
+} from './definitions/textReplacementRules'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -147,6 +150,7 @@ export class BenefitHandler {
         this.rawInput.partnerBenefitStatus
       ),
     }
+
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
@@ -218,27 +222,9 @@ export class BenefitHandler {
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
 
-      /*
-      Make changes to avoid contridictions: 
-        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW
-        therefore, no following question will show up except income
-        2. when partner is older or equals to 60, but younger than 65, partner will not be eligible for 
-        OAS, therefore, hide the partner benefit section
-        3. when partner is older or equals to 65, we show the partner benefit section
-       */
-
-      if (
-        this.input.partner.age < 60 ||
-        this.input.partner.age > 123 ||
-        this.input.partner.age === undefined
-      ) {
-        requiredFields.sort(BenefitHandler.sortFields)
-        return requiredFields
-      } else if (this.input.partner.age >= 65) {
-        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+      if (this.input.partner.age >= 60) {
+        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
       }
-
-      requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
 
       if (
         this.input.partner.legalStatus.value &&
@@ -252,6 +238,26 @@ export class BenefitHandler {
 
       if (this.input.partner.livedOutsideCanada) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+      }
+
+      /*
+      Make changes to avoid contridictions when showing the Benefit Partner Question: 
+        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW.
+        2. when partner is between 60 and 65, partner will not be eligible for OAS
+        3. Only show it when: partner is older than 65 and LegalStatus is canadian AND
+            currently lives in Canada and has lived for 10+ years  OR 
+            currently lives outside Canada and has lived for 20+ years in Canada
+       */
+      if (
+        this.input.partner.age > 65 &&
+        this.input.partner.legalStatus.canadian &&
+        this.input.partner.livedOutsideCanada !== undefined &&
+        ((this.input.partner.livingCountry.canada &&
+          this.input.partner.yearsInCanadaSince18 > 10) ||
+          (!this.input.partner.livingCountry.canada &&
+            this.input.partner.yearsInCanadaSince18 > 20))
+      ) {
+        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }
     }
 
@@ -349,6 +355,42 @@ export class BenefitHandler {
     // Moving onto ALW, again only doing eligibility.
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
+
+    // task #115349 overwrite eligibility when conditions are met.
+    //              all the conditions below are just to make sure
+    //              one and one case is overwritten
+    if (
+      this.input.client.age >= 60 &&
+      this.input.client.age < 65 &&
+      !this.input.client.livedOutsideCanada &&
+      this.input.client.legalStatus.canadian &&
+      this.input.client.yearsInCanadaSince18 > 10 &&
+      this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
+      this.input.client.partnerBenefitStatus.value ===
+        PartnerBenefitStatus.NONE &&
+      allResults.partner.oas.entitlement.result !== undefined &&
+      allResults.partner.gis.entitlement.result !== undefined &&
+      allResults.client.alw.entitlement.result !== undefined
+    ) {
+      if (
+        allResults.partner.oas.entitlement.result > 0 &&
+        allResults.partner.gis.entitlement.result > 0 &&
+        allResults.client.alw.entitlement.result > 0
+      ) {
+        // overwrite eligibility
+        allResults.client.alw.eligibility = {
+          result: ResultKey.INELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.conditional,
+        }
+        // cardDetails and remove 'apply...' from the links
+        allResults.client.alw.cardDetail.mainText =
+          this.translations.detail.alwEligibleButPartnerAlreadyIs
+        allResults.client.alw.entitlement.result = 0
+        allResults.client.alw.cardDetail.links.splice(0, 1)
+      }
+    }
+
     this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
       clientGis,
       clientAlw,
@@ -381,6 +423,10 @@ export class BenefitHandler {
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
+
+    // this line overrides the partner value that's defaults to oasGis regardless.
+    this.input.partner.partnerBenefitStatus.value =
+      this.input.client.partnerBenefitStatus.value
 
     const partnerOas = new OasBenefit(
       this.input.partner,
@@ -773,15 +819,24 @@ export class BenefitHandler {
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
 
-              allResults.partner.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
-              allResults.client.alw.entitlement.result = applicantAlwCalcSingle
-              allResults.client.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
+              if (
+                this.input.partner.invSeparated &&
+                allResults.partner.gis.entitlement.result > 0 &&
+                clientAlw.entitlement.result > 0
+              ) {
+                allResults.partner.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+
+                allResults.client.alw.entitlement.result =
+                  applicantAlwCalcSingle
+
+                allResults.client.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+              }
             }
           }
 

@@ -173,7 +173,7 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: 'Je voudrais commencer à 65 ans (le plus commun)',
+        text: 'Je voudrais commencer à 65 ans (le plus commun)',
         shortText: 'Commencer à 65&nbsp;ans',
       },
       {
@@ -305,11 +305,11 @@ const fr: Translations = {
     eligibleWhen65ApplyNow:
       'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
-      "Vous serez probablement admissible lorsque vous aurez 60 ans. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
+      "Vous serez probablement admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
     eligibleWhen65:
       'Vous serez probablement admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='underline text-default-text' href='/fr/eligibility/#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
@@ -333,13 +333,15 @@ const fr: Translations = {
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     alwNotEligible:
-      "L'Allocation est une prestation pour les personnes âgées de&nbsp;60 à&nbsp;64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
+    alwEligibleButPartnerAlreadyIs:
+      "Pour être admissible à cette prestation, votre partenaire doit recevoir la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#partnerBenefitStatus'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si votre partenaire recevait ces prestations.",
     alwEligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
       'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
     afsNotEligible:
-      "L'Allocation au survivant est une prestation pour les personnes veuves âgées de&nbsp;60 à&nbsp;64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -368,11 +370,11 @@ const fr: Translations = {
       applyOnline:
         "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
       over70:
-        'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
+        'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
       eligibleWhenTurn65:
-        "Vous serez probablement admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' href='/fr/eligibility/#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
+        "Vous serez probablement admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
-        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a class='text-default-text' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
@@ -386,7 +388,7 @@ const fr: Translations = {
   detailWithHeading: {
     oasDeferralApplied: {
       heading: 'Comment le report affecte vos paiements',
-      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
+      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
@@ -415,6 +417,10 @@ const fr: Translations = {
     partnerDependOnYourIncome: {
       heading: 'Votre conjoint pourrait être admissible',
       text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
+    },
+    partnerEligibleButAnsweredNo: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: 'Vous pouvez <a href="/fr/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
   },
   summaryTitle: {

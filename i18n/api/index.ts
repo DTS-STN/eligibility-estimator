@@ -73,6 +73,7 @@ export interface Translations {
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
     alwNotEligible: string
+    alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string
     alwIfYouApply: string
     afsNotEligible: string
@@ -109,6 +110,7 @@ export interface Translations {
     calculatedBasedOnIndividualIncome: { heading: string; text: string }
     partnerEligible: { heading: string; text: string }
     partnerDependOnYourIncome: { heading: string; text: string }
+    partnerEligibleButAnsweredNo: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
