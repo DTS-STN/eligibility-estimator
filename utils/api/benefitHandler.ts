@@ -686,7 +686,7 @@ export class BenefitHandler {
             if (clientGis.entitlement.result === 0) {
               isApplicantGisAvailable = false
             } else {
-              clientGis.cardDetail.collapsedText.push(
+              allResults.client.gis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading
                   .calculatedBasedOnIndividualIncome
               )
