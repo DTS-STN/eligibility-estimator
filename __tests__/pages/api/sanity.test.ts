@@ -2199,7 +2199,9 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultKey.INCOME_DEPENDENT
     )
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-    expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expectAfsMarital(res)
     //partner results
