@@ -13,7 +13,6 @@ import {
   EntitlementResultOas,
   ProcessedInput,
   CardCollapsedText,
-  Link,
   LinkWithAction,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
@@ -56,11 +55,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       ? legalValues.gis.spouseAlwIncomeLimit
       : legalValues.gis.spouseNoOasIncomeLimit
 
-    console.log('maxIncome', maxIncome)
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided // refers to partner income
-    console.log('skipReqIncome', skipReqIncome)
-    console.log('this.input', this.input)
 
     const meetsReqIncome =
       skipReqIncome ||
@@ -85,13 +81,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             detail: this.translations.detail.conditional,
           }
         } else if (skipReqIncome) {
-          return {
-            result: ResultKey.INCOME_DEPENDENT,
-            reason: ResultReason.INCOME_MISSING,
-            detail:
-              this.translations.detail.gis
-                .eligibleDependingOnIncomeNoEntitlement,
-            incomeMustBeLessThan: maxIncome,
+          if (this.input.income.relevant >= maxIncome) {
+            return {
+              result: ResultKey.ELIGIBLE,
+              reason: ResultReason.INCOME,
+              detail: this.translations.detail.gis.incomeTooHigh,
+            }
+          } else {
+            return {
+              result: ResultKey.INCOME_DEPENDENT,
+              reason: ResultReason.INCOME_MISSING,
+              detail:
+                this.translations.detail.gis
+                  .eligibleDependingOnIncomeNoEntitlement,
+              incomeMustBeLessThan: maxIncome,
+            }
           }
         }
 
