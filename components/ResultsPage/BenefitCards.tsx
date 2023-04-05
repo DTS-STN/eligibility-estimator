@@ -99,7 +99,6 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.ifNotReceiveLetter64}</p>`
       }
     } else if (benefitKey === BenefitKey.alw) {
-      console.log(result)
       if (
         result.eligibility.result === ResultKey.ELIGIBLE &&
         result.entitlement.result === 0

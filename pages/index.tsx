@@ -7,6 +7,7 @@ import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
 import Head from 'next/head'
+import { consoleDev } from '../utils/web/helpers/utils'
 
 const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
 const AA_BUTTON_CLICK_ATTRIBUTE =
@@ -177,12 +178,13 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }
 
 export const getStaticProps = async () => {
-  console.log(
+  consoleDev(
     'process.env.ADOBE_ANALYTICS_URL',
     process.env.ADOBE_ANALYTICS_URL
       ? process.env.ADOBE_ANALYTICS_URL.substring(0, 27)
       : 'not loaded'
   )
+
   return {
     props: {
       adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,

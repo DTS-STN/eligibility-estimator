@@ -29,8 +29,6 @@ export const EstimatedTotalItem: React.VFC<{
     }
   }
 
-  // console.log(!result.entitlement, result.entitlement)
-
   if (!result.entitlement) return null
 
   return (
