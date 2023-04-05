@@ -47,8 +47,6 @@ import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
 import { consoleDev } from '../web/helpers/utils'
 
-const envAPP_ENV = process.env.APP_ENV
-
 export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
