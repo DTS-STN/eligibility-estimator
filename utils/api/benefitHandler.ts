@@ -854,10 +854,13 @@ export class BenefitHandler {
             !isPartnerGisAvailable
           ) {
             console.log('part gis available = ', isPartnerGisAvailable)
-            // return partnerGisResultT4
-            allResults.partner.gis.entitlement.result = partnerGisResultT4
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-            allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            // return partnerGisResultT4, but #153345 Only when Gis <> 0
+            if (partnerGis.entitlement.result !== 0) {
+              allResults.partner.gis.entitlement.result = partnerGisResultT4
+              allResults.partner.gis.entitlement.type =
+                EntitlementResultType.FULL
+              allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            }
           }
           isPartnerGisAvailable = true
 
