@@ -860,7 +860,14 @@ export class BenefitHandler {
             } else {
               allResults.client.alw.eligibility.result = ResultKey.INELIGIBLE
               allResults.client.alw.eligibility.reason = ResultReason.PARTNER
+              allResults.client.alw.eligibility.detail =
+                this.translations.detail.alwNotEligible
               allResults.client.alw.entitlement.result = 0
+              allResults.client.alw.entitlement.type =
+                EntitlementResultType.NONE
+              allResults.client.alw.cardDetail.mainText =
+                this.translations.detail.alwNotEligible
+              allResults.client.alw.cardDetail.links.splice(0, 1)
             }
           }
           isPartnerGisAvailable = true
