@@ -817,9 +817,6 @@ export class BenefitHandler {
 
             if (partnerGis.entitlement.result === 0) {
               isPartnerGisAvailable = false
-              allResults.client.alw.eligibility.result = ResultKey.INELIGIBLE
-              allResults.client.alw.eligibility.reason = ResultReason.PARTNER
-              allResults.client.alw.entitlement.result = 0
             } else {
               partnerGis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading
@@ -860,6 +857,10 @@ export class BenefitHandler {
               allResults.partner.gis.entitlement.type =
                 EntitlementResultType.FULL
               allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            } else {
+              allResults.client.alw.eligibility.result = ResultKey.INELIGIBLE
+              allResults.client.alw.eligibility.reason = ResultReason.PARTNER
+              allResults.client.alw.entitlement.result = 0
             }
           }
           isPartnerGisAvailable = true
