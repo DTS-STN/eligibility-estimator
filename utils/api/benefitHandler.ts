@@ -46,6 +46,7 @@ import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
 import { consoleDev } from '../web/helpers/utils'
+import { result } from 'lodash'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -255,9 +256,9 @@ export class BenefitHandler {
         this.input.partner.legalStatus.canadian &&
         this.input.partner.livedOutsideCanada !== undefined &&
         ((this.input.partner.livingCountry.canada &&
-          this.input.partner.yearsInCanadaSince18 > 10) ||
+          this.input.partner.yearsInCanadaSince18 >= 10) ||
           (!this.input.partner.livingCountry.canada &&
-            this.input.partner.yearsInCanadaSince18 > 20))
+            this.input.partner.yearsInCanadaSince18 >= 20))
       ) {
         requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }
@@ -366,7 +367,7 @@ export class BenefitHandler {
       this.input.client.age < 65 &&
       !this.input.client.livedOutsideCanada &&
       this.input.client.legalStatus.canadian &&
-      this.input.client.yearsInCanadaSince18 > 10 &&
+      this.input.client.yearsInCanadaSince18 >= 10 &&
       this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
       this.input.client.partnerBenefitStatus.value ===
         PartnerBenefitStatus.NONE &&
@@ -376,7 +377,7 @@ export class BenefitHandler {
     ) {
       if (
         allResults.partner.oas.entitlement.result > 0 &&
-        allResults.partner.gis.entitlement.result > 0 &&
+        allResults.partner.gis.entitlement.result >= 0 &&
         allResults.client.alw.entitlement.result > 0
       ) {
         // overwrite eligibility
@@ -723,6 +724,7 @@ export class BenefitHandler {
               'gis',
               clientGisCouple
             )
+
             allResults.partner.alw.entitlement.result = partnerAlwCalcCouple
 
             // Display a note stating when PartnerB turns 65, to determine if it is still
@@ -848,10 +850,25 @@ export class BenefitHandler {
             totalAmountSingle <= totalAmountCouple ||
             !isPartnerGisAvailable
           ) {
-            // return partnerGisResultT4
-            allResults.partner.gis.entitlement.result = partnerGisResultT4
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-            allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            console.log('part gis available = ', isPartnerGisAvailable)
+            // return partnerGisResultT4, but #153345 Only when Gis <> 0
+            if (partnerGis.entitlement.result !== 0) {
+              allResults.partner.gis.entitlement.result = partnerGisResultT4
+              allResults.partner.gis.entitlement.type =
+                EntitlementResultType.FULL
+              allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            } else {
+              allResults.client.alw.eligibility.result = ResultKey.INELIGIBLE
+              allResults.client.alw.eligibility.reason = ResultReason.PARTNER
+              allResults.client.alw.eligibility.detail =
+                this.translations.detail.alwNotEligible
+              allResults.client.alw.entitlement.result = 0
+              allResults.client.alw.entitlement.type =
+                EntitlementResultType.NONE
+              allResults.client.alw.cardDetail.mainText =
+                this.translations.detail.alwNotEligible
+              allResults.client.alw.cardDetail.links.splice(0, 1)
+            }
           }
           isPartnerGisAvailable = true
 

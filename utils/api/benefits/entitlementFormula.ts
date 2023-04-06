@@ -1,4 +1,8 @@
-import { EntitlementResultType, MaritalStatus } from '../definitions/enums'
+import {
+  EntitlementResultType,
+  MaritalStatus,
+  PartnerBenefitStatus,
+} from '../definitions/enums'
 import { BenefitResult, EntitlementResultOas } from '../definitions/types'
 import {
   MaritalStatusHelper,
@@ -82,10 +86,10 @@ export class EntitlementFormula {
     this.gisStatus = this.maritalStatus.single ? 1 : 2
 
     /*
-     Don't simply remove this line below, it needs proper handling if to be
-     implemented properly. I think the idea is that we would consider them
-     single for one scenario, consider them partnered for another scenario,
-     and then return whichever scenario is higher.
+      Don't simply remove this line below, it needs proper handling if to be
+      implemented properly. I think the idea is that we would consider them
+      single for one scenario, consider them partnered for another scenario,
+      and then return whichever scenario is higher.
     */
     if (maritalStatus.invSeparated)
       throw new Error(
@@ -129,7 +133,15 @@ export class EntitlementFormula {
         return GisSituation.AFS
       else return GisSituation.SINGLE
     } else {
-      if (this.partnerBenefitStatus.anyOas)
+      /**
+       * new request 115349
+       *  partnerBenefitStatus was build without considering the answer to partnerBenefits
+       *  this attempts to fix it, but the cases are too many to be sure this is correct
+       *    if answer = yes (OAS_GIS)          then partnerBenefitStatus = true
+       *    if answer = no  (NONE)             then partnerBenefitStatus = false
+       *    if answer = I don't know (HELP_ME) then partnerBenefitStatus.alw = true ???
+       */
+      if (this.partnerBenefitStatus.value === PartnerBenefitStatus.OAS_GIS)
         return this.age >= 65 ? GisSituation.PARTNER_OAS : GisSituation.ALW
       else if (this.partnerBenefitStatus.alw) return GisSituation.PARTNER_ALW
       else return GisSituation.PARTNER_NO_OAS
