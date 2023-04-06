@@ -46,6 +46,7 @@ import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
 import { consoleDev } from '../web/helpers/utils'
+import { result } from 'lodash'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -816,6 +817,9 @@ export class BenefitHandler {
 
             if (partnerGis.entitlement.result === 0) {
               isPartnerGisAvailable = false
+              allResults.client.alw.eligibility.result = ResultKey.INELIGIBLE
+              allResults.client.alw.eligibility.reason = ResultReason.PARTNER
+              allResults.client.alw.entitlement.result = 0
             } else {
               partnerGis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading
@@ -849,6 +853,7 @@ export class BenefitHandler {
             totalAmountSingle <= totalAmountCouple ||
             !isPartnerGisAvailable
           ) {
+            console.log('part gis available = ', isPartnerGisAvailable)
             // return partnerGisResultT4
             allResults.partner.gis.entitlement.result = partnerGisResultT4
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
