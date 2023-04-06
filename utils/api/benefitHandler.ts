@@ -313,6 +313,10 @@ export class BenefitHandler {
       },
     }
 
+    const initialPartnerBenefitStatus =
+      this.input.client.partnerBenefitStatus.value
+    consoleDev('initial Partner Benef Status =', initialPartnerBenefitStatus)
+
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     const clientOas = new OasBenefit(this.input.client, this.translations)
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
@@ -815,7 +819,11 @@ export class BenefitHandler {
               true
             )
 
-            if (partnerGis.entitlement.result === 0) {
+            // #115349 no allowance because partnerBenefits = No
+            if (
+              partnerGis.entitlement.result === 0 ||
+              initialPartnerBenefitStatus === PartnerBenefitStatus.NONE
+            ) {
               isPartnerGisAvailable = false
             } else {
               partnerGis.cardDetail.collapsedText.push(
@@ -850,9 +858,8 @@ export class BenefitHandler {
             totalAmountSingle <= totalAmountCouple ||
             !isPartnerGisAvailable
           ) {
-            console.log('part gis available = ', isPartnerGisAvailable)
-            // return partnerGisResultT4, but #153345 Only when Gis <> 0
-            if (partnerGis.entitlement.result !== 0) {
+            // return partnerGisResultT4 only partnerBenefits = No
+            if (initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE) {
               allResults.partner.gis.entitlement.result = partnerGisResultT4
               allResults.partner.gis.entitlement.type =
                 EntitlementResultType.FULL
@@ -866,7 +873,7 @@ export class BenefitHandler {
               allResults.client.alw.entitlement.type =
                 EntitlementResultType.NONE
               allResults.client.alw.cardDetail.mainText =
-                this.translations.detail.alwNotEligible
+                this.translations.detail.alwEligibleButPartnerAlreadyIs
               allResults.client.alw.cardDetail.links.splice(0, 1)
             }
           }
