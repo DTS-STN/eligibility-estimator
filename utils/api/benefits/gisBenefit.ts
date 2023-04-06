@@ -13,7 +13,6 @@ import {
   EntitlementResultOas,
   ProcessedInput,
   CardCollapsedText,
-  Link,
   LinkWithAction,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
@@ -57,7 +56,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       : legalValues.gis.spouseNoOasIncomeLimit
 
     // if income is not provided, assume they meet the income requirement
-    const skipReqIncome = !this.input.income.provided
+    const skipReqIncome = !this.input.income.provided // refers to partner income
 
     const meetsReqIncome =
       skipReqIncome ||
@@ -82,13 +81,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             detail: this.translations.detail.conditional,
           }
         } else if (skipReqIncome) {
-          return {
-            result: ResultKey.INCOME_DEPENDENT,
-            reason: ResultReason.INCOME_MISSING,
-            detail:
-              this.translations.detail.gis
-                .eligibleDependingOnIncomeNoEntitlement,
-            incomeMustBeLessThan: maxIncome,
+          if (this.input.income.relevant >= maxIncome) {
+            return {
+              result: ResultKey.INCOME_DEPENDENT,
+              reason: ResultReason.INCOME,
+              detail: this.translations.detail.gis.incomeTooHigh,
+            }
+          } else {
+            return {
+              result: ResultKey.INCOME_DEPENDENT,
+              reason: ResultReason.INCOME_MISSING,
+              detail:
+                this.translations.detail.gis
+                  .eligibleDependingOnIncomeNoEntitlement,
+              incomeMustBeLessThan: maxIncome,
+            }
           }
         }
 
@@ -101,7 +108,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.INCOME,
             detail: this.translations.detail.gis.incomeTooHigh,
           }
-        } else if (this.input.income.partner >= maxIncome && amount <= 0) {
+        } else if (this.input.income?.partner >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
