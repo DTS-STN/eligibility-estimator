@@ -873,7 +873,7 @@ export class BenefitHandler {
               allResults.client.alw.entitlement.type =
                 EntitlementResultType.NONE
               allResults.client.alw.cardDetail.mainText =
-                this.translations.detail.alwNotEligible
+                this.translations.detail.alwEligibleButPartnerAlreadyIs
               allResults.client.alw.cardDetail.links.splice(0, 1)
             }
           }
