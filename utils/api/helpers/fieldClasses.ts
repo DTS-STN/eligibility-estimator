@@ -108,15 +108,15 @@ export class MaritalStatusHelper extends FieldHelper {
 
 export class PartnerBenefitStatusHelper extends FieldHelper {
   helpMe: boolean
+  none: boolean
   oasEligibility: EntitlementResultType
   gisEligibility: EntitlementResultType
   alwEligibility: EntitlementResultType
 
   constructor(public value: PartnerBenefitStatus) {
     super(value)
-    this.helpMe =
-      this.value === PartnerBenefitStatus.HELP_ME ||
-      this.value === PartnerBenefitStatus.NONE
+    this.helpMe = this.value === PartnerBenefitStatus.HELP_ME
+    this.none = this.value === PartnerBenefitStatus.NONE
     this.oasEligibility = EntitlementResultType.NONE
     this.gisEligibility = EntitlementResultType.NONE
     this.alwEligibility = EntitlementResultType.NONE
@@ -131,10 +131,12 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
         this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         this.gisEligibility = EntitlementResultType.FULL
         break
-
       case PartnerBenefitStatus.HELP_ME:
         break
       case PartnerBenefitStatus.NONE:
+        this.alwEligibility = EntitlementResultType.NONE
+        this.oasEligibility = EntitlementResultType.NONE
+        this.gisEligibility = EntitlementResultType.NONE
         break
     }
   }
