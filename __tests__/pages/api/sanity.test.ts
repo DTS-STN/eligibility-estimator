@@ -728,7 +728,8 @@ describe('EE Sanity Test Scenarios:', () => {
 
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-    expect(res.body.results.gis.entitlement.result).toEqual(170.98)
+    expect(res.body.results.gis.entitlement.result).toEqual(637.78) // PartnerBenefit = No, therefore calculate as single user. #115349
+    //expect(res.body.results.gis.entitlement.result).toEqual(170.98)
 
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
