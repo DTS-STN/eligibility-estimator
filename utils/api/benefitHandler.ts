@@ -373,8 +373,7 @@ export class BenefitHandler {
       this.input.client.legalStatus.canadian &&
       this.input.client.yearsInCanadaSince18 >= 10 &&
       this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
-      this.input.client.partnerBenefitStatus.value ===
-        PartnerBenefitStatus.NONE &&
+      this.input.client.partnerBenefitStatus.none &&
       allResults.partner.oas.entitlement.result !== undefined &&
       allResults.partner.gis.entitlement.result !== undefined &&
       allResults.client.alw.entitlement.result !== undefined
