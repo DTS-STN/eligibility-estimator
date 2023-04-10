@@ -506,59 +506,59 @@ describe('EE Sanity Test Scenarios:', () => {
       - years resided in Canada: 40
   */
 
-  // it('should pass the sanity test - SAN-GIS-c2-01', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 4000, // personal income
-  //     age: 68,
-  //     oasDefer: true,
-  //     oasAge: 68,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: true,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 10,
-  //     everLivedSocialCountry: false,
-  //     partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 0, // partner income
-  //     partnerAge: 78,
-  //     partnerLivingCountry: LivingCountry.AGREEMENT, // country code
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
-  //     partnerYearsInCanadaSince18: 40,
-  //   })
+  it('should pass the sanity test - SAN-GIS-c2-01', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 4000, // personal income
+      age: 68,
+      oasDefer: true,
+      oasAge: 68,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: true,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 10,
+      everLivedSocialCountry: false,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncomeAvailable: true,
+      partnerIncome: 0, // partner income
+      partnerAge: 78,
+      partnerLivingCountry: LivingCountry.AGREEMENT, // country code
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 40,
+    })
 
-  //   //client results
-  //   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_65_TO_69
-  //   )
-  //   expect(res.body.results.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.PARTIAL
-  //   )
-  //   expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('209.02')
-  //   expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_65_TO_69
+    )
+    expect(res.body.results.oas.entitlement.type).toEqual(
+      EntitlementResultType.PARTIAL
+    )
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('209.02')
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-  //   expect(res.body.results.gis.entitlement.result).toEqual(1335.63)
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.entitlement.result).toEqual(1335.63)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-  //   expect(res.body.results.afs.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.afs.eligibility.reason).toEqual(
-  //     ResultReason.MARITAL
-  //   )
-  //   expect(res.body.results.afs.entitlement.result).toEqual(0)
-  // })
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.results.afs.entitlement.result).toEqual(0)
+  })
 
   /*
     SAN-GIS-C2-02
@@ -691,86 +691,87 @@ describe('EE Sanity Test Scenarios:', () => {
       - years resided in Canada: 20
   */
 
-  // it('should pass the sanity test - SAN-GIS-c2-03', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 8326, // personal income
-  //     age: 78,
-  //     oasDefer: true,
-  //     oasAge: 67,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: false,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 30,
-  //     everLivedSocialCountry: false,
-  //     partnerBenefitStatus: PartnerBenefitStatus.NONE,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 19226, // partner income
-  //     partnerAge: 68,
-  //     partnerLivingCountry: LivingCountry.CANADA, // country code
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
-  //     partnerYearsInCanadaSince18: 20,
-  //   })
+  it('should pass the sanity test - SAN-GIS-c2-03', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 8326, // personal income
+      age: 78,
+      oasDefer: true,
+      oasAge: 67,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 30,
+      everLivedSocialCountry: false,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: true,
+      partnerIncome: 19226, // partner income
+      partnerAge: 68,
+      partnerLivingCountry: LivingCountry.CANADA, // country code
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 20,
+    })
 
-  //   //client results
-  //   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_70_AND_OVER
-  //   )
-  //   expect(res.body.results.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.PARTIAL
-  //   )
-  //   expect(res.body.results.oas.entitlement.result).toEqual(648.92)
-  //   expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_70_AND_OVER
+    )
+    expect(res.body.results.oas.entitlement.type).toEqual(
+      EntitlementResultType.PARTIAL
+    )
+    expect(res.body.results.oas.entitlement.result).toEqual(648.92)
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-  //   expect(res.body.results.gis.entitlement.result).toEqual(170.98)
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.entitlement.result).toEqual(637.78) // PartnerBenefit = No, therefore calculate as single user. #115349
+    //expect(res.body.results.gis.entitlement.result).toEqual(170.98)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-  //   expect(res.body.results.afs.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.afs.eligibility.reason).toEqual(
-  //     ResultReason.MARITAL
-  //   )
-  //   expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.results.afs.entitlement.result).toEqual(0)
 
-  //   //partner results
-  //   expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_65_TO_69
-  //   )
-  //   expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.PARTIAL
-  //   )
-  //   expect(res.body.partnerResults.oas.entitlement.result).toEqual(343.78)
-  //   expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
+    //partner results
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_65_TO_69
+    )
+    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
+      EntitlementResultType.PARTIAL
+    )
+    expect(res.body.partnerResults.oas.entitlement.result).toEqual(343.78)
+    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-  //     ResultReason.NONE
-  //   )
-  //   expect(res.body.partnerResults.gis.entitlement.result).toEqual(342.87)
+    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.NONE
+    )
+    expect(res.body.partnerResults.gis.entitlement.result).toEqual(342.87)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
-  // })
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
+  })
 
   /*
   SAN-GIS-C2-04
@@ -794,86 +795,86 @@ describe('EE Sanity Test Scenarios:', () => {
       - years resided in Canada: 10
   */
 
-  // it('should pass the sanity test - SAN-GIS-c2-04', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 8326, // personal income
-  //     age: 78,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: false,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 20,
-  //     everLivedSocialCountry: false,
-  //     partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 19326, // partner income
-  //     partnerAge: 78,
-  //     partnerLivingCountry: LivingCountry.CANADA, // country code
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
-  //     partnerYearsInCanadaSince18: 10,
-  //   })
+  it('should pass the sanity test - SAN-GIS-c2-04', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 8326, // personal income
+      age: 78,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 20,
+      everLivedSocialCountry: false,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncomeAvailable: true,
+      partnerIncome: 19326, // partner income
+      partnerAge: 78,
+      partnerLivingCountry: LivingCountry.CANADA, // country code
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 10,
+    })
 
-  //   //client results
-  //   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_70_AND_OVER
-  //   )
-  //   expect(res.body.results.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.PARTIAL
-  //   )
-  //   expect(res.body.results.oas.entitlement.result).toEqual(378.16)
-  //   expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_70_AND_OVER
+    )
+    expect(res.body.results.oas.entitlement.type).toEqual(
+      EntitlementResultType.PARTIAL
+    )
+    expect(res.body.results.oas.entitlement.result).toEqual(378.16)
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-  //   expect(res.body.results.gis.entitlement.result).toEqual(340.87)
+    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+    expect(res.body.results.gis.entitlement.result).toEqual(340.87)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-  //   expect(res.body.results.afs.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.afs.eligibility.reason).toEqual(
-  //     ResultReason.MARITAL
-  //   )
-  //   expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.results.afs.entitlement.result).toEqual(0)
 
-  //   //partner results
-  //   expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_70_AND_OVER
-  //   )
-  //   expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.PARTIAL
-  //   )
-  //   expect(res.body.partnerResults.oas.entitlement.result).toEqual(189.08)
-  //   expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
+    //partner results
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_70_AND_OVER
+    )
+    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
+      EntitlementResultType.PARTIAL
+    )
+    expect(res.body.partnerResults.oas.entitlement.result).toEqual(189.08)
+    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-  //     ResultReason.NONE
-  //   )
-  //   expect(res.body.partnerResults.gis.entitlement.result).toEqual(512.76)
+    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.NONE
+    )
+    expect(res.body.partnerResults.gis.entitlement.result).toEqual(512.76)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
-  // })
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
+  })
 
   /*
     SAN-GIS-C1-01
@@ -897,90 +898,90 @@ describe('EE Sanity Test Scenarios:', () => {
       - years resided in Canada: 40
   */
 
-  // it('should pass the sanity test - SAN-GIS-c1-01', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 0, // personal income
-  //     age: 78,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: false,
-  //     livingCountry: LivingCountry.AGREEMENT, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 35,
-  //     everLivedSocialCountry: false,
-  //     partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 0, // partner income
-  //     partnerAge: 78,
-  //     partnerLivingCountry: LivingCountry.CANADA, // country code
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: false,
-  //     partnerYearsInCanadaSince18: 40,
-  //   })
+  it('should pass the sanity test - SAN-GIS-c1-01', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 0, // personal income
+      age: 78,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.AGREEMENT, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      everLivedSocialCountry: false,
+      partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
+      partnerIncomeAvailable: true,
+      partnerIncome: 0, // partner income
+      partnerAge: 78,
+      partnerLivingCountry: LivingCountry.CANADA, // country code
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: 40,
+    })
 
-  //   //client results
-  //   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   expect(res.body.results.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_70_AND_OVER
-  //   )
-  //   expect(res.body.results.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.PARTIAL
-  //   )
-  //   expect(res.body.results.oas.entitlement.result).toEqual(661.78)
-  //   expect(res.body.results.oas.entitlement.clawback).toEqual(0)
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_70_AND_OVER
+    )
+    expect(res.body.results.oas.entitlement.type).toEqual(
+      EntitlementResultType.PARTIAL
+    )
+    expect(res.body.results.oas.entitlement.result).toEqual(661.78)
+    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.results.gis.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(
-  //     ResultReason.LIVING_COUNTRY
-  //   )
-  //   expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.LIVING_COUNTRY
+    )
+    expect(res.body.results.gis.entitlement.result).toEqual(0)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-  //   expect(res.body.results.afs.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.afs.eligibility.reason).toEqual(
-  //     ResultReason.MARITAL
-  //   )
-  //   expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.afs.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.afs.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.results.afs.entitlement.result).toEqual(0)
 
-  //   //partner results
-  //   expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_70_AND_OVER
-  //   )
-  //   expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-  //     EntitlementResultType.FULL
-  //   )
-  //   expect(res.body.partnerResults.oas.entitlement.result).toEqual(756.32)
-  //   expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
+    //partner results
+    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_70_AND_OVER
+    )
+    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
+      EntitlementResultType.FULL
+    )
+    expect(res.body.partnerResults.oas.entitlement.result).toEqual(756.32)
+    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
 
-  //   expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-  //     ResultReason.NONE
-  //   )
-  //   expect(res.body.partnerResults.gis.entitlement.result).toEqual(618.15)
+    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.NONE
+    )
+    expect(res.body.partnerResults.gis.entitlement.result).toEqual(618.15)
 
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expect(res.body.results.alw.entitlement.result).toEqual(0)
-  // })
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.entitlement.result).toEqual(0)
+  })
 
   /*
     SAN-GIS-C1-02
@@ -1186,49 +1187,49 @@ describe('EE Sanity Test Scenarios:', () => {
      
   */
 
-  // it('should pass the sanity test - SAN-GIS-ALW-01', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 0, // personal income
-  //     age: 68,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: true,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 25,
-  //     everLivedSocialCountry: false,
-  //     partnerBenefitStatus: PartnerBenefitStatus.NONE,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 4000, // partner income
-  //     partnerAge: 64,
-  //     partnerLivingCountry: LivingCountry.CANADA,
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: false,
-  //     partnerYearsInCanadaSince18: 40,
-  //   })
+  it('should pass the sanity test - SAN-GIS-ALW-01', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 0, // personal income
+      age: 68,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: true,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 25,
+      everLivedSocialCountry: false,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: true,
+      partnerIncome: 4000, // partner income
+      partnerAge: 64,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: 40,
+    })
 
-  //   //client results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 429.73)
-  //   expectGisEligible(res, 1284.8)
-  //   expectAlwTooOld(res)
-  //   expectAfsMarital(res)
-  //   //partner results
-  //   expectOasNotEligible(res, true)
-  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_YOUNG_64
-  //   )
-  //   expectGisNotEligible(res, true)
-  //   expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-  //     ResultReason.OAS
-  //   )
-  //   expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expectAlwEligible(res, 1056.71, true)
-  // })
+    //client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 429.73)
+    expectGisEligible(res, 1284.8)
+    expectAlwTooOld(res)
+    expectAfsMarital(res)
+    //partner results
+    expectOasNotEligible(res, true)
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG_64
+    )
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.OAS
+    )
+    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expectAlwEligible(res, 1056.71, true)
+  })
 
   /*
   SAN-GIS-ALW-02
@@ -1252,49 +1253,49 @@ describe('EE Sanity Test Scenarios:', () => {
     
   */
 
-  // it('should pass the sanity test - SAN-GIS-ALW-02', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 8326, // personal income
-  //     age: 68,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: true,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 10,
-  //     everLivedSocialCountry: undefined,
-  //     partnerBenefitStatus: PartnerBenefitStatus.NONE,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 0, // partner income
-  //     partnerAge: 64,
-  //     partnerLivingCountry: LivingCountry.CANADA,
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: false,
-  //     partnerYearsInCanadaSince18: 40,
-  //   })
+  it('should pass the sanity test - SAN-GIS-ALW-02', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 8326, // personal income
+      age: 68,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: true,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 10,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: true,
+      partnerIncome: 0, // partner income
+      partnerAge: 64,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: false,
+      partnerYearsInCanadaSince18: 40,
+    })
 
-  //   //client results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 171.89)
-  //   expectGisEligible(res, 1065.63)
-  //   expectAlwTooOld(res)
-  //   expectAfsMarital(res)
-  //   //partner results
-  //   expectOasNotEligible(res, true)
-  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_YOUNG_64
-  //   )
-  //   expectGisNotEligible(res, true)
-  //   expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-  //     ResultReason.OAS
-  //   )
-  //   expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-  //     ResultKey.ELIGIBLE
-  //   )
-  //   expectAlwEligible(res, 1305.71, true)
-  // })
+    //client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 171.89)
+    expectGisEligible(res, 1065.63)
+    expectAlwTooOld(res)
+    expectAfsMarital(res)
+    //partner results
+    expectOasNotEligible(res, true)
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG_64
+    )
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.OAS
+    )
+    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
+      ResultKey.ELIGIBLE
+    )
+    expectAlwEligible(res, 1305.71, true)
+  })
 
   /*
     SAN-GIS-ALW-03
@@ -1390,46 +1391,46 @@ describe('EE Sanity Test Scenarios:', () => {
     
   */
 
-  // it('should pass the sanity test - SAN-GIS-ALW-04', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 4000, // personal income
-  //     age: 78,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: true,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 20,
-  //     everLivedSocialCountry: undefined,
-  //     partnerBenefitStatus: PartnerBenefitStatus.NONE,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 34592, // partner income
-  //     partnerAge: 64,
-  //     partnerLivingCountry: LivingCountry.CANADA,
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
-  //     partnerYearsInCanadaSince18: 25,
-  //   })
+  it('should pass the sanity test - SAN-GIS-ALW-04', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 4000, // personal income
+      age: 78,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: true,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 20,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: true,
+      partnerIncome: 34592, // partner income
+      partnerAge: 64,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 25,
+    })
 
-  //   //client results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 378.16)
-  //   expectGisEligible(res, 1163.74)
-  //   expectAlwTooOld(res)
-  //   expectAfsMarital(res)
-  //   //partner results
-  //   expectOasNotEligible(res, true)
-  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_YOUNG_64
-  //   )
-  //   expectGisNotEligible(res, true)
-  //   expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-  //     ResultReason.OAS
-  //   )
-  //   expectAlwEligible(res, 83.09, true)
-  // })
+    //client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 378.16)
+    expectGisEligible(res, 1163.74)
+    expectAlwTooOld(res)
+    expectAfsMarital(res)
+    //partner results
+    expectOasNotEligible(res, true)
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG_64
+    )
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.OAS
+    )
+    expectAlwEligible(res, 83.09, true)
+  })
 
   /*
     SAN-GIS-ALW-05
@@ -1583,44 +1584,44 @@ describe('EE Sanity Test Scenarios:', () => {
     - years resided in Canada: 35
   */
 
-  // it('should pass the sanity test - SAN-GIS-ALW-07', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 4000, // personal income
-  //     age: 64,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: true,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 35,
-  //     everLivedSocialCountry: undefined,
-  //     partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 23216, // partner income
-  //     partnerAge: 78,
-  //     partnerLivingCountry: LivingCountry.CANADA,
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
-  //     partnerYearsInCanadaSince18: 35,
-  //   })
+  it('should pass the sanity test - SAN-GIS-ALW-07', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 4000, // personal income
+      age: 64,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: true,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncomeAvailable: true,
+      partnerIncome: 23216, // partner income
+      partnerAge: 78,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 35,
+    })
 
-  //   //client results
-  //   expectOasNotEligible(res)
-  //   expect(res.body.results.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_YOUNG_64
-  //   )
-  //   expectGisNotEligible(res)
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-  //   expectAlwEligible(res, 236.09)
-  //   expectAfsMarital(res)
-  //   //partner results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 661.78, true)
-  //   expectGisEligible(res, 322.74, true)
-  //   expectAlwTooOld(res, true)
-  // })
+    //client results
+    expectOasNotEligible(res)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG_64
+    )
+    expectGisNotEligible(res)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    expectAlwEligible(res, 236.09)
+    expectAfsMarital(res)
+    //partner results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 661.78, true)
+    expectGisEligible(res, 322.74, true)
+    expectAlwTooOld(res, true)
+  })
 
   /*
     SAN-GIS-ALW-08
@@ -1644,45 +1645,45 @@ describe('EE Sanity Test Scenarios:', () => {
       - years resided in Canada: 40
   */
 
-  // it('should pass the sanity test - SAN-GIS-ALW-08', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 27216, // personal income
-  //     age: 64,
-  //     oasDefer: false,
-  //     oasAge: undefined,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: false,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 35,
-  //     everLivedSocialCountry: undefined,
-  //     partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-  //     partnerIncomeAvailable: true,
-  //     partnerIncome: 11376, // partner income
-  //     partnerAge: 67,
-  //     partnerLivingCountry: LivingCountry.CANADA,
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
-  //     partnerYearsInCanadaSince18: 40,
-  //   })
+  it('should pass the sanity test - SAN-GIS-ALW-08', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 27216, // personal income
+      age: 64,
+      oasDefer: false,
+      oasAge: undefined,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOutsideCanada: true,
+      yearsInCanadaSince18: 35,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+      partnerIncomeAvailable: true,
+      partnerIncome: 11376, // partner income
+      partnerAge: 67,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOutsideCanada: true,
+      partnerYearsInCanadaSince18: 40,
+    })
 
-  //   //client results
-  //   expectOasNotEligible(res)
-  //   expect(res.body.results.oas.eligibility.reason).toEqual(
-  //     ResultReason.AGE_YOUNG_64
-  //   )
-  //   expectGisNotEligible(res)
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-  //   // eligible but income is too high
-  //   expectAlwEligible(res, 0)
-  //   expectAfsMarital(res)
-  //   //partner results
-  //   expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
-  //   expectGisEligible(res, 235.89, true)
-  //   expectAlwTooOld(res, true)
-  // })
+    //client results
+    expectOasNotEligible(res)
+    expect(res.body.results.oas.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG_64
+    )
+    expectGisNotEligible(res)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
+    // eligible but income is too high
+    expectAlwEligible(res, 0)
+    expectAfsMarital(res)
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
+    expectGisEligible(res, 235.89, true)
+    expectAlwTooOld(res, true)
+  })
 
   /*
     SAN-GIS-ALW-09
