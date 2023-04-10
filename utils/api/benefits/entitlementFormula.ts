@@ -133,15 +133,7 @@ export class EntitlementFormula {
         return GisSituation.AFS
       else return GisSituation.SINGLE
     } else {
-      /**
-       * new request 115349
-       *  partnerBenefitStatus was build without considering the answer to partnerBenefits
-       *  this attempts to fix it, but the cases are too many to be sure this is correct
-       *    if answer = yes (OAS_GIS)          then partnerBenefitStatus = true
-       *    if answer = no  (NONE)             then partnerBenefitStatus = false
-       *    if answer = I don't know (HELP_ME) then partnerBenefitStatus.alw = true ???
-       */
-      if (this.partnerBenefitStatus.value === PartnerBenefitStatus.OAS_GIS)
+      if (this.partnerBenefitStatus.anyOas)
         return this.age >= 65 ? GisSituation.PARTNER_OAS : GisSituation.ALW
       else if (this.partnerBenefitStatus.alw) return GisSituation.PARTNER_ALW
       else return GisSituation.PARTNER_NO_OAS
