@@ -56,7 +56,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqCountry
     ) {
       if (meetsReqAge && incomeNotProvided) {
-        console.log(' this should be working ')
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.INCOME_MISSING,
