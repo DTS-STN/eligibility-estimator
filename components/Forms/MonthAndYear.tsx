@@ -61,9 +61,10 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
       fieldToSet = 'month'
     }
 
+    const limit = 15
     const newDate: IAgeDateInput = {
       ...dateInput,
-      [fieldToSet]: Number(e.target.value),
+      [fieldToSet]: Number(e.target.value.slice(0, limit)),
     }
     setDateInput(newDate)
     baseOnChange(
