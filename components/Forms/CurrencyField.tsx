@@ -94,6 +94,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         allowNegative={false}
         decimalScale={2}
         onBlur={() => setFieldValue(getFieldValue())}
+        maxLength={15}
       />
 
       {error && (
