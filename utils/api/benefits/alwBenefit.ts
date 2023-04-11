@@ -59,7 +59,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.INCOME_MISSING,
-          detail: this.translations.detail.alwNotEligible,
+          detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
         }
       } else if (meetsReqAge) {
         const amount = this.formulaResult()
@@ -96,6 +96,12 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           reason: ResultReason.AGE,
           detail: this.translations.detail.alwNotEligible,
         }
+      }
+    } else if (meetsReqAge && incomeNotProvided) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.INCOME_MISSING,
+        detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
     } else if (overAgeReq) {
       return {

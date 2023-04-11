@@ -315,7 +315,6 @@ export class BenefitHandler {
 
     const initialPartnerBenefitStatus =
       this.input.client.partnerBenefitStatus.value
-    consoleDev('initial Partner Benef Status =', initialPartnerBenefitStatus)
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     const clientOas = new OasBenefit(this.input.client, this.translations)

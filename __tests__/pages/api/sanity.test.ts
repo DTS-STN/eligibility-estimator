@@ -1979,7 +1979,7 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.MARITAL
+      ResultReason.INCOME_MISSING
     )
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -2029,7 +2029,7 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.MARITAL
+      ResultReason.INCOME_MISSING
     )
     expect(res.body.results.afs.eligibility.result).toEqual(
       ResultKey.INCOME_DEPENDENT
@@ -2143,7 +2143,7 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.PARTNER
+      ResultReason.INCOME_MISSING
     )
     expectAfsMarital(res)
   })
