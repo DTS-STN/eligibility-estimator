@@ -66,6 +66,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         allowNegative={false}
         decimalSeparator={null}
         aria-describedby={`help-text-enter-${name}`}
+        maxLength={15}
       />
 
       {error && (
