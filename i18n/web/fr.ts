@@ -25,9 +25,12 @@ const fr: WebTranslations = {
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  breadcrumb2Title: 'Service Canada',
+  // breadcrumb2Title: 'Service Canada',
+  // breadcrumb2URL:
+  //   'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  breadcrumb2Title: 'Laboratoires de Service Canada',
   breadcrumb2URL:
-    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+    'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   questionPageTitle:
