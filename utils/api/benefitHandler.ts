@@ -362,8 +362,6 @@ export class BenefitHandler {
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
 
-    console.log('allResults', allResults)
-
     // task #115349 overwrite eligibility when conditions are met.
     //              all the conditions below are just to make sure
     //              one and one case is overwritten
@@ -471,7 +469,10 @@ export class BenefitHandler {
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
-    if (this.input.client.invSeparated) {
+    if (
+      this.input.client.invSeparated &&
+      this.input.client.maritalStatus.partnered
+    ) {
       const isIncomeProvided =
         this.input.client.income.provided && this.input.partner.income.provided
 
