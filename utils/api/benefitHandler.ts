@@ -362,6 +362,8 @@ export class BenefitHandler {
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
 
+    console.log('allResults', allResults)
+
     // task #115349 overwrite eligibility when conditions are met.
     //              all the conditions below are just to make sure
     //              one and one case is overwritten
@@ -374,9 +376,9 @@ export class BenefitHandler {
       this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
       this.input.client.partnerBenefitStatus.value ===
         PartnerBenefitStatus.NONE &&
-      allResults.partner.oas.entitlement.result !== undefined &&
-      allResults.partner.gis.entitlement.result !== undefined &&
-      allResults.client.alw.entitlement.result !== undefined
+      allResults.partner.oas.entitlement !== undefined &&
+      allResults.partner.gis.entitlement !== undefined &&
+      allResults.client.alw.entitlement !== undefined
     ) {
       if (
         allResults.partner.oas.entitlement.result > 0 &&
