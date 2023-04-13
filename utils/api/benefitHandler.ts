@@ -706,6 +706,14 @@ export class BenefitHandler {
                 this.translations.detailWithHeading
                   .calculatedBasedOnIndividualIncome
               )
+              allResults.partner.alw.cardDetail = partnerAlw.cardDetail
+              allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
+
+              if (partnerAlwCalcSingle > 0) {
+                partnerAlw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading.partnerEligible
+                )
+              }
             }
           }
 
