@@ -141,3 +141,11 @@ export enum LanguageCode {
   EN = 'en-CA',
   FR = 'fr-CA',
 }
+
+export enum Steps {
+  STEP_1 = 'step1',
+  STEP_2 = 'step2',
+  STEP_3 = 'step3',
+  STEP_4 = 'step4',
+  STEP_5 = 'step5',
+}

@@ -18,6 +18,7 @@ import {
   ResultKey,
   ResultReason,
   SummaryState,
+  Steps,
 } from './enums'
 import { FieldConfig, FieldKey } from './fields'
 
@@ -170,4 +171,28 @@ export interface SummaryObject {
 export interface NextStepText {
   nextStepTitle: string
   nextStepContent: string
+}
+
+export type Card = {
+  children: CardChildren
+  id: string
+  title: string
+  buttonLabel: string
+  buttonAttributes: Object
+  buttonOnChange?: (e) => void
+}
+
+export type CardChildren = JSX.Element[]
+
+export type CardConfig = {
+  title: string
+  buttonLabel: string
+  keys: FieldKey[]
+  buttonAttributes: Object
+}
+
+export type StepValidity = { [x in Steps]?: { isValid: boolean } }
+
+export type NextClickedObject = {
+  [x in Steps]?: boolean
 }
