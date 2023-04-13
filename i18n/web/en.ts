@@ -24,9 +24,12 @@ const en: WebTranslations = {
   search: 'Search Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  breadcrumb2Title: 'Service Canada',
+  //breadcrumb2Title: 'Service Canada',
+  //breadcrumb2URL:
+  //  'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+  breadcrumb2Title: 'Service Canada Labs',
   breadcrumb2URL:
-    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+    'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
