@@ -73,13 +73,15 @@ export interface Translations {
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
     alwNotEligible: string
+    alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string
     alwIfYouApply: string
     afsNotEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
-    oasClawback: string
+    oasClawbackInCanada: string
+    oasClawbackNotInCanada: string
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string
@@ -108,6 +110,7 @@ export interface Translations {
     calculatedBasedOnIndividualIncome: { heading: string; text: string }
     partnerEligible: { heading: string; text: string }
     partnerDependOnYourIncome: { heading: string; text: string }
+    partnerEligibleButAnsweredNo: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
@@ -151,4 +154,5 @@ export function numberToStringCurrency(
       minimumFractionDigits: rounding,
     })
     .replace('.00', '')
+    .replace(/,00\s/, '\xa0')
 }

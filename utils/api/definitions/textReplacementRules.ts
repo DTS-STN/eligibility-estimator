@@ -1,6 +1,7 @@
 import { numberToStringCurrency, Translations } from '../../../i18n/api'
 import { BenefitHandler } from '../benefitHandler'
 import legalValues from '../scrapers/output'
+import { Language } from './enums'
 import { BenefitResult, Link } from './types'
 
 type TextReplacementRules = {
@@ -82,6 +83,8 @@ export const textReplacementRules: TextReplacementRules = {
     generateLink(handler.translations.links.oasRecoveryTaxInline),
   LINK_LEARN_ABOUT_RECOVERY_TAX: (handler) =>
     generateLink(handler.translations.links.oasLearnAboutRecoveryTax),
+  LINK_NON_RESIDENT_TAX: (handler) =>
+    generateLink(handler.translations.links.oasNonResidentTax),
   PARTNER_BENEFIT_AMOUNT: (handler, benefitResult) =>
     `<strong>${numberToStringCurrency(
       benefitResult.entitlement.result,
@@ -99,4 +102,8 @@ export function generateLink(link: Link, opensNewWindow?: string): string {
 
 export function getMaxYear(): number {
   return new Date().getFullYear() - 18
+}
+
+export function getMaximumIncomeThreshold(language: Language): string {
+  return numberToStringCurrency(legalValues.oas.incomeLimit, language)
 }

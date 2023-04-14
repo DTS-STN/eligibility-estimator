@@ -15,9 +15,13 @@ export function expectAfsMarital(res: MockResponseObject<ResponseSuccess>) {
   expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.MARITAL)
 }
 
-export function expectAlwTooOld(res: MockResponseObject<ResponseSuccess>) {
-  expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
-  expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+export function expectAlwTooOld(
+  res: MockResponseObject<ResponseSuccess>,
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+  expect(results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(results.alw.eligibility.reason).toEqual(ResultReason.AGE)
 }
 
 export function expectAlwAfsTooOld(res: MockResponseObject<ResponseSuccess>) {
@@ -56,40 +60,68 @@ export function expectAllIneligible(res: MockResponseObject<ResponseSuccess>) {
 export function expectOasEligible(
   res: MockResponseObject<ResponseSuccess>,
   oasType: EntitlementResultType = EntitlementResultType.FULL,
-  entitlement?: number
+  entitlement?: number,
+  partner?: boolean
 ) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
-  expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   //expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
-  expect(res.body.results.oas.entitlement.type).toEqual(oasType)
+  expect(results.oas.entitlement.type).toEqual(oasType)
   if (oasType === EntitlementResultType.FULL && !entitlement)
     entitlement = legalValues.oas.amount
   if (entitlement)
-    expect(res.body.results.oas.entitlement.result).toEqual(
-      entitlement - res.body.results.oas.entitlement.clawback
+    expect(results.oas.entitlement.result).toEqual(
+      //entitlement - results.oas.entitlement.clawback //with clawback #114098
+      entitlement //without clawback #114098
     )
+}
+
+export function expectOasNotEligible(
+  res: MockResponseObject<ResponseSuccess>,
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+
+  expect(results.oas.eligibility.result).not.toEqual(ResultKey.ELIGIBLE)
+  expect(results.oas.entitlement.result).toEqual(0)
 }
 
 export function expectGisEligible(
   res: MockResponseObject<ResponseSuccess>,
-  entitlement?: number
+  entitlement?: number,
+  partner?: boolean
 ) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
-  expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-  if (entitlement)
-    expect(res.body.results.gis.entitlement.result).toEqual(entitlement)
+  expect(results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+  if (entitlement) expect(results.gis.entitlement.result).toEqual(entitlement)
+}
+
+export function expectGisNotEligible(
+  res: MockResponseObject<ResponseSuccess>,
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+
+  expect(results.gis.eligibility.result).not.toEqual(ResultKey.ELIGIBLE)
+  expect(results.gis.entitlement.result).toEqual(0)
 }
 
 export function expectAlwEligible(
   res: MockResponseObject<ResponseSuccess>,
-  entitlement?: number
+  entitlement?: number,
+  partner?: boolean
 ) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
-  expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.NONE)
-  if (entitlement)
-    expect(res.body.results.alw.entitlement.result).toEqual(entitlement)
+  expect(results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+  if (entitlement) expect(results.alw.entitlement.result).toEqual(entitlement)
 }
 
 export function expectAfsEligible(

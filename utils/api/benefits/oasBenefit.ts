@@ -2,6 +2,7 @@ import { Translations } from '../../../i18n/api'
 import {
   BenefitKey,
   EntitlementResultType,
+  PartnerBenefitStatus,
   ResultKey,
   ResultReason,
 } from '../definitions/enums'
@@ -162,7 +163,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const monthlyClawbackAmount = roundToTwo(this.clawbackAmount / 12)
 
     // monthly entitlement amount minus monthly clawback amount
-    const resultCurrent = this.currentEntitlementAmount - monthlyClawbackAmount
+    // const resultCurrent = this.currentEntitlementAmount - monthlyClawbackAmount  //Task 114098 original code
+    // task 114098 do not substract the amount from the benefit amount
+    const resultCurrent = this.currentEntitlementAmount //remove this line when a correct recovery process is in place.
+
     if (resultCurrent <= 0) {
       return {
         result: 0,
@@ -297,9 +301,21 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       return cardCollapsedText
 
     if (this.partner && this.entitlement.result !== 0) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.partnerEligible
-      )
+      if (
+        // eslint-disable-next-line prettier/prettier
+        this.input.partnerBenefitStatus.value ===
+          PartnerBenefitStatus.OAS_GIS ||
+        this.input.partnerBenefitStatus.value === PartnerBenefitStatus.HELP_ME
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligible
+        )
+      } else {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+        )
+      }
+
       return cardCollapsedText
     }
 

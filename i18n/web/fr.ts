@@ -4,6 +4,7 @@ import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
+  getMaximumIncomeThreshold,
 } from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
@@ -24,9 +25,12 @@ const fr: WebTranslations = {
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  breadcrumb2Title: 'Service Canada',
+  // breadcrumb2Title: 'Service Canada',
+  // breadcrumb2URL:
+  //   'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  breadcrumb2Title: 'Laboratoires de Service Canada',
   breadcrumb2URL:
-    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+    'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   questionPageTitle:
@@ -49,7 +53,9 @@ const fr: WebTranslations = {
   youMayBeEligible: 'Vous pourriez recevoir des prestations de vieillesse si :',
   atLeast60: 'vous avez au moins 60 ans',
   headerWhatToKnow: 'Ce dont vous aurez besoin',
-  haveNetIncomeLess: 'votre revenu net est moins de 133 141 $',
+  haveNetIncomeLess: `votre revenu net est moins de ${getMaximumIncomeThreshold(
+    Language.FR
+  )}`,
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
@@ -126,15 +132,14 @@ const fr: WebTranslations = {
       'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
       'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
-    basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
+    basedOnYourInfoNotEligible: `Selon vos informations, vous n'êtes peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
       apiFr.links.SC
-    )} pour plus d'informations.`,
+    )} pour plus de détails.`,
     yourEstimatedTotal: ' Votre total mensuel estimé est ',
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
     basedOnYourInfoTotal: 'Selon vos informations, vous pourriez recevoir :',
     basedOnYourInfoAndIncomeTotal:
       'Selon vos informations, vous pourriez recevoir :',
-    from: ' de ',
     total: 'Votre montant total par mois est ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
@@ -213,9 +218,9 @@ const fr: WebTranslations = {
     [ValidationErrors.oasAge65to70]:
       'Veuillez entrer un âge entre 65 et 70 ans.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
-      "Votre devez avoir vécu au Canada pendant au moins 10&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
+      "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      "Votre devez avoir vécu au Canada pendant au moins 20&nbsp;ans pour recevoir l'une des prestations incluses dans cet outil.",
+      "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaMinusAge]:
       "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:

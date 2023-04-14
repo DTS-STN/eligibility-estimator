@@ -3,6 +3,7 @@ import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
+  getMaximumIncomeThreshold,
 } from '../../utils/api/definitions/textReplacementRules'
 import apiEn from '../api/en'
 
@@ -23,9 +24,12 @@ const en: WebTranslations = {
   search: 'Search Canada.ca',
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  breadcrumb2Title: 'Service Canada',
+  //breadcrumb2Title: 'Service Canada',
+  //breadcrumb2URL:
+  //  'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+  breadcrumb2Title: 'Service Canada Labs',
   breadcrumb2URL:
-    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+    'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
@@ -45,7 +49,9 @@ const en: WebTranslations = {
   homePageHeader1: 'Who these benefits are for',
   youMayBeEligible: 'You may be able to receive old age benefits if:',
   atLeast60: "you're at least 60 years old",
-  haveNetIncomeLess: 'your net income is less than $133,141',
+  haveNetIncomeLess: `your net income is less than ${getMaximumIncomeThreshold(
+    Language.EN
+  )}`,
   headerWhatToKnow: "What you'll need",
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
@@ -125,14 +131,13 @@ const en: WebTranslations = {
       'Based on your information, you may be eligible for the:',
     basedOnYourInfoAndIncomeEligible:
       'Depending on your income and based on your information, you may be eligible for:',
-    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any old age benefits. See below, or ${generateLink(
+    basedOnYourInfoNotEligible: `Based on your information, you may not be eligible for any Old Age Security benefits. See below, or ${generateLink(
       apiEn.links.SC
     )} for more information.`,
     yourEstimatedTotal: ' Your estimated monthly total is ',
     yourEstimatedNoIncome: " You're likely eligible",
     basedOnYourInfoTotal: 'Based on your information, you could get:',
     basedOnYourInfoAndIncomeTotal: 'Based on your information, you could get:',
-    from: ' from ',
     total: 'Your total monthly amount is ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',

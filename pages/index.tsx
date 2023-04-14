@@ -1,7 +1,4 @@
-import {
-  Button,
-  ContextualAlert as Message,
-} from '@dts-stn/service-canada-design-system'
+import { Button } from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -9,8 +6,8 @@ import { useEffect } from 'react'
 import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
-import { sendAnalyticsRequest } from '../utils/web/helpers/utils'
 import Head from 'next/head'
+import { consoleDev } from '../utils/web/helpers/utils'
 
 const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
 const AA_BUTTON_CLICK_ATTRIBUTE =
@@ -22,19 +19,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
 
-  // useEffect(() => {
-  //   // only run on mount on the client
-  //   if (typeof window !== undefined) {
-  //     const win = window as Window &
-  //       typeof globalThis & { adobeDataLayer: any; _satellite: any }
-  //     const lang = tsln.langLong
-  //     const creator = tsln.creator
-  //     const title = lang + '-sc labs-eligibility estimator-home'
-
-  //     sendAnalyticsRequest(lang, title, creator, win)
-  //   }
-  // })
-
   useEffect(() => {
     if (adobeAnalyticsUrl) {
       window.adobeDataLayer = window.adobeDataLayer || []
@@ -45,7 +29,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   return (
     <>
       <Head>
-        {/* <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> */}
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
         <meta name="dcterms.title" content={tsln.questionPageTitle} />
@@ -195,12 +178,13 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }
 
 export const getStaticProps = async () => {
-  console.log(
+  consoleDev(
     'process.env.ADOBE_ANALYTICS_URL',
     process.env.ADOBE_ANALYTICS_URL
       ? process.env.ADOBE_ANALYTICS_URL.substring(0, 27)
       : 'not loaded'
   )
+
   return {
     props: {
       adobeAnalyticsUrl: process.env.ADOBE_ANALYTICS_URL,

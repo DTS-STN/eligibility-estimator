@@ -19,7 +19,10 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
-import { textReplacementRules } from './definitions/textReplacementRules'
+import {
+  getMaximumIncomeThreshold,
+  textReplacementRules,
+} from './definitions/textReplacementRules'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -42,6 +45,9 @@ import { SummaryHandler } from './summaryHandler'
 import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
+import { consoleDev } from '../web/helpers/utils'
+import { result } from 'lodash'
+
 export class BenefitHandler {
   private _translations: Translations
   private _input: ProcessedInputWithPartner
@@ -147,6 +153,7 @@ export class BenefitHandler {
         this.rawInput.partnerBenefitStatus
       ),
     }
+
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
@@ -220,27 +227,9 @@ export class BenefitHandler {
           requiredFields.push(FieldKey.PARTNER_INCOME)
       }
 
-      /*
-      Make changes to avoid contridictions: 
-        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW
-        therefore, no following question will show up except income
-        2. when partner is older or equals to 60, but younger than 65, partner will not be eligible for 
-        OAS, therefore, hide the partner benefit section
-        3. when partner is older or equals to 65, we show the partner benefit section
-       */
-
-      if (
-        this.input.partner.age < 60 ||
-        this.input.partner.age > 123 ||
-        this.input.partner.age === undefined
-      ) {
-        requiredFields.sort(BenefitHandler.sortFields)
-        return requiredFields
-      } else if (this.input.partner.age >= 65) {
-        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
+      if (this.input.partner.age >= 60) {
+        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
       }
-
-      requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
 
       if (
         this.input.partner.legalStatus.value &&
@@ -255,6 +244,26 @@ export class BenefitHandler {
       // default value = undefined
       if (this.input.partner.livedOnlyInCanada === false) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+      }
+
+      /*
+      Make changes to avoid contridictions when showing the Benefit Partner Question: 
+        1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW.
+        2. when partner is between 60 and 65, partner will not be eligible for OAS
+        3. Only show it when: partner is older than 65 and LegalStatus is canadian AND
+            currently lives in Canada and has lived for 10+ years  OR 
+            currently lives outside Canada and has lived for 20+ years in Canada
+       */
+      if (
+        this.input.partner.age > 65 &&
+        this.input.partner.legalStatus.canadian &&
+        this.input.partner.livedOutsideCanada !== undefined &&
+        ((this.input.partner.livingCountry.canada &&
+          this.input.partner.yearsInCanadaSince18 >= 10) ||
+          (!this.input.partner.livingCountry.canada &&
+            this.input.partner.yearsInCanadaSince18 >= 20))
+      ) {
+        requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }
     }
 
@@ -307,6 +316,9 @@ export class BenefitHandler {
       },
     }
 
+    const initialPartnerBenefitStatus =
+      this.input.client.partnerBenefitStatus.value
+
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     const clientOas = new OasBenefit(this.input.client, this.translations)
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
@@ -352,6 +364,42 @@ export class BenefitHandler {
     // Moving onto ALW, again only doing eligibility.
     const clientAlw = new AlwBenefit(this.input.client, this.translations)
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
+
+    // task #115349 overwrite eligibility when conditions are met.
+    //              all the conditions below are just to make sure
+    //              one and one case is overwritten
+    if (
+      this.input.client.age >= 60 &&
+      this.input.client.age < 65 &&
+      !this.input.client.livedOutsideCanada &&
+      this.input.client.legalStatus.canadian &&
+      this.input.client.yearsInCanadaSince18 >= 10 &&
+      this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
+      this.input.client.partnerBenefitStatus.value ===
+        PartnerBenefitStatus.NONE &&
+      allResults.partner.oas.entitlement !== undefined &&
+      allResults.partner.gis.entitlement !== undefined &&
+      allResults.client.alw.entitlement !== undefined
+    ) {
+      if (
+        allResults.partner.oas.entitlement.result > 0 &&
+        allResults.partner.gis.entitlement.result >= 0 &&
+        allResults.client.alw.entitlement.result > 0
+      ) {
+        // overwrite eligibility
+        allResults.client.alw.eligibility = {
+          result: ResultKey.INELIGIBLE,
+          reason: ResultReason.NONE,
+          detail: this.translations.detail.conditional,
+        }
+        // cardDetails and remove 'apply...' from the links
+        allResults.client.alw.cardDetail.mainText =
+          this.translations.detail.alwEligibleButPartnerAlreadyIs
+        allResults.client.alw.entitlement.result = 0
+        allResults.client.alw.cardDetail.links.splice(0, 1)
+      }
+    }
+
     this.input.partner.partnerBenefitStatus = this.getPartnerBenefitStatus(
       clientGis,
       clientAlw,
@@ -384,6 +432,10 @@ export class BenefitHandler {
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
+
+    // this line overrides the partner value that's defaults to oasGis regardless.
+    this.input.partner.partnerBenefitStatus.value =
+      this.input.client.partnerBenefitStatus.value
 
     const partnerOas = new OasBenefit(
       this.input.partner,
@@ -420,7 +472,10 @@ export class BenefitHandler {
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
-    if (this.input.client.invSeparated) {
+    if (
+      this.input.client.invSeparated &&
+      this.input.client.maritalStatus.partnered
+    ) {
       const isIncomeProvided =
         this.input.client.income.provided && this.input.partner.income.provided
 
@@ -429,7 +484,7 @@ export class BenefitHandler {
           clientOas.entitlement.result > 0 &&
           partnerOas.entitlement.result > 0
         ) {
-          console.log('--- both oas are greater than 0 --- start')
+          consoleDev('--- both oas are greater than 0 --- start')
 
           let maritalStatus = new MaritalStatusHelper(MaritalStatus.SINGLE)
 
@@ -442,7 +497,7 @@ export class BenefitHandler {
             allResults.client.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'both Oas > 0 - applicantGisResultTable1',
             applicantGisResultT1
           )
@@ -456,7 +511,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'both Oas > 0 - partnerGisResultTable1',
             partnerGisResultT1
           )
@@ -472,7 +527,7 @@ export class BenefitHandler {
             allResults.client.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'both Oas > 0 - applicantGisResultT2',
             applicantGisResultT2
           )
@@ -486,7 +541,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log('both Oas > 0 - partnerGisResultT2', partnerGisResultT2)
+          consoleDev('both Oas > 0 - partnerGisResultT2', partnerGisResultT2)
 
           // define total_amt_singleA
           const totalAmountSingleApplicant =
@@ -512,21 +567,20 @@ export class BenefitHandler {
           const totalAmountCouple = totalAmountCoupleA + totalAmountCoupleB
 
           if (totalAmountSingle < totalAmountCouple) {
-            console.log(
+            consoleDev(
               'both Oas > 0 - totalAmountsingle < totalAmountCouple',
               'totalAmountSingle',
               totalAmountSingle,
               'totalAmountCouple',
               totalAmountCouple
             )
-
             allResults.client.gis.entitlement.result = applicantGisResultT2
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
 
             allResults.partner.gis.entitlement.result = partnerGisResultT2
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            console.log(
+            consoleDev(
               'both Oas > 0 - totalAmountsingle > totalAmountCouple',
               'totalAmountSingle',
               totalAmountSingle,
@@ -558,10 +612,11 @@ export class BenefitHandler {
             this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
             this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
           }
-          console.log('--- both oas are greater than 0 --- end')
+          consoleDev('--- both oas are greater than 0 --- end')
         } // if partner is eligible for alw
         else if (partnerAlw.eligibility.result === ResultKey.ELIGIBLE) {
-          console.log('--- partner is eligible for alw --- start')
+          consoleDev('--- partner is eligible for alw --- start')
+
           const maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
           //calculate gis entitlement for applicant use table4
           const applicantGisResultT4 = new EntitlementFormula(
@@ -579,7 +634,7 @@ export class BenefitHandler {
             this.input.partner.age
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'T4',
             applicantGisResultT4,
             'partnerAlwCalcCouple',
@@ -608,7 +663,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'T1',
             applicantGisResultT1,
             'partnerAlwCalcSingle',
@@ -618,13 +673,14 @@ export class BenefitHandler {
           // define Total_amt_Single
           const totalAmountSingle = applicantGisResultT1 + partnerAlwCalcSingle
 
-          console.log(
+          consoleDev(
             'Case: partner is eligible for alw',
             'totalAmountSingle',
             totalAmountSingle,
             'totalAmtCouple',
             totalAmtCouple
           )
+
           this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
 
           let isApplicantGisAvailable = true
@@ -640,7 +696,7 @@ export class BenefitHandler {
             if (clientGis.entitlement.result === 0) {
               isApplicantGisAvailable = false
             } else {
-              clientGis.cardDetail.collapsedText.push(
+              allResults.client.gis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading
                   .calculatedBasedOnIndividualIncome
               )
@@ -655,6 +711,12 @@ export class BenefitHandler {
               )
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
               allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
+
+              if (partnerAlwCalcSingle > 0) {
+                partnerAlw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading.partnerEligible
+                )
+              }
             }
           }
 
@@ -671,6 +733,7 @@ export class BenefitHandler {
               'gis',
               clientGisCouple
             )
+
             allResults.partner.alw.entitlement.result = partnerAlwCalcCouple
 
             // Display a note stating when PartnerB turns 65, to determine if it is still
@@ -678,10 +741,10 @@ export class BenefitHandler {
           } //else {
           isApplicantGisAvailable = true
 
-          console.log('--- partner is eligible for alw --- end')
+          consoleDev('--- partner is eligible for alw --- end')
         } // if applicant is eligible for alw
         else if (clientAlw.eligibility.result === ResultKey.ELIGIBLE) {
-          console.log(' --- applicant is eligible for alw --- start')
+          consoleDev(' --- applicant is eligible for alw --- start')
 
           const maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
 
@@ -711,7 +774,7 @@ export class BenefitHandler {
             this.input.client.age
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'applicantAlwCalc',
             applicantAlwCalcCouple,
             applicantAlwCalcSingle,
@@ -721,7 +784,7 @@ export class BenefitHandler {
           // define Total_amt_Couple
           const totalAmountCouple = partnerGisResultT4 + applicantAlwCalcCouple
 
-          console.log(
+          consoleDev(
             'partnerGisResultT4',
             partnerGisResultT4,
             'clientAlw.entitlement.result',
@@ -737,11 +800,12 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log('partnerGisResultT1', partnerGisResultT1)
+          consoleDev('partnerGisResultT1', partnerGisResultT1)
 
           // define Total_amt_Single
           const totalAmountSingle = partnerGisResultT1 + applicantAlwCalcSingle
-          console.log(
+
+          consoleDev(
             'applicant is eligible for alw',
             'totalAmtSingle',
             totalAmountSingle,
@@ -760,7 +824,11 @@ export class BenefitHandler {
               true
             )
 
-            if (partnerGis.entitlement.result === 0) {
+            // #115349 no allowance because partnerBenefits = No
+            if (
+              partnerGis.entitlement.result === 0 ||
+              initialPartnerBenefitStatus === PartnerBenefitStatus.NONE
+            ) {
               isPartnerGisAvailable = false
             } else {
               partnerGis.cardDetail.collapsedText.push(
@@ -770,15 +838,24 @@ export class BenefitHandler {
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
 
-              allResults.partner.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
-              allResults.client.alw.entitlement.result = applicantAlwCalcSingle
-              allResults.client.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
+              if (
+                this.input.partner.invSeparated &&
+                allResults.partner.gis.entitlement.result > 0 &&
+                clientAlw.entitlement.result > 0
+              ) {
+                allResults.partner.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+
+                allResults.client.alw.entitlement.result =
+                  applicantAlwCalcSingle
+
+                allResults.client.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+              }
             }
           }
 
@@ -786,18 +863,33 @@ export class BenefitHandler {
             totalAmountSingle <= totalAmountCouple ||
             !isPartnerGisAvailable
           ) {
-            // return partnerGisResultT4
-            allResults.partner.gis.entitlement.result = partnerGisResultT4
-            allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-            allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            // return partnerGisResultT4 only partnerBenefits = No
+            if (initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE) {
+              allResults.partner.gis.entitlement.result = partnerGisResultT4
+              allResults.partner.gis.entitlement.type =
+                EntitlementResultType.FULL
+              allResults.client.alw.entitlement.result = applicantAlwCalcCouple
+            } else {
+              allResults.client.alw.eligibility.result = ResultKey.INELIGIBLE
+              allResults.client.alw.eligibility.reason = ResultReason.PARTNER
+              allResults.client.alw.eligibility.detail =
+                this.translations.detail.alwNotEligible
+              allResults.client.alw.entitlement.result = 0
+              allResults.client.alw.entitlement.type =
+                EntitlementResultType.NONE
+              allResults.client.alw.cardDetail.mainText =
+                this.translations.detail.alwEligibleButPartnerAlreadyIs
+              allResults.client.alw.cardDetail.links.splice(0, 1)
+            }
           }
           isPartnerGisAvailable = true
-          console.log(' --- applicant is eligible for alw --- end')
+
+          consoleDev(' --- applicant is eligible for alw --- end')
         } else if (
           clientOas.entitlement.result > 0 &&
           partnerOas.entitlement.result === 0
         ) {
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- start'
           )
 
@@ -825,7 +917,7 @@ export class BenefitHandler {
             allResults.client.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'clientOas > 0 and partnerOas = 0',
             allResults.client.oas,
             'applicantGisTable1',
@@ -849,15 +941,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
-
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- end'
           )
         } else if (
           clientOas.entitlement.result === 0 &&
           partnerOas.entitlement.result > 0
         ) {
-          console.log(
+          consoleDev(
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- start'
           )
 
@@ -880,7 +971,7 @@ export class BenefitHandler {
             allResults.partner.oas
           ).getEntitlementAmount()
 
-          console.log(
+          consoleDev(
             'clientOas = 0 and partnerOas > 0',
             'partnerGisTable1',
             partnerGisResultT1,
@@ -899,9 +990,8 @@ export class BenefitHandler {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           }
-
-          console.log(
-            '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- start'
+          consoleDev(
+            '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )
         }
       }
@@ -941,8 +1031,9 @@ export class BenefitHandler {
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
 
+    consoleDev('allResults', allResults)
+
     // All done!
-    console.log('allResults', allResults)
     return allResults
   }
 
@@ -1046,11 +1137,12 @@ export class BenefitHandler {
   private translateResults(): void {
     for (const individualBenefits in this.benefitResults) {
       let clawbackValue: number
+
       for (const key in this.benefitResults[individualBenefits]) {
         const result: BenefitResult =
           this.benefitResults[individualBenefits][key]
-        if (!result || !result?.eligibility) continue
 
+        if (!result || !result?.eligibility) continue
         // if initially the eligibility was ELIGIBLE, yet the entitlement is determined to be NONE, override the eligibility.
         // this happens when high income results in no entitlement.
         // this If block was copied to _base and probably not required anymore.
@@ -1079,11 +1171,20 @@ export class BenefitHandler {
         ) {
           clawbackValue =
             this.benefitResults[individualBenefits][key].entitlement.clawback
-          newMainText =
-            clawbackValue > 0 && result.cardDetail.mainText
-              ? result.cardDetail.mainText +
-                `<div class="mt-8">${this.translations.detail.oasClawback}</div>`
-              : result.cardDetail.mainText
+
+          if (this.input.client.livingCountry.canada) {
+            newMainText =
+              clawbackValue > 0 && result.cardDetail.mainText
+                ? result.cardDetail.mainText +
+                  `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
+                : result.cardDetail.mainText
+          } else {
+            newMainText =
+              clawbackValue > 0 && result.cardDetail.mainText
+                ? result.cardDetail.mainText +
+                  `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
+                : result.cardDetail.mainText
+          }
         }
 
         // process card main text

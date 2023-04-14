@@ -2,6 +2,7 @@ import { OutputItemGis } from '../_baseTable'
 import { OutputItemAlw } from '../tbl4PartneredAlwScraper'
 import { OutputItemAfs } from '../tbl5PartneredAfsScraper'
 import legalValues from './legalValuesJson.json'
+import legalValuesForTest from './legalValuesJson_test.json'
 import tbl1_single from './tbl1_single.json'
 import tbl2_partneredAndOas from './tbl2_partneredAndOas.json'
 import tbl3_partneredNoOas from './tbl3_partneredNoOas.json'
@@ -24,4 +25,7 @@ export const scraperData: ScraperCollection = {
   tbl5_partneredAfs,
 }
 
-export default legalValues
+const exportLegalValues =
+  process.env.NODE_ENV === 'test' ? legalValuesForTest : legalValues
+
+export default exportLegalValues

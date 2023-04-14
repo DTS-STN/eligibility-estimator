@@ -299,10 +299,10 @@ const en: Translations = {
     eligibleWhen65ApplyNow:
       'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60:
-      "You'll likely be eligible for this benefit once you turn 60. You can <a class='underline text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
+      "You'll likely be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
     mustBeInCanada:
-      "You need to live in Canada to receive this benefit. You can <a class='underline text-default-text' href='/eligibility/#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
+      "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
@@ -327,6 +327,8 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
+    alwEligibleButPartnerAlreadyIs:
+      'To be eligible for this benefit, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class="text-default-text" style="text-decoration: underline" href="/eligibility#partnerBenefitStatus">edit your answers</a> to see what you could get if your partner received these benefits.',
     alwEligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
@@ -339,8 +341,10 @@ const en: Translations = {
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
-    oasClawback:
-      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, we removed {OAS_CLAWBACK} from your monthly amount. {LINK_LEARN_ABOUT_RECOVERY_TAX}',
+    oasClawbackInCanada:
+      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    oasClawbackNotInCanada:
+      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you will have to repay some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
@@ -361,9 +365,9 @@ const en: Translations = {
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
-        "You'll likely be eligible for this benefit once you turn 65. You can <a class='underline text-default-text' href='/eligibility/#age'>edit your answers</a> to see what you could receive at a future age.",
+        "You'll likely be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
-        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='underline text-default-text' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
@@ -406,6 +410,10 @@ const en: Translations = {
     partnerDependOnYourIncome: {
       heading: 'Your partner may be eligible',
       text: 'Depending on your income, you can expect to receive around&nbsp;{PARTNER_BENEFIT_AMOUNT} every month. Provide your income to get an accurate estimate.',
+    },
+    partnerEligibleButAnsweredNo: {
+      heading: 'Your partner may be eligible',
+      text: 'You can <a href="/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
   },
   summaryTitle: {

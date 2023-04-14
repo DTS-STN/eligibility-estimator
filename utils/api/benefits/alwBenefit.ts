@@ -37,12 +37,10 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const underAgeReq = this.input.age < 60
     const meetsReqCountry = this.input.livingCountry.canada
 
-    // if income is not provided, assume they meet the income requirement
-    const skipReqIncome = !this.input.income.provided
+    // income must be provided, partner cannot be eligible for gis without income
+    const incomeNotProvided = !this.input.income.provided
     const maxIncome = legalValues.alw.alwIncomeLimit
-    const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant <= maxIncome
-
+    const meetsReqIncome = this.input.income.relevant <= maxIncome
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -57,13 +55,11 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqPartner &&
       meetsReqCountry
     ) {
-      if (meetsReqAge && skipReqIncome) {
+      if (meetsReqAge && incomeNotProvided) {
         return {
-          result: ResultKey.INCOME_DEPENDENT,
+          result: ResultKey.INELIGIBLE,
           reason: ResultReason.INCOME_MISSING,
-          detail:
-            this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
-          incomeMustBeLessThan: maxIncome,
+          detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
         }
       } else if (meetsReqAge) {
         const amount = this.formulaResult()
@@ -100,6 +96,12 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           reason: ResultReason.AGE,
           detail: this.translations.detail.alwNotEligible,
         }
+      }
+    } else if (meetsReqAge && incomeNotProvided) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.INCOME_MISSING,
+        detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
     } else if (overAgeReq) {
       return {
@@ -255,11 +257,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // partner is eligible, different message if income was not provided
     if (this.partner) {
       if (this.entitlement.result > 0) {
-        if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
-          cardCollapsedText.push(
-            this.translations.detailWithHeading.partnerEligible
-          )
-        } else {
+        if (this.eligibility.result == ResultKey.INCOME_DEPENDENT) {
           cardCollapsedText.push(
             this.translations.detailWithHeading.partnerDependOnYourIncome
           )
