@@ -16,10 +16,9 @@ import { WebTranslations } from '../../../i18n/web'
 
 export default function generateCardChildren(
   form,
-  step: Steps,
   stepKeys: FieldKey[],
-  errorsVisible,
   handleOnChange,
+  errorsVisible,
   tsln
 ): CardChildren {
   const fields = form.visibleFields.filter((field) =>

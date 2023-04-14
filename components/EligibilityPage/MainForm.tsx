@@ -1,6 +1,6 @@
 import { AccordionForm } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { VisibleFieldsObject } from '.'
 import { Form } from '../../client-state/Form'
@@ -64,6 +64,10 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
     getStepValidity(form, inputs, keyStepMap)
   )
 
+  useEffect(() => {
+    console.log('FORM CHANGED')
+  }, [form])
+
   // Controls press of "Next" on each card
   const handleButtonOnChange = (step) => {
     setErrorsVisible({
@@ -100,8 +104,6 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
       router.push('/results')
     }
   }
-
-  form.update(inputHelper)
 
   return (
     <AccordionForm

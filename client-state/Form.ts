@@ -11,12 +11,14 @@ import { InputHelper } from './InputHelper'
 export class Form {
   public readonly allFieldConfigs: FieldConfig[]
   public readonly fields: FormField[]
+  public readonly visibleFieldsObj: VisibleFieldsObject
 
   constructor(
     private readonly language: Language,
     inputHelper: InputHelper,
     visibleFieldsObject: VisibleFieldsObject
   ) {
+    this.visibleFieldsObj = visibleFieldsObject
     this.allFieldConfigs = BenefitHandler.getAllFieldData(language)
     this.fields = this.allFieldConfigs.map((config) => {
       return new FormField(config, inputHelper, visibleFieldsObject)

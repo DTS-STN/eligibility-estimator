@@ -15,18 +15,20 @@ import MainHandler from '../../utils/api/mainHandler'
 import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { useMediaQuery } from '../Hooks'
 import MainForm from './MainForm'
+import { ERRORS_AS_ALERTS } from './utils'
 
 export const EligibilityPage: React.VFC = ({}) => {
   const isMobile = useMediaQuery(992)
   const language = useRouter().locale as Language
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
+
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
-  const [errorsVisible, _setErrorsVisible]: [
+  const [errorsVisible]: [
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
   ] = useSessionStorage('errors-visible', getErrorVisibility(allFieldConfigs))
@@ -37,9 +39,8 @@ export const EligibilityPage: React.VFC = ({}) => {
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
 
-  // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
+  // On mobile only, captures enter keypress, does NOT submit form, and blurs (hides) keyboard
   useEffect(() => {
     document.addEventListener('keydown', function (event) {
       if (isMobile && event.key == 'Enter') {
@@ -59,6 +60,8 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }, [])
 
+  form.update(inputHelper)
+
   return (
     <>
       <div>
@@ -67,14 +70,14 @@ export const EligibilityPage: React.VFC = ({}) => {
             (field) =>
               field.error &&
               errorsVisible[field.key] &&
-              (!errorsAsAlerts.includes(field.key) || field.value === undefined)
+              (!ERRORS_AS_ALERTS.includes(field.key) ||
+                field.value === undefined)
           )}
         />
       </div>
       <div
         className="md:w-2/3"
         data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
-        // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
       >
         <MainForm form={form} />
       </div>
@@ -105,14 +108,6 @@ function getErrorVisibility(fieldConfigs): VisibleFieldsObject {
   }, {})
 }
 
-function getNextClickedObj(): NextClickedObject {
-  const result = {}
-  for (const step in Steps) {
-    result[Steps[step]] = false
-  }
-  return result
-}
-
 export type VisibleFieldsObject = {
   [key in FieldKey]?: boolean
 }
@@ -130,26 +125,4 @@ function getDefaultVisibleFields(
       return result
     }, {})
   }
-}
-
-type CardConfig = {
-  title: string
-  buttonLabel: string
-  keys: FieldKey[]
-  buttonAttributes: Object
-}
-
-type Card = {
-  children: CardChildren
-  id: string
-  title: string
-  buttonLabel: string
-  buttonAttributes: Object
-  buttonOnChange?: (e) => void
-}
-
-type StepValidity = { [x in Steps]?: { isValid: boolean } }
-
-type NextClickedObject = {
-  [x in Steps]?: boolean
 }

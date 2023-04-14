@@ -16,6 +16,8 @@ import {
 } from '../../../utils/api/definitions/types'
 import MainHandler from '../../../utils/api/mainHandler'
 
+export const ERRORS_AS_ALERTS = ['legalStatus', 'everLivedSocialCountry']
+
 export function getKeyStepMap(tsln, language): { [x in Steps]: CardConfig } {
   const connection = tsln._language === Language.EN ? ':' : ' :'
   const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
@@ -173,15 +175,14 @@ export function getDefaultVisibleFields(
  * Returns error for the form that is either an alert error or a form error (red text under input) depending on circumstance
  */
 export function getErrorForField(field, errorsVisible) {
-  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
   let formError
   let alertError
 
-  if (field.value === undefined || !errorsAsAlerts.includes(field.key)) {
+  if (field.value === undefined || !ERRORS_AS_ALERTS.includes(field.key)) {
     formError = errorsVisible[field.key] ? field.error : ''
   } else {
     alertError =
-      errorsAsAlerts.includes(field.key) &&
+      ERRORS_AS_ALERTS.includes(field.key) &&
       errorsVisible[field.key] &&
       field.error
   }

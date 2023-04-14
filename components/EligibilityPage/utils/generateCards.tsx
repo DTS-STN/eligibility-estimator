@@ -1,7 +1,6 @@
 import { Steps } from '../../../utils/api/definitions/enums'
 import { Card, CardConfig } from '../../../utils/api/definitions/types'
 import generateCardChildren from './generateCardChildren'
-import { getKeyStepMap } from './'
 
 export function generateCards(
   form,
@@ -16,7 +15,6 @@ export function generateCards(
     const cardConfig: CardConfig = keyStepMap[step]
     const children = generateCardChildren(
       form,
-      step,
       cardConfig.keys,
       handleOnChange,
       errorsVisible,
