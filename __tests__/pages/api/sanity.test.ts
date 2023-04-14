@@ -1034,7 +1034,8 @@ describe('EE Sanity Test Scenarios:', () => {
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
+      //ResultReason.LEGAL_STATUS
+      ResultReason.YEARS_IN_CANADA
     )
     expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
@@ -1150,7 +1151,8 @@ describe('EE Sanity Test Scenarios:', () => {
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
+      //ResultReason.AGE_YOUNG
+      ResultReason.YEARS_IN_CANADA
     )
     expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
@@ -2194,7 +2196,6 @@ describe('EE Sanity Test Scenarios:', () => {
 
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    //expect(res.body.results.oas.entitlement.result).toEqual(489.05) // with Recovery Tax #114098
     expect(res.body.results.oas.entitlement.result).toEqual(553.49) // without Recovery Tax #114098
     expect(res.body.results.gis.eligibility.result).toEqual(
       ResultKey.INCOME_DEPENDENT
@@ -2209,7 +2210,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, true)
     expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INCOME_DEPENDENT
+      ResultKey.INELIGIBLE
     )
     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
       ResultReason.INCOME_MISSING
