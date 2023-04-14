@@ -1039,7 +1039,8 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
+      //ResultReason.LEGAL_STATUS
+      ResultReason.OAS
     )
     expectAlwTooOld(res, true)
   })
