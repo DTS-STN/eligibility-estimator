@@ -257,7 +257,7 @@ export class BenefitHandler {
       if (
         this.input.partner.age > 65 &&
         this.input.partner.legalStatus.canadian &&
-        this.input.partner.livedOutsideCanada !== undefined &&
+        this.input.partner.livedOnlyInCanada !== undefined &&
         ((this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 >= 10) ||
           (!this.input.partner.livingCountry.canada &&
@@ -371,7 +371,7 @@ export class BenefitHandler {
     if (
       this.input.client.age >= 60 &&
       this.input.client.age < 65 &&
-      !this.input.client.livedOutsideCanada &&
+      this.input.client.livedOnlyInCanada &&
       this.input.client.legalStatus.canadian &&
       this.input.client.yearsInCanadaSince18 >= 10 &&
       this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&

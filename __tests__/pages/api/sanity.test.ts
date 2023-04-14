@@ -61,7 +61,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: true,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -70,7 +70,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 75,
       partnerLivingCountry: LivingCountry.CANADA, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -158,7 +158,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -167,7 +167,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.AGREEMENT, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -252,7 +252,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: 40,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -261,7 +261,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 75,
       partnerLivingCountry: LivingCountry.CANADA, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 35,
     })
 
@@ -336,7 +336,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: undefined,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: 40,
       everLivedSocialCountry: false,
       ...partnerUndefined,
@@ -390,7 +390,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: undefined,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: false,
       ...partnerUndefined,
@@ -449,7 +449,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: undefined,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: false,
       ...partnerUndefined,
@@ -517,7 +517,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -526,7 +526,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: LivingCountry.AGREEMENT, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -593,7 +593,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 40,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -602,7 +602,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 68,
       partnerLivingCountry: LivingCountry.CANADA, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -702,7 +702,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 30,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -711,7 +711,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 68,
       partnerLivingCountry: LivingCountry.CANADA, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 20,
     })
 
@@ -806,7 +806,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -815,7 +815,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: LivingCountry.CANADA, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 10,
     })
 
@@ -909,7 +909,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -918,7 +918,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: LivingCountry.CANADA, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -1013,7 +1013,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -1022,7 +1022,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: undefined, // country code
       partnerLegalStatus: LegalStatus.NO,
-      partnerLivedOutsideCanada: undefined,
+      partnerLivedOnlyInCanada: undefined,
       partnerYearsInCanadaSince18: undefined,
     })
 
@@ -1073,7 +1073,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 30,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -1082,7 +1082,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 68,
       partnerLivingCountry: LivingCountry.AGREEMENT, // country code
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -1129,7 +1129,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: 40,
       everLivedSocialCountry: false,
       partnerBenefitStatus: undefined,
@@ -1138,7 +1138,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 58,
       partnerLivingCountry: undefined,
       partnerLegalStatus: undefined,
-      partnerLivedOutsideCanada: undefined,
+      partnerLivedOnlyInCanada: undefined,
       partnerYearsInCanadaSince18: undefined,
     })
 
@@ -1198,7 +1198,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 25,
       everLivedSocialCountry: false,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1207,7 +1207,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 64,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -1264,7 +1264,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1273,7 +1273,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 64,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -1330,7 +1330,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.NO_AGREEMENT, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: 40,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1339,7 +1339,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 64,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -1402,7 +1402,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1411,7 +1411,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 64,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 25,
     })
 
@@ -1466,7 +1466,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -1475,7 +1475,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 64,
       partnerLivingCountry: LivingCountry.NO_AGREEMENT,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 25,
     })
 
@@ -1534,7 +1534,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -1543,7 +1543,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 68,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 10,
     })
 
@@ -1595,7 +1595,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: true,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -1604,7 +1604,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 35,
     })
 
@@ -1656,7 +1656,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
@@ -1665,7 +1665,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 67,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -1718,7 +1718,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -1727,7 +1727,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 67,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 25,
     })
 
@@ -1772,7 +1772,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -1817,7 +1817,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 30,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -1862,7 +1862,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -1910,7 +1910,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: true,
       ...partnerUndefined,
@@ -1962,7 +1962,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: undefined,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 15,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -2012,7 +2012,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: undefined,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 25,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -2062,7 +2062,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: undefined,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
@@ -2119,7 +2119,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 15,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -2128,7 +2128,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -2168,54 +2168,54 @@ describe('EE Sanity Test Scenarios:', () => {
       - lived outside Canada: yes
       - years resided in Canada: 30
   */
-  // it('should pass the sanity test - SAN-NI-05', async () => {
-  //   const res = await mockGetRequest({
-  //     incomeAvailable: true,
-  //     income: 85000, // personal income
-  //     age: 68,
-  //     oasDefer: true,
-  //     oasAge: 69,
-  //     maritalStatus: MaritalStatus.PARTNERED,
-  //     invSeparated: false,
-  //     livingCountry: LivingCountry.CANADA, // country code
-  //     legalStatus: LegalStatus.YES,
-  //     livedOutsideCanada: true,
-  //     yearsInCanadaSince18: 25,
-  //     everLivedSocialCountry: undefined,
-  //     partnerBenefitStatus: PartnerBenefitStatus.NONE,
-  //     partnerIncomeAvailable: false,
-  //     partnerIncome: undefined,
-  //     partnerAge: 64,
-  //     partnerLivingCountry: LivingCountry.CANADA,
-  //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: false,
-  //     partnerYearsInCanadaSince18: 30,
-  //   })
+  it('should pass the sanity test - SAN-NI-05', async () => {
+    const res = await mockGetRequest({
+      incomeAvailable: true,
+      income: 85000, // personal income
+      age: 68,
+      oasDefer: true,
+      oasAge: 69,
+      maritalStatus: MaritalStatus.PARTNERED,
+      invSeparated: false,
+      livingCountry: LivingCountry.CANADA, // country code
+      legalStatus: LegalStatus.YES,
+      livedOnlyInCanada: false,
+      yearsInCanadaSince18: 25,
+      everLivedSocialCountry: undefined,
+      partnerBenefitStatus: PartnerBenefitStatus.NONE,
+      partnerIncomeAvailable: false,
+      partnerIncome: undefined,
+      partnerAge: 64,
+      partnerLivingCountry: LivingCountry.CANADA,
+      partnerLegalStatus: LegalStatus.YES,
+      partnerLivedOnlyInCanada: true,
+      partnerYearsInCanadaSince18: 30,
+    })
 
-  //   //client results
-  //   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  //   //expect(res.body.results.oas.entitlement.result).toEqual(489.05) // with Recovery Tax #114098
-  //   expect(res.body.results.oas.entitlement.result).toEqual(553.49) // without Recovery Tax #114098
-  //   expect(res.body.results.gis.eligibility.result).toEqual(
-  //     ResultKey.INCOME_DEPENDENT
-  //   )
-  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-  //   expect(res.body.results.alw.eligibility.result).toEqual(
-  //     ResultKey.INELIGIBLE
-  //   )
-  //   expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  //   expectAfsMarital(res)
-  //   //partner results
-  //   expectOasNotEligible(res, true)
-  //   expectGisNotEligible(res, true)
-  //   expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-  //     ResultKey.INCOME_DEPENDENT
-  //   )
-  //   expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-  //     ResultReason.INCOME_MISSING
-  //   )
-  //   expectAfsMarital(res)
-  // })
+    //client results
+    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    //expect(res.body.results.oas.entitlement.result).toEqual(489.05) // with Recovery Tax #114098
+    expect(res.body.results.oas.entitlement.result).toEqual(553.49) // without Recovery Tax #114098
+    expect(res.body.results.gis.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expectAfsMarital(res)
+    //partner results
+    expectOasNotEligible(res, true)
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
+      ResultKey.INCOME_DEPENDENT
+    )
+    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
+      ResultReason.INCOME_MISSING
+    )
+    expectAfsMarital(res)
+  })
 
   /*
     SAN-NI-06
@@ -2249,7 +2249,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -2258,7 +2258,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 56,
       partnerLivingCountry: undefined,
       partnerLegalStatus: undefined,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: undefined,
     })
 
@@ -2323,7 +2323,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 15,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -2332,7 +2332,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 76,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 20,
     })
 
@@ -2406,7 +2406,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 25,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -2415,7 +2415,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 68,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: false,
+      partnerLivedOnlyInCanada: true,
       partnerYearsInCanadaSince18: 40,
     })
 
@@ -2488,7 +2488,7 @@ describe('EE Sanity Test Scenarios:', () => {
       invSeparated: false,
       livingCountry: LivingCountry.CANADA, // country code
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
@@ -2497,7 +2497,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerAge: 78,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 30,
     })
 
@@ -2555,7 +2555,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 1000,
       legalStatus: LegalStatus.YES,
       livingCountry: LivingCountry.CANADA, // country code
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       maritalStatus: MaritalStatus.SINGLE,
       invSeparated: undefined,
@@ -2589,7 +2589,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 1000,
       legalStatus: LegalStatus.YES,
       livingCountry: LivingCountry.CANADA, // country code
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 25,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: undefined,
@@ -2632,7 +2632,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 1000,
       legalStatus: LegalStatus.YES,
       livingCountry: LivingCountry.CANADA, // country code
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 35,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
@@ -2642,7 +2642,7 @@ describe('EE Sanity Test Scenarios:', () => {
       partnerIncome: 2000,
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 30,
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
     })
