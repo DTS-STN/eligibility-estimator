@@ -51,6 +51,10 @@ export const EligibilityPage: React.VFC = ({}) => {
   }, [isMobile])
 
   useEffect(() => {
+    console.log('FORM CHANGED')
+  }, [])
+
+  useEffect(() => {
     const el = document.getElementById('mainForm')
     if (el) {
       el.setAttribute(
@@ -59,8 +63,6 @@ export const EligibilityPage: React.VFC = ({}) => {
       )
     }
   }, [])
-
-  form.update(inputHelper)
 
   return (
     <>

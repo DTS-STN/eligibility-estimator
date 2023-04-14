@@ -15,6 +15,7 @@ import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldConfig } from '../../utils/api/definitions/fields'
 import { NextClickedObject } from '../../utils/api/definitions/types'
+import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { useTranslation } from '../Hooks'
 import {
   getDefaultInputs,
@@ -24,6 +25,7 @@ import {
   getStepValidity,
   getVisisbleErrorsForStep,
   getKeyStepMap,
+  ERRORS_AS_ALERTS,
 } from './utils'
 import { generateCards } from './utils/generateCards'
 
@@ -38,6 +40,13 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
   const keyStepMap = getKeyStepMap(tsln, language)
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
+
+  const [formFields, setFormFields] = useState(form.fields)
+
+  useEffect(() => {
+    console.log('FORM HAS CHANGED BECAUSE FORM FIELDS IN STATE CHANGED')
+    getErrorFields()
+  }, [formFields])
 
   const [inputs, setInputs]: [
     FieldInputsObject,
@@ -64,10 +73,6 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
     getStepValidity(form, inputs, keyStepMap)
   )
 
-  useEffect(() => {
-    console.log('FORM CHANGED')
-  }, [form])
-
   // Controls press of "Next" on each card
   const handleButtonOnChange = (step) => {
     setErrorsVisible({
@@ -75,6 +80,7 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
       ...getVisisbleErrorsForStep(step, visibleFields, keyStepMap),
     })
     setNextForStepClicked({ ...nextForStepClicked, [step]: true })
+    setFormFields({ ...form.fields })
   }
 
   // Controls change of inputs
@@ -87,6 +93,7 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
+    setFormFields({ ...form.fields })
     setCardsValid(getStepValidity(form, inputs, keyStepMap))
 
     if (nextForStepClicked[step]) {
@@ -105,21 +112,36 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
     }
   }
 
+  const getErrorFields = () => {
+    return form.visibleFields.filter(
+      (field) =>
+        field.error &&
+        errorsVisible[field.key] &&
+        (!ERRORS_AS_ALERTS.includes(field.key) || field.value === undefined)
+    )
+  }
+
+  form.update(inputHelper)
   return (
-    <AccordionForm
-      id="mainForm"
-      cardsState={cardsValid}
-      cards={generateCards(
-        form,
-        handleButtonOnChange,
-        handleOnChange,
-        submitForm,
-        errorsVisible,
-        keyStepMap,
-        tsln
-      )}
-      lang={language}
-    />
+    <>
+      <div>
+        <ErrorsSummary errorFields={getErrorFields()} />
+      </div>
+      <AccordionForm
+        id="mainForm"
+        cardsState={cardsValid}
+        cards={generateCards(
+          form,
+          handleButtonOnChange,
+          handleOnChange,
+          submitForm,
+          errorsVisible,
+          keyStepMap,
+          tsln
+        )}
+        lang={language}
+      />
+    </>
   )
 }
 

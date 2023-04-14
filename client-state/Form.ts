@@ -29,19 +29,18 @@ export class Form {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
     this.clearAllErrors()
 
-    // set visibility of fields
-    this.fields.forEach((field) => {
-      field.visible = data.visibleFields.includes(field.key)
-
-      // handle default values (currently only select/radio support defaults, which use KeyAndText).
-      if (
+    this.fields.map((field) => {
+      const meetsCondition =
         field.visible &&
         !field.value &&
         'default' in field.config &&
         field.config.default &&
         field.config.default.key
-      )
-        field.value = field.config.default.key
+      return {
+        ...field,
+        visible: data.visibleFields.includes(field.key),
+        value: meetsCondition ? field.config.default.key : undefined,
+      }
     })
 
     this.clearInvisibleFields()
