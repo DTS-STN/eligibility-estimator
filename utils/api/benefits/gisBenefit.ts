@@ -85,15 +85,17 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             return {
               result: ResultKey.INCOME_DEPENDENT,
               reason: ResultReason.INCOME,
-              detail: this.translations.detail.gis.incomeTooHigh,
+              detail:
+                this.translations.detail.youreLikelyEligible +
+                this.translations.detail.eligibleIncomeTooHigh,
             }
           } else {
             return {
               result: ResultKey.INCOME_DEPENDENT,
               reason: ResultReason.INCOME_MISSING,
               detail:
-                this.translations.detail.gis
-                  .eligibleDependingOnIncomeNoEntitlement,
+                this.translations.detail.youreLikelyEligible +
+                this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
               incomeMustBeLessThan: maxIncome,
             }
           }
@@ -106,19 +108,25 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
-            detail: this.translations.detail.gis.incomeTooHigh,
+            detail:
+              this.translations.detail.youreLikelyEligible +
+              this.translations.detail.eligibleIncomeTooHigh,
           }
         } else if (this.input.income?.partner >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
-            detail: this.translations.detail.gis.incomeTooHigh,
+            detail:
+              this.translations.detail.youreLikelyEligible +
+              this.translations.detail.eligibleIncomeTooHigh,
           }
         } else if (this.input.income.relevant >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
-            detail: this.translations.detail.gis.incomeTooHigh,
+            detail:
+              this.translations.detail.youreLikelyEligible +
+              this.translations.detail.eligibleIncomeTooHigh,
           }
         } else {
           return {
@@ -190,6 +198,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // marital status is invSeparated? entitlement unavailable.
     if (this.input.maritalStatus.invSeparated) {
       this.eligibility.detail =
+        this.translations.detail.youreLikelyEligible +
         this.translations.detail.eligibleEntitlementUnavailable
       return {
         result: -1,
@@ -222,7 +231,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // */
     // if (type === EntitlementResultType.UNAVAILABLE)
     //   this.eligibility.detail =
-    //     this.translations.detail.eligibleEntitlementUnavailable
+    //     this.translation.detail.youreLikelyEligible + this.translations.detail.eligibleEntitlementUnavailable
 
     return { result: formulaResult, type, autoEnrollment }
   }
@@ -265,7 +274,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     ) {
       //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.gis.incomeTooHigh
+      this.eligibility.detail =
+        this.translations.detail.youreLikelyEligible +
+        this.translations.detail.eligibleIncomeTooHigh
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 

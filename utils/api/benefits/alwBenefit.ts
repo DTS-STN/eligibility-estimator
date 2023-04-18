@@ -69,7 +69,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
-            detail: this.translations.detail.alwEligibleIncomeTooHigh,
+            detail:
+              this.translations.detail.youreLikelyEligible +
+              this.translations.detail.alwEligibleIncomeTooHigh,
           }
         } else {
           return {
@@ -131,7 +133,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,
-        detail: this.translations.detail.alwEligibleIncomeTooHigh,
+        detail:
+          this.translations.detail.youreLikelyEligible +
+          this.translations.detail.alwEligibleIncomeTooHigh,
       }
     } else if (!meetsReqCountry) {
       return {

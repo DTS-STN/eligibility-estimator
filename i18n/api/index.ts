@@ -51,13 +51,15 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    youreLikelyEligible: string
+    youMaybeEligible: string
     eligibleIncomeTooHigh: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     eligibleWhen60ApplyNow: string
-    eligibleWhen65ApplyNow: string
+    // eligibleWhen65ApplyNow: string
     eligibleWhen60: string
     eligibleWhen65: string
     mustBeInCanada: string
@@ -85,7 +87,7 @@ export interface Translations {
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string
-      eligibleIncomeTooHigh: string
+      // eligibleIncomeTooHigh: string
       serviceCanadaReviewYourPayment: string
       automaticallyBePaid: string
       youShouldReceiveLetter: string
@@ -96,8 +98,8 @@ export interface Translations {
       ifNotReceiveLetter64: string
     }
     gis: {
-      eligibleDependingOnIncomeNoEntitlement: string
-      incomeTooHigh: string
+      // eligibleDependingOnIncomeNoEntitlement: string
+      // incomeTooHigh: string
       ifYouApply: string
     }
   }

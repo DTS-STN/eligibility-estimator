@@ -104,7 +104,9 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.INCOME_DEPENDENT,
         reason: ResultReason.INCOME_MISSING,
-        detail: this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
+        detail:
+          this.translations.detail.youreLikelyEligible +
+          this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
         incomeMustBeLessThan: maxIncome,
       }
     } else {
@@ -113,7 +115,9 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
-          detail: this.translations.detail.eligibleIncomeTooHigh,
+          detail:
+            this.translations.detail.youreLikelyEligible +
+            this.translations.detail.eligibleIncomeTooHigh,
         }
       } else {
         return {

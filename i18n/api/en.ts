@@ -284,20 +284,26 @@ const en: Translations = {
   },
   detail: {
     eligible: "You're likely eligible for this benefit.",
+    youreLikelyEligible: "You're likely eligible for this benefit",
+    youMaybeEligible: 'You may be eligible to receive this benefit',
     eligibleIncomeTooHigh:
-      "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+      ', but your income is too high to receive a monthly payment at this time.',
+    // "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     eligibleDependingOnIncome:
-      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
+      ' if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+    // "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
-      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
+      ' if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
+    // "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
     eligibleEntitlementUnavailable:
-      "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
+      ', however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.',
+    // "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
-    eligibleWhen65ApplyNow:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
+    // eligibleWhen65ApplyNow:
+    //   'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60:
       "You'll likely be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
     eligibleWhen65: 'You will likely be eligible when you turn 65.',
@@ -330,7 +336,8 @@ const en: Translations = {
     alwEligibleButPartnerAlreadyIs:
       'To be eligible for this benefit, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class="text-default-text" style="text-decoration: underline" href="/eligibility#partnerBenefitStatus">edit your answers</a> to see what you could get if your partner received these benefits.',
     alwEligibleIncomeTooHigh:
-      "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
+      ', but you and your partner’s combined income is too high to receive a monthly payment at this time.',
+    // "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
@@ -347,11 +354,12 @@ const en: Translations = {
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you will have to repay some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
     oas: {
       eligibleIfIncomeIsLessThan:
-        "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
+        ' if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.',
+      // "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
       dependOnYourIncome:
         'Depending on your income, you can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month. Provide your income to get an accurate estimate.',
-      eligibleIncomeTooHigh:
-        "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+      // eligibleIncomeTooHigh:
+      //   "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       serviceCanadaReviewYourPayment:
         'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
       automaticallyBePaid:
@@ -370,10 +378,10 @@ const en: Translations = {
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
     },
     gis: {
-      eligibleDependingOnIncomeNoEntitlement:
-        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
-      incomeTooHigh:
-        "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+      // eligibleDependingOnIncomeNoEntitlement:
+      //  "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
+      // incomeTooHigh:
+      //   "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:
         "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.</p>",
     },

@@ -60,7 +60,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         return {
           result: ResultKey.INCOME_DEPENDENT,
           reason: ResultReason.INCOME_MISSING,
-          detail: this.translations.detail.oas.eligibleIfIncomeIsLessThan,
+          detail:
+            this.translations.detail.youreLikelyEligible +
+            this.translations.detail.oas.eligibleIfIncomeIsLessThan,
           incomeMustBeLessThan: incomeLimit,
         }
       else if (meetsReqAge) {
@@ -74,7 +76,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
               : ResultReason.AGE_70_AND_OVER,
           detail:
             this.income > incomeLimit
-              ? this.translations.detail.oas.eligibleIncomeTooHigh
+              ? this.translations.detail.youreLikelyEligible +
+                this.translations.detail.eligibleIncomeTooHigh
               : this.translations.detail.eligible,
         }
       } else if (this.input.age >= 64 && this.input.age < 65) {
@@ -353,7 +356,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     ) {
       //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.eligibleIncomeTooHigh
+      this.eligibility.detail =
+        this.translations.detail.youreLikelyEligible +
+        this.translations.detail.eligibleIncomeTooHigh
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
