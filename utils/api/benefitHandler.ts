@@ -991,6 +991,17 @@ export class BenefitHandler {
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )
         }
+        if (
+          this.input.partner.invSeparated &&
+          clientGis.entitlement.result > 0
+        ) {
+          allResults.client.gis.eligibility.detail,
+            (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+          allResults.client.gis.cardDetail.collapsedText.push(
+            this.translations.detailWithHeading
+              .calculatedBasedOnIndividualIncome
+          )
+        }
       }
 
       // Finish with AFS entitlement.
