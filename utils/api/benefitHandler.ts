@@ -938,6 +938,17 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
+          if (
+            this.input.partner.invSeparated &&
+            clientGis.entitlement.result > 0
+          ) {
+            allResults.client.gis.eligibility.detail,
+              (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+            allResults.client.gis.cardDetail.collapsedText.push(
+              this.translations.detailWithHeading
+                .calculatedBasedOnIndividualIncome
+            )
+          }
           consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- end'
           )
@@ -989,17 +1000,6 @@ export class BenefitHandler {
           }
           consoleDev(
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
-          )
-        }
-        if (
-          this.input.partner.invSeparated &&
-          clientGis.entitlement.result > 0
-        ) {
-          allResults.client.gis.eligibility.detail,
-            (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
-          allResults.client.gis.cardDetail.collapsedText.push(
-            this.translations.detailWithHeading
-              .calculatedBasedOnIndividualIncome
           )
         }
       }
