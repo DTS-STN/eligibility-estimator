@@ -30,7 +30,7 @@ describe('Help Me Find Out scenarios', () => {
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -38,7 +38,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 0,
     }
     let res = await mockGetRequest(input)
@@ -60,7 +60,7 @@ describe('Help Me Find Out scenarios', () => {
   //     maritalStatus: MaritalStatus.PARTNERED,
   //     invSeparated: false,
   //     ...canadian,
-  //     livedOutsideCanada: false,
+  //     livedOnlyInCanada: false,
   //     yearsInCanadaSince18: undefined,
   //     everLivedSocialCountry: undefined,
   //     partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -68,7 +68,7 @@ describe('Help Me Find Out scenarios', () => {
   //     partnerAge: 65,
   //     partnerLivingCountry: LivingCountry.CANADA,
   //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
+  //     partnerLivedOnlyInCanada: true,
   //     partnerYearsInCanadaSince18: 20,
   //   }
   //   let res = await mockGetRequest(input)
@@ -90,7 +90,7 @@ describe('Help Me Find Out scenarios', () => {
   //     maritalStatus: MaritalStatus.PARTNERED,
   //     invSeparated: false,
   //     ...canadian,
-  //     livedOutsideCanada: false,
+  //     livedOnlyInCanada: false,
   //     yearsInCanadaSince18: undefined,
   //     everLivedSocialCountry: undefined,
   //     partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -98,7 +98,7 @@ describe('Help Me Find Out scenarios', () => {
   //     partnerAge: 65,
   //     partnerLivingCountry: LivingCountry.CANADA,
   //     partnerLegalStatus: LegalStatus.YES,
-  //     partnerLivedOutsideCanada: true,
+  //     partnerLivedOnlyInCanada: true,
   //     partnerYearsInCanadaSince18: 40,
   //   }
   //   let res = await mockGetRequest(input)
@@ -120,7 +120,7 @@ describe('Help Me Find Out scenarios', () => {
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -128,7 +128,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     }
     let res = await mockGetRequest(input)
@@ -144,7 +144,7 @@ describe('Help Me Find Out scenarios', () => {
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -152,7 +152,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     }
     let res = await mockGetRequest(input)
@@ -166,7 +166,7 @@ describe('Help Me Find Out scenarios', () => {
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -174,7 +174,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 60,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     }
     let res = await mockGetRequest(input)
@@ -200,7 +200,7 @@ describe('Help Me Find Out scenarios', () => {
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -208,7 +208,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.CANADA,
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     }
     let res = await mockGetRequest(input)
@@ -229,7 +229,7 @@ describe('Help Me Find Out scenarios', () => {
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
-      livedOutsideCanada: false,
+      livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       partnerBenefitStatus: PartnerBenefitStatus.HELP_ME,
@@ -237,7 +237,7 @@ describe('Help Me Find Out scenarios', () => {
       partnerAge: 65,
       partnerLivingCountry: LivingCountry.NO_AGREEMENT, // gis ineligible
       partnerLegalStatus: LegalStatus.YES,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 40,
     }
     let res = await mockGetRequest(input)

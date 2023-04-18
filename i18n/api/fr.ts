@@ -51,10 +51,10 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial?',
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
-    [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
+    [FieldKey.LIVING_COUNTRY]: 'Dans quel pays vivez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois?",
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -70,10 +70,10 @@ const fr: Translations = {
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Votre conjoint a-t-il un statut légal au Canada?',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
+      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
@@ -83,7 +83,7 @@ const fr: Translations = {
     [FieldKey.INCOME]: 'Revenu net',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
-    [FieldKey.LIVED_OUTSIDE_CANADA]: "Vécu à l'extérieur du Canada",
+    [FieldKey.LIVED_ONLY_IN_CANADA]: 'Seulement vécu au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
@@ -95,8 +95,8 @@ const fr: Translations = {
     [FieldKey.PARTNER_AGE]: 'Âge du conjoint',
     [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut légal du conjoint',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du conjoint',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      "Conjoint a vécu à l'extérieur du Canada",
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      'Conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Années où le conjoint a vécu au Canada',
   },
@@ -108,8 +108,8 @@ const fr: Translations = {
     [FieldKey.INCOME]: 'Modifier votre revenu net',
     [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Modifier si vous avez vécu à l’extérieur du Canada',
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      'Modifier si vous avez seulement vécu au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Modifier le nombre d’années vécues au Canada',
     [FieldKey.MARITAL_STATUS]: 'Modifier votre état matrimonial',
@@ -125,8 +125,8 @@ const fr: Translations = {
       'Modifier le statut légal de votre conjoint',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Modifier le pays de résidence de votre conjoint',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Modifier si votre conjoint a vécu à l’extérieur du Canada',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      'Modifier si votre conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Modifier le nombre d’années vécues au Canada de votre conjoint',
   },
@@ -194,28 +194,28 @@ const fr: Translations = {
         shortText: 'Non',
       },
     ],
-    [FieldKey.LIVED_OUTSIDE_CANADA]: [
-      {
-        key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
-        shortText: 'Non',
-      },
+    [FieldKey.LIVED_ONLY_IN_CANADA]: [
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
+        text: 'Oui',
         shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
-      {
-        key: false,
-        text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
-        shortText: 'Non',
-      },
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: [
       {
         key: true,
-        text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6&nbsp;mois",
+        text: 'Oui',
         shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.MARITAL_STATUS]: [

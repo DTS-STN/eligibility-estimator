@@ -27,7 +27,7 @@ describe('field requirement analysis', () => {
       maritalStatus: undefined,
       livingCountry: undefined,
       legalStatus: undefined,
-      livedOutsideCanada: undefined,
+      livedOnlyInCanada: undefined,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       invSeparated: undefined,
@@ -40,7 +40,7 @@ describe('field requirement analysis', () => {
       FieldKey.INCOME_AVAILABLE,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
+      FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
@@ -49,7 +49,7 @@ describe('field requirement analysis', () => {
       FieldKey.INCOME_AVAILABLE,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
+      FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.MARITAL_STATUS,
     ])
   })
@@ -62,7 +62,7 @@ describe('field requirement analysis', () => {
       oasAge: 70,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: true,
       invSeparated: false,
@@ -72,7 +72,7 @@ describe('field requirement analysis', () => {
       partnerAge: 65,
       partnerLegalStatus: LegalStatus.YES,
       partnerLivingCountry: LivingCountry.CANADA,
-      partnerLivedOutsideCanada: true,
+      partnerLivedOnlyInCanada: false,
       partnerYearsInCanadaSince18: 5,
     })
     expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
@@ -85,7 +85,7 @@ describe('field requirement analysis', () => {
       FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
-      FieldKey.LIVED_OUTSIDE_CANADA,
+      FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       // FieldKey.EVER_LIVED_SOCIAL_COUNTRY, // this field is odd because when visible, no matter what is selected it will return an error
       FieldKey.MARITAL_STATUS,
@@ -96,20 +96,20 @@ describe('field requirement analysis', () => {
       // FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_LEGAL_STATUS,
       FieldKey.PARTNER_LIVING_COUNTRY,
-      FieldKey.PARTNER_LIVED_OUTSIDE_CANADA,
+      FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
       FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
     ])
   })
 })
 
 describe('field requirements analysis: conditional fields', () => {
-  it('requires "yearsInCanadaSince18" when livedOutsideCanada=true', async () => {
+  it('requires "yearsInCanadaSince18" when livedOnlyInCanada=true', async () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: undefined,
       everLivedSocialCountry: undefined,
       invSeparated: false,
@@ -126,7 +126,7 @@ describe('field requirements analysis: conditional fields', () => {
       ...age65NoDefer,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: undefined,
       invSeparated: false,
@@ -144,7 +144,7 @@ describe('field requirements analysis: conditional fields', () => {
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.YES,
-      livedOutsideCanada: true,
+      livedOnlyInCanada: false,
       yearsInCanadaSince18: 19,
       everLivedSocialCountry: undefined,
       invSeparated: false,
@@ -163,7 +163,7 @@ describe('field requirements analysis: conditional fields', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
-      invSeparated: undefined, //added missing property
+      invSeparated: undefined,
     })
 
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
