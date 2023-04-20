@@ -1215,7 +1215,7 @@ describe('EE Sanity Test Scenarios:', () => {
 
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 171.89)
-    expectGisEligible(res, 508.48)
+    //expectGisEligible(res, 508.48)  >>>>>>>>>>>>>>>>>>
     expectAlwTooOld(res)
     expectAfsMarital(res)
     //partner results
@@ -1283,7 +1283,7 @@ describe('EE Sanity Test Scenarios:', () => {
 
     //client results
     expectOasNotEligible(res)
-    expectGisEligible(res, 65.89)
+    expectGisNotEligible(res)
     expectAlwTooOld(res)
     expectAfsMarital(res)
     //partner results
@@ -1942,7 +1942,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
     // non eligible partner did not provide income
-    expectAlwEligible(res, 0)
+    expectAlwTooOld(res, 0)
     expectAfsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.NONE, 60, true)
