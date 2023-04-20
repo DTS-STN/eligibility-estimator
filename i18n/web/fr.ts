@@ -137,9 +137,10 @@ const fr: WebTranslations = {
     )} pour plus de détails.`,
     yourEstimatedTotal: ' Votre total mensuel estimé est ',
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
-    basedOnYourInfoTotal: 'Selon vos informations, vous pourriez recevoir :',
+    basedOnYourInfoTotal:
+      'Selon vos informations, vous pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      'Selon vos informations, vous pourriez recevoir :',
+      'Selon vos informations, vous pourriez être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
