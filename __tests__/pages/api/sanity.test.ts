@@ -1225,7 +1225,7 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+      ResultReason.OAS
     )
     expect(res.body.partnerResults.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -1284,7 +1284,12 @@ describe('EE Sanity Test Scenarios:', () => {
     //client results
     expectOasNotEligible(res)
     expectGisNotEligible(res)
-    expectAlwTooOld(res)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.AGE_YOUNG
+    )
     expectAfsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
@@ -1942,7 +1947,12 @@ describe('EE Sanity Test Scenarios:', () => {
     expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
     // non eligible partner did not provide income
-    expectAlwTooOld(res, 0)
+    expect(res.body.results.alw.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.PARTNER
+    )
     expectAfsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.NONE, 60, true)
