@@ -1215,7 +1215,7 @@ describe('EE Sanity Test Scenarios:', () => {
 
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 171.89)
-    //expectGisEligible(res, 508.48)  >>>>>>>>>>>>>>>>>>
+    expectGisEligible(res, 508.48)
     expectAlwTooOld(res)
     expectAfsMarital(res)
     //partner results
@@ -1259,8 +1259,8 @@ describe('EE Sanity Test Scenarios:', () => {
 
   it('should pass the sanity test - SAN-GIS-c1-06', async () => {
     const res = await mockGetRequest({
-      incomeAvailable: false,
-      income: 0, // personal income
+      incomeAvailable: true,
+      income: 4000, // personal income
       age: 58,
       oasDefer: false,
       oasAge: undefined,
@@ -1294,7 +1294,6 @@ describe('EE Sanity Test Scenarios:', () => {
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      //ResultReason.AGE_YOUNG
       ResultReason.YEARS_IN_CANADA
     )
     expectGisNotEligible(res, true)
@@ -1329,7 +1328,6 @@ describe('EE Sanity Test Scenarios:', () => {
       - Country of Residence: Canada
       - lived outside Canada: no
       - years resided in Canada: 40
-     
   */
 
   it('should pass the sanity test - SAN-GIS-ALW-01', async () => {
@@ -1946,7 +1944,7 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    // non eligible partner did not provide income
+
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
@@ -1955,8 +1953,8 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expectAfsMarital(res)
     //partner results
-    expectOasEligible(res, EntitlementResultType.NONE, 60, true)
-    expectGisEligible(res, 0, true)
+    expectOasNotEligible(res, true)
+    expectGisNotEligible(res, true)
     expectAlwTooOld(res, true)
   })
 
