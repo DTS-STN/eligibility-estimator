@@ -1233,7 +1233,7 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+      ResultReason.AGE
     )
   })
 
