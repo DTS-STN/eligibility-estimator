@@ -35,17 +35,17 @@ const getEstimatedMonthlyTotalLinkText = (
   }
 }
 
-const getEligibility = (
+const getEligibilityText = (
   resultsArray: BenefitResult[],
   apiTsln: Translations,
   key: string
 ): string => {
-  return getEligibilityResult(resultsArray, key)
+  return getEligibility(resultsArray, key)
     ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
     : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
 }
 
-const getEligibilityResult = (
+const getEligibility = (
   resultsArray: BenefitResult[],
   key: string
 ): boolean => {
@@ -104,24 +104,24 @@ const ResultsPage: React.VFC<{
       url: '#answers',
     },
     {
-      text: `${getEligibility(resultsArray, apiTsln, 'oas')}`,
+      text: `${getEligibilityText(resultsArray, apiTsln, 'oas')}`,
       url: '#oas',
-      eligible: getEligibilityResult(resultsArray, 'oas'),
+      eligible: getEligibility(resultsArray, 'oas'),
     },
     {
-      text: `${getEligibility(resultsArray, apiTsln, 'gis')}`,
+      text: `${getEligibilityText(resultsArray, apiTsln, 'gis')}`,
       url: '#gis',
-      eligible: getEligibilityResult(resultsArray, 'gis'),
+      eligible: getEligibility(resultsArray, 'gis'),
     },
     {
-      text: `${getEligibility(resultsArray, apiTsln, 'alw')}`,
+      text: `${getEligibilityText(resultsArray, apiTsln, 'alw')}`,
       url: '#alw',
-      eligible: getEligibilityResult(resultsArray, 'alw'),
+      eligible: getEligibility(resultsArray, 'alw'),
     },
     {
-      text: `${getEligibility(resultsArray, apiTsln, 'afs')}`,
+      text: `${getEligibilityText(resultsArray, apiTsln, 'afs')}`,
       url: '#afs',
-      eligible: getEligibilityResult(resultsArray, 'afs'),
+      eligible: getEligibility(resultsArray, 'afs'),
     },
   ]
 
