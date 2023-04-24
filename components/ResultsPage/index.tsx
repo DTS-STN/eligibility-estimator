@@ -40,13 +40,25 @@ const getEligibility = (
   apiTsln: Translations,
   key: string
 ): string => {
-  const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
-    .eligibility.result
-
-  return eligibityResult === ResultKey.ELIGIBLE ||
-    eligibityResult === ResultKey.INCOME_DEPENDENT
+  return getEligibilityResult(resultsArray, key)
     ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
     : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
+}
+
+const getEligibilityResult = (
+  resultsArray: BenefitResult[],
+  key: string
+): boolean => {
+  const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
+    .eligibility.result
+  if (
+    eligibityResult === ResultKey.ELIGIBLE ||
+    eligibityResult === ResultKey.INCOME_DEPENDENT
+  ) {
+    return true
+  } else {
+    return false
+  }
 }
 
 const ResultsPage: React.VFC<{
@@ -77,6 +89,7 @@ const ResultsPage: React.VFC<{
   let listLinks: {
     text: string
     url: string
+    eligible?: boolean
   }[] = [
     {
       text: getEstimatedMonthlyTotalLinkText(
@@ -93,24 +106,42 @@ const ResultsPage: React.VFC<{
     {
       text: `${getEligibility(resultsArray, apiTsln, 'oas')}`,
       url: '#oas',
+      eligible: getEligibilityResult(resultsArray, 'oas'),
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'gis')}`,
       url: '#gis',
+      eligible: getEligibilityResult(resultsArray, 'gis'),
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'alw')}`,
       url: '#alw',
+      eligible: getEligibilityResult(resultsArray, 'alw'),
     },
     {
       text: `${getEligibility(resultsArray, apiTsln, 'afs')}`,
       url: '#afs',
+      eligible: getEligibilityResult(resultsArray, 'afs'),
     },
   ]
 
   // filtered out the link item which text is empty.
   listLinks = listLinks.filter((ll) => ll.text)
+  // Sort the links based on eligibility
+  const sortListLinks = (a, b) => {
+    if (a.eligible == null || b.eligible == null) {
+      return 0
+    }
+    if (a.eligible && !b.eligible) {
+      return -1
+    }
+    if (!a.eligible && b.eligible) {
+      return 1
+    }
+    return 0
+  }
 
+  listLinks = listLinks.sort(sortListLinks)
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
@@ -132,7 +163,6 @@ const ResultsPage: React.VFC<{
         <div className="col-span-1 row-span-2">
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
-
         <div className="col-span-2 row-span-1">
           <BenefitCards
             results={resultsArray}
