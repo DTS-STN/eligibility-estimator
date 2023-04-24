@@ -42,10 +42,13 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
     BenefitHandler.getAllFieldData(language)
 
   const [formFields, setFormFields] = useState(form.fields)
+  const [rerender, setRerender] = useState(false)
 
   useEffect(() => {
     console.log('FORM HAS CHANGED BECAUSE FORM FIELDS IN STATE CHANGED')
     getErrorFields()
+    getCards()
+    setRerender(!rerender)
   }, [formFields])
 
   const [inputs, setInputs]: [
@@ -121,6 +124,19 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
     )
   }
 
+  const getCards = () => {
+    console.log('inside get carsd')
+    return generateCards(
+      form,
+      handleButtonOnChange,
+      handleOnChange,
+      submitForm,
+      errorsVisible,
+      keyStepMap,
+      tsln
+    )
+  }
+
   form.update(inputHelper)
   return (
     <>
@@ -130,15 +146,7 @@ const MainForm: React.FC<MainFormProps> = ({ form }) => {
       <AccordionForm
         id="mainForm"
         cardsState={cardsValid}
-        cards={generateCards(
-          form,
-          handleButtonOnChange,
-          handleOnChange,
-          submitForm,
-          errorsVisible,
-          keyStepMap,
-          tsln
-        )}
+        cards={getCards()}
         lang={language}
       />
     </>

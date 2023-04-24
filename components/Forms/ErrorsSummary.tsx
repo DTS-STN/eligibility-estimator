@@ -8,7 +8,6 @@ import { Language } from '../../utils/api/definitions/enums'
 
 export const ErrorsSummary: any = ({ errorFields }) => {
   const tsln = useTranslation<WebTranslations>()
-  console.log('errorFields', errorFields)
   if (errorFields.length === 0) return null
 
   const messageBody = (

@@ -11,6 +11,7 @@ export function generateCards(
   keyStepMap,
   tsln
 ): Card[] {
+  console.log('inside generate cards')
   return Object.keys(keyStepMap).map((step: Steps, index) => {
     const cardConfig: CardConfig = keyStepMap[step]
     const children = generateCardChildren(

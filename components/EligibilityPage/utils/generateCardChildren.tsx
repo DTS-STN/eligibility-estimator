@@ -25,6 +25,7 @@ export default function generateCardChildren(
     stepKeys.includes(field.key)
   )
 
+  console.log('inside generate children', fields)
   return fields.map((field: FormField) => {
     const [formError, alertError] = getErrorForField(field, errorsVisible)
 
