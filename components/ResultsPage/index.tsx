@@ -51,14 +51,10 @@ const getEligibility = (
 ): boolean => {
   const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
     .eligibility.result
-  if (
+  return (
     eligibityResult === ResultKey.ELIGIBLE ||
     eligibityResult === ResultKey.INCOME_DEPENDENT
-  ) {
-    return true
-  } else {
-    return false
-  }
+  )
 }
 
 const ResultsPage: React.VFC<{
