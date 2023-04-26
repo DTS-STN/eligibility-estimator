@@ -172,3 +172,23 @@ export function getStepValidity(keyStepMap, form, inputs): StepValidity {
     return result
   }, {})
 }
+
+/**
+ * Get error text for each field. Some fields show up as alerts while some are regular form errors
+ */
+export function getErrorForField(field, errorsVisible) {
+  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
+  let formError
+  let alertError
+
+  if (field.value === undefined || !errorsAsAlerts.includes(field.key)) {
+    formError = errorsVisible[field.key] ? field.error : ''
+  } else {
+    alertError =
+      errorsAsAlerts.includes(field.key) &&
+      errorsVisible[field.key] &&
+      field.error
+  }
+
+  return [formError, alertError]
+}

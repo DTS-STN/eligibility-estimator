@@ -17,7 +17,6 @@ import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import {
   Language,
-  LegalStatus,
   MaritalStatus,
   Steps,
 } from '../../utils/api/definitions/enums'
@@ -31,7 +30,6 @@ import {
   CardChildren,
   CardConfig,
   NextClickedObject,
-  StepValidity,
   VisibleFieldsObject,
 } from '../../utils/web/types'
 import { CurrencyField } from '../Forms/CurrencyField'
@@ -45,6 +43,7 @@ import { useMediaQuery, useTranslation } from '../Hooks'
 import {
   getDefaultInputs,
   getDefaultVisibleFields,
+  getErrorForField,
   getErrorVisibility,
   getKeyStepMap,
   getNextClickedObj,
@@ -62,6 +61,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
   const language = useRouter().locale as Language
+
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
   const [inputs, setInputs]: [
@@ -73,6 +73,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     NextClickedObject,
     (value: NextClickedObject) => void
   ] = useSessionStorage('next-clicked', getNextClickedObj())
+
   const [errorsVisible, setErrorsVisible]: [
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
@@ -82,6 +83,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
+
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
   const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
@@ -135,22 +137,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }
 
-  function getErrorForField(field) {
-    let formError
-    let alertError
-
-    if (field.value === undefined || !errorsAsAlerts.includes(field.key)) {
-      formError = errorsVisible[field.key] ? field.error : ''
-    } else {
-      alertError =
-        errorsAsAlerts.includes(field.key) &&
-        errorsVisible[field.key] &&
-        field.error
-    }
-
-    return [formError, alertError]
-  }
-
   /**
    * Generates the raw HTML for each field (aka. child).
    */
@@ -160,7 +146,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     )
 
     return fields.map((field: FormField) => {
-      const [formError, alertError] = getErrorForField(field)
+      const [formError, alertError] = getErrorForField(field, errorsVisible)
 
       return (
         <div key={field.key}>
@@ -262,7 +248,6 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             </div>
           )}
-          {/* {showWarningMessage(field)} */}
           {field.key === FieldKey.MARITAL_STATUS &&
             field.value === MaritalStatus.PARTNERED && (
               <div className="my-6">
