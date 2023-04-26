@@ -49,6 +49,7 @@ import {
   getNextClickedObj,
   getPlaceholderForSelect,
   getStepValidity,
+  getVisisbleErrorsForStep,
 } from './utils'
 
 /**
@@ -92,7 +93,11 @@ export const EligibilityPage: React.VFC = ({}) => {
     allFieldConfigs
   )
 
-  // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
+  const [cardsValid, setCardsValid] = useState(
+    getStepValidity(keyStepMap, form, inputs)
+  )
+
+  // On mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
     document.addEventListener('keydown', function (event) {
       if (isMobile && event.key == 'Enter') {
@@ -112,12 +117,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }, [])
 
-  form.update(inputHelper)
-
-  const [cardsValid, setCardsValid] = useState(
-    getStepValidity(keyStepMap, form, inputs)
-  )
-
   /**
    * On every change to a field, this will check the validity of all fields.
    */
@@ -133,21 +132,23 @@ export const EligibilityPage: React.VFC = ({}) => {
     setCardsValid(getStepValidity(keyStepMap, form, inputs))
 
     if (nextForStepClicked[step]) {
-      setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+      setErrorsVisible({
+        ...errorsVisible,
+        ...getVisisbleErrorsForStep(step, keyStepMap, visibleFields),
+      })
     }
   }
 
   /**
    * Generates the raw HTML for each field (aka. child).
    */
-  function generateChildren(step: Steps, stepKeys: FieldKey[]): CardChildren {
+  function generateChildren(stepKeys: FieldKey[]): CardChildren {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
 
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(field, errorsVisible)
-
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -273,21 +274,11 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }
 
-  function getVisisbleErrorsForStep(step) {
-    const stepKeys = keyStepMap[step].keys
-    const allVisibleKeys = Object.keys(visibleFields).filter((key) => key)
-
-    const visibleKeysForStep = stepKeys.filter((key) =>
-      allVisibleKeys.includes(key)
-    )
-
-    const stepErrorsVisible = {}
-    visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
-    return stepErrorsVisible
-  }
-
   function handleButtonOnChange(step) {
-    setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
+    setErrorsVisible({
+      ...errorsVisible,
+      ...getVisisbleErrorsForStep(step, keyStepMap, visibleFields),
+    })
     setNextForStepClicked({ ...nextForStepClicked, [step]: true })
   }
 
@@ -298,7 +289,7 @@ export const EligibilityPage: React.VFC = ({}) => {
   function generateCards(): Card[] {
     return Object.keys(keyStepMap).map((step: Steps, index) => {
       const cardConfig: CardConfig = keyStepMap[step]
-      const children = generateChildren(step, cardConfig.keys)
+      const children = generateChildren(cardConfig.keys)
       const card: Card = {
         id: step,
         title: cardConfig.title,
@@ -324,6 +315,8 @@ export const EligibilityPage: React.VFC = ({}) => {
       return card
     })
   }
+
+  form.update(inputHelper)
 
   return (
     <>

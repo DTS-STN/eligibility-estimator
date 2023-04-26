@@ -192,3 +192,20 @@ export function getErrorForField(field, errorsVisible) {
 
   return [formError, alertError]
 }
+
+/**
+ * Returns an object that determines whether errors for a given step (card) are visible or not. If a key is visible in a step,
+ * the error if it exists will also be visible.
+ */
+export function getVisisbleErrorsForStep(step, keyStepMap, visibleFields) {
+  const stepKeys = keyStepMap[step].keys
+  const allVisibleKeys = Object.keys(visibleFields).filter((key) => key)
+
+  const visibleKeysForStep = stepKeys.filter((key) =>
+    allVisibleKeys.includes(key)
+  )
+
+  const stepErrorsVisible = {}
+  visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
+  return stepErrorsVisible
+}
