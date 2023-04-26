@@ -306,31 +306,6 @@ export const EligibilityPage: React.VFC = ({}) => {
     })
   }
 
-  const showWarningMessage = (field) => {
-    const messageHeading = tsln.partnerIsNotEligible
-    let messageBody = ''
-    if (field.key === 'partnerLegalStatus' && field.value === LegalStatus.NO) {
-      messageBody = tsln.partnerLegalStatusNotEligible
-    } else {
-      return ''
-    }
-
-    return (
-      <div className="mt-6 md:pr-12 msg-container border-info">
-        <Message
-          id={field.key}
-          alert_icon_id={field.key}
-          alert_icon_alt_text={tsln.warningText}
-          type={'info'}
-          message_heading={messageHeading}
-          message_body={messageBody}
-          asHtml={true}
-          whiteBG={true}
-        />
-      </div>
-    )
-  }
-
   /**
    * Submits the form, saves inputs, and navigates to the results page.
    * This happens only when all fields are filled, and there are no errors.
