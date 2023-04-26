@@ -1,9 +1,17 @@
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { Steps } from '../../utils/api/definitions/enums'
-import { FieldConfig } from '../../utils/api/definitions/fields'
-import { NextClickedObject, VisibleFieldsObject } from '../../utils/web/types'
+import {
+  FieldCategory,
+  Language,
+  Steps,
+} from '../../utils/api/definitions/enums'
+import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
+import {
+  CardConfig,
+  NextClickedObject,
+  VisibleFieldsObject,
+} from '../../utils/web/types'
 import MainHandler from '../../utils/api/mainHandler'
 
 /**
@@ -66,4 +74,70 @@ export function getNextClickedObj(): NextClickedObject {
     result[Steps[step]] = false
   }
   return result
+}
+
+/**
+ * Builds a keyStepMap object that defines parameters for a given card such as card title, button label, the question keys associated with
+ * that card as well as button attributes that are required by Adobe Analytics
+ */
+export function getKeyStepMap(
+  tsln,
+  allFieldConfigs
+): { [x in Steps]: CardConfig } {
+  const connection = tsln._language === Language.EN ? ':' : ' :'
+  const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
+  const AA_BUTTON_CLICK_ATTRIBUTE =
+    'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click'
+  const AA_FROM_SUBMIT_ATTRIBUTE = 'data-gc-analytics-formsubmit'
+  const AA_FORM_SUBMIT_ACTION = 'submit'
+
+  function getKeysByCategory(category: FieldCategory): FieldKey[] {
+    return allFieldConfigs
+      .filter((value) => value.category.key === category)
+      .map((value) => value.key)
+  }
+
+  return {
+    [Steps.STEP_1]: {
+      title: tsln.category.age,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
+      keys: getKeysByCategory(FieldCategory.AGE),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
+      },
+    },
+    [Steps.STEP_2]: {
+      title: tsln.category.income,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
+      keys: getKeysByCategory(FieldCategory.INCOME),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.legal}`,
+      },
+    },
+    [Steps.STEP_3]: {
+      title: tsln.category.legal,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
+      keys: getKeysByCategory(FieldCategory.LEGAL),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
+      },
+    },
+    [Steps.STEP_4]: {
+      title: tsln.category.residence,
+      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
+      keys: getKeysByCategory(FieldCategory.RESIDENCE),
+      buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.marital}`,
+      },
+    },
+    [Steps.STEP_5]: {
+      title: tsln.category.marital,
+      buttonLabel: tsln.getEstimate,
+      keys: getKeysByCategory(FieldCategory.MARITAL),
+      buttonAttributes: {
+        [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
+        type: AA_FORM_SUBMIT_ACTION,
+      },
+    },
+  }
 }

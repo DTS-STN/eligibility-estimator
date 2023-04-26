@@ -1,6 +1,6 @@
 import {
-  ContextualAlert as Message,
   AccordionForm,
+  ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
@@ -9,17 +9,16 @@ import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
 import {
-  FieldInputsObject,
   ErrorsVisibleObject,
+  FieldInputsObject,
   InputHelper,
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import {
-  FieldCategory,
   Language,
-  MaritalStatus,
   LegalStatus,
+  MaritalStatus,
   Steps,
 } from '../../utils/api/definitions/enums'
 import {
@@ -27,14 +26,6 @@ import {
   FieldKey,
   FieldType,
 } from '../../utils/api/definitions/fields'
-import { CurrencyField } from '../Forms/CurrencyField'
-import { MonthAndYear } from '../Forms/MonthAndYear'
-import { NumberField } from '../Forms/NumberField'
-import { Radio } from '../Forms/Radio'
-import { FormSelect } from '../Forms/Select'
-import { TextField } from '../Forms/TextField'
-import { ErrorsSummary } from '../Forms/ErrorsSummary'
-import { useMediaQuery, useTranslation } from '../Hooks'
 import {
   Card,
   CardChildren,
@@ -43,10 +34,19 @@ import {
   StepValidity,
   VisibleFieldsObject,
 } from '../../utils/web/types'
+import { CurrencyField } from '../Forms/CurrencyField'
+import { ErrorsSummary } from '../Forms/ErrorsSummary'
+import { MonthAndYear } from '../Forms/MonthAndYear'
+import { NumberField } from '../Forms/NumberField'
+import { Radio } from '../Forms/Radio'
+import { FormSelect } from '../Forms/Select'
+import { TextField } from '../Forms/TextField'
+import { useMediaQuery, useTranslation } from '../Hooks'
 import {
   getDefaultInputs,
   getDefaultVisibleFields,
   getErrorVisibility,
+  getKeyStepMap,
   getNextClickedObj,
   getPlaceholderForSelect,
 } from './utils'
@@ -55,12 +55,6 @@ import {
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
-
-const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
-const AA_BUTTON_CLICK_ATTRIBUTE =
-  'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click'
-const AA_FROM_SUBMIT_ATTRIBUTE = 'data-gc-analytics-formsubmit'
-const AA_FORM_SUBMIT_ACTION = 'submit'
 
 export const EligibilityPage: React.VFC = ({}) => {
   const router = useRouter()
@@ -89,8 +83,11 @@ export const EligibilityPage: React.VFC = ({}) => {
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-  const connection = tsln._language === Language.EN ? ':' : ' :'
   const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
+  const keyStepMap: { [x in Steps]: CardConfig } = getKeyStepMap(
+    tsln,
+    allFieldConfigs
+  )
 
   // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -113,56 +110,6 @@ export const EligibilityPage: React.VFC = ({}) => {
   }, [])
 
   form.update(inputHelper)
-
-  function getKeysByCategory(category: FieldCategory): FieldKey[] {
-    return allFieldConfigs
-      .filter((value) => value.category.key === category)
-      .map((value) => value.key)
-  }
-
-  const keyStepMap: { [x in Steps]: CardConfig } = {
-    [Steps.STEP_1]: {
-      title: tsln.category.age,
-      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.income}`,
-      keys: getKeysByCategory(FieldCategory.AGE),
-      buttonAttributes: {
-        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
-      },
-    },
-    [Steps.STEP_2]: {
-      title: tsln.category.income,
-      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
-      keys: getKeysByCategory(FieldCategory.INCOME),
-      buttonAttributes: {
-        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.legal}`,
-      },
-    },
-    [Steps.STEP_3]: {
-      title: tsln.category.legal,
-      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.residence}`,
-      keys: getKeysByCategory(FieldCategory.LEGAL),
-      buttonAttributes: {
-        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
-      },
-    },
-    [Steps.STEP_4]: {
-      title: tsln.category.residence,
-      buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.marital}`,
-      keys: getKeysByCategory(FieldCategory.RESIDENCE),
-      buttonAttributes: {
-        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.marital}`,
-      },
-    },
-    [Steps.STEP_5]: {
-      title: tsln.category.marital,
-      buttonLabel: tsln.getEstimate,
-      keys: getKeysByCategory(FieldCategory.MARITAL),
-      buttonAttributes: {
-        [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
-        type: AA_FORM_SUBMIT_ACTION,
-      },
-    },
-  }
 
   /**
    * Checks the validity of all steps.
