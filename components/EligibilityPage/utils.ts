@@ -10,6 +10,7 @@ import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
 import {
   CardConfig,
   NextClickedObject,
+  StepValidity,
   VisibleFieldsObject,
 } from '../../utils/web/types'
 import MainHandler from '../../utils/api/mainHandler'
@@ -140,4 +141,34 @@ export function getKeyStepMap(
       },
     },
   }
+}
+
+/**
+ * Checks the validity of all steps.
+ * If a step has an error or is missing a field, it will be invalid.
+ */
+export function getStepValidity(keyStepMap, form, inputs): StepValidity {
+  return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
+    const stepKeys: FieldKey[] = keyStepMap[step].keys // all keys for a step, including keys that are not visible!
+    const visibleKeys: FieldKey[] = form.visibleFieldKeys // all keys that are visible (ie. exist in the form)
+    const visibleStepKeys: FieldKey[] = stepKeys.filter(
+      (value) => visibleKeys.includes(value) // all keys for a step that are visible
+    )
+    const allFieldsFilled: boolean = visibleStepKeys.every((key) => inputs[key])
+    const visibleStepFields: FormField[] = form.visibleFields.filter((field) =>
+      visibleStepKeys.includes(field.key)
+    )
+    const allFieldsNoError: boolean = visibleStepFields.every(
+      (field) => field.valid
+    )
+    const previousStep: { isValid: boolean } = result[`step${index}`]
+    const previousStepExists: boolean = previousStep !== undefined
+    const previousStepValid: boolean = previousStep?.isValid
+    const isValid: boolean =
+      allFieldsFilled &&
+      allFieldsNoError &&
+      (!previousStepExists || previousStepValid)
+    result[step] = { isValid }
+    return result
+  }, {})
 }

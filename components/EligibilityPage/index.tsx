@@ -49,6 +49,7 @@ import {
   getKeyStepMap,
   getNextClickedObj,
   getPlaceholderForSelect,
+  getStepValidity,
 } from './utils'
 
 /**
@@ -111,39 +112,9 @@ export const EligibilityPage: React.VFC = ({}) => {
 
   form.update(inputHelper)
 
-  /**
-   * Checks the validity of all steps.
-   * If a step has an error or is missing a field, it will be invalid.
-   */
-  function getStepValidity(): StepValidity {
-    return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
-      const stepKeys: FieldKey[] = keyStepMap[step].keys // all keys for a step, including keys that are not visible!
-      const visibleKeys: FieldKey[] = form.visibleFieldKeys // all keys that are visible (ie. exist in the form)
-      const visibleStepKeys: FieldKey[] = stepKeys.filter(
-        (value) => visibleKeys.includes(value) // all keys for a step that are visible
-      )
-      const allFieldsFilled: boolean = visibleStepKeys.every(
-        (key) => inputs[key]
-      )
-      const visibleStepFields: FormField[] = form.visibleFields.filter(
-        (field) => visibleStepKeys.includes(field.key)
-      )
-      const allFieldsNoError: boolean = visibleStepFields.every(
-        (field) => field.valid
-      )
-      const previousStep: { isValid: boolean } = result[`step${index}`]
-      const previousStepExists: boolean = previousStep !== undefined
-      const previousStepValid: boolean = previousStep?.isValid
-      const isValid: boolean =
-        allFieldsFilled &&
-        allFieldsNoError &&
-        (!previousStepExists || previousStepValid)
-      result[step] = { isValid }
-      return result
-    }, {})
-  }
-
-  const [cardsValid, setCardsValid] = useState(getStepValidity())
+  const [cardsValid, setCardsValid] = useState(
+    getStepValidity(keyStepMap, form, inputs)
+  )
 
   /**
    * On every change to a field, this will check the validity of all fields.
@@ -157,7 +128,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     field.value = newValue
     inputHelper.setInputByKey(field.key, newValue)
     form.update(inputHelper)
-    setCardsValid(getStepValidity())
+    setCardsValid(getStepValidity(keyStepMap, form, inputs))
 
     if (nextForStepClicked[step]) {
       setErrorsVisible({ ...errorsVisible, ...getVisisbleErrorsForStep(step) })
