@@ -42,7 +42,7 @@ import {
   NextClickedObject,
   StepValidity,
   VisibleFieldsObject,
-} from '../../utils/api/definitions/types'
+} from '../../utils/web/types'
 import {
   getDefaultInputs,
   getDefaultVisibleFields,

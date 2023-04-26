@@ -1,5 +1,5 @@
-import { VisibleFieldsObject } from '../components/EligibilityPage'
 import { FieldConfig, FieldKey } from '../utils/api/definitions/fields'
+import { VisibleFieldsObject } from '../utils/web/types'
 import { InputHelper } from './InputHelper'
 
 export class FormField {

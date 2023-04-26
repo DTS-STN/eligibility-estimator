@@ -3,10 +3,7 @@ import { FieldInputsObject } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { Steps } from '../../utils/api/definitions/enums'
 import { FieldConfig } from '../../utils/api/definitions/fields'
-import {
-  NextClickedObject,
-  VisibleFieldsObject,
-} from '../../utils/api/definitions/types'
+import { NextClickedObject, VisibleFieldsObject } from '../../utils/web/types'
 import MainHandler from '../../utils/api/mainHandler'
 
 /**
