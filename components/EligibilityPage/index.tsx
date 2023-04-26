@@ -20,13 +20,13 @@ import {
   Language,
   MaritalStatus,
   LegalStatus,
+  Steps,
 } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
   FieldKey,
   FieldType,
 } from '../../utils/api/definitions/fields'
-import MainHandler from '../../utils/api/mainHandler'
 import { CurrencyField } from '../Forms/CurrencyField'
 import { MonthAndYear } from '../Forms/MonthAndYear'
 import { NumberField } from '../Forms/NumberField'
@@ -35,6 +35,21 @@ import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
 import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { useMediaQuery, useTranslation } from '../Hooks'
+import {
+  Card,
+  CardChildren,
+  CardConfig,
+  NextClickedObject,
+  StepValidity,
+  VisibleFieldsObject,
+} from '../../utils/api/definitions/types'
+import {
+  getDefaultInputs,
+  getDefaultVisibleFields,
+  getErrorVisibility,
+  getNextClickedObj,
+  getPlaceholderForSelect,
+} from './utils'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
@@ -458,94 +473,4 @@ export const EligibilityPage: React.VFC = ({}) => {
       </div>
     </>
   )
-}
-
-/**
- * Builds the object representing the default inputs object.
- */
-function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
-  return allFieldConfigs.reduce((result, value) => {
-    if ('default' in value && value.default) {
-      result[value.key] =
-        typeof value.default === 'string' ? value.default : value.default.key
-    }
-    return result
-  }, {})
-}
-
-/**
- * Builds the object representing the default visibility of errors.
- */
-function getErrorVisibility(fieldConfigs): VisibleFieldsObject {
-  return fieldConfigs.reduce((result, value) => {
-    result[value.key] = false
-    return result
-  }, {})
-}
-
-function getNextClickedObj(): NextClickedObject {
-  const result = {}
-  for (const step in Steps) {
-    result[Steps[step]] = false
-  }
-  return result
-}
-
-export type VisibleFieldsObject = {
-  [key in FieldKey]?: boolean
-}
-
-/**
- * Builds the object representing the default set of visible fields.
- */
-function getDefaultVisibleFields(
-  allFieldConfigs: FieldConfig[]
-): VisibleFieldsObject {
-  const defaultData = new MainHandler({}).results
-  if ('visibleFields' in defaultData) {
-    return allFieldConfigs.reduce((result, value) => {
-      result[value.key] = defaultData.visibleFields.includes(value.key)
-      return result
-    }, {})
-  }
-}
-
-function getPlaceholderForSelect(
-  field: FormField,
-  tsln: WebTranslations
-): string {
-  const text: string = tsln.selectText[field.key]
-  return text ?? tsln.selectText.default
-}
-
-type CardConfig = {
-  title: string
-  buttonLabel: string
-  keys: FieldKey[]
-  buttonAttributes: Object
-}
-
-type Card = {
-  children: CardChildren
-  id: string
-  title: string
-  buttonLabel: string
-  buttonAttributes: Object
-  buttonOnChange?: (e) => void
-}
-
-type CardChildren = JSX.Element[]
-
-type StepValidity = { [x in Steps]?: { isValid: boolean } }
-
-type NextClickedObject = {
-  [x in Steps]?: boolean
-}
-
-enum Steps {
-  STEP_1 = 'step1',
-  STEP_2 = 'step2',
-  STEP_3 = 'step3',
-  STEP_4 = 'step4',
-  STEP_5 = 'step5',
 }
