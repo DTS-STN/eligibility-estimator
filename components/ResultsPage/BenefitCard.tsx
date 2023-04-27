@@ -85,11 +85,11 @@ export const BenefitCard: React.VFC<{
           links.map(({ text, url, icon, alt, action }, index) => (
             <div key={index} className="flex items-center py-4 text-content">
               <div>
-                <Image src={`/${icon}.png`} alt={alt} width="30" height="44" />
+                <Image src={`/${icon}.png`} alt={alt} width="40" height="40" />
               </div>
-              <div className="pl-5 w-full block">
+              <div className="pl-1 w-full block">
                 <span
-                  className="ds-font-body block ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
+                  className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
                   data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}:${action}`}
                 >
                   <a
@@ -97,6 +97,7 @@ export const BenefitCard: React.VFC<{
                     href={url}
                     target="_blank"
                     rel="noreferrer"
+                    className="align-top"
                   >
                     {text}
                   </a>
