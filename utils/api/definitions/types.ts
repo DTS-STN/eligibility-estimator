@@ -18,7 +18,6 @@ import {
   ResultKey,
   ResultReason,
   SummaryState,
-  Steps,
 } from './enums'
 import { FieldConfig, FieldKey } from './fields'
 

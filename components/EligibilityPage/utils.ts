@@ -1,15 +1,12 @@
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import {
-  FieldCategory,
-  Language,
-  Steps,
-} from '../../utils/api/definitions/enums'
+import { FieldCategory, Language } from '../../utils/api/definitions/enums'
 import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
 import {
   CardConfig,
   NextClickedObject,
+  Steps,
   StepValidity,
   VisibleFieldsObject,
 } from '../../utils/web/types'

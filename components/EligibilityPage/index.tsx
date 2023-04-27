@@ -15,11 +15,7 @@ import {
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import {
-  Language,
-  MaritalStatus,
-  Steps,
-} from '../../utils/api/definitions/enums'
+import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
   FieldKey,
@@ -30,6 +26,7 @@ import {
   CardChildren,
   CardConfig,
   NextClickedObject,
+  Steps,
   VisibleFieldsObject,
 } from '../../utils/web/types'
 import { CurrencyField } from '../Forms/CurrencyField'
