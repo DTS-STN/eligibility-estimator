@@ -78,7 +78,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.UNAVAILABLE,
             reason: ResultReason.OAS,
-            detail: this.translations.detail.conditional,
+            detail:
+              this.translations.detail.youMaybeEligible +
+              this.translations.detail.conditional,
           }
         } else if (skipReqIncome) {
           if (this.input.income.relevant >= maxIncome) {
@@ -158,7 +160,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.UNAVAILABLE,
         reason: ResultReason.LEGAL_STATUS,
-        detail: this.translations.detail.dependingOnLegal,
+        detail:
+          this.translations.detail.youMaybeEligible +
+          this.translations.detail.dependingOnLegal,
       }
     } else if (this.oasResult.eligibility.result == ResultKey.MORE_INFO) {
       return {

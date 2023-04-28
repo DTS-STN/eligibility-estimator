@@ -387,7 +387,9 @@ export class BenefitHandler {
         allResults.client.alw.eligibility = {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.NONE,
-          detail: this.translations.detail.conditional,
+          detail:
+            this.translations.detail.youMaybeEligible +
+            this.translations.detail.conditional,
         }
         // cardDetails and remove 'apply...' from the links
         allResults.client.alw.cardDetail.mainText =

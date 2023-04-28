@@ -318,19 +318,26 @@ const en: Translations = {
     mustMeetYearReq:
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
     conditional:
-      'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
+      '. We encourage you to contact Service Canada for a better assessment.',
+    // 'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
     dependingOnAgreement:
-      "You may be eligible to receive this benefit, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
+      ", depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
+    // "You may be eligible to receive this benefit, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnAgreementWhen60:
-      "You may be eligible to receive this benefit when you turn 60, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
+      " when you turn 60, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
+    // "You may be eligible to receive this benefit when you turn 60, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnAgreementWhen65:
-      "You may be eligible to receive this benefit when you turn 65, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
+      " when you turn 65, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
+    // "You may be eligible to receive this benefit when you turn 65, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnLegal:
-      'You may be eligible to receive this benefit, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+      ', depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    // 'You may be eligible to receive this benefit, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen60:
-      'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+      ' when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    // 'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
-      'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+      ' when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    // 'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
