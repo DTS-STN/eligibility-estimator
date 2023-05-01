@@ -137,9 +137,10 @@ const fr: WebTranslations = {
     )} pour plus de détails.`,
     yourEstimatedTotal: ' Votre total mensuel estimé est ',
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
-    basedOnYourInfoTotal: 'Selon vos informations, vous pourriez recevoir :',
+    basedOnYourInfoTotal:
+      'Selon vos informations, vous pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      'Selon vos informations, vous pourriez recevoir :',
+      'Selon vos informations, vous pourriez être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
@@ -185,11 +186,10 @@ const fr: WebTranslations = {
       'Veuillez indiquer si votre conjoint a un statut légal au Canada.',
     [ValidationErrors.partnerBenefitStatusEmpty]:
       'Veuillez indiquer si votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
-
-    [ValidationErrors.outsideCanadaEmpty]:
-      "Veuillez indiquer si vous avez vécu à l'extérieur du Canada pendant plus de 6 mois.",
-    [ValidationErrors.partnerOutsideCanadaEmpty]:
-      "Veuillez indiquer si votre conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
+    [ValidationErrors.onlyInCanadaEmpty]:
+      'Veuillez indiquer si vous seulement vécu àu Canada.',
+    [ValidationErrors.partnerOnlyInCanadaEmpty]:
+      'Veuillez indiquer si votre conjoint a seulement vécu au Canada.',
     [ValidationErrors.invSeparatedEmpty]:
       'Veuillez indiquer si vous êtes involontairement séparé.',
     [ValidationErrors.socialCountryEmpty]:

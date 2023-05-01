@@ -51,8 +51,8 @@ const en: Translations = {
       'Are you and your partner living apart for reasons beyond your control?',
     [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
     [FieldKey.LEGAL_STATUS]: 'Do you have legal status in Canada?',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18, have you lived outside of Canada for longer than 6&nbsp;months?',
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      'Since the age of 18, have you only lived in Canada?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
@@ -68,8 +68,8 @@ const en: Translations = {
       'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Does your partner have legal status in Canada?',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Since the age of 18, has your partner lived outside of Canada for longer than 6&nbsp;months?',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      'Since the age of 18, has your partner only lived in Canada?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
   },
@@ -81,7 +81,7 @@ const en: Translations = {
     [FieldKey.INCOME]: 'Net income',
     [FieldKey.LEGAL_STATUS]: 'Legal status',
     [FieldKey.LIVING_COUNTRY]: 'Country of residence',
-    [FieldKey.LIVED_OUTSIDE_CANADA]: 'Lived outside Canada',
+    [FieldKey.LIVED_ONLY_IN_CANADA]: 'Only lived in Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years lived in Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Lived in country with social agreement',
@@ -93,7 +93,7 @@ const en: Translations = {
     [FieldKey.PARTNER_AGE]: "Partner's age",
     [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: 'Partner lived outside Canada',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: 'Partner only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Years partner lived in Canada',
   },
@@ -105,7 +105,7 @@ const en: Translations = {
     [FieldKey.INCOME]: 'Edit your net income',
     [FieldKey.LEGAL_STATUS]: 'Edit your legal status',
     [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
-    [FieldKey.LIVED_OUTSIDE_CANADA]: 'Edit if you have lived outside Canada',
+    [FieldKey.LIVED_ONLY_IN_CANADA]: 'Edit if you have only lived in Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Edit how long you have lived in Canada',
     [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
@@ -119,8 +119,8 @@ const en: Translations = {
     [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit your partner’s legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Edit your partner’s country of residence',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      'Edit if your partner has lived outside Canada',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      'Edit if your partner has only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Edit how long your partner has lived in Canada',
   },
@@ -188,28 +188,28 @@ const en: Translations = {
         shortText: 'No',
       },
     ],
-    [FieldKey.LIVED_OUTSIDE_CANADA]: [
-      {
-        key: false,
-        text: 'No, I have not lived outside of Canada for longer than 6&nbsp;months',
-        shortText: 'No',
-      },
+    [FieldKey.LIVED_ONLY_IN_CANADA]: [
       {
         key: true,
-        text: 'Yes, I have lived outside of Canada for longer than 6&nbsp;months',
+        text: 'Yes',
         shortText: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
       },
     ],
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
-      {
-        key: false,
-        text: 'No, my partner has not lived outside of Canada for longer than 6&nbsp;months',
-        shortText: 'No',
-      },
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: [
       {
         key: true,
-        text: 'Yes, my partner has lived outside of Canada for longer than 6&nbsp;months',
+        text: 'Yes',
         shortText: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
       },
     ],
     [FieldKey.MARITAL_STATUS]: [

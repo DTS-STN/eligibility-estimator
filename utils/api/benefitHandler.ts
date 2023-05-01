@@ -142,9 +142,9 @@ export class BenefitHandler {
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
-      livedOutsideCanada: this.rawInput.livedOutsideCanada,
-      // if not livedOutsideCanada, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18: !this.rawInput.livedOutsideCanada
+      livedOnlyInCanada: this.rawInput.livedOnlyInCanada,
+      // if livedOnlyInCanada, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: this.rawInput.livedOnlyInCanada
         ? 40
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
@@ -164,8 +164,8 @@ export class BenefitHandler {
         this.rawInput.partnerLivingCountry
       ),
       legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
-      livedOutsideCanada: this.rawInput.partnerLivedOutsideCanada,
-      yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
+      livedOnlyInCanada: this.rawInput.partnerLivedOnlyInCanada,
+      yearsInCanadaSince18: this.rawInput.partnerLivedOnlyInCanada //assume 40 when live only in Canada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
       everLivedSocialCountry: false, // required by ProcessedInput
@@ -194,9 +194,11 @@ export class BenefitHandler {
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
-      FieldKey.LIVED_OUTSIDE_CANADA,
+      FieldKey.LIVED_ONLY_IN_CANADA,
     ]
-    if (this.input.client.livedOutsideCanada) {
+
+    // default value = undefined
+    if (this.input.client.livedOnlyInCanada === false) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
     if (this.input.client.oasDefer) {
@@ -235,11 +237,12 @@ export class BenefitHandler {
       ) {
         requiredFields.push(
           FieldKey.PARTNER_LIVING_COUNTRY,
-          FieldKey.PARTNER_LIVED_OUTSIDE_CANADA
+          FieldKey.PARTNER_LIVED_ONLY_IN_CANADA
         )
       }
 
-      if (this.input.partner.livedOutsideCanada) {
+      // default value = undefined
+      if (this.input.partner.livedOnlyInCanada === false) {
         requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
       }
 
@@ -254,7 +257,7 @@ export class BenefitHandler {
       if (
         this.input.partner.age > 65 &&
         this.input.partner.legalStatus.canadian &&
-        this.input.partner.livedOutsideCanada !== undefined &&
+        this.input.partner.livedOnlyInCanada !== undefined &&
         ((this.input.partner.livingCountry.canada &&
           this.input.partner.yearsInCanadaSince18 >= 10) ||
           (!this.input.partner.livingCountry.canada &&
@@ -368,7 +371,7 @@ export class BenefitHandler {
     if (
       this.input.client.age >= 60 &&
       this.input.client.age < 65 &&
-      !this.input.client.livedOutsideCanada &&
+      this.input.client.livedOnlyInCanada &&
       this.input.client.legalStatus.canadian &&
       this.input.client.yearsInCanadaSince18 >= 10 &&
       this.input.client.income.relevant <= legalValues.alw.alwIncomeLimit &&
@@ -940,6 +943,17 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
+          if (
+            this.input.partner.invSeparated &&
+            clientGis.entitlement.result > 0
+          ) {
+            allResults.client.gis.eligibility.detail,
+              (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+            allResults.client.gis.cardDetail.collapsedText.push(
+              this.translations.detailWithHeading
+                .calculatedBasedOnIndividualIncome
+            )
+          }
           consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- end'
           )
@@ -1064,9 +1078,9 @@ export class BenefitHandler {
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
-      livedOutsideCanada: this.rawInput.livedOutsideCanada,
-      // if not livedOutsideCanada, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18: !this.rawInput.livedOutsideCanada
+      livedOnlyInCanada: this.rawInput.livedOnlyInCanada,
+      // if not livedOnlyInCanada, assume yearsInCanadaSince18 is 40
+      yearsInCanadaSince18: this.rawInput.livedOnlyInCanada
         ? 40
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
@@ -1098,8 +1112,8 @@ export class BenefitHandler {
         this.rawInput.partnerLivingCountry
       ),
       legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
-      livedOutsideCanada: this.rawInput.partnerLivedOutsideCanada,
-      yearsInCanadaSince18: !this.rawInput.partnerLivedOutsideCanada
+      livedOnlyInCanada: this.rawInput.partnerLivedOnlyInCanada,
+      yearsInCanadaSince18: this.rawInput.partnerLivedOnlyInCanada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
       everLivedSocialCountry: false, //required by ProcessedInput

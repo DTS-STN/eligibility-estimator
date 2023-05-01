@@ -41,7 +41,7 @@ paths:
         - $ref: '#/components/parameters/invSeparated'
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
-        - $ref: '#/components/parameters/livedOutsideCanada'
+        - $ref: '#/components/parameters/livedOnlyInCanada'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/everLivedSocialCountry'
         - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -50,7 +50,7 @@ paths:
         - $ref: '#/components/parameters/partnerAge'
         - $ref: '#/components/parameters/partnerLivingCountry'
         - $ref: '#/components/parameters/partnerLegalStatus'
-        - $ref: '#/components/parameters/partnerLivedOutsideCanada'
+        - $ref: '#/components/parameters/partnerLivedOnlyInCanada'
         - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
       responses:
         '200':
@@ -75,7 +75,7 @@ components:
           - invSeparated
           - livingCountry
           - legalStatus
-          - livedOutsideCanada
+          - livedOnlyInCanada
           - yearsInCanadaSince18
           - everLivedSocialCountry
           - partnerBenefitStatus
@@ -84,7 +84,7 @@ components:
           - partnerAge
           - partnerLivingCountry
           - partnerLegalStatus
-          - partnerLivedOutsideCanada
+          - partnerLivedOnlyInCanada
           - partnerYearsInCanadaSince18
 
     ResultKey:
@@ -428,10 +428,10 @@ components:
         description: The current legal status of the client.
       allowEmptyValue: false
 
-    livedOutsideCanada:
-      name: livedOutsideCanada
+    livedOnlyInCanada:
+      name: livedOnlyInCanada
       in: query
-      description: Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?
+      description: Since the age of 18 years old, have you lived only in Canada?
       required: false
       example: false
       schema:
@@ -549,10 +549,10 @@ components:
         description: The current legal status of the partner.
       allowEmptyValue: false
 
-    partnerLivedOutsideCanada:
-      name: partnerLivedOutsideCanada
+    partnerLivedOnlyInCanada:
+      name: partnerLivedOnlyInCanada
       in: query
-      description: Since the age of 18, has your partner lived outside of Canada for longer than 6 months?
+      description: Since the age of 18, has your partner lived only in Canada?
       required: false
       example: false
       schema:
