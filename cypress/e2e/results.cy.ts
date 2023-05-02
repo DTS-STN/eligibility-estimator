@@ -69,3 +69,5 @@ describe('OAS eligibility', () => {
     cy.get('a[href*="afs"]').should('contain.text', 'Not')
   })
 })
+
+export {}

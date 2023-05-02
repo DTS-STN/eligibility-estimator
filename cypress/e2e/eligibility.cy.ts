@@ -164,3 +164,5 @@ describe('Marital Status', () => {
     cy.get('.ds-errorText').should('be.visible')
   })
 })
+
+export {}
