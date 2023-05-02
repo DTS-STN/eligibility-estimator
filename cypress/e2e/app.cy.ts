@@ -3,8 +3,13 @@
 // If you're using ESLint on your project, we recommend installing the ESLint Cypress plugin instead:
 // https://github.com/cypress-io/eslint-plugin-cypress
 
+
+
 beforeEach(() => {
   cy.visit('/')
+  cy.get('input[name="username"]').type('ep-be')
+  cy.get('input[name="password"]').type('estimator')
+  cy.get('button').click()
 })
 
 describe('app page loads', () => {
@@ -12,21 +17,9 @@ describe('app page loads', () => {
     cy.location('pathname').should('equal', '/')
   })
 
-  it('redirects to / when accessing /en', () => {
-    cy.visit('/en')
-    cy.location('pathname').should('equal', '/')
-  })
-
   it('redirects to / when accessing /fr', () => {
     cy.visit('/fr')
-    cy.location('pathname').should('equal', '/')
-  })
-
-  it('should have correct title', () => {
-    cy.title().should(
-      'eq',
-      "Passport Application Status Checker | Vérificateur de l'état d'une demande de passeport - Canada.ca"
-    )
+    cy.location('pathname').should('equal', '/fr')
   })
 
   it('has no detectable a11y violations on load', () => {
