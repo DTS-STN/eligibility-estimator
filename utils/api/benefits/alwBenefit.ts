@@ -71,7 +71,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
-            detail: this.translations.detail.alwEligibleIncomeTooHigh,
+            detail:
+              this.translations.detail.youreLikelyEligible +
+              this.translations.detail.alwEligibleIncomeTooHigh,
           }
         } else {
           return {
@@ -135,7 +137,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,
-        detail: this.translations.detail.alwEligibleIncomeTooHigh,
+        detail:
+          this.translations.detail.youreLikelyEligible +
+          this.translations.detail.alwEligibleIncomeTooHigh,
       }
     } else if (!meetsReqCountry) {
       return {
@@ -152,13 +156,17 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.UNAVAILABLE,
             reason: ResultReason.YEARS_IN_CANADA,
-            detail: this.translations.detail.dependingOnAgreement,
+            detail:
+              this.translations.detail.youMaybeEligible +
+              this.translations.detail.dependingOnAgreement,
           }
         } else if (underAgeReq) {
           return {
             result: ResultKey.INELIGIBLE,
             reason: ResultReason.AGE_YOUNG,
-            detail: this.translations.detail.dependingOnAgreementWhen60,
+            detail:
+              this.translations.detail.youMaybeEligible +
+              this.translations.detail.dependingOnAgreementWhen60,
           }
         } else {
           return {
@@ -179,13 +187,17 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE_YOUNG,
-          detail: this.translations.detail.dependingOnLegalWhen60,
+          detail:
+            this.translations.detail.youMaybeEligible +
+            this.translations.detail.dependingOnLegalWhen60,
         }
       } else {
         return {
           result: ResultKey.UNAVAILABLE,
           reason: ResultReason.LEGAL_STATUS,
-          detail: this.translations.detail.dependingOnLegal,
+          detail:
+            this.translations.detail.youMaybeEligible +
+            this.translations.detail.dependingOnLegal,
         }
       }
     }
