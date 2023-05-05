@@ -34,6 +34,7 @@ export enum FieldType {
   RADIO = 'radio',
   STRING = 'string',
   DATE = 'date',
+  DURATION = 'duration',
 }
 
 // the order of fields here will define the order within the application
@@ -51,7 +52,7 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.OAS_DEFER_DURATION]: {
     key: FieldKey.OAS_DEFER_DURATION,
     category: { key: FieldCategory.AGE },
-    type: FieldType.DATE,
+    type: FieldType.DURATION,
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
@@ -173,6 +174,7 @@ export type FieldConfig =
   | FieldConfigDropdown
   | FieldConfigString
   | FieldConfigDate
+  | FieldConfigDuration
 
 interface FieldConfigGeneric {
   key: FieldKey
@@ -187,6 +189,10 @@ interface FieldConfigGeneric {
 
 interface FieldConfigDate extends FieldConfigGeneric {
   type: FieldType.DATE
+}
+
+interface FieldConfigDuration extends FieldConfigGeneric {
+  type: FieldType.DURATION
 }
 
 interface FieldConfigCurrency extends FieldConfigGeneric {

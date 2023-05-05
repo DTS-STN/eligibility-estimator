@@ -30,6 +30,7 @@ import {
   VisibleFieldsObject,
 } from '../../utils/web/types'
 import { CurrencyField } from '../Forms/CurrencyField'
+import Duration from '../Forms/Duration'
 import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { MonthAndYear } from '../Forms/MonthAndYear'
 import { NumberField } from '../Forms/NumberField'
@@ -145,12 +146,23 @@ export const EligibilityPage: React.VFC = ({}) => {
     )
 
     return fields.map((field: FormField) => {
+      console.log('field', field)
       const [formError, alertError] = getErrorForField(field, errorsVisible)
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
             {field.config.type === FieldType.DATE && (
               <MonthAndYear
+                name={field.key}
+                label={field.config.label}
+                helpText={field.config.helpText}
+                baseOnChange={(newValue) => handleOnChange(field, newValue)}
+                requiredText={tsln.required}
+                error={formError}
+              />
+            )}
+            {field.config.type === FieldType.DURATION && (
+              <Duration
                 name={field.key}
                 label={field.config.label}
                 helpText={field.config.helpText}
