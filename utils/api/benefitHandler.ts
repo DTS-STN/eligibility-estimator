@@ -47,6 +47,7 @@ import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
 import { consoleDev } from '../web/helpers/utils'
 import { result } from 'lodash'
+import { getMinBirthYear } from './definitions/schemas'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -188,14 +189,20 @@ export class BenefitHandler {
    */
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
-      FieldKey.INCOME_AVAILABLE,
+      // FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
-      FieldKey.OAS_DEFER,
+      // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
       FieldKey.LIVED_ONLY_IN_CANADA,
     ]
+
+    // OAS deferral related fields
+    const clientAge = this.input.client.age
+    if (clientAge >= 65 && clientAge < getMinBirthYear()) {
+      requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
+    }
 
     // default value = undefined
     if (this.input.client.livedOnlyInCanada === false) {

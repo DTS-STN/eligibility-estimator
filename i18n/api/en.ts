@@ -42,6 +42,8 @@ const en: Translations = {
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
     [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Do you already receive the Old Age Security pension?',
     [FieldKey.OAS_DEFER]:
       'When would you like to start receiving the Old Age Security (OAS) pension?',
     [FieldKey.OAS_AGE]:
@@ -75,6 +77,7 @@ const en: Translations = {
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
+    [FieldKey.ALREADY_RECEIVE_OAS]: 'Already receive OAS pension',
     [FieldKey.OAS_DEFER]: 'OAS pension deferral',
     [FieldKey.OAS_AGE]: 'OAS pension deferral',
     [FieldKey.INCOME_AVAILABLE]: 'Net income',
@@ -100,6 +103,8 @@ const en: Translations = {
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',
     [FieldKey.OAS_AGE]: 'Start at',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Edit if you already receive the Old Age Security pension',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
@@ -162,6 +167,18 @@ const en: Translations = {
         key: false,
         text: "No, I will not provide my partner's income at this time",
         shortText: 'Not provided',
+      },
+    ],
+    [FieldKey.ALREADY_RECEIVE_OAS]: [
+      {
+        key: true,
+        text: 'Yes',
+        shortText: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
       },
     ],
     [FieldKey.OAS_DEFER]: [

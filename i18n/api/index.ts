@@ -38,6 +38,7 @@ export interface Translations {
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
+    [FieldKey.ALREADY_RECEIVE_OAS]: TypedKeyAndText<boolean>[]
     [FieldKey.OAS_DEFER]: TypedKeyAndText<boolean>[]
     [FieldKey.LEGAL_STATUS]: TypedKeyAndText<LegalStatus>[]
     [FieldKey.LIVED_ONLY_IN_CANADA]: TypedKeyAndText<boolean>[]
