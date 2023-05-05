@@ -79,6 +79,7 @@ const fr: Translations = {
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
+    [FieldKey.ALREADY_RECEIVE_OAS]: 'Reçoit la pension de la SV',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
     [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
@@ -105,6 +106,8 @@ const fr: Translations = {
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',
     [FieldKey.OAS_AGE]: 'Commencer à',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Modifier si vous recevez la pension de la SV',
     [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',

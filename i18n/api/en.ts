@@ -104,7 +104,7 @@ const en: Translations = {
     [FieldKey.AGE]: 'Edit your age',
     [FieldKey.OAS_AGE]: 'Start at',
     [FieldKey.ALREADY_RECEIVE_OAS]:
-      'Edit if you already receive the Old Age Security pension',
+      'Edit if you already receive the OAS pension',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
