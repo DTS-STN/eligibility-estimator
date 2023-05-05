@@ -170,6 +170,8 @@ const fr: WebTranslations = {
   },
   validationErrors: {
     [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.receiveOASEmpty]:
+      'Veuillez indiquer si vous recevez la pension de la SV.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:

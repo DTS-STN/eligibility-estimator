@@ -44,6 +44,8 @@ const fr: Translations = {
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Recevez-vous la pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER]:
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
@@ -168,6 +170,18 @@ const fr: Translations = {
         key: false,
         text: 'Non, je ne fournirai pas le revenu de mon conjoint pour le moment',
         shortText: 'Non fourni',
+      },
+    ],
+    [FieldKey.ALREADY_RECEIVE_OAS]: [
+      {
+        key: true,
+        text: 'Oui',
+        shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.OAS_DEFER]: [
