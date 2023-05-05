@@ -44,6 +44,8 @@ const en: Translations = {
     [FieldKey.AGE]: 'In what month and year were you born?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Do you already receive the Old Age Security pension?',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'How long did you defer your Old Age Security pension?',
     [FieldKey.OAS_DEFER]:
       'When would you like to start receiving the Old Age Security (OAS) pension?',
     [FieldKey.OAS_AGE]:
@@ -79,6 +81,7 @@ const en: Translations = {
     [FieldKey.AGE]: 'Age',
     [FieldKey.ALREADY_RECEIVE_OAS]: 'Already receive OAS pension',
     [FieldKey.OAS_DEFER]: 'OAS pension deferral',
+    [FieldKey.OAS_DEFER_DURATION]: 'Deferred OAS pension',
     [FieldKey.OAS_AGE]: 'OAS pension deferral',
     [FieldKey.INCOME_AVAILABLE]: 'Net income',
     [FieldKey.INCOME]: 'Net income',
@@ -105,6 +108,7 @@ const en: Translations = {
     [FieldKey.OAS_AGE]: 'Start at',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Edit if you already receive the OAS pension',
+    [FieldKey.OAS_DEFER_DURATION]: 'Edit your OAS pension deferral',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
@@ -136,6 +140,8 @@ const en: Translations = {
       'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more accurate results.",
+    [FieldKey.OAS_DEFER_DURATION]:
+      'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',

@@ -46,6 +46,8 @@ const fr: Translations = {
     [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Pendant combien de temps avez-vous reporté votre pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER]:
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
@@ -81,6 +83,7 @@ const fr: Translations = {
     [FieldKey.AGE]: 'Âge',
     [FieldKey.ALREADY_RECEIVE_OAS]: 'Reçoit la pension de la SV',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
+    [FieldKey.OAS_DEFER_DURATION]: 'Report de la pension de la SV',
     [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
     [FieldKey.INCOME]: 'Revenu net',
@@ -109,6 +112,8 @@ const fr: Translations = {
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Modifier si vous recevez la pension de la SV',
     [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Modifier le report de votre pension de la SV',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',
     [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
@@ -144,6 +149,8 @@ const fr: Translations = {
       'Fournir le revenu de votre conjoint vous donnera des résultats plus précis.',
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Si vous n’avez pas reporté votre pension, passez à l’étape suivante.',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",

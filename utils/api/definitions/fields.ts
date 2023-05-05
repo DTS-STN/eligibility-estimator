@@ -6,6 +6,7 @@ export enum FieldKey {
   INCOME = 'income',
   AGE = 'age',
   ALREADY_RECEIVE_OAS = 'receiveOAS',
+  OAS_DEFER_DURATION = 'oasDeferDuration',
   OAS_DEFER = 'oasDefer',
   OAS_AGE = 'oasAge',
   MARITAL_STATUS = 'maritalStatus',
@@ -46,6 +47,11 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.ALREADY_RECEIVE_OAS,
     category: { key: FieldCategory.AGE },
     type: FieldType.RADIO,
+  },
+  [FieldKey.OAS_DEFER_DURATION]: {
+    key: FieldKey.OAS_DEFER_DURATION,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.DATE,
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,

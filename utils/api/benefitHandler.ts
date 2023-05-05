@@ -138,6 +138,7 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      receiveOAS: this.rawInput.receiveOAS,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
@@ -158,6 +159,7 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      receiveOAS: false, // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
@@ -202,6 +204,10 @@ export class BenefitHandler {
     const clientAge = this.input.client.age
     if (clientAge >= 65 && clientAge < getMinBirthYear()) {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
+    }
+
+    if (this.input.client.receiveOAS) {
+      requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 
     // default value = undefined
@@ -1078,6 +1084,7 @@ export class BenefitHandler {
     const clientSingleInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      receiveOAS: this.rawInput.receiveOAS,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
@@ -1110,6 +1117,7 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      receiveOAS: false, // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
