@@ -324,6 +324,13 @@ const fr: Translations = {
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
+    yourDeferralOptions: 'Vos options de report',
+    sinceYouAreSixty:
+      'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
+    youCanAply:
+      'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+    delayMonths:
+      'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     eligibleWhen60ApplyNow:
       'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen65ApplyNow:
@@ -356,6 +363,11 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+    ifYouDeferYourPension: 'Si vous reportez votre pension',
+    youCantGetThisBenefit:
+      'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
+    thisEstimate:
+      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}',
     alwNotEligible:
       "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     alwEligibleButPartnerAlreadyIs:

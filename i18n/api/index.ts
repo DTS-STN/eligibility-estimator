@@ -57,6 +57,10 @@ export interface Translations {
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
+    yourDeferralOptions: string
+    sinceYouAreSixty: string
+    youCanAply: string
+    delayMonths: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
     eligibleWhen60: string
@@ -73,6 +77,9 @@ export interface Translations {
     dependingOnLegal: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
+    ifYouDeferYourPension: string
+    youCantGetThisBenefit: string
+    thisEstimate: string
     alwNotEligible: string
     alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string

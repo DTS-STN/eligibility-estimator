@@ -142,6 +142,11 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
     order: -1,
   },
+  SCAccount: {
+    text: 'Mon dossier Service Canada',
+    url: 'https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html',
+    order: -1,
+  },
   oasDeferClickHere: {
     text: 'possibilité de reporter votre premier paiement de la pension de la Sécurité de la vieillesse',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',

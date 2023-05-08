@@ -317,6 +317,13 @@ const en: Translations = {
       "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
+    yourDeferralOptions: 'Your deferral options',
+    sinceYouAreSixty:
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more months.",
+    youCanAply:
+      'You can apply 11 months before the date you want your payments to start.',
+    delayMonths:
+      'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:
@@ -348,6 +355,11 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    ifYouDeferYourPension: 'If you defer your pension',
+    youCantGetThisBenefit:
+      'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
+    thisEstimate:
+      'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
