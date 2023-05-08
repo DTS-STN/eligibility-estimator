@@ -194,7 +194,7 @@ interface FieldConfigDate extends FieldConfigGeneric {
 
 interface FieldConfigDuration extends FieldConfigGeneric {
   type: FieldType.DURATION
-  values?: Array<KeyAndText | number>
+  values?: Array<KeyAndText>
   default?: KeyAndText
 }
 
