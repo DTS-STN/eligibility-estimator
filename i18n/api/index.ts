@@ -122,6 +122,11 @@ export interface Translations {
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
+  oasDeferralTable: {
+    title: string
+    headingAge: string
+    headingAmount: string
+  }
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string
