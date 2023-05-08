@@ -57,7 +57,7 @@ describe('EE Sanity Test Scenarios:', () => {
       age: 65,
       oasDefer: true,
       oasAge: 68,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
@@ -155,7 +155,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 85000, // personal income
       age: 75,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -251,7 +251,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 130757, // personal income
       age: 75,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 67,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -337,7 +337,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 2000, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 70,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -393,7 +393,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 9636, // personal income
       age: 78,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
@@ -454,7 +454,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 20832, // personal income
       age: 78,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 69,
       maritalStatus: MaritalStatus.SINGLE,
@@ -524,7 +524,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 68,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -602,7 +602,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 68,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -713,7 +713,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 8326, // personal income
       age: 78,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 67,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -819,7 +819,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 8326, // personal income
       age: 78,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -924,7 +924,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 0, // personal income
       age: 78,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1030,7 +1030,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 0, // personal income
       age: 78,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1094,7 +1094,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 78,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 69,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1152,7 +1152,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 19271, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 67,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1223,7 +1223,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 50159.04, // personal income
       age: 68,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1295,7 +1295,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 58,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1372,7 +1372,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 0, // personal income
       age: 68,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1440,7 +1440,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 8326, // personal income
       age: 68,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1508,7 +1508,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 66,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1582,7 +1582,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 78,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1648,7 +1648,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 38692, // personal income
       age: 68,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1718,7 +1718,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 0, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1781,7 +1781,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1844,7 +1844,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 27216, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1908,7 +1908,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -1973,7 +1973,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 4000, // personal income
       age: 63,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2038,7 +2038,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 2000, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -2085,7 +2085,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 9636, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -2132,7 +2132,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 28080, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -2182,7 +2182,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 28080, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -2236,7 +2236,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: undefined, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.SINGLE,
@@ -2288,7 +2288,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: undefined, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -2340,7 +2340,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: undefined, // personal income
       age: 78,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 67,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -2399,7 +2399,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: undefined, // personal income
       age: 64,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2461,7 +2461,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 85000, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 69,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2532,7 +2532,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: undefined, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 68,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2608,7 +2608,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 0, // personal income
       age: 56,
       oasDefer: false,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2693,7 +2693,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: undefined, // personal income
       age: 68,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 70,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2777,7 +2777,7 @@ describe('EE Sanity Test Scenarios:', () => {
       income: 0, // personal income
       age: 78,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 66,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -2846,7 +2846,7 @@ describe('EE Sanity Test Scenarios:', () => {
     const res = await mockGetRequest({
       age: 65,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 66,
       incomeAvailable: true,
@@ -2882,7 +2882,7 @@ describe('EE Sanity Test Scenarios:', () => {
     const res = await mockGetRequest({
       age: 65,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 66,
       incomeAvailable: true,
@@ -2927,7 +2927,7 @@ describe('EE Sanity Test Scenarios:', () => {
     const res = await mockGetRequest({
       age: 65,
       oasDefer: true,
-      receiveOAS: undefined,
+      receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: 66,
       incomeAvailable: true,
