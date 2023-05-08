@@ -255,6 +255,11 @@ const en: WebTranslations = {
   partnerInformationDescription:
     "Individuals who are married or in common-law relationships need to \
   provide their partner's information to assess their own eligibility.",
+
+  duration: {
+    months: 'Months',
+    years: 'Years',
+  },
 }
 
 export default en

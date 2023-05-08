@@ -53,6 +53,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.OAS_DEFER_DURATION,
     category: { key: FieldCategory.AGE },
     type: FieldType.DURATION,
+    default: { key: JSON.stringify({ months: 0, years: 0 }), text: 'TEST' },
   },
   [FieldKey.OAS_DEFER]: {
     key: FieldKey.OAS_DEFER,
@@ -193,6 +194,8 @@ interface FieldConfigDate extends FieldConfigGeneric {
 
 interface FieldConfigDuration extends FieldConfigGeneric {
   type: FieldType.DURATION
+  values?: Array<KeyAndText | number>
+  default?: KeyAndText
 }
 
 interface FieldConfigCurrency extends FieldConfigGeneric {

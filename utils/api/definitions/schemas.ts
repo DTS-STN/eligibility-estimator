@@ -58,6 +58,7 @@ export const RequestSchema = Joi.object({
   receiveOAS: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.receiveOASEmpty }),
+  oasDeferDuration: Joi.string(),
   oasDefer: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.oasDeferEmpty }),

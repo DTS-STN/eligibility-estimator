@@ -157,6 +157,12 @@ export type WebTranslations = {
   partnerYearsLivingCanadaNotEligible: string
   partnerInformation: string
   partnerInformationDescription: string
+
+  // duration component
+  duration: {
+    months: string
+    years: string
+  }
 }
 
 export function getWebTranslations(language: Language): WebTranslations {

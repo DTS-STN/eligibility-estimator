@@ -139,6 +139,7 @@ export class BenefitHandler {
       income: incomeHelper,
       age: this.rawInput.age,
       receiveOAS: this.rawInput.receiveOAS,
+      oasDeferDuration: this.rawInput.oasDeferDuration,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
@@ -160,6 +161,7 @@ export class BenefitHandler {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
       receiveOAS: false, // dummy data
+      oasDeferDuration: JSON.stringify({ months: 0, years: 0 }), // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
@@ -191,7 +193,7 @@ export class BenefitHandler {
    */
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
-      // FieldKey.INCOME_AVAILABLE,
+      FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
       // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
@@ -1085,6 +1087,7 @@ export class BenefitHandler {
       income: incomeHelper,
       age: this.rawInput.age,
       receiveOAS: this.rawInput.receiveOAS,
+      oasDeferDuration: this.rawInput.oasDeferDuration,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
@@ -1119,6 +1122,7 @@ export class BenefitHandler {
       age: this.rawInput.partnerAge,
       receiveOAS: false, // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
+      oasDeferDuration: JSON.stringify({ months: 0, years: 0 }),
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
       livingCountry: new LivingCountryHelper(

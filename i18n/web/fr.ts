@@ -261,6 +261,11 @@ const fr: WebTranslations = {
   partnerInformationDescription:
     'Les personnes mariées ou vivant en union de fait doivent fournir \
   des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
+
+  duration: {
+    months: 'Mois',
+    years: 'Années',
+  },
 }
 
 export default fr
