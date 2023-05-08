@@ -445,6 +445,11 @@ const fr: Translations = {
     [SummaryState.AVAILABLE_DEPENDING]:
       "En fonction de vos revenus, vous pouvez être éligible aux prestations de vieillesse. Voir les détails ci-dessous pour plus d'informations.",
   },
+  oasDeferralTable: {
+    title: 'Montants de report estimés',
+    headingAge: "Si vous attendez d'avoir...",
+    headingAmount: 'Vous pourriez recevoir chaque mois...',
+  },
   links,
   incomeSingle: 'votre revenu',
   incomeCombined: 'le revenu combiné de vous et votre conjoint',
