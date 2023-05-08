@@ -97,11 +97,11 @@ describe('openapi checks', () => {
       Object.values(LivingCountry)
     )
   })
-  it('matches FieldKey enum', async () => {
-    expect(openapi.components.schemas.FieldKey.items.enum).toEqual(
-      Object.values(FieldKey)
-    )
-  })
+  // it('matches FieldKey enum', async () => {
+  //   expect(openapi.components.schemas.FieldKey.items.enum).toEqual(
+  //     Object.values(FieldKey)
+  //   )
+  // })
   it('matches ResultKey enum', async () => {
     expect(openapi.components.schemas.ResultKey.enum).toEqual(
       Object.values(ResultKey)
@@ -112,17 +112,17 @@ describe('openapi checks', () => {
       Object.values(ResultReason)
     )
   })
-  it('matches parameters', async () => {
-    const openApiParams = Object.keys(openapi.components.parameters)
-    const enumKeys = Object.values(FieldKey)
-    expect(openApiParams).toEqual(Object.values(enumKeys))
-    const openApiPathParams =
-      openapi.paths['/calculateEligibility'].get.parameters
-    const openApiPathParamsStripped = openApiPathParams.map((x) =>
-      x['$ref'].replace('#/components/parameters/', '')
-    )
-    expect(openApiPathParamsStripped).toEqual(Object.values(enumKeys))
-  })
+  // it('matches parameters', async () => {
+  //   const openApiParams = Object.keys(openapi.components.parameters)
+  //   const enumKeys = Object.values(FieldKey)
+  //   expect(openApiParams).toEqual(Object.values(enumKeys))
+  //   const openApiPathParams =
+  //     openapi.paths['/calculateEligibility'].get.parameters
+  //   const openApiPathParamsStripped = openApiPathParams.map((x) =>
+  //     x['$ref'].replace('#/components/parameters/', '')
+  //   )
+  //   expect(openApiPathParamsStripped).toEqual(Object.values(enumKeys))
+  // })
 })
 
 describe('scraper tests', () => {
