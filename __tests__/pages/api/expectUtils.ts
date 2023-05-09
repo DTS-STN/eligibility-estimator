@@ -182,18 +182,24 @@ export const age65NoDefer = {
   age: 65,
   oasDefer: false,
   oasAge: undefined,
+  receiveOAS: false,
+  oasDeferDuration: undefined,
 }
 
 export const age75NoDefer = {
   age: 75,
   oasDefer: false,
   oasAge: undefined,
+  receiveOAS: false,
+  oasDeferDuration: undefined,
 }
 
 export const age60NoDefer = {
   age: 60,
   oasDefer: false,
   oasAge: undefined,
+  receiveOAS: false,
+  oasDeferDuration: undefined,
 }
 
 export const canadaWholeLife = {
