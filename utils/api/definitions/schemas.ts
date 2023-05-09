@@ -23,7 +23,7 @@ import {
  *
  */
 
-const getMinBirthYear = () => {
+export const getMinBirthYear = () => {
   const wholeYear = new Date().getFullYear() - 1900
   const partialYear = (new Date().getMonth() / 12).toFixed(1)
   return wholeYear + parseFloat(partialYear)
@@ -55,6 +55,10 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.invalidAge)
     .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
+  receiveOAS: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.receiveOASEmpty }),
+  oasDeferDuration: Joi.string(),
   oasDefer: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.oasDeferEmpty }),

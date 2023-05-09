@@ -44,6 +44,10 @@ const fr: Translations = {
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
     [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Recevez-vous la pension de la Sécurité de la vieillesse?',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Pendant combien de temps avez-vous reporté votre pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER]:
       'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
     [FieldKey.OAS_AGE]:
@@ -77,7 +81,9 @@ const fr: Translations = {
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
+    [FieldKey.ALREADY_RECEIVE_OAS]: 'Reçoit la pension de la SV',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
+    [FieldKey.OAS_DEFER_DURATION]: 'Report de la pension de la SV',
     [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
     [FieldKey.INCOME]: 'Revenu net',
@@ -103,7 +109,11 @@ const fr: Translations = {
   questionAriaLabel: {
     [FieldKey.AGE]: 'Modifier votre âge',
     [FieldKey.OAS_AGE]: 'Commencer à',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Modifier si vous recevez la pension de la SV',
     [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Modifier le report de votre pension de la SV',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',
     [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
@@ -139,6 +149,8 @@ const fr: Translations = {
       'Fournir le revenu de votre conjoint vous donnera des résultats plus précis.',
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Si vous n’avez pas reporté votre pension, passez à l’étape suivante.',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
@@ -168,6 +180,18 @@ const fr: Translations = {
         key: false,
         text: 'Non, je ne fournirai pas le revenu de mon conjoint pour le moment',
         shortText: 'Non fourni',
+      },
+    ],
+    [FieldKey.ALREADY_RECEIVE_OAS]: [
+      {
+        key: true,
+        text: 'Oui',
+        shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.OAS_DEFER]: [
@@ -300,6 +324,13 @@ const fr: Translations = {
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
+    yourDeferralOptions: 'Vos options de report',
+    sinceYouAreSixty:
+      'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
+    youCanAply:
+      'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+    delayMonths:
+      'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     eligibleWhen60ApplyNow:
       'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen65ApplyNow:
@@ -332,6 +363,11 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+    ifYouDeferYourPension: 'Si vous reportez votre pension',
+    youCantGetThisBenefit:
+      'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
+    thisEstimate:
+      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}',
     alwNotEligible:
       "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     alwEligibleButPartnerAlreadyIs:

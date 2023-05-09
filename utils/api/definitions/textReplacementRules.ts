@@ -22,6 +22,10 @@ export const textReplacementRules: TextReplacementRules = {
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
+  CURRENT_AGE: (handler, benefitResult) => ` `, //TBD
+  WAIT_MONTHS: (handler, benefitResult) => ` `, //TBD
+  DELAY_MONTHS: (handler, benefitResult) => ` `, //TBD
+  MONTH_MONTHS: (handler, benefitResult) => ` `, //TBD
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.resultAt75 ?? 0,
@@ -68,6 +72,8 @@ export const textReplacementRules: TextReplacementRules = {
       ? handler.translations.incomeCombined
       : handler.translations.incomeSingle,
   LINK_SERVICE_CANADA: (handler) => generateLink(handler.translations.links.SC),
+  MY_SERVICE_CANADA: (handler) =>
+    generateLink(handler.translations.links.SCAccount),
   LINK_SOCIAL_AGREEMENT: (handler) =>
     generateLink(handler.translations.links.socialAgreement),
   LINK_MORE_REASONS: (handler, benefitResult) =>

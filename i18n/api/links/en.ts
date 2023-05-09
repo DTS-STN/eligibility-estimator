@@ -142,6 +142,11 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
     order: -1,
   },
+  SCAccount: {
+    text: 'My Service Canada Account',
+    url: 'https://www.canada.ca/en/employment-social-development/services/my-account.html',
+    order: -1,
+  },
   oasDeferClickHere: {
     text: 'option to delay your first Old Age Security pension payment',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',

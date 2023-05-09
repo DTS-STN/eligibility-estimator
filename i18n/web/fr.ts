@@ -170,6 +170,8 @@ const fr: WebTranslations = {
   },
   validationErrors: {
     [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.receiveOASEmpty]:
+      'Veuillez indiquer si vous recevez la pension de la SV.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:
@@ -259,6 +261,11 @@ const fr: WebTranslations = {
   partnerInformationDescription:
     'Les personnes mariées ou vivant en union de fait doivent fournir \
   des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
+
+  duration: {
+    months: 'Mois',
+    years: 'Années',
+  },
 }
 
 export default fr

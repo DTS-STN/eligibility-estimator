@@ -38,6 +38,7 @@ export interface Translations {
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
+    [FieldKey.ALREADY_RECEIVE_OAS]: TypedKeyAndText<boolean>[]
     [FieldKey.OAS_DEFER]: TypedKeyAndText<boolean>[]
     [FieldKey.LEGAL_STATUS]: TypedKeyAndText<LegalStatus>[]
     [FieldKey.LIVED_ONLY_IN_CANADA]: TypedKeyAndText<boolean>[]
@@ -56,6 +57,10 @@ export interface Translations {
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
+    yourDeferralOptions: string
+    sinceYouAreSixty: string
+    youCanAply: string
+    delayMonths: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
     eligibleWhen60: string
@@ -72,6 +77,9 @@ export interface Translations {
     dependingOnLegal: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
+    ifYouDeferYourPension: string
+    youCantGetThisBenefit: string
+    thisEstimate: string
     alwNotEligible: string
     alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string

@@ -28,6 +28,8 @@ export interface RequestInput {
   incomeAvailable: boolean
   income: number // personal income
   age: number
+  receiveOAS: boolean
+  oasDeferDuration: string
   oasDefer: boolean
   oasAge: number
   maritalStatus: MaritalStatus
@@ -54,6 +56,8 @@ export interface RequestInput {
 export interface ProcessedInput {
   income: IncomeHelper
   age: number
+  receiveOAS: boolean
+  oasDeferDuration: string
   oasDefer: boolean
   oasAge: number
   maritalStatus: MaritalStatusHelper

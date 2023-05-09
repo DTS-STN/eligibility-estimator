@@ -47,6 +47,7 @@ import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
 import { consoleDev } from '../web/helpers/utils'
 import { result } from 'lodash'
+import { getMinBirthYear } from './definitions/schemas'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -137,6 +138,8 @@ export class BenefitHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      receiveOAS: this.rawInput.receiveOAS,
+      oasDeferDuration: this.rawInput.oasDeferDuration,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
@@ -157,6 +160,8 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      receiveOAS: false, // dummy data
+      oasDeferDuration: JSON.stringify({ months: 0, years: 0 }), // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: maritalStatusHelper,
@@ -190,12 +195,22 @@ export class BenefitHandler {
     const requiredFields = [
       FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
-      FieldKey.OAS_DEFER,
+      // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
       FieldKey.LIVED_ONLY_IN_CANADA,
     ]
+
+    // OAS deferral related fields
+    const clientAge = this.input.client.age
+    if (clientAge >= 65 && clientAge < getMinBirthYear()) {
+      requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
+    }
+
+    if (this.input.client.receiveOAS) {
+      requiredFields.push(FieldKey.OAS_DEFER_DURATION)
+    }
 
     // default value = undefined
     if (this.input.client.livedOnlyInCanada === false) {
@@ -1071,6 +1086,8 @@ export class BenefitHandler {
     const clientSingleInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      receiveOAS: this.rawInput.receiveOAS,
+      oasDeferDuration: this.rawInput.oasDeferDuration,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
@@ -1103,7 +1120,9 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      receiveOAS: false, // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
+      oasDeferDuration: JSON.stringify({ months: 0, years: 0 }),
       oasAge: 65, // pass dummy data because we will never use this anyway
       maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
       livingCountry: new LivingCountryHelper(

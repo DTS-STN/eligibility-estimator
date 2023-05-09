@@ -167,6 +167,8 @@ const en: WebTranslations = {
   },
   validationErrors: {
     [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
+    [ValidationErrors.receiveOASEmpty]:
+      'Please indicate if you receive the OAS pension.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       "Please indicate if you're able to provide your partner's income.",
     [ValidationErrors.partnerIncomeEmpty]:
@@ -253,6 +255,11 @@ const en: WebTranslations = {
   partnerInformationDescription:
     "Individuals who are married or in common-law relationships need to \
   provide their partner's information to assess their own eligibility.",
+
+  duration: {
+    months: 'Months',
+    years: 'Years',
+  },
 }
 
 export default en

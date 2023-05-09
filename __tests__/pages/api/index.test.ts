@@ -37,6 +37,8 @@ describe('OAS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       invSeparated: false,
       ...canadian,
@@ -54,6 +56,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       invSeparated: false,
       ...canadian,
@@ -66,6 +70,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...incomeZero,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       invSeparated: false,
       ...canadian,
@@ -78,6 +84,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -93,6 +101,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...incomeZero,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -108,6 +118,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -124,6 +136,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -140,6 +154,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -156,6 +172,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...incomeZero,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -171,6 +189,8 @@ describe('GIS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...incomeZero,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -187,6 +207,8 @@ describe('GIS entitlement scenarios', () => {
       incomeAvailable: true,
       income: 1000,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       invSeparated: false,
       ...canadian,
@@ -202,6 +224,8 @@ describe('GIS entitlement scenarios', () => {
       incomeAvailable: true,
       income: 1000,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       invSeparated: false,
       ...canadian,
@@ -219,6 +243,8 @@ describe('basic Allowance scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -245,6 +271,8 @@ describe('Allowance entitlement scenarios', () => {
       incomeAvailable: true,
       income: 20000,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -261,6 +289,8 @@ describe('Allowance entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -276,6 +306,8 @@ describe('Allowance entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...incomeZero,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -295,6 +327,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       incomeAvailable: true,
       income: legalValues.alw.afsIncomeLimit + 1,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
       ...canadaWholeLife,
@@ -309,6 +343,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       ...canadian,
@@ -327,6 +363,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       ...income10k,
       age: 59,
       oasDefer: false,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
@@ -367,6 +405,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -389,6 +429,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       ...canadian,
@@ -403,6 +445,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       livingCountry: LivingCountry.AGREEMENT,
@@ -450,6 +494,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -496,6 +542,8 @@ describe('AFS entitlement scenarios', () => {
       incomeAvailable: true,
       income: 20000,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       ...canadian,
@@ -508,6 +556,8 @@ describe('AFS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       ...canadian,
@@ -520,6 +570,8 @@ describe('AFS entitlement scenarios', () => {
     const res = await mockGetRequest({
       ...incomeZero,
       ...age60NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
       ...canadian,

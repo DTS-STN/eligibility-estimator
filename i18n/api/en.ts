@@ -42,6 +42,10 @@ const en: Translations = {
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
     [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Do you already receive the Old Age Security pension?',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'How long did you defer your Old Age Security pension?',
     [FieldKey.OAS_DEFER]:
       'When would you like to start receiving the Old Age Security (OAS) pension?',
     [FieldKey.OAS_AGE]:
@@ -75,7 +79,9 @@ const en: Translations = {
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
+    [FieldKey.ALREADY_RECEIVE_OAS]: 'Already receive OAS pension',
     [FieldKey.OAS_DEFER]: 'OAS pension deferral',
+    [FieldKey.OAS_DEFER_DURATION]: 'Deferred OAS pension',
     [FieldKey.OAS_AGE]: 'OAS pension deferral',
     [FieldKey.INCOME_AVAILABLE]: 'Net income',
     [FieldKey.INCOME]: 'Net income',
@@ -100,6 +106,9 @@ const en: Translations = {
   questionAriaLabel: {
     [FieldKey.AGE]: 'Edit your age',
     [FieldKey.OAS_AGE]: 'Start at',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Edit if you already receive the OAS pension',
+    [FieldKey.OAS_DEFER_DURATION]: 'Edit your OAS pension deferral',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
@@ -131,6 +140,8 @@ const en: Translations = {
       'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Providing your partner's income will give you more accurate results.",
+    [FieldKey.OAS_DEFER_DURATION]:
+      'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
@@ -162,6 +173,18 @@ const en: Translations = {
         key: false,
         text: "No, I will not provide my partner's income at this time",
         shortText: 'Not provided',
+      },
+    ],
+    [FieldKey.ALREADY_RECEIVE_OAS]: [
+      {
+        key: true,
+        text: 'Yes',
+        shortText: 'Yes',
+      },
+      {
+        key: false,
+        text: 'No',
+        shortText: 'No',
       },
     ],
     [FieldKey.OAS_DEFER]: [
@@ -294,6 +317,13 @@ const en: Translations = {
       "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
+    yourDeferralOptions: 'Your deferral options',
+    sinceYouAreSixty:
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more months.",
+    youCanAply:
+      'You can apply 11 months before the date you want your payments to start.',
+    delayMonths:
+      'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}',
     eligibleWhen60ApplyNow:
       'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:
@@ -325,6 +355,11 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
+    ifYouDeferYourPension: 'If you defer your pension',
+    youCantGetThisBenefit:
+      'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
+    thisEstimate:
+      'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
