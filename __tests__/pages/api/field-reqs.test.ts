@@ -38,7 +38,6 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
-      FieldKey.OAS_DEFER,
       FieldKey.INCOME_AVAILABLE,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
@@ -47,7 +46,6 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
-      FieldKey.OAS_DEFER,
       FieldKey.INCOME_AVAILABLE,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
@@ -83,7 +81,7 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
-      FieldKey.OAS_DEFER,
+      FieldKey.ALREADY_RECEIVE_OAS,
       FieldKey.OAS_AGE,
       FieldKey.INCOME_AVAILABLE,
       FieldKey.INCOME,
@@ -111,6 +109,8 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOnlyInCanada: false,
@@ -128,6 +128,8 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
       livedOnlyInCanada: false,
@@ -145,6 +147,8 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -163,6 +167,8 @@ describe('field requirements analysis: conditional fields', () => {
     const res = await mockGetRequest({
       ...income10k,
       ...age65NoDefer,
+      receiveOAS: false,
+      oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       ...canadaWholeLife,
