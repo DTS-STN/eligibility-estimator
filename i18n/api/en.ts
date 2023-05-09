@@ -470,6 +470,11 @@ const en: Translations = {
     [SummaryState.AVAILABLE_DEPENDING]:
       'Depending on your income, you may be eligible for old age benefits. See the details below for more information.',
   },
+  oasDeferralTable: {
+    title: 'Estimated deferral amounts',
+    headingAge: 'If you wait until age...',
+    headingAmount: 'Your monthly payment could be...',
+  },
   links,
   incomeSingle: 'your income',
   incomeCombined: "you and your partner's combined income",
