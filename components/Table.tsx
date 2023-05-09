@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { getTranslations } from '../i18n/api'
+import { getTranslations, numberToStringCurrency } from '../i18n/api'
 import { WebTranslations } from '../i18n/web'
 import { useTranslation } from './Hooks'
 
@@ -17,16 +17,6 @@ const Table: React.FC<TableProps> = ({ data }) => {
   const locale = useRouter().locale
   const apiTsln = getTranslations(tsln._language)
 
-  const localizedIncome = (amount) => {
-    return new Intl.NumberFormat(`${locale}-CA`, {
-      style: 'currency',
-      currency: 'CAD',
-    })
-      .format(amount)
-      .replace('.00', '')
-      .replace(/,00\s/, '\xa0')
-  }
-
   return (
     <table className="mt-8 mb-8 text-center w-full md:w-8/12 table-fixed">
       <caption className="mb-3 font-bold">
@@ -34,10 +24,10 @@ const Table: React.FC<TableProps> = ({ data }) => {
       </caption>
       <thead>
         <tr className="text-sm">
-          <th className="border border-gray-200 bg-gray-100 p-4">
+          <th scope="col" className="border border-gray-200 bg-gray-100 p-4">
             {apiTsln.oasDeferralTable.headingAge}
           </th>
-          <th className="border border-gray-200 bg-gray-100">
+          <th scope="col" className="border border-gray-200 bg-gray-100">
             {apiTsln.oasDeferralTable.headingAmount}
           </th>
         </tr>
@@ -49,7 +39,7 @@ const Table: React.FC<TableProps> = ({ data }) => {
               {age.toLocaleString() + (locale === 'fr' ? ' ans' : '')}
             </td>
             <td className="border border-gray-200 p-0">
-              {localizedIncome(amount)}
+              {numberToStringCurrency(amount, tsln._language)}
             </td>
           </tr>
         ))}
