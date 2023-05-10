@@ -5,6 +5,7 @@ import { TooltipTranslations } from './index'
 const en: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiEn.category.marital,
+    moreinfo: 'Which option applies to me?',
     text: "<p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Single</span>: \
             You have never been married and are not in a common-law relationship. \
@@ -34,6 +35,7 @@ const en: TooltipTranslations = {
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,
+    moreinfo: 'What does it mean to have legal status?',
     text: "<p style='padding-bottom: 12px;'> \
           Having legal status means you're allowed to enter and stay in Canada as: \
           </p> \
@@ -48,6 +50,7 @@ const en: TooltipTranslations = {
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     heading: apiEn.category.legal,
+    moreinfo: 'What does it mean to have legal status?',
     text: "<p style='padding-bottom: 12px;'> \
             Having legal status means your partner is allowed to enter and stay in Canada as: \
           </p> \
@@ -62,7 +65,13 @@ const en: TooltipTranslations = {
   },
   [FieldKey.INCOME]: {
     heading: apiEn.category.income,
+    moreinfo: 'Where can I find my annual income?',
     text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">You can find your net income on line&nbsp;23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">Remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
+  },
+  [FieldKey.PARTNER_INCOME]: {
+    heading: apiEn.category.income,
+    moreinfo: 'Where can I find my partner’s annual income?',
+    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">Your partner’s net income appears on line&nbsp;23600 of their personal income tax return (T1).</div><div style="padding-top:8px;">Remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
   },
 }
 
