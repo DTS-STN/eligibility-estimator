@@ -71,7 +71,7 @@ const en: TooltipTranslations = {
   [FieldKey.PARTNER_INCOME]: {
     heading: apiEn.category.income,
     moreinfo: 'Where can I find my partner’s annual income?',
-    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">Your partner’s net income appears on line&nbsp;23600 of their personal income tax return (T1).</div><div style="padding-top:8px;">Remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
+    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">Your partner’s net income appears on line&nbsp;23600 of their personal income tax return (T1).</div><div style="padding-top:8px;">Remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
   },
 }
 
