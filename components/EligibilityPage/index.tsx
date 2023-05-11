@@ -163,6 +163,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             {field.config.type === FieldType.DURATION && (
               <Duration
                 name={field.key}
+                age={inputs.age}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
