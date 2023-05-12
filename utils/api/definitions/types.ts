@@ -113,6 +113,7 @@ export interface CardDetail {
   mainText: string
   collapsedText: CardCollapsedText[]
   links: LinkWithAction[]
+  meta: any
 }
 
 export interface BenefitResult<
@@ -174,4 +175,15 @@ export interface SummaryObject {
 export interface NextStepText {
   nextStepTitle: string
   nextStepContent: string
+}
+
+type TableData = {
+  age: number
+  amount: number
+}
+
+export interface MetaDataObject {
+  tableData?: null | TableData[]
+  currentAge?: null | number
+  monthsTo70?: null | number
 }

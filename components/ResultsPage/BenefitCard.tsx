@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
+import Table from '../Table'
 import { CustomCollapse } from './CustomCollapse'
 
 const AA_BUTTON_CLICK_ATTRIBUTE =
@@ -53,7 +54,17 @@ export const BenefitCard: React.VFC<{
         {eligibleFlag}
       </div>
 
-      <div className={`py-1`}>{children}</div>
+      <div className={`py-1`}>
+        <div>{children}</div>
+        {benefitKey === 'oas' && (
+          <Table
+            data={[
+              { age: 66, amount: 324 },
+              { age: 67, amount: 360 },
+            ]}
+          />
+        )}
+      </div>
 
       {collapsedDetails &&
         collapsedDetails.map((detail, index) => (

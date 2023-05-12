@@ -25,7 +25,6 @@ export const BenefitCards: React.VFC<{
     'Old Age Security (OAS) pension',
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
-
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
   const resultsEligible = results.filter(
@@ -131,6 +130,7 @@ export const BenefitCards: React.VFC<{
   }
 
   function generateCard(result: BenefitResult) {
+    console.log('result', result)
     let titleText: string = apiTsln.benefit[result.benefitKey]
     let collapsedDetails = result.cardDetail.collapsedText
     const eligiblePartnerResult = partnerResultsEligible.find(
