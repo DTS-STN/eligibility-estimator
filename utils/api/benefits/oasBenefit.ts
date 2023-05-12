@@ -223,7 +223,16 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The number of years the client has chosen to defer their OAS pension.
    */
   private get deferralYears(): number {
-    return Math.max(0, this.input.oasAge - 65) // the number of years deferred (between zero and five)
+    let oasAge = 65
+
+    const durationStr = this.input.oasDeferDuration
+    if (durationStr) {
+      const duration = JSON.parse(durationStr)
+      const durationFloat = duration.years + duration.months / 12
+      oasAge = 65 + durationFloat
+    }
+
+    return Math.max(0, oasAge - 65) // the number of years deferred (between zero and five)
   }
 
   /**
@@ -367,24 +376,24 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       return cardCollapsedText
 
     // increase at 75
-    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75
-      )
-    else
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75Applied
-      )
+    // if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasIncreaseAt75
+    //   )
+    // else
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasIncreaseAt75Applied
+    //   )
 
     // deferral
-    if (this.deferralIncrease)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasDeferralApplied
-      )
-    else if (this.input.age >= 65 && this.input.age < 70)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasDeferralAvailable
-      )
+    // if (this.deferralIncrease)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasDeferralApplied
+    //   )
+    // else if (this.input.age >= 65 && this.input.age < 70)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasDeferralAvailable
+    //   )
 
     return cardCollapsedText
   }

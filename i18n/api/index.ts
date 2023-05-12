@@ -77,7 +77,6 @@ export interface Translations {
     dependingOnLegal: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
-    ifYouDeferYourPension: string
     youCantGetThisBenefit: string
     thisEstimate: string
     alwNotEligible: string
@@ -110,6 +109,7 @@ export interface Translations {
     }
   }
   detailWithHeading: {
+    ifYouDeferYourPension: { heading: string; text: string }
     oasDeferralApplied: { heading: string; text: string }
     oasDeferralAvailable: { heading: string; text: string }
     oasClawback: { heading: string; text: string }

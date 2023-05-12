@@ -130,7 +130,6 @@ export const BenefitCards: React.VFC<{
   }
 
   function generateCard(result: BenefitResult) {
-    console.log('result', result)
     let titleText: string = apiTsln.benefit[result.benefitKey]
     let collapsedDetails = result.cardDetail.collapsedText
     const eligiblePartnerResult = partnerResultsEligible.find(
