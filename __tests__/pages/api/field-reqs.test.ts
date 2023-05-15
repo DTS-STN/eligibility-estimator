@@ -61,7 +61,7 @@ describe('field requirement analysis', () => {
       oasDefer: true,
       oasAge: 70,
       receiveOAS: false,
-      oasDeferDuration: '{ months: 0, years: 5 }',
+      oasDeferDuration: '{ "months": 0, "years": 5 }',
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
       livedOnlyInCanada: false,
