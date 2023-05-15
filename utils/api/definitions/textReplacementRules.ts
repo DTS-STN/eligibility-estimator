@@ -22,10 +22,6 @@ export const textReplacementRules: TextReplacementRules = {
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
-  CURRENT_AGE: (handler, benefitResult) => ` `, //TBD
-  WAIT_MONTHS: (handler, benefitResult) => ` `, //TBD
-  DELAY_MONTHS: (handler, benefitResult) => ` `, //TBD
-  MONTH_MONTHS: (handler, benefitResult) => ` `, //TBD
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.resultAt75 ?? 0,

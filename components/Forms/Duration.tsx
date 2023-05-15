@@ -10,6 +10,7 @@ interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   baseOnChange: (newValue: string) => void
   requiredText?: string
   error?: string
+  age: string
 }
 
 interface IDurationInput {
@@ -24,10 +25,21 @@ const Duration: FC<DurationProps> = ({
   baseOnChange,
   requiredText,
   error,
+  age,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
 
+  // Dynamically populate select options. Return object that represents years and months away from age 65
+  const getSelectOptions = () => {
+    const diff = Number(age) - 65
+    const maxYears = Math.floor(diff)
+    const maxMonths = Math.round((diff - maxYears) * 12)
+
+    return { years: maxYears, months: maxMonths }
+  }
+
+  // Duration input
   useEffect(() => {
     if (name in sessionStorage) {
       setDurationInput(JSON.parse(sessionStorage.getItem(name)))
@@ -62,6 +74,7 @@ const Duration: FC<DurationProps> = ({
     setDurationInput(newDuration)
     baseOnChange(JSON.stringify(newDuration))
   }
+
   return (
     <fieldset>
       <legend>
@@ -82,16 +95,17 @@ const Duration: FC<DurationProps> = ({
 
           <select
             id={`${name}-years`}
-            defaultValue={0}
             value={durationInput?.years || 0}
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(11).keys()].map((mv, index) => (
-              <option value={mv} key={`${name}-option-${index}`}>
-                {mv}
-              </option>
-            ))}
+            {[...Array(getSelectOptions()['years'] + 1).keys()].map(
+              (mv, index) => (
+                <option value={mv} key={`${name}-years-option-${index}`}>
+                  {mv}
+                </option>
+              )
+            )}
           </select>
         </div>
 
@@ -102,16 +116,17 @@ const Duration: FC<DurationProps> = ({
 
           <select
             id={`${name}-months`}
-            defaultValue={0}
             value={durationInput?.months || 0}
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(12).keys()].map((mv, index) => (
-              <option value={mv} key={`${name}-option-${index}`}>
-                {mv}
-              </option>
-            ))}
+            {[...Array(getSelectOptions()['months'] + 1).keys()].map(
+              (mv, index) => (
+                <option value={mv} key={`${name}-years-option-${index}`}>
+                  {mv}
+                </option>
+              )
+            )}
           </select>
         </div>
       </div>
