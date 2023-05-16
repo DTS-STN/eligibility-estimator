@@ -127,6 +127,7 @@ export class BenefitHandler {
     const maritalStatusHelper = new MaritalStatusHelper(
       this.rawInput.maritalStatus
     )
+
     // shared between partners
     const incomeHelper = new IncomeHelper(
       this.rawInput.incomeAvailable,

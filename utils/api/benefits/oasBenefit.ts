@@ -376,13 +376,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (this.eligibility.reason === ResultReason.INCOME)
       return cardCollapsedText
 
-    if (this.eligibility.reason === ResultReason.AGE_65_TO_69) {
-      cardCollapsedText.push({
-        heading: this.translations.detail.yourDeferralOptions,
-        text: this.translations.detail.sinceYouAreSixty,
-      })
-    }
-
     // // increase at 75
     // if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
     //   cardCollapsedText.push(
@@ -435,6 +428,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
     }
 
+    if (
+      this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+      !this.partner
+    ) {
+      text += `<p class='mb-2 mt-6 font-bold'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += this.translations.detail.sinceYouAreSixty
+    }
+
     return text
   }
 
@@ -449,4 +450,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
+
+  private add
 }

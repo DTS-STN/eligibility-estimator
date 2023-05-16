@@ -496,6 +496,8 @@ const fr: Translations = {
   yes: 'Oui',
   no: 'Non',
   year: 'an',
+  month: 'mois',
+  months: 'mois',
   your: 'votre revenu',
   complete: 'vos revenus',
 }

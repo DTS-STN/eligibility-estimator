@@ -177,7 +177,7 @@ export interface NextStepText {
   nextStepContent: string
 }
 
-type TableData = {
+export type TableData = {
   age: number
   amount: number
 }

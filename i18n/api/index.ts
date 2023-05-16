@@ -134,6 +134,8 @@ export interface Translations {
   yes: string
   no: string
   year: string
+  month: string
+  months: string
   your: string
   complete: string
 }

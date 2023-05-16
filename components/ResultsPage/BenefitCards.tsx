@@ -10,6 +10,7 @@ import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
 import legalValues from '../../utils/api/scrapers/output'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
+import { DeferralTable } from './DeferralTable'
 
 export const BenefitCards: React.VFC<{
   results: BenefitResult[]
@@ -49,6 +50,21 @@ export const BenefitCards: React.VFC<{
     benefitText =
       foundIndex != -1 ? titleWithAcronymArray[foundIndex] : benefitName
     return benefitText
+  }
+
+  const getDeferralTable = (benefitKey, result): any => {
+    return benefitKey === BenefitKey.oas &&
+      result.eligibility.result === ResultKey.ELIGIBLE ? (
+      <DeferralTable data={result.cardDetail?.meta?.tableData} />
+    ) : null
+  }
+
+  const oasApply = (benefitKey, result) => {
+    console.log('here')
+    return benefitKey === BenefitKey.oas &&
+      result.eligibility.result === ResultKey.ELIGIBLE
+      ? apiTsln.detail.youCanAply
+      : null
   }
 
   const getNextStepText = (benefitKey, result): NextStepText => {
@@ -164,6 +180,8 @@ export const BenefitCards: React.VFC<{
 
     const nextStepText = getNextStepText(result.benefitKey, result)
 
+    const OASdeferralTable = getDeferralTable(result.benefitKey, result)
+
     return (
       <div key={result.benefitKey}>
         <BenefitCard
@@ -188,6 +206,8 @@ export const BenefitCards: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
+          <div>{OASdeferralTable}</div>
+          <div>{oasApply(result.benefitKey, result)}</div>
         </BenefitCard>
       </div>
     )

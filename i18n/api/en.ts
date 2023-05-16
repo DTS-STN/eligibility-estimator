@@ -319,7 +319,7 @@ const en: Translations = {
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
     sinceYouAreSixty:
-      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more months.",
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
@@ -485,6 +485,8 @@ const en: Translations = {
   yes: 'Yes',
   no: 'No',
   year: 'year',
+  month: 'month',
+  months: 'months',
   your: 'your income',
   complete: 'complete income information',
 }
