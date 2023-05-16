@@ -2,6 +2,7 @@ import { FC, InputHTMLAttributes, useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { QuestionLabel } from './QuestionLabel'
+import { MonthsYears } from '../../utils/api/definitions/types'
 
 interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -11,11 +12,6 @@ interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   requiredText?: string
   error?: string
   age: string
-}
-
-interface IDurationInput {
-  months: number
-  years: number
 }
 
 const Duration: FC<DurationProps> = ({
@@ -66,7 +62,7 @@ const Duration: FC<DurationProps> = ({
       fieldToSet = 'months'
     }
 
-    const newDuration: IDurationInput = {
+    const newDuration: MonthsYears = {
       ...durationInput,
       [fieldToSet]: Number(e.target.value),
     }

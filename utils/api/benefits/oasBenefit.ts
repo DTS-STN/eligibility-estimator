@@ -11,9 +11,9 @@ import {
   EligibilityResult,
   EntitlementResultOas,
   ProcessedInput,
-  Link,
   LinkWithAction,
   MetaDataObject,
+  MonthsYears,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
 import { getDeferralIncrease } from '../helpers/utils'
@@ -226,8 +226,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     let oasAge = 65
 
     const durationStr = this.input.oasDeferDuration
+
     if (durationStr) {
-      const duration = JSON.parse(durationStr)
+      const duration: MonthsYears = JSON.parse(durationStr)
       const durationFloat = duration.years + duration.months / 12
       oasAge = 65 + durationFloat
     }
@@ -375,15 +376,22 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (this.eligibility.reason === ResultReason.INCOME)
       return cardCollapsedText
 
-    // increase at 75
-    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75
-      )
-    else
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75Applied
-      )
+    if (this.eligibility.reason === ResultReason.AGE_65_TO_69) {
+      cardCollapsedText.push({
+        heading: this.translations.detail.yourDeferralOptions,
+        text: this.translations.detail.sinceYouAreSixty,
+      })
+    }
+
+    // // increase at 75
+    // if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasIncreaseAt75
+    //   )
+    // else
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasIncreaseAt75Applied
+    //   )
 
     // deferral
     // if (this.deferralIncrease)

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import { getTranslations, numberToStringCurrency } from '../i18n/api'
-import { WebTranslations } from '../i18n/web'
-import { useTranslation } from './Hooks'
+import { getTranslations, numberToStringCurrency } from '../../i18n/api'
+import { WebTranslations } from '../../i18n/web'
+import { useTranslation } from '../Hooks'
 
 export type TableData = {
   age: number

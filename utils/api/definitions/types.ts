@@ -187,3 +187,8 @@ export interface MetaDataObject {
   currentAge?: null | number
   monthsTo70?: null | number
 }
+
+export interface MonthsYears {
+  months: number
+  years: number
+}
