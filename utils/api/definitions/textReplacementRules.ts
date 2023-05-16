@@ -41,8 +41,8 @@ export const textReplacementRules: TextReplacementRules = {
   MONTH_MONTHS: (handler) => {
     const months =
       handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
-    return `${months ?? 0} ${
-      months !== 1 ? handler.translations.month : handler.translations.months
+    return `${
+      months == 1 ? handler.translations.month : handler.translations.months
     }`
   },
   OAS_DEFERRAL_INCREASE: (handler) =>
