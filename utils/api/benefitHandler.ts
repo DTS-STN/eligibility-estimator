@@ -271,7 +271,7 @@ export class BenefitHandler {
             currently lives outside Canada and has lived for 20+ years in Canada
        */
       if (
-        this.input.partner.age > 65 &&
+        this.input.partner.age >= 65 &&
         this.input.partner.legalStatus.canadian &&
         this.input.partner.livedOnlyInCanada !== undefined &&
         ((this.input.partner.livingCountry.canada &&
