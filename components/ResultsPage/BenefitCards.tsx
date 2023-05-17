@@ -101,12 +101,10 @@ export const BenefitCards: React.VFC<{
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
     if (benefitKey === BenefitKey.gis) {
-      console.log(result)
-      console.log('receiving = ', receivingOAS)
       if (
         result.eligibility.result === ResultKey.ELIGIBLE &&
         result.entitlement.result >= 0 &&
-        receivingOAS
+        !receivingOAS
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
@@ -133,7 +131,7 @@ export const BenefitCards: React.VFC<{
         } else if (
           result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
           result.entitlement.result > 0 &&
-          receivingOAS
+          !receivingOAS
         ) {
           nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
