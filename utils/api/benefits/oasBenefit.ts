@@ -309,6 +309,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       tableData: null,
       currentAge: null,
       monthsTo70: null,
+      receiveOas: false,
     }
 
     if (age) {
@@ -321,6 +322,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       if (eligible && ageInRange && !receiveOas) {
         const monthsTo70 = Math.floor((70 - age) * 12)
         meta.monthsTo70 = monthsTo70
+        meta.receiveOas = receiveOas
 
         // have an estimate > 0
         if (!(estimate <= 0)) {
@@ -339,7 +341,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         return meta
       }
 
-      return null
+      return {
+        tableData: null,
+        currentAge: null,
+        monthsTo70: null,
+        receiveOas: receiveOas,
+      }
     }
   }
 

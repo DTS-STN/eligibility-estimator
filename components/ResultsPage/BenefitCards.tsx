@@ -28,6 +28,8 @@ export const BenefitCards: React.VFC<{
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
 
+  const receivingOAS = results[0]?.cardDetail?.meta?.receiveOas
+
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
    */
@@ -82,8 +84,8 @@ export const BenefitCards: React.VFC<{
     return benefitKey === BenefitKey.oas &&
       result.eligibility.result === ResultKey.ELIGIBLE &&
       result.entitlement.result > 0 &&
-      result.cardDetail.meta !== null ? (
-      <DeferralTable data={result.cardDetail?.meta?.tableData} />
+      result.cardDetail.meta?.tableData !== null ? (
+      <DeferralTable data={result.cardDetail.meta?.tableData} />
     ) : null
   }
 
@@ -99,11 +101,14 @@ export const BenefitCards: React.VFC<{
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
     if (benefitKey === BenefitKey.gis) {
-      // at this point it is impossible to know if the client answered yes to receiving
+      console.log(result)
+      console.log('receiving = ', receivingOAS)
       if (
         result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.result > 0
+        result.entitlement.result >= 0 &&
+        receivingOAS
       ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
       } else if (
         result.eligibility.result === ResultKey.ELIGIBLE ||
@@ -128,7 +133,7 @@ export const BenefitCards: React.VFC<{
         } else if (
           result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
           result.entitlement.result > 0 &&
-          result.cardDetail?.meta?.monthsTo70 > 0
+          receivingOAS
         ) {
           nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
