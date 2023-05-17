@@ -81,7 +81,8 @@ export const BenefitCards: React.VFC<{
   const getDeferralTable = (benefitKey, result): any => {
     return benefitKey === BenefitKey.oas &&
       result.eligibility.result === ResultKey.ELIGIBLE &&
-      result.entitlement.result > 0 ? (
+      result.entitlement.result > 0 &&
+      result.cardDetail.meta !== null ? (
       <DeferralTable data={result.cardDetail?.meta?.tableData} />
     ) : null
   }
