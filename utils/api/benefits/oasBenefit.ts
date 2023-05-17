@@ -430,10 +430,21 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     if (
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
-      !this.partner
+      !this.partner &&
+      this.currentEntitlementAmount > 0
     ) {
       text += `<p class='mb-2 mt-6 font-bold'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.sinceYouAreSixty
+    }
+
+    // not sure when this condition would be true, I think never.
+    if (
+      this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+      !this.partner &&
+      this.currentEntitlementAmount <= 0
+    ) {
+      text += `<p class='mb-2 mt-6 font-bold'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += this.translations.detail.delayMonths
     }
 
     return text

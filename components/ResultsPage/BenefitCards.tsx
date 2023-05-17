@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -26,6 +26,8 @@ export const BenefitCards: React.VFC<{
     'Old Age Security (OAS) pension',
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
+  const [alreadyReceiving, setAlreadyReceiving] = useState(false)
+
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
   const resultsEligible = results.filter(
@@ -54,15 +56,16 @@ export const BenefitCards: React.VFC<{
 
   const getDeferralTable = (benefitKey, result): any => {
     return benefitKey === BenefitKey.oas &&
-      result.eligibility.result === ResultKey.ELIGIBLE ? (
+      result.eligibility.result === ResultKey.ELIGIBLE &&
+      result.entitlement.result > 0 ? (
       <DeferralTable data={result.cardDetail?.meta?.tableData} />
     ) : null
   }
 
   const oasApply = (benefitKey, result) => {
-    console.log('here')
     return benefitKey === BenefitKey.oas &&
-      result.eligibility.result === ResultKey.ELIGIBLE
+      result.eligibility.result === ResultKey.ELIGIBLE &&
+      result.entitlement.result > 0
       ? apiTsln.detail.youCanAply
       : null
   }
@@ -72,6 +75,12 @@ export const BenefitCards: React.VFC<{
 
     if (benefitKey === BenefitKey.gis) {
       if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result > 0 &&
+        alreadyReceiving
+      ) {
+        nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
+      } else if (
         result.eligibility.result === ResultKey.ELIGIBLE ||
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
       ) {
@@ -91,6 +100,13 @@ export const BenefitCards: React.VFC<{
           }
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.serviceCanadaReviewYourPayment
+        } else if (
+          result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+          result.entitlement.result > 0 &&
+          result.cardDetail?.meta?.monthsTo70 > 0
+        ) {
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
+          setAlreadyReceiving(true)
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter

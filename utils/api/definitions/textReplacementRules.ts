@@ -37,7 +37,11 @@ export const textReplacementRules: TextReplacementRules = {
       handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
     return `<strong>${months}</strong>`
   },
-  DELAY_MONTHS: (handler) => ` `, //TBD
+  DELAY_MONTHS: (handler) => {
+    const months =
+      handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
+    return `<strong>${months}</strong>`
+  },
   MONTH_MONTHS: (handler) => {
     const months =
       handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
