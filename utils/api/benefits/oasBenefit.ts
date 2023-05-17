@@ -433,7 +433,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       !this.partner &&
       this.currentEntitlementAmount > 0
     ) {
-      text += `<p class='mb-2 mt-6 font-bold'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.sinceYouAreSixty
     }
 
@@ -443,7 +443,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       !this.partner &&
       this.currentEntitlementAmount <= 0
     ) {
-      text += `<p class='mb-2 mt-6 font-bold'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.delayMonths
     }
 
