@@ -11,6 +11,7 @@ import legalValues from '../../utils/api/scrapers/output'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 import { DeferralTable } from './DeferralTable'
+import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 
 export const BenefitCards: React.VFC<{
   results: BenefitResult[]
@@ -26,6 +27,30 @@ export const BenefitCards: React.VFC<{
     'Old Age Security (OAS) pension',
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
+
+  /**
+   * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
+   */
+  const replaceTextVariables = (textToProcess: string): string => {
+    const re: RegExp = new RegExp(/{(\w*?)}/g)
+    const matches: IterableIterator<RegExpMatchArray> =
+      textToProcess.matchAll(re)
+    let replaceWith: string
+
+    for (const match of matches) {
+      const key: string = match[1]
+      switch (key) {
+        case 'MY_SERVICE_CANADA':
+          replaceWith = generateLink(apiTsln.links.SCAccount)
+          break
+        default:
+          throw new Error(`no text replacement rule for ${key}`)
+      }
+      textToProcess = textToProcess.replace(`{${key}}`, replaceWith)
+    }
+
+    return textToProcess
+  }
 
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
@@ -156,6 +181,11 @@ export const BenefitCards: React.VFC<{
           )}</strong>.`
       }
     }
+
+    nextStepText.nextStepContent = replaceTextVariables(
+      nextStepText.nextStepContent
+    )
+
     return nextStepText
   }
 
