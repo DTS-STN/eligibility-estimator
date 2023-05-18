@@ -299,9 +299,14 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
-    // Related to OAS Deferral
+    // Related to OAS Deferral, don't show if already receiving
     const ageInOasRange = this.input.age >= 65 && this.input.age < 70
-    if (this.entitlement.result !== 0 && ageInOasRange) {
+
+    if (
+      this.entitlement.result !== 0 &&
+      ageInOasRange &&
+      !this.input.receiveOAS
+    ) {
       cardCollapsedText.push(
         this.translations.detailWithHeading.ifYouDeferYourPension
       )

@@ -93,7 +93,7 @@ export const BenefitCards: React.VFC<{
     return benefitKey === BenefitKey.oas &&
       result.eligibility.result === ResultKey.ELIGIBLE &&
       result.entitlement.result > 0 &&
-      !receivingOAS
+      result.cardDetail.meta?.tableData !== null
       ? apiTsln.detail.youCanAply
       : null
   }
@@ -102,25 +102,21 @@ export const BenefitCards: React.VFC<{
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
     if (benefitKey === BenefitKey.gis) {
-      if (result.eligibility.result === ResultKey.ELIGIBLE) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-
-        if (result.entitlement.result > 0 && !receivingOAS) {
-          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
-        } else if (result.entitlement.result > 0 && receivingOAS) {
-          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.youCantGetThisBenefit}</p>`
-        }
-      } else if (
+      if (
         result.eligibility.result === ResultKey.ELIGIBLE ||
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent =
-          result.eligibility.reason === ResultReason.INCOME
-            ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
-            : tsln.resultsPage.nextStepGis
+
+        if (result.eligibility.reason === ResultReason.INCOME) {
+          nextStepText.nextStepContent =
+            tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
+        } else if (result.entitlement.result > 0 && receivingOAS) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (result.entitlement.result > 0 && !receivingOAS) {
+          nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
+          //nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.youCantGetThisBenefit}</p>`
+        }
       }
     } else if (benefitKey === BenefitKey.oas) {
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
@@ -137,12 +133,20 @@ export const BenefitCards: React.VFC<{
           result.entitlement.result > 0 &&
           receivingOAS
         ) {
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
-        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.applyOnline}</p>`
+        } else if (
+          result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
+          receivingOAS
+        ) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (
+          result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
+          !receivingOAS
+        ) {
           nextStepText.nextStepContent += apiTsln.detail.oas.over70
         } else if (result.entitlement.clawback === 0) {
           nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`

@@ -126,7 +126,9 @@ export const YourAnswers: React.VFC<{
         deferral = JSON.parse(input.value)
         deferralVal = deferral?.years * 12 + deferral?.months
         return deferralVal > 0
-          ? `${tsln.yes} <div>${deferralVal} ${tsln.duration.months.toLowerCase}<div>`
+          ? `${
+              tsln.yes
+            } <div>${deferralVal} ${tsln.duration.months.toLowerCase()}<div>`
           : `${tsln.no}`
 
       default:
