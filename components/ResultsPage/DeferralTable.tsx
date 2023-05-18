@@ -15,7 +15,7 @@ export const DeferralTable: React.VFC<{ data: TableData[] }> = ({ data }) => {
         {apiTsln.oasDeferralTable.title}
       </caption>
       <thead>
-        <tr className="text-sm">
+        <tr>
           <th scope="col" className="border border-gray-200 bg-gray-100 p-4">
             {apiTsln.oasDeferralTable.headingAge}
           </th>
