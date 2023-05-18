@@ -309,20 +309,20 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       tableData: null,
       currentAge: null,
       monthsTo70: null,
-      receiveOas: false,
+      receiveOAS: false,
     }
 
     if (age) {
       const ageInRange = age >= 65 && age < 70
-      const receiveOas = this.input.receiveOAS
+      const receivingOAS = this.input.receiveOAS
       const ageWhole = Math.floor(age)
       const estimate = this.entitlement.result
 
       // Eligible for OAS pension,and are 65-69, who do not already reveive
-      if (eligible && ageInRange && !receiveOas) {
+      if (eligible && ageInRange && !receivingOAS) {
         const monthsTo70 = Math.floor((70 - age) * 12)
         meta.monthsTo70 = monthsTo70
-        meta.receiveOas = receiveOas
+        meta.receiveOAS = receivingOAS
 
         // have an estimate > 0
         if (!(estimate <= 0)) {
@@ -345,7 +345,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         tableData: null,
         currentAge: null,
         monthsTo70: null,
-        receiveOas: receiveOas,
+        receiveOAS: receivingOAS,
       }
     }
   }
@@ -438,7 +438,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
       !this.partner &&
-      this.currentEntitlementAmount > 0
+      this.currentEntitlementAmount > 0 &&
+      !this.input.receiveOAS
     ) {
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.sinceYouAreSixty
@@ -448,7 +449,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
       !this.partner &&
-      this.currentEntitlementAmount <= 0
+      this.currentEntitlementAmount <= 0 &&
+      !this.input.receiveOAS
     ) {
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.delayMonths

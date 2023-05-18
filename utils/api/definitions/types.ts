@@ -186,7 +186,7 @@ export interface MetaDataObject {
   tableData?: null | TableData[]
   currentAge?: null | number
   monthsTo70?: null | number
-  receiveOas: boolean
+  receiveOAS: boolean
 }
 
 export interface MonthsYears {

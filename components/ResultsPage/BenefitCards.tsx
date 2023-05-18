@@ -28,7 +28,7 @@ export const BenefitCards: React.VFC<{
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
 
-  const receivingOAS = results[0]?.cardDetail?.meta?.receiveOas
+  const receivingOAS: boolean = results[0]?.cardDetail?.meta?.receiveOAS
 
   /**
    * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
@@ -92,7 +92,8 @@ export const BenefitCards: React.VFC<{
   const oasApply = (benefitKey, result) => {
     return benefitKey === BenefitKey.oas &&
       result.eligibility.result === ResultKey.ELIGIBLE &&
-      result.entitlement.result > 0
+      result.entitlement.result > 0 &&
+      !receivingOAS
       ? apiTsln.detail.youCanAply
       : null
   }
@@ -103,11 +104,18 @@ export const BenefitCards: React.VFC<{
     if (benefitKey === BenefitKey.gis) {
       if (
         result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.result >= 0 &&
+        result.entitlement.result > 0 &&
         !receivingOAS
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
+      } else if (
+        result.eligibility.result === ResultKey.ELIGIBLE &&
+        result.entitlement.result > 0 &&
+        receivingOAS
+      ) {
+        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+        nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.youCantGetThisBenefit}</p>`
       } else if (
         result.eligibility.result === ResultKey.ELIGIBLE ||
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
@@ -131,7 +139,7 @@ export const BenefitCards: React.VFC<{
         } else if (
           result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
           result.entitlement.result > 0 &&
-          !receivingOAS
+          receivingOAS
         ) {
           nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
