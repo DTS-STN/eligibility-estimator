@@ -102,20 +102,16 @@ export const BenefitCards: React.VFC<{
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
     if (benefitKey === BenefitKey.gis) {
-      if (
-        result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.result > 0 &&
-        !receivingOAS
-      ) {
+      if (result.eligibility.result === ResultKey.ELIGIBLE) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
-      } else if (
-        result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.result > 0 &&
-        receivingOAS
-      ) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.youCantGetThisBenefit}</p>`
+
+        if (result.entitlement.result > 0 && !receivingOAS) {
+          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (result.entitlement.result > 0 && receivingOAS) {
+          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.youCantGetThisBenefit}</p>`
+        }
       } else if (
         result.eligibility.result === ResultKey.ELIGIBLE ||
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
