@@ -115,7 +115,6 @@ export const BenefitCards: React.VFC<{
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.entitlement.result > 0 && !receivingOAS) {
           nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
-          //nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.youCantGetThisBenefit}</p>`
         }
       }
     } else if (benefitKey === BenefitKey.oas) {
