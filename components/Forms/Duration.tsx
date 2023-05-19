@@ -26,11 +26,12 @@ const Duration: FC<DurationProps> = ({
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
 
-  // Dynamically populate select options. Return object that represents years and months away from age 65
+  // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
   const getSelectOptions = () => {
-    const diff = Number(age) - 65
+    const diff = Number(age) < 71 ? Number(age) - 65 : 4
     const maxYears = Math.floor(diff)
-    const maxMonths = Math.round((diff - maxYears) * 12)
+    const maxMonths =
+      diff !== maxYears ? Math.round((diff - maxYears) * 12) : 12
 
     return { years: maxYears, months: maxMonths }
   }
