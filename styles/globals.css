@@ -7,17 +7,21 @@
   display: none;
  }
  .print-estimated{
-  @apply col-span-4 col-start-1
+  @apply col-span-4 col-start-1;
  }
  .print-parent{
     @apply grid grid-cols-6 gap-2 grid-rows-6 m-5;
-    overflow: auto;
+    overflow: visible;
  }
  .print-answers{
-  @apply col-span-2 col-start-5 row-span-full row-start-1
+  @apply col-span-2 col-start-5 row-span-full row-start-1;
  }
  .print-cards{
-  @apply col-span-4 col-start-1 row-span-full row-start-2
+  @apply col-span-4 col-start-1 row-span-full row-start-2;
+ }
+ .no-break{
+  display: inline-block;
+  break-inside: avoid !important;
  }
 }
 
