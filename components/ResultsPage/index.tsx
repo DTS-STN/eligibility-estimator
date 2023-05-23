@@ -148,7 +148,7 @@ const ResultsPage: React.VFC<{
         className="md:grid md:grid-cols-3 md:gap-12 print-parent"
       >
         <div className="col-span-2 row-span-1 print-estimated">
-          <div>
+          <div className="print-hide">
             <div> {tsln.resultsPage.general} </div>
             <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
           </div>
@@ -186,9 +186,6 @@ const ResultsPage: React.VFC<{
                 id={'EditAnswers'}
                 styling="secondary"
                 className="mt-6 justify-center md:w-[fit-content] print-hide"
-                onBeforePrint={() => {
-                  console.log('hello')
-                }}
               />
             )}
             content={() => componentRef.current}
