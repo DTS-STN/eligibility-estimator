@@ -1,3 +1,4 @@
+import { consoleDev } from '../web/helpers/utils'
 import { BenefitHandler } from './benefitHandler'
 import { ResultKey } from './definitions/enums'
 import { RequestSchema as schema } from './definitions/schemas'
@@ -25,7 +26,7 @@ export default class MainHandler {
       resultObj.detail = error
     }
 
-    console.log(resultObj)
+    consoleDev(resultObj)
     this.results = resultObj
   }
 }

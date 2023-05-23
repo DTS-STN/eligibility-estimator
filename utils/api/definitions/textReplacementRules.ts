@@ -1,4 +1,4 @@
-import { numberToStringCurrency, Translations } from '../../../i18n/api'
+import { numberToStringCurrency } from '../../../i18n/api'
 import { BenefitHandler } from '../benefitHandler'
 import legalValues from '../scrapers/output'
 import { Language } from './enums'
@@ -22,15 +22,33 @@ export const textReplacementRules: TextReplacementRules = {
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
-  CURRENT_AGE: (handler, benefitResult) => ` `, //TBD
-  WAIT_MONTHS: (handler, benefitResult) => ` `, //TBD
-  DELAY_MONTHS: (handler, benefitResult) => ` `, //TBD
-  MONTH_MONTHS: (handler, benefitResult) => ` `, //TBD
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.resultAt75 ?? 0,
       handler.translations._language
     )}</strong>`,
+  CURRENT_AGE: (handler) => {
+    const current_age =
+      handler.benefitResults.client.oas?.cardDetail?.meta?.currentAge
+    return `<strong>${current_age}</strong>`
+  },
+  WAIT_MONTHS: (handler) => {
+    const months =
+      handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
+    return `<strong>${months}</strong>`
+  },
+  DELAY_MONTHS: (handler) => {
+    const months =
+      handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
+    return `<strong>${months}</strong>`
+  },
+  MONTH_MONTHS: (handler) => {
+    const months =
+      handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
+    return `${
+      months == 1 ? handler.translations.month : handler.translations.months
+    }`
+  },
   OAS_DEFERRAL_INCREASE: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.deferral.increase ?? 0,

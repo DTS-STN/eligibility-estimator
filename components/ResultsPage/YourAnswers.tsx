@@ -5,6 +5,7 @@ import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 import Link from 'next/link'
+import { MonthsYears } from '../../utils/api/definitions/types'
 
 export const YourAnswers: React.VFC<{
   title: string
@@ -19,15 +20,11 @@ export const YourAnswers: React.VFC<{
 
   /**
    * shouldDisplay
-   *    Returns  False  when IncomeAvailable is Yes or OAS deferral is Delay
+   *    Returns  False  when IncomeAvailable is Yes
    *    Returns  True   for any other scenario
    */
   function shouldDisplay(input: FieldInput): boolean {
-    const exceptions: String[] = [
-      'incomeAvailable',
-      'partnerIncomeAvailable',
-      'oasDefer',
-    ]
+    const exceptions: String[] = ['incomeAvailable', 'partnerIncomeAvailable']
     return (
       !exceptions.includes(input.key) ||
       (exceptions.includes(input.key) && input.value === 'false')
@@ -82,10 +79,15 @@ export const YourAnswers: React.VFC<{
    * and returns the string that should be displayed in the UI.
    */
   function getDisplayValue(input: FieldInput): string {
+    let deferral: MonthsYears
+    let deferralVal: number
+
     const fieldData: FieldConfig = allFieldData.find(
       (fieldData) => fieldData.key === input.key
     )
+
     const fieldType: FieldType = fieldData.type
+
     switch (fieldType) {
       case FieldType.NUMBER:
         return input.key === 'oasAge'
@@ -93,27 +95,42 @@ export const YourAnswers: React.VFC<{
               tsln._language === 'en' ? '' : 'ans'
             }`
           : input.value
+
       case FieldType.STRING:
         return input.value // no processing needed, display as-is
+
       case FieldType.CURRENCY:
         return numberToStringCurrency(Number(input.value), tsln._language, {
           rounding: 2,
         })
+
       case FieldType.DATE:
         // this will display the DATE fields as a NUMBER - i.e. the Month/Year will display as AGE!
         return String(Math.floor(Number(input.value)))
+
       case FieldType.DROPDOWN:
       case FieldType.DROPDOWN_SEARCHABLE:
         if ('values' in fieldData)
           return fieldData.values.find((value) => value.key === input.value)
             .text
         throw new Error(`values not found for field: ${input.key}`)
+
       case FieldType.RADIO:
         if (fieldData.type === FieldType.RADIO && 'values' in fieldData) {
           return fieldData.values.find((value) => value.key === input.value)
             .shortText
         }
         throw new Error(`values not found for field: ${input.key}`)
+
+      case FieldType.DURATION:
+        deferral = JSON.parse(input.value)
+        deferralVal = deferral?.years * 12 + deferral?.months
+        return deferralVal > 0
+          ? `${
+              tsln.yes
+            } <div>${deferralVal} ${tsln.duration.months.toLowerCase()}<div>`
+          : `${tsln.no}`
+
       default:
         throw new Error(`field type not supported in YourAnswers: ${fieldType}`)
     }

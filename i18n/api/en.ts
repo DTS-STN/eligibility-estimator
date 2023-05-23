@@ -319,7 +319,7 @@ const en: Translations = {
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
     sinceYouAreSixty:
-      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more months.",
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
@@ -355,7 +355,6 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    ifYouDeferYourPension: 'If you defer your pension',
     youCantGetThisBenefit:
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
@@ -414,6 +413,10 @@ const en: Translations = {
     },
   },
   detailWithHeading: {
+    ifYouDeferYourPension: {
+      heading: 'If you defer your pension',
+      text: 'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
+    },
     oasDeferralApplied: {
       heading: 'How deferral affects your payments',
       text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
@@ -482,6 +485,8 @@ const en: Translations = {
   yes: 'Yes',
   no: 'No',
   year: 'year',
+  month: 'month',
+  months: 'months',
   your: 'your income',
   complete: 'complete income information',
 }

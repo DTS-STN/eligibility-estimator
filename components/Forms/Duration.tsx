@@ -2,6 +2,7 @@ import { FC, InputHTMLAttributes, useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { QuestionLabel } from './QuestionLabel'
+import { MonthsYears } from '../../utils/api/definitions/types'
 
 interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -10,11 +11,7 @@ interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   baseOnChange: (newValue: string) => void
   requiredText?: string
   error?: string
-}
-
-interface IDurationInput {
-  months: number
-  years: number
+  age: string
 }
 
 const Duration: FC<DurationProps> = ({
@@ -24,10 +21,22 @@ const Duration: FC<DurationProps> = ({
   baseOnChange,
   requiredText,
   error,
+  age,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
 
+  // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
+  const getSelectOptions = () => {
+    const diff = Number(age) < 71 ? Number(age) - 65 : 4
+    const maxYears = Math.floor(diff)
+    const maxMonths =
+      diff !== maxYears ? Math.round((diff - maxYears) * 12) : 12
+
+    return { years: maxYears, months: maxMonths }
+  }
+
+  // Duration input
   useEffect(() => {
     if (name in sessionStorage) {
       setDurationInput(JSON.parse(sessionStorage.getItem(name)))
@@ -54,7 +63,7 @@ const Duration: FC<DurationProps> = ({
       fieldToSet = 'months'
     }
 
-    const newDuration: IDurationInput = {
+    const newDuration: MonthsYears = {
       ...durationInput,
       [fieldToSet]: Number(e.target.value),
     }
@@ -62,6 +71,7 @@ const Duration: FC<DurationProps> = ({
     setDurationInput(newDuration)
     baseOnChange(JSON.stringify(newDuration))
   }
+
   return (
     <fieldset>
       <legend>
@@ -82,16 +92,17 @@ const Duration: FC<DurationProps> = ({
 
           <select
             id={`${name}-years`}
-            defaultValue={0}
             value={durationInput?.years || 0}
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(11).keys()].map((mv, index) => (
-              <option value={mv} key={`${name}-option-${index}`}>
-                {mv}
-              </option>
-            ))}
+            {[...Array(getSelectOptions()['years'] + 1).keys()].map(
+              (mv, index) => (
+                <option value={mv} key={`${name}-years-option-${index}`}>
+                  {mv}
+                </option>
+              )
+            )}
           </select>
         </div>
 
@@ -102,16 +113,17 @@ const Duration: FC<DurationProps> = ({
 
           <select
             id={`${name}-months`}
-            defaultValue={0}
             value={durationInput?.months || 0}
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(12).keys()].map((mv, index) => (
-              <option value={mv} key={`${name}-option-${index}`}>
-                {mv}
-              </option>
-            ))}
+            {[...Array(getSelectOptions()['months'] + 1).keys()].map(
+              (mv, index) => (
+                <option value={mv} key={`${name}-years-option-${index}`}>
+                  {mv}
+                </option>
+              )
+            )}
           </select>
         </div>
       </div>
