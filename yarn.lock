@@ -3877,6 +3877,7 @@ __metadata:
     react-dom: 17.0.2
     react-number-format: ^4.9.1
     react-select: ^5.2.2
+    react-to-print: ^2.14.12
     react-use: ^17.4.0
     start-server-and-test: ^2.0.0
     string-strip-html: ^9.1.7
@@ -8669,6 +8670,18 @@ __metadata:
   peerDependencies:
     react: ">= 0.14.0"
   checksum: c082b48f30f8ba8d0c55ed1d761910630860077c7ff5793c4c912adcb5760df06436ed0ad62be0de28113aac9ad2af55eccd995f8eee98df53382e4ced2072fb
+  languageName: node
+  linkType: hard
+
+"react-to-print@npm:^2.14.12":
+  version: 2.14.12
+  resolution: "react-to-print@npm:2.14.12"
+  dependencies:
+    prop-types: ^15.8.1
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: d88e93121fc95ae95ca3ad9a8b2bc1b305d6270d1330f0222d4843527a7925182d6f1e96b7a1df0403d2d6820d116c85f4a7c122956fe2dbc81dbbb09970efe2
   languageName: node
   linkType: hard
 

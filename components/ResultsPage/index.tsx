@@ -17,6 +17,7 @@ import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
 import { Translations, getTranslations } from '../../i18n/api'
+import ReactToPrint, { PrintContextConsumer } from 'react-to-print'
 
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
@@ -138,13 +139,19 @@ const ResultsPage: React.VFC<{
   }
 
   listLinks = listLinks.sort(sortListLinks)
+  const componentRef = useRef()
+
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
-      <div className="md:grid md:grid-cols-3 md:gap-12">
-        <div className="col-span-2 row-span-1">
-          <div> {tsln.resultsPage.general} </div>
-
-          <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
+      <div
+        ref={componentRef}
+        className="md:grid md:grid-cols-3 md:gap-12 print-parent"
+      >
+        <div className="col-span-2 row-span-1 print-estimated">
+          <div>
+            <div> {tsln.resultsPage.general} </div>
+            <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
+          </div>
 
           <MayBeEligible resultsEligible={resultsEligible} />
 
@@ -156,10 +163,10 @@ const ResultsPage: React.VFC<{
           )}
         </div>
 
-        <div className="col-span-1 row-span-2">
+        <div className="col-span-1 row-span-2 print-answers">
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
-        <div className="col-span-2 row-span-1">
+        <div className="col-span-2 row-span-1 print-cards">
           <BenefitCards
             results={resultsArray}
             partnerResults={partnerResultsArray}
@@ -169,8 +176,22 @@ const ResultsPage: React.VFC<{
             text={tsln.modifyAnswers}
             id={'EditAnswers'}
             styling="secondary"
-            className="mt-6 justify-center md:w-[fit-content]"
+            className="mt-6 justify-center md:w-[fit-content] print-hide"
             onClick={(e) => router.push('/eligibility')}
+          />
+          <ReactToPrint
+            trigger={() => (
+              <Button
+                text={'Print'}
+                id={'EditAnswers'}
+                styling="secondary"
+                className="mt-6 justify-center md:w-[fit-content] print-hide"
+                onBeforePrint={() => {
+                  console.log('hello')
+                }}
+              />
+            )}
+            content={() => componentRef.current}
           />
         </div>
       </div>

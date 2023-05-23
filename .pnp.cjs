@@ -72,6 +72,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2"],\
             ["react-number-format", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:4.9.1"],\
             ["react-select", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:5.2.2"],\
+            ["react-to-print", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:2.14.12"],\
             ["react-use", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.4.0"],\
             ["start-server-and-test", "npm:2.0.0"],\
             ["string-strip-html", "npm:9.1.7"],\
@@ -5026,6 +5027,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2"],\
             ["react-number-format", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:4.9.1"],\
             ["react-select", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:5.2.2"],\
+            ["react-to-print", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:2.14.12"],\
             ["react-use", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.4.0"],\
             ["start-server-and-test", "npm:2.0.0"],\
             ["string-strip-html", "npm:9.1.7"],\
@@ -10711,6 +10713,33 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "packagePeers": [\
             "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-to-print", [\
+        ["npm:2.14.12", {\
+          "packageLocation": "./.yarn/cache/react-to-print-npm-2.14.12-1bdb38d6f7-d88e93121f.zip/node_modules/react-to-print/",\
+          "packageDependencies": [\
+            ["react-to-print", "npm:2.14.12"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:2.14.12", {\
+          "packageLocation": "./.yarn/__virtual__/react-to-print-virtual-0f814b8917/0/cache/react-to-print-npm-2.14.12-1bdb38d6f7-d88e93121f.zip/node_modules/react-to-print/",\
+          "packageDependencies": [\
+            ["react-to-print", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:2.14.12"],\
+            ["@types/react", "npm:17.0.42"],\
+            ["@types/react-dom", null],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:17.0.2"],\
+            ["react-dom", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:17.0.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
             "react"\
           ],\
           "linkType": "HARD"\
