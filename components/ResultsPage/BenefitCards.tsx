@@ -10,6 +10,8 @@ import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
 import legalValues from '../../utils/api/scrapers/output'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
+import { DeferralTable } from './DeferralTable'
+import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 
 export const BenefitCards: React.VFC<{
   results: BenefitResult[]
@@ -25,6 +27,32 @@ export const BenefitCards: React.VFC<{
     'Old Age Security (OAS) pension',
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
+
+  const receivingOAS: boolean = results[0]?.cardDetail?.meta?.receiveOAS
+
+  /**
+   * Accepts a single string and replaces any {VARIABLES} with the appropriate value.
+   */
+  const replaceTextVariables = (textToProcess: string): string => {
+    const re: RegExp = new RegExp(/{(\w*?)}/g)
+    const matches: IterableIterator<RegExpMatchArray> =
+      textToProcess.matchAll(re)
+    let replaceWith: string
+
+    for (const match of matches) {
+      const key: string = match[1]
+      switch (key) {
+        case 'MY_SERVICE_CANADA':
+          replaceWith = generateLink(apiTsln.links.SCAccount)
+          break
+        default:
+          throw new Error(`no text replacement rule for ${key}`)
+      }
+      textToProcess = textToProcess.replace(`{${key}}`, replaceWith)
+    }
+
+    return textToProcess
+  }
 
   // note that there are some ResultKeys not covered here, like Unavailable, Invalid, More Info
   // TODO: is this a problem?
@@ -52,6 +80,24 @@ export const BenefitCards: React.VFC<{
     return benefitText
   }
 
+  const getDeferralTable = (benefitKey, result): any => {
+    return benefitKey === BenefitKey.oas &&
+      result.eligibility.result === ResultKey.ELIGIBLE &&
+      result.entitlement.result > 0 &&
+      result.cardDetail.meta?.tableData !== null ? (
+      <DeferralTable data={result.cardDetail.meta?.tableData} />
+    ) : null
+  }
+
+  const oasApply = (benefitKey, result) => {
+    return benefitKey === BenefitKey.oas &&
+      result.eligibility.result === ResultKey.ELIGIBLE &&
+      result.entitlement.result > 0 &&
+      result.cardDetail.meta?.tableData !== null
+      ? apiTsln.detail.youCanAply
+      : null
+  }
+
   const getNextStepText = (benefitKey, result): NextStepText => {
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
@@ -61,10 +107,15 @@ export const BenefitCards: React.VFC<{
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent =
-          result.eligibility.reason === ResultReason.INCOME
-            ? tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
-            : tsln.resultsPage.nextStepGis
+
+        if (result.eligibility.reason === ResultReason.INCOME) {
+          nextStepText.nextStepContent =
+            tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
+        } else if (result.entitlement.result > 0 && receivingOAS) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (result.entitlement.result > 0 && !receivingOAS) {
+          nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
+        }
       }
     } else if (benefitKey === BenefitKey.oas) {
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
@@ -76,11 +127,25 @@ export const BenefitCards: React.VFC<{
           }
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.serviceCanadaReviewYourPayment
+        } else if (
+          result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+          result.entitlement.result > 0 &&
+          receivingOAS
+        ) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.applyOnline}</p>`
-        } else if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.applyOnline}</p>`
+        } else if (
+          result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
+          receivingOAS
+        ) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (
+          result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
+          !receivingOAS
+        ) {
           nextStepText.nextStepContent += apiTsln.detail.oas.over70
         } else if (result.entitlement.clawback === 0) {
           nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
@@ -127,6 +192,11 @@ export const BenefitCards: React.VFC<{
           )}</strong>.`
       }
     }
+
+    nextStepText.nextStepContent = replaceTextVariables(
+      nextStepText.nextStepContent
+    )
+
     return nextStepText
   }
 
@@ -165,6 +235,8 @@ export const BenefitCards: React.VFC<{
 
     const nextStepText = getNextStepText(result.benefitKey, result)
 
+    const OASdeferralTable = getDeferralTable(result.benefitKey, result)
+
     return (
       <div key={result.benefitKey}>
         <BenefitCard
@@ -189,6 +261,8 @@ export const BenefitCards: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
+          <div>{OASdeferralTable}</div>
+          <div>{oasApply(result.benefitKey, result)}</div>
         </BenefitCard>
       </div>
     )
