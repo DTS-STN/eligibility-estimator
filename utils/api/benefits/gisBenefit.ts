@@ -303,6 +303,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const ageInOasRange = this.input.age >= 65 && this.input.age < 70
 
     if (
+      !this.partner &&
       this.entitlement.result !== 0 &&
       ageInOasRange &&
       !this.input.receiveOAS
