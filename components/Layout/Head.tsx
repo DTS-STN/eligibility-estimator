@@ -1,3 +1,4 @@
+import { is } from 'cypress/types/bluebird'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import { WebTranslations } from '../../i18n/web'
@@ -17,6 +18,8 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       <meta name="author" content={tsln.meta.author} />
       <meta name="dcterms.creator" content={tsln.meta.author} />
       <meta name="dcterms.title" content={title} />
+      <meta name="description" content={tsln.meta.homeDescription} />
+      <meta name="dcterms.description" content={tsln.meta.homeDescription} />
 
       <meta
         name="dcterms.language"
@@ -28,18 +31,30 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
 
       <link
         rel="canonical"
-        href={`http://ep-be.alpha.servicecanada.ca/${tsln._language}${router.pathname}`}
+        href={
+          isCanadaDotCa
+            ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
+            : `http://ep-be.alpha.servicecanada.ca/${tsln._language}${router.pathname}`
+        }
       />
       <link
         rel="alternate"
         lang="en"
-        href={`shttps://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`}
+        href={
+          isCanadaDotCa
+            ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
+            : `shttps://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+        }
       />
 
       <link
         rel="alternate"
         lang="fr"
-        href={`https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`}
+        href={
+          isCanadaDotCa
+            ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+        }
       />
       <meta name="keywords" content={tsln.meta.homeKeywords} />
       <meta
@@ -53,7 +68,6 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       <meta name="dcterms.modified" title="W3CDTF" content="2023-04-12" />
 
       <meta name="dcterms.spatial" content="Canada" />
-      <meta property="og:title" content={title} />
     </NextHead>
   )
 }

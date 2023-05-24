@@ -18,6 +18,8 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
+  const hostName = window.location.hostname
+  const isCanadaDotCa = hostName.includes('.canada.ca')
 
   useEffect(() => {
     if (adobeAnalyticsUrl) {
@@ -31,17 +33,17 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
-        <meta name="description" content={tsln.meta.homeDescription} />
-        <meta name="dcterms.description" content={tsln.meta.homeDescription} />
-
-        <meta name="dcterms.accessRights" content="2" />
-        <meta name="dcterms.service" content="ESDC-EDSC_DC-CD" />
-
         <meta property="og:title" content={tsln.introPageTitle} />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
-          content={`https://ep-be.alpha.service.canada.ca/${tsln._language}`}
+          content={
+            isCanadaDotCa
+              ? tsln._language === 'en'
+                ? `oas-estimator.service.canada.ca`
+                : `estimateur-sv.service.canada.ca`
+              : `https://ep-be.alpha.service.canada.ca/${tsln._language}`
+          }
         />
         <meta
           property="og:image"
@@ -58,7 +60,16 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           name="twitter:image"
           content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
         />
-        <meta name="twitter:image:alt" content=" " />
+        <meta
+          name="twitter:image:alt"
+          content={
+            isCanadaDotCa
+              ? tsln._language === 'en'
+                ? 'oas-estimator.service.canada.ca'
+                : 'estimateur-sv.service.canada.ca'
+              : ' '
+          }
+        />
         <meta
           name="twitter:description"
           content={tsln.meta.homeShortDescription}
