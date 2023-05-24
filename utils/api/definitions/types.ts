@@ -113,7 +113,7 @@ export interface CardDetail {
   mainText: string
   collapsedText: CardCollapsedText[]
   links: LinkWithAction[]
-  meta: any
+  meta: MetaDataObject
 }
 
 export interface BenefitResult<
