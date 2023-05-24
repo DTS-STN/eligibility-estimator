@@ -9,7 +9,7 @@ export const LinkButton: React.FC<{
   handlePrint: MouseEventHandler
 }> = ({ text, src, alt, handlePrint }) => {
   return (
-    <div className="inline-block">
+    <div className="inline-block print-hide">
       <div className="ml-5 flex items-center justify-center">
         <div className="flex items-center justify-center">
           {src && alt && (
