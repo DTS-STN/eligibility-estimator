@@ -479,6 +479,7 @@ const en: Translations = {
     headingAmount: 'Your monthly payment could be...',
   },
   links,
+  print: 'Print',
   incomeSingle: 'your income',
   incomeCombined: "you and your partner's combined income",
   opensNewWindow: 'opens a new window',

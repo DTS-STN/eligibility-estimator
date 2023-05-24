@@ -128,6 +128,7 @@ export interface Translations {
     headingAmount: string
   }
   links: LinkDefinitions
+  print: string
   incomeSingle: string
   incomeCombined: string
   opensNewWindow: string

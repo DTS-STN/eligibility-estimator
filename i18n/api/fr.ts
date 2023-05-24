@@ -490,6 +490,7 @@ const fr: Translations = {
     headingAmount: 'Vous pourriez recevoir chaque mois...',
   },
   links,
+  print: 'Imprimer',
   incomeSingle: 'votre revenu',
   incomeCombined: 'le revenu combiné de vous et votre conjoint',
   opensNewWindow: 'ouvre une nouvelle fenêtre',

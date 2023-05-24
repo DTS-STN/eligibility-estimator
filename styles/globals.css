@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @media print {
+  body{
+    margin: 25px;
+  }
  .print-hide{
   display: none;
  }

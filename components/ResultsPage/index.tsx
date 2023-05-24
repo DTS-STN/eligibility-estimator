@@ -2,6 +2,7 @@ import { Button } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
+import { LinkButton } from '../LinkButton'
 import { WebTranslations } from '../../i18n/web'
 import { ResultKey } from '../../utils/api/definitions/enums'
 import {
@@ -17,7 +18,7 @@ import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
 import { Translations, getTranslations } from '../../i18n/api'
-import ReactToPrint, { PrintContextConsumer } from 'react-to-print'
+import ReactToPrint, { useReactToPrint } from 'react-to-print'
 
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
@@ -139,7 +140,10 @@ const ResultsPage: React.VFC<{
   }
 
   listLinks = listLinks.sort(sortListLinks)
-  const componentRef = useRef()
+  const componentRef = useRef(null)
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  })
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
@@ -171,25 +175,26 @@ const ResultsPage: React.VFC<{
             results={resultsArray}
             partnerResults={partnerResultsArray}
           />
-
-          <Button
-            text={tsln.modifyAnswers}
-            id={'EditAnswers'}
-            styling="secondary"
-            className="mt-6 justify-center md:w-[fit-content] print-hide"
-            onClick={(e) => router.push('/eligibility')}
-          />
-          <ReactToPrint
-            trigger={() => (
-              <Button
-                text={'Print'}
-                id={'EditAnswers'}
-                styling="secondary"
-                className="mt-6 justify-center md:w-[fit-content] print-hide"
-              />
-            )}
-            content={() => componentRef.current}
-          />
+          <div className="flex items-center">
+            <Button
+              text={tsln.modifyAnswers}
+              id={'EditAnswers'}
+              styling="secondary"
+              className="justify-center md:w-[fit-content] inline-block print-hide"
+              onClick={(e) => router.push('/eligibility')}
+            />
+            <ReactToPrint
+              trigger={() => (
+                <LinkButton
+                  text={apiTsln.print}
+                  src={'print'}
+                  alt={apiTsln.print}
+                  handlePrint={handlePrint}
+                />
+              )}
+              content={() => componentRef.current}
+            />
+          </div>
         </div>
       </div>
     </div>
