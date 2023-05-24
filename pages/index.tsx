@@ -31,14 +31,38 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
-        <meta name="dcterms.title" content={tsln.questionPageTitle} />
-        <meta name="dcterms.language" content={router.locale} />
-        <meta
-          name="dcterms.creator"
-          content="Employment and Social Development Canada/Emploi et Développement social Canada"
-        />
+        <meta name="description" content={tsln.meta.homeDescription} />
+        <meta name="dcterms.description" content={tsln.meta.homeDescription} />
+
         <meta name="dcterms.accessRights" content="2" />
         <meta name="dcterms.service" content="ESDC-EDSC_DC-CD" />
+
+        <meta property="og:title" content={tsln.introPageTitle} />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`https://ep-be.alpha.service.canada.ca/${tsln._language}`}
+        />
+        <meta
+          property="og:image"
+          content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
+        />
+        <meta property="og:image:alt" content=" " />
+        <meta
+          property="og:description"
+          content={tsln.meta.homeShortDescription}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={tsln.introPageTitle} />
+        <meta
+          name="twitter:image"
+          content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
+        />
+        <meta name="twitter:image:alt" content=" " />
+        <meta
+          name="twitter:description"
+          content={tsln.meta.homeShortDescription}
+        />
       </Head>
       <Layout title={tsln.introPageTitle}>
         <div className="mt-18">

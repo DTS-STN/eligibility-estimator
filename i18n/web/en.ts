@@ -116,6 +116,17 @@ const en: WebTranslations = {
   warningText: 'warning',
   category: apiEn.category,
   errorBoxTitle: 'The information could not be submitted because ',
+  meta: {
+    homeDescription:
+      'Find out how much you could receive from the Old Age Security pension, the Guaranteed Income Supplement, the Allowance and the Allowance for the Survivor.',
+    homeShortDescription:
+      'Find out how much you could receive from Canadian Old Age Security benefits.',
+    homeKeywords:
+      'old age pension, old age security, calculating GIS, OAS amount, OAS payments, estimate OAS, benefits, personal finance, widow’s pension, retirement planning',
+    author: 'Service Canada',
+    homeSubject:
+      'EC Economics and Industry;Allowances;Benefits;Survivor benefits;Finance;Personal finance;Income;Pensions;Public pensions,PE Persons;Adults;Seniors,So Society and Culture;Old age',
+  },
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
