@@ -625,6 +625,17 @@ export class BenefitHandler {
               allResults.partner.oas
             )
 
+            // adds partner calculation when InvSeparated = true
+            if (
+              partnerGis.entitlement?.result > 0 &&
+              this.input.partner?.partnerBenefitStatus.value ===
+                PartnerBenefitStatus.OAS_GIS
+            ) {
+              partnerGis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading.partnerEligible
+              )
+            }
+
             this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
             this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
           }
@@ -847,12 +858,11 @@ export class BenefitHandler {
             ) {
               isPartnerGisAvailable = false
             } else {
-              partnerGis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
+              allResults.partner.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading.partnerEligible
+              )
 
               if (
                 this.input.partner.invSeparated &&
@@ -946,28 +956,30 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            if (
-              allResults.client.gis.eligibility.reason === ResultReason.NONE
-            ) {
-              allResults.client.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
-            }
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
+
           if (
-            this.input.partner.invSeparated &&
+            (allResults.client.gis.eligibility.reason === ResultReason.NONE ||
+              allResults.client.gis.eligibility.reason ===
+                ResultReason.INCOME) &&
             clientGis.entitlement.result > 0
           ) {
-            allResults.client.gis.eligibility.detail,
-              (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
             allResults.client.gis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
                 .calculatedBasedOnIndividualIncome
             )
           }
+
+          if (
+            allResults.client.gis.eligibility.reason === ResultReason.INCOME &&
+            clientGis.entitlement.result > 0
+          ) {
+            allResults.client.gis.eligibility.detail,
+              (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+          }
+
           consoleDev(
             '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- end'
           )
@@ -980,8 +992,11 @@ export class BenefitHandler {
           )
 
           const maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
-          const noOAS = allResults.client.oas
-          noOAS.entitlement.result = 0
+
+          // T3 was originally coded with the client.oas and entitlement=0
+          //  but it returned an incorrect GIS amount and OAS=0
+          const noOAS = allResults.partner.oas
+
           const partnerGisResultT3 = new EntitlementFormula(
             this.input.partner.income.relevant,
             maritalStatus,
@@ -1010,13 +1025,17 @@ export class BenefitHandler {
             allResults.partner.gis.entitlement.result = partnerGisResultT3
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           } else {
-            allResults.partner.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           }
+
+          // add the amount calculated to the card.
+          if (allResults.partner.gis.entitlement.result > 0) {
+            allResults.partner.gis.cardDetail.collapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+
           consoleDev(
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )

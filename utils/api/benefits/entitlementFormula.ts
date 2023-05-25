@@ -113,19 +113,9 @@ export class EntitlementFormula {
       const oasCoverageAmount =
         legalValues.oas.amount - this.oasResult.entitlement.result65To74
 
-      // GIS Partial pensioner < 40 yrs in Canada and 75+ yrs.
+      // GIS Partial pensioner < 40 yrs in Canada and 75+ yrs, gets 10% more.
       const superGIS = this.age > 75 ? oasCoverageAmount * 0.1 : 0
 
-      console.log(
-        ' getE1  preOasAmount =',
-        preOasAmount,
-        'oasCoverageAmount ',
-        oasCoverageAmount,
-        ' superGIS = ',
-        superGIS,
-        ' total = ',
-        roundToTwo(preOasAmount + oasCoverageAmount + superGIS)
-      )
       // Always return 0 when result is negative
       return preOasAmount + oasCoverageAmount > 0
         ? roundToTwo(preOasAmount + oasCoverageAmount + superGIS)
