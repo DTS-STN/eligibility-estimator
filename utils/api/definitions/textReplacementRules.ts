@@ -30,17 +30,17 @@ export const textReplacementRules: TextReplacementRules = {
   CURRENT_AGE: (handler) => {
     const current_age =
       handler.benefitResults.client.oas?.cardDetail?.meta?.currentAge
-    return `<strong>${current_age}</strong>`
+    return `${current_age}`
   },
   WAIT_MONTHS: (handler) => {
     const months =
       handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
-    return `<strong>${months}</strong>`
+    return `${months}`
   },
   DELAY_MONTHS: (handler) => {
     const months =
       handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
-    return `<strong>${months}</strong>`
+    return `${months}`
   },
   MONTH_MONTHS: (handler) => {
     const months =
