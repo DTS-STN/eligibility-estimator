@@ -43,7 +43,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         href={
           isCanadaDotCa
             ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
-            : `shttps://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
         }
       />
 
