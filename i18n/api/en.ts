@@ -41,7 +41,7 @@ const en: Translations = {
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.AGE]: 'When were you born?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Do you already receive the Old Age Security pension?',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -67,7 +67,7 @@ const en: Translations = {
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
       "What is your partner's annual net income (income after taxes) in Canadian dollars?",
-    [FieldKey.PARTNER_AGE]: 'In what month and year was your partner born?',
+    [FieldKey.PARTNER_AGE]: 'When was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
