@@ -7,10 +7,12 @@ import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
+import Age from './Age'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
+  age: string
   label: string
   helpText?: string
   baseOnChange: (newValue: string) => void
@@ -25,6 +27,7 @@ interface IAgeDateInput {
 
 export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   name,
+  age,
   label,
   helpText,
   baseOnChange,
@@ -85,19 +88,28 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
         />
       </legend>
       {dateInput && (
-        <FormDatePicker
-          id={`enter-${name}`}
-          month={dateInput.month}
-          year={dateInput.year}
-          hasDay={false}
-          onMonthChange={dateOnChange}
-          onYearChange={debounce(dateOnChange, 500)}
-          lang={tsln._language}
-          yearId={`${name}-birth-year`}
-          monthId={`${name}-birth-month`}
-          hasError={!!error}
-          formErrorProps={{ id: 'formErrorId', errorMessage: error }}
-        />
+        <div className="flex flex-row flex-wrap gap-y-4">
+          <div className="flex-auto">
+            <FormDatePicker
+              id={`enter-${name}`}
+              month={dateInput.month}
+              year={dateInput.year}
+              hasDay={false}
+              onMonthChange={dateOnChange}
+              onYearChange={debounce(dateOnChange, 500)}
+              lang={tsln._language}
+              yearId={`${name}-birth-year`}
+              monthId={`${name}-birth-month`}
+              hasError={!!error}
+              formErrorProps={{ id: 'formErrorId', errorMessage: error }}
+            />
+          </div>
+          {age && age !== '0' && !error && (
+            <div className="flex-auto m-auto">
+              <Age age={age} name={name} />
+            </div>
+          )}
+        </div>
       )}
     </fieldset>
   )
