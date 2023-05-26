@@ -314,21 +314,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       )
     }
 
-    if (
-      this.partner &&
-      this.input.income.provided &&
-      this.entitlement.result !== 0
-    ) {
-      if (this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE) {
-        console.log('point #2')
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
-        )
-      } else {
-        console.log('point #3')
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligible
-        )
+    if (this.partner) {
+      if (this.input.income.provided && this.entitlement.result !== 0) {
+        if (
+          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
+        ) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+          )
+        } else {
+          if (!this.input.invSeparated) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+        }
       }
     }
 
