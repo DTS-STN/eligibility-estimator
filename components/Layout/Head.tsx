@@ -10,6 +10,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
   const tsln = useTranslation<WebTranslations>()
   const hostName = window.location.hostname
   const isCanadaDotCa = hostName.includes('.canada.ca')
+  const altLang = tsln._language === 'en' ? 'fr' : 'en'
 
   return (
     <NextHead>
@@ -39,21 +40,21 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       />
       <link
         rel="alternate"
-        lang="en"
+        lang={altLang}
         href={
           isCanadaDotCa
-            ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
-            : `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+            ? `oas-estimator.service.canada.ca/${altLang}${router.pathname}`
+            : `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
         }
       />
 
       <link
         rel="alternate"
-        lang="fr"
+        lang={altLang}
         href={
           isCanadaDotCa
-            ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
-            : `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+            ? `oas-estimator.service.canada.ca/${altLang}${router.pathname}`
+            : `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
         }
       />
       <meta name="keywords" content={tsln.meta.homeKeywords} />
