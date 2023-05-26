@@ -218,10 +218,9 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
 
-    // Leave in case needed to revert
-    // if (this.input.client.oasDefer) {
-    //   requiredFields.push(FieldKey.OAS_AGE)
-    // }
+    if (this.input.client.oasDefer) {
+      requiredFields.push(FieldKey.OAS_AGE)
+    }
 
     if (this.input.client.income.clientAvailable) {
       requiredFields.push(FieldKey.INCOME)
