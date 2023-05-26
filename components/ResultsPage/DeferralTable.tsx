@@ -12,12 +12,10 @@ export const DeferralTable: React.VFC<{ data: TableData[] }> = ({ data }) => {
   return (
     <table
       aria-label={`${apiTsln.oasDeferralTable.title} Table`}
+      aria-describedby={`${apiTsln.oasDeferralTable.title} desc`}
       className="mt-8 mb-8 text-center w-full md:w-7/12 table-fixed"
     >
-      <caption
-        aria-label={`${apiTsln.oasDeferralTable.title} Table`}
-        className="mb-3 font-bold"
-      >
+      <caption className="mb-3 font-bold">
         {apiTsln.oasDeferralTable.title}
       </caption>
       <thead>
