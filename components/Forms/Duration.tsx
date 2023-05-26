@@ -14,6 +14,11 @@ interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   age: string
 }
 
+// Returns num of months for select option
+const getMaxMonths = (age, maxYears) => {
+  return age < 70 ? Math.round((Number(age) - 65 - maxYears) * 12) : 0
+}
+
 const Duration: FC<DurationProps> = ({
   name,
   label,
@@ -25,16 +30,21 @@ const Duration: FC<DurationProps> = ({
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
+  const diff = Number(age) <= 70 ? Number(age) - 65 : 5
+  const maxYears = Math.floor(diff)
 
   // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
-  const getSelectOptions = () => {
-    const diff = Number(age) < 71 ? Number(age) - 65 : 4
-    const maxYears = Math.floor(diff)
-    const maxMonths =
-      diff !== maxYears ? Math.round((diff - maxYears) * 12) : 12
+  const getSelectOptions = (maxMonths = 11) => {
+    if (durationInput?.years === maxYears) {
+      const maxMonths = getMaxMonths(age, maxYears)
+      if (durationInput?.months > maxMonths) {
+        setDurationInput({ ...durationInput, months: 0 })
+      }
+    }
 
     return { years: maxYears, months: maxMonths }
   }
+  const [selectOptions, setSelectOptions] = useState(getSelectOptions())
 
   // Duration input
   useEffect(() => {
@@ -43,11 +53,28 @@ const Duration: FC<DurationProps> = ({
     } else {
       setDurationInput({ months: 0, years: 0 })
     }
+
+    return () => {
+      sessionStorage.setItem(name, JSON.stringify({ months: 0, years: 0 }))
+    }
   }, [])
 
   useEffect(() => {
+    setSelectOptions(getSelectOptions())
+    if (durationInput?.years === maxYears) {
+      const maxMonths = getMaxMonths(age, maxYears)
+      setSelectOptions(getSelectOptions(maxMonths))
+      if (durationInput?.months > maxMonths) {
+        setDurationInput({ ...durationInput, months: 0 })
+      }
+    }
+
+    if (durationInput?.years > maxYears) {
+      setDurationInput({ months: 0, years: 0 })
+    }
+
     sessionStorage.setItem(name, JSON.stringify(durationInput))
-  }, [durationInput])
+  }, [age, durationInput])
 
   const validationClass = !!error
     ? 'ds-border-specific-red-red50b focus:ds-border-multi-blue-blue60f focus:ds-shadow-text-input'
@@ -96,13 +123,11 @@ const Duration: FC<DurationProps> = ({
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(getSelectOptions()['years'] + 1).keys()].map(
-              (mv, index) => (
-                <option value={mv} key={`${name}-years-option-${index}`}>
-                  {mv}
-                </option>
-              )
-            )}
+            {[...Array(selectOptions['years'] + 1).keys()].map((mv, index) => (
+              <option value={mv} key={`${name}-years-option-${index}`}>
+                {mv}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -117,13 +142,11 @@ const Duration: FC<DurationProps> = ({
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(getSelectOptions()['months'] + 1).keys()].map(
-              (mv, index) => (
-                <option value={mv} key={`${name}-years-option-${index}`}>
-                  {mv}
-                </option>
-              )
-            )}
+            {[...Array(selectOptions['months'] + 1).keys()].map((mv, index) => (
+              <option value={mv} key={`${name}-years-option-${index}`}>
+                {mv}
+              </option>
+            ))}
           </select>
         </div>
       </div>

@@ -209,7 +209,7 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS) {
+    if (this.input.client.receiveOAS && clientAge > 65) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 
@@ -217,9 +217,11 @@ export class BenefitHandler {
     if (this.input.client.livedOnlyInCanada === false) {
       requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
     }
+
     if (this.input.client.oasDefer) {
       requiredFields.push(FieldKey.OAS_AGE)
     }
+
     if (this.input.client.income.clientAvailable) {
       requiredFields.push(FieldKey.INCOME)
     }
