@@ -18,6 +18,8 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
+  const hostName = window.location.hostname
+  const isCanadaDotCa = hostName.includes('.canada.ca')
 
   useEffect(() => {
     if (adobeAnalyticsUrl) {
@@ -31,14 +33,47 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
-        <meta name="dcterms.title" content={tsln.questionPageTitle} />
-        <meta name="dcterms.language" content={router.locale} />
+        <meta property="og:title" content={tsln.introPageTitle} />
+        <meta property="og:type" content="website" />
         <meta
-          name="dcterms.creator"
-          content="Employment and Social Development Canada/Emploi et Développement social Canada"
+          property="og:url"
+          content={
+            isCanadaDotCa
+              ? tsln._language === 'en'
+                ? `oas-estimator.service.canada.ca`
+                : `estimateur-sv.service.canada.ca`
+              : `https://ep-be.alpha.service.canada.ca/${tsln._language}`
+          }
         />
-        <meta name="dcterms.accessRights" content="2" />
-        <meta name="dcterms.service" content="ESDC-EDSC_DC-CD" />
+        <meta
+          property="og:image"
+          content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
+        />
+        <meta property="og:image:alt" content=" " />
+        <meta
+          property="og:description"
+          content={tsln.meta.homeShortDescription}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={tsln.introPageTitle} />
+        <meta
+          name="twitter:image"
+          content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
+        />
+        <meta
+          name="twitter:image:alt"
+          content={
+            isCanadaDotCa
+              ? tsln._language === 'en'
+                ? 'oas-estimator.service.canada.ca'
+                : 'estimateur-sv.service.canada.ca'
+              : ' '
+          }
+        />
+        <meta
+          name="twitter:description"
+          content={tsln.meta.homeShortDescription}
+        />
       </Head>
       <Layout title={tsln.introPageTitle}>
         <div className="mt-18">

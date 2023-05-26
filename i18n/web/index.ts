@@ -93,6 +93,14 @@ export type WebTranslations = {
   category: Translations['category']
   errorBoxTitle: string
 
+  // meta tags
+  meta: {
+    homeDescription: string
+    homeShortDescription: string
+    homeKeywords: string
+    author: string
+    homeSubject: string
+  }
   //results page
   resultsPage: {
     header: string
