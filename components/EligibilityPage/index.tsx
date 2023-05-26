@@ -147,7 +147,7 @@ export const EligibilityPage: React.VFC = ({}) => {
 
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(field, errorsVisible)
-      console.log('field', field)
+
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
