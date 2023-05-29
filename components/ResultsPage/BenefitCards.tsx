@@ -113,7 +113,10 @@ export const BenefitCards: React.VFC<{
             tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
         } else if (result.entitlement.result > 0 && receivingOAS) {
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
-        } else if (result.entitlement.result > 0 && !receivingOAS) {
+        } else if (
+          (result.entitlement.result > 0 && !receivingOAS) ||
+          (result.entitlement.result <= 0 && receivingOAS)
+        ) {
           nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
         }
       }
