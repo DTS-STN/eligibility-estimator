@@ -107,7 +107,7 @@ export const BenefitCards: React.VFC<{
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        console.log('this', result.entitlement.result)
+
         if (result.eligibility.reason === ResultReason.INCOME) {
           nextStepText.nextStepContent =
             tsln.resultsPage.nextStepGis + apiTsln.detail.gis.ifYouApply
