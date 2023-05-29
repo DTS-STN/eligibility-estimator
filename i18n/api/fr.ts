@@ -43,7 +43,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.AGE]: 'Quel est votre mois de naissance?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -69,8 +69,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
       'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
-    [FieldKey.PARTNER_AGE]:
-      'En quel mois et quelle année votre conjoint est-il né?',
+    [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Votre conjoint a-t-il un statut légal au Canada?',
