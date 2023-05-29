@@ -618,9 +618,20 @@ export class BenefitHandler {
               this.translations.detailWithHeading
                 .calculatedBasedOnIndividualIncome
             )
-
+            console.log(
+              'after 1',
+              this.rawInput.receiveOAS,
+              this.input.partner.receiveOAS,
+              this.input.partner.oasDeferDuration
+            )
             const partnerSingleInput = this.getSinglePartnerInput()
-
+            console.log(
+              'after 2',
+              this.rawInput.receiveOAS,
+              this.input.partner.receiveOAS,
+              this.input.partner.oasDeferDuration,
+              partnerSingleInput.receiveOAS
+            )
             partnerGis = new GisBenefit(
               partnerSingleInput,
               this.translations,
@@ -1142,7 +1153,7 @@ export class BenefitHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
-      receiveOAS: false, // dummy data
+      receiveOAS: this.rawInput.receiveOAS,
       oasDefer: false, // pass dummy data because we will never use this anyway
       oasDeferDuration: JSON.stringify({ months: 0, years: 0 }),
       oasAge: 65, // pass dummy data because we will never use this anyway
