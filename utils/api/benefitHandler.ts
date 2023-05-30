@@ -1303,7 +1303,7 @@ export class BenefitHandler {
       ageMonths = 12 + (currentMonth - birthMonth)
     }
 
-    return ageYears + Number((ageMonths / 12).toFixed(1))
+    return ageYears + Number((ageMonths / 12).toFixed(2))
   }
 
   /**
