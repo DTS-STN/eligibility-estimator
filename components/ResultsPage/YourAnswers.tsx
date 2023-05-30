@@ -125,12 +125,15 @@ export const YourAnswers: React.VFC<{
       case FieldType.DURATION:
         deferral = JSON.parse(input.value)
         deferralVal = deferral?.years * 12 + deferral?.months
-        return deferralVal > 0
+        return deferralVal === 0
+          ? `${tsln.no}`
+          : deferralVal > 1
           ? `${
               tsln.yes
             } <div>${deferralVal} ${tsln.duration.months.toLowerCase()}<div>`
-          : `${tsln.no}`
-
+          : `${
+              tsln.yes
+            } <div>${deferralVal} ${tsln.duration.month.toLowerCase()}</div>`
       default:
         throw new Error(`field type not supported in YourAnswers: ${fieldType}`)
     }

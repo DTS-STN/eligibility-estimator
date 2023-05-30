@@ -270,6 +270,7 @@ const en: WebTranslations = {
 
   duration: {
     months: 'Months',
+    month: 'Month',
     years: 'Years',
   },
 }

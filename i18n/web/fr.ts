@@ -272,6 +272,7 @@ const fr: WebTranslations = {
 
   duration: {
     months: 'Mois',
+    month: 'Mois',
     years: 'Années',
   },
 }
