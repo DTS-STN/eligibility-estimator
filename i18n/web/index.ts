@@ -169,6 +169,7 @@ export type WebTranslations = {
   // duration component
   duration: {
     months: string
+    month: string
     years: string
   }
 }
