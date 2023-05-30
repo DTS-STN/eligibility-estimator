@@ -70,9 +70,12 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
       [fieldToSet]: Number(e.target.value.slice(0, limit)),
     }
     setDateInput(newDate)
-    baseOnChange(
-      String(BenefitHandler.calculateAge(newDate.month, newDate.year))
-    )
+
+    const ageObj = {
+      value: String(BenefitHandler.calculateAge(newDate.month, newDate.year)),
+      date: newDate,
+    }
+    baseOnChange(JSON.stringify(ageObj))
   }
 
   return (

@@ -407,7 +407,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   protected getCardText(): string {
-    console.log('this.input inside getCardText', this.input)
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.type === EntitlementResultType.NONE

@@ -68,6 +68,8 @@ export const EligibilityPage: React.VFC = ({}) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
+  const [ageDate, setAgeDate] = useState({ month: 1, year: undefined })
+
   const [nextForStepClicked, setNextForStepClicked]: [
     NextClickedObject,
     (value: NextClickedObject) => void
@@ -119,14 +121,24 @@ export const EligibilityPage: React.VFC = ({}) => {
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
+    let newVal = newValue
     const key: String = field.config.key
+
+    // Required to pass on to the Duration component that needs the exact birth month, not just age as float
+    if (key === 'age') {
+      newVal = JSON.parse(newValue).value
+      const ageDate = JSON.parse(newValue).date
+      setAgeDate(ageDate)
+    }
+
     const step = Object.keys(keyStepMap).find((step) =>
       keyStepMap[step].keys.includes(key)
     )
 
-    field.value = newValue
-    inputHelper.setInputByKey(field.key, newValue)
+    field.value = newVal
+    inputHelper.setInputByKey(field.key, newVal)
     form.update(inputHelper)
+
     setCardsValid(getStepValidity(keyStepMap, form, inputs))
 
     if (nextForStepClicked[step]) {
@@ -147,7 +159,6 @@ export const EligibilityPage: React.VFC = ({}) => {
 
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(field, errorsVisible)
-
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -166,6 +177,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               <Duration
                 name={field.key}
                 age={inputs.age}
+                ageDate={ageDate}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}

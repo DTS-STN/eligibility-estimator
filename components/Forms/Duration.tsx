@@ -12,11 +12,7 @@ interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   requiredText?: string
   error?: string
   age: string
-}
-
-// Returns num of months for select option
-const getMaxMonths = (age, maxYears) => {
-  return age < 70 ? Math.round((Number(age) - 65 - maxYears) * 12) : 0
+  ageDate: { month: number; year: number }
 }
 
 const Duration: FC<DurationProps> = ({
@@ -27,16 +23,30 @@ const Duration: FC<DurationProps> = ({
   requiredText,
   error,
   age,
+  ageDate,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
+
   const diff = Number(age) <= 70 ? Number(age) - 65 : 5
   const maxYears = Math.floor(diff)
+
+  // Returns num of months for select option
+  const getMaxMonths = (age) => {
+    const birthMonth = ageDate.month
+    const today = new Date()
+    const month = today.getMonth() + 1
+
+    let monthsDiff = month - birthMonth
+    if (monthsDiff < 0) monthsDiff += 12
+
+    return age < 70 ? monthsDiff : 0
+  }
 
   // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
   const getSelectOptions = (maxMonths = 11) => {
     if (durationInput?.years === maxYears) {
-      const maxMonths = getMaxMonths(age, maxYears)
+      const maxMonths = getMaxMonths(age)
       if (durationInput?.months > maxMonths) {
         setDurationInput({ ...durationInput, months: 0 })
       }
@@ -53,16 +63,12 @@ const Duration: FC<DurationProps> = ({
     } else {
       setDurationInput({ months: 0, years: 0 })
     }
-
-    return () => {
-      sessionStorage.setItem(name, JSON.stringify({ months: 0, years: 0 }))
-    }
   }, [])
 
   useEffect(() => {
     setSelectOptions(getSelectOptions())
     if (durationInput?.years === maxYears) {
-      const maxMonths = getMaxMonths(age, maxYears)
+      const maxMonths = getMaxMonths(age)
       setSelectOptions(getSelectOptions(maxMonths))
       if (durationInput?.months > maxMonths) {
         setDurationInput({ ...durationInput, months: 0 })
@@ -74,7 +80,7 @@ const Duration: FC<DurationProps> = ({
     }
 
     sessionStorage.setItem(name, JSON.stringify(durationInput))
-  }, [age, durationInput])
+  }, [age, durationInput, ageDate])
 
   const validationClass = !!error
     ? 'ds-border-specific-red-red50b focus:ds-border-multi-blue-blue60f focus:ds-shadow-text-input'

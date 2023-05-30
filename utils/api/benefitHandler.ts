@@ -1317,7 +1317,6 @@ export class BenefitHandler {
     const fieldDataList = fields
       .sort(this.sortFields)
       .map((x) => fieldDefinitions[x])
-
     // applies translations
     fieldDataList.map((fieldData) => {
       // translate category
