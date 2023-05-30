@@ -8,6 +8,7 @@ import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
 import Age from './Age'
+import { getMinBirthYear } from '../../utils/api/definitions/schemas'
 
 export interface MonthAndYearProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -36,6 +37,12 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [dateInput, setDateInput] = useState(null)
+  const ageValid =
+    age &&
+    age !== '0' &&
+    !error &&
+    Number(age) >= 18 &&
+    Number(age) <= getMinBirthYear()
 
   useEffect(() => {
     if (`dateInput-${name}` in sessionStorage) {
@@ -104,7 +111,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
               formErrorProps={{ id: 'formErrorId', errorMessage: error }}
             />
           </div>
-          {age && age !== '0' && !error && (
+          {ageValid && (
             <div className="flex-auto m-auto">
               <Age age={age} name={name} />
             </div>
