@@ -630,8 +630,10 @@ export class BenefitHandler {
             // adds partner calculation when InvSeparated = true
             if (
               partnerGis.entitlement?.result > 0 &&
-              this.input.partner?.partnerBenefitStatus.value ===
-                PartnerBenefitStatus.OAS_GIS
+              (this.input.partner?.partnerBenefitStatus.value ===
+                PartnerBenefitStatus.OAS_GIS ||
+                this.input.partner?.partnerBenefitStatus.value ===
+                  PartnerBenefitStatus.HELP_ME)
             ) {
               partnerGis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading.partnerEligible
@@ -966,7 +968,8 @@ export class BenefitHandler {
             (allResults.client.gis.eligibility.reason === ResultReason.NONE ||
               allResults.client.gis.eligibility.reason ===
                 ResultReason.INCOME) &&
-            clientGis.entitlement.result > 0
+            clientGis.entitlement.result > 0 &&
+            this.rawInput.partnerLegalStatus === LegalStatus.YES
           ) {
             allResults.client.gis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
