@@ -63,10 +63,6 @@ const Duration: FC<DurationProps> = ({
     } else {
       setDurationInput({ months: 0, years: 0 })
     }
-
-    return () => {
-      sessionStorage.setItem(name, JSON.stringify({ months: 0, years: 0 }))
-    }
   }, [])
 
   useEffect(() => {

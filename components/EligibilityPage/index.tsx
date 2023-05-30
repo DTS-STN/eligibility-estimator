@@ -68,7 +68,7 @@ export const EligibilityPage: React.VFC = ({}) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
-  const [ageDate, setAgeDate] = useState(null)
+  const [ageDate, setAgeDate] = useState({ month: 1, year: undefined })
 
   const [nextForStepClicked, setNextForStepClicked]: [
     NextClickedObject,

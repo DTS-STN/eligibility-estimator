@@ -308,7 +308,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       ageInOasRange &&
       !this.input.receiveOAS
     ) {
-      console.log('point #1')
       cardCollapsedText.push(
         this.translations.detailWithHeading.ifYouDeferYourPension
       )
