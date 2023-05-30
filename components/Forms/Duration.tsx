@@ -3,7 +3,6 @@ import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { QuestionLabel } from './QuestionLabel'
 import { MonthsYears } from '../../utils/api/definitions/types'
-import { useSessionStorage } from 'react-use'
 
 interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
