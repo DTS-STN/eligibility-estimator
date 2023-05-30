@@ -36,10 +36,10 @@ const fr: TooltipTranslations = {
   [FieldKey.LEGAL_STATUS]: {
     heading: apiFr.category.legal,
     moreinfo: 'Que signifie avoir un statut légal?',
-    text: "<p style='padding-bottom: 12px;'> \
+    text: "<p style='padding-bottom: 8px;'> \
             Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
           </p> \
-          <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
             <li>résident temporaire;</li> \
             <li>résident permanent (immigrant reçu);</li> \
@@ -51,10 +51,10 @@ const fr: TooltipTranslations = {
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     heading: apiFr.category.legal,
     moreinfo: 'Que signifie avoir un statut légal?',
-    text: "<p style='padding-bottom: 12px;'> \
+    text: "<p style='padding-bottom: 8px;'> \
             Avoir un statut légal signifie que votre conjoint est autorisé à entrer et à rester au Canada à titre de : \
           </p> \
-          <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
             <li>résident temporaire;</li> \
             <li>résident permanent (immigrant reçu);</li> \
@@ -66,12 +66,32 @@ const fr: TooltipTranslations = {
   [FieldKey.INCOME]: {
     heading: apiFr.category.income,
     moreinfo: 'Où puis-je trouver mon revenu annuel?',
-    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">Vous trouverez votre revenu net à la ligne&nbsp;23600 de votre déclaration de revenus (T1).</div><div style="padding-top:8px;">Retirez de ce montant :</div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">vos prestations de la Sécurité de la vieillesse;</li><li style="padding-top: 10px;">les premiers&nbsp;5&nbsp;000&nbsp;$ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et&nbsp;50&nbsp;% des prochains&nbsp;10&nbsp;000&nbsp;$.</li></ul></div>',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+              Vous trouverez votre revenu net à la ligne&nbsp;23600 de votre déclaration de revenus (T1). \
+            </p> \
+            <p style='padding-bottom: 8px;'>Retirez de ce montant&nbsp;:</p> \
+            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+              <li>vos prestations de la Sécurité de la vieillesse;</li> \
+              <li>les premiers&nbsp;5&nbsp;000&nbsp;$ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et&nbsp;50&nbsp;% des prochains&nbsp;10&nbsp;000&nbsp;$.</li> \
+            </ul> \
+          </div> \
+          ",
   },
   [FieldKey.PARTNER_INCOME]: {
     heading: apiFr.category.income,
     moreinfo: 'Où puis-je trouver le revenu annuel de mon conjoint?',
-    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">Le revenu net de votre conjoint se trouve à la ligne&nbsp;23600 de sa déclaration de revenus (T1)..</div><div style="padding-top:8px;">Retirez de ce montant :</div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">vos prestations de la Sécurité de la vieillesse;</li><li style="padding-top: 10px;">les premiers&nbsp;5&nbsp;000&nbsp;$ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et&nbsp;50&nbsp;% des prochains&nbsp;10&nbsp;000&nbsp;$.</li></ul></div>',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+              Le revenu net de votre conjoint se trouve à la ligne&nbsp;23600 de sa déclaration de revenus (T1). \
+            </p> \
+            <p style='padding-bottom: 8px;'>Retirez de ce montant&nbsp;:</p> \
+            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+              <li>vos prestations de la Sécurité de la vieillesse;</li> \
+              <li>les premiers&nbsp;5&nbsp;000&nbsp;$ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et&nbsp;50&nbsp;% des prochains&nbsp;10&nbsp;000&nbsp;$.</li> \
+            </ul> \
+          </div> \
+          ",
   },
 }
 
