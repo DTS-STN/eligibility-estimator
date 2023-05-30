@@ -268,4 +268,9 @@
       background-color: #fff;
     }
   }
+
+  #age-birth-year,
+  #partnerAge-birth-year {
+    width: 80px;
+  }
 }

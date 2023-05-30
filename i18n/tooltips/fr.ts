@@ -87,7 +87,7 @@ const fr: TooltipTranslations = {
             </p> \
             <p style='padding-bottom: 8px;'>Retirez de ce montant&nbsp;:</p> \
             <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
-              <li>vos prestations de la Sécurité de la vieillesse;</li> \
+              <li>toute prestations de la Sécurité de la vieillesse;</li> \
               <li>les premiers&nbsp;5&nbsp;000&nbsp;$ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et&nbsp;50&nbsp;% des prochains&nbsp;10&nbsp;000&nbsp;$.</li> \
             </ul> \
           </div> \

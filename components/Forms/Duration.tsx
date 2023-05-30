@@ -2,6 +2,7 @@ import { FC, InputHTMLAttributes, useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { QuestionLabel } from './QuestionLabel'
+import { MonthsYears } from '../../utils/api/definitions/types'
 
 interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -10,11 +11,12 @@ interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   baseOnChange: (newValue: string) => void
   requiredText?: string
   error?: string
+  age: string
 }
 
-interface IDurationInput {
-  months: number
-  years: number
+// Returns num of months for select option
+const getMaxMonths = (age, maxYears) => {
+  return age < 70 ? Math.round((Number(age) - 65 - maxYears) * 12) : 0
 }
 
 const Duration: FC<DurationProps> = ({
@@ -24,21 +26,55 @@ const Duration: FC<DurationProps> = ({
   baseOnChange,
   requiredText,
   error,
+  age,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
+  const diff = Number(age) <= 70 ? Number(age) - 65 : 5
+  const maxYears = Math.floor(diff)
 
+  // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
+  const getSelectOptions = (maxMonths = 11) => {
+    if (durationInput?.years === maxYears) {
+      const maxMonths = getMaxMonths(age, maxYears)
+      if (durationInput?.months > maxMonths) {
+        setDurationInput({ ...durationInput, months: 0 })
+      }
+    }
+
+    return { years: maxYears, months: maxMonths }
+  }
+  const [selectOptions, setSelectOptions] = useState(getSelectOptions())
+
+  // Duration input
   useEffect(() => {
     if (name in sessionStorage) {
       setDurationInput(JSON.parse(sessionStorage.getItem(name)))
     } else {
       setDurationInput({ months: 0, years: 0 })
     }
+
+    return () => {
+      sessionStorage.setItem(name, JSON.stringify({ months: 0, years: 0 }))
+    }
   }, [])
 
   useEffect(() => {
+    setSelectOptions(getSelectOptions())
+    if (durationInput?.years === maxYears) {
+      const maxMonths = getMaxMonths(age, maxYears)
+      setSelectOptions(getSelectOptions(maxMonths))
+      if (durationInput?.months > maxMonths) {
+        setDurationInput({ ...durationInput, months: 0 })
+      }
+    }
+
+    if (durationInput?.years > maxYears) {
+      setDurationInput({ months: 0, years: 0 })
+    }
+
     sessionStorage.setItem(name, JSON.stringify(durationInput))
-  }, [durationInput])
+  }, [age, durationInput])
 
   const validationClass = !!error
     ? 'ds-border-specific-red-red50b focus:ds-border-multi-blue-blue60f focus:ds-shadow-text-input'
@@ -54,7 +90,7 @@ const Duration: FC<DurationProps> = ({
       fieldToSet = 'months'
     }
 
-    const newDuration: IDurationInput = {
+    const newDuration: MonthsYears = {
       ...durationInput,
       [fieldToSet]: Number(e.target.value),
     }
@@ -62,6 +98,7 @@ const Duration: FC<DurationProps> = ({
     setDurationInput(newDuration)
     baseOnChange(JSON.stringify(newDuration))
   }
+
   return (
     <fieldset>
       <legend>
@@ -82,13 +119,12 @@ const Duration: FC<DurationProps> = ({
 
           <select
             id={`${name}-years`}
-            defaultValue={0}
             value={durationInput?.years || 0}
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(11).keys()].map((mv, index) => (
-              <option value={mv} key={`${name}-option-${index}`}>
+            {[...Array(selectOptions['years'] + 1).keys()].map((mv, index) => (
+              <option value={mv} key={`${name}-years-option-${index}`}>
                 {mv}
               </option>
             ))}
@@ -102,13 +138,12 @@ const Duration: FC<DurationProps> = ({
 
           <select
             id={`${name}-months`}
-            defaultValue={0}
             value={durationInput?.months || 0}
             onChange={(e) => durationOnChange(e)}
             className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
           >
-            {[...Array(12).keys()].map((mv, index) => (
-              <option value={mv} key={`${name}-option-${index}`}>
+            {[...Array(selectOptions['months'] + 1).keys()].map((mv, index) => (
+              <option value={mv} key={`${name}-years-option-${index}`}>
                 {mv}
               </option>
             ))}

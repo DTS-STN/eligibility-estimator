@@ -55,6 +55,7 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       mainText: this.getCardText(),
       collapsedText: this.getCardCollapsedText(),
       links: this.getCardLinks(),
+      meta: this.getMetadata(),
     }
   }
 
@@ -113,6 +114,10 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
    */
   protected getCardCollapsedText(): CardCollapsedText[] {
     return []
+  }
+
+  protected getMetadata(): any {
+    return {}
   }
 
   /**

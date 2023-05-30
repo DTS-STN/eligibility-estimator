@@ -19,7 +19,7 @@ export type WebTranslations = {
   residenceHistoryText: string
   maritalStatusText: string
   partnerText: string
-  youNeedEndingText: string
+  youNeedBeginningText: string
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
@@ -92,7 +92,16 @@ export type WebTranslations = {
   warningText: string
   category: Translations['category']
   errorBoxTitle: string
+  useEstimatorIf: string
 
+  // meta tags
+  meta: {
+    homeDescription: string
+    homeShortDescription: string
+    homeKeywords: string
+    author: string
+    homeSubject: string
+  }
   //results page
   resultsPage: {
     header: string
@@ -161,6 +170,7 @@ export type WebTranslations = {
   // duration component
   duration: {
     months: string
+    month: string
     years: string
   }
 }

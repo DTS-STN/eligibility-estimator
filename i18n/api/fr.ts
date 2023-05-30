@@ -43,7 +43,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.AGE]: 'Quel est votre mois de naissance?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -69,8 +69,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
       'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
-    [FieldKey.PARTNER_AGE]:
-      'En quel mois et quelle année votre conjoint est-il né?',
+    [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Votre conjoint a-t-il un statut légal au Canada?',
@@ -319,7 +318,7 @@ const fr: Translations = {
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
-      'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+      'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
@@ -363,7 +362,6 @@ const fr: Translations = {
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    ifYouDeferYourPension: 'Si vous reportez votre pension',
     youCantGetThisBenefit:
       'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
     thisEstimate:
@@ -414,7 +412,7 @@ const fr: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+        'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       ifYouApply:
@@ -422,6 +420,10 @@ const fr: Translations = {
     },
   },
   detailWithHeading: {
+    ifYouDeferYourPension: {
+      heading: 'Si vous reportez votre pension',
+      text: 'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
+    },
     oasDeferralApplied: {
       heading: 'Comment le report affecte vos paiements',
       text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
@@ -493,6 +495,8 @@ const fr: Translations = {
   yes: 'Oui',
   no: 'Non',
   year: 'an',
+  month: 'mois',
+  months: 'mois',
   your: 'votre revenu',
   complete: 'vos revenus',
 }

@@ -59,9 +59,19 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.INCOME_MISSING,
-          detail: this.input.maritalStatus.partnered
+          detail: this.input.partnerBenefitStatus.none
             ? this.translations.detail.alwEligibleButPartnerAlreadyIs
             : this.translations.detail.alwNotEligible,
+        }
+      } else if (
+        meetsReqAge &&
+        !incomeNotProvided &&
+        this.input.partnerBenefitStatus.none
+      ) {
+        return {
+          result: ResultKey.INELIGIBLE,
+          reason: ResultReason.INCOME_MISSING,
+          detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
         }
       } else if (meetsReqAge) {
         const amount = this.formulaResult()
@@ -103,9 +113,11 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.INCOME_MISSING,
-        detail: this.input.maritalStatus.partnered
-          ? this.translations.detail.alwEligibleButPartnerAlreadyIs
-          : this.translations.detail.alwNotEligible,
+        detail:
+          this.input.maritalStatus.partnered &&
+          this.input.partnerBenefitStatus.none
+            ? this.translations.detail.alwEligibleButPartnerAlreadyIs
+            : this.translations.detail.alwNotEligible,
       }
     } else if (overAgeReq) {
       return {
@@ -258,10 +270,18 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
-    // partner is eligible, different message if income was not provided
+    // partner is eligible, IF income was not provided the result = 0
+    //  when IF income > 0 AND invSeparated = true the amount is incorrectly calculated
+    //  the correct amount is on the benefitHandler.
     if (this.partner) {
       if (this.entitlement.result > 0) {
-        if (this.eligibility.result == ResultKey.INCOME_DEPENDENT) {
+        if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
+          if (!this.input.invSeparated) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+        } else {
           cardCollapsedText.push(
             this.translations.detailWithHeading.partnerDependOnYourIncome
           )

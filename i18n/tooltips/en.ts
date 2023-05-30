@@ -88,7 +88,7 @@ const en: TooltipTranslations = {
             <p style='padding-bottom: 8px;'>Remove from this amount: </p> \
             <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
               <li>any Old Age Security payments</li> \
-              <li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li> \
+              <li>their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li> \
             </ul> \
           </div> \
           ",

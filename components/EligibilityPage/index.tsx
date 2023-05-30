@@ -147,12 +147,14 @@ export const EligibilityPage: React.VFC = ({}) => {
 
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(field, errorsVisible)
+
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
             {field.config.type === FieldType.DATE && (
               <MonthAndYear
                 name={field.key}
+                age={field.value}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
@@ -163,6 +165,7 @@ export const EligibilityPage: React.VFC = ({}) => {
             {field.config.type === FieldType.DURATION && (
               <Duration
                 name={field.key}
+                age={inputs.age}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}

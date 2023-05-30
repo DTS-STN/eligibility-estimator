@@ -41,7 +41,7 @@ const en: Translations = {
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.AGE]: 'When were you born?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Do you already receive the Old Age Security pension?',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -67,7 +67,7 @@ const en: Translations = {
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
       "What is your partner's annual net income (income after taxes) in Canadian dollars?",
-    [FieldKey.PARTNER_AGE]: 'In what month and year was your partner born?',
+    [FieldKey.PARTNER_AGE]: 'When was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
@@ -312,14 +312,14 @@ const en: Translations = {
     eligibleDependingOnIncome:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
-      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
+      'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
     eligibleEntitlementUnavailable:
       "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
     sinceYouAreSixty:
-      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more months.",
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
@@ -355,7 +355,6 @@ const en: Translations = {
       'You may be eligible to receive this benefit when you turn 60, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
     dependingOnLegalWhen65:
       'You may be eligible to receive this benefit when you turn 65, depending on your legal status in Canada. We encourage you to contact Service Canada for a better assessment.',
-    ifYouDeferYourPension: 'If you defer your pension',
     youCantGetThisBenefit:
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
@@ -406,7 +405,7 @@ const en: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
+        'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:
@@ -414,6 +413,10 @@ const en: Translations = {
     },
   },
   detailWithHeading: {
+    ifYouDeferYourPension: {
+      heading: 'If you defer your pension',
+      text: 'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
+    },
     oasDeferralApplied: {
       heading: 'How deferral affects your payments',
       text: 'You have deferred your OAS benefits by {OAS_DEFERRAL_YEARS}. This means that your OAS payments will start once you turn {OAS_DEFERRAL_AGE}, and you will be receiving an extra {OAS_DEFERRAL_INCREASE} per month.',
@@ -482,6 +485,8 @@ const en: Translations = {
   yes: 'Yes',
   no: 'No',
   year: 'year',
+  month: 'month',
+  months: 'months',
   your: 'your income',
   complete: 'complete income information',
 }

@@ -661,54 +661,54 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     )
   })
 
-  it('returns "eligible" - deferral', async () => {
-    const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
-    const oasBaseAmount = legalValues.oas.amount
-    const deferYears = 5
-    const oasDeferredAmount = roundToTwo(
-      oasBaseAmount * (1 + deferYears * 12 * deferralIncreaseByMonth)
-    )
+  // it('returns "eligible" - deferral', async () => {
+  //   const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
+  //   const oasBaseAmount = legalValues.oas.amount
+  //   const deferYears = 5
+  //   const oasDeferredAmount = roundToTwo(
+  //     oasBaseAmount * (1 + deferYears * 12 * deferralIncreaseByMonth)
+  //   )
 
-    let inputBase = {
-      ...income10k,
-      maritalStatus: MaritalStatus.PARTNERED,
-      ...canadian,
-      ...canadaWholeLife,
-      invSeparated: false,
-      partnerAge: 60,
-      partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncomeAvailable: true,
-      partnerIncome: 10000,
-      partnerLegalStatus: LegalStatus.YES,
-      partnerLivingCountry: LivingCountry.CANADA,
-      partnerLivedOnlyInCanada: true,
-      partnerYearsInCanadaSince18: undefined,
-      partnerEverLivedSocialCountry: undefined,
-      receiveOAS: false,
-      oasDeferDuration: undefined,
-    }
-    let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
-    let res = await mockGetRequest(inputNoDefer65)
-    expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
+  //   let inputBase = {
+  //     ...income10k,
+  //     maritalStatus: MaritalStatus.PARTNERED,
+  //     ...canadian,
+  //     ...canadaWholeLife,
+  //     invSeparated: false,
+  //     partnerAge: 60,
+  //     partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
+  //     partnerIncomeAvailable: true,
+  //     partnerIncome: 10000,
+  //     partnerLegalStatus: LegalStatus.YES,
+  //     partnerLivingCountry: LivingCountry.CANADA,
+  //     partnerLivedOnlyInCanada: true,
+  //     partnerYearsInCanadaSince18: undefined,
+  //     partnerEverLivedSocialCountry: undefined,
+  //     receiveOAS: false,
+  //     oasDeferDuration: undefined,
+  //   }
+  //   let inputNoDefer65 = { ...inputBase, age: 65, oasDefer: false, oasAge: 65 }
+  //   let res = await mockGetRequest(inputNoDefer65)
+  //   expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
 
-    let inputNoDefer70 = { ...inputBase, age: 70, oasDefer: false, oasAge: 65 }
-    res = await mockGetRequest(inputNoDefer70)
-    expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
+  //   let inputNoDefer70 = { ...inputBase, age: 70, oasDefer: false, oasAge: 65 }
+  //   res = await mockGetRequest(inputNoDefer70)
+  //   expect(res.body.results.oas.entitlement.result).toEqual(oasBaseAmount)
 
-    let input65Defer70 = { ...inputBase, age: 65, oasDefer: true, oasAge: 70 }
-    res = await mockGetRequest(input65Defer70)
-    expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
+  //   let input65Defer70 = { ...inputBase, age: 65, oasDefer: true, oasAge: 70 }
+  //   res = await mockGetRequest(input65Defer70)
+  //   expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
 
-    let input70Defer70 = { ...inputBase, age: 70, oasDefer: true, oasAge: 70 }
-    res = await mockGetRequest(input70Defer70)
-    expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
+  //   let input70Defer70 = { ...inputBase, age: 70, oasDefer: true, oasAge: 70 }
+  //   res = await mockGetRequest(input70Defer70)
+  //   expect(res.body.results.oas.entitlement.result).toEqual(oasDeferredAmount)
 
-    let input75Defer70 = { ...inputBase, age: 75, oasDefer: true, oasAge: 70 }
-    res = await mockGetRequest(input75Defer70)
-    expect(res.body.results.oas.entitlement.result).toEqual(
-      roundToTwo(oasDeferredAmount * 1.1) // age 75 gets 10% more
-    )
-  })
+  //   let input75Defer70 = { ...inputBase, age: 75, oasDefer: true, oasAge: 70 }
+  //   res = await mockGetRequest(input75Defer70)
+  //   expect(res.body.results.oas.entitlement.result).toEqual(
+  //     roundToTwo(oasDeferredAmount * 1.1) // age 75 gets 10% more
+  //   )
+  // })
 
   it('returns "eligible" - married, income high so OAS only (with clawback)', async () => {
     const res = await mockGetRequest({

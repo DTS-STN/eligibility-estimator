@@ -299,19 +299,35 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
+    // Related to OAS Deferral, don't show if already receiving
+    const ageInOasRange = this.input.age >= 65 && this.input.age < 70
+
     if (
-      this.partner &&
-      this.input.income.provided &&
-      this.entitlement.result !== 0
+      this.partner !== true &&
+      this.entitlement.result !== 0 &&
+      ageInOasRange &&
+      !this.input.receiveOAS
     ) {
-      if (this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
-        )
-      } else {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligible
-        )
+      cardCollapsedText.push(
+        this.translations.detailWithHeading.ifYouDeferYourPension
+      )
+    }
+
+    if (this.partner) {
+      if (this.input.income.provided && this.entitlement.result !== 0) {
+        if (
+          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
+        ) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+          )
+        } else {
+          if (!this.input.invSeparated) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+        }
       }
     }
 

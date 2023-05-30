@@ -11,10 +11,12 @@ import {
   EligibilityResult,
   EntitlementResultOas,
   ProcessedInput,
-  Link,
   LinkWithAction,
+  MetaDataObject,
+  MonthsYears,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
+import { getDeferralIncrease } from '../helpers/utils'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
@@ -221,19 +223,24 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The number of years the client has chosen to defer their OAS pension.
    */
   private get deferralYears(): number {
-    return Math.max(0, this.input.oasAge - 65) // the number of years deferred (between zero and five)
+    let oasAge = 65
+
+    const durationStr = this.input.oasDeferDuration
+
+    if (durationStr) {
+      const duration: MonthsYears = JSON.parse(durationStr)
+      const durationFloat = duration.years + duration.months / 12
+      oasAge = 65 + durationFloat
+    }
+
+    return Math.max(0, oasAge - 65) // the number of years deferred (between zero and five)
   }
 
   /**
    * The dollar amount by which the OAS entitlement will increase due to deferral.
    */
   private get deferralIncrease() {
-    const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
-    const deferralIncreaseByYear = deferralIncreaseByMonth * 12 // the increase to the monthly payment per year deferred
-    // the extra entitlement received because of the deferral
-    return roundToTwo(
-      this.deferralYears * deferralIncreaseByYear * this.baseAmount
-    )
+    return getDeferralIncrease(this.deferralYears, this.baseAmount)
   }
 
   /**
@@ -290,6 +297,59 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     return roundToTwo(result)
   }
 
+  // Add logic here that will generate data for Table component and additional text
+  // Translations delegated to BenefitCards component on FE
+  protected getMetadata(): any {
+    const age = this.input.age
+    const eligible =
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+
+    const meta: MetaDataObject = {
+      tableData: null,
+      currentAge: null,
+      monthsTo70: null,
+      receiveOAS: false,
+    }
+
+    if (age) {
+      const ageInRange = age >= 65 && age < 70
+      const receivingOAS = this.input.receiveOAS
+      const ageWhole = Math.floor(age)
+      const estimate = this.entitlement.result
+
+      // Eligible for OAS pension,and are 65-69, who do not already reveive
+      if (eligible && ageInRange && !receivingOAS) {
+        const monthsTo70 = Math.floor((70 - age) * 12)
+        meta.monthsTo70 = monthsTo70
+        meta.receiveOAS = receivingOAS
+
+        // have an estimate > 0
+        if (!(estimate <= 0)) {
+          const tableData = [...Array(71 - ageWhole).keys()]
+            .map((i) => i + ageWhole)
+            .map((age, i) => {
+              return {
+                age,
+                amount: estimate + getDeferralIncrease(i, estimate),
+              }
+            })
+          meta.tableData = tableData
+          meta.currentAge = ageWhole
+        }
+
+        return meta
+      }
+
+      return {
+        tableData: null,
+        currentAge: null,
+        monthsTo70: null,
+        receiveOAS: receivingOAS,
+      }
+    }
+  }
+
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
@@ -334,19 +394,20 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       )
 
     // deferral
-    if (this.deferralIncrease)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasDeferralApplied
-      )
-    else if (this.input.age >= 65 && this.input.age < 70)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasDeferralAvailable
-      )
+    // if (this.deferralIncrease)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasDeferralApplied
+    //   )
+    // else if (this.input.age >= 65 && this.input.age < 70)
+    //   cardCollapsedText.push(
+    //     this.translations.detailWithHeading.oasDeferralAvailable
+    //   )
 
     return cardCollapsedText
   }
 
   protected getCardText(): string {
+    console.log('this.input inside getCardText', this.input)
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.type === EntitlementResultType.NONE
@@ -374,6 +435,27 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
     }
 
+    if (
+      this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+      !this.partner &&
+      this.currentEntitlementAmount > 0 &&
+      !this.input.receiveOAS
+    ) {
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += this.translations.detail.sinceYouAreSixty
+    }
+
+    // not sure when this condition would be true, I think never.
+    if (
+      this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+      !this.partner &&
+      this.currentEntitlementAmount <= 0 &&
+      !this.input.receiveOAS
+    ) {
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += this.translations.detail.delayMonths
+    }
+
     return text
   }
 
@@ -388,4 +470,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
+
+  private add
 }
