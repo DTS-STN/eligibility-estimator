@@ -19,7 +19,7 @@ export type WebTranslations = {
   residenceHistoryText: string
   maritalStatusText: string
   partnerText: string
-  youNeedEndingText: string
+  youNeedBeginningText: string
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
@@ -92,6 +92,7 @@ export type WebTranslations = {
   warningText: string
   category: Translations['category']
   errorBoxTitle: string
+  useEstimatorIf: string
 
   // meta tags
   meta: {
