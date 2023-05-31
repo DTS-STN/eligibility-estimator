@@ -27,7 +27,7 @@ const en: TooltipTranslations = {
             <span style='font-weight: bold;'>Common-Law</span>: \
             You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
           </p> \
-          <p style='padding-bottom: 12px;'> \
+          <p style='padding-bottom: 8px;'> \
             <span style='font-weight: bold;'>Widowed</span>: \
             Your spouse or common-law partner has died and you have not remarried or entered into a common-law relationship. \
           </p> \
@@ -36,10 +36,10 @@ const en: TooltipTranslations = {
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,
     moreinfo: 'What does it mean to have legal status?',
-    text: "<p style='padding-bottom: 12px;'> \
+    text: "<p style='padding-bottom: 8px;'> \
           Having legal status means you're allowed to enter and stay in Canada as: \
           </p> \
-          <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>a Canadian citizen</li> \
             <li>a temporary resident</li> \
             <li>a permanent resident (landed immigrant)</li> \
@@ -51,10 +51,10 @@ const en: TooltipTranslations = {
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     heading: apiEn.category.legal,
     moreinfo: 'What does it mean to have legal status?',
-    text: "<p style='padding-bottom: 12px;'> \
+    text: "<p style='padding-bottom: 8px;'> \
             Having legal status means your partner is allowed to enter and stay in Canada as: \
           </p> \
-          <ul style='list-style-type: disc; padding-bottom: 12px; padding-left: 20px;'> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>a Canadian citizen</li> \
             <li>a temporary resident</li> \
             <li>a permanent resident (landed immigrant)</li> \
@@ -66,12 +66,32 @@ const en: TooltipTranslations = {
   [FieldKey.INCOME]: {
     heading: apiEn.category.income,
     moreinfo: 'Where can I find my annual income?',
-    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">You can find your net income on line&nbsp;23600 of your personal income tax return (T1).</div><div style="padding-top:8px;">Remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+              You can find your net income on line&nbsp;23600 of your personal income tax return (T1). \
+            </p> \
+            <p style='padding-bottom: 8px;'>Remove from this amount: </p> \
+            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+              <li>any Old Age Security payments</li> \
+              <li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li> \
+            </ul> \
+          </div> \
+          ",
   },
   [FieldKey.PARTNER_INCOME]: {
     heading: apiEn.category.income,
     moreinfo: 'Where can I find my partner’s annual income?',
-    text: '<div style="padding-bottom:16px;"><div style="padding-top:8px;">Your partner’s net income appears on line&nbsp;23600 of their personal income tax return (T1).</div><div style="padding-top:8px;">Remove from this amount: </div> <ul class="list-disc" style="padding-left: 12px;"><li style="padding-top: 10px;">any Old Age Security payments</li><li style="padding-top: 10px;">their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul></div>',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+              Your partner’s net income appears on line&nbsp;23600 of their personal income tax return (T1). \
+            </p> \
+            <p style='padding-bottom: 8px;'>Remove from this amount: </p> \
+            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+              <li>any Old Age Security payments</li> \
+              <li>their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li> \
+            </ul> \
+          </div> \
+          ",
   },
 }
 
