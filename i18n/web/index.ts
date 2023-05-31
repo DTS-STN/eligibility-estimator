@@ -134,6 +134,7 @@ export type WebTranslations = {
     CTAFeedbackTitle: string
     CTAFeedbackBody: string
     CTAFeedbackButton: string
+    month: string
     //nextStepOas: string
   }
 
@@ -169,7 +170,6 @@ export type WebTranslations = {
   // duration component
   duration: {
     months: string
-    month: string
     years: string
   }
 }

@@ -168,6 +168,7 @@ const fr: WebTranslations = {
     CTAFeedbackBody:
       "Répondez à un sondage de 5 minutes pour nous aider à améliorer l'estimateur.",
     CTAFeedbackButton: 'Participer au sondage',
+    month: 'mois',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,
@@ -272,7 +273,6 @@ const fr: WebTranslations = {
 
   duration: {
     months: 'Mois',
-    month: 'Mois',
     years: 'Années',
   },
 }
