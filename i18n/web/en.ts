@@ -169,6 +169,7 @@ const en: WebTranslations = {
     CTAFeedbackBody:
       'Complete a 5-minute survey to help us improve the estimator.',
     CTAFeedbackButton: 'Take our survey',
+    month: 'month',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,
@@ -270,7 +271,6 @@ const en: WebTranslations = {
 
   duration: {
     months: 'Months',
-    month: 'Month',
     years: 'Years',
   },
 }
