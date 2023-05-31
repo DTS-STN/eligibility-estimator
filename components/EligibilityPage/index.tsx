@@ -131,6 +131,10 @@ export const EligibilityPage: React.VFC = ({}) => {
       setAgeDate(ageDate)
     }
 
+    if (key === 'partnerAge') {
+      newVal = JSON.parse(newValue).value
+    }
+
     const step = Object.keys(keyStepMap).find((step) =>
       keyStepMap[step].keys.includes(key)
     )
