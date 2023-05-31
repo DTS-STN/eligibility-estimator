@@ -13,7 +13,7 @@ const Age: FC<AgeProps> = ({ age, name }) => {
     if (name === 'age') {
       return tsln._language === 'en' ? 'You are:' : 'Vous avez :'
     } else if (name === 'partnerAge') {
-      return tsln._language === 'en' ? 'Your partner is' : 'Votre conjoint a'
+      return tsln._language === 'en' ? 'Your partner is:' : 'Votre conjoint a :'
     }
   }
   return (
