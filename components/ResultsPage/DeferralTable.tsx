@@ -10,16 +10,20 @@ export const DeferralTable: React.VFC<{ data: TableData[] }> = ({ data }) => {
   const apiTsln = getTranslations(tsln._language)
 
   return (
-    <table className="mt-8 mb-8 text-center w-full md:w-7/12 table-fixed">
+    <table
+      aria-label={`${apiTsln.oasDeferralTable.title} Table`}
+      aria-describedby={`${apiTsln.oasDeferralTable.title} desc`}
+      className="mt-8 mb-8 text-center w-full md:w-7/12 table-fixed"
+    >
       <caption className="mb-3 font-bold">
         {apiTsln.oasDeferralTable.title}
       </caption>
       <thead>
         <tr>
-          <th scope="col" className="border border-gray-200 bg-gray-100 p-4">
+          <th scope="col" className="border border-gray-800 bg-gray-100 p-4">
             {apiTsln.oasDeferralTable.headingAge}
           </th>
-          <th scope="col" className="border border-gray-200 bg-gray-100">
+          <th scope="col" className="border border-gray-800 bg-gray-100">
             {apiTsln.oasDeferralTable.headingAmount}
           </th>
         </tr>
@@ -27,10 +31,10 @@ export const DeferralTable: React.VFC<{ data: TableData[] }> = ({ data }) => {
       <tbody>
         {data.map(({ age, amount }, index) => (
           <tr key={index}>
-            <td className="border border-gray-200 p-0">
+            <td className="border border-gray-800 p-0">
               {age.toLocaleString() + (locale === 'fr' ? ' ans' : '')}
             </td>
-            <td className="border border-gray-200 p-0">
+            <td className="border border-gray-800 p-0">
               {numberToStringCurrency(amount, tsln._language)}
             </td>
           </tr>
