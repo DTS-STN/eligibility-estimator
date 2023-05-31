@@ -383,12 +383,17 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (this.eligibility.reason === ResultReason.INCOME)
       return cardCollapsedText
 
-    // increase at 75
-    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
+    // increase at 75, show when receiving or age 70-74
+    if (
+      this.currentEntitlementAmount !== this.age75EntitlementAmount &&
+      ((this.input.age >= 70 && this.input.age < 75) || this.input.receiveOAS)
+    )
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasIncreaseAt75
       )
-    else
+
+    // increase at 75+
+    if (this.currentEntitlementAmount === this.age75EntitlementAmount)
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasIncreaseAt75Applied
       )
