@@ -41,7 +41,7 @@ const en: Translations = {
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
       'What is your annual net income (income after taxes) in Canadian dollars?',
-    [FieldKey.AGE]: 'In what month and year were you born?',
+    [FieldKey.AGE]: 'When were you born?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Do you already receive the Old Age Security pension?',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -67,7 +67,7 @@ const en: Translations = {
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]:
       "What is your partner's annual net income (income after taxes) in Canadian dollars?",
-    [FieldKey.PARTNER_AGE]: 'In what month and year was your partner born?',
+    [FieldKey.PARTNER_AGE]: 'When was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
@@ -312,7 +312,7 @@ const en: Translations = {
     eligibleDependingOnIncome:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
-      "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
+      'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
     eligibleEntitlementUnavailable:
       "You're likely eligible for this benefit, however an entitlement estimation is unavailable. You should contact {LINK_SERVICE_CANADA} for more information about your payment amounts.",
     eligiblePartialOas:
@@ -358,7 +358,7 @@ const en: Translations = {
     youCantGetThisBenefit:
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
-      'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}',
+      'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
@@ -405,7 +405,7 @@ const en: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.",
+        'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:

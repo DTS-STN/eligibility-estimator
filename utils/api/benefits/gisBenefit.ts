@@ -303,7 +303,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const ageInOasRange = this.input.age >= 65 && this.input.age < 70
 
     if (
-      !this.partner &&
+      this.partner !== true &&
       this.entitlement.result !== 0 &&
       ageInOasRange &&
       !this.input.receiveOAS
@@ -313,19 +313,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       )
     }
 
-    if (
-      this.partner &&
-      this.input.income.provided &&
-      this.entitlement.result !== 0
-    ) {
-      if (this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
-        )
-      } else {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligible
-        )
+    if (this.partner) {
+      if (this.input.income.provided && this.entitlement.result !== 0) {
+        if (
+          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
+        ) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+          )
+        } else {
+          if (!this.input.invSeparated) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+        }
       }
     }
 

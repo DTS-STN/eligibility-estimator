@@ -43,7 +43,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     [FieldKey.INCOME]:
       'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    [FieldKey.AGE]: 'En quel mois et quelle année êtes-vous né?',
+    [FieldKey.AGE]: 'Quel est votre mois de naissance?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -69,8 +69,7 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
       'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
-    [FieldKey.PARTNER_AGE]:
-      'En quel mois et quelle année votre conjoint est-il né?',
+    [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Votre conjoint a-t-il un statut légal au Canada?',
@@ -319,7 +318,7 @@ const fr: Translations = {
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
-      'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+      'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
@@ -366,7 +365,7 @@ const fr: Translations = {
     youCantGetThisBenefit:
       'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
     thisEstimate:
-      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}',
+      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}.',
     alwNotEligible:
       "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     alwEligibleButPartnerAlreadyIs:
@@ -413,7 +412,7 @@ const fr: Translations = {
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'Vous êtes probablement admissible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+        'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       ifYouApply:

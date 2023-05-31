@@ -18,6 +18,8 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
+  const hostName = window.location.hostname
+  const isCanadaDotCa = hostName.includes('.canada.ca')
 
   useEffect(() => {
     if (adobeAnalyticsUrl) {
@@ -31,14 +33,47 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
-        <meta name="dcterms.title" content={tsln.questionPageTitle} />
-        <meta name="dcterms.language" content={router.locale} />
+        <meta property="og:title" content={tsln.introPageTitle} />
+        <meta property="og:type" content="website" />
         <meta
-          name="dcterms.creator"
-          content="Employment and Social Development Canada/Emploi et Développement social Canada"
+          property="og:url"
+          content={
+            isCanadaDotCa
+              ? tsln._language === 'en'
+                ? `oas-estimator.service.canada.ca`
+                : `estimateur-sv.service.canada.ca`
+              : `https://ep-be.alpha.service.canada.ca/${tsln._language}`
+          }
         />
-        <meta name="dcterms.accessRights" content="2" />
-        <meta name="dcterms.service" content="ESDC-EDSC_DC-CD" />
+        <meta
+          property="og:image"
+          content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
+        />
+        <meta property="og:image:alt" content=" " />
+        <meta
+          property="og:description"
+          content={tsln.meta.homeShortDescription}
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={tsln.introPageTitle} />
+        <meta
+          name="twitter:image"
+          content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
+        />
+        <meta
+          name="twitter:image:alt"
+          content={
+            isCanadaDotCa
+              ? tsln._language === 'en'
+                ? 'oas-estimator.service.canada.ca'
+                : 'estimateur-sv.service.canada.ca'
+              : ' '
+          }
+        />
+        <meta
+          name="twitter:description"
+          content={tsln.meta.homeShortDescription}
+        />
       </Head>
       <Layout title={tsln.introPageTitle}>
         <div className="mt-18">
@@ -46,6 +81,43 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             className="mb-4 sm:w-[65%]"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
+          <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
+            {tsln.headerWhatToKnow}
+          </h2>
+          <p
+            className="xs:mt-4 sm:mt-12 xs:pr-3 w-full sm:w-[73%]"
+            dangerouslySetInnerHTML={{ __html: tsln.youNeedBeginningText }}
+          />
+          <p className="xs:mt-4 sm:mt-12">
+            {tsln.estimatorIncludeQuestionText}
+          </p>
+          <ul
+            id="information-list"
+            className="list-disc list-outside ml-5 xs:pr-3 w-full sm:w-3/5"
+          >
+            <li dangerouslySetInnerHTML={{ __html: tsln.ageText }} />
+            <li dangerouslySetInnerHTML={{ __html: tsln.netIncomeText }} />
+            <li dangerouslySetInnerHTML={{ __html: tsln.legalStatusText }} />
+            <li
+              dangerouslySetInnerHTML={{ __html: tsln.residenceHistoryText }}
+            />
+            <li dangerouslySetInnerHTML={{ __html: tsln.maritalStatusText }} />
+            <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
+          </ul>
+
+          <p className="sm:w-3/5 mt-8 sm:mt-8">{tsln.estimatorTimeEstimate}</p>
+
+          <div className="flex justify-start mt-8 sm:mt-12">
+            <Button
+              text={tsln.startBenefitsEstimator}
+              styling="supertask"
+              onClick={(e) => router.push('/eligibility')}
+              className=" w-auto justify-center"
+              attributes={{
+                [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
+              }}
+            />
+          </div>
           <h2 className="text-xs sm:h2 xs:mt-6 sm:mt-14 mb-2">
             {tsln.homePageHeader1}
           </h2>
@@ -76,47 +148,11 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               <p className="ml-2 grow">{tsln.haveNetIncomeLess}</p>
             </div>
           </div>
-          <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
-            {tsln.headerWhatToKnow}
-          </h2>
-          <p className="">{tsln.estimatorIncludeQuestionText}</p>
-          <ul
-            id="information-list"
-            className="list-disc list-outside ml-5 xs:pr-3 w-full sm:w-3/5"
-          >
-            <li dangerouslySetInnerHTML={{ __html: tsln.ageText }} />
-            <li dangerouslySetInnerHTML={{ __html: tsln.netIncomeText }} />
-            <li dangerouslySetInnerHTML={{ __html: tsln.legalStatusText }} />
-            <li
-              dangerouslySetInnerHTML={{ __html: tsln.residenceHistoryText }}
-            />
-            <li dangerouslySetInnerHTML={{ __html: tsln.maritalStatusText }} />
-            <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
-          </ul>
-          <p className="xs:mt-4 sm:mt-12 xs:pr-3 w-full sm:w-[73%]">
-            {tsln.youNeedEndingText}
-          </p>
-          <h2 className="text-xs sm:h2 mt-8 sm:mt-12 mb-2">
-            {tsln.timeToCompleteText}
-          </h2>
-          <p className="sm:w-3/5">{tsln.estimatorTimeEstimate}</p>
-
-          <div className="flex justify-start mt-8 sm:mt-12">
-            <Button
-              text={tsln.startBenefitsEstimator}
-              styling="supertask"
-              onClick={(e) => router.push('/eligibility')}
-              className=" w-auto justify-center"
-              attributes={{
-                [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
-              }}
-            />
+          <div className="mt-8">
+            <p>{tsln.useEstimatorIf}</p>
           </div>
-          <h2 className="text-xs font-bold sm:h2 mt-12 sm:mt-16 mb-2">
-            {tsln.whatBenefitsIncluded}
-          </h2>
 
-          <div className="w-full sm:w-3/5">
+          <div className="w-full mt-8 sm:w-3/5">
             <h3 className="h3 mt-3 mb-2">{tsln.oas}</h3>
             <p>{tsln.benefitAvailable}</p>
             <p
@@ -147,17 +183,17 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAfs }}
             />
 
-            <p className="mt-8">{tsln.notIncludeCPP}</p>
-            <p
-              className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutCpp }}
-            />
-
             <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>
             <p>{tsln.inflationInfo}</p>
             <p
               className="summary-link mt-8"
               dangerouslySetInnerHTML={{ __html: tsln.resultDefinition }}
+            />
+
+            <p className="mt-8">{tsln.notIncludeCPP}</p>
+            <p
+              className="summary-link"
+              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutCpp }}
             />
 
             <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>

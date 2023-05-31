@@ -50,7 +50,8 @@ const fr: WebTranslations = {
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
-  youMayBeEligible: 'Vous pourriez recevoir des prestations de vieillesse si :',
+  youMayBeEligible:
+    'Vous pourriez recevoir des prestations de la Sécurité de la vieillesse si\xa0:',
   atLeast60: 'vous avez au moins 60 ans',
   headerWhatToKnow: 'Ce dont vous aurez besoin',
   haveNetIncomeLess: `votre revenu net est moins de ${getMaximumIncomeThreshold(
@@ -66,7 +67,7 @@ const fr: WebTranslations = {
   residenceHistoryText: '<strong>historique de résidence</strong>',
   maritalStatusText: '<strong>état matrimonial</strong>',
   partnerText: '<strong>conjoint</strong>, le cas échéant',
-  youNeedEndingText: `Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.`,
+  youNeedBeginningText: `Vous pouvez fournir vos renseignements actuels, ou <strong>des renseignements futurs pour utiliser l'outil à des fins de planification</strong>. Vos réponses doivent refléter ce que sera votre situation au moment où vous commencerez à recevoir votre prestation.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
@@ -81,7 +82,7 @@ const fr: WebTranslations = {
   alwDefinitionText:
     'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
   learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
-  inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter le coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
+  inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter les changements au coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
     'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
@@ -117,7 +118,16 @@ const fr: WebTranslations = {
   warningText: 'avertissement',
   category: apiFr.category,
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
-
+  useEstimatorIf:
+    'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  meta: {
+    homeDescription: `Déterminez combien vous pourriez recevoir de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant.`,
+    homeShortDescription: `Déterminez combien vous pourriez recevoir des prestations canadiennes de la Sécurité de la vieillesse.`,
+    homeKeywords:
+      'pension de vieillesse, sécurité de la vieillesse, calculer supplément, montant de pension, paiements sv, estimer sécurité vieillesse, prestations, finances personnelles, pension du survivant, planification de retraite',
+    author: 'Service Canada',
+    homeSubject: `EC Économie et industrie;Allocation;Avantages sociaux;Prestation au survivant;Finances;Finances personnelles;Revenu;Pension;Pension publique,PE Personnes;Adulte;Aîné,SO Société et culture;Vieillesse`,
+  },
   resultsPage: {
     header: "Tableau des résultats d'estimation",
     general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.`,
@@ -265,6 +275,7 @@ const fr: WebTranslations = {
 
   duration: {
     months: 'Mois',
+    month: 'Mois',
     years: 'Années',
   },
 }
