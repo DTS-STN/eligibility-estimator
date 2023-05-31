@@ -313,8 +313,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     }
 
     if (age) {
-      const preciseAge = age
-      age = Number(age.toFixed(1))
       const ageInRange = age >= 65 && age < 70
       const receivingOAS = this.input.receiveOAS
       const ageWhole = Math.floor(age)
@@ -322,7 +320,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       // Eligible for OAS pension,and are 65-69, who do not already receive
       if (eligible && ageInRange && !receivingOAS) {
-        const monthsTo70 = Math.round((70 - preciseAge) * 12)
+        const monthsTo70 = Math.round((70 - age) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
 
@@ -331,7 +329,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           const tableData = [...Array(71 - ageWhole).keys()]
             .map((i) => i + ageWhole)
             .map((deferAge, _i) => {
-              let monthsUntilAge = Math.round((deferAge - preciseAge) * 12)
+              let monthsUntilAge = Math.round((deferAge - age) * 12)
               if (monthsUntilAge < 0) monthsUntilAge = 0
               return {
                 age: deferAge,
