@@ -240,7 +240,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The dollar amount by which the OAS entitlement will increase due to deferral.
    */
   private get deferralIncrease() {
-    return getDeferralIncrease(this.deferralYears, this.baseAmount)
+    return getDeferralIncrease(this.deferralYears * 12, this.baseAmount)
   }
 
   /**
@@ -300,7 +300,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
-    const age = this.input.age
+    let age = this.input.age
     const eligible =
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
@@ -318,9 +318,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       const ageWhole = Math.floor(age)
       const estimate = this.entitlement.result
 
-      // Eligible for OAS pension,and are 65-69, who do not already reveive
+      // Eligible for OAS pension,and are 65-69, who do not already receive
       if (eligible && ageInRange && !receivingOAS) {
-        const monthsTo70 = Math.floor((70 - age) * 12)
+        const monthsTo70 = Math.round((70 - age) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
 
@@ -328,10 +328,13 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         if (!(estimate <= 0)) {
           const tableData = [...Array(71 - ageWhole).keys()]
             .map((i) => i + ageWhole)
-            .map((age, i) => {
+            .map((deferAge, _i) => {
+              let monthsUntilAge = Math.round((deferAge - age) * 12)
+              if (monthsUntilAge < 0) monthsUntilAge = 0
               return {
-                age,
-                amount: estimate + getDeferralIncrease(i, estimate),
+                age: deferAge,
+                amount:
+                  estimate + getDeferralIncrease(monthsUntilAge, estimate),
               }
             })
           meta.tableData = tableData
