@@ -10,7 +10,6 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
   CardCollapsedText,
-  Link,
   LinkWithAction,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
@@ -56,15 +55,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqCountry
     ) {
       if (meetsReqAge && incomeNotProvided) {
-        console.log(
-          'alw #1',
-          'partner=',
-          this.partner,
-          'ReqAge',
-          meetsReqAge,
-          'income=',
-          incomeNotProvided
-        )
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.INCOME_MISSING,
@@ -112,15 +102,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           detail: this.translations.detail.eligibleWhen60,
         }
       } else {
-        console.log(
-          'alw #2',
-          'partner=',
-          this.partner,
-          'ReqAge',
-          meetsReqAge,
-          'income=',
-          incomeNotProvided
-        )
         return {
           result: ResultKey.INELIGIBLE,
           reason: ResultReason.AGE,
@@ -128,17 +109,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         }
       }
     } else if (meetsReqAge && incomeNotProvided) {
-      console.log(
-        'alw #3',
-        'partner=',
-        this.partner,
-        'ReqAge',
-        meetsReqAge,
-        'income=',
-        incomeNotProvided,
-        'reqPartnerGIS',
-        meetsReqPartner
-      )
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.INCOME_MISSING,
@@ -147,15 +117,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           : this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
     } else if (overAgeReq) {
-      console.log(
-        'alw #4',
-        'partner=',
-        this.partner,
-        'oveeAgeReq',
-        overAgeReq,
-        'income=',
-        incomeNotProvided
-      )
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.AGE,
@@ -168,28 +129,12 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         detail: this.translations.detail.eligibleWhen60,
       }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
-      console.log(
-        'alw #5',
-        'partner=',
-        this.partner,
-        'reqMarital',
-        meetsReqMarital,
-        'marital=',
-        this.input.maritalStatus.provided
-      )
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.MARITAL,
         detail: this.translations.detail.alwNotEligible,
       }
     } else if (!meetsReqPartner) {
-      console.log(
-        'alw #6',
-        'partner=',
-        this.partner,
-        'reqPartner',
-        meetsReqPartner
-      )
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
