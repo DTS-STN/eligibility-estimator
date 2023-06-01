@@ -67,7 +67,7 @@ const fr: WebTranslations = {
   residenceHistoryText: '<strong>historique de résidence</strong>',
   maritalStatusText: '<strong>état matrimonial</strong>',
   partnerText: '<strong>conjoint</strong>, le cas échéant',
-  youNeedBeginningText: `Vous pouvez fournir vos renseignements actuels, ou <strong>des renseignements futurs pour utiliser l'outil à des fins de planification</strong>. Vos réponses doivent refléter ce que sera votre situation au moment où vous commencerez à recevoir votre prestation.`,
+  youNeedBeginningText: `Vous pouvez fournir vos renseignements actuels, ou des <strong>renseignements futurs pour utiliser l'outil à des fins de planification</strong>. Vos réponses doivent refléter ce que sera votre situation au moment où vous commencerez à recevoir votre prestation.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
