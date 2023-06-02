@@ -537,17 +537,38 @@ export class BenefitHandler {
           maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
 
           // applicant gis using table2
-          const applicantGisResultT2 = new EntitlementFormula(
+          // const applicantGisResultT2 = new EntitlementFormula(
+          //   this.input.client.income.relevant,
+          //   maritalStatus,
+          //   this.input.client.partnerBenefitStatus,
+          //   this.input.client.age,
+          //   allResults.client.oas
+          // ).getEntitlementAmount()
+
+          // consoleDev(
+          //   'both Oas > 0 - applicantGisResultT2',
+          //   applicantGisResultT2
+          // )
+
+          // applicant gis using table3
+          const noOASString = JSON.stringify(allResults.client.oas)
+          const noOAS = JSON.parse(noOASString)
+          noOAS.entitlement.result = 0
+          let benefitStatus = new PartnerBenefitStatusHelper(
+            PartnerBenefitStatus.NONE
+          )
+
+          const applicantGisResultT3 = new EntitlementFormula(
             this.input.client.income.relevant,
             maritalStatus,
-            this.input.client.partnerBenefitStatus,
+            benefitStatus,
             this.input.client.age,
-            allResults.client.oas
+            noOAS
           ).getEntitlementAmount()
 
           consoleDev(
-            'both Oas > 0 - applicantGisResultT2',
-            applicantGisResultT2
+            'both Oas > 0 - applicantGisResultT3',
+            applicantGisResultT3
           )
 
           // partner gis using table2
@@ -575,7 +596,8 @@ export class BenefitHandler {
 
           // define Total_amt_CoupleA
           const totalAmountCoupleA =
-            allResults.client.oas.entitlement.result + applicantGisResultT2
+            //allResults.client.oas.entitlement.result + applicantGisResultT2
+            allResults.client.oas.entitlement.result + applicantGisResultT3
 
           // define Total_amt_CoupleB
           const totalAmountCoupleB =
@@ -592,7 +614,8 @@ export class BenefitHandler {
               'totalAmountCouple',
               totalAmountCouple
             )
-            allResults.client.gis.entitlement.result = applicantGisResultT2
+            //allResults.client.gis.entitlement.result = applicantGisResultT2
+            allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
 
             allResults.partner.gis.entitlement.result = partnerGisResultT2
@@ -606,7 +629,7 @@ export class BenefitHandler {
               totalAmountCouple
             )
 
-            const clientSingleInput = this.getSingleClientInput()
+            const clientSingleInput = this.getSingleClientInput(true)
 
             clientGis = new GisBenefit(
               clientSingleInput,
@@ -716,7 +739,7 @@ export class BenefitHandler {
 
           let isApplicantGisAvailable = true
           if (totalAmountSingle > totalAmtCouple) {
-            const clientSingleInput = this.getSingleClientInput()
+            const clientSingleInput = this.getSingleClientInput(false)
 
             clientGis = new GisBenefit(
               clientSingleInput,
@@ -927,6 +950,7 @@ export class BenefitHandler {
           const noOASString = JSON.stringify(allResults.client.oas)
           const noOAS = JSON.parse(noOASString)
           noOAS.entitlement.result = 0
+
           const applicantGisResultT3 = new EntitlementFormula(
             this.input.client.income.relevant,
             maritalStatus,
@@ -1099,13 +1123,16 @@ export class BenefitHandler {
     allResults[prop][benefitName].cardDetail = benefit.cardDetail
   }
 
-  private getSingleClientInput(): ProcessedInput {
+  private getSingleClientInput(Alternate: boolean): ProcessedInput {
+    // different setup when alternate = true
     const incomeHelper = new IncomeHelper(
       this.rawInput.incomeAvailable,
       false,
-      this.rawInput.income,
+      Alternate ? this.input.client.income.relevant : this.rawInput.income,
       0,
-      new MaritalStatusHelper(MaritalStatus.SINGLE)
+      Alternate
+        ? new MaritalStatusHelper(MaritalStatus.SINGLE)
+        : new MaritalStatusHelper(MaritalStatus.PARTNERED)
     )
 
     const clientSingleInput: ProcessedInput = {
@@ -1115,7 +1142,9 @@ export class BenefitHandler {
       oasDeferDuration: this.rawInput.oasDeferDuration,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
-      maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
+      maritalStatus: Alternate
+        ? new MaritalStatusHelper(MaritalStatus.PARTNERED)
+        : new MaritalStatusHelper(MaritalStatus.SINGLE),
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
       legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
       livedOnlyInCanada: this.rawInput.livedOnlyInCanada,
@@ -1125,9 +1154,9 @@ export class BenefitHandler {
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
       invSeparated: this.rawInput.invSeparated,
-      partnerBenefitStatus: new PartnerBenefitStatusHelper(
-        this.rawInput.partnerBenefitStatus
-      ),
+      partnerBenefitStatus: Alternate
+        ? new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE)
+        : new PartnerBenefitStatusHelper(this.rawInput.partnerBenefitStatus),
     }
 
     return clientSingleInput
