@@ -158,6 +158,7 @@ const en: WebTranslations = {
     basedOnPartnerInfoAndIncomeTotal:
       'Your partner could be eligible to receive:',
     total: 'Your total monthly amount is ',
+    partnerTotal: 'Their total monthly amount is ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',
     nextSteps: 'Next steps for benefits you may be eligible for',
