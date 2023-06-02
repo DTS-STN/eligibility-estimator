@@ -24,10 +24,7 @@ const getEstimatedMonthlyTotalLinkText = (
   tsln: WebTranslations
 ): string => {
   if (entitlementSum > 0) {
-    return `${tsln.resultsPage.yourEstimatedTotal}${numberToStringCurrency(
-      entitlementSum,
-      tsln._language
-    )}`
+    return `${tsln.resultsPage.yourEstimatedTotal}`
   } else if (resultsEligible.length <= 0) {
     return `${tsln.resultsPage.youAreNotEligible}`
   } else {
@@ -41,8 +38,8 @@ const getEligibilityText = (
   key: string
 ): string => {
   return getEligibility(resultsArray, key)
-    ? `${apiTsln.benefit[key]}: ${apiTsln.result.eligible}`
-    : `${apiTsln.benefit[key]}: ${apiTsln.result.ineligible}`
+    ? `${apiTsln.benefit[key]}`
+    : `${apiTsln.benefit[key]}`
 }
 
 const getEligibility = (
@@ -67,6 +64,8 @@ const ResultsPage: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+
+  console.log('summary', summary)
 
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]

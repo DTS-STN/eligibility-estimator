@@ -28,8 +28,7 @@ export const EstimatedTotal: React.VFC<{
 
   const headerSentence =
     summary.entitlementSum != 0
-      ? tsln.resultsPage.yourEstimatedTotal +
-        numberToStringCurrency(summary.entitlementSum, language)
+      ? tsln.resultsPage.yourEstimatedTotal
       : tsln.resultsPage.yourEstimatedNoIncome
 
   return (
