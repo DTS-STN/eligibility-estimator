@@ -153,10 +153,13 @@ const fr: WebTranslations = {
     yourEstimatedTotal: ' Votre estimation',
     partnerEstimatedTotal: "L'estimation de votre conjoint",
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
-    basedOnYourInfoTotal:
-      'Selon vos informations, vous pourriez être admissible à recevoir :',
+    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      'Selon vos informations, vous pourriez être admissible à recevoir :',
+      'Votre pourriez être admissible à recevoir :',
+    basedOnPartnerInfoTotal:
+      'Votre conjoint pourrait être admissible à recevoir :',
+    basedOnPartnerInfoAndIncomeTotal:
+      'Votre conjoint pourrait être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',

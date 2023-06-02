@@ -152,10 +152,11 @@ const en: WebTranslations = {
     yourEstimatedTotal: ' Your estimate',
     partnerEstimatedTotal: " Your partner's estiamte",
     yourEstimatedNoIncome: " You're likely eligible",
-    basedOnYourInfoTotal:
-      'Based on your information, you could be eligible to receive:',
-    basedOnYourInfoAndIncomeTotal:
-      'Based on your information, you could be eligible to receive:',
+    basedOnYourInfoTotal: 'You could be eligible to receive:',
+    basedOnYourInfoAndIncomeTotal: 'You could be eligible to receive:',
+    basedOnPartnerInfoTotal: 'Your partner could be eligible to receive:',
+    basedOnPartnerInfoAndIncomeTotal:
+      'Your partner could be eligible to receive:',
     total: 'Your total monthly amount is ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',

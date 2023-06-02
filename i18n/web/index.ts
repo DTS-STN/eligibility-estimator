@@ -123,6 +123,8 @@ export type WebTranslations = {
     yourEstimatedNoIncome: string
     basedOnYourInfoTotal: string
     basedOnYourInfoAndIncomeTotal: string
+    basedOnPartnerInfoTotal: string
+    basedOnPartnerInfoAndIncomeTotal: string
     total: string
     ifIncomeNotProvided: string
     nextSteps: string

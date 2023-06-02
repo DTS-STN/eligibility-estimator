@@ -147,6 +147,8 @@ const ResultsPage: React.VFC<{
 
           <MayBeEligible resultsEligible={resultsEligible} />
 
+          <MayBeEligible resultsEligible={resultsEligible} />
+
           {resultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
