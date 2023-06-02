@@ -112,13 +112,13 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               text={tsln.startBenefitsEstimator}
               styling="supertask"
               onClick={(e) => router.push('/eligibility')}
-              className=" w-auto justify-center"
+              className=" w-auto justify-center mb-4"
               attributes={{
                 [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
               }}
             />
           </div>
-          <h2 className="text-xs sm:h2 xs:mt-6 sm:mt-14 mb-2">
+          <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.homePageHeader1}
           </h2>
           <p className="my-2">{tsln.youMayBeEligible}</p>
