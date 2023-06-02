@@ -328,13 +328,19 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         if (!(estimate <= 0)) {
           const tableData = [...Array(71 - ageWhole).keys()]
             .map((i) => i + ageWhole)
-            .map((deferAge, _i) => {
+            .map((deferAge, i) => {
               let monthsUntilAge = Math.round((deferAge - age) * 12)
               if (monthsUntilAge < 0) monthsUntilAge = 0
+              const amount =
+                estimate +
+                getDeferralIncrease(
+                  deferAge === 70 ? monthsUntilAge : i * 12,
+                  estimate
+                )
+
               return {
                 age: deferAge,
-                amount:
-                  estimate + getDeferralIncrease(monthsUntilAge, estimate),
+                amount,
               }
             })
           meta.tableData = tableData
