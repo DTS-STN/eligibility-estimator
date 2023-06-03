@@ -624,7 +624,8 @@ export class BenefitHandler {
             partnerGis = new GisBenefit(
               partnerSingleInput,
               this.translations,
-              allResults.partner.oas
+              allResults.partner.oas,
+              true
             )
 
             // adds partner calculation when InvSeparated = true
