@@ -19,15 +19,10 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
-import {
-  getMaximumIncomeThreshold,
-  textReplacementRules,
-} from './definitions/textReplacementRules'
+import { textReplacementRules } from './definitions/textReplacementRules'
 import {
   BenefitResult,
-  BenefitResultsObject,
   BenefitResultsObjectWithPartner,
-  EntitlementResultOas,
   ProcessedInput,
   ProcessedInputWithPartner,
   RequestInput,
