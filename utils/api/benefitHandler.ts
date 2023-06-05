@@ -46,7 +46,6 @@ import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
 import { BaseBenefit } from './benefits/_base'
 import { consoleDev } from '../web/helpers/utils'
-import { result } from 'lodash'
 import { getMinBirthYear } from './definitions/schemas'
 
 export class BenefitHandler {
