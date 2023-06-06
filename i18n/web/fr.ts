@@ -138,6 +138,8 @@ const fr: WebTranslations = {
     whatYouToldUs: 'Vos renseignements',
     youMayBeEligible: 'Vous pourriez être admissible',
     youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
+    partnerNotEligible:
+      "Votre conjoint n'est probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
       'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
@@ -145,13 +147,21 @@ const fr: WebTranslations = {
     basedOnYourInfoNotEligible: `Selon vos informations, vous n'êtes peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
       apiFr.links.SC
     )} pour plus de détails.`,
-    yourEstimatedTotal: ' Votre total mensuel estimé est ',
+    basedOnPartnerInfoNotEligible: `Selon vos informations, votre conjoint n'est peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
+      apiFr.links.SC
+    )} pour plus de détails.`,
+    yourEstimatedTotal: ' Votre estimation',
+    partnerEstimatedTotal: " L'estimation de votre conjoint",
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
-    basedOnYourInfoTotal:
-      'Selon vos informations, vous pourriez être admissible à recevoir :',
+    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      'Selon vos informations, vous pourriez être admissible à recevoir :',
+      'Votre pourriez être admissible à recevoir :',
+    basedOnPartnerInfoTotal:
+      'Votre conjoint pourrait être admissible à recevoir :',
+    basedOnPartnerInfoAndIncomeTotal:
+      'Votre conjoint pourrait être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
+    partnerTotal: 'Leur montant total par mois est ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:

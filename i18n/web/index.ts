@@ -113,14 +113,20 @@ export type WebTranslations = {
     whatYouToldUs: string
     youMayBeEligible: string
     youAreNotEligible: string
+    partnerNotEligible: string
     basedOnYourInfoEligible: string
     basedOnYourInfoAndIncomeEligible: string
     basedOnYourInfoNotEligible: string
+    basedOnPartnerInfoNotEligible: string
     yourEstimatedTotal: string
+    partnerEstimatedTotal: string
     yourEstimatedNoIncome: string
     basedOnYourInfoTotal: string
     basedOnYourInfoAndIncomeTotal: string
+    basedOnPartnerInfoTotal: string
+    basedOnPartnerInfoAndIncomeTotal: string
     total: string
+    partnerTotal: string
     ifIncomeNotProvided: string
     nextSteps: string
     youMayNotBeEligible: string

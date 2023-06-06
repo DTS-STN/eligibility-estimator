@@ -94,8 +94,11 @@ export function expectGisEligible(
   partner?: boolean
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
+  const state = !partner
+    ? res.body.summary.state
+    : res.body.summary.partnerState
 
-  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
+  expect(state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(results.gis.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement) expect(results.gis.entitlement.result).toEqual(entitlement)
