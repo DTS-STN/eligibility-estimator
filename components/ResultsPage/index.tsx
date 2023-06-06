@@ -189,6 +189,7 @@ const ResultsPage: React.VFC<{
               state={summary.state}
             />
           )}
+          <MayBeEligible resultsEligible={resultsEligible} />
 
           {isPartnered && partnerResultsEligible.length > 0 && (
             <EstimatedTotal
@@ -199,7 +200,6 @@ const ResultsPage: React.VFC<{
             />
           )}
 
-          <MayBeEligible resultsEligible={resultsEligible} />
           {isPartnered && (
             <MayBeEligible
               resultsEligible={partnerResultsEligible}
