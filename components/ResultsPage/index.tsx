@@ -182,14 +182,6 @@ const ResultsPage: React.VFC<{
             links={getListLinks()}
           />
 
-          <MayBeEligible resultsEligible={resultsEligible} />
-          {isPartnered && (
-            <MayBeEligible
-              resultsEligible={partnerResultsEligible}
-              partner={true}
-            />
-          )}
-
           {resultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
@@ -203,6 +195,14 @@ const ResultsPage: React.VFC<{
               resultsEligible={partnerResultsEligible}
               entitlementSum={summary.partnerEntitlementSum}
               state={summary.partnerState}
+              partner={true}
+            />
+          )}
+
+          <MayBeEligible resultsEligible={resultsEligible} />
+          {isPartnered && (
+            <MayBeEligible
+              resultsEligible={partnerResultsEligible}
               partner={true}
             />
           )}
