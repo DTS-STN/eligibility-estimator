@@ -141,6 +141,10 @@ const fr: Translations = {
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
+    [FieldKey.INCOME]:
+      `Incluez le revenu après impôt de toutes les sources (la ligne&nbsp;23600 de votre déclaration de revenus), moins&nbsp;:` +
+      `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
+      `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
     [FieldKey.INV_SEPARATED]:
       "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
