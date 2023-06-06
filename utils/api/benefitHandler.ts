@@ -235,13 +235,7 @@ export class BenefitHandler {
       //logic is missing, need to be implemented
       requiredFields.push(FieldKey.INV_SEPARATED)
       requiredFields.push(FieldKey.PARTNER_AGE)
-
-      // only ask for partner income if client income is available
-      if (this.input.client.income.clientAvailable) {
-        requiredFields.push(FieldKey.PARTNER_INCOME_AVAILABLE)
-        if (this.input.client.income.partnerAvailable)
-          requiredFields.push(FieldKey.PARTNER_INCOME)
-      }
+      requiredFields.push(FieldKey.PARTNER_INCOME)
 
       if (this.input.partner.age >= 60) {
         requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)

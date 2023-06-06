@@ -67,7 +67,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
-      'Quel est le revenu annuel net (revenu après impôts) de votre conjoint en dollars canadiens?',
+      'Quel est le revenu annuel net de votre conjoint?',
     [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
@@ -147,8 +147,10 @@ const fr: Translations = {
       `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
     [FieldKey.INV_SEPARATED]:
       "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
-    [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      'Fournir le revenu de votre conjoint vous donnera des résultats plus précis.',
+    [FieldKey.PARTNER_INCOME]:
+      `Incluez le revenu après impôt de toutes les sources (la ligne&nbsp;23600 de votre déclaration de revenus), moins&nbsp;:` +
+      `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
+      `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_DEFER_DURATION]:

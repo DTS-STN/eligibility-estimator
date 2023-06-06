@@ -64,8 +64,7 @@ const en: Translations = {
       'Does your partner receive the Old Age Security pension?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Are you able to provide us your partner's annual net income?",
-    [FieldKey.PARTNER_INCOME]:
-      "What is your partner's annual net income (income after taxes) in Canadian dollars?",
+    [FieldKey.PARTNER_INCOME]: "What is your partner's annual net income?",
     [FieldKey.PARTNER_AGE]: 'When was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
@@ -141,8 +140,10 @@ const en: Translations = {
       `<li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul>`,
     [FieldKey.INV_SEPARATED]:
       'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
-    [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      "Providing your partner's income will give you more accurate results.",
+    [FieldKey.PARTNER_INCOME]:
+      `Include income after taxes from all sources (line&nbsp;23600 of your income tax return), minus: ` +
+      `<ul><li>any Old Age Security payments</li>` +
+      `<li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul>`,
     [FieldKey.OAS_DEFER_DURATION]:
       'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
