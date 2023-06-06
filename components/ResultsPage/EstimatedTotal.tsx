@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Language, SummaryState } from '../../utils/api/definitions/enums'
-import { BenefitResult, SummaryObject } from '../../utils/api/definitions/types'
+import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { EstimatedTotalItem } from './EstimatedTotalItem'
 
@@ -28,8 +28,6 @@ export const EstimatedTotal: React.VFC<{
         return partner
           ? tsln.resultsPage.basedOnPartnerInfoTotal
           : tsln.resultsPage.basedOnYourInfoTotal
-      case 'total':
-        return null
     }
   }
 
@@ -65,9 +63,7 @@ export const EstimatedTotal: React.VFC<{
         {entitlementSum != 0 && (
           <p className="pl-[35px]">
             {partner ? tsln.resultsPage.partnerTotal : tsln.resultsPage.total}
-            <strong>
-              {numberToStringCurrency(entitlementSum, language)}
-            </strong>. {getText('total')}
+            <strong>{numberToStringCurrency(entitlementSum, language)}</strong>.
           </p>
         )}
       </div>

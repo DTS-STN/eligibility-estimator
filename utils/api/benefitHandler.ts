@@ -1,8 +1,11 @@
 import { getTranslations, Translations } from '../../i18n/api'
+import { consoleDev } from '../web/helpers/utils'
 import { AfsBenefit } from './benefits/afsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
+import { EntitlementFormula } from './benefits/entitlementFormula'
 import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
+import { BaseBenefit } from './benefits/_base'
 import {
   BenefitKey,
   EntitlementResultType,
@@ -19,20 +22,16 @@ import {
   FieldKey,
   FieldType,
 } from './definitions/fields'
-import {
-  getMaximumIncomeThreshold,
-  textReplacementRules,
-} from './definitions/textReplacementRules'
+import { getMinBirthYear } from './definitions/schemas'
+import { textReplacementRules } from './definitions/textReplacementRules'
 import {
   BenefitResult,
-  BenefitResultsObject,
   BenefitResultsObjectWithPartner,
-  EntitlementResultOas,
+  EntitlementResultGeneric,
   ProcessedInput,
   ProcessedInputWithPartner,
   RequestInput,
   SummaryObject,
-  EntitlementResultGeneric,
 } from './definitions/types'
 import {
   IncomeHelper,
@@ -41,13 +40,8 @@ import {
   MaritalStatusHelper,
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
-import { SummaryHandler } from './summaryHandler'
-import { EntitlementFormula } from './benefits/entitlementFormula'
 import legalValues from './scrapers/output'
-import { BaseBenefit } from './benefits/_base'
-import { consoleDev } from '../web/helpers/utils'
-import { result } from 'lodash'
-import { getMinBirthYear } from './definitions/schemas'
+import { SummaryHandler } from './summaryHandler'
 
 export class BenefitHandler {
   private _translations: Translations
