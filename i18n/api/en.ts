@@ -325,12 +325,12 @@ const en: Translations = {
     delayMonths:
       'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}',
     eligibleWhen60ApplyNow:
-      'You will likely be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
+      'You may be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:
-      'You will likely be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
+      'You may be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60:
-      "You'll likely be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
-    eligibleWhen65: 'You will likely be eligible when you turn 65.',
+      "You may be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
+    eligibleWhen65: 'You may be eligible when you turn 65.',
     mustBeInCanada:
       "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
     mustBeOasEligible:
@@ -399,7 +399,7 @@ const en: Translations = {
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
-        "You'll likely be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age.",
+        "You may be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
     },
