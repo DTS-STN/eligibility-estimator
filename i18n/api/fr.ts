@@ -41,8 +41,7 @@ const fr: Translations = {
   question: {
     [FieldKey.INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
-    [FieldKey.INCOME]:
-      'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
+    [FieldKey.INCOME]: 'Quel est votre revenu annuel net?',
     [FieldKey.AGE]: 'Quel est votre mois de naissance?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',

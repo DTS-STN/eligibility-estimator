@@ -273,4 +273,18 @@
   #partnerAge-birth-year {
     width: 80px;
   }
+
+  [id^='help-text'] > ul {
+    margin-left: 15px;
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  [id^='help-text'] > ul > li {
+    color: #5c5c5c;
+  }
+
+  [id^='help-text'] > ul > li::marker {
+    font-size: 12px;
+  }
 }
