@@ -15,7 +15,6 @@ import { EstimatedTotal } from './EstimatedTotal'
 import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
-import { numberToStringCurrency } from '../../i18n/api'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
 
