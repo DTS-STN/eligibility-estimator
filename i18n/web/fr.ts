@@ -151,7 +151,7 @@ const fr: WebTranslations = {
       apiFr.links.SC
     )} pour plus de détails.`,
     yourEstimatedTotal: ' Votre estimation',
-    partnerEstimatedTotal: "L'estimation de votre conjoint",
+    partnerEstimatedTotal: " L'estimation de votre conjoint",
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
     basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:

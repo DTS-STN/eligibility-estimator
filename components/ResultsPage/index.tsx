@@ -21,12 +21,24 @@ import { Translations, getTranslations } from '../../i18n/api'
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
   resultsEligible: BenefitResult[],
-  tsln: WebTranslations
+  tsln: WebTranslations,
+  textFor = 'client'
 ): string => {
+  if (textFor === 'client') {
+    if (entitlementSum > 0) {
+      return `${tsln.resultsPage.yourEstimatedTotal}`
+    } else if (resultsEligible.length <= 0) {
+      return `${tsln.resultsPage.youAreNotEligible}`
+    } else {
+      return `${tsln.resultsPage.yourEstimatedNoIncome}`
+    }
+  }
+
+  // text for partner links
   if (entitlementSum > 0) {
-    return `${tsln.resultsPage.yourEstimatedTotal}`
+    return `${tsln.resultsPage.partnerEstimatedTotal}`
   } else if (resultsEligible.length <= 0) {
-    return `${tsln.resultsPage.youAreNotEligible}`
+    return `${tsln.resultsPage.partnerNotEligible}`
   } else {
     return `${tsln.resultsPage.yourEstimatedNoIncome}`
   }
@@ -65,8 +77,6 @@ const ResultsPage: React.VFC<{
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
 
-  console.log('summary', summary)
-
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
   )
@@ -76,6 +86,12 @@ const ResultsPage: React.VFC<{
   )
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
+    (result) =>
+      result.eligibility?.result === ResultKey.ELIGIBLE ||
+      result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+  )
+
+  const partnerResultsEligible: BenefitResult[] = partnerResultsArray.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
@@ -93,6 +109,15 @@ const ResultsPage: React.VFC<{
         tsln
       ),
       url: '#estimated',
+    },
+    {
+      text: getEstimatedMonthlyTotalLinkText(
+        summary.partnerEntitlementSum,
+        partnerResultsEligible,
+        tsln,
+        'partner'
+      ),
+      url: '#partnerEstimated',
     },
     {
       text: tsln.resultsPage.whatYouToldUs,
@@ -146,13 +171,25 @@ const ResultsPage: React.VFC<{
           <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
 
           <MayBeEligible resultsEligible={resultsEligible} />
-
-          <MayBeEligible resultsEligible={resultsEligible} />
+          <MayBeEligible
+            resultsEligible={partnerResultsEligible}
+            partner={true}
+          />
 
           {resultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={resultsEligible}
-              summary={summary}
+              entitlementSum={summary.entitlementSum}
+              state={summary.state}
+            />
+          )}
+
+          {partnerResultsEligible.length > 0 && (
+            <EstimatedTotal
+              resultsEligible={partnerResultsEligible}
+              entitlementSum={summary.partnerEntitlementSum}
+              state={summary.partnerState}
+              partner={true}
             />
           )}
         </div>

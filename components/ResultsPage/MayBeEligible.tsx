@@ -6,7 +6,8 @@ import { useTranslation } from '../Hooks'
 
 export const MayBeEligible: React.VFC<{
   resultsEligible: BenefitResult[]
-}> = ({ resultsEligible }) => {
+  partner?: boolean
+}> = ({ resultsEligible, partner = false }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const isEligible: boolean = resultsEligible.length > 0
@@ -42,6 +43,8 @@ export const MayBeEligible: React.VFC<{
         />{' '}
         {isEligible
           ? tsln.resultsPage.youMayBeEligible
+          : partner
+          ? tsln.resultsPage.partnerNotEligible
           : tsln.resultsPage.youAreNotEligible}
       </h2>
       <div className="pl-[35px]">
@@ -49,6 +52,8 @@ export const MayBeEligible: React.VFC<{
           dangerouslySetInnerHTML={{
             __html: isEligible
               ? tsln.resultsPage.basedOnYourInfoEligible
+              : partner
+              ? tsln.resultsPage.basedOnPartnerInfoNotEligible
               : tsln.resultsPage.basedOnYourInfoNotEligible,
           }}
         />

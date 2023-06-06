@@ -57,6 +57,7 @@ export class BenefitHandler {
   private _fieldData: FieldConfig[]
   private _benefitResults: BenefitResultsObjectWithPartner
   private _summary: SummaryObject
+  private _partnerSummary: SummaryObject
 
   constructor(readonly rawInput: Partial<RequestInput>) {}
 
@@ -110,6 +111,11 @@ export class BenefitHandler {
       this._summary = SummaryHandler.buildSummaryObject(
         this.input,
         this.benefitResults.client,
+        Object.fromEntries(
+          Object.entries(this.benefitResults.partner).filter(
+            (e) => e[0] != 'afs'
+          )
+        ),
         this.missingFields,
         this.translations
       )

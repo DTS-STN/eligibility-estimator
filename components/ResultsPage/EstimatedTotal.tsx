@@ -9,47 +9,63 @@ import { EstimatedTotalItem } from './EstimatedTotalItem'
 
 export const EstimatedTotal: React.VFC<{
   resultsEligible: BenefitResult[]
-  summary: SummaryObject
-}> = ({ resultsEligible, summary }) => {
+  entitlementSum: number
+  state: SummaryState
+  partner?: boolean
+}> = ({ resultsEligible, entitlementSum, state, partner = false }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
 
   const language = useRouter().locale as Language
 
-  const introSentence =
-    summary.state === SummaryState.AVAILABLE_DEPENDING
-      ? tsln.resultsPage.basedOnYourInfoAndIncomeTotal
-      : tsln.resultsPage.basedOnYourInfoTotal
+  const getText = (type) => {
+    if (partner) {
+      if (type === 'intro') {
+        return tsln.resultsPage.basedOnPartnerInfoTotal
+      }
 
-  const totalSentence =
-    summary.state === SummaryState.AVAILABLE_DEPENDING
-      ? tsln.resultsPage.ifIncomeNotProvided
-      : null
+      if (type === 'total') {
+        return state === SummaryState.AVAILABLE_DEPENDING
+          ? tsln.resultsPage.ifIncomeNotProvided
+          : null
+      }
 
-  const headerSentence =
-    summary.entitlementSum != 0
-      ? tsln.resultsPage.yourEstimatedTotal
-      : tsln.resultsPage.yourEstimatedNoIncome
+      if (type === 'header') {
+        return tsln.resultsPage.partnerEstimatedTotal
+      }
+    } else {
+      if (type === 'intro') {
+        return tsln.resultsPage.basedOnYourInfoTotal
+      }
+
+      if (type === 'total') {
+        return state === SummaryState.AVAILABLE_DEPENDING
+          ? tsln.resultsPage.ifIncomeNotProvided
+          : null
+      }
+
+      if (type === 'header') {
+        return tsln.resultsPage.yourEstimatedTotal
+      }
+    }
+  }
 
   return (
     <>
-      <h2 id="estimated" className="h2 mt-12">
-        {summary.entitlementSum != 0 ? (
+      <h2 id={partner ? 'partnerEstimated' : 'estimated'} className="h2 mt-12">
+        {entitlementSum != 0 ? (
           <Image src="/money.png" alt="" width={30} height={30} />
         ) : (
           <Image src="/green-check-mark.svg" alt="" width={30} height={30} />
         )}
-        {headerSentence}
+        {getText('header')}
       </h2>
 
       <div>
         <p
           className="pl-[35px]"
           dangerouslySetInnerHTML={{
-            __html: introSentence.replace(
-              '{AMOUNT}',
-              numberToStringCurrency(summary.entitlementSum, language)
-            ),
+            __html: getText('intro'),
           }}
         />
 
@@ -63,13 +79,12 @@ export const EstimatedTotal: React.VFC<{
           ))}
         </ul>
 
-        {summary.entitlementSum != 0 && (
+        {entitlementSum != 0 && (
           <p className="pl-[35px]">
-            {tsln.resultsPage.total}
+            {partner ? tsln.resultsPage.partnerTotal : tsln.resultsPage.total}
             <strong>
-              {numberToStringCurrency(summary.entitlementSum, language)}
-            </strong>
-            . {totalSentence}
+              {numberToStringCurrency(entitlementSum, language)}
+            </strong>. {getText('total')}
           </p>
         )}
       </div>

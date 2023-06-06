@@ -150,7 +150,7 @@ const en: WebTranslations = {
       apiEn.links.SC
     )} for more information.`,
     yourEstimatedTotal: ' Your estimate',
-    partnerEstimatedTotal: " Your partner's estiamte",
+    partnerEstimatedTotal: " Your partner's estimate",
     yourEstimatedNoIncome: " You're likely eligible",
     basedOnYourInfoTotal: 'You could be eligible to receive:',
     basedOnYourInfoAndIncomeTotal: 'You could be eligible to receive:',

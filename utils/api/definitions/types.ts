@@ -166,10 +166,12 @@ export interface LinkWithAction extends Link {
 
 export interface SummaryObject {
   state: SummaryState
+  partnerState: SummaryState
   title: string
-  details: string
   links: Link[]
+  details: string
   entitlementSum: number
+  partnerEntitlementSum: number
 }
 
 export interface NextStepText {
