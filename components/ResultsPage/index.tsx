@@ -17,6 +17,7 @@ import { MayBeEligible } from './MayBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { numberToStringCurrency } from '../../i18n/api'
 import { Translations, getTranslations } from '../../i18n/api'
+import { FieldKey } from '../../utils/api/definitions/fields'
 
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
@@ -76,6 +77,9 @@ const ResultsPage: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+  const isPartnered =
+    inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
+    'partnered'
 
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
@@ -97,84 +101,95 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
-  let listLinks: {
-    text: string
-    url: string
-    eligible?: boolean
-  }[] = [
-    {
-      text: getEstimatedMonthlyTotalLinkText(
-        summary.entitlementSum,
-        resultsEligible,
-        tsln
-      ),
-      url: '#estimated',
-    },
-    {
-      text: getEstimatedMonthlyTotalLinkText(
-        summary.partnerEntitlementSum,
-        partnerResultsEligible,
-        tsln,
-        'partner'
-      ),
-      url: '#partnerEstimated',
-    },
-    {
-      text: tsln.resultsPage.whatYouToldUs,
-      url: '#answers',
-    },
-    {
-      text: `${getEligibilityText(resultsArray, apiTsln, 'oas')}`,
-      url: '#oas',
-      eligible: getEligibility(resultsArray, 'oas'),
-    },
-    {
-      text: `${getEligibilityText(resultsArray, apiTsln, 'gis')}`,
-      url: '#gis',
-      eligible: getEligibility(resultsArray, 'gis'),
-    },
-    {
-      text: `${getEligibilityText(resultsArray, apiTsln, 'alw')}`,
-      url: '#alw',
-      eligible: getEligibility(resultsArray, 'alw'),
-    },
-    {
-      text: `${getEligibilityText(resultsArray, apiTsln, 'afs')}`,
-      url: '#afs',
-      eligible: getEligibility(resultsArray, 'afs'),
-    },
-  ]
+  const getListLinks = () => {
+    let listLinks: {
+      text: string
+      url: string
+      eligible?: boolean
+    }[] = [
+      {
+        text: getEstimatedMonthlyTotalLinkText(
+          summary.entitlementSum,
+          resultsEligible,
+          tsln
+        ),
+        url: '#estimated',
+      },
+      {
+        text: tsln.resultsPage.whatYouToldUs,
+        url: '#answers',
+      },
+      {
+        text: `${getEligibilityText(resultsArray, apiTsln, 'oas')}`,
+        url: '#oas',
+        eligible: getEligibility(resultsArray, 'oas'),
+      },
+      {
+        text: `${getEligibilityText(resultsArray, apiTsln, 'gis')}`,
+        url: '#gis',
+        eligible: getEligibility(resultsArray, 'gis'),
+      },
+      {
+        text: `${getEligibilityText(resultsArray, apiTsln, 'alw')}`,
+        url: '#alw',
+        eligible: getEligibility(resultsArray, 'alw'),
+      },
+      {
+        text: `${getEligibilityText(resultsArray, apiTsln, 'afs')}`,
+        url: '#afs',
+        eligible: getEligibility(resultsArray, 'afs'),
+      },
+    ]
 
-  // filtered out the link item which text is empty.
-  listLinks = listLinks.filter((ll) => ll.text)
-  // Sort the links based on eligibility
-  const sortListLinks = (a, b) => {
-    if (a.eligible == null || b.eligible == null) {
+    if (isPartnered) {
+      listLinks.splice(1, 0, {
+        text: getEstimatedMonthlyTotalLinkText(
+          summary.partnerEntitlementSum,
+          partnerResultsEligible,
+          tsln,
+          'partner'
+        ),
+        url: '#partnerEstimated',
+      })
+    }
+
+    // filtered out the link item which text is empty.
+    listLinks = listLinks.filter((ll) => ll.text)
+    // Sort the links based on eligibility
+    const sortListLinks = (a, b) => {
+      if (a.eligible == null || b.eligible == null) {
+        return 0
+      }
+      if (a.eligible && !b.eligible) {
+        return -1
+      }
+      if (!a.eligible && b.eligible) {
+        return 1
+      }
       return 0
     }
-    if (a.eligible && !b.eligible) {
-      return -1
-    }
-    if (!a.eligible && b.eligible) {
-      return 1
-    }
-    return 0
+
+    return listLinks.sort(sortListLinks)
   }
 
-  listLinks = listLinks.sort(sortListLinks)
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2 row-span-1">
           <div> {tsln.resultsPage.general} </div>
 
-          <ListLinks title={tsln.resultsPage.onThisPage} links={listLinks} />
+          <ListLinks
+            title={tsln.resultsPage.onThisPage}
+            links={getListLinks()}
+          />
 
           <MayBeEligible resultsEligible={resultsEligible} />
-          <MayBeEligible
-            resultsEligible={partnerResultsEligible}
-            partner={true}
-          />
+          {isPartnered && (
+            <MayBeEligible
+              resultsEligible={partnerResultsEligible}
+              partner={true}
+            />
+          )}
 
           {resultsEligible.length > 0 && (
             <EstimatedTotal
@@ -184,7 +199,7 @@ const ResultsPage: React.VFC<{
             />
           )}
 
-          {partnerResultsEligible.length > 0 && (
+          {isPartnered && partnerResultsEligible.length > 0 && (
             <EstimatedTotal
               resultsEligible={partnerResultsEligible}
               entitlementSum={summary.partnerEntitlementSum}
