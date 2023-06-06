@@ -19,34 +19,17 @@ export const EstimatedTotal: React.VFC<{
   const language = useRouter().locale as Language
 
   const getText = (type) => {
-    if (partner) {
-      if (type === 'intro') {
-        return tsln.resultsPage.basedOnPartnerInfoTotal
-      }
-
-      if (type === 'total') {
-        return state === SummaryState.AVAILABLE_DEPENDING
-          ? tsln.resultsPage.ifIncomeNotProvided
-          : null
-      }
-
-      if (type === 'header') {
-        return tsln.resultsPage.partnerEstimatedTotal
-      }
-    } else {
-      if (type === 'intro') {
-        return tsln.resultsPage.basedOnYourInfoTotal
-      }
-
-      if (type === 'total') {
-        return state === SummaryState.AVAILABLE_DEPENDING
-          ? tsln.resultsPage.ifIncomeNotProvided
-          : null
-      }
-
-      if (type === 'header') {
-        return tsln.resultsPage.yourEstimatedTotal
-      }
+    switch (type) {
+      case 'header':
+        return partner
+          ? tsln.resultsPage.partnerEstimatedTotal
+          : tsln.resultsPage.yourEstimatedTotal
+      case 'intro':
+        return partner
+          ? tsln.resultsPage.basedOnPartnerInfoTotal
+          : tsln.resultsPage.basedOnYourInfoTotal
+      case 'total':
+        return null
     }
   }
 
