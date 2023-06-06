@@ -52,6 +52,7 @@ export class SummaryHandler {
   }
 
   private getState(stateFor = 'client'): SummaryState {
+    console.log('stateFor', stateFor)
     if (this.detectNeedsInfo()) {
       return SummaryState.MORE_INFO
     } else if (this.detectUnavailable(stateFor)) {
@@ -59,6 +60,7 @@ export class SummaryHandler {
     } else if (this.detectDepending(stateFor)) {
       return SummaryState.AVAILABLE_DEPENDING
     } else if (this.detectEligible(stateFor)) {
+      console.log('detected eligibles')
       return SummaryState.AVAILABLE_ELIGIBLE
     }
     return SummaryState.AVAILABLE_INELIGIBLE
