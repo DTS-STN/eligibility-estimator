@@ -34,18 +34,22 @@ export const MayBeEligible: React.VFC<{
   // Displays only when not eligible
   return (
     <>
-      <h2 id="eligible" className="h2 mt-8">
-        <Image
-          src={isEligible ? '/green-check-mark.svg' : '/circle-arrow.svg'}
-          alt=""
-          width={30}
-          height={30}
-        />{' '}
-        {isEligible
-          ? tsln.resultsPage.youMayBeEligible
-          : partner
-          ? tsln.resultsPage.partnerNotEligible
-          : tsln.resultsPage.youAreNotEligible}
+      <h2 id="eligible" className="h2 mt-8 flex">
+        <div className="flex-none w-8 h-8">
+          <Image
+            src={isEligible ? '/green-check-mark.svg' : '/circle-arrow.svg'}
+            alt=""
+            width={30}
+            height={30}
+          />{' '}
+        </div>
+        <div className="ml-2 grow">
+          {isEligible
+            ? tsln.resultsPage.youMayBeEligible
+            : partner
+            ? tsln.resultsPage.partnerNotEligible
+            : tsln.resultsPage.youAreNotEligible}
+        </div>
       </h2>
       <div className="pl-[35px]">
         <p
