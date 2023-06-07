@@ -10,7 +10,6 @@ import {
   EntitlementResultGeneric,
   ProcessedInput,
   CardCollapsedText,
-  Link,
   LinkWithAction,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
@@ -113,11 +112,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.INCOME_MISSING,
-        detail:
-          this.input.maritalStatus.partnered &&
-          this.input.partnerBenefitStatus.none
-            ? this.translations.detail.alwEligibleButPartnerAlreadyIs
-            : this.translations.detail.alwNotEligible,
+        detail: this.input.maritalStatus.partnered
+          ? this.translations.detail.alwNotEligible
+          : this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
     } else if (overAgeReq) {
       return {
@@ -141,7 +138,8 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
-        detail: this.translations.detail.alwNotEligible,
+        //detail: this.translations.detail.alwNotEligible,
+        detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
     } else if (!meetsReqIncome) {
       return {
