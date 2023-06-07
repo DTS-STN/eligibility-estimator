@@ -464,6 +464,16 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += this.translations.detail.delayMonths
     }
 
+    // if income is too high
+    if (
+      this.eligibility.reason === ResultReason.INCOME &&
+      !this.partner &&
+      !this.input.receiveOAS
+    ) {
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+      text += this.translations.detail.delayMonths
+    }
+
     return text
   }
 
@@ -478,6 +488,4 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
-
-  private add
 }
