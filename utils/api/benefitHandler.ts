@@ -194,8 +194,9 @@ export class BenefitHandler {
    */
   private getRequiredFields(): FieldKey[] {
     const requiredFields = [
-      FieldKey.INCOME_AVAILABLE,
+      // FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
+      FieldKey.INCOME,
       // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
@@ -222,9 +223,6 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.OAS_AGE)
     }
 
-    if (this.input.client.income.clientAvailable) {
-      requiredFields.push(FieldKey.INCOME)
-    }
     if (
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
@@ -237,13 +235,7 @@ export class BenefitHandler {
       //logic is missing, need to be implemented
       requiredFields.push(FieldKey.INV_SEPARATED)
       requiredFields.push(FieldKey.PARTNER_AGE)
-
-      // only ask for partner income if client income is available
-      if (this.input.client.income.clientAvailable) {
-        requiredFields.push(FieldKey.PARTNER_INCOME_AVAILABLE)
-        if (this.input.client.income.partnerAvailable)
-          requiredFields.push(FieldKey.PARTNER_INCOME)
-      }
+      requiredFields.push(FieldKey.PARTNER_INCOME)
 
       if (this.input.partner.age >= 60) {
         requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)

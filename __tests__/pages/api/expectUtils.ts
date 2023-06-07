@@ -177,7 +177,7 @@ export const incomeZero = {
 }
 
 export const income10k = {
-  incomeAvailable: true,
+  incomeAvailable: undefined,
   income: 10000,
 }
 

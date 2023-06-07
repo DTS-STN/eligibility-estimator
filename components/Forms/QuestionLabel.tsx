@@ -1,4 +1,5 @@
 import React from 'react'
+import { Tooltip } from '../Tooltip/tooltip'
 
 export interface QuestionLabelProps {
   name: string
@@ -30,10 +31,11 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
           <span className="font-medium ml-2">{requiredText}</span>
         )}
       </label>
+      <Tooltip field={name} />
       {helpText && (
-        <span
+        <div
           id={fieldId && `help-text-${fieldId}`}
-          className="ds-font-body block ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
+          className="ds-font-body block ds-text-lg ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
           dangerouslySetInnerHTML={{ __html: helpText }}
         />
       )}

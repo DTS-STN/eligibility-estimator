@@ -65,31 +65,21 @@ const en: TooltipTranslations = {
   },
   [FieldKey.INCOME]: {
     heading: apiEn.category.income,
-    moreinfo: 'Where can I find my annual income?',
+    moreinfo: 'Which year’s income will be used when I apply?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px;'> \
-              You can find your net income on line&nbsp;23600 of your personal income tax return (T1). \
+            By default, your latest income tax return will be used when you apply \
             </p> \
-            <p style='padding-bottom: 8px;'>Remove from this amount: </p> \
-            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
-              <li>any Old Age Security payments</li> \
-              <li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li> \
-            </ul> \
           </div> \
           ",
   },
   [FieldKey.PARTNER_INCOME]: {
     heading: apiEn.category.income,
-    moreinfo: 'Where can I find my partner’s annual income?',
+    moreinfo: 'Which year’s income will be used when I apply?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px;'> \
-              Your partner’s net income appears on line&nbsp;23600 of their personal income tax return (T1). \
+            By default, your partner's latest income tax return will be used when you apply. \
             </p> \
-            <p style='padding-bottom: 8px;'>Remove from this amount: </p> \
-            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
-              <li>any Old Age Security payments</li> \
-              <li>their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li> \
-            </ul> \
           </div> \
           ",
   },

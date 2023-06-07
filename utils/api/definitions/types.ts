@@ -25,7 +25,7 @@ import { FieldConfig, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
-  incomeAvailable: boolean
+  incomeAvailable?: boolean
   income: number // personal income
   age: number
   receiveOAS: boolean
@@ -40,7 +40,7 @@ export interface RequestInput {
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
-  partnerIncomeAvailable: boolean
+  partnerIncomeAvailable?: boolean
   partnerIncome: number // partner income
   partnerAge: number
   partnerLivingCountry: string // country code

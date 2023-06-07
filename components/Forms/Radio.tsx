@@ -44,7 +44,6 @@ export const Radio: React.VFC<InputProps> = ({
             requiredText={requiredText}
             helpText={helpText}
           />
-          <Tooltip field={name} />
         </legend>
         <div role="radiogroup" className="mt-2.5">
           {values.map((val, index) => (
