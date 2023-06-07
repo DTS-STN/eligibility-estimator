@@ -38,7 +38,7 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
-      FieldKey.INCOME_AVAILABLE,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
@@ -46,7 +46,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
-      FieldKey.INCOME_AVAILABLE,
+      FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
@@ -69,7 +69,7 @@ describe('field requirement analysis', () => {
       everLivedSocialCountry: true,
       invSeparated: false,
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
-      partnerIncomeAvailable: true,
+      partnerIncomeAvailable: undefined,
       partnerIncome: 10000,
       partnerAge: 65,
       partnerLegalStatus: LegalStatus.YES,
@@ -83,7 +83,7 @@ describe('field requirement analysis', () => {
       FieldKey.AGE,
       FieldKey.ALREADY_RECEIVE_OAS,
       FieldKey.OAS_AGE,
-      FieldKey.INCOME_AVAILABLE,
+      // FieldKey.INCOME_AVAILABLE,
       FieldKey.INCOME,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
@@ -93,7 +93,7 @@ describe('field requirement analysis', () => {
       FieldKey.MARITAL_STATUS,
       FieldKey.INV_SEPARATED,
       FieldKey.PARTNER_AGE,
-      FieldKey.PARTNER_INCOME_AVAILABLE,
+      // FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_INCOME,
       // FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.PARTNER_LEGAL_STATUS,
@@ -180,10 +180,9 @@ describe('field requirements analysis: conditional fields', () => {
     expect(res.body.missingFields).toEqual([
       FieldKey.INV_SEPARATED,
       FieldKey.PARTNER_AGE,
-      FieldKey.PARTNER_INCOME_AVAILABLE,
-      // FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.PARTNER_INCOME,
     ])
-    expect(res.body.visibleFields).toContain(FieldKey.PARTNER_INCOME_AVAILABLE)
+    // expect(res.body.visibleFields).toContain(FieldKey.PARTNER_INCOME_AVAILABLE)
     expect(res.body.visibleFields).toContain(FieldKey.PARTNER_AGE)
     expect(res.body.visibleFields).toContain(FieldKey.INV_SEPARATED)
   })
