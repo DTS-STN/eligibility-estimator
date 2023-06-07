@@ -141,9 +141,9 @@ const en: Translations = {
     [FieldKey.INV_SEPARATED]:
       'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
     [FieldKey.PARTNER_INCOME]:
-      `Include income after taxes from all sources (line&nbsp;23600 of your income tax return), minus: ` +
+      `Include income after taxes from all sources (line&nbsp;23600 of their income tax return), minus: ` +
       `<ul><li>any Old Age Security payments</li>` +
-      `<li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul>`,
+      `<li>their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul>`,
     [FieldKey.OAS_DEFER_DURATION]:
       'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
