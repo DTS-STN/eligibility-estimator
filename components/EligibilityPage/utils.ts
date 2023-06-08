@@ -133,6 +133,7 @@ export function getKeyStepMap(
       buttonLabel: tsln.getEstimate,
       keys: getKeysByCategory(FieldCategory.MARITAL),
       buttonAttributes: {
+        [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}: ${tsln.getEstimate}`,
         [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
         type: AA_FORM_SUBMIT_ACTION,
       },
