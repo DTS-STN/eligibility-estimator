@@ -611,7 +611,7 @@ export class BenefitHandler {
               totalAmountCouple
             )
 
-            console.log('useT1versusT3: ', useT1versusT3)
+            consoleDev('useT1versusT3: ', useT1versusT3)
             const clientSingleInput = this.getSingleClientInput(useT1versusT3)
 
             clientGis = new GisBenefit(
