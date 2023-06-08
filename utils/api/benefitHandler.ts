@@ -620,10 +620,12 @@ export class BenefitHandler {
               allResults.client.oas
             )
 
-            clientGis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading
-                .calculatedBasedOnIndividualIncome
-            )
+            if (useT1versusT3) {
+              clientGis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
 
             const partnerSingleInput = this.getSinglePartnerInput()
 
