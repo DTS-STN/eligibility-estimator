@@ -10,7 +10,6 @@ export const EstimatedTotalItem: React.VFC<{
   result: BenefitResult
 }> = ({ heading, result }) => {
   const tsln = useTranslation<WebTranslations>()
-
   /*
     returns benefit name with from/de and proper article. ... french nuances.
   */
@@ -20,7 +19,9 @@ export const EstimatedTotalItem: React.VFC<{
     } else {
       switch (benefitName) {
         case tsln.oas:
-          return result > 0 ? ` de la ${benefitName}` : ` la ${benefitName}`
+          const lowCase =
+            benefitName.charAt(0).toLowerCase() + benefitName.slice(1)
+          return result > 0 ? ` de la ${lowCase}` : ` la ${lowCase}`
         case tsln.gis:
           return result > 0 ? ` du ${benefitName}` : ` le ${benefitName}`
         default:

@@ -75,16 +75,11 @@ const fr: TooltipTranslations = {
   },
   [FieldKey.PARTNER_INCOME]: {
     heading: apiFr.category.income,
-    moreinfo: 'Où puis-je trouver le revenu annuel de mon conjoint?',
+    moreinfo: 'Quelle année de revenus sera utilisée pour ma demande?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px;'> \
-              Le revenu net de votre conjoint se trouve à la ligne&nbsp;23600 de sa déclaration de revenus (T1). \
+            Par défaut, la dernière déclaration de revenus de votre conjoint sera utilisée lors de votre demande. \
             </p> \
-            <p style='padding-bottom: 8px;'>Retirez de ce montant&nbsp;:</p> \
-            <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
-              <li>toute prestations de la Sécurité de la vieillesse;</li> \
-              <li>les premiers&nbsp;5&nbsp;000&nbsp;$ de revenu tiré d&apos;un emploi ou d&apos;un travail indépendant, et&nbsp;50&nbsp;% des prochains&nbsp;10&nbsp;000&nbsp;$.</li> \
-            </ul> \
           </div> \
           ",
   },
