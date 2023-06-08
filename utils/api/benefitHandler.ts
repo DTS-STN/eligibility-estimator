@@ -550,24 +550,6 @@ export class BenefitHandler {
             applicantGisStatusBased
           )
 
-          // applicant gis using table3
-          // const noOASString = JSON.stringify(allResults.client.oas)
-          // const noOAS = JSON.parse(noOASString)
-          // noOAS.entitlement.result = 0
-
-          // const applicantGisResultT3 = new EntitlementFormula(
-          //   this.input.client.income.relevant,
-          //   maritalStatus,
-          //   this.input.client.partnerBenefitStatus,
-          //   this.input.client.age,
-          //   noOAS
-          // ).getEntitlementAmount()
-
-          // consoleDev(
-          //   'both Oas > 0 - applicantGisResultT3',
-          //   applicantGisResultT3
-          // )
-
           // partner gis using table2
           const partnerGisResultT2 = new EntitlementFormula(
             this.input.client.income.relevant,
@@ -602,6 +584,10 @@ export class BenefitHandler {
           // define Total_amt_Couple (need to add gis enhancement? )
           const totalAmountCouple = totalAmountCoupleA + totalAmountCoupleB
 
+          //          Total Amount Couple > Total Amount Single
+          //
+          const useT1versusT3 = applicantGisResultT1 > applicantGisStatusBased
+
           if (totalAmountSingle < totalAmountCouple) {
             consoleDev(
               'both Oas > 0 - totalAmountsingle < totalAmountCouple',
@@ -616,6 +602,7 @@ export class BenefitHandler {
             allResults.partner.gis.entitlement.result = partnerGisResultT2
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           } else {
+            //          Total Amount Single > Total Amount Couple
             consoleDev(
               'both Oas > 0 - totalAmountsingle > totalAmountCouple',
               'totalAmountSingle',
@@ -624,20 +611,8 @@ export class BenefitHandler {
               totalAmountCouple
             )
 
-            // true when Receiving or I don't know.
-            let receivingOas =
-              this.rawInput.partnerBenefitStatus !== PartnerBenefitStatus.NONE
-            console.log(
-              'receiving: ',
-              receivingOas,
-              'single:',
-              receivingOas ? true : false,
-              this.rawInput.partnerBenefitStatus
-            )
-            const clientSingleInput = this.getSingleClientInput(
-              receivingOas ? true : false,
-              receivingOas
-            )
+            console.log('useT1versusT3: ', useT1versusT3)
+            const clientSingleInput = this.getSingleClientInput(useT1versusT3)
 
             clientGis = new GisBenefit(
               clientSingleInput,
@@ -753,10 +728,7 @@ export class BenefitHandler {
             PartnerBenefitStatus.NONE
 
           if (totalAmountSingle > totalAmtCouple) {
-            const clientSingleInput = this.getSingleClientInput(
-              true,
-              receivingOas
-            )
+            const clientSingleInput = this.getSingleClientInput(true)
 
             clientGis = new GisBenefit(
               clientSingleInput,
@@ -1140,19 +1112,16 @@ export class BenefitHandler {
     allResults[prop][benefitName].cardDetail = benefit.cardDetail
   }
 
-  private getSingleClientInput(
-    single: boolean,
-    partnerReceivingOas: boolean
-  ): ProcessedInput {
+  private getSingleClientInput(useTable1: boolean): ProcessedInput {
     //
-    // different setup when 'partner receiving OAS' = No
+    // if useTable1 then force Table 1 over Table 3
     //
     const incomeHelper = new IncomeHelper(
       this.rawInput.incomeAvailable,
       false,
-      single ? this.rawInput.income : this.input.client.income.relevant,
+      useTable1 ? this.rawInput.income : this.input.client.income.relevant,
       0,
-      single
+      useTable1
         ? new MaritalStatusHelper(MaritalStatus.SINGLE)
         : new MaritalStatusHelper(MaritalStatus.PARTNERED)
     )
@@ -1164,7 +1133,7 @@ export class BenefitHandler {
       oasDeferDuration: this.rawInput.oasDeferDuration,
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
-      maritalStatus: single
+      maritalStatus: useTable1
         ? new MaritalStatusHelper(MaritalStatus.SINGLE)
         : new MaritalStatusHelper(MaritalStatus.PARTNERED),
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
@@ -1176,7 +1145,7 @@ export class BenefitHandler {
         : this.rawInput.yearsInCanadaSince18,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
       invSeparated: this.rawInput.invSeparated,
-      partnerBenefitStatus: partnerReceivingOas
+      partnerBenefitStatus: useTable1
         ? new PartnerBenefitStatusHelper(this.rawInput.partnerBenefitStatus)
         : new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
     }
