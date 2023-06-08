@@ -32,6 +32,7 @@ const en: WebTranslations = {
     'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
+  introPageOASHeading: 'Old Age Security benefits',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
   resultPageTitle: 'Old Age Security Benefits Estimator: Results',
   menuTitle: 'Service Canada',
