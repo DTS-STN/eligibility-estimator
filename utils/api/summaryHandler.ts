@@ -177,10 +177,12 @@ export class SummaryHandler {
     stateFor: string
   ): boolean {
     const results = stateFor === 'client' ? this.results : this.partnerResults
+    let count = 0
     const matchingItems = Object.keys(results).filter((key) => {
-      results[key].eligibility.result === expectedResult
+      const result = results[key].eligibility.result
+      result === expectedResult ? count++ : count
     })
-    return matchingItems.length > 0
+    return count > 0
   }
 
   getEntitlementSum(sumFor = 'client'): number {
