@@ -33,6 +33,7 @@ const fr: WebTranslations = {
     'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
+  introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
   questionPageTitle:
     'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
   resultPageTitle:

@@ -119,39 +119,8 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             />
           </div>
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
-            {tsln.homePageHeader1}
+            {tsln.introPageOASHeading}
           </h2>
-          <p className="my-2">{tsln.youMayBeEligible}</p>
-          <div className="inline-block sm:w-[500px] bg-light-green py-4 px-8">
-            <div className="flex items-start mb-4">
-              <div className="flex-none w-8 h-8">
-                <Image
-                  src="/green-check-mark.svg"
-                  alt=""
-                  height={30}
-                  width={30}
-                  layout="fixed"
-                />
-              </div>
-              <p className="ml-2 grow">{tsln.atLeast60}</p>
-            </div>
-            <div className="flex items-start">
-              <div className="flex-none w-8 h-8">
-                <Image
-                  src="/green-check-mark.svg"
-                  alt=""
-                  height={30}
-                  width={30}
-                  layout="fixed"
-                />
-              </div>
-              <p className="ml-2 grow">{tsln.haveNetIncomeLess}</p>
-            </div>
-          </div>
-          <div className="mt-8">
-            <p>{tsln.useEstimatorIf}</p>
-          </div>
-
           <div className="w-full mt-8 sm:w-3/5">
             <h3 className="h3 mt-3 mb-2">{tsln.oas}</h3>
             <p>{tsln.benefitAvailable}</p>
