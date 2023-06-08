@@ -435,7 +435,7 @@ const en: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Your payments will increase when you turn&nbsp;75',
-      text: 'Once you turn 75, your payments will increase by&nbsp;10%, meaning you will receive {OAS_75_AMOUNT} per month.',
+      text: 'Once you turn 75, your payments will increase by&nbsp;10%.',
     },
     oasIncreaseAt75Applied: {
       heading: "Your payments have increased because you're over&nbsp;75",
