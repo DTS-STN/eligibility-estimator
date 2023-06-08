@@ -13,8 +13,10 @@ export const Tooltip: React.FC<{
     field
   )
 
-  if (!tooltipData) return <></>
+  const AA_BUTTON_CLICK_ATTRIBUTE =
+    'ESDC-EDSC:Canadian OAS Benefits Est. More information Click'
 
+  if (!tooltipData) return <></>
   return (
     <details className="my-2 text-h6 " data-testid={`tooltip-${field}`}>
       <summary
@@ -24,6 +26,7 @@ export const Tooltip: React.FC<{
         <span
           className="ds-underline"
           dangerouslySetInnerHTML={{ __html: tooltipData.moreinfo }}
+          data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: ${tooltipData.moreinfo}`}
         />
       </summary>
       <div
