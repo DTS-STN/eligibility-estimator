@@ -327,7 +327,7 @@ const en: Translations = {
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
-      'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}',
+      'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
     eligibleWhen60ApplyNow:
       'You may be eligible when you turn 60, however you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen65ApplyNow:

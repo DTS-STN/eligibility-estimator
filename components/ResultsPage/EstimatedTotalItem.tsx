@@ -13,6 +13,7 @@ export const EstimatedTotalItem: React.VFC<{
   /*
     returns benefit name with from/de and proper article. ... french nuances.
   */
+
   function displayBenefitName(benefitName: string, result: number): string {
     if (tsln._language === Language.EN) {
       return result > 0 ? ` from the ${benefitName}` : ` the ${benefitName}`
