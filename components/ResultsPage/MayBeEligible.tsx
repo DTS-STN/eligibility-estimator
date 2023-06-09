@@ -34,7 +34,10 @@ export const MayBeEligible: React.VFC<{
   // Displays only when not eligible
   return (
     <>
-      <h2 id="eligible" className="h2 mt-8 flex">
+      <h2
+        id={partner ? 'partnerEstimated' : 'estimated'}
+        className="h2 mt-8 flex"
+      >
         <div className="flex-none w-8 h-8">
           <Image
             src={isEligible ? '/green-check-mark.svg' : '/circle-arrow.svg'}
