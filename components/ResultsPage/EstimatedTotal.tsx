@@ -12,7 +12,14 @@ export const EstimatedTotal: React.VFC<{
   entitlementSum: number
   state: SummaryState
   partner?: boolean
-}> = ({ resultsEligible, entitlementSum, state, partner = false }) => {
+  partnerNoOAS: boolean
+}> = ({
+  resultsEligible,
+  entitlementSum,
+  state,
+  partner = false,
+  partnerNoOAS,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
 
@@ -29,6 +36,14 @@ export const EstimatedTotal: React.VFC<{
           ? tsln.resultsPage.basedOnPartnerInfoTotal
           : tsln.resultsPage.basedOnYourInfoTotal
     }
+  }
+
+  // If partner answers "No" to receiving OAS, the amounts should not show
+  if (partner && partnerNoOAS) {
+    entitlementSum = 0
+    resultsEligible = resultsEligible.map((benefit) => {
+      return { ...benefit, entitlement: { ...benefit.entitlement, result: 0 } }
+    })
   }
 
   return (

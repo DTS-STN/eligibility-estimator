@@ -466,6 +466,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     // if income is too high
     if (
+      this.input.age < 70 &&
       this.eligibility.reason === ResultReason.INCOME &&
       !this.partner &&
       !this.input.receiveOAS

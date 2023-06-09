@@ -3,7 +3,11 @@ import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey } from '../../utils/api/definitions/enums'
+import {
+  MaritalStatus,
+  PartnerBenefitStatus,
+  ResultKey,
+} from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
@@ -25,22 +29,18 @@ const getEstimatedMonthlyTotalLinkText = (
   textFor = 'client'
 ): string => {
   if (textFor === 'client') {
-    if (entitlementSum > 0) {
-      return `${tsln.resultsPage.yourEstimatedTotal}`
-    } else if (resultsEligible.length <= 0) {
+    if (resultsEligible.length <= 0) {
       return `${tsln.resultsPage.youAreNotEligible}`
     } else {
-      return `${tsln.resultsPage.yourEstimatedNoIncome}`
+      return `${tsln.resultsPage.yourEstimatedTotal}`
     }
   }
 
   // text for partner links
-  if (entitlementSum > 0) {
-    return `${tsln.resultsPage.partnerEstimatedTotal}`
-  } else if (resultsEligible.length <= 0) {
+  if (resultsEligible.length <= 0) {
     return `${tsln.resultsPage.partnerNotEligible}`
   } else {
-    return `${tsln.resultsPage.yourEstimatedNoIncome}`
+    return `${tsln.resultsPage.partnerEstimatedTotal}`
   }
 }
 
@@ -68,7 +68,12 @@ const ResultsPage: React.VFC<{
   const router = useRouter()
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
-    'partnered'
+    MaritalStatus.PARTNERED
+
+  const partnerNoOAS =
+    inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
+      'value'
+    ] === PartnerBenefitStatus.NONE
 
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
@@ -177,6 +182,7 @@ const ResultsPage: React.VFC<{
               resultsEligible={resultsEligible}
               entitlementSum={summary.entitlementSum}
               state={summary.state}
+              partnerNoOAS={partnerNoOAS}
             />
           )}
           <MayBeEligible resultsEligible={resultsEligible} />
@@ -187,6 +193,7 @@ const ResultsPage: React.VFC<{
               entitlementSum={summary.partnerEntitlementSum}
               state={summary.partnerState}
               partner={true}
+              partnerNoOAS={partnerNoOAS}
             />
           )}
 
