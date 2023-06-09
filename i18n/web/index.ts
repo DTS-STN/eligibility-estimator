@@ -54,6 +54,12 @@ export type WebTranslations = {
   breadcrumb1URL: string
   breadcrumb2Title: string
   breadcrumb2URL: string
+  breadcrumb3Title: string
+  breadcrumb3URL: string
+  breadcrumb4Title: string
+  breadcrumb4URL: string
+  breadcrumb5Title: string
+  breadcrumb5URL: string
   title: string
   introPageTitle: string
   introPageOASHeading: string

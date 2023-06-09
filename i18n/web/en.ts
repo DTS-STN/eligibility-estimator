@@ -27,9 +27,17 @@ const en: WebTranslations = {
   //breadcrumb2Title: 'Service Canada',
   //breadcrumb2URL:
   //  'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
-  breadcrumb2Title: 'Service Canada Labs',
-  breadcrumb2URL:
-    'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
+  breadcrumb2Title: 'Benefits',
+  breadcrumb2URL: 'https://www.canada.ca/en/services/benefits.html',
+  breadcrumb3Title: 'Public pension',
+  breadcrumb3URL:
+    'https://www.canada.ca/en/services/benefits/publicpensions.html',
+  breadcrumb4Title: 'Old Age Security',
+  breadcrumb4URL:
+    'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
+  breadcrumb5Title: 'Old Age Security payment amounts',
+  breadcrumb5URL:
+    'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   introPageOASHeading: 'Old Age Security benefits',
