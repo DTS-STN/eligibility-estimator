@@ -34,7 +34,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         rel="canonical"
         href={
           isCanadaDotCa
-            ? `oas-estimator.service.canada.ca/${tsln._language}${router.pathname}`
+            ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
             : `http://ep-be.alpha.servicecanada.ca/${tsln._language}${router.pathname}`
         }
       />
@@ -43,7 +43,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         lang={altLang}
         href={
           isCanadaDotCa
-            ? `oas-estimator.service.canada.ca/${altLang}${router.pathname}`
+            ? `https://estimateursv-oasestimator.service.canada.ca/${altLang}${router.pathname}`
             : `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
         }
       />
@@ -53,7 +53,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         lang={altLang}
         href={
           isCanadaDotCa
-            ? `oas-estimator.service.canada.ca/${altLang}${router.pathname}`
+            ? `https://estimateursv-oasestimator.service.canada.ca/${altLang}${router.pathname}`
             : `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
         }
       />

@@ -39,9 +39,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           property="og:url"
           content={
             isCanadaDotCa
-              ? tsln._language === 'en'
-                ? `oas-estimator.service.canada.ca`
-                : `estimateur-sv.service.canada.ca`
+              ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}`
               : `https://ep-be.alpha.service.canada.ca/${tsln._language}`
           }
         />
@@ -64,9 +62,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           name="twitter:image:alt"
           content={
             isCanadaDotCa
-              ? tsln._language === 'en'
-                ? 'oas-estimator.service.canada.ca'
-                : 'estimateur-sv.service.canada.ca'
+              ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}`
               : ' '
           }
         />
