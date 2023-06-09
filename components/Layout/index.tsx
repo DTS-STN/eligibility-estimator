@@ -57,6 +57,18 @@ export const Layout: React.VFC<{
       text: tsln.breadcrumb2Title,
       link: tsln.breadcrumb2URL,
     },
+    {
+      text: tsln.breadcrumb3Title,
+      link: tsln.breadcrumb3URL,
+    },
+    {
+      text: tsln.breadcrumb4Title,
+      link: tsln.breadcrumb4URL,
+    },
+    {
+      text: tsln.breadcrumb5Title,
+      link: tsln.breadcrumb5URL,
+    },
   ]
 
   const handleOnClick = () => {

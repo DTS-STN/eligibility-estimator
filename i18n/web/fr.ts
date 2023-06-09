@@ -28,9 +28,17 @@ const fr: WebTranslations = {
   // breadcrumb2Title: 'Service Canada',
   // breadcrumb2URL:
   //   'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
-  breadcrumb2Title: 'Laboratoires de Service Canada',
-  breadcrumb2URL:
-    'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
+  breadcrumb2Title: 'Prestation',
+  breadcrumb2URL: 'https://www.canada.ca/fr/services/prestations.html',
+  breadcrumb3Title: 'Pensions publique',
+  breadcrumb3URL:
+    'https://www.canada.ca/fr/services/prestations/pensionspubliques.html',
+  breadcrumb4Title: 'Sécurité de la vieillesse',
+  breadcrumb4URL:
+    'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
+  breadcrumb5Title: 'Montant des paiements de la Sécurité de la vieillesse',
+  breadcrumb5URL:
+    'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
