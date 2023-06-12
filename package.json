@@ -26,6 +26,10 @@
   },
   "dependencies": {
     "@dts-stn/service-canada-design-system": "1.57.1-dev.50f5be381",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "latest",
     "@tailwindcss/forms": "^0.5.0",
     "csv-writer": "^1.6.0",
     "joi": "^17.6.0",

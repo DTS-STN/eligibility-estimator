@@ -1,7 +1,6 @@
 import {
   Header,
   Heading,
-  CTA,
   ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
@@ -11,6 +10,7 @@ import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Head } from './Head'
 import { TestBanner } from './TestBanner'
+import { CTA } from '../ResultsPage/CTA'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -72,8 +72,7 @@ export const Layout: React.VFC<{
   ]
 
   const handleOnClick = () => {
-    const langStr = router.locale === 'en' ? 'eng' : 'fra'
-    const link = `https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=${langStr}`
+    const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`
     router.push(link)
   }
 
@@ -117,11 +116,11 @@ export const Layout: React.VFC<{
         {router.pathname === '/results' && (
           <div id="cta-feedback" className="mb-8">
             <CTA
-              heading={tsln.resultsPage.CTAFeedbackTitle}
-              body={tsln.resultsPage.CTAFeedbackBody}
+              heading={tsln.resultsPage.CTATitle}
+              body={tsln.resultsPage.CTABody}
               containerClass="xs:container"
               ButtonProps={{
-                text: tsln.resultsPage.CTAFeedbackButton,
+                text: tsln.resultsPage.CTAButton,
                 onClick: handleOnClick,
               }}
             />
