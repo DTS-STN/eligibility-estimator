@@ -28,9 +28,9 @@ const fr: WebTranslations = {
   // breadcrumb2Title: 'Service Canada',
   // breadcrumb2URL:
   //   'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
-  breadcrumb2Title: 'Prestation',
+  breadcrumb2Title: 'Prestations',
   breadcrumb2URL: 'https://www.canada.ca/fr/services/prestations.html',
-  breadcrumb3Title: 'Pensions publique',
+  breadcrumb3Title: 'Pensions publiques',
   breadcrumb3URL:
     'https://www.canada.ca/fr/services/prestations/pensionspubliques.html',
   breadcrumb4Title: 'Sécurité de la vieillesse',
