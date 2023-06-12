@@ -108,6 +108,7 @@ export const Layout: React.VFC<{
               message_heading={tsln.workInProgress}
               message_body={tsln.workInProgressBody}
               whiteBG={true}
+              asHtml={true}
             />
           </div>
           {children}
