@@ -23,7 +23,7 @@ export function CTA({
             icon={faPiggyBank}
             className="w-[60px]"
             size="2xl"
-            style={{ color: '#759bdb' }}
+            style={{ color: '#2E5274' }}
           />
           <div className="ds-flex-grow ds-divide-x-2 ds-divide-multi-blue-blue60a ds-flex ds-flex-row ds-justify-center ds-mt-3">
             <div></div>
