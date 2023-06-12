@@ -1050,7 +1050,10 @@ export class BenefitHandler {
           }
 
           // add the amount calculated to the card.
-          if (allResults.partner.gis.entitlement.result > 0) {
+          if (
+            allResults.partner.gis.entitlement.result > 0 &&
+            initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
+          ) {
             allResults.partner.gis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading.partnerEligible
             )
