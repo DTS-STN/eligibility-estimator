@@ -145,9 +145,9 @@ export type WebTranslations = {
     link: string
     nextStepTitle: string
     nextStepGis: string
-    CTAFeedbackTitle: string
-    CTAFeedbackBody: string
-    CTAFeedbackButton: string
+    CTATitle: string
+    CTABody: string
+    CTAButton: string
     month: string
     //nextStepOas: string
   }

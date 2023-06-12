@@ -186,10 +186,10 @@ const fr: WebTranslations = {
     nextStepTitle: 'Prochaines étapes',
     nextStepGis:
       'Vous pouvez faire une demande pour le Supplément de revenu garanti lorsque vous présentez votre demande pour la pension de la Sécurité de la vieillesse.',
-    CTAFeedbackTitle: 'Nous voulons votre avis!',
-    CTAFeedbackBody:
-      "Répondez à un sondage de 5 minutes pour nous aider à améliorer l'estimateur.",
-    CTAFeedbackButton: 'Participer au sondage',
+    CTATitle: 'Informez-vous sur vos options de retraite',
+    CTABody:
+      'Renseignez-vous sur les pensions publiques, le meilleur moment pour commencer à les recevoir et les conseils pour maximiser votre revenu de retraite.',
+    CTAButton: 'Visiter le Carrefour retraite',
     month: 'mois',
   },
   resultsQuestions: apiFr.questionShortText,
