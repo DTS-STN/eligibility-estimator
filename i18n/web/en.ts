@@ -29,7 +29,7 @@ const en: WebTranslations = {
   //  'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   breadcrumb2Title: 'Benefits',
   breadcrumb2URL: 'https://www.canada.ca/en/services/benefits.html',
-  breadcrumb3Title: 'Public pension',
+  breadcrumb3Title: 'Public pensions',
   breadcrumb3URL:
     'https://www.canada.ca/en/services/benefits/publicpensions.html',
   breadcrumb4Title: 'Old Age Security',
