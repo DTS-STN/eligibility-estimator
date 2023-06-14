@@ -750,14 +750,15 @@ export class BenefitHandler {
               allResults.client.gis.entitlement.type =
                 EntitlementResultType.FULL
 
-              allResults.partner.alw.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
               allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
 
               if (partnerAlwCalcSingle > 0) {
+                allResults.partner.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+
                 partnerAlw.cardDetail.collapsedText.push(
                   this.translations.detailWithHeading.partnerEligible
                 )
