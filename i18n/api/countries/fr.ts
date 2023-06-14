@@ -154,7 +154,7 @@ export const livingCountry = [
   { key: 'LCA', text: 'Sainte-Lucie' },
   { key: 'KNA', text: 'Saint-Kitts-et-Nevis' },
   { key: 'SMR', text: 'Saint-Marin' },
-  { key: 'VA', text: 'Vatican' },
+  { key: 'VA', text: 'Saint-Siège' },
   { key: 'VCT', text: 'Saint Vincent et les Grenadines' },
   { key: 'WSM', text: 'Samoa' },
   { key: 'STP', text: 'Sao Tomé-et-Principe' },
