@@ -883,7 +883,6 @@ export class BenefitHandler {
                 this.translations.detailWithHeading.partnerEligible
               )
               if (
-                this.input.partner.invSeparated &&
                 allResults.partner.gis.entitlement.result > 0 &&
                 allResults.client.gis.entitlement.result <= 0
               )
