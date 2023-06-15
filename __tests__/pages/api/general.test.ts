@@ -37,7 +37,7 @@ describe('translation checks', () => {
 })
 
 describe('country checks', () => {
-  const COUNTRY_COUNT = 195
+  const COUNTRY_COUNT = 196
   const handlerEn = new BenefitHandler({ _language: Language.EN })
   handlerEn.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataEn = handlerEn.fieldData as Array<FieldConfigDropdown>
