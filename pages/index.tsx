@@ -2,7 +2,7 @@ import { Button } from '@dts-stn/service-canada-design-system'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from '../components/Hooks'
 import { Layout } from '../components/Layout'
 import { WebTranslations } from '../i18n/web'
@@ -18,8 +18,15 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
-  const hostName = window.location.hostname
-  const isCanadaDotCa = hostName.includes('.canada.ca')
+
+  const [isCanadaDotCa, setIsCanadaDotCa] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const hostName = window.location.hostname
+      setIsCanadaDotCa(hostName.includes('.canada.ca'))
+    }
+  }, [])
 
   useEffect(() => {
     if (adobeAnalyticsUrl) {
