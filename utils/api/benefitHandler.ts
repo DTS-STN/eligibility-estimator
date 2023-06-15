@@ -882,6 +882,14 @@ export class BenefitHandler {
               allResults.partner.gis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading.partnerEligible
               )
+              if (
+                allResults.partner.gis.entitlement.result > 0 &&
+                allResults.client.gis.entitlement.result <= 0
+              )
+                allResults.partner.gis.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
 
               if (
                 this.input.partner.invSeparated &&
@@ -1058,6 +1066,12 @@ export class BenefitHandler {
             allResults.partner.gis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading.partnerEligible
             )
+            if (allResults.client.gis.entitlement.result <= 0) {
+              allResults.partner.gis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading
+                  .calculatedBasedOnIndividualIncome
+              )
+            }
           }
 
           consoleDev(
