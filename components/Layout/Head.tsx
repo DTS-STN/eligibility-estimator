@@ -1,16 +1,22 @@
-import { is } from 'cypress/types/bluebird'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
-//import Script from 'next/script'
 
 export const Head: React.VFC<{ title: string }> = ({ title }) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
-  const hostName = window.location.hostname
-  const isCanadaDotCa = hostName.includes('.canada.ca')
   const altLang = tsln._language === 'en' ? 'fr' : 'en'
+
+  const [isCanadaDotCa, setIsCanadaDotCa] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const hostName = window.location.hostname
+      setIsCanadaDotCa(hostName.includes('.canada.ca'))
+    }
+  }, [])
 
   return (
     <NextHead>
