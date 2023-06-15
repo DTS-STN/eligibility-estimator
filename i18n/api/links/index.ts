@@ -1,10 +1,10 @@
 import { BenefitKey } from '../../../utils/api/definitions/enums'
-import { Link } from '../../../utils/api/definitions/types'
+import { Link, LinkWithAction } from '../../../utils/api/definitions/types'
 
 export interface LinkDefinitions {
   contactSC: Link
   faq: Link
-  overview: { [key in BenefitKey]: Link }
+  overview: { [key in BenefitKey]: LinkWithAction }
   oasMaxIncome: Link
   cpp: Link
   cric: Link
@@ -18,11 +18,14 @@ export interface LinkDefinitions {
   oasRecoveryTax: Link
   oasDefer: Link
   oasRetroactive: Link
-  apply: { [key in BenefitKey]: Link }
+  apply: { [key in BenefitKey]: LinkWithAction }
   SC: Link
+  SCAccount: Link
   oasDeferClickHere: Link
   oasDeferInline: Link
   socialAgreement: Link
   reasons: { [key in BenefitKey]: Link }
   oasRecoveryTaxInline: Link
+  oasLearnAboutRecoveryTax: Link
+  oasNonResidentTax: Link
 }

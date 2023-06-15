@@ -1,68 +1,41 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { getTooltipTranslations, TooltipTranslation } from '../../i18n/tooltips'
 import { Language } from '../../utils/api/definitions/enums'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { WebTranslations } from '../../i18n/web'
-import { useTranslation } from '../Hooks'
 
 export const Tooltip: React.FC<{
   field: string
-  size?: number
-}> = ({ field, size }) => {
+}> = ({ field }) => {
   const router = useRouter()
-  const [show, setShow] = useState<boolean>(false)
-  const wrapperRef = useRef(null)
-  const tsln = useTranslation<WebTranslations>()
-
-  const handleEscPress = (event) => {
-    if (event.keyCode === 27) {
-      setShow(false)
-    }
-  }
-
-  useEffect(() => {
-    // handles closing tooltip via Esc
-    document.addEventListener('keyup', handleEscPress)
-    return () => {
-      document.removeEventListener('keyup', handleEscPress)
-    }
-  }, [])
-
   const tooltipData = getTooltipTranslationByField(
     router.locale == 'en' ? Language.EN : Language.FR,
     field
   )
 
-  const handleClick = () => {
-    setShow(!show)
-  }
+  const AA_BUTTON_CLICK_ATTRIBUTE =
+    'ESDC-EDSC:Canadian OAS Benefits Est. More information Click'
 
   if (!tooltipData) return <></>
-
   return (
-    <div
-      className="relative inline-block mb-2 cursor-pointer "
-      ref={wrapperRef}
-      data-testid="tooltip"
-    >
-      <div className="flex items-center gap-x-[10px]" onClick={handleClick}>
-        <div className={`triangle ${show && 'origin-center rotate-90'} `} />
-        <a className="underline text-default-text text-[16px]">
-          {tsln.tooltip.moreInformation}
-        </a>
-      </div>
-      <div className={`${!show && 'hidden'} mx-[5px] py-1`} tabIndex={-1}>
-        <div
-          className={`w-full xs:w-auto s:max-w-md sm:max-w-[80%] border-l-[2px]`}
-        >
-          <p
-            className="font-normal text-[16px] leading-5 px-5 max-h-[100%] "
-            dangerouslySetInnerHTML={{ __html: tooltipData.text }}
-          />
-        </div>
-      </div>
-    </div>
+    <details className="my-2 text-h6 " data-testid={`tooltip-${field}`}>
+      <summary
+        key={`summary-${field}`}
+        className="border-none pl-0 ds-text-multi-blue-blue70b mb-[15px] ds-cursor-pointer ds-select-none"
+      >
+        <span
+          className="ds-underline"
+          dangerouslySetInnerHTML={{ __html: tooltipData.moreinfo }}
+          data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: ${tooltipData.moreinfo}`}
+        />
+      </summary>
+      <div
+        className="ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100 border-l-2 border-[#284162] px-6 pt-4"
+        data-testid="tooltip-text"
+        id={`helpText-${field}`}
+        dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+      />
+    </details>
   )
 }
 

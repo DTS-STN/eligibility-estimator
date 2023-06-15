@@ -24,6 +24,7 @@ export interface KeyAndText {
 export interface TypedKeyAndText<T> {
   key: T
   text: string
+  shortText: string
 }
 
 export interface Translations {
@@ -32,15 +33,18 @@ export interface Translations {
   category: { [key in FieldCategory]: string }
   result: { [key in ResultKey]: string }
   question: { [key in FieldKey]: string }
-  questionShortText: { [key in FieldKey]: string }
+  questionShortText: { [key in FieldKey]?: string }
+  questionAriaLabel: { [key in FieldKey]?: string }
   questionHelp: { [key in FieldKey]?: string }
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
+    [FieldKey.ALREADY_RECEIVE_OAS]: TypedKeyAndText<boolean>[]
     [FieldKey.OAS_DEFER]: TypedKeyAndText<boolean>[]
     [FieldKey.LEGAL_STATUS]: TypedKeyAndText<LegalStatus>[]
-    [FieldKey.LIVED_OUTSIDE_CANADA]: TypedKeyAndText<boolean>[]
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: TypedKeyAndText<boolean>[]
+    [FieldKey.LIVED_ONLY_IN_CANADA]: TypedKeyAndText<boolean>[]
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: TypedKeyAndText<boolean>[]
     [FieldKey.MARITAL_STATUS]: TypedKeyAndText<MaritalStatus>[]
+    [FieldKey.INV_SEPARATED]: TypedKeyAndText<boolean>[]
     [FieldKey.PARTNER_INCOME_AVAILABLE]: TypedKeyAndText<boolean>[]
     [FieldKey.PARTNER_BENEFIT_STATUS]: TypedKeyAndText<PartnerBenefitStatus>[]
     [FieldKey.LIVING_COUNTRY]: KeyAndText[]
@@ -48,10 +52,15 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    eligibleIncomeTooHigh: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
+    yourDeferralOptions: string
+    sinceYouAreSixty: string
+    youCanAply: string
+    delayMonths: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
     eligibleWhen60: string
@@ -66,30 +75,69 @@ export interface Translations {
     dependingOnAgreementWhen60: string
     dependingOnAgreementWhen65: string
     dependingOnLegal: string
-    dependingOnLegalSponsored: string
     dependingOnLegalWhen60: string
     dependingOnLegalWhen65: string
+    youCantGetThisBenefit: string
+    thisEstimate: string
     alwNotEligible: string
+    alwEligibleButPartnerAlreadyIs: string
+    alwEligibleIncomeTooHigh: string
+    alwIfYouApply: string
     afsNotEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
+    oasClawbackInCanada: string
+    oasClawbackNotInCanada: string
+    oas: {
+      eligibleIfIncomeIsLessThan: string
+      dependOnYourIncome: string
+      eligibleIncomeTooHigh: string
+      serviceCanadaReviewYourPayment: string
+      automaticallyBePaid: string
+      youShouldReceiveLetter: string
+      youShouldHaveReceivedLetter: string
+      applyOnline: string
+      over70: string
+      eligibleWhenTurn65: string
+      ifNotReceiveLetter64: string
+    }
+    gis: {
+      eligibleDependingOnIncomeNoEntitlement: string
+      incomeTooHigh: string
+      ifYouApply: string
+    }
   }
   detailWithHeading: {
+    ifYouDeferYourPension: { heading: string; text: string }
     oasDeferralApplied: { heading: string; text: string }
     oasDeferralAvailable: { heading: string; text: string }
     oasClawback: { heading: string; text: string }
     oasIncreaseAt75: { heading: string; text: string }
     oasIncreaseAt75Applied: { heading: string; text: string }
+    calculatedBasedOnIndividualIncome: { heading: string; text: string }
+    partnerEligible: { heading: string; text: string }
+    partnerDependOnYourIncome: { heading: string; text: string }
+    partnerEligibleButAnsweredNo: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
+  oasDeferralTable: {
+    title: string
+    headingAge: string
+    headingAmount: string
+  }
   links: LinkDefinitions
   incomeSingle: string
   incomeCombined: string
+  opensNewWindow: string
   yes: string
   no: string
   year: string
+  month: string
+  months: string
+  your: string
+  complete: string
 }
 
 export function getTranslations(language: Language): Translations {
@@ -113,10 +161,13 @@ export function numberToStringCurrency(
   const languageCode =
     language === Language.EN ? LanguageCode.EN : LanguageCode.FR
   const rounding = options?.rounding === undefined ? 2 : options.rounding
-  return number.toLocaleString(languageCode, {
-    style: 'currency',
-    currency: 'CAD',
-    currencyDisplay: 'narrowSymbol',
-    minimumFractionDigits: rounding,
-  })
+  return number
+    .toLocaleString(languageCode, {
+      style: 'currency',
+      currency: 'CAD',
+      currencyDisplay: 'narrowSymbol',
+      minimumFractionDigits: rounding,
+    })
+    .replace('.00', '')
+    .replace(/,00\s/, '\xa0')
 }

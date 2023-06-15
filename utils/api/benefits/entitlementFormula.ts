@@ -1,4 +1,8 @@
-import { EntitlementResultType, MaritalStatus } from '../definitions/enums'
+import {
+  EntitlementResultType,
+  MaritalStatus,
+  PartnerBenefitStatus,
+} from '../definitions/enums'
 import { BenefitResult, EntitlementResultOas } from '../definitions/types'
 import {
   MaritalStatusHelper,
@@ -82,10 +86,10 @@ export class EntitlementFormula {
     this.gisStatus = this.maritalStatus.single ? 1 : 2
 
     /*
-     Don't simply remove this line below, it needs proper handling if to be
-     implemented properly. I think the idea is that we would consider them
-     single for one scenario, consider them partnered for another scenario,
-     and then return whichever scenario is higher.
+      Don't simply remove this line below, it needs proper handling if to be
+      implemented properly. I think the idea is that we would consider them
+      single for one scenario, consider them partnered for another scenario,
+      and then return whichever scenario is higher.
     */
     if (maritalStatus.invSeparated)
       throw new Error(
@@ -107,9 +111,16 @@ export class EntitlementFormula {
     // It is assumed that this does not affect ALW/AFS, though this is not confirmed.
     if (this.oasResult?.entitlement.type === EntitlementResultType.PARTIAL) {
       const oasCoverageAmount =
-        legalValues.oas.amount - this.oasResult.entitlement.result
-      return roundToTwo(preOasAmount + oasCoverageAmount)
-    } else return preOasAmount
+        legalValues.oas.amount - this.oasResult.entitlement.result65To74
+
+      // GIS Partial pensioner < 40 yrs in Canada and 75+ yrs, gets 10% more.
+      const superGIS = this.age >= 75 ? oasCoverageAmount * 0.1 : 0
+
+      // Always return 0 when result is negative
+      return preOasAmount + oasCoverageAmount > 0
+        ? roundToTwo(preOasAmount + oasCoverageAmount + superGIS)
+        : 0
+    } else return preOasAmount > 0 ? preOasAmount : 0
   }
 
   /**
@@ -117,7 +128,11 @@ export class EntitlementFormula {
    */
   private get gisSituation(): GisSituation {
     if (this.maritalStatus.single) {
-      if (this.maritalStatus.value === MaritalStatus.WIDOWED)
+      if (
+        this.maritalStatus.value === MaritalStatus.WIDOWED &&
+        this.age >= 60 &&
+        this.age < 65
+      )
         return GisSituation.AFS
       else return GisSituation.SINGLE
     } else {
@@ -196,7 +211,7 @@ export class EntitlementFormula {
     const calculated = roundToTwo(
       this.actualMaxAmount - this.incomeDifferential * differentialMultiplier
     )
-    return Math.max(0, calculated)
+    return calculated
   }
 
   /**

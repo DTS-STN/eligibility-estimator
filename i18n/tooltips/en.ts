@@ -5,14 +5,83 @@ import { TooltipTranslations } from './index'
 const en: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiEn.category.marital,
-    text: "<p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Common-Law</span>: You have lived continuously with your partner in a marital-type relationship for a minimum of one year.</p> <p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Divorced</span>: You are officially separated and have legally ended your marriage.</p> <p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Married</span>: You and your spouse have had a ceremony that legally binds you to each other. Your marriage must be legally recognized in the country where it was performed and in Canada.</p> <p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Single</span>: You have never been married and are not in a common-law relationship.</p> <p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Surviving Partner/Widowed</span>: Your spouse has died and that you have not remarried or entered into a common-law relationship.</p><p><span style='font-weight: bold;'>Separated:</span> You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled.</p>",
+    moreinfo: 'Which option applies to me?',
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Single</span>: \
+            You have never been married and are not in a common-law relationship. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Divorced</span>: \
+            You're officially separated and have legally ended your marriage. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Separated:</span> \
+            You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Married</span>: \
+            You and your spouse have had a ceremony that legally binds you to each other. \
+            Your marriage must be legally recognized in the country where it was performed and in Canada. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Common-Law</span>: \
+            You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
+          </p> \
+          <p style='padding-bottom: 8px;'> \
+            <span style='font-weight: bold;'>Widowed</span>: \
+            Your spouse or common-law partner has died and you have not remarried or entered into a common-law relationship. \
+          </p> \
+          ",
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,
-    text: "<p style='padding-bottom: 20px;'><span style='font-weight: bold;'>Canadian citizen:</span> You are Canadian by birth (either born in Canada or born outside Canada to a Canadian citizen who was themselves either born in Canada or granted citizenship) or you have applied for a grant of citizenship and have received Canadian citizenship.</p><p style='padding-bottom: 20px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (non-sponsored immigrant):</span> You have been given permanent resident status by immigrating to Canada, but is not a Canadian citizen.</p><p style='padding-bottom: 20px;'><span style='font-weight: bold;'>A permanent resident or landed immigrant (sponsored immigrant):</span> You are a foreign national who has applied for permanent residence under the Family Class, has an approved Canadian sponsor, and meets the requirements of the Family Class.</p><p><span style='font-weight: bold;'>Indian status or status card:</span> You are registered as an Indian under the Indian Act.</p>",
+    moreinfo: 'What does it mean to have legal status?',
+    text: "<p style='padding-bottom: 8px;'> \
+          Having legal status means you're allowed to enter and stay in Canada as: \
+          </p> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+            <li>a Canadian citizen</li> \
+            <li>a temporary resident</li> \
+            <li>a permanent resident (landed immigrant)</li> \
+            <li>a refugee</li> \
+            <li>an Indigenous person registered under the <em>Indian Act</em></li> \
+          </ul> \
+          ",
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
-    useDataFromKey: 'legalStatus',
+    heading: apiEn.category.legal,
+    moreinfo: 'What does it mean to have legal status?',
+    text: "<p style='padding-bottom: 8px;'> \
+            Having legal status means your partner is allowed to enter and stay in Canada as: \
+          </p> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+            <li>a Canadian citizen</li> \
+            <li>a temporary resident</li> \
+            <li>a permanent resident (landed immigrant)</li> \
+            <li>a refugee</li> \
+            <li>an Indigenous person registered under the <em>Indian Act</em></li> \
+          </ul> \
+          ",
+  },
+  [FieldKey.INCOME]: {
+    heading: apiEn.category.income,
+    moreinfo: 'Which year’s income will be used when I apply?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+            By default, your latest income tax return will be used when you apply \
+            </p> \
+          </div> \
+          ",
+  },
+  [FieldKey.PARTNER_INCOME]: {
+    heading: apiEn.category.income,
+    moreinfo: 'Which year’s income will be used when I apply?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+            By default, your partner's latest income tax return will be used when you apply. \
+            </p> \
+          </div> \
+          ",
   },
 }
 

@@ -18,8 +18,8 @@ import { links } from './links/fr'
 const fr: Translations = {
   _language: Language.FR,
   benefit: {
-    [BenefitKey.oas]: 'Sécurité de la vieillesse (SV)',
-    [BenefitKey.gis]: 'Supplément de revenu garanti (SRG)',
+    [BenefitKey.oas]: 'Pension de la Sécurité de la vieillesse',
+    [BenefitKey.gis]: 'Supplément de revenu garanti',
     [BenefitKey.alw]: 'Allocation',
     [BenefitKey.afs]: 'Allocation au survivant',
   },
@@ -27,12 +27,12 @@ const fr: Translations = {
     [FieldCategory.AGE]: 'Âge',
     [FieldCategory.INCOME]: 'Revenu',
     [FieldCategory.LEGAL]: 'Statut légal',
-    [FieldCategory.RESIDENCE]: 'Historique des résidences',
-    [FieldCategory.MARITAL]: 'État civil',
+    [FieldCategory.RESIDENCE]: 'Historique de résidence',
+    [FieldCategory.MARITAL]: 'État matrimonial',
   },
   result: {
     [ResultKey.ELIGIBLE]: 'Admissible',
-    [ResultKey.INELIGIBLE]: 'Non admissible',
+    [ResultKey.INELIGIBLE]: 'Non\xA0admissible',
     [ResultKey.UNAVAILABLE]: 'Non disponible',
     [ResultKey.MORE_INFO]: "Besoin de plus d'information...",
     [ResultKey.INVALID]: "Votre demande n'est pas valide!",
@@ -41,220 +41,311 @@ const fr: Translations = {
   question: {
     [FieldKey.INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
-    [FieldKey.INCOME]:
-      'Quel est votre revenu annuel net (revenu après impôts) en dollars canadiens?',
-    [FieldKey.AGE]: 'Quel mois et quelle année êtes-vous né?',
-    [FieldKey.OAS_DEFER]: 'Quand souhaitez-vous commencer à recevoir la SV?',
-    [FieldKey.OAS_AGE]: 'À quel âge aimeriez-vous commencer à recevoir la SV?',
-    [FieldKey.MARITAL_STATUS]: 'Quel est votre état civil actuel?',
-    [FieldKey.LIVING_COUNTRY]: 'Dans quel pays résidez-vous?',
-    [FieldKey.LEGAL_STATUS]: 'Quel est votre statut légal au Canada?',
-    [FieldKey.LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous vécu à l'extérieur du Canada pendant plus de 6 mois?",
+    [FieldKey.INCOME]: 'Quel est votre revenu annuel net?',
+    [FieldKey.AGE]: 'Quel est votre mois de naissance?',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Recevez-vous la pension de la Sécurité de la vieillesse?',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Pendant combien de temps avez-vous reporté votre pension de la Sécurité de la vieillesse?',
+    [FieldKey.OAS_DEFER]:
+      'Quand souhaitez-vous commencer à recevoir la pension de la Sécurité de la vieillesse (SV)?',
+    [FieldKey.OAS_AGE]:
+      'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
+    [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial?',
+    [FieldKey.INV_SEPARATED]:
+      'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
+    [FieldKey.LIVING_COUNTRY]: 'Dans quel pays vivez-vous?',
+    [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
-      "Laquelle des options suivantes s'applique à votre conjoint?",
+      'Votre conjoint reçoit-il la pension de la Sécurité de la vieillesse?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      'Êtes-vous en mesure de nous fournir le revenu net annuel de votre partenaire?',
+      'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
-      'Quel est le revenu annuel net de votre conjoint en dollars canadiens?',
-    [FieldKey.PARTNER_AGE]:
-      'Quel mois et quelle année votre partenaire est-il né?',
-    [FieldKey.PARTNER_LIVING_COUNTRY]:
-      'Dans quel pays habite actuellement votre conjoint?',
+      'Quel est le revenu annuel net de votre conjoint?',
+    [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
-      'Quel est le statut légal actuel de votre conjoint?',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      "Depuis l'âge de 18 ans, votre conjoint a-t-il vécu à l'extérieur du Canada pendant plus de 6 mois?",
+      'Votre conjoint a-t-il un statut légal au Canada?',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il habité au Canada?",
-    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Votre conjoint-a-til déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
+      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
   },
   questionShortText: {
-    [FieldKey.INCOME_AVAILABLE]: 'Âge',
-    [FieldKey.INCOME]: 'Report de la SV',
-    [FieldKey.AGE]: 'Âge de report de la SV',
-    [FieldKey.OAS_DEFER]: 'Revenu fourni',
-    [FieldKey.OAS_AGE]: 'Revenu net',
-    [FieldKey.MARITAL_STATUS]: 'Statut légal',
+    [FieldKey.AGE]: 'Âge',
+    [FieldKey.ALREADY_RECEIVE_OAS]: 'Reçoit la pension de la SV',
+    [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
+    [FieldKey.OAS_DEFER_DURATION]: 'Report de la pension de la SV',
+    [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
+    [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
+    [FieldKey.INCOME]: 'Revenu net',
+    [FieldKey.LEGAL_STATUS]: 'Statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
-    [FieldKey.LEGAL_STATUS]:
-      "A vécu à l'extérieur du Canada pendant plus de 6 mois",
-    [FieldKey.LIVED_OUTSIDE_CANADA]: "Années vécues à l'extérieur du Canada",
-    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+    [FieldKey.LIVED_ONLY_IN_CANADA]: 'Seulement vécu au Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
-    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: 'État civil',
-    [FieldKey.PARTNER_BENEFIT_STATUS]: 'Revenu du partenaire fourni',
-    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu net du partenaire',
-    [FieldKey.PARTNER_INCOME]: 'Prestations de vieillesse du partenaire',
-    [FieldKey.PARTNER_AGE]: 'Âge du partenaire',
-    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Statut juridique du partenaire',
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Pays de résidence du partenaire',
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]:
-      "Le partenaire a vécu à l'extérieur du Canada pendant plus de 6 mois",
+    [FieldKey.MARITAL_STATUS]: 'État matrimonial',
+    [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
+    [FieldKey.PARTNER_INCOME]: 'Revenu net du conjoint',
+    [FieldKey.PARTNER_BENEFIT_STATUS]: 'Conjoint reçoit la pension de la SV',
+    [FieldKey.PARTNER_AGE]: 'Âge du conjoint',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut légal du conjoint',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du conjoint',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      'Conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Années du partenaire vécues à l'extérieur du Canada",
-    [FieldKey.PARTNER_EVER_LIVED_SOCIAL_COUNTRY]:
-      'Le partenaire vivait dans un pays avec un accord social',
+      'Années où le conjoint a vécu au Canada',
+  },
+  questionAriaLabel: {
+    [FieldKey.AGE]: 'Modifier votre âge',
+    [FieldKey.OAS_AGE]: 'Commencer à',
+    [FieldKey.ALREADY_RECEIVE_OAS]:
+      'Modifier si vous recevez la pension de la SV',
+    [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Modifier le report de votre pension de la SV',
+    [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
+    [FieldKey.INCOME]: 'Modifier votre revenu net',
+    [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
+    [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      'Modifier si vous avez seulement vécu au Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'Modifier le nombre d’années vécues au Canada',
+    [FieldKey.MARITAL_STATUS]: 'Modifier votre état matrimonial',
+    [FieldKey.INV_SEPARATED]:
+      'Modifier votre statut de séparation involontaire',
+    [FieldKey.PARTNER_INCOME_AVAILABLE]:
+      'Modifier si vous fournissez le revenu de votre conjoint',
+    [FieldKey.PARTNER_INCOME]: 'Modifier le revenu net de votre conjoint',
+    [FieldKey.PARTNER_BENEFIT_STATUS]:
+      'Modifier si votre conjoint reçoit la pension de la SV',
+    [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
+    [FieldKey.PARTNER_LEGAL_STATUS]:
+      'Modifier le statut légal de votre conjoint',
+    [FieldKey.PARTNER_LIVING_COUNTRY]:
+      'Modifier le pays de résidence de votre conjoint',
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
+      'Modifier si votre conjoint a seulement vécu au Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Modifier le nombre d’années vécues au Canada de votre conjoint',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
-      'Fournir votre revenu vous donnera des résultats plus utiles et plus précis.',
-    [FieldKey.PARTNER_INCOME_AVAILABLE]:
-      'Fournir le revenu de votre partenaire vous donnera des résultats plus utiles et plus précis.',
-    [FieldKey.AGE]:
-      'Vous pouvez entrer votre âge actuel, ou un âge futur à des fins de planification.',
-    [FieldKey.OAS_DEFER]:
-      'Si vous recevez déjà la SV, indiquez quand vous avez commencé à la recevoir.</br>En savoir plus sur {LINK_OAS_DEFER_INLINE}.',
-    [FieldKey.OAS_AGE]: 'Celui-ci doit être compris entre 65 et 70.',
+      'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      'Vous trouverez votre revenu net à la ligne 23600 de votre déclaration de revenus.',
+      `Incluez le revenu après impôt de toutes les sources (la ligne&nbsp;23600 de votre déclaration de revenus), moins&nbsp;:` +
+      `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
+      `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
+    [FieldKey.INV_SEPARATED]:
+      "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
+    [FieldKey.PARTNER_INCOME]:
+      `Incluez le revenu après impôt de toutes les sources (la ligne&nbsp;23600 de sa déclaration de revenus), moins&nbsp;:` +
+      `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
+      `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
+    [FieldKey.OAS_DEFER]:
+      '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
+    [FieldKey.OAS_DEFER_DURATION]:
+      'Si vous n’avez pas reporté votre pension, passez à l’étape suivante.',
+    [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation. Vous pourrez quand même voir le montant que vous pourriez recevoir.",
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
       {
         key: true,
-        text: 'Oui, je fournirai mes revenus',
+        text: 'Oui, je fournirai mon revenu',
+        shortText: 'Oui',
       },
       {
         key: false,
-        text: 'Non, je ne fournirai pas mes revenus pour le moment',
+        text: 'Non, je ne fournirai pas mon revenu pour le moment',
+        shortText: 'Non fourni',
       },
     ],
     [FieldKey.PARTNER_INCOME_AVAILABLE]: [
       {
         key: true,
-        text: 'Oui, je fournirai les revenus de mon partenaire',
+        text: 'Oui, je fournirai le revenu de mon conjoint',
+        shortText: 'Oui',
       },
       {
         key: false,
-        text: 'Non, je ne fournirai pas les revenus de mon partenaire pour le moment',
+        text: 'Non, je ne fournirai pas le revenu de mon conjoint pour le moment',
+        shortText: 'Non fourni',
+      },
+    ],
+    [FieldKey.ALREADY_RECEIVE_OAS]: [
+      {
+        key: true,
+        text: 'Oui',
+        shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.OAS_DEFER]: [
       {
         key: false,
-        text: "Je voudrais commencer à recevoir la SV quand j'aurai 65 ans (le plus courant)",
+        text: 'Je voudrais commencer à 65 ans (le plus commun)',
+        shortText: 'Commencer à 65&nbsp;ans',
       },
       {
         key: true,
-        text: 'Je voudrais retarder le moment où je commencerai à recevoir la SV (paiements mensuels plus élevés)',
+        text: 'Je voudrais retarder mon premier paiement (montants plus élevés)',
+        shortText: 'Retard',
       },
     ],
     [FieldKey.LEGAL_STATUS]: [
-      { key: LegalStatus.CANADIAN_CITIZEN, text: 'Citoyen canadien' },
       {
-        key: LegalStatus.PERMANENT_RESIDENT,
-        text: 'Résident permanent ou immigrant reçu (non parrainé)',
+        key: LegalStatus.YES,
+        text: 'Oui',
+        shortText: 'Oui',
       },
       {
-        key: LegalStatus.SPONSORED,
-        text: 'Résident permanent ou immigrant reçu (parrainé)',
-      },
-      {
-        key: LegalStatus.INDIAN_STATUS,
-        text: "Statut d'Indien ou carte de statut",
-      },
-      {
-        key: LegalStatus.OTHER,
-        text: 'Autre (par exemple, résident temporaire, étudiant, travailleur temporaire)',
+        key: LegalStatus.NO,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
-    [FieldKey.LIVED_OUTSIDE_CANADA]: [
-      {
-        key: false,
-        text: "Non, je n'ai pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
-      },
+    [FieldKey.LIVED_ONLY_IN_CANADA]: [
       {
         key: true,
-        text: "Oui, j'ai vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: 'Oui',
+        shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
-    [FieldKey.PARTNER_LIVED_OUTSIDE_CANADA]: [
-      {
-        key: false,
-        text: "Non, mon conjoint n'a pas vécu à l'extérieur du Canada pendant plus de 6 mois.",
-      },
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: [
       {
         key: true,
-        text: "Oui, mon conjoint a vécu à l'extérieur du Canada pendant plus de 6 mois.",
+        text: 'Oui',
+        shortText: 'Oui',
+      },
+      {
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Célibataire, divorcé(e), ou séparé(e)',
+        text: 'Célibataire, divorcé ou séparé',
+        shortText: 'Célibataire, divorcé ou séparé',
       },
       {
         key: MaritalStatus.PARTNERED,
-        text: 'Marié(e) ou conjoint(e) de fait',
+        text: 'Marié ou conjoint de fait',
+        shortText: 'Marié ou conjoint de fait',
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Partenaire veuf(ve)',
+        text: 'Conjoint survivant',
+        shortText: 'Conjoint survivant',
+      },
+    ],
+    [FieldKey.INV_SEPARATED]: [
+      {
+        key: true,
+        text: 'Oui',
+        shortText: 'Oui',
       },
       {
-        key: MaritalStatus.INV_SEPARATED,
-        text: 'Conjoints vivants séparément pour des raisons indépendantes de leur volonté',
+        key: false,
+        text: 'Non',
+        shortText: 'Non',
       },
     ],
     [FieldKey.PARTNER_BENEFIT_STATUS]: [
-      {
-        key: PartnerBenefitStatus.OAS,
-        text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
-      },
+      // {
+      //   key: PartnerBenefitStatus.OAS,
+      //   text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+      //   shortText: 'Oui',
+      // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Mon conjoint reçoit la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti',
+        text: 'Oui, mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+        shortText: 'Oui',
+      },
+      // {
+      //   key: PartnerBenefitStatus.ALW,
+      //   text: "Mon conjoint reçoit l'Allocation",
+      //   shortText: 'Oui',
+      // },
+      {
+        key: PartnerBenefitStatus.NONE,
+        text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
+        shortText: 'Non',
       },
       {
-        key: PartnerBenefitStatus.ALW,
-        text: "Mon conjoint reçoit l'Allocation",
+        key: PartnerBenefitStatus.HELP_ME,
+        text: 'Je ne sais pas',
+        shortText: 'Je ne sais pas',
       },
-      { key: PartnerBenefitStatus.NONE, text: 'Aucune des réponses' },
-      { key: PartnerBenefitStatus.HELP_ME, text: 'Aidez-moi à trouver' },
     ],
     [FieldKey.LIVING_COUNTRY]: livingCountry,
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]: [
       {
         key: true,
         text: 'Oui',
+        shortText: 'Oui',
       },
       {
         key: false,
         text: 'Non',
+        shortText: 'Non',
       },
     ],
   },
   detail: {
-    eligible:
-      "D'après les informations fournies, vous êtes probablement admissible à cette prestation.",
+    eligible: 'Vous êtes probablement admissible à cette prestation.',
+    eligibleIncomeTooHigh:
+      'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     eligibleDependingOnIncome:
-      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de vos revenus, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
-      "Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. Une estimation des droits n'est pas disponible à moins que vous ne fournissiez votre revenu.",
+      'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
+    yourDeferralOptions: 'Vos options de report',
+    sinceYouAreSixty:
+      'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
+    youCanAply:
+      'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+    delayMonths:
+      'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     eligibleWhen60ApplyNow:
-      'Vous serez probablement admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
+      'Vous pourriez être admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen65ApplyNow:
-      'Vous serez probablement admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
+      'Vous pourriez être admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
-      'Vous serez probablement admissible à votre 60e anniversaire.',
-    eligibleWhen65:
-      'Vous serez probablement admissible à votre 65e anniversaire.',
+      "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
+    eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      'Vous devez vivre au Canada pour être admissible à cette prestation.',
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     mustBeOasEligible:
-      'Vous devez être admissible à la Sécurité de la vieillesse pour être admissible à cette prestation.',
+      'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
       "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
     mustMeetIncomeReq:
@@ -271,43 +362,107 @@ const fr: Translations = {
       "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnLegal:
       'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
-    dependingOnLegalSponsored:
-      'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen60:
       'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
       'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+    youCantGetThisBenefit:
+      'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
+    thisEstimate:
+      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}.',
     alwNotEligible:
-      "L'allocation s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) reçoit le Supplément de revenu garanti.",
+      "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
+    alwEligibleButPartnerAlreadyIs:
+      "Pour être admissible à cette prestation, votre partenaire doit recevoir la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#partnerBenefitStatus'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si votre partenaire recevait ces prestations.",
+    alwEligibleIncomeTooHigh:
+      'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    alwIfYouApply:
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
     afsNotEligible:
-      "L'Allocation au survivant s'adresse aux personnes âgées de 60 à 64 ans dont le partenaire (époux ou conjoint de fait) est décédé.",
+      "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
       "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
     expectToReceive:
-      'Vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+    oasClawbackInCanada:
+      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous devrez rembourser une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
+    oasClawbackNotInCanada:
+      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous devrez rembourser une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de&nbsp;: <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
+    oas: {
+      eligibleIfIncomeIsLessThan:
+        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
+      dependOnYourIncome:
+        'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
+      eligibleIncomeTooHigh:
+        'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+      serviceCanadaReviewYourPayment:
+        'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
+      automaticallyBePaid:
+        'Vous recevrez automatiquement des paiements si votre revenu vous rend admissible.',
+      youShouldReceiveLetter:
+        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+      youShouldHaveReceivedLetter:
+        "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+      applyOnline:
+        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
+      over70:
+        'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
+      eligibleWhenTurn65:
+        "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/eligibility#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
+      ifNotReceiveLetter64:
+        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+    },
+    gis: {
+      eligibleDependingOnIncomeNoEntitlement:
+        'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+      incomeTooHigh:
+        'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+      ifYouApply:
+        "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est admissible.</>",
+    },
   },
   detailWithHeading: {
+    ifYouDeferYourPension: {
+      heading: 'Si vous reportez votre pension',
+      text: 'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
+    },
     oasDeferralApplied: {
       heading: 'Comment le report affecte vos paiements',
-      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
+      text: 'Vous avez reporté vos prestations de la SV de {OAS_DEFERRAL_YEARS}. Cela signifie que vos paiements de la SV commenceront une fois que vous aurez {OAS_DEFERRAL_AGE} ans et que vous recevrez {OAS_DEFERRAL_INCREASE} supplémentaires par mois.',
     },
     oasDeferralAvailable: {
       heading: 'Vous pouvez peut-être différer vos paiements',
-      text: 'Pour en savoir plus sur la possibilité de reporter votre premier paiement, {LINK_OAS_DEFER_CLICK_HERE}.',
+      text: 'Renseignez-vous sur la {LINK_OAS_DEFER_CLICK_HERE}.',
     },
     oasClawback: {
       heading: 'Vous devrez peut-être rembourser une partie de votre pension',
-      text: 'Étant donné que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
+      text: 'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
     },
     oasIncreaseAt75: {
-      heading: 'Vos paiements augmenteront lorsque vous atteindrez 75 ans',
-      text: "Une fois que vous aurez atteint l'âge de 75 ans, vos paiements de la SV augmenteront de 10 %, ce qui signifie que vous recevrez {OAS_75_AMOUNT} par mois.",
+      heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
+      text: 'Lorsque vous aurez 75&nbsp;ans, vos paiements augmenteront de 10&nbsp;%.',
     },
     oasIncreaseAt75Applied: {
-      heading: 'Vos versements ont augmenté car vous avez plus de 75 ans',
-      text: 'Puisque vous avez plus de 75 ans, vos versements de la SV ont été augmentés de 10 %.',
+      heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
+      text: 'Parce que vous avez plus de 75&nbsp;ans, vos paiements ont augmenté de 10&nbsp;%.',
+    },
+    calculatedBasedOnIndividualIncome: {
+      heading: 'Les montants ont été calculés à partir du revenu individuel',
+      text: 'Parce que vous ne vivez pas avec votre conjoint pour des raisons hors de votre contrôle, vous pouvez recevoir des paiements mensuels plus élevés.',
+    },
+    partnerEligible: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: "Selon vos renseignements, votre conjoint pourrait recevoir&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+    },
+    partnerDependOnYourIncome: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
+    },
+    partnerEligibleButAnsweredNo: {
+      heading: 'Votre conjoint pourrait être admissible',
+      text: 'Vous pouvez <a href="/fr/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
   },
   summaryTitle: {
@@ -324,7 +479,7 @@ const fr: Translations = {
     [SummaryState.MORE_INFO]:
       "Veuillez remplir le formulaire. Selon les renseignements que vous fournirez aujourd'hui, l'application estimera votre admissibilité. Si vous êtes admissible, l'application fournira également une estimation de votre paiement mensuel.",
     [SummaryState.UNAVAILABLE]:
-      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à communiquer avec {LINK_SERVICE_CANADA}.",
+      "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à {LINK_SERVICE_CANADA}.",
     [SummaryState.AVAILABLE_ELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT_SUM}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     [SummaryState.AVAILABLE_INELIGIBLE]:
@@ -332,11 +487,21 @@ const fr: Translations = {
     [SummaryState.AVAILABLE_DEPENDING]:
       "En fonction de vos revenus, vous pouvez être éligible aux prestations de vieillesse. Voir les détails ci-dessous pour plus d'informations.",
   },
+  oasDeferralTable: {
+    title: 'Montants de report estimés',
+    headingAge: "Si vous attendez d'avoir...",
+    headingAmount: 'Vous pourriez recevoir chaque mois...',
+  },
   links,
   incomeSingle: 'votre revenu',
-  incomeCombined: 'le revenu combiné de vous et de votre partenaire',
+  incomeCombined: 'le revenu combiné de vous et votre conjoint',
+  opensNewWindow: 'ouvre une nouvelle fenêtre',
   yes: 'Oui',
   no: 'Non',
   year: 'an',
+  month: 'mois',
+  months: 'mois',
+  your: 'votre revenu',
+  complete: 'vos revenus',
 }
 export default fr

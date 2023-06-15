@@ -3,74 +3,84 @@ import { useRouter } from 'next/router'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Language, SummaryState } from '../../utils/api/definitions/enums'
-import { BenefitResult, SummaryObject } from '../../utils/api/definitions/types'
+import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
-import { EstimatedTotalRow } from './EstimatedTotalRow'
+import { EstimatedTotalItem } from './EstimatedTotalItem'
 
 export const EstimatedTotal: React.VFC<{
   resultsEligible: BenefitResult[]
-  summary: SummaryObject
-}> = ({ resultsEligible, summary }) => {
+  entitlementSum: number
+  state: SummaryState
+  partner?: boolean
+  partnerNoOAS: boolean
+}> = ({
+  resultsEligible,
+  entitlementSum,
+  state,
+  partner = false,
+  partnerNoOAS,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
 
   const language = useRouter().locale as Language
 
-  const introSentence =
-    summary.state === SummaryState.AVAILABLE_DEPENDING
-      ? tsln.resultsPage.basedOnYourInfoAndIncomeTotal
-      : tsln.resultsPage.basedOnYourInfoTotal
+  const getText = (type) => {
+    switch (type) {
+      case 'header':
+        return partner
+          ? tsln.resultsPage.partnerEstimatedTotal
+          : tsln.resultsPage.yourEstimatedTotal
+      case 'intro':
+        return partner
+          ? tsln.resultsPage.basedOnPartnerInfoTotal
+          : tsln.resultsPage.basedOnYourInfoTotal
+    }
+  }
+
+  // If partner answers "No" to receiving OAS, the amounts should not show
+  if (partner && partnerNoOAS) {
+    entitlementSum = 0
+    resultsEligible = resultsEligible.map((benefit) => {
+      return { ...benefit, entitlement: { ...benefit.entitlement, result: 0 } }
+    })
+  }
 
   return (
     <>
-      <h2 id="estimated" className="h2 mt-12">
-        <Image
-          src="/money.png"
-          alt={tsln.resultsPage.dollarSign}
-          width={30}
-          height={30}
-        />{' '}
-        {tsln.resultsPage.yourEstimatedTotal}
-        {numberToStringCurrency(summary.entitlementSum, language)}
+      <h2 id={partner ? 'partnerEstimated' : 'estimated'} className="h2 mt-12">
+        {entitlementSum != 0 ? (
+          <Image src="/money.png" alt="" width={30} height={30} />
+        ) : (
+          <Image src="/green-check-mark.svg" alt="" width={30} height={30} />
+        )}
+        {getText('header')}
       </h2>
 
       <div>
-        <p className="pl-[35px]">
-          {introSentence.replace(
-            '{AMOUNT}',
-            numberToStringCurrency(summary.entitlementSum, language)
-          )}
-        </p>
-        <h3 className="my-6 font-semibold">{tsln.resultsPage.header}</h3>
-        <table className="text-left w-full">
-          <thead className="font-bold border border-[#DDDDDD] bg-[#EEEEEE]">
-            <tr>
-              <th className="pl-5">{tsln.resultsPage.tableHeader1}</th>
-              <th className="pr-5 text-right">
-                {tsln.resultsPage.tableHeader2}
-              </th>
-            </tr>
-          </thead>
+        <p
+          className="pl-[35px]"
+          dangerouslySetInnerHTML={{
+            __html: getText('intro'),
+          }}
+        />
 
-          <tbody className="align-top">
-            {resultsEligible.map((benefit) => (
-              <EstimatedTotalRow
-                key={benefit.benefitKey}
-                heading={apiTrans.benefit[benefit.benefitKey]}
-                result={benefit}
-                showEntitlement={summary.entitlementSum != 0}
-              />
-            ))}
-            {summary.entitlementSum != 0 && (
-              <tr className="border border-[#DDDDDD]">
-                <td className="pl-5">{tsln.resultsPage.tableTotalAmount}</td>
-                <td className="text-right min-w-[68px] pr-5">
-                  {numberToStringCurrency(summary.entitlementSum, language)}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <ul className="pl-[35px] ml-[20px] my-2 list-disc text-content">
+          {resultsEligible.map((benefit) => (
+            <EstimatedTotalItem
+              key={benefit.benefitKey}
+              heading={apiTrans.benefit[benefit.benefitKey]}
+              result={benefit}
+            />
+          ))}
+        </ul>
+
+        {entitlementSum != 0 && (
+          <p className="pl-[35px]">
+            {partner ? tsln.resultsPage.partnerTotal : tsln.resultsPage.total}
+            <strong>{numberToStringCurrency(entitlementSum, language)}</strong>.
+          </p>
+        )}
       </div>
     </>
   )

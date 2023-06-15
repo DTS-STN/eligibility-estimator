@@ -19,16 +19,18 @@ export type WebTranslations = {
   residenceHistoryText: string
   maritalStatusText: string
   partnerText: string
+  youNeedBeginningText: string
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
-  whatBenefitsTheEstimatorIsFor: string
+  whatBenefitsIncluded: string
   benefitAvailable: string
   learnMoreAboutOldAgeSecurity: string
   gisDefinitionText: string
   learnMoreAboutGis: string
   alwDefinitionText: string
   learnMoreAboutAlw: string
+  inflationInfo: string
   afsDefinitionText: string
   learnMoreAboutAfs: string
   notIncludeCPP: string
@@ -52,7 +54,17 @@ export type WebTranslations = {
   breadcrumb1URL: string
   breadcrumb2Title: string
   breadcrumb2URL: string
+  breadcrumb3Title: string
+  breadcrumb3URL: string
+  breadcrumb4Title: string
+  breadcrumb4URL: string
+  breadcrumb5Title: string
+  breadcrumb5URL: string
   title: string
+  introPageTitle: string
+  introPageOASHeading: string
+  questionPageTitle: string
+  resultPageTitle: string
   menuTitle: string
   clear: string
   back: string
@@ -61,6 +73,8 @@ export type WebTranslations = {
   getEstimate: string
   required: string
   homePageHeader1: string
+  workInProgress: string
+  workInProgressBody: string
   homePageP1: string
   homePageP3: string
   homePageP4: string
@@ -81,12 +95,24 @@ export type WebTranslations = {
   socialLink4: string
   socialLink5: string
   youMayBeEligible: string
-
+  pageNotFound: string
+  warningText: string
   category: Translations['category']
+  errorBoxTitle: string
+  useEstimatorIf: string
 
+  // meta tags
+  meta: {
+    homeDescription: string
+    homeShortDescription: string
+    homeKeywords: string
+    author: string
+    homeSubject: string
+  }
   //results page
   resultsPage: {
     header: string
+    general: string
     onThisPage: string
     tableHeader1: string
     tableHeader2: string
@@ -94,12 +120,21 @@ export type WebTranslations = {
     whatYouToldUs: string
     youMayBeEligible: string
     youAreNotEligible: string
+    partnerNotEligible: string
     basedOnYourInfoEligible: string
     basedOnYourInfoAndIncomeEligible: string
     basedOnYourInfoNotEligible: string
+    basedOnPartnerInfoNotEligible: string
     yourEstimatedTotal: string
+    partnerEstimatedTotal: string
+    yourEstimatedNoIncome: string
     basedOnYourInfoTotal: string
     basedOnYourInfoAndIncomeTotal: string
+    basedOnPartnerInfoTotal: string
+    basedOnPartnerInfoAndIncomeTotal: string
+    total: string
+    partnerTotal: string
+    ifIncomeNotProvided: string
     nextSteps: string
     youMayNotBeEligible: string
     noAnswersFound: string
@@ -108,9 +143,17 @@ export type WebTranslations = {
     info: string
     note: string
     link: string
-    dollarSign: string
+    nextStepTitle: string
+    nextStepGis: string
+    CTATitle: string
+    CTABody: string
+    CTAButton: string
+    month: string
+    //nextStepOas: string
   }
+
   resultsQuestions: Translations['questionShortText']
+  resultsEditAriaLabels: Translations['questionAriaLabel']
   modifyAnswers: string
   errors: {
     empty: string
@@ -130,6 +173,18 @@ export type WebTranslations = {
 
   tooltip: {
     moreInformation: string
+  }
+
+  partnerIsNotEligible: string
+  partnerLegalStatusNotEligible: string
+  partnerYearsLivingCanadaNotEligible: string
+  partnerInformation: string
+  partnerInformationDescription: string
+
+  // duration component
+  duration: {
+    months: string
+    years: string
   }
 }
 

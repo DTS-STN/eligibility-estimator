@@ -38,9 +38,10 @@ paths:
         - $ref: '#/components/parameters/oasDefer'
         - $ref: '#/components/parameters/oasAge'
         - $ref: '#/components/parameters/maritalStatus'
+        - $ref: '#/components/parameters/invSeparated'
         - $ref: '#/components/parameters/livingCountry'
         - $ref: '#/components/parameters/legalStatus'
-        - $ref: '#/components/parameters/livedOutsideCanada'
+        - $ref: '#/components/parameters/livedOnlyInCanada'
         - $ref: '#/components/parameters/yearsInCanadaSince18'
         - $ref: '#/components/parameters/everLivedSocialCountry'
         - $ref: '#/components/parameters/partnerBenefitStatus'
@@ -49,9 +50,8 @@ paths:
         - $ref: '#/components/parameters/partnerAge'
         - $ref: '#/components/parameters/partnerLivingCountry'
         - $ref: '#/components/parameters/partnerLegalStatus'
-        - $ref: '#/components/parameters/partnerLivedOutsideCanada'
+        - $ref: '#/components/parameters/partnerLivedOnlyInCanada'
         - $ref: '#/components/parameters/partnerYearsInCanadaSince18'
-        - $ref: '#/components/parameters/partnerEverLivedSocialCountry'
       responses:
         '200':
           $ref: '#/components/responses/200'
@@ -70,11 +70,14 @@ components:
           - income
           - age
           - oasDefer
+          - receiveOAS
+          - oasDeferDuration
           - oasAge
           - maritalStatus
+          - invSeparated
           - livingCountry
           - legalStatus
-          - livedOutsideCanada
+          - livedOnlyInCanada
           - yearsInCanadaSince18
           - everLivedSocialCountry
           - partnerBenefitStatus
@@ -83,9 +86,8 @@ components:
           - partnerAge
           - partnerLivingCountry
           - partnerLegalStatus
-          - partnerLivedOutsideCanada
+          - partnerLivedOnlyInCanada
           - partnerYearsInCanadaSince18
-          - partnerEverLivedSocialCountry
 
     ResultKey:
       type: string
@@ -107,6 +109,7 @@ components:
         - You meet the criteria
         - Age does not meet requirement for this benefit
         - Age does not meet yet requirement for this benefit, will in the future
+        - Age 64 and does not meet the requirement
         - Not enough years in Canada
         - Not living in Canada
         - Legal status does not meet requirement for this benefit
@@ -117,6 +120,8 @@ components:
         - Income not provided
         - Your marital status does not meet the requirement for this benefit
         - Your partner does not receive the required benefits
+        - Age between 65 and 69
+        - Age 70 or over
 
     ResultObject:
       type: object
@@ -382,6 +387,16 @@ components:
         description: The current marital status of the client.
       allowEmptyValue: false
 
+    invSeparated:
+      name: invSeparated
+      in: query
+      description: Separated either Involutarily or Voluntarily.
+      required: false
+      example: false
+      schema:
+        type: boolean
+      allowEmptyValue: false
+
     livingCountry:
       name: livingCountry
       in: query
@@ -410,18 +425,15 @@ components:
       schema:
         type: string
         enum:
-          - canadianCitizen
-          - permanentResident
-          - sponsored
-          - indianStatus
-          - other
+          - yes
+          - no
         description: The current legal status of the client.
       allowEmptyValue: false
 
-    livedOutsideCanada:
-      name: livedOutsideCanada
+    livedOnlyInCanada:
+      name: livedOnlyInCanada
       in: query
-      description: Since the age of 18 years old, have you lived outside of Canada for longer than 6 months?
+      description: Since the age of 18 years old, have you lived only in Canada?
       required: false
       example: false
       schema:
@@ -534,18 +546,15 @@ components:
       schema:
         type: string
         enum:
-          - canadianCitizen
-          - permanentResident
-          - sponsored
-          - indianStatus
-          - other
+          - yes
+          - no
         description: The current legal status of the partner.
       allowEmptyValue: false
 
-    partnerLivedOutsideCanada:
-      name: partnerLivedOutsideCanada
+    partnerLivedOnlyInCanada:
+      name: partnerLivedOnlyInCanada
       in: query
-      description: Since the age of 18 years old, has your partner lived outside of Canada for longer than 6 months?
+      description: Since the age of 18, has your partner lived only in Canada?
       required: false
       example: false
       schema:
@@ -566,14 +575,4 @@ components:
         type: integer
         description: Years, up to a max of 100.
         maximum: 100
-      allowEmptyValue: false
-
-    partnerEverLivedSocialCountry:
-      name: partnerEverLivedSocialCountry
-      in: query
-      description: Has the partner ever lived in a country with a social agreement? [link of countries to be included]
-      required: false
-      example: true
-      schema:
-        type: boolean
       allowEmptyValue: false

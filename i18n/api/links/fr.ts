@@ -14,28 +14,32 @@ export const links: LinkDefinitions = {
   },
   overview: {
     oas: {
-      text: 'En savoir plus sur la Sécurité de la vieillesse',
+      text: 'En savoir plus sur la pension de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
       order: 3,
       icon: LinkIcon.info,
+      action: 'Learn about OAS',
     },
     gis: {
       text: 'En savoir plus sur le Supplément de revenu garanti',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti.html',
       order: 4,
       icon: LinkIcon.info,
+      action: 'Learn about GIS',
     },
     alw: {
       text: "En savoir plus sur l'Allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation.html',
       order: 5,
       icon: LinkIcon.info,
+      action: 'Learn about ALW',
     },
     afs: {
       text: "En savoir plus sur l'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
       order: 6,
       icon: LinkIcon.info,
+      action: 'Learn about ALWS',
     },
   },
   oasMaxIncome: {
@@ -84,7 +88,7 @@ export const links: LinkDefinitions = {
     order: 15,
   },
   oasPartial: {
-    text: 'Pension de la Sécurité de vieillesse: Moins de 40 ans au Canada',
+    text: 'Pension de la Sécurité de vieillesse: Moins de 40 ans au Canada',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.3-3.1',
     order: 16,
   },
@@ -105,42 +109,51 @@ export const links: LinkDefinitions = {
   },
   apply: {
     oas: {
-      text: 'Faire une demande de la Sécurité de la vieillesse',
+      text: 'Faire une demande pour la pension de la Sécurité de la vieillesse',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/demande.html',
       order: 20,
       icon: LinkIcon.link,
+      action: 'Apply for OAS',
     },
     gis: {
-      text: 'Faire une demande de le Supplément de revenu garanti',
+      text: 'Faire une demande pour le Supplément de revenu garanti',
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html',
       order: 21,
       icon: LinkIcon.link,
+      action: 'Apply for GIS',
     },
     alw: {
-      text: "Faire une demande de l'Allocation",
+      text: "Faire une demande d'Allocation",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/demande.html',
       order: 22,
       icon: LinkIcon.link,
+      action: 'Apply for ALW',
     },
     afs: {
-      text: "Faire une demande de l'Allocation au survivant",
+      text: "Faire une demande d'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
       order: 23,
       icon: LinkIcon.link,
+      action: 'Apply for ALWS',
     },
   },
   SC: {
-    text: 'Service Canada',
+    text: 'communiquez avec Service Canada',
     url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
     order: -1,
   },
+  SCAccount: {
+    text: 'Mon dossier Service Canada',
+    url: 'https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html',
+    order: -1,
+  },
   oasDeferClickHere: {
-    text: 'cliquez ici',
+    text: 'possibilité de reporter votre premier paiement de la pension de la Sécurité de la vieillesse',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
     order: -1,
   },
   oasDeferInline: {
-    text: 'le report de la SV',
+    text: 'En savoir plus sur le report de la pension de la SV',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/montant-prestation.html#h2.2',
     order: -1,
   },
@@ -151,7 +164,7 @@ export const links: LinkDefinitions = {
   },
   reasons: {
     oas: {
-      text: "Voir tous les critères d'admissibilité pour la Sécurité de la vieillesse",
+      text: "Voir tous les critères d'admissibilité pour la pension de la Sécurité de la vieillesse",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/admissibilite.html',
       order: -1,
       icon: LinkIcon.note,
@@ -176,8 +189,18 @@ export const links: LinkDefinitions = {
     },
   },
   oasRecoveryTaxInline: {
-    text: "d'impôt de récupération",
+    text: 'impôt de récupération',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
+    order: -1,
+  },
+  oasLearnAboutRecoveryTax: {
+    text: "En apprendre davantage sur l'impôt de récupération",
+    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/impot-recuperation.html',
+    order: -1,
+  },
+  oasNonResidentTax: {
+    text: 'impôt des non-résidents',
+    url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/rpc-internationales/avant-demande.html',
     order: -1,
   },
 }

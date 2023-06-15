@@ -21,106 +21,145 @@ import {
  * - types.ts
  * - index.test.ts
  *
- * Note: Do not require fields here, do it in the BenefitHandler. This should gladly accept an empty object.
  */
+
+export const getMinBirthYear = () => {
+  const wholeYear = new Date().getFullYear() - 1900
+  const partialYear = (new Date().getMonth() / 12).toFixed(1)
+  return wholeYear + parseFloat(partialYear)
+}
+
 export const RequestSchema = Joi.object({
-  incomeAvailable: Joi.boolean(),
+  incomeAvailable: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.provideIncomeEmpty }),
   income: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.incomeEmpty })
     .precision(2)
     .min(0)
-    .message(ValidationErrors.incomeBelowZero)
-    .less(
-      Joi.ref('age', {
-        adjust: (age) =>
-          age >= 75
-            ? legalValues.oas.incomeLimit75
-            : legalValues.oas.incomeLimit,
-      })
-    )
-    .message(ValidationErrors.incomeTooHigh),
+    .message(ValidationErrors.incomeBelowZero),
+  // .less(
+  //   Joi.ref('age', {
+  //     adjust: (age) =>
+  //       age >= 75
+  //         ? legalValues.oas.incomeLimit75
+  //         : legalValues.oas.incomeLimit,
+  //   })
+  // )
+  // .message(ValidationErrors.incomeTooHigh),
   age: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.ageUnder18)
-    .max(150)
-    .message(ValidationErrors.ageOver150),
-  oasDefer: Joi.boolean(),
+    .message(ValidationErrors.invalidAge)
+    .max(getMinBirthYear())
+    .message(ValidationErrors.invalidAge),
+  receiveOAS: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.receiveOASEmpty }),
+  oasDeferDuration: Joi.string(),
+  oasDefer: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.oasDeferEmpty }),
   oasAge: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.oasAge65to70 })
     .min(65)
     .message(ValidationErrors.oasAge65to70)
     .max(70)
     .message(ValidationErrors.oasAge65to70),
   maritalStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.maritalStatusEmpty })
     .valid(...Object.values(MaritalStatus))
     .messages({ 'any.invalid': ValidationErrors.maritalUnavailable }),
+  invSeparated: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.invSeparatedEmpty }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
     .valid(...Object.values(LegalStatus))
-    .invalid(LegalStatus.SPONSORED, LegalStatus.OTHER)
+    .invalid(LegalStatus.NO)
     .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
-  livedOutsideCanada: Joi.boolean(),
+  livedOnlyInCanada: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.onlyInCanadaEmpty }),
   yearsInCanadaSince18: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge)
-    /*
-     If they are currently living in a country with an agreement, then the
-     everLivedSocialCountry rules below will never apply, as we don't ask that
-     question if they currently live in a country with an agreement.
-     So, we apply the rule here in this case.
-    */
-    .when('livingCountry', {
-      is: Joi.string().valid(...Object.values(AGREEMENT_COUNTRIES)),
-      then: Joi.number()
-        .min(10) // sticking with the "easy" limit of 10, because the 20 only applies to OAS
-        .message(ValidationErrors.socialCountryUnavailable),
-    }),
+    .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
-    // if they haven't lived in Canada long enough,
-    .when('yearsInCanadaSince18', {
-      not: Joi.number().min(10), // sticking with the "easy" limit of 10, because the 20 only applies to OAS
-      // then we'll stop them no matter what.
-      // if they put true, they should contact Service Canada.
-      // if they put false, we can confidently say they are not eligible for anything.
-      then: Joi.boolean().when('.', {
-        is: Joi.boolean().valid(true),
-        then: Joi.forbidden().messages({
-          'any.unknown': ValidationErrors.socialCountryUnavailable,
-        }),
-        otherwise: Joi.forbidden().messages({
-          'any.unknown': ValidationErrors.yearsInCanadaNotEnough,
-        }),
-      }),
-    }),
-  partnerBenefitStatus: Joi.string().valid(
-    ...Object.values(PartnerBenefitStatus)
-  ),
-  partnerIncomeAvailable: Joi.boolean(),
+    .required()
+    .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
+    .custom((value, helpers) => {
+      const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
+      if (livingCountry === 'CAN') {
+        if (yearsInCanadaSince18 < 10) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable10
+              : ValidationErrors.yearsInCanadaNotEnough10,
+          })
+        }
+      } else {
+        if (yearsInCanadaSince18 < 20) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable20
+              : ValidationErrors.yearsInCanadaNotEnough20,
+          })
+        }
+      }
+    }, 'custom validation for the "everLivedSocialCountry" question'),
+  partnerBenefitStatus: Joi.string()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerBenefitStatusEmpty })
+    .valid(...Object.values(PartnerBenefitStatus)),
+  partnerIncomeAvailable: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.providePartnerIncomeEmpty }),
   partnerIncome: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerIncomeEmpty })
     .precision(2)
     .min(0)
-    .message(ValidationErrors.partnerIncomeBelowZero)
-    .less(
-      Joi.ref('income', {
-        adjust: (income) => legalValues.oas.incomeLimit - income,
-      })
-    )
-    .message(ValidationErrors.partnerIncomeTooHigh),
+    .message(ValidationErrors.partnerIncomeBelowZero),
+  // .less(
+  //   Joi.ref('income', {
+  //     adjust: (income) => legalValues.oas.incomeLimit - income,
+  //   })
+  // )
+  // .message(ValidationErrors.partnerIncomeTooHigh),
   partnerAge: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.partnerAgeUnder18)
-    .max(150)
-    .message(ValidationErrors.partnerAgeOver150),
-  partnerLivingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
+    .message(ValidationErrors.invalidAge)
+    .max(getMinBirthYear())
+    .message(ValidationErrors.invalidAge),
+  partnerLivingCountry: Joi.string()
+    .required()
+    .valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string()
-    .valid(...Object.values(LegalStatus))
-    .invalid(LegalStatus.SPONSORED, LegalStatus.OTHER)
-    .messages({ 'any.invalid': ValidationErrors.legalUnavailable }),
-  partnerLivedOutsideCanada: Joi.boolean(),
+    .required()
+    .messages({
+      'any.required': ValidationErrors.partnerLegalStatusNotSelected,
+    })
+    .valid(...Object.values(LegalStatus)),
+  partnerLivedOnlyInCanada: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerOnlyInCanadaEmpty }),
   partnerYearsInCanadaSince18: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.partnerYearsInCanadaMinusAge),
-  partnerEverLivedSocialCountry: Joi.boolean(),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),

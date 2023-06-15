@@ -1,19 +1,19 @@
 environments:
   dev:
-  int:
+  staging:
+  dyna:
   main:
-  sprint:
-  prod-blue:
-  prod-green:
+  prod:
+  prototype:
 
 releases:
-  - name: {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" | lower }}
-    chart: ../helm/charts/{{ requiredEnv "PROJECT" }}
+  - name: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}
+    chart: ../helm/charts/eligibility-estimator
     values:
-      - overrides/{{ requiredEnv "PROJECT" }}/{{ requiredEnv "PROJECT" }}.yaml.gotmpl
+      - overrides/eligibility-estimator/eligibility-estimator.yaml.gotmpl
     labels:
         category: dts
         app: {{ requiredEnv "PROJECT" }}
         tier: frontend
-    namespace: {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" | lower }}
+    namespace: {{ requiredEnv "PROJECT" }}
     installed: true

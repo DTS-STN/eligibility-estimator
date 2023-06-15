@@ -1,5 +1,6 @@
 import { Language } from '../utils/api/definitions/enums'
 import { fieldDefinitions, FieldKey } from '../utils/api/definitions/fields'
+import { sanitizeCurrency } from '../components/Forms/validation/utils'
 
 interface LanguageInput {
   key: '_language'
@@ -17,6 +18,10 @@ export type FieldInputsObject = {
   [key in FieldKey]?: string
 }
 
+export type ErrorsVisibleObject = {
+  [key in FieldKey]?: boolean
+}
+
 export class InputHelper {
   constructor(
     private readonly inputs: FieldInputsObject,
@@ -32,7 +37,7 @@ export class InputHelper {
 
   setInputByKey(key: FieldKey, newValue: string): void {
     if (newValue === '' || newValue === undefined) delete this.inputs[key]
-    else this.inputs[key] = InputHelper.sanitizeValue(newValue)
+    else this.inputs[key] = InputHelper.sanitizeValue(newValue, this.language)
     this.setInputs(this.inputs)
   }
 
@@ -67,15 +72,8 @@ export class InputHelper {
     return { ...this.asObject, _language: this.language }
   }
 
-  static sanitizeValue(value: string): string {
+  static sanitizeValue(value: string, language: string): string {
     // income handling
-    if (value.includes('$'))
-      return value
-        .toString()
-        .replaceAll(' ', '')
-        .replace(/(\d+),(\d+)\$/, '$1.$2') // replaces commas with decimals, but only in French!
-        .replaceAll(',', '')
-        .replaceAll('$', '')
-    else return value
+    return sanitizeCurrency(value, language)
   }
 }

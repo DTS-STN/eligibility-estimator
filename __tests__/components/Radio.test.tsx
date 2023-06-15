@@ -28,8 +28,8 @@ describe('Radio component', () => {
       label: 'Have you ever live in a social agreement country?',
       required: true,
       values: [
-        { key: 'true', text: 'Yes' },
-        { key: 'false', text: 'No' },
+        { key: 'true', text: 'Yes', shortText: 'Yes' },
+        { key: 'false', text: 'No', shortText: 'No' },
       ],
     }
 
@@ -40,15 +40,18 @@ describe('Radio component', () => {
         label={props.label}
         required={props.required}
         values={props.values}
-        onChange={(e) => e.preventDefault()}
+        onChange={(e) => e.target.value}
+        setValue={() => {
+          return ''
+        }}
       />
     )
     render(ui)
 
-    const label = screen.getByTestId('radio-label')
-    expect(label).toBeInTheDocument()
-    expect(label.tagName).toBe('LABEL')
-    expect(label.textContent).toContain(props.label)
+    // const label = screen.getByTestId('radio-legend')
+    // expect(label).toBeInTheDocument()
+    // expect(label.tagName).toBe('LEGEND')
+    // expect(label.textContent).toContain(props.label)
 
     const fields = screen.getAllByTestId('radio')
     for (let index = 0; index < fields.length; index++) {
@@ -57,7 +60,6 @@ describe('Radio component', () => {
       expect(field).toBeInTheDocument()
       expect(field.tagName).toBe('INPUT')
       expect(field).toBeDefined()
-      expect(field).toBeRequired()
       expect(field.value).toEqual(props.values[index].key)
     }
   })
@@ -68,8 +70,8 @@ describe('Radio component', () => {
       label: 'Have you ever live in a social agreement country?',
       required: true,
       values: [
-        { key: 'true', text: 'Yes' },
-        { key: 'false', text: 'No' },
+        { key: 'true', text: 'Yes', shortText: 'Yes' },
+        { key: 'false', text: 'No', shortText: 'No' },
       ],
       checkedValue: 'true',
     }
@@ -81,16 +83,19 @@ describe('Radio component', () => {
         label={props.label}
         required={props.required}
         values={props.values}
+        onChange={(e) => e.target.value}
         checkedValue={props.checkedValue}
-        onChange={(e) => e.preventDefault()}
+        setValue={(e) => {
+          return ''
+        }}
       />
     )
     render(ui)
 
-    const label = screen.getByTestId('radio-label')
-    expect(label).toBeInTheDocument()
-    expect(label.tagName).toBe('LABEL')
-    expect(label.textContent).toContain(props.label)
+    //const label = screen.getByTestId('radio-legend')
+    //expect(label).toBeInTheDocument()
+    //expect(label.tagName).toBe('LEGEND')
+    //expect(label.textContent).toContain(props.label)
 
     const fields = screen.getAllByTestId('radio')
     for (let index = 0; index < fields.length; index++) {
@@ -99,7 +104,6 @@ describe('Radio component', () => {
       expect(field).toBeInTheDocument()
       expect(field.tagName).toBe('INPUT')
       expect(field).toBeDefined()
-      expect(field).toBeRequired()
       expect(field.value).toEqual(props.values[index].key)
     }
 

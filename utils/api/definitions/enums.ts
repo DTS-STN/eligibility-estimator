@@ -21,11 +21,8 @@ export enum MaritalStatus {
 }
 
 export enum LegalStatus {
-  CANADIAN_CITIZEN = 'canadianCitizen',
-  PERMANENT_RESIDENT = 'permanentResident',
-  SPONSORED = 'sponsored',
-  INDIAN_STATUS = 'indianStatus',
-  OTHER = 'other',
+  YES = 'yes',
+  NO = 'no',
 }
 
 export enum PartnerBenefitStatus {
@@ -66,6 +63,7 @@ export enum ResultReason {
   NONE = `You meet the criteria`,
   AGE = `Age does not meet requirement for this benefit`,
   AGE_YOUNG = `Age does not meet yet requirement for this benefit, will in the future`,
+  AGE_YOUNG_64 = `Age 64 and does not meet the requirement`,
   YEARS_IN_CANADA = `Not enough years in Canada`,
   LIVING_COUNTRY = `Not living in Canada`,
   LEGAL_STATUS = `Legal status does not meet requirement for this benefit`,
@@ -76,6 +74,8 @@ export enum ResultReason {
   INCOME_MISSING = 'Income not provided',
   MARITAL = 'Your marital status does not meet the requirement for this benefit',
   PARTNER = 'Your partner does not receive the required benefits',
+  AGE_65_TO_69 = 'Age between 65 and 69',
+  AGE_70_AND_OVER = 'Age 70 or over',
 }
 
 // used to determine color+type of alert dialog
@@ -95,6 +95,24 @@ export enum LinkIcon {
 
 // all "custom" Joi Validation errors that we properly handle and translate for the end user
 export enum ValidationErrors {
+  invalidAge = 'invalidAge',
+  receiveOASEmpty = 'receiveOASEmpty',
+  oasDeferEmpty = 'oasDeferEmpty',
+  providePartnerIncomeEmpty = 'providePartnerIncomeEmpty',
+  partnerIncomeEmpty = 'partnerIncomeEmpty',
+  partnerYearsSince18Empty = 'partnerYearsSince18Empty',
+  maritalStatusEmpty = 'maritalStatusEmpty',
+  yearsSince18Empty = 'yearsSince18Empty',
+  legalStatusNotSelected = 'legalStatusNotSelected',
+  partnerLegalStatusNotSelected = 'partnerLegalStatusNotSelected',
+  partnerBenefitStatusEmpty = 'partnerBenefitStatusEmpty',
+  invSeparatedEmpty = 'invSeparatedEmpty',
+  socialCountryEmpty = 'socialCountryEmpty',
+  partnerSocialCountryEmpty = 'partnerSocialCountryEmpty',
+  onlyInCanadaEmpty = 'onlyInCanadaEmpty',
+  partnerOnlyInCanadaEmpty = 'partnerOnlyInCanadaEmpty',
+  provideIncomeEmpty = 'provideIncomeEmpty',
+  incomeEmpty = 'incomeEmpty',
   incomeBelowZero = 'incomeBelowZero',
   partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   incomeTooHigh = 'incomeTooHigh',
@@ -104,12 +122,14 @@ export enum ValidationErrors {
   ageOver150 = 'ageOver150',
   partnerAgeOver150 = 'partnerAgeOver150',
   oasAge65to70 = 'oasAge65to70',
-  yearsInCanadaNotEnough = 'yearsInCanadaNotEnough',
+  yearsInCanadaNotEnough10 = 'yearsInCanadaNotEnough10',
+  yearsInCanadaNotEnough20 = 'yearsInCanadaNotEnough20',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
   maritalUnavailable = 'maritalUnavailable',
   legalUnavailable = 'legalUnavailable',
-  socialCountryUnavailable = 'socialCountryUnavailable',
+  socialCountryUnavailable10 = 'socialCountryUnavailable10',
+  socialCountryUnavailable20 = 'socialCountryUnavailable20',
 }
 
 export enum Language {

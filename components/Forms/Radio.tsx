@@ -1,15 +1,19 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { InputHTMLAttributes } from 'react'
-import { KeyAndText } from '../../i18n/api'
+import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
-import { ErrorLabel } from './validation/ErrorLabel'
+import { QuestionLabel } from './QuestionLabel'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string
   keyforid: string
-  values: KeyAndText[]
+  values: TypedKeyAndText<string>[]
   label: string
   checkedValue?: string
   helpText?: string
   error?: string
+  requiredText?: string
+  setValue(value: string): void
 }
 
 /**
@@ -26,58 +30,55 @@ export const Radio: React.VFC<InputProps> = ({
   keyforid,
   helpText,
   error,
+  requiredText,
+  setValue,
 }) => {
   return (
     <div className="radio">
-      <div>
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="radio-label"
-          className="inline mb-2.5 flex-nowrap"
-        >
-          <span
-            className="mb-1.5 text-content font-bold question-link"
-            dangerouslySetInnerHTML={{ __html: label }}
-          />
-        </label>
-        {helpText && (
-          <div
-            className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
-            dangerouslySetInnerHTML={{ __html: helpText }}
-          />
-        )}
-      </div>
-
-      <Tooltip field={name} />
-
-      {error && <ErrorLabel errorMessage={error} />}
-      {values.map((val, index) => (
-        <div
-          key={index}
-          className="flex items-center mb-2 md:mb-[12px] last:mb-0"
-        >
-          <input
+      <fieldset>
+        <legend>
+          <QuestionLabel
+            name={name}
             type="radio"
-            data-testid="radio"
-            id={`${keyforid}-${index}`}
-            name={`${keyforid}`}
-            // opacity-0 is important here, it allows us to tab through the inputs where display:none would make the radio's unselectable
-            className="opacity-0 -ml-4"
-            value={val.key}
-            onChange={onChange}
-            required
-            checked={checkedValue === correctForBooleans(val.key)}
+            label={label}
+            requiredText={requiredText}
+            helpText={helpText}
           />
-          <label
-            htmlFor={`${keyforid}-${index}`}
-            className="radio flex items-center"
-          >
-            <span className="w-8 h-8 inline-block mr-3.5 rounded-full border border-form-border min-w-[32px] bg-white" />
-            <p className="text-content ">{val.text}</p>
-          </label>
+        </legend>
+        <div role="radiogroup" className="mt-2.5">
+          {values.map((val, index) => (
+            <div
+              key={index}
+              id={`${name}-r${index}`}
+              className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
+            >
+              <input
+                className={`hover:cursor-pointer ${
+                  error ? '!border-danger' : ''
+                }`}
+                type="radio"
+                data-testid="radio"
+                id={`${keyforid}-${index}`}
+                name={`${keyforid}`}
+                value={val.key}
+                onChange={onChange}
+                checked={checkedValue === correctForBooleans(val.key)}
+              />
+              <label
+                htmlFor={`${keyforid}-${index}`}
+                className="flex items-center focus:inherit text-content hover:cursor-pointer"
+              >
+                {<span dangerouslySetInnerHTML={{ __html: val.text }} />}
+              </label>
+            </div>
+          ))}
         </div>
-      ))}
+      </fieldset>
+      {error && (
+        <div className="mt-2">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </div>
   )
 }

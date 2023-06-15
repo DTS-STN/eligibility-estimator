@@ -1,44 +1,84 @@
-import { AccordionForm, Message } from '@dts-stn/service-canada-design-system'
+import {
+  AccordionForm,
+  ContextualAlert as Message,
+} from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
-import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
+import {
+  ErrorsVisibleObject,
+  FieldInputsObject,
+  InputHelper,
+} from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { FieldCategory, Language } from '../../utils/api/definitions/enums'
+import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
   FieldKey,
   FieldType,
 } from '../../utils/api/definitions/fields'
-import MainHandler from '../../utils/api/mainHandler'
+import {
+  Card,
+  CardChildren,
+  CardConfig,
+  NextClickedObject,
+  Steps,
+  VisibleFieldsObject,
+} from '../../utils/web/types'
 import { CurrencyField } from '../Forms/CurrencyField'
+import Duration from '../Forms/Duration'
+import { ErrorsSummary } from '../Forms/ErrorsSummary'
 import { MonthAndYear } from '../Forms/MonthAndYear'
 import { NumberField } from '../Forms/NumberField'
 import { Radio } from '../Forms/Radio'
 import { FormSelect } from '../Forms/Select'
 import { TextField } from '../Forms/TextField'
 import { useMediaQuery, useTranslation } from '../Hooks'
+import {
+  getDefaultInputs,
+  getDefaultVisibleFields,
+  getErrorForField,
+  getErrorVisibility,
+  getKeyStepMap,
+  getNextClickedObj,
+  getPlaceholderForSelect,
+  getStepValidity,
+  getVisisbleErrorsForStep,
+} from './utils'
 
 /**
  * A component that will receive backend props from an API call and render the data as an interactive form.
  * `/interact` holds the swagger docs for the API response, and `fieldData` is the iterable that contains the form fields to be rendered.
  */
+
 export const EligibilityPage: React.VFC = ({}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
   const language = useRouter().locale as Language
+
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
-
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
+
+  const [ageDate, setAgeDate] = useState({ month: 1, year: undefined })
+
+  const [nextForStepClicked, setNextForStepClicked]: [
+    NextClickedObject,
+    (value: NextClickedObject) => void
+  ] = useSessionStorage('next-clicked', getNextClickedObj())
+
+  const [errorsVisible, setErrorsVisible]: [
+    ErrorsVisibleObject,
+    (value: ErrorsVisibleObject) => void
+  ] = useSessionStorage('errors-visible', getErrorVisibility(allFieldConfigs))
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -47,10 +87,17 @@ export const EligibilityPage: React.VFC = ({}) => {
 
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
+  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
+  const keyStepMap: { [x in Steps]: CardConfig } = getKeyStepMap(
+    tsln,
+    allFieldConfigs
+  )
 
-  const connection = tsln._language === Language.EN ? '-' : ':'
+  const [cardsValid, setCardsValid] = useState(
+    getStepValidity(keyStepMap, form, inputs)
+  )
 
-  // on mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
+  // On mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
     document.addEventListener('keydown', function (event) {
       if (isMobile && event.key == 'Enter') {
@@ -60,103 +107,86 @@ export const EligibilityPage: React.VFC = ({}) => {
     })
   }, [isMobile])
 
-  form.update(inputHelper)
-
-  function getKeysByCategory(category: FieldCategory): FieldKey[] {
-    return allFieldConfigs
-      .filter((value) => value.category.key === category)
-      .map((value) => value.key)
-  }
-
-  const keyStepMap: { [x in Steps]: CardConfig } = {
-    [Steps.STEP_1]: {
-      title: tsln.category.age,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.income}`,
-      keys: getKeysByCategory(FieldCategory.AGE),
-    },
-    [Steps.STEP_2]: {
-      title: tsln.category.income,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.legal}`,
-      keys: getKeysByCategory(FieldCategory.INCOME),
-    },
-    [Steps.STEP_3]: {
-      title: tsln.category.legal,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.residence}`,
-      keys: getKeysByCategory(FieldCategory.LEGAL),
-    },
-    [Steps.STEP_4]: {
-      title: tsln.category.residence,
-      buttonLabel: `${tsln.nextStep} ${connection} ${tsln.category.marital}`,
-      keys: getKeysByCategory(FieldCategory.RESIDENCE),
-    },
-    [Steps.STEP_5]: {
-      title: tsln.category.marital,
-      buttonLabel: tsln.getEstimate,
-      keys: getKeysByCategory(FieldCategory.MARITAL),
-    },
-  }
-
-  /**
-   * Checks the validity of all steps.
-   * If a step has an error or is missing a field, it will be invalid.
-   */
-  function getStepValidity(): StepValidity {
-    return Object.keys(keyStepMap).reduce((result, step: Steps, index) => {
-      const stepKeys: FieldKey[] = keyStepMap[step].keys // all keys for a step, including keys that are not visible!
-      const visibleKeys: FieldKey[] = form.visibleFieldKeys // all keys that are visible (ie. exist in the form)
-      const visibleStepKeys: FieldKey[] = stepKeys.filter(
-        (value) => visibleKeys.includes(value) // all keys for a step that are visible
+  useEffect(() => {
+    const el = document.getElementById('mainForm')
+    if (el) {
+      el.setAttribute(
+        'data-gc-analytics-formname',
+        'ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form'
       )
-      const allFieldsFilled: boolean = visibleStepKeys.every(
-        (key) => inputs[key]
-      )
-      const visibleStepFields: FormField[] = form.visibleFields.filter(
-        (field) => visibleStepKeys.includes(field.key)
-      )
-      const allFieldsNoError: boolean = visibleStepFields.every(
-        (field) => field.valid
-      )
-      const previousStep: { isValid: boolean } = result[`step${index}`]
-      const previousStepExists: boolean = previousStep !== undefined
-      const previousStepValid: boolean = previousStep?.isValid
-      const isValid: boolean =
-        allFieldsFilled &&
-        allFieldsNoError &&
-        (!previousStepExists || previousStepValid)
-      result[step] = { isValid }
-      return result
-    }, {})
-  }
-
-  const [cardsValid, setCardsValid] = useState(getStepValidity())
+    }
+  }, [])
 
   /**
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
-    field.value = newValue
-    inputHelper.setInputByKey(field.key, newValue)
+    let newVal = newValue
+    const key: String = field.config.key
+
+    // Required to pass on to the Duration component that needs the exact birth month, not just age as float
+    if (key === 'age') {
+      newVal = JSON.parse(newValue).value
+      const ageDate = JSON.parse(newValue).date
+      setAgeDate(ageDate)
+    }
+
+    if (key === 'partnerAge') {
+      newVal = JSON.parse(newValue).value
+    }
+
+    const step = Object.keys(keyStepMap).find((step) =>
+      keyStepMap[step].keys.includes(key)
+    )
+
+    field.value = newVal
+    inputHelper.setInputByKey(field.key, newVal)
     form.update(inputHelper)
-    setCardsValid(getStepValidity())
+
+    setCardsValid(getStepValidity(keyStepMap, form, inputs))
+
+    if (nextForStepClicked[step]) {
+      setErrorsVisible({
+        ...errorsVisible,
+        ...getVisisbleErrorsForStep(step, keyStepMap, visibleFields),
+      })
+    }
   }
 
   /**
    * Generates the raw HTML for each field (aka. child).
    */
-  function generateChildren(step: Steps, stepKeys: FieldKey[]): CardChildren {
+  function generateChildren(stepKeys: FieldKey[]): CardChildren {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+
     return fields.map((field: FormField) => {
+      const [formError, alertError] = getErrorForField(field, errorsVisible)
       return (
         <div key={field.key}>
-          <div className="pb-4">
+          <div className="pb-4" id={field.key}>
             {field.config.type === FieldType.DATE && (
               <MonthAndYear
                 name={field.key}
+                age={field.value}
                 label={field.config.label}
                 helpText={field.config.helpText}
                 baseOnChange={(newValue) => handleOnChange(field, newValue)}
+                requiredText={tsln.required}
+                error={formError}
+              />
+            )}
+            {field.config.type === FieldType.DURATION && (
+              <Duration
+                name={field.key}
+                age={inputs.age}
+                ageDate={ageDate}
+                label={field.config.label}
+                helpText={field.config.helpText}
+                baseOnChange={(newValue) => handleOnChange(field, newValue)}
+                requiredText={tsln.required}
+                error={formError}
               />
             )}
             {field.config.type === FieldType.NUMBER && (
@@ -170,7 +200,9 @@ export const EligibilityPage: React.VFC = ({}) => {
                   500
                 )}
                 value={field.value}
+                requiredText={tsln.required}
                 helpText={field.config.helpText}
+                error={formError}
               />
             )}
             {field.config.type == FieldType.CURRENCY && (
@@ -185,6 +217,8 @@ export const EligibilityPage: React.VFC = ({}) => {
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
                 helpText={field.config.helpText}
+                requiredText={tsln.required}
+                error={formError}
               />
             )}
             {field.config.type == FieldType.STRING && (
@@ -205,6 +239,7 @@ export const EligibilityPage: React.VFC = ({}) => {
               <FormSelect
                 name={field.key}
                 field={field}
+                requiredText={tsln.required}
                 placeholder={getPlaceholderForSelect(field, tsln)}
                 customOnChange={(newValue: { value: string; label: string }) =>
                   handleOnChange(field, newValue.value)
@@ -219,18 +254,21 @@ export const EligibilityPage: React.VFC = ({}) => {
                 values={field.config.values}
                 keyforid={field.key}
                 label={field.config.label}
+                requiredText={tsln.required}
                 onChange={(e) => handleOnChange(field, e.target.value)}
                 helpText={field.config.helpText}
+                setValue={(val) => handleOnChange(field, val)}
+                error={formError}
               />
             )}
           </div>
-          {field.error && (
-            <div className="mt-6 md:pr-12">
+          {field.error && alertError && (
+            <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
                 alert_icon_id={field.key}
-                alert_icon_alt_text="warning icon"
-                type="warning"
+                alert_icon_alt_text={tsln.warningText}
+                type={'warning'}
                 message_heading={tsln.unableToProceed}
                 message_body={field.error}
                 asHtml={true}
@@ -238,6 +276,15 @@ export const EligibilityPage: React.VFC = ({}) => {
               />
             </div>
           )}
+          {field.key === FieldKey.MARITAL_STATUS &&
+            field.value === MaritalStatus.PARTNERED && (
+              <div className="my-6">
+                <p className="ds-accordion-header mb-4">
+                  {tsln.partnerInformation}
+                </p>
+                <p>{tsln.partnerInformationDescription}</p>
+              </div>
+            )}
         </div>
       )
     })
@@ -254,6 +301,14 @@ export const EligibilityPage: React.VFC = ({}) => {
     }
   }
 
+  function handleButtonOnChange(step) {
+    setErrorsVisible({
+      ...errorsVisible,
+      ...getVisisbleErrorsForStep(step, keyStepMap, visibleFields),
+    })
+    setNextForStepClicked({ ...nextForStepClicked, [step]: true })
+  }
+
   /**
    * Generates the card configuration.
    * Each card will contain children. Each child represents a field and contains its HTML.
@@ -261,98 +316,59 @@ export const EligibilityPage: React.VFC = ({}) => {
   function generateCards(): Card[] {
     return Object.keys(keyStepMap).map((step: Steps, index) => {
       const cardConfig: CardConfig = keyStepMap[step]
-      const children = generateChildren(step, cardConfig.keys)
+      const children = generateChildren(cardConfig.keys)
       const card: Card = {
         id: step,
         title: cardConfig.title,
         buttonLabel: cardConfig.buttonLabel,
+        buttonAttributes: cardConfig.buttonAttributes,
         children,
+        buttonOnChange: () => {
+          handleButtonOnChange(step)
+        },
       }
 
-      const processingLastCard = index === Object.keys(keyStepMap).length - 1
+      const keysLength = Object.keys(keyStepMap).length
+      const processingLastCard = index === keysLength - 1
       if (processingLastCard) {
         return {
           ...card,
-          buttonOnChange: submitForm,
+          buttonOnChange: (e) => {
+            handleButtonOnChange(`step${keysLength}`)
+            submitForm(e)
+          },
         }
       }
       return card
     })
   }
 
+  form.update(inputHelper)
+
   return (
     <>
-      {
-        <div className="md:w-2/3">
-          <AccordionForm
-            id="mainForm"
-            cardsState={cardsValid}
-            cards={generateCards()}
-          />
-        </div>
-      }
+      <div>
+        <ErrorsSummary
+          errorFields={form.visibleFields.filter(
+            (field) =>
+              field.error &&
+              errorsVisible[field.key] &&
+              (!errorsAsAlerts.includes(field.key) || field.value === undefined)
+          )}
+        />
+      </div>
+      <div
+        className="md:w-2/3"
+        data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
+        // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
+      >
+        <AccordionForm
+          id="mainForm"
+          cardsState={cardsValid}
+          cards={generateCards()}
+          lang={language}
+        />
+      </div>
     </>
   )
-}
-
-/**
- * Builds the object representing the default inputs object.
- */
-function getDefaultInputs(allFieldConfigs: FieldConfig[]): FieldInputsObject {
-  return allFieldConfigs.reduce((result, value) => {
-    if ('default' in value && value.default) {
-      result[value.key] =
-        typeof value.default === 'string' ? value.default : value.default.key
-    }
-    return result
-  }, {})
-}
-
-export type VisibleFieldsObject = {
-  [key in FieldKey]?: boolean
-}
-
-/**
- * Builds the object representing the default set of visible fields.
- */
-function getDefaultVisibleFields(
-  allFieldConfigs: FieldConfig[]
-): VisibleFieldsObject {
-  const defaultData = new MainHandler({}).results
-  if ('visibleFields' in defaultData) {
-    return allFieldConfigs.reduce((result, value) => {
-      result[value.key] = defaultData.visibleFields.includes(value.key)
-      return result
-    }, {})
-  }
-}
-
-function getPlaceholderForSelect(
-  field: FormField,
-  tsln: WebTranslations
-): string {
-  const text: string = tsln.selectText[field.key]
-  return text ?? tsln.selectText.default
-}
-
-type CardConfig = { title: string; buttonLabel: string; keys: FieldKey[] }
-
-type Card = {
-  children: CardChildren
-  id: string
-  title: string
-  buttonLabel: string
-  buttonOnChange?: (e) => void
-}
-
-type CardChildren = JSX.Element[]
-
-type StepValidity = { [x in Steps]?: { isValid: boolean } }
-
-enum Steps {
-  STEP_1 = 'step1',
-  STEP_2 = 'step2',
-  STEP_3 = 'step3',
-  STEP_4 = 'step4',
-  STEP_5 = 'step5',
 }

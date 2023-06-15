@@ -14,28 +14,32 @@ export const links: LinkDefinitions = {
   },
   overview: {
     oas: {
-      text: 'Learn more about Old Age Security',
+      text: 'Learn more about the Old Age Security pension',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.htm',
       order: 3,
       icon: LinkIcon.info,
+      action: 'Learn about OAS',
     },
     gis: {
-      text: 'Learn more about Guaranteed Income Supplement',
+      text: 'Learn more about the Guaranteed Income Supplement',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement.html',
       order: 4,
       icon: LinkIcon.info,
+      action: 'Learn about GIS',
     },
     alw: {
-      text: 'Learn more about Allowance',
+      text: 'Learn more about the Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance.html',
       order: 5,
       icon: LinkIcon.info,
+      action: 'Learn about ALW',
     },
     afs: {
-      text: 'Learn more about Allowance for the Survivor',
+      text: 'Learn more about the Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
       order: 6,
       icon: LinkIcon.info,
+      action: 'Learn about ALWS',
     },
   },
   oasMaxIncome: {
@@ -105,42 +109,51 @@ export const links: LinkDefinitions = {
   },
   apply: {
     oas: {
-      text: 'Apply for Old Age Security',
+      text: 'Apply for the Old Age Security pension',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/apply.html',
       order: 20,
       icon: LinkIcon.link,
+      action: 'Apply for OAS',
     },
     gis: {
-      text: 'Apply for Guaranteed Income Supplement',
+      text: 'Apply for the Guaranteed Income Supplement',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html',
       order: 21,
       icon: LinkIcon.link,
+      action: 'Apply for GIS',
     },
     alw: {
-      text: 'Apply for Allowance',
+      text: 'Apply for the Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/apply.html',
       order: 22,
       icon: LinkIcon.link,
+      action: 'Apply for ALW',
     },
     afs: {
-      text: 'Apply for Allowance for the Survivor',
+      text: 'Apply for the Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
       order: 23,
       icon: LinkIcon.link,
+      action: 'Apply for ALWS',
     },
   },
   SC: {
-    text: 'Service Canada',
+    text: 'contact Service Canada',
     url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',
     order: -1,
   },
+  SCAccount: {
+    text: 'My Service Canada Account',
+    url: 'https://www.canada.ca/en/employment-social-development/services/my-account.html',
+    order: -1,
+  },
   oasDeferClickHere: {
-    text: 'click here',
+    text: 'option to delay your first Old Age Security pension payment',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
     order: -1,
   },
   oasDeferInline: {
-    text: 'OAS Deferral',
+    text: 'Learn more about OAS pension deferral',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/benefit-amount.html#h2.2',
     order: -1,
   },
@@ -151,25 +164,25 @@ export const links: LinkDefinitions = {
   },
   reasons: {
     oas: {
-      text: 'View full eligibility criteria for Old Age Security',
+      text: 'View full eligibility criteria for the Old Age Security pension',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/eligibility.html#gc-document-nav',
       order: -1,
       icon: LinkIcon.note,
     },
     gis: {
-      text: 'View full eligibility criteria for Guaranteed Income Supplement',
+      text: 'View full eligibility criteria for the Guaranteed Income Supplement',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/eligibility.html',
       order: -1,
       icon: LinkIcon.note,
     },
     alw: {
-      text: 'View full eligibility criteria for Allowance',
+      text: 'View full eligibility criteria for the Allowance',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/eligibility.html',
       order: -1,
       icon: LinkIcon.note,
     },
     afs: {
-      text: 'View full eligibility criteria for Allowance for the Survivor',
+      text: 'View full eligibility criteria for the Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
       order: -1,
       icon: LinkIcon.note,
@@ -178,6 +191,16 @@ export const links: LinkDefinitions = {
   oasRecoveryTaxInline: {
     text: 'recovery tax',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
+    order: -1,
+  },
+  oasLearnAboutRecoveryTax: {
+    text: 'Learn more about recovery tax',
+    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/recovery-tax.htm',
+    order: -1,
+  },
+  oasNonResidentTax: {
+    text: 'non-resident tax',
+    url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/cpp-international/before-apply.html',
     order: -1,
   },
 }

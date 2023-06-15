@@ -3,6 +3,7 @@ import Select from 'react-select'
 import { FormField } from '../../client-state/FormField'
 import { KeyAndText } from '../../i18n/api'
 import { FieldType } from '../../utils/api/definitions/fields'
+import { QuestionLabel } from './QuestionLabel'
 
 interface SelectProps
   extends DetailedHTMLProps<
@@ -11,6 +12,7 @@ interface SelectProps
   > {
   field: FormField
   error?: string
+  requiredText?: string
   customOnChange
 }
 
@@ -24,6 +26,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
   name,
   customOnChange,
   error,
+  requiredText,
   placeholder,
 }) => {
   if (!('default' in field.config))
@@ -44,20 +47,16 @@ export const FormSelect: React.VFC<SelectProps> = ({
 
   return (
     <>
-      <div className="mb-2 5">
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="select-label"
-          className="inline mb-2.5"
-        >
-          <span className="mb-1.5 font-bold text-content">
-            {field.config.label}
-          </span>
-        </label>
-      </div>
+      <QuestionLabel
+        name={name}
+        type="select"
+        label={field.config.label}
+        requiredText={requiredText}
+        fieldId={`${name}-select`}
+      />
       <div className="w-full md:w-80">
         <Select
+          inputId={`${name}-select`}
           aria-labelledby={name}
           styles={{
             container: (styles) => ({

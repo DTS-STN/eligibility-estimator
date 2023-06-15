@@ -1,12 +1,14 @@
+import { FormError } from '@dts-stn/service-canada-design-system'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import { ErrorLabel } from './validation/ErrorLabel'
+import { QuestionLabel } from './QuestionLabel'
 
 export interface NumberFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label: string
   helpText?: string
+  requiredText?: string
   error?: string
 }
 
@@ -23,6 +25,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
   placeholder,
   onChange,
   helpText,
+  requiredText,
   error,
 }) => {
   // only need to run this once at component render, so no need for deps
@@ -38,37 +41,39 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
 
   return (
     <>
-      <div className="mb-2.5">
-        <label
-          htmlFor={name}
-          aria-label={name}
-          data-testid="number-input-label"
-          className="text-content font-bold inline mb-2.5"
-        >
-          {label}
-        </label>
-        {helpText && (
-          <div className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4">
-            {helpText}
-          </div>
-        )}
-      </div>
-      {error && <ErrorLabel errorMessage={error} />}
-      <NumberFormat
-        id={name}
+      <QuestionLabel
         name={name}
-        className={`form-control text-content border-form-border ${
-          error ? ' border-danger' : ''
+        type="number-input"
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+        fieldId={`enter-${name}`}
+      />
+
+      <NumberFormat
+        id={`enter-${name}`}
+        name={name}
+        className={`form-control text-content border-form-border w-24 ${
+          error ? ' !border-danger' : ''
         }`}
         data-testid="number-input"
-        min={0}
         value={value != null ? (value as string) : ''}
         placeholder={placeholder}
         onChange={onChange}
         required
         autoComplete="off"
         enterKeyHint="done"
+        allowNegative={false}
+        decimalSeparator={null}
+        aria-describedby={`help-text-enter-${name}`}
+        maxLength={15}
       />
+
+      {error && (
+        <div className="mt-2" role="alert">
+          <FormError errorMessage={error} />
+        </div>
+      )}
     </>
   )
 }

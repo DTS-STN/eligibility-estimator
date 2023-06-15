@@ -9,30 +9,37 @@ import {
   EligibilityResult,
   EntitlementResultGeneric,
   ProcessedInput,
+  CardCollapsedText,
+  LinkWithAction,
 } from '../definitions/types'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
-  constructor(input: ProcessedInput, translations: Translations) {
+  partner: Boolean
+  constructor(
+    input: ProcessedInput,
+    translations: Translations,
+    partner?: Boolean
+  ) {
     super(input, translations, BenefitKey.alw)
+    this.partner = partner
   }
 
   protected getEligibility(): EligibilityResult {
     // helpers
     const meetsReqMarital = this.input.maritalStatus.partnered
     const meetsReqPartner = this.input.partnerBenefitStatus.gis
-    const meetsReqAge = 60 <= this.input.age && this.input.age <= 64
+    const meetsReqAge = 60 <= this.input.age && this.input.age < 65
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
+    const meetsReqCountry = this.input.livingCountry.canada
 
-    // if income is not provided, assume they meet the income requirement
-    const skipReqIncome = !this.input.income.provided
+    // income must be provided, partner cannot be eligible for gis without income
+    const incomeNotProvided = !this.input.income.provided
     const maxIncome = legalValues.alw.alwIncomeLimit
-    const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant < maxIncome
-
+    const meetsReqIncome = this.input.income.relevant <= maxIncome
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -44,21 +51,43 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       meetsReqYears &&
       meetsReqMarital &&
       meetsReqIncome &&
-      meetsReqPartner
+      meetsReqPartner &&
+      meetsReqCountry
     ) {
-      if (meetsReqAge && skipReqIncome) {
+      if (meetsReqAge && incomeNotProvided) {
         return {
-          result: ResultKey.INCOME_DEPENDENT,
+          result: ResultKey.INELIGIBLE,
           reason: ResultReason.INCOME_MISSING,
-          detail:
-            this.translations.detail.eligibleDependingOnIncomeNoEntitlement,
-          incomeMustBeLessThan: maxIncome,
+          detail: this.input.partnerBenefitStatus.none
+            ? this.translations.detail.alwEligibleButPartnerAlreadyIs
+            : this.translations.detail.alwNotEligible,
+        }
+      } else if (
+        meetsReqAge &&
+        !incomeNotProvided &&
+        this.input.partnerBenefitStatus.none
+      ) {
+        return {
+          result: ResultKey.INELIGIBLE,
+          reason: ResultReason.INCOME_MISSING,
+          detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
         }
       } else if (meetsReqAge) {
-        return {
-          result: ResultKey.ELIGIBLE,
-          reason: ResultReason.NONE,
-          detail: this.translations.detail.eligible,
+        const amount = this.formulaResult()
+
+        // client is Eligible however if the amount returned is 0 it requires a different text
+        if (amount === 0) {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.NONE,
+            detail: this.translations.detail.alwEligibleIncomeTooHigh,
+          }
+        } else {
+          return {
+            result: ResultKey.ELIGIBLE,
+            reason: ResultReason.NONE,
+            detail: this.translations.detail.eligible,
+          }
         }
       } else if (this.input.age == 59) {
         return {
@@ -79,11 +108,25 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           detail: this.translations.detail.alwNotEligible,
         }
       }
+    } else if (meetsReqAge && incomeNotProvided) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.INCOME_MISSING,
+        detail: this.input.maritalStatus.partnered
+          ? this.translations.detail.alwNotEligible
+          : this.translations.detail.alwEligibleButPartnerAlreadyIs,
+      }
     } else if (overAgeReq) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.AGE,
         detail: this.translations.detail.alwNotEligible,
+      }
+    } else if (underAgeReq && meetsReqMarital) {
+      return {
+        result: ResultKey.INELIGIBLE,
+        reason: ResultReason.AGE_YOUNG,
+        detail: this.translations.detail.eligibleWhen60,
       }
     } else if (!meetsReqMarital && this.input.maritalStatus.provided) {
       return {
@@ -91,17 +134,24 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         reason: ResultReason.MARITAL,
         detail: this.translations.detail.alwNotEligible,
       }
-    } else if (!meetsReqPartner && this.input.partnerBenefitStatus.provided) {
+    } else if (!meetsReqPartner) {
       return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.PARTNER,
-        detail: this.translations.detail.alwNotEligible,
+        //detail: this.translations.detail.alwNotEligible,
+        detail: this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
     } else if (!meetsReqIncome) {
       return {
+        result: ResultKey.ELIGIBLE,
+        reason: ResultReason.INCOME,
+        detail: this.translations.detail.alwEligibleIncomeTooHigh,
+      }
+    } else if (!meetsReqCountry) {
+      return {
         result: ResultKey.INELIGIBLE,
         reason: ResultReason.INCOME,
-        detail: this.translations.detail.mustMeetIncomeReq,
+        detail: this.translations.detail.mustBeInCanada,
       }
     } else if (!meetsReqYears) {
       if (
@@ -141,12 +191,6 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           reason: ResultReason.AGE_YOUNG,
           detail: this.translations.detail.dependingOnLegalWhen60,
         }
-      } else if (this.input.legalStatus.sponsored) {
-        return {
-          result: ResultKey.UNAVAILABLE,
-          reason: ResultReason.LEGAL_STATUS,
-          detail: this.translations.detail.dependingOnLegalSponsored,
-        }
       } else {
         return {
           result: ResultKey.UNAVAILABLE,
@@ -177,19 +221,14 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     )
       return {
-        result: -1,
+        result: 0,
         type: EntitlementResultType.UNAVAILABLE,
         autoEnrollment,
       }
 
     // otherwise, let's do it!
 
-    const formulaResult = new EntitlementFormula(
-      this.input.income.relevant,
-      this.input.maritalStatus,
-      this.input.partnerBenefitStatus,
-      this.input.age
-    ).getEntitlementAmount()
+    const formulaResult = this.formulaResult()
 
     const type =
       formulaResult === -1
@@ -200,9 +239,68 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   }
 
   /**
+   * Just the formula to get the amount
+   */
+  protected formulaResult(): number {
+    const formulaResult = new EntitlementFormula(
+      this.input.income.relevant,
+      this.input.maritalStatus,
+      this.input.partnerBenefitStatus,
+      this.input.age
+    ).getEntitlementAmount()
+
+    return formulaResult
+  }
+
+  /**
    * For this benefit, always return false, because we don't know any better as of now.
    */
   protected getAutoEnrollment(): boolean {
     return false
+  }
+
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
+
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return cardCollapsedText
+
+    // partner is eligible, IF income was not provided the result = 0
+    //  when IF income > 0 AND invSeparated = true the amount is incorrectly calculated
+    //  the correct amount is on the benefitHandler.
+    if (this.partner) {
+      if (this.entitlement.result > 0) {
+        if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
+          if (!this.input.invSeparated) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+        } else {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerDependOnYourIncome
+          )
+        }
+      }
+    }
+
+    return cardCollapsedText
+  }
+
+  protected getCardLinks(): LinkWithAction[] {
+    const links: LinkWithAction[] = []
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
+      (this.eligibility.result === ResultKey.INELIGIBLE &&
+        this.eligibility.reason === ResultReason.AGE_YOUNG)
+    ) {
+      links.push(this.translations.links.apply[BenefitKey.alw])
+    }
+    links.push(this.translations.links.overview[BenefitKey.alw])
+    return links
   }
 }

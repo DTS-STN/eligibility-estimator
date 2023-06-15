@@ -25,26 +25,28 @@ import { FieldConfig, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
-  incomeAvailable: boolean
+  incomeAvailable?: boolean
   income: number // personal income
   age: number
+  receiveOAS: boolean
+  oasDeferDuration: string
   oasDefer: boolean
   oasAge: number
   maritalStatus: MaritalStatus
+  invSeparated: boolean
   livingCountry: string // country code
   legalStatus: LegalStatus
-  livedOutsideCanada: boolean
+  livedOnlyInCanada: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
-  partnerIncomeAvailable: boolean
+  partnerIncomeAvailable?: boolean
   partnerIncome: number // partner income
   partnerAge: number
   partnerLivingCountry: string // country code
   partnerLegalStatus: LegalStatus
-  partnerLivedOutsideCanada: boolean
+  partnerLivedOnlyInCanada: boolean
   partnerYearsInCanadaSince18: number
-  partnerEverLivedSocialCountry: boolean
   _language?: Language
 }
 
@@ -54,15 +56,18 @@ export interface RequestInput {
 export interface ProcessedInput {
   income: IncomeHelper
   age: number
+  receiveOAS: boolean
+  oasDeferDuration: string
   oasDefer: boolean
   oasAge: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper
   legalStatus: LegalStatusHelper
-  livedOutsideCanada: boolean
+  livedOnlyInCanada: boolean
   yearsInCanadaSince18: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper
+  invSeparated: boolean
 }
 
 export interface ProcessedInputWithPartner {
@@ -85,6 +90,7 @@ export interface EntitlementResultGeneric {
 }
 
 export interface EntitlementResultOas extends EntitlementResultGeneric {
+  result65To74: number
   resultAt75: number
   clawback: number
   deferral: { age: number; years: number; increase: number }
@@ -106,7 +112,8 @@ export interface CardCollapsedText {
 export interface CardDetail {
   mainText: string
   collapsedText: CardCollapsedText[]
-  links: Link[]
+  links: LinkWithAction[]
+  meta: MetaDataObject
 }
 
 export interface BenefitResult<
@@ -126,12 +133,13 @@ export interface BenefitResultsObject {
 }
 
 export interface BenefitResultsObjectWithPartner {
-  client: BenefitResultsObject
-  partner: BenefitResultsObject
+  client?: BenefitResultsObject
+  partner?: BenefitResultsObject
 }
 
 export interface ResponseSuccess {
   results: BenefitResultsObject
+  partnerResults: BenefitResultsObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>
@@ -139,6 +147,8 @@ export interface ResponseSuccess {
 }
 
 export interface ResponseError {
+  visibleFields: Array<FieldKey>
+  missingFields: Array<FieldKey>
   error: string
   detail: Joi.ValidationError | Error
 }
@@ -150,10 +160,38 @@ export interface Link {
   icon?: LinkIcon
 }
 
+export interface LinkWithAction extends Link {
+  action: string
+}
+
 export interface SummaryObject {
   state: SummaryState
+  partnerState: SummaryState
   title: string
-  details: string
   links: Link[]
+  details: string
   entitlementSum: number
+  partnerEntitlementSum: number
+}
+
+export interface NextStepText {
+  nextStepTitle: string
+  nextStepContent: string
+}
+
+export type TableData = {
+  age: number
+  amount: number
+}
+
+export interface MetaDataObject {
+  tableData?: null | TableData[]
+  currentAge?: null | number
+  monthsTo70?: null | number
+  receiveOAS: boolean
+}
+
+export interface MonthsYears {
+  months: number
+  years: number
 }

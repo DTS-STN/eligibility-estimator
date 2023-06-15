@@ -1,13 +1,17 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
 import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
-import { generateLink } from '../../utils/api/definitions/textReplacementRules'
+import {
+  generateLink,
+  getMaxYear,
+  getMaximumIncomeThreshold,
+} from '../../utils/api/definitions/textReplacementRules'
 import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
 
-  oas: 'Sécurité de la vieillesse',
+  oas: 'Pension de la Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
   afs: 'Allocation au survivant',
@@ -20,62 +24,83 @@ const fr: WebTranslations = {
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   breadcrumb1Title: 'Canada.ca',
-  breadcrumb1URL: 'https://www.canada.ca/fr.html',
-  breadcrumb2Title: 'Service Canada',
-  breadcrumb2URL:
-    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+  breadcrumb1URL: 'https://www.canada.ca',
+  // breadcrumb2Title: 'Service Canada',
+  // breadcrumb2URL:
+  //   'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  breadcrumb2Title: 'Prestations',
+  breadcrumb2URL: 'https://www.canada.ca/fr/services/prestations.html',
+  breadcrumb3Title: 'Pensions publiques',
+  breadcrumb3URL:
+    'https://www.canada.ca/fr/services/prestations/pensionspubliques.html',
+  breadcrumb4Title: 'Sécurité de la vieillesse',
+  breadcrumb4URL:
+    'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
+  breadcrumb5Title: 'Montant des paiements de la Sécurité de la vieillesse',
+  breadcrumb5URL:
+    'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
   title: 'Estimateur de prestations de vieillesse canadiennes',
+  introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
+  introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
+  questionPageTitle:
+    'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
+  resultPageTitle:
+    'Estimateur des prestations de la Sécurité de la vieillesse : Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
   faq: 'Foire Aux Questions',
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
-  required: 'obligatoire',
+  required: '(obligatoire)',
+  workInProgress: 'Cet estimateur est un travail en cours',
+  workInProgressBody:
+    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
   homePageP1:
-    "Utilisez cet outil afin de déterminer le montant que vous pourriez recevoir des programmes de prestations de vieillesse. Vous pouvez fournir vos renseignements actuels, ou des renseignements futurs si vous désirez utiliser l'outil à des fins de planification.",
+    "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
   youMayBeEligible:
-    'Vous pourriez être admisible aux prestations de vieillesse si : ',
-  atLeast60: 'vous avez au moins 60 ans',
-  haveNetIncomeLess: 'votre revenu net est moins de 133 141 $ CAD',
-  headerWhatToKnow: 'Ce que vous devez savoir avant de commencer',
+    'Vous pourriez recevoir des prestations de la Sécurité de la vieillesse si\xa0:',
+  atLeast60: 'vous avez au moins 60 ans',
+  headerWhatToKnow: 'Ce dont vous aurez besoin',
+  haveNetIncomeLess: `votre revenu net est moins de ${getMaximumIncomeThreshold(
+    Language.FR
+  )}`,
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
-  ageText: '<b>âge</b>',
-  netIncomeText:
-    '<b>revenu net</b> (ligne 23600 de votre déclaration de revenus)',
-  legalStatusText:
-    "<b>statut légal</b> (par exemple, citoyen canadien, statut d'Indien ou résident permanent)",
-  residenceHistoryText:
-    '<b>historique de résidence</b> (depuis combien de temps vous vivez au Canada)',
-  maritalStatusText: '<b>état civil</b>',
-  partnerText: `le cas échéant, les revenus de <b>votre partenaire</b> (y compris ses prestations de vieillesse), son statut légal et son historique de résidence`,
+  ageText: '<strong>âge</strong>',
+  netIncomeText: '<strong>revenu net</strong>',
+  legalStatusText: '<strong>statut légal</strong>',
+  residenceHistoryText: '<strong>historique de résidence</strong>',
+  maritalStatusText: '<strong>état matrimonial</strong>',
+  partnerText: '<strong>conjoint</strong>, le cas échéant',
+  youNeedBeginningText: `Vous pouvez fournir vos renseignements actuels, ou des <strong>renseignements futurs pour utiliser l'outil à des fins de planification</strong>. Vos réponses doivent refléter ce que sera votre situation au moment où vous commencerez à recevoir votre prestation.`,
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
     'Il vous faudra environ 5 à 10 minutes pour répondre aux questions et obtenir une estimation.',
-  whatBenefitsTheEstimatorIsFor: "Prestations incluses dans l'estimateur",
+  whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   benefitAvailable:
-    'Une prestation disponible aux personnes de 65 ans et plus.',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la Sécurité de la vieillesse</a>`,
+    'Une prestation imposable disponible aux personnes de 65 ans et plus',
+  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la pension de la Sécurité de la vieillesse</a>`,
   gisDefinitionText:
-    'Une prestation disponible aux personnes qui reçoivent la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada.',
+    'Une prestation non imposable disponible aux personnes qui reçoivent la pension de la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada',
   learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
   alwDefinitionText:
-    'Une prestation disponible aux personnes âgées entre 60 et 64 ans ayant un faible revenu et dont le conjoint reçoit le Supplément de revenu garanti.',
+    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
   learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
+  inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter les changements au coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
-    'Une prestation disponible aux personnes âgées entre entre 60 et 64 ans ayant un faible revenu et dont le conjoint est décédé.',
+    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
   learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
-  aboutResultText: 'À propos des estimations',
-  resultDefinition: `Les estimations ne sont pas des décisions finales. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada.</a> Les estimations ne doivent pas être considérées comme des conseils financiers.`,
+  aboutResultText: 'À propos des résultats',
+  resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada</a>.`,
   privacyHeading: 'Confidentialité',
-  privacyDefinition: `Vos renseignements sont confidentiels. Les renseignements personnels que vous fournissez sont régis conformément à la <a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html" target="_blank">Loi sur la protection des renseignements personnels.</a> L'Estimateur de prestations de vieillesse canadiennes ne recueille et ne transmet aucun renseignement pouvant vous identifer. Vos estimations anonymes peuvent être utilisées pour des fins de recherche.`,
+  privacyDefinition: `Nous protégeons vos renseignements en vertu de la <em><a className="underline italic text-default-text" href="https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html" target="_blank">Loi sur la protection des renseignements personnels</a></em>. L'estimateur ne recueille aucun renseignement pouvant vous identifier. Vos résultats anonymes peuvent être utilisés à des fins de recherche.`,
   homePageP3:
     "La pension de la Sécurité de la vieillesse est un paiement mensuel que vous pouvez recevoir si vous avez 65 ans et plus. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.",
   homePageP4:
@@ -98,48 +123,117 @@ const fr: WebTranslations = {
   socialLink3: 'À propos de Canada.ca',
   socialLink4: 'Avis',
   socialLink5: 'Confidentialité',
-
+  pageNotFound: 'Page non trouvée',
+  warningText: 'avertissement',
   category: apiFr.category,
-
+  errorBoxTitle: "L'information n'a pas pu être soumise car ",
+  useEstimatorIf:
+    'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  meta: {
+    homeDescription: `Déterminez combien vous pourriez recevoir de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant.`,
+    homeShortDescription: `Déterminez combien vous pourriez recevoir des prestations canadiennes de la Sécurité de la vieillesse.`,
+    homeKeywords:
+      'pension de vieillesse, sécurité de la vieillesse, calculer supplément, montant de pension, paiements sv, estimer sécurité vieillesse, prestations, finances personnelles, pension du survivant, planification de retraite',
+    author: 'Service Canada',
+    homeSubject: `EC Économie et industrie;Allocation;Avantages sociaux;Prestation au survivant;Finances;Finances personnelles;Revenu;Pension;Pension publique,PE Personnes;Adulte;Aîné,SO Société et culture;Vieillesse`,
+  },
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    onThisPage: 'sur cette page',
+    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.`,
+    onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
     tableTotalAmount: 'Total',
-    whatYouToldUs: 'Ce que vous nous avez dit',
-    youMayBeEligible: 'Vous pouvez être éligible en ce moment',
-    youAreNotEligible: "Vous n'êtes probablement pas éligible pour le moment",
+    whatYouToldUs: 'Vos renseignements',
+    youMayBeEligible: 'Vous pourriez être admissible',
+    youAreNotEligible: "Vous n'êtes probablement pas admissible pour le moment",
+    partnerNotEligible:
+      "Votre conjoint n'est probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
-      'Selon vos informations, vous pourriez être admissible à :',
+      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
       'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
-    basedOnYourInfoNotEligible: `Sur la base de vos informations, vous n'êtes peut-être pas éligible aux prestations de vieillesse. Voir ci-dessous, ou contactez ${generateLink(
+    basedOnYourInfoNotEligible: `Selon vos informations, vous n'êtes peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
       apiFr.links.SC
-    )} pour plus d'informations.`,
-    yourEstimatedTotal: 'Votre total mensuel estimé est de ',
-    basedOnYourInfoTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois.",
+    )} pour plus de détails.`,
+    basedOnPartnerInfoNotEligible: `Selon vos informations, votre conjoint n'est peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
+      apiFr.links.SC
+    )} pour plus de détails.`,
+    yourEstimatedTotal: ' Votre estimation',
+    partnerEstimatedTotal: " L'estimation de votre conjoint",
+    yourEstimatedNoIncome: ' Vous êtes probablement admissible',
+    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      "D'après les informations que vous avez fournies, vous devriez vous attendre à recevoir environ {AMOUNT} par mois. Cependant, ce montant peut être inférieur ou supérieur en fonction de vos revenus.",
+      'Votre pourriez être admissible à recevoir :',
+    basedOnPartnerInfoTotal:
+      'Votre conjoint pourrait être admissible à recevoir :',
+    basedOnPartnerInfoAndIncomeTotal:
+      'Votre conjoint pourrait être admissible à recevoir :',
+    total: 'Votre montant total par mois est ',
+    partnerTotal: 'Leur montant total par mois est ',
+    ifIncomeNotProvided:
+      'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:
-      'Prochaines étapes pour les prestations auxquels vous pourriez être admissible',
+      'Prochaines étapes pour les prestations auxquelles vous pourriez être admissible',
     youMayNotBeEligible:
-      'Prestations auxquels vous pourriez ne pas avoir droit',
+      'Prestations auxquelles vous pourriez ne pas être admissible',
     noAnswersFound: 'Aucune réponse trouvée',
     noBenefitsFound: 'Aucune prestations trouvée',
-    edit: 'Réviser',
+    edit: 'Modifier',
     info: 'info',
     note: 'remarque',
     link: 'lien',
-    dollarSign: 'symbole du dollar',
+    nextStepTitle: 'Prochaines étapes',
+    nextStepGis:
+      'Vous pouvez faire une demande pour le Supplément de revenu garanti lorsque vous présentez votre demande pour la pension de la Sécurité de la vieillesse.',
+    CTATitle: 'Informez-vous sur vos options de retraite',
+    CTABody:
+      'Renseignez-vous sur les pensions publiques, le meilleur moment pour commencer à les recevoir et les conseils pour maximiser votre revenu de retraite.',
+    CTAButton: 'Visiter le Carrefour retraite',
+    month: 'mois',
   },
   resultsQuestions: apiFr.questionShortText,
+  resultsEditAriaLabels: apiFr.questionAriaLabel,
   modifyAnswers: 'Modifier vos réponses',
   errors: {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
+    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.receiveOASEmpty]:
+      //'Veuillez indiquer si vous recevez la pension de la SV.',
+      'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',
+    [ValidationErrors.providePartnerIncomeEmpty]:
+      'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
+    [ValidationErrors.partnerIncomeEmpty]:
+      'Veuillez entrer le revenu de votre conjoint.',
+    [ValidationErrors.partnerYearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
+    [ValidationErrors.maritalStatusEmpty]:
+      'Veuillez sélectionner un état matrimonial.',
+    [ValidationErrors.yearsSince18Empty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.legalStatusNotSelected]:
+      'Veuillez indiquer si vous avez un statut légal au Canada.',
+    [ValidationErrors.partnerLegalStatusNotSelected]:
+      'Veuillez indiquer si votre conjoint a un statut légal au Canada.',
+    [ValidationErrors.partnerBenefitStatusEmpty]:
+      'Veuillez indiquer si votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
+    [ValidationErrors.onlyInCanadaEmpty]:
+      'Veuillez indiquer si vous seulement vécu àu Canada.',
+    [ValidationErrors.partnerOnlyInCanadaEmpty]:
+      'Veuillez indiquer si votre conjoint a seulement vécu au Canada.',
+    [ValidationErrors.invSeparatedEmpty]:
+      'Veuillez indiquer si vous êtes involontairement séparé.',
+    [ValidationErrors.socialCountryEmpty]:
+      'Veuillez indiquer si vous avez déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
+    [ValidationErrors.partnerSocialCountryEmpty]:
+      'Veuillez indiquer si votre conjoint a déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
+    [ValidationErrors.provideIncomeEmpty]:
+      'Veuillez indiquer si vous êtes en mesure de fournir votre revenu.',
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
+    [ValidationErrors.oasDeferEmpty]:
+      'Veuillez sélectionner quand vous souhaitez commencer à recevoir la pension de la SV.',
     [ValidationErrors.incomeBelowZero]:
       'Vos revenus doivent être supérieurs à zéro.',
     [ValidationErrors.partnerIncomeBelowZero]:
@@ -149,26 +243,30 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerIncomeTooHigh]:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
     [ValidationErrors.ageUnder18]:
-      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
+      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
     [ValidationErrors.partnerAgeUnder18]:
-      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
-    [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
+      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
+    [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
     [ValidationErrors.partnerAgeOver150]:
-      "L'âge de votre partenaire doit être inférieur à 150 ans.",
+      "L'âge de votre partenaire doit être inférieur à 150 ans.",
     [ValidationErrors.oasAge65to70]:
-      'Vous devez saisir un âge compris entre 65 et 70 ans.',
-    [ValidationErrors.yearsInCanadaNotEnough]:
-      "Le nombre d'années pendant lesquelles vous avez vécu au Canada n'est pas suffisant pour recevoir des prestations de vieillesse.",
+      'Veuillez entrer un âge entre 65 et 70 ans.',
+    [ValidationErrors.yearsInCanadaNotEnough10]:
+      "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
+    [ValidationErrors.yearsInCanadaNotEnough20]:
+      "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaMinusAge]:
-      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
+      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
-      "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
+      "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
-      "Vous avez indiqué un état civil qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+      "Vous avez indiqué un état matrimonial qui n'est pas couvert par cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
     [ValidationErrors.legalUnavailable]:
-      "Vous avez indiqué un statut légal qui n'est pas couvert par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
-    [ValidationErrors.socialCountryUnavailable]:
-      "Vous avez indiqué que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, mais que vous n'avez pas vécu au Canada pendant un certain nombre d'années pris en charge par cet outil. Pour obtenir de l'aide, veuillez contacter {LINK_SERVICE_CANADA}.",
+      "Vous devez avoir un statut légal au Canada pour recevoir les prestations incluses dans cet outil. Pour obtenir de l'aide, {LINK_SERVICE_CANADA}.",
+    [ValidationErrors.socialCountryUnavailable10]:
+      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
+    [ValidationErrors.socialCountryUnavailable20]:
+      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 20&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
   },
   unableToProceed: 'Impossible de continuer',
   yes: 'Oui',
@@ -176,7 +274,7 @@ const fr: WebTranslations = {
   unavailable: 'indisponible',
 
   selectText: {
-    maritalStatus: 'Sélectionner un état civil',
+    maritalStatus: 'Sélectionner un état matrimonial',
     livingCountry: 'Sélectionner un pays',
     partnerLivingCountry: 'Sélectionner un pays',
     default: 'Sélectionnez parmi',
@@ -184,6 +282,20 @@ const fr: WebTranslations = {
 
   tooltip: {
     moreInformation: "Plus d'information",
+  },
+  partnerIsNotEligible: "Votre conjoint n'est pas admissible",
+  partnerLegalStatusNotEligible:
+    "Le statut légal de votre conjoint indique qu'il ne reçoit pas la pension de la Sécurité de la vieillesse.",
+  partnerYearsLivingCanadaNotEligible:
+    "Votre conjoint n'a pas vécu au Canada assez longtemps pour recevoir la pension de la Sécurité de la vieillesse.",
+  partnerInformation: 'Renseignements sur votre conjoint',
+  partnerInformationDescription:
+    'Les personnes mariées ou vivant en union de fait doivent fournir \
+  des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
+
+  duration: {
+    months: 'Mois',
+    years: 'Années',
   },
 }
 

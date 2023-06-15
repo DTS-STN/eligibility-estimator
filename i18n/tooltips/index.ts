@@ -8,6 +8,7 @@ import fr from './fr'
  */
 export interface TooltipTranslation {
   heading?: string
+  moreinfo?: string
   text?: string
   useDataFromKey?: string
 }

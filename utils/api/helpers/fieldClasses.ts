@@ -36,7 +36,6 @@ export class IncomeHelper extends FieldHelper {
    * Returns the client's income when single, or the sum of client+partner when partnered.
    */
   get relevant(): number {
-    if (!this.provided) throw new Error('income not provided!')
     if (
       this.maritalStatus.provided &&
       this.maritalStatus.partnered &&
@@ -83,17 +82,12 @@ export class LivingCountryHelper extends FieldHelper {
 
 export class LegalStatusHelper extends FieldHelper {
   canadian: boolean
-  sponsored: boolean
   other: boolean
 
   constructor(public value: LegalStatus) {
     super(value)
-    this.canadian =
-      value === LegalStatus.CANADIAN_CITIZEN ||
-      value === LegalStatus.PERMANENT_RESIDENT ||
-      value === LegalStatus.INDIAN_STATUS
-    this.sponsored = value === LegalStatus.SPONSORED
-    this.other = value === LegalStatus.OTHER
+    this.canadian = value === LegalStatus.YES
+    this.other = value === LegalStatus.NO
   }
 }
 
@@ -106,22 +100,23 @@ export class MaritalStatusHelper extends FieldHelper {
     super(value)
     this.partnered = value === MaritalStatus.PARTNERED
     this.single =
-      value === MaritalStatus.SINGLE ||
-      value === MaritalStatus.WIDOWED ||
-      value === MaritalStatus.INV_SEPARATED // invSeparated doesn't necessarily mean single - be careful with this
+      value === MaritalStatus.SINGLE || value === MaritalStatus.WIDOWED
+    //value === MaritalStatus.INV_SEPARATED // invSeparated doesn't necessarily mean single - be careful with this
     this.invSeparated = value === MaritalStatus.INV_SEPARATED
   }
 }
 
 export class PartnerBenefitStatusHelper extends FieldHelper {
   helpMe: boolean
+  none: boolean
   oasEligibility: EntitlementResultType
   gisEligibility: EntitlementResultType
   alwEligibility: EntitlementResultType
 
   constructor(public value: PartnerBenefitStatus) {
     super(value)
-    this.helpMe = this.value == PartnerBenefitStatus.HELP_ME
+    this.helpMe = this.value === PartnerBenefitStatus.HELP_ME
+    this.none = this.value === PartnerBenefitStatus.NONE
     this.oasEligibility = EntitlementResultType.NONE
     this.gisEligibility = EntitlementResultType.NONE
     this.alwEligibility = EntitlementResultType.NONE
@@ -129,16 +124,19 @@ export class PartnerBenefitStatusHelper extends FieldHelper {
       case PartnerBenefitStatus.OAS:
         this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         break
+      case PartnerBenefitStatus.ALW:
+        this.alwEligibility = EntitlementResultType.FULL
+        break
       case PartnerBenefitStatus.OAS_GIS:
         this.oasEligibility = EntitlementResultType.PARTIAL_OR_FULL
         this.gisEligibility = EntitlementResultType.FULL
         break
-      case PartnerBenefitStatus.ALW:
-        this.alwEligibility = EntitlementResultType.FULL
-        break
       case PartnerBenefitStatus.HELP_ME:
         break
       case PartnerBenefitStatus.NONE:
+        this.alwEligibility = EntitlementResultType.NONE
+        this.oasEligibility = EntitlementResultType.NONE
+        this.gisEligibility = EntitlementResultType.NONE
         break
     }
   }

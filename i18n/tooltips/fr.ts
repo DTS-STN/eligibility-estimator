@@ -5,14 +5,83 @@ import { TooltipTranslations } from './index'
 const fr: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiFr.category.marital,
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint(e) de fait</span>: Vous vivez avec une autre personne dans une relation conjugale depuis au moins un an. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Divorcé(e)</span>: Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Marié(e)</span>: Vous êtes unies officiellement au cours d’une cérémonie. Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Célibataire </span>: Vous n'avez jamais été marié et ne vivez pas en union de fait. </p> <p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Conjoint survivant/veuf</span>: Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Séparé(e):</span> Vous vivez séparé de votre époux ou de votre conjoint à cause de la rupture de votre relation depuis au moins 90 jours et vous ne vous êtes pas réconcilié.</p>",
+    moreinfo: 'Lequel s’applique à moi?',
+    text: "<p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Célibataire </span>: \
+            Vous n'avez jamais été marié et ne vivez pas en union de fait. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Divorcé </span>: \
+            Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Séparé </span>: \
+            Vous vivez séparé de votre conjoint à cause de la rupture de votre relation \
+            depuis au moins 90 jours et vous ne vous êtes pas réconcilié. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Marié </span>: \
+            Vous et votre conjoint avez été unis officiellement au cours d’une cérémonie. \
+            Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Conjoint de fait </span>: \
+            Vous vivez avec une autre personne dans une relation conjugale depuis au moins 1&nbsp;an. \
+          </p> \
+          <p style='padding-bottom: 12px;'> \
+            <span style='font-weight: bold;'>Conjoint survivant </span>: \
+            Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait. \
+          </p>",
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiFr.category.legal,
-    text: "<p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Citoyen canadien:</span> Vous êtes Canadien de naissance (née au Canada ou née à l’extérieur du Canada d’un parent citoyen canadien qui est lui-même né au Canada ou qui a obtenu la citoyenneté) ou vous avez  demandé et obtenu la citoyenneté canadienne.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (non parrainé):</span> Vous avez obtenu le statut de résident permanent en immigrant au Canada, mais qui n’êtes pas encore citoyen canadien.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Résident permanent ou un immigrant reçu (parrainé):</span>Vous êtes un étranger qui a présenté une demande de résidence permanente au titre de la catégorie du regroupement familial, qui est parrainé par un répondant canadien approuvé et qui satisfait aux exigences de la catégorie du regroupement familial.</p><p style='padding-bottom: 12px;'><span style='font-weight: bold;'>Statut d'Indien ou carte de statut:</span>  Vous êtes inscrits en tant qu'Indien selon la définition qu'en donne la Loi sur les Indiens.</p>",
+    moreinfo: 'Que signifie avoir un statut légal?',
+    text: "<p style='padding-bottom: 8px;'> \
+            Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
+          </p> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+            <li>citoyen canadien;</li> \
+            <li>résident temporaire;</li> \
+            <li>résident permanent (immigrant reçu);</li> \
+            <li>réfugié;</li> \
+            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>.</li> \
+          </ul> \
+          ",
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
-    useDataFromKey: 'legalStatus',
+    heading: apiFr.category.legal,
+    moreinfo: 'Que signifie avoir un statut légal?',
+    text: "<p style='padding-bottom: 8px;'> \
+            Avoir un statut légal signifie que votre conjoint est autorisé à entrer et à rester au Canada à titre de : \
+          </p> \
+          <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
+            <li>citoyen canadien;</li> \
+            <li>résident temporaire;</li> \
+            <li>résident permanent (immigrant reçu);</li> \
+            <li>réfugié;</li> \
+            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>.</li> \
+          </ul> \
+          ",
+  },
+  [FieldKey.INCOME]: {
+    heading: apiFr.category.income,
+    moreinfo: 'Quelle année de revenus sera utilisée pour ma demande?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+            Par défaut, votre dernière déclaration de revenus sera utilisée lors de votre demande. \
+            </p> \
+          </div> \
+          ",
+  },
+  [FieldKey.PARTNER_INCOME]: {
+    heading: apiFr.category.income,
+    moreinfo: 'Quelle année de revenus sera utilisée pour ma demande?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px;'> \
+            Par défaut, la dernière déclaration de revenus de votre conjoint sera utilisée lors de votre demande. \
+            </p> \
+          </div> \
+          ",
   },
 }
 
