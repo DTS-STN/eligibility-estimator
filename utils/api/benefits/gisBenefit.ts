@@ -322,12 +322,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             this.translations.detailWithHeading.partnerEligibleButAnsweredNo
           )
         } else {
-          if (!this.input.invSeparated) {
-            console.log('INSIDEs')
-            cardCollapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
-            )
-          }
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligible
+          )
         }
       }
     }

@@ -879,9 +879,7 @@ export class BenefitHandler {
             } else {
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
-              allResults.partner.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading.partnerEligible
-              )
+
               if (
                 allResults.partner.gis.entitlement.result > 0 &&
                 allResults.client.gis.entitlement.result <= 0
@@ -1063,9 +1061,6 @@ export class BenefitHandler {
             allResults.partner.gis.entitlement.result > 0 &&
             initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
           ) {
-            allResults.partner.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
-            )
             if (allResults.client.gis.entitlement.result <= 0) {
               allResults.partner.gis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading
