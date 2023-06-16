@@ -20,7 +20,7 @@ export const livingCountry = [
   { key: 'BLZ', text: 'Belize' },
   { key: 'BEN', text: 'Benin' },
   { key: 'BTN', text: 'Bhutan' },
-  { key: 'BOL', text: 'Bolivia (Plurinational State of)' },
+  { key: 'BOL', text: 'Bolivia' },
   { key: 'BIH', text: 'Bosnia and Herzegovina' },
   { key: 'BWA', text: 'Botswana' },
   { key: 'BRA', text: 'Brazil' },
