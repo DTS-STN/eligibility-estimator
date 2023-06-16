@@ -51,7 +51,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
     const meetsReqLegal = this.input.legalStatus.canadian
-
+    console.log('relevantIncome', this.relevantIncome)
     // main checks
     if (
       meetsReqLegal &&
