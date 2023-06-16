@@ -900,6 +900,11 @@ export class BenefitHandler {
                   this.translations.detailWithHeading
                     .calculatedBasedOnIndividualIncome
                 )
+
+                allResults.client.gis.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
               }
             }
           }

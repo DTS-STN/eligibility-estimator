@@ -18,6 +18,7 @@ import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
+  relevantIncome: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -25,6 +26,11 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   ) {
     super(input, translations, BenefitKey.alw)
     this.partner = partner
+    this.relevantIncome = this.input.invSeparated
+      ? this.partner
+        ? this.input.income.partner
+        : this.input.income.client
+      : this.input.income.relevant
   }
 
   protected getEligibility(): EligibilityResult {
@@ -39,7 +45,8 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // income must be provided, partner cannot be eligible for gis without income
     const incomeNotProvided = !this.input.income.provided
     const maxIncome = legalValues.alw.alwIncomeLimit
-    const meetsReqIncome = this.input.income.relevant <= maxIncome
+
+    const meetsReqIncome = this.relevantIncome <= maxIncome
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada
@@ -243,7 +250,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
    */
   protected formulaResult(): number {
     const formulaResult = new EntitlementFormula(
-      this.input.income.relevant,
+      this.relevantIncome,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age
