@@ -494,6 +494,7 @@ export class BenefitHandler {
           clientOas.entitlement.result > 0 &&
           partnerOas.entitlement.result > 0
         ) {
+          console.log('BOTH OAS PROVIDED')
           consoleDev('--- both oas are greater than 0 --- start')
 
           let maritalStatus = new MaritalStatusHelper(MaritalStatus.SINGLE)
@@ -644,6 +645,7 @@ export class BenefitHandler {
                 this.input.partner?.partnerBenefitStatus.value ===
                   PartnerBenefitStatus.HELP_ME)
             ) {
+              console.log('INSIDE IF STATEMENT')
               partnerGis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading.partnerEligible
               )
@@ -877,11 +879,9 @@ export class BenefitHandler {
             ) {
               isPartnerGisAvailable = false
             } else {
+              console.log('IN THE ELSE CONDITIONs')
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
-              allResults.partner.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading.partnerEligible
-              )
 
               if (
                 this.input.partner.invSeparated &&
@@ -1053,16 +1053,6 @@ export class BenefitHandler {
           } else {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-          }
-
-          // add the amount calculated to the card.
-          if (
-            allResults.partner.gis.entitlement.result > 0 &&
-            initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
-          ) {
-            allResults.partner.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
-            )
           }
 
           consoleDev(

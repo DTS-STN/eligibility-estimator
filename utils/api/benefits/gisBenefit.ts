@@ -322,11 +322,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             this.translations.detailWithHeading.partnerEligibleButAnsweredNo
           )
         } else {
-          if (!this.input.invSeparated) {
-            cardCollapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
-            )
-          }
+          // This captures all scenarios where a partner has an estimate and the couple is involuntary separated
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligible
+          )
         }
       }
     }
