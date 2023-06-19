@@ -391,6 +391,7 @@ export class BenefitHandler {
       allResults.partner.gis.entitlement !== undefined &&
       allResults.client.alw.entitlement !== undefined
     ) {
+      console.log('INSIDE OVERWRITE CONDTIONAL')
       if (
         allResults.partner.oas.entitlement.result > 0 &&
         allResults.partner.gis.entitlement.result >= 0 &&
@@ -486,6 +487,7 @@ export class BenefitHandler {
       this.input.client.invSeparated &&
       this.input.client.maritalStatus.partnered
     ) {
+      //*
       const isIncomeProvided =
         this.input.client.income.provided && this.input.partner.income.provided
 
@@ -792,6 +794,8 @@ export class BenefitHandler {
         else if (clientAlw.eligibility.result === ResultKey.ELIGIBLE) {
           consoleDev(' --- applicant is eligible for alw --- start')
 
+          //* here is captured the scenario when: 64: 27000, 65: 20000
+
           const maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
 
           //calculate gis entitlement for applicant use table4
@@ -861,6 +865,7 @@ export class BenefitHandler {
 
           let isPartnerGisAvailable = true
           if (totalAmountSingle > totalAmountCouple) {
+            console.log('TOTAL AMOUNT SINGLE LARGER')
             const partnerSingleInput = this.getSinglePartnerInput()
 
             partnerGis = new GisBenefit(
@@ -870,13 +875,22 @@ export class BenefitHandler {
               true
             )
 
+            console.log(
+              'partnerGis.entitlement.result',
+              partnerGis.entitlement.result
+            )
             // #115349 no allowance because partnerBenefits = No
             if (
               partnerGis.entitlement.result === 0 ||
               initialPartnerBenefitStatus === PartnerBenefitStatus.NONE
             ) {
+              //* fall in this condition when: 64: 0, 65: 38736 (taken care of in the next IF block)
+              //* So all we have to worry about is this ELSE block and make sure that ALW is calculated with single income
               isPartnerGisAvailable = false
+              console.log('fall into second IF')
             } else {
+              //* fall in this condition when: 64: 0, 65: 0 and example from task 64: 27876.41, 65: 20000
+              console.log('IN THE ELSE')
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
               allResults.partner.gis.cardDetail.collapsedText.push(
@@ -891,11 +905,46 @@ export class BenefitHandler {
                     .calculatedBasedOnIndividualIncome
                 )
 
+              // If client is eligible for ALW, need to recalculate estimate based on individual income
+              if (clientAlw.eligibility.result === 'eligible') {
+                console.log('CLIENT IS ELIGIBLE FOR ALW')
+                const tempClientAlw = new AlwBenefit(
+                  this.input.client,
+                  this.translations,
+                  false,
+                  true
+                )
+                this.setValueForAllResults(
+                  allResults,
+                  'client',
+                  'alw',
+                  tempClientAlw
+                )
+
+                // overwrite eligibility and cardDetails for correct text in card
+                allResults.client.alw.eligibility = {
+                  result: ResultKey.ELIGIBLE,
+                  reason: ResultReason.NONE,
+                  detail: this.translations.detail.eligible,
+                }
+
+                // cardDetails
+                allResults.client.alw.eligibility.detail,
+                  (allResults.client.alw.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+
+                allResults.client.alw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
+              }
+
               if (
                 this.input.partner.invSeparated &&
                 allResults.partner.gis.entitlement.result > 0 &&
                 clientAlw.entitlement.result > 0
               ) {
+                console.log('INSIDE')
+                //* still when: 64: 0, 65: 0
                 allResults.partner.alw.cardDetail.collapsedText.push(
                   this.translations.detailWithHeading
                     .calculatedBasedOnIndividualIncome
@@ -903,11 +952,6 @@ export class BenefitHandler {
 
                 allResults.client.alw.entitlement.result =
                   applicantAlwCalcSingle
-
-                allResults.client.alw.cardDetail.collapsedText.push(
-                  this.translations.detailWithHeading
-                    .calculatedBasedOnIndividualIncome
-                )
               }
             }
           }
@@ -916,6 +960,9 @@ export class BenefitHandler {
             totalAmountSingle <= totalAmountCouple ||
             !isPartnerGisAvailable
           ) {
+            console.log(
+              'TOTAL AMOUNT FOR COUPLE LARGER OR PARTNERGIS NOT AVAILABLE'
+            )
             // return partnerGisResultT4 only partnerBenefits = No
             if (initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE) {
               allResults.partner.gis.entitlement.result = partnerGisResultT4
