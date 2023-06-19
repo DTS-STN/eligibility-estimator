@@ -486,7 +486,6 @@ export class BenefitHandler {
       this.input.client.invSeparated &&
       this.input.client.maritalStatus.partnered
     ) {
-      //*
       const isIncomeProvided =
         this.input.client.income.provided && this.input.partner.income.provided
 
