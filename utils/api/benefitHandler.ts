@@ -973,12 +973,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
 
+          // the push below prob can be moved to the else condition above but no time to test all scenarios
           if (
             (allResults.client.gis.eligibility.reason === ResultReason.NONE ||
               allResults.client.gis.eligibility.reason ===
                 ResultReason.INCOME) &&
             clientGis.entitlement.result > 0 &&
-            this.rawInput.partnerLegalStatus === LegalStatus.YES
+            (this.rawInput.partnerLegalStatus === LegalStatus.YES ||
+              this.rawInput.partnerLegalStatus === undefined)
           ) {
             allResults.client.gis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
