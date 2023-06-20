@@ -876,6 +876,63 @@ export class BenefitHandler {
                     .calculatedBasedOnIndividualIncome
                 )
 
+              // If client is eligible for ALW, need to recalculate estimate based on individual income
+              if (clientAlw.eligibility.result === 'eligible') {
+                if (
+                  this.input.client.income.client >=
+                  legalValues.alw.alwIncomeLimit
+                ) {
+                  const tempClientAlw = new AlwBenefit(
+                    this.input.client,
+                    this.translations,
+                    false,
+                    false
+                  )
+                  this.setValueForAllResults(
+                    allResults,
+                    'client',
+                    'alw',
+                    tempClientAlw
+                  )
+
+                  // overwrite eligibility and cardDetails for correct text in card
+                  allResults.client.alw.eligibility = {
+                    result: ResultKey.ELIGIBLE,
+                    reason: ResultReason.NONE,
+                    detail: this.translations.detail.alwEligibleIncomeTooHigh,
+                  }
+                } else {
+                  const tempClientAlw = new AlwBenefit(
+                    this.input.client,
+                    this.translations,
+                    false,
+                    true
+                  )
+                  this.setValueForAllResults(
+                    allResults,
+                    'client',
+                    'alw',
+                    tempClientAlw
+                  )
+
+                  // overwrite eligibility and cardDetails for correct text in card
+                  allResults.client.alw.eligibility = {
+                    result: ResultKey.ELIGIBLE,
+                    reason: ResultReason.NONE,
+                    detail: this.translations.detail.eligible,
+                  }
+
+                  // cardDetails
+                  allResults.client.alw.eligibility.detail,
+                    (allResults.client.alw.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+
+                  allResults.client.alw.cardDetail.collapsedText.push(
+                    this.translations.detailWithHeading
+                      .calculatedBasedOnIndividualIncome
+                  )
+                }
+              }
+
               if (
                 this.input.partner.invSeparated &&
                 allResults.partner.gis.entitlement.result > 0 &&
@@ -888,11 +945,6 @@ export class BenefitHandler {
 
                 allResults.client.alw.entitlement.result =
                   applicantAlwCalcSingle
-
-                allResults.client.alw.cardDetail.collapsedText.push(
-                  this.translations.detailWithHeading
-                    .calculatedBasedOnIndividualIncome
-                )
               }
             }
           }
