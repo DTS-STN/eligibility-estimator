@@ -31,6 +31,9 @@ service:
     prometheus.io/path: /api/metrics
     prometheus.io/port: "3000"
 ingress:
+    prod_enabled: {{ requiredEnv "PROD_ENABLED" }}
+    ssl_cert: service_canada_ca
+    prod_url: {{ requiredEnv "SUB_DOMAIN" }}.{{ requiredEnv "BASE_DOMAIN" }}
     enabled: true
     annotations: 
       {{ if (eq .Environment.Name "prototype")}}  

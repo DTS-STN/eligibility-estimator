@@ -636,19 +636,6 @@ export class BenefitHandler {
               true
             )
 
-            // adds partner calculation when InvSeparated = true
-            if (
-              partnerGis.entitlement?.result > 0 &&
-              (this.input.partner?.partnerBenefitStatus.value ===
-                PartnerBenefitStatus.OAS_GIS ||
-                this.input.partner?.partnerBenefitStatus.value ===
-                  PartnerBenefitStatus.HELP_ME)
-            ) {
-              partnerGis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading.partnerEligible
-              )
-            }
-
             this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
             this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
           }
@@ -879,9 +866,7 @@ export class BenefitHandler {
             } else {
               allResults.partner.gis.eligibility = partnerGis.eligibility
               allResults.partner.gis.entitlement = partnerGis.entitlement
-              allResults.partner.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading.partnerEligible
-              )
+
               if (
                 allResults.partner.gis.entitlement.result > 0 &&
                 allResults.client.gis.entitlement.result <= 0
@@ -890,6 +875,63 @@ export class BenefitHandler {
                   this.translations.detailWithHeading
                     .calculatedBasedOnIndividualIncome
                 )
+
+              // If client is eligible for ALW, need to recalculate estimate based on individual income
+              if (clientAlw.eligibility.result === 'eligible') {
+                if (
+                  this.input.client.income.client >=
+                  legalValues.alw.alwIncomeLimit
+                ) {
+                  const tempClientAlw = new AlwBenefit(
+                    this.input.client,
+                    this.translations,
+                    false,
+                    false
+                  )
+                  this.setValueForAllResults(
+                    allResults,
+                    'client',
+                    'alw',
+                    tempClientAlw
+                  )
+
+                  // overwrite eligibility and cardDetails for correct text in card
+                  allResults.client.alw.eligibility = {
+                    result: ResultKey.ELIGIBLE,
+                    reason: ResultReason.NONE,
+                    detail: this.translations.detail.alwEligibleIncomeTooHigh,
+                  }
+                } else {
+                  const tempClientAlw = new AlwBenefit(
+                    this.input.client,
+                    this.translations,
+                    false,
+                    true
+                  )
+                  this.setValueForAllResults(
+                    allResults,
+                    'client',
+                    'alw',
+                    tempClientAlw
+                  )
+
+                  // overwrite eligibility and cardDetails for correct text in card
+                  allResults.client.alw.eligibility = {
+                    result: ResultKey.ELIGIBLE,
+                    reason: ResultReason.NONE,
+                    detail: this.translations.detail.eligible,
+                  }
+
+                  // cardDetails
+                  allResults.client.alw.eligibility.detail,
+                    (allResults.client.alw.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+
+                  allResults.client.alw.cardDetail.collapsedText.push(
+                    this.translations.detailWithHeading
+                      .calculatedBasedOnIndividualIncome
+                  )
+                }
+              }
 
               if (
                 this.input.partner.invSeparated &&
@@ -903,11 +945,6 @@ export class BenefitHandler {
 
                 allResults.client.alw.entitlement.result =
                   applicantAlwCalcSingle
-
-                allResults.client.alw.cardDetail.collapsedText.push(
-                  this.translations.detailWithHeading
-                    .calculatedBasedOnIndividualIncome
-                )
               }
             }
           }
@@ -988,12 +1025,14 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
 
+          // the push below prob can be moved to the else condition above but no time to test all scenarios
           if (
             (allResults.client.gis.eligibility.reason === ResultReason.NONE ||
               allResults.client.gis.eligibility.reason ===
                 ResultReason.INCOME) &&
             clientGis.entitlement.result > 0 &&
-            this.rawInput.partnerLegalStatus === LegalStatus.YES
+            (this.rawInput.partnerLegalStatus === LegalStatus.YES ||
+              this.rawInput.partnerLegalStatus === undefined)
           ) {
             allResults.client.gis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
@@ -1063,9 +1102,6 @@ export class BenefitHandler {
             allResults.partner.gis.entitlement.result > 0 &&
             initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
           ) {
-            allResults.partner.gis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
-            )
             if (allResults.client.gis.entitlement.result <= 0) {
               allResults.partner.gis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading

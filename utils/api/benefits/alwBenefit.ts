@@ -18,13 +18,19 @@ import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
+  single: Boolean
+  relevantIncome: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
-    partner?: Boolean
+    partner?: Boolean,
+    single?: Boolean
   ) {
     super(input, translations, BenefitKey.alw)
     this.partner = partner
+    this.relevantIncome = single
+      ? this.input.income.client
+      : this.input.income.relevant
   }
 
   protected getEligibility(): EligibilityResult {
@@ -243,7 +249,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
    */
   protected formulaResult(): number {
     const formulaResult = new EntitlementFormula(
-      this.input.income.relevant,
+      this.relevantIncome,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age
