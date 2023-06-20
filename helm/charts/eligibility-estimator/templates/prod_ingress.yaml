@@ -1,0 +1,26 @@
+{{- if .Values.ingress.prod_enabled -}}
+{{- $fullName := include "fullname" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      appgw.ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.class: azure/application-gateway
+      appgw.ingress.kubernetes.io/appgw-ssl-certificate: {{ .Values.ingress.ssl_cert }}
+    name: {{ $fullName }}-prod
+  spec:
+    rules:
+    - host: {{ .Values.ingress.prod_url }}
+      http:
+        paths:
+        - backend:
+            service:
+              name: {{ $fullName }}
+              port:
+                number: {{ $svcPort }}
+          path: /
+          pathType: ImplementationSpecific
+{{- end }}
