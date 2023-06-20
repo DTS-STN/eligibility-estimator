@@ -10,7 +10,7 @@ releases:
   - name: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}
     chart: ../helm/charts/eligibility-estimator
     values:
-      - overrides/eligibility-estimator/eligibility-estimator.yaml.gotmpl
+      - overrides/eligibility-estimator/eligibility-estimator.yaml.go.tmpl
     labels:
         category: dts
         app: {{ requiredEnv "PROJECT" }}
