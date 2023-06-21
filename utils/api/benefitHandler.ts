@@ -876,6 +876,15 @@ export class BenefitHandler {
                     .calculatedBasedOnIndividualIncome
                 )
 
+              if (
+                !allResults.partner.gis.cardDetail.collapsedText.includes(
+                  this.translations.detailWithHeading.partnerEligible
+                )
+              )
+                allResults.partner.gis.cardDetail.collapsedText.unshift(
+                  this.translations.detailWithHeading.partnerEligible
+                )
+
               // If client is eligible for ALW, need to recalculate estimate based on individual income
               if (clientAlw.eligibility.result === 'eligible') {
                 if (
