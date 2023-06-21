@@ -75,6 +75,8 @@ const ResultsPage: React.VFC<{
       'value'
     ] === PartnerBenefitStatus.NONE
 
+  console.log(results)
+  console.log(partnerResults)
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
   )
