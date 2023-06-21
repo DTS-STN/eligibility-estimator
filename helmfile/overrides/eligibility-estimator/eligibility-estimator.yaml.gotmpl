@@ -35,8 +35,8 @@ ingress:
     ssl_cert: service_canada_ca
     prod_url: {{ requiredEnv "SUB_DOMAIN" }}.{{ requiredEnv "BASE_DOMAIN" }}
     enabled: true
-    annotations: 
-      {{ if (eq .Environment.Name "prototype")}}  
+    annotations:
+      {{ if (eq .Environment.Name "prototype")}}
       cert-manager.io/cluster-issuer: letsencrypt-prod-alpha-sc
       {{ else }}
       cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -46,7 +46,7 @@ ingress:
     tls:
       - hosts:
           - {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
-        {{ if (eq .Environment.Name "prototype")}}  
+        {{ if (eq .Environment.Name "prototype")}}
         secretName: ingress-tls-eeprototype
         {{ else }}
         secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
