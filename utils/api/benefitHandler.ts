@@ -707,7 +707,7 @@ export class BenefitHandler {
             'totalAmtCouple',
             totalAmtCouple
           )
-          console.log('here #1')
+
           this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
 
           let isApplicantGisAvailable = true
@@ -724,7 +724,7 @@ export class BenefitHandler {
               this.translations,
               allResults.client.oas
             )
-            console.log('here')
+
             if (clientGis.entitlement.result === 0) {
               isApplicantGisAvailable = false
 
@@ -746,7 +746,6 @@ export class BenefitHandler {
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
               allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
 
-              console.log('here #3')
               if (partnerAlwCalcSingle > 0) {
                 allResults.partner.alw.cardDetail.collapsedText.push(
                   this.translations.detailWithHeading
