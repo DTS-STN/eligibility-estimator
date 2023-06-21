@@ -18,7 +18,7 @@ extraEnv:
       valueFrom:
         secretKeyRef:
           name: web-example-secret
-          key: example-secret-password         
+          key: example-secret-password
           
 */}}
 image:
@@ -34,7 +34,7 @@ ingress:
     prod_enabled: {{ requiredEnv "PROD_ENABLED" }}
     ssl_cert: service_canada_ca
     prod_url: {{ requiredEnv "SUB_DOMAIN" }}.{{ requiredEnv "BASE_DOMAIN" }}
-    enabled: true
+    enabled: {{ requiredEnv "ALPHA_ENABLED" }}
     annotations: 
       {{ if (eq .Environment.Name "prototype")}}  
       cert-manager.io/cluster-issuer: letsencrypt-prod-alpha-sc
