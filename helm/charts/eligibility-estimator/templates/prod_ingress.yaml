@@ -2,6 +2,7 @@
 {{- $fullName := include "fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 apiVersion: v1
+kind: List
 items:
 - apiVersion: networking.k8s.io/v1
   kind: Ingress

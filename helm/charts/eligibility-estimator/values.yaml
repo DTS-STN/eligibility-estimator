@@ -27,9 +27,6 @@ service:
 
 ingress:
   enabled: true
-  prod_enabled: {{ requiredEnv "PROD_ENABLED" }}
-  ssl_cert: service_canada_ca
-  prod_url: {{ requiredEnv "SUB_DOMAIN" }}.{{ requiredEnv "BASE_DOMAIN" }}
   annotations:
     {}
     # kubernetes.io/ingress.class: nginx
