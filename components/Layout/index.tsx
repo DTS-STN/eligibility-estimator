@@ -9,7 +9,6 @@ import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Head } from './Head'
-import { TestBanner } from './TestBanner'
 import { CTA } from '../ResultsPage/CTA'
 
 export const Layout: React.VFC<{
@@ -17,11 +16,9 @@ export const Layout: React.VFC<{
   title: string
 }> = ({ children, title }) => {
   const router = useRouter()
-  const oppositeLocale = router.locales.find((l) => l !== router.locale)
+
   const langToggleLink =
-    oppositeLocale === 'fr'
-      ? `${oppositeLocale}${router.asPath}`
-      : `${router.asPath}`
+    router.locale === 'fr' ? `/en${router.asPath}` : `/fr${router.asPath}`
 
   const tsln = useTranslation<WebTranslations>()
 

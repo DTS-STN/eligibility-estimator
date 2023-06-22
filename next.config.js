@@ -1,7 +1,7 @@
 module.exports = {
   i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'en',
+    locales: ['en', 'fr', 'default'],
+    defaultLocale: 'default',
   },
   reactStrictMode: true,
   // this supposed to work
