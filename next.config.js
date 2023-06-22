@@ -14,6 +14,18 @@ module.exports = {
         destination: '/interact.html',
         permanent: false,
       },
+      {
+        source: '/en/index',
+        destination: '/en',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/fr/index',
+        destination: '/fr',
+        permanent: true,
+        locale: false,
+      },
     ]
   },
   env: {
