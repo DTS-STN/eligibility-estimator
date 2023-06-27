@@ -727,6 +727,12 @@ export class BenefitHandler {
 
             if (clientGis.entitlement.result === 0) {
               isApplicantGisAvailable = false
+
+              if (partnerAlwCalcSingle > 0) {
+                partnerAlw.cardDetail.collapsedText.push(
+                  this.translations.detailWithHeading.partnerEligible
+                )
+              }
             } else {
               allResults.client.gis.cardDetail.collapsedText.push(
                 this.translations.detailWithHeading
