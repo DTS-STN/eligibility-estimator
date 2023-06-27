@@ -1,7 +1,7 @@
 module.exports = {
   i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'en',
+    locales: ['en', 'fr', 'default'],
+    defaultLocale: 'default',
   },
   reactStrictMode: true,
   // this supposed to work
@@ -13,6 +13,18 @@ module.exports = {
         source: '/interact',
         destination: '/interact.html',
         permanent: false,
+      },
+      {
+        source: '/en/index',
+        destination: '/en',
+        permanent: true,
+        locale: false,
+      },
+      {
+        source: '/fr/index',
+        destination: '/fr',
+        permanent: true,
+        locale: false,
       },
     ]
   },

@@ -27,7 +27,7 @@ export const options = {
 }
 
 export default function () {
-  const pages = ['/', '/eligibility', '/results']
+  const pages = ['/', '/questions', '/results']
 
   const headers = {
     'upgrade-insecure-requests': '1',
