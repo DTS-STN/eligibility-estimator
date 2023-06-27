@@ -333,10 +333,10 @@ const en: Translations = {
     eligibleWhen65ApplyNow:
       'You may be eligible when you turn 65. However, you may be able to apply now. Please contact {LINK_SERVICE_CANADA} for more information.',
     eligibleWhen60:
-      "You may be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
+      "You may be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1&nbsp;month after you turn&nbsp;59.</p>",
     eligibleWhen65: 'You may be eligible when you turn 65.',
     mustBeInCanada:
-      "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
+      "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
@@ -366,7 +366,7 @@ const en: Translations = {
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
-      'To be eligible for this benefit, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class="text-default-text" style="text-decoration: underline" href="/eligibility#partnerBenefitStatus">edit your answers</a> to see what you could get if your partner received these benefits.',
+      'To be eligible for this benefit, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class="text-default-text" style="text-decoration: underline" href="/en/questions#partnerBenefitStatus">edit your answers</a> to see what you could get if your partner received these benefits.',
     alwEligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
@@ -403,7 +403,7 @@ const en: Translations = {
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
-        "You may be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/eligibility#age'>edit your answers</a> to see what you could receive at a future age.",
+        "You may be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
         "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
     },
@@ -455,7 +455,7 @@ const en: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Your partner may be eligible',
-      text: 'You can <a href="/eligibility#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
+      text: 'You can <a href="/en/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
   },
   summaryTitle: {
