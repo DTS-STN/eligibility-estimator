@@ -107,7 +107,7 @@ const ResultsPage: React.VFC<{
           resultsEligible,
           tsln
         ),
-        url: '#estimated',
+        url: '#estimate',
       },
       {
         text: tsln.resultsPage.whatYouToldUs,
@@ -143,7 +143,7 @@ const ResultsPage: React.VFC<{
           tsln,
           'partner'
         ),
-        url: '#partnerEstimated',
+        url: '#partnerEstimate',
       })
     }
 
