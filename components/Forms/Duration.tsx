@@ -48,7 +48,9 @@ const Duration: FC<DurationProps> = ({
     if (durationInput?.years === maxYears) {
       const maxMonths = getMaxMonths(age)
       if (durationInput?.months > maxMonths) {
-        setDurationInput({ ...durationInput, months: 0 })
+        const newDuration = { ...durationInput, months: 0 }
+        setDurationInput(newDuration)
+        baseOnChange(JSON.stringify(newDuration))
       }
     }
 
