@@ -109,7 +109,7 @@ const ResultsPage: React.VFC<{
           resultsEligible,
           tsln
         ),
-        url: '#estimated',
+        url: '#estimate',
       },
       {
         text: tsln.resultsPage.whatYouToldUs,
@@ -145,7 +145,7 @@ const ResultsPage: React.VFC<{
           tsln,
           'partner'
         ),
-        url: '#partnerEstimated',
+        url: '#partnerEstimate',
       })
     }
 
@@ -221,7 +221,7 @@ const ResultsPage: React.VFC<{
             id={'EditAnswers'}
             styling="secondary"
             className="mt-6 justify-center md:w-[fit-content]"
-            onClick={(e) => router.push('/eligibility')}
+            onClick={(e) => router.push('/questions')}
           />
         </div>
       </div>

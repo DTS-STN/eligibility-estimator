@@ -1,5 +1,5 @@
 /* eslint-disable cypress/no-unnecessary-waiting */
-//Cypress tests for the eligibility page
+//Cypress tests for the questions page
 
 beforeEach(() => {
   cy.visit('/')
@@ -10,8 +10,8 @@ beforeEach(() => {
 })
 
 describe('form page loads without errors', () => {
-  it('should have eligibility in the URL', () => {
-    cy.location('pathname').should('equal', '/eligibility')
+  it('should have questions in the URL', () => {
+    cy.location('pathname').should('equal', '/questions')
   })
 })
 

@@ -8,7 +8,7 @@ export enum Steps {
   STEP_5 = 'step5',
 }
 
-// Types for EligibilityPage
+// Types for QuestionsPage
 export type NextClickedObject = {
   [x in Steps]?: boolean
 }
