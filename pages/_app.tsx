@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 import Auth from './Auth'
 
-const PRIVATE_PATHS = ['/', '/questions', '/results']
+const PRIVATE_PATHS = ['/', '/questions', '/results', '/resultats']
 
 function MyApp({
   Component,

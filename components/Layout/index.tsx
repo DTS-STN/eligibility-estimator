@@ -110,7 +110,8 @@ export const Layout: React.VFC<{
           {children}
         </div>
 
-        {router.pathname === '/results' && (
+        {(router.pathname === '/results' ||
+          router.pathname === '/resultats') && (
           <div id="cta-feedback" className="mb-8">
             <CTA
               heading={tsln.resultsPage.CTATitle}
