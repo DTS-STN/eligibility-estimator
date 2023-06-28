@@ -130,20 +130,9 @@ export const QuestionsPage: React.VFC = ({}) => {
       const ageDate = JSON.parse(newValue).date
       setAgeDate(ageDate)
     }
-    console.log(
-      '>>>>>>> key=',
-      key,
-      'keyStepMap',
-      keyStepMap,
-      'new value=',
-      newValue
-    )
+
     if (key === 'partnerAge') {
       newVal = JSON.parse(newValue).value
-    }
-
-    if (key === 'receiveOAS') {
-      console.log('receiveOAS', 'oasDeferDuration')
     }
 
     const step = Object.keys(keyStepMap).find((step) =>
