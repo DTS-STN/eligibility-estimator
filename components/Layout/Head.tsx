@@ -75,6 +75,11 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       <meta name="dcterms.modified" title="W3CDTF" content="2023-04-12" />
 
       <meta name="dcterms.spatial" content="Canada" />
+      <meta name="dcterms.accessRights" content="2" />
+      <meta
+        name="dcterms.service"
+        content="ESDC-EDSC_estimateursv-oasestimator"
+      />
     </NextHead>
   )
 }
