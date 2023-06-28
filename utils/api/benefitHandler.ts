@@ -1167,7 +1167,7 @@ export class BenefitHandler {
       allResults.client.alw.cardDetail = clientAlw.cardDetail
       allResults.client.afs.cardDetail = clientAfs.cardDetail
     }
-
+    console.log(this.rawInput)
     consoleDev('allResults', allResults)
 
     // All done!
