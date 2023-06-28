@@ -48,9 +48,11 @@ const Duration: FC<DurationProps> = ({
     if (durationInput?.years === maxYears) {
       const maxMonths = getMaxMonths(age)
       if (durationInput?.months > maxMonths) {
-        const newDuration = { ...durationInput, months: 0 }
-        setDurationInput(newDuration)
-        baseOnChange(JSON.stringify(newDuration))
+        setDurationInput({ ...durationInput, months: 0 })
+        // reset to how it was before
+        //const newDuration = { ...durationInput, months: 0 }
+        //setDurationInput(newDuration)
+        //baseOnChange(JSON.stringify(newDuration))
       }
     }
 
@@ -70,9 +72,11 @@ const Duration: FC<DurationProps> = ({
 
   useEffect(() => {
     setSelectOptions(getSelectOptions())
+
     if (durationInput?.years === maxYears) {
       const maxMonths = getMaxMonths(age)
       setSelectOptions(getSelectOptions(maxMonths))
+
       if (durationInput?.months > maxMonths) {
         setDurationInput({ ...durationInput, months: 0 })
       }
@@ -80,6 +84,7 @@ const Duration: FC<DurationProps> = ({
 
     if (durationInput?.years > maxYears) {
       setDurationInput({ months: 0, years: 0 })
+      baseOnChange(JSON.stringify({ months: 0, years: 0 }))
     }
 
     sessionStorage.setItem(name, JSON.stringify(durationInput))

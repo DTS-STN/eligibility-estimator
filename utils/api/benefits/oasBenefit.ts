@@ -227,6 +227,13 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     const durationStr = this.input.oasDeferDuration
 
+    if (!this.input.receiveOAS) {
+      sessionStorage.setItem(
+        'oasDeferDuration',
+        JSON.stringify({ months: 0, years: 0 })
+      )
+    }
+
     if (durationStr) {
       const duration: MonthsYears = JSON.parse(durationStr)
       const durationFloat = duration.years + duration.months / 12
