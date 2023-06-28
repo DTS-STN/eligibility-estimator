@@ -76,7 +76,10 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
 
       <meta name="dcterms.spatial" content="Canada" />
       <meta name="dcterms.accessRights" content="2" />
-      <meta name="dcterms.service" content="ESDC-EDSC_MSCA-MSDC" />
+      <meta
+        name="dcterms.service"
+        content="ESDC-EDSC_estimateursv-oasestimator"
+      />
     </NextHead>
   )
 }
