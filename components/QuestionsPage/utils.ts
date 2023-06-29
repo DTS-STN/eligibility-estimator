@@ -207,3 +207,20 @@ export function getVisisbleErrorsForStep(step, keyStepMap, visibleFields) {
   visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
   return stepErrorsVisible
 }
+
+export function getBirthMonthAndYear(age) {
+  const currentDate = new Date()
+  const currentYear = currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth()
+
+  let birthYear = currentYear - Math.floor(age)
+  const months = Math.round((age - Math.floor(age)) * 12)
+  let birthMonth = currentMonth + 1 - months
+
+  if (birthMonth < 1) {
+    birthYear--
+    birthMonth = birthMonth + 12 // adjust birthMonth because it can be negative
+  }
+
+  return { year: birthYear, month: birthMonth }
+}
