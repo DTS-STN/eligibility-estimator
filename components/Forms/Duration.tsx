@@ -82,6 +82,9 @@ const Duration: FC<DurationProps> = ({
     }
 
     sessionStorage.setItem(name, JSON.stringify(durationInput))
+    if (durationInput) {
+      baseOnChange(JSON.stringify(durationInput))
+    }
   }, [age, durationInput, ageDate])
 
   const validationClass = !!error
