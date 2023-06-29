@@ -2,7 +2,6 @@ import {
   AccordionForm,
   ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
-import { config } from 'cypress/types/bluebird'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
