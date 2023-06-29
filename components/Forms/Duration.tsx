@@ -62,7 +62,6 @@ const Duration: FC<DurationProps> = ({
   useEffect(() => {
     if (name in sessionStorage) {
       setDurationInput(JSON.parse(sessionStorage.getItem(name)))
-      // baseOnChange(JSON.stringify(JSON.parse(sessionStorage.getItem(name))))
     } else {
       setDurationInput({ months: 0, years: 0 })
     }
