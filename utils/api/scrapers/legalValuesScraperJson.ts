@@ -46,11 +46,16 @@ export class LegalValuesScraperJson extends BaseScraper {
     )
   }
 
-  async main() {
+  async main(jsonArg?: any) {
     console.log(`${this.logHeader} Starting...`)
-    const jsonString = await this.fetchPage(this.JSON_URL)
-    const jsonObject = JSON.parse(jsonString)
-    const jsonSanitized = LegalValuesScraperJson.sanitizeObject(jsonObject)
+    let jsonObj
+    if (jsonArg) {
+      jsonObj = jsonArg
+    } else {
+      const jsonStr = await this.fetchPage(this.JSON_URL)
+      jsonObj = JSON.parse(jsonStr)
+    }
+    const jsonSanitized = LegalValuesScraperJson.sanitizeObject(jsonObj)
     this.saveAndComplete(jsonSanitized)
     console.log(`${this.logHeader} Final results: `, jsonSanitized)
   }
