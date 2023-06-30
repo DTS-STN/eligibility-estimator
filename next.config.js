@@ -4,9 +4,8 @@ module.exports = {
     defaultLocale: 'default',
   },
   reactStrictMode: true,
-  // this supposed to work
   outputStandalone: true,
-  // .
+  //
   async redirects() {
     return [
       {
