@@ -15,6 +15,12 @@ module.exports = {
         permanent: false,
       },
       {
+        source: '/default/:slug',
+        destination: '/en/:slug',
+        permanent: true,
+        locale: false,
+      },
+      {
         source: '/en/index',
         destination: '/en',
         permanent: true,
