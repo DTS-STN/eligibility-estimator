@@ -15,7 +15,11 @@ import {
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
-import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  Language,
+  MaritalStatus,
+} from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
   FieldKey,
@@ -59,7 +63,9 @@ export const QuestionsPage: React.VFC = ({}) => {
   const router = useRouter()
   const tsln = useTranslation<WebTranslations>()
   const isMobile = useMediaQuery(992)
-  const language = useRouter().locale as Language
+
+  const langx = useRouter().locale as Language
+  const language = langx === Language.EN || Language.FR ? langx : Language.EN
 
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
