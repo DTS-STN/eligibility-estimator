@@ -146,6 +146,8 @@ export function getTranslations(language: Language): Translations {
       return apiTranslationsDict.en
     case Language.FR:
       return apiTranslationsDict.fr
+    default:
+      return apiTranslationsDict.en
   }
 }
 
