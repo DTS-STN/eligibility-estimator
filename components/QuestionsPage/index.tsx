@@ -61,7 +61,8 @@ export const QuestionsPage: React.VFC = ({}) => {
   const isMobile = useMediaQuery(992)
 
   const langx = useRouter().locale as Language
-  const language = langx === Language.EN || Language.FR ? langx : Language.EN
+  const language =
+    langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
   const allFieldConfigs: FieldConfig[] =
     BenefitHandler.getAllFieldData(language)
