@@ -14,36 +14,6 @@ module.exports = {
         permanent: false,
       },
       {
-        source: '/default/questions',
-        destination: '/en/questions',
-        permanent: true,
-        locale: false,
-      },
-      {
-        source: '/default/questions',
-        destination: '/en/questions',
-        permanent: true,
-        locale: false,
-      },
-      {
-        source: '/default',
-        destination: '/en',
-        permanent: true,
-        locale: false,
-      },
-      {
-        source: '/default/results',
-        destination: '/en/results',
-        permanent: true,
-        locale: false,
-      },
-      {
-        source: '/default/404',
-        destination: '/en/404',
-        permanent: true,
-        locale: false,
-      },
-      {
         source: '/en/index',
         destination: '/en',
         permanent: true,
