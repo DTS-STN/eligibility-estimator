@@ -15,8 +15,8 @@ module.exports = {
         permanent: false,
       },
       {
-        source: '/default/:slug',
-        destination: '/en/:slug',
+        source: '/default/:path*',
+        destination: '/en/:path*',
         permanent: true,
         locale: false,
       },
