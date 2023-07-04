@@ -45,28 +45,40 @@ export const Layout: React.VFC<{
     onSubmit: () => {},
   }
 
-  const breadcrumbs = [
-    {
-      text: tsln.breadcrumb1Title,
-      link: tsln.breadcrumb1URL,
-    },
-    {
-      text: tsln.breadcrumb2Title,
-      link: tsln.breadcrumb2URL,
-    },
-    {
-      text: tsln.breadcrumb3Title,
-      link: tsln.breadcrumb3URL,
-    },
-    {
-      text: tsln.breadcrumb4Title,
-      link: tsln.breadcrumb4URL,
-    },
-    {
-      text: tsln.breadcrumb5Title,
-      link: tsln.breadcrumb5URL,
-    },
-  ]
+  const breadcrumbs =
+    process.env.APP_ENV === 'production'
+      ? [
+          {
+            text: tsln.breadcrumb1Title,
+            link: tsln.breadcrumb1URL,
+          },
+          {
+            text: tsln.breadcrumb2Title,
+            link: tsln.breadcrumb2URL,
+          },
+          {
+            text: tsln.breadcrumb3Title,
+            link: tsln.breadcrumb3URL,
+          },
+          {
+            text: tsln.breadcrumb4Title,
+            link: tsln.breadcrumb4URL,
+          },
+          {
+            text: tsln.breadcrumb5Title,
+            link: tsln.breadcrumb5URL,
+          },
+        ]
+      : [
+          {
+            text: tsln.breadcrumb1aTitle,
+            link: tsln.breadcrumb1aURL,
+          },
+          {
+            text: tsln.breadcrumb2aTitle,
+            link: tsln.breadcrumb2aURL,
+          },
+        ]
 
   const handleOnClick = () => {
     const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`

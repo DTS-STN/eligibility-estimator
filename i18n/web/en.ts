@@ -22,11 +22,15 @@ const en: WebTranslations = {
   langLong: 'eng',
   creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
+  // alpha service canada labs breadcrumbs
+  breadcrumb1aTitle: 'Canada.ca',
+  breadcrumb1aURL: 'https://www.canada.ca',
+  breadcrumb2aTitle: 'Service Canada Labs',
+  breadcrumb2aURL:
+    'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
+  // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  //breadcrumb2Title: 'Service Canada',
-  //breadcrumb2URL:
-  //  'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   breadcrumb2Title: 'Benefits',
   breadcrumb2URL: 'https://www.canada.ca/en/services/benefits.html',
   breadcrumb3Title: 'Public pensions',

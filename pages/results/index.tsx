@@ -36,7 +36,10 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
 
-  const language = useRouter().locale as Language
+  const langx = useRouter().locale as Language
+  const language =
+    langx === Language.EN || langx === Language.FR ? langx : Language.EN
+
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
   const response: ResponseSuccess | ResponseError = mainHandler.results

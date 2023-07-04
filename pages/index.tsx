@@ -41,6 +41,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
         <meta property="og:title" content={tsln.introPageTitle} />
+        <meta name="robots" content="noindex" />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
