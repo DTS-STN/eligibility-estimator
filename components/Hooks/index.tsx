@@ -42,8 +42,9 @@ export const useWindowWidth = () => {
 
 export function useTranslation<T = string | WebTranslations>(key?: string): T {
   const { locale } = useRouter()
+  const newLocale = locale === 'default' ? 'en' : locale
   if (key) {
-    return webDictionary[locale][key]
+    return webDictionary[newLocale][key]
   }
-  return webDictionary[locale]
+  return webDictionary[newLocale]
 }

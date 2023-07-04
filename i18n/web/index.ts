@@ -50,6 +50,10 @@ export type WebTranslations = {
   langLong: string
   creator: string
   search: string
+  breadcrumb1aTitle: string
+  breadcrumb1aURL: string
+  breadcrumb2aTitle: string
+  breadcrumb2aURL: string
   breadcrumb1Title: string
   breadcrumb1URL: string
   breadcrumb2Title: string
