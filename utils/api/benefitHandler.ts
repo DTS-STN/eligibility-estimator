@@ -1103,8 +1103,7 @@ export class BenefitHandler {
             'partnerGisTable1',
             partnerGisResultT1,
             'partnerGisResultT3',
-            partnerGisResultT3,
-            initialPartnerBenefitStatus
+            partnerGisResultT3
           )
 
           if (partnerGisResultT1 < partnerGisResultT3) {
