@@ -48,6 +48,7 @@ import {
   getPlaceholderForSelect,
   getStepValidity,
   getVisisbleErrorsForStep,
+  getBirthMonthAndYear,
 } from './utils'
 
 /**
@@ -71,7 +72,11 @@ export const QuestionsPage: React.VFC = ({}) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
-  const [ageDate, setAgeDate] = useState({ month: 1, year: undefined })
+  const [ageDate, setAgeDate] = useState(
+    inputs.age
+      ? getBirthMonthAndYear(inputs.age)
+      : { month: 1, year: undefined }
+  )
 
   const [nextForStepClicked, setNextForStepClicked]: [
     NextClickedObject,
