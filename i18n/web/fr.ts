@@ -47,9 +47,9 @@ const fr: WebTranslations = {
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
   questionPageTitle:
-    'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
+    'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
   resultPageTitle:
-    'Estimateur des prestations de la Sécurité de la vieillesse : Résultats',
+    'Estimateur des prestations de la Sécurité de la vieillesse : Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
@@ -73,7 +73,7 @@ const fr: WebTranslations = {
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
-    "L'estimateur vous posera des questions au sujet de votre : ",
+    "L'estimateur vous posera des questions au sujet de votre : ",
   ageText: '<strong>âge</strong>',
   netIncomeText: '<strong>revenu net</strong>',
   legalStatusText: '<strong>statut légal</strong>',
@@ -154,9 +154,9 @@ const fr: WebTranslations = {
     partnerNotEligible:
       "Votre conjoint n'est probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
-      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
+      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
-      'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
+      'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
     basedOnYourInfoNotEligible: `Selon vos informations, vous n'êtes peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
       apiFr.links.SC
     )} pour plus de détails.`,
@@ -166,13 +166,13 @@ const fr: WebTranslations = {
     yourEstimatedTotal: ' Votre estimation',
     partnerEstimatedTotal: " L'estimation de votre conjoint",
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
-    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
+    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      'Votre pourriez être admissible à recevoir :',
+      'Votre pourriez être admissible à recevoir :',
     basedOnPartnerInfoTotal:
-      'Votre conjoint pourrait être admissible à recevoir :',
+      'Votre conjoint pourrait être admissible à recevoir :',
     basedOnPartnerInfoAndIncomeTotal:
-      'Votre conjoint pourrait être admissible à recevoir :',
+      'Votre conjoint pourrait être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
     partnerTotal: 'Leur montant total par mois est ',
     ifIncomeNotProvided:
@@ -203,7 +203,7 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
-    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
     [ValidationErrors.receiveOASEmpty]:
       //'Veuillez indiquer si vous recevez la pension de la SV.',
       'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',
