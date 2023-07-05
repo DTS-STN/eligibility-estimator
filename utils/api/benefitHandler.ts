@@ -1103,7 +1103,8 @@ export class BenefitHandler {
             'partnerGisTable1',
             partnerGisResultT1,
             'partnerGisResultT3',
-            partnerGisResultT3
+            partnerGisResultT3,
+            initialPartnerBenefitStatus
           )
 
           if (partnerGisResultT1 < partnerGisResultT3) {
@@ -1112,6 +1113,9 @@ export class BenefitHandler {
           } else {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+            partnerGis.cardDetail.collapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
           }
 
           // add the amount calculated to the card.
