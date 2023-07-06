@@ -419,7 +419,7 @@ const en: Translations = {
   detailWithHeading: {
     ifYouDeferYourPension: {
       heading: 'If you defer your pension',
-      text: 'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guranteed Income Supplement payments won’t increase if you defer your pension.',
+      text: 'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guaranteed Income Supplement payments won’t increase if you defer your pension.',
     },
     oasDeferralApplied: {
       heading: 'How deferral affects your payments',
