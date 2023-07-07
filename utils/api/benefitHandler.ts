@@ -1112,6 +1112,9 @@ export class BenefitHandler {
           } else {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+            partnerGis.cardDetail.collapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
           }
 
           // add the amount calculated to the card.
