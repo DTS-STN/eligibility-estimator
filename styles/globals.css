@@ -236,8 +236,8 @@
   #gisLink1,
   #alwLink0,
   #alwLink1,
-  #afsLink0,
-  #afsLink1,
+  #alwsLink0,
+  #alwsLink1,
   a.generatedLink {
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
@@ -254,8 +254,8 @@
   #gisLink1:hover,
   #alwLink0:hover,
   #alwLink1:hover,
-  #afsLink0:hover,
-  #afsLink1:hover,
+  #alwsLink0:hover,
+  #alwsLink1:hover,
   a.generatedLink:hover,
   .summary-link a:hover {
     --tw-border-opacity: 1;

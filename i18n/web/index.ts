@@ -32,7 +32,7 @@ export type WebTranslations = {
   learnMoreAboutAlw: string
   inflationInfo: string
   afsDefinitionText: string
-  learnMoreAboutAfs: string
+  learnMoreAboutAlws: string
   notIncludeCPP: string
   learnMoreAboutCpp: string
   aboutResultText: string
@@ -42,7 +42,7 @@ export type WebTranslations = {
   oas: string
   gis: string
   alw: string
-  afs: string
+  alws: string
   testSiteTitle: string
   testSiteHeader: string
   otherLang: string

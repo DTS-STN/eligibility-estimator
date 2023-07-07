@@ -21,7 +21,7 @@ const fr: Translations = {
     [BenefitKey.oas]: 'Pension de la Sécurité de la vieillesse',
     [BenefitKey.gis]: 'Supplément de revenu garanti',
     [BenefitKey.alw]: 'Allocation',
-    [BenefitKey.afs]: 'Allocation au survivant',
+    [BenefitKey.alws]: 'Allocation au survivant',
   },
   category: {
     [FieldCategory.AGE]: 'Âge',

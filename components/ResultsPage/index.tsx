@@ -129,9 +129,9 @@ const ResultsPage: React.VFC<{
         eligible: getEligibility(resultsArray, 'alw'),
       },
       {
-        text: apiTsln.benefit['afs'],
-        url: '#afs',
-        eligible: getEligibility(resultsArray, 'afs'),
+        text: apiTsln.benefit['alws'],
+        url: '#alws',
+        eligible: getEligibility(resultsArray, 'alws'),
       },
     ]
 

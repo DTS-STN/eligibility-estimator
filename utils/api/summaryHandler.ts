@@ -106,8 +106,8 @@ export class SummaryHandler {
       links.push(this.translations.links.gisEntitlement)
     if (this.results.alw?.eligibility.result === ResultKey.ELIGIBLE)
       links.push(this.translations.links.alwEntitlement)
-    if (this.results.afs?.eligibility.result === ResultKey.ELIGIBLE)
-      links.push(this.translations.links.afsEntitlement)
+    if (this.results.alws?.eligibility.result === ResultKey.ELIGIBLE)
+      links.push(this.translations.links.alwsEntitlement)
 
     // special situation links
     if (

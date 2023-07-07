@@ -1,6 +1,6 @@
 import { getTranslations, Translations } from '../../i18n/api'
 import { consoleDev } from '../web/helpers/utils'
-import { AfsBenefit } from './benefits/afsBenefit'
+import { AlwsBenefit } from './benefits/alwsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { EntitlementFormula } from './benefits/entitlementFormula'
 import { GisBenefit } from './benefits/gisBenefit'
@@ -107,7 +107,7 @@ export class BenefitHandler {
         this.benefitResults.client,
         Object.fromEntries(
           Object.entries(this.benefitResults.partner).filter(
-            (e) => e[0] != 'afs'
+            (e) => e[0] != 'alws'
           )
         ),
         this.missingFields,
@@ -316,13 +316,13 @@ export class BenefitHandler {
         oas: getBlankObject(BenefitKey.oas),
         gis: getBlankObject(BenefitKey.gis),
         alw: getBlankObject(BenefitKey.alw),
-        afs: getBlankObject(BenefitKey.afs),
+        alws: getBlankObject(BenefitKey.alws),
       },
       partner: {
         oas: getBlankObject(BenefitKey.oas),
         gis: getBlankObject(BenefitKey.gis),
         alw: getBlankObject(BenefitKey.alw),
-        afs: getBlankObject(BenefitKey.afs),
+        alws: getBlankObject(BenefitKey.alws),
       },
     }
 
@@ -433,8 +433,8 @@ export class BenefitHandler {
     }
 
     // Moving onto AFS, again only doing eligibility.
-    const clientAfs = new AfsBenefit(this.input.client, this.translations)
-    allResults.client.afs.eligibility = clientAfs.eligibility
+    const clientAlws = new AlwsBenefit(this.input.client, this.translations)
+    allResults.client.alws.eligibility = clientAlws.eligibility
 
     const partnerAlw = new AlwBenefit(
       this.input.partner,
@@ -1134,8 +1134,8 @@ export class BenefitHandler {
       }
 
       // Finish with AFS entitlement.
-      allResults.client.afs.entitlement = clientAfs.entitlement
-      allResults.client.afs.cardDetail = clientAfs.cardDetail
+      allResults.client.alws.entitlement = clientAlws.entitlement
+      allResults.client.alws.cardDetail = clientAlws.cardDetail
 
       // Process all CardDetails
       allResults.client.oas.cardDetail =
@@ -1159,13 +1159,13 @@ export class BenefitHandler {
       allResults.client.alw.entitlement = clientAlw.entitlement
 
       // Finish with AFS entitlement.
-      allResults.client.afs.entitlement = clientAfs.entitlement
+      allResults.client.alws.entitlement = clientAlws.entitlement
 
       // Process all CardDetails
       allResults.client.oas.cardDetail = clientOas.cardDetail
       allResults.client.gis.cardDetail = clientGis.cardDetail
       allResults.client.alw.cardDetail = clientAlw.cardDetail
-      allResults.client.afs.cardDetail = clientAfs.cardDetail
+      allResults.client.alws.cardDetail = clientAlws.cardDetail
     }
 
     consoleDev('allResults', allResults)

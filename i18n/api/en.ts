@@ -19,7 +19,7 @@ const en: Translations = {
     [BenefitKey.oas]: 'Old Age Security pension',
     [BenefitKey.gis]: 'Guaranteed Income Supplement',
     [BenefitKey.alw]: 'Allowance',
-    [BenefitKey.afs]: 'Allowance for the Survivor',
+    [BenefitKey.alws]: 'Allowance for the Survivor',
   },
   category: {
     [FieldCategory.AGE]: 'Age',
