@@ -17,8 +17,15 @@ export const Layout: React.VFC<{
 }> = ({ children, title }) => {
   const router = useRouter()
 
+  // basically returns 'results' or 'resultats' IF, otherwise index or questions in the other locale.
   const langToggleLink =
-    router.locale === 'fr' ? `/en${router.asPath}` : `/fr${router.asPath}`
+    router.asPath === '/results' && router.locale === 'en'
+      ? '/fr/resultats'
+      : router.asPath === '/resultats' && router.locale === 'fr'
+      ? '/en/results'
+      : router.locale === 'en'
+      ? `/fr${router.asPath}`
+      : `/en${router.asPath}`
 
   const tsln = useTranslation<WebTranslations>()
 
