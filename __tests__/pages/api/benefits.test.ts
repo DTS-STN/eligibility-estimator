@@ -16,8 +16,8 @@ import {
   age65NoDefer,
   canadaWholeLife,
   canadian,
-  expectAfsMarital,
-  expectAfsEligible,
+  expectAlwsMarital,
+  expectAlwsEligible,
   expectAllIneligible,
   expectAlwTooOld,
   expectAlwEligible,
@@ -228,7 +228,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })
@@ -285,7 +285,7 @@ describe('consolidated benefit tests: ineligible', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.AGE_YOUNG
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })
@@ -500,9 +500,9 @@ describe('consolidated benefit tests: max income checks', () => {
       invSeparated: undefined,
     }
     let res = await mockGetRequest(input)
-    expect(res.body.results.afs.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expect(res.body.results.alws.eligibility.result).toEqual(ResultKey.ELIGIBLE)
 
-    // expectAfsEligible(res)
+    // expectAlwsEligible(res)
   })
 })
 
@@ -526,7 +526,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     //   EntitlementResultType.PARTIAL,
     //   roundToTwo(legalValues.oas.amount / 4)
     // )
-    // expectAfsMarital(res)
+    // expectAlwsMarital(res)
   })
 
   it('returns "eligible" - single, 20 years in Canada, high income (partial gis edge case)', async () => {
@@ -546,7 +546,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerUndefined,
     })
 
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     expectAlwTooOld(res)
   })
 
@@ -565,7 +565,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       ...partnerUndefined,
     })
 
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     expectAlwTooOld(res)
   })
 
@@ -595,8 +595,8 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-    //expectAlwAfsTooOld(res)
-    expectAfsMarital(res)
+    //expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
     expectAlwTooOld(res)
   })
 
@@ -626,7 +626,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     expectAlwTooOld(res)
   })
 
@@ -733,7 +733,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     // test clawback: expect some due to high income
     //expect(res.body.results.oas.entitlement.clawback).toEqual(7873.65)
 
@@ -773,7 +773,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
     //   EntitlementResultType.FULL,
     //   roundToTwo(legalValues.oas.amount * 1.1)
     // )
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     expectAlwTooOld(res)
 
     // test clawback: expect none due to low income
@@ -809,10 +809,10 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     // expectOasGisTooYoung(res)
     // expectAlwEligible(res)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })
@@ -834,7 +834,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expectAfsEligible(res)*/
+    expectAlwsEligible(res)*/
   })
 
   it('returns "ALW eligible" - married, 10 years in Canada', async () => {

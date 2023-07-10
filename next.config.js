@@ -45,6 +45,15 @@ module.exports = {
       },
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/fr/resultats',
+        destination: '/fr/results',
+        locale: false,
+      },
+    ]
+  },
   env: {
     ADOBE_ANALYTICS_URL: process.env.ADOBE_ANALYTICS_URL,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,

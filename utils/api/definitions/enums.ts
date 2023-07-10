@@ -2,7 +2,7 @@ export enum BenefitKey {
   oas = 'oas',
   gis = 'gis',
   alw = 'alw',
-  afs = 'afs',
+  alws = 'alws',
 }
 
 export enum FieldCategory {

@@ -305,7 +305,7 @@ export const QuestionsPage: React.VFC = ({}) => {
   function submitForm(e) {
     e.preventDefault()
     if (form.isValid) {
-      router.push('/results')
+      language === 'en' ? router.push('/results') : router.push('/resultats')
     }
   }
 

@@ -17,9 +17,9 @@ import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
-export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
+export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
   constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations, BenefitKey.afs)
+    super(input, translations, BenefitKey.alws)
   }
 
   protected getEligibility(): EligibilityResult {
@@ -179,9 +179,9 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
       (this.eligibility.result === ResultKey.INELIGIBLE &&
         this.eligibility.reason === ResultReason.AGE_YOUNG)
     ) {
-      links.push(this.translations.links.apply[BenefitKey.afs])
+      links.push(this.translations.links.apply[BenefitKey.alws])
     }
-    links.push(this.translations.links.overview[BenefitKey.afs])
+    links.push(this.translations.links.overview[BenefitKey.alws])
     return links
   }
 }

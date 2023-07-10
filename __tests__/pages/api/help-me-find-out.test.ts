@@ -186,10 +186,10 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.PARTNER
     )
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })
@@ -215,10 +215,10 @@ describe('Help Me Find Out scenarios', () => {
     // expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
     expectOasGisTooYoung(res)
     //expectAlwEligible(res, 1266.36) // table 4
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })
@@ -249,10 +249,10 @@ describe('Help Me Find Out scenarios', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.PARTNER
     )
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })

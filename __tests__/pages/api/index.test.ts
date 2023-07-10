@@ -15,7 +15,7 @@ import {
   age65NoDefer,
   canadaWholeLife,
   canadian,
-  expectAfsEligible,
+  expectAlwsEligible,
   expectAlwEligible,
   expectGisEligible,
   expectOasEligible,
@@ -334,10 +334,10 @@ describe('basic Allowance for Survivor scenarios', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
   })
   it('returns "ineligible" when age over 64', async () => {
     const res = await mockGetRequest({
@@ -353,10 +353,10 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
   })
   it('returns "ineligible" when age under 60', async () => {
     const res = await mockGetRequest({
@@ -374,10 +374,10 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.AGE_YOUNG
     )
   })
@@ -418,10 +418,10 @@ describe('basic Allowance for Survivor scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
     })
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
   })
@@ -439,7 +439,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
     })
-    // expectAfsEligible(res)
+    // expectAlwsEligible(res)
   })
   it('returns "eligible" when living in Agreement and 10 years in Canada', async () => {
     const res = await mockGetRequest({
@@ -550,7 +550,7 @@ describe('AFS entitlement scenarios', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
-    //expectAfsEligible(res, 301.48)
+    //expectAlwsEligible(res, 301.48)
   })
   it('returns "eligible for $681.35" when 40 years in Canada and income=10000', async () => {
     const res = await mockGetRequest({
@@ -564,7 +564,7 @@ describe('AFS entitlement scenarios', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
-    //expectAfsEligible(res, 731.31)
+    //expectAlwsEligible(res, 731.31)
   })
   it('returns "eligible for $1468.47" when 40 years in Canada and income=0', async () => {
     const res = await mockGetRequest({
@@ -578,6 +578,6 @@ describe('AFS entitlement scenarios', () => {
       ...canadaWholeLife,
       ...partnerUndefined,
     })
-    //expectAfsEligible(res, 1509.58)
+    //expectAlwsEligible(res, 1509.58)
   })
 })

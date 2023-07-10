@@ -183,7 +183,7 @@ export const BenefitCards: React.VFC<{
             { rounding: 0 }
           )}</strong>.`
       }
-    } else if (benefitKey === BenefitKey.afs) {
+    } else if (benefitKey === BenefitKey.alws) {
       if (
         result.eligibility.result === ResultKey.ELIGIBLE &&
         result.entitlement.result === 0

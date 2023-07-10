@@ -14,7 +14,7 @@ const fr: WebTranslations = {
   oas: 'Pension de la Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
-  afs: 'Allocation au survivant',
+  alws: 'Allocation au survivant',
   testSiteTitle: "SITE D'ESSAI",
   testSiteHeader:
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
@@ -98,7 +98,7 @@ const fr: WebTranslations = {
   inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter les changements au coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
     'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
+  learnMoreAboutAlws: `<a className="underline text-default-text" href="${apiFr.links.overview.alws.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',

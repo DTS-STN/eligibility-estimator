@@ -34,7 +34,7 @@ export const links: LinkDefinitions = {
       icon: LinkIcon.info,
       action: 'Learn about ALW',
     },
-    afs: {
+    alws: {
       text: "En savoir plus sur l'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant.html',
       order: 6,
@@ -72,7 +72,7 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation/montant-prestation.html',
     order: 12,
   },
-  afsEntitlement: {
+  alwsEntitlement: {
     text: 'Allocation au survivant: Aperçu des paiements',
     url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/montant-prestation.html',
     order: 13,
@@ -129,7 +129,7 @@ export const links: LinkDefinitions = {
       icon: LinkIcon.link,
       action: 'Apply for ALW',
     },
-    afs: {
+    alws: {
       text: "Faire une demande d'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/demande.html',
       order: 23,
@@ -181,7 +181,7 @@ export const links: LinkDefinitions = {
       order: -1,
       icon: LinkIcon.note,
     },
-    afs: {
+    alws: {
       text: "Voir tous les critères d'admissibilité pour l'Allocation au survivant",
       url: 'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/allocation-survivant/admissibilite.html',
       order: -1,
