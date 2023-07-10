@@ -400,7 +400,7 @@ const fr: Translations = {
       serviceCanadaReviewYourPayment:
         'Si votre revenue est admissible, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
-        'Vous recevrez automatiquement des paiements si votre revenu vous rend admissible.',
+        'Vous recevrez automatiquement des paiements si votre revenu est admissible.',
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
