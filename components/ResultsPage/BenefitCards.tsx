@@ -134,11 +134,19 @@ export const BenefitCards: React.VFC<{
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.serviceCanadaReviewYourPayment
         } else if (
-          result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+          (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
+            result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
           result.entitlement.result > 0 &&
           receivingOAS
         ) {
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (
+          (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
+            result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
+          result.entitlement.result === 0 &&
+          receivingOAS
+        ) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimateWhenZero}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
