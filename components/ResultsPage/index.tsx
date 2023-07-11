@@ -18,6 +18,7 @@ import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
 import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
+import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
@@ -59,10 +60,12 @@ const getEligibility = (
 const ResultsPage: React.VFC<{
   inputs: FieldInput[]
   results: BenefitResultsObject
-  futureClientResults: BenefitResultsObject
+  futureClientResults: any
   partnerResults: BenefitResultsObject
   summary: SummaryObject
-}> = ({ inputs, results, partnerResults, summary }) => {
+}> = ({ inputs, results, futureClientResults, partnerResults, summary }) => {
+  console.log('results on results page', results)
+  // console.log('futureClientResults', futureClientResults)
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
@@ -79,6 +82,8 @@ const ResultsPage: React.VFC<{
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
   )
+
+  console.log('resultsArray from results page', resultsArray)
 
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]
@@ -186,7 +191,14 @@ const ResultsPage: React.VFC<{
               partnerNoOAS={partnerNoOAS}
             />
           )}
-          <MayBeEligible resultsEligible={resultsEligible} />
+
+          {futureClientResults && (
+            <WillBeEligible futureResults={futureClientResults} />
+          )}
+
+          {!futureClientResults && (
+            <MayBeEligible resultsEligible={resultsEligible} />
+          )}
 
           {isPartnered && partnerResultsEligible.length > 0 && (
             <EstimatedTotal

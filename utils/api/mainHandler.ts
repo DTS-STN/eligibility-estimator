@@ -6,6 +6,7 @@ import { ResponseError, ResponseSuccess } from './definitions/types'
 
 function getFutureResults(query) {
   let futureResultsObj = { client: null, partner: null }
+  console.log('query', query)
 
   // SINGLE
   if (query.maritalStatus === MaritalStatus.SINGLE) {
@@ -14,6 +15,15 @@ function getFutureResults(query) {
       newQuery['age'] = '65'
       newQuery['receiveOAS'] = 'false'
 
+      if (query.livedOnlyInCanada === 'false' && query.yearsInCanadaSince18) {
+        newQuery['yearsInCanadaSince18'] = String(
+          65 -
+            Math.floor(Number(query.age)) +
+            Number(query.yearsInCanadaSince18)
+        )
+      }
+
+      console.log('newQuery', newQuery)
       const { value } = schema.validate(newQuery, { abortEarly: false })
       const futureHandler = new BenefitHandler(value)
 
@@ -42,6 +52,21 @@ function getFutureResults(query) {
             const newQuery = { ...query }
             newQuery['age'] = age
 
+            if (age === 65) {
+              newQuery['receiveOAS'] = 'false'
+            }
+
+            if (
+              query.livedOnlyInCanada === 'false' &&
+              query.yearsInCanadaSince18
+            ) {
+              newQuery['yearsInCanadaSince18'] = String(
+                65 -
+                  Math.floor(Number(query.age)) +
+                  Number(query.yearsInCanadaSince18)
+              )
+            }
+
             const { value } = schema.validate(newQuery, { abortEarly: false })
             const futureHandler = new BenefitHandler(value)
 
@@ -65,15 +90,12 @@ export default class MainHandler {
   readonly results: ResponseSuccess | ResponseError
   constructor(query: { [key: string]: string | string[] }) {
     const { error, value } = schema.validate(query, { abortEarly: false })
-    console.log('query', query)
 
     // Provides results for current age
     this.handler = new BenefitHandler(value)
 
     // Future planning
     const futureResults = getFutureResults(query)
-
-    console.log('futureResults', futureResults)
 
     const resultObj: any = {
       visibleFields: this.handler.requiredFields,
