@@ -143,6 +143,7 @@ export const BenefitCards: React.VFC<{
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
           nextStepText.nextStepContent += ` ${apiTsln.detail.oas.applyOnline}`
+          nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
         } else if (
           result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
           receivingOAS
