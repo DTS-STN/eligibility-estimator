@@ -421,6 +421,12 @@ const fr: Translations = {
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       ifYouApply:
         "<p class='mt-6'>Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est admissible.</>",
+      canApplyOnline:
+        'Vous pouvez faire une demande pour cette prestation en ligne.',
+      ifYouAlreadyApplied:
+        "Si vous avez déjà fait une demande pour le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte <a class='underline text-default-text generatedLink' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>Mon dossier Service Canada</a>.",
+      ifYouAlreadyReceive:
+        "Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte <a class='underline text-default-text generatedLink' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>Mon dossier Service Canada</a>.",
     },
   },
   detailWithHeading: {

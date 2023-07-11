@@ -414,6 +414,11 @@ const en: Translations = {
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       ifYouApply:
         "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.</p>",
+      canApplyOnline: 'You can apply for this benefit online.',
+      ifYouAlreadyApplied:
+        "If you already applied for the Guaranteed Income Supplement, you can confirm that your information is up to date in your <a class='underline text-default-text generatedLink' target='_blank' href='https://www.canada.ca/en/employment-social-development/services/my-account.html'>My Service Canada Account</a>.",
+      ifYouAlreadyReceive:
+        "If you already receive the Guaranteed Income Supplement, you can confirm that your information is up to date in your <a class='underline text-default-text generatedLink' target='_blank' href='https://www.canada.ca/en/employment-social-development/services/my-account.html'>My Service Canada Account</a>.",
     },
   },
   detailWithHeading: {

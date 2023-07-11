@@ -115,12 +115,14 @@ export const BenefitCards: React.VFC<{
               ? apiTsln.detail.gis.ifYouApply
               : '')
         } else if (result.entitlement.result > 0 && receivingOAS) {
-          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
-        } else if (
-          (result.entitlement.result > 0 && !receivingOAS) ||
-          (result.entitlement.result <= 0 && receivingOAS)
-        ) {
+          nextStepText.nextStepContent =
+            apiTsln.detail.gis.canApplyOnline +
+            `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyReceive}</p>`
+        } else if (result.entitlement.result > 0 && !receivingOAS) {
           nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
+        } else if (result.entitlement.result <= 0 && receivingOAS) {
+          nextStepText.nextStepContent = apiTsln.detail.gis.ifYouApply
+          nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyApplied}</p>`
         }
       }
     } else if (benefitKey === BenefitKey.oas) {
