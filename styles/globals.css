@@ -193,7 +193,8 @@
     @apply text-default-text underline font-bold;
   }
 
-  .summary-link a {
+  .summary-link a,
+  .addOpenNew {
     @apply text-default-text underline;
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
