@@ -142,7 +142,7 @@ export const BenefitCards: React.VFC<{
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `${apiTsln.detail.oas.applyOnline}`
+          nextStepText.nextStepContent += ` ${apiTsln.detail.oas.applyOnline}`
         } else if (
           result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
           receivingOAS
@@ -167,7 +167,7 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent +=
           apiTsln.detail.oas.youShouldHaveReceivedLetter
-        nextStepText.nextStepContent += `${apiTsln.detail.oas.ifNotReceiveLetter64}`
+        nextStepText.nextStepContent += ` ${apiTsln.detail.oas.ifNotReceiveLetter64}`
       }
     } else if (benefitKey === BenefitKey.alw) {
       if (
