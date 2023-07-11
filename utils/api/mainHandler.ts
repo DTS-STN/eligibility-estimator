@@ -23,11 +23,14 @@ function getFutureResults(query) {
         )
       }
 
-      console.log('newQuery', newQuery)
       const { value } = schema.validate(newQuery, { abortEarly: false })
       const futureHandler = new BenefitHandler(value)
 
-      const clientResult = [{ 65: futureHandler.benefitResults.client }]
+      const eligibleBenefits = getEligibleBenefits(
+        futureHandler.benefitResults.client
+      )
+
+      const clientResult = [{ 65: eligibleBenefits }]
 
       futureResultsObj = {
         ...futureResultsObj,
@@ -70,7 +73,11 @@ function getFutureResults(query) {
             const { value } = schema.validate(newQuery, { abortEarly: false })
             const futureHandler = new BenefitHandler(value)
 
-            return { [age]: futureHandler.benefitResults.client }
+            const eligibleBenefits = getEligibleBenefits(
+              futureHandler.benefitResults.client
+            )
+
+            return { [age]: eligibleBenefits }
           })
         : null
 
@@ -116,4 +123,14 @@ export default class MainHandler {
     consoleDev('result object', resultObj)
     this.results = resultObj
   }
+}
+
+function getEligibleBenefits(benefits) {
+  const newObj = {}
+  for (const key in benefits) {
+    if (benefits[key].eligibility.result === 'eligible') {
+      newObj[key] = benefits[key]
+    }
+  }
+  return newObj
 }

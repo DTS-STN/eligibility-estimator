@@ -95,6 +95,9 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  //TODO: write function that gets only the eligible
+  const futureClientResultsEligible = { futureClientResults }
+
   const partnerResultsEligible: BenefitResult[] = partnerResultsArray.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
@@ -192,6 +195,7 @@ const ResultsPage: React.VFC<{
             />
           )}
 
+          {/* this should actually check if any benefits are eligible in the future */}
           {futureClientResults && (
             <WillBeEligible futureResults={futureClientResults} />
           )}
