@@ -24,12 +24,12 @@ import { FieldKey } from '../../utils/api/definitions/fields'
 
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
-  resultsEligible: BenefitResult[],
+  length: number,
   tsln: WebTranslations,
   textFor = 'client'
 ): string => {
   if (textFor === 'client') {
-    if (resultsEligible.length <= 0) {
+    if (length <= 0) {
       return `${tsln.resultsPage.youAreNotEligible}`
     } else {
       return `${tsln.resultsPage.yourEstimatedTotal}`
@@ -37,7 +37,7 @@ const getEstimatedMonthlyTotalLinkText = (
   }
 
   // text for partner links
-  if (resultsEligible.length <= 0) {
+  if (length <= 0) {
     return `${tsln.resultsPage.partnerNotEligible}`
   } else {
     return `${tsln.resultsPage.partnerEstimatedTotal}`
@@ -59,6 +59,7 @@ const getEligibility = (
 const ResultsPage: React.VFC<{
   inputs: FieldInput[]
   results: BenefitResultsObject
+  futureClientResults: BenefitResultsObject
   partnerResults: BenefitResultsObject
   summary: SummaryObject
 }> = ({ inputs, results, partnerResults, summary }) => {
@@ -104,7 +105,7 @@ const ResultsPage: React.VFC<{
       {
         text: getEstimatedMonthlyTotalLinkText(
           summary.entitlementSum,
-          resultsEligible,
+          resultsEligible.length,
           tsln
         ),
         url: '#estimate',
@@ -139,7 +140,7 @@ const ResultsPage: React.VFC<{
       listLinks.splice(1, 0, {
         text: getEstimatedMonthlyTotalLinkText(
           summary.partnerEntitlementSum,
-          partnerResultsEligible,
+          partnerResultsEligible.length,
           tsln,
           'partner'
         ),
