@@ -171,6 +171,7 @@ const en: WebTranslations = {
     basedOnPartnerInfoAndIncomeTotal:
       'Your partner could be eligible to receive:',
     total: 'Your total monthly amount is ',
+    futureTotal: 'Your total monthly amount will be ',
     partnerTotal: 'Their total monthly amount is ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',
@@ -190,8 +191,8 @@ const en: WebTranslations = {
       'Find out about public pensions, when to collect them and tips to consider for your retirement income.',
     CTAButton: 'Visit the Retirement Hub',
     month: 'month',
-    futureEligible: "You'll likely be eligible",
-    partnerFutureEligible: 'Your partner will likely be eligible',
+    futureEligible: " You'll likely be eligible",
+    partnerFutureEligible: ' Your partner will likely be eligible',
     toReceive: "you'll likely be eligible to receive",
   },
   resultsQuestions: apiEn.questionShortText,

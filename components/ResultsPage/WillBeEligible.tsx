@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { getTranslations } from '../../i18n/api'
+import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Language, ResultKey } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
@@ -10,12 +10,9 @@ import { EstimatedTotalItem } from './EstimatedTotalItem'
 export const WillBeEligible: React.VFC<{
   futureResults: any
 }> = ({ futureResults }) => {
-  console.log('futureResults', futureResults)
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
-
   const language = useRouter().locale as Language
-  console.log('language', language)
 
   return (
     <>
@@ -24,7 +21,7 @@ export const WillBeEligible: React.VFC<{
         {tsln.resultsPage.futureEligible}
       </h2>
 
-      {futureResults.map((resultObj) => {
+      {futureResults.map((resultObj, idx) => {
         const age = Object.keys(resultObj)[0]
         const text = `${language === 'en' ? 'At' : 'À'} ${age}, ${
           tsln.resultsPage.toReceive
@@ -41,7 +38,10 @@ export const WillBeEligible: React.VFC<{
         )
 
         return (
-          <div key={age}>
+          <div
+            className={idx + 1 !== futureResults.length ? 'mb-10' : ''}
+            key={age}
+          >
             <p
               className="pl-[35px]"
               dangerouslySetInnerHTML={{
@@ -49,7 +49,7 @@ export const WillBeEligible: React.VFC<{
               }}
             />
 
-            <ul className="pl-[35px] ml-[20px] my-2 list-disc text-content">
+            <ul className="pl-[35px] ml-[20px] my-1 list-disc text-content">
               {eligible.map((benefit) => (
                 <EstimatedTotalItem
                   key={benefit.benefitKey}
@@ -58,6 +58,21 @@ export const WillBeEligible: React.VFC<{
                 />
               ))}
             </ul>
+            {eligible.length > 1 && (
+              <p className="pl-[35px]">
+                {tsln.resultsPage.futureTotal}
+                <strong>
+                  {numberToStringCurrency(
+                    eligible.reduce(
+                      (sum, obj) => sum + obj.entitlement.result,
+                      0
+                    ),
+                    language
+                  )}
+                </strong>
+                .
+              </p>
+            )}
           </div>
         )
       })}

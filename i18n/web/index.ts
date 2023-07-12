@@ -137,6 +137,7 @@ export type WebTranslations = {
     basedOnPartnerInfoTotal: string
     basedOnPartnerInfoAndIncomeTotal: string
     total: string
+    futureTotal: string
     partnerTotal: string
     ifIncomeNotProvided: string
     nextSteps: string
