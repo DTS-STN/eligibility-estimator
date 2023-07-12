@@ -440,7 +440,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.result === ResultKey.INELIGIBLE &&
       this.eligibility.reason === ResultReason.AGE_YOUNG
     ) {
-      text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
+      text += this.translations.nextStepTitle
+      //text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
+      text += `<p class='mt-6'>${this.translations.detail.oas.youShouldHaveReceivedLetter}</p>`
     }
 
     if (

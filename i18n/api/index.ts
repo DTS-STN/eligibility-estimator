@@ -131,6 +131,7 @@ export interface Translations {
   incomeSingle: string
   incomeCombined: string
   opensNewWindow: string
+  nextStepTitle: string
   yes: string
   no: string
   year: string
