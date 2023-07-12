@@ -319,12 +319,16 @@ const fr: Translations = {
   },
   detail: {
     eligible: 'Vous êtes probablement admissible à cette prestation.',
-    futureEligible:
+    futureEligible60:
+      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
+    futureEligible65:
       'Vous serez probablement admissible lorsque vous aurez 65 ans.',
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     futureEligibleIncomeTooHigh:
       'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
+    futureEligibleIncomeTooHighAlws:
+      'Vous serez probablement admissible lorsque vous aurez 60 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
@@ -387,6 +391,8 @@ const fr: Translations = {
       'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
+    alwsApply:
+      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:

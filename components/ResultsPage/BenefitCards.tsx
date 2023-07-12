@@ -223,18 +223,25 @@ export const BenefitCards: React.VFC<{
           )}</strong>.`
       }
     } else if (benefitKey === BenefitKey.alws) {
-      if (
-        result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.result === 0
-      ) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent =
-          apiTsln.detail.alwIfYouApply +
-          `<strong>${numberToStringCurrency(
-            legalValues.alw.afsIncomeLimit,
-            apiTsln._language,
-            { rounding: 0 }
-          )}</strong>.`
+      if (result.eligibility.result === ResultKey.ELIGIBLE) {
+        const ifYouApplyText = `${
+          apiTsln.detail.alwIfYouApply
+        } <strong>${numberToStringCurrency(
+          legalValues.alw.afsIncomeLimit,
+          apiTsln._language,
+          { rounding: 0 }
+        )}</strong>.`
+
+        if (inputAge < 60) {
+          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+          nextStepText.nextStepContent += `${apiTsln.detail.alwsApply}`
+
+          if (result.entitlement.result === 0) {
+            nextStepText.nextStepContent += ifYouApplyText
+          }
+        } else if (result.entitlement.result === 0) {
+          nextStepText.nextStepContent += ifYouApplyText
+        }
       }
     }
 

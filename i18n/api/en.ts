@@ -312,11 +312,14 @@ const en: Translations = {
   },
   detail: {
     eligible: "You're likely eligible for this benefit.",
-    futureEligible: "You'll likely be eligible once you turn 65.",
+    futureEligible60: "You'll likely be eligible once you turn 60.",
+    futureEligible65: "You'll likely be eligible once you turn 65.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     futureEligibleIncomeTooHigh:
       'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+    futureEligibleIncomeTooHighAlws:
+      'You may be eligible once you turn 60. If your income stays the same, you may not receive a monthly payment.',
     eligibleDependingOnIncome:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
@@ -379,6 +382,7 @@ const en: Translations = {
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
+    alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:

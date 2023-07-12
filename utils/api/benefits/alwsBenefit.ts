@@ -18,8 +18,14 @@ import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
 export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
-  constructor(input: ProcessedInput, translations: Translations) {
+  future: Boolean
+  constructor(
+    input: ProcessedInput,
+    translations: Translations,
+    future: Boolean
+  ) {
     super(input, translations, BenefitKey.alws)
+    this.future = future
   }
 
   protected getEligibility(): EligibilityResult {
@@ -113,13 +119,17 @@ export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
-          detail: this.translations.detail.eligibleIncomeTooHigh,
+          detail: this.future
+            ? this.translations.detail.futureEligibleIncomeTooHighAlws
+            : this.translations.detail.eligibleIncomeTooHigh,
         }
       } else {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
-          detail: this.translations.detail.eligible,
+          detail: this.future
+            ? this.translations.detail.futureEligible60
+            : this.translations.detail.eligible,
         }
       }
     }

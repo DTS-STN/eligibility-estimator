@@ -441,7 +441,11 @@ export class BenefitHandler {
     }
 
     // Moving onto AFS, again only doing eligibility.
-    const clientAlws = new AlwsBenefit(this.input.client, this.translations)
+    const clientAlws = new AlwsBenefit(
+      this.input.client,
+      this.translations,
+      this.future
+    )
     allResults.client.alws.eligibility = clientAlws.eligibility
 
     const partnerAlw = new AlwBenefit(

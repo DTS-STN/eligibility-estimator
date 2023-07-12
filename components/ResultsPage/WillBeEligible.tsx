@@ -37,6 +37,11 @@ export const WillBeEligible: React.VFC<{
             result.eligibility?.result === ResultKey.INCOME_DEPENDENT
         )
 
+        const eligibleTotalAmount = eligible.reduce(
+          (sum, obj) => sum + obj.entitlement.result,
+          0
+        )
+
         return (
           <div
             className={idx + 1 !== futureResults.length ? 'mb-10' : ''}
@@ -58,17 +63,11 @@ export const WillBeEligible: React.VFC<{
                 />
               ))}
             </ul>
-            {eligible.length > 1 && (
+            {eligible.length > 1 && eligibleTotalAmount > 0 && (
               <p className="pl-[35px]">
                 {tsln.resultsPage.futureTotal}
                 <strong>
-                  {numberToStringCurrency(
-                    eligible.reduce(
-                      (sum, obj) => sum + obj.entitlement.result,
-                      0
-                    ),
-                    language
-                  )}
+                  {numberToStringCurrency(eligibleTotalAmount, language)}
                 </strong>
                 .
               </p>

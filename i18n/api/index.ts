@@ -52,9 +52,11 @@ export interface Translations {
   }
   detail: {
     eligible: string
-    futureEligible: string
+    futureEligible60: string
+    futureEligible65: string
     eligibleIncomeTooHigh: string
     futureEligibleIncomeTooHigh: string
+    futureEligibleIncomeTooHighAlws: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
@@ -87,6 +89,7 @@ export interface Translations {
     alwEligibleIncomeTooHigh: string
     alwIfYouApply: string
     afsNotEligible: string
+    alwsApply: string
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
