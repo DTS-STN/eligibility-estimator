@@ -1334,8 +1334,11 @@ export class BenefitHandler {
           if (this.input.client.livingCountry.canada) {
             newMainText =
               clawbackValue > 0 && result.cardDetail.mainText
-                ? result.cardDetail.mainText +
-                  `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
+                ? this.future
+                  ? result.cardDetail.mainText +
+                    `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
+                  : result.cardDetail.mainText +
+                    `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
                 : result.cardDetail.mainText
           } else {
             newMainText =

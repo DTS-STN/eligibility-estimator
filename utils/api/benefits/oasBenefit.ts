@@ -325,8 +325,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       const ageWhole = Math.floor(age)
       const estimate = this.entitlement.result
 
+      // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
+      const dontShowCondition = this.entitlement.clawback !== 0 && this.future
+
       // Eligible for OAS pension,and are 65-69, who do not already receive
-      if (eligible && ageInRange && !receivingOAS) {
+      if (eligible && ageInRange && !receivingOAS && !dontShowCondition) {
         const monthsTo70 = Math.round((70 - age) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
@@ -462,10 +465,18 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.currentEntitlementAmount > 0 &&
       !this.input.receiveOAS
     ) {
-      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-      text += this.future
-        ? this.translations.detail.futureDeferralOptions
-        : this.translations.detail.sinceYouAreSixty
+      if (this.future) {
+        console.log('INSIDE THIS IS FUTURE')
+        // can also check if this.entitlement.clawback === 0
+        if (this.income <= legalValues.oas.clawbackIncomeLimit) {
+          text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+          text += this.translations.detail.futureDeferralOptions
+        }
+      } else {
+        console.log('INSIDE THE ELSE BLOCK')
+        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+        text += this.translations.detail.sinceYouAreSixty
+      }
     }
 
     // not sure when this condition would be true, I think never.
@@ -486,8 +497,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       !this.partner &&
       !this.input.receiveOAS
     ) {
-      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-      text += this.translations.detail.delayMonths
+      if (!this.future) {
+        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+        text += this.translations.detail.delayMonths
+      }
     }
 
     return text

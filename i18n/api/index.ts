@@ -92,6 +92,7 @@ export interface Translations {
     expectToReceive: string
     futureExpectToReceive: string
     oasClawbackInCanada: string
+    futureOasClawbackInCanada: string
     oasClawbackNotInCanada: string
     oas: {
       eligibleIfIncomeIsLessThan: string

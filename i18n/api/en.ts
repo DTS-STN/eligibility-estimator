@@ -390,6 +390,8 @@ const en: Translations = {
       'If your income stays the same, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawbackInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    futureOasClawbackInCanada:
+      "Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you will have to repay some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
     oas: {
