@@ -424,9 +424,9 @@ const fr: Translations = {
       canApplyOnline:
         'Vous pouvez faire une demande pour cette prestation en ligne.',
       ifYouAlreadyApplied:
-        "Si vous avez déjà fait une demande pour le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte <a class='underline text-default-text generatedLink' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>Mon dossier Service Canada</a>.",
+        'Si vous avez déjà fait une demande pour le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
       ifYouAlreadyReceive:
-        "Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte <a class='underline text-default-text generatedLink' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>Mon dossier Service Canada</a>.",
+        'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
   },
   detailWithHeading: {
