@@ -115,21 +115,50 @@ const ResultsPage: React.VFC<{
   // console.log('resultsEligible', resultsEligible)
   // console.log('futureClientEligible', futureClientEligible)
 
-  const getListLinks = () => {
-    let listLinks: {
-      text: string
-      id?: string
-      url: string
-      eligible?: boolean
-    }[] = [
-      {
-        text: getEstimatedMonthlyTotalLinkText(
-          summary.entitlementSum,
-          resultsEligible.length,
-          tsln
-        ),
-        url: '#estimate',
-      },
+  const getListLinks: any = () => {
+    const getFirstLinks = () => {
+      const tempLinks = []
+
+      if (resultsEligible.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.yourEstimatedTotal,
+          url: '#estimate',
+        })
+      }
+
+      if (
+        resultsEligible.length === 0 &&
+        futureClientEligibleArray.length === 0
+      ) {
+        tempLinks.push({
+          text: tsln.resultsPage.youAreNotEligible,
+          url: '#estimate',
+        })
+      }
+
+      if (futureClientEligibleArray.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.futureEligible,
+          url: '#future-estimate',
+        })
+      }
+
+      if (isPartnered) {
+        tempLinks.push({
+          text: getEstimatedMonthlyTotalLinkText(
+            summary.partnerEntitlementSum,
+            partnerResultsEligible.length,
+            tsln,
+            'partner'
+          ),
+          url: '#partnerEstimate',
+        })
+      }
+      return tempLinks
+    }
+
+    let listLinks: any = [
+      ...getFirstLinks(),
       {
         text: tsln.resultsPage.whatYouToldUs,
         url: '#answers',
@@ -175,18 +204,6 @@ const ResultsPage: React.VFC<{
         ),
       },
     ]
-
-    if (isPartnered) {
-      listLinks.splice(1, 0, {
-        text: getEstimatedMonthlyTotalLinkText(
-          summary.partnerEntitlementSum,
-          partnerResultsEligible.length,
-          tsln,
-          'partner'
-        ),
-        url: '#partnerEstimate',
-      })
-    }
 
     // filtered out the link item which text is empty.
     listLinks = listLinks.filter((ll) => ll.text)

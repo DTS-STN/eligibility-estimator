@@ -66,9 +66,12 @@ function getFutureResults(query) {
               query.yearsInCanadaSince18
             ) {
               newQuery['yearsInCanadaSince18'] = String(
-                65 -
-                  Math.floor(Number(query.age)) +
-                  Number(query.yearsInCanadaSince18)
+                Math.min(
+                  40,
+                  65 -
+                    Math.floor(Number(query.age)) +
+                    Number(query.yearsInCanadaSince18)
+                )
               )
             }
 
