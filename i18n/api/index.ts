@@ -107,6 +107,9 @@ export interface Translations {
       eligibleDependingOnIncomeNoEntitlement: string
       incomeTooHigh: string
       ifYouApply: string
+      canApplyOnline: string
+      ifYouAlreadyApplied: string
+      ifYouAlreadyReceive: string
     }
   }
   detailWithHeading: {
