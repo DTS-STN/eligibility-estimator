@@ -13,6 +13,7 @@ import { BenefitCard } from './BenefitCard'
 import { DeferralTable } from './DeferralTable'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import { FieldInput } from '../../client-state/InputHelper'
+import { flattenArray } from './utils'
 
 export const BenefitCards: React.VFC<{
   inputAge: number
@@ -67,6 +68,7 @@ export const BenefitCards: React.VFC<{
   )
 
   const futureClientEligible = flattenArray(futureClientResults)
+
   const resultsNotEligible = results.filter((value) => {
     const inFutureEligible = futureClientEligible?.find(
       (val) => val.benefitKey === value.benefitKey
@@ -77,9 +79,9 @@ export const BenefitCards: React.VFC<{
     )
   })
 
-  console.log('resultsEligible', resultsEligible)
-  console.log('futureEligible', futureClientEligible)
-  console.log('resultsNotEligible', resultsNotEligible)
+  // console.log('resultsEligible', resultsEligible)
+  // console.log('futureEligible', futureClientEligible)
+  // console.log('resultsNotEligible', resultsNotEligible)
 
   const partnerResultsEligible = partnerResults.filter(
     (result) =>
@@ -335,15 +337,4 @@ export const BenefitCards: React.VFC<{
       )}
     </div>
   )
-}
-
-function flattenArray(resultArr: any) {
-  let newArr = []
-  resultArr?.forEach((item) => {
-    const values = Object.values(item)[0]
-    const innerValues = Object.values(values)
-    newArr = newArr.concat(innerValues)
-  })
-
-  return newArr
 }

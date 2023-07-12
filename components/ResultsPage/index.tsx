@@ -22,6 +22,7 @@ import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
+import { flattenArray } from './utils'
 
 const getEstimatedMonthlyTotalLinkText = (
   entitlementSum: number,
@@ -46,15 +47,19 @@ const getEstimatedMonthlyTotalLinkText = (
 }
 
 const getEligibility = (
-  resultsArray: BenefitResult[],
+  resultsEligible: BenefitResult[],
+  futureClientEligibleArray: BenefitResult[],
   key: string
 ): boolean => {
-  const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
-    .eligibility.result
-  return (
-    eligibityResult === ResultKey.ELIGIBLE ||
-    eligibityResult === ResultKey.INCOME_DEPENDENT
-  )
+  // console.log('resultsArray INSIDE GET ELIGIBILITY', resultsEligible)
+  // console.log(
+  //   'futureClientEligibleArray INSIDE GET ELIGIBILITY',
+  //   futureClientEligibleArray
+  // )
+
+  // const allEligible = resultsEligible.concat(futureClientEligibleArray)
+
+  return resultsEligible.some((benefit) => benefit.benefitKey === key)
 }
 
 const ResultsPage: React.VFC<{
@@ -82,12 +87,9 @@ const ResultsPage: React.VFC<{
       'value'
     ] === PartnerBenefitStatus.NONE
 
+  // CURRENT CLIENT
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
-  )
-
-  const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
-    (value) => partnerResults[value]
   )
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
@@ -96,8 +98,10 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
-  //TODO: write function that gets only the eligible
-  const futureClientResultsEligible = { futureClientResults }
+  // CURRENT PARTNER
+  const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
+    (value) => partnerResults[value]
+  )
 
   const partnerResultsEligible: BenefitResult[] = partnerResultsArray.filter(
     (result) =>
@@ -105,9 +109,16 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  // FUTURE CLIENT
+  const futureClientEligibleArray = flattenArray(futureClientResults)
+
+  // console.log('resultsEligible', resultsEligible)
+  // console.log('futureClientEligible', futureClientEligible)
+
   const getListLinks = () => {
     let listLinks: {
       text: string
+      id?: string
       url: string
       eligible?: boolean
     }[] = [
@@ -125,23 +136,43 @@ const ResultsPage: React.VFC<{
       },
       {
         text: apiTsln.benefit['oas'],
+        id: 'oas',
         url: '#oas',
-        eligible: getEligibility(resultsArray, 'oas'),
+        eligible: getEligibility(
+          resultsEligible,
+          futureClientEligibleArray,
+          'oas'
+        ),
       },
       {
         text: apiTsln.benefit['gis'],
+        id: 'gis',
         url: '#gis',
-        eligible: getEligibility(resultsArray, 'gis'),
+        eligible: getEligibility(
+          resultsEligible,
+          futureClientEligibleArray,
+          'gis'
+        ),
       },
       {
         text: apiTsln.benefit['alw'],
+        id: 'alw',
         url: '#alw',
-        eligible: getEligibility(resultsArray, 'alw'),
+        eligible: getEligibility(
+          resultsEligible,
+          futureClientEligibleArray,
+          'alw'
+        ),
       },
       {
         text: apiTsln.benefit['alws'],
+        id: 'alws',
         url: '#alws',
-        eligible: getEligibility(resultsArray, 'alws'),
+        eligible: getEligibility(
+          resultsEligible,
+          futureClientEligibleArray,
+          'alws'
+        ),
       },
     ]
 
@@ -170,6 +201,27 @@ const ResultsPage: React.VFC<{
       if (!a.eligible && b.eligible) {
         return 1
       }
+
+      // This accounts for future planning results and preserves the order of links as they appear in the future eligible array
+      if (!a.eligible && !b.eligible) {
+        let aIndex = futureClientEligibleArray.findIndex(
+          (benefit) => benefit.benefitKey === a.id
+        )
+        let bIndex = futureClientEligibleArray.findIndex(
+          (benefit) => benefit.benefitKey === b.id
+        )
+
+        if (aIndex > -1 && bIndex > -1) {
+          return aIndex - bIndex
+        }
+        if (aIndex > -1) {
+          return -1
+        }
+        if (bIndex > -1) {
+          return 1
+        }
+      }
+
       return 0
     }
 
