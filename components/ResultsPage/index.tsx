@@ -64,15 +64,10 @@ const ResultsPage: React.VFC<{
   partnerResults: BenefitResultsObject
   summary: SummaryObject
 }> = ({ inputs, results, futureClientResults, partnerResults, summary }) => {
-  // console.log('results on results page', results)
-  console.log('futureClientResults', futureClientResults)
-
   const anyFutureEligible = futureClientResults?.some((obj) => {
     const key = Object.keys(obj)[0]
     return Object.keys(obj[key]).length !== 0
   })
-
-  console.log('anyFutureEligible', anyFutureEligible)
 
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
@@ -90,8 +85,6 @@ const ResultsPage: React.VFC<{
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
   )
-
-  console.log('resultsArray from results page', resultsArray)
 
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
     (value) => partnerResults[value]

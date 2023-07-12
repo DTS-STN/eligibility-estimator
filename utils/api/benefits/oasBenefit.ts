@@ -200,7 +200,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         : EntitlementResultType.FULL
 
     if (type === EntitlementResultType.PARTIAL)
-      this.eligibility.detail = this.translations.detail.eligiblePartialOas
+      this.eligibility.detail = this.future
+        ? this.translations.detail.futureEligible
+        : this.translations.detail.eligiblePartialOas
 
     return {
       result: resultCurrent,
@@ -447,9 +449,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.reason !== ResultReason.INCOME &&
       this.entitlement.result > 0
     ) {
-      text += this.future
-        ? ` ${this.translations.detail.futureExpectToReceive}`
-        : ` ${this.translations.detail.expectToReceive}`
+      if (this.future) {
+        if (!this.input.livedOnlyInCanada) {
+          text += ` ${this.translations.detail.futureExpectToReceivePartial}`
+        } else {
+          text += ` ${this.translations.detail.futureExpectToReceive}`
+        }
+      } else {
+        text += ` ${this.translations.detail.expectToReceive}`
+      }
     } else if (this.eligibility.result === ResultKey.INCOME_DEPENDENT) {
       text += `<p class="mt-6">${this.translations.detail.oas.dependOnYourIncome}</p>`
     } else if (
@@ -466,14 +474,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       !this.input.receiveOAS
     ) {
       if (this.future) {
-        console.log('INSIDE THIS IS FUTURE')
         // can also check if this.entitlement.clawback === 0
         if (this.income <= legalValues.oas.clawbackIncomeLimit) {
           text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
           text += this.translations.detail.futureDeferralOptions
         }
       } else {
-        console.log('INSIDE THE ELSE BLOCK')
         text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
         text += this.translations.detail.sinceYouAreSixty
       }

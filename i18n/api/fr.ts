@@ -395,6 +395,8 @@ const fr: Translations = {
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     futureExpectToReceive:
       'Si votre revenu reste le même, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+    futureExpectToReceivePartial:
+      'Si votre revenu reste le même, et vous vivez au Canada pendant {CALCULATED_YEARS_IN_CANADA} ans, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawbackInCanada:
       "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous devrez rembourser une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     futureOasClawbackInCanada:

@@ -91,6 +91,7 @@ export interface Translations {
     autoEnrollFalse: string
     expectToReceive: string
     futureExpectToReceive: string
+    futureExpectToReceivePartial: string
     oasClawbackInCanada: string
     futureOasClawbackInCanada: string
     oasClawbackNotInCanada: string

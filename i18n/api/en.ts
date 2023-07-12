@@ -312,8 +312,7 @@ const en: Translations = {
   },
   detail: {
     eligible: "You're likely eligible for this benefit.",
-    futureEligible:
-      "You'll likely be eligible for this benefit once you turn 65.",
+    futureEligible: "You'll likely be eligible once you turn 65.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     futureEligibleIncomeTooHigh:
@@ -388,6 +387,8 @@ const en: Translations = {
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     futureExpectToReceive:
       'If your income stays the same, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+    futureExpectToReceivePartial:
+      'If your income stays the same, and you live in Canada for {CALCULATED_YEARS_IN_CANADA} years, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawbackInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
     futureOasClawbackInCanada:

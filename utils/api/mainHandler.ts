@@ -6,7 +6,6 @@ import { ResponseError, ResponseSuccess } from './definitions/types'
 
 function getFutureResults(query) {
   let futureResultsObj = { client: null, partner: null }
-  console.log('query', query)
 
   // SINGLE
   if (query.maritalStatus === MaritalStatus.SINGLE) {
@@ -17,9 +16,12 @@ function getFutureResults(query) {
 
       if (query.livedOnlyInCanada === 'false' && query.yearsInCanadaSince18) {
         newQuery['yearsInCanadaSince18'] = String(
-          65 -
-            Math.floor(Number(query.age)) +
-            Number(query.yearsInCanadaSince18)
+          Math.min(
+            40,
+            65 -
+              Math.floor(Number(query.age)) +
+              Number(query.yearsInCanadaSince18)
+          )
         )
       }
 

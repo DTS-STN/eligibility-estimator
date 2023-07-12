@@ -11,7 +11,7 @@ export const DeferralTable: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const locale = useRouter().locale
   const apiTsln = getTranslations(tsln._language)
-  console.log('future', future)
+
   return (
     <table
       aria-label={`${apiTsln.oasDeferralTable.title} Table`}
