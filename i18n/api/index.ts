@@ -79,6 +79,7 @@ export interface Translations {
     dependingOnLegalWhen65: string
     youCantGetThisBenefit: string
     thisEstimate: string
+    thisEstimateWhenZero: string
     alwNotEligible: string
     alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string

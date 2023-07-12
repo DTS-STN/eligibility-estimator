@@ -363,6 +363,8 @@ const en: Translations = {
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guaranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
       'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
+    thisEstimateWhenZero:
+      'This estimate is based on the information you provided. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
