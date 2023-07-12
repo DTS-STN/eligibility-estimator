@@ -146,8 +146,16 @@ export const BenefitCards: React.VFC<{
           if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
             nextStepText.nextStepContent += `<p class='mb-6'>${apiTsln.detail.oas.over70}</p>`
           }
-          nextStepText.nextStepContent +=
-            apiTsln.detail.oas.serviceCanadaReviewYourPayment
+
+          if (inputAge < 64) {
+            nextStepText.nextStepContent +=
+              apiTsln.detail.oas.youWillReceiveLetter
+          } else if (inputAge === 64) {
+            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
+          } else {
+            nextStepText.nextStepContent +=
+              apiTsln.detail.oas.serviceCanadaReviewYourPayment
+          }
         } else if (
           result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
           result.entitlement.result > 0 &&
@@ -176,11 +184,18 @@ export const BenefitCards: React.VFC<{
         ) {
           nextStepText.nextStepContent += apiTsln.detail.oas.over70
         } else if (result.entitlement.clawback === 0) {
-          nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
-          result.eligibility.reason === ResultReason.INCOME
-            ? (nextStepText.nextStepContent +=
-                ' ' + apiTsln.detail.oas.automaticallyBePaid)
-            : ''
+          if (inputAge < 64) {
+            nextStepText.nextStepContent +=
+              apiTsln.detail.oas.youWillReceiveLetter
+          } else if (inputAge === 64) {
+            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
+          } else {
+            nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
+            result.eligibility.reason === ResultReason.INCOME
+              ? (nextStepText.nextStepContent +=
+                  ' ' + apiTsln.detail.oas.automaticallyBePaid)
+              : ''
+          }
         }
       } else if (
         result.eligibility.result === ResultKey.INELIGIBLE &&
