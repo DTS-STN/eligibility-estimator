@@ -153,6 +153,9 @@ export type WebTranslations = {
     CTABody: string
     CTAButton: string
     month: string
+    futureEligible: string
+    partnerFutureEligible: string
+    toReceive: string
     //nextStepOas: string
   }
 

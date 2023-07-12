@@ -15,18 +15,20 @@ export const WillBeEligible: React.VFC<{
   const apiTrans = getTranslations(tsln._language)
 
   const language = useRouter().locale as Language
+  console.log('language', language)
 
   return (
     <>
       <h2 id={'future-estimate'} className="h2 mt-12">
         <Image src="/pg-check.svg" alt="" width={30} height={30} />
-
-        {"You'll likely be eligible"}
+        {tsln.resultsPage.futureEligible}
       </h2>
 
       {futureResults.map((resultObj) => {
         const age = Object.keys(resultObj)[0]
-        const text = `At ${age}, you'll likely be eligible to receive:`
+        const text = `${language === 'en' ? 'At' : 'À'} ${age}, ${
+          tsln.resultsPage.toReceive
+        }:`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
           (value) => resultObj[age][value]

@@ -324,7 +324,7 @@ const fr: Translations = {
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     futureEligibleIncomeTooHigh:
-      'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+      'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
@@ -409,7 +409,7 @@ const fr: Translations = {
       eligibleIncomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       futureEligibleIncomeTooHigh:
-        'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+        'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
       serviceCanadaReviewYourPayment:
         'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
