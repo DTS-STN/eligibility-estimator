@@ -138,15 +138,24 @@ export const BenefitCards: React.VFC<{
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.serviceCanadaReviewYourPayment
         } else if (
-          result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+          (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
+            result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
           result.entitlement.result > 0 &&
           receivingOAS
         ) {
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
+        } else if (
+          (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
+            result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
+          result.entitlement.result === 0 &&
+          receivingOAS
+        ) {
+          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimateWhenZero}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.applyOnline}</p>`
+          nextStepText.nextStepContent += ` ${apiTsln.detail.oas.applyOnline}`
+          nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
         } else if (
           result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
           receivingOAS
@@ -171,7 +180,7 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
         nextStepText.nextStepContent +=
           apiTsln.detail.oas.youShouldHaveReceivedLetter
-        nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.ifNotReceiveLetter64}</p>`
+        nextStepText.nextStepContent += ` ${apiTsln.detail.oas.ifNotReceiveLetter64}`
       }
     } else if (benefitKey === BenefitKey.alw) {
       if (

@@ -363,6 +363,8 @@ const en: Translations = {
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guaranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
       'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
+    thisEstimateWhenZero:
+      'This estimate is based on the information you provided. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
@@ -398,14 +400,13 @@ const en: Translations = {
         'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
-      applyOnline:
-        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
+      applyOnline: "If you didn't, you can apply online.",
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
         "You may be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
-        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, <a class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+        "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
@@ -491,6 +492,7 @@ const en: Translations = {
   incomeSingle: 'your income',
   incomeCombined: "you and your partner's combined income",
   opensNewWindow: 'opens a new window',
+  nextStepTitle: 'Next steps',
   yes: 'Yes',
   no: 'No',
   year: 'year',

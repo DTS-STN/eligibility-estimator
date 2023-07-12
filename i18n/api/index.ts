@@ -79,6 +79,7 @@ export interface Translations {
     dependingOnLegalWhen65: string
     youCantGetThisBenefit: string
     thisEstimate: string
+    thisEstimateWhenZero: string
     alwNotEligible: string
     alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string
@@ -134,6 +135,7 @@ export interface Translations {
   incomeSingle: string
   incomeCombined: string
   opensNewWindow: string
+  nextStepTitle: string
   yes: string
   no: string
   year: string
