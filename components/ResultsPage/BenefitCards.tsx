@@ -107,13 +107,15 @@ export const BenefitCards: React.VFC<{
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-
+        console.log(result.entitlement.result, this)
         if (result.eligibility.reason === ResultReason.INCOME) {
-          nextStepText.nextStepContent =
-            tsln.resultsPage.nextStepGis +
-            (result.entitlement.result === 0
-              ? apiTsln.detail.gis.ifYouApply
-              : '')
+          nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
+          if (result.entitlement.result === 0) {
+            if (receivingOAS) {
+              nextStepText.nextStepContent = apiTsln.detail.gis.ifYouApply
+              nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyApplied}</p>`
+            } else nextStepText.nextStepContent += apiTsln.detail.gis.ifYouApply
+          }
         } else if (result.entitlement.result > 0 && receivingOAS) {
           nextStepText.nextStepContent =
             apiTsln.detail.gis.canApplyOnline +
