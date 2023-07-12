@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cloneElement } from 'react'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -12,11 +12,14 @@ import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 import { DeferralTable } from './DeferralTable'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
+import { FieldInput } from '../../client-state/InputHelper'
 
 export const BenefitCards: React.VFC<{
+  inputAge: number
   results: BenefitResult[]
+  futureClientResults: any
   partnerResults: BenefitResult[]
-}> = ({ results, partnerResults }) => {
+}> = ({ inputAge, results, futureClientResults, partnerResults }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const titleArray = [
@@ -28,6 +31,7 @@ export const BenefitCards: React.VFC<{
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
 
+  console.log('futureClientResults INSIDE BENEFIT CARDS', futureClientResults)
   const receivingOAS: boolean = results[0]?.cardDetail?.meta?.receiveOAS
 
   /**
@@ -62,14 +66,25 @@ export const BenefitCards: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  const futureClientEligible = flattenArray(futureClientResults)
+  const resultsNotEligible = results.filter((value) => {
+    const inFutureEligible = futureClientEligible?.find(
+      (val) => val.benefitKey === value.benefitKey
+    )
+
+    return (
+      value.eligibility?.result === ResultKey.INELIGIBLE && !inFutureEligible
+    )
+  })
+
+  console.log('resultsEligible', resultsEligible)
+  console.log('futureEligible', futureClientEligible)
+  console.log('resultsNotEligible', resultsNotEligible)
+
   const partnerResultsEligible = partnerResults.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-  )
-
-  const resultsNotEligible = results.filter(
-    (value) => value.eligibility?.result === ResultKey.INELIGIBLE
   )
 
   const transformBenefitName = (benefitName) => {
@@ -80,12 +95,12 @@ export const BenefitCards: React.VFC<{
     return benefitText
   }
 
-  const getDeferralTable = (benefitKey, result): any => {
+  const getDeferralTable = (benefitKey, result, future): any => {
     return benefitKey === BenefitKey.oas &&
       result.eligibility.result === ResultKey.ELIGIBLE &&
       result.entitlement.result > 0 &&
       result.cardDetail.meta?.tableData !== null ? (
-      <DeferralTable data={result.cardDetail.meta?.tableData} />
+      <DeferralTable data={result.cardDetail.meta?.tableData} future={future} />
     ) : null
   }
 
@@ -140,9 +155,16 @@ export const BenefitCards: React.VFC<{
         ) {
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
-          nextStepText.nextStepContent +=
-            apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.applyOnline}</p>`
+          if (inputAge < 64) {
+            nextStepText.nextStepContent +=
+              apiTsln.detail.oas.youWillReceiveLetter
+          } else if (inputAge === 64) {
+            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
+          } else {
+            nextStepText.nextStepContent +=
+              apiTsln.detail.oas.youShouldHaveReceivedLetter
+            // nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.applyOnline}</p>`
+          }
         } else if (
           result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
           receivingOAS
@@ -206,7 +228,7 @@ export const BenefitCards: React.VFC<{
     return nextStepText
   }
 
-  function generateCard(result: BenefitResult) {
+  function generateCard(result: BenefitResult, future = false) {
     let titleText: string = apiTsln.benefit[result.benefitKey]
     let collapsedDetails = result.cardDetail.collapsedText
     const eligiblePartnerResult = partnerResultsEligible.find(
@@ -236,12 +258,14 @@ export const BenefitCards: React.VFC<{
       eligibility === false ? transformBenefitName(titleText) : titleText
 
     const eligibleText = eligibility
-      ? apiTsln.result.eligible
+      ? future
+        ? apiTsln.result.willBeEligible
+        : apiTsln.result.eligible
       : apiTsln.result.ineligible
 
     const nextStepText = getNextStepText(result.benefitKey, result)
 
-    const OASdeferralTable = getDeferralTable(result.benefitKey, result)
+    const OASdeferralTable = getDeferralTable(result.benefitKey, result, future)
 
     return (
       <div key={result.benefitKey}>
@@ -249,6 +273,7 @@ export const BenefitCards: React.VFC<{
           benefitKey={result.benefitKey}
           benefitName={titleText}
           isEligible={eligibility}
+          future={future}
           eligibleText={eligibleText}
           nextStepText={nextStepText}
           collapsedDetails={collapsedDetails}
@@ -281,6 +306,13 @@ export const BenefitCards: React.VFC<{
           <>{resultsEligible.map((result) => generateCard(result))}</>
         </>
       )}
+      {futureClientEligible?.length > 0 && (
+        <>
+          <>
+            {futureClientEligible.map((result) => generateCard(result, true))}
+          </>
+        </>
+      )}
       {resultsNotEligible.length > 0 && (
         <>
           <>{resultsNotEligible.map((result) => generateCard(result))}</>
@@ -288,4 +320,15 @@ export const BenefitCards: React.VFC<{
       )}
     </div>
   )
+}
+
+function flattenArray(resultArr: any) {
+  let newArr = []
+  resultArr?.forEach((item) => {
+    const values = Object.values(item)[0]
+    const innerValues = Object.values(values)
+    newArr = newArr.concat(innerValues)
+  })
+
+  return newArr
 }

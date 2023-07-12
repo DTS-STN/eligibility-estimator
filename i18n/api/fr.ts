@@ -33,6 +33,7 @@ const fr: Translations = {
   result: {
     [ResultKey.ELIGIBLE]: 'Admissible',
     [ResultKey.INELIGIBLE]: 'Non\xA0admissible',
+    [ResultKey.WILL_BE_ELIGIBLE]: 'Serez\xA0admissible',
     [ResultKey.UNAVAILABLE]: 'Non disponible',
     [ResultKey.MORE_INFO]: "Besoin de plus d'information...",
     [ResultKey.INVALID]: "Votre demande n'est pas valide!",
@@ -318,8 +319,12 @@ const fr: Translations = {
   },
   detail: {
     eligible: 'Vous êtes probablement admissible à cette prestation.',
+    futureEligible:
+      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    futureEligibleIncomeTooHigh:
+      'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
@@ -331,6 +336,8 @@ const fr: Translations = {
     yourDeferralOptions: 'Vos options de report',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
+    futureDeferralOptions:
+      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
     youCanAply:
       'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
     delayMonths:
@@ -386,6 +393,8 @@ const fr: Translations = {
       "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
     expectToReceive:
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+    futureExpectToReceive:
+      'Si votre revenu reste le même, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawbackInCanada:
       "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous devrez rembourser une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
@@ -397,14 +406,20 @@ const fr: Translations = {
         'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
       eligibleIncomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+      futureEligibleIncomeTooHigh:
+        'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
         'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
         'Vous recevrez automatiquement des paiements si votre revenu vous rend admissible.',
+      youWillReceiveLetter:
+        "Vous devriez recevoir une lettre au sujet de votre status d'inscription le mois après votre 64e anniversaire.",
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
         "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+      ifYouDidnt:
+        "Si vous ne l'avez pas reçue, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       applyOnline:
         "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, vous pouvez présenter une demande en ligne.",
       over70:
@@ -412,7 +427,7 @@ const fr: Translations = {
       eligibleWhenTurn65:
         "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
-        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+        "Si vous n'avez pas reçu de lettre au sujet de la pension de la Sécurité de la vieillesse le mois après votre 64e anniversaire, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
@@ -490,6 +505,7 @@ const fr: Translations = {
   oasDeferralTable: {
     title: 'Montants de report estimés',
     headingAge: "Si vous attendez d'avoir...",
+    futureHeadingAge: 'Si vouz commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
   },
   links,

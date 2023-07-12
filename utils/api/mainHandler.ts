@@ -24,7 +24,7 @@ function getFutureResults(query) {
       }
 
       const { value } = schema.validate(newQuery, { abortEarly: false })
-      const futureHandler = new BenefitHandler(value)
+      const futureHandler = new BenefitHandler(value, true)
 
       const eligibleBenefits = getEligibleBenefits(
         futureHandler.benefitResults.client
@@ -71,7 +71,7 @@ function getFutureResults(query) {
             }
 
             const { value } = schema.validate(newQuery, { abortEarly: false })
-            const futureHandler = new BenefitHandler(value)
+            const futureHandler = new BenefitHandler(value, true)
 
             const eligibleBenefits = getEligibleBenefits(
               futureHandler.benefitResults.client

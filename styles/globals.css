@@ -232,6 +232,7 @@
   #oasDefer a,
   #oasLink0,
   #oasLink1,
+  #oasLink2,
   #gisLink0,
   #gisLink1,
   #alwLink0,
@@ -241,7 +242,7 @@
   a.generatedLink {
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
-    padding-right: 18px;
+    padding-right: 20px;
     text-decoration-line: underline;
     --tw-text-opacity: 1;
     color: rgb(40 65 98 / var(--tw-text-opacity));

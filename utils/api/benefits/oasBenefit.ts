@@ -22,14 +22,17 @@ import { BaseBenefit } from './_base'
 
 export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   partner: Boolean
+  future: Boolean
   income: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
-    partner?: Boolean
+    partner?: Boolean,
+    future?: Boolean
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
+    this.future = future
     this.income = this.partner
       ? this.input.income.partner
       : this.input.income.client
@@ -76,7 +79,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
               : ResultReason.AGE_70_AND_OVER,
           detail:
             this.income > incomeLimit
-              ? this.translations.detail.oas.eligibleIncomeTooHigh
+              ? this.future
+                ? this.translations.detail.oas.futureEligibleIncomeTooHigh
+                : this.translations.detail.oas.eligibleIncomeTooHigh
+              : this.future
+              ? this.translations.detail.futureEligible
               : this.translations.detail.eligible,
         }
       } else if (this.input.age >= 64 && this.input.age < 65) {
@@ -393,11 +400,13 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       return cardCollapsedText
 
     // increase at 75
-    if (this.currentEntitlementAmount !== this.age75EntitlementAmount)
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75
-      )
-    else
+    if (this.currentEntitlementAmount !== this.age75EntitlementAmount) {
+      if (!this.future) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.oasIncreaseAt75
+        )
+      }
+    } else
       cardCollapsedText.push(
         this.translations.detailWithHeading.oasIncreaseAt75Applied
       )
@@ -422,7 +431,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     ) {
       //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.eligibleIncomeTooHigh
+      this.eligibility.detail = this.future
+        ? this.translations.detail.futureEligibleIncomeTooHigh
+        : this.translations.detail.eligibleIncomeTooHigh
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
@@ -433,7 +444,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.reason !== ResultReason.INCOME &&
       this.entitlement.result > 0
     ) {
-      text += ` ${this.translations.detail.expectToReceive}`
+      text += this.future
+        ? ` ${this.translations.detail.futureExpectToReceive}`
+        : ` ${this.translations.detail.expectToReceive}`
     } else if (this.eligibility.result === ResultKey.INCOME_DEPENDENT) {
       text += `<p class="mt-6">${this.translations.detail.oas.dependOnYourIncome}</p>`
     } else if (
@@ -450,7 +463,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       !this.input.receiveOAS
     ) {
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-      text += this.translations.detail.sinceYouAreSixty
+      text += this.future
+        ? this.translations.detail.futureDeferralOptions
+        : this.translations.detail.sinceYouAreSixty
     }
 
     // not sure when this condition would be true, I think never.

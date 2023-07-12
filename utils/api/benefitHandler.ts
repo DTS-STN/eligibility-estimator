@@ -52,8 +52,11 @@ export class BenefitHandler {
   private _benefitResults: BenefitResultsObjectWithPartner
   private _summary: SummaryObject
   private _partnerSummary: SummaryObject
+  future: Boolean
 
-  constructor(readonly rawInput: Partial<RequestInput>) {}
+  constructor(readonly rawInput: Partial<RequestInput>, future?: Boolean) {
+    this.future = future
+  }
 
   get translations(): Translations {
     if (this._translations === undefined)
@@ -330,7 +333,12 @@ export class BenefitHandler {
       this.input.client.partnerBenefitStatus.value
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
-    const clientOas = new OasBenefit(this.input.client, this.translations)
+    const clientOas = new OasBenefit(
+      this.input.client,
+      this.translations,
+      false,
+      this.future
+    )
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
 
     // If the client needs help, check their partner's OAS.

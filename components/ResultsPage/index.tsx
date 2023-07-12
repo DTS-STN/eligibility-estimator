@@ -64,8 +64,16 @@ const ResultsPage: React.VFC<{
   partnerResults: BenefitResultsObject
   summary: SummaryObject
 }> = ({ inputs, results, futureClientResults, partnerResults, summary }) => {
-  console.log('results on results page', results)
-  // console.log('futureClientResults', futureClientResults)
+  // console.log('results on results page', results)
+  console.log('futureClientResults', futureClientResults)
+
+  const anyFutureEligible = futureClientResults?.some((obj) => {
+    const key = Object.keys(obj)[0]
+    return Object.keys(obj[key]).length !== 0
+  })
+
+  console.log('anyFutureEligible', anyFutureEligible)
+
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
@@ -195,8 +203,7 @@ const ResultsPage: React.VFC<{
             />
           )}
 
-          {/* this should actually check if any benefits are eligible in the future */}
-          {futureClientResults && (
+          {anyFutureEligible && (
             <WillBeEligible futureResults={futureClientResults} />
           )}
 
@@ -227,7 +234,11 @@ const ResultsPage: React.VFC<{
         </div>
         <div className="col-span-2 row-span-1">
           <BenefitCards
+            inputAge={Math.floor(
+              Number(inputs.find((input) => input.key === 'age').value)
+            )}
             results={resultsArray}
+            futureClientResults={futureClientResults}
             partnerResults={partnerResultsArray}
           />
 

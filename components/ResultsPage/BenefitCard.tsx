@@ -10,6 +10,7 @@ export const BenefitCard: React.VFC<{
   benefitKey: string
   benefitName: string
   isEligible: boolean
+  future: boolean
   eligibleText: string
   collapsedDetails: any
   children: React.ReactNode
@@ -25,6 +26,7 @@ export const BenefitCard: React.VFC<{
   benefitKey,
   benefitName,
   isEligible,
+  future,
   eligibleText,
   collapsedDetails,
   children,
@@ -36,7 +38,9 @@ export const BenefitCard: React.VFC<{
     <span
       className={`px-2 py-1 ml-2 border-left border-l-4 font-semibold text-[15px] ${
         isEligible
-          ? ' border-success bg-[#D8EECA] '
+          ? future
+            ? 'border-[#269ABC] bg-[#D7FAFF]'
+            : ' border-success bg-[#D8EECA] '
           : ' border-[#EE7100] bg-[#F9F4D4] '
       }`}
     >
