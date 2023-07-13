@@ -3,6 +3,7 @@ import { BenefitHandler } from './benefitHandler'
 import { MaritalStatus, ResultKey } from './definitions/enums'
 import { RequestSchema as schema } from './definitions/schemas'
 import { ResponseError, ResponseSuccess } from './definitions/types'
+import { getAgeArray, getEligibleBenefits } from './helpers/utils'
 
 function getFutureResults(query) {
   let futureResultsObj = { client: null, partner: null }
@@ -92,6 +93,22 @@ function getFutureResults(query) {
     }
   }
 
+  // PARTNERED
+  if (query.maritalStatus === MaritalStatus.PARTNERED) {
+    const ages = [
+      Math.floor(Number(query.age)),
+      Math.floor(Number(query.partnerAge)),
+    ]
+
+    const futureAges = getAgeArray(ages)
+
+    if (futureAges.length !== 0) {
+      console.log('FUTURE AGES ARE', futureAges)
+      console.log('SOLUTION GOES HERE!')
+    }
+  }
+
+  console.log('futureResultsObj', futureResultsObj)
   return futureResultsObj
 }
 
@@ -128,14 +145,4 @@ export default class MainHandler {
     consoleDev('result object', resultObj)
     this.results = resultObj
   }
-}
-
-function getEligibleBenefits(benefits) {
-  const newObj = {}
-  for (const key in benefits) {
-    if (benefits[key].eligibility.result === 'eligible') {
-      newObj[key] = benefits[key]
-    }
-  }
-  return newObj
 }

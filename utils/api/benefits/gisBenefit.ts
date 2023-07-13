@@ -104,10 +104,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
         // move get entitlement amount to here, because when income is not provided, it will cause exception
         const amount = this.formulaResult()
-        console.log('amount', amount)
 
         if (this.input.income.client >= maxIncome && amount <= 0) {
-          console.log('INSIDE GIS TOO HIGH')
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,

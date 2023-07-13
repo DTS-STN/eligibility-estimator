@@ -48,17 +48,8 @@ const getEstimatedMonthlyTotalLinkText = (
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
-  futureClientEligibleArray: BenefitResult[],
   key: string
 ): boolean => {
-  // console.log('resultsArray INSIDE GET ELIGIBILITY', resultsEligible)
-  // console.log(
-  //   'futureClientEligibleArray INSIDE GET ELIGIBILITY',
-  //   futureClientEligibleArray
-  // )
-
-  // const allEligible = resultsEligible.concat(futureClientEligibleArray)
-
   return resultsEligible.some((benefit) => benefit.benefitKey === key)
 }
 
@@ -167,41 +158,25 @@ const ResultsPage: React.VFC<{
         text: apiTsln.benefit['oas'],
         id: 'oas',
         url: '#oas',
-        eligible: getEligibility(
-          resultsEligible,
-          futureClientEligibleArray,
-          'oas'
-        ),
+        eligible: getEligibility(resultsEligible, 'oas'),
       },
       {
         text: apiTsln.benefit['gis'],
         id: 'gis',
         url: '#gis',
-        eligible: getEligibility(
-          resultsEligible,
-          futureClientEligibleArray,
-          'gis'
-        ),
+        eligible: getEligibility(resultsEligible, 'gis'),
       },
       {
         text: apiTsln.benefit['alw'],
         id: 'alw',
         url: '#alw',
-        eligible: getEligibility(
-          resultsEligible,
-          futureClientEligibleArray,
-          'alw'
-        ),
+        eligible: getEligibility(resultsEligible, 'alw'),
       },
       {
         text: apiTsln.benefit['alws'],
         id: 'alws',
         url: '#alws',
-        eligible: getEligibility(
-          resultsEligible,
-          futureClientEligibleArray,
-          'alws'
-        ),
+        eligible: getEligibility(resultsEligible, 'alws'),
       },
     ]
 

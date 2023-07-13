@@ -32,7 +32,6 @@ export const BenefitCards: React.VFC<{
     'Pension de la Sécurité de la vieillesse (SV)',
   ]
 
-  console.log('futureClientResults INSIDE BENEFIT CARDS', futureClientResults)
   const receivingOAS: boolean = results[0]?.cardDetail?.meta?.receiveOAS
 
   /**
