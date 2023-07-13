@@ -41,10 +41,10 @@ const fr: TooltipTranslations = {
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
-            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>.</li> \
+            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>;</li> \
             <li>résident temporaire;</li> \
             <li>résident permanent (immigrant reçu);</li> \
-            <li>réfugié;</li> \
+            <li>réfugié.</li> \
           </ul> \
           ",
   },
@@ -56,10 +56,10 @@ const fr: TooltipTranslations = {
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
-            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>.</li> \
+            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>;</li> \
             <li>résident temporaire;</li> \
             <li>résident permanent (immigrant reçu);</li> \
-            <li>réfugié;</li> \
+            <li>réfugié.</li> \
           </ul> \
           ",
   },
