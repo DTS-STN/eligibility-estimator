@@ -412,7 +412,7 @@ const fr: Translations = {
       eligibleWhenTurn65:
         "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
-        "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+        "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:

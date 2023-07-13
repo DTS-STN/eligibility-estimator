@@ -128,22 +128,27 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
 
         if (result.entitlement.clawback > 0) {
-          if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
-            nextStepText.nextStepContent += `<p class='mb-6'>${apiTsln.detail.oas.over70}</p>`
+          if (!receivingOAS) {
+            nextStepText.nextStepContent +=
+              apiTsln.detail.oas.youShouldHaveReceivedLetter
           }
-          nextStepText.nextStepContent +=
-            apiTsln.detail.oas.serviceCanadaReviewYourPayment
+          if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+            nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.over70}</p>`
+          }
+
+          nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
         } else if (
           result.eligibility.reason === ResultReason.AGE_65_TO_69 &&
           result.entitlement.result > 0 &&
           receivingOAS
         ) {
+          nextStepText.nextStepContent +=
+            apiTsln.detail.oas.youShouldHaveReceivedLetter
+
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
-          nextStepText.nextStepContent += ` ${apiTsln.detail.oas.applyOnline}`
-          nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
         } else if (
           result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
           receivingOAS
