@@ -9,7 +9,7 @@ export const getDeferralIncrease = (months, baseAmount) => {
 export function getEligibleBenefits(benefits) {
   const newObj = {}
   for (const key in benefits) {
-    if (benefits[key].eligibility.result === 'eligible') {
+    if (benefits[key].eligibility?.result === 'eligible') {
       newObj[key] = benefits[key]
     }
   }
