@@ -357,7 +357,9 @@ export class BenefitHandler {
     let clientGis = new GisBenefit(
       this.input.client,
       this.translations,
-      allResults.client.oas
+      allResults.client.oas,
+      false,
+      this.future
     )
 
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
@@ -487,7 +489,9 @@ export class BenefitHandler {
       clientGis = new GisBenefit(
         this.input.client,
         this.translations,
-        allResults.client.oas
+        allResults.client.oas,
+        false,
+        this.future
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }
@@ -629,7 +633,9 @@ export class BenefitHandler {
             clientGis = new GisBenefit(
               clientSingleInput,
               this.translations,
-              allResults.client.oas
+              allResults.client.oas,
+              false,
+              this.future
             )
 
             if (useT1versusT3) {
@@ -734,7 +740,9 @@ export class BenefitHandler {
             clientGis = new GisBenefit(
               clientSingleInput,
               this.translations,
-              allResults.client.oas
+              allResults.client.oas,
+              false,
+              this.future
             )
 
             if (clientGis.entitlement.result === 0) {
@@ -777,7 +785,9 @@ export class BenefitHandler {
             const clientGisCouple = new GisBenefit(
               this.input.client,
               this.translations,
-              allResults.client.oas
+              allResults.client.oas,
+              false,
+              this.future
             )
 
             this.setValueForAllResults(

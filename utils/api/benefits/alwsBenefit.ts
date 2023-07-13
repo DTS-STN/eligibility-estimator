@@ -120,7 +120,7 @@ export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
           detail: this.future
-            ? this.translations.detail.futureEligibleIncomeTooHighAlws
+            ? this.translations.detail.futureEligibleIncomeTooHigh2
             : this.translations.detail.eligibleIncomeTooHigh,
         }
       } else {

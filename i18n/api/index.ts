@@ -56,7 +56,7 @@ export interface Translations {
     futureEligible65: string
     eligibleIncomeTooHigh: string
     futureEligibleIncomeTooHigh: string
-    futureEligibleIncomeTooHighAlws: string
+    futureEligibleIncomeTooHigh2: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
@@ -117,6 +117,7 @@ export interface Translations {
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string
       incomeTooHigh: string
+      futureEligibleIncomeTooHigh: string
       ifYouApply: string
     }
   }
