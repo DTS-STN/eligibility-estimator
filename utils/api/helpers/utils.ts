@@ -66,3 +66,80 @@ export function getAgeArray(ages: number[]) {
 
   return result
 }
+
+export function buildQuery(query, ageSet) {
+  console.log('INSIDE BUILD QUERY')
+  console.log('query', query)
+  console.log('ageSet', ageSet)
+  const newQuery = { ...query }
+  const [userAge, partnerAge] = ageSet
+
+  // CLIENT
+  newQuery['age'] = userAge
+  newQuery['partnerAge'] = partnerAge
+
+  if (userAge >= 65) {
+    // need to add to query "receiveOAS" false
+    addKeyValue(newQuery, 'receiveOAS', 'false')
+  }
+
+  if (query.livedOnlyInCanada === 'false' && query.yearsInCanadaSince18) {
+    const newYrsInCanada = String(
+      Math.min(
+        40,
+        65 - Math.floor(Number(query.age)) + Number(query.yearsInCanadaSince18)
+      )
+    )
+    newQuery['yearsInCanadaSince18'] = newYrsInCanada
+  }
+
+  // PARTNER
+  if (partnerAge >= 60) {
+    addKeyValue(newQuery, 'partnerLegalStatus', 'yes')
+    addKeyValue(newQuery, 'partnerLivingCountry', 'CAN')
+    addKeyValue(newQuery, 'partnerLivedOnlyInCanada', 'true')
+    // add legalstatus yes
+    // canada
+    // only lived in canada
+    //65,68
+
+    // if (partnerLegalStatus !== 'no') {
+    //   // if YES, then more options are possible
+    //   if (partnerLivedOnlyInCanada !== false) {
+    //     // need to add to query "partnerLivingCountry" CAN ?? dont need i think since its added automatically as defualt
+    //     // need to add to query "partnerLivedOnlyInCanada" true
+    //   }
+    // }
+
+    // // otherwise, the query is good as is
+  }
+
+  if (partnerAge >= 65) {
+    // need to add to query "partnerBenefitStatus" helpMe
+    addKeyValue(newQuery, 'partnerBenefitStatus', 'helpMe')
+  }
+
+  if (
+    query.partnerLivedOnlyInCanada === 'false' &&
+    query.partnerYearsInCanadaSince18
+  ) {
+    const ageLimit = partnerAge < 65 ? 65 : partnerAge
+    const partnerNewYrsInCanada = String(
+      Math.min(
+        40,
+        ageLimit -
+          Math.floor(Number(query.partnerAge)) +
+          Number(query.partnerYearsInCanadaSince18)
+      )
+    )
+    newQuery['partnerYearsInCanadaSince18'] = partnerNewYrsInCanada
+  }
+
+  return newQuery
+}
+
+function addKeyValue(obj, key, val) {
+  if (!obj.hasOwnProperty(key)) {
+    obj[key] = val
+  }
+}

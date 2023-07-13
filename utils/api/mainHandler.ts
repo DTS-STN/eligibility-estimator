@@ -3,7 +3,7 @@ import { BenefitHandler } from './benefitHandler'
 import { MaritalStatus, ResultKey } from './definitions/enums'
 import { RequestSchema as schema } from './definitions/schemas'
 import { ResponseError, ResponseSuccess } from './definitions/types'
-import { getAgeArray, getEligibleBenefits } from './helpers/utils'
+import { buildQuery, getAgeArray, getEligibleBenefits } from './helpers/utils'
 
 function getFutureResults(query) {
   let futureResultsObj = { client: null, partner: null }
@@ -95,20 +95,44 @@ function getFutureResults(query) {
 
   // PARTNERED
   if (query.maritalStatus === MaritalStatus.PARTNERED) {
-    // TODO: investigate ENDLESS LOOP WHEN THE FORM IS FIRST BLANK.
     const ages = [
       Math.floor(Number(query.age)),
       Math.floor(Number(query.partnerAge)),
     ]
+    if (ages.some((age) => isNaN(age))) return futureResultsObj
+    const futureAges = getAgeArray(ages)
 
-    if (!ages.some((age) => isNaN(age))) {
-      console.log('ages', ages)
+    if (futureAges.length !== 0) {
+      console.log('FUTURE AGES ARE', futureAges)
+      console.log('SOLUTION GOES HERE!')
 
-      const futureAges = getAgeArray(ages)
+      const clientResults = []
+      const partnerResults = []
+      futureAges.forEach((ageSet) => {
+        console.log('ageSet', ageSet)
+        const [userAge, partnerAge] = ageSet
 
-      if (futureAges.length !== 0) {
-        console.log('FUTURE AGES ARE', futureAges)
-        console.log('SOLUTION GOES HERE!')
+        const newQuery = buildQuery(query, ageSet)
+        console.log('ageSet', ageSet)
+        console.log('newQuery', newQuery)
+        // const { value } = schema.validate(newQuery, { abortEarly: false })
+        // const futureHandler = new BenefitHandler(value, true)
+
+        // // [{benefitKey: oas, ....}, {}]
+        // const clientEligibleBenefits = getEligibleBenefits(
+        //   futureHandler.benefitResults.client
+        // )
+        // const partnerEligibleBenefits = getEligibleBenefits(
+        //   futureHandler.benefitResults.partner
+        // )
+
+        // clientResults.push({ [userAge]: clientEligibleBenefits })
+        // partnerResults.push({ [partnerAge]: partnerEligibleBenefits })
+      })
+
+      futureResultsObj = {
+        client: clientResults,
+        partner: partnerResults,
       }
     }
   }
