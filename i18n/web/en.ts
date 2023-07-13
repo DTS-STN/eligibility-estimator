@@ -173,6 +173,7 @@ const en: WebTranslations = {
     total: 'Your total monthly amount is ',
     futureTotal: 'Your total monthly amount will be ',
     partnerTotal: 'Their total monthly amount is ',
+    futurePartnerTotal: 'Their total monthly amount will be ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',
     nextSteps: 'Next steps for benefits you may be eligible for',
@@ -194,6 +195,7 @@ const en: WebTranslations = {
     futureEligible: " You'll likely be eligible",
     partnerFutureEligible: ' Your partner will likely be eligible',
     toReceive: "you'll likely be eligible to receive",
+    partnerToReceive: 'your partner will likely be eligible to receive',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,

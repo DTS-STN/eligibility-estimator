@@ -9,11 +9,11 @@ export const getDeferralIncrease = (months, baseAmount) => {
 export function getEligibleBenefits(benefits) {
   const newObj = {}
   for (const key in benefits) {
-    if (benefits[key].eligibility.result === 'eligible') {
+    if (benefits[key].eligibility?.result === 'eligible') {
       newObj[key] = benefits[key]
     }
   }
-  return newObj
+  return Object.keys(newObj).length === 0 ? null : newObj
 }
 
 export function getAgeArray(ages: number[]) {
@@ -68,9 +68,6 @@ export function getAgeArray(ages: number[]) {
 }
 
 export function buildQuery(query, ageSet) {
-  console.log('INSIDE BUILD QUERY')
-  console.log('query', query)
-  console.log('ageSet', ageSet)
   const newQuery = { ...query }
   const [userAge, partnerAge] = ageSet
 
@@ -79,7 +76,6 @@ export function buildQuery(query, ageSet) {
   newQuery['partnerAge'] = partnerAge
 
   if (userAge >= 65) {
-    // need to add to query "receiveOAS" false
     addKeyValue(newQuery, 'receiveOAS', 'false')
   }
 
@@ -98,24 +94,9 @@ export function buildQuery(query, ageSet) {
     addKeyValue(newQuery, 'partnerLegalStatus', 'yes')
     addKeyValue(newQuery, 'partnerLivingCountry', 'CAN')
     addKeyValue(newQuery, 'partnerLivedOnlyInCanada', 'true')
-    // add legalstatus yes
-    // canada
-    // only lived in canada
-    //65,68
-
-    // if (partnerLegalStatus !== 'no') {
-    //   // if YES, then more options are possible
-    //   if (partnerLivedOnlyInCanada !== false) {
-    //     // need to add to query "partnerLivingCountry" CAN ?? dont need i think since its added automatically as defualt
-    //     // need to add to query "partnerLivedOnlyInCanada" true
-    //   }
-    // }
-
-    // // otherwise, the query is good as is
   }
 
   if (partnerAge >= 65) {
-    // need to add to query "partnerBenefitStatus" helpMe
     addKeyValue(newQuery, 'partnerBenefitStatus', 'helpMe')
   }
 

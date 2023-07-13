@@ -35,7 +35,7 @@ export const MayBeEligible: React.VFC<{
   return (
     <>
       <h2
-        id={partner ? 'partnerEstimate' : 'estimate'}
+        id={partner ? 'partner-estimate' : 'estimate'}
         className="h2 mt-8 flex"
       >
         <div className="flex-none w-8 h-8">

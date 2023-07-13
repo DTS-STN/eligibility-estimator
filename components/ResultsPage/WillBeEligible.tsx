@@ -9,22 +9,30 @@ import { EstimatedTotalItem } from './EstimatedTotalItem'
 
 export const WillBeEligible: React.VFC<{
   futureResults: any
-}> = ({ futureResults }) => {
+  partner?: boolean
+}> = ({ futureResults, partner = false }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
 
   return (
     <>
-      <h2 id={'future-estimate'} className="h2 mt-12">
+      <h2
+        id={partner ? 'future-partner-estimate' : 'future-estimate'}
+        className="h2 mt-12"
+      >
         <Image src="/pg-check.svg" alt="" width={30} height={30} />
-        {tsln.resultsPage.futureEligible}
+        {partner
+          ? tsln.resultsPage.partnerFutureEligible
+          : tsln.resultsPage.futureEligible}
       </h2>
 
       {futureResults.map((resultObj, idx) => {
         const age = Object.keys(resultObj)[0]
         const text = `${language === 'en' ? 'At' : 'À'} ${age}, ${
-          tsln.resultsPage.toReceive
+          partner
+            ? tsln.resultsPage.partnerToReceive
+            : tsln.resultsPage.toReceive
         }:`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
@@ -65,7 +73,9 @@ export const WillBeEligible: React.VFC<{
             </ul>
             {eligible.length > 1 && eligibleTotalAmount > 0 && (
               <p className="pl-[35px]">
-                {tsln.resultsPage.futureTotal}
+                {partner
+                  ? tsln.resultsPage.futurePartnerTotal
+                  : tsln.resultsPage.futureTotal}
                 <strong>
                   {numberToStringCurrency(eligibleTotalAmount, language)}
                 </strong>

@@ -48,7 +48,7 @@ export const EstimatedTotal: React.VFC<{
 
   return (
     <>
-      <h2 id={partner ? 'partnerEstimate' : 'estimate'} className="h2 mt-12">
+      <h2 id={partner ? 'partner-estimate' : 'estimate'} className="h2 mt-12">
         {entitlementSum != 0 ? (
           <Image src="/money.png" alt="" width={30} height={30} />
         ) : (

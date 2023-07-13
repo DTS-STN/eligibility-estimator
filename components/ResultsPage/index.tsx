@@ -58,13 +58,16 @@ const ResultsPage: React.VFC<{
   results: BenefitResultsObject
   futureClientResults: any
   partnerResults: BenefitResultsObject
+  futurePartnerResults: any
   summary: SummaryObject
-}> = ({ inputs, results, futureClientResults, partnerResults, summary }) => {
-  const anyFutureEligible = futureClientResults?.some((obj) => {
-    const key = Object.keys(obj)[0]
-    return Object.keys(obj[key]).length !== 0
-  })
-
+}> = ({
+  inputs,
+  results,
+  futureClientResults,
+  partnerResults,
+  futurePartnerResults,
+  summary,
+}) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
@@ -103,8 +106,8 @@ const ResultsPage: React.VFC<{
   // FUTURE CLIENT
   const futureClientEligibleArray = flattenArray(futureClientResults)
 
-  // console.log('resultsEligible', resultsEligible)
-  // console.log('futureClientEligible', futureClientEligible)
+  // FUTURE PARTNER
+  const futurePartnerEligibleArray = flattenArray(futurePartnerResults)
 
   const getListLinks: any = () => {
     const getFirstLinks = () => {
@@ -134,7 +137,7 @@ const ResultsPage: React.VFC<{
         })
       }
 
-      if (isPartnered) {
+      if (isPartnered && partnerResultsEligible.length !== 0) {
         tempLinks.push({
           text: getEstimatedMonthlyTotalLinkText(
             summary.partnerEntitlementSum,
@@ -142,9 +145,17 @@ const ResultsPage: React.VFC<{
             tsln,
             'partner'
           ),
-          url: '#partnerEstimate',
+          url: '#partner-estimate',
         })
       }
+
+      if (futurePartnerEligibleArray.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.partnerFutureEligible,
+          url: '#future-partner-estimate',
+        })
+      }
+
       return tempLinks
     }
 
@@ -240,7 +251,7 @@ const ResultsPage: React.VFC<{
             />
           )}
 
-          {anyFutureEligible && (
+          {futureClientResults && (
             <WillBeEligible futureResults={futureClientResults} />
           )}
 
@@ -258,7 +269,14 @@ const ResultsPage: React.VFC<{
             />
           )}
 
-          {isPartnered && (
+          {futurePartnerResults && (
+            <WillBeEligible
+              futureResults={futurePartnerResults}
+              partner={true}
+            />
+          )}
+
+          {isPartnered && !futurePartnerResults && (
             <MayBeEligible
               resultsEligible={partnerResultsEligible}
               partner={true}

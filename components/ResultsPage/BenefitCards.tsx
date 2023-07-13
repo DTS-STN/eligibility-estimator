@@ -13,7 +13,11 @@ import { BenefitCard } from './BenefitCard'
 import { DeferralTable } from './DeferralTable'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
 import { FieldInput } from '../../client-state/InputHelper'
-import { flattenArray } from './utils'
+import {
+  flattenArray,
+  getFirstOccurences,
+  omitCommonBenefitKeys,
+} from './utils'
 
 export const BenefitCards: React.VFC<{
   inputAge: number
@@ -78,9 +82,16 @@ export const BenefitCards: React.VFC<{
     )
   })
 
-  // console.log('resultsEligible', resultsEligible)
-  // console.log('futureEligible', futureClientEligible)
-  // console.log('resultsNotEligible', resultsNotEligible)
+  console.log('resultsEligible', resultsEligible)
+  console.log('futureEligible', futureClientEligible) // keep only first occurences of the benefit, then check against resultsEligible. Omit if in that array
+  console.log('resultsNotEligible', resultsNotEligible)
+
+  const futureEligibleFirst = getFirstOccurences(futureClientEligible)
+  const futureEligibleToDisplay = omitCommonBenefitKeys(
+    futureEligibleFirst,
+    resultsEligible
+  )
+  console.log('futuerEligibleToDisplay', futureEligibleToDisplay)
 
   const partnerResultsEligible = partnerResults.filter(
     (result) =>
@@ -332,7 +343,9 @@ export const BenefitCards: React.VFC<{
       {futureClientEligible?.length > 0 && (
         <>
           <>
-            {futureClientEligible.map((result) => generateCard(result, true))}
+            {futureEligibleToDisplay.map((result) =>
+              generateCard(result, true)
+            )}
           </>
         </>
       )}

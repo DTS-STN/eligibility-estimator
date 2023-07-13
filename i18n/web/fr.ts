@@ -176,6 +176,7 @@ const fr: WebTranslations = {
     total: 'Votre montant total par mois est ',
     futureTotal: 'Votre montant total par mois sera ',
     partnerTotal: 'Leur montant total par mois est ',
+    futurePartnerTotal: 'Leur montant total par mois sera ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:
@@ -199,6 +200,7 @@ const fr: WebTranslations = {
     futureEligible: ' Vous serez probablement admissible',
     partnerFutureEligible: ' Votre conjoint sera probablement admissible',
     toReceive: 'vous pourriez être admissible à recevoir',
+    partnerToReceive: 'votre conjoint pourrait être admissible à recevoir',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,

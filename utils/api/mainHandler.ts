@@ -5,7 +5,7 @@ import { RequestSchema as schema } from './definitions/schemas'
 import { ResponseError, ResponseSuccess } from './definitions/types'
 import { buildQuery, getAgeArray, getEligibleBenefits } from './helpers/utils'
 
-function getFutureResults(query) {
+function getFutureResults(query, locale) {
   let futureResultsObj = { client: null, partner: null }
 
   // SINGLE
@@ -103,41 +103,56 @@ function getFutureResults(query) {
     const futureAges = getAgeArray(ages)
 
     if (futureAges.length !== 0) {
-      console.log('FUTURE AGES ARE', futureAges)
-      console.log('SOLUTION GOES HERE!')
-
       const clientResults = []
       const partnerResults = []
+      let benefitCounter = { oas: 0, gis: 0, alw: 0, alws: 0 }
+
       futureAges.forEach((ageSet) => {
-        console.log('ageSet', ageSet)
         const [userAge, partnerAge] = ageSet
-
         const newQuery = buildQuery(query, ageSet)
-        console.log('ageSet', ageSet)
-        console.log('newQuery', newQuery)
-        // const { value } = schema.validate(newQuery, { abortEarly: false })
-        // const futureHandler = new BenefitHandler(value, true)
+        const { value } = schema.validate(newQuery, { abortEarly: false })
+        const futureHandler = new BenefitHandler(value, true)
 
-        // // [{benefitKey: oas, ....}, {}]
-        // const clientEligibleBenefits = getEligibleBenefits(
-        //   futureHandler.benefitResults.client
-        // )
-        // const partnerEligibleBenefits = getEligibleBenefits(
-        //   futureHandler.benefitResults.partner
-        // )
+        const clientEligibleBenefits = getEligibleBenefits(
+          futureHandler.benefitResults.client
+        )
 
-        // clientResults.push({ [userAge]: clientEligibleBenefits })
-        // partnerResults.push({ [partnerAge]: partnerEligibleBenefits })
+        Object.keys(clientEligibleBenefits).forEach((benefit) => {
+          benefitCounter[benefit] += 1
+        })
+        const partnerEligibleBenefits = getEligibleBenefits(
+          futureHandler.benefitResults.partner
+        )
+
+        if (clientEligibleBenefits) {
+          clientResults.push({ [userAge]: clientEligibleBenefits })
+        }
+        if (partnerEligibleBenefits) {
+          partnerResults.push({ [partnerAge]: partnerEligibleBenefits })
+        }
+      })
+
+      // TEMPORARY: For any benefit that appears twice in future estimates, add text to indicate that these results may be different in the future since BenefitCards component will only show one occurence of each benefit.
+      Object.keys(benefitCounter).forEach((benefit) => {
+        if (benefitCounter[benefit] > 1) {
+          const val = Object.values(clientResults[0])[0]
+          const mainText = val[benefit].cardDetail.mainText
+          const textToAdd =
+            locale === 'en'
+              ? `This may change in the future based on your situation.`
+              : `Ceci pourrait changer dans l'avenir selon votre situation.`
+
+          val[benefit].cardDetail.mainText = textToAdd + '</br></br>' + mainText
+        }
       })
 
       futureResultsObj = {
-        client: clientResults,
-        partner: partnerResults,
+        client: clientResults.length !== 0 ? clientResults : null,
+        partner: partnerResults.length !== 0 ? partnerResults : null,
       }
     }
   }
 
-  console.log('futureResultsObj', futureResultsObj)
   return futureResultsObj
 }
 
@@ -145,6 +160,7 @@ function getFutureResults(query) {
 export default class MainHandler {
   readonly handler: BenefitHandler
   readonly futureHandler: BenefitHandler
+  readonly locale: string
   readonly results: ResponseSuccess | ResponseError
   constructor(query: { [key: string]: string | string[] }) {
     const { error, value } = schema.validate(query, { abortEarly: false })
@@ -153,7 +169,7 @@ export default class MainHandler {
     this.handler = new BenefitHandler(value)
 
     // Future planning
-    const futureResults = getFutureResults(query)
+    const futureResults = getFutureResults(query, value._language)
 
     const resultObj: any = {
       visibleFields: this.handler.requiredFields,

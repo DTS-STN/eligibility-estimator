@@ -139,6 +139,7 @@ export type WebTranslations = {
     total: string
     futureTotal: string
     partnerTotal: string
+    futurePartnerTotal: string
     ifIncomeNotProvided: string
     nextSteps: string
     youMayNotBeEligible: string
@@ -157,6 +158,7 @@ export type WebTranslations = {
     futureEligible: string
     partnerFutureEligible: string
     toReceive: string
+    partnerToReceive: string
     //nextStepOas: string
   }
 
