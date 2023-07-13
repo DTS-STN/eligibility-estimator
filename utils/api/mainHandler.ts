@@ -95,16 +95,21 @@ function getFutureResults(query) {
 
   // PARTNERED
   if (query.maritalStatus === MaritalStatus.PARTNERED) {
+    // TODO: investigate ENDLESS LOOP WHEN THE FORM IS FIRST BLANK.
     const ages = [
       Math.floor(Number(query.age)),
       Math.floor(Number(query.partnerAge)),
     ]
 
-    const futureAges = getAgeArray(ages)
+    if (!ages.some((age) => isNaN(age))) {
+      console.log('ages', ages)
 
-    if (futureAges.length !== 0) {
-      console.log('FUTURE AGES ARE', futureAges)
-      console.log('SOLUTION GOES HERE!')
+      const futureAges = getAgeArray(ages)
+
+      if (futureAges.length !== 0) {
+        console.log('FUTURE AGES ARE', futureAges)
+        console.log('SOLUTION GOES HERE!')
+      }
     }
   }
 
