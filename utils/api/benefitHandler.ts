@@ -931,7 +931,8 @@ export class BenefitHandler {
                     this.input.client,
                     this.translations,
                     false,
-                    false
+                    false,
+                    this.future
                   )
                   this.setValueForAllResults(
                     allResults,
@@ -951,7 +952,8 @@ export class BenefitHandler {
                     this.input.client,
                     this.translations,
                     false,
-                    true
+                    true,
+                    this.future
                   )
                   this.setValueForAllResults(
                     allResults,
