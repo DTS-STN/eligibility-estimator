@@ -56,9 +56,6 @@ export const WillBeEligible: React.VFC<{
           })
         }
 
-        // [{benefitKey: oas, ...}, {}]
-        console.log('eligible', eligible)
-
         const eligibleTotalAmount = eligible.reduce(
           (sum, obj) => sum + obj.entitlement.result,
           0
