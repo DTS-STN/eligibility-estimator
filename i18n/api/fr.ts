@@ -58,9 +58,9 @@ const fr: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Dans quel pays vivez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
-      "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
+      "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
+      "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
@@ -74,9 +74,9 @@ const fr: Translations = {
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Votre conjoint a-t-il un statut légal au Canada?',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
-      "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
+      "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
+      "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
@@ -143,20 +143,20 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      `Incluez le revenu après impôt de toutes les sources (la ligne&nbsp;23600 de votre déclaration de revenus), moins&nbsp;:` +
+      `Incluez le revenu après impôt de toutes les sources (la ligne 23600 de votre déclaration de revenus), moins :` +
       `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
-      `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
+      `<li>les premiers 5 000 $ de revenu d'emploi ou de travail indépendant, et 50 % des 10 000 $ suivants.</li></ul>`,
     [FieldKey.INV_SEPARATED]:
       "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
     [FieldKey.PARTNER_INCOME]:
-      `Incluez le revenu après impôt de toutes les sources (la ligne&nbsp;23600 de sa déclaration de revenus), moins&nbsp;:` +
+      `Incluez le revenu après impôt de toutes les sources (la ligne 23600 de sa déclaration de revenus), moins :` +
       `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
-      `<li>les premiers 5&nbsp;000&nbsp;$ de revenu d'emploi ou de travail indépendant, et 50&nbsp;% des 10&nbsp;000&nbsp;$ suivants.</li></ul>`,
+      `<li>les premiers 5 000 $ de revenu d'emploi ou de travail indépendant, et 50 % des 10 000 $ suivants.</li></ul>`,
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_DEFER_DURATION]:
       'Si vous n’avez pas reporté votre pension, passez à l’étape suivante.',
-    [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
+    [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -203,7 +203,7 @@ const fr: Translations = {
       {
         key: false,
         text: 'Je voudrais commencer à 65 ans (le plus commun)',
-        shortText: 'Commencer à 65&nbsp;ans',
+        shortText: 'Commencer à 65 ans',
       },
       {
         key: true,
@@ -320,39 +320,39 @@ const fr: Translations = {
   detail: {
     eligible: 'Vous êtes probablement admissible à cette prestation.',
     futureEligible60:
-      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
+      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
     futureEligible65:
-      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
+      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     futureEligibleIncomeTooHigh:
-      'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
+      'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
     futureEligibleIncomeTooHigh2:
-      'Vous serez probablement admissible lorsque vous aurez 60 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
+      'Vous serez probablement admissible lorsque vous aurez 60 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
     eligibleDependingOnIncome:
-      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
-      'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+      'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
     eligibleEntitlementUnavailable:
       "Vous êtes probablement admissible à cette prestation, mais une estimation du droit à cette prestation n'est pas disponible. Vous devriez communiquer avec {LINK_SERVICE_CANADA} pour obtenir plus de renseignements sur le montant de vos paiements.",
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     yourDeferralOptions: 'Vos options de report',
     sinceYouAreSixty:
-      'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
+      'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
-      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
+      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
     youCanAply:
-      'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+      'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
     delayMonths:
-      'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
+      'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     eligibleWhen60ApplyNow:
-      'Vous pourriez être admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
+      'Vous pourriez être admissible à votre 60e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen65ApplyNow:
-      'Vous pourriez être admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
+      'Vous pourriez être admissible à votre 65e anniversaire. Par contre, vous pourriez être en mesure de présenter une demande dès maintenant. Veuillez communiquer avec {LINK_SERVICE_CANADA} pour en savoir plus.',
     eligibleWhen60:
-      "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1&nbsp;mois après votre 59e&nbsp;anniversaire.</p>",
-    eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
+      "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.</p>",
+    eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
     mustBeInCanada:
       "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     mustBeOasEligible:
@@ -360,7 +360,7 @@ const fr: Translations = {
     mustCompleteOasCheck:
       "Vous devez d'abord compléter l'évaluation d'admissibilité à la Sécurité de la vieillesse.",
     mustMeetIncomeReq:
-      '{INCOME_SINGLE_OR_COMBINED} est trop élevé pour que vous soyez admissible à cette prestation.',
+      '{INCOME_SINGLE_OR_COMBINED} est trop élevé pour que vous soyez admissible à cette prestation.',
     mustMeetYearReq:
       "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
     conditional:
@@ -368,15 +368,15 @@ const fr: Translations = {
     dependingOnAgreement:
       "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen60:
-      "Vous pourriez avoir droit à cette prestation à votre 60e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada  pour obtenir une meilleure évaluation.",
+      "Vous pourriez avoir droit à cette prestation à votre 60e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada  pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen65:
-      "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
+      "Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon l'entente entre le Canada et ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnLegal:
       'Vous pourriez être admissible à cette prestation, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen60:
-      'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+      'Vous pourriez être admissible à cette prestation à votre 60e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     dependingOnLegalWhen65:
-      'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+      'Vous pourriez être admissible à cette prestation à votre 65e anniversaire, selon votre statut légal au Canada. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     youCantGetThisBenefit:
       'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
     thisEstimate:
@@ -390,46 +390,46 @@ const fr: Translations = {
     alwEligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
-      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que&nbsp;',
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que ',
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.',
+      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.',
     autoEnrollTrue:
-      "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
+      "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
       "Selon ce que vous nous avez dit, <strong>vous devrez peut-être demander cette prestation</strong>. Nous ne disposons peut-être pas de suffisamment d'informations pour vous inscrire automatiquement.",
     expectToReceive:
-      'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     futureExpectToReceive:
-      'Si votre revenu reste le même, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Si votre revenu reste le même, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     futureExpectToReceivePartial:
-      'Si votre revenu reste le même, et vous vivez au Canada pendant {CALCULATED_YEARS_IN_CANADA} ans, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
+      'Si votre revenu reste le même, et vous vivez au Canada pendant {CALCULATED_YEARS_IN_CANADA} ans, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawbackInCanada:
-      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous devrez rembourser une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
+      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous devrez rembourser une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     futureOasClawbackInCanada:
-      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
+      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
-      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de&nbsp;: <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
+      "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
     oas: {
       eligibleIfIncomeIsLessThan:
-        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
+        "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
       dependOnYourIncome:
-        'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
+        'Selon votre revenu, vous pourriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
       eligibleIncomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       futureEligibleIncomeTooHigh:
-        'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
+        'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
       serviceCanadaReviewYourPayment:
         'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
         'Vous recevrez automatiquement des paiements si votre revenu vous rend admissible.',
       youWillReceiveLetter:
-        "Vous devriez recevoir une lettre au sujet de votre status d'inscription le mois après votre 64e anniversaire.",
+        "Vous devriez recevoir une lettre au sujet de votre status d'inscription le mois après votre 64e anniversaire.",
       youShouldReceiveLetter:
-        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
-        "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+        "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       ifYouDidnt:
         "Si vous ne l'avez pas reçue, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       applyOnline:
@@ -437,17 +437,17 @@ const fr: Translations = {
       over70:
         'Si vous avez plus de 70 ans et ne recevez pas la pension la Sécurité de la vieillesse, présentez votre demande dès que possible.',
       eligibleWhenTurn65:
-        "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
+        "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
         "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
-        'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
+        'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       futureEligibleIncomeTooHigh:
-        'Vous pourriez être admissible lorsque vous aurez 65 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
+        'Vous pourriez être admissible lorsque vous aurez 65 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
       ifYouApply:
         'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est admissible.',
       canApplyOnline:
@@ -476,12 +476,12 @@ const fr: Translations = {
       text: 'Parce que {INCOME_SINGLE_OR_COMBINED} dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être rembourser {OAS_CLAWBACK} en {LINK_RECOVERY_TAX}.',
     },
     oasIncreaseAt75: {
-      heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
-      text: 'Lorsque vous aurez 75&nbsp;ans, vos paiements augmenteront de 10&nbsp;%.',
+      heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
+      text: 'Lorsque vous aurez 75 ans, vos paiements augmenteront de 10 %.',
     },
     oasIncreaseAt75Applied: {
-      heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
-      text: 'Parce que vous avez plus de 75&nbsp;ans, vos paiements ont augmenté de 10&nbsp;%.',
+      heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
+      text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10 %.',
     },
     calculatedBasedOnIndividualIncome: {
       heading: 'Les montants ont été calculés à partir du revenu individuel',
@@ -489,11 +489,11 @@ const fr: Translations = {
     },
     partnerEligible: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: "Selon vos renseignements, votre conjoint pourrait recevoir&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
+      text: "Selon vos renseignements, votre conjoint pourrait recevoir {PARTNER_BENEFIT_AMOUNT} par mois. Votre conjoint peut utiliser l'estimateur pour obtenir des résultats détaillés.",
     },
     partnerDependOnYourIncome: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ&nbsp;{PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
+      text: 'Selon votre revenu, vous pourriez vous attendre à recevoir environ {PARTNER_BENEFIT_AMOUNT} par mois. Fournissez votre revenu pour obtenir une estimation précise.',
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Votre conjoint pourrait être admissible',
@@ -516,7 +516,7 @@ const fr: Translations = {
     [SummaryState.UNAVAILABLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, nous sommes incapables de déterminer votre admissibilité. Nous vous invitons à {LINK_SERVICE_CANADA}.",
     [SummaryState.AVAILABLE_ELIGIBLE]:
-      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT_SUM}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
+      "Selon les renseignements que vous avez fournis aujourd'hui, vous êtes probablement admissible à un montant mensuel total estimé à {ENTITLEMENT_AMOUNT_SUM}. Notez que les montants ne sont qu'une estimation de votre paiement mensuel. Des changements dans votre situation peuvent affecter vos résultats.",
     [SummaryState.AVAILABLE_INELIGIBLE]:
       "Selon les renseignements que vous avez fournis aujourd'hui, vous n'avez probablement pas droit à des prestations. Voir les détails ci-dessous pour en savoir plus.",
     [SummaryState.AVAILABLE_DEPENDING]:
