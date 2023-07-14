@@ -18,50 +18,34 @@ import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
 import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
+import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
-
-const getEstimatedMonthlyTotalLinkText = (
-  entitlementSum: number,
-  resultsEligible: BenefitResult[],
-  tsln: WebTranslations,
-  textFor = 'client'
-): string => {
-  if (textFor === 'client') {
-    if (resultsEligible.length <= 0) {
-      return `${tsln.resultsPage.youAreNotEligible}`
-    } else {
-      return `${tsln.resultsPage.yourEstimatedTotal}`
-    }
-  }
-
-  // text for partner links
-  if (resultsEligible.length <= 0) {
-    return `${tsln.resultsPage.partnerNotEligible}`
-  } else {
-    return `${tsln.resultsPage.partnerEstimatedTotal}`
-  }
-}
+import { flattenArray } from './utils'
 
 const getEligibility = (
-  resultsArray: BenefitResult[],
+  resultsEligible: BenefitResult[],
   key: string
 ): boolean => {
-  const eligibityResult = resultsArray.find((r) => r.benefitKey === key)
-    .eligibility.result
-  return (
-    eligibityResult === ResultKey.ELIGIBLE ||
-    eligibityResult === ResultKey.INCOME_DEPENDENT
-  )
+  return resultsEligible.some((benefit) => benefit.benefitKey === key)
 }
 
 const ResultsPage: React.VFC<{
   inputs: FieldInput[]
   results: BenefitResultsObject
+  futureClientResults: any
   partnerResults: BenefitResultsObject
+  futurePartnerResults: any
   summary: SummaryObject
-}> = ({ inputs, results, partnerResults, summary }) => {
+}> = ({
+  inputs,
+  results,
+  futureClientResults,
+  partnerResults,
+  futurePartnerResults,
+  summary,
+}) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
@@ -75,12 +59,9 @@ const ResultsPage: React.VFC<{
       'value'
     ] === PartnerBenefitStatus.NONE
 
+  // CURRENT CLIENT
   const resultsArray: BenefitResult[] = Object.keys(results).map(
     (value) => results[value]
-  )
-
-  const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
-    (value) => partnerResults[value]
   )
 
   const resultsEligible: BenefitResult[] = resultsArray.filter(
@@ -89,63 +70,110 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  // CURRENT PARTNER
+  const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
+    (value) => partnerResults[value]
+  )
+
   const partnerResultsEligible: BenefitResult[] = partnerResultsArray.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
-  const getListLinks = () => {
-    let listLinks: {
-      text: string
-      url: string
-      eligible?: boolean
-    }[] = [
-      {
-        text: getEstimatedMonthlyTotalLinkText(
-          summary.entitlementSum,
-          resultsEligible,
-          tsln
-        ),
-        url: '#estimate',
-      },
+  // FUTURE CLIENT
+  const futureClientEligibleArray = flattenArray(futureClientResults)
+
+  // FUTURE PARTNER
+  const futurePartnerEligibleArray = flattenArray(futurePartnerResults)
+
+  const getListLinks: any = () => {
+    const getFirstLinks = () => {
+      const tempLinks = []
+
+      if (resultsEligible.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.yourEstimatedTotal,
+          url: '#estimate',
+        })
+      }
+
+      if (
+        resultsEligible.length === 0 &&
+        futureClientEligibleArray.length === 0
+      ) {
+        tempLinks.push({
+          text: tsln.resultsPage.youAreNotEligible,
+          url: '#estimate',
+        })
+      }
+
+      if (futureClientEligibleArray.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.futureEligible,
+          url: '#future-estimate',
+        })
+      }
+
+      if (isPartnered && partnerResultsEligible.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.partnerEstimatedTotal,
+          url: '#partner-estimate',
+        })
+      }
+
+      if (
+        isPartnered &&
+        partnerResultsEligible.length === 0 &&
+        futurePartnerEligibleArray.length === 0
+      ) {
+        tempLinks.push({
+          text: tsln.resultsPage.partnerNotEligible,
+          url: '#partner-estimate',
+        })
+      }
+
+      if (isPartnered && futurePartnerEligibleArray.length !== 0) {
+        tempLinks.push({
+          text: tsln.resultsPage.partnerFutureEligible,
+          url: '#future-partner-estimate',
+        })
+      }
+
+      return tempLinks
+    }
+
+    let listLinks: any = [
+      ...getFirstLinks(),
       {
         text: tsln.resultsPage.whatYouToldUs,
         url: '#answers',
       },
       {
         text: apiTsln.benefit['oas'],
+        id: 'oas',
         url: '#oas',
-        eligible: getEligibility(resultsArray, 'oas'),
+        eligible: getEligibility(resultsEligible, 'oas'),
       },
       {
         text: apiTsln.benefit['gis'],
+        id: 'gis',
         url: '#gis',
-        eligible: getEligibility(resultsArray, 'gis'),
+        eligible: getEligibility(resultsEligible, 'gis'),
       },
       {
         text: apiTsln.benefit['alw'],
+        id: 'alw',
         url: '#alw',
-        eligible: getEligibility(resultsArray, 'alw'),
+        eligible: getEligibility(resultsEligible, 'alw'),
       },
       {
         text: apiTsln.benefit['alws'],
+        id: 'alws',
         url: '#alws',
-        eligible: getEligibility(resultsArray, 'alws'),
+        eligible: getEligibility(resultsEligible, 'alws'),
       },
     ]
-
-    if (isPartnered) {
-      listLinks.splice(1, 0, {
-        text: getEstimatedMonthlyTotalLinkText(
-          summary.partnerEntitlementSum,
-          partnerResultsEligible,
-          tsln,
-          'partner'
-        ),
-        url: '#partnerEstimate',
-      })
-    }
 
     // filtered out the link item which text is empty.
     listLinks = listLinks.filter((ll) => ll.text)
@@ -160,6 +188,27 @@ const ResultsPage: React.VFC<{
       if (!a.eligible && b.eligible) {
         return 1
       }
+
+      // This accounts for future planning results and preserves the order of links as they appear in the future eligible array
+      if (!a.eligible && !b.eligible) {
+        let aIndex = futureClientEligibleArray.findIndex(
+          (benefit) => benefit.benefitKey === a.id
+        )
+        let bIndex = futureClientEligibleArray.findIndex(
+          (benefit) => benefit.benefitKey === b.id
+        )
+
+        if (aIndex > -1 && bIndex > -1) {
+          return aIndex - bIndex
+        }
+        if (aIndex > -1) {
+          return -1
+        }
+        if (bIndex > -1) {
+          return 1
+        }
+      }
+
       return 0
     }
 
@@ -185,7 +234,17 @@ const ResultsPage: React.VFC<{
               partnerNoOAS={partnerNoOAS}
             />
           )}
-          <MayBeEligible resultsEligible={resultsEligible} />
+
+          {futureClientResults && (
+            <WillBeEligible
+              futureResults={futureClientResults}
+              partnerNoOAS={partnerNoOAS}
+            />
+          )}
+
+          {!futureClientResults && (
+            <MayBeEligible resultsEligible={resultsEligible} />
+          )}
 
           {isPartnered && partnerResultsEligible.length > 0 && (
             <EstimatedTotal
@@ -197,7 +256,15 @@ const ResultsPage: React.VFC<{
             />
           )}
 
-          {isPartnered && (
+          {futurePartnerResults && (
+            <WillBeEligible
+              futureResults={futurePartnerResults}
+              partner={true}
+              partnerNoOAS={partnerNoOAS}
+            />
+          )}
+
+          {isPartnered && !futurePartnerResults && (
             <MayBeEligible
               resultsEligible={partnerResultsEligible}
               partner={true}
@@ -210,7 +277,11 @@ const ResultsPage: React.VFC<{
         </div>
         <div className="col-span-2 row-span-1">
           <BenefitCards
+            inputAge={Math.floor(
+              Number(inputs.find((input) => input.key === 'age').value)
+            )}
             results={resultsArray}
+            futureClientResults={futureClientResults}
             partnerResults={partnerResultsArray}
           />
 
