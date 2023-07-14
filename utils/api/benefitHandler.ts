@@ -382,7 +382,13 @@ export class BenefitHandler {
     }
 
     // Moving onto ALW, again only doing eligibility.
-    const clientAlw = new AlwBenefit(this.input.client, this.translations)
+    const clientAlw = new AlwBenefit(
+      this.input.client,
+      this.translations,
+      false,
+      false,
+      this.future
+    )
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
 
     // task #115349 overwrite eligibility when conditions are met.

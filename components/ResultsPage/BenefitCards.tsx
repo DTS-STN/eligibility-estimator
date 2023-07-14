@@ -82,16 +82,16 @@ export const BenefitCards: React.VFC<{
     )
   })
 
-  console.log('resultsEligible', resultsEligible)
-  console.log('futureEligible', futureClientEligible) // keep only first occurences of the benefit, then check against resultsEligible. Omit if in that array
-  console.log('resultsNotEligible', resultsNotEligible)
+  // console.log('resultsEligible', resultsEligible)
+  // console.log('futureEligible', futureClientEligible) // keep only first occurences of the benefit, then check against resultsEligible. Omit if in that array
+  // console.log('resultsNotEligible', resultsNotEligible)
 
   const futureEligibleFirst = getFirstOccurences(futureClientEligible)
   const futureEligibleToDisplay = omitCommonBenefitKeys(
     futureEligibleFirst,
     resultsEligible
   )
-  console.log('futuerEligibleToDisplay', futureEligibleToDisplay)
+  // console.log('futuerEligibleToDisplay', futureEligibleToDisplay)
 
   const partnerResultsEligible = partnerResults.filter(
     (result) =>
@@ -219,18 +219,24 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.ifNotReceiveLetter64}</p>`
       }
     } else if (benefitKey === BenefitKey.alw) {
-      if (
-        result.eligibility.result === ResultKey.ELIGIBLE &&
-        result.entitlement.result === 0
-      ) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent =
+      if (result.eligibility.result === ResultKey.ELIGIBLE) {
+        const ifYouApplyText =
           apiTsln.detail.alwIfYouApply +
           `<strong>${numberToStringCurrency(
             legalValues.alw.alwIncomeLimit,
             apiTsln._language,
             { rounding: 0 }
           )}</strong>.`
+
+        if (inputAge < 60) {
+          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+          nextStepText.nextStepContent += apiTsln.detail.alwsApply
+          if (result.entitlement.result === 0) {
+            nextStepText.nextStepContent += ifYouApplyText
+          }
+        } else if (result.entitlement.result === 0) {
+          nextStepText.nextStepContent += ifYouApplyText
+        }
       }
     } else if (benefitKey === BenefitKey.alws) {
       if (result.eligibility.result === ResultKey.ELIGIBLE) {

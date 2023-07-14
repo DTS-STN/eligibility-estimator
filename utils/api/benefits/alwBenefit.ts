@@ -19,15 +19,18 @@ import { EntitlementFormula } from './entitlementFormula'
 export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
   single: Boolean
+  future: Boolean
   relevantIncome: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
     partner?: Boolean,
-    single?: Boolean
+    single?: Boolean,
+    future?: Boolean
   ) {
     super(input, translations, BenefitKey.alw)
     this.partner = partner
+    this.future = future
     this.relevantIncome = single
       ? this.input.income.client
       : this.input.income.relevant
@@ -92,7 +95,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
-            detail: this.translations.detail.eligible,
+            detail: this.future
+              ? this.translations.detail.futureEligible60
+              : this.translations.detail.eligible,
           }
         }
       } else if (this.input.age == 59) {
@@ -151,7 +156,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
       return {
         result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,
-        detail: this.translations.detail.alwEligibleIncomeTooHigh,
+        detail: this.future
+          ? this.translations.detail.futureEligibleIncomeTooHigh2
+          : this.translations.detail.alwEligibleIncomeTooHigh,
       }
     } else if (!meetsReqCountry) {
       return {
@@ -263,6 +270,20 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
    */
   protected getAutoEnrollment(): boolean {
     return false
+  }
+
+  protected getCardText(): string {
+    let text = this.eligibility.detail
+
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      this.entitlement.result > 0
+    ) {
+      text += this.future
+        ? ` ${this.translations.detail.futureExpectToReceive}`
+        : ` ${this.translations.detail.expectToReceive}`
+    }
+    return text
   }
 
   protected getCardCollapsedText(): CardCollapsedText[] {

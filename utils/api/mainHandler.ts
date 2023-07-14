@@ -117,9 +117,12 @@ function getFutureResults(query, locale) {
           futureHandler.benefitResults.client
         )
 
-        Object.keys(clientEligibleBenefits).forEach((benefit) => {
-          benefitCounter[benefit] += 1
-        })
+        if (clientEligibleBenefits) {
+          Object.keys(clientEligibleBenefits).forEach((benefit) => {
+            benefitCounter[benefit] += 1
+          })
+        }
+
         const partnerEligibleBenefits = getEligibleBenefits(
           futureHandler.benefitResults.partner
         )

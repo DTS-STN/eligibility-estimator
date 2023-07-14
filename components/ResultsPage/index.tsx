@@ -24,28 +24,6 @@ import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { flattenArray } from './utils'
 
-const getEstimatedMonthlyTotalLinkText = (
-  entitlementSum: number,
-  length: number,
-  tsln: WebTranslations,
-  textFor = 'client'
-): string => {
-  if (textFor === 'client') {
-    if (length <= 0) {
-      return `${tsln.resultsPage.youAreNotEligible}`
-    } else {
-      return `${tsln.resultsPage.yourEstimatedTotal}`
-    }
-  }
-
-  // text for partner links
-  if (length <= 0) {
-    return `${tsln.resultsPage.partnerNotEligible}`
-  } else {
-    return `${tsln.resultsPage.partnerEstimatedTotal}`
-  }
-}
-
 const getEligibility = (
   resultsEligible: BenefitResult[],
   key: string
@@ -91,6 +69,7 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
+  console.log('resultsEligible', resultsEligible)
 
   // CURRENT PARTNER
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
@@ -102,12 +81,15 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
+  console.log('partnerResultsEligible', partnerResultsEligible)
 
   // FUTURE CLIENT
   const futureClientEligibleArray = flattenArray(futureClientResults)
+  console.log('futureClientEligibleArray', futureClientEligibleArray)
 
   // FUTURE PARTNER
   const futurePartnerEligibleArray = flattenArray(futurePartnerResults)
+  console.log('futurePartnerEligibleArray', futurePartnerEligibleArray)
 
   const getListLinks: any = () => {
     const getFirstLinks = () => {
@@ -139,17 +121,22 @@ const ResultsPage: React.VFC<{
 
       if (isPartnered && partnerResultsEligible.length !== 0) {
         tempLinks.push({
-          text: getEstimatedMonthlyTotalLinkText(
-            summary.partnerEntitlementSum,
-            partnerResultsEligible.length,
-            tsln,
-            'partner'
-          ),
+          text: tsln.resultsPage.partnerEstimatedTotal,
           url: '#partner-estimate',
         })
       }
 
-      if (futurePartnerEligibleArray.length !== 0) {
+      if (
+        partnerResultsEligible.length === 0 &&
+        futurePartnerEligibleArray.length === 0
+      ) {
+        tempLinks.push({
+          text: tsln.resultsPage.partnerNotEligible,
+          url: '#partner-estimate',
+        })
+      }
+
+      if (isPartnered && futurePartnerEligibleArray.length !== 0) {
         tempLinks.push({
           text: tsln.resultsPage.partnerFutureEligible,
           url: '#future-partner-estimate',
