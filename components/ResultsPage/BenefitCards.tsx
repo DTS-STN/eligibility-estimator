@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react'
+import React from 'react'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -12,7 +12,6 @@ import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 import { DeferralTable } from './DeferralTable'
 import { generateLink } from '../../utils/api/definitions/textReplacementRules'
-import { FieldInput } from '../../client-state/InputHelper'
 import {
   flattenArray,
   getFirstOccurences,

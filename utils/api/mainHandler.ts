@@ -198,37 +198,3 @@ export default class MainHandler {
     this.results = resultObj
   }
 }
-
-// value // when calculatng PRESENT
-age: 65.17
-income: 0
-invSeparated: false
-legalStatus: 'yes'
-livedOnlyInCanada: true
-livingCountry: 'CAN'
-maritalStatus: 'partnered'
-partnerAge: 70.5
-partnerBenefitStatus: 'none'
-partnerIncome: 4000
-partnerLegalStatus: 'yes'
-partnerLivedOnlyInCanada: true
-partnerLivingCountry: 'CAN'
-receiveOAS: false
-_language: 'en'
-
-// newValue // when calculating FUTURE
-age: 65.17
-income: 0
-invSeparated: false
-legalStatus: 'yes'
-livedOnlyInCanada: true
-livingCountry: 'CAN'
-maritalStatus: 'partnered'
-partnerAge: 70.5
-partnerBenefitStatus: 'none'
-partnerIncome: 4000
-partnerLegalStatus: 'yes'
-partnerLivedOnlyInCanada: true
-partnerLivingCountry: 'CAN'
-receiveOAS: false
-_language: 'en'
