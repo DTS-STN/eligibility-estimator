@@ -219,7 +219,7 @@ const ResultsPage: React.VFC<{
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2 row-span-1">
-          <div> {tsln.resultsPage.general} </div>
+          <div dangerouslySetInnerHTML={{ __html: tsln.resultsPage.general }} />
 
           <ListLinks
             title={tsln.resultsPage.onThisPage}
