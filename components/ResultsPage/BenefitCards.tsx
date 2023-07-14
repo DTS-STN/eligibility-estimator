@@ -178,7 +178,7 @@ export const BenefitCards: React.VFC<{
         ) {
           nextStepText.nextStepContent +=
             apiTsln.detail.oas.youShouldHaveReceivedLetter
-          console.log('#3')
+
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (
           (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
@@ -194,7 +194,6 @@ export const BenefitCards: React.VFC<{
             nextStepText.nextStepContent +=
               apiTsln.detail.oas.youWillReceiveLetter
           } else if (inputAge === 64) {
-            console.log('point #2')
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
           } else {
             // default when 65-69
