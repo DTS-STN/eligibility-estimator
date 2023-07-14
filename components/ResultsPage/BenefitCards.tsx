@@ -159,8 +159,6 @@ export const BenefitCards: React.VFC<{
             nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.over70}</p>`
           }
 
-          //nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>` old line before code for future
-
           //code for future --start--
           if (inputAge < 64) {
             nextStepText.nextStepContent +=
