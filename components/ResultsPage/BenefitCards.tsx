@@ -152,25 +152,32 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
 
         if (result.entitlement.clawback > 0) {
+          if (!receivingOAS) {
+            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
+          }
           if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
-            nextStepText.nextStepContent += `<p class='mb-6'>${apiTsln.detail.oas.over70}</p>`
+            nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.over70}</p>`
           }
 
+          //code for future --start--
           if (inputAge < 64) {
             nextStepText.nextStepContent +=
               apiTsln.detail.oas.youWillReceiveLetter
           } else if (inputAge === 64) {
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
           } else {
-            nextStepText.nextStepContent +=
-              apiTsln.detail.oas.serviceCanadaReviewYourPayment
+            nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
           }
+          //code for future --end--
         } else if (
           (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
             result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
           result.entitlement.result > 0 &&
           receivingOAS
         ) {
+          nextStepText.nextStepContent +=
+            apiTsln.detail.oas.youShouldHaveReceivedLetter
+
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (
           (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
@@ -181,16 +188,17 @@ export const BenefitCards: React.VFC<{
         ) {
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimateWhenZero}</p>`
         } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
+          //code for future --start--
           if (inputAge < 64) {
             nextStepText.nextStepContent +=
               apiTsln.detail.oas.youWillReceiveLetter
           } else if (inputAge === 64) {
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
           } else {
-            nextStepText.nextStepContent +=
-              apiTsln.detail.oas.youShouldHaveReceivedLetter
-            // nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.applyOnline}</p>`
+            // default when 65-69
+            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
           }
+          //code for future --end--
         } else if (
           result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
           receivingOAS
