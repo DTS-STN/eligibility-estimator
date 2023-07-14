@@ -18,7 +18,7 @@ export const ErrorsSummary: any = ({ errorFields }) => {
           <li key={field.key}>
             <DSLink
               id={`errorbox-${field.key}`}
-              href={`eligibility#${field.key}`}
+              href={`questions#${field.key}`}
               text={field.error}
               target="_self"
               ariaLabel={tsln.resultsEditAriaLabels[field.key]}

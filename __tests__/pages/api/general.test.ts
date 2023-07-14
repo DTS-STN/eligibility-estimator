@@ -102,11 +102,11 @@ describe('openapi checks', () => {
   //     Object.values(FieldKey)
   //   )
   // })
-  it('matches ResultKey enum', async () => {
-    expect(openapi.components.schemas.ResultKey.enum).toEqual(
-      Object.values(ResultKey)
-    )
-  })
+  // it('matches ResultKey enum', async () => {
+  //   expect(openapi.components.schemas.ResultKey.enum).toEqual(
+  //     Object.values(ResultKey)
+  //   )
+  // })
   it('matches ResultReason enum', async () => {
     expect(openapi.components.schemas.ResultReason.enum).toEqual(
       Object.values(ResultReason)

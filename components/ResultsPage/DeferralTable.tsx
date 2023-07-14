@@ -4,7 +4,10 @@ import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { TableData } from '../../utils/api/definitions/types'
 
-export const DeferralTable: React.VFC<{ data: TableData[] }> = ({ data }) => {
+export const DeferralTable: React.VFC<{
+  data: TableData[]
+  future: boolean
+}> = ({ data, future }) => {
   const tsln = useTranslation<WebTranslations>()
   const locale = useRouter().locale
   const apiTsln = getTranslations(tsln._language)
@@ -21,7 +24,9 @@ export const DeferralTable: React.VFC<{ data: TableData[] }> = ({ data }) => {
       <thead>
         <tr>
           <th scope="col" className="border border-gray-800 bg-gray-100 p-4">
-            {apiTsln.oasDeferralTable.headingAge}
+            {future
+              ? apiTsln.oasDeferralTable.futureHeadingAge
+              : apiTsln.oasDeferralTable.headingAge}
           </th>
           <th scope="col" className="border border-gray-800 bg-gray-100">
             {apiTsln.oasDeferralTable.headingAmount}

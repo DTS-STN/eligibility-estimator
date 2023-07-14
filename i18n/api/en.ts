@@ -31,6 +31,7 @@ const en: Translations = {
   result: {
     [ResultKey.ELIGIBLE]: 'Eligible',
     [ResultKey.INELIGIBLE]: 'Not\xA0eligible',
+    [ResultKey.WILL_BE_ELIGIBLE]: 'Will\xA0be\xA0eligible',
     [ResultKey.UNAVAILABLE]: 'Unavailable',
     [ResultKey.MORE_INFO]: 'Need more information...',
     [ResultKey.INVALID]: 'Request is invalid!',
@@ -311,8 +312,14 @@ const en: Translations = {
   },
   detail: {
     eligible: "You're likely eligible for this benefit.",
+    futureEligible60: "You'll likely be eligible once you turn 60.",
+    futureEligible65: "You'll likely be eligible once you turn 65.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+    futureEligibleIncomeTooHigh:
+      'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+    futureEligibleIncomeTooHigh2:
+      'You may be eligible once you turn 60. If your income stays the same, you may not receive a monthly payment.',
     eligibleDependingOnIncome:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
@@ -324,6 +331,8 @@ const en: Translations = {
     yourDeferralOptions: 'Your deferral options',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
+    futureDeferralOptions:
+      "You can start receving your payments at 65 or wait until you're 70.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
@@ -363,6 +372,8 @@ const en: Translations = {
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guaranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
       'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
+    thisEstimateWhenZero:
+      'This estimate is based on the information you provided. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
@@ -373,16 +384,23 @@ const en: Translations = {
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
+    alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
     autoEnrollFalse:
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+    futureExpectToReceive:
+      'If your income stays the same, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+    futureExpectToReceivePartial:
+      'If your income stays the same, and you live in Canada for {CALCULATED_YEARS_IN_CANADA} years, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawbackInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    futureOasClawbackInCanada:
+      "Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
-      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you will have to repay some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
+      'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
@@ -390,15 +408,22 @@ const en: Translations = {
         'Depending on your income, you can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month. Provide your income to get an accurate estimate.',
       eligibleIncomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+      futureEligibleIncomeTooHigh:
+        'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
         'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
+      youWillReceiveLetter:
+        'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldReceiveLetter:
         'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
-      applyOnline: "If you didn't, you can apply online.",
+      ifYouDidnt:
+        "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+      applyOnline:
+        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
@@ -411,8 +436,15 @@ const en: Translations = {
         'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
+      futureEligibleIncomeTooHigh:
+        'You may be eligible once you turn 65. If your income stays the same, you may not receive a monthly payment.',
       ifYouApply:
         "<p class='mt-6'>If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.</p>",
+      canApplyOnline: 'You can apply for this benefit online.',
+      ifYouAlreadyApplied:
+        'If you already applied for the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
+      ifYouAlreadyReceive:
+        'If you already receive the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
     },
   },
   detailWithHeading: {
@@ -479,6 +511,7 @@ const en: Translations = {
   oasDeferralTable: {
     title: 'Estimated deferral amounts',
     headingAge: 'If you wait until age...',
+    futureHeadingAge: 'If you start receiving at age...',
     headingAmount: 'Your monthly payment could be...',
   },
   links,
