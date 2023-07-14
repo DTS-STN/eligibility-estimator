@@ -52,13 +52,18 @@ export interface Translations {
   }
   detail: {
     eligible: string
+    futureEligible60: string
+    futureEligible65: string
     eligibleIncomeTooHigh: string
+    futureEligibleIncomeTooHigh: string
+    futureEligibleIncomeTooHigh2: string
     eligibleDependingOnIncome: string
     eligibleDependingOnIncomeNoEntitlement: string
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     yourDeferralOptions: string
     sinceYouAreSixty: string
+    futureDeferralOptions: string
     youCanAply: string
     delayMonths: string
     eligibleWhen60ApplyNow: string
@@ -85,19 +90,26 @@ export interface Translations {
     alwEligibleIncomeTooHigh: string
     alwIfYouApply: string
     afsNotEligible: string
+    alwsApply: string
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
+    futureExpectToReceive: string
+    futureExpectToReceivePartial: string
     oasClawbackInCanada: string
+    futureOasClawbackInCanada: string
     oasClawbackNotInCanada: string
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string
       eligibleIncomeTooHigh: string
+      futureEligibleIncomeTooHigh: string
       serviceCanadaReviewYourPayment: string
       automaticallyBePaid: string
+      youWillReceiveLetter: string
       youShouldReceiveLetter: string
       youShouldHaveReceivedLetter: string
+      ifYouDidnt: string
       applyOnline: string
       over70: string
       eligibleWhenTurn65: string
@@ -106,6 +118,7 @@ export interface Translations {
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string
       incomeTooHigh: string
+      futureEligibleIncomeTooHigh: string
       ifYouApply: string
       canApplyOnline: string
       ifYouAlreadyApplied: string
@@ -129,6 +142,7 @@ export interface Translations {
   oasDeferralTable: {
     title: string
     headingAge: string
+    futureHeadingAge: string
     headingAmount: string
   }
   links: LinkDefinitions

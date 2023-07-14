@@ -56,6 +56,7 @@ export enum ResultKey {
   MORE_INFO = 'moreInfo',
   INVALID = 'invalid',
   INCOME_DEPENDENT = 'incomeDependent',
+  WILL_BE_ELIGIBLE = 'willBeEligible',
 }
 
 // not displayed in the UI
