@@ -153,7 +153,7 @@ export const BenefitCards: React.VFC<{
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
 
         if (result.entitlement.clawback > 0) {
-          if (!receivingOAS) {
+          if (!receivingOAS && inputAge > 64) {
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
           }
           if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
