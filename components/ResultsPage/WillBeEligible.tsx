@@ -34,7 +34,7 @@ export const WillBeEligible: React.VFC<{
           partner
             ? tsln.resultsPage.partnerToReceive
             : tsln.resultsPage.toReceive
-        }:`
+        }`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
           (value) => resultObj[age][value]
