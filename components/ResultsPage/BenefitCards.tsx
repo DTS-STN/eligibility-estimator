@@ -156,6 +156,7 @@ export const BenefitCards: React.VFC<{
           if (!receivingOAS && inputAge > 64) {
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
           }
+
           if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
             nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.over70}</p>`
           }
@@ -166,8 +167,18 @@ export const BenefitCards: React.VFC<{
               apiTsln.detail.oas.youWillReceiveLetter
           } else if (inputAge === 64) {
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
+          } else if (
+            (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
+              result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
+            result.entitlement.result > 0 &&
+            receivingOAS
+          ) {
+            //TODO  duplicating the code here, will refactor later TODO
+            nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
           } else {
-            nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`
+            !receivingOAS
+              ? (nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`)
+              : ''
           }
           //code for future --end--
         } else if (
@@ -194,7 +205,9 @@ export const BenefitCards: React.VFC<{
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
           } else {
             // default when 65-69
-            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
+            !receivingOAS
+              ? (nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`)
+              : ''
           }
           //code for future --end--
         } else if (
@@ -208,18 +221,23 @@ export const BenefitCards: React.VFC<{
         ) {
           nextStepText.nextStepContent += apiTsln.detail.oas.over70
         } else if (result.entitlement.clawback === 0) {
+          //code for future --start--
           if (inputAge < 64) {
             nextStepText.nextStepContent +=
               apiTsln.detail.oas.youWillReceiveLetter
           } else if (inputAge === 64) {
             nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
           } else {
-            nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`
+            !receivingOAS
+              ? (nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`)
+              : ''
+
             result.eligibility.reason === ResultReason.INCOME
               ? (nextStepText.nextStepContent +=
                   ' ' + apiTsln.detail.oas.automaticallyBePaid)
               : ''
           }
+          //code for future --end--
         }
       } else if (
         result.eligibility.result === ResultKey.INELIGIBLE &&
