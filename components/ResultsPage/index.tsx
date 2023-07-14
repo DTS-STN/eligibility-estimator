@@ -127,6 +127,7 @@ const ResultsPage: React.VFC<{
       }
 
       if (
+        isPartnered &&
         partnerResultsEligible.length === 0 &&
         futurePartnerEligibleArray.length === 0
       ) {
