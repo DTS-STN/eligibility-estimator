@@ -422,8 +422,7 @@ const en: Translations = {
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
         "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
-      applyOnline:
-        "If you didn't receive a letter about the Old Age Security pension the month after you turned 64, you can apply online.",
+      applyOnline: "If you didn't, you can apply online.",
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
