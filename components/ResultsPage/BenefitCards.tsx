@@ -183,7 +183,8 @@ export const BenefitCards: React.VFC<{
           nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
         } else if (
           (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
-            result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
+            result.eligibility.reason === ResultReason.AGE_70_AND_OVER ||
+            result.eligibility.reason === ResultReason.INCOME) &&
           result.entitlement.result === 0 &&
           receivingOAS
         ) {
