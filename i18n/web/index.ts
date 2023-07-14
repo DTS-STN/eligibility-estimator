@@ -137,7 +137,9 @@ export type WebTranslations = {
     basedOnPartnerInfoTotal: string
     basedOnPartnerInfoAndIncomeTotal: string
     total: string
+    futureTotal: string
     partnerTotal: string
+    futurePartnerTotal: string
     ifIncomeNotProvided: string
     nextSteps: string
     youMayNotBeEligible: string
@@ -153,6 +155,10 @@ export type WebTranslations = {
     CTABody: string
     CTAButton: string
     month: string
+    futureEligible: string
+    partnerFutureEligible: string
+    toReceive: string
+    partnerToReceive: string
     //nextStepOas: string
   }
 
