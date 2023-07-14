@@ -1353,15 +1353,6 @@ export class BenefitHandler {
           clawbackValue =
             this.benefitResults[individualBenefits][key].entitlement.clawback
 
-          const indexOf = newMainText.indexOf(
-            this.translations.detail.yourDeferralOptions
-          )
-          // Insert oasClawback message before Deferral message
-
-          if (indexOf > 0) {
-            newMainText = result.cardDetail.mainText.substring(0, indexOf - 43)
-          }
-
           if (this.input.client.livingCountry.canada) {
             newMainText =
               clawbackValue > 0 && result.cardDetail.mainText
@@ -1374,15 +1365,9 @@ export class BenefitHandler {
           } else {
             newMainText =
               clawbackValue > 0 && result.cardDetail.mainText
-                ? newMainText +
+                ? result.cardDetail.mainText +
                   `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
                 : result.cardDetail.mainText
-          }
-
-          if (indexOf > 0) {
-            newMainText +=
-              `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>` +
-              this.translations.detail.sinceYouAreSixty
           }
         }
 
