@@ -22,6 +22,10 @@ export const textReplacementRules: TextReplacementRules = {
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
+  CALCULATED_YEARS_IN_CANADA: (handler) => {
+    const yearsInCanada = handler.rawInput.yearsInCanadaSince18
+    return String(yearsInCanada)
+  },
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.resultAt75 ?? 0,

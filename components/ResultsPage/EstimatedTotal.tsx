@@ -48,7 +48,7 @@ export const EstimatedTotal: React.VFC<{
 
   return (
     <>
-      <h2 id={partner ? 'partnerEstimate' : 'estimate'} className="h2 mt-12">
+      <h2 id={partner ? 'partner-estimate' : 'estimate'} className="h2 mt-12">
         {entitlementSum != 0 ? (
           <Image src="/money.png" alt="" width={30} height={30} />
         ) : (
@@ -65,7 +65,7 @@ export const EstimatedTotal: React.VFC<{
           }}
         />
 
-        <ul className="pl-[35px] ml-[20px] my-2 list-disc text-content">
+        <ul className="pl-[35px] ml-[20px] my-1 list-disc text-content">
           {resultsEligible.map((benefit) => (
             <EstimatedTotalItem
               key={benefit.benefitKey}
@@ -75,7 +75,7 @@ export const EstimatedTotal: React.VFC<{
           ))}
         </ul>
 
-        {entitlementSum != 0 && (
+        {entitlementSum != 0 && resultsEligible.length > 1 && (
           <p className="pl-[35px]">
             {partner ? tsln.resultsPage.partnerTotal : tsln.resultsPage.total}
             <strong>{numberToStringCurrency(entitlementSum, language)}</strong>.

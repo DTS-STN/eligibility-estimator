@@ -174,7 +174,9 @@ const fr: WebTranslations = {
     basedOnPartnerInfoAndIncomeTotal:
       'Votre conjoint pourrait être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
+    futureTotal: 'Votre montant total par mois sera ',
     partnerTotal: 'Leur montant total par mois est ',
+    futurePartnerTotal: 'Leur montant total par mois sera ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:
@@ -195,6 +197,10 @@ const fr: WebTranslations = {
       'Renseignez-vous sur les pensions publiques, le meilleur moment pour commencer à les recevoir et les conseils pour maximiser votre revenu de retraite.',
     CTAButton: 'Visiter le Carrefour retraite',
     month: 'mois',
+    futureEligible: ' Vous serez probablement admissible',
+    partnerFutureEligible: ' Votre conjoint sera probablement admissible',
+    toReceive: 'vous pourriez être admissible à recevoir',
+    partnerToReceive: 'votre conjoint pourrait être admissible à recevoir',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,
