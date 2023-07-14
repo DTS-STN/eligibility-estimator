@@ -769,7 +769,9 @@ export class BenefitHandler {
               allResults.client.gis.entitlement.type =
                 EntitlementResultType.FULL
               allResults.client.gis.eligibility.detail,
-                (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+                (allResults.client.gis.cardDetail.mainText = this.future
+                  ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                  : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
 
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
               allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
@@ -906,12 +908,13 @@ export class BenefitHandler {
               if (
                 allResults.partner.gis.entitlement.result > 0 &&
                 allResults.client.gis.entitlement.result <= 0
-              )
-                allResults.partner.gis.cardDetail.collapsedText.push(
-                  this.translations.detailWithHeading
-                    .calculatedBasedOnIndividualIncome
-                )
-
+              ) {
+                // TODO
+                // allResults.partner.gis.cardDetail.collapsedText.push(
+                //   this.translations.detailWithHeading
+                //     .calculatedBasedOnIndividualIncome
+                // )
+              }
               if (
                 !allResults.partner.gis.cardDetail.collapsedText.includes(
                   this.translations.detailWithHeading.partnerEligible
@@ -971,7 +974,9 @@ export class BenefitHandler {
 
                   // cardDetails
                   allResults.client.alw.eligibility.detail,
-                    (allResults.client.alw.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+                    (allResults.client.alw.cardDetail.mainText = this.future
+                      ? `${this.translations.detail.futureEligible60} ${this.translations.detail.futureExpectToReceive}`
+                      : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
 
                   allResults.client.alw.cardDetail.collapsedText.push(
                     this.translations.detailWithHeading
@@ -1092,7 +1097,9 @@ export class BenefitHandler {
             clientGis.entitlement.result > 0
           ) {
             allResults.client.gis.eligibility.detail,
-              (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+              (allResults.client.gis.cardDetail.mainText = this.future
+                ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
           }
 
           consoleDev(
