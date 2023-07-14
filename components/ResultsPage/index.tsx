@@ -69,7 +69,6 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
-  console.log('resultsEligible', resultsEligible)
 
   // CURRENT PARTNER
   const partnerResultsArray: BenefitResult[] = Object.keys(partnerResults).map(
@@ -81,15 +80,12 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
-  console.log('partnerResultsEligible', partnerResultsEligible)
 
   // FUTURE CLIENT
   const futureClientEligibleArray = flattenArray(futureClientResults)
-  console.log('futureClientEligibleArray', futureClientEligibleArray)
 
   // FUTURE PARTNER
   const futurePartnerEligibleArray = flattenArray(futurePartnerResults)
-  console.log('futurePartnerEligibleArray', futurePartnerEligibleArray)
 
   const getListLinks: any = () => {
     const getFirstLinks = () => {
@@ -240,7 +236,10 @@ const ResultsPage: React.VFC<{
           )}
 
           {futureClientResults && (
-            <WillBeEligible futureResults={futureClientResults} />
+            <WillBeEligible
+              futureResults={futureClientResults}
+              partnerNoOAS={partnerNoOAS}
+            />
           )}
 
           {!futureClientResults && (
@@ -261,6 +260,7 @@ const ResultsPage: React.VFC<{
             <WillBeEligible
               futureResults={futurePartnerResults}
               partner={true}
+              partnerNoOAS={partnerNoOAS}
             />
           )}
 

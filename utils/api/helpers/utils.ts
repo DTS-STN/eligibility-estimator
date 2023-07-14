@@ -67,13 +67,14 @@ export function getAgeArray(ages: number[]) {
   return result
 }
 
-export function buildQuery(query, ageSet) {
+export function buildQuery(query, ageSet, ageFraction) {
   const newQuery = { ...query }
   const [userAge, partnerAge] = ageSet
+  const [userFraction, partnerFraction] = ageFraction
 
   // CLIENT
-  newQuery['age'] = userAge
-  newQuery['partnerAge'] = partnerAge
+  newQuery['age'] = String(userAge + userFraction)
+  newQuery['partnerAge'] = String(partnerAge + partnerFraction)
 
   if (userAge >= 65) {
     addKeyValue(newQuery, 'receiveOAS', 'false')

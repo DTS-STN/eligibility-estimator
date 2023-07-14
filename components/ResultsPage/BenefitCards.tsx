@@ -82,16 +82,11 @@ export const BenefitCards: React.VFC<{
     )
   })
 
-  // console.log('resultsEligible', resultsEligible)
-  // console.log('futureEligible', futureClientEligible) // keep only first occurences of the benefit, then check against resultsEligible. Omit if in that array
-  // console.log('resultsNotEligible', resultsNotEligible)
-
   const futureEligibleFirst = getFirstOccurences(futureClientEligible)
   const futureEligibleToDisplay = omitCommonBenefitKeys(
     futureEligibleFirst,
     resultsEligible
   )
-  // console.log('futuerEligibleToDisplay', futureEligibleToDisplay)
 
   const partnerResultsEligible = partnerResults.filter(
     (result) =>
@@ -134,7 +129,6 @@ export const BenefitCards: React.VFC<{
         result.eligibility.result === ResultKey.INCOME_DEPENDENT
       ) {
         nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        console.log(result.entitlement.result, this)
         if (result.eligibility.reason === ResultReason.INCOME) {
           nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
           if (result.entitlement.result === 0) {

@@ -95,10 +95,14 @@ function getFutureResults(query, locale) {
 
   // PARTNERED
   if (query.maritalStatus === MaritalStatus.PARTNERED) {
-    const ages = [
-      Math.floor(Number(query.age)),
-      Math.floor(Number(query.partnerAge)),
-    ]
+    const age = Number(query.age)
+    const partnerAge = Number(query.partnerAge)
+    const ageFloored = Math.floor(age)
+    const partnerAgeFloored = Math.floor(partnerAge)
+
+    const ageFraction = [age - ageFloored, partnerAge - partnerAgeFloored]
+
+    const ages = [ageFloored, partnerAgeFloored]
     if (ages.some((age) => isNaN(age))) return futureResultsObj
     const futureAges = getAgeArray(ages)
 
@@ -109,7 +113,7 @@ function getFutureResults(query, locale) {
 
       futureAges.forEach((ageSet) => {
         const [userAge, partnerAge] = ageSet
-        const newQuery = buildQuery(query, ageSet)
+        const newQuery = buildQuery(query, ageSet, ageFraction)
         const { value } = schema.validate(newQuery, { abortEarly: false })
         const futureHandler = new BenefitHandler(value, true)
 
@@ -194,3 +198,37 @@ export default class MainHandler {
     this.results = resultObj
   }
 }
+
+// value // when calculatng PRESENT
+age: 65.17
+income: 0
+invSeparated: false
+legalStatus: 'yes'
+livedOnlyInCanada: true
+livingCountry: 'CAN'
+maritalStatus: 'partnered'
+partnerAge: 70.5
+partnerBenefitStatus: 'none'
+partnerIncome: 4000
+partnerLegalStatus: 'yes'
+partnerLivedOnlyInCanada: true
+partnerLivingCountry: 'CAN'
+receiveOAS: false
+_language: 'en'
+
+// newValue // when calculating FUTURE
+age: 65.17
+income: 0
+invSeparated: false
+legalStatus: 'yes'
+livedOnlyInCanada: true
+livingCountry: 'CAN'
+maritalStatus: 'partnered'
+partnerAge: 70.5
+partnerBenefitStatus: 'none'
+partnerIncome: 4000
+partnerLegalStatus: 'yes'
+partnerLivedOnlyInCanada: true
+partnerLivingCountry: 'CAN'
+receiveOAS: false
+_language: 'en'

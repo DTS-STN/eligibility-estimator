@@ -10,7 +10,8 @@ import { EstimatedTotalItem } from './EstimatedTotalItem'
 export const WillBeEligible: React.VFC<{
   futureResults: any
   partner?: boolean
-}> = ({ futureResults, partner = false }) => {
+  partnerNoOAS: boolean
+}> = ({ futureResults, partner = false, partnerNoOAS }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
@@ -39,11 +40,24 @@ export const WillBeEligible: React.VFC<{
           (value) => resultObj[age][value]
         )
 
-        const eligible = resultsArray.filter(
+        let eligible = resultsArray.filter(
           (result) =>
             result.eligibility?.result === ResultKey.ELIGIBLE ||
             result.eligibility?.result === ResultKey.INCOME_DEPENDENT
         )
+
+        // If partner answers "No" to receiving OAS, the amounts should not show
+        if (partner && partnerNoOAS) {
+          eligible = eligible.map((benefit) => {
+            return {
+              ...benefit,
+              entitlement: { ...benefit.entitlement, result: 0 },
+            }
+          })
+        }
+
+        // [{benefitKey: oas, ...}, {}]
+        console.log('eligible', eligible)
 
         const eligibleTotalAmount = eligible.reduce(
           (sum, obj) => sum + obj.entitlement.result,
