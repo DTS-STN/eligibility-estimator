@@ -100,8 +100,6 @@ function getFutureResults(query, locale) {
     const ageFloored = Math.floor(age)
     const partnerAgeFloored = Math.floor(partnerAge)
 
-    const ageFraction = [age - ageFloored, partnerAge - partnerAgeFloored]
-
     const ages = [ageFloored, partnerAgeFloored]
     if (ages.some((age) => isNaN(age))) return futureResultsObj
     const futureAges = getAgeArray(ages)
@@ -113,7 +111,7 @@ function getFutureResults(query, locale) {
 
       futureAges.forEach((ageSet) => {
         const [userAge, partnerAge] = ageSet
-        const newQuery = buildQuery(query, ageSet, ageFraction)
+        const newQuery = buildQuery(query, ageSet)
         const { value } = schema.validate(newQuery, { abortEarly: false })
         const futureHandler = new BenefitHandler(value, true)
 

@@ -16,6 +16,9 @@ export const WillBeEligible: React.VFC<{
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
 
+  const multipleOAS_GIS =
+    futureResults.filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
+
   return (
     <>
       <h2
@@ -30,7 +33,29 @@ export const WillBeEligible: React.VFC<{
 
       {futureResults.map((resultObj, idx) => {
         const age = Object.keys(resultObj)[0]
-        const text = `${language === 'en' ? 'At' : 'À'} ${age}, ${
+        const onlyOASGIS = Object.keys(
+          resultObj[Object.keys(resultObj)[0]]
+        ).filter((key) => key === 'oas' || key === 'gis')
+
+        // show if some are non zero
+        const nonZeroExist = onlyOASGIS.some(
+          (key) => resultObj[age][key].entitlement?.result > 0
+        )
+
+        const enStr =
+          multipleOAS_GIS && nonZeroExist
+            ? partner
+              ? 'If your partner starts receiving at'
+              : 'If you start receiving at'
+            : 'At'
+        const frStr =
+          multipleOAS_GIS && nonZeroExist
+            ? partner
+              ? 'Si votre conjoint commence à'
+              : 'Si vous commencez à'
+            : 'À'
+
+        const text = `${language === 'en' ? enStr : frStr} ${age}, ${
           partner
             ? tsln.resultsPage.partnerToReceive
             : tsln.resultsPage.toReceive
