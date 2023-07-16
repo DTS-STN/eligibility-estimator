@@ -201,6 +201,7 @@ const fr: WebTranslations = {
     partnerFutureEligible: ' Votre conjoint sera probablement admissible',
     toReceive: 'vous pourriez être admissible à recevoir :',
     partnerToReceive: 'votre conjoint pourrait être admissible à recevoir :',
+    theyToReceive: 'il pourrait être admissible à recevoir :',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,

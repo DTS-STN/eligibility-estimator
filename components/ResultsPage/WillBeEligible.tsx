@@ -55,10 +55,13 @@ export const WillBeEligible: React.VFC<{
               : 'Si vous commencez à'
             : 'À'
 
+        const partnerText =
+          multipleOAS_GIS && nonZeroExist
+            ? tsln.resultsPage.theyToReceive
+            : tsln.resultsPage.partnerToReceive
+
         const text = `${language === 'en' ? enStr : frStr} ${age}, ${
-          partner
-            ? tsln.resultsPage.partnerToReceive
-            : tsln.resultsPage.toReceive
+          partner ? partnerText : tsln.resultsPage.toReceive
         }`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(

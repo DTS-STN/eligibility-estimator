@@ -159,6 +159,7 @@ export type WebTranslations = {
     partnerFutureEligible: string
     toReceive: string
     partnerToReceive: string
+    theyToReceive: string
     //nextStepOas: string
   }
 
