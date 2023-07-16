@@ -14,7 +14,7 @@ const fr: WebTranslations = {
   oas: 'Pension de la Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
-  afs: 'Allocation au survivant',
+  alws: 'Allocation au survivant',
   testSiteTitle: "SITE D'ESSAI",
   testSiteHeader:
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
@@ -23,11 +23,15 @@ const fr: WebTranslations = {
   langLong: 'fra',
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
+  // alpha service canada labs breadcrumbs
+  breadcrumb1aTitle: 'Canada.ca',
+  breadcrumb1aURL: 'https://www.canada.ca',
+  breadcrumb2aTitle: 'Laboratoires de Service Canada',
+  breadcrumb2aURL:
+    'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
+  // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  // breadcrumb2Title: 'Service Canada',
-  // breadcrumb2URL:
-  //   'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
   breadcrumb2Title: 'Prestations',
   breadcrumb2URL: 'https://www.canada.ca/fr/services/prestations.html',
   breadcrumb3Title: 'Pensions publiques',
@@ -43,9 +47,9 @@ const fr: WebTranslations = {
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
   questionPageTitle:
-    'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
+    'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
   resultPageTitle:
-    'Estimateur des prestations de la Sécurité de la vieillesse : Résultats',
+    'Estimateur des prestations de la Sécurité de la vieillesse : Résultats',
   menuTitle: 'Service Canada',
   clear: 'Effacer',
   back: 'Précédent',
@@ -69,7 +73,7 @@ const fr: WebTranslations = {
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
-    "L'estimateur vous posera des questions au sujet de votre : ",
+    "L'estimateur vous posera des questions au sujet de votre : ",
   ageText: '<strong>âge</strong>',
   netIncomeText: '<strong>revenu net</strong>',
   legalStatusText: '<strong>statut légal</strong>',
@@ -94,7 +98,7 @@ const fr: WebTranslations = {
   inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter les changements au coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
   afsDefinitionText:
     'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiFr.links.overview.afs.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
+  learnMoreAboutAlws: `<a className="underline text-default-text" href="${apiFr.links.overview.alws.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
   notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
@@ -139,7 +143,7 @@ const fr: WebTranslations = {
   },
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de votre paiement mensuel. Des changements dans votre situation pourraient modifier vos résultats.`,
+    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <span style="font-weight: bold;">basée sur les montants actuels</span>. Ceux-ci peuvent augmenter avec le coût de la vie. Des changements dans votre situation pourraient aussi modifier vos résultats`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
@@ -150,9 +154,9 @@ const fr: WebTranslations = {
     partnerNotEligible:
       "Votre conjoint n'est probablement pas admissible pour le moment",
     basedOnYourInfoEligible:
-      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
+      'Selon vos renseignements, vous pourriez être admissible aux prestations suivantes :',
     basedOnYourInfoAndIncomeEligible:
-      'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
+      'En fonction de vos revenus et en fonction de vos informations, vous pourriez être éligible à :',
     basedOnYourInfoNotEligible: `Selon vos informations, vous n'êtes peut-être pas admissible aux prestations de la Sécurité de la vieillesse. Voir ci-dessous, ou ${generateLink(
       apiFr.links.SC
     )} pour plus de détails.`,
@@ -162,15 +166,17 @@ const fr: WebTranslations = {
     yourEstimatedTotal: ' Votre estimation',
     partnerEstimatedTotal: " L'estimation de votre conjoint",
     yourEstimatedNoIncome: ' Vous êtes probablement admissible',
-    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
+    basedOnYourInfoTotal: 'Votre pourriez être admissible à recevoir :',
     basedOnYourInfoAndIncomeTotal:
-      'Votre pourriez être admissible à recevoir :',
+      'Votre pourriez être admissible à recevoir :',
     basedOnPartnerInfoTotal:
-      'Votre conjoint pourrait être admissible à recevoir :',
+      'Votre conjoint pourrait être admissible à recevoir :',
     basedOnPartnerInfoAndIncomeTotal:
-      'Votre conjoint pourrait être admissible à recevoir :',
+      'Votre conjoint pourrait être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
+    futureTotal: 'Votre montant total par mois sera ',
     partnerTotal: 'Leur montant total par mois est ',
+    futurePartnerTotal: 'Leur montant total par mois sera ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:
@@ -191,6 +197,11 @@ const fr: WebTranslations = {
       'Renseignez-vous sur les pensions publiques, le meilleur moment pour commencer à les recevoir et les conseils pour maximiser votre revenu de retraite.',
     CTAButton: 'Visiter le Carrefour retraite',
     month: 'mois',
+    futureEligible: ' Vous serez probablement admissible',
+    partnerFutureEligible: ' Votre conjoint sera probablement admissible',
+    toReceive: 'vous pourriez être admissible à recevoir :',
+    partnerToReceive: 'votre conjoint pourrait être admissible à recevoir :',
+    theyToReceive: 'il pourrait être admissible à recevoir :',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,
@@ -199,7 +210,7 @@ const fr: WebTranslations = {
     empty: 'Ce renseignement est requis',
   },
   validationErrors: {
-    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
+    [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
     [ValidationErrors.receiveOASEmpty]:
       //'Veuillez indiquer si vous recevez la pension de la SV.',
       'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',

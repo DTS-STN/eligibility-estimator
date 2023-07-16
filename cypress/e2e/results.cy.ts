@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.get('#btn1').first().click()
 })
 
-describe('results page load', () => {
+describe('results page load -- english only', () => {
   it('should redirect to /result', () => {
     //Age section
     cy.get('#age-birth-month').select('June')

@@ -14,7 +14,7 @@ export interface LinkDefinitions {
   paymentOverview: Link
   gisEntitlement: Link
   alwEntitlement: Link
-  afsEntitlement: Link
+  alwsEntitlement: Link
   oasRecoveryTax: Link
   oasDefer: Link
   oasRetroactive: Link

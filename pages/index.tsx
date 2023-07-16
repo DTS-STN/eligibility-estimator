@@ -41,6 +41,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
         <meta property="og:title" content={tsln.introPageTitle} />
+        <meta name="robots" content="noindex" />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
@@ -148,11 +149,11 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAlw }}
             />
 
-            <h3 className="h3 mt-6 mb-2">{tsln.afs}</h3>
+            <h3 className="h3 mt-6 mb-2">{tsln.alws}</h3>
             <p>{tsln.afsDefinitionText}</p>
             <p
               className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAfs }}
+              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAlws }}
             />
 
             <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>

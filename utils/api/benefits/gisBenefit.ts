@@ -21,14 +21,17 @@ import { EntitlementFormula } from './entitlementFormula'
 
 export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
+  future: Boolean
   constructor(
     input: ProcessedInput,
     translations: Translations,
     private oasResult: BenefitResult<EntitlementResultOas>,
-    partner?: Boolean
+    partner?: Boolean,
+    future?: Boolean
   ) {
     super(input, translations, BenefitKey.gis)
     this.partner = partner
+    this.future = future
   }
 
   protected getEligibility(): EligibilityResult {
@@ -106,7 +109,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
-            detail: this.translations.detail.gis.incomeTooHigh,
+            detail: this.future
+              ? this.translations.detail.gis.futureEligibleIncomeTooHigh
+              : this.translations.detail.gis.incomeTooHigh,
           }
         } else if (this.input.income?.partner >= maxIncome && amount <= 0) {
           return {
@@ -124,7 +129,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
-            detail: this.translations.detail.eligible,
+            detail: this.future
+              ? this.translations.detail.futureEligible65
+              : this.translations.detail.eligible,
           }
         }
       } else {
@@ -246,7 +253,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     ) {
-      links.push(this.translations.links.apply[BenefitKey.gis])
+      !this.future && links.push(this.translations.links.apply[BenefitKey.gis])
     }
     links.push(this.translations.links.overview[BenefitKey.gis])
     return links
@@ -265,7 +272,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     ) {
       //this.eligibility.result = ResultKey.INELIGIBLE
       this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.translations.detail.gis.incomeTooHigh
+      this.eligibility.detail = this.future
+        ? this.translations.detail.gis.futureEligibleIncomeTooHigh
+        : this.translations.detail.gis.incomeTooHigh
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
@@ -284,7 +293,9 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.result > 0
     ) {
-      text += ` ${this.translations.detail.expectToReceive}`
+      text += this.future
+        ? ` ${this.translations.detail.futureExpectToReceive}`
+        : ` ${this.translations.detail.expectToReceive}`
     }
 
     return text
@@ -306,7 +317,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.partner !== true &&
       this.entitlement.result !== 0 &&
       ageInOasRange &&
-      !this.input.receiveOAS
+      !this.input.receiveOAS &&
+      !this.future
     ) {
       cardCollapsedText.push(
         this.translations.detailWithHeading.ifYouDeferYourPension

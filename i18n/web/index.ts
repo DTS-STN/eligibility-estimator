@@ -32,7 +32,7 @@ export type WebTranslations = {
   learnMoreAboutAlw: string
   inflationInfo: string
   afsDefinitionText: string
-  learnMoreAboutAfs: string
+  learnMoreAboutAlws: string
   notIncludeCPP: string
   learnMoreAboutCpp: string
   aboutResultText: string
@@ -42,7 +42,7 @@ export type WebTranslations = {
   oas: string
   gis: string
   alw: string
-  afs: string
+  alws: string
   testSiteTitle: string
   testSiteHeader: string
   otherLang: string
@@ -50,6 +50,10 @@ export type WebTranslations = {
   langLong: string
   creator: string
   search: string
+  breadcrumb1aTitle: string
+  breadcrumb1aURL: string
+  breadcrumb2aTitle: string
+  breadcrumb2aURL: string
   breadcrumb1Title: string
   breadcrumb1URL: string
   breadcrumb2Title: string
@@ -133,7 +137,9 @@ export type WebTranslations = {
     basedOnPartnerInfoTotal: string
     basedOnPartnerInfoAndIncomeTotal: string
     total: string
+    futureTotal: string
     partnerTotal: string
+    futurePartnerTotal: string
     ifIncomeNotProvided: string
     nextSteps: string
     youMayNotBeEligible: string
@@ -149,6 +155,11 @@ export type WebTranslations = {
     CTABody: string
     CTAButton: string
     month: string
+    futureEligible: string
+    partnerFutureEligible: string
+    toReceive: string
+    partnerToReceive: string
+    theyToReceive: string
     //nextStepOas: string
   }
 

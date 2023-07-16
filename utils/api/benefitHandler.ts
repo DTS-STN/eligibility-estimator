@@ -1,6 +1,6 @@
 import { getTranslations, Translations } from '../../i18n/api'
 import { consoleDev } from '../web/helpers/utils'
-import { AfsBenefit } from './benefits/afsBenefit'
+import { AlwsBenefit } from './benefits/alwsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
 import { EntitlementFormula } from './benefits/entitlementFormula'
 import { GisBenefit } from './benefits/gisBenefit'
@@ -52,8 +52,11 @@ export class BenefitHandler {
   private _benefitResults: BenefitResultsObjectWithPartner
   private _summary: SummaryObject
   private _partnerSummary: SummaryObject
+  future: Boolean
 
-  constructor(readonly rawInput: Partial<RequestInput>) {}
+  constructor(readonly rawInput: Partial<RequestInput>, future?: Boolean) {
+    this.future = future
+  }
 
   get translations(): Translations {
     if (this._translations === undefined)
@@ -107,7 +110,7 @@ export class BenefitHandler {
         this.benefitResults.client,
         Object.fromEntries(
           Object.entries(this.benefitResults.partner).filter(
-            (e) => e[0] != 'afs'
+            (e) => e[0] != 'alws'
           )
         ),
         this.missingFields,
@@ -316,13 +319,13 @@ export class BenefitHandler {
         oas: getBlankObject(BenefitKey.oas),
         gis: getBlankObject(BenefitKey.gis),
         alw: getBlankObject(BenefitKey.alw),
-        afs: getBlankObject(BenefitKey.afs),
+        alws: getBlankObject(BenefitKey.alws),
       },
       partner: {
         oas: getBlankObject(BenefitKey.oas),
         gis: getBlankObject(BenefitKey.gis),
         alw: getBlankObject(BenefitKey.alw),
-        afs: getBlankObject(BenefitKey.afs),
+        alws: getBlankObject(BenefitKey.alws),
       },
     }
 
@@ -330,7 +333,12 @@ export class BenefitHandler {
       this.input.client.partnerBenefitStatus.value
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
-    const clientOas = new OasBenefit(this.input.client, this.translations)
+    const clientOas = new OasBenefit(
+      this.input.client,
+      this.translations,
+      false,
+      this.future
+    )
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
 
     // If the client needs help, check their partner's OAS.
@@ -349,7 +357,9 @@ export class BenefitHandler {
     let clientGis = new GisBenefit(
       this.input.client,
       this.translations,
-      allResults.client.oas
+      allResults.client.oas,
+      false,
+      this.future
     )
 
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
@@ -372,7 +382,13 @@ export class BenefitHandler {
     }
 
     // Moving onto ALW, again only doing eligibility.
-    const clientAlw = new AlwBenefit(this.input.client, this.translations)
+    const clientAlw = new AlwBenefit(
+      this.input.client,
+      this.translations,
+      false,
+      false,
+      this.future
+    )
     this.setValueForAllResults(allResults, 'client', 'alw', clientAlw)
 
     // task #115349 overwrite eligibility when conditions are met.
@@ -433,8 +449,12 @@ export class BenefitHandler {
     }
 
     // Moving onto AFS, again only doing eligibility.
-    const clientAfs = new AfsBenefit(this.input.client, this.translations)
-    allResults.client.afs.eligibility = clientAfs.eligibility
+    const clientAlws = new AlwsBenefit(
+      this.input.client,
+      this.translations,
+      this.future
+    )
+    allResults.client.alws.eligibility = clientAlws.eligibility
 
     const partnerAlw = new AlwBenefit(
       this.input.partner,
@@ -475,7 +495,9 @@ export class BenefitHandler {
       clientGis = new GisBenefit(
         this.input.client,
         this.translations,
-        allResults.client.oas
+        allResults.client.oas,
+        false,
+        this.future
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }
@@ -617,7 +639,9 @@ export class BenefitHandler {
             clientGis = new GisBenefit(
               clientSingleInput,
               this.translations,
-              allResults.client.oas
+              allResults.client.oas,
+              false,
+              this.future
             )
 
             if (useT1versusT3) {
@@ -722,7 +746,9 @@ export class BenefitHandler {
             clientGis = new GisBenefit(
               clientSingleInput,
               this.translations,
-              allResults.client.oas
+              allResults.client.oas,
+              false,
+              this.future
             )
 
             if (clientGis.entitlement.result === 0) {
@@ -743,7 +769,9 @@ export class BenefitHandler {
               allResults.client.gis.entitlement.type =
                 EntitlementResultType.FULL
               allResults.client.gis.eligibility.detail,
-                (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+                (allResults.client.gis.cardDetail.mainText = this.future
+                  ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                  : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
 
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
               allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
@@ -765,7 +793,9 @@ export class BenefitHandler {
             const clientGisCouple = new GisBenefit(
               this.input.client,
               this.translations,
-              allResults.client.oas
+              allResults.client.oas,
+              false,
+              this.future
             )
 
             this.setValueForAllResults(
@@ -878,12 +908,13 @@ export class BenefitHandler {
               if (
                 allResults.partner.gis.entitlement.result > 0 &&
                 allResults.client.gis.entitlement.result <= 0
-              )
-                allResults.partner.gis.cardDetail.collapsedText.push(
-                  this.translations.detailWithHeading
-                    .calculatedBasedOnIndividualIncome
-                )
-
+              ) {
+                // TODO
+                // allResults.partner.gis.cardDetail.collapsedText.push(
+                //   this.translations.detailWithHeading
+                //     .calculatedBasedOnIndividualIncome
+                // )
+              }
               if (
                 !allResults.partner.gis.cardDetail.collapsedText.includes(
                   this.translations.detailWithHeading.partnerEligible
@@ -903,7 +934,8 @@ export class BenefitHandler {
                     this.input.client,
                     this.translations,
                     false,
-                    false
+                    false,
+                    this.future
                   )
                   this.setValueForAllResults(
                     allResults,
@@ -923,7 +955,8 @@ export class BenefitHandler {
                     this.input.client,
                     this.translations,
                     false,
-                    true
+                    true,
+                    this.future
                   )
                   this.setValueForAllResults(
                     allResults,
@@ -941,7 +974,9 @@ export class BenefitHandler {
 
                   // cardDetails
                   allResults.client.alw.eligibility.detail,
-                    (allResults.client.alw.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+                    (allResults.client.alw.cardDetail.mainText = this.future
+                      ? `${this.translations.detail.futureEligible60} ${this.translations.detail.futureExpectToReceive}`
+                      : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
 
                   allResults.client.alw.cardDetail.collapsedText.push(
                     this.translations.detailWithHeading
@@ -1062,7 +1097,9 @@ export class BenefitHandler {
             clientGis.entitlement.result > 0
           ) {
             allResults.client.gis.eligibility.detail,
-              (allResults.client.gis.cardDetail.mainText = `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
+              (allResults.client.gis.cardDetail.mainText = this.future
+                ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
           }
 
           consoleDev(
@@ -1112,6 +1149,9 @@ export class BenefitHandler {
           } else {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+            partnerGis.cardDetail.collapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
           }
 
           // add the amount calculated to the card.
@@ -1134,8 +1174,8 @@ export class BenefitHandler {
       }
 
       // Finish with AFS entitlement.
-      allResults.client.afs.entitlement = clientAfs.entitlement
-      allResults.client.afs.cardDetail = clientAfs.cardDetail
+      allResults.client.alws.entitlement = clientAlws.entitlement
+      allResults.client.alws.cardDetail = clientAlws.cardDetail
 
       // Process all CardDetails
       allResults.client.oas.cardDetail =
@@ -1159,13 +1199,13 @@ export class BenefitHandler {
       allResults.client.alw.entitlement = clientAlw.entitlement
 
       // Finish with AFS entitlement.
-      allResults.client.afs.entitlement = clientAfs.entitlement
+      allResults.client.alws.entitlement = clientAlws.entitlement
 
       // Process all CardDetails
       allResults.client.oas.cardDetail = clientOas.cardDetail
       allResults.client.gis.cardDetail = clientGis.cardDetail
       allResults.client.alw.cardDetail = clientAlw.cardDetail
-      allResults.client.afs.cardDetail = clientAfs.cardDetail
+      allResults.client.alws.cardDetail = clientAlws.cardDetail
     }
 
     consoleDev('allResults', allResults)
@@ -1323,8 +1363,11 @@ export class BenefitHandler {
           if (this.input.client.livingCountry.canada) {
             newMainText =
               clawbackValue > 0 && result.cardDetail.mainText
-                ? result.cardDetail.mainText +
-                  `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
+                ? this.future
+                  ? result.cardDetail.mainText +
+                    `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
+                  : result.cardDetail.mainText +
+                    `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
                 : result.cardDetail.mainText
           } else {
             newMainText =

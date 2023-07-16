@@ -129,7 +129,7 @@ export interface BenefitResultsObject {
   oas?: BenefitResult<EntitlementResultOas>
   gis?: BenefitResult<EntitlementResultGeneric>
   alw?: BenefitResult<EntitlementResultGeneric>
-  afs?: BenefitResult<EntitlementResultGeneric>
+  alws?: BenefitResult<EntitlementResultGeneric>
 }
 
 export interface BenefitResultsObjectWithPartner {
@@ -139,7 +139,9 @@ export interface BenefitResultsObjectWithPartner {
 
 export interface ResponseSuccess {
   results: BenefitResultsObject
+  futureClientResults: BenefitResultsObject
   partnerResults: BenefitResultsObject
+  futurePartnerResults: BenefitResultsObject
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>

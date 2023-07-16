@@ -27,7 +27,7 @@ export const options = {
 }
 
 export default function () {
-  const pages = ['/', '/questions', '/results']
+  const pages = ['/', '/questions', '/results', '/resultats']
 
   const headers = {
     'upgrade-insecure-requests': '1',

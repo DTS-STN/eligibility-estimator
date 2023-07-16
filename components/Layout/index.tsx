@@ -17,8 +17,15 @@ export const Layout: React.VFC<{
 }> = ({ children, title }) => {
   const router = useRouter()
 
+  // basically returns 'results' or 'resultats' IF, otherwise index or questions in the other locale.
   const langToggleLink =
-    router.locale === 'fr' ? `/en${router.asPath}` : `/fr${router.asPath}`
+    router.asPath === '/results' && router.locale === 'en'
+      ? '/fr/resultats'
+      : router.asPath === '/resultats' && router.locale === 'fr'
+      ? '/en/results'
+      : router.locale === 'en'
+      ? `/fr${router.asPath}`
+      : `/en${router.asPath}`
 
   const tsln = useTranslation<WebTranslations>()
 
@@ -45,28 +52,40 @@ export const Layout: React.VFC<{
     onSubmit: () => {},
   }
 
-  const breadcrumbs = [
-    {
-      text: tsln.breadcrumb1Title,
-      link: tsln.breadcrumb1URL,
-    },
-    {
-      text: tsln.breadcrumb2Title,
-      link: tsln.breadcrumb2URL,
-    },
-    {
-      text: tsln.breadcrumb3Title,
-      link: tsln.breadcrumb3URL,
-    },
-    {
-      text: tsln.breadcrumb4Title,
-      link: tsln.breadcrumb4URL,
-    },
-    {
-      text: tsln.breadcrumb5Title,
-      link: tsln.breadcrumb5URL,
-    },
-  ]
+  const breadcrumbs =
+    process.env.APP_ENV === 'production'
+      ? [
+          {
+            text: tsln.breadcrumb1Title,
+            link: tsln.breadcrumb1URL,
+          },
+          {
+            text: tsln.breadcrumb2Title,
+            link: tsln.breadcrumb2URL,
+          },
+          {
+            text: tsln.breadcrumb3Title,
+            link: tsln.breadcrumb3URL,
+          },
+          {
+            text: tsln.breadcrumb4Title,
+            link: tsln.breadcrumb4URL,
+          },
+          {
+            text: tsln.breadcrumb5Title,
+            link: tsln.breadcrumb5URL,
+          },
+        ]
+      : [
+          {
+            text: tsln.breadcrumb1aTitle,
+            link: tsln.breadcrumb1aURL,
+          },
+          {
+            text: tsln.breadcrumb2aTitle,
+            link: tsln.breadcrumb2aURL,
+          },
+        ]
 
   const handleOnClick = () => {
     const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`
@@ -110,7 +129,8 @@ export const Layout: React.VFC<{
           {children}
         </div>
 
-        {router.pathname === '/results' && (
+        {(router.pathname === '/results' ||
+          router.pathname === '/resultats') && (
           <div id="cta-feedback" className="mb-8">
             <CTA
               heading={tsln.resultsPage.CTATitle}

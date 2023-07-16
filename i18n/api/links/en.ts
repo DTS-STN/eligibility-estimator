@@ -34,7 +34,7 @@ export const links: LinkDefinitions = {
       icon: LinkIcon.info,
       action: 'Learn about ALW',
     },
-    afs: {
+    alws: {
       text: 'Learn more about the Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor.html',
       order: 6,
@@ -72,7 +72,7 @@ export const links: LinkDefinitions = {
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance/benefit-amount.html',
     order: 12,
   },
-  afsEntitlement: {
+  alwsEntitlement: {
     text: 'Allowance for the Survivor: Payment Overview',
     url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/benefit-amount.html',
     order: 13,
@@ -129,7 +129,7 @@ export const links: LinkDefinitions = {
       icon: LinkIcon.link,
       action: 'Apply for ALW',
     },
-    afs: {
+    alws: {
       text: 'Apply for the Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/apply.html',
       order: 23,
@@ -181,7 +181,7 @@ export const links: LinkDefinitions = {
       order: -1,
       icon: LinkIcon.note,
     },
-    afs: {
+    alws: {
       text: 'View full eligibility criteria for the Allowance for the Survivor',
       url: 'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/allowance-survivor/eligibility.html',
       order: -1,

@@ -13,7 +13,7 @@ const en: WebTranslations = {
   oas: 'Old Age Security pension',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
-  afs: 'Allowance for the Survivor',
+  alws: 'Allowance for the Survivor',
   testSiteTitle: 'TEST SITE',
   testSiteHeader:
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
@@ -22,11 +22,15 @@ const en: WebTranslations = {
   langLong: 'eng',
   creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
+  // alpha service canada labs breadcrumbs
+  breadcrumb1aTitle: 'Canada.ca',
+  breadcrumb1aURL: 'https://www.canada.ca',
+  breadcrumb2aTitle: 'Service Canada Labs',
+  breadcrumb2aURL:
+    'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
+  // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
-  //breadcrumb2Title: 'Service Canada',
-  //breadcrumb2URL:
-  //  'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
   breadcrumb2Title: 'Benefits',
   breadcrumb2URL: 'https://www.canada.ca/en/services/benefits.html',
   breadcrumb3Title: 'Public pensions',
@@ -88,7 +92,7 @@ const en: WebTranslations = {
   inflationInfo: `Old Age Security benefit rates are updated quarterly to reflect changes to the cost of living. If planning for the future, amounts may be higher due to inflation.`,
   afsDefinitionText:
     'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away',
-  learnMoreAboutAfs: `<a className="underline text-default-text" href="${apiEn.links.overview.afs.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
+  learnMoreAboutAlws: `<a className="underline text-default-text" href="${apiEn.links.overview.alws.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
@@ -139,7 +143,7 @@ const en: WebTranslations = {
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payment. Changes in your circumstances may impact your results.',
+      'The following is only an estimate of your eligibility and monthly payments <span style="font-weight: bold;">based on current rates</span>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
@@ -167,7 +171,9 @@ const en: WebTranslations = {
     basedOnPartnerInfoAndIncomeTotal:
       'Your partner could be eligible to receive:',
     total: 'Your total monthly amount is ',
+    futureTotal: 'Your total monthly amount will be ',
     partnerTotal: 'Their total monthly amount is ',
+    futurePartnerTotal: 'Their total monthly amount will be ',
     ifIncomeNotProvided:
       'However, this amount may be lower or higher depending on your income.',
     nextSteps: 'Next steps for benefits you may be eligible for',
@@ -186,6 +192,11 @@ const en: WebTranslations = {
       'Find out about public pensions, when to collect them and tips to consider for your retirement income.',
     CTAButton: 'Visit the Retirement Hub',
     month: 'month',
+    futureEligible: " You'll likely be eligible",
+    partnerFutureEligible: ' Your partner will likely be eligible',
+    toReceive: "you'll likely be eligible to receive:",
+    partnerToReceive: 'your partner will likely be eligible to receive:',
+    theyToReceive: 'they will likely be eligible to receive:',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,

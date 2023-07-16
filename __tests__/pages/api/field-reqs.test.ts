@@ -10,7 +10,7 @@ import {
   age65NoDefer,
   canadaWholeLife,
   canadian,
-  expectAfsEligible,
+  expectAlwsEligible,
   income10k,
   partnerUndefined,
 } from './expectUtils'

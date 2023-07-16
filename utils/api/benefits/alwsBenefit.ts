@@ -17,9 +17,15 @@ import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 import { EntitlementFormula } from './entitlementFormula'
 
-export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
-  constructor(input: ProcessedInput, translations: Translations) {
-    super(input, translations, BenefitKey.afs)
+export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
+  future: Boolean
+  constructor(
+    input: ProcessedInput,
+    translations: Translations,
+    future: Boolean
+  ) {
+    super(input, translations, BenefitKey.alws)
+    this.future = future
   }
 
   protected getEligibility(): EligibilityResult {
@@ -113,13 +119,17 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
-          detail: this.translations.detail.eligibleIncomeTooHigh,
+          detail: this.future
+            ? this.translations.detail.futureEligibleIncomeTooHigh2
+            : this.translations.detail.eligibleIncomeTooHigh,
         }
       } else {
         return {
           result: ResultKey.ELIGIBLE,
           reason: ResultReason.NONE,
-          detail: this.translations.detail.eligible,
+          detail: this.future
+            ? this.translations.detail.futureEligible60
+            : this.translations.detail.eligible,
         }
       }
     }
@@ -179,9 +189,9 @@ export class AfsBenefit extends BaseBenefit<EntitlementResultGeneric> {
       (this.eligibility.result === ResultKey.INELIGIBLE &&
         this.eligibility.reason === ResultReason.AGE_YOUNG)
     ) {
-      links.push(this.translations.links.apply[BenefitKey.afs])
+      links.push(this.translations.links.apply[BenefitKey.alws])
     }
-    links.push(this.translations.links.overview[BenefitKey.afs])
+    links.push(this.translations.links.overview[BenefitKey.alws])
     return links
   }
 }

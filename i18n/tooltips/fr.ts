@@ -37,14 +37,14 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.legal,
     moreinfo: 'Que signifie avoir un statut légal?',
     text: "<p style='padding-bottom: 8px;'> \
-            Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
+            Avoir un statut légal signifie que vous êtes autorisé à entrer et à rester au Canada à titre de : \
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
+            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>;</li> \
             <li>résident temporaire;</li> \
             <li>résident permanent (immigrant reçu);</li> \
-            <li>réfugié;</li> \
-            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>.</li> \
+            <li>réfugié.</li> \
           </ul> \
           ",
   },
@@ -52,14 +52,14 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.legal,
     moreinfo: 'Que signifie avoir un statut légal?',
     text: "<p style='padding-bottom: 8px;'> \
-            Avoir un statut légal signifie que votre conjoint est autorisé à entrer et à rester au Canada à titre de : \
+            Avoir un statut légal signifie que votre conjoint est autorisé à entrer et à rester au Canada à titre de : \
           </p> \
           <ul style='list-style-type: disc; padding-bottom: 8px; padding-left: 20px;'> \
             <li>citoyen canadien;</li> \
+            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>;</li> \
             <li>résident temporaire;</li> \
             <li>résident permanent (immigrant reçu);</li> \
-            <li>réfugié;</li> \
-            <li>personne autochtone inscrite en vertu de la <em>Loi sur les Indiens</em>.</li> \
+            <li>réfugié.</li> \
           </ul> \
           ",
   },

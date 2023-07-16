@@ -193,7 +193,8 @@
     @apply text-default-text underline font-bold;
   }
 
-  .summary-link a {
+  .summary-link a,
+  .addOpenNew {
     @apply text-default-text underline;
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
@@ -232,16 +233,17 @@
   #oasDefer a,
   #oasLink0,
   #oasLink1,
+  #oasLink2,
   #gisLink0,
   #gisLink1,
   #alwLink0,
   #alwLink1,
-  #afsLink0,
-  #afsLink1,
+  #alwsLink0,
+  #alwsLink1,
   a.generatedLink {
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
-    padding-right: 18px;
+    padding-right: 20px;
     text-decoration-line: underline;
     --tw-text-opacity: 1;
     color: rgb(40 65 98 / var(--tw-text-opacity));
@@ -254,8 +256,8 @@
   #gisLink1:hover,
   #alwLink0:hover,
   #alwLink1:hover,
-  #afsLink0:hover,
-  #afsLink1:hover,
+  #alwsLink0:hover,
+  #alwsLink1:hover,
   a.generatedLink:hover,
   .summary-link a:hover {
     --tw-border-opacity: 1;

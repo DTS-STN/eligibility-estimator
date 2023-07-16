@@ -14,8 +14,8 @@ import {
 
 import { mockGetRequest, mockGetRequestError } from './factory'
 import {
-  expectAfsEligible,
-  expectAfsMarital,
+  expectAlwsEligible,
+  expectAlwsMarital,
   expectAlwEligible,
   expectAlwTooOld,
   expectGisEligible,
@@ -94,13 +94,13 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -190,13 +190,13 @@ describe('EE Sanity Test Scenarios:', () => {
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -287,13 +287,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -368,11 +368,11 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
   })
 
   /*
@@ -427,13 +427,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
   })
 
   /*
@@ -488,13 +488,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
   })
 
   /*
@@ -565,13 +565,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
   })
 
   /*
@@ -647,13 +647,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -755,13 +755,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -860,13 +860,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -969,13 +969,13 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.entitlement.result).toEqual(0)
+    expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
     expect(res.body.partnerResults.oas.eligibility.result).toEqual(
@@ -1054,7 +1054,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 378.16)
     expectGisEligible(res, 1405.12)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1118,7 +1118,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 730.6)
     expectGisEligible(res, 1009.04)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
     expectGisNotEligible(res, true)
@@ -1176,7 +1176,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.FULL, 786.57)
     expectGisEligible(res, 65.89)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1249,7 +1249,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectGisEligible(res, 33.76) // correct value is 508.48
 
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1324,7 +1324,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.AGE_YOUNG
     )
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
 
     //partner results
     //   correct results should be ineligible because answered  No Benefits
@@ -1396,7 +1396,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 429.73)
     expectGisEligible(res, 1284.8)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1464,7 +1464,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 171.89)
     expectGisEligible(res, 1065.63)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1535,7 +1535,7 @@ describe('EE Sanity Test Scenarios:', () => {
       ResultReason.LIVING_COUNTRY
     )
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1606,7 +1606,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 378.16)
     expectGisEligible(res, 1198.12)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1672,7 +1672,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 601.62)
     expectGisEligible(res, 319.83)
     expectAlwTooOld(res)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -1746,7 +1746,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
     expectAlwEligible(res, 1305.71)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 171.89, true)
     expectGisEligible(res, 1335.63, true)
@@ -1809,7 +1809,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
     expectAlwEligible(res, 236.09)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 661.78, true)
     expectGisEligible(res, 331.34, true)
@@ -1873,7 +1873,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
     // eligible but income is too high
     expectAlwEligible(res, 0)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
     expectGisEligible(res, 235.89, true)
@@ -1938,7 +1938,7 @@ describe('EE Sanity Test Scenarios:', () => {
     // eligible but income is too high
     expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 429.73, true)
     expectGisEligible(res, 485.73, true)
@@ -2007,7 +2007,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.PARTNER
     )
-    expectAfsMarital(res)
+    expectAlwsMarital(res)
 
     //partner results
     //   correct results should be ineligible because answered  No Benefits
@@ -2064,7 +2064,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expectAfsEligible(res, 1433.51)
+    expectAlwsEligible(res, 1433.51)
   })
 
   /*
@@ -2111,7 +2111,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expectAfsEligible(res, 797.51)
+    expectAlwsEligible(res, 797.51)
   })
 
   /*
@@ -2158,8 +2158,8 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expectAfsEligible(res, 0)
-    expect(res.body.results.afs.eligibility.detail).toEqual(
+    expectAlwsEligible(res, 0)
+    expect(res.body.results.alws.eligibility.detail).toEqual(
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time."
     )
   })
@@ -2210,10 +2210,10 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
-    expect(res.body.results.afs.eligibility.result).toEqual(
+    expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.afs.eligibility.reason).toEqual(
+    expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
   })
