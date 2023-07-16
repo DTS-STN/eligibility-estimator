@@ -196,6 +196,7 @@ const en: WebTranslations = {
     partnerFutureEligible: ' Your partner will likely be eligible',
     toReceive: "you'll likely be eligible to receive:",
     partnerToReceive: 'your partner will likely be eligible to receive:',
+    theyToReceive: 'they will likely be eligible to receive:',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,
