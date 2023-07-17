@@ -16,15 +16,17 @@ function MyApp({
     PRIVATE_PATHS.some((path) => route.startsWith(path))
 
   return (
-    <SessionProvider session={session}>
+    <>
       {AuthRequired ? (
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
+        <SessionProvider session={session}>
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        </SessionProvider>
       ) : (
         <Component {...pageProps} />
       )}
-    </SessionProvider>
+    </>
   )
 }
 
