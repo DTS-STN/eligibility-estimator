@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
-import Auth from './Auth'
+import Auth from '../components/Layout/Auth'
 
 const PRIVATE_PATHS = ['/', '/questions', '/results', '/resultats']
 
