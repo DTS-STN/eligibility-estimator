@@ -332,7 +332,7 @@ const en: Translations = {
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
-      "You can start receving your payments at 65 or wait until you're 70.",
+      "You can start receiving your payments at 65 or wait until you're 70.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
@@ -415,11 +415,11 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'You should receive a letter about your enrolment status the month after you turn 64.',
+        'You should receive a letter about your enrollment status the month after you turn 64.',
       youShouldReceiveLetter:
-        'You should receive a letter about your enrolment status the month after you turn 64.',
+        'You should receive a letter about your enrollment status the month after you turn 64.',
       youShouldHaveReceivedLetter:
-        'You should have received a letter about your enrolment status the month after you turned 64.',
+        'You should have received a letter about your enrollment status the month after you turned 64.',
       ifYouDidnt:
         "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       applyOnline: "If you didn't, you can apply online.",
