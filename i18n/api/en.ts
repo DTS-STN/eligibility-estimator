@@ -386,7 +386,7 @@ const en: Translations = {
       'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
     alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
     autoEnrollTrue:
-      'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrollment</strong> the month after you turn 64.',
+      'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
       'Based on what you told us, <strong>you may have to apply for this benefit</strong>. We may not have enough information to enroll you automatically.',
     expectToReceive:
@@ -415,11 +415,11 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'You should receive a letter about your enrollment status the month after you turn 64.',
+        'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldReceiveLetter:
-        'You should receive a letter about your enrollment status the month after you turn 64.',
+        'You should receive a letter about your enrolment status the month after you turn 64.',
       youShouldHaveReceivedLetter:
-        'You should have received a letter about your enrollment status the month after you turned 64.',
+        'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
         "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       applyOnline: "If you didn't, you can apply online.",
