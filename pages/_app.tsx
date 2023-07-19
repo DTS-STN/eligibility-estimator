@@ -1,9 +1,7 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
-import Auth from './Auth'
-
-const PRIVATE_PATHS = ['/', '/questions', '/results', '/resultats']
+import Auth from '../components/Layout/Auth'
 
 function MyApp({
   Component,
@@ -11,20 +9,20 @@ function MyApp({
   router: { route },
 }: AppProps) {
   const AuthRequired =
-    process.env.APP_ENV !== 'production' &&
-    process.env.APP_ENV !== 'alpha' &&
-    PRIVATE_PATHS.some((path) => route.startsWith(path))
+    process.env.APP_ENV !== 'production' && process.env.APP_ENV !== 'alpha'
 
   return (
-    <SessionProvider session={session}>
+    <>
       {AuthRequired ? (
-        <Auth>
-          <Component {...pageProps} />
-        </Auth>
+        <SessionProvider session={session}>
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        </SessionProvider>
       ) : (
         <Component {...pageProps} />
       )}
-    </SessionProvider>
+    </>
   )
 }
 
