@@ -644,13 +644,6 @@ export class BenefitHandler {
               this.future
             )
 
-            if (useT1versusT3) {
-              clientGis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
-            }
-
             const partnerSingleInput = this.getSinglePartnerInput()
 
             partnerGis = new GisBenefit(
@@ -1142,31 +1135,30 @@ export class BenefitHandler {
             'partnerGisResultT3',
             partnerGisResultT3
           )
-
           if (partnerGisResultT1 < partnerGisResultT3) {
             allResults.partner.gis.entitlement.result = partnerGisResultT3
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
           } else {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
+            if (
+              !allResults.partner.gis.cardDetail.collapsedText.includes(
+                this.translations.detailWithHeading.partnerEligible
+              )
+            ) {
+              partnerGis.cardDetail.collapsedText.push(
+                this.translations.detailWithHeading.partnerEligible
+              )
+            }
+          }
+          if (clientGis.entitlement.result > partnerGisResultT3) {
             partnerGis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
+              this.translations.detailWithHeading
+                .calculatedBasedOnIndividualIncome
             )
           }
 
           // add the amount calculated to the card.
-          if (
-            allResults.partner.gis.entitlement.result > 0 &&
-            initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
-          ) {
-            if (allResults.client.gis.entitlement.result <= 0) {
-              allResults.partner.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
-              )
-            }
-          }
-
           consoleDev(
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )
