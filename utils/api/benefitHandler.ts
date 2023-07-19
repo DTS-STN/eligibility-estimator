@@ -1171,17 +1171,6 @@ export class BenefitHandler {
             '--- both are not eligible for alw - applicant oas = 0 & partner oas > 0 --- end'
           )
         }
-        if (
-          allResults.client.gis.entitlement.result != 0 &&
-          this.input.client.receiveOAS == false &&
-          this.input.client.age >= 65 &&
-          this.input.client.age < 70 &&
-          !this.future
-        ) {
-          allResults.client.gis.cardDetail.collapsedText.push(
-            this.translations.detailWithHeading.ifYouDeferYourPension
-          )
-        }
       }
 
       // Finish with AFS entitlement.

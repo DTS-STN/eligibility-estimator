@@ -315,7 +315,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     if (
       this.partner !== true &&
-      this.entitlement.result !== 0 &&
+      this.entitlement.result === 0 &&
       ageInOasRange &&
       !this.input.receiveOAS &&
       !this.future
