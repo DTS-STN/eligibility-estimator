@@ -1151,6 +1151,7 @@ export class BenefitHandler {
               )
             }
           }
+          //test
           if (clientGis.entitlement.result > partnerGisResultT3) {
             partnerGis.cardDetail.collapsedText.push(
               this.translations.detailWithHeading
