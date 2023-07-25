@@ -1068,7 +1068,6 @@ export class BenefitHandler {
             'applicantGisResultT3',
             applicantGisResultT3
           )
-
           if (applicantGisResultT1 < applicantGisResultT3) {
             allResults.client.gis.entitlement.result = applicantGisResultT3
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
@@ -1076,6 +1075,9 @@ export class BenefitHandler {
             allResults.client.gis.entitlement.result = applicantGisResultT1
             allResults.client.gis.entitlement.type = EntitlementResultType.FULL
           }
+          //since the collapsed texts gets called at object instantiation, we have to update it manually with
+          //the entitlement result once it's calculated
+          clientGis.cardDetail.collapsedText = clientGis.updateCollapsedText()
 
           // the push below prob can be moved to the else condition above but no time to test all scenarios
           if (

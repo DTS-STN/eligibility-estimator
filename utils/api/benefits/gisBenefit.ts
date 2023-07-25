@@ -181,7 +181,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         type: EntitlementResultType.NONE,
         autoEnrollment,
       }
-
     // income is not provided, and they are eligible depending on income? entitlement unavailable.
     if (
       !this.input.income.provided &&
@@ -301,6 +300,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     return text
   }
 
+  public updateCollapsedText(): CardCollapsedText[] {
+    return this.getCardCollapsedText()
+  }
+
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
@@ -315,7 +318,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     if (
       this.partner !== true &&
-      this.entitlement.result === 0 &&
+      this.entitlement.result !== 0 &&
       ageInOasRange &&
       !this.input.receiveOAS &&
       !this.future
