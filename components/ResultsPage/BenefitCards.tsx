@@ -272,7 +272,7 @@ export const BenefitCards: React.VFC<{
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         const ifYouApplyText = `${
           apiTsln.detail.alwIfYouApply
-        } <strong>${numberToStringCurrency(
+        }<strong>${numberToStringCurrency(
           legalValues.alw.afsIncomeLimit,
           apiTsln._language,
           { rounding: 0 }
@@ -286,6 +286,7 @@ export const BenefitCards: React.VFC<{
             nextStepText.nextStepContent += ifYouApplyText
           }
         } else if (result.entitlement.result === 0) {
+          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
           nextStepText.nextStepContent += ifYouApplyText
         }
       }
