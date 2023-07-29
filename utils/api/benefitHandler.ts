@@ -1162,10 +1162,16 @@ export class BenefitHandler {
             initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
           ) {
             if (allResults.client.gis.entitlement.result <= 0) {
-              allResults.partner.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
+              if (
+                !allResults.client.gis.cardDetail.collapsedText.includes(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
               )
+                allResults.client.gis.cardDetail.collapsedText.unshift(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
             }
           }
 
