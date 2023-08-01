@@ -394,7 +394,7 @@ const fr: Translations = {
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.',
+      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire. ',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
