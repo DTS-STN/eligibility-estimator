@@ -270,7 +270,7 @@ export const BenefitCards: React.VFC<{
       }
     } else if (benefitKey === BenefitKey.alws) {
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
-        const ifYouApplyText = `${
+        const ifYouApplyText = ` ${
           apiTsln.detail.alwIfYouApply
         }<strong>${numberToStringCurrency(
           legalValues.alw.afsIncomeLimit,
