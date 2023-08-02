@@ -36,7 +36,7 @@ export const BenefitCard: React.VFC<{
   // the green/yellow eligible/notEligible
   const eligibleFlag: JSX.Element = (
     <span
-    data-cy="eligibility-flag"
+      data-cy="eligibility-flag"
       className={`px-2 py-1 ml-2 border-left border-l-4 font-semibold text-[15px] ${
         isEligible
           ? future
@@ -50,15 +50,24 @@ export const BenefitCard: React.VFC<{
   )
 
   return (
-    <div className="my-6 py-6 px-8 border border-[#6F6F6F] rounded" data-cy={benefitKey}>
+    <div
+      className="my-6 py-6 px-8 border border-[#6F6F6F] rounded"
+      data-cy={benefitKey}
+    >
       <div className="inline">
-        <h2 data-cy="benefit-title" id={benefitKey} className="inline align-sub h2">
+        <h2
+          data-cy="benefit-title"
+          id={benefitKey}
+          className="inline align-sub h2"
+        >
           {benefitName}
         </h2>
         {eligibleFlag}
       </div>
 
-      <div data-cy="benefit-detail" className={`py-1`}>{children}</div>
+      <div data-cy="benefit-detail" className={`py-1`}>
+        {children}
+      </div>
       {collapsedDetails &&
         collapsedDetails.map((detail, index) => (
           <CustomCollapse
@@ -75,7 +84,11 @@ export const BenefitCard: React.VFC<{
 
       {nextStepText.nextStepTitle && (
         <div>
-          <p data-cy="next-step-title" className="mb-2 mt-6  font-bold text-[24px]">
+          <p
+            data-cy="next-step-title"
+            className="mb-2 mt-6
+            font-bold text-[24px]"
+          >
             {nextStepText.nextStepTitle}
           </p>
           <p
