@@ -1151,9 +1151,16 @@ export class BenefitHandler {
           } else {
             allResults.partner.gis.entitlement.result = partnerGisResultT1
             allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-            partnerGis.cardDetail.collapsedText.push(
-              this.translations.detailWithHeading.partnerEligible
-            )
+
+            if (
+              !partnerGis.cardDetail.collapsedText.includes(
+                this.translations.detailWithHeading.partnerEligible
+              )
+            ) {
+              partnerGis.cardDetail.collapsedText.unshift(
+                this.translations.detailWithHeading.partnerEligible
+              )
+            }
           }
 
           // add the amount calculated to the card.
@@ -1162,10 +1169,16 @@ export class BenefitHandler {
             initialPartnerBenefitStatus !== PartnerBenefitStatus.NONE
           ) {
             if (allResults.client.gis.entitlement.result <= 0) {
-              allResults.partner.gis.cardDetail.collapsedText.push(
-                this.translations.detailWithHeading
-                  .calculatedBasedOnIndividualIncome
+              if (
+                !allResults.client.gis.cardDetail.collapsedText.includes(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
               )
+                allResults.client.gis.cardDetail.collapsedText.unshift(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
+                )
             }
           }
 
