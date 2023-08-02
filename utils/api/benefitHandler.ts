@@ -333,13 +333,47 @@ export class BenefitHandler {
       this.input.client.partnerBenefitStatus.value
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
+    // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
+
+    // without deferral
     const clientOas = new OasBenefit(
       this.input.client,
       this.translations,
       false,
       this.future
     )
+
+    // if option to defer is possible
+    // with deferral
+    // TODO
+    // if NOT use "with deferral" calculation as more beneficial
+
+    // TODO: Assign the more beneficial result to clientOas
+
+    // All done with OAS, move onto GIS, but only do GIS eligibility for now.
+    // using no deferral OAS amount
+    let clientGis = new GisBenefit(
+      this.input.client,
+      this.translations,
+      allResults.client.oas,
+      false,
+      this.future
+    )
+
+    // using deferral amount
+    // TODO
+
+    // TODO: Assign the more beneficial amount to clientGis
+
+    // TODO
+    // if (withDeferral) {
+    //   make appropriate changes to clientOas.cardDetail.?
+    //   make appropriate changes to clientOas.eligibility?
+    // }
+
+    // Compare totals to determine which combination of OAS/GIS is higher and set those amounts
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
+    this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -352,17 +386,6 @@ export class BenefitHandler {
       this.input.partner.partnerBenefitStatus.oasResultEntitlement =
         clientOas.entitlement
     }
-
-    // All done with OAS, move onto GIS, but only do GIS eligibility for now.
-    let clientGis = new GisBenefit(
-      this.input.client,
-      this.translations,
-      allResults.client.oas,
-      false,
-      this.future
-    )
-
-    this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
     // If the client needs help, check their partner's GIS eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
