@@ -1367,32 +1367,6 @@ export class BenefitHandler {
         // This adds the oasClawback text as requested.
         let newMainText = result.cardDetail.mainText
 
-        if (
-          key === 'oas' &&
-          this.benefitResults[individualBenefits][key].eligibility.reason !==
-            ResultReason.INCOME
-        ) {
-          clawbackValue =
-            this.benefitResults[individualBenefits][key].entitlement.clawback
-
-          if (this.input.client.livingCountry.canada) {
-            newMainText =
-              clawbackValue > 0 && result.cardDetail.mainText
-                ? this.future
-                  ? result.cardDetail.mainText +
-                    `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
-                  : result.cardDetail.mainText +
-                    `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
-                : result.cardDetail.mainText
-          } else {
-            newMainText =
-              clawbackValue > 0 && result.cardDetail.mainText
-                ? result.cardDetail.mainText +
-                  `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
-                : result.cardDetail.mainText
-          }
-        }
-
         // process card main text
         result.cardDetail.mainText = BenefitHandler.capitalizeEachLine(
           this.replaceTextVariables(newMainText, result)
