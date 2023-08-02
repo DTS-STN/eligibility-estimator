@@ -336,7 +336,7 @@ export class BenefitHandler {
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
     // without deferral
-    const clientOas = new OasBenefit(
+    const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
       false,
@@ -348,22 +348,26 @@ export class BenefitHandler {
     // TODO
     // if NOT use "with deferral" calculation as more beneficial
 
-    // TODO: Assign the more beneficial result to clientOas
-
     // All done with OAS, move onto GIS, but only do GIS eligibility for now.
     // using no deferral OAS amount
-    let clientGis = new GisBenefit(
+    let clientGisNoDeferral = new GisBenefit(
       this.input.client,
       this.translations,
-      allResults.client.oas,
+      allResults.client.oas, // TODO: use clientOasNoDeferral result here but we need it in the same format as what the allResults contains
       false,
       this.future
     )
 
+    // console.log('clientOas', clientOas)
+    // console.log('allResults.client.oas', allResults.client.oas)
+
     // using deferral amount
     // TODO
 
+    // TODO: Assign the more beneficial result to clientOas
+    const clientOas = clientOasNoDeferral
     // TODO: Assign the more beneficial amount to clientGis
+    let clientGis = clientGisNoDeferral
 
     // TODO
     // if (withDeferral) {
@@ -372,6 +376,7 @@ export class BenefitHandler {
     // }
 
     // Compare totals to determine which combination of OAS/GIS is higher and set those amounts
+
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
