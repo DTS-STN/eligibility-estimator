@@ -18,7 +18,7 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._language
     )}</strong>`,
   ENTITLEMENT_AMOUNT_FOR_BENEFIT: (handler, benefitResult) =>
-    `<strong>${numberToStringCurrency(
+    `<strong data-cy='benefit-estimate'>${numberToStringCurrency(
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
