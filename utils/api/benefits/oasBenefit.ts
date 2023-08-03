@@ -469,6 +469,24 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += `<p class='mt-6'>${this.translations.detail.oas.youShouldHaveReceivedLetter}</p>`
     }
 
+    if (this.eligibility.reason !== ResultReason.INCOME) {
+      const clawbackValue = this.entitlement.clawback
+
+      if (!this.partner && this.input.livingCountry.canada) {
+        text +=
+          clawbackValue > 0
+            ? this.future
+              ? `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
+              : `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
+            : null
+      } else {
+        text +=
+          clawbackValue > 0
+            ? `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
+            : null
+      }
+    }
+
     if (
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
       !this.partner &&
