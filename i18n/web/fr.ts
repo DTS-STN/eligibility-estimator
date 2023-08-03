@@ -1,6 +1,10 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import {
+  ISOLanguage,
+  Language,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
@@ -10,6 +14,7 @@ import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
+  metaLanguage: ISOLanguage.FR,
 
   oas: 'Pension de la Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',

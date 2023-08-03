@@ -41,7 +41,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
         <meta property="og:title" content={tsln.introPageTitle} />
-        <meta name="robots" content="noindex" />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
@@ -69,9 +68,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
         <meta
           name="twitter:image:alt"
           content={
-            isCanadaDotCa
-              ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}`
-              : ' '
+            ' '
+            // isCanadaDotCa
+            //   ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}`
+            //   : ' '
           }
         />
         <meta

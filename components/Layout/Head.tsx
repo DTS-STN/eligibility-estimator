@@ -59,8 +59,8 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         lang={altLang}
         href={
           isCanadaDotCa
-            ? `https://estimateursv-oasestimator.service.canada.ca/${altLang}${router.pathname}`
-            : `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
+            ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
         }
       />
       <meta name="keywords" content={tsln.meta.homeKeywords} />
@@ -71,8 +71,11 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       />
       <meta name="dcterms.issued" title="W3CDTF" content="2023-04-12" />
 
-      {/* TODO: modify to be dynamic */}
-      <meta name="dcterms.modified" title="W3CDTF" content="2023-04-12" />
+      <meta
+        name="dcterms.modified"
+        title="W3CDTF"
+        content={process.env.NEXT_LAST_MODIFIED}
+      />
 
       <meta name="dcterms.spatial" content="Canada" />
       <meta name="dcterms.accessRights" content="2" />

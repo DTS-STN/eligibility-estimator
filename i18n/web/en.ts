@@ -1,5 +1,9 @@
 import { WebTranslations } from '.'
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import {
+  ISOLanguage,
+  Language,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
@@ -9,6 +13,7 @@ import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
+  metaLanguage: ISOLanguage.EN,
 
   oas: 'Old Age Security pension',
   gis: 'Guaranteed Income Supplement',
