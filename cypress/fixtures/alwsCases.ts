@@ -1,5 +1,6 @@
 import en from '../../i18n/api/en'
 import fr from '../../i18n/api/fr'
+import { ALWSThresholds } from './thresholds'
 
 const data = [
     {
@@ -9,7 +10,7 @@ const data = [
       "receiveOAS": false,
       "delayYears": 0,
       "delayMonths": 0,
-      "netWorldIncome": 27000,
+      "netWorldIncome": ALWSThresholds.maxIncome-1,
       "legalStatus": true,
       "countryResidence": "Canada",
       "inCanadaSince18": true,
@@ -25,7 +26,7 @@ const data = [
       "receiveOAS": false,
       "delayYears": 0,
       "delayMonths": 0,
-      "netWorldIncome": 30000,
+      "netWorldIncome": ALWSThresholds.maxIncome,
       "legalStatus": true,
       "countryResidence": "Canada",
       "inCanadaSince18": true,
@@ -42,7 +43,7 @@ const data = [
       "receiveOAS": false,
       "delayYears": 0,
       "delayMonths": 0,
-      "netWorldIncome": 27000,
+      "netWorldIncome": ALWSThresholds.maxIncome-1,
       "legalStatus": true,
       "countryResidence": "Canada",
       "inCanadaSince18": true,
@@ -59,7 +60,7 @@ const data = [
       "receiveOAS": false,
       "delayYears": 0,
       "delayMonths": 0,
-      "netWorldIncome": 30000,
+      "netWorldIncome": ALWSThresholds.maxIncome,
       "legalStatus": true,
       "countryResidence": "Canada",
       "inCanadaSince18": true,
@@ -76,7 +77,7 @@ const data = [
       "receiveOAS": false,
       "delayYears": 0,
       "delayMonths": 0,
-      "netWorldIncome": 27000,
+      "netWorldIncome": ALWSThresholds.maxIncome-1,
       "legalStatus": true,
       "countryResidence": "Mexico",
       "inCanadaSince18": true,
@@ -92,7 +93,7 @@ const data = [
       "receiveOAS": false,
       "delayYears": 0,
       "delayMonths": 0,
-      "netWorldIncome": 27000,
+      "netWorldIncome": ALWSThresholds.maxIncome-1,
       "legalStatus": true,
       "countryResidence": "Canada",
       "inCanadaSince18": true,
