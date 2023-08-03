@@ -18,6 +18,9 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
     }
   }, [])
 
+  console.log('next_last_modified=', process.env.NEXT_LAST_MODIFIED) // test only to be deleted later
+  console.log('next_build_date=', process.env.NEXT_BUILD_DATE) // test only to be deleted later
+
   return (
     <NextHead>
       <title>{title} - Canada.ca</title>

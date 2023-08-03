@@ -11,8 +11,6 @@ function MyApp({
   const AuthRequired =
     process.env.APP_ENV !== 'production' && process.env.APP_ENV !== 'alpha'
 
-  console.log('next_build_date=', process.env.NEXT_BUILD_DATE) // test only to be deleted later
-
   return (
     <>
       {AuthRequired ? (
