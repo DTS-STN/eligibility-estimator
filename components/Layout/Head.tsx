@@ -79,7 +79,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       <meta
         name="dcterms.modified"
         title="W3CDTF"
-        content={process.env.NEXT_LAST_MODIFIED}
+        content={process.env.NEXT_BUILD_DATE}
       />
 
       <meta name="dcterms.spatial" content="Canada" />
