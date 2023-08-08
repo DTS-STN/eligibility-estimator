@@ -124,3 +124,29 @@ function addKeyValue(obj, key, val) {
     obj[key] = val
   }
 }
+
+export function eligibility(age, yearsInCanada) {
+  if (age < 65) {
+    let yearsUntil65 = 65 - age
+    let yearsInCanadaWhen65 = yearsInCanada + yearsUntil65
+
+    if (yearsInCanadaWhen65 >= 10) {
+      return {
+        ageOfEligibility: 65,
+        yearsOfResAtEligibility: yearsInCanadaWhen65,
+      }
+    }
+
+    let additionalYears = 10 - yearsInCanadaWhen65
+    return {
+      ageOfEligibility: 65 + additionalYears,
+      yearsOfResAtEligibility: 10,
+    }
+  }
+
+  let additionalYears = 10 - yearsInCanada
+  return {
+    ageOfEligibility: age + additionalYears,
+    yearsOfResAtEligibility: 10,
+  }
+}

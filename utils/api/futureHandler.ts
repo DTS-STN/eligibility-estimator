@@ -1,7 +1,7 @@
 import { BenefitHandler } from './benefitHandler'
 import { MaritalStatus } from './definitions/enums'
 import { RequestSchema as schema } from './definitions/schemas'
-import { buildQuery, getAgeArray } from './helpers/utils'
+import { buildQuery, getAgeArray, eligibility } from './helpers/utils'
 
 export class FutureHandler {
   maritalStatus: string
@@ -31,38 +31,51 @@ export class FutureHandler {
 
   private getSingleResults() {
     let result = this.futureResultsObj
-    if (Number(this.query.age) < 65) {
-      this.newQuery['age'] = '65'
-      this.newQuery['receiveOAS'] = 'false'
+    const yearsInCanada = Number(this.query.yearsInCanadaSince18)
+    const age = Number(this.query.age)
+    // TODO: take into consideration whether in Canada or not? (could be 10 or 20)
+    const residencyReq = 10
 
-      if (
-        this.query.livedOnlyInCanada === 'false' &&
-        this.query.yearsInCanadaSince18
-      ) {
-        this.newQuery['yearsInCanadaSince18'] = String(
-          Math.min(
-            40,
-            65 -
-              Math.floor(Number(this.query.age)) +
-              Number(this.query.yearsInCanadaSince18)
-          )
-        )
-      }
+    // No future benefits if 65 or over AND years in Canada already meets residency criteria
+    if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-      const { value } = schema.validate(this.newQuery, { abortEarly: false })
-      const handler = new BenefitHandler(value, true)
+    // const ageEligible = yearsInCanada < residencyReq ? age + (residencyReq - yearsInCanada) : age < 65 ? 65 : age +
 
-      const eligibleBenefits = this.getEligibleBenefits(
-        handler.benefitResults.client
+    console.log('age', age)
+    console.log('ELIGIBILITY')
+    const eliObj = eligibility(Math.floor(age), yearsInCanada)
+    console.log('eliObj', eliObj)
+
+    this.newQuery['age'] = String(eliObj.ageOfEligibility)
+    this.newQuery['receiveOAS'] = 'false'
+
+    if (
+      this.query.livedOnlyInCanada === 'false' &&
+      this.query.yearsInCanadaSince18
+    ) {
+      this.newQuery['yearsInCanadaSince18'] = String(
+        Math.min(40, eliObj.yearsOfResAtEligibility)
       )
-
-      const clientResult = [{ 65: eligibleBenefits }]
-
-      result = {
-        ...this.futureResultsObj,
-        client: clientResult,
-      }
     }
+
+    console.log('this.newQuery', this.newQuery)
+
+    const { value } = schema.validate(this.newQuery, { abortEarly: false })
+    const handler = new BenefitHandler(value, true)
+
+    const eligibleBenefits = this.getEligibleBenefits(
+      handler.benefitResults.client
+    )
+
+    const clientResult = eligibleBenefits
+      ? [{ [eliObj.ageOfEligibility]: eligibleBenefits }]
+      : null
+
+    result = {
+      ...this.futureResultsObj,
+      client: clientResult,
+    }
+
     return result
   }
 
@@ -107,7 +120,7 @@ export class FutureHandler {
               handler.benefitResults.client
             )
 
-            return { [age]: eligibleBenefits }
+            return eligibleBenefits ? { [age]: eligibleBenefits } : null
           })
         : null
 
