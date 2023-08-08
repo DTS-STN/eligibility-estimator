@@ -319,6 +319,12 @@ export const BenefitCards: React.VFC<{
           : [...eligiblePartnerResult.cardDetail.collapsedText]
 
       collapsedDetails = [...collapsedDetails, ...temp]
+
+      // remove duplicates from array, this is because future is adding extra msg
+      collapsedDetails = collapsedDetails.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.heading === value.heading)
+      )
     }
 
     const eligibility: boolean =
