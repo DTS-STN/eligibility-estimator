@@ -61,5 +61,6 @@ module.exports = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXT_AUTH_USERNAME: process.env.NEXT_AUTH_USERNAME,
     NEXT_AUTH_PASSWORD: process.env.NEXT_AUTH_PASSWORD,
+    LOGGING_LEVEL: process.env.LOGGING_LEVEL,
   },
 }
