@@ -30,6 +30,7 @@ export class FutureHandler {
   }
 
   private getSingleResults() {
+    let result = this.futureResultsObj
     if (Number(this.query.age) < 65) {
       this.newQuery['age'] = '65'
       this.newQuery['receiveOAS'] = 'false'
@@ -57,11 +58,12 @@ export class FutureHandler {
 
       const clientResult = [{ 65: eligibleBenefits }]
 
-      return {
+      result = {
         ...this.futureResultsObj,
         client: clientResult,
       }
     }
+    return result
   }
 
   private getWidowedResults() {
@@ -125,6 +127,7 @@ export class FutureHandler {
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
     const futureAges = getAgeArray(ages)
 
+    let result = this.futureResultsObj
     if (futureAges.length !== 0) {
       const clientResults = []
       const partnerResults = []
@@ -172,11 +175,12 @@ export class FutureHandler {
         }
       })
 
-      return {
+      result = {
         client: clientResults.length !== 0 ? clientResults : null,
         partner: partnerResults.length !== 0 ? partnerResults : null,
       }
     }
+    return result
   }
 
   private getEligibleBenefits(benefits) {
