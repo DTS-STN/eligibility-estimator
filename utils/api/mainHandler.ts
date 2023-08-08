@@ -9,7 +9,6 @@ import { FutureHandler } from './futureHandler'
 export default class MainHandler {
   readonly handler: BenefitHandler
   readonly futureHandler: FutureHandler
-  readonly locale: string
   readonly results: ResponseSuccess | ResponseError
   constructor(query: { [key: string]: string | string[] }) {
     const { error, value } = schema.validate(query, { abortEarly: false })
@@ -18,14 +17,14 @@ export default class MainHandler {
     this.handler = new BenefitHandler(value)
 
     // Future planning
-    this.futureHandler = new FutureHandler(query, this.locale)
+    this.futureHandler = new FutureHandler(query, value._language)
 
     const resultObj: any = {
       visibleFields: this.handler.requiredFields,
       results: this.handler.benefitResults.client,
-      futureClientResults: this.futureHandler.benefitResults.client,
+      futureClientResults: this.futureHandler.benefitResults?.client,
       partnerResults: this.handler.benefitResults.partner,
-      futurePartnerResults: this.futureHandler.benefitResults.partner,
+      futurePartnerResults: this.futureHandler.benefitResults?.partner,
       summary: this.handler.summary,
       missingFields: this.handler.missingFields,
       fieldData: this.handler.fieldData,

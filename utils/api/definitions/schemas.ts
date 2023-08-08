@@ -95,27 +95,7 @@ export const RequestSchema = Joi.object({
     .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
     .required()
-    .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
-    .custom((value, helpers) => {
-      const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
-      if (livingCountry === 'CAN') {
-        if (yearsInCanadaSince18 < 10) {
-          return helpers.message({
-            custom: value
-              ? ValidationErrors.socialCountryUnavailable10
-              : ValidationErrors.yearsInCanadaNotEnough10,
-          })
-        }
-      } else {
-        if (yearsInCanadaSince18 < 20) {
-          return helpers.message({
-            custom: value
-              ? ValidationErrors.socialCountryUnavailable20
-              : ValidationErrors.yearsInCanadaNotEnough20,
-          })
-        }
-      }
-    }, 'custom validation for the "everLivedSocialCountry" question'),
+    .messages({ 'any.required': ValidationErrors.socialCountryEmpty }),
   partnerBenefitStatus: Joi.string()
     .required()
     .messages({ 'any.required': ValidationErrors.partnerBenefitStatusEmpty })
