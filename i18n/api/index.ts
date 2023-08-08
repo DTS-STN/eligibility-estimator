@@ -53,7 +53,7 @@ export interface Translations {
   detail: {
     eligible: string
     futureEligible60: string
-    futureEligible65: string
+    futureEligible: string
     eligibleIncomeTooHigh: string
     futureEligibleIncomeTooHigh: string
     futureEligibleIncomeTooHigh2: string

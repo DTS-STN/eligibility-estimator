@@ -130,7 +130,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
             detail: this.future
-              ? this.translations.detail.futureEligible65
+              ? this.translations.detail.futureEligible
               : this.translations.detail.eligible,
           }
         }

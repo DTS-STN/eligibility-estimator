@@ -798,7 +798,7 @@ export class BenefitHandler {
                 EntitlementResultType.FULL
               allResults.client.gis.eligibility.detail,
                 (allResults.client.gis.cardDetail.mainText = this.future
-                  ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                  ? `${this.translations.detail.futureEligible} ${this.translations.detail.futureExpectToReceive}`
                   : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
 
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
@@ -1128,7 +1128,7 @@ export class BenefitHandler {
           ) {
             allResults.client.gis.eligibility.detail,
               (allResults.client.gis.cardDetail.mainText = this.future
-                ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                ? `${this.translations.detail.futureEligible} ${this.translations.detail.futureExpectToReceive}`
                 : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
           }
 

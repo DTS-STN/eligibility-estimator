@@ -39,12 +39,7 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    // const ageEligible = yearsInCanada < residencyReq ? age + (residencyReq - yearsInCanada) : age < 65 ? 65 : age +
-
-    console.log('age', age)
-    console.log('ELIGIBILITY')
     const eliObj = eligibility(Math.floor(age), yearsInCanada)
-    console.log('eliObj', eliObj)
 
     this.newQuery['age'] = String(eliObj.ageOfEligibility)
     this.newQuery['receiveOAS'] = 'false'
@@ -57,8 +52,6 @@ export class FutureHandler {
         Math.min(40, eliObj.yearsOfResAtEligibility)
       )
     }
-
-    console.log('this.newQuery', this.newQuery)
 
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
     const handler = new BenefitHandler(value, true)
@@ -80,12 +73,22 @@ export class FutureHandler {
   }
 
   private getWidowedResults() {
+    let result = this.futureResultsObj
     const age = Number(this.query.age)
+    const yearsInCanada = Number(this.query.yearsInCanadaSince18)
+    const residencyReq = 10
+
+    // No future benefits if 65 or over AND years in Canada already meets residency criteria
+    if (age >= 65 && yearsInCanada >= residencyReq) return result
+
+    const eliObj = eligibility(Math.floor(age), yearsInCanada)
+    const oasAge = eliObj.ageOfEligibility
+
     let futureAges = []
     if (age < 60) {
-      futureAges = [60, 65]
-    } else if (age >= 60 && age < 65) {
-      futureAges = [65]
+      futureAges = [60, oasAge]
+    } else if (age >= 60 && age < oasAge) {
+      futureAges = [oasAge]
     }
 
     const clientResult =
@@ -93,7 +96,7 @@ export class FutureHandler {
         ? futureAges.map((age) => {
             this.newQuery['age'] = age
 
-            if (age === 65) {
+            if (age === oasAge) {
               this.newQuery['receiveOAS'] = 'false'
             }
 
@@ -102,12 +105,7 @@ export class FutureHandler {
               this.query.yearsInCanadaSince18
             ) {
               this.newQuery['yearsInCanadaSince18'] = String(
-                Math.min(
-                  40,
-                  65 -
-                    Math.floor(Number(this.query.age)) +
-                    Number(this.query.yearsInCanadaSince18)
-                )
+                Math.min(40, oasAge)
               )
             }
 

@@ -83,7 +83,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
                 ? this.translations.detail.oas.futureEligibleIncomeTooHigh
                 : this.translations.detail.oas.eligibleIncomeTooHigh
               : this.future
-              ? this.translations.detail.futureEligible65
+              ? this.translations.detail.futureEligible
               : this.translations.detail.eligible,
         }
       } else if (this.input.age >= 64 && this.input.age < 65) {
@@ -201,7 +201,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     if (type === EntitlementResultType.PARTIAL)
       this.eligibility.detail = this.future
-        ? this.translations.detail.futureEligible65
+        ? this.translations.detail.futureEligible
         : this.translations.detail.eligiblePartialOas
 
     return {

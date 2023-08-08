@@ -313,7 +313,8 @@ const en: Translations = {
   detail: {
     eligible: "You're likely eligible for this benefit.",
     futureEligible60: "You'll likely be eligible once you turn 60.",
-    futureEligible65: "You'll likely be eligible once you turn 65.",
+    futureEligible:
+      "You'll likely be eligible once you turn {EARLIEST_ELIGIBLE_AGE}.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     futureEligibleIncomeTooHigh:
