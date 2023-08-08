@@ -139,4 +139,13 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
+
+  get info() {
+    return {
+      benefitKey: this.benefitKey,
+      eligibility: this.eligibility,
+      entitlement: this.entitlement,
+      cardDetail: this.cardDetail,
+    }
+  }
 }

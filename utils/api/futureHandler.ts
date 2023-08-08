@@ -105,7 +105,7 @@ export class FutureHandler {
               this.query.yearsInCanadaSince18
             ) {
               this.newQuery['yearsInCanadaSince18'] = String(
-                Math.min(40, oasAge)
+                Math.min(40, eliObj.yearsOfResAtEligibility)
               )
             }
 

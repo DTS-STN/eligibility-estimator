@@ -126,27 +126,36 @@ function addKeyValue(obj, key, val) {
 }
 
 export function eligibility(age, yearsInCanada) {
-  if (age < 65) {
-    let yearsUntil65 = 65 - age
-    let yearsInCanadaWhen65 = yearsInCanada + yearsUntil65
+  const minAgeEligibility = 65
+  const minYearsOfResEligibility = 10
 
-    if (yearsInCanadaWhen65 >= 10) {
-      return {
-        ageOfEligibility: 65,
-        yearsOfResAtEligibility: yearsInCanadaWhen65,
-      }
-    }
+  let ageOfEligibility
+  let yearsOfResAtEligibility
 
-    let additionalYears = 10 - yearsInCanadaWhen65
-    return {
-      ageOfEligibility: 65 + additionalYears,
-      yearsOfResAtEligibility: 10,
+  if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
+    const yearsPastEligibility = Math.min(
+      age - minAgeEligibility,
+      yearsInCanada - minYearsOfResEligibility
+    )
+    ageOfEligibility = age - yearsPastEligibility
+    yearsOfResAtEligibility = yearsInCanada - yearsPastEligibility
+  } else if (
+    age < minAgeEligibility ||
+    yearsInCanada < minYearsOfResEligibility
+  ) {
+    while (
+      age < minAgeEligibility ||
+      yearsInCanada < minYearsOfResEligibility
+    ) {
+      age++
+      yearsInCanada++
     }
+    ageOfEligibility = age
+    yearsOfResAtEligibility = yearsInCanada
   }
 
-  let additionalYears = 10 - yearsInCanada
   return {
-    ageOfEligibility: age + additionalYears,
-    yearsOfResAtEligibility: 10,
+    ageOfEligibility,
+    yearsOfResAtEligibility,
   }
 }

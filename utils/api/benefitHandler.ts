@@ -42,6 +42,7 @@ import {
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
+import { eligibility } from './helpers/utils'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -335,7 +336,6 @@ export class BenefitHandler {
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
-    // without deferral
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
@@ -343,39 +343,75 @@ export class BenefitHandler {
       this.future
     )
 
-    // if option to defer is possible
-    // with deferral
-    // TODO
-    // if NOT use "with deferral" calculation as more beneficial
+    const clientAge = this.input.client.age
+    const clientYearsInCanada = this.input.client.yearsInCanadaSince18
+    const clientReceiveOas = this.input.client.receiveOAS
+    const eliObj = eligibility(clientAge, clientYearsInCanada)
+    const ageDiff = clientAge - eliObj.ageOfEligibility
+    console.log('eliObj', eliObj)
 
-    // All done with OAS, move onto GIS, but only do GIS eligibility for now.
-    // using no deferral OAS amount
+    let deferralMonths = 0
+    if (clientAge > eliObj.ageOfEligibility) {
+      deferralMonths = ageDiff * 12
+    }
+
+    // Possible to defer
+    const newInput = { ...this.input.client }
+    let clientOasWithDeferral
+    if (deferralMonths !== 0) {
+      newInput['age'] = eliObj.ageOfEligibility
+      newInput['receiveOAS'] = true
+      newInput['yearsInCanadaSince18'] =
+        this.input.client.yearsInCanadaSince18 - ageDiff
+      newInput['oasDeferDuration'] = JSON.stringify({
+        months: deferralMonths,
+        years: 0,
+      })
+
+      clientOasWithDeferral = new OasBenefit(
+        newInput,
+        this.translations,
+        false,
+        this.future
+      )
+    }
+
     let clientGisNoDeferral = new GisBenefit(
       this.input.client,
       this.translations,
-      allResults.client.oas, // TODO: use clientOasNoDeferral result here but we need it in the same format as what the allResults contains
+      clientOasNoDeferral.info, // TODO: use clientOasNoDeferral result here but we need it in the same format as what the allResults contains
       false,
       this.future
     )
 
-    // console.log('clientOas', clientOas)
-    // console.log('allResults.client.oas', allResults.client.oas)
+    let clientGisWithDeferral
+    if (clientOasWithDeferral) {
+      clientGisWithDeferral = new GisBenefit(
+        newInput,
+        this.translations,
+        clientOasWithDeferral.info,
+        false,
+        this.future
+      )
+    }
 
-    // using deferral amount
-    // TODO
+    const noDeferTotal =
+      clientOasNoDeferral.entitlement.result +
+      clientGisNoDeferral.entitlement.result
 
-    // TODO: Assign the more beneficial result to clientOas
-    const clientOas = clientOasNoDeferral
-    // TODO: Assign the more beneficial amount to clientGis
-    let clientGis = clientGisNoDeferral
+    const deferTotal =
+      clientOasWithDeferral?.entitlement.result +
+      clientGisWithDeferral?.entitlement.result
 
-    // TODO
-    // if (withDeferral) {
-    //   make appropriate changes to clientOas.cardDetail.?
-    //   make appropriate changes to clientOas.eligibility?
-    // }
+    const deferralMoreBeneficial = deferTotal > noDeferTotal
 
-    // Compare totals to determine which combination of OAS/GIS is higher and set those amounts
+    const clientOas = deferralMoreBeneficial
+      ? clientOasWithDeferral
+      : clientOasNoDeferral
+
+    let clientGis = deferralMoreBeneficial
+      ? clientGisWithDeferral
+      : clientGisNoDeferral
 
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
