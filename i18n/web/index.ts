@@ -1,4 +1,8 @@
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  ISOLanguage,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
@@ -7,6 +11,7 @@ export const webDictionary = { [Language.EN]: en, [Language.FR]: fr }
 
 export type WebTranslations = {
   _language: Language
+  metaLanguage: ISOLanguage
 
   atLeast60: string
   haveNetIncomeLess: string

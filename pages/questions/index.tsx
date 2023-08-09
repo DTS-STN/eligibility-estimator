@@ -24,9 +24,9 @@ const Questions: NextPage<{ adobeAnalyticsUrl: string }> = ({
     <>
       <Head>
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
-
         <meta name="robots" content="noindex" />
       </Head>
+
       <Layout title={tsln.questionPageTitle}>
         <QuestionsPage />
       </Layout>
