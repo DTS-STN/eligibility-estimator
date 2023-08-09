@@ -1173,9 +1173,13 @@ export class BenefitHandler {
                 !allResults.client.gis.cardDetail.collapsedText.includes(
                   this.translations.detailWithHeading
                     .calculatedBasedOnIndividualIncome
+                ) &&
+                !allResults.partner.gis.cardDetail.collapsedText.includes(
+                  this.translations.detailWithHeading
+                    .calculatedBasedOnIndividualIncome
                 )
               )
-                allResults.client.gis.cardDetail.collapsedText.unshift(
+                allResults.partner.gis.cardDetail.collapsedText.unshift(
                   this.translations.detailWithHeading
                     .calculatedBasedOnIndividualIncome
                 )
