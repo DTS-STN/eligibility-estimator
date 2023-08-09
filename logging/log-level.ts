@@ -4,4 +4,5 @@ const logLevelData = {
   //   'home': 'info',
   //   'app': 'debug',
 }
+console.log('log level', process.env.LOGGING_LEVEL)
 export default logLevelData
