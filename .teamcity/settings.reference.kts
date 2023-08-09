@@ -337,7 +337,7 @@ object Build_Prod: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.CLOUD_ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg LOGGING_LEVEL=%env.Login% --build-arg ADOBE_ANALYTICS_URL=%env.ADOBE_ANALYTICS_URL% --build-arg NEXTAUTH_URL=%env.NEXTAUTH_URL% --build-arg NEXTAUTH_SECRET=%env.NEXTAUTH_SECRET% --build-arg NEXT_AUTH_USERNAME=%env.NEXT_AUTH_USERNAME% --build-arg NEXT_AUTH_PASSWORD=%env.NEXT_AUTH_PASSWORD% "
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg LOGGING_LEVEL=%env.LOGGING_LEVEL% --build-arg ADOBE_ANALYTICS_URL=%env.ADOBE_ANALYTICS_URL% --build-arg NEXTAUTH_URL=%env.NEXTAUTH_URL% --build-arg NEXTAUTH_SECRET=%env.NEXTAUTH_SECRET% --build-arg NEXT_AUTH_USERNAME=%env.NEXT_AUTH_USERNAME% --build-arg NEXT_AUTH_PASSWORD=%env.NEXT_AUTH_PASSWORD% "
             }
         }
         script {
