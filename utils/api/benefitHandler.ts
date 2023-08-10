@@ -42,7 +42,7 @@ import {
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
-import { eligibility } from './helpers/utils'
+import { eligibility, evaluateOASInput } from './helpers/utils'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -336,6 +336,7 @@ export class BenefitHandler {
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
+    console.log('this.input.client', this.input.client)
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
@@ -343,55 +344,59 @@ export class BenefitHandler {
       this.future
     )
 
-    const clientAge = this.input.client.age
-    const clientYearsInCanada = this.input.client.yearsInCanadaSince18
-    const clientReceiveOas = this.input.client.receiveOAS
-    const eliObj = eligibility(clientAge, clientYearsInCanada)
-    const ageDiff = clientAge - eliObj.ageOfEligibility
-    console.log('eliObj', eliObj)
+    consoleDev(
+      'Client OAS amount NO deferral',
+      clientOasNoDeferral.entitlement.result
+    )
 
-    let deferralMonths = 0
-    if (clientAge > eliObj.ageOfEligibility) {
-      deferralMonths = ageDiff * 12
-    }
+    // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
+    const clientOasHelper = evaluateOASInput(this.input.client)
 
-    // Possible to defer
-    const newInput = { ...this.input.client }
+    console.log('clientoasHelper.newInput', clientOasHelper.newInput)
     let clientOasWithDeferral
-    if (deferralMonths !== 0) {
-      newInput['age'] = eliObj.ageOfEligibility
-      newInput['receiveOAS'] = true
-      newInput['yearsInCanadaSince18'] =
-        this.input.client.yearsInCanadaSince18 - ageDiff
-      newInput['oasDeferDuration'] = JSON.stringify({
-        months: deferralMonths,
-        years: 0,
-      })
-
+    if (clientOasHelper.canDefer) {
+      consoleDev(
+        'Modified input to calculate OAS with deferral',
+        clientOasHelper.newInput
+      )
       clientOasWithDeferral = new OasBenefit(
-        newInput,
+        clientOasHelper.newInput,
         this.translations,
         false,
         this.future
+      )
+      consoleDev(
+        'Client OAS amount WITH deferral',
+        clientOasWithDeferral.entitlement.result
       )
     }
 
     let clientGisNoDeferral = new GisBenefit(
       this.input.client,
       this.translations,
-      clientOasNoDeferral.info, // TODO: use clientOasNoDeferral result here but we need it in the same format as what the allResults contains
+      clientOasNoDeferral.info,
       false,
       this.future
+    )
+
+    consoleDev(
+      'Client GIS amount NO deferral',
+      clientGisNoDeferral.entitlement.result
     )
 
     let clientGisWithDeferral
     if (clientOasWithDeferral) {
       clientGisWithDeferral = new GisBenefit(
-        newInput,
+        clientOasHelper.newInput,
         this.translations,
         clientOasWithDeferral.info,
         false,
         this.future
+      )
+
+      consoleDev(
+        'Client GIS amount WITH deferral',
+        clientGisWithDeferral.entitlement.result
       )
     }
 
@@ -399,11 +404,41 @@ export class BenefitHandler {
       clientOasNoDeferral.entitlement.result +
       clientGisNoDeferral.entitlement.result
 
-    const deferTotal =
-      clientOasWithDeferral?.entitlement.result +
-      clientGisWithDeferral?.entitlement.result
+    consoleDev('TOTAL - NO DEFERRAL', noDeferTotal)
 
-    const deferralMoreBeneficial = deferTotal > noDeferTotal
+    let deferTotal
+    if (clientOasHelper.canDefer) {
+      deferTotal =
+        clientOasWithDeferral?.entitlement.result +
+        clientGisWithDeferral?.entitlement.result
+
+      consoleDev('TOTAL - WITH DEFERRAL', deferTotal)
+    }
+
+    const deferralMoreBeneficial = deferTotal ? deferTotal > noDeferTotal : null
+
+    consoleDev(
+      'CAN DEFER:',
+      clientOasHelper.canDefer,
+      'MORE BENEFICIAL:',
+      deferralMoreBeneficial
+    )
+
+    // console.log('deferralMonths', clientOasHelper.deferralMonths)
+
+    // const addTable =
+    // clientOasHelper.canDefer && deferralMoreBeneficial && clientAge + deferralMonths / 12 < 70
+    // console.log('addTable', addTable)
+
+    // if (deferralMoreBeneficial) {
+    //   clientOasWithDeferral.cardDetail.meta = OasBenefit.buildMetadataObj(
+    //     clientOasHelper.newInput.age,
+    //     this.input.client,
+    //     clientOasNoDeferral.eligibility,
+    //     clientOasNoDeferral.entitlement,
+    //     this.future
+    //   )
+    // }
 
     const clientOas = deferralMoreBeneficial
       ? clientOasWithDeferral

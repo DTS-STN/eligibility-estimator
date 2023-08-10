@@ -309,10 +309,33 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
-    let age = this.input.age
+    // console.log('this.input', this.input)
+    return OasBenefit.buildMetadataObj(
+      this.input.age,
+      this.input,
+      this.eligibility,
+      this.entitlement,
+      this.future
+    )
+
+    // return {
+    //   tableData: null,
+    //   currentAge: null,
+    //   monthsTo70: null,
+    //   receiveOAS: false,
+    // }
+  }
+
+  static buildMetadataObj(
+    age,
+    input,
+    eligibility,
+    entitlement,
+    future
+  ): MetaDataObject {
     const eligible =
-      this.eligibility.result === ResultKey.ELIGIBLE ||
-      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+      eligibility.result === ResultKey.ELIGIBLE ||
+      eligibility.result === ResultKey.INCOME_DEPENDENT
 
     const meta: MetaDataObject = {
       tableData: null,
@@ -323,15 +346,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     if (age) {
       const ageInRange = age >= 65 && age < 70
-      const receivingOAS = this.input.receiveOAS
+      const receivingOAS = input.receiveOAS
       const ageWhole = Math.floor(age)
-      const estimate = this.entitlement.result
+      const estimate = entitlement.result
 
       // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
-      const dontShowCondition = this.entitlement.clawback !== 0 && this.future
+      const dontShowCondition = entitlement.clawback !== 0 && future
 
       // Eligible for OAS pension,and are 65-69, who do not already receive
-      if (eligible && ageInRange && !receivingOAS && !dontShowCondition) {
+      if (eligible && ageInRange && !dontShowCondition) {
         const monthsTo70 = Math.round((70 - age) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
