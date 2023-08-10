@@ -108,6 +108,8 @@ export function getOasNextSteps(
       apiTsln.detail.oas.youShouldHaveReceivedLetter
     nextStepText.nextStepContent += ` ${apiTsln.detail.oas.ifNotReceiveLetter64}`
   }
+
+  return nextStepText
 }
 
 export function getGisNextSteps(
@@ -142,6 +144,8 @@ export function getGisNextSteps(
       nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyApplied}</p>`
     }
   }
+
+  return nextStepText
 }
 
 //
@@ -171,6 +175,8 @@ export function getAlwNextSteps(
       nextStepText.nextStepContent += ifYouApplyText
     }
   }
+
+  return nextStepText
 }
 
 //
@@ -202,5 +208,6 @@ export function getAlwsNextSteps(
       nextStepText.nextStepContent += ifYouApplyText
     }
   }
+
   return nextStepText
 }
