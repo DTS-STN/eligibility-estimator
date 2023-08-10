@@ -468,7 +468,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       //text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
       text += `<p class='mt-6'>${this.translations.detail.oas.youShouldHaveReceivedLetter}</p>`
     }
-
+    console.log('#1', text)
     if (this.eligibility.reason !== ResultReason.INCOME) {
       const clawbackValue = this.entitlement.clawback
 
@@ -478,15 +478,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
             ? this.future
               ? `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
               : `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
-            : null
+            : ''
       } else {
         text +=
           clawbackValue > 0
             ? `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
-            : null
+            : ''
       }
     }
-
+    console.log('#2', text)
     if (
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
       !this.partner &&
@@ -504,7 +504,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         text += this.translations.detail.sinceYouAreSixty
       }
     }
-
+    console.log('#3', text)
     // not sure when this condition would be true, I think never.
     if (
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
@@ -515,7 +515,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.delayMonths
     }
-
+    console.log('#4', text)
     // if income is too high
     if (
       this.input.age < 70 &&
@@ -528,7 +528,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         text += this.translations.detail.delayMonths
       }
     }
-
+    console.log('#8', text)
     return text
   }
 
