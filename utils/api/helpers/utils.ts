@@ -2,6 +2,7 @@ import { consoleDev } from '../../web/helpers/utils'
 import roundToTwo from './roundToTwo'
 
 export const getDeferralIncrease = (months, baseAmount) => {
+  console.log('months ', months)
   const deferralIncreaseByMonth = 0.006 // the increase to the monthly payment per month deferred
   // the extra entitlement received because of the deferral
   return roundToTwo(months * deferralIncreaseByMonth * baseAmount)
@@ -163,12 +164,12 @@ export function eligibility(age, yearsInCanada) {
 
 export function evaluateOASInput(input) {
   let canDefer = false
-  let newInput = { ...input }
-
+  let justBecameEligible = false
   const age = input.age
   const yearsInCanada = input.yearsInCanadaSince18
   const eliObj = eligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
+  let newInput = { ...input }
 
   let deferralMonths = 0
   if (age > eliObj.ageOfEligibility) {
@@ -177,6 +178,10 @@ export function evaluateOASInput(input) {
       Math.min(70, age) - eliObj.ageOfEligibility
     )
     deferralMonths = deferralYears * 12
+  }
+
+  if (age === eliObj.ageOfEligibility && age < 70) {
+    justBecameEligible = true
   }
 
   if (deferralMonths !== 0) {
@@ -193,5 +198,6 @@ export function evaluateOASInput(input) {
   return {
     canDefer,
     newInput,
+    justBecameEligible,
   }
 }

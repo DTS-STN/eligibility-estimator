@@ -336,12 +336,12 @@ export class BenefitHandler {
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
-    console.log('this.input.client', this.input.client)
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
       false,
-      this.future
+      this.future,
+      true
     )
 
     consoleDev(
@@ -351,8 +351,8 @@ export class BenefitHandler {
 
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
+    console.log('clientOasHelper', clientOasHelper)
 
-    console.log('clientoasHelper.newInput', clientOasHelper.newInput)
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {
       consoleDev(
@@ -365,6 +365,7 @@ export class BenefitHandler {
         false,
         this.future
       )
+
       consoleDev(
         'Client OAS amount WITH deferral',
         clientOasWithDeferral.entitlement.result
@@ -433,10 +434,10 @@ export class BenefitHandler {
     // if (deferralMoreBeneficial) {
     //   clientOasWithDeferral.cardDetail.meta = OasBenefit.buildMetadataObj(
     //     clientOasHelper.newInput.age,
-    //     this.input.client,
-    //     clientOasNoDeferral.eligibility,
-    //     clientOasNoDeferral.entitlement,
-    //     this.future
+    //     clientOasHelper.newInput,
+    //     clientOasWithDeferral.eligibility,
+    //     clientOasWithDeferral.entitlement,
+    //
     //   )
     // }
 
@@ -447,6 +448,27 @@ export class BenefitHandler {
     let clientGis = deferralMoreBeneficial
       ? clientGisWithDeferral
       : clientGisNoDeferral
+
+    if (!this.future) {
+      if (deferralMoreBeneficial) {
+        clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+          this.input.client.age,
+          this.input.client,
+          clientOasWithDeferral.eligibility,
+          clientOasWithDeferral.entitlement
+        )
+      }
+
+      // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
+      if (clientOasHelper.justBecameEligible) {
+        clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+          this.input.client.age,
+          this.input.client,
+          clientOasNoDeferral.eligibility,
+          clientOasNoDeferral.entitlement
+        )
+      }
+    }
 
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
