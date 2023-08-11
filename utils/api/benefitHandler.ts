@@ -1412,30 +1412,6 @@ export class BenefitHandler {
   }
 
   /**
-   * Accepts a numerical month+year, and returns the number of years since then.
-   * This can and will return a decimal value, such as "65.5"!
-   */
-  static calculateAge(birthMonth: number, birthYear: number): number {
-    if (!birthMonth || !birthYear) return 0
-
-    const today = new Date()
-    const currentMonth = today.getMonth() + 1
-    const currentYear = today.getFullYear()
-
-    let ageMonths: number
-    let ageYears = currentYear - birthYear
-
-    if (currentMonth >= birthMonth) {
-      ageMonths = currentMonth - birthMonth
-    } else {
-      ageYears -= 1
-      ageMonths = 12 + (currentMonth - birthMonth)
-    }
-
-    return ageYears + Number((ageMonths / 12).toFixed(2))
-  }
-
-  /**
    * Accepts a list of FieldKeys, transforms that into a full list of field configurations for the frontend to use.
    */
   static getFieldData(
