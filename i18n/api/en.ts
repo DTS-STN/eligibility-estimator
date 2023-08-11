@@ -333,7 +333,7 @@ const en: Translations = {
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
-      "You can start receiving your payments at 65 or wait until you're 70.",
+      "You can start receiving your payments at {EARLIEST_ELIGIBLE_AGE} or wait until you're 70.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:

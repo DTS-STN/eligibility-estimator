@@ -341,7 +341,7 @@ const fr: Translations = {
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
-      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
+      "Vous pouvez commencer à recevoir vos paiements à {EARLIEST_ELIGIBLE_AGE} ans ou attendre d'avoir 70 ans.",
     youCanAply:
       'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
     delayMonths:

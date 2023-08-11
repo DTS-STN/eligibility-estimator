@@ -344,6 +344,7 @@ export class BenefitHandler {
       true
     )
 
+    console.log('NO DEFERRAL', clientOasNoDeferral)
     consoleDev(
       'Client OAS amount NO deferral',
       clientOasNoDeferral.entitlement.result
@@ -366,6 +367,7 @@ export class BenefitHandler {
         this.future
       )
 
+      consoleDev('Client OAS amount WITH deferral', clientOasWithDeferral)
       consoleDev(
         'Client OAS amount WITH deferral',
         clientOasWithDeferral.entitlement.result
@@ -452,9 +454,10 @@ export class BenefitHandler {
     if (!this.future) {
       if (deferralMoreBeneficial) {
         clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
-          this.input.client.age,
+          this.input.client.age, // current age
+          clientOasHelper.newInput.age, // base age
           this.input.client,
-          clientOasWithDeferral.eligibility,
+          clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
           clientOasWithDeferral.entitlement
         )
       }
@@ -462,6 +465,7 @@ export class BenefitHandler {
       // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
       if (clientOasHelper.justBecameEligible) {
         clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+          this.input.client.age,
           this.input.client.age,
           this.input.client,
           clientOasNoDeferral.eligibility,

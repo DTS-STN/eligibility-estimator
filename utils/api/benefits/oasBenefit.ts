@@ -315,6 +315,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     if (this.future) {
       return OasBenefit.buildMetadataObj(
         this.input.age,
+        this.input.age,
         this.input,
         this.eligibility,
         this.entitlement
@@ -330,7 +331,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   static buildMetadataObj(
-    age,
+    currentAge,
+    baseAge,
     input,
     eligibility,
     entitlement
@@ -346,18 +348,21 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       receiveOAS: false,
     }
 
-    if (age) {
+    if (currentAge) {
       console.log('--------------------')
-      console.log('age', age)
+      console.log('currentAge', currentAge)
+      console.log('baseAge', baseAge)
       console.log('input', input)
       console.log('eligibility', eligibility)
       console.log('entitlement', entitlement)
 
-      const ageInRange = age >= 65 && age < 70
+      const ageInRange = currentAge >= 65 && currentAge < 70
       const receivingOAS = input.receiveOAS
-      const ageWhole = Math.floor(age)
-      const estimate = entitlement.result
-      console.log('ageWhole', ageWhole)
+      const currentAgeWhole = Math.floor(currentAge)
+      const baseAgeWhole = Math.floor(baseAge)
+      const estimate = entitlement.result65To74
+      console.log('currentAgeWhole', currentAgeWhole)
+      console.log('baseAgeWhole', baseAgeWhole)
       console.log('estimate', estimate)
       console.log('--------------------')
       // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
@@ -365,35 +370,35 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       // Eligible for OAS pension,and are 65-69, who do not already receive
       if (eligible && ageInRange && !dontShowCondition) {
-        const monthsTo70 = Math.round((70 - age) * 12)
+        const monthsTo70 = Math.round((70 - currentAge) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
+        console.log('monthsTo70', monthsTo70)
 
         // have an estimate > 0
         if (!(estimate <= 0)) {
-          const tableData = [...Array(71 - ageWhole).keys()]
-            .map((i) => i + ageWhole)
+          const tableData = [...Array(71 - baseAgeWhole).keys()]
+            .map((i) => i + baseAgeWhole)
             .map((deferAge, i) => {
-              let monthsUntilAge = Math.round((deferAge - age) * 12)
+              let monthsUntilAge = Math.round((deferAge - currentAge) * 12)
+              console.log('deferAge, monthsUntilAge', deferAge, monthsUntilAge)
               if (monthsUntilAge < 0) monthsUntilAge = 0
-              const amount =
-                estimate +
-                getDeferralIncrease(
-                  deferAge === 70 ? monthsUntilAge : i * 12,
-                  estimate
-                )
+              const amount = estimate + getDeferralIncrease(i * 12, estimate)
+
+              console.log('amount', amount)
 
               return {
                 age: deferAge,
                 amount,
               }
             })
-          // tableData.shift()
-          meta.tableData = tableData
-          meta.currentAge = ageWhole
+          const filteredTableData = tableData.filter(
+            (row) => row.age > currentAge
+          )
+          meta.tableData = filteredTableData
+          meta.currentAge = currentAgeWhole
         }
 
-        console.log('meta', meta)
         return meta
       }
 
@@ -508,8 +513,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
       !this.partner &&
       this.currentEntitlementAmount > 0 &&
-      !this.input.receiveOAS &&
-      !this.deferral
+      !this.input.receiveOAS
     ) {
       if (this.future) {
         // can also check if this.entitlement.clawback === 0
@@ -528,8 +532,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
       !this.partner &&
       this.currentEntitlementAmount <= 0 &&
-      !this.input.receiveOAS &&
-      !this.deferral
+      !this.input.receiveOAS
     ) {
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       text += this.translations.detail.delayMonths
@@ -540,8 +543,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.input.age < 70 &&
       this.eligibility.reason === ResultReason.INCOME &&
       !this.partner &&
-      !this.input.receiveOAS &&
-      !this.deferral
+      !this.input.receiveOAS
     ) {
       if (!this.future) {
         text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
