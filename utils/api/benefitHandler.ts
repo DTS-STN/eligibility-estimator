@@ -430,22 +430,6 @@ export class BenefitHandler {
       deferralMoreBeneficial
     )
 
-    // console.log('deferralMonths', clientOasHelper.deferralMonths)
-
-    // const addTable =
-    // clientOasHelper.canDefer && deferralMoreBeneficial && clientAge + deferralMonths / 12 < 70
-    // console.log('addTable', addTable)
-
-    // if (deferralMoreBeneficial) {
-    //   clientOasWithDeferral.cardDetail.meta = OasBenefit.buildMetadataObj(
-    //     clientOasHelper.newInput.age,
-    //     clientOasHelper.newInput,
-    //     clientOasWithDeferral.eligibility,
-    //     clientOasWithDeferral.entitlement,
-    //
-    //   )
-    // }
-
     const clientOas = deferralMoreBeneficial
       ? clientOasWithDeferral
       : clientOasNoDeferral
@@ -455,26 +439,48 @@ export class BenefitHandler {
       : clientGisNoDeferral
 
     if (!this.future) {
-      if (deferralMoreBeneficial) {
+      if (clientOasHelper.canDefer) {
+        if (deferralMoreBeneficial) {
+          clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+            this.input.client.age, // current age
+            clientOasHelper.newInput.age, // base age - age when first eligible for OAS
+            this.input.client,
+            clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
+            clientOasWithDeferral.entitlement,
+            this.future
+          )
+        } else {
+          // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
+          if (clientOasHelper.justBecameEligible) {
+            clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+              this.input.client.age,
+              this.input.client.age,
+              this.input.client,
+              clientOasNoDeferral.eligibility,
+              clientOasNoDeferral.entitlement,
+              this.future
+            )
+          } else {
+            clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+              this.input.client.age, // current age
+              clientOasHelper.newInput.age, // base age - age when first eligible for OAS
+              this.input.client,
+              clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
+              clientOasWithDeferral.entitlement,
+              this.future
+            )
+          }
+        }
+      } else {
         clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
           this.input.client.age, // current age
-          clientOasHelper.newInput.age, // base age - age when first eligible for OAS
+          this.input.client.age, // base age - age when first eligible for OAS
           this.input.client,
-          clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
-          clientOasWithDeferral.entitlement,
+          clientOasNoDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
+          clientOasNoDeferral.entitlement,
           this.future
         )
       }
-      // else {
-      //   clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
-      //     this.input.client.age,
-      //     this.input.client.age,
-      //     this.input.client,
-      //     clientOasNoDeferral.eligibility,
-      //     clientOasNoDeferral.entitlement,
-      //     this.future
-      //   )
-      // }
     }
 
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
