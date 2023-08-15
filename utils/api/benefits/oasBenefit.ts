@@ -478,12 +478,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
             ? this.future
               ? `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
               : `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
-            : null
+            : ''
       } else {
         text +=
           clawbackValue > 0
             ? `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
-            : null
+            : ''
       }
     }
 
