@@ -114,6 +114,7 @@ export interface Translations {
       over70: string
       eligibleWhenTurn65: string
       ifNotReceiveLetter64: string
+      chooseToDefer: string
     }
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string

@@ -312,22 +312,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
-    if (this.future) {
-      return OasBenefit.buildMetadataObj(
-        this.input.age,
-        this.input.age,
-        this.input,
-        this.eligibility,
-        this.entitlement
-      )
-    } else {
-      return {
-        tableData: null,
-        currentAge: null,
-        monthsTo70: null,
-        receiveOAS: false,
-      }
-    }
+    return OasBenefit.buildMetadataObj(
+      this.input.age,
+      this.input.age,
+      this.input,
+      this.eligibility,
+      this.entitlement,
+      this.future
+    )
   }
 
   static buildMetadataObj(
@@ -335,7 +327,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     baseAge,
     input,
     eligibility,
-    entitlement
+    entitlement,
+    future
   ): MetaDataObject {
     const eligible =
       eligibility.result === ResultKey.ELIGIBLE ||
@@ -356,7 +349,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       const estimate = entitlement.result65To74
 
       // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
-      const dontShowCondition = entitlement.clawback !== 0
+      const dontShowCondition = entitlement.clawback !== 0 && future
 
       // Eligible for OAS pension,and are 65-69, who do not already receive
       if (eligible && ageInRange && !dontShowCondition) {
@@ -456,7 +449,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   protected getCardText(): string {
-    // overwrite eligibility detaili if income too high
+    // overwrite eligibility detail if income too high
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.type === EntitlementResultType.NONE
@@ -504,10 +497,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += `<p class='mt-6'>${this.translations.detail.oas.youShouldHaveReceivedLetter}</p>`
     }
 
-    console.log('this.eligibility.result', this.eligibility.result)
-    console.log('this.partner', this.partner)
-    console.log('this.input.receiveOAS', this.input.receiveOAS)
-    console.log('this.input.age', this.input.age)
+    // console.log('this.eligibility.result', this.eligibility.result)
+    // console.log('this.partner', this.partner)
+    // console.log('this.input.receiveOAS', this.input.receiveOAS)
+    // console.log('this.input.age', this.input.age)
 
     // Deferral options - only scenarios when deferral options are shown
     if (
@@ -516,12 +509,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       (!this.input.receiveOAS || this.deferral) &&
       this.input.age < 70
     ) {
-      console.log('ELIGIBLE CASE INSIDE THE IF STATEMENT FOR DEFERRAL OPTIONS')
-      // console.log('this.eligibility.result', this.eligibility.result)
-      // console.log('this.partner', this.partner)
-      // console.log('this.input.receiveOAS', this.input.receiveOAS)
-      // console.log('this.input.age', this.input.age)
-      // console.log('INSIDE MAIN IF STATEMENT')
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       // if income too high
       if (this.eligibility.reason === ResultReason.INCOME) {
@@ -541,8 +528,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         } else {
           text += this.translations.detail.sinceYouAreSixty
 
-          if (this.deferral) {
-            text += `<p class='mb-2 mt-6'>You can choose to defer your pension or increase your years of residence in Canada.</p>`
+          if (!this.deferral && this.input.yearsInCanadaSince18 < 40) {
+            text += `<p class='mb-2 mt-6'>${this.translations.detail.oas.chooseToDefer}</p>`
           }
         }
       }
