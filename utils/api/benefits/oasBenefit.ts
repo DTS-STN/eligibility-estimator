@@ -349,22 +349,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     }
 
     if (currentAge) {
-      console.log('--------------------')
-      console.log('currentAge', currentAge)
-      console.log('baseAge', baseAge)
-      console.log('input', input)
-      console.log('eligibility', eligibility)
-      console.log('entitlement', entitlement)
-
       const ageInRange = currentAge >= 65 && currentAge < 70
       const receivingOAS = input.receiveOAS
       const currentAgeWhole = Math.floor(currentAge)
       const baseAgeWhole = Math.floor(baseAge)
       const estimate = entitlement.result65To74
-      console.log('currentAgeWhole', currentAgeWhole)
-      console.log('baseAgeWhole', baseAgeWhole)
-      console.log('estimate', estimate)
-      console.log('--------------------')
+
       // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
       const dontShowCondition = entitlement.clawback !== 0
 
@@ -373,7 +363,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         const monthsTo70 = Math.round((70 - currentAge) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
-        console.log('monthsTo70', monthsTo70)
 
         // have an estimate > 0
         if (!(estimate <= 0)) {
@@ -381,11 +370,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
             .map((i) => i + baseAgeWhole)
             .map((deferAge, i) => {
               let monthsUntilAge = Math.round((deferAge - currentAge) * 12)
-              console.log('deferAge, monthsUntilAge', deferAge, monthsUntilAge)
               if (monthsUntilAge < 0) monthsUntilAge = 0
               const amount = estimate + getDeferralIncrease(i * 12, estimate)
-
-              console.log('amount', amount)
 
               return {
                 age: deferAge,
@@ -470,6 +456,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   }
 
   protected getCardText(): string {
+    // overwrite eligibility detaili if income too high
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.type === EntitlementResultType.NONE
@@ -482,8 +469,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
+    // First sentence - general eligibility already in the detail
     let text = this.eligibility.detail
 
+    // Second sentence - "expect to receive" variation
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.eligibility.reason !== ResultReason.INCOME &&
@@ -498,9 +487,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       } else {
         text += ` ${this.translations.detail.expectToReceive}`
       }
-    } else if (this.eligibility.result === ResultKey.INCOME_DEPENDENT) {
+    }
+
+    // special case
+    if (this.eligibility.result === ResultKey.INCOME_DEPENDENT) {
       text += `<p class="mt-6">${this.translations.detail.oas.dependOnYourIncome}</p>`
-    } else if (
+    }
+
+    // special case
+    if (
       this.eligibility.result === ResultKey.INELIGIBLE &&
       this.eligibility.reason === ResultReason.AGE_YOUNG
     ) {
@@ -509,45 +504,47 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       text += `<p class='mt-6'>${this.translations.detail.oas.youShouldHaveReceivedLetter}</p>`
     }
 
-    if (
-      this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
-      !this.partner &&
-      this.currentEntitlementAmount > 0 &&
-      !this.input.receiveOAS
-    ) {
-      if (this.future) {
-        // can also check if this.entitlement.clawback === 0
-        if (this.income <= legalValues.oas.clawbackIncomeLimit) {
-          text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-          text += this.translations.detail.futureDeferralOptions
-        }
-      } else {
-        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-        text += this.translations.detail.sinceYouAreSixty
-      }
-    }
+    console.log('this.eligibility.result', this.eligibility.result)
+    console.log('this.partner', this.partner)
+    console.log('this.input.receiveOAS', this.input.receiveOAS)
+    console.log('this.input.age', this.input.age)
 
-    // not sure when this condition would be true, I think never.
+    // Deferral options - only scenarios when deferral options are shown
     if (
-      this.eligibility.reason === ResultReason.AGE_65_TO_69 &&
+      this.eligibility.result === ResultKey.ELIGIBLE &&
       !this.partner &&
-      this.currentEntitlementAmount <= 0 &&
-      !this.input.receiveOAS
+      (!this.input.receiveOAS || this.deferral) &&
+      this.input.age < 70
     ) {
+      console.log('ELIGIBLE CASE INSIDE THE IF STATEMENT FOR DEFERRAL OPTIONS')
+      // console.log('this.eligibility.result', this.eligibility.result)
+      // console.log('this.partner', this.partner)
+      // console.log('this.input.receiveOAS', this.input.receiveOAS)
+      // console.log('this.input.age', this.input.age)
+      // console.log('INSIDE MAIN IF STATEMENT')
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-      text += this.translations.detail.delayMonths
-    }
+      // if income too high
+      if (this.eligibility.reason === ResultReason.INCOME) {
+        if (!this.future) {
+          text += this.translations.detail.delayMonths
+        }
+      }
 
-    // if income is too high
-    if (
-      this.input.age < 70 &&
-      this.eligibility.reason === ResultReason.INCOME &&
-      !this.partner &&
-      !this.input.receiveOAS
-    ) {
-      if (!this.future) {
-        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-        text += this.translations.detail.delayMonths
+      // normal case
+      if (this.entitlement.result > 0) {
+        // console.log('this.entitlement.result', this.entitlement.result)
+        if (this.future) {
+          // can also check if this.entitlement.clawback === 0
+          if (this.income <= legalValues.oas.clawbackIncomeLimit) {
+            text += this.translations.detail.futureDeferralOptions
+          }
+        } else {
+          text += this.translations.detail.sinceYouAreSixty
+
+          if (this.deferral) {
+            text += `<p class='mb-2 mt-6'>You can choose to defer your pension or increase your years of residence in Canada.</p>`
+          }
+        }
       }
     }
 

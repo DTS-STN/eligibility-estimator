@@ -340,8 +340,7 @@ export class BenefitHandler {
       this.input.client,
       this.translations,
       false,
-      this.future,
-      true
+      this.future
     )
 
     console.log('NO DEFERRAL', clientOasNoDeferral)
@@ -364,10 +363,11 @@ export class BenefitHandler {
         clientOasHelper.newInput,
         this.translations,
         false,
-        this.future
+        this.future,
+        true
       )
 
-      consoleDev('Client OAS amount WITH deferral', clientOasWithDeferral)
+      consoleDev('WITH DEFERRAL', clientOasWithDeferral)
       consoleDev(
         'Client OAS amount WITH deferral',
         clientOasWithDeferral.entitlement.result

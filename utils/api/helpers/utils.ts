@@ -183,7 +183,7 @@ export function evaluateOASInput(input) {
     justBecameEligible = true
   }
 
-  if (deferralMonths !== 0) {
+  if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
     newInput['age'] = eliObj.ageOfEligibility
     newInput['receiveOAS'] = true
