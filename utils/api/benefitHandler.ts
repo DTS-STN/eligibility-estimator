@@ -42,7 +42,7 @@ import {
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
-import { eligibility, evaluateOASInput } from './helpers/utils'
+import { evaluateOASInput } from './helpers/utils'
 
 export class BenefitHandler {
   private _translations: Translations

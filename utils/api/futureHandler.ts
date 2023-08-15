@@ -1,7 +1,12 @@
 import { BenefitHandler } from './benefitHandler'
 import { MaritalStatus } from './definitions/enums'
 import { RequestSchema as schema } from './definitions/schemas'
-import { buildQuery, getAgeArray, eligibility } from './helpers/utils'
+import {
+  buildQuery,
+  getAgeArray,
+  OasEligibility,
+  AlwsEligibility,
+} from './helpers/utils'
 
 export class FutureHandler {
   maritalStatus: string
@@ -39,7 +44,7 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    const eliObj = eligibility(Math.floor(age), yearsInCanada)
+    const eliObj = OasEligibility(Math.floor(age), yearsInCanada)
 
     this.newQuery['age'] = String(eliObj.ageOfEligibility)
     this.newQuery['receiveOAS'] = 'false'
@@ -81,15 +86,13 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    const eliObj = eligibility(Math.floor(age), yearsInCanada)
-    const oasAge = eliObj.ageOfEligibility
+    const eliObjOas = OasEligibility(Math.floor(age), yearsInCanada)
+    const oasAge = eliObjOas.ageOfEligibility
 
-    let futureAges = []
-    if (age < 60) {
-      futureAges = [60, oasAge]
-    } else if (age >= 60 && age < oasAge) {
-      futureAges = [oasAge]
-    }
+    const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
+    const alwsAge = eliObjAlws.ageOfEligibility
+
+    const futureAges = [alwsAge, oasAge].filter((age) => !!age)
 
     const clientResult =
       futureAges.length !== 0
@@ -105,7 +108,7 @@ export class FutureHandler {
               this.query.yearsInCanadaSince18
             ) {
               this.newQuery['yearsInCanadaSince18'] = String(
-                Math.min(40, eliObj.yearsOfResAtEligibility)
+                Math.min(40, eliObjOas.yearsOfResAtEligibility)
               )
             }
 

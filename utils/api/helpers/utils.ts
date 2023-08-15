@@ -1,3 +1,4 @@
+import { max, min } from 'lodash'
 import { consoleDev } from '../../web/helpers/utils'
 import roundToTwo from './roundToTwo'
 
@@ -126,7 +127,7 @@ function addKeyValue(obj, key, val) {
   }
 }
 
-export function eligibility(age, yearsInCanada) {
+export function OasEligibility(age, yearsInCanada) {
   const minAgeEligibility = 65
   const minYearsOfResEligibility = 10
 
@@ -161,12 +162,38 @@ export function eligibility(age, yearsInCanada) {
   }
 }
 
+export function AlwsEligibility(age, yearsInCanada) {
+  const minAgeEligibility = 60
+  const maxAgeEligibility = 64
+  const minYearsOfResEligibility = 10
+
+  let ageOfEligibility
+  let yearsOfResAtEligibility
+
+  if (age < minAgeEligibility || yearsInCanada < minYearsOfResEligibility) {
+    while (
+      age < minAgeEligibility ||
+      yearsInCanada < minYearsOfResEligibility
+    ) {
+      age++
+      yearsInCanada++
+    }
+    ageOfEligibility = age > maxAgeEligibility ? null : age
+    yearsOfResAtEligibility = yearsInCanada
+  }
+
+  return {
+    ageOfEligibility,
+    yearsOfResAtEligibility,
+  }
+}
+
 export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
   const age = input.age
   const yearsInCanada = input.yearsInCanadaSince18
-  const eliObj = eligibility(age, yearsInCanada)
+  const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
   let newInput = { ...input }
 
