@@ -330,6 +330,7 @@ const en: Translations = {
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
+    retroactivePay: 'Retroactive payment',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
@@ -432,6 +433,8 @@ const en: Translations = {
         "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       chooseToDefer:
         "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+      receivePayment:
+        'You may be able to receive payment for up to the last 11 months.',
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:

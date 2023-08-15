@@ -62,6 +62,7 @@ export interface Translations {
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     yourDeferralOptions: string
+    retroactivePay: string
     sinceYouAreSixty: string
     futureDeferralOptions: string
     youCanAply: string
@@ -115,6 +116,7 @@ export interface Translations {
       eligibleWhenTurn65: string
       ifNotReceiveLetter64: string
       chooseToDefer: string
+      receivePayment: string
     }
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string

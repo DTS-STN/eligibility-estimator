@@ -340,7 +340,9 @@ export class BenefitHandler {
       this.input.client,
       this.translations,
       false,
-      this.future
+      this.future,
+      false,
+      this.input.client.age
     )
 
     console.log('NO DEFERRAL', clientOasNoDeferral)
@@ -364,7 +366,8 @@ export class BenefitHandler {
         this.translations,
         false,
         this.future,
-        true
+        true,
+        this.input.client.age
       )
 
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)
@@ -479,7 +482,11 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      const partnerOas = new OasBenefit(this.input.partner, this.translations)
+      const partnerOas = new OasBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =

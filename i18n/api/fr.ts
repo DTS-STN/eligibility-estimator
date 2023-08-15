@@ -338,6 +338,7 @@ const fr: Translations = {
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     yourDeferralOptions: 'Vos options de report',
+    retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
@@ -442,6 +443,8 @@ const fr: Translations = {
         "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       chooseToDefer:
         "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
+      receivePayment:
+        'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:

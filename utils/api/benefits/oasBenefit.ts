@@ -25,12 +25,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   future: Boolean
   deferral: Boolean
   income: number
+  inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age
   constructor(
     input: ProcessedInput,
     translations: Translations,
     partner?: Boolean,
     future?: Boolean,
-    deferral: Boolean = false
+    deferral: Boolean = false,
+    inputAge?: number
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -39,6 +41,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     this.income = this.partner
       ? this.input.income.partner
       : this.input.income.client
+    this.inputAge = inputAge
   }
 
   protected getEligibility(): EligibilityResult {
@@ -462,10 +465,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.entitlement.autoEnrollment = this.getAutoEnrollment()
     }
 
-    // First sentence - general eligibility already in the detail
+    // INTRO 1 - general eligibility already in the detail
     let text = this.eligibility.detail
 
-    // Second sentence - "expect to receive" variation
+    // INTRO 2 - "expect to receive" variation
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.eligibility.reason !== ResultReason.INCOME &&
@@ -502,13 +505,30 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     // console.log('this.input.receiveOAS', this.input.receiveOAS)
     // console.log('this.input.age', this.input.age)
 
-    // Deferral options - only scenarios when deferral options are shown
+    // RETROACTIVE PAY
     if (
       this.eligibility.result === ResultKey.ELIGIBLE &&
       !this.partner &&
       (!this.input.receiveOAS || this.deferral) &&
-      this.input.age < 70
+      (this.input.age > 70 || this.inputAge > 70)
     ) {
+      console.log('INSIDE RETRO PAY')
+      // if (this.inputAge !== this.input.age) {
+      // Retroactive pay
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.retroactivePay}</p>`
+      text += `<p class='mb-2 mt-6'>${this.translations.detail.oas.receivePayment}</p>`
+      // }
+    }
+
+    // DEFERRAL
+    if (
+      this.eligibility.result === ResultKey.ELIGIBLE &&
+      !this.partner &&
+      (!this.input.receiveOAS || this.deferral) &&
+      this.input.age < 70 &&
+      this.inputAge < 70
+    ) {
+      // Deferral
       text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
       // if income too high
       if (this.eligibility.reason === ResultReason.INCOME) {
