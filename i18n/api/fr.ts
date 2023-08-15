@@ -425,7 +425,7 @@ const fr: Translations = {
       automaticallyBePaid:
         'Vous recevrez automatiquement des paiements si votre revenu est admissible.',
       youWillReceiveLetter:
-        "Vous devriez recevoir une lettre au sujet de votre status d'inscription le mois après votre 64e anniversaire.",
+        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
