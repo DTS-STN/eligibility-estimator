@@ -49,7 +49,7 @@ ingress:
         {{ if (eq .Environment.Name "prototype")}}  
         secretName: ingress-tls-eeprototype
         {{ else }}
-        secretName: ingress-tls-{{ requiredEnv "BRANCH" | lower }}
+        secretName: ingress-tls-development
         {{ end }}
     hosts:
     - host: {{ requiredEnv "SUB_DOMAIN_PATH" | lower }}.{{ requiredEnv "BASE_DOMAIN" }}
