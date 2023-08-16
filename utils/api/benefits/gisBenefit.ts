@@ -237,13 +237,25 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
    * Just the formula to get the amount
    */
   protected formulaResult(): number {
-    return new EntitlementFormula(
+    const gisResult = new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age,
       this.oasResult
     ).getEntitlementAmount()
+    // console.log('FUTURE', this.future)
+    // console.log('--------------------')
+    // console.log('this.input.income.relevant', this.input.income.relevant)
+    // console.log('this.input.maritalStatus', this.input.maritalStatus)
+    // console.log(
+    //   'this.input.partnerBenefitStatus',
+    //   this.input.partnerBenefitStatus
+    // )
+    // console.log('this.input.age', this.input.age)
+    // console.log('this.oasResult', this.oasResult)
+    // console.log('gisResult', gisResult)
+    return gisResult
   }
 
   protected getCardLinks(): LinkWithAction[] {

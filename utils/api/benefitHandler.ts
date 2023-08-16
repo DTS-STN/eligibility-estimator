@@ -385,6 +385,13 @@ export class BenefitHandler {
       this.future
     )
 
+    console.log('this.future FUTURE', this.future)
+    console.log(
+      'clientGisNoDeferral',
+      clientGisNoDeferral,
+      'FUTURE',
+      this.future
+    )
     consoleDev(
       'Client GIS amount NO deferral',
       clientGisNoDeferral.entitlement.result
@@ -400,6 +407,12 @@ export class BenefitHandler {
         this.future
       )
 
+      console.log(
+        'clientGisWithDeferral',
+        clientGisWithDeferral,
+        'FUTURE',
+        this.future
+      )
       consoleDev(
         'Client GIS amount WITH deferral',
         clientGisWithDeferral.entitlement.result
@@ -438,6 +451,7 @@ export class BenefitHandler {
       ? clientGisWithDeferral
       : clientGisNoDeferral
 
+    // Add appropriate meta data info and table
     if (!this.future) {
       if (clientOasHelper.canDefer) {
         if (deferralMoreBeneficial) {
@@ -639,6 +653,8 @@ export class BenefitHandler {
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }
+
+    // console.log('clientGis AFTER ADJUSTMENT', clientGis)
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
