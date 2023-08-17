@@ -345,8 +345,6 @@ export class BenefitHandler {
       this.input.client.age
     )
 
-    console.log('clientOasNoDeferral', clientOasNoDeferral)
-
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
     if (this.input.client.partnerBenefitStatus.helpMe) {

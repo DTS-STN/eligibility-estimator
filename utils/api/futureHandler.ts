@@ -137,6 +137,9 @@ export class FutureHandler {
     const ageFloored = Math.floor(age)
     const partnerAgeFloored = Math.floor(partnerAge)
 
+    const clientAlreadyEligible = age >= 65
+    const partnerAlreadyEligible = partnerAge >= 65
+
     const ages = [ageFloored, partnerAgeFloored]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
     const futureAges = getAgeArray(ages)
@@ -149,7 +152,12 @@ export class FutureHandler {
 
       futureAges.forEach((ageSet) => {
         const [userAge, partnerAge] = ageSet
-        const newQuery = buildQuery(this.query, ageSet)
+        const newQuery = buildQuery(
+          this.query,
+          ageSet,
+          clientAlreadyEligible,
+          partnerAlreadyEligible
+        )
         const { value } = schema.validate(newQuery, { abortEarly: false })
         const handler = new BenefitHandler(value, true)
 

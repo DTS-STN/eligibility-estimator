@@ -69,7 +69,12 @@ export function getAgeArray(ages: number[]) {
   return result
 }
 
-export function buildQuery(query, ageSet) {
+export function buildQuery(
+  query,
+  ageSet,
+  clientAlreadyEligible,
+  partnerAlreadyEligible
+) {
   const newQuery = { ...query }
   // console.log('input query', newQuery)
   console.log(ageSet)
@@ -83,14 +88,26 @@ export function buildQuery(query, ageSet) {
     addKeyValue(newQuery, 'receiveOAS', 'false')
   }
 
-  if (query.livedOnlyInCanada === 'false' && query.yearsInCanadaSince18) {
-    const newYrsInCanada = String(
-      Math.min(
-        40,
-        65 - Math.floor(Number(query.age)) + Number(query.yearsInCanadaSince18)
-      )
-    )
-    newQuery['yearsInCanadaSince18'] = newYrsInCanada
+  if (
+    query.livedOnlyInCanada === 'false' &&
+    query.yearsInCanadaSince18 &&
+    !clientAlreadyEligible
+  ) {
+    console.log('userAge', userAge)
+    console.log('query.age', query.age)
+    console.log('query.yearsInCanadaSince18', query.yearsInCanadaSince18)
+    const newYrsInCanada =
+      Number(userAge) - Number(query.age) + Number(query.yearsInCanadaSince18)
+
+    console.log('CLIENT NEW YEARS', newYrsInCanada)
+
+    // const newYrsInCanada = String(
+    //   Math.min(
+    //     40,
+    //     65 - Math.floor(Number(query.age)) + Number(query.yearsInCanadaSince18)
+    //   )
+    // )
+    newQuery['yearsInCanadaSince18'] = String(newYrsInCanada)
   }
 
   // PARTNER
@@ -106,18 +123,18 @@ export function buildQuery(query, ageSet) {
 
   if (
     query.partnerLivedOnlyInCanada === 'false' &&
-    query.partnerYearsInCanadaSince18
+    query.partnerYearsInCanadaSince18 &&
+    !partnerAlreadyEligible
   ) {
     const ageLimit = partnerAge < 65 ? 65 : partnerAge
-    const partnerNewYrsInCanada = String(
-      Math.min(
-        40,
-        ageLimit -
-          Math.floor(Number(query.partnerAge)) +
-          Number(query.partnerYearsInCanadaSince18)
-      )
-    )
-    newQuery['partnerYearsInCanadaSince18'] = partnerNewYrsInCanada
+
+    const partnerNewYrsInCanada =
+      Number(partnerAge) -
+      Number(query.partnerAge) +
+      Number(query.partnerYearsInCanadaSince18)
+
+    console.log('PARTNER NEW YEARS', partnerNewYrsInCanada)
+    newQuery['partnerYearsInCanadaSince18'] = String(partnerNewYrsInCanada)
   }
 
   //TODO - why yearsInCanada goes down by 1 year while partner years in canada works good

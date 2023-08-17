@@ -362,7 +362,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
       // const dontShowCondition = entitlement.clawback !== 0 && !future
-      // console.log('dontShowCondition', dontShowCondition)
 
       // Eligible for OAS pension,and are 65-69, who do not already receive
       if (eligible && ageInRange && !receivingOAS) {

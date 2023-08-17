@@ -244,17 +244,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.input.age,
       this.oasResult
     ).getEntitlementAmount()
-    console.log('FUTURE', this.future)
-    console.log('--------------------')
-    console.log('this.input.income.relevant', this.input.income.relevant)
-    console.log('this.input.maritalStatus', this.input.maritalStatus)
-    console.log(
-      'this.input.partnerBenefitStatus',
-      this.input.partnerBenefitStatus
-    )
-    console.log('this.input.age', this.input.age)
-    console.log('this.oasResult', this.oasResult)
-    console.log('gisResult', gisResult)
+
     return gisResult
   }
 
