@@ -71,6 +71,8 @@ export function getAgeArray(ages: number[]) {
 
 export function buildQuery(query, ageSet) {
   const newQuery = { ...query }
+  // console.log('input query', newQuery)
+  console.log(ageSet)
   const [userAge, partnerAge] = ageSet
 
   // CLIENT
@@ -118,6 +120,19 @@ export function buildQuery(query, ageSet) {
     newQuery['partnerYearsInCanadaSince18'] = partnerNewYrsInCanada
   }
 
+  //TODO - why yearsInCanada goes down by 1 year while partner years in canada works good
+
+  //TODO put this somewhere
+  // if (
+  //   this.query.livedOnlyInCanada === 'false' &&
+  //   this.query.yearsInCanadaSince18
+  // ) {
+  //   this.newQuery['yearsInCanadaSince18'] = String(
+  //     Math.min(40, eliObj.yearsOfResAtEligibility)
+  //   )
+  // }
+
+  console.log('newQuery before return', newQuery)
   return newQuery
 }
 
