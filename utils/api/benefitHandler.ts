@@ -345,7 +345,29 @@ export class BenefitHandler {
       this.input.client.age
     )
 
-    console.log('NO DEFERRAL', clientOasNoDeferral)
+    // If the client needs help, check their partner's OAS.
+    // no defer and defer options?
+    if (this.input.client.partnerBenefitStatus.helpMe) {
+      const partnerOasNoDeferral = new OasBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
+
+      this.setValueForAllResults(
+        allResults,
+        'partner',
+        'oas',
+        partnerOasNoDeferral
+      )
+      // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
+      this.input.client.partnerBenefitStatus.oasResultEntitlement =
+        partnerOasNoDeferral.entitlement
+      // Save the client result to the partner's partnerBenefitStatus field, which is not yet used for anything
+      this.input.partner.partnerBenefitStatus.oasResultEntitlement =
+        clientOasNoDeferral.entitlement
+    }
+
     consoleDev(
       'Client OAS amount NO deferral',
       clientOasNoDeferral.entitlement.result
@@ -353,7 +375,6 @@ export class BenefitHandler {
 
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
-    console.log('clientOasHelper', clientOasHelper)
 
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {
@@ -385,13 +406,6 @@ export class BenefitHandler {
       this.future
     )
 
-    console.log('this.future FUTURE', this.future)
-    console.log(
-      'clientGisNoDeferral',
-      clientGisNoDeferral,
-      'FUTURE',
-      this.future
-    )
     consoleDev(
       'Client GIS amount NO deferral',
       clientGisNoDeferral.entitlement.result
@@ -407,12 +421,6 @@ export class BenefitHandler {
         this.future
       )
 
-      console.log(
-        'clientGisWithDeferral',
-        clientGisWithDeferral,
-        'FUTURE',
-        this.future
-      )
       consoleDev(
         'Client GIS amount WITH deferral',
         clientGisWithDeferral.entitlement.result
@@ -653,8 +661,6 @@ export class BenefitHandler {
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }
-
-    // console.log('clientGis AFTER ADJUSTMENT', clientGis)
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario

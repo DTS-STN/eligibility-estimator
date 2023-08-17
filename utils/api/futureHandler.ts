@@ -151,7 +151,6 @@ export class FutureHandler {
         const [userAge, partnerAge] = ageSet
         const newQuery = buildQuery(this.query, ageSet)
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        console.log('value', value)
         const handler = new BenefitHandler(value, true)
 
         const clientEligibleBenefits = this.getEligibleBenefits(
