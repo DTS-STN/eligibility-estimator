@@ -339,19 +339,21 @@ export class BenefitHandler {
     const initialPartnerBenefitStatus =
       this.input.client.partnerBenefitStatus.value
 
-    // if (!this.future) {
-    //   // if currently eligible for OAS (I think)
-    //   const partnerEliObj = OasEligibility(
-    //     this.input.partner.age,
-    //     this.input.partner.yearsInCanadaSince18,
-    //     this.input.partner.livedOnlyInCanada
-    //   )
-
-    //   console.log('parnterEliObj', partnerEliObj)
-    //   this.input.partner.age = partnerEliObj.ageOfEligibility
-    //   this.input.partner.yearsInCanadaSince18 =
-    //     partnerEliObj.yearsOfResAtEligibility
-    // }
+    // Future handler takes care of cases when partner is not yet eligible
+    // If partner was already eligible in the past based on residency, we need to adjust the inputs
+    if (!this.future) {
+      const partnerEliObj = OasEligibility(
+        this.input.partner.age,
+        this.input.partner.yearsInCanadaSince18,
+        this.input.partner.livedOnlyInCanada
+      )
+      if (this.input.partner.age > partnerEliObj.ageOfEligibility) {
+        console.log('parnterEliObj', partnerEliObj)
+        this.input.partner.age = partnerEliObj.ageOfEligibility
+        this.input.partner.yearsInCanadaSince18 =
+          partnerEliObj.yearsOfResAtEligibility
+      }
+    }
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result

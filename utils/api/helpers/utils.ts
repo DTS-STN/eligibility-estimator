@@ -90,6 +90,7 @@ export function buildQuery(
   if (query.livedOnlyInCanada === 'false' && query.yearsInCanadaSince18) {
     if (clientAlreadyOasEligible) {
       if (deferralMeta.deferred) {
+        // deferred scenario more beneficial
         newQuery['yearsInCanadaSince18'] = String(deferralMeta.residency)
         newQuery['oasDeferDuration'] = deferralMeta.length
       } else {
