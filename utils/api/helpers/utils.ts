@@ -171,7 +171,11 @@ function addKeyValue(obj, key, val) {
   }
 }
 
-export function OasEligibility(ageAtStart, yearsInCanadaAtStart) {
+export function OasEligibility(
+  ageAtStart,
+  yearsInCanadaAtStart,
+  livedOnlyInCanada = false
+) {
   // 61.58
   // 9
   // expect 65, 12
@@ -213,7 +217,7 @@ export function OasEligibility(ageAtStart, yearsInCanadaAtStart) {
   }
   return {
     ageOfEligibility,
-    yearsOfResAtEligibility,
+    yearsOfResAtEligibility: livedOnlyInCanada ? 40 : yearsOfResAtEligibility,
   }
 }
 
@@ -251,7 +255,6 @@ export function evaluateOASInput(input) {
   const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
 
-  console.log('ageDiff', ageDiff)
   let newInput = { ...input }
   // console.log('input TO CHECK', input)
   let deferralMonths = 0
@@ -268,7 +271,6 @@ export function evaluateOASInput(input) {
     justBecameEligible = true
   }
 
-  console.log('input.yearsInCanadaSince18', input.yearsInCanadaSince18)
   const newYearsInCan =
     age > eliObj.ageOfEligibility
       ? input.yearsInCanadaSince18 - ageDiff

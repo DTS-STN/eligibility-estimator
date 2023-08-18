@@ -42,7 +42,7 @@ import {
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
-import { evaluateOASInput } from './helpers/utils'
+import { evaluateOASInput, OasEligibility } from './helpers/utils'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -338,6 +338,19 @@ export class BenefitHandler {
 
     const initialPartnerBenefitStatus =
       this.input.client.partnerBenefitStatus.value
+
+    // if (!this.future) {
+    //   const partnerEliObj = OasEligibility(
+    //     this.input.partner.age,
+    //     this.input.partner.yearsInCanadaSince18,
+    //     this.input.partner.livedOnlyInCanada
+    //   )
+
+    //   console.log('parnterEliObj', partnerEliObj)
+    //   this.input.partner.age = partnerEliObj.ageOfEligibility
+    //   this.input.partner.yearsInCanadaSince18 =
+    //     partnerEliObj.yearsOfResAtEligibility
+    // }
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result

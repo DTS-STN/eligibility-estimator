@@ -387,8 +387,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           const tableData = [...Array(71 - baseAgeWhole).keys()]
             .map((i) => i + baseAgeWhole)
             .map((deferAge, i) => {
-              let monthsUntilAge = Math.round((deferAge - currentAge) * 12)
+              let monthsUntilAge = Math.round((deferAge - baseAge) * 12)
               if (monthsUntilAge < 0) monthsUntilAge = 0
+
               const monthsToIncrease =
                 deferAge === 70
                   ? monthsUntilAge % 12 === 0
