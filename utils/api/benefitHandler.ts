@@ -342,14 +342,11 @@ export class BenefitHandler {
     // Future handler takes care of cases when partner is not yet eligible
     // If partner was already eligible in the past based on residency, we need to adjust the inputs
     if (!this.future) {
-      console.log('INSIDE NOT FUTURE')
       const partnerEliObj = OasEligibility(
         this.input.partner.age,
         this.input.partner.yearsInCanadaSince18,
         this.input.partner.livedOnlyInCanada
       )
-      console.log('parnterEliObj', partnerEliObj)
-      console.log('this.input.partner.age', this.input.partner.age)
       if (this.input.partner.age > partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
           this.input.partner.age = partnerEliObj.ageOfEligibility
@@ -364,8 +361,6 @@ export class BenefitHandler {
       }
     }
 
-    console.log('this.input.partner', this.input.partner)
-
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
@@ -377,8 +372,6 @@ export class BenefitHandler {
       false,
       this.input.client.age
     )
-
-    // console.log('clientOasNoDeferral', clientOasNoDeferral)
 
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
@@ -411,7 +404,6 @@ export class BenefitHandler {
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
 
-    // console.log('clientOasHelper', clientOasHelper)
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {
       consoleDev(
@@ -456,8 +448,6 @@ export class BenefitHandler {
         false,
         this.future
       )
-
-      console.log('clientGisWITHDeferral', clientGisWithDeferral)
 
       consoleDev(
         'Client GIS amount WITH deferral',
@@ -555,7 +545,6 @@ export class BenefitHandler {
         this.translations,
         true
       )
-      console.log('partnerOas', partnerOas)
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =

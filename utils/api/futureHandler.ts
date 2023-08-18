@@ -134,16 +134,23 @@ export class FutureHandler {
   }
 
   private getPartneredResults() {
-    console.log('-----------START OF FUTURE RESULTS FOR PARTNERS----------')
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
-    // const ageRounded = Math.round(age)
-    // const partnerAgeRounded = Math.round(partnerAge)
 
-    const deferralMeta =
+    const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
+    const partnerDeferralMeta =
+      this.currentHandler.benefitResults?.partner?.oas?.entitlement?.deferral
 
-    const partnerAlreadyEligible = partnerAge >= 65
+    const partnerCurrentOasEligibility =
+      this.currentHandler.benefitResults?.partner?.oas?.eligibility
+
+    let partnerAlreadyOasEligible = false
+    if (partnerCurrentOasEligibility) {
+      partnerAlreadyOasEligible =
+        partnerCurrentOasEligibility?.result === ResultKey.ELIGIBLE ||
+        partnerCurrentOasEligibility?.result === ResultKey.INCOME_DEPENDENT
+    }
 
     const currentOasEligibility =
       this.currentHandler.benefitResults.client.oas?.eligibility
@@ -158,7 +165,7 @@ export class FutureHandler {
     const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
     const futureAges = getAgeArray(ages)
-    console.log('futureAges', futureAges)
+
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
       const clientResults = []
@@ -170,12 +177,13 @@ export class FutureHandler {
         const newQuery = buildQuery(
           this.query,
           ageSet,
-          deferralMeta, // client
+          clientDeferralMeta,
+          partnerDeferralMeta,
           clientAlreadyOasEligible,
-          partnerAlreadyEligible
+          partnerAlreadyOasEligible
         )
+
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        console.log('NEW QUERY', value)
         const handler = new BenefitHandler(value, true, false)
 
         const clientEligibleBenefits = this.getEligibleBenefits(

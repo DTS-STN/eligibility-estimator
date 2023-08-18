@@ -568,12 +568,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       // normal case
       if (this.entitlement.result > 0) {
-        // console.log('this.entitlement.result', this.entitlement.result)
         if (this.future) {
           // can also check if this.entitlement.clawback === 0
-          // if (this.income <= legalValues.oas.clawbackIncomeLimit) {
           text += this.translations.detail.futureDeferralOptions
-          // }
         } else {
           text += this.translations.detail.sinceYouAreSixty
 
