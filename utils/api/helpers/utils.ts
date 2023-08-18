@@ -77,7 +77,7 @@ export function buildQuery(
 ) {
   const newQuery = { ...query }
   // console.log('input query', newQuery)
-  console.log(ageSet)
+  // console.log(ageSet)
   const [userAge, partnerAge] = ageSet
 
   // CLIENT
@@ -93,13 +93,13 @@ export function buildQuery(
     query.yearsInCanadaSince18 &&
     !clientAlreadyEligible
   ) {
-    console.log('userAge', userAge)
-    console.log('query.age', query.age)
-    console.log('query.yearsInCanadaSince18', query.yearsInCanadaSince18)
+    // console.log('userAge', userAge)
+    // console.log('query.age', query.age)
+    // console.log('query.yearsInCanadaSince18', query.yearsInCanadaSince18)
     const newYrsInCanada =
       Number(userAge) - Number(query.age) + Number(query.yearsInCanadaSince18)
 
-    console.log('CLIENT NEW YEARS', newYrsInCanada)
+    // console.log('CLIENT NEW YEARS', newYrsInCanada)
 
     // const newYrsInCanada = String(
     //   Math.min(
@@ -133,7 +133,7 @@ export function buildQuery(
       Number(query.partnerAge) +
       Number(query.partnerYearsInCanadaSince18)
 
-    console.log('PARTNER NEW YEARS', partnerNewYrsInCanada)
+    // console.log('PARTNER NEW YEARS', partnerNewYrsInCanada)
     newQuery['partnerYearsInCanadaSince18'] = String(partnerNewYrsInCanada)
   }
 
@@ -149,7 +149,7 @@ export function buildQuery(
   //   )
   // }
 
-  console.log('newQuery before return', newQuery)
+  // console.log('newQuery before return', newQuery)
   return newQuery
 }
 
@@ -159,7 +159,14 @@ function addKeyValue(obj, key, val) {
   }
 }
 
-export function OasEligibility(age, yearsInCanada) {
+export function OasEligibility(ageAtStart, yearsInCanadaAtStart) {
+  // 61.58
+  // 9
+  // expect 65, 12
+  let age = ageAtStart
+  let yearsInCanada = yearsInCanadaAtStart
+  // console.log('age AT START', age)
+  // console.log('yearsInCanada AT START', yearsInCanada)
   const minAgeEligibility = 65
   const minYearsOfResEligibility = 10
 
@@ -184,10 +191,14 @@ export function OasEligibility(age, yearsInCanada) {
       age++
       yearsInCanada++
     }
-    ageOfEligibility = age
-    yearsOfResAtEligibility = yearsInCanada
-  }
+    ageOfEligibility = Math.floor(age)
+    yearsOfResAtEligibility = Math.round(
+      ageOfEligibility - ageAtStart + yearsInCanadaAtStart
+    )
 
+    // console.log('ageOfEligibility', ageOfEligibility)
+    // console.log('yearsOfResAtEligibility', yearsOfResAtEligibility)
+  }
   return {
     ageOfEligibility,
     yearsOfResAtEligibility,
@@ -223,14 +234,16 @@ export function AlwsEligibility(age, yearsInCanada) {
 export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
-  const age = input.age
+  const age = input.age // 66.42
   const yearsInCanada = input.yearsInCanadaSince18
   const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
+  // console.log('ageDiff', ageDiff)
   let newInput = { ...input }
-
+  // console.log('input TO CHECK', input)
   let deferralMonths = 0
   if (age > eliObj.ageOfEligibility) {
+    // 65
     const deferralYears = Math.min(
       60,
       Math.min(70, age) - eliObj.ageOfEligibility
@@ -242,14 +255,17 @@ export function evaluateOASInput(input) {
     justBecameEligible = true
   }
 
+  const newYEARSINCAN = input.yearsInCanadaSince18 - ageDiff
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
     newInput['inputAge'] = input.age
     newInput['age'] = eliObj.ageOfEligibility
     newInput['receiveOAS'] = true
-    newInput['yearsInCanadaSince18'] = input.yearsInCanadaSince18 - ageDiff
+    newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
+      ? 40
+      : input.yearsInCanadaSince18 - ageDiff
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: deferralMonths,
+      months: Math.floor(deferralMonths),
       years: 0,
     })
   }

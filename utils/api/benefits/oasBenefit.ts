@@ -368,7 +368,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         const monthsTo70 = Math.round((70 - currentAge) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
-
+        console.log('currentAge', currentAge)
+        // const monthsToAdd = 1 - (currentAge - Math.floor(currentAge)) * 12
         // have an estimate > 0
         if (!(estimate <= 0)) {
           const tableData = [...Array(71 - baseAgeWhole).keys()]
@@ -376,8 +377,22 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
             .map((deferAge, i) => {
               let monthsUntilAge = Math.round((deferAge - currentAge) * 12)
               if (monthsUntilAge < 0) monthsUntilAge = 0
-              const amount = estimate + getDeferralIncrease(i * 12, estimate)
+              const monthsToIncrease =
+                deferAge === 70
+                  ? monthsUntilAge % 12 === 0
+                    ? i * 12
+                    : (monthsUntilAge % 12) + (i - 1) * 12
+                  : i * 12
 
+              const amount =
+                estimate + getDeferralIncrease(monthsToIncrease, estimate)
+
+              console.log(
+                'monthsToIncrease',
+                monthsToIncrease,
+                ' defer age',
+                deferAge
+              )
               return {
                 age: deferAge,
                 amount,
@@ -390,6 +405,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           meta.currentAge = currentAgeWhole
         }
 
+        console.log('meta', meta)
         return meta
       }
 

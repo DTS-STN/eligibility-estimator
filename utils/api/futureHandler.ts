@@ -44,7 +44,7 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    const eliObj = OasEligibility(Math.floor(age), yearsInCanada)
+    const eliObj = OasEligibility(age, yearsInCanada)
 
     this.newQuery['age'] = String(eliObj.ageOfEligibility)
     this.newQuery['receiveOAS'] = 'false'
@@ -134,13 +134,14 @@ export class FutureHandler {
   private getPartneredResults() {
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
-    const ageFloored = Math.floor(age)
-    const partnerAgeFloored = Math.floor(partnerAge)
+    const ageRounded = Math.round(age)
+    const partnerAgeRounded = Math.round(partnerAge)
 
+    // TODO change this
     const clientAlreadyEligible = age >= 65
     const partnerAlreadyEligible = partnerAge >= 65
 
-    const ages = [ageFloored, partnerAgeFloored]
+    const ages = [ageRounded, partnerAgeRounded]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
     const futureAges = getAgeArray(ages)
 

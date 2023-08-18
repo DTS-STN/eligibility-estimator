@@ -17,7 +17,6 @@ export default class MainHandler {
     this.handler = new BenefitHandler(value)
 
     // Future planning
-    console.log('query', query)
     this.futureHandler = new FutureHandler(query, value._language)
 
     const resultObj: any = {
