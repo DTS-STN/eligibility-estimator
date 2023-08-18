@@ -340,6 +340,7 @@ export class BenefitHandler {
       this.input.client.partnerBenefitStatus.value
 
     // if (!this.future) {
+    //   // if currently eligible for OAS (I think)
     //   const partnerEliObj = OasEligibility(
     //     this.input.partner.age,
     //     this.input.partner.yearsInCanadaSince18,

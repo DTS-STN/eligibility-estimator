@@ -282,7 +282,7 @@ export function evaluateOASInput(input) {
     newInput['receiveOAS'] = true
     newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
       ? 40
-      : Math.min(40, newYearsInCan)
+      : Math.min(40, Math.round(newYearsInCan))
     newInput['oasDeferDuration'] = JSON.stringify({
       months: Math.floor(deferralMonths),
       years: 0,
