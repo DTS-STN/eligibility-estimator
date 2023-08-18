@@ -158,7 +158,7 @@ export class FutureHandler {
     const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
     const futureAges = getAgeArray(ages)
-
+    console.log('futureAges', futureAges)
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
       const clientResults = []

@@ -177,9 +177,6 @@ export function OasEligibility(
   yearsInCanadaAtStart,
   livedOnlyInCanada = false
 ) {
-  // 61.58
-  // 9
-  // expect 65, 12
   let age = ageAtStart
   let yearsInCanada = yearsInCanadaAtStart
   // console.log('age AT START', age)
