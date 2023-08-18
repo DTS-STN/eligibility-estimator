@@ -23,7 +23,7 @@ import { BaseBenefit } from './_base'
 export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   partner: Boolean
   future: Boolean
-  deferral: Boolean
+  deferral: boolean
   income: number
   inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age
   constructor(
@@ -31,7 +31,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     translations: Translations,
     partner?: Boolean,
     future?: Boolean,
-    deferral: Boolean = false,
+    deferral: boolean = false,
     inputAge?: number
   ) {
     super(input, translations, BenefitKey.oas)
@@ -169,7 +169,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         result65To74: 0,
         resultAt75: 0,
         clawback: 0,
-        deferral: { age: 65, years: 0, increase: 0 },
+        deferral: {
+          age: 65,
+          years: 0,
+          increase: 0,
+          deferred: this.deferral || !!this.input.oasDeferDuration,
+          length: this.input.oasDeferDuration,
+          residency: this.input.yearsInCanadaSince18,
+        },
         type: EntitlementResultType.NONE,
         autoEnrollment,
       }
@@ -192,6 +199,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           age: this.deferralYears + 65,
           years: this.deferralYears,
           increase: 0,
+          deferred: this.deferral || !!this.input.oasDeferDuration,
+          length: this.input.oasDeferDuration,
+          residency: this.input.yearsInCanadaSince18,
         },
         type: EntitlementResultType.NONE,
         autoEnrollment,
@@ -219,6 +229,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         age: this.deferralYears + 65,
         years: this.deferralYears,
         increase: this.deferralIncrease,
+        deferred: this.deferral || !!this.input.oasDeferDuration,
+        length: this.input.oasDeferDuration,
+        residency: this.input.yearsInCanadaSince18,
       },
       type,
       autoEnrollment,
@@ -368,8 +381,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         const monthsTo70 = Math.round((70 - currentAge) * 12)
         meta.monthsTo70 = monthsTo70
         meta.receiveOAS = receivingOAS
-        console.log('currentAge', currentAge)
-        // const monthsToAdd = 1 - (currentAge - Math.floor(currentAge)) * 12
+
         // have an estimate > 0
         if (!(estimate <= 0)) {
           const tableData = [...Array(71 - baseAgeWhole).keys()]
@@ -387,12 +399,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
               const amount =
                 estimate + getDeferralIncrease(monthsToIncrease, estimate)
 
-              console.log(
-                'monthsToIncrease',
-                monthsToIncrease,
-                ' defer age',
-                deferAge
-              )
               return {
                 age: deferAge,
                 amount,
@@ -405,7 +411,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           meta.currentAge = currentAgeWhole
         }
 
-        console.log('meta', meta)
         return meta
       }
 

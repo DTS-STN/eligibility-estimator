@@ -1,5 +1,5 @@
 import { BenefitHandler } from './benefitHandler'
-import { MaritalStatus } from './definitions/enums'
+import { MaritalStatus, ResultKey } from './definitions/enums'
 import { RequestSchema as schema } from './definitions/schemas'
 import {
   buildQuery,
@@ -9,12 +9,14 @@ import {
 } from './helpers/utils'
 
 export class FutureHandler {
+  currentHandler: BenefitHandler
   maritalStatus: string
   query: { [key: string]: string | string[] }
   newQuery: { [key: string]: string | string[] }
   locale: string
   futureResultsObj: any
-  constructor(query, locale) {
+  constructor(currentHandler, query, locale) {
+    this.currentHandler = currentHandler
     this.maritalStatus = query.maritalStatus
     this.query = query
     this.newQuery = { ...query }
@@ -132,16 +134,28 @@ export class FutureHandler {
   }
 
   private getPartneredResults() {
+    console.log('-----------START OF FUTURE RESULTS FOR PARTNERS----------')
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
-    const ageRounded = Math.round(age)
-    const partnerAgeRounded = Math.round(partnerAge)
+    // const ageRounded = Math.round(age)
+    // const partnerAgeRounded = Math.round(partnerAge)
 
-    // TODO change this
-    const clientAlreadyEligible = age >= 65
+    const deferralMeta =
+      this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
+
     const partnerAlreadyEligible = partnerAge >= 65
 
-    const ages = [ageRounded, partnerAgeRounded]
+    const currentOasEligibility =
+      this.currentHandler.benefitResults.client.oas?.eligibility
+
+    let clientAlreadyOasEligible = false
+    if (currentOasEligibility) {
+      clientAlreadyOasEligible =
+        currentOasEligibility?.result === ResultKey.ELIGIBLE ||
+        currentOasEligibility?.result === ResultKey.INCOME_DEPENDENT
+    }
+
+    const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
     const futureAges = getAgeArray(ages)
 
@@ -156,11 +170,13 @@ export class FutureHandler {
         const newQuery = buildQuery(
           this.query,
           ageSet,
-          clientAlreadyEligible,
+          deferralMeta, // client
+          clientAlreadyOasEligible,
           partnerAlreadyEligible
         )
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        const handler = new BenefitHandler(value, true)
+        console.log('NEW QUERY', value)
+        const handler = new BenefitHandler(value, true, false)
 
         const clientEligibleBenefits = this.getEligibleBenefits(
           handler.benefitResults.client

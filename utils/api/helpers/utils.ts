@@ -72,34 +72,37 @@ export function getAgeArray(ages: number[]) {
 export function buildQuery(
   query,
   ageSet,
-  clientAlreadyEligible,
+  deferralMeta, // client
+  clientAlreadyOasEligible,
   partnerAlreadyEligible
 ) {
   const newQuery = { ...query }
   // console.log('input query', newQuery)
   // console.log(ageSet)
-  const [userAge, partnerAge] = ageSet
+  const [userAge, partnerAge] = ageSet // 68, 65
 
   // CLIENT
   newQuery['age'] = String(userAge)
-  newQuery['partnerAge'] = String(partnerAge)
-
   if (userAge >= 65) {
     addKeyValue(newQuery, 'receiveOAS', 'false')
   }
 
-  if (
-    query.livedOnlyInCanada === 'false' &&
-    query.yearsInCanadaSince18 &&
-    !clientAlreadyEligible
-  ) {
-    // console.log('userAge', userAge)
-    // console.log('query.age', query.age)
-    // console.log('query.yearsInCanadaSince18', query.yearsInCanadaSince18)
-    const newYrsInCanada =
-      Number(userAge) - Number(query.age) + Number(query.yearsInCanadaSince18)
-
-    // console.log('CLIENT NEW YEARS', newYrsInCanada)
+  if (query.livedOnlyInCanada === 'false' && query.yearsInCanadaSince18) {
+    if (clientAlreadyOasEligible) {
+      if (deferralMeta.deferred) {
+        newQuery['yearsInCanadaSince18'] = String(deferralMeta.residency)
+        newQuery['oasDeferDuration'] = deferralMeta.length
+      } else {
+        newQuery['yearsInCanadaSince18'] = String(deferralMeta.residency)
+      }
+    } else {
+      // just add residency
+      const newYrsInCanada = Math.min(
+        40,
+        Number(userAge) - Number(query.age) + Number(query.yearsInCanadaSince18)
+      )
+      newQuery['yearsInCanadaSince18'] = String(Math.floor(newYrsInCanada))
+    }
 
     // const newYrsInCanada = String(
     //   Math.min(
@@ -107,10 +110,17 @@ export function buildQuery(
     //     65 - Math.floor(Number(query.age)) + Number(query.yearsInCanadaSince18)
     //   )
     // )
-    newQuery['yearsInCanadaSince18'] = String(newYrsInCanada)
+  } else {
+    if (clientAlreadyOasEligible) {
+      if (deferralMeta.deferred) {
+        newQuery['oasDeferDuration'] = deferralMeta.length
+      }
+    }
   }
 
   // PARTNER
+  newQuery['partnerAge'] = String(partnerAge)
+
   if (partnerAge >= 60) {
     addKeyValue(newQuery, 'partnerLegalStatus', 'yes')
     addKeyValue(newQuery, 'partnerLivingCountry', 'CAN')
@@ -134,7 +144,9 @@ export function buildQuery(
       Number(query.partnerYearsInCanadaSince18)
 
     // console.log('PARTNER NEW YEARS', partnerNewYrsInCanada)
-    newQuery['partnerYearsInCanadaSince18'] = String(partnerNewYrsInCanada)
+    newQuery['partnerYearsInCanadaSince18'] = String(
+      Math.floor(partnerNewYrsInCanada)
+    )
   }
 
   //TODO - why yearsInCanada goes down by 1 year while partner years in canada works good
@@ -149,7 +161,7 @@ export function buildQuery(
   //   )
   // }
 
-  // console.log('newQuery before return', newQuery)
+  console.log('newQuery before return', newQuery)
   return newQuery
 }
 
@@ -238,7 +250,8 @@ export function evaluateOASInput(input) {
   const yearsInCanada = input.yearsInCanadaSince18
   const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
-  // console.log('ageDiff', ageDiff)
+
+  console.log('ageDiff', ageDiff)
   let newInput = { ...input }
   // console.log('input TO CHECK', input)
   let deferralMonths = 0
@@ -255,7 +268,11 @@ export function evaluateOASInput(input) {
     justBecameEligible = true
   }
 
-  const newYEARSINCAN = input.yearsInCanadaSince18 - ageDiff
+  console.log('input.yearsInCanadaSince18', input.yearsInCanadaSince18)
+  const newYearsInCan =
+    age > eliObj.ageOfEligibility
+      ? input.yearsInCanadaSince18 - ageDiff
+      : input.yearsInCanada + ageDiff
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
     newInput['inputAge'] = input.age
@@ -263,7 +280,7 @@ export function evaluateOASInput(input) {
     newInput['receiveOAS'] = true
     newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
       ? 40
-      : input.yearsInCanadaSince18 - ageDiff
+      : Math.min(40, newYearsInCan)
     newInput['oasDeferDuration'] = JSON.stringify({
       months: Math.floor(deferralMonths),
       years: 0,

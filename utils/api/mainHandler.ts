@@ -17,7 +17,7 @@ export default class MainHandler {
     this.handler = new BenefitHandler(value)
 
     // Future planning
-    this.futureHandler = new FutureHandler(query, value._language)
+    this.futureHandler = new FutureHandler(this.handler, query, value._language)
 
     const resultObj: any = {
       visibleFields: this.handler.requiredFields,

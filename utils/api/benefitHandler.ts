@@ -54,9 +54,15 @@ export class BenefitHandler {
   private _summary: SummaryObject
   private _partnerSummary: SummaryObject
   future: Boolean
+  compare: Boolean
 
-  constructor(readonly rawInput: Partial<RequestInput>, future?: Boolean) {
+  constructor(
+    readonly rawInput: Partial<RequestInput>,
+    future?: Boolean,
+    compare: Boolean = true
+  ) {
     this.future = future
+    this.compare = compare
   }
 
   get translations(): Translations {
@@ -454,13 +460,15 @@ export class BenefitHandler {
       deferralMoreBeneficial
     )
 
-    const clientOas = deferralMoreBeneficial
-      ? clientOasWithDeferral
-      : clientOasNoDeferral
+    const clientOas =
+      deferralMoreBeneficial && this.compare
+        ? clientOasWithDeferral
+        : clientOasNoDeferral
 
-    let clientGis = deferralMoreBeneficial
-      ? clientGisWithDeferral
-      : clientGisNoDeferral
+    let clientGis =
+      deferralMoreBeneficial && this.compare
+        ? clientGisWithDeferral
+        : clientGisNoDeferral
 
     // Add appropriate meta data info and table
     if (!this.future) {
