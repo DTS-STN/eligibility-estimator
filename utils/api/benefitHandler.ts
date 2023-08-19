@@ -42,6 +42,7 @@ import {
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
+import { evaluateOASInput, OasEligibility } from './helpers/utils'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -53,9 +54,15 @@ export class BenefitHandler {
   private _summary: SummaryObject
   private _partnerSummary: SummaryObject
   future: Boolean
+  compare: Boolean
 
-  constructor(readonly rawInput: Partial<RequestInput>, future?: Boolean) {
+  constructor(
+    readonly rawInput: Partial<RequestInput>,
+    future?: Boolean,
+    compare: Boolean = true
+  ) {
     this.future = future
+    this.compare = compare
   }
 
   get translations(): Translations {
@@ -332,18 +339,212 @@ export class BenefitHandler {
     const initialPartnerBenefitStatus =
       this.input.client.partnerBenefitStatus.value
 
+    // Future handler takes care of cases when partner is not yet eligible
+    // If partner was already eligible in the past based on residency, we need to adjust the inputs
+    if (!this.future) {
+      const partnerEliObj = OasEligibility(
+        this.input.partner.age,
+        this.input.partner.yearsInCanadaSince18,
+        this.input.partner.livedOnlyInCanada
+      )
+      if (this.input.partner.age > partnerEliObj.ageOfEligibility) {
+        if (this.input.partner.age < 75) {
+          this.input.partner.age = partnerEliObj.ageOfEligibility
+          this.input.partner.yearsInCanadaSince18 =
+            partnerEliObj.yearsOfResAtEligibility
+        }
+
+        if (this.input.partner.age >= 75) {
+          this.input.partner.yearsInCanadaSince18 =
+            partnerEliObj.yearsOfResAtEligibility
+        }
+      }
+    }
+
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
-    const clientOas = new OasBenefit(
+    // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
+
+    const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
       false,
+      this.future,
+      false,
+      this.input.client.age
+    )
+
+    // If the client needs help, check their partner's OAS.
+    // no defer and defer options?
+    if (this.input.client.partnerBenefitStatus.helpMe) {
+      const partnerOasNoDeferral = new OasBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
+
+      this.setValueForAllResults(
+        allResults,
+        'partner',
+        'oas',
+        partnerOasNoDeferral
+      )
+      // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
+      this.input.client.partnerBenefitStatus.oasResultEntitlement =
+        partnerOasNoDeferral.entitlement
+      // Save the client result to the partner's partnerBenefitStatus field, which is not yet used for anything
+      this.input.partner.partnerBenefitStatus.oasResultEntitlement =
+        clientOasNoDeferral.entitlement
+    }
+
+    consoleDev(
+      'Client OAS amount NO deferral',
+      clientOasNoDeferral.entitlement.result
+    )
+
+    // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
+    const clientOasHelper = evaluateOASInput(this.input.client)
+
+    let clientOasWithDeferral
+    if (clientOasHelper.canDefer) {
+      consoleDev(
+        'Modified input to calculate OAS with deferral',
+        clientOasHelper.newInput
+      )
+      clientOasWithDeferral = new OasBenefit(
+        clientOasHelper.newInput,
+        this.translations,
+        false,
+        this.future,
+        true,
+        this.input.client.age
+      )
+
+      consoleDev('WITH DEFERRAL', clientOasWithDeferral)
+      consoleDev(
+        'Client OAS amount WITH deferral',
+        clientOasWithDeferral.entitlement.result
+      )
+    }
+
+    let clientGisNoDeferral = new GisBenefit(
+      this.input.client,
+      this.translations,
+      clientOasNoDeferral.info,
+      false,
       this.future
     )
+
+    consoleDev(
+      'Client GIS amount NO deferral',
+      clientGisNoDeferral.entitlement.result
+    )
+
+    let clientGisWithDeferral
+    if (clientOasWithDeferral) {
+      clientGisWithDeferral = new GisBenefit(
+        clientOasHelper.newInput,
+        this.translations,
+        clientOasWithDeferral.info,
+        false,
+        this.future
+      )
+
+      consoleDev(
+        'Client GIS amount WITH deferral',
+        clientGisWithDeferral.entitlement.result
+      )
+    }
+
+    const noDeferTotal =
+      clientOasNoDeferral.entitlement.result +
+      clientGisNoDeferral.entitlement.result
+
+    consoleDev('TOTAL - NO DEFERRAL', noDeferTotal)
+
+    let deferTotal
+    if (clientOasHelper.canDefer) {
+      deferTotal =
+        clientOasWithDeferral?.entitlement.result +
+        clientGisWithDeferral?.entitlement.result
+
+      consoleDev('TOTAL - WITH DEFERRAL', deferTotal)
+    }
+
+    const deferralMoreBeneficial = deferTotal ? deferTotal > noDeferTotal : null
+
+    consoleDev(
+      'CAN DEFER:',
+      clientOasHelper.canDefer,
+      'MORE BENEFICIAL:',
+      deferralMoreBeneficial
+    )
+
+    const clientOas =
+      deferralMoreBeneficial && this.compare
+        ? clientOasWithDeferral
+        : clientOasNoDeferral
+
+    let clientGis =
+      deferralMoreBeneficial && this.compare
+        ? clientGisWithDeferral
+        : clientGisNoDeferral
+
+    // Add appropriate meta data info and table
+    if (!this.future) {
+      if (clientOasHelper.canDefer) {
+        if (deferralMoreBeneficial) {
+          clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+            this.input.client.age, // current age
+            clientOasHelper.newInput.age, // base age - age when first eligible for OAS
+            this.input.client,
+            clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
+            clientOasWithDeferral.entitlement,
+            this.future
+          )
+        } else {
+          // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
+          if (clientOasHelper.justBecameEligible) {
+            clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+              this.input.client.age,
+              this.input.client.age,
+              this.input.client,
+              clientOasNoDeferral.eligibility,
+              clientOasNoDeferral.entitlement,
+              this.future
+            )
+          } else {
+            clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+              this.input.client.age, // current age
+              clientOasHelper.newInput.age, // base age - age when first eligible for OAS
+              this.input.client,
+              clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
+              clientOasWithDeferral.entitlement,
+              this.future
+            )
+          }
+        }
+      } else {
+        clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
+          this.input.client.age, // current age
+          this.input.client.age, // base age - age when first eligible for OAS
+          this.input.client,
+          clientOasNoDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
+          clientOasNoDeferral.entitlement,
+          this.future
+        )
+      }
+    }
+
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
+    this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
-      const partnerOas = new OasBenefit(this.input.partner, this.translations)
+      const partnerOas = new OasBenefit(
+        this.input.partner,
+        this.translations,
+        true
+      )
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =
@@ -352,17 +553,6 @@ export class BenefitHandler {
       this.input.partner.partnerBenefitStatus.oasResultEntitlement =
         clientOas.entitlement
     }
-
-    // All done with OAS, move onto GIS, but only do GIS eligibility for now.
-    let clientGis = new GisBenefit(
-      this.input.client,
-      this.translations,
-      allResults.client.oas,
-      false,
-      this.future
-    )
-
-    this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
     // If the client needs help, check their partner's GIS eligibility.
     if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -770,7 +960,7 @@ export class BenefitHandler {
                 EntitlementResultType.FULL
               allResults.client.gis.eligibility.detail,
                 (allResults.client.gis.cardDetail.mainText = this.future
-                  ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                  ? `${this.translations.detail.futureEligible} ${this.translations.detail.futureExpectToReceive}`
                   : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
 
               allResults.partner.alw.cardDetail = partnerAlw.cardDetail
@@ -1100,7 +1290,7 @@ export class BenefitHandler {
           ) {
             allResults.client.gis.eligibility.detail,
               (allResults.client.gis.cardDetail.mainText = this.future
-                ? `${this.translations.detail.futureEligible65} ${this.translations.detail.futureExpectToReceive}`
+                ? `${this.translations.detail.futureEligible} ${this.translations.detail.futureExpectToReceive}`
                 : `${this.translations.detail.eligible} ${this.translations.detail.expectToReceive}`)
           }
 
