@@ -1,5 +1,3 @@
-import { max, min } from 'lodash'
-import { consoleDev } from '../../web/helpers/utils'
 import roundToTwo from './roundToTwo'
 
 export const getDeferralIncrease = (months, baseAmount) => {

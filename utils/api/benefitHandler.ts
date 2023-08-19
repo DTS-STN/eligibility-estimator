@@ -339,7 +339,7 @@ export class BenefitHandler {
     const initialPartnerBenefitStatus =
       this.input.client.partnerBenefitStatus.value
 
-    // Future handler takes care of cases when partner is not yet eligible
+    // Future handler takes care of cases when partner is not yet eligible by creating "age sets" of future eligible ages
     // If partner was already eligible in the past based on residency, we need to adjust the inputs
     if (!this.future) {
       const partnerEliObj = OasEligibility(
