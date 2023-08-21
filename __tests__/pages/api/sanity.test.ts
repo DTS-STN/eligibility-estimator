@@ -633,7 +633,8 @@ describe('EE Sanity Test Scenarios:', () => {
       //EntitlementResultType.FULL
       EntitlementResultType.PARTIAL //oas deferral
     )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('687.56')
+    //expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('687.56')
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('773.36') //oas-deferral
     expect(res.body.results.oas.entitlement.clawback).toEqual(0)
 
     expect(res.body.results.gis.eligibility.result).toEqual(
@@ -786,7 +787,8 @@ describe('EE Sanity Test Scenarios:', () => {
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
       ResultReason.NONE
     )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(340.87)
+    //expect(res.body.partnerResults.gis.entitlement.result).toEqual(340.87)
+    expect(res.body.partnerResults.gis.entitlement.result).toEqual(392.44) //oas-deferral
 
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -1125,7 +1127,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectAlwsMarital(res)
     //partner results
     //expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 687.56, true) //oas-deferral
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 635.99, true) //oas-deferral
     expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
@@ -1678,7 +1680,8 @@ describe('EE Sanity Test Scenarios:', () => {
     //client results
     //expectOasEligible(res, EntitlementResultType.PARTIAL, 601.62)
     expectOasEligible(res, EntitlementResultType.PARTIAL, 668.86) //oas-deferral
-    expectGisEligible(res, 319.83)
+    //expectGisEligible(res, 319.83)
+    expectGisEligible(res, 371.4) //oas-deferral
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //partner results
@@ -1820,7 +1823,8 @@ describe('EE Sanity Test Scenarios:', () => {
     expectAlwEligible(res, 1056.71) //oas-deferral
     expectAlwsMarital(res)
     //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 661.78, true)
+    //expectOasEligible(res, EntitlementResultType.PARTIAL, 661.78, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 415.98, true) //oas-deferral
     expectGisEligible(res, 331.34, true)
     expectAlwTooOld(res, true)
   })
@@ -1885,7 +1889,7 @@ describe('EE Sanity Test Scenarios:', () => {
     expectAlwsMarital(res)
     //partner results
     //expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 687.56, true) //oas-deferral
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 653.18, true) //oas-deferral
     expectGisEligible(res, 235.89, true)
     expectAlwTooOld(res, true)
   })
@@ -1952,7 +1956,8 @@ describe('EE Sanity Test Scenarios:', () => {
     //partner results
     //expectOasEligible(res, EntitlementResultType.PARTIAL, 429.73, true)
     expectOasEligible(res, EntitlementResultType.PARTIAL, 395.35, true) //oas-deferral
-    expectGisEligible(res, 485.73, true)
+    //expectGisEligible(res, 485.73, true)
+    expectGisEligible(res, 520.1, true) //oas-deferral
     expectAlwTooOld(res, true)
   })
 
