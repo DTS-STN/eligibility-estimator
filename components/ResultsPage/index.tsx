@@ -22,7 +22,7 @@ import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { flattenArray } from './utils'
+import { flattenArray, getSortedListLinks } from './utils'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -175,44 +175,11 @@ const ResultsPage: React.VFC<{
       },
     ]
 
-    // filtered out the link item which text is empty.
-    listLinks = listLinks.filter((ll) => ll.text)
-    // Sort the links based on eligibility
-    const sortListLinks = (a, b) => {
-      if (a.eligible == null || b.eligible == null) {
-        return 0
-      }
-      if (a.eligible && !b.eligible) {
-        return -1
-      }
-      if (!a.eligible && b.eligible) {
-        return 1
-      }
-
-      // This accounts for future planning results and preserves the order of links as they appear in the future eligible array
-      if (!a.eligible && !b.eligible) {
-        let aIndex = futureClientEligibleArray.findIndex(
-          (benefit) => benefit.benefitKey === a.id
-        )
-        let bIndex = futureClientEligibleArray.findIndex(
-          (benefit) => benefit.benefitKey === b.id
-        )
-
-        if (aIndex > -1 && bIndex > -1) {
-          return aIndex - bIndex
-        }
-        if (aIndex > -1) {
-          return -1
-        }
-        if (bIndex > -1) {
-          return 1
-        }
-      }
-
-      return 0
-    }
-
-    return listLinks.sort(sortListLinks)
+    // Get sorted list links based on eligibility, filtering out link items which text is empty
+    return getSortedListLinks(
+      listLinks.filter((ll) => ll.text),
+      futureClientEligibleArray
+    )
   }
 
   return (
