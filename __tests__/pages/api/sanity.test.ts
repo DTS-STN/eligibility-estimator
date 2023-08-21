@@ -1825,7 +1825,8 @@ describe('EE Sanity Test Scenarios:', () => {
     //partner results
     //expectOasEligible(res, EntitlementResultType.PARTIAL, 661.78, true)
     expectOasEligible(res, EntitlementResultType.PARTIAL, 415.98, true) //oas-deferral
-    expectGisEligible(res, 331.34, true)
+    //expectGisEligible(res, 331.34, true)
+    expectGisEligible(res, 241.23, true) //oas-deferral
     expectAlwTooOld(res, true)
   })
 
@@ -1890,7 +1891,8 @@ describe('EE Sanity Test Scenarios:', () => {
     //partner results
     //expectOasEligible(res, EntitlementResultType.FULL, 687.56, true)
     expectOasEligible(res, EntitlementResultType.PARTIAL, 653.18, true) //oas-deferral
-    expectGisEligible(res, 235.89, true)
+    //expectGisEligible(res, 235.89, true)
+    expectGisEligible(res, 270.27, true) //oas-deferral
     expectAlwTooOld(res, true)
   })
 
