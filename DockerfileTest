@@ -39,4 +39,4 @@ WORKDIR $home
 COPY --chown=55:$group . . 
 
 RUN yarn install --immutable
-RUN yarn run test:unit field-reqs.test
+RUN yarn run test:unit sanity.test
