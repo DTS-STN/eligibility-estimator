@@ -83,14 +83,18 @@ describe('GIS Benefit Card Results', () => {
 
 function runTextReplacements(handler, benefitResult, inputString) {
     let processedString = inputString;
-  
     for (const ruleKey in textReplacementRules) {
       if (textReplacementRules.hasOwnProperty(ruleKey)) {
         const placeholder = `{${ruleKey}}`;
-  
+        
         if (processedString.includes(placeholder)) {
-          const replacement = textReplacementRules[ruleKey](handler, benefitResult);
-          processedString = processedString.replace(placeholder, replacement);
+          //GIS Eligibility Age 65
+          if(placeholder=="{EARLIEST_ELIGIBLE_AGE}"){
+            processedString=processedString.replace(placeholder, "65");
+          }else{
+            const replacement = textReplacementRules[ruleKey](handler, benefitResult);
+            processedString = processedString.replace(placeholder, replacement);
+          }
         }
       }
     }
@@ -129,7 +133,7 @@ function checkGISResults(handler, response, item, language) {
   
     //Detail
     item.gisDetail[language].forEach((index) => {
-        cy.getByData('gis').find('[data-cy="benefit-detail"]').should('exist').contains(removeHtmlContent(index))
+        cy.getByData('gis').find('[data-cy="benefit-detail"]').should('exist').contains(runTextReplacements(handler,response,index))
       });
 
 

@@ -70,7 +70,7 @@ const data = [
         "yearsResided": 0,
         "marritalStatus": "Single",
         "gisEligible": {en: en.result.willBeEligible, fr: fr.result.willBeEligible},
-        "gisDetail": {en: [en.detail.futureEligible65], fr: [fr.detail.futureEligible65], estimate: true},
+        "gisDetail": {en: [en.detail.futureEligible], fr: [fr.detail.futureEligible], estimate: true},
         "nextSteps": {en: [enWeb.resultsPage.nextStepGis], fr: [frWeb.resultsPage.nextStepGis], limit: false},
       },
       {
@@ -218,7 +218,7 @@ const data = [
         "partnerInCanadaSince18": true,
         "partnerRecvOas": false,
         "gisEligible": {en: en.result.willBeEligible, fr: fr.result.willBeEligible},
-        "gisDetail": {en: [en.detail.futureEligible65], fr: [fr.detail.futureEligible65], estimate: true},
+        "gisDetail": {en: [en.detail.futureEligible], fr: [fr.detail.futureEligible], estimate: true},
         "nextSteps": {en: [enWeb.resultsPage.nextStepGis], fr: [frWeb.resultsPage.nextStepGis], limit: false},
       },
       {
@@ -242,7 +242,7 @@ const data = [
         "partnerInCanadaSince18": true,
         "partnerRecvOas": false,
         "gisEligible": {en: en.result.willBeEligible, fr: fr.result.willBeEligible},
-        "gisDetail": {en: [en.detail.futureEligible65], fr: [fr.detail.futureEligible65], estimate: true},
+        "gisDetail": {en: [en.detail.futureEligible], fr: [fr.detail.futureEligible], estimate: true},
         "nextSteps": {en: [enWeb.resultsPage.nextStepGis], fr: [frWeb.resultsPage.nextStepGis], limit: false},
         "collapsedText": {
           en: [{estimate:false, object:en.detailWithHeading.partnerEligibleButAnsweredNo}], 
@@ -402,7 +402,7 @@ const data = [
         "partnerInCanadaSince18": true,
         "partnerRecvOas": false,
         "gisEligible": {en: en.result.willBeEligible, fr: fr.result.willBeEligible},
-        "gisDetail": {en: [en.detail.futureEligible65], fr: [fr.detail.futureEligible65], estimate: true},
+        "gisDetail": {en: [en.detail.futureEligible], fr: [fr.detail.futureEligible], estimate: true},
         "nextSteps": {en: [enWeb.resultsPage.nextStepGis], fr: [frWeb.resultsPage.nextStepGis], limit: false},
         "collapsedText": {
           en: [{estimate:true, object:en.detailWithHeading.partnerEligible}], 
@@ -587,7 +587,7 @@ const data = [
         "partnerInCanadaSince18": true,
         "partnerRecvOas": true,
         "gisEligible": {en: en.result.willBeEligible, fr: fr.result.willBeEligible},
-        "gisDetail": {en: [en.detail.futureEligible65], fr: [fr.detail.futureEligible65], estimate: true},
+        "gisDetail": {en: [en.detail.futureEligible], fr: [fr.detail.futureEligible], estimate: true},
         "nextSteps": {en: [enWeb.resultsPage.nextStepGis], fr: [frWeb.resultsPage.nextStepGis], limit: false},
       },
       {
@@ -611,7 +611,7 @@ const data = [
         "partnerInCanadaSince18": true,
         "partnerRecvOas": true,
         "gisEligible": {en: en.result.willBeEligible, fr: fr.result.willBeEligible},
-        "gisDetail": {en: [en.detail.futureEligible65], fr: [fr.detail.futureEligible65], estimate: true},
+        "gisDetail": {en: [en.detail.futureEligible], fr: [fr.detail.futureEligible], estimate: true},
         "nextSteps": {en: [enWeb.resultsPage.nextStepGis], fr: [frWeb.resultsPage.nextStepGis], limit: false},
         "collapsedText": {
           en: [{estimate:true, object:en.detailWithHeading.partnerEligible}], 
