@@ -252,7 +252,7 @@ export const BenefitCards: React.VFC<{
       if (result.eligibility.result === ResultKey.ELIGIBLE) {
         const ifYouApplyText =
           apiTsln.detail.alwIfYouApply +
-          `<strong>${numberToStringCurrency(
+          `<strong data-cy='next-step-limit'>${numberToStringCurrency(
             legalValues.alw.alwIncomeLimit,
             apiTsln._language,
             { rounding: 0 }

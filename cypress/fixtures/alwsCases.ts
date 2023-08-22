@@ -5,7 +5,7 @@ import { ALWSThresholds } from './thresholds'
 const data = [
     {
       "testId": "CASE-AS1",
-      "ageYears": 62,
+      "ageYears": 60,
       "ageMonths": 0,
       "receiveOAS": false,
       "delayYears": 0,
@@ -21,7 +21,7 @@ const data = [
     },
     {
       "testId": "CASE-AS2",
-      "ageYears": 62,
+      "ageYears": 60,
       "ageMonths": 0,
       "receiveOAS": false,
       "delayYears": 0,
@@ -72,7 +72,7 @@ const data = [
     },
     {
       "testId": "CASE-AS5",
-      "ageYears": 62,
+      "ageYears": 60,
       "ageMonths": 0,
       "receiveOAS": false,
       "delayYears": 0,
@@ -88,7 +88,7 @@ const data = [
     },
     {
       "testId": "CASE-AS6",
-      "ageYears": 62,
+      "ageYears": 60,
       "ageMonths": 0,
       "receiveOAS": false,
       "delayYears": 0,
