@@ -130,7 +130,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
             detail: this.future
-              ? this.translations.detail.futureEligible65
+              ? this.translations.detail.futureEligible
               : this.translations.detail.eligible,
           }
         }
@@ -237,13 +237,15 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
    * Just the formula to get the amount
    */
   protected formulaResult(): number {
-    return new EntitlementFormula(
+    const gisResult = new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age,
       this.oasResult
     ).getEntitlementAmount()
+
+    return gisResult
   }
 
   protected getCardLinks(): LinkWithAction[] {

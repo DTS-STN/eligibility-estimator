@@ -1,13 +1,8 @@
 import React from 'react'
-import { getTranslations, numberToStringCurrency } from '../../i18n/api'
+import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import {
-  ResultKey,
-  BenefitKey,
-  ResultReason,
-} from '../../utils/api/definitions/enums'
+import { ResultKey, BenefitKey } from '../../utils/api/definitions/enums'
 import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
-import legalValues from '../../utils/api/scrapers/output'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
 import { DeferralTable } from './DeferralTable'
@@ -17,6 +12,12 @@ import {
   getFirstOccurences,
   omitCommonBenefitKeys,
 } from './utils'
+import {
+  getOasNextSteps,
+  getGisNextSteps,
+  getAlwNextSteps,
+  getAlwsNextSteps,
+} from './NextSteps'
 
 export const BenefitCards: React.VFC<{
   inputAge: number
@@ -122,174 +123,22 @@ export const BenefitCards: React.VFC<{
   const getNextStepText = (benefitKey, result): NextStepText => {
     let nextStepText = { nextStepTitle: '', nextStepContent: '' }
 
+    // get... code below was moved to another file to make it a bit cleaner
     if (benefitKey === BenefitKey.gis) {
-      if (
-        result.eligibility.result === ResultKey.ELIGIBLE ||
-        result.eligibility.result === ResultKey.INCOME_DEPENDENT
-      ) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        if (result.eligibility.reason === ResultReason.INCOME) {
-          nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
-          if (result.entitlement.result === 0) {
-            if (receivingOAS) {
-              nextStepText.nextStepContent = apiTsln.detail.gis.ifYouApply
-              nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyApplied}</p>`
-            } else
-              nextStepText.nextStepContent += `<p class='mt-6'>${apiTsln.detail.gis.ifYouApply}</p>`
-          }
-        } else if (result.entitlement.result > 0 && receivingOAS) {
-          nextStepText.nextStepContent =
-            apiTsln.detail.gis.canApplyOnline +
-            `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyReceive}</p>`
-        } else if (result.entitlement.result > 0 && !receivingOAS) {
-          nextStepText.nextStepContent = tsln.resultsPage.nextStepGis
-        } else if (result.entitlement.result <= 0 && receivingOAS) {
-          nextStepText.nextStepContent = apiTsln.detail.gis.ifYouApply
-          nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouAlreadyApplied}</p>`
-        }
-      }
+      getGisNextSteps(result, receivingOAS, nextStepText, apiTsln, tsln)
     } else if (benefitKey === BenefitKey.oas) {
-      if (result.eligibility.result === ResultKey.ELIGIBLE) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-
-        if (result.entitlement.clawback > 0) {
-          if (!receivingOAS && inputAge > 64) {
-            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
-          }
-
-          if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
-            nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.over70}</p>`
-          }
-
-          //code for future --start--
-          if (inputAge < 64) {
-            nextStepText.nextStepContent +=
-              apiTsln.detail.oas.youWillReceiveLetter
-          } else if (inputAge === 64) {
-            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
-          } else if (
-            (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
-              result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
-            result.entitlement.result > 0 &&
-            receivingOAS
-          ) {
-            //TODO  duplicating the code here, will refactor later TODO
-            nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
-          } else {
-            !receivingOAS
-              ? (nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.serviceCanadaReviewYourPayment}</p>`)
-              : ''
-          }
-          //code for future --end--
-        } else if (
-          (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
-            result.eligibility.reason === ResultReason.AGE_70_AND_OVER) &&
-          result.entitlement.result > 0 &&
-          receivingOAS
-        ) {
-          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
-        } else if (
-          (result.eligibility.reason === ResultReason.AGE_65_TO_69 ||
-            result.eligibility.reason === ResultReason.AGE_70_AND_OVER ||
-            result.eligibility.reason === ResultReason.INCOME) &&
-          result.entitlement.result === 0 &&
-          receivingOAS
-        ) {
-          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimateWhenZero}</p>`
-        } else if (result.eligibility.reason === ResultReason.AGE_65_TO_69) {
-          //code for future --start--
-          if (inputAge < 64) {
-            nextStepText.nextStepContent +=
-              apiTsln.detail.oas.youWillReceiveLetter
-          } else if (inputAge === 64) {
-            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
-          } else {
-            // default when 65-69
-            !receivingOAS
-              ? (nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`)
-              : ''
-          }
-          //code for future --end--
-        } else if (
-          result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
-          receivingOAS
-        ) {
-          nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
-        } else if (
-          result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
-          !receivingOAS
-        ) {
-          nextStepText.nextStepContent += apiTsln.detail.oas.over70
-        } else if (result.entitlement.clawback === 0) {
-          //code for future --start--
-          if (inputAge < 64) {
-            nextStepText.nextStepContent +=
-              apiTsln.detail.oas.youWillReceiveLetter
-          } else if (inputAge === 64) {
-            nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.ifYouDidnt}`
-          } else {
-            !receivingOAS
-              ? (nextStepText.nextStepContent += `${apiTsln.detail.oas.serviceCanadaReviewYourPayment}`)
-              : ''
-
-            result.eligibility.reason === ResultReason.INCOME
-              ? (nextStepText.nextStepContent +=
-                  ' ' + apiTsln.detail.oas.automaticallyBePaid)
-              : ''
-          }
-          //code for future --end--
-        }
-      } else if (
-        result.eligibility.result === ResultKey.INELIGIBLE &&
-        result.eligibility.reason === ResultReason.AGE_YOUNG_64
-      ) {
-        nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-        nextStepText.nextStepContent +=
-          apiTsln.detail.oas.youShouldHaveReceivedLetter
-        nextStepText.nextStepContent += ` ${apiTsln.detail.oas.ifNotReceiveLetter64}`
-      }
+      getOasNextSteps(
+        result,
+        inputAge,
+        receivingOAS,
+        nextStepText,
+        apiTsln,
+        tsln
+      )
     } else if (benefitKey === BenefitKey.alw) {
-      if (result.eligibility.result === ResultKey.ELIGIBLE) {
-        const ifYouApplyText =
-          apiTsln.detail.alwIfYouApply +
-          `<strong data-cy='next-step-limit'>${numberToStringCurrency(
-            legalValues.alw.alwIncomeLimit,
-            apiTsln._language,
-            { rounding: 0 }
-          )}</strong>.`
-
-        if (inputAge < 60) {
-          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-          nextStepText.nextStepContent += apiTsln.detail.alwsApply
-          if (result.entitlement.result === 0) {
-            nextStepText.nextStepContent += ifYouApplyText
-          }
-        } else if (result.entitlement.result === 0) {
-          nextStepText.nextStepContent += ifYouApplyText
-        }
-      }
+      getAlwNextSteps(result, inputAge, nextStepText, apiTsln, tsln)
     } else if (benefitKey === BenefitKey.alws) {
-      if (result.eligibility.result === ResultKey.ELIGIBLE) {
-        const ifYouApplyText = `${
-          apiTsln.detail.alwIfYouApply
-        }<strong data-cy='next-step-limit'>${numberToStringCurrency(
-          legalValues.alw.afsIncomeLimit,
-          apiTsln._language,
-          { rounding: 0 }
-        )}</strong>.`
-
-        if (inputAge < 60) {
-          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-          nextStepText.nextStepContent += `${apiTsln.detail.alwsApply}`
-
-          if (result.entitlement.result === 0) {
-            nextStepText.nextStepContent += ifYouApplyText
-          }
-        } else if (result.entitlement.result === 0) {
-          nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-          nextStepText.nextStepContent += ifYouApplyText
-        }
-      }
+      getAlwsNextSteps(result, inputAge, nextStepText, apiTsln, tsln)
     }
 
     nextStepText.nextStepContent = replaceTextVariables(
@@ -319,6 +168,12 @@ export const BenefitCards: React.VFC<{
           : [...eligiblePartnerResult.cardDetail.collapsedText]
 
       collapsedDetails = [...collapsedDetails, ...temp]
+
+      // remove duplicates from array, this is because future is adding extra msg
+      collapsedDetails = collapsedDetails.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.heading === value.heading)
+      )
     }
 
     const eligibility: boolean =

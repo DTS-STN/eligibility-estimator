@@ -19,6 +19,28 @@ export const WillBeEligible: React.VFC<{
   const multipleOAS_GIS =
     futureResults.filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
+  for (let i = futureResults.length - 1; i >= 0; i--) {
+    if (i > 0) {
+      if (
+        Object.values(Object.values(Object.values(futureResults)[i])[0])
+          .length != 1
+      ) {
+        if (
+          Object.values(Object.values(futureResults[i])[0])[0].entitlement
+            .result ==
+            Object.values(Object.values(futureResults[i - 1])[0])[0].entitlement
+              .result &&
+          Object.values(Object.values(futureResults[i])[0])[1].entitlement
+            .result ==
+            Object.values(Object.values(futureResults[i - 1])[0])[1].entitlement
+              .result
+        ) {
+          futureResults.pop()
+        }
+      }
+    }
+  }
+
   return (
     <>
       <h2
@@ -41,7 +63,6 @@ export const WillBeEligible: React.VFC<{
         const nonZeroExist = onlyOASGIS.some(
           (key) => resultObj[age][key].entitlement?.result > 0
         )
-
         const enStr =
           multipleOAS_GIS && nonZeroExist
             ? partner
@@ -60,14 +81,15 @@ export const WillBeEligible: React.VFC<{
             ? tsln.resultsPage.theyToReceive
             : tsln.resultsPage.partnerToReceive
 
-        const text = `${language === 'en' ? enStr : frStr} ${age}${
-          language === 'en' ? ',' : ' ans,'
-        } ${partner ? partnerText : tsln.resultsPage.toReceive}`
+        const text = `${language === 'en' ? enStr : frStr} ${Math.floor(
+          Number(age)
+        )}${language === 'en' ? ',' : ' ans,'} ${
+          partner ? partnerText : tsln.resultsPage.toReceive
+        }`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
           (value) => resultObj[age][value]
         )
-
         let eligible = resultsArray.filter(
           (result) =>
             result.eligibility?.result === ResultKey.ELIGIBLE ||

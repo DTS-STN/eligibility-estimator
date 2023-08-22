@@ -41,7 +41,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
         {adobeAnalyticsUrl ? <script src={adobeAnalyticsUrl} /> : ''}
 
         <meta property="og:title" content={tsln.introPageTitle} />
-        <meta name="robots" content="noindex" />
         <meta property="og:type" content="website" />
         <meta
           property="og:url"
@@ -66,14 +65,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           name="twitter:image"
           content="https://www.canada.ca/content/dam/decd-endc/images/sclabs/oas-benefits-estimator/overview.jpg"
         />
-        <meta
-          name="twitter:image:alt"
-          content={
-            isCanadaDotCa
-              ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}`
-              : ' '
-          }
-        />
+        <meta name="twitter:image:alt" content=" " />
         <meta
           name="twitter:description"
           content={tsln.meta.homeShortDescription}

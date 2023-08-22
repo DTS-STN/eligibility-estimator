@@ -143,3 +143,8 @@ export enum LanguageCode {
   EN = 'en-CA',
   FR = 'fr-CA',
 }
+
+export enum ISOLanguage {
+  EN = 'eng',
+  FR = 'fra',
+}
