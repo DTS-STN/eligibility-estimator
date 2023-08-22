@@ -48,6 +48,11 @@ const fr: WebTranslations = {
   breadcrumb5Title: 'Montant des paiements de la Sécurité de la vieillesse',
   breadcrumb5URL:
     'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
+  breadcrumb6Title:
+    'Estimateur des prestations de la Sécurité de la vieillesse',
+  breadcrumb6URL: '/fr',
+  breadcrumb7Title: 'Questions',
+  breadcrumb7URL: '/fr/questions',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',

@@ -47,6 +47,10 @@ const en: WebTranslations = {
   breadcrumb5Title: 'Old Age Security payment amounts',
   breadcrumb5URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
+  breadcrumb6Title: 'Old Age Security Benefits Estimator',
+  breadcrumb6URL: '/en',
+  breadcrumb7Title: 'Questions',
+  breadcrumb7URL: '/en/questions',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   introPageOASHeading: 'Old Age Security benefits',

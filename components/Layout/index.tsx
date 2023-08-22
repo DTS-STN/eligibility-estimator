@@ -71,10 +71,6 @@ export const Layout: React.VFC<{
             text: tsln.breadcrumb4Title,
             link: tsln.breadcrumb4URL,
           },
-          {
-            text: tsln.breadcrumb5Title,
-            link: tsln.breadcrumb5URL,
-          },
         ]
       : [
           {
@@ -87,6 +83,24 @@ export const Layout: React.VFC<{
           },
         ]
 
+  if (router.pathname === '/questions') {
+    breadcrumbs.push({
+      text: tsln.breadcrumb6Title,
+      link: tsln.breadcrumb6URL,
+    })
+  } else if (
+    router.pathname === '/results' ||
+    router.pathname === '/resultats'
+  ) {
+    breadcrumbs.push({
+      text: tsln.breadcrumb6Title,
+      link: tsln.breadcrumb6URL,
+    }),
+      breadcrumbs.push({
+        text: tsln.breadcrumb7Title,
+        link: tsln.breadcrumb7URL,
+      })
+  }
   const handleOnClick = () => {
     const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`
     router.push(link)
