@@ -53,7 +53,7 @@ export const Layout: React.VFC<{
   }
 
   const breadcrumbs =
-    process.env.APP_ENV !== 'production'
+    process.env.APP_ENV === 'production'
       ? [
           {
             text: tsln.breadcrumb1Title,
