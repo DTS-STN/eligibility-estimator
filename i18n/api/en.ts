@@ -313,7 +313,8 @@ const en: Translations = {
   detail: {
     eligible: "You're likely eligible for this benefit.",
     futureEligible60: "You'll likely be eligible once you turn 60.",
-    futureEligible65: "You'll likely be eligible once you turn 65.",
+    futureEligible:
+      "You'll likely be eligible once you turn {EARLIEST_ELIGIBLE_AGE}.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     futureEligibleIncomeTooHigh:
@@ -329,10 +330,11 @@ const en: Translations = {
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
+    retroactivePay: 'Retroactive payment',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
-      "You can start receiving your payments at 65 or wait until you're 70.",
+      "You can start receiving your payments at {EARLIEST_ELIGIBLE_AGE} or wait until you're 70.",
     youCanAply:
       'You can apply 11 months before the date you want your payments to start.',
     delayMonths:
@@ -429,6 +431,10 @@ const en: Translations = {
         "You may be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
         "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+      chooseToDefer:
+        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+      receivePayment:
+        'You may be able to receive payment for up to the last 11 months.',
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:

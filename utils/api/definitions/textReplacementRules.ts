@@ -93,6 +93,7 @@ export const textReplacementRules: TextReplacementRules = {
     handler.input.client.maritalStatus.partnered
       ? handler.translations.incomeCombined
       : handler.translations.incomeSingle,
+  EARLIEST_ELIGIBLE_AGE: (handler) => String(handler.rawInput.age),
   LINK_SERVICE_CANADA: (handler) => generateLink(handler.translations.links.SC),
   MY_SERVICE_CANADA: (handler) =>
     generateLink(handler.translations.links.SCAccount),

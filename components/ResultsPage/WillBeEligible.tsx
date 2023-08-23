@@ -11,13 +11,36 @@ export const WillBeEligible: React.VFC<{
   futureResults: any
   partner?: boolean
   partnerNoOAS: boolean
-}> = ({ futureResults, partner = false, partnerNoOAS }) => {
+  multipleResults: boolean
+}> = ({ futureResults, partner = false, partnerNoOAS, multipleResults }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
 
   const multipleOAS_GIS =
     futureResults.filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
+
+  for (let i = futureResults.length - 1; i >= 0; i--) {
+    if (i > 0) {
+      if (
+        Object.values(Object.values(Object.values(futureResults)[i])[0])
+          .length != 1
+      ) {
+        if (
+          Object.values(Object.values(futureResults[i])[0])[0].entitlement
+            .result ==
+            Object.values(Object.values(futureResults[i - 1])[0])[0].entitlement
+              .result &&
+          Object.values(Object.values(futureResults[i])[0])[1].entitlement
+            .result ==
+            Object.values(Object.values(futureResults[i - 1])[0])[1].entitlement
+              .result
+        ) {
+          futureResults.pop()
+        }
+      }
+    }
+  }
 
   return (
     <>
@@ -41,18 +64,37 @@ export const WillBeEligible: React.VFC<{
         const nonZeroExist = onlyOASGIS.some(
           (key) => resultObj[age][key].entitlement?.result > 0
         )
+        console.log(
+          'multipleOAS_GIS',
+          multipleOAS_GIS,
+          ' nonZeroExist=',
+          nonZeroExist,
+          ' age=',
+          Math.floor(Number(age)),
+          ' multiple=',
+          multipleResults,
+          ' idx=',
+          idx
+        )
 
+        //
+        // an overcomplicated condition for useless information
+        //
         const enStr =
-          multipleOAS_GIS && nonZeroExist
+          (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
+          (multipleOAS_GIS && nonZeroExist && multipleResults) ||
+          (multipleOAS_GIS && nonZeroExist && idx > 0)
             ? partner
-              ? 'If your partner starts receiving at'
-              : 'If you start receiving at'
+              ? 'If your partner continues receiving at'
+              : 'If you continue receiving at'
             : 'At'
         const frStr =
-          multipleOAS_GIS && nonZeroExist
+          (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
+          (multipleOAS_GIS && nonZeroExist && multipleResults) ||
+          (multipleOAS_GIS && nonZeroExist && idx > 0)
             ? partner
-              ? 'Si votre conjoint commence à'
-              : 'Si vous commencez à'
+              ? 'Si votre conjoint continue de recevoir à'
+              : 'Si vous continuez de recevoir à'
             : 'À'
 
         const partnerText =
@@ -60,14 +102,15 @@ export const WillBeEligible: React.VFC<{
             ? tsln.resultsPage.theyToReceive
             : tsln.resultsPage.partnerToReceive
 
-        const text = `${language === 'en' ? enStr : frStr} ${age}${
-          language === 'en' ? ',' : ' ans,'
-        } ${partner ? partnerText : tsln.resultsPage.toReceive}`
+        const text = `${language === 'en' ? enStr : frStr} ${Math.floor(
+          Number(age)
+        )}${language === 'en' ? ',' : ' ans,'} ${
+          partner ? partnerText : tsln.resultsPage.toReceive
+        }`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
           (value) => resultObj[age][value]
         )
-
         let eligible = resultsArray.filter(
           (result) =>
             result.eligibility?.result === ResultKey.ELIGIBLE ||

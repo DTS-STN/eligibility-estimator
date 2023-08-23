@@ -53,7 +53,7 @@ export interface Translations {
   detail: {
     eligible: string
     futureEligible60: string
-    futureEligible65: string
+    futureEligible: string
     eligibleIncomeTooHigh: string
     futureEligibleIncomeTooHigh: string
     futureEligibleIncomeTooHigh2: string
@@ -62,6 +62,7 @@ export interface Translations {
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     yourDeferralOptions: string
+    retroactivePay: string
     sinceYouAreSixty: string
     futureDeferralOptions: string
     youCanAply: string
@@ -114,6 +115,8 @@ export interface Translations {
       over70: string
       eligibleWhenTurn65: string
       ifNotReceiveLetter64: string
+      chooseToDefer: string
+      receivePayment: string
     }
     gis: {
       eligibleDependingOnIncomeNoEntitlement: string
