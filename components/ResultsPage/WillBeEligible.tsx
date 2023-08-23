@@ -64,18 +64,6 @@ export const WillBeEligible: React.VFC<{
         const nonZeroExist = onlyOASGIS.some(
           (key) => resultObj[age][key].entitlement?.result > 0
         )
-        console.log(
-          'multipleOAS_GIS',
-          multipleOAS_GIS,
-          ' nonZeroExist=',
-          nonZeroExist,
-          ' age=',
-          Math.floor(Number(age)),
-          ' multiple=',
-          multipleResults,
-          ' idx=',
-          idx
-        )
 
         //
         // an overcomplicated condition for useless information
