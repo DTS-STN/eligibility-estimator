@@ -11,7 +11,8 @@ export const WillBeEligible: React.VFC<{
   futureResults: any
   partner?: boolean
   partnerNoOAS: boolean
-}> = ({ futureResults, partner = false, partnerNoOAS }) => {
+  multipleResults: boolean
+}> = ({ futureResults, partner = false, partnerNoOAS, multipleResults }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
@@ -63,17 +64,37 @@ export const WillBeEligible: React.VFC<{
         const nonZeroExist = onlyOASGIS.some(
           (key) => resultObj[age][key].entitlement?.result > 0
         )
+        console.log(
+          'multipleOAS_GIS',
+          multipleOAS_GIS,
+          ' nonZeroExist=',
+          nonZeroExist,
+          ' age=',
+          Math.floor(Number(age)),
+          ' multiple=',
+          multipleResults,
+          ' idx=',
+          idx
+        )
+
+        //
+        // an overcomplicated condition for useless information
+        //
         const enStr =
-          multipleOAS_GIS && nonZeroExist
+          (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
+          (multipleOAS_GIS && nonZeroExist && multipleResults) ||
+          (multipleOAS_GIS && nonZeroExist && idx > 0)
             ? partner
-              ? 'If your partner starts receiving at'
-              : 'If you start receiving at'
+              ? 'If your partner continues receiving at'
+              : 'If you continue receiving at'
             : 'At'
         const frStr =
-          multipleOAS_GIS && nonZeroExist
+          (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
+          (multipleOAS_GIS && nonZeroExist && multipleResults) ||
+          (multipleOAS_GIS && nonZeroExist && idx > 0)
             ? partner
-              ? 'Si votre conjoint commence à'
-              : 'Si vous commencez à'
+              ? 'Si votre conjoint continue de recevoir à'
+              : 'Si vous continuez de recevoir à'
             : 'À'
 
         const partnerText =

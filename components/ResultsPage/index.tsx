@@ -206,6 +206,7 @@ const ResultsPage: React.VFC<{
             <WillBeEligible
               futureResults={futureClientResults}
               partnerNoOAS={partnerNoOAS}
+              multipleResults={resultsEligible.length > 0}
             />
           )}
 
@@ -228,6 +229,7 @@ const ResultsPage: React.VFC<{
               futureResults={futurePartnerResults}
               partner={true}
               partnerNoOAS={partnerNoOAS}
+              multipleResults={partnerResultsEligible.length > 0}
             />
           )}
 
