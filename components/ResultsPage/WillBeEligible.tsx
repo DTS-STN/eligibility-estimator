@@ -12,7 +12,14 @@ export const WillBeEligible: React.VFC<{
   partner?: boolean
   partnerNoOAS: boolean
   multipleResults: boolean
-}> = ({ futureResults, partner = false, partnerNoOAS, multipleResults }) => {
+  eligibleOAS: boolean
+}> = ({
+  futureResults,
+  partner = false,
+  partnerNoOAS,
+  multipleResults,
+  eligibleOAS,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
@@ -71,7 +78,8 @@ export const WillBeEligible: React.VFC<{
         const enStr =
           (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
           (multipleOAS_GIS && nonZeroExist && multipleResults) ||
-          (multipleOAS_GIS && nonZeroExist && idx > 0)
+          (multipleOAS_GIS && nonZeroExist && idx > 0) ||
+          eligibleOAS
             ? partner
               ? 'If your partner continues receiving at'
               : 'If you continue receiving at'
@@ -79,7 +87,8 @@ export const WillBeEligible: React.VFC<{
         const frStr =
           (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
           (multipleOAS_GIS && nonZeroExist && multipleResults) ||
-          (multipleOAS_GIS && nonZeroExist && idx > 0)
+          (multipleOAS_GIS && nonZeroExist && idx > 0) ||
+          eligibleOAS
             ? partner
               ? 'Si votre conjoint continue de recevoir à'
               : 'Si vous continuez de recevoir à'

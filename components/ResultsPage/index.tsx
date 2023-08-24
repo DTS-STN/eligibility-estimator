@@ -207,6 +207,10 @@ const ResultsPage: React.VFC<{
               futureResults={futureClientResults}
               partnerNoOAS={partnerNoOAS}
               multipleResults={resultsEligible.length > 0}
+              eligibleOAS={
+                resultsEligible.filter((obj) => obj.benefitKey === 'oas')
+                  .length > 0
+              }
             />
           )}
 
@@ -230,6 +234,10 @@ const ResultsPage: React.VFC<{
               partner={true}
               partnerNoOAS={partnerNoOAS}
               multipleResults={partnerResultsEligible.length > 0}
+              eligibleOAS={
+                partnerResultsEligible.filter((obj) => obj.benefitKey === 'oas')
+                  .length > 0
+              }
             />
           )}
 
