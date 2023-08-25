@@ -168,6 +168,8 @@ export class BenefitHandler {
       ),
     }
 
+    consoleDev('#1 oasDefer', this.rawInput.oasDeferDuration)
+
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
@@ -1471,6 +1473,8 @@ export class BenefitHandler {
         ? new PartnerBenefitStatusHelper(this.rawInput.partnerBenefitStatus)
         : new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
     }
+
+    consoleDev('#2 oasDefer', clientSingleInput.oasDeferDuration)
 
     return clientSingleInput
   }
