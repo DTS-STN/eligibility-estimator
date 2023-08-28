@@ -265,7 +265,6 @@ export function evaluateOASInput(input) {
   const yearsInCanada = input.yearsInCanadaSince18
   const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
-  console.log('eliObj', eliObj)
   let newInput = { ...input }
 
   let deferralMonths = 0
