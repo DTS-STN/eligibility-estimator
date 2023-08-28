@@ -52,7 +52,7 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.invalidAge)
+    .message(ValidationErrors.ageUnder18)
     .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
   receiveOAS: Joi.boolean()
@@ -139,7 +139,7 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.invalidAge)
+    .message(ValidationErrors.partnerAgeUnder18)
     .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
   partnerLivingCountry: Joi.string()
