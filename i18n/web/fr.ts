@@ -263,10 +263,9 @@ const fr: WebTranslations = {
       "Votre revenu annuel doit être inférieur à {OAS_MAX_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
     [ValidationErrors.partnerIncomeTooHigh]:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
-    [ValidationErrors.ageUnder18]:
-      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
+    [ValidationErrors.ageUnder18]: 'Vous devez avoir au moins 18 ans.',
     [ValidationErrors.partnerAgeUnder18]:
-      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
+      'Votre conjoint doit avoir au moins 18 ans.',
     [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
     [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
