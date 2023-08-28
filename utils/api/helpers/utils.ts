@@ -1,3 +1,4 @@
+import { consoleDev } from '../../web/helpers/utils'
 import roundToTwo from './roundToTwo'
 
 export const getDeferralIncrease = (months, baseAmount) => {
@@ -294,9 +295,15 @@ export function evaluateOASInput(input) {
       ? 40
       : Math.min(40, Math.round(newYearsInCan))
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: Math.floor(deferralMonths),
+      months: Math.round(deferralMonths),
       years: 0,
     })
+    consoleDev(
+      '#5 oasDefer',
+      newInput['oasDeferDuration'],
+      'months',
+      deferralMonths
+    )
   }
 
   return {
