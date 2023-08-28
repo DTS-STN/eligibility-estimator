@@ -4,7 +4,7 @@ import {
   ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
@@ -52,7 +52,7 @@ export const Layout: React.VFC<{
     onSubmit: () => {},
   }
 
-  const breadcrumbs =
+  const breadcrumbsArr =
     process.env.APP_ENV === 'production'
       ? [
           {
@@ -83,24 +83,46 @@ export const Layout: React.VFC<{
           },
         ]
 
-  if (router.pathname === '/questions') {
-    breadcrumbs.push({
-      text: tsln.breadcrumb6Title,
-      link: tsln.breadcrumb6URL,
-    })
-  } else if (
-    router.pathname === '/results' ||
-    router.pathname === '/resultats'
-  ) {
-    breadcrumbs.push({
-      text: tsln.breadcrumb6Title,
-      link: tsln.breadcrumb6URL,
-    }),
-      breadcrumbs.push({
-        text: tsln.breadcrumb7Title,
-        link: tsln.breadcrumb7URL,
-      })
-  }
+  const [breadcrumbs, setBreadcrumbsArr] = useState(breadcrumbsArr)
+  const [shouldAddItem, setShouldAddItem] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (router.pathname === '/questions' && shouldAddItem) {
+      setBreadcrumbsArr((prevFriends) => [
+        ...prevFriends,
+        {
+          text: tsln.breadcrumb6Title,
+          link: tsln.breadcrumb6URL,
+        },
+      ])
+      setShouldAddItem(false)
+    } else if (
+      (router.pathname === '/results' || router.pathname === '/resultats') &&
+      shouldAddItem
+    ) {
+      setBreadcrumbsArr((prevFriends) => [
+        ...prevFriends,
+        {
+          text: tsln.breadcrumb6Title,
+          link: tsln.breadcrumb6URL,
+        },
+        {
+          text: tsln.breadcrumb7Title,
+          link: tsln.breadcrumb7URL,
+        },
+      ])
+      setShouldAddItem(false)
+    }
+  }, [
+    breadcrumbs,
+    router.pathname,
+    shouldAddItem,
+    tsln.breadcrumb6Title,
+    tsln.breadcrumb6URL,
+    tsln.breadcrumb7Title,
+    tsln.breadcrumb7URL,
+  ])
+
   const handleOnClick = () => {
     const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`
     router.push(link)
