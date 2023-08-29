@@ -1,3 +1,5 @@
+import Results from '../../pages/results'
+
 export function flattenArray(resultArr: any) {
   let newArr = []
   resultArr?.forEach((item) => {
@@ -62,4 +64,62 @@ export function getSortedListLinks(listLinkArray, futureClientEligibleArray) {
   }
 
   return listLinkArray.sort(sortArray)
+}
+
+export function removeDuplicateResults(FutureResultsArray, ResultsArray?) {
+  //remove duplicate results within futureResultsArray
+  for (let i = FutureResultsArray.length - 1; i >= 0; i--) {
+    if (i > 0) {
+      if (
+        Object.values(Object.values(Object.values(FutureResultsArray)[i])[0])
+          .length != 1
+      ) {
+        if (
+          Object.values(Object.values(FutureResultsArray[i])[0])[0].entitlement
+            .result ==
+            Object.values(Object.values(FutureResultsArray[i - 1])[0])[0]
+              .entitlement.result &&
+          Object.values(Object.values(FutureResultsArray[i])[0])[1].entitlement
+            .result ==
+            Object.values(Object.values(FutureResultsArray[i - 1])[0])[1]
+              .entitlement.result
+        ) {
+          FutureResultsArray.pop()
+        }
+      }
+    }
+  }
+  //if results array is passed remove duplicate results from futureArray based on resultsArray
+  if (ResultsArray) {
+    //Loop for futureResultsArray [65{}, 75{}, 80{}]
+    for (let i = 0; i < FutureResultsArray.length; i++) {
+      let isDuplicate = true
+      //Loop for benefits at the futureResultsArray[i] [oas, gis], [alw]
+      for (
+        let j = 0;
+        j < Object.values(Object.values(FutureResultsArray[i])[0]).length;
+        j++
+      ) {
+        const activeObject = ResultsArray.find(
+          (obj) =>
+            obj.benefitKey ===
+            Object.values(Object.values(FutureResultsArray[i])[0])[j].benefitKey
+        )
+        if (activeObject) {
+          if (
+            activeObject.entitlement.result !==
+            Object.values(Object.values(FutureResultsArray[i])[0])[j]
+              .entitlement.result
+          ) {
+            isDuplicate = false
+          }
+        }
+      }
+      if (isDuplicate) {
+        FutureResultsArray.pop()
+      }
+    }
+  }
+  //if FutureResultsArray.length == 0, return null to display nothing
+  return FutureResultsArray.length > 0 ? FutureResultsArray : null
 }
