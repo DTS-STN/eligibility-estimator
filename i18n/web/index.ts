@@ -93,6 +93,7 @@ export type WebTranslations = {
   homePageP4: string
   homePageP5: string
   homePageP6: string
+  dateModified: string
   footerlink1: string
   footerlink2: string
   footerlink3: string

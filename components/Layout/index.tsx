@@ -1,6 +1,7 @@
 import {
   Header,
   Heading,
+  Date,
   ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
@@ -106,6 +107,10 @@ export const Layout: React.VFC<{
     router.push(link)
   }
 
+  const dateModified = process.env.NEXT_BUILD_DATE
+    ? process.env.NEXT_BUILD_DATE.replaceAll('-', '')
+    : '20230101'
+
   return (
     <>
       <Head title={title} />
@@ -157,6 +162,11 @@ export const Layout: React.VFC<{
             />
           </div>
         )}
+
+        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
+          <Date date={dateModified} label={tsln.dateModified} />
+        </div>
+
         <Footer />
       </main>
     </>
