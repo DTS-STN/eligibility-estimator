@@ -22,11 +22,7 @@ import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import {
-  flattenArray,
-  getSortedListLinks,
-  removeDuplicateResults,
-} from './utils'
+import { flattenArray, getSortedListLinks } from './utils'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -147,13 +143,6 @@ const ResultsPage: React.VFC<{
       return tempLinks
     }
 
-    if (futurePartnerResults) {
-      futurePartnerResults = removeDuplicateResults(
-        futurePartnerResults,
-        partnerResultsEligible
-      )
-    }
-
     let listLinks: any = [
       ...getFirstLinks(),
       {
@@ -216,7 +205,6 @@ const ResultsPage: React.VFC<{
           {futureClientResults && (
             <WillBeEligible
               futureResults={futureClientResults}
-              resultsEligible={resultsEligible}
               partnerNoOAS={partnerNoOAS}
               multipleResults={resultsEligible.length > 0}
               eligibleOAS={
@@ -243,7 +231,6 @@ const ResultsPage: React.VFC<{
           {futurePartnerResults && (
             <WillBeEligible
               futureResults={futurePartnerResults}
-              resultsEligible={partnerResultsEligible}
               partner={true}
               partnerNoOAS={partnerNoOAS}
               multipleResults={partnerResultsEligible.length > 0}
