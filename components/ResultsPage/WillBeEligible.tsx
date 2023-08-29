@@ -95,7 +95,10 @@ export const WillBeEligible: React.VFC<{
             : 'À'
 
         const partnerText =
-          multipleOAS_GIS && nonZeroExist
+          (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
+          (multipleOAS_GIS && nonZeroExist && multipleResults) ||
+          (multipleOAS_GIS && nonZeroExist && idx > 0) ||
+          eligibleOAS
             ? tsln.resultsPage.theyToReceive
             : tsln.resultsPage.partnerToReceive
 
