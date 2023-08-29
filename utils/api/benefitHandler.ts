@@ -168,8 +168,6 @@ export class BenefitHandler {
       ),
     }
 
-    consoleDev('#1 oasDefer', this.rawInput.oasDeferDuration)
-
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,

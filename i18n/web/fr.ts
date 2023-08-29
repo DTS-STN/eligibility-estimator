@@ -123,6 +123,7 @@ const fr: WebTranslations = {
     "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
   homePageP6:
     "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
+  dateModified: 'Date de modification :',
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
   footerlink3: 'Traités, lois et règlements',
