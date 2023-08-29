@@ -168,7 +168,7 @@ function addKeyValue(obj, key, val) {
  * This can and will return a decimal value, such as "65.5"!
  */
 export function calculateAge(birthMonth: number, birthYear: number): number {
-  if (!birthMonth || !birthYear) return 0
+  if (birthMonth == null || birthYear == null) return null
 
   const today = new Date()
   const currentMonth = today.getMonth() + 1
