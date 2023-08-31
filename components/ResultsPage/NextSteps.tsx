@@ -20,7 +20,10 @@ export function getOasNextSteps(
         nextStepText.nextStepContent += `${apiTsln.detail.oas.youShouldHaveReceivedLetter} ${apiTsln.detail.oas.applyOnline}`
       }
 
-      if (result.eligibility.reason === ResultReason.AGE_70_AND_OVER) {
+      if (
+        result.eligibility.reason === ResultReason.AGE_70_AND_OVER &&
+        !receivingOAS
+      ) {
         nextStepText.nextStepContent += `<p class='mt-6 mb-6'>${apiTsln.detail.oas.over70}</p>`
       }
 
