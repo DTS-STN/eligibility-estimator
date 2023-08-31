@@ -88,7 +88,7 @@ export function removeDuplicateResults(FutureResultsArray, ResultsArray?) {
     }
   }
   //if results array is passed remove duplicate results from futureArray based on resultsArray
-  if (ResultsArray) {
+  if (ResultsArray.length > 0) {
     //Loop for futureResultsArray [65{}, 75{}, 80{}]
     for (let i = 0; i < FutureResultsArray.length; i++) {
       let isDuplicate = true

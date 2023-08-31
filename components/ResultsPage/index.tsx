@@ -22,7 +22,11 @@ import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { flattenArray, getSortedListLinks } from './utils'
+import {
+  flattenArray,
+  getSortedListLinks,
+  removeDuplicateResults,
+} from './utils'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -174,6 +178,20 @@ const ResultsPage: React.VFC<{
         eligible: getEligibility(resultsEligible, 'alws'),
       },
     ]
+
+    if (futureClientResults) {
+      futureClientResults = removeDuplicateResults(
+        futureClientResults,
+        resultsEligible
+      )
+    }
+
+    if (futurePartnerResults) {
+      futurePartnerResults = removeDuplicateResults(
+        futurePartnerResults,
+        partnerResultsEligible
+      )
+    }
 
     // Get sorted list links based on eligibility, filtering out link items which text is empty
     return getSortedListLinks(
