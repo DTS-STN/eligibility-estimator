@@ -1,4 +1,5 @@
 import {
+  EntitlementResultType,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -8,7 +9,19 @@ import {
 } from '../../../utils/api/definitions/enums'
 
 import { mockGetRequest } from './factory'
-import { partnerUndefined } from './expectUtils'
+import {
+  expectAlwAlwsTooOld,
+  expectAlwEligible,
+  expectAlwsEligible,
+  expectAlwsMarital,
+  expectAlwTooOld,
+  expectGisEligible,
+  expectGISEligibleEntZero,
+  expectGisNotEligible,
+  expectOasEligible,
+  expectOasNotEligible,
+  partnerUndefined,
+} from './expectUtils'
 
 import { getTransformedPayloadByName } from '../../utils/excelReaderUtil'
 
@@ -20,88 +33,31 @@ describe('OasBenefit', () => {
     const desiredName = 'CALC-1' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('769.86')
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('960.45')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.FULL, 769.86)
+    expectGisEligible(res, 960.45)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '628.74'
-    )
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 628.74, true)
+    expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
   /* CALC-02  
   it('should pass the second test - OAS-CALC-02', async () => {
     const desiredName = 'CALC-2' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
+    
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('195.61')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 195.61)
+    expectGisEligible(res, 572.77)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
   })
 */
   /* CALC-03  */
@@ -111,25 +67,10 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('199.80')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('530.77')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 199.8)
+    expectGisEligible(res, 530.77)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
   })
   /* CALC-04 */
   it('should pass the 04 test - OAS-CALC-04', async () => {
@@ -138,61 +79,19 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('474.14')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('550.53')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 474.14)
+    expectGisEligible(res, 550.53)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 480.29, true)
+    expectGisEligible(res, 454.47, true)
+    expect(res.body.results.gis.eligibility.reason).toEqual(
+      ResultReason.LIVING_COUNTRY
     )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '480.29'
-    )
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '454.47'
-    )
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
   /* CALC-05  */
   it('should pass the 05 test - OAS-CALC-05', async () => {
@@ -201,55 +100,25 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('384.23')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23)
+    expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
       ResultReason.YEARS_IN_CANADA
     )
-    expect(res.body.partnerResults.oas.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
       ResultReason.OAS
     )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
   /* CALC-06  */
   it('should pass the 06 test - OAS-CALC-06', async () => {
@@ -258,87 +127,33 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('768.46')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
+    expectGisEligible(res, 0.0)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
   })
   /* CALC-07  */
   it('should pass the 07 test - OAS-CALC-07', async () => {
     const desiredName = 'CALC-7' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
+
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('522.56')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 522.56)
+    expectGisEligible(res, true)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '288.17'
-    )
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 288.17, true)
+    expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
   /* CALC-08  */
   it('should pass the 08 test - OAS-CALC-08', async () => {
@@ -346,96 +161,34 @@ describe('OasBenefit', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
 
-    //  expect(res.status).toEqual(200)
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+    expectGisEligible(res, 0.0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '174.65'
-    )
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1567.40'
-    )
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
+    expectGisEligible(res, 1567.4, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
   /* CALC-09  
   it('should pass the 09 test - OAS-CALC-09', async () => {
     const desiredName = 'CALC-9' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
+    
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 0.0)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-    expect(res.body.results.gis.eligibility.reason).toEqual(
+    expectGisNotEligible(res)
+     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
   })*/
   /* CALC-10  */
   it('should pass the 10 test - OAS-CALC-10', async () => {
@@ -444,56 +197,24 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+    expectGisNotEligible(res, true)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwAlwsTooOld(res)
   })
   /* CALC-11  */
-  it('should pass the 06 test - OAS-CALC-06', async () => {
+  it('should pass the 011 test - OAS-CALC-011', async () => {
     const desiredName = 'CALC-11' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+    expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwAlwsTooOld(res)
   })
   /* CALC-12  */
   it('should pass the 12 test - OAS-CALC-12', async () => {
@@ -502,25 +223,10 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+    expectGisNotEligible(res, true)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwAlwsTooOld(res)
   })
   /* CALC-13  */
   it('should pass the 13 test - OAS-CALC-13', async () => {
@@ -529,27 +235,11 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+    expectGisNotEligible(res, true)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
   })
   /* CALC-14  */
   it('should pass the 14 test - OAS-CALC-14', async () => {
@@ -558,97 +248,39 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectGisNotEligible(res, true)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
+    expectOasNotEligible(res, true)
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.YEARS_IN_CANADA
     )
+    expectGisNotEligible(res, true)
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
+      ResultReason.OAS
     )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.LEGAL_STATUS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.AGE
-    )
-
-    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
   /* CALC-15  */
-  it('should pass the 16 test - OAS-CALC-16', async () => {
+  it('should pass the 15 test - OAS-CALC-15', async () => {
     const desiredName = 'CALC-15' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
+    expectGisNotEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(
       ResultReason.LIVING_COUNTRY
     )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectAlwAlwsTooOld(res)
   })
   /* CALC-16 to be updated when the test case will checked and updated*/
   it('should pass the 16 test - OAS-CALC-16', async () => {
@@ -657,48 +289,23 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('698.60')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual(
-      '1043.45'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.FULL, 698.6)
+    expectGisEligible(res, 1043.45)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
       ResultReason.AGE_YOUNG_64
     )
-    expect(res.body.partnerResults.oas.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
+    expectGisNotEligible(res, true)
+    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
+      ResultReason.OAS
     )
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
       ResultReason.OAS
     )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.partnerResults.alw.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.alw.entitlement.result).toEqual(1326.69)
+    expectAlwEligible(res, 1326.69, true)
+    expectAlwsMarital(res, true)
   })
 })
