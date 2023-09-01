@@ -639,7 +639,6 @@ describe('OasBenefit', () => {
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
     )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alw.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
