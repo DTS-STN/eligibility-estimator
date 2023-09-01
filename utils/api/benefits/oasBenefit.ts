@@ -576,10 +576,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.input.age < 70 &&
       this.inputAge < 70
     ) {
-      // Deferral
-      if (this.eligibility.reason !== ResultReason.INCOME) {
-        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-      }
+      // your Deferral Options
+
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+
       // if income too high
       if (this.eligibility.reason === ResultReason.INCOME) {
         if (!this.future) {
