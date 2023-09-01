@@ -84,16 +84,6 @@ export function expectOasEligible(
     )
 }
 
-export function expectGISEligibleEntZero(
-  res: MockResponseObject<ResponseSuccess>,
-  partner?: boolean
-) {
-  const results = !partner ? res.body.results : res.body.partnerResults
-
-  expect(results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results.gis.entitlement.result).toEqual(0)
-}
-
 export function expectOasNotEligible(
   res: MockResponseObject<ResponseSuccess>,
   partner?: boolean
