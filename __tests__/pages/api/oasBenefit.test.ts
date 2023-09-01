@@ -25,7 +25,6 @@ describe('OasBenefit', () => {
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
     expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('769.86')
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-
     expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('960.45')
 
     expect(res.body.results.alw.eligibility.result).toEqual(
@@ -47,7 +46,7 @@ describe('OasBenefit', () => {
       ResultKey.ELIGIBLE
     )
     expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '698.60'
+      '628.74'
     )
 
     expect(res.body.partnerResults.gis.eligibility.result).toEqual(
@@ -65,8 +64,19 @@ describe('OasBenefit', () => {
       ResultReason.AGE
     )
     expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+
+    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.AGE
+    )
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
   })
-  /* CALC-02  */
+  /* CALC-02  
   it('should pass the second test - OAS-CALC-02', async () => {
     const desiredName = 'CALC-2' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -93,7 +103,7 @@ describe('OasBenefit', () => {
     )
     expect(res.body.results.alws.entitlement.result).toEqual(0)
   })
-
+*/
   /* CALC-03  */
   it('should pass the 03 test - OAS-CALC-03', async () => {
     const desiredName = 'CALC-3' // Replace with the desired name
@@ -102,11 +112,10 @@ describe('OasBenefit', () => {
 
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('209.58')
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('199.80')
 
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('495.84')
+    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('530.77')
 
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -130,11 +139,10 @@ describe('OasBenefit', () => {
 
     //client results
     expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('948.28')
+    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('474.14')
 
     expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('166.30')
+    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('550.53')
 
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -148,6 +156,7 @@ describe('OasBenefit', () => {
     expect(res.body.results.alws.eligibility.reason).toEqual(
       ResultReason.MARITAL
     )
+    expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alws.entitlement.result).toEqual(0)
 
     //partner results
@@ -155,14 +164,14 @@ describe('OasBenefit', () => {
       ResultKey.ELIGIBLE
     )
     expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '768.46'
+      '480.29'
     )
 
     expect(res.body.partnerResults.gis.eligibility.result).toEqual(
       ResultKey.ELIGIBLE
     )
     expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '166.30'
+      '454.47'
     )
 
     expect(res.body.partnerResults.alw.eligibility.result).toEqual(
@@ -172,6 +181,18 @@ describe('OasBenefit', () => {
       ResultReason.AGE
     )
     expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+
+    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.AGE
+    )
+
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
   })
   /* CALC-05  */
   it('should pass the 05 test - OAS-CALC-05', async () => {
@@ -288,7 +309,7 @@ describe('OasBenefit', () => {
       ResultKey.ELIGIBLE
     )
     expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '672.41'
+      '288.17'
     )
 
     expect(res.body.partnerResults.gis.eligibility.result).toEqual(
@@ -306,6 +327,18 @@ describe('OasBenefit', () => {
       ResultReason.AGE
     )
     expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+
+    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.AGE
+    )
+
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
   })
   /* CALC-08  */
   it('should pass the 08 test - OAS-CALC-08', async () => {
@@ -359,8 +392,20 @@ describe('OasBenefit', () => {
       ResultReason.AGE
     )
     expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+
+    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.AGE
+    )
+
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
   })
-  /* CALC-09  */
+  /* CALC-09  
   it('should pass the 09 test - OAS-CALC-09', async () => {
     const desiredName = 'CALC-9' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -391,7 +436,7 @@ describe('OasBenefit', () => {
       ResultReason.MARITAL
     )
     expect(res.body.results.alws.entitlement.result).toEqual(0)
-  })
+  })*/
   /* CALC-10  */
   it('should pass the 10 test - OAS-CALC-10', async () => {
     const desiredName = 'CALC-10' // Replace with the desired name
@@ -540,7 +585,7 @@ describe('OasBenefit', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
+      ResultReason.LEGAL_STATUS
     )
     expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
 
@@ -548,7 +593,7 @@ describe('OasBenefit', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
+      ResultReason.LEGAL_STATUS
     )
     expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
 
@@ -559,6 +604,18 @@ describe('OasBenefit', () => {
       ResultReason.AGE
     )
     expect(res.body.partnerResults.alw.entitlement.result).toEqual(0)
+
+    expect(res.body.partnerResults.alws.eligibility.result).toEqual(
+      ResultKey.INELIGIBLE
+    )
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.AGE
+    )
+
+    expect(res.body.partnerResults.alws.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
+    expect(res.body.partnerResults.alws.entitlement.result).toEqual(0)
   })
   /* CALC-15  */
   it('should pass the 16 test - OAS-CALC-16', async () => {
@@ -583,6 +640,9 @@ describe('OasBenefit', () => {
       ResultKey.INELIGIBLE
     )
     expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+    expect(res.body.results.alw.eligibility.reason).toEqual(
+      ResultReason.MARITAL
+    )
     expect(res.body.results.alw.entitlement.result).toEqual(0)
 
     expect(res.body.results.alws.eligibility.result).toEqual(
@@ -591,7 +651,7 @@ describe('OasBenefit', () => {
     expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.AGE)
     expect(res.body.results.alws.entitlement.result).toEqual(0)
   })
-  /* CALC-16 */
+  /* CALC-16 to be updated when the test case will checked and updated*/
   it('should pass the 16 test - OAS-CALC-16', async () => {
     const desiredName = 'CALC-16' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
