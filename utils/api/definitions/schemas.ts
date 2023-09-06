@@ -93,6 +93,12 @@ export const RequestSchema = Joi.object({
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
+  yearsInCanadaSinceOAS: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.yearsSinceOASEmpty })
+    .integer()
+    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
+    .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.socialCountryEmpty })

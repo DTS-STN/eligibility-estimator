@@ -228,7 +228,11 @@ export class BenefitHandler {
 
     // default value = undefined
     if (this.input.client.livedOnlyInCanada === false) {
-      requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
+      if (this.input.client.receiveOAS == true) {
+        requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_OAS)
+      } else {
+        requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
+      }
     }
 
     if (this.input.client.oasDefer) {
