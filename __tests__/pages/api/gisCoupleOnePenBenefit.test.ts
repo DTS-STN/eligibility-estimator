@@ -8,6 +8,14 @@ import {
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import { getTransformedPayloadByName } from '../../utils/excelReaderUtil'
+import {
+  expectOasEligible,
+  expectGisEligible,
+  expectAlwTooOld,
+  expectAlwsMarital,
+  expectAllIneligible,
+  expectDeferralTable,
+} from './expectUtils'
 
 import { mockGetRequest, mockGetRequestError } from './factory'
 
@@ -22,63 +30,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('698.60')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('628.09')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 698.6)
+    expectGisEligible(res, 1043.45)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '768.46'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '628.09'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-48 */
@@ -88,63 +46,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('765.67')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('545.09')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+   // expectOasEligible(res, EntitlementResultType.FULL, 727.38)
+    expectGisEligible(res, 1078.38)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '768.46'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '545.09'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-49 */
@@ -152,60 +60,25 @@ describe('gisCoupleOnePenBenefit', () => {
     const desiredName = 'CALC-49' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
+    const deferralTable = [
+      { age: 67, amount: 730.18 },
+      { age: 68, amount: 779.22 },
+      { age: 69, amount: 828.26 },
+      { age: 70, amount: 926.34 },
+    ]
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('698.60')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('917.45')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 726.25)
+    expectDeferralTable(res, deferralTable)
+    expectGisEligible(res, 934.91)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.NONE
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
+    expectGisEligible(res, 929.64, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-50 */
@@ -215,54 +88,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('768.46')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('651.45')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 1045.11)
+    expectGisEligible(res, 651.45)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-51 */
@@ -272,54 +104,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('768.46')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('0.82')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.FULL, 1045.11)
+    expectGisEligible(res, 0.82)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-52 */
@@ -329,56 +120,14 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual(
-      '1008.22'
-    )
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.FULL, 882.19)
+    expectGisEligible(res, 0)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-53 */
@@ -388,139 +137,29 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '349.30'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1392.75'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 331.84, true)
+    expectGisEligible(res, 1410.22, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
-  /* CALC-23 */
+  /* CALC-54 */
   it('should pass 54 test - CALC-54', async () => {
     const desiredName = 'CALC-54' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '349.30'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1392.75'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 313.37, true)
+    expectGisEligible(res, 1427.68, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-55*/
@@ -530,67 +169,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '349.30'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1266.75'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
+    expectGisEligible(res, 1423.94, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-56 */
@@ -600,68 +185,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '384.23'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1035.68'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
+    expectGisEligible(res, 1227.8, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-57 */
@@ -671,68 +201,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '384.23'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '385.05'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
+    expectGisEligible(res, 577.17, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-58 */
@@ -742,66 +217,14 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '384.23'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.INCOME
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
+    expectGisEligible(res, 0, true)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-59 */
@@ -811,68 +234,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '768.46'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1043.45'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 557.13, true)
+    expectGisEligible(res, 1254.78, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-60 */
@@ -882,68 +250,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '768.46'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1043.45'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 768.46, true)
+    expectGisEligible(res, 1043.45, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-61 */
@@ -953,68 +266,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '768.46'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '917.45'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 768.45, true)
+    expectGisEligible(res, 917.45, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-62 */
@@ -1024,59 +282,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('768.46')
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('651.45')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '698.60'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1043.45'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 523.95, true)
+    expectGisEligible(res, 1218.1, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-63 */
@@ -1086,70 +298,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.NONE
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '698.60'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '0.82'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 698.6, true)
+    expectGisEligible(res, 0.82, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-64 */
@@ -1159,72 +314,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.NONE
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('0.00')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.OAS)
-    expect(res.body.results.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectAllIneligible(res, true)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.FULL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '698.60'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.INCOME
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '48.82'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
-    )
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 681.14, true)
+    expectGisEligible(res, 66.29, true)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-65 */
@@ -1234,65 +330,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('480.29')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual(
-      '1331.62'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12)
+    expectGisEligible(res, 1619.79)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '349.30'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1392.75'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-66 */
@@ -1302,65 +346,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('526.41')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual( ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual(
-      '1248.62'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 526.28)
+    expectGisEligible(res, 1248.62)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '349.30'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.NONE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '1309.75'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-67 */
@@ -1370,48 +362,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_70_AND_OVER
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('480.29')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual(
-      '1205.62'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12)
+    expectGisEligible(res, 1493.79)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
+    expectAllIneligible(res, true)
   })
 
   /* CALC-68 */
@@ -1419,63 +376,19 @@ describe('gisCoupleOnePenBenefit', () => {
     const desiredName = 'CALC-68' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
+    const deferralTable = [
+      { age: 69, amount: 472.39 },
+      { age: 70, amount: 498.8 },
+    ]
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('436.63')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('913.43')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 462.39)
+    expectDeferralTable(res, deferralTable)
+    expectGisEligible(res, 983.28)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.partnerResults.oas.entitlement.type).toEqual(
-      EntitlementResultType.NONE
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-    expect(res.body.partnerResults.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-69 */
@@ -1483,57 +396,21 @@ describe('gisCoupleOnePenBenefit', () => {
     const desiredName = 'CALC-69' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
+    const deferralTable = [
+      { age: 67, amount: 468.06 },
+      { age: 68, amount: 499.5 },
+      { age: 69, amount: 530.94 },
+      { age: 70, amount: 538.8 },
+    ]
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('436.63')
-    expect(res.body.results.oas.entitlement.clawback).toEqual(0)
-
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual(
-      '1305.43'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 436.63)
+    expectDeferralTable(res, deferralTable)
+    expectGisEligible(res, 1305.42)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '384.23'
-    )
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.ELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 
   /* CALC-70 */
@@ -1543,54 +420,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_65_TO_69
-    )
-    expect(res.body.results.oas.entitlement.type).toEqual(
-      EntitlementResultType.PARTIAL
-    )
-    expect(res.body.results.oas.entitlement.result.toFixed(2)).toEqual('572.86')
-    expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-    expect(res.body.results.gis.entitlement.result.toFixed(2)).toEqual('0.00')
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alws.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alws.eligibility.reason).toEqual(
-      ResultReason.MARITAL
-    )
-    expect(res.body.results.alws.entitlement.result).toEqual(0)
-
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 572.86)
+    expectGisEligible(res, 0)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
+    //TODO Add future benefit estimate
     //partner results
-    expect(res.body.partnerResults.oas.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expect(res.body.partnerResults.oas.entitlement.result.toFixed(2)).toEqual(
-      '0.00'
-    )
-
-    expect(res.body.partnerResults.gis.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
-    expect(res.body.partnerResults.gis.entitlement.result).toEqual(0)
-
-    expect(res.body.results.alw.eligibility.result).toEqual(
-      ResultKey.INELIGIBLE
-    )
-    expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-    expect(res.body.results.alw.entitlement.result).toEqual(0)
+    expectAllIneligible(res, true)
   })
 })

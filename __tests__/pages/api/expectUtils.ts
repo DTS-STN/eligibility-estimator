@@ -65,7 +65,11 @@ export function expectOasGisUnavailable(
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.UNAVAILABLE)
 }
 
-export function expectAllIneligible(res: MockResponseObject<ResponseSuccess>) {
+export function expectAllIneligible(
+  res: MockResponseObject<ResponseSuccess>,
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
   expect(res.body.missingFields).toEqual([])
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.INELIGIBLE)
