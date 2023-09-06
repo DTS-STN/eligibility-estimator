@@ -4,7 +4,7 @@ describe('Excel Reader Utility Tests', () => {
   it('should extract payload by name', () => {
     const filePath =
       '__tests__/utils/ScenariosWith2023Q3RatesAndThresholds.xlsx'
-    const desiredName = 'CALC-10' // Replace with the desired name
+    const desiredName = 'CALC-126' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
 
     if (extractedPayload) {

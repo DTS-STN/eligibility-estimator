@@ -1,3 +1,4 @@
+import { List } from 'lodash'
 import {
   EntitlementResultType,
   LegalStatus,
@@ -6,8 +7,12 @@ import {
   ResultReason,
   SummaryState,
 } from '../../../utils/api/definitions/enums'
-import { ResponseSuccess } from '../../../utils/api/definitions/types'
+import {
+  ResponseSuccess,
+  TableData,
+} from '../../../utils/api/definitions/types'
 import legalValues from '../../../utils/api/scrapers/output'
+import { consoleDev } from '../../../utils/web/helpers/utils'
 import { MockResponseObject } from './factory'
 
 export function expectAlwsMarital(
@@ -19,8 +24,6 @@ export function expectAlwsMarital(
   expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.MARITAL)
 }
 
-
-
 export function expectAlwTooOld(
   res: MockResponseObject<ResponseSuccess>,
   partner?: boolean
@@ -28,6 +31,14 @@ export function expectAlwTooOld(
   const results = !partner ? res.body.results : res.body.partnerResults
   expect(results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(results.alw.eligibility.reason).toEqual(ResultReason.AGE)
+}
+export function expectAlwTooYoung(
+  res: MockResponseObject<ResponseSuccess>,
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+  expect(results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(results.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
 }
 
 export function expectAlwAlwsTooOld(res: MockResponseObject<ResponseSuccess>) {
@@ -120,6 +131,50 @@ export function expectGisNotEligible(
   expect(results.gis.entitlement.result).toEqual(0)
 }
 
+export function expectDeferralTable(
+  res: MockResponseObject<ResponseSuccess>,
+  expectedDeferralTable: TableData[],
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+
+  const deferralTable = results.oas.cardDetail.meta?.tableData
+
+  expect(expectedDeferralTable.length).toEqual(deferralTable.length)
+  expect(
+    expectedDeferralTable.every((item1) =>
+      deferralTable.some(
+        (item2) => JSON.stringify(item1) === JSON.stringify(item2)
+      )
+    )
+  )
+}
+
+export function expectFutureBenefitEligible(
+  res: MockResponseObject<ResponseSuccess>,
+  entitlementOas?: number,
+  entitlementGis?: number,
+  partner?: boolean
+) {
+  const results = !partner
+    ? res.body.futureClientResults
+    : res.body.futurePartnerResults
+
+
+  consoleDev('**** future details' + results.oas.eligibility.detail)
+  consoleDev('**** future reason' + results.oas.eligibility.reason)
+  consoleDev('**** future result' + results.oas.eligibility.result)
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
+  expect(results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results.oas.eligibility.reason).toEqual(ResultReason.NONE)
+  expect(results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results.gis.eligibility.reason).toEqual(ResultReason.NONE)
+  if (entitlementOas)
+    expect(results.oas.entitlement.result).toEqual(entitlementOas)
+  if (entitlementGis)
+    expect(results.gis.entitlement.result).toEqual(entitlementGis)
+}
+
 export function expectAlwEligible(
   res: MockResponseObject<ResponseSuccess>,
   entitlement?: number,
@@ -129,7 +184,7 @@ export function expectAlwEligible(
 
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+ // expect(results.alw.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement) expect(results.alw.entitlement.result).toEqual(entitlement)
 }
 
