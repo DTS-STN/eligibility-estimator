@@ -44,21 +44,21 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     income: rowToTransform["User's Net Worldwide Income"],
     age: rowToTransform['Age '],
     oasDefer:
-      rowToTransform['Delay (# of Years)'] === 'N/A' ||
-      rowToTransform['Delay (# of Years)'] === ''
+      rowToTransform['Delay (# of Years and Months)'] === 'N/A' ||
+      rowToTransform['Delay (# of Years and Months)'] === ''
         ? false
         : true, // Replace 'N/A' or empty with false
     oasAge: 65,
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
-      rowToTransform['Delay (# of Years)'] === 'N/A' ||
-      rowToTransform['Delay (# of Years)'] === ''
+      rowToTransform['Delay (# of Years and Months)'] === 'N/A' ||
+      rowToTransform['Delay (# of Years and Months)'] === ''
         ? undefined
         : '{"years":' +
-          extractValueBeforeSemicolon(rowToTransform['Delay (# of Years)']) +
+          extractValueBeforeSemicolon(rowToTransform['Delay (# of Years and Months)']) +
           ',"months":' +
           extractFirstCharacterAfterSemicolon(
-            rowToTransform['Delay (# of Years)']
+            rowToTransform['Delay (# of Years and Months)']
           ) +
           '}',
     maritalStatus: transformMaritalStatusValue(
@@ -106,10 +106,10 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
         ? undefined
         : rowToTransform["Partner's Net Worldwide Income"], // partner income
     partnerAge:
-      rowToTransform["Partner's Age"] === 'N/A' ||
-      rowToTransform["Partner's Age"] === ''
+      rowToTransform["Partner's Age (Years and months)"] === 'N/A' ||
+      rowToTransform["Partner's Age (Years and months)"] === ''
         ? undefined
-        : rowToTransform["Partner's Age"],
+        : rowToTransform["Partner's Age (Years and months)"],
     partnerLivingCountry: transformLivingContryValue(
       rowToTransform["Partner's Country of Residence (Canada, Not Canada)"]
     ), // country code
