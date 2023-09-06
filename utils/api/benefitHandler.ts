@@ -161,6 +161,7 @@ export class BenefitHandler {
       yearsInCanadaSince18: this.rawInput.livedOnlyInCanada
         ? 40
         : this.rawInput.yearsInCanadaSince18,
+      yearsInCanadaSinceOAS: this.rawInput.yearsInCanadaSinceOAS,
       everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
       invSeparated: this.rawInput.invSeparated,
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
@@ -370,7 +371,18 @@ export class BenefitHandler {
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
-    const clientOasNoDeferral = new OasBenefit(
+    let clientOasNoDeferral
+    if (this.input.client.receiveOAS) {
+      const yearsInCanada = Number(this.input.client.yearsInCanadaSinceOAS)
+      const deferralDuration = JSON.parse(this.input.client.oasDeferDuration)
+      const deferralYrs = deferralDuration.years
+      const deferralMonths = deferralDuration.months
+
+      this.input.client.yearsInCanadaSince18 =
+        yearsInCanada - (deferralYrs + deferralMonths / 12)
+    }
+
+    clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
       false,
@@ -378,7 +390,6 @@ export class BenefitHandler {
       false,
       this.input.client.age
     )
-
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
     if (this.input.client.partnerBenefitStatus.helpMe) {
