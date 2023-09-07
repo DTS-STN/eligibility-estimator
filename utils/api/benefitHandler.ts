@@ -249,6 +249,17 @@ export class BenefitHandler {
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
+
+    if (
+      this.input.client.yearsInCanadaSinceOAS !== undefined &&
+      ((this.input.client.livingCountry.canada &&
+        this.input.client.yearsInCanadaSinceOAS < 10) ||
+        (!this.input.client.livingCountry.canada &&
+          this.input.client.yearsInCanadaSinceOAS < 20))
+    ) {
+      requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    }
+
     if (this.input.client.maritalStatus.partnered) {
       //logic is missing, need to be implemented
       requiredFields.push(FieldKey.INV_SEPARATED)
