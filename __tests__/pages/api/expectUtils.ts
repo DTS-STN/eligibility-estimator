@@ -136,6 +136,21 @@ export function expectGisNotEligible(
   expect(results.gis.entitlement.result).toEqual(0)
 }
 
+function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
+  if (list1.length !== list2.length) {
+    return false
+  }
+
+  for (let i = 0; i < list1.length; i++) {
+    consoleDev()
+    if (list1[i].age != list2[i].age || list1[i].amount != list2[i].amount) {
+      return false
+    }
+  }
+
+  return true
+}
+
 export function expectDeferralTable(
   res: MockResponseObject<ResponseSuccess>,
   expectedDeferralTable: TableData[],
@@ -146,13 +161,7 @@ export function expectDeferralTable(
   const deferralTable = results.oas.cardDetail.meta?.tableData
 
   expect(expectedDeferralTable.length).toEqual(deferralTable.length)
-  expect(
-    expectedDeferralTable.every((item1) =>
-      deferralTable.some(
-        (item2) => JSON.stringify(item1) === JSON.stringify(item2)
-      )
-    )
-  )
+  expect(areListsEqual(expectedDeferralTable, deferralTable)).toEqual(true)
 }
 
 export function expectFutureBenefitEligible(
@@ -164,7 +173,6 @@ export function expectFutureBenefitEligible(
   const results = !partner
     ? res.body.futureClientResults
     : res.body.futurePartnerResults
-
 
   consoleDev('**** future details' + results.oas.eligibility.detail)
   consoleDev('**** future reason' + results.oas.eligibility.reason)
@@ -189,7 +197,7 @@ export function expectAlwEligible(
 
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
- // expect(results.alw.eligibility.reason).toEqual(ResultReason.NONE)
+  // expect(results.alw.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement) expect(results.alw.entitlement.result).toEqual(entitlement)
 }
 
