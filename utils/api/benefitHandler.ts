@@ -43,6 +43,7 @@ import {
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
 import { evaluateOASInput, OasEligibility } from './helpers/utils'
+import { livingCountry } from '../../i18n/api/countries/en'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -371,8 +372,10 @@ export class BenefitHandler {
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
-    let clientOasNoDeferral
-    if (this.input.client.receiveOAS) {
+    if (
+      this.input.client.receiveOAS &&
+      !this.input.client.livingCountry.canada
+    ) {
       const yearsInCanada = Number(this.input.client.yearsInCanadaSinceOAS)
       const deferralDuration = JSON.parse(this.input.client.oasDeferDuration)
       const deferralYrs = deferralDuration.years
@@ -382,7 +385,7 @@ export class BenefitHandler {
         yearsInCanada - (deferralYrs + deferralMonths / 12)
     }
 
-    clientOasNoDeferral = new OasBenefit(
+    const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
       false,
