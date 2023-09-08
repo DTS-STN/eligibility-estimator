@@ -228,6 +228,8 @@ const en: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsSince18Empty]:
       'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.yearsSinceOASEmpty]:
+      'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:

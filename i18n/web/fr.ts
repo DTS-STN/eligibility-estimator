@@ -235,6 +235,8 @@ const fr: WebTranslations = {
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.yearsSinceOASEmpty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:

@@ -38,6 +38,7 @@ export interface RequestInput {
   legalStatus: LegalStatus
   livedOnlyInCanada: boolean
   yearsInCanadaSince18: number
+  yearsInCanadaSinceOAS?: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
   partnerIncomeAvailable?: boolean
@@ -65,6 +66,7 @@ export interface ProcessedInput {
   legalStatus: LegalStatusHelper
   livedOnlyInCanada: boolean
   yearsInCanadaSince18: number
+  yearsInCanadaSinceOAS?: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper
   invSeparated: boolean
