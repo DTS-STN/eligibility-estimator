@@ -104,7 +104,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
     .custom((value, helpers) => {
       const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
-      if (livingCountry === 'CAN') {
+      if (livingCountry === 'CAN' && yearsInCanadaSince18 !== undefined) {
         if (yearsInCanadaSince18 < 10) {
           return helpers.message({
             custom: value
