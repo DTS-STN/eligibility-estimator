@@ -121,6 +121,24 @@ export const RequestSchema = Joi.object({
           })
         }
       }
+      const { yearsInCanadaSinceOAS } = helpers.state.ancestors[0]
+      if (livingCountry === 'CAN' && yearsInCanadaSinceOAS !== undefined) {
+        if (yearsInCanadaSinceOAS < 10) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable10
+              : ValidationErrors.yearsInCanadaNotEnough10,
+          })
+        }
+      } else {
+        if (yearsInCanadaSinceOAS < 20) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable20
+              : ValidationErrors.yearsInCanadaNotEnough20,
+          })
+        }
+      }
     }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
     .required()
