@@ -48,14 +48,16 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform['Delay (# of Years and Months)'] === ''
         ? false
         : true, // Replace 'N/A' or empty with false
-    oasAge: 65,
+    oasAge: undefined,
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A' ||
       rowToTransform['Delay (# of Years and Months)'] === ''
         ? undefined
         : '{"years":' +
-          extractValueBeforeSemicolon(rowToTransform['Delay (# of Years and Months)']) +
+          extractValueBeforeSemicolon(
+            rowToTransform['Delay (# of Years and Months)']
+          ) +
           ',"months":' +
           extractFirstCharacterAfterSemicolon(
             rowToTransform['Delay (# of Years and Months)']
@@ -83,11 +85,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform[
         '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
       ] === 'Full'
-        ? undefined
+        ? 40
         : rowToTransform[
             '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
           ],
-    everLivedSocialCountry: false, // check with vero
+    everLivedSocialCountry: undefined, // check with vero
     partnerBenefitStatus:
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === 'N/A' ||
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === ''

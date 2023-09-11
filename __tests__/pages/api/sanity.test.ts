@@ -9,10 +9,9 @@ import {
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
-  ValidationErrors,
 } from '../../../utils/api/definitions/enums'
 
-import { mockGetRequest, mockGetRequestError } from './factory'
+import { mockGetRequest } from '../../utils/factory'
 import {
   expectAlwsEligible,
   expectAlwsMarital,
@@ -22,9 +21,8 @@ import {
   expectGisNotEligible,
   expectOasEligible,
   expectOasNotEligible,
-  getErrorDetails,
   partnerUndefined,
-} from './expectUtils'
+} from '../../utils/expectUtils'
 
 describe('EE Sanity Test Scenarios:', () => {
   /* SAN-OAS-01

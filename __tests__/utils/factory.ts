@@ -1,10 +1,10 @@
 import { createMocks } from 'node-mocks-http'
-import handler from '../../../pages/api/calculateEligibility'
+import handler from '../../pages/api/calculateEligibility'
 import {
   RequestInput,
   ResponseError,
   ResponseSuccess,
-} from '../../../utils/api/definitions/types'
+} from '../../utils/api/definitions/types'
 
 export interface MockResponseObject<T extends ResponseSuccess | ResponseError> {
   status: number

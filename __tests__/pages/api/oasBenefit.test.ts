@@ -1,27 +1,21 @@
 import {
   EntitlementResultType,
-  LegalStatus,
-  LivingCountry,
-  MaritalStatus,
-  PartnerBenefitStatus,
-  ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 
-import { mockGetRequest } from './factory'
+import { mockGetRequest } from '../../utils/factory'
 import {
-  expectAllIneligible,
   expectAlwAlwsTooOld,
   expectAlwEligible,
-  expectAlwsEligible,
   expectAlwsMarital,
   expectAlwTooOld,
   expectDeferralTable,
+  expectFutureOasGisBenefitEligible,
   expectGisEligible,
   expectGisNotEligible,
   expectOasEligible,
   expectOasNotEligible,
-} from './expectUtils'
+} from '../../utils/expectUtils'
 
 import { getTransformedPayloadByName } from '../../utils/excelReaderUtil'
 
@@ -45,17 +39,17 @@ describe('OasBenefit', () => {
     expectAlwsMarital(res, true)
   })
   /* CALC-02  
-  it('should pass the second test - OAS-CALC-02', async () => {
-    const desiredName = 'CALC-2' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-    
-    //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 195.61)
-    expectGisEligible(res, 572.77)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-  })
+it('should pass the second test - OAS-CALC-02', async () => {
+  const desiredName = 'CALC-2' // Replace with the desired name
+  const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+  const res = await mockGetRequest(extractedPayload)
+  
+  //client results
+  expectOasEligible(res, EntitlementResultType.FULL, 195.61)
+  expectGisEligible(res, 572.77)
+  expectAlwTooOld(res)
+  expectAlwsMarital(res)
+})
 */
   /* CALC-03  */
   it('should pass the 03 test - OAS-CALC-03', async () => {
@@ -106,7 +100,7 @@ describe('OasBenefit', () => {
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+      ResultReason.LEGAL_STATUS
     )
     expectGisNotEligible(res, ResultReason.LEGAL_STATUS, true)
     expectAlwTooOld(res, true)
@@ -141,9 +135,6 @@ describe('OasBenefit', () => {
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23, true)
     expectGisNotEligible(res, ResultReason.LIVING_COUNTRY, true)
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
     expectAlwTooOld(res, true)
     expectAlwsMarital(res, true)
   })
@@ -176,10 +167,7 @@ describe('OasBenefit', () => {
     //client results
     expectOasEligible(res, EntitlementResultType.NONE, 0.0)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectGisNotEligible(res)
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
+    expectGisNotEligible(res, ResultReason.LIVING_COUNTRY)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
   })
@@ -252,12 +240,9 @@ describe('OasBenefit', () => {
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
+      ResultReason.LEGAL_STATUS
     )
-    expectGisNotEligible(res, ResultReason.INCOME, true)
-    expect(res.body.partnerResults.gis.eligibility.reason).toEqual(
-      ResultReason.OAS
-    )
+    expectGisNotEligible(res, ResultReason.LEGAL_STATUS, true)
     expectAlwTooOld(res, true)
     expectAlwsMarital(res, true)
   })
@@ -270,13 +255,10 @@ describe('OasBenefit', () => {
     //client results
     expectOasEligible(res, EntitlementResultType.NONE, 0.0)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectGisNotEligible(res)
-    expect(res.body.results.gis.eligibility.reason).toEqual(
-      ResultReason.LIVING_COUNTRY
-    )
+    expectGisNotEligible(res, ResultReason.LIVING_COUNTRY)
     expectAlwAlwsTooOld(res)
   })
-  /* CALC-16 to be updated when the test case will checked and updated*/
+  /* CALC-16 */
   it('should pass the 16 test - OAS-CALC-16', async () => {
     const desiredName = 'CALC-16' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -288,12 +270,15 @@ describe('OasBenefit', () => {
       { age: 69, amount: 899.8 },
       { age: 70, amount: 950.1 },
     ]
+
     //client results
     expectOasEligible(res, EntitlementResultType.FULL, 698.6)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 1043.45)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
+    //future benefit
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -305,5 +290,7 @@ describe('OasBenefit', () => {
     )
     expectAlwEligible(res, 1326.69, true)
     expectAlwsMarital(res, true)
+    //future benefit
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, true)
   })
 })

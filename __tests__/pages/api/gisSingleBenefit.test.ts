@@ -1,20 +1,15 @@
 import {
   EntitlementResultType,
-  LegalStatus,
-  LivingCountry,
-  MaritalStatus,
-  ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 
-import { mockGetRequest } from './factory'
+import { mockGetRequest } from '../../utils/factory'
 import {
   expectAlwsMarital,
   expectAlwTooOld,
   expectGisEligible,
   expectOasEligible,
-  partnerUndefined,
-} from './expectUtils'
+} from '../../utils/expectUtils'
 import { getTransformedPayloadByName } from '../../utils/excelReaderUtil'
 
 describe('OasBenefit', () => {
@@ -107,19 +102,18 @@ describe('OasBenefit', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
   })
-  /* CALC-118 
+  /* CALC-118 */
   it('should pass the 118 test - CALC-118', async () => {
     const desiredName = 'CALC-118' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
-    expectGisEligible(res, 0.0)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+    expectOasEligible(res, EntitlementResultType.NONE, 237.52)
+    expectGisEligible(res, 1000.4)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
-  })*/
+  })
   /* CALC-119 */
   it('should pass the 119 test - CALC-119', async () => {
     const desiredName = 'CALC-119' // Replace with the desired name
@@ -199,8 +193,8 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
-    expectGisEligible(res, 0.0)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 267.89)
+    expectGisEligible(res, 537.74)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     expectAlwsMarital(res, true)

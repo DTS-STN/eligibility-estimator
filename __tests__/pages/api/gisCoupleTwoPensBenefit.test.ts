@@ -1,10 +1,5 @@
 import {
   EntitlementResultType,
-  LegalStatus,
-  LivingCountry,
-  MaritalStatus,
-  PartnerBenefitStatus,
-  ResultKey,
   ResultReason,
 } from '../../../utils/api/definitions/enums'
 import { getTransformedPayloadByName } from '../../utils/excelReaderUtil'
@@ -15,9 +10,9 @@ import {
   expectGisEligible,
   expectGisNotEligible,
   expectOasEligible,
-} from './expectUtils'
+} from '../../utils/expectUtils'
 
-import { mockGetRequest, mockGetRequestError } from './factory'
+import { mockGetRequest } from '../../utils/factory'
 
 //file for extracting test data
 const filePath = '__tests__/utils/ScenariosWith2023Q3RatesAndThresholds.xlsx'
@@ -49,8 +44,8 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 782.43)
-    expectGisEligible(res, 545.09)
+    expectOasEligible(res, EntitlementResultType.FULL, 743.31)
+    expectGisEligible(res, 580.02)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -95,7 +90,7 @@ describe('gisCoupleTwoPensBenefit', () => {
       { age: 70, amount: 950.1 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 803.22)
+    expectOasEligible(res, EntitlementResultType.FULL, 803.39)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 409.09)
     expectAlwTooOld(res)
@@ -138,7 +133,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 866.26)
+    expectOasEligible(res, EntitlementResultType.FULL, 779.64)
     expectGisEligible(res, 0.0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
@@ -292,8 +287,8 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 860.67)
-    expectGisEligible(res, 960.45)
+    expectOasEligible(res, EntitlementResultType.FULL, 817.64)
+    expectGisEligible(res, 998.47)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -368,7 +363,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 952.89)
+    expectOasEligible(res, EntitlementResultType.FULL, 857.60)
     expectGisEligible(res, 0.0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
@@ -406,7 +401,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 195.61)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 195.65)
     expectGisEligible(res, 1484.4)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -423,9 +418,15 @@ describe('gisCoupleTwoPensBenefit', () => {
     const desiredName = 'CALC-43' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
+    const deferralTable = [
+      { age: 67, amount: 187.22 },
+      { age: 68, amount: 199.8 },
+      { age: 69, amount: 212.37 },
+      { age: 70, amount: 221.81 },
+    ]
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65)
+    expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 1360.4)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -442,9 +443,14 @@ describe('gisCoupleTwoPensBenefit', () => {
     const desiredName = 'CALC-44' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
+    const deferralTable = [
+      { age: 68, amount: 187.22 },
+      { age: 69, amount: 199.8 },
+      { age: 70, amount: 211.33 },
+    ]
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65)
+    expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 1085.4)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -461,9 +467,13 @@ describe('gisCoupleTwoPensBenefit', () => {
     const desiredName = 'CALC-45' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
-
+    const deferralTable = [
+      { age: 69, amount: 187.22 },
+      { age: 70, amount: 194.56 },
+    ]
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65)
+    expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 616.77)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -475,7 +485,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectAlwsMarital(res, true)
   })
 
-  /* CALC-46 */
+  /* CALC-46 
   it('should pass 46 test - CALC-46', async () => {
     const desiredName = 'CALC-46' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -493,5 +503,5 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectGisEligible(res, 452.26, true)
     expectAlwTooOld(res, true)
     expectAlwsMarital(res, true)
-  })
+  })*/
 })

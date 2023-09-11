@@ -6,13 +6,10 @@ import {
   ResultKey,
   ResultReason,
   SummaryState,
-} from '../../../utils/api/definitions/enums'
-import {
-  ResponseSuccess,
-  TableData,
-} from '../../../utils/api/definitions/types'
-import legalValues from '../../../utils/api/scrapers/output'
-import { consoleDev } from '../../../utils/web/helpers/utils'
+} from '../../utils/api/definitions/enums'
+import { ResponseSuccess, TableData } from '../../utils/api/definitions/types'
+import legalValues from '../../utils/api/scrapers/output'
+import { consoleDev } from '../../utils/web/helpers/utils'
 import { MockResponseObject } from './factory'
 
 export function expectAlwsMarital(
@@ -144,6 +141,7 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
   for (let i = 0; i < list1.length; i++) {
     consoleDev()
     if (list1[i].age != list2[i].age || list1[i].amount != list2[i].amount) {
+      consoleDev('** age:' + list2[i].age + ', Amount: ' + list2[i].amount)
       return false
     }
   }
@@ -154,9 +152,15 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
 export function expectDeferralTable(
   res: MockResponseObject<ResponseSuccess>,
   expectedDeferralTable: TableData[],
+  future?: boolean,
   partner?: boolean
 ) {
-  const results = !partner ? res.body.results : res.body.partnerResults
+  const currentResults = !partner ? res.body.results : res.body.partnerResults
+  const futureResults = !partner
+    ? res.body.futureClientResults
+    : res.body.futurePartnerResults
+
+  const results = !future ? currentResults : futureResults
 
   const deferralTable = results.oas.cardDetail.meta?.tableData
 
@@ -164,28 +168,38 @@ export function expectDeferralTable(
   expect(areListsEqual(expectedDeferralTable, deferralTable)).toEqual(true)
 }
 
-export function expectFutureBenefitEligible(
+export function expectFutureOasGisBenefitEligible(
   res: MockResponseObject<ResponseSuccess>,
-  entitlementOas?: number,
-  entitlementGis?: number,
+  age: number,
+  entitlementOas: number,
+  entitlementGis: number,
   partner?: boolean
 ) {
   const results = !partner
-    ? res.body.futureClientResults
-    : res.body.futurePartnerResults
+    ? res.body.futureClientResults[0]
+    : res.body.futurePartnerResults[0]
 
-  consoleDev('**** future details' + results.oas.eligibility.detail)
-  consoleDev('**** future reason' + results.oas.eligibility.reason)
-  consoleDev('**** future result' + results.oas.eligibility.result)
-  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
-  expect(results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results.oas.eligibility.reason).toEqual(ResultReason.NONE)
-  expect(results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results.gis.eligibility.reason).toEqual(ResultReason.NONE)
-  if (entitlementOas)
-    expect(results.oas.entitlement.result).toEqual(entitlementOas)
-  if (entitlementGis)
-    expect(results.gis.entitlement.result).toEqual(entitlementGis)
+  expect(results[age].oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results[age].oas.eligibility.reason).toEqual(ResultReason.NONE)
+  expect(results[age].gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results[age].gis.eligibility.reason).toEqual(ResultReason.NONE)
+  expect(results[age].oas.entitlement.result).toEqual(entitlementOas)
+  expect(results[age].gis.entitlement.result).toEqual(entitlementGis)
+}
+
+export function expectFutureAwlBenefitEligible(
+  res: MockResponseObject<ResponseSuccess>,
+  age: number,
+  entitlementAwl: number,
+  partner?: boolean
+) {
+  const results = !partner
+    ? res.body.futureClientResults[0]
+    : res.body.futurePartnerResults[0]
+
+  expect(results[age].awl.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results[age].awl.eligibility.reason).toEqual(ResultReason.NONE)
+  expect(results[age].awl.entitlement.result).toEqual(entitlementAwl)
 }
 
 export function expectAlwEligible(

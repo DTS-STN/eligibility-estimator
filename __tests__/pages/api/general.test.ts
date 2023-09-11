@@ -19,8 +19,8 @@ import {
 import { RequestSchema } from '../../../utils/api/definitions/schemas'
 import { OutputItem } from '../../../utils/api/scrapers/_baseTable'
 import { scraperData } from '../../../utils/api/scrapers/output'
-import { mockGetRequestError, mockPartialGetRequest } from './factory'
-import { getErrorDetails } from './expectUtils'
+import { mockGetRequestError, mockPartialGetRequest } from '../../utils/factory'
+import { getErrorDetails } from '../../utils/expectUtils'
 
 describe('code checks', () => {})
 

@@ -1,5 +1,4 @@
 import {
-  EntitlementResultType,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -17,21 +16,16 @@ import {
   canadaWholeLife,
   canadian,
   expectAlwsMarital,
-  expectAlwsEligible,
   expectAllIneligible,
   expectAlwTooOld,
-  expectAlwEligible,
-  expectGisEligible,
-  expectOasEligible,
-  expectOasGisEligible,
   expectOasGisTooYoung,
   income10k,
   partnerIncomeZero,
   partnerNoHelpNeeded,
   partnerUndefined,
   getErrorDetails,
-} from './expectUtils'
-import { mockGetRequest, mockGetRequestError } from './factory'
+} from '../../utils/expectUtils'
+import { mockGetRequest, mockGetRequestError } from '../../utils/factory'
 
 describe('consolidated benefit tests: unavailable and errors (screening out)', () => {
   it('returns "error ineligible" - living in Canada, under 10 years in Canada, not lived in social country', async () => {
