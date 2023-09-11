@@ -21,6 +21,15 @@ export function expectAlwsMarital(
   expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.MARITAL)
 }
 
+export function expectAlwMarital(
+  res: MockResponseObject<ResponseSuccess>,
+  partner?: boolean
+) {
+  const results = !partner ? res.body.results : res.body.partnerResults
+  expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(res.body.results.alw.eligibility.reason).toEqual(ResultReason.MARITAL)
+}
+
 export function expectAlwTooOld(
   res: MockResponseObject<ResponseSuccess>,
   partner?: boolean
@@ -152,17 +161,29 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
 export function expectDeferralTable(
   res: MockResponseObject<ResponseSuccess>,
   expectedDeferralTable: TableData[],
-  future?: boolean,
   partner?: boolean
 ) {
-  const currentResults = !partner ? res.body.results : res.body.partnerResults
-  const futureResults = !partner
-    ? res.body.futureClientResults
-    : res.body.futurePartnerResults
-
-  const results = !future ? currentResults : futureResults
-
+  const results = !partner ? res.body.results : res.body.partnerResults
   const deferralTable = results.oas.cardDetail.meta?.tableData
+
+  consoleDev('table : ' + deferralTable)
+
+  expect(expectedDeferralTable.length).toEqual(deferralTable.length)
+  expect(areListsEqual(expectedDeferralTable, deferralTable)).toEqual(true)
+}
+
+export function expectFutureDeferralTable(
+  res: MockResponseObject<ResponseSuccess>,
+  age: number,
+  expectedDeferralTable: TableData[],
+  partner?: boolean
+) {
+  const results = !partner
+    ? res.body.futureClientResults[0]
+    : res.body.futurePartnerResults[0]
+  const deferralTable = results[age].oas.cardDetail.meta?.tableData
+
+  consoleDev('table : ' + deferralTable)
 
   expect(expectedDeferralTable.length).toEqual(deferralTable.length)
   expect(areListsEqual(expectedDeferralTable, deferralTable)).toEqual(true)

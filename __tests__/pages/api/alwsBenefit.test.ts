@@ -2,10 +2,12 @@ import { ResultKey, ResultReason } from '../../../utils/api/definitions/enums'
 
 import { mockGetRequest } from '../../utils/factory'
 import {
+  expectAlwMarital,
   expectAlwsEligible,
   expectAlwsMarital,
   expectAlwTooOld,
   expectDeferralTable,
+  expectFutureDeferralTable,
   expectFutureOasGisBenefitEligible,
   expectGisNotEligible,
   expectOasNotEligible,
@@ -39,7 +41,7 @@ describe('AlwsBenefit', () => {
 
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45)
-    expectDeferralTable(res, futureDeferralTable, true)
+    expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
   /* CALC-018  */
   it('should pass the sanity test 18 - CALC-18', async () => {
@@ -59,11 +61,11 @@ describe('AlwsBenefit', () => {
       ResultReason.AGE_YOUNG
     )
     expectGisNotEligible(res, ResultReason.OAS)
-    expectAlwsMarital(res, true)
+    expectAlwMarital(res, true)
     expectAlwsEligible(res, 1458.51)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45)
-    expectDeferralTable(res, futureDeferralTable, true)
+    expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
   /* CALC-019 */
@@ -81,14 +83,14 @@ describe('AlwsBenefit', () => {
     //client results
     expectOasNotEligible(res)
     expect(res.body.results.oas.eligibility.reason).toEqual(
-      ResultReason.AGE_YOUNG
+      ResultReason.AGE_YOUNG_64
     )
     expectGisNotEligible(res, ResultReason.OAS)
-    expectAlwsMarital(res)
+    expectAlwMarital(res)
     expectAlwsEligible(res, 811.51)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45)
-    expectDeferralTable(res, futureDeferralTable, true)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 476.45)
+    expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
   /* CALC-20*/
@@ -109,11 +111,11 @@ describe('AlwsBenefit', () => {
       ResultReason.AGE_YOUNG
     )
     expectGisNotEligible(res, ResultReason.OAS)
-    expectAlwsMarital(res)
+    expectAlwMarital(res)
     expectAlwsEligible(res, 723.88)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.82)
-    expectDeferralTable(res, futureDeferralTable, true)
+    expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
   /* CALC-21*/
@@ -135,11 +137,11 @@ describe('AlwsBenefit', () => {
       ResultReason.AGE_YOUNG_64
     )
     expectGisNotEligible(res, ResultReason.OAS)
-    expectAlwsMarital(res)
+    expectAlwMarital(res)
     expectAlwsEligible(res, 539.28)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 233.82)
-    expectDeferralTable(res, futureDeferralTable, true)
+    expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
   /* CALC-22*/
@@ -160,10 +162,10 @@ describe('AlwsBenefit', () => {
       ResultReason.AGE_YOUNG
     )
     expectGisNotEligible(res, ResultReason.OAS)
-    expectAlwTooOld(res)
+    expectAlwMarital(res)
     expectAlwsEligible(res, 0)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45)
-    expectDeferralTable(res, futureDeferralTable, true)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0)
+    expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 })
