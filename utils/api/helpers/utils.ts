@@ -1,3 +1,4 @@
+import { consoleDev } from '../../web/helpers/utils'
 import roundToTwo from './roundToTwo'
 
 export const getDeferralIncrease = (months, baseAmount) => {
@@ -167,7 +168,7 @@ function addKeyValue(obj, key, val) {
  * This can and will return a decimal value, such as "65.5"!
  */
 export function calculateAge(birthMonth: number, birthYear: number): number {
-  if (!birthMonth || !birthYear) return 0
+  if (birthMonth === null || birthYear === null) return null
 
   const today = new Date()
   const currentMonth = today.getMonth() + 1
@@ -264,7 +265,6 @@ export function evaluateOASInput(input) {
   const yearsInCanada = input.yearsInCanadaSince18
   const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
-
   let newInput = { ...input }
 
   let deferralMonths = 0
@@ -274,7 +274,7 @@ export function evaluateOASInput(input) {
       60,
       Math.min(70, age) - eliObj.ageOfEligibility
     )
-    deferralMonths = deferralYears * 12
+    deferralMonths = Math.max(0, deferralYears * 12)
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {
@@ -294,9 +294,15 @@ export function evaluateOASInput(input) {
       ? 40
       : Math.min(40, Math.round(newYearsInCan))
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: Math.floor(deferralMonths),
+      months: Math.round(deferralMonths),
       years: 0,
     })
+    consoleDev(
+      '#5 oasDefer',
+      newInput['oasDeferDuration'],
+      'months',
+      deferralMonths
+    )
   }
 
   return {

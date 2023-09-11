@@ -118,6 +118,7 @@ const en: WebTranslations = {
     'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
     'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+  dateModified: 'Date modified:',
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',
   footerlink3: 'Treaties, laws and regulations',
@@ -227,6 +228,8 @@ const en: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsSince18Empty]:
       'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.yearsSinceOASEmpty]:
+      'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -255,10 +258,8 @@ const en: WebTranslations = {
       'Your annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.',
     [ValidationErrors.partnerIncomeTooHigh]:
       "The sum of you and your partner's annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.",
-    [ValidationErrors.ageUnder18]:
-      'You must be at least 60 years old to receive Canadian old age benefits.',
-    [ValidationErrors.partnerAgeUnder18]:
-      "Your partner's age must be over 18 to be able to use this tool.",
+    [ValidationErrors.ageUnder18]: 'You must be at least 18.',
+    [ValidationErrors.partnerAgeUnder18]: 'Your partner must be at least 18.',
     [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
     [ValidationErrors.partnerAgeOver150]:
       "Your partner's age should be less than 150.",

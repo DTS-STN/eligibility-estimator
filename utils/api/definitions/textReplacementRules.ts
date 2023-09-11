@@ -115,7 +115,7 @@ export const textReplacementRules: TextReplacementRules = {
   LINK_NON_RESIDENT_TAX: (handler) =>
     generateLink(handler.translations.links.oasNonResidentTax),
   PARTNER_BENEFIT_AMOUNT: (handler, benefitResult) =>
-    `<strong>${numberToStringCurrency(
+    `<strong data-cy='benefit-estimate'>${numberToStringCurrency(
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,

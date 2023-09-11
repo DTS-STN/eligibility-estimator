@@ -123,6 +123,7 @@ const fr: WebTranslations = {
     "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
   homePageP6:
     "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
+  dateModified: 'Date de modification :',
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
   footerlink3: 'Traités, lois et règlements',
@@ -234,6 +235,8 @@ const fr: WebTranslations = {
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.yearsSinceOASEmpty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -263,10 +266,9 @@ const fr: WebTranslations = {
       "Votre revenu annuel doit être inférieur à {OAS_MAX_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
     [ValidationErrors.partnerIncomeTooHigh]:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
-    [ValidationErrors.ageUnder18]:
-      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
+    [ValidationErrors.ageUnder18]: 'Vous devez avoir au moins 18 ans.',
     [ValidationErrors.partnerAgeUnder18]:
-      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
+      'Votre conjoint doit avoir au moins 18 ans.',
     [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
     [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",

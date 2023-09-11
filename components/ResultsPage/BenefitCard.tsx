@@ -71,6 +71,7 @@ export const BenefitCard: React.VFC<{
       {collapsedDetails &&
         collapsedDetails.map((detail, index) => (
           <CustomCollapse
+            datacy={`collapse-${benefitKey}-${index}`}
             key={`collapse-${benefitName}-${index}`}
             id={`collapse-${benefitName}-${index}`}
             title={detail.heading}

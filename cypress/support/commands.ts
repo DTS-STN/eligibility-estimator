@@ -89,9 +89,11 @@ Cypress.Commands.add('fillQuestionsForm', (item) => {
     if (item.receiveOAS === true) {
       cy.get('#receiveOAS-0').check()
       cy.wait(1000)
-      cy.get('#oasDeferDuration').should('exist')
-      cy.get('#oasDeferDuration-years').select(item.delayYears)
-      cy.get('#oasDeferDuration-months').select(item.delayMonths)
+      if(item.ageYears == 65 && item.ageMonths != 0){
+        cy.get('#oasDeferDuration').should('exist')
+        cy.get('#oasDeferDuration-years').select(item.delayYears)
+        cy.get('#oasDeferDuration-months').select(item.delayMonths)
+      }
     } else {
       cy.get('#receiveOAS-1').check()
     }
@@ -134,6 +136,51 @@ Cypress.Commands.add('fillQuestionsForm', (item) => {
       break
     case 'Married':
       cy.get('#maritalStatus-1').check()
+
+      cy.get('#invSeparated').should('exist')
+      if (item.invSeparate == true) {
+        cy.get('#invSeparated-0').check()
+      } else {
+        cy.get('#invSeparated-1').check()
+      }
+
+      const partnerBirthday = getBirthday(
+        item.partnerAgeYears,
+        item.partnerAgeMonths
+      )
+
+      cy.get('#partnerAge-birth-month').select(partnerBirthday.month)
+      cy.get('#partnerAge-birth-year').type(`${partnerBirthday.year}`)
+      cy.wait(500)
+      cy.get('#enter-partnerIncome').type(`${item.partnerWorldIncome}`)
+
+      if(item.partnerAgeYears>=60){
+        cy.get('#partnerLegalStatus-0').check()
+        cy.get('#partnerLivingCountry-select').type(
+          `${item.partnerCountryResidence}\n`
+        )
+        cy.wait(500)
+
+        if (item.partnerInCanadaSince18 == true) {
+          cy.get('#partnerLivedOnlyInCanada-0').check()
+        } else {
+          cy.get('#partnerLivedOnlyInCanada-1').check()
+          cy.get('#enter-partnerYearsInCanadaSince18').type(
+            `${item.partnerYearsResided}`
+          )
+        }
+      }
+
+      if(item.partnerAgeYears >= 65){
+        if (item.partnerRecvOas == true) {
+          cy.get('#partnerBenefitStatus-0').check()
+        } else if (item.partnerRecvOas == false) {
+          cy.get('#partnerBenefitStatus-1').check()
+        } else {
+          cy.get('#partnerBenefitStatus-2').check()
+        }
+      }
+
       break
     case 'Widowed':
       cy.get('#maritalStatus-2').check()

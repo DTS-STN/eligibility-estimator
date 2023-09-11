@@ -305,7 +305,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * At age 75, OAS increases by 10%.
    */
   private get currentEntitlementAmount(): number {
-    if (this.input.age < 75) return this.age65EntitlementAmount
+    const condition = this.partner
+      ? this.input.age < 75
+      : this.input.age < 75 && this.inputAge < 75
+    if (condition) return this.age65EntitlementAmount
     else return this.age75EntitlementAmount
   }
 
@@ -573,10 +576,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.input.age < 70 &&
       this.inputAge < 70
     ) {
-      // Deferral
-      if (this.eligibility.reason !== ResultReason.INCOME) {
-        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-      }
+      // your Deferral Options
+
+      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+
       // if income too high
       if (this.eligibility.reason === ResultReason.INCOME) {
         if (!this.future) {
