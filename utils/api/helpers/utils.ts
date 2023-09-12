@@ -164,14 +164,6 @@ export function buildQuery(
           : Number(partnerDeferralMeta.residency)
       )
     )
-
-    // if (partnerAlreadyOasEligible) {
-
-    // } else if (partnerLockResidence) {
-    //   newQuery['partnerYearsInCanadaSince18'] = String(
-    //     Math.floor(partnerLockResidence)
-    //   )
-    // }
   }
 
   return newQuery
