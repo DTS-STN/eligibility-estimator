@@ -58,9 +58,10 @@ describe('gisCoupleOnePenBenefit', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
     const deferralTable = [
-      { age: 67, amount: 730.18 },
-      { age: 68, amount: 779.22 },
-      { age: 69, amount: 828.26 },
+      { age: 66, amount: 730.18 },
+      { age: 67, amount: 779.22 },
+      { age: 68, amount: 828.26 },
+      { age: 69, amount: 877.3 },
       { age: 70, amount: 926.34 },
     ]
 
@@ -447,7 +448,7 @@ describe('gisCoupleOnePenBenefit', () => {
       { age: 70, amount: 498.8 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 461.39)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 461.4)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 983.28)
     expectAlwTooOld(res)
@@ -469,9 +470,9 @@ describe('gisCoupleOnePenBenefit', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
     const deferralTable = [
-      { age: 67, amount: 459.54 },
-      { age: 68, amount: 488.46 },
-      { age: 69, amount: 517.38 },
+      { age: 67, amount: 459.53 },
+      { age: 68, amount: 488.47 },
+      { age: 69, amount: 517.39 },
       { age: 70, amount: 546.31 },
     ]
     //client results

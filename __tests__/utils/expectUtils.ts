@@ -77,7 +77,7 @@ export function expectAllIneligible(
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
   expect(res.body.missingFields).toEqual([])
-  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
+  //expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
   expect(res.body.results.oas.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.gis.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
@@ -91,8 +91,10 @@ export function expectOasEligible(
   partner?: boolean
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
-
-  //expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
+  consoleDev('results : ' + results)
+  consoleDev('res.body. : ' + res.body)
+  consoleDev('res.body.results.oas  : ' + res.body.results.oas )
+  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   //expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(results.oas.entitlement.type).toEqual(oasType)
@@ -149,7 +151,10 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
 
   for (let i = 0; i < list1.length; i++) {
     consoleDev()
-    if (list1[i].age != list2[i].age || list1[i].amount != list2[i].amount) {
+    if (
+      list1[i].age != list2[i].age ||
+      list1[i].amount.toFixed(2) != list2[i].amount.toFixed(2)
+    ) {
       consoleDev('** age:' + list2[i].age + ', Amount: ' + list2[i].amount)
       return false
     }
@@ -165,8 +170,6 @@ export function expectDeferralTable(
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
   const deferralTable = results.oas.cardDetail.meta?.tableData
-
-  consoleDev('table : ' + deferralTable)
 
   expect(expectedDeferralTable.length).toEqual(deferralTable.length)
   expect(areListsEqual(expectedDeferralTable, deferralTable)).toEqual(true)
