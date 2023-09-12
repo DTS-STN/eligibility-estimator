@@ -76,7 +76,9 @@ export function buildQuery(
   clientDeferralMeta,
   partnerDeferralMeta,
   clientAlreadyOasEligible,
-  partnerAlreadyOasEligible
+  partnerAlreadyOasEligible,
+  clientLockResidence,
+  partnerLockResidence
 ) {
   const newQuery = { ...query }
   const [userAge, partnerAge] = ageSet // 68, 65
@@ -97,12 +99,20 @@ export function buildQuery(
         newQuery['yearsInCanadaSince18'] = String(clientDeferralMeta.residency)
       }
     } else {
-      // just add residency
-      const newYrsInCanada = Math.min(
-        40,
-        Number(userAge) - Number(query.age) + Number(query.yearsInCanadaSince18)
-      )
-      newQuery['yearsInCanadaSince18'] = String(Math.floor(newYrsInCanada))
+      if (clientLockResidence) {
+        newQuery['yearsInCanadaSince18'] = String(
+          Math.floor(clientLockResidence)
+        )
+      } else {
+        // just add residency
+        const newYrsInCanada = Math.min(
+          40,
+          Number(userAge) -
+            Number(query.age) +
+            Number(query.yearsInCanadaSince18)
+        )
+        newQuery['yearsInCanadaSince18'] = String(Math.floor(newYrsInCanada))
+      }
     }
 
     // const newYrsInCanada = String(
@@ -148,10 +158,20 @@ export function buildQuery(
     newQuery['partnerYearsInCanadaSince18'] = String(
       Math.floor(
         increaseResidence
-          ? partnerNewYrsInCanada
+          ? partnerLockResidence
+            ? Math.floor(partnerLockResidence)
+            : partnerNewYrsInCanada
           : Number(partnerDeferralMeta.residency)
       )
     )
+
+    // if (partnerAlreadyOasEligible) {
+
+    // } else if (partnerLockResidence) {
+    //   newQuery['partnerYearsInCanadaSince18'] = String(
+    //     Math.floor(partnerLockResidence)
+    //   )
+    // }
   }
 
   return newQuery
