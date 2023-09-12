@@ -94,7 +94,15 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
           ),
     yearsInCanadaSince18:
       transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false
-        ? undefined
+        ? claculYearsInCanadaSince18(
+            rowToTransform[
+              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+            ],
+            rowToTransform[
+              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+            ],
+            rowToTransform['Delay (# of Years and Months)']
+          )
         : transformYearsInCanadaSinceOAS18Value(
             rowToTransform[
               '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
@@ -221,6 +229,24 @@ function claculOasAge(durationStr: string): number | undefined {
   }
   return oasAge
 }
+
+function claculYearsInCanadaSince18(
+  yearsInCanadaSince18: string,
+  yearsInCanadaSinceOAS: string,
+  oasDeferDuration: string
+): number | undefined {
+  const yearsInCanada =
+    Number(yearsInCanadaSinceOAS) || Number(yearsInCanadaSince18)
+  if (oasDeferDuration && oasDeferDuration.toString().toUpperCase() !== 'N/A') {
+    const deferralDuration = JSON.parse(oasDeferDuration)
+    const deferralYrs = deferralDuration.years
+    const deferralMonths = deferralDuration.months
+
+    return yearsInCanada - (deferralYrs + deferralMonths / 12)
+  }
+  return yearsInCanada
+}
+
 function transformPartnerBenefitStatusValue(value: string): String | undefined {
   if (value.toUpperCase() === 'YES') {
     return PartnerBenefitStatus.OAS
