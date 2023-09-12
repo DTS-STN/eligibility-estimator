@@ -91,9 +91,6 @@ export function expectOasEligible(
   partner?: boolean
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
-  consoleDev('results : ' + results)
-  consoleDev('res.body. : ' + res.body)
-  consoleDev('res.body.results.oas  : ' + res.body.results.oas )
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
   expect(results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   //expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)

@@ -84,7 +84,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
         '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
       ]
     ),
-    yearsInCanadaSince18:
+    yearsInCanadaSinceOAS:
       rowToTransform[
         '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
       ] === 'N/A' ||

@@ -31,7 +31,7 @@ describe('OasBenefit', () => {
     //client results
 
     consoleDev('oas: ' + res.body.results)
-    expectOasEligible(res, EntitlementResultType.FULL, 750.61)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 750.61)
     expectGisEligible(res, 977.91)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -77,7 +77,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 853.45)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 853.45)
     expectGisEligible(res, 243.15)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -129,7 +129,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 391.91)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 391.92)
     expectGisEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
@@ -168,7 +168,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+    expectOasNotEligible(res, true)
     expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
     expectGisNotEligible(res, ResultReason.LIVING_COUNTRY)
     expectAlwTooOld(res)

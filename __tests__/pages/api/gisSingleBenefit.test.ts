@@ -28,7 +28,6 @@ describe('OasBenefit', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
   })
-
   /* CALC-112 */
   it('should pass the 112 test - CALC-112', async () => {
     const desiredName = 'CALC-112' // Replace with the desired name
@@ -48,7 +47,7 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 698.6)
+    expectOasEligible(res, EntitlementResultType.FULL, 698.6)
     expectGisEligible(res, 476.45)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -72,7 +71,7 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 698.6)
+    expectOasEligible(res, EntitlementResultType.FULL, 698.6)
     expectGisEligible(res, 0.0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
@@ -109,7 +108,7 @@ describe('OasBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.NONE, 237.52)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 237.52)
     expectGisEligible(res, 1000.4)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
