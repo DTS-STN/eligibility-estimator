@@ -27,21 +27,24 @@ export const WillBeEligible: React.VFC<{
   const multipleOAS_GIS =
     futureResults.filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
+  console.log('futureResults', futureResults)
+
   for (let i = futureResults.length - 1; i >= 0; i--) {
     if (i > 0) {
+      console.log('INSIDE IF STATEMENT')
       if (
         Object.values(Object.values(Object.values(futureResults)[i])[0])
           .length != 1
       ) {
         if (
-          Object.values(Object.values(futureResults[i])[0])[0].entitlement
+          Object.values(Object.values(futureResults[i])[0])[0]?.entitlement
             .result ==
-            Object.values(Object.values(futureResults[i - 1])[0])[0].entitlement
-              .result &&
-          Object.values(Object.values(futureResults[i])[0])[1].entitlement
+            Object.values(Object.values(futureResults[i - 1])[0])[0]
+              ?.entitlement.result &&
+          Object.values(Object.values(futureResults[i])[0])[1]?.entitlement
             .result ==
-            Object.values(Object.values(futureResults[i - 1])[0])[1].entitlement
-              .result
+            Object.values(Object.values(futureResults[i - 1])[0])[1]
+              ?.entitlement.result
         ) {
           futureResults.pop()
         }
