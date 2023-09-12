@@ -86,15 +86,20 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     ),
     yearsInCanadaSinceOAS:
       transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === true
-        ? undefined
-        : transformYearsInCanadaSinceOAS18Value(
+        ? transformYearsInCanadaSinceOAS18Value(
             rowToTransform[
               '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
             ]
-          ),
+          )
+        : undefined,
     yearsInCanadaSince18:
       transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false
-        ? claculYearsInCanadaSince18(
+        ? transformYearsInCanadaSinceOAS18Value(
+            rowToTransform[
+              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+            ]
+          )
+        : claculYearsInCanadaSince18(
             rowToTransform[
               '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
             ],
@@ -102,17 +107,12 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
               '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
             ],
             rowToTransform['Delay (# of Years and Months)']
-          )
-        : transformYearsInCanadaSinceOAS18Value(
-            rowToTransform[
-              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-            ]
           ),
     everLivedSocialCountry: false, // check with vero
     partnerBenefitStatus:
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === 'N/A' ||
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === ''
-        ? PartnerBenefitStatus.HELP_ME //undefined
+        ? PartnerBenefitStatus.OAS_GIS //undefined
         : transformPartnerBenefitStatusValue(
             rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
           ),
