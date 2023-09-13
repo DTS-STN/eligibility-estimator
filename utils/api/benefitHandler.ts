@@ -391,8 +391,9 @@ export class BenefitHandler {
       const deferralYrs = deferralDuration.years
       const deferralMonths = deferralDuration.months
 
-      this.input.client.yearsInCanadaSince18 =
+      this.input.client.yearsInCanadaSince18 = Math.floor(
         yearsInCanada - (deferralYrs + deferralMonths / 12)
+      )
     }
 
     const clientOasNoDeferral = new OasBenefit(
