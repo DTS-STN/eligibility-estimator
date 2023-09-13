@@ -383,7 +383,7 @@ export class BenefitHandler {
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
 
-    if (this.input.client.receiveOAS) {
+    if (this.input.client.receiveOAS && !this.input.client.livedOnlyInCanada) {
       const yearsInCanada =
         Number(this.input.client.yearsInCanadaSinceOAS) ||
         Number(this.input.client.yearsInCanadaSince18)
@@ -398,6 +398,7 @@ export class BenefitHandler {
       )
     }
 
+    console.log('this.input.client', this.input.client)
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
