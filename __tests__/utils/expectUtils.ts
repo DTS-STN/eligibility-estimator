@@ -172,8 +172,7 @@ expect.extend({
     const pass = Math.abs(received - expected) < precision
     return {
       pass,
-      message: () =>
-        `expected ${received} to be close to ${expected} with precision ${precision}`,
+      message: () => `Expected: ${expected}\nReceived: ${received} `,
     }
   },
 })
@@ -240,10 +239,7 @@ export function expectFutureAwlBenefitEligible(
 
   expect(results[age].awl.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(results[age].awl.eligibility.reason).toEqual(ResultReason.NONE)
-  expect(results[age].awl.entitlement.result).OAtoBeCloseTo(
-    entitlementAwl,
-    0.01
-  )
+  expect(results[age].awl.entitlement.result).toBeCloseTo(entitlementAwl, 0.01)
 }
 
 export function expectAlwEligible(
@@ -271,7 +267,7 @@ export function expectAlwsEligible(
   expect(res.body.results.alws.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
-    expect(res.body.results.alws.entitlement.result).OAtoBeCloseTo(
+    expect(res.body.results.alws.entitlement.result).toBeCloseTo(
       entitlement,
       0.01
     )

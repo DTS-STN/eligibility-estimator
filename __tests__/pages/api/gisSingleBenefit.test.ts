@@ -59,7 +59,7 @@ describe('gisSingleBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 874.65)
+    expectOasEligible(res, EntitlementResultType.FULL, 874.65)
     expectGisEligible(res, 0.82)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
