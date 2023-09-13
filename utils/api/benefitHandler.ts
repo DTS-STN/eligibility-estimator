@@ -398,7 +398,6 @@ export class BenefitHandler {
       )
     }
 
-    console.log('this.input.client', this.input.client)
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
