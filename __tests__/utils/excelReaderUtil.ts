@@ -38,17 +38,17 @@ function readExcelData(filePath: string): string[] {
 
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   const payload: Record<string, any> = {
-    incomeAvailable:
-      rowToTransform["User's Net Worldwide Income"] === 'N/A' ? false : true, // Replace 'N/A' or empty with false
+    /*  incomeAvailable:
+      rowToTransform["User's Net Worldwide Income"] === 'N/A' ? false : true, // Replace 'N/A' or empty with false*/
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
     age: rowToTransform['Age '],
-    oasDefer:
+    /*oasDefer:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A' ? false : true, // Replace 'N/A' or empty with false
     oasAge: claculOasAge(
       extractFirstCharacterAfterSemicolon(
         rowToTransform['Delay (# of Years and Months)']
       )
-    ),
+    ),*/
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
@@ -101,12 +101,9 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             )
           ),
     everLivedSocialCountry: false, // check with vero
-    partnerBenefitStatus:
-      rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === 'N/A'
-        ? undefined
-        : transformPartnerBenefitStatusValue(
-            rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
-          ),
+    partnerBenefitStatus: transformPartnerBenefitStatusValue(
+      rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
+    ),
     partnerIncomeAvailable:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ? false : true, // Convert to true if value exists
     partnerIncome:
@@ -216,7 +213,6 @@ function claculOasAge(durationStr: string): number | undefined {
   return oasAge
 }
 function roundedIncome(numberToRound: number): number {
-
   const roundedNumber = numberToRound.toFixed(2)
   return Number(roundedNumber)
 }
@@ -245,15 +241,17 @@ function claculYearsInCanadaSince18(
   return yearsInCanada
 }
 
-function transformPartnerBenefitStatusValue(value: string): String | undefined {
+function transformPartnerBenefitStatusValue(value: string): String {
+  // TODO call the partnerbenefit helper
+
   if (value.toUpperCase() === 'YES') {
-    return PartnerBenefitStatus.OAS
+    return PartnerBenefitStatus.OAS_GIS
   } else if (value.toUpperCase() === 'IDK'.toUpperCase()) {
     return PartnerBenefitStatus.HELP_ME
   } else if (value.toUpperCase() === 'NO') {
     return PartnerBenefitStatus.NONE
   }
-  return undefined
+  return PartnerBenefitStatus.NONE
 }
 
 function extractValueBeforeSemicolon(value: string): string {
