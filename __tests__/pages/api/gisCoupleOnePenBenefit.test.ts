@@ -33,7 +33,10 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.FULL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-48 */
@@ -43,13 +46,16 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 727.38)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 727.38)
     expectGisEligible(res, 1078.38)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-49 */
@@ -92,7 +98,10 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.FULL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-51 */
@@ -121,14 +130,17 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 882.19)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 882.19)
     expectGisEligible(res, 0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-53 */
@@ -400,7 +412,10 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-66 */
@@ -416,7 +431,10 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-67 */
@@ -437,7 +455,6 @@ describe('gisCoupleOnePenBenefit', () => {
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 71, 174.65, 1297.4, true)
   })
-
   /* CALC-68 */
   it('should pass 68 test - CALC-68', async () => {
     const desiredName = 'CALC-68' // Replace with the desired name
@@ -450,7 +467,7 @@ describe('gisCoupleOnePenBenefit', () => {
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 461.4)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 983.28)
+    expectGisEligible(res, 983.29)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
@@ -458,7 +475,11 @@ describe('gisCoupleOnePenBenefit', () => {
     expectFutureOasGisBenefitEligible(res, 74, 461.39, 400.65)
 
     //partner results
-    expectAllIneligible(res, true)
+    //partner results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
     //Future Benefit
     expectFutureAwlBenefitEligible(res, 60, 1326.69, true)
     expectFutureOasGisBenefitEligible(res, 74, 698.6, 1043.45, true)
@@ -471,19 +492,22 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
     const deferralTable = [
       { age: 67, amount: 459.53 },
-      { age: 68, amount: 488.47 },
-      { age: 69, amount: 517.39 },
+      { age: 68, amount: 488.46 },
+      { age: 69, amount: 517.38 },
       { age: 70, amount: 546.31 },
     ]
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 452.31)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 1340.35)
+    expectGisEligible(res, 1340.36)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 
   /* CALC-70 */
@@ -500,6 +524,9 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectAllIneligible(res, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0)
+    expectGisEligible(res, 0.0)
+    expectAlwTooOld(res, true)
+    expectAlwsMarital(res, true)
   })
 })

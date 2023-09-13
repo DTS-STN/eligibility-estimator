@@ -39,7 +39,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -62,7 +62,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1077.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -88,7 +88,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 857.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -114,7 +114,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 759.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -143,7 +143,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 582.3, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -165,7 +165,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 241.3, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -188,7 +188,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 228.30, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -210,7 +210,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 24.3, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -233,7 +233,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 0.0, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -256,7 +256,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 0.0, true)
       expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.INCOME)
       expectAlwsMarital(res, true)
@@ -271,9 +271,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 1326.69)
       expectAlwsMarital(res)
        //Future Benefit
@@ -306,9 +306,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 857.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -329,9 +329,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 756.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -352,9 +352,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
      //client results
-     expectOasEligible(res)
-     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-     expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+     expectOasNotEligible(res)
+     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+     expectGisNotEligible(res, ResultReason.OAS)
      expectAlwEligible(res, 582.3)
      expectAlwsMarital(res)
      //Future Benefit
@@ -375,9 +375,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
      //client results
-     expectOasEligible(res)
-     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-     expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+     expectOasNotEligible(res)
+     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+     expectGisNotEligible(res, ResultReason.OAS)
      expectAlwEligible(res, 241.3)
      expectAlwsMarital(res)
      //Future Benefit
@@ -398,9 +398,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 228.3)
       expectAlwsMarital(res)
       //Future Benefit
@@ -421,9 +421,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 24.3)
       expectAlwsMarital(res)
       //Future Benefit
@@ -444,9 +444,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 0.0)
       expectAlwsMarital(res)
       //Future Benefit
@@ -467,9 +467,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 0.0)
       expectAlwsMarital(res)
       //Future Benefit
@@ -500,7 +500,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -524,7 +524,7 @@ import { mockGetRequest } from '../../utils/factory'
      
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1200.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -551,7 +551,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 12137.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -575,7 +575,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -604,7 +604,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 582.3, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -626,7 +626,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -646,7 +646,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 228.3, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -668,7 +668,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 656.90, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -688,7 +688,7 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 0.0, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -701,14 +701,14 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 261.28)
-      expectGisEligible(res, 297.16)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 261.27)
+      expectGisEligible(res, 297.17)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
 
       //partner results
       expectOasNotEligible(res, true)
-      expectGisNotEligible(res,ResultReason.AGE_YOUNG, true)
+      expectGisNotEligible(res,ResultReason.OAS, true)
       expectAlwEligible(res, 399.3, true)
       expectAlwsMarital(res, true)
       //Future Benefit
@@ -721,9 +721,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 1326.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -744,9 +744,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 1200.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -767,9 +767,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 1077.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -790,9 +790,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 759.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -813,9 +813,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 1326.69)
       expectAlwsMarital(res)
       //Future Benefit
@@ -836,9 +836,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 241.3)
       expectAlwsMarital(res)
       //Future Benefit
@@ -859,9 +859,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 228.3)
       expectAlwsMarital(res)
       //Future Benefit
@@ -882,9 +882,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 232.30)
       expectAlwsMarital(res)
       //Future Benefit
@@ -905,9 +905,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
      //client results
-     expectOasEligible(res)
-     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-     expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+     expectOasNotEligible(res)
+     expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+     expectGisNotEligible(res, ResultReason.OAS)
      expectAlwEligible(res, 0.0)
      expectAlwsMarital(res)
      //Future Benefit
@@ -928,9 +928,9 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res)
-      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE_YOUNG)
-      expectGisNotEligible(res, ResultReason.AGE_YOUNG)
+      expectOasNotEligible(res)
+      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
+      expectGisNotEligible(res, ResultReason.OAS)
       expectAlwEligible(res, 235.3)
       expectAlwsMarital(res)
       //Future Benefit

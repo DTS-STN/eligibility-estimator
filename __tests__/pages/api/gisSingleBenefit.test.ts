@@ -12,7 +12,7 @@ import {
 } from '../../utils/expectUtils'
 import { getTransformedPayloadByName } from '../../utils/excelReaderUtil'
 
-describe('OasBenefit', () => {
+describe('gisSingleBenefit', () => {
   //file for extracting test data
   const filePath = '__tests__/utils/ScenariosWith2023Q3RatesAndThresholds.xlsx'
 

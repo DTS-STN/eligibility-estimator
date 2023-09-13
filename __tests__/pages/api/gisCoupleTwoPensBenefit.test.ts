@@ -44,7 +44,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 743.31)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 743.31)
     expectGisEligible(res, 580.02)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -133,7 +133,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 779.64)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 779.64)
     expectGisEligible(res, 0.0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
@@ -287,7 +287,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 817.64)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 817.64)
     expectGisEligible(res, 998.47)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
@@ -332,7 +332,7 @@ describe('gisCoupleTwoPensBenefit', () => {
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 681.14, true)
-    expectGisEligible(res, 1060.91, true)
+    expectGisEligible(res, 1060.92, true)
     expectAlwTooOld(res, true)
     expectAlwsMarital(res, true)
   })
@@ -363,7 +363,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 857.60)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 857.60)
     expectGisEligible(res, 0.0)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)

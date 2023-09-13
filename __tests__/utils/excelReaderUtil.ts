@@ -39,17 +39,11 @@ function readExcelData(filePath: string): string[] {
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   const payload: Record<string, any> = {
     incomeAvailable:
-      rowToTransform["User's Net Worldwide Income"] === 'N/A' ||
-      rowToTransform["User's Net Worldwide Income"] === ''
-        ? false
-        : true, // Replace 'N/A' or empty with false
-    income: rowToTransform["User's Net Worldwide Income"],
+      rowToTransform["User's Net Worldwide Income"] === 'N/A' ? false : true, // Replace 'N/A' or empty with false
+    income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
     age: rowToTransform['Age '],
     oasDefer:
-      rowToTransform['Delay (# of Years and Months)'] === 'N/A' ||
-      rowToTransform['Delay (# of Years and Months)'] === ''
-        ? false
-        : true, // Replace 'N/A' or empty with false
+      rowToTransform['Delay (# of Years and Months)'] === 'N/A' ? false : true, // Replace 'N/A' or empty with false
     oasAge: claculOasAge(
       extractFirstCharacterAfterSemicolon(
         rowToTransform['Delay (# of Years and Months)']
@@ -57,8 +51,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     ),
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
-      rowToTransform['Delay (# of Years and Months)'] === 'N/A' ||
-      rowToTransform['Delay (# of Years and Months)'] === ''
+      rowToTransform['Delay (# of Years and Months)'] === 'N/A'
         ? undefined
         : '{"years":' +
           extractValueBeforeSemicolon(
@@ -103,32 +96,25 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             rowToTransform[
               '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
             ],
-            rowToTransform[
-              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-            ],
-            rowToTransform['Delay (# of Years and Months)']
+            extractFirstCharacterAfterSemicolon(
+              rowToTransform['Delay (# of Years and Months)']
+            )
           ),
     everLivedSocialCountry: false, // check with vero
     partnerBenefitStatus:
-      rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === 'N/A' ||
-      rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === ''
-        ? PartnerBenefitStatus.OAS_GIS //undefined
+      rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"] === 'N/A'
+        ? undefined
         : transformPartnerBenefitStatusValue(
             rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
           ),
     partnerIncomeAvailable:
-      rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ||
-      rowToTransform["Partner's Net Worldwide Income"] === ''
-        ? undefined
-        : true, // Convert to true if value exists
+      rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ? false : true, // Convert to true if value exists
     partnerIncome:
-      rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ||
-      rowToTransform["Partner's Net Worldwide Income"] === ''
+      rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
         ? undefined
         : rowToTransform["Partner's Net Worldwide Income"], // partner income
     partnerAge:
-      rowToTransform["Partner's Age (Years and months)"] === 'N/A' ||
-      rowToTransform["Partner's Age (Years and months)"] === ''
+      rowToTransform["Partner's Age (Years and months)"] === 'N/A'
         ? undefined
         : rowToTransform["Partner's Age (Years and months)"],
     partnerLivingCountry: transformLivingContryValue(
@@ -229,20 +215,32 @@ function claculOasAge(durationStr: string): number | undefined {
   }
   return oasAge
 }
+function roundedIncome(numberToRound: number): number {
+
+  const roundedNumber = numberToRound.toFixed(2)
+  return Number(roundedNumber)
+}
 
 function claculYearsInCanadaSince18(
   yearsInCanadaSince18: string,
-  yearsInCanadaSinceOAS: string,
   oasDeferDuration: string
 ): number | undefined {
-  const yearsInCanada =
-    Number(yearsInCanadaSinceOAS) || Number(yearsInCanadaSince18)
+  const yearsInCanada = Number(yearsInCanadaSince18)
   if (oasDeferDuration && oasDeferDuration.toString().toUpperCase() !== 'N/A') {
-    const deferralDuration = JSON.parse(oasDeferDuration)
-    const deferralYrs = deferralDuration.years
-    const deferralMonths = deferralDuration.months
+    const deferralDuration: MonthsYears = JSON.parse(oasDeferDuration)
+    if (
+      deferralDuration.months === undefined &&
+      deferralDuration.years === undefined
+    ) {
+      return yearsInCanada
+    } else {
+      consoleDev('oasDeferDuration: ' + oasDeferDuration)
 
-    return yearsInCanada - (deferralYrs + deferralMonths / 12)
+      const deferralYrs = deferralDuration.years
+      const deferralMonths = deferralDuration.months
+
+      return yearsInCanada - (deferralYrs + deferralMonths / 12)
+    }
   }
   return yearsInCanada
 }

@@ -152,7 +152,7 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
       list1[i].age != list2[i].age ||
       list1[i].amount.toFixed(2) != list2[i].amount.toFixed(2)
     ) {
-      consoleDev('** age:' + list2[i].age + ', Amount: ' + list2[i].amount)
+      consoleDev('** age:' + list2[i].age + ', ***Amount: ' + list2[i].amount)
       return false
     }
   }
