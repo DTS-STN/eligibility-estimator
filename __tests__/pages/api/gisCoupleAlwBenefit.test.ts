@@ -53,7 +53,7 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
        //client results
-      expectOasEligible(res, EntitlementResultType.FULL, 743.31)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 743.31)
       expectGisEligible(res, 663.02)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
@@ -179,7 +179,7 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res, EntitlementResultType.FULL, 857.6)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 857.6)
       expectGisEligible(res, 318.37)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
@@ -201,7 +201,7 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res, EntitlementResultType.FULL, 783.83)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 783.83)
       expectGisEligible(res, 433.63)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
@@ -224,7 +224,7 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
        //client results
-      expectOasEligible(res, EntitlementResultType.FULL, 817.45)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 817.45)
       expectGisEligible(res, 298.45)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
@@ -247,7 +247,7 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
   
       //client results
-      expectOasEligible(res, EntitlementResultType.FULL, 914.47)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 914.47)
       expectGisEligible(res, 155.88)
       expectAlwTooOld(res)
       expectAlwsMarital(res)

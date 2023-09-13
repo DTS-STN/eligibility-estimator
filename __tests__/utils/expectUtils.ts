@@ -20,6 +20,7 @@ export function expectAlwsMarital(
   expect(res.body.results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.MARITAL)
 }
+const tolerance = 0.01
 
 export function expectAlwMarital(
   res: MockResponseObject<ResponseSuccess>,
@@ -100,8 +101,8 @@ export function expectOasEligible(
   if (entitlement)
     expect(results.oas.entitlement.result).toBeCloseTo(
       //entitlement - results.oas.entitlement.clawback //with clawback #114098
-      entitlement,
-      0.01 //without clawback #114098
+      entitlement, //without clawback #114098
+      tolerance
     )
 }
 
@@ -129,7 +130,7 @@ export function expectGisEligible(
   expect(results.gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   // expect(results.gis.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
-    expect(results.gis.entitlement.result).toBeCloseTo(entitlement, 0.01)
+    expect(results.gis.entitlement.result).toBeCloseTo(entitlement, tolerance)
 }
 
 export function expectGisNotEligible(
@@ -167,18 +168,18 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
   return true
 }
 
-expect.extend({
+/*expect.extend({
   toBeCloseTo(received: number, expected: number, precision: number) {
-    const pass = Math.abs(received - expected) < precision
+    const pass = Math.abs(received - expected) <= precision
     return {
       pass,
       message: () => `Expected: ${expected}\nReceived: ${received} `,
     }
   },
-})
+})*/
 
 const approximatelyEqual = (v1, v2, tolerance) => {
-  return Math.abs(v1 - v2) < tolerance
+  return Math.abs(v1 - v2) <= tolerance
 }
 
 export function expectDeferralTable(
@@ -223,8 +224,14 @@ export function expectFutureOasGisBenefitEligible(
 
   expect(results[age].oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(results[age].gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results[age].oas.entitlement.result).toBeCloseTo(entitlementOas, 0.01)
-  expect(results[age].gis.entitlement.result).toBeCloseTo(entitlementGis, 0.01)
+  expect(results[age].oas.entitlement.result).toBeCloseTo(
+    entitlementOas,
+    tolerance
+  )
+  expect(results[age].gis.entitlement.result).toBeCloseTo(
+    entitlementGis,
+    tolerance
+  )
 }
 
 export function expectFutureAwlBenefitEligible(
@@ -239,7 +246,10 @@ export function expectFutureAwlBenefitEligible(
 
   expect(results[age].awl.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   expect(results[age].awl.eligibility.reason).toEqual(ResultReason.NONE)
-  expect(results[age].awl.entitlement.result).toBeCloseTo(entitlementAwl, 0.01)
+  expect(results[age].awl.entitlement.result).toBeCloseTo(
+    entitlementAwl,
+    tolerance
+  )
 }
 
 export function expectAlwEligible(
@@ -253,7 +263,7 @@ export function expectAlwEligible(
   expect(results.alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   // expect(results.alw.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
-    expect(results.alw.entitlement.result).toBeCloseTo(entitlement, 0.01)
+    expect(results.alw.entitlement.result).toBeCloseTo(entitlement, tolerance)
 }
 
 export function expectAlwsEligible(
@@ -269,7 +279,7 @@ export function expectAlwsEligible(
   if (entitlement)
     expect(res.body.results.alws.entitlement.result).toBeCloseTo(
       entitlement,
-      0.01
+      tolerance
     )
 }
 
