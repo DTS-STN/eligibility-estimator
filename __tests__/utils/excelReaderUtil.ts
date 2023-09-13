@@ -104,8 +104,8 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
     ),
-    partnerIncomeAvailable:
-      rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ? false : true, // Convert to true if value exists
+   /* partnerIncomeAvailable:
+      rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ? false : true, // Convert to true if value exists*/
     partnerIncome:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
         ? undefined
