@@ -387,7 +387,9 @@ export class BenefitHandler {
       const yearsInCanada =
         Number(this.input.client.yearsInCanadaSinceOAS) ||
         Number(this.input.client.yearsInCanadaSince18)
-      const deferralDuration = JSON.parse(this.input.client.oasDeferDuration)
+      const oasDefer =
+        this.input.client.oasDeferDuration || '{"months":0,"years":0}'
+      const deferralDuration = JSON.parse(oasDefer)
       const deferralYrs = deferralDuration.years
       const deferralMonths = deferralDuration.months
 
