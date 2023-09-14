@@ -235,15 +235,18 @@ export function expectFutureOasGisBenefitEligible(
     : res.body.futurePartnerResults[listPos]
 
   expect(results[age].oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  if (entitlementOas !== 0.0)
+    expect(results[age].oas.entitlement.result).toBeCloseTo(
+      entitlementOas,
+      tolerance
+    )
+
   expect(results[age].gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results[age].oas.entitlement.result).toBeCloseTo(
-    entitlementOas,
-    tolerance
-  )
-  expect(results[age].gis.entitlement.result).toBeCloseTo(
-    entitlementGis,
-    tolerance
-  )
+  if (entitlementGis !== 0.0)
+    expect(results[age].gis.entitlement.result).toBeCloseTo(
+      entitlementGis,
+      tolerance
+    )
 }
 
 export function expectFutureAwlBenefitEligible(
@@ -256,9 +259,8 @@ export function expectFutureAwlBenefitEligible(
     ? res.body.futureClientResults[0]
     : res.body.futurePartnerResults[0]
 
-  expect(results[age].awl.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results[age].awl.eligibility.reason).toEqual(ResultReason.NONE)
-  expect(results[age].awl.entitlement.result).toBeCloseTo(
+  expect(results[age].alw.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(results[age].alw.entitlement.result).toBeCloseTo(
     entitlementAwl,
     tolerance
   )

@@ -1,16 +1,10 @@
-import { faBullseye } from '@fortawesome/free-solid-svg-icons'
-import { any, boolean, number } from 'joi'
-import { isUndefined } from 'lodash'
 import * as XLSX from 'xlsx'
-import { getLogger } from '../../logging/log-util'
 import {
   LegalStatus,
   LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
-import { MonthsYears } from '../../utils/api/definitions/types'
-import { consoleDev } from '../../utils/web/helpers/utils'
 
 export function getTransformedPayloadByName(
   filePath: string,
@@ -19,7 +13,7 @@ export function getTransformedPayloadByName(
   const data = readExcelData(filePath)
   const rowToTransform = data.find((row) => row['Scenario'] === testName) // Assuming "testName" column is represented by "Column1"
 
-  console.log('Extracted rowToTransform:', rowToTransform)
+  //console.log('Extracted rowToTransform:', rowToTransform)
 
   if (rowToTransform) {
     const transformedPayload = createTransformedPayload(rowToTransform)
@@ -44,7 +38,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
-        ? undefined
+        ? ''
         : '{"years":' +
           extractValueBeforeSemicolon(
             rowToTransform['Delay (# of Years and Months)']
@@ -54,6 +48,8 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             rowToTransform['Delay (# of Years and Months)']
           ) +
           '}',
+    oasDefer: false, // no longer used.
+    oasAge: 0,
     maritalStatus: transformMaritalStatusValue(
       rowToTransform['Marital Status\r\n(With or Without Partner, Widowed)']
     ),
@@ -69,34 +65,46 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
         '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
       ]
     ),
-    yearsInCanadaSinceOAS:
-      transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === true
-        ? transformYearsInCanadaSinceOAS18Value(
-            rowToTransform[
-              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-            ]
-          )
-        : undefined,
     yearsInCanadaSince18:
-      transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false ||
-      transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === undefined
-        ? transformYearsInCanadaSinceOAS18Value(
-            rowToTransform[
-              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-            ]
-          )
-        : undefined,
-    //everLivedSocialCountry: false, // check with vero
+      transformLiveOnlyCanadaValue(
+        rowToTransform[
+          '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+        ]
+      ) !== true
+        ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false ||
+          transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === undefined
+          ? transformYearsInCanadaSinceOAS18Value(
+              rowToTransform[
+                '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+              ]
+            )
+          : 0
+        : 0,
+    yearsInCanadaSinceOAS:
+      transformLiveOnlyCanadaValue(
+        rowToTransform[
+          '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+        ]
+      ) !== true
+        ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === true
+          ? transformYearsInCanadaSinceOAS18Value(
+              rowToTransform[
+                '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+              ]
+            )
+          : 0
+        : 0,
+    everLivedSocialCountry: false, // check with vero
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
     ),
     partnerIncome:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
-        ? undefined
+        ? 0
         : rowToTransform["Partner's Net Worldwide Income"], // partner income
     partnerAge:
       rowToTransform["Partner's Age (Years and months)"] === 'N/A'
-        ? undefined
+        ? 0
         : rowToTransform["Partner's Age (Years and months)"],
     partnerLivingCountry: transformLivingContryValue(
       rowToTransform["Partner's Country of Residence (Canada, Not Canada)"]
@@ -115,7 +123,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       ]
     ),
   }
-  console.log('payload:', payload)
+  //console.log('payload:', payload)
   return payload
 }
 
@@ -136,16 +144,16 @@ function transformLivingContryValue(value: string): string | undefined {
     return LivingCountry.AGREEMENT
   }
 
-  return undefined
+  return ''
 }
 
 function transformYearsInCanadaSinceOAS18Value(
   value: string
 ): number | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
-    return undefined
+    return 40
   } else if (value.toString().toUpperCase() === 'N/A') {
-    return undefined
+    return 0
   }
 
   return Number(value)
@@ -157,7 +165,7 @@ function transformLegalStatusValue(value: string): string | undefined {
   } else if (value.toString().toUpperCase() === 'NO') {
     return LegalStatus.NO
   }
-  return undefined
+  return LegalStatus.NO
 }
 
 function transformMaritalStatusValue(value: string): string | undefined {
@@ -178,7 +186,7 @@ function transformLiveOnlyCanadaValue(value: string): boolean | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
     return true
   } else if (value.toString().toUpperCase() === 'N/A') {
-    return undefined
+    return false
   }
   return false
 }
