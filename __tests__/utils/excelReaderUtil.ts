@@ -39,17 +39,8 @@ function readExcelData(filePath: string): string[] {
 
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   const payload: Record<string, any> = {
-    /*  incomeAvailable:
-      rowToTransform["User's Net Worldwide Income"] === 'N/A' ? false : true, // Replace 'N/A' or empty with false*/
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
     age: rowToTransform['Age '],
-    /*oasDefer:
-      rowToTransform['Delay (# of Years and Months)'] === 'N/A' ? false : true, // Replace 'N/A' or empty with false
-    oasAge: claculOasAge(
-      extractFirstCharacterAfterSemicolon(
-        rowToTransform['Delay (# of Years and Months)']
-      )
-    ),*/
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
@@ -99,8 +90,6 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
     ),
-    /* partnerIncomeAvailable:
-      rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ? false : true, // Convert to true if value exists*/
     partnerIncome:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
         ? undefined
@@ -154,7 +143,7 @@ function transformYearsInCanadaSinceOAS18Value(
   value: string
 ): number | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
-    return 40
+    return undefined
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
   }
@@ -194,46 +183,9 @@ function transformLiveOnlyCanadaValue(value: string): boolean | undefined {
   return false
 }
 
-function claculOasAge(durationStr: string): number | undefined {
-  let oasAge = 65
-  if (durationStr && durationStr.toString().toUpperCase() !== 'N/A') {
-    const duration: MonthsYears = JSON.parse(durationStr)
-    if (duration.months === undefined && duration.years === undefined) {
-      oasAge
-    } else {
-      const durationFloat = duration.years + duration.months / 12
-      oasAge = 65 + durationFloat
-    }
-  }
-  return oasAge
-}
 function roundedIncome(numberToRound: number): number {
   const roundedNumber = numberToRound.toFixed(2)
   return Number(roundedNumber)
-}
-
-function claculYearsInCanadaSince18(
-  yearsInCanadaSince18: string,
-  oasDeferDuration: string
-): number | undefined {
-  const yearsInCanada = Number(yearsInCanadaSince18)
-  if (oasDeferDuration && oasDeferDuration.toString().toUpperCase() !== 'N/A') {
-    const deferralDuration: MonthsYears = JSON.parse(oasDeferDuration)
-    if (
-      deferralDuration.months === undefined &&
-      deferralDuration.years === undefined
-    ) {
-      return yearsInCanada
-    } else {
-      consoleDev('oasDeferDuration: ' + oasDeferDuration)
-
-      const deferralYrs = deferralDuration.years
-      const deferralMonths = deferralDuration.months
-
-      return yearsInCanada - (deferralYrs + deferralMonths / 12)
-    }
-  }
-  return yearsInCanada
 }
 
 function transformPartnerBenefitStatusValue(value: string): String {
