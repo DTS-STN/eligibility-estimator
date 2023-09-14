@@ -364,8 +364,10 @@ export class BenefitHandler {
       const partnerEliObj = OasEligibility(
         this.input.partner.age,
         this.input.partner.yearsInCanadaSince18,
-        this.input.partner.livedOnlyInCanada
+        this.input.partner.livedOnlyInCanada,
+        this.rawInput.partnerLivingCountry
       )
+
       if (this.input.partner.age > partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
           this.input.partner.age = partnerEliObj.ageOfEligibility

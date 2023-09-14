@@ -202,12 +202,13 @@ export function calculateAge(birthMonth: number, birthYear: number): number {
 export function OasEligibility(
   ageAtStart,
   yearsInCanadaAtStart,
-  livedOnlyInCanada = false
+  livedOnlyInCanada = false,
+  livingCountry = 'CAN'
 ) {
   let age = ageAtStart
   let yearsInCanada = yearsInCanadaAtStart
   const minAgeEligibility = 65
-  const minYearsOfResEligibility = 10
+  const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
 
   let ageOfEligibility
   let yearsOfResAtEligibility
