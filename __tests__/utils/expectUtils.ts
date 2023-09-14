@@ -139,7 +139,11 @@ export function expectGisNotEligible(
   partner?: boolean
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
-  if (reason) expect(res.body.results.gis.eligibility.reason).toEqual(reason)
+
+  if (reason) {
+    expect(res.body.results.gis.eligibility.reason).toEqual(reason)
+  }
+
   expect(results.gis.eligibility.result).not.toEqual(ResultKey.ELIGIBLE)
   expect(results.gis.entitlement.result).toEqual(0)
 }

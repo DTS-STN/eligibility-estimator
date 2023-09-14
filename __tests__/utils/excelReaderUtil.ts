@@ -1,5 +1,6 @@
 import { faBullseye } from '@fortawesome/free-solid-svg-icons'
 import { any, boolean, number } from 'joi'
+import { isUndefined } from 'lodash'
 import * as XLSX from 'xlsx'
 import { getLogger } from '../../logging/log-util'
 import {
@@ -86,25 +87,19 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
           )
         : undefined,
     yearsInCanadaSince18:
-      transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false
+      transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false ||
+      transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === undefined
         ? transformYearsInCanadaSinceOAS18Value(
             rowToTransform[
               '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
             ]
           )
-        : claculYearsInCanadaSince18(
-            rowToTransform[
-              '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-            ],
-            extractFirstCharacterAfterSemicolon(
-              rowToTransform['Delay (# of Years and Months)']
-            )
-          ),
-    everLivedSocialCountry: false, // check with vero
+        : undefined,
+    //everLivedSocialCountry: false, // check with vero
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
     ),
-   /* partnerIncomeAvailable:
+    /* partnerIncomeAvailable:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A' ? false : true, // Convert to true if value exists*/
     partnerIncome:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
