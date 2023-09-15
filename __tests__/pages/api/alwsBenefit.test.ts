@@ -18,6 +18,7 @@ describe('AlwsBenefit', () => {
   //file for extracting test data
   const filePath = '__tests__/utils/ScenariosWith2023Q3RatesAndThresholds.xlsx'
 
+  // TEST FAILED THE CLIENT SHOULD RECEIVE HIS BENEFIT AT 65 INSTEAD IS AT 71
   /* CALC-017  */
   it('should pass the sanity test 17 - CALC-17', async () => {
     const desiredName = 'CALC-17' // Replace with the desired name
@@ -40,7 +41,7 @@ describe('AlwsBenefit', () => {
     expectAlwsEligible(res, 1581.51)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0)
     expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
   /* CALC-018  */
@@ -64,7 +65,7 @@ describe('AlwsBenefit', () => {
     expectAlwMarital(res, true)
     expectAlwsEligible(res, 1458.51)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45, 0)
     expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
@@ -89,7 +90,7 @@ describe('AlwsBenefit', () => {
     expectAlwMarital(res)
     expectAlwsEligible(res, 811.51)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 476.45)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 476.45,0)
     expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
@@ -114,7 +115,7 @@ describe('AlwsBenefit', () => {
     expectAlwMarital(res)
     expectAlwsEligible(res, 723.88)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.82)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.82, 0)
     expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
@@ -140,7 +141,7 @@ describe('AlwsBenefit', () => {
     expectAlwMarital(res)
     expectAlwsEligible(res, 539.28)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 233.82)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 233.82, 0)
     expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 
@@ -165,7 +166,7 @@ describe('AlwsBenefit', () => {
     expectAlwMarital(res)
     expectAlwsEligible(res, 0)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0)
     expectFutureDeferralTable(res, 65, futureDeferralTable)
   })
 })

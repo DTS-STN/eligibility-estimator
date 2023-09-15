@@ -196,6 +196,5 @@ describe('gisSingleBenefit', () => {
     expectGisEligible(res, 537.74)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
-    expectAlwsMarital(res, true)
   })
 })

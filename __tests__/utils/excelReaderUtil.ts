@@ -79,7 +79,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
               ]
             )
           : 0
-        : 0,
+        : undefined,
     yearsInCanadaSinceOAS:
       transformLiveOnlyCanadaValue(
         rowToTransform[
@@ -93,7 +93,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
               ]
             )
           : 0
-        : 0,
+        : undefined,
     everLivedSocialCountry: false, // check with vero
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
@@ -134,7 +134,7 @@ function transformValue(value: string): boolean | undefined {
     return false
   }
 
-  return undefined
+  return false
 }
 
 function transformLivingContryValue(value: string): string | undefined {

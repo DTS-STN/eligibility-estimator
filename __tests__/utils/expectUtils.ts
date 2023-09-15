@@ -178,16 +178,6 @@ function areListsEqual(list1: TableData[], list2: TableData[]): boolean {
   return true
 }
 
-/*expect.extend({
-  toBeCloseTo(received: number, expected: number, precision: number) {
-    const pass = Math.abs(received - expected) <= precision
-    return {
-      pass,
-      message: () => `Expected: ${expected}\nReceived: ${received} `,
-    }
-  },
-})*/
-
 const approximatelyEqual = (v1, v2, tolerance) => {
   return Math.abs(v1 - v2) <= tolerance
 }

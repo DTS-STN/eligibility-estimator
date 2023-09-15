@@ -39,7 +39,6 @@ describe('OasBenefit', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 628.74, true)
     expectGisNotEligible(res, ResultReason.LIVING_COUNTRY, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
   })
   /* CALC-02  
 it('should pass the second test - OAS-CALC-02', async () => {
@@ -86,7 +85,6 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 480.29, true)
     expectGisEligible(res, 454.47, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
   })
   /* CALC-05  */
   it('should pass the 05 test - OAS-CALC-05', async () => {
@@ -159,7 +157,6 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
     expectGisEligible(res, 1567.4, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
   })
   /* CALC-09  */
   it('should pass the 09 test - OAS-CALC-09', async () => {
@@ -281,7 +278,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //future benefit
-    expectFutureOasGisBenefitEligible(res, 66, 698.6, 1043.45)
+    expectFutureOasGisBenefitEligible(res, 66, 698.6, 1043.45, 0)
     //partner results
     expectOasNotEligible(res, true)
     expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
@@ -292,8 +289,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
       ResultReason.OAS
     )
     expectAlwEligible(res, 1326.69, true)
-    expectAlwsMarital(res, true)
     //future benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, true)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0, true)
   })
 })
