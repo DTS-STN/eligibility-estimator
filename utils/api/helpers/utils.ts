@@ -202,12 +202,13 @@ export function calculateAge(birthMonth: number, birthYear: number): number {
 export function OasEligibility(
   ageAtStart,
   yearsInCanadaAtStart,
-  livedOnlyInCanada = false
+  livedOnlyInCanada = false,
+  livingCountry = 'CAN'
 ) {
   let age = ageAtStart
   let yearsInCanada = yearsInCanadaAtStart
   const minAgeEligibility = 65
-  const minYearsOfResEligibility = 10
+  const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
 
   let ageOfEligibility
   let yearsOfResAtEligibility
@@ -297,6 +298,7 @@ export function evaluateOASInput(input) {
     age > eliObj.ageOfEligibility
       ? input.yearsInCanadaSince18 - ageDiff
       : input.yearsInCanada + ageDiff
+
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
     newInput['inputAge'] = input.age
@@ -304,7 +306,7 @@ export function evaluateOASInput(input) {
     newInput['receiveOAS'] = true
     newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
       ? 40
-      : Math.min(40, Math.round(newYearsInCan))
+      : Math.min(40, Math.floor(newYearsInCan))
     newInput['oasDeferDuration'] = JSON.stringify({
       months: Math.round(deferralMonths),
       years: 0,
