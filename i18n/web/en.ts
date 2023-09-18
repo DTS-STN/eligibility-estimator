@@ -1,5 +1,9 @@
 import { WebTranslations } from '.'
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import {
+  ISOLanguage,
+  Language,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
@@ -9,6 +13,7 @@ import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
+  metaLanguage: ISOLanguage.EN,
 
   oas: 'Old Age Security pension',
   gis: 'Guaranteed Income Supplement',
@@ -42,6 +47,10 @@ const en: WebTranslations = {
   breadcrumb5Title: 'Old Age Security payment amounts',
   breadcrumb5URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
+  breadcrumb6Title: 'Old Age Security Benefits Estimator',
+  breadcrumb6URL: '/en',
+  breadcrumb7Title: 'Questions',
+  breadcrumb7URL: '/en/questions',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   introPageOASHeading: 'Old Age Security benefits',
@@ -56,7 +65,7 @@ const en: WebTranslations = {
   required: '(required)',
   workInProgress: 'This estimator is a work in progress',
   workInProgressBody:
-    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
+    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=07eef192-0870-426e-bb66-d135936787a7&lc=eng" target="_blank">feedback</a>.',
   homePageP1:
     'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
@@ -109,6 +118,7 @@ const en: WebTranslations = {
     'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
     'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+  dateModified: 'Date modified:',
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',
   footerlink3: 'Treaties, laws and regulations',
@@ -218,6 +228,8 @@ const en: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsSince18Empty]:
       'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.yearsSinceOASEmpty]:
+      'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -246,10 +258,8 @@ const en: WebTranslations = {
       'Your annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.',
     [ValidationErrors.partnerIncomeTooHigh]:
       "The sum of you and your partner's annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.",
-    [ValidationErrors.ageUnder18]:
-      'You must be at least 60 years old to receive Canadian old age benefits.',
-    [ValidationErrors.partnerAgeUnder18]:
-      "Your partner's age must be over 18 to be able to use this tool.",
+    [ValidationErrors.ageUnder18]: 'You must be at least 18.',
+    [ValidationErrors.partnerAgeUnder18]: 'Your partner must be at least 18.',
     [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
     [ValidationErrors.partnerAgeOver150]:
       "Your partner's age should be less than 150.",

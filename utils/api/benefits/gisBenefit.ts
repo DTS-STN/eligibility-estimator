@@ -130,7 +130,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
             detail: this.future
-              ? this.translations.detail.futureEligible65
+              ? this.translations.detail.futureEligible
               : this.translations.detail.eligible,
           }
         }
@@ -181,7 +181,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         type: EntitlementResultType.NONE,
         autoEnrollment,
       }
-
     // income is not provided, and they are eligible depending on income? entitlement unavailable.
     if (
       !this.input.income.provided &&
@@ -238,13 +237,15 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
    * Just the formula to get the amount
    */
   protected formulaResult(): number {
-    return new EntitlementFormula(
+    const gisResult = new EntitlementFormula(
       this.input.income.relevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age,
       this.oasResult
     ).getEntitlementAmount()
+
+    return gisResult
   }
 
   protected getCardLinks(): LinkWithAction[] {
@@ -299,6 +300,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     }
 
     return text
+  }
+
+  public updateCollapsedText(): CardCollapsedText[] {
+    return this.getCardCollapsedText()
   }
 
   protected getCardCollapsedText(): CardCollapsedText[] {

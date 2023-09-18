@@ -61,6 +61,8 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
+      "Combien d'années aviez-vous vécu au Canada lorsque vous avez commencé à recevoir votre pension de la Sécurité de la vieillesse?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
@@ -90,6 +92,7 @@ const fr: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Seulement vécu au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
     [FieldKey.MARITAL_STATUS]: 'État matrimonial',
@@ -120,6 +123,8 @@ const fr: Translations = {
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       'Modifier si vous avez seulement vécu au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'Modifier le nombre d’années vécues au Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Modifier le nombre d’années vécues au Canada',
     [FieldKey.MARITAL_STATUS]: 'Modifier votre état matrimonial',
     [FieldKey.INV_SEPARATED]:
@@ -155,10 +160,12 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_DEFER_DURATION]:
-      'Si vous n’avez pas reporté votre pension, passez à l’étape suivante.',
+      "Si vous n'avez pas reporté votre pension, passez à l'étape suivante.",
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
+      "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
@@ -321,8 +328,8 @@ const fr: Translations = {
     eligible: 'Vous êtes probablement admissible à cette prestation.',
     futureEligible60:
       'Vous serez probablement admissible lorsque vous aurez 60 ans.',
-    futureEligible65:
-      'Vous serez probablement admissible lorsque vous aurez 65 ans.',
+    futureEligible:
+      'Vous serez probablement admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE} ans.',
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     futureEligibleIncomeTooHigh:
@@ -338,10 +345,11 @@ const fr: Translations = {
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     yourDeferralOptions: 'Vos options de report',
+    retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
-      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
+      "Vous pouvez commencer à recevoir vos paiements à {EARLIEST_ELIGIBLE_AGE} ans ou attendre d'avoir 70 ans.",
     youCanAply:
       'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
     delayMonths:
@@ -394,7 +402,7 @@ const fr: Translations = {
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.',
+      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire. ',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -425,7 +433,7 @@ const fr: Translations = {
       automaticallyBePaid:
         'Vous recevrez automatiquement des paiements si votre revenu est admissible.',
       youWillReceiveLetter:
-        "Vous devriez recevoir une lettre au sujet de votre status d'inscription le mois après votre 64e anniversaire.",
+        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
@@ -440,6 +448,10 @@ const fr: Translations = {
         "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
         "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+      chooseToDefer:
+        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
+      receivePayment:
+        'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     gis: {
       eligibleDependingOnIncomeNoEntitlement:
@@ -484,7 +496,8 @@ const fr: Translations = {
       text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10 %.',
     },
     calculatedBasedOnIndividualIncome: {
-      heading: 'Les montants ont été calculés à partir du revenu individuel',
+      heading:
+        'Certains montants ont été calculés à partir du revenu individuel',
       text: 'Parce que vous ne vivez pas avec votre conjoint pour des raisons hors de votre contrôle, vous pouvez recevoir des paiements mensuels plus élevés.',
     },
     partnerEligible: {

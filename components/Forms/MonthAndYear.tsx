@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { FormDatePicker } from '@dts-stn/service-canada-design-system'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
-import { useSessionStorage } from 'react-use'
 import { WebTranslations } from '../../i18n/web'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { calculateAge } from '../../utils/api/helpers/utils'
 import { QuestionLabel } from './QuestionLabel'
 import { useTranslation } from '../Hooks'
 import Age from './Age'
@@ -79,7 +78,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     setDateInput(newDate)
 
     const ageObj = {
-      value: String(BenefitHandler.calculateAge(newDate.month, newDate.year)),
+      value: String(calculateAge(newDate.month, newDate.year)),
       date: newDate,
     }
     baseOnChange(JSON.stringify(ageObj))

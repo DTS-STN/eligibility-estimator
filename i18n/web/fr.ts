@@ -1,6 +1,10 @@
 // noinspection SpellCheckingInspection
 import { WebTranslations } from '.'
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import {
+  ISOLanguage,
+  Language,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import {
   generateLink,
   getMaxYear,
@@ -10,6 +14,7 @@ import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
+  metaLanguage: ISOLanguage.FR,
 
   oas: 'Pension de la Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
@@ -43,6 +48,11 @@ const fr: WebTranslations = {
   breadcrumb5Title: 'Montant des paiements de la Sécurité de la vieillesse',
   breadcrumb5URL:
     'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
+  breadcrumb6Title:
+    'Estimateur des prestations de la Sécurité de la vieillesse',
+  breadcrumb6URL: '/fr',
+  breadcrumb7Title: 'Questions',
+  breadcrumb7URL: '/fr/questions',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
@@ -59,7 +69,7 @@ const fr: WebTranslations = {
   required: '(obligatoire)',
   workInProgress: 'Cet estimateur est un travail en cours',
   workInProgressBody:
-    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
+    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=07eef192-0870-426e-bb66-d135936787a7&lc=fra" target="_blank">rétroaction</a>.',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
@@ -113,6 +123,7 @@ const fr: WebTranslations = {
     "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
   homePageP6:
     "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
+  dateModified: 'Date de modification :',
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
   footerlink3: 'Traités, lois et règlements',
@@ -224,6 +235,8 @@ const fr: WebTranslations = {
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.yearsSinceOASEmpty]:
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -253,10 +266,9 @@ const fr: WebTranslations = {
       "Votre revenu annuel doit être inférieur à {OAS_MAX_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
     [ValidationErrors.partnerIncomeTooHigh]:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
-    [ValidationErrors.ageUnder18]:
-      'Vous devez avoir au moins 60 ans pour recevoir des des prestations de vieillesse canadiennes.',
+    [ValidationErrors.ageUnder18]: 'Vous devez avoir au moins 18 ans.',
     [ValidationErrors.partnerAgeUnder18]:
-      "L'âge de votre partenaire doit être supérieur à 18 ans pour pouvoir utiliser cet outil.",
+      'Votre conjoint doit avoir au moins 18 ans.',
     [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
     [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",

@@ -52,7 +52,7 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.invalidAge)
+    .message(ValidationErrors.ageUnder18)
     .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
   receiveOAS: Joi.boolean()
@@ -93,12 +93,18 @@ export const RequestSchema = Joi.object({
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
+  yearsInCanadaSinceOAS: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.yearsSinceOASEmpty })
+    .integer()
+    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
+    .message(ValidationErrors.yearsInCanadaMinusAge),
   everLivedSocialCountry: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
     .custom((value, helpers) => {
       const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
-      if (livingCountry === 'CAN') {
+      if (livingCountry === 'CAN' && yearsInCanadaSince18 !== undefined) {
         if (yearsInCanadaSince18 < 10) {
           return helpers.message({
             custom: value
@@ -108,6 +114,24 @@ export const RequestSchema = Joi.object({
         }
       } else {
         if (yearsInCanadaSince18 < 20) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable20
+              : ValidationErrors.yearsInCanadaNotEnough20,
+          })
+        }
+      }
+      const { yearsInCanadaSinceOAS } = helpers.state.ancestors[0]
+      if (livingCountry === 'CAN' && yearsInCanadaSinceOAS !== undefined) {
+        if (yearsInCanadaSinceOAS < 10) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.socialCountryUnavailable10
+              : ValidationErrors.yearsInCanadaNotEnough10,
+          })
+        }
+      } else {
+        if (yearsInCanadaSinceOAS < 20) {
           return helpers.message({
             custom: value
               ? ValidationErrors.socialCountryUnavailable20
@@ -139,7 +163,7 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
     .min(18)
-    .message(ValidationErrors.invalidAge)
+    .message(ValidationErrors.partnerAgeUnder18)
     .max(getMinBirthYear())
     .message(ValidationErrors.invalidAge),
   partnerLivingCountry: Joi.string()

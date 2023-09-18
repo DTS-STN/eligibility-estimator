@@ -104,6 +104,7 @@ export enum ValidationErrors {
   partnerYearsSince18Empty = 'partnerYearsSince18Empty',
   maritalStatusEmpty = 'maritalStatusEmpty',
   yearsSince18Empty = 'yearsSince18Empty',
+  yearsSinceOASEmpty = 'yearsSinceOASEmpty',
   legalStatusNotSelected = 'legalStatusNotSelected',
   partnerLegalStatusNotSelected = 'partnerLegalStatusNotSelected',
   partnerBenefitStatusEmpty = 'partnerBenefitStatusEmpty',
@@ -142,4 +143,9 @@ export enum Language {
 export enum LanguageCode {
   EN = 'en-CA',
   FR = 'fr-CA',
+}
+
+export enum ISOLanguage {
+  EN = 'eng',
+  FR = 'fra',
 }

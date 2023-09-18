@@ -18,7 +18,7 @@ export const textReplacementRules: TextReplacementRules = {
       handler.translations._language
     )}</strong>`,
   ENTITLEMENT_AMOUNT_FOR_BENEFIT: (handler, benefitResult) =>
-    `<strong>${numberToStringCurrency(
+    `<strong data-cy='benefit-estimate'>${numberToStringCurrency(
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,
@@ -93,6 +93,7 @@ export const textReplacementRules: TextReplacementRules = {
     handler.input.client.maritalStatus.partnered
       ? handler.translations.incomeCombined
       : handler.translations.incomeSingle,
+  EARLIEST_ELIGIBLE_AGE: (handler) => String(handler.rawInput.age),
   LINK_SERVICE_CANADA: (handler) => generateLink(handler.translations.links.SC),
   MY_SERVICE_CANADA: (handler) =>
     generateLink(handler.translations.links.SCAccount),
@@ -114,7 +115,7 @@ export const textReplacementRules: TextReplacementRules = {
   LINK_NON_RESIDENT_TAX: (handler) =>
     generateLink(handler.translations.links.oasNonResidentTax),
   PARTNER_BENEFIT_AMOUNT: (handler, benefitResult) =>
-    `<strong>${numberToStringCurrency(
+    `<strong data-cy='benefit-estimate'>${numberToStringCurrency(
       benefitResult.entitlement.result,
       handler.translations._language
     )}</strong>`,

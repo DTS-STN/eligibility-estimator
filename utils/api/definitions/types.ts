@@ -38,6 +38,7 @@ export interface RequestInput {
   legalStatus: LegalStatus
   livedOnlyInCanada: boolean
   yearsInCanadaSince18: number
+  yearsInCanadaSinceOAS?: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatus
   partnerIncomeAvailable?: boolean
@@ -65,6 +66,7 @@ export interface ProcessedInput {
   legalStatus: LegalStatusHelper
   livedOnlyInCanada: boolean
   yearsInCanadaSince18: number
+  yearsInCanadaSinceOAS?: number
   everLivedSocialCountry: boolean
   partnerBenefitStatus: PartnerBenefitStatusHelper
   invSeparated: boolean
@@ -93,7 +95,14 @@ export interface EntitlementResultOas extends EntitlementResultGeneric {
   result65To74: number
   resultAt75: number
   clawback: number
-  deferral: { age: number; years: number; increase: number }
+  deferral: {
+    age: number
+    years: number
+    increase: number
+    deferred: boolean
+    length: any
+    residency: number
+  }
 }
 
 export type EntitlementResult = EntitlementResultGeneric | EntitlementResultOas

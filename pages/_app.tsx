@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import '../styles/globals.css'
 import Auth from '../components/Layout/Auth'
+import { getLogger } from '../logging/log-util'
 
 function MyApp({
   Component,
@@ -10,7 +11,8 @@ function MyApp({
 }: AppProps) {
   const AuthRequired =
     process.env.APP_ENV !== 'production' && process.env.APP_ENV !== 'alpha'
-
+  const logger = getLogger('app')
+  logger.info('_app started....')
   return (
     <>
       {AuthRequired ? (

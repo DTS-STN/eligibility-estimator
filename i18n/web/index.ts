@@ -1,4 +1,8 @@
-import { Language, ValidationErrors } from '../../utils/api/definitions/enums'
+import {
+  Language,
+  ISOLanguage,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import { Translations } from '../api'
 import en from './en'
 import fr from './fr'
@@ -7,6 +11,7 @@ export const webDictionary = { [Language.EN]: en, [Language.FR]: fr }
 
 export type WebTranslations = {
   _language: Language
+  metaLanguage: ISOLanguage
 
   atLeast60: string
   haveNetIncomeLess: string
@@ -64,6 +69,10 @@ export type WebTranslations = {
   breadcrumb4URL: string
   breadcrumb5Title: string
   breadcrumb5URL: string
+  breadcrumb6Title: string
+  breadcrumb6URL: string
+  breadcrumb7Title: string
+  breadcrumb7URL: string
   title: string
   introPageTitle: string
   introPageOASHeading: string
@@ -84,6 +93,7 @@ export type WebTranslations = {
   homePageP4: string
   homePageP5: string
   homePageP6: string
+  dateModified: string
   footerlink1: string
   footerlink2: string
   footerlink3: string
