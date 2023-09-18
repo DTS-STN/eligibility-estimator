@@ -59,6 +59,8 @@ const en: Translations = {
       'Since the age of 18, have you only lived in Canada?',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years have you lived in Canada?',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
+      'How many years had you lived in Canada when you started receiving your Old Age Security pension?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
@@ -88,6 +90,7 @@ const en: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Country of residence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Only lived in Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years lived in Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: 'Years lived in Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Lived in country with social agreement',
     [FieldKey.MARITAL_STATUS]: 'Marital status',
@@ -115,6 +118,8 @@ const en: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Edit if you have only lived in Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'Edit how long you have lived in Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Edit how long you have lived in Canada',
     [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
     [FieldKey.INV_SEPARATED]: 'Edit your involuntary separation status',
@@ -152,6 +157,8 @@ const en: Translations = {
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "If you're not sure of the exact number, you may enter an estimate.",
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
+      'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "If you're not sure of the exact number, you may enter an estimate.",
   },
