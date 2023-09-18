@@ -14,14 +14,11 @@ import { MockResponseObject } from './factory'
 
 const tolerance = 0.01
 
-export function expectAlwsMarital(
-  res: MockResponseObject<ResponseSuccess>,
-  partner?: boolean
-) {
-  const results = !partner ? res.body.results : res.body.partnerResults
-  expect(results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
-  expect(results.alws.eligibility.reason).toEqual(ResultReason.MARITAL)
+export function expectAlwsMarital(res: MockResponseObject<ResponseSuccess>) {
+  expect(res.body.results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+  expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.MARITAL)
 }
+
 export function expectAlwMarital(
   res: MockResponseObject<ResponseSuccess>,
   partner?: boolean
@@ -55,8 +52,11 @@ export function expectAlwAlwsTooOld(
   const results = !partner ? res.body.results : res.body.partnerResults
   expect(results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(results.alw.eligibility.reason).toEqual(ResultReason.AGE)
-  expect(results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
-  expect(results.alws.eligibility.reason).toEqual(ResultReason.AGE)
+
+  if (!partner) {
+    expect(results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+    expect(results.alws.eligibility.reason).toEqual(ResultReason.AGE)
+  }
 }
 
 export function expectOasGisTooYoung(res: MockResponseObject<ResponseSuccess>) {
@@ -83,12 +83,15 @@ export function expectAllIneligible(
   partner?: boolean
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
+
   expect(res.body.missingFields).toEqual([])
   //expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_INELIGIBLE)
   expect(results.oas.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(results.gis.eligibility.result).toEqual(ResultKey.INELIGIBLE)
   expect(results.alw.eligibility.result).toEqual(ResultKey.INELIGIBLE)
-  expect(results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
+
+  if (!partner)
+    expect(results.alws.eligibility.result).toEqual(ResultKey.INELIGIBLE)
 }
 
 export function expectOasEligible(
@@ -272,16 +275,16 @@ export function expectAlwEligible(
 
 export function expectAlwsEligible(
   res: MockResponseObject<ResponseSuccess>,
-  entitlement?: number,
-  partner?: boolean
+  entitlement?: number
 ) {
-  const results = !partner ? res.body.results : res.body.partnerResults
-
   expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
-  expect(results.alws.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  expect(results.alws.eligibility.reason).toEqual(ResultReason.NONE)
+  expect(res.body.results.alws.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+  expect(res.body.results.alws.eligibility.reason).toEqual(ResultReason.NONE)
   if (entitlement)
-    expect(results.alws.entitlement.result).toBeCloseTo(entitlement, tolerance)
+    expect(res.body.results.alws.entitlement.result).toBeCloseTo(
+      entitlement,
+      tolerance
+    )
 }
 
 export function expectOasGisEligible(
