@@ -332,7 +332,7 @@ describe('OasDEferral', () => {
 
     //partner results
     expectOasNotEligible(res, true)
-    expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+    expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwEligible(res, 503.3, true)
 
     //Future Benefit
