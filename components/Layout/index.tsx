@@ -11,6 +11,7 @@ import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Head } from './Head'
 import { CTA } from '../ResultsPage/CTA'
+import { Breadcrumb } from './Breadcrumb'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -125,9 +126,9 @@ export const Layout: React.VFC<{
             menuProps={menuProps}
             topnavProps={topnavProps}
             searchProps={searchProps}
-            breadCrumbItems={breadcrumbs}
             useParentContainer={true}
           />
+          <Breadcrumb items={breadcrumbs} />
           <Heading
             id="applicationTitle"
             title={title}
