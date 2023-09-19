@@ -186,8 +186,8 @@ const fr: WebTranslations = {
       'Votre conjoint pourrait être admissible à recevoir :',
     total: 'Votre montant total par mois est ',
     futureTotal: 'Votre montant total par mois sera ',
-    partnerTotal: 'Leur montant total par mois est ',
-    futurePartnerTotal: 'Leur montant total par mois sera ',
+    partnerTotal: 'Son montant total par mois est ',
+    futurePartnerTotal: 'Son montant total par mois sera ',
     ifIncomeNotProvided:
       'Cependant, ce montant pourrait être inférieur ou supérieur selon votre revenu.',
     nextSteps:
