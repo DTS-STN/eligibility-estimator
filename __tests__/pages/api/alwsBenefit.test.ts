@@ -4,9 +4,6 @@ import { mockGetRequest } from '../../utils/factory'
 import {
   expectAlwMarital,
   expectAlwsEligible,
-  expectAlwsMarital,
-  expectAlwTooOld,
-  expectDeferralTable,
   expectFutureDeferralTable,
   expectFutureOasGisBenefitEligible,
   expectGisNotEligible,

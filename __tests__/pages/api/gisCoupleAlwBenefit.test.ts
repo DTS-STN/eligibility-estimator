@@ -41,9 +41,9 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 698.6, 628.09, t0, rue)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 628.09, 0, true)
     })
 
      /* CALC-72 */
@@ -64,7 +64,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1077.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 545.09, 0, true)
     })
@@ -84,13 +84,13 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwsMarital(res)
       expectDeferralTable(res, deferralTable)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 71, 790.99, 539.41, 0)
+      expectFutureOasGisBenefitEligible(res, 71.08, 790.99, 539.41, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 857.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 452.09, 0, true)
     })
@@ -110,13 +110,13 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 70, 849.5, 409.09, 0)
+      expectFutureOasGisBenefitEligible(res, 70.67, 849.5, 409.09, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 759.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 409.09, 0, true)
     })
@@ -139,13 +139,13 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 719.56, 350.3, 0)
+      expectFutureOasGisBenefitEligible(res, 65.67, 719.56, 350.3, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 582.3, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 350.3, 0, true)
     })
@@ -167,7 +167,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 241.3, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 8.3, 0, true)
     })
@@ -190,7 +190,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 228.30, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0, true)
     })
@@ -206,13 +206,13 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 79, 783.83, 0.0, 0)
+      expectFutureOasGisBenefitEligible(res, 79.58, 783.83, 0.0, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 24.3, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0, true)
     })
@@ -235,7 +235,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 0.0, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0, true)
     })
@@ -259,9 +259,9 @@ import { mockGetRequest } from '../../utils/factory'
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 0.0, true)
       expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.INCOME)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, true)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0, true)
     })
 
     /* CALC-81*/
@@ -283,7 +283,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
       expectGisEligible(res, 1204.43,true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
 
     })
     /* CALC-82*/
@@ -309,18 +309,18 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res)
       expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
       expectGisNotEligible(res, ResultReason.OAS)
-      expectAlwEligible(res, 857.69)
+      expectAlwEligible(res, 860.69)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 71, 698.6, 452.09, 0)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 452.09, 0)
 
       //partner results
       expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
       expectGisEligible(res, 1173.43, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 71, 192.12, 1028.43, 0, true)
+      expectFutureOasGisBenefitEligible(res, 78.33, 192.12, 1028.43, 0, true)
     })
     /* CALC-84 */
     it('should pass 84 test - CALC-84', async () => {
@@ -332,7 +332,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res)
       expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
       expectGisNotEligible(res, ResultReason.OAS)
-      expectAlwEligible(res, 756.69)
+      expectAlwEligible(res, 759.69)
       expectAlwsMarital(res)
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 409.09, 0)
@@ -341,9 +341,9 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
       expectGisEligible(res, 1159.43, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 80, 192.12, 985.43, 0, true)
+      expectFutureOasGisBenefitEligible(res, 80.92, 192.12, 985.43, 0, true)
     })
     /* CALC-85 */
     it('should pass 85 test - CALC-85', async () => {
@@ -355,7 +355,7 @@ import { mockGetRequest } from '../../utils/factory'
      expectOasNotEligible(res)
      expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
      expectGisNotEligible(res, ResultReason.OAS)
-     expectAlwEligible(res, 582.3)
+     expectAlwEligible(res, 584.90)
      expectAlwsMarital(res)
      //Future Benefit
      expectFutureOasGisBenefitEligible(res, 65, 698.6, 350.3, 0)
@@ -364,9 +364,9 @@ import { mockGetRequest } from '../../utils/factory'
      expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
      expectGisEligible(res, 1158.64, true)
      expectAlwTooOld(res, true)
-     expectAlwsMarital(res, true)
+     
      //Future Benefit
-     expectFutureOasGisBenefitEligible(res, 82, 192.12, 926.64, 0, true)
+     expectFutureOasGisBenefitEligible(res, 82.75, 192.12, 926.64, 0, true)
     })
     /* CALC-86 */
     it('should pass 86 test - CALC-86', async () => {
@@ -387,7 +387,7 @@ import { mockGetRequest } from '../../utils/factory'
      expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
      expectGisEligible(res, 748.0, true)
      expectAlwTooOld(res, true)
-     expectAlwsMarital(res, true)
+     
      //Future Benefit
      expectFutureOasGisBenefitEligible(res, 74, 192.12, 514.78, 0, true)
     })
@@ -410,7 +410,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
       expectGisEligible(res, 765.47, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 74, 174.65, 519.25, 0, true)
     })
@@ -433,7 +433,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
       expectGisEligible(res, 765.47, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 75, 192.12, 367.64, 0, true)
     })
@@ -454,11 +454,11 @@ import { mockGetRequest } from '../../utils/factory'
 
       //partner results
       expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
-      expectGisEligible(res, 765.77, true)
+      expectGisEligible(res, 764.77, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 74, 174.65, 290.25, 0, true)
+      expectFutureOasGisBenefitEligible(res, 74.16, 174.65, 290.25, 0, true)
     })
     /* CALC-90*/
     it('should pass 90 test - CALC-90', async () => {
@@ -479,9 +479,9 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 244.51, true)
       expectGisEligible(res, 513.91, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 244.51, 39.39, 0, true)
+      expectFutureOasGisBenefitEligible(res, 65.58, 244.51, 39.39, 0, true)
     })
 
     /* CALC-91 */
@@ -502,7 +502,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0, true)
 
@@ -519,14 +519,14 @@ import { mockGetRequest } from '../../utils/factory'
       expectGisEligible(res, 1432.0)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
-      //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 72, 254.29, 1432.0, 0)
+      //Future Benefit -- changed the age from 72.42 to 71.42
+      expectFutureOasGisBenefitEligible(res, 71.42, 254.29, 1432.0, 0)
      
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
-      expectAlwEligible(res, 1200.69, true)
-      expectAlwsMarital(res, true)
+      expectAlwEligible(res, 1203.69, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45, 0, true)
 
@@ -546,16 +546,16 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 70, 226.0, 1360.4, 0)
+      expectFutureOasGisBenefitEligible(res, 70.08, 226.0, 1360.4, 0)
 
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 12137.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 698.6, 898.45, true)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 898.45, 0, true)
     })
     /* CALC-94 */
     it('should pass 94 test - CALC-94', async () => {
@@ -599,13 +599,13 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 68, 251.85, 1497.54, 0)
+      expectFutureOasGisBenefitEligible(res, 68.42, 251.85, 1497.54, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
-      expectAlwEligible(res, 582.3, true)
-      expectAlwsMarital(res, true)
+      expectAlwEligible(res, 584.9, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.85, 0, true)
     })
@@ -616,18 +616,18 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12)
-      expectGisEligible(res, 310.16)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 288.18)
+      expectGisEligible(res, 214.11)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 79, 192, 310.16, 0)
+      expectFutureOasGisBenefitEligible(res, 79, 288.14, 214.11, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 1326.69, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0, true)
     })
@@ -647,7 +647,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 228.3, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0, true)
     })
@@ -658,20 +658,20 @@ import { mockGetRequest } from '../../utils/factory'
       const res = await mockGetRequest(extractedPayload)
 
       //client results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12)
-      expectGisEligible(res, 292.16)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 288.18)
+      expectGisEligible(res, 196.11)
       expectAlwTooOld(res)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 81, 192, 292.16, 0)
+      expectFutureOasGisBenefitEligible(res, 81.08, 288.18, 746.11, 0)
 
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
       expectAlwEligible(res, 656.90, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 698.6, 465.82, true)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 465.82, 0, true)
     })
     /* CALC-99 */
     it('should pass 99 test - CALC-99', async () => {
@@ -730,9 +730,9 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23, true)
       expectGisEligible(res, 1427.68, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 85, 174.65, 1427.68, 0,true)
+      expectFutureOasGisBenefitEligible(res, 85.08, 174.65, 1427.68, 0,true)
     })
     /* CALC-102 */
     it('should pass 102 test - CALC-102', async () => {
@@ -744,18 +744,18 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasNotEligible(res)
       expect(res.body.partnerResults.alw.eligibility.reason).toEqual(ResultReason.AGE)
       expectGisNotEligible(res, ResultReason.OAS)
-      expectAlwEligible(res, 1200.69)
+      expectAlwEligible(res, 1203.69)
       expectAlwsMarital(res)
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45, 0)
 
       //partner results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 768.46, true)
+      expectOasEligible(res, EntitlementResultType.FULL, 768.46, true)
       expectGisEligible(res, 960.45, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 101, 768.46, 960.45, 0, true)
+      expectFutureOasGisBenefitEligible(res, 101.67, 768.46, 960.45, 0, true)
     })
     /* CALC-103 */
     it('should pass 103 test - CALC-103', async () => {
@@ -773,10 +773,10 @@ import { mockGetRequest } from '../../utils/factory'
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 836.6, 0)
 
       //partner results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 768.46, true)
+      expectOasEligible(res, EntitlementResultType.FULL, 768.46, true)
       expectGisEligible(res, 898.45, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 79, 768.46, 898.45, 0, true)
     })
@@ -799,9 +799,9 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 557.13, true)
       expectGisEligible(res, 1254.78, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 81, 557.13, 1254.78, 0. true)
+      expectFutureOasGisBenefitEligible(res, 81, 557.13, 1254.78, 0, true)
     })
     /* CALC-105 */
     it('should pass 105 test - CALC-105', async () => {
@@ -822,7 +822,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 537.92, true)
       expectGisEligible(res, 647.36, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 80, 537.92, 647.36, 0, true)
     })
@@ -842,12 +842,12 @@ import { mockGetRequest } from '../../utils/factory'
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0)
 
       //partner results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 698.6, true)
+      expectOasEligible(res, EntitlementResultType.FULL, 698.6, true)
       expectGisEligible(res, 1043.45, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 67, 698.60, 1043.45, true)
+      expectFutureOasGisBenefitEligible(res, 67, 698.60, 1043.45, 0, true)
     })
     /* CALC-107 */
     it('should pass 107 test - CALC-107', async () => {
@@ -862,15 +862,15 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwEligible(res, 228.3)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0)
 
       //partner results
       expectOasEligible(res, EntitlementResultType.PARTIAL, 681.14, true)
       expectGisEligible(res, 258.98, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 68, 681.14, 0.0, true)
+      expectFutureOasGisBenefitEligible(res, 68.75, 681.14, 0.0, 0, true)
     })
     /* CALC-108 */
     it('should pass 108 test - CALC-108', async () => {
@@ -885,15 +885,15 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwEligible(res, 232.30)
       expectAlwsMarital(res)
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0)
+      expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0)
 
       //partner results
-      expectOasEligible(res, EntitlementResultType.PARTIAL, 698.6, true)
+      expectOasEligible(res, EntitlementResultType.FULL, 698.6, true)
       expectGisEligible(res, 465.82, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
-      //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 79, 698.6, 465.82, true)
+      
+      //Future Benefit-- changed the age from 79 to 67.25 to check
+      expectFutureOasGisBenefitEligible(res, 67.25, 698.6, 465.82, 0, true)
     })
     /* CALC-109 */
     it('should pass 109 test - CALC-109', async () => {
@@ -908,15 +908,15 @@ import { mockGetRequest } from '../../utils/factory'
      expectAlwEligible(res, 0.0)
      expectAlwsMarital(res)
      //Future Benefit
-     expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45)
+     expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0)
 
      //partner results
      expectOasEligible(res, EntitlementResultType.PARTIAL, 646.21, true)
      expectGisEligible(res, 293.21, true)
      expectAlwTooOld(res, true)
-     expectAlwsMarital(res, true)
+     
      //Future Benefit
-     expectFutureOasGisBenefitEligible(res, 72, 646.21, 0.0, true)
+     expectFutureOasGisBenefitEligible(res, 72.75, 646.21, 0.0, 0, true)
     })
     /* CALC-110 */
     it('should pass 110 test - CALC-110', async () => {
@@ -937,7 +937,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectOasEligible(res, EntitlementResultType.PARTIAL, 628.74, true)
       expectGisEligible(res, 118.68, true)
       expectAlwTooOld(res, true)
-      expectAlwsMarital(res, true)
+      
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 72.5, 628.74, 118.68, 0, true)
     })

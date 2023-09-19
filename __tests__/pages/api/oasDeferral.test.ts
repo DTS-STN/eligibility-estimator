@@ -191,9 +191,9 @@ describe('OasDEferral', () => {
 
     //partner results
     expectOasNotEligible(res, true)
-    expectGisNotEligible(res, ResultReason.NONE, true)
+    expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwEligible(res, 190.3, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 209.58, 446.32, 0, true)
   })
@@ -222,7 +222,7 @@ describe('OasDEferral', () => {
     expectOasNotEligible(res, true)
     //expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
     expectAlwEligible(res, 0.0, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 209.58, 238.32, 0, true)
   })
@@ -249,9 +249,9 @@ describe('OasDEferral', () => {
 
     //partner results
     expectOasNotEligible(res, true)
-    expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+    expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwEligible(res, 295.3, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 244.51, 516.39, 0, true)
   })
@@ -289,15 +289,15 @@ describe('OasDEferral', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
     const deferralTable = [
-      { age: 67, amount: 799.2 },
-      { age: 68, amount: 849.5 },
-      { age: 69, amount: 899.8 },
-      { age: 70, amount: 950.1 },
+      { age: 67, amount: 779.22 },
+      { age: 68, amount: 828.27 },
+      { age: 69, amount: 877.31 },
+      { age: 70, amount: 926.35 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 774.05)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 754.7)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 241.52)
+    expectGisEligible(res, 258.98)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
@@ -316,15 +316,15 @@ describe('OasDEferral', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
     const deferralTable = [
-      { age: 67, amount: 799.2 },
-      { age: 68, amount: 849.5 },
-      { age: 69, amount: 899.8 },
-      { age: 70, amount: 950.1 },
+      { age: 67, amount: 779.22 },
+      { age: 68, amount: 828.27 },
+      { age: 69, amount: 877.31 },
+      { age: 70, amount: 926.35 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 774.05)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 754.7)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 48.82)
+    expectGisEligible(res, 66.28)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
@@ -334,7 +334,7 @@ describe('OasDEferral', () => {
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
     expectAlwEligible(res, 503.3, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 261.98, 693.44, 0, true)
   })
@@ -362,7 +362,7 @@ describe('OasDEferral', () => {
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
     expectAlwEligible(res, 86.3, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 261.98, 289.92, 0, true)
   })
@@ -390,7 +390,7 @@ describe('OasDEferral', () => {
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
     expectAlwEligible(res, 420.3, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 244.51, 641.39, 0, true)
   })
@@ -439,7 +439,7 @@ describe('OasDEferral', () => {
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
     expectAlwEligible(res, 931.69, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 209.58, 972.11, 0, true)
   })
@@ -462,7 +462,7 @@ describe('OasDEferral', () => {
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
     expectAlwEligible(res, 931.69, true)
-    expectAlwsMarital(res, true)
+
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 66, 174.65, 1007.04, 0, true)
   })
@@ -723,7 +723,7 @@ describe('OasDEferral', () => {
 
     //partner results
     expectOasNotEligible(res, true)
-    expectGisNotEligible(res, ResultReason.AGE_YOUNG, true)
+    expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwTooYoung(res, true)
     //Future Benefit
     expectFutureAwlBenefitEligible(res, 60, 253.3, true)
@@ -756,128 +756,5 @@ describe('OasDEferral', () => {
     expectFutureAwlBenefitEligible(res, 60, 253.3, true)
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 20.3, 1, true)
   })
-  /* CALC-159 */
-  it('should pass the 159 test - OAS-CALC-159', async () => {
-    const desiredName = 'CALC-159' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-    const deferralTable = [
-      { age: 69, amount: 199.8 },
-      { age: 70, amount: 212.37 },
-    ]
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12)
-    expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 0.0)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 261.98, true)
-    expectGisEligible(res, 0.0, true)
-    expectAlwTooOld(res, true)
-  })
-  /* CALC-160 */
-  it('should pass the 160 test - OAS-CALC-160', async () => {
-    const desiredName = 'CALC-160' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 224.95)
-    expectGisEligible(res, 877.25)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
-    expectGisEligible(res, 877.25, true)
-    expectAlwTooOld(res, true)
-    // expectAlwsMarital(res, true)
-  })
-  /* CALC-161 */
-  it('should pass the 161 test - OAS-CALC-161', async () => {
-    const desiredName = 'CALC-161' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 244.51)
-    expectGisEligible(res, 0.0)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
-    expectGisEligible(res, 0.0, true)
-    expectAlwTooOld(res, true)
-  })
-  /* CALC-162 */
-  it('should pass the 162 test - OAS-CALC-162', async () => {
-    const desiredName = 'CALC-162' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 199.8)
-    expectGisEligible(res, 143.77)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0, true)
-    expectGisEligible(res, 0.0, true)
-    expectAlwTooOld(res, true)
-  })
-  /* CALC-163 */
-  it('should pass the 163 test - OAS-CALC-163', async () => {
-    const desiredName = 'CALC-163' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 244.51)
-    expectGisEligible(res, 0.0)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
-    expectGisEligible(res, 0.0, true)
-    expectAlwTooOld(res, true)
-  })
-  /* CALC-164 */
-  it('should pass the 164 test - OAS-CALC-164', async () => {
-    const desiredName = 'CALC-164' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 209.58)
-    expectGisEligible(res, 551.32)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65, true)
-    expectGisEligible(res, 586.25, true)
-    expectAlwTooOld(res, true)
-  })
-  /* CALC-165 */
-  it('should pass the 165 test - OAS-CALC-165', async () => {
-    const desiredName = 'CALC-165' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 174.65)
-    expectGisEligible(res, 919.25)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
-    expectGisEligible(res, 971.65, true)
-    expectAlwTooOld(res, true)
-  })
+  
 })

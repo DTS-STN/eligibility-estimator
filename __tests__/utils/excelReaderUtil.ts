@@ -1,3 +1,4 @@
+import { faLessThan } from '@fortawesome/free-solid-svg-icons'
 import * as XLSX from 'xlsx'
 import {
   LegalStatus,
@@ -32,13 +33,13 @@ function readExcelData(filePath: string): string[] {
 }
 
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
-  const payload: Record<string, any> = {
+  let payload: Record<string, any> = {
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
     age: rowToTransform['Age '],
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
-        ? ''
+        ? undefined
         : '{"years":' +
           extractValueBeforeSemicolon(
             rowToTransform['Delay (# of Years and Months)']
@@ -48,8 +49,8 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             rowToTransform['Delay (# of Years and Months)']
           ) +
           '}',
-    oasDefer: false, // no longer used.
-    oasAge: 0,
+    //oasDefer: false, // no longer used.
+    //oasAge: 0,
     maritalStatus: transformMaritalStatusValue(
       rowToTransform['Marital Status\r\n(With or Without Partner, Widowed)']
     ),
@@ -78,7 +79,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
                 '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
               ]
             )
-          : 0
+          : undefined
         : undefined,
     yearsInCanadaSinceOAS:
       transformLiveOnlyCanadaValue(
@@ -92,7 +93,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
                 '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
               ]
             )
-          : 0
+          : undefined
         : undefined,
     everLivedSocialCountry: false, // check with vero
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
@@ -100,11 +101,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     ),
     partnerIncome:
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
-        ? 0
+        ? undefined
         : rowToTransform["Partner's Net Worldwide Income"], // partner income
     partnerAge:
       rowToTransform["Partner's Age (Years and months)"] === 'N/A'
-        ? 0
+        ? undefined
         : rowToTransform["Partner's Age (Years and months)"],
     partnerLivingCountry: transformLivingContryValue(
       rowToTransform["Partner's Country of Residence (Canada, Not Canada)"]
@@ -123,6 +124,9 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       ]
     ),
   }
+  payload = Object.fromEntries(
+    Object.entries(payload).filter(([key, value]) => value !== undefined)
+  )
   //console.log('payload:', payload)
   return payload
 }
@@ -134,7 +138,7 @@ function transformValue(value: string): boolean | undefined {
     return false
   }
 
-  return false
+  return undefined
 }
 
 function transformLivingContryValue(value: string): string | undefined {
@@ -144,18 +148,18 @@ function transformLivingContryValue(value: string): string | undefined {
     return LivingCountry.AGREEMENT
   }
 
-  return ''
+  return undefined
 }
 
 function transformYearsInCanadaSinceOAS18Value(
-  value: string
+  value: string,
+  partner?: boolean
 ): number | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
     return 40
   } else if (value.toString().toUpperCase() === 'N/A') {
-    return 0
+    return undefined
   }
-
   return Number(value)
 }
 
@@ -165,7 +169,7 @@ function transformLegalStatusValue(value: string): string | undefined {
   } else if (value.toString().toUpperCase() === 'NO') {
     return LegalStatus.NO
   }
-  return LegalStatus.NO
+  return undefined
 }
 
 function transformMaritalStatusValue(value: string): string | undefined {
@@ -186,7 +190,7 @@ function transformLiveOnlyCanadaValue(value: string): boolean | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
     return true
   } else if (value.toString().toUpperCase() === 'N/A') {
-    return false
+    return undefined
   }
   return false
 }
@@ -206,7 +210,7 @@ function transformPartnerBenefitStatusValue(value: string): String {
   } else if (value.toUpperCase() === 'NO') {
     return PartnerBenefitStatus.NONE
   }
-  return PartnerBenefitStatus.NONE
+  return undefined
 }
 
 function extractValueBeforeSemicolon(value: string): string {

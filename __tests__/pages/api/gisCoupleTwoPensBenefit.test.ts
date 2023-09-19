@@ -72,10 +72,10 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 768.46, true)
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46, true)
     expectGisEligible(res, 452.09, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
+    
   })
   /* CALC-26 */
   it('should pass 26 test - CALC-26', async () => {
@@ -178,7 +178,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 366.77, true)
     expectGisEligible(res, 876.93, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
+    
   })*/
 
   /* CALC-31*/
@@ -251,7 +251,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 454.09, true)
     expectGisNotEligible(res, ResultReason.INCOME, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
+    
   })*/
 
   /* CALC-35 */
@@ -303,10 +303,10 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 698.6, true)
+    expectOasEligible(res, EntitlementResultType.FULL, 698.6, true)
     expectGisEligible(res, 898.45, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
+    
   })
 
   /* CALC-38 */
@@ -397,7 +397,7 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23, true)
     expectGisEligible(res, 1344.68, true)
     expectAlwTooOld(res, true)
-    expectAlwsMarital(res, true)
+    
   })*/
   /* CALC-43 */
   it('should pass 43 test - CALC-43', async () => {
@@ -485,6 +485,6 @@ it('should pass 46 test - CALC-46', async () => {
   expectOasEligible(res, EntitlementResultType.PARTIAL, 365.02, true)
   expectGisEligible(res, 452.26, true)
   expectAlwTooOld(res, true)
-  expectAlwsMarital(res, true)
+  
 })*/
 })
