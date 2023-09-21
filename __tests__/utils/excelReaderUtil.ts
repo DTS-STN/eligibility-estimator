@@ -1,4 +1,3 @@
-import { faLessThan } from '@fortawesome/free-solid-svg-icons'
 import * as XLSX from 'xlsx'
 import {
   LegalStatus,
@@ -71,8 +70,9 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
         rowToTransform[
           '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
         ]
-      ) !== true
-        ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === false ||
+      ) !== 'true'
+        ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) ===
+            'false' ||
           transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === undefined
           ? transformYearsInCanadaSinceOAS18Value(
               rowToTransform[
@@ -86,8 +86,8 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
         rowToTransform[
           '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
         ]
-      ) !== true
-        ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === true
+      ) !== 'true'
+        ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === 'true'
           ? transformYearsInCanadaSinceOAS18Value(
               rowToTransform[
                 '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
@@ -95,7 +95,8 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             )
           : undefined
         : undefined,
-    everLivedSocialCountry: false, // check with vero
+    //everLivedSocialCountry: false, // check with vero
+    everLivedSocialCountry: undefined,
     partnerBenefitStatus: transformPartnerBenefitStatusValue(
       rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
     ),
@@ -125,17 +126,20 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     ),
   }
   payload = Object.fromEntries(
-    Object.entries(payload).filter(([key, value]) => value !== undefined)
+    Object.entries(payload).filter(
+      ([key, value]) => value !== undefined && value !== ''
+    )
   )
+
   //console.log('payload:', payload)
   return payload
 }
 
-function transformValue(value: string): boolean | undefined {
+function transformValue(value: string): string | undefined {
   if (value.toString().toUpperCase() === 'YES') {
-    return true
+    return 'true'
   } else if (value.toString().toUpperCase() === 'NO') {
-    return false
+    return 'false'
   }
 
   return undefined
@@ -154,13 +158,13 @@ function transformLivingContryValue(value: string): string | undefined {
 function transformYearsInCanadaSinceOAS18Value(
   value: string,
   partner?: boolean
-): number | undefined {
+): string | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
-    return 40
+    return '40'
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
   }
-  return Number(value)
+  return String(value) // Number(value)
 }
 
 function transformLegalStatusValue(value: string): string | undefined {
@@ -186,18 +190,18 @@ function transformMaritalStatusValue(value: string): string | undefined {
   return undefined
 }
 
-function transformLiveOnlyCanadaValue(value: string): boolean | undefined {
+function transformLiveOnlyCanadaValue(value: string): string | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
-    return true
+    return 'true'
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
   }
-  return false
+  return 'false'
 }
 
-function roundedIncome(numberToRound: number): number {
-  const roundedNumber = numberToRound.toFixed(2)
-  return Number(roundedNumber)
+function roundedIncome(numberToRound: number): string {
+  const roundedNumber = numberToRound //.toFixed(2)
+  return String(roundedNumber)
 }
 
 function transformPartnerBenefitStatusValue(value: string): String {

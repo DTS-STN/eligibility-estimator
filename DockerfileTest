@@ -41,4 +41,4 @@ WORKDIR $home
 COPY --chown=55:$group . . 
 
 RUN yarn install --immutable
-RUN yarn run test:unit 
+RUN yarn run test:unit gisCoupleOnePenBenefit

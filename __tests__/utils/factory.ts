@@ -15,6 +15,7 @@ async function mockGetRequestGeneric<T extends ResponseSuccess | ResponseError>(
   params: Partial<RequestInput>
 ): Promise<MockResponseObject<T>> {
   const { req, res } = createMocks({ method: 'GET', query: params })
+
   handler(req, res)
   return { status: res.statusCode, body: res._getJSONData() }
 }

@@ -1,4 +1,3 @@
-import { List } from 'lodash'
 import {
   EntitlementResultType,
   LegalStatus,
@@ -101,12 +100,21 @@ export function expectOasEligible(
   partner?: boolean
 ) {
   const results = !partner ? res.body.results : res.body.partnerResults
-  expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
+
+  // Summary state validation
+  !partner
+    ? expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
+    : expect(res.body.summary.partnerState).toEqual(
+        SummaryState.AVAILABLE_ELIGIBLE
+      )
+
   expect(results.oas.eligibility.result).toEqual(ResultKey.ELIGIBLE)
   //expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.NONE)
   expect(results.oas.entitlement.type).toEqual(oasType)
+
   if (oasType === EntitlementResultType.FULL && !entitlement)
     entitlement = legalValues.oas.amount
+
   if (entitlement)
     expect(results.oas.entitlement.result).toBeCloseTo(
       //entitlement - results.oas.entitlement.clawback //with clawback #114098
@@ -187,10 +195,9 @@ const approximatelyEqual = (v1, v2, tolerance) => {
 
 export function expectDeferralTable(
   res: MockResponseObject<ResponseSuccess>,
-  expectedDeferralTable: TableData[],
-  partner?: boolean
+  expectedDeferralTable: TableData[]
 ) {
-  const results = !partner ? res.body.results : res.body.partnerResults
+  const results = res.body.results
   const deferralTable = results.oas.cardDetail.meta?.tableData
 
   expect(expectedDeferralTable.length).toEqual(deferralTable.length)
@@ -200,13 +207,10 @@ export function expectDeferralTable(
 export function expectFutureDeferralTable(
   res: MockResponseObject<ResponseSuccess>,
   age: number,
-  expectedDeferralTable: TableData[],
-  partner?: boolean
+  listPos: number,
+  expectedDeferralTable: TableData[]
 ) {
-  const ageInt = Math.trunc(age)
-  const results = !partner
-    ? res.body.futureClientResults[0]
-    : res.body.futurePartnerResults[0]
+  const results = res.body.futureClientResults[listPos]
   const deferralTable = results[age].oas.cardDetail.meta?.tableData
 
   consoleDev('table : ' + deferralTable)
