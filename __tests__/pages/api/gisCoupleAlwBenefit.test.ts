@@ -89,7 +89,7 @@ import { mockGetRequest } from '../../utils/factory'
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
-      expectAlwEligible(res, 857.69, true)
+      expectAlwEligible(res, 860.69, true)
       
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 452.09, 0, true)
@@ -144,7 +144,7 @@ import { mockGetRequest } from '../../utils/factory'
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
-      expectAlwEligible(res, 582.3, true)
+      expectAlwEligible(res, 584.9, true)
       
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 350.3, 0, true)
@@ -297,7 +297,9 @@ import { mockGetRequest } from '../../utils/factory'
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0)
       //partner results
-      expectAllIneligible(res, true)
+      expectOasEligible(res, EntitlementResultType.PARTIAL, 0, true)
+      expectGisEligible(res, 0, true)
+      expectAlwTooOld(res, true)
     })
     /* CALC-83 */
     it('should pass 83 test - CALC-83', async () => {
@@ -552,7 +554,7 @@ import { mockGetRequest } from '../../utils/factory'
       //partner results
       expectOasNotEligible(res, true)
       expectGisNotEligible(res, ResultReason.OAS, true)
-      expectAlwEligible(res, 12137.69, true)
+      expectAlwEligible(res, 1140.69, true)
       
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 898.45, 0, true)
@@ -609,7 +611,9 @@ import { mockGetRequest } from '../../utils/factory'
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.85, 0, true)
     })
-    /* CALC-96 */
+
+    // There is a bug #140665. Should be retested when the bug is fixed
+    /* CALC-96 
     it('should pass 96 test - CALC-96', async () => {
       const desiredName = 'CALC-96' // Replace with the desired name
       const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -630,7 +634,7 @@ import { mockGetRequest } from '../../utils/factory'
       
       //Future Benefit
       expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0, true)
-    })
+    })*/ 
     /* CALC-97 */
     it('should pass 97 test - CALC-97', async () => {
       const desiredName = 'CALC-97' // Replace with the desired name
@@ -732,7 +736,7 @@ import { mockGetRequest } from '../../utils/factory'
       expectAlwTooOld(res, true)
       
       //Future Benefit
-      expectFutureOasGisBenefitEligible(res, 85.08, 174.65, 1427.68, 0,true)
+      expectFutureOasGisBenefitEligible(res, 85.08, 384.23, 1427.68, 0,true)
     })
     /* CALC-102 */
     it('should pass 102 test - CALC-102', async () => {

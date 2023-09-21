@@ -444,8 +444,9 @@ describe('OasDEferral', () => {
     expectFutureOasGisBenefitEligible(res, 65, 209.58, 972.11, 0, true)
   })
 
-  /* CALC-145 */ // there is already Bug-141941 opened
- /* it('should pass the 145 test - OAS-CALC-145', async () => {
+  // There is a bug #141941. Should be retested when the bug is fixed
+  /* CALC-145 
+  it('should pass the 145 test - OAS-CALC-145', async () => {
     const desiredName = 'CALC-145' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
