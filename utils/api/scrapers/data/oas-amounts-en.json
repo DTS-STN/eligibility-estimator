@@ -1,39 +1,39 @@
 {
   "lastupdatedYear": "2022",
-  "lastupdatedQuarter": "July to September 2023",
+  "lastupdatedQuarter": "October to December 2023",
   "renewalYearGIS": "2023",
   "oas": {
-    "average": "698.60",
-    "average75": "768.46",
-    "maximum": "134,626",
-    "maximum75": "137,331",
-    "clawback": "81,761"
+    "average": "707.68",
+    "average75": "778.45",
+    "maximum": "142,609",
+    "maximum75": "148,179",
+    "clawback": "86,912"
   },
   "gis": {
-    "single-amount": "1,043.45",
-    "single-limit": "21,168",
-    "spouse-oas-amount": "628.09",
-    "spouse-oas-limit": "27,984",
-    "spouse-no-oas-amount": "1,043.45",
-    "spouse-no-oas-limit": "50,736",
-    "spouse-allowance-amount": "628.09",
-    "spouse-allowance-limit": "39,168"
+    "single-amount": "1,057.01",
+    "single-limit": "21,456",
+    "spouse-oas-amount": "636.26",
+    "spouse-oas-limit": "28,320",
+    "spouse-no-oas-amount": "1,057.01",
+    "spouse-no-oas-limit": "51,408",
+    "spouse-allowance-amount": "636.26",
+    "spouse-allowance-limit": "39,648"
   },
   "allowance": {
-    "spouse-gis-amount": "1,326.69",
-    "spouse-gis-limit": "39,168",
-    "survivor-amount": "1,581.51",
-    "survivor-limit": "28,512"
+    "spouse-gis-amount": "1,343.94",
+    "spouse-gis-limit": "39,648",
+    "survivor-amount": "1,602.07",
+    "survivor-limit": "28,872"
   },
   "topup": {
-    "single": "161.63",
-    "married": "45.79"
+    "single": "163.73",
+    "married": "46.39"
   },
   "delay": {
-    "oas66": "748.90",
-    "oas67": "799.20",
-    "oas68": "849.50",
-    "oas69": "899.80",
-    "oas70": "950.10"
+    "oas66": "758.63",
+    "oas67": "809.59",
+    "oas68": "860.54",
+    "oas69": "911.49",
+    "oas70": "962.44"
   }
 }
