@@ -15,6 +15,11 @@ const en: WebTranslations = {
   _language: Language.EN,
   metaLanguage: ISOLanguage.EN,
 
+  skipToMainContent: 'Skip to main content',
+  globalHeader: 'Global header',
+  testSiteNotice: 'Test site notice',
+  officialSiteNavigation: 'Canada.ca official site',
+  languageSelection: 'Language selection',
   oas: 'Old Age Security pension',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',

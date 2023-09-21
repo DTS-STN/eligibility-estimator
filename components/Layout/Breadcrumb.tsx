@@ -14,7 +14,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({ items = [] }: BreadcrumbProps) {
   return (
     <nav aria-label="breadcrumbs">
-      <ul className="block text-base font-body">
+      <ul className="block text-base font-body mt-6">
         {items.map((item, index) => (
           <li
             key={item.link}
@@ -27,7 +27,7 @@ export function Breadcrumb({ items = [] }: BreadcrumbProps) {
               } h-[8px] w-[8px] py-[2px] pr-[4px]`}
             />
             <Link href={item.link}>
-              <a className="text-sm text-[#295376] hover:text-[#0535D2] text-canada-footer-font visited:text-purple-700 underline">
+              <a className="font-sans text-[16px] leading-[23px] font-[400] text-[#295376] hover:text-[#0535D2] underline">
                 {item.text}
               </a>
             </Link>

@@ -16,6 +16,11 @@ const fr: WebTranslations = {
   _language: Language.FR,
   metaLanguage: ISOLanguage.FR,
 
+  skipToMainContent: 'Passer au contenu principal',
+  globalHeader: 'En-tête général',
+  testSiteNotice: "Avis de site d'essai",
+  officialSiteNavigation: 'Site officiel de Canada.ca',
+  languageSelection: 'Sélection de la langue',
   oas: 'Pension de la Sécurité de la vieillesse',
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',

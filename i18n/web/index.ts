@@ -13,6 +13,11 @@ export type WebTranslations = {
   _language: Language
   metaLanguage: ISOLanguage
 
+  skipToMainContent: string
+  globalHeader: string
+  testSiteNotice: string
+  officialSiteNavigation: string
+  languageSelection: string
   atLeast60: string
   haveNetIncomeLess: string
   headerWhatToKnow: string
