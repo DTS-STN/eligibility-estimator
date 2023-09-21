@@ -1,5 +1,4 @@
 import {
-  Header,
   Heading,
   Date,
   ContextualAlert as Message,
@@ -8,6 +7,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
+import { Header } from './Header'
 import { Footer } from './Footer'
 import { Head } from './Head'
 import { CTA } from '../ResultsPage/CTA'
@@ -118,15 +118,18 @@ export const Layout: React.VFC<{
       <main className="mainContent">
         <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
-            id="mainHeader"
-            lang={router.locale}
-            linkPath={langToggleLink}
-            isAuthenticated={true}
-            menuProps={menuProps}
-            topnavProps={topnavProps}
-            searchProps={searchProps}
-            breadCrumbItems={breadcrumbs}
-            useParentContainer={true}
+            id="header"
+            locale={router.locale}
+            langUrl={langToggleLink}
+            breadcrumbItems={breadcrumbs}
+            headerText={{
+              skipToMainContent: tsln.skipToMainContent,
+              globalHeader: tsln.globalHeader,
+              testSiteNotice: tsln.testSiteNotice,
+              officialSiteNavigation: tsln.officialSiteNavigation,
+              languageSelection: tsln.languageSelection,
+              logoAltText: tsln.logoAltText,
+            }}
           />
           <Heading
             id="applicationTitle"
