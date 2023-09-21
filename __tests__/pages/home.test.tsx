@@ -8,6 +8,10 @@ import React from 'react'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Home from '../../pages/index'
 
+jest.mock('next/link', () => {
+  return ({ children }) => children
+})
+
 describe('index page', () => {
   let useRouter
   beforeAll(() => {

@@ -9,6 +9,10 @@ import { axe } from 'jest-axe'
 import Questions from '../../pages/questions/index'
 import { mockPartialGetRequest } from './api/factory'
 
+jest.mock('next/link', () => {
+  return ({ children }) => children
+})
+
 describe('index page', () => {
   let useRouter
 
