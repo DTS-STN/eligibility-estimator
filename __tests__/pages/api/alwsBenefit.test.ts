@@ -39,7 +39,7 @@ describe('AlwsBenefit', () => {
 
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 0)
-    expectFutureDeferralTable(res, 65, futureDeferralTable)
+    expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
   /* CALC-018  */
   it('should pass the sanity test 18 - CALC-18', async () => {
@@ -63,7 +63,7 @@ describe('AlwsBenefit', () => {
     expectAlwsEligible(res, 1458.51)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 960.45, 0)
-    expectFutureDeferralTable(res, 65, futureDeferralTable)
+    expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
 
   /* CALC-019 */
@@ -88,7 +88,7 @@ describe('AlwsBenefit', () => {
     expectAlwsEligible(res, 811.51)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 476.45,0)
-    expectFutureDeferralTable(res, 65, futureDeferralTable)
+    expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
 
   /* CALC-20*/
@@ -113,7 +113,7 @@ describe('AlwsBenefit', () => {
     expectAlwsEligible(res, 723.88)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.82, 0)
-    expectFutureDeferralTable(res, 65, futureDeferralTable)
+    expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
 
   /* CALC-21*/
@@ -139,7 +139,7 @@ describe('AlwsBenefit', () => {
     expectAlwsEligible(res, 539.28)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 233.82, 0)
-    expectFutureDeferralTable(res, 65, futureDeferralTable)
+    expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
 
   /* CALC-22*/
@@ -164,6 +164,6 @@ describe('AlwsBenefit', () => {
     expectAlwsEligible(res, 0)
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 0)
-    expectFutureDeferralTable(res, 65, futureDeferralTable)
+    expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
 })
