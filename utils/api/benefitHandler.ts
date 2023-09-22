@@ -217,7 +217,7 @@ export class BenefitHandler {
       FieldKey.MARITAL_STATUS,
       FieldKey.LIVED_ONLY_IN_CANADA,
     ]
-console.log(this.input.client, "client input")
+
     // OAS deferral related fields
     const clientAge = this.input.client.age
     if (clientAge >= 65.08 && clientAge <= getMinBirthYear()) {
