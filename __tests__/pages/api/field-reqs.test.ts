@@ -57,7 +57,7 @@ describe('field requirement analysis', () => {
   it('requires no fields when all provided', async () => {
     const res = await mockGetRequest({
       ...income10k,
-      age: 65,
+      age: 65.08,
       oasDefer: true,
       oasAge: 70,
       receiveOAS: false,
