@@ -7,7 +7,7 @@ import * as nextRouter from 'next/router'
 import React from 'react'
 import { axe } from 'jest-axe'
 import Questions from '../../pages/questions/index'
-import { mockPartialGetRequest } from './api/factory'
+import { mockPartialGetRequest } from '../utils/factory'
 
 describe('index page', () => {
   let useRouter
