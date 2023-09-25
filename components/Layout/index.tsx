@@ -163,11 +163,11 @@ export const Layout: React.VFC<{
           </div>
         )}
 
-        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
+        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col my-8">
           <Date date={dateModified} label={tsln.dateModified} />
         </div>
 
-        <Footer />
+        <Footer id="footer" locale={router.locale} />
       </main>
     </>
   )

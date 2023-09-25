@@ -28,6 +28,115 @@ const fr: WebTranslations = {
   langLong: 'fra',
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
+  aboutGovernment: 'Au sujet du gouvernement',
+  footerTitle: 'Gouvernement du Canada',
+  aboutSite: 'À propos de ce site',
+  // Main footer links
+  landscapeLinks: {
+    contacts: {
+      text: 'Toutes les coordonnées',
+      link: 'https://www.canada.ca/fr/contact.html',
+    },
+    departments: {
+      text: 'Ministères et organismes',
+      link: 'https://www.canada.ca/fr/government/dept.html',
+    },
+    about: {
+      text: 'À propos du gouvernement',
+      link: 'https://www.canada.ca/fr/government/system.html',
+    },
+    jobs: {
+      text: 'Emplois',
+      link: 'https://www.canada.ca/fr/services/jobs.html',
+    },
+    taxes: {
+      text: 'Impôts',
+      link: 'https://www.canada.ca/fr/services/taxes.html',
+    },
+    canadaAndWorld: {
+      text: 'Le Canada et le monde',
+      link: 'https://international.gc.ca/world-monde/index.aspx?lang=fra',
+    },
+    immigration: {
+      text: 'Immigration et citoyenneté',
+      link: 'https://www.canada.ca/fr/services/immigration-citizenship.html',
+    },
+    environment: {
+      text: 'Environnement et ressources naturelles',
+      link: 'https://www.canada.ca/fr/services/environment.html',
+    },
+    finance: {
+      text: 'Argent et finance',
+      link: 'https://www.canada.ca/fr/services/finance.html',
+    },
+    travel: { text: 'Voyage et tourisme', link: 'https://voyage.gc.ca/' },
+    nationalSecurity: {
+      text: 'Sécurité nationale et défense',
+      link: 'https://www.canada.ca/fr/services/defence.html',
+    },
+    innovation: {
+      text: 'Science et innovation',
+      link: 'https://www.canada.ca/fr/services/science.html',
+    },
+    business: {
+      text: 'Entreprises',
+      link: 'https://www.canada.ca/fr/services/business.html',
+    },
+    culture: {
+      text: 'Culture, histoire et sport',
+      link: 'https://www.canada.ca/fr/services/culture.html',
+    },
+    indigenous: {
+      text: 'Autochtones',
+      link: 'https://www.canada.ca/fr/services/indigenous-peoples.html',
+    },
+    benefit: {
+      text: 'Prestations',
+      link: 'https://www.canada.ca/fr/services/benefits.html',
+    },
+    policing: {
+      text: 'Services de police, justice et urgences',
+      link: 'https://www.canada.ca/fr/services/policing.html',
+    },
+    veterans: {
+      text: 'Vétérans et militaires',
+      link: 'https://www.canada.ca/fr/services/veterans-military.html',
+    },
+    health: {
+      text: 'Santé',
+      link: 'https://www.canada.ca/fr/services/health.html',
+    },
+    transport: {
+      text: 'Transport et infrastructure',
+      link: 'https://www.canada.ca/fr/services/transport.html',
+    },
+    youth: {
+      text: 'Jeunesse',
+      link: 'https://www.canada.ca/fr/services/youth.html',
+    },
+  },
+  brandLinks: {
+    socialMedia: {
+      text: 'Médias sociaux',
+      link: 'https://www.canada.ca/fr/social.html',
+    },
+    mobile: {
+      text: 'Applications mobiles',
+      link: 'https://www.canada.ca/fr/mobile.html',
+    },
+    about: {
+      text: 'À propos de Canada.ca',
+      link: 'https://www.canada.ca/fr/government/about.html',
+    },
+    terms: {
+      text: 'Avis',
+      link: 'https://www.canada.ca/fr/transparency/terms.html',
+    },
+    privacy: {
+      text: 'Confidentialité',
+      link: 'https://www.canada.ca/fr/transparency/privacy.html',
+    },
+  },
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
