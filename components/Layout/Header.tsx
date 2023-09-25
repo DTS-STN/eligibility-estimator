@@ -73,7 +73,7 @@ export function Header({
             </Link>
           </div>
         </div>
-        <hr className="absolute left-0 border-b-[1.5px] border-[#38414D] w-screen w-full" />
+        <hr className="absolute left-0 border-b-2 border-[#38414D] w-screen w-full" />
         <Breadcrumb items={breadcrumbItems} locale={locale} />
       </header>
     </>
