@@ -1,7 +1,6 @@
 import {
   Header,
   Heading,
-  Date,
   ContextualAlert as Message,
 } from '@dts-stn/service-canada-design-system'
 import { useRouter } from 'next/router'
@@ -11,6 +10,7 @@ import { useTranslation } from '../Hooks'
 import { Footer } from './Footer'
 import { Head } from './Head'
 import { CTA } from '../ResultsPage/CTA'
+import { Date } from './Date'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -163,7 +163,7 @@ export const Layout: React.VFC<{
           </div>
         )}
 
-        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col my-8">
+        <div className="xs:container s:container md:container lg:container my-8">
           <Date date={dateModified} label={tsln.dateModified} />
         </div>
 

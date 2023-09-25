@@ -20,7 +20,7 @@ export const Footer = ({ id, locale }: FooterProps) => {
         <h2 className="sr-only" id="accessibleSectionHeader1">
           {tsln.aboutGovernment}
         </h2>
-        <h3 className="container text-white text-[19px] leading-[21px] font-bold pt-[22px]">
+        <h3 className="container text-white text-[19px] leading-[21px] font-bold pt-[24px] pb-2">
           {tsln.footerTitle}
         </h3>
         <div
@@ -36,7 +36,7 @@ export const Footer = ({ id, locale }: FooterProps) => {
                   key={key}
                   className={`${
                     key === 'contacts' ? 'footerLine pb-[26px] relative' : ''
-                  } list-none w-64 sm:w-56 lg:w-80 my-2.5`}
+                  } list-none w-64 sm:w-56 lg:w-80 my-2`}
                 >
                   <Link href={value.link} locale={locale}>
                     <a className="font-[400] text-white text-[14px] leading-[19px]">
@@ -61,8 +61,8 @@ export const Footer = ({ id, locale }: FooterProps) => {
                   <li
                     key={key}
                     className={`${
-                      index === 0 ? '' : 'md:list-disc'
-                    } pr-4 mb-[17px] list-inside`}
+                      index === 0 ? '' : 'md:custom-bullet'
+                    } pr-4 mb-[17px]`}
                   >
                     <Link href={value.link}>
                       <a className="font-[400] text-[14px] leading-[19px] text-[#31455C]">
