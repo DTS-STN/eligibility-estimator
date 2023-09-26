@@ -35,7 +35,9 @@ export const Footer = ({ id, locale }: FooterProps) => {
                 <li
                   key={key}
                   className={`${
-                    key === 'contacts' ? 'footerLine pb-[26px] relative' : ''
+                    key === 'contacts'
+                      ? 'footerLine pb-[26px] relative mb-3'
+                      : ''
                   } list-none w-64 sm:w-56 lg:w-80 my-1`}
                 >
                   <Link href={value.link} locale={locale}>
