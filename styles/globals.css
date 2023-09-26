@@ -274,7 +274,9 @@
 
   @-moz-document url-prefix() {
     #enter-age select,
-    #enter-partnerAge select {
+    #enter-partnerAge select,
+    #oasDeferDuration-years,
+    #oasDeferDuration-months {
       background-color: #fff;
     }
   }
