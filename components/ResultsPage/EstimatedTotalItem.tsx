@@ -16,17 +16,17 @@ export const EstimatedTotalItem: React.VFC<{
 
   function displayBenefitName(benefitName: string, result: number): string {
     if (tsln._language === Language.EN) {
-      return result > 0 ? ` from the ${benefitName}` : ` the ${benefitName}`
+      return ` from the ${benefitName}`
     } else {
       switch (benefitName) {
         case tsln.oas:
           const lowCase =
             benefitName.charAt(0).toLowerCase() + benefitName.slice(1)
-          return result > 0 ? ` de la ${lowCase}` : ` la ${lowCase}`
+          return ` de la ${lowCase}`
         case tsln.gis:
-          return result > 0 ? ` du ${benefitName}` : ` le ${benefitName}`
+          return ` du ${benefitName}`
         default:
-          return result > 0 ? ` de l'${benefitName}` : ` l'${benefitName}`
+          return ` de l'${benefitName}`
       }
     }
   }
@@ -36,9 +36,8 @@ export const EstimatedTotalItem: React.VFC<{
   return (
     <li>
       <strong>
-        {numberToStringCurrency(result.entitlement.result ?? 0, tsln._language)}
+        {numberToStringCurrency(result.entitlement.result, tsln._language)}
       </strong>
-
       {displayBenefitName(heading, result.entitlement.result)}
     </li>
   )
