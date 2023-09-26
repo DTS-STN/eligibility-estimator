@@ -36,7 +36,7 @@ export const Footer = ({ id, locale }: FooterProps) => {
                   key={key}
                   className={`${
                     key === 'contacts' ? 'footerLine pb-[26px] relative' : ''
-                  } list-none w-64 sm:w-56 lg:w-80 my-2`}
+                  } list-none w-64 sm:w-56 lg:w-80 my-1`}
                 >
                   <Link href={value.link} locale={locale}>
                     <a className="font-[400] text-white text-[14px] leading-[19px]">
@@ -56,13 +56,13 @@ export const Footer = ({ id, locale }: FooterProps) => {
               <h2 className="sr-only" id="accessibleSectionHeader2">
                 {tsln.aboutSite}
               </h2>
-              <ul className="flex flex-col md:flex-row whitespace-nowrap pt-4">
+              <ul className="flex flex-col md:flex-row whitespace-nowrap py-4">
                 {Object.entries(brandLinks).map(([key, value], index) => (
                   <li
                     key={key}
                     className={`${
                       index === 0 ? '' : 'md:custom-bullet'
-                    } pr-4 mb-[17px]`}
+                    } pr-4 my-1`}
                   >
                     <Link href={value.link}>
                       <a className="font-[400] text-[14px] leading-[19px] text-[#31455C]">
