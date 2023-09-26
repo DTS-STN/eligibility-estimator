@@ -479,7 +479,8 @@ export class BenefitHandler {
         this.translations,
         clientOasWithDeferral.info,
         false,
-        this.future
+        this.future,
+        this.input.client
       )
 
       consoleDev(
