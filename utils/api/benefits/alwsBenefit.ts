@@ -32,9 +32,9 @@ export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // helpers
     const meetsReqMarital =
       this.input.maritalStatus.value == MaritalStatus.WIDOWED
-    const meetsReqAge = 60 <= this.input.age && this.input.age < 65
+    const meetsReqAge = this.input.age > 60 && this.input.age <= 65
     const overAgeReq = 65 <= this.input.age
-    const underAgeReq = this.input.age < 60
+    const underAgeReq = this.input.age <= 60
 
     // if income is not provided, assume they meet the income requirement
     const skipReqIncome = !this.input.income.provided

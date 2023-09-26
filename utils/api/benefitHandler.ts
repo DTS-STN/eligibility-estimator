@@ -220,11 +220,11 @@ export class BenefitHandler {
 
     // OAS deferral related fields
     const clientAge = this.input.client.age
-    if (clientAge >= 65.08 && clientAge <= getMinBirthYear()) {
+    if (clientAge > 65 && clientAge <= getMinBirthYear()) {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS && clientAge > 65.08) {
+    if (this.input.client.receiveOAS && clientAge > 65) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 
@@ -294,7 +294,7 @@ export class BenefitHandler {
             currently lives outside Canada and has lived for 20+ years in Canada
        */
       if (
-        this.input.partner.age >= 65 &&
+        this.input.partner.age > 65 &&
         this.input.partner.legalStatus.canadian &&
         this.input.partner.livedOnlyInCanada !== undefined &&
         ((this.input.partner.livingCountry.canada &&
@@ -620,8 +620,8 @@ export class BenefitHandler {
     //              all the conditions below are just to make sure
     //              one and one case is overwritten
     if (
-      this.input.client.age >= 60 &&
-      this.input.client.age < 65 &&
+      this.input.client.age > 60 &&
+      this.input.client.age <= 65 &&
       this.input.client.livedOnlyInCanada &&
       this.input.client.legalStatus.canadian &&
       this.input.client.yearsInCanadaSince18 >= 10 &&

@@ -182,7 +182,7 @@ export const income10k = {
 }
 
 export const age65NoDefer = {
-  age: 65,
+  age: 65.08,
   oasDefer: false,
   oasAge: undefined,
   receiveOAS: false,
@@ -198,7 +198,7 @@ export const age75NoDefer = {
 }
 
 export const age60NoDefer = {
-  age: 60,
+  age: 60.08,
   oasDefer: false,
   oasAge: undefined,
   receiveOAS: false,

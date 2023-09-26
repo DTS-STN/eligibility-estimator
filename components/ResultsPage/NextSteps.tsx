@@ -168,7 +168,7 @@ export function getAlwNextSteps(
         { rounding: 0 }
       )}</strong>.`
 
-    if (inputAge < 60) {
+    if (inputAge <= 60) {
       nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
       nextStepText.nextStepContent += apiTsln.detail.alwsApply
       if (result.entitlement.result === 0) {
@@ -199,7 +199,7 @@ export function getAlwsNextSteps(
       { rounding: 0 }
     )}</strong>.`
 
-    if (inputAge < 60) {
+    if (inputAge <= 60) {
       nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
       nextStepText.nextStepContent += `${apiTsln.detail.alwsApply}`
 
