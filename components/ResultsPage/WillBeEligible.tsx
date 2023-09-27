@@ -150,6 +150,7 @@ export const WillBeEligible: React.VFC<{
                   key={benefit.benefitKey}
                   heading={apiTrans.benefit[benefit.benefitKey]}
                   result={benefit}
+                  displayAmount={partner && partnerNoOAS ? false : true}
                 />
               ))}
             </ul>
