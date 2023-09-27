@@ -121,6 +121,40 @@ export type WebTranslations = {
   errorBoxTitle: string
   useEstimatorIf: string
 
+  //Main footer links
+  aboutGovernment: string
+  footerTitle: string
+  aboutSite: string
+  landscapeLinks: {
+    contacts: { text: string; link: string }
+    departments: { text: string; link: string }
+    about: { text: string; link: string }
+    jobs: { text: string; link: string }
+    taxes: { text: string; link: string }
+    canadaAndWorld: { text: string; link: string }
+    immigration: { text: string; link: string }
+    environment: { text: string; link: string }
+    finance: { text: string; link: string }
+    travel: { text: string; link: string }
+    nationalSecurity: { text: string; link: string }
+    innovation: { text: string; link: string }
+    business: { text: string; link: string }
+    culture: { text: string; link: string }
+    indigenous: { text: string; link: string }
+    benefit: { text: string; link: string }
+    policing: { text: string; link: string }
+    veterans: { text: string; link: string }
+    health: { text: string; link: string }
+    transport: { text: string; link: string }
+    youth: { text: string; link: string }
+  }
+  brandLinks: {
+    socialMedia: { text: string; link: string }
+    mobile: { text: string; link: string }
+    about: { text: string; link: string }
+    terms: { text: string; link: string }
+    privacy: { text: string; link: string }
+  }
   // meta tags
   meta: {
     homeDescription: string
