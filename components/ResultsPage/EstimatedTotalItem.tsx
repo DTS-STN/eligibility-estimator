@@ -37,7 +37,7 @@ export const EstimatedTotalItem: React.VFC<{
   }
 
   if (!result.entitlement) return null
-  console.log(result, '=====')
+
   return (
     <li>
       <strong>
