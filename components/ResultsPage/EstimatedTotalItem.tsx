@@ -29,7 +29,7 @@ export const EstimatedTotalItem: React.VFC<{
             benefitName.charAt(0).toLowerCase() + benefitName.slice(1)
           return displayAmount ? ` de la ${lowCase}` : `la ${lowCase}`
         case tsln.gis:
-          return displayAmount ? ` du ${benefitName}` : `du ${benefitName}`
+          return displayAmount ? ` du ${benefitName}` : `le ${benefitName}`
         default:
           return displayAmount ? ` de l'${benefitName}` : `l'${benefitName}`
       }
