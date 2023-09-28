@@ -74,7 +74,7 @@ export function Header({
           </div>
         </div>
         <hr className="absolute left-0 border-b-2 border-[#38414D] w-screen w-full" />
-        <Breadcrumb items={breadcrumbItems} locale={locale} />
+        <Breadcrumb key={locale} items={breadcrumbItems} locale={locale} />
       </header>
     </>
   )
