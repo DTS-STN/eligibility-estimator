@@ -1,5 +1,4 @@
 import {
-  EntitlementResultType,
   LegalStatus,
   LivingCountry,
   MaritalStatus,
@@ -15,22 +14,18 @@ import {
   age65NoDefer,
   canadaWholeLife,
   canadian,
-  expectAlwsEligible,
-  expectAlwEligible,
-  expectGisEligible,
-  expectOasEligible,
   income10k,
   incomeZero,
   partnerIncomeZero,
   partnerNoHelpNeeded,
   partnerUndefined,
   getErrorDetails,
-} from './expectUtils'
+} from '../../utils/expectUtils'
 import {
   mockGetRequest,
   mockGetRequestError,
   mockPartialGetRequest,
-} from './factory'
+} from '../../utils/factory'
 
 describe('OAS entitlement scenarios', () => {
   it('returns "eligible for $619.38" when 39 years in Canada (rounding test)', async () => {

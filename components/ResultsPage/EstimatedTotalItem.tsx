@@ -8,25 +8,30 @@ import { useTranslation } from '../Hooks'
 export const EstimatedTotalItem: React.VFC<{
   heading: string
   result: BenefitResult
-}> = ({ heading, result }) => {
+  displayAmount: boolean
+}> = ({ heading, result, displayAmount }) => {
   const tsln = useTranslation<WebTranslations>()
   /*
     returns benefit name with from/de and proper article. ... french nuances.
   */
 
-  function displayBenefitName(benefitName: string, result: number): string {
+  function displayBenefitName(
+    benefitName: string,
+    result: number,
+    displayAmount: boolean
+  ): string {
     if (tsln._language === Language.EN) {
-      return result > 0 ? ` from the ${benefitName}` : ` the ${benefitName}`
+      return displayAmount ? ` from the ${benefitName}` : `the ${benefitName}`
     } else {
       switch (benefitName) {
         case tsln.oas:
           const lowCase =
             benefitName.charAt(0).toLowerCase() + benefitName.slice(1)
-          return result > 0 ? ` de la ${lowCase}` : ` la ${lowCase}`
+          return displayAmount ? ` de la ${lowCase}` : `la ${lowCase}`
         case tsln.gis:
-          return result > 0 ? ` du ${benefitName}` : ` le ${benefitName}`
+          return displayAmount ? ` du ${benefitName}` : `le ${benefitName}`
         default:
-          return result > 0 ? ` de l'${benefitName}` : ` l'${benefitName}`
+          return displayAmount ? ` de l'${benefitName}` : `l'${benefitName}`
       }
     }
   }
@@ -36,15 +41,10 @@ export const EstimatedTotalItem: React.VFC<{
   return (
     <li>
       <strong>
-        {result.entitlement.result > 0
-          ? numberToStringCurrency(
-              result.entitlement.result ?? 0,
-              tsln._language
-            )
-          : ''}
+        {displayAmount &&
+          numberToStringCurrency(result.entitlement.result, tsln._language)}
       </strong>
-
-      {displayBenefitName(heading, result.entitlement.result)}
+      {displayBenefitName(heading, result.entitlement.result, displayAmount)}
     </li>
   )
 }

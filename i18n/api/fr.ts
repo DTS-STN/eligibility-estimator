@@ -538,7 +538,7 @@ const fr: Translations = {
   oasDeferralTable: {
     title: 'Montants de report estimés',
     headingAge: "Si vous attendez d'avoir...",
-    futureHeadingAge: 'Si vouz commencez votre pension à...',
+    futureHeadingAge: 'Si vous commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
   },
   links,
