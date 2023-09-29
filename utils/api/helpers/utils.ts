@@ -17,58 +17,157 @@ export function getEligibleBenefits(benefits) {
   return Object.keys(newObj).length === 0 ? null : newObj
 }
 
-export function getAgeArray(ages: number[]) {
-  const [userAge, partnerAge] = ages
-  const ageDiff = Math.abs(userAge - partnerAge)
+export function getAgeArray(residencyData: any) {
+  console.log('INSIDE GET AGE ARRAY FUNCTION')
   const result = []
+  console.log('residencyData', residencyData)
+  let [userAge, partnerAge] = residencyData.map((data) =>
+    parseInt(Object.keys(data)[0], 10)
+  )
+  let [userResidency, partnerResidency] = residencyData.map(
+    (data) => Object.values(data)[0]
+  )
 
-  if (ageDiff > 5 && ages.some((age) => age < 60)) {
-    while (!ages.some((age) => age === 60)) {
-      // should be "until some age is not over 60"
-      let [userAge, partnerAge] = ages
-      if (userAge > partnerAge && userAge < 65) {
-        // make this 65 user oas eligibility age
-        let diff = 65 - userAge // client oas eligibility age - user age
-        userAge += diff
-        partnerAge += diff
-      } else if (userAge < partnerAge) {
-        let diff = 60 - userAge // user ALW eli age instead of 60
-        userAge += diff
-        partnerAge += diff
-      } else {
-        let diff = 60 - partnerAge // partner ALW age instead of 60
-        userAge += diff
-        partnerAge += diff
-      }
-      ages = [userAge, partnerAge]
-      result.push(ages)
-    }
+  // Helper function to check ALW eligibility
+  function isEligibleForALW(age, residency, partnerOASEligibility) {
+    return age >= 60 && age <= 64 && residency >= 10 && partnerOASEligibility
   }
 
-  while (!ages.every((age) => age >= 65)) {
-    let [userAge, partnerAge] = ages
-    if (userAge >= 65 || partnerAge >= 65) {
-      if (userAge < partnerAge) {
-        let diff = 65 - userAge
-        userAge += diff
-        partnerAge += diff
-      } else {
-        let diff = 65 - partnerAge
-        userAge += diff
-        partnerAge += diff
-      }
-    } else {
-      const maxAge = Math.max(userAge, partnerAge)
-      const diff = 65 - maxAge
-      userAge += diff
-      partnerAge += diff
+  // Helper function to check OAS eligibility
+  function isEligibleForOAS(age, residency) {
+    return age >= 65 && residency >= 10
+  }
+
+  // Tracking initial eligibility
+  let userPrevEligibility = [
+    isEligibleForALW(
+      userAge,
+      userResidency,
+      isEligibleForOAS(partnerAge, partnerResidency)
+    ),
+    isEligibleForOAS(userAge, userResidency),
+  ]
+
+  let partnerPrevEligibility = [
+    isEligibleForALW(
+      partnerAge,
+      partnerResidency,
+      isEligibleForOAS(userAge, userResidency)
+    ),
+    isEligibleForOAS(partnerAge, partnerResidency),
+  ]
+
+  // Iterate until both are eligible for OAS
+  while (
+    !(
+      isEligibleForOAS(userAge, userResidency) &&
+      isEligibleForOAS(partnerAge, partnerResidency)
+    )
+  ) {
+    // Increase age and residency for both user and partner
+    userAge++
+    userResidency++
+    partnerAge++
+    partnerResidency++
+
+    // Check current eligibility
+    const userCurrEligibility = [
+      isEligibleForALW(
+        userAge,
+        userResidency,
+        isEligibleForOAS(partnerAge, partnerResidency)
+      ),
+      isEligibleForOAS(userAge, userResidency),
+    ]
+
+    const partnerCurrEligibility = [
+      isEligibleForALW(
+        partnerAge,
+        partnerResidency,
+        isEligibleForOAS(userAge, userResidency)
+      ),
+      isEligibleForOAS(partnerAge, partnerResidency),
+    ]
+
+    // If eligibility changed for either person, add to result
+    if (
+      userCurrEligibility.join() !== userPrevEligibility.join() ||
+      partnerCurrEligibility.join() !== partnerPrevEligibility.join()
+    ) {
+      result.push([userAge, partnerAge])
     }
-    ages = [userAge, partnerAge]
-    result.push(ages)
+
+    // Update previous eligibility
+    userPrevEligibility = userCurrEligibility
+    partnerPrevEligibility = partnerCurrEligibility
   }
 
   return result
 }
+
+// export function getAgeArray(ages: number[]) {
+//   // {70: 15, 64: 8} -> (72:17, 66:10) == [72,66]
+//   // {70: 15, 66: 8} -> (72:17, 68:10) == [72,68]
+//   // 60: 9, 65: 10 -> 61: 10, 66: 11 -> 65: 14, 70: 15 == [61, 66], [65, 70]
+//   // 45: 1, 62: 20 -> (48: 4, 65: 23), (60: 16, 77: 25), (65, 82) == [48, 65], [60, 77], [65, 82]
+
+//   // noone eligible -> client will eligible first -> then a year later partner will be eligible -> EVERYONE ELIGIBLE FOR OAS, DONE
+//   // {68: 5, 69: 4} -> (73: 10, 74: 9) -> (74: 11, 75: 10) => [73, 74], [74, 75]
+
+//   // 53, 59 -> (60,66), (65,71)
+//   // 53:2, 59:1 -> (60: 9, 66:8) -> (61:10, 67:9) -> (62:11, 68:10) -> (65:14, 71:13) == [62, 68], [65,71]
+//   const [userAge, partnerAge] = ages
+//   const ageDiff = Math.abs(userAge - partnerAge)
+//   const result = []
+
+//   if (ageDiff > 5 && ages.some((age) => age < 60)) {
+//     while (!ages.some((age) => age === 60)) {
+//       // should be "until some age is not over 60"
+//       let [userAge, partnerAge] = ages
+//       if (userAge > partnerAge && userAge < 65) {
+//         // make this 65 user oas eligibility age
+//         let diff = 65 - userAge // client oas eligibility age - user age
+//         userAge += diff
+//         partnerAge += diff
+//       } else if (userAge < partnerAge) {
+//         let diff = 60 - userAge // user ALW eli age instead of 60
+//         userAge += diff
+//         partnerAge += diff
+//       } else {
+//         let diff = 60 - partnerAge // partner ALW age instead of 60
+//         userAge += diff
+//         partnerAge += diff
+//       }
+//       ages = [userAge, partnerAge]
+//       result.push(ages)
+//     }
+//   }
+
+//   while (!ages.every((age) => age >= 65)) {
+//     // while both are not eligible
+//     let [userAge, partnerAge] = ages
+//     if (userAge >= 65 || partnerAge >= 65) {
+//       if (userAge < partnerAge) {
+//         let diff = 65 - userAge // partner OAS eligibility age instead of 65
+//         userAge += diff
+//         partnerAge += diff
+//       } else {
+//         let diff = 65 - partnerAge
+//         userAge += diff
+//         partnerAge += diff
+//       }
+//     } else {
+//       const maxAge = Math.max(userAge, partnerAge)
+//       const diff = 65 - maxAge
+//       userAge += diff
+//       partnerAge += diff
+//     }
+//     ages = [userAge, partnerAge]
+//     result.push(ages)
+//   }
+
+//   return result
+// }
 
 export function buildQuery(
   query,
@@ -166,6 +265,13 @@ export function buildQuery(
     )
   }
 
+  // need to have these inputs to make it work
+  // newQuery['age'] = '72'
+  // newQuery['yearsInCanadaSince18'] = '11'
+  // newQuery['partnerAge'] = '66'
+  // newQuery['partnerYearsInCanadaSince18'] = '10'
+
+  console.log('newQuery', newQuery)
   return newQuery
 }
 

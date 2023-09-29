@@ -136,6 +136,8 @@ export class FutureHandler {
   private getPartneredResults() {
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
+    const clientRes = Number(this.query.yearsInCanadaSince18)
+    const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
 
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
@@ -164,12 +166,14 @@ export class FutureHandler {
 
     const ages = [age, partnerAge]
 
-    console.log('ages', ages)
+    console.log('age', age)
+    console.log('partnerAge', partnerAge)
 
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
-    const futureAges = getAgeArray(ages)
-
-    console.log('futureAges', futureAges)
+    console.log('AFTER THE IF STATEMENT')
+    const ageResData = [{ [age]: clientRes }, { [partnerAge]: partnerRes }]
+    console.log('ageResData', ageResData)
+    const futureAges = getAgeArray(ageResData)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
