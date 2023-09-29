@@ -194,5 +194,4 @@ export function numberToStringCurrency(
     })
     .replace('.00', '')
     .replace(/,00\s/, '\xa0')
-    .replace(/\s/g, '');
 }
