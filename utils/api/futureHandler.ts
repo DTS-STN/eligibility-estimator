@@ -179,8 +179,6 @@ export class FutureHandler {
       },
     })
 
-    console.log('futureAges', futureAges)
-
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
       const clientResults = []

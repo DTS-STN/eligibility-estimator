@@ -988,6 +988,7 @@ export class BenefitHandler {
                 this.translations.detailWithHeading
                   .calculatedBasedOnIndividualIncome
               )
+
               allResults.client.gis.eligibility = clientGis.eligibility
               allResults.client.gis.entitlement.result = applicantGisResultT1
               allResults.client.gis.entitlement.type =

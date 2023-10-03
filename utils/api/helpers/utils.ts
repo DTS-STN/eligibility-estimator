@@ -18,7 +18,6 @@ export function getEligibleBenefits(benefits) {
 }
 
 export function getAgeArray(residencyData) {
-  console.log('residencyData', residencyData)
   let [userAge, partnerAge] = [
     residencyData.client.age,
     residencyData.partner.age,
@@ -65,16 +64,10 @@ export function getAgeArray(residencyData) {
     let pALW = yearsUntilALW(partnerAge, partnerRes)
     let pOAS = yearsUntilOAS(partnerAge, partnerRes)
 
-    console.log('cALW', cALW)
-    console.log('cOAS', cOAS)
-    console.log('pALW', pALW)
-    console.log('pOAS', pOAS)
-
     let arr = [cALW, cOAS, pALW, pOAS]
     if (arr.every((el) => el === null)) break
 
     const years = Math.min(...arr.filter((num) => num !== null))
-    console.log('years', years)
     userAge += years
     partnerAge += years
     userRes += years
@@ -82,7 +75,6 @@ export function getAgeArray(residencyData) {
     result.push([userAge, partnerAge])
   }
 
-  console.log('result', result)
   return result
 }
 
@@ -179,7 +171,6 @@ export function getAgeArray3(residencyData) {
     partnerPrevEligibility = partnerCurrEligibility
   }
 
-  console.log('result', result)
   return result
 }
 
@@ -370,13 +361,6 @@ export function buildQuery(
     )
   }
 
-  // need to have these inputs to make it work
-  // newQuery['age'] = '72'
-  // newQuery['yearsInCanadaSince18'] = '11'
-  // newQuery['partnerAge'] = '66'
-  // newQuery['partnerYearsInCanadaSince18'] = '10'
-
-  console.log('newQuery', newQuery)
   return newQuery
 }
 

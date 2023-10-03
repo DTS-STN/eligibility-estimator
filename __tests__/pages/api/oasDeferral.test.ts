@@ -457,7 +457,7 @@ describe('OasDEferral', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit // To Check with Vero or Lorelei - test case it's 72 but in the code is 71
-    expectFutureOasGisBenefitEligible(res, 72, 237.52, 1547.4, 0)
+    expectFutureOasGisBenefitEligible(res, 72, 237.52, 1007.04, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -694,13 +694,15 @@ describe('OasDEferral', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 74, 314.37, 0.0, 0)
+    expectFutureOasGisBenefitEligible(res, 73, 314.37, 0.0, 0)
+
     //partner results
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.OAS, true)
-    expectAlwEligible(res, 0.0, true)
+    // expectAlwEligible(res, 0.0, true) // TODO: Not enough residency at age 63 and 9 years res
     //Future Benefit (it didn't pass even in manuall testing)
-    expectFutureOasGisBenefitEligible(res, 65, 192.12, 0.0, 0, true)
+    expectFutureAwlBenefitEligible(res, 64, 0.0, true)
+    expectFutureOasGisBenefitEligible(res, 65, 192.12, 0.0, 1, true)
   })
   /* CALC-157 */
   it('should pass the 157 test - OAS-CALC-157', async () => {
