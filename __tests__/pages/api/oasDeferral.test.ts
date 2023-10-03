@@ -445,7 +445,7 @@ describe('OasDEferral', () => {
   })
 
   // There is a bug #141941. Should be retested when the bug is fixed
-  /* CALC-145 
+  /* CALC-145 */
   it('should pass the 145 test - OAS-CALC-145', async () => {
     const desiredName = 'CALC-145' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -457,7 +457,7 @@ describe('OasDEferral', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit // To Check with Vero or Lorelei - test case it's 72 but in the code is 71
-    expectFutureOasGisBenefitEligible(res, 71, 237.52, 1547.4, 0)
+    expectFutureOasGisBenefitEligible(res, 72, 237.52, 1547.4, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -465,7 +465,7 @@ describe('OasDEferral', () => {
 
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 66, 174.65, 1007.04, 0, true)
-  })*/
+  })
   /* CALC-146 */
   it('should pass the 146 test - OAS-CALC-146', async () => {
     const desiredName = 'CALC-146' // Replace with the desired name

@@ -4,6 +4,7 @@ import { RequestSchema as schema } from './definitions/schemas'
 import {
   buildQuery,
   getAgeArray,
+  getAgeArray2,
   OasEligibility,
   AlwsEligibility,
 } from './helpers/utils'
@@ -138,6 +139,7 @@ export class FutureHandler {
     const partnerAge = Number(this.query.partnerAge)
     const clientRes = Number(this.query.yearsInCanadaSince18)
     const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
+    const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
@@ -167,17 +169,17 @@ export class FutureHandler {
     const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
 
+    // const futureAges = getAgeArray2(ages)
+
     const futureAges = getAgeArray({
       client: { age, res: this.query.livedOnlyInCanada ? 40 : clientRes },
       partner: {
         age: partnerAge,
-        res:
-          this.query.partnerLivedOnlyInCanada ||
-          Number(this.query.partnerAge) < 60
-            ? 40
-            : partnerRes,
+        res: partnerOnlyCanada === 'true' || partnerAge < 60 ? 40 : partnerRes,
       },
     })
+
+    console.log('futureAges', futureAges)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
