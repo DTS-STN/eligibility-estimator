@@ -87,7 +87,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
         // client is Eligible however if the amount returned is 0 it requires a different text
         if (amount === 0) {
           return {
-            result: ResultKey.INELIGIBLE,
+            result: ResultKey.ELIGIBLE,
             reason: ResultReason.NONE,
             detail: this.translations.detail.alwEligibleIncomeTooHigh,
           }
@@ -154,7 +154,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           ? this.translations.detail.alwNotEligible
           : this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
-    } else if (!meetsReqIncome && meetsReqYears) {
+    } else if (!meetsReqIncome) {
       return {
         result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,
