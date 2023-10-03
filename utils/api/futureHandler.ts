@@ -4,7 +4,6 @@ import { RequestSchema as schema } from './definitions/schemas'
 import {
   buildQuery,
   getAgeArray,
-  getAgeArray2,
   OasEligibility,
   AlwsEligibility,
 } from './helpers/utils'
