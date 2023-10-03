@@ -1,6 +1,5 @@
-import { Button } from '@dts-stn/service-canada-design-system'
+import { Button } from '../components/Layout/Button'
 import type { NextPage } from 'next'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useTranslation } from '../components/Hooks'
@@ -106,9 +105,9 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           <div className="flex justify-start mt-8 sm:mt-12">
             <Button
               text={tsln.startBenefitsEstimator}
-              styling="supertask"
+              style="supertask"
               onClick={(e) => router.push('/questions')}
-              className=" w-auto justify-center mb-4"
+              custom=" w-auto justify-center mb-4"
               attributes={{
                 [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
               }}

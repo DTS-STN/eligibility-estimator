@@ -159,10 +159,8 @@ export const Layout: React.VFC<{
               heading={tsln.resultsPage.CTATitle}
               body={tsln.resultsPage.CTABody}
               containerClass="xs:container"
-              ButtonProps={{
-                text: tsln.resultsPage.CTAButton,
-                onClick: handleOnClick,
-              }}
+              buttonText={tsln.resultsPage.CTAButton}
+              onClick={handleOnClick}
             />
           </div>
         )}
