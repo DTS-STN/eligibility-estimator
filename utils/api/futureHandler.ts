@@ -165,15 +165,19 @@ export class FutureHandler {
     }
 
     const ages = [age, partnerAge]
-
-    console.log('age', age)
-    console.log('partnerAge', partnerAge)
-
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
-    console.log('AFTER THE IF STATEMENT')
-    const ageResData = [{ [age]: clientRes }, { [partnerAge]: partnerRes }]
-    console.log('ageResData', ageResData)
-    const futureAges = getAgeArray(ageResData)
+
+    const futureAges = getAgeArray({
+      client: { age, res: this.query.livedOnlyInCanada ? 40 : clientRes },
+      partner: {
+        age: partnerAge,
+        res:
+          this.query.partnerLivedOnlyInCanada ||
+          Number(this.query.partnerAge) < 60
+            ? 40
+            : partnerRes,
+      },
+    })
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
