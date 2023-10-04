@@ -2,7 +2,6 @@ import { getTranslations, Translations } from '../../i18n/api'
 import { consoleDev } from '../web/helpers/utils'
 import { AlwsBenefit } from './benefits/alwsBenefit'
 import { AlwBenefit } from './benefits/alwBenefit'
-import { EntitlementFormula } from './benefits/entitlementFormula'
 import { GisBenefit } from './benefits/gisBenefit'
 import { OasBenefit } from './benefits/oasBenefit'
 import { BaseBenefit } from './benefits/_base'
@@ -12,7 +11,6 @@ import {
   EntitlementResultType,
   Language,
   LegalStatus,
-  MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -44,7 +42,6 @@ import {
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
 import { evaluateOASInput, OasEligibility } from './helpers/utils'
-import { livingCountry } from '../../i18n/api/countries/en'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -779,82 +776,6 @@ export class BenefitHandler {
     allResults[prop][benefitName].eligibility = benefit.eligibility
     allResults[prop][benefitName].entitlement = benefit.entitlement
     allResults[prop][benefitName].cardDetail = benefit.cardDetail
-  }
-
-  private getSingleClientInput(useTable1: boolean): ProcessedInput {
-    //
-    // if useTable1 then force Table 1 over Table 3
-    //
-    const incomeHelper = new IncomeHelper(
-      this.rawInput.incomeAvailable,
-      false,
-      useTable1 ? this.rawInput.income : this.input.client.income.relevant,
-      0,
-      useTable1
-        ? new MaritalStatusHelper(MaritalStatus.SINGLE)
-        : new MaritalStatusHelper(MaritalStatus.PARTNERED)
-    )
-
-    const clientSingleInput: ProcessedInput = {
-      income: incomeHelper,
-      age: this.rawInput.age,
-      receiveOAS: this.rawInput.receiveOAS,
-      oasDeferDuration: this.rawInput.oasDeferDuration,
-      oasDefer: this.rawInput.oasDefer,
-      oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
-      maritalStatus: useTable1
-        ? new MaritalStatusHelper(MaritalStatus.SINGLE)
-        : new MaritalStatusHelper(MaritalStatus.PARTNERED),
-      livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
-      legalStatus: new LegalStatusHelper(this.rawInput.legalStatus),
-      livedOnlyInCanada: this.rawInput.livedOnlyInCanada,
-      // if not livedOnlyInCanada, assume yearsInCanadaSince18 is 40
-      yearsInCanadaSince18: this.rawInput.livedOnlyInCanada
-        ? 40
-        : this.rawInput.yearsInCanadaSince18,
-      everLivedSocialCountry: this.rawInput.everLivedSocialCountry,
-      invSeparated: this.rawInput.invSeparated,
-      partnerBenefitStatus: useTable1
-        ? new PartnerBenefitStatusHelper(this.rawInput.partnerBenefitStatus)
-        : new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
-    }
-
-    consoleDev('#2 oasDefer', clientSingleInput.oasDeferDuration)
-
-    return clientSingleInput
-  }
-
-  private getSinglePartnerInput(): ProcessedInput {
-    const incomeHelper = new IncomeHelper(
-      true,
-      false,
-      this.rawInput.partnerIncome,
-      0,
-      new MaritalStatusHelper(MaritalStatus.SINGLE)
-    )
-
-    const partnerInput: ProcessedInput = {
-      income: incomeHelper,
-      age: this.rawInput.partnerAge,
-      receiveOAS: this.rawInput.receiveOAS,
-      oasDefer: false, // pass dummy data because we will never use this anyway
-      oasDeferDuration: JSON.stringify({ months: 0, years: 0 }),
-      oasAge: 65, // pass dummy data because we will never use this anyway
-      maritalStatus: new MaritalStatusHelper(MaritalStatus.SINGLE),
-      livingCountry: new LivingCountryHelper(
-        this.rawInput.partnerLivingCountry
-      ),
-      legalStatus: new LegalStatusHelper(this.rawInput.partnerLegalStatus),
-      livedOnlyInCanada: this.rawInput.partnerLivedOnlyInCanada,
-      yearsInCanadaSince18: this.rawInput.partnerLivedOnlyInCanada
-        ? 40
-        : this.rawInput.partnerYearsInCanadaSince18,
-      everLivedSocialCountry: false, //required by ProcessedInput
-      partnerBenefitStatus: this.input.partner.partnerBenefitStatus,
-      invSeparated: this.rawInput.invSeparated,
-    }
-
-    return partnerInput
   }
 
   private getPartnerBenefitStatus(
