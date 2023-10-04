@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../Layout/Button'
+import { Button } from '../Forms/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPiggyBank } from '@fortawesome/free-solid-svg-icons'
 export interface ICTAProps {

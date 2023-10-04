@@ -1,4 +1,4 @@
-import { Button } from '../components/Layout/Button'
+import { Button } from '../components/Forms/Button'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
