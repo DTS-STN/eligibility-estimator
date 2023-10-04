@@ -578,7 +578,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     ) {
       // your Deferral Options
 
-      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+      if (this.deferral) {
+        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
+      }
 
       // if income too high
       if (this.eligibility.reason === ResultReason.INCOME) {
