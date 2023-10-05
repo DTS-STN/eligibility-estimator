@@ -60,7 +60,8 @@ export const ContextualAlert: React.FC<ContextualAlertProps> = ({
         />
       </div>
       <div
-        className={`overflow-auto border-l-4 border-[${alertColor}] pl-[24px] py-[16px] leading-8`}
+        style={{ borderColor: alertColor }}
+        className={`overflow-auto border-l-4 pl-[24px] py-[16px] leading-8`}
       >
         {asHtml ? (
           <p
