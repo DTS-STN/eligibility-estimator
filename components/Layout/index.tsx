@@ -1,16 +1,13 @@
-import {
-  Header,
-  Heading,
-  Date,
-  ContextualAlert as Message,
-} from '@dts-stn/service-canada-design-system'
+import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
+import { Header } from './Header'
 import { Footer } from './Footer'
 import { Head } from './Head'
 import { CTA } from '../ResultsPage/CTA'
+import { Date } from './Date'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
@@ -102,6 +99,7 @@ export const Layout: React.VFC<{
         link: tsln.breadcrumb7URL,
       })
   }
+
   const handleOnClick = () => {
     const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`
     router.push(link)
@@ -118,31 +116,31 @@ export const Layout: React.VFC<{
       <main className="mainContent">
         <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
-            id="mainHeader"
-            lang={router.locale}
-            linkPath={langToggleLink}
-            isAuthenticated={true}
-            menuProps={menuProps}
-            topnavProps={topnavProps}
-            searchProps={searchProps}
-            breadCrumbItems={breadcrumbs}
-            useParentContainer={true}
+            id="header"
+            locale={router.locale}
+            langUrl={langToggleLink}
+            breadcrumbItems={breadcrumbs}
+            headerText={{
+              skipToMainContent: tsln.skipToMainContent,
+              globalHeader: tsln.globalHeader,
+              testSiteNotice: tsln.testSiteNotice,
+              officialSiteNavigation: tsln.officialSiteNavigation,
+              languageSelection: tsln.languageSelection,
+              logoAltText: tsln.logoAltText,
+            }}
           />
-          <Heading
-            id="applicationTitle"
-            title={title}
-            className="mb-8 mt-4 sm:mt-12 sm:w-[100%]"
-          />
+          <h1 id="applicationTitle" className="h1 my-8">
+            {title}
+          </h1>
           <div className="mb-6">
             <Message
               id={'wip'}
-              alert_icon_id={'testkey'}
-              alert_icon_alt_text={tsln.warningText}
+              iconId={'testkey'}
+              iconAltText={tsln.warningText}
               type={'info'}
-              message_heading={tsln.workInProgress}
-              message_body={tsln.workInProgressBody}
-              whiteBG={true}
-              asHtml={true}
+              heading={tsln.workInProgress}
+              body={tsln.workInProgressBody}
+              asHtml
             />
           </div>
           {children}
@@ -155,19 +153,17 @@ export const Layout: React.VFC<{
               heading={tsln.resultsPage.CTATitle}
               body={tsln.resultsPage.CTABody}
               containerClass="xs:container"
-              ButtonProps={{
-                text: tsln.resultsPage.CTAButton,
-                onClick: handleOnClick,
-              }}
+              buttonText={tsln.resultsPage.CTAButton}
+              onClick={handleOnClick}
             />
           </div>
         )}
 
-        <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
+        <div className="xs:container s:container md:container lg:container my-8">
           <Date date={dateModified} label={tsln.dateModified} />
         </div>
 
-        <Footer />
+        <Footer id="footer" locale={router.locale} />
       </main>
     </>
   )

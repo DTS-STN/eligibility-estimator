@@ -20,6 +20,7 @@ export default class MainHandler {
     this.futureHandler = new FutureHandler(this.handler, query, value._language)
 
     const resultObj: any = {
+      input: value,
       visibleFields: this.handler.requiredFields,
       results: this.handler.benefitResults.client,
       futureClientResults: this.futureHandler.benefitResults?.client,

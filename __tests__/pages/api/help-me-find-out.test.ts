@@ -12,14 +12,11 @@ import {
   age60NoDefer,
   age65NoDefer,
   canadian,
-  expectAlwEligible,
-  expectOasEligible,
-  expectOasGisEligible,
   expectOasGisTooYoung,
   incomeZero,
   partnerIncomeZero,
-} from './expectUtils'
-import { mockGetRequest } from './factory'
+} from '../../utils/expectUtils'
+import { mockGetRequest } from '../../utils/factory'
 
 describe('Help Me Find Out scenarios', () => {
   it(`works when client old, partner old (partner=noOas, therefore gis income limit ${legalValues.gis.spouseNoOasIncomeLimit}, gis table 3)`, async () => {

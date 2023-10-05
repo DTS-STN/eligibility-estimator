@@ -61,6 +61,8 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années avez-vous vécu au Canada?",
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
+      "Combien d'années aviez-vous vécu au Canada lorsque vous avez commencé à recevoir votre pension de la Sécurité de la vieillesse?",
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'Avez-vous déjà vécu dans un pays ayant un {LINK_SOCIAL_AGREEMENT} avec le Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
@@ -90,6 +92,7 @@ const fr: Translations = {
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Seulement vécu au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
       'A vécu dans un pays avec un accord social',
     [FieldKey.MARITAL_STATUS]: 'État matrimonial',
@@ -120,6 +123,8 @@ const fr: Translations = {
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       'Modifier si vous avez seulement vécu au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
+      'Modifier le nombre d’années vécues au Canada',
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Modifier le nombre d’années vécues au Canada',
     [FieldKey.MARITAL_STATUS]: 'Modifier votre état matrimonial',
     [FieldKey.INV_SEPARATED]:
@@ -155,10 +160,12 @@ const fr: Translations = {
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_DEFER_DURATION]:
-      'Si vous n’avez pas reporté votre pension, passez à l’étape suivante.',
+      "Si vous n'avez pas reporté votre pension, passez à l'étape suivante.",
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+    [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
+      "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
   },
@@ -531,7 +538,7 @@ const fr: Translations = {
   oasDeferralTable: {
     title: 'Montants de report estimés',
     headingAge: "Si vous attendez d'avoir...",
-    futureHeadingAge: 'Si vouz commencez votre pension à...',
+    futureHeadingAge: 'Si vous commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
   },
   links,

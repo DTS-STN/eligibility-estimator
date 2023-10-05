@@ -17,54 +17,62 @@ export function getEligibleBenefits(benefits) {
   return Object.keys(newObj).length === 0 ? null : newObj
 }
 
-export function getAgeArray(ages: number[]) {
-  const [userAge, partnerAge] = ages
-  const ageDiff = Math.abs(userAge - partnerAge)
+export function getAgeArray(residencyData) {
+  let [userAge, partnerAge] = [
+    residencyData.client.age,
+    residencyData.partner.age,
+  ]
+  let [userRes, partnerRes] = [
+    residencyData.client.res,
+    residencyData.partner.res,
+  ]
+
+  // Early return if any element is missing
+  if ([userAge, partnerAge, userRes, partnerRes].some((el) => isNaN(el)))
+    return []
+
   const result = []
 
-  if (ageDiff > 5 && ages.some((age) => age < 60)) {
-    while (!ages.some((age) => age === 60)) {
-      // should be "until some age is not over 60"
-      let [userAge, partnerAge] = ages
-      if (userAge > partnerAge && userAge < 65) {
-        // make this 65 user oas eligibility age
-        let diff = 65 - userAge // client oas eligibility age - user age
-        userAge += diff
-        partnerAge += diff
-      } else if (userAge < partnerAge) {
-        let diff = 60 - userAge // user ALW eli age instead of 60
-        userAge += diff
-        partnerAge += diff
-      } else {
-        let diff = 60 - partnerAge // partner ALW age instead of 60
-        userAge += diff
-        partnerAge += diff
-      }
-      ages = [userAge, partnerAge]
-      result.push(ages)
+  function yearsUntilOAS(age, residency) {
+    if (age >= 65 && residency >= 10) {
+      return null
     }
+
+    let ageDiff = Math.max(0, 65 - age)
+    let residencyDiff = Math.max(0, 10 - residency)
+    return Math.max(ageDiff, residencyDiff)
   }
 
-  while (!ages.every((age) => age >= 65)) {
-    let [userAge, partnerAge] = ages
-    if (userAge >= 65 || partnerAge >= 65) {
-      if (userAge < partnerAge) {
-        let diff = 65 - userAge
-        userAge += diff
-        partnerAge += diff
-      } else {
-        let diff = 65 - partnerAge
-        userAge += diff
-        partnerAge += diff
-      }
-    } else {
-      const maxAge = Math.max(userAge, partnerAge)
-      const diff = 65 - maxAge
-      userAge += diff
-      partnerAge += diff
+  function yearsUntilALW(age, residency) {
+    if ((age >= 60 && age <= 64 && residency >= 10) || age > 64) {
+      return null
     }
-    ages = [userAge, partnerAge]
-    result.push(ages)
+
+    let ageDiff = Math.max(0, 60 - age)
+    let residencyDiff = Math.max(0, 10 - residency)
+
+    if (age + residencyDiff > 64) {
+      return null
+    }
+
+    return Math.max(ageDiff, residencyDiff)
+  }
+
+  while (true) {
+    let cALW = yearsUntilALW(userAge, userRes)
+    let cOAS = yearsUntilOAS(userAge, userRes)
+    let pALW = yearsUntilALW(partnerAge, partnerRes)
+    let pOAS = yearsUntilOAS(partnerAge, partnerRes)
+
+    let arr = [cALW, cOAS, pALW, pOAS]
+    if (arr.every((el) => el === null)) break
+
+    const years = Math.min(...arr.filter((num) => num !== null))
+    userAge += years
+    partnerAge += years
+    userRes += years
+    partnerRes += years
+    result.push([userAge, partnerAge])
   }
 
   return result
@@ -76,7 +84,9 @@ export function buildQuery(
   clientDeferralMeta,
   partnerDeferralMeta,
   clientAlreadyOasEligible,
-  partnerAlreadyOasEligible
+  partnerAlreadyOasEligible,
+  clientLockResidence,
+  partnerLockResidence
 ) {
   const newQuery = { ...query }
   const [userAge, partnerAge] = ageSet // 68, 65
@@ -97,12 +107,20 @@ export function buildQuery(
         newQuery['yearsInCanadaSince18'] = String(clientDeferralMeta.residency)
       }
     } else {
-      // just add residency
-      const newYrsInCanada = Math.min(
-        40,
-        Number(userAge) - Number(query.age) + Number(query.yearsInCanadaSince18)
-      )
-      newQuery['yearsInCanadaSince18'] = String(Math.floor(newYrsInCanada))
+      if (clientLockResidence) {
+        newQuery['yearsInCanadaSince18'] = String(
+          Math.floor(clientLockResidence)
+        )
+      } else {
+        // just add residency
+        const newYrsInCanada = Math.min(
+          40,
+          Number(userAge) -
+            Number(query.age) +
+            Number(query.yearsInCanadaSince18)
+        )
+        newQuery['yearsInCanadaSince18'] = String(Math.floor(newYrsInCanada))
+      }
     }
 
     // const newYrsInCanada = String(
@@ -148,7 +166,9 @@ export function buildQuery(
     newQuery['partnerYearsInCanadaSince18'] = String(
       Math.floor(
         increaseResidence
-          ? partnerNewYrsInCanada
+          ? partnerLockResidence
+            ? Math.floor(partnerLockResidence)
+            : partnerNewYrsInCanada
           : Number(partnerDeferralMeta.residency)
       )
     )
@@ -190,12 +210,13 @@ export function calculateAge(birthMonth: number, birthYear: number): number {
 export function OasEligibility(
   ageAtStart,
   yearsInCanadaAtStart,
-  livedOnlyInCanada = false
+  livedOnlyInCanada = false,
+  livingCountry = 'CAN'
 ) {
   let age = ageAtStart
   let yearsInCanada = yearsInCanadaAtStart
   const minAgeEligibility = 65
-  const minYearsOfResEligibility = 10
+  const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
 
   let ageOfEligibility
   let yearsOfResAtEligibility
@@ -285,6 +306,7 @@ export function evaluateOASInput(input) {
     age > eliObj.ageOfEligibility
       ? input.yearsInCanadaSince18 - ageDiff
       : input.yearsInCanada + ageDiff
+
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
     newInput['inputAge'] = input.age
@@ -292,7 +314,7 @@ export function evaluateOASInput(input) {
     newInput['receiveOAS'] = true
     newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
       ? 40
-      : Math.min(40, Math.round(newYearsInCan))
+      : Math.min(40, Math.floor(newYearsInCan))
     newInput['oasDeferDuration'] = JSON.stringify({
       months: Math.round(deferralMonths),
       years: 0,

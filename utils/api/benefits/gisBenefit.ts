@@ -22,16 +22,19 @@ import { EntitlementFormula } from './entitlementFormula'
 export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
   future: Boolean
+  originalInput?: ProcessedInput
   constructor(
     input: ProcessedInput,
     translations: Translations,
     private oasResult: BenefitResult<EntitlementResultOas>,
     partner?: Boolean,
-    future?: Boolean
+    future?: Boolean,
+    originalInput?: ProcessedInput
   ) {
     super(input, translations, BenefitKey.gis)
     this.partner = partner
     this.future = future
+    this.originalInput = originalInput
   }
 
   protected getEligibility(): EligibilityResult {
@@ -315,19 +318,21 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
+    const inputs = this.originalInput === null ? this.input : this.originalInput
     // Related to OAS Deferral, don't show if already receiving
-    const ageInOasRange = this.input.age >= 65 && this.input.age < 70
-
-    if (
-      this.partner !== true &&
-      this.entitlement.result !== 0 &&
-      ageInOasRange &&
-      !this.input.receiveOAS &&
-      !this.future
-    ) {
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.ifYouDeferYourPension
-      )
+    if (inputs) {
+      const ageInOasRange = inputs.age >= 65 && inputs.age < 70
+      if (
+        this.partner !== true &&
+        this.entitlement.result !== 0 &&
+        ageInOasRange &&
+        !inputs.receiveOAS &&
+        !this.future
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.ifYouDeferYourPension
+        )
+      }
     }
 
     if (this.partner) {

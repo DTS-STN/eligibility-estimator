@@ -88,7 +88,7 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    const eliObjOas = OasEligibility(Math.floor(age), yearsInCanada)
+    const eliObjOas = OasEligibility(age, yearsInCanada)
     const oasAge = eliObjOas.ageOfEligibility
 
     const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
@@ -136,6 +136,9 @@ export class FutureHandler {
   private getPartneredResults() {
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
+    const clientRes = Number(this.query.yearsInCanadaSince18)
+    const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
+    const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
@@ -164,7 +167,14 @@ export class FutureHandler {
 
     const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
-    const futureAges = getAgeArray(ages)
+
+    const futureAges = getAgeArray({
+      client: { age, res: this.query.livedOnlyInCanada ? 40 : clientRes },
+      partner: {
+        age: partnerAge,
+        res: partnerOnlyCanada === 'true' || partnerAge < 60 ? 40 : partnerRes,
+      },
+    })
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
@@ -172,6 +182,8 @@ export class FutureHandler {
       const partnerResults = []
       let benefitCounter = { oas: 0, gis: 0, alw: 0, alws: 0 }
 
+      let clientLockResidence
+      let partnerLockResidence
       futureAges.forEach((ageSet) => {
         const [userAge, partnerAge] = ageSet
         const newQuery = buildQuery(
@@ -180,7 +192,9 @@ export class FutureHandler {
           clientDeferralMeta,
           partnerDeferralMeta,
           clientAlreadyOasEligible,
-          partnerAlreadyOasEligible
+          partnerAlreadyOasEligible,
+          clientLockResidence,
+          partnerLockResidence
         )
 
         const { value } = schema.validate(newQuery, { abortEarly: false })
@@ -200,6 +214,32 @@ export class FutureHandler {
           handler.benefitResults.partner
         )
 
+        // Lock residence if this calculation produces an OAS/GIS result. We need to use the same number of years for subsequent OAS/GIS results if there are any
+        if (clientEligibleBenefits) {
+          const oasEligible =
+            handler.benefitResults?.client?.oas?.eligibility?.result ===
+              ResultKey.ELIGIBLE ||
+            handler.benefitResults?.client?.oas?.eligibility?.result ===
+              ResultKey.INCOME_DEPENDENT
+
+          if (oasEligible) {
+            clientLockResidence = newQuery['yearsInCanadaSince18']
+          }
+        }
+
+        if (partnerEligibleBenefits) {
+          const oasEligible =
+            handler.benefitResults?.partner?.oas?.eligibility?.result ===
+              ResultKey.ELIGIBLE ||
+            handler.benefitResults?.partner?.oas?.eligibility?.result ===
+              ResultKey.INCOME_DEPENDENT
+
+          if (oasEligible) {
+            partnerLockResidence = newQuery['partnerYearsInCanadaSince18']
+          }
+        }
+
+        // Add future results if available
         if (clientEligibleBenefits) {
           clientResults.push({ [userAge]: clientEligibleBenefits })
         }

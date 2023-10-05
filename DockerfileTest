@@ -3,7 +3,9 @@
 #   docker build --file DockerfileTest . 
 #
 FROM node:16.15.1-alpine AS production
-ENV NODE_ENV=production
+
+# test = test uses legalValuesJson_test.json to run the all the tests
+ENV NODE_ENV=test
 
 SHELL ["/bin/sh", "-c"]
 
@@ -41,4 +43,5 @@ WORKDIR $home
 COPY --chown=55:$group . . 
 
 RUN yarn install --immutable
-RUN yarn run test:unit field-reqs.test
+#RUN yarn run test:unit gisCoupleOnePenBenefit
+RUN yarn run test:unit 

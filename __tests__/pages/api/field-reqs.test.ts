@@ -10,11 +10,10 @@ import {
   age65NoDefer,
   canadaWholeLife,
   canadian,
-  expectAlwsEligible,
   income10k,
   partnerUndefined,
-} from './expectUtils'
-import { mockGetRequest } from './factory'
+} from '../../utils/expectUtils'
+import { mockGetRequest } from '../../utils/factory'
 
 describe('field requirement analysis', () => {
   it('requires base questions when nothing provided', async () => {

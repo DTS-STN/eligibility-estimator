@@ -10,6 +10,14 @@
     @apply focus-visible:ring-black;
   }
 
+  .skip-main {
+    @apply absolute w-px h-px -left-96;
+  }
+
+  .skip-main:focus-within {
+    @apply absolute w-screen h-auto top-4 left-0 z-50 flex justify-center;
+  }
+
   table,
   p,
   label,
@@ -20,6 +28,29 @@
 
   .mainContent {
     @apply text-base;
+  }
+
+  .footerLine::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 36px;
+    height: 4px;
+    background-color: #ffffff;
+  }
+
+  .custom-bullet li {
+    list-style-type: none;
+  }
+
+  /**
+    adding a custom bullet style because the default bullet is too big
+  */
+  .custom-bullet::before {
+    content: '•';
+    font-size: 17px;
+    padding-right: 12px;
   }
 
   #cta-feedback h3 {
@@ -74,7 +105,7 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content;
+    @apply text-mobile sm:text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content pb-2;
   }
 
   .h2 {
@@ -266,7 +297,9 @@
 
   @-moz-document url-prefix() {
     #enter-age select,
-    #enter-partnerAge select {
+    #enter-partnerAge select,
+    #oasDeferDuration-years,
+    #oasDeferDuration-months {
       background-color: #fff;
     }
   }

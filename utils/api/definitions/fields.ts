@@ -15,6 +15,7 @@ export enum FieldKey {
   LEGAL_STATUS = 'legalStatus',
   LIVED_ONLY_IN_CANADA = 'livedOnlyInCanada',
   YEARS_IN_CANADA_SINCE_18 = 'yearsInCanadaSince18',
+  YEARS_IN_CANADA_SINCE_OAS = 'yearsInCanadaSinceOAS',
   EVER_LIVED_SOCIAL_COUNTRY = 'everLivedSocialCountry',
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
   PARTNER_INCOME_AVAILABLE = 'partnerIncomeAvailable',
@@ -95,6 +96,11 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.YEARS_IN_CANADA_SINCE_18,
+    category: { key: FieldCategory.RESIDENCE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: {
+    key: FieldKey.YEARS_IN_CANADA_SINCE_OAS,
     category: { key: FieldCategory.RESIDENCE },
     type: FieldType.NUMBER,
   },

@@ -154,7 +154,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           ? this.translations.detail.alwNotEligible
           : this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
-    } else if (!meetsReqIncome) {
+    } else if (!meetsReqIncome && meetsReqYears) {
       return {
         result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,

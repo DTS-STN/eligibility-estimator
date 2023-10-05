@@ -15,6 +15,12 @@ const en: WebTranslations = {
   _language: Language.EN,
   metaLanguage: ISOLanguage.EN,
 
+  skipToMainContent: 'Skip to main content',
+  globalHeader: 'Global header',
+  testSiteNotice: 'Test site notice',
+  officialSiteNavigation: 'Canada.ca official site',
+  languageSelection: 'Language selection',
+  logoAltText: 'Government of Canada',
   oas: 'Old Age Security pension',
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
@@ -27,6 +33,113 @@ const en: WebTranslations = {
   langLong: 'eng',
   creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
+  aboutGovernment: 'About Government',
+  footerTitle: 'Government of Canada',
+  aboutSite: 'About this site',
+  // Main footer links
+  landscapeLinks: {
+    contacts: {
+      text: 'All contacts',
+      link: 'https://www.canada.ca/en/contact.html',
+    },
+    departments: {
+      text: 'Departments and agencies',
+      link: 'https://www.canada.ca/en/government/dept.html',
+    },
+    about: {
+      text: 'About government',
+      link: 'https://www.canada.ca/en/government/system.html',
+    },
+    jobs: { text: 'Jobs', link: 'https://www.canada.ca/en/services/jobs.html' },
+    taxes: {
+      text: 'Taxes',
+      link: 'https://www.canada.ca/en/services/taxes.html',
+    },
+    canadaAndWorld: {
+      text: 'Canada and the world',
+      link: 'https://international.gc.ca/world-monde/index.aspx?lang=eng',
+    },
+    immigration: {
+      text: 'Immigration and citizenship',
+      link: 'https://www.canada.ca/en/services/immigration-citizenship.html',
+    },
+    environment: {
+      text: 'Environment and natural resources',
+      link: 'https://www.canada.ca/en/services/environment.html',
+    },
+    finance: {
+      text: 'Money and finance',
+      link: 'https://www.canada.ca/en/services/finance.html',
+    },
+    travel: { text: 'Travel and tourism', link: 'https://travel.gc.ca/' },
+    nationalSecurity: {
+      text: 'National security and defence',
+      link: 'https://www.canada.ca/en/services/defence.html',
+    },
+    innovation: {
+      text: 'Science and innovation',
+      link: 'https://www.canada.ca/en/services/science.html',
+    },
+    business: {
+      text: 'Business',
+      link: 'https://www.canada.ca/en/services/business.html',
+    },
+    culture: {
+      text: 'Culture, history and sport',
+      link: 'https://www.canada.ca/en/services/culture.html',
+    },
+    indigenous: {
+      text: 'Indigenous peoples',
+      link: 'https://www.canada.ca/en/services/indigenous-peoples.html',
+    },
+    benefit: {
+      text: 'Benefits',
+      link: 'https://www.canada.ca/en/services/benefits.html',
+    },
+    policing: {
+      text: 'Policing, justice and emergencies',
+      link: 'https://www.canada.ca/en/services/policing.html',
+    },
+    veterans: {
+      text: 'Veterans and military',
+      link: 'https://www.canada.ca/en/services/veterans-military.html',
+    },
+    health: {
+      text: 'Health',
+      link: 'https://www.canada.ca/en/services/health.html',
+    },
+    transport: {
+      text: 'Transport and infrastructure',
+      link: 'https://www.canada.ca/en/services/transport.html',
+    },
+    youth: {
+      text: 'Youth',
+      link: 'https://www.canada.ca/en/services/youth.html',
+    },
+  },
+  // Subfooter brand links
+  brandLinks: {
+    socialMedia: {
+      text: 'Social Media',
+      link: 'https://www.canada.ca/en/social.html',
+    },
+    mobile: {
+      text: 'Mobile applications',
+      link: 'https://www.canada.ca/en/mobile.html',
+    },
+    about: {
+      text: 'About Canada.ca',
+      link: 'https://www.canada.ca/en/government/about.html',
+    },
+    terms: {
+      text: 'Terms and conditions',
+      link: 'https://www.canada.ca/en/transparency/terms.html',
+    },
+    privacy: {
+      text: 'Privacy',
+      link: 'https://www.canada.ca/en/transparency/privacy.html',
+    },
+  },
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
@@ -227,6 +340,8 @@ const en: WebTranslations = {
       "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsSince18Empty]:
+      'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.yearsSinceOASEmpty]:
       'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
