@@ -699,7 +699,7 @@ describe('OasDEferral', () => {
     //partner results
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.OAS, true)
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+    expect(res.body.partnerResults.alw.eligibility.reason).toEqual(
       ResultReason.YEARS_IN_CANADA
     )
     //Future Benefit
