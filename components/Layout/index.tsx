@@ -1,7 +1,4 @@
-import {
-  Heading,
-  ContextualAlert as Message,
-} from '@dts-stn/service-canada-design-system'
+import { ContextualAlert as Message } from './ContextualAlert'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -132,20 +129,20 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          <Heading
+          <h1
             id="applicationTitle"
-            title={title}
-            className="mb-8 mt-4 sm:mt-12 sm:w-[100%]"
-          />
+            className="font-header-gc font-[700] text-[#333333] text-[38px] leading-[42px] mb-8 mt-4 sm:mt-12 sm:w-[100%]"
+          >
+            {title}
+          </h1>
           <div className="mb-6">
             <Message
               id={'wip'}
-              alert_icon_id={'testkey'}
-              alert_icon_alt_text={tsln.warningText}
+              iconId={'testkey'}
+              iconAltText={tsln.warningText}
               type={'info'}
-              message_heading={tsln.workInProgress}
-              message_body={tsln.workInProgressBody}
-              whiteBG={true}
+              heading={tsln.workInProgress}
+              body={tsln.workInProgressBody}
               asHtml={true}
             />
           </div>
