@@ -92,7 +92,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
+    .message(ValidationErrors.yearsSince18Empty),
   yearsInCanadaSinceOAS: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsSinceOASEmpty })
@@ -183,7 +183,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.partnerYearsInCanadaMinusAge),
+    .message(ValidationErrors.partnerYearsSince18Empty),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
