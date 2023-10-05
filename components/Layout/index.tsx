@@ -129,10 +129,7 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          <h1
-            id="applicationTitle"
-            className="font-header-gc font-[700] text-[#333333] text-[38px] leading-[42px] mb-8 mt-4 sm:mt-12 sm:w-[100%]"
-          >
+          <h1 id="applicationTitle" className="h1 my-8">
             {title}
           </h1>
           <div className="mb-6">
@@ -143,7 +140,7 @@ export const Layout: React.VFC<{
               type={'info'}
               heading={tsln.workInProgress}
               body={tsln.workInProgressBody}
-              asHtml={true}
+              asHtml
             />
           </div>
           {children}

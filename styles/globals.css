@@ -105,7 +105,7 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content;
+    @apply text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content pb-2;
   }
 
   .h2 {

@@ -1,9 +1,7 @@
 import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
-import {
-  ContextualAlert as Message,
-  Link as DSLink,
-} from '@dts-stn/service-canada-design-system'
+import { Link as DSLink } from '@dts-stn/service-canada-design-system'
+import { ContextualAlert as Message } from './ContextualAlert'
 import { Language } from '../../utils/api/definitions/enums'
 
 export const ErrorsSummary: any = ({ errorFields }) => {
@@ -43,12 +41,10 @@ export const ErrorsSummary: any = ({ errorFields }) => {
       <Message
         id={`form-errors-${errorFields.length}`}
         type="danger"
-        message_heading={
-          tsln.errorBoxTitle + errorFields.length + titleTranslation
-        }
-        message_body={messageBody}
-        alert_icon_id="form-errors"
-        alert_icon_alt_text={tsln.warningText}
+        heading={tsln.errorBoxTitle + errorFields.length + titleTranslation}
+        body={messageBody}
+        iconId="form-errors"
+        iconAltText={tsln.warningText}
       />
     </div>
   )

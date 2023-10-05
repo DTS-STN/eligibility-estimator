@@ -7,7 +7,7 @@ interface ContextualAlertProps {
   type: AlertType
   iconId: string
   iconAltText: string
-  asHtml: boolean
+  asHtml?: boolean
 }
 
 type AlertType = 'warning' | 'info' | 'success' | 'danger'
