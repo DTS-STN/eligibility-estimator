@@ -1,4 +1,4 @@
-import { ContextualAlert as Message } from './ContextualAlert'
+import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { WebTranslations } from '../../i18n/web'
