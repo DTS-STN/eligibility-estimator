@@ -75,7 +75,6 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectOasEligible(res, EntitlementResultType.FULL, 768.46, true)
     expectGisEligible(res, 452.09, true)
     expectAlwTooOld(res, true)
-    
   })
   /* CALC-26 */
   it('should pass 26 test - CALC-26', async () => {
@@ -306,7 +305,6 @@ describe('gisCoupleTwoPensBenefit', () => {
     expectOasEligible(res, EntitlementResultType.FULL, 698.6, true)
     expectGisEligible(res, 898.45, true)
     expectAlwTooOld(res, true)
-    
   })
 
   /* CALC-38 */
