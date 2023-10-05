@@ -87,7 +87,7 @@ describe('AlwsBenefit', () => {
     expectAlwMarital(res)
     expectAlwsEligible(res, 811.51)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 476.45,0)
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 476.45, 0)
     expectFutureDeferralTable(res, 65, 0, futureDeferralTable)
   })
 
