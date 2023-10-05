@@ -1,4 +1,4 @@
-import { Button } from '@dts-stn/service-canada-design-system'
+import { Button } from '../Forms/Button'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
@@ -265,8 +265,8 @@ const ResultsPage: React.VFC<{
           <Button
             text={tsln.modifyAnswers}
             id={'EditAnswers'}
-            styling="secondary"
-            className="mt-6 justify-center md:w-[fit-content]"
+            style="secondary"
+            custom="mt-6 justify-center md:w-[fit-content]"
             onClick={(e) => router.push('/questions')}
           />
         </div>
