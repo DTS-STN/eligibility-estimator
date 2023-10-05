@@ -699,8 +699,10 @@ describe('OasDEferral', () => {
     //partner results
     expectOasNotEligible(res, true)
     expectGisNotEligible(res, ResultReason.OAS, true)
-    expectAlwTooOld(res) // Actually a residency issue: 9 years not enough at age 63
-    //Future Benefit (it didn't pass even in manuall testing)
+    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+      ResultReason.YEARS_IN_CANADA
+    )
+    //Future Benefit
     expectFutureAwlBenefitEligible(res, 64, 0.0, true)
     expectFutureOasGisBenefitEligible(res, 65, 192.12, 0.0, 1, true)
   })
