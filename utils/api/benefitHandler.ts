@@ -222,7 +222,7 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS && clientAge > 65) {
+    if (this.input.client.receiveOAS && clientAge >= 65) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 
