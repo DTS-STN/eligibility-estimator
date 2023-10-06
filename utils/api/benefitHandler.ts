@@ -151,7 +151,9 @@ export class BenefitHandler {
       income: incomeHelper,
       age: this.rawInput.age,
       receiveOAS: this.rawInput.receiveOAS,
-      oasDeferDuration: this.rawInput.oasDeferDuration,
+      oasDeferDuration:
+        this.rawInput.oasDeferDuration ||
+        JSON.stringify({ months: 0, years: 0 }),
       oasDefer: this.rawInput.oasDefer,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
@@ -222,7 +224,7 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS && clientAge >= 65) {
+    if (this.input.client.receiveOAS && clientAge > 65) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 
