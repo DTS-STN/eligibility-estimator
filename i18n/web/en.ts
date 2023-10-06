@@ -339,9 +339,7 @@ const en: WebTranslations = {
     [ValidationErrors.partnerYearsSince18Empty]:
       "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
-    [ValidationErrors.yearsSince18Empty]:
-      'Please enter a number no higher than your age minus 18.',
-    [ValidationErrors.yearsSinceOASEmpty]:
+    [ValidationErrors.yearsInCanadaMinusAge]:
       'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
@@ -381,8 +379,6 @@ const en: WebTranslations = {
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
       'You need to have lived in Canada for at least 20&nbsp;years to receive any of the benefits covered by this tool.',
-    [ValidationErrors.yearsInCanadaMinusAge]:
-      'The number of years you have lived in Canada should be no more than your age minus 18.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:

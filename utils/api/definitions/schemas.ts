@@ -89,13 +89,13 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.onlyInCanadaEmpty }),
   yearsInCanadaSince18: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.yearsSince18Empty })
+    .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
   yearsInCanadaSinceOAS: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.yearsSinceOASEmpty })
+    .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
     .integer()
     .max(Joi.ref('age', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.yearsInCanadaMinusAge),
@@ -183,7 +183,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.partnerYearsInCanadaMinusAge),
+    .message(ValidationErrors.partnerYearsSince18Empty),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
