@@ -1,7 +1,5 @@
-import {
-  AccordionForm,
-  ContextualAlert as Message,
-} from '@dts-stn/service-canada-design-system'
+import { AccordionForm } from '@dts-stn/service-canada-design-system'
+import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -274,13 +272,12 @@ export const QuestionsPage: React.VFC = ({}) => {
             <div className="mt-6 md:pr-12 msg-container border-warning">
               <Message
                 id={field.key}
-                alert_icon_id={field.key}
-                alert_icon_alt_text={tsln.warningText}
+                iconId={field.key}
+                iconAltText={tsln.warningText}
                 type={'warning'}
-                message_heading={tsln.unableToProceed}
-                message_body={field.error}
-                asHtml={true}
-                whiteBG={true}
+                heading={tsln.unableToProceed}
+                body={field.error}
+                asHtml
               />
             </div>
           )}

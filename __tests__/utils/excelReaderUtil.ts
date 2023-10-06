@@ -1,3 +1,4 @@
+import { calculateAge } from '../../utils/api/helpers/utils'
 import * as XLSX from 'xlsx'
 import {
   LegalStatus,
@@ -34,19 +35,20 @@ function readExcelData(filePath: string): string[] {
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   let payload: Record<string, any> = {
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
-    age: rowToTransform['Age '],
+    age: rowToTransform['Age '].toString().includes(';')
+      ? calculateAge(
+          extractValue(rowToTransform['Age '], 1),
+          extractValue(rowToTransform['Age '], 0)
+        )
+      : rowToTransform['Age '],
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
         ? undefined
         : '{"years":' +
-          extractValueBeforeSemicolon(
-            rowToTransform['Delay (# of Years and Months)']
-          ) +
+          extractValue(rowToTransform['Delay (# of Years and Months)'], 0) +
           ',"months":' +
-          extractFirstCharacterAfterSemicolon(
-            rowToTransform['Delay (# of Years and Months)']
-          ) +
+          extractValue(rowToTransform['Delay (# of Years and Months)'], 1) +
           '}',
     //oasDefer: false, // no longer used.
     //oasAge: 0,
@@ -160,7 +162,7 @@ function transformYearsInCanadaSinceOAS18Value(
   partner?: boolean
 ): string | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
-    return '40'
+    return undefined
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
   }
@@ -217,22 +219,15 @@ function transformPartnerBenefitStatusValue(value: string): String {
   return undefined
 }
 
-function extractValueBeforeSemicolon(value: string): string {
+function extractValue(value: string, pos: number): number {
   if (value) {
     const parts = value.split(';')
     if (parts.length > 1 && parts[1].trim().length > 0) {
-      return parts[0].trim()
+      if (pos > 0) {
+        return +parts[pos].trim()[0]
+      }
+      return +parts[pos].trim()
     }
+    return +value
   }
-  return value
-}
-
-function extractFirstCharacterAfterSemicolon(value: string): string {
-  if (value) {
-    const parts = value.split(';')
-    if (parts.length > 1 && parts[1].trim().length > 0) {
-      return parts[1].trim()[0]
-    }
-  }
-  return value
 }
