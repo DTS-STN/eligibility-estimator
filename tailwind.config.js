@@ -33,6 +33,7 @@ module.exports = {
         h2: ['36px', '40px'],
         xs: ['32px', '36px'],
         h1: ['38px', '42px'], // requires red <hr /> below
+        mobile: ['34px', '38px'],
         small: ['14px', '16px'],
       },
       colors: {
