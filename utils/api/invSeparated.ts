@@ -154,6 +154,8 @@ export function InvSeparatedAllCases(
 
       //          Total Amount Couple > Total Amount Single
       //
+
+      // TODO: This needs to evaluate to true, then it will work
       const useT1versusT3 = applicantGisResultT1 > applicantGisStatusBased
 
       if (totalAmountSingle < totalAmountCouple) {
