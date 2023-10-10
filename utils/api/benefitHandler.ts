@@ -728,13 +728,14 @@ export class BenefitHandler {
 
     // Now that the above dependencies are satisfied, we can do GIS entitlement.
     // deal with involuntary separated scenario
+    console.log('allResults BEFORE INV SEP BLOCK', allResults)
     if (
       this.input.client.invSeparated &&
       this.input.client.maritalStatus.partnered
     ) {
       //
       // All cases for InvSeparated moved to another file to made this one smaller
-
+      console.log('---------------this.future-------------', this.future)
       InvSeparatedAllCases(
         clientOas,
         clientGis,
@@ -765,6 +766,7 @@ export class BenefitHandler {
       allResults.client.alws.cardDetail = clientAlws.cardDetail
     }
 
+    console.log('alResults AFTER BLOCK', allResults)
     // All done!
     return allResults
   }

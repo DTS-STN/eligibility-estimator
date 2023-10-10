@@ -53,6 +53,7 @@ export function InvSeparatedAllCases(
   rawInput: Partial<RequestInput>,
   allResults: BenefitResultsObjectWithPartner
 ) {
+  if (future) console.log('-------------THIS IS FUTURE---------------')
   //
   const isIncomeProvided =
     input.client.income.provided && input.partner.income.provided
@@ -61,7 +62,7 @@ export function InvSeparatedAllCases(
 
   if (isIncomeProvided) {
     // *************************************
-    //  Case #1
+    //  Case #1 - Both eligible for benefit
     // *************************************
 
     if (clientOas.entitlement.result > 0 && partnerOas.entitlement.result > 0) {
@@ -79,7 +80,7 @@ export function InvSeparatedAllCases(
       ).getEntitlementAmount()
 
       consoleDev(
-        'both Oas > 0 - applicantGisResultTable1',
+        'both Oas > 0 - applicantGisResultTable1', // 231.81
         applicantGisResultT1
       )
 
@@ -99,12 +100,23 @@ export function InvSeparatedAllCases(
 
       maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
 
+      console.log(
+        'rawInput.partnerBenefitStatus',
+        rawInput.partnerBenefitStatus
+      )
+      console.log(
+        'input.partner.partnerBenefitStatus',
+        input.partner.partnerBenefitStatus
+      )
+
       let benefitStatus = new PartnerBenefitStatusHelper(
         rawInput.partnerBenefitStatus === PartnerBenefitStatus.NONE
           ? PartnerBenefitStatus.NONE
           : PartnerBenefitStatus.OAS_GIS
       )
 
+      console.log('input.client.income.relevant', input.client.income.relevant)
+      console.log('partner benefitStatus', benefitStatus) // both receiving (T2) correctly uses T2
       const applicantGisStatusBased = new EntitlementFormula(
         input.client.income.relevant,
         maritalStatus,
@@ -114,7 +126,7 @@ export function InvSeparatedAllCases(
       ).getEntitlementAmount()
 
       consoleDev(
-        'both Oas > 0 - applicantGisStatusBased',
+        'both Oas > 0 - applicantGisStatusBased', //502.40
         applicantGisStatusBased
       )
 
@@ -127,7 +139,7 @@ export function InvSeparatedAllCases(
         allResults.partner.oas
       ).getEntitlementAmount()
 
-      consoleDev('both Oas > 0 - partnerGisResultT2', partnerGisResultT2)
+      consoleDev('both Oas > 0 - partnerGisResultT2', partnerGisResultT2) // 15.87
 
       // define total_amt_singleA
       const totalAmountSingleApplicant =
@@ -151,12 +163,17 @@ export function InvSeparatedAllCases(
 
       // define Total_amt_Couple (need to add gis enhancement? )
       const totalAmountCouple = totalAmountCoupleA + totalAmountCoupleB
-
       //          Total Amount Couple > Total Amount Single
       //
 
       // TODO: This needs to evaluate to true, then it will work
-      const useT1versusT3 = applicantGisResultT1 > applicantGisStatusBased
+      // this evaluates to False -> applicantGisStatusBased (T3) is larger here
+      // Tool is showing result of T3 (combined income, 1 pensioner, 1 not receiving) -> Should use T1 (individual income)
+      // OR T2 (combined income, 2 pensioners)
+      // Because Inv Sep, CANNOT be T3?
+      const useT1versusT3 =
+        applicantGisResultT1 + partnerGisResultT1 >
+        applicantGisStatusBased + partnerGisResultT2
 
       if (totalAmountSingle < totalAmountCouple) {
         consoleDev(
@@ -195,6 +212,8 @@ export function InvSeparatedAllCases(
           false,
           future
         )
+
+        console.log('clientGis', clientGis)
 
         if (useT1versusT3) {
           clientGis.cardDetail.collapsedText.push(
