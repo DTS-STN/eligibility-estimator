@@ -11,7 +11,7 @@ export const webDictionary = { [Language.EN]: en, [Language.FR]: fr }
 
 export type WebTranslations = {
   _language: Language
-  metaLanguage: ISOLanguage
+  ISOlang: ISOLanguage
 
   skipToMainContent: string
   globalHeader: string
@@ -58,7 +58,6 @@ export type WebTranslations = {
   testSiteHeader: string
   otherLang: string
   otherLangCode: string
-  langLong: string
   creator: string
   search: string
   breadcrumb1aTitle: string
