@@ -154,6 +154,8 @@ export function InvSeparatedAllCases(
 
       //          Total Amount Couple > Total Amount Single
       //
+
+      // T1versusT3 only relevan in scenarios when 1 partner receives GIS and other, not receiving any benefit
       const useT1versusT3 = applicantGisResultT1 > applicantGisStatusBased
 
       if (totalAmountSingle < totalAmountCouple) {
