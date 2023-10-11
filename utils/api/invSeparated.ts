@@ -130,11 +130,15 @@ export function InvSeparatedAllCases(
         applicantGisStatusBased
       )
 
+      console.log(
+        'input.partner.partnerBenefitStatus',
+        input.partner.partnerBenefitStatus
+      )
       // partner gis using table2
       const partnerGisResultT2 = new EntitlementFormula(
         input.client.income.relevant,
         maritalStatus,
-        input.partner.partnerBenefitStatus,
+        benefitStatus,
         input.partner.age,
         allResults.partner.oas
       ).getEntitlementAmount()
