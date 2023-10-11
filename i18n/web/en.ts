@@ -13,7 +13,7 @@ import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
-  metaLanguage: ISOLanguage.EN,
+  ISOlang: ISOLanguage.EN,
 
   skipToMainContent: 'Skip to main content',
   globalHeader: 'Global header',
@@ -30,7 +30,6 @@ const en: WebTranslations = {
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   otherLangCode: 'FR',
-  langLong: 'eng',
   creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
   aboutGovernment: 'About Government',

@@ -14,7 +14,7 @@ import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
-  metaLanguage: ISOLanguage.FR,
+  ISOlang: ISOLanguage.FR,
 
   skipToMainContent: 'Passer au contenu principal',
   globalHeader: 'En-tête général',
@@ -31,7 +31,6 @@ const fr: WebTranslations = {
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   otherLangCode: 'EN',
-  langLong: 'fra',
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   aboutGovernment: 'Au sujet du gouvernement',
