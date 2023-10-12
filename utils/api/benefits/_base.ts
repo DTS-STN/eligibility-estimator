@@ -97,12 +97,11 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     }
 
     if (
-      this.eligibility.result === ResultKey.ELIGIBLE ||
-      this.eligibility.result === ResultKey.INCOME_DEPENDENT
+      (this.eligibility.result === ResultKey.ELIGIBLE ||
+        this.eligibility.result === ResultKey.INCOME_DEPENDENT) &&
+      this.getAutoEnrollment()
     ) {
-      text += this.getAutoEnrollment()
-        ? `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
-        : `<div class="mt-8">${this.translations.detail.autoEnrollFalse}</div>`
+      text += `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
     }
 
     return text
