@@ -1,8 +1,8 @@
 import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
-import { Link as DSLink } from '@dts-stn/service-canada-design-system'
 import { ContextualAlert as Message } from './ContextualAlert'
 import { Language } from '../../utils/api/definitions/enums'
+import Link from 'next/link'
 
 export const ErrorsSummary: any = ({ errorFields }) => {
   const tsln = useTranslation<WebTranslations>()
@@ -14,13 +14,16 @@ export const ErrorsSummary: any = ({ errorFields }) => {
       {errorFields.map((field) => {
         return (
           <li key={field.key}>
-            <DSLink
-              id={`errorbox-${field.key}`}
-              href={`questions#${field.key}`}
-              text={field.error}
-              target="_self"
-              ariaLabel={tsln.resultsEditAriaLabels[field.key]}
-            />
+            <Link href={`questions#${field.key}`}>
+              <a
+                id={`errorbox-${field.key}`}
+                target="_self"
+                aria-label={tsln.resultsEditAriaLabels[field.key]}
+                className="underline text-[#284162] text-[20px] leading-[22px] hover:text-[#0535D2]"
+              >
+                {field.error}
+              </a>
+            </Link>
           </li>
         )
       })}
