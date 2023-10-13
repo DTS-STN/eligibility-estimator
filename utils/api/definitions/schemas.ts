@@ -28,7 +28,21 @@ export const getMinBirthYear = () => {
   const partialYear = (new Date().getMonth() / 12).toFixed(1)
   return wholeYear + parseFloat(partialYear)
 }
+// Validate if the age is not under 18
+// and the birth year is between 1800 and the current year
+const customAgeValidation = (value, helpers) => {
+  const currentYear = new Date().getFullYear()
+  const age = value
+  const birthYear = currentYear - age
 
+  if (birthYear < 1800 || birthYear > currentYear) {
+    return helpers.message(ValidationErrors.invalidAge)
+  } else if (age < 18) {
+    return helpers.message(ValidationErrors.ageUnder18)
+  }
+
+  return value
+}
 export const RequestSchema = Joi.object({
   incomeAvailable: Joi.boolean()
     .required()
@@ -51,10 +65,7 @@ export const RequestSchema = Joi.object({
   age: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
-    .min(18)
-    .message(ValidationErrors.ageUnder18)
-    .max(getMinBirthYear())
-    .message(ValidationErrors.invalidAge),
+    .custom(customAgeValidation, 'Custom Validation'),
   receiveOAS: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.receiveOASEmpty }),
@@ -162,10 +173,7 @@ export const RequestSchema = Joi.object({
   partnerAge: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
-    .min(18)
-    .message(ValidationErrors.partnerAgeUnder18)
-    .max(getMinBirthYear())
-    .message(ValidationErrors.invalidAge),
+    .custom(customAgeValidation, 'Custom Validation'),
   partnerLivingCountry: Joi.string()
     .required()
     .valid(...Object.values(ALL_COUNTRY_CODES)),
