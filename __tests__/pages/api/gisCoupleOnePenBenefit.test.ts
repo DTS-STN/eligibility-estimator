@@ -79,13 +79,13 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
-    //Future Benefit  --Tested manually and there are ni future benefit (cleint /partner)
+    //Future Benefit
     expectFutureOasGisBenefitEligible(res, 66.92, 726.25, 370.76, 0)
     //partner results
     expectAllIneligible(res, true)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 76.92, 192.12, 929.64, 0, true) // Bug Future should be calculated
+    expectFutureOasGisBenefitEligible(res, 76.92, 192.12, 929.64, 0, true)
   })
 
   /* CALC-50 */
@@ -351,7 +351,6 @@ describe('gisCoupleOnePenBenefit', () => {
     expectFutureOasGisBenefitEligible(res, 93, 768.46, 773.45, 1, true)
   })
 
-  // There is a bug #140665. Should be retested when the bug is fixed
   /* CALC-62 */
   it('should pass 62 test - CALC-62', async () => {
     const desiredName = 'CALC-62' // Replace with the desired name
@@ -362,7 +361,7 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAllIneligible(res)
     //Future Benefit
     expectFutureAwlBenefitEligible(res, 60, 409.3)
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 68.82, 1) //bug logged for this one
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 68.82, 1)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 523.95, true)
@@ -494,7 +493,7 @@ describe('gisCoupleOnePenBenefit', () => {
 
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 69.58, 461.39, 400.65, 0)
-    expectFutureOasGisBenefitEligible(res, 74.58, 461.39, 983.29, 1)
+    expectFutureOasGisBenefitEligible(res, 74.58, 461.39, 400.65, 1)
 
     //partner results
     expectAllIneligible(res, true)

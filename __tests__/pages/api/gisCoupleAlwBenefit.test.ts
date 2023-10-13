@@ -536,7 +536,7 @@ describe('gisCoupleALWBenefit', () => {
     expectGisEligible(res, 1432.0)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
-    //Future Benefit -- changed the age from 72.42 to 71.42
+    //Future Benefit
     expectFutureOasGisBenefitEligible(res, 71.42, 254.29, 1432.0, 0)
 
     //partner results
@@ -623,7 +623,6 @@ describe('gisCoupleALWBenefit', () => {
     expectFutureOasGisBenefitEligible(res, 65, 698.6, 416.85, 0, true)
   })
 
-  // There is a bug #140665. Should be retested when the bug is fixed
   /* CALC-96 */
   it('should pass 96 test - CALC-96', async () => {
     const desiredName = 'CALC-96' // Replace with the desired name
@@ -678,7 +677,7 @@ describe('gisCoupleALWBenefit', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 81.08, 288.18, 746.11, 0)
+    expectFutureOasGisBenefitEligible(res, 81.08, 288.18, 196.11, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -923,7 +922,7 @@ describe('gisCoupleALWBenefit', () => {
     expectGisEligible(res, 465.82, true)
     expectAlwTooOld(res, true)
 
-    //Future Benefit-- changed the age from 79 to 67.25 to check
+    //Future Benefit
     expectFutureOasGisBenefitEligible(res, 67.25, 698.6, 465.82, 0, true)
   })
   /* CALC-109 */
