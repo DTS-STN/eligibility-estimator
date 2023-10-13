@@ -200,8 +200,6 @@ export function InvSeparatedAllCases(
           )
         }
 
-        console.log('clientGis WITHIN THE IF STATEMENT', clientGis) // this should return T1
-
         const partnerSingleInput = getSinglePartnerInput(input, rawInput)
 
         partnerGis = new GisBenefit(
