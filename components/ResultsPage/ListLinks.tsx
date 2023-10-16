@@ -1,4 +1,4 @@
-import { Link as DSLink } from '@dts-stn/service-canada-design-system'
+import Link from 'next/link'
 
 export const ListLinks: React.VFC<{
   title: string
@@ -12,7 +12,14 @@ export const ListLinks: React.VFC<{
         {links &&
           links.map(({ text, url }, index) => (
             <li key={index}>
-              <DSLink id={`Link${index}`} href={url} text={text} />
+              <Link href={url}>
+                <a
+                  id={`Link${index}`}
+                  className="underline text-[#284162] text-[20px] leading-[22px] hover:text-[#0535D2]"
+                >
+                  {text}
+                </a>
+              </Link>
             </li>
           ))}
       </ul>
