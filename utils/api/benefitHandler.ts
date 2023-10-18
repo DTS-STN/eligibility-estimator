@@ -609,6 +609,7 @@ export class BenefitHandler {
     const clientAlw = new AlwBenefit(
       this.input.client,
       this.translations,
+      this.rawInput.partnerLivingCountry,
       false,
       false,
       this.future
@@ -661,6 +662,7 @@ export class BenefitHandler {
       const partnerAlw = new AlwBenefit(
         this.input.partner,
         this.translations,
+        this.rawInput.livingCountry,
         true
       )
       this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)
@@ -683,6 +685,7 @@ export class BenefitHandler {
     const partnerAlw = new AlwBenefit(
       this.input.partner,
       this.translations,
+      this.rawInput.livingCountry,
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'alw', partnerAlw)

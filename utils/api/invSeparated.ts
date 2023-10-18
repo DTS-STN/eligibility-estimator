@@ -482,6 +482,7 @@ export function InvSeparatedAllCases(
               const tempClientAlw = new AlwBenefit(
                 input.client,
                 translations,
+                rawInput.partnerLivingCountry,
                 false,
                 false,
                 future
@@ -498,6 +499,7 @@ export function InvSeparatedAllCases(
               const tempClientAlw = new AlwBenefit(
                 input.client,
                 translations,
+                rawInput.partnerLivingCountry,
                 false,
                 true,
                 future
@@ -804,8 +806,6 @@ function getSingleClientInput(
       ? new PartnerBenefitStatusHelper(rawInput.partnerBenefitStatus)
       : new PartnerBenefitStatusHelper(PartnerBenefitStatus.NONE),
   }
-
-  consoleDev('#2 oasDefer', clientSingleInput.oasDeferDuration)
 
   return clientSingleInput
 }
