@@ -94,18 +94,18 @@ export function InvSeparatedAllCases(
 
       consoleDev('both Oas > 0 - partnerGisResultTable1', partnerGisResultT1)
 
-      //
-      // applicant gis using partner Benefit Status. No = uses table 3, anything else uses Table 2.
-
       maritalStatus = new MaritalStatusHelper(MaritalStatus.PARTNERED)
 
+      // Partner benefit status determines if RT2 or RT3 is used
       let benefitStatus = new PartnerBenefitStatusHelper(
         rawInput.partnerBenefitStatus === PartnerBenefitStatus.NONE
           ? PartnerBenefitStatus.NONE
           : PartnerBenefitStatus.OAS_GIS
       )
 
-      const applicantGisStatusBased = new EntitlementFormula(
+      // benefitStatus NONE means 1 pensioner, other no benfefit -> RT3
+      // benefitStatus OAS_GIS means both are receiving OAS/GIS -> RT2
+      const applicantGisT2_T3 = new EntitlementFormula(
         input.client.income.relevant,
         maritalStatus,
         benefitStatus,
@@ -113,16 +113,13 @@ export function InvSeparatedAllCases(
         allResults.client.oas
       ).getEntitlementAmount()
 
-      consoleDev(
-        'both Oas > 0 - applicantGisStatusBased',
-        applicantGisStatusBased
-      )
+      consoleDev('both Oas > 0 - applicantGisT2_T3', applicantGisT2_T3)
 
       // partner gis using table2
       const partnerGisResultT2 = new EntitlementFormula(
         input.client.income.relevant,
         maritalStatus,
-        input.partner.partnerBenefitStatus,
+        benefitStatus,
         input.partner.age,
         allResults.partner.oas
       ).getEntitlementAmount()
@@ -143,7 +140,7 @@ export function InvSeparatedAllCases(
 
       // define Total_amt_CoupleA
       const totalAmountCoupleA =
-        allResults.client.oas.entitlement.result + applicantGisStatusBased
+        allResults.client.oas.entitlement.result + applicantGisT2_T3
 
       // define Total_amt_CoupleB
       const totalAmountCoupleB =
@@ -152,11 +149,14 @@ export function InvSeparatedAllCases(
       // define Total_amt_Couple (need to add gis enhancement? )
       const totalAmountCouple = totalAmountCoupleA + totalAmountCoupleB
 
-      //          Total Amount Couple > Total Amount Single
-      //
-      const useT1versusT3 = applicantGisResultT1 > applicantGisStatusBased
+      // T3 only relevant in scenarios when 1 partner receives GIS and other, not receiving any benefit
+      const useT1versusT2_T3 =
+        applicantGisResultT1 + partnerGisResultT1 >
+        applicantGisT2_T3 + partnerGisResultT2
 
       if (totalAmountSingle < totalAmountCouple) {
+        //          Total Amount Couple > Total Amount Single
+
         consoleDev(
           'both Oas > 0 - totalAmountsingle < totalAmountCouple',
           'totalAmountSingle',
@@ -164,7 +164,7 @@ export function InvSeparatedAllCases(
           'totalAmountCouple',
           totalAmountCouple
         )
-        allResults.client.gis.entitlement.result = applicantGisStatusBased
+        allResults.client.gis.entitlement.result = applicantGisT2_T3
         allResults.client.gis.entitlement.type = EntitlementResultType.FULL
 
         allResults.partner.gis.entitlement.result = partnerGisResultT2
@@ -179,11 +179,11 @@ export function InvSeparatedAllCases(
           totalAmountCouple
         )
 
-        consoleDev('useT1versusT3: ', useT1versusT3)
+        consoleDev('useT1versusT2_T3: ', useT1versusT2_T3)
         const clientSingleInput = getSingleClientInput(
           input,
           rawInput,
-          useT1versusT3
+          useT1versusT2_T3
         )
 
         clientGis = new GisBenefit(
@@ -194,7 +194,7 @@ export function InvSeparatedAllCases(
           future
         )
 
-        if (useT1versusT3) {
+        if (useT1versusT2_T3) {
           clientGis.cardDetail.collapsedText.push(
             translations.detailWithHeading.calculatedBasedOnIndividualIncome
           )
