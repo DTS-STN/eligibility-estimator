@@ -621,9 +621,7 @@ export function InvSeparatedAllCases(
       if (
         (allResults.client.gis.eligibility.reason === ResultReason.NONE ||
           allResults.client.gis.eligibility.reason === ResultReason.INCOME) &&
-        clientGis.entitlement.result > 0 &&
-        (rawInput.partnerLegalStatus === LegalStatus.YES ||
-          rawInput.partnerLegalStatus === undefined)
+        clientGis.entitlement.result > 0
       ) {
         allResults.client.gis.cardDetail.collapsedText.push(
           translations.detailWithHeading.calculatedBasedOnIndividualIncome
