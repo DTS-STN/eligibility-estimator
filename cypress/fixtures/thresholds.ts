@@ -12,3 +12,9 @@ export const GISThresholds = {
   table2: 28320,
   table3: 51408,
 }
+
+export const OASThresholds = {
+  minimum: 86912,
+  maximum: 142609,
+  maximum75: 148179,
+}
