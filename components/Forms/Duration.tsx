@@ -43,8 +43,25 @@ const Duration: FC<DurationProps> = ({
     return age < 70 ? monthsDiff : 0
   }
 
+  const calculate2013Age = (ageDateObj) => {
+    const { month, year } = ageDateObj
+
+    let yearsDifference = 2013 - year
+    let monthsDifference = 7 - month
+
+    if (monthsDifference < 0) {
+      yearsDifference -= 1
+      monthsDifference += 12
+    }
+
+    const age = yearsDifference + monthsDifference / 12
+    return parseFloat(age.toFixed(2))
+  }
+
   // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
   const getSelectOptions = (maxMonths = 11) => {
+    const ageJuly2013 = calculate2013Age(ageDate)
+
     if (durationInput?.years === maxYears) {
       const maxMonths = getMaxMonths(age)
       if (durationInput?.months > maxMonths) {
@@ -54,7 +71,9 @@ const Duration: FC<DurationProps> = ({
       }
     }
 
-    return { years: maxYears, months: maxMonths }
+    return ageJuly2013 >= 70
+      ? { years: 0, months: 0 }
+      : { years: maxYears, months: maxMonths }
   }
   const [selectOptions, setSelectOptions] = useState(getSelectOptions())
 
