@@ -58,8 +58,8 @@ describe('gisCoupleOnePenBenefit', () => {
     expectGisEligible(res, 0.0)
     expectAlwTooOld(res, true)
   })
-  // There is a bug #140665. Should be retested when the bug is fixed
-  /* CALC-49 
+
+  /* CALC-49 */
   it('should pass 49 test - CALC-49', async () => {
     const desiredName = 'CALC-49' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -79,14 +79,14 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
-    //Future Benefit  --Tested manually and there are ni future benefit (cleint /partner)
-    expectFutureOasGisBenefitEligible(res, 66, 726.25, 370.76, 0)
+    //Future Benefit
+    expectFutureOasGisBenefitEligible(res, 66.92, 726.25, 370.76, 0)
     //partner results
     expectAllIneligible(res, true)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 76, 192.12, 929.64, 0, true) // Bug Future should be calculated
-  })*/
+    expectFutureOasGisBenefitEligible(res, 76.92, 192.12, 929.64, 0, true)
+  })
 
   /* CALC-50 */
   it('should pass 50 test - CALC-50', async () => {
@@ -351,8 +351,7 @@ describe('gisCoupleOnePenBenefit', () => {
     expectFutureOasGisBenefitEligible(res, 93, 768.46, 773.45, 1, true)
   })
 
-   // There is a bug #140665. Should be retested when the bug is fixed
-  /* CALC-62 
+  /* CALC-62 */
   it('should pass 62 test - CALC-62', async () => {
     const desiredName = 'CALC-62' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -362,7 +361,7 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAllIneligible(res)
     //Future Benefit
     expectFutureAwlBenefitEligible(res, 60, 409.3)
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 68.82, 1) //bug logged for this one
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 68.82, 1)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 523.95, true)
@@ -370,9 +369,9 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwTooOld(res, true)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 76, 576.35, 1235.56, 0, true)
-    expectFutureOasGisBenefitEligible(res, 81, 576.35, 1235.56, 1, true)
-  }) */
+    expectFutureOasGisBenefitEligible(res, 76.75, 576.35, 1235.56, 0, true)
+    expectFutureOasGisBenefitEligible(res, 81.75, 576.35, 1235.56, 1, true)
+  })
 
   /* CALC-63 */
   it('should pass 63 test - CALC-63', async () => {
@@ -453,8 +452,7 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwTooOld(res, true)
   })
 
-   // There is a bug #140665. Should be retested when the bug is fixed
-  /* CALC-67 
+  /* CALC-67 */
   it('should pass 67 test - CALC-67', async () => {
     const desiredName = 'CALC-67' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
@@ -467,14 +465,14 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAlwsMarital(res)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 92, 192.12, 1286.79, 0)
+    expectFutureOasGisBenefitEligible(res, 92, 480.29, 998.62, 0)
 
     //partner results - NO
     expectAllIneligible(res, true)
 
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 71, 174.65, 1297.4, 0, true)
-  })*/
+  })
 
   /* CALC-68 */
   it('should pass 68 test - CALC-68', async () => {
@@ -495,7 +493,7 @@ describe('gisCoupleOnePenBenefit', () => {
 
     //Future Benefit
     expectFutureOasGisBenefitEligible(res, 69.58, 461.39, 400.65, 0)
-    expectFutureOasGisBenefitEligible(res, 74.58, 461.39, 983.29, 1)
+    expectFutureOasGisBenefitEligible(res, 74.58, 461.39, 400.65, 1)
 
     //partner results
     expectAllIneligible(res, true)

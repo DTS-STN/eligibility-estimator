@@ -66,7 +66,7 @@ export function Header({
             <Link href={langUrl} locale={language}>
               <a className="ml-6 sm:ml-16 -mt-1 underline font-lato text-[16px] leading-[23px] text-[#295376] hover:text-[#0535D2]">
                 <span className="md:hidden font-bold">{shortLanguageText}</span>
-                <span className="hidden md:inline font-[400]">
+                <span className="hidden md:inline font-[400]" data-cy="lang1">
                   {languageText}
                 </span>
               </a>

@@ -14,7 +14,7 @@ import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
-  metaLanguage: ISOLanguage.FR,
+  ISOlang: ISOLanguage.FR,
 
   skipToMainContent: 'Passer au contenu principal',
   globalHeader: 'En-tête général',
@@ -31,7 +31,6 @@ const fr: WebTranslations = {
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   otherLangCode: 'EN',
-  langLong: 'fra',
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   aboutGovernment: 'Au sujet du gouvernement',
@@ -348,9 +347,7 @@ const fr: WebTranslations = {
       'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
     [ValidationErrors.maritalStatusEmpty]:
       'Veuillez sélectionner un état matrimonial.',
-    [ValidationErrors.yearsSince18Empty]:
-      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
-    [ValidationErrors.yearsSinceOASEmpty]:
+    [ValidationErrors.yearsInCanadaMinusAge]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
@@ -393,8 +390,6 @@ const fr: WebTranslations = {
       "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
       "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
-    [ValidationErrors.yearsInCanadaMinusAge]:
-      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:

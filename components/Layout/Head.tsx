@@ -28,11 +28,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       <meta name="description" content={tsln.meta.homeDescription} />
       <meta name="dcterms.description" content={tsln.meta.homeDescription} />
 
-      <meta
-        name="dcterms.language"
-        title="ISO639-2/T"
-        content={tsln._language}
-      />
+      <meta name="dcterms.language" title="ISO639-2/T" content={tsln.ISOlang} />
       {/* commented out - causing issues with page render */}
       {/*<Script src="https://assets.adobedtm.com/be5dfd287373/0127575cd23a/launch-913b1beddf7a-staging.min.js" />*/}
 
@@ -56,7 +52,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
 
       <link
         rel="alternate"
-        lang={altLang}
+        lang={tsln._language}
         href={
           isCanadaDotCa
             ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`

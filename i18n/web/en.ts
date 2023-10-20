@@ -13,7 +13,7 @@ import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
-  metaLanguage: ISOLanguage.EN,
+  ISOlang: ISOLanguage.EN,
 
   skipToMainContent: 'Skip to main content',
   globalHeader: 'Global header',
@@ -30,7 +30,6 @@ const en: WebTranslations = {
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   otherLangCode: 'FR',
-  langLong: 'eng',
   creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
   aboutGovernment: 'About Government',
@@ -339,9 +338,7 @@ const en: WebTranslations = {
     [ValidationErrors.partnerYearsSince18Empty]:
       "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
-    [ValidationErrors.yearsSince18Empty]:
-      'Please enter a number no higher than your age minus 18.',
-    [ValidationErrors.yearsSinceOASEmpty]:
+    [ValidationErrors.yearsInCanadaMinusAge]:
       'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
@@ -381,8 +378,6 @@ const en: WebTranslations = {
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
       'You need to have lived in Canada for at least 20&nbsp;years to receive any of the benefits covered by this tool.',
-    [ValidationErrors.yearsInCanadaMinusAge]:
-      'The number of years you have lived in Canada should be no more than your age minus 18.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:
