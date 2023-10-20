@@ -170,7 +170,7 @@ function transformYearsInCanadaSinceOAS18Value(
     const currentMonth = today.getMonth() + 1
     const currentYear = today.getFullYear()
     value =
-      value -
+      value +
       Math.floor(
         (currentYear - 1900) * 12 +
           currentMonth -
