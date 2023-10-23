@@ -26,13 +26,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   deferral: boolean
   income: number
   inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age
+  inputYearsInCanadaSince18: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
     partner?: Boolean,
     future?: Boolean,
     deferral: boolean = false,
-    inputAge?: number
+    inputAge?: number,
+    inputYearsInCanadaSince18?: number
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -42,6 +44,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       ? this.input.income.partner
       : this.input.income.client
     this.inputAge = inputAge
+    this.inputYearsInCanadaSince18 = inputYearsInCanadaSince18
   }
 
   protected getEligibility(): EligibilityResult {
@@ -61,8 +64,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const meetsReqIncome = skipReqIncome || this.income >= 0
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
-    const meetsReqYears =
-      this.input.yearsInCanadaSince18 >= requiredYearsInCanada
+    const meetsReqYears = this.inputYearsInCanadaSince18
+      ? this.inputYearsInCanadaSince18
+      : this.input.yearsInCanadaSince18 >= requiredYearsInCanada
     const meetsReqLegal = this.input.legalStatus.canadian
 
     // main checks
@@ -593,6 +597,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           // can also check if this.entitlement.clawback === 0
           text += this.translations.detail.futureDeferralOptions
         } else {
+          console.log(this, ' this')
           text += this.translations.detail.sinceYouAreSixty
 
           if (!this.deferral && this.input.yearsInCanadaSince18 < 40) {

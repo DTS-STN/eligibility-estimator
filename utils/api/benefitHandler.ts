@@ -449,7 +449,8 @@ export class BenefitHandler {
         false,
         this.future,
         true,
-        this.input.client.age
+        this.input.client.age,
+        this.input.client.yearsInCanadaSince18
       )
 
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)
