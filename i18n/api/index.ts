@@ -163,6 +163,7 @@ export interface Translations {
   your: string
   complete: string
   at: string
+  atAge: string
 }
 
 export function getTranslations(language: Language): Translations {

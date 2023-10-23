@@ -556,5 +556,6 @@ const fr: Translations = {
   your: 'votre revenu',
   complete: 'vos revenus',
   at: 'À',
+  atAge: ' ans,',
 }
 export default fr

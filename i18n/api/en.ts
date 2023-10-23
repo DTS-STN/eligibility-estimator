@@ -541,5 +541,6 @@ const en: Translations = {
   your: 'your income',
   complete: 'complete income information',
   at: 'At',
+  atAge: ',',
 }
 export default en

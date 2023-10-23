@@ -93,9 +93,9 @@ export const WillBeEligible: React.VFC<{
             ? tsln.resultsPage.theyToReceive
             : tsln.resultsPage.partnerToReceive
 
-        const text = `${mainStr} ${Math.floor(Number(age))}${
-          language === 'en' ? ',' : ' ans,'
-        } ${partner ? partnerText : tsln.resultsPage.toReceive}`
+        const text = `${mainStr} ${Math.floor(Number(age))}${apiTrans.atAge} ${
+          partner ? partnerText : tsln.resultsPage.toReceive
+        }`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
           (value) => resultObj[age][value]
