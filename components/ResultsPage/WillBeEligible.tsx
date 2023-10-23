@@ -75,24 +75,15 @@ export const WillBeEligible: React.VFC<{
         //
         // an overcomplicated condition for useless information
         //
-        const enStr =
+        const mainStr =
           (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
           (multipleOAS_GIS && nonZeroExist && multipleResults) ||
           (multipleOAS_GIS && nonZeroExist && idx > 0) ||
           eligibleOAS
             ? partner
-              ? 'If your partner continues receiving at'
-              : 'If you continue receiving at'
-            : 'At'
-        const frStr =
-          (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
-          (multipleOAS_GIS && nonZeroExist && multipleResults) ||
-          (multipleOAS_GIS && nonZeroExist && idx > 0) ||
-          eligibleOAS
-            ? partner
-              ? 'Si votre conjoint continue de recevoir à'
-              : 'Si vous continuez de recevoir à'
-            : 'À'
+              ? apiTrans.detail.partnerContinues
+              : apiTrans.detail.continueReceiving
+            : apiTrans.at
 
         const partnerText =
           (multipleOAS_GIS && nonZeroExist && !multipleResults && idx > 0) ||
@@ -102,11 +93,9 @@ export const WillBeEligible: React.VFC<{
             ? tsln.resultsPage.theyToReceive
             : tsln.resultsPage.partnerToReceive
 
-        const text = `${language === 'en' ? enStr : frStr} ${Math.floor(
-          Number(age)
-        )}${language === 'en' ? ',' : ' ans,'} ${
-          partner ? partnerText : tsln.resultsPage.toReceive
-        }`
+        const text = `${mainStr} ${Math.floor(Number(age))}${
+          language === 'en' ? ',' : ' ans,'
+        } ${partner ? partnerText : tsln.resultsPage.toReceive}`
 
         const resultsArray: BenefitResult[] = Object.keys(resultObj[age]).map(
           (value) => resultObj[age][value]

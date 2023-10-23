@@ -27,14 +27,6 @@ export const BenefitCards: React.VFC<{
 }> = ({ inputAge, results, futureClientResults, partnerResults }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
-  const titleArray = [
-    'Old Age Security pension',
-    'Pension de la Sécurité de la vieillesse',
-  ]
-  const titleWithAcronymArray = [
-    'Old Age Security (OAS) pension',
-    'Pension de la Sécurité de la vieillesse (SV)',
-  ]
 
   const receivingOAS: boolean = results[0]?.cardDetail?.meta?.receiveOAS
 
@@ -93,14 +85,6 @@ export const BenefitCards: React.VFC<{
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
-
-  const transformBenefitName = (benefitName) => {
-    let benefitText = ''
-    const foundIndex = titleArray.findIndex((t) => t === benefitName)
-    benefitText =
-      foundIndex != -1 ? titleWithAcronymArray[foundIndex] : benefitName
-    return benefitText
-  }
 
   const getDeferralTable = (benefitKey, result, future): any => {
     return benefitKey === BenefitKey.oas &&
@@ -179,9 +163,6 @@ export const BenefitCards: React.VFC<{
     const eligibility: boolean =
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
-
-    titleText =
-      eligibility === false ? transformBenefitName(titleText) : titleText
 
     const eligibleText = eligibility
       ? future
