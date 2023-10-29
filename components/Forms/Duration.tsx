@@ -27,7 +27,7 @@ const Duration: FC<DurationProps> = ({
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
-  const [resideny, setResidency] = useState(null) // TODO: if residency is known, we need to base drop down year/month on age of eligibility, not just age in July 2013.
+  const [resideny, setResidency] = useState(null) // TODO: if residency is known, we need to base drop down year/month on age of eligibility, not just age in July 2013. For now assume minimum required 10 years
 
   const calculate2013Age = (ageDateObj) => {
     const { month, year } = ageDateObj
@@ -62,6 +62,9 @@ const Duration: FC<DurationProps> = ({
   const ageJuly2013 = calculate2013Age(ageDate) // if < 65 do as before. if between 65 and 70, get a different maxYears
   const maxYears = getMaxYears(ageJuly2013)
 
+  console.log('ageJuly2013', ageJuly2013)
+  console.log('maxYears', maxYears)
+
   // Returns num of months for select option
   const getMaxMonths = () => {
     let months
@@ -76,9 +79,10 @@ const Duration: FC<DurationProps> = ({
     } else if (ageJuly2013 >= 70) {
       months = 0
     } else {
-      months = Math.floor((Math.ceil(ageJuly2013) - ageJuly2013) * 12)
+      months = Math.round((Math.ceil(ageJuly2013) - ageJuly2013) * 12)
     }
 
+    console.log('months', months)
     return months
   }
 

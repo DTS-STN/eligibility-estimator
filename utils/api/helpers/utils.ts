@@ -279,10 +279,31 @@ export function AlwsEligibility(age, yearsInCanada) {
   }
 }
 
+function calculate2013Age(currentAge) {
+  const currentDate = new Date()
+  const currentYear = currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth() + 1 // getMonth() returns a 0-based index
+
+  const birthYear = currentYear - Math.floor(currentAge)
+  const birthMonth =
+    currentMonth - Math.round((currentAge - Math.floor(currentAge)) * 12)
+
+  let adjustedYear = birthYear
+  let adjustedMonth = birthMonth
+  if (birthMonth <= 0) {
+    adjustedYear -= 1
+    adjustedMonth += 12
+  }
+
+  const ageInJuly2013 = 2013 - adjustedYear + (7 - adjustedMonth) / 12
+  return parseFloat(ageInJuly2013.toFixed(2))
+}
+
 export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
   const age = input.age // 66.42
+  const ageJuly2013 = calculate2013Age(age)
   const yearsInCanada = input.yearsInCanadaSince18
   const eliObj = OasEligibility(age, yearsInCanada)
   const ageDiff = age - eliObj.ageOfEligibility
