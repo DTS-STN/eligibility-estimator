@@ -221,6 +221,10 @@ export function OasEligibility(
   let ageOfEligibility
   let yearsOfResAtEligibility
 
+  const ageJuly2013 = calculate2013Age(age)
+
+  console.log('ageJuly2013 INSIDE OAS ELIGIBILITY', ageJuly2013)
+
   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
     const yearsPastEligibility = Math.min(
       age - minAgeEligibility,
@@ -282,7 +286,7 @@ export function AlwsEligibility(age, yearsInCanada) {
 function calculate2013Age(currentAge) {
   const currentDate = new Date()
   const currentYear = currentDate.getFullYear()
-  const currentMonth = currentDate.getMonth() + 1 // getMonth() returns a 0-based index
+  const currentMonth = currentDate.getMonth() + 1
 
   const birthYear = currentYear - Math.floor(currentAge)
   const birthMonth =
@@ -304,19 +308,30 @@ export function evaluateOASInput(input) {
   let justBecameEligible = false
   const age = input.age // 66.42
   const ageJuly2013 = calculate2013Age(age)
+  console.log('ageJuly2013', ageJuly2013)
   const yearsInCanada = input.yearsInCanadaSince18
-  const eliObj = OasEligibility(age, yearsInCanada)
+  let eliObj = OasEligibility(age, yearsInCanada) // this is how we calculate eliObj under normal circumscantes. Need a new one for when July2013 rule is used
+  console.log('eliObj', eliObj)
   const ageDiff = age - eliObj.ageOfEligibility
   let newInput = { ...input }
 
-  let deferralMonths = 0
-  if (age > eliObj.ageOfEligibility) {
-    // 65
-    const deferralYears = Math.min(
-      60,
-      Math.min(70, age) - eliObj.ageOfEligibility
-    )
-    deferralMonths = Math.max(0, deferralYears * 12)
+  let deferralMonths
+  if (ageJuly2013 < 65) {
+    if (age > eliObj.ageOfEligibility) {
+      // 65
+      const deferralYears = Math.min(
+        60,
+        Math.min(70, age) - eliObj.ageOfEligibility
+      )
+      deferralMonths = Math.max(0, deferralYears * 12)
+    }
+  } else if (ageJuly2013 >= 70) {
+    deferralMonths = 0
+  } else {
+    const July2013YearsInCanada = 9 // something
+    eliObj = OasEligibility(ageJuly2013, July2013YearsInCanada)
+    // if eliObj.age > 70, deferralMonths = 0
+    deferralMonths = Math.round((70 - ageJuly2013) * 12)
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {
@@ -328,6 +343,7 @@ export function evaluateOASInput(input) {
       ? input.yearsInCanadaSince18 - ageDiff
       : input.yearsInCanada + ageDiff
 
+  console.log('deferralMonths', deferralMonths)
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
     newInput['inputAge'] = input.age
