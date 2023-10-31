@@ -29,7 +29,6 @@ function readExcelData(filePath: string): string[] {
   const sheetName = workbook.SheetNames[0]
   const sheet = workbook.Sheets[sheetName]
   const jsonData: string[] = XLSX.utils.sheet_to_json(sheet, { range: 1 })
-  console.log('jsonData', jsonData)
   return jsonData
 }
 
