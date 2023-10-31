@@ -207,39 +207,85 @@ export function calculateAge(birthMonth: number, birthYear: number): number {
   return ageYears + Number((ageMonths / 12).toFixed(2))
 }
 
+// export function OasEligibility(
+//   ageAtStart,
+//   yearsInCanadaAtStart,
+//   livedOnlyInCanada = false,
+//   livingCountry = 'CAN'
+// ) {
+//   let age = ageAtStart // 66
+//   let yearsInCanada = yearsInCanadaAtStart //20
+//   const minAgeEligibility = 65
+//   const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
+//   console.log('livingCountry', livingCountry)
+//   console.log('minYearsOfResEligibility', minYearsOfResEligibility)
+//   let ageOfEligibility
+//   let yearsOfResAtEligibility
+
+//   const ageJuly2013 = calculate2013Age(age)
+
+//   console.log('ageJuly2013 INSIDE OAS ELIGIBILITY', ageJuly2013)
+
+//   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
+//     console.log('AGE DIFF', age, minAgeEligibility, age - minAgeEligibility)
+//     console.log(
+//       'years in CANADA DIFF',
+//       yearsInCanada,
+//       minYearsOfResEligibility,
+//       yearsInCanada - minYearsOfResEligibility
+//     )
+//     const yearsPastEligibility = Math.min(
+//       age - minAgeEligibility, // 66 - 65
+//       yearsInCanada - minYearsOfResEligibility //
+//     )
+
+//     console.log('yearsPastEligibility', yearsPastEligibility)
+//     ageOfEligibility = age - yearsPastEligibility
+//     yearsOfResAtEligibility = yearsInCanada - yearsPastEligibility
+//   } else if (
+//     age < minAgeEligibility ||
+//     yearsInCanada < minYearsOfResEligibility
+//   ) {
+//     while (
+//       age < minAgeEligibility ||
+//       yearsInCanada < minYearsOfResEligibility
+//     ) {
+//       age++
+//       yearsInCanada++
+//     }
+//     ageOfEligibility = Math.floor(age)
+//     yearsOfResAtEligibility = Math.round(
+//       ageOfEligibility - ageAtStart + yearsInCanadaAtStart
+//     )
+//   }
+
+//   return {
+//     ageOfEligibility,
+//     yearsOfResAtEligibility: livedOnlyInCanada
+//       ? 40
+//       : Math.floor(yearsOfResAtEligibility),
+//   }
+// }
+
 export function OasEligibility(
   ageAtStart,
   yearsInCanadaAtStart,
   livedOnlyInCanada = false,
   livingCountry = 'CAN'
 ) {
-  let age = ageAtStart // 66
-  let yearsInCanada = yearsInCanadaAtStart //20
+  let age = ageAtStart
+  let yearsInCanada = yearsInCanadaAtStart
   const minAgeEligibility = 65
   const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
-  console.log('livingCountry', livingCountry)
-  console.log('minYearsOfResEligibility', minYearsOfResEligibility)
+
   let ageOfEligibility
   let yearsOfResAtEligibility
 
-  const ageJuly2013 = calculate2013Age(age)
-
-  console.log('ageJuly2013 INSIDE OAS ELIGIBILITY', ageJuly2013)
-
   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
-    console.log('AGE DIFF', age, minAgeEligibility, age - minAgeEligibility)
-    console.log(
-      'years in CANADA DIFF',
-      yearsInCanada,
-      minYearsOfResEligibility,
+    const yearsPastEligibility = Math.min(
+      age - minAgeEligibility,
       yearsInCanada - minYearsOfResEligibility
     )
-    const yearsPastEligibility = Math.min(
-      age - minAgeEligibility, // 66 - 65
-      yearsInCanada - minYearsOfResEligibility //
-    )
-
-    console.log('yearsPastEligibility', yearsPastEligibility)
     ageOfEligibility = age - yearsPastEligibility
     yearsOfResAtEligibility = yearsInCanada - yearsPastEligibility
   } else if (
@@ -325,23 +371,32 @@ export function evaluateOASInput(input) {
   const ageDiff = age - eliObj.ageOfEligibility
   let newInput = { ...input }
 
-  let deferralMonths
-  if (ageJuly2013 < 65) {
-    if (age > eliObj.ageOfEligibility) {
-      // 65
-      const deferralYears = Math.min(
-        60,
-        Math.min(70, age) - eliObj.ageOfEligibility
-      )
-      deferralMonths = Math.max(0, deferralYears * 12)
-    }
-  } else if (ageJuly2013 >= 70) {
-    deferralMonths = 0
-  } else {
-    const July2013YearsInCanada = 9 // something
-    eliObj = OasEligibility(ageJuly2013, July2013YearsInCanada)
-    // if eliObj.age > 70, deferralMonths = 0
-    deferralMonths = Math.round((70 - ageJuly2013) * 12)
+  let deferralMonths = 0
+  // if (ageJuly2013 < 65) {
+  //   if (age > eliObj.ageOfEligibility) {
+  //     // 65
+  //     const deferralYears = Math.min(
+  //       60,
+  //       Math.min(70, age) - eliObj.ageOfEligibility
+  //     )
+  //     deferralMonths = Math.max(0, deferralYears * 12)
+  //   }
+  // } else if (ageJuly2013 >= 70) {
+  //   deferralMonths = 0
+  // } else {
+  //   const July2013YearsInCanada = 9 // something
+  //   eliObj = OasEligibility(ageJuly2013, July2013YearsInCanada)
+  //   // if eliObj.age > 70, deferralMonths = 0
+  //   deferralMonths = Math.round((70 - ageJuly2013) * 12)
+  // }
+
+  if (age > eliObj.ageOfEligibility) {
+    // 65
+    const deferralYears = Math.min(
+      60,
+      Math.min(70, age) - eliObj.ageOfEligibility
+    )
+    deferralMonths = Math.max(0, deferralYears * 12)
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {
