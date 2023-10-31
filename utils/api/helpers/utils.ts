@@ -213,11 +213,12 @@ export function OasEligibility(
   livedOnlyInCanada = false,
   livingCountry = 'CAN'
 ) {
-  let age = ageAtStart
-  let yearsInCanada = yearsInCanadaAtStart
+  let age = ageAtStart // 66
+  let yearsInCanada = yearsInCanadaAtStart //20
   const minAgeEligibility = 65
   const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
-
+  console.log('livingCountry', livingCountry)
+  console.log('minYearsOfResEligibility', minYearsOfResEligibility)
   let ageOfEligibility
   let yearsOfResAtEligibility
 
@@ -226,10 +227,19 @@ export function OasEligibility(
   console.log('ageJuly2013 INSIDE OAS ELIGIBILITY', ageJuly2013)
 
   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
-    const yearsPastEligibility = Math.min(
-      age - minAgeEligibility,
+    console.log('AGE DIFF', age, minAgeEligibility, age - minAgeEligibility)
+    console.log(
+      'years in CANADA DIFF',
+      yearsInCanada,
+      minYearsOfResEligibility,
       yearsInCanada - minYearsOfResEligibility
     )
+    const yearsPastEligibility = Math.min(
+      age - minAgeEligibility, // 66 - 65
+      yearsInCanada - minYearsOfResEligibility //
+    )
+
+    console.log('yearsPastEligibility', yearsPastEligibility)
     ageOfEligibility = age - yearsPastEligibility
     yearsOfResAtEligibility = yearsInCanada - yearsPastEligibility
   } else if (
