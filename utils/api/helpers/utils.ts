@@ -283,19 +283,30 @@ export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
   const age = input.age // 66.42
+  const ageJuly2013 = calculate2013Age(age)
+  console.log('ageJuly2013', ageJuly2013)
   const yearsInCanada = input.yearsInCanadaSince18
+  console.log('yearsInCanada', yearsInCanada)
   const eliObj = OasEligibility(age, yearsInCanada)
+
+  console.log('eliObj', eliObj)
+
   const ageDiff = age - eliObj.ageOfEligibility
   let newInput = { ...input }
 
   let deferralMonths = 0
   if (age > eliObj.ageOfEligibility) {
+    // ex: current age 76, eligible at 65
     // 65
-    const deferralYears = Math.min(
-      60,
-      Math.min(70, age) - eliObj.ageOfEligibility
-    )
-    deferralMonths = Math.max(0, deferralYears * 12)
+    if (ageJuly2013 >= 70) {
+      deferralMonths = 0
+    } else {
+      const deferralYears = Math.min(
+        60,
+        Math.min(70, age) - eliObj.ageOfEligibility
+      )
+      deferralMonths = Math.max(0, deferralYears * 12)
+    }
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {

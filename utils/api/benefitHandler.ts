@@ -227,7 +227,6 @@ export class BenefitHandler {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    console.log('ageJuly2013', ageJuly2013)
     if (this.input.client.receiveOAS && clientAge > 65 && ageJuly2013 <= 70) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
@@ -412,6 +411,7 @@ export class BenefitHandler {
       false,
       this.input.client.age
     )
+    console.log('clientOasNoDeferral', clientOasNoDeferral)
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
     if (this.input.client.partnerBenefitStatus.helpMe) {
@@ -442,6 +442,8 @@ export class BenefitHandler {
 
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
+
+    console.log('clientOasHelper', clientOasHelper)
 
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {
