@@ -62,9 +62,6 @@ const Duration: FC<DurationProps> = ({
   const ageJuly2013 = calculate2013Age(ageDate)
   const maxYears = getMaxYears(ageJuly2013)
 
-  console.log('ageJuly2013', ageJuly2013)
-  console.log('maxYears', maxYears)
-
   // Returns num of months for select option
   const getMaxMonths = () => {
     let months
