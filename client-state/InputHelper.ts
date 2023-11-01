@@ -69,7 +69,10 @@ export class InputHelper {
   }
 
   get asObjectWithLanguage(): { [x in FieldKeyOrLanguage]?: string } {
-    return { ...this.asObject, _language: this.language }
+    return {
+      ...this.asObject,
+      _language: this.language,
+    }
   }
 
   static sanitizeValue(value: string, language: string): string {

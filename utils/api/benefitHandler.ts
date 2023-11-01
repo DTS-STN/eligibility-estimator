@@ -223,15 +223,12 @@ export class BenefitHandler {
     // OAS deferral related fields
     const clientAge = this.input.client.age
     const ageJuly2013 = calculate2013Age(this.input.client.age)
-    if (
-      clientAge >= 65 &&
-      clientAge <= getMinBirthYear() &&
-      ageJuly2013 <= 70
-    ) {
+    if (clientAge >= 65 && clientAge <= getMinBirthYear()) {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS && clientAge > 65) {
+    console.log('ageJuly2013', ageJuly2013)
+    if (this.input.client.receiveOAS && clientAge > 65 && ageJuly2013 <= 70) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 

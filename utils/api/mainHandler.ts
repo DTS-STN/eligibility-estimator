@@ -11,6 +11,7 @@ export default class MainHandler {
   readonly futureHandler: FutureHandler
   readonly results: ResponseSuccess | ResponseError
   constructor(query: { [key: string]: string | string[] }) {
+    console.log('query', query)
     const { error, value } = schema.validate(query, { abortEarly: false })
 
     // Provides results for current age
