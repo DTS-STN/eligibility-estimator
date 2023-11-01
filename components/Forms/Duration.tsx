@@ -27,26 +27,74 @@ const Duration: FC<DurationProps> = ({
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
+  const [resideny, setResidency] = useState(null) // TODO: if residency is known, we need to base drop down year/month on age of eligibility, not just age in July 2013. For now assume minimum required 10 years
 
-  const diff = Number(age) <= 70 ? Number(age) - 65 : 5
-  const maxYears = Math.floor(diff)
+  const calculate2013Age = (ageDateObj) => {
+    const { month, year } = ageDateObj
 
-  // Returns num of months for select option
-  const getMaxMonths = (age) => {
-    const birthMonth = ageDate.month
-    const today = new Date()
-    const month = today.getMonth() + 1
+    let yearsDifference = 2013 - year
+    let monthsDifference = 7 - month
 
-    let monthsDiff = month - birthMonth
-    if (monthsDiff < 0) monthsDiff += 12
+    if (monthsDifference < 0) {
+      yearsDifference -= 1
+      monthsDifference += 12
+    }
 
-    return age < 70 ? monthsDiff : 0
+    const age = yearsDifference + monthsDifference / 12
+    return parseFloat(age.toFixed(2))
   }
 
-  // Dynamically populate select options. Return object that represents years and months away from age 65 but upto 70
+  const getMaxYears = (ageJ2013) => {
+    let years
+    if (ageJ2013 < 65) {
+      const diff = Number(age) <= 70 ? Number(age) - 65 : 5
+      years = Math.floor(diff)
+    } else if (ageJ2013 >= 70) {
+      years = 0
+    } else {
+      // between ages 65 and 70 in July 2013
+      years = Math.floor(70 - ageJ2013)
+    }
+
+    return years
+  }
+
+  const ageJuly2013 = calculate2013Age(ageDate)
+  const maxYears = getMaxYears(ageJuly2013)
+
+  console.log('ageJuly2013', ageJuly2013)
+  console.log('maxYears', maxYears)
+
+  // Returns num of months for select option
+  const getMaxMonths = () => {
+    let months
+    if (ageJuly2013 < 65) {
+      const birthMonth = ageDate.month
+      const today = new Date()
+      const month = today.getMonth() + 1
+
+      let monthsDiff = month - birthMonth
+      if (monthsDiff < 0) monthsDiff += 12
+      months = monthsDiff
+    } else if (ageJuly2013 >= 70) {
+      months = 0
+    } else {
+      months = Math.round((Math.ceil(ageJuly2013) - ageJuly2013) * 12)
+    }
+
+    return months
+  }
+
   const getSelectOptions = (maxMonths = 11) => {
+    let years = maxYears
+    let months = maxMonths
+    if (ageJuly2013 >= 70) {
+      years = 0
+      months = 0
+    }
+
     if (durationInput?.years === maxYears) {
-      const maxMonths = getMaxMonths(age)
+      const maxMonths = getMaxMonths()
       if (durationInput?.months > maxMonths) {
         const newDuration = { ...durationInput, months: 0 }
         setDurationInput(newDuration)
@@ -54,7 +102,7 @@ const Duration: FC<DurationProps> = ({
       }
     }
 
-    return { years: maxYears, months: maxMonths }
+    return { years, months }
   }
   const [selectOptions, setSelectOptions] = useState(getSelectOptions())
 
@@ -70,7 +118,7 @@ const Duration: FC<DurationProps> = ({
   useEffect(() => {
     setSelectOptions(getSelectOptions())
     if (durationInput?.years === maxYears) {
-      const maxMonths = getMaxMonths(age)
+      const maxMonths = getMaxMonths()
       setSelectOptions(getSelectOptions(maxMonths))
       if (durationInput?.months > maxMonths) {
         setDurationInput({ ...durationInput, months: 0 })

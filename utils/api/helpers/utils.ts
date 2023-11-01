@@ -333,3 +333,23 @@ export function evaluateOASInput(input) {
     justBecameEligible,
   }
 }
+
+export function calculate2013Age(currentAge) {
+  const currentDate = new Date()
+  const currentYear = currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth() + 1
+
+  const birthYear = currentYear - Math.floor(currentAge)
+  const birthMonth =
+    currentMonth - Math.round((currentAge - Math.floor(currentAge)) * 12)
+
+  let adjustedYear = birthYear
+  let adjustedMonth = birthMonth
+  if (birthMonth <= 0) {
+    adjustedYear -= 1
+    adjustedMonth += 12
+  }
+
+  const ageInJuly2013 = 2013 - adjustedYear + (7 - adjustedMonth) / 12
+  return parseFloat(ageInJuly2013.toFixed(2))
+}

@@ -41,7 +41,11 @@ import {
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
 import { SummaryHandler } from './summaryHandler'
-import { evaluateOASInput, OasEligibility } from './helpers/utils'
+import {
+  calculate2013Age,
+  evaluateOASInput,
+  OasEligibility,
+} from './helpers/utils'
 
 export class BenefitHandler {
   private _translations: Translations
@@ -218,7 +222,12 @@ export class BenefitHandler {
 
     // OAS deferral related fields
     const clientAge = this.input.client.age
-    if (clientAge >= 65 && clientAge <= getMinBirthYear()) {
+    const ageJuly2013 = calculate2013Age(this.input.client.age)
+    if (
+      clientAge >= 65 &&
+      clientAge <= getMinBirthYear() &&
+      ageJuly2013 <= 70
+    ) {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
