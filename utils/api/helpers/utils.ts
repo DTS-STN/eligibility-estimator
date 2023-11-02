@@ -287,36 +287,34 @@ export function evaluateOASInput(input) {
   console.log('ageJuly2013', ageJuly2013)
   const yearsInCanada = input.yearsInCanadaSince18
   console.log('yearsInCanada', yearsInCanada)
-  const eliObj = OasEligibility(age, yearsInCanada)
+  let eliObj = OasEligibility(age, yearsInCanada)
+  let newInput = { ...input }
 
   console.log('eliObj', eliObj)
 
-  const ageDiff = age - eliObj.ageOfEligibility
-  let newInput = { ...input }
-
-  let deferralMonths = 0
-  if (age > eliObj.ageOfEligibility) {
-    // ex: current age 76, eligible at 65
-    // 65
-    if (ageJuly2013 >= 70) {
-      deferralMonths = 0
+  let deferralMonths
+  if (eliObj.ageOfEligibility >= 70) {
+    deferralMonths = 0
+  } else {
+    // Eligibility age is between 65-70 here
+    if (ageJuly2013 >= eliObj.ageOfEligibility) {
+      // Cannot defer from the time they became eligible but only from July 2013 (must use residency and age from July 2013 to calculate OAS with deferral)
+      const ageDiff = ageJuly2013 - eliObj.ageOfEligibility
+      const newRes = Math.floor(eliObj.yearsOfResAtEligibility + ageDiff)
+      eliObj = {
+        ageOfEligibility: ageJuly2013,
+        yearsOfResAtEligibility: newRes,
+      }
+      deferralMonths = (70 - ageJuly2013) * 12
     } else {
-      const deferralYears = Math.min(
-        60,
-        Math.min(70, age) - eliObj.ageOfEligibility
-      )
-      deferralMonths = Math.max(0, deferralYears * 12)
+      // They became eligible after July 2013 -> use age and residency as is (at the time they became eligible for OAS)
+      deferralMonths = (70 - eliObj.ageOfEligibility) * 12
     }
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {
     justBecameEligible = true
   }
-
-  const newYearsInCan =
-    age > eliObj.ageOfEligibility
-      ? input.yearsInCanadaSince18 - ageDiff
-      : input.yearsInCanada + ageDiff
 
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
@@ -325,7 +323,7 @@ export function evaluateOASInput(input) {
     newInput['receiveOAS'] = true
     newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
       ? 40
-      : Math.min(40, Math.floor(newYearsInCan))
+      : Math.min(40, Math.floor(eliObj.yearsOfResAtEligibility))
     newInput['oasDeferDuration'] = JSON.stringify({
       months: Math.round(deferralMonths),
       years: 0,
