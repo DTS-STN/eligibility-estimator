@@ -293,7 +293,7 @@ export function evaluateOASInput(input) {
   console.log('eliObj', eliObj)
 
   let deferralMonths
-  if (eliObj.ageOfEligibility >= 70) {
+  if (eliObj.ageOfEligibility >= 70 || age < eliObj.ageOfEligibility) {
     deferralMonths = 0
   } else {
     // Eligibility age is between 65-70 here
@@ -310,6 +310,20 @@ export function evaluateOASInput(input) {
       // They became eligible after July 2013 -> use age and residency as is (at the time they became eligible for OAS)
       deferralMonths = (70 - eliObj.ageOfEligibility) * 12
     }
+  }
+
+  // let deferralMonths = 0
+  // if (age > eliObj.ageOfEligibility) {
+  //   // 65
+  //   const deferralYears = Math.min(
+  //     60,
+  //     Math.min(70, age) - eliObj.ageOfEligibility
+  //   )
+  //   deferralMonths = Math.max(0, deferralYears * 12)
+  // }
+
+  if (age === eliObj.ageOfEligibility && age < 70) {
+    justBecameEligible = true
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {
