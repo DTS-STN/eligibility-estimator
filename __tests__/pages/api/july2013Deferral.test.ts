@@ -237,4 +237,184 @@ describe('gisCoupleOnePenBenefit', () => {
     expectGisNotEligible(res, ResultReason.INCOME, true)
     expectAlwTooOld(res, true)
   })
+
+  /* CALC-178 */
+  it('should pass 178 test - CALC-178', async () => {
+    const desiredName = 'CALC-178'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 365.02)
+    expectGisNotEligible(res, ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 307.38, true)
+    expectGisNotEligible(res, ResultReason.INCOME, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-179 */
+  it('should pass 179 test - CALC-179', async () => {
+    const desiredName = 'CALC-179'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 226.7)
+    expectGisEligible(res, 1204.43)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 537.92, true)
+    expectGisEligible(res, 858.63, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-180 */
+  it('should pass 180 test - CALC-180', async () => {
+    const desiredName = 'CALC-180'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 286.14)
+    expectGisEligible(res, 514.43)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 288.18, true)
+    expectGisEligible(res, 437.59, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-181 */
+  it('should pass 181 test - CALC-181', async () => {
+    const desiredName = 'CALC-181'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasNotEligible(res)
+    expectGisNotEligible(res, ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 365.02, true)
+    expectGisNotEligible(res, ResultReason.INCOME, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-182 */
+  it('should pass 182 test - CALC-182', async () => {
+    const desiredName = 'CALC-182'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 494.24)
+    expectGisEligible(res, 465.74)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 268.96, true)
+    expectGisEligible(res, 561.8, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-183 */
+  it('should pass 183 test - CALC-183', async () => {
+    const desiredName = 'CALC-183'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
+    expectGisNotEligible(res, ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46, true)
+    expectGisNotEligible(res, ResultReason.INCOME, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-184 */
+  it('should pass 184 test - CALC-184', async () => {
+    const desiredName = 'CALC-184'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 365.02)
+    expectGisNotEligible(res, ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 192.12, true)
+    expectGisNotEligible(res, ResultReason.INCOME, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-185 */
+  it('should pass 185 test - CALC-185', async () => {
+    const desiredName = 'CALC-185'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 205.95)
+    expectGisEligible(res, 742.64)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 192.12, true)
+    expectGisEligible(res, 742.64, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-186 */
+  it('should pass 186 test - CALC-186', async () => {
+    const desiredName = 'CALC-186'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 261.28)
+    expectGisEligible(res, 846.64)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 557.14, true)
+    expectGisEligible(res, 481.63, true)
+    expectAlwTooOld(res, true)
+  })
+
+  /* CALC-187 */
+  it('should pass 187 test - CALC-187', async () => {
+    const desiredName = 'CALC-187'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+
+    //client results
+    expectOasEligible(res, EntitlementResultType.FULL, 403.45)
+    expectGisNotEligible(res, ResultReason.INCOME)
+    expectAlwTooOld(res)
+    expectAlwAlwsTooOld(res)
+
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46, true)
+    expectGisNotEligible(res, ResultReason.INCOME, true)
+    expectAlwTooOld(res, true)
+  })
 })
