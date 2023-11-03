@@ -244,7 +244,6 @@ export function OasEligibility(
       ageOfEligibility - ageAtStart + yearsInCanadaAtStart
     )
   }
-
   return {
     ageOfEligibility,
     yearsOfResAtEligibility: livedOnlyInCanada
@@ -284,7 +283,12 @@ export function evaluateOASInput(input) {
   let justBecameEligible = false
   const age = input.age // 66.42
   const yearsInCanada = input.yearsInCanadaSince18
-  const eliObj = OasEligibility(age, yearsInCanada)
+  const eliObj = OasEligibility(
+    age,
+    yearsInCanada,
+    input.livedOnlyInCanada,
+    input.livingCountry.value
+  )
   const ageDiff = age - eliObj.ageOfEligibility
   let newInput = { ...input }
 
