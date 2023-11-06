@@ -113,6 +113,14 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform["Partner's Age (Years and months)"] === 'N/A'
         ? undefined
         : rowToTransform["Partner's Age (Years and months)"],
+    partnerBirthDate: rowToTransform['Partner Birth Year and Month']
+      .toString()
+      .includes(';')
+      ? calculateAge(
+          extractValue(rowToTransform['Partner Birth Year and Month'], 1),
+          extractValue(rowToTransform['Partner Birth Year and Month'], 0)
+        )
+      : undefined,
     partnerLivingCountry: transformLivingCountryValue(
       rowToTransform["Partner's Country of Residence (Canada, Not Canada)"]
     ), // country code
