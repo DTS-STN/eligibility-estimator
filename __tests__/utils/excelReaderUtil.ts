@@ -29,18 +29,22 @@ function readExcelData(filePath: string): string[] {
   const sheetName = workbook.SheetNames[0]
   const sheet = workbook.Sheets[sheetName]
   const jsonData: string[] = XLSX.utils.sheet_to_json(sheet, { range: 1 })
+  console.log('jsonData', jsonData)
   return jsonData
 }
 
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   let payload: Record<string, any> = {
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
-    age: rowToTransform['Age '].toString().includes(';')
+    age: rowToTransform['Age '],
+    clientBirthDate: rowToTransform['Birth Year and Month']
+      .toString()
+      .includes(';')
       ? calculateAge(
-          extractValue(rowToTransform['Age '], 1),
-          extractValue(rowToTransform['Age '], 0)
+          extractValue(rowToTransform['Birth Year and Month'], 1),
+          extractValue(rowToTransform['Birth Year and Month'], 0)
         )
-      : rowToTransform['Age '],
+      : undefined,
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
@@ -53,11 +57,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     //oasDefer: false, // no longer used.
     //oasAge: 0,
     maritalStatus: transformMaritalStatusValue(
-      rowToTransform['Marital Status\r\n(With or Without Partner, Widowed)']
+      rowToTransform['Marital Status\n(With or Without Partner, Widowed)']
     ),
     invSeparated: transformValue(rowToTransform['Inv Sep (Yes / No)']),
     livingCountry: transformLivingContryValue(
-      rowToTransform['Country of Residence\r\n(Canada, Not Canada)']
+      rowToTransform['Country of Residence\n(Canada, Not Canada)']
     ), // country code
     legalStatus: transformLegalStatusValue(
       rowToTransform['Legal Status (Yes / No)']
@@ -133,7 +137,6 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     )
   )
 
-  //console.log('payload:', payload)
   return payload
 }
 
