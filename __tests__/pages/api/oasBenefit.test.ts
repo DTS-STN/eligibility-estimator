@@ -76,8 +76,8 @@ it('should pass the second test - OAS-CALC-02', async () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 853.45)
-    expectGisEligible(res, 243.15)
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
+    expectGisEligible(res, 166.3)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -126,7 +126,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 391.92)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23)
     expectGisEligible(res)
     expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
     expectAlwTooOld(res)
