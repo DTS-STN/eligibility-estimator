@@ -322,6 +322,8 @@ export function evaluateOASInput(input) {
   //   deferralMonths = Math.max(0, deferralYears * 12)
   // }
 
+  console.log('eliObj AFTER JULY 2013 RULE', eliObj)
+
   if (age === eliObj.ageOfEligibility && age < 70) {
     justBecameEligible = true
   }
