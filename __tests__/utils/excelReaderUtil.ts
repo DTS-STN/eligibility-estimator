@@ -59,7 +59,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform['Marital Status\n(With or Without Partner, Widowed)']
     ),
     invSeparated: transformValue(rowToTransform['Inv Sep (Yes / No)']),
-    livingCountry: transformLivingContryValue(
+    livingCountry: transformLivingCountryValue(
       rowToTransform['Country of Residence\n(Canada, Not Canada)']
     ), // country code
     legalStatus: transformLegalStatusValue(
@@ -113,7 +113,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform["Partner's Age (Years and months)"] === 'N/A'
         ? undefined
         : rowToTransform["Partner's Age (Years and months)"],
-    partnerLivingCountry: transformLivingContryValue(
+    partnerLivingCountry: transformLivingCountryValue(
       rowToTransform["Partner's Country of Residence (Canada, Not Canada)"]
     ), // country code
     partnerLegalStatus: transformLegalStatusValue(
@@ -149,7 +149,7 @@ function transformValue(value: string): string | undefined {
   return undefined
 }
 
-function transformLivingContryValue(value: string): string | undefined {
+function transformLivingCountryValue(value: string): string | undefined {
   if (value.toString().toUpperCase() === 'CANADA') {
     return LivingCountry.CANADA
   } else if (value.toString().toUpperCase() === 'NOT CANADA') {
@@ -160,13 +160,25 @@ function transformLivingContryValue(value: string): string | undefined {
 }
 
 function transformYearsInCanadaSinceOAS18Value(
-  value: string,
+  value: number,
   partner?: boolean
 ): string | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
     return undefined
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
+  } else if (value.toString().toLowerCase().includes('s')) {
+    const today = new Date()
+    const currentMonth = today.getMonth() + 1
+    const currentYear = today.getFullYear()
+    value =
+      value +
+      Math.floor(
+        (currentYear - 1900) * 12 +
+          currentMonth -
+          ((2023 - 1900) * 12 + 10) / 12
+      )
+    return String(value)
   }
   return String(value) // Number(value)
 }
