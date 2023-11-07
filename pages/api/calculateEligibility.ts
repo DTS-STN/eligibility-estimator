@@ -13,7 +13,6 @@ export default function handler(
   res: NextApiResponse<ResponseSuccess | ResponseError>
 ) {
   const inputHelper = new InputHelper(req.query, null, Language.EN)
-
   const result = new MainHandler(inputHelper.asObjectWithLanguage).results
   if ('error' in result) res.status(400).json(result)
   else res.status(200).json(result)
