@@ -1,4 +1,3 @@
-import { calculateAge } from '../../utils/api/helpers/utils'
 import * as XLSX from 'xlsx'
 import {
   LegalStatus,
@@ -6,6 +5,7 @@ import {
   MaritalStatus,
   PartnerBenefitStatus,
 } from '../../utils/api/definitions/enums'
+import { calculateFutureYearMonth } from '../../utils/api/helpers/utils'
 
 export function getTransformedPayloadByName(
   filePath: string,
@@ -35,12 +35,8 @@ function readExcelData(filePath: string): string[] {
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   let payload: Record<string, any> = {
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
-    age: rowToTransform['Age '].toString().includes(';')
-      ? calculateAge(
-          extractValue(rowToTransform['Age '], 1),
-          extractValue(rowToTransform['Age '], 0)
-        )
-      : rowToTransform['Age '],
+    age: rowToTransform['Age'],
+    clientBirthDate: rowToTransform['Birth Year and Month'],
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
     oasDeferDuration:
       rowToTransform['Delay (# of Years and Months)'] === 'N/A'
@@ -53,11 +49,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     //oasDefer: false, // no longer used.
     //oasAge: 0,
     maritalStatus: transformMaritalStatusValue(
-      rowToTransform['Marital Status\r\n(With or Without Partner, Widowed)']
+      rowToTransform['Marital Status (With or Without Partner, Widowed)']
     ),
     invSeparated: transformValue(rowToTransform['Inv Sep (Yes / No)']),
-    livingCountry: transformLivingContryValue(
-      rowToTransform['Country of Residence\r\n(Canada, Not Canada)']
+    livingCountry: transformLivingCountryValue(
+      rowToTransform['Country of Residence (Canada, Not Canada)']
     ), // country code
     legalStatus: transformLegalStatusValue(
       rowToTransform['Legal Status (Yes / No)']
@@ -77,9 +73,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             'false' ||
           transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === undefined
           ? transformYearsInCanadaSinceOAS18Value(
+              rowToTransform['Age'],
               rowToTransform[
                 '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-              ]
+              ],
+              rowToTransform['Birth Year and Month']
             )
           : undefined
         : undefined,
@@ -91,9 +89,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       ) !== 'true'
         ? transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]) === 'true'
           ? transformYearsInCanadaSinceOAS18Value(
+              rowToTransform['Age'],
               rowToTransform[
                 '# of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-              ]
+              ],
+              rowToTransform['Birth Year and Month']
             )
           : undefined
         : undefined,
@@ -107,10 +107,15 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
         ? undefined
         : rowToTransform["Partner's Net Worldwide Income"], // partner income
     partnerAge:
-      rowToTransform["Partner's Age (Years and months)"] === 'N/A'
+      rowToTransform['Partner Age'] === 'N/A'
         ? undefined
-        : rowToTransform["Partner's Age (Years and months)"],
-    partnerLivingCountry: transformLivingContryValue(
+        : rowToTransform['Partner Age'],
+    partnerBirthDate: rowToTransform['Partner Birth Year and Month']
+      .toString()
+      .includes(';')
+      ? rowToTransform['Partner Birth Year and Month']
+      : undefined,
+    partnerLivingCountry: transformLivingCountryValue(
       rowToTransform["Partner's Country of Residence (Canada, Not Canada)"]
     ), // country code
     partnerLegalStatus: transformLegalStatusValue(
@@ -122,9 +127,11 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       ]
     ),
     partnerYearsInCanadaSince18: transformYearsInCanadaSinceOAS18Value(
+      rowToTransform['Partner Age'],
       rowToTransform[
         'Partner: # of years resided in Canada after age 18 (Full, 40, 10, etc.)'
-      ]
+      ],
+      rowToTransform['Partner Birth Year and Month']
     ),
   }
   payload = Object.fromEntries(
@@ -133,7 +140,6 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
     )
   )
 
-  //console.log('payload:', payload)
   return payload
 }
 
@@ -147,7 +153,7 @@ function transformValue(value: string): string | undefined {
   return undefined
 }
 
-function transformLivingContryValue(value: string): string | undefined {
+function transformLivingCountryValue(value: string): string | undefined {
   if (value.toString().toUpperCase() === 'CANADA') {
     return LivingCountry.CANADA
   } else if (value.toString().toUpperCase() === 'NOT CANADA') {
@@ -158,13 +164,32 @@ function transformLivingContryValue(value: string): string | undefined {
 }
 
 function transformYearsInCanadaSinceOAS18Value(
-  value: string,
+  age: number,
+  value: number,
+  birthDate: string,
   partner?: boolean
 ): string | undefined {
   if (value.toString().toUpperCase() === 'FULL') {
     return undefined
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
+  } else if (value.toString().toLowerCase().includes('s')) {
+    const birthYear = extractValue(birthDate, 0) // 1943; 11 + 75.08
+    const birthMonth = extractValue(birthDate, 1)
+    const [year, month] = Object.values(
+      calculateFutureYearMonth(birthYear, birthMonth, age)
+    )
+    const today = new Date(Number(year), Number(month) - 1)
+    const currentMonth = today.getMonth() + 1
+    const currentYear = today.getFullYear()
+    value =
+      value +
+      Math.floor(
+        (currentYear - 1900) * 12 +
+          currentMonth -
+          ((2023 - 1900) * 12 + 10) / 12
+      )
+    return String(value)
   }
   return String(value) // Number(value)
 }

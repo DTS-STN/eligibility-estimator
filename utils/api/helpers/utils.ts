@@ -183,30 +183,6 @@ function addKeyValue(obj, key, val) {
   }
 }
 
-/**
- * Accepts a numerical month+year, and returns the number of years since then.
- * This can and will return a decimal value, such as "65.5"!
- */
-export function calculateAge(birthMonth: number, birthYear: number): number {
-  if (birthMonth === null || birthYear === null) return null
-
-  const today = new Date()
-  const currentMonth = today.getMonth() + 1
-  const currentYear = today.getFullYear()
-
-  let ageMonths: number
-  let ageYears = currentYear - birthYear
-
-  if (currentMonth >= birthMonth) {
-    ageMonths = currentMonth - birthMonth
-  } else {
-    ageYears -= 1
-    ageMonths = 12 + (currentMonth - birthMonth)
-  }
-
-  return ageYears + Number((ageMonths / 12).toFixed(2))
-}
-
 export function OasEligibility(
   ageAtStart,
   yearsInCanadaAtStart,
@@ -244,7 +220,6 @@ export function OasEligibility(
       ageOfEligibility - ageAtStart + yearsInCanadaAtStart
     )
   }
-
   return {
     ageOfEligibility,
     yearsOfResAtEligibility: livedOnlyInCanada
@@ -286,8 +261,13 @@ export function evaluateOASInput(input) {
   const ageJuly2013 = calculate2013Age(age)
   console.log('ageJuly2013', ageJuly2013)
   const yearsInCanada = input.yearsInCanadaSince18
-  console.log('yearsInCanada', yearsInCanada)
-  let eliObj = OasEligibility(age, yearsInCanada)
+  let eliObj = OasEligibility(
+    age,
+    yearsInCanada,
+    input.livedOnlyInCanada,
+    input.livingCountry.value
+  )
+
   let newInput = { ...input }
 
   console.log('eliObj', eliObj)
@@ -377,4 +357,55 @@ export function calculate2013Age(currentAge) {
 
   const ageInJuly2013 = 2013 - adjustedYear + (7 - adjustedMonth) / 12
   return parseFloat(ageInJuly2013.toFixed(2))
+}
+
+/**
+ * Accepts a numerical month+year, and returns the number of years since then.
+ * This can and will return a decimal value, such as "65.5"!
+ */
+export function calculateAge(birthMonth: number, birthYear: number): number {
+  if (birthMonth === null || birthYear === null) return null
+
+  const today = new Date()
+  const currentMonth = today.getMonth() + 1
+  const currentYear = today.getFullYear()
+
+  let ageMonths: number
+  let ageYears = currentYear - birthYear
+
+  if (currentMonth >= birthMonth) {
+    ageMonths = currentMonth - birthMonth
+  } else {
+    ageYears -= 1
+    ageMonths = 12 + (currentMonth - birthMonth)
+  }
+
+  return ageYears + Number((ageMonths / 12).toFixed(2))
+}
+
+export function calculateFutureYearMonth(birthYear, birthMonth, age) {
+  // Calculate the number of full years and additional months
+  var fullYears = Math.floor(age)
+  var additionalMonths = Math.floor((age - fullYears) * 12)
+
+  // Calculate the future year and month
+  var futureYear = birthYear + fullYears
+  var futureMonth = birthMonth + additionalMonths
+
+  // Adjust for month overflow (if futureMonth > 12)
+  if (futureMonth > 12) {
+    futureYear += Math.floor(futureMonth / 12)
+    futureMonth = futureMonth % 12
+  }
+
+  // If futureMonth is 0, it means the month is December of the previous year
+  if (futureMonth === 0) {
+    futureYear -= 1
+    futureMonth = 12
+  }
+
+  return {
+    year: futureYear,
+    month: futureMonth,
+  }
 }
