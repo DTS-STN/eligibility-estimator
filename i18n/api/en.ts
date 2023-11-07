@@ -365,6 +365,8 @@ const en: Translations = {
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
     conditional:
       'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
+    partnerContinues: 'If your partner continues receiving at',
+    continueReceiving: 'If you continue receiving at',
     dependingOnAgreement:
       "You may be eligible to receive this benefit, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnAgreementWhen60:
@@ -538,5 +540,7 @@ const en: Translations = {
   months: 'months',
   your: 'your income',
   complete: 'complete income information',
+  at: 'At',
+  atAge: ',',
 }
 export default en

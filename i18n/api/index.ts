@@ -77,6 +77,8 @@ export interface Translations {
     mustMeetIncomeReq: string
     mustMeetYearReq: string
     conditional: string
+    partnerContinues: string
+    continueReceiving: string
     dependingOnAgreement: string
     dependingOnAgreementWhen60: string
     dependingOnAgreementWhen65: string
@@ -160,6 +162,8 @@ export interface Translations {
   months: string
   your: string
   complete: string
+  at: string
+  atAge: string
 }
 
 export function getTranslations(language: Language): Translations {
