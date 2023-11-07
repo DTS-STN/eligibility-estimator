@@ -314,6 +314,30 @@ export function evaluateOASInput(input) {
   }
 }
 
+/**
+ * Accepts a numerical month+year, and returns the number of years since then.
+ * This can and will return a decimal value, such as "65.5"!
+ */
+export function calculateAge(birthMonth: number, birthYear: number): number {
+  if (birthMonth === null || birthYear === null) return null
+
+  const today = new Date()
+  const currentMonth = today.getMonth() + 1
+  const currentYear = today.getFullYear()
+
+  let ageMonths: number
+  let ageYears = currentYear - birthYear
+
+  if (currentMonth >= birthMonth) {
+    ageMonths = currentMonth - birthMonth
+  } else {
+    ageYears -= 1
+    ageMonths = 12 + (currentMonth - birthMonth)
+  }
+
+  return ageYears + Number((ageMonths / 12).toFixed(2))
+}
+
 export function calculateFutureYearMonth(birthYear, birthMonth, age) {
   // Calculate the number of full years and additional months
   var fullYears = Math.floor(age)
