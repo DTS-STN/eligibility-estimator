@@ -154,12 +154,12 @@ describe('gisCoupleALWBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 1045.11)
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
     expectGisEligible(res, 241.52)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 100, 1045.11, 8.3, 0)
+    expectFutureOasGisBenefitEligible(res, 100, 768.46, 8.3, 0)
 
     //partner results
     expectOasNotEligible(res, true)

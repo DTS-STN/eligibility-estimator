@@ -258,7 +258,7 @@ export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
   const age = input.age // 66.42
-  const ageJuly2013 = calculate2013Age(age)
+  const ageJuly2013 = calculate2013Age(age, input.clientBirthDate)
   console.log('ageJuly2013', ageJuly2013)
   const yearsInCanada = input.yearsInCanadaSince18
   let eliObj = OasEligibility(
@@ -288,7 +288,7 @@ export function evaluateOASInput(input) {
       deferralMonths = (70 - ageJuly2013) * 12
     } else {
       // They became eligible after July 2013 -> use age and residency as is (at the time they became eligible for OAS)
-      deferralMonths = (70 - eliObj.ageOfEligibility) * 12
+      deferralMonths = (Math.min(70, age) - eliObj.ageOfEligibility) * 12
     }
   }
 
@@ -339,24 +339,41 @@ export function evaluateOASInput(input) {
   }
 }
 
-export function calculate2013Age(currentAge) {
-  const currentDate = new Date()
-  const currentYear = currentDate.getFullYear()
-  const currentMonth = currentDate.getMonth() + 1
+export function calculate2013Age(currentAge, birthDate?) {
+  if (birthDate) {
+    const parts = birthDate.split(';')
+    const birthYear = parseInt(parts[0], 10)
+    const birthMonth = parseInt(parts[1], 10)
 
-  const birthYear = currentYear - Math.floor(currentAge)
-  const birthMonth =
-    currentMonth - Math.round((currentAge - Math.floor(currentAge)) * 12)
+    const comparisonYear = 2013
+    const comparisonMonth = 7 // July
 
-  let adjustedYear = birthYear
-  let adjustedMonth = birthMonth
-  if (birthMonth <= 0) {
-    adjustedYear -= 1
-    adjustedMonth += 12
+    let age = comparisonYear - birthYear
+    const monthDifference = comparisonMonth - birthMonth
+
+    const monthAge = monthDifference / 12
+    age += monthAge
+
+    return parseFloat(age.toFixed(2))
+  } else {
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth() + 1
+
+    const birthYear = currentYear - Math.floor(currentAge)
+    const birthMonth =
+      currentMonth - Math.round((currentAge - Math.floor(currentAge)) * 12)
+
+    let adjustedYear = birthYear
+    let adjustedMonth = birthMonth
+    if (birthMonth <= 0) {
+      adjustedYear -= 1
+      adjustedMonth += 12
+    }
+
+    const ageInJuly2013 = 2013 - adjustedYear + (7 - adjustedMonth) / 12
+    return parseFloat(ageInJuly2013.toFixed(2))
   }
-
-  const ageInJuly2013 = 2013 - adjustedYear + (7 - adjustedMonth) / 12
-  return parseFloat(ageInJuly2013.toFixed(2))
 }
 
 /**

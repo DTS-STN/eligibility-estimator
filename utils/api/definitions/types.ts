@@ -59,6 +59,7 @@ export interface RequestInput {
 export interface ProcessedInput {
   income: IncomeHelper
   age: number
+  clientBirthDate: string
   receiveOAS: boolean
   oasDeferDuration: string
   oasDefer: boolean
