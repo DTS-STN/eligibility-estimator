@@ -43,7 +43,6 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
   const textStyle =
     'font-regular font-sans text-[20px] leading-[33px] text-[#333333]'
 
-  console.log('locale: ', lang)
   return (
     <div className="container">
       <h1 id={`pageHead${errType}`} className="h1 mt-4">
