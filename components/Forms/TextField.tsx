@@ -1,4 +1,4 @@
-import { FormError } from '@dts-stn/service-canada-design-system'
+import { Error } from './Error'
 import { InputHTMLAttributes } from 'react'
 
 export interface TextFieldProps
@@ -36,7 +36,7 @@ export const TextField: React.VFC<TextFieldProps> = ({
       </div>
       {error && (
         <div className="mt-2" role="alert">
-          <FormError errorMessage={error} />
+          <Error errorMessage={error} />
         </div>
       )}
       <textarea

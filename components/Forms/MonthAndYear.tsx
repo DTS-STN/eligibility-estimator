@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FormDatePicker } from '@dts-stn/service-canada-design-system'
+import { DatePicker } from './DatePicker'
 import { debounce } from 'lodash'
 import { ChangeEvent, InputHTMLAttributes } from 'react'
 import { WebTranslations } from '../../i18n/web'
@@ -61,7 +61,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
     }
   }, [name])
 
-  const dateOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
+  const dateOnChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     const fieldId = e.target.id
     let fieldToSet = ''
     if (fieldId === `${name}-birth-year`) {
@@ -99,7 +99,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
       {dateInput && (
         <div className="flex flex-row flex-wrap gap-y-4">
           <div className="flex-auto">
-            <FormDatePicker
+            <DatePicker
               id={`enter-${name}`}
               month={dateInput.month}
               year={dateInput.year}
@@ -110,7 +110,8 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
               yearId={`${name}-birth-year`}
               monthId={`${name}-birth-month`}
               hasError={!!error}
-              formErrorProps={{ id: 'formErrorId', errorMessage: error }}
+              errorProps={{ id: 'formErrorId', errorMessage: error }}
+              hasYear
             />
           </div>
           {ageValid && (
