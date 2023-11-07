@@ -281,6 +281,25 @@ const fr: WebTranslations = {
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  datePicker: {
+    month: 'Mois',
+    year: 'Année',
+    day: 'Jour',
+    months: {
+      1: 'janvier',
+      2: 'février',
+      3: 'mars',
+      4: 'avril',
+      5: 'mai',
+      6: 'juin',
+      7: 'juillet',
+      8: 'août',
+      9: 'septembre',
+      10: 'octobre',
+      11: 'novembre',
+      12: 'décembre',
+    },
+  },
   meta: {
     homeDescription: `Déterminez combien vous pourriez recevoir de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant.`,
     homeShortDescription: `Déterminez combien vous pourriez recevoir des prestations canadiennes de la Sécurité de la vieillesse.`,

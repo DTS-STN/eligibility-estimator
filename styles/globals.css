@@ -132,6 +132,37 @@
     @apply font-bold mb-[15px] font-header-gc text-content;
   }
 
+  .dropdownPos {
+    position: absolute;
+    left: 136px;
+    top: 48px;
+  }
+
+  .datePicker select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-position: right 50%;
+    background-position-x: calc(100% - 10px);
+    background-image: url("../public/dropdown.svg");
+    background-repeat: no-repeat;
+  }
+
+  .inputStyles {
+    width: 165px;
+    height: 44px;
+    padding-left: 14px;
+    margin: 4px 16px 4px 0;
+    border: 1.5px solid #6F6F6F;
+    border-radius: 4px;
+  }
+
+  .inputStyles:focus {
+    box-shadow: 0px 0px 6px 0px rgba(14, 98, 201, 0.6);
+    border: 1.5px solid rgba(14, 98, 201, 1);
+    outline: none;
+  }
+
   /* form controls */
   .form-control {
     @apply text-base w-full md:w-80 h-auto min-h-9 block py-1.5 px-3 align-middle text-muted bg-white rounded border-[1px] border-solid border-form-border focus:border-form-highlighted focus:shadow-active-form placeholder-muted/70;
