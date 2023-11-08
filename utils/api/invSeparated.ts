@@ -29,6 +29,8 @@ import {
   IncomeHelper,
 } from './helpers/fieldClasses'
 import legalValues from './scrapers/output'
+import { raw } from 'next/dist/build/webpack/loaders/next-middleware-wasm-loader'
+import { rawListeners } from 'process'
 
 //
 // This File is just to unload this big chunk of code
@@ -784,6 +786,7 @@ function getSingleClientInput(
   const clientSingleInput: ProcessedInput = {
     income: incomeHelper,
     age: rawInput.age,
+    clientBirthDate: rawInput.clientBirthDate,
     receiveOAS: rawInput.receiveOAS,
     oasDeferDuration: rawInput.oasDeferDuration,
     oasDefer: rawInput.oasDefer,
@@ -826,6 +829,7 @@ function getSinglePartnerInput(
   const partnerInput: ProcessedInput = {
     income: incomeHelper,
     age: rawInput.partnerAge,
+    clientBirthDate: rawInput.partnerBirthDate,
     receiveOAS: rawInput.receiveOAS,
     oasDefer: false, // pass dummy data because we will never use this anyway
     oasDeferDuration: JSON.stringify({ months: 0, years: 0 }),
