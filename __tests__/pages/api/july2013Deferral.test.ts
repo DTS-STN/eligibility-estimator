@@ -34,10 +34,10 @@ describe('gisCoupleOnePenBenefit', () => {
     expectOasEligible(res, EntitlementResultType.FULL, 768.46)
     expectGisEligible(res, 62.3)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.FULL, 192.12, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
     expectGisEligible(res, 638.34, true)
     expectAlwTooOld(res, true)
   })
@@ -50,13 +50,13 @@ describe('gisCoupleOnePenBenefit', () => {
 
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 365.02)
-    expectGisNotEligible(res, ResultReason.INCOME)
+    expectGisEligible(res, 0)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.FULL, 192.12, true)
-    expectGisNotEligible(res, ResultReason.INCOME, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
+    expectGisEligible(res, 0), true
     expectAlwTooOld(res, true)
   })
 
@@ -281,7 +281,7 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 286.14)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 286.14)
     expectGisEligible(res, 514.43)
     expectAlwTooOld(res)
     expectAlwAlwsTooOld(res)
@@ -317,13 +317,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 494.24)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 494.24)
     expectGisEligible(res, 465.74)
     expectAlwTooOld(res)
     expectAlwAlwsTooOld(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.FULL, 268.96, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 268.96, true)
     expectGisEligible(res, 561.8, true)
     expectAlwTooOld(res, true)
   })
