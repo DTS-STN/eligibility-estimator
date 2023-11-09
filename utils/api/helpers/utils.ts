@@ -321,7 +321,7 @@ export function evaluateOASInput(input) {
       ? 40
       : Math.min(40, Math.floor(eliObj.yearsOfResAtEligibility))
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: Math.round(deferralMonths),
+      months: Math.max(Math.round(deferralMonths), 0),
       years: 0,
     })
     consoleDev(
