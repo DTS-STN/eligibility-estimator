@@ -290,22 +290,22 @@ describe('gisCoupleTwoPensBenefit', () => {
   })
 
   /* CALC-37 */
-  // it('should pass 37 test - CALC-37', async () => {
-  //   const desiredName = 'CALC-37' // Replace with the desired name
-  //   const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //   const res = await mockGetRequest(extractedPayload)
+  it('should pass 37 test - CALC-37', async () => {
+    const desiredName = 'CALC-37' // Replace with the desired name
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //   //client results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 731.57)
-  //   expectGisEligible(res, 1066.99)
-  //   expectAlwTooOld(res)
-  //   expectAlwsMarital(res)
+    //client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 717.6)
+    expectGisEligible(res, 1047.78)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
-  //   //partner results
-  //   expectOasEligible(res, EntitlementResultType.FULL, 698.6, true)
-  //   expectGisEligible(res, 898.45, true)
-  //   expectAlwTooOld(res, true)
-  // })
+    //partner results
+    expectOasEligible(res, EntitlementResultType.FULL, 698.6, true)
+    expectGisEligible(res, 898.45, true)
+    expectAlwTooOld(res, true)
+  })
 
   /* CALC-38 */
   it('should pass 38 test - CALC-38', async () => {

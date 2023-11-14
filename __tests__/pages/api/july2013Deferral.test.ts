@@ -23,7 +23,7 @@ import { mockGetRequest } from '../../utils/factory'
 //file for extracting test data
 const filePath = '__tests__/utils/ScenariosWith2023Q3RatesAndThresholds.xlsx'
 
-describe('gisCoupleOnePenBenefit', () => {
+describe('july2013Deferral', () => {
   /* CALC-166 */
   it('should pass 166 test - CALC-166', async () => {
     const desiredName = 'CALC-166'
