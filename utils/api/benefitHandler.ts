@@ -397,7 +397,7 @@ export class BenefitHandler {
         yearsInCanada - (deferralYrs + deferralMonths / 12)
       )
     }
-
+    console.log('>>> BEN 1', this.input.client.age)
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.translations,
@@ -409,6 +409,7 @@ export class BenefitHandler {
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
     if (this.input.client.partnerBenefitStatus.helpMe) {
+      console.log('>>> BEN 2', this.input.client.age)
       const partnerOasNoDeferral = new OasBenefit(
         this.input.partner,
         this.translations,
@@ -443,6 +444,7 @@ export class BenefitHandler {
         'Modified input to calculate OAS with deferral',
         clientOasHelper.newInput
       )
+      console.log('>>> BEN 3', this.input.client.age)
       clientOasWithDeferral = new OasBenefit(
         clientOasHelper.newInput,
         this.translations,
@@ -527,6 +529,7 @@ export class BenefitHandler {
     if (!this.future) {
       if (clientOasHelper.canDefer) {
         if (deferralMoreBeneficial) {
+          console.log('>>> BEN 4', this.input.client.age)
           clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
             this.input.client.age, // current age
             clientOasHelper.newInput.age, // base age - age when first eligible for OAS
@@ -538,6 +541,7 @@ export class BenefitHandler {
         } else {
           // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
           if (clientOasHelper.justBecameEligible) {
+            console.log('>>> BEN 5', this.input.client.age)
             clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
               this.input.client.age,
               this.input.client.age,
@@ -547,6 +551,7 @@ export class BenefitHandler {
               this.future
             )
           } else {
+            console.log('>>> BEN 6', this.input.client.age, clientOasHelper)
             clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
               this.input.client.age, // current age
               clientOasHelper.newInput.age, // base age - age when first eligible for OAS
@@ -558,6 +563,7 @@ export class BenefitHandler {
           }
         }
       } else {
+        console.log('>>> BEN 7', this.input.client.age)
         clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
           this.input.client.age, // current age
           this.input.client.age, // base age - age when first eligible for OAS
@@ -574,6 +580,7 @@ export class BenefitHandler {
 
     // If the client needs help, check their partner's OAS.
     if (this.input.client.partnerBenefitStatus.helpMe) {
+      console.log('>>> BEN 8', this.input.client.age)
       const partnerOas = new OasBenefit(
         this.input.partner,
         this.translations,
@@ -693,7 +700,7 @@ export class BenefitHandler {
     // this line overrides the partner value that's defaults to oasGis regardless.
     this.input.partner.partnerBenefitStatus.value =
       this.input.client.partnerBenefitStatus.value
-
+    console.log('>>> BEN 9', this.input.client.age)
     const partnerOas = new OasBenefit(
       this.input.partner,
       this.translations,

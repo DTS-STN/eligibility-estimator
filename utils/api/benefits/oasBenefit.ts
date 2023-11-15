@@ -42,6 +42,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       ? this.input.income.partner
       : this.input.income.client
     this.inputAge = inputAge
+    console.log('>>1>>', this.input.age, this.inputAge, this.input)
   }
 
   protected getEligibility(): EligibilityResult {
@@ -331,6 +332,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
+    console.log('>>2>>', this.input.age, this.inputAge, this.input)
     if (this.future) {
       return OasBenefit.buildMetadataObj(
         this.input.age,
@@ -369,6 +371,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       receiveOAS: false,
     }
 
+    console.log('>>3>>', 'curr Age', currentAge, 'baseAge', baseAge, input)
+
     if (currentAge) {
       const ageInRange = currentAge >= 65 && currentAge < 70
       const receivingOAS = input.receiveOAS
@@ -378,7 +382,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       // Based on requirement to not show deferral options in "Will be eligible card" when inbetween min/max income thresholds
       // const dontShowCondition = entitlement.clawback !== 0 && !future
-
+      console.log(
+        '>>> META > elig=',
+        eligible,
+        ' inRange=',
+        ageInRange,
+        'receivng=',
+        !receivingOAS
+      )
       // Eligible for OAS pension,and are 65-69, who do not already receive
       if (eligible && ageInRange && !receivingOAS) {
         const monthsTo70 = Math.round((70 - currentAge) * 12)
@@ -414,10 +425,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           meta.tableData = filteredTableData
           meta.currentAge = currentAgeWhole
         }
-
+        console.log('>>4>>  META', meta)
         return meta
       }
-
+      console.log('>>5>>  META', meta)
       return {
         tableData: null,
         currentAge: null,
