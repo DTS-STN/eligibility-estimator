@@ -99,7 +99,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME]: "Partner's net income",
     [FieldKey.PARTNER_BENEFIT_STATUS]: 'Partner receives OAS pension',
     [FieldKey.PARTNER_AGE]: "Partner's age",
-    [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Partner has legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: 'Partner only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -129,7 +129,7 @@ const en: Translations = {
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Edit if your partner receives the OAS pension',
     [FieldKey.PARTNER_AGE]: "Edit your partner's age",
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit your partner’s legal status',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit if your partner has legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Edit your partner’s country of residence',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
