@@ -13,7 +13,7 @@ import apiEn from '../api/en'
 
 const en: WebTranslations = {
   _language: Language.EN,
-  metaLanguage: ISOLanguage.EN,
+  ISOlang: ISOLanguage.EN,
 
   skipToMainContent: 'Skip to main content',
   globalHeader: 'Global header',
@@ -30,7 +30,6 @@ const en: WebTranslations = {
     'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   otherLangCode: 'FR',
-  langLong: 'eng',
   creator: 'Employment and Social Development Canada',
   search: 'Search Canada.ca',
   aboutGovernment: 'About Government',
@@ -140,6 +139,28 @@ const en: WebTranslations = {
       link: 'https://www.canada.ca/en/transparency/privacy.html',
     },
   },
+  // Error page
+  errorPageHeadingTitle404: 'We couldn’t find that web page',
+  errorPageHeadingTitle500: "We're having a problem with that page",
+  errorPageHeadingTitle503: 'This service is currently not available',
+  errorPageErrorText404:
+    "We're sorry you ended up here. Sometimes a page gets moved or deleted, but hopefully we can help you find what you're looking for.",
+  errorPageErrorText500:
+    "We expect the problem to be fixed shortly. It's not your computer or Internet connection but a problem with our website's server. We apologize for the inconvenience.",
+  errorPageErrorText503:
+    'The web server that provides this service is currently overloaded, or may be temporarily down for maintenance. We apologize for the inconvenience. ',
+  errorPageNextText: ' What next?',
+  errorTextLinkCommon: '• Go to the ',
+  errorTextLinkCommon_2: ' Service Canada home page',
+  errorTextLinkCommonLink:
+    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+  errorAuthTextLinkCommon: '• Go to your ',
+  errorAuthTextLinkCommon_2: 'My Service Canada Account dashboard',
+  errorAuthTextLinkCommonLink:
+    'https://www.canada.ca/en/employment-social-development/services/my-account.html',
+  error500TextLink: '• Try refreshing the page or try again later',
+  error503TextLink: '• Try again later',
+  errorPageType: 'Error',
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
@@ -178,7 +199,7 @@ const en: WebTranslations = {
   required: '(required)',
   workInProgress: 'This estimator is a work in progress',
   workInProgressBody:
-    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=07eef192-0870-426e-bb66-d135936787a7&lc=eng" target="_blank">feedback</a>.',
+    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
   homePageP1:
     'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
@@ -252,6 +273,25 @@ const en: WebTranslations = {
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
     'Use the estimator to see if you meet all eligibility criteria.',
+  datePicker: {
+    month: 'Month',
+    year: 'Year',
+    day: 'Day',
+    months: {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December',
+    },
+  },
   meta: {
     homeDescription:
       'Find out how much you could receive from the Old Age Security pension, the Guaranteed Income Supplement, the Allowance and the Allowance for the Survivor.',
@@ -339,9 +379,7 @@ const en: WebTranslations = {
     [ValidationErrors.partnerYearsSince18Empty]:
       "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
-    [ValidationErrors.yearsSince18Empty]:
-      'Please enter a number no higher than your age minus 18.',
-    [ValidationErrors.yearsSinceOASEmpty]:
+    [ValidationErrors.yearsInCanadaMinusAge]:
       'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
@@ -381,8 +419,6 @@ const en: WebTranslations = {
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
       'You need to have lived in Canada for at least 20&nbsp;years to receive any of the benefits covered by this tool.',
-    [ValidationErrors.yearsInCanadaMinusAge]:
-      'The number of years you have lived in Canada should be no more than your age minus 18.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:

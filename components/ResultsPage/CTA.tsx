@@ -1,18 +1,20 @@
 import React from 'react'
-import { Button } from '@dts-stn/service-canada-design-system'
+import { Button } from '../Forms/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPiggyBank } from '@fortawesome/free-solid-svg-icons'
 export interface ICTAProps {
   heading: string
   body: string
-  ButtonProps: typeof Button.propTypes
+  buttonText: string
+  onClick: React.MouseEventHandler<HTMLButtonElement>
   containerClass?: string
 }
 
 export function CTA({
   heading,
   body,
-  ButtonProps,
+  buttonText,
+  onClick,
   containerClass = '',
 }: ICTAProps) {
   return (
@@ -36,10 +38,11 @@ export function CTA({
           </h3>
           <p className="ds-body">{body}</p>
           <Button
-            styling="primary"
-            className="ds-my-3"
+            style="primary"
+            custom="ds-my-3"
             type="button"
-            {...ButtonProps}
+            text={buttonText}
+            onClick={onClick}
           />
         </div>
       </div>

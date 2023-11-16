@@ -103,8 +103,6 @@ export enum ValidationErrors {
   partnerIncomeEmpty = 'partnerIncomeEmpty',
   partnerYearsSince18Empty = 'partnerYearsSince18Empty',
   maritalStatusEmpty = 'maritalStatusEmpty',
-  yearsSince18Empty = 'yearsSince18Empty',
-  yearsSinceOASEmpty = 'yearsSinceOASEmpty',
   legalStatusNotSelected = 'legalStatusNotSelected',
   partnerLegalStatusNotSelected = 'partnerLegalStatusNotSelected',
   partnerBenefitStatusEmpty = 'partnerBenefitStatusEmpty',

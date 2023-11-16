@@ -4,6 +4,7 @@ import {
   EntitlementResultType,
   ResultKey,
   ResultReason,
+  LivingCountry,
 } from '../definitions/enums'
 import {
   EligibilityResult,
@@ -20,10 +21,12 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
   single: Boolean
   future: Boolean
+  partnerLivingCountry: String
   relevantIncome: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
+    partnerLivingCountry: String,
     partner?: Boolean,
     single?: Boolean,
     future?: Boolean
@@ -31,6 +34,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     super(input, translations, BenefitKey.alw)
     this.partner = partner
     this.future = future
+    this.partnerLivingCountry = partnerLivingCountry
     this.relevantIncome = single
       ? this.input.income.client
       : this.input.income.relevant
@@ -39,11 +43,15 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   protected getEligibility(): EligibilityResult {
     // helpers
     const meetsReqMarital = this.input.maritalStatus.partnered
-    const meetsReqPartner = this.input.partnerBenefitStatus.gis
     const meetsReqAge = 60 <= this.input.age && this.input.age < 65
     const overAgeReq = 65 <= this.input.age
     const underAgeReq = this.input.age < 60
     const meetsReqCountry = this.input.livingCountry.canada
+
+    // Partner must live in Canada to receive GIS
+    const meetsReqPartner =
+      this.input.partnerBenefitStatus.gis &&
+      this.partnerLivingCountry === LivingCountry.CANADA
 
     // income must be provided, partner cannot be eligible for gis without income
     const incomeNotProvided = !this.input.income.provided
@@ -154,7 +162,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
           ? this.translations.detail.alwNotEligible
           : this.translations.detail.alwEligibleButPartnerAlreadyIs,
       }
-    } else if (!meetsReqIncome) {
+    } else if (!meetsReqIncome && meetsReqYears) {
       return {
         result: ResultKey.ELIGIBLE,
         reason: ResultReason.INCOME,

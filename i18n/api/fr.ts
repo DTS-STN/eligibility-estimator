@@ -101,7 +101,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME]: 'Revenu net du conjoint',
     [FieldKey.PARTNER_BENEFIT_STATUS]: 'Conjoint reçoit la pension de la SV',
     [FieldKey.PARTNER_AGE]: 'Âge du conjoint',
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Statut légal du conjoint',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Conjoint a statut légal',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Pays de résidence du conjoint',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Conjoint a seulement vécu au Canada',
@@ -136,7 +136,7 @@ const fr: Translations = {
       'Modifier si votre conjoint reçoit la pension de la SV',
     [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
     [FieldKey.PARTNER_LEGAL_STATUS]:
-      'Modifier le statut légal de votre conjoint',
+      'Modifier si votre conjoint a un statut légal',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Modifier le pays de résidence de votre conjoint',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
@@ -373,6 +373,8 @@ const fr: Translations = {
       "Vous n'avez pas vécu au Canada pendant le nombre d'années requis pour être admissible à cette prestation.",
     conditional:
       'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
+    partnerContinues: 'Si votre conjoint continue de recevoir à',
+    continueReceiving: 'Si vous continuez de recevoir à',
     dependingOnAgreement:
       "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen60:
@@ -553,5 +555,7 @@ const fr: Translations = {
   months: 'mois',
   your: 'votre revenu',
   complete: 'vos revenus',
+  at: 'À',
+  atAge: ' ans,',
 }
 export default fr

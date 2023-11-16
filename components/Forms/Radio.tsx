@@ -1,4 +1,4 @@
-import { FormError } from '@dts-stn/service-canada-design-system'
+import { Error } from './Error'
 import { InputHTMLAttributes } from 'react'
 import { TypedKeyAndText } from '../../i18n/api'
 import { Tooltip } from '../Tooltip/tooltip'
@@ -76,7 +76,7 @@ export const Radio: React.VFC<InputProps> = ({
       </fieldset>
       {error && (
         <div className="mt-2">
-          <FormError errorMessage={error} />
+          <Error errorMessage={error} />
         </div>
       )}
     </div>

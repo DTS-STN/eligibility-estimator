@@ -1,4 +1,4 @@
-import { FormError } from '@dts-stn/service-canada-design-system'
+import { Error } from './Error'
 import { useRouter } from 'next/router'
 import { useState, InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
@@ -97,7 +97,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 
       {error && (
         <div className="mt-2" role="alert">
-          <FormError errorMessage={error} />
+          <Error errorMessage={error} />
         </div>
       )}
     </div>

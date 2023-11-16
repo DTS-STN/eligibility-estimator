@@ -14,7 +14,7 @@ import apiFr from '../api/fr'
 
 const fr: WebTranslations = {
   _language: Language.FR,
-  metaLanguage: ISOLanguage.FR,
+  ISOlang: ISOLanguage.FR,
 
   skipToMainContent: 'Passer au contenu principal',
   globalHeader: 'En-tête général',
@@ -31,7 +31,6 @@ const fr: WebTranslations = {
     'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   otherLangCode: 'EN',
-  langLong: 'fra',
   creator: 'Emploi et Développement social Canada',
   search: 'Rechercher dans Canada.ca',
   aboutGovernment: 'Au sujet du gouvernement',
@@ -143,6 +142,29 @@ const fr: WebTranslations = {
       link: 'https://www.canada.ca/fr/transparence/confidentialite.html',
     },
   },
+  // Error page
+  errorPageHeadingTitle404: 'Nous ne pouvons trouver cette page Web',
+  errorPageHeadingTitle500: 'Nous éprouvons des difficultés avec cette page',
+  errorPageHeadingTitle503: 'Le service est actuellement indisponible',
+  errorPageErrorText404:
+    "Nous sommes désolés que vous ayez abouti ici. Il arrive parfois qu'une page ait été déplacée ou supprimée. Heureusement, nous pouvons vous aider à trouver ce que vous cherchez.",
+  errorPageErrorText500:
+    'Nous espérons résoudre le problème sous peu. Il ne s’agit pas d’un problème avec votre ordinateur ou Internet, mais plutôt avec le serveur de notre site Web. Nous nous excusons de cet inconvénient.',
+  errorPageErrorText503:
+    'Le serveur Web auquel vous tentez d’accéder est actuellement surchargé ou pourrait être temporairement hors service à des fins d’entretien. Nous nous excusons de cet inconvénient. ',
+  errorPageNextText: 'Que faire?',
+  errorTextLinkCommon: '• Accéder à la ',
+  errorTextLinkCommon_2: "page d'accueil de Service Canada",
+  errorTextLinkCommonLink:
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  errorAuthTextLinkCommon: '• Accéder au ',
+  errorAuthTextLinkCommon_2:
+    'tableau de bord de mon compte Mon dossier Service Canada',
+  errorAuthTextLinkCommonLink:
+    'https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html',
+  error500TextLink: '• Actualisez la page ou réessayez plus tard',
+  error503TextLink: '• Réessayez plus tard',
+  errorPageType: 'Erreur',
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
@@ -184,7 +206,7 @@ const fr: WebTranslations = {
   required: '(obligatoire)',
   workInProgress: 'Cet estimateur est un travail en cours',
   workInProgressBody:
-    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=07eef192-0870-426e-bb66-d135936787a7&lc=fra" target="_blank">rétroaction</a>.',
+    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
@@ -259,6 +281,25 @@ const fr: WebTranslations = {
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  datePicker: {
+    month: 'Mois',
+    year: 'Année',
+    day: 'Jour',
+    months: {
+      1: 'janvier',
+      2: 'février',
+      3: 'mars',
+      4: 'avril',
+      5: 'mai',
+      6: 'juin',
+      7: 'juillet',
+      8: 'août',
+      9: 'septembre',
+      10: 'octobre',
+      11: 'novembre',
+      12: 'décembre',
+    },
+  },
   meta: {
     homeDescription: `Déterminez combien vous pourriez recevoir de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant.`,
     homeShortDescription: `Déterminez combien vous pourriez recevoir des prestations canadiennes de la Sécurité de la vieillesse.`,
@@ -348,9 +389,7 @@ const fr: WebTranslations = {
       'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
     [ValidationErrors.maritalStatusEmpty]:
       'Veuillez sélectionner un état matrimonial.',
-    [ValidationErrors.yearsSince18Empty]:
-      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
-    [ValidationErrors.yearsSinceOASEmpty]:
+    [ValidationErrors.yearsInCanadaMinusAge]:
       'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
@@ -393,8 +432,6 @@ const fr: WebTranslations = {
       "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
       "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
-    [ValidationErrors.yearsInCanadaMinusAge]:
-      "Le nombre d'années pendant lesquelles vous avez vécu au Canada ne doit pas dépasser votre âge moins 18 ans.",
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:

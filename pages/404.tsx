@@ -1,4 +1,4 @@
-import { ErrorPage } from '@dts-stn/service-canada-design-system'
+import { ErrorPage } from '../components/Layout/ErrorPage'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'

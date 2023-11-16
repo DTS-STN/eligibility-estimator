@@ -18,10 +18,10 @@ export const DeferralTable: React.VFC<{
       aria-describedby={`${apiTsln.oasDeferralTable.title} desc`}
       className="mt-8 mb-8 text-center w-full md:w-7/12 table-fixed"
     >
-      <caption className="mb-3 font-bold">
+      <caption data-cy="deferral-title" className="mb-3 font-bold">
         {apiTsln.oasDeferralTable.title}
       </caption>
-      <thead>
+      <thead data-cy="deferral-heading">
         <tr>
           <th scope="col" className="border border-gray-800 bg-gray-100 p-4">
             {future
@@ -33,7 +33,7 @@ export const DeferralTable: React.VFC<{
           </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody data-cy="deferral-table">
         {data.map(({ age, amount }, index) => (
           <tr key={index}>
             <td className="border border-gray-800 p-0">
