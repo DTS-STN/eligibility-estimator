@@ -18,6 +18,7 @@ export function getEligibleBenefits(benefits) {
 }
 
 export function getAgeArray(residencyData) {
+  console.log('residencyData', residencyData)
   let [userAge, partnerAge] = [
     residencyData.client.age,
     residencyData.partner.age,
@@ -63,6 +64,11 @@ export function getAgeArray(residencyData) {
     let cOAS = yearsUntilOAS(userAge, userRes)
     let pALW = yearsUntilALW(partnerAge, partnerRes)
     let pOAS = yearsUntilOAS(partnerAge, partnerRes)
+
+    console.log('cALW', cALW)
+    console.log('cOAS', cOAS)
+    console.log('pALW', pALW)
+    console.log('pOAS', pOAS)
 
     let arr = [cALW, cOAS, pALW, pOAS]
     if (arr.every((el) => el === null)) break
