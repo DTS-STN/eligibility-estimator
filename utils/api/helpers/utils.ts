@@ -273,7 +273,11 @@ export function evaluateOASInput(input) {
   console.log('eliObj', eliObj)
 
   let deferralMonths
-  if (eliObj.ageOfEligibility >= 70 || age < eliObj.ageOfEligibility) {
+  if (
+    ageJuly2013 >= 70 ||
+    eliObj.ageOfEligibility >= 70 ||
+    age < eliObj.ageOfEligibility
+  ) {
     deferralMonths = 0
   } else {
     // Eligibility age is between 65-70 here

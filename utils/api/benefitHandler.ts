@@ -480,6 +480,7 @@ export class BenefitHandler {
       this.future
     )
 
+    console.log(clientGisNoDeferral)
     consoleDev(
       'Client GIS amount NO deferral',
       clientGisNoDeferral.entitlement.result
@@ -496,6 +497,7 @@ export class BenefitHandler {
         this.input.client
       )
 
+      console.log(clientGisWithDeferral)
       consoleDev(
         'Client GIS amount WITH deferral',
         clientGisWithDeferral.entitlement.result
