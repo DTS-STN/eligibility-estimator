@@ -172,7 +172,10 @@ export class FutureHandler {
       client: { age, res: this.query.livedOnlyInCanada ? 40 : clientRes },
       partner: {
         age: partnerAge,
-        res: partnerOnlyCanada === 'true' || partnerAge < 60 ? 40 : partnerRes,
+        res:
+          partnerOnlyCanada === 'true' || partnerAge < 60
+            ? 40
+            : partnerRes || 0,
       },
     })
 
