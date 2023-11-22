@@ -1,7 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight as solidChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 export interface BreadcrumbItem {
   text: string
@@ -20,19 +18,17 @@ export function Breadcrumb({ locale, items = [] }: BreadcrumbProps) {
         {items.map((item, index) => (
           <li
             key={item.link}
-            className="inline-block min-w-0 max-w-full truncate -my-4 px-1"
+            className="inline-block min-w-0 max-w-full truncate -my-4"
           >
-            <FontAwesomeIcon
-              icon={solidChevronRight}
-              className={`${
-                index === 0 ? 'hidden' : ''
-              } h-[8px] w-[8px] py-[2px] pr-[4px]`}
-            />
             <Link href={item.link} locale={locale}>
               <a className="font-sans text-[16px] leading-[23px] font-[400] text-[#295376] hover:text-[#0535D2] underline">
                 {item.text}
               </a>
             </Link>
+
+            {index < items.length - 1 && (
+              <span className="ml-2 mr-1 ds-inline-block ds-align-middle ds-text-multi-blue-blue70b ds-icon-cheveron-right" />
+            )}
           </li>
         ))}
       </ul>
