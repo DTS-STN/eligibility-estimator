@@ -388,7 +388,10 @@ export class BenefitHandler {
             partnerEliObj.yearsOfResAtEligibility
         }
       }
+      console.log('partnerEliObj', partnerEliObj)
     }
+
+    console.log('this.input.partner', this.input.partner)
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result

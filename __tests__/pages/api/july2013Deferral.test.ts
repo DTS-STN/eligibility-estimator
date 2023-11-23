@@ -139,7 +139,6 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    console.log('res.body.input', res.body.input)
     expectOasEligible(res, EntitlementResultType.PARTIAL, 241.69)
     expectGisEligible(res, 429.64)
     expectAlwTooOld(res)
