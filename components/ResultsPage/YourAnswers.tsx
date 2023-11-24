@@ -21,17 +21,17 @@ export const YourAnswers: React.VFC<{
 
   // Group results into category for mobile view
   const categoryMapping = {
-    'Age': ['age', 'receiveOAS', 'oasDefer', 'oasDeferDuration', 'oasAge'],
-    'Income': ['incomeAvailable', 'income'],
-    'Legal Status': ['legalStatus'],
-    'Residence History': [
+    age: ['age', 'receiveOAS', 'oasDefer', 'oasDeferDuration', 'oasAge'],
+    netIncome: ['incomeAvailable', 'income'],
+    legalStatus: ['legalStatus'],
+    residenceHistory: [
       'livingCountry',
       'livedOnlyInCanada',
       'yearsInCanadaSince18',
       'yearsInCanadaSinceOAS',
       'everLivedSocialCountry',
     ],
-    'Marital Status': [
+    maritalStatus: [
       'maritalStatus',
       'invSeparated',
       'partnerIncomeAvailable',
@@ -121,17 +121,20 @@ export const YourAnswers: React.VFC<{
       return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
     return (
       <>
-        {Object.entries(categoryMapping).map(([category, keys]) => {
+        {Object.entries(categoryMapping).map(([key, keys]) => {
+          const translatedTitle = tsln[key + 'Text']
           const categoryInputs = inputs.filter(
             (input) => keys.includes(input.key) && shouldDisplay(input)
           )
           if (categoryInputs.length === 0) return null
           return (
             <Accordion
-              key={category}
-              title={category}
-              isOpen={accordionStates[category]}
-              onClick={() => toggleAccordion(category)}
+              key={key}
+              title={
+                <div dangerouslySetInnerHTML={{ __html: translatedTitle }} />
+              }
+              isOpen={accordionStates[key]}
+              onClick={() => toggleAccordion(key)}
             >
               {categoryInputs.map((input) => {
                 return (

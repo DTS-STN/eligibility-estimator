@@ -2,7 +2,7 @@
 import React from 'react'
 
 interface AccordionProps {
-  title: string
+  title: React.ReactNode
   children: React.ReactNode
   isOpen: boolean
   onClick: React.MouseEventHandler<HTMLButtonElement>
