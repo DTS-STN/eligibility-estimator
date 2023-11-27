@@ -15,12 +15,12 @@ export const textReplacementRules: TextReplacementRules = {
   ENTITLEMENT_AMOUNT_SUM: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.summary.entitlementSum,
-      handler.translations._language
+      handler.fields.translations._language
     )}</strong>`,
   ENTITLEMENT_AMOUNT_FOR_BENEFIT: (handler, benefitResult) =>
     `<strong data-cy='benefit-estimate'>${numberToStringCurrency(
       benefitResult.entitlement.result,
-      handler.translations._language
+      handler.fields.translations._language
     )}</strong>`,
   CALCULATED_YEARS_IN_CANADA: (handler) => {
     const yearsInCanada = handler.rawInput.yearsInCanadaSince18
@@ -29,7 +29,7 @@ export const textReplacementRules: TextReplacementRules = {
   OAS_75_AMOUNT: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.resultAt75 ?? 0,
-      handler.translations._language
+      handler.fields.translations._language
     )}</strong>`,
   CURRENT_AGE: (handler) => {
     const current_age =
@@ -50,17 +50,19 @@ export const textReplacementRules: TextReplacementRules = {
     const months =
       handler.benefitResults.client.oas?.cardDetail?.meta?.monthsTo70
     return `${
-      months == 1 ? handler.translations.month : handler.translations.months
+      months == 1
+        ? handler.fields.translations.month
+        : handler.fields.translations.months
     }`
   },
   OAS_DEFERRAL_INCREASE: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.deferral.increase ?? 0,
-      handler.translations._language
+      handler.fields.translations._language
     )}</strong>`,
   OAS_DEFERRAL_YEARS: (handler) => {
     const years = handler.benefitResults.client.oas?.entitlement.deferral.years
-    return `<strong>${years ?? 0} ${handler.translations.year}${
+    return `<strong>${years ?? 0} ${handler.fields.translations.year}${
       years !== 1 ? 's' : ''
     }</strong>`
   },
@@ -69,60 +71,63 @@ export const textReplacementRules: TextReplacementRules = {
   OAS_CLAWBACK: (handler) =>
     `<strong>${numberToStringCurrency(
       handler.benefitResults.client.oas?.entitlement.clawback ?? 0,
-      handler.translations._language
+      handler.fields.translations._language
     )}</strong>`,
   OAS_RECOVERY_TAX_CUTOFF: (handler) =>
     `<strong>${numberToStringCurrency(
       legalValues.oas.clawbackIncomeLimit,
-      handler.translations._language,
+      handler.fields.translations._language,
       { rounding: 0 }
     )}</strong>`,
   OAS_MAX_INCOME: (handler) =>
     `<strong>${numberToStringCurrency(
       legalValues.oas.incomeLimit,
-      handler.translations._language,
+      handler.fields.translations._language,
       { rounding: 0 }
     )}</strong>`,
   INCOME_LESS_THAN: (handler, benefitResult) =>
     `<strong>${numberToStringCurrency(
       benefitResult.eligibility.incomeMustBeLessThan,
-      handler.translations._language,
+      handler.fields.translations._language,
       { rounding: 0 }
     )}</strong>`,
   INCOME_SINGLE_OR_COMBINED: (handler) =>
-    handler.input.client.maritalStatus.partnered
-      ? handler.translations.incomeCombined
-      : handler.translations.incomeSingle,
+    handler.fields.input.client.maritalStatus.partnered
+      ? handler.fields.translations.incomeCombined
+      : handler.fields.translations.incomeSingle,
   EARLIEST_ELIGIBLE_AGE: (handler) => String(handler.rawInput.age),
-  LINK_SERVICE_CANADA: (handler) => generateLink(handler.translations.links.SC),
+  LINK_SERVICE_CANADA: (handler) =>
+    generateLink(handler.fields.translations.links.SC),
   MY_SERVICE_CANADA: (handler) =>
-    generateLink(handler.translations.links.SCAccount),
+    generateLink(handler.fields.translations.links.SCAccount),
   LINK_SOCIAL_AGREEMENT: (handler) =>
-    generateLink(handler.translations.links.socialAgreement),
+    generateLink(handler.fields.translations.links.socialAgreement),
   LINK_MORE_REASONS: (handler, benefitResult) =>
-    generateLink(handler.translations.links.reasons[benefitResult.benefitKey]),
+    generateLink(
+      handler.fields.translations.links.reasons[benefitResult.benefitKey]
+    ),
   LINK_OAS_DEFER_CLICK_HERE: (handler) =>
-    generateLink(handler.translations.links.oasDeferClickHere),
+    generateLink(handler.fields.translations.links.oasDeferClickHere),
   LINK_OAS_DEFER_INLINE: (handler) =>
     generateLink(
-      handler.translations.links.oasDeferInline,
-      handler.translations.opensNewWindow
+      handler.fields.translations.links.oasDeferInline,
+      handler.fields.translations.opensNewWindow
     ),
   LINK_RECOVERY_TAX: (handler) =>
-    generateLink(handler.translations.links.oasRecoveryTaxInline),
+    generateLink(handler.fields.translations.links.oasRecoveryTaxInline),
   LINK_LEARN_ABOUT_RECOVERY_TAX: (handler) =>
-    generateLink(handler.translations.links.oasLearnAboutRecoveryTax),
+    generateLink(handler.fields.translations.links.oasLearnAboutRecoveryTax),
   LINK_NON_RESIDENT_TAX: (handler) =>
-    generateLink(handler.translations.links.oasNonResidentTax),
+    generateLink(handler.fields.translations.links.oasNonResidentTax),
   PARTNER_BENEFIT_AMOUNT: (handler, benefitResult) =>
     `<strong data-cy='benefit-estimate'>${numberToStringCurrency(
       benefitResult.entitlement.result,
-      handler.translations._language
+      handler.fields.translations._language
     )}</strong>`,
   YOUR_OR_COMPLETE: (handler) =>
-    handler.input.client.maritalStatus.partnered
-      ? handler.translations.complete
-      : handler.translations.your,
+    handler.fields.input.client.maritalStatus.partnered
+      ? handler.fields.translations.complete
+      : handler.fields.translations.your,
 }
 
 export function generateLink(link: Link, opensNewWindow?: string): string {
