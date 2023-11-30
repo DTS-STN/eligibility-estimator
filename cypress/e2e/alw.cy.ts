@@ -1,8 +1,8 @@
 //====
-// UI Regression test to validate ALWS variations
+// UI Regression test to validate ALW variations
 // for widowed scenarios and ineligible individuals.
 //
-// Author: Curtis Underwood
+// Author: Curtis Underwood, Maxim Lam
 //====
 
 import testData from '../fixtures/alwCases'
@@ -88,7 +88,7 @@ function removeHtmlContent(text) {
   return text;
 }
 
-// Function to perform checks on ALWS Benefit Card Results
+// Function to perform checks on ALW Benefit Card Results
 function checkALWResults(response, item, language) {
     const alw = response.results.alw
     const lang = language === Language.FR ? fr : en;
