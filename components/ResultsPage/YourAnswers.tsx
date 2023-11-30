@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
-import { numberToStringCurrency } from '../../i18n/api'
-import { Translations } from '../../i18n/api'
+import { Translations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
