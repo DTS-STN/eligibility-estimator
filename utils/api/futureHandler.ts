@@ -255,6 +255,7 @@ export class FutureHandler {
       Object.keys(benefitCounter).forEach((benefit) => {
         if (benefitCounter[benefit] > 1) {
           const val = Object.values(clientResults[0])[0]
+
           if (val[benefit]?.cardDetail?.mainText !== undefined) {
             const mainText = val[benefit].cardDetail.mainText
             const textToAdd =
