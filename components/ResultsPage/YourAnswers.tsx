@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { numberToStringCurrency } from '../../i18n/api'
+import { Translations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
@@ -18,20 +19,27 @@ export const YourAnswers: React.VFC<{
   const allFieldData: FieldConfig[] = BenefitHandler.getAllFieldData(
     tsln._language
   )
+  const t = useTranslation<Translations>()
 
   // Group results into category for mobile view
   const categoryMapping = {
-    age: ['age', 'receiveOAS', 'oasDefer', 'oasDeferDuration', 'oasAge'],
-    netIncome: ['incomeAvailable', 'income'],
-    legalStatus: ['legalStatus'],
-    residenceHistory: [
+    [t.category.age]: [
+      'age',
+      'receiveOAS',
+      'oasDefer',
+      'oasDeferDuration',
+      'oasAge',
+    ],
+    [t.category.income]: ['incomeAvailable', 'income'],
+    [t.category.legal]: ['legalStatus'],
+    [t.category.residence]: [
       'livingCountry',
       'livedOnlyInCanada',
       'yearsInCanadaSince18',
       'yearsInCanadaSinceOAS',
       'everLivedSocialCountry',
     ],
-    maritalStatus: [
+    [t.category.marital]: [
       'maritalStatus',
       'invSeparated',
       'partnerIncomeAvailable',
@@ -121,20 +129,17 @@ export const YourAnswers: React.VFC<{
       return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
     return (
       <>
-        {Object.entries(categoryMapping).map(([key, keys]) => {
-          const translatedTitle = tsln[key + 'Text']
+        {Object.entries(categoryMapping).map(([category, keys]) => {
           const categoryInputs = inputs.filter(
             (input) => keys.includes(input.key) && shouldDisplay(input)
           )
           if (categoryInputs.length === 0) return null
           return (
             <Accordion
-              key={key}
-              title={
-                <div dangerouslySetInnerHTML={{ __html: translatedTitle }} />
-              }
-              isOpen={accordionStates[key]}
-              onClick={() => toggleAccordion(key)}
+              key={category}
+              title={category}
+              isOpen={accordionStates[category]}
+              onClick={() => toggleAccordion(category)}
             >
               {categoryInputs.map((input) => {
                 return (
