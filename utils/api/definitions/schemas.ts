@@ -35,7 +35,7 @@ const customAgeValidation = (value, helpers) => {
   const age = value
   const birthYear = currentYear - age
 
-  if (birthYear < 1900 || birthYear > currentYear) {
+  if (birthYear < 1899 || birthYear > currentYear) {
     return helpers.message(ValidationErrors.invalidAge)
   } else if (age < 18) {
     return helpers.message(ValidationErrors.ageUnder18)
