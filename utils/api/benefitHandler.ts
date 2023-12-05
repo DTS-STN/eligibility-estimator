@@ -500,6 +500,7 @@ export class BenefitHandler {
         this.input.client
       )
 
+      console.log('clientGisWithDeferral', clientGisWithDeferral)
       console.log(clientGisWithDeferral)
       consoleDev(
         'Client GIS amount WITH deferral',

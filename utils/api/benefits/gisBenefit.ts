@@ -245,7 +245,8 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age,
-      this.oasResult
+      this.oasResult,
+      this.originalInput?.age
     ).getEntitlementAmount()
 
     return gisResult
