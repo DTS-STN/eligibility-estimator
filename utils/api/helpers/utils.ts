@@ -258,7 +258,7 @@ export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
   const age = input.age // 66.42
-  const ageJuly2013 = calculate2013Age(age)
+  const ageJuly2013 = calculate2013Age(age, input.clientBirthDate)
   console.log('ageJuly2013', ageJuly2013)
   const yearsInCanada = input.yearsInCanadaSince18
   let eliObj = OasEligibility(

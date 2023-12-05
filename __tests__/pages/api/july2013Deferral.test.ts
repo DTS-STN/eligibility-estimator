@@ -160,10 +160,10 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 212.6)
     expectGisEligible(res, 514.43)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.FULL, 192.12, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
     expectGisEligible(res, 533.64, true)
     expectAlwTooOld(res, true)
   })
@@ -178,10 +178,10 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 243.99)
     expectGisEligible(res, 1204.43)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.FULL, 192.12, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
     expectGisEligible(res, 1204.43, true)
     expectAlwTooOld(res, true)
   })
@@ -212,7 +212,7 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 365.79)
     expectGisEligible(res, 769.8)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 211.33, true)
@@ -265,7 +265,7 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 226.7)
     expectGisEligible(res, 1204.43)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 537.92, true)
@@ -283,10 +283,10 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 286.14)
     expectGisEligible(res, 514.43)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
-    expectOasEligible(res, EntitlementResultType.FULL, 288.18, true)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 288.18, true)
     expectGisEligible(res, 437.59, true)
     expectAlwTooOld(res, true)
   })
@@ -319,7 +319,7 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 494.24)
     expectGisEligible(res, 465.74)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 268.96, true)
@@ -373,7 +373,7 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 205.95)
     expectGisEligible(res, 742.64)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 192.12, true)
@@ -391,7 +391,7 @@ describe('july2013Deferral', () => {
     expectOasEligible(res, EntitlementResultType.PARTIAL, 261.28)
     expectGisEligible(res, 846.64)
     expectAlwTooOld(res)
-    expectAlwAlwsTooOld(res)
+    expectAlwsMarital(res)
 
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 557.14, true)
