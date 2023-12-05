@@ -60,7 +60,7 @@ module.exports = {
 
         // info
         'info': '#269abc;',
-        'info-border': '#269abc',
+        'info-border': '#666666',
         'info-hover': '#343333',
 
         // warning
@@ -84,7 +84,7 @@ module.exports = {
 
         'header-rule': '#AF3C43',
 
-        'emphasis': '#edf9ff',
+        'emphasis': '#F5F5F5',
 
         //button background color
         'button-background': '#26374a',
