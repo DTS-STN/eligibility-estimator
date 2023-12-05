@@ -142,6 +142,29 @@ const fr: WebTranslations = {
       link: 'https://www.canada.ca/fr/transparence/confidentialite.html',
     },
   },
+  // Error page
+  errorPageHeadingTitle404: 'Nous ne pouvons trouver cette page Web',
+  errorPageHeadingTitle500: 'Nous éprouvons des difficultés avec cette page',
+  errorPageHeadingTitle503: 'Le service est actuellement indisponible',
+  errorPageErrorText404:
+    "Nous sommes désolés que vous ayez abouti ici. Il arrive parfois qu'une page ait été déplacée ou supprimée. Heureusement, nous pouvons vous aider à trouver ce que vous cherchez.",
+  errorPageErrorText500:
+    'Nous espérons résoudre le problème sous peu. Il ne s’agit pas d’un problème avec votre ordinateur ou Internet, mais plutôt avec le serveur de notre site Web. Nous nous excusons de cet inconvénient.',
+  errorPageErrorText503:
+    'Le serveur Web auquel vous tentez d’accéder est actuellement surchargé ou pourrait être temporairement hors service à des fins d’entretien. Nous nous excusons de cet inconvénient. ',
+  errorPageNextText: 'Que faire?',
+  errorTextLinkCommon: '• Accéder à la ',
+  errorTextLinkCommon_2: "page d'accueil de Service Canada",
+  errorTextLinkCommonLink:
+    'https://www.canada.ca/fr/emploi-developpement-social/ministere/portefeuille/service-canada.html',
+  errorAuthTextLinkCommon: '• Accéder au ',
+  errorAuthTextLinkCommon_2:
+    'tableau de bord de mon compte Mon dossier Service Canada',
+  errorAuthTextLinkCommonLink:
+    'https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html',
+  error500TextLink: '• Actualisez la page ou réessayez plus tard',
+  error503TextLink: '• Réessayez plus tard',
+  errorPageType: 'Erreur',
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
@@ -258,6 +281,25 @@ const fr: WebTranslations = {
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  datePicker: {
+    month: 'Mois',
+    year: 'Année',
+    day: 'Jour',
+    months: {
+      1: 'janvier',
+      2: 'février',
+      3: 'mars',
+      4: 'avril',
+      5: 'mai',
+      6: 'juin',
+      7: 'juillet',
+      8: 'août',
+      9: 'septembre',
+      10: 'octobre',
+      11: 'novembre',
+      12: 'décembre',
+    },
+  },
   meta: {
     homeDescription: `Déterminez combien vous pourriez recevoir de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant.`,
     homeShortDescription: `Déterminez combien vous pourriez recevoir des prestations canadiennes de la Sécurité de la vieillesse.`,

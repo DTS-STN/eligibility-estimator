@@ -99,7 +99,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME]: "Partner's net income",
     [FieldKey.PARTNER_BENEFIT_STATUS]: 'Partner receives OAS pension',
     [FieldKey.PARTNER_AGE]: "Partner's age",
-    [FieldKey.PARTNER_LEGAL_STATUS]: "Partner's legal status",
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Partner has legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: 'Partner only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
@@ -129,7 +129,7 @@ const en: Translations = {
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Edit if your partner receives the OAS pension',
     [FieldKey.PARTNER_AGE]: "Edit your partner's age",
-    [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit your partner’s legal status',
+    [FieldKey.PARTNER_LEGAL_STATUS]: 'Edit if your partner has legal status',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'Edit your partner’s country of residence',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
@@ -365,6 +365,8 @@ const en: Translations = {
       'You have not lived in Canada for the required number of years to be eligible for this benefit.',
     conditional:
       'You may be eligible for this benefit. We encourage you to contact Service Canada for a better assessment.',
+    partnerContinues: 'If your partner continues receiving at',
+    continueReceiving: 'If you continue receiving at',
     dependingOnAgreement:
       "You may be eligible to receive this benefit, depending on Canada's agreement with this country. We encourage you to contact Service Canada for a better assessment.",
     dependingOnAgreementWhen60:
@@ -538,5 +540,7 @@ const en: Translations = {
   months: 'months',
   your: 'your income',
   complete: 'complete income information',
+  at: 'At',
+  atAge: ',',
 }
 export default en

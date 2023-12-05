@@ -16,13 +16,11 @@ import {
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
-import { ListLinks } from './ListLinks'
 import { MayBeEligible } from './MayBeEligible'
 import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { flattenArray, getSortedListLinks } from './utils'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -81,117 +79,11 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
-  // FUTURE CLIENT
-  const futureClientEligibleArray = flattenArray(futureClientResults)
-
-  // FUTURE PARTNER
-  const futurePartnerEligibleArray = flattenArray(futurePartnerResults)
-
-  const getListLinks: any = () => {
-    const getFirstLinks = () => {
-      const tempLinks = []
-
-      if (resultsEligible.length !== 0) {
-        tempLinks.push({
-          text: tsln.resultsPage.yourEstimatedTotal,
-          url: '#estimate',
-        })
-      }
-
-      if (
-        resultsEligible.length === 0 &&
-        futureClientEligibleArray.length === 0
-      ) {
-        tempLinks.push({
-          text: tsln.resultsPage.youAreNotEligible,
-          url: '#estimate',
-        })
-      }
-
-      if (futureClientEligibleArray.length !== 0) {
-        tempLinks.push({
-          text: tsln.resultsPage.futureEligible,
-          url: '#future-estimate',
-        })
-      }
-
-      if (isPartnered && partnerResultsEligible.length !== 0) {
-        tempLinks.push({
-          text: tsln.resultsPage.partnerEstimatedTotal,
-          url: '#partner-estimate',
-        })
-      }
-
-      if (
-        isPartnered &&
-        partnerResultsEligible.length === 0 &&
-        futurePartnerEligibleArray.length === 0
-      ) {
-        tempLinks.push({
-          text: tsln.resultsPage.partnerNotEligible,
-          url: '#partner-estimate',
-        })
-      }
-
-      if (isPartnered && futurePartnerEligibleArray.length !== 0) {
-        tempLinks.push({
-          text: tsln.resultsPage.partnerFutureEligible,
-          url: '#future-partner-estimate',
-        })
-      }
-
-      return tempLinks
-    }
-
-    let listLinks: any = [
-      ...getFirstLinks(),
-      {
-        text: tsln.resultsPage.whatYouToldUs,
-        url: '#answers',
-      },
-      {
-        text: apiTsln.benefit['oas'],
-        id: 'oas',
-        url: '#oas',
-        eligible: getEligibility(resultsEligible, 'oas'),
-      },
-      {
-        text: apiTsln.benefit['gis'],
-        id: 'gis',
-        url: '#gis',
-        eligible: getEligibility(resultsEligible, 'gis'),
-      },
-      {
-        text: apiTsln.benefit['alw'],
-        id: 'alw',
-        url: '#alw',
-        eligible: getEligibility(resultsEligible, 'alw'),
-      },
-      {
-        text: apiTsln.benefit['alws'],
-        id: 'alws',
-        url: '#alws',
-        eligible: getEligibility(resultsEligible, 'alws'),
-      },
-    ]
-
-    // Get sorted list links based on eligibility, filtering out link items which text is empty
-    return getSortedListLinks(
-      listLinks.filter((ll) => ll.text),
-      futureClientEligibleArray
-    )
-  }
-
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2 row-span-1">
           <div dangerouslySetInnerHTML={{ __html: tsln.resultsPage.general }} />
-
-          <ListLinks
-            title={tsln.resultsPage.onThisPage}
-            links={getListLinks()}
-          />
 
           {resultsEligible.length > 0 && (
             <EstimatedTotal

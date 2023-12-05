@@ -139,6 +139,28 @@ const en: WebTranslations = {
       link: 'https://www.canada.ca/en/transparency/privacy.html',
     },
   },
+  // Error page
+  errorPageHeadingTitle404: 'We couldn’t find that web page',
+  errorPageHeadingTitle500: "We're having a problem with that page",
+  errorPageHeadingTitle503: 'This service is currently not available',
+  errorPageErrorText404:
+    "We're sorry you ended up here. Sometimes a page gets moved or deleted, but hopefully we can help you find what you're looking for.",
+  errorPageErrorText500:
+    "We expect the problem to be fixed shortly. It's not your computer or Internet connection but a problem with our website's server. We apologize for the inconvenience.",
+  errorPageErrorText503:
+    'The web server that provides this service is currently overloaded, or may be temporarily down for maintenance. We apologize for the inconvenience. ',
+  errorPageNextText: ' What next?',
+  errorTextLinkCommon: '• Go to the ',
+  errorTextLinkCommon_2: ' Service Canada home page',
+  errorTextLinkCommonLink:
+    'https://www.canada.ca/en/employment-social-development/corporate/portfolio/service-canada.html',
+  errorAuthTextLinkCommon: '• Go to your ',
+  errorAuthTextLinkCommon_2: 'My Service Canada Account dashboard',
+  errorAuthTextLinkCommonLink:
+    'https://www.canada.ca/en/employment-social-development/services/my-account.html',
+  error500TextLink: '• Try refreshing the page or try again later',
+  error503TextLink: '• Try again later',
+  errorPageType: 'Error',
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
@@ -251,6 +273,25 @@ const en: WebTranslations = {
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
     'Use the estimator to see if you meet all eligibility criteria.',
+  datePicker: {
+    month: 'Month',
+    year: 'Year',
+    day: 'Day',
+    months: {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December',
+    },
+  },
   meta: {
     homeDescription:
       'Find out how much you could receive from the Old Age Security pension, the Guaranteed Income Supplement, the Allowance and the Allowance for the Survivor.',

@@ -1,4 +1,4 @@
-import { FormError } from '@dts-stn/service-canada-design-system'
+import { Error } from './Error'
 import { InputHTMLAttributes, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import { QuestionLabel } from './QuestionLabel'
@@ -71,7 +71,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
 
       {error && (
         <div className="mt-2" role="alert">
-          <FormError errorMessage={error} />
+          <Error errorMessage={error} />
         </div>
       )}
     </>

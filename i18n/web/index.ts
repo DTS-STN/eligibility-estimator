@@ -154,6 +154,43 @@ export type WebTranslations = {
     terms: { text: string; link: string }
     privacy: { text: string; link: string }
   }
+  // Error page
+  errorPageHeadingTitle404: string
+  errorPageHeadingTitle500: string
+  errorPageHeadingTitle503: string
+  errorPageErrorText404: string
+  errorPageErrorText500: string
+  errorPageErrorText503: string
+  errorPageNextText: string
+  errorTextLinkCommon: string
+  errorTextLinkCommon_2: string
+  errorTextLinkCommonLink: string
+  errorAuthTextLinkCommon: string
+  errorAuthTextLinkCommon_2: string
+  errorAuthTextLinkCommonLink: string
+  error500TextLink: string
+  error503TextLink: string
+  errorPageType: string
+  //Date Picker
+  datePicker: {
+    month: string
+    year: string
+    day: string
+    months: {
+      1: string
+      2: string
+      3: string
+      4: string
+      5: string
+      6: string
+      7: string
+      8: string
+      9: string
+      10: string
+      11: string
+      12: string
+    }
+  }
   // meta tags
   meta: {
     homeDescription: string
