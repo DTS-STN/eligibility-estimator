@@ -174,25 +174,9 @@ function transformYearsInCanadaSinceOAS18Value(
   } else if (value.toString().toUpperCase() === 'N/A') {
     return undefined
   } else if (value.toString().toLowerCase().includes('s')) {
-    // const birthYear = extractValue(birthDate, 0) // 1943; 11 + 75.08
-    // const birthMonth = extractValue(birthDate, 1)
-    // const [year, month] = Object.values(
-    //   calculateFutureYearMonth(birthYear, birthMonth, age)
-    // )
-    // const today = new Date(Number(year), Number(month) - 1)
-    // const currentMonth = today.getMonth() + 1
-    // const currentYear = today.getFullYear()
-    // value =
-    //   value +
-    //   Math.floor(
-    //     (currentYear - 1900) * 12 +
-    //       currentMonth -
-    //       ((2023 - 1900) * 12 + 10) / 12
-    //   )
-    // return String(value)
     return String(value).split('s')[1]
   }
-  return String(value) // Number(value)
+  return String(value)
 }
 
 function transformLegalStatusValue(value: string): string | undefined {

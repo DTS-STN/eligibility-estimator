@@ -379,15 +379,3 @@ export const getErrorDetails = (res) => {
   )
   return arrOfErrors
 }
-
-const funcTest = (value) => {
-  const today = new Date()
-  const currentMonth = today.getMonth() + 1
-  const currentYear = today.getFullYear()
-  value =
-    value +
-    Math.floor(
-      (currentYear - 1900) * 12 + currentMonth - ((2023 - 1900) * 12 + 10) / 12
-    )
-  return String(value)
-}

@@ -388,10 +388,7 @@ export class BenefitHandler {
             partnerEliObj.yearsOfResAtEligibility
         }
       }
-      console.log('partnerEliObj', partnerEliObj)
     }
-
-    console.log('this.input.partner', this.input.partner)
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
@@ -451,8 +448,6 @@ export class BenefitHandler {
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
 
-    console.log('clientOasHelper', clientOasHelper)
-
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {
       consoleDev(
@@ -483,7 +478,6 @@ export class BenefitHandler {
       this.future
     )
 
-    console.log(clientGisNoDeferral)
     consoleDev(
       'Client GIS amount NO deferral',
       clientGisNoDeferral.entitlement.result
@@ -500,8 +494,6 @@ export class BenefitHandler {
         this.input.client
       )
 
-      console.log('clientGisWithDeferral', clientGisWithDeferral)
-      console.log(clientGisWithDeferral)
       consoleDev(
         'Client GIS amount WITH deferral',
         clientGisWithDeferral.entitlement.result
