@@ -12,7 +12,7 @@ import {
   InputHelper,
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { BenefitHandler, FieldsHandler } from '../../utils/api/benefitHandler'
+import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,

@@ -1,6 +1,7 @@
 import Joi from 'joi'
 import { getWebTranslations, WebTranslations } from '../i18n/web'
-import { BenefitHandler, FieldsHandler } from '../utils/api/benefitHandler'
+import { BenefitHandler } from '../utils/api/benefitHandler'
+import { FieldsHandler } from '../utils/api/fieldsHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
 import { FieldConfig, FieldKey } from '../utils/api/definitions/fields'
 import { VisibleFieldsObject } from '../utils/web/types'
