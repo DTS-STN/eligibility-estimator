@@ -4,9 +4,9 @@ trigger:
 pr: none
 
 variables:
-  azureContainerRegistry.repository: ''
+  azureContainerRegistry.repository: 'eligibilityestimator'
   azureContainerRegistry.name: ''
-  azureContainerRegistry.domain: ''
+  azureContainerRegistry.domain: 'dtsshared.azurecr.io'
   tag: 'ADO-$(Build.BuildId)'
 
 stages:
