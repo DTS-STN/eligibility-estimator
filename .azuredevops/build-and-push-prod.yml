@@ -5,7 +5,7 @@ pr: none
 
 variables:
   azureContainerRegistry.repository: 'eligibilityestimator'
-  azureContainerRegistry.name: ''
+  azureContainerRegistry.name: 'DTSShared-December/2023'
   azureContainerRegistry.domain: 'dtsshared.azurecr.io'
   tag: 'ADO-$(Build.BuildId)'
 
