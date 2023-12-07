@@ -31,7 +31,7 @@
   }
 
   .footerLine::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -142,9 +142,10 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    background-color: white;
     background-position: right 50%;
     background-position-x: calc(100% - 10px);
-    background-image: url("../public/dropdown.svg");
+    background-image: url('../public/dropdown.svg');
     background-repeat: no-repeat;
   }
 
@@ -153,7 +154,7 @@
     height: 44px;
     padding-left: 14px;
     margin: 4px 16px 4px 0;
-    border: 1.5px solid #6F6F6F;
+    border: 1.5px solid #6f6f6f;
     border-radius: 4px;
   }
 
@@ -331,8 +332,13 @@
     #enter-partnerAge select,
     #oasDeferDuration-years,
     #oasDeferDuration-months {
-      background-color: #fff;
+      background-color: white;
     }
+  }
+
+  #age-birth-month,
+  #partnerAge-birth-month {
+    background-color: white;
   }
 
   #age-birth-year,
