@@ -13,7 +13,9 @@ export type WebTranslations = {
   _language: Language
   ISOlang: ISOLanguage
 
-  skipToMainContent: string
+  skipToMain: string
+  skipToAbout: string
+  switchToBasic: string
   globalHeader: string
   testSiteNotice: string
   officialSiteNavigation: string
