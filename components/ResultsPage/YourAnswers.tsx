@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
-import { Translations, numberToStringCurrency } from '../../i18n/api'
+import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
@@ -8,6 +8,12 @@ import { useTranslation } from '../Hooks'
 import Link from 'next/link'
 import { MonthsYears } from '../../utils/api/definitions/types'
 import { Accordion } from '../Forms/Accordion'
+import { fieldDefinitions } from '../../utils/api/definitions/fields'
+import { FieldCategory } from '../../utils/api/definitions/enums'
+
+type CategorizedInputs = {
+  [category in FieldCategory]?: FieldInput[]
+}
 
 export const YourAnswers: React.VFC<{
   title: string
@@ -18,44 +24,12 @@ export const YourAnswers: React.VFC<{
   const allFieldData: FieldConfig[] = BenefitHandler.getAllFieldData(
     tsln._language
   )
-  const t = useTranslation<Translations>()
 
-  // Group results into category for mobile view
-  const categoryMapping = {
-    [t.category.age]: [
-      'age',
-      'receiveOAS',
-      'oasDefer',
-      'oasDeferDuration',
-      'oasAge',
-    ],
-    [t.category.income]: ['incomeAvailable', 'income'],
-    [t.category.legal]: ['legalStatus'],
-    [t.category.residence]: [
-      'livingCountry',
-      'livedOnlyInCanada',
-      'yearsInCanadaSince18',
-      'yearsInCanadaSinceOAS',
-      'everLivedSocialCountry',
-    ],
-    [t.category.marital]: [
-      'maritalStatus',
-      'invSeparated',
-      'partnerIncomeAvailable',
-      'partnerIncome',
-      'partnerBenefitStatus',
-      'partnerAge',
-      'partnerLegalStatus',
-      'partnerLivingCountry',
-      'partnerLivedOnlyInCanada',
-      'partnerYearsInCanadaSince18',
-    ],
-  }
-
+  // State for handling individual accordion
   const [accordionStates, setAccordionStates] = useState(() => {
     const initialState = {}
-    Object.keys(categoryMapping).forEach((category) => {
-      initialState[category] = false
+    Object.keys(FieldCategory).forEach((categoryKey) => {
+      initialState[categoryKey] = false
     })
     return initialState
   })
@@ -124,24 +98,40 @@ export const YourAnswers: React.VFC<{
   }
 
   function getMainContentMobile(): JSX.Element {
-    if (inputs.length === 0)
+    if (inputs.length === 0) {
       return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
+    }
+
+    // Group inputs by category
+    const categorizedInputs: CategorizedInputs = inputs.reduce((acc, input) => {
+      const categoryKey = fieldDefinitions[input.key]?.category?.key
+      if (categoryKey && shouldDisplay(input)) {
+        acc[categoryKey] = acc[categoryKey] || []
+        acc[categoryKey].push(input)
+      }
+      return acc
+    }, {})
+
     return (
       <>
-        {Object.entries(categoryMapping).map(([category, keys]) => {
-          const categoryInputs = inputs.filter(
-            (input) => keys.includes(input.key) && shouldDisplay(input)
-          )
-          if (categoryInputs.length === 0) return null
-          return (
-            <Accordion
-              key={category}
-              title={category}
-              isOpen={accordionStates[category]}
-              onClick={() => toggleAccordion(category)}
-            >
-              {categoryInputs.map((input) => {
-                return (
+        {Object.entries(categorizedInputs).map(
+          ([categoryKey, categoryInputs]) => {
+            if (!categoryInputs) return null
+            const translatedCategory = tsln.category[categoryKey]
+            if (!translatedCategory) return null
+
+            return (
+              <Accordion
+                key={categoryKey}
+                title={
+                  <span
+                    dangerouslySetInnerHTML={{ __html: translatedCategory }}
+                  />
+                }
+                isOpen={accordionStates[categoryKey]}
+                onClick={() => toggleAccordion(categoryKey)}
+              >
+                {categoryInputs.map((input) => (
                   <div
                     key={input.key}
                     className="py-4 border-t border-info-border"
@@ -167,11 +157,11 @@ export const YourAnswers: React.VFC<{
                       </div>
                     </div>
                   </div>
-                )
-              })}
-            </Accordion>
-          )
-        })}
+                ))}
+              </Accordion>
+            )
+          }
+        )}
       </>
     )
   }
