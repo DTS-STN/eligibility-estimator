@@ -7,8 +7,16 @@ interface HeaderProps {
   id: string
   locale: string
   langUrl: string
+  topNavProps: {
+    skipToMain: string
+    skipToMainPath: string
+    skipToAbout: string
+    skipToAboutPath: string
+    switchToBasic: string
+    switchToBasicPath: string
+    displayAlternateLink: boolean
+  }
   headerText: {
-    skipToMainContent: string
     globalHeader: string
     testSiteNotice: string
     officialSiteNavigation: string
@@ -22,6 +30,7 @@ export function Header({
   id,
   locale,
   langUrl,
+  topNavProps,
   headerText,
   breadcrumbItems = [],
 }: HeaderProps) {
@@ -31,16 +40,45 @@ export function Header({
 
   return (
     <>
-      <nav id={id} className="skip-main">
-        <a
-          id="skipToMainContent"
-          className="bg-white text-custom-blue-dark text-lg underline py-1 px-2 focus:outline-dark-goldenrod hover:bg-gray-dark"
-          href="#pageMainTitle"
-          data-cy-button="skip-Content"
-          draggable="false"
-        >
-          {headerText.skipToMainContent}
-        </a>
+      <nav id={id} role="navigation" aria-label="topNavigation">
+        <ul id="TopNavLinks" className="skip-main">
+          <li className="absolute text-center w-full focus-within:z-50 ">
+            <a
+              id="skipToMain"
+              className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+              href={topNavProps.skipToMainPath}
+              data-cy-button="skip-Content"
+              draggable="false"
+            >
+              {topNavProps.skipToMain}
+            </a>
+          </li>
+          <li className="absolute text-center w-full focus-within:z-50 ">
+            <a
+              id="skipToAboutGov"
+              className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+              href={topNavProps.skipToAboutPath}
+              data-cy-button="skip-About"
+              draggable="false"
+            >
+              {topNavProps.skipToAbout}
+            </a>
+          </li>
+          <li className="absolute text-center w-full focus-within:z-50 ">
+            {topNavProps.displayAlternateLink ? (
+              <a
+                id=""
+                className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+                href={topNavProps.switchToBasicPath}
+                rel="alternate"
+              >
+                {topNavProps.switchToBasic}
+              </a>
+            ) : (
+              ''
+            )}
+          </li>
+        </ul>
       </nav>
       <header>
         <h2 className="sr-only">{headerText.globalHeader}</h2>
