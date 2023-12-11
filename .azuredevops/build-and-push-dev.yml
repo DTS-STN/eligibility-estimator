@@ -60,6 +60,7 @@ stages:
                 --build-arg NEXTAUTH_URL=$(app.domain)
                 --build-arg NEXT_AUTH_USERNAME=$(NEXT_AUTH_USERCODE)
                 --build-arg NEXT_AUTH_PASSWORD=$(NEXT_AUTH_PASSWORD)
+                --build-arg NEXT_AUTH_SECRET=$(NEXT_AUTH_SECRET)
                 --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
                 --build-arg APP_ENV=$(app.environment)
                 --build-arg LOGGING_LEVEL=$(app.logLevel)
