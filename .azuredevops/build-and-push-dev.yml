@@ -1,5 +1,5 @@
 pr:
-- develop
+  - develop
 
 variables:
   azureContainerRegistry.repository: 'eligibilityestimator'
@@ -8,7 +8,7 @@ variables:
   app.environment: development
   app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
   app.domain: 'https://app-eligibilityestimator-dev.azurewebsites.net/'
-  app.logLevel: "info"
+  app.logLevel: 'info'
   System.Debug: false
 
 stages:
@@ -18,14 +18,13 @@ stages:
       - job:
         displayName: Pull latest image
         steps:
-
           - task: Docker@2
             inputs:
               containerRegistry: '$(azureContainerRegistry.name)'
               repository: '$(azureContainerRegistry.repository)'
               command: 'login'
 
-          - script: "docker pull $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest"
+          - script: 'docker pull $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest'
             displayName: Pull latest for layer caching
             continueOnError: true
 
@@ -35,7 +34,6 @@ stages:
       - job: Build
         displayName: Build and Push Container
         steps:
-
           - task: AzureKeyVault@2
             inputs:
               azureSubscription: 'id-eligibilityestimator-dev'

@@ -68,7 +68,6 @@ export const QuestionsPage: React.VFC = ({}) => {
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
-
   const [ageDate, setAgeDate] = useState(
     inputs.age
       ? getBirthMonthAndYear(inputs.age)

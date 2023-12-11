@@ -8,7 +8,7 @@ describe('Excel Reader Utility Tests', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
 
     if (extractedPayload) {
-      console.log('Extracted Payload:', extractedPayload)
+      // console.log('Extracted Payload:', extractedPayload)
       // Add your assertions here
       //expect(extractedPayload.length).toBeGreaterThan(0)
       //expect(jsonPayload.length).toBeGreaterThan(0)

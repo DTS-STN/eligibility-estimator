@@ -183,30 +183,6 @@ function addKeyValue(obj, key, val) {
   }
 }
 
-/**
- * Accepts a numerical month+year, and returns the number of years since then.
- * This can and will return a decimal value, such as "65.5"!
- */
-export function calculateAge(birthMonth: number, birthYear: number): number {
-  if (birthMonth === null || birthYear === null) return null
-
-  const today = new Date()
-  const currentMonth = today.getMonth() + 1
-  const currentYear = today.getFullYear()
-
-  let ageMonths: number
-  let ageYears = currentYear - birthYear
-
-  if (currentMonth >= birthMonth) {
-    ageMonths = currentMonth - birthMonth
-  } else {
-    ageYears -= 1
-    ageMonths = 12 + (currentMonth - birthMonth)
-  }
-
-  return ageYears + Number((ageMonths / 12).toFixed(2))
-}
-
 export function OasEligibility(
   ageAtStart,
   yearsInCanadaAtStart,
@@ -282,34 +258,48 @@ export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
   const age = input.age // 66.42
+  const ageJuly2013 = calculate2013Age(age, input.clientBirthDate)
   const yearsInCanada = input.yearsInCanadaSince18
-  const eliObj = OasEligibility(
+  let eliObj = OasEligibility(
     age,
     yearsInCanada,
     input.livedOnlyInCanada,
     input.livingCountry.value
   )
-  const ageDiff = age - eliObj.ageOfEligibility
+
   let newInput = { ...input }
 
-  let deferralMonths = 0
-  if (age > eliObj.ageOfEligibility) {
-    // 65
-    const deferralYears = Math.min(
-      60,
-      Math.min(70, age) - eliObj.ageOfEligibility
-    )
-    deferralMonths = Math.max(0, deferralYears * 12)
+  let deferralMonths
+  if (
+    ageJuly2013 >= 70 ||
+    eliObj.ageOfEligibility >= 70 ||
+    age < eliObj.ageOfEligibility
+  ) {
+    deferralMonths = 0
+  } else {
+    // Eligibility age is between 65-70 here
+    if (ageJuly2013 >= eliObj.ageOfEligibility) {
+      // Cannot defer from the time they became eligible but only from July 2013 (must use residency and age from July 2013 to calculate OAS with deferral)
+      const ageDiff = ageJuly2013 - eliObj.ageOfEligibility
+      const newRes = Math.floor(eliObj.yearsOfResAtEligibility + ageDiff)
+      eliObj = {
+        ageOfEligibility: ageJuly2013,
+        yearsOfResAtEligibility: newRes,
+      }
+      deferralMonths = (70 - ageJuly2013) * 12
+    } else {
+      // They became eligible after July 2013 -> use age and residency as is (at the time they became eligible for OAS)
+      deferralMonths = (Math.min(70, age) - eliObj.ageOfEligibility) * 12
+    }
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {
     justBecameEligible = true
   }
 
-  const newYearsInCan =
-    age > eliObj.ageOfEligibility
-      ? input.yearsInCanadaSince18 - ageDiff
-      : input.yearsInCanada + ageDiff
+  if (age === eliObj.ageOfEligibility && age < 70) {
+    justBecameEligible = true
+  }
 
   if (deferralMonths !== 0 && !input.receiveOAS) {
     canDefer = true
@@ -318,9 +308,9 @@ export function evaluateOASInput(input) {
     newInput['receiveOAS'] = true
     newInput['yearsInCanadaSince18'] = input.livedOnlyInCanada
       ? 40
-      : Math.min(40, Math.floor(newYearsInCan))
+      : Math.min(40, Math.floor(eliObj.yearsOfResAtEligibility))
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: Math.round(deferralMonths),
+      months: Math.max(Math.round(deferralMonths), 0),
       years: 0,
     })
     consoleDev(
@@ -335,5 +325,93 @@ export function evaluateOASInput(input) {
     canDefer,
     newInput,
     justBecameEligible,
+  }
+}
+
+export function calculate2013Age(currentAge, birthDate?) {
+  if (birthDate) {
+    const parts = birthDate.split(';')
+    const birthYear = parseInt(parts[0], 10)
+    const birthMonth = parseInt(parts[1], 10)
+
+    const comparisonYear = 2013
+    const comparisonMonth = 7 // July
+
+    let age = comparisonYear - birthYear
+    const monthDifference = comparisonMonth - birthMonth
+
+    const monthAge = monthDifference / 12
+    age += monthAge
+
+    return parseFloat(age.toFixed(2))
+  } else {
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth() + 1
+
+    const birthYear = currentYear - Math.floor(currentAge)
+    const birthMonth =
+      currentMonth - Math.round((currentAge - Math.floor(currentAge)) * 12)
+
+    let adjustedYear = birthYear
+    let adjustedMonth = birthMonth
+    if (birthMonth <= 0) {
+      adjustedYear -= 1
+      adjustedMonth += 12
+    }
+
+    const ageInJuly2013 = 2013 - adjustedYear + (7 - adjustedMonth) / 12
+    return parseFloat(ageInJuly2013.toFixed(2))
+  }
+}
+
+/**
+ * Accepts a numerical month+year, and returns the number of years since then.
+ * This can and will return a decimal value, such as "65.5"!
+ */
+export function calculateAge(birthMonth: number, birthYear: number): number {
+  if (birthMonth === null || birthYear === null) return null
+
+  const today = new Date()
+  const currentMonth = today.getMonth() + 1
+  const currentYear = today.getFullYear()
+
+  let ageMonths: number
+  let ageYears = currentYear - birthYear
+
+  if (currentMonth >= birthMonth) {
+    ageMonths = currentMonth - birthMonth
+  } else {
+    ageYears -= 1
+    ageMonths = 12 + (currentMonth - birthMonth)
+  }
+
+  return ageYears + Number((ageMonths / 12).toFixed(2))
+}
+
+export function calculateFutureYearMonth(birthYear, birthMonth, age) {
+  // Calculate the number of full years and additional months
+  var fullYears = Math.floor(age)
+  var additionalMonths = Math.floor((age - fullYears) * 12)
+
+  // Calculate the future year and month
+  var futureYear = birthYear + fullYears
+  var futureMonth = birthMonth + additionalMonths
+
+  // Adjust for month overflow (if futureMonth > 12)
+  if (futureMonth > 12) {
+    futureYear += Math.floor(futureMonth / 12)
+    futureMonth = futureMonth % 12
+  }
+
+  // If futureMonth is 0, it means the month is December of the previous year
+  if (futureMonth === 0) {
+    futureYear -= 1
+    futureMonth = 12
+  }
+
+  return {
+    year: futureYear,
+    month: futureMonth,
   }
 }

@@ -30,6 +30,7 @@ import {
   PartnerBenefitStatusHelper,
 } from './helpers/fieldClasses'
 import { BenefitHandler } from './benefitHandler'
+import { calculate2013Age } from './helpers/utils'
 
 export class FieldsHandler {
   private _translations: Translations
@@ -101,6 +102,7 @@ export class FieldsHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      clientBirthDate: this.rawInput.clientBirthDate,
       receiveOAS: this.rawInput.receiveOAS,
       oasDeferDuration:
         this.rawInput.oasDeferDuration ||
@@ -126,6 +128,7 @@ export class FieldsHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      clientBirthDate: this.rawInput.partnerBirthDate,
       receiveOAS: false, // dummy data
       oasDeferDuration: JSON.stringify({ months: 0, years: 0 }), // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
@@ -171,11 +174,15 @@ export class FieldsHandler {
 
     // OAS deferral related fields
     const clientAge = this.input.client.age
+    const ageJuly2013 = calculate2013Age(
+      this.input.client.age,
+      this.input.client.clientBirthDate
+    )
     if (clientAge >= 65 && clientAge <= getMinBirthYear()) {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS && clientAge > 65) {
+    if (this.input.client.receiveOAS && clientAge > 65 && ageJuly2013 <= 70) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 

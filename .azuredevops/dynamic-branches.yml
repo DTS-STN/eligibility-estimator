@@ -15,84 +15,84 @@ variables:
   System.Debug: false
 
 steps:
-- task: Docker@2
-  inputs:
-    containerRegistry: '$(azureContainerRegistry.name)'
-    repository: '$(azureContainerRegistry.repository)'
-    command: 'login'
-- script: "docker pull $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest"
-  displayName: Pull latest for layer caching
-  continueOnError: true
+  - task: Docker@2
+    inputs:
+      containerRegistry: '$(azureContainerRegistry.name)'
+      repository: '$(azureContainerRegistry.repository)'
+      command: 'login'
+  - script: 'docker pull $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest'
+    displayName: Pull latest for layer caching
+    continueOnError: true
 
-- task: Docker@2
-  displayName: "Build image"
-  inputs:
-    containerRegistry: '$(azureContainerRegistry.name)'
-    repository: '$(azureContainerRegistry.repository)'
-    command: 'build'
-    Dockerfile: '**/Dockerfile'
-    tags: |
-      $(azureContainerRegistry.tag)
-      latest
-    arguments: |
-      --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
+  - task: Docker@2
+    displayName: 'Build image'
+    inputs:
+      containerRegistry: '$(azureContainerRegistry.name)'
+      repository: '$(azureContainerRegistry.repository)'
+      command: 'build'
+      Dockerfile: '**/Dockerfile'
+      tags: |
+        $(azureContainerRegistry.tag)
+        latest
+      arguments: |
+        --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
 
-- task: Docker@2
-  displayName: "Push image"
-  inputs:
-    containerRegistry: '$(azureContainerRegistry.name)'
-    repository: '$(azureContainerRegistry.repository)'
-    command: 'push'
-    tags: |
-      $(azureContainerRegistry.tag)
-      latest
+  - task: Docker@2
+    displayName: 'Push image'
+    inputs:
+      containerRegistry: '$(azureContainerRegistry.name)'
+      repository: '$(azureContainerRegistry.repository)'
+      command: 'push'
+      tags: |
+        $(azureContainerRegistry.tag)
+        latest
 
-- task: PowerShell@2
-  displayName: 'Decide which AppService slot to put this preview in'
-  inputs:
-    targetType: 'inline'
-    script: |
-      [int] $slotNumber = $(System.PullRequest.PullRequestId) % 4
-      Write-Host "Generated slot number:"
-      Write-Host "$slotNumber"
-      Write-Host "From PRID"
-      Write-Host "$(System.PullRequest.PullRequestId)"
-      Write-Host "##vso[task.setvariable variable=webapp.slotName]$slotNumber"
+  - task: PowerShell@2
+    displayName: 'Decide which AppService slot to put this preview in'
+    inputs:
+      targetType: 'inline'
+      script: |
+        [int] $slotNumber = $(System.PullRequest.PullRequestId) % 4
+        Write-Host "Generated slot number:"
+        Write-Host "$slotNumber"
+        Write-Host "From PRID"
+        Write-Host "$(System.PullRequest.PullRequestId)"
+        Write-Host "##vso[task.setvariable variable=webapp.slotName]$slotNumber"
 
-- task: AzureCLI@2
-  displayName: 'Create new slot in App Service'
-  inputs:
-    azureSubscription: $(azure.servicePrincipal)
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az webapp deployment slot create \
-      --name $(webapp.name) \
-      --resource-group $(webapp.resourceGroup) \
-      --slot pr-preview-$(webapp.slotName) \
-      --configuration-source $(webapp.name)
-      az webapp identity assign \
-      -g $(webapp.resourceGroup) \
-      -n $(webapp.name) \
-      --slot pr-preview-$(webapp.slotName) \
-      --identities /subscriptions/400c5730-25f5-4ee6-a933-8b289b9ccb0d/resourcegroups/rg-dts-id-shared/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-SCLabs-Shared
+  - task: AzureCLI@2
+    displayName: 'Create new slot in App Service'
+    inputs:
+      azureSubscription: $(azure.servicePrincipal)
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az webapp deployment slot create \
+        --name $(webapp.name) \
+        --resource-group $(webapp.resourceGroup) \
+        --slot pr-preview-$(webapp.slotName) \
+        --configuration-source $(webapp.name)
+        az webapp identity assign \
+        -g $(webapp.resourceGroup) \
+        -n $(webapp.name) \
+        --slot pr-preview-$(webapp.slotName) \
+        --identities /subscriptions/400c5730-25f5-4ee6-a933-8b289b9ccb0d/resourcegroups/rg-dts-id-shared/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-SCLabs-Shared
 
-- task: AzureCLI@2
-  displayName: 'Deploy pr image to new slot'
-  inputs:
-    azureSubscription: $(azure.servicePrincipal)
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az webapp config container set \
-      --docker-custom-image-name $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):$(azureContainerRegistry.tag) \
-      --name $(webapp.name) \
-      --slot pr-preview-$(webapp.slotName) \
-      --resource-group $(webapp.resourceGroup)
+  - task: AzureCLI@2
+    displayName: 'Deploy pr image to new slot'
+    inputs:
+      azureSubscription: $(azure.servicePrincipal)
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az webapp config container set \
+        --docker-custom-image-name $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):$(azureContainerRegistry.tag) \
+        --name $(webapp.name) \
+        --slot pr-preview-$(webapp.slotName) \
+        --resource-group $(webapp.resourceGroup)
 
-- task: GitHubComment@0
-  displayName: "Post a comment with a link to the new PR preview"
-  inputs:
-    gitHubConnection: 'Adam''sGitHub-9/15/2023'
-    repositoryName: '$(Build.Repository.Name)'
-    comment: 'Check out a preview of your pull request here: https://$(webapp.name)-pr-preview-$(webapp.slotName).azurewebsites.net'
+  - task: GitHubComment@0
+    displayName: 'Post a comment with a link to the new PR preview'
+    inputs:
+      gitHubConnection: "Adam'sGitHub-9/15/2023"
+      repositoryName: '$(Build.Repository.Name)'
+      comment: 'Check out a preview of your pull request here: https://$(webapp.name)-pr-preview-$(webapp.slotName).azurewebsites.net'
