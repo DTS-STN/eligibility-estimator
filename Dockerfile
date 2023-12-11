@@ -93,4 +93,6 @@ COPY --chown=55:$group public ./public
 RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& yarn add next@"$VERSION_NEXT"
 USER $user
 
+EXPOSE 3000
+
 CMD [ "yarn", "start" ]
