@@ -21,14 +21,14 @@ export default class MainHandler {
 
     const resultObj: any = {
       input: value,
-      visibleFields: this.handler.requiredFields,
+      visibleFields: this.handler.fields.requiredFields,
       results: this.handler.benefitResults.client,
       futureClientResults: this.futureHandler.benefitResults?.client,
       partnerResults: this.handler.benefitResults.partner,
       futurePartnerResults: this.futureHandler.benefitResults?.partner,
       summary: this.handler.summary,
-      missingFields: this.handler.missingFields,
-      fieldData: this.handler.fieldData,
+      missingFields: this.handler.fields.missingFields,
+      fieldData: this.handler.fields.fieldData,
     }
 
     if (error) {
