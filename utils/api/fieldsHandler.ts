@@ -101,6 +101,7 @@ export class FieldsHandler {
     const clientInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.age,
+      clientBirthDate: this.rawInput.clientBirthDate,
       receiveOAS: this.rawInput.receiveOAS,
       oasDeferDuration:
         this.rawInput.oasDeferDuration ||
@@ -126,6 +127,7 @@ export class FieldsHandler {
     const partnerInput: ProcessedInput = {
       income: incomeHelper,
       age: this.rawInput.partnerAge,
+      clientBirthDate: this.rawInput.partnerBirthDate,
       receiveOAS: false, // dummy data
       oasDeferDuration: JSON.stringify({ months: 0, years: 0 }), // dummy data
       oasDefer: false, // pass dummy data because we will never use this anyway
