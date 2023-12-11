@@ -1,6 +1,7 @@
 import Joi from 'joi'
 import { getWebTranslations, WebTranslations } from '../i18n/web'
 import { BenefitHandler } from '../utils/api/benefitHandler'
+import { FieldsHandler } from '../utils/api/fieldsHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
 import { FieldConfig, FieldKey } from '../utils/api/definitions/fields'
 import { VisibleFieldsObject } from '../utils/web/types'
@@ -17,7 +18,7 @@ export class Form {
     inputHelper: InputHelper,
     visibleFieldsObject: VisibleFieldsObject
   ) {
-    this.allFieldConfigs = BenefitHandler.getAllFieldData(language)
+    this.allFieldConfigs = FieldsHandler.getAllFieldData(language)
     this.fields = this.allFieldConfigs.map((config) => {
       return new FormField(config, inputHelper, visibleFieldsObject)
     })
@@ -58,7 +59,7 @@ export class Form {
         try {
           const handler = new BenefitHandler({ _language: this.language })
           let text = tsln.validationErrors[errorKeyOrText] // throws error when error not handled/defined in ValidationErrors
-          text = handler.replaceTextVariables(text)
+          text = handler.fields.replaceTextVariables(handler, text)
           allErrorsParsed[fieldKey] = { text, successful: true }
         } catch {
           let successfulErrorExists = allErrorsParsed[fieldKey] !== undefined

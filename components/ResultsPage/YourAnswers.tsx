@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 import Link from 'next/link'
@@ -15,7 +15,7 @@ export const YourAnswers: React.VFC<{
 }> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
-  const allFieldData: FieldConfig[] = BenefitHandler.getAllFieldData(
+  const allFieldData: FieldConfig[] = FieldsHandler.getAllFieldData(
     tsln._language
   )
 
