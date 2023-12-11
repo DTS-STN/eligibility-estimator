@@ -12,7 +12,7 @@ import {
   InputHelper,
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
 import {
   FieldConfig,
@@ -63,8 +63,7 @@ export const QuestionsPage: React.VFC = ({}) => {
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
-  const allFieldConfigs: FieldConfig[] =
-    BenefitHandler.getAllFieldData(language)
+  const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void

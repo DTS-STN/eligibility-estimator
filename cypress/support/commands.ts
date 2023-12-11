@@ -89,7 +89,7 @@ Cypress.Commands.add('fillQuestionsForm', (item) => {
     if (item.receiveOAS === true) {
       cy.get('#receiveOAS-0').check()
       cy.wait(1000)
-      if(item.ageYears == 65 && item.ageMonths != 0){
+      if (item.ageYears == 65 && item.ageMonths != 0) {
         cy.get('#oasDeferDuration').should('exist')
         cy.get('#oasDeferDuration-years').select(item.delayYears)
         cy.get('#oasDeferDuration-months').select(item.delayMonths)
@@ -154,7 +154,7 @@ Cypress.Commands.add('fillQuestionsForm', (item) => {
       cy.wait(500)
       cy.get('#enter-partnerIncome').type(`${item.partnerWorldIncome}`)
 
-      if(item.partnerAgeYears>=60){
+      if (item.partnerAgeYears >= 60) {
         cy.get('#partnerLegalStatus-0').check()
         cy.get('#partnerLivingCountry-select').type(
           `${item.partnerCountryResidence}\n`
@@ -171,7 +171,7 @@ Cypress.Commands.add('fillQuestionsForm', (item) => {
         }
       }
 
-      if(item.partnerAgeYears >= 65){
+      if (item.partnerAgeYears >= 65) {
         if (item.partnerRecvOas == true) {
           cy.get('#partnerBenefitStatus-0').check()
         } else if (item.partnerRecvOas == false) {
