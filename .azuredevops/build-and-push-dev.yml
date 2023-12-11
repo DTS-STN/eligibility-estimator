@@ -6,6 +6,9 @@ variables:
   azureContainerRegistry.name: 'DTSShared-December/2023'
   azureContainerRegistry.domain: 'dtsshared.azurecr.io'
   tag: 'ADO-$(Build.BuildId)'
+  APP_ENV: development
+  NEXT_BUILD_DATE: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
+  LOGGING_LEVEL: "info"
   System.Debug: false
 
 stages:
@@ -53,12 +56,8 @@ stages:
               arguments: |
                 --pull
                 --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
-                --build-arg NEXT_BUILD_DATE=$(BUILD_START_DATE)
+                --build-arg NEXT_BUILD_DATE=$(NEXT_BUILD_DATE)
                 --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
-                --build-arg NEXTAUTH_URL=$(NEXTAUTH_URL)
-                --build-arg NEXTAUTH_SECRET=$(NEXTAUTH_SECRET)
-                --build-arg NEXT_AUTH_USERNAME=$(NEXT_AUTH_USERCODE)
-                --build-arg NEXT_AUTH_PASSWORD=$(NEXT_AUTH_PASSWORD)
                 --build-arg APP_ENV=$(APP_ENV)
                 --build-arg LOGGING_LEVEL=$(LOGGING_LEVEL)
 
