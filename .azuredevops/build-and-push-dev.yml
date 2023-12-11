@@ -5,7 +5,10 @@ variables:
   azureContainerRegistry.repository: 'eligibilityestimator'
   azureContainerRegistry.name: 'DTSShared-December/2023'
   azureContainerRegistry.domain: 'dtsshared.azurecr.io'
-  tag: 'ADO-$(Build.BuildId)'
+  app.environment: development
+  app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
+  app.domain: 'https://app-eligibilityestimator-dev.azurewebsites.net/'
+  app.logLevel: 'info'
   System.Debug: false
 
 stages:
@@ -31,6 +34,13 @@ stages:
       - job: Build
         displayName: Build and Push Container
         steps:
+          - task: AzureKeyVault@2
+            inputs:
+              azureSubscription: 'id-eligibilityestimator-dev'
+              KeyVaultName: 'kv-oas-ee-dev'
+              SecretsFilter: 'DEV-ADOBE-ANALYTICS-URL, NEXT-AUTH-PASSWORD, NEXT-AUTH-USERCODE'
+              RunAsPreJob: false
+
           - task: Docker@2
             inputs:
               containerRegistry: '$(azureContainerRegistry.name)'
@@ -38,12 +48,19 @@ stages:
               command: 'build'
               Dockerfile: './Dockerfile'
               tags: |
-                $(tag)
+                $(app.buildDate)
                 latest
                 release-candidate
               arguments: |
                 --pull
                 --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
+                --build-arg NEXT_BUILD_DATE=$(app.buildDate)
+                --build-arg NEXTAUTH_URL=$(app.domain)
+                --build-arg NEXT_AUTH_USERNAME=$(NEXT_AUTH_USERCODE)
+                --build-arg NEXT_AUTH_PASSWORD=$(NEXT_AUTH_PASSWORD)
+                --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
+                --build-arg APP_ENV=$(app.environment)
+                --build-arg LOGGING_LEVEL=$(app.logLevel)
 
           - task: Docker@2
             inputs:
@@ -51,6 +68,6 @@ stages:
               repository: '$(azureContainerRegistry.repository)'
               command: 'push'
               tags: |
-                $(tag)
+                $(app.buildDate)
                 latest
                 release-candidate
