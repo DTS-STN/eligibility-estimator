@@ -54,6 +54,7 @@ stages:
               arguments: |
                 --pull
                 --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
+                --build-arg HOME=/app
                 --build-arg NEXT_BUILD_DATE=$(app.buildDate)
                 --build-arg NEXTAUTH_URL=$(app.domain)
                 --build-arg NEXT_AUTH_USERNAME=$(NEXT_AUTH_USERCODE)
