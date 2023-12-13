@@ -42,7 +42,7 @@ export const Layout: React.VFC<{
     skipToMain: tsln.skipToMain,
     skipToMainPath: '#applicationTitle',
     skipToAbout: tsln.skipToAbout,
-    skipToAboutPath: '#footer-info',
+    skipToAboutPath: '#footer',
     switchToBasic: tsln.switchToBasic,
     switchToBasicPath: '',
     displayAlternateLink: false,
