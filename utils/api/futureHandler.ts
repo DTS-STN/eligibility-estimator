@@ -201,7 +201,7 @@ export class FutureHandler {
         )
 
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        const handler = new BenefitHandler(value, true, false)
+        const handler = new BenefitHandler(value, true, +this.query.age, false)
 
         const clientEligibleBenefits = this.getEligibleBenefits(
           handler.benefitResults.client

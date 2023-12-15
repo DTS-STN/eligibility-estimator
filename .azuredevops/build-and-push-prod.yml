@@ -74,6 +74,14 @@ stages:
                 --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
                 --build-arg APP_ENV=$(app.environment)
                 --build-arg LOGGING_LEVEL=$(app.logLevel)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 11a6856c3c8ebf2bb372ca4c3b5a5dba031fc4bf
+>>>>>>> develop
           - task: Docker@2
             inputs:
               containerRegistry: '$(azureContainerRegistry.name)'
