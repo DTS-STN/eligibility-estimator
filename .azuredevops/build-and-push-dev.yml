@@ -1,14 +1,17 @@
-pr:
+trigger:
   - develop
 
+pr: none
+
 variables:
-  azureContainerRegistry.repository: 'eligibilityestimator'
+  azureContainerRegistry.repository: 'oas/eligibility-estimator'
   azureContainerRegistry.name: 'DTSShared-December/2023'
   azureContainerRegistry.domain: 'dtsshared.azurecr.io'
   app.environment: development
   app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
   app.domain: 'https://app-eligibilityestimator-dev.azurewebsites.net/'
   app.logLevel: 'info'
+  image.tag: 'oas/$(Build.SourceVersion)'
   System.Debug: false
 
 stages:
@@ -48,7 +51,7 @@ stages:
               command: 'build'
               Dockerfile: './Dockerfile'
               tags: |
-                $(app.buildDate)
+                $(image.tag)
                 latest
                 release-candidate
               arguments: |
@@ -70,6 +73,6 @@ stages:
               repository: '$(azureContainerRegistry.repository)'
               command: 'push'
               tags: |
-                $(app.buildDate)
+                $(image.tag)
                 latest
                 release-candidate
