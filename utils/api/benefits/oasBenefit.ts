@@ -25,7 +25,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   future: Boolean
   deferral: boolean
   income: number
-  inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age
+  inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age ONLY for non-future benefits
   formAge: number
   constructor(
     input: ProcessedInput,
