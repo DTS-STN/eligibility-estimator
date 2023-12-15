@@ -1,0 +1,74 @@
+trigger:
+  - main
+
+pr: none
+
+variables:
+  azureContainerRegistry.repository: 'oas/eligibility-estimator'
+  azureContainerRegistry.name: 'DTSShared-December/2023'
+  azureContainerRegistry.domain: 'dtsshared.azurecr.io'
+  app.environment: production
+  app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
+  image.tag: 'oas/$(Build.SourceVersion)'
+
+stages:
+  - stage: Cache
+    displayName: Pull latest image for caching
+    jobs:
+      - job:
+        displayName: Pull latest image
+        steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: '$(azureContainerRegistry.name)'
+              repository: '$(azureContainerRegistry.repository)'
+              command: 'login'
+
+          - script: 'docker pull $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest'
+            displayName: Pull latest for layer caching
+            continueOnError: true
+  - stage: Build
+    displayName: Build and Push to ACR
+    jobs:
+      - job: Build
+        displayName: Build and Push Container
+        steps:
+          - task: AzureKeyVault@2
+            inputs:
+              azureSubscription: 'id-eligibilityestimator-prod'
+              KeyVaultName: 'kv-oas-ee-prod'
+              SecretsFilter: 'PROD-ADOBE-ANALYTICS-URL'
+              RunAsPreJob: false
+
+          - script: 'docker pull $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest'
+            displayName: Pull latest for layer caching
+            continueOnError: true
+
+          - task: Docker@2
+            inputs:
+              containerRegistry: '$(azureContainerRegistry.name)'
+              repository: '$(azureContainerRegistry.repository)'
+              command: 'build'
+              Dockerfile: './Dockerfile'
+              tags: |
+                $(image.tag)
+                latest
+                production-release
+              arguments: |
+                --pull
+                --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
+                --build-arg home=/app
+                --build-arg NEXT_BUILD_DATE=$(app.buildDate)
+                --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
+                --build-arg APP_ENV=$(app.environment)
+                --build-arg LOGGING_LEVEL=$(app.logLevel)
+
+          - task: Docker@2
+            inputs:
+              containerRegistry: '$(azureContainerRegistry.name)'
+              repository: '$(azureContainerRegistry.repository)'
+              command: 'push'
+              tags: |
+                $(image.tag)
+                latest
+                release-candidate
