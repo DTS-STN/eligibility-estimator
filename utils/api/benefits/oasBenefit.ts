@@ -510,7 +510,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     ) {
       if (this.future) {
         if (!this.input.livedOnlyInCanada) {
-          text += ` ${this.translations.detail.futureExpectToReceivePartial}`
+          text += ` ${this.translations.detail.futureExpectToReceivePartial1}`
+          if (
+            this.inputAge != this.input.age &&
+            this.input.yearsInCanadaSince18 < 40
+          ) {
+            text += ` ${this.translations.detail.futureExpectToReceivePartial2}`
+          }
+          text += ` ${this.translations.detail.futureExpectToReceivePartial3}`
         } else {
           text += ` ${this.translations.detail.futureExpectToReceive}`
         }

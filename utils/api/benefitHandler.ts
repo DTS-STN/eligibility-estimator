@@ -33,16 +33,19 @@ export class BenefitHandler {
   fields: FieldsHandler
   future: Boolean
   compare: Boolean
+  age: number
 
   constructor(
     readonly rawInput: Partial<RequestInput>,
     future?: Boolean,
+    age?: number,
     compare: Boolean = true
   ) {
     this.fields = new FieldsHandler(rawInput)
     this.input = this.fields.input
     this.future = future
     this.compare = compare
+    this.age = age
   }
 
   get benefitResults(): BenefitResultsObjectWithPartner {
@@ -158,7 +161,7 @@ export class BenefitHandler {
       false,
       this.future,
       false,
-      this.input.client.age
+      this.age
     )
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
