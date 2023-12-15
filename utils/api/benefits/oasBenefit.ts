@@ -26,13 +26,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   deferral: boolean
   income: number
   inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age
+  formAge: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
     partner?: Boolean,
     future?: Boolean,
     deferral: boolean = false,
-    inputAge?: number
+    inputAge?: number,
+    formAge?: number
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -42,6 +44,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       ? this.input.income.partner
       : this.input.income.client
     this.inputAge = inputAge
+    this.formAge = formAge
   }
 
   protected getEligibility(): EligibilityResult {
