@@ -31,6 +31,9 @@ export function getAgeArray(residencyData) {
   if ([userAge, partnerAge, userRes, partnerRes].some((el) => isNaN(el)))
     return []
 
+  //when partner does not have Legal status residenciy is 0
+  if (userAge >= 65 && partnerRes === 0) return []
+
   const result = []
 
   function yearsUntilOAS(age, residency) {
