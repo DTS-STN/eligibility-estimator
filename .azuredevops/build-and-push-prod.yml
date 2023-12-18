@@ -10,6 +10,7 @@ variables:
   app.environment: production
   app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
   app.domain: 'https://app-eligibilityestimator-prod.azurewebsites.net/'
+  app.logLevel: 'info'
   image.tag: '$(Build.SourceVersion)'
 
 stages:
