@@ -199,9 +199,15 @@ export class FutureHandler {
           clientLockResidence,
           partnerLockResidence
         )
-
+        console.log(+this.query.yearsInCanadaSince18)
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        const handler = new BenefitHandler(value, true, +this.query.age, false)
+        const handler = new BenefitHandler(
+          value,
+          true,
+          +this.query.age,
+          +this.query.yearsInCanadaSince18,
+          false
+        )
 
         const clientEligibleBenefits = this.getEligibleBenefits(
           handler.benefitResults.client

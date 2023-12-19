@@ -27,6 +27,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   income: number
   inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age ONLY for non-future benefits
   formAge: number
+  formYearsInCanada: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -34,7 +35,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     future?: Boolean,
     deferral: boolean = false,
     inputAge?: number,
-    formAge?: number
+    formAge?: number,
+    formYearsInCanada?: number
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -45,6 +47,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       : this.input.income.client
     this.inputAge = inputAge
     this.formAge = formAge
+    this.formYearsInCanada = formYearsInCanada
   }
 
   protected getEligibility(): EligibilityResult {
@@ -516,9 +519,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           text += ` ${this.translations.detail.futureExpectToReceivePartial1}`
           if (
             this.formAge != this.input.age &&
-            this.input.yearsInCanadaSince18 < 40
+            this.input.yearsInCanadaSince18 <= 40 &&
+            this.formYearsInCanada != 40
           ) {
-            text += ` ${this.translations.detail.futureExpectToReceivePartial2}`
+            text += `${this.translations.detail.futureExpectToReceivePartial2}`
           }
           text += ` ${this.translations.detail.futureExpectToReceivePartial3}`
         } else {
