@@ -519,8 +519,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           text += ` ${this.translations.detail.futureExpectToReceivePartial1}`
           if (
             this.formAge != this.input.age &&
-            this.input.yearsInCanadaSince18 <= 40 &&
-            this.formYearsInCanada != 40
+            this.formYearsInCanada <= 40 &&
+            this.formYearsInCanada != this.input.yearsInCanadaSince18
           ) {
             text += `${this.translations.detail.futureExpectToReceivePartial2}`
           }

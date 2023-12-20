@@ -413,9 +413,9 @@ const fr: Translations = {
       'Vous pouvez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     futureExpectToReceive:
       'Si votre revenu reste le même, vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
-    futureExpectToReceivePartial1: 'Si votre revenu reste le même',
+    futureExpectToReceivePartial1: 'Si votre revenu reste le même,',
     futureExpectToReceivePartial2:
-      ', et vous vivez au Canada pendant {CALCULATED_YEARS_IN_CANADA} ans,',
+      ' et vous vivez au Canada pendant {CALCULATED_YEARS_IN_CANADA} ans,',
     futureExpectToReceivePartial3:
       ' vous pourriez recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     oasClawbackInCanada:
