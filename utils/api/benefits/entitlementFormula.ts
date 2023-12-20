@@ -23,6 +23,7 @@ export enum GisSituation {
 export class EntitlementFormula {
   private readonly gisIncrements: number = 24
   private readonly gisStatus: number
+  private inputAge?: number
 
   // The variables below are admittedly extremely weird.
   // I don't understand the naming or logic behind them, this is simply what was provided to me.
@@ -81,8 +82,10 @@ export class EntitlementFormula {
     private maritalStatus: MaritalStatusHelper,
     private partnerBenefitStatus: PartnerBenefitStatusHelper,
     private age: number,
-    private oasResult: BenefitResult<EntitlementResultOas> = undefined
+    private oasResult: BenefitResult<EntitlementResultOas> = undefined,
+    inputAge?: number
   ) {
+    this.inputAge = inputAge
     this.gisStatus = this.maritalStatus.single ? 1 : 2
 
     /*
@@ -114,7 +117,8 @@ export class EntitlementFormula {
         legalValues.oas.amount - this.oasResult.entitlement.result65To74
 
       // GIS Partial pensioner < 40 yrs in Canada and 75+ yrs, gets 10% more.
-      const superGIS = this.age >= 75 ? oasCoverageAmount * 0.1 : 0
+      const superGIS =
+        this.age >= 75 || this.inputAge >= 75 ? oasCoverageAmount * 0.1 : 0
 
       // Always return 0 when result is negative
       return preOasAmount + oasCoverageAmount > 0

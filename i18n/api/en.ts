@@ -404,8 +404,11 @@ const en: Translations = {
       'You can expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     futureExpectToReceive:
       'If your income stays the same, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
-    futureExpectToReceivePartial:
-      'If your income stays the same, and you live in Canada for {CALCULATED_YEARS_IN_CANADA} years, you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
+    futureExpectToReceivePartial1: 'If your income stays the same,',
+    futureExpectToReceivePartial2:
+      ' and you live in Canada for {CALCULATED_YEARS_IN_CANADA} years,',
+    futureExpectToReceivePartial3:
+      ' you could receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.',
     oasClawbackInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
     futureOasClawbackInCanada:

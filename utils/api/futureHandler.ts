@@ -61,7 +61,12 @@ export class FutureHandler {
     }
 
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
-    const handler = new BenefitHandler(value, true)
+    const handler = new BenefitHandler(
+      value,
+      true,
+      +this.query.age,
+      +this.query.yearsInCanadaSince18
+    )
 
     const eligibleBenefits = this.getEligibleBenefits(
       handler.benefitResults.client
@@ -117,7 +122,12 @@ export class FutureHandler {
             const { value } = schema.validate(this.newQuery, {
               abortEarly: false,
             })
-            const handler = new BenefitHandler(value, true)
+            const handler = new BenefitHandler(
+              value,
+              true,
+              +this.query.age,
+              +this.query.yearsInCanadaSince18
+            )
 
             const eligibleBenefits = this.getEligibleBenefits(
               handler.benefitResults.client
@@ -199,9 +209,14 @@ export class FutureHandler {
           clientLockResidence,
           partnerLockResidence
         )
-
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        const handler = new BenefitHandler(value, true, false)
+        const handler = new BenefitHandler(
+          value,
+          true,
+          +this.query.age,
+          +this.query.yearsInCanadaSince18,
+          false
+        )
 
         const clientEligibleBenefits = this.getEligibleBenefits(
           handler.benefitResults.client
@@ -255,13 +270,17 @@ export class FutureHandler {
       Object.keys(benefitCounter).forEach((benefit) => {
         if (benefitCounter[benefit] > 1) {
           const val = Object.values(clientResults[0])[0]
-          const mainText = val[benefit].cardDetail.mainText
-          const textToAdd =
-            this.locale === 'en'
-              ? `This may change in the future based on your situation.`
-              : `Ceci pourrait changer dans l'avenir selon votre situation.`
 
-          val[benefit].cardDetail.mainText = textToAdd + '</br></br>' + mainText
+          if (val[benefit]?.cardDetail?.mainText !== undefined) {
+            const mainText = val[benefit].cardDetail.mainText
+            const textToAdd =
+              this.locale === 'en'
+                ? `This may change in the future based on your situation.`
+                : `Ceci pourrait changer dans l'avenir selon votre situation.`
+
+            val[benefit].cardDetail.mainText =
+              textToAdd + '</br></br>' + mainText
+          }
         }
       })
 
@@ -270,6 +289,7 @@ export class FutureHandler {
         partner: partnerResults.length !== 0 ? partnerResults : null,
       }
     }
+
     return result
   }
 

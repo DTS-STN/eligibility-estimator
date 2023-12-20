@@ -1,22 +1,45 @@
+import React, { useState } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { FieldConfig, FieldType } from '../../utils/api/definitions/fields'
 import { useTranslation } from '../Hooks'
 import Link from 'next/link'
 import { MonthsYears } from '../../utils/api/definitions/types'
+import { Accordion } from '../Forms/Accordion'
+import { fieldDefinitions } from '../../utils/api/definitions/fields'
+import { FieldCategory } from '../../utils/api/definitions/enums'
+
+type CategorizedInputs = {
+  [category in FieldCategory]?: FieldInput[]
+}
 
 export const YourAnswers: React.VFC<{
   title: string
   inputs: FieldInput[]
 }> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
-
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
-  const allFieldData: FieldConfig[] = BenefitHandler.getAllFieldData(
+  const allFieldData: FieldConfig[] = FieldsHandler.getAllFieldData(
     tsln._language
   )
+
+  // State for handling individual accordion
+  const [accordionStates, setAccordionStates] = useState(() => {
+    const initialState = {}
+    Object.keys(FieldCategory).forEach((categoryKey) => {
+      initialState[categoryKey] = false
+    })
+    return initialState
+  })
+
+  const toggleAccordion = (category) => {
+    setAccordionStates((prevStates) => ({
+      ...prevStates,
+      [category]: !prevStates[category],
+    }))
+  }
 
   /**
    * shouldDisplay
@@ -43,7 +66,7 @@ export const YourAnswers: React.VFC<{
         {inputs.map((input, index) => {
           const showBorder = index != inputs.length - 1
           const borderStyle = showBorder
-            ? 'py-4 border-b-2 border-info-border'
+            ? 'py-4 border-b border-info-border'
             : 'py-4'
           return shouldDisplay(input) ? (
             <div key={input.key} className={borderStyle}>
@@ -70,6 +93,75 @@ export const YourAnswers: React.VFC<{
             ''
           )
         })}
+      </>
+    )
+  }
+
+  function getMainContentMobile(): JSX.Element {
+    if (inputs.length === 0) {
+      return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
+    }
+
+    // Group inputs by category
+    const categorizedInputs: CategorizedInputs = inputs.reduce((acc, input) => {
+      const categoryKey = fieldDefinitions[input.key]?.category?.key
+      if (categoryKey && shouldDisplay(input)) {
+        acc[categoryKey] = acc[categoryKey] || []
+        acc[categoryKey].push(input)
+      }
+      return acc
+    }, {})
+
+    return (
+      <>
+        {Object.entries(categorizedInputs).map(
+          ([categoryKey, categoryInputs]) => {
+            if (!categoryInputs) return null
+            const translatedCategory = tsln.category[categoryKey]
+            if (!translatedCategory) return null
+
+            return (
+              <Accordion
+                key={categoryKey}
+                title={
+                  <span
+                    dangerouslySetInnerHTML={{ __html: translatedCategory }}
+                  />
+                }
+                isOpen={accordionStates[categoryKey]}
+                onClick={() => toggleAccordion(categoryKey)}
+              >
+                {categoryInputs.map((input) => (
+                  <div
+                    key={input.key}
+                    className="py-4 border-t border-info-border"
+                  >
+                    <div>{tsln.resultsQuestions[input.key]}</div>
+                    <div className="grid gap-0 grid-cols-3">
+                      <div className="col-span-2">
+                        <strong
+                          dangerouslySetInnerHTML={{
+                            __html: getDisplayValue(input),
+                          }}
+                        />
+                      </div>
+                      <div className="justify-self-end self-end">
+                        <Link href={`questions#${input.key}`}>
+                          <a
+                            className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
+                            aria-label={tsln.resultsEditAriaLabels[input.key]}
+                          >
+                            {tsln.resultsPage.edit}
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </Accordion>
+            )
+          }
+        )}
       </>
     )
   }
@@ -137,11 +229,12 @@ export const YourAnswers: React.VFC<{
 
   return (
     <div className="fz-10">
-      <div className="p-8 bg-emphasis rounded mt-8 md:mt-0 md:max-w-[380px]">
+      <div className="py-8 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
         <h3 className="h3" id="answers">
           {title}
         </h3>
-        {getMainContent()}
+        <div className="sm:hidden">{getMainContentMobile()}</div>
+        <div className="hidden sm:block">{getMainContent()}</div>
       </div>
     </div>
   )

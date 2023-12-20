@@ -15,7 +15,9 @@ const en: WebTranslations = {
   _language: Language.EN,
   ISOlang: ISOLanguage.EN,
 
-  skipToMainContent: 'Skip to main content',
+  skipToMain: 'Skip to main content',
+  skipToAbout: "Skip to 'About government'",
+  switchToBasic: 'Switch to basic HTML version',
   globalHeader: 'Global header',
   testSiteNotice: 'Test site notice',
   officialSiteNavigation: 'Canada.ca official site',

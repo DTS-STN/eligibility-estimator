@@ -108,17 +108,18 @@ describe('gisCoupleOnePenBenefit', () => {
   it('should pass 51 test - CALC-51', async () => {
     const desiredName = 'CALC-51' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 1045.11)
+    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
     expectGisEligible(res, 0.82)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 82, 1045.11, 0.82, 0)
-    expectFutureOasGisBenefitEligible(res, 87, 1045.11, 0.0, 1)
+    expectFutureOasGisBenefitEligible(res, 82, 768.46, 0.82, 0)
+    expectFutureOasGisBenefitEligible(res, 87, 768.46, 0.0, 1)
 
     //partner results
     expectAllIneligible(res, true)

@@ -28,6 +28,7 @@ export interface RequestInput {
   incomeAvailable?: boolean
   income: number // personal income
   age: number
+  clientBirthDate?: string
   receiveOAS: boolean
   oasDeferDuration: string
   oasDefer: boolean
@@ -44,6 +45,7 @@ export interface RequestInput {
   partnerIncomeAvailable?: boolean
   partnerIncome: number // partner income
   partnerAge: number
+  partnerBirthDate?: string
   partnerLivingCountry: string // country code
   partnerLegalStatus: LegalStatus
   partnerLivedOnlyInCanada: boolean
@@ -57,6 +59,7 @@ export interface RequestInput {
 export interface ProcessedInput {
   income: IncomeHelper
   age: number
+  clientBirthDate: string
   receiveOAS: boolean
   oasDeferDuration: string
   oasDefer: boolean

@@ -39,8 +39,11 @@ export const Layout: React.VFC<{
   }
 
   const topnavProps = {
+    skipToMain: tsln.skipToMain,
     skipToMainPath: '#applicationTitle',
-    skipToAboutPath: '#footer-info',
+    skipToAbout: tsln.skipToAbout,
+    skipToAboutPath: '#footer',
+    switchToBasic: tsln.switchToBasic,
     switchToBasicPath: '',
     displayAlternateLink: false,
   }
@@ -120,8 +123,8 @@ export const Layout: React.VFC<{
             locale={router.locale}
             langUrl={langToggleLink}
             breadcrumbItems={breadcrumbs}
+            topNavProps={topnavProps}
             headerText={{
-              skipToMainContent: tsln.skipToMainContent,
               globalHeader: tsln.globalHeader,
               testSiteNotice: tsln.testSiteNotice,
               officialSiteNavigation: tsln.officialSiteNavigation,
