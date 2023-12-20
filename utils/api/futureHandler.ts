@@ -61,7 +61,12 @@ export class FutureHandler {
     }
 
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
-    const handler = new BenefitHandler(value, true)
+    const handler = new BenefitHandler(
+      value,
+      true,
+      +this.query.age,
+      +this.query.yearsInCanadaSince18
+    )
 
     const eligibleBenefits = this.getEligibleBenefits(
       handler.benefitResults.client
@@ -117,7 +122,12 @@ export class FutureHandler {
             const { value } = schema.validate(this.newQuery, {
               abortEarly: false,
             })
-            const handler = new BenefitHandler(value, true)
+            const handler = new BenefitHandler(
+              value,
+              true,
+              +this.query.age,
+              +this.query.yearsInCanadaSince18
+            )
 
             const eligibleBenefits = this.getEligibleBenefits(
               handler.benefitResults.client
@@ -199,9 +209,14 @@ export class FutureHandler {
           clientLockResidence,
           partnerLockResidence
         )
-
         const { value } = schema.validate(newQuery, { abortEarly: false })
-        const handler = new BenefitHandler(value, true, +this.query.age, false)
+        const handler = new BenefitHandler(
+          value,
+          true,
+          +this.query.age,
+          +this.query.yearsInCanadaSince18,
+          false
+        )
 
         const clientEligibleBenefits = this.getEligibleBenefits(
           handler.benefitResults.client
