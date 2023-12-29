@@ -46,7 +46,7 @@ export const YourAnswers: React.VFC<{
    * Deducts $5,000 from the first $5,000 and 50% of the next $10,000.
    * The maximum deduction is $10,000 for inputs of $15,000 or more.
    */
-  function incomeDeduction(income: number): number {
+  function salaryExemption(income: number): number {
     if (income <= 5000) {
       return income
     } else if (income <= 15000) {
@@ -199,7 +199,7 @@ export const YourAnswers: React.VFC<{
 
     if (input.key === 'incomeWork' || input.key === 'partnerIncomeWork') {
       return numberToStringCurrency(
-        incomeDeduction(Number(input.value)),
+        salaryExemption(Number(input.value)),
         tsln._language,
         {
           rounding: 2,
