@@ -42,7 +42,10 @@ const fr: Translations = {
   question: {
     [FieldKey.INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
-    [FieldKey.INCOME]: 'Quel est votre revenu annuel net?',
+    [FieldKey.INCOME]:
+      'Quel sera votre revenu annuel net lorsque vous commencerez à recevoir vos prestations?',
+    [FieldKey.INCOME_WORK]:
+      'Combien de ce montant provient de revenus d’emploi ou de travail indépendant?',
     [FieldKey.AGE]: 'Quel est votre mois de naissance?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',
@@ -71,6 +74,8 @@ const fr: Translations = {
       'Êtes-vous en mesure de nous fournir le revenu net annuel de votre conjoint?',
     [FieldKey.PARTNER_INCOME]:
       'Quel est le revenu annuel net de votre conjoint?',
+    [FieldKey.PARTNER_INCOME_WORK]:
+      'Combien de ce montant provient de revenus d’emploi ou de travail indépendant?',
     [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
     [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
@@ -88,6 +93,7 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
     [FieldKey.INCOME_AVAILABLE]: 'Revenu net',
     [FieldKey.INCOME]: 'Revenu net',
+    [FieldKey.INCOME_WORK]: 'Exemption du salaire',
     [FieldKey.LEGAL_STATUS]: 'Statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Pays de résidence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Seulement vécu au Canada',
@@ -99,6 +105,7 @@ const fr: Translations = {
     [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
     [FieldKey.PARTNER_INCOME]: 'Revenu net du conjoint',
+    [FieldKey.PARTNER_INCOME_WORK]: 'Exemption du salaire du conjoint',
     [FieldKey.PARTNER_BENEFIT_STATUS]: 'Conjoint reçoit la pension de la SV',
     [FieldKey.PARTNER_AGE]: 'Âge du conjoint',
     [FieldKey.PARTNER_LEGAL_STATUS]: 'Conjoint a statut légal',
@@ -118,6 +125,7 @@ const fr: Translations = {
       'Modifier le report de votre pension de la SV',
     [FieldKey.INCOME_AVAILABLE]: 'Modifier si vous fournissez votre revenu',
     [FieldKey.INCOME]: 'Modifier votre revenu net',
+    [FieldKey.INCOME_WORK]: 'Modifier votre salaire',
     [FieldKey.LEGAL_STATUS]: 'Modifier votre statut légal',
     [FieldKey.LIVING_COUNTRY]: 'Modifier votre pays de résidence',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
@@ -132,6 +140,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       'Modifier si vous fournissez le revenu de votre conjoint',
     [FieldKey.PARTNER_INCOME]: 'Modifier le revenu net de votre conjoint',
+    [FieldKey.PARTNER_INCOME_WORK]: 'Modifier le salaire de votre conjoint',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Modifier si votre conjoint reçoit la pension de la SV',
     [FieldKey.PARTNER_AGE]: "Modifier l'âge de votre conjoint",
@@ -148,15 +157,15 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      `Incluez le revenu après impôt de toutes les sources (la ligne 23600 de votre déclaration de revenus), moins :` +
-      `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
-      `<li>les premiers 5 000 $ de revenu d'emploi ou de travail indépendant, et 50 % des 10 000 $ suivants.</li></ul>`,
+      "Incluez tous les types de revenus après déductions, y compris&nbsp;: les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne&nbsp;23600 de votre T1). N'incluez pas ce que vous recevez de toute prestation de la Sécurité de la vieillesse.",
+    [FieldKey.INCOME_WORK]:
+      "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
       "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
     [FieldKey.PARTNER_INCOME]:
-      `Incluez le revenu après impôt de toutes les sources (la ligne 23600 de sa déclaration de revenus), moins :` +
-      `<ul><li>tout paiement de la Sécurité de la vieillesse;</li>` +
-      `<li>les premiers 5 000 $ de revenu d'emploi ou de travail indépendant, et 50 % des 10 000 $ suivants.</li></ul>`,
+      "Incluez tous les types de revenus après déductions, y compris&nbsp;: les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne&nbsp;23600 de son T1). N'incluez pas ce que votre conjoint reçoit de toute prestation de la Sécurité de la vieillesse.",
+    [FieldKey.PARTNER_INCOME_WORK]:
+      "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_DEFER_DURATION]:

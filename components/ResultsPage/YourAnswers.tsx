@@ -10,6 +10,7 @@ import { MonthsYears } from '../../utils/api/definitions/types'
 import { Accordion } from '../Forms/Accordion'
 import { fieldDefinitions } from '../../utils/api/definitions/fields'
 import { FieldCategory } from '../../utils/api/definitions/enums'
+import { number } from 'joi'
 
 type CategorizedInputs = {
   [category in FieldCategory]?: FieldInput[]
@@ -39,6 +40,20 @@ export const YourAnswers: React.VFC<{
       ...prevStates,
       [category]: !prevStates[category],
     }))
+  }
+
+  /**
+   * Deducts $5,000 from the first $5,000 and 50% of the next $10,000.
+   * The maximum deduction is $10,000 for inputs of $15,000 or more.
+   */
+  function incomeDeduction(income: number): number {
+    if (income <= 5000) {
+      return income
+    } else if (income <= 15000) {
+      return 5000 + (income - 5000) * 0.5
+    } else {
+      return 10000
+    }
   }
 
   /**
@@ -74,7 +89,9 @@ export const YourAnswers: React.VFC<{
               <div className="grid gap-0 grid-cols-3">
                 <div className="col-span-2">
                   <strong
-                    dangerouslySetInnerHTML={{ __html: getDisplayValue(input) }}
+                    dangerouslySetInnerHTML={{
+                      __html: getDisplayValue(input),
+                    }}
                   />
                 </div>
                 <div className="justify-self-end self-end">
@@ -179,6 +196,16 @@ export const YourAnswers: React.VFC<{
     )
 
     const fieldType: FieldType = fieldData.type
+
+    if (input.key === 'incomeWork' || input.key === 'partnerIncomeWork') {
+      return numberToStringCurrency(
+        incomeDeduction(Number(input.value)),
+        tsln._language,
+        {
+          rounding: 2,
+        }
+      )
+    }
 
     switch (fieldType) {
       case FieldType.NUMBER:

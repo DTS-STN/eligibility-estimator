@@ -113,6 +113,8 @@ export enum ValidationErrors {
   partnerOnlyInCanadaEmpty = 'partnerOnlyInCanadaEmpty',
   provideIncomeEmpty = 'provideIncomeEmpty',
   incomeEmpty = 'incomeEmpty',
+  incomeWorkEmpty = 'incomeWorkEmpty',
+  partnerIncomeWorkEmpty = 'partnerIncomeWorkEmpty',
   incomeBelowZero = 'incomeBelowZero',
   partnerIncomeBelowZero = 'partnerIncomeBelowZero',
   incomeTooHigh = 'incomeTooHigh',

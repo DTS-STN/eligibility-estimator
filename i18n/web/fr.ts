@@ -385,8 +385,12 @@ const fr: WebTranslations = {
       'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',
     [ValidationErrors.providePartnerIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
+    [ValidationErrors.incomeWorkEmpty]:
+      'Veuillez entrer vos revenus d’emploi ou de travail indépendant.',
+    [ValidationErrors.partnerIncomeWorkEmpty]:
+      'Veuillez entrer les revenus d’emploi ou de travail indépendant de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:
-      'Veuillez entrer le revenu de votre conjoint.',
+      'Veuillez entrer le revenu net prévu de votre conjoint.',
     [ValidationErrors.partnerYearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
     [ValidationErrors.maritalStatusEmpty]:
@@ -411,7 +415,7 @@ const fr: WebTranslations = {
       'Veuillez indiquer si votre conjoint a déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
     [ValidationErrors.provideIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir votre revenu.',
-    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu net prévu.',
     [ValidationErrors.oasDeferEmpty]:
       'Veuillez sélectionner quand vous souhaitez commencer à recevoir la pension de la SV.',
     [ValidationErrors.incomeBelowZero]:

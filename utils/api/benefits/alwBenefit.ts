@@ -36,8 +36,8 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     this.future = future
     this.partnerLivingCountry = partnerLivingCountry
     this.relevantIncome = single
-      ? this.input.income.client
-      : this.input.income.relevant
+      ? this.input.income.adjustedIncome
+      : this.input.income.adjustedRelevant
   }
 
   protected getEligibility(): EligibilityResult {
@@ -56,7 +56,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     // income must be provided, partner cannot be eligible for gis without income
     const incomeNotProvided = !this.input.income.provided
     const maxIncome = legalValues.alw.alwIncomeLimit
-    const meetsReqIncome = this.input.income.relevant <= maxIncome
+    const meetsReqIncome = this.input.income.adjustedRelevant <= maxIncome
     const requiredYearsInCanada = 10
     const meetsReqYears =
       this.input.yearsInCanadaSince18 >= requiredYearsInCanada

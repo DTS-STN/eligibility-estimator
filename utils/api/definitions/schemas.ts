@@ -62,6 +62,12 @@ export const RequestSchema = Joi.object({
   //   })
   // )
   // .message(ValidationErrors.incomeTooHigh),
+  incomeWork: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
+    .precision(2)
+    .min(0)
+    .message(ValidationErrors.incomeBelowZero),
   age: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
@@ -170,6 +176,12 @@ export const RequestSchema = Joi.object({
   //   })
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
+  partnerIncomeWork: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
+    .precision(2)
+    .min(0)
+    .message(ValidationErrors.incomeBelowZero),
   partnerAge: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
