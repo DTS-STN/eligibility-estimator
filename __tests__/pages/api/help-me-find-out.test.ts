@@ -24,6 +24,8 @@ describe('Help Me Find Out scenarios', () => {
       incomeAvailable: true,
       income: legalValues.gis.spouseNoOasIncomeLimit,
       ...age65NoDefer,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -45,6 +47,8 @@ describe('Help Me Find Out scenarios', () => {
     res = await mockGetRequest({
       ...input,
       income: legalValues.gis.spouseNoOasIncomeLimit - 1,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     // expectOasGisEligible(res)
     //expect(res.body.results.gis.entitlement.result).toEqual(0.72) // table 3
@@ -112,6 +116,8 @@ describe('Help Me Find Out scenarios', () => {
   it(`works when client old, partner young (partner=noAllowance, therefore gis table 3)`, async () => {
     const input = {
       incomeAvailable: true,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
       income: legalValues.alw.alwIncomeLimit, // too high for allowance
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
@@ -137,6 +143,8 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       incomeAvailable: true,
       income: legalValues.alw.alwIncomeLimit - 1, // okay for allowance
+      incomeWork: 0,
+      partnerIncomeWork: 0,
       ...age65NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
@@ -160,6 +168,8 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       ...incomeZero,
       ...age60NoDefer,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,
@@ -196,6 +206,8 @@ describe('Help Me Find Out scenarios', () => {
       ...age60NoDefer,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
       ...canadian,
       livedOnlyInCanada: true,
       yearsInCanadaSince18: undefined,
@@ -223,6 +235,8 @@ describe('Help Me Find Out scenarios', () => {
     const input = {
       ...incomeZero,
       ...age60NoDefer,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
       ...canadian,

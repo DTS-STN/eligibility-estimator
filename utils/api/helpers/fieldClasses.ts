@@ -51,6 +51,10 @@ export class IncomeHelper extends FieldHelper {
     return this.calculateDeductedIncome(this.client, this.clientIncomeWork)
   }
 
+  get adjustedIncomePartner(): number {
+    return this.calculateDeductedIncome(this.partner, this.partnerIncomeWork)
+  }
+
   /**
    * Returns the relevant income, depending on marital status.
    * Returns the client's income when single, or the sum of client+partner when partnered.
@@ -83,7 +87,7 @@ export class IncomeHelper extends FieldHelper {
       this.maritalStatus.partnered &&
       this.partner !== undefined
     ) {
-      let partnerAdjustedIncome = this.adjustedIncome
+      let partnerAdjustedIncome = this.adjustedIncomePartner
       return clientAdjustedIncome + partnerAdjustedIncome
     }
     return clientAdjustedIncome

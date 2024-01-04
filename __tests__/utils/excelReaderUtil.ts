@@ -35,6 +35,7 @@ function readExcelData(filePath: string): string[] {
 function createTransformedPayload(rowToTransform: string): Record<string, any> {
   let payload: Record<string, any> = {
     income: roundedIncome(rowToTransform["User's Net Worldwide Income"]),
+    incomeWork: 0,
     age: rowToTransform['Age'],
     clientBirthDate: rowToTransform['Birth Year and Month'],
     receiveOAS: transformValue(rowToTransform["Rec'ing OAS (Yes / No)"]),
@@ -106,6 +107,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
         ? undefined
         : rowToTransform["Partner's Net Worldwide Income"], // partner income
+    partnerIncomeWork: 0,
     partnerAge:
       rowToTransform['Partner Age'] === 'N/A'
         ? undefined

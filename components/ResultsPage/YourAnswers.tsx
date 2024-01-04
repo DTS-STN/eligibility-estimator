@@ -10,7 +10,6 @@ import { MonthsYears } from '../../utils/api/definitions/types'
 import { Accordion } from '../Forms/Accordion'
 import { fieldDefinitions } from '../../utils/api/definitions/fields'
 import { FieldCategory } from '../../utils/api/definitions/enums'
-import { number } from 'joi'
 
 type CategorizedInputs = {
   [category in FieldCategory]?: FieldInput[]
@@ -43,8 +42,7 @@ export const YourAnswers: React.VFC<{
   }
 
   /**
-   * Deducts $5,000 from the first $5,000 and 50% of the next $10,000.
-   * The maximum deduction is $10,000 for inputs of $15,000 or more.
+   * This is needed to display deduction income value.
    */
   function salaryExemption(income: number): number {
     if (income <= 5000) {
