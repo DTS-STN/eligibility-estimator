@@ -387,8 +387,12 @@ const fr: WebTranslations = {
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
     [ValidationErrors.incomeWorkEmpty]:
       'Veuillez entrer vos revenus d’emploi ou de travail indépendant.',
+    [ValidationErrors.incomeWorkGreaterThanNetIncome]:
+      'Ce montant ne peut pas être plus élevé que votre revenu annuel net.',
     [ValidationErrors.partnerIncomeWorkEmpty]:
       'Veuillez entrer les revenus d’emploi ou de travail indépendant de votre conjoint.',
+    [ValidationErrors.partnerIncomeWorkGreaterThanNetIncome]:
+      'Ce montant ne peut pas être plus élevé que le revenu annuel net de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:
       'Veuillez entrer le revenu net prévu de votre conjoint.',
     [ValidationErrors.partnerYearsSince18Empty]:

@@ -380,8 +380,12 @@ const en: WebTranslations = {
       "Please enter your partner's expected net income.",
     [ValidationErrors.incomeWorkEmpty]:
       'Please enter your work or self-employment income.',
+    [ValidationErrors.incomeWorkGreaterThanNetIncome]:
+      'This amount can’t be higher than your annual net income.',
     [ValidationErrors.partnerIncomeWorkEmpty]:
       "Please enter your partner's work or self-employment income.",
+    [ValidationErrors.partnerIncomeWorkGreaterThanNetIncome]:
+      'This amount can’t be higher than your partner’s annual net income.',
     [ValidationErrors.partnerYearsSince18Empty]:
       "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
