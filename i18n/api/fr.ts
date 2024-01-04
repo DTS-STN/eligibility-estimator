@@ -159,7 +159,7 @@ const fr: Translations = {
     [FieldKey.INCOME]:
       "Incluez tous les types de revenus après déductions, y compris&nbsp;: les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne&nbsp;23600 de votre T1). N'incluez pas ce que vous recevez de toute prestation de la Sécurité de la vieillesse.",
     [FieldKey.INCOME_WORK]:
-      "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
+      "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
       "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
     [FieldKey.PARTNER_INCOME]:
