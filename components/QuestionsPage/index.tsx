@@ -301,6 +301,8 @@ export const QuestionsPage: React.VFC = ({}) => {
     e.preventDefault()
     if (form.isValid) {
       language === 'en' ? router.push('/results') : router.push('/resultats')
+    } else {
+      document.getElementById('errorField').scrollIntoView()
     }
   }
 
