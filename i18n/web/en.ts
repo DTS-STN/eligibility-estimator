@@ -469,6 +469,9 @@ const en: WebTranslations = {
     months: 'Months',
     years: 'Years',
   },
+  incomeTitle:
+    'What will be your annual net income when you start receiving your benefits?',
+  incomeTitleReceivedOAS: 'What is your annual net income?',
 }
 
 export default en

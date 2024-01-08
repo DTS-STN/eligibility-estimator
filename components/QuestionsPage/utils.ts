@@ -80,7 +80,8 @@ export function getNextClickedObj(): NextClickedObject {
  */
 export function getKeyStepMap(
   tsln,
-  allFieldConfigs
+  allFieldConfigs,
+  incomeQuestionTitle
 ): { [x in Steps]: CardConfig } {
   const connection = tsln._language === Language.EN ? ':' : ' :'
   const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
@@ -105,7 +106,7 @@ export function getKeyStepMap(
       },
     },
     [Steps.STEP_2]: {
-      title: tsln.category.income,
+      title: incomeQuestionTitle,
       buttonLabel: `${tsln.nextStep}${connection} ${tsln.category.legal}`,
       keys: getKeysByCategory(FieldCategory.INCOME),
       buttonAttributes: {

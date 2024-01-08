@@ -482,6 +482,9 @@ const fr: WebTranslations = {
     months: 'Mois',
     years: 'Années',
   },
+  incomeTitle:
+    'Quel sera votre revenu annuel net lorsque vous commencerez à recevoir vos prestations?',
+  incomeTitleReceivedOAS: 'Quel est votre revenu annuel net?',
 }
 
 export default fr

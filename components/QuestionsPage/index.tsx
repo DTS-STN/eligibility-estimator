@@ -89,12 +89,19 @@ export const QuestionsPage: React.VFC = ({}) => {
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
 
+  const [incomeQuestionTitle, setIncomeQuestionTitle] = useState(
+    tsln.incomeTitle
+  )
+
+  const [receiveOAS, setReceiveOAS] = useState(false)
+
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
   const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
   const keyStepMap: { [x in Steps]: CardConfig } = getKeyStepMap(
     tsln,
-    allFieldConfigs
+    allFieldConfigs,
+    incomeQuestionTitle
   )
 
   const [cardsValid, setCardsValid] = useState(
@@ -121,12 +128,22 @@ export const QuestionsPage: React.VFC = ({}) => {
     }
   }, [])
 
+  useEffect(() => {
+    const title = receiveOAS ? tsln.incomeTitleReceivedOAS : tsln.incomeTitle
+    setIncomeQuestionTitle(title)
+  }, [receiveOAS])
+
   /**
    * On every change to a field, this will check the validity of all fields.
    */
   function handleOnChange(field: FormField, newValue: string): void {
     let newVal = newValue
     const key: String = field.config.key
+
+    if (key === 'receiveOAS') {
+      const receiveOAS = newValue === 'true'
+      setReceiveOAS(receiveOAS)
+    }
 
     // Required to pass on to the Duration component that needs the exact birth month, not just age as float
     if (key === 'age') {
