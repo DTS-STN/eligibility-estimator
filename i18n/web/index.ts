@@ -285,8 +285,6 @@ export type WebTranslations = {
     months: string
     years: string
   }
-  incomeTitle: string
-  incomeTitleReceivedOAS: string
 }
 
 export function getWebTranslations(language: Language): WebTranslations {
