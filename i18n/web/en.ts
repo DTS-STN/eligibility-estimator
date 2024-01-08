@@ -469,6 +469,43 @@ const en: WebTranslations = {
     months: 'Months',
     years: 'Years',
   },
+  incomeLabel:
+    'What will be your annual net income when you start receiving your benefits?',
+  incomeLabelReceiveOAS: 'What is your annual net income?',
+  partnerIncomeLabel:
+    'What will be your partner’s annual net income when you start receiving your benefits?',
+  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
+  incomeHintTitle: 'Will this income be used in your application?',
+  incomeHintTitleReceiveOAS: 'Is your income about to change?',
+  incomeHintText:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  No, this is an estimation. Your actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 2px 0px 0px 4px; display: inline-block;' src='/external.svg'/></a> will be assessed when you apply. \
+  </p> \
+</div> \
+",
+  incomeHintTextReceiveOAS:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  If you're expecting a drop in income, you can enter your estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 2px 0px 0px 4px; display: inline-block;' src='/external.svg'/></a> to report this event. \
+  </p> \
+</div> \
+",
+  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
+  partnerIncomeHintText:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  No, this is an estimation. Your partner’s actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions <img style='padding: 4px 0px 0px 4px; display: inline-block' src='/external.svg'/></a> will be assessed when you apply. \
+  </p> \
+</div> \
+",
+  partnerIncomeHintTextReceiveOAS:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  If your partner is expecting a drop in income, you can enter their estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 4px 0px 0px 4px; display: inline-block' src='/external.svg'/></a> to report this event. \
+  </p> \
+</div> \
+",
 }
 
 export default en

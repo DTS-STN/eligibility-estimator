@@ -101,6 +101,69 @@ export const QuestionsPage: React.VFC = ({}) => {
     getStepValidity(keyStepMap, form, inputs)
   )
 
+  const [incomeLabel, setIncomeLabel] = useState(tsln.incomeLabel)
+  const [partnerIncomeLabel, setPartnerIncomeLabel] = useState(
+    tsln.partnerIncomeLabel
+  )
+  const [incomeHintTitle, setIncomeHintTitle] = useState(tsln.incomeHintTitle)
+  const [incomeHintText, setIncomeHintText] = useState(tsln.incomeHintText)
+  const [partnerIncomeHintTitle, setPartnerIncomeHintTitle] = useState(
+    tsln.incomeHintTitle
+  )
+  const [partnerIncomeHintText, setPartnerIncomeHintText] = useState(
+    tsln.partnerIncomeHintText
+  )
+  const [receiveOAS, setReceiveOAS] = useState(false)
+
+  const incomeTooltip = {
+    moreinfo: incomeHintTitle,
+    text: incomeHintText,
+  }
+  const partnerIncomeTooltip = {
+    moreinfo: partnerIncomeHintTitle,
+    text: partnerIncomeHintText,
+  }
+
+  useEffect(() => {
+    const incomeLabel = receiveOAS
+      ? tsln.incomeLabelReceiveOAS
+      : tsln.incomeLabel
+    const partnerIncomeLabel = receiveOAS
+      ? tsln.partnerIncomeLabelReceiveOAS
+      : tsln.partnerIncomeLabel
+    const incomeHintTitle = receiveOAS
+      ? tsln.incomeHintTitleReceiveOAS
+      : tsln.incomeHintTitle
+    const incomeHintText = receiveOAS
+      ? tsln.incomeHintTextReceiveOAS
+      : tsln.incomeHintText
+    const partnerIncomeHintTitle = receiveOAS
+      ? tsln.partnerIncomeHintTitleReceiveOAS
+      : tsln.incomeHintTitle
+    const partnerIncomeHintText = receiveOAS
+      ? tsln.partnerIncomeHintTextReceiveOAS
+      : tsln.partnerIncomeHintText
+    setIncomeLabel(incomeLabel)
+    setPartnerIncomeLabel(partnerIncomeLabel)
+    setIncomeHintTitle(incomeHintTitle)
+    setIncomeHintText(incomeHintText)
+    setPartnerIncomeHintTitle(partnerIncomeHintTitle)
+    setPartnerIncomeHintText(partnerIncomeHintText)
+  }, [
+    receiveOAS,
+    tsln.incomeHintText,
+    tsln.incomeHintTextReceiveOAS,
+    tsln.incomeHintTitle,
+    tsln.incomeHintTitleReceiveOAS,
+    tsln.incomeLabel,
+    tsln.incomeLabelReceiveOAS,
+    tsln.partnerIncomeHintText,
+    tsln.partnerIncomeHintTextReceiveOAS,
+    tsln.partnerIncomeHintTitleReceiveOAS,
+    tsln.partnerIncomeLabel,
+    tsln.partnerIncomeLabelReceiveOAS,
+  ])
+
   // On mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
     document.addEventListener('keydown', function (event) {
@@ -137,6 +200,11 @@ export const QuestionsPage: React.VFC = ({}) => {
 
     if (key === 'partnerAge') {
       newVal = JSON.parse(newValue).value
+    }
+
+    if (key === 'receiveOAS') {
+      const receiveOAS = newValue === 'true'
+      setReceiveOAS(receiveOAS)
     }
 
     const step = Object.keys(keyStepMap).find((step) =>
@@ -213,7 +281,13 @@ export const QuestionsPage: React.VFC = ({}) => {
               <CurrencyField
                 type={field.config.type}
                 name={field.key}
-                label={field.config.label}
+                label={
+                  field.key === 'income'
+                    ? incomeLabel
+                    : field.key === 'partnerIncome'
+                    ? partnerIncomeLabel
+                    : field.config.label
+                }
                 onChange={debounce(
                   (e) => handleOnChange(field, e.target.value),
                   100
@@ -223,6 +297,13 @@ export const QuestionsPage: React.VFC = ({}) => {
                 helpText={field.config.helpText}
                 requiredText={tsln.required}
                 error={formError}
+                dynamicContent={
+                  field.key === 'income'
+                    ? incomeTooltip
+                    : field.key === 'partnerIncome'
+                    ? partnerIncomeTooltip
+                    : undefined
+                }
               />
             )}
             {field.config.type == FieldType.STRING && (

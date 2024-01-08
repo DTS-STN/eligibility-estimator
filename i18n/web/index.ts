@@ -121,6 +121,17 @@ export type WebTranslations = {
   category: Translations['category']
   errorBoxTitle: string
   useEstimatorIf: string
+  incomeLabel: string
+  incomeLabelReceiveOAS: string
+  partnerIncomeLabel: string
+  partnerIncomeLabelReceiveOAS: string
+  incomeHintTitle: string
+  incomeHintTitleReceiveOAS: string
+  incomeHintText: string
+  incomeHintTextReceiveOAS: string
+  partnerIncomeHintTitleReceiveOAS: string
+  partnerIncomeHintText: string
+  partnerIncomeHintTextReceiveOAS: string
 
   //Main footer links
   aboutGovernment: string

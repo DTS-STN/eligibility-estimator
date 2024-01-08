@@ -1,4 +1,5 @@
 import React from 'react'
+import { TooltipTranslation } from '../../i18n/tooltips'
 import { Tooltip } from '../Tooltip/tooltip'
 
 export interface QuestionLabelProps {
@@ -8,6 +9,7 @@ export interface QuestionLabelProps {
   helpText?: string
   requiredText?: string
   fieldId?: string
+  dynamicContent?: TooltipTranslation
 }
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
@@ -17,6 +19,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   requiredText,
   helpText,
   fieldId,
+  dynamicContent,
 }) => {
   return (
     <>
@@ -31,7 +34,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
           <span className="font-medium ml-2">{requiredText}</span>
         )}
       </label>
-      <Tooltip field={name} />
+      <Tooltip field={name} dynamicContent={dynamicContent} />
       {helpText && (
         <div
           id={fieldId && `help-text-${fieldId}`}
