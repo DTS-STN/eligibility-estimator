@@ -40,7 +40,7 @@ export const ErrorsSummary: any = ({ errorFields }) => {
       : ' erreurs ont été trouvées'
 
   return (
-    <div className="border-2 border-danger rounded py-4 mb-2">
+    <div id="errorField" className="border-2 border-danger rounded py-4 mb-2">
       <Message
         id={`form-errors-${errorFields.length}`}
         type="danger"
