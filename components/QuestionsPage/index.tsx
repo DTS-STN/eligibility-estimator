@@ -302,7 +302,9 @@ export const QuestionsPage: React.VFC = ({}) => {
     if (form.isValid) {
       language === 'en' ? router.push('/results') : router.push('/resultats')
     } else {
-      document.getElementById('errorField').scrollIntoView()
+      document
+        .getElementById('errorField')
+        .scrollIntoView({ behavior: 'smooth' })
     }
   }
 
