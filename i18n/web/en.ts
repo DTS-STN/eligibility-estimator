@@ -377,6 +377,8 @@ const en: WebTranslations = {
     [ValidationErrors.providePartnerIncomeEmpty]:
       "Please indicate if you're able to provide your partner's income.",
     [ValidationErrors.partnerIncomeEmpty]:
+      "Please enter your partner's expected net income.",
+    [ValidationErrors.partnerIncomeEmptyReceiveOAS]:
       "Please enter your partner's net income.",
     [ValidationErrors.incomeWorkEmpty]:
       'Please enter your work or self-employment income.',
@@ -409,7 +411,8 @@ const en: WebTranslations = {
       "Please indicate if you're involuntarily separated.",
     [ValidationErrors.provideIncomeEmpty]:
       "Please indicate if you're able to provide your income.",
-    [ValidationErrors.incomeEmpty]: 'Please enter your net income.',
+    [ValidationErrors.incomeEmpty]: 'Please enter your expected net income.',
+    [ValidationErrors.incomeEmptyReceiveOAS]: 'Please enter your net income.',
     [ValidationErrors.oasDeferEmpty]:
       "Please select when you'd like to start receiving the OAS pension.",
     [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',

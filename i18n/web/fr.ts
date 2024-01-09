@@ -394,6 +394,8 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerIncomeWorkGreaterThanNetIncome]:
       'Ce montant ne peut pas être plus élevé que le revenu annuel net de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:
+      'Veuillez entrer le revenu net prévu de votre conjoint.',
+    [ValidationErrors.partnerIncomeEmptyReceiveOAS]:
       'Veuillez entrer le revenu net de votre conjoint.',
     [ValidationErrors.partnerYearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
@@ -419,7 +421,9 @@ const fr: WebTranslations = {
       'Veuillez indiquer si votre conjoint a déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
     [ValidationErrors.provideIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir votre revenu.',
-    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu net.',
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu net prévu.',
+    [ValidationErrors.incomeEmptyReceiveOAS]:
+      'Veuillez entrer votre revenu net.',
     [ValidationErrors.oasDeferEmpty]:
       'Veuillez sélectionner quand vous souhaitez commencer à recevoir la pension de la SV.',
     [ValidationErrors.incomeBelowZero]:

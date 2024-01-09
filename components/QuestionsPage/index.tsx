@@ -149,20 +149,7 @@ export const QuestionsPage: React.VFC = ({}) => {
     setIncomeHintText(incomeHintText)
     setPartnerIncomeHintTitle(partnerIncomeHintTitle)
     setPartnerIncomeHintText(partnerIncomeHintText)
-  }, [
-    receiveOAS,
-    tsln.incomeHintText,
-    tsln.incomeHintTextReceiveOAS,
-    tsln.incomeHintTitle,
-    tsln.incomeHintTitleReceiveOAS,
-    tsln.incomeLabel,
-    tsln.incomeLabelReceiveOAS,
-    tsln.partnerIncomeHintText,
-    tsln.partnerIncomeHintTextReceiveOAS,
-    tsln.partnerIncomeHintTitleReceiveOAS,
-    tsln.partnerIncomeLabel,
-    tsln.partnerIncomeLabelReceiveOAS,
-  ])
+  }, [receiveOAS, tsln])
 
   // On mobile only, captures enter keypress, does NOT submit form, and blur (hide) keyboard
   useEffect(() => {
@@ -234,7 +221,12 @@ export const QuestionsPage: React.VFC = ({}) => {
     )
     console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {
-      const [formError, alertError] = getErrorForField(field, errorsVisible)
+      const [formError, alertError] = getErrorForField(
+        field,
+        errorsVisible,
+        receiveOAS,
+        tsln
+      )
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -439,6 +431,7 @@ export const QuestionsPage: React.VFC = ({}) => {
               errorsVisible[field.key] &&
               (!errorsAsAlerts.includes(field.key) || field.value === undefined)
           )}
+          receiveOAS={receiveOAS}
         />
       </div>
       <div
