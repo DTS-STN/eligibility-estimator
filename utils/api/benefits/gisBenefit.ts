@@ -66,7 +66,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
     const meetsReqIncome =
       skipReqIncome ||
-      this.input.income.relevant < maxIncome ||
+      this.input.income.adjustedRelevant < maxIncome ||
       /*
         This exception is pretty weird, but necessary to work around the fact that a client can be entitled to GIS
         while being above the GIS income limit. This scenario can happen when the client gets Partial OAS, as
@@ -87,7 +87,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             detail: this.translations.detail.conditional,
           }
         } else if (skipReqIncome) {
-          if (this.input.income.relevant >= maxIncome) {
+          if (this.input.income.adjustedRelevant >= maxIncome) {
             return {
               result: ResultKey.INCOME_DEPENDENT,
               reason: ResultReason.INCOME,
@@ -108,7 +108,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         // move get entitlement amount to here, because when income is not provided, it will cause exception
         const amount = this.formulaResult()
 
-        if (this.input.income.client >= maxIncome && amount <= 0) {
+        if (this.input.income.adjustedIncome >= maxIncome && amount <= 0) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
@@ -122,7 +122,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             reason: ResultReason.INCOME,
             detail: this.translations.detail.gis.incomeTooHigh,
           }
-        } else if (this.input.income.relevant >= maxIncome && amount <= 0) {
+        } else if (
+          this.input.income.adjustedRelevant >= maxIncome &&
+          amount <= 0
+        ) {
           return {
             result: ResultKey.ELIGIBLE,
             reason: ResultReason.INCOME,
@@ -241,7 +244,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
    */
   protected formulaResult(): number {
     const gisResult = new EntitlementFormula(
-      this.input.income.relevant,
+      this.input.income.adjustedRelevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age,

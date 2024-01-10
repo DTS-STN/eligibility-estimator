@@ -65,23 +65,43 @@ const fr: TooltipTranslations = {
   },
   [FieldKey.INCOME]: {
     heading: apiFr.category.income,
-    moreinfo: 'Quelle année de revenus sera utilisée pour ma demande?',
+    moreinfo: 'Ce revenu sera-t-il utilisé dans votre demande?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px;'> \
-            Par défaut, votre dernière déclaration de revenus sera utilisée lors de votre demande. \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            Non, il s’agit d’une estimation. Vos <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> réels seront évalués lors de votre demande. \
             </p> \
           </div> \
           ",
   },
+  [FieldKey.INCOME_WORK]: {
+    heading: apiFr.category.income,
+    moreinfo: '	Pourquoi demandons-nous vos revenus d’emploi?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            Vos premiers 15&nbsp;000&nbsp;$ de revenu lié au travail sont sujets à des exemptions. Nous allons les calculer pour vous. \
+            </p> \
+           </div> \
+    ",
+  },
   [FieldKey.PARTNER_INCOME]: {
     heading: apiFr.category.income,
-    moreinfo: 'Quelle année de revenus sera utilisée pour ma demande?',
+    moreinfo: 'Ce revenu sera-t-il utilisé dans votre demande?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px;'> \
-            Par défaut, la dernière déclaration de revenus de votre conjoint sera utilisée lors de votre demande. \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            Non, il s’agit d’une estimation. Ses <a style='text-decoration: underline; color: rgba(40, 65, 98, 1); display: flex;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions<img style='padding: 0px 0px 3px 4px;' src='/openNewTab.svg'/></a> réels seront évalués lors de votre demande. \
             </p> \
           </div> \
           ",
+  },
+  [FieldKey.PARTNER_INCOME_WORK]: {
+    heading: apiFr.category.marital,
+    moreinfo: 'Pourquoi demandons-nous ses revenus d’emploi?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            Ses premiers 15&nbsp;000&nbsp;$ de revenu lié au travail sont sujets à des exemptions. Nous allons les calculer pour vous. \
+            </p> \
+           </div> \
+    ",
   },
 }
 

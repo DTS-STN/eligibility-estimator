@@ -1,7 +1,11 @@
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { FieldCategory, Language } from '../../utils/api/definitions/enums'
+import {
+  FieldCategory,
+  Language,
+  ValidationErrors,
+} from '../../utils/api/definitions/enums'
 import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
 import {
   CardConfig,
@@ -174,18 +178,31 @@ export function getStepValidity(keyStepMap, form, inputs): StepValidity {
 /**
  * Get error text for each field. Some fields show up as alerts while some are regular form errors
  */
-export function getErrorForField(field, errorsVisible) {
+export function getErrorForField(field, errorsVisible, receiveOAS, tsln) {
   const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
-  let formError
-  let alertError
+  let formError = ''
+  let alertError = ''
 
   if (field.value === undefined || !errorsAsAlerts.includes(field.key)) {
-    formError = errorsVisible[field.key] ? field.error : ''
-  } else {
-    alertError =
-      errorsAsAlerts.includes(field.key) &&
-      errorsVisible[field.key] &&
-      field.error
+    if (field.key === 'income' || field.key === 'partnerIncome') {
+      const errorKey =
+        field.key === 'income'
+          ? receiveOAS
+            ? ValidationErrors.incomeEmptyReceiveOAS
+            : ValidationErrors.incomeEmpty
+          : receiveOAS
+          ? ValidationErrors.partnerIncomeEmptyReceiveOAS
+          : ValidationErrors.partnerIncomeEmpty
+
+      formError =
+        field.value === undefined && errorsVisible[field.key]
+          ? tsln.validationErrors[errorKey] || ''
+          : ''
+    } else {
+      formError = errorsVisible[field.key] ? field.error : ''
+    }
+  } else if (errorsVisible[field.key] && errorsAsAlerts.includes(field.key)) {
+    alertError = field.error
   }
 
   return [formError, alertError]

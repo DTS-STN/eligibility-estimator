@@ -41,6 +41,8 @@ describe('OAS entitlement scenarios', () => {
       yearsInCanadaSince18: 39,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectOasEligible(res, EntitlementResultType.PARTIAL, 650.16)
   })
@@ -58,6 +60,8 @@ describe('GIS entitlement scenarios', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 425.72)
   })
@@ -72,6 +76,8 @@ describe('GIS entitlement scenarios', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 995.99)
   })
@@ -89,6 +95,8 @@ describe('GIS entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     // expectGisEligible(res, 892.99)
   })
@@ -106,6 +114,8 @@ describe('GIS entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 995.99)
   })
@@ -124,6 +134,8 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     // expectGisEligible(res, 861.99)
   })
@@ -142,6 +154,8 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     // expectGisEligible(res, 326.82)
   })
@@ -160,6 +174,8 @@ describe('GIS entitlement scenarios', () => {
       partnerIncome: 1000,
       ...partnerNoHelpNeeded,
       partnerAge: 58,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 549.82)
   })
@@ -177,6 +193,8 @@ describe('GIS entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 599.53)
   })
@@ -194,6 +212,8 @@ describe('GIS entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 58,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     // expectGisEligible(res, 599.53)
   })
@@ -211,6 +231,8 @@ describe('GIS entitlement scenarios', () => {
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 1288.4)
   })
@@ -228,6 +250,8 @@ describe('GIS entitlement scenarios', () => {
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectGisEligible(res, 1455.11)
   })
@@ -250,6 +274,8 @@ describe('basic Allowance scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.body.results.alw.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -276,6 +302,8 @@ describe('Allowance entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectAlwEligible(res, 362.82)
   })
@@ -294,6 +322,8 @@ describe('Allowance entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectAlwEligible(res, 598.65)
   })
@@ -311,6 +341,8 @@ describe('Allowance entitlement scenarios', () => {
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
       partnerAge: 65,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectAlwEligible(res, 1266.36)
   })
@@ -322,6 +354,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       incomeAvailable: true,
       income: legalValues.alw.afsIncomeLimit + 1,
       ...age65NoDefer,
+      incomeWork: 0,
       receiveOAS: false,
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -347,6 +380,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -368,6 +403,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 20,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -412,6 +449,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       partnerBenefitStatus: PartnerBenefitStatus.NONE,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.body.results.alws.eligibility.result).toEqual(
       ResultKey.INELIGIBLE
@@ -433,6 +472,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: undefined,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     // expectAlwsEligible(res)
   })
@@ -450,6 +491,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: true,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
 
     expect(res.status).toEqual(400)
@@ -474,6 +517,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: true,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
@@ -499,6 +544,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 10,
       everLivedSocialCountry: false,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
@@ -520,6 +567,8 @@ describe('basic Allowance for Survivor scenarios', () => {
       yearsInCanadaSince18: 9,
       everLivedSocialCountry: false,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
@@ -544,6 +593,8 @@ describe('AFS entitlement scenarios', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectAlwsEligible(res, 301.48)
   })
@@ -558,6 +609,8 @@ describe('AFS entitlement scenarios', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectAlwsEligible(res, 731.31)
   })
@@ -572,6 +625,8 @@ describe('AFS entitlement scenarios', () => {
       ...canadian,
       ...canadaWholeLife,
       ...partnerUndefined,
+      incomeWork: 0,
+      partnerIncomeWork: 0,
     })
     //expectAlwsEligible(res, 1509.58)
   })

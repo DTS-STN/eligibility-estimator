@@ -40,7 +40,10 @@ const en: Translations = {
   question: {
     [FieldKey.INCOME_AVAILABLE]:
       'Are you able to provide us your annual net income?',
-    [FieldKey.INCOME]: 'What is your annual net income?',
+    [FieldKey.INCOME]:
+      'What will be your annual net income when you start receiving your benefits?',
+    [FieldKey.INCOME_WORK]:
+      'How much of this amount is from work or self-employment income?',
     [FieldKey.AGE]: 'When were you born?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Do you already receive the Old Age Security pension?',
@@ -68,6 +71,8 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Are you able to provide us your partner's annual net income?",
     [FieldKey.PARTNER_INCOME]: "What is your partner's annual net income?",
+    [FieldKey.PARTNER_INCOME_WORK]:
+      'How much of this amount is from work or self-employment income?',
     [FieldKey.PARTNER_AGE]: 'When was your partner born?',
     [FieldKey.PARTNER_LIVING_COUNTRY]:
       'What country does your partner live in?',
@@ -86,6 +91,7 @@ const en: Translations = {
     [FieldKey.OAS_AGE]: 'OAS pension deferral',
     [FieldKey.INCOME_AVAILABLE]: 'Net income',
     [FieldKey.INCOME]: 'Net income',
+    [FieldKey.INCOME_WORK]: 'Salary exemption',
     [FieldKey.LEGAL_STATUS]: 'Legal status',
     [FieldKey.LIVING_COUNTRY]: 'Country of residence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Only lived in Canada',
@@ -97,6 +103,7 @@ const en: Translations = {
     [FieldKey.INV_SEPARATED]: 'Involuntarily separated',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: "Partner's net income",
     [FieldKey.PARTNER_INCOME]: "Partner's net income",
+    [FieldKey.PARTNER_INCOME_WORK]: 'Partner’s salary exemption',
     [FieldKey.PARTNER_BENEFIT_STATUS]: 'Partner receives OAS pension',
     [FieldKey.PARTNER_AGE]: "Partner's age",
     [FieldKey.PARTNER_LEGAL_STATUS]: 'Partner has legal status',
@@ -114,6 +121,7 @@ const en: Translations = {
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
     [FieldKey.INCOME]: 'Edit your net income',
+    [FieldKey.INCOME_WORK]: 'Edit your salary',
     [FieldKey.LEGAL_STATUS]: 'Edit your legal status',
     [FieldKey.LIVING_COUNTRY]: 'Edit your country of residence',
     [FieldKey.LIVED_ONLY_IN_CANADA]: 'Edit if you have only lived in Canada',
@@ -126,6 +134,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
       "Edit if you will provide your partner's income",
     [FieldKey.PARTNER_INCOME]: 'Edit your partner’s net income',
+    [FieldKey.PARTNER_INCOME_WORK]: "Edit your partner's salary",
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Edit if your partner receives the OAS pension',
     [FieldKey.PARTNER_AGE]: "Edit your partner's age",
@@ -141,15 +150,15 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      `Include income after taxes from all sources (line&nbsp;23600 of your income tax return), minus: ` +
-      `<ul><li>any Old Age Security payments</li>` +
-      `<li>your first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul>`,
+      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of your T1). Do not include what you receive from any of the Old Age Security benefits.',
+    [FieldKey.INCOME_WORK]:
+      'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
       'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
     [FieldKey.PARTNER_INCOME]:
-      `Include income after taxes from all sources (line&nbsp;23600 of their income tax return), minus: ` +
-      `<ul><li>any Old Age Security payments</li>` +
-      `<li>their first $5,000 of employment or self-employment income, and 50% of the next $10,000</li></ul>`,
+      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of their T1). Do not include what they receive from any of the Old Age Security benefits.',
+    [FieldKey.PARTNER_INCOME_WORK]:
+      'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
     [FieldKey.OAS_DEFER_DURATION]:
       'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:

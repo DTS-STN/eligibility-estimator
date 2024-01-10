@@ -27,6 +27,7 @@ import { FieldConfig, FieldKey } from './fields'
 export interface RequestInput {
   incomeAvailable?: boolean
   income: number // personal income
+  incomeWork: number // personal income from work
   age: number
   clientBirthDate?: string
   receiveOAS: boolean
@@ -44,6 +45,7 @@ export interface RequestInput {
   partnerBenefitStatus: PartnerBenefitStatus
   partnerIncomeAvailable?: boolean
   partnerIncome: number // partner income
+  partnerIncomeWork: number // partner income from work
   partnerAge: number
   partnerBirthDate?: string
   partnerLivingCountry: string // country code

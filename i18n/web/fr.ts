@@ -385,8 +385,18 @@ const fr: WebTranslations = {
       'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',
     [ValidationErrors.providePartnerIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
+    [ValidationErrors.incomeWorkEmpty]:
+      'Veuillez entrer vos revenus d’emploi ou de travail indépendant.',
+    [ValidationErrors.incomeWorkGreaterThanNetIncome]:
+      'Ce montant ne peut pas être plus élevé que votre revenu annuel net.',
+    [ValidationErrors.partnerIncomeWorkEmpty]:
+      'Veuillez entrer les revenus d’emploi ou de travail indépendant de votre conjoint.',
+    [ValidationErrors.partnerIncomeWorkGreaterThanNetIncome]:
+      'Ce montant ne peut pas être plus élevé que le revenu annuel net de votre conjoint.',
     [ValidationErrors.partnerIncomeEmpty]:
-      'Veuillez entrer le revenu de votre conjoint.',
+      'Veuillez entrer le revenu net prévu de votre conjoint.',
+    [ValidationErrors.partnerIncomeEmptyReceiveOAS]:
+      'Veuillez entrer le revenu net de votre conjoint.',
     [ValidationErrors.partnerYearsSince18Empty]:
       'Veuillez entrer un nombre qui ne dépasse pas l’âge de votre conjoint moins 18 ans.',
     [ValidationErrors.maritalStatusEmpty]:
@@ -411,7 +421,9 @@ const fr: WebTranslations = {
       'Veuillez indiquer si votre conjoint a déjà vécu dans un pays ayant un accord de sécurité sociale avec le Canada.',
     [ValidationErrors.provideIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir votre revenu.',
-    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu.',
+    [ValidationErrors.incomeEmpty]: 'Veuillez entrer votre revenu net prévu.',
+    [ValidationErrors.incomeEmptyReceiveOAS]:
+      'Veuillez entrer votre revenu net.',
     [ValidationErrors.oasDeferEmpty]:
       'Veuillez sélectionner quand vous souhaitez commencer à recevoir la pension de la SV.',
     [ValidationErrors.incomeBelowZero]:
@@ -474,6 +486,44 @@ const fr: WebTranslations = {
     months: 'Mois',
     years: 'Années',
   },
+  incomeLabel:
+    'Quel sera votre revenu annuel net lorsque vous commencerez à recevoir vos prestations?',
+  incomeLabelReceiveOAS: 'Quel est votre revenu annuel net?',
+  partnerIncomeLabel:
+    'Quel sera le revenu annuel net de votre conjoint lorsque vous commencerez à recevoir vos prestations?',
+  partnerIncomeLabelReceiveOAS:
+    'Quel est le revenu annuel net de votre conjoint?',
+  incomeHintTitle: 'Ce revenu sera-t-il utilisé dans votre demande?',
+  incomeHintTitleReceiveOAS: 'Votre revenu va bientôt changer?',
+  incomeHintText:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  Non, il s’agit d’une estimation. Vos <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> réels seront évalués lors de votre demande. \
+  </p> \
+</div> \
+",
+  incomeHintTextReceiveOAS:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank'>Communiquez avec nous<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> pour signaler cet événement. \
+  </p> \
+</div> \
+",
+  partnerIncomeHintTitleReceiveOAS: 'Son revenu va bientôt changer?',
+  partnerIncomeHintText:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  Non, il s’agit d’une estimation. Ses <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> réels seront évalués lors de votre demande. \
+  </p> \
+</div> \
+",
+  partnerIncomeHintTextReceiveOAS:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  Si votre conjoint prévoit une baisse de revenu, vous pouvez entrer son revenu prévu. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank'>Communiquez avec nous<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> pour signaler cet événement. \
+  </p> \
+</div> \
+",
 }
 
 export default fr
