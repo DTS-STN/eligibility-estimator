@@ -379,10 +379,14 @@ const en: WebTranslations = {
     [ValidationErrors.partnerIncomeEmpty]:
       "Please enter your partner's income.",
     [ValidationErrors.partnerYearsSince18Empty]:
-      "Please enter a number no higher than your partner's age minus 18.",
+      "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsInCanadaMinusAge]:
-      'Please enter a number no higher than your age minus 18.',
+      'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.yearsInCanadaMinusDeferred]:
+      'This number must be at least 10 at the time you deferred your pension.',
+    [ValidationErrors.yearsNotInCanadaMinusDeferred]:
+      'This number must be at least 20 at the time you deferred your pension.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
