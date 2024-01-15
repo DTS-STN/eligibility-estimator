@@ -5,7 +5,7 @@ import { TooltipTranslations } from './index'
 const en: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiEn.category.marital,
-    moreinfo: 'Which option applies to me?',
+    moreinfo: 'Which option applies to you?',
     text: "<p style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Single</span>: \
             You have never been married and are not in a common-law relationship. \
