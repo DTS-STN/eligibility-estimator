@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   disabled,
   ariaLabel,
-  ...attributes
+  attributes,
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
