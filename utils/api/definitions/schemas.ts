@@ -5,6 +5,7 @@ import legalValues from '../scrapers/output'
 import {
   Language,
   LegalStatus,
+  LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ValidationErrors,
@@ -103,22 +104,43 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
     .custom((value, helpers) => {
-      const { age, yearsInCanadaSince18 } = helpers.state.ancestors[0]
+      const { age, yearsInCanadaSince18, livingCountry } =
+        helpers.state.ancestors[0]
 
-      if (age > 0 && yearsInCanadaSince18 !== undefined) {
-        if (yearsInCanadaSince18 < 20) {
-          return helpers.message({
-            custom: value
-              ? ValidationErrors.yearsNotInCanadaMinusDeferred
-              : ValidationErrors.yearsInCanadaMinusAge,
-          })
-        } else {
-          if (age - 18 < yearsInCanadaSince18) {
+      if (livingCountry === LivingCountry.CANADA) {
+        if (age > 0 && yearsInCanadaSince18 !== undefined) {
+          if (yearsInCanadaSince18 < 10) {
             return helpers.message({
               custom: value
-                ? ValidationErrors.yearsInCanadaMinusAge
+                ? ValidationErrors.yearsInCanadaMinusDeferred
                 : ValidationErrors.yearsInCanadaMinusAge,
             })
+          } else {
+            if (age - 18 < yearsInCanadaSince18) {
+              return helpers.message({
+                custom: value
+                  ? ValidationErrors.yearsInCanadaMinusAge
+                  : ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
+          }
+        }
+      } else {
+        if (age > 0 && yearsInCanadaSince18 !== undefined) {
+          if (yearsInCanadaSince18 < 20) {
+            return helpers.message({
+              custom: value
+                ? ValidationErrors.yearsNotInCanadaMinusDeferred
+                : ValidationErrors.yearsInCanadaMinusAge,
+            })
+          } else {
+            if (age - 18 < yearsInCanadaSince18) {
+              return helpers.message({
+                custom: value
+                  ? ValidationErrors.yearsInCanadaMinusAge
+                  : ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
           }
         }
       }
