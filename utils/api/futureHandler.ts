@@ -100,7 +100,6 @@ export class FutureHandler {
     const alwsAge = eliObjAlws.ageOfEligibility
 
     const futureAges = [alwsAge, oasAge].filter((age) => !!age)
-
     const clientResult =
       futureAges.length !== 0
         ? futureAges.map((age) => {
@@ -137,9 +136,13 @@ export class FutureHandler {
           })
         : null
 
+    const clientResults = clientResult.filter((e) => {
+      return e
+    })
+
     return {
       ...this.futureResultsObj,
-      client: clientResult,
+      client: clientResults,
     }
   }
 
