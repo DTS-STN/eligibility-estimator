@@ -4,7 +4,7 @@ trigger:
 pr: develop
 
 variables:
-  azure.servicePrincipal: ''
+  azure.servicePrincipal: 'OASEE-Dynamic-Links-01/18/2024'
   webapp.name: 'app-eligibilityestimator-dev'
   webapp.resourceGroup: 'rg-eligibilityestimator-dev'
   webapp.slotName: null
