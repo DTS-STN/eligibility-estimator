@@ -100,41 +100,42 @@ export class FutureHandler {
     const alwsAge = eliObjAlws.ageOfEligibility
 
     const futureAges = [alwsAge, oasAge].filter((age) => !!age)
-
     const clientResult =
       futureAges.length !== 0
-        ? futureAges.map((age) => {
-            this.newQuery['age'] = age
+        ? futureAges
+            .map((age) => {
+              this.newQuery['age'] = age
 
-            if (age === oasAge) {
-              this.newQuery['receiveOAS'] = 'false'
-            }
+              if (age === oasAge) {
+                this.newQuery['receiveOAS'] = 'false'
+              }
 
-            if (
-              this.query.livedOnlyInCanada === 'false' &&
-              this.query.yearsInCanadaSince18
-            ) {
-              this.newQuery['yearsInCanadaSince18'] = String(
-                Math.min(40, eliObjOas.yearsOfResAtEligibility)
+              if (
+                this.query.livedOnlyInCanada === 'false' &&
+                this.query.yearsInCanadaSince18
+              ) {
+                this.newQuery['yearsInCanadaSince18'] = String(
+                  Math.min(40, eliObjOas.yearsOfResAtEligibility)
+                )
+              }
+
+              const { value } = schema.validate(this.newQuery, {
+                abortEarly: false,
+              })
+              const handler = new BenefitHandler(
+                value,
+                true,
+                +this.query.age,
+                +this.query.yearsInCanadaSince18
               )
-            }
 
-            const { value } = schema.validate(this.newQuery, {
-              abortEarly: false,
+              const eligibleBenefits = this.getEligibleBenefits(
+                handler.benefitResults.client
+              )
+
+              return eligibleBenefits ? { [age]: eligibleBenefits } : null
             })
-            const handler = new BenefitHandler(
-              value,
-              true,
-              +this.query.age,
-              +this.query.yearsInCanadaSince18
-            )
-
-            const eligibleBenefits = this.getEligibleBenefits(
-              handler.benefitResults.client
-            )
-
-            return eligibleBenefits ? { [age]: eligibleBenefits } : null
-          })
+            .filter((result) => result !== null)
         : null
 
     return {
