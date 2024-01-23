@@ -294,7 +294,6 @@ export class FutureHandler {
           }
         }
       })
-      console.log(result)
 
       result = {
         client: clientResults.length !== 0 ? clientResults : null,

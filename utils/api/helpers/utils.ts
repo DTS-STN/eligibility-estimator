@@ -179,7 +179,6 @@ export function buildQuery(
           : Number(partnerDeferralMeta.residency)
       )
     )
-    console.log(newQuery['partnerYearsInCanadaSince18'])
   }
 
   return newQuery
