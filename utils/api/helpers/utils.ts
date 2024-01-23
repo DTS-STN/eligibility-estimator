@@ -116,12 +116,15 @@ export function buildQuery(
         )
       } else {
         // just add residency
-        const newYrsInCanada = Math.min(
-          40,
-          Number(userAge) -
-            Number(query.age) +
-            Number(query.yearsInCanadaSince18)
-        )
+        const newYrsInCanada =
+          query.livingCountry == 'CAN'
+            ? Math.min(
+                40,
+                Number(userAge) -
+                  Number(query.age) +
+                  Number(query.yearsInCanadaSince18)
+              )
+            : query.yearsInCanadaSince18
         newQuery['yearsInCanadaSince18'] = String(Math.floor(newYrsInCanada))
       }
     }
@@ -158,13 +161,14 @@ export function buildQuery(
     query.partnerYearsInCanadaSince18
   ) {
     const increaseResidence = !partnerAlreadyOasEligible
-
     // const ageLimit = partnerAge < 65 ? 65 : partnerAge
 
     const partnerNewYrsInCanada =
-      Number(partnerAge) -
-      Number(query.partnerAge) +
-      Number(query.partnerYearsInCanadaSince18)
+      query.partnerLivingCountry === 'CAN'
+        ? Number(partnerAge) -
+          Number(query.partnerAge) +
+          Number(query.partnerYearsInCanadaSince18)
+        : query.partnerYearsInCanadaSince18
 
     newQuery['partnerYearsInCanadaSince18'] = String(
       Math.floor(
@@ -175,6 +179,7 @@ export function buildQuery(
           : Number(partnerDeferralMeta.residency)
       )
     )
+    console.log(newQuery['partnerYearsInCanadaSince18'])
   }
 
   return newQuery
@@ -219,9 +224,10 @@ export function OasEligibility(
       yearsInCanada++
     }
     ageOfEligibility = Math.floor(age)
-    yearsOfResAtEligibility = Math.round(
-      ageOfEligibility - ageAtStart + yearsInCanadaAtStart
-    )
+    yearsOfResAtEligibility =
+      livingCountry == 'CAN'
+        ? Math.round(ageOfEligibility - ageAtStart + yearsInCanadaAtStart)
+        : yearsInCanadaAtStart
   }
   return {
     ageOfEligibility,
