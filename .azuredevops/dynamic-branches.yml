@@ -1,7 +1,8 @@
 trigger:
   - none
 
-pr: develop
+pr:
+  - develop
 
 variables:
   azure.servicePrincipal: 'OASEE-Dynamic-Links-01/18/2024'
