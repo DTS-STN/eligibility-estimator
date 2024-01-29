@@ -37,6 +37,15 @@ steps:
         latest
       arguments: |
         --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
+        --build-arg home=/app
+        --build-arg NEXT_BUILD_DATE=$(app.buildDate)
+        --build-arg NEXTAUTH_URL=$(app.domain)
+        --build-arg NEXT_AUTH_USERNAME=$(NEXT-AUTH-USERCODE)
+        --build-arg NEXT_AUTH_PASSWORD=$(NEXT-AUTH-PASSWORD)
+        --build-arg NEXTAUTH_SECRET=$(NEXT_AUTH_SECRET)
+        --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
+        --build-arg APP_ENV=$(app.environment)
+        --build-arg LOGGING_LEVEL=$(app.logLevel)
 
   - task: Docker@2
     displayName: 'Push image'
