@@ -46,7 +46,12 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    const eliObj = OasEligibility(age, yearsInCanada)
+    const eliObj = OasEligibility(
+      age,
+      yearsInCanada,
+      this.query.livingCountry === 'CAN',
+      String(this.query.livingCountry)
+    )
 
     this.newQuery['age'] = String(eliObj.ageOfEligibility)
     this.newQuery['receiveOAS'] = 'false'
@@ -93,7 +98,12 @@ export class FutureHandler {
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
 
-    const eliObjOas = OasEligibility(age, yearsInCanada)
+    const eliObjOas = OasEligibility(
+      age,
+      yearsInCanada,
+      this.query.livingCountry === 'CAN',
+      String(this.query.livingCountry)
+    )
     const oasAge = eliObjOas.ageOfEligibility
 
     const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
