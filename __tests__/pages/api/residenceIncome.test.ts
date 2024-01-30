@@ -80,22 +80,23 @@ describe('ResidenceIncome', () => {
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
 
-    //client future results
+    // client future results
     expectFutureOasGisBenefitEligible(res, 65, 454.09, 0, 0)
   })
 
   //   /* CALC-192 */
-  //   it('should pass the 192 test - CALC-192', async () => {
-  //     const desiredName = 'CALC-192'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 192 test - CALC-192', async () => {
+    const desiredName = 'CALC-192'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client future results
+    expectFutureOasGisBenefitEligible(res, 65, 523.95, 0, 0)
+
+    // partner future results
+    expectFutureOasGisBenefitEligible(res, 65, 436.63, 1305.42, 0, true)
+    expectFutureOasGisBenefitEligible(res, 70, 436.63, 807.06, 1, true)
+  })
 
   //   /* CALC-193 */
   //   it('should pass the 193 test - CALC-193', async () => {
