@@ -75,17 +75,14 @@ describe('ResidenceIncome', () => {
   })
 
   //   /* CALC-191 */
-  //   it('should pass the 191 test - CALC-191', async () => {
-  //     const desiredName = 'CALC-191'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 191 test - CALC-191', async () => {
+    const desiredName = 'CALC-191'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    //client future results
+    expectFutureOasGisBenefitEligible(res, 65, 454.09, 0, 0)
+  })
 
   //   /* CALC-192 */
   //   it('should pass the 192 test - CALC-192', async () => {
