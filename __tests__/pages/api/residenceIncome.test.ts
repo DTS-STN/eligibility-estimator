@@ -99,30 +99,30 @@ describe('ResidenceIncome', () => {
   })
 
   //   /* CALC-193 */
-  //   it('should pass the 193 test - CALC-193', async () => {
-  //     const desiredName = 'CALC-193'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 193 test - CALC-193', async () => {
+    const desiredName = 'CALC-193'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    //client future results
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0, 0)
+
+    // partner future results
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 545.09, 0, true)
+  })
 
   //   /* CALC-194 */
-  //   it('should pass the 194 test - CALC-194', async () => {
-  //     const desiredName = 'CALC-194'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 194 test - CALC-194', async () => {
+    const desiredName = 'CALC-194'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    //client future results
+    expectFutureOasGisBenefitEligible(res, 65, 384.23, 0, 0)
+
+    // partner future results
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 270.3, 0, true)
+  })
 
   //   /* CALC-195 */
   //   it('should pass the 195 test - CALC-195', async () => {
