@@ -6,6 +6,7 @@ import {
 
 import { mockGetRequest } from '../../utils/factory'
 import {
+  expectAllIneligible,
   expectAlwEligible,
   expectAlwMarital,
   expectAlwsMarital,
@@ -147,84 +148,94 @@ describe('ResidenceIncome', () => {
     expectFutureOasGisBenefitEligible(res, 65, 436.63, 0, 0)
 
     // partner future results
-    // expectFutureOasGisBenefitEligible(res, 65, 261.98, 0, 0, true)
+    expectAllIneligible(res, true)
   })
 
   //   /* CALC-197 */
-  //   it('should pass the 197 test - CALC-197', async () => {
-  //     const desiredName = 'CALC-197'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 197 test - CALC-197', async () => {
+    const desiredName = 'CALC-197'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client future results
+    expectFutureOasGisBenefitEligible(res, 65, 611.28, 0, 0)
+
+    // partner future results
+    expectAllIneligible(res, true)
+  })
 
   //   /* CALC-198 */
-  //   it('should pass the 198 test - CALC-198', async () => {
-  //     const desiredName = 'CALC-198'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 198 test - CALC-198', async () => {
+    const desiredName = 'CALC-198'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client future results
+    expectFutureOasGisBenefitEligible(res, 65, 611.28, 1130.77, 0)
+
+    // partner future results
+    expectAllIneligible(res, true)
+  })
 
   //   /* CALC-199 */
-  //   it('should pass the 199 test - CALC-199', async () => {
-  //     const desiredName = 'CALC-199'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 199 test - CALC-199', async () => {
+    const desiredName = 'CALC-199'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 237.52)
+    // expectGisEligible(res, 806.25) // 765.47
+
+    // client future results
+    // expectFutureOasGisBenefitEligible(res, 71, 237.52, 573.25, 0)
+
+    // partner results
+    // expectAlwEligible(res, 230.3, true)
+
+    // partner future results
+    // expectFutureOasGisBenefitEligible(res, 65, 192.12, 503.79, 0, true)
+  })
 
   //   /* CALC-200 */
-  //   it('should pass the 200 test - CALC-200', async () => {
-  //     const desiredName = 'CALC-200'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 200 test - CALC-200', async () => {
+    const desiredName = 'CALC-200'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client results
+    expectOasNotEligible(res, true)
+    expectGisEligible(res, 0.0)
+    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+
+    // client future results
+    expectFutureOasGisBenefitEligible(res, 69.5, 0, 0, 0)
+
+    // partner future results
+    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0, 1, true)
+  })
 
   //   /* CALC-201 */
-  //   it('should pass the 201 test - CALC-201', async () => {
-  //     const desiredName = 'CALC-201'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 201 test - CALC-201', async () => {
+    const desiredName = 'CALC-201'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client results
+    expectAlwsMarital(res)
+
+    // partner results
+    // expectOasEligible(res, EntitlementResultType.PARTIAL, 593.81, true)
+    // expectGisEligible(res, 537.61, true)
+  })
 
   //   /* CALC-202 */
-  //   it('should pass the 202 test - CALC-202', async () => {
-  //     const desiredName = 'CALC-202'
-  //     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //     const res = await mockGetRequest(extractedPayload)
+  it('should pass the 202 test - CALC-202', async () => {
+    const desiredName = 'CALC-202'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //     //client results
-  //     expectOasNotEligible(res, true)
-  //     expectFutureOasGisBenefitEligible(res, 65, 349.3, 0, 0)
-  //     expectAlwTooOld(res)
-  //     expectAlwsMarital(res)
-  //   })
+    // client results
+    expectAlwEligible(res, 329.28)
+  })
 })
