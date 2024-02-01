@@ -107,7 +107,7 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       rowToTransform["Partner's Net Worldwide Income"] === 'N/A'
         ? undefined
         : Number(rowToTransform["Partner's Net Worldwide Income"]), // partner income
-    partnerIncomeWork: 0,
+    partnerIncomeWork: Number(rowToTransform['Partner exemption amount']),
     partnerAge:
       rowToTransform['Partner Age'] === 'N/A'
         ? undefined
