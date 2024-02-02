@@ -159,7 +159,6 @@ export function getAlwNextSteps(
   apiTsln: Translations,
   tsln: WebTranslations
 ) {
-  console.log(inputAge)
   if (result.eligibility.result === ResultKey.ELIGIBLE) {
     const ifYouApplyText =
       apiTsln.detail.alwIfYouApply +
