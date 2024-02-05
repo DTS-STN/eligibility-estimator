@@ -18,7 +18,11 @@ export const DeferralTable: React.VFC<{
       aria-describedby={`${apiTsln.oasDeferralTable.title} desc`}
       className="mt-8 mb-8 text-center w-full md:w-7/12 table-fixed"
     >
-      <caption data-cy="deferral-title" className="mb-3 font-bold">
+      <caption
+        id={`${apiTsln.oasDeferralTable.title} desc`}
+        data-cy="deferral-title"
+        className="mb-3 font-bold"
+      >
         {apiTsln.oasDeferralTable.title}
       </caption>
       <thead data-cy="deferral-heading">
