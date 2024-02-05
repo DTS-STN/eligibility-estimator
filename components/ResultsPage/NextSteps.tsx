@@ -175,6 +175,7 @@ export function getAlwNextSteps(
         nextStepText.nextStepContent += ifYouApplyText
       }
     } else if (result.entitlement.result === 0) {
+      nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
       nextStepText.nextStepContent += ifYouApplyText
     }
   }
