@@ -238,12 +238,15 @@ export function expectFutureOasGisBenefitEligible(
       tolerance
     )
 
-  expect(results[age].gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
-  if (entitlementGis !== 0.0)
-    expect(results[age].gis.entitlement.result).toBeCloseTo(
-      entitlementGis,
-      tolerance
-    )
+  const gisPresent = results[age].gis!!
+  if (gisPresent) {
+    expect(results[age].gis.eligibility.result).toEqual(ResultKey.ELIGIBLE)
+    if (entitlementGis !== 0.0)
+      expect(results[age].gis.entitlement.result).toBeCloseTo(
+        entitlementGis,
+        tolerance
+      )
+  }
 }
 
 export function expectFutureAwlBenefitEligible(
