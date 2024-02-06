@@ -402,6 +402,8 @@ const en: Translations = {
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your combined income is less than&nbsp;",
+    alwsIfYouApply:
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
     alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
