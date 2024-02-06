@@ -50,7 +50,11 @@ export const ErrorsSummary: any = ({ errorFields, receiveOAS }) => {
       : ' erreurs ont été trouvées'
 
   return (
-    <div id="errorField" className="border-2 border-danger rounded py-4 mb-2">
+    <div
+      id="errorField"
+      className="border-2 border-danger rounded py-4 mb-2"
+      aria-live="polite"
+    >
       <Message
         id={`form-errors-${errorFields.length}`}
         type="danger"
