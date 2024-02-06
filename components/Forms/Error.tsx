@@ -17,7 +17,9 @@ export const Error: React.FC<ErrorProps> = ({ id, errorMessage }) => {
           <img src="/error.svg" alt={errorMessage} />
         </span>
       </div>
-      <div className="errorText text-xl">{errorMessage}</div>
+      <div aria-live="assertive" className="errorText text-xl">
+        {errorMessage}
+      </div>
     </div>
   )
 }
