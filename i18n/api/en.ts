@@ -465,7 +465,7 @@ const en: Translations = {
       futureEligibleIncomeTooHigh:
         'You may be eligible once you turn 65. If your income stays the same, you may not receive a monthly payment.',
       ifYouApply:
-        "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.",
+        "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your combined income qualifies.",
       canApplyOnline: 'You can apply for this benefit online.',
       ifYouAlreadyApplied:
         'If you already applied for the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
