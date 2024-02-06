@@ -308,7 +308,7 @@ const en: WebTranslations = {
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <span style="font-weight: bold;">based on current rates</span>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
+      'The following is only an estimate of your eligibility and monthly payments <strong style="font-weight: bold;">based on current rates</strong>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
