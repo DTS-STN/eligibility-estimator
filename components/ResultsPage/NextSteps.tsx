@@ -193,7 +193,7 @@ export function getAlwsNextSteps(
 ) {
   if (result.eligibility.result === ResultKey.ELIGIBLE) {
     const ifYouApplyText = `${
-      apiTsln.detail.alwIfYouApply
+      apiTsln.detail.alwsIfYouApply
     }<strong data-cy='next-step-limit'>${numberToStringCurrency(
       legalValues.alw.afsIncomeLimit,
       apiTsln._language,
