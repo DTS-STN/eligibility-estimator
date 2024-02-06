@@ -475,7 +475,7 @@ const fr: Translations = {
       futureEligibleIncomeTooHigh:
         'Vous pourriez être admissible lorsque vous aurez 65 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
       ifYouApply:
-        'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est admissible.',
+        'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu combiné est admissible.',
       canApplyOnline:
         'Vous pouvez faire une demande pour cette prestation en ligne.',
       ifYouAlreadyApplied:
