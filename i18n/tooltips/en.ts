@@ -6,32 +6,33 @@ const en: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiEn.category.marital,
     moreinfo: 'Which option applies to you?',
-    text: "<p style='padding-bottom: 12px;'> \
+    text: "<ul> \
+            <li style='padding-bottom: 12px;'> \
             <span style='font-weight: bold;'>Single</span>: \
             You have never been married and are not in a common-law relationship. \
-          </p> \
-          <p style='padding-bottom: 12px;'> \
-            <span style='font-weight: bold;'>Divorced</span>: \
-            You're officially separated and have legally ended your marriage. \
-          </p> \
-          <p style='padding-bottom: 12px;'> \
-            <span style='font-weight: bold;'>Separated:</span> \
-            You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled. \
-          </p> \
-          <p style='padding-bottom: 12px;'> \
-            <span style='font-weight: bold;'>Married</span>: \
-            You and your spouse have had a ceremony that legally binds you to each other. \
-            Your marriage must be legally recognized in the country where it was performed and in Canada. \
-          </p> \
-          <p style='padding-bottom: 12px;'> \
-            <span style='font-weight: bold;'>Common-Law</span>: \
-            You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
-          </p> \
-          <p style='padding-bottom: 8px;'> \
-            <span style='font-weight: bold;'>Widowed</span>: \
-            Your spouse or common-law partner has died and you have not remarried or entered into a common-law relationship. \
-          </p> \
-          ",
+            </li> \
+            <li style='padding-bottom: 12px;'> \
+              <span style='font-weight: bold;'>Divorced</span>: \
+              You're officially separated and have legally ended your marriage. \
+            </li> \
+            <li style='padding-bottom: 12px;'> \
+              <span style='font-weight: bold;'>Separated:</span> \
+              You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled. \
+            </li> \
+            <li style='padding-bottom: 12px;'> \
+              <span style='font-weight: bold;'>Married</span>: \
+              You and your spouse have had a ceremony that legally binds you to each other. \
+              Your marriage must be legally recognized in the country where it was performed and in Canada. \
+            </li> \
+            <li style='padding-bottom: 12px;'> \
+              <span style='font-weight: bold;'>Common-Law</span>: \
+              You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
+            </li> \
+            <li style='padding-bottom: 8px;'> \
+              <span style='font-weight: bold;'>Widowed</span>: \
+              Your spouse or common-law partner has died and you have not remarried or entered into a common-law relationship. \
+            </li> \
+          </ul>",
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,
