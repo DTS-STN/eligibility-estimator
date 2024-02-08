@@ -42,6 +42,19 @@ export const YourAnswers: React.VFC<{
   }
 
   /**
+   * This is needed to display deduction income value.
+   */
+  function salaryExemption(income: number): number {
+    if (income <= 5000) {
+      return income
+    } else if (income <= 15000) {
+      return 5000 + (income - 5000) * 0.5
+    } else {
+      return 10000
+    }
+  }
+
+  /**
    * shouldDisplay
    *    Returns  False  when IncomeAvailable is Yes
    *    Returns  True   for any other scenario
@@ -74,7 +87,9 @@ export const YourAnswers: React.VFC<{
               <div className="grid gap-0 grid-cols-3">
                 <div className="col-span-2">
                   <strong
-                    dangerouslySetInnerHTML={{ __html: getDisplayValue(input) }}
+                    dangerouslySetInnerHTML={{
+                      __html: getDisplayValue(input),
+                    }}
                   />
                 </div>
                 <div className="justify-self-end self-end">
@@ -179,6 +194,16 @@ export const YourAnswers: React.VFC<{
     )
 
     const fieldType: FieldType = fieldData.type
+
+    if (input.key === 'incomeWork' || input.key === 'partnerIncomeWork') {
+      return numberToStringCurrency(
+        salaryExemption(Number(input.value)),
+        tsln._language,
+        {
+          rounding: 2,
+        }
+      )
+    }
 
     switch (fieldType) {
       case FieldType.NUMBER:

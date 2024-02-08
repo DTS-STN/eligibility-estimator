@@ -7,6 +7,7 @@ import { QuestionLabel } from './QuestionLabel'
 import { Tooltip } from '../Tooltip/tooltip'
 import { sanitizeCurrency } from './validation/utils'
 import { set } from 'lodash'
+import { TooltipTranslation } from '../../i18n/tooltips'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -15,6 +16,7 @@ export interface CurrencyFieldProps
   helpText?: string
   requiredText?: string
   error?: string
+  dynamicContent?: TooltipTranslation
 }
 
 /**
@@ -32,6 +34,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   helpText,
   requiredText,
   error,
+  dynamicContent,
 }) => {
   const locale = useRouter().locale
   const [fieldValue, setFieldValue] = useState(value)
@@ -72,6 +75,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         requiredText={requiredText}
         helpText={helpText}
         fieldId={`enter-${name}`}
+        dynamicContent={dynamicContent}
       />
 
       <NumberFormat

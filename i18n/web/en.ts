@@ -308,7 +308,7 @@ const en: WebTranslations = {
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <span style="font-weight: bold;">based on current rates</span>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
+      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
@@ -377,7 +377,17 @@ const en: WebTranslations = {
     [ValidationErrors.providePartnerIncomeEmpty]:
       "Please indicate if you're able to provide your partner's income.",
     [ValidationErrors.partnerIncomeEmpty]:
-      "Please enter your partner's income.",
+      "Please enter your partner's expected net income.",
+    [ValidationErrors.partnerIncomeEmptyReceiveOAS]:
+      "Please enter your partner's net income.",
+    [ValidationErrors.incomeWorkEmpty]:
+      'Please enter your work or self-employment income.',
+    [ValidationErrors.incomeWorkGreaterThanNetIncome]:
+      'This amount can’t be higher than your annual net income.',
+    [ValidationErrors.partnerIncomeWorkEmpty]:
+      "Please enter your partner's work or self-employment income.",
+    [ValidationErrors.partnerIncomeWorkGreaterThanNetIncome]:
+      'This amount can’t be higher than your partner’s annual net income.',
     [ValidationErrors.partnerYearsSince18Empty]:
       "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
@@ -401,7 +411,8 @@ const en: WebTranslations = {
       "Please indicate if you're involuntarily separated.",
     [ValidationErrors.provideIncomeEmpty]:
       "Please indicate if you're able to provide your income.",
-    [ValidationErrors.incomeEmpty]: 'Please enter your income.',
+    [ValidationErrors.incomeEmpty]: 'Please enter your expected net income.',
+    [ValidationErrors.incomeEmptyReceiveOAS]: 'Please enter your net income.',
     [ValidationErrors.oasDeferEmpty]:
       "Please select when you'd like to start receiving the OAS pension.",
     [ValidationErrors.incomeBelowZero]: 'Your income must be above zero.',
@@ -461,6 +472,43 @@ const en: WebTranslations = {
     months: 'Months',
     years: 'Years',
   },
+  incomeLabel:
+    'What will be your annual net income when you start receiving your benefits?',
+  incomeLabelReceiveOAS: 'What is your annual net income?',
+  partnerIncomeLabel:
+    'What will be your partner’s annual net income when you start receiving your benefits?',
+  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
+  incomeHintTitle: 'Will this income be used in your application?',
+  incomeHintTitleReceiveOAS: 'Is your income about to change?',
+  incomeHintText:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  No, this is an estimation. Your actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> will be assessed when you apply. \
+  </p> \
+</div> \
+",
+  incomeHintTextReceiveOAS:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  If you're expecting a drop in income, you can enter your estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> to report this event. \
+  </p> \
+</div> \
+",
+  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
+  partnerIncomeHintText:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  No, this is an estimation. Your partner’s actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> will be assessed when you apply. \
+  </p> \
+</div> \
+",
+  partnerIncomeHintTextReceiveOAS:
+    "<div style='margin-bottom: 16px;'> \
+  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+  If your partner is expecting a drop in income, you can enter their estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> to report this event. \
+  </p> \
+</div> \
+",
 }
 
 export default en

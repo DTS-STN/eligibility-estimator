@@ -40,7 +40,7 @@ export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
     const skipReqIncome = !this.input.income.provided
     const maxIncome = legalValues.alw.afsIncomeLimit
     const meetsReqIncome =
-      skipReqIncome || this.input.income.relevant < maxIncome
+      skipReqIncome || this.input.income.adjustedRelevant < maxIncome
 
     const requiredYearsInCanada = 10
     const meetsReqYears =
@@ -168,7 +168,7 @@ export class AlwsBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
   protected formulaResult(): number {
     return new EntitlementFormula(
-      this.input.income.relevant,
+      this.input.income.adjustedRelevant,
       this.input.maritalStatus,
       this.input.partnerBenefitStatus,
       this.input.age

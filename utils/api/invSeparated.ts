@@ -775,6 +775,8 @@ function getSingleClientInput(
     rawInput.incomeAvailable,
     false,
     useTable1 ? rawInput.income : input.client.income.relevant,
+    rawInput.incomeWork,
+    0,
     0,
     useTable1
       ? new MaritalStatusHelper(MaritalStatus.SINGLE)
@@ -820,6 +822,8 @@ function getSinglePartnerInput(
     true,
     false,
     rawInput.partnerIncome,
+    rawInput.partnerIncomeWork,
+    0,
     0,
     new MaritalStatusHelper(MaritalStatus.SINGLE)
   )

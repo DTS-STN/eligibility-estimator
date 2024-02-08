@@ -54,11 +54,11 @@ export const BenefitCard: React.VFC<{
       className="my-6 py-6 px-8 border border-[#6F6F6F] rounded"
       data-cy={benefitKey}
     >
-      <div className="inline">
+      <div className="ss:inline block">
         <h2
           data-cy="benefit-title"
           id={benefitKey}
-          className="inline align-sub h2"
+          className="ss:inline block align-sub h2"
         >
           {benefitName}
         </h2>

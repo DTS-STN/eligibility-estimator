@@ -92,6 +92,7 @@ export interface Translations {
     alwEligibleButPartnerAlreadyIs: string
     alwEligibleIncomeTooHigh: string
     alwIfYouApply: string
+    alwsIfYouApply: string
     afsNotEligible: string
     alwsApply: string
     autoEnrollTrue: string

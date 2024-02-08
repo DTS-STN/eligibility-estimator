@@ -6,12 +6,14 @@ import { FieldKey } from '../../utils/api/definitions/fields'
 
 export const Tooltip: React.FC<{
   field: string
-}> = ({ field }) => {
+  dynamicContent?: TooltipTranslation
+}> = ({ field, dynamicContent }) => {
   const router = useRouter()
   const tooltipData = getTooltipTranslationByField(
     router.locale == 'en' ? Language.EN : Language.FR,
     field
   )
+  const content = dynamicContent || tooltipData
 
   const AA_BUTTON_CLICK_ATTRIBUTE =
     'ESDC-EDSC:Canadian OAS Benefits Est. More information Click'
@@ -25,15 +27,15 @@ export const Tooltip: React.FC<{
       >
         <span
           className="ds-underline"
-          dangerouslySetInnerHTML={{ __html: tooltipData.moreinfo }}
-          data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: ${tooltipData.moreinfo}`}
+          dangerouslySetInnerHTML={{ __html: content.moreinfo }}
+          data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: ${content.moreinfo}`}
         />
       </summary>
       <div
-        className="ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100 border-l-2 border-[#284162] px-6 pt-4"
+        className="ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100 border-l-2 border-[#284162] px-2 ml-[5px]"
         data-testid="tooltip-text"
         id={`helpText-${field}`}
-        dangerouslySetInnerHTML={{ __html: tooltipData.text }}
+        dangerouslySetInnerHTML={{ __html: content.text }}
       />
     </details>
   )

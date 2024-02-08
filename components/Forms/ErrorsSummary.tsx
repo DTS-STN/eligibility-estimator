@@ -4,8 +4,14 @@ import { ContextualAlert as Message } from './ContextualAlert'
 import { Language } from '../../utils/api/definitions/enums'
 import Link from 'next/link'
 
-export const ErrorsSummary: any = ({ errorFields }) => {
+export const ErrorsSummary: any = ({ errorFields, receiveOAS }) => {
   const tsln = useTranslation<WebTranslations>()
+  const incomeError = receiveOAS
+    ? tsln.validationErrors['incomeEmptyReceiveOAS']
+    : tsln.validationErrors['incomeEmpty']
+  const partnerIncomeError = receiveOAS
+    ? tsln.validationErrors['partnerIncomeEmptyReceiveOAS']
+    : tsln.validationErrors['partnerIncomeEmpty']
 
   if (errorFields.length === 0) return null
 
@@ -21,7 +27,11 @@ export const ErrorsSummary: any = ({ errorFields }) => {
                 aria-label={tsln.resultsEditAriaLabels[field.key]}
                 className="underline text-[#284162] text-[20px] leading-[22px] hover:text-[#0535D2]"
               >
-                {field.error}
+                {field.key === 'income'
+                  ? incomeError
+                  : field.key === 'partnerIncome'
+                  ? partnerIncomeError
+                  : field.error}
               </a>
             </Link>
           </li>
@@ -40,7 +50,11 @@ export const ErrorsSummary: any = ({ errorFields }) => {
       : ' erreurs ont été trouvées'
 
   return (
-    <div className="border-2 border-danger rounded py-4 mb-2">
+    <div
+      id="errorField"
+      className="border-2 border-danger rounded py-4 mb-2"
+      aria-live="polite"
+    >
       <Message
         id={`form-errors-${errorFields.length}`}
         type="danger"

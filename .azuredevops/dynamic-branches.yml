@@ -1,17 +1,18 @@
 trigger:
   - none
 
-pr: develop
+pr:
+  - develop
 
 variables:
-  azure.servicePrincipal: ''
-  webapp.name: ''
-  webapp.resourceGroup: ''
+  azure.servicePrincipal: 'OASEE-Dynamic-Links-01/18/2024'
+  webapp.name: 'app-eligibilityestimator-dev'
+  webapp.resourceGroup: 'rg-eligibilityestimator-dev'
   webapp.slotName: null
-  azureContainerRegistry.name: ''
-  azureContainerRegistry.repository: ''
-  azureContainerRegistry.domain: ''
-  azureContainerRegistry.tag: ''
+  azureContainerRegistry.name: 'DTSShared-December/2023'
+  azureContainerRegistry.repository: 'oas/eligibility-estimator'
+  azureContainerRegistry.domain: 'dtsshared.azurecr.io'
+  azureContainerRegistry.tag: 'preview-$(Build.SourceVersion)'
   System.Debug: false
 
 steps:
@@ -36,6 +37,15 @@ steps:
         latest
       arguments: |
         --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
+        --build-arg home=/app
+        --build-arg NEXT_BUILD_DATE=$(app.buildDate)
+        --build-arg NEXTAUTH_URL=$(app.domain)
+        --build-arg NEXT_AUTH_USERNAME=$(NEXT-AUTH-USERCODE)
+        --build-arg NEXT_AUTH_PASSWORD=$(NEXT-AUTH-PASSWORD)
+        --build-arg NEXTAUTH_SECRET=$(NEXT_AUTH_SECRET)
+        --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
+        --build-arg APP_ENV=$(app.environment)
+        --build-arg LOGGING_LEVEL=$(app.logLevel)
 
   - task: Docker@2
     displayName: 'Push image'
@@ -52,7 +62,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        [int] $slotNumber = $(System.PullRequest.PullRequestId) % 4
+        [int] $slotNumber = $(System.PullRequest.PullRequestId)
         Write-Host "Generated slot number:"
         Write-Host "$slotNumber"
         Write-Host "From PRID"
@@ -89,10 +99,3 @@ steps:
         --name $(webapp.name) \
         --slot pr-preview-$(webapp.slotName) \
         --resource-group $(webapp.resourceGroup)
-
-  - task: GitHubComment@0
-    displayName: 'Post a comment with a link to the new PR preview'
-    inputs:
-      gitHubConnection: "Adam'sGitHub-9/15/2023"
-      repositoryName: '$(Build.Repository.Name)'
-      comment: 'Check out a preview of your pull request here: https://$(webapp.name)-pr-preview-$(webapp.slotName).azurewebsites.net'

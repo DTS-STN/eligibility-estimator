@@ -96,7 +96,9 @@ export class FieldsHandler {
       this.rawInput.incomeAvailable,
       this.rawInput.partnerIncomeAvailable,
       this.rawInput.income,
+      this.rawInput.incomeWork,
       this.rawInput.partnerIncome,
+      this.rawInput.partnerIncomeWork,
       maritalStatusHelper
     )
     const clientInput: ProcessedInput = {
@@ -165,6 +167,7 @@ export class FieldsHandler {
       // FieldKey.INCOME_AVAILABLE,
       FieldKey.AGE,
       FieldKey.INCOME,
+      FieldKey.INCOME_WORK,
       // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LEGAL_STATUS,
@@ -223,6 +226,7 @@ export class FieldsHandler {
       requiredFields.push(FieldKey.INV_SEPARATED)
       requiredFields.push(FieldKey.PARTNER_AGE)
       requiredFields.push(FieldKey.PARTNER_INCOME)
+      requiredFields.push(FieldKey.PARTNER_INCOME_WORK)
 
       if (this.input.partner.age >= 60) {
         requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)

@@ -43,8 +43,8 @@ const data = [
       estimate: false,
     },
     nextSteps: {
-      en: [en.detail.alwIfYouApply],
-      fr: [fr.detail.alwIfYouApply],
+      en: [en.detail.alwsIfYouApply],
+      fr: [fr.detail.alwsIfYouApply],
       limit: true,
     },
   },
@@ -99,8 +99,8 @@ const data = [
       estimate: false,
     },
     nextSteps: {
-      en: [en.detail.alwsApply, en.detail.alwIfYouApply],
-      fr: [fr.detail.alwsApply, fr.detail.alwIfYouApply],
+      en: [en.detail.alwsApply, en.detail.alwsIfYouApply],
+      fr: [fr.detail.alwsApply, fr.detail.alwsIfYouApply],
       limit: true,
     },
   },

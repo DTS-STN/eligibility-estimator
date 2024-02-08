@@ -4,6 +4,7 @@ import { FieldCategory } from './enums'
 export enum FieldKey {
   INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
+  INCOME_WORK = 'incomeWork',
   AGE = 'age',
   ALREADY_RECEIVE_OAS = 'receiveOAS',
   OAS_DEFER_DURATION = 'oasDeferDuration',
@@ -20,6 +21,7 @@ export enum FieldKey {
   PARTNER_BENEFIT_STATUS = 'partnerBenefitStatus',
   PARTNER_INCOME_AVAILABLE = 'partnerIncomeAvailable',
   PARTNER_INCOME = 'partnerIncome',
+  PARTNER_INCOME_WORK = 'partnerIncomeWork',
   PARTNER_AGE = 'partnerAge',
   PARTNER_LIVING_COUNTRY = 'partnerLivingCountry',
   PARTNER_LEGAL_STATUS = 'partnerLegalStatus',
@@ -73,6 +75,11 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
+    category: { key: FieldCategory.INCOME },
+    type: FieldType.CURRENCY,
+  },
+  [FieldKey.INCOME_WORK]: {
+    key: FieldKey.INCOME_WORK,
     category: { key: FieldCategory.INCOME },
     type: FieldType.CURRENCY,
   },
@@ -136,6 +143,11 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_INCOME]: {
     key: FieldKey.PARTNER_INCOME,
     relatedKey: FieldKey.INCOME,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.CURRENCY,
+  },
+  [FieldKey.PARTNER_INCOME_WORK]: {
+    key: FieldKey.PARTNER_INCOME_WORK,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.CURRENCY,
   },
