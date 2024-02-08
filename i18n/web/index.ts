@@ -118,6 +118,7 @@ export type WebTranslations = {
   youMayBeEligible: string
   pageNotFound: string
   warningText: string
+  infoText: string
   category: Translations['category']
   errorBoxTitle: string
   useEstimatorIf: string

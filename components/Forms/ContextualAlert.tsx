@@ -64,12 +64,12 @@ export const ContextualAlert: React.FC<ContextualAlertProps> = ({
         className={`overflow-auto border-l-4 pl-[24px] py-[16px] leading-8`}
       >
         {asHtml ? (
-          <p
+          <h2
             className={headingClass}
             dangerouslySetInnerHTML={{ __html: heading }}
           />
         ) : (
-          <p className={headingClass}>{heading}</p>
+          <h2 className={headingClass}>{heading}</h2>
         )}
         {asHtml && typeof body === 'string' ? (
           <div
