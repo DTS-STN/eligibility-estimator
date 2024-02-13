@@ -279,6 +279,7 @@ const fr: WebTranslations = {
   socialLink5: 'Confidentialité',
   pageNotFound: 'Page non trouvée',
   warningText: 'avertissement',
+  infoText: 'information',
   category: apiFr.category,
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:

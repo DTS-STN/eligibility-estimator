@@ -271,6 +271,7 @@ const en: WebTranslations = {
   socialLink5: 'Privacy',
   pageNotFound: 'Page not found',
   warningText: 'warning',
+  infoText: 'information',
   category: apiEn.category,
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
