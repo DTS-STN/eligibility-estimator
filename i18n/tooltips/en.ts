@@ -8,8 +8,8 @@ const en: TooltipTranslations = {
     moreinfo: 'Which option applies to you?',
     text: "<ul> \
             <li style='padding-bottom: 12px;'> \
-            <span style='font-weight: bold;'>Single</span>: \
-            You have never been married and are not in a common-law relationship. \
+              <span style='font-weight: bold;'>Single</span>: \
+              You have never been married and are not in a common-law relationship. \
             </li> \
             <li style='padding-bottom: 12px;'> \
               <span style='font-weight: bold;'>Divorced</span>: \
