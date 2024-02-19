@@ -8,6 +8,7 @@ import {
   PartnerBenefitStatus,
   ValidationErrors,
 } from './enums'
+import { MonthsYears } from './types'
 
 /**
  * This is what the API expects to receive, with the below exceptions due to normalization:
