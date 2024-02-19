@@ -4,10 +4,12 @@ import legalValues from '../scrapers/output'
 import {
   Language,
   LegalStatus,
+  LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ValidationErrors,
 } from './enums'
+import { MonthsYears } from './types'
 
 /**
  * This is what the API expects to receive, with the below exceptions due to normalization:
@@ -109,15 +111,81 @@ export const RequestSchema = Joi.object({
   yearsInCanadaSince18: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
-    .integer()
-    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
+    .custom((value, helpers) => {
+      const { age, yearsInCanadaSince18, livingCountry } =
+        helpers.state.ancestors[0]
+
+      if (livingCountry === LivingCountry.CANADA) {
+        if (age > 0 && yearsInCanadaSince18 !== undefined) {
+          if (yearsInCanadaSince18 < 10) {
+            return helpers.message({
+              custom: value
+                ? ValidationErrors.yearsInCanadaMinusDeferred
+                : ValidationErrors.yearsInCanadaMinusAge,
+            })
+          } else {
+            if (age - 18 < yearsInCanadaSince18) {
+              return helpers.message({
+                custom: value
+                  ? ValidationErrors.yearsInCanadaMinusAge
+                  : ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
+          }
+        }
+      } else {
+        if (age > 0 && yearsInCanadaSince18 !== undefined) {
+          if (yearsInCanadaSince18 < 20) {
+            return helpers.message({
+              custom: value
+                ? ValidationErrors.yearsNotInCanadaMinusDeferred
+                : ValidationErrors.yearsInCanadaMinusAge,
+            })
+          } else {
+            if (age - 18 < yearsInCanadaSince18) {
+              return helpers.message({
+                custom: value
+                  ? ValidationErrors.yearsInCanadaMinusAge
+                  : ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
+          }
+        }
+      }
+      return value
+    }, 'custom validation for the "yearsInCanadaSince18" question'),
   yearsInCanadaSinceOAS: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
-    .integer()
-    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
+    .custom((value, helpers) => {
+      const { age, oasDeferDuration, yearsInCanadaSinceOAS } =
+        helpers.state.ancestors[0]
+
+      const duration: MonthsYears = JSON.parse(oasDeferDuration)
+      const durationFloat = duration.years + duration.months / 12
+      console.log('schema 1')
+
+      if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
+        if (yearsInCanadaSinceOAS - durationFloat < 10) {
+          return helpers.message({
+            custom: value
+              ? ValidationErrors.yearsInCanadaMinusDeferred
+              : ValidationErrors.yearsInCanadaMinusAge,
+          })
+        } else {
+          if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
+            if (age - 18 < yearsInCanadaSinceOAS) {
+              return helpers.message({
+                custom: value
+                  ? ValidationErrors.yearsInCanadaMinusAge
+                  : ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
+          }
+        }
+      }
+      return value
+    }, 'custom validation for the "yearsInCanadaSinceOAS" question'),
   everLivedSocialCountry: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
