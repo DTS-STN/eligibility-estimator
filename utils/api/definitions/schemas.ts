@@ -69,9 +69,9 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
     .precision(2)
     .min(0)
-    .message(ValidationErrors.incomeBelowZero)
-    .max(Joi.ref('income'))
-    .message(ValidationErrors.incomeWorkGreaterThanNetIncome),
+    .message(ValidationErrors.incomeBelowZero),
+  //.max(Joi.ref('income'))
+  //.message(ValidationErrors.incomeWorkGreaterThanNetIncome),
   age: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
@@ -163,7 +163,6 @@ export const RequestSchema = Joi.object({
 
       const duration: MonthsYears = JSON.parse(oasDeferDuration)
       const durationFloat = duration.years + duration.months / 12
-      console.log('schema 1')
 
       if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
         if (yearsInCanadaSinceOAS - durationFloat < 10) {
@@ -251,9 +250,9 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
     .precision(2)
     .min(0)
-    .message(ValidationErrors.incomeBelowZero)
-    .max(Joi.ref('partnerIncome'))
-    .message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
+    .message(ValidationErrors.incomeBelowZero),
+  //.max(Joi.ref('partnerIncome'))
+  //.message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
   partnerAge: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
