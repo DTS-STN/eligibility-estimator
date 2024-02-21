@@ -403,7 +403,11 @@ const fr: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]:
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsInCanadaMinusAge]:
-      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.yearsInCanadaMinusDeferred]:
+      'Ce nombre doit être au moins 10 au moment où vous avez reporté votre pension.',
+    [ValidationErrors.yearsNotInCanadaMinusDeferred]:
+      'Ce nombre doit être au moins 20 au moment où vous avez reporté votre pension.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
