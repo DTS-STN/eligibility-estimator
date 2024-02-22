@@ -141,6 +141,7 @@ const en: WebTranslations = {
       link: 'https://www.canada.ca/en/transparency/privacy.html',
     },
   },
+  woodmark: 'Symbol of the Government of Canada',
   // Error page
   errorPageHeadingTitle404: 'We couldn’t find that web page',
   errorPageHeadingTitle500: "We're having a problem with that page",

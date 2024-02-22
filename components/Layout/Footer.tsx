@@ -80,7 +80,7 @@ export const Footer = ({ id, locale }: FooterProps) => {
             <img
               className="h-[25px] md:h-[40px] w-[105px] md:w-[164px] my-[15px]"
               src="/wmms-blk.svg"
-              alt="Symbol of the Government of Canada"
+              alt={tsln.woodmark}
             />
           </div>
         </div>
