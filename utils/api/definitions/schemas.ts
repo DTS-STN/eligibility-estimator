@@ -158,27 +158,49 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
     .custom((value, helpers) => {
-      const { age, oasDeferDuration, yearsInCanadaSinceOAS } =
+      const { age, oasDeferDuration, livingCountry, yearsInCanadaSinceOAS } =
         helpers.state.ancestors[0]
 
       const duration: MonthsYears = JSON.parse(oasDeferDuration)
       const durationFloat = duration.years + duration.months / 12
 
-      if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
-        if (yearsInCanadaSinceOAS - durationFloat < 10) {
-          return helpers.message({
-            custom: value
-              ? ValidationErrors.yearsInCanadaMinusDeferred
-              : ValidationErrors.yearsInCanadaMinusAge,
-          })
-        } else {
-          if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
-            if (age - 18 < yearsInCanadaSinceOAS) {
-              return helpers.message({
-                custom: value
-                  ? ValidationErrors.yearsInCanadaMinusAge
-                  : ValidationErrors.yearsInCanadaMinusAge,
-              })
+      if (livingCountry === 'CANADA') {
+        if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
+          if (yearsInCanadaSinceOAS - durationFloat < 10) {
+            return helpers.message({
+              custom: value
+                ? ValidationErrors.yearsInCanadaMinusDeferred
+                : ValidationErrors.yearsInCanadaMinusAge,
+            })
+          } else {
+            if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
+              if (age - 18 < yearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: value
+                    ? ValidationErrors.yearsInCanadaMinusAge
+                    : ValidationErrors.yearsInCanadaMinusAge,
+                })
+              }
+            }
+          }
+        }
+      } else {
+        if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
+          if (yearsInCanadaSinceOAS - durationFloat < 20) {
+            return helpers.message({
+              custom: value
+                ? ValidationErrors.yearsNotInCanadaMinusDeferred
+                : ValidationErrors.yearsInCanadaMinusAge,
+            })
+          } else {
+            if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
+              if (age - 18 < yearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: value
+                    ? ValidationErrors.yearsInCanadaMinusAge
+                    : ValidationErrors.yearsInCanadaMinusAge,
+                })
+              }
             }
           }
         }
