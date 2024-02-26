@@ -200,7 +200,7 @@ const en: WebTranslations = {
   nextStep: 'Next step',
   getEstimate: 'Estimate my benefits',
   required: '(required)',
-  workInProgress: 'This estimator is a work in progress',
+  workInProgress: 'This estimator is a work in progress - TESTING',
   workInProgressBody:
     'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
   homePageP1:
