@@ -57,7 +57,6 @@ export const Radio: React.VFC<InputProps> = ({
                   error ? '!border-danger' : ''
                 }`}
                 type="radio"
-                role="radio"
                 data-testid="radio"
                 id={`${keyforid}-${index}`}
                 aria-describedby={`${keyforid}-${index}-error`}
