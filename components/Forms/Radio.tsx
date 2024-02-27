@@ -57,8 +57,10 @@ export const Radio: React.VFC<InputProps> = ({
                   error ? '!border-danger' : ''
                 }`}
                 type="radio"
+                role="radio"
                 data-testid="radio"
                 id={`${keyforid}-${index}`}
+                aria-describedby={`${keyforid}-${index}-error`}
                 name={`${keyforid}`}
                 value={val.key}
                 onChange={onChange}
@@ -76,7 +78,7 @@ export const Radio: React.VFC<InputProps> = ({
       </fieldset>
       {error && (
         <div className="mt-2">
-          <Error errorMessage={error} />
+          <Error id={`${keyforid}-${index}`} errorMessage={error} />
         </div>
       )}
     </div>
