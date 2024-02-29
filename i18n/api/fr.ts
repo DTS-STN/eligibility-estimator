@@ -276,8 +276,8 @@ const fr: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Conjoint survivant',
-        shortText: 'Conjoint survivant',
+        text: 'Veuf',
+        shortText: 'Veuf',
       },
     ],
     [FieldKey.INV_SEPARATED]: [

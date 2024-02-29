@@ -30,7 +30,7 @@ const fr: TooltipTranslations = {
               Vous vivez avec une autre personne dans une relation conjugale depuis au moins 1&nbsp;an. \
             </li> \
             <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Conjoint survivant </span>: \
+              <span style='font-weight: bold;'>Veuf </span>: \
               Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait. \
             </li> \
           </ul>",
