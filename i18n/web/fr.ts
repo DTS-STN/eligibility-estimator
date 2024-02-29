@@ -144,6 +144,7 @@ const fr: WebTranslations = {
       link: 'https://www.canada.ca/fr/transparence/confidentialite.html',
     },
   },
+  woodmark: 'Symbole du gouvernement du Canada',
   // Error page
   errorPageHeadingTitle404: 'Nous ne pouvons trouver cette page Web',
   errorPageHeadingTitle500: 'Nous éprouvons des difficultés avec cette page',

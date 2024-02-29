@@ -168,6 +168,7 @@ export type WebTranslations = {
     terms: { text: string; link: string }
     privacy: { text: string; link: string }
   }
+  woodmark: string
   // Error page
   errorPageHeadingTitle404: string
   errorPageHeadingTitle500: string
