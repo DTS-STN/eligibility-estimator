@@ -139,8 +139,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 241.69)
-    expectGisEligible(res, 429.64)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 403.45)
+    expectGisEligible(res, 218.32)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -175,8 +175,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 243.99)
-    expectGisEligible(res, 1204.43)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 365.02)
+    expectGisEligible(res, 1031.53)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -262,8 +262,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 226.7)
-    expectGisEligible(res, 1204.43)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 345.81)
+    expectGisEligible(res, 1050.74)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -280,8 +280,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 286.14)
-    expectGisEligible(res, 514.43)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 422.65)
+    expectGisEligible(res, 303.11)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -370,8 +370,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 205.95)
-    expectGisEligible(res, 742.64)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 307.38)
+    expectGisEligible(res, 627.38)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -388,8 +388,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 261.28)
-    expectGisEligible(res, 846.64)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 403.44)
+    expectGisEligible(res, 635.32)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 

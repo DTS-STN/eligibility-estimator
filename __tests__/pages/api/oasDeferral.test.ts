@@ -128,7 +128,7 @@ describe('OasDEferral', () => {
 
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 244.51)
-    expectGisEligible(res, 1082.18)
+    expectGisEligible(res, 1290.54)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
   })
@@ -384,7 +384,7 @@ describe('OasDEferral', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 68, 243.4, 658.85, 0)
+    expectFutureOasGisBenefitEligible(res, 68, 243.4, 641.39, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -444,7 +444,6 @@ describe('OasDEferral', () => {
     expectFutureOasGisBenefitEligible(res, 65, 209.58, 972.11, 0, true)
   })
 
-  // There is a bug #141941. Should be retested when the bug is fixed
   /* CALC-145 */
   it('should pass the 145 test - OAS-CALC-145', async () => {
     const desiredName = 'CALC-145' // Replace with the desired name
@@ -453,7 +452,7 @@ describe('OasDEferral', () => {
 
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 261.98)
-    expectGisEligible(res, 1044.71)
+    expectGisEligible(res, 1460.08)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit // To Check with Vero or Lorelei - test case it's 72 but in the code is 71
@@ -594,7 +593,7 @@ describe('OasDEferral', () => {
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 244.51)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 516.39)
+    expectGisEligible(res, 990.91)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -789,7 +788,7 @@ describe('OasDEferral', () => {
 
     //client results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 244.51)
-    expectGisEligible(res, 852.8)
+    expectGisEligible(res, 807.39)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
