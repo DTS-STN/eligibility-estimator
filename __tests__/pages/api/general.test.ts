@@ -37,7 +37,7 @@ describe('translation checks', () => {
 })
 
 describe('country checks', () => {
-  const COUNTRY_COUNT = 196
+  const COUNTRY_COUNT = 2
   const handlerEn = new BenefitHandler({ _language: Language.EN })
   handlerEn.fields.requiredFields = [FieldKey.LIVING_COUNTRY]
   const fieldDataEn = handlerEn.fields.fieldData as Array<FieldConfigDropdown>
@@ -48,11 +48,11 @@ describe('country checks', () => {
     expect(fieldDataEn[0].values.length).toEqual(COUNTRY_COUNT)
     expect(fieldDataFr[0].values.length).toEqual(COUNTRY_COUNT)
   })
-  it(`produces a list of countries with Canada first and AFG second (EN and FR)`, async () => {
+  it(`produces a list of countries with Canada first and OTH second (EN and FR)`, async () => {
     expect(fieldDataEn[0].values[0].key).toEqual('CAN') // ensure Canada is first in the list
-    expect(fieldDataEn[0].values[1].key).toEqual('AFG') // ensure Agreement is not in the list (AFG should be next)
+    expect(fieldDataEn[0].values[1].key).toEqual('OTH') // ensure Agreement is not in the list (AFG should be next)
     expect(fieldDataFr[0].values[0].key).toEqual('CAN')
-    expect(fieldDataFr[0].values[1].key).toEqual('AFG')
+    expect(fieldDataFr[0].values[1].key).toEqual('OTH')
   })
   it(`includes Agreement in "agreement countries" list`, async () => {
     expect(countryList[0].code).toEqual('CAN') // ensure Canada is first in the list
