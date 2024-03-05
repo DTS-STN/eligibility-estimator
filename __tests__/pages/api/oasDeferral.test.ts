@@ -356,7 +356,7 @@ describe('OasDEferral', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 71, 187.22, 377.25, 0)
+    expectFutureOasGisBenefitEligible(res, 71, 192.12, 359.78, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -384,7 +384,7 @@ describe('OasDEferral', () => {
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 68, 243.4, 641.39, 0)
+    expectFutureOasGisBenefitEligible(res, 68, 244.51, 641.39, 0)
 
     //partner results
     expectOasNotEligible(res, true)

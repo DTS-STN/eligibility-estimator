@@ -191,6 +191,7 @@ export class BenefitHandler {
         clientOasNoDeferral.entitlement
     }
 
+    consoleDev('NO DEFERRAL', clientOasNoDeferral)
     consoleDev(
       'Client OAS amount NO deferral',
       clientOasNoDeferral.entitlement.result

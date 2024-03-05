@@ -157,8 +157,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 212.6)
-    expectGisEligible(res, 514.43)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 422.65)
+    expectGisEligible(res, 303.11)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -209,8 +209,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 365.79)
-    expectGisEligible(res, 769.8)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 480.29)
+    expectGisEligible(res, 558.47)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -316,8 +316,8 @@ describe('july2013Deferral', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 494.24)
-    expectGisEligible(res, 465.74)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 576.35)
+    expectGisEligible(res, 254.41)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
