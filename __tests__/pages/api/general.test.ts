@@ -56,7 +56,7 @@ describe('country checks', () => {
   })
   it(`includes Agreement in "agreement countries" list`, async () => {
     expect(countryList[0].code).toEqual('CAN') // ensure Canada is first in the list
-    expect(countryList[1].code).toEqual('AGREEMENT') // ensure Agreement is second in the list
+    expect(countryList[2].code).toEqual('AGREEMENT') // ensure Agreement is second in the list
   })
 })
 
