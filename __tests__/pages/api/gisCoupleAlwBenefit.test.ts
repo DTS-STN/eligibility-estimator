@@ -554,13 +554,13 @@ describe('gisCoupleALWBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
     const deferralTable = [{ age: 70, amount: 237.52 }]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 226)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 261.98)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 1360.4)
+    expectGisEligible(res, 1273.07)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 70.08, 226.0, 1360.4, 0)
+    expectFutureOasGisBenefitEligible(res, 70.08, 261.98, 1273.07, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -580,9 +580,9 @@ describe('gisCoupleALWBenefit', () => {
       { age: 70, amount: 285.03 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 254.85)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 261.98)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 1050.47)
+    expectGisEligible(res, 998.07)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
@@ -606,13 +606,13 @@ describe('gisCoupleALWBenefit', () => {
       { age: 70, amount: 332.53 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 251.85)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 261.98)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 1497.54)
+    expectGisEligible(res, 1480.07)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 68.42, 251.85, 1497.54, 0)
+    expectFutureOasGisBenefitEligible(res, 68.42, 261.98, 1480.07, 0)
 
     //partner results
     expectOasNotEligible(res, true)
