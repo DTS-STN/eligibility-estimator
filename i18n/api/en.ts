@@ -65,7 +65,7 @@ const en: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'How many years had you lived in Canada when you started receiving your Old Age Security pension?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
-      'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
+      'Have you ever lived in a country with a {LINK_SOCIAL_AGREEMENT} with Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Does your partner receive the Old Age Security pension?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
@@ -259,7 +259,7 @@ const en: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Single, divorced, or separated',
+        text: 'Single, divorced or separated',
         shortText: 'Single, divorced or separated',
       },
       {

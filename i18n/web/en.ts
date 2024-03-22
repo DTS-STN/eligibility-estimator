@@ -471,8 +471,7 @@ const en: WebTranslations = {
     'Your partner has not lived in Canada long enough to receive the Old Age Security pension.',
   partnerInformation: "Partner's information",
   partnerInformationDescription:
-    "Individuals who are married or in common-law relationships need to \
-  provide their partner's information to assess their own eligibility.",
+    "Since you have a partner, we'll also need their information to estimate your benefits.",
 
   duration: {
     months: 'Months',

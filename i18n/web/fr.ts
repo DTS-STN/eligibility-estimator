@@ -485,8 +485,7 @@ const fr: WebTranslations = {
     "Votre conjoint n'a pas vécu au Canada assez longtemps pour recevoir la pension de la Sécurité de la vieillesse.",
   partnerInformation: 'Renseignements sur votre conjoint',
   partnerInformationDescription:
-    'Les personnes mariées ou vivant en union de fait doivent fournir \
-  des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
+    'Puisque vous avez un conjoint, nous aurons également besoin de ses informations pour estimer vos prestations.',
 
   duration: {
     months: 'Mois',
