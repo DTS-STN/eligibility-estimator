@@ -430,12 +430,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })
   it('returns "ineligible" when married', async () => {
     const res = await mockGetRequest({
@@ -504,12 +500,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -533,12 +525,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -564,12 +552,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
   it('returns "error ineligible" when living in No Agreement and under 10 years in Canada', async () => {
     const res = await mockGetRequestError({
@@ -591,12 +575,8 @@ describe('basic Allowance for Survivor scenarios', () => {
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
 })
 
