@@ -56,7 +56,7 @@ const en: Translations = {
     [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
     [FieldKey.INV_SEPARATED]:
       'Are you and your partner living apart for reasons beyond your control?',
-    [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
+    [FieldKey.LIVING_COUNTRY]: 'Where do you live?',
     [FieldKey.LEGAL_STATUS]: 'Do you have legal status in Canada?',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       'Since the age of 18, have you only lived in Canada?',
@@ -74,8 +74,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_WORK]:
       'How much of this amount is from work or self-employment income?',
     [FieldKey.PARTNER_AGE]: 'When was your partner born?',
-    [FieldKey.PARTNER_LIVING_COUNTRY]:
-      'What country does your partner live in?',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Where does your partner live?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Does your partner have legal status in Canada?',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
