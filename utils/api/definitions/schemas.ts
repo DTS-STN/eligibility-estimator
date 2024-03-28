@@ -157,7 +157,11 @@ export const RequestSchema = Joi.object({
         })
       }
 
-      const duration: MonthsYears = JSON.parse(oasDeferDuration)
+      const duration: MonthsYears =
+        oasDeferDuration !== undefined
+          ? JSON.parse(oasDeferDuration)
+          : { years: 0, months: 0 }
+
       const durationFloat = duration.years + duration.months / 12
 
       if (livingCountry === LivingCountry.CANADA) {
