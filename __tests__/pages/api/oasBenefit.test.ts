@@ -63,9 +63,9 @@ it('should pass the second test - OAS-CALC-02', async () => {
       { age: 70, amount: 224.95 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 199.8)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 209.58)
     expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 530.77)
+    expectGisEligible(res, 495.84)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
   })

@@ -56,7 +56,7 @@ const en: Translations = {
     [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
     [FieldKey.INV_SEPARATED]:
       'Are you and your partner living apart for reasons beyond your control?',
-    [FieldKey.LIVING_COUNTRY]: 'What country do you live in?',
+    [FieldKey.LIVING_COUNTRY]: 'Where do you live?',
     [FieldKey.LEGAL_STATUS]: 'Do you have legal status in Canada?',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       'Since the age of 18, have you only lived in Canada?',
@@ -65,7 +65,7 @@ const en: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'How many years had you lived in Canada when you started receiving your Old Age Security pension?',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
-      'Have you ever lived in a country with an established {LINK_SOCIAL_AGREEMENT} with Canada?',
+      'Have you ever lived in a country with a {LINK_SOCIAL_AGREEMENT} with Canada?',
     [FieldKey.PARTNER_BENEFIT_STATUS]:
       'Does your partner receive the Old Age Security pension?',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
@@ -74,8 +74,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME_WORK]:
       'How much of this amount is from work or self-employment income?',
     [FieldKey.PARTNER_AGE]: 'When was your partner born?',
-    [FieldKey.PARTNER_LIVING_COUNTRY]:
-      'What country does your partner live in?',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Where does your partner live?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Does your partner have legal status in Canada?',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
@@ -259,7 +258,7 @@ const en: Translations = {
     [FieldKey.MARITAL_STATUS]: [
       {
         key: MaritalStatus.SINGLE,
-        text: 'Single, divorced, or separated',
+        text: 'Single, divorced or separated',
         shortText: 'Single, divorced or separated',
       },
       {

@@ -139,7 +139,7 @@ export const Layout: React.VFC<{
             <Message
               id={'wip'}
               iconId={'testkey'}
-              iconAltText={tsln.warningText}
+              iconAltText={tsln.infoText}
               type={'info'}
               heading={tsln.workInProgress}
               body={tsln.workInProgressBody}

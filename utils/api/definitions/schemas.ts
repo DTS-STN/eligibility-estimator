@@ -4,10 +4,12 @@ import legalValues from '../scrapers/output'
 import {
   Language,
   LegalStatus,
+  LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ValidationErrors,
 } from './enums'
+import { MonthsYears } from './types'
 
 /**
  * This is what the API expects to receive, with the below exceptions due to normalization:
@@ -67,9 +69,9 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
     .precision(2)
     .min(0)
-    .message(ValidationErrors.incomeBelowZero)
-    .max(Joi.ref('income'))
-    .message(ValidationErrors.incomeWorkGreaterThanNetIncome),
+    .message(ValidationErrors.incomeBelowZero),
+  //.max(Joi.ref('income'))
+  //.message(ValidationErrors.incomeWorkGreaterThanNetIncome),
   age: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })
@@ -109,15 +111,100 @@ export const RequestSchema = Joi.object({
   yearsInCanadaSince18: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
-    .integer()
-    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
+    .custom((value, helpers) => {
+      const { age, yearsInCanadaSince18, livingCountry, receiveOAS } =
+        helpers.state.ancestors[0]
+
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.yearsInCanadaMinusAge,
+        })
+      }
+
+      if (livingCountry === LivingCountry.CANADA) {
+        if (age > 0 && yearsInCanadaSince18 !== undefined) {
+          if (yearsInCanadaSince18 >= 10) {
+            if (age - 18 < yearsInCanadaSince18) {
+              return helpers.message({
+                custom: ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
+          }
+        }
+      } else {
+        if (age > 0 && yearsInCanadaSince18 !== undefined) {
+          if (yearsInCanadaSince18 >= 20) {
+            if (age - 18 < yearsInCanadaSince18) {
+              return helpers.message({
+                custom: ValidationErrors.yearsInCanadaMinusAge,
+              })
+            }
+          }
+        }
+      }
+      return value
+    }, 'custom validation for the "yearsInCanadaSince18" question'),
   yearsInCanadaSinceOAS: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
-    .integer()
-    .max(Joi.ref('age', { adjust: (age) => age - 18 }))
-    .message(ValidationErrors.yearsInCanadaMinusAge),
+    .custom((value, helpers) => {
+      const { age, oasDeferDuration, livingCountry, yearsInCanadaSinceOAS } =
+        helpers.state.ancestors[0]
+
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.yearsInCanadaMinusAge,
+        })
+      }
+
+      const duration: MonthsYears =
+        oasDeferDuration !== undefined
+          ? JSON.parse(oasDeferDuration)
+          : { years: 0, months: 0 }
+
+      const durationFloat = duration.years + duration.months / 12
+
+      if (livingCountry === LivingCountry.CANADA) {
+        if (
+          durationFloat !== undefined &&
+          yearsInCanadaSinceOAS !== undefined
+        ) {
+          if (yearsInCanadaSinceOAS - durationFloat < 10) {
+            return helpers.message({
+              custom: ValidationErrors.yearsInCanadaMinusDeferred,
+            })
+          } else {
+            if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
+              if (age - 18 < yearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: ValidationErrors.yearsInCanadaMinusAge,
+                })
+              }
+            }
+          }
+        }
+      } else {
+        if (
+          durationFloat !== undefined &&
+          yearsInCanadaSinceOAS !== undefined
+        ) {
+          if (yearsInCanadaSinceOAS - durationFloat < 20) {
+            return helpers.message({
+              custom: ValidationErrors.yearsNotInCanadaMinusDeferred,
+            })
+          } else {
+            if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
+              if (age - 18 < yearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: ValidationErrors.yearsInCanadaMinusAge,
+                })
+              }
+            }
+          }
+        }
+      }
+      return value
+    }, 'custom validation for the "yearsInCanadaSinceOAS" question'),
   everLivedSocialCountry: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.socialCountryEmpty })
@@ -183,9 +270,9 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
     .precision(2)
     .min(0)
-    .message(ValidationErrors.incomeBelowZero)
-    .max(Joi.ref('partnerIncome'))
-    .message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
+    .message(ValidationErrors.incomeBelowZero),
+  //.max(Joi.ref('partnerIncome'))
+  //.message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
   partnerAge: Joi.number()
     .required()
     .messages({ 'any.required': ValidationErrors.invalidAge })

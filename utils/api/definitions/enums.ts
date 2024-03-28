@@ -131,6 +131,8 @@ export enum ValidationErrors {
   yearsInCanadaNotEnough10 = 'yearsInCanadaNotEnough10',
   yearsInCanadaNotEnough20 = 'yearsInCanadaNotEnough20',
   yearsInCanadaMinusAge = 'yearsInCanadaMinusAge',
+  yearsInCanadaMinusDeferred = 'yearsInCanadaMinusDeferred',
+  yearsNotInCanadaMinusDeferred = 'yearsNotInCanadaMinusDeferred',
   partnerYearsInCanadaMinusAge = 'partnerYearsInCanadaMinusAge',
   maritalUnavailable = 'maritalUnavailable',
   legalUnavailable = 'legalUnavailable',

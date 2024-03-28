@@ -144,6 +144,7 @@ const fr: WebTranslations = {
       link: 'https://www.canada.ca/fr/transparence/confidentialite.html',
     },
   },
+  woodmark: 'Symbole du gouvernement du Canada',
   // Error page
   errorPageHeadingTitle404: 'Nous ne pouvons trouver cette page Web',
   errorPageHeadingTitle500: 'Nous éprouvons des difficultés avec cette page',
@@ -279,6 +280,7 @@ const fr: WebTranslations = {
   socialLink5: 'Confidentialité',
   pageNotFound: 'Page non trouvée',
   warningText: 'avertissement',
+  infoText: 'information',
   category: apiFr.category,
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
@@ -288,18 +290,18 @@ const fr: WebTranslations = {
     year: 'Année',
     day: 'Jour',
     months: {
-      1: 'janvier',
-      2: 'février',
-      3: 'mars',
-      4: 'avril',
-      5: 'mai',
-      6: 'juin',
-      7: 'juillet',
-      8: 'août',
-      9: 'septembre',
-      10: 'octobre',
-      11: 'novembre',
-      12: 'décembre',
+      1: 'Janvier',
+      2: 'Février',
+      3: 'Mars',
+      4: 'Avril',
+      5: 'Mai',
+      6: 'Juin',
+      7: 'Juillet',
+      8: 'Août',
+      9: 'Septembre',
+      10: 'Octobre',
+      11: 'Novembre',
+      12: 'Décembre',
     },
   },
   meta: {
@@ -402,7 +404,11 @@ const fr: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]:
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsInCanadaMinusAge]:
-      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+    [ValidationErrors.yearsInCanadaMinusDeferred]:
+      'Ce nombre doit être au moins 10 au moment où vous avez reporté votre pension.',
+    [ValidationErrors.yearsNotInCanadaMinusDeferred]:
+      'Ce nombre doit être au moins 20 au moment où vous avez reporté votre pension.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -479,8 +485,7 @@ const fr: WebTranslations = {
     "Votre conjoint n'a pas vécu au Canada assez longtemps pour recevoir la pension de la Sécurité de la vieillesse.",
   partnerInformation: 'Renseignements sur votre conjoint',
   partnerInformationDescription:
-    'Les personnes mariées ou vivant en union de fait doivent fournir \
-  des renseignements sur leur conjoint pour évaluer leur propre admissibilité.',
+    'Puisque vous avez un conjoint, nous aurons également besoin de ses informations pour estimer vos prestations.',
 
   duration: {
     months: 'Mois',

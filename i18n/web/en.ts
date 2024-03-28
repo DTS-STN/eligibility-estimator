@@ -141,6 +141,7 @@ const en: WebTranslations = {
       link: 'https://www.canada.ca/en/transparency/privacy.html',
     },
   },
+  woodmark: 'Symbol of the Government of Canada',
   // Error page
   errorPageHeadingTitle404: 'We couldn’t find that web page',
   errorPageHeadingTitle500: "We're having a problem with that page",
@@ -271,6 +272,7 @@ const en: WebTranslations = {
   socialLink5: 'Privacy',
   pageNotFound: 'Page not found',
   warningText: 'warning',
+  infoText: 'information',
   category: apiEn.category,
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
@@ -393,6 +395,10 @@ const en: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsInCanadaMinusAge]:
       'Please enter a number no higher than your age minus 18.',
+    [ValidationErrors.yearsInCanadaMinusDeferred]:
+      'This number must be at least 10 at the time you deferred your pension.',
+    [ValidationErrors.yearsNotInCanadaMinusDeferred]:
+      'This number must be at least 20 at the time you deferred your pension.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -465,8 +471,7 @@ const en: WebTranslations = {
     'Your partner has not lived in Canada long enough to receive the Old Age Security pension.',
   partnerInformation: "Partner's information",
   partnerInformationDescription:
-    "Individuals who are married or in common-law relationships need to \
-  provide their partner's information to assess their own eligibility.",
+    "Since you have a partner, we'll also need their information to estimate your benefits.",
 
   duration: {
     months: 'Months',

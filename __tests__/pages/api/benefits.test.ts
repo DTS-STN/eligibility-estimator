@@ -43,7 +43,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
-
+    console.log(errors)
     expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })

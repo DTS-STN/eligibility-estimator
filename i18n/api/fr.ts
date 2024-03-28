@@ -58,7 +58,7 @@ const fr: Translations = {
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial?',
     [FieldKey.INV_SEPARATED]:
       'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
-    [FieldKey.LIVING_COUNTRY]: 'Dans quel pays vivez-vous?',
+    [FieldKey.LIVING_COUNTRY]: 'Où vivez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       "Depuis l'âge de 18 ans, avez-vous seulement vécu au Canada?",
@@ -77,7 +77,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_INCOME_WORK]:
       'Combien de ce montant provient de revenus d’emploi ou de travail indépendant?',
     [FieldKey.PARTNER_AGE]: 'Quel est le mois de naissance de votre conjoint?',
-    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Dans quel pays votre conjoint vit-il?',
+    [FieldKey.PARTNER_LIVING_COUNTRY]: 'Où vit votre conjoint?',
     [FieldKey.PARTNER_LEGAL_STATUS]:
       'Votre conjoint a-t-il un statut légal au Canada?',
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
@@ -276,8 +276,8 @@ const fr: Translations = {
       },
       {
         key: MaritalStatus.WIDOWED,
-        text: 'Conjoint survivant',
-        shortText: 'Conjoint survivant',
+        text: 'Veuf',
+        shortText: 'Veuf',
       },
     ],
     [FieldKey.INV_SEPARATED]: [
