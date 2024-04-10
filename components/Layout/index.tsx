@@ -14,6 +14,7 @@ export const Layout: React.VFC<{
   title: string
 }> = ({ children, title }) => {
   const router = useRouter()
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : ''
 
   // basically returns 'results' or 'resultats' IF, otherwise index or questions in the other locale.
   const langToggleLink =
@@ -53,54 +54,59 @@ export const Layout: React.VFC<{
     onSubmit: () => {},
   }
 
-  const breadcrumbs =
-    process.env.APP_ENV === 'production'
-      ? [
-          {
-            text: tsln.breadcrumb1Title,
-            link: tsln.breadcrumb1URL,
-          },
-          {
-            text: tsln.breadcrumb2Title,
-            link: tsln.breadcrumb2URL,
-          },
-          {
-            text: tsln.breadcrumb3Title,
-            link: tsln.breadcrumb3URL,
-          },
-          {
-            text: tsln.breadcrumb4Title,
-            link: tsln.breadcrumb4URL,
-          },
-        ]
-      : [
-          {
-            text: tsln.breadcrumb1aTitle,
-            link: tsln.breadcrumb1aURL,
-          },
-          {
-            text: tsln.breadcrumb2aTitle,
-            link: tsln.breadcrumb2aURL,
-          },
-        ]
+  const getBreadcrumbs = () => {
+    const isBeta = !hostname.includes('.alpha.service')
+    const breadcrumbs =
+      process.env.APP_ENV === 'production' && isBeta
+        ? [
+            {
+              text: tsln.breadcrumb1Title,
+              link: tsln.breadcrumb1URL,
+            },
+            {
+              text: tsln.breadcrumb2Title,
+              link: tsln.breadcrumb2URL,
+            },
+            {
+              text: tsln.breadcrumb3Title,
+              link: tsln.breadcrumb3URL,
+            },
+            {
+              text: tsln.breadcrumb4Title,
+              link: tsln.breadcrumb4URL,
+            },
+          ]
+        : [
+            {
+              text: tsln.breadcrumb1aTitle,
+              link: tsln.breadcrumb1aURL,
+            },
+            {
+              text: tsln.breadcrumb2aTitle,
+              link: tsln.breadcrumb2aURL,
+            },
+          ]
 
-  if (router.pathname === '/questions') {
-    breadcrumbs.push({
-      text: tsln.breadcrumb6Title,
-      link: tsln.breadcrumb6URL,
-    })
-  } else if (
-    router.pathname === '/results' ||
-    router.pathname === '/resultats'
-  ) {
-    breadcrumbs.push({
-      text: tsln.breadcrumb6Title,
-      link: tsln.breadcrumb6URL,
-    }),
+    if (router.pathname === '/questions') {
       breadcrumbs.push({
-        text: tsln.breadcrumb7Title,
-        link: tsln.breadcrumb7URL,
+        text: tsln.breadcrumb6Title,
+        link: tsln.breadcrumb6URL,
       })
+    } else if (
+      router.pathname === '/results' ||
+      router.pathname === '/resultats'
+    ) {
+      breadcrumbs.push({
+        text: tsln.breadcrumb6Title,
+        link: tsln.breadcrumb6URL,
+      }),
+        breadcrumbs.push({
+          text: tsln.breadcrumb7Title,
+          link: tsln.breadcrumb7URL,
+        })
+    }
+
+    return breadcrumbs
   }
 
   const handleOnClick = () => {
@@ -122,7 +128,7 @@ export const Layout: React.VFC<{
             id="header"
             locale={router.locale}
             langUrl={langToggleLink}
-            breadcrumbItems={breadcrumbs}
+            breadcrumbItems={getBreadcrumbs()}
             topNavProps={topnavProps}
             headerText={{
               globalHeader: tsln.globalHeader,
