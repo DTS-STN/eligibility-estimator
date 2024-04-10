@@ -41,6 +41,7 @@ const customAgeValidation = (value, helpers) => {
     return helpers.message(ValidationErrors.invalidAge)
   } else if (age < 18) {
     return helpers.message(ValidationErrors.ageUnder18)
+    // if age is NaN
   }
 
   return value
@@ -74,7 +75,10 @@ export const RequestSchema = Joi.object({
   //.message(ValidationErrors.incomeWorkGreaterThanNetIncome),
   age: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.invalidAge })
+    .messages({
+      'any.required': ValidationErrors.invalidAge,
+      'number.base': ValidationErrors.invalidAge,
+    })
     .custom(customAgeValidation, 'Custom Validation'),
   receiveOAS: Joi.boolean()
     .required()
@@ -275,7 +279,10 @@ export const RequestSchema = Joi.object({
   //.message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
   partnerAge: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.invalidAge })
+    .messages({
+      'any.required': ValidationErrors.invalidAge,
+      'number.base': ValidationErrors.invalidAge,
+    })
     .custom(customAgeValidation, 'Custom Validation'),
   partnerLivingCountry: Joi.string()
     .required()
