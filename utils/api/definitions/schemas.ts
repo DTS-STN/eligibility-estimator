@@ -41,7 +41,6 @@ const customAgeValidation = (value, helpers) => {
     return helpers.message(ValidationErrors.invalidAge)
   } else if (age < 18) {
     return helpers.message(ValidationErrors.ageUnder18)
-    // if age is NaN
   }
 
   return value
