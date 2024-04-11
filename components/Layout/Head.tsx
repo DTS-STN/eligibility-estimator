@@ -9,12 +9,12 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
   const tsln = useTranslation<WebTranslations>()
   const altLang = tsln._language === 'en' ? 'fr' : 'en'
 
-  const [isCanadaDotCa, setIsCanadaDotCa] = useState(false)
+  const [isAlpha, setIsAlpha] = useState(false)
 
   useEffect(() => {
     if (typeof window !== undefined) {
       const hostName = window.location.hostname
-      setIsCanadaDotCa(hostName.includes('.canada.ca'))
+      setIsAlpha(hostName.includes('.alpha.service'))
     }
   }, [])
 
@@ -35,18 +35,18 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
       <link
         rel="canonical"
         href={
-          isCanadaDotCa
-            ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
-            : `http://ep-be.alpha.servicecanada.ca/${tsln._language}${router.pathname}`
+          isAlpha
+            ? `http://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
         }
       />
       <link
         rel="alternate"
         lang={altLang}
         href={
-          isCanadaDotCa
-            ? `https://estimateursv-oasestimator.service.canada.ca/${altLang}${router.pathname}`
-            : `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
+          isAlpha
+            ? `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
+            : `https://estimateursv-oasestimator.service.canada.ca/${altLang}${router.pathname}`
         }
       />
 
@@ -54,9 +54,9 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         rel="alternate"
         lang={tsln._language}
         href={
-          isCanadaDotCa
-            ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
-            : `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+          isAlpha
+            ? `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
         }
       />
       <meta name="keywords" content={tsln.meta.homeKeywords} />
