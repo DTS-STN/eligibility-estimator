@@ -443,7 +443,6 @@ export const QuestionsPage: React.VFC = ({}) => {
         data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
         // data-gc-analytics-collect='[{"value":"input,select","emptyField":"N/A"}]'
       >
-        {console.log({ cardsValid })}
         <AccordionForm
           id="mainForm"
           cardsState={cardsValid}
