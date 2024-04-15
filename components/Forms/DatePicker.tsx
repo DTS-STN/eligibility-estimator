@@ -128,7 +128,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
             <input
               id={props.yearId}
               defaultValue={props.year}
-              type={'number'}
+              type="number"
               min={props.minYear}
               max={props.maxYear}
               onChange={_onYearChange}
