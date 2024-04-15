@@ -45,6 +45,10 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
     const matcher = new RegExp(/[\D]/g)
     e.target.value = e.target.value.replaceAll(matcher, '')
   }
+  const maxLength = (e) => {
+    e.target.value =
+      e.target.value.length > 4 ? e.target.value.slice(0, 4) : e.target.value
+  }
 
   const monthValues = Array.from({ length: 12 }, (_, i) => (i + 1).toString())
 
@@ -55,6 +59,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
 
   const _onYearChange = (e) => {
     restrictNonNumbers(e)
+    maxLength(e)
     props.onYearChange(e)
   }
 
@@ -123,7 +128,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
             <input
               id={props.yearId}
               defaultValue={props.year}
-              type="number"
+              type={'number'}
               min={props.minYear}
               max={props.maxYear}
               onChange={_onYearChange}
