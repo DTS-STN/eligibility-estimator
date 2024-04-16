@@ -361,6 +361,8 @@ const fr: Translations = {
       "Vous pouvez commencer à recevoir vos paiements à {EARLIEST_ELIGIBLE_AGE} ans ou attendre d'avoir 70 ans.",
     youCanAply:
       'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+    onceEnrolled:
+      'Quand vous serez inscrit, le montant de votre paiement sera révisé chaque année en fonction de votre déclaration de revenus. Vous recevrez automatiquement des paiements si votre revenu est admissible.',
     delayMonths:
       'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     eligibleWhen60ApplyNow:
@@ -470,6 +472,8 @@ const fr: Translations = {
         'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     gis: {
+      youCanApplyGis:
+        'Vous pouvez faire une demande pour le Supplément de revenu garanti lorsque vous présentez votre demande pour la pension de la Sécurité de la vieillesse.',
       eligibleDependingOnIncomeNoEntitlement:
         'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
@@ -478,8 +482,7 @@ const fr: Translations = {
         'Vous pourriez être admissible lorsque vous aurez 65 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
       ifYouApply:
         'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu  est admissible.',
-      canApplyOnline:
-        'Vous pouvez faire une demande pour cette prestation en ligne.',
+      canApplyOnline: 'Vous pouvez faire une demande pour cette prestation.',
       ifYouAlreadyApplied:
         'Si vous avez déjà fait une demande pour le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
       ifYouAlreadyReceive:

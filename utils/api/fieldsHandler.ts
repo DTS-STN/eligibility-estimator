@@ -312,19 +312,22 @@ export class FieldsHandler {
     textToProcess: string,
     benefitResult?: BenefitResult
   ): string {
-    const re: RegExp = new RegExp(/{(\w*?)}/g)
-    const matches: IterableIterator<RegExpMatchArray> =
-      textToProcess.matchAll(re)
-    for (const match of matches) {
-      const key: string = match[1]
-      const replacementRule = textReplacementRules[key]
-      if (!replacementRule)
-        throw new Error(`no text replacement rule for ${key}`)
-      textToProcess = textToProcess.replace(
-        `{${key}}`,
-        replacementRule(benefitHandlerInstance, benefitResult)
-      )
+    if (textToProcess) {
+      const re: RegExp = new RegExp(/{(\w*?)}/g)
+      const matches: IterableIterator<RegExpMatchArray> =
+        textToProcess.matchAll(re)
+      for (const match of matches) {
+        const key: string = match[1]
+        const replacementRule = textReplacementRules[key]
+        if (!replacementRule)
+          throw new Error(`no text replacement rule for ${key}`)
+        textToProcess = textToProcess.replace(
+          `{${key}}`,
+          replacementRule(benefitHandlerInstance, benefitResult)
+        )
+      }
     }
+
     return textToProcess
   }
 
@@ -419,12 +422,14 @@ export class FieldsHandler {
    * Accepts a string, generally containing newlines (\n), and capitalizes the first character of each line.
    */
   static capitalizeEachLine(s: string): string {
-    const lines: string[] = s.split('\n')
-    return lines
-      .reduce((result, line) => {
-        return result + this.capitalizeFirstChar(line) + '\n'
-      }, '')
-      .trim()
+    if (s) {
+      const lines: string[] = s.split('\n')
+      return lines
+        .reduce((result, line) => {
+          return result + this.capitalizeFirstChar(line) + '\n'
+        }, '')
+        .trim()
+    }
   }
 
   /**

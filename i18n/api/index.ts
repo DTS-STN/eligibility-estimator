@@ -66,6 +66,7 @@ export interface Translations {
     sinceYouAreSixty: string
     futureDeferralOptions: string
     youCanAply: string
+    onceEnrolled: string
     delayMonths: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
@@ -124,6 +125,7 @@ export interface Translations {
       receivePayment: string
     }
     gis: {
+      youCanApplyGis: string
       eligibleDependingOnIncomeNoEntitlement: string
       incomeTooHigh: string
       futureEligibleIncomeTooHigh: string

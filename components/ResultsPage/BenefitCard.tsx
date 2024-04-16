@@ -1,3 +1,4 @@
+import { Button } from '../Forms/Button'
 import Image from 'next/image'
 import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
@@ -54,11 +55,18 @@ export const BenefitCard: React.VFC<{
       className="my-6 py-6 px-8 border border-[#6F6F6F] rounded"
       data-cy={benefitKey}
     >
-      <div className="ss:inline block">
+      {/* 
+      
+      TO-DO:
+      - flex-wrap
+
+
+      */}
+      <div className="flex h-auto w-full justify-between items-center mb-2">
         <h2
           data-cy="benefit-title"
           id={benefitKey}
-          className="ss:inline block align-sub h2"
+          className="ss:inline block align-sub h2 mb-0"
         >
           {benefitName}
         </h2>
@@ -85,13 +93,13 @@ export const BenefitCard: React.VFC<{
 
       {nextStepText.nextStepTitle && (
         <div>
-          <p
+          {/* <p
             data-cy="next-step-title"
             className="mb-2 mt-6
             font-bold text-[24px]"
           >
             {nextStepText.nextStepTitle}
-          </p>
+          </p> */}
           <p
             data-cy="next-step-content"
             dangerouslySetInnerHTML={{ __html: nextStepText.nextStepContent }}
@@ -102,16 +110,25 @@ export const BenefitCard: React.VFC<{
       <div className="mt-4" data-cy="benefit-links">
         {links &&
           links.map(({ text, url, icon, alt, action }, index) => (
-            <div key={index} className="flex items-center py-4 text-content">
-              <div>
+            <div key={index} className="flex items-center  text-content">
+              {/* <div>
                 <Image src={`/${icon}.png`} alt={alt} width="40" height="40" />
-              </div>
+              </div> */}
               <div className="pl-1 w-full block">
                 <span
                   className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
                   data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}:${action}`}
                 >
-                  <a
+                  {/* GET WHITE PNG */}
+                  <Button
+                    style={icon == 'info' ? 'secondary' : 'primary'}
+                    custom="ds-my-3"
+                    type="button"
+                    text={text}
+                    imgHref={`/openNewTab.svg`}
+                    onClick={console.log}
+                  />
+                  {/* <a
                     id={`${benefitKey}Link${index}`}
                     href={url}
                     target="_blank"
@@ -119,7 +136,7 @@ export const BenefitCard: React.VFC<{
                     className="align-top"
                   >
                     {text}
-                  </a>
+                  </a> */}
                 </span>
               </div>
             </div>

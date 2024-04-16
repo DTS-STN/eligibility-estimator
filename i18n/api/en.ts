@@ -350,9 +350,11 @@ const en: Translations = {
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
-      "You can start receiving your payments at {EARLIEST_ELIGIBLE_AGE} or wait until you're 70.",
+      "If you're automatically enrolled, you can start receiving payments the month after you turn 65 unless you request a deferral.",
     youCanAply:
-      'You can apply 11 months before the date you want your payments to start.',
+      "If you're not enrolled, you can apply up to 11 months before you want your payements to start. ",
+    onceEnrolled:
+      "Once you’re enroled, your payment amount will be reviewed each year based on your income tax return. You'll automatically be paid if your income qualifies.",
     delayMonths:
       'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
     eligibleWhen60ApplyNow:
@@ -401,7 +403,7 @@ const en: Translations = {
     alwEligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
-      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your combined income is less than&nbsp;",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your couple's income is less than&nbsp;",
     alwsIfYouApply:
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
@@ -436,17 +438,17 @@ const en: Translations = {
       futureEligibleIncomeTooHigh:
         'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
-        'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
+        'If you apply, your payement will be reviewed each year based on your income tax return.',
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'You should receive a letter about your enrolment status the month after you turn 64.',
+        'Your enrollement status should be confirmed by mail the month after you turn 64.',
       youShouldReceiveLetter:
-        'You should receive a letter about your enrolment status the month after you turn 64.',
+        'Your enrollement status should be confirmed by mail the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
-        "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+        "If you didn't receive a letter, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       applyOnline: "If you didn't, you can apply online.",
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
@@ -460,6 +462,8 @@ const en: Translations = {
         'You may be able to receive payment for up to the last 11 months.',
     },
     gis: {
+      youCanApplyGis:
+        'You can apply for the Guaranteed Income Supplement when you apply for the Old Age Security pension.',
       eligibleDependingOnIncomeNoEntitlement:
         'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
       incomeTooHigh:
@@ -468,7 +472,7 @@ const en: Translations = {
         'You may be eligible once you turn 65. If your income stays the same, you may not receive a monthly payment.',
       ifYouApply:
         "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.",
-      canApplyOnline: 'You can apply for this benefit online.',
+      canApplyOnline: 'You can apply for this benefit.',
       ifYouAlreadyApplied:
         'If you already applied for the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
       ifYouAlreadyReceive:

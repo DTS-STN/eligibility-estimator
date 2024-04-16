@@ -120,7 +120,14 @@ export const BenefitCards: React.VFC<{
         tsln
       )
     } else if (benefitKey === BenefitKey.alw) {
-      getAlwNextSteps(result, inputAge, nextStepText, apiTsln, tsln)
+      getAlwNextSteps(
+        result,
+        partnerResults,
+        inputAge,
+        nextStepText,
+        apiTsln,
+        tsln
+      )
     } else if (benefitKey === BenefitKey.alws) {
       getAlwsNextSteps(result, inputAge, nextStepText, apiTsln, tsln)
     }
@@ -199,8 +206,8 @@ export const BenefitCards: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
-          <div>{OASdeferralTable}</div>
-          <div>{oasApply(result.benefitKey, result)}</div>
+          {/* <div>{OASdeferralTable}</div> */}
+          {/* <div>{oasApply(result.benefitKey, result)}</div> */}
         </BenefitCard>
       </div>
     )

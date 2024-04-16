@@ -6,6 +6,7 @@ interface ButtonProps {
   style: 'primary' | 'secondary' | 'supertask' | 'danger' | 'link'
   custom?: string
   href?: string
+  imgHref?: string
   text: string
   type?: ButtonType
   locale?: string
@@ -31,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   custom = '',
   href,
+  imgHref,
   text,
   type = 'button',
   locale,
@@ -59,6 +61,7 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       {...attributes}
     >
+      {imgHref && <img src={imgHref} alt="alt" className="pr-3" />}
       {text}
     </button>
   )
