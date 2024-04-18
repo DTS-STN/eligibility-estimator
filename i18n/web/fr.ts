@@ -195,7 +195,6 @@ const fr: WebTranslations = {
   breadcrumb7URL: '/fr/questions',
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
-  introPageOASHeading: 'Prestations de la Sécurité de la vieillesse',
   questionPageTitle:
     'Estimateur des prestations de la Sécurité de la vieillesse : Questions',
   resultPageTitle:
@@ -211,7 +210,7 @@ const fr: WebTranslations = {
   workInProgressBody:
     'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
   homePageP1:
-    "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
+    "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Il ne s'agit pas d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
   youMayBeEligible:
     'Vous pourriez recevoir des prestations de la Sécurité de la vieillesse si\xa0:',
@@ -224,37 +223,26 @@ const fr: WebTranslations = {
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
-  ageText: '<strong>âge</strong>',
-  netIncomeText: '<strong>revenu net</strong>',
-  legalStatusText: '<strong>statut légal</strong>',
-  residenceHistoryText: '<strong>historique de résidence</strong>',
-  maritalStatusText: '<strong>état matrimonial</strong>',
-  partnerText: '<strong>conjoint</strong>, le cas échéant',
-  youNeedBeginningText: `Vous pouvez fournir vos renseignements actuels, ou des <strong>renseignements futurs pour utiliser l'outil à des fins de planification</strong>. Vos réponses doivent refléter ce que sera votre situation au moment où vous commencerez à recevoir votre prestation.`,
+  ageText: 'âge',
+  netIncomeText: 'revenu net',
+  legalStatusText: 'statut légal',
+  residenceHistoryText: 'historique de résidence',
+  maritalStatusText: 'état matrimonial',
+  partnerText: 'conjoint, le cas échéant',
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
-    'Il vous faudra environ 5 à 10 minutes pour répondre aux questions et obtenir une estimation.',
+    'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
-  benefitAvailable:
-    'Une prestation imposable disponible aux personnes de 65 ans et plus',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiFr.links.overview.oas.url}" target="_blank">En savoir plus sur la pension de la Sécurité de la vieillesse</a>`,
-  gisDefinitionText:
-    'Une prestation non imposable disponible aux personnes qui reçoivent la pension de la Sécurité de la vieillesse, ont 65 ans et plus, ont un faible revenu, et habitent au Canada',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiFr.links.overview.gis.url}" target="_blank">En savoir plus sur le Supplément de revenu garanti </a>`,
-  alwDefinitionText:
-    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint reçoit le Supplément de revenu garanti',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiFr.links.overview.alw.url}" target="_blank">En savoir plus sur l'Allocation</a>`,
-  inflationInfo: `Les montants des prestations de la Sécurité de la vieillesse sont mis à jour tous les trimestres pour refléter les changements au coût de la vie. Si vous planifiez pour l'avenir, les montants pourraient être plus élevés en raison de l'inflation.`,
-  afsDefinitionText:
-    'Une prestation non imposable disponible aux personnes âgées de 60 à 64 ans ayant un faible revenu, qui habitent au Canada et dont le conjoint est décédé',
-  learnMoreAboutAlws: `<a className="underline text-default-text" href="${apiFr.links.overview.alws.url}" target="_blank">En savoir plus sur l'Allocation au survivant</a>`,
-  notIncludeCPP: `Cet estimateur n'inclut pas le Régime de pensions du Canada.`,
+  inflationInfo: `Cet estimateur utilise les taux des prestations actuelles. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
+  notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
-  resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre admissibilité, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec Service Canada</a>.`,
+  resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre montant de prestations estimé, veuillez <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec nous</a>.`,
   privacyHeading: 'Confidentialité',
-  privacyDefinition: `Nous protégeons vos renseignements en vertu de la <em><a className="underline italic text-default-text" href="https://laws-lois.justice.gc.ca/fra/lois/p-21/index.html" target="_blank">Loi sur la protection des renseignements personnels</a></em>. L'estimateur ne recueille aucun renseignement pouvant vous identifier. Vos résultats anonymes peuvent être utilisés à des fins de recherche.`,
+  privacyDefinition: `Nous ne conservons pas les informations que vous entrez dans l'estimateur.`,
+  usingSharedDevice: 'Si vous utilisez un appareil partagé ou public',
+  usingSharedDeviceInfo: `Les autres personnes qui utilisent cet appareil pourraient voir vos réponses. Pour éviter ceci, effacez l'historique de votre navigateur Internet après avoir utilisé l’estimateur.`,
   homePageP3:
     "La pension de la Sécurité de la vieillesse est un paiement mensuel que vous pouvez recevoir si vous avez 65 ans et plus. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.",
   homePageP4:

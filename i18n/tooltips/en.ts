@@ -81,7 +81,7 @@ const en: TooltipTranslations = {
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
             Your first $15,000 of work-related income is subject to exemptions. We’ll calculate those for you. \
             </p> \
-           </div> \
+          </div> \
     ",
   },
   [FieldKey.PARTNER_INCOME]: {
@@ -101,7 +101,7 @@ const en: TooltipTranslations = {
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
             Their first $15,000 of work-related income is subject to exemptions. We’ll calculate those for you. \
             </p> \
-           </div> \
+          </div> \
     ",
   },
 }

@@ -190,7 +190,6 @@ const en: WebTranslations = {
   breadcrumb7URL: '/en/questions',
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
-  introPageOASHeading: 'Old Age Security benefits',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
   resultPageTitle: 'Old Age Security Benefits Estimator: Results',
   menuTitle: 'Service Canada',
@@ -204,7 +203,7 @@ const en: WebTranslations = {
   workInProgressBody:
     'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
   homePageP1:
-    'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
+    'Use this estimator to find out how much money you could get from Old Age Security benefits. This is not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
   youMayBeEligible: 'You may be able to receive Old Age Security benefits if:',
   atLeast60: "you're at least 60 years old",
@@ -216,37 +215,28 @@ const en: WebTranslations = {
     'Please note that this is an estimator and not an application for benefits.',
   estimatorIncludeQuestionText:
     'The estimator will ask you questions about your:',
-  ageText: '<strong>age</strong>',
-  netIncomeText: '<strong>net income</strong>',
-  legalStatusText: '<strong>legal status</strong>',
-  residenceHistoryText: '<strong>residence history</strong>',
-  maritalStatusText: '<strong>marital status</strong>',
-  partnerText: `<strong>spouse or common-law partner</strong>, if applicable`,
-  youNeedBeginningText: `You can enter your current information, or <strong>future information for planning purposes</strong>. Your answers should match what you expect them to be when you start to receive your benefit.`,
+  ageText: 'age',
+  netIncomeText: 'net income',
+  legalStatusText: 'legal status',
+  residenceHistoryText: 'residence history',
+  maritalStatusText: 'marital status',
+  partnerText: 'spouse or common-law partner, if applicable',
   timeToCompleteText: 'Time to complete',
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate: 'It will take about 5 to 10 minutes to complete.',
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  benefitAvailable: 'A taxable benefit available to those 65 and older',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about the Old Age Security pension</a>`,
-  gisDefinitionText:
-    'A non-taxable benefit available to those who receive the Old Age Security pension, are aged 65 and older, have a low income, and are living in Canada',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.overview.gis.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
-  alwDefinitionText:
-    'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner receives the Guaranteed Income Supplement',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.overview.alw.url}" target="_blank">Learn more about the Allowance</a>`,
-  inflationInfo: `Old Age Security benefit rates are updated quarterly to reflect changes to the cost of living. If planning for the future, amounts may be higher due to inflation.`,
-  afsDefinitionText:
-    'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away',
-  learnMoreAboutAlws: `<a className="underline text-default-text" href="${apiEn.links.overview.alws.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
+  inflationInfo: `This estimator uses current benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
   aboutResultText: 'About the results',
-  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>.`,
+  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.`,
   privacyHeading: 'Privacy',
   privacyDefinition:
-    'We protect your information under the <em><a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a></em>. The estimator does not collect information that can identify you. Your anonymous results may be used for research purposes.',
+    'We don’t collect the information you enter in the estimator.',
+  usingSharedDevice: 'If using a shared or public device',
+  usingSharedDeviceInfo:
+    'Others who use this device may be able to see your answers. To avoid this, clear your Internet browser history after using the estimator.',
   homePageP3:
     "The Old Age Security pension is a monthly payment you can get if you're 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.",
   homePageP4:
