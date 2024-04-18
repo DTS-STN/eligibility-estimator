@@ -57,7 +57,7 @@ const fr: Translations = {
       'À quel âge aimeriez-vous commencer à recevoir la pension de la SV?',
     [FieldKey.MARITAL_STATUS]: 'Quel est votre état matrimonial?',
     [FieldKey.INV_SEPARATED]:
-      'Est-ce que vous et votre conjoint vivez séparément pour des raisons indépendantes de votre volonté?',
+      'Vivez-vous séparément de votre conjoint pour des raisons hors de votre contrôle?',
     [FieldKey.LIVING_COUNTRY]: 'Où vivez-vous?',
     [FieldKey.LEGAL_STATUS]: 'Avez-vous un statut légal au Canada?',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
@@ -161,7 +161,7 @@ const fr: Translations = {
     [FieldKey.INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
-      "Une séparation involontaire peut survenir lorsque l'un des conjoints est absent pour des raisons de travail, d'études ou de santé.",
+      "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
       "Incluez tous les types de revenus après déductions, y compris&nbsp;: les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne&nbsp;23600 de son T1). N'incluez pas ce que votre conjoint reçoit de toute prestation de la Sécurité de la vieillesse.",
     [FieldKey.PARTNER_INCOME_WORK]:

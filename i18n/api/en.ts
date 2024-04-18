@@ -55,7 +55,7 @@ const en: Translations = {
       'At what age would you like to start receiving the OAS pension?',
     [FieldKey.MARITAL_STATUS]: 'What is your marital status?',
     [FieldKey.INV_SEPARATED]:
-      'Are you and your partner living apart for reasons beyond your control?',
+      'Do you live apart from your partner for reasons outside of your control?',
     [FieldKey.LIVING_COUNTRY]: 'Where do you live?',
     [FieldKey.LEGAL_STATUS]: 'Do you have legal status in Canada?',
     [FieldKey.LIVED_ONLY_IN_CANADA]:
@@ -153,7 +153,7 @@ const en: Translations = {
     [FieldKey.INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
-      'An involuntary separation could happen when one partner is living away for work, school or health reasons.',
+      'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
       'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of their T1). Do not include what they receive from any of the Old Age Security benefits.',
     [FieldKey.PARTNER_INCOME_WORK]:
