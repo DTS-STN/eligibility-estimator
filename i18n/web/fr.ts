@@ -73,7 +73,7 @@ const fr: WebTranslations = {
       link: 'https://www.canada.ca/fr/services/environnement.html',
     },
     finance: {
-      text: 'Argent et finance',
+      text: 'Argent et finances',
       link: 'https://www.canada.ca/fr/services/finance.html',
     },
     travel: { text: 'Voyage et tourisme', link: 'https://voyage.gc.ca/' },
