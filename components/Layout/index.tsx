@@ -101,7 +101,6 @@ export const Layout: React.VFC<{
     ? process.env.NEXT_BUILD_DATE.replaceAll('-', '')
     : '20230101'
 
-  console.log('prodEnv', prodEnv)
   return (
     <>
       <Head title={title} />
