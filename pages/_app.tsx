@@ -17,9 +17,9 @@ function MyApp({
     <>
       {AuthRequired ? (
         <SessionProvider session={session}>
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
+          {/* <Auth> */}
+          <Component {...pageProps} />
+          {/* </Auth> */}
         </SessionProvider>
       ) : (
         <Component {...pageProps} />
