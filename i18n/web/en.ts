@@ -121,7 +121,7 @@ const en: WebTranslations = {
   // Subfooter brand links
   brandLinks: {
     socialMedia: {
-      text: 'Social Media',
+      text: 'Social media',
       link: 'https://www.canada.ca/en/social.html',
     },
     mobile: {
