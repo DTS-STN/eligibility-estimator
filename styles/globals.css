@@ -231,12 +231,13 @@
 
   details summary {
     @apply text-content border border-content rounded py-1 px-4;
-  }
+  } */
 
   details[open] > summary {
-    @apply rounded-bl-none rounded-br-none;
+    @apply rounded-bl-none rounded-br-none border-b;
   }
 
+  /*
   details[open] div {
     @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   } */

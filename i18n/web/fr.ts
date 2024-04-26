@@ -223,12 +223,12 @@ const fr: WebTranslations = {
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
-  ageText: 'âge',
-  netIncomeText: 'revenu net',
-  legalStatusText: 'statut légal',
-  residenceHistoryText: 'historique de résidence',
-  maritalStatusText: 'état matrimonial',
-  partnerText: 'conjoint, le cas échéant',
+  ageText: 'âge;',
+  netIncomeText: 'revenu net;',
+  legalStatusText: 'statut légal;',
+  residenceHistoryText: 'historique de résidence;',
+  maritalStatusText: 'état matrimonial;',
+  partnerText: 'conjoint, le cas échéant.',
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
