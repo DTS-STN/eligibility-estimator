@@ -163,8 +163,6 @@ export class FutureHandler {
     const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
-    console.log('clientRes INSIDE GETPARTNERED RESULTS', clientRes)
-    console.log('this.query.livedOnlyInCanada', this.query.livedOnlyInCanada)
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
     const partnerDeferralMeta =
@@ -207,10 +205,7 @@ export class FutureHandler {
       },
     }
 
-    console.log('agesInputObj', agesInputObj)
     const futureAges = getAgeArray(agesInputObj)
-
-    console.log('futureAges', futureAges)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {

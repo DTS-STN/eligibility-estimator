@@ -18,7 +18,6 @@ export function getEligibleBenefits(benefits) {
 }
 
 export function getAgeArray(residencyData) {
-  console.log('START getAgeArray')
   let [userAge, partnerAge] = [
     residencyData.client.age,
     residencyData.partner.age,
@@ -27,8 +26,6 @@ export function getAgeArray(residencyData) {
     residencyData.client.res,
     residencyData.partner.res,
   ]
-
-  console.log('userRes', userRes)
 
   // Early return if any element is missing
   if ([userAge, partnerAge, userRes, partnerRes].some((el) => isNaN(el)))
@@ -40,8 +37,6 @@ export function getAgeArray(residencyData) {
   const result = []
 
   function yearsUntilOAS(age, residency) {
-    console.log('age', age)
-    console.log('residency', residency)
     if (age >= 65 && residency >= 10) {
       return null
     }
