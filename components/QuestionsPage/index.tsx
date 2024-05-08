@@ -219,6 +219,8 @@ export const QuestionsPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+
+    console.log('fields', fields)
     console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(

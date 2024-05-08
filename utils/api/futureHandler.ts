@@ -157,10 +157,14 @@ export class FutureHandler {
   private getPartneredResults() {
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
-    const clientRes = Number(this.query.yearsInCanadaSince18)
+    const clientRes =
+      Number(this.query.yearsInCanadaSince18) ||
+      Number(this.query.yearsInCanadaSinceOAS)
     const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
+    console.log('clientRes INSIDE GETPARTNERED RESULTS', clientRes)
+    console.log('this.query.livedOnlyInCanada', this.query.livedOnlyInCanada)
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
     const partnerDeferralMeta =
@@ -189,8 +193,11 @@ export class FutureHandler {
     const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
 
-    const futureAges = getAgeArray({
-      client: { age, res: this.query.livedOnlyInCanada ? 40 : clientRes },
+    const agesInputObj = {
+      client: {
+        age,
+        res: this.query.livedOnlyInCanada === 'true' ? 40 : clientRes,
+      },
       partner: {
         age: partnerAge,
         res:
@@ -198,7 +205,12 @@ export class FutureHandler {
             ? 40
             : partnerRes || 0,
       },
-    })
+    }
+
+    console.log('agesInputObj', agesInputObj)
+    const futureAges = getAgeArray(agesInputObj)
+
+    console.log('futureAges', futureAges)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
