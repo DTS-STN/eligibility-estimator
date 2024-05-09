@@ -220,7 +220,6 @@ export const QuestionsPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
 
-    console.log('fields', fields)
     console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(
