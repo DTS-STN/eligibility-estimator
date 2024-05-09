@@ -134,12 +134,12 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               dangerouslySetInnerHTML={{ __html: tsln.privacyDefinition }}
             />
             <details
-              className="my-2 text-h6 pl-4"
+              className="text-h6 border border-[#dddddd] rounded mb-1"
               data-testid={`tooltip-shared`}
             >
               <summary
                 key={`summary-shared`}
-                className="border-none pl-0 ds-text-multi-blue-blue70b mb-[15px] ds-cursor-pointer ds-select-none"
+                className="text-default-text pt-2 pb-3 px-4 ds-cursor-pointer ds-select-none hover:underline"
               >
                 <span
                   className="ds-underline"
@@ -148,7 +148,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
                 />
               </summary>
               <div
-                className="ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100 "
+                className="ds-z-1 my-3 pl-6 text-[#515151]"
                 data-testid="tooltip-text"
                 id={`helpText-shared`}
                 dangerouslySetInnerHTML={{ __html: tsln.usingSharedDeviceInfo }}
