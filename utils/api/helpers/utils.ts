@@ -67,8 +67,6 @@ export function getAgeArray(residencyData) {
     let pALW = yearsUntilALW(partnerAge, partnerRes)
     let pOAS = yearsUntilOAS(partnerAge, partnerRes)
 
-    console.log('cOAS', cOAS)
-
     let arr = [cALW, cOAS, pALW, pOAS]
     if (arr.every((el) => el === null)) break
 
