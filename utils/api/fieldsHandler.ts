@@ -31,6 +31,7 @@ import {
 } from './helpers/fieldClasses'
 import { BenefitHandler } from './benefitHandler'
 import { calculate2013Age } from './helpers/utils'
+import { OAS_AGE_PLUS_MONTH, OAS_START_AGE } from './definitions/constants'
 
 export class FieldsHandler {
   private _translations: Translations
@@ -181,11 +182,15 @@ export class FieldsHandler {
       this.input.client.age,
       this.input.client.clientBirthDate
     )
-    if (clientAge >= 65 && clientAge <= getMinBirthYear()) {
+    if (clientAge >= OAS_AGE_PLUS_MONTH && clientAge <= getMinBirthYear()) {
       requiredFields.push(FieldKey.ALREADY_RECEIVE_OAS)
     }
 
-    if (this.input.client.receiveOAS && clientAge > 65 && ageJuly2013 <= 70) {
+    if (
+      this.input.client.receiveOAS &&
+      clientAge > OAS_AGE_PLUS_MONTH &&
+      ageJuly2013 <= 70
+    ) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
     }
 

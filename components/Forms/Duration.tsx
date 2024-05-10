@@ -3,6 +3,7 @@ import { WebTranslations } from '../../i18n/web'
 import { useTranslation } from '../Hooks'
 import { QuestionLabel } from './QuestionLabel'
 import { MonthsYears } from '../../utils/api/definitions/types'
+import { OAS_AGE_PLUS_MONTH } from '../../utils/api/definitions/constants'
 
 interface DurationProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
@@ -44,16 +45,18 @@ const Duration: FC<DurationProps> = ({
     return parseFloat(age.toFixed(2))
   }
 
-  const getMaxYears = (ageJ2013) => {
-    let years
+  const getMaxYears = (ageJ2013: number) => {
+    const adjustedAge = parseFloat((ageJ2013 + 1 / 12).toFixed(2))
+    let years: number
+
     if (ageJ2013 < 65) {
-      const diff = Number(age) <= 70 ? Number(age) - 65 : 5
+      const diff = Number(age) <= 70 ? Number(age) - OAS_AGE_PLUS_MONTH : 4
       years = Math.floor(diff)
     } else if (ageJ2013 >= 70) {
       years = 0
     } else {
       // between ages 65 and 70 in July 2013
-      years = Math.floor(70 - ageJ2013)
+      years = Math.floor(70 - adjustedAge)
     }
 
     return years
@@ -64,19 +67,22 @@ const Duration: FC<DurationProps> = ({
 
   // Returns num of months for select option
   const getMaxMonths = () => {
-    let months
+    const adjustedAge = parseFloat((ageJuly2013 + 1 / 12).toFixed(2))
+    let months: number
+
     if (ageJuly2013 < 65) {
       const birthMonth = ageDate.month
       const today = new Date()
       const month = today.getMonth() + 1
 
-      let monthsDiff = month - birthMonth
+      let monthsDiff = month - birthMonth - 1
       if (monthsDiff < 0) monthsDiff += 12
       months = monthsDiff
     } else if (ageJuly2013 >= 70) {
       months = 0
     } else {
-      months = Math.round((Math.ceil(ageJuly2013) - ageJuly2013) * 12)
+      // between ages 65 and 70 in July 2013
+      months = Math.round((Math.ceil(adjustedAge) - ageJuly2013) * 12) - 1
     }
 
     return months
