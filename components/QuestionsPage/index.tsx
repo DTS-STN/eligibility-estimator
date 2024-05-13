@@ -287,7 +287,11 @@ export const QuestionsPage: React.VFC = ({}) => {
                 placeholder={field.config.placeholder ?? ''}
                 value={field.value}
                 helpText={field.config.helpText}
-                requiredText={tsln.required}
+                requiredText={
+                  field.key in [FieldKey.INCOME, FieldKey.PARTNER_INCOME]
+                    ? tsln.required
+                    : ''
+                }
                 error={formError}
                 dynamicContent={
                   field.key === 'income'
