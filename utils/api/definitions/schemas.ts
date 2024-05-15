@@ -65,6 +65,8 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.incomeTooHigh),
   incomeWork: Joi.number()
+    .default(0)
+    .required()
     .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
     .precision(2)
     .min(0)
@@ -267,6 +269,8 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
   partnerIncomeWork: Joi.number()
+    .default(0)
+    .required()
     .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
     .precision(2)
     .min(0)

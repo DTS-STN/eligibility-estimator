@@ -270,6 +270,15 @@ export const QuestionsPage: React.VFC = ({}) => {
                 error={formError}
               />
             )}
+            {field.config.type === FieldType.CURRENCY
+              ? console.log(
+                  field.key,
+                  field.key in
+                    [FieldKey.INCOME_WORK, FieldKey.PARTNER_INCOME_WORK],
+                  field.value,
+                  field.config
+                )
+              : null}
             {field.config.type == FieldType.CURRENCY && (
               <CurrencyField
                 type={field.config.type}
@@ -286,10 +295,16 @@ export const QuestionsPage: React.VFC = ({}) => {
                   100
                 )}
                 placeholder={field.config.placeholder ?? ''}
-                value={field.value}
+                value={
+                  field.key === FieldKey.INCOME_WORK ||
+                  field.key === FieldKey.PARTNER_INCOME_WORK
+                    ? field.config.default
+                    : field.value
+                }
                 helpText={field.config.helpText}
                 requiredText={
-                  field.key in [FieldKey.INCOME, FieldKey.PARTNER_INCOME]
+                  field.key === FieldKey.INCOME ||
+                  field.key === FieldKey.PARTNER_INCOME
                     ? tsln.required
                     : ''
                 }
