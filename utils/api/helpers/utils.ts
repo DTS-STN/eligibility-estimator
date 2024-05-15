@@ -265,7 +265,7 @@ export function AlwsEligibility(age, yearsInCanada) {
 export function evaluateOASInput(input) {
   let canDefer = false
   let justBecameEligible = false
-  const age = input.age // 66.42
+  const age = input.age
   const ageJuly2013 = calculate2013Age(age, input.clientBirthDate)
   const yearsInCanada = input.yearsInCanadaSince18
   let eliObj = OasEligibility(
@@ -301,9 +301,7 @@ export function evaluateOASInput(input) {
     }
   }
 
-  if (age === eliObj.ageOfEligibility && age < 70) {
-    justBecameEligible = true
-  }
+  console.log('deferralMonths', deferralMonths)
 
   if (age === eliObj.ageOfEligibility && age < 70) {
     justBecameEligible = true
@@ -318,7 +316,7 @@ export function evaluateOASInput(input) {
       ? 40
       : Math.min(40, Math.floor(eliObj.yearsOfResAtEligibility))
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: Math.max(Math.round(deferralMonths), 0),
+      months: Math.max(Math.round(deferralMonths - 1), 0), // subtract 1 because duration only starts after the first month after eligibility
       years: 0,
     })
     consoleDev(

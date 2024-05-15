@@ -65,7 +65,7 @@ describe('gisCoupleTwoPensBenefit', () => {
       { age: 70, amount: 902.59 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 723.4)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 719.42)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 487.02)
     expectAlwTooOld(res)
@@ -87,7 +87,7 @@ describe('gisCoupleTwoPensBenefit', () => {
       { age: 70, amount: 950.1 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 803.39)
+    expectOasEligible(res, EntitlementResultType.FULL, 799.2)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 409.09)
     expectAlwTooOld(res)
@@ -109,7 +109,7 @@ describe('gisCoupleTwoPensBenefit', () => {
       { age: 70, amount: 950.1 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 870.46)
+    expectOasEligible(res, EntitlementResultType.FULL, 866.26)
     expectDeferralTable(res, deferralTable)
     expectGisNotEligible(res, ResultReason.LIVING_COUNTRY)
     expectAlwTooOld(res)
