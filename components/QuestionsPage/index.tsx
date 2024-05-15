@@ -270,15 +270,6 @@ export const QuestionsPage: React.VFC = ({}) => {
                 error={formError}
               />
             )}
-            {field.config.type === FieldType.CURRENCY
-              ? console.log(
-                  field.key,
-                  field.key in
-                    [FieldKey.INCOME_WORK, FieldKey.PARTNER_INCOME_WORK],
-                  field.value,
-                  field.config
-                )
-              : null}
             {field.config.type == FieldType.CURRENCY && (
               <CurrencyField
                 type={field.config.type}

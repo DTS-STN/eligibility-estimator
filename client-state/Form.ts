@@ -3,7 +3,7 @@ import { getWebTranslations, WebTranslations } from '../i18n/web'
 import { BenefitHandler } from '../utils/api/benefitHandler'
 import { FieldsHandler } from '../utils/api/fieldsHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
-import { FieldConfig, FieldKey } from '../utils/api/definitions/fields'
+import { FieldConfig, FieldKey, FieldType } from '../utils/api/definitions/fields'
 import { VisibleFieldsObject } from '../utils/web/types'
 import MainHandler from '../utils/api/mainHandler'
 import { FormField } from './FormField'
@@ -37,10 +37,13 @@ export class Form {
         field.visible &&
         !field.value &&
         'default' in field.config &&
-        field.config.default &&
-        field.config.default.key
-      )
-        field.value = field.config.default.key
+        field.config.default
+      ) {
+        // currency now has default but without KeyAndText
+        if (field.config.type !== FieldType.CURRENCY)
+          field.value = field.config.default.key
+        else field.value = field.config.default
+      }
     })
 
     this.clearInvisibleFields()
