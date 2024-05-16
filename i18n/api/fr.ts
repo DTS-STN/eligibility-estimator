@@ -157,13 +157,13 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris&nbsp;: les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne&nbsp;23600 de votre T1). N'incluez pas ce que vous recevez de toute prestation de la Sécurité de la vieillesse.",
+      "Incluez tous les types de revenus après déductions, y compris : les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne 23600 de votre T1). N'incluez pas ce que vous recevez de toute prestation de la Sécurité de la vieillesse.",
     [FieldKey.INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
       "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris&nbsp;: les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne&nbsp;23600 de son T1). N'incluez pas ce que votre conjoint reçoit de toute prestation de la Sécurité de la vieillesse.",
+      "Incluez tous les types de revenus après déductions, y compris : les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne 23600 de son T1). N'incluez pas ce que votre conjoint reçoit de toute prestation de la Sécurité de la vieillesse.",
     [FieldKey.PARTNER_INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
     [FieldKey.OAS_DEFER]:
@@ -177,6 +177,10 @@ const fr: Translations = {
       "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [

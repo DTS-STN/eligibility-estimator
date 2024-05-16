@@ -104,6 +104,26 @@ const en: TooltipTranslations = {
           </div> \
     ",
   },
+  [FieldKey.LIVED_ONLY_IN_CANADA]: {
+    heading: apiEn.category.residence,
+    moreinfo: 'When does residence start counting?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+              Residence begins when you reside and make your home in Canada. \
+            </p> \
+          </div> \
+    ",
+  },
+  [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: {
+    heading: apiEn.category.marital,
+    moreinfo: 'When does residence start counting?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+              Residence begins when your partner resides and makes their home in Canada. \
+            </p> \
+          </div> \
+    ",
+  },
 }
 
 export default en

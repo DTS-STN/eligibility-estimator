@@ -149,13 +149,13 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of your T1). Do not include what you receive from any of the Old Age Security benefits.',
+      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line 23600 of your T1). Do not include what you receive from any of the Old Age Security benefits.',
     [FieldKey.INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of their T1). Do not include what they receive from any of the Old Age Security benefits.',
+      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line 23600 of their T1). Do not include what they receive from any of the Old Age Security benefits.',
     [FieldKey.PARTNER_INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -169,6 +169,10 @@ const en: Translations = {
       'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "If you're not sure of the exact number, you may enter an estimate.",
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
+    [FieldKey.LIVED_ONLY_IN_CANADA]:
+      'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -394,17 +398,17 @@ const en: Translations = {
     thisEstimateWhenZero:
       'This estimate is based on the information you provided. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
     alwNotEligible:
-      'The Allowance is for individuals between the ages of&nbsp;60 and&nbsp;64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
+      'The Allowance is for individuals between the ages of 60 and 64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
       'To be eligible for this benefit, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class="text-default-text" style="text-decoration: underline" href="/en/questions#partnerBenefitStatus">edit your answers</a> to see what you could get if your partner received these benefits.',
     alwEligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
-      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your combined income is less than&nbsp;",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your combined income is less than ",
     alwsIfYouApply:
-      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than ",
     afsNotEligible:
-      'The Allowance for the Survivor is for widowed individuals between the ages of&nbsp;60 and&nbsp;64 who have not remarried or entered into a new common-law relationship.',
+      'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
     alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
