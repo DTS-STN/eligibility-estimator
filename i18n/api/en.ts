@@ -149,13 +149,13 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of your T1). Do not include what you receive from any of the Old Age Security benefits.',
+      'Add all types of income after deductions, including: <ul><li>pensions (including CPP and QPP)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including RRSPs).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      'Add all types of income after deductions, including: pensions, benefits, annuities, salaries and retirement fund withdrawals (you can refer to line&nbsp;23600 of their T1). Do not include what they receive from any of the Old Age Security benefits.',
+      'Add all types of income after deductions, including: <ul><li>pensions (including CPP and QPP)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including RRSPs).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.PARTNER_INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
     [FieldKey.OAS_DEFER_DURATION]:
