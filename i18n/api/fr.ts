@@ -157,13 +157,13 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne 23600 de votre T1). N'incluez pas ce que vous recevez de toute prestation de la Sécurité de la vieillesse.",
+      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le RPC et le RRQ);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un REER).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
       "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : les pensions, les prestations, les rentes, les salaires et les retraits d'un fonds de retraite (vous pouvez vous référer à la ligne 23600 de son T1). N'incluez pas ce que votre conjoint reçoit de toute prestation de la Sécurité de la vieillesse.",
+      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le RPC et le RRQ);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un REER).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.PARTNER_INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
     [FieldKey.OAS_DEFER]:

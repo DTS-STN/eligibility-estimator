@@ -160,16 +160,19 @@ describe('sanity checks', () => {
   })
   it('accepts valid Marital Status', async () => {
     const res = await mockPartialGetRequest({
+      incomeWork: 0, //required for this test
       age: 65,
       maritalStatus: MaritalStatus.SINGLE,
     })
     expect(res.status).toEqual(400)
 
     const errors = getErrorDetails(res)
+    console.log(errors)
     expect(errors.length).toEqual(0)
   })
   it('accepts valid Legal Status', async () => {
     const res = await mockPartialGetRequest({
+      incomeWork: 0, //required for this test
       age: 65,
       legalStatus: LegalStatus.YES,
     })
@@ -190,6 +193,7 @@ describe('sanity checks', () => {
   it('accepts when years in Canada is equal to age minus 18', async () => {
     const res = await mockPartialGetRequest({
       age: 65,
+      incomeWork: 0, //required for this test
       livedOnlyInCanada: false,
       yearsInCanadaSince18: 47,
     })

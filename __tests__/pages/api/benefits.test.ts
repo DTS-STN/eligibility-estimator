@@ -74,6 +74,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     const res = await mockGetRequestError({
       ...income10k,
       ...age65NoDefer,
+      incomeWork: 0,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -156,6 +157,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
+      incomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -165,6 +167,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerIncomeWork: 0,
     })
 
     expect(res.status).toEqual(400)
@@ -237,6 +240,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
+      incomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -246,6 +250,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerIncomeWork: 0,
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
