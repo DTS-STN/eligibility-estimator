@@ -171,7 +171,7 @@ const en: Translations = {
       "If you're not sure of the exact number, you may enter an estimate.",
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
-    [FieldKey.LIVED_ONLY_IN_CANADA]:
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
   },
   questionOptions: {

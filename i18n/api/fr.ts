@@ -179,7 +179,7 @@ const fr: Translations = {
       "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
     [FieldKey.LIVED_ONLY_IN_CANADA]:
       "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
-    [FieldKey.LIVED_ONLY_IN_CANADA]:
+    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
   },
   questionOptions: {
