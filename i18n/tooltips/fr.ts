@@ -105,6 +105,26 @@ const fr: TooltipTranslations = {
            </div> \
     ",
   },
+  [FieldKey.LIVED_ONLY_IN_CANADA]: {
+    heading: apiFr.category.residence,
+    moreinfo: 'Quand la résidence commence-t-elle à compter?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+              La résidence commence lorsque vous établissez votre demeure et vivez au Canada. \
+            </p> \
+          </div> \
+    ",
+  },
+  [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: {
+    heading: apiFr.category.marital,
+    moreinfo: 'Quand la résidence commence-t-elle à compter?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+              La résidence commence lorsque votre conjoint établit sa demeure et vit au Canada. \
+            </p> \
+          </div> \
+    ",
+  },
 }
 
 export default fr
