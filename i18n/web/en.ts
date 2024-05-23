@@ -469,7 +469,7 @@ const en: WebTranslations = {
   },
   incomeLabel:
     'What will be your annual net income when you start receiving your benefits?',
-  incomeHintTitle: 'How will your income be calculated when you apply',
+  incomeHintTitle: 'How will your income be calculated when you apply?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
