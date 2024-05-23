@@ -172,14 +172,10 @@ const fr: Translations = {
       "Si vous n'avez pas reporté votre pension, passez à l'étape suivante.",
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+      "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
-    [FieldKey.LIVED_ONLY_IN_CANADA]:
-      "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
-    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
   },
   questionOptions: {

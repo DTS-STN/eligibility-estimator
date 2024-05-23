@@ -104,7 +104,7 @@ const en: TooltipTranslations = {
           </div> \
     ",
   },
-  [FieldKey.LIVED_ONLY_IN_CANADA]: {
+  [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
     heading: apiEn.category.residence,
     moreinfo: 'When does residence start counting?',
     text: "<div style='margin-bottom: 16px;'> \
@@ -114,7 +114,7 @@ const en: TooltipTranslations = {
           </div> \
     ",
   },
-  [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: {
+  [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
     heading: apiEn.category.marital,
     moreinfo: 'When does residence start counting?',
     text: "<div style='margin-bottom: 16px;'> \

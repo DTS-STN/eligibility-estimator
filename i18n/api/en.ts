@@ -164,14 +164,10 @@ const en: Translations = {
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "If you're not sure of the exact number, you may enter an estimate.",
+      'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "If you're not sure of the exact number, you may enter an estimate.",
-    [FieldKey.LIVED_ONLY_IN_CANADA]:
-      'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
-    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
   },
   questionOptions: {
