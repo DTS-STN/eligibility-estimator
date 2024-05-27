@@ -164,12 +164,14 @@ const en: WebTranslations = {
   error500TextLink: '• Try refreshing the page or try again later',
   error503TextLink: '• Try again later',
   errorPageType: 'Error',
+  //
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
   breadcrumb2aTitle: 'Service Canada Labs',
   breadcrumb2aURL:
     'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
+  //
   // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
@@ -181,13 +183,14 @@ const en: WebTranslations = {
   breadcrumb4Title: 'Old Age Security',
   breadcrumb4URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-  breadcrumb5Title: 'Old Age Security payment amounts',
+  breadcrumb5Title: 'Payment amounts',
   breadcrumb5URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
-  breadcrumb6Title: 'Old Age Security Benefits Estimator',
+  breadcrumb6Title: 'Estimator',
   breadcrumb6URL: '/en',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/en/questions',
+  //
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
