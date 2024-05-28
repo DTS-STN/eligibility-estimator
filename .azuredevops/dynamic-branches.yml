@@ -4,6 +4,9 @@ trigger:
 pr:
   - develop
 
+pool:
+  vmImage: ubuntu-latest
+
 variables:
   azure.servicePrincipal: 'OASEE-Dynamic-Links-01/18/2024'
   webapp.name: 'app-eligibilityestimator-dev'
@@ -20,38 +23,6 @@ variables:
   System.Debug: false
 
 steps:
-  - task: PowerShell@2
-    displayName: 'Decide which AppService slot to put this preview in'
-    inputs:
-      targetType: 'inline'
-      script: |
-        [int] $slotNumber = $(System.PullRequest.PullRequestId)
-        Write-Host "Generated slot number:"
-        Write-Host "$slotNumber"
-        Write-Host "From PRID"
-        Write-Host "$(System.PullRequest.PullRequestId)"
-        Write-Host "##vso[task.setvariable variable=webapp.slotName]$slotNumber"
-        $deployURL = "https://app-eligibilityestimator-dev-pr-preview-$slotNumber.azurewebsites.net"
-        Write-Host "##vso[task.setvariable variable=app.domain]$deployURL"
-
-  - task: AzureCLI@2
-    displayName: 'Create new slot in App Service'
-    inputs:
-      azureSubscription: $(azure.servicePrincipal)
-      scriptType: 'bash'
-      scriptLocation: 'inlineScript'
-      inlineScript: |
-        az webapp deployment slot create \
-        --name $(webapp.name) \
-        --resource-group $(webapp.resourceGroup) \
-        --slot pr-preview-$(webapp.slotName) \
-        --configuration-source $(webapp.name)
-        az webapp identity assign \
-        -g $(webapp.resourceGroup) \
-        -n $(webapp.name) \
-        --slot pr-preview-$(webapp.slotName) \
-        --identities /subscriptions/400c5730-25f5-4ee6-a933-8b289b9ccb0d/resourcegroups/rg-dts-id-shared/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-SCLabs-Shared
-
   - task: Docker@2
     inputs:
       containerRegistry: '$(azureContainerRegistry.name)'
@@ -92,6 +63,36 @@ steps:
       tags: |
         $(azureContainerRegistry.tag)
         latest
+
+  - task: PowerShell@2
+    displayName: 'Decide which AppService slot to put this preview in'
+    inputs:
+      targetType: 'inline'
+      script: |
+        [int] $slotNumber = $(System.PullRequest.PullRequestId)
+        Write-Host "Generated slot number:"
+        Write-Host "$slotNumber"
+        Write-Host "From PRID"
+        Write-Host "$(System.PullRequest.PullRequestId)"
+        Write-Host "##vso[task.setvariable variable=webapp.slotName]$slotNumber"
+
+  - task: AzureCLI@2
+    displayName: 'Create new slot in App Service'
+    inputs:
+      azureSubscription: $(azure.servicePrincipal)
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az webapp deployment slot create \
+        --name $(webapp.name) \
+        --resource-group $(webapp.resourceGroup) \
+        --slot pr-preview-$(webapp.slotName) \
+        --configuration-source $(webapp.name)
+        az webapp identity assign \
+        -g $(webapp.resourceGroup) \
+        -n $(webapp.name) \
+        --slot pr-preview-$(webapp.slotName) \
+        --identities /subscriptions/400c5730-25f5-4ee6-a933-8b289b9ccb0d/resourcegroups/rg-eligibilityestimator-dev/providers/microsoft.managedidentity/userassignedidentities/id-eligibilityestimator-dev
 
   - task: AzureCLI@2
     displayName: 'Deploy pr image to new slot'
