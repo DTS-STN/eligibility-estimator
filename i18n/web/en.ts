@@ -167,14 +167,14 @@ const en: WebTranslations = {
   //
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
-  breadcrumb1aURL: 'https://www.canada.ca',
+  breadcrumb1aURL: 'https://www.canada.ca/en',
   breadcrumb2aTitle: 'Service Canada Labs',
   breadcrumb2aURL:
     'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
   //
   // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
-  breadcrumb1URL: 'https://www.canada.ca',
+  breadcrumb1URL: 'https://www.canada.ca/en',
   breadcrumb2Title: 'Benefits',
   breadcrumb2URL: 'https://www.canada.ca/en/services/benefits.html',
   breadcrumb3Title: 'Public pensions',
