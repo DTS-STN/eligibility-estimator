@@ -106,6 +106,22 @@ export interface Translations {
     oasClawbackInCanada: string
     futureOasClawbackInCanada: string
     oasClawbackNotInCanada: string
+    firstYearEligible: string
+    lastYearEligible: string
+    currentEligible: string
+    you: string
+    yourPartner: string
+    youCouldReceive: string
+    youCouldReceiveTo: string
+    youCouldReceivePerMonth: string
+    youCouldReceiveUntil: string
+    youCouldReceiveFrom: string
+    youCouldStartReceivingAt: string
+    youCouldContinueReceiving: string
+    youCouldStartReceiving: string
+    yourEstimateIsStill: string
+    yourEstimateIsStillPartner: string
+    thisEstimateIsBased: string
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string
@@ -134,6 +150,14 @@ export interface Translations {
       ifYouAlreadyApplied: string
       ifYouAlreadyReceive: string
     }
+    alw: {
+      forIndividuals: string
+      age60to64: string
+      livingInCanada: string
+      spouseReceives: string
+      yourPartnerCanApply: string
+    }
+    alws: {}
   }
   detailWithHeading: {
     ifYouDeferYourPension: { heading: string; text: string }

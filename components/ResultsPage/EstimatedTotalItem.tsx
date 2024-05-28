@@ -40,10 +40,8 @@ export const EstimatedTotalItem: React.VFC<{
 
   return (
     <li>
-      <strong>
-        {displayAmount &&
-          numberToStringCurrency(result.entitlement.result, tsln._language)}
-      </strong>
+      {displayAmount &&
+        numberToStringCurrency(result.entitlement.result, tsln._language)}
       {displayBenefitName(heading, result.entitlement.result, displayAmount)}
     </li>
   )

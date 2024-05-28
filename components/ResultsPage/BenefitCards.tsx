@@ -172,9 +172,7 @@ export const BenefitCards: React.VFC<{
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
 
     const eligibleText = eligibility
-      ? future
-        ? apiTsln.result.willBeEligible
-        : apiTsln.result.eligible
+      ? apiTsln.result.eligible
       : apiTsln.result.ineligible
 
     const nextStepText = getNextStepText(result.benefitKey, result)

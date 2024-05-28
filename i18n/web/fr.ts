@@ -313,8 +313,15 @@ const fr: WebTranslations = {
     homeSubject: `EC Économie et industrie;Allocation;Avantages sociaux;Prestation au survivant;Finances;Finances personnelles;Revenu;Pension;Pension publique,PE Personnes;Adulte;Aîné,SO Société et culture;Vieillesse`,
   },
   resultsPage: {
+    yourMonEstimateHeading: 'Votre estimation mensuelle',
+    changeInSituation:
+      'Si votre situation change, vos résultats pourraient changer.',
+    youEstimateMayChange:
+      'Votre estimation peut changer au fil du temps en fonction&nbsp:',
+    basedYourAge: 'de votre âge;',
+    basedYourPartner: 'des prestations que votre conjoint reçoit.',
     header: "Tableau des résultats d'estimation",
-    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie. Des changements dans votre situation pourraient aussi modifier vos résultats`,
+    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie.`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',

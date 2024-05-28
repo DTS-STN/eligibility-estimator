@@ -428,6 +428,23 @@ const en: Translations = {
       "Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
+    firstYearEligible: '{FIRST_ELIGIBLE_YEAR}',
+    lastYearEligible: ' onwards',
+    currentEligible: 'At this time',
+    you: 'you',
+    yourPartner: 'your partner',
+    youCouldReceive: 'could receive',
+    youCouldReceiveTo: 'to',
+    youCouldReceivePerMonth: 'per month:',
+    youCouldReceiveUntil: 'Until age',
+    youCouldReceiveFrom: 'From age ',
+    youCouldStartReceivingAt: 'At ',
+    youCouldContinueReceiving: 'could continue receiving',
+    youCouldStartReceiving: 'could start receiving',
+    yourEstimateIsStill: 'Your estimate is still',
+    yourEstimateIsStillPartner: `Your partner's estimate is still`,
+    thisEstimateIsBased:
+      'This estimate is based on {YEARS_OF_RESIDENCY} years of residence in Canada.',
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
@@ -478,6 +495,16 @@ const en: Translations = {
       ifYouAlreadyReceive:
         'If you already receive the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
     },
+    alw: {
+      forIndividuals: 'This benefit is for individuals:',
+      age60to64: 'Age 60 to 64',
+      livingInCanada: 'living in Canada',
+      spouseReceives:
+        'whose spouse or common-law partner receives the Guaranteed Income Supplement',
+      yourPartnerCanApply:
+        'Your partner can apply 6 to 11 months before they become eligible at 65',
+    },
+    alws: {},
   },
   detailWithHeading: {
     ifYouDeferYourPension: {

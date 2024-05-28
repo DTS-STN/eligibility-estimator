@@ -1,3 +1,4 @@
+import { result } from 'lodash'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
@@ -51,16 +52,6 @@ export const WillBeEligible: React.VFC<{
 
   return (
     <>
-      <h2
-        id={partner ? 'future-partner-estimate' : 'future-estimate'}
-        className="h2 mt-12"
-      >
-        <Image src="/pg-check.svg" alt="" width={30} height={30} />
-        {partner
-          ? tsln.resultsPage.partnerFutureEligible
-          : tsln.resultsPage.futureEligible}
-      </h2>
-
       {futureResults.map((resultObj, idx) => {
         const age = Object.keys(resultObj)[0]
         const onlyOASGIS = Object.keys(
@@ -115,6 +106,13 @@ export const WillBeEligible: React.VFC<{
             }
           })
         }
+
+        const headingYear = () => {
+          console.log(resultObj)
+          console.log(futureResults)
+          // console.log(futurePartnerResults)
+        }
+        headingYear()
 
         const eligibleTotalAmount = eligible.reduce(
           (sum, obj) => sum + obj.entitlement.result,

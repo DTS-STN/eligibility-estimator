@@ -358,7 +358,7 @@ const fr: Translations = {
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
-      "Vous pouvez commencer à recevoir vos paiements à {EARLIEST_ELIGIBLE_AGE} ans ou attendre d'avoir 70 ans.",
+      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
     youCanAply:
       'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
     onceEnrolled:
@@ -437,6 +437,23 @@ const fr: Translations = {
       "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
       "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
+    firstYearEligible: '{FIRST_ELIGIBLE_YEAR}',
+    lastYearEligible: 'À partir de ',
+    currentEligible: 'Présentement',
+    you: 'vous pourriez',
+    yourPartner: 'votre conjoint pourrait',
+    youCouldReceivePerMonth: 'par mois:',
+    youCouldReceiveTo: 'à',
+    youCouldReceive: 'recevoir',
+    youCouldReceiveUntil: 'Jusqu’à',
+    youCouldReceiveFrom: 'De',
+    youCouldStartReceivingAt: 'À',
+    youCouldContinueReceiving: 'continuer de recevoir',
+    youCouldStartReceiving: 'commencer à recevoir',
+    yourEstimateIsStill: 'Votre estimation est encore',
+    yourEstimateIsStillPartner: `L'estimation de votre conjoint est encore`,
+    thisEstimateIsBased:
+      'Cette estimation est basée sur {ENTITLEMENT_AMOUNT_FOR_BENEFIT} années de résidence au Canada.',
     oas: {
       eligibleIfIncomeIsLessThan:
         "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
@@ -488,6 +505,16 @@ const fr: Translations = {
       ifYouAlreadyReceive:
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
+    alw: {
+      forIndividuals: 'Cette prestation est pour les personnes veuves :',
+      age60to64: 'âgées de 60 à 64 ans;',
+      livingInCanada: 'qui vivent au Canada;',
+      spouseReceives:
+        'qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.',
+      yourPartnerCanApply:
+        'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 65 ans.',
+    },
+    alws: {},
   },
   detailWithHeading: {
     ifYouDeferYourPension: {

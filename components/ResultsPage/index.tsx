@@ -16,11 +16,10 @@ import {
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
-import { MayBeEligible } from './MayBeEligible'
-import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
+import { FutureSummaryEstimates } from './FutureSummaryEstimates'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -82,61 +81,45 @@ const ResultsPage: React.VFC<{
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
-        <div className="col-span-2 row-span-1">
-          <div dangerouslySetInnerHTML={{ __html: tsln.resultsPage.general }} />
+        <div className="col-span-2 row-span-1 border-[#269ABC] bg-[#EEFAFF] p-8">
+          {/* Current results eligible */}
+          <div className="mb-7">
+            {(resultsEligible.length > 0 ||
+              partnerResultsEligible.length > 0) && (
+              <h3 className="h3">{apiTsln.detail.currentEligible}</h3>
+            )}
+            {resultsEligible.length > 0 && (
+              <EstimatedTotal
+                resultsEligible={resultsEligible}
+                entitlementSum={summary.entitlementSum}
+                state={summary.state}
+                partnerNoOAS={partnerNoOAS}
+              />
+            )}
 
-          {resultsEligible.length > 0 && (
-            <EstimatedTotal
-              resultsEligible={resultsEligible}
-              entitlementSum={summary.entitlementSum}
-              state={summary.state}
-              partnerNoOAS={partnerNoOAS}
-            />
-          )}
+            {isPartnered && partnerResultsEligible.length > 0 && (
+              <EstimatedTotal
+                resultsEligible={partnerResultsEligible}
+                entitlementSum={summary.partnerEntitlementSum}
+                state={summary.partnerState}
+                partner={true}
+                partnerNoOAS={partnerNoOAS}
+              />
+            )}
+          </div>
 
+          {/* FUTURE RESULTS SUMMARY */}
           {futureClientResults && (
-            <WillBeEligible
+            <FutureSummaryEstimates
               futureResults={futureClientResults}
+              futurePartnerResults={futurePartnerResults}
               partnerNoOAS={partnerNoOAS}
               multipleResults={resultsEligible.length > 0}
               eligibleOAS={
                 resultsEligible.filter((obj) => obj.benefitKey === 'oas')
                   .length > 0
               }
-            />
-          )}
-
-          {!futureClientResults && (
-            <MayBeEligible resultsEligible={resultsEligible} />
-          )}
-
-          {isPartnered && partnerResultsEligible.length > 0 && (
-            <EstimatedTotal
-              resultsEligible={partnerResultsEligible}
-              entitlementSum={summary.partnerEntitlementSum}
-              state={summary.partnerState}
-              partner={true}
-              partnerNoOAS={partnerNoOAS}
-            />
-          )}
-
-          {futurePartnerResults && (
-            <WillBeEligible
-              futureResults={futurePartnerResults}
-              partner={true}
-              partnerNoOAS={partnerNoOAS}
-              multipleResults={partnerResultsEligible.length > 0}
-              eligibleOAS={
-                partnerResultsEligible.filter((obj) => obj.benefitKey === 'oas')
-                  .length > 0
-              }
-            />
-          )}
-
-          {isPartnered && !futurePartnerResults && (
-            <MayBeEligible
-              resultsEligible={partnerResultsEligible}
-              partner={true}
+              userAge={inputs[0].value}
             />
           )}
         </div>

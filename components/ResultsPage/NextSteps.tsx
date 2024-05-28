@@ -90,26 +90,6 @@ export function getAlwNextSteps(
   apiTsln: Translations,
   tsln: WebTranslations
 ) {
-  // if (result.eligibility.result === ResultKey.ELIGIBLE) {
-  //   const ifYouApplyText =
-  //     apiTsln.detail.alwIfYouApply +
-  //     `<strong>${numberToStringCurrency(
-  //       legalValues.alw.alwIncomeLimit,
-  //       apiTsln._language,
-  //       { rounding: 0 }
-  //     )}</strong>.`
-
-  //   if (inputAge < 60) {
-  //     nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-  //     nextStepText.nextStepContent += apiTsln.detail.alwsApply
-  //     if (result.entitlement.result === 0) {
-  //       nextStepText.nextStepContent += ifYouApplyText
-  //     }
-  //   } else if (result.entitlement.result === 0) {
-  //     nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-  //     nextStepText.nextStepContent += ifYouApplyText
-  //   }
-  // }
   const ifYouApplyText =
     apiTsln.detail.alwIfYouApply +
     `<strong>${numberToStringCurrency(
@@ -128,7 +108,19 @@ export function getAlwNextSteps(
     } else {
       nextStepText.nextStepContent += ifYouApplyText
     }
-  } else {
+  } else if (result.eligibility.result === ResultKey.INELIGIBLE) {
+    nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.alw.forIndividuals}</p>`
+    nextStepText.nextStepContent += `<ul class='pl-[35px] ml-[20px] my-1 list-disc text-content'>
+    <li>${apiTsln.detail.alw.age60to64}</li>
+    <li>${apiTsln.detail.alw.livingInCanada}</li>
+    <li>${apiTsln.detail.alw.spouseReceives}</li>
+  </ul>`
+    // if (
+    //   partnerResults.result.eligibility.result === ResultKey.ELIGIBLE ||
+    //   partnerResults.result.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
+    // ) {
+    //   nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.alw.forIndividuals}</p>`
+    // }
   }
 
   return nextStepText
@@ -142,26 +134,31 @@ export function getAlwsNextSteps(
   apiTsln: Translations,
   tsln: WebTranslations
 ) {
-  if (result.eligibility.result === ResultKey.ELIGIBLE) {
-    const ifYouApplyText = `${
-      apiTsln.detail.alwsIfYouApply
-    }<strong data-cy='next-step-limit'>${numberToStringCurrency(
+  const ifYouApplyText =
+    apiTsln.detail.alwIfYouApply +
+    `<strong>${numberToStringCurrency(
       legalValues.alw.afsIncomeLimit,
       apiTsln._language,
       { rounding: 0 }
     )}</strong>.`
+  nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
 
-    if (inputAge < 60) {
-      nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
-      nextStepText.nextStepContent += `${apiTsln.detail.alwsApply}`
-
-      if (result.entitlement.result === 0) {
-        nextStepText.nextStepContent += ifYouApplyText
-      }
-    } else if (result.entitlement.result === 0) {
-      nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
+  if (
+    result.eligibility.result === ResultKey.ELIGIBLE ||
+    result.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
+  ) {
+    if (result.entitlement.result > 0) {
+      nextStepText.nextStepContent += apiTsln.detail.alwsApply
+    } else {
       nextStepText.nextStepContent += ifYouApplyText
     }
+  } else if (result.eligibility.result === ResultKey.INELIGIBLE) {
+    nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.alw.forIndividuals}</p>`
+    nextStepText.nextStepContent += `<ul class='pl-[35px] ml-[20px] my-1 list-disc text-content'>
+    <li>${apiTsln.detail.alw.age60to64}</li>
+    <li>${apiTsln.detail.alw.livingInCanada}</li>
+    <li>${apiTsln.detail.alw.spouseReceives}</li>
+  </ul>`
   }
 
   return nextStepText

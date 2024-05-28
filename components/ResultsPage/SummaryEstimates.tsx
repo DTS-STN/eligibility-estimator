@@ -7,7 +7,7 @@ import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { EstimatedTotalItem } from './EstimatedTotalItem'
 
-export const EstimatedTotal: React.VFC<{
+export const SummaryEstimates: React.VFC<{
   resultsEligible: BenefitResult[]
   entitlementSum: number
   state: SummaryState
@@ -26,7 +26,7 @@ export const EstimatedTotal: React.VFC<{
   const language = useRouter().locale as Language
 
   const buildSummaryString = (partner) => {
-    return `${!partner ? apiTrans.detail.you : apiTrans.detail.yourPartner} ${
+    return `${partner ? apiTrans.detail.yourPartner : ''} ${
       apiTrans.detail.youCouldReceive
     } ${numberToStringCurrency(entitlementSum, language)} ${
       apiTrans.detail.youCouldReceivePerMonth

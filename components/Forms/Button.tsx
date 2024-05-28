@@ -48,7 +48,7 @@ export const Button: React.FC<ButtonProps> = ({
   return href ? (
     <Link href={href} locale={locale}>
       <a className={classes} aria-label={ariaLabel} {...attributes}>
-        {text}
+        {imgHref && <img src={imgHref} alt="alt" className="pr-3" />} {text}
       </a>
     </Link>
   ) : (

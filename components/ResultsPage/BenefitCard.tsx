@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
 import { CustomCollapse } from './CustomCollapse'
+import { Router, useRouter } from 'next/router'
 
 const AA_BUTTON_CLICK_ATTRIBUTE =
   'ESDC-EDSC:Canadian OAS Benefits Est. Result card link click'
@@ -39,16 +40,16 @@ export const BenefitCard: React.VFC<{
     <span
       data-cy="eligibility-flag"
       className={`px-2 py-1 ml-2 border-left border-l-4 font-semibold text-[15px] ${
-        isEligible
-          ? future
-            ? 'border-[#269ABC] bg-[#D7FAFF]'
-            : ' border-success bg-[#D8EECA] '
+        isEligible || future
+          ? ' border-success bg-[#D8EECA] '
           : ' border-[#EE7100] bg-[#F9F4D4] '
       }`}
     >
       {eligibleText}
     </span>
   )
+
+  const router = useRouter()
 
   return (
     <div
@@ -93,13 +94,6 @@ export const BenefitCard: React.VFC<{
 
       {nextStepText.nextStepTitle && (
         <div>
-          {/* <p
-            data-cy="next-step-title"
-            className="mb-2 mt-6
-            font-bold text-[24px]"
-          >
-            {nextStepText.nextStepTitle}
-          </p> */}
           <p
             data-cy="next-step-content"
             dangerouslySetInnerHTML={{ __html: nextStepText.nextStepContent }}
@@ -111,9 +105,6 @@ export const BenefitCard: React.VFC<{
         {links &&
           links.map(({ text, url, icon, alt, action }, index) => (
             <div key={index} className="flex items-center  text-content">
-              {/* <div>
-                <Image src={`/${icon}.png`} alt={alt} width="40" height="40" />
-              </div> */}
               <div className="pl-1 w-full block">
                 <span
                   className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
@@ -126,17 +117,8 @@ export const BenefitCard: React.VFC<{
                     type="button"
                     text={text}
                     imgHref={`/openNewTab.svg`}
-                    onClick={console.log}
-                  />
-                  {/* <a
-                    id={`${benefitKey}Link${index}`}
                     href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="align-top"
-                  >
-                    {text}
-                  </a> */}
+                  />
                 </span>
               </div>
             </div>

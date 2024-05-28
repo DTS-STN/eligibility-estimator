@@ -216,6 +216,12 @@ export type WebTranslations = {
   }
   //results page
   resultsPage: {
+    yourMonEstimateHeading: string
+    changeInSituation: string
+    youEstimateMayChange: string
+    basedYourAge: string
+    basedYourPartner: string
+
     header: string
     general: string
     onThisPage: string

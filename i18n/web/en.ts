@@ -308,9 +308,14 @@ const en: WebTranslations = {
       'EC Economics and Industry;Allowances;Benefits;Survivor benefits;Finance;Personal finance;Income;Pensions;Public pensions,PE Persons;Adults;Seniors,So Society and Culture;Old age',
   },
   resultsPage: {
+    yourMonEstimateHeading: 'Your monthly estimate',
+    changeInSituation: 'Changes in your situation may impact your results.',
+    youEstimateMayChange: 'Your estimate may change over time based on:',
+    basedYourAge: 'your age',
+    basedYourPartner: 'the benefits your partner receives',
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
+      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living.',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
