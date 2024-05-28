@@ -168,12 +168,14 @@ const fr: WebTranslations = {
   error500TextLink: '• Actualisez la page ou réessayez plus tard',
   error503TextLink: '• Réessayez plus tard',
   errorPageType: 'Erreur',
+  //
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
   breadcrumb2aTitle: 'Laboratoires de Service Canada',
   breadcrumb2aURL:
     'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
+  //
   // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
@@ -185,14 +187,14 @@ const fr: WebTranslations = {
   breadcrumb4Title: 'Sécurité de la vieillesse',
   breadcrumb4URL:
     'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse.html',
-  breadcrumb5Title: 'Montant des paiements de la Sécurité de la vieillesse',
+  breadcrumb5Title: 'Montant des paiements',
   breadcrumb5URL:
     'https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/paiements.html',
-  breadcrumb6Title:
-    'Estimateur des prestations de la Sécurité de la vieillesse',
+  breadcrumb6Title: 'Estimateur',
   breadcrumb6URL: '/fr',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/fr/questions',
+  //
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
   questionPageTitle:
