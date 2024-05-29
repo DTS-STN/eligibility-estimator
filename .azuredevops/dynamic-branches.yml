@@ -23,6 +23,20 @@ variables:
   System.Debug: false
 
 steps:
+  - task: PowerShell@2
+    displayName: 'Decide which AppService slot to put this preview in'
+    inputs:
+      targetType: 'inline'
+      script: |
+        [int] $slotNumber = $(System.PullRequest.PullRequestId) % 4
+        Write-Host "Generated slot number:"
+        Write-Host "$slotNumber"
+        Write-Host "From PRID"
+        Write-Host "$(System.PullRequest.PullRequestId)"
+        Write-Host "##vso[task.setvariable variable=webapp.slotName]$slotNumber"
+        $deployURL = "https://app-eligibilityestimator-dev-pr-preview-$slotNumber.azurewebsites.net"
+        Write-Host "##vso[task.setvariable variable=app.domain]$deployURL"
+
   - task: Docker@2
     inputs:
       containerRegistry: '$(azureContainerRegistry.name)'
@@ -63,18 +77,6 @@ steps:
       tags: |
         $(azureContainerRegistry.tag)
         latest
-
-  - task: PowerShell@2
-    displayName: 'Decide which AppService slot to put this preview in'
-    inputs:
-      targetType: 'inline'
-      script: |
-        [int] $slotNumber = $(System.PullRequest.PullRequestId) % 4
-        Write-Host "Generated slot number:"
-        Write-Host "$slotNumber"
-        Write-Host "From PRID"
-        Write-Host "$(System.PullRequest.PullRequestId)"
-        Write-Host "##vso[task.setvariable variable=webapp.slotName]$slotNumber"
 
   - task: AzureCLI@2
     displayName: 'Create new slot in App Service'
