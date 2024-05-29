@@ -37,6 +37,13 @@ steps:
         $deployURL = "https://app-eligibilityestimator-dev-pr-preview-$slotNumber.azurewebsites.net"
         Write-Host "##vso[task.setvariable variable=app.domain]$deployURL"
 
+  - task: AzureKeyVault@2
+    inputs:
+      azureSubscription: 'id-eligibilityestimator-dev'
+      KeyVaultName: 'kv-oas-ee-dev'
+      SecretsFilter: 'DEV-ADOBE-ANALYTICS-URL, NEXT-AUTH-PASSWORD, NEXT-AUTH-USERCODE'
+      RunAsPreJob: false
+
   - task: Docker@2
     inputs:
       containerRegistry: '$(azureContainerRegistry.name)'
