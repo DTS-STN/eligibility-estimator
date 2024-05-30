@@ -20,8 +20,8 @@ describe('field requirement analysis', () => {
     const res = await mockGetRequest({
       incomeAvailable: undefined,
       income: undefined,
-      incomeWork: undefined,
-      partnerIncomeWork: undefined,
+      incomeWork: undefined, //default to 0
+      partnerIncomeWork: undefined, //default to 0
       age: undefined,
       oasDefer: undefined,
       oasAge: undefined,
@@ -40,7 +40,7 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
       FieldKey.INCOME,
-      FieldKey.INCOME_WORK,
+      //FieldKey.INCOME_WORK,
       FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,

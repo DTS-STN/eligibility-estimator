@@ -105,7 +105,10 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-mobile sm:text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content pb-2;
+    @apply text-mobile sm:text-h1 font-bold font-header-gc text-content pb-2;
+    border-bottom: .18em solid #AF3C43;
+    border-image: linear-gradient(to right, #AF3C43 71px, transparent 71px);
+    border-image-slice: 1;
   }
 
   .h2 {
@@ -311,6 +314,7 @@
     text-decoration-line: underline;
     --tw-text-opacity: 1;
     color: rgb(40 65 98 / var(--tw-text-opacity));
+    visited: #7834BC !important;
   }
 
   #oasDefer a:hover,
@@ -359,5 +363,9 @@
 
   [id^='help-text'] > ul > li::marker {
     font-size: 12px;
+  }
+
+  a:visited {
+    color: #7834BC !important;
   }
 }

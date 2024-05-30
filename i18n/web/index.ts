@@ -123,6 +123,7 @@ export type WebTranslations = {
   incomeHintText: string
   incomeHintTextReceiveOAS: string
   partnerIncomeHintTitleReceiveOAS: string
+  partnerIncomeHintTitle: string
   partnerIncomeHintText: string
   partnerIncomeHintTextReceiveOAS: string
 

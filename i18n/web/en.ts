@@ -164,12 +164,14 @@ const en: WebTranslations = {
   error500TextLink: '• Try refreshing the page or try again later',
   error503TextLink: '• Try again later',
   errorPageType: 'Error',
+  //
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
   breadcrumb1aURL: 'https://www.canada.ca',
   breadcrumb2aTitle: 'Service Canada Labs',
   breadcrumb2aURL:
     'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
+  //
   // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
   breadcrumb1URL: 'https://www.canada.ca',
@@ -181,13 +183,14 @@ const en: WebTranslations = {
   breadcrumb4Title: 'Old Age Security',
   breadcrumb4URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-  breadcrumb5Title: 'Old Age Security payment amounts',
+  breadcrumb5Title: 'Payment amounts',
   breadcrumb5URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
-  breadcrumb6Title: 'Old Age Security Benefits Estimator',
+  breadcrumb6Title: 'Estimator',
   breadcrumb6URL: '/en',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/en/questions',
+  //
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
@@ -469,41 +472,42 @@ const en: WebTranslations = {
   },
   incomeLabel:
     'What will be your annual net income when you start receiving your benefits?',
-  incomeLabelReceiveOAS: 'What is your annual net income?',
-  partnerIncomeLabel:
-    'What will be your partner’s annual net income when you start receiving your benefits?',
-  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
-  incomeHintTitle: 'Will this income be used in your application?',
-  incomeHintTitleReceiveOAS: 'Is your income about to change?',
+  incomeHintTitle: 'How will your income be calculated when you apply?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  No, this is an estimation. Your actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> will be assessed when you apply. \
-  </p> \
-</div> \
-",
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        Your <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> will be assessed when you apply based on your latest income tax return. \
+      </p> \
+    </div> \
+  ",
+  incomeLabelReceiveOAS: 'What is your annual net income?',
+  incomeHintTitleReceiveOAS: 'Is your income about to change?',
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  If you're expecting a drop in income, you can enter your estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> to report this event. \
-  </p> \
-</div> \
-",
-  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        If you're expecting a drop in income, you can enter your estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> to report this event. \
+      </p> \
+    </div> \
+  ",
+  partnerIncomeLabel:
+    'What will be your partner’s annual net income when you start receiving your benefits?',
+  partnerIncomeHintTitle: 'How will their income be calculated when you apply?',
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  No, this is an estimation. Your partner’s actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> will be assessed when you apply. \
-  </p> \
-</div> \
-",
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        Your partner’s <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> will be assessed when you apply based on their latest income tax return. \
+      </p> \
+    </div> \
+  ",
+  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
+  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  If your partner is expecting a drop in income, you can enter their estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> to report this event. \
-  </p> \
-</div> \
-",
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        If your partner is expecting a drop in income, you can enter their estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> to report this event. \
+      </p> \
+    </div> \
+  ",
 }
 
 export default en

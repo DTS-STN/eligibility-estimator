@@ -82,6 +82,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.INCOME_WORK,
     category: { key: FieldCategory.INCOME },
     type: FieldType.CURRENCY,
+    default: '0',
   },
   [FieldKey.LEGAL_STATUS]: {
     key: FieldKey.LEGAL_STATUS,
@@ -150,6 +151,7 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.PARTNER_INCOME_WORK,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.CURRENCY,
+    default: '0',
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
     key: FieldKey.PARTNER_LEGAL_STATUS,
@@ -219,6 +221,7 @@ interface FieldConfigDuration extends FieldConfigGeneric {
 interface FieldConfigCurrency extends FieldConfigGeneric {
   type: FieldType.CURRENCY
   placeholder?: string
+  default?: string
 }
 
 interface FieldConfigNumber extends FieldConfigGeneric {
