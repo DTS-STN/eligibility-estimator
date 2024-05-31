@@ -486,15 +486,15 @@ describe('gisCoupleOnePenBenefit', () => {
     ]
 
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 461.39)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 452.59)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 983.28)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 69.58, 461.39, 400.65, 0)
-    expectFutureOasGisBenefitEligible(res, 74.58, 461.39, 400.65, 1)
+    expectFutureOasGisBenefitEligible(res, 69.58, 452.59, 400.65, 0)
+    expectFutureOasGisBenefitEligible(res, 74.58, 452.59, 400.65, 1)
 
     //partner results
     expectAllIneligible(res, true)

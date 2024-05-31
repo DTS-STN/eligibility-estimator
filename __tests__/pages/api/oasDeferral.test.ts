@@ -36,7 +36,7 @@ describe('OasDEferral', () => {
       { age: 70, amount: 950.1 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 748.9)
+    expectOasEligible(res, EntitlementResultType.FULL, 744.71)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 48.82)
     expectAlwTooOld(res)
@@ -239,13 +239,13 @@ describe('OasDEferral', () => {
       { age: 70, amount: 950.1 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 769.86)
+    expectOasEligible(res, EntitlementResultType.FULL, 765.67)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 295.3)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 70.5, 769.86, 62.3, 0)
+    expectFutureOasGisBenefitEligible(res, 70.5, 765.67, 62.3, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -267,13 +267,13 @@ describe('OasDEferral', () => {
       { age: 70, amount: 950.1 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 748.9)
+    expectOasEligible(res, EntitlementResultType.FULL, 744.71)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 241.52)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 71, 748.9, 0.0, 0)
+    expectFutureOasGisBenefitEligible(res, 71, 744.71, 0.0, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -295,13 +295,13 @@ describe('OasDEferral', () => {
       { age: 70, amount: 926.35 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 754.7)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 750.62)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 258.98)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 71.5, 754.7, 0.0, 0)
+    expectFutureOasGisBenefitEligible(res, 71.5, 750.62, 0.0, 0)
 
     //partner results
     expectOasNotEligible(res, true)
@@ -322,13 +322,13 @@ describe('OasDEferral', () => {
       { age: 70, amount: 926.35 },
     ]
     //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 754.7)
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 750.62)
     expectDeferralTable(res, deferralTable)
     expectGisEligible(res, 66.28)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
     //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 71.5, 754.7, 66.28, 0)
+    expectFutureOasGisBenefitEligible(res, 71.5, 750.62, 66.28, 0)
 
     //partner results
     expectOasNotEligible(res, true)

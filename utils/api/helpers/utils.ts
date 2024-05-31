@@ -274,7 +274,8 @@ export function evaluateOASInput(input) {
     input.livedOnlyInCanada,
     input.livingCountry.value
   )
-
+  console.log('ageJuly2013', ageJuly2013)
+  console.log('eliObj', eliObj)
   let newInput = { ...input }
 
   let deferralMonths
@@ -294,10 +295,10 @@ export function evaluateOASInput(input) {
         ageOfEligibility: ageJuly2013,
         yearsOfResAtEligibility: newRes,
       }
-      deferralMonths = (70 - ageJuly2013) * 12
+      deferralMonths = (70.08 - ageJuly2013) * 12
     } else {
       // They became eligible after July 2013 -> use age and residency as is (at the time they became eligible for OAS)
-      deferralMonths = (Math.min(70, age) - eliObj.ageOfEligibility) * 12
+      deferralMonths = (Math.min(70.08, age) - eliObj.ageOfEligibility) * 12 - 1 // subtract 1 because duration only starts after the first month after eligibility
     }
   }
 
@@ -316,7 +317,7 @@ export function evaluateOASInput(input) {
       ? 40
       : Math.min(40, Math.floor(eliObj.yearsOfResAtEligibility))
     newInput['oasDeferDuration'] = JSON.stringify({
-      months: Math.max(Math.round(deferralMonths - 1), 0), // subtract 1 because duration only starts after the first month after eligibility
+      months: Math.max(Math.round(deferralMonths), 0),
       years: 0,
     })
     consoleDev(

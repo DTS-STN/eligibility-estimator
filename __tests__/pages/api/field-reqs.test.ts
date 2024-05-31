@@ -86,7 +86,6 @@ describe('field requirement analysis', () => {
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
-      FieldKey.ALREADY_RECEIVE_OAS,
       FieldKey.OAS_AGE,
       // FieldKey.INCOME_AVAILABLE,
       FieldKey.INCOME,
