@@ -108,7 +108,7 @@ export const QuestionsPage: React.VFC = ({}) => {
   const [incomeHintTitle, setIncomeHintTitle] = useState(tsln.incomeHintTitle)
   const [incomeHintText, setIncomeHintText] = useState(tsln.incomeHintText)
   const [partnerIncomeHintTitle, setPartnerIncomeHintTitle] = useState(
-    tsln.incomeHintTitle
+    tsln.partnerIncomeHintTitle
   )
   const [partnerIncomeHintText, setPartnerIncomeHintText] = useState(
     tsln.partnerIncomeHintText
@@ -139,7 +139,7 @@ export const QuestionsPage: React.VFC = ({}) => {
       : tsln.incomeHintText
     const partnerIncomeHintTitle = receiveOAS
       ? tsln.partnerIncomeHintTitleReceiveOAS
-      : tsln.incomeHintTitle
+      : tsln.partnerIncomeHintTitle
     const partnerIncomeHintText = receiveOAS
       ? tsln.partnerIncomeHintTextReceiveOAS
       : tsln.partnerIncomeHintText
