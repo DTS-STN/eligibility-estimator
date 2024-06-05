@@ -95,7 +95,8 @@ export const textReplacementRules: TextReplacementRules = {
     handler.fields.input.client.maritalStatus.partnered
       ? handler.fields.translations.incomeCombined
       : handler.fields.translations.incomeSingle,
-  EARLIEST_ELIGIBLE_AGE: (handler) => String(handler.rawInput.age),
+  EARLIEST_ELIGIBLE_AGE: (handler) =>
+    getEligibleAgeWithMonths(handler.rawInput.age),
   LINK_SERVICE_CANADA: (handler) =>
     generateLink(handler.fields.translations.links.SC),
   MY_SERVICE_CANADA: (handler) =>
@@ -132,6 +133,17 @@ export const textReplacementRules: TextReplacementRules = {
 
 export function generateLink(link: Link, opensNewWindow?: string): string {
   return `<a class="underline text-default-text generatedLink" href="${link.url}" target="_blank">${link.text}</a>`
+}
+
+export function getEligibleAgeWithMonths(age: number) {
+  if (Number.isInteger(age)) {
+    return age.toString()
+  }
+
+  const years = Math.floor(age)
+  const months = Math.round((age - years) * 12)
+
+  return `${years} years and ${months} months`
 }
 
 export function getMaxYear(): number {
