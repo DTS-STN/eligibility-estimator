@@ -90,7 +90,29 @@ export const Layout: React.VFC<{
       text: tsln.breadcrumb4Title,
       link: tsln.breadcrumb4URL,
     },
+    {
+      text: tsln.breadcrumb5Title,
+      link: tsln.breadcrumb5URL,
+    },
   ]
+
+  if (
+    router.pathname === '/questions' ||
+    router.pathname === '/results' ||
+    router.pathname === '/resultats'
+  ) {
+    if (!prodEnv || prodEnv === 'alpha') {
+      alphaBreadcrumbs.push({
+        text: tsln.breadcrumb6Title,
+        link: tsln.breadcrumb6URL,
+      })
+    } else {
+      betaBreadcrumbs.push({
+        text: tsln.breadcrumb6Title,
+        link: tsln.breadcrumb6URL,
+      })
+    }
+  }
 
   const handleOnClick = () => {
     const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`

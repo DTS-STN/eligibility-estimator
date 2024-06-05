@@ -171,14 +171,14 @@ const fr: WebTranslations = {
   //
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
-  breadcrumb1aURL: 'https://www.canada.ca',
+  breadcrumb1aURL: 'https://www.canada.ca/fr',
   breadcrumb2aTitle: 'Laboratoires de Service Canada',
   breadcrumb2aURL:
     'https://alpha.service.canada.ca/fr/projets/estimateur-prestations-sv',
   //
   // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
-  breadcrumb1URL: 'https://www.canada.ca',
+  breadcrumb1URL: 'https://www.canada.ca/fr',
   breadcrumb2Title: 'Prestations',
   breadcrumb2URL: 'https://www.canada.ca/fr/services/prestations.html',
   breadcrumb3Title: 'Pensions publiques',
