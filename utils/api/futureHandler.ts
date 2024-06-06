@@ -104,6 +104,7 @@ export class FutureHandler {
       this.query.livedOnlyInCanada === 'true',
       String(this.query.livingCountry)
     )
+
     const oasAge = eliObjOas.ageOfEligibility
 
     const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
