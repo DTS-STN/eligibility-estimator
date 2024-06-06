@@ -134,7 +134,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               dangerouslySetInnerHTML={{ __html: tsln.privacyDefinition }}
             />
             <details
-              className="text-h6 border border-[#dddddd] rounded mb-1"
+              className="text-h6 border border-[#dddddd] rounded mb-1 mt-3"
               data-testid={`tooltip-shared`}
             >
               <summary

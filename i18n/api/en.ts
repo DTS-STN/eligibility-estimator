@@ -149,13 +149,13 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including CPP and QPP)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including RRSPs).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plan">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including CPP and QPP)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including RRSPs).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plan">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.PARTNER_INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
     [FieldKey.OAS_DEFER_DURATION]:
@@ -164,14 +164,10 @@ const en: Translations = {
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "If you're not sure of the exact number, you may enter an estimate.",
+      'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "If you're not sure of the exact number, you may enter an estimate.",
-    [FieldKey.LIVED_ONLY_IN_CANADA]:
-      'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
-    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
   },
   questionOptions: {

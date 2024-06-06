@@ -157,13 +157,13 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le RPC et le RRQ);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un REER).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
       "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le RPC et le RRQ);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un REER).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.PARTNER_INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
     [FieldKey.OAS_DEFER]:
@@ -172,14 +172,10 @@ const fr: Translations = {
       "Si vous n'avez pas reporté votre pension, passez à l'étape suivante.",
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
+      "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      "Si vous n'êtes pas certain du nombre exact, vous pouvez entrer une estimation.",
-    [FieldKey.LIVED_ONLY_IN_CANADA]:
-      "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
-    [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
   },
   questionOptions: {

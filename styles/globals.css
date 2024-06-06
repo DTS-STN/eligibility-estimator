@@ -368,4 +368,8 @@
   a:visited {
     color: #7834BC !important;
   }
+
+  dfn {
+    font-style: normal;
+  }
 }
