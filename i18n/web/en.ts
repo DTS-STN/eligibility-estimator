@@ -204,7 +204,7 @@ const en: WebTranslations = {
   required: '(required)',
   workInProgress: 'This estimator is a work in progress',
   workInProgressBody:
-    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
+    'You can help improve it by: <ul class="list-disc" style="margin-left: 2rem;")><li><a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">giving your feedback</a></li><li><a class="underline text-default-text generatedLink" href="https://forms-formulaires.alpha.canada.ca/en/id/clwi90pv301hsx883ffit057r" target="_blank">trying our next version</a></li></ul>',
   homePageP1:
     'Use this estimator to find out how much money you could get from Old Age Security benefits. This is not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
