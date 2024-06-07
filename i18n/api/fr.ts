@@ -338,7 +338,7 @@ const fr: Translations = {
     futureEligible60:
       'Vous serez probablement admissible lorsque vous aurez 60 ans.',
     futureEligible:
-      'Vous serez probablement admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE} ans.',
+      'Vous serez probablement admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}.',
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     futureEligibleIncomeTooHigh:
