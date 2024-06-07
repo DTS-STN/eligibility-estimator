@@ -210,7 +210,7 @@ const fr: WebTranslations = {
   required: '(obligatoire)',
   workInProgress: 'Cet estimateur est un travail en cours',
   workInProgressBody:
-    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
+    'Vous pouvez aider à l’améliorer en : <ul class="list-disc" style="margin-left: 2rem;")><li><a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">donnant votre rétroaction</a></li><li><a class="underline text-default-text generatedLink" href="https://forms-formulaires.alpha.canada.ca/fr/id/clwi90pv301hsx883ffit057r" target="_blank">essayant notre prochaine version</a></li></ul>',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Il ne s'agit pas d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
