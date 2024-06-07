@@ -232,7 +232,6 @@ export function OasEligibility(
         : yearsInCanadaAtStart
   }
 
-  console.log('yearsOfResAtEligibility', yearsOfResAtEligibility)
   return {
     ageOfEligibility,
     yearsOfResAtEligibility: livedOnlyInCanada

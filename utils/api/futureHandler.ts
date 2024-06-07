@@ -53,8 +53,6 @@ export class FutureHandler {
       String(this.query.livingCountry)
     )
 
-    console.log('eliObj', eliObj)
-
     this.newQuery['age'] = String(eliObj.ageOfEligibility)
     this.newQuery['receiveOAS'] = 'false'
 
