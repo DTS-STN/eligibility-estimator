@@ -137,7 +137,7 @@ export function generateLink(link: Link, opensNewWindow?: string): string {
 
 export function getEligibleAgeWithMonths(age: number, language: string) {
   if (Number.isInteger(age)) {
-    return age.toString()
+    return age.toString() //
   }
 
   const years = Math.floor(age)
