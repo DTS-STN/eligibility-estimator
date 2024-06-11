@@ -364,7 +364,6 @@
   [id^='help-text'] > ul > li::marker {
     font-size: 12px;
   }
-<<<<<<< HEAD
 
   a:visited {
     color: #7834BC !important;
@@ -373,6 +372,4 @@
   dfn {
     font-style: normal;
   }
-=======
->>>>>>> main
 }
