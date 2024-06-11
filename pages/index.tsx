@@ -79,10 +79,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.headerWhatToKnow}
           </h2>
-          <p
-            className="xs:mt-4 sm:mt-12 xs:pr-3 w-full sm:w-[73%]"
-            dangerouslySetInnerHTML={{ __html: tsln.youNeedBeginningText }}
-          />
           <p className="xs:mt-4 sm:mt-12">
             {tsln.estimatorIncludeQuestionText}
           </p>
@@ -105,7 +101,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           <div className="flex justify-start mt-8 sm:mt-12">
             <Button
               text={tsln.startBenefitsEstimator}
-              style="supertask"
+              style="primary"
               onClick={(e) => router.push('/questions')}
               custom=" w-auto justify-center mb-4"
               attributes={{
@@ -113,41 +109,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               }}
             />
           </div>
-          <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
-            {tsln.introPageOASHeading}
-          </h2>
-          <div className="w-full mt-8 sm:w-3/5">
-            <h3 className="h3 mt-3 mb-2">{tsln.oas}</h3>
-            <p>{tsln.benefitAvailable}</p>
-            <p
-              className="summary-link"
-              dangerouslySetInnerHTML={{
-                __html: tsln.learnMoreAboutOldAgeSecurity,
-              }}
-            />
 
-            <h3 className="h3 mt-6 mb-2">{tsln.gis}</h3>
-            <p>{tsln.gisDefinitionText}</p>
-            <p
-              className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutGis }}
-            />
+          <h2 className="text-xs sm:h2 mt-8">{tsln.aboutResultText}</h2>
 
-            <h3 className="h3 mt-6 mb-2">{tsln.alw}</h3>
-            <p>{tsln.alwDefinitionText}</p>
-            <p
-              className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAlw }}
-            />
-
-            <h3 className="h3 mt-6 mb-2">{tsln.alws}</h3>
-            <p>{tsln.afsDefinitionText}</p>
-            <p
-              className="summary-link"
-              dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutAlws }}
-            />
-
-            <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.aboutResultText}</h2>
+          <div className="w-full mt-4 sm:w-3/5">
             <p>{tsln.inflationInfo}</p>
             <p
               className="summary-link mt-8"
@@ -159,12 +124,36 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.learnMoreAboutCpp }}
             />
+          </div>
 
-            <h2 className="text-xs sm:h2 mt-12 mb-2">{tsln.privacyHeading}</h2>
+          <h2 className="text-xs sm:h2 mt-8">{tsln.privacyHeading}</h2>
+
+          <div className="w-full mt-4 sm:w-3/5">
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.privacyDefinition }}
             />
+            <details
+              className="text-h6 border border-[#dddddd] rounded mb-1 mt-3"
+              data-testid={`tooltip-shared`}
+            >
+              <summary
+                key={`summary-shared`}
+                className="text-default-text pt-2 pb-3 px-4 ds-cursor-pointer ds-select-none hover:underline"
+              >
+                <span
+                  className="ds-underline"
+                  dangerouslySetInnerHTML={{ __html: tsln.usingSharedDevice }}
+                  data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: shared`}
+                />
+              </summary>
+              <div
+                className="ds-z-1 my-3 pl-6 text-[#515151]"
+                data-testid="tooltip-text"
+                id={`helpText-shared`}
+                dangerouslySetInnerHTML={{ __html: tsln.usingSharedDeviceInfo }}
+              />
+            </details>
           </div>
         </div>
       </Layout>

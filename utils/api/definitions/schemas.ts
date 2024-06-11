@@ -65,6 +65,7 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.incomeTooHigh),
   incomeWork: Joi.number()
+    .default(0)
     .required()
     .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
     .precision(2)
@@ -126,12 +127,10 @@ export const RequestSchema = Joi.object({
 
       if (livingCountry === LivingCountry.CANADA) {
         if (age > 0 && yearsInCanadaSince18 !== undefined) {
-          if (yearsInCanadaSince18 >= 10) {
-            if (age - 18 < yearsInCanadaSince18) {
-              return helpers.message({
-                custom: ValidationErrors.yearsInCanadaMinusAge,
-              })
-            }
+          if (age - 18 < yearsInCanadaSince18) {
+            return helpers.message({
+              custom: ValidationErrors.yearsInCanadaMinusAge,
+            })
           }
         }
       } else {
@@ -214,13 +213,13 @@ export const RequestSchema = Joi.object({
     .custom((value, helpers) => {
       const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
       if (livingCountry === 'CAN' && yearsInCanadaSince18 !== undefined) {
-        if (yearsInCanadaSince18 < 10) {
-          return helpers.message({
-            custom: value
-              ? ValidationErrors.socialCountryUnavailable10
-              : ValidationErrors.yearsInCanadaNotEnough10,
-          })
-        }
+        // if (yearsInCanadaSince18 < 10) {
+        //   return helpers.message({
+        //     custom: value
+        //       ? ValidationErrors.socialCountryUnavailable10
+        //       : ValidationErrors.yearsInCanadaNotEnough10,
+        //   })
+        // }
       } else {
         if (yearsInCanadaSince18 < 20) {
           return helpers.message({
@@ -248,6 +247,7 @@ export const RequestSchema = Joi.object({
           })
         }
       }
+      return value
     }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
     .required()
@@ -269,6 +269,7 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
   partnerIncomeWork: Joi.number()
+    .default(0)
     .required()
     .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
     .precision(2)

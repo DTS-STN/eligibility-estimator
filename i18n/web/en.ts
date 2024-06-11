@@ -121,7 +121,7 @@ const en: WebTranslations = {
   // Subfooter brand links
   brandLinks: {
     socialMedia: {
-      text: 'Social Media',
+      text: 'Social media',
       link: 'https://www.canada.ca/en/social.html',
     },
     mobile: {
@@ -164,15 +164,17 @@ const en: WebTranslations = {
   error500TextLink: '• Try refreshing the page or try again later',
   error503TextLink: '• Try again later',
   errorPageType: 'Error',
+  //
   // alpha service canada labs breadcrumbs
   breadcrumb1aTitle: 'Canada.ca',
-  breadcrumb1aURL: 'https://www.canada.ca',
+  breadcrumb1aURL: 'https://www.canada.ca/en',
   breadcrumb2aTitle: 'Service Canada Labs',
   breadcrumb2aURL:
     'https://alpha.service.canada.ca/en/projects/oas-benefits-estimator',
+  //
   // Production Canada.ca breadcrumbs
   breadcrumb1Title: 'Canada.ca',
-  breadcrumb1URL: 'https://www.canada.ca',
+  breadcrumb1URL: 'https://www.canada.ca/en',
   breadcrumb2Title: 'Benefits',
   breadcrumb2URL: 'https://www.canada.ca/en/services/benefits.html',
   breadcrumb3Title: 'Public pensions',
@@ -181,16 +183,16 @@ const en: WebTranslations = {
   breadcrumb4Title: 'Old Age Security',
   breadcrumb4URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security.html',
-  breadcrumb5Title: 'Old Age Security payment amounts',
+  breadcrumb5Title: 'Payment amounts',
   breadcrumb5URL:
     'https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/payments.html',
-  breadcrumb6Title: 'Old Age Security Benefits Estimator',
+  breadcrumb6Title: 'Estimator',
   breadcrumb6URL: '/en',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/en/questions',
+  //
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
-  introPageOASHeading: 'Old Age Security benefits',
   questionPageTitle: 'Old Age Security Benefits Estimator: Questions',
   resultPageTitle: 'Old Age Security Benefits Estimator: Results',
   menuTitle: 'Service Canada',
@@ -202,9 +204,9 @@ const en: WebTranslations = {
   required: '(required)',
   workInProgress: 'This estimator is a work in progress',
   workInProgressBody:
-    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
+    'You can help improve it by: <ul class="list-disc" style="margin-left: 2rem;")><li><a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">giving your feedback</a></li><li><a class="underline text-default-text generatedLink" href="https://forms-formulaires.alpha.canada.ca/en/id/clwi90pv301hsx883ffit057r" target="_blank">trying our next version</a></li></ul>',
   homePageP1:
-    'Use this estimator to find out how much money you could get from Old Age Security benefits. Please note that this is an estimator and not an application for benefits.',
+    'Use this estimator to find out how much money you could get from Old Age Security benefits. This is not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
   youMayBeEligible: 'You may be able to receive Old Age Security benefits if:',
   atLeast60: "you're at least 60 years old",
@@ -216,37 +218,28 @@ const en: WebTranslations = {
     'Please note that this is an estimator and not an application for benefits.',
   estimatorIncludeQuestionText:
     'The estimator will ask you questions about your:',
-  ageText: '<strong>age</strong>',
-  netIncomeText: '<strong>net income</strong>',
-  legalStatusText: '<strong>legal status</strong>',
-  residenceHistoryText: '<strong>residence history</strong>',
-  maritalStatusText: '<strong>marital status</strong>',
-  partnerText: `<strong>spouse or common-law partner</strong>, if applicable`,
-  youNeedBeginningText: `You can enter your current information, or <strong>future information for planning purposes</strong>. Your answers should match what you expect them to be when you start to receive your benefit.`,
+  ageText: 'age',
+  netIncomeText: 'net income',
+  legalStatusText: 'legal status',
+  residenceHistoryText: 'residence history',
+  maritalStatusText: 'marital status',
+  partnerText: 'spouse or common-law partner, if applicable',
   timeToCompleteText: 'Time to complete',
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate: 'It will take about 5 to 10 minutes to complete.',
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  benefitAvailable: 'A taxable benefit available to those 65 and older',
-  learnMoreAboutOldAgeSecurity: `<a className="underline text-default-text" href="${apiEn.links.overview.oas.url}" target="_blank">Learn more about the Old Age Security pension</a>`,
-  gisDefinitionText:
-    'A non-taxable benefit available to those who receive the Old Age Security pension, are aged 65 and older, have a low income, and are living in Canada',
-  learnMoreAboutGis: `<a className="underline text-default-text" href="${apiEn.links.overview.gis.url}" target="_blank">Learn more about the Guaranteed Income Supplement</a>`,
-  alwDefinitionText:
-    'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner receives the Guaranteed Income Supplement',
-  learnMoreAboutAlw: `<a className="underline text-default-text" href="${apiEn.links.overview.alw.url}" target="_blank">Learn more about the Allowance</a>`,
-  inflationInfo: `Old Age Security benefit rates are updated quarterly to reflect changes to the cost of living. If planning for the future, amounts may be higher due to inflation.`,
-  afsDefinitionText:
-    'A non-taxable benefit available to low-income individuals aged 60 to 64, who are living in Canada, and whose spouse or common-law partner has passed away',
-  learnMoreAboutAlws: `<a className="underline text-default-text" href="${apiEn.links.overview.alws.url}" target="_blank">Learn more about the Allowance for the Survivor</a>`,
+  inflationInfo: `This estimator uses current benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
   aboutResultText: 'About the results',
-  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact Service Canada</a>.`,
+  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.`,
   privacyHeading: 'Privacy',
   privacyDefinition:
-    'We protect your information under the <em><a className="underline text-default-text" href="https://laws-lois.justice.gc.ca/eng/acts/P-21/index.html" target="_blank">Privacy Act</a></em>. The estimator does not collect information that can identify you. Your anonymous results may be used for research purposes.',
+    'We don’t collect the information you enter in the estimator.',
+  usingSharedDevice: 'If using a shared or public device',
+  usingSharedDeviceInfo:
+    'Others who use this device may be able to see your answers. To avoid this, clear your Internet browser history after using the estimator.',
   homePageP3:
     "The Old Age Security pension is a monthly payment you can get if you're 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.",
   homePageP4:
@@ -479,41 +472,42 @@ const en: WebTranslations = {
   },
   incomeLabel:
     'What will be your annual net income when you start receiving your benefits?',
-  incomeLabelReceiveOAS: 'What is your annual net income?',
-  partnerIncomeLabel:
-    'What will be your partner’s annual net income when you start receiving your benefits?',
-  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
-  incomeHintTitle: 'Will this income be used in your application?',
-  incomeHintTitleReceiveOAS: 'Is your income about to change?',
+  incomeHintTitle: 'How will your income be calculated when you apply?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  No, this is an estimation. Your actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> will be assessed when you apply. \
-  </p> \
-</div> \
-",
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        Your <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> will be assessed when you apply based on your latest income tax return. \
+      </p> \
+    </div> \
+  ",
+  incomeLabelReceiveOAS: 'What is your annual net income?',
+  incomeHintTitleReceiveOAS: 'Is your income about to change?',
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  If you're expecting a drop in income, you can enter your estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> to report this event. \
-  </p> \
-</div> \
-",
-  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        If you're expecting a drop in income, you can enter your estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> to report this event. \
+      </p> \
+    </div> \
+  ",
+  partnerIncomeLabel:
+    'What will be your partner’s annual net income when you start receiving your benefits?',
+  partnerIncomeHintTitle: 'How will their income be calculated when you apply?',
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  No, this is an estimation. Your partner’s actual <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> will be assessed when you apply. \
-  </p> \
-</div> \
-",
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        Your partner’s <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> will be assessed when you apply based on their latest income tax return. \
+      </p> \
+    </div> \
+  ",
+  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
+  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-  <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-  If your partner is expecting a drop in income, you can enter their estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> to report this event. \
-  </p> \
-</div> \
-",
+      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+        If your partner is expecting a drop in income, you can enter their estimated income. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank'>Contact us<img style='padding: 0px 0px 3px 4px; display: inline-block' src='/openNewTab.svg'/></a> to report this event. \
+      </p> \
+    </div> \
+  ",
 }
 
 export default en

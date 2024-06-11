@@ -81,7 +81,7 @@ const en: TooltipTranslations = {
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
             Your first $15,000 of work-related income is subject to exemptions. We’ll calculate those for you. \
             </p> \
-           </div> \
+          </div> \
     ",
   },
   [FieldKey.PARTNER_INCOME]: {
@@ -101,7 +101,27 @@ const en: TooltipTranslations = {
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
             Their first $15,000 of work-related income is subject to exemptions. We’ll calculate those for you. \
             </p> \
-           </div> \
+          </div> \
+    ",
+  },
+  [FieldKey.YEARS_IN_CANADA_SINCE_18]: {
+    heading: apiEn.category.residence,
+    moreinfo: 'When does residence start counting?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+              Residence begins when you reside and make your home in Canada. \
+            </p> \
+          </div> \
+    ",
+  },
+  [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
+    heading: apiEn.category.marital,
+    moreinfo: 'When does residence start counting?',
+    text: "<div style='margin-bottom: 16px;'> \
+            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+              Residence begins when your partner resides and makes their home in Canada. \
+            </p> \
+          </div> \
     ",
   },
 }
