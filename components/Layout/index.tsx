@@ -16,7 +16,9 @@ export const Layout: React.VFC<{
   const router = useRouter()
   const hostname = typeof window !== 'undefined' ? window.location.hostname : ''
   const [prodEnv, setProdEnv] = useState(null)
-  const isProduction = process.env.NEXT_PUBLIC_ENV === 'production'
+  const isProduction = process.env.APP_ENV === 'production'
+
+  console.log(hostname, isProduction)
 
   useEffect(() => {
     if (isProduction) {
