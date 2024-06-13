@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
-import { consoleDev } from '../../utils/web/helpers/utils'
 import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useTranslation } from '../Hooks'
 import { CTA } from '../ResultsPage/CTA'
