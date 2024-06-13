@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
+import { consoleDev } from '../../utils/web/helpers/utils'
 import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useTranslation } from '../Hooks'
 import { CTA } from '../ResultsPage/CTA'
@@ -16,7 +17,9 @@ export const Layout: React.VFC<{
   const router = useRouter()
   const hostname = typeof window !== 'undefined' ? window.location.hostname : ''
   const [prodEnv, setProdEnv] = useState(null)
-  const isProduction = process.env.NEXT_PUBLIC_ENV === 'production'
+  const isProduction = process.env.APP_ENV === 'production'
+
+  consoleDev(hostname, isProduction)
 
   useEffect(() => {
     if (isProduction) {
