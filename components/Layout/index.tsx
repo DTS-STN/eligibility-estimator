@@ -19,7 +19,7 @@ export const Layout: React.VFC<{
   const [prodEnv, setProdEnv] = useState(null)
   const isProduction = process.env.APP_ENV === 'production'
 
-  consoleDev(hostname, isProduction)
+  console.log(hostname, isProduction)
 
   useEffect(() => {
     if (isProduction) {
