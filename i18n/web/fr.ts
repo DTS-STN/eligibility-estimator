@@ -487,7 +487,7 @@ const fr: WebTranslations = {
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        Vos <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> seront évalués lors de votre demande selon votre dernière déclaration de revenus. \
+        Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions</a> seront évalués lors de votre demande selon votre dernière déclaration de revenus. \
       </p> \
     </div> \
   ",
@@ -496,7 +496,7 @@ const fr: WebTranslations = {
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank'>Communiquez avec nous<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> pour signaler cet événement. \
+        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \
   ",
@@ -507,7 +507,7 @@ const fr: WebTranslations = {
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        Les <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> de votre conjoint seront évalués lors de votre demande selon sa dernière déclaration de revenus. \
+        Les <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions</a> de votre conjoint seront évalués lors de votre demande selon sa dernière déclaration de revenus. \
       </p> \
     </div> \
   ",
@@ -517,7 +517,7 @@ const fr: WebTranslations = {
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        Si votre conjoint prévoit une baisse de revenu, vous pouvez entrer son revenu prévu. <a style='text-decoration: underline; color: rgba(40, 65, 98, 1);' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank'>Communiquez avec nous<img style='padding: 0px 0px 3px 4px; display: inline-block;' src='/openNewTab.svg'/></a> pour signaler cet événement. \
+        Si votre conjoint prévoit une baisse de revenu, vous pouvez entrer son revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \
   ",
