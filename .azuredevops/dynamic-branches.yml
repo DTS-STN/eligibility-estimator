@@ -97,11 +97,19 @@ steps:
         --resource-group $(webapp.resourceGroup) \
         --slot pr-preview-$(webapp.slotName) \
         --configuration-source $(webapp.name)
-        # az webapp identity assign \
-        # -g $(webapp.resourceGroup) \
-        # -n $(webapp.name) \
-        # --slot pr-preview-$(webapp.slotName) \
-        # --identities /subscriptions/400c5730-25f5-4ee6-a933-8b289b9ccb0d/resourcegroups/rg-eligibilityestimator-dev/providers/microsoft.managedidentity/userassignedidentities/id-eligibilityestimator-dev
+
+        IDENTITY_RESOURCE_ID="/subscriptions/400c5730-25f5-4ee6-a933-8b289b9ccb0d/resourcegroups/rg-eligibilityestimator-dev/providers/microsoft.managedidentity/userassignedidentities/id-eligibilityestimator-dev"
+        ASSIGNED_IDENTITIES=$(az webapp identity show --name $(webapp.name) --resource-group $(webapp.resourceGroup) --slot pr-preview-$(webapp.slotName) --query "userAssignedIdentities" -o tsv)
+
+        if [[ $ASSIGNED_IDENTITIES != *"$IDENTITY_RESOURCE_ID"* ]]; then
+          az webapp identity assign \
+          --resource-group $(webapp.resourceGroup) \
+          --name $(webapp.name) \
+          --slot pr-preview-$(webapp.slotName) \
+          --identities $IDENTITY_RESOURCE_ID
+        else
+          echo "Identity $IDENTITY_RESOURCE_ID is already assigned to the slot."
+        fi
 
   - task: AzureCLI@2
     displayName: 'Deploy pr image to new slot'
