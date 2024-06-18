@@ -69,7 +69,7 @@ const en: TooltipTranslations = {
     moreinfo: 'Will this income be used in your application?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-            No, this is an estimation. Your actual <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions</a> will be assessed when you apply. \
+            No, this is an estimation. Your actual <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply. \
             </p> \
           </div> \
           ",
@@ -89,7 +89,7 @@ const en: TooltipTranslations = {
     moreinfo: 'Will this income be used in your application?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-            No, this is an estimation. Your partner’s actual <a class='hintText' style='text-decoration: underline; display: flex;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank'>income and exemptions</a> will be assessed when you apply. \
+            No, this is an estimation. Your partner’s actual <a class='hintText' style='text-decoration: underline; display: flex;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply. \
             </p> \
           </div> \
           ",

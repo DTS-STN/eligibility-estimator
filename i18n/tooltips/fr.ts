@@ -70,7 +70,7 @@ const fr: TooltipTranslations = {
     moreinfo: 'Ce revenu sera-t-il utilisé dans votre demande?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-            Non, il s’agit d’une estimation. Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions</a> réels seront évalués lors de votre demande. \
+            Non, il s’agit d’une estimation. Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> réels seront évalués lors de votre demande. \
             </p> \
           </div> \
           ",
@@ -90,7 +90,7 @@ const fr: TooltipTranslations = {
     moreinfo: 'Ce revenu sera-t-il utilisé dans votre demande?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-            Non, il s’agit d’une estimation. Ses <a class=hintText' style='text-decoration: underline; display: flex;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank'>revenus et exemptions</a> réels seront évalués lors de votre demande. \
+            Non, il s’agit d’une estimation. Ses <a class=hintText' style='text-decoration: underline; display: flex;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> réels seront évalués lors de votre demande. \
             </p> \
           </div> \
           ",
