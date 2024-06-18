@@ -7,7 +7,7 @@
   * {
     @apply focus:outline-none;
     @apply focus-visible:ring-4;
-    @apply focus-visible:ring-sky-500;
+    @apply focus-visible:ring-[#009EE1];
   }
 
   .skip-main {
