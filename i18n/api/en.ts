@@ -327,15 +327,16 @@ const en: Translations = {
   },
   detail: {
     eligible: "You're likely eligible for this benefit.",
-    futureEligible60: "You'll likely be eligible once you turn 60.",
+    futureEligible60:
+      "You'll likely be eligible once you turn {EARLIEST_ELIGIBLE_AGE}.",
     futureEligible:
       "You'll likely be eligible once you turn {EARLIEST_ELIGIBLE_AGE}.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     futureEligibleIncomeTooHigh:
-      'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+      'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. Since your income is too high, you may not receive a monthly payment.',
     futureEligibleIncomeTooHigh2:
-      'You may be eligible once you turn 60. If your income stays the same, you may not receive a monthly payment.',
+      'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. If your income stays the same, you may not receive a monthly payment.',
     eligibleDependingOnIncome:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
@@ -433,7 +434,7 @@ const en: Translations = {
       eligibleIncomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       futureEligibleIncomeTooHigh:
-        'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+        'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
         'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
       automaticallyBePaid:
@@ -464,7 +465,7 @@ const en: Translations = {
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       futureEligibleIncomeTooHigh:
-        'You may be eligible once you turn 65. If your income stays the same, you may not receive a monthly payment.',
+        'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. If your income stays the same, you may not receive a monthly payment.',
       ifYouApply:
         "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.",
       canApplyOnline: 'You can apply for this benefit online.',
