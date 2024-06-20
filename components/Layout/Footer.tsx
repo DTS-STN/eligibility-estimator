@@ -41,7 +41,7 @@ export const Footer = ({ id, locale }: FooterProps) => {
                   } list-none w-64 sm:w-56 lg:w-80 my-1`}
                 >
                   <Link href={value.link} locale={locale}>
-                    <a className="font-[400] !text-white text-[14px] leading-[19px]">
+                    <a className="font-[400] text-white text-[14px] leading-[19px]">
                       {value.text}
                     </a>
                   </Link>
