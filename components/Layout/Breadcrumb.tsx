@@ -21,13 +21,13 @@ export function Breadcrumb({ locale, items = [] }: BreadcrumbProps) {
             className="inline-block min-w-0 max-w-full truncate -my-4"
           >
             <Link href={item.link} locale={locale}>
-              <a className="font-sans text-[16px] leading-[23px] font-[400] text-[#295376] hover:text-[#0535D2] underline">
+              <a className="font-sans ml-1 mr-1 text-[16px] leading-[23px] font-[400] text-[#295376] hover:text-[#0535D2] underline">
                 {item.text}
               </a>
             </Link>
 
             {index < items.length - 1 && (
-              <span className="ml-1 mr-1 inline-block align-middle text-multi-blue-blue70b">
+              <span className="inline-block align-middle text-multi-blue-blue70b">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   id={`chevron-${index}`}
