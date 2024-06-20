@@ -131,7 +131,9 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
               type="number"
               min={props.minYear}
               max={props.maxYear}
+              pattern="[0-9]*"
               onChange={_onYearChange}
+              onKeyUpCapture={restrictNonNumbers}
               className="inputStyles"
             />
           </div>
