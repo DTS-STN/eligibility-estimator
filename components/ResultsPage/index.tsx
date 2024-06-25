@@ -20,6 +20,7 @@ import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
 import { FutureSummaryEstimates } from './FutureSummaryEstimates'
+import { SummaryEstimates } from './SummaryEstimates'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -51,6 +52,11 @@ const ResultsPage: React.VFC<{
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
 
+  const userAge = inputs.find((input) => input.key === FieldKey.AGE)['value']
+  const partnerAge = isPartnered
+    ? inputs.find((input) => input.key === FieldKey.PARTNER_AGE)['value']
+    : null
+
   const partnerNoOAS =
     inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
       'value'
@@ -78,49 +84,109 @@ const ResultsPage: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  const userResultObject =
+    resultsEligible.length > 0
+      ? resultsEligible.reduce((acc, item) => {
+          // Use the value of benefitKey as the key in the resulting object
+          acc[item.benefitKey] = item
+          return acc
+        }, {})
+      : null
+
+  const partnerResultObject =
+    partnerResultsEligible.length > 0
+      ? partnerResultsEligible.reduce((acc, item) => {
+          // Use the value of benefitKey as the key in the resulting object
+          acc[item.benefitKey] = item
+          return acc
+        }, {})
+      : null
+
+  let userObj = {}
+  // userObj['0'] = userResultObject
+  if (userResultObject) {
+    userObj['0'] = userResultObject
+  } else {
+    userObj = null
+  }
+  const userArr = userObj ? [userObj] : []
+
+  let partnerObj = {}
+  // partnerObj['0'] = partnerResultObject
+  if (partnerResultObject) {
+    partnerObj['0'] = partnerResultObject
+  } else {
+    partnerObj = null
+  }
+  const partnerArr = partnerObj ? [partnerObj] : []
+
+  const userArrNew = userArr.concat(futureClientResults)
+  const partnerArrNew = partnerArr.concat(futurePartnerResults)
+
+  const currentYear = new Date().getFullYear()
+
+  const newestUser = userArrNew.map((item, index) => {
+    if (item) {
+      const age = Number(Object.keys(item)[0])
+      const headingYear = currentYear + (age - Math.round(Number(userAge)))
+      let key
+      if (age == 0) {
+        key = currentYear
+      } else {
+        key = headingYear
+      }
+      return { [key]: item }
+    }
+  })
+
+  const newestPartner = isPartnered
+    ? partnerArrNew.map((item, index) => {
+        if (item) {
+          const age = Number(Object.keys(item)[0])
+          const headingYear =
+            currentYear + (age - Math.round(Number(partnerAge)))
+          // console.log(headingYear)
+          let key
+          if (age == 0) {
+            key = currentYear
+          } else {
+            key = headingYear
+          }
+          return { [key]: item }
+        }
+      })
+    : null
+
+  const userKeys = newestUser.flatMap((obj) => {
+    // Check if the object is not null or undefined before extracting keys
+    return obj ? Object.keys(obj) : []
+  })
+
+  const partnerKeys = isPartnered
+    ? newestPartner.flatMap((obj) => {
+        // Check if the object is not null or undefined before extracting keys
+        return obj ? Object.keys(obj) : []
+      })
+    : []
+
+  const arr1 = userKeys.length > partnerKeys.length ? userKeys : partnerKeys
+  const arr2 = arr1 == partnerKeys ? userKeys : partnerKeys
+
+  const headings = [...new Set([...arr1, ...arr2])]
+
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
         <div className="col-span-2 row-span-1 border-[#269ABC] bg-[#EEFAFF] p-8">
-          {/* Current results eligible */}
-          <div className="mb-7">
-            {(resultsEligible.length > 0 ||
-              partnerResultsEligible.length > 0) && (
-              <h3 className="h3">{apiTsln.detail.currentEligible}</h3>
-            )}
-            {resultsEligible.length > 0 && (
-              <EstimatedTotal
-                resultsEligible={resultsEligible}
-                entitlementSum={summary.entitlementSum}
-                state={summary.state}
-                partnerNoOAS={partnerNoOAS}
-              />
-            )}
-
-            {isPartnered && partnerResultsEligible.length > 0 && (
-              <EstimatedTotal
-                resultsEligible={partnerResultsEligible}
-                entitlementSum={summary.partnerEntitlementSum}
-                state={summary.partnerState}
-                partner={true}
-                partnerNoOAS={partnerNoOAS}
-              />
-            )}
-          </div>
-
-          {/* FUTURE RESULTS SUMMARY */}
-          {futureClientResults && (
-            <FutureSummaryEstimates
-              futureResults={futureClientResults}
-              futurePartnerResults={futurePartnerResults}
-              partnerNoOAS={partnerNoOAS}
-              multipleResults={resultsEligible.length > 0}
-              eligibleOAS={
-                resultsEligible.filter((obj) => obj.benefitKey === 'oas')
-                  .length > 0
-              }
-              userAge={inputs[0].value}
-            />
+          {/* Summary Estimates section */}
+          {headings && (
+            <SummaryEstimates
+              headings={headings}
+              userResults={newestUser}
+              partnerResults={newestPartner}
+              userAge={userAge}
+              partnerAge={partnerAge}
+            ></SummaryEstimates>
           )}
         </div>
 

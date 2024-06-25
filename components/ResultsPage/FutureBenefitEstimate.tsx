@@ -58,11 +58,14 @@ export const FutureBenefitEstimate: React.VFC<{
     (value) => resultObj[age][value]
   )
 
+  console.log(resultsArray)
   let eligible = resultsArray.filter(
     (result) =>
       result.eligibility?.result === ResultKey.ELIGIBLE ||
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
+
+  console.log(eligible)
 
   // If partner answers "No" to receiving OAS, the amounts should not show
   if (partner && partnerNoOAS) {
@@ -152,7 +155,7 @@ export const FutureBenefitEstimate: React.VFC<{
     else {
       const firstOasGis = isFirstOasGis(partner, resultObj)
       const lastOasGis = isLastOasGis(partner, resultObj)
-      // console.log(resultObj)
+      console.log(resultObj)
       // console.log(futureBenefits)
 
       const arrayofben = partner ? futurePartnerBenefits : futureBenefits

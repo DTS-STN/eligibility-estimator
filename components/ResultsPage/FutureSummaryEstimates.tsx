@@ -33,7 +33,7 @@ export const FutureSummaryEstimates: React.VFC<{
   let arr2
   futurePartnerResults = futurePartnerResults ? futurePartnerResults : []
 
-  if (futureResults.length < futurePartnerResults) {
+  if (futureResults.length < futurePartnerResults.length) {
     partner = true
     arr1 = futurePartnerResults
     arr2 = futureResults
@@ -42,10 +42,15 @@ export const FutureSummaryEstimates: React.VFC<{
     arr2 = futurePartnerResults
   }
 
+  console.log(futureResults)
+  console.log(futurePartnerResults)
+
   const results = arr1.map((obj1, index) => [
     obj1,
     arr2[index] ? arr2[index] : null,
   ])
+
+  console.log(results)
   const currentYear = new Date().getFullYear()
 
   const headingYears = arr1.map((item) => {
@@ -72,6 +77,7 @@ export const FutureSummaryEstimates: React.VFC<{
         <div className="mb-7" key={index}>
           <h3 className="h3">{getHeadingYear(headingYears[index], index)}</h3>
           {innerArray.map((resultObj, innerIndex) => {
+            console.log(resultObj)
             if (resultObj != null) {
               return (
                 <FutureBenefitEstimate
