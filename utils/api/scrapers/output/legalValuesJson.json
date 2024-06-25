@@ -19,13 +19,13 @@
 		"spouse-allowance-amount": "645.84",
 		"spouse-allowance-limit": "40,272"			
 	},
-	"allowance": {
+	"alw": {
 		"spouse-gis-amount": "1,364.17",
 		"spouse-gis-limit": "40,272",
 		"survivor-amount": "1,626.20",
 		"survivor-limit": "29,328"
 	},
-	"topup": {
+	"topUp": {
 		"single": "166.20",
 		"married": "47.09"
 	},
