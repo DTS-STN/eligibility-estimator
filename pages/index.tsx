@@ -139,10 +139,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             >
               <summary
                 key={`summary-shared`}
-                className="pt-2 pb-3 px-4 ds-cursor-pointer ds-select-none "
+                className="text-[#295376] pt-2 pb-3 px-4 ds-cursor-pointer ds-select-none hover:text-[#0535D2]"
               >
                 <span
-                  className="text-[#295376] hover:underline"
+                  className="hover:underline"
                   dangerouslySetInnerHTML={{ __html: tsln.usingSharedDevice }}
                   data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: shared`}
                 />
