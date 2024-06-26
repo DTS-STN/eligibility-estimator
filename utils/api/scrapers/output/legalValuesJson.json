@@ -1,39 +1,39 @@
 {
-  "lastUpdatedYear": 2022,
-  "lastUpdatedQuarter": "April to June 2024",
-  "renewalYearGIS": 2023,
+  "lastUpdatedYear": 2023,
+  "lastUpdatedQuarter": "July to September 2024",
+  "renewalYearGIS": 2024,
   "oas": {
-    "amount": 713.34,
-    "amount75": 784.67,
-    "incomeLimit": 134626,
-    "incomeLimit75": 137331,
-    "clawbackIncomeLimit": 81761
+    "amount": 718.33,
+    "amount75": 790.16,
+    "incomeLimit": 142609,
+    "incomeLimit75": 148179,
+    "clawbackIncomeLimit": 86912
   },
   "gis": {
-    "singleAmount": 1065.47,
-    "singleIncomeLimit": 21624,
-    "spouseOasAmount": 641.35,
-    "spouseOasIncomeLimit": 28560,
-    "spouseNoOasAmount": 1065.47,
-    "spouseNoOasIncomeLimit": 51840,
-    "spouseAlwAmount": 641.35,
-    "spouseAlwIncomeLimit": 39984
+    "singleAmount": 1072.93,
+    "singleIncomeLimit": 21768,
+    "spouseOasAmount": 645.84,
+    "spouseOasIncomeLimit": 28752,
+    "spouseNoOasAmount": 1072.93,
+    "spouseNoOasIncomeLimit": 52176,
+    "spouseAlwAmount": 645.84,
+    "spouseAlwIncomeLimit": 40272
   },
   "alw": {
-    "alwAmount": 1354.69,
-    "alwIncomeLimit": 39984,
-    "afsAmount": 1614.89,
-    "afsIncomeLimit": 29112
+    "alwAmount": 1364.17,
+    "alwIncomeLimit": 40272,
+    "afsAmount": 1626.2,
+    "afsIncomeLimit": 29328
   },
   "topUp": {
-    "single": 165.04,
-    "married": 46.76
+    "single": 166.2,
+    "married": 47.09
   },
   "delay": {
-    "oas66": 764.7,
-    "oas67": 816.06,
-    "oas68": 867.42,
-    "oas69": 918.78,
-    "oas70": 970.14
+    "oas66": 770.05,
+    "oas67": 821.77,
+    "oas68": 873.49,
+    "oas69": 925.21,
+    "oas70": 976.93
   }
 }
