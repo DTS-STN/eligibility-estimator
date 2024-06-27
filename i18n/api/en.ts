@@ -327,15 +327,16 @@ const en: Translations = {
   },
   detail: {
     eligible: "You're likely eligible for this benefit.",
-    futureEligible60: "You'll likely be eligible once you turn 60.",
+    futureEligible60:
+      "You'll likely be eligible once you turn {EARLIEST_ELIGIBLE_AGE}.",
     futureEligible:
       "You'll likely be eligible once you turn {EARLIEST_ELIGIBLE_AGE}.",
     eligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
     futureEligibleIncomeTooHigh:
-      'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+      'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. Since your income is too high, you may not receive a monthly payment.',
     futureEligibleIncomeTooHigh2:
-      'You may be eligible once you turn 60. If your income stays the same, you may not receive a monthly payment.',
+      'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. If your income stays the same, you may not receive a monthly payment.',
     eligibleDependingOnIncome:
       "You're likely eligible for this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Depending on your income, you should expect to receive around {ENTITLEMENT_AMOUNT_FOR_BENEFIT} every month.",
     eligibleDependingOnIncomeNoEntitlement:
@@ -433,7 +434,7 @@ const en: Translations = {
       eligibleIncomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       futureEligibleIncomeTooHigh:
-        'You may be eligible once you turn 65. Since your income is too high, you may not receive a monthly payment.',
+        'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
         'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
       automaticallyBePaid:
@@ -445,16 +446,16 @@ const en: Translations = {
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
-        "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+        "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       applyOnline: "If you didn't, you can apply online.",
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
       eligibleWhenTurn65:
         "You may be eligible for this benefit once you turn 65. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age.",
       ifNotReceiveLetter64:
-        "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+        "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       chooseToDefer:
-        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
       receivePayment:
         'You may be able to receive payment for up to the last 11 months.',
     },
@@ -464,7 +465,7 @@ const en: Translations = {
       incomeTooHigh:
         "You're likely eligible for this benefit, but your income is too high to receive a monthly payment at this time.",
       futureEligibleIncomeTooHigh:
-        'You may be eligible once you turn 65. If your income stays the same, you may not receive a monthly payment.',
+        'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. If your income stays the same, you may not receive a monthly payment.',
       ifYouApply:
         "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.",
       canApplyOnline: 'You can apply for this benefit online.',

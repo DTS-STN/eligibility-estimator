@@ -336,15 +336,15 @@ const fr: Translations = {
   detail: {
     eligible: 'Vous êtes probablement admissible à cette prestation.',
     futureEligible60:
-      'Vous serez probablement admissible lorsque vous aurez 60 ans.',
+      'Vous serez probablement admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}.',
     futureEligible:
       'Vous serez probablement admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}.',
     eligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
     futureEligibleIncomeTooHigh:
-      'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
+      'Vous pourriez être admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
     futureEligibleIncomeTooHigh2:
-      'Vous serez probablement admissible lorsque vous aurez 60 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
+      'Vous serez probablement admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
     eligibleDependingOnIncome:
       'Vous êtes probablement éligible à cette prestation si {INCOME_SINGLE_OR_COMBINED} est inférieur à {INCOME_LESS_THAN}. En fonction de {YOUR_OR_COMPLETE}, vous devriez vous attendre à recevoir environ {ENTITLEMENT_AMOUNT_FOR_BENEFIT} par mois.',
     eligibleDependingOnIncomeNoEntitlement:
@@ -443,7 +443,7 @@ const fr: Translations = {
       eligibleIncomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       futureEligibleIncomeTooHigh:
-        'Vous pourriez être admissible lorsque vous aurez 65 ans. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
+        'Vous pourriez être admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}. Puisque votre revenu est trop élevé, vous ne recevrez peut-être pas de paiement mensuel.',
       serviceCanadaReviewYourPayment:
         'Si vous présentez une demande, Service Canada révisera le montant de votre paiement chaque année en fonction de votre déclaration de revenus.',
       automaticallyBePaid:
@@ -455,7 +455,7 @@ const fr: Translations = {
       youShouldHaveReceivedLetter:
         "Vous devriez avoir reçu une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       ifYouDidnt:
-        "Si vous ne l'avez pas reçue, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+        "Si vous ne l'avez pas reçue, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       applyOnline:
         "Si vous ne l'avez pas reçue, vous pouvez présenter une demande en ligne.",
       over70:
@@ -463,9 +463,9 @@ const fr: Translations = {
       eligibleWhenTurn65:
         "Vous pourriez être admissible lorsque vous aurez 65 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur.",
       ifNotReceiveLetter64:
-        "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
+        "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       chooseToDefer:
-        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
+        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
       receivePayment:
         'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
@@ -475,7 +475,7 @@ const fr: Translations = {
       incomeTooHigh:
         'Vous êtes probablement admissible à cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
       futureEligibleIncomeTooHigh:
-        'Vous pourriez être admissible lorsque vous aurez 65 ans. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
+        'Vous pourriez être admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
       ifYouApply:
         'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu  est admissible.',
       canApplyOnline:
