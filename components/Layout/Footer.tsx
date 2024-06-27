@@ -67,7 +67,7 @@ export const Footer = ({ id, locale }: FooterProps) => {
                     } pr-4 my-1`}
                   >
                     <Link href={value.link}>
-                      <a className="font-[400] text-[14px] leading-[19px] !text-[#284162]">
+                      <a className="font-[400] text-[14px] leading-[19px] text-[#284162]">
                         {value.text}
                       </a>
                     </Link>

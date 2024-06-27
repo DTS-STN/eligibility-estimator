@@ -382,6 +382,10 @@
     font-size: 12px;
   }
 
+  a:visited {
+    color: #7834BC;
+  }
+
   dfn {
     font-style: normal;
   }
