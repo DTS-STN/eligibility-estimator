@@ -27,7 +27,7 @@ export function Breadcrumb({ locale, items = [] }: BreadcrumbProps) {
             </Link>
 
             {index < items.length - 1 && (
-              <span className="inline-block align-middle text-multi-blue-blue70b">
+              <span className="mx-1 inline-block align-middle text-multi-blue-blue70b">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   id={`chevron-${index}`}

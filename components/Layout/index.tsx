@@ -18,8 +18,6 @@ export const Layout: React.VFC<{
   const [prodEnv, setProdEnv] = useState(null)
   const isProduction = process.env.APP_ENV === 'production'
 
-  console.log(hostname, isProduction)
-
   useEffect(() => {
     if (isProduction) {
       setProdEnv(hostname.includes('.alpha.service') ? 'alpha' : 'beta')
