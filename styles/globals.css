@@ -7,7 +7,7 @@
   * {
     @apply focus:outline-none;
     @apply focus-visible:ring-4;
-    @apply focus-visible:ring-sky-500;
+    @apply focus-visible:ring-[#009EE1];
   }
 
   .skip-main {
@@ -307,6 +307,7 @@
   #alwLink1,
   #alwsLink0,
   #alwsLink1,
+  a.hintText,
   a.generatedLink {
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
@@ -314,7 +315,6 @@
     text-decoration-line: underline;
     --tw-text-opacity: 1;
     color: rgb(40 65 98 / var(--tw-text-opacity));
-    visited: #7834BC !important;
   }
 
   #oasDefer a:hover,
@@ -326,10 +326,27 @@
   #alwLink1:hover,
   #alwsLink0:hover,
   #alwsLink1:hover,
+  a.hintText,
   a.generatedLink:hover,
   .summary-link a:hover {
     --tw-border-opacity: 1;
     color: rgb(5 53 210 / var(--tw-border-opacity));
+  }
+
+  #oasDefer a:visited,
+  #oasLink0:visited,
+  #oasLink1:visited,
+  #gisLink0:visited,
+  #gisLink1:visited,
+  #alwLink0:visited,
+  #alwLink1:visited,
+  #alwsLink0:visited,
+  #alwsLink1:visited,
+  a.hintText:visited,
+  a.generatedLink:visited,
+  .summary-link a:visited {
+    color: #7834BC;
+    background: url('/openNewTabPurple.svg') no-repeat right;
   }
 
   @-moz-document url-prefix() {
@@ -366,7 +383,7 @@
   }
 
   a:visited {
-    color: #7834BC !important;
+    color: #7834BC;
   }
 
   dfn {
