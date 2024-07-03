@@ -98,6 +98,7 @@ export const Layout: React.VFC<{
 
   if (
     router.pathname === '/questions' ||
+    router.pathname === '/stepper' ||
     router.pathname === '/results' ||
     router.pathname === '/resultats'
   ) {
@@ -147,20 +148,24 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          <h1 id="applicationTitle" className="h1 my-8">
-            {title}
-          </h1>
-          <div className="mb-6">
-            <Message
-              id={'wip'}
-              iconId={'testkey'}
-              iconAltText={tsln.infoText}
-              type={'info'}
-              heading={tsln.workInProgress}
-              body={tsln.workInProgressBody}
-              asHtml
-            />
-          </div>
+          {router.pathname !== '/stepper' && (
+            <div>
+              <h1 id="applicationTitle" className="h1 my-8">
+                {title}
+              </h1>
+              <div className="mb-6">
+                <Message
+                  id={'wip'}
+                  iconId={'testkey'}
+                  iconAltText={tsln.infoText}
+                  type={'info'}
+                  heading={tsln.workInProgress}
+                  body={tsln.workInProgressBody}
+                  asHtml
+                />
+              </div>
+            </div>
+          )}
           {children}
         </div>
 
