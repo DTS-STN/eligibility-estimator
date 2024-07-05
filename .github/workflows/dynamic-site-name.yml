@@ -14,9 +14,13 @@ jobs:
       - name: Checkout 🔔
         uses: actions/checkout@v3
 
+      - name: Calculate Slot Number
+        id: calculate_slot
+        run: echo "slot=$(( ${{ github.event.pull_request.number }} % 4 ))" >> $GITHUB_ENV
+
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
 
         with:
-          message: 'Dynamic branch URL: https://app-eligibilityestimator-dev-pr-preview-${{github.event.pull_request.number}}.azurewebsites.net'
+          message: 'Dynamic branch URL: https://app-eligibilityestimator-dev-pr-preview-${{env.slot}}.azurewebsites.net'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

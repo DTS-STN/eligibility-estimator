@@ -1,19 +1,28 @@
-import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { WebTranslations } from '../../i18n/web'
+import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useTranslation } from '../Hooks'
-import { Header } from './Header'
-import { Footer } from './Footer'
-import { Head } from './Head'
 import { CTA } from '../ResultsPage/CTA'
 import { Date } from './Date'
+import { Footer } from './Footer'
+import { Head } from './Head'
+import { Header } from './Header'
 
 export const Layout: React.VFC<{
   children: React.ReactNode
   title: string
 }> = ({ children, title }) => {
   const router = useRouter()
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : ''
+  const [prodEnv, setProdEnv] = useState(null)
+  const isProduction = process.env.APP_ENV === 'production'
+
+  useEffect(() => {
+    if (isProduction) {
+      setProdEnv(hostname.includes('.alpha.service') ? 'alpha' : 'beta')
+    }
+  }, [])
 
   // basically returns 'results' or 'resultats' IF, otherwise index or questions in the other locale.
   const langToggleLink =
@@ -53,54 +62,56 @@ export const Layout: React.VFC<{
     onSubmit: () => {},
   }
 
-  const breadcrumbs =
-    process.env.APP_ENV === 'production'
-      ? [
-          {
-            text: tsln.breadcrumb1Title,
-            link: tsln.breadcrumb1URL,
-          },
-          {
-            text: tsln.breadcrumb2Title,
-            link: tsln.breadcrumb2URL,
-          },
-          {
-            text: tsln.breadcrumb3Title,
-            link: tsln.breadcrumb3URL,
-          },
-          {
-            text: tsln.breadcrumb4Title,
-            link: tsln.breadcrumb4URL,
-          },
-        ]
-      : [
-          {
-            text: tsln.breadcrumb1aTitle,
-            link: tsln.breadcrumb1aURL,
-          },
-          {
-            text: tsln.breadcrumb2aTitle,
-            link: tsln.breadcrumb2aURL,
-          },
-        ]
+  const alphaBreadcrumbs = [
+    {
+      text: tsln.breadcrumb1aTitle,
+      link: tsln.breadcrumb1aURL,
+    },
+    {
+      text: tsln.breadcrumb2aTitle,
+      link: tsln.breadcrumb2aURL,
+    },
+  ]
 
-  if (router.pathname === '/questions') {
-    breadcrumbs.push({
-      text: tsln.breadcrumb6Title,
-      link: tsln.breadcrumb6URL,
-    })
-  } else if (
+  const betaBreadcrumbs = [
+    {
+      text: tsln.breadcrumb1Title,
+      link: tsln.breadcrumb1URL,
+    },
+    {
+      text: tsln.breadcrumb2Title,
+      link: tsln.breadcrumb2URL,
+    },
+    {
+      text: tsln.breadcrumb3Title,
+      link: tsln.breadcrumb3URL,
+    },
+    {
+      text: tsln.breadcrumb4Title,
+      link: tsln.breadcrumb4URL,
+    },
+    {
+      text: tsln.breadcrumb5Title,
+      link: tsln.breadcrumb5URL,
+    },
+  ]
+
+  if (
+    router.pathname === '/questions' ||
     router.pathname === '/results' ||
     router.pathname === '/resultats'
   ) {
-    breadcrumbs.push({
-      text: tsln.breadcrumb6Title,
-      link: tsln.breadcrumb6URL,
-    }),
-      breadcrumbs.push({
-        text: tsln.breadcrumb7Title,
-        link: tsln.breadcrumb7URL,
+    if (!prodEnv || prodEnv === 'alpha') {
+      alphaBreadcrumbs.push({
+        text: tsln.breadcrumb6Title,
+        link: tsln.breadcrumb6URL,
       })
+    } else {
+      betaBreadcrumbs.push({
+        text: tsln.breadcrumb6Title,
+        link: tsln.breadcrumb6URL,
+      })
+    }
   }
 
   const handleOnClick = () => {
@@ -122,7 +133,11 @@ export const Layout: React.VFC<{
             id="header"
             locale={router.locale}
             langUrl={langToggleLink}
-            breadcrumbItems={breadcrumbs}
+            breadcrumbItems={
+              !prodEnv || prodEnv === 'alpha'
+                ? alphaBreadcrumbs
+                : betaBreadcrumbs
+            }
             topNavProps={topnavProps}
             headerText={{
               globalHeader: tsln.globalHeader,

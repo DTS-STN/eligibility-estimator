@@ -7,7 +7,7 @@
   * {
     @apply focus:outline-none;
     @apply focus-visible:ring-4;
-    @apply focus-visible:ring-sky-500;
+    @apply focus-visible:ring-[#009EE1];
   }
 
   .skip-main {
@@ -105,7 +105,10 @@
 
   /* typography gc overrides */
   .h1 {
-    @apply text-mobile sm:text-h1 font-bold mb-[15px] font-header-gc border-b border-header-rule text-content pb-2;
+    @apply text-mobile sm:text-h1 font-bold font-header-gc text-content pb-2;
+    border-bottom: .18em solid #AF3C43;
+    border-image: linear-gradient(to right, #AF3C43 71px, transparent 71px);
+    border-image-slice: 1;
   }
 
   .h2 {
@@ -231,12 +234,13 @@
 
   details summary {
     @apply text-content border border-content rounded py-1 px-4;
-  }
+  } */
 
   details[open] > summary {
-    @apply rounded-bl-none rounded-br-none;
+    @apply rounded-bl-none rounded-br-none border-b;
   }
 
+  /*
   details[open] div {
     @apply border border-t-0 rounded-br rounded-bl border-content text-content;
   } */
@@ -303,6 +307,7 @@
   #alwLink1,
   #alwsLink0,
   #alwsLink1,
+  a.hintText,
   a.generatedLink {
     display: inline;
     background: url('/openNewTab.svg') no-repeat right;
@@ -321,10 +326,27 @@
   #alwLink1:hover,
   #alwsLink0:hover,
   #alwsLink1:hover,
+  a.hintText,
   a.generatedLink:hover,
   .summary-link a:hover {
     --tw-border-opacity: 1;
     color: rgb(5 53 210 / var(--tw-border-opacity));
+  }
+
+  #oasDefer a:visited,
+  #oasLink0:visited,
+  #oasLink1:visited,
+  #gisLink0:visited,
+  #gisLink1:visited,
+  #alwLink0:visited,
+  #alwLink1:visited,
+  #alwsLink0:visited,
+  #alwsLink1:visited,
+  a.hintText:visited,
+  a.generatedLink:visited,
+  .summary-link a:visited {
+    color: #7834BC;
+    background: url('/openNewTabPurple.svg') no-repeat right;
   }
 
   @-moz-document url-prefix() {
@@ -358,5 +380,13 @@
 
   [id^='help-text'] > ul > li::marker {
     font-size: 12px;
+  }
+
+  a:visited {
+    color: #7834BC;
+  }
+
+  dfn {
+    font-style: normal;
   }
 }

@@ -104,6 +104,7 @@ export class FutureHandler {
       this.query.livedOnlyInCanada === 'true',
       String(this.query.livingCountry)
     )
+
     const oasAge = eliObjOas.ageOfEligibility
 
     const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
@@ -157,7 +158,9 @@ export class FutureHandler {
   private getPartneredResults() {
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
-    const clientRes = Number(this.query.yearsInCanadaSince18)
+    const clientRes =
+      Number(this.query.yearsInCanadaSince18) ||
+      Number(this.query.yearsInCanadaSinceOAS)
     const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
@@ -189,8 +192,11 @@ export class FutureHandler {
     const ages = [age, partnerAge]
     if (ages.some((age) => isNaN(age))) return this.futureResultsObj
 
-    const futureAges = getAgeArray({
-      client: { age, res: this.query.livedOnlyInCanada ? 40 : clientRes },
+    const agesInputObj = {
+      client: {
+        age,
+        res: this.query.livedOnlyInCanada === 'true' ? 40 : clientRes,
+      },
       partner: {
         age: partnerAge,
         res:
@@ -198,7 +204,9 @@ export class FutureHandler {
             ? 40
             : partnerRes || 0,
       },
-    })
+    }
+
+    const futureAges = getAgeArray(agesInputObj)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {

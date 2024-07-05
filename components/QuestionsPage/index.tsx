@@ -108,7 +108,7 @@ export const QuestionsPage: React.VFC = ({}) => {
   const [incomeHintTitle, setIncomeHintTitle] = useState(tsln.incomeHintTitle)
   const [incomeHintText, setIncomeHintText] = useState(tsln.incomeHintText)
   const [partnerIncomeHintTitle, setPartnerIncomeHintTitle] = useState(
-    tsln.incomeHintTitle
+    tsln.partnerIncomeHintTitle
   )
   const [partnerIncomeHintText, setPartnerIncomeHintText] = useState(
     tsln.partnerIncomeHintText
@@ -139,7 +139,7 @@ export const QuestionsPage: React.VFC = ({}) => {
       : tsln.incomeHintText
     const partnerIncomeHintTitle = receiveOAS
       ? tsln.partnerIncomeHintTitleReceiveOAS
-      : tsln.incomeHintTitle
+      : tsln.partnerIncomeHintTitle
     const partnerIncomeHintText = receiveOAS
       ? tsln.partnerIncomeHintTextReceiveOAS
       : tsln.partnerIncomeHintText
@@ -219,6 +219,7 @@ export const QuestionsPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+
     console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(
@@ -285,9 +286,19 @@ export const QuestionsPage: React.VFC = ({}) => {
                   100
                 )}
                 placeholder={field.config.placeholder ?? ''}
-                value={field.value}
+                value={
+                  field.key === FieldKey.INCOME_WORK ||
+                  field.key === FieldKey.PARTNER_INCOME_WORK
+                    ? field.config.default
+                    : field.value
+                }
                 helpText={field.config.helpText}
-                requiredText={tsln.required}
+                requiredText={
+                  field.key === FieldKey.INCOME ||
+                  field.key === FieldKey.PARTNER_INCOME
+                    ? tsln.required
+                    : ''
+                }
                 error={formError}
                 dynamicContent={
                   field.key === 'income'

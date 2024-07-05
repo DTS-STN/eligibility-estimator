@@ -32,26 +32,19 @@ export type WebTranslations = {
   residenceHistoryText: string
   maritalStatusText: string
   partnerText: string
-  youNeedBeginningText: string
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
   whatBenefitsIncluded: string
-  benefitAvailable: string
-  learnMoreAboutOldAgeSecurity: string
-  gisDefinitionText: string
-  learnMoreAboutGis: string
-  alwDefinitionText: string
-  learnMoreAboutAlw: string
   inflationInfo: string
-  afsDefinitionText: string
-  learnMoreAboutAlws: string
   notIncludeCPP: string
   learnMoreAboutCpp: string
   aboutResultText: string
   resultDefinition: string
   privacyHeading: string
   privacyDefinition: string
+  usingSharedDevice: string
+  usingSharedDeviceInfo: string
   oas: string
   gis: string
   alw: string
@@ -82,7 +75,6 @@ export type WebTranslations = {
   breadcrumb7URL: string
   title: string
   introPageTitle: string
-  introPageOASHeading: string
   questionPageTitle: string
   resultPageTitle: string
   menuTitle: string
@@ -131,6 +123,7 @@ export type WebTranslations = {
   incomeHintText: string
   incomeHintTextReceiveOAS: string
   partnerIncomeHintTitleReceiveOAS: string
+  partnerIncomeHintTitle: string
   partnerIncomeHintText: string
   partnerIncomeHintTextReceiveOAS: string
 

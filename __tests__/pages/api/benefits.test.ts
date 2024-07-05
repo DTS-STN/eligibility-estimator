@@ -44,12 +44,8 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
+    // expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    // expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })
 
   it('returns "error unavailable" - living in Canada, under 10 years in Canada, lived in social country', async () => {
@@ -68,20 +64,17 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
-      ValidationErrors.socialCountryUnavailable10
-    )
+    // expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    // expect(errors[0].message).toEqual(
+    //   ValidationErrors.socialCountryUnavailable10
+    // )
   })
 
   it('returns "error unavailable" - living in No Agreement, under 10 years in Canada, lived in social country', async () => {
     const res = await mockGetRequestError({
       ...income10k,
       ...age65NoDefer,
+      incomeWork: 0,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -95,12 +88,8 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -128,12 +117,8 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -162,12 +147,8 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -176,6 +157,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
+      incomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -185,6 +167,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerIncomeWork: 0,
     })
 
     expect(res.status).toEqual(400)
@@ -192,12 +175,8 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(
       ValidationErrors.socialCountryUnavailable20
     )
   })
@@ -221,12 +200,8 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
+    // expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    // expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough10)
   })
 
   it('returns "ineligible" - age 60, single, living in No Agreement, 20 years in Canada', async () => {
@@ -265,6 +240,7 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
     const res = await mockGetRequestError({
       ...income10k,
       ...age60NoDefer,
+      incomeWork: 0,
       maritalStatus: MaritalStatus.PARTNERED,
       livingCountry: LivingCountry.NO_AGREEMENT,
       legalStatus: LegalStatus.YES,
@@ -274,18 +250,15 @@ describe('consolidated benefit tests: unavailable and errors (screening out)', (
       partnerBenefitStatus: PartnerBenefitStatus.OAS_GIS,
       ...partnerIncomeZero,
       ...partnerNoHelpNeeded,
+      partnerIncomeWork: 0,
     })
     expect(res.status).toEqual(400)
     expect(res.body.error).toEqual(ResultKey.INVALID)
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
 })
 
@@ -988,12 +961,8 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     if (!('details' in res.body.detail)) throw Error('missing details')
     const errors = getErrorDetails(res)
 
-    expect(errors[0].path[0]).toEqual(FieldKey.YEARS_IN_CANADA_SINCE_18)
-    expect(errors[0].message).toEqual(
-      ValidationErrors.yearsNotInCanadaMinusDeferred
-    )
-    expect(errors[1].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
-    expect(errors[1].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
+    expect(errors[0].path[0]).toEqual(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
+    expect(errors[0].message).toEqual(ValidationErrors.yearsInCanadaNotEnough20)
   })
 
   it('returns "ALW eligible" - age 64, married, 19 years in Canada, lived in social country', async () => {

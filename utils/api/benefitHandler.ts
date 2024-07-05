@@ -193,6 +193,7 @@ export class BenefitHandler {
         clientOasNoDeferral.entitlement
     }
 
+    consoleDev('NO DEFERRAL', clientOasNoDeferral)
     consoleDev(
       'Client OAS amount NO deferral',
       clientOasNoDeferral.entitlement.result
@@ -272,7 +273,14 @@ export class BenefitHandler {
       consoleDev('TOTAL - WITH DEFERRAL', deferTotal)
     }
 
-    const deferralMoreBeneficial = deferTotal ? deferTotal > noDeferTotal : null
+    // const deferralMoreBeneficial = deferTotal ? deferTotal > noDeferTotal : null
+
+    const deferralMoreBeneficial = clientOasWithDeferral
+      ? clientOasWithDeferral.entitlement.result >
+        clientOasNoDeferral.entitlement.result
+        ? true
+        : false
+      : false
 
     consoleDev(
       'CAN DEFER:',

@@ -65,6 +65,7 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.incomeTooHigh),
   incomeWork: Joi.number()
+    .default(0)
     .required()
     .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
     .precision(2)
@@ -74,7 +75,10 @@ export const RequestSchema = Joi.object({
   //.message(ValidationErrors.incomeWorkGreaterThanNetIncome),
   age: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.invalidAge })
+    .messages({
+      'any.required': ValidationErrors.invalidAge,
+      'number.base': ValidationErrors.invalidAge,
+    })
     .custom(customAgeValidation, 'Custom Validation'),
   receiveOAS: Joi.boolean()
     .required()
@@ -112,41 +116,29 @@ export const RequestSchema = Joi.object({
     .required()
     .messages({ 'any.required': ValidationErrors.yearsInCanadaMinusAge })
     .custom((value, helpers) => {
-      const { age, yearsInCanadaSince18, livingCountry } =
+      const { age, yearsInCanadaSince18, livingCountry, receiveOAS } =
         helpers.state.ancestors[0]
+
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.yearsInCanadaMinusAge,
+        })
+      }
 
       if (livingCountry === LivingCountry.CANADA) {
         if (age > 0 && yearsInCanadaSince18 !== undefined) {
-          if (yearsInCanadaSince18 < 10) {
+          if (age - 18 < yearsInCanadaSince18) {
             return helpers.message({
-              custom: value
-                ? ValidationErrors.yearsInCanadaMinusDeferred
-                : ValidationErrors.yearsInCanadaMinusAge,
+              custom: ValidationErrors.yearsInCanadaMinusAge,
             })
-          } else {
-            if (age - 18 < yearsInCanadaSince18) {
-              return helpers.message({
-                custom: value
-                  ? ValidationErrors.yearsInCanadaMinusAge
-                  : ValidationErrors.yearsInCanadaMinusAge,
-              })
-            }
           }
         }
       } else {
         if (age > 0 && yearsInCanadaSince18 !== undefined) {
-          if (yearsInCanadaSince18 < 20) {
-            return helpers.message({
-              custom: value
-                ? ValidationErrors.yearsNotInCanadaMinusDeferred
-                : ValidationErrors.yearsInCanadaMinusAge,
-            })
-          } else {
+          if (yearsInCanadaSince18 >= 20) {
             if (age - 18 < yearsInCanadaSince18) {
               return helpers.message({
-                custom: value
-                  ? ValidationErrors.yearsInCanadaMinusAge
-                  : ValidationErrors.yearsInCanadaMinusAge,
+                custom: ValidationErrors.yearsInCanadaMinusAge,
               })
             }
           }
@@ -161,44 +153,52 @@ export const RequestSchema = Joi.object({
       const { age, oasDeferDuration, livingCountry, yearsInCanadaSinceOAS } =
         helpers.state.ancestors[0]
 
-      const duration: MonthsYears = JSON.parse(oasDeferDuration)
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.yearsInCanadaMinusAge,
+        })
+      }
+
+      const duration: MonthsYears =
+        oasDeferDuration !== undefined
+          ? JSON.parse(oasDeferDuration)
+          : { years: 0, months: 0 }
+
       const durationFloat = duration.years + duration.months / 12
 
-      if (livingCountry === 'CANADA') {
-        if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
+      if (livingCountry === LivingCountry.CANADA) {
+        if (
+          durationFloat !== undefined &&
+          yearsInCanadaSinceOAS !== undefined
+        ) {
           if (yearsInCanadaSinceOAS - durationFloat < 10) {
             return helpers.message({
-              custom: value
-                ? ValidationErrors.yearsInCanadaMinusDeferred
-                : ValidationErrors.yearsInCanadaMinusAge,
+              custom: ValidationErrors.yearsInCanadaMinusDeferred,
             })
           } else {
             if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
               if (age - 18 < yearsInCanadaSinceOAS) {
                 return helpers.message({
-                  custom: value
-                    ? ValidationErrors.yearsInCanadaMinusAge
-                    : ValidationErrors.yearsInCanadaMinusAge,
+                  custom: ValidationErrors.yearsInCanadaMinusAge,
                 })
               }
             }
           }
         }
       } else {
-        if (durationFloat > 0 && yearsInCanadaSinceOAS !== undefined) {
+        if (
+          durationFloat !== undefined &&
+          yearsInCanadaSinceOAS !== undefined
+        ) {
           if (yearsInCanadaSinceOAS - durationFloat < 20) {
             return helpers.message({
-              custom: value
-                ? ValidationErrors.yearsNotInCanadaMinusDeferred
-                : ValidationErrors.yearsInCanadaMinusAge,
+              custom: ValidationErrors.yearsNotInCanadaMinusDeferred,
             })
           } else {
             if (age > 0 && yearsInCanadaSinceOAS !== undefined) {
               if (age - 18 < yearsInCanadaSinceOAS) {
                 return helpers.message({
-                  custom: value
-                    ? ValidationErrors.yearsInCanadaMinusAge
-                    : ValidationErrors.yearsInCanadaMinusAge,
+                  custom: ValidationErrors.yearsInCanadaMinusAge,
                 })
               }
             }
@@ -213,13 +213,13 @@ export const RequestSchema = Joi.object({
     .custom((value, helpers) => {
       const { livingCountry, yearsInCanadaSince18 } = helpers.state.ancestors[0]
       if (livingCountry === 'CAN' && yearsInCanadaSince18 !== undefined) {
-        if (yearsInCanadaSince18 < 10) {
-          return helpers.message({
-            custom: value
-              ? ValidationErrors.socialCountryUnavailable10
-              : ValidationErrors.yearsInCanadaNotEnough10,
-          })
-        }
+        // if (yearsInCanadaSince18 < 10) {
+        //   return helpers.message({
+        //     custom: value
+        //       ? ValidationErrors.socialCountryUnavailable10
+        //       : ValidationErrors.yearsInCanadaNotEnough10,
+        //   })
+        // }
       } else {
         if (yearsInCanadaSince18 < 20) {
           return helpers.message({
@@ -247,6 +247,7 @@ export const RequestSchema = Joi.object({
           })
         }
       }
+      return value
     }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
     .required()
@@ -268,6 +269,7 @@ export const RequestSchema = Joi.object({
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
   partnerIncomeWork: Joi.number()
+    .default(0)
     .required()
     .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
     .precision(2)
@@ -277,7 +279,10 @@ export const RequestSchema = Joi.object({
   //.message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
   partnerAge: Joi.number()
     .required()
-    .messages({ 'any.required': ValidationErrors.invalidAge })
+    .messages({
+      'any.required': ValidationErrors.invalidAge,
+      'number.base': ValidationErrors.invalidAge,
+    })
     .custom(customAgeValidation, 'Custom Validation'),
   partnerLivingCountry: Joi.string()
     .required()
