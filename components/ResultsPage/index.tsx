@@ -15,12 +15,11 @@ import {
 } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
-import { EstimatedTotal } from './EstimatedTotal'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
-import { FutureSummaryEstimates } from './FutureSummaryEstimates'
 import { SummaryEstimates } from './SummaryEstimates'
+import { Intro } from './Intro'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -48,11 +47,17 @@ const ResultsPage: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
 
+  const maritalStatus = inputs.find(
+    (input) => input.key === FieldKey.MARITAL_STATUS
+  )['value']
+
   const userAge = inputs.find((input) => input.key === FieldKey.AGE)['value']
+
   const partnerAge = isPartnered
     ? inputs.find((input) => input.key === FieldKey.PARTNER_AGE)['value']
     : null
@@ -145,7 +150,6 @@ const ResultsPage: React.VFC<{
           const age = Number(Object.keys(item)[0])
           const headingYear =
             currentYear + (age - Math.round(Number(partnerAge)))
-          // console.log(headingYear)
           let key
           if (age == 0) {
             key = currentYear
@@ -172,22 +176,38 @@ const ResultsPage: React.VFC<{
   const arr1 = userKeys.length > partnerKeys.length ? userKeys : partnerKeys
   const arr2 = arr1 == partnerKeys ? userKeys : partnerKeys
 
+  //get the headings to display user and partner results
   const headings = [...new Set([...arr1, ...arr2])]
+
+  //has multiple oas benefits
+  const multipleOAS_GIS =
+    userArrNew
+      .filter((item) => item !== null)
+      .filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
-        <div className="col-span-2 row-span-1 border-[#269ABC] bg-[#EEFAFF] p-8">
+        <div className="col-span-2 row-span-1">
+          <Intro
+            hasPartner={isPartnered}
+            userAge={Number(userAge)}
+            estimateLength={userArrNew.length}
+            hasMultipleOasGis={multipleOAS_GIS}
+          />
           {/* Summary Estimates section */}
-          {headings && (
-            <SummaryEstimates
-              headings={headings}
-              userResults={newestUser}
-              partnerResults={newestPartner}
-              userAge={userAge}
-              partnerAge={partnerAge}
-            ></SummaryEstimates>
-          )}
+          <div className="border-[#269ABC] bg-[#EEFAFF] p-8">
+            {headings && (
+              <SummaryEstimates
+                headings={headings}
+                userResults={newestUser}
+                partnerResults={newestPartner}
+                userAge={userAge}
+                partnerAge={partnerAge}
+                maritalStatus={maritalStatus}
+              ></SummaryEstimates>
+            )}
+          </div>
         </div>
 
         <div className="col-span-1 row-span-2">

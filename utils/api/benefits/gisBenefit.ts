@@ -22,6 +22,8 @@ import { EntitlementFormula } from './entitlementFormula'
 export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
   future: Boolean
+  formAge: number
+  formYearsInCanada: number
   originalInput?: ProcessedInput
   constructor(
     input: ProcessedInput,
@@ -29,12 +31,16 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     private oasResult: BenefitResult<EntitlementResultOas>,
     partner?: Boolean,
     future?: Boolean,
-    originalInput?: ProcessedInput
+    originalInput?: ProcessedInput,
+    formAge?: number,
+    formYearsInCanada?: number
   ) {
     super(input, translations, BenefitKey.gis)
     this.partner = partner
     this.future = future
     this.originalInput = originalInput
+    this.formAge = formAge
+    this.formYearsInCanada = formYearsInCanada
   }
 
   protected getEligibility(): EligibilityResult {
@@ -280,35 +286,48 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     )
       return cardCollapsedText
 
-    const inputs = this.originalInput === null ? this.input : this.originalInput
-    // Related to OAS Deferral, don't show if already receiving
-    if (inputs) {
-      const ageInOasRange = inputs.age >= 65 && inputs.age < 70
-      if (
-        this.partner !== true &&
-        this.entitlement.result !== 0 &&
-        ageInOasRange &&
-        !inputs.receiveOAS &&
-        !this.future
-      ) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.ifYouDeferYourPension
-        )
-      }
-    }
+    if (!this.partner) {
+      let text = ''
+      let heading
 
-    if (this.partner) {
-      if (this.input.income.provided && this.entitlement.result !== 0) {
-        if (
-          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
-        ) {
-          cardCollapsedText.push(
-            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
-          )
-        } else {
-          cardCollapsedText.push(
-            this.translations.detailWithHeading.partnerEligible
-          )
+      if (this.oasResult.eligibility.result === ResultKey.ELIGIBLE) {
+        if (this.oasResult.cardDetail.meta.receiveOAS == false) {
+          heading = this.translations.detail.yourDeferralOptions
+          if (this.oasResult.entitlement.result > 0) {
+            if (
+              this.input.age != this.originalInput?.age &&
+              this.originalInput?.age < 70
+            ) {
+              if (this.input.age >= 65 && this.input.age < 70) {
+                //CHECK IF RECEIVING OAS
+                text += this.translations.detail.deferralEligible
+              } else if (this.formAge < 65) {
+                text += this.translations.detail.deferralWillBeEligible
+              }
+            }
+
+            if (text !== '') {
+              if (this.entitlement.result === 0) {
+                text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
+              } else {
+                text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
+              }
+
+              if (!this.input.livedOnlyInCanada) {
+                if (
+                  this.formAge != this.input.age &&
+                  this.formYearsInCanada <= 40 &&
+                  this.formYearsInCanada != this.input.yearsInCanadaSince18
+                ) {
+                  text += `<p class="mt-6">${this.translations.detail.deferralYearsInCanada}</p>`
+                }
+              }
+            }
+          }
+
+          if (text !== '') {
+            this.oasResult.cardDetail.collapsedText.push({ heading, text })
+          }
         }
       }
     }

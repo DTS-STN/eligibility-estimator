@@ -74,6 +74,7 @@ export function getGisNextSteps(
     }
   } else {
     if (result.eligibility.result === ResultReason.LIVING_COUNTRY) {
+      nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
       nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.mustBeInCanada}</p>`
     }
   }

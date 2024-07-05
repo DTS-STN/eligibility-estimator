@@ -346,6 +346,14 @@ const en: Translations = {
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
+    deferralEligible:
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
+    deferralNoGis:
+      'You won’t be able to receive the Guaranteed Income Supplement if you don’t receive the pension.',
+    deferralWillBeEligible:
+      'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    deferralYearsInCanada:
+      "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
     retroactivePay: 'Retroactive payment',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
@@ -547,6 +555,50 @@ const en: Translations = {
       heading: 'Your partner may be eligible',
       text: 'You can <a href="/en/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
+    recoveryTax: {
+      heading: 'Recovery tax will be applied to your pension',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    recoveryTaxPartner: {
+      heading: "Recovery tax will be applied to your partner's pension",
+      text: "Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+    },
+    recoveryTaxBoth: {
+      heading: 'Recovery tax will be applied to your pensions',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTax: {
+      heading: 'Taxes will be applied to your pension',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
+    },
+    nonResidentTaxPartner: {
+      heading: "Taxes will be applied to your partner's income",
+      text: `Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
+    },
+    nonResidentTaxBoth: {
+      heading: 'Taxes will be applied to your pensions',
+      text: `Since you and your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
+    },
+    yourDeferralOptions: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferWaitMonths: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferralDelay: {
+      heading: 'Your deferral options',
+      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+    },
+    retroactivePayment: {
+      heading: 'Retroactive payment',
+      text: 'You may be able to receive payment for up to the last 11 months.',
+    },
+    mayBecomeEligible: {
+      heading: 'Retroactive payment',
+      text: 'You may be able to receive payment for up to the last 11 months.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'More information needed',
@@ -572,6 +624,19 @@ const en: Translations = {
     headingAge: 'If you wait until age...',
     futureHeadingAge: 'If you start receiving at age...',
     headingAmount: 'Your monthly payment could be...',
+  },
+  modal: {
+    userHeading: 'Can you receive this benefit?',
+    partnerHeading: 'Can your partner receive this benefit?',
+    userIncomeTooHigh:
+      'You can apply for this benefit, but your income is too high to receive a monthly payment at this time.',
+    partnerIncomeTooHigh:
+      'Your partner can apply for this benefit, but their income is too high to receive a monthly payment at this time.',
+    userCoupleIncomeTooHigh:
+      'You can apply for this benefit, but your couple’s income is too high to receive a monthly payment at this time.',
+    partnerCoupleIncomeTooHigh:
+      'Your partner can apply for this benefit, but your couple’s income is too high to receive a monthly payment at this time.',
+    close: 'Close',
   },
   links,
   incomeSingle: 'your income',

@@ -14,6 +14,7 @@ interface ButtonProps {
   disabled?: boolean
   ariaLabel?: string
   attributes?: any
+  alt?: string
 }
 
 type ButtonType = 'submit' | 'reset' | 'button'
@@ -40,6 +41,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ariaLabel,
   attributes,
+  alt = 'Image alt',
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
@@ -48,7 +50,7 @@ export const Button: React.FC<ButtonProps> = ({
   return href ? (
     <Link href={href} locale={locale}>
       <a className={classes} aria-label={ariaLabel} {...attributes}>
-        {imgHref && <img src={imgHref} alt="alt" className="pr-3" />} {text}
+        {imgHref && <img src={imgHref} alt={alt} className="pr-3" />} {text}
       </a>
     </Link>
   ) : (
@@ -61,7 +63,7 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       {...attributes}
     >
-      {imgHref && <img src={imgHref} alt="alt" className="pr-3" />}
+      {imgHref && <img src={imgHref} alt={alt} className="pr-3" />}
       {text}
     </button>
   )

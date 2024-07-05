@@ -62,6 +62,10 @@ export interface Translations {
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     yourDeferralOptions: string
+    deferralWillBeEligible: string
+    deferralEligible: string
+    deferralNoGis: string
+    deferralYearsInCanada: string
     retroactivePay: string
     sinceYouAreSixty: string
     futureDeferralOptions: string
@@ -170,6 +174,17 @@ export interface Translations {
     partnerEligible: { heading: string; text: string }
     partnerDependOnYourIncome: { heading: string; text: string }
     partnerEligibleButAnsweredNo: { heading: string; text: string }
+    recoveryTax: { heading: string; text: string }
+    recoveryTaxPartner: { heading: string; text: string }
+    recoveryTaxBoth: { heading: string; text: string }
+    nonResidentTax: { heading: string; text: string }
+    nonResidentTaxPartner: { heading: string; text: string }
+    nonResidentTaxBoth: { heading: string; text: string }
+    yourDeferralOptions: { heading: string; text: string }
+    deferWaitMonths: { heading: string; text: string }
+    deferralDelay: { heading: string; text: string }
+    retroactivePayment: { heading: string; text: string }
+    mayBecomeEligible: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
@@ -178,6 +193,15 @@ export interface Translations {
     headingAge: string
     futureHeadingAge: string
     headingAmount: string
+  }
+  modal: {
+    userHeading: string
+    partnerHeading: string
+    userIncomeTooHigh: string
+    partnerIncomeTooHigh: string
+    userCoupleIncomeTooHigh: string
+    partnerCoupleIncomeTooHigh: string
+    close: string
   }
   links: LinkDefinitions
   incomeSingle: string

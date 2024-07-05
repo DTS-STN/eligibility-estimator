@@ -354,6 +354,10 @@ const fr: Translations = {
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     yourDeferralOptions: 'Vos options de report',
+    deferralEligible: '',
+    deferralNoGis: '',
+    deferralWillBeEligible: '',
+    deferralYearsInCanada: '',
     retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
@@ -558,6 +562,50 @@ const fr: Translations = {
       heading: 'Votre conjoint pourrait être admissible',
       text: 'Vous pouvez <a href="/fr/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
+    recoveryTax: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    recoveryTaxPartner: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    recoveryTaxBoth: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTax: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTaxPartner: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTaxBoth: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    yourDeferralOptions: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferWaitMonths: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferralDelay: {
+      heading: 'Your deferral options',
+      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+    },
+    retroactivePayment: {
+      heading: 'Your deferral options',
+      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+    },
+    mayBecomeEligible: {
+      heading: 'Retroactive payment',
+      text: 'You may be able to receive payment for up to the last 11 months.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',
@@ -586,6 +634,19 @@ const fr: Translations = {
     headingAge: "Si vous attendez d'avoir...",
     futureHeadingAge: 'Si vous commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
+  },
+  modal: {
+    userHeading: 'Est-ce que vous pouvez recevoir cette prestation?',
+    partnerHeading: 'Est-ce que votre conjoint peut recevoir cette prestation?',
+    userIncomeTooHigh:
+      'Vous pouvez faire une demande pour cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    partnerIncomeTooHigh:
+      'Votre conjoint peut faire une demande pour cette prestation, mais son revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    userCoupleIncomeTooHigh:
+      'Vous pouvez faire une demande pour cette prestation, mais votre revenu de couple est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    partnerCoupleIncomeTooHigh:
+      'Votre conjoint peut faire une demande pour cette prestation, mais votre revenu de couple est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    close: 'Fermer',
   },
   links,
   incomeSingle: 'votre revenu',

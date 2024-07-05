@@ -295,4 +295,35 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     links.push(this.translations.links.overview[BenefitKey.alw])
     return links
   }
+
+  protected getCardCollapsedText(): CardCollapsedText[] {
+    let cardCollapsedText = super.getCardCollapsedText()
+
+    if (
+      this.eligibility.result !== ResultKey.ELIGIBLE &&
+      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
+    )
+      return cardCollapsedText
+
+    // partner is eligible, IF income was not provided the result = 0
+    //  when IF income > 0 AND invSeparated = true the amount is incorrectly calculated
+    //  the correct amount is on the benefitHandler.
+    if (this.partner) {
+      if (this.entitlement.result > 0) {
+        if (this.eligibility.result !== ResultKey.INCOME_DEPENDENT) {
+          if (!this.input.invSeparated) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.partnerEligible
+            )
+          }
+        } else {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerDependOnYourIncome
+          )
+        }
+      }
+    }
+
+    return cardCollapsedText
+  }
 }

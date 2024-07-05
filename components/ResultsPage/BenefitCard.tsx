@@ -1,9 +1,9 @@
 import { Button } from '../Forms/Button'
-import Image from 'next/image'
 import React from 'react'
 import { NextStepText } from '../../utils/api/definitions/types'
-import { CustomCollapse } from './CustomCollapse'
 import { Router, useRouter } from 'next/router'
+import { useTranslation } from '../Hooks'
+import { WebTranslations } from '../../i18n/web'
 
 const AA_BUTTON_CLICK_ATTRIBUTE =
   'ESDC-EDSC:Canadian OAS Benefits Est. Result card link click'
@@ -50,19 +50,13 @@ export const BenefitCard: React.VFC<{
   )
 
   const router = useRouter()
+  const tsln = useTranslation<WebTranslations>()
 
   return (
     <div
       className="my-6 py-6 px-8 border border-[#6F6F6F] rounded"
       data-cy={benefitKey}
     >
-      {/* 
-      
-      TO-DO:
-      - flex-wrap
-
-
-      */}
       <div className="flex h-auto w-full justify-between items-center mb-2">
         <h2
           data-cy="benefit-title"
@@ -77,20 +71,6 @@ export const BenefitCard: React.VFC<{
       <div data-cy="benefit-detail" className={`py-1`}>
         {children}
       </div>
-      {collapsedDetails &&
-        collapsedDetails.map((detail, index) => (
-          <CustomCollapse
-            datacy={`collapse-${benefitKey}-${index}`}
-            key={`collapse-${benefitName}-${index}`}
-            id={`collapse-${benefitName}-${index}`}
-            title={detail.heading}
-          >
-            <p
-              className="leading-[26px]"
-              dangerouslySetInnerHTML={{ __html: detail.text }}
-            />
-          </CustomCollapse>
-        ))}
 
       {nextStepText.nextStepTitle && (
         <div>
@@ -110,13 +90,17 @@ export const BenefitCard: React.VFC<{
                   className="ds-font-body ds-text-lg ds-leading-22px ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
                   data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}:${action}`}
                 >
-                  {/* GET WHITE PNG */}
                   <Button
                     style={icon == 'info' ? 'secondary' : 'primary'}
                     custom="ds-my-3"
                     type="button"
                     text={text}
-                    imgHref={`/openNewTab.svg`}
+                    imgHref={
+                      icon == 'info'
+                        ? `/openNewTab.svg`
+                        : `/openNewTabWhite.svg`
+                    }
+                    alt={tsln.openNewTab}
                     href={url}
                   />
                 </span>

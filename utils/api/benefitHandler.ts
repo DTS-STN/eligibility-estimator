@@ -161,6 +161,7 @@ export class BenefitHandler {
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.fields.translations,
+      null,
       false,
       this.future,
       false,
@@ -174,6 +175,7 @@ export class BenefitHandler {
       const partnerOasNoDeferral = new OasBenefit(
         this.input.partner,
         this.fields.translations,
+        clientOasNoDeferral,
         true
       )
 
@@ -208,6 +210,7 @@ export class BenefitHandler {
       clientOasWithDeferral = new OasBenefit(
         clientOasHelper.newInput,
         this.fields.translations,
+        null,
         false,
         this.future,
         true,
@@ -226,7 +229,10 @@ export class BenefitHandler {
       this.fields.translations,
       clientOasNoDeferral.info,
       false,
-      this.future
+      this.future,
+      null,
+      this.formAge,
+      this.formYearsInCanada
     )
 
     consoleDev(
@@ -339,6 +345,7 @@ export class BenefitHandler {
       const partnerOas = new OasBenefit(
         this.input.partner,
         this.fields.translations,
+        clientOas,
         true
       )
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
@@ -456,6 +463,7 @@ export class BenefitHandler {
     const partnerOas = new OasBenefit(
       this.input.partner,
       this.fields.translations,
+      clientOas,
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
@@ -480,7 +488,10 @@ export class BenefitHandler {
         this.fields.translations,
         allResults.client.oas,
         false,
-        this.future
+        this.future,
+        null,
+        this.formAge,
+        this.formYearsInCanada
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }

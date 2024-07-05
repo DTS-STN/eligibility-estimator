@@ -310,9 +310,11 @@ const en: WebTranslations = {
   resultsPage: {
     yourMonEstimateHeading: 'Your monthly estimate',
     changeInSituation: 'Changes in your situation may impact your results.',
-    youEstimateMayChange: 'Your estimate may change over time based on:',
+    youEstimateMayChange: 'Your estimate may change over time based on',
     basedYourAge: 'your age',
     basedYourPartner: 'the benefits your partner receives',
+    ifYouChoseToDefer:
+      'If you choose to defer your pension, your future estimate will be higher.',
     header: 'Table of estimated monthly amounts',
     general:
       'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living.',
@@ -469,6 +471,7 @@ const en: WebTranslations = {
   tooltip: {
     moreInformation: 'More information',
   },
+  openNewTab: 'Opens in a new tab',
   partnerIsNotEligible: 'Your partner is not eligible',
   partnerLegalStatusNotEligible:
     "Your partner's legal status indicates that they are not receiving the Old Age Security pension.",

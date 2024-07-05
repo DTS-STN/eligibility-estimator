@@ -317,9 +317,11 @@ const fr: WebTranslations = {
     changeInSituation:
       'Si votre situation change, vos résultats pourraient changer.',
     youEstimateMayChange:
-      'Votre estimation peut changer au fil du temps en fonction&nbsp:',
-    basedYourAge: 'de votre âge;',
+      'Votre estimation peut changer au fil du temps en fonction&nbsp',
+    basedYourAge: 'de votre âge',
     basedYourPartner: 'des prestations que votre conjoint reçoit.',
+    ifYouChoseToDefer:
+      'Si vous choisissez de reporter votre pension, votre estimation future sera plus élevée.',
     header: "Tableau des résultats d'estimation",
     general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie.`,
     onThisPage: 'Sur cette page',
@@ -485,6 +487,8 @@ const fr: WebTranslations = {
   tooltip: {
     moreInformation: "Plus d'information",
   },
+  openNewTab: "s'ouvre dans un nouvel onglet",
+
   partnerIsNotEligible: "Votre conjoint n'est pas admissible",
   partnerLegalStatusNotEligible:
     "Le statut légal de votre conjoint indique qu'il ne reçoit pas la pension de la Sécurité de la vieillesse.",

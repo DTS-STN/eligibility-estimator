@@ -2,6 +2,8 @@ import { Translations } from '../../../i18n/api'
 import {
   BenefitKey,
   EntitlementResultType,
+  LivingCountry,
+  MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -28,9 +30,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age ONLY for non-future benefits
   formAge: number
   formYearsInCanada: number
+  userOas: OasBenefit
   constructor(
     input: ProcessedInput,
     translations: Translations,
+    userOas?: OasBenefit,
     partner?: Boolean,
     future?: Boolean,
     deferral: boolean = false,
@@ -48,6 +52,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     this.inputAge = inputAge
     this.formAge = formAge
     this.formYearsInCanada = formYearsInCanada
+    this.userOas = userOas
   }
 
   protected getEligibility(): EligibilityResult {
@@ -433,6 +438,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     }
   }
 
+  public updateCollapsedText(): CardCollapsedText[] {
+    return this.getCardCollapsedText()
+  }
+
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
@@ -443,50 +452,103 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     )
       return cardCollapsedText
 
-    // if (this.partner && this.entitlement.result !== 0) {
-    //   if (
-    //     // eslint-disable-next-line prettier/prettier
-    //     this.input.partnerBenefitStatus.value ===
-    //       PartnerBenefitStatus.OAS_GIS ||
-    //     this.input.partnerBenefitStatus.value === PartnerBenefitStatus.HELP_ME
-    //   ) {
-    //     cardCollapsedText.push(
-    //       this.translations.detailWithHeading.partnerEligible
-    //     )
-    //   } else {
-    //     cardCollapsedText.push(
-    //       this.translations.detailWithHeading.partnerEligibleButAnsweredNo
-    //     )
-    //   }
+    if (this.partner) {
+      //EC15
+      if (this.entitlement.result > 0) {
+        if (
+          this.input.partnerBenefitStatus.value !== PartnerBenefitStatus.NONE
+        ) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+          )
+        }
+      }
 
-    //   return cardCollapsedText
-    // }
+      if (this.userOas) {
+        if (
+          this.eligibility.result == ResultKey.ELIGIBLE &&
+          this.userOas.eligibility.result == ResultKey.ELIGIBLE
+        ) {
+          if (this.clawbackAmount > 0 && this.userOas.clawbackAmount > 0) {
+            if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+              cardCollapsedText.push(
+                this.translations.detailWithHeading.nonResidentTaxBoth
+              )
+            } else {
+              cardCollapsedText.push(
+                this.translations.detailWithHeading.recoveryTaxBoth
+              )
+            }
+          }
+        } else {
+          if (this.clawbackAmount > 0) {
+            if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+              cardCollapsedText.push(
+                this.translations.detailWithHeading.recoveryTaxPartner
+              )
+            } else {
+              cardCollapsedText.push(
+                this.translations.detailWithHeading.nonResidentTaxPartner
+              )
+            }
+          }
+        }
+      }
+    }
 
-    // // getCardText reset the eligibility reason
-    // if (this.eligibility.reason === ResultReason.INCOME)
-    //   return cardCollapsedText
+    if (!this.partner) {
+      if (
+        this.inputAge > 64 &&
+        this.inputAge < 75 &&
+        this.entitlement.result > 0
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.oasIncreaseAt75
+        )
+      }
 
-    // // increase at 75
-    // if (this.currentEntitlementAmount !== this.age75EntitlementAmount) {
-    //   if (!this.future) {
-    //     cardCollapsedText.push(
-    //       this.translations.detailWithHeading.oasIncreaseAt75
-    //     )
-    //   }
-    // } else
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasIncreaseAt75Applied
-    //   )
+      //RECOVER TAX MESSAGE - if partnered better to handle it in the partnered section to access both benefits
+      if (this.input.maritalStatus.value != MaritalStatus.PARTNERED) {
+        if (this.clawbackAmount > 0) {
+          if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.nonResidentTax
+            )
+          } else {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.recoveryTax
+            )
+          }
+        }
+      }
 
-    // deferral
-    // if (this.deferralIncrease)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasDeferralApplied
-    //   )
-    // else if (this.input.age >= 65 && this.input.age < 70)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasDeferralAvailable
-    //   )
+      if (this.inputAge > 74 && this.entitlement.result > 0) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.oasIncreaseAt75Applied
+        )
+      }
+
+      if (
+        this.entitlement.result == 0 &&
+        this.inputAge > 64 &&
+        this.inputAge > 70 &&
+        !this.input.receiveOAS
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.deferWaitMonths
+        )
+      }
+
+      if (
+        this.inputAge >= 70 &&
+        !this.input.receiveOAS &&
+        this.entitlement.result > 0
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.retroactivePayment
+        )
+      }
+    }
 
     return cardCollapsedText
   }

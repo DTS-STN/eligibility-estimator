@@ -1,21 +1,12 @@
-import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { Summary } from 'prom-client'
 import { getTranslations, numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import {
-  BenefitKey,
-  Language,
-  ResultKey,
-  SummaryState,
-} from '../../utils/api/definitions/enums'
+import { Language, ResultKey } from '../../utils/api/definitions/enums'
 import {
   BenefitResult,
   BenefitResultsObject,
 } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
-import { CustomCollapse } from './CustomCollapse'
-import { DeferralTable } from './DeferralTable'
 import { EstimatedTotalItem } from './EstimatedTotalItem'
 
 export const Estimation: React.VFC<{
@@ -23,7 +14,8 @@ export const Estimation: React.VFC<{
   resultObject
   resultArray
   age
-}> = ({ partner, resultObject, resultArray, age }) => {
+  maritalStatus
+}> = ({ partner, resultObject, resultArray, age, maritalStatus }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   age = Math.round(age)
@@ -66,7 +58,6 @@ export const Estimation: React.VFC<{
 
   const isFirstOasGis = () => {
     let isFirst = false
-    // const resultArray =
 
     for (let i = 0; i < benefitResultArray.length; i++) {
       const obj = benefitResultArray[i]
@@ -74,8 +65,6 @@ export const Estimation: React.VFC<{
         Object.keys(obj[Object.keys(obj)[0]]).includes('oas') &&
         Object.keys(obj[Object.keys(obj)[0]]).includes('gis')
       ) {
-        console.log(obj)
-        console.log(benefitObject)
         // Check if it's the same object
         if (JSON.stringify(obj) === JSON.stringify(resultObject)) {
           isFirst = true
@@ -110,9 +99,6 @@ export const Estimation: React.VFC<{
   const buildSummaryString = () => {
     let text = ''
 
-    console.log('age')
-    console.log(age)
-    console.log(benefitAge)
     age = benefitAge == '0' ? age : benefitAge
     let isPartnerStr = partner
       ? apiTrans.detail.yourPartner
@@ -160,7 +146,6 @@ export const Estimation: React.VFC<{
           else {
             const nextBenefitResult =
               arrayofben[arrayofben.indexOf(resultObject) + 1]
-            console.log('next one', nextBenefitResult)
 
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
@@ -203,7 +188,6 @@ export const Estimation: React.VFC<{
           else {
             const nextBenefitResult =
               arrayofben[arrayofben.indexOf(resultObject) + 1]
-            console.log('next one', nextBenefitResult)
 
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
@@ -238,7 +222,7 @@ export const Estimation: React.VFC<{
       else {
         const previousBenefitResult =
           arrayofben[arrayofben.indexOf(resultObject) - 1]
-        console.log('previous one', previousBenefitResult)
+
         const previousBenefitTotal =
           previousBenefitResult[Object.keys(previousBenefitResult)[0]]['oas']
             .entitlement.result +
@@ -266,7 +250,6 @@ export const Estimation: React.VFC<{
           } else {
             const nextBenefitResult =
               arrayofben[arrayofben.indexOf(resultObject) + 1]
-            console.log('next one', nextBenefitResult)
 
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
@@ -315,6 +298,8 @@ export const Estimation: React.VFC<{
               heading={apiTrans.benefit[benefit.benefitKey]}
               result={benefit}
               displayAmount={true}
+              partner={partner}
+              maritalStatus={maritalStatus}
             />
           ))}
       </ul>

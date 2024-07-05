@@ -1,19 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { numberToStringCurrency } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
 import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
+import { Modal } from './Modal'
+import Image from 'next/image'
 
 export const EstimatedTotalItem: React.VFC<{
   heading: string
   result: BenefitResult
   displayAmount: boolean
-}> = ({ heading, result, displayAmount }) => {
+  partner: boolean
+  maritalStatus
+}> = ({ heading, result, displayAmount, partner, maritalStatus }) => {
   const tsln = useTranslation<WebTranslations>()
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
   /*
     returns benefit name with from/de and proper article. ... french nuances.
   */
+
+  const openModal = (e) => {
+    setModalPosition({ x: e.clientX, y: e.clientY })
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
 
   function displayBenefitName(
     benefitName: string,
@@ -39,10 +54,31 @@ export const EstimatedTotalItem: React.VFC<{
   if (!result.entitlement) return null
 
   return (
-    <li>
+    <li className="align-middle">
       {displayAmount &&
         numberToStringCurrency(result.entitlement.result, tsln._language)}
       {displayBenefitName(heading, result.entitlement.result, displayAmount)}
+      {result.entitlement.result == 0 && (
+        <>
+          <span className="align-middle ml-2">
+            <Image
+              className="cursor-pointer"
+              src="/moreInfo.png"
+              alt="info"
+              width="25"
+              height="25"
+              onClick={openModal}
+            />
+            <Modal
+              isOpen={modalOpen}
+              onClose={closeModal}
+              position={modalPosition}
+              partner={partner}
+              maritalStatus={maritalStatus}
+            />
+          </span>
+        </>
+      )}
     </li>
   )
 }
