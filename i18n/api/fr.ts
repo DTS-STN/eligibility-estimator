@@ -100,7 +100,7 @@ const fr: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
-      'A vécu dans un pays avec un accord de sécurité social',
+      'A vécu dans un pays avec un accord de sécurité sociale',
     [FieldKey.MARITAL_STATUS]: 'État matrimonial',
     [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
