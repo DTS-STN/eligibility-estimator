@@ -282,18 +282,18 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     return false
   }
 
-  protected getCardText(): string {
-    let text = this.eligibility.detail
-
+  protected getCardLinks(): LinkWithAction[] {
+    const links: LinkWithAction[] = []
     if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.entitlement.result > 0
+      this.eligibility.result === ResultKey.ELIGIBLE ||
+      this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
+      (this.eligibility.result === ResultKey.INELIGIBLE &&
+        this.eligibility.reason === ResultReason.AGE_YOUNG)
     ) {
-      text += this.future
-        ? ` ${this.translations.detail.futureExpectToReceive}`
-        : ` ${this.translations.detail.expectToReceive}`
+      links.push(this.translations.links.apply[BenefitKey.alw])
     }
-    return text
+    links.push(this.translations.links.overview[BenefitKey.alw])
+    return links
   }
 
   protected getCardCollapsedText(): CardCollapsedText[] {
@@ -325,19 +325,5 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     }
 
     return cardCollapsedText
-  }
-
-  protected getCardLinks(): LinkWithAction[] {
-    const links: LinkWithAction[] = []
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE ||
-      this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
-      (this.eligibility.result === ResultKey.INELIGIBLE &&
-        this.eligibility.reason === ResultReason.AGE_YOUNG)
-    ) {
-      links.push(this.translations.links.apply[BenefitKey.alw])
-    }
-    links.push(this.translations.links.overview[BenefitKey.alw])
-    return links
   }
 }
