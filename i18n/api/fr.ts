@@ -354,13 +354,19 @@ const fr: Translations = {
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     yourDeferralOptions: 'Vos options de report',
+    deferralEligible: '',
+    deferralNoGis: '',
+    deferralWillBeEligible: '',
+    deferralYearsInCanada: '',
     retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
-      "Vous pouvez commencer à recevoir vos paiements à {EARLIEST_ELIGIBLE_AGE} ans ou attendre d'avoir 70 ans.",
+      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
     youCanAply:
       'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+    onceEnrolled:
+      'Quand vous serez inscrit, le montant de votre paiement sera révisé chaque année en fonction de votre déclaration de revenus. Vous recevrez automatiquement des paiements si votre revenu est admissible.',
     delayMonths:
       'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     eligibleWhen60ApplyNow:
@@ -383,7 +389,7 @@ const fr: Translations = {
     conditional:
       'Vous pourriez être admissible à cette prestation. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.',
     partnerContinues: 'Si votre conjoint continue de recevoir à',
-    continueReceiving: 'Si vous continuez de recevoir à',
+    continueReceiving: 'continuez de recevoir à',
     dependingOnAgreement:
       "Vous pourriez être admissible à cette prestation, selon l'accord que le Canada a avec ce pays. Nous vous invitons à communiquer avec Service Canada pour obtenir une meilleure évaluation.",
     dependingOnAgreementWhen60:
@@ -435,6 +441,23 @@ const fr: Translations = {
       "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
       "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
+    firstYearEligible: '{FIRST_ELIGIBLE_YEAR}',
+    lastYearEligible: 'À partir de ',
+    currentEligible: 'Présentement',
+    you: 'vous pourriez',
+    yourPartner: 'votre conjoint pourrait',
+    youCouldReceivePerMonth: 'par mois:',
+    youCouldReceiveTo: 'à',
+    youCouldReceive: 'recevoir',
+    youCouldReceiveUntil: 'Jusqu’à',
+    youCouldReceiveFrom: 'De',
+    youCouldStartReceivingAt: 'À',
+    youCouldContinueReceiving: 'continuer de recevoir',
+    youCouldStartReceiving: 'commencer à recevoir',
+    yourEstimateIsStill: 'Votre estimation est encore',
+    yourEstimateIsStillPartner: `L'estimation de votre conjoint est encore`,
+    thisEstimateIsBased:
+      'Cette estimation est basée sur {ENTITLEMENT_AMOUNT_FOR_BENEFIT} années de résidence au Canada.',
     oas: {
       eligibleIfIncomeIsLessThan:
         "Vous êtes probablement admissible à cette prestation si votre revenu est moins que {INCOME_LESS_THAN}. Si votre revenu dépasse {OAS_RECOVERY_TAX_CUTOFF}, vous devrez peut-être payer de l'{LINK_RECOVERY_TAX}.",
@@ -470,6 +493,8 @@ const fr: Translations = {
         'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     gis: {
+      youCanApplyGis:
+        'Vous pouvez faire une demande pour le Supplément de revenu garanti lorsque vous présentez votre demande pour la pension de la Sécurité de la vieillesse.',
       eligibleDependingOnIncomeNoEntitlement:
         'Vous pourriez probablement recevoir cette prestation si {INCOME_SINGLE_OR_COMBINED} est moins que {INCOME_LESS_THAN}. Fournissez {YOUR_OR_COMPLETE} pour obtenir une estimation de paiement mensuel.',
       incomeTooHigh:
@@ -478,13 +503,22 @@ const fr: Translations = {
         'Vous pourriez être admissible lorsque vous aurez {EARLIEST_ELIGIBLE_AGE}. Si votre revenu reste le même, vous ne recevrez peut-être pas de paiement mensuel.',
       ifYouApply:
         'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu  est admissible.',
-      canApplyOnline:
-        'Vous pouvez faire une demande pour cette prestation en ligne.',
+      canApplyOnline: 'Vous pouvez faire une demande pour cette prestation.',
       ifYouAlreadyApplied:
         'Si vous avez déjà fait une demande pour le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
       ifYouAlreadyReceive:
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
+    alw: {
+      forIndividuals: 'Cette prestation est pour les personnes veuves :',
+      age60to64: 'âgées de 60 à 64 ans;',
+      livingInCanada: 'qui vivent au Canada;',
+      spouseReceives:
+        'qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.',
+      yourPartnerCanApply:
+        'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 65 ans.',
+    },
+    alws: {},
   },
   detailWithHeading: {
     ifYouDeferYourPension: {
@@ -528,6 +562,50 @@ const fr: Translations = {
       heading: 'Votre conjoint pourrait être admissible',
       text: 'Vous pouvez <a href="/fr/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
+    recoveryTax: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    recoveryTaxPartner: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    recoveryTaxBoth: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTax: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTaxPartner: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    nonResidentTaxBoth: {
+      heading: 'blablabla',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+    },
+    yourDeferralOptions: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferWaitMonths: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferralDelay: {
+      heading: 'Your deferral options',
+      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+    },
+    retroactivePayment: {
+      heading: 'Your deferral options',
+      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+    },
+    mayBecomeEligible: {
+      heading: 'Retroactive payment',
+      text: 'You may be able to receive payment for up to the last 11 months.',
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'Plus de renseignements sont nécessaires',
@@ -556,6 +634,19 @@ const fr: Translations = {
     headingAge: "Si vous attendez d'avoir...",
     futureHeadingAge: 'Si vous commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
+  },
+  modal: {
+    userHeading: 'Est-ce que vous pouvez recevoir cette prestation?',
+    partnerHeading: 'Est-ce que votre conjoint peut recevoir cette prestation?',
+    userIncomeTooHigh:
+      'Vous pouvez faire une demande pour cette prestation, mais votre revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    partnerIncomeTooHigh:
+      'Votre conjoint peut faire une demande pour cette prestation, mais son revenu est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    userCoupleIncomeTooHigh:
+      'Vous pouvez faire une demande pour cette prestation, mais votre revenu de couple est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    partnerCoupleIncomeTooHigh:
+      'Votre conjoint peut faire une demande pour cette prestation, mais votre revenu de couple est trop élevé pour recevoir un paiement mensuel pour le moment.',
+    close: 'Fermer',
   },
   links,
   incomeSingle: 'votre revenu',

@@ -209,6 +209,12 @@ export type WebTranslations = {
   }
   //results page
   resultsPage: {
+    yourMonEstimateHeading: string
+    changeInSituation: string
+    youEstimateMayChange: string
+    basedYourAge: string
+    basedYourPartner: string
+    ifYouChoseToDefer: string
     header: string
     general: string
     onThisPage: string
@@ -279,6 +285,8 @@ export type WebTranslations = {
   tooltip: {
     moreInformation: string
   }
+
+  openNewTab: string
 
   partnerIsNotEligible: string
   partnerLegalStatusNotEligible: string

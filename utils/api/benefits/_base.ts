@@ -67,6 +67,8 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     return this.eligibility.result === ResultKey.ELIGIBLE
   }
 
+  // Remove This code
+
   /**
    * The main text content that will always be visible within each benefit's card.
    */
@@ -93,7 +95,7 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
       this.eligibility.result === ResultKey.ELIGIBLE &&
       this.entitlement.result > 0
     ) {
-      text += ` ${this.translations.detail.expectToReceive}`
+      // text += ` ${this.translations.detail.expectToReceive}`
     }
 
     if (
@@ -103,7 +105,7 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     ) {
       text += `<div class="mt-8">${this.translations.detail.autoEnrollTrue}</div>`
     }
-
+    text = null
     return text
   }
 
