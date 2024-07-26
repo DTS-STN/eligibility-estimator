@@ -96,7 +96,7 @@ export const QuestionsPage: React.VFC = ({}) => {
     tsln,
     allFieldConfigs
   )
-
+  console.log('keyStepMap', keyStepMap)
   const [cardsValid, setCardsValid] = useState(
     getStepValidity(keyStepMap, form, inputs)
   )
@@ -220,7 +220,7 @@ export const QuestionsPage: React.VFC = ({}) => {
       stepKeys.includes(field.key)
     )
 
-    console.log('------ Generate Children ------')
+    // console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {
       const [formError, alertError] = getErrorForField(
         field,

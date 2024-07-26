@@ -21,7 +21,7 @@ export function Stepper(props) {
             <div className="mr-9">
               <Button
                 id={props.previousProps?.id}
-                text="Previous"
+                text={props.previousProps?.text}
                 style="primary"
                 data-testid={props.previousProps?.id}
                 // iconAltText={props.previousProps?.iconAltText}
@@ -34,7 +34,7 @@ export function Stepper(props) {
             <div>
               <Button
                 id={props.nextProps?.id}
-                text="Next"
+                text={props.nextProps?.text}
                 style="secondary"
                 data-testid={props.nextProps?.id}
                 // iconAltText={props.nextProps?.iconAltText}

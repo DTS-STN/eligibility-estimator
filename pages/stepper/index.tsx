@@ -1,5 +1,4 @@
 import { NextPage } from 'next'
-import { QuestionsPage } from '../../components/QuestionsPage'
 import { Layout } from '../../components/Layout'
 import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
