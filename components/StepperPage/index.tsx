@@ -1,4 +1,5 @@
 import { TextField } from '@dts-stn/service-canada-design-system'
+import { use } from 'chai'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -48,6 +49,12 @@ const StepperPage: React.FC = () => {
       ? getBirthMonthAndYear(inputs.age)
       : { month: 1, year: undefined }
   )
+
+  const [stepComponents, setStepComponents] = useState<React.ReactNode[]>([])
+
+  useEffect(() => {
+    setStepComponents([getComponentForStep()])
+  }, [])
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -154,6 +161,8 @@ const StepperPage: React.FC = () => {
     field.value = newVal
     inputHelper.setInputByKey(field.key, newVal)
     form.update(inputHelper)
+
+    setStepComponents([getComponentForStep()])
   }
 
   const getField = (field: FormField) => {
@@ -196,8 +205,9 @@ const StepperPage: React.FC = () => {
       )
     })
   }
-  form.update(inputHelper)
+
   console.log('isLastStep', isLastStep)
+  form.update(inputHelper)
   return (
     <div className="my-14 ml-1">
       <Stepper
@@ -220,7 +230,7 @@ const StepperPage: React.FC = () => {
         }}
       >
         {/* {steps[activeStep - 1].component} */}
-        {getComponentForStep()}
+        {stepComponents}
       </Stepper>
     </div>
   )
