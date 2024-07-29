@@ -64,6 +64,7 @@ export const QuestionsPage: React.VFC = ({}) => {
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
+  console.log('allFieldConfigs', allFieldConfigs)
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -88,6 +89,8 @@ export const QuestionsPage: React.VFC = ({}) => {
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
+
+  console.log('visibleFields', visibleFields)
 
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
@@ -219,6 +222,8 @@ export const QuestionsPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
+
+    console.log('fields', fields)
 
     // console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {

@@ -49,6 +49,7 @@ export function getDefaultVisibleFields(
   allFieldConfigs: FieldConfig[]
 ): VisibleFieldsObject {
   const defaultData = new MainHandler({}).results
+  console.log('defaultData', defaultData)
   if ('visibleFields' in defaultData) {
     return allFieldConfigs.reduce((result, value) => {
       result[value.key] = defaultData.visibleFields.includes(value.key)

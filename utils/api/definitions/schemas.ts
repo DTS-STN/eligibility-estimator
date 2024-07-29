@@ -104,6 +104,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.invSeparatedEmpty }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
+    .default('yes')
     .required()
     .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
     .valid(...Object.values(LegalStatus))
@@ -288,6 +289,7 @@ export const RequestSchema = Joi.object({
     .required()
     .valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string()
+    .default('yes')
     .required()
     .messages({
       'any.required': ValidationErrors.partnerLegalStatusNotSelected,
