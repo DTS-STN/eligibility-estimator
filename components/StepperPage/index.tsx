@@ -50,10 +50,10 @@ const StepperPage: React.FC = () => {
       : { month: 1, year: undefined }
   )
 
-  const [stepComponents, setStepComponents] = useState<React.ReactNode[]>([])
+  const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
 
   useEffect(() => {
-    setStepComponents([getComponentForStep()])
+    setStepComponents(getComponentForStep())
   }, [])
 
   const [visibleFields]: [
@@ -130,6 +130,7 @@ const StepperPage: React.FC = () => {
     //     },
     //   }
     // })
+    setStepComponents(getComponentForStep())
   }, [activeStep])
 
   useEffect(() => {
@@ -162,7 +163,7 @@ const StepperPage: React.FC = () => {
     inputHelper.setInputByKey(field.key, newVal)
     form.update(inputHelper)
 
-    setStepComponents([getComponentForStep()])
+    setStepComponents(getComponentForStep())
   }
 
   const getField = (field: FormField) => {
@@ -187,33 +188,56 @@ const StepperPage: React.FC = () => {
   }
 
   const getComponentForStep = () => {
-    // const fields = form.visibleFields.filter((field) =>
-    //   stepKeys.includes(field.key)
-    // )
-
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
     )
 
-    return fields.map((field: FormField) => {
-      return (
-        <div key={field.key}>
-          <div className="pb-4" id={field.key}>
-            {getField(field)}
-          </div>
-        </div>
-      )
-    })
+    const partnerFields = form.visibleFields.filter((field) =>
+      steps[activeStep].partnerKeys?.includes(field.key)
+    )
+
+    const isPartnered = partnerFields.length > 0
+
+    console.log(activeStep)
+    console.log('fields', fields)
+    console.log('partnerFields', partnerFields)
+
+    return (
+      <>
+        {isPartnered && <h1>Your information:</h1>}
+        {fields.map((field: FormField) => {
+          return (
+            <div key={field.key}>
+              <div className="pb-4" id={field.key}>
+                {getField(field)}
+              </div>
+            </div>
+          )
+        })}
+        {isPartnered && <h1>Partner&apos;s information:</h1>}
+        {isPartnered &&
+          partnerFields.map((field: FormField) => {
+            return (
+              <div key={field.key}>
+                <div className="pb-4" id={field.key}>
+                  {getField(field)}
+                </div>
+              </div>
+            )
+          })}
+      </>
+    )
   }
 
   console.log('isLastStep', isLastStep)
-  form.update(inputHelper)
+  // form.update(inputHelper)
   return (
     <div className="my-14 ml-1">
       <Stepper
         id="stepper123"
         name="Old Age Security Benefits Estimator"
-        step={`Step ${activeStep} of ${totalSteps}`}
+        activeStep={activeStep}
+        totalSteps={totalSteps}
         heading={steps[activeStep].title}
         previousProps={{
           id: 'previous',
@@ -223,13 +247,15 @@ const StepperPage: React.FC = () => {
         nextProps={{
           id: 'next',
           text: isLastStep ? 'Estimate my benefits' : 'Next',
-          onClick: () =>
-            isLastStep
-              ? console.log('Estimate my benefits')
-              : setActiveStep(activeStep + 1),
+          onClick: () => {
+            if (isLastStep) {
+              console.log('ESTIMATE MY BENEFITS')
+            } else {
+              setActiveStep(activeStep + 1)
+            }
+          },
         }}
       >
-        {/* {steps[activeStep - 1].component} */}
         {stepComponents}
       </Stepper>
     </div>

@@ -12,17 +12,17 @@ export function Stepper(props) {
             {props.name}
           </div>
           <div className="heading1 pb-2">
-            {props.step}: {props.heading}
+            {`Step ${props.activeStep} of ${props.totalSteps}`}: {props.heading}
           </div>
         </h1>
         {props.children}
         <div className="flex justify-between pt-14 sm:justify-start sm:pt-12">
-          {props.previousProps && (
+          {props.previousProps && props.activeStep !== 1 && (
             <div className="mr-9">
               <Button
                 id={props.previousProps?.id}
                 text={props.previousProps?.text}
-                style="primary"
+                style="secondary"
                 data-testid={props.previousProps?.id}
                 // iconAltText={props.previousProps?.iconAltText}
                 onClick={props.previousProps?.onClick}
@@ -35,7 +35,7 @@ export function Stepper(props) {
               <Button
                 id={props.nextProps?.id}
                 text={props.nextProps?.text}
-                style="secondary"
+                style="primary"
                 data-testid={props.nextProps?.id}
                 // iconAltText={props.nextProps?.iconAltText}
                 onClick={props.nextProps?.onClick}
