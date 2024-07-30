@@ -16,6 +16,7 @@ import {
 } from '../../utils/api/definitions/fields'
 import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { VisibleFieldsObject } from '../../utils/web/types'
+import FieldFactory from '../FieldFactory'
 import { CurrencyField } from '../Forms/CurrencyField'
 import Duration from '../Forms/Duration'
 import { MonthAndYear } from '../Forms/MonthAndYear'
@@ -54,6 +55,7 @@ const StepperPage: React.FC = () => {
 
   useEffect(() => {
     setStepComponents(getComponentForStep())
+    form.update(inputHelper)
   }, [])
 
   const [visibleFields]: [
@@ -166,27 +168,6 @@ const StepperPage: React.FC = () => {
     setStepComponents(getComponentForStep())
   }
 
-  const getField = (field: FormField) => {
-    return (
-      <>
-        {field.config.type == FieldType.RADIO && (
-          <Radio
-            name={field.key}
-            checkedValue={field.value}
-            values={field.config.values}
-            keyforid={field.key}
-            label={field.config.label}
-            requiredText={tsln.required}
-            onChange={(e) => handleOnChange(field, e.target.value)}
-            helpText={field.config.helpText}
-            setValue={(val) => handleOnChange(field, val)}
-            error={null}
-          />
-        )}
-      </>
-    )
-  }
-
   const getComponentForStep = () => {
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
@@ -209,7 +190,11 @@ const StepperPage: React.FC = () => {
           return (
             <div key={field.key}>
               <div className="pb-4" id={field.key}>
-                {getField(field)}
+                <FieldFactory
+                  field={field}
+                  tsln={tsln}
+                  handleOnChange={handleOnChange}
+                />
               </div>
             </div>
           )
@@ -220,7 +205,11 @@ const StepperPage: React.FC = () => {
             return (
               <div key={field.key}>
                 <div className="pb-4" id={field.key}>
-                  {getField(field)}
+                  <FieldFactory
+                    field={field}
+                    tsln={tsln}
+                    handleOnChange={handleOnChange}
+                  />
                 </div>
               </div>
             )
@@ -230,7 +219,7 @@ const StepperPage: React.FC = () => {
   }
 
   console.log('isLastStep', isLastStep)
-  // form.update(inputHelper)
+
   return (
     <div className="my-14 ml-1">
       <Stepper
