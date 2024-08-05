@@ -53,10 +53,13 @@ const StepperPage: React.FC = () => {
 
   const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
 
+  // useEffect(() => {
+  //   setStepComponents(getComponentForStep())
+  // }, [])
+
   useEffect(() => {
     setStepComponents(getComponentForStep())
-    form.update(inputHelper)
-  }, [])
+  }, [tsln])
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -219,7 +222,7 @@ const StepperPage: React.FC = () => {
   }
 
   console.log('isLastStep', isLastStep)
-
+  form.update(inputHelper)
   return (
     <div className="my-14 ml-1">
       <Stepper
