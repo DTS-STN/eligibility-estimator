@@ -137,8 +137,8 @@ const Duration: FC<DurationProps> = ({
   }, [age, durationInput, ageDate])
 
   const validationClass = !!error
-    ? 'ds-border-specific-red-red50b focus:ds-border-multi-blue-blue60f focus:ds-shadow-text-input'
-    : 'ds-border-multi-neutrals-grey85a focus:ds-border-multi-blue-blue60f focus:ds-shadow-text-input'
+    ? 'border-specific-red-red50b focus:border-multi-blue-blue60f focus:shadow-text-input'
+    : 'border-multi-neutrals-grey85a focus:border-multi-blue-blue60f focus:shadow-text-input'
 
   const durationOnChange = (e): void => {
     const fieldId = e.target.id
@@ -171,9 +171,9 @@ const Duration: FC<DurationProps> = ({
           fieldId={`enter-${name}`}
         />
       </legend>
-      <div className="datePicker ds-relative ds-flex">
+      <div className="datePicker relative flex">
         <div className="flex flex-col">
-          <label className="ds-form-date" htmlFor={`${name}-years`}>
+          <label className="form-date" htmlFor={`${name}-years`}>
             {tsln.duration.years}
           </label>
 
@@ -181,7 +181,7 @@ const Duration: FC<DurationProps> = ({
             id={`${name}-years`}
             value={durationInput?.years || 0}
             onChange={(e) => durationOnChange(e)}
-            className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
+            className={`w-20 py-[5px] flex px-[14px] ds-date-text ds-border-1.5 border-multi-neutrals-grey85a rounded ${validationClass}`}
           >
             {[...Array(selectOptions['years'] + 1).keys()].map((mv, index) => (
               <option value={mv} key={`${name}-years-option-${index}`}>
@@ -191,8 +191,8 @@ const Duration: FC<DurationProps> = ({
           </select>
         </div>
 
-        <div className="flex flex-col sm:ds-pl-24px ds-pl-8px">
-          <label className="ds-form-date" htmlFor={`${name}-months`}>
+        <div className="flex flex-col sm:pl-[24px] pl-[8px]">
+          <label className="form-date" htmlFor={`${name}-months`}>
             {tsln.duration.months}
           </label>
 
@@ -200,7 +200,7 @@ const Duration: FC<DurationProps> = ({
             id={`${name}-months`}
             value={durationInput?.months || 0}
             onChange={(e) => durationOnChange(e)}
-            className={`w-20 ds-py-5px ds-flex ds-px-14px ds-date-text ds-border-1.5 ds-border-multi-neutrals-grey85a ds-rounded ${validationClass}`}
+            className={`w-20 py-[5px] flex px-[14px] ds-date-text ds-border-1.5 border-multi-neutrals-grey85a rounded ${validationClass}`}
           >
             {[...Array(selectOptions['months'] + 1).keys()].map((mv, index) => (
               <option value={mv} key={`${name}-years-option-${index}`}>

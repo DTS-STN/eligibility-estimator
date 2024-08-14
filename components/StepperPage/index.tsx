@@ -1,6 +1,3 @@
-import { TextField } from '@dts-stn/service-canada-design-system'
-import { use } from 'chai'
-import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
@@ -8,27 +5,16 @@ import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
-import {
-  FieldConfig,
-  FieldKey,
-  FieldType,
-} from '../../utils/api/definitions/fields'
+import { Language } from '../../utils/api/definitions/enums'
+import { FieldConfig } from '../../utils/api/definitions/fields'
 import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { VisibleFieldsObject } from '../../utils/web/types'
 import FieldFactory from '../FieldFactory'
-import { CurrencyField } from '../Forms/CurrencyField'
-import Duration from '../Forms/Duration'
-import { MonthAndYear } from '../Forms/MonthAndYear'
-import { NumberField } from '../Forms/NumberField'
-import { Radio } from '../Forms/Radio'
-import { FormSelect } from '../Forms/Select'
 import { useTranslation } from '../Hooks'
 import {
-  getDefaultInputs,
   getBirthMonthAndYear,
+  getDefaultInputs,
   getDefaultVisibleFields,
-  getPlaceholderForSelect,
 } from '../QuestionsPage/utils'
 import { Stepper } from '../Stepper'
 

@@ -36,8 +36,23 @@ module.exports = {
         h1: ['38px', '42px'], // requires red <hr /> below
         mobile: ['34px', '38px'],
         small: ['14px', '16px'],
+        mobileh5: ['20px', '22px'],
       },
       colors: {
+        'multi': {
+          blue: {
+            blue60f: '#0E62C9',
+          },
+          neutrals: {
+            grey85a: '#6F6F6F',
+            grey100: '#333333',
+          },
+        },
+        'specific': {
+          red: {
+            red50b: '#D3080C',
+          },
+        },
         'white': '#FFF',
         'black': '#000',
         'content': '#333',
@@ -93,6 +108,7 @@ module.exports = {
       fontFamily: {
         'header-gc': '"Lato", sans-serif',
         'sans': '"Noto Sans", sans-serif',
+        'input-label': '"Noto Sans", font-mono',
       },
       minHeight: {
         9: '36px',
@@ -103,6 +119,7 @@ module.exports = {
       boxShadow: {
         'active-form':
           'inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)',
+        'text-input': '0px 0px 6px rgba(14, 98, 201, 0.6)',
       },
     },
   },
