@@ -106,8 +106,8 @@
   /* typography gc overrides */
   .h1 {
     @apply text-mobile sm:text-h1 font-bold font-header-gc text-content pb-2;
-    border-bottom: .18em solid #AF3C43;
-    border-image: linear-gradient(to right, #AF3C43 71px, transparent 71px);
+    border-bottom: 0.18em solid #af3c43;
+    border-image: linear-gradient(to right, #af3c43 71px, transparent 71px);
     border-image-slice: 1;
   }
 
@@ -345,7 +345,7 @@
   a.hintText:visited,
   a.generatedLink:visited,
   .summary-link a:visited {
-    color: #7834BC;
+    color: #7834bc;
     background: url('/openNewTabPurple.svg') no-repeat right;
   }
 
@@ -383,7 +383,7 @@
   }
 
   a:visited {
-    color: #7834BC;
+    color: #7834bc;
   }
 
   dfn {

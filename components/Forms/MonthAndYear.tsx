@@ -56,7 +56,7 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   }, [dateInput])
 
   useEffect(() => {
-    if (name === 'partnerAge' && error !== undefined && error.length > 0) {
+    if (name === 'partnerAge' && error !== undefined && error?.length > 0) {
       setDateInput({ month: 1, year: undefined })
     }
   }, [name])

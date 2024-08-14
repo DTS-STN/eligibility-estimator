@@ -195,6 +195,7 @@ const StepperPage: React.FC = () => {
               <div className="pb-4" id={field.key}>
                 <FieldFactory
                   field={field}
+                  metaData={{ ageDate }}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                 />
@@ -210,6 +211,7 @@ const StepperPage: React.FC = () => {
                 <div className="pb-4" id={field.key}>
                   <FieldFactory
                     field={field}
+                    metaData={{ ageDate }}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                   />
@@ -221,7 +223,6 @@ const StepperPage: React.FC = () => {
     )
   }
 
-  console.log('isLastStep', isLastStep)
   form.update(inputHelper)
   return (
     <div className="my-14 ml-1">

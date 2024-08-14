@@ -24,7 +24,7 @@ export type ErrorsVisibleObject = {
 
 export class InputHelper {
   constructor(
-    private readonly inputs: FieldInputsObject,
+    readonly inputs: FieldInputsObject,
     private readonly setInputs: (value: FieldInputsObject) => void,
     private readonly language: Language
   ) {

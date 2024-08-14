@@ -94,6 +94,7 @@ export const QuestionsPage: React.VFC = ({}) => {
 
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
+  console.log('form', form)
   const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
   const keyStepMap: { [x in Steps]: CardConfig } = getKeyStepMap(
     tsln,
@@ -180,6 +181,8 @@ export const QuestionsPage: React.VFC = ({}) => {
   function handleOnChange(field: FormField, newValue: string): void {
     let newVal = newValue
     const key: String = field.config.key
+
+    console.log('newVal', newVal)
 
     // Required to pass on to the Duration component that needs the exact birth month, not just age as float
     if (key === 'age') {
