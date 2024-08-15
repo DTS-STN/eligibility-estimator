@@ -51,6 +51,7 @@ module.exports = {
           neutrals: {
             grey85a: '#6F6F6F',
             grey100: '#333333',
+            grey90a: '#5C5C5C',
           },
         },
         'specific': {

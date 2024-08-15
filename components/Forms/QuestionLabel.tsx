@@ -38,7 +38,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
       {helpText && (
         <div
           id={fieldId && `help-text-${fieldId}`}
-          className="ds-font-body block ds-text-lg ds-font-medium ds-text-multi-neutrals-grey90a ds-mb-4"
+          className="font-body block text-lg font-medium text-multi-neutrals-grey90a mb-4"
           dangerouslySetInnerHTML={{ __html: helpText }}
         />
       )}
