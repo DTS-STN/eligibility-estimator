@@ -181,7 +181,7 @@ const Duration: FC<DurationProps> = ({
             id={`${name}-years`}
             value={durationInput?.years || 0}
             onChange={(e) => durationOnChange(e)}
-            className={`w-20 py-[5px] flex px-[14px] ds-date-text ds-border-1.5 border-multi-neutrals-grey85a rounded ${validationClass}`}
+            className={`duration-input ${validationClass}`}
           >
             {[...Array(selectOptions['years'] + 1).keys()].map((mv, index) => (
               <option value={mv} key={`${name}-years-option-${index}`}>
@@ -200,7 +200,7 @@ const Duration: FC<DurationProps> = ({
             id={`${name}-months`}
             value={durationInput?.months || 0}
             onChange={(e) => durationOnChange(e)}
-            className={`w-20 py-[5px] flex px-[14px] ds-date-text ds-border-1.5 border-multi-neutrals-grey85a rounded ${validationClass}`}
+            className={`duration-input ${validationClass}`}
           >
             {[...Array(selectOptions['months'] + 1).keys()].map((mv, index) => (
               <option value={mv} key={`${name}-years-option-${index}`}>

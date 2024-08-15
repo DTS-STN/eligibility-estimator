@@ -5,6 +5,10 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    borderWidth: {
+      DEFAULT: '1px',
+      1.5: '1.5px',
+    },
     extend: {
       screens: {
         // please note that the order here is important, and will determine how some styles are applied
@@ -42,6 +46,7 @@ module.exports = {
         'multi': {
           blue: {
             blue60f: '#0E62C9',
+            blue70b: '#284162',
           },
           neutrals: {
             grey85a: '#6F6F6F',

@@ -45,12 +45,12 @@ export const Radio: React.VFC<InputProps> = ({
             helpText={helpText}
           />
         </legend>
-        <div role="radiogroup" className="mt-2.5">
+        <div role="radiogroup">
           {values.map((val, index) => (
             <div
               key={index}
               id={`${name}-r${index}`}
-              className="flex items-center mb-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
+              className="flex items-center py-2 md:mb-[12px] last:mb-0 hover:cursor-pointer"
             >
               <input
                 className={`hover:cursor-pointer ${

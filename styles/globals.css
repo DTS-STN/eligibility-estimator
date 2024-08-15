@@ -180,7 +180,11 @@ html {
   }
 
   .form-date {
-    @apply text-mobileh5 font-medium font-input-label text-multi-neutrals-grey100;
+    @apply font-medium font-input-label text-multi-neutrals-grey100;
+  }
+
+  .duration-input {
+    @apply flex w-20 py-[5px] px-[14px] border-solid border-1.5 border-multi-neutrals-grey85a rounded;
   }
 
   .form-control[disabled] {
