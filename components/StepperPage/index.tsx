@@ -37,7 +37,28 @@ const StepperPage: React.FC = () => {
       : { month: 1, year: undefined }
   )
 
+  // Income question dynamic labels and hint content
   const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
+  const [incomeLabel, setIncomeLabel] = useState(tsln.incomeLabel)
+  const [partnerIncomeLabel, setPartnerIncomeLabel] = useState(
+    tsln.partnerIncomeLabel
+  )
+  const [incomeHintTitle, setIncomeHintTitle] = useState(tsln.incomeHintTitle)
+  const [incomeHintText, setIncomeHintText] = useState(tsln.incomeHintText)
+  const [partnerIncomeHintTitle, setPartnerIncomeHintTitle] = useState(
+    tsln.partnerIncomeHintTitle
+  )
+  const [partnerIncomeHintText, setPartnerIncomeHintText] = useState(
+    tsln.partnerIncomeHintText
+  )
+  const incomeTooltip = {
+    moreinfo: incomeHintTitle,
+    text: incomeHintText,
+  }
+  const partnerIncomeTooltip = {
+    moreinfo: partnerIncomeHintTitle,
+    text: partnerIncomeHintText,
+  }
 
   // useEffect(() => {
   //   setStepComponents(getComponentForStep())
@@ -157,6 +178,26 @@ const StepperPage: React.FC = () => {
     setStepComponents(getComponentForStep())
   }
 
+  const getMetaDataForField = (key: string) => {
+    if (
+      key === 'age' ||
+      key === 'partnerAge' ||
+      key === 'oasAge' ||
+      key === 'oasDeferDuration'
+    ) {
+      return { ageDate }
+    }
+
+    if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
+      return {
+        incomeLabel,
+        partnerIncomeLabel,
+        incomeTooltip,
+        partnerIncomeTooltip,
+      }
+    }
+  }
+
   const getComponentForStep = () => {
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
@@ -181,7 +222,7 @@ const StepperPage: React.FC = () => {
               <div className="pb-4" id={field.key}>
                 <FieldFactory
                   field={field}
-                  metaData={{ ageDate }}
+                  metaData={getMetaDataForField(field.key)}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                 />
@@ -197,7 +238,7 @@ const StepperPage: React.FC = () => {
                 <div className="pb-4" id={field.key}>
                   <FieldFactory
                     field={field}
-                    metaData={{ ageDate }}
+                    metaData={getMetaDataForField(field.key)}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                   />
