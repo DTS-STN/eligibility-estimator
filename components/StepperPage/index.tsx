@@ -229,6 +229,7 @@ const StepperPage: React.FC = () => {
   // }, [tsln])
 
   useEffect(() => {
+    console.log('LANGUAGE CHANGED')
     const incomeLabel = receiveOAS
       ? tsln.incomeLabelReceiveOAS
       : tsln.incomeLabel
@@ -253,7 +254,18 @@ const StepperPage: React.FC = () => {
     setIncomeHintText(incomeHintText)
     setPartnerIncomeHintTitle(partnerIncomeHintTitle)
     setPartnerIncomeHintText(partnerIncomeHintText)
-  }, [receiveOAS, tsln, activeStep])
+  }, [receiveOAS, tsln])
+
+  useEffect(() => {
+    setStepComponents(getComponentForStep())
+  }, [
+    incomeLabel,
+    partnerIncomeLabel,
+    incomeHintTitle,
+    incomeHintText,
+    partnerIncomeHintTitle,
+    partnerIncomeHintText,
+  ])
 
   console.log('incomeLabel', incomeLabel)
 
@@ -355,28 +367,6 @@ const StepperPage: React.FC = () => {
     </div>
   )
 }
-
-// or have StepperForm component that takes props for active step and content for each step? Or generate content inside the stepper based on what step we're on?
-
-// const steps = useMemo(() => {
-//   factory: () => [
-//     {
-//       label: 'Step 1',
-//       value: 1,
-//       component: <StepOne />,
-//     },
-//     {
-//       label: 'Step 2',
-//       value: 2,
-//       component: <StepTwo />,
-//     },
-//     {
-//       label: 'Step 3',
-//       value: 3,
-//       component: <StepThree />,
-//     },
-//   ]
-// }, [])
 
 export default StepperPage
 
