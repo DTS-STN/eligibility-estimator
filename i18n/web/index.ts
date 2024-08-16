@@ -179,6 +179,12 @@ export type WebTranslations = {
   error500TextLink: string
   error503TextLink: string
   errorPageType: string
+  //Stepper
+  stepper: {
+    nextStep: string
+    previousStep: string
+    getEstimate: string
+  }
   //Date Picker
   datePicker: {
     month: string

@@ -270,6 +270,11 @@ const en: WebTranslations = {
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
     'Use the estimator to see if you meet all eligibility criteria.',
+  stepper: {
+    previousStep: 'Previous',
+    nextStep: 'Next',
+    getEstimate: 'Estimate my benefits',
+  },
   datePicker: {
     month: 'Month',
     year: 'Year',

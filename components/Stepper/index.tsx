@@ -3,7 +3,26 @@
 import React from 'react'
 import { Button } from '../Forms/Button'
 
-export function Stepper(props) {
+// Stepper props
+export interface StepperProps {
+  id: string
+  name: string
+  title: string
+  children: React.ReactNode
+  previousProps?: {
+    id: string
+    text: string
+    onClick: () => void
+  }
+  nextProps?: {
+    id: string
+    text: string
+    onClick: () => void
+  }
+  activeStep: number
+}
+
+export function Stepper(props: StepperProps) {
   return (
     <div className="pt-3 pb-6 sm:pb-40">
       <div className="px-4">
@@ -11,9 +30,7 @@ export function Stepper(props) {
           <div className="text-[22px] leading-[33px] text-[#666666] font-display font-normal">
             {props.name}
           </div>
-          <div className="steps-title pb-2">
-            {`Step ${props.activeStep} of ${props.totalSteps}`}: {props.heading}
-          </div>
+          <div className="steps-title pb-2">{props.title}</div>
         </h1>
         {props.children}
         <div className="flex justify-between sm:justify-start  pt-14 sm:pt-12">

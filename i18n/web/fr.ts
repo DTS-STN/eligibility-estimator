@@ -275,6 +275,11 @@ const fr: WebTranslations = {
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  stepper: {
+    nextStep: 'Suivant',
+    previousStep: 'Précédent',
+    getEstimate: 'Estimer mes prestations',
+  },
   datePicker: {
     month: 'Mois',
     year: 'Année',

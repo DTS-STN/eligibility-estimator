@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
@@ -37,8 +37,9 @@ const StepperPage: React.FC = () => {
       : { month: 1, year: undefined }
   )
 
-  // Income question dynamic labels and hint content
   const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
+
+  // Income question dynamic labels and hint content
   const [incomeLabel, setIncomeLabel] = useState(tsln.incomeLabel)
   const [partnerIncomeLabel, setPartnerIncomeLabel] = useState(
     tsln.partnerIncomeLabel
@@ -66,6 +67,7 @@ const StepperPage: React.FC = () => {
   // }, [])
 
   useEffect(() => {
+    setSteps(getSteps())
     setStepComponents(getComponentForStep())
   }, [tsln])
 
@@ -129,26 +131,6 @@ const StepperPage: React.FC = () => {
   const [activeStep, setActiveStep] = useState(1)
   const [isLastStep, setIsLastStep] = useState(false)
 
-  const getMetaDataForField = () => {
-    return {
-      ['oasAge' || 'oasDeferDuration']: { ageDate },
-    }
-
-    // if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
-    //   return {
-    //     incomeLabel,
-    //     partnerIncomeLabel,
-    //     incomeTooltip,
-    //     partnerIncomeTooltip,
-    //   }
-    // }
-  }
-  const [metaDataForField, setMetaDataForField] = useState(
-    getMetaDataForField()
-  )
-
-  console.log('metaDataForField', metaDataForField)
-
   useEffect(() => {
     if (activeStep === totalSteps) {
       setIsLastStep(true)
@@ -208,13 +190,43 @@ const StepperPage: React.FC = () => {
     setStepComponents(getComponentForStep())
   }
 
+  const getMetaDataForField = () => {
+    // if (
+    //   key === 'age' ||
+    //   key === 'partnerAge' ||
+    //   key === 'oasAge' ||
+    //   key === 'oasDeferDuration'
+    // ) {
+    //   return { ageDate }
+    // }
+
+    // if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
+    //   return {
+    //     incomeLabel,
+    //     partnerIncomeLabel,
+    //     incomeTooltip,
+    //     partnerIncomeTooltip,
+    //   }
+    // }
+
+    return {
+      oasDeferDuration: { ageDate },
+      income: {
+        incomeLabel,
+        partnerIncomeLabel,
+        incomeTooltip,
+        partnerIncomeTooltip,
+      },
+    }
+  }
+
   // this does not work
-  useEffect(() => {
-    console.log('language changed')
-    setSteps((prev) => {
-      return { ...prev, ...getSteps() }
-    })
-  }, [tsln])
+  // useEffect(() => {
+  //   console.log('language changed')
+  //   setSteps((prev) => {
+  //     return { ...prev, ...getSteps() }
+  //   })
+  // }, [tsln])
 
   useEffect(() => {
     const incomeLabel = receiveOAS
@@ -243,6 +255,8 @@ const StepperPage: React.FC = () => {
     setPartnerIncomeHintText(partnerIncomeHintText)
   }, [receiveOAS, tsln, activeStep])
 
+  console.log('incomeLabel', incomeLabel)
+
   const getComponentForStep = () => {
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
@@ -267,7 +281,13 @@ const StepperPage: React.FC = () => {
               <div className="pb-4" id={field.key}>
                 <FieldFactory
                   field={field}
-                  metaData={metaDataForField[field.key]}
+                  metaData={{
+                    ageDate,
+                    incomeLabel,
+                    partnerIncomeLabel,
+                    incomeTooltip,
+                    partnerIncomeTooltip,
+                  }}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                 />
@@ -283,7 +303,13 @@ const StepperPage: React.FC = () => {
                 <div className="pb-4" id={field.key}>
                   <FieldFactory
                     field={field}
-                    metaData={metaDataForField[field.key]}
+                    metaData={{
+                      ageDate,
+                      incomeLabel,
+                      partnerIncomeLabel,
+                      incomeTooltip,
+                      partnerIncomeTooltip,
+                    }}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                   />
@@ -302,16 +328,19 @@ const StepperPage: React.FC = () => {
         id="stepper123"
         name={tsln.introPageTitle}
         activeStep={activeStep}
-        totalSteps={totalSteps}
-        heading={steps[activeStep].title}
+        title={
+          tsln._language === 'en'
+            ? `Step ${activeStep} of ${totalSteps}: ${steps[activeStep].title}`
+            : `Étape ${activeStep} de ${totalSteps}: ${steps[activeStep].title}`
+        }
         previousProps={{
           id: 'previous',
-          text: 'Previous',
+          text: tsln.stepper.previousStep,
           onClick: () => setActiveStep(Math.max(activeStep - 1, 1)),
         }}
         nextProps={{
           id: 'next',
-          text: isLastStep ? 'Estimate my benefits' : 'Next',
+          text: isLastStep ? tsln.stepper.getEstimate : tsln.stepper.nextStep,
           onClick: () => {
             if (isLastStep) {
               console.log('ESTIMATE MY BENEFITS')
