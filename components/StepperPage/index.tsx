@@ -59,6 +59,7 @@ const StepperPage: React.FC = () => {
     moreinfo: partnerIncomeHintTitle,
     text: partnerIncomeHintText,
   }
+  const [receiveOAS, setReceiveOAS] = useState(false)
 
   // useEffect(() => {
   //   setStepComponents(getComponentForStep())
@@ -83,43 +84,47 @@ const StepperPage: React.FC = () => {
 
   console.log('form', form)
 
-  const [steps, setSteps] = useState({
-    1: {
-      title: 'Marital Status',
-      keys: ['maritalStatus', 'invSeparated'],
-    },
-    2: {
-      title: 'Age',
-      keys: ['age', 'receiveOAS', 'oasDeferDuration', 'oasDefer', 'oasAge'],
-      partnerKeys: ['partnerAge', 'partnerBenefitStatus'],
-    },
-    3: {
-      title: 'Income',
-      keys: ['incomeAvailable', 'income', 'incomeWork'],
-      partnerKeys: [
-        'partnerIncomeAvailable',
-        'partnerIncome',
-        'partnerIncomeWork',
-      ],
-    },
-    4: {
-      title: 'Residence',
-      keys: [
-        'legalStatus',
-        'livingCountry',
-        'livedOnlyInCanada',
-        'yearsInCanadaSince18',
-        'yearsInCanadaSinceOAS',
-        'everLivedSocialCountry',
-      ], // we actually dont want to show legalStatus question but to default to YES behind the scenes
-      partnerKeys: [
-        'partnerLegalStatus',
-        'partnerLivingCountry',
-        'partnerLivedOnlyInCanada',
-        'partnerYearsInCanadaSince18',
-      ],
-    },
-  })
+  const getSteps = () => {
+    return {
+      1: {
+        title: tsln.category.marital,
+        keys: ['maritalStatus', 'invSeparated'],
+      },
+      2: {
+        title: 'Age',
+        keys: ['age', 'receiveOAS', 'oasDeferDuration', 'oasDefer', 'oasAge'],
+        partnerKeys: ['partnerAge', 'partnerBenefitStatus'],
+      },
+      3: {
+        title: 'Income',
+        keys: ['incomeAvailable', 'income', 'incomeWork'],
+        partnerKeys: [
+          'partnerIncomeAvailable',
+          'partnerIncome',
+          'partnerIncomeWork',
+        ],
+      },
+      4: {
+        title: 'Residence',
+        keys: [
+          'legalStatus',
+          'livingCountry',
+          'livedOnlyInCanada',
+          'yearsInCanadaSince18',
+          'yearsInCanadaSinceOAS',
+          'everLivedSocialCountry',
+        ], // we actually dont want to show legalStatus question but to default to YES behind the scenes
+        partnerKeys: [
+          'partnerLegalStatus',
+          'partnerLivingCountry',
+          'partnerLivedOnlyInCanada',
+          'partnerYearsInCanadaSince18',
+        ],
+      },
+    }
+  }
+
+  const [steps, setSteps] = useState(getSteps())
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useState(1)
   const [isLastStep, setIsLastStep] = useState(false)
@@ -166,6 +171,11 @@ const StepperPage: React.FC = () => {
       newVal = JSON.parse(newValue).value
     }
 
+    if (key === 'receiveOAS') {
+      const receiveOAS = newValue === 'true'
+      setReceiveOAS(receiveOAS)
+    }
+
     // if (key === 'receiveOAS') {
     //   const receiveOAS = newValue === 'true'
     //   setReceiveOAS(receiveOAS)
@@ -197,6 +207,41 @@ const StepperPage: React.FC = () => {
       }
     }
   }
+
+  // this does not work
+  useEffect(() => {
+    console.log('language changed')
+    setSteps((prev) => {
+      return { ...prev, ...getSteps() }
+    })
+  }, [tsln])
+
+  useEffect(() => {
+    const incomeLabel = receiveOAS
+      ? tsln.incomeLabelReceiveOAS
+      : tsln.incomeLabel
+    const partnerIncomeLabel = receiveOAS
+      ? tsln.partnerIncomeLabelReceiveOAS
+      : tsln.partnerIncomeLabel
+    const incomeHintTitle = receiveOAS
+      ? tsln.incomeHintTitleReceiveOAS
+      : tsln.incomeHintTitle
+    const incomeHintText = receiveOAS
+      ? tsln.incomeHintTextReceiveOAS
+      : tsln.incomeHintText
+    const partnerIncomeHintTitle = receiveOAS
+      ? tsln.partnerIncomeHintTitleReceiveOAS
+      : tsln.partnerIncomeHintTitle
+    const partnerIncomeHintText = receiveOAS
+      ? tsln.partnerIncomeHintTextReceiveOAS
+      : tsln.partnerIncomeHintText
+    setIncomeLabel(incomeLabel)
+    setPartnerIncomeLabel(partnerIncomeLabel)
+    setIncomeHintTitle(incomeHintTitle)
+    setIncomeHintText(incomeHintText)
+    setPartnerIncomeHintTitle(partnerIncomeHintTitle)
+    setPartnerIncomeHintText(partnerIncomeHintText)
+  }, [receiveOAS, tsln, activeStep])
 
   const getComponentForStep = () => {
     const fields = form.visibleFields.filter((field) =>
