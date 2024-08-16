@@ -16,7 +16,7 @@ export function Stepper(props) {
           </div>
         </h1>
         {props.children}
-        <div className="flex justify-between pt-14 sm:justify-start sm:pt-12">
+        <div className="flex justify-between sm:justify-start  pt-14 sm:pt-12">
           {props.previousProps && props.activeStep !== 1 && (
             <div className="mr-9">
               <Button

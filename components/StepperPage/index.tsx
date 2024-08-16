@@ -211,7 +211,7 @@ const StepperPage: React.FC = () => {
 
   form.update(inputHelper)
   return (
-    <div className="my-14 ml-1">
+    <div className="my-14 ml-1 sm:w-4/5 md:w-4/6 w-full">
       <Stepper
         id="stepper123"
         name="Old Age Security Benefits Estimator"
