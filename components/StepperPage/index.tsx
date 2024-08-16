@@ -91,12 +91,12 @@ const StepperPage: React.FC = () => {
         keys: ['maritalStatus', 'invSeparated'],
       },
       2: {
-        title: 'Age',
+        title: tsln.category.age,
         keys: ['age', 'receiveOAS', 'oasDeferDuration', 'oasDefer', 'oasAge'],
         partnerKeys: ['partnerAge', 'partnerBenefitStatus'],
       },
       3: {
-        title: 'Income',
+        title: tsln.category.income,
         keys: ['incomeAvailable', 'income', 'incomeWork'],
         partnerKeys: [
           'partnerIncomeAvailable',
@@ -105,7 +105,7 @@ const StepperPage: React.FC = () => {
         ],
       },
       4: {
-        title: 'Residence',
+        title: tsln.category.residence,
         keys: [
           'legalStatus',
           'livingCountry',
@@ -128,6 +128,26 @@ const StepperPage: React.FC = () => {
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useState(1)
   const [isLastStep, setIsLastStep] = useState(false)
+
+  const getMetaDataForField = () => {
+    return {
+      ['oasAge' || 'oasDeferDuration']: { ageDate },
+    }
+
+    // if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
+    //   return {
+    //     incomeLabel,
+    //     partnerIncomeLabel,
+    //     incomeTooltip,
+    //     partnerIncomeTooltip,
+    //   }
+    // }
+  }
+  const [metaDataForField, setMetaDataForField] = useState(
+    getMetaDataForField()
+  )
+
+  console.log('metaDataForField', metaDataForField)
 
   useEffect(() => {
     if (activeStep === totalSteps) {
@@ -186,26 +206,6 @@ const StepperPage: React.FC = () => {
     form.update(inputHelper)
 
     setStepComponents(getComponentForStep())
-  }
-
-  const getMetaDataForField = (key: string) => {
-    if (
-      key === 'age' ||
-      key === 'partnerAge' ||
-      key === 'oasAge' ||
-      key === 'oasDeferDuration'
-    ) {
-      return { ageDate }
-    }
-
-    if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
-      return {
-        incomeLabel,
-        partnerIncomeLabel,
-        incomeTooltip,
-        partnerIncomeTooltip,
-      }
-    }
   }
 
   // this does not work
@@ -267,7 +267,7 @@ const StepperPage: React.FC = () => {
               <div className="pb-4" id={field.key}>
                 <FieldFactory
                   field={field}
-                  metaData={getMetaDataForField(field.key)}
+                  metaData={metaDataForField[field.key]}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                 />
@@ -283,7 +283,7 @@ const StepperPage: React.FC = () => {
                 <div className="pb-4" id={field.key}>
                   <FieldFactory
                     field={field}
-                    metaData={getMetaDataForField(field.key)}
+                    metaData={metaDataForField[field.key]}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                   />
@@ -300,7 +300,7 @@ const StepperPage: React.FC = () => {
     <div className="my-14 ml-1 sm:w-4/5 md:w-4/6 w-full">
       <Stepper
         id="stepper123"
-        name="Old Age Security Benefits Estimator"
+        name={tsln.introPageTitle}
         activeStep={activeStep}
         totalSteps={totalSteps}
         heading={steps[activeStep].title}
