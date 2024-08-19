@@ -286,11 +286,18 @@ const StepperPage: React.FC = () => {
 
     return (
       <>
-        {isPartnered && <h1>Your information:</h1>}
-        {fields.map((field: FormField) => {
+        {isPartnered && (
+          <h2 className="text-h2 font-header-gc mb-6 font-bold font-700">
+            Your information:
+          </h2>
+        )}
+        {fields.map((field: FormField, index: number) => {
           return (
-            <div key={field.key}>
-              <div className="pb-4" id={field.key}>
+            <div
+              key={field.key}
+              className={!(index === fields.length - 1) ? 'mb-8' : ''}
+            >
+              <div id={field.key}>
                 <FieldFactory
                   field={field}
                   metaData={{
@@ -307,7 +314,11 @@ const StepperPage: React.FC = () => {
             </div>
           )
         })}
-        {isPartnered && <h1>Partner&apos;s information:</h1>}
+        {isPartnered && (
+          <h2 className="text-h2 font-header-gc mt-12 mb-6 font-bold font-700">
+            Partner&apos;s information:
+          </h2>
+        )}
         {isPartnered &&
           partnerFields.map((field: FormField) => {
             return (
