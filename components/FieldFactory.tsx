@@ -1,15 +1,18 @@
 import { debounce } from 'lodash'
 import { FormField } from '../client-state/FormField'
+import { WebTranslations } from '../i18n/web'
 import { FieldKey, FieldType } from '../utils/api/definitions/fields'
 import { CurrencyField } from './Forms/CurrencyField'
 import Duration from './Forms/Duration'
 import { MonthAndYear } from './Forms/MonthAndYear'
 import { Radio } from './Forms/Radio'
+import { FormSelect } from './Forms/Select'
+import { getPlaceholderForSelect } from './QuestionsPage/utils'
 
 interface FieldProps {
   field: FormField
   metaData?: { [key: string]: any }
-  tsln: { required: string }
+  tsln: WebTranslations
   handleOnChange: (field: FormField, value: any) => void
 }
 
@@ -37,7 +40,6 @@ const FieldFactory: React.FC<FieldProps> = ({
           error={null}
         />
       )
-    // Add cases for other field types here
     case FieldType.DATE:
       return (
         <MonthAndYear
@@ -98,6 +100,19 @@ const FieldFactory: React.FC<FieldProps> = ({
               ? metaData.partnerIncomeTooltip
               : undefined
           }
+        />
+      )
+    case FieldType.DROPDOWN || FieldType.DROPDOWN_SEARCHABLE:
+      return (
+        <FormSelect
+          name={field.key}
+          field={field}
+          requiredText={tsln.required}
+          placeholder={getPlaceholderForSelect(field, tsln)}
+          customOnChange={(newValue: { value: string; label: string }) =>
+            handleOnChange(field, newValue.value)
+          }
+          value={null}
         />
       )
     default:

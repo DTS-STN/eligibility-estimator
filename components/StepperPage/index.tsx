@@ -221,7 +221,6 @@ const StepperPage: React.FC = () => {
   // }, [tsln])
 
   useEffect(() => {
-    console.log('LANGUAGE CHANGED')
     const incomeLabel = receiveOAS
       ? tsln.incomeLabelReceiveOAS
       : tsln.incomeLabel
@@ -258,8 +257,6 @@ const StepperPage: React.FC = () => {
     partnerIncomeHintTitle,
     partnerIncomeHintText,
   ])
-
-  console.log('incomeLabel', incomeLabel)
 
   const getComponentForStep = () => {
     const fields = form.visibleFields.filter((field) =>
@@ -301,24 +298,24 @@ const StepperPage: React.FC = () => {
           )
         })}
         {isPartnered && (
-          <h2 className="text-h2 font-header-gc mt-12 mb-6 font-bold font-700">
-            {tsln.stepper.partnerInfo}
-          </h2>
+          <>
+            <div className="h-12 sm:h-16"></div>
+            <h2 className="text-h2 font-header-gc mb-6 font-bold font-700">
+              {tsln.stepper.partnerInfo}
+            </h2>
+          </>
         )}
         {isPartnered &&
-          partnerFields.map((field: FormField) => {
+          partnerFields.map((field: FormField, index: number) => {
             return (
-              <div key={field.key}>
+              <div
+                key={field.key}
+                className={!(index === partnerFields.length - 1) ? 'mb-8' : ''}
+              >
                 <div className="pb-4" id={field.key}>
                   <FieldFactory
                     field={field}
-                    metaData={{
-                      ageDate,
-                      incomeLabel,
-                      partnerIncomeLabel,
-                      incomeTooltip,
-                      partnerIncomeTooltip,
-                    }}
+                    metaData={getMetaDataForField(field.key)}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                   />
