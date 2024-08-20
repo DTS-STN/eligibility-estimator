@@ -6,7 +6,7 @@ import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import { Language } from '../../utils/api/definitions/enums'
-import { FieldConfig } from '../../utils/api/definitions/fields'
+import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
 import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { VisibleFieldsObject } from '../../utils/web/types'
 import FieldFactory from '../FieldFactory'
@@ -190,34 +190,26 @@ const StepperPage: React.FC = () => {
     setStepComponents(getComponentForStep())
   }
 
-  const getMetaDataForField = () => {
-    // if (
-    //   key === 'age' ||
-    //   key === 'partnerAge' ||
-    //   key === 'oasAge' ||
-    //   key === 'oasDeferDuration'
-    // ) {
-    //   return { ageDate }
-    // }
+  const getMetaDataForField = (key: FieldKey) => {
+    if (
+      key === 'age' ||
+      key === 'partnerAge' ||
+      key === 'oasAge' ||
+      key === 'oasDeferDuration'
+    ) {
+      return { ageDate }
+    }
 
-    // if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
-    //   return {
-    //     incomeLabel,
-    //     partnerIncomeLabel,
-    //     incomeTooltip,
-    //     partnerIncomeTooltip,
-    //   }
-    // }
-
-    return {
-      oasDeferDuration: { ageDate },
-      income: {
+    if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
+      return {
         incomeLabel,
         partnerIncomeLabel,
         incomeTooltip,
         partnerIncomeTooltip,
-      },
+      }
     }
+
+    return {}
   }
 
   // this does not work
@@ -288,7 +280,7 @@ const StepperPage: React.FC = () => {
       <>
         {isPartnered && (
           <h2 className="text-h2 font-header-gc mb-6 font-bold font-700">
-            Your information:
+            {tsln.stepper.yourInfo}
           </h2>
         )}
         {fields.map((field: FormField, index: number) => {
@@ -300,13 +292,7 @@ const StepperPage: React.FC = () => {
               <div id={field.key}>
                 <FieldFactory
                   field={field}
-                  metaData={{
-                    ageDate,
-                    incomeLabel,
-                    partnerIncomeLabel,
-                    incomeTooltip,
-                    partnerIncomeTooltip,
-                  }}
+                  metaData={getMetaDataForField(field.key)}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                 />
@@ -316,7 +302,7 @@ const StepperPage: React.FC = () => {
         })}
         {isPartnered && (
           <h2 className="text-h2 font-header-gc mt-12 mb-6 font-bold font-700">
-            Partner&apos;s information:
+            {tsln.stepper.partnerInfo}
           </h2>
         )}
         {isPartnered &&

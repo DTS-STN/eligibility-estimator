@@ -276,6 +276,8 @@ const fr: WebTranslations = {
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
   stepper: {
+    yourInfo: 'Vos renseignements',
+    partnerInfo: 'Renseignements sur votre conjoint',
     nextStep: 'Suivant',
     previousStep: 'Précédent',
     getEstimate: 'Estimer mes prestations',

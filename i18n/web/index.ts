@@ -181,6 +181,8 @@ export type WebTranslations = {
   errorPageType: string
   //Stepper
   stepper: {
+    yourInfo: string
+    partnerInfo: string
     nextStep: string
     previousStep: string
     getEstimate: string
