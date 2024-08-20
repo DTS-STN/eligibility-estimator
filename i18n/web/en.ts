@@ -272,7 +272,7 @@ const en: WebTranslations = {
     'Use the estimator to see if you meet all eligibility criteria.',
   stepper: {
     yourInfo: 'Your information',
-    partnerInfo: 'Partner&apos;s information',
+    partnerInfo: `Partner's information`,
     previousStep: 'Previous',
     nextStep: 'Next',
     getEstimate: 'Estimate my benefits',
