@@ -261,14 +261,6 @@ export class FieldsHandler {
       ) {
         requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }
-
-      // &&
-      //   this.input.partner.legalStatus.canadian &&
-      //   this.input.partner.livedOnlyInCanada !== undefined &&
-      //   ((this.input.partner.livingCountry.canada &&
-      //     this.input.partner.yearsInCanadaSince18 >= 10) ||
-      //     (!this.input.partner.livingCountry.canada &&
-      //       this.input.partner.yearsInCanadaSince18 >= 20))
     }
 
     requiredFields.sort(FieldsHandler.sortFields)

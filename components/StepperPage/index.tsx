@@ -167,11 +167,6 @@ const StepperPage: React.FC = () => {
       setReceiveOAS(receiveOAS)
     }
 
-    // if (key === 'receiveOAS') {
-    //   const receiveOAS = newValue === 'true'
-    //   setReceiveOAS(receiveOAS)
-    // }
-
     field.value = newVal
     inputHelper.setInputByKey(field.key, newVal)
     form.update(inputHelper)
@@ -245,6 +240,7 @@ const StepperPage: React.FC = () => {
     incomeHintText,
     partnerIncomeHintTitle,
     partnerIncomeHintText,
+    ageDate,
   ])
 
   const getComponentForStep = () => {
