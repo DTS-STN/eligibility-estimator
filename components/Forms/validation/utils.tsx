@@ -1,5 +1,4 @@
 export const sanitizeCurrency = (value, language) => {
-  console.log('Value being sanitized:', value)
   return value
     .toString()
     .replaceAll(' ', '')

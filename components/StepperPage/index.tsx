@@ -128,7 +128,7 @@ const StepperPage: React.FC = () => {
 
   const [steps, setSteps] = useState(getSteps())
   const totalSteps = Object.keys(steps).length
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useSessionStorage('step', 1)
   const [isLastStep, setIsLastStep] = useState(false)
 
   useEffect(() => {
