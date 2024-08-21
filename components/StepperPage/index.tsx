@@ -137,20 +137,8 @@ const StepperPage: React.FC = () => {
     } else {
       setIsLastStep(false)
     }
-    window.scrollTo(0, 0)
-  }, [activeStep])
-
-  useEffect(() => {
-    // setSteps((prev) => {
-    //   return {
-    //     ...prev,
-    //     [activeStep]: {
-    //       ...prev[activeStep],
-    //       component: <>CHANGED</>,
-    //     },
-    //   }
-    // })
     setStepComponents(getComponentForStep())
+    window.scrollTo(0, 0)
   }, [activeStep])
 
   useEffect(() => {
