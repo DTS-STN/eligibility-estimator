@@ -227,6 +227,9 @@ export const QuestionsPage: React.VFC = ({}) => {
         receiveOAS,
         tsln
       )
+      console.log('errorsVisible', errorsVisible)
+      console.log('formError', formError)
+      console.log('alertError', alertError)
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>
@@ -434,7 +437,7 @@ export const QuestionsPage: React.VFC = ({}) => {
   }
 
   form.update(inputHelper)
-
+  console.log('form', form)
   return (
     <>
       <div>

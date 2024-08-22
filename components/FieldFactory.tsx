@@ -5,6 +5,7 @@ import { FieldKey, FieldType } from '../utils/api/definitions/fields'
 import { CurrencyField } from './Forms/CurrencyField'
 import Duration from './Forms/Duration'
 import { MonthAndYear } from './Forms/MonthAndYear'
+import { NumberField } from './Forms/NumberField'
 import { Radio } from './Forms/Radio'
 import { FormSelect } from './Forms/Select'
 import { getPlaceholderForSelect } from './QuestionsPage/utils'
@@ -14,11 +15,13 @@ interface FieldProps {
   metaData?: { [key: string]: any }
   tsln: WebTranslations
   handleOnChange: (field: FormField, value: any) => void
+  formError: string
 }
 
 const FieldFactory: React.FC<FieldProps> = ({
   field,
   metaData = {},
+  formError,
   tsln,
   handleOnChange,
 }) => {
@@ -35,7 +38,7 @@ const FieldFactory: React.FC<FieldProps> = ({
           onChange={(e) => handleOnChange(field, e.target.value)}
           helpText={field.config.helpText}
           setValue={(val) => handleOnChange(field, val)}
-          error={null}
+          error={formError}
         />
       )
     case FieldType.DATE:
@@ -100,7 +103,8 @@ const FieldFactory: React.FC<FieldProps> = ({
           }
         />
       )
-    case FieldType.DROPDOWN || FieldType.DROPDOWN_SEARCHABLE:
+    case FieldType.DROPDOWN:
+    case FieldType.DROPDOWN_SEARCHABLE:
       return (
         <FormSelect
           name={field.key}
@@ -111,6 +115,20 @@ const FieldFactory: React.FC<FieldProps> = ({
             handleOnChange(field, newValue.value)
           }
           value={null}
+        />
+      )
+    case FieldType.NUMBER:
+      return (
+        <NumberField
+          type={field.config.type}
+          name={field.key}
+          label={field.config.label}
+          placeholder={field.config.placeholder ?? ''}
+          onChange={debounce((e) => handleOnChange(field, e.target.value), 500)}
+          value={field.value}
+          requiredText={tsln.required}
+          helpText={field.config.helpText}
+          error={null}
         />
       )
     default:
