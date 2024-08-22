@@ -25,7 +25,7 @@ export class FormField {
   }
 
   set value(value: string) {
-    this.inputHelper.setInputByKey(this.config.key, value)
+    this.inputHelper.setInputByKey(this, value)
   }
 
   // get metaData(): { [key: string]: any } {

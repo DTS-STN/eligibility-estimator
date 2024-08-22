@@ -1,6 +1,11 @@
 import { Language } from '../utils/api/definitions/enums'
-import { fieldDefinitions, FieldKey } from '../utils/api/definitions/fields'
+import {
+  fieldDefinitions,
+  FieldKey,
+  FieldType,
+} from '../utils/api/definitions/fields'
 import { sanitizeCurrency } from '../components/Forms/validation/utils'
+import { FormField } from './FormField'
 
 interface LanguageInput {
   key: '_language'
@@ -35,10 +40,15 @@ export class InputHelper {
     return this.asObject[key]
   }
 
-  setInputByKey(key: FieldKey, newValue: string): void {
-    if (newValue === '' || newValue === undefined) delete this.inputs[key]
-    else this.inputs[key] = InputHelper.sanitizeValue(newValue, this.language)
-    this.setInputs(this.inputs)
+  setInputByKey(field: FormField, newValue: string): void {
+    if (newValue === '' || newValue === undefined) delete this.inputs[field.key]
+    else {
+      this.inputs[field.key] =
+        field.config.type === FieldType.CURRENCY
+          ? InputHelper.sanitizeValue(newValue, this.language)
+          : newValue
+      this.setInputs(this.inputs)
+    }
   }
 
   /**

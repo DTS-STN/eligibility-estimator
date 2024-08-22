@@ -99,8 +99,6 @@ const Duration: FC<DurationProps> = ({
       }
     }
 
-    console.log('years', years)
-    console.log('months', months)
     return { years, months }
   }
   const [selectOptions, setSelectOptions] = useState(getSelectOptions())

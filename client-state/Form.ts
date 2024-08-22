@@ -30,7 +30,6 @@ export class Form {
   }
 
   update(inputs: InputHelper) {
-    console.log('update runs')
     const data = new MainHandler(inputs.asObjectWithLanguage).results
     this.clearAllErrors()
 

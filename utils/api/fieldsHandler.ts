@@ -171,7 +171,7 @@ export class FieldsHandler {
       FieldKey.INCOME_WORK,
       // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
+      // FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
       FieldKey.LIVED_ONLY_IN_CANADA,
     ]
@@ -229,9 +229,9 @@ export class FieldsHandler {
       requiredFields.push(FieldKey.PARTNER_INCOME)
       requiredFields.push(FieldKey.PARTNER_INCOME_WORK)
 
-      if (this.input.partner.age >= 60) {
-        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
-      }
+      // if (this.input.partner.age >= 60) {
+      //   requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
+      // }
 
       if (
         this.input.partner.legalStatus.value &&

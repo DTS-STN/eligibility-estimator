@@ -109,7 +109,6 @@ const StepperPage: React.FC = () => {
       4: {
         title: tsln.category.residence,
         keys: [
-          'legalStatus',
           'livingCountry',
           'livedOnlyInCanada',
           'yearsInCanadaSince18',
@@ -117,7 +116,6 @@ const StepperPage: React.FC = () => {
           'everLivedSocialCountry',
         ], // we actually dont want to show legalStatus question but to default to YES behind the scenes
         partnerKeys: [
-          'partnerLegalStatus',
           'partnerLivingCountry',
           'partnerLivedOnlyInCanada',
           'partnerYearsInCanadaSince18',
@@ -168,7 +166,7 @@ const StepperPage: React.FC = () => {
     }
 
     field.value = newVal
-    inputHelper.setInputByKey(field.key, newVal)
+    inputHelper.setInputByKey(field, newVal)
     form.update(inputHelper)
 
     setStepComponents(getComponentForStep())

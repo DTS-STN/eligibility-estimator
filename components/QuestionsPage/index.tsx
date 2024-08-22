@@ -64,7 +64,6 @@ export const QuestionsPage: React.VFC = ({}) => {
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
-  console.log('allFieldConfigs', allFieldConfigs)
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -90,17 +89,13 @@ export const QuestionsPage: React.VFC = ({}) => {
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
 
-  console.log('visibleFields', visibleFields)
-
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-  console.log('form', form)
   const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
   const keyStepMap: { [x in Steps]: CardConfig } = getKeyStepMap(
     tsln,
     allFieldConfigs
   )
-  console.log('keyStepMap', keyStepMap)
   const [cardsValid, setCardsValid] = useState(
     getStepValidity(keyStepMap, form, inputs)
   )
@@ -182,8 +177,6 @@ export const QuestionsPage: React.VFC = ({}) => {
     let newVal = newValue
     const key: String = field.config.key
 
-    console.log('newVal', newVal)
-
     // Required to pass on to the Duration component that needs the exact birth month, not just age as float
     if (key === 'age') {
       newVal = JSON.parse(newValue).value
@@ -205,7 +198,7 @@ export const QuestionsPage: React.VFC = ({}) => {
     )
 
     field.value = newVal
-    inputHelper.setInputByKey(field.key, newVal)
+    inputHelper.setInputByKey(field, newVal)
     form.update(inputHelper)
 
     setCardsValid(getStepValidity(keyStepMap, form, inputs))
@@ -225,8 +218,6 @@ export const QuestionsPage: React.VFC = ({}) => {
     const fields = form.visibleFields.filter((field) =>
       stepKeys.includes(field.key)
     )
-
-    console.log('fields', fields)
 
     // console.log('------ Generate Children ------')
     return fields.map((field: FormField) => {
