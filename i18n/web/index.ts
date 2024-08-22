@@ -25,6 +25,7 @@ export type WebTranslations = {
   haveNetIncomeLess: string
   headerWhatToKnow: string
   pleaseNodeText: string
+  legaCitizenlText: string
   estimatorIncludeQuestionText: string
   ageText: string
   netIncomeText: string

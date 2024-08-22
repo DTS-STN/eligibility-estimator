@@ -213,9 +213,11 @@ const en: WebTranslations = {
   haveNetIncomeLess: `your net income is less than ${getMaximumIncomeThreshold(
     Language.EN
   )}`,
-  headerWhatToKnow: "What you'll need",
+  headerWhatToKnow: 'Before you begin',
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
+  legaCitizenlText:
+    'To be eligible for Old Age Security benefits, you must be a citizen or legal resident of Canada.',
   estimatorIncludeQuestionText:
     'The estimator will ask you questions about your:',
   ageText: 'age',
