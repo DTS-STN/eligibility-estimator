@@ -19,6 +19,7 @@ import {
   getBirthMonthAndYear,
   getDefaultInputs,
   getDefaultVisibleFields,
+  getErrorVisibility,
 } from '../QuestionsPage/utils'
 import { Stepper } from '../Stepper'
 import { ContextualAlert as Message } from '../Forms/ContextualAlert'
@@ -76,7 +77,7 @@ const StepperPage: React.FC = () => {
     setStepComponents(getComponentForStep())
   }, [tsln])
 
-  const [visibleFields]: [
+  const [visibleFields, setVisibleFields]: [
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
@@ -96,6 +97,7 @@ const StepperPage: React.FC = () => {
       1: {
         title: tsln.category.marital,
         keys: ['maritalStatus', 'invSeparated'],
+        partnerKeys: [],
       },
       2: {
         title: tsln.category.age,
@@ -129,6 +131,18 @@ const StepperPage: React.FC = () => {
     }
   }
 
+  const getStepErrorVisibility = (step: number) => {
+    const allStepKeys = [
+      ...steps[step].keys,
+      ...steps[step].partnerKeys,
+    ].filter((key) => visibleFields[key])
+
+    return allStepKeys.reduce((acc, key) => {
+      acc[key] = false
+      return acc
+    }, {})
+  }
+
   const [steps, setSteps] = useState(getSteps())
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useSessionStorage('step', 1)
@@ -136,22 +150,7 @@ const StepperPage: React.FC = () => {
   const [visibleErrors, setVisibleErrors]: [
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
-  ] = useSessionStorage(
-    'errors-visible',
-    steps[activeStep].keys
-      .concat(steps[activeStep].partnerKeys)
-      .reduce((acc, key) => {
-        acc[key] = false
-        return acc
-      }, {})
-  )
-  // load page:
-  // visibleErrors = {client: [], partner: []}
-
-  // click next: (check which fields have errors on the active page and change visibleErrors))
-  // visibleErrors = {client: ['income'], partner: ['partnerIncome']}
-
-  //
+  ] = useSessionStorage('visibleErrors', getStepErrorVisibility(activeStep))
 
   useEffect(() => {
     if (activeStep === totalSteps) {
@@ -160,14 +159,15 @@ const StepperPage: React.FC = () => {
       setIsLastStep(false)
     }
     setStepComponents(getComponentForStep())
+    setVisibleErrors(getStepErrorVisibility(activeStep))
     window.scrollTo(0, 0)
   }, [activeStep])
 
   useEffect(() => {
-    console.log('visibleFields HAS CHANGED')
-    // when a question is answered that triggers visibility of other questions, we need to update the visibleFields object.
-    // I think using this strategy we can render the components dynamically
-  }, [visibleFields])
+    setVisibleErrors(getStepErrorVisibility(activeStep))
+  }, [JSON.stringify(visibleFields)])
+
+  // useEffect(() => {
 
   function handleOnChange(field: FormField, newValue: string): void {
     let newVal = newValue
@@ -194,6 +194,7 @@ const StepperPage: React.FC = () => {
     form.update(inputHelper)
 
     setStepComponents(getComponentForStep())
+    getStepErrorVisibility(activeStep)
   }
 
   const getMetaDataForField = (key: FieldKey) => {
@@ -265,7 +266,7 @@ const StepperPage: React.FC = () => {
     ageDate,
   ])
 
-  const getErrorForField = (field: FormField) => {
+  const getErrorForField = (field: FormField, visibleErrors: any) => {
     return [field.error, 'also an error message here']
   }
 
@@ -293,7 +294,7 @@ const StepperPage: React.FC = () => {
           </h2>
         )}
         {fields.map((field: FormField, index: number) => {
-          const [formError, alertError] = getErrorForField(field)
+          const [formError, alertError] = getErrorForField(field, visibleErrors)
           return (
             <div
               key={field.key}
@@ -334,7 +335,10 @@ const StepperPage: React.FC = () => {
         )}
         {isPartnered &&
           partnerFields.map((field: FormField, index: number) => {
-            const [formError, alertError] = getErrorForField(field)
+            const [formError, alertError] = getErrorForField(
+              field,
+              visibleErrors
+            )
             return (
               <div
                 key={field.key}
