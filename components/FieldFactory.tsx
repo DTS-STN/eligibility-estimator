@@ -25,6 +25,7 @@ const FieldFactory: React.FC<FieldProps> = ({
   tsln,
   handleOnChange,
 }) => {
+  console.log('metaData for field', field.key, metaData)
   switch (field.config.type) {
     case FieldType.RADIO:
       return (

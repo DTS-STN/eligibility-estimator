@@ -42,7 +42,7 @@ const StepperPage: React.FC = () => {
       ? getBirthMonthAndYear(inputs.age)
       : { month: 1, year: undefined }
   )
-
+  console.log('ageDate', ageDate)
   const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
 
   // Income question dynamic labels and hint content
@@ -143,6 +143,28 @@ const StepperPage: React.FC = () => {
     }, {})
   }
 
+  const getFieldsMetaData = (step: number) => {
+    const allStepKeys = [
+      ...steps[step].keys,
+      ...steps[step].partnerKeys,
+    ].filter((key) => visibleFields[key])
+
+    return allStepKeys.reduce((acc, key) => {
+      if (key === 'age' || key === 'oasAge' || key === 'oasDeferDuration') {
+        acc['ageDate'] = ageDate
+      }
+
+      if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
+        acc['incomeLabel'] = incomeLabel
+        acc['partnerIncomeLabel'] = partnerIncomeLabel
+        acc['incomeTooltip'] = incomeTooltip
+        acc['partnerIncomeTooltip'] = partnerIncomeTooltip
+      }
+
+      return acc
+    }, {})
+  }
+
   const [steps, setSteps] = useState(getSteps())
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useSessionStorage('step', 1)
@@ -151,6 +173,9 @@ const StepperPage: React.FC = () => {
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
   ] = useSessionStorage('visibleErrors', getStepErrorVisibility(activeStep))
+  const [fieldsMetaData, setFieldsMetaData] = useState(
+    getFieldsMetaData(activeStep)
+  )
 
   useEffect(() => {
     if (activeStep === totalSteps) {
@@ -165,7 +190,12 @@ const StepperPage: React.FC = () => {
 
   useEffect(() => {
     setVisibleErrors(getStepErrorVisibility(activeStep))
+    setFieldsMetaData(getFieldsMetaData(activeStep))
   }, [JSON.stringify(visibleFields)])
+
+  useEffect(() => {
+    setStepComponents(getComponentForStep())
+  }, [fieldsMetaData])
 
   // useEffect(() => {
 
@@ -195,28 +225,6 @@ const StepperPage: React.FC = () => {
 
     setStepComponents(getComponentForStep())
     getStepErrorVisibility(activeStep)
-  }
-
-  const getMetaDataForField = (key: FieldKey) => {
-    if (
-      key === 'age' ||
-      key === 'partnerAge' ||
-      key === 'oasAge' ||
-      key === 'oasDeferDuration'
-    ) {
-      return { ageDate }
-    }
-
-    if (key === 'income' || key === 'partnerIncome' || key === 'incomeWork') {
-      return {
-        incomeLabel,
-        partnerIncomeLabel,
-        incomeTooltip,
-        partnerIncomeTooltip,
-      }
-    }
-
-    return {}
   }
 
   // this does not work
@@ -295,6 +303,7 @@ const StepperPage: React.FC = () => {
         )}
         {fields.map((field: FormField, index: number) => {
           const [formError, alertError] = getErrorForField(field, visibleErrors)
+
           return (
             <div
               key={field.key}
@@ -303,7 +312,7 @@ const StepperPage: React.FC = () => {
               <div id={field.key}>
                 <FieldFactory
                   field={field}
-                  metaData={getMetaDataForField(field.key)}
+                  metaData={fieldsMetaData}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                   formError={formError}
@@ -347,7 +356,7 @@ const StepperPage: React.FC = () => {
                 <div id={field.key}>
                   <FieldFactory
                     field={field}
-                    metaData={getMetaDataForField(field.key)}
+                    metaData={fieldsMetaData}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                     formError={formError}

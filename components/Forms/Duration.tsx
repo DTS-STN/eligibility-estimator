@@ -25,6 +25,7 @@ const Duration: FC<DurationProps> = ({
   age,
   ageDate,
 }) => {
+  console.log('ageDate', ageDate)
   const tsln = useTranslation<WebTranslations>()
   const [durationInput, setDurationInput] = useState(null)
   const [resideny, setResidency] = useState(null) // TODO: if residency is known, we need to base drop down year/month on age of eligibility, not just age in July 2013. For now assume minimum required 10 years
