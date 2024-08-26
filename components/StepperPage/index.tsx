@@ -38,9 +38,7 @@ const StepperPage: React.FC = () => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
   const [ageDate, setAgeDate] = useState(
-    inputs.age
-      ? getBirthMonthAndYear(inputs.age)
-      : { month: 1, year: undefined }
+    inputs.age ? getBirthMonthAndYear(inputs.age) : null
   )
   console.log('ageDate', ageDate)
   const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
@@ -178,17 +176,24 @@ const StepperPage: React.FC = () => {
   )
 
   useEffect(() => {
+    setFieldsMetaData(getFieldsMetaData(activeStep))
+  }, [ageDate])
+
+  useEffect(() => {
     if (activeStep === totalSteps) {
       setIsLastStep(true)
     } else {
       setIsLastStep(false)
     }
+    setAgeDate(inputs.age ? getBirthMonthAndYear(inputs.age) : null)
+
     setStepComponents(getComponentForStep())
     setVisibleErrors(getStepErrorVisibility(activeStep))
     window.scrollTo(0, 0)
   }, [activeStep])
 
   useEffect(() => {
+    setStepComponents(getComponentForStep())
     setVisibleErrors(getStepErrorVisibility(activeStep))
     setFieldsMetaData(getFieldsMetaData(activeStep))
   }, [JSON.stringify(visibleFields)])
@@ -279,6 +284,7 @@ const StepperPage: React.FC = () => {
   }
 
   const getComponentForStep = () => {
+    const metaDataForFields = getFieldsMetaData(activeStep)
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
     )
@@ -312,7 +318,7 @@ const StepperPage: React.FC = () => {
               <div id={field.key}>
                 <FieldFactory
                   field={field}
-                  metaData={fieldsMetaData}
+                  metaData={metaDataForFields}
                   tsln={tsln}
                   handleOnChange={handleOnChange}
                   formError={formError}
@@ -356,7 +362,7 @@ const StepperPage: React.FC = () => {
                 <div id={field.key}>
                   <FieldFactory
                     field={field}
-                    metaData={fieldsMetaData}
+                    metaData={metaDataForFields}
                     tsln={tsln}
                     handleOnChange={handleOnChange}
                     formError={formError}
