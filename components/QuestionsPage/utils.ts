@@ -225,6 +225,19 @@ export function getVisisbleErrorsForStep(step, keyStepMap, visibleFields) {
   return stepErrorsVisible
 }
 
+export function getVisisbleErrorsForActiveStep(stepKeys, visibleFields) {
+  // filter stepKeys to only include those that are visible.
+  const visibleKeysForStep = stepKeys.filter((key) => visibleFields[key])
+
+  // const visibleKeysForStep = stepKeys.filter((key) =>
+  //   allVisibleKeys.includes(key)
+  // )
+
+  const stepErrorsVisible = {}
+  visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))
+  return stepErrorsVisible
+}
+
 export function getBirthMonthAndYear(age) {
   const currentDate = new Date()
   const currentYear = currentDate.getFullYear()

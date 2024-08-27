@@ -25,7 +25,6 @@ const FieldFactory: React.FC<FieldProps> = ({
   tsln,
   handleOnChange,
 }) => {
-  console.log('metaData for field', field.key, metaData)
   switch (field.config.type) {
     case FieldType.RADIO:
       return (
@@ -51,7 +50,7 @@ const FieldFactory: React.FC<FieldProps> = ({
           helpText={field.config.helpText}
           baseOnChange={(newValue) => handleOnChange(field, newValue)}
           requiredText={tsln.required}
-          error={null} // error={formError}
+          error={formError}
         />
       )
     case FieldType.DURATION:
@@ -64,7 +63,7 @@ const FieldFactory: React.FC<FieldProps> = ({
           helpText={field.config.helpText}
           baseOnChange={(newValue) => handleOnChange(field, newValue)}
           requiredText={tsln.required}
-          error={null} // error={formError}
+          error={formError}
         />
       )
     case FieldType.CURRENCY:
@@ -94,7 +93,7 @@ const FieldFactory: React.FC<FieldProps> = ({
               ? tsln.required
               : ''
           }
-          error={null}
+          error={formError}
           dynamicContent={
             field.key === 'income'
               ? metaData.incomeTooltip
@@ -129,7 +128,7 @@ const FieldFactory: React.FC<FieldProps> = ({
           value={field.value}
           requiredText={tsln.required}
           helpText={field.config.helpText}
-          error={null}
+          error={formError}
         />
       )
     default:

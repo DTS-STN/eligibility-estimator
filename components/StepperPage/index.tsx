@@ -9,7 +9,7 @@ import {
   InputHelper,
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { Language } from '../../utils/api/definitions/enums'
+import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
 import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
 import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { VisibleFieldsObject } from '../../utils/web/types'
@@ -19,12 +19,17 @@ import {
   getBirthMonthAndYear,
   getDefaultInputs,
   getDefaultVisibleFields,
+  getErrorForField,
   getErrorVisibility,
+  getVisisbleErrorsForActiveStep,
+  getVisisbleErrorsForStep,
 } from '../QuestionsPage/utils'
 import { Stepper } from '../Stepper'
 import { ContextualAlert as Message } from '../Forms/ContextualAlert'
+import { ErrorsSummary } from '../Forms/ErrorsSummary'
 
 const StepperPage: React.FC = () => {
+  const router = useRouter()
   const langx = useRouter().locale as Language
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
@@ -32,7 +37,6 @@ const StepperPage: React.FC = () => {
   const tsln = useTranslation<WebTranslations>()
 
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
-  console.log('allFieldConfigs', allFieldConfigs)
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -40,7 +44,6 @@ const StepperPage: React.FC = () => {
   const [ageDate, setAgeDate] = useState(
     inputs.age ? getBirthMonthAndYear(inputs.age) : null
   )
-  console.log('ageDate', ageDate)
   const [stepComponents, setStepComponents] = useState<React.ReactNode>(null)
 
   // Income question dynamic labels and hint content
@@ -80,15 +83,10 @@ const StepperPage: React.FC = () => {
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
 
-  console.log('visibleFields', visibleFields)
-  console.log('inputs', inputs)
-
   // for each step we need to take "visibleFields" and filter by which fields are relevant for a given step.
 
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-
-  console.log('form', form)
 
   const getSteps = () => {
     return {
@@ -136,7 +134,7 @@ const StepperPage: React.FC = () => {
     ].filter((key) => visibleFields[key])
 
     return allStepKeys.reduce((acc, key) => {
-      acc[key] = false
+      acc[key] = false // set this based on what fields are currently visible.
       return acc
     }, {})
   }
@@ -167,10 +165,13 @@ const StepperPage: React.FC = () => {
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useSessionStorage('step', 1)
   const [isLastStep, setIsLastStep] = useState(false)
-  const [visibleErrors, setVisibleErrors]: [
+
+  const [errorsVisible, setErrorsVisible]: [
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
   ] = useSessionStorage('visibleErrors', getStepErrorVisibility(activeStep))
+  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
+
   const [fieldsMetaData, setFieldsMetaData] = useState(
     getFieldsMetaData(activeStep)
   )
@@ -188,21 +189,18 @@ const StepperPage: React.FC = () => {
     setAgeDate(inputs.age ? getBirthMonthAndYear(inputs.age) : null)
 
     setStepComponents(getComponentForStep())
-    setVisibleErrors(getStepErrorVisibility(activeStep))
     window.scrollTo(0, 0)
   }, [activeStep])
 
   useEffect(() => {
+    // setErrorsVisible(getStepErrorVisibility(activeStep))
     setStepComponents(getComponentForStep())
-    setVisibleErrors(getStepErrorVisibility(activeStep))
     setFieldsMetaData(getFieldsMetaData(activeStep))
   }, [JSON.stringify(visibleFields)])
 
   useEffect(() => {
     setStepComponents(getComponentForStep())
   }, [fieldsMetaData])
-
-  // useEffect(() => {
 
   function handleOnChange(field: FormField, newValue: string): void {
     let newVal = newValue
@@ -228,17 +226,13 @@ const StepperPage: React.FC = () => {
     inputHelper.setInputByKey(field, newVal)
     form.update(inputHelper)
 
+    // getStepErrorVisibility(activeStep)
     setStepComponents(getComponentForStep())
-    getStepErrorVisibility(activeStep)
   }
 
-  // this does not work
-  // useEffect(() => {
-  //   console.log('language changed')
-  //   setSteps((prev) => {
-  //     return { ...prev, ...getSteps() }
-  //   })
-  // }, [tsln])
+  useEffect(() => {
+    setStepComponents(getComponentForStep())
+  }, [JSON.stringify(errorsVisible)])
 
   useEffect(() => {
     const incomeLabel = receiveOAS
@@ -279,12 +273,10 @@ const StepperPage: React.FC = () => {
     ageDate,
   ])
 
-  const getErrorForField = (field: FormField, visibleErrors: any) => {
-    return [field.error, 'also an error message here']
-  }
-
   const getComponentForStep = () => {
     const metaDataForFields = getFieldsMetaData(activeStep)
+    // get error data here, whats visible and whatis not?
+
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
     )
@@ -292,13 +284,7 @@ const StepperPage: React.FC = () => {
     const partnerFields = form.visibleFields.filter((field) =>
       steps[activeStep].partnerKeys?.includes(field.key)
     )
-
     const isPartnered = partnerFields.length > 0
-
-    console.log(activeStep)
-    console.log('fields', fields)
-    console.log('partnerFields', partnerFields)
-    console.log('visibleFields', visibleFields)
 
     return (
       <>
@@ -308,7 +294,15 @@ const StepperPage: React.FC = () => {
           </h2>
         )}
         {fields.map((field: FormField, index: number) => {
-          const [formError, alertError] = getErrorForField(field, visibleErrors)
+          const [formError, alertError] = getErrorForField(
+            field,
+            errorsVisible,
+            receiveOAS,
+            tsln
+          )
+
+          console.log('formError', formError)
+          console.log('alertError', alertError)
 
           return (
             <div
@@ -352,7 +346,9 @@ const StepperPage: React.FC = () => {
           partnerFields.map((field: FormField, index: number) => {
             const [formError, alertError] = getErrorForField(
               field,
-              visibleErrors
+              errorsVisible,
+              receiveOAS,
+              tsln
             )
             return (
               <div
@@ -367,12 +363,45 @@ const StepperPage: React.FC = () => {
                     handleOnChange={handleOnChange}
                     formError={formError}
                   />
+                  {field.error && alertError && (
+                    <div className="mt-6 md:pr-12 msg-container border-warning">
+                      <Message
+                        id={field.key}
+                        iconId={field.key}
+                        iconAltText={tsln.warningText}
+                        type={'warning'}
+                        heading={tsln.unableToProceed}
+                        body={field.error}
+                        asHtml
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             )
           })}
       </>
     )
+  }
+
+  const getIsStepValid = (step: number) => {
+    const stepKeys = steps[step].keys.concat(steps[step].partnerKeys)
+
+    const stepVisibleKeys = stepKeys.filter(
+      (value) => form.visibleFieldKeys.includes(value) // all keys for a step that are visible
+    )
+
+    const allFieldsFilled: boolean = stepVisibleKeys.every((key) => inputs[key])
+
+    const visibleStepFields: FormField[] = form.visibleFields.filter((field) =>
+      stepVisibleKeys.includes(field.key)
+    )
+    const allFieldsNoError: boolean = visibleStepFields.every(
+      (field) => field.valid
+    )
+
+    const stepIsValid = allFieldsFilled && allFieldsNoError
+    return stepIsValid
   }
 
   const handleOnNextClick = () => {
@@ -384,7 +413,33 @@ const StepperPage: React.FC = () => {
     // useEffect when page loads should give visibleErrors all false: {maritalStatus: false}
 
     // if no errors, proceed to next step, if errors, scroll up to top of page with error summary
-    setActiveStep(activeStep + 1)
+
+    // these are steps relevant to current step. ex. marital status.
+    const stepKeys = steps[activeStep].keys.concat(
+      steps[activeStep].partnerKeys
+    )
+    setErrorsVisible({
+      ...errorsVisible,
+      ...getVisisbleErrorsForActiveStep(stepKeys, visibleFields),
+    })
+
+    function submitForm() {
+      if (form.isValid) {
+        language === 'en' ? router.push('/results') : router.push('/resultats')
+      } else {
+        console.log('FORM IS INVALID')
+      }
+    }
+
+    const stepValid = getIsStepValid(activeStep)
+    if (stepValid) {
+      if (isLastStep) {
+        // submit form
+        submitForm()
+      } else {
+        setActiveStep(activeStep + 1)
+      }
+    }
   }
 
   form.update(inputHelper)
@@ -408,11 +463,7 @@ const StepperPage: React.FC = () => {
           id: 'next',
           text: isLastStep ? tsln.stepper.getEstimate : tsln.stepper.nextStep,
           onClick: () => {
-            if (isLastStep) {
-              console.log('ESTIMATE MY BENEFITS')
-            } else {
-              handleOnNextClick()
-            }
+            handleOnNextClick()
           },
         }}
       >
