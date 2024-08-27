@@ -467,6 +467,18 @@ const StepperPage: React.FC = () => {
           },
         }}
       >
+        <ErrorsSummary
+          errorFields={form.visibleFields.filter(
+            (field) =>
+              steps[activeStep].keys
+                .concat(steps[activeStep].partnerKeys)
+                .includes(field.key) &&
+              field.error &&
+              errorsVisible[field.key] &&
+              (!errorsAsAlerts.includes(field.key) || field.value === undefined)
+          )}
+          receiveOAS={receiveOAS}
+        />
         {stepComponents}
       </Stepper>
     </div>

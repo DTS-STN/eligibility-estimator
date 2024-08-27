@@ -52,7 +52,7 @@ export const ErrorsSummary: any = ({ errorFields, receiveOAS }) => {
   return (
     <div
       id="errorField"
-      className="border-2 border-danger rounded py-4 mb-2"
+      className="border-[2px] border-specific-red-red50b rounded py-4 mb-2"
       aria-live="polite"
     >
       <Message
