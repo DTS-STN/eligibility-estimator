@@ -18,6 +18,7 @@ export interface StepperProps {
     id: string
     text: string
     onClick: () => void
+    buttonAttributes: Object
   }
   activeStep: number
 }
@@ -56,6 +57,7 @@ export function Stepper(props: StepperProps) {
                 data-testid={props.nextProps?.id}
                 // iconAltText={props.nextProps?.iconAltText}
                 onClick={props.nextProps?.onClick}
+                attributes={props.nextProps?.buttonAttributes}
                 // styling={props.nextProps?.styling}
               />
             </div>

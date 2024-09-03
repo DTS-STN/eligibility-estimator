@@ -89,16 +89,27 @@ const StepperPage: React.FC = () => {
   const form = new Form(language, inputHelper, visibleFields)
 
   const getSteps = () => {
+    const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
+    const AA_BUTTON_CLICK_ATTRIBUTE =
+      'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click'
+    const AA_FROM_SUBMIT_ATTRIBUTE = 'data-gc-analytics-formsubmit'
+    const AA_FORM_SUBMIT_ACTION = 'submit'
     return {
       1: {
         title: tsln.category.marital,
         keys: ['maritalStatus', 'invSeparated'],
         partnerKeys: [],
+        buttonAttributes: {
+          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.age}`,
+        },
       },
       2: {
         title: tsln.category.age,
         keys: ['age', 'receiveOAS', 'oasDeferDuration', 'oasDefer', 'oasAge'],
         partnerKeys: ['partnerAge', 'partnerBenefitStatus'],
+        buttonAttributes: {
+          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
+        },
       },
       3: {
         title: tsln.category.income,
@@ -108,6 +119,9 @@ const StepperPage: React.FC = () => {
           'partnerIncome',
           'partnerIncomeWork',
         ],
+        buttonAttributes: {
+          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
+        },
       },
       4: {
         title: tsln.category.residence,
@@ -123,6 +137,11 @@ const StepperPage: React.FC = () => {
           'partnerLivedOnlyInCanada',
           'partnerYearsInCanadaSince18',
         ],
+        buttonAttributes: {
+          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.getEstimate}`,
+          [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
+          type: AA_FORM_SUBMIT_ACTION,
+        },
       },
     }
   }
@@ -444,7 +463,10 @@ const StepperPage: React.FC = () => {
 
   form.update(inputHelper)
   return (
-    <div className="my-14 ml-1 sm:w-4/5 md:w-4/6 w-full">
+    <div
+      className="my-14 ml-1 sm:w-4/5 md:w-4/6 w-full"
+      data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
+    >
       <Stepper
         id="stepper123"
         name={tsln.introPageTitle}
@@ -465,20 +487,9 @@ const StepperPage: React.FC = () => {
           onClick: () => {
             handleOnNextClick()
           },
+          buttonAttributes: steps[activeStep].buttonAttributes,
         }}
       >
-        <ErrorsSummary
-          errorFields={form.visibleFields.filter(
-            (field) =>
-              steps[activeStep].keys
-                .concat(steps[activeStep].partnerKeys)
-                .includes(field.key) &&
-              field.error &&
-              errorsVisible[field.key] &&
-              (!errorsAsAlerts.includes(field.key) || field.value === undefined)
-          )}
-          receiveOAS={receiveOAS}
-        />
         {stepComponents}
       </Stepper>
     </div>
