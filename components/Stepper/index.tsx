@@ -42,9 +42,7 @@ export function Stepper(props: StepperProps) {
                 text={props.previousProps?.text}
                 style="secondary"
                 data-testid={props.previousProps?.id}
-                // iconAltText={props.previousProps?.iconAltText}
                 onClick={props.previousProps?.onClick}
-                // styling={props.previousProps?.styling}
               />
             </div>
           )}
@@ -55,10 +53,8 @@ export function Stepper(props: StepperProps) {
                 text={props.nextProps?.text}
                 style="primary"
                 data-testid={props.nextProps?.id}
-                // iconAltText={props.nextProps?.iconAltText}
                 onClick={props.nextProps?.onClick}
                 attributes={props.nextProps?.buttonAttributes}
-                // styling={props.nextProps?.styling}
               />
             </div>
           )}
@@ -66,8 +62,4 @@ export function Stepper(props: StepperProps) {
       </div>
     </div>
   )
-}
-
-Stepper.defaultProps = {
-  href: '#',
 }

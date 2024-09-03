@@ -254,3 +254,29 @@ export function getBirthMonthAndYear(age) {
 
   return { year: birthYear, month: birthMonth }
 }
+
+export const keyToStepMap = {
+  maritalStatus: 1,
+  invSeparated: 1,
+  age: 2,
+  receiveOAS: 2,
+  oasDeferDuration: 2,
+  oasDefer: 2,
+  oasAge: 2,
+  partnerAge: 2,
+  partnerBenefitStatus: 2,
+  incomeAvailable: 3,
+  income: 3,
+  incomeWork: 3,
+  partnerIncomeAvailable: 3,
+  partnerIncome: 3,
+  partnerIncomeWork: 3,
+  livingCountry: 4,
+  livedOnlyInCanada: 4,
+  yearsInCanadaSince18: 4,
+  yearsInCanadaSinceOAS: 4,
+  everLivedSocialCountry: 4,
+  partnerLivingCountry: 4,
+  partnerLivedOnlyInCanada: 4,
+  partnerYearsInCanadaSince18: 4,
+}

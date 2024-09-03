@@ -21,6 +21,7 @@ import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { FieldKey } from '../../utils/api/definitions/fields'
+import { useSessionStorage } from 'react-use'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -48,6 +49,8 @@ const ResultsPage: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+  const [_activeStep, setActiveStep] = useSessionStorage('step')
+
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
@@ -159,7 +162,11 @@ const ResultsPage: React.VFC<{
             id={'EditAnswers'}
             style="secondary"
             custom="mt-6 justify-center md:w-[fit-content]"
-            onClick={(e) => router.push('/questions')}
+            onClick={(e) => {
+              e.preventDefault()
+              setActiveStep(1)
+              router.push('/questions')
+            }}
           />
         </div>
       </div>

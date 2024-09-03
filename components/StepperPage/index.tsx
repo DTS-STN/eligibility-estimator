@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSessionStorage } from 'react-use'
 import { Form } from '../../client-state/Form'
 import { FormField } from '../../client-state/FormField'
@@ -26,7 +26,6 @@ import {
 } from '../QuestionsPage/utils'
 import { Stepper } from '../Stepper'
 import { ContextualAlert as Message } from '../Forms/ContextualAlert'
-import { ErrorsSummary } from '../Forms/ErrorsSummary'
 
 const StepperPage: React.FC = () => {
   const router = useRouter()
@@ -69,21 +68,15 @@ const StepperPage: React.FC = () => {
   }
   const [receiveOAS, setReceiveOAS] = useState(false)
 
-  // useEffect(() => {
-  //   setStepComponents(getComponentForStep())
-  // }, [])
-
   useEffect(() => {
     setSteps(getSteps())
     setStepComponents(getComponentForStep())
   }, [tsln])
 
-  const [visibleFields, setVisibleFields]: [
+  const [visibleFields]: [
     VisibleFieldsObject,
     (value: VisibleFieldsObject) => void
   ] = useState(getDefaultVisibleFields(allFieldConfigs))
-
-  // for each step we need to take "visibleFields" and filter by which fields are relevant for a given step.
 
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
@@ -147,13 +140,14 @@ const StepperPage: React.FC = () => {
   }
 
   const getStepErrorVisibility = (step: number) => {
+    // Initially no errors are shown
     const allStepKeys = [
       ...steps[step].keys,
       ...steps[step].partnerKeys,
     ].filter((key) => visibleFields[key])
 
     return allStepKeys.reduce((acc, key) => {
-      acc[key] = false // set this based on what fields are currently visible.
+      acc[key] = false
       return acc
     }, {})
   }
@@ -189,11 +183,32 @@ const StepperPage: React.FC = () => {
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
   ] = useSessionStorage('visibleErrors', getStepErrorVisibility(activeStep))
-  const errorsAsAlerts = ['legalStatus', 'everLivedSocialCountry']
 
   const [fieldsMetaData, setFieldsMetaData] = useState(
     getFieldsMetaData(activeStep)
   )
+
+  useEffect(() => {
+    // Scroll to the right question if hash is present in URL (ex. "Edit" buttons in the results page)
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1)
+      if (hash) {
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 100)
+      }
+    }
+
+    handleHashChange()
+    window.addEventListener('hashchange', handleHashChange)
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [])
 
   useEffect(() => {
     setFieldsMetaData(getFieldsMetaData(activeStep))
@@ -245,7 +260,6 @@ const StepperPage: React.FC = () => {
     inputHelper.setInputByKey(field, newVal)
     form.update(inputHelper)
 
-    // getStepErrorVisibility(activeStep)
     setStepComponents(getComponentForStep())
   }
 
@@ -294,7 +308,6 @@ const StepperPage: React.FC = () => {
 
   const getComponentForStep = () => {
     const metaDataForFields = getFieldsMetaData(activeStep)
-    // get error data here, whats visible and whatis not?
 
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
@@ -319,9 +332,6 @@ const StepperPage: React.FC = () => {
             receiveOAS,
             tsln
           )
-
-          console.log('formError', formError)
-          console.log('alertError', alertError)
 
           return (
             <div
@@ -424,16 +434,6 @@ const StepperPage: React.FC = () => {
   }
 
   const handleOnNextClick = () => {
-    // check if all required fields are filled out
-    // every field has an "error" property when empty - which is the case when the page is first loaded
-    // we have to check against visible fields (filter visible fields for the particular step)
-    // if visibleFields[maritalStatus] is true, and has error (empty or invalid), then set visibleErrors[maritalStatus] = true
-
-    // useEffect when page loads should give visibleErrors all false: {maritalStatus: false}
-
-    // if no errors, proceed to next step, if errors, scroll up to top of page with error summary
-
-    // these are steps relevant to current step. ex. marital status.
     const stepKeys = steps[activeStep].keys.concat(
       steps[activeStep].partnerKeys
     )
@@ -445,15 +445,12 @@ const StepperPage: React.FC = () => {
     function submitForm() {
       if (form.isValid) {
         language === 'en' ? router.push('/results') : router.push('/resultats')
-      } else {
-        console.log('FORM IS INVALID')
       }
     }
 
     const stepValid = getIsStepValid(activeStep)
     if (stepValid) {
       if (isLastStep) {
-        // submit form
         submitForm()
       } else {
         setActiveStep(activeStep + 1)
@@ -464,7 +461,7 @@ const StepperPage: React.FC = () => {
   form.update(inputHelper)
   return (
     <div
-      className="my-14 ml-1 sm:w-4/5 md:w-4/6 w-full"
+      className="ml-1 sm:w-4/5 md:w-4/6 w-full"
       data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
     >
       <Stepper
@@ -497,5 +494,3 @@ const StepperPage: React.FC = () => {
 }
 
 export default StepperPage
-
-// Make a mock page where we have a bare bones stepper with hardcoded content that you can step through and see the content change

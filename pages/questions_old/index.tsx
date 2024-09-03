@@ -1,13 +1,13 @@
 import { NextPage } from 'next'
+import { QuestionsPage } from '../../components/QuestionsPage'
 import { Layout } from '../../components/Layout'
 import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
 import { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import StepperPage from '../../components/StepperPage'
 
-const Stepper: NextPage<{ adobeAnalyticsUrl: string }> = ({
+const Questions: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
   const tsln = useTranslation<WebTranslations>()
@@ -28,7 +28,7 @@ const Stepper: NextPage<{ adobeAnalyticsUrl: string }> = ({
       </Head>
 
       <Layout title={tsln.questionPageTitle}>
-        <StepperPage />
+        <QuestionsPage />
       </Layout>
       {adobeAnalyticsUrl ? (
         <script type="text/javascript">_satellite.pageBottom()</script>
@@ -47,4 +47,4 @@ export const getStaticProps = async () => {
   }
 }
 
-export default Stepper
+export default Questions
