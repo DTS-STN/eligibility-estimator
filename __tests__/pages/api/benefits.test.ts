@@ -930,6 +930,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
 
     expect(res.body.summary.state).toEqual('MORE_INFO')
     expect(res.body.missingFields).toEqual([
+      'everLivedSocialCountry',
       'partnerLivingCountry',
       'partnerLivedOnlyInCanada',
     ])
