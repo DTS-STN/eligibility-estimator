@@ -11,8 +11,8 @@ import { Accordion } from '../Forms/Accordion'
 import { fieldDefinitions } from '../../utils/api/definitions/fields'
 import { FieldCategory } from '../../utils/api/definitions/enums'
 import { useSessionStorage } from 'react-use'
-import { keyToStepMap } from '../QuestionsPage/utils'
-import { Router, useRouter } from 'next/router'
+import { keyToStepMap } from '../StepperPage/utils'
+import { useRouter } from 'next/router'
 
 type CategorizedInputs = {
   [category in FieldCategory]?: FieldInput[]

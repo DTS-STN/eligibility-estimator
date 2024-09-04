@@ -1,6 +1,6 @@
-import { Button } from '../Forms/Button'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
+import { useSessionStorage } from 'react-use'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -8,27 +8,19 @@ import {
   PartnerBenefitStatus,
   ResultKey,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import {
   BenefitResult,
   BenefitResultsObject,
   SummaryObject,
 } from '../../utils/api/definitions/types'
+import { Button } from '../Forms/Button'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { EstimatedTotal } from './EstimatedTotal'
 import { MayBeEligible } from './MayBeEligible'
 import { WillBeEligible } from './WillBeEligible'
 import { YourAnswers } from './YourAnswers'
-import { Translations, getTranslations } from '../../i18n/api'
-import { FieldKey } from '../../utils/api/definitions/fields'
-import { useSessionStorage } from 'react-use'
-
-const getEligibility = (
-  resultsEligible: BenefitResult[],
-  key: string
-): boolean => {
-  return resultsEligible.some((benefit) => benefit.benefitKey === key)
-}
 
 const ResultsPage: React.VFC<{
   inputs: FieldInput[]
@@ -47,7 +39,6 @@ const ResultsPage: React.VFC<{
 }) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
-  const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
   const [_activeStep, setActiveStep] = useSessionStorage('step')
 

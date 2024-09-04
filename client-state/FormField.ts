@@ -1,4 +1,4 @@
-import { getBirthMonthAndYear } from '../components/QuestionsPage/utils'
+import { getBirthMonthAndYear } from '../components/StepperPage/utils'
 import {
   FieldConfig,
   FieldKey,

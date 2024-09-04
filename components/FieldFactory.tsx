@@ -8,7 +8,7 @@ import { MonthAndYear } from './Forms/MonthAndYear'
 import { NumberField } from './Forms/NumberField'
 import { Radio } from './Forms/Radio'
 import { FormSelect } from './Forms/Select'
-import { getPlaceholderForSelect } from './QuestionsPage/utils'
+import { getPlaceholderForSelect } from './StepperPage/utils'
 
 interface FieldProps {
   field: FormField

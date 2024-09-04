@@ -9,23 +9,24 @@ import {
   InputHelper,
 } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import { Language, MaritalStatus } from '../../utils/api/definitions/enums'
-import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
+import { Language } from '../../utils/api/definitions/enums'
+import { FieldConfig } from '../../utils/api/definitions/fields'
 import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { VisibleFieldsObject } from '../../utils/web/types'
 import FieldFactory from '../FieldFactory'
+import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useTranslation } from '../Hooks'
 import {
   getBirthMonthAndYear,
   getDefaultInputs,
   getDefaultVisibleFields,
   getErrorForField,
-  getErrorVisibility,
+  getIsStepValid,
+  getStepErrorVisibility,
+  getSteps,
   getVisisbleErrorsForActiveStep,
-  getVisisbleErrorsForStep,
-} from '../QuestionsPage/utils'
+} from './utils'
 import { Stepper } from '../Stepper'
-import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 
 const StepperPage: React.FC = () => {
   const router = useRouter()
@@ -69,7 +70,7 @@ const StepperPage: React.FC = () => {
   const [receiveOAS, setReceiveOAS] = useState(false)
 
   useEffect(() => {
-    setSteps(getSteps())
+    setSteps(getSteps(tsln))
     setStepComponents(getComponentForStep())
   }, [tsln])
 
@@ -80,77 +81,6 @@ const StepperPage: React.FC = () => {
 
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
-
-  const getSteps = () => {
-    const AA_CUSTOMCLICK = 'data-gc-analytics-customclick'
-    const AA_BUTTON_CLICK_ATTRIBUTE =
-      'ESDC-EDSC:Canadian OAS Benefits Est. Next Step Click'
-    const AA_FROM_SUBMIT_ATTRIBUTE = 'data-gc-analytics-formsubmit'
-    const AA_FORM_SUBMIT_ACTION = 'submit'
-    return {
-      1: {
-        title: tsln.category.marital,
-        keys: ['maritalStatus', 'invSeparated'],
-        partnerKeys: [],
-        buttonAttributes: {
-          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.age}`,
-        },
-      },
-      2: {
-        title: tsln.category.age,
-        keys: ['age', 'receiveOAS', 'oasDeferDuration', 'oasDefer', 'oasAge'],
-        partnerKeys: ['partnerAge', 'partnerBenefitStatus'],
-        buttonAttributes: {
-          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.income}`,
-        },
-      },
-      3: {
-        title: tsln.category.income,
-        keys: ['incomeAvailable', 'income', 'incomeWork'],
-        partnerKeys: [
-          'partnerIncomeAvailable',
-          'partnerIncome',
-          'partnerIncomeWork',
-        ],
-        buttonAttributes: {
-          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.category.residence}`,
-        },
-      },
-      4: {
-        title: tsln.category.residence,
-        keys: [
-          'livingCountry',
-          'livedOnlyInCanada',
-          'yearsInCanadaSince18',
-          'yearsInCanadaSinceOAS',
-          'everLivedSocialCountry',
-        ], // we actually dont want to show legalStatus question but to default to YES behind the scenes
-        partnerKeys: [
-          'partnerLivingCountry',
-          'partnerLivedOnlyInCanada',
-          'partnerYearsInCanadaSince18',
-        ],
-        buttonAttributes: {
-          [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.getEstimate}`,
-          [AA_FROM_SUBMIT_ATTRIBUTE]: AA_FORM_SUBMIT_ACTION,
-          type: AA_FORM_SUBMIT_ACTION,
-        },
-      },
-    }
-  }
-
-  const getStepErrorVisibility = (step: number) => {
-    // Initially no errors are shown
-    const allStepKeys = [
-      ...steps[step].keys,
-      ...steps[step].partnerKeys,
-    ].filter((key) => visibleFields[key])
-
-    return allStepKeys.reduce((acc, key) => {
-      acc[key] = false
-      return acc
-    }, {})
-  }
 
   const getFieldsMetaData = (step: number) => {
     const allStepKeys = [
@@ -174,7 +104,7 @@ const StepperPage: React.FC = () => {
     }, {})
   }
 
-  const [steps, setSteps] = useState(getSteps())
+  const [steps, setSteps] = useState(getSteps(tsln))
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useSessionStorage('step', 1)
   const [isLastStep, setIsLastStep] = useState(false)
@@ -182,7 +112,10 @@ const StepperPage: React.FC = () => {
   const [errorsVisible, setErrorsVisible]: [
     ErrorsVisibleObject,
     (value: ErrorsVisibleObject) => void
-  ] = useSessionStorage('visibleErrors', getStepErrorVisibility(activeStep))
+  ] = useSessionStorage(
+    'visibleErrors',
+    getStepErrorVisibility(steps, activeStep, visibleFields)
+  )
 
   const [fieldsMetaData, setFieldsMetaData] = useState(
     getFieldsMetaData(activeStep)
@@ -227,7 +160,6 @@ const StepperPage: React.FC = () => {
   }, [activeStep])
 
   useEffect(() => {
-    // setErrorsVisible(getStepErrorVisibility(activeStep))
     setStepComponents(getComponentForStep())
     setFieldsMetaData(getFieldsMetaData(activeStep))
   }, [JSON.stringify(visibleFields)])
@@ -413,26 +345,6 @@ const StepperPage: React.FC = () => {
     )
   }
 
-  const getIsStepValid = (step: number) => {
-    const stepKeys = steps[step].keys.concat(steps[step].partnerKeys)
-
-    const stepVisibleKeys = stepKeys.filter(
-      (value) => form.visibleFieldKeys.includes(value) // all keys for a step that are visible
-    )
-
-    const allFieldsFilled: boolean = stepVisibleKeys.every((key) => inputs[key])
-
-    const visibleStepFields: FormField[] = form.visibleFields.filter((field) =>
-      stepVisibleKeys.includes(field.key)
-    )
-    const allFieldsNoError: boolean = visibleStepFields.every(
-      (field) => field.valid
-    )
-
-    const stepIsValid = allFieldsFilled && allFieldsNoError
-    return stepIsValid
-  }
-
   const handleOnNextClick = () => {
     const stepKeys = steps[activeStep].keys.concat(
       steps[activeStep].partnerKeys
@@ -448,7 +360,12 @@ const StepperPage: React.FC = () => {
       }
     }
 
-    const stepValid = getIsStepValid(activeStep)
+    const stepValid = getIsStepValid(
+      steps,
+      activeStep,
+      form.visibleFields,
+      inputs
+    )
     if (stepValid) {
       if (isLastStep) {
         submitForm()
