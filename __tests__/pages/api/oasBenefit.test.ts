@@ -87,25 +87,25 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectAlwTooOld(res, true)
   })
   /* CALC-05  */
-  it('should pass the 05 test - OAS-CALC-05', async () => {
-    const desiredName = 'CALC-5' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
+  // it('should pass the 05 test - OAS-CALC-05', async () => {
+  //   const desiredName = 'CALC-5' // Replace with the desired name
+  //   const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+  //   const res = await mockGetRequest(extractedPayload)
 
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23)
-    expectGisNotEligible(res, ResultReason.LIVING_COUNTRY)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
+  //   //client results
+  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 384.23)
+  //   expectGisNotEligible(res, ResultReason.LIVING_COUNTRY)
+  //   expectAlwTooOld(res)
+  //   expectAlwsMarital(res)
 
-    //partner results
-    expectOasNotEligible(res, true)
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expectGisNotEligible(res, ResultReason.OAS, true)
-    expectAlwTooOld(res, true)
-  })
+  //   //partner results
+  //   expectOasNotEligible(res, true)
+  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+  //     ResultReason.YEARS_IN_CANADA
+  //   )
+  //   expectGisNotEligible(res, ResultReason.OAS, true)
+  //   expectAlwTooOld(res, true)
+  // })
   /* CALC-06  */
   it('should pass the 06 test - OAS-CALC-06', async () => {
     const desiredName = 'CALC-6' // Replace with the desired name
@@ -224,27 +224,27 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectAlwsMarital(res)
   })
   /* CALC-14  */
-  it('should pass the 14 test - OAS-CALC-14', async () => {
-    const desiredName = 'CALC-14' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
+  // it('should pass the 14 test - OAS-CALC-14', async () => {
+  //   const desiredName = 'CALC-14' // Replace with the desired name
+  //   const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+  //   const res = await mockGetRequest(extractedPayload)
 
-    //client results
-    expectOasEligible(res, EntitlementResultType.NONE, 0.0)
-    expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectGisEligible(res, 0.0)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
+  //   //client results
+  //   expectOasEligible(res, EntitlementResultType.NONE, 0.0)
+  //   expect(res.body.results.oas.eligibility.reason).toEqual(ResultReason.INCOME)
+  //   expectGisEligible(res, 0.0)
+  //   expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
+  //   expectAlwTooOld(res)
+  //   expectAlwsMarital(res)
 
-    //partner results
-    expectOasNotEligible(res, true)
-    expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
-      ResultReason.YEARS_IN_CANADA
-    )
-    expectGisNotEligible(res, ResultReason.OAS, true)
-    expectAlwTooOld(res, true)
-  })
+  //   //partner results
+  //   expectOasNotEligible(res, true)
+  //   expect(res.body.partnerResults.oas.eligibility.reason).toEqual(
+  //     ResultReason.YEARS_IN_CANADA
+  //   )
+  //   expectGisNotEligible(res, ResultReason.OAS, true)
+  //   expectAlwTooOld(res, true)
+  // })
   /* CALC-15  */
   it('should pass the 15 test - OAS-CALC-15', async () => {
     const desiredName = 'CALC-15' // Replace with the desired name

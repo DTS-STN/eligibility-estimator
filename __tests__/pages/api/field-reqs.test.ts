@@ -41,7 +41,7 @@ describe('field requirement analysis', () => {
       FieldKey.AGE,
       FieldKey.INCOME,
       //FieldKey.INCOME_WORK,
-      FieldKey.LEGAL_STATUS,
+      // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.MARITAL_STATUS,
@@ -50,7 +50,7 @@ describe('field requirement analysis', () => {
       FieldKey.AGE,
       FieldKey.INCOME,
       FieldKey.INCOME_WORK,
-      FieldKey.LEGAL_STATUS,
+      // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.MARITAL_STATUS,
@@ -91,7 +91,7 @@ describe('field requirement analysis', () => {
       // FieldKey.INCOME_AVAILABLE,
       FieldKey.INCOME,
       FieldKey.INCOME_WORK,
-      FieldKey.LEGAL_STATUS,
+      // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
@@ -102,11 +102,11 @@ describe('field requirement analysis', () => {
       // FieldKey.PARTNER_INCOME_AVAILABLE,
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_INCOME_WORK,
-      // FieldKey.PARTNER_BENEFIT_STATUS,
-      FieldKey.PARTNER_LEGAL_STATUS,
+      // FieldKey.PARTNER_LEGAL_STATUS,
       FieldKey.PARTNER_LIVING_COUNTRY,
       FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
       FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
+      FieldKey.PARTNER_BENEFIT_STATUS,
     ])
   })
 })
@@ -196,6 +196,8 @@ describe('field requirements analysis: conditional fields', () => {
       FieldKey.INV_SEPARATED,
       FieldKey.PARTNER_AGE,
       FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_LIVING_COUNTRY,
+      FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
     ])
     // expect(res.body.visibleFields).toContain(FieldKey.PARTNER_INCOME_AVAILABLE)
     expect(res.body.visibleFields).toContain(FieldKey.PARTNER_AGE)
