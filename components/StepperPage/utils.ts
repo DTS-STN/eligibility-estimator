@@ -1,20 +1,10 @@
 import { FormField } from '../../client-state/FormField'
 import { FieldInputsObject } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
-import {
-  FieldCategory,
-  Language,
-  ValidationErrors,
-} from '../../utils/api/definitions/enums'
-import { FieldConfig, FieldKey } from '../../utils/api/definitions/fields'
-import {
-  CardConfig,
-  NextClickedObject,
-  Steps,
-  StepValidity,
-  VisibleFieldsObject,
-} from '../../utils/web/types'
+import { ValidationErrors } from '../../utils/api/definitions/enums'
+import { FieldConfig } from '../../utils/api/definitions/fields'
 import MainHandler from '../../utils/api/mainHandler'
+import { VisibleFieldsObject } from '../../utils/web/types'
 
 /**
  * Builds the object representing the default inputs object.
@@ -93,10 +83,6 @@ export function getErrorForField(field, errorsVisible, receiveOAS, tsln) {
 export function getVisisbleErrorsForActiveStep(stepKeys, visibleFields) {
   // filter stepKeys to only include those that are visible.
   const visibleKeysForStep = stepKeys.filter((key) => visibleFields[key])
-
-  // const visibleKeysForStep = stepKeys.filter((key) =>
-  //   allVisibleKeys.includes(key)
-  // )
 
   const stepErrorsVisible = {}
   visibleKeysForStep.forEach((key) => (stepErrorsVisible[key] = true))

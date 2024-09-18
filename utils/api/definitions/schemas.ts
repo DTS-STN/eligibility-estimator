@@ -1,6 +1,5 @@
 import Joi from 'joi'
-import { AGREEMENT_COUNTRIES, ALL_COUNTRY_CODES } from '../helpers/countryUtils'
-import legalValues from '../scrapers/output'
+import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import {
   Language,
   LegalStatus,
@@ -253,7 +252,26 @@ export const RequestSchema = Joi.object({
   partnerBenefitStatus: Joi.string()
     .required()
     .messages({ 'any.required': ValidationErrors.partnerBenefitStatusEmpty })
-    .valid(...Object.values(PartnerBenefitStatus)),
+    // .valid(...Object.values(PartnerBenefitStatus))
+    .custom((value, helpers) => {
+      const { partnerLivingCountry, partnerYearsInCanadaSince18 } =
+        helpers.state.ancestors[0]
+
+      if (
+        partnerLivingCountry === 'CAN' &&
+        partnerYearsInCanadaSince18 !== undefined
+      ) {
+        if (partnerYearsInCanadaSince18 < 10) {
+          return 'none'
+        }
+      } else {
+        if (partnerYearsInCanadaSince18 < 20) {
+          return 'none'
+        }
+      }
+
+      return value
+    }, 'Custom validation for setting partnerBenefitStatus'),
   partnerIncomeAvailable: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.providePartnerIncomeEmpty }),

@@ -13,6 +13,9 @@ export default class MainHandler {
   constructor(query: { [key: string]: string | string[] }) {
     const { error, value } = schema.validate(query, { abortEarly: false })
 
+    console.log('value from main', value)
+    console.log('partner benefit status', value.partnerBenefitStatus)
+
     // Provides results for current age
     this.handler = new BenefitHandler(value)
 

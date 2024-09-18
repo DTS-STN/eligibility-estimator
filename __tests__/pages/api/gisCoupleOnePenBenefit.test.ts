@@ -60,33 +60,33 @@ describe('gisCoupleOnePenBenefit', () => {
   })
 
   /* CALC-49 */
-  // it('should pass 49 test - CALC-49', async () => {
-  //   const desiredName = 'CALC-49' // Replace with the desired name
-  //   const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //   const res = await mockGetRequest(extractedPayload)
-  //   const deferralTable = [
-  //     { age: 66, amount: 730.18 },
-  //     { age: 67, amount: 779.22 },
-  //     { age: 68, amount: 828.26 },
-  //     { age: 69, amount: 877.3 },
-  //     { age: 70, amount: 926.34 },
-  //   ]
+  it('should pass 49 test - CALC-49', async () => {
+    const desiredName = 'CALC-49' // Replace with the desired name
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
+    const deferralTable = [
+      { age: 66, amount: 730.18 },
+      { age: 67, amount: 779.22 },
+      { age: 68, amount: 828.26 },
+      { age: 69, amount: 877.3 },
+      { age: 70, amount: 926.34 },
+    ]
 
-  //   //client results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 726.09)
-  //   expectDeferralTable(res, deferralTable)
-  //   expectGisEligible(res, 934.91)
-  //   expectAlwTooOld(res)
-  //   expectAlwsMarital(res)
+    //client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 726.09)
+    expectDeferralTable(res, deferralTable)
+    expectGisEligible(res, 934.91)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
-  //   //Future Benefit
-  //   expectFutureOasGisBenefitEligible(res, 66.92, 726.25, 370.76, 0)
-  //   //partner results
-  //   expectAllIneligible(res, true)
+    //Future Benefit
+    expectFutureOasGisBenefitEligible(res, 66.92, 726.25, 370.76, 0)
+    //partner results
+    expectAllIneligible(res, true)
 
-  //   //Future Benefit
-  //   expectFutureOasGisBenefitEligible(res, 76.92, 192.12, 929.64, 0, true)
-  // })
+    //Future Benefit
+    expectFutureOasGisBenefitEligible(res, 76.92, 192.12, 929.64, 0, true)
+  })
 
   /* CALC-50 */
   // it('should pass 50 test - CALC-50', async () => {
