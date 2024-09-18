@@ -307,7 +307,7 @@ const fr: WebTranslations = {
     changeInSituation:
       'Si votre situation change, vos résultats pourraient changer.',
     youEstimateMayChange:
-      'Votre estimation peut changer au fil du temps en fonction&nbsp',
+      'Votre estimation peut changer au fil du temps en fonction',
     basedYourAge: 'de votre âge',
     basedYourPartner: 'des prestations que votre conjoint reçoit.',
     ifYouChoseToDefer:

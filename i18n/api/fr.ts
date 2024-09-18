@@ -38,6 +38,7 @@ const fr: Translations = {
     [ResultKey.MORE_INFO]: "Besoin de plus d'information...",
     [ResultKey.INVALID]: "Votre demande n'est pas valide!",
     [ResultKey.INCOME_DEPENDENT]: 'Revenu manquant',
+    [ResultKey.ALMOST_ELIGIBLE]: 'Presque admissible',
   },
   question: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -354,17 +355,21 @@ const fr: Translations = {
     eligiblePartialOas:
       'Vous êtes probablement admissible à une pension partielle de la Sécurité de la vieillesse.',
     yourDeferralOptions: 'Vos options de report',
-    deferralEligible: '',
-    deferralNoGis: '',
-    deferralWillBeEligible: '',
-    deferralYearsInCanada: '',
+    deferralEligible:
+      'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements de la pension de la Sécurité de la vieillesse immédiatement ou attendre encore {WAIT_MONTHS}&nbspmois.',
+    deferralNoGis:
+      'Vous ne pourrez pas recevoir le Supplément de revenu garanti si vous ne recevez pas la pension.',
+    deferralWillBeEligible:
+      "Vous pouvez commencer à recevoir vos paiements de la pension de la Sécurité de la vieillesse à 65 ans ou attendre d'avoir 70 ans.",
+    deferralYearsInCanada:
+      "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>",
     retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
     futureDeferralOptions:
-      "Vous pouvez commencer à recevoir vos paiements à 65 ans ou attendre d'avoir 70 ans.",
+      'Si vous êtes inscrit automatiquement, vous commencerez à recevoir des paiements le mois après vos 65 ans, sauf si vous demandez un report.',
     youCanAply:
-      'Vous pouvez présenter votre demande 11 mois avant la date à laquelle vous aimeriez recevoir votre premier paiement.',
+      'Si vous n’êtes pas inscrit, vous pouvez présenter une demande dès 11 mois avant la date à laquelle vous souhaitez recevoir votre premier paiement.',
     onceEnrolled:
       'Quand vous serez inscrit, le montant de votre paiement sera révisé chaque année en fonction de votre déclaration de revenus. Vous recevrez automatiquement des paiements si votre revenu est admissible.',
     delayMonths:
@@ -415,13 +420,13 @@ const fr: Translations = {
     alwEligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
-      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu combiné est moins que ',
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu combiné est moins de',
     alwsIfYouApply:
-      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins que ',
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins de',
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire. ',
+      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible à 6X ans.',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -446,7 +451,7 @@ const fr: Translations = {
     currentEligible: 'Présentement',
     you: 'vous pourriez',
     yourPartner: 'votre conjoint pourrait',
-    youCouldReceivePerMonth: 'par mois:',
+    youCouldReceivePerMonth: 'par mois&nbsp;:',
     youCouldReceiveTo: 'à',
     youCouldReceive: 'recevoir',
     youCouldReceiveUntil: 'Jusqu’à',
@@ -472,7 +477,7 @@ const fr: Translations = {
       automaticallyBePaid:
         'Vous recevrez automatiquement des paiements si votre revenu est admissible.',
       youWillReceiveLetter:
-        "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
+        "Votre statut d'inscription devrait être confirmé par la poste le mois après votre 64e anniversaire.",
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
@@ -510,15 +515,20 @@ const fr: Translations = {
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
     alw: {
-      forIndividuals: 'Cette prestation est pour les personnes veuves :',
+      forIndividuals: 'Cette prestation est pour les personnes&nbsp;:',
       age60to64: 'âgées de 60 à 64 ans;',
       livingInCanada: 'qui vivent au Canada;',
       spouseReceives:
-        'qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.',
+        'dont le conjoint reçoit le Supplément de revenu garanti.',
       yourPartnerCanApply:
         'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 65 ans.',
     },
-    alws: {},
+    alws: {
+      forWidowedIndividuals:
+        'Cette prestation est pour les personnes veuves&nbsp;:',
+      haveNotRemarried:
+        'qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.',
+    },
   },
   detailWithHeading: {
     ifYouDeferYourPension: {
@@ -563,48 +573,53 @@ const fr: Translations = {
       text: 'Vous pouvez <a href="/fr/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
     recoveryTax: {
-      heading: 'blablabla',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      heading: 'L’impôt de récupération s’appliquera à votre pension',
+      text: "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     },
     recoveryTaxPartner: {
-      heading: 'blablabla',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      heading:
+        'L’impôt de récupération s’appliquera à la pension de votre conjoint',
+      text: "Puisque le revenu de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     },
     recoveryTaxBoth: {
-      heading: 'blablabla',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      heading: 'L’impôt de récupération s’appliquera à vos pensions',
+      text: "Puisque vos revenus et ceux de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     },
     nonResidentTax: {
-      heading: 'blablabla',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      heading: 'Des impôts s’appliqueront à votre pension',
+      text: "Puisque votre revenu est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
     },
     nonResidentTaxPartner: {
-      heading: 'blablabla',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      heading: 'Des impôts s’appliqueront à la pension de votre conjoint',
+      text: "Puisque le revenu de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
     },
     nonResidentTaxBoth: {
-      heading: 'blablabla',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      heading: 'Des impôts s’appliqueront à vos pensions',
+      text: "Puisque vos revenus et ceux de votre conjoint sont plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
     },
     yourDeferralOptions: {
-      heading: 'Your deferral options',
-      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
-    },
-    deferWaitMonths: {
-      heading: 'Your deferral options',
-      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+      heading: 'Vos options de report',
+      text: "Vous pouvez commencer à recevoir vos paiements de la pension de la Sécurité de la vieillesse à 65 ans ou attendre d'avoir 70 ans.",
     },
     deferralDelay: {
-      heading: 'Your deferral options',
-      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+      heading: 'Vos options de report',
+      text: 'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     },
     retroactivePayment: {
-      heading: 'Your deferral options',
-      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+      heading: 'Vos options de report',
+      text: 'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     },
     mayBecomeEligible: {
-      heading: 'Retroactive payment',
-      text: 'You may be able to receive payment for up to the last 11 months.',
+      heading: 'Paiement rétroactif',
+      text: 'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
+    },
+    socialSecurityEligible: {
+      heading: 'Vous pourriez devenir admissible plus tôt',
+      text: "Vous pourriez devenir admissible plus tôt parce que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter votre estimation. <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
+    },
+    socialSecurityEligiblePartner: {
+      heading: 'Votre conjoint pourrait devenir admissible plus tôt',
+      text: "Votre conjoint pourrait devenir admissible plus tôt parce qu’il a vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter son estimation. <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
     },
   },
   summaryTitle: {

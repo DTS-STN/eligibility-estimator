@@ -149,7 +149,6 @@ export const SummaryEstimates: React.VFC<{
               {eligible &&
                 eligible.map((benefit: BenefitResult) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
-
                   return (
                     <>
                       {collapsedDetails &&

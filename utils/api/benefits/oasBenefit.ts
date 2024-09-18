@@ -445,6 +445,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
+    if (this.input.everLivedSocialCountry) {
+      cardCollapsedText.push(
+        this.partner
+          ? this.translations.detailWithHeading.socialSecurityEligiblePartner
+          : this.translations.detailWithHeading.socialSecurityEligible
+      )
+    }
+
     // if not eligible, don't bother with any of the below
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
@@ -497,16 +505,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     }
 
     if (!this.partner) {
-      if (
-        this.inputAge > 64 &&
-        this.inputAge < 75 &&
-        this.entitlement.result > 0
-      ) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.oasIncreaseAt75
-        )
-      }
-
       //RECOVER TAX MESSAGE - if partnered better to handle it in the partnered section to access both benefits
       if (this.input.maritalStatus.value != MaritalStatus.PARTNERED) {
         if (this.clawbackAmount > 0) {
@@ -522,30 +520,45 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         }
       }
 
-      if (this.inputAge > 74 && this.entitlement.result > 0) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.oasIncreaseAt75Applied
-        )
-      }
-
       if (
         this.entitlement.result == 0 &&
         this.inputAge > 64 &&
-        this.inputAge > 70 &&
+        this.inputAge < 70 &&
         !this.input.receiveOAS
       ) {
         cardCollapsedText.push(
-          this.translations.detailWithHeading.deferWaitMonths
+          this.translations.detailWithHeading.deferralDelay
         )
       }
 
       if (
         this.inputAge >= 70 &&
         !this.input.receiveOAS &&
-        this.entitlement.result > 0
+        this.entitlement.result > 0 &&
+        this.future !== true
       ) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.retroactivePayment
+        )
+      }
+
+      if (
+        this.inputAge > 74 &&
+        this.inputAge > 64 &&
+        this.entitlement.result > 0
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.oasIncreaseAt75Applied
+        )
+      }
+
+      if (
+        this.inputAge > 64 &&
+        this.inputAge < 75 &&
+        this.entitlement.result > 0
+      ) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.oasIncreaseAt75
         )
       }
     }

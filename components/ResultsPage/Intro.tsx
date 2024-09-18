@@ -8,12 +8,13 @@ export const Intro: React.VFC<{
   hasMultipleOasGis: boolean
 }> = ({ hasPartner, userAge, estimateLength, hasMultipleOasGis }) => {
   const tsln = useTranslation<WebTranslations>()
-
   return (
     <>
       <p dangerouslySetInnerHTML={{ __html: tsln.resultsPage.general }} />
       <div className="h2 my-8">{tsln.resultsPage.yourMonEstimateHeading}</div>
-      {estimateLength == 1 && <p>{tsln.resultsPage.changeInSituation}</p>}
+      {estimateLength == 1 && (
+        <p className="my-5">{tsln.resultsPage.changeInSituation}</p>
+      )}
       {estimateLength > 1 && !hasPartner && (
         <p className="my-5">
           {tsln.resultsPage.youEstimateMayChange}{' '}

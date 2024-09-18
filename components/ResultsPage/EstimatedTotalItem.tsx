@@ -72,7 +72,6 @@ export const EstimatedTotalItem: React.VFC<{
             <Modal
               isOpen={modalOpen}
               onClose={closeModal}
-              position={modalPosition}
               partner={partner}
               maritalStatus={maritalStatus}
             />
