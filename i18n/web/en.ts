@@ -401,6 +401,10 @@ const en: WebTranslations = {
       'This number must be at least 10 at the time you deferred your pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'This number must be at least 20 at the time you deferred your pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'This number must be at least 10 because your partner receives the Old Age Security pension.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'This number must be at least 20 because your partner receives the Old Age Security pension outside Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:

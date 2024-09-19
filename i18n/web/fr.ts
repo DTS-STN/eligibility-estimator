@@ -408,6 +408,10 @@ const fr: WebTranslations = {
       'Ce nombre doit être au moins 10 au moment où vous avez reporté votre pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'Ce nombre doit être au moins 20 au moment où vous avez reporté votre pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'Ce nombre doit être au moins 10 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'Ce nombre doit être au moins 20 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
