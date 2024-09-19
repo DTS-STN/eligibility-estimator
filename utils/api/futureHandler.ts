@@ -161,9 +161,7 @@ export class FutureHandler {
     const clientRes =
       Number(this.query.yearsInCanadaSince18) ||
       Number(this.query.yearsInCanadaSinceOAS)
-    const partnerRes =
-      Number(this.query.partnerYearsInCanadaSince18) ||
-      Number(this.query.partnerYearsInCanadaSinceOAS)
+    const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
     const clientDeferralMeta =
