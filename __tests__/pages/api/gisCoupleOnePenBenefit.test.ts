@@ -454,26 +454,26 @@ describe('gisCoupleOnePenBenefit', () => {
   })
 
   /* CALC-67 */
-  // it('should pass 67 test - CALC-67', async () => {
-  //   const desiredName = 'CALC-67' // Replace with the desired name
-  //   const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-  //   const res = await mockGetRequest(extractedPayload)
+  it('should pass 67 test - CALC-67', async () => {
+    const desiredName = 'CALC-67' // Replace with the desired name
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest(extractedPayload)
 
-  //   //client results
-  //   expectOasEligible(res, EntitlementResultType.PARTIAL, 480.29)
-  //   expectGisEligible(res, 1205.62)
-  //   expectAlwTooOld(res)
-  //   expectAlwsMarital(res)
+    //client results
+    expectOasEligible(res, EntitlementResultType.PARTIAL, 480.29)
+    expectGisEligible(res, 1205.62)
+    expectAlwTooOld(res)
+    expectAlwsMarital(res)
 
-  //   //Future Benefit
-  //   expectFutureOasGisBenefitEligible(res, 92, 480.29, 998.62, 0)
+    //Future Benefit
+    expectFutureOasGisBenefitEligible(res, 92, 480.29, 998.62, 0)
 
-  //   //partner results - NO
-  //   expectAllIneligible(res, true)
+    //partner results - NO
+    expectAllIneligible(res, true)
 
-  //   //Future Benefit
-  //   expectFutureOasGisBenefitEligible(res, 71, 174.65, 1297.4, 0, true)
-  // })
+    //Future Benefit
+    expectFutureOasGisBenefitEligible(res, 71, 174.65, 1297.4, 0, true)
+  })
 
   /* CALC-68 */
   // it('should pass 68 test - CALC-68', async () => {

@@ -229,6 +229,7 @@ export class FutureHandler {
           partnerLockResidence
         )
         const { value } = schema.validate(newQuery, { abortEarly: false })
+
         const handler = new BenefitHandler(
           value,
           true,

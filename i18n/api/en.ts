@@ -81,6 +81,8 @@ const en: Translations = {
       'Since the age of 18, has your partner only lived in Canada?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'How many years had your partner lived in Canada when they started receiving their Old Age Security pension?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
@@ -109,6 +111,8 @@ const en: Translations = {
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: 'Partner only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Years partner lived in Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
       'Years partner lived in Canada',
   },
   questionAriaLabel: {
@@ -144,6 +148,8 @@ const en: Translations = {
       'Edit if your partner has only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Edit how long your partner has lived in Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Edit how long your partner has lived in Canada',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -167,6 +173,8 @@ const en: Translations = {
       'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Only count the number of years since the age of 18.',
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [

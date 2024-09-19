@@ -145,6 +145,7 @@ export class FieldsHandler {
       yearsInCanadaSince18: this.rawInput.partnerLivedOnlyInCanada //assume 40 when live only in Canada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
+      yearsInCanadaSinceOAS: this.rawInput.partnerYearsInCanadaSinceOAS,
       everLivedSocialCountry: false, // required by ProcessedInput
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
@@ -243,9 +244,22 @@ export class FieldsHandler {
         )
       }
 
+      // if (this.input.client.livedOnlyInCanada === false) {
+      //   if (this.input.client.receiveOAS == true) {
+      //     requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_OAS)
+      //   } else {
+      //     requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
+      //   }
+      // }
+
       // default value = undefined
       if (this.input.partner.livedOnlyInCanada === false) {
-        requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+        if (this.rawInput.partnerBenefitStatus === 'oasGis') {
+          console.log('should push the partner years in canada since oas')
+          requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS)
+        } else {
+          requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+        }
       }
 
       /*

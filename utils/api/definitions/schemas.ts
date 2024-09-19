@@ -250,28 +250,10 @@ export const RequestSchema = Joi.object({
       return value
     }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
+    // .default('none')
     .required()
     .messages({ 'any.required': ValidationErrors.partnerBenefitStatusEmpty })
-    // .valid(...Object.values(PartnerBenefitStatus))
-    .custom((value, helpers) => {
-      const { partnerLivingCountry, partnerYearsInCanadaSince18 } =
-        helpers.state.ancestors[0]
-
-      if (
-        partnerLivingCountry === 'CAN' &&
-        partnerYearsInCanadaSince18 !== undefined
-      ) {
-        if (partnerYearsInCanadaSince18 < 10) {
-          return 'none'
-        }
-      } else {
-        if (partnerYearsInCanadaSince18 < 20) {
-          return 'none'
-        }
-      }
-
-      return value
-    }, 'Custom validation for setting partnerBenefitStatus'),
+    .valid(...Object.values(PartnerBenefitStatus)),
   partnerIncomeAvailable: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.providePartnerIncomeEmpty }),
