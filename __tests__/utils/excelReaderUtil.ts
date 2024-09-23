@@ -87,7 +87,6 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
             )
           : undefined
         : undefined,
-    // TODO: do the same as this but for the partner - partnerYearsInCanadaSinceOAS
     yearsInCanadaSinceOAS:
       transformLiveOnlyCanadaValue(
         rowToTransform[

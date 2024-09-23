@@ -84,8 +84,6 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
-    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
-      'Votre conjoint avait vécu combien d’années au Canada lorsqu’il a commencé à recevoir sa pension de la Sécurité de la vieillesse?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
@@ -115,8 +113,6 @@ const fr: Translations = {
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Années où le conjoint a vécu au Canada',
-    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
       'Années où le conjoint a vécu au Canada',
   },
   questionAriaLabel: {
@@ -155,8 +151,6 @@ const fr: Translations = {
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Modifier si votre conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
-      'Modifier le nombre d’années vécues au Canada de votre conjoint',
-    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
       'Modifier le nombre d’années vécues au Canada de votre conjoint',
   },
   questionHelp: {

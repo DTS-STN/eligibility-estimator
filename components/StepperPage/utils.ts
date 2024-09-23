@@ -166,7 +166,6 @@ export const getSteps = (tsln) => {
         'partnerLivingCountry',
         'partnerLivedOnlyInCanada',
         'partnerYearsInCanadaSince18',
-        'partnerYearsInCanadaSinceOAS',
       ],
       buttonAttributes: {
         [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.getEstimate}`,
@@ -226,5 +225,4 @@ export const keyToStepMap = {
   partnerLivingCountry: 4,
   partnerLivedOnlyInCanada: 4,
   partnerYearsInCanadaSince18: 4,
-  partnerYearsInCanadaSinceOAS: 4,
 }

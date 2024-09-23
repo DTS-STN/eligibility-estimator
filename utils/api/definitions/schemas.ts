@@ -304,54 +304,6 @@ export const RequestSchema = Joi.object({
     .integer()
     .max(Joi.ref('partnerAge', { adjust: (age) => age - 18 }))
     .message(ValidationErrors.partnerYearsSince18Empty),
-  partnerYearsInCanadaSinceOAS: Joi.number()
-    .required()
-    .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
-    .custom((value, helpers) => {
-      const { partnerAge, partnerLivingCountry, partnerYearsInCanadaSinceOAS } =
-        helpers.state.ancestors[0]
-
-      if (value === 0) {
-        return helpers.message({
-          custom: ValidationErrors.partnerYearsSince18Empty,
-        })
-      }
-
-      if (partnerLivingCountry === LivingCountry.CANADA) {
-        if (partnerYearsInCanadaSinceOAS !== undefined) {
-          if (partnerYearsInCanadaSinceOAS < 10) {
-            return helpers.message({
-              custom: ValidationErrors.partnerResCanadaNotEnough10,
-            })
-          } else {
-            if (partnerAge > 0 && partnerYearsInCanadaSinceOAS !== undefined) {
-              if (partnerAge - 18 < partnerYearsInCanadaSinceOAS) {
-                return helpers.message({
-                  custom: ValidationErrors.partnerYearsSince18Empty,
-                })
-              }
-            }
-          }
-        }
-      } else {
-        if (partnerYearsInCanadaSinceOAS !== undefined) {
-          if (partnerYearsInCanadaSinceOAS < 20) {
-            return helpers.message({
-              custom: ValidationErrors.partnerResCanadaNotEnough20,
-            })
-          } else {
-            if (partnerAge > 0 && partnerYearsInCanadaSinceOAS !== undefined) {
-              if (partnerAge - 18 < partnerYearsInCanadaSinceOAS) {
-                return helpers.message({
-                  custom: ValidationErrors.partnerYearsSince18Empty,
-                })
-              }
-            }
-          }
-        }
-      }
-      return value
-    }, 'custom validation for the "partnerYearsInCanadaSinceOAS" question'),
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
