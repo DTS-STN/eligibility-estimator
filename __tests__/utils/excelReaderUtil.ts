@@ -242,8 +242,6 @@ function transformPartnerBenefitStatusValue(value: string): String {
     return PartnerBenefitStatus.HELP_ME
   } else if (value.toUpperCase() === 'NO') {
     return PartnerBenefitStatus.NONE
-  } else if (value.toUpperCase() === 'N/A') {
-    return PartnerBenefitStatus.NONE
   }
   return undefined
 }

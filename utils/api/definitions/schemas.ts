@@ -250,7 +250,6 @@ export const RequestSchema = Joi.object({
       return value
     }, 'custom validation for the "everLivedSocialCountry" question'),
   partnerBenefitStatus: Joi.string()
-    // .default('none')
     .required()
     .messages({ 'any.required': ValidationErrors.partnerBenefitStatusEmpty })
     .valid(...Object.values(PartnerBenefitStatus)),
