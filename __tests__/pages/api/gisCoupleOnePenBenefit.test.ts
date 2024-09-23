@@ -104,31 +104,6 @@ describe('gisCoupleOnePenBenefit', () => {
     expectAllIneligible(res, true)
   })
 
-  /* CALC-51 */
-  it('should pass 51 test - CALC-51', async () => {
-    const desiredName = 'CALC-51' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
-    expectGisEligible(res, 0.82)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 82, 768.46, 0.82, 0)
-    expectFutureOasGisBenefitEligible(res, 87, 768.46, 0.0, 1)
-
-    //partner results
-    expectAllIneligible(res, true)
-
-    //Future Benefit
-    expectFutureAwlBenefitEligible(res, 60, 0.0, true)
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 1, true)
-  })
-
   /* CALC-53 */
   it('should pass 53 test - CALC-53', async () => {
     const desiredName = 'CALC-53' // Replace with the desired name

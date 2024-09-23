@@ -24,7 +24,7 @@ const filePath = '__tests__/utils/ScenariosWith2023Q3RatesAndThresholds.xlsx'
 
 describe('gisCoupleALWBenefit', () => {
   /* CALC-71 */
-  it.only('should pass 71 test - CALC-71', async () => {
+  it('should pass 71 test - CALC-71', async () => {
     const desiredName = 'CALC-71' // Replace with the desired name
     const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
     const res = await mockGetRequest(extractedPayload)
