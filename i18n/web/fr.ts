@@ -236,7 +236,7 @@ const fr: WebTranslations = {
   estimatorTimeEstimate:
     'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
-  inflationInfo: `Cet estimateur utilise les taux des prestations d’octobre 2024 à décembre 2024. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
+  inflationInfo: `Cet estimateur utilise les taux des prestations d’octobre à décembre 2024. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
