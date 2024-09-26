@@ -6,11 +6,11 @@ export enum BenefitKey {
 }
 
 export enum FieldCategory {
+  MARITAL = 'marital',
   AGE = 'age',
   INCOME = 'income',
-  LEGAL = 'legal',
   RESIDENCE = 'residence',
-  MARITAL = 'marital',
+  LEGAL = 'legal',
 }
 
 export enum MaritalStatus {
