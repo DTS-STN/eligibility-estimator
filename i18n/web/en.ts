@@ -228,7 +228,7 @@ const en: WebTranslations = {
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate: 'It will take about 5 to 10 minutes to complete.',
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  inflationInfo: `This estimator uses current benefit rates. Future benefit amounts may be higher due to inflation.`,
+  inflationInfo: `This estimator uses October to December 2024 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
@@ -241,13 +241,13 @@ const en: WebTranslations = {
   usingSharedDeviceInfo:
     'Others who use this device may be able to see your answers. To avoid this, clear your Internet browser history after using the estimator.',
   homePageP3:
-    "The Old Age Security pension is a monthly payment you can get if you're 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.",
+    "The Old Age Security pension is a monthly payment you can get if you're 65 and older. In most cases, Service Canada will be able to automatically enroll you. In other cases, you will have to apply. Service Canada will inform you if you have been automatically enrolled.",
   homePageP4:
-    'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
+    'The Guaranteed Income Supplement is a monthly non-taxable benefit for Old Age Security pension recipients aged 65 and older who have a low income and are living in Canada.',
   homePageP5:
-    'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
+    'The Allowance is a monthly benefit available to low-income individuals aged 60 to 64 whose spouse or common-law partner receives the Guaranteed Income Supplement.',
   homePageP6:
-    'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
+    'The Allowance for the Survivor is a monthly benefit available to individuals aged 60 to 64 who have a low income, who are living in Canada, and whose spouse or common-law partner has passed away.',
   dateModified: 'Date modified:',
   footerlink1: 'Contact Us',
   footerlink2: 'Prime Minister',

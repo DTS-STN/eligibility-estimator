@@ -234,9 +234,9 @@ const fr: WebTranslations = {
   timeToCompleteText: 'Temps requis pour obtenir une estimation',
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
-    'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
+    'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
-  inflationInfo: `Cet estimateur utilise les taux des prestations actuelles. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
+  inflationInfo: `Cet estimateur utilise les taux des prestations d’octobre à décembre 2024. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
@@ -248,11 +248,11 @@ const fr: WebTranslations = {
   homePageP3:
     "La pension de la Sécurité de la vieillesse est un paiement mensuel que vous pouvez recevoir si vous avez 65 ans et plus. Dans la plupart des cas, Service Canada sera en mesure de vous inscrire automatiquement. Dans d'autres cas, vous devrez présenter une demande. Service Canada vous informera si vous avez été inscrit automatiquement.",
   homePageP4:
-    'Le Supplément de revenu garanti est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse âgées de 65 et plus qui ont un faible revenu et qui vivent au Canada.',
+    'Le Supplément de revenu garanti est une prestation mensuelle non imposable destinée aux bénéficiaires de la pension de la Sécurité de la vieillesse âgées de 65 et plus qui ont un faible revenu et qui vivent au Canada.',
   homePageP5:
-    "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
+    "L'Allocation est une prestation mensuelle offerte aux personnes à faible revenu âgées de 60 à 64 ans dont l'époux ou le conjoint de fait reçoit le Supplément de revenu garanti.",
   homePageP6:
-    "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
+    "L'Allocation au survivant est une prestation mensuelle offerte aux personnes âgées de 60 à 64 ans qui ont un faible revenu, qui vivent au Canada et dont l'époux ou le conjoint de fait est décédé.",
   dateModified: 'Date de modification :',
   footerlink1: 'Contactez-nous',
   footerlink2: 'Premier ministre',
