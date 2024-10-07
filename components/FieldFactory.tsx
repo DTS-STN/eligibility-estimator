@@ -81,8 +81,10 @@ const FieldFactory: React.FC<FieldProps> = ({
           onChange={debounce((e) => handleOnChange(field, e.target.value), 100)}
           placeholder={field.config.placeholder ?? ''}
           value={
-            field.key === FieldKey.INCOME_WORK ||
-            field.key === FieldKey.PARTNER_INCOME_WORK
+            field.value
+              ? field.value
+              : field.key === FieldKey.INCOME_WORK ||
+                field.key === FieldKey.PARTNER_INCOME_WORK
               ? field.config.default
               : field.value
           }

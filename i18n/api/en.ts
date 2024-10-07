@@ -25,7 +25,7 @@ const en: Translations = {
     [FieldCategory.AGE]: 'Age',
     [FieldCategory.INCOME]: 'Income',
     [FieldCategory.LEGAL]: 'Legal status',
-    [FieldCategory.RESIDENCE]: 'Residence history',
+    [FieldCategory.RESIDENCE]: 'Residence',
     [FieldCategory.MARITAL]: 'Marital status',
   },
   result: {

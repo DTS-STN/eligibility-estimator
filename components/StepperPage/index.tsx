@@ -388,7 +388,7 @@ const StepperPage: React.FC = () => {
         title={
           tsln._language === 'en'
             ? `Step ${activeStep} of ${totalSteps}: ${steps[activeStep].title}`
-            : `Étape ${activeStep} de ${totalSteps}: ${steps[activeStep].title}`
+            : `Étape ${activeStep} de ${totalSteps} : ${steps[activeStep].title}`
         }
         previousProps={{
           id: 'previous',
