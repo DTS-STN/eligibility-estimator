@@ -38,22 +38,22 @@ describe('field requirement analysis', () => {
     })
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
+      FieldKey.MARITAL_STATUS,
       FieldKey.AGE,
       FieldKey.INCOME,
       //FieldKey.INCOME_WORK,
       // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
-      FieldKey.MARITAL_STATUS,
     ])
     expect(res.body.visibleFields).toEqual([
+      FieldKey.MARITAL_STATUS,
       FieldKey.AGE,
       FieldKey.INCOME,
       FieldKey.INCOME_WORK,
       // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
-      FieldKey.MARITAL_STATUS,
     ])
   })
 
@@ -85,28 +85,28 @@ describe('field requirement analysis', () => {
     // expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
     expect(res.body.missingFields).toEqual([])
     expect(res.body.visibleFields).toEqual([
+      FieldKey.MARITAL_STATUS,
+      FieldKey.INV_SEPARATED,
       FieldKey.AGE,
       FieldKey.ALREADY_RECEIVE_OAS,
-      FieldKey.OAS_AGE,
       // FieldKey.INCOME_AVAILABLE,
+      FieldKey.PARTNER_AGE,
+      FieldKey.PARTNER_BENEFIT_STATUS,
       FieldKey.INCOME,
       FieldKey.INCOME_WORK,
+      FieldKey.PARTNER_INCOME,
+      FieldKey.PARTNER_INCOME_WORK,
       // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
       FieldKey.YEARS_IN_CANADA_SINCE_18,
       // FieldKey.EVER_LIVED_SOCIAL_COUNTRY, // this field is odd because when visible, no matter what is selected it will return an error
-      FieldKey.MARITAL_STATUS,
-      FieldKey.INV_SEPARATED,
-      FieldKey.PARTNER_AGE,
       // FieldKey.PARTNER_INCOME_AVAILABLE,
-      FieldKey.PARTNER_INCOME,
-      FieldKey.PARTNER_INCOME_WORK,
       // FieldKey.PARTNER_LEGAL_STATUS,
       FieldKey.PARTNER_LIVING_COUNTRY,
       FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
       FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
-      FieldKey.PARTNER_BENEFIT_STATUS,
+      FieldKey.OAS_AGE,
     ])
   })
 })
