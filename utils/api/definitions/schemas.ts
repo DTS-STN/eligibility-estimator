@@ -31,7 +31,7 @@ export const getMinBirthYear = () => {
 }
 // Validate if the age is not under 18
 // and the birth year is between 1800 and the current year
-const customAgeValidation = (value, helpers) => {
+const customAgeValidation = (value, helpers, partner = false) => {
   const currentYear = new Date().getFullYear()
   const age = value
   const birthYear = currentYear - age
@@ -39,7 +39,9 @@ const customAgeValidation = (value, helpers) => {
   if (birthYear < 1899 || birthYear > currentYear) {
     return helpers.message(ValidationErrors.invalidAge)
   } else if (age < 18) {
-    return helpers.message(ValidationErrors.ageUnder18)
+    return partner
+      ? helpers.message(ValidationErrors.partnerAgeUnder18)
+      : helpers.message(ValidationErrors.ageUnder18)
   }
 
   return value
@@ -283,7 +285,10 @@ export const RequestSchema = Joi.object({
       'any.required': ValidationErrors.invalidAge,
       'number.base': ValidationErrors.invalidAge,
     })
-    .custom(customAgeValidation, 'Custom Validation'),
+    .custom(
+      (value, helpers) => customAgeValidation(value, helpers, true),
+      'Custom Validation'
+    ),
   partnerLivingCountry: Joi.string()
     .required()
     .valid(...Object.values(ALL_COUNTRY_CODES)),
