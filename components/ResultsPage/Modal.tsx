@@ -13,45 +13,45 @@ export const Modal: React.VFC<{
 }> = ({ isOpen, onClose, partner, maritalStatus }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
-  const modalRef = useRef(null);
-  const firstFocusableRef = useRef(null);
-  const closeButtonRef = useRef(null);
+  const modalRef = useRef(null)
+  const firstFocusableRef = useRef(null)
+  const closeButtonRef = useRef(null)
 
   useEffect(() => {
     if (isOpen) {
       // Focus the first focusable element when the modal opens
-      firstFocusableRef.current?.focus();
+      firstFocusableRef.current?.focus()
 
       // Event listener for trapping focus
       const handleKeyDown = (event) => {
         if (event.key === 'Tab') {
           const focusableElements = modalRef.current.querySelectorAll(
             'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
-          );
-          const firstElement = focusableElements[0];
-          const lastElement =
-            focusableElements[focusableElements.length - 1];
+          )
+          const firstElement = focusableElements[0]
+          const lastElement = focusableElements[focusableElements.length - 1]
 
           if (event.shiftKey && document.activeElement === firstElement) {
             // Shift + Tab pressed on first element: move focus to the last element
-            event.preventDefault();
-            lastElement.focus();
-          } else if (!event.shiftKey && document.activeElement === lastElement) {
+            event.preventDefault()
+            lastElement.focus()
+          } else if (
+            !event.shiftKey &&
+            document.activeElement === lastElement
+          ) {
             // Tab pressed on the last element: move focus to the first element
-            event.preventDefault();
-            firstElement.focus();
+            event.preventDefault()
+            firstElement.focus()
           }
         }
-      };
+      }
 
-      document.addEventListener('keydown', handleKeyDown);
-      return () => document.removeEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown)
+      return () => document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
 
   if (!isOpen) return null
-
-
 
   const getModalString = () => {
     let text = ''
@@ -80,7 +80,10 @@ export const Modal: React.VFC<{
       ref={modalRef}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div  role={'status'} className="modal-content md:w-6/12 sm:w-9/12 bg-white p-6  shadow-lg z-50">
+      <div
+        role={'status'}
+        className="modal-content md:w-6/12 sm:w-9/12 bg-white p-6  shadow-lg z-50"
+      >
         <h2 className="h2">
           {!partner
             ? apiTrans.modal.userHeading

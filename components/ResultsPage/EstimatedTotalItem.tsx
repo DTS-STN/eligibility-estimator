@@ -61,26 +61,26 @@ export const EstimatedTotalItem: React.VFC<{
       {displayBenefitName(heading, result.entitlement.result, displayAmount)}
       {result.entitlement.result == 0 && (
         <>
-          <span  className="align-middle ml-2">
-          <button
-            onClick={openModal}
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: 0,
-              cursor: 'pointer',
-            }}
-            aria-label={tsln.resultsPage.moreInformation + ' ' + heading}
-          >
-            <Image
-              className="cursor-pointer"
-              src="/moreInfo.png"
-              alt={tsln.resultsPage.moreInformation + ' ' + heading}
-              width="25"
-              height="25"
+          <span className="align-middle ml-2">
+            <button
               onClick={openModal}
-            />
-    </button>
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+              }}
+              aria-label={tsln.resultsPage.moreInformation + ' ' + heading}
+            >
+              <Image
+                className="cursor-pointer"
+                src="/moreInfo.png"
+                alt={tsln.resultsPage.moreInformation + ' ' + heading}
+                width="25"
+                height="25"
+                onClick={openModal}
+              />
+            </button>
 
             <Modal
               isOpen={modalOpen}
