@@ -11,7 +11,7 @@ export const Intro: React.VFC<{
   return (
     <>
       <p dangerouslySetInnerHTML={{ __html: tsln.resultsPage.general }} />
-      <div className="h2 my-8">{tsln.resultsPage.yourMonEstimateHeading}</div>
+      <h2 className="h2 my-8">{tsln.resultsPage.yourMonEstimateHeading}</h2>
       {estimateLength == 1 && (
         <p className="my-5">{tsln.resultsPage.changeInSituation}</p>
       )}

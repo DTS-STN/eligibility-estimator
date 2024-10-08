@@ -1,4 +1,5 @@
 import { Button } from '@dts-stn/service-canada-design-system'
+import { useEffect, useRef } from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import { MaritalStatus } from '../../utils/api/definitions/enums'
@@ -12,8 +13,45 @@ export const Modal: React.VFC<{
 }> = ({ isOpen, onClose, partner, maritalStatus }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
+  const modalRef = useRef(null);
+  const firstFocusableRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Focus the first focusable element when the modal opens
+      firstFocusableRef.current?.focus();
+
+      // Event listener for trapping focus
+      const handleKeyDown = (event) => {
+        if (event.key === 'Tab') {
+          const focusableElements = modalRef.current.querySelectorAll(
+            'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
+          );
+          const firstElement = focusableElements[0];
+          const lastElement =
+            focusableElements[focusableElements.length - 1];
+
+          if (event.shiftKey && document.activeElement === firstElement) {
+            // Shift + Tab pressed on first element: move focus to the last element
+            event.preventDefault();
+            lastElement.focus();
+          } else if (!event.shiftKey && document.activeElement === lastElement) {
+            // Tab pressed on the last element: move focus to the first element
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isOpen])
 
   if (!isOpen) return null
+
+
 
   const getModalString = () => {
     let text = ''
@@ -37,9 +75,12 @@ export const Modal: React.VFC<{
     <div
       className="modal-overlay fixed inset-0 flex items-center justify-center z-50"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      ref={modalRef}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="modal-content w-6/12 bg-white p-6  shadow-lg z-50">
+      <div  role={'status'} className="modal-content md:w-6/12 sm:w-9/12 bg-white p-6  shadow-lg z-50">
         <h2 className="h2">
           {!partner
             ? apiTrans.modal.userHeading
@@ -48,6 +89,7 @@ export const Modal: React.VFC<{
         <p>{getModalString()}</p>
         <div className="mt-4 flex justify-start">
           <Button
+            ref={closeButtonRef}
             text={apiTrans.modal.close}
             id={apiTrans.modal.close}
             style="primary"

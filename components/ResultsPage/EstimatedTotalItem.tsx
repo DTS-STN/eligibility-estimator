@@ -6,6 +6,7 @@ import { BenefitResult } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { Modal } from './Modal'
 import Image from 'next/image'
+import { Button } from '../Forms/Button'
 
 export const EstimatedTotalItem: React.VFC<{
   heading: string
@@ -60,15 +61,27 @@ export const EstimatedTotalItem: React.VFC<{
       {displayBenefitName(heading, result.entitlement.result, displayAmount)}
       {result.entitlement.result == 0 && (
         <>
-          <span className="align-middle ml-2">
+          <span  className="align-middle ml-2">
+          <button
+            onClick={openModal}
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+            }}
+            aria-label={tsln.resultsPage.moreInformation + ' ' + heading}
+          >
             <Image
               className="cursor-pointer"
               src="/moreInfo.png"
-              alt="info"
+              alt={tsln.resultsPage.moreInformation + ' ' + heading}
               width="25"
               height="25"
               onClick={openModal}
             />
+    </button>
+
             <Modal
               isOpen={modalOpen}
               onClose={closeModal}

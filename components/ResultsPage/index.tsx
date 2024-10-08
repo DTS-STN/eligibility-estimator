@@ -218,7 +218,7 @@ const ResultsPage: React.VFC<{
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
-          <div className="h2"> {apiTsln.nextStepTitle}</div>
+          <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
           <BenefitCards
             inputAge={Math.floor(
               Number(inputs.find((input) => input.key === 'age').value)

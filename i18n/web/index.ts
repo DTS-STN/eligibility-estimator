@@ -209,6 +209,7 @@ export type WebTranslations = {
   }
   //results page
   resultsPage: {
+    moreInformation: string
     yourMonEstimateHeading: string
     changeInSituation: string
     youEstimateMayChange: string

@@ -303,6 +303,7 @@ const fr: WebTranslations = {
     homeSubject: `EC Économie et industrie;Allocation;Avantages sociaux;Prestation au survivant;Finances;Finances personnelles;Revenu;Pension;Pension publique,PE Personnes;Adulte;Aîné,SO Société et culture;Vieillesse`,
   },
   resultsPage: {
+    moreInformation: 'More information on',
     yourMonEstimateHeading: 'Votre estimation mensuelle',
     changeInSituation:
       'Si votre situation change, vos résultats pourraient changer.',
