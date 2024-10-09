@@ -375,6 +375,10 @@ const fr: WebTranslations = {
     [ValidationErrors.receiveOASEmpty]:
       //'Veuillez indiquer si vous recevez la pension de la SV.',
       'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',
+    [ValidationErrors.whenToStartOAS]:
+      'FRENCH ==> Please indicate when to start your OAS pension',
+    [ValidationErrors.startDateForOAS]:
+      'Vous devez avoir au moins 65 ans et 1 mois pour commencer à recevoir la pension de la Sécurité de la vieillesse.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
     [ValidationErrors.incomeWorkEmpty]:

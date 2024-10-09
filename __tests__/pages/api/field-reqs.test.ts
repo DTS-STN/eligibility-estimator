@@ -26,6 +26,7 @@ describe('field requirement analysis', () => {
       oasDefer: undefined,
       oasAge: undefined,
       receiveOAS: false,
+      whenToStartOAS: undefined, //asap
       oasDeferDuration: undefined,
       maritalStatus: undefined,
       livingCountry: undefined,
@@ -39,6 +40,7 @@ describe('field requirement analysis', () => {
     expect(res.body.summary.state).toEqual(SummaryState.MORE_INFO)
     expect(res.body.missingFields).toEqual([
       FieldKey.AGE,
+      FieldKey.WHEN_TO_START,
       FieldKey.INCOME,
       //FieldKey.INCOME_WORK,
       FieldKey.LEGAL_STATUS,
@@ -48,6 +50,7 @@ describe('field requirement analysis', () => {
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
+      FieldKey.WHEN_TO_START,
       FieldKey.INCOME,
       FieldKey.INCOME_WORK,
       FieldKey.LEGAL_STATUS,
@@ -66,6 +69,7 @@ describe('field requirement analysis', () => {
       oasDefer: true,
       oasAge: 70,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: '{ "months": 0, "years": 5 }',
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,
@@ -87,6 +91,7 @@ describe('field requirement analysis', () => {
     expect(res.body.visibleFields).toEqual([
       FieldKey.AGE,
       FieldKey.ALREADY_RECEIVE_OAS,
+      FieldKey.WHEN_TO_START,
       FieldKey.OAS_AGE,
       // FieldKey.INCOME_AVAILABLE,
       FieldKey.INCOME,
@@ -119,6 +124,7 @@ describe('field requirements analysis: conditional fields', () => {
       partnerIncomeWork: 0,
       ...age65NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
@@ -140,6 +146,7 @@ describe('field requirements analysis: conditional fields', () => {
       partnerIncomeWork: 0,
       ...age65NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       ...canadian,
@@ -161,6 +168,7 @@ describe('field requirements analysis: conditional fields', () => {
       partnerIncomeWork: 0,
       ...age65NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.SINGLE,
       livingCountry: LivingCountry.NO_AGREEMENT,
@@ -183,6 +191,7 @@ describe('field requirements analysis: conditional fields', () => {
       partnerIncomeWork: 0,
       ...age65NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       ...canadian,

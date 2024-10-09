@@ -110,6 +110,12 @@ export class FieldsHandler {
         this.rawInput.oasDeferDuration ||
         JSON.stringify({ months: 0, years: 0 }),
       oasDefer: this.rawInput.oasDefer,
+      // Start Date to OAS changes
+      whenToStartOAS: this.rawInput.whenToStartOAS,
+      // If start asap then start date = 65 yrs 1 month.
+      startDateForOAS: this.rawInput.whenToStartOAS
+        ? 65.08
+        : this.rawInput.startDateForOAS,
       oasAge: this.rawInput.oasDefer ? this.rawInput.oasAge : 65,
       maritalStatus: maritalStatusHelper,
       livingCountry: new LivingCountryHelper(this.rawInput.livingCountry),
@@ -187,6 +193,14 @@ export class FieldsHandler {
 
     if (this.input.client.receiveOAS && clientAge > 65 && ageJuly2013 <= 70) {
       requiredFields.push(FieldKey.OAS_DEFER_DURATION)
+    }
+
+    if (clientAge <= 65 || this.input.client.receiveOAS === false) {
+      requiredFields.push(FieldKey.WHEN_TO_START)
+    }
+
+    if (this.input.client.whenToStartOAS == false) {
+      requiredFields.push(FieldKey.START_DATE_FOR_OAS)
     }
 
     // default value = undefined

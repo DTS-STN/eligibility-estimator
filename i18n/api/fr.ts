@@ -49,6 +49,9 @@ const fr: Translations = {
     [FieldKey.AGE]: 'Quel est votre mois de naissance?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Recevez-vous la pension de la Sécurité de la vieillesse?',
+    [FieldKey.WHEN_TO_START]:
+      'Quand voulez-vous commencer à recevoir votre pension de la Sécurité de la vieillesse?',
+    [FieldKey.START_DATE_FOR_OAS]: 'Entrez une date de début',
     [FieldKey.OAS_DEFER_DURATION]:
       'Pendant combien de temps avez-vous reporté votre pension de la Sécurité de la vieillesse?',
     [FieldKey.OAS_DEFER]:
@@ -88,6 +91,8 @@ const fr: Translations = {
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
     [FieldKey.ALREADY_RECEIVE_OAS]: 'Reçoit la pension de la SV',
+    [FieldKey.WHEN_TO_START]: 'Date de début de la pension SV',
+    [FieldKey.START_DATE_FOR_OAS]: 'date de début',
     [FieldKey.OAS_DEFER]: 'Report de la pension de la SV',
     [FieldKey.OAS_DEFER_DURATION]: 'Report de la pension de la SV',
     [FieldKey.OAS_AGE]: 'Report de la pension de la\xA0SV',
@@ -120,6 +125,9 @@ const fr: Translations = {
     [FieldKey.OAS_AGE]: 'Commencer à',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Modifier si vous recevez la pension de la SV',
+    [FieldKey.WHEN_TO_START]:
+      'Modifier quand voulez-vous commencer à recevoir votre pension de la Sécurité de la vieillesse?',
+    [FieldKey.START_DATE_FOR_OAS]: 'Modifier votre date de début',
     [FieldKey.OAS_DEFER]: 'Modifier votre décision de report',
     [FieldKey.OAS_DEFER_DURATION]:
       'Modifier le report de votre pension de la SV',
@@ -170,6 +178,8 @@ const fr: Translations = {
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_DEFER_DURATION]:
       "Si vous n'avez pas reporté votre pension, passez à l'étape suivante.",
+    [FieldKey.WHEN_TO_START]:
+      'Si vous êtes admissible, vous pouvez commencer dès le mois après votre 65e anniversaire.',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
@@ -213,6 +223,18 @@ const fr: Translations = {
         key: false,
         text: 'Non',
         shortText: 'Non',
+      },
+    ],
+    [FieldKey.WHEN_TO_START]: [
+      {
+        key: true,
+        text: 'As soon as possible',
+        shortText: 'As soon as possible',
+      },
+      {
+        key: false,
+        text: 'As of a specific month',
+        shortText: 'As of a specific month',
       },
     ],
     [FieldKey.OAS_DEFER]: [

@@ -271,6 +271,7 @@ describe('consolidated benefit tests: ineligible', () => {
       partnerIncomeWork: 0,
       age: 50,
       oasDefer: false,
+      whenToStartOAS: true, //asap
       receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
@@ -791,6 +792,7 @@ describe('consolidated benefit tests: eligible: 65+', () => {
       partnerIncomeWork: 0,
       age: 75,
       oasDefer: false,
+      whenToStartOAS: true, //asap
       receiveOAS: false,
       oasDeferDuration: undefined,
       oasAge: undefined,
@@ -973,6 +975,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
       age: 64,
       oasDefer: false,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.PARTNERED,

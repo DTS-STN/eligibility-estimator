@@ -342,6 +342,7 @@ export const age65NoDefer = {
   oasDefer: false,
   oasAge: undefined,
   receiveOAS: false,
+  whenToStartOAS: true, //asap
   oasDeferDuration: undefined,
 }
 
@@ -350,6 +351,7 @@ export const age75NoDefer = {
   oasDefer: false,
   oasAge: undefined,
   receiveOAS: false,
+  whenToStartOAS: true, //asap
   oasDeferDuration: undefined,
 }
 
@@ -358,6 +360,7 @@ export const age60NoDefer = {
   oasDefer: false,
   oasAge: undefined,
   receiveOAS: false,
+  whenToStartOAS: true, //asap
   oasDeferDuration: undefined,
 }
 

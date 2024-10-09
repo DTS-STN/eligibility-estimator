@@ -416,4 +416,36 @@ describe('july2013Deferral', () => {
     expectGisEligible(res, 0, true)
     expectAlwTooOld(res, true)
   })
+
+  /* CALC-187 */
+  it('should TEST TEST - CALC-187', async () => {
+    const desiredName = 'CALC-187'
+    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
+    const res = await mockGetRequest({
+      ...extractedPayload,
+      maritalStatus: 'single',
+      invSeparated: 'false',
+      age: 55.0,
+      clientBirthDate: '1969;08',
+      yearsInCanadaSince18: '10',
+      income: 2000,
+      whenToStartOAS: false,
+      startDateForOAS: -10.08,
+      partnerBenefitStatus: undefined,
+      partnerIncome: 0,
+      partnerIncomeWork: 0,
+      partnerAge: undefined,
+      partnerBirthDate: undefined,
+      partnerLivingCountry: undefined,
+      partnerLegalStatus: undefined,
+      partnerLivedOnlyInCanada: undefined,
+    })
+
+    const future = res.body.futureClientResults[0][65]
+    console.log('#####', future)
+    expect(res.status).toEqual(400)
+    expect(res.body.summary.state).toEqual('AVAILABLE_INELIGIBLE')
+    expect(future.oas.eligibility.result).toEqual('eligible')
+    expect(future.oas.entitlement.result).toBeCloseTo(359.17, 0.01)
+  })
 })

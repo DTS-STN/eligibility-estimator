@@ -47,6 +47,9 @@ const en: Translations = {
     [FieldKey.AGE]: 'When were you born?',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Do you already receive the Old Age Security pension?',
+    [FieldKey.WHEN_TO_START]:
+      'When do you want your Old Age Security pension to start?',
+    [FieldKey.START_DATE_FOR_OAS]: 'Enter start date',
     [FieldKey.OAS_DEFER_DURATION]:
       'How long did you defer your Old Age Security pension?',
     [FieldKey.OAS_DEFER]:
@@ -85,6 +88,8 @@ const en: Translations = {
   questionShortText: {
     [FieldKey.AGE]: 'Age',
     [FieldKey.ALREADY_RECEIVE_OAS]: 'Already receive OAS pension',
+    [FieldKey.WHEN_TO_START]: 'OAS pension start date',
+    [FieldKey.START_DATE_FOR_OAS]: 'Start date',
     [FieldKey.OAS_DEFER]: 'OAS pension deferral',
     [FieldKey.OAS_DEFER_DURATION]: 'Deferred OAS pension',
     [FieldKey.OAS_AGE]: 'OAS pension deferral',
@@ -116,6 +121,9 @@ const en: Translations = {
     [FieldKey.OAS_AGE]: 'Start at',
     [FieldKey.ALREADY_RECEIVE_OAS]:
       'Edit if you already receive the OAS pension',
+    [FieldKey.WHEN_TO_START]:
+      'When do you want your Old Age Security pension to start?',
+    [FieldKey.START_DATE_FOR_OAS]: 'Edit your start date',
     [FieldKey.OAS_DEFER_DURATION]: 'Edit your OAS pension deferral',
     [FieldKey.OAS_DEFER]: 'Edit your deferral decision',
     [FieldKey.INCOME_AVAILABLE]: 'Edit if you will provide your income',
@@ -162,6 +170,8 @@ const en: Translations = {
       'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
+    [FieldKey.WHEN_TO_START]:
+      "If you're eligible, you can start as early as the month after your 65th birthday",
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       'Do not include periods when you were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
@@ -205,6 +215,18 @@ const en: Translations = {
         key: false,
         text: 'No',
         shortText: 'No',
+      },
+    ],
+    [FieldKey.WHEN_TO_START]: [
+      {
+        key: true,
+        text: 'As soon as possible',
+        shortText: 'As soon as possible',
+      },
+      {
+        key: false,
+        text: 'As of a specific month',
+        shortText: 'As of a specific month',
       },
     ],
     [FieldKey.OAS_DEFER]: [

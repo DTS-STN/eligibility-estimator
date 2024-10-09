@@ -369,6 +369,10 @@ const en: WebTranslations = {
     [ValidationErrors.receiveOASEmpty]:
       //'Please indicate if you receive the OAS pension.',
       'Please indicate if you receive the Old Age Security pension',
+    [ValidationErrors.whenToStartOAS]:
+      'Please indicate when to start your OAS pension',
+    [ValidationErrors.startDateForOAS]:
+      'You must be at least 65 and 1 month to start receiving the Old Age Security pension.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       "Please indicate if you're able to provide your partner's income.",
     [ValidationErrors.partnerIncomeEmpty]:

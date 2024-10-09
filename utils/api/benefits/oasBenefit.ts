@@ -262,6 +262,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const durationStr = this.input.oasDeferDuration
 
     if (durationStr) {
+      console.log(
+        '>>> oasBenefit Resid',
+        this.input.yearsInCanadaSince18,
+        'defer',
+        durationStr
+      )
       const duration: MonthsYears = JSON.parse(durationStr)
       const durationFloat = duration.years + duration.months / 12
       oasAge = 65 + durationFloat
