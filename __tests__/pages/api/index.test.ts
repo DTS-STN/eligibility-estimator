@@ -263,6 +263,7 @@ describe('basic Allowance scenarios', () => {
       ...income10k,
       ...age60NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,
@@ -356,6 +357,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       ...age65NoDefer,
       incomeWork: 0,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       ...canadian,
@@ -372,6 +374,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       ...income10k,
       ...age65NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
       invSeparated: false,
@@ -394,6 +397,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       age: 59,
       oasDefer: false,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       oasAge: undefined,
       maritalStatus: MaritalStatus.WIDOWED,
@@ -438,6 +442,7 @@ describe('basic Allowance for Survivor scenarios', () => {
       ...income10k,
       ...age60NoDefer,
       receiveOAS: false,
+      whenToStartOAS: true, //asap
       oasDeferDuration: undefined,
       maritalStatus: MaritalStatus.PARTNERED,
       invSeparated: false,

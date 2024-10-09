@@ -98,6 +98,8 @@ export enum LinkIcon {
 export enum ValidationErrors {
   invalidAge = 'invalidAge',
   receiveOASEmpty = 'receiveOASEmpty',
+  whenToStartOAS = 'whenToStartOAS',
+  startDateForOAS = 'startDateForOAS',
   oasDeferEmpty = 'oasDeferEmpty',
   providePartnerIncomeEmpty = 'providePartnerIncomeEmpty',
   partnerIncomeEmpty = 'partnerIncomeEmpty',

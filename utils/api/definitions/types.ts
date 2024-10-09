@@ -33,6 +33,8 @@ export interface RequestInput {
   receiveOAS: boolean
   oasDeferDuration: string
   oasDefer: boolean
+  whenToStartOAS?: boolean
+  startDateForOAS?: number
   oasAge: number
   maritalStatus: MaritalStatus
   invSeparated: boolean
@@ -65,6 +67,8 @@ export interface ProcessedInput {
   receiveOAS: boolean
   oasDeferDuration: string
   oasDefer: boolean
+  whenToStartOAS?: boolean
+  startDateForOAS?: number
   oasAge: number
   maritalStatus: MaritalStatusHelper
   livingCountry: LivingCountryHelper

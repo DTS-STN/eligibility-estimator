@@ -7,6 +7,8 @@ export enum FieldKey {
   INCOME_WORK = 'incomeWork',
   AGE = 'age',
   ALREADY_RECEIVE_OAS = 'receiveOAS',
+  WHEN_TO_START = 'whenToStartOAS',
+  START_DATE_FOR_OAS = 'startDateForOAS',
   OAS_DEFER_DURATION = 'oasDeferDuration',
   OAS_DEFER = 'oasDefer',
   OAS_AGE = 'oasAge',
@@ -51,6 +53,17 @@ export const fieldDefinitions: FieldDefinitions = {
     key: FieldKey.ALREADY_RECEIVE_OAS,
     category: { key: FieldCategory.AGE },
     type: FieldType.RADIO,
+  },
+  [FieldKey.WHEN_TO_START]: {
+    key: FieldKey.WHEN_TO_START,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.RADIO,
+    //default: { key: 'true', text: 'Yes', shortText: 'Yes' },
+  },
+  [FieldKey.START_DATE_FOR_OAS]: {
+    key: FieldKey.START_DATE_FOR_OAS,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.DATE,
   },
   [FieldKey.OAS_DEFER_DURATION]: {
     key: FieldKey.OAS_DEFER_DURATION,

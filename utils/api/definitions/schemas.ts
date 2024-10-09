@@ -71,8 +71,6 @@ export const RequestSchema = Joi.object({
     .precision(2)
     .min(0)
     .message(ValidationErrors.incomeBelowZero),
-  //.max(Joi.ref('income'))
-  //.message(ValidationErrors.incomeWorkGreaterThanNetIncome),
   age: Joi.number()
     .required()
     .messages({
@@ -83,6 +81,31 @@ export const RequestSchema = Joi.object({
   receiveOAS: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.receiveOASEmpty }),
+  whenToStartOAS: Joi.boolean()
+    .required()
+    .messages({ 'any.required': ValidationErrors.whenToStartOAS }),
+  startDateForOAS: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.startDateForOAS })
+    .custom((value, helpers) => {
+      const { age } = helpers.state.ancestors[0]
+
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.startDateForOAS,
+        })
+      }
+
+      // hack. control returns a negative value for dates in the future
+      const startDate: number = value > 0 ? value : value * -1
+
+      if (startDate + age < 65.08) {
+        return helpers.message({
+          custom: ValidationErrors.startDateForOAS,
+        })
+      }
+      return value
+    }, 'custom validation for the "yearsInCanadaSince18" question'),
   oasDeferDuration: Joi.string(),
   oasDefer: Joi.boolean()
     .required()

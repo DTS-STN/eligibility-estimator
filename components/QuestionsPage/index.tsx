@@ -185,6 +185,12 @@ export const QuestionsPage: React.VFC = ({}) => {
       setAgeDate(ageDate)
     }
 
+    if (key === 'startDateForOAS') {
+      newVal = JSON.parse(newValue).value
+      // const oasStartDate = JSON.parse(newValue).date
+      // setDateToStartOAS(oasStartDate)
+    }
+
     if (key === 'partnerAge') {
       newVal = JSON.parse(newValue).value
     }
@@ -228,6 +234,7 @@ export const QuestionsPage: React.VFC = ({}) => {
         receiveOAS,
         tsln
       )
+
       return (
         <div key={field.key}>
           <div className="pb-4" id={field.key}>

@@ -38,7 +38,9 @@ export class FutureHandler {
 
   private getSingleResults() {
     let result = this.futureResultsObj
+    console.log('@@ FutureHandler yearsInCanada', this.query.yearsInCanadaSince18)
     const yearsInCanada = Number(this.query.yearsInCanadaSince18)
+
     const age = Number(this.query.age)
     // TODO: take into consideration whether in Canada or not? (could be 10 or 20)
     const residencyReq = 10
@@ -57,15 +59,18 @@ export class FutureHandler {
     this.newQuery['receiveOAS'] = 'false'
 
     if (
-      this.query.livedOnlyInCanada === 'false' &&
+      (this.query.livedOnlyInCanada === 'false' ||
+        !this.query.livedOnlyInCanada) &&
       this.query.yearsInCanadaSince18
     ) {
       this.newQuery['yearsInCanadaSince18'] = String(
         Math.min(40, eliObj.yearsOfResAtEligibility)
       )
+      console.log('@@ FutureHandler #2 yearsInCanada', this.newQuery.yearsInCanadaSince18, eliObj.yearsOfResAtEligibility)
     }
 
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
+    console.log('@@ FutureHandler #3 yearsInCanada', value.yearsInCanadaSince18)
     const handler = new BenefitHandler(
       value,
       true,
@@ -163,7 +168,7 @@ export class FutureHandler {
       Number(this.query.yearsInCanadaSinceOAS)
     const partnerRes = Number(this.query.partnerYearsInCanadaSince18)
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
-
+    console.log('@@ Future Married yearsInCanada', clientRes)
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
     const partnerDeferralMeta =
@@ -206,7 +211,11 @@ export class FutureHandler {
       },
     }
 
-    const futureAges = getAgeArray(agesInputObj)
+    // TODO when there is a StartFromDate the years need to be added to the array below
+    const futureAges = [...getAgeArray(agesInputObj), [76, 91]]
+    // TODO this.query is missing the residence years, and months delayed
+
+    console.log('futureAges', futureAges)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
@@ -229,6 +238,7 @@ export class FutureHandler {
           partnerLockResidence
         )
         const { value } = schema.validate(newQuery, { abortEarly: false })
+        console.log('>>>> TEST Age', userAge, partnerAge, 'Res', value)
         const handler = new BenefitHandler(
           value,
           true,
