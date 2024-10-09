@@ -4,6 +4,7 @@ import { NextStepText } from '../../utils/api/definitions/types'
 import { Router, useRouter } from 'next/router'
 import { useTranslation } from '../Hooks'
 import { WebTranslations } from '../../i18n/web'
+import { BenefitKey } from '../../utils/api/definitions/enums'
 
 const AA_BUTTON_CLICK_ATTRIBUTE =
   'ESDC-EDSC:Canadian OAS Benefits Est. Result card link click'
@@ -13,6 +14,7 @@ export const BenefitCard: React.VFC<{
   benefitName: string
   isEligible: boolean
   future: boolean
+  liveInCanada: boolean
   eligibleText: string
   collapsedDetails: any
   children: React.ReactNode
@@ -29,6 +31,7 @@ export const BenefitCard: React.VFC<{
   benefitName,
   isEligible,
   future,
+  liveInCanada,
   eligibleText,
   collapsedDetails,
   children,
@@ -40,7 +43,9 @@ export const BenefitCard: React.VFC<{
     <span
       data-cy="eligibility-flag"
       className={`px-2 py-1 ml-2 border-left border-l-4 font-semibold text-[15px] ${
-        isEligible || future
+        benefitKey !== BenefitKey.oas && !liveInCanada
+          ? 'border-[#6e6e6e] bg-[#EAEBED] '
+          : isEligible || future
           ? ' border-success bg-[#D8EECA] '
           : ' border-[#EE7100] bg-[#F9F4D4] '
       }`}
@@ -58,13 +63,13 @@ export const BenefitCard: React.VFC<{
       data-cy={benefitKey}
     >
       <div className="flex h-auto w-full justify-between items-center mb-2">
-        <h2
+        <h3
           data-cy="benefit-title"
           id={benefitKey}
-          className="ss:inline block align-sub h2 mb-0"
+          className="ss:inline block align-sub h3 mb-0"
         >
           {benefitName}
-        </h2>
+        </h3>
         {eligibleFlag}
       </div>
 

@@ -10,7 +10,7 @@ export const CustomCollapse = (props) => {
     >
       <summary
         key={`summary-${id}`}
-        className="border-none pl-0 ds-text-multi-blue-blue70b p-3 ds-cursor-pointer ds-select-none"
+        className="border-none pl-0 ds-text-multi-blue-blue70b p-3 ds-cursor-pointer ds-select-none pl-4"
       >
         <span
           className="ml-[5px] ds-underline"

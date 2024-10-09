@@ -36,6 +36,7 @@ const en: Translations = {
     [ResultKey.MORE_INFO]: 'Need more information...',
     [ResultKey.INVALID]: 'Request is invalid!',
     [ResultKey.INCOME_DEPENDENT]: 'Missing income',
+    [ResultKey.ALMOST_ELIGIBLE]: 'Almost eligible',
   },
   question: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -97,7 +98,7 @@ const en: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Years lived in Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: 'Years lived in Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
-      'Lived in country with social agreement',
+      'Lived in country with social security agreement',
     [FieldKey.MARITAL_STATUS]: 'Marital status',
     [FieldKey.INV_SEPARATED]: 'Involuntarily separated',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: "Partner's net income",
@@ -358,9 +359,9 @@ const en: Translations = {
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
-      "If you're automatically enrolled, you can start receiving payments the month after you turn 65 unless you request a deferral.",
+      'If you’re automatically enroled, you’ll start receiving payments the month after you turn 65 unless you request a deferral.',
     youCanAply:
-      "If you're not enrolled, you can apply up to 11 months before you want your payements to start. ",
+      "If you're not enroled, you can apply up to 11 months before you want your payments to start. ",
     onceEnrolled:
       "Once you’re enroled, your payment amount will be reviewed each year based on your income tax return. You'll automatically be paid if your income qualifies.",
     delayMonths:
@@ -416,7 +417,8 @@ const en: Translations = {
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than ",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
-    alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
+    alwsApply:
+      'You can apply 6 to 11 months before you become eligible at 6X. ',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -467,9 +469,9 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'Your enrollement status should be confirmed by mail the month after you turn 64.',
+        'Your enrolement status should be confirmed by mail the month after you turn 64.',
       youShouldReceiveLetter:
-        'Your enrollement status should be confirmed by mail the month after you turn 64.',
+        'Your enrolement status should be confirmed by mail the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
@@ -505,14 +507,18 @@ const en: Translations = {
     },
     alw: {
       forIndividuals: 'This benefit is for individuals:',
-      age60to64: 'Age 60 to 64',
+      age60to64: 'aged 60 to 64',
       livingInCanada: 'living in Canada',
       spouseReceives:
         'whose spouse or common-law partner receives the Guaranteed Income Supplement',
       yourPartnerCanApply:
         'Your partner can apply 6 to 11 months before they become eligible at 65',
     },
-    alws: {},
+    alws: {
+      forWidowedIndividuals: 'This benefit is for widowed individuals:',
+      haveNotRemarried:
+        'who have not remarried or started a new common-law relationship',
+    },
   },
   detailWithHeading: {
     ifYouDeferYourPension: {
@@ -557,15 +563,15 @@ const en: Translations = {
     },
     recoveryTax: {
       heading: 'Recovery tax will be applied to your pension',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      text: "Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     },
     recoveryTaxPartner: {
       heading: "Recovery tax will be applied to your partner's pension",
-      text: "Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+      text: "Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, they won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     },
     recoveryTaxBoth: {
       heading: 'Recovery tax will be applied to your pensions',
-      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you will have to repay some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.',
+      text: "Since you and your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     },
     nonResidentTax: {
       heading: 'Taxes will be applied to your pension',
@@ -583,10 +589,6 @@ const en: Translations = {
       heading: 'Your deferral options',
       text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
     },
-    deferWaitMonths: {
-      heading: 'Your deferral options',
-      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
-    },
     deferralDelay: {
       heading: 'Your deferral options',
       text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
@@ -598,6 +600,14 @@ const en: Translations = {
     mayBecomeEligible: {
       heading: 'Retroactive payment',
       text: 'You may be able to receive payment for up to the last 11 months.',
+    },
+    socialSecurityEligible: {
+      heading: 'You may become eligible earlier',
+      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> external-link-alt for more information.",
+    },
+    socialSecurityEligiblePartner: {
+      heading: 'Your partner may become eligible earlier',
+      text: "Your partner may become eligible earlier because they’ve lived in a country with a social security agreement with Canada. This may affect their estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
   },
   summaryTitle: {

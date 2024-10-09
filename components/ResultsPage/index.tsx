@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import {
+  LivingCountry,
   MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
@@ -133,7 +134,8 @@ const ResultsPage: React.VFC<{
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
       const age = Number(Object.keys(item)[0])
-      const headingYear = currentYear + (age - Math.round(Number(userAge)))
+      const headingYear =
+        currentYear + (Math.trunc(age) - Math.trunc(Number(userAge)))
       let key
       if (age == 0) {
         key = currentYear
@@ -149,7 +151,7 @@ const ResultsPage: React.VFC<{
         if (item) {
           const age = Number(Object.keys(item)[0])
           const headingYear =
-            currentYear + (age - Math.round(Number(partnerAge)))
+            currentYear + (Math.trunc(age) - Math.trunc(Number(partnerAge)))
           let key
           if (age == 0) {
             key = currentYear
@@ -192,7 +194,9 @@ const ResultsPage: React.VFC<{
           <Intro
             hasPartner={isPartnered}
             userAge={Number(userAge)}
-            estimateLength={userArrNew.length}
+            estimateLength={
+              userArrNew.filter((element) => element !== null).length
+            }
             hasMultipleOasGis={multipleOAS_GIS}
           />
           {/* Summary Estimates section */}
@@ -214,6 +218,7 @@ const ResultsPage: React.VFC<{
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
+          <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
           <BenefitCards
             inputAge={Math.floor(
               Number(inputs.find((input) => input.key === 'age').value)
@@ -221,6 +226,10 @@ const ResultsPage: React.VFC<{
             results={resultsArray}
             futureClientResults={futureClientResults}
             partnerResults={partnerResultsArray}
+            liveInCanada={
+              inputs.find((input) => input.key === 'livingCountry').value ===
+              LivingCountry.CANADA
+            }
           />
 
           <Button

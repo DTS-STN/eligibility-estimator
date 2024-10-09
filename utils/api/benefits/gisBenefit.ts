@@ -280,6 +280,14 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
+    if (this.input.everLivedSocialCountry) {
+      cardCollapsedText.push(
+        this.partner
+          ? this.translations.detailWithHeading.socialSecurityEligiblePartner
+          : this.translations.detailWithHeading.socialSecurityEligible
+      )
+    }
+
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT
@@ -290,7 +298,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       let text = ''
       let heading
 
-      if (this.oasResult.eligibility.result === ResultKey.ELIGIBLE) {
+      if (
+        this.oasResult.eligibility.result === ResultKey.ELIGIBLE ||
+        this.oasResult.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
+      ) {
         if (this.oasResult.cardDetail.meta.receiveOAS == false) {
           heading = this.translations.detail.yourDeferralOptions
           if (this.oasResult.entitlement.result > 0) {
@@ -307,9 +318,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             }
 
             if (text !== '') {
-              if (this.entitlement.result === 0) {
-                text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
-              } else {
+              if (this.entitlement.result !== 0) {
                 text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
               }
 

@@ -299,6 +299,14 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
+    if (this.input.everLivedSocialCountry) {
+      cardCollapsedText.push(
+        this.partner
+          ? this.translations.detailWithHeading.socialSecurityEligiblePartner
+          : this.translations.detailWithHeading.socialSecurityEligible
+      )
+    }
+
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
       this.eligibility.result !== ResultKey.INCOME_DEPENDENT

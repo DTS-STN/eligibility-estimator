@@ -161,7 +161,10 @@ export interface Translations {
       spouseReceives: string
       yourPartnerCanApply: string
     }
-    alws: {}
+    alws: {
+      forWidowedIndividuals: string
+      haveNotRemarried: string
+    }
   }
   detailWithHeading: {
     ifYouDeferYourPension: { heading: string; text: string }
@@ -181,10 +184,11 @@ export interface Translations {
     nonResidentTaxPartner: { heading: string; text: string }
     nonResidentTaxBoth: { heading: string; text: string }
     yourDeferralOptions: { heading: string; text: string }
-    deferWaitMonths: { heading: string; text: string }
     deferralDelay: { heading: string; text: string }
     retroactivePayment: { heading: string; text: string }
     mayBecomeEligible: { heading: string; text: string }
+    socialSecurityEligible: { heading: string; text: string }
+    socialSecurityEligiblePartner: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }

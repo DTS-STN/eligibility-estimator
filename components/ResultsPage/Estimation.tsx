@@ -18,6 +18,7 @@ export const Estimation: React.VFC<{
 }> = ({ partner, resultObject, resultArray, age, maritalStatus }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
+  const roundedAge = Math.trunc(Number(age))
   age = Math.round(age)
 
   const language = useRouter().locale as Language
@@ -62,7 +63,7 @@ export const Estimation: React.VFC<{
     for (let i = 0; i < benefitResultArray.length; i++) {
       const obj = benefitResultArray[i]
       if (
-        Object.keys(obj[Object.keys(obj)[0]]).includes('oas') &&
+        Object.keys(obj[Object.keys(obj)[0]]).includes('oas') ||
         Object.keys(obj[Object.keys(obj)[0]]).includes('gis')
       ) {
         // Check if it's the same object
@@ -81,7 +82,7 @@ export const Estimation: React.VFC<{
     for (let i = benefitResultArray.length - 1; i >= 0; i--) {
       const obj = benefitResultArray[i]
       if (
-        Object.keys(obj[Object.keys(obj)[0]]).includes('oas') &&
+        Object.keys(obj[Object.keys(obj)[0]]).includes('oas') ||
         Object.keys(obj[Object.keys(obj)[0]]).includes('gis')
       ) {
         // Check if it's the same object
@@ -109,10 +110,10 @@ export const Estimation: React.VFC<{
 
     const eligibleAmt = numberToStringCurrency(eligibleTotalAmount, language)
 
-    const arrayofben = benefitResultArray
+    const arrayOfBen = benefitResultArray
 
     //ALW & ALWS
-    if (!benefitType.includes('oas') || !benefitType.includes('gis')) {
+    if (benefitType.includes('alw') || benefitType.includes('alws')) {
       //CURRENT ELIGIBLE
       if (benefitAge == '0') {
         text = `${apiTrans.detail.youCouldReceiveUntil} ${age}${
@@ -145,7 +146,7 @@ export const Estimation: React.VFC<{
           //FIRST NOT LAST
           else {
             const nextBenefitResult =
-              arrayofben[arrayofben.indexOf(resultObject) + 1]
+              arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
@@ -187,7 +188,7 @@ export const Estimation: React.VFC<{
           //NOT LAST
           else {
             const nextBenefitResult =
-              arrayofben[arrayofben.indexOf(resultObject) + 1]
+              arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
@@ -221,7 +222,7 @@ export const Estimation: React.VFC<{
       //NOT FIRST
       else {
         const previousBenefitResult =
-          arrayofben[arrayofben.indexOf(resultObject) - 1]
+          arrayOfBen[arrayOfBen.indexOf(resultObject) - 1]
 
         const previousBenefitTotal =
           previousBenefitResult[Object.keys(previousBenefitResult)[0]]['oas']
@@ -249,7 +250,7 @@ export const Estimation: React.VFC<{
             } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
           } else {
             const nextBenefitResult =
-              arrayofben[arrayofben.indexOf(resultObject) + 1]
+              arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
@@ -277,7 +278,7 @@ export const Estimation: React.VFC<{
       }
     }
 
-    return text
+    return text.charAt(0).toUpperCase() + text.slice(1)
   }
 
   return (
