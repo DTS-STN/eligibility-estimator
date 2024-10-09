@@ -36,6 +36,7 @@ const en: Translations = {
     [ResultKey.MORE_INFO]: 'Need more information...',
     [ResultKey.INVALID]: 'Request is invalid!',
     [ResultKey.INCOME_DEPENDENT]: 'Missing income',
+    [ResultKey.ALMOST_ELIGIBLE]: 'Almost eligible',
   },
   question: {
     [FieldKey.INCOME_AVAILABLE]:
@@ -346,13 +347,23 @@ const en: Translations = {
     eligiblePartialOas:
       "You're likely eligible to a partial Old Age Security pension.",
     yourDeferralOptions: 'Your deferral options',
+    deferralEligible:
+      "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
+    deferralNoGis:
+      'You won’t be able to receive the Guaranteed Income Supplement if you don’t receive the pension.',
+    deferralWillBeEligible:
+      'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    deferralYearsInCanada:
+      "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
     retroactivePay: 'Retroactive payment',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
-      "You can start receiving your payments at {EARLIEST_ELIGIBLE_AGE} or wait until you're 70.",
+      'If you’re automatically enroled, you’ll start receiving payments the month after you turn 65 unless you request a deferral.',
     youCanAply:
-      'You can apply 11 months before the date you want your payments to start.',
+      "If you're not enroled, you can apply up to 11 months before you want your payments to start. ",
+    onceEnrolled:
+      "Once you’re enroled, your payment amount will be reviewed each year based on your income tax return. You'll automatically be paid if your income qualifies.",
     delayMonths:
       'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
     eligibleWhen60ApplyNow:
@@ -401,12 +412,13 @@ const en: Translations = {
     alwEligibleIncomeTooHigh:
       "You're likely eligible for this benefit, but you and your partner’s combined income is too high to receive a monthly payment at this time.",
     alwIfYouApply:
-      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your combined income is less than ",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your couple's income is less than&nbsp;",
     alwsIfYouApply:
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than ",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
-    alwsApply: 'You can apply for this benefit 1 month after you turn 59. ',
+    alwsApply:
+      'You can apply 6 to 11 months before you become eligible at 6X. ',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -426,6 +438,23 @@ const en: Translations = {
       "Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     oasClawbackNotInCanada:
       'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
+    firstYearEligible: '{FIRST_ELIGIBLE_YEAR}',
+    lastYearEligible: ' onwards',
+    currentEligible: 'At this time',
+    you: 'you',
+    yourPartner: 'your partner',
+    youCouldReceive: 'could receive',
+    youCouldReceiveTo: 'to',
+    youCouldReceivePerMonth: 'per month:',
+    youCouldReceiveUntil: 'Until age',
+    youCouldReceiveFrom: 'From age ',
+    youCouldStartReceivingAt: 'At ',
+    youCouldContinueReceiving: 'could continue receiving',
+    youCouldStartReceiving: 'could start receiving',
+    yourEstimateIsStill: 'Your estimate is still',
+    yourEstimateIsStillPartner: `Your partner's estimate is still`,
+    thisEstimateIsBased:
+      'This estimate is based on {YEARS_OF_RESIDENCY} years of residence in Canada.',
     oas: {
       eligibleIfIncomeIsLessThan:
         "You're likely eligible for this benefit if your income is less than {INCOME_LESS_THAN}. If your income is over {OAS_RECOVERY_TAX_CUTOFF}, you may have to pay {LINK_RECOVERY_TAX}.",
@@ -436,17 +465,17 @@ const en: Translations = {
       futureEligibleIncomeTooHigh:
         'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
-        'If you apply, Service Canada will review your payment amount each year based on your income tax return.',
+        'If you apply, your payement will be reviewed each year based on your income tax return.',
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'You should receive a letter about your enrolment status the month after you turn 64.',
+        'Your enrolement status should be confirmed by mail the month after you turn 64.',
       youShouldReceiveLetter:
-        'You should receive a letter about your enrolment status the month after you turn 64.',
+        'Your enrolement status should be confirmed by mail the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
-        "If you didn't, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
+        "If you didn't receive a letter, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       applyOnline: "If you didn't, you can apply online.",
       over70:
         "If you're over the age of 70 and are not receiving an Old Age Security pension, apply now.",
@@ -460,6 +489,8 @@ const en: Translations = {
         'You may be able to receive payment for up to the last 11 months.',
     },
     gis: {
+      youCanApplyGis:
+        'You can apply for the Guaranteed Income Supplement when you apply for the Old Age Security pension.',
       eligibleDependingOnIncomeNoEntitlement:
         'You could likely receive this benefit if {INCOME_SINGLE_OR_COMBINED} is less than {INCOME_LESS_THAN}. Provide {YOUR_OR_COMPLETE} to get a monthly payment estimate.',
       incomeTooHigh:
@@ -468,11 +499,25 @@ const en: Translations = {
         'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. If your income stays the same, you may not receive a monthly payment.',
       ifYouApply:
         "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.",
-      canApplyOnline: 'You can apply for this benefit online.',
+      canApplyOnline: 'You can apply for this benefit.',
       ifYouAlreadyApplied:
         'If you already applied for the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
       ifYouAlreadyReceive:
         'If you already receive the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
+    },
+    alw: {
+      forIndividuals: 'This benefit is for individuals:',
+      age60to64: 'aged 60 to 64',
+      livingInCanada: 'living in Canada',
+      spouseReceives:
+        'whose spouse or common-law partner receives the Guaranteed Income Supplement',
+      yourPartnerCanApply:
+        'Your partner can apply 6 to 11 months before they become eligible at 65',
+    },
+    alws: {
+      forWidowedIndividuals: 'This benefit is for widowed individuals:',
+      haveNotRemarried:
+        'who have not remarried or started a new common-law relationship',
     },
   },
   detailWithHeading: {
@@ -516,6 +561,54 @@ const en: Translations = {
       heading: 'Your partner may be eligible',
       text: 'You can <a href="/en/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
+    recoveryTax: {
+      heading: 'Recovery tax will be applied to your pension',
+      text: "Since your income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+    },
+    recoveryTaxPartner: {
+      heading: "Recovery tax will be applied to your partner's pension",
+      text: "Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, they won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+    },
+    recoveryTaxBoth: {
+      heading: 'Recovery tax will be applied to your pensions',
+      text: "Since you and your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+    },
+    nonResidentTax: {
+      heading: 'Taxes will be applied to your pension',
+      text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
+    },
+    nonResidentTaxPartner: {
+      heading: "Taxes will be applied to your partner's income",
+      text: `Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
+    },
+    nonResidentTaxBoth: {
+      heading: 'Taxes will be applied to your pensions',
+      text: `Since you and your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
+    },
+    yourDeferralOptions: {
+      heading: 'Your deferral options',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+    },
+    deferralDelay: {
+      heading: 'Your deferral options',
+      text: 'You can delay your pension for up to {DELAY_MONTHS} more {MONTH_MONTHS}.',
+    },
+    retroactivePayment: {
+      heading: 'Retroactive payment',
+      text: 'You may be able to receive payment for up to the last 11 months.',
+    },
+    mayBecomeEligible: {
+      heading: 'Retroactive payment',
+      text: 'You may be able to receive payment for up to the last 11 months.',
+    },
+    socialSecurityEligible: {
+      heading: 'You may become eligible earlier',
+      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> external-link-alt for more information.",
+    },
+    socialSecurityEligiblePartner: {
+      heading: 'Your partner may become eligible earlier',
+      text: "Your partner may become eligible earlier because they’ve lived in a country with a social security agreement with Canada. This may affect their estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
+    },
   },
   summaryTitle: {
     [SummaryState.MORE_INFO]: 'More information needed',
@@ -541,6 +634,19 @@ const en: Translations = {
     headingAge: 'If you wait until age...',
     futureHeadingAge: 'If you start receiving at age...',
     headingAmount: 'Your monthly payment could be...',
+  },
+  modal: {
+    userHeading: 'Can you receive this benefit?',
+    partnerHeading: 'Can your partner receive this benefit?',
+    userIncomeTooHigh:
+      'You can apply for this benefit, but your income is too high to receive a monthly payment at this time.',
+    partnerIncomeTooHigh:
+      'Your partner can apply for this benefit, but their income is too high to receive a monthly payment at this time.',
+    userCoupleIncomeTooHigh:
+      'You can apply for this benefit, but your couple’s income is too high to receive a monthly payment at this time.',
+    partnerCoupleIncomeTooHigh:
+      'Your partner can apply for this benefit, but your couple’s income is too high to receive a monthly payment at this time.',
+    close: 'Close',
   },
   links,
   incomeSingle: 'your income',
