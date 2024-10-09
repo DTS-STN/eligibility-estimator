@@ -6,6 +6,7 @@ interface ButtonProps {
   style: 'primary' | 'secondary' | 'supertask' | 'danger' | 'link'
   custom?: string
   href?: string
+  imgHref?: string
   text: string
   type?: ButtonType
   locale?: string
@@ -13,17 +14,21 @@ interface ButtonProps {
   disabled?: boolean
   ariaLabel?: string
   attributes?: any
+  alt?: string
 }
 
 type ButtonType = 'submit' | 'reset' | 'button'
 
 const BUTTON_STYLES = {
-  primary: 'text-white bg-[#26374A] hover:bg-[#1C578A] focus:bg-[#0E62C9]',
+  primary:
+    'text-white bg-[#26374A] hover:bg-[#1C578A] focus:bg-[#0E62C9] visited:text-white',
   secondary:
-    'text-[#335075] bg-[#EAEBED] hover:bg-[#CFD1D5] focus:bg-[#CFD1D5]',
-  supertask: 'text-white bg-[#318000] hover:bg-[#1D4D00] focus:bg-[#1D4D00]',
-  danger: 'text-white bg-[#BC3331] hover:bg-[#942826] focus:bg-[#942826]',
-  link: 'text-[#2B4380] hover:text-[#0535D2] focus:text-[#0535D2]n hover:underline focus:underline',
+    'text-[#335075] visited:text-[#335075] bg-[#EAEBED] hover:bg-[#CFD1D5] focus:bg-[#CFD1D5]',
+  supertask:
+    'text-white visited:text-white bg-[#318000] hover:bg-[#1D4D00] focus:bg-[#1D4D00]',
+  danger:
+    'text-white  visited:text-white bg-[#BC3331] hover:bg-[#942826] focus:bg-[#942826]',
+  link: 'text-[#2B4380] visited:text-[#2B4380] hover:text-[#0535D2] focus:text-[#0535D2]n hover:underline focus:underline',
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -31,6 +36,7 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   custom = '',
   href,
+  imgHref,
   text,
   type = 'button',
   locale,
@@ -38,6 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ariaLabel,
   attributes,
+  alt = 'Image alt',
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
@@ -46,7 +53,7 @@ export const Button: React.FC<ButtonProps> = ({
   return href ? (
     <Link href={href} locale={locale}>
       <a className={classes} aria-label={ariaLabel} {...attributes}>
-        {text}
+        {imgHref && <img src={imgHref} alt={alt} className="pr-3" />} {text}
       </a>
     </Link>
   ) : (
@@ -59,6 +66,7 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       {...attributes}
     >
+      {imgHref && <img src={imgHref} alt={alt} className="pr-3" />}
       {text}
     </button>
   )

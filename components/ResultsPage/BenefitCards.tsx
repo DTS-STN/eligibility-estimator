@@ -24,10 +24,16 @@ export const BenefitCards: React.VFC<{
   results: BenefitResult[]
   futureClientResults: any
   partnerResults: BenefitResult[]
-}> = ({ inputAge, results, futureClientResults, partnerResults }) => {
+  liveInCanada?: boolean
+}> = ({
+  inputAge,
+  results,
+  futureClientResults,
+  partnerResults,
+  liveInCanada,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
-
   const receivingOAS: boolean = results[0]?.cardDetail?.meta?.receiveOAS
 
   /**
@@ -109,20 +115,43 @@ export const BenefitCards: React.VFC<{
 
     // get... code below was moved to another file to make it a bit cleaner
     if (benefitKey === BenefitKey.gis) {
-      getGisNextSteps(result, receivingOAS, nextStepText, apiTsln, tsln)
+      getGisNextSteps(
+        result,
+        receivingOAS,
+        liveInCanada,
+        nextStepText,
+        apiTsln,
+        tsln
+      )
     } else if (benefitKey === BenefitKey.oas) {
       getOasNextSteps(
         result,
         inputAge,
         receivingOAS,
+        liveInCanada,
         nextStepText,
         apiTsln,
         tsln
       )
     } else if (benefitKey === BenefitKey.alw) {
-      getAlwNextSteps(result, inputAge, nextStepText, apiTsln, tsln)
+      getAlwNextSteps(
+        result,
+        partnerResults,
+        inputAge,
+        liveInCanada,
+        nextStepText,
+        apiTsln,
+        tsln
+      )
     } else if (benefitKey === BenefitKey.alws) {
-      getAlwsNextSteps(result, inputAge, nextStepText, apiTsln, tsln)
+      getAlwsNextSteps(
+        result,
+        inputAge,
+        liveInCanada,
+        nextStepText,
+        apiTsln,
+        tsln
+      )
     }
 
     nextStepText.nextStepContent = replaceTextVariables(
@@ -164,11 +193,12 @@ export const BenefitCards: React.VFC<{
       result.eligibility.result === ResultKey.ELIGIBLE ||
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
 
-    const eligibleText = eligibility
-      ? future
-        ? apiTsln.result.willBeEligible
-        : apiTsln.result.eligible
-      : apiTsln.result.ineligible
+    const eligibleText =
+      result.benefitKey !== BenefitKey.oas && !liveInCanada
+        ? apiTsln.result.almostEligible
+        : eligibility
+        ? apiTsln.result.eligible
+        : apiTsln.result.ineligible
 
     const nextStepText = getNextStepText(result.benefitKey, result)
 
@@ -181,6 +211,7 @@ export const BenefitCards: React.VFC<{
           benefitName={titleText}
           isEligible={eligibility}
           future={future}
+          liveInCanada={liveInCanada}
           eligibleText={eligibleText}
           nextStepText={nextStepText}
           collapsedDetails={collapsedDetails}
@@ -199,8 +230,8 @@ export const BenefitCards: React.VFC<{
               __html: result.cardDetail.mainText,
             }}
           />
-          <div>{OASdeferralTable}</div>
-          <div>{oasApply(result.benefitKey, result)}</div>
+          {/* <div>{OASdeferralTable}</div> */}
+          {/* <div>{oasApply(result.benefitKey, result)}</div> */}
         </BenefitCard>
       </div>
     )
