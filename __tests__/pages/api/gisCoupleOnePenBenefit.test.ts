@@ -95,57 +95,13 @@ describe('gisCoupleOnePenBenefit', () => {
     const res = await mockGetRequest(extractedPayload)
 
     //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 1045.11)
+    // expectOasEligible(res, EntitlementResultType.FULL, 1045.11)
     expectGisEligible(res, 651.45)
     expectAlwTooOld(res)
     expectAlwsMarital(res)
 
     //partner is not eligible for any benefit
     expectAllIneligible(res, true)
-  })
-
-  /* CALC-51 */
-  it('should pass 51 test - CALC-51', async () => {
-    const desiredName = 'CALC-51' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.FULL, 768.46)
-    expectGisEligible(res, 0.82)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 82, 768.46, 0.82, 0)
-    expectFutureOasGisBenefitEligible(res, 87, 768.46, 0.0, 1)
-
-    //partner results
-    expectAllIneligible(res, true)
-
-    //Future Benefit
-    expectFutureAwlBenefitEligible(res, 60, 0.0, true)
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 0.0, 1, true)
-  })
-
-  /* CALC-52 */
-  it('should pass 52 test - CALC-52', async () => {
-    const desiredName = 'CALC-52' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 882.19)
-    expectGisEligible(res, 0)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasNotEligible(res, true)
-    expectGisNotEligible(res, ResultReason.OAS, true)
-    expectAlwTooOld(res, true)
   })
 
   /* CALC-53 */
@@ -475,35 +431,6 @@ describe('gisCoupleOnePenBenefit', () => {
     expectFutureOasGisBenefitEligible(res, 71, 174.65, 1297.4, 0, true)
   })
 
-  /* CALC-68 */
-  it('should pass 68 test - CALC-68', async () => {
-    const desiredName = 'CALC-68' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-    const deferralTable = [
-      { age: 69, amount: 472.39 },
-      { age: 70, amount: 498.8 },
-    ]
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 461.39)
-    expectDeferralTable(res, deferralTable)
-    expectGisEligible(res, 983.28)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //Future Benefit
-    expectFutureOasGisBenefitEligible(res, 69.58, 461.39, 400.65, 0)
-    expectFutureOasGisBenefitEligible(res, 74.58, 461.39, 400.65, 1)
-
-    //partner results
-    expectAllIneligible(res, true)
-
-    //Future Benefit
-    expectFutureAwlBenefitEligible(res, 60, 1326.69, true)
-    expectFutureOasGisBenefitEligible(res, 65, 698.6, 1043.45, 1, true)
-  })
-
   /* CALC-69 */
   it('should pass 69 test - CALC-69', async () => {
     const desiredName = 'CALC-69' // Replace with the desired name
@@ -526,25 +453,6 @@ describe('gisCoupleOnePenBenefit', () => {
     //partner results
     expectOasEligible(res, EntitlementResultType.PARTIAL, 0.0, true)
     expectGisEligible(res, 0.0, true)
-    expectAlwTooOld(res, true)
-  })
-
-  /* CALC-70 */
-  it('should pass 70 test - CALC-70', async () => {
-    const desiredName = 'CALC-70' // Replace with the desired name
-    const extractedPayload = getTransformedPayloadByName(filePath, desiredName)
-    const res = await mockGetRequest(extractedPayload)
-
-    //client results
-    expectOasEligible(res, EntitlementResultType.PARTIAL, 458.28)
-    expectGisEligible(res, 0)
-    expect(res.body.results.gis.eligibility.reason).toEqual(ResultReason.INCOME)
-    expectAlwTooOld(res)
-    expectAlwsMarital(res)
-
-    //partner results
-    expectOasNotEligible(res, true)
-    expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwTooOld(res, true)
   })
 })

@@ -79,7 +79,8 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
             {tsln.headerWhatToKnow}
           </h2>
-          <p className="xs:mt-4 sm:mt-12">
+          <p className="xs:mt-4 sm:mt-12 mb-4">{tsln.legaCitizenlText}</p>
+          <p className="xs:mt-4 sm:mt-12 mb-4">
             {tsln.estimatorIncludeQuestionText}
           </p>
           <ul
@@ -88,7 +89,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           >
             <li dangerouslySetInnerHTML={{ __html: tsln.ageText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.netIncomeText }} />
-            <li dangerouslySetInnerHTML={{ __html: tsln.legalStatusText }} />
             <li
               dangerouslySetInnerHTML={{ __html: tsln.residenceHistoryText }}
             />
