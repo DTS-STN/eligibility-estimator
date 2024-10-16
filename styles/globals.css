@@ -117,7 +117,7 @@ html {
   }
 
   .steps-title {
-    @apply text-mobile sm:text-xs font-bold font-header-gc text-content pb-2;
+    @apply text-[32.44px] leading-[40px] sm:text-[40.55px] sm:leading-[48px] font-bold font-header-gc text-content pb-2;
     border-bottom: 0.18em solid #af3c43;
     border-image: linear-gradient(to right, #af3c43 71px, transparent 71px);
     border-image-slice: 1;

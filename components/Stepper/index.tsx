@@ -31,7 +31,7 @@ export function Stepper(props: StepperProps) {
           <div className="text-[22px] leading-[33px] text-[#666666] font-header-gc font-normal">
             {props.name}
           </div>
-          <div className="steps-title pb-2">{props.title}</div>
+          <h1 className="steps-title pb-2">{props.title}</h1>
         </h1>
         {props.children}
         <div className="flex justify-between sm:justify-start  pt-14 sm:pt-12">

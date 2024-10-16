@@ -148,6 +148,11 @@ const StepperPage: React.FC = () => {
   }, [ageDate])
 
   useEffect(() => {
+    const focusedElement = document.activeElement
+    if (focusedElement instanceof HTMLButtonElement) {
+      focusedElement.blur()
+    }
+
     if (activeStep === totalSteps) {
       setIsLastStep(true)
     } else {
@@ -253,7 +258,7 @@ const StepperPage: React.FC = () => {
     return (
       <>
         {isPartnered && (
-          <h2 className="text-h2 font-header-gc mb-6 font-bold font-700">
+          <h2 className="text-[32px] leading-[36px] sm:text-h2 font-header-gc mb-6 font-bold font-700">
             {tsln.stepper.yourInfo}
           </h2>
         )}
@@ -298,7 +303,7 @@ const StepperPage: React.FC = () => {
         {isPartnered && (
           <>
             <div className="h-12 sm:h-16"></div>
-            <h2 className="text-h2 font-header-gc mb-6 font-bold font-700">
+            <h2 className="text-[32px] leading-[36px] sm:text-h2 font-header-gc mb-6 font-bold font-700">
               {tsln.stepper.partnerInfo}
             </h2>
           </>
@@ -366,6 +371,7 @@ const StepperPage: React.FC = () => {
       form.visibleFields,
       inputs
     )
+
     if (stepValid) {
       if (isLastStep) {
         submitForm()
@@ -393,7 +399,9 @@ const StepperPage: React.FC = () => {
         previousProps={{
           id: 'previous',
           text: tsln.stepper.previousStep,
-          onClick: () => setActiveStep(Math.max(activeStep - 1, 1)),
+          onClick: () => {
+            setActiveStep(Math.max(activeStep - 1, 1))
+          },
         }}
         nextProps={{
           id: 'next',
