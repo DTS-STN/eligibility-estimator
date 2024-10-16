@@ -71,9 +71,9 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
         />
       </Head>
       <Layout title={tsln.introPageTitle}>
-        <div className="mt-18">
+        <div className="mt-18 sm:w-[65%]">
           <p
-            className="mb-4 sm:w-[65%]"
+            className="mb-4"
             dangerouslySetInnerHTML={{ __html: tsln.homePageP1 }}
           />
           <h2 className="text-xs sm:h2 xs:mt-8 sm:mt-14 mb-2">
@@ -85,7 +85,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           </p>
           <ul
             id="information-list"
-            className="list-disc list-outside ml-5 xs:pr-3 w-full sm:w-3/5"
+            className="list-disc list-outside ml-5 xs:pr-3 w-full"
           >
             <li dangerouslySetInnerHTML={{ __html: tsln.ageText }} />
             <li dangerouslySetInnerHTML={{ __html: tsln.netIncomeText }} />
@@ -96,14 +96,14 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             <li dangerouslySetInnerHTML={{ __html: tsln.partnerText }} />
           </ul>
 
-          <p className="sm:w-3/5 mt-8 sm:mt-8">{tsln.estimatorTimeEstimate}</p>
+          <p className="mt-8 sm:mt-8">{tsln.estimatorTimeEstimate}</p>
 
           <div className="flex justify-start mt-8 sm:mt-12">
             <Button
               text={tsln.startBenefitsEstimator}
               style="primary"
               onClick={(e) => router.push('/questions')}
-              custom=" w-auto justify-center mb-4"
+              custom="w-auto justify-center mb-4"
               attributes={{
                 [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
               }}
@@ -112,7 +112,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
           <h2 className="text-xs sm:h2 mt-8">{tsln.aboutResultText}</h2>
 
-          <div className="w-full mt-4 sm:w-3/5">
+          <div className="w-full mt-4">
             <p>{tsln.inflationInfo}</p>
             <p
               className="summary-link mt-8"
@@ -128,7 +128,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
           <h2 className="text-xs sm:h2 mt-8">{tsln.privacyHeading}</h2>
 
-          <div className="w-full mt-4 sm:w-3/5">
+          <div className="w-full mt-4">
             <p
               className="summary-link"
               dangerouslySetInnerHTML={{ __html: tsln.privacyDefinition }}
