@@ -42,6 +42,18 @@ export enum FieldType {
 
 // the order of fields here will define the order within the application
 export const fieldDefinitions: FieldDefinitions = {
+  [FieldKey.MARITAL_STATUS]: {
+    key: FieldKey.MARITAL_STATUS,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
+    default: undefined,
+  },
+  [FieldKey.INV_SEPARATED]: {
+    key: FieldKey.INV_SEPARATED,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
+    default: undefined,
+  },
   [FieldKey.AGE]: {
     key: FieldKey.AGE,
     category: { key: FieldCategory.AGE },
@@ -58,20 +70,17 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.DURATION,
     default: { key: JSON.stringify({ months: 0, years: 0 }), text: 'TEST' },
   },
-  [FieldKey.OAS_DEFER]: {
-    key: FieldKey.OAS_DEFER,
-    category: { key: FieldCategory.AGE },
-    type: FieldType.RADIO,
+  [FieldKey.PARTNER_AGE]: {
+    key: FieldKey.PARTNER_AGE,
+    relatedKey: FieldKey.AGE,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.DATE,
   },
-  [FieldKey.OAS_AGE]: {
-    key: FieldKey.OAS_AGE,
-    category: { key: FieldCategory.AGE },
-    type: FieldType.NUMBER,
-  },
-  [FieldKey.INCOME_AVAILABLE]: {
-    key: FieldKey.INCOME_AVAILABLE,
-    category: { key: FieldCategory.INCOME },
+  [FieldKey.PARTNER_BENEFIT_STATUS]: {
+    key: FieldKey.PARTNER_BENEFIT_STATUS,
+    category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
+    default: undefined,
   },
   [FieldKey.INCOME]: {
     key: FieldKey.INCOME,
@@ -84,11 +93,17 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.CURRENCY,
     default: '0',
   },
-  [FieldKey.LEGAL_STATUS]: {
-    key: FieldKey.LEGAL_STATUS,
-    category: { key: FieldCategory.LEGAL },
-    type: FieldType.RADIO,
-    default: undefined,
+  [FieldKey.PARTNER_INCOME]: {
+    key: FieldKey.PARTNER_INCOME,
+    relatedKey: FieldKey.INCOME,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.CURRENCY,
+  },
+  [FieldKey.PARTNER_INCOME_WORK]: {
+    key: FieldKey.PARTNER_INCOME_WORK,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.CURRENCY,
+    default: '0',
   },
   [FieldKey.LIVING_COUNTRY]: {
     key: FieldKey.LIVING_COUNTRY,
@@ -118,48 +133,6 @@ export const fieldDefinitions: FieldDefinitions = {
     type: FieldType.RADIO,
     default: undefined,
   },
-  [FieldKey.MARITAL_STATUS]: {
-    key: FieldKey.MARITAL_STATUS,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.RADIO,
-    default: undefined,
-  },
-  [FieldKey.INV_SEPARATED]: {
-    key: FieldKey.INV_SEPARATED,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.RADIO,
-    default: undefined,
-  },
-  [FieldKey.PARTNER_AGE]: {
-    key: FieldKey.PARTNER_AGE,
-    relatedKey: FieldKey.AGE,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.DATE,
-  },
-  [FieldKey.PARTNER_INCOME_AVAILABLE]: {
-    key: FieldKey.PARTNER_INCOME_AVAILABLE,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.RADIO,
-  },
-  [FieldKey.PARTNER_INCOME]: {
-    key: FieldKey.PARTNER_INCOME,
-    relatedKey: FieldKey.INCOME,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.CURRENCY,
-  },
-  [FieldKey.PARTNER_INCOME_WORK]: {
-    key: FieldKey.PARTNER_INCOME_WORK,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.CURRENCY,
-    default: '0',
-  },
-  [FieldKey.PARTNER_LEGAL_STATUS]: {
-    key: FieldKey.PARTNER_LEGAL_STATUS,
-    relatedKey: FieldKey.LEGAL_STATUS,
-    category: { key: FieldCategory.MARITAL },
-    type: FieldType.RADIO,
-    default: undefined,
-  },
   [FieldKey.PARTNER_LIVING_COUNTRY]: {
     key: FieldKey.PARTNER_LIVING_COUNTRY,
     relatedKey: FieldKey.LIVING_COUNTRY,
@@ -180,8 +153,35 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.MARITAL },
     type: FieldType.NUMBER,
   },
-  [FieldKey.PARTNER_BENEFIT_STATUS]: {
-    key: FieldKey.PARTNER_BENEFIT_STATUS,
+  [FieldKey.OAS_DEFER]: {
+    key: FieldKey.OAS_DEFER,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.RADIO,
+  },
+  [FieldKey.OAS_AGE]: {
+    key: FieldKey.OAS_AGE,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.INCOME_AVAILABLE]: {
+    key: FieldKey.INCOME_AVAILABLE,
+    category: { key: FieldCategory.INCOME },
+    type: FieldType.RADIO,
+  },
+  [FieldKey.LEGAL_STATUS]: {
+    key: FieldKey.LEGAL_STATUS,
+    category: { key: FieldCategory.LEGAL },
+    type: FieldType.RADIO,
+    default: undefined,
+  },
+  [FieldKey.PARTNER_INCOME_AVAILABLE]: {
+    key: FieldKey.PARTNER_INCOME_AVAILABLE,
+    category: { key: FieldCategory.MARITAL },
+    type: FieldType.RADIO,
+  },
+  [FieldKey.PARTNER_LEGAL_STATUS]: {
+    key: FieldKey.PARTNER_LEGAL_STATUS,
+    relatedKey: FieldKey.LEGAL_STATUS,
     category: { key: FieldCategory.MARITAL },
     type: FieldType.RADIO,
     default: undefined,

@@ -929,10 +929,7 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     })
 
     expect(res.body.summary.state).toEqual('MORE_INFO')
-    expect(res.body.missingFields).toEqual([
-      'everLivedSocialCountry',
-      'partnerLegalStatus',
-    ])
+    expect(res.body.missingFields).toEqual(['everLivedSocialCountry'])
   })
 
   it('returns "ALW eligible" - married, living in No Agreement, 10 years in Canada', async () => {
@@ -988,6 +985,6 @@ describe('consolidated benefit tests: eligible: 60-64', () => {
     })
 
     expect(res.status).toEqual(400)
-    expect(res.body.missingFields).toEqual(['partnerLegalStatus'])
+    expect(res.body.missingFields).toEqual([])
   })
 })

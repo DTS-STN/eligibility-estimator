@@ -41,8 +41,8 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 
   const localizedIncome =
     locale == Language.EN
-      ? { thousandSeparator: ',', prefix: '$', decimalSeparator: '.' }
-      : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
+      ? { thousandSeparator: ',', decimalSeparator: '.' }
+      : { thousandSeparator: ' ', decimalSeparator: ',' }
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -63,7 +63,15 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   const getFieldValue = () => {
     const regex = /\d+\.\d{1}$/
     if (!fieldValue) return ''
-    return fieldValue + (regex.test(fieldValue as string) ? '0' : '')
+
+    let stringValue = String(fieldValue)
+
+    // Remove trailing decimal if present
+    if (stringValue.endsWith('.')) {
+      stringValue = stringValue.slice(0, -1)
+    }
+
+    return stringValue + (regex.test(stringValue) ? '0' : '')
   }
 
   return (
@@ -78,26 +86,30 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         dynamicContent={dynamicContent}
       />
 
-      <NumberFormat
-        id={`enter-${name}`}
-        name={name}
-        {...localizedIncome}
-        data-testid="currency-input"
-        className={`form-control text-content border-form-border w-44 ${
-          error ? ' !border-danger' : ''
-        }`}
-        value={getFieldValue()}
-        isNumericString={true}
-        placeholder={placeholder}
-        onChange={(e) => handleOnChange(e)}
-        required
-        autoComplete="off"
-        enterKeyHint="done"
-        allowNegative={false}
-        decimalScale={2}
-        onBlur={() => setFieldValue(getFieldValue())}
-        maxLength={locale == Language.EN ? 15 : 16}
-      />
+      <div className="flex items-center space-x-2">
+        {locale === Language.EN && <span className="text-content">$</span>}
+        <NumberFormat
+          id={`enter-${name}`}
+          name={name}
+          {...localizedIncome}
+          data-testid="currency-input"
+          className={`form-control text-content border-form-border w-44 ${
+            error ? ' !border-danger' : ''
+          }`}
+          value={getFieldValue()}
+          isNumericString={true}
+          placeholder={placeholder}
+          onChange={(e) => handleOnChange(e)}
+          required
+          autoComplete="off"
+          enterKeyHint="done"
+          allowNegative={false}
+          decimalScale={2}
+          onBlur={() => setFieldValue(getFieldValue())}
+          maxLength={locale == Language.EN ? 15 : 16}
+        />
+        {locale !== Language.EN && <span className="text-content">$</span>}
+      </div>
 
       {error && (
         <div className="mt-2" role="alert">

@@ -316,9 +316,9 @@ export const partnerUndefined = {
 }
 
 export const partnerNoHelpNeeded = {
-  partnerLivingCountry: undefined,
+  partnerLivingCountry: 'CAN',
   partnerLegalStatus: undefined,
-  partnerLivedOnlyInCanada: undefined,
+  partnerLivedOnlyInCanada: true,
   partnerYearsInCanadaSince18: undefined,
 }
 
