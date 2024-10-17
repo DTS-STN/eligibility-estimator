@@ -30,17 +30,18 @@ module.exports = {
       },
       fontSize: {
         // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76
-        h6: ['19px', '21px'],
-        base: ['20px', '33px'],
-        h5: ['20px', '22px'],
-        h4: ['22px', '24px'],
-        h3: ['24px', '26px'],
-        h2: ['36px', '40px'],
-        xs: ['32px', '36px'],
-        h1: ['38px', '42px'], // requires red <hr /> below
-        mobile: ['34px', '38px'],
-        small: ['14px', '16px'],
-        mobileh5: ['20px', '22px'],
+        'h6': ['19px', '21px'],
+        'base': ['20px', '33px'],
+        'h5': ['20px', '22px'],
+        'h4': ['22px', '24px'],
+        'h3': ['24px', '26px'],
+        'h2': ['36px', '40px'],
+        'xs': ['32px', '36px'],
+        'h1': ['38px', '42px'], // requires red <hr /> below
+        'mobile': ['34px', '38px'],
+        'small': ['14px', '16px'],
+        'mobileh5': ['20px', '22px'],
+        'h5-gc': ['20px', '26px'],
       },
       colors: {
         'multi': {

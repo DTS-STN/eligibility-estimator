@@ -26,7 +26,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
       <label
         htmlFor={fieldId}
         data-testid={`${type}-label`}
-        className=" font-bold block mb-2 mr-2"
+        className="font-bold block mb-2 mr-2"
       >
         <span dangerouslySetInnerHTML={{ __html: label }} />
         &nbsp;
