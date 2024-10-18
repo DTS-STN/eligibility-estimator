@@ -14,8 +14,6 @@ export function getTransformedPayloadByName(
   const data = readExcelData(filePath)
   const rowToTransform = data.find((row) => row['Scenario'] === testName) // Assuming "testName" column is represented by "Column1"
 
-  //console.log('Extracted rowToTransform:', rowToTransform)
-
   if (rowToTransform) {
     const transformedPayload = createTransformedPayload(rowToTransform)
     return transformedPayload
@@ -244,6 +242,8 @@ function transformPartnerBenefitStatusValue(value: string): String {
     return PartnerBenefitStatus.HELP_ME
   } else if (value.toUpperCase() === 'NO') {
     return PartnerBenefitStatus.NONE
+  } else if (value.toUpperCase() === 'N/A') {
+    return PartnerBenefitStatus.HELP_ME
   }
   return undefined
 }

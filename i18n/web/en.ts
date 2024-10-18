@@ -213,9 +213,11 @@ const en: WebTranslations = {
   haveNetIncomeLess: `your net income is less than ${getMaximumIncomeThreshold(
     Language.EN
   )}`,
-  headerWhatToKnow: "What you'll need",
+  headerWhatToKnow: 'Before you begin',
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
+  legaCitizenlText:
+    'To be eligible for Old Age Security benefits, you must be a citizen or legal resident of Canada.',
   estimatorIncludeQuestionText:
     'The estimator will ask you questions about your:',
   ageText: 'age',
@@ -270,6 +272,14 @@ const en: WebTranslations = {
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
     'Use the estimator to see if you meet all eligibility criteria.',
+  stepper: {
+    yourInfo: 'Your information',
+    partnerInfo: `Partner's information`,
+    partnerInfoHelp: `Since you have a partner, we'll also need their information to estimate your benefits.`,
+    previousStep: 'Previous',
+    nextStep: 'Next',
+    getEstimate: 'Estimate my benefits',
+  },
   datePicker: {
     month: 'Month',
     year: 'Year',
@@ -392,6 +402,10 @@ const en: WebTranslations = {
       'This number must be at least 10 at the time you deferred your pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'This number must be at least 20 at the time you deferred your pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'This number must be at least 10 because your partner receives the Old Age Security pension.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'This number must be at least 20 because your partner receives the Old Age Security pension outside Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
