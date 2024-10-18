@@ -184,6 +184,7 @@ export type WebTranslations = {
   stepper: {
     yourInfo: string
     partnerInfo: string
+    partnerInfoHelp: string
     nextStep: string
     previousStep: string
     getEstimate: string

@@ -280,6 +280,7 @@ const fr: WebTranslations = {
   stepper: {
     yourInfo: 'Vos renseignements',
     partnerInfo: 'Renseignements sur votre conjoint',
+    partnerInfoHelp: `Puisque vous avez un partenaire, nous aurons également besoin de ses informations pour estimer vos prestations.`,
     nextStep: 'Suivant',
     previousStep: 'Précédent',
     getEstimate: 'Estimer mes prestations',

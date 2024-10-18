@@ -275,6 +275,7 @@ const en: WebTranslations = {
   stepper: {
     yourInfo: 'Your information',
     partnerInfo: `Partner's information`,
+    partnerInfoHelp: `Since you have a partner, we'll also need their information to estimate your benefits.`,
     previousStep: 'Previous',
     nextStep: 'Next',
     getEstimate: 'Estimate my benefits',
