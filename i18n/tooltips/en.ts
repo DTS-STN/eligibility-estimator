@@ -25,7 +25,7 @@ const en: TooltipTranslations = {
               Your marriage must be legally recognized in the country where it was performed and in Canada. \
             </li> \
             <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Common-Law</span>: \
+              <span style='font-weight: bold;'>Common-law</span>: \
               You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
             </li> \
             <li style='padding-bottom: 8px;'> \

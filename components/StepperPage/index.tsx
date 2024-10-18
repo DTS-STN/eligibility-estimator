@@ -177,6 +177,11 @@ const StepperPage: React.FC = () => {
     let newVal = newValue
     const key: String = field.config.key
 
+    console.log('key', key)
+    console.log('newVal', newVal)
+    // TODO: we should have visibleErrors (in session storage) be based on the visibile fields. Meaning, if a field is not visible, it should not be in visibleErrors
+    // Try to remove the field from visibleErorrs on onChange (or maybe a useEffect that runs when visibleFields changes)
+
     // Required to pass on to the Duration component that needs the exact birth month, not just age as float
     if (key === 'age') {
       newVal = JSON.parse(newValue).value
@@ -244,6 +249,7 @@ const StepperPage: React.FC = () => {
   ])
 
   const getComponentForStep = () => {
+    console.log('function runs')
     const metaDataForFields = getFieldsMetaData(activeStep)
 
     const fields = form.visibleFields.filter((field) =>
