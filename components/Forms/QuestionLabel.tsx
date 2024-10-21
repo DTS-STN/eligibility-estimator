@@ -4,6 +4,7 @@ import { Tooltip } from '../Tooltip/tooltip'
 
 export interface QuestionLabelProps {
   name: string
+  id?: string
   type: string
   label: string
   helpText?: string
@@ -14,6 +15,7 @@ export interface QuestionLabelProps {
 
 export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   name,
+  id,
   type,
   label,
   requiredText,
@@ -24,6 +26,7 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   return (
     <>
       <label
+        id={id}
         htmlFor={fieldId}
         data-testid={`${type}-label`}
         className="font-bold block mb-2 mr-2"

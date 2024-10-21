@@ -49,6 +49,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
     <>
       <QuestionLabel
         name={name}
+        id={name}
         type="select"
         label={field.config.label}
         requiredText={requiredText}
@@ -58,6 +59,10 @@ export const FormSelect: React.VFC<SelectProps> = ({
         <Select
           inputId={`${name}-select`}
           aria-labelledby={name}
+          ariaLiveMessages={{
+            onFocus: (value) =>
+              `You are currently focused on option ${value.label}`,
+          }}
           styles={{
             container: (styles) => ({
               ...styles,

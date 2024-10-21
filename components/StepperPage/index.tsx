@@ -312,7 +312,6 @@ const StepperPage: React.FC = () => {
             <h2 className="text-[32px] leading-[36px] sm:text-h2 font-header-gc mb-6 font-bold font-700">
               {tsln.stepper.partnerInfo}
             </h2>
-            {/* if it's step 2 then display a paragraph */}
             {activeStep === 2 && (
               <p className="mb-8">{tsln.stepper.partnerInfoHelp}</p>
             )}
