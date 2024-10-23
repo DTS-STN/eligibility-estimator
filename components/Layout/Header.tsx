@@ -92,7 +92,9 @@ export function Header({
             <h3 className="sr-only" id="officialSiteNav">
               {headerText.officialSiteNavigation}
             </h3>
-            <a href="https://www.canada.ca">
+            <a
+              href={`https://www.canada.ca/${language === 'en' ? 'fr' : 'en'}`}
+            >
               <Image
                 src={language === 'en' ? '/sig-blk-fr.svg' : '/sig-blk-en.svg'}
                 alt={headerText.logoAltText}

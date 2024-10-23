@@ -59,6 +59,7 @@ export const Radio: React.VFC<InputProps> = ({
                 type="radio"
                 data-testid="radio"
                 id={`${keyforid}-${index}`}
+                aria-invalid={!!error}
                 aria-describedby={`${keyforid}--error`}
                 name={`${keyforid}`}
                 value={val.key}

@@ -249,7 +249,6 @@ const StepperPage: React.FC = () => {
   ])
 
   const getComponentForStep = () => {
-    console.log('function runs')
     const metaDataForFields = getFieldsMetaData(activeStep)
 
     const fields = form.visibleFields.filter((field) =>

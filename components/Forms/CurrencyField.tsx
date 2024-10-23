@@ -87,7 +87,11 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
       />
 
       <div className="flex items-center space-x-2">
-        {locale === Language.EN && <span className="text-content">$</span>}
+        {locale === Language.EN && (
+          <span id={`${name}-currency-symbol`} className="text-content">
+            $
+          </span>
+        )}
         <NumberFormat
           id={`enter-${name}`}
           name={name}
@@ -107,8 +111,16 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           decimalScale={2}
           onBlur={() => setFieldValue(getFieldValue())}
           maxLength={locale == Language.EN ? 15 : 16}
+          aria-label="Enter amount in dollars"
+          aria-describedby={
+            locale === Language.EN ? `${name}-currency-symbol` : undefined
+          }
         />
-        {locale !== Language.EN && <span className="text-content">$</span>}
+        {locale !== Language.EN && (
+          <span id={`${name}-currency-symbol`} className="text-content">
+            $
+          </span>
+        )}
       </div>
 
       {error && (
