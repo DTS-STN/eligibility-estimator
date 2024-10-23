@@ -213,9 +213,11 @@ const en: WebTranslations = {
   haveNetIncomeLess: `your net income is less than ${getMaximumIncomeThreshold(
     Language.EN
   )}`,
-  headerWhatToKnow: "What you'll need",
+  headerWhatToKnow: 'Before you begin',
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
+  legaCitizenlText:
+    'To be eligible for Old Age Security benefits, you must be a citizen or legal resident of Canada.',
   estimatorIncludeQuestionText:
     'The estimator will ask you questions about your:',
   ageText: 'age',
@@ -270,6 +272,14 @@ const en: WebTranslations = {
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
     'Use the estimator to see if you meet all eligibility criteria.',
+  stepper: {
+    yourInfo: 'Your information',
+    partnerInfo: `Partner's information`,
+    partnerInfoHelp: `Since you have a partner, we'll also need their information to estimate your benefits.`,
+    previousStep: 'Previous',
+    nextStep: 'Next',
+    getEstimate: 'Estimate my benefits',
+  },
   datePicker: {
     month: 'Month',
     year: 'Year',
@@ -392,6 +402,10 @@ const en: WebTranslations = {
       'This number must be at least 10 at the time you deferred your pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'This number must be at least 20 at the time you deferred your pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'This number must be at least 10 because your partner receives the Old Age Security pension.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'This number must be at least 20 because your partner receives the Old Age Security pension outside Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -485,7 +499,7 @@ const en: WebTranslations = {
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        If you're expecting a drop in income, you can enter your estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='opens a new tab'>Contact us</a> to report this event. \
+        If you're expecting a drop in income, you can enter your estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='Contact us. Opens a new tab'>Contact us</a> to report this event. \
       </p> \
     </div> \
   ",

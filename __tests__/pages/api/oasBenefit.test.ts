@@ -106,6 +106,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwTooOld(res, true)
   })
+
   /* CALC-06  */
   it('should pass the 06 test - OAS-CALC-06', async () => {
     const desiredName = 'CALC-6' // Replace with the desired name
@@ -245,6 +246,7 @@ it('should pass the second test - OAS-CALC-02', async () => {
     expectGisNotEligible(res, ResultReason.OAS, true)
     expectAlwTooOld(res, true)
   })
+
   /* CALC-15  */
   it('should pass the 15 test - OAS-CALC-15', async () => {
     const desiredName = 'CALC-15' // Replace with the desired name

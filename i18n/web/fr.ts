@@ -217,12 +217,14 @@ const fr: WebTranslations = {
   youMayBeEligible:
     'Vous pourriez recevoir des prestations de la Sécurité de la vieillesse si\xa0:',
   atLeast60: 'vous avez au moins 60 ans',
-  headerWhatToKnow: 'Ce dont vous aurez besoin',
+  headerWhatToKnow: 'Avant de commencer',
   haveNetIncomeLess: `votre revenu net est moins de ${getMaximumIncomeThreshold(
     Language.FR
   )}`,
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
+  legaCitizenlText:
+    'Pour être admissible aux prestations de la Sécurité de la vieillesse, vous devez être citoyen ou résident autorisé du Canada.',
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
   ageText: 'âge;',
@@ -275,6 +277,14 @@ const fr: WebTranslations = {
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  stepper: {
+    yourInfo: 'Vos renseignements',
+    partnerInfo: 'Renseignements sur votre conjoint',
+    partnerInfoHelp: `Puisque vous avez un partenaire, nous aurons également besoin de ses informations pour estimer vos prestations.`,
+    nextStep: 'Suivant',
+    previousStep: 'Précédent',
+    getEstimate: 'Estimer mes prestations',
+  },
   datePicker: {
     month: 'Mois',
     year: 'Année',
@@ -399,6 +409,10 @@ const fr: WebTranslations = {
       'Ce nombre doit être au moins 10 au moment où vous avez reporté votre pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'Ce nombre doit être au moins 20 au moment où vous avez reporté votre pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'Ce nombre doit être au moins 10 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'Ce nombre doit être au moins 20 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -496,7 +510,7 @@ const fr: WebTranslations = {
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
       <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
+        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='Communiquez avec nous. Ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \
   ",
