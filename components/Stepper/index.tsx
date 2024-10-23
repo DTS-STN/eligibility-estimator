@@ -27,12 +27,12 @@ export function Stepper(props: StepperProps) {
   return (
     <div className="pt-3 pb-6 sm:pb-40">
       <div className="px-4">
-        <h1 className="sm:pb-8 pb-4">
+        <div className="sm:pb-8 pb-4">
           <div className="text-[22px] leading-[33px] text-[#666666] font-header-gc font-normal">
             {props.name}
           </div>
           <h1 className="steps-title pb-2">{props.title}</h1>
-        </h1>
+        </div>
         {props.children}
         <div className="flex justify-between sm:justify-start  pt-14 sm:pt-12">
           {props.previousProps && props.activeStep !== 1 && (
