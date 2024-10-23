@@ -23,6 +23,14 @@ export const QuestionLabel: React.FC<QuestionLabelProps> = ({
   fieldId,
   dynamicContent,
 }) => {
+  console.log('name', name)
+  console.log('id', id)
+  console.log('type', type)
+  console.log('label', label)
+  console.log('requiredText', requiredText)
+  console.log('helpText', helpText)
+  console.log('fieldId', fieldId)
+  console.log('dynamicContent', dynamicContent)
   return (
     <>
       <label

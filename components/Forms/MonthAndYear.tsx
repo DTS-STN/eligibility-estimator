@@ -85,19 +85,21 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
   }
 
   return (
-    <fieldset>
-      <legend>
-        <QuestionLabel
-          name={name}
-          type="date"
-          label={label}
-          requiredText={requiredText}
-          helpText={helpText}
-          fieldId={`enter-${name}`}
-        />
-      </legend>
+    <div>
+      <QuestionLabel
+        id={`${name}-label`}
+        name={name}
+        type="date"
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+        fieldId={`enter-${name}`}
+      />
       {dateInput && (
-        <div className="flex flex-row flex-wrap gap-y-4">
+        <div
+          className="flex flex-row flex-wrap gap-y-4"
+          aria-labelledby={`${name}-label`}
+        >
           <div className="flex-auto">
             <DatePicker
               id={`enter-${name}`}
@@ -121,6 +123,6 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
           )}
         </div>
       )}
-    </fieldset>
+    </div>
   )
 }

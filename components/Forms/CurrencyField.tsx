@@ -77,6 +77,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   return (
     <div>
       <QuestionLabel
+        id={`${name}-label`}
         name={name}
         type="currency-input"
         label={label}
@@ -86,7 +87,10 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         dynamicContent={dynamicContent}
       />
 
-      <div className="flex items-center space-x-2">
+      <div
+        className="flex items-center space-x-2"
+        aria-labelledby={`${name}-label`}
+      >
         {locale === Language.EN && (
           <span id={`${name}-currency-symbol`} className="text-content">
             $

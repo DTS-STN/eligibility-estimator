@@ -156,18 +156,20 @@ const Duration: FC<DurationProps> = ({
   }
 
   return (
-    <fieldset>
-      <legend>
-        <QuestionLabel
-          name={name}
-          type="date"
-          label={label}
-          requiredText={requiredText}
-          helpText={helpText}
-          fieldId={`enter-${name}`}
-        />
-      </legend>
-      <div className="datePicker relative flex">
+    <div>
+      <QuestionLabel
+        id={`${name}-label`}
+        name={name}
+        type="date"
+        label={label}
+        requiredText={requiredText}
+        helpText={helpText}
+        fieldId={`enter-${name}`}
+      />
+      <div
+        className="datePicker relative flex"
+        aria-labelledby={`${name}-label`}
+      >
         <div className="flex flex-col">
           <label className="form-date" htmlFor={`${name}-years`}>
             {tsln.duration.years}
@@ -206,7 +208,7 @@ const Duration: FC<DurationProps> = ({
           </select>
         </div>
       </div>
-    </fieldset>
+    </div>
   )
 }
 
