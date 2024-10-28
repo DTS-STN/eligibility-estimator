@@ -42,10 +42,10 @@ export function Header({
     <>
       <nav id={id} role="navigation" aria-label="topNavigation">
         <ul id="TopNavLinks" className="skip-main">
-          <li className="absolute text-center w-full focus-within:z-50 ">
+          <li className="absolute text-center w-full opacity-0 focus-within:opacity-100">
             <a
               id="skipToMain"
-              className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+              className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
               href={topNavProps.skipToMainPath}
               data-cy-button="skip-Content"
               draggable="false"
@@ -53,10 +53,10 @@ export function Header({
               {topNavProps.skipToMain}
             </a>
           </li>
-          <li className="absolute text-center w-full focus-within:z-50 ">
+          <li className="absolute text-center w-full opacity-0 focus-within:opacity-100">
             <a
               id="skipToAboutGov"
-              className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+              className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
               href={topNavProps.skipToAboutPath}
               data-cy-button="skip-About"
               draggable="false"
@@ -64,11 +64,11 @@ export function Header({
               {topNavProps.skipToAbout}
             </a>
           </li>
-          <li className="absolute text-center w-full focus-within:z-50 ">
+          <li className="absolute text-center w-full opacity-0 focus-within:opacity-100">
             {topNavProps.displayAlternateLink ? (
               <a
                 id=""
-                className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+                className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
                 href={topNavProps.switchToBasicPath}
                 rel="alternate"
               >
