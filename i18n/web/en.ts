@@ -444,7 +444,7 @@ const en: WebTranslations = {
     [ValidationErrors.yearsInCanadaNotEnough10]:
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      'You need to have lived in Canada for at least 20&nbsp;years to receive any of the benefits covered by this tool.',
+      'You need to have at least 20&nbsp;years of Canadian residence to receive the Old Age Security pension outside Canada.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:
@@ -454,9 +454,9 @@ const en: WebTranslations = {
     [ValidationErrors.socialCountryUnavailable10]:
       "This tool can't estimate your benefits because you have lived in Canada for less than 10&nbsp;years. To find out if you're eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable20]:
-      "This tool can't estimate your benefits because you have lived in Canada for less than 20&nbsp;years. To find out if you're eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
+      'You need to have at least 20&nbsp;years of Canadian residence to receive the Old Age Security pension outside Canada. Since you lived in a country with a social security agreement with Canada, {LINK_SERVICE_CANADA} to find out if you’re eligible.',
   },
-  unableToProceed: 'Unable to proceed',
+  unableToProceed: 'We can’t estimate your benefits',
   yes: 'Yes',
   no: 'No',
   unavailable: 'unavailable',

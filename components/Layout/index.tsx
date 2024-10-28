@@ -147,7 +147,11 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-
+          {router.pathname !== '/questions' && (
+            <h1 id="applicationTitle" className="h1 my-8">
+              {title}
+            </h1>
+          )}
           <div>
             <div className="my-6">
               <Message

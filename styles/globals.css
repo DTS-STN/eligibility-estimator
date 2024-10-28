@@ -201,6 +201,12 @@ html {
     opacity: 1;
   }
 
+  .alert-box {
+    @apply bg-[#FAEDD1] p-4 mx-auto;
+    border-left: 6px solid #b3800f;
+    padding: 20px 24px 24px 24px;
+  }
+
   /* css reset for number input types*/
   /* Chrome, Safari, Edge, Opera */
   input::-webkit-outer-spin-button,

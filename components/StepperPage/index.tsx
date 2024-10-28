@@ -28,6 +28,7 @@ import {
   getVisisbleErrorsForActiveStep,
 } from './utils'
 import { Stepper } from '../Stepper'
+import Warning from '../Forms/Warning'
 
 interface StepperPageProps {
   setPageTitle: (title: string) => void
@@ -299,12 +300,9 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
                   formError={formError}
                 />
                 {field.error && alertError && (
-                  <div className="mt-6 md:pr-12 msg-container border-warning">
-                    <Message
+                  <div className="mt-6">
+                    <Warning
                       id={field.key}
-                      iconId={field.key}
-                      iconAltText={tsln.warningText}
-                      type={'warning'}
                       heading={tsln.unableToProceed}
                       body={field.error}
                       asHtml
@@ -348,12 +346,9 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
                     formError={formError}
                   />
                   {field.error && alertError && (
-                    <div className="mt-6 md:pr-12 msg-container border-warning">
-                      <Message
+                    <div className="mt-6">
+                      <Warning
                         id={field.key}
-                        iconId={field.key}
-                        iconAltText={tsln.warningText}
-                        type={'warning'}
                         heading={tsln.unableToProceed}
                         body={field.error}
                         asHtml

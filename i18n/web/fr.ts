@@ -455,7 +455,7 @@ const fr: WebTranslations = {
     [ValidationErrors.yearsInCanadaNotEnough10]:
       "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
+      'Vous devez avoir au moins 20 ans de résidence canadienne pour recevoir la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
@@ -465,9 +465,9 @@ const fr: WebTranslations = {
     [ValidationErrors.socialCountryUnavailable10]:
       'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable20]:
-      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 20&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
+      'Vous devez avoir au moins 20&nbsp;ans de résidence canadienne pour recevoir la pension de la Sécurité de la vieillesse à l’extérieur du Canada. Puisque vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, {LINK_SERVICE_CANADA} pour savoir si vous êtes admissible.',
   },
-  unableToProceed: 'Impossible de continuer',
+  unableToProceed: 'Nous ne pouvons pas estimer vos prestations',
   yes: 'Oui',
   no: 'Non',
   unavailable: 'indisponible',
