@@ -201,6 +201,19 @@ export const getIsStepValid = (
   return stepIsValid
 }
 
+export const getStepTitle = (
+  language: string,
+  activeStep: number,
+  totalSteps: number,
+  steps: Object
+) => {
+  const title =
+    language === 'en'
+      ? `Step ${activeStep} of ${totalSteps}: ${steps[activeStep].title}`
+      : `Étape ${activeStep} de ${totalSteps} : ${steps[activeStep].title}`
+  return title
+}
+
 export const keyToStepMap = {
   maritalStatus: 1,
   invSeparated: 1,

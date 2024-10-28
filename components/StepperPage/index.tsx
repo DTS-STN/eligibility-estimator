@@ -24,11 +24,16 @@ import {
   getIsStepValid,
   getStepErrorVisibility,
   getSteps,
+  getStepTitle,
   getVisisbleErrorsForActiveStep,
 } from './utils'
 import { Stepper } from '../Stepper'
 
-const StepperPage: React.FC = () => {
+interface StepperPageProps {
+  setPageTitle: (title: string) => void
+}
+
+const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   const router = useRouter()
   const langx = useRouter().locale as Language
   const language =
@@ -248,6 +253,11 @@ const StepperPage: React.FC = () => {
     ageDate,
   ])
 
+  useEffect(() => {
+    const title = getStepTitle(language, activeStep, totalSteps, steps)
+    setPageTitle(title)
+  }, [activeStep, totalSteps, language, setPageTitle])
+
   const getComponentForStep = () => {
     const metaDataForFields = getFieldsMetaData(activeStep)
 
@@ -399,11 +409,7 @@ const StepperPage: React.FC = () => {
         id="stepper123"
         name={tsln.introPageTitle}
         activeStep={activeStep}
-        title={
-          tsln._language === 'en'
-            ? `Step ${activeStep} of ${totalSteps}: ${steps[activeStep].title}`
-            : `Étape ${activeStep} de ${totalSteps} : ${steps[activeStep].title}`
-        }
+        title={getStepTitle(tsln._language, activeStep, totalSteps, steps)}
         previousProps={{
           id: 'previous',
           text: tsln.stepper.previousStep,
