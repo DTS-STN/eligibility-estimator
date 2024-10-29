@@ -11,6 +11,7 @@ interface HeaderProps {
   topNavProps: {
     skipToMain: string
     skipToMainPath: string
+    skipToFormPath: string
     skipToAbout: string
     skipToAboutPath: string
     switchToBasic: string
@@ -45,7 +46,10 @@ export function Header({
       e.preventDefault()
       let targetId
       if (target === 'main') {
-        targetId = router.pathname === '/' ? 'applicationTitle' : 'mainForm'
+        targetId =
+          router.pathname === '/'
+            ? topNavProps.skipToMainPath
+            : topNavProps.skipToFormPath
       } else {
         targetId = target
       }
