@@ -397,6 +397,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   form.update(inputHelper)
   return (
     <div
+      id="mainForm"
       className="ml-1 sm:w-4/5 md:w-4/6 w-full"
       data-gc-analytics-formname="ESDC|EDSC:CanadaOldAgeSecurityBenefitsEstimator-Form"
     >

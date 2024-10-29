@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Breadcrumb, BreadcrumbItem } from './Breadcrumb'
+import { useRouter } from 'next/router'
 
 interface HeaderProps {
   id: string
@@ -37,34 +38,56 @@ export function Header({
   const language = locale === 'en' ? 'fr' : 'en'
   const languageText = language === 'en' ? 'English' : 'Français'
   const shortLanguageText = language === 'en' ? 'EN' : 'FR'
+  const router = useRouter()
+
+  const handleAutoScroll =
+    (target: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault()
+      let targetId
+      if (target === 'main') {
+        targetId = router.pathname === '/' ? 'applicationTitle' : 'mainForm'
+      } else {
+        targetId = target
+      }
+
+      const targetElement = document.getElementById(targetId)
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' })
+      }
+
+      targetElement.setAttribute('tabindex', '-1')
+      targetElement.focus({ preventScroll: true })
+    }
 
   return (
     <>
       <nav id={id} role="navigation" aria-label="topNavigation">
         <ul id="TopNavLinks" className="skip-main">
-          <li className="absolute text-center w-full opacity-0 focus-within:opacity-100">
+          <li className="absolute inset-0 text-center opacity-0 pointer-events-none focus-within:opacity-100 focus-within:pointer-events-auto">
             <a
               id="skipToMain"
               className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
-              href={topNavProps.skipToMainPath}
+              href="#"
+              onClick={handleAutoScroll('main')}
               data-cy-button="skip-Content"
               draggable="false"
             >
               {topNavProps.skipToMain}
             </a>
           </li>
-          <li className="absolute text-center w-full opacity-0 focus-within:opacity-100">
+          <li className="absolute inset-0 text-center opacity-0 pointer-events-none focus-within:opacity-100 focus-within:pointer-events-auto">
             <a
               id="skipToAboutGov"
               className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
-              href={topNavProps.skipToAboutPath}
+              href="#"
+              onClick={handleAutoScroll('footer')}
               data-cy-button="skip-About"
               draggable="false"
             >
               {topNavProps.skipToAbout}
             </a>
           </li>
-          <li className="absolute text-center w-full opacity-0 focus-within:opacity-100">
+          <li className="absolute inset-0 text-center opacity-0 pointer-events-none focus-within:opacity-100 focus-within:pointer-events-auto">
             {topNavProps.displayAlternateLink ? (
               <a
                 id=""

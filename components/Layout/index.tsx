@@ -49,9 +49,9 @@ export const Layout: React.VFC<{
 
   const topnavProps = {
     skipToMain: tsln.skipToMain,
-    skipToMainPath: '#applicationTitle',
+    skipToMainPath: 'applicationTitle',
     skipToAbout: tsln.skipToAbout,
-    skipToAboutPath: '#footer',
+    skipToAboutPath: 'footer',
     switchToBasic: tsln.switchToBasic,
     switchToBasicPath: '',
     displayAlternateLink: false,
