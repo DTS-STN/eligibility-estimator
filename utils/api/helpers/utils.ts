@@ -272,6 +272,8 @@ export function evaluateOASInput(input, formAge) {
   const age = input.age // 66.42
   const ageJuly2013 = calculate2013Age(age, input.clientBirthDate)
 
+  console.log('ageJuly2013', ageJuly2013)
+
   const yearsInCanada = input.yearsInCanadaSince18
 
   let eliObj = OasEligibility(
@@ -280,6 +282,8 @@ export function evaluateOASInput(input, formAge) {
     input.livedOnlyInCanada,
     input.livingCountry.value
   )
+
+  console.log('eliObj', eliObj) // calculates age of eligibility as well as years of residence at eligibility
 
   let newInput = { ...input }
 
@@ -310,44 +314,18 @@ export function evaluateOASInput(input, formAge) {
       //   If Client age < 65 futureMonths will be converted into years and months discarting any months after 65
       //      Example: client age is 45.6 wants oas as of 65.6 => 240 months However at 65 he only have 234 montsh or 19 yrs and 6 months
       //
-      if (!input.whenToStartOAS) {
-        let futureMonths = input.startDateForOAS * 12 * -1
+      // if (!input.whenToStartOAS) {
+      //   let futureMonths = input.startDateForOAS * 12 * -1
 
-        if (formAge >= 65) {
-          deferralMonths = deferralMonths + futureMonths
-        } else {
-          console.log("before ", eliObj.yearsOfResAtEligibility)
-          eliObj.yearsOfResAtEligibility =
-            eliObj.yearsOfResAtEligibility + Math.floor(65 - formAge)
-          console.log("after  ", eliObj.yearsOfResAtEligibility)
-          deferralMonths = ((65 - formAge) * 12) % 12
-        }
-
-        consoleDev(
-          '### EvaluateOASInput startDateOAS',
-          input.startDateForOAS,
-          'deferral',
-          Math.round((Math.min(70, age) - eliObj.ageOfEligibility) * 12),
-          'startDate',
-          Math.round(futureMonths),
-          'NEW deferral',
-          Math.round(deferralMonths),
-          'age',
-          age,
-          'ageJuly2013',
-          ageJuly2013,
-          'formAge',
-          formAge,
-          'elig Age,Resid',
-          eliObj.ageOfEligibility,
-          eliObj.yearsOfResAtEligibility
-        )
-      }
+      //   if (formAge >= 65) {
+      //     deferralMonths = deferralMonths + futureMonths
+      //   } else {
+      //     eliObj.yearsOfResAtEligibility =
+      //       eliObj.yearsOfResAtEligibility + Math.floor(65 - formAge)
+      //     deferralMonths = ((65 - formAge) * 12) % 12
+      //   }
+      // }
     }
-  }
-
-  if (age === eliObj.ageOfEligibility && age < 70) {
-    justBecameEligible = true
   }
 
   if (age === eliObj.ageOfEligibility && age < 70) {

@@ -120,18 +120,6 @@ export class BenefitHandler {
     if (this.formYearsInCanada === undefined)
       this.formYearsInCanada = this.input.client.yearsInCanadaSince18
 
-    console.log(
-      '### curr resid=',
-      this.input.client.yearsInCanadaSince18,
-      'future',
-      this.future,
-      'form age',
-      this.formAge,
-      'form resid',
-      this.formYearsInCanada,
-      '###'
-    )
-
     // Future handler takes care of cases when partner is not yet eligible by creating "age sets" of future eligible ages
     // If partner was already eligible in the past based on residency, we need to adjust the inputs
     if (!this.future) {
@@ -174,17 +162,6 @@ export class BenefitHandler {
       )
     }
 
-    consoleDev(
-      '>>> benefitHandler',
-      this.input.client.startDateForOAS,
-      'NewResidYrs',
-      this.input.client.yearsInCanadaSince18,
-      'oasDeferDuration',
-      this.input.client.oasDeferDuration,
-      'future',
-      this.future
-    )
-
     // If client selected a when to start OAS date then the client accumulates some extra months of residency
     //  if date to start is greater than 12 months
     //     full yrs are added to the residence
@@ -203,19 +180,6 @@ export class BenefitHandler {
       this.input.client.oasDeferDuration = `{"months":${Math.round(
         futureMonths % 12
       )}, "years": 0}`
-
-      consoleDev(
-        '>>> MAX RESIDENCY startDateforOAS=',
-        this.input.client.startDateForOAS,
-        'months=',
-        futureMonths,
-        'form Resid',
-        this.formYearsInCanada,
-        'NewResidYrs',
-        this.input.client.yearsInCanadaSince18,
-        'oasDeferDuration',
-        this.input.client.oasDeferDuration
-      )
     }
 
     const clientOasNoDeferral = new OasBenefit(
@@ -252,7 +216,7 @@ export class BenefitHandler {
         clientOasNoDeferral.entitlement
     }
 
-    //consoleDev('NO DEFERRAL', clientOasNoDeferral)
+    consoleDev('NO DEFERRAL', clientOasNoDeferral)
     consoleDev(
       'Client OAS amount NO deferral',
       clientOasNoDeferral.entitlement.result
@@ -264,24 +228,12 @@ export class BenefitHandler {
       this.input.client.whenToStartOAS !== undefined &&
       !this.input.client.whenToStartOAS
     ) {
-      console.log('yearsInCanada before', this.input.client.yearsInCanadaSince18)
       this.input.client.yearsInCanadaSince18 = this.formYearsInCanada
-      console.log('yearsInCanada after', this.input.client.yearsInCanadaSince18)
     }
 
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client, this.formAge)
-
-    consoleDev(
-      '>>> MAX DEFERRAL startDateforOAS=',
-      clientOasHelper.newInput.startDateForOAS,
-      'age',
-      clientOasHelper.newInput.age,
-      'ResidYrs',
-      clientOasHelper.newInput.yearsInCanadaSince18,
-      'oasDeferDuration',
-      clientOasHelper.newInput.oasDeferDuration
-    )
+    console.log('clientOasHelper', clientOasHelper)
 
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {
@@ -299,7 +251,7 @@ export class BenefitHandler {
         this.input.client.age
       )
 
-      //consoleDev('WITH DEFERRAL', clientOasWithDeferral)
+      consoleDev('WITH DEFERRAL', clientOasWithDeferral)
       consoleDev(
         'Client OAS amount WITH deferral',
         clientOasWithDeferral.entitlement.result
