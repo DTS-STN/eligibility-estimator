@@ -26,7 +26,7 @@ export interface StepperProps {
 export function Stepper(props: StepperProps) {
   return (
     <div className="pt-3 pb-6 sm:pb-40">
-      <div className="px-4">
+      <div>
         <div className="sm:pb-8 pb-4">
           <div className="text-[22px] leading-[33px] text-[#666666] font-header-gc font-normal">
             {props.name}
