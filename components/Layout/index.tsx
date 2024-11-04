@@ -149,7 +149,7 @@ export const Layout: React.VFC<{
             }}
           />
           {router.pathname !== '/questions' && (
-            <h1 id="applicationTitle" className="h1 my-8">
+            <h1 id="applicationTitle" className="h1 mt-8 mb-2">
               {title}
             </h1>
           )}

@@ -80,7 +80,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             {tsln.headerWhatToKnow}
           </h2>
           <p className="xs:mt-4 sm:mt-12 mb-4">{tsln.legaCitizenlText}</p>
-          <p className="xs:mt-4 sm:mt-12 mb-4">
+          <p className="xs:mt-4 sm:mt-12">
             {tsln.estimatorIncludeQuestionText}
           </p>
           <ul

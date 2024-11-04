@@ -8,6 +8,7 @@ module.exports = {
     borderWidth: {
       DEFAULT: '1px',
       1.5: '1.5px',
+      3: '3px',
     },
     extend: {
       screens: {
