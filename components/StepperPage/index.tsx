@@ -14,7 +14,6 @@ import { FieldConfig } from '../../utils/api/definitions/fields'
 import { FieldsHandler } from '../../utils/api/fieldsHandler'
 import { VisibleFieldsObject } from '../../utils/web/types'
 import FieldFactory from '../FieldFactory'
-import { ContextualAlert as Message } from '../Forms/ContextualAlert'
 import { useTranslation } from '../Hooks'
 import {
   getBirthMonthAndYear,
@@ -88,7 +87,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
 
-  const getFieldsMetaData = (step: number) => {
+  const getFieldsMetaData = (step: number, ageDate: any) => {
     const allStepKeys = [
       ...steps[step].keys,
       ...steps[step].partnerKeys,
@@ -124,7 +123,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   )
 
   const [fieldsMetaData, setFieldsMetaData] = useState(
-    getFieldsMetaData(activeStep)
+    getFieldsMetaData(activeStep, ageDate)
   )
 
   useEffect(() => {
@@ -150,7 +149,9 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }, [])
 
   useEffect(() => {
-    setFieldsMetaData(getFieldsMetaData(activeStep))
+    console.log('AGE DATE CHANGED', ageDate)
+    // setFieldsMetaData(getFieldsMetaData(activeStep))
+    setStepComponents(getComponentForStep())
   }, [ageDate])
 
   useEffect(() => {
@@ -172,17 +173,19 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   useEffect(() => {
     setStepComponents(getComponentForStep())
-    setFieldsMetaData(getFieldsMetaData(activeStep))
+    setFieldsMetaData(getFieldsMetaData(activeStep, ageDate))
   }, [JSON.stringify(visibleFields)])
 
   useEffect(() => {
+    console.log('fieldsMetaData CHANGED', fieldsMetaData)
     setStepComponents(getComponentForStep())
-  }, [fieldsMetaData])
+  }, [JSON.stringify(fieldsMetaData)])
 
   function handleOnChange(field: FormField, newValue: string): void {
     let newVal = newValue
     const key: String = field.config.key
 
+    // everything good up to here, all the input fields are updating the state
     console.log('key', key)
     console.log('newVal', newVal)
     // TODO: we should have visibleErrors (in session storage) be based on the visibile fields. Meaning, if a field is not visible, it should not be in visibleErrors
@@ -191,8 +194,8 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     // Required to pass on to the Duration component that needs the exact birth month, not just age as float
     if (key === 'age') {
       newVal = JSON.parse(newValue).value
-      const ageDate = JSON.parse(newValue).date
-      setAgeDate(ageDate)
+      const newAgeDate = JSON.parse(newValue).date
+      setAgeDate(newAgeDate)
     }
 
     if (key === 'partnerAge') {
@@ -260,7 +263,8 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }, [activeStep, totalSteps, language, setPageTitle])
 
   const getComponentForStep = () => {
-    const metaDataForFields = getFieldsMetaData(activeStep)
+    console.log('get components for step triggered')
+    const metaDataForFields = getFieldsMetaData(activeStep, ageDate)
 
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
