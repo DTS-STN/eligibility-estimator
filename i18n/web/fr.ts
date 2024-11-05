@@ -419,7 +419,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerBenefitStatusEmpty]:
       'Veuillez indiquer si votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
     [ValidationErrors.onlyInCanadaEmpty]:
-      'Veuillez indiquer si vous seulement vécu àu Canada.',
+      'Veuillez indiquer si vous seulement vécu au Canada.',
     [ValidationErrors.partnerOnlyInCanadaEmpty]:
       'Veuillez indiquer si votre conjoint a seulement vécu au Canada.',
     [ValidationErrors.invSeparatedEmpty]:

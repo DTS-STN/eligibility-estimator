@@ -176,6 +176,24 @@ export const getSteps = (tsln) => {
   }
 }
 
+export const firstInvalidFieldId = (
+  steps,
+  step: number,
+  visibleFields: FormField[]
+) => {
+  const stepKeys = steps[step].keys.concat(steps[step].partnerKeys)
+
+  const stepVisibleKeys = stepKeys.filter(
+    (value) => visibleFields.map((field) => field.key).includes(value) // all keys for a step that are visible
+  )
+
+  const visibleStepFields: FormField[] = visibleFields.filter((field) =>
+    stepVisibleKeys.includes(field.key)
+  )
+
+  return visibleStepFields.find((field) => !field.valid)?.config.key
+}
+
 export const getIsStepValid = (
   steps,
   step: number,
@@ -193,6 +211,7 @@ export const getIsStepValid = (
   const visibleStepFields: FormField[] = visibleFields.filter((field) =>
     stepVisibleKeys.includes(field.key)
   )
+
   const allFieldsNoError: boolean = visibleStepFields.every(
     (field) => field.valid
   )

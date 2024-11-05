@@ -16,6 +16,7 @@ import { VisibleFieldsObject } from '../../utils/web/types'
 import FieldFactory from '../FieldFactory'
 import { useTranslation } from '../Hooks'
 import {
+  firstInvalidFieldId,
   getBirthMonthAndYear,
   getDefaultInputs,
   getDefaultVisibleFields,
@@ -363,10 +364,19 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     const stepKeys = steps[activeStep].keys.concat(
       steps[activeStep].partnerKeys
     )
+
+    const visibleErrorsForActiveStep = getVisisbleErrorsForActiveStep(
+      stepKeys,
+      visibleFields
+    )
+
     setErrorsVisible({
       ...errorsVisible,
-      ...getVisisbleErrorsForActiveStep(stepKeys, visibleFields),
+      ...visibleErrorsForActiveStep,
     })
+
+    console.log('visibleErrorsForActiveStep', visibleErrorsForActiveStep)
+    const firstErrorFieldId = Object.keys(visibleErrorsForActiveStep)[0]
 
     function submitForm() {
       if (form.isValid) {
@@ -381,11 +391,23 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
       inputs
     )
 
+    const firstInvalidStep = firstInvalidFieldId(
+      steps,
+      activeStep,
+      form.visibleFields
+    )
+
     if (stepValid) {
       if (isLastStep) {
         submitForm()
       } else {
         setActiveStep(activeStep + 1)
+      }
+    } else {
+      if (firstInvalidStep) {
+        document
+          .getElementById(firstInvalidStep)
+          ?.scrollIntoView({ behavior: 'smooth' })
       }
     }
   }
