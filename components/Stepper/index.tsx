@@ -28,7 +28,7 @@ export function Stepper(props: StepperProps) {
     <div className="pt-3 pb-6 sm:pb-40">
       <div>
         <div className="sm:pb-8 pb-4">
-          <div className="text-[22px] leading-[33px] text-[#666666] font-header-gc font-normal">
+          <div className="text-[22px] leading-relaxed text-[#666666] font-header-gc font-normal">
             {props.name}
           </div>
           <h1 className="steps-title pb-2">{props.title}</h1>

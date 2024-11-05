@@ -148,7 +148,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
                 />
               </summary>
               <div
-                className="ds-z-1 my-3 pl-6 text-[#515151]"
+                className="ds-z-1 my-3 pl-6 text-multi-neutrals-grey100 leading-relaxed"
                 data-testid="tooltip-text"
                 id={`helpText-shared`}
                 dangerouslySetInnerHTML={{ __html: tsln.usingSharedDeviceInfo }}

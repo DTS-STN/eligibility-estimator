@@ -499,7 +499,7 @@ const fr: WebTranslations = {
     'Comment votre revenu sera-t-il calculé lors de votre demande?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> seront évalués lors de votre demande selon votre dernière déclaration de revenus. \
       </p> \
     </div> \
@@ -508,7 +508,7 @@ const fr: WebTranslations = {
   incomeHintTitleReceiveOAS: 'Votre revenu va bientôt changer?',
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='Communiquez avec nous. Ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \
@@ -519,7 +519,7 @@ const fr: WebTranslations = {
     'Comment son revenu sera-t-il calculé lors de votre demande?',
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Les <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> de votre conjoint seront évalués lors de votre demande selon sa dernière déclaration de revenus. \
       </p> \
     </div> \
@@ -529,7 +529,7 @@ const fr: WebTranslations = {
   partnerIncomeHintTitleReceiveOAS: 'Son revenu va bientôt changer?',
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Si votre conjoint prévoit une baisse de revenu, vous pouvez entrer son revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \

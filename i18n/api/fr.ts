@@ -157,7 +157,7 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "<p class='text-multi-neutrals-grey90a'>Incluez tous les types de revenus après déductions, y compris :</p> <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> <p class='mt-4 text-multi-neutrals-grey90a'>N'incluez pas les paiements :</p> <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:

@@ -68,7 +68,7 @@ const en: TooltipTranslations = {
     heading: apiEn.category.income,
     moreinfo: 'Will this income be used in your application?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             No, this is an estimation. Your actual <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply. \
             </p> \
           </div> \
@@ -78,7 +78,7 @@ const en: TooltipTranslations = {
     heading: apiEn.category.income,
     moreinfo: 'Why are we asking for your work income?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             Your first $15,000 of work-related income is subject to exemptions. We’ll calculate those for you. \
             </p> \
           </div> \
@@ -88,7 +88,7 @@ const en: TooltipTranslations = {
     heading: apiEn.category.income,
     moreinfo: 'Will this income be used in your application?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             No, this is an estimation. Your partner’s actual <a class='hintText' style='text-decoration: underline; display: flex;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply. \
             </p> \
           </div> \
@@ -98,7 +98,7 @@ const en: TooltipTranslations = {
     heading: apiEn.category.marital,
     moreinfo: 'Why are we asking for their work income?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             Their first $15,000 of work-related income is subject to exemptions. We’ll calculate those for you. \
             </p> \
           </div> \
@@ -108,7 +108,7 @@ const en: TooltipTranslations = {
     heading: apiEn.category.residence,
     moreinfo: 'When does residence start counting?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
               Residence begins when you reside and make your home in Canada. \
             </p> \
           </div> \
@@ -118,7 +118,7 @@ const en: TooltipTranslations = {
     heading: apiEn.category.marital,
     moreinfo: 'When does residence start counting?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
               Residence begins when your partner resides and makes their home in Canada. \
             </p> \
           </div> \

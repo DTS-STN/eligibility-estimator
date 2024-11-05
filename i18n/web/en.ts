@@ -488,7 +488,7 @@ const en: WebTranslations = {
   incomeHintTitle: 'How will your income be calculated when you apply?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Your <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply based on your latest income tax return. \
       </p> \
     </div> \
@@ -497,7 +497,7 @@ const en: WebTranslations = {
   incomeHintTitleReceiveOAS: 'Is your income about to change?',
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         If you're expecting a drop in income, you can enter your estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='Contact us. Opens a new tab'>Contact us</a> to report this event. \
       </p> \
     </div> \
@@ -507,7 +507,7 @@ const en: WebTranslations = {
   partnerIncomeHintTitle: 'How will their income be calculated when you apply?',
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Your partner’s <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply based on their latest income tax return. \
       </p> \
     </div> \
@@ -516,7 +516,7 @@ const en: WebTranslations = {
   partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         If your partner is expecting a drop in income, you can enter their estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='opens a new tab'>Contact us</a> to report this event. \
       </p> \
     </div> \
