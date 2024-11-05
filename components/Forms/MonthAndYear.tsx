@@ -63,7 +63,6 @@ export const MonthAndYear: React.VFC<MonthAndYearProps> = ({
 
   const dateOnChange = (e: ChangeEvent<HTMLSelectElement>): void => {
     const fieldId = e.target.id
-    console.log('fieldId', fieldId)
     let fieldToSet = ''
     if (fieldId === `${name}-birth-year`) {
       fieldToSet = 'year'

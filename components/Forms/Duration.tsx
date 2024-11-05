@@ -113,9 +113,6 @@ const Duration: FC<DurationProps> = ({
   }, [])
 
   useEffect(() => {
-    console.log('USE EFFECT TRIGGERED')
-    console.log('age', age)
-    console.log('ageDate', ageDate)
     setSelectOptions(getSelectOptions())
     if (durationInput?.years === maxYears) {
       const maxMonths = getMaxMonths()

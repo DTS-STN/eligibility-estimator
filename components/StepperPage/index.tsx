@@ -87,7 +87,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   const inputHelper = new InputHelper(inputs, setInputs, language)
   const form = new Form(language, inputHelper, visibleFields)
 
-  const getFieldsMetaData = (step: number, ageDate: any) => {
+  const getFieldsMetaData = (step: number) => {
     const allStepKeys = [
       ...steps[step].keys,
       ...steps[step].partnerKeys,
@@ -123,7 +123,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   )
 
   const [fieldsMetaData, setFieldsMetaData] = useState(
-    getFieldsMetaData(activeStep, ageDate)
+    getFieldsMetaData(activeStep)
   )
 
   useEffect(() => {
@@ -149,9 +149,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }, [])
 
   useEffect(() => {
-    console.log('AGE DATE CHANGED', ageDate)
-    // setFieldsMetaData(getFieldsMetaData(activeStep))
-    setStepComponents(getComponentForStep())
+    setFieldsMetaData(getFieldsMetaData(activeStep))
   }, [ageDate])
 
   useEffect(() => {
@@ -173,21 +171,17 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   useEffect(() => {
     setStepComponents(getComponentForStep())
-    setFieldsMetaData(getFieldsMetaData(activeStep, ageDate))
+    setFieldsMetaData(getFieldsMetaData(activeStep))
   }, [JSON.stringify(visibleFields)])
 
   useEffect(() => {
-    console.log('fieldsMetaData CHANGED', fieldsMetaData)
     setStepComponents(getComponentForStep())
-  }, [JSON.stringify(fieldsMetaData)])
+  }, [fieldsMetaData])
 
   function handleOnChange(field: FormField, newValue: string): void {
     let newVal = newValue
     const key: String = field.config.key
 
-    // everything good up to here, all the input fields are updating the state
-    console.log('key', key)
-    console.log('newVal', newVal)
     // TODO: we should have visibleErrors (in session storage) be based on the visibile fields. Meaning, if a field is not visible, it should not be in visibleErrors
     // Try to remove the field from visibleErorrs on onChange (or maybe a useEffect that runs when visibleFields changes)
 
@@ -254,7 +248,6 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     incomeHintText,
     partnerIncomeHintTitle,
     partnerIncomeHintText,
-    ageDate,
   ])
 
   useEffect(() => {
@@ -263,8 +256,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }, [activeStep, totalSteps, language, setPageTitle])
 
   const getComponentForStep = () => {
-    console.log('get components for step triggered')
-    const metaDataForFields = getFieldsMetaData(activeStep, ageDate)
+    const metaDataForFields = getFieldsMetaData(activeStep)
 
     const fields = form.visibleFields.filter((field) =>
       steps[activeStep].keys.includes(field.key)
