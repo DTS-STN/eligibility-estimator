@@ -290,7 +290,7 @@ const en: Translations = {
       // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Yes, my partner receives the Old Age Security pension',
+        text: 'Yes',
         shortText: 'Yes',
       },
       // {
@@ -300,7 +300,7 @@ const en: Translations = {
       // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'No, my partner does not receive the Old Age Security pension',
+        text: 'No',
         shortText: 'No',
       },
       {

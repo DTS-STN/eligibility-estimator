@@ -118,6 +118,9 @@ module.exports = {
         'sans': '"Noto Sans", sans-serif',
         'input-label': '"Noto Sans", font-mono',
       },
+      height: {
+        'stepper-button': '48px',
+      },
       minHeight: {
         9: '36px',
       },

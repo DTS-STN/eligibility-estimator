@@ -300,7 +300,7 @@ const fr: Translations = {
       // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Oui, mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+        text: 'Oui',
         shortText: 'Oui',
       },
       // {
@@ -310,7 +310,7 @@ const fr: Translations = {
       // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
+        text: 'Non',
         shortText: 'Non',
       },
       {

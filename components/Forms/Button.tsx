@@ -18,7 +18,8 @@ interface ButtonProps {
 type ButtonType = 'submit' | 'reset' | 'button'
 
 const BUTTON_STYLES = {
-  primary: 'text-white bg-[#26374A] hover:bg-[#2B4380] focus:bg-[#0535D2]',
+  primary:
+    'text-white bg-[#26374A] hover:bg-[#2B4380] focus:bg-[#0535D2] border-transparent border-[2px]',
   secondary:
     'text-[#2B4380] focus:text-white bg-white hover:bg-[#D7E5F5] focus:bg-[#0535D2] border-[#2B4380] border-[2px]',
   supertask: 'text-white bg-[#318000] hover:bg-[#1D4D00] focus:bg-[#1D4D00]',
@@ -41,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
-  const classes = `${btnStyle} ${custom} flex flex-row focus:ring focus:ring-offset-4 ring-[#0E62C9] py-2 px-4 w-fit font-lato font-[400] text-[20px] leading-[33px] rounded-md`
+  const classes = `${btnStyle} ${custom} h-stepper-button flex flex-row focus:ring focus:ring-offset-4 ring-[#0E62C9] py-2 px-4 w-fit font-[500] text-[20px] leading-[24px] rounded-md`
 
   return href ? (
     <Link href={href} locale={locale}>
