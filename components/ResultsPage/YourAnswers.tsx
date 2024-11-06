@@ -136,7 +136,6 @@ export const YourAnswers: React.VFC<{
         acc[categoryKey] = acc[categoryKey] || []
         acc[categoryKey].push(input)
       }
-      console.log('acc', acc)
       return acc
     }, {})
 

@@ -207,13 +207,15 @@ export class FieldsHandler {
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
       (!this.input.client.livingCountry.canada &&
-        this.input.client.yearsInCanadaSince18 < 20)
+        this.input.client.yearsInCanadaSince18 < 20 &&
+        !this.input.client.receiveOAS)
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
 
     if (
       this.input.client.yearsInCanadaSinceOAS !== undefined &&
+      !this.input.client.receiveOAS &&
       ((this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSinceOAS < 10) ||
         (!this.input.client.livingCountry.canada &&

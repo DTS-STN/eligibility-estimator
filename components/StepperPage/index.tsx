@@ -375,9 +375,6 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
       ...visibleErrorsForActiveStep,
     })
 
-    console.log('visibleErrorsForActiveStep', visibleErrorsForActiveStep)
-    const firstErrorFieldId = Object.keys(visibleErrorsForActiveStep)[0]
-
     function submitForm() {
       if (form.isValid) {
         language === 'en' ? router.push('/results') : router.push('/resultats')
