@@ -415,4 +415,10 @@ html {
   dfn {
     font-style: normal;
   }
+
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 0px;
+  }
 }
