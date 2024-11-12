@@ -324,12 +324,9 @@ export const RequestSchema = Joi.object({
         })
       }
 
-      //TODO FROM HERE
       if (partnerLivingCountry === LivingCountry.CANADA) {
-        // if < 10
         if (partnerYearsInCanadaSinceOAS !== undefined) {
           if (partnerYearsInCanadaSinceOAS < 10) {
-            // under 10 message
             return helpers.message({
               custom: ValidationErrors.partnerResCanadaNotEnough10,
             })
@@ -344,10 +341,8 @@ export const RequestSchema = Joi.object({
           }
         }
       } else {
-        // if < 20
         if (partnerYearsInCanadaSinceOAS !== undefined) {
           if (partnerYearsInCanadaSinceOAS < 20) {
-            // under 20 message
             return helpers.message({
               custom: ValidationErrors.partnerResCanadaNotEnough20,
             })

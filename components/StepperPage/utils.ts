@@ -258,4 +258,5 @@ export const keyToStepMap = {
   partnerLivingCountry: 4,
   partnerLivedOnlyInCanada: 4,
   partnerYearsInCanadaSince18: 4,
+  partnerYearsInCanadaSinceOAS: 4,
 }

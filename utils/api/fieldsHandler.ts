@@ -145,6 +145,7 @@ export class FieldsHandler {
       yearsInCanadaSince18: this.rawInput.partnerLivedOnlyInCanada //assume 40 when live only in Canada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
+      yearsInCanadaSinceOAS: this.rawInput.partnerYearsInCanadaSinceOAS,
       everLivedSocialCountry: false, // required by ProcessedInput
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
