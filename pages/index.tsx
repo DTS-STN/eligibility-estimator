@@ -102,7 +102,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
             <Button
               text={tsln.startBenefitsEstimator}
               style="primary"
-              onClick={(e) => router.push('/questions')}
+              onClick={(e) => {
+                sessionStorage.setItem('step', '1')
+                router.push('/questions')
+              }}
               custom="w-auto justify-center mb-4"
               attributes={{
                 [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.startBenefitsEstimator}`,
