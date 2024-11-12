@@ -166,6 +166,7 @@ export const getSteps = (tsln) => {
         'partnerLivingCountry',
         'partnerLivedOnlyInCanada',
         'partnerYearsInCanadaSince18',
+        'partnerYearsInCanadaSinceOAS',
       ],
       buttonAttributes: {
         [AA_CUSTOMCLICK]: `${AA_BUTTON_CLICK_ATTRIBUTE}:${tsln.getEstimate}`,

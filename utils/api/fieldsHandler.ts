@@ -192,7 +192,7 @@ export class FieldsHandler {
 
     // default value = undefined
     if (this.input.client.livedOnlyInCanada === false) {
-      if (this.input.client.receiveOAS == true) {
+      if (this.input.client.receiveOAS === true) {
         requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_OAS)
       } else {
         requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
@@ -247,7 +247,16 @@ export class FieldsHandler {
 
       // default value = undefined
       if (this.input.partner.livedOnlyInCanada === false) {
-        requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+        if (
+          this.input.client.partnerBenefitStatus.value ===
+          PartnerBenefitStatus.OAS_GIS
+        ) {
+          console.log('INSIDEs')
+          requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS)
+        } else {
+          console.log('INSIDESEEEEEE')
+          requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+        }
       }
 
       /*

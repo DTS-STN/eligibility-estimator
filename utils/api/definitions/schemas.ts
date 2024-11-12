@@ -311,4 +311,58 @@ export const RequestSchema = Joi.object({
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
+  partnerYearsInCanadaSinceOAS: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
+    .custom((value, helpers) => {
+      const { partnerAge, partnerLivingCountry, partnerYearsInCanadaSinceOAS } =
+        helpers.state.ancestors[0]
+
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.partnerYearsSince18Empty,
+        })
+      }
+
+      //TODO FROM HERE
+      if (partnerLivingCountry === LivingCountry.CANADA) {
+        // if < 10
+        if (partnerYearsInCanadaSinceOAS !== undefined) {
+          if (partnerYearsInCanadaSinceOAS < 10) {
+            // under 10 message
+            return helpers.message({
+              custom: ValidationErrors.partnerResCanadaNotEnough10,
+            })
+          } else {
+            if (partnerAge > 0 && partnerYearsInCanadaSinceOAS !== undefined) {
+              if (partnerAge - 18 < partnerYearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: ValidationErrors.partnerYearsSince18Empty,
+                })
+              }
+            }
+          }
+        }
+      } else {
+        // if < 20
+        if (partnerYearsInCanadaSinceOAS !== undefined) {
+          if (partnerYearsInCanadaSinceOAS < 20) {
+            // under 20 message
+            return helpers.message({
+              custom: ValidationErrors.partnerResCanadaNotEnough20,
+            })
+          } else {
+            if (partnerAge > 0 && partnerYearsInCanadaSinceOAS !== undefined) {
+              if (partnerAge - 18 < partnerYearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: ValidationErrors.partnerYearsSince18Empty,
+                })
+              }
+            }
+          }
+        }
+      }
+
+      return value
+    }),
 })
