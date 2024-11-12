@@ -161,7 +161,7 @@ const en: Translations = {
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>).</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.PARTNER_INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
     [FieldKey.OAS_DEFER]:
