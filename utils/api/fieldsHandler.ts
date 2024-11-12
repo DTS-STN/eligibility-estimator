@@ -252,10 +252,8 @@ export class FieldsHandler {
           this.input.client.partnerBenefitStatus.value ===
           PartnerBenefitStatus.OAS_GIS
         ) {
-          console.log('INSIDEs')
           requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS)
         } else {
-          console.log('INSIDESEEEEEE')
           requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
         }
       }

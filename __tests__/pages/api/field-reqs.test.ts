@@ -83,7 +83,7 @@ describe('field requirement analysis', () => {
       partnerYearsInCanadaSince18: 5,
     })
     // expect(res.body.summary.state).toEqual(SummaryState.AVAILABLE_ELIGIBLE)
-    expect(res.body.missingFields).toEqual([])
+    expect(res.body.missingFields).toEqual(['partnerYearsInCanadaSinceOAS'])
     expect(res.body.visibleFields).toEqual([
       FieldKey.MARITAL_STATUS,
       FieldKey.INV_SEPARATED,
@@ -105,7 +105,7 @@ describe('field requirement analysis', () => {
       // FieldKey.PARTNER_LEGAL_STATUS,
       FieldKey.PARTNER_LIVING_COUNTRY,
       FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
-      FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
+      FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS,
       FieldKey.OAS_AGE,
     ])
   })
