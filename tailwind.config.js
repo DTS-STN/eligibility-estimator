@@ -9,7 +9,7 @@ module.exports = {
       DEFAULT: '1px',
       1.5: '1.5px',
       3: '3px',
-      4: '4px',
+      4: '4.34px',
     },
     extend: {
       screens: {
