@@ -74,12 +74,12 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_AGE]: {
     key: FieldKey.PARTNER_AGE,
     relatedKey: FieldKey.AGE,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.AGE },
     type: FieldType.DATE,
   },
   [FieldKey.PARTNER_BENEFIT_STATUS]: {
     key: FieldKey.PARTNER_BENEFIT_STATUS,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.AGE },
     type: FieldType.RADIO,
     default: undefined,
   },
@@ -97,12 +97,12 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_INCOME]: {
     key: FieldKey.PARTNER_INCOME,
     relatedKey: FieldKey.INCOME,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.INCOME },
     type: FieldType.CURRENCY,
   },
   [FieldKey.PARTNER_INCOME_WORK]: {
     key: FieldKey.PARTNER_INCOME_WORK,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.INCOME },
     type: FieldType.CURRENCY,
     default: '0',
   },
@@ -137,27 +137,27 @@ export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PARTNER_LIVING_COUNTRY]: {
     key: FieldKey.PARTNER_LIVING_COUNTRY,
     relatedKey: FieldKey.LIVING_COUNTRY,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.RESIDENCE },
     type: FieldType.DROPDOWN_SEARCHABLE,
     default: { key: 'CAN', text: 'Canada' },
   },
   [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: {
     key: FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
     relatedKey: FieldKey.LIVED_ONLY_IN_CANADA,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.RESIDENCE },
     type: FieldType.RADIO,
     default: undefined,
   },
   [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]: {
     key: FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18,
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_18,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.RESIDENCE },
     type: FieldType.NUMBER,
   },
   [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]: {
     key: FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS,
     relatedKey: FieldKey.YEARS_IN_CANADA_SINCE_OAS,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.RESIDENCE },
     type: FieldType.NUMBER,
   },
   [FieldKey.OAS_DEFER]: {
@@ -183,7 +183,7 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_INCOME_AVAILABLE]: {
     key: FieldKey.PARTNER_INCOME_AVAILABLE,
-    category: { key: FieldCategory.MARITAL },
+    category: { key: FieldCategory.INCOME },
     type: FieldType.RADIO,
   },
   [FieldKey.PARTNER_LEGAL_STATUS]: {
