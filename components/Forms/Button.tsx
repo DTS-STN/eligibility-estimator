@@ -42,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
-  const classes = `${btnStyle} ${custom} whitespace-nowrap h-stepper-button flex flex-row items-center justify-center focus:ring focus:ring-offset-4 ring-[#0E62C9] py-2 px-4 w-fit font-[500] text-[20px] leading-[24px] rounded-md`
+  const classes = `${btnStyle} ${custom} min-h-[48px] flex flex-row items-center justify-center focus:ring focus:ring-offset-4 ring-[#0E62C9] py-2 px-4 w-fit font-[500] text-[20px] leading-[24px] rounded-md`
 
   return href ? (
     <Link href={href} locale={locale}>
