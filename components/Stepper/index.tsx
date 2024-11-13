@@ -34,20 +34,21 @@ export function Stepper(props: StepperProps) {
           <h1 className="steps-title pb-2">{props.title}</h1>
         </div>
         {props.children}
-        <div className="flex justify-between sm:justify-start  pt-14 sm:pt-12">
+        <div className="flex flex-wrap items-center justify-between sm:justify-start gap-4 pt-14 sm:pt-12">
           {props.previousProps && props.activeStep !== 1 && (
-            <div className="mr-9">
+            <div className="mr-9 flex-shrink-0 w-auto">
               <Button
                 id={props.previousProps?.id}
                 text={props.previousProps?.text}
                 style="secondary"
                 data-testid={props.previousProps?.id}
                 onClick={props.previousProps?.onClick}
+                custom="w-auto"
               />
             </div>
           )}
           {props.nextProps && (
-            <div>
+            <div className="flex-shrink-0 w-auto">
               <Button
                 id={props.nextProps?.id}
                 text={props.nextProps?.text}
@@ -55,6 +56,7 @@ export function Stepper(props: StepperProps) {
                 data-testid={props.nextProps?.id}
                 onClick={props.nextProps?.onClick}
                 attributes={props.nextProps?.buttonAttributes}
+                custom="w-auto"
               />
             </div>
           )}
