@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Breadcrumb, BreadcrumbItem } from './Breadcrumb'
+import { useRouter } from 'next/router'
 
 interface HeaderProps {
   id: string
@@ -10,6 +11,7 @@ interface HeaderProps {
   topNavProps: {
     skipToMain: string
     skipToMainPath: string
+    skipToFormPath: string
     skipToAbout: string
     skipToAboutPath: string
     switchToBasic: string
@@ -37,38 +39,63 @@ export function Header({
   const language = locale === 'en' ? 'fr' : 'en'
   const languageText = language === 'en' ? 'English' : 'Français'
   const shortLanguageText = language === 'en' ? 'EN' : 'FR'
+  const router = useRouter()
+
+  const handleAutoScroll =
+    (target: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault()
+      let targetId
+      if (target === 'main') {
+        targetId =
+          router.pathname === '/'
+            ? topNavProps.skipToMainPath
+            : topNavProps.skipToFormPath
+      } else {
+        targetId = target
+      }
+
+      const targetElement = document.getElementById(targetId)
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' })
+      }
+
+      targetElement.setAttribute('tabindex', '-1')
+      targetElement.focus({ preventScroll: true })
+    }
 
   return (
     <>
       <nav id={id} role="navigation" aria-label="topNavigation">
         <ul id="TopNavLinks" className="skip-main">
-          <li className="absolute text-center w-full focus-within:z-50 ">
+          <li className="absolute inset-0 text-center opacity-0 pointer-events-none focus-within:opacity-100 focus-within:pointer-events-auto">
             <a
               id="skipToMain"
-              className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
-              href={topNavProps.skipToMainPath}
+              className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
+              href="#"
+              onClick={handleAutoScroll('main')}
               data-cy-button="skip-Content"
               draggable="false"
             >
               {topNavProps.skipToMain}
             </a>
           </li>
-          <li className="absolute text-center w-full focus-within:z-50 ">
+          <li className="absolute inset-0 text-center opacity-0 pointer-events-none focus-within:opacity-100 focus-within:pointer-events-auto">
             <a
               id="skipToAboutGov"
-              className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
-              href={topNavProps.skipToAboutPath}
+              className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
+              href="#"
+              onClick={handleAutoScroll('footer')}
               data-cy-button="skip-About"
               draggable="false"
             >
               {topNavProps.skipToAbout}
             </a>
           </li>
-          <li className="absolute text-center w-full focus-within:z-50 ">
+          <li className="absolute inset-0 text-center opacity-0 pointer-events-none focus-within:opacity-100 focus-within:pointer-events-auto">
             {topNavProps.displayAlternateLink ? (
               <a
                 id=""
-                className="font-[700] text-[24px] p-1 text-white focus:bg-[#26374A] "
+                className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
                 href={topNavProps.switchToBasicPath}
                 rel="alternate"
               >
@@ -92,7 +119,9 @@ export function Header({
             <h3 className="sr-only" id="officialSiteNav">
               {headerText.officialSiteNavigation}
             </h3>
-            <a href="https://www.canada.ca">
+            <a
+              href={`https://www.canada.ca/${language === 'en' ? 'fr' : 'en'}`}
+            >
               <Image
                 src={language === 'en' ? '/sig-blk-fr.svg' : '/sig-blk-en.svg'}
                 alt={headerText.logoAltText}
@@ -114,7 +143,7 @@ export function Header({
             </Link>
           </div>
         </div>
-        <hr className="absolute left-0 border-b-2 border-[#38414D] w-screen w-full" />
+        <hr className="absolute left-0 border-b-3 border-[#38414D] w-screen w-full" />
         <Breadcrumb items={breadcrumbItems} locale={locale} />
       </header>
     </>

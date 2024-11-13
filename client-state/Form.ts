@@ -5,6 +5,7 @@ import { FieldsHandler } from '../utils/api/fieldsHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
 import {
   FieldConfig,
+  fieldDefinitions,
   FieldKey,
   FieldType,
 } from '../utils/api/definitions/fields'

@@ -42,6 +42,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
   return (
     <>
       <QuestionLabel
+        id={`${name}-label`}
         name={name}
         type="number-input"
         label={label}
@@ -65,6 +66,7 @@ export const NumberField: React.VFC<NumberFieldProps> = ({
         enterKeyHint="done"
         allowNegative={false}
         decimalSeparator={null}
+        aria-labelledby={`${name}-label`}
         aria-describedby={`help-text-enter-${name}`}
         maxLength={15}
       />

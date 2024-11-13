@@ -49,9 +49,10 @@ export const Layout: React.VFC<{
 
   const topnavProps = {
     skipToMain: tsln.skipToMain,
-    skipToMainPath: '#applicationTitle',
+    skipToMainPath: 'applicationTitle',
+    skipToFormPath: 'stepperForm',
     skipToAbout: tsln.skipToAbout,
-    skipToAboutPath: '#footer',
+    skipToAboutPath: 'footer',
     switchToBasic: tsln.switchToBasic,
     switchToBasicPath: '',
     displayAlternateLink: false,
@@ -147,20 +148,27 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          <h1 id="applicationTitle" className="h1 my-8">
-            {title}
-          </h1>
-          <div className="mb-6">
-            <Message
-              id={'wip'}
-              iconId={'testkey'}
-              iconAltText={tsln.infoText}
-              type={'info'}
-              heading={tsln.workInProgress}
-              body={tsln.workInProgressBody}
-              asHtml
-            />
-          </div>
+          {router.pathname !== '/questions' && (
+            <>
+              <h1 id="applicationTitle" className="h1 mt-8 mb-2">
+                {title}
+              </h1>
+              <div>
+                <div className="my-6">
+                  <Message
+                    id={'wip'}
+                    iconId={'testkey'}
+                    iconAltText={tsln.infoText}
+                    type={'info'}
+                    heading={tsln.workInProgress}
+                    body={tsln.workInProgressBody}
+                    asHtml
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
           {children}
         </div>
 

@@ -217,12 +217,14 @@ const fr: WebTranslations = {
   youMayBeEligible:
     'Vous pourriez recevoir des prestations de la Sécurité de la vieillesse si\xa0:',
   atLeast60: 'vous avez au moins 60 ans',
-  headerWhatToKnow: 'Ce dont vous aurez besoin',
+  headerWhatToKnow: 'Avant de commencer',
   haveNetIncomeLess: `votre revenu net est moins de ${getMaximumIncomeThreshold(
     Language.FR
   )}`,
   pleaseNodeText:
     "Veuillez noter qu'il s'agit d'un estimateur et non d'une demande de prestations.",
+  legaCitizenlText:
+    'Pour être admissible aux prestations de la Sécurité de la vieillesse, vous devez être citoyen ou résident autorisé du Canada.',
   estimatorIncludeQuestionText:
     "L'estimateur vous posera des questions au sujet de votre : ",
   ageText: 'âge;',
@@ -275,6 +277,14 @@ const fr: WebTranslations = {
   errorBoxTitle: "L'information n'a pas pu être soumise car ",
   useEstimatorIf:
     'Utilisez l’estimateur pour savoir si vous répondez à tous les critères d’admissibilité.',
+  stepper: {
+    yourInfo: 'Vos renseignements',
+    partnerInfo: 'Renseignements sur votre conjoint',
+    partnerInfoHelp: `Puisque vous avez un partenaire, nous aurons également besoin de ses informations pour estimer vos prestations.`,
+    nextStep: 'Suivant',
+    previousStep: 'Précédent',
+    getEstimate: 'Estimer mes prestations',
+  },
   datePicker: {
     month: 'Mois',
     year: 'Année',
@@ -373,8 +383,7 @@ const fr: WebTranslations = {
   validationErrors: {
     [ValidationErrors.invalidAge]: `Veuillez entrer une année entre 1900 et ${getMaxYear()}.`,
     [ValidationErrors.receiveOASEmpty]:
-      //'Veuillez indiquer si vous recevez la pension de la SV.',
-      'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse',
+      'Veuillez indiquer si vous recevez la pension de la Sécurité de la vieillesse.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       'Veuillez indiquer si vous êtes en mesure de fournir le revenu de votre conjoint.',
     [ValidationErrors.incomeWorkEmpty]:
@@ -399,6 +408,10 @@ const fr: WebTranslations = {
       'Ce nombre doit être au moins 10 au moment où vous avez reporté votre pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'Ce nombre doit être au moins 20 au moment où vous avez reporté votre pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'Ce nombre doit être au moins 10 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'Ce nombre doit être au moins 20 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -406,7 +419,7 @@ const fr: WebTranslations = {
     [ValidationErrors.partnerBenefitStatusEmpty]:
       'Veuillez indiquer si votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
     [ValidationErrors.onlyInCanadaEmpty]:
-      'Veuillez indiquer si vous seulement vécu àu Canada.',
+      'Veuillez indiquer si vous avez seulement vécu au Canada.',
     [ValidationErrors.partnerOnlyInCanadaEmpty]:
       'Veuillez indiquer si votre conjoint a seulement vécu au Canada.',
     [ValidationErrors.invSeparatedEmpty]:
@@ -441,7 +454,7 @@ const fr: WebTranslations = {
     [ValidationErrors.yearsInCanadaNotEnough10]:
       "Votre devez avoir vécu au Canada pendant au moins 10 ans pour recevoir l'une des prestations incluses dans cet outil.",
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      "Votre devez avoir vécu au Canada pendant au moins 20 ans pour recevoir l'une des prestations incluses dans cet outil.",
+      'Vous devez avoir au moins 20 ans de résidence canadienne pour recevoir la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Le nombre d'années de votre partenaire au Canada ne doit pas dépasser son âge moins 18 ans.",
     [ValidationErrors.maritalUnavailable]:
@@ -451,9 +464,9 @@ const fr: WebTranslations = {
     [ValidationErrors.socialCountryUnavailable10]:
       'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 10&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
     [ValidationErrors.socialCountryUnavailable20]:
-      'Cet outil ne peut pas estimer vos prestations parce que vous avez vécu au Canada pendant moins de 20&nbsp;ans. Pour savoir si vous êtes admissible aux prestations de vieillesse, {LINK_SERVICE_CANADA}.',
+      'Vous devez avoir au moins 20&nbsp;ans de résidence canadienne pour recevoir la pension de la Sécurité de la vieillesse à l’extérieur du Canada. Puisque vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada, {LINK_SERVICE_CANADA} pour savoir si vous êtes admissible.',
   },
-  unableToProceed: 'Impossible de continuer',
+  unableToProceed: 'Nous ne pouvons pas estimer vos prestations',
   yes: 'Oui',
   no: 'Non',
   unavailable: 'indisponible',
@@ -486,7 +499,7 @@ const fr: WebTranslations = {
     'Comment votre revenu sera-t-il calculé lors de votre demande?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> seront évalués lors de votre demande selon votre dernière déclaration de revenus. \
       </p> \
     </div> \
@@ -495,8 +508,8 @@ const fr: WebTranslations = {
   incomeHintTitleReceiveOAS: 'Votre revenu va bientôt changer?',
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
+        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='Communiquez avec nous. Ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \
   ",
@@ -506,7 +519,7 @@ const fr: WebTranslations = {
     'Comment son revenu sera-t-il calculé lors de votre demande?',
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Les <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> de votre conjoint seront évalués lors de votre demande selon sa dernière déclaration de revenus. \
       </p> \
     </div> \
@@ -516,7 +529,7 @@ const fr: WebTranslations = {
   partnerIncomeHintTitleReceiveOAS: 'Son revenu va bientôt changer?',
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Si votre conjoint prévoit une baisse de revenu, vous pouvez entrer son revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
       </p> \
     </div> \

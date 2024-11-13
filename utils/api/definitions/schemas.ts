@@ -1,6 +1,5 @@
 import Joi from 'joi'
-import { AGREEMENT_COUNTRIES, ALL_COUNTRY_CODES } from '../helpers/countryUtils'
-import legalValues from '../scrapers/output'
+import { ALL_COUNTRY_CODES } from '../helpers/countryUtils'
 import {
   Language,
   LegalStatus,
@@ -32,7 +31,7 @@ export const getMinBirthYear = () => {
 }
 // Validate if the age is not under 18
 // and the birth year is between 1800 and the current year
-const customAgeValidation = (value, helpers) => {
+const customAgeValidation = (value, helpers, partner = false) => {
   const currentYear = new Date().getFullYear()
   const age = value
   const birthYear = currentYear - age
@@ -40,7 +39,9 @@ const customAgeValidation = (value, helpers) => {
   if (birthYear < 1899 || birthYear > currentYear) {
     return helpers.message(ValidationErrors.invalidAge)
   } else if (age < 18) {
-    return helpers.message(ValidationErrors.ageUnder18)
+    return partner
+      ? helpers.message(ValidationErrors.partnerAgeUnder18)
+      : helpers.message(ValidationErrors.ageUnder18)
   }
 
   return value
@@ -104,6 +105,7 @@ export const RequestSchema = Joi.object({
     .messages({ 'any.required': ValidationErrors.invSeparatedEmpty }),
   livingCountry: Joi.string().valid(...Object.values(ALL_COUNTRY_CODES)),
   legalStatus: Joi.string()
+    .default('yes')
     .required()
     .messages({ 'any.required': ValidationErrors.legalStatusNotSelected })
     .valid(...Object.values(LegalStatus))
@@ -283,11 +285,15 @@ export const RequestSchema = Joi.object({
       'any.required': ValidationErrors.invalidAge,
       'number.base': ValidationErrors.invalidAge,
     })
-    .custom(customAgeValidation, 'Custom Validation'),
+    .custom(
+      (value, helpers) => customAgeValidation(value, helpers, true),
+      'Custom Validation'
+    ),
   partnerLivingCountry: Joi.string()
     .required()
     .valid(...Object.values(ALL_COUNTRY_CODES)),
   partnerLegalStatus: Joi.string()
+    .default('yes')
     .required()
     .messages({
       'any.required': ValidationErrors.partnerLegalStatusNotSelected,
@@ -305,4 +311,53 @@ export const RequestSchema = Joi.object({
   _language: Joi.string()
     .valid(...Object.values(Language))
     .default(Language.EN),
+  partnerYearsInCanadaSinceOAS: Joi.number()
+    .required()
+    .messages({ 'any.required': ValidationErrors.partnerYearsSince18Empty })
+    .custom((value, helpers) => {
+      const { partnerAge, partnerLivingCountry, partnerYearsInCanadaSinceOAS } =
+        helpers.state.ancestors[0]
+
+      if (value === 0) {
+        return helpers.message({
+          custom: ValidationErrors.partnerYearsSince18Empty,
+        })
+      }
+
+      if (partnerLivingCountry === LivingCountry.CANADA) {
+        if (partnerYearsInCanadaSinceOAS !== undefined) {
+          if (partnerYearsInCanadaSinceOAS < 10) {
+            return helpers.message({
+              custom: ValidationErrors.partnerResCanadaNotEnough10,
+            })
+          } else {
+            if (partnerAge > 0 && partnerYearsInCanadaSinceOAS !== undefined) {
+              if (partnerAge - 18 < partnerYearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: ValidationErrors.partnerYearsSince18Empty,
+                })
+              }
+            }
+          }
+        }
+      } else {
+        if (partnerYearsInCanadaSinceOAS !== undefined) {
+          if (partnerYearsInCanadaSinceOAS < 20) {
+            return helpers.message({
+              custom: ValidationErrors.partnerResCanadaNotEnough20,
+            })
+          } else {
+            if (partnerAge > 0 && partnerYearsInCanadaSinceOAS !== undefined) {
+              if (partnerAge - 18 < partnerYearsInCanadaSinceOAS) {
+                return helpers.message({
+                  custom: ValidationErrors.partnerYearsSince18Empty,
+                })
+              }
+            }
+          }
+        }
+      }
+
+      return value
+    }),
 })
