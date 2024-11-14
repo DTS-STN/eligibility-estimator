@@ -4,7 +4,6 @@ import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import StepperPage from '../../components/StepperPage'
 import React from 'react'
 
@@ -12,7 +11,6 @@ const Stepper: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
   const tsln = useTranslation<WebTranslations>()
-  const language = useRouter().locale
   const [pageTitle, setPageTitle] = useState(tsln.questionPageTitle)
 
   useEffect(() => {

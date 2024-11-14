@@ -78,7 +78,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   useEffect(() => {
     setSteps(getSteps(tsln))
     setStepComponents(getComponentForStep())
-  }, [tsln])
+  }, [tsln, language])
 
   const [visibleFields]: [
     VisibleFieldsObject,
@@ -114,6 +114,8 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   const totalSteps = Object.keys(steps).length
   const [activeStep, setActiveStep] = useSessionStorage('step', 1)
   const [isLastStep, setIsLastStep] = useState(false)
+
+  const [stepTitle, setStepTitle] = useState('')
 
   const [errorsVisible, setErrorsVisible]: [
     ErrorsVisibleObject,
@@ -252,9 +254,13 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   ])
 
   useEffect(() => {
-    const title = getStepTitle(language, activeStep, totalSteps, steps)
-    setPageTitle(title)
+    const title = getStepTitle(tsln, language, activeStep, totalSteps, steps)
+    setStepTitle(title)
   }, [activeStep, totalSteps, language, setPageTitle])
+
+  useEffect(() => {
+    setPageTitle(stepTitle)
+  }, [stepTitle])
 
   const getComponentForStep = () => {
     const metaDataForFields = getFieldsMetaData(activeStep)
@@ -420,7 +426,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
         id="stepper123"
         name={tsln.introPageTitle}
         activeStep={activeStep}
-        title={getStepTitle(tsln._language, activeStep, totalSteps, steps)}
+        title={stepTitle}
         previousProps={{
           id: 'previous',
           text: tsln.stepper.previousStep,
