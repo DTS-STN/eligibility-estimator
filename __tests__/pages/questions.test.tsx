@@ -20,8 +20,8 @@ describe('index page', () => {
     useRouter = jest.spyOn(nextRouter, 'useRouter')
     useRouter.mockImplementation(() => ({
       route: '/questions',
-      pathname: '/questions?income=20000',
-      query: { income: '20000' },
+      pathname: '/questions',
+      query: { income: '20000', step: 'marital' },
       asPath: '',
       locale: 'en',
       locales: ['en', 'fr'],
