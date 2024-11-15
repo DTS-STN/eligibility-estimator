@@ -10,8 +10,6 @@ import { MonthsYears } from '../../utils/api/definitions/types'
 import { Accordion } from '../Forms/Accordion'
 import { fieldDefinitions } from '../../utils/api/definitions/fields'
 import { FieldCategory } from '../../utils/api/definitions/enums'
-import { useSessionStorage } from 'react-use'
-import { keyToStepMap } from '../StepperPage/utils'
 import { useRouter } from 'next/router'
 
 type CategorizedInputs = {
@@ -37,7 +35,6 @@ export const YourAnswers: React.VFC<{
     })
     return initialState
   })
-  const [_activeStep, setActiveStep] = useSessionStorage('step')
 
   const toggleAccordion = (category) => {
     setAccordionStates((prevStates) => ({
@@ -61,8 +58,8 @@ export const YourAnswers: React.VFC<{
 
   const handlePageChange = (key: string) => (e) => {
     e.preventDefault()
-    setActiveStep(keyToStepMap[key] || 0)
-    router.push(`/questions#${key}`)
+    const category = fieldDefinitions[key]?.category?.key
+    router.push(`/questions?step=${category}#${key}`)
   }
 
   /**
