@@ -314,7 +314,7 @@ const fr: WebTranslations = {
   },
   resultsPage: {
     header: "Tableau des résultats d'estimation",
-    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie. Des changements dans votre situation pourraient aussi modifier vos résultats`,
+    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie. <p class="mt-4">Vous devez être citoyen ou résident autorisé du Canada pour recevoir ces prestations.</p>`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',

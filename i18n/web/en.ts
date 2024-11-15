@@ -313,7 +313,7 @@ const en: WebTranslations = {
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
+      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. <p class="mt-4">You must be a citizen or legal resident of Canada to receive these benefits.</p>',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
