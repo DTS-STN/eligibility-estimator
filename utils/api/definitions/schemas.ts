@@ -65,15 +65,10 @@ export const RequestSchema = Joi.object({
   //   })
   // )
   // .message(ValidationErrors.incomeTooHigh),
-  incomeWork: Joi.number()
-    .default(0)
-    .required()
-    .messages({ 'any.required': ValidationErrors.incomeWorkEmpty })
-    .precision(2)
-    .min(0)
-    .message(ValidationErrors.incomeBelowZero),
-  //.max(Joi.ref('income'))
-  //.message(ValidationErrors.incomeWorkGreaterThanNetIncome),
+  incomeWork: Joi.alternatives().try(
+    Joi.number().precision(2).min(0).message(ValidationErrors.incomeBelowZero),
+    Joi.string().valid('.').strip()
+  ),
   age: Joi.number()
     .required()
     .messages({
@@ -270,15 +265,10 @@ export const RequestSchema = Joi.object({
   //   })
   // )
   // .message(ValidationErrors.partnerIncomeTooHigh),
-  partnerIncomeWork: Joi.number()
-    .default(0)
-    .required()
-    .messages({ 'any.required': ValidationErrors.partnerIncomeWorkEmpty })
-    .precision(2)
-    .min(0)
-    .message(ValidationErrors.incomeBelowZero),
-  //.max(Joi.ref('partnerIncome'))
-  //.message(ValidationErrors.partnerIncomeWorkGreaterThanNetIncome),
+  partnerIncomeWork: Joi.alternatives().try(
+    Joi.number().precision(2).min(0).message(ValidationErrors.incomeBelowZero),
+    Joi.string().valid('.').strip()
+  ),
   partnerAge: Joi.number()
     .required()
     .messages({

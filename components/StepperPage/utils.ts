@@ -126,7 +126,7 @@ export const getSteps = (tsln) => {
   const AA_FORM_SUBMIT_ACTION = 'submit'
   return {
     1: {
-      title: tsln.category.marital,
+      title: 'marital',
       keys: ['maritalStatus', 'invSeparated'],
       partnerKeys: [],
       buttonAttributes: {
@@ -134,7 +134,7 @@ export const getSteps = (tsln) => {
       },
     },
     2: {
-      title: tsln.category.age,
+      title: 'age',
       keys: ['age', 'receiveOAS', 'oasDeferDuration', 'oasDefer', 'oasAge'],
       partnerKeys: ['partnerAge', 'partnerBenefitStatus'],
       buttonAttributes: {
@@ -142,7 +142,7 @@ export const getSteps = (tsln) => {
       },
     },
     3: {
-      title: tsln.category.income,
+      title: 'income',
       keys: ['incomeAvailable', 'income', 'incomeWork'],
       partnerKeys: [
         'partnerIncomeAvailable',
@@ -154,7 +154,7 @@ export const getSteps = (tsln) => {
       },
     },
     4: {
-      title: tsln.category.residence,
+      title: 'residence',
       keys: [
         'livingCountry',
         'livedOnlyInCanada',
@@ -222,6 +222,7 @@ export const getIsStepValid = (
 }
 
 export const getStepTitle = (
+  tsln: WebTranslations,
   language: string,
   activeStep: number,
   totalSteps: number,
@@ -229,8 +230,12 @@ export const getStepTitle = (
 ) => {
   const title =
     language === 'en'
-      ? `Step ${activeStep} of ${totalSteps}: ${steps[activeStep].title}`
-      : `Étape ${activeStep} de ${totalSteps} : ${steps[activeStep].title}`
+      ? `Step ${activeStep} of ${totalSteps}: ${
+          tsln['category'][steps[activeStep].title]
+        }`
+      : `Étape ${activeStep} de ${totalSteps} : ${
+          tsln['category'][steps[activeStep].title]
+        }`
   return title
 }
 

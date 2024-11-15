@@ -41,7 +41,7 @@ describe('field requirement analysis', () => {
       FieldKey.MARITAL_STATUS,
       FieldKey.AGE,
       FieldKey.INCOME,
-      //FieldKey.INCOME_WORK,
+      FieldKey.INCOME_WORK,
       // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
