@@ -129,6 +129,13 @@ export const Layout: React.VFC<{
       <Head title={title} />
       {/* <TestBanner /> */}
       <main className="mainContent">
+        <div
+          id="topOfPageFocus"
+          tabIndex={-1}
+          style={{ position: 'absolute', top: 0, left: 0, opacity: 0 }}
+        >
+          {/* Hidden focusable element */}
+        </div>
         <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
             id="header"
