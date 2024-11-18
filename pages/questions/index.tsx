@@ -4,6 +4,7 @@ import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import StepperPage from '../../components/StepperPage'
 import React from 'react'
 
