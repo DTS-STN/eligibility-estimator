@@ -34,28 +34,12 @@ interface StepperPageProps {
   setPageTitle: (title: string) => void
 }
 
-const defaultStep = 'marital'
-const formSteps = ['marital', 'age', 'income', 'residence']
-
 const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   const router = useRouter()
   const langx = useRouter().locale as Language
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
   const tsln = useTranslation<WebTranslations>()
-
-  const { step } = router.query
-
-  useEffect(() => {
-    // Redirect to the default step if no step is specified or the step is invalid
-    if (
-      !step ||
-      typeof step !== 'string' ||
-      !Object.values(formSteps).includes(step)
-    ) {
-      router.replace(`/questions?step=${defaultStep}`)
-    }
-  }, [])
 
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
   const [inputs, setInputs]: [
@@ -127,9 +111,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   const [steps, setSteps] = useState(getSteps(tsln))
   const totalSteps = Object.keys(steps).length
-  const [activeStep, setActiveStep] = useState(
-    formSteps.indexOf(step as string) + 1
-  )
+  const [activeStep, setActiveStep] = useSessionStorage('step', 1)
   const [isLastStep, setIsLastStep] = useState(false)
 
   const [stepTitle, setStepTitle] = useState('')
@@ -173,13 +155,9 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }, [ageDate])
 
   useEffect(() => {
-    setActiveStep(formSteps.indexOf(step as string) + 1)
-  }, [step])
-
-  useEffect(() => {
-    const focusedElement = document.activeElement
-    if (focusedElement instanceof HTMLButtonElement) {
-      focusedElement.blur()
+    const topElement = document.getElementById('topOfPageFocus')
+    if (topElement) {
+      topElement.focus()
     }
 
     if (activeStep === totalSteps) {
@@ -425,8 +403,6 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
       if (isLastStep) {
         submitForm()
       } else {
-        const nextStep = formSteps[activeStep]
-        router.push(`/questions?step=${nextStep}`)
         setActiveStep(activeStep + 1)
       }
     } else {
@@ -454,10 +430,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
           id: 'previous',
           text: tsln.stepper.previousStep,
           onClick: () => {
-            if (activeStep > 1) {
-              router.push(`/questions?step=${formSteps[activeStep - 2]}`)
-              setActiveStep(Math.max(activeStep - 1, 1))
-            }
+            setActiveStep(Math.max(activeStep - 1, 1))
           },
         }}
         nextProps={{

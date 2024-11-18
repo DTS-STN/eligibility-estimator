@@ -1,13 +1,11 @@
-import { Error } from './Error'
 import { useRouter } from 'next/router'
-import { useState, InputHTMLAttributes, useEffect } from 'react'
+import { InputHTMLAttributes, useEffect, useState } from 'react'
 import NumberFormat from 'react-number-format'
-import { Language } from '../../utils/api/definitions/enums'
-import { QuestionLabel } from './QuestionLabel'
-import { Tooltip } from '../Tooltip/tooltip'
-import { sanitizeCurrency } from './validation/utils'
-import { set } from 'lodash'
 import { TooltipTranslation } from '../../i18n/tooltips'
+import { Language } from '../../utils/api/definitions/enums'
+import { Error } from './Error'
+import { QuestionLabel } from './QuestionLabel'
+import { sanitizeCurrency } from './validation/utils'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -119,6 +117,12 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           aria-describedby={
             locale === Language.EN ? `${name}-currency-symbol` : undefined
           }
+          isAllowed={(values) => {
+            const { formattedValue } = values
+            return !(
+              formattedValue.startsWith('.') || formattedValue.startsWith(',')
+            )
+          }}
         />
         {locale !== Language.EN && (
           <span id={`${name}-currency-symbol`} className="text-content">
