@@ -279,6 +279,7 @@ const en: WebTranslations = {
     previousStep: 'Previous',
     nextStep: 'Next',
     getEstimate: 'Estimate my benefits',
+    navWarning: `Note: Please navigate using the "Previous" and "Next" buttons. Using your browser's navigation buttons is not recommended.`,
   },
   datePicker: {
     month: 'Month',
