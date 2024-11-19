@@ -65,7 +65,10 @@ export function Stepper(props: StepperProps) {
           )}
         </div>
         {props.activeStep === 1 && (
-          <p className="mt-[24px]">{tsln.stepper.navWarning}</p>
+          <p
+            dangerouslySetInnerHTML={{ __html: tsln.stepper.navWarning }}
+            className="mt-[24px]"
+          ></p>
         )}
       </div>
     </div>
