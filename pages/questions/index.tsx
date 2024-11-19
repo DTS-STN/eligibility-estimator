@@ -8,6 +8,9 @@ import { useRouter } from 'next/router'
 import StepperPage from '../../components/StepperPage'
 import React from 'react'
 
+const defaultStep = 'marital'
+const steps = ['marital', 'age', 'income', 'residence']
+
 const Stepper: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
@@ -22,6 +25,18 @@ const Stepper: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const { step } = router.query
+
+  useEffect(() => {
+    if (!step || typeof step !== 'string' || !steps.includes(step)) {
+      router.replace(`/questions?step=${defaultStep}`)
+    }
+  }, [step, router])
+
+  if (!step || typeof step !== 'string' || !steps.includes(step)) {
+    return null
+  }
 
   return (
     <>

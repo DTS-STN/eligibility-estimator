@@ -103,7 +103,6 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
               text={tsln.startBenefitsEstimator}
               style="primary"
               onClick={(e) => {
-                sessionStorage.setItem('step', '1')
                 router.push('/questions')
               }}
               custom="w-auto justify-center mb-4"

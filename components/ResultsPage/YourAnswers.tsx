@@ -61,7 +61,8 @@ export const YourAnswers: React.VFC<{
 
   const handlePageChange = (key: string) => (e) => {
     e.preventDefault()
-    setActiveStep(keyToStepMap[key] || 0)
+    const category = fieldDefinitions[key]?.category?.key
+    router.push(`/questions?step=${category}#${key}`)
     router.push(`/questions#${key}`)
   }
 
