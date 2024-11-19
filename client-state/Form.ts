@@ -1,16 +1,16 @@
 import Joi from 'joi'
 import { getWebTranslations, WebTranslations } from '../i18n/web'
 import { BenefitHandler } from '../utils/api/benefitHandler'
-import { FieldsHandler } from '../utils/api/fieldsHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
 import {
   FieldConfig,
-  fieldDefinitions,
   FieldKey,
   FieldType,
 } from '../utils/api/definitions/fields'
-import { VisibleFieldsObject } from '../utils/web/types'
+import { ResponseError, ResponseSuccess } from '../utils/api/definitions/types'
+import { FieldsHandler } from '../utils/api/fieldsHandler'
 import MainHandler from '../utils/api/mainHandler'
+import { VisibleFieldsObject } from '../utils/web/types'
 import { FormField } from './FormField'
 import { InputHelper } from './InputHelper'
 
@@ -18,8 +18,8 @@ export class Form {
   public readonly allFieldConfigs: FieldConfig[]
   public readonly fields: FormField[]
 
-  private results: any
-  private localInputs: any
+  private results: ResponseSuccess | ResponseError
+  private localInputs: InputHelper
 
   constructor(
     private readonly language: Language,
