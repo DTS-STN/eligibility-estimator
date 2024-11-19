@@ -37,7 +37,6 @@ export const YourAnswers: React.VFC<{
     })
     return initialState
   })
-  const [_activeStep, setActiveStep] = useSessionStorage('step')
 
   const toggleAccordion = (category) => {
     setAccordionStates((prevStates) => ({
@@ -63,7 +62,6 @@ export const YourAnswers: React.VFC<{
     e.preventDefault()
     const category = fieldDefinitions[key]?.category?.key
     router.push(`/questions?step=${category}#${key}`)
-    router.push(`/questions#${key}`)
   }
 
   /**

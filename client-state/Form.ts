@@ -18,6 +18,9 @@ export class Form {
   public readonly allFieldConfigs: FieldConfig[]
   public readonly fields: FormField[]
 
+  private results: any
+  private localInputs: any
+
   constructor(
     private readonly language: Language,
     inputHelper: InputHelper,
@@ -31,6 +34,9 @@ export class Form {
 
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
+    this.results = data
+    this.localInputs = inputs
+
     this.clearAllErrors()
 
     // set visibility of fields
@@ -83,6 +89,23 @@ export class Form {
         this.getFieldByKey(<FieldKey>errorKey).error =
           allErrorsParsed[errorKey].text
       }
+    }
+  }
+
+  writeToSessionStorage(): void {
+    try {
+      if (this.results && this.localInputs) {
+        sessionStorage.setItem(
+          'calculationResults',
+          JSON.stringify(this.results)
+        )
+        sessionStorage.setItem(
+          'resultPageInputs',
+          JSON.stringify(this.localInputs)
+        )
+      }
+    } catch (error) {
+      console.error('Error writing to sessionStorage:', error)
     }
   }
 

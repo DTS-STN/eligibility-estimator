@@ -40,9 +40,16 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
-  const inputHelper = new InputHelper(inputs, setInputs, language)
-  const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
-  const response: ResponseSuccess | ResponseError = mainHandler.results
+  const response: ResponseSuccess | ResponseError = JSON.parse(
+    sessionStorage.getItem('calculationResults') || '{}'
+  )
+
+  const savedInputs = JSON.parse(
+    sessionStorage.getItem('resultPageInputs') || '{}'
+  )
+
+  const inputHelper = new InputHelper(savedInputs.inputs, setInputs, language)
+
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
@@ -60,7 +67,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       </Head>
 
       <Layout title={tsln.resultPageTitle}>
-        {'results' in response ? (
+        {'results' in response && inputHelper.asArray.length !== 0 ? (
           <ResultsPage
             inputs={inputHelper.asArray}
             results={response.results}
