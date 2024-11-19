@@ -20,6 +20,7 @@ export const YourAnswers: React.VFC<{
   title: string
   inputs: FieldInput[]
 }> = ({ title, inputs }) => {
+  console.log('inputs INSIDE YOUR ANSWERS', inputs)
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   // allFieldData is the full configuration for ALL fields - not only the visible ones.

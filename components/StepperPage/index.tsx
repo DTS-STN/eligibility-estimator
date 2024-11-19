@@ -404,6 +404,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
     function submitForm() {
       if (form.isValid) {
+        form.writeToSessionStorage()
         language === 'en' ? router.push('/results') : router.push('/resultats')
       }
     }

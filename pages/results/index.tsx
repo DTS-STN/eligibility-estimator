@@ -36,13 +36,25 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
 
+  const [calculationResults, setCalculationResults] = useSessionStorage(
+    'calculationResults',
+    {}
+  )
+
   const langx = useRouter().locale as Language
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
-  const inputHelper = new InputHelper(inputs, setInputs, language)
-  const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
-  const response: ResponseSuccess | ResponseError = mainHandler.results
+  // const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
+
+  const response: any = JSON.parse(
+    sessionStorage.getItem('calculationResults') || '{}'
+  )
+  const savedInputs = JSON.parse(
+    sessionStorage.getItem('resultPageInputs') || '{}'
+  )
+
+  const inputHelper = new InputHelper(savedInputs.inputs, setInputs, language)
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
