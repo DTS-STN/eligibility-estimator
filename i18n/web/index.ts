@@ -188,6 +188,7 @@ export type WebTranslations = {
     nextStep: string
     previousStep: string
     getEstimate: string
+    navWarning: string
   }
   //Date Picker
   datePicker: {

@@ -40,7 +40,6 @@ const ResultsPage: React.VFC<{
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
-  const [_activeStep, setActiveStep] = useSessionStorage('step')
 
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
@@ -155,7 +154,6 @@ const ResultsPage: React.VFC<{
             custom="mt-6 justify-center md:w-[fit-content]"
             onClick={(e) => {
               e.preventDefault()
-              setActiveStep(1)
               router.push('/questions')
             }}
           />

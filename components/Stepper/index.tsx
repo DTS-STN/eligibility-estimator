@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // import PropTypes from "prop-types";
 import React from 'react'
+import { WebTranslations } from '../../i18n/web'
 import { Button } from '../Forms/Button'
+import { useTranslation } from '../Hooks'
 
 // Stepper props
 export interface StepperProps {
@@ -24,6 +26,7 @@ export interface StepperProps {
 }
 
 export function Stepper(props: StepperProps) {
+  const tsln = useTranslation<WebTranslations>()
   return (
     <div className="pt-3 pb-6 sm:pb-40">
       <div>
@@ -61,6 +64,9 @@ export function Stepper(props: StepperProps) {
             </div>
           )}
         </div>
+        {props.activeStep === 1 && (
+          <p className="mt-[24px]">{tsln.stepper.navWarning}</p>
+        )}
       </div>
     </div>
   )

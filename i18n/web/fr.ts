@@ -284,6 +284,7 @@ const fr: WebTranslations = {
     nextStep: 'Suivant',
     previousStep: 'Précédent',
     getEstimate: 'Estimer mes prestations',
+    navWarning: `Note: Veuillez naviguer en utilisant les boutons «Précédent» et «Suivant». Il n’est pas recommandé d’utiliser les boutons de votre navigateur.`,
   },
   datePicker: {
     month: 'Mois',
