@@ -92,7 +92,7 @@ export function buildQuery(
   partnerLockResidence
 ) {
   const newQuery = { ...query }
-  const [userAge, partnerAge] = ageSet // 68, 65
+  const [userAge, partnerAge] = ageSet
 
   // CLIENT
   newQuery['age'] = String(userAge)
@@ -156,19 +156,16 @@ export function buildQuery(
     addKeyValue(newQuery, 'partnerBenefitStatus', 'helpMe')
   }
 
-  if (
-    query.partnerLivedOnlyInCanada === 'false' &&
-    query.partnerYearsInCanadaSince18
-  ) {
+  const partnerRes =
+    query.partnerYearsInCanadaSince18 || query.partnerYearsInCanadaSinceOAS
+  if (query.partnerLivedOnlyInCanada === 'false' && partnerRes) {
     const increaseResidence = !partnerAlreadyOasEligible
     // const ageLimit = partnerAge < 65 ? 65 : partnerAge
 
     const partnerNewYrsInCanada =
       query.partnerLivingCountry === 'CAN'
-        ? Number(partnerAge) -
-          Number(query.partnerAge) +
-          Number(query.partnerYearsInCanadaSince18)
-        : query.partnerYearsInCanadaSince18
+        ? Number(partnerAge) - Number(query.partnerAge) + Number(partnerRes)
+        : partnerRes
 
     newQuery['partnerYearsInCanadaSince18'] = String(
       Math.floor(

@@ -93,6 +93,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
             defaultValue={props.month}
             onChange={props.onMonthChange}
             className="inputStyles"
+            aria-invalid={!!props.hasError}
           >
             {monthValues.map((mv, index) => (
               <option value={mv} key={`datePicker-month-option-${index}`}>
@@ -114,6 +115,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
               max={props.maxDay}
               onChange={_onDayChange}
               className="inputStyles"
+              aria-invalid={!!props.hasError}
             />
           </div>
         ) : null}

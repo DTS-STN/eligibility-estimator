@@ -25,7 +25,7 @@ const en: Translations = {
     [FieldCategory.AGE]: 'Age',
     [FieldCategory.INCOME]: 'Income',
     [FieldCategory.LEGAL]: 'Legal status',
-    [FieldCategory.RESIDENCE]: 'Residence history',
+    [FieldCategory.RESIDENCE]: 'Residence',
     [FieldCategory.MARITAL]: 'Marital status',
   },
   result: {
@@ -81,6 +81,8 @@ const en: Translations = {
       'Since the age of 18, has your partner only lived in Canada?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'How many years had your partner lived in Canada when they started receiving their Old Age Security pension?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
@@ -109,6 +111,8 @@ const en: Translations = {
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: 'Partner only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Years partner lived in Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
       'Years partner lived in Canada',
   },
   questionAriaLabel: {
@@ -144,22 +148,22 @@ const en: Translations = {
       'Edit if your partner has only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Edit how long your partner has lived in Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Edit how long your partner has lived in Canada',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>)</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>)</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.PARTNER_INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
-    [FieldKey.OAS_DEFER_DURATION]:
-      'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
@@ -169,6 +173,8 @@ const en: Translations = {
       'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Only count the number of years since the age of 18.',
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -292,7 +298,7 @@ const en: Translations = {
       // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Yes, my partner receives the Old Age Security pension',
+        text: 'Yes',
         shortText: 'Yes',
       },
       // {
@@ -302,7 +308,7 @@ const en: Translations = {
       // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'No, my partner does not receive the Old Age Security pension',
+        text: 'No',
         shortText: 'No',
       },
       {

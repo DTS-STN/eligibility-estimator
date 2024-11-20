@@ -10,6 +10,9 @@ import { MonthsYears } from '../../utils/api/definitions/types'
 import { Accordion } from '../Forms/Accordion'
 import { fieldDefinitions } from '../../utils/api/definitions/fields'
 import { FieldCategory } from '../../utils/api/definitions/enums'
+import { useSessionStorage } from 'react-use'
+import { keyToStepMap } from '../StepperPage/utils'
+import { useRouter } from 'next/router'
 
 type CategorizedInputs = {
   [category in FieldCategory]?: FieldInput[]
@@ -20,6 +23,7 @@ export const YourAnswers: React.VFC<{
   inputs: FieldInput[]
 }> = ({ title, inputs }) => {
   const tsln = useTranslation<WebTranslations>()
+  const router = useRouter()
   // allFieldData is the full configuration for ALL fields - not only the visible ones.
   const allFieldData: FieldConfig[] = FieldsHandler.getAllFieldData(
     tsln._language
@@ -52,6 +56,12 @@ export const YourAnswers: React.VFC<{
     } else {
       return 10000
     }
+  }
+
+  const handlePageChange = (key: string) => (e) => {
+    e.preventDefault()
+    const category = fieldDefinitions[key]?.category?.key
+    router.push(`/questions?step=${category}#${key}`)
   }
 
   /**
@@ -95,6 +105,7 @@ export const YourAnswers: React.VFC<{
                 <div className="justify-self-end self-end">
                   <Link href={`questions#${input.key}`}>
                     <a
+                      onClick={handlePageChange(input.key)}
                       className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
                       aria-label={tsln.resultsEditAriaLabels[input.key]}
                     >
@@ -163,6 +174,7 @@ export const YourAnswers: React.VFC<{
                       <div className="justify-self-end self-end">
                         <Link href={`questions#${input.key}`}>
                           <a
+                            onClick={handlePageChange(input.key)}
                             className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
                             aria-label={tsln.resultsEditAriaLabels[input.key]}
                           >

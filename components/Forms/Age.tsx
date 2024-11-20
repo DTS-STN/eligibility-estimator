@@ -17,13 +17,13 @@ const Age: FC<AgeProps> = ({ age, name }) => {
     }
   }
   return (
-    <>
+    <div role="alert" aria-live="assertive">
       <p>{getLabel()}</p>
       <div>
         {Math.floor(Number(age))}{' '}
         {tsln._language === 'en' ? 'years old' : 'ans'}
       </div>
-    </>
+    </div>
   )
 }
 

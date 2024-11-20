@@ -21,7 +21,11 @@ export function Breadcrumb({ locale, items = [] }: BreadcrumbProps) {
             className="inline-block min-w-0 max-w-full truncate -my-4"
           >
             <Link href={item.link} locale={locale}>
-              <a className="font-sans ml-1 mr-1 text-[16px] leading-[23px] font-[400] text-[#295376] hover:text-[#0535D2] underline">
+              <a
+                className={`font-sans ${
+                  index !== 0 ? 'ml-1' : ''
+                } mr-1 text-[16px] leading-[23px] font-[400] text-[#295376] hover:text-[#0535D2] underline`}
+              >
                 {item.text}
               </a>
             </Link>

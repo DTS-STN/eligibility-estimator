@@ -213,9 +213,11 @@ const en: WebTranslations = {
   haveNetIncomeLess: `your net income is less than ${getMaximumIncomeThreshold(
     Language.EN
   )}`,
-  headerWhatToKnow: "What you'll need",
+  headerWhatToKnow: 'Before you begin',
   pleaseNodeText:
     'Please note that this is an estimator and not an application for benefits.',
+  legaCitizenlText:
+    'To be eligible for Old Age Security benefits, you must be a citizen or legal resident of Canada.',
   estimatorIncludeQuestionText:
     'The estimator will ask you questions about your:',
   ageText: 'age',
@@ -270,6 +272,15 @@ const en: WebTranslations = {
   errorBoxTitle: 'The information could not be submitted because ',
   useEstimatorIf:
     'Use the estimator to see if you meet all eligibility criteria.',
+  stepper: {
+    yourInfo: 'Your information',
+    partnerInfo: `Partner's information`,
+    partnerInfoHelp: `Since you have a partner, we'll also need their information to estimate your benefits.`,
+    previousStep: 'Previous',
+    nextStep: 'Next',
+    getEstimate: 'Estimate my benefits',
+    navWarning: `Note: Please navigate using the "Previous" and "Next" buttons. Using your browser's navigation buttons is not recommended.`,
+  },
   datePicker: {
     month: 'Month',
     year: 'Year',
@@ -303,7 +314,7 @@ const en: WebTranslations = {
   resultsPage: {
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. Changes in your circumstances may also impact your results.',
+      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. <p class="mt-4">You must be a citizen or legal resident of Canada to receive these benefits.</p>',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
@@ -367,8 +378,7 @@ const en: WebTranslations = {
   validationErrors: {
     [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
     [ValidationErrors.receiveOASEmpty]:
-      //'Please indicate if you receive the OAS pension.',
-      'Please indicate if you receive the Old Age Security pension',
+      'Please indicate if you receive the Old Age Security pension.',
     [ValidationErrors.providePartnerIncomeEmpty]:
       "Please indicate if you're able to provide your partner's income.",
     [ValidationErrors.partnerIncomeEmpty]:
@@ -392,6 +402,10 @@ const en: WebTranslations = {
       'This number must be at least 10 at the time you deferred your pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'This number must be at least 20 at the time you deferred your pension.',
+    [ValidationErrors.partnerResCanadaNotEnough10]:
+      'This number must be at least 10 because your partner receives the Old Age Security pension.',
+    [ValidationErrors.partnerResCanadaNotEnough20]:
+      'This number must be at least 20 because your partner receives the Old Age Security pension outside Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -430,7 +444,7 @@ const en: WebTranslations = {
     [ValidationErrors.yearsInCanadaNotEnough10]:
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
-      'You need to have lived in Canada for at least 20&nbsp;years to receive any of the benefits covered by this tool.',
+      'You need to have at least 20&nbsp;years of Canadian residence to receive the Old Age Security pension outside Canada.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
       "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:
@@ -440,9 +454,9 @@ const en: WebTranslations = {
     [ValidationErrors.socialCountryUnavailable10]:
       "This tool can't estimate your benefits because you have lived in Canada for less than 10&nbsp;years. To find out if you're eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
     [ValidationErrors.socialCountryUnavailable20]:
-      "This tool can't estimate your benefits because you have lived in Canada for less than 20&nbsp;years. To find out if you're eligible for old age benefits, please {LINK_SERVICE_CANADA}.",
+      'You need to have at least 20&nbsp;years of Canadian residence to receive the Old Age Security pension outside Canada. Since you lived in a country with a social security agreement with Canada, {LINK_SERVICE_CANADA} to find out if you’re eligible.',
   },
-  unableToProceed: 'Unable to proceed',
+  unableToProceed: 'We can’t estimate your benefits',
   yes: 'Yes',
   no: 'No',
   unavailable: 'unavailable',
@@ -475,7 +489,7 @@ const en: WebTranslations = {
   incomeHintTitle: 'How will your income be calculated when you apply?',
   incomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Your <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply based on your latest income tax return. \
       </p> \
     </div> \
@@ -484,8 +498,8 @@ const en: WebTranslations = {
   incomeHintTitleReceiveOAS: 'Is your income about to change?',
   incomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
-        If you're expecting a drop in income, you can enter your estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='opens a new tab'>Contact us</a> to report this event. \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
+        If you're expecting a drop in income, you can enter your estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='Contact us. Opens a new tab'>Contact us</a> to report this event. \
       </p> \
     </div> \
   ",
@@ -494,7 +508,7 @@ const en: WebTranslations = {
   partnerIncomeHintTitle: 'How will their income be calculated when you apply?',
   partnerIncomeHintText:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         Your partner’s <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply based on their latest income tax return. \
       </p> \
     </div> \
@@ -503,7 +517,7 @@ const en: WebTranslations = {
   partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
   partnerIncomeHintTextReceiveOAS:
     "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
         If your partner is expecting a drop in income, you can enter their estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='opens a new tab'>Contact us</a> to report this event. \
       </p> \
     </div> \
