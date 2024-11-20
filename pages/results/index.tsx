@@ -46,7 +46,11 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const [savedInputs, setSavedInputs]: [any, (value: any) => void] =
     useSessionStorage('resultPageInputs', {})
 
-  const inputHelper = new InputHelper(savedInputs.inputs, setInputs, language)
+  const inputHelper = new InputHelper(
+    'inputs' in savedInputs ? savedInputs.inputs : {},
+    setInputs,
+    language
+  )
 
   const tsln = useTranslation<WebTranslations>()
 
