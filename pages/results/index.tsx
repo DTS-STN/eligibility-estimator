@@ -40,13 +40,11 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
-  const response: ResponseSuccess | ResponseError = JSON.parse(
-    sessionStorage.getItem('calculationResults') || '{}'
-  )
+  const [response, setResponse]: [any, (value: any) => void] =
+    useSessionStorage('calculationResults', {})
 
-  const savedInputs = JSON.parse(
-    sessionStorage.getItem('resultPageInputs') || '{}'
-  )
+  const [savedInputs, setSavedInputs]: [any, (value: any) => void] =
+    useSessionStorage('resultPageInputs', {})
 
   const inputHelper = new InputHelper(savedInputs.inputs, setInputs, language)
 
