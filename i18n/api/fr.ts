@@ -184,7 +184,7 @@ const fr: Translations = {
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
-      "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
+      "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [

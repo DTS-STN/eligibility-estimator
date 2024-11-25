@@ -404,15 +404,15 @@ const fr: WebTranslations = {
     [ValidationErrors.maritalStatusEmpty]:
       'Veuillez sélectionner un état matrimonial.',
     [ValidationErrors.yearsInCanadaMinusAge]:
-      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
+      'Veuillez entrer un nombre qui ne dépasse pas votre âge moins 18 ans.',
     [ValidationErrors.yearsInCanadaMinusDeferred]:
       'Ce nombre doit être au moins 10 au moment où vous avez reporté votre pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'Ce nombre doit être au moins 20 au moment où vous avez reporté votre pension.',
     [ValidationErrors.partnerResCanadaNotEnough10]:
-      'Ce nombre doit être au moins 10 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
+      'Ce nombre doit être au moins 10 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse.',
     [ValidationErrors.partnerResCanadaNotEnough20]:
-      'Ce nombre doit être au moins 20 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
+      'Ce nombre doit être au moins 20 puisque votre conjoint reçoit la pension de la Sécurité de la vieillesse à l’extérieur du Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Veuillez indiquer si vous avez un statut légal au Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -444,9 +444,9 @@ const fr: WebTranslations = {
       "Votre revenu annuel doit être inférieur à {OAS_MAX_INCOME} pour recevoir l'une des prestations couvertes par cet outil.",
     [ValidationErrors.partnerIncomeTooHigh]:
       "La somme de votre revenu annuel et de celui de votre partenaire doit être inférieure à {OAS_MAX_INCOME} pour bénéficier de l'une des prestations couvertes par cet outil.",
-    [ValidationErrors.ageUnder18]: 'Vous devez avoir au moins 18 ans.',
+    [ValidationErrors.ageUnder18]: 'Vous devez avoir au moins 18 ans.',
     [ValidationErrors.partnerAgeUnder18]:
-      'Votre conjoint doit avoir au moins 18 ans.',
+      'Votre conjoint doit avoir au moins 18 ans.',
     [ValidationErrors.ageOver150]: 'Votre âge doit être inférieur à 150 ans.',
     [ValidationErrors.partnerAgeOver150]:
       "L'âge de votre partenaire doit être inférieur à 150 ans.",
