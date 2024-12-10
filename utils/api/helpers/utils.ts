@@ -220,6 +220,13 @@ export function OasEligibility(
       yearsInCanada++
     }
 
+    // If client is n years + months.  #219890
+    //   the oas should be 65 exactly not 65 plus months
+    age =
+      age > minAgeEligibility && age < minAgeEligibility + 1
+        ? Math.floor(age)
+        : age
+
     ageOfEligibility =
       yearsInCanadaAtStart < minYearsOfResEligibility ? age : Math.floor(age)
 
@@ -269,6 +276,7 @@ export function evaluateOASInput(input) {
   const age = input.age // 66.42
   const ageJuly2013 = calculate2013Age(age, input.clientBirthDate)
   const yearsInCanada = input.yearsInCanadaSince18
+
   let eliObj = OasEligibility(
     age,
     yearsInCanada,
