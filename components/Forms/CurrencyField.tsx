@@ -1,13 +1,11 @@
-import { Error } from './Error'
 import { useRouter } from 'next/router'
-import { useState, InputHTMLAttributes, useEffect } from 'react'
+import { InputHTMLAttributes, useEffect, useState } from 'react'
 import NumberFormat from 'react-number-format'
-import { Language } from '../../utils/api/definitions/enums'
-import { QuestionLabel } from './QuestionLabel'
-import { Tooltip } from '../Tooltip/tooltip'
-import { sanitizeCurrency } from './validation/utils'
-import { set } from 'lodash'
 import { TooltipTranslation } from '../../i18n/tooltips'
+import { Language } from '../../utils/api/definitions/enums'
+import { Error } from './Error'
+import { QuestionLabel } from './QuestionLabel'
+import { sanitizeCurrency } from './validation/utils'
 
 export interface CurrencyFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -41,8 +39,8 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
 
   const localizedIncome =
     locale == Language.EN
-      ? { thousandSeparator: ',', prefix: '$', decimalSeparator: '.' }
-      : { thousandSeparator: ' ', suffix: ' $', decimalSeparator: ',' }
+      ? { thousandSeparator: ',', decimalSeparator: '.' }
+      : { thousandSeparator: ' ', decimalSeparator: ',' }
 
   // only need to run this once at component render, so no need for deps
   useEffect(() => {
@@ -63,12 +61,21 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
   const getFieldValue = () => {
     const regex = /\d+\.\d{1}$/
     if (!fieldValue) return ''
-    return fieldValue + (regex.test(fieldValue as string) ? '0' : '')
+
+    let stringValue = String(fieldValue)
+
+    // Remove trailing decimal if present
+    if (stringValue.endsWith('.')) {
+      stringValue = stringValue.slice(0, -1)
+    }
+
+    return stringValue + (regex.test(stringValue) ? '0' : '')
   }
 
   return (
     <div>
       <QuestionLabel
+        id={`${name}-label`}
         name={name}
         type="currency-input"
         label={label}
@@ -78,26 +85,51 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
         dynamicContent={dynamicContent}
       />
 
-      <NumberFormat
-        id={`enter-${name}`}
-        name={name}
-        {...localizedIncome}
-        data-testid="currency-input"
-        className={`form-control text-content border-form-border w-44 ${
-          error ? ' !border-danger' : ''
-        }`}
-        value={getFieldValue()}
-        isNumericString={true}
-        placeholder={placeholder}
-        onChange={(e) => handleOnChange(e)}
-        required
-        autoComplete="off"
-        enterKeyHint="done"
-        allowNegative={false}
-        decimalScale={2}
-        onBlur={() => setFieldValue(getFieldValue())}
-        maxLength={locale == Language.EN ? 15 : 16}
-      />
+      <div
+        className="flex items-center space-x-2"
+        aria-labelledby={`${name}-label`}
+      >
+        {locale === Language.EN && (
+          <span id={`${name}-currency-symbol`} className="text-content">
+            $
+          </span>
+        )}
+        <NumberFormat
+          id={`enter-${name}`}
+          name={name}
+          {...localizedIncome}
+          data-testid="currency-input"
+          className={`form-control text-content border-form-border w-44 ${
+            error ? ' !border-danger' : ''
+          }`}
+          value={getFieldValue()}
+          isNumericString={true}
+          placeholder={placeholder}
+          onChange={(e) => handleOnChange(e)}
+          required
+          autoComplete="off"
+          enterKeyHint="done"
+          allowNegative={false}
+          decimalScale={2}
+          onBlur={() => setFieldValue(getFieldValue())}
+          maxLength={locale == Language.EN ? 15 : 16}
+          aria-label="Enter amount in dollars"
+          aria-describedby={
+            locale === Language.EN ? `${name}-currency-symbol` : undefined
+          }
+          isAllowed={(values) => {
+            const { formattedValue } = values
+            return !(
+              formattedValue.startsWith('.') || formattedValue.startsWith(',')
+            )
+          }}
+        />
+        {locale !== Language.EN && (
+          <span id={`${name}-currency-symbol`} className="text-content">
+            $
+          </span>
+        )}
+      </div>
 
       {error && (
         <div className="mt-2" role="alert">

@@ -31,6 +31,7 @@ import {
 } from './helpers/fieldClasses'
 import { BenefitHandler } from './benefitHandler'
 import { calculate2013Age } from './helpers/utils'
+import { RequestSchema as schema } from './definitions/schemas'
 
 export class FieldsHandler {
   private _translations: Translations
@@ -144,6 +145,7 @@ export class FieldsHandler {
       yearsInCanadaSince18: this.rawInput.partnerLivedOnlyInCanada //assume 40 when live only in Canada
         ? 40
         : this.rawInput.partnerYearsInCanadaSince18,
+      yearsInCanadaSinceOAS: this.rawInput.partnerYearsInCanadaSinceOAS,
       everLivedSocialCountry: false, // required by ProcessedInput
       partnerBenefitStatus: new PartnerBenefitStatusHelper(
         PartnerBenefitStatus.HELP_ME
@@ -170,7 +172,7 @@ export class FieldsHandler {
       FieldKey.INCOME_WORK,
       // FieldKey.OAS_DEFER,
       FieldKey.LIVING_COUNTRY,
-      FieldKey.LEGAL_STATUS,
+      // FieldKey.LEGAL_STATUS,
       FieldKey.MARITAL_STATUS,
       FieldKey.LIVED_ONLY_IN_CANADA,
     ]
@@ -191,7 +193,7 @@ export class FieldsHandler {
 
     // default value = undefined
     if (this.input.client.livedOnlyInCanada === false) {
-      if (this.input.client.receiveOAS == true) {
+      if (this.input.client.receiveOAS === true) {
         requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_OAS)
       } else {
         requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_18)
@@ -206,13 +208,15 @@ export class FieldsHandler {
       (this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSince18 < 10) ||
       (!this.input.client.livingCountry.canada &&
-        this.input.client.yearsInCanadaSince18 < 20)
+        this.input.client.yearsInCanadaSince18 < 20 &&
+        !this.input.client.receiveOAS)
     ) {
       requiredFields.push(FieldKey.EVER_LIVED_SOCIAL_COUNTRY)
     }
 
     if (
       this.input.client.yearsInCanadaSinceOAS !== undefined &&
+      !this.input.client.receiveOAS &&
       ((this.input.client.livingCountry.canada &&
         this.input.client.yearsInCanadaSinceOAS < 10) ||
         (!this.input.client.livingCountry.canada &&
@@ -228,9 +232,9 @@ export class FieldsHandler {
       requiredFields.push(FieldKey.PARTNER_INCOME)
       requiredFields.push(FieldKey.PARTNER_INCOME_WORK)
 
-      if (this.input.partner.age >= 60) {
-        requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
-      }
+      // if (this.input.partner.age >= 60) {
+      //   requiredFields.push(FieldKey.PARTNER_LEGAL_STATUS)
+      // }
 
       if (
         this.input.partner.legalStatus.value &&
@@ -244,25 +248,26 @@ export class FieldsHandler {
 
       // default value = undefined
       if (this.input.partner.livedOnlyInCanada === false) {
-        requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+        if (
+          this.input.client.partnerBenefitStatus.value ===
+          PartnerBenefitStatus.OAS_GIS
+        ) {
+          requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS)
+        } else {
+          requiredFields.push(FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18)
+        }
       }
 
       /*
       Make changes to avoid contridictions when showing the Benefit Partner Question: 
         1. when partner is younger than 60, the partner will not be eligible for OAS, GIS, ALW.
         2. when partner is between 60 and 65, partner will not be eligible for OAS
-        3. Only show it when: partner is older than 65 and LegalStatus is canadian AND
-            currently lives in Canada and has lived for 10+ years  OR 
-            currently lives outside Canada and has lived for 20+ years in Canada
+        3. Only show it when: partner is older than 65 (and age is valid)
        */
+
       if (
         this.input.partner.age >= 65 &&
-        this.input.partner.legalStatus.canadian &&
-        this.input.partner.livedOnlyInCanada !== undefined &&
-        ((this.input.partner.livingCountry.canada &&
-          this.input.partner.yearsInCanadaSince18 >= 10) ||
-          (!this.input.partner.livingCountry.canada &&
-            this.input.partner.yearsInCanadaSince18 >= 20))
+        !schema.extract('partnerAge').validate(this.input.partner.age)['error']
       ) {
         requiredFields.push(FieldKey.PARTNER_BENEFIT_STATUS)
       }

@@ -47,7 +47,7 @@ export const ContextualAlert: React.FC<ContextualAlertProps> = ({
   const headingClass =
     'font-header-gc font-[700] text-[24px] leading-[26px] text-[#333333]'
   const bodyClass =
-    'font-sans font-[400] text-[20px] leading-[33px] text-[#333333] pt-2'
+    'font-sans font-[400] text-[20px] leading-relaxed text-[#333333] pt-2'
 
   return (
     <div id={id} className="relative min-w-290px ml-[24px]">
@@ -61,7 +61,7 @@ export const ContextualAlert: React.FC<ContextualAlertProps> = ({
       </div>
       <div
         style={{ borderColor: alertColor }}
-        className={`overflow-auto border-l-4 pl-[24px] py-[16px] leading-8`}
+        className={`overflow-auto border-l-[4px] pl-[24px] py-[16px] leading-8`}
       >
         {asHtml ? (
           <h2

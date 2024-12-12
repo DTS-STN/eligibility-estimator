@@ -1,21 +1,25 @@
 import Joi from 'joi'
 import { getWebTranslations, WebTranslations } from '../i18n/web'
 import { BenefitHandler } from '../utils/api/benefitHandler'
-import { FieldsHandler } from '../utils/api/fieldsHandler'
 import { Language, ValidationErrors } from '../utils/api/definitions/enums'
 import {
   FieldConfig,
   FieldKey,
   FieldType,
 } from '../utils/api/definitions/fields'
-import { VisibleFieldsObject } from '../utils/web/types'
+import { ResponseError, ResponseSuccess } from '../utils/api/definitions/types'
+import { FieldsHandler } from '../utils/api/fieldsHandler'
 import MainHandler from '../utils/api/mainHandler'
+import { VisibleFieldsObject } from '../utils/web/types'
 import { FormField } from './FormField'
 import { InputHelper } from './InputHelper'
 
 export class Form {
   public readonly allFieldConfigs: FieldConfig[]
   public readonly fields: FormField[]
+
+  private results: ResponseSuccess | ResponseError
+  private localInputs: InputHelper
 
   constructor(
     private readonly language: Language,
@@ -30,6 +34,9 @@ export class Form {
 
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
+    this.results = data
+    this.localInputs = inputs
+
     this.clearAllErrors()
 
     // set visibility of fields
@@ -82,6 +89,23 @@ export class Form {
         this.getFieldByKey(<FieldKey>errorKey).error =
           allErrorsParsed[errorKey].text
       }
+    }
+  }
+
+  writeToSessionStorage(): void {
+    try {
+      if (this.results && this.localInputs) {
+        sessionStorage.setItem(
+          'calculationResults',
+          JSON.stringify(this.results)
+        )
+        sessionStorage.setItem(
+          'resultPageInputs',
+          JSON.stringify(this.localInputs)
+        )
+      }
+    } catch (error) {
+      console.error('Error writing to sessionStorage:', error)
     }
   }
 

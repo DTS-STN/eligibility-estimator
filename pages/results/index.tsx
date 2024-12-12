@@ -31,7 +31,7 @@ const ResultsPage = dynamic(
 const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
-  const [inputs, setInputs]: [
+  const [_inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
@@ -40,9 +40,18 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const language =
     langx === Language.EN || langx === Language.FR ? langx : Language.EN
 
-  const inputHelper = new InputHelper(inputs, setInputs, language)
-  const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
-  const response: ResponseSuccess | ResponseError = mainHandler.results
+  const [response, setResponse]: [any, (value: any) => void] =
+    useSessionStorage('calculationResults', {})
+
+  const [savedInputs, _setSavedInputs]: [any, (value: any) => void] =
+    useSessionStorage('resultPageInputs', {})
+
+  const inputHelper = new InputHelper(
+    'inputs' in savedInputs ? savedInputs.inputs : {},
+    setInputs,
+    language
+  )
+
   const tsln = useTranslation<WebTranslations>()
 
   useEffect(() => {
@@ -52,6 +61,12 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
+    const response: ResponseSuccess | ResponseError = mainHandler.results
+    setResponse(response)
+  }, [language])
+
   return (
     <>
       <Head>
@@ -60,7 +75,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       </Head>
 
       <Layout title={tsln.resultPageTitle}>
-        {'results' in response ? (
+        {'results' in response && inputHelper.asArray.length !== 0 ? (
           <ResultsPage
             inputs={inputHelper.asArray}
             results={response.results}

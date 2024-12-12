@@ -20,19 +20,20 @@ export const Tooltip: React.FC<{
 
   if (!tooltipData) return <></>
   return (
-    <details className="my-2 text-h6 " data-testid={`tooltip-${field}`}>
+    <details className="my-2 text-h5-gc" data-testid={`tooltip-${field}`}>
       <summary
         key={`summary-${field}`}
-        className="border-none pl-0 ds-text-multi-blue-blue70b mb-[15px] ds-cursor-pointer ds-select-none"
+        className="border-none pl-0 text-multi-blue-blue70b mb-[15px] cursor-pointer select-none"
       >
         <span
-          className="ds-underline"
+          className="underline ml-1"
           dangerouslySetInnerHTML={{ __html: content.moreinfo }}
           data-gc-analytics-customclick={`${AA_BUTTON_CLICK_ATTRIBUTE}: ${content.moreinfo}`}
         />
       </summary>
+
       <div
-        className="ds-z-1 ds-font-body text-base leading-7 ds-text-multi-neutrals-grey100 border-l-2 border-[#284162] px-2 ml-[5px]"
+        className="ml-[5px] pl-4 border-l-[2px] font-body text-base text-multi-neutrals-grey100 border-multi-blue-blue70b"
         data-testid="tooltip-text"
         id={`helpText-${field}`}
         dangerouslySetInnerHTML={{ __html: content.text }}

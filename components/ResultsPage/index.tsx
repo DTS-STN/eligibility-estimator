@@ -1,6 +1,6 @@
-import { Button } from '../Forms/Button'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
+import { useSessionStorage } from 'react-use'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -9,11 +9,13 @@ import {
   PartnerBenefitStatus,
   ResultKey,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import {
   BenefitResult,
   BenefitResultsObject,
   SummaryObject,
 } from '../../utils/api/definitions/types'
+import { Button } from '../Forms/Button'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { YourAnswers } from './YourAnswers'
@@ -46,8 +48,8 @@ const ResultsPage: React.VFC<{
 }) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
-  const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+
 
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
@@ -246,7 +248,10 @@ const ResultsPage: React.VFC<{
             id={'EditAnswers'}
             style="secondary"
             custom="mt-6 justify-center md:w-[fit-content]"
-            onClick={(e) => router.push('/questions')}
+            onClick={(e) => {
+              e.preventDefault()
+              router.push('/questions')
+            }}
           />
         </div>
       </div>
