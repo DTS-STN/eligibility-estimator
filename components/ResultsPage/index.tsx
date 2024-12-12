@@ -20,7 +20,6 @@ import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
-import { FieldKey } from '../../utils/api/definitions/fields'
 import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
 
@@ -49,7 +48,7 @@ const ResultsPage: React.VFC<{
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
-
+  const apiTsln = getTranslations(tsln._language)
 
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
