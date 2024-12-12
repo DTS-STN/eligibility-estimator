@@ -42,8 +42,8 @@ export const BenefitCard: React.VFC<{
   const eligibleFlag: JSX.Element = (
     <span
       data-cy="eligibility-flag"
-      className={`px-2 py-1 ml-2 border-left border-l-4 font-semibold text-[15px] ${
-        benefitKey !== BenefitKey.oas && !liveInCanada
+      className={` px-2 py-1 ml-2 h-7 flex items-center justify-center border-left border-l-4 font-semibold text-[15px] ${
+        benefitKey !== BenefitKey.oas && liveInCanada
           ? 'border-[#6e6e6e] bg-[#EAEBED] '
           : isEligible || future
           ? ' border-success bg-[#D8EECA] '

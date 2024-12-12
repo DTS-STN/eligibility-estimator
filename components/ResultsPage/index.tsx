@@ -1,6 +1,6 @@
-import { Button } from '../Forms/Button'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
+import { useSessionStorage } from 'react-use'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -9,16 +9,17 @@ import {
   PartnerBenefitStatus,
   ResultKey,
 } from '../../utils/api/definitions/enums'
+import { FieldKey } from '../../utils/api/definitions/fields'
 import {
   BenefitResult,
   BenefitResultsObject,
   SummaryObject,
 } from '../../utils/api/definitions/types'
+import { Button } from '../Forms/Button'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
 import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
-import { FieldKey } from '../../utils/api/definitions/fields'
 import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
 
@@ -46,12 +47,20 @@ const ResultsPage: React.VFC<{
 }) => {
   const ref = useRef<HTMLDivElement>()
   const tsln = useTranslation<WebTranslations>()
-  const apiTsln = getTranslations(tsln._language)
   const router = useRouter()
+  const apiTsln = getTranslations(tsln._language)
 
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
+
+  const alreadyReceiving =
+    inputs.find((input) => input.key === FieldKey.ALREADY_RECEIVE_OAS) !==
+    undefined
+      ? inputs.find((input) => input.key === FieldKey.ALREADY_RECEIVE_OAS)[
+          'value'
+        ]
+      : false
 
   const maritalStatus = inputs.find(
     (input) => input.key === FieldKey.MARITAL_STATUS
@@ -198,6 +207,7 @@ const ResultsPage: React.VFC<{
               userArrNew.filter((element) => element !== null).length
             }
             hasMultipleOasGis={multipleOAS_GIS}
+            alreadyReceiving={alreadyReceiving === 'true'}
           />
           {/* Summary Estimates section */}
           <div className="border-[#269ABC] bg-[#EEFAFF] p-8">
@@ -237,7 +247,10 @@ const ResultsPage: React.VFC<{
             id={'EditAnswers'}
             style="secondary"
             custom="mt-6 justify-center md:w-[fit-content]"
-            onClick={(e) => router.push('/questions')}
+            onClick={(e) => {
+              e.preventDefault()
+              router.push('/questions')
+            }}
           />
         </div>
       </div>

@@ -17,6 +17,8 @@ export const Modal: React.VFC<{
   const firstFocusableRef = useRef(null)
   const closeButtonRef = useRef(null)
 
+  // ########## Block start ##########
+
   useEffect(() => {
     if (isOpen) {
       // Focus the first focusable element when the modal opens
@@ -51,6 +53,8 @@ export const Modal: React.VFC<{
     }
   }, [isOpen])
 
+  // ########## Block End ##########
+
   if (!isOpen) return null
 
   const getModalString = () => {
@@ -77,6 +81,8 @@ export const Modal: React.VFC<{
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDescription"
       ref={modalRef}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -84,12 +90,12 @@ export const Modal: React.VFC<{
         role={'status'}
         className="modal-content md:w-6/12 sm:w-9/12 bg-white p-6  shadow-lg z-50"
       >
-        <h2 className="h2">
+        <h2 className="h2" id="modalTitle">
           {!partner
             ? apiTrans.modal.userHeading
             : apiTrans.modal.partnerHeading}
         </h2>
-        <p>{getModalString()}</p>
+        <p id="modalDescription">{getModalString()}</p>
         <div className="mt-4 flex justify-start">
           <Button
             ref={closeButtonRef}

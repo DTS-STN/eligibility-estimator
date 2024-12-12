@@ -263,7 +263,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    */
   private get deferralYears(): number {
     let oasAge = 65
-
     const durationStr = this.input.oasDeferDuration
 
     if (durationStr) {
@@ -452,7 +451,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           : this.translations.detailWithHeading.socialSecurityEligible
       )
     }
-
     // if not eligible, don't bother with any of the below
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
@@ -542,21 +540,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         )
       }
 
-      if (
-        this.inputAge > 74 &&
-        this.inputAge > 64 &&
-        this.entitlement.result > 0
-      ) {
+      const ageCalc = this.formAge ? this.formAge : this.inputAge
+
+      if (ageCalc > 74 && ageCalc > 64 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75Applied
         )
       }
 
-      if (
-        this.inputAge > 64 &&
-        this.inputAge < 75 &&
-        this.entitlement.result > 0
-      ) {
+      if (ageCalc > 64 && ageCalc < 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75
         )

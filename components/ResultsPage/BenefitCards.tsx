@@ -1,7 +1,11 @@
 import React from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
-import { ResultKey, BenefitKey } from '../../utils/api/definitions/enums'
+import {
+  ResultKey,
+  BenefitKey,
+  ResultReason,
+} from '../../utils/api/definitions/enums'
 import { BenefitResult, NextStepText } from '../../utils/api/definitions/types'
 import { useTranslation } from '../Hooks'
 import { BenefitCard } from './BenefitCard'
@@ -194,7 +198,8 @@ export const BenefitCards: React.VFC<{
       result.eligibility.result === ResultKey.INCOME_DEPENDENT
 
     const eligibleText =
-      result.benefitKey !== BenefitKey.oas && !liveInCanada
+      result.benefitKey !== BenefitKey.oas &&
+      result.eligibility.reason === ResultReason.LIVING_COUNTRY
         ? apiTsln.result.almostEligible
         : eligibility
         ? apiTsln.result.eligible
@@ -211,7 +216,9 @@ export const BenefitCards: React.VFC<{
           benefitName={titleText}
           isEligible={eligibility}
           future={future}
-          liveInCanada={liveInCanada}
+          liveInCanada={
+            result.eligibility.reason === ResultReason.LIVING_COUNTRY
+          }
           eligibleText={eligibleText}
           nextStepText={nextStepText}
           collapsedDetails={collapsedDetails}

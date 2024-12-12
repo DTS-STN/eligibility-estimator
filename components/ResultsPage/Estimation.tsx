@@ -105,6 +105,7 @@ export const Estimation: React.VFC<{
       ? apiTrans.detail.yourPartner
       : apiTrans.detail.you
 
+    const displayAge = Math.trunc(Number(age))
     const firstOasGis = isFirstOasGis()
     const lastOasGis = isLastOasGis()
 
@@ -116,13 +117,13 @@ export const Estimation: React.VFC<{
     if (benefitType.includes('alw') || benefitType.includes('alws')) {
       //CURRENT ELIGIBLE
       if (benefitAge == '0') {
-        text = `${apiTrans.detail.youCouldReceiveUntil} ${age}${
+        text = `${apiTrans.detail.youCouldReceiveUntil} ${displayAge}${
           language == 'fr' ? ' ans' : ''
         },`
       }
       //FUTURE ELIGIBLE
       else {
-        text = `${apiTrans.detail.youCouldReceiveFrom} ${age} ${
+        text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
           apiTrans.detail.youCouldReceiveTo
         } 65${language == 'fr' ? ' ans' : ''},`
       }
@@ -179,7 +180,7 @@ export const Estimation: React.VFC<{
           //LAST ESTIMATE
           if (lastOasGis) {
             //I5
-            text = `${apiTrans.detail.youCouldStartReceivingAt} ${age}${
+            text = `${apiTrans.detail.youCouldStartReceivingAt} ${displayAge}${
               language == 'fr' ? ' ans' : ''
             }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
               apiTrans.detail.youCouldStartReceiving
@@ -199,9 +200,9 @@ export const Estimation: React.VFC<{
 
             //NEXT SAME
             if (eligibleTotalAmount == nextBenefitTotal) {
-              text = `${apiTrans.detail.youCouldStartReceivingAt} ${age}${
-                language == 'fr' ? ' ans' : ''
-              }, ${
+              text = `${
+                apiTrans.detail.youCouldStartReceivingAt
+              } ${displayAge}${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldStartReceiving} ${eligibleAmt} ${
                 apiTrans.detail.youCouldReceivePerMonth
@@ -209,7 +210,7 @@ export const Estimation: React.VFC<{
             }
             //NEXT NOT SAME
             else {
-              text = `${apiTrans.detail.youCouldReceiveFrom} ${age} ${
+              text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
                 apiTrans.detail.youCouldReceiveTo
               } ${Object.keys(nextBenefitResult)[0]}${
                 language == 'fr' ? ' ans' : ''
@@ -268,7 +269,7 @@ export const Estimation: React.VFC<{
                 apiTrans.detail.youCouldReceivePerMonth
               }`
             } else {
-              text = `${apiTrans.detail.youCouldReceiveFrom} ${age} ${
+              text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
                 apiTrans.detail.youCouldReceiveTo
               } ${nextBenefitAge}${language == 'fr' ? ' ans' : ''},`
               text += ` ${isPartnerStr} ${apiTrans.detail.continueReceiving} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`

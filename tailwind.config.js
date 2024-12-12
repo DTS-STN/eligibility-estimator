@@ -5,6 +5,12 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    borderWidth: {
+      DEFAULT: '1px',
+      1.5: '1.5px',
+      3: '3px',
+      4: '4.34px',
+    },
     extend: {
       screens: {
         // please note that the order here is important, and will determine how some styles are applied
@@ -26,18 +32,36 @@ module.exports = {
       },
       fontSize: {
         // https://www.figma.com/file/TodbPq5LF1G6l1E3Kx2qPP/GC-Design-Library?node-id=22%3A76
-        h6: ['19px', '21px'],
-        base: ['20px', '33px'],
-        h5: ['20px', '22px'],
-        h4: ['22px', '24px'],
-        h3: ['24px', '26px'],
-        h2: ['36px', '40px'],
-        xs: ['32px', '36px'],
-        h1: ['38px', '42px'], // requires red <hr /> below
-        mobile: ['34px', '38px'],
-        small: ['14px', '16px'],
+        'h6': ['19px', '21px'],
+        'base': ['20px', '33px'],
+        'h5': ['20px', '22px'],
+        'h4': ['22px', '24px'],
+        'h3': ['24px', '26px'],
+        'h2': ['36px', '40px'],
+        'xs': ['32px', '36px'],
+        'h1': ['38px', '42px'], // requires red <hr /> below
+        'mobile': ['34px', '38px'],
+        'small': ['14px', '16px'],
+        'mobileh5': ['20px', '22px'],
+        'h5-gc': ['20px', '26px'],
       },
       colors: {
+        'multi': {
+          blue: {
+            blue60f: '#0E62C9',
+            blue70b: '#284162',
+          },
+          neutrals: {
+            grey85a: '#6F6F6F',
+            grey100: '#333333',
+            grey90a: '#5C5C5C',
+          },
+        },
+        'specific': {
+          red: {
+            red50b: '#D3080C',
+          },
+        },
         'white': '#FFF',
         'black': '#000',
         'content': '#333',
@@ -93,6 +117,13 @@ module.exports = {
       fontFamily: {
         'header-gc': '"Lato", sans-serif',
         'sans': '"Noto Sans", sans-serif',
+        'input-label': '"Noto Sans", font-mono',
+      },
+      lineHeight: {
+        relaxed: '33px',
+      },
+      height: {
+        'stepper-button': '48px',
       },
       minHeight: {
         9: '36px',
@@ -103,6 +134,7 @@ module.exports = {
       boxShadow: {
         'active-form':
           'inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)',
+        'text-input': '0px 0px 6px rgba(14, 98, 201, 0.6)',
       },
     },
   },

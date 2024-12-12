@@ -25,6 +25,7 @@ export type WebTranslations = {
   haveNetIncomeLess: string
   headerWhatToKnow: string
   pleaseNodeText: string
+  legaCitizenlText: string
   estimatorIncludeQuestionText: string
   ageText: string
   netIncomeText: string
@@ -179,6 +180,16 @@ export type WebTranslations = {
   error500TextLink: string
   error503TextLink: string
   errorPageType: string
+  //Stepper
+  stepper: {
+    yourInfo: string
+    partnerInfo: string
+    partnerInfoHelp: string
+    nextStep: string
+    previousStep: string
+    getEstimate: string
+    navWarning: string
+  }
   //Date Picker
   datePicker: {
     month: string

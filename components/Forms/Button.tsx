@@ -21,14 +21,12 @@ type ButtonType = 'submit' | 'reset' | 'button'
 
 const BUTTON_STYLES = {
   primary:
-    'text-white bg-[#26374A] hover:bg-[#1C578A] focus:bg-[#0E62C9] visited:text-white',
+    'text-white bg-[#26374A] hover:bg-[#2B4380] focus:bg-[#0535D2] border-transparent border-[2px]',
   secondary:
-    'text-[#335075] visited:text-[#335075] bg-[#EAEBED] hover:bg-[#CFD1D5] focus:bg-[#CFD1D5]',
-  supertask:
-    'text-white visited:text-white bg-[#318000] hover:bg-[#1D4D00] focus:bg-[#1D4D00]',
-  danger:
-    'text-white  visited:text-white bg-[#BC3331] hover:bg-[#942826] focus:bg-[#942826]',
-  link: 'text-[#2B4380] visited:text-[#2B4380] hover:text-[#0535D2] focus:text-[#0535D2]n hover:underline focus:underline',
+    'text-[#2B4380] focus:text-white bg-white hover:bg-[#D7E5F5] focus:bg-[#0535D2] border-[#2B4380] border-[2px]',
+  supertask: 'text-white bg-[#318000] hover:bg-[#1D4D00] focus:bg-[#1D4D00]',
+  danger: 'text-white bg-[#BC3331] hover:bg-[#942826] focus:bg-[#942826]',
+  link: 'text-[#2B4380] hover:text-[#0535D2] focus:text-[#0535D2]n hover:underline focus:underline',
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -48,7 +46,7 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
-  const classes = `${btnStyle} ${custom} flex flex-row focus:ring focus:ring-offset-4 ring-[#0E62C9] py-2 px-4 rounded-sm w-fit font-lato font-[400] text-[20px] leading-[33px]`
+  const classes = `${btnStyle} ${custom} min-h-[48px] flex flex-row items-center justify-center focus:ring focus:ring-offset-4 ring-[#0E62C9] py-2 px-4 w-fit font-[500] text-[20px] leading-[24px] rounded-md`
 
   return href ? (
     <Link href={href} locale={locale}>

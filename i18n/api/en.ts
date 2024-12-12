@@ -25,7 +25,7 @@ const en: Translations = {
     [FieldCategory.AGE]: 'Age',
     [FieldCategory.INCOME]: 'Income',
     [FieldCategory.LEGAL]: 'Legal status',
-    [FieldCategory.RESIDENCE]: 'Residence history',
+    [FieldCategory.RESIDENCE]: 'Residence',
     [FieldCategory.MARITAL]: 'Marital status',
   },
   result: {
@@ -82,6 +82,8 @@ const en: Translations = {
       'Since the age of 18, has your partner only lived in Canada?',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Since the age of 18, how many years has your partner lived in Canada?',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'How many years had your partner lived in Canada when they started receiving their Old Age Security pension?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Age',
@@ -110,6 +112,8 @@ const en: Translations = {
     [FieldKey.PARTNER_LIVING_COUNTRY]: "Partner's country of residence",
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]: 'Partner only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Years partner lived in Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
       'Years partner lived in Canada',
   },
   questionAriaLabel: {
@@ -145,22 +149,22 @@ const en: Translations = {
       'Edit if your partner has only lived in Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Edit how long your partner has lived in Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Edit how long your partner has lived in Canada',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>)</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your annual net income. ',
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      'Add all types of income after deductions, including: <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>).</li></ul> Do not include payments from the: <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>)</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
     [FieldKey.PARTNER_INCOME_WORK]:
       'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
-    [FieldKey.OAS_DEFER_DURATION]:
-      'If you didn’t delay your payments, go to the next step.',
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',
@@ -170,6 +174,8 @@ const en: Translations = {
       'Only count the number of years since the age of 18.',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Do not include periods when they were outside Canada for at least 6 months at a time. Some exceptions apply, such as working for a Canadian employer abroad.',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Only count the number of years since the age of 18.',
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -293,7 +299,7 @@ const en: Translations = {
       // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Yes, my partner receives the Old Age Security pension',
+        text: 'Yes',
         shortText: 'Yes',
       },
       // {
@@ -303,7 +309,7 @@ const en: Translations = {
       // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'No, my partner does not receive the Old Age Security pension',
+        text: 'No',
         shortText: 'No',
       },
       {
@@ -414,11 +420,13 @@ const en: Translations = {
     alwIfYouApply:
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your couple's income is less than&nbsp;",
     alwsIfYouApply:
-      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than ",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
     alwsApply:
-      'You can apply 6 to 11 months before you become eligible at 6X. ',
+      'You can apply 6 to 11 months before you become eligible at 60. ',
+    alwPartnerEligible:
+      'Your partner can apply 6 to 11 months before they become eligible at 60.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -469,9 +477,11 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'Your enrolement status should be confirmed by mail the month after you turn 64.',
+        'Your enrolment status should be confirmed by mail the month after you turn 64.',
+      shouldReceive65to69:
+        "Your enrolment status should have been confirmed by mail the month after you turned 64. If you didn't receive a letter, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       youShouldReceiveLetter:
-        'Your enrolement status should be confirmed by mail the month after you turn 64.',
+        'Your enrolment status should be confirmed by mail the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
@@ -603,7 +613,7 @@ const en: Translations = {
     },
     socialSecurityEligible: {
       heading: 'You may become eligible earlier',
-      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> external-link-alt for more information.",
+      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
     socialSecurityEligiblePartner: {
       heading: 'Your partner may become eligible earlier',

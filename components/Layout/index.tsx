@@ -49,9 +49,10 @@ export const Layout: React.VFC<{
 
   const topnavProps = {
     skipToMain: tsln.skipToMain,
-    skipToMainPath: '#applicationTitle',
+    skipToMainPath: 'applicationTitle',
+    skipToFormPath: 'stepperForm',
     skipToAbout: tsln.skipToAbout,
-    skipToAboutPath: '#footer',
+    skipToAboutPath: 'footer',
     switchToBasic: tsln.switchToBasic,
     switchToBasicPath: '',
     displayAlternateLink: false,
@@ -128,6 +129,13 @@ export const Layout: React.VFC<{
       <Head title={title} />
       {/* <TestBanner /> */}
       <main className="mainContent">
+        <div
+          id="topOfPageFocus"
+          tabIndex={-1}
+          style={{ position: 'absolute', top: 0, left: 0, opacity: 0 }}
+        >
+          {/* Hidden focusable element */}
+        </div>
         <div className="xs:container s:container md:container lg:container mx-0 flex flex-col mb-16 mt-8">
           <Header
             id="header"
@@ -147,20 +155,27 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          <h1 id="applicationTitle" className="h1 my-8">
-            {title}
-          </h1>
-          <div className="mb-6">
-            <Message
-              id={'wip'}
-              iconId={'testkey'}
-              iconAltText={tsln.infoText}
-              type={'info'}
-              heading={tsln.workInProgress}
-              body={tsln.workInProgressBody}
-              asHtml
-            />
-          </div>
+          {!router.pathname.includes('/questions') && (
+            <>
+              <h1 id="applicationTitle" className="h1 mt-8 mb-2">
+                {title}
+              </h1>
+              <div>
+                <div className="my-6">
+                  <Message
+                    id={'wip'}
+                    iconId={'testkey'}
+                    iconAltText={tsln.infoText}
+                    type={'info'}
+                    heading={tsln.workInProgress}
+                    body={tsln.workInProgressBody}
+                    asHtml
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
           {children}
         </div>
 
