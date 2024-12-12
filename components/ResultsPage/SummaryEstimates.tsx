@@ -122,33 +122,50 @@ export const SummaryEstimates: React.VFC<{
 
         return (
           <div key={heading}>
-            <h3 className="h3 mt-5 mb-5" key={'heading' + heading}>
+            <h3
+              className={`h3 ${index != 0 ? 'mt-5' : ''} mb-5`}
+              key={'heading' + heading}
+            >
               {heading}
             </h3>
             <div key={`estimation-${year}`} className="mb-5">
-              {userResult && (
-                <Estimation
-                  partner={false}
-                  resultObject={userResultObject}
-                  resultArray={userResults}
-                  age={userAge}
-                  maritalStatus={maritalStatus}
-                />
-              )}
+              <div key={`estimation-sub-${year}`} className="space-y-4">
+                {userResult && (
+                  <Estimation
+                    partner={false}
+                    resultObject={userResultObject}
+                    resultArray={userResults}
+                    age={userAge}
+                    maritalStatus={maritalStatus}
+                  />
+                )}
 
-              {partnerResult && (
-                <Estimation
-                  partner={true}
-                  resultObject={partnerResultObject}
-                  resultArray={partnerResults}
-                  age={partnerAge}
-                  maritalStatus={maritalStatus}
-                />
-              )}
-
+                {partnerResult && (
+                  <Estimation
+                    partner={true}
+                    resultObject={partnerResultObject}
+                    resultArray={partnerResults}
+                    age={partnerAge}
+                    maritalStatus={maritalStatus}
+                  />
+                )}
+              </div>
               {eligible &&
                 eligible.map((benefit: BenefitResult) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
+                  if (collapsedDetails) {
+                    const index = collapsedDetails.findIndex(
+                      (item) =>
+                        item.heading ===
+                        apiTrans.detailWithHeading.yourDeferralOptions.heading
+                    )
+                    if (index !== -1) {
+                      // show deferral first
+                      const [targetItem] = collapsedDetails.splice(index, 1)
+                      collapsedDetails.unshift(targetItem)
+                    }
+                  }
+
                   return (
                     <>
                       {collapsedDetails &&
@@ -193,7 +210,9 @@ export const SummaryEstimates: React.VFC<{
             </div>
             {headings.length > 1 &&
               index < year.length &&
-              index != headings.length - 1 && <hr />}
+              index != headings.length - 1 && (
+                <hr className="border-[#6F6F6F]" />
+              )}
           </div>
         )
       })}

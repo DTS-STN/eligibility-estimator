@@ -267,7 +267,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     ) {
-      !this.future && links.push(this.translations.links.apply[BenefitKey.gis])
+      links.push(this.translations.links.apply[BenefitKey.gis])
     }
     links.push(this.translations.links.overview[BenefitKey.gis])
     return links
@@ -288,12 +288,6 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       )
     }
 
-    if (
-      this.eligibility.result !== ResultKey.ELIGIBLE &&
-      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
-    )
-      return cardCollapsedText
-
     if (!this.partner) {
       let text = ''
       let heading
@@ -302,19 +296,18 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         this.oasResult.eligibility.result === ResultKey.ELIGIBLE ||
         this.oasResult.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
       ) {
+        const ageToCheck = this.originalInput?.age
+          ? this.originalInput?.age
+          : this.formAge
+
         if (this.oasResult.cardDetail.meta.receiveOAS == false) {
           heading = this.translations.detail.yourDeferralOptions
           if (this.oasResult.entitlement.result > 0) {
-            if (
-              this.input.age != this.originalInput?.age &&
-              this.originalInput?.age < 70
-            ) {
-              if (this.input.age >= 65 && this.input.age < 70) {
-                //CHECK IF RECEIVING OAS
-                text += this.translations.detail.deferralEligible
-              } else if (this.formAge < 65) {
-                text += this.translations.detail.deferralWillBeEligible
-              }
+            if (ageToCheck >= 65 && ageToCheck < 70) {
+              //CHECK IF RECEIVING OAS
+              text += this.translations.detail.deferralEligible
+            } else if (ageToCheck < 65) {
+              text += this.translations.detail.deferralWillBeEligible
             }
 
             if (text !== '') {
@@ -324,7 +317,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
               if (!this.input.livedOnlyInCanada) {
                 if (
-                  this.formAge != this.input.age &&
+                  ageToCheck != this.input.age &&
                   this.formYearsInCanada <= 40 &&
                   this.formYearsInCanada != this.input.yearsInCanadaSince18
                 ) {

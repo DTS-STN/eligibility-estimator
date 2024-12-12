@@ -249,7 +249,9 @@ export class BenefitHandler {
         clientOasWithDeferral.info,
         false,
         this.future,
-        this.input.client
+        this.input.client,
+        this.formAge,
+        this.formYearsInCanada
       )
 
       consoleDev(

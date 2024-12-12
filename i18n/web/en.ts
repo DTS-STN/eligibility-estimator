@@ -301,7 +301,7 @@ const en: WebTranslations = {
       'EC Economics and Industry;Allowances;Benefits;Survivor benefits;Finance;Personal finance;Income;Pensions;Public pensions,PE Persons;Adults;Seniors,So Society and Culture;Old age',
   },
   resultsPage: {
-    moreInformation: "Plus d'information ",
+    moreInformation: 'More information on ',
     yourMonEstimateHeading: 'Your monthly estimate',
     changeInSituation: 'Changes in your situation may impact your results.',
     youEstimateMayChange: 'Your estimate may change over time based on',

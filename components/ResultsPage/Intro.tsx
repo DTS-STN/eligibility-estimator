@@ -6,7 +6,14 @@ export const Intro: React.VFC<{
   userAge: number
   estimateLength: number
   hasMultipleOasGis: boolean
-}> = ({ hasPartner, userAge, estimateLength, hasMultipleOasGis }) => {
+  alreadyReceiving: boolean
+}> = ({
+  hasPartner,
+  userAge,
+  estimateLength,
+  hasMultipleOasGis,
+  alreadyReceiving,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   return (
     <>
@@ -29,7 +36,7 @@ export const Intro: React.VFC<{
             <li>{tsln.resultsPage.basedYourPartner}</li>
           </ul>
           <p className="my-6">
-            {userAge > 70 && hasMultipleOasGis
+            {userAge < 70 && hasMultipleOasGis
               ? tsln.resultsPage.ifYouChoseToDefer
               : ''}{' '}
             {tsln.resultsPage.changeInSituation}

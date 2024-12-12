@@ -414,11 +414,13 @@ const en: Translations = {
     alwIfYouApply:
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your couple's income is less than&nbsp;",
     alwsIfYouApply:
-      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than ",
+      "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
     alwsApply:
-      'You can apply 6 to 11 months before you become eligible at 6X. ',
+      'You can apply 6 to 11 months before you become eligible at 60. ',
+    alwPartnerEligible:
+      'Your partner can apply 6 to 11 months before they become eligible at 60.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -469,9 +471,11 @@ const en: Translations = {
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
-        'Your enrolement status should be confirmed by mail the month after you turn 64.',
+        'Your enrolment status should be confirmed by mail the month after you turn 64.',
+      shouldReceive65to69:
+        "Your enrolment status should have been confirmed by mail the month after you turned 64. If you didn't receive a letter, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       youShouldReceiveLetter:
-        'Your enrolement status should be confirmed by mail the month after you turn 64.',
+        'Your enrolment status should be confirmed by mail the month after you turn 64.',
       youShouldHaveReceivedLetter:
         'You should have received a letter about your enrolment status the month after you turned 64.',
       ifYouDidnt:
@@ -603,7 +607,7 @@ const en: Translations = {
     },
     socialSecurityEligible: {
       heading: 'You may become eligible earlier',
-      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> external-link-alt for more information.",
+      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
     socialSecurityEligiblePartner: {
       heading: 'Your partner may become eligible earlier',

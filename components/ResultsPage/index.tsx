@@ -53,6 +53,14 @@ const ResultsPage: React.VFC<{
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
 
+  const alreadyReceiving =
+    inputs.find((input) => input.key === FieldKey.ALREADY_RECEIVE_OAS) !==
+    undefined
+      ? inputs.find((input) => input.key === FieldKey.ALREADY_RECEIVE_OAS)[
+          'value'
+        ]
+      : false
+
   const maritalStatus = inputs.find(
     (input) => input.key === FieldKey.MARITAL_STATUS
   )['value']
@@ -198,6 +206,7 @@ const ResultsPage: React.VFC<{
               userArrNew.filter((element) => element !== null).length
             }
             hasMultipleOasGis={multipleOAS_GIS}
+            alreadyReceiving={alreadyReceiving === 'true'}
           />
           {/* Summary Estimates section */}
           <div className="border-[#269ABC] bg-[#EEFAFF] p-8">

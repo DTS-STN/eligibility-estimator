@@ -100,6 +100,7 @@ export interface Translations {
     alwsIfYouApply: string
     afsNotEligible: string
     alwsApply: string
+    alwPartnerEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
@@ -134,6 +135,7 @@ export interface Translations {
       serviceCanadaReviewYourPayment: string
       automaticallyBePaid: string
       youWillReceiveLetter: string
+      shouldReceive65to69: string
       youShouldReceiveLetter: string
       youShouldHaveReceivedLetter: string
       ifYouDidnt: string

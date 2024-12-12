@@ -420,13 +420,15 @@ const fr: Translations = {
     alwEligibleIncomeTooHigh:
       'Vous êtes probablement admissible à cette prestation, mais le revenu combiné de vous et votre conjoint est trop élevé pour recevoir un paiement mensuel pour le moment.',
     alwIfYouApply:
-      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu combiné est moins de',
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu combiné est moins de&nbsp;',
     alwsIfYouApply:
-      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins de',
+      'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu est moins de&nbsp;',
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible à 6X ans.',
+      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible à 60 ans.',
+    alwPartnerEligible:
+      'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 60 ans.',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -478,6 +480,8 @@ const fr: Translations = {
         'Vous recevrez automatiquement des paiements si votre revenu est admissible.',
       youWillReceiveLetter:
         "Votre statut d'inscription devrait être confirmé par la poste le mois après votre 64e anniversaire.",
+      shouldReceive65to69:
+        "Votre statut d'inscription aurait dû être confirmé par la poste le mois après votre 64e anniversaire. Si vous n'avez pas reçu de lettre, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       youShouldReceiveLetter:
         "Vous devriez recevoir une lettre au sujet de votre statut d'inscription le mois après votre 64e anniversaire.",
       youShouldHaveReceivedLetter:
