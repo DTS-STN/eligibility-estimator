@@ -2,6 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { OasEligibility } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
 
+// Residence is 5 years
+// current age    GAP1     eliAge    GAP2    PSDAge
+//    58y7m       6y5m       65       5y       70
+// We need to calculate both "maxRes" and "maxDeferral"
+
+// maxRes           original res + gaps
+//const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
+//residence = Math.floor(totalMonths / 12)
+//deferral = totalMonths % 12
+
+// maxDeferral
+// residence = whole years of GAP1
+// deferral = GAP2
+
+// All that's needed is the PSD age from the psd component and a flag that this is a "psd calc"
+// Then, when running the calc - "no deferral" and "deferral" OAS calculations will take the flag and work a little bit differently
+
 const monthNames = [
   'Jan.',
   'Feb.',
@@ -17,18 +34,24 @@ const monthNames = [
   'Dec.',
 ]
 
-const calculateMonthsFromToday = (
-  selectedMonth: number,
-  selectedYear: number
+const calculatePsdAge = (
+  currentAge: number,
+  targetMonth: number,
+  targetYear: number
 ) => {
   const today = new Date()
   const currentYear = today.getFullYear()
-  const currentMonth = today.getMonth()
+  const currentMonth = today.getMonth() // Months are 0-indexed in JS, so add 1
 
-  const totalCurrentMonths = currentYear * 12 + currentMonth
-  const totalSelectedMonths = selectedYear * 12 + selectedMonth
+  // Calculate the total number of months elapsed between the current date and the target date
+  const monthsElapsed =
+    (targetYear - currentYear) * 12 + (targetMonth - currentMonth)
 
-  return totalSelectedMonths - totalCurrentMonths
+  // Convert monthsElapsed into years (with decimals)
+  const ageAtTargetDate = currentAge + monthsElapsed / 12
+
+  // Return the calculated age rounded to two decimal places
+  return parseFloat(ageAtTargetDate.toFixed(2))
 }
 
 const getFirstEligibleDate = (currentAge: number, ageOfEligibility: number) => {
@@ -62,7 +85,7 @@ const getFirstEligibleDate = (currentAge: number, ageOfEligibility: number) => {
 }
 
 export const PSDBox: React.VFC<{
-  onUpdate: (monthsFromToday: number) => void
+  onUpdate: (psdAge: number) => void
   inputObj: any
   isUpdating: boolean
 }> = ({ onUpdate, inputObj, isUpdating }) => {
@@ -80,18 +103,13 @@ export const PSDBox: React.VFC<{
     inputObj.livingCountry
   )
 
-  console.log('clientEliObj', clientEliObj)
-
   const maxEliAge = Math.max(clientEliObj.ageOfEligibility, age)
   const yearsToDeferMax = maxEliAge >= 70 ? null : 70 - maxEliAge
   const totalMonths = yearsToDeferMax * 12
 
-  console.log('yearsToDeferMax', yearsToDeferMax)
-
   const receiveOAS = inputObj?.receiveOAS === 'true'
   const showPSD = !receiveOAS && yearsToDeferMax
 
-  const currentDate = new Date()
   const [showUpdateButton, setShowUpdateButton] = useState(false)
   const [months, setMonths] = useState<number[]>([])
   const [years, setYears] = useState<number[]>([])
@@ -100,8 +118,6 @@ export const PSDBox: React.VFC<{
     Number(inputObj.age),
     clientEliObj.ageOfEligibility
   )
-
-  console.log('firstEligibleDate', firstEligibleDate)
 
   const [selectedMonth, setSelectedMonth] = useState<number>(
     firstEligibleDate.month
@@ -112,7 +128,6 @@ export const PSDBox: React.VFC<{
   )
 
   const populateDropdowns = (totalMonths: number) => {
-    console.log('totalMonths', totalMonths)
     const targetYear = firstEligibleDate.year + Math.floor(totalMonths / 12)
 
     const remainingMonths = (firstEligibleDate.month + totalMonths) % 12 // Remaining months (modulo 12)
@@ -120,8 +135,6 @@ export const PSDBox: React.VFC<{
       remainingMonths % 1 < 0.5
         ? Math.floor(remainingMonths)
         : Math.ceil(remainingMonths)
-
-    console.log('targetMonth', targetMonth)
 
     let tempMonths: number[] = []
     let tempYears: number[] = []
@@ -185,11 +198,9 @@ export const PSDBox: React.VFC<{
   }, [selectedMonth, selectedYear])
 
   const handleUpdateClick = () => {
-    const monthsFromToday = calculateMonthsFromToday(
-      selectedMonth,
-      selectedYear
-    )
-    onUpdate(monthsFromToday)
+    const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
+
+    onUpdate(psdAge)
   }
 
   return (

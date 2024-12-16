@@ -48,7 +48,6 @@ const ResultsPage: React.VFC<{
   futurePartnerResults,
   summary,
 }) => {
-  console.log('inputs', inputHelper.asArray)
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject
@@ -217,7 +216,6 @@ const ResultsPage: React.VFC<{
       .filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
   const handleUpdate = async (monthsFromToday) => {
-    console.log('monthsFromToday', monthsFromToday)
     setIsUpdating(true)
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsUpdating(false)

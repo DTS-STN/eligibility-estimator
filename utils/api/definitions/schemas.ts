@@ -47,6 +47,7 @@ const customAgeValidation = (value, helpers, partner = false) => {
   return value
 }
 export const RequestSchema = Joi.object({
+  psdAge: Joi.number().optional(),
   incomeAvailable: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.provideIncomeEmpty }),

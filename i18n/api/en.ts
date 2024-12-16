@@ -39,6 +39,7 @@ const en: Translations = {
     [ResultKey.ALMOST_ELIGIBLE]: 'Almost eligible',
   },
   question: {
+    [FieldKey.PSD_AGE]: 'When do you want to start receiving your pension?',
     [FieldKey.INCOME_AVAILABLE]:
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
