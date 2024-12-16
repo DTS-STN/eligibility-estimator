@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
-import { useSessionStorage } from 'react-use'
+import { useRef, useState } from 'react'
 import { FieldInput, InputHelper } from '../../client-state/InputHelper'
+import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
   LivingCountry,
@@ -18,13 +18,10 @@ import {
 import { Button } from '../Forms/Button'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
-import { YourAnswers } from './YourAnswers'
-import { Translations, getTranslations } from '../../i18n/api'
-import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
 import { PSDBox } from './PSDBox'
-import { use } from 'chai'
-import { OasEligibility } from '../../utils/api/helpers/utils'
+import { SummaryEstimates } from './SummaryEstimates'
+import { YourAnswers } from './YourAnswers'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -39,6 +36,7 @@ const ResultsPage: React.VFC<{
   futureClientResults: any
   partnerResults: BenefitResultsObject
   futurePartnerResults: any
+  handleUpdateEstimate: (psdAge: number) => void
   summary: SummaryObject
 }> = ({
   inputHelper,
@@ -46,6 +44,7 @@ const ResultsPage: React.VFC<{
   futureClientResults,
   partnerResults,
   futurePartnerResults,
+  handleUpdateEstimate,
   summary,
 }) => {
   const ref = useRef<HTMLDivElement>()
@@ -215,9 +214,12 @@ const ResultsPage: React.VFC<{
       .filter((item) => item !== null)
       .filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
-  const handleUpdate = async (monthsFromToday) => {
+  const handleUpdate = async (psdAge) => {
     setIsUpdating(true)
     await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    handleUpdateEstimate(psdAge)
+
     setIsUpdating(false)
   }
 

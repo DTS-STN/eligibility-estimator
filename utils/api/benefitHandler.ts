@@ -160,6 +160,44 @@ export class BenefitHandler {
       )
     }
 
+    // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
+    const clientOasHelper = evaluateOASInput(this.input.client)
+
+    console.log('clientOasHelper BEFORE CHANGE', clientOasHelper) // input age is 55 here - cant defer
+
+    if (this.rawInput.psdAge) {
+      const psdAge = this.rawInput.psdAge
+      console.log('PSG IS PERSENT')
+      console.log('psdAge', this.rawInput.psdAge)
+      // maxRes           original res + gaps
+      //const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
+      //residence = Math.floor(totalMonths / 12)
+      //deferral = totalMonths % 12
+      const totalMonthsRes =
+        (clientOasHelper.ageOfEligibility - this.input.client.age) * 12 +
+        (psdAge - clientOasHelper.ageOfEligibility) * 12
+      console.log('totalMonthsRes', totalMonthsRes)
+
+      const psdRes =
+        (Number(this.input.client.yearsInCanadaSince18) ||
+          Number(this.input.client.yearsInCanadaSinceOAS) * 12) +
+        Math.floor(totalMonthsRes / 12)
+      const psdDef = Math.round(totalMonthsRes % 12)
+
+      console.log('psdRes', psdRes)
+      console.log('psdDef', psdDef)
+
+      this.input.client.age = psdAge
+      this.input.client.yearsInCanadaSince18 = psdRes
+      this.input.client.oasDeferDuration = JSON.stringify({
+        months: psdDef,
+        years: 0,
+      })
+    }
+
+    const clientOasHelper2 = evaluateOASInput(this.input.client) // here age should be 69.33 - can defer
+    console.log('clientOasHelper2 AFTER CHANGE', clientOasHelper2)
+
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.fields.translations,
@@ -202,19 +240,44 @@ export class BenefitHandler {
       clientOasNoDeferral.entitlement.result
     )
 
-    // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
-    const clientOasHelper = evaluateOASInput(this.input.client)
-
-    console.log('clientOasHelper', clientOasHelper)
-
     let clientOasWithDeferral
-    if (clientOasHelper.canDefer) {
+    if (clientOasHelper.canDefer || this.rawInput.psdAge) {
+      console.log(
+        'this.input.client.yearsInCanadaSince18',
+        this.input.client.yearsInCanadaSince18
+      )
+      console.log(
+        'TESTNG what is REZ',
+        Math.floor(clientOasHelper.ageOfEligibility - this.input.client.age)
+      )
+
+      const newInput = this.rawInput.psdAge
+        ? {
+            ...this.input.client,
+            inputAge: this.input.client.age,
+            age: clientOasHelper.ageOfEligibility,
+            receiveOAS: true,
+            yearsInCanadaSince18:
+              this.input.client.yearsInCanadaSince18 +
+              Math.floor(
+                clientOasHelper.ageOfEligibility - this.input.client.age
+              ),
+            oasDeferDuration: JSON.stringify({
+              months:
+                (Number(this.rawInput.psdAge) -
+                  clientOasHelper.ageOfEligibility) *
+                12,
+              years: 0,
+            }),
+          }
+        : clientOasHelper.newInput
+
       consoleDev(
         'Modified input to calculate OAS with deferral',
         clientOasHelper.newInput
       )
       clientOasWithDeferral = new OasBenefit(
-        clientOasHelper.newInput,
+        newInput,
         this.fields.translations,
         null,
         false,

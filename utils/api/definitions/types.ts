@@ -25,6 +25,7 @@ import { FieldConfig, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
+  psdAge?: number
   incomeAvailable?: boolean
   income: number // personal income
   incomeWork: number // personal income from work
@@ -60,6 +61,7 @@ export interface RequestInput {
  * After Joi validation and additional pre-processing, this is the object passed around to provide app logic.
  */
 export interface ProcessedInput {
+  psdAge?: number
   income: IncomeHelper
   age: number
   clientBirthDate: string

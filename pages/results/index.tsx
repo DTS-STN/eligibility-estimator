@@ -67,6 +67,17 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     setResponse(response)
   }, [language])
 
+  const handleUpdateEstimate = (psdAge) => {
+    const psdHandler = new MainHandler({
+      ...inputHelper.asObjectWithLanguage,
+      psdAge,
+    })
+
+    const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
+
+    console.log('psdResponse', psdResponse)
+  }
+
   return (
     <>
       <Head>
@@ -82,6 +93,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
             futureClientResults={response.futureClientResults}
             futurePartnerResults={response.futurePartnerResults}
             partnerResults={response.partnerResults}
+            handleUpdateEstimate={handleUpdateEstimate}
             summary={response.summary}
           />
         ) : (

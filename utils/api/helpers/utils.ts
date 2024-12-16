@@ -340,6 +340,7 @@ export function evaluateOASInput(input) {
   }
 
   return {
+    ageOfEligibility: eliObj.ageOfEligibility,
     canDefer,
     newInput,
     justBecameEligible,
