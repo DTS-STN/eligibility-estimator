@@ -31,7 +31,7 @@ const ResultsPage = dynamic(
 const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
-  const [inputs, setInputs]: [
+  const [_inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', {})
@@ -43,7 +43,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const [response, setResponse]: [any, (value: any) => void] =
     useSessionStorage('calculationResults', {})
 
-  const [savedInputs, setSavedInputs]: [any, (value: any) => void] =
+  const [savedInputs, _setSavedInputs]: [any, (value: any) => void] =
     useSessionStorage('resultPageInputs', {})
 
   const inputHelper = new InputHelper(
@@ -60,6 +60,12 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
+    const response: ResponseSuccess | ResponseError = mainHandler.results
+    setResponse(response)
+  }, [language])
 
   return (
     <>
