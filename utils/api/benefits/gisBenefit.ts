@@ -303,13 +303,12 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         if (this.oasResult.cardDetail.meta.receiveOAS == false) {
           heading = this.translations.detail.yourDeferralOptions
           if (this.oasResult.entitlement.result > 0) {
-            if (ageToCheck >= 65 && ageToCheck < 70) {
+            if (this.input.age >= 65 && this.input.age < 70) {
               //CHECK IF RECEIVING OAS
               text += this.translations.detail.deferralEligible
-            } else if (ageToCheck < 65) {
+            } else if (this.input.age < 65) {
               text += this.translations.detail.deferralWillBeEligible
             }
-
             if (text !== '') {
               if (this.entitlement.result !== 0) {
                 text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`

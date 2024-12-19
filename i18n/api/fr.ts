@@ -390,7 +390,7 @@ const fr: Translations = {
       "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.</p>",
     eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#livingCountry'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
@@ -418,9 +418,9 @@ const fr: Translations = {
     youCantGetThisBenefit:
       'Vous ne pouvez pas recevoir cette prestation si vous ne recevez pas la pension de la Sécurité de la vieillesse. Vos paiements du Supplément de revenu garanti n’augmenteront pas si vous reportez votre pension.',
     thisEstimate:
-      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}.',
+      'Cette estimation est basée sur les informations fournies. Votre montant réel pourrait être différent. Pour confirmer que vos renseignements sont à jour, consultez votre compte Mon dossier Service Canada.',
     thisEstimateWhenZero:
-      'Cette estimation est basée sur les informations fournies. Pour confirmer que vos renseignements sont à jour, consultez votre compte {MY_SERVICE_CANADA}.',
+      'Cette estimation est basée sur les informations fournies. Pour confirmer que vos renseignements sont à jour, consultez votre compte Mon dossier Service Canada.',
     alwNotEligible:
       "L'Allocation est une prestation pour les personnes âgées de 60 à 64 ans dont le conjoint reçoit le Supplément de revenu garanti.",
     alwEligibleButPartnerAlreadyIs:
@@ -461,7 +461,7 @@ const fr: Translations = {
     currentEligible: 'Présentement',
     you: 'vous pourriez',
     yourPartner: 'votre conjoint pourrait',
-    youCouldReceivePerMonth: 'par mois&nbsp;:',
+    youCouldReceivePerMonth: 'par mois&nbsp;',
     youCouldReceiveTo: 'à',
     youCouldReceive: 'recevoir',
     youCouldReceiveUntil: 'Jusqu’à',
@@ -522,7 +522,7 @@ const fr: Translations = {
         'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu  est admissible.',
       canApplyOnline: 'Vous pouvez faire une demande pour cette prestation.',
       ifYouAlreadyApplied:
-        'Si vous avez déjà fait une demande pour le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
+        "Si vous avez déjà demandé le Supplément de revenu garanti, vous pouvez <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>vous connecter à Mon dossier Service Canada<a/> pour confirmer que vos renseignements sont à jour.",
       ifYouAlreadyReceive:
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
@@ -619,7 +619,7 @@ const fr: Translations = {
     },
     retroactivePayment: {
       heading: 'Vos options de report',
-      text: 'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
+      text: 'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     mayBecomeEligible: {
       heading: 'Paiement rétroactif',

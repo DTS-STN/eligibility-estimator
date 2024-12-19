@@ -380,7 +380,7 @@ const en: Translations = {
       "You may be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1 month after you turn 59.</p>",
     eligibleWhen65: 'You may be eligible when you turn 65.',
     mustBeInCanada:
-      "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#livingCountry'>edit your answers</a> to see what you could get if you lived in Canada.",
+      "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions?step=residence'>edit your answers</a> to see what you could get if you lived in Canada.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
@@ -408,9 +408,9 @@ const en: Translations = {
     youCantGetThisBenefit:
       'You can’t get this benefit if you don’t receive the Old Age Security pension. Your Guaranteed Income Supplement payments won’t increase if you defer your pension.',
     thisEstimate:
-      'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
+      'This estimate is based on the information you provided. Your actual amount may be different. To confirm that your information is up to date, consult your My Service Canada Account.',
     thisEstimateWhenZero:
-      'This estimate is based on the information you provided. To confirm that your information is up to date, consult your {MY_SERVICE_CANADA}.',
+      'This estimate is based on the information you provided. To confirm that your information is up to date, consult your My Service Canada Account.',
     alwNotEligible:
       'The Allowance is for individuals between the ages of 60 and 64 whose spouse or common-law partner is receiving the Guaranteed Income Supplement.',
     alwEligibleButPartnerAlreadyIs:
@@ -453,7 +453,7 @@ const en: Translations = {
     yourPartner: 'your partner',
     youCouldReceive: 'could receive',
     youCouldReceiveTo: 'to',
-    youCouldReceivePerMonth: 'per month:',
+    youCouldReceivePerMonth: 'per month',
     youCouldReceiveUntil: 'Until age',
     youCouldReceiveFrom: 'From age ',
     youCouldStartReceivingAt: 'At ',
@@ -473,7 +473,7 @@ const en: Translations = {
       futureEligibleIncomeTooHigh:
         'You may be eligible once you turn {EARLIEST_ELIGIBLE_AGE}. Since your income is too high, you may not receive a monthly payment.',
       serviceCanadaReviewYourPayment:
-        'If you apply, your payement will be reviewed each year based on your income tax return.',
+        'If you apply, your payment amount will be reviewed each year based on your income tax return.',
       automaticallyBePaid:
         "You'll automatically be paid if your income qualifies.",
       youWillReceiveLetter:
@@ -511,7 +511,7 @@ const en: Translations = {
         "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income qualifies.",
       canApplyOnline: 'You can apply for this benefit.',
       ifYouAlreadyApplied:
-        'If you already applied for the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
+        "If you already applied for the Guaranteed Income Supplement, you can <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/services/my-account.html'>sign in to My Service Canada Account</a> to confirm that your information is up to date.",
       ifYouAlreadyReceive:
         'If you already receive the Guaranteed Income Supplement, you can confirm that your information is up to date in your {MY_SERVICE_CANADA}.',
     },

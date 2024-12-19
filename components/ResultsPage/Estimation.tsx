@@ -117,7 +117,7 @@ export const Estimation: React.VFC<{
     if (benefitType.includes('alw') || benefitType.includes('alws')) {
       //CURRENT ELIGIBLE
       if (benefitAge == '0') {
-        text = `${apiTrans.detail.youCouldReceiveUntil} ${displayAge}${
+        text = `${apiTrans.detail.youCouldReceiveUntil} 65${
           language == 'fr' ? ' ans' : ''
         },`
       }
@@ -127,7 +127,7 @@ export const Estimation: React.VFC<{
           apiTrans.detail.youCouldReceiveTo
         } 65${language == 'fr' ? ' ans' : ''},`
       }
-      text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+      text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
     }
     //OAS AND GIS BENEFIT
     else {
@@ -142,7 +142,7 @@ export const Estimation: React.VFC<{
               partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
             } ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${
               apiTrans.detail.youCouldReceivePerMonth
-            }`
+            }:`
           }
           //FIRST NOT LAST
           else {
@@ -165,13 +165,13 @@ export const Estimation: React.VFC<{
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${
                 apiTrans.detail.youCouldReceivePerMonth
-              }`
+              }:`
             }
             text = `${
               partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
             } ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${
               apiTrans.detail.youCouldReceivePerMonth
-            }`
+            }:`
           }
         }
 
@@ -184,7 +184,7 @@ export const Estimation: React.VFC<{
               language == 'fr' ? ' ans' : ''
             }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
               apiTrans.detail.youCouldStartReceiving
-            } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+            } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
           }
           //NOT LAST
           else {
@@ -206,7 +206,7 @@ export const Estimation: React.VFC<{
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldStartReceiving} ${eligibleAmt} ${
                 apiTrans.detail.youCouldReceivePerMonth
-              }`
+              }:`
             }
             //NEXT NOT SAME
             else {
@@ -215,7 +215,7 @@ export const Estimation: React.VFC<{
               } ${Object.keys(nextBenefitResult)[0]}${
                 language == 'fr' ? ' ans' : ''
               },`
-              text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+              text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
             }
           }
         }
@@ -238,17 +238,17 @@ export const Estimation: React.VFC<{
             partner
               ? apiTrans.detail.yourEstimateIsStillPartner
               : apiTrans.detail.yourEstimateIsStill
-          } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+          } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}.`
         }
         //PREVIOUS NOT THE SAME
         else {
           //IS LAST
           if (lastOasGis) {
-            text = `${apiTrans.detail.youCouldStartReceivingAt} ${benefitAge}${
+            text = `${apiTrans.detail.youCouldStartReceivingAt} ${displayAge}${
               language == 'fr' ? ' ans' : ''
             }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
               apiTrans.detail.youCouldContinueReceiving
-            } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+            } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
           } else {
             const nextBenefitResult =
               arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
@@ -263,16 +263,18 @@ export const Estimation: React.VFC<{
             if (eligibleTotalAmount == nextBenefitTotal) {
               text = `${
                 apiTrans.detail.youCouldStartReceivingAt
-              } ${benefitAge}${language == 'fr' ? ' ans' : ''}, ${
+              } ${displayAge}${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldContinueReceiving} ${eligibleAmt} ${
                 apiTrans.detail.youCouldReceivePerMonth
-              }`
+              }:`
             } else {
               text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
                 apiTrans.detail.youCouldReceiveTo
-              } ${nextBenefitAge}${language == 'fr' ? ' ans' : ''},`
-              text += ` ${isPartnerStr} ${apiTrans.detail.continueReceiving} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+              } ${Math.trunc(Number(nextBenefitAge))}${
+                language == 'fr' ? ' ans' : ''
+              },`
+              text += ` ${isPartnerStr} ${apiTrans.detail.youCouldContinueReceiving} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
             }
           }
         }

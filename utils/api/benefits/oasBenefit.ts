@@ -462,7 +462,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       //EC15
       if (this.entitlement.result > 0) {
         if (
-          this.input.partnerBenefitStatus.value !== PartnerBenefitStatus.NONE
+          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
         ) {
           cardCollapsedText.push(
             this.translations.detailWithHeading.partnerEligibleButAnsweredNo
@@ -542,7 +542,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       const ageCalc = this.formAge ? this.formAge : this.inputAge
 
-      if (ageCalc > 74 && ageCalc > 64 && this.entitlement.result > 0) {
+      if (ageCalc >= 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75Applied
         )
