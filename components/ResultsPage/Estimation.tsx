@@ -149,11 +149,14 @@ export const Estimation: React.VFC<{
             const nextBenefitResult =
               arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
+            //have to get the GIS before hand because when user not in Canada, GIS is null
+            const gis =
+              nextBenefitResult[Object.keys(nextBenefitResult)[0]]['gis']
+
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
-                .entitlement.result +
-              nextBenefitResult[Object.keys(nextBenefitResult)[0]]['gis']
-                .entitlement.result
+                .entitlement.result + (gis ? gis.entitlement.result : 0)
+
             const nextBenefitAge = Object.keys(nextBenefitResult)[0]
 
             //IS NEXT RESULT THE SAME
@@ -191,11 +194,14 @@ export const Estimation: React.VFC<{
             const nextBenefitResult =
               arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
+            //have to get the GIS before hand because when user not in Canada, GIS is null
+            const gis =
+              nextBenefitResult[Object.keys(nextBenefitResult)[0]]['gis']
+
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
-                .entitlement.result +
-              nextBenefitResult[Object.keys(nextBenefitResult)[0]]['gis']
-                .entitlement.result
+                .entitlement.result + (gis ? gis.entitlement.result : 0)
+
             const nextBenefitAge = Object.keys(nextBenefitResult)[0]
 
             //NEXT SAME
@@ -225,11 +231,13 @@ export const Estimation: React.VFC<{
         const previousBenefitResult =
           arrayOfBen[arrayOfBen.indexOf(resultObject) - 1]
 
+        //have to get the GIS before hand because when user not in Canada, GIS is null
+        const gis =
+          previousBenefitResult[Object.keys(previousBenefitResult)[0]]['gis']
+
         const previousBenefitTotal =
           previousBenefitResult[Object.keys(previousBenefitResult)[0]]['oas']
-            .entitlement.result +
-          previousBenefitResult[Object.keys(previousBenefitResult)[0]]['gis']
-            .entitlement.result
+            .entitlement.result + (gis ? gis.entitlement.result : 0)
 
         //PREVIOUS THE SAME
         if (previousBenefitTotal === eligibleTotalAmount) {
@@ -253,11 +261,14 @@ export const Estimation: React.VFC<{
             const nextBenefitResult =
               arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
+            //have to get the GIS before hand because when user not in Canada, GIS is null
+            const gis =
+              nextBenefitResult[Object.keys(nextBenefitResult)[0]]['gis']
+
             const nextBenefitTotal =
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
-                .entitlement.result +
-              nextBenefitResult[Object.keys(nextBenefitResult)[0]]['gis']
-                .entitlement.result
+                .entitlement.result + (gis ? gis.entitlement.result : 0)
+
             const nextBenefitAge = Object.keys(nextBenefitResult)[0]
 
             if (eligibleTotalAmount == nextBenefitTotal) {

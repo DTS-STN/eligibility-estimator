@@ -591,11 +591,11 @@ const fr: Translations = {
     recoveryTaxPartner: {
       heading:
         'L’impôt de récupération s’appliquera à la pension de votre conjoint',
-      text: "Puisque le revenu de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
+      text: "Puisque le revenu de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, il ne recevra pas une partie ou la totalité de sa pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     },
     recoveryTaxBoth: {
       heading: 'L’impôt de récupération s’appliquera à vos pensions',
-      text: "Puisque vos revenus et ceux de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
+      text: "Puisque vos revenus et ceux de votre conjoint sont plus grand que {OAS_RECOVERY_TAX_CUTOFF}, vous ne recevrez pas une partie ou la totalité de vos pensions de la Sécurité de la vieillesse en raison de l'{LINK_RECOVERY_TAX}.",
     },
     nonResidentTax: {
       heading: 'Des impôts s’appliqueront à votre pension',
@@ -603,11 +603,11 @@ const fr: Translations = {
     },
     nonResidentTaxPartner: {
       heading: 'Des impôts s’appliqueront à la pension de votre conjoint',
-      text: "Puisque le revenu de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
+      text: "Puisque le revenu de votre conjoint est plus grand que {OAS_RECOVERY_TAX_CUTOFF} et qu’il vit à l’extérieur du Canada, il ne recevra pas une partie ou la totalité de sa pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
     },
     nonResidentTaxBoth: {
       heading: 'Des impôts s’appliqueront à vos pensions',
-      text: "Puisque vos revenus et ceux de votre conjoint sont plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de votre pension de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
+      text: "Puisque vos revenus et ceux de votre conjoint sont plus grand que {OAS_RECOVERY_TAX_CUTOFF} et que vous vivez à l'extérieur du Canada, vous ne recevrez pas une partie ou la totalité de vos pensions de la Sécurité de la vieillesse en raison de : <ul class='list-disc' style='padding-left: 24px;'><li style='padding-left: 2px;'>l'{LINK_RECOVERY_TAX};</li><li style='padding-left: 2px;'>l'{LINK_NON_RESIDENT_TAX}.</li></ul></div>",
     },
     yourDeferralOptions: {
       heading: 'Vos options de report',

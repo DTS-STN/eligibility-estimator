@@ -230,9 +230,7 @@ const ResultsPage: React.VFC<{
         <div className="col-span-2 row-span-1">
           <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
           <BenefitCards
-            inputAge={Math.floor(
-              Number(inputs.find((input) => input.key === 'age').value)
-            )}
+            inputAge={Number(userAge)}
             results={resultsArray}
             futureClientResults={futureClientResults}
             partnerResults={partnerResultsArray}

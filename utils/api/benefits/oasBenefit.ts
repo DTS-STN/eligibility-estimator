@@ -31,6 +31,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   formAge: number
   formYearsInCanada: number
   userOas: OasBenefit
+  formReceiving: boolean
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -40,7 +41,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     deferral: boolean = false,
     inputAge?: number,
     formAge?: number,
-    formYearsInCanada?: number
+    formYearsInCanada?: number,
+    formReceiving?: boolean
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -53,6 +55,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     this.formAge = formAge
     this.formYearsInCanada = formYearsInCanada
     this.userOas = userOas
+    this.formReceiving = formReceiving
   }
 
   protected getEligibility(): EligibilityResult {
@@ -470,6 +473,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         }
       }
 
+      //Handle EC9 - EC14
       if (this.userOas) {
         if (
           this.eligibility.result == ResultKey.ELIGIBLE &&
@@ -490,11 +494,11 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           if (this.clawbackAmount > 0) {
             if (this.input.livingCountry.value !== LivingCountry.CANADA) {
               cardCollapsedText.push(
-                this.translations.detailWithHeading.recoveryTaxPartner
+                this.translations.detailWithHeading.nonResidentTaxPartner
               )
             } else {
               cardCollapsedText.push(
-                this.translations.detailWithHeading.nonResidentTaxPartner
+                this.translations.detailWithHeading.recoveryTaxPartner
               )
             }
           }
@@ -529,17 +533,17 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         )
       }
 
+      //EC8
       if (
         this.inputAge >= 70 &&
-        !this.input.receiveOAS &&
-        this.entitlement.result > 0 &&
-        this.future !== true
+        !this.formReceiving &&
+        this.entitlement.result > 0
       ) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.retroactivePayment
         )
       }
-
+      //EC19 && EC20
       const ageCalc = this.formAge ? this.formAge : this.inputAge
 
       if (ageCalc >= 75 && this.entitlement.result > 0) {

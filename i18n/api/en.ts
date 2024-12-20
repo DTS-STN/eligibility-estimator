@@ -577,23 +577,23 @@ const en: Translations = {
     },
     recoveryTaxPartner: {
       heading: "Recovery tax will be applied to your partner's pension",
-      text: "Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, they won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+      text: "Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, they won't receive some or all of their Old Age Security pension due to {LINK_RECOVERY_TAX}.",
     },
     recoveryTaxBoth: {
       heading: 'Recovery tax will be applied to your pensions',
-      text: "Since you and your partner's income is over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pension due to {LINK_RECOVERY_TAX}.",
+      text: "Since you and your partner's incomes are over {OAS_RECOVERY_TAX_CUTOFF}, you won't receive some or all of your Old Age Security pensions due to {LINK_RECOVERY_TAX}.",
     },
     nonResidentTax: {
       heading: 'Taxes will be applied to your pension',
       text: 'Since your income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>',
     },
     nonResidentTaxPartner: {
-      heading: "Taxes will be applied to your partner's income",
-      text: `Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
+      heading: "Taxes will be applied to your partner's pension",
+      text: `Since your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and they live outside Canada, they won’t receive some or all of their Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
     },
     nonResidentTaxBoth: {
       heading: 'Taxes will be applied to your pensions',
-      text: `Since you and your partner's income is over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pension due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
+      text: `Since you and your partner's incomes are over {OAS_RECOVERY_TAX_CUTOFF} and you live outside Canada, you won’t receive some or all of your Old Age Security pensions due to: <ul class="list-disc" style="padding-left: 24px;"><li style="padding-left: 2px;">the {LINK_RECOVERY_TAX}</li><li style="padding-left: 2px;">the {LINK_NON_RESIDENT_TAX}</li></ul>`,
     },
     yourDeferralOptions: {
       heading: 'Your deferral options',

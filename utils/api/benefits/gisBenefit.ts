@@ -288,6 +288,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       )
     }
 
+    //Deferral options Expand-Collapse
     if (!this.partner) {
       let text = ''
       let heading
@@ -302,7 +303,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
 
         if (this.oasResult.cardDetail.meta.receiveOAS == false) {
           heading = this.translations.detail.yourDeferralOptions
-          if (this.oasResult.entitlement.result > 0) {
+          if (this.oasResult.entitlement.result > 0 && ageToCheck < 70) {
             if (this.input.age >= 65 && this.input.age < 70) {
               //CHECK IF RECEIVING OAS
               text += this.translations.detail.deferralEligible

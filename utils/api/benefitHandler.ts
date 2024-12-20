@@ -169,7 +169,8 @@ export class BenefitHandler {
       false,
       this.input.client.age,
       this.formAge,
-      this.formYearsInCanada
+      this.formYearsInCanada,
+      this.input.client.receiveOAS
     )
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
@@ -217,7 +218,10 @@ export class BenefitHandler {
         false,
         this.future,
         true,
-        this.input.client.age
+        this.input.client.age,
+        this.formAge,
+        this.formYearsInCanada,
+        this.input.client.receiveOAS
       )
 
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)

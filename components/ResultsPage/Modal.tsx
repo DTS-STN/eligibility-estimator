@@ -1,4 +1,4 @@
-import { Button } from '@dts-stn/service-canada-design-system'
+import { Button } from '../Forms/Button'
 import { useEffect, useRef } from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
@@ -15,7 +15,6 @@ export const Modal: React.VFC<{
   const apiTrans = getTranslations(tsln._language)
   const modalRef = useRef(null)
   const firstFocusableRef = useRef(null)
-  const closeButtonRef = useRef(null)
 
   // ########## Block start ##########
 
@@ -98,7 +97,6 @@ export const Modal: React.VFC<{
         <p id="modalDescription">{getModalString()}</p>
         <div className="mt-4 flex justify-start">
           <Button
-            ref={closeButtonRef}
             text={apiTrans.modal.close}
             id={apiTrans.modal.close}
             style="primary"

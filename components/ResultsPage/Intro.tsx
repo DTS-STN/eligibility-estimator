@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router'
 import { WebTranslations } from '../../i18n/web'
+import { Language } from '../../utils/api/definitions/enums'
 import { useTranslation } from '../Hooks'
 
 export const Intro: React.VFC<{
@@ -15,6 +17,8 @@ export const Intro: React.VFC<{
   alreadyReceiving,
 }) => {
   const tsln = useTranslation<WebTranslations>()
+  const language = useRouter().locale as Language
+
   return (
     <>
       <p dangerouslySetInnerHTML={{ __html: tsln.resultsPage.general }} />
@@ -30,9 +34,15 @@ export const Intro: React.VFC<{
       )}
       {estimateLength > 1 && hasPartner && (
         <div>
-          <p>{tsln.resultsPage.youEstimateMayChange}</p>
+          <p>
+            {tsln.resultsPage.youEstimateMayChange}
+            {':'}
+          </p>
           <ul className="pl-[35px] ml-[20px] my-1 list-disc text-content">
-            <li>{tsln.resultsPage.basedYourAge}</li>
+            <li>
+              {tsln.resultsPage.basedYourAge}
+              {language == 'fr' ? ';' : ''}
+            </li>
             <li>{tsln.resultsPage.basedYourPartner}</li>
           </ul>
           <p className="my-6">
