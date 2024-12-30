@@ -22,6 +22,7 @@ import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
+import { PSDBox } from './PSDBox'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -224,7 +225,8 @@ const ResultsPage: React.VFC<{
           </div>
         </div>
 
-        <div className="col-span-1 row-span-2">
+        <div className="col-span-1 row-span-2 space-y-4">
+          <PSDBox />
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">

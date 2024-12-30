@@ -64,8 +64,8 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       {...attributes}
     >
-      {imgHref && <img src={imgHref} alt={alt} className="pr-3" />}
       {text}
+      {imgHref && <img src={imgHref} alt={alt} className="pl-3 w-8 h-8" />}
     </button>
   )
 }
