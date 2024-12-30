@@ -230,7 +230,7 @@ const en: WebTranslations = {
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate: 'It will take about 5 to 10 minutes to complete.',
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  inflationInfo: `This estimator uses October to December 2024 benefit rates. Future benefit amounts may be higher due to inflation.`,
+  inflationInfo: `This estimator uses January to March&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
