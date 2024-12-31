@@ -6,7 +6,7 @@ export const PSDBox: React.VFC<{}> = ({}) => {
 
   return (
     <div className="fz-10">
-      <div className="py-8 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
+      <div className="py-2 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
         <h3 className="h3">Change your pension start date</h3>
         <p className="text-[20px] leading-[30px]">
           You can delay until age 70. For each month you wait, your pension
@@ -60,7 +60,7 @@ export const PSDBox: React.VFC<{}> = ({}) => {
         </div>
         <Button
           style="primary"
-          custom="ds-my-3 mt-6"
+          custom="mt-6"
           type="button"
           text="Update estimate"
           imgHref={`/refresh-icon.svg`}

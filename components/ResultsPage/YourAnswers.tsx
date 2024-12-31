@@ -266,7 +266,7 @@ export const YourAnswers: React.VFC<{
 
   return (
     <div className="fz-10">
-      <div className="py-8 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
+      <div className="mb-8 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
         <h3 className="h3" id="answers">
           {title}
         </h3>
