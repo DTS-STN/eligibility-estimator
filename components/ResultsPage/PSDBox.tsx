@@ -1,12 +1,19 @@
 import React from 'react'
 import { Button } from '../Forms/Button'
 
-export const PSDBox: React.VFC<{}> = ({}) => {
+export const PSDBox: React.VFC<{
+  onUpdate: () => void
+  isUpdating: boolean
+}> = ({ onUpdate, isUpdating }) => {
   // function that calculates age
 
   return (
     <div className="fz-10">
-      <div className="py-2 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
+      <div
+        className={`py-2 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px] ${
+          isUpdating ? 'opacity-50' : 'opacity-100'
+        }`}
+      >
         <h3 className="h3">Change your pension start date</h3>
         <p className="text-[20px] leading-[30px]">
           You can delay until age 70. For each month you wait, your pension
@@ -65,6 +72,7 @@ export const PSDBox: React.VFC<{}> = ({}) => {
           text="Update estimate"
           imgHref={`/refresh-icon.svg`}
           alt="Update estimate"
+          onClick={onUpdate}
         />
       </div>
     </div>
