@@ -34,6 +34,7 @@ export class Form {
 
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
+    console.log('data', data)
     this.results = data
     this.localInputs = inputs
 

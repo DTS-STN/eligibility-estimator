@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useSessionStorage } from 'react-use'
-import { FieldInput } from '../../client-state/InputHelper'
+import { FieldInput, InputHelper } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import {
   LivingCountry,
@@ -33,21 +33,26 @@ const getEligibility = (
 }
 
 const ResultsPage: React.VFC<{
-  inputs: FieldInput[]
+  inputHelper: InputHelper
   results: BenefitResultsObject
   futureClientResults: any
   partnerResults: BenefitResultsObject
   futurePartnerResults: any
   summary: SummaryObject
 }> = ({
-  inputs,
+  inputHelper,
   results,
   futureClientResults,
   partnerResults,
   futurePartnerResults,
   summary,
 }) => {
+  console.log('inputs', inputHelper.asArray)
   const ref = useRef<HTMLDivElement>()
+  const inputs: FieldInput[] = inputHelper.asArray
+  const inputObj = inputHelper.asObject
+  console.log('inputObj.receiveOAS', JSON.parse(inputObj.receiveOAS))
+  console.log('inputObj', inputObj)
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   const apiTsln = getTranslations(tsln._language)
@@ -219,10 +224,9 @@ const ResultsPage: React.VFC<{
             alreadyReceiving={alreadyReceiving === 'true'}
           />
           {/* Summary Estimates section */}
-          {/* TODO: this section fades in */}
           <div
             className={`border-[#269ABC] bg-[#EEFAFF] p-8 ${
-              isUpdating ? 'opacity-50' : 'opacity-100'
+              isUpdating ? 'opacity-20' : ''
             }`}
           >
             {headings && (
@@ -239,13 +243,13 @@ const ResultsPage: React.VFC<{
         </div>
 
         <div className="col-span-1 row-span-2 space-y-4">
-          {/* TODO: this section fades in */}
-          <PSDBox onUpdate={handleUpdate} isUpdating={isUpdating} />
+          {!JSON.parse(inputObj.receiveOAS) && (
+            <PSDBox onUpdate={handleUpdate} isUpdating={isUpdating} />
+          )}
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
-          {/* TODO: this section fades in */}
-          <div className={isUpdating ? 'opacity-50' : 'opacity-100'}>
+          <div className={isUpdating ? 'opacity-20' : ''}>
             <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
             <BenefitCards
               inputAge={Number(userAge)}

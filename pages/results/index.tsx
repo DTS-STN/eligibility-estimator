@@ -77,7 +77,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       <Layout title={tsln.resultPageTitle}>
         {'results' in response && inputHelper.asArray.length !== 0 ? (
           <ResultsPage
-            inputs={inputHelper.asArray}
+            inputHelper={inputHelper}
             results={response.results}
             futureClientResults={response.futureClientResults}
             futurePartnerResults={response.futurePartnerResults}

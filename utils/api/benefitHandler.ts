@@ -127,6 +127,8 @@ export class BenefitHandler {
         this.rawInput.partnerLivingCountry
       )
 
+      console.log('partnerEliObj', partnerEliObj)
+
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
           this.input.partner.age = partnerEliObj.ageOfEligibility
