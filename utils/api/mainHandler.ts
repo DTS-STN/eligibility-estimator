@@ -36,6 +36,7 @@ export default class MainHandler {
       resultObj.detail = error
     }
 
+    console.log('result object', resultObj)
     consoleDev('result object', resultObj)
     this.results = resultObj
   }

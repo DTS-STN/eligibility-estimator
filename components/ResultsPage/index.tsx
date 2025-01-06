@@ -53,6 +53,23 @@ const ResultsPage: React.VFC<{
   const inputObj = inputHelper.asObject
   console.log('inputObj.receiveOAS', JSON.parse(inputObj.receiveOAS))
   console.log('inputObj', inputObj)
+
+  // TODO: get eligible age (should probably come in already as a prop or part of the results object) Math.max(eligibleAge, userAge) -> ex. 65, 68 => 68. Check if less than 70.
+
+  // ex:
+  // Age/res   EliAge   Deferral Duration
+  // 65/10      65           5
+  // 68/10      68           2
+  // 63/7       66           4
+  // 49/20      65           5
+  // 68/30      65           2
+  // 69/11      68           1
+  // 66/20      74           N/A
+
+  // const maxEliAge = Math.max(eligibleAge, userAge)
+  // const deferralDurationYrs = maxEliAge >= 70 ? 0 : 70 - maxEliAge
+
+  const showPSD = !JSON.parse(inputObj.receiveOAS)
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   const apiTsln = getTranslations(tsln._language)
@@ -243,7 +260,7 @@ const ResultsPage: React.VFC<{
         </div>
 
         <div className="col-span-1 row-span-2 space-y-4">
-          {!JSON.parse(inputObj.receiveOAS) && (
+          {showPSD && (
             <PSDBox onUpdate={handleUpdate} isUpdating={isUpdating} />
           )}
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />

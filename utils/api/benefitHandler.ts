@@ -127,8 +127,6 @@ export class BenefitHandler {
         this.rawInput.partnerLivingCountry
       )
 
-      console.log('partnerEliObj', partnerEliObj)
-
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
           this.input.partner.age = partnerEliObj.ageOfEligibility
@@ -145,6 +143,15 @@ export class BenefitHandler {
 
     // Check OAS. Does both Eligibility and Entitlement, as there are no dependencies.
     // Calculate OAS with and without deferral so we can compare totals and present more beneficial result
+
+    const clientEliObj = OasEligibility(
+      this.input.client.age,
+      this.input.client.yearsInCanadaSince18,
+      this.input.client.livedOnlyInCanada,
+      this.rawInput.livingCountry
+    )
+
+    console.log('clientEliObj', clientEliObj)
 
     if (this.input.client.receiveOAS && !this.input.client.livedOnlyInCanada) {
       const yearsInCanada =
@@ -206,6 +213,7 @@ export class BenefitHandler {
 
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
+    console.log('clientOasHelper', clientOasHelper)
 
     let clientOasWithDeferral
     if (clientOasHelper.canDefer) {

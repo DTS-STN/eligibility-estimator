@@ -1,3 +1,4 @@
+import { config } from 'cypress/types/bluebird'
 import { consoleDev } from '../../web/helpers/utils'
 import roundToTwo from './roundToTwo'
 
