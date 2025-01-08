@@ -1,12 +1,91 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '../Forms/Button'
 
 export const PSDBox: React.VFC<{
   onUpdate: () => void
   isUpdating: boolean
-}> = ({ onUpdate, isUpdating }) => {
-  // function that calculates age
+  yearsToDefer: number | null
+}> = ({ onUpdate, isUpdating, yearsToDefer }) => {
+  const totalMonths = Math.floor(yearsToDefer * 12)
 
+  const [months, setMonths] = useState<string[]>([])
+  const [years, setYears] = useState<number[]>([])
+  const [selectedMonth, setSelectedMonth] = useState<string>('')
+  const [selectedYear, setSelectedYear] = useState<number>(
+    new Date().getFullYear()
+  )
+
+  const populateDropdowns = (totalMonths: number) => {
+    const currentDate = new Date()
+    const futureDate = new Date()
+    futureDate.setMonth(currentDate.getMonth() + totalMonths)
+
+    const monthNames = [
+      'Jan.',
+      'Feb.',
+      'Mar.',
+      'Apr.',
+      'May',
+      'June',
+      'July',
+      'Aug.',
+      'Sept.',
+      'Oct.',
+      'Nov.',
+      'Dec.',
+    ]
+
+    let tempMonths: string[] = []
+    let tempYears: number[] = []
+
+    // Generate the range of years
+    for (
+      let year = currentDate.getFullYear();
+      year <= futureDate.getFullYear();
+      year++
+    ) {
+      tempYears.push(year)
+    }
+
+    // Generate months based on the range
+    let startMonth = currentDate.getMonth()
+    let endMonth = futureDate.getMonth()
+
+    if (tempYears.length === 1) {
+      // Same year case
+      for (let i = startMonth; i <= endMonth; i++) {
+        tempMonths.push(monthNames[i])
+      }
+    } else {
+      // Multiple years case
+      if (selectedYear === currentDate.getFullYear()) {
+        for (let i = startMonth; i < 12; i++) {
+          tempMonths.push(monthNames[i])
+        }
+      } else if (selectedYear === futureDate.getFullYear()) {
+        for (let i = 0; i <= endMonth; i++) {
+          tempMonths.push(monthNames[i])
+        }
+      } else {
+        tempMonths = monthNames // All months for intermediate years
+      }
+    }
+
+    setMonths(tempMonths)
+    setYears(tempYears)
+  }
+
+  const handleYearChange = (year: number) => {
+    setSelectedYear(year)
+    // populateDropdowns(totalMonths)
+  }
+
+  useEffect(() => {
+    populateDropdowns(totalMonths)
+  }, [totalMonths, selectedYear])
+
+  console.log('months', months)
+  console.log('years', years)
   return (
     <div className="fz-10">
       <div
@@ -31,22 +110,15 @@ export const PSDBox: React.VFC<{
             <select
               id="psd-month"
               defaultValue={1}
-              // onChange={props.onMonthChange}
+              onChange={(e) => setSelectedMonth(e.target.value)}
               className="inputStyles w-[108px]"
               // aria-invalid={!!props.hasError}
             >
-              <option value="1">Jan.</option>
-              <option value="2">Feb.</option>
-              <option value="3">Mar.</option>
-              <option value="4">Apr.</option>
-              <option value="5">May</option>
-              <option value="6">June</option>
-              <option value="7">July</option>
-              <option value="8">Aug.</option>
-              <option value="9">Sept.</option>
-              <option value="10">Oct.</option>
-              <option value="11">Nov.</option>
-              <option value="12">Dec.</option>
+              {months.map((month, index) => (
+                <option key={index} value={index}>
+                  {month}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex flex-col">
@@ -56,12 +128,17 @@ export const PSDBox: React.VFC<{
             >
               Year
             </label>
-            <select className="inputStyles w-[108px]">
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
+            <select
+              id="psd-year"
+              className="inputStyles w-[108px]"
+              value={selectedYear}
+              onChange={(e) => handleYearChange(Number(e.target.value))}
+            >
+              {years.map((year, index) => (
+                <option key={index} value={year}>
+                  {year}
+                </option>
+              ))}
             </select>
           </div>
         </div>

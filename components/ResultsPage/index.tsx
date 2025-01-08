@@ -24,6 +24,7 @@ import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
 import { PSDBox } from './PSDBox'
 import { use } from 'chai'
+import { OasEligibility } from '../../utils/api/helpers/utils'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -51,8 +52,29 @@ const ResultsPage: React.VFC<{
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject
-  console.log('inputObj.receiveOAS', JSON.parse(inputObj.receiveOAS))
+  const age = Number(inputObj.age)
   console.log('inputObj', inputObj)
+  // console.log('inputObj.receiveOAS', JSON.parse(inputObj.receiveOAS))
+  const receiveOAS = inputObj?.receiveOAS === 'true'
+  console.log('receiveOAS', receiveOAS)
+  const yearsInCanada =
+    inputObj.livedOnlyInCanada === 'true'
+      ? 40
+      : Number(inputObj.yearsInCanadaSince18) ||
+        Number(inputObj.yearsInCanadaSinceOAS)
+
+  const clientEliObj = OasEligibility(
+    Number(inputObj.age),
+    yearsInCanada,
+    JSON.parse(inputObj.livedOnlyInCanada),
+    inputObj.livingCountry
+  )
+
+  const maxEliAge = Math.max(clientEliObj.ageOfEligibility, age)
+  const yearsToDefer = maxEliAge >= 70 ? null : 70 - maxEliAge
+
+  console.log('clientEliObj', clientEliObj)
+  console.log('yearsToDefer', yearsToDefer)
 
   // TODO: get eligible age (should probably come in already as a prop or part of the results object) Math.max(eligibleAge, userAge) -> ex. 65, 68 => 68. Check if less than 70.
 
@@ -64,12 +86,12 @@ const ResultsPage: React.VFC<{
   // 49/20      65           5
   // 68/30      65           2
   // 69/11      68           1
-  // 66/20      74           N/A
+  // 66/2       74           N/A
 
   // const maxEliAge = Math.max(eligibleAge, userAge)
   // const deferralDurationYrs = maxEliAge >= 70 ? 0 : 70 - maxEliAge
 
-  const showPSD = !JSON.parse(inputObj.receiveOAS)
+  const showPSD = !receiveOAS && age >= 65 && yearsToDefer
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   const apiTsln = getTranslations(tsln._language)
@@ -261,7 +283,11 @@ const ResultsPage: React.VFC<{
 
         <div className="col-span-1 row-span-2 space-y-4">
           {showPSD && (
-            <PSDBox onUpdate={handleUpdate} isUpdating={isUpdating} />
+            <PSDBox
+              onUpdate={handleUpdate}
+              isUpdating={isUpdating}
+              yearsToDefer={yearsToDefer}
+            />
           )}
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
