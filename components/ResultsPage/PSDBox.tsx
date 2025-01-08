@@ -109,7 +109,7 @@ export const PSDBox: React.VFC<{
             </label>
             <select
               id="psd-month"
-              defaultValue={1}
+              value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
               className="inputStyles w-[108px]"
               // aria-invalid={!!props.hasError}
