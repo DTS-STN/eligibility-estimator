@@ -21,7 +21,7 @@ export const PSDBox: React.VFC<{
   isUpdating: boolean
   yearsToDefer: number | null
 }> = ({ onUpdate, isUpdating, yearsToDefer }) => {
-  const totalMonths = Math.floor(yearsToDefer * 12)
+  const totalMonths = yearsToDefer * 12
   const currentDate = new Date()
   const [showUpdateButton, setShowUpdateButton] = useState(false)
 
@@ -35,28 +35,26 @@ export const PSDBox: React.VFC<{
   )
 
   const populateDropdowns = (totalMonths: number) => {
-    const futureDate = new Date()
-    futureDate.setMonth(currentDate.getMonth() + totalMonths)
+    const targetYear = currentDate.getFullYear() + Math.floor(totalMonths / 12) // Full years
+    const remainingMonths = (currentDate.getMonth() + totalMonths) % 12 // Remaining months (modulo 12)
+    const targetMonth =
+      remainingMonths % 1 < 0.5
+        ? Math.floor(remainingMonths)
+        : Math.ceil(remainingMonths)
 
     let tempMonths: number[] = []
     let tempYears: number[] = []
 
     // Generate the range of years
-    for (
-      let year = currentDate.getFullYear();
-      year <= futureDate.getFullYear();
-      year++
-    ) {
+    for (let year = currentDate.getFullYear(); year <= targetYear; year++) {
       tempYears.push(year)
     }
 
-    // Generate months based on the range
-    let startMonth = currentDate.getMonth()
-    let endMonth = futureDate.getMonth()
+    const startMonth = currentDate.getMonth()
 
     if (tempYears.length === 1) {
       // Same year case
-      for (let i = startMonth; i <= endMonth; i++) {
+      for (let i = startMonth; i <= targetMonth; i++) {
         tempMonths.push(i)
       }
     } else {
@@ -65,8 +63,8 @@ export const PSDBox: React.VFC<{
         for (let i = startMonth; i < 12; i++) {
           tempMonths.push(i)
         }
-      } else if (selectedYear === futureDate.getFullYear()) {
-        for (let i = 0; i <= endMonth; i++) {
+      } else if (selectedYear === targetYear) {
+        for (let i = 0; i <= targetMonth; i++) {
           tempMonths.push(i)
         }
       } else {
@@ -90,7 +88,6 @@ export const PSDBox: React.VFC<{
 
   useEffect(() => {
     if (!months.includes(selectedMonth)) {
-      console.log('inside IF')
       setSelectedMonth(0)
     }
   }, [JSON.stringify(months)])
