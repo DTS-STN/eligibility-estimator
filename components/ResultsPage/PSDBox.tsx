@@ -25,7 +25,7 @@ export const PSDBox: React.VFC<{
   const currentDate = new Date()
   const [showUpdateButton, setShowUpdateButton] = useState(false)
 
-  const [months, setMonths] = useState<string[]>([])
+  const [months, setMonths] = useState<number[]>([])
   const [years, setYears] = useState<number[]>([])
   const [selectedMonth, setSelectedMonth] = useState<number>(
     currentDate.getMonth()
@@ -35,11 +35,10 @@ export const PSDBox: React.VFC<{
   )
 
   const populateDropdowns = (totalMonths: number) => {
-    const currentDate = new Date()
     const futureDate = new Date()
     futureDate.setMonth(currentDate.getMonth() + totalMonths)
 
-    let tempMonths: string[] = []
+    let tempMonths: number[] = []
     let tempYears: number[] = []
 
     // Generate the range of years
@@ -58,20 +57,20 @@ export const PSDBox: React.VFC<{
     if (tempYears.length === 1) {
       // Same year case
       for (let i = startMonth; i <= endMonth; i++) {
-        tempMonths.push(monthNames[i])
+        tempMonths.push(i)
       }
     } else {
       // Multiple years case
       if (selectedYear === currentDate.getFullYear()) {
         for (let i = startMonth; i < 12; i++) {
-          tempMonths.push(monthNames[i])
+          tempMonths.push(i)
         }
       } else if (selectedYear === futureDate.getFullYear()) {
         for (let i = 0; i <= endMonth; i++) {
-          tempMonths.push(monthNames[i])
+          tempMonths.push(i)
         }
       } else {
-        tempMonths = monthNames // All months for intermediate years
+        tempMonths = months.map((_, index) => index) // All months for intermediate years
       }
     }
 
@@ -81,12 +80,20 @@ export const PSDBox: React.VFC<{
 
   const handleYearChange = (year: number) => {
     setSelectedYear(year)
-    // populateDropdowns(totalMonths)
+
+    populateDropdowns(totalMonths)
   }
 
   useEffect(() => {
     populateDropdowns(totalMonths)
   }, [totalMonths, selectedYear])
+
+  useEffect(() => {
+    if (!months.includes(selectedMonth)) {
+      console.log('inside IF')
+      setSelectedMonth(0)
+    }
+  }, [JSON.stringify(months)])
 
   // write a useEffect that listens to changes to selectedYear and selectedMonth and if they are different from current month and year make a hidden button appear
   useEffect(() => {
@@ -100,6 +107,8 @@ export const PSDBox: React.VFC<{
     }
   }, [selectedMonth, selectedYear])
 
+  console.log('months', months)
+  console.log('years', years)
   console.log('selectedMonth', selectedMonth)
   console.log('selectedYear', selectedYear)
   return (
@@ -132,7 +141,7 @@ export const PSDBox: React.VFC<{
             >
               {months.map((month, index) => (
                 <option key={index} value={index}>
-                  {month}
+                  {monthNames[month]}
                 </option>
               ))}
             </select>
