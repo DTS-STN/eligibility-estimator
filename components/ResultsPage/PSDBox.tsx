@@ -1,39 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '../Forms/Button'
 
+const monthNames = [
+  'Jan.',
+  'Feb.',
+  'Mar.',
+  'Apr.',
+  'May',
+  'June',
+  'July',
+  'Aug.',
+  'Sept.',
+  'Oct.',
+  'Nov.',
+  'Dec.',
+]
+
 export const PSDBox: React.VFC<{
   onUpdate: () => void
   isUpdating: boolean
   yearsToDefer: number | null
 }> = ({ onUpdate, isUpdating, yearsToDefer }) => {
   const totalMonths = Math.floor(yearsToDefer * 12)
+  const currentDate = new Date()
+  const [showUpdateButton, setShowUpdateButton] = useState(false)
 
   const [months, setMonths] = useState<string[]>([])
   const [years, setYears] = useState<number[]>([])
-  const [selectedMonth, setSelectedMonth] = useState<string>('')
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    currentDate.getMonth()
+  )
   const [selectedYear, setSelectedYear] = useState<number>(
-    new Date().getFullYear()
+    currentDate.getFullYear()
   )
 
   const populateDropdowns = (totalMonths: number) => {
     const currentDate = new Date()
     const futureDate = new Date()
     futureDate.setMonth(currentDate.getMonth() + totalMonths)
-
-    const monthNames = [
-      'Jan.',
-      'Feb.',
-      'Mar.',
-      'Apr.',
-      'May',
-      'June',
-      'July',
-      'Aug.',
-      'Sept.',
-      'Oct.',
-      'Nov.',
-      'Dec.',
-    ]
 
     let tempMonths: string[] = []
     let tempYears: number[] = []
@@ -84,8 +88,20 @@ export const PSDBox: React.VFC<{
     populateDropdowns(totalMonths)
   }, [totalMonths, selectedYear])
 
-  console.log('months', months)
-  console.log('years', years)
+  // write a useEffect that listens to changes to selectedYear and selectedMonth and if they are different from current month and year make a hidden button appear
+  useEffect(() => {
+    if (
+      selectedMonth !== currentDate.getMonth() ||
+      selectedYear !== currentDate.getFullYear()
+    ) {
+      setShowUpdateButton(true)
+    } else {
+      setShowUpdateButton(false)
+    }
+  }, [selectedMonth, selectedYear])
+
+  console.log('selectedMonth', selectedMonth)
+  console.log('selectedYear', selectedYear)
   return (
     <div className="fz-10">
       <div
@@ -110,7 +126,7 @@ export const PSDBox: React.VFC<{
             <select
               id="psd-month"
               value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
+              onChange={(e) => setSelectedMonth(Number(e.target.value))}
               className="inputStyles w-[108px]"
               // aria-invalid={!!props.hasError}
             >
@@ -142,15 +158,17 @@ export const PSDBox: React.VFC<{
             </select>
           </div>
         </div>
-        <Button
-          style="primary"
-          custom="mt-6"
-          type="button"
-          text="Update estimate"
-          imgHref={`/refresh-icon.svg`}
-          alt="Update estimate"
-          onClick={onUpdate}
-        />
+        {showUpdateButton && (
+          <Button
+            style="primary"
+            custom="mt-6"
+            type="button"
+            text="Update estimate"
+            imgHref={`/refresh-icon.svg`}
+            alt="Update estimate"
+            onClick={onUpdate}
+          />
+        )}
       </div>
     </div>
   )
