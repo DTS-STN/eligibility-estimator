@@ -72,6 +72,10 @@ export const BenefitCards: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  const almostEligible = results.filter(
+    (result) => result.eligibility?.reason === ResultReason.LIVING_COUNTRY
+  )
+
   const futureClientEligible = flattenArray(futureClientResults)
 
   const resultsNotEligible = results.filter((value) => {
@@ -80,7 +84,9 @@ export const BenefitCards: React.VFC<{
     )
 
     return (
-      value.eligibility?.result === ResultKey.INELIGIBLE && !inFutureEligible
+      value.eligibility?.result === ResultKey.INELIGIBLE &&
+      !inFutureEligible &&
+      value.eligibility?.reason !== ResultReason.LIVING_COUNTRY
     )
   })
 
@@ -258,6 +264,11 @@ export const BenefitCards: React.VFC<{
               generateCard(result, true)
             )}
           </>
+        </>
+      )}
+      {almostEligible.length > 0 && (
+        <>
+          <>{almostEligible.map((result) => generateCard(result))}</>
         </>
       )}
       {resultsNotEligible.length > 0 && (

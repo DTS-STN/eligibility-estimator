@@ -408,6 +408,10 @@ html {
     font-size: 12px;
   }
 
+  a#inCanada:visited{
+    color:#284162
+  }
+
   a:visited {
     color: #7834bc;
   }

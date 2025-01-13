@@ -304,10 +304,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         if (this.oasResult.cardDetail.meta.receiveOAS == false) {
           heading = this.translations.detail.yourDeferralOptions
           if (this.oasResult.entitlement.result > 0 && ageToCheck < 70) {
-            if (this.input.age >= 65 && this.input.age < 70) {
+            if (ageToCheck >= 65 && ageToCheck < 70) {
               //CHECK IF RECEIVING OAS
               text += this.translations.detail.deferralEligible
-            } else if (this.input.age < 65) {
+            } else if (ageToCheck < 65) {
               text += this.translations.detail.deferralWillBeEligible
             }
             if (text !== '') {
@@ -315,7 +315,7 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
                 text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
               }
 
-              if (!this.input.livedOnlyInCanada) {
+              if (!this.input.livedOnlyInCanada && ageToCheck > 64) {
                 if (
                   ageToCheck != this.input.age &&
                   this.formYearsInCanada <= 40 &&

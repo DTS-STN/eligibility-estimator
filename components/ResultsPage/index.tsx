@@ -144,7 +144,7 @@ const ResultsPage: React.VFC<{
     if (item) {
       const age = Number(Object.keys(item)[0])
       const headingYear =
-        currentYear + (Math.trunc(age) - Math.trunc(Number(userAge)))
+        currentYear + (Math.round(age) - Math.trunc(Number(userAge)))
       let key
       if (age == 0) {
         key = currentYear
@@ -160,7 +160,7 @@ const ResultsPage: React.VFC<{
         if (item) {
           const age = Number(Object.keys(item)[0])
           const headingYear =
-            currentYear + (Math.trunc(age) - Math.trunc(Number(partnerAge)))
+            currentYear + (Math.round(age) - Math.trunc(Number(partnerAge)))
           let key
           if (age == 0) {
             key = currentYear
