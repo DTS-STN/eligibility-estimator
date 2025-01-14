@@ -64,8 +64,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
 
-  const [savedResults, setSavedResults]: [any, (value: any) => void] =
-    useSessionStorage('resultPageInputs', {})
+  const savedResults = JSON.parse(sessionStorage.getItem('resultPageInputs'))
 
   const [ageDate, setAgeDate] = useState(
     inputs.age ? getBirthMonthAndYear(inputs.age) : null
@@ -97,9 +96,11 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   // get savedResults, overwite inputs with it
   useEffect(() => {
-    if ('inputs' in savedResults) {
-      for (const [key, value] of Object.entries(savedResults.inputs)) {
-        inputs[key] = value
+    if (savedResults !== null) {
+      if ('inputs' in savedResults) {
+        for (const [key, value] of Object.entries(savedResults.inputs)) {
+          inputs[key] = value
+        }
       }
     }
   }, [savedResults])
