@@ -31,6 +31,36 @@ const calculateMonthsFromToday = (
   return totalSelectedMonths - totalCurrentMonths
 }
 
+const getFirstEligibleDate = (currentAge: number, ageOfEligibility: number) => {
+  const currentDate = new Date() // Get the current date (today's date)
+
+  // If the user is already eligible, return the current month and year
+  if (currentAge >= ageOfEligibility) {
+    return {
+      month: currentDate.getMonth(), // Convert zero-based month to one-based (1 = January)
+      year: currentDate.getFullYear(),
+    }
+  }
+
+  // Calculate the years and months until eligibility
+  const yearsToEligibility = ageOfEligibility - currentAge // Calculate how many years until eligible
+  const wholeYears = Math.floor(yearsToEligibility) // Get the whole number of years
+  const remainingMonths = Math.round((yearsToEligibility - wholeYears) * 12) // Convert fractional part to months
+
+  // Calculate the month and year of eligibility
+  const eligibilityYear = currentDate.getFullYear() + wholeYears // Add whole years to the current year
+  const eligibilityMonth = currentDate.getMonth() + remainingMonths // Add remaining months to the current month
+
+  // Handle overflow if eligibilityMonth exceeds 11 (e.g., December = 11)
+  const finalMonth = eligibilityMonth % 12 // Ensure the month wraps around (0 = January, 11 = December)
+  const finalYear = eligibilityYear + Math.floor(eligibilityMonth / 12) // Increment the year if months overflow
+
+  return {
+    month: finalMonth,
+    year: finalYear,
+  }
+}
+
 export const PSDBox: React.VFC<{
   onUpdate: (monthsFromToday: number) => void
   inputObj: any
@@ -50,15 +80,14 @@ export const PSDBox: React.VFC<{
     inputObj.livingCountry
   )
 
+  console.log('clientEliObj', clientEliObj)
+
   const maxEliAge = Math.max(clientEliObj.ageOfEligibility, age)
   const yearsToDeferMax = maxEliAge >= 70 ? null : 70 - maxEliAge
   const totalMonths = yearsToDeferMax * 12
-  const yearsToEligible =
-    clientEliObj.ageOfEligibility > age
-      ? clientEliObj.ageOfEligibility - age
-      : 0
 
-  console.log('yearsToDefer MAX', yearsToDeferMax)
+  console.log('yearsToDeferMax', yearsToDeferMax)
+
   const receiveOAS = inputObj?.receiveOAS === 'true'
   const showPSD = !receiveOAS && yearsToDeferMax
 
@@ -66,48 +95,60 @@ export const PSDBox: React.VFC<{
   const [showUpdateButton, setShowUpdateButton] = useState(false)
   const [months, setMonths] = useState<number[]>([])
   const [years, setYears] = useState<number[]>([])
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    currentDate.getMonth()
+
+  const firstEligibleDate = getFirstEligibleDate(
+    Number(inputObj.age),
+    clientEliObj.ageOfEligibility
   )
+
+  console.log('firstEligibleDate', firstEligibleDate)
+
+  const [selectedMonth, setSelectedMonth] = useState<number>(
+    firstEligibleDate.month
+  )
+
   const [selectedYear, setSelectedYear] = useState<number>(
-    currentDate.getFullYear()
+    firstEligibleDate.year
   )
 
   const populateDropdowns = (totalMonths: number) => {
-    const targetYear = currentDate.getFullYear() + Math.floor(totalMonths / 12) // Full years
-    const remainingMonths = (currentDate.getMonth() + totalMonths) % 12 // Remaining months (modulo 12)
+    console.log('totalMonths', totalMonths)
+    const targetYear = firstEligibleDate.year + Math.floor(totalMonths / 12)
+
+    const remainingMonths = (firstEligibleDate.month + totalMonths) % 12 // Remaining months (modulo 12)
     const targetMonth =
       remainingMonths % 1 < 0.5
         ? Math.floor(remainingMonths)
         : Math.ceil(remainingMonths)
 
+    console.log('targetMonth', targetMonth)
+
     let tempMonths: number[] = []
     let tempYears: number[] = []
 
     // Generate the range of years
-    for (let year = currentDate.getFullYear(); year <= targetYear; year++) {
-      tempYears.push(year + yearsToEligible)
+    for (let year = firstEligibleDate.year; year <= targetYear; year++) {
+      tempYears.push(year)
     }
-
-    const startMonth = currentDate.getMonth()
 
     if (tempYears.length === 1) {
       // Same year case
-      for (let i = startMonth; i <= targetMonth; i++) {
+      for (let i = firstEligibleDate.month; i <= targetMonth; i++) {
+        tempMonths.push(i)
+      }
+    }
+
+    if (selectedYear === firstEligibleDate.year) {
+      for (let i = firstEligibleDate.month; i < 12; i++) {
+        tempMonths.push(i)
+      }
+    } else if (selectedYear === targetYear) {
+      for (let i = 0; i <= remainingMonths; i++) {
         tempMonths.push(i)
       }
     } else {
-      // Multiple years case
-      if (selectedYear === currentDate.getFullYear()) {
-        for (let i = startMonth; i < 12; i++) {
-          tempMonths.push(i)
-        }
-      } else if (selectedYear === targetYear) {
-        for (let i = 0; i <= targetMonth; i++) {
-          tempMonths.push(i)
-        }
-      } else {
-        tempMonths = months.map((_, index) => index) // All months for intermediate years
+      for (let i = 0; i <= 11; i++) {
+        tempMonths.push(i)
       }
     }
 
@@ -127,15 +168,15 @@ export const PSDBox: React.VFC<{
 
   useEffect(() => {
     if (!months.includes(selectedMonth)) {
-      setSelectedMonth(0)
+      setSelectedMonth(firstEligibleDate.month)
     }
   }, [JSON.stringify(months)])
 
   // write a useEffect that listens to changes to selectedYear and selectedMonth and if they are different from current month and year make a hidden button appear
   useEffect(() => {
     if (
-      selectedMonth !== currentDate.getMonth() ||
-      selectedYear !== currentDate.getFullYear()
+      selectedMonth !== firstEligibleDate.month ||
+      selectedYear !== firstEligibleDate.year
     ) {
       setShowUpdateButton(true)
     } else {
@@ -175,7 +216,7 @@ export const PSDBox: React.VFC<{
               </label>
               <select
                 id="psd-month"
-                value={selectedMonth}
+                value={months.indexOf(selectedMonth)}
                 onChange={(e) => setSelectedMonth(Number(e.target.value))}
                 className="inputStyles w-[108px]"
                 // aria-invalid={!!props.hasError}
