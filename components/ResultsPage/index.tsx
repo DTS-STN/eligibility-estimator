@@ -52,29 +52,6 @@ const ResultsPage: React.VFC<{
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject
-  const age = Number(inputObj.age)
-  console.log('inputObj', inputObj)
-  // console.log('inputObj.receiveOAS', JSON.parse(inputObj.receiveOAS))
-  const receiveOAS = inputObj?.receiveOAS === 'true'
-  console.log('receiveOAS', receiveOAS)
-  const yearsInCanada =
-    inputObj.livedOnlyInCanada === 'true'
-      ? 40
-      : Number(inputObj.yearsInCanadaSince18) ||
-        Number(inputObj.yearsInCanadaSinceOAS)
-
-  const clientEliObj = OasEligibility(
-    Number(inputObj.age),
-    yearsInCanada,
-    JSON.parse(inputObj.livedOnlyInCanada),
-    inputObj.livingCountry
-  )
-
-  const maxEliAge = Math.max(clientEliObj.ageOfEligibility, age)
-  const yearsToDefer = maxEliAge >= 70 ? null : 70 - maxEliAge
-
-  console.log('clientEliObj', clientEliObj)
-  console.log('yearsToDefer', yearsToDefer)
 
   // TODO: get eligible age (should probably come in already as a prop or part of the results object) Math.max(eligibleAge, userAge) -> ex. 65, 68 => 68. Check if less than 70.
 
@@ -88,10 +65,6 @@ const ResultsPage: React.VFC<{
   // 69/11      68           1
   // 66/2       74           N/A
 
-  // const maxEliAge = Math.max(eligibleAge, userAge)
-  // const deferralDurationYrs = maxEliAge >= 70 ? 0 : 70 - maxEliAge
-
-  const showPSD = !receiveOAS && age >= 65 && yearsToDefer
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   const apiTsln = getTranslations(tsln._language)
@@ -243,7 +216,8 @@ const ResultsPage: React.VFC<{
       .filter((item) => item !== null)
       .filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (monthsFromToday) => {
+    console.log('monthsFromToday', monthsFromToday)
     setIsUpdating(true)
     await new Promise((resolve) => setTimeout(resolve, 1000))
     setIsUpdating(false)
@@ -282,13 +256,11 @@ const ResultsPage: React.VFC<{
         </div>
 
         <div className="col-span-1 row-span-2 space-y-4">
-          {showPSD && (
-            <PSDBox
-              onUpdate={handleUpdate}
-              isUpdating={isUpdating}
-              yearsToDefer={yearsToDefer}
-            />
-          )}
+          <PSDBox
+            onUpdate={handleUpdate}
+            inputObj={inputObj}
+            isUpdating={isUpdating}
+          />
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
