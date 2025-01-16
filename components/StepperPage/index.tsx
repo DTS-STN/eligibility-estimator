@@ -94,7 +94,7 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }
   const [receiveOAS, setReceiveOAS] = useState(false)
 
-  // get savedResults, overwite inputs with it
+  // Get savedResults, overwite inputs with it.
   useEffect(() => {
     if (savedResults !== null) {
       if ('inputs' in savedResults) {
