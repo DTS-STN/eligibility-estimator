@@ -532,19 +532,15 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           this.translations.detailWithHeading.deferralDelay
         )
       }
+      const ageCalc = this.formAge ? this.formAge : this.inputAge
 
       //EC8
-      if (
-        this.inputAge >= 70 &&
-        !this.formReceiving &&
-        this.entitlement.result > 0
-      ) {
+      if (ageCalc >= 70 && !this.formReceiving && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.retroactivePayment
         )
       }
       //EC19 && EC20
-      const ageCalc = this.formAge ? this.formAge : this.inputAge
 
       if (ageCalc >= 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(

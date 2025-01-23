@@ -202,7 +202,9 @@ export const Estimation: React.VFC<{
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
                 .entitlement.result + (gis ? gis.entitlement.result : 0)
 
-            const nextBenefitAge = Object.keys(nextBenefitResult)[0]
+            const nextBenefitAge = Math.trunc(
+              Number(Object.keys(nextBenefitResult)[0])
+            )
 
             //NEXT SAME
             if (eligibleTotalAmount == nextBenefitTotal) {
@@ -218,9 +220,7 @@ export const Estimation: React.VFC<{
             else {
               text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
                 apiTrans.detail.youCouldReceiveTo
-              } ${Object.keys(nextBenefitResult)[0]}${
-                language == 'fr' ? ' ans' : ''
-              },`
+              } ${nextBenefitAge}${language == 'fr' ? ' ans' : ''},`
               text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
             }
           }

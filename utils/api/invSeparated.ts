@@ -305,12 +305,6 @@ export function InvSeparatedAllCases(
 
         if (clientGis.entitlement.result === 0) {
           isApplicantGisAvailable = false
-
-          if (partnerAlwCalcSingle > 0) {
-            partnerAlw.cardDetail.collapsedText.push(
-              translations.detailWithHeading.partnerEligible
-            )
-          }
         } else {
           allResults.client.gis.cardDetail.collapsedText.push(
             translations.detailWithHeading.calculatedBasedOnIndividualIncome
@@ -329,10 +323,6 @@ export function InvSeparatedAllCases(
           if (partnerAlwCalcSingle > 0) {
             allResults.partner.alw.cardDetail.collapsedText.push(
               translations.detailWithHeading.calculatedBasedOnIndividualIncome
-            )
-
-            partnerAlw.cardDetail.collapsedText.push(
-              translations.detailWithHeading.partnerEligible
             )
           }
         }
@@ -467,14 +457,6 @@ export function InvSeparatedAllCases(
             //     .calculatedBasedOnIndividualIncome
             // )
           }
-          if (
-            !allResults.partner.gis.cardDetail.collapsedText.includes(
-              translations.detailWithHeading.partnerEligible
-            )
-          )
-            allResults.partner.gis.cardDetail.collapsedText.unshift(
-              translations.detailWithHeading.partnerEligible
-            )
 
           // If client is eligible for ALW, need to recalculate estimate based on individual income
           if (clientAlw.eligibility.result === 'eligible') {
@@ -690,16 +672,6 @@ export function InvSeparatedAllCases(
       } else {
         allResults.partner.gis.entitlement.result = partnerGisResultT1
         allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-
-        if (
-          !partnerGis.cardDetail.collapsedText.includes(
-            translations.detailWithHeading.partnerEligible
-          )
-        ) {
-          partnerGis.cardDetail.collapsedText.unshift(
-            translations.detailWithHeading.partnerEligible
-          )
-        }
       }
 
       // add the amount calculated to the card.

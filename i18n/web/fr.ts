@@ -320,6 +320,8 @@ const fr: WebTranslations = {
       'Si votre situation change, vos résultats pourraient changer.',
     youEstimateMayChange:
       'Votre estimation peut changer au fil du temps en fonction',
+    yourEstimateMayChangeList:
+      'Votre estimation peut changer au fil du temps en fonction&nbsp;',
     basedYourAge: 'de votre âge',
     basedYourPartner: 'des prestations que votre conjoint reçoit.',
     ifYouChoseToDefer:

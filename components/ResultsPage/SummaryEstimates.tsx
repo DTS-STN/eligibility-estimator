@@ -57,7 +57,9 @@ export const SummaryEstimates: React.VFC<{
           : null
 
         const partnerResult = partnerResults
-          ? partnerResults.some((obj) => year in obj)
+          ? partnerResults.filter((elm) => elm).length > 0
+            ? partnerResults.some((obj) => year in obj)
+            : null
           : null
         let heading
 

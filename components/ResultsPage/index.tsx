@@ -143,8 +143,7 @@ const ResultsPage: React.VFC<{
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
       const age = Number(Object.keys(item)[0])
-      const headingYear =
-        currentYear + (Math.round(age) - Math.trunc(Number(userAge)))
+      const headingYear = Math.trunc(currentYear + (age - Number(userAge)))
       let key
       if (age == 0) {
         key = currentYear
@@ -159,8 +158,9 @@ const ResultsPage: React.VFC<{
     ? partnerArrNew.map((item, index) => {
         if (item) {
           const age = Number(Object.keys(item)[0])
-          const headingYear =
-            currentYear + (Math.round(age) - Math.trunc(Number(partnerAge)))
+          const headingYear = Math.trunc(
+            currentYear + (age - Number(partnerAge))
+          )
           let key
           if (age == 0) {
             key = currentYear

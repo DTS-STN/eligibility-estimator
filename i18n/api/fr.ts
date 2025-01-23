@@ -461,7 +461,7 @@ const fr: Translations = {
     currentEligible: 'Présentement',
     you: 'vous pourriez',
     yourPartner: 'votre conjoint pourrait',
-    youCouldReceivePerMonth: 'par mois&nbsp;',
+    youCouldReceivePerMonth: 'par mois',
     youCouldReceiveTo: 'à',
     youCouldReceive: 'recevoir',
     youCouldReceiveUntil: 'Jusqu’à',
@@ -618,7 +618,7 @@ const fr: Translations = {
       text: 'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     },
     retroactivePayment: {
-      heading: 'Vos options de report',
+      heading: 'Paiement rétroactif',
       text: 'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     mayBecomeEligible: {

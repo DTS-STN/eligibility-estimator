@@ -316,6 +316,7 @@ const en: WebTranslations = {
     yourMonEstimateHeading: 'Your monthly estimate',
     changeInSituation: 'Changes in your situation may impact your results.',
     youEstimateMayChange: 'Your estimate may change over time based on',
+    yourEstimateMayChangeList: 'Your estimate may change over time based on:',
     basedYourAge: 'your age',
     basedYourPartner: 'the benefits your partner receives',
     ifYouChoseToDefer:
