@@ -52,8 +52,15 @@ export const SummaryEstimates: React.VFC<{
   return (
     <>
       {headings.map((year, index) => {
+        //
+        // filter from userResults years that are deemed unimportant when
+        //  partnerResults = null because it does not qualify for benefits
+        //
+
         const userResult = userResults
-          ? userResults.some((obj) => year in obj)
+          ? partnerResults.length === 1 && index === 0
+            ? userResults.some((obj: any) => year in obj)
+            : null
           : null
 
         const partnerResult = partnerResults
@@ -61,6 +68,7 @@ export const SummaryEstimates: React.VFC<{
             ? partnerResults.some((obj) => year in obj)
             : null
           : null
+
         let heading
 
         if (year == currentYear) {
@@ -124,12 +132,16 @@ export const SummaryEstimates: React.VFC<{
 
         return (
           <div key={heading}>
-            <h3
-              className={`h3 ${index != 0 ? 'mt-5' : ''} mb-5`}
-              key={'heading' + heading}
-            >
-              {heading}
-            </h3>
+            {/* Print Heading if there is something to print */}
+            {(userResult || partnerResult) && (
+              <h3
+                className={`h3 ${index != 0 ? 'mt-5' : ''} mb-5`}
+                key={'heading' + heading}
+              >
+                {heading}
+              </h3>
+            )}
+
             <div key={`estimation-${year}`} className="mb-5">
               <div key={`estimation-sub-${year}`} className="space-y-4">
                 {userResult && (
@@ -210,9 +222,13 @@ export const SummaryEstimates: React.VFC<{
                   )
                 })}
             </div>
+
+            {/* Only display the <hr /> if there are results to show */}
+
             {headings.length > 1 &&
               index < year.length &&
-              index != headings.length - 1 && (
+              index != headings.length - 1 &&
+              (userResult || partnerResult) && (
                 <hr className="border-[#6F6F6F] border-solid border-t border-opacity-25" />
               )}
           </div>
