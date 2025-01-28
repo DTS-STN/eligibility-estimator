@@ -41,7 +41,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
       : null
 
   const textStyle =
-    'font-regular font-sans text-[20px] leading-[33px] text-[#333333]'
+    'font-regular font-sans text-[20px] leading-relaxed text-[#333333]'
 
   return (
     <div className="container">
@@ -62,7 +62,7 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({
           </Link>
         </li>
       </ul>
-      <p className="font-[700] text-[14px] leading-[33px] mt-16">
+      <p className="font-[700] text-[14px] leading-relaxed mt-16">
         {errorPageType} {errType}
       </p>
     </div>

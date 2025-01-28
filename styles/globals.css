@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 @layer components {
   /* consistent focus styles on all components */
   * {
@@ -106,8 +111,15 @@
   /* typography gc overrides */
   .h1 {
     @apply text-mobile sm:text-h1 font-bold font-header-gc text-content pb-2;
-    border-bottom: .18em solid #AF3C43;
-    border-image: linear-gradient(to right, #AF3C43 71px, transparent 71px);
+    border-bottom: 0.18em solid #af3c43;
+    border-image: linear-gradient(to right, #af3c43 71px, transparent 71px);
+    border-image-slice: 1;
+  }
+
+  .steps-title {
+    @apply text-[32.44px] leading-[40px] sm:text-[40.55px] sm:leading-[48px] font-bold font-header-gc text-content pb-2;
+    border-bottom: 0.18em solid #af3c43;
+    border-image: linear-gradient(to right, #af3c43 71px, transparent 71px);
     border-image-slice: 1;
   }
 
@@ -174,11 +186,25 @@
     outline: none;
   }
 
+  .form-date {
+    @apply font-medium font-input-label text-multi-neutrals-grey100;
+  }
+
+  .duration-input {
+    @apply flex w-20 py-[5px] px-[14px] border-solid border-1.5 border-multi-neutrals-grey85a rounded;
+  }
+
   .form-control[disabled] {
     @apply text-muted/60;
     cursor: not-allowed;
     background-color: #eee;
     opacity: 1;
+  }
+
+  .alert-box {
+    @apply bg-[#FAEDD1] p-4 mx-auto;
+    border-left: 6px solid #b3800f;
+    padding: 20px 24px 24px 24px;
   }
 
   /* css reset for number input types*/
@@ -345,7 +371,7 @@
   a.hintText:visited,
   a.generatedLink:visited,
   .summary-link a:visited {
-    color: #7834BC;
+    color: #7834bc;
     background: url('/openNewTabPurple.svg') no-repeat right;
   }
 
@@ -383,10 +409,16 @@
   }
 
   a:visited {
-    color: #7834BC;
+    color: #7834bc;
   }
 
   dfn {
     font-style: normal;
+  }
+
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 0px;
   }
 }

@@ -121,12 +121,13 @@ export class BenefitHandler {
     if (!this.future) {
       const partnerEliObj = OasEligibility(
         this.input.partner.age,
-        this.input.partner.yearsInCanadaSince18,
+        this.input.partner.yearsInCanadaSince18 ||
+          this.input.partner.yearsInCanadaSinceOAS,
         this.input.partner.livedOnlyInCanada,
         this.rawInput.partnerLivingCountry
       )
 
-      if (this.input.partner.age > partnerEliObj.ageOfEligibility) {
+      if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
           this.input.partner.age = partnerEliObj.ageOfEligibility
           this.input.partner.yearsInCanadaSince18 =
@@ -145,10 +146,11 @@ export class BenefitHandler {
 
     if (this.input.client.receiveOAS && !this.input.client.livedOnlyInCanada) {
       const yearsInCanada =
-        Number(this.input.client.yearsInCanadaSinceOAS) ||
-        Number(this.input.client.yearsInCanadaSince18)
+        Number(this.input.client.yearsInCanadaSince18) ||
+        Number(this.input.client.yearsInCanadaSinceOAS)
       const oasDefer =
-        this.input.client.oasDeferDuration || '{"months":0,"years":0}'
+        this.input.client.oasDeferDuration || '{"months":0, "years":0}'
+
       const deferralDuration = JSON.parse(oasDefer)
       const deferralYrs = deferralDuration.years
       const deferralMonths = deferralDuration.months

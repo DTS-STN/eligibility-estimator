@@ -69,7 +69,7 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.income,
     moreinfo: 'Ce revenu sera-t-il utilisé dans votre demande?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             Non, il s’agit d’une estimation. Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> réels seront évalués lors de votre demande. \
             </p> \
           </div> \
@@ -79,7 +79,7 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.income,
     moreinfo: '	Pourquoi demandons-nous vos revenus d’emploi?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             Vos premiers 15&nbsp;000&nbsp;$ de revenu lié au travail sont sujets à des exemptions. Nous allons les calculer pour vous. \
             </p> \
           </div> \
@@ -89,7 +89,7 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.income,
     moreinfo: 'Ce revenu sera-t-il utilisé dans votre demande?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             Non, il s’agit d’une estimation. Ses <a class=hintText' style='text-decoration: underline; display: flex;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> réels seront évalués lors de votre demande. \
             </p> \
           </div> \
@@ -99,7 +99,7 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.marital,
     moreinfo: 'Pourquoi demandons-nous ses revenus d’emploi?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
             Ses premiers 15&nbsp;000&nbsp;$ de revenu lié au travail sont sujets à des exemptions. Nous allons les calculer pour vous. \
             </p> \
           </div> \
@@ -109,7 +109,7 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.residence,
     moreinfo: 'Quand la résidence commence-t-elle à compter?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
               La résidence commence lorsque vous établissez votre demeure et vivez au Canada. \
             </p> \
           </div> \
@@ -119,7 +119,7 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.marital,
     moreinfo: 'Quand la résidence commence-t-elle à compter?',
     text: "<div style='margin-bottom: 16px;'> \
-            <p style='padding-bottom: 8px; color: rgba(92, 92, 92, 1);'> \
+            <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
               La résidence commence lorsque votre conjoint établit sa demeure et vit au Canada. \
             </p> \
           </div> \

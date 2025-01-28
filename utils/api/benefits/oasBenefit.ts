@@ -263,7 +263,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    */
   private get deferralYears(): number {
     let oasAge = 65
-
     const durationStr = this.input.oasDeferDuration
 
     if (durationStr) {

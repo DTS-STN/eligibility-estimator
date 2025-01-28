@@ -27,7 +27,7 @@ const fr: Translations = {
     [FieldCategory.AGE]: 'Âge',
     [FieldCategory.INCOME]: 'Revenu',
     [FieldCategory.LEGAL]: 'Statut légal',
-    [FieldCategory.RESIDENCE]: 'Historique de résidence',
+    [FieldCategory.RESIDENCE]: 'Résidence',
     [FieldCategory.MARITAL]: 'État matrimonial',
   },
   result: {
@@ -84,6 +84,8 @@ const fr: Translations = {
       "Depuis l'âge de 18 ans, votre conjoint a-t-il seulement vécu au Canada?",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Depuis l'âge de 18 ans, combien d'années votre conjoint a-t-il vécu au Canada?",
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Votre conjoint avait vécu combien d’années au Canada lorsqu’il a commencé à recevoir sa pension de la Sécurité de la vieillesse?',
   },
   questionShortText: {
     [FieldKey.AGE]: 'Âge',
@@ -100,7 +102,7 @@ const fr: Translations = {
     [FieldKey.YEARS_IN_CANADA_SINCE_18]: 'Années vécues au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]: 'Années vécues au Canada',
     [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
-      'A vécu dans un pays avec un accord social',
+      'A vécu dans un pays avec un accord de sécurité sociale',
     [FieldKey.MARITAL_STATUS]: 'État matrimonial',
     [FieldKey.INV_SEPARATED]: 'Séparation involontaire',
     [FieldKey.PARTNER_INCOME_AVAILABLE]: 'Revenu du conjoint fourni',
@@ -113,6 +115,8 @@ const fr: Translations = {
     [FieldKey.PARTNER_LIVED_ONLY_IN_CANADA]:
       'Conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      'Années où le conjoint a vécu au Canada',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
       'Années où le conjoint a vécu au Canada',
   },
   questionAriaLabel: {
@@ -152,24 +156,24 @@ const fr: Translations = {
       'Modifier si votre conjoint a seulement vécu au Canada',
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       'Modifier le nombre d’années vécues au Canada de votre conjoint',
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      'Modifier le nombre d’années vécues au Canada de votre conjoint',
   },
   questionHelp: {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "<p class='text-multi-neutrals-grey90a'>Incluez tous les types de revenus après déductions, y compris :</p> <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> <p class='mt-4 text-multi-neutrals-grey90a'>N'incluez pas les paiements :</p> <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
     [FieldKey.INV_SEPARATED]:
       "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
-      "Incluez tous les types de revenus après déductions, y compris : <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> N'incluez pas les paiements : <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "<p class='text-multi-neutrals-grey90a'>Incluez tous les types de revenus après déductions, y compris :</p> <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> <p class='mt-4 text-multi-neutrals-grey90a'>N'incluez pas les paiements :</p> <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
     [FieldKey.PARTNER_INCOME_WORK]:
       "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
-    [FieldKey.OAS_DEFER_DURATION]:
-      "Si vous n'avez pas reporté votre pension, passez à l'étape suivante.",
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',
     [FieldKey.YEARS_IN_CANADA_SINCE_18]:
       "Ne comptez pas les périodes où vous étiez à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
@@ -177,6 +181,10 @@ const fr: Translations = {
       "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
     [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
       "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_18]:
+      "Ne comptez pas les périodes où votre conjoint était à l'extérieur du Canada pendant au moins 6 mois consécutifs. Certaines exceptions s'appliquent, comme travailler pour un employeur canadien à l'étranger.",
+    [FieldKey.PARTNER_YEARS_IN_CANADA_SINCE_OAS]:
+      "Comptez seulement le nombre d'années depuis l'âge de 18 ans.",
   },
   questionOptions: {
     [FieldKey.INCOME_AVAILABLE]: [
@@ -300,7 +308,7 @@ const fr: Translations = {
       // },
       {
         key: PartnerBenefitStatus.OAS_GIS,
-        text: 'Oui, mon conjoint reçoit la pension de la Sécurité de la vieillesse',
+        text: 'Oui',
         shortText: 'Oui',
       },
       // {
@@ -310,7 +318,7 @@ const fr: Translations = {
       // },
       {
         key: PartnerBenefitStatus.NONE,
-        text: 'Non, mon conjoint ne reçoit pas la pension de la Sécurité de la vieillesse',
+        text: 'Non',
         shortText: 'Non',
       },
       {

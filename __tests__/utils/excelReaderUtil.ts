@@ -14,8 +14,6 @@ export function getTransformedPayloadByName(
   const data = readExcelData(filePath)
   const rowToTransform = data.find((row) => row['Scenario'] === testName) // Assuming "testName" column is represented by "Column1"
 
-  //console.log('Extracted rowToTransform:', rowToTransform)
-
   if (rowToTransform) {
     const transformedPayload = createTransformedPayload(rowToTransform)
     return transformedPayload
@@ -152,6 +150,24 @@ function createTransformedPayload(rowToTransform: string): Record<string, any> {
       ],
       rowToTransform['Partner Birth Year and Month']
     ),
+    partnerYearsInCanadaSinceOAS:
+      transformLiveOnlyCanadaValue(
+        rowToTransform[
+          'Partner: # of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+        ]
+      ) !== 'true'
+        ? transformValue(
+            rowToTransform["Partner Rec'ing OAS (Yes / No / IDK)"]
+          ) === 'true'
+          ? transformYearsInCanadaSinceOAS18Value(
+              rowToTransform['Partner Age'],
+              rowToTransform[
+                'Partner: # of years resided in Canada after age 18 (Full, 40, 10, etc.)'
+              ],
+              rowToTransform['Partner Birth Year and Month']
+            )
+          : undefined
+        : undefined,
   }
   payload = Object.fromEntries(
     Object.entries(payload).filter(
@@ -244,6 +260,8 @@ function transformPartnerBenefitStatusValue(value: string): String {
     return PartnerBenefitStatus.HELP_ME
   } else if (value.toUpperCase() === 'NO') {
     return PartnerBenefitStatus.NONE
+  } else if (value.toUpperCase() === 'N/A') {
+    return PartnerBenefitStatus.HELP_ME
   }
   return undefined
 }
