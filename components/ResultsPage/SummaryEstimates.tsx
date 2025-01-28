@@ -194,7 +194,9 @@ export const SummaryEstimates: React.VFC<{
             </div>
             {headings.length > 1 &&
               index < year.length &&
-              index != headings.length - 1 && <hr />}
+              index != headings.length - 1 && (
+                <hr className="border-[#676767]" />
+              )}
           </div>
         )
       })}

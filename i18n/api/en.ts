@@ -360,7 +360,7 @@ const en: Translations = {
     futureDeferralOptions:
       "If you're automatically enrolled, you can start receiving payments the month after you turn 65 unless you request a deferral.",
     youCanAply:
-      "If you're not enrolled, you can apply up to 11 months before you want your payements to start. ",
+      "If you're not enrolled, you can apply up to 11 months before you want your payements to start. ",
     onceEnrolled:
       "Once you’re enroled, your payment amount will be reviewed each year based on your income tax return. You'll automatically be paid if your income qualifies.",
     delayMonths:
@@ -484,7 +484,7 @@ const en: Translations = {
       chooseToDefer:
         "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
       receivePayment:
-        'You may be able to receive payment for up to the last 11 months.',
+        'You may be able to receive payment for up to the last 11 months.',
     },
     gis: {
       youCanApplyGis:
@@ -510,7 +510,7 @@ const en: Translations = {
       spouseReceives:
         'whose spouse or common-law partner receives the Guaranteed Income Supplement',
       yourPartnerCanApply:
-        'Your partner can apply 6 to 11 months before they become eligible at 65',
+        'Your partner can apply 6 to 11 months before they become eligible at 65',
     },
     alws: {},
   },
@@ -581,11 +581,11 @@ const en: Translations = {
     },
     yourDeferralOptions: {
       heading: 'Your deferral options',
-      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
     },
     deferWaitMonths: {
       heading: 'Your deferral options',
-      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
     },
     deferralDelay: {
       heading: 'Your deferral options',
@@ -593,11 +593,11 @@ const en: Translations = {
     },
     retroactivePayment: {
       heading: 'Retroactive payment',
-      text: 'You may be able to receive payment for up to the last 11 months.',
+      text: 'You may be able to receive payment for up to the last 11 months.',
     },
     mayBecomeEligible: {
       heading: 'Retroactive payment',
-      text: 'You may be able to receive payment for up to the last 11 months.',
+      text: 'You may be able to receive payment for up to the last 11 months.',
     },
   },
   summaryTitle: {

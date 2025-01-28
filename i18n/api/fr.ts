@@ -511,12 +511,12 @@ const fr: Translations = {
     },
     alw: {
       forIndividuals: 'Cette prestation est pour les personnes veuves :',
-      age60to64: 'âgées de 60 à 64 ans;',
+      age60to64: 'âgées de 60 à 64 ans;',
       livingInCanada: 'qui vivent au Canada;',
       spouseReceives:
         'qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.',
       yourPartnerCanApply:
-        'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 65 ans.',
+        'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 65 ans.',
     },
     alws: {},
   },

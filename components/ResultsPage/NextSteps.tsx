@@ -60,7 +60,7 @@ export function getGisNextSteps(
   if (result.eligibility.result === ResultKey.ELIGIBLE) {
     nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
     if (!receivingOAS) {
-      nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.youCanApplyGis}</p>`
+      nextStepText.nextStepContent += `<p class='mt-0'>${apiTsln.detail.gis.youCanApplyGis}</p>`
       if (result.entitlement.result === 0) {
         nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouApply}</p>`
       }
@@ -110,7 +110,7 @@ export function getAlwNextSteps(
       nextStepText.nextStepContent += ifYouApplyText
     }
   } else if (result.eligibility.result === ResultKey.INELIGIBLE) {
-    nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.alw.forIndividuals}</p>`
+    nextStepText.nextStepContent += `<p class='mt-0'>${apiTsln.detail.alw.forIndividuals}</p>`
     nextStepText.nextStepContent += `<ul class='pl-[35px] ml-[20px] my-1 list-disc text-content'>
     <li>${apiTsln.detail.alw.age60to64}</li>
     <li>${apiTsln.detail.alw.livingInCanada}</li>
