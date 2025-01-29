@@ -58,10 +58,12 @@ export const SummaryEstimates: React.VFC<{
         //
 
         const userResult = userResults
-          ? partnerResults.length === 1 && index === 0
-            ? userResults.some((obj: any) => year in obj)
-            : null
-          : null
+          ? partnerResults
+            ? partnerResults.length === 1 && index === 0
+              ? userResults.some((obj: any) => year in obj)
+              : null
+            : userResults.some((obj: any) => year in obj)
+          : userResults.some((obj: any) => year in obj)
 
         const partnerResult = partnerResults
           ? partnerResults.filter((elm) => elm).length > 0
