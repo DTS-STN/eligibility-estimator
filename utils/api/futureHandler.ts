@@ -306,12 +306,21 @@ export class FutureHandler {
         }
       })
 
+      console.log('>>>>> query', this.query)
+      console.log('>>>>> OTH country', this.query.partnerLivingCountry === 'OTH')
+      console.log('>>>>> is partner results', partnerResults)
       result = {
         client: clientResults.length !== 0 ? clientResults : null,
-        partner: partnerResults.length !== 0 ? partnerResults : null,
+        partner:
+          this.query.partnerLivingCountry === 'OTH'
+            ? null
+            : partnerResults.length !== 0
+            ? partnerResults
+            : null,
       }
     }
 
+    console.log('>>>>> is result', result)
     return result
   }
 

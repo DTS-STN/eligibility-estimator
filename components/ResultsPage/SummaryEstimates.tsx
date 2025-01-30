@@ -57,17 +57,19 @@ export const SummaryEstimates: React.VFC<{
         //  partnerResults = null because it does not qualify for benefits
         //
 
+        console.log('summary YEAR', year)
+        console.log('summary user ', userResults)
+        console.log('summary partner ', partnerResults)
+
         const userResult = userResults
-          ? partnerResults
-            ? partnerResults.length === 1 && index === 0
-              ? userResults.some((obj: any) => year in obj)
-              : null
-            : userResults.some((obj: any) => year in obj)
-          : userResults.some((obj: any) => year in obj)
+          ? userResults.some((obj: any) => year in obj)
+          : null
 
         const partnerResult = partnerResults
           ? partnerResults.filter((elm) => elm).length > 0
-            ? partnerResults.some((obj) => year in obj)
+            ? partnerResults.includes(year)
+              ? partnerResults.some((obj) => year in obj)
+              : null
             : null
           : null
 
