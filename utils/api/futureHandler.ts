@@ -306,9 +306,9 @@ export class FutureHandler {
         }
       })
 
-      console.log('>>>>> query', this.query)
-      console.log('>>>>> OTH country', this.query.partnerLivingCountry === 'OTH')
-      console.log('>>>>> is partner results', partnerResults)
+      //
+      // Remove from partnerResults all calculations when partner resides out of the country
+      //
       result = {
         client: clientResults.length !== 0 ? clientResults : null,
         partner:
@@ -320,7 +320,6 @@ export class FutureHandler {
       }
     }
 
-    console.log('>>>>> is result', result)
     return result
   }
 

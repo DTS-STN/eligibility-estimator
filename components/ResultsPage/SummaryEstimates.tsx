@@ -52,17 +52,8 @@ export const SummaryEstimates: React.VFC<{
   return (
     <>
       {headings.map((year, index) => {
-        //
-        // filter from userResults years that are deemed unimportant when
-        //  partnerResults = null because it does not qualify for benefits
-        //
-
-        console.log('summary YEAR', year)
-        console.log('summary user ', userResults)
-        console.log('summary partner ', partnerResults)
-
         const userResult = userResults
-          ? userResults.some((obj: any) => year in obj)
+          ? userResults.some((obj) => year in obj)
           : null
 
         const partnerResult = partnerResults
