@@ -169,7 +169,7 @@ export const SummaryEstimates: React.VFC<{
                 )}
               </div>
               {eligible &&
-                eligible.map((benefit: BenefitResult) => {
+                eligible.map((benefit: BenefitResult, index) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
                   if (collapsedDetails) {
                     const index = collapsedDetails.findIndex(
@@ -185,11 +185,12 @@ export const SummaryEstimates: React.VFC<{
                   }
 
                   return (
-                    <>
+                    <div key={`CustomCollapse-${index}`}>
                       {collapsedDetails &&
                         collapsedDetails.map((detail, index) => {
                           if (!collapsed.includes(detail.heading)) {
                             collapsed.push(detail.heading)
+
                             return (
                               <CustomCollapse
                                 datacy={`collapse-${benefit.benefitKey}-${index}`}
@@ -199,7 +200,6 @@ export const SummaryEstimates: React.VFC<{
                               >
                                 <p
                                   className="leading-[26px]"
-                                  key={`collapse-${detail.heading}-${index}`}
                                   dangerouslySetInnerHTML={{
                                     __html: detail.text,
                                   }}
@@ -222,7 +222,7 @@ export const SummaryEstimates: React.VFC<{
                             )
                           }
                         })}
-                    </>
+                    </div>
                   )
                 })}
             </div>
