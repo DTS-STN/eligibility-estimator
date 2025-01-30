@@ -527,8 +527,8 @@ const fr: Translations = {
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
     alw: {
-      forIndividuals: 'Cette prestation est pour les personnes&nbsp;:',
-      age60to64: 'âgées de 60 à 64 ans;',
+      forIndividuals: 'Cette prestation est pour les personnes :',
+      age60to64: 'âgées de 60 à 64 ans;',
       livingInCanada: 'qui vivent au Canada;',
       spouseReceives:
         'dont le conjoint reçoit le Supplément de revenu garanti.',

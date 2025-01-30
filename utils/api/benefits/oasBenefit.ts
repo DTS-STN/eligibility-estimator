@@ -478,7 +478,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           this.eligibility.result == ResultKey.ELIGIBLE &&
           this.userOas.eligibility.result == ResultKey.ELIGIBLE
         ) {
-
           if (this.clawbackAmount > 0 && this.userOas.clawbackAmount > 0) {
             if (this.input.livingCountry.value !== LivingCountry.CANADA) {
               cardCollapsedText.push(
