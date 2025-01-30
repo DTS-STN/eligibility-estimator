@@ -472,13 +472,13 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           )
         }
       }
-
       //Handle EC9 - EC14
       if (this.userOas) {
         if (
           this.eligibility.result == ResultKey.ELIGIBLE &&
           this.userOas.eligibility.result == ResultKey.ELIGIBLE
         ) {
+
           if (this.clawbackAmount > 0 && this.userOas.clawbackAmount > 0) {
             if (this.input.livingCountry.value !== LivingCountry.CANADA) {
               cardCollapsedText.push(
@@ -535,7 +535,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       const ageCalc = this.formAge ? this.formAge : this.inputAge
 
       //EC8
-      if (ageCalc >= 70 && !this.formReceiving && this.entitlement.result > 0) {
+      if (
+        ageCalc >= 70 &&
+        this.inputAge == ageCalc &&
+        !this.formReceiving &&
+        this.entitlement.result > 0
+      ) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.retroactivePayment
         )
