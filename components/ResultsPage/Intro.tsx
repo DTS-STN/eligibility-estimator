@@ -43,7 +43,7 @@ export const Intro: React.VFC<{
             <li>{tsln.resultsPage.basedYourPartner}</li>
           </ul>
           <p className="my-6">
-            {userAge < 70 && hasMultipleOasGis
+            {userAge < 70 && hasMultipleOasGis && !alreadyReceiving
               ? tsln.resultsPage.ifYouChoseToDefer
               : ''}{' '}
             {tsln.resultsPage.changeInSituation}

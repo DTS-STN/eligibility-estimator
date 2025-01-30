@@ -66,7 +66,7 @@ export function getGisNextSteps(
   if (result.eligibility.result === ResultKey.ELIGIBLE) {
     nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
     if (!receivingOAS) {
-      nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.youCanApplyGis}</p>`
+      nextStepText.nextStepContent += `<p class='mt-0'>${apiTsln.detail.gis.youCanApplyGis}</p>`
       if (result.entitlement.result === 0) {
         nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouApply}</p>`
       }

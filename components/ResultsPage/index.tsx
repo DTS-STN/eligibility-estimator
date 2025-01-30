@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
-import { useSessionStorage } from 'react-use'
 import { FieldInput } from '../../client-state/InputHelper'
 import { WebTranslations } from '../../i18n/web'
 import {

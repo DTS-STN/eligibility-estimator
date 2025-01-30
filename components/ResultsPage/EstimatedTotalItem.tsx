@@ -87,6 +87,7 @@ export const EstimatedTotalItem: React.VFC<{
               onClose={closeModal}
               partner={partner}
               maritalStatus={maritalStatus}
+              benefitName={heading}
             />
           </span>
         </>
