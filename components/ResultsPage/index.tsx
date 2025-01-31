@@ -145,7 +145,7 @@ const ResultsPage: React.VFC<{
       const headingYear = Math.trunc(currentYear + (age - Number(userAge)))
       let key
       if (age == 0) {
-        key = currentYear
+        key = apiTsln.detail.currentEligible
       } else {
         key = headingYear
       }
@@ -162,7 +162,7 @@ const ResultsPage: React.VFC<{
           )
           let key
           if (age == 0) {
-            key = currentYear
+            key = apiTsln.detail.currentEligible
           } else {
             key = headingYear
           }

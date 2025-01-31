@@ -63,9 +63,7 @@ export const SummaryEstimates: React.VFC<{
           : null
         let heading
 
-        if (year == currentYear) {
-          heading = apiTrans.detail.currentEligible
-        } else if (index < headings.length - 1) {
+        if (index < headings.length - 1) {
           heading = year
         } else {
           heading =
