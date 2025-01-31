@@ -380,7 +380,9 @@ const en: Translations = {
       "You may be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1 month after you turn 59.</p>",
     eligibleWhen65: 'You may be eligible when you turn 65.',
     mustBeInCanada:
-      "You need to live in Canada to receive this benefit. You can <a id='inCanada' class='text-default-text visited:text-blue-500' style='text-decoration: underline' href='/en/questions?step=residence'>edit your answers</a> to see what you could get if you lived in Canada.",
+      "You need to live in Canada to receive this benefit. You can <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/en/questions?step=residence'>edit your answers</a> to see what you could get if you lived in Canada.",
+    partnerMustBeEligible:
+      "To be eligible, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/en/questions?step=age#partnerBenefitStatus'>edit your answers</a> to see what you could get if your partner received these benefits.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
@@ -423,10 +425,9 @@ const en: Translations = {
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
-    alwsApply:
-      'You can apply 6 to 11 months before you become eligible at 60. ',
+    alwsApply: 'You can apply 6 to 11 months before you become eligible. ',
     alwPartnerEligible:
-      'Your partner can apply 6 to 11 months before they become eligible at 60.',
+      'Your partner can apply 6 to 11 months before they become eligible.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -569,7 +570,7 @@ const en: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Your partner may be eligible',
-      text: 'You can <a href="/en/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
+      text: 'You can <a class="link-no-deco" href="/en/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
     recoveryTax: {
       heading: 'Recovery tax will be applied to your pension',

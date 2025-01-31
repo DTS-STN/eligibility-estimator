@@ -408,7 +408,7 @@ html {
     font-size: 12px;
   }
 
-  a#inCanada:visited{
+  a#inCanada, a.link-no-deco:visited{
     color:#284162
   }
 

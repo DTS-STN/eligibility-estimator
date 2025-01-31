@@ -25,7 +25,7 @@ export function getOasNextSteps(
         nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
       }
     } else {
-      if (inputAge > 69) {
+      if (Math.trunc(inputAge) > 69) {
         nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.over70}</p>`
         nextStepText.nextStepContent += `<p class='mt-2'>${
           apiTsln.detail.oas.serviceCanadaReviewYourPayment
@@ -121,8 +121,13 @@ export function getAlwNextSteps(
       nextStepText.nextStepContent += `<p class='mt-4'>${ifYouApplyText}</p>`
     }
   } else if (result.eligibility.result === ResultKey.INELIGIBLE) {
+    console.log(result.eligibility.reason)
     if (result.eligibility.reason === ResultReason.LIVING_COUNTRY) {
       nextStepText.nextStepContent += apiTsln.detail.mustBeInCanada
+    } else if (result.eligibility.reason === ResultReason.PARTNER) {
+      if (!liveInCanada)
+        nextStepText.nextStepContent += apiTsln.detail.mustBeInCanada
+      else nextStepText.nextStepContent += apiTsln.detail.partnerMustBeEligible
     } else {
       nextStepText.nextStepContent += `<p>${apiTsln.detail.alw.forIndividuals}</p>`
       nextStepText.nextStepContent += `<ul class='pl-[35px] ml-[20px] my-1 list-disc text-content'>

@@ -205,7 +205,8 @@ export const BenefitCards: React.VFC<{
 
     const eligibleText =
       result.benefitKey !== BenefitKey.oas &&
-      result.eligibility.reason === ResultReason.LIVING_COUNTRY
+      (result.eligibility.reason === ResultReason.LIVING_COUNTRY ||
+        result.eligibility.reason === ResultReason.PARTNER)
         ? apiTsln.result.almostEligible
         : eligibility
         ? apiTsln.result.eligible
@@ -223,7 +224,8 @@ export const BenefitCards: React.VFC<{
           isEligible={eligibility}
           future={future}
           liveInCanada={
-            result.eligibility.reason === ResultReason.LIVING_COUNTRY
+            result.eligibility.reason === ResultReason.LIVING_COUNTRY ||
+            result.eligibility.reason === ResultReason.PARTNER
           }
           eligibleText={eligibleText}
           nextStepText={nextStepText}

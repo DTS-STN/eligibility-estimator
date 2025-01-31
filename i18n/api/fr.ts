@@ -390,7 +390,9 @@ const fr: Translations = {
       "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.</p>",
     eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline link-no-deco' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+    partnerMustBeEligible:
+      "Pour être admissible, votre conjoint doit recevoir la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti. Vous pouvez <a class='text-default-text link-no-deco' style='text-decoration: underline' href='/fr/questions?step=age#partnerBenefitStatus'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si votre conjoint recevait ces prestations.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
@@ -434,9 +436,9 @@ const fr: Translations = {
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible à 60 ans.',
+      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible.',
     alwPartnerEligible:
-      'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 60 ans.',
+      'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible.',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -582,7 +584,7 @@ const fr: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: 'Vous pouvez <a href="/fr/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
+      text: 'Vous pouvez <a class="link-no-deco" href="/fr/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
     recoveryTax: {
       heading: 'L’impôt de récupération s’appliquera à votre pension',

@@ -77,6 +77,7 @@ export interface Translations {
     eligibleWhen60: string
     eligibleWhen65: string
     mustBeInCanada: string
+    partnerMustBeEligible: string
     mustBeOasEligible: string
     mustCompleteOasCheck: string
     mustMeetIncomeReq: string

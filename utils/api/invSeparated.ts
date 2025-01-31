@@ -312,10 +312,6 @@ export function InvSeparatedAllCases(
           allResults.client.gis.eligibility = clientGis.eligibility
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
-          allResults.client.gis.eligibility.detail,
-            (allResults.client.gis.cardDetail.mainText = future
-              ? `${translations.detail.futureEligible} ${translations.detail.futureExpectToReceive}`
-              : `${translations.detail.eligible} ${translations.detail.expectToReceive}`)
 
           allResults.partner.alw.cardDetail = partnerAlw.cardDetail
           allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
@@ -495,12 +491,6 @@ export function InvSeparatedAllCases(
                 detail: translations.detail.eligible,
               }
 
-              // cardDetails
-              allResults.client.alw.eligibility.detail,
-                (allResults.client.alw.cardDetail.mainText = future
-                  ? `${translations.detail.futureEligible60} ${translations.detail.futureExpectToReceive}`
-                  : `${translations.detail.eligible} ${translations.detail.expectToReceive}`)
-
               allResults.client.alw.cardDetail.collapsedText.push(
                 translations.detailWithHeading.calculatedBasedOnIndividualIncome
               )
@@ -608,16 +598,6 @@ export function InvSeparatedAllCases(
         allResults.client.gis.cardDetail.collapsedText.push(
           translations.detailWithHeading.calculatedBasedOnIndividualIncome
         )
-      }
-
-      if (
-        allResults.client.gis.eligibility.reason === ResultReason.INCOME &&
-        clientGis.entitlement.result > 0
-      ) {
-        allResults.client.gis.eligibility.detail,
-          (allResults.client.gis.cardDetail.mainText = future
-            ? `${translations.detail.futureEligible} ${translations.detail.futureExpectToReceive}`
-            : `${translations.detail.eligible} ${translations.detail.expectToReceive}`)
       }
 
       consoleDev(
