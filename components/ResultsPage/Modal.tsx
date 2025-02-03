@@ -25,6 +25,7 @@ export const Modal: React.VFC<{
 
       // Event listener for trapping focus
       const handleKeyDown = (event) => {
+        console.log('keypressed', event.key)
         if (event.key === 'Tab') {
           const focusableElements = modalRef.current.querySelectorAll(
             'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
@@ -45,9 +46,13 @@ export const Modal: React.VFC<{
             firstElement.focus()
           }
         }
+        if (event.key === 'Escape') {
+          onClose()
+        }
       }
 
       document.addEventListener('keydown', handleKeyDown)
+
       return () => document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
