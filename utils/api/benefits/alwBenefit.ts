@@ -173,7 +173,7 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     } else if (!meetsReqCountry) {
       return {
         result: ResultKey.INELIGIBLE,
-        reason: ResultReason.INCOME,
+        reason: ResultReason.LIVING_COUNTRY,
         detail: this.translations.detail.mustBeInCanada,
       }
     } else if (!meetsReqYears) {

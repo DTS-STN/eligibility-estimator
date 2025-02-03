@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useEffect, useLayoutEffect } from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -48,6 +49,35 @@ export const SummaryEstimates: React.VFC<{
   }
 
   let collapsed = []
+
+  //To remove recovery tax EC
+  useLayoutEffect(() => {
+    const element =
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTaxPartner.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTaxPartner.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTax.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTax.heading}`
+      )
+
+    const recoveryBoth =
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTaxBoth.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTaxBoth.heading}`
+      )
+
+    if (recoveryBoth) {
+      element?.remove()
+    }
+  })
 
   return (
     <>
@@ -178,7 +208,7 @@ export const SummaryEstimates: React.VFC<{
                               <CustomCollapse
                                 datacy={`collapse-${benefit.benefitKey}-${index}`}
                                 key={`collapse-${benefit.benefitKey}-${index}`}
-                                id={`collapse-${benefit.benefitKey}-${index}`}
+                                id={`collapse-${detail.heading}`}
                                 title={detail.heading}
                               >
                                 <p

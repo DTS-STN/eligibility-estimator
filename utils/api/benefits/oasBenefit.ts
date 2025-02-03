@@ -17,6 +17,7 @@ import {
   MetaDataObject,
   MonthsYears,
 } from '../definitions/types'
+import { LivingCountryHelper } from '../helpers/fieldClasses'
 import roundToTwo from '../helpers/roundToTwo'
 import { getDeferralIncrease } from '../helpers/utils'
 import legalValues from '../scrapers/output'
@@ -475,31 +476,38 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       //Handle EC9 - EC14
       if (this.userOas) {
         if (
-          this.eligibility.result == ResultKey.ELIGIBLE &&
-          this.userOas.eligibility.result == ResultKey.ELIGIBLE
+          this.eligibility.result === ResultKey.ELIGIBLE &&
+          this.userOas.eligibility.result === ResultKey.ELIGIBLE
         ) {
           if (this.clawbackAmount > 0 && this.userOas.clawbackAmount > 0) {
-            if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+            //EC13
+            if (
+              this.userOas.input.livingCountry.value !== LivingCountry.CANADA
+            ) {
               cardCollapsedText.push(
                 this.translations.detailWithHeading.nonResidentTaxBoth
               )
-            } else {
+            }
+            //EC14
+            else {
               cardCollapsedText.push(
                 this.translations.detailWithHeading.recoveryTaxBoth
               )
             }
           }
-        } else {
-          if (this.clawbackAmount > 0) {
-            if (this.input.livingCountry.value !== LivingCountry.CANADA) {
-              cardCollapsedText.push(
-                this.translations.detailWithHeading.nonResidentTaxPartner
-              )
-            } else {
-              cardCollapsedText.push(
-                this.translations.detailWithHeading.recoveryTaxPartner
-              )
-            }
+        }
+        if (this.clawbackAmount > 0 && this.userOas.clawbackAmount <= 0) {
+          //EC11
+          if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.nonResidentTaxPartner
+            )
+          }
+          //EC12
+          else {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.recoveryTaxPartner
+            )
           }
         }
       }
@@ -507,17 +515,18 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     if (!this.partner) {
       //RECOVER TAX MESSAGE - if partnered better to handle it in the partnered section to access both benefits
-      if (this.input.maritalStatus.value != MaritalStatus.PARTNERED) {
-        if (this.clawbackAmount > 0) {
-          if (this.input.livingCountry.value !== LivingCountry.CANADA) {
-            cardCollapsedText.push(
-              this.translations.detailWithHeading.nonResidentTax
-            )
-          } else {
-            cardCollapsedText.push(
-              this.translations.detailWithHeading.recoveryTax
-            )
-          }
+      if (this.clawbackAmount > 0) {
+        //EC10
+        if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.nonResidentTax
+          )
+        }
+        //EC09
+        else {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.recoveryTax
+          )
         }
       }
 
