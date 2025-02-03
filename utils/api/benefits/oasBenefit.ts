@@ -578,7 +578,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
       this.eligibility.reason === ResultReason.AGE_YOUNG_64
     )
-      links.push(this.translations.links.apply[this.benefitKey])
+      this.formReceiving
+        ? links.push(this.translations.links.SignInSC)
+        : links.push(this.translations.links.apply[this.benefitKey])
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }

@@ -550,11 +550,11 @@ const en: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Your payments will increase when you turn 75',
-      text: 'Once you turn 75, your payments will increase by 10%.',
+      text: 'Once you turn 75, your Old Age Security pension payments will increase by 10%.',
     },
     oasIncreaseAt75Applied: {
       heading: "Your payments have increased because you're over 75",
-      text: "Since you're over the age of 75, your payments have increased by 10%.",
+      text: "Since you're over the age of 75, your Old Age Security pension payments have increased by 10%.",
     },
     calculatedBasedOnIndividualIncome: {
       heading: 'Some amounts were calculated based on individual income',

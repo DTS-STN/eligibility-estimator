@@ -563,11 +563,11 @@ const fr: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
-      text: 'Lorsque vous aurez 75 ans, vos paiements augmenteront de 10 %.',
+      text: 'Lorsque vous aurez 75 ans, vos paiements de la pension de la Sécurité de la vieillesse augmenteront de 10 %.',
     },
     oasIncreaseAt75Applied: {
       heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
-      text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10 %.',
+      text: 'Parce que vous avez plus de 75 ans, vos paiements de la pension de la Sécurité de la vieillesse ont augmenté de 10 %.',
     },
     calculatedBasedOnIndividualIncome: {
       heading:

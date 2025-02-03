@@ -29,7 +29,7 @@ export function getOasNextSteps(
         nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.over70}</p>`
         nextStepText.nextStepContent += `<p class='mt-2'>${
           apiTsln.detail.oas.serviceCanadaReviewYourPayment
-        }</p> <p class='mt-2'>${
+        } ${
           result.entitlement.result === 0
             ? apiTsln.detail.oas.automaticallyBePaid
             : ''
@@ -135,13 +135,6 @@ export function getAlwNextSteps(
       <li>${apiTsln.detail.alw.livingInCanada}</li>
       <li>${apiTsln.detail.alw.spouseReceives}</li>
     </ul>`
-
-      if (
-        partnerAlw.eligibility.result === ResultKey.ELIGIBLE ||
-        partnerAlw.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
-      ) {
-        nextStepText.nextStepContent += `<p>${apiTsln.detail.alwPartnerEligible}</p>`
-      }
     }
   }
   // }
