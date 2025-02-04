@@ -67,7 +67,7 @@ export const EstimatedTotalItem: React.VFC<{
       {displayAmount &&
         numberToStringCurrency(result.entitlement.result, tsln._language)}
       {displayBenefitName(heading, result.entitlement.result, displayAmount)}
-      {result.entitlement.result == 0 && (
+      {result.entitlement.result == 0 && displayAmount && (
         <>
           <span className="align-middle ml-2">
             <button
