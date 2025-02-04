@@ -14,7 +14,15 @@ export const EstimatedTotalItem: React.VFC<{
   displayAmount: boolean
   partner: boolean
   maritalStatus
-}> = ({ heading, result, displayAmount, partner, maritalStatus }) => {
+  partnerReceiving: boolean
+}> = ({
+  heading,
+  result,
+  displayAmount,
+  partner,
+  maritalStatus,
+  partnerReceiving,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const [modalOpen, setModalOpen] = useState(false)
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })

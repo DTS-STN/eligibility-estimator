@@ -15,7 +15,15 @@ export const Estimation: React.VFC<{
   resultArray
   age
   maritalStatus
-}> = ({ partner, resultObject, resultArray, age, maritalStatus }) => {
+  partnerReceiving
+}> = ({
+  partner,
+  resultObject,
+  resultArray,
+  age,
+  maritalStatus,
+  partnerReceiving,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const roundedAge = Math.trunc(Number(age))
@@ -140,8 +148,10 @@ export const Estimation: React.VFC<{
           if (lastOasGis) {
             text += `${
               partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
-            } ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${
-              apiTrans.detail.youCouldReceivePerMonth
+            } ${apiTrans.detail.youCouldReceive}${
+              partner && partnerReceiving
+                ? ''
+                : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
             }:`
           }
           //FIRST NOT LAST
@@ -166,14 +176,18 @@ export const Estimation: React.VFC<{
                 apiTrans.detail.youCouldReceiveUntil
               } ${nextBenefitAge}${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
-              } ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${
-                apiTrans.detail.youCouldReceivePerMonth
+              } ${apiTrans.detail.youCouldReceive}${
+                partner && partnerReceiving
+                  ? ''
+                  : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
               }:`
             }
             text = `${
               partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
-            } ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${
-              apiTrans.detail.youCouldReceivePerMonth
+            } ${apiTrans.detail.youCouldReceive}${
+              partner && partnerReceiving
+                ? ''
+                : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
             }:`
           }
         }
@@ -187,7 +201,11 @@ export const Estimation: React.VFC<{
               language == 'fr' ? ' ans' : ''
             }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
               apiTrans.detail.youCouldStartReceiving
-            } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
+            }${
+              partner && partnerReceiving
+                ? ''
+                : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+            }:`
           }
           //NOT LAST
           else {
@@ -212,8 +230,10 @@ export const Estimation: React.VFC<{
                 apiTrans.detail.youCouldStartReceivingAt
               } ${displayAge}${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
-              } ${apiTrans.detail.youCouldStartReceiving} ${eligibleAmt} ${
-                apiTrans.detail.youCouldReceivePerMonth
+              } ${apiTrans.detail.youCouldStartReceiving}${
+                partner && partnerReceiving
+                  ? ''
+                  : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
               }:`
             }
             //NEXT NOT SAME
@@ -221,7 +241,11 @@ export const Estimation: React.VFC<{
               text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
                 apiTrans.detail.youCouldReceiveTo
               } ${nextBenefitAge}${language == 'fr' ? ' ans' : ''},`
-              text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
+              text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive}${
+                partner && partnerReceiving
+                  ? ''
+                  : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+              }:`
             }
           }
         }
@@ -246,7 +270,11 @@ export const Estimation: React.VFC<{
             partner
               ? apiTrans.detail.yourEstimateIsStillPartner
               : apiTrans.detail.yourEstimateIsStill
-          } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}.`
+          } ${
+            partner && partnerReceiving
+              ? apiTrans.detail.theSame
+              : `${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+          }.`
         }
         //PREVIOUS NOT THE SAME
         else {
@@ -256,7 +284,11 @@ export const Estimation: React.VFC<{
               language == 'fr' ? ' ans' : ''
             }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
               apiTrans.detail.youCouldContinueReceiving
-            } ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
+            }${
+              partner && partnerReceiving
+                ? ''
+                : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+            }:`
           } else {
             const nextBenefitResult =
               arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
@@ -276,8 +308,10 @@ export const Estimation: React.VFC<{
                 apiTrans.detail.youCouldStartReceivingAt
               } ${displayAge}${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
-              } ${apiTrans.detail.youCouldContinueReceiving} ${eligibleAmt} ${
-                apiTrans.detail.youCouldReceivePerMonth
+              } ${apiTrans.detail.youCouldContinueReceiving}${
+                partner && partnerReceiving
+                  ? ''
+                  : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
               }:`
             } else {
               text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
@@ -285,7 +319,13 @@ export const Estimation: React.VFC<{
               } ${Math.trunc(Number(nextBenefitAge))}${
                 language == 'fr' ? ' ans' : ''
               },`
-              text += ` ${isPartnerStr} ${apiTrans.detail.youCouldContinueReceiving} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
+              text += ` ${isPartnerStr} ${
+                apiTrans.detail.youCouldContinueReceiving
+              }${
+                partner && partnerReceiving
+                  ? ''
+                  : ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}$`
+              }:`
             }
           }
         }
@@ -312,9 +352,10 @@ export const Estimation: React.VFC<{
               key={benefit.benefitKey + index}
               heading={apiTrans.benefit[benefit.benefitKey]}
               result={benefit}
-              displayAmount={true}
+              displayAmount={!partner || (partner && !partnerReceiving)}
               partner={partner}
               maritalStatus={maritalStatus}
+              partnerReceiving={partnerReceiving}
             />
           ))}
       </ul>

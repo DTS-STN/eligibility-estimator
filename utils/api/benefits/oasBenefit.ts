@@ -380,6 +380,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       tableData: null,
       currentAge: null,
       monthsTo70: null,
+      residency: input.yearsInCanadaSince18,
       receiveOAS: false,
     }
 
@@ -436,6 +437,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         tableData: null,
         currentAge: null,
         monthsTo70: null,
+        residency: input.yearsInCanadaSince18,
         receiveOAS: receivingOAS,
       }
     }

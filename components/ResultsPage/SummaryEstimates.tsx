@@ -20,6 +20,7 @@ export const SummaryEstimates: React.VFC<{
   userAge
   partnerAge
   maritalStatus
+  partnerReceiving
 }> = ({
   headings,
   userResults,
@@ -27,6 +28,7 @@ export const SummaryEstimates: React.VFC<{
   userAge,
   partnerAge,
   maritalStatus,
+  partnerReceiving,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -169,6 +171,7 @@ export const SummaryEstimates: React.VFC<{
                     resultArray={userResults}
                     age={userAge}
                     maritalStatus={maritalStatus}
+                    partnerReceiving={partnerReceiving}
                   />
                 )}
 
@@ -179,29 +182,54 @@ export const SummaryEstimates: React.VFC<{
                     resultArray={partnerResults}
                     age={partnerAge}
                     maritalStatus={maritalStatus}
+                    partnerReceiving={partnerReceiving}
                   />
                 )}
               </div>
               {eligible &&
                 eligible.map((benefit: BenefitResult) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
-                  if (collapsedDetails) {
-                    const index = collapsedDetails.findIndex(
-                      (item) =>
-                        item.heading ===
-                        apiTrans.detailWithHeading.yourDeferralOptions.heading
+
+                  const newCollapsedDetails = [...collapsedDetails]
+                  if (newCollapsedDetails) {
+                    //Find all indexes of deferral options
+                    let indexes = newCollapsedDetails.reduce(
+                      (acc, item, index) => {
+                        if (
+                          item.heading ===
+                          apiTrans.detailWithHeading.yourDeferralOptions.heading
+                        )
+                          acc.push(index)
+                        return acc
+                      },
+                      []
                     )
-                    if (index !== -1) {
-                      // show deferral first
-                      const [targetItem] = collapsedDetails.splice(index, 1)
-                      collapsedDetails.unshift(targetItem)
+
+                    //While there are still multiple deferral options, remove the first one
+                    while (indexes.length > 1) {
+                      newCollapsedDetails.splice(indexes[0], 1) // Remove the first occurrence
+                      indexes.shift() // Remove the first index from the list
+
+                      //Recalculate the index since removing the duplicates
+                      indexes = newCollapsedDetails.reduce(
+                        (acc, item, index) => {
+                          if (
+                            item.heading ===
+                            apiTrans.detailWithHeading.yourDeferralOptions
+                              .heading
+                          )
+                            acc.push(index)
+                          return acc
+                        },
+                        []
+                      )
                     }
                   }
 
                   return (
                     <>
-                      {collapsedDetails &&
-                        collapsedDetails.map((detail, index) => {
+                      {newCollapsedDetails &&
+                        newCollapsedDetails.map((detail, index) => {
                           if (!collapsed.includes(detail.heading)) {
                             collapsed.push(detail.heading)
                             return (

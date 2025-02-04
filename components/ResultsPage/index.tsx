@@ -71,6 +71,12 @@ const ResultsPage: React.VFC<{
     ? inputs.find((input) => input.key === FieldKey.PARTNER_AGE)['value']
     : null
 
+  const partnerReceiving = isPartnered
+    ? inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
+        'value'
+      ] === PartnerBenefitStatus.OAS_GIS
+    : null
+
   const partnerNoOAS =
     inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
       'value'
@@ -218,6 +224,7 @@ const ResultsPage: React.VFC<{
                 userAge={userAge}
                 partnerAge={partnerAge}
                 maritalStatus={maritalStatus}
+                partnerReceiving={partnerReceiving}
               ></SummaryEstimates>
             )}
           </div>

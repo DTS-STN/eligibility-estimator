@@ -360,7 +360,7 @@ const en: Translations = {
     deferralWillBeEligible:
       'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
     deferralYearsInCanada:
-      "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+      "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text link-no-deco' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
     retroactivePay: 'Retroactive payment',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
@@ -462,6 +462,7 @@ const en: Translations = {
     youCouldStartReceiving: 'could start receiving',
     yourEstimateIsStill: 'Your estimate is still',
     yourEstimateIsStillPartner: `Your partner's estimate is still`,
+    theSame: 'the same',
     thisEstimateIsBased:
       'This estimate is based on {YEARS_OF_RESIDENCY} years of residence in Canada.',
     oas: {
@@ -495,7 +496,7 @@ const en: Translations = {
       ifNotReceiveLetter64:
         "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       chooseToDefer:
-        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
       receivePayment:
         'You may be able to receive payment for up to the last 11 months.',
     },
@@ -614,11 +615,11 @@ const en: Translations = {
     },
     socialSecurityEligible: {
       heading: 'You may become eligible earlier',
-      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
+      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew link-no-deco' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
     socialSecurityEligiblePartner: {
       heading: 'Your partner may become eligible earlier',
-      text: "Your partner may become eligible earlier because they’ve lived in a country with a social security agreement with Canada. This may affect their estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
+      text: "Your partner may become eligible earlier because they’ve lived in a country with a social security agreement with Canada. This may affect their estimate. <a class='text-default-text addOpenNew link-no-deco' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
   },
   summaryTitle: {

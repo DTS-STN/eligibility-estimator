@@ -127,6 +127,7 @@ export interface Translations {
     youCouldStartReceiving: string
     yourEstimateIsStill: string
     yourEstimateIsStillPartner: string
+    theSame: string
     thisEstimateIsBased: string
     oas: {
       eligibleIfIncomeIsLessThan: string

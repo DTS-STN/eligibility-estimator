@@ -370,7 +370,7 @@ const fr: Translations = {
     deferralWillBeEligible:
       "Vous pouvez commencer à recevoir vos paiements de la pension de la Sécurité de la vieillesse à 65 ans ou attendre d'avoir 70 ans.",
     deferralYearsInCanada:
-      "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>",
+      "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>",
     retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
@@ -473,6 +473,7 @@ const fr: Translations = {
     youCouldStartReceiving: 'commencer à recevoir',
     yourEstimateIsStill: 'Votre estimation est encore',
     yourEstimateIsStillPartner: `L'estimation de votre conjoint est encore`,
+    theSame: 'la même',
     thisEstimateIsBased:
       'Cette estimation est basée sur {ENTITLEMENT_AMOUNT_FOR_BENEFIT} années de résidence au Canada.',
     oas: {
@@ -507,7 +508,7 @@ const fr: Translations = {
       ifNotReceiveLetter64:
         "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       chooseToDefer:
-        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
+        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
       receivePayment:
         'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
@@ -629,11 +630,11 @@ const fr: Translations = {
     },
     socialSecurityEligible: {
       heading: 'Vous pourriez devenir admissible plus tôt',
-      text: "Vous pourriez devenir admissible plus tôt parce que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter votre estimation. <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
+      text: "Vous pourriez devenir admissible plus tôt parce que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter votre estimation. <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
     },
     socialSecurityEligiblePartner: {
       heading: 'Votre conjoint pourrait devenir admissible plus tôt',
-      text: "Votre conjoint pourrait devenir admissible plus tôt parce qu’il a vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter son estimation. <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
+      text: "Votre conjoint pourrait devenir admissible plus tôt parce qu’il a vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter son estimation. <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
     },
   },
   summaryTitle: {
