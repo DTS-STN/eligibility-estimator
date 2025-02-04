@@ -323,15 +323,16 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
                 text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
               }
 
-              if (!this.input.livedOnlyInCanada && ageToCheck > 64) {
-                if (
-                  ageToCheck != this.input.age &&
-                  this.formYearsInCanada <= 40 &&
-                  this.formYearsInCanada != this.input.yearsInCanadaSince18
-                ) {
-                  text += `<p class="mt-6">${this.translations.detail.deferralYearsInCanada}</p>`
-                }
-              }
+              //Removing due to complexity, revisit potential for EC6- EC5
+              // if (!this.input.livedOnlyInCanada && ageToCheck > 64) {
+              //   if (
+              //     ageToCheck != this.input.age &&
+              //     this.formYearsInCanada <= 40 &&
+              //     this.formYearsInCanada != this.input.yearsInCanadaSince18
+              //   ) {
+              //     text += `<p class="mt-6">${this.translations.detail.deferralYearsInCanada}</p>`
+              //   }
+              // }
             }
           }
 

@@ -53,6 +53,10 @@ const ResultsPage: React.VFC<{
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
 
+  const involSep = isPartnered
+    ? inputs.find((input) => input.key === FieldKey.INV_SEPARATED)['value']
+    : null
+
   const alreadyReceiving =
     inputs.find((input) => input.key === FieldKey.ALREADY_RECEIVE_OAS) !==
     undefined
@@ -74,7 +78,10 @@ const ResultsPage: React.VFC<{
   const partnerReceiving = isPartnered
     ? inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
         'value'
-      ] === PartnerBenefitStatus.OAS_GIS
+      ] === PartnerBenefitStatus.OAS_GIS ||
+      inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
+        'value'
+      ] === PartnerBenefitStatus.HELP_ME
     : null
 
   const partnerNoOAS =
@@ -209,7 +216,8 @@ const ResultsPage: React.VFC<{
             hasPartner={isPartnered}
             userAge={Number(userAge)}
             estimateLength={
-              userArrNew.filter((element) => element !== null).length
+              userArrNew.filter((element) => element !== null).length +
+              partnerArrNew.filter((element) => element !== null).length
             }
             hasMultipleOasGis={multipleOAS_GIS}
             alreadyReceiving={alreadyReceiving === 'true'}
@@ -225,6 +233,7 @@ const ResultsPage: React.VFC<{
                 partnerAge={partnerAge}
                 maritalStatus={maritalStatus}
                 partnerReceiving={partnerReceiving}
+                involSep={involSep}
               ></SummaryEstimates>
             )}
           </div>

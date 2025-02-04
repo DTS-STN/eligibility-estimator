@@ -156,7 +156,9 @@ export class AlwBenefit extends BaseBenefit<EntitlementResultGeneric> {
     } else if (!meetsReqPartner) {
       return {
         result: ResultKey.INELIGIBLE,
-        reason: ResultReason.PARTNER,
+        reason: !this.input.partnerBenefitStatus.provided
+          ? ResultReason.NONE
+          : ResultReason.PARTNER,
         //detail: this.translations.detail.alwNotEligible,
         detail: !this.input.partnerBenefitStatus.provided
           ? this.translations.detail.alwNotEligible

@@ -21,6 +21,7 @@ export const SummaryEstimates: React.VFC<{
   partnerAge
   maritalStatus
   partnerReceiving
+  involSep
 }> = ({
   headings,
   userResults,
@@ -29,6 +30,7 @@ export const SummaryEstimates: React.VFC<{
   partnerAge,
   maritalStatus,
   partnerReceiving,
+  involSep,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -172,6 +174,7 @@ export const SummaryEstimates: React.VFC<{
                     age={userAge}
                     maritalStatus={maritalStatus}
                     partnerReceiving={partnerReceiving}
+                    involSep={involSep}
                   />
                 )}
 
@@ -183,6 +186,7 @@ export const SummaryEstimates: React.VFC<{
                     age={partnerAge}
                     maritalStatus={maritalStatus}
                     partnerReceiving={partnerReceiving}
+                    involSep={involSep}
                   />
                 )}
               </div>

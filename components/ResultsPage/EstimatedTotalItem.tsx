@@ -15,6 +15,7 @@ export const EstimatedTotalItem: React.VFC<{
   partner: boolean
   maritalStatus
   partnerReceiving: boolean
+  involSep: boolean
 }> = ({
   heading,
   result,
@@ -22,6 +23,7 @@ export const EstimatedTotalItem: React.VFC<{
   partner,
   maritalStatus,
   partnerReceiving,
+  involSep,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const [modalOpen, setModalOpen] = useState(false)
@@ -96,6 +98,7 @@ export const EstimatedTotalItem: React.VFC<{
               partner={partner}
               maritalStatus={maritalStatus}
               benefitName={heading}
+              involSep={involSep}
             />
           </span>
         </>

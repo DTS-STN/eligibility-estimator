@@ -11,7 +11,8 @@ export const Modal: React.VFC<{
   partner
   maritalStatus
   benefitName
-}> = ({ isOpen, onClose, partner, maritalStatus, benefitName }) => {
+  involSep
+}> = ({ isOpen, onClose, partner, maritalStatus, benefitName, involSep }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const modalRef = useRef(null)
@@ -68,12 +69,16 @@ export const Modal: React.VFC<{
         maritalStatus === MaritalStatus.PARTNERED
           ? benefitName === tsln.oas
             ? apiTrans.modal.partnerIncomeTooHigh
+            : involSep == 'true'
+            ? apiTrans.modal.partnerIncomeTooHigh
             : apiTrans.modal.partnerCoupleIncomeTooHigh
           : apiTrans.modal.partnerIncomeTooHigh
     } else {
       text =
         maritalStatus === MaritalStatus.PARTNERED
           ? benefitName === tsln.oas
+            ? apiTrans.modal.userIncomeTooHigh
+            : involSep == 'true'
             ? apiTrans.modal.userIncomeTooHigh
             : apiTrans.modal.userCoupleIncomeTooHigh
           : apiTrans.modal.userIncomeTooHigh
