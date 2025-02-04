@@ -390,9 +390,9 @@ const fr: Translations = {
       "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.</p>",
     eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline link-no-deco' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
     partnerMustBeEligible:
-      "Pour être admissible, votre conjoint doit recevoir la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti. Vous pouvez <a class='text-default-text link-no-deco' style='text-decoration: underline' href='/fr/questions?step=age#partnerBenefitStatus'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si votre conjoint recevait ces prestations.",
+      "Pour être admissible, votre conjoint doit recevoir la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti. Vous pouvez <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/fr/questions?step=age#partnerBenefitStatus'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si votre conjoint recevait ces prestations.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
