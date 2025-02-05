@@ -374,7 +374,6 @@ export const Estimation: React.VFC<{
         eligible.map((benefit, index) => {
           if (
             benefit.cardDetail.meta.residency &&
-            benefit.cardDetail.meta.residency < 40 &&
             benefit.entitlement.result > 0
           ) {
             return (
