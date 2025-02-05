@@ -38,7 +38,6 @@ export const Estimation: React.VFC<{
 
   let estimateIsSame = false
 
-  console.log(partnerReceiving)
   const showPartnerAmounts = () => {
     if (!partner) return true
     else if (roundedAge < 65) {
