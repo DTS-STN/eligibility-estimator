@@ -184,6 +184,23 @@ const ResultsPage: React.VFC<{
       })
     : null
 
+  const filteredUserRes = newestUser.filter((item, index, arr) => {
+    return (
+      index === newestUser.length - 1 ||
+      Object.keys(item)[0] !== Object.keys(newestUser[index + 1] ?? {})[0]
+    )
+  })
+
+  const filteredPartnerRes = isPartnered
+    ? newestPartner.filter((item, index, arr) => {
+        return (
+          index === newestPartner.length - 1 ||
+          Object.keys(item)[0] !==
+            Object.keys(newestPartner[index + 1] ?? {})[0]
+        )
+      })
+    : null
+
   const userKeys = newestUser.flatMap((obj) => {
     // Check if the object is not null or undefined before extracting keys
     return obj ? Object.keys(obj) : []
@@ -227,8 +244,8 @@ const ResultsPage: React.VFC<{
             {headings && (
               <SummaryEstimates
                 headings={headings}
-                userResults={newestUser}
-                partnerResults={newestPartner}
+                userResults={filteredUserRes}
+                partnerResults={filteredPartnerRes}
                 userAge={userAge}
                 partnerAge={partnerAge}
                 maritalStatus={maritalStatus}
