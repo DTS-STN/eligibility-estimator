@@ -352,7 +352,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         this.input,
         this.eligibility,
         this.entitlement,
-        this.future
+        this.future,
+        this.formYearsInCanada
       )
     } else {
       return {
@@ -370,17 +371,25 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     input,
     eligibility,
     entitlement,
-    future
+    future,
+    formYearsInCanada
   ): MetaDataObject {
     const eligible =
       eligibility.result === ResultKey.ELIGIBLE ||
       eligibility.result === ResultKey.INCOME_DEPENDENT
 
+    //Check future first, if !future don't bother
+    const filledYears = future
+      ? +input.yearsInCanadaSince18 !== +formYearsInCanada
+        ? input.yearsInCanadaSince18
+        : null
+      : null
+
     const meta: MetaDataObject = {
       tableData: null,
       currentAge: null,
       monthsTo70: null,
-      residency: input.yearsInCanadaSince18,
+      residency: filledYears,
       receiveOAS: false,
     }
 
@@ -437,7 +446,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         tableData: null,
         currentAge: null,
         monthsTo70: null,
-        residency: input.yearsInCanadaSince18,
+        residency: filledYears,
         receiveOAS: receivingOAS,
       }
     }

@@ -317,7 +317,8 @@ export class BenefitHandler {
             this.input.client,
             clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
             clientOasWithDeferral.entitlement,
-            this.future
+            this.future,
+            this.formYearsInCanada
           )
         } else {
           // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
@@ -328,7 +329,8 @@ export class BenefitHandler {
               this.input.client,
               clientOasNoDeferral.eligibility,
               clientOasNoDeferral.entitlement,
-              this.future
+              this.future,
+              this.formYearsInCanada
             )
           } else {
             clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
@@ -337,7 +339,8 @@ export class BenefitHandler {
               this.input.client,
               clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
               clientOasWithDeferral.entitlement,
-              this.future
+              this.future,
+              this.formYearsInCanada
             )
           }
         }
@@ -348,7 +351,8 @@ export class BenefitHandler {
           this.input.client,
           clientOasNoDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
           clientOasNoDeferral.entitlement,
-          this.future
+          this.future,
+          this.formYearsInCanada
         )
       }
     }
