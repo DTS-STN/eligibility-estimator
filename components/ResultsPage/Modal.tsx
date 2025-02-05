@@ -93,7 +93,7 @@ export const Modal: React.VFC<{
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      // aria-labelledby="modalTitle"
+      aria-labelledby="modalTitle"
       // aria-describedby="modalDescription"
       ref={modalRef}
     >
@@ -102,7 +102,7 @@ export const Modal: React.VFC<{
         role={'document'}
         className="modal-content md:w-6/12 sm:w-9/12 bg-white p-6  shadow-lg z-50"
       >
-        <h2 className="h2" id="modalTitle">
+        <h2 className="h2" id="modalTitle" tabIndex={-1}>
           {!partner
             ? apiTrans.modal.userHeading
             : apiTrans.modal.partnerHeading}
