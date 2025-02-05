@@ -191,7 +191,7 @@ export const SummaryEstimates: React.VFC<{
                 )}
               </div>
               {eligible &&
-                eligible.map((benefit: BenefitResult) => {
+                eligible.map((benefit: BenefitResult, index) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
 
                   const newCollapsedDetails = [...collapsedDetails]
@@ -231,7 +231,7 @@ export const SummaryEstimates: React.VFC<{
                   }
 
                   return (
-                    <>
+                    <div key={`Key-${benefit.benefitKey}-${index}`}>
                       {newCollapsedDetails &&
                         newCollapsedDetails.map((detail, index) => {
                           if (!collapsed.includes(detail.heading)) {
@@ -268,7 +268,7 @@ export const SummaryEstimates: React.VFC<{
                             )
                           }
                         })}
-                    </>
+                    </div>
                   )
                 })}
             </div>
