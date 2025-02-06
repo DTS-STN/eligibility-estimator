@@ -22,8 +22,8 @@ export default class MainHandler {
     const resultObj: any = {
       input: value,
       visibleFields: this.handler.fields.requiredFields,
-      results: this.handler.benefitResults.client,
-      futureClientResults: this.futureHandler.benefitResults?.client,
+      results: this.handler.benefitResults.client, // age 55
+      futureClientResults: this.futureHandler.benefitResults?.client, // age 65
       partnerResults: this.handler.benefitResults.partner,
       futurePartnerResults: this.futureHandler.benefitResults?.partner,
       summary: this.handler.summary,
@@ -36,7 +36,6 @@ export default class MainHandler {
       resultObj.detail = error
     }
 
-    console.log('result object', resultObj)
     consoleDev('result object', resultObj)
     this.results = resultObj
   }

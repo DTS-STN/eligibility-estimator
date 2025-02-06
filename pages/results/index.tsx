@@ -68,14 +68,23 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   }, [language])
 
   const handleUpdateEstimate = (psdAge) => {
-    const psdHandler = new MainHandler({
-      ...inputHelper.asObjectWithLanguage,
-      psdAge,
-    })
+    console.log('psdAge', psdAge)
+    // const psdHandler = new MainHandler({
+    //   ...inputHelper.asObjectWithLanguage,
+    //   age: psdAge,
+    //   yearsInCanadaSince18: String(
+    //     Math.floor(
+    //       Number(psdAge) -
+    //         Number(inputHelper.asObjectWithLanguage.age) +
+    //         Number(inputHelper.asObjectWithLanguage.yearsInCanadaSince18)
+    //     )
+    //   ),
+    //   psdAge,
+    // })
 
-    const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
+    // const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
 
-    console.log('psdResponse', psdResponse)
+    // console.log('psdResponse', psdResponse)
   }
 
   return (

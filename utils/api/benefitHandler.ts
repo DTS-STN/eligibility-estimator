@@ -186,12 +186,12 @@ export class BenefitHandler {
       const totalMonthsRes =
         (clientEliObj.ageOfEligibility - this.input.client.age) * 12 +
         (psdAge - clientEliObj.ageOfEligibility) * 12
-      console.log('totalMonthsRes', totalMonthsRes)
 
       const psdRes =
         (Number(this.input.client.yearsInCanadaSince18) ||
-          Number(this.input.client.yearsInCanadaSinceOAS) * 12) +
+          Number(this.input.client.yearsInCanadaSinceOAS)) +
         Math.floor(totalMonthsRes / 12)
+
       const psdDef = Math.round(totalMonthsRes % 12)
 
       console.log('psdRes', psdRes)
@@ -317,6 +317,12 @@ export class BenefitHandler {
         this.formAge,
         this.formYearsInCanada,
         this.input.client.receiveOAS
+      )
+
+      consoleDev('WITH DEFERRAL', clientOasWithDeferral)
+      consoleDev(
+        'Client OAS amount WITH deferral',
+        clientOasWithDeferral.entitlement.result
       )
     }
 

@@ -39,6 +39,9 @@ const calculatePsdAge = (
   targetMonth: number,
   targetYear: number
 ) => {
+  console.log('currentAge', currentAge)
+  console.log('targetMonth', targetMonth)
+  console.log('targetYear', targetYear)
   const today = new Date()
   const currentYear = today.getFullYear()
   const currentMonth = today.getMonth() // Months are 0-indexed in JS, so add 1
@@ -128,13 +131,13 @@ export const PSDBox: React.VFC<{
   )
 
   const populateDropdowns = (totalMonths: number) => {
-    const targetYear = firstEligibleDate.year + Math.floor(totalMonths / 12)
-
+    const targetYear = Math.ceil(firstEligibleDate.year + totalMonths / 12)
     const remainingMonths = (firstEligibleDate.month + totalMonths) % 12 // Remaining months (modulo 12)
+
     const targetMonth =
-      remainingMonths % 1 < 0.5
+      (remainingMonths % 1 < 0.5
         ? Math.floor(remainingMonths)
-        : Math.ceil(remainingMonths)
+        : Math.ceil(remainingMonths)) % 12
 
     let tempMonths: number[] = []
     let tempYears: number[] = []
@@ -156,7 +159,7 @@ export const PSDBox: React.VFC<{
         tempMonths.push(i)
       }
     } else if (selectedYear === targetYear) {
-      for (let i = 0; i <= remainingMonths; i++) {
+      for (let i = 0; i <= targetMonth; i++) {
         tempMonths.push(i)
       }
     } else {
@@ -181,7 +184,7 @@ export const PSDBox: React.VFC<{
 
   useEffect(() => {
     if (!months.includes(selectedMonth)) {
-      setSelectedMonth(firstEligibleDate.month)
+      setSelectedMonth(months[0])
     }
   }, [JSON.stringify(months)])
 
