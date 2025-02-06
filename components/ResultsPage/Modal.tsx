@@ -16,13 +16,14 @@ export const Modal: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const modalRef = useRef(null)
-  const firstFocusableRef = useRef(null)
+
   // ########## Block start ##########
 
   useEffect(() => {
     if (isOpen) {
       // Focus the first focusable element when the modal opens
-      firstFocusableRef.current?.focus()
+      const firstFocusableRef = modalRef.current.querySelectorAll('h2')
+      firstFocusableRef[0].focus()
 
       // Event listener for trapping focus
       const handleKeyDown = (event) => {
@@ -30,6 +31,7 @@ export const Modal: React.VFC<{
           const focusableElements = modalRef.current.querySelectorAll(
             'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
           )
+
           const firstElement = focusableElements[0]
           const lastElement = focusableElements[focusableElements.length - 1]
 
@@ -93,7 +95,7 @@ export const Modal: React.VFC<{
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      // aria-labelledby="modalTitle"
+      aria-labelledby="modalTitle"
       // aria-describedby="modalDescription"
       ref={modalRef}
     >
@@ -111,7 +113,7 @@ export const Modal: React.VFC<{
         <div className="mt-4 flex justify-start">
           <Button
             text={apiTrans.modal.close}
-            id={apiTrans.modal.close}
+            id="closeButton"
             style="primary"
             custom="mt-6 justify-center md:w-[fit-content]"
             onClick={onClose}
