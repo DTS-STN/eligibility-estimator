@@ -22,7 +22,7 @@ export const Modal: React.VFC<{
   useEffect(() => {
     if (isOpen) {
       // Focus the first focusable element when the modal opens
-      const firstFocusableRef = modalRef.current.querySelectorAll('h2')
+      const firstFocusableRef = modalRef.current.querySelectorAll('button')
       firstFocusableRef[0].focus()
 
       // Event listener for trapping focus
