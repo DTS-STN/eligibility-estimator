@@ -163,12 +163,14 @@ export class BenefitHandler {
     const clientOasNoDeferral = new OasBenefit(
       this.input.client,
       this.fields.translations,
+      null,
       false,
       this.future,
       false,
       this.input.client.age,
       this.formAge,
-      this.formYearsInCanada
+      this.formYearsInCanada,
+      this.input.client.receiveOAS
     )
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
@@ -176,6 +178,7 @@ export class BenefitHandler {
       const partnerOasNoDeferral = new OasBenefit(
         this.input.partner,
         this.fields.translations,
+        clientOasNoDeferral,
         true
       )
 
@@ -211,10 +214,14 @@ export class BenefitHandler {
       clientOasWithDeferral = new OasBenefit(
         clientOasHelper.newInput,
         this.fields.translations,
+        null,
         false,
         this.future,
         true,
-        this.input.client.age
+        this.input.client.age,
+        this.formAge,
+        this.formYearsInCanada,
+        this.input.client.receiveOAS
       )
 
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)
@@ -229,7 +236,10 @@ export class BenefitHandler {
       this.fields.translations,
       clientOasNoDeferral.info,
       false,
-      this.future
+      this.future,
+      null,
+      this.formAge,
+      this.formYearsInCanada
     )
 
     consoleDev(
@@ -245,7 +255,9 @@ export class BenefitHandler {
         clientOasWithDeferral.info,
         false,
         this.future,
-        this.input.client
+        this.input.client,
+        this.formAge,
+        this.formYearsInCanada
       )
 
       consoleDev(
@@ -305,7 +317,8 @@ export class BenefitHandler {
             this.input.client,
             clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
             clientOasWithDeferral.entitlement,
-            this.future
+            this.future,
+            this.formYearsInCanada
           )
         } else {
           // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
@@ -316,7 +329,8 @@ export class BenefitHandler {
               this.input.client,
               clientOasNoDeferral.eligibility,
               clientOasNoDeferral.entitlement,
-              this.future
+              this.future,
+              this.formYearsInCanada
             )
           } else {
             clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
@@ -325,7 +339,8 @@ export class BenefitHandler {
               this.input.client,
               clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
               clientOasWithDeferral.entitlement,
-              this.future
+              this.future,
+              this.formYearsInCanada
             )
           }
         }
@@ -336,7 +351,8 @@ export class BenefitHandler {
           this.input.client,
           clientOasNoDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
           clientOasNoDeferral.entitlement,
-          this.future
+          this.future,
+          this.formYearsInCanada
         )
       }
     }
@@ -349,6 +365,7 @@ export class BenefitHandler {
       const partnerOas = new OasBenefit(
         this.input.partner,
         this.fields.translations,
+        clientOas,
         true
       )
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
@@ -466,6 +483,7 @@ export class BenefitHandler {
     const partnerOas = new OasBenefit(
       this.input.partner,
       this.fields.translations,
+      clientOas,
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
@@ -490,7 +508,10 @@ export class BenefitHandler {
         this.fields.translations,
         allResults.client.oas,
         false,
-        this.future
+        this.future,
+        null,
+        this.formAge,
+        this.formYearsInCanada
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }

@@ -33,9 +33,9 @@ export function CTA({
           </div>
         </div>
         <div className="ds-pt-0 ds-pl-5">
-          <h3 className={`ds-heading2 ds-text-multi-neutrals-grey100`}>
+          <h2 className={`ds-heading2 ds-text-multi-neutrals-grey100`}>
             {heading}
-          </h3>
+          </h2>
           <p className="ds-body">{body}</p>
           <Button
             style="primary"

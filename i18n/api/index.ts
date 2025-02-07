@@ -62,16 +62,22 @@ export interface Translations {
     eligibleEntitlementUnavailable: string
     eligiblePartialOas: string
     yourDeferralOptions: string
+    deferralWillBeEligible: string
+    deferralEligible: string
+    deferralNoGis: string
+    deferralYearsInCanada: string
     retroactivePay: string
     sinceYouAreSixty: string
     futureDeferralOptions: string
     youCanAply: string
+    onceEnrolled: string
     delayMonths: string
     eligibleWhen60ApplyNow: string
     eligibleWhen65ApplyNow: string
     eligibleWhen60: string
     eligibleWhen65: string
     mustBeInCanada: string
+    partnerMustBeEligible: string
     mustBeOasEligible: string
     mustCompleteOasCheck: string
     mustMeetIncomeReq: string
@@ -95,6 +101,7 @@ export interface Translations {
     alwsIfYouApply: string
     afsNotEligible: string
     alwsApply: string
+    alwPartnerEligible: string
     autoEnrollTrue: string
     autoEnrollFalse: string
     expectToReceive: string
@@ -105,6 +112,23 @@ export interface Translations {
     oasClawbackInCanada: string
     futureOasClawbackInCanada: string
     oasClawbackNotInCanada: string
+    firstYearEligible: string
+    lastYearEligible: string
+    currentEligible: string
+    you: string
+    yourPartner: string
+    youCouldReceive: string
+    youCouldReceiveTo: string
+    youCouldReceivePerMonth: string
+    youCouldReceiveUntil: string
+    youCouldReceiveFrom: string
+    youCouldStartReceivingAt: string
+    youCouldContinueReceiving: string
+    youCouldStartReceiving: string
+    yourEstimateIsStill: string
+    yourEstimateIsStillPartner: string
+    theSame: string
+    thisEstimateIsBased: string
     oas: {
       eligibleIfIncomeIsLessThan: string
       dependOnYourIncome: string
@@ -113,6 +137,7 @@ export interface Translations {
       serviceCanadaReviewYourPayment: string
       automaticallyBePaid: string
       youWillReceiveLetter: string
+      shouldReceive65to69: string
       youShouldReceiveLetter: string
       youShouldHaveReceivedLetter: string
       ifYouDidnt: string
@@ -124,6 +149,7 @@ export interface Translations {
       receivePayment: string
     }
     gis: {
+      youCanApplyGis: string
       eligibleDependingOnIncomeNoEntitlement: string
       incomeTooHigh: string
       futureEligibleIncomeTooHigh: string
@@ -131,6 +157,17 @@ export interface Translations {
       canApplyOnline: string
       ifYouAlreadyApplied: string
       ifYouAlreadyReceive: string
+    }
+    alw: {
+      forIndividuals: string
+      age60to64: string
+      livingInCanada: string
+      spouseReceives: string
+      yourPartnerCanApply: string
+    }
+    alws: {
+      forWidowedIndividuals: string
+      haveNotRemarried: string
     }
   }
   detailWithHeading: {
@@ -144,6 +181,18 @@ export interface Translations {
     partnerEligible: { heading: string; text: string }
     partnerDependOnYourIncome: { heading: string; text: string }
     partnerEligibleButAnsweredNo: { heading: string; text: string }
+    recoveryTax: { heading: string; text: string }
+    recoveryTaxPartner: { heading: string; text: string }
+    recoveryTaxBoth: { heading: string; text: string }
+    nonResidentTax: { heading: string; text: string }
+    nonResidentTaxPartner: { heading: string; text: string }
+    nonResidentTaxBoth: { heading: string; text: string }
+    yourDeferralOptions: { heading: string; text: string }
+    deferralDelay: { heading: string; text: string }
+    retroactivePayment: { heading: string; text: string }
+    mayBecomeEligible: { heading: string; text: string }
+    socialSecurityEligible: { heading: string; text: string }
+    socialSecurityEligiblePartner: { heading: string; text: string }
   }
   summaryTitle: { [key in SummaryState]?: string }
   summaryDetails: { [key in SummaryState]?: string }
@@ -152,6 +201,15 @@ export interface Translations {
     headingAge: string
     futureHeadingAge: string
     headingAmount: string
+  }
+  modal: {
+    userHeading: string
+    partnerHeading: string
+    userIncomeTooHigh: string
+    partnerIncomeTooHigh: string
+    userCoupleIncomeTooHigh: string
+    partnerCoupleIncomeTooHigh: string
+    close: string
   }
   links: LinkDefinitions
   incomeSingle: string

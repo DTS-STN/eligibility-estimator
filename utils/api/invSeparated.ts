@@ -305,12 +305,6 @@ export function InvSeparatedAllCases(
 
         if (clientGis.entitlement.result === 0) {
           isApplicantGisAvailable = false
-
-          if (partnerAlwCalcSingle > 0) {
-            partnerAlw.cardDetail.collapsedText.push(
-              translations.detailWithHeading.partnerEligible
-            )
-          }
         } else {
           allResults.client.gis.cardDetail.collapsedText.push(
             translations.detailWithHeading.calculatedBasedOnIndividualIncome
@@ -318,10 +312,6 @@ export function InvSeparatedAllCases(
           allResults.client.gis.eligibility = clientGis.eligibility
           allResults.client.gis.entitlement.result = applicantGisResultT1
           allResults.client.gis.entitlement.type = EntitlementResultType.FULL
-          allResults.client.gis.eligibility.detail,
-            (allResults.client.gis.cardDetail.mainText = future
-              ? `${translations.detail.futureEligible} ${translations.detail.futureExpectToReceive}`
-              : `${translations.detail.eligible} ${translations.detail.expectToReceive}`)
 
           allResults.partner.alw.cardDetail = partnerAlw.cardDetail
           allResults.partner.alw.entitlement.result = partnerAlwCalcSingle
@@ -329,10 +319,6 @@ export function InvSeparatedAllCases(
           if (partnerAlwCalcSingle > 0) {
             allResults.partner.alw.cardDetail.collapsedText.push(
               translations.detailWithHeading.calculatedBasedOnIndividualIncome
-            )
-
-            partnerAlw.cardDetail.collapsedText.push(
-              translations.detailWithHeading.partnerEligible
             )
           }
         }
@@ -467,14 +453,6 @@ export function InvSeparatedAllCases(
             //     .calculatedBasedOnIndividualIncome
             // )
           }
-          if (
-            !allResults.partner.gis.cardDetail.collapsedText.includes(
-              translations.detailWithHeading.partnerEligible
-            )
-          )
-            allResults.partner.gis.cardDetail.collapsedText.unshift(
-              translations.detailWithHeading.partnerEligible
-            )
 
           // If client is eligible for ALW, need to recalculate estimate based on individual income
           if (clientAlw.eligibility.result === 'eligible') {
@@ -512,12 +490,6 @@ export function InvSeparatedAllCases(
                 reason: ResultReason.NONE,
                 detail: translations.detail.eligible,
               }
-
-              // cardDetails
-              allResults.client.alw.eligibility.detail,
-                (allResults.client.alw.cardDetail.mainText = future
-                  ? `${translations.detail.futureEligible60} ${translations.detail.futureExpectToReceive}`
-                  : `${translations.detail.eligible} ${translations.detail.expectToReceive}`)
 
               allResults.client.alw.cardDetail.collapsedText.push(
                 translations.detailWithHeading.calculatedBasedOnIndividualIncome
@@ -628,16 +600,6 @@ export function InvSeparatedAllCases(
         )
       }
 
-      if (
-        allResults.client.gis.eligibility.reason === ResultReason.INCOME &&
-        clientGis.entitlement.result > 0
-      ) {
-        allResults.client.gis.eligibility.detail,
-          (allResults.client.gis.cardDetail.mainText = future
-            ? `${translations.detail.futureEligible} ${translations.detail.futureExpectToReceive}`
-            : `${translations.detail.eligible} ${translations.detail.expectToReceive}`)
-      }
-
       consoleDev(
         '--- both are not eligible for alw - applicant oas > 0 & partner oas =0 --- end'
       )
@@ -690,16 +652,6 @@ export function InvSeparatedAllCases(
       } else {
         allResults.partner.gis.entitlement.result = partnerGisResultT1
         allResults.partner.gis.entitlement.type = EntitlementResultType.FULL
-
-        if (
-          !partnerGis.cardDetail.collapsedText.includes(
-            translations.detailWithHeading.partnerEligible
-          )
-        ) {
-          partnerGis.cardDetail.collapsedText.unshift(
-            translations.detailWithHeading.partnerEligible
-          )
-        }
       }
 
       // add the amount calculated to the card.
