@@ -108,53 +108,77 @@ export const SummaryEstimates: React.VFC<{
               : `${year} ${apiTrans.detail.lastYearEligible}`
         }
 
-        const userObj = userResult
-          ? userResults.find((obj) => year in obj)
+        // Get all results under a year (there can be multiple)
+        const yearResults = userResult
+          ? userResults.filter((obj) => obj && year in obj)
           : null
 
-        const partnerObj = partnerResult
-          ? partnerResults.find((obj) => year in obj)
+        const yearResultsParnter = partnerResult
+          ? partnerResults.filter((obj) => obj && year in obj)
           : null
 
-        const userResultObject = userObj
-          ? userObj[Object.keys(userObj)[0]]
+        //Get the Result Objects: {"eligibility age": {Result}}
+        const userResultObjects = yearResults
+          ? yearResults.map((el) => {
+              return el
+            })
           : null
 
-        const partnerResultObject = partnerObj
-          ? partnerObj[Object.keys(partnerObj)[0]]
+        const partnerResultObjects = yearResultsParnter
+          ? yearResultsParnter.map((el) => {
+              return el
+            })
           : null
 
         let eligible = []
-        if (userResultObject) {
-          const benefitAge = Object.keys(userResultObject)[0]
+        if (userResultObjects) {
+          if (userResultObjects.length > 0) {
+            userResultObjects.forEach((resultObject, index) => {
+              const benefitItem = resultObject[Object.keys(resultObject)[0]]
+              const benefitAge = Object.keys(benefitItem)[0]
 
-          const resultsArray: BenefitResult[] = Object.keys(
-            userResultObject[benefitAge]
-          ).map((value) => userResultObject[benefitAge][value])
+              const resultsArray: BenefitResult[] = Object.keys(
+                benefitItem[benefitAge]
+              ).map((value) => benefitItem[benefitAge][value])
 
-          eligible = resultsArray.filter(
-            (result) =>
-              result.eligibility?.result === ResultKey.ELIGIBLE ||
-              result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-          )
+              const eligibleResults = resultsArray.filter(
+                (result) =>
+                  result.eligibility?.result === ResultKey.ELIGIBLE ||
+                  result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+              )
+
+              eligibleResults.forEach((item) => {
+                eligible.push(item)
+              })
+            })
+          }
         }
 
-        let partnerEligible = []
-        if (partnerResultObject) {
-          const benefitAge = Object.keys(partnerResultObject)[0]
+        let partnerEli = []
+        if (partnerResultObjects) {
+          if (partnerResultObjects.length > 0) {
+            partnerResultObjects.forEach((resultObject, index) => {
+              const benefitItem = resultObject[Object.keys(resultObject)[0]]
+              const benefitAge = Object.keys(benefitItem)[0]
 
-          const resultsArray: BenefitResult[] = Object.keys(
-            partnerResultObject[benefitAge]
-          ).map((value) => partnerResultObject[benefitAge][value])
+              const resultsArray: BenefitResult[] = Object.keys(
+                benefitItem[benefitAge]
+              ).map((value) => benefitItem[benefitAge][value])
 
-          partnerEligible = resultsArray.filter(
-            (result) =>
-              result.eligibility?.result === ResultKey.ELIGIBLE ||
-              result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-          )
+              const eligibleResults = resultsArray.filter(
+                (result) =>
+                  result.eligibility?.result === ResultKey.ELIGIBLE ||
+                  result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+              )
+
+              eligibleResults.forEach((item) => {
+                partnerEli.push(item)
+              })
+            })
+          }
         }
 
-        eligible = eligible.concat(partnerEligible)
+        eligible = eligible.concat(partnerEli)
 
         return (
           <div key={heading}>
@@ -166,29 +190,39 @@ export const SummaryEstimates: React.VFC<{
             </h3>
             <div key={`estimation-${year}`} className="mb-5">
               <div key={`estimation-sub-${year}`} className="space-y-4">
-                {userResult && (
-                  <Estimation
-                    partner={false}
-                    resultObject={userResultObject}
-                    resultArray={userResults}
-                    age={userAge}
-                    maritalStatus={maritalStatus}
-                    partnerReceiving={partnerReceiving}
-                    involSep={involSep}
-                  />
-                )}
+                {userResult &&
+                  userResultObjects.map((result, index) => {
+                    return (
+                      <Estimation
+                        key={index}
+                        partner={false}
+                        resultObject={result[Object.keys(result)[0]]}
+                        resultArray={userResults}
+                        age={userAge}
+                        maritalStatus={maritalStatus}
+                        partnerReceiving={partnerReceiving}
+                        involSep={involSep}
+                        isSecondEstimate={index > 0}
+                      />
+                    )
+                  })}
 
-                {partnerResult && (
-                  <Estimation
-                    partner={true}
-                    resultObject={partnerResultObject}
-                    resultArray={partnerResults}
-                    age={partnerAge}
-                    maritalStatus={maritalStatus}
-                    partnerReceiving={partnerReceiving}
-                    involSep={involSep}
-                  />
-                )}
+                {partnerResult &&
+                  partnerResultObjects.map((result, index) => {
+                    return (
+                      <Estimation
+                        key={index}
+                        partner={true}
+                        resultObject={result[Object.keys(result)[0]]}
+                        resultArray={partnerResults}
+                        age={partnerAge}
+                        maritalStatus={maritalStatus}
+                        partnerReceiving={partnerReceiving}
+                        involSep={involSep}
+                        isSecondEstimate={index > 0}
+                      />
+                    )
+                  })}
               </div>
               {eligible &&
                 eligible.map((benefit: BenefitResult, index) => {

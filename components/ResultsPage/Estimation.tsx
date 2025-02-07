@@ -17,6 +17,7 @@ export const Estimation: React.VFC<{
   maritalStatus
   partnerReceiving
   involSep
+  isSecondEstimate
 }> = ({
   partner,
   resultObject,
@@ -25,6 +26,7 @@ export const Estimation: React.VFC<{
   maritalStatus,
   partnerReceiving,
   involSep,
+  isSecondEstimate,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -277,15 +279,17 @@ export const Estimation: React.VFC<{
         //PREVIOUS THE SAME
         if (previousBenefitTotal === eligibleTotalAmount) {
           estimateIsSame = true
-          text = `${
-            partner
-              ? apiTrans.detail.yourEstimateIsStillPartner
-              : apiTrans.detail.yourEstimateIsStill
-          } ${
-            showPartnerAmounts()
-              ? `${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
-              : apiTrans.detail.theSame
-          }.`
+          text = !isSecondEstimate
+            ? `${
+                partner
+                  ? apiTrans.detail.yourEstimateIsStillPartner
+                  : apiTrans.detail.yourEstimateIsStill
+              } ${
+                showPartnerAmounts()
+                  ? `${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
+                  : apiTrans.detail.theSame
+              }.`
+            : ''
         }
         //PREVIOUS NOT THE SAME
         else {

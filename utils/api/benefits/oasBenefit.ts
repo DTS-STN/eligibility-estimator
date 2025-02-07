@@ -566,7 +566,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         )
       }
       //EC19 && EC20
-
       if (ageCalc >= 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75Applied

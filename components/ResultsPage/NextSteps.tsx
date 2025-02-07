@@ -121,7 +121,6 @@ export function getAlwNextSteps(
       nextStepText.nextStepContent += `<p class='mt-4'>${ifYouApplyText}</p>`
     }
   } else if (result.eligibility.result === ResultKey.INELIGIBLE) {
-    console.log(result.eligibility.reason)
     if (result.eligibility.reason === ResultReason.LIVING_COUNTRY) {
       nextStepText.nextStepContent += apiTsln.detail.mustBeInCanada
     } else if (result.eligibility.reason === ResultReason.PARTNER) {
@@ -147,6 +146,7 @@ export function getAlwsNextSteps(
   result: any,
   inputAge: number,
   liveInCanada: boolean,
+  yearsinCan: any,
   nextStepText: NextStepText,
   apiTsln: Translations,
   tsln: WebTranslations
@@ -167,7 +167,7 @@ export function getAlwsNextSteps(
     if (result.entitlement.result > 0) {
       nextStepText.nextStepContent += apiTsln.detail.alwsApply
     } else {
-      if (inputAge < 60) {
+      if (Math.trunc(inputAge) < 60 || yearsinCan < 10) {
         nextStepText.nextStepContent += apiTsln.detail.alwsApply
       }
       nextStepText.nextStepContent += `<p class='mt-4'>${ifYouApplyText}</p>`
