@@ -35,6 +35,7 @@ export class BenefitHandler {
   compare: Boolean
   formAge: number
   formYearsInCanada: number
+  psdCalc: Boolean
 
   constructor(
     readonly rawInput: Partial<RequestInput>,
@@ -49,6 +50,8 @@ export class BenefitHandler {
     this.compare = compare
     this.formAge = formAge
     this.formYearsInCanada = formYearsInCanada
+    this.psdCalc =
+      this.future && !!this.rawInput.psdAge && this.input.client.age >= 65
   }
 
   get benefitResults(): BenefitResultsObjectWithPartner {
@@ -170,12 +173,12 @@ export class BenefitHandler {
       this.rawInput.livingCountry
     )
 
-    console.log('clientOasHelper BEFORE CHANGE', clientOasHelper) // input age is 55 here - cant defer
+    console.log('clientOasHelper', clientOasHelper)
 
     let clientOasNoDeferral
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 
-    if (this.rawInput.psdAge) {
+    if (this.psdCalc) {
       const psdAge = this.rawInput.psdAge
       console.log('PSG IS PERSENT')
       console.log('psdAge', this.rawInput.psdAge)
@@ -183,24 +186,33 @@ export class BenefitHandler {
       //const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
       //residence = Math.floor(totalMonths / 12)
       //deferral = totalMonths % 12
-      const totalMonthsRes =
-        (clientEliObj.ageOfEligibility - this.input.client.age) * 12 +
-        (psdAge - clientEliObj.ageOfEligibility) * 12
+      // const totalMonthsRes =
+      //   (clientEliObj.ageOfEligibility - this.input.client.age) * 12 +
+      //   (psdAge - clientEliObj.ageOfEligibility) * 12
 
-      const psdRes =
-        (Number(this.input.client.yearsInCanadaSince18) ||
-          Number(this.input.client.yearsInCanadaSinceOAS)) +
-        Math.floor(totalMonthsRes / 12)
+      // const psdRes =
+      //   (Number(this.input.client.yearsInCanadaSince18) ||
+      //     Number(this.input.client.yearsInCanadaSinceOAS)) +
+      //   Math.floor(totalMonthsRes / 12)
 
-      const psdDef = Math.round(totalMonthsRes % 12)
+      const originalRes = this.input.client.yearsInCanadaSince18
+      const resWhole = Math.floor(originalRes)
+      const resRemainder = (originalRes - resWhole) * 12
 
-      console.log('psdRes', psdRes)
+      const psdRes = resWhole
+
+      const extraDeferral = psdRes - 40
+
+      const psdDef =
+        Math.round(resRemainder) + (extraDeferral > 0 ? extraDeferral * 12 : 0)
+
+      console.log('psdRes', Math.min(psdRes, 40))
       console.log('psdDef', psdDef)
 
       const psdInput = {
         ...this.input.client,
         age: psdAge,
-        yearsInCanadaSince18: psdRes,
+        yearsInCanadaSince18: Math.min(psdRes, 40),
         oasDeferDuration: JSON.stringify({
           months: psdDef,
           years: 0,
@@ -265,7 +277,7 @@ export class BenefitHandler {
 
     let clientOasWithDeferral
     console.log('this.rawInput.psdAge', this.rawInput.psdAge)
-    if (clientOasHelper.canDefer && !this.rawInput.psdAge) {
+    if (clientOasHelper.canDefer && !this.psdCalc) {
       consoleDev(
         'Modified input to calculate OAS with deferral',
         clientOasHelper.newInput
@@ -290,7 +302,7 @@ export class BenefitHandler {
       )
     }
 
-    if (this.rawInput.psdAge) {
+    if (this.psdCalc) {
       // res needs to be residence at time of eligibiliity (ex. 25 years at 65 years)
       // deferral is (psdAge - eliAge) * 12
       const psdAge = this.rawInput.psdAge
@@ -301,8 +313,9 @@ export class BenefitHandler {
         receiveOAS: true,
         yearsInCanadaSince18: clientEliObj.yearsOfResAtEligibility,
         oasDeferDuration: JSON.stringify({
-          months:
-            (Number(this.rawInput.psdAge) - clientEliObj.ageOfEligibility) * 12,
+          months: Math.round(
+            (Number(this.rawInput.psdAge) - clientEliObj.ageOfEligibility) * 12
+          ),
           years: 0,
         }),
       }

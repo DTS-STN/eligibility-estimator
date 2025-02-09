@@ -42,28 +42,52 @@ export class FutureHandler {
     const age = Number(this.query.age)
     // TODO: take into consideration whether in Canada or not? (could be 10 or 20)
     const residencyReq = 10
+    let futureAge
 
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
-    if (age >= 65 && yearsInCanada >= residencyReq) return result
+    // An exception to this is when being called from PSDBox component since pension start date is always in the future even if the client is currently eligible
+    if (age >= 65 && yearsInCanada >= residencyReq && !this.query.psdAge)
+      return result
 
-    const eliObj = OasEligibility(
-      age,
-      yearsInCanada,
-      this.query.livedOnlyInCanada === 'true',
-      String(this.query.livingCountry)
-    )
+    if (this.query.psdAge) {
+      futureAge = this.query.psdAge
+      const newResidence =
+        Number(this.query.psdAge) -
+        Number(this.query.age) +
+        Number(this.query.yearsInCanadaSince18)
+      this.newQuery['age'] = String(this.query.psdAge)
+      this.newQuery['receiveOAS'] = 'false'
 
-    this.newQuery['age'] = String(eliObj.ageOfEligibility)
-    this.newQuery['receiveOAS'] = 'false'
-
-    if (
-      this.query.livedOnlyInCanada === 'false' &&
-      this.query.yearsInCanadaSince18
-    ) {
-      this.newQuery['yearsInCanadaSince18'] = String(
-        Math.min(40, eliObj.yearsOfResAtEligibility)
+      if (
+        this.query.livedOnlyInCanada === 'false' &&
+        this.query.yearsInCanadaSince18
+      ) {
+        this.newQuery['yearsInCanadaSince18'] = String(newResidence)
+      }
+    } else {
+      const eliObj = OasEligibility(
+        age,
+        yearsInCanada,
+        this.query.livedOnlyInCanada === 'true',
+        String(this.query.livingCountry)
       )
+
+      futureAge = eliObj.ageOfEligibility
+
+      this.newQuery['age'] = String(eliObj.ageOfEligibility)
+      this.newQuery['receiveOAS'] = 'false'
+
+      if (
+        this.query.livedOnlyInCanada === 'false' &&
+        this.query.yearsInCanadaSince18
+      ) {
+        this.newQuery['yearsInCanadaSince18'] = String(
+          Math.min(40, eliObj.yearsOfResAtEligibility)
+        )
+      }
     }
+
+    console.log('this.query IN FUTURE HANDLER', this.newQuery)
 
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
     const handler = new BenefitHandler(
@@ -78,7 +102,7 @@ export class FutureHandler {
     )
 
     const clientResult = eligibleBenefits
-      ? [{ [eliObj.ageOfEligibility]: eligibleBenefits }]
+      ? [{ [futureAge]: eligibleBenefits }]
       : null
 
     result = {
@@ -94,6 +118,7 @@ export class FutureHandler {
     const age = Number(this.query.age)
     const yearsInCanada = Number(this.query.yearsInCanadaSince18)
     const residencyReq = 10
+    const psdAge = this.query.psdAge
 
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
     if (age >= 65 && yearsInCanada >= residencyReq) return result
@@ -105,7 +130,8 @@ export class FutureHandler {
       String(this.query.livingCountry)
     )
 
-    const oasAge = eliObjOas.ageOfEligibility
+    const oasAge = psdAge ? psdAge : eliObjOas.ageOfEligibility
+    console.log('oasAge', oasAge)
 
     const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
     const alwsAge = eliObjAlws.ageOfEligibility
@@ -125,14 +151,20 @@ export class FutureHandler {
                 this.query.livedOnlyInCanada === 'false' &&
                 this.query.yearsInCanadaSince18
               ) {
-                this.newQuery['yearsInCanadaSince18'] = String(
-                  Math.min(40, eliObjOas.yearsOfResAtEligibility)
-                )
+                this.newQuery['yearsInCanadaSince18'] = psdAge
+                  ? String(
+                      Number(this.query.psdAge) -
+                        Number(this.query.age) +
+                        Number(this.query.yearsInCanadaSince18)
+                    )
+                  : String(Math.min(40, eliObjOas.yearsOfResAtEligibility))
               }
 
               const { value } = schema.validate(this.newQuery, {
                 abortEarly: false,
               })
+
+              console.log('value', value)
               const handler = new BenefitHandler(
                 value,
                 true,
@@ -209,6 +241,8 @@ export class FutureHandler {
     }
 
     const futureAges = getAgeArray(agesInputObj)
+
+    console.log('futureAges', futureAges)
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {

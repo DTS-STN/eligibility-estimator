@@ -216,7 +216,7 @@ const ResultsPage: React.VFC<{
 
   const handleUpdate = async (psdAge) => {
     setIsUpdating(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 600))
 
     handleUpdateEstimate(psdAge)
 

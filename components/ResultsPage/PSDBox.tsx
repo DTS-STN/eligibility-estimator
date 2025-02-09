@@ -19,6 +19,9 @@ import { Button } from '../Forms/Button'
 // All that's needed is the PSD age from the psd component and a flag that this is a "psd calc"
 // Then, when running the calc - "no deferral" and "deferral" OAS calculations will take the flag and work a little bit differently
 
+// In the results page, we need to iterate over client future results and find the first occurence of OAS. THIS is the OAS that we will replace with the PSD results
+// Then we have to keep track at what location did we find the first occurence of OAS and replace the partner future results at the same location
+
 const monthNames = [
   'Jan.',
   'Feb.',
@@ -131,8 +134,12 @@ export const PSDBox: React.VFC<{
   )
 
   const populateDropdowns = (totalMonths: number) => {
-    const targetYear = Math.ceil(firstEligibleDate.year + totalMonths / 12)
+    let targetYear = Math.floor(firstEligibleDate.year + totalMonths / 12)
     const remainingMonths = (firstEligibleDate.month + totalMonths) % 12 // Remaining months (modulo 12)
+
+    if (remainingMonths > 11) {
+      targetYear += 1
+    }
 
     const targetMonth =
       (remainingMonths % 1 < 0.5
@@ -204,6 +211,9 @@ export const PSDBox: React.VFC<{
     const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
 
     onUpdate(psdAge)
+
+    // after doing the calc, we need to make the button disappear. We can set up a new variable psdSelectedYear and month
+    // and if those equal selectedYear and month, don't show the button.
   }
 
   return (
