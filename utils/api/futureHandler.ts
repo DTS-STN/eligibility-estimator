@@ -131,7 +131,6 @@ export class FutureHandler {
     )
 
     const oasAge = psdAge ? psdAge : eliObjOas.ageOfEligibility
-    console.log('oasAge', oasAge)
 
     const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
     const alwsAge = eliObjAlws.ageOfEligibility
@@ -164,7 +163,6 @@ export class FutureHandler {
                 abortEarly: false,
               })
 
-              console.log('value', value)
               const handler = new BenefitHandler(
                 value,
                 true,
@@ -190,12 +188,14 @@ export class FutureHandler {
   private getPartneredResults() {
     const age = Number(this.query.age)
     const partnerAge = Number(this.query.partnerAge)
+
     const clientRes =
       Number(this.query.yearsInCanadaSince18) ||
       Number(this.query.yearsInCanadaSinceOAS)
     const partnerRes =
       Number(this.query.partnerYearsInCanadaSince18) ||
       Number(this.query.partnerYearsInCanadaSinceOAS)
+
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
     const clientDeferralMeta =
@@ -241,8 +241,25 @@ export class FutureHandler {
     }
 
     const futureAges = getAgeArray(agesInputObj)
+    const psdAge = Number(this.query.psdAge)
 
-    console.log('futureAges', futureAges)
+    let psdAgeSet
+    if (psdAge) {
+      // TODO: here make changes to the future ages set
+      // ex. 60.5/64.33 -> [[61.17,65],[65,68.33]]
+
+      console.log('INSIDE the psd AGE manipulation block')
+      console.log('futureAges', futureAges)
+      const yrsDiff = psdAge - age
+      const psdPartnerAge = partnerAge + yrsDiff
+
+      psdAgeSet = [psdAge, psdPartnerAge]
+      console.log('psdAgeSet', psdAgeSet)
+    }
+
+    if (psdAgeSet) {
+      futureAges.push(psdAgeSet)
+    }
 
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
@@ -264,6 +281,16 @@ export class FutureHandler {
           clientLockResidence,
           partnerLockResidence
         )
+
+        if (psdAge) {
+          const yrsDiff = psdAge - age
+          newQuery['yearsInCanadaSince18'] =
+            +this.query.yearsInCanadaSince18 + yrsDiff
+        }
+
+        console.log('ageSet', ageSet)
+        console.log('newQuery', newQuery)
+
         const { value } = schema.validate(newQuery, { abortEarly: false })
 
         const handler = new BenefitHandler(
