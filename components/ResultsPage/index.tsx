@@ -288,17 +288,20 @@ const ResultsPage: React.VFC<{
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
-          <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
-          <BenefitCards
-            inputAge={Number(userAge)}
-            results={resultsArray}
-            futureClientResults={futureClientResults}
-            partnerResults={partnerResultsArray}
-            liveInCanada={
-              inputs.find((input) => input.key === 'livingCountry').value ===
-              LivingCountry.CANADA
-            }
-          />
+          <div className={isUpdating ? 'opacity-20' : ''}>
+            <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
+            <BenefitCards
+              inputAge={Number(userAge)}
+              results={resultsArray}
+              futureClientResults={futureClientResults}
+              partnerResults={partnerResultsArray}
+              liveInCanada={
+                inputs.find((input) => input.key === 'livingCountry').value ===
+                LivingCountry.CANADA
+              }
+              formYears={yearsinCan}
+            />
+          </div>
 
           <Button
             text={tsln.modifyAnswers}
