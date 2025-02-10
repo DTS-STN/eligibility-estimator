@@ -34,10 +34,7 @@ export const Intro: React.VFC<{
       )}
       {estimateLength > 1 && hasPartner && (
         <div>
-          <p>
-            {tsln.resultsPage.youEstimateMayChange}
-            {':'}
-          </p>
+          <p>{tsln.resultsPage.yourEstimateMayChangeList}</p>
           <ul className="pl-[35px] ml-[20px] my-1 list-disc text-content">
             <li>
               {tsln.resultsPage.basedYourAge}
@@ -46,7 +43,7 @@ export const Intro: React.VFC<{
             <li>{tsln.resultsPage.basedYourPartner}</li>
           </ul>
           <p className="my-6">
-            {userAge < 70 && hasMultipleOasGis
+            {userAge < 70 && hasMultipleOasGis && !alreadyReceiving
               ? tsln.resultsPage.ifYouChoseToDefer
               : ''}{' '}
             {tsln.resultsPage.changeInSituation}

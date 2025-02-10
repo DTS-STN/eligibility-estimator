@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useEffect, useLayoutEffect } from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -19,6 +20,8 @@ export const SummaryEstimates: React.VFC<{
   userAge
   partnerAge
   maritalStatus
+  partnerReceiving
+  involSep
 }> = ({
   headings,
   userResults,
@@ -26,6 +29,8 @@ export const SummaryEstimates: React.VFC<{
   userAge,
   partnerAge,
   maritalStatus,
+  partnerReceiving,
+  involSep,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -49,6 +54,35 @@ export const SummaryEstimates: React.VFC<{
 
   let collapsed = []
 
+  //To remove recovery tax EC
+  useLayoutEffect(() => {
+    const element =
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTaxPartner.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTaxPartner.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTax.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTax.heading}`
+      )
+
+    const recoveryBoth =
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTaxBoth.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTaxBoth.heading}`
+      )
+
+    if (recoveryBoth) {
+      element?.remove()
+    }
+  })
+
   return (
     <>
       {headings.map((year, index) => {
@@ -57,11 +91,13 @@ export const SummaryEstimates: React.VFC<{
           : null
 
         const partnerResult = partnerResults
-          ? partnerResults.some((obj) => year in obj)
+          ? partnerResults.filter((elm) => elm).length > 0
+            ? partnerResults.some((obj) => year in obj)
+            : null
           : null
         let heading
 
-        if (year == currentYear) {
+        if (year == apiTrans.detail.currentEligible) {
           heading = apiTrans.detail.currentEligible
         } else if (index < headings.length - 1) {
           heading = year
@@ -72,53 +108,77 @@ export const SummaryEstimates: React.VFC<{
               : `${year} ${apiTrans.detail.lastYearEligible}`
         }
 
-        const userObj = userResult
-          ? userResults.find((obj) => year in obj)
+        // Get all results under a year (there can be multiple)
+        const yearResults = userResult
+          ? userResults.filter((obj) => obj && year in obj)
           : null
 
-        const partnerObj = partnerResult
-          ? partnerResults.find((obj) => year in obj)
+        const yearResultsParnter = partnerResult
+          ? partnerResults.filter((obj) => obj && year in obj)
           : null
 
-        const userResultObject = userObj
-          ? userObj[Object.keys(userObj)[0]]
+        //Get the Result Objects: {"eligibility age": {Result}}
+        const userResultObjects = yearResults
+          ? yearResults.map((el) => {
+              return el
+            })
           : null
 
-        const partnerResultObject = partnerObj
-          ? partnerObj[Object.keys(partnerObj)[0]]
+        const partnerResultObjects = yearResultsParnter
+          ? yearResultsParnter.map((el) => {
+              return el
+            })
           : null
 
         let eligible = []
-        if (userResultObject) {
-          const benefitAge = Object.keys(userResultObject)[0]
+        if (userResultObjects) {
+          if (userResultObjects.length > 0) {
+            userResultObjects.forEach((resultObject, index) => {
+              const benefitItem = resultObject[Object.keys(resultObject)[0]]
+              const benefitAge = Object.keys(benefitItem)[0]
 
-          const resultsArray: BenefitResult[] = Object.keys(
-            userResultObject[benefitAge]
-          ).map((value) => userResultObject[benefitAge][value])
+              const resultsArray: BenefitResult[] = Object.keys(
+                benefitItem[benefitAge]
+              ).map((value) => benefitItem[benefitAge][value])
 
-          eligible = resultsArray.filter(
-            (result) =>
-              result.eligibility?.result === ResultKey.ELIGIBLE ||
-              result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-          )
+              const eligibleResults = resultsArray.filter(
+                (result) =>
+                  result.eligibility?.result === ResultKey.ELIGIBLE ||
+                  result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+              )
+
+              eligibleResults.forEach((item) => {
+                eligible.push(item)
+              })
+            })
+          }
         }
 
-        let partnerEligible = []
-        if (partnerResultObject) {
-          const benefitAge = Object.keys(partnerResultObject)[0]
+        let partnerEli = []
+        if (partnerResultObjects) {
+          if (partnerResultObjects.length > 0) {
+            partnerResultObjects.forEach((resultObject, index) => {
+              const benefitItem = resultObject[Object.keys(resultObject)[0]]
+              const benefitAge = Object.keys(benefitItem)[0]
 
-          const resultsArray: BenefitResult[] = Object.keys(
-            partnerResultObject[benefitAge]
-          ).map((value) => partnerResultObject[benefitAge][value])
+              const resultsArray: BenefitResult[] = Object.keys(
+                benefitItem[benefitAge]
+              ).map((value) => benefitItem[benefitAge][value])
 
-          partnerEligible = resultsArray.filter(
-            (result) =>
-              result.eligibility?.result === ResultKey.ELIGIBLE ||
-              result.eligibility?.result === ResultKey.INCOME_DEPENDENT
-          )
+              const eligibleResults = resultsArray.filter(
+                (result) =>
+                  result.eligibility?.result === ResultKey.ELIGIBLE ||
+                  result.eligibility?.result === ResultKey.INCOME_DEPENDENT
+              )
+
+              eligibleResults.forEach((item) => {
+                partnerEli.push(item)
+              })
+            })
+          }
         }
 
-        eligible = eligible.concat(partnerEligible)
+        eligible = eligible.concat(partnerEli)
 
         return (
           <div key={heading}>
@@ -130,53 +190,91 @@ export const SummaryEstimates: React.VFC<{
             </h3>
             <div key={`estimation-${year}`} className="mb-5">
               <div key={`estimation-sub-${year}`} className="space-y-4">
-                {userResult && (
-                  <Estimation
-                    partner={false}
-                    resultObject={userResultObject}
-                    resultArray={userResults}
-                    age={userAge}
-                    maritalStatus={maritalStatus}
-                  />
-                )}
+                {userResult &&
+                  userResultObjects.map((result, index) => {
+                    return (
+                      <Estimation
+                        key={index}
+                        partner={false}
+                        resultObject={result[Object.keys(result)[0]]}
+                        resultArray={userResults}
+                        age={userAge}
+                        maritalStatus={maritalStatus}
+                        partnerReceiving={partnerReceiving}
+                        involSep={involSep}
+                        isSecondEstimate={index > 0}
+                      />
+                    )
+                  })}
 
-                {partnerResult && (
-                  <Estimation
-                    partner={true}
-                    resultObject={partnerResultObject}
-                    resultArray={partnerResults}
-                    age={partnerAge}
-                    maritalStatus={maritalStatus}
-                  />
-                )}
+                {partnerResult &&
+                  partnerResultObjects.map((result, index) => {
+                    return (
+                      <Estimation
+                        key={index}
+                        partner={true}
+                        resultObject={result[Object.keys(result)[0]]}
+                        resultArray={partnerResults}
+                        age={partnerAge}
+                        maritalStatus={maritalStatus}
+                        partnerReceiving={partnerReceiving}
+                        involSep={involSep}
+                        isSecondEstimate={index > 0}
+                      />
+                    )
+                  })}
               </div>
               {eligible &&
-                eligible.map((benefit: BenefitResult) => {
+                eligible.map((benefit: BenefitResult, index) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
-                  if (collapsedDetails) {
-                    const index = collapsedDetails.findIndex(
-                      (item) =>
-                        item.heading ===
-                        apiTrans.detailWithHeading.yourDeferralOptions.heading
+
+                  const newCollapsedDetails = [...collapsedDetails]
+                  if (newCollapsedDetails) {
+                    //Find all indexes of deferral options
+                    let indexes = newCollapsedDetails.reduce(
+                      (acc, item, index) => {
+                        if (
+                          item.heading ===
+                          apiTrans.detailWithHeading.yourDeferralOptions.heading
+                        )
+                          acc.push(index)
+                        return acc
+                      },
+                      []
                     )
-                    if (index !== -1) {
-                      // show deferral first
-                      const [targetItem] = collapsedDetails.splice(index, 1)
-                      collapsedDetails.unshift(targetItem)
+
+                    //While there are still multiple deferral options, remove the first one
+                    while (indexes.length > 1) {
+                      newCollapsedDetails.splice(indexes[0], 1) // Remove the first occurrence
+                      indexes.shift() // Remove the first index from the list
+
+                      //Recalculate the index since removing the duplicates
+                      indexes = newCollapsedDetails.reduce(
+                        (acc, item, index) => {
+                          if (
+                            item.heading ===
+                            apiTrans.detailWithHeading.yourDeferralOptions
+                              .heading
+                          )
+                            acc.push(index)
+                          return acc
+                        },
+                        []
+                      )
                     }
                   }
 
                   return (
-                    <>
-                      {collapsedDetails &&
-                        collapsedDetails.map((detail, index) => {
+                    <div key={`Key-${benefit.benefitKey}-${index}`}>
+                      {newCollapsedDetails &&
+                        newCollapsedDetails.map((detail, index) => {
                           if (!collapsed.includes(detail.heading)) {
                             collapsed.push(detail.heading)
                             return (
                               <CustomCollapse
                                 datacy={`collapse-${benefit.benefitKey}-${index}`}
                                 key={`collapse-${benefit.benefitKey}-${index}`}
-                                id={`collapse-${benefit.benefitKey}-${index}`}
+                                id={`collapse-${detail.heading}`}
                                 title={detail.heading}
                               >
                                 <p
@@ -204,14 +302,14 @@ export const SummaryEstimates: React.VFC<{
                             )
                           }
                         })}
-                    </>
+                    </div>
                   )
                 })}
             </div>
             {headings.length > 1 &&
               index < year.length &&
               index != headings.length - 1 && (
-                <hr className="border-[#6F6F6F] border-solid border-t border-opacity-25" />
+                <hr className="border-[#676767] border-solid border-t border-opacity-25" />
               )}
           </div>
         )

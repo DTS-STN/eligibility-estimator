@@ -17,6 +17,7 @@ import {
   MetaDataObject,
   MonthsYears,
 } from '../definitions/types'
+import { LivingCountryHelper } from '../helpers/fieldClasses'
 import roundToTwo from '../helpers/roundToTwo'
 import { getDeferralIncrease } from '../helpers/utils'
 import legalValues from '../scrapers/output'
@@ -351,7 +352,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         this.input,
         this.eligibility,
         this.entitlement,
-        this.future
+        this.future,
+        this.formYearsInCanada
       )
     } else {
       return {
@@ -369,16 +371,26 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     input,
     eligibility,
     entitlement,
-    future
+    future,
+    formYearsInCanada
   ): MetaDataObject {
     const eligible =
       eligibility.result === ResultKey.ELIGIBLE ||
       eligibility.result === ResultKey.INCOME_DEPENDENT
 
+    //Check future first, if !future don't bother
+    const filledYears =
+      future && !input.livedOnlyInCanada
+        ? +input.yearsInCanadaSince18 !== +formYearsInCanada
+          ? input.yearsInCanadaSince18
+          : null
+        : null
+
     const meta: MetaDataObject = {
       tableData: null,
       currentAge: null,
       monthsTo70: null,
+      residency: filledYears,
       receiveOAS: false,
     }
 
@@ -435,6 +447,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         tableData: null,
         currentAge: null,
         monthsTo70: null,
+        residency: filledYears,
         receiveOAS: receivingOAS,
       }
     }
@@ -472,35 +485,41 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           )
         }
       }
-
       //Handle EC9 - EC14
       if (this.userOas) {
         if (
-          this.eligibility.result == ResultKey.ELIGIBLE &&
-          this.userOas.eligibility.result == ResultKey.ELIGIBLE
+          this.eligibility.result === ResultKey.ELIGIBLE &&
+          this.userOas.eligibility.result === ResultKey.ELIGIBLE
         ) {
           if (this.clawbackAmount > 0 && this.userOas.clawbackAmount > 0) {
-            if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+            //EC13
+            if (
+              this.userOas.input.livingCountry.value !== LivingCountry.CANADA
+            ) {
               cardCollapsedText.push(
                 this.translations.detailWithHeading.nonResidentTaxBoth
               )
-            } else {
+            }
+            //EC14
+            else {
               cardCollapsedText.push(
                 this.translations.detailWithHeading.recoveryTaxBoth
               )
             }
           }
-        } else {
-          if (this.clawbackAmount > 0) {
-            if (this.input.livingCountry.value !== LivingCountry.CANADA) {
-              cardCollapsedText.push(
-                this.translations.detailWithHeading.nonResidentTaxPartner
-              )
-            } else {
-              cardCollapsedText.push(
-                this.translations.detailWithHeading.recoveryTaxPartner
-              )
-            }
+        }
+        if (this.clawbackAmount > 0 && this.userOas.clawbackAmount <= 0) {
+          //EC11
+          if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.nonResidentTaxPartner
+            )
+          }
+          //EC12
+          else {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.recoveryTaxPartner
+            )
           }
         }
       }
@@ -508,17 +527,18 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
     if (!this.partner) {
       //RECOVER TAX MESSAGE - if partnered better to handle it in the partnered section to access both benefits
-      if (this.input.maritalStatus.value != MaritalStatus.PARTNERED) {
-        if (this.clawbackAmount > 0) {
-          if (this.input.livingCountry.value !== LivingCountry.CANADA) {
-            cardCollapsedText.push(
-              this.translations.detailWithHeading.nonResidentTax
-            )
-          } else {
-            cardCollapsedText.push(
-              this.translations.detailWithHeading.recoveryTax
-            )
-          }
+      if (this.clawbackAmount > 0) {
+        //EC10
+        if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.nonResidentTax
+          )
+        }
+        //EC09
+        else {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.recoveryTax
+          )
         }
       }
 
@@ -532,10 +552,12 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           this.translations.detailWithHeading.deferralDelay
         )
       }
+      const ageCalc = this.formAge ? this.formAge : this.inputAge
 
       //EC8
       if (
-        this.inputAge >= 70 &&
+        ageCalc >= 70 &&
+        this.inputAge == ageCalc &&
         !this.formReceiving &&
         this.entitlement.result > 0
       ) {
@@ -544,8 +566,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         )
       }
       //EC19 && EC20
-      const ageCalc = this.formAge ? this.formAge : this.inputAge
-
       if (ageCalc >= 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75Applied
@@ -569,7 +589,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
       this.eligibility.reason === ResultReason.AGE_YOUNG_64
     )
-      links.push(this.translations.links.apply[this.benefitKey])
+      this.formReceiving
+        ? links.push(this.translations.links.SignInSC)
+        : links.push(this.translations.links.apply[this.benefitKey])
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }

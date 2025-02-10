@@ -25,11 +25,11 @@ export function getOasNextSteps(
         nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.thisEstimate}</p>`
       }
     } else {
-      if (inputAge > 69) {
+      if (Math.trunc(inputAge) > 69) {
         nextStepText.nextStepContent += `<p class='mt-2'>${apiTsln.detail.oas.over70}</p>`
         nextStepText.nextStepContent += `<p class='mt-2'>${
           apiTsln.detail.oas.serviceCanadaReviewYourPayment
-        }</p> <p class='mt-2'>${
+        } ${
           result.entitlement.result === 0
             ? apiTsln.detail.oas.automaticallyBePaid
             : ''
@@ -66,7 +66,7 @@ export function getGisNextSteps(
   if (result.eligibility.result === ResultKey.ELIGIBLE) {
     nextStepText.nextStepTitle = tsln.resultsPage.nextStepTitle
     if (!receivingOAS) {
-      nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.youCanApplyGis}</p>`
+      nextStepText.nextStepContent += `<p class='mt-0'>${apiTsln.detail.gis.youCanApplyGis}</p>`
       if (result.entitlement.result === 0) {
         nextStepText.nextStepContent += `<p class='mt-4'>${apiTsln.detail.gis.ifYouApply}</p>`
       }
@@ -123,6 +123,10 @@ export function getAlwNextSteps(
   } else if (result.eligibility.result === ResultKey.INELIGIBLE) {
     if (result.eligibility.reason === ResultReason.LIVING_COUNTRY) {
       nextStepText.nextStepContent += apiTsln.detail.mustBeInCanada
+    } else if (result.eligibility.reason === ResultReason.PARTNER) {
+      if (!liveInCanada)
+        nextStepText.nextStepContent += apiTsln.detail.mustBeInCanada
+      else nextStepText.nextStepContent += apiTsln.detail.partnerMustBeEligible
     } else {
       nextStepText.nextStepContent += `<p>${apiTsln.detail.alw.forIndividuals}</p>`
       nextStepText.nextStepContent += `<ul class='pl-[35px] ml-[20px] my-1 list-disc text-content'>
@@ -130,13 +134,6 @@ export function getAlwNextSteps(
       <li>${apiTsln.detail.alw.livingInCanada}</li>
       <li>${apiTsln.detail.alw.spouseReceives}</li>
     </ul>`
-
-      if (
-        partnerAlw.eligibility.result === ResultKey.ELIGIBLE ||
-        partnerAlw.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
-      ) {
-        nextStepText.nextStepContent += `<p>${apiTsln.detail.alwPartnerEligible}</p>`
-      }
     }
   }
   // }
@@ -149,6 +146,7 @@ export function getAlwsNextSteps(
   result: any,
   inputAge: number,
   liveInCanada: boolean,
+  yearsinCan: any,
   nextStepText: NextStepText,
   apiTsln: Translations,
   tsln: WebTranslations
@@ -169,7 +167,7 @@ export function getAlwsNextSteps(
     if (result.entitlement.result > 0) {
       nextStepText.nextStepContent += apiTsln.detail.alwsApply
     } else {
-      if (inputAge < 60) {
+      if (Math.trunc(inputAge) < 60 || yearsinCan < 10) {
         nextStepText.nextStepContent += apiTsln.detail.alwsApply
       }
       nextStepText.nextStepContent += `<p class='mt-4'>${ifYouApplyText}</p>`

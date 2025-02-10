@@ -238,7 +238,7 @@ const fr: WebTranslations = {
   estimatorTimeEstimate:
     'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
-  inflationInfo: `Cet estimateur utilise les taux des prestations d’octobre à décembre 2024. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
+  inflationInfo: `Cet estimateur utilise les taux des prestations de janvier à mars&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
@@ -314,18 +314,20 @@ const fr: WebTranslations = {
     homeSubject: `EC Économie et industrie;Allocation;Avantages sociaux;Prestation au survivant;Finances;Finances personnelles;Revenu;Pension;Pension publique,PE Personnes;Adulte;Aîné,SO Société et culture;Vieillesse`,
   },
   resultsPage: {
-    moreInformation: 'More information on',
+    moreInformation: "Plus d'information",
     yourMonEstimateHeading: 'Votre estimation mensuelle',
     changeInSituation:
       'Si votre situation change, vos résultats pourraient changer.',
     youEstimateMayChange:
       'Votre estimation peut changer au fil du temps en fonction',
+    yourEstimateMayChangeList:
+      'Votre estimation peut changer au fil du temps en fonction\xa0:',
     basedYourAge: 'de votre âge',
     basedYourPartner: 'des prestations que votre conjoint reçoit.',
     ifYouChoseToDefer:
       'Si vous choisissez de reporter votre pension, votre estimation future sera plus élevée.',
     header: "Tableau des résultats d'estimation",
-    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie.`,
+    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie. <p class="mt-4">Vous devez être citoyen ou résident autorisé du Canada pour recevoir ces prestations.</p>`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',

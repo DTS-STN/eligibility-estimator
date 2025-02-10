@@ -361,14 +361,14 @@ const en: Translations = {
     deferralWillBeEligible:
       'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
     deferralYearsInCanada:
-      "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+      "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text link-no-deco' style='text-decoration: underline' target='_blank' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
     retroactivePay: 'Retroactive payment',
     sinceYouAreSixty:
       "Since you're {CURRENT_AGE}, you can start receiving your payments right away or wait for up to {WAIT_MONTHS} more {MONTH_MONTHS}.",
     futureDeferralOptions:
       'If you’re automatically enroled, you’ll start receiving payments the month after you turn 65 unless you request a deferral.',
     youCanAply:
-      "If you're not enroled, you can apply up to 11 months before you want your payments to start. ",
+      "If you're not enroled, you can apply up to 11 months before you want your payments to start. ",
     onceEnrolled:
       "Once you’re enroled, your payment amount will be reviewed each year based on your income tax return. You'll automatically be paid if your income qualifies.",
     delayMonths:
@@ -381,7 +381,9 @@ const en: Translations = {
       "You may be eligible for this benefit once you turn 60. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions#age'>edit your answers</a> to see what you could receive at a future age. <p class='mt-6'>You can apply for this benefit 1 month after you turn 59.</p>",
     eligibleWhen65: 'You may be eligible when you turn 65.',
     mustBeInCanada:
-      "You need to live in Canada to receive this benefit. You can <a class='text-default-text' style='text-decoration: underline' href='/en/questions?step=residence'>edit your answers</a> to see what you could get if you lived in Canada.",
+      "You need to live in Canada to receive this benefit. You can <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/en/questions?step=residence'>edit your answers</a> to see what you could get if you lived in Canada.",
+    partnerMustBeEligible:
+      "To be eligible, your partner must receive the Old Age Security pension and the Guaranteed Income Supplement. You can <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/en/questions?step=age#partnerBenefitStatus'>edit your answers</a> to see what you could get if your partner received these benefits.",
     mustBeOasEligible:
       'You need to be eligible for the Old Age Security pension to be eligible for this benefit.',
     mustCompleteOasCheck:
@@ -424,10 +426,9 @@ const en: Translations = {
       "If you apply, Service Canada will review your income tax return every year. You'll automatically be paid if your income is less than&nbsp;",
     afsNotEligible:
       'The Allowance for the Survivor is for widowed individuals between the ages of 60 and 64 who have not remarried or entered into a new common-law relationship.',
-    alwsApply:
-      'You can apply 6 to 11 months before you become eligible at 60. ',
+    alwsApply: 'You can apply 6 to 11 months before you become eligible. ',
     alwPartnerEligible:
-      'Your partner can apply 6 to 11 months before they become eligible at 60.',
+      'Your partner can apply 6 to 11 months before they become eligible.',
     autoEnrollTrue:
       'Based on what you told us, <strong>you do not need to apply to get this benefit</strong>. You will receive a letter in the mail letting you know of your <strong>automatic enrolment</strong> the month after you turn 64.',
     autoEnrollFalse:
@@ -462,6 +463,7 @@ const en: Translations = {
     youCouldStartReceiving: 'could start receiving',
     yourEstimateIsStill: 'Your estimate is still',
     yourEstimateIsStillPartner: `Your partner's estimate is still`,
+    theSame: 'the same',
     thisEstimateIsBased:
       'This estimate is based on {YEARS_OF_RESIDENCY} years of residence in Canada.',
     oas: {
@@ -495,9 +497,9 @@ const en: Translations = {
       ifNotReceiveLetter64:
         "If you didn't, <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a> to find out if you need to apply.",
       chooseToDefer:
-        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
+        "You can choose to defer your pension or increase your years of residence in Canada. To find out which option is best for you, <a id='oasLink2' class='text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.",
       receivePayment:
-        'You may be able to receive payment for up to the last 11 months.',
+        'You may be able to receive payment for up to the last 11 months.',
     },
     gis: {
       youCanApplyGis:
@@ -523,7 +525,7 @@ const en: Translations = {
       spouseReceives:
         'whose spouse or common-law partner receives the Guaranteed Income Supplement',
       yourPartnerCanApply:
-        'Your partner can apply 6 to 11 months before they become eligible at 65',
+        'Your partner can apply 6 to 11 months before they become eligible at 65',
     },
     alws: {
       forWidowedIndividuals: 'This benefit is for widowed individuals:',
@@ -550,11 +552,11 @@ const en: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Your payments will increase when you turn 75',
-      text: 'Once you turn 75, your payments will increase by 10%.',
+      text: 'Once you turn 75, your Old Age Security pension payments will increase by 10%.',
     },
     oasIncreaseAt75Applied: {
       heading: "Your payments have increased because you're over 75",
-      text: "Since you're over the age of 75, your payments have increased by 10%.",
+      text: "Since you're over the age of 75, your Old Age Security pension payments have increased by 10%.",
     },
     calculatedBasedOnIndividualIncome: {
       heading: 'Some amounts were calculated based on individual income',
@@ -570,7 +572,7 @@ const en: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Your partner may be eligible',
-      text: 'You can <a href="/en/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
+      text: 'You can <a class="link-no-deco" href="/en/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
     recoveryTax: {
       heading: 'Recovery tax will be applied to your pension',
@@ -598,7 +600,7 @@ const en: Translations = {
     },
     yourDeferralOptions: {
       heading: 'Your deferral options',
-      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
+      text: 'You can start receiving your Old Age Security pension payments at 65 or wait until you’re 70. ',
     },
     deferralDelay: {
       heading: 'Your deferral options',
@@ -606,7 +608,7 @@ const en: Translations = {
     },
     retroactivePayment: {
       heading: 'Retroactive payment',
-      text: 'You may be able to receive payment for up to the last 11 months.',
+      text: 'You may be able to receive payment for up to the last 11 months.',
     },
     mayBecomeEligible: {
       heading: 'Retroactive payment',
@@ -614,11 +616,11 @@ const en: Translations = {
     },
     socialSecurityEligible: {
       heading: 'You may become eligible earlier',
-      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
+      text: "You may become eligible earlier because you’ve lived in a country with a social security agreement with Canada. This may affect your estimate. <a class='text-default-text addOpenNew link-no-deco' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
     socialSecurityEligiblePartner: {
       heading: 'Your partner may become eligible earlier',
-      text: "Your partner may become eligible earlier because they’ve lived in a country with a social security agreement with Canada. This may affect their estimate. <a class='text-default-text addOpenNew' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
+      text: "Your partner may become eligible earlier because they’ve lived in a country with a social security agreement with Canada. This may affect their estimate. <a class='text-default-text addOpenNew link-no-deco' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>Contact us</a> for more information.",
     },
   },
   summaryTitle: {

@@ -207,6 +207,7 @@ export interface MetaDataObject {
   tableData?: null | TableData[]
   currentAge?: null | number
   monthsTo70?: null | number
+  residency?: null | number
   receiveOAS: boolean
 }
 

@@ -29,12 +29,14 @@ export const BenefitCards: React.VFC<{
   futureClientResults: any
   partnerResults: BenefitResult[]
   liveInCanada?: boolean
+  formYears?: any
 }> = ({
   inputAge,
   results,
   futureClientResults,
   partnerResults,
   liveInCanada,
+  formYears,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
@@ -72,6 +74,10 @@ export const BenefitCards: React.VFC<{
       result.eligibility?.result === ResultKey.INCOME_DEPENDENT
   )
 
+  const almostEligible = results.filter(
+    (result) => result.eligibility?.reason === ResultReason.LIVING_COUNTRY
+  )
+
   const futureClientEligible = flattenArray(futureClientResults)
 
   const resultsNotEligible = results.filter((value) => {
@@ -80,7 +86,9 @@ export const BenefitCards: React.VFC<{
     )
 
     return (
-      value.eligibility?.result === ResultKey.INELIGIBLE && !inFutureEligible
+      value.eligibility?.result === ResultKey.INELIGIBLE &&
+      !inFutureEligible &&
+      value.eligibility?.reason !== ResultReason.LIVING_COUNTRY
     )
   })
 
@@ -152,6 +160,7 @@ export const BenefitCards: React.VFC<{
         result,
         inputAge,
         liveInCanada,
+        formYears,
         nextStepText,
         apiTsln,
         tsln
@@ -199,7 +208,8 @@ export const BenefitCards: React.VFC<{
 
     const eligibleText =
       result.benefitKey !== BenefitKey.oas &&
-      result.eligibility.reason === ResultReason.LIVING_COUNTRY
+      (result.eligibility.reason === ResultReason.LIVING_COUNTRY ||
+        result.eligibility.reason === ResultReason.PARTNER)
         ? apiTsln.result.almostEligible
         : eligibility
         ? apiTsln.result.eligible
@@ -217,7 +227,8 @@ export const BenefitCards: React.VFC<{
           isEligible={eligibility}
           future={future}
           liveInCanada={
-            result.eligibility.reason === ResultReason.LIVING_COUNTRY
+            result.eligibility.reason === ResultReason.LIVING_COUNTRY ||
+            result.eligibility.reason === ResultReason.PARTNER
           }
           eligibleText={eligibleText}
           nextStepText={nextStepText}
@@ -258,6 +269,11 @@ export const BenefitCards: React.VFC<{
               generateCard(result, true)
             )}
           </>
+        </>
+      )}
+      {almostEligible.length > 0 && (
+        <>
+          <>{almostEligible.map((result) => generateCard(result))}</>
         </>
       )}
       {resultsNotEligible.length > 0 && (

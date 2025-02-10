@@ -297,17 +297,25 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
         this.oasResult.eligibility.result === ResultKey.ELIGIBLE ||
         this.oasResult.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
       ) {
-        const ageToCheck = this.originalInput?.age
-          ? this.originalInput?.age
-          : this.formAge
+        // const ageToCheck = this.originalInput?.age
+        //   ? this.originalInput?.age
+        //   : this.formAge
+
+        const ageToCheck =
+          this.formAge ?? this.originalInput?.age ?? this.input.age
 
         if (this.oasResult.cardDetail.meta.receiveOAS == false) {
           heading = this.translations.detail.yourDeferralOptions
-          if (this.oasResult.entitlement.result > 0 && ageToCheck < 70) {
-            if (this.input.age >= 65 && this.input.age < 70) {
+
+          if (
+            this.oasResult.entitlement.result > 0 &&
+            ageToCheck < 70 &&
+            this.input.age < 70
+          ) {
+            if (ageToCheck >= 65 && ageToCheck < 70) {
               //CHECK IF RECEIVING OAS
               text += this.translations.detail.deferralEligible
-            } else if (this.input.age < 65) {
+            } else if (ageToCheck < 65) {
               text += this.translations.detail.deferralWillBeEligible
             }
             if (text !== '') {
@@ -315,15 +323,16 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
                 text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
               }
 
-              if (!this.input.livedOnlyInCanada) {
-                if (
-                  ageToCheck != this.input.age &&
-                  this.formYearsInCanada <= 40 &&
-                  this.formYearsInCanada != this.input.yearsInCanadaSince18
-                ) {
-                  text += `<p class="mt-6">${this.translations.detail.deferralYearsInCanada}</p>`
-                }
-              }
+              //Removing due to complexity, revisit potential for EC6- EC5
+              // if (!this.input.livedOnlyInCanada && ageToCheck > 64) {
+              //   if (
+              //     ageToCheck != this.input.age &&
+              //     this.formYearsInCanada <= 40 &&
+              //     this.formYearsInCanada != this.input.yearsInCanadaSince18
+              //   ) {
+              //     text += `<p class="mt-6">${this.translations.detail.deferralYearsInCanada}</p>`
+              //   }
+              // }
             }
           }
 

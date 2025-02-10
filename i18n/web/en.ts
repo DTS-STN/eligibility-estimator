@@ -230,7 +230,7 @@ const en: WebTranslations = {
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate: 'It will take about 5 to 10 minutes to complete.',
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  inflationInfo: `This estimator uses October to December 2024 benefit rates. Future benefit amounts may be higher due to inflation.`,
+  inflationInfo: `This estimator uses January to March&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
@@ -316,13 +316,14 @@ const en: WebTranslations = {
     yourMonEstimateHeading: 'Your monthly estimate',
     changeInSituation: 'Changes in your situation may impact your results.',
     youEstimateMayChange: 'Your estimate may change over time based on',
+    yourEstimateMayChangeList: 'Your estimate may change over time based on:',
     basedYourAge: 'your age',
     basedYourPartner: 'the benefits your partner receives',
     ifYouChoseToDefer:
       'If you choose to defer your pension, your future estimate will be higher.',
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living.',
+      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. <p class="mt-4">You must be a citizen or legal resident of Canada to receive these benefits.</p>',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',

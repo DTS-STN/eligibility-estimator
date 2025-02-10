@@ -137,6 +137,13 @@ export const links: LinkDefinitions = {
       action: 'Apply for ALWS',
     },
   },
+  SignInSC: {
+    text: 'Sign in to My Service Canada Account',
+    url: 'https://www.canada.ca/en/employment-social-development/services/my-account.html',
+    order: 24,
+    icon: LinkIcon.link,
+    action: 'Sign in to My Service Canada',
+  },
   SC: {
     text: 'contact us',
     url: 'https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html',

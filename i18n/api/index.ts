@@ -77,6 +77,7 @@ export interface Translations {
     eligibleWhen60: string
     eligibleWhen65: string
     mustBeInCanada: string
+    partnerMustBeEligible: string
     mustBeOasEligible: string
     mustCompleteOasCheck: string
     mustMeetIncomeReq: string
@@ -126,6 +127,7 @@ export interface Translations {
     youCouldStartReceiving: string
     yourEstimateIsStill: string
     yourEstimateIsStillPartner: string
+    theSame: string
     thisEstimateIsBased: string
     oas: {
       eligibleIfIncomeIsLessThan: string

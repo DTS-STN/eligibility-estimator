@@ -132,7 +132,7 @@ export const textReplacementRules: TextReplacementRules = {
 }
 
 export function generateLink(link: Link, opensNewWindow?: string): string {
-  return `<a class="underline text-default-text generatedLink" href="${link.url}" target="_blank">${link.text}</a>`
+  return `<a class="underline link-no-deco text-default-text generatedLink" href="${link.url}" target="_blank">${link.text}</a>`
 }
 
 export function getEligibleAgeWithMonths(age: number, language: string) {

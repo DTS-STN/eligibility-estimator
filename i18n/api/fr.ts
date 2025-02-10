@@ -371,7 +371,7 @@ const fr: Translations = {
     deferralWillBeEligible:
       "Vous pouvez commencer à recevoir vos paiements de la pension de la Sécurité de la vieillesse à 65 ans ou attendre d'avoir 70 ans.",
     deferralYearsInCanada:
-      "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>",
+      "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>",
     retroactivePay: 'Paiement rétroactif',
     sinceYouAreSixty:
       'Puisque vous avez {CURRENT_AGE} ans, vous pouvez commencer à recevoir vos paiements immédiatement ou attendre encore {WAIT_MONTHS} mois.',
@@ -391,7 +391,9 @@ const fr: Translations = {
       "Vous pourriez être admissible lorsque vous aurez 60 ans. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions#age'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir à un âge futur. <p class='mt-6'>Vous pouvez présenter une demande pour cette prestation 1 mois après votre 59e anniversaire.</p>",
     eligibleWhen65: 'Vous pourriez être admissible à votre 65e anniversaire.',
     mustBeInCanada:
-      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text' style='text-decoration: underline' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+      "Vous devez habiter au Canada pour recevoir cette prestation. Vous pouvez <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/fr/questions?step=residence'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si vous habitiez au Canada.",
+    partnerMustBeEligible:
+      "Pour être admissible, votre conjoint doit recevoir la pension de la Sécurité de la vieillesse et le Supplément de revenu garanti. Vous pouvez <a class='text-default-text visited:text-blue-500 link-no-deco' style='text-decoration: underline' href='/fr/questions?step=age#partnerBenefitStatus'>modifier vos réponses</a> pour voir ce que vous pourriez recevoir si votre conjoint recevait ces prestations.",
     mustBeOasEligible:
       'Vous devez être admissible à la pension de la Sécurité de la vieillesse pour être admissible à cette prestation.',
     mustCompleteOasCheck:
@@ -435,9 +437,9 @@ const fr: Translations = {
     afsNotEligible:
       "L'Allocation au survivant est une prestation pour les personnes veuves âgées de 60 à 64 ans qui ne se sont pas remariées ou engagées dans une nouvelle union de fait.",
     alwsApply:
-      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible à 60 ans.',
+      'Vous pouvez faire une demande de 6 à 11 mois avant d’être admissible.',
     alwPartnerEligible:
-      'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible à 60 ans.',
+      'Votre conjoint peut faire une demande de 6 à 11 mois avant d’être admissible.',
     autoEnrollTrue:
       "D'après ce que vous nous avez dit, vous <strong>n'avez pas besoin de faire une demande</strong> pour obtenir cette prestation. Vous recevrez une lettre par la poste vous informant de votre <strong>inscription automatique</strong> le mois suivant vos 64 ans.",
     autoEnrollFalse:
@@ -462,7 +464,7 @@ const fr: Translations = {
     currentEligible: 'Présentement',
     you: 'vous pourriez',
     yourPartner: 'votre conjoint pourrait',
-    youCouldReceivePerMonth: 'par mois&nbsp;',
+    youCouldReceivePerMonth: 'par mois',
     youCouldReceiveTo: 'à',
     youCouldReceive: 'recevoir',
     youCouldReceiveUntil: 'Jusqu’à',
@@ -472,6 +474,7 @@ const fr: Translations = {
     youCouldStartReceiving: 'commencer à recevoir',
     yourEstimateIsStill: 'Votre estimation est encore',
     yourEstimateIsStillPartner: `L'estimation de votre conjoint est encore`,
+    theSame: 'la même',
     thisEstimateIsBased:
       'Cette estimation est basée sur {ENTITLEMENT_AMOUNT_FOR_BENEFIT} années de résidence au Canada.',
     oas: {
@@ -506,7 +509,7 @@ const fr: Translations = {
       ifNotReceiveLetter64:
         "Si vous ne l'avez pas reçue, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a> pour savoir si vous devez présenter une demande.",
       chooseToDefer:
-        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
+        "Vous pouvez choisir de reporter votre pension ou augmenter vos années de résidence au Canada. Pour savoir quelle option serait la meilleure pour vous, <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquez avec nous</a>.",
       receivePayment:
         'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
@@ -528,8 +531,8 @@ const fr: Translations = {
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },
     alw: {
-      forIndividuals: 'Cette prestation est pour les personnes&nbsp;:',
-      age60to64: 'âgées de 60 à 64 ans;',
+      forIndividuals: 'Cette prestation est pour les personnes :',
+      age60to64: 'âgées de 60 à 64 ans;',
       livingInCanada: 'qui vivent au Canada;',
       spouseReceives:
         'dont le conjoint reçoit le Supplément de revenu garanti.',
@@ -562,11 +565,11 @@ const fr: Translations = {
     },
     oasIncreaseAt75: {
       heading: 'Vos paiements augmenteront lorsque vous aurez 75 ans',
-      text: 'Lorsque vous aurez 75 ans, vos paiements augmenteront de 10 %.',
+      text: 'Lorsque vous aurez 75 ans, vos paiements de la pension de la Sécurité de la vieillesse augmenteront de 10 %.',
     },
     oasIncreaseAt75Applied: {
       heading: 'Vos paiements ont augmenté car vous avez plus de 75 ans',
-      text: 'Parce que vous avez plus de 75 ans, vos paiements ont augmenté de 10 %.',
+      text: 'Parce que vous avez plus de 75 ans, vos paiements de la pension de la Sécurité de la vieillesse ont augmenté de 10 %.',
     },
     calculatedBasedOnIndividualIncome: {
       heading:
@@ -583,7 +586,7 @@ const fr: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: 'Vous pouvez <a href="/fr/questions#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
+      text: 'Vous pouvez <a class="link-no-deco" href="/fr/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
     recoveryTax: {
       heading: 'L’impôt de récupération s’appliquera à votre pension',
@@ -619,7 +622,7 @@ const fr: Translations = {
       text: 'Vous pouvez reporter votre pension pour encore {DELAY_MONTHS} mois.',
     },
     retroactivePayment: {
-      heading: 'Vos options de report',
+      heading: 'Paiement rétroactif',
       text: 'Vous pourriez recevoir un paiement pour un maximum des 11 derniers mois.',
     },
     mayBecomeEligible: {
@@ -628,11 +631,11 @@ const fr: Translations = {
     },
     socialSecurityEligible: {
       heading: 'Vous pourriez devenir admissible plus tôt',
-      text: "Vous pourriez devenir admissible plus tôt parce que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter votre estimation. <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
+      text: "Vous pourriez devenir admissible plus tôt parce que vous avez vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter votre estimation. <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
     },
     socialSecurityEligiblePartner: {
       heading: 'Votre conjoint pourrait devenir admissible plus tôt',
-      text: "Votre conjoint pourrait devenir admissible plus tôt parce qu’il a vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter son estimation. <a class='addOpenNew text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
+      text: "Votre conjoint pourrait devenir admissible plus tôt parce qu’il a vécu dans un pays avec un accord de sécurité sociale avec le Canada. Ceci pourrait affecter son estimation. <a class='addOpenNew text-default-text link-no-deco' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>Communiquez avec nous</a> pour plus de détails.",
     },
   },
   summaryTitle: {

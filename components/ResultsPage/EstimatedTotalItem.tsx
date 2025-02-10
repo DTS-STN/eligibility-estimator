@@ -14,7 +14,17 @@ export const EstimatedTotalItem: React.VFC<{
   displayAmount: boolean
   partner: boolean
   maritalStatus
-}> = ({ heading, result, displayAmount, partner, maritalStatus }) => {
+  partnerReceiving: boolean
+  involSep: boolean
+}> = ({
+  heading,
+  result,
+  displayAmount,
+  partner,
+  maritalStatus,
+  partnerReceiving,
+  involSep,
+}) => {
   const tsln = useTranslation<WebTranslations>()
   const [modalOpen, setModalOpen] = useState(false)
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 })
@@ -59,7 +69,7 @@ export const EstimatedTotalItem: React.VFC<{
       {displayAmount &&
         numberToStringCurrency(result.entitlement.result, tsln._language)}
       {displayBenefitName(heading, result.entitlement.result, displayAmount)}
-      {result.entitlement.result == 0 && (
+      {result.entitlement.result == 0 && displayAmount && (
         <>
           <span className="align-middle ml-2">
             <button
@@ -87,6 +97,8 @@ export const EstimatedTotalItem: React.VFC<{
               onClose={closeModal}
               partner={partner}
               maritalStatus={maritalStatus}
+              benefitName={heading}
+              involSep={involSep}
             />
           </span>
         </>

@@ -72,6 +72,10 @@ const ResultsPage: React.VFC<{
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
     MaritalStatus.PARTNERED
 
+  const involSep = isPartnered
+    ? inputs.find((input) => input.key === FieldKey.INV_SEPARATED)['value']
+    : null
+
   const alreadyReceiving =
     inputs.find((input) => input.key === FieldKey.ALREADY_RECEIVE_OAS) !==
     undefined
@@ -79,6 +83,14 @@ const ResultsPage: React.VFC<{
           'value'
         ]
       : false
+
+  const yearsinCan = inputs.find(
+    (input) => input.key === FieldKey.YEARS_IN_CANADA_SINCE_18
+  )
+    ? inputs.find((input) => input.key === FieldKey.YEARS_IN_CANADA_SINCE_18)[
+        'value'
+      ]
+    : null
 
   const maritalStatus = inputs.find(
     (input) => input.key === FieldKey.MARITAL_STATUS
@@ -88,6 +100,15 @@ const ResultsPage: React.VFC<{
 
   const partnerAge = isPartnered
     ? inputs.find((input) => input.key === FieldKey.PARTNER_AGE)['value']
+    : null
+
+  const partnerReceiving = isPartnered
+    ? inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
+        'value'
+      ] === PartnerBenefitStatus.OAS_GIS ||
+      inputs.find((input) => input.key === FieldKey.PARTNER_BENEFIT_STATUS)?.[
+        'value'
+      ] === PartnerBenefitStatus.HELP_ME
     : null
 
   const partnerNoOAS =
@@ -161,11 +182,10 @@ const ResultsPage: React.VFC<{
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
       const age = Number(Object.keys(item)[0])
-      const headingYear =
-        currentYear + (Math.trunc(age) - Math.trunc(Number(userAge)))
+      const headingYear = Math.trunc(currentYear + (age - Number(userAge)))
       let key
       if (age == 0) {
-        key = currentYear
+        key = apiTsln.detail.currentEligible
       } else {
         key = headingYear
       }
@@ -177,11 +197,12 @@ const ResultsPage: React.VFC<{
     ? partnerArrNew.map((item, index) => {
         if (item) {
           const age = Number(Object.keys(item)[0])
-          const headingYear =
-            currentYear + (Math.trunc(age) - Math.trunc(Number(partnerAge)))
+          const headingYear = Math.trunc(
+            currentYear + (age - Number(partnerAge))
+          )
           let key
           if (age == 0) {
-            key = currentYear
+            key = apiTsln.detail.currentEligible
           } else {
             key = headingYear
           }
@@ -231,7 +252,8 @@ const ResultsPage: React.VFC<{
             hasPartner={isPartnered}
             userAge={Number(userAge)}
             estimateLength={
-              userArrNew.filter((element) => element !== null).length
+              userArrNew.filter((element) => element !== null).length +
+              partnerArrNew.filter((element) => element !== null).length
             }
             hasMultipleOasGis={multipleOAS_GIS}
             alreadyReceiving={alreadyReceiving === 'true'}
@@ -250,6 +272,8 @@ const ResultsPage: React.VFC<{
                 userAge={userAge}
                 partnerAge={partnerAge}
                 maritalStatus={maritalStatus}
+                partnerReceiving={partnerReceiving}
+                involSep={involSep}
               ></SummaryEstimates>
             )}
           </div>
@@ -264,19 +288,18 @@ const ResultsPage: React.VFC<{
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
-          <div className={isUpdating ? 'opacity-20' : ''}>
-            <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
-            <BenefitCards
-              inputAge={Number(userAge)}
-              results={resultsArray}
-              futureClientResults={futureClientResults}
-              partnerResults={partnerResultsArray}
-              liveInCanada={
-                inputs.find((input) => input.key === 'livingCountry').value ===
-                LivingCountry.CANADA
-              }
-            />
-          </div>
+          <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
+          <BenefitCards
+            inputAge={Number(userAge)}
+            results={resultsArray}
+            futureClientResults={futureClientResults}
+            partnerResults={partnerResultsArray}
+            liveInCanada={
+              inputs.find((input) => input.key === 'livingCountry').value ===
+              LivingCountry.CANADA
+            }
+          />
+
           <Button
             text={tsln.modifyAnswers}
             id={'EditAnswers'}

@@ -10,18 +10,20 @@ export const Modal: React.VFC<{
   onClose
   partner
   maritalStatus
-}> = ({ isOpen, onClose, partner, maritalStatus }) => {
+  benefitName
+  involSep
+}> = ({ isOpen, onClose, partner, maritalStatus, benefitName, involSep }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const modalRef = useRef(null)
-  const firstFocusableRef = useRef(null)
 
   // ########## Block start ##########
 
   useEffect(() => {
     if (isOpen) {
       // Focus the first focusable element when the modal opens
-      firstFocusableRef.current?.focus()
+      const firstFocusableRef = modalRef.current.querySelectorAll('button')
+      firstFocusableRef[0].focus()
 
       // Event listener for trapping focus
       const handleKeyDown = (event) => {
@@ -29,6 +31,7 @@ export const Modal: React.VFC<{
           const focusableElements = modalRef.current.querySelectorAll(
             'button, a, input, textarea, select, [tabindex]:not([tabindex="-1"])'
           )
+
           const firstElement = focusableElements[0]
           const lastElement = focusableElements[focusableElements.length - 1]
 
@@ -45,9 +48,13 @@ export const Modal: React.VFC<{
             firstElement.focus()
           }
         }
+        if (event.key === 'Escape') {
+          onClose()
+        }
       }
 
       document.addEventListener('keydown', handleKeyDown)
+
       return () => document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
@@ -62,12 +69,20 @@ export const Modal: React.VFC<{
     if (partner) {
       text =
         maritalStatus === MaritalStatus.PARTNERED
-          ? apiTrans.modal.partnerCoupleIncomeTooHigh
+          ? benefitName === tsln.oas
+            ? apiTrans.modal.partnerIncomeTooHigh
+            : involSep == 'true'
+            ? apiTrans.modal.partnerIncomeTooHigh
+            : apiTrans.modal.partnerCoupleIncomeTooHigh
           : apiTrans.modal.partnerIncomeTooHigh
     } else {
       text =
         maritalStatus === MaritalStatus.PARTNERED
-          ? apiTrans.modal.userCoupleIncomeTooHigh
+          ? benefitName === tsln.oas
+            ? apiTrans.modal.userIncomeTooHigh
+            : involSep == 'true'
+            ? apiTrans.modal.userIncomeTooHigh
+            : apiTrans.modal.userCoupleIncomeTooHigh
           : apiTrans.modal.userIncomeTooHigh
     }
 
@@ -81,12 +96,12 @@ export const Modal: React.VFC<{
       role="dialog"
       aria-modal="true"
       aria-labelledby="modalTitle"
-      aria-describedby="modalDescription"
+      // aria-describedby="modalDescription"
       ref={modalRef}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div
-        role={'status'}
+        role={'document'}
         className="modal-content md:w-6/12 sm:w-9/12 bg-white p-6  shadow-lg z-50"
       >
         <h2 className="h2" id="modalTitle">
@@ -98,7 +113,7 @@ export const Modal: React.VFC<{
         <div className="mt-4 flex justify-start">
           <Button
             text={apiTrans.modal.close}
-            id={apiTrans.modal.close}
+            id="closeButton"
             style="primary"
             custom="mt-6 justify-center md:w-[fit-content]"
             onClick={onClose}
