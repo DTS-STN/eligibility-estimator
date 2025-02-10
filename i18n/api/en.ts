@@ -367,7 +367,7 @@ const en: Translations = {
     futureDeferralOptions:
       'If you’re automatically enroled, you’ll start receiving payments the month after you turn 65 unless you request a deferral.',
     youCanAply:
-      "If you're not enrolled, you can apply up to 11 months before you want your payements to start. ",
+      "If you're not enroled, you can apply up to 11 months before you want your payments to start. ",
     onceEnrolled:
       "Once you’re enroled, your payment amount will be reviewed each year based on your income tax return. You'll automatically be paid if your income qualifies.",
     delayMonths:
