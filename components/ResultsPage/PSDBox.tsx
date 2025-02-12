@@ -9,6 +9,7 @@ import { Button } from '../Forms/Button'
 
 // maxRes           original res + gaps
 //const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
+
 //residence = Math.floor(totalMonths / 12)
 //deferral = totalMonths % 12
 
