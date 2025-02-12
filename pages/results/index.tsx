@@ -105,6 +105,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
       console.log('psdResponse', psdResponse)
     } else {
+      console.log('psdAge', psdAge)
       const psdHandler = new MainHandler({
         ...inputHelper.asObjectWithLanguage,
         psdAge,
@@ -113,6 +114,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
 
       console.log('psdResponse', psdResponse)
+      console.log('response - this is the ORIGINAL response', response)
     }
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { cloneElement, useEffect, useState } from 'react'
 import { OasEligibility } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
 
@@ -42,9 +42,6 @@ const calculatePsdAge = (
   targetMonth: number,
   targetYear: number
 ) => {
-  console.log('currentAge', currentAge)
-  console.log('targetMonth', targetMonth)
-  console.log('targetYear', targetYear)
   const today = new Date()
   const currentYear = today.getFullYear()
   const currentMonth = today.getMonth() // Months are 0-indexed in JS, so add 1
@@ -175,12 +172,21 @@ export const PSDBox: React.VFC<{
       }
     }
 
+    console.log('tempMonths', tempMonths)
+    console.log('tempYears', tempYears)
+
     setMonths(tempMonths)
     setYears(tempYears)
   }
 
   const handleYearChange = (year: number) => {
     setSelectedYear(year)
+
+    populateDropdowns(totalMonths)
+  }
+
+  const handleMonthChange = (month: number) => {
+    setSelectedMonth(month)
 
     populateDropdowns(totalMonths)
   }
@@ -240,13 +246,13 @@ export const PSDBox: React.VFC<{
               </label>
               <select
                 id="psd-month"
-                value={months.indexOf(selectedMonth)}
-                onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                value={selectedMonth}
+                onChange={(e) => handleMonthChange(Number(e.target.value))}
                 className="inputStyles w-[108px]"
                 // aria-invalid={!!props.hasError}
               >
                 {months.map((month, index) => (
-                  <option key={index} value={index}>
+                  <option key={index} value={months[index]}>
                     {monthNames[month]}
                   </option>
                 ))}
