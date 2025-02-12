@@ -15,6 +15,7 @@ import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
 import { useEffect } from 'react'
 import Head from 'next/head'
+import { buildQuery } from '../../utils/api/helpers/utils'
 
 /*
  It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
@@ -69,23 +70,50 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
   const handleUpdateEstimate = (psdAge) => {
     console.log('psd AGE', psdAge)
+    const partnered =
+      inputHelper.asObjectWithLanguage.maritalStatus === 'partnered'
 
-    const psdHandler = new MainHandler({
-      ...inputHelper.asObjectWithLanguage,
-      // age: psdAge,
-      // yearsInCanadaSince18: String(
-      //   Math.floor(
-      //     Number(psdAge) -
-      //       Number(inputHelper.asObjectWithLanguage.age) +
-      //       Number(inputHelper.asObjectWithLanguage.yearsInCanadaSince18)
-      //   )
-      // ),
-      psdAge,
-    })
+    if (partnered) {
+      const clientAge = Number(inputHelper.asObjectWithLanguage.age)
+      const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+      // const clientRes = Number(
+      //   inputHelper.asObjectWithLanguage.yearsInCanadaSince18
+      // )
+      // const partnerRes = Number(
+      //   inputHelper.asObjectWithLanguage.partnerYearsInCanadaSince18
+      // )
+      const ageDiff = Number(psdAge - clientAge)
+      const psdPartnerAge = partnerAge + ageDiff
 
-    const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
+      // const partnerOnlyInCanada =
+      //   inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada
 
-    console.log('psdResponse', psdResponse)
+      // for partnered case only we need to build a query
+      const psdQuery = buildQuery(
+        inputHelper.asObjectWithLanguage,
+        [psdAge, psdPartnerAge],
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      )
+
+      const psdHandler = new MainHandler({ ...psdQuery, psdAge })
+      const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
+
+      console.log('psdResponse', psdResponse)
+    } else {
+      const psdHandler = new MainHandler({
+        ...inputHelper.asObjectWithLanguage,
+        psdAge,
+      })
+
+      const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
+
+      console.log('psdResponse', psdResponse)
+    }
   }
 
   return (

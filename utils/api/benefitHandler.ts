@@ -50,8 +50,11 @@ export class BenefitHandler {
     this.compare = compare
     this.formAge = formAge
     this.formYearsInCanada = formYearsInCanada
-    this.psdCalc =
-      this.future && !!this.rawInput.psdAge && this.input.client.age >= 65
+    // Below conditions explained:
+    // For partnered case, it is simpler to treat the pension start date age as current age so the results get saved to "results"
+    this.psdCalc = this.input.client.maritalStatus.partnered
+      ? !this.future
+      : this.future && !!this.rawInput.psdAge && this.input.client.age >= 65
   }
 
   get benefitResults(): BenefitResultsObjectWithPartner {
@@ -173,15 +176,15 @@ export class BenefitHandler {
       this.rawInput.livingCountry
     )
 
-    console.log('clientOasHelper', clientOasHelper)
-
     let clientOasNoDeferral
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 
+    console.log('this.rawInput.psdAge', this.rawInput.psdAge)
+    console.log('this.future', this.future)
     if (this.psdCalc) {
       const psdAge = this.rawInput.psdAge
       console.log('PSG IS PERSENT')
-      console.log('psdAge', this.rawInput.psdAge)
+      // console.log('psdAge', this.rawInput.psdAge)
       // maxRes           original res + gaps
       //const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
       //residence = Math.floor(totalMonths / 12)
@@ -196,12 +199,16 @@ export class BenefitHandler {
       //   Math.floor(totalMonthsRes / 12)
 
       const originalRes = this.input.client.yearsInCanadaSince18
+      console.log('originalRes', originalRes)
       const resWhole = Math.floor(originalRes)
+      console.log('resWhole', resWhole)
       const resRemainder = (originalRes - resWhole) * 12
+      console.log('resRemainder', resRemainder)
 
       const psdRes = resWhole
 
       const extraDeferral = psdRes - 40
+      console.log('extraDeferral', extraDeferral)
 
       const psdDef =
         Math.round(resRemainder) + (extraDeferral > 0 ? extraDeferral * 12 : 0)
@@ -231,6 +238,7 @@ export class BenefitHandler {
         psdInput.receiveOAS
       )
     } else {
+      console.log('not a psd calc')
       clientOasNoDeferral = new OasBenefit(
         this.input.client,
         this.fields.translations,
@@ -276,7 +284,7 @@ export class BenefitHandler {
     )
 
     let clientOasWithDeferral
-    console.log('this.rawInput.psdAge', this.rawInput.psdAge)
+    // console.log('this.rawInput.psdAge', this.rawInput.psdAge)
     if (clientOasHelper.canDefer && !this.psdCalc) {
       consoleDev(
         'Modified input to calculate OAS with deferral',
@@ -465,6 +473,7 @@ export class BenefitHandler {
       }
     }
 
+    console.log('clientOas that will be saved to results', clientOas)
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
