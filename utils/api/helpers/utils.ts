@@ -233,7 +233,7 @@ export function OasEligibility(
 
     yearsOfResAtEligibility =
       livingCountry == 'CAN'
-        ? Math.round(ageOfEligibility - ageAtStart + yearsInCanadaAtStart)
+        ? ageOfEligibility - ageAtStart + yearsInCanadaAtStart
         : yearsInCanadaAtStart
   }
 
