@@ -100,6 +100,9 @@ export class Form {
           'calculationResults',
           JSON.stringify(this.results)
         )
+
+        // sessionStorage.setItem('originalResponse', JSON.stringify(this.results))
+
         sessionStorage.setItem(
           'resultPageInputs',
           JSON.stringify(this.localInputs)

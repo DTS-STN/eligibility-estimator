@@ -230,7 +230,6 @@ export const PSDBox: React.VFC<{
       setShowUpdateButton(true)
     } else {
       setShowUpdateButton(false)
-      // onUpdate(psdAge, maxEliAge)
     }
   }, [selectedMonth, selectedYear])
 
@@ -239,13 +238,8 @@ export const PSDBox: React.VFC<{
     setBaseYear(selectedYear)
     setShowUpdateButton(false)
     onUpdate(psdAge, maxEliAge)
-
-    // after doing the calc, we need to make the button disappear. We can set up a new variable psdSelectedYear and month
-    // and if those equal selectedYear and month, don't show the button.
   }
 
-  console.log('baseMonth', baseMonth)
-  console.log('baseYear', baseYear)
   return (
     showPSD && (
       <div className="fz-10">

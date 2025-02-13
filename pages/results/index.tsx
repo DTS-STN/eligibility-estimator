@@ -48,7 +48,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     {}
   )
 
-  const [originalResposne, setOriginalResponse]: [any, (value: any) => void] =
+  const [originalResponse, setOriginalResponse]: [any, (value: any) => void] =
     useSessionStorage('originalResponse', {})
 
   const [savedInputs, _setSavedInputs]: [any, (value: any) => void] =
@@ -71,7 +71,27 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const psdHandleAndSet = (psdAge) => {
+  const mergeUniqueObjects = (arr1, arr2) => {
+    arr1 = arr1 || []
+    arr2 = arr2 || []
+    const resultMap = new Map()
+
+    arr1.forEach((obj) => {
+      const key = Object.keys(obj)[0]
+      resultMap.set(Number(key), obj)
+    })
+
+    arr2.forEach((obj) => {
+      const key = Object.keys(obj)[0]
+      if (!resultMap.has(Number(key))) {
+        resultMap.set(Number(key), obj)
+      }
+    })
+
+    return Array.from(resultMap.values())
+  }
+
+  const psdSingleHandleAndSet = (psdAge) => {
     const psdHandler = new MainHandler({
       ...inputHelper.asObjectWithLanguage,
       psdAge,
@@ -81,13 +101,16 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     if ('results' in psdResults) {
       psdResults.results.oas.eligibility.result = ResultKey.INELIGIBLE
       psdResults.results.gis.eligibility.result = ResultKey.INELIGIBLE
+
+      // TODO: Ask if we can avoid doing the below step
+      // TODO?: Might have to go inside "results" and pull out oas/gis 'cardDetail' and then iterate over the futureClientResults in the psdResults and replace the cardDetail for every age
     }
 
     setResponse(psdResults)
     setPsdResponse(psdResults)
   }
 
-  const mainHandleAnsSet = () => {
+  const mainHandleAndSet = () => {
     const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
     const response: ResponseSuccess | ResponseError = mainHandler.results
     setResponse(response)
@@ -96,9 +119,9 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
   useEffect(() => {
     if (Object.keys(psdResponse).length !== 0) {
-      psdHandleAndSet(psdAge)
+      psdSingleHandleAndSet(psdAge)
     } else {
-      mainHandleAnsSet()
+      mainHandleAndSet()
     }
   }, [language])
 
@@ -135,18 +158,84 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       )
 
       const psdHandler = new MainHandler({ ...psdQuery, psdAge })
-      const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
+      const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
-      console.log('psdResponse', psdResponse)
+      console.log('psdAge', psdAge)
+      console.log('psdPartnerAge', psdPartnerAge)
+      console.log('psdResults', psdResults)
+
+      if ('results' in psdResults) {
+        // we need {68: {oas, gis}} and {64.333: {oas, gis}} for client and partner
+        const clientPsd = { [psdAge]: psdResults.results }
+        const partnerPsd = { [psdPartnerAge]: psdResults.partnerResults }
+
+        const tempFutureClientResults = psdResults.futureClientResults
+          ? psdResults.futureClientResults.concat(clientPsd)
+          : [clientPsd]
+
+        const tempFuturePartnerResults = psdResults.futurePartnerResults
+          ? psdResults.futurePartnerResults.concat(partnerPsd)
+          : [partnerPsd]
+
+        console.log('tempFutureClientResults', tempFutureClientResults)
+        console.log('tempFuturePartnerResults', tempFuturePartnerResults)
+
+        const responseClone = JSON.parse(JSON.stringify(response))
+        console.log('responseClone', responseClone)
+
+        console.log('tempFutureClientResults', tempFutureClientResults)
+        console.log(
+          'responseClone.futureClientResults',
+          responseClone.futureClientResults
+        )
+
+        const mergedClientRes = mergeUniqueObjects(
+          tempFutureClientResults,
+          responseClone?.futureClientResults
+        ).sort((a, b) => {
+          const ageA = Object.keys(a)[0]
+          const ageB = Object.keys(b)[0]
+          return Number(ageA) - Number(ageB)
+        })
+
+        const mergedPartnerRes = mergeUniqueObjects(
+          tempFuturePartnerResults,
+          responseClone?.futurePartnerResults
+        ).sort((a, b) => {
+          const ageA = Object.keys(a)[0]
+          const ageB = Object.keys(b)[0]
+          return Number(ageA) - Number(ageB)
+        })
+
+        //TODO:
+        // iterate through the mergedClientRes/mergedPartnerRes to see what to keep/recalculate
+        // (mergedClientRes): if age < psdAge, decide what to do... keep or recalculate or throw away - if client OAS in this case throw away since age < psdAge
+        // (mergedPartnerRes): if age < psdAGe, determine if equals eligibility age. If yes, recalculate, if not, discard
+        // if age < psdAge but eligible for ALW, keep the equivalent partner result
+        // if age === psdAge, keep this and everything after
+
+        //TODO:
+        // if age < psdAge but eligible for ALW, keep the equivalent partner result
+        // Now address the "results" in responseClone. "Delete" all oas/gis from client results if < psdAge by setting to 'ineligible'
+        //
+
+        console.log('response', response)
+        console.log('responseCloneAFTER', responseClone)
+
+        console.log('mergedClientRes', mergedClientRes)
+        console.log('mergedPartnerRes', mergedPartnerRes)
+      }
+
+      // iterate over results and partnerResults. These are the future results for psdAges
     } else {
       // Single and Widowed scenarios
       console.log('psdAge', psdAge)
 
       if (psdAge === maxEliAge) {
-        setResponse(originalResposne)
+        setResponse(originalResponse)
         setPsdResponse({})
       } else {
-        psdHandleAndSet(psdAge)
+        psdSingleHandleAndSet(psdAge)
       }
     }
   }
