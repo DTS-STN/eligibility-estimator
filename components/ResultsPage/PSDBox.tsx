@@ -1,5 +1,5 @@
 import React, { cloneElement, useEffect, useState } from 'react'
-import { OasEligibility } from '../../utils/api/helpers/utils'
+import { getTargetDate, OasEligibility } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
 
 // Residence is 5 years
@@ -137,34 +137,11 @@ export const PSDBox: React.VFC<{
 
   const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
 
-  const populateDropdowns = (totalMonths: number) => {
-    const currentDate = new Date()
-    const currentYear = currentDate.getFullYear()
-    const currentMonth = currentDate.getMonth()
-    const yearsUntilSeventy = 70 - +inputObj.age
-    const targetDate = new Date(currentYear, currentMonth)
-    targetDate.setFullYear(
-      targetDate.getFullYear() + Math.floor(yearsUntilSeventy)
-    )
-    targetDate.setMonth(
-      targetDate.getMonth() + Math.round((yearsUntilSeventy % 1) * 12)
-    )
+  const populateDropdowns = () => {
+    const targetDate = getTargetDate(70, +inputObj.age)
 
-    console.log('targetDate.getFullYear()', targetDate.getFullYear())
-    console.log('targetDate.getMonth()', targetDate.getMonth())
-    // let targetYear = Math.floor(currentYear + yearsUntilSeventy)
-    const targetYear = targetDate.getFullYear()
-    const targetMonth = targetDate.getMonth()
-    const remainingMonths = (firstEligibleDate.month + totalMonths) % 12 // Remaining months (modulo 12)
-
-    // if (remainingMonths > 11) {
-    //   targetYear += 1
-    // }
-
-    // const targetMonth =
-    //   (remainingMonths % 1 < 0.5
-    //     ? Math.floor(remainingMonths)
-    //     : Math.ceil(remainingMonths)) % 12
+    const targetYear = targetDate.year
+    const targetMonth = targetDate.month
 
     let tempMonths: number[] = []
     let tempYears: number[] = []
@@ -205,17 +182,17 @@ export const PSDBox: React.VFC<{
   const handleYearChange = (year: number) => {
     setSelectedYear(year)
 
-    populateDropdowns(totalMonths)
+    populateDropdowns()
   }
 
   const handleMonthChange = (month: number) => {
     setSelectedMonth(month)
 
-    populateDropdowns(totalMonths)
+    populateDropdowns()
   }
 
   useEffect(() => {
-    populateDropdowns(totalMonths)
+    populateDropdowns()
   }, [totalMonths, selectedYear])
 
   useEffect(() => {

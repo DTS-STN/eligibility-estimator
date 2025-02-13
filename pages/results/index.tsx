@@ -133,14 +133,15 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     if (partnered) {
       const clientAge = Number(inputHelper.asObjectWithLanguage.age)
       const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+      const partnersAgeDiff = Math.abs(clientAge - partnerAge)
       // const clientRes = Number(
       //   inputHelper.asObjectWithLanguage.yearsInCanadaSince18
       // )
       // const partnerRes = Number(
       //   inputHelper.asObjectWithLanguage.partnerYearsInCanadaSince18
       // )
-      const ageDiff = Number(psdAge - clientAge)
-      const psdPartnerAge = partnerAge + ageDiff
+      const psdAgeDiff = Number(psdAge - clientAge)
+      const psdPartnerAge = partnerAge + psdAgeDiff
 
       // const partnerOnlyInCanada =
       //   inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada
@@ -169,28 +170,27 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         const clientPsd = { [psdAge]: psdResults.results }
         const partnerPsd = { [psdPartnerAge]: psdResults.partnerResults }
 
-        const tempFutureClientResults = psdResults.futureClientResults
+        const partialFutureClientResults = psdResults.futureClientResults
           ? psdResults.futureClientResults.concat(clientPsd)
           : [clientPsd]
 
-        const tempFuturePartnerResults = psdResults.futurePartnerResults
+        const partialFuturePartnerResults = psdResults.futurePartnerResults
           ? psdResults.futurePartnerResults.concat(partnerPsd)
           : [partnerPsd]
 
-        console.log('tempFutureClientResults', tempFutureClientResults)
-        console.log('tempFuturePartnerResults', tempFuturePartnerResults)
+        console.log('partialFutureClientResults', partialFutureClientResults)
+        console.log('partialFuturePartnerResults', partialFuturePartnerResults)
 
-        const responseClone = JSON.parse(JSON.stringify(response))
-        console.log('responseClone', responseClone)
+        const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
-        console.log('tempFutureClientResults', tempFutureClientResults)
+        console.log('partialFutureClientResults', partialFutureClientResults)
         console.log(
           'responseClone.futureClientResults',
           responseClone.futureClientResults
         )
 
         const mergedClientRes = mergeUniqueObjects(
-          tempFutureClientResults,
+          partialFutureClientResults,
           responseClone?.futureClientResults
         ).sort((a, b) => {
           const ageA = Object.keys(a)[0]
@@ -199,7 +199,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         })
 
         const mergedPartnerRes = mergeUniqueObjects(
-          tempFuturePartnerResults,
+          partialFuturePartnerResults,
           responseClone?.futurePartnerResults
         ).sort((a, b) => {
           const ageA = Object.keys(a)[0]
@@ -207,17 +207,73 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           return Number(ageA) - Number(ageB)
         })
 
-        //TODO:
-        // iterate through the mergedClientRes/mergedPartnerRes to see what to keep/recalculate
-        // (mergedClientRes): if age < psdAge, decide what to do... keep or recalculate or throw away - if client OAS in this case throw away since age < psdAge
-        // (mergedPartnerRes): if age < psdAGe, determine if equals eligibility age. If yes, recalculate, if not, discard
-        // if age < psdAge but eligible for ALW, keep the equivalent partner result
-        // if age === psdAge, keep this and everything after
+        console.log('mergedClientRes', mergedClientRes)
+        console.log('mergedPartnerRes', mergedPartnerRes)
 
         //TODO:
+        // iterate through the mergedClientRes/mergedPartnerRes to see what to keep/recalculate
+        // (mergedClientRes): if age < psdAge, decide what to do... keep or recalculate or throw away - if client OAS in this case throw away since age < psdAge, keep ALW
+        // if age < psdAge but eligible for ALW, keep it
+        // if age === psdAge, keep this and everything after
+        // (mergedPartnerRes):, we can look at an age, get equivalent client psdAge, ask "is it in the (now cleaned) mergedClientRes?". If it is, keep it, if it is not, then determine if the age is EliAge and if it is, recalculate, if not, then delete
+
+        const mappedClientRes = mergedClientRes
+          .map((ageRes) => {
+            const currAge = Number(Object.keys(ageRes)[0])
+            if (currAge < psdAge) {
+              console.log('ageRes', ageRes)
+              console.log('Object.values(ageRes)', Object.values(ageRes))
+              const hasAlw = Object.values(ageRes)[0].hasOwnProperty('alw')
+              console.log('hasAlw', hasAlw)
+              return null
+            }
+
+            if (currAge >= psdAge) {
+              return ageRes
+            }
+          })
+          .filter((obj) => obj !== null)
+
+        console.log('mappedClientRes', mappedClientRes)
+        const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
+
+        const mappedPartnerRes = mergedPartnerRes
+          .map((ageRes) => {
+            const currAge = Number(Object.keys(ageRes)[0])
+            const equivClientAge = String(currAge + partnersAgeDiff)
+            if (!clientResAges.includes(equivClientAge)) {
+              // TODO: if eliage, recalculate and add result, else set to null
+              return null
+            } else {
+              return ageRes
+            }
+          })
+          .filter((obj) => obj !== null)
+
+        responseClone.futureClientResults = mappedClientRes
+        responseClone.futurePartnerResults = mappedPartnerRes
+
+        console.log('mappedPartnerRes AFTER MAPPING', mappedPartnerRes)
+
+        console.log('clientResAges', clientResAges)
+
+        console.log('responseClone', responseClone)
+
+        // if some condition
+        // responseClone.results.oas.eligibility.result = ResultKey.INELIGIBLE
+
+        responseClone.results.oas.eligibility.result = ResultKey.INELIGIBLE
+        responseClone.results.gis.eligibility.result = ResultKey.INELIGIBLE
+        responseClone.partnerResults.alw.eligibility.result =
+          ResultKey.INELIGIBLE
+
+        //TODO:
+        // Now address the "results" in responseClone.
         // if age < psdAge but eligible for ALW, keep the equivalent partner result
-        // Now address the "results" in responseClone. "Delete" all oas/gis from client results if < psdAge by setting to 'ineligible'
+        // "Delete" all oas/gis from client results if < psdAge by setting to 'ineligible'
         //
+
+        setResponse(responseClone)
 
         console.log('response', response)
         console.log('responseCloneAFTER', responseClone)

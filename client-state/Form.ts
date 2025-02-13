@@ -101,7 +101,7 @@ export class Form {
           JSON.stringify(this.results)
         )
 
-        // sessionStorage.setItem('originalResponse', JSON.stringify(this.results))
+        sessionStorage.setItem('originalResponse', JSON.stringify(this.results))
 
         sessionStorage.setItem(
           'resultPageInputs',

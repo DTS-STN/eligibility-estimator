@@ -433,3 +433,16 @@ export function calculateFutureYearMonth(birthYear, birthMonth, age) {
     month: futureMonth,
   }
 }
+
+export function getTargetDate(targetAge, currentAge) {
+  const currentYear = new Date().getFullYear()
+  const currentMonth = new Date().getMonth() // 0-based (Jan = 0, Dec = 11)
+
+  const ageDifference = targetAge - currentAge
+  const totalMonths = Math.round(ageDifference * 12)
+
+  const targetYear = currentYear + Math.floor((currentMonth + totalMonths) / 12)
+  const targetMonth = (currentMonth + totalMonths) % 12 // Ensures month stays within [0,11]
+
+  return { year: targetYear, month: targetMonth }
+}
