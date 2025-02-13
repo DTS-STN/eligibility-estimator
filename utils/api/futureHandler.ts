@@ -115,13 +115,18 @@ export class FutureHandler {
 
   private getWidowedResults() {
     let result = this.futureResultsObj
-    const age = Number(this.query.age) // 55/5
+    const age = Number(this.query.age)
     const yearsInCanada = Number(this.query.yearsInCanadaSince18)
     const residencyReq = 10
-    const psdAge = this.query.psdAge // 70/20... eligible at 65/15
+    const psdAge = this.query.psdAge
+
+    console.log('age', age)
+    console.log('yearsInCanada', yearsInCanada)
+    console.log('psdAge', psdAge)
 
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
-    if (age >= 65 && yearsInCanada >= residencyReq) return result
+    if (age >= 65 && yearsInCanada >= residencyReq && !this.query.psdAge)
+      return result
 
     const eliObjOas = OasEligibility(
       age,

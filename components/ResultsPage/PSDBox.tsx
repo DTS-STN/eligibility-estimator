@@ -89,7 +89,7 @@ const getFirstEligibleDate = (currentAge: number, ageOfEligibility: number) => {
 }
 
 export const PSDBox: React.VFC<{
-  onUpdate: (psdAge: number) => void
+  onUpdate: (psdAge: number, maxEliAge: number) => void
   inputObj: any
   isUpdating: boolean
 }> = ({ onUpdate, inputObj, isUpdating }) => {
@@ -131,18 +131,40 @@ export const PSDBox: React.VFC<{
     firstEligibleDate.year
   )
 
+  const [baseMonth, setBaseMonth] = useState<number>(firstEligibleDate.month)
+
+  const [baseYear, setBaseYear] = useState<number>(firstEligibleDate.year)
+
+  const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
+
   const populateDropdowns = (totalMonths: number) => {
-    let targetYear = Math.floor(firstEligibleDate.year + totalMonths / 12)
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth()
+    const yearsUntilSeventy = 70 - +inputObj.age
+    const targetDate = new Date(currentYear, currentMonth)
+    targetDate.setFullYear(
+      targetDate.getFullYear() + Math.floor(yearsUntilSeventy)
+    )
+    targetDate.setMonth(
+      targetDate.getMonth() + Math.round((yearsUntilSeventy % 1) * 12)
+    )
+
+    console.log('targetDate.getFullYear()', targetDate.getFullYear())
+    console.log('targetDate.getMonth()', targetDate.getMonth())
+    // let targetYear = Math.floor(currentYear + yearsUntilSeventy)
+    const targetYear = targetDate.getFullYear()
+    const targetMonth = targetDate.getMonth()
     const remainingMonths = (firstEligibleDate.month + totalMonths) % 12 // Remaining months (modulo 12)
 
-    if (remainingMonths > 11) {
-      targetYear += 1
-    }
+    // if (remainingMonths > 11) {
+    //   targetYear += 1
+    // }
 
-    const targetMonth =
-      (remainingMonths % 1 < 0.5
-        ? Math.floor(remainingMonths)
-        : Math.ceil(remainingMonths)) % 12
+    // const targetMonth =
+    //   (remainingMonths % 1 < 0.5
+    //     ? Math.floor(remainingMonths)
+    //     : Math.ceil(remainingMonths)) % 12
 
     let tempMonths: number[] = []
     let tempYears: number[] = []
@@ -204,25 +226,26 @@ export const PSDBox: React.VFC<{
 
   // write a useEffect that listens to changes to selectedYear and selectedMonth and if they are different from current month and year make a hidden button appear
   useEffect(() => {
-    if (
-      selectedMonth !== firstEligibleDate.month ||
-      selectedYear !== firstEligibleDate.year
-    ) {
+    if (selectedMonth !== baseMonth || selectedYear !== baseYear) {
       setShowUpdateButton(true)
     } else {
       setShowUpdateButton(false)
+      // onUpdate(psdAge, maxEliAge)
     }
   }, [selectedMonth, selectedYear])
 
   const handleUpdateClick = () => {
-    const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
-
-    onUpdate(psdAge)
+    setBaseMonth(selectedMonth)
+    setBaseYear(selectedYear)
+    setShowUpdateButton(false)
+    onUpdate(psdAge, maxEliAge)
 
     // after doing the calc, we need to make the button disappear. We can set up a new variable psdSelectedYear and month
     // and if those equal selectedYear and month, don't show the button.
   }
 
+  console.log('baseMonth', baseMonth)
+  console.log('baseYear', baseYear)
   return (
     showPSD && (
       <div className="fz-10">

@@ -52,9 +52,12 @@ export class BenefitHandler {
     this.formYearsInCanada = formYearsInCanada
     // Below conditions explained:
     // For partnered case, it is simpler to treat the pension start date age as current age so the results get saved to "results"
-    this.psdCalc = this.input.client.maritalStatus.partnered
-      ? !this.future
-      : this.future && !!this.rawInput.psdAge && this.input.client.age >= 65
+    this.psdCalc =
+      (this.input.client.maritalStatus.partnered
+        ? !this.future
+        : this.future) &&
+      !!this.rawInput.psdAge &&
+      this.input.client.age >= 65
   }
 
   get benefitResults(): BenefitResultsObjectWithPartner {
@@ -185,7 +188,7 @@ export class BenefitHandler {
       const psdAge = this.rawInput.psdAge
       console.log('PSG IS PERSENT')
       // console.log('psdAge', this.rawInput.psdAge)
-      // maxRes           original res + gaps
+      // maxRes           original res + gaps (gap 1, only years)
       //const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
       //residence = Math.floor(totalMonths / 12)
       //deferral = totalMonths % 12
@@ -193,16 +196,20 @@ export class BenefitHandler {
       //   (clientEliObj.ageOfEligibility - this.input.client.age) * 12 +
       //   (psdAge - clientEliObj.ageOfEligibility) * 12
 
+      console.log('clientEliObj', clientEliObj)
+
       // const psdRes =
       //   (Number(this.input.client.yearsInCanadaSince18) ||
       //     Number(this.input.client.yearsInCanadaSinceOAS)) +
       //   Math.floor(totalMonthsRes / 12)
 
-      const originalRes = this.input.client.yearsInCanadaSince18
-      console.log('originalRes', originalRes)
-      const resWhole = Math.floor(originalRes)
+      const yrsDiff = +this.rawInput.psdAge - clientEliObj.ageOfEligibility
+      const resAtEli = clientEliObj.yearsOfResAtEligibility
+      const maxRes = resAtEli + yrsDiff
+      console.log('maxRes', maxRes)
+      const resWhole = Math.floor(maxRes)
       console.log('resWhole', resWhole)
-      const resRemainder = (originalRes - resWhole) * 12
+      const resRemainder = (maxRes - resWhole) * 12
       console.log('resRemainder', resRemainder)
 
       const psdRes = resWhole

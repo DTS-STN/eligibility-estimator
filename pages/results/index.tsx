@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useSessionStorage } from 'react-use'
 import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { Layout } from '../../components/Layout'
-import { Language } from '../../utils/api/definitions/enums'
+import { Language, ResultKey } from '../../utils/api/definitions/enums'
 import {
   ResponseError,
   ResponseSuccess,
@@ -13,7 +13,7 @@ import {
 import MainHandler from '../../utils/api/mainHandler'
 import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { buildQuery } from '../../utils/api/helpers/utils'
 
@@ -44,6 +44,13 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const [response, setResponse]: [any, (value: any) => void] =
     useSessionStorage('calculationResults', {})
 
+  const [psdResponse, setPsdResponse]: [any, (value: any) => void] = useState(
+    {}
+  )
+
+  const [originalResposne, setOriginalResponse]: [any, (value: any) => void] =
+    useSessionStorage('originalResponse', {})
+
   const [savedInputs, _setSavedInputs]: [any, (value: any) => void] =
     useSessionStorage('resultPageInputs', {})
 
@@ -52,6 +59,8 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     setInputs,
     language
   )
+
+  const [psdAge, setPsdAge] = useState(null)
 
   const tsln = useTranslation<WebTranslations>()
 
@@ -62,17 +71,42 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
+  const psdHandleAndSet = (psdAge) => {
+    const psdHandler = new MainHandler({
+      ...inputHelper.asObjectWithLanguage,
+      psdAge,
+    })
+
+    const psdResults: ResponseSuccess | ResponseError = psdHandler.results
+    if ('results' in psdResults) {
+      psdResults.results.oas.eligibility.result = ResultKey.INELIGIBLE
+      psdResults.results.gis.eligibility.result = ResultKey.INELIGIBLE
+    }
+
+    setResponse(psdResults)
+    setPsdResponse(psdResults)
+  }
+
+  const mainHandleAnsSet = () => {
     const mainHandler = new MainHandler(inputHelper.asObjectWithLanguage)
     const response: ResponseSuccess | ResponseError = mainHandler.results
     setResponse(response)
+    setOriginalResponse(response)
+  }
+
+  useEffect(() => {
+    if (Object.keys(psdResponse).length !== 0) {
+      psdHandleAndSet(psdAge)
+    } else {
+      mainHandleAnsSet()
+    }
   }, [language])
 
-  const handleUpdateEstimate = (psdAge) => {
+  const handleUpdateEstimate = (psdAge, maxEliAge) => {
     console.log('psd AGE', psdAge)
     const partnered =
       inputHelper.asObjectWithLanguage.maritalStatus === 'partnered'
-
+    setPsdAge(psdAge)
     if (partnered) {
       const clientAge = Number(inputHelper.asObjectWithLanguage.age)
       const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
@@ -105,19 +139,19 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
       console.log('psdResponse', psdResponse)
     } else {
+      // Single and Widowed scenarios
       console.log('psdAge', psdAge)
-      const psdHandler = new MainHandler({
-        ...inputHelper.asObjectWithLanguage,
-        psdAge,
-      })
 
-      const psdResponse: ResponseSuccess | ResponseError = psdHandler.results
-
-      console.log('psdResponse', psdResponse)
-      console.log('response - this is the ORIGINAL response', response)
+      if (psdAge === maxEliAge) {
+        setResponse(originalResposne)
+        setPsdResponse({})
+      } else {
+        psdHandleAndSet(psdAge)
+      }
     }
   }
 
+  console.log('psdAge FROM STATE IN RESULTS', psdAge)
   return (
     <>
       <Head>

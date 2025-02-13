@@ -36,7 +36,7 @@ const ResultsPage: React.VFC<{
   futureClientResults: any
   partnerResults: BenefitResultsObject
   futurePartnerResults: any
-  handleUpdateEstimate: (psdAge: number) => void
+  handleUpdateEstimate: (psdAge: number, maxEliAge: number) => void
   summary: SummaryObject
 }> = ({
   inputHelper,
@@ -175,6 +175,7 @@ const ResultsPage: React.VFC<{
   const partnerArr = partnerObj ? [partnerObj] : []
 
   const userArrNew = userArr.concat(futureClientResults)
+  console.log('userArrNew', userArrNew)
   const partnerArrNew = partnerArr.concat(futurePartnerResults)
 
   const currentYear = new Date().getFullYear()
@@ -235,11 +236,11 @@ const ResultsPage: React.VFC<{
       .filter((item) => item !== null)
       .filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
-  const handleUpdate = async (psdAge) => {
+  const handleUpdate = async (psdAge, maxEliAge) => {
     setIsUpdating(true)
     await new Promise((resolve) => setTimeout(resolve, 600))
 
-    handleUpdateEstimate(psdAge)
+    handleUpdateEstimate(psdAge, maxEliAge)
 
     setIsUpdating(false)
   }
