@@ -19,6 +19,7 @@ export interface LinkDefinitions {
   oasDefer: Link
   oasRetroactive: Link
   apply: { [key in BenefitKey]: LinkWithAction }
+  SignInSC: LinkWithAction
   SC: Link
   SCAccount: Link
   oasDeferClickHere: Link

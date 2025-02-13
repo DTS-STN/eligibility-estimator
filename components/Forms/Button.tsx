@@ -6,6 +6,7 @@ interface ButtonProps {
   style: 'primary' | 'secondary' | 'supertask' | 'danger' | 'link'
   custom?: string
   href?: string
+  imgHref?: string
   text: string
   type?: ButtonType
   locale?: string
@@ -13,15 +14,16 @@ interface ButtonProps {
   disabled?: boolean
   ariaLabel?: string
   attributes?: any
+  alt?: string
 }
 
 type ButtonType = 'submit' | 'reset' | 'button'
 
 const BUTTON_STYLES = {
   primary:
-    'text-white bg-[#26374A] hover:bg-[#2B4380] focus:bg-[#0535D2] border-transparent border-[2px]',
+    'text-white visited:text-white bg-[#26374A] hover:bg-[#2B4380] focus:bg-[#0535D2] border-transparent border-[2px]',
   secondary:
-    'text-[#2B4380] focus:text-white bg-white hover:bg-[#D7E5F5] focus:bg-[#0535D2] border-[#2B4380] border-[2px]',
+    'text-[#2B4380] visited:text-[#2B4380] focus:text-white bg-white hover:bg-[#D7E5F5] focus:bg-[#0535D2] border-[#2B4380] border-[2px]',
   supertask: 'text-white bg-[#318000] hover:bg-[#1D4D00] focus:bg-[#1D4D00]',
   danger: 'text-white bg-[#BC3331] hover:bg-[#942826] focus:bg-[#942826]',
   link: 'text-[#2B4380] hover:text-[#0535D2] focus:text-[#0535D2]n hover:underline focus:underline',
@@ -32,6 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   custom = '',
   href,
+  imgHref,
   text,
   type = 'button',
   locale,
@@ -39,6 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ariaLabel,
   attributes,
+  alt = 'Image alt',
 }) => {
   const btnStyle = BUTTON_STYLES[style]
 
@@ -46,8 +50,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   return href ? (
     <Link href={href} locale={locale}>
-      <a className={classes} aria-label={ariaLabel} {...attributes}>
-        {text}
+      <a
+        className={classes}
+        aria-label={ariaLabel}
+        target="_blank"
+        {...attributes}
+      >
+        {imgHref && <img src={imgHref} alt={alt} className="pr-3" />} {text}
       </a>
     </Link>
   ) : (
@@ -60,6 +69,7 @@ export const Button: React.FC<ButtonProps> = ({
       aria-label={ariaLabel}
       {...attributes}
     >
+      {imgHref && <img src={imgHref} alt={alt} className="pr-3" />}
       {text}
     </button>
   )

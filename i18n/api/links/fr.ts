@@ -137,6 +137,13 @@ export const links: LinkDefinitions = {
       action: 'Apply for ALWS',
     },
   },
+  SignInSC: {
+    text: 'Se connecter à Mon dossier Service Canada',
+    url: 'https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html',
+    order: 24,
+    icon: LinkIcon.link,
+    action: 'Se connecter à Mon dossier Service Canada',
+  },
   SC: {
     text: 'communiquez avec nous',
     url: 'https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html',
