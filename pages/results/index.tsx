@@ -15,7 +15,13 @@ import { useTranslation } from '../../components/Hooks'
 import { WebTranslations } from '../../i18n/web'
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { buildQuery } from '../../utils/api/helpers/utils'
+import {
+  buildQuery,
+  getEligibleBenefits,
+  OasEligibility,
+} from '../../utils/api/helpers/utils'
+import { BenefitHandler } from '../../utils/api/benefitHandler'
+import { RequestSchema as schema } from '../../utils/api/definitions/schemas'
 
 /*
  It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
@@ -133,7 +139,15 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     if (partnered) {
       const clientAge = Number(inputHelper.asObjectWithLanguage.age)
       const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
-      const partnersAgeDiff = Math.abs(clientAge - partnerAge)
+      const partnerRes = Number(
+        inputHelper.asObjectWithLanguage.partnerYearsInCanadaSince18 ||
+          Number(inputHelper.asObjectWithLanguage.partnerYearsInCanadaSinceOAS)
+      )
+      const partnerOnlyCanada =
+        inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada === 'true'
+      const partnerLivingCountry =
+        inputHelper.asObjectWithLanguage.partnerLivingCountry
+      const partnersAgeDiff = clientAge - partnerAge
       // const clientRes = Number(
       //   inputHelper.asObjectWithLanguage.yearsInCanadaSince18
       // )
@@ -221,11 +235,8 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           .map((ageRes) => {
             const currAge = Number(Object.keys(ageRes)[0])
             if (currAge < psdAge) {
-              console.log('ageRes', ageRes)
-              console.log('Object.values(ageRes)', Object.values(ageRes))
               const hasAlw = Object.values(ageRes)[0].hasOwnProperty('alw')
-              console.log('hasAlw', hasAlw)
-              return null
+              return hasAlw ? ageRes : null
             }
 
             if (currAge >= psdAge) {
@@ -233,17 +244,63 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
             }
           })
           .filter((obj) => obj !== null)
-
-        console.log('mappedClientRes', mappedClientRes)
         const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
+        console.log('mergedClientRes', mergedClientRes)
+        console.log('mergedPartnerRes', mergedPartnerRes)
         const mappedPartnerRes = mergedPartnerRes
           .map((ageRes) => {
             const currAge = Number(Object.keys(ageRes)[0])
             const equivClientAge = String(currAge + partnersAgeDiff)
+            console.log('currAge', currAge)
+            console.log('equiv', equivClientAge)
             if (!clientResAges.includes(equivClientAge)) {
               // TODO: if eliage, recalculate and add result, else set to null
-              return null
+              const partnerEliObj = OasEligibility(
+                partnerAge,
+                partnerRes,
+                partnerOnlyCanada,
+                partnerLivingCountry
+              )
+              console.log('we are in the IF BLOCK')
+              console.log('partnerOnlyCanada', partnerOnlyCanada)
+              console.log('partnerEliObj', partnerEliObj)
+
+              if (currAge === partnerEliObj.ageOfEligibility) {
+                console.log('HERE IS WHERE THE MAGIC HAPPENS')
+                // This means that the partner became independently eligible for OAS before the client's pension start date,
+                // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
+
+                const partnerQuery = buildQuery(
+                  inputHelper.asObjectWithLanguage,
+                  [equivClientAge, currAge],
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  null
+                )
+
+                //TODO: get correct inputs here so we can arrive at the right answer
+                partnerQuery['livedOnlyInCanada'] = 'true'
+                partnerQuery['yearsInCanadaSince18'] = 5
+
+                console.log('partnerQuery', partnerQuery)
+
+                const { value } = schema.validate(partnerQuery, {
+                  abortEarly: false,
+                })
+                const partnerHandler = new BenefitHandler(value)
+
+                const newPartnerResults = getEligibleBenefits(
+                  partnerHandler.benefitResults.partner
+                )
+
+                return { [currAge]: newPartnerResults }
+              } else {
+                return null
+              }
             } else {
               return ageRes
             }
@@ -254,8 +311,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         responseClone.futurePartnerResults = mappedPartnerRes
 
         console.log('mappedPartnerRes AFTER MAPPING', mappedPartnerRes)
-
-        console.log('clientResAges', clientResAges)
 
         console.log('responseClone', responseClone)
 
@@ -314,6 +369,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
             partnerResults={response.partnerResults}
             handleUpdateEstimate={handleUpdateEstimate}
             summary={response.summary}
+            psdCalc={!!psdAge}
           />
         ) : (
           <ErrorPage lang={language} errType="500" isAuth={false} />

@@ -199,16 +199,13 @@ export function OasEligibility(
   const minAgeEligibility = 65
   const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
 
-  let ageOfEligibility
-  let yearsOfResAtEligibility
-
   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
     const yearsPastEligibility = Math.min(
       age - minAgeEligibility,
       yearsInCanada - minYearsOfResEligibility
     )
-    ageOfEligibility = age - yearsPastEligibility
-    yearsOfResAtEligibility = yearsInCanada - yearsPastEligibility
+    age -= yearsPastEligibility
+    yearsInCanada -= yearsPastEligibility
   } else if (
     age < minAgeEligibility ||
     yearsInCanada < minYearsOfResEligibility
@@ -217,31 +214,24 @@ export function OasEligibility(
       age < minAgeEligibility ||
       yearsInCanada < minYearsOfResEligibility
     ) {
-      age++
-      yearsInCanada++
+      if (yearsInCanada < minYearsOfResEligibility) {
+        yearsInCanada++
+        age++
+      } else {
+        if (age < minAgeEligibility) {
+          const ageToAdd =
+            age + 1 > minAgeEligibility ? minAgeEligibility - age : 1
+          const resToAdd = ageToAdd < 1 ? 0 : 1
+          age += ageToAdd
+          yearsInCanada += resToAdd
+        }
+      }
     }
-
-    // If client is n years + months.  #219890
-    //   the oas should be 65 exactly not 65 plus months
-    age =
-      age > minAgeEligibility && age < minAgeEligibility + 1
-        ? Math.floor(age)
-        : age
-
-    ageOfEligibility =
-      yearsInCanadaAtStart < minYearsOfResEligibility ? age : Math.floor(age)
-
-    yearsOfResAtEligibility =
-      livingCountry == 'CAN'
-        ? ageOfEligibility - ageAtStart + yearsInCanadaAtStart
-        : yearsInCanadaAtStart
   }
 
   return {
-    ageOfEligibility,
-    yearsOfResAtEligibility: livedOnlyInCanada
-      ? 40
-      : Math.floor(yearsOfResAtEligibility),
+    ageOfEligibility: age,
+    yearsOfResAtEligibility: livedOnlyInCanada ? 40 : Math.floor(yearsInCanada),
   }
 }
 
@@ -435,14 +425,19 @@ export function calculateFutureYearMonth(birthYear, birthMonth, age) {
 }
 
 export function getTargetDate(targetAge, currentAge) {
-  const currentYear = new Date().getFullYear()
-  const currentMonth = new Date().getMonth() // 0-based (Jan = 0, Dec = 11)
+  const currentDate = new Date()
+  const currentYear = currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth()
 
-  const ageDifference = targetAge - currentAge
-  const totalMonths = Math.round(ageDifference * 12)
+  const ageDiff = targetAge - currentAge
+  const totalMonths = Math.round(ageDiff * 12)
 
   const targetYear = currentYear + Math.floor((currentMonth + totalMonths) / 12)
-  const targetMonth = (currentMonth + totalMonths) % 12 // Ensures month stays within [0,11]
+  const targetMonth = (currentMonth + totalMonths) % 12
 
   return { year: targetYear, month: targetMonth }
+}
+
+export function roundToTwoDecimals(num: number) {
+  return num % 1 !== 0 ? parseFloat(num.toFixed(2)) : num
 }

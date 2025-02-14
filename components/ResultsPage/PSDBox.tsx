@@ -1,4 +1,4 @@
-import React, { cloneElement, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getTargetDate, OasEligibility } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
 
@@ -171,9 +171,6 @@ export const PSDBox: React.VFC<{
         tempMonths.push(i)
       }
     }
-
-    console.log('tempMonths', tempMonths)
-    console.log('tempYears', tempYears)
 
     setMonths(tempMonths)
     setYears(tempYears)

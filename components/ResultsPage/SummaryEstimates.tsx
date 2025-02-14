@@ -83,7 +83,6 @@ export const SummaryEstimates: React.VFC<{
     }
   })
 
-  console.log('headings', headings)
   return (
     <>
       {headings.map((year, index) => {

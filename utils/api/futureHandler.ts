@@ -6,6 +6,7 @@ import {
   getAgeArray,
   OasEligibility,
   AlwsEligibility,
+  getEligibleBenefits,
 } from './helpers/utils'
 
 export class FutureHandler {
@@ -97,9 +98,7 @@ export class FutureHandler {
       +this.query.yearsInCanadaSince18
     )
 
-    const eligibleBenefits = this.getEligibleBenefits(
-      handler.benefitResults.client
-    )
+    const eligibleBenefits = getEligibleBenefits(handler.benefitResults.client)
 
     const clientResult = eligibleBenefits
       ? [{ [futureAge]: eligibleBenefits }]
@@ -179,7 +178,7 @@ export class FutureHandler {
                 +this.query.yearsInCanadaSince18
               )
 
-              const eligibleBenefits = this.getEligibleBenefits(
+              const eligibleBenefits = getEligibleBenefits(
                 handler.benefitResults.client
               )
 
@@ -303,7 +302,7 @@ export class FutureHandler {
         //     +this.query.yearsInCanadaSince18 + yrsDiff
         // }
 
-        const clientEligibleBenefits = this.getEligibleBenefits(
+        const clientEligibleBenefits = getEligibleBenefits(
           handler.benefitResults.client
         )
 
@@ -313,7 +312,7 @@ export class FutureHandler {
           })
         }
 
-        const partnerEligibleBenefits = this.getEligibleBenefits(
+        const partnerEligibleBenefits = getEligibleBenefits(
           handler.benefitResults.partner
         )
 
@@ -376,15 +375,5 @@ export class FutureHandler {
     }
     console.log('result as returned in the FUTURE HANDLER', result)
     return result
-  }
-
-  private getEligibleBenefits(benefits) {
-    const newObj = {}
-    for (const key in benefits) {
-      if (benefits[key].eligibility?.result === 'eligible') {
-        newObj[key] = benefits[key]
-      }
-    }
-    return Object.keys(newObj).length === 0 ? null : newObj
   }
 }

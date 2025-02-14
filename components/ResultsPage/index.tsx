@@ -39,6 +39,7 @@ const ResultsPage: React.VFC<{
   futurePartnerResults: any
   handleUpdateEstimate: (psdAge: number, maxEliAge: number) => void
   summary: SummaryObject
+  psdCalc: boolean
 }> = ({
   inputHelper,
   results,
@@ -47,6 +48,7 @@ const ResultsPage: React.VFC<{
   futurePartnerResults,
   handleUpdateEstimate,
   summary,
+  psdCalc,
 }) => {
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
@@ -176,10 +178,7 @@ const ResultsPage: React.VFC<{
   const partnerArr = partnerObj ? [partnerObj] : []
 
   const userArrNew = userArr.concat(futureClientResults)
-  console.log('userArrNew', userArrNew)
   const partnerArrNew = partnerArr.concat(futurePartnerResults)
-
-  const currentYear = new Date().getFullYear()
 
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
@@ -213,9 +212,6 @@ const ResultsPage: React.VFC<{
       })
     : null
 
-  console.log('newestUser', newestUser)
-  console.log('newestPartner', newestPartner)
-
   const userKeys = newestUser.flatMap((obj) => {
     // Check if the object is not null or undefined before extracting keys
     return obj ? Object.keys(obj) : []
@@ -230,9 +226,6 @@ const ResultsPage: React.VFC<{
 
   const arr1 = userKeys.length > partnerKeys.length ? userKeys : partnerKeys
   const arr2 = arr1 == partnerKeys ? userKeys : partnerKeys
-
-  console.log('arr1', arr1)
-  console.log('arr2', arr2)
 
   //get the headings to display user and partner results
   const headings = [...new Set([...arr1, ...arr2])]
@@ -308,6 +301,7 @@ const ResultsPage: React.VFC<{
                 LivingCountry.CANADA
               }
               formYears={yearsinCan}
+              psdCalc={psdCalc}
             />
           </div>
 
