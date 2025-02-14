@@ -441,3 +441,23 @@ export function getTargetDate(targetAge, currentAge) {
 export function roundToTwoDecimals(num: number) {
   return num % 1 !== 0 ? parseFloat(num.toFixed(2)) : num
 }
+
+export function mergeUniqueObjects(arr1, arr2) {
+  arr1 = arr1 || []
+  arr2 = arr2 || []
+  const resultMap = new Map()
+
+  arr1.forEach((obj) => {
+    const key = Object.keys(obj)[0]
+    resultMap.set(Number(key), obj)
+  })
+
+  arr2.forEach((obj) => {
+    const key = Object.keys(obj)[0]
+    if (!resultMap.has(Number(key))) {
+      resultMap.set(Number(key), obj)
+    }
+  })
+
+  return Array.from(resultMap.values())
+}

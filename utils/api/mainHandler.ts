@@ -14,7 +14,6 @@ export default class MainHandler {
     const { error, value } = schema.validate(query, { abortEarly: false })
 
     // Provides results for current age
-    console.log('value THAT IS BEING PASSED IN', value)
     this.handler = new BenefitHandler(value)
 
     // Future planning
@@ -23,8 +22,8 @@ export default class MainHandler {
     const resultObj: any = {
       input: value,
       visibleFields: this.handler.fields.requiredFields,
-      results: this.handler.benefitResults.client, // age 55
-      futureClientResults: this.futureHandler.benefitResults?.client, // age 65
+      results: this.handler.benefitResults.client,
+      futureClientResults: this.futureHandler.benefitResults?.client,
       partnerResults: this.handler.benefitResults.partner,
       futurePartnerResults: this.futureHandler.benefitResults?.partner,
       summary: this.handler.summary,

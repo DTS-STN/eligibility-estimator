@@ -201,8 +201,8 @@ export class FutureHandler {
     // partherRes: FULL
     // typically age sets will return [68.67, 65]. When the 68.67 OAS is calculated, the inputs are:
 
-    const age = Number(this.query.age)
-    const partnerAge = Number(this.query.partnerAge)
+    const age = Number(this.query.age) //56
+    const partnerAge = Number(this.query.partnerAge) //66
 
     const clientRes =
       Number(this.query.yearsInCanadaSince18) ||

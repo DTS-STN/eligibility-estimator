@@ -32,6 +32,11 @@ export const SummaryEstimates: React.VFC<{
   partnerReceiving,
   involSep,
 }) => {
+  console.log('headings', headings)
+  console.log('userAge', userAge)
+  console.log('partnerAge', partnerAge)
+  console.log('userResults', userResults)
+  console.log('partnerResults', partnerResults)
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
 

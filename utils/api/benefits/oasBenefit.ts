@@ -3,7 +3,6 @@ import {
   BenefitKey,
   EntitlementResultType,
   LivingCountry,
-  MaritalStatus,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -12,12 +11,11 @@ import {
   CardCollapsedText,
   EligibilityResult,
   EntitlementResultOas,
-  ProcessedInput,
   LinkWithAction,
   MetaDataObject,
   MonthsYears,
+  ProcessedInput,
 } from '../definitions/types'
-import { LivingCountryHelper } from '../helpers/fieldClasses'
 import roundToTwo from '../helpers/roundToTwo'
 import { getDeferralIncrease } from '../helpers/utils'
 import legalValues from '../scrapers/output'
@@ -85,7 +83,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       if (meetsReqAge && skipReqIncome)
         return {
           result: ResultKey.INCOME_DEPENDENT,
-          reason: ResultReason.INCOME_MISSING,
+          reason: ResultReason.LIVING_COUNTRY,
           detail: this.translations.detail.oas.eligibleIfIncomeIsLessThan,
           incomeMustBeLessThan: incomeLimit,
         }
