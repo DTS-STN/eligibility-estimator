@@ -26,6 +26,8 @@ import { FieldConfig, FieldKey } from './fields'
  */
 export interface RequestInput {
   psdAge?: number
+  clientEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
+  partnerEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   incomeAvailable?: boolean
   income: number // personal income
   incomeWork: number // personal income from work
@@ -62,6 +64,8 @@ export interface RequestInput {
  */
 export interface ProcessedInput {
   psdAge?: number
+  clientEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
+  partnerEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   income: IncomeHelper
   age: number
   clientBirthDate: string

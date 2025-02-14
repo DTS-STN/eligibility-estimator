@@ -3,6 +3,8 @@ import { FieldCategory } from './enums'
 
 export enum FieldKey {
   PSD_AGE = 'psdAge',
+  ELI_OBJ = 'clientEliObj',
+  PARTNER_ELI_OBJ = 'partnerEliObj',
   INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
   INCOME_WORK = 'incomeWork',
@@ -46,6 +48,16 @@ export enum FieldType {
 export const fieldDefinitions: FieldDefinitions = {
   [FieldKey.PSD_AGE]: {
     key: FieldKey.PSD_AGE,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.ELI_OBJ]: {
+    key: FieldKey.ELI_OBJ,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.PARTNER_ELI_OBJ]: {
+    key: FieldKey.PARTNER_ELI_OBJ,
     category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
   },

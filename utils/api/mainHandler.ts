@@ -14,6 +14,7 @@ export default class MainHandler {
     const { error, value } = schema.validate(query, { abortEarly: false })
 
     // Provides results for current age
+    console.log('value THAT IS BEING PASSED IN', value)
     this.handler = new BenefitHandler(value)
 
     // Future planning

@@ -140,6 +140,10 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     if (partnered) {
       const clientAge = Number(inputHelper.asObjectWithLanguage.age)
       const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+      const clientRes = Number(
+        inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
+          Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
+      )
       const partnerRes = Number(
         inputHelper.asObjectWithLanguage.partnerYearsInCanadaSince18 ||
           Number(inputHelper.asObjectWithLanguage.partnerYearsInCanadaSinceOAS)
@@ -148,6 +152,9 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada === 'true'
       const partnerLivingCountry =
         inputHelper.asObjectWithLanguage.partnerLivingCountry
+      const clientOnlyCanada =
+        inputHelper.asObjectWithLanguage.livedOnlyInCanada === 'true'
+      const livingCountry = inputHelper.asObjectWithLanguage.livingCountry
       const partnersAgeDiff = clientAge - partnerAge
       // const clientRes = Number(
       //   inputHelper.asObjectWithLanguage.yearsInCanadaSince18
@@ -157,6 +164,20 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       // )
       const psdAgeDiff = Number(psdAge - clientAge)
       const psdPartnerAge = partnerAge + psdAgeDiff
+
+      const clientEliObj = OasEligibility(
+        clientAge,
+        clientRes,
+        clientOnlyCanada,
+        livingCountry
+      )
+
+      const partnerEliObj = OasEligibility(
+        partnerAge,
+        partnerRes,
+        partnerOnlyCanada,
+        partnerLivingCountry
+      )
 
       // const partnerOnlyInCanada =
       //   inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada
@@ -173,7 +194,12 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         null
       )
 
-      const psdHandler = new MainHandler({ ...psdQuery, psdAge })
+      const psdHandler = new MainHandler({
+        ...psdQuery,
+        psdAge,
+        clientEliObj,
+        partnerEliObj,
+      })
       const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
       console.log('psdAge', psdAge)
@@ -288,12 +314,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
             console.log('equiv', equivClientAge)
             if (!clientResAges.includes(equivClientAge)) {
               // TODO: if eliage, recalculate and add result, else set to null
-              const partnerEliObj = OasEligibility(
-                partnerAge,
-                partnerRes,
-                partnerOnlyCanada,
-                partnerLivingCountry
-              )
+
               console.log('we are in the IF BLOCK')
               console.log('partnerOnlyCanada', partnerOnlyCanada)
               console.log('partnerEliObj', partnerEliObj)
@@ -317,6 +338,8 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
                 //TODO: get correct inputs here so we can arrive at the right answer
                 partnerQuery['livedOnlyInCanada'] = 'true'
                 partnerQuery['yearsInCanadaSince18'] = 5
+                partnerQuery['clientEliObj'] = clientEliObj
+                partnerQuery['partnerEliObj'] = partnerEliObj
 
                 console.log('partnerQuery', partnerQuery)
 

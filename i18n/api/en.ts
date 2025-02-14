@@ -40,6 +40,8 @@ const en: Translations = {
   },
   question: {
     [FieldKey.PSD_AGE]: 'When do you want to start receiving your pension?',
+    [FieldKey.ELI_OBJ]: 'N/A',
+    [FieldKey.PARTNER_ELI_OBJ]: 'N/A',
     [FieldKey.INCOME_AVAILABLE]:
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:

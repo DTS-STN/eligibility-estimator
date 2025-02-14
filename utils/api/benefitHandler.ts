@@ -128,13 +128,15 @@ export class BenefitHandler {
     // Future handler takes care of cases when partner is not yet eligible by creating "age sets" of future eligible ages
     // If partner was already eligible in the past based on residency, we need to adjust the inputs
     if (!this.future) {
-      const partnerEliObj = OasEligibility(
-        this.input.partner.age,
-        this.input.partner.yearsInCanadaSince18 ||
-          this.input.partner.yearsInCanadaSinceOAS,
-        this.input.partner.livedOnlyInCanada,
-        this.rawInput.partnerLivingCountry
-      )
+      const partnerEliObj = this.rawInput.partnerEliObj
+        ? this.rawInput.partnerEliObj
+        : OasEligibility(
+            this.input.partner.age,
+            this.input.partner.yearsInCanadaSince18 ||
+              this.input.partner.yearsInCanadaSinceOAS,
+            this.input.partner.livedOnlyInCanada,
+            this.rawInput.partnerLivingCountry
+          )
 
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
@@ -171,18 +173,22 @@ export class BenefitHandler {
 
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
-    const clientEliObj = OasEligibility(
-      this.input.client.age,
-      this.input.client.yearsInCanadaSince18 ||
-        this.input.client.yearsInCanadaSinceOAS,
-      this.input.client.livedOnlyInCanada,
-      this.rawInput.livingCountry
-    )
+
+    const clientEliObj = this.rawInput.clientEliObj
+      ? this.rawInput.clientEliObj
+      : OasEligibility(
+          this.input.client.age,
+          this.input.client.yearsInCanadaSince18 ||
+            this.input.client.yearsInCanadaSinceOAS,
+          this.input.client.livedOnlyInCanada,
+          this.rawInput.livingCountry
+        )
 
     let clientOasNoDeferral
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 
-    console.log('this.rawInput.psdAge', this.rawInput.psdAge)
+    console.log('this.input.client', this.input.client)
+    console.log('this.rawInput', this.rawInput)
     console.log('this.future', this.future)
     if (this.psdCalc) {
       const psdAge = this.rawInput.psdAge
