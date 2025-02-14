@@ -7,6 +7,7 @@ import { FieldInputsObject, InputHelper } from '../../client-state/InputHelper'
 import { Layout } from '../../components/Layout'
 import { Language, ResultKey } from '../../utils/api/definitions/enums'
 import {
+  BenefitResultsObject,
   ResponseError,
   ResponseSuccess,
 } from '../../utils/api/definitions/types'
@@ -184,13 +185,43 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         const clientPsd = { [psdAge]: psdResults.results }
         const partnerPsd = { [psdPartnerAge]: psdResults.partnerResults }
 
+        console.log(
+          'psdResults.futurePartnerResults',
+          psdResults.futurePartnerResults
+        )
+
         const partialFutureClientResults = psdResults.futureClientResults
           ? psdResults.futureClientResults.concat(clientPsd)
           : [clientPsd]
 
-        const partialFuturePartnerResults = psdResults.futurePartnerResults
-          ? psdResults.futurePartnerResults.concat(partnerPsd)
-          : [partnerPsd]
+        const unfilteredFuturePartner: BenefitResultsObject[] =
+          psdResults.futurePartnerResults
+            ? psdResults.futurePartnerResults.concat(partnerPsd)
+            : [partnerPsd]
+
+        // const partialFuturePartnerResults = unfilteredFuturePartner
+
+        const partialFuturePartnerResults = unfilteredFuturePartner.filter(
+          (obj) => {
+            const ageKey = Object.keys(obj)[0]
+            const benefits = obj[ageKey]
+
+            console.log('ageKey', ageKey)
+            console.log('benefits', benefits)
+            console.log('Object.values(benefits)', Object.values(benefits))
+
+            // Check if at least one benefit is **not** "ineligible"
+            const hasEligibleBenefit = Object.values(benefits).some(
+              (benefit: any) => {
+                const eligibility = benefit.eligibility || {}
+                return eligibility.result && eligibility.result !== 'ineligible'
+              }
+            )
+
+            console.log('hasEligibleBenefit', hasEligibleBenefit)
+            return hasEligibleBenefit
+          }
+        )
 
         console.log('partialFutureClientResults', partialFutureClientResults)
         console.log('partialFuturePartnerResults', partialFuturePartnerResults)
@@ -212,6 +243,10 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           return Number(ageA) - Number(ageB)
         })
 
+        console.log(
+          'partialFuturePartnerResults',
+          getEligibleBenefits(partialFuturePartnerResults)
+        )
         const mergedPartnerRes = mergeUniqueObjects(
           partialFuturePartnerResults,
           responseClone?.futurePartnerResults
@@ -220,9 +255,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           const ageB = Object.keys(b)[0]
           return Number(ageA) - Number(ageB)
         })
-
-        console.log('mergedClientRes', mergedClientRes)
-        console.log('mergedPartnerRes', mergedPartnerRes)
 
         //TODO:
         // iterate through the mergedClientRes/mergedPartnerRes to see what to keep/recalculate
@@ -307,6 +339,9 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           })
           .filter((obj) => obj !== null)
 
+        console.log('mappedClientRes', mappedClientRes)
+        console.log('mappedPartnerRes', mappedPartnerRes)
+
         responseClone.futureClientResults = mappedClientRes
         responseClone.futurePartnerResults = mappedPartnerRes
 
@@ -332,9 +367,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
         console.log('response', response)
         console.log('responseCloneAFTER', responseClone)
-
-        console.log('mergedClientRes', mergedClientRes)
-        console.log('mergedPartnerRes', mergedPartnerRes)
       }
 
       // iterate over results and partnerResults. These are the future results for psdAges
