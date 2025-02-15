@@ -432,3 +432,41 @@ export function calculateFutureYearMonth(birthYear, birthMonth, age) {
     month: futureMonth,
   }
 }
+
+export function getTargetDate(targetAge, currentAge) {
+  const currentDate = new Date()
+  const currentYear = currentDate.getFullYear()
+  const currentMonth = currentDate.getMonth()
+
+  const ageDiff = targetAge - currentAge
+  const totalMonths = Math.round(ageDiff * 12)
+
+  const targetYear = currentYear + Math.floor((currentMonth + totalMonths) / 12)
+  const targetMonth = (currentMonth + totalMonths) % 12
+
+  return { year: targetYear, month: targetMonth }
+}
+
+export function roundToTwoDecimals(num: number) {
+  return num % 1 !== 0 ? parseFloat(num.toFixed(2)) : num
+}
+
+export function mergeUniqueObjects(arr1, arr2) {
+  arr1 = arr1 || []
+  arr2 = arr2 || []
+  const resultMap = new Map()
+
+  arr1.forEach((obj) => {
+    const key = Object.keys(obj)[0]
+    resultMap.set(Number(key), obj)
+  })
+
+  arr2.forEach((obj) => {
+    const key = Object.keys(obj)[0]
+    if (!resultMap.has(Number(key))) {
+      resultMap.set(Number(key), obj)
+    }
+  })
+
+  return Array.from(resultMap.values())
+}

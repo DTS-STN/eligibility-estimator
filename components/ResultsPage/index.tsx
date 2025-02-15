@@ -21,6 +21,7 @@ import { YourAnswers } from './YourAnswers'
 import { Translations, getTranslations } from '../../i18n/api'
 import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
+import { getTargetDate } from '../../utils/api/helpers/utils'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -163,7 +164,8 @@ const ResultsPage: React.VFC<{
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
       const age = Number(Object.keys(item)[0])
-      const headingYear = Math.trunc(currentYear + (age - Number(userAge)))
+      const headingYear = getTargetDate(age, Number(userAge)).year
+
       let key
       if (age == 0) {
         key = apiTsln.detail.currentEligible
@@ -178,9 +180,8 @@ const ResultsPage: React.VFC<{
     ? partnerArrNew.map((item, index) => {
         if (item) {
           const age = Number(Object.keys(item)[0])
-          const headingYear = Math.trunc(
-            currentYear + (age - Number(partnerAge))
-          )
+          const headingYear = getTargetDate(age, Number(partnerAge)).year
+
           let key
           if (age == 0) {
             key = apiTsln.detail.currentEligible
