@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useEffect, useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -32,17 +32,9 @@ export const SummaryEstimates: React.VFC<{
   partnerReceiving,
   involSep,
 }) => {
-  console.log('headings', headings)
-  console.log('userAge', userAge)
-  console.log('partnerAge', partnerAge)
-  console.log('userResults', userResults)
-  console.log('partnerResults', partnerResults)
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
-
   const language = useRouter().locale as Language
-
-  const currentYear = new Date().getFullYear()
 
   const getDeferralTable = (benefitKey, result, future, key?): any => {
     return benefitKey === BenefitKey.oas &&
@@ -100,6 +92,7 @@ export const SummaryEstimates: React.VFC<{
             ? partnerResults.some((obj) => year in obj)
             : null
           : null
+
         let heading
 
         if (year == apiTrans.detail.currentEligible) {
@@ -113,7 +106,6 @@ export const SummaryEstimates: React.VFC<{
               : `${year} ${apiTrans.detail.lastYearEligible}`
         }
 
-        // Get all results under a year (there can be multiple)
         const yearResults = userResult
           ? userResults.filter((obj) => obj && year in obj)
           : null
@@ -182,7 +174,6 @@ export const SummaryEstimates: React.VFC<{
             })
           }
         }
-
         eligible = eligible.concat(partnerEli)
 
         return (
@@ -311,6 +302,7 @@ export const SummaryEstimates: React.VFC<{
                   )
                 })}
             </div>
+
             {headings.length > 1 &&
               index < year.length &&
               index != headings.length - 1 && (
