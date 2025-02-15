@@ -1,21 +1,10 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { WebTranslations } from '../../i18n/web'
+import { Language } from '../../utils/api/definitions/enums'
 import { getTargetDate, OasEligibility } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
-
-const monthNames = [
-  'Jan.',
-  'Feb.',
-  'Mar.',
-  'Apr.',
-  'May',
-  'June',
-  'July',
-  'Aug.',
-  'Sept.',
-  'Oct.',
-  'Nov.',
-  'Dec.',
-]
+import { useTranslation } from '../Hooks'
 
 const calculatePsdAge = (
   currentAge: number,
@@ -72,6 +61,40 @@ export const PSDBox: React.VFC<{
   inputObj: any
   isUpdating: boolean
 }> = ({ onUpdate, inputObj, isUpdating }) => {
+  const tsln = useTranslation<WebTranslations>()
+  const language = useRouter().locale as Language
+
+  const monthNames =
+    language === 'en'
+      ? [
+          'Jan.',
+          'Feb.',
+          'Mar.',
+          'Apr.',
+          'May',
+          'June',
+          'July',
+          'Aug.',
+          'Sept.',
+          'Oct.',
+          'Nov.',
+          'Dec.',
+        ]
+      : [
+          'Janv.',
+          'Févr.',
+          'Mars',
+          'Avr.',
+          'Mai',
+          'Juin',
+          'Juill.',
+          'Août',
+          'Sept.',
+          'Oct.',
+          'Nov.',
+          'Déc.',
+        ]
+
   const age = Number(inputObj.age)
   const yearsInCanada =
     inputObj.livedOnlyInCanada === 'true'
@@ -111,7 +134,6 @@ export const PSDBox: React.VFC<{
   )
 
   const [baseMonth, setBaseMonth] = useState<number>(firstEligibleDate.month)
-
   const [baseYear, setBaseYear] = useState<number>(firstEligibleDate.year)
 
   const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
@@ -201,11 +223,13 @@ export const PSDBox: React.VFC<{
             isUpdating ? 'opacity-50' : 'opacity-100'
           }`}
         >
-          <h3 className="h3">Change your pension start date</h3>
-          <p className="text-[20px] leading-[30px]">
-            You can delay until age 70. For each month you wait, your pension
-            increases by 0.6%.
-          </p>
+          <h3 className="h3">{tsln.resultsPage.psdTitle}</h3>
+          <p
+            className="text-[20px] leading-[30px]"
+            dangerouslySetInnerHTML={{
+              __html: tsln.resultsPage.psdDescription,
+            }}
+          />
 
           <div className="datePicker relative flex flex-wrap mt-4">
             <div className="flex flex-col">
@@ -213,7 +237,7 @@ export const PSDBox: React.VFC<{
                 className="text-[#333333] text-base font-[700]"
                 htmlFor="psd-month"
               >
-                Month
+                {tsln.datePicker.month}
               </label>
               <select
                 id="psd-month"
@@ -234,7 +258,7 @@ export const PSDBox: React.VFC<{
                 className="text-[#333333] text-base font-[700]"
                 htmlFor="psd-year"
               >
-                Year
+                {tsln.datePicker.year}
               </label>
               <select
                 id="psd-year"
@@ -255,9 +279,9 @@ export const PSDBox: React.VFC<{
               style="primary"
               custom="mt-6"
               type="button"
-              text="Update estimate"
+              text={tsln.resultsPage.psdUpdateBtn}
               imgHref={`/refresh-icon.svg`}
-              alt="Update estimate"
+              alt={tsln.resultsPage.psdUpdateBtn}
               onClick={handleUpdateClick}
             />
           )}

@@ -377,6 +377,10 @@ const en: WebTranslations = {
     toReceive: "you'll likely be eligible to receive:",
     partnerToReceive: 'your partner will likely be eligible to receive:',
     theyToReceive: 'they will likely be eligible to receive:',
+    psdTitle: 'Change your pension start date',
+    psdDescription:
+      'You can delay until age 70. For each month you wait, your pension increases by 0.6%.',
+    psdUpdateBtn: 'Update estimate',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,

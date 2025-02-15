@@ -274,6 +274,9 @@ export type WebTranslations = {
     partnerToReceive: string
     theyToReceive: string
     //nextStepOas: string
+    psdTitle: string
+    psdDescription: string
+    psdUpdateBtn: string
   }
 
   resultsQuestions: Translations['questionShortText']
