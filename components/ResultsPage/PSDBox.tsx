@@ -5,6 +5,7 @@ import { Language } from '../../utils/api/definitions/enums'
 import { getTargetDate, OasEligibility } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
 import { useTranslation } from '../Hooks'
+import legalValues from '../../utils/api/scrapers/output/legalValuesJson.json'
 
 const calculatePsdAge = (
   currentAge: number,
@@ -114,7 +115,8 @@ export const PSDBox: React.VFC<{
   const totalMonths = yearsToDeferMax * 12
 
   const receiveOAS = inputObj?.receiveOAS === 'true'
-  const showPSD = !receiveOAS && yearsToDeferMax
+  const incomeWithinLimit = +inputObj.income < legalValues.oas.incomeLimit
+  const showPSD = !receiveOAS && yearsToDeferMax && incomeWithinLimit
 
   const [showUpdateButton, setShowUpdateButton] = useState(false)
   const [months, setMonths] = useState<number[]>([])
