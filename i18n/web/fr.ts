@@ -388,8 +388,8 @@ const fr: WebTranslations = {
     theyToReceive: 'il pourrait être admissible à recevoir :',
     psdTitle: 'Changez votre date de début de pension',
     psdDescription:
-      '&nbsp;Vous pouvez attendre jusqu’à l’âge de 70&nbsp;ans. Pour chaque mois de report, votre pension augmente de 0,6&nbsp;%.',
-    psdUpdateBtn: "Actualiser l'estimation",
+      'Vous pouvez attendre jusqu’à l’âge de 70&nbsp;ans. Pour chaque mois de report, votre pension augmente de 0,6&nbsp;%.',
+    psdUpdateBtn: 'Mettre à jour l’estimation',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,
