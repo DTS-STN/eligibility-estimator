@@ -60,8 +60,7 @@ export function Header({
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' })
       }
-      console.log('target', target)
-      console.log('elem', targetElement, 'targetid', targetId)
+
       targetElement.setAttribute('tabindex', '-1')
       targetElement.focus({ preventScroll: true })
     }

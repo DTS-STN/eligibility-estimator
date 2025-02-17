@@ -218,7 +218,7 @@ export const PSDBox: React.VFC<{
 
   return (
     showPSD && (
-      <div className="fz-10">
+      <div className="fz-10" id="psdBox">
         <div
           className={`py-2 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px] ${
             isUpdating ? 'opacity-50' : 'opacity-100'

@@ -667,6 +667,7 @@ const fr: Translations = {
     headingAge: "Si vous attendez d'avoir...",
     futureHeadingAge: 'Si vous commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
+    psdAnchor: 'Changez votre date de début de pension',
   },
   modal: {
     userHeading: 'Est-ce que vous pouvez recevoir cette prestation?',

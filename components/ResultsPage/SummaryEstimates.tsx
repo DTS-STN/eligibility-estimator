@@ -225,6 +225,7 @@ export const SummaryEstimates: React.VFC<{
                   const collapsedDetails = benefit.cardDetail?.collapsedText
 
                   const newCollapsedDetails = [...collapsedDetails]
+                  console.log('newCollapsedDetails', newCollapsedDetails)
                   if (newCollapsedDetails) {
                     //Find all indexes of deferral options
                     let indexes = newCollapsedDetails.reduce(

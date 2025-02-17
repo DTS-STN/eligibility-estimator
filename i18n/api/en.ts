@@ -649,6 +649,7 @@ const en: Translations = {
     headingAge: 'If you wait until age...',
     futureHeadingAge: 'If you start receiving at age...',
     headingAmount: 'Your monthly payment could be...',
+    psdAnchor: 'Change your pension start date',
   },
   modal: {
     userHeading: 'Can you receive this benefit?',
