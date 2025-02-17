@@ -223,9 +223,8 @@ export const SummaryEstimates: React.VFC<{
               {eligible &&
                 eligible.map((benefit: BenefitResult, index) => {
                   const collapsedDetails = benefit.cardDetail?.collapsedText
-
                   const newCollapsedDetails = [...collapsedDetails]
-                  console.log('newCollapsedDetails', newCollapsedDetails)
+
                   if (newCollapsedDetails) {
                     //Find all indexes of deferral options
                     let indexes = newCollapsedDetails.reduce(

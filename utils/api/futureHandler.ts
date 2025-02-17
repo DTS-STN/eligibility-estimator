@@ -88,8 +88,6 @@ export class FutureHandler {
       }
     }
 
-    console.log('this.query IN FUTURE HANDLER', this.newQuery)
-
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
     const handler = new BenefitHandler(
       value,

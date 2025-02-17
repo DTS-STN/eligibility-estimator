@@ -16,40 +16,35 @@ const calculatePsdAge = (
   const currentYear = today.getFullYear()
   const currentMonth = today.getMonth() // Months are 0-indexed in JS, so add 1
 
-  // Calculate the total number of months elapsed between the current date and the target date
   const monthsElapsed =
     (targetYear - currentYear) * 12 + (targetMonth - currentMonth)
 
-  // Convert monthsElapsed into years (with decimals)
   const ageAtTargetDate = currentAge + monthsElapsed / 12
 
-  // Return the calculated age rounded to two decimal places
   return parseFloat(ageAtTargetDate.toFixed(2))
 }
 
 const getFirstEligibleDate = (currentAge: number, ageOfEligibility: number) => {
-  const currentDate = new Date() // Get the current date (today's date)
+  const currentDate = new Date()
 
   // If the user is already eligible, return the current month and year
   if (currentAge >= ageOfEligibility) {
     return {
-      month: currentDate.getMonth(), // Convert zero-based month to one-based (1 = January)
+      month: currentDate.getMonth(),
       year: currentDate.getFullYear(),
     }
   }
 
-  // Calculate the years and months until eligibility
-  const yearsToEligibility = ageOfEligibility - currentAge // Calculate how many years until eligible
-  const wholeYears = Math.floor(yearsToEligibility) // Get the whole number of years
-  const remainingMonths = Math.round((yearsToEligibility - wholeYears) * 12) // Convert fractional part to months
+  const yearsToEligibility = ageOfEligibility - currentAge
+  const wholeYears = Math.floor(yearsToEligibility)
+  const remainingMonths = Math.round((yearsToEligibility - wholeYears) * 12)
 
-  // Calculate the month and year of eligibility
-  const eligibilityYear = currentDate.getFullYear() + wholeYears // Add whole years to the current year
-  const eligibilityMonth = currentDate.getMonth() + remainingMonths // Add remaining months to the current month
+  const eligibilityYear = currentDate.getFullYear() + wholeYears
+  const eligibilityMonth = currentDate.getMonth() + remainingMonths
 
   // Handle overflow if eligibilityMonth exceeds 11 (e.g., December = 11)
-  const finalMonth = eligibilityMonth % 12 // Ensure the month wraps around (0 = January, 11 = December)
-  const finalYear = eligibilityYear + Math.floor(eligibilityMonth / 12) // Increment the year if months overflow
+  const finalMonth = eligibilityMonth % 12
+  const finalYear = eligibilityYear + Math.floor(eligibilityMonth / 12)
 
   return {
     month: finalMonth,

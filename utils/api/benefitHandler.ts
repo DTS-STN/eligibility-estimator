@@ -187,47 +187,19 @@ export class BenefitHandler {
     let clientOasNoDeferral
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 
-    console.log('this.input.client', this.input.client)
-    console.log('this.rawInput', this.rawInput)
-    console.log('this.future', this.future)
     if (this.psdCalc) {
       const psdAge = this.rawInput.psdAge
-      console.log('PSG IS PERSENT')
-      // console.log('psdAge', this.rawInput.psdAge)
-      // maxRes           original res + gaps (gap 1, only years)
-      //const totalMonths = 5*12 + (6*12 + 5)  + 5*12 = 197 months
-      //residence = Math.floor(totalMonths / 12)
-      //deferral = totalMonths % 12
-      // const totalMonthsRes =
-      //   (clientEliObj.ageOfEligibility - this.input.client.age) * 12 +
-      //   (psdAge - clientEliObj.ageOfEligibility) * 12
-
-      console.log('clientEliObj', clientEliObj)
-
-      // const psdRes =
-      //   (Number(this.input.client.yearsInCanadaSince18) ||
-      //     Number(this.input.client.yearsInCanadaSinceOAS)) +
-      //   Math.floor(totalMonthsRes / 12)
-
       const yrsDiff = +this.rawInput.psdAge - clientEliObj.ageOfEligibility
       const resAtEli = clientEliObj.yearsOfResAtEligibility
       const maxRes = resAtEli + yrsDiff
-      console.log('maxRes', maxRes)
       const resWhole = Math.floor(maxRes)
-      console.log('resWhole', resWhole)
       const resRemainder = (maxRes - resWhole) * 12
-      console.log('resRemainder', resRemainder)
 
       const psdRes = resWhole
-
       const extraDeferral = psdRes - 40
-      console.log('extraDeferral', extraDeferral)
 
       const psdDef =
         Math.round(resRemainder) + (extraDeferral > 0 ? extraDeferral * 12 : 0)
-
-      console.log('psdRes', Math.min(psdRes, 40))
-      console.log('psdDef', psdDef)
 
       const psdInput = {
         ...this.input.client,
@@ -251,7 +223,6 @@ export class BenefitHandler {
         psdInput.receiveOAS
       )
     } else {
-      console.log('not a psd calc')
       clientOasNoDeferral = new OasBenefit(
         this.input.client,
         this.fields.translations,
@@ -297,7 +268,6 @@ export class BenefitHandler {
     )
 
     let clientOasWithDeferral
-    // console.log('this.rawInput.psdAge', this.rawInput.psdAge)
     if (clientOasHelper.canDefer && !this.psdCalc) {
       consoleDev(
         'Modified input to calculate OAS with deferral',
@@ -486,7 +456,6 @@ export class BenefitHandler {
       }
     }
 
-    console.log('clientOas that will be saved to results', clientOas)
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
 
