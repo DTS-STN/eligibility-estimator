@@ -248,11 +248,21 @@ export function AlwsEligibility(age, yearsInCanada) {
       age < minAgeEligibility ||
       yearsInCanada < minYearsOfResEligibility
     ) {
-      age++
-      yearsInCanada++
+      if (yearsInCanada < minYearsOfResEligibility) {
+        yearsInCanada++
+        age++
+      } else {
+        if (age < minAgeEligibility) {
+          const ageToAdd =
+            age + 1 > minAgeEligibility ? minAgeEligibility - age : 1
+          const resToAdd = ageToAdd < 1 ? 0 : 1
+          age += ageToAdd
+          yearsInCanada += resToAdd
+        }
+      }
     }
     ageOfEligibility = age > maxAgeEligibility ? null : age
-    yearsOfResAtEligibility = yearsInCanada
+    yearsOfResAtEligibility = Math.floor(yearsInCanada)
   }
 
   return {

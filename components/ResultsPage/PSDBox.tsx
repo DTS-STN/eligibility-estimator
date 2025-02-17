@@ -141,7 +141,9 @@ export const PSDBox: React.VFC<{
   const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
 
   const populateDropdowns = () => {
+    console.log('inputObj.age', inputObj.age)
     const targetDate = getTargetDate(70, +inputObj.age)
+    console.log('targetDate', targetDate)
 
     const targetYear = targetDate.year
     const targetMonth = targetDate.month
@@ -155,23 +157,22 @@ export const PSDBox: React.VFC<{
     }
 
     if (tempYears.length === 1) {
-      // Same year case
       for (let i = firstEligibleDate.month; i <= targetMonth; i++) {
         tempMonths.push(i)
       }
-    }
-
-    if (selectedYear === firstEligibleDate.year) {
-      for (let i = firstEligibleDate.month; i < 12; i++) {
-        tempMonths.push(i)
-      }
-    } else if (selectedYear === targetYear) {
-      for (let i = 0; i <= targetMonth; i++) {
-        tempMonths.push(i)
-      }
     } else {
-      for (let i = 0; i <= 11; i++) {
-        tempMonths.push(i)
+      if (selectedYear === firstEligibleDate.year) {
+        for (let i = firstEligibleDate.month; i < 12; i++) {
+          tempMonths.push(i)
+        }
+      } else if (selectedYear === targetYear) {
+        for (let i = 0; i <= targetMonth; i++) {
+          tempMonths.push(i)
+        }
+      } else {
+        for (let i = 0; i <= 11; i++) {
+          tempMonths.push(i)
+        }
       }
     }
 

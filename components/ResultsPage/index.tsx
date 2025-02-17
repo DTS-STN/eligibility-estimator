@@ -50,6 +50,7 @@ const ResultsPage: React.VFC<{
   summary,
   psdCalc,
 }) => {
+  console.log('futureClientResults', futureClientResults)
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject
@@ -167,6 +168,7 @@ const ResultsPage: React.VFC<{
     userObj = null
   }
   const userArr = userObj ? [userObj] : []
+  console.log('userArr', userArr)
 
   let partnerObj = {}
   // partnerObj['0'] = partnerResultObject
@@ -179,6 +181,7 @@ const ResultsPage: React.VFC<{
 
   const userArrNew = userArr.concat(futureClientResults)
   const partnerArrNew = partnerArr.concat(futurePartnerResults)
+  console.log('userArrNew', userArrNew)
 
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
@@ -217,6 +220,8 @@ const ResultsPage: React.VFC<{
     return obj ? Object.keys(obj) : []
   })
 
+  console.log('newestUser', newestUser)
+
   const partnerKeys = isPartnered
     ? newestPartner.flatMap((obj) => {
         // Check if the object is not null or undefined before extracting keys
@@ -226,6 +231,8 @@ const ResultsPage: React.VFC<{
 
   const arr1 = userKeys.length > partnerKeys.length ? userKeys : partnerKeys
   const arr2 = arr1 == partnerKeys ? userKeys : partnerKeys
+  console.log('arr1', arr1)
+  console.log('arr2', arr2)
 
   //get the headings to display user and partner results
   const headings = [...new Set([...arr1, ...arr2])]
