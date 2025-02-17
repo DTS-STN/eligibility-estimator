@@ -35,7 +35,7 @@ export const SummaryEstimates: React.VFC<{
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
-  console.log('headings', headings)
+
   const getDeferralTable = (benefitKey, result, future, key?): any => {
     return benefitKey === BenefitKey.oas &&
       result.eligibility.result === ResultKey.ELIGIBLE &&

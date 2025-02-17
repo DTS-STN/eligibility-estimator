@@ -141,9 +141,7 @@ export const PSDBox: React.VFC<{
   const psdAge = calculatePsdAge(age, selectedMonth, selectedYear)
 
   const populateDropdowns = () => {
-    console.log('inputObj.age', inputObj.age)
     const targetDate = getTargetDate(70, +inputObj.age)
-    console.log('targetDate', targetDate)
 
     const targetYear = targetDate.year
     const targetMonth = targetDate.month

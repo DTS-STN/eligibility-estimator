@@ -50,22 +50,9 @@ const ResultsPage: React.VFC<{
   summary,
   psdCalc,
 }) => {
-  console.log('futureClientResults', futureClientResults)
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject
-
-  // TODO: get eligible age (should probably come in already as a prop or part of the results object) Math.max(eligibleAge, userAge) -> ex. 65, 68 => 68. Check if less than 70.
-
-  // ex:
-  // Age/res   EliAge   Deferral Duration
-  // 65/10      65           5
-  // 68/10      68           2
-  // 63/7       66           4
-  // 49/20      65           5
-  // 68/30      65           2
-  // 69/11      68           1
-  // 66/2       74           N/A
 
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
@@ -168,7 +155,6 @@ const ResultsPage: React.VFC<{
     userObj = null
   }
   const userArr = userObj ? [userObj] : []
-  console.log('userArr', userArr)
 
   let partnerObj = {}
   // partnerObj['0'] = partnerResultObject
@@ -181,7 +167,6 @@ const ResultsPage: React.VFC<{
 
   const userArrNew = userArr.concat(futureClientResults)
   const partnerArrNew = partnerArr.concat(futurePartnerResults)
-  console.log('userArrNew', userArrNew)
 
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
@@ -220,8 +205,6 @@ const ResultsPage: React.VFC<{
     return obj ? Object.keys(obj) : []
   })
 
-  console.log('newestUser', newestUser)
-
   const partnerKeys = isPartnered
     ? newestPartner.flatMap((obj) => {
         // Check if the object is not null or undefined before extracting keys
@@ -231,8 +214,6 @@ const ResultsPage: React.VFC<{
 
   const arr1 = userKeys.length > partnerKeys.length ? userKeys : partnerKeys
   const arr2 = arr1 == partnerKeys ? userKeys : partnerKeys
-  console.log('arr1', arr1)
-  console.log('arr2', arr2)
 
   //get the headings to display user and partner results
   const headings = [...new Set([...arr1, ...arr2])]

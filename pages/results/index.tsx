@@ -220,9 +220,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         .filter((obj) => obj !== null)
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
-      console.log('clientResAges', clientResAges)
-      console.log('mergedClientRes', mergedClientRes)
-      console.log('mergedPartnerRes', mergedPartnerRes)
       const mappedPartnerRes = mergedPartnerRes
         .map((ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
@@ -270,9 +267,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           }
         })
         .filter((obj) => obj !== null)
-
-      console.log('mappedClientRes', mappedClientRes)
-      console.log('mappedPartnerRes', mappedPartnerRes)
 
       responseClone.futureClientResults = mappedClientRes
       responseClone.futurePartnerResults = mappedPartnerRes
