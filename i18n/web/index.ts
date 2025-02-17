@@ -36,6 +36,7 @@ export type WebTranslations = {
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
+  overviewDisclaimer: string
   whatBenefitsIncluded: string
   inflationInfo: string
   notIncludeCPP: string
