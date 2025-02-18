@@ -74,6 +74,7 @@ export type WebTranslations = {
   breadcrumb6URL: string
   breadcrumb7Title: string
   breadcrumb7URL: string
+  retirementUrl: string
   title: string
   introPageTitle: string
   questionPageTitle: string

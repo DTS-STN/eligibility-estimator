@@ -116,7 +116,7 @@ export const Layout: React.VFC<{
   }
 
   const handleOnClick = () => {
-    const link = `https://retraite-retirement.service.canada.ca/${router.locale}/home`
+    const link = tsln.retirementUrl
     router.push(link)
   }
 

@@ -194,6 +194,7 @@ const fr: WebTranslations = {
   breadcrumb6URL: '/fr',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/fr/questions',
+  retirementUrl: 'https://www.canada.ca/fr/services/retraite.html',
   //
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
