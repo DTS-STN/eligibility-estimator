@@ -262,7 +262,7 @@ export class FutureHandler {
       let partnerLockResidence
 
       futureAges.forEach((ageSet) => {
-        const [userAge, partnerAge] = ageSet // 68/64.3 (original input query is still 65/61.33)
+        const [userAge, partnerAge] = ageSet
 
         const newQuery = buildQuery(
           this.query,
