@@ -240,7 +240,7 @@ export class FutureHandler {
           false
         )
 
-        let clientEligibleBenefits = this.getEligibleBenefits(
+        const clientEligibleBenefits = this.getEligibleBenefits(
           handler.benefitResults.client
         )
 
@@ -254,11 +254,6 @@ export class FutureHandler {
         const partnerEligibleBenefits = clientEligibleBenefits
           ? this.getEligibleBenefits(handler.benefitResults.partner)
           : null
-
-        // If PartnerBenefit is null make ClientBenefit null as well (Task 311008)
-        if (!partnerEligibleBenefits) {
-          clientEligibleBenefits = null
-        }
 
         // Lock residence if this calculation produces an OAS/GIS result. We need to use the same number of years for subsequent OAS/GIS results if there are any
         if (clientEligibleBenefits) {
@@ -297,22 +292,17 @@ export class FutureHandler {
       // TEMPORARY: For any benefit that appears twice in future estimates, add text to indicate that these results may be different in the future since BenefitCards component will only show one occurence of each benefit.
       Object.keys(benefitCounter).forEach((benefit) => {
         if (benefitCounter[benefit] > 1) {
-          //
-          // Client Results could be empty when PartnerBenefits are null (Task 311008)
-          const val =
-            clientResults.length > 0 ? Object.values(clientResults[0])[0] : null
+          const val = Object.values(clientResults[0])[0]
 
-          if (val) {
-            if (val[benefit]?.cardDetail?.mainText !== undefined) {
-              const mainText = val[benefit].cardDetail.mainText
-              const textToAdd =
-                this.locale === 'en'
-                  ? `This may change in the future based on your situation.`
-                  : `Ceci pourrait changer dans l'avenir selon votre situation.`
+          if (val[benefit]?.cardDetail?.mainText !== undefined) {
+            const mainText = val[benefit].cardDetail.mainText
+            const textToAdd =
+              this.locale === 'en'
+                ? `This may change in the future based on your situation.`
+                : `Ceci pourrait changer dans l'avenir selon votre situation.`
 
-              val[benefit].cardDetail.mainText =
-                textToAdd + '</br></br>' + mainText
-            }
+            val[benefit].cardDetail.mainText =
+              textToAdd + '</br></br>' + mainText
           }
         }
       })
