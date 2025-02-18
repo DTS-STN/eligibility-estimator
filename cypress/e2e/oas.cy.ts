@@ -118,16 +118,23 @@ function runTextReplacements(handler, benefitResult, inputString) {
   }
 
   processedString = processedString.replace(/&nbsp;|\xA0/g, ' ')
-  processedString = processedString.replace(/<[^>]+>/g, '')
-  processedString = processedString.replace(/<\/?[^>]+>/g, '')
+  let previousString
+  do {
+    previousString = processedString
+    processedString = processedString.replace(/<[^>]+>/g, '')
+    processedString = processedString.replace(/<\/?[^>]+>/g, '')
+  } while (processedString !== previousString)
   return processedString
 }
 
 function removeHtmlContent(text) {
-  text = text.replace(/&nbsp;|\xA0/g, ' ')
-  text = text.replace(/<[^>]+>/g, '')
-  text = text.replace(/<\/?[^>]+>/g, '')
-
+  let previous
+  do {
+    previous = text
+    text = text.replace(/&nbsp;|\xA0/g, ' ')
+    text = text.replace(/<[^>]+>/g, '')
+    text = text.replace(/<\/?[^>]+>/g, '')
+  } while (text !== previous)
   return text
 }
 
