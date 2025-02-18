@@ -34,6 +34,7 @@ export class Form {
 
   update(inputs: InputHelper) {
     const data = new MainHandler(inputs.asObjectWithLanguage).results
+
     this.results = data
     this.localInputs = inputs
 
@@ -99,6 +100,9 @@ export class Form {
           'calculationResults',
           JSON.stringify(this.results)
         )
+
+        sessionStorage.setItem('originalResponse', JSON.stringify(this.results))
+
         sessionStorage.setItem(
           'resultPageInputs',
           JSON.stringify(this.localInputs)

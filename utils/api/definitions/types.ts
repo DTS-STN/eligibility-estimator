@@ -25,6 +25,9 @@ import { FieldConfig, FieldKey } from './fields'
  * What the API expects to receive. This is passed to Joi for validation.
  */
 export interface RequestInput {
+  psdAge?: number
+  clientEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
+  partnerEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   incomeAvailable?: boolean
   income: number // personal income
   incomeWork: number // personal income from work
@@ -60,6 +63,9 @@ export interface RequestInput {
  * After Joi validation and additional pre-processing, this is the object passed around to provide app logic.
  */
 export interface ProcessedInput {
+  psdAge?: number
+  clientEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
+  partnerEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   income: IncomeHelper
   age: number
   clientBirthDate: string
@@ -154,9 +160,9 @@ export interface BenefitResultsObjectWithPartner {
 
 export interface ResponseSuccess {
   results: BenefitResultsObject
-  futureClientResults: BenefitResultsObject
+  futureClientResults: BenefitResultsObject[] | null
   partnerResults: BenefitResultsObject
-  futurePartnerResults: BenefitResultsObject
+  futurePartnerResults: BenefitResultsObject[] | null
   summary: SummaryObject
   visibleFields: Array<FieldKey>
   missingFields: Array<FieldKey>

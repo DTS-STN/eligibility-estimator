@@ -201,6 +201,7 @@ export interface Translations {
     headingAge: string
     futureHeadingAge: string
     headingAmount: string
+    psdAnchor: string
   }
   modal: {
     userHeading: string

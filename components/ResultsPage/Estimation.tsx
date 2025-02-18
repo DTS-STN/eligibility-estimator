@@ -49,9 +49,6 @@ export const Estimation: React.VFC<{
     }
   }
 
-  const benefitObject: BenefitResultsObject =
-    resultObject[Object.keys(resultObject)[0]]
-
   const resultsArray: BenefitResult[] = Object.keys(
     resultObject[benefitAge]
   ).map((value) => resultObject[benefitAge][value])
@@ -126,12 +123,11 @@ export const Estimation: React.VFC<{
       ? apiTrans.detail.yourPartner
       : apiTrans.detail.you
 
-    const displayAge = Math.trunc(Number(age))
+    const displayAge = Math.trunc(Number(age)) // If this is the first occurence of the "same" age (68.08), leave truncated, but if it's subsequent (68.67) then add the months
     const firstOasGis = isFirstOasGis()
     const lastOasGis = isLastOasGis()
 
     const eligibleAmt = numberToStringCurrency(eligibleTotalAmount, language)
-
     const arrayOfBen = benefitResultArray
 
     //ALW & ALWS
@@ -346,6 +342,7 @@ export const Estimation: React.VFC<{
         }
       }
     }
+
     return text.charAt(0).toUpperCase() + text.slice(1)
   }
 

@@ -6,6 +6,7 @@ import {
   getAgeArray,
   OasEligibility,
   AlwsEligibility,
+  getEligibleBenefits,
 } from './helpers/utils'
 
 export class FutureHandler {
@@ -42,27 +43,49 @@ export class FutureHandler {
     const age = Number(this.query.age)
     // TODO: take into consideration whether in Canada or not? (could be 10 or 20)
     const residencyReq = 10
+    let futureAge
 
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
-    if (age >= 65 && yearsInCanada >= residencyReq) return result
+    // An exception to this is when being called from PSDBox component since pension start date is always in the future even if the client is currently eligible
+    if (age >= 65 && yearsInCanada >= residencyReq && !this.query.psdAge)
+      return result
 
-    const eliObj = OasEligibility(
-      age,
-      yearsInCanada,
-      this.query.livedOnlyInCanada === 'true',
-      String(this.query.livingCountry)
-    )
+    if (this.query.psdAge) {
+      futureAge = this.query.psdAge
+      const newResidence =
+        Number(this.query.psdAge) -
+        Number(this.query.age) +
+        Number(this.query.yearsInCanadaSince18)
+      this.newQuery['age'] = String(this.query.psdAge)
+      this.newQuery['receiveOAS'] = 'false'
 
-    this.newQuery['age'] = String(eliObj.ageOfEligibility)
-    this.newQuery['receiveOAS'] = 'false'
-
-    if (
-      this.query.livedOnlyInCanada === 'false' &&
-      this.query.yearsInCanadaSince18
-    ) {
-      this.newQuery['yearsInCanadaSince18'] = String(
-        Math.min(40, eliObj.yearsOfResAtEligibility)
+      if (
+        this.query.livedOnlyInCanada === 'false' &&
+        this.query.yearsInCanadaSince18
+      ) {
+        this.newQuery['yearsInCanadaSince18'] = String(newResidence)
+      }
+    } else {
+      const eliObj = OasEligibility(
+        age,
+        yearsInCanada,
+        this.query.livedOnlyInCanada === 'true',
+        String(this.query.livingCountry)
       )
+
+      futureAge = eliObj.ageOfEligibility
+
+      this.newQuery['age'] = String(eliObj.ageOfEligibility)
+      this.newQuery['receiveOAS'] = 'false'
+
+      if (
+        this.query.livedOnlyInCanada === 'false' &&
+        this.query.yearsInCanadaSince18
+      ) {
+        this.newQuery['yearsInCanadaSince18'] = String(
+          Math.min(40, eliObj.yearsOfResAtEligibility)
+        )
+      }
     }
 
     const { value } = schema.validate(this.newQuery, { abortEarly: false })
@@ -73,12 +96,10 @@ export class FutureHandler {
       +this.query.yearsInCanadaSince18
     )
 
-    const eligibleBenefits = this.getEligibleBenefits(
-      handler.benefitResults.client
-    )
+    const eligibleBenefits = getEligibleBenefits(handler.benefitResults.client)
 
     const clientResult = eligibleBenefits
-      ? [{ [eliObj.ageOfEligibility]: eligibleBenefits }]
+      ? [{ [futureAge]: eligibleBenefits }]
       : null
 
     result = {
@@ -94,9 +115,11 @@ export class FutureHandler {
     const age = Number(this.query.age)
     const yearsInCanada = Number(this.query.yearsInCanadaSince18)
     const residencyReq = 10
+    const psdAge = this.query.psdAge
 
     // No future benefits if 65 or over AND years in Canada already meets residency criteria
-    if (age >= 65 && yearsInCanada >= residencyReq) return result
+    if (age >= 65 && yearsInCanada >= residencyReq && !this.query.psdAge)
+      return result
 
     const eliObjOas = OasEligibility(
       age,
@@ -105,9 +128,9 @@ export class FutureHandler {
       String(this.query.livingCountry)
     )
 
-    const oasAge = eliObjOas.ageOfEligibility
+    const oasAge = psdAge ? psdAge : eliObjOas.ageOfEligibility
 
-    const eliObjAlws = AlwsEligibility(Math.floor(age), yearsInCanada)
+    const eliObjAlws = AlwsEligibility(age, yearsInCanada)
     const alwsAge = eliObjAlws.ageOfEligibility
 
     const futureAges = [alwsAge, oasAge].filter((age) => !!age)
@@ -125,14 +148,19 @@ export class FutureHandler {
                 this.query.livedOnlyInCanada === 'false' &&
                 this.query.yearsInCanadaSince18
               ) {
-                this.newQuery['yearsInCanadaSince18'] = String(
-                  Math.min(40, eliObjOas.yearsOfResAtEligibility)
-                )
+                this.newQuery['yearsInCanadaSince18'] = psdAge
+                  ? String(
+                      Number(this.query.psdAge) -
+                        Number(this.query.age) +
+                        Number(this.query.yearsInCanadaSince18)
+                    )
+                  : String(Math.min(40, eliObjOas.yearsOfResAtEligibility))
               }
 
               const { value } = schema.validate(this.newQuery, {
                 abortEarly: false,
               })
+
               const handler = new BenefitHandler(
                 value,
                 true,
@@ -140,7 +168,7 @@ export class FutureHandler {
                 +this.query.yearsInCanadaSince18
               )
 
-              const eligibleBenefits = this.getEligibleBenefits(
+              const eligibleBenefits = getEligibleBenefits(
                 handler.benefitResults.client
               )
 
@@ -156,14 +184,23 @@ export class FutureHandler {
   }
 
   private getPartneredResults() {
-    const age = Number(this.query.age)
-    const partnerAge = Number(this.query.partnerAge)
+    // input that comes in is
+    // age: 65
+    // res: 25
+    // partnerAge: 61.33
+    // partherRes: FULL
+    // typically age sets will return [68.67, 65]. When the 68.67 OAS is calculated, the inputs are:
+
+    const age = Number(this.query.age) //56
+    const partnerAge = Number(this.query.partnerAge) //66
+
     const clientRes =
       Number(this.query.yearsInCanadaSince18) ||
       Number(this.query.yearsInCanadaSinceOAS)
     const partnerRes =
       Number(this.query.partnerYearsInCanadaSince18) ||
       Number(this.query.partnerYearsInCanadaSinceOAS)
+
     const partnerOnlyCanada = this.query.partnerLivedOnlyInCanada
 
     const clientDeferralMeta =
@@ -210,6 +247,11 @@ export class FutureHandler {
 
     const futureAges = getAgeArray(agesInputObj)
 
+    const psdAge = Number(this.query.psdAge)
+    // const psdClientAge = psdAge
+    // const yrsDiff = psdClientAge - age
+    // const psdPartnerAge = partnerAge + yrsDiff
+
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
       const clientResults = []
@@ -218,8 +260,10 @@ export class FutureHandler {
 
       let clientLockResidence
       let partnerLockResidence
+
       futureAges.forEach((ageSet) => {
         const [userAge, partnerAge] = ageSet
+
         const newQuery = buildQuery(
           this.query,
           ageSet,
@@ -230,17 +274,23 @@ export class FutureHandler {
           clientLockResidence,
           partnerLockResidence
         )
-        const { value } = schema.validate(newQuery, { abortEarly: false })
 
+        const { value } = schema.validate(newQuery, { abortEarly: false })
         const handler = new BenefitHandler(
           value,
           true,
           +this.query.age,
           +this.query.yearsInCanadaSince18,
-          false
+          false // this.compare boolean set to false means that we disregard the comparison between 'non-deferred' and 'deferred'. The non-deferred results are saved
         )
 
-        const clientEligibleBenefits = this.getEligibleBenefits(
+        // if (psdAge) {
+        //   const yrsDiff = psdAge - age
+        //   newQuery['yearsInCanadaSince18'] =
+        //     +this.query.yearsInCanadaSince18 + yrsDiff
+        // }
+
+        const clientEligibleBenefits = getEligibleBenefits(
           handler.benefitResults.client
         )
 
@@ -250,7 +300,7 @@ export class FutureHandler {
           })
         }
 
-        const partnerEligibleBenefits = this.getEligibleBenefits(
+        const partnerEligibleBenefits = getEligibleBenefits(
           handler.benefitResults.partner
         )
 
@@ -263,7 +313,9 @@ export class FutureHandler {
               ResultKey.INCOME_DEPENDENT
 
           if (oasEligible) {
-            clientLockResidence = newQuery['yearsInCanadaSince18']
+            clientLockResidence = psdAge
+              ? this.query['yearsInCanadaSince18']
+              : newQuery['yearsInCanadaSince18']
           }
         }
 
@@ -275,7 +327,9 @@ export class FutureHandler {
               ResultKey.INCOME_DEPENDENT
 
           if (oasEligible) {
-            partnerLockResidence = newQuery['partnerYearsInCanadaSince18']
+            partnerLockResidence = psdAge
+              ? this.query['partnerYearsInCanadaSince18']
+              : newQuery['partnerYearsInCanadaSince18']
           }
         }
 
@@ -311,17 +365,6 @@ export class FutureHandler {
         partner: partnerResults.length !== 0 ? partnerResults : null,
       }
     }
-
     return result
-  }
-
-  private getEligibleBenefits(benefits) {
-    const newObj = {}
-    for (const key in benefits) {
-      if (benefits[key].eligibility?.result === 'eligible') {
-        newObj[key] = benefits[key]
-      }
-    }
-    return Object.keys(newObj).length === 0 ? null : newObj
   }
 }

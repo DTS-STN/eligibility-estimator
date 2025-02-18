@@ -41,6 +41,9 @@ const fr: Translations = {
     [ResultKey.ALMOST_ELIGIBLE]: 'Presque admissible',
   },
   question: {
+    [FieldKey.PSD_AGE]: 'When do you want to start receiving your pension?',
+    [FieldKey.ELI_OBJ]: 'N/A',
+    [FieldKey.PARTNER_ELI_OBJ]: 'N/A',
     [FieldKey.INCOME_AVAILABLE]:
       'Êtes-vous en mesure de nous fournir votre revenu net annuel?',
     [FieldKey.INCOME]:
@@ -664,6 +667,7 @@ const fr: Translations = {
     headingAge: "Si vous attendez d'avoir...",
     futureHeadingAge: 'Si vous commencez votre pension à...',
     headingAmount: 'Vous pourriez recevoir chaque mois...',
+    psdAnchor: 'Changez votre date de début de pension',
   },
   modal: {
     userHeading: 'Est-ce que vous pouvez recevoir cette prestation?',

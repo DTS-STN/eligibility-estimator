@@ -386,6 +386,10 @@ const fr: WebTranslations = {
     toReceive: 'vous pourriez être admissible à recevoir :',
     partnerToReceive: 'votre conjoint pourrait être admissible à recevoir :',
     theyToReceive: 'il pourrait être admissible à recevoir :',
+    psdTitle: 'Changez votre date de début de pension',
+    psdDescription:
+      'Vous pouvez attendre jusqu’à l’âge de 70&nbsp;ans. Pour chaque mois de report, votre pension augmente de 0,6&nbsp;%.',
+    psdUpdateBtn: 'Mettre à jour l’estimation',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,
