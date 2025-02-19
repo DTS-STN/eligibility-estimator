@@ -155,9 +155,11 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
     if ('results' in psdResults) {
-      const clientPsd = { [psdAge]: getEligibleBenefits(psdResults.results) }
+      const clientPsd = {
+        [psdAge]: getEligibleBenefits(psdResults.results) || {},
+      }
       const partnerPsd = {
-        [psdPartnerAge]: getEligibleBenefits(psdResults.partnerResults),
+        [psdPartnerAge]: getEligibleBenefits(psdResults.partnerResults) || {},
       }
 
       const partialFutureClientResults = psdResults.futureClientResults
