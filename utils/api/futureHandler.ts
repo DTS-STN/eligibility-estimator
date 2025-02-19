@@ -39,7 +39,10 @@ export class FutureHandler {
 
   private getSingleResults() {
     let result = this.futureResultsObj
-    const yearsInCanada = Number(this.query.yearsInCanadaSince18)
+    const livedOnlyInCanada = this.query.livedOnlyInCanada === 'true'
+    const yearsInCanada = livedOnlyInCanada
+      ? 40
+      : Number(this.query.yearsInCanadaSince18)
     const age = Number(this.query.age)
     // TODO: take into consideration whether in Canada or not? (could be 10 or 20)
     const residencyReq = 10
@@ -69,7 +72,7 @@ export class FutureHandler {
       const eliObj = OasEligibility(
         age,
         yearsInCanada,
-        this.query.livedOnlyInCanada === 'true',
+        livedOnlyInCanada,
         String(this.query.livingCountry)
       )
 
@@ -113,7 +116,10 @@ export class FutureHandler {
   private getWidowedResults() {
     let result = this.futureResultsObj
     const age = Number(this.query.age)
-    const yearsInCanada = Number(this.query.yearsInCanadaSince18)
+    const livedOnlyInCanada = this.query.livedOnlyInCanada === 'true'
+    const yearsInCanada = livedOnlyInCanada
+      ? 40
+      : Number(this.query.yearsInCanadaSince18)
     const residencyReq = 10
     const psdAge = this.query.psdAge
 
@@ -124,7 +130,7 @@ export class FutureHandler {
     const eliObjOas = OasEligibility(
       age,
       yearsInCanada,
-      this.query.livedOnlyInCanada === 'true',
+      livedOnlyInCanada,
       String(this.query.livingCountry)
     )
 
