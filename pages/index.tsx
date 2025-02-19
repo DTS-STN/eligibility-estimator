@@ -97,6 +97,10 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           </ul>
 
           <p className="mt-8 sm:mt-8">{tsln.estimatorTimeEstimate}</p>
+          <p
+            className="mt-8 sm:mt-8"
+            dangerouslySetInnerHTML={{ __html: tsln.overviewDisclaimer }}
+          />
 
           <div className="flex justify-start mt-8 sm:mt-12">
             <Button
