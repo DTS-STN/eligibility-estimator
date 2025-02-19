@@ -323,7 +323,13 @@ export class BenefitHandler {
         this.input.client.receiveOAS
       )
 
-      clientOasWithDeferral.cardDetail = clientOasNoDeferral.cardDetail
+      clientOasWithDeferral.cardDetail = {
+        ...clientOasNoDeferral.cardDetail,
+        meta: {
+          ...clientOasNoDeferral.cardDetail.meta,
+          residency: clientOasWithDeferral.cardDetail.meta.residency,
+        },
+      }
 
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)
       consoleDev(
