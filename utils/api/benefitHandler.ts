@@ -323,6 +323,8 @@ export class BenefitHandler {
         this.input.client.receiveOAS
       )
 
+      clientOasWithDeferral.cardDetail = clientOasNoDeferral.cardDetail
+
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)
       consoleDev(
         'Client OAS amount WITH deferral',
