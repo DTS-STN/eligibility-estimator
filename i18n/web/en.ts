@@ -190,6 +190,7 @@ const en: WebTranslations = {
   breadcrumb6URL: '/en',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/en/questions',
+  retirementUrl: 'https://www.canada.ca/en/services/retirement.html',
   //
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
