@@ -574,7 +574,7 @@ const en: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Your partner may be eligible',
-      text: 'You can <a class="link-no-deco" href="/en/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
+      text: 'You can <a class="link-no-deco" href="/en/questions?step=age" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
     recoveryTax: {
       heading: 'Recovery tax will be applied to your pension',
