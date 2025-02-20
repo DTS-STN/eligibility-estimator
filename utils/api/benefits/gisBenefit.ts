@@ -312,12 +312,12 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
             ageToCheck < 70 &&
             this.input.age < 70
           ) {
-            if (ageToCheck >= 65 && ageToCheck < 70) {
+            if (this.input.age >= 65 && this.input.age < 70) {
               //CHECK IF RECEIVING OAS
               text += this.translations.detail.deferralEligible
 
               text += `<p class="sm:hidden underline text-default-text mt-2"><a href="#psdBox">${this.translations.oasDeferralTable.psdAnchor}</a></p>`
-            } else if (ageToCheck < 65) {
+            } else if (this.input.age < 65) {
               text += this.translations.detail.deferralWillBeEligible
             }
             if (text !== '') {
