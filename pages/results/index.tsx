@@ -87,31 +87,44 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     })
 
     let psdResults: ResponseSuccess | ResponseError = psdHandler.results
+
     if ('results' in psdResults) {
       const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
-      const deferralTable = responseClone.futureClientResults
-        ? (Object.values(responseClone.futureClientResults[0]) as any)[0].oas
-            .cardDetail.meta.tableData
-        : responseClone.results.oas.cardDetail.meta.tableData
+      const getDeferralTable = () => {
+        if (Array.isArray(responseClone.futureClientResults)) {
+          const oasEntry = responseClone.futureClientResults
+            .flatMap((item) => Object.values(item))
+            .find((entry: any) => entry?.oas)
+          return oasEntry?.oas?.cardDetail?.meta?.tableData ?? []
+        }
 
-      const filteredDeferralTable = deferralTable.filter((row) => {
+        return responseClone.results?.oas?.cardDetail?.meta?.tableData ?? []
+      }
+
+      const filteredDeferralTable = getDeferralTable().filter((row) => {
         return row.age > psdAge
       })
 
-      // Check if the `tableData` field exists before updating
+      // Check if the `tableData` field exists on present results before updating
       if (psdResults.results.oas.cardDetail.meta?.tableData) {
         psdResults.results.oas.cardDetail.meta.tableData = filteredDeferralTable
       }
 
       // If updating a future result (e.g., age 69)
-      if (
-        psdResults.futureClientResults?.[0]?.[psdAge]?.oas?.cardDetail?.meta
-          ?.tableData
-      ) {
-        psdResults.futureClientResults[0][
-          psdAge
-        ].oas.cardDetail.meta.tableData = filteredDeferralTable
+      const futureResultWithOAS = psdResults.futureClientResults?.find(
+        (entry) => Object.values(entry).some((benefit: any) => benefit?.oas)
+      )
+
+      if (futureResultWithOAS) {
+        const ageKey = Object.keys(futureResultWithOAS).find(
+          (key) => futureResultWithOAS[key]?.oas
+        )
+
+        if (ageKey) {
+          futureResultWithOAS[ageKey].oas.cardDetail.meta.tableData =
+            filteredDeferralTable
+        }
       }
 
       psdResults.results.oas.eligibility.result = ResultKey.INELIGIBLE
