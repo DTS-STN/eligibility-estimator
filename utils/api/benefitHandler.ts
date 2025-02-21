@@ -206,7 +206,7 @@ export class BenefitHandler {
         age: psdAge,
         yearsInCanadaSince18: Math.min(psdRes, 40),
         oasDeferDuration: JSON.stringify({
-          months: psdDef,
+          months: Math.min(psdDef, 60),
           years: 0,
         }),
       }
@@ -304,8 +304,12 @@ export class BenefitHandler {
         receiveOAS: true,
         yearsInCanadaSince18: clientEliObj.yearsOfResAtEligibility,
         oasDeferDuration: JSON.stringify({
-          months: Math.round(
-            (Number(this.rawInput.psdAge) - clientEliObj.ageOfEligibility) * 12
+          months: Math.min(
+            Math.round(
+              (Number(this.rawInput.psdAge) - clientEliObj.ageOfEligibility) *
+                12
+            ),
+            60
           ),
           years: 0,
         }),
