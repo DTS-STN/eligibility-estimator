@@ -86,8 +86,34 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       psdAge,
     })
 
-    const psdResults: ResponseSuccess | ResponseError = psdHandler.results
+    let psdResults: ResponseSuccess | ResponseError = psdHandler.results
     if ('results' in psdResults) {
+      const responseClone = JSON.parse(JSON.stringify(originalResponse))
+
+      const deferralTable = responseClone.futureClientResults
+        ? (Object.values(responseClone.futureClientResults[0]) as any)[0].oas
+            .cardDetail.meta.tableData
+        : responseClone.results.oas.cardDetail.meta.tableData
+
+      const filteredDeferralTable = deferralTable.filter((row) => {
+        return row.age > psdAge
+      })
+
+      // Check if the `tableData` field exists before updating
+      if (psdResults.results.oas.cardDetail.meta?.tableData) {
+        psdResults.results.oas.cardDetail.meta.tableData = filteredDeferralTable
+      }
+
+      // If updating a future result (e.g., age 69)
+      if (
+        psdResults.futureClientResults?.[0]?.[psdAge]?.oas?.cardDetail?.meta
+          ?.tableData
+      ) {
+        psdResults.futureClientResults[0][
+          psdAge
+        ].oas.cardDetail.meta.tableData = filteredDeferralTable
+      }
+
       psdResults.results.oas.eligibility.result = ResultKey.INELIGIBLE
       psdResults.results.gis.eligibility.result = ResultKey.INELIGIBLE
     }
