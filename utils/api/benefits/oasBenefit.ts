@@ -343,10 +343,6 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
-    const yearsInCanada = this.input.livedOnlyInCanada
-      ? 40
-      : Number(this.input.yearsInCanadaSince18)
-
     if (this.future) {
       return OasBenefit.buildMetadataObj(
         this.input.age,
