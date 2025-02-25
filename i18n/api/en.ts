@@ -39,6 +39,9 @@ const en: Translations = {
     [ResultKey.ALMOST_ELIGIBLE]: 'Almost eligible',
   },
   question: {
+    [FieldKey.PSD_AGE]: 'When do you want to start receiving your pension?',
+    [FieldKey.ELI_OBJ]: 'N/A',
+    [FieldKey.PARTNER_ELI_OBJ]: 'N/A',
     [FieldKey.INCOME_AVAILABLE]:
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:
@@ -571,7 +574,7 @@ const en: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Your partner may be eligible',
-      text: 'You can <a class="link-no-deco" href="/en/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
+      text: 'You can <a class="link-no-deco" href="/en/questions?step=age" class="text-default-text" style="text-decoration: underline">edit your answers</a> to see what you and your partner could get if they received the Old Age Security pension.',
     },
     recoveryTax: {
       heading: 'Recovery tax will be applied to your pension',
@@ -646,6 +649,7 @@ const en: Translations = {
     headingAge: 'If you wait until age...',
     futureHeadingAge: 'If you start receiving at age...',
     headingAmount: 'Your monthly payment could be...',
+    psdAnchor: 'Change your pension start date',
   },
   modal: {
     userHeading: 'Can you receive this benefit?',

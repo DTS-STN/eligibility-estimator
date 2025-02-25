@@ -30,6 +30,7 @@ export const BenefitCards: React.VFC<{
   partnerResults: BenefitResult[]
   liveInCanada?: boolean
   formYears?: any
+  psdCalc: boolean
 }> = ({
   inputAge,
   results,
@@ -37,6 +38,7 @@ export const BenefitCards: React.VFC<{
   partnerResults,
   liveInCanada,
   formYears,
+  psdCalc,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTsln = getTranslations(tsln._language)
@@ -226,6 +228,7 @@ export const BenefitCards: React.VFC<{
           benefitName={titleText}
           isEligible={eligibility}
           future={future}
+          psdCalc={psdCalc}
           liveInCanada={
             result.eligibility.reason === ResultReason.LIVING_COUNTRY ||
             result.eligibility.reason === ResultReason.PARTNER

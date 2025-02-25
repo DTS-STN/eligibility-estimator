@@ -194,6 +194,7 @@ const fr: WebTranslations = {
   breadcrumb6URL: '/fr',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/fr/questions',
+  retirementUrl: 'https://www.canada.ca/fr/services/retraite.html',
   //
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
@@ -237,6 +238,8 @@ const fr: WebTranslations = {
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
     'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
+  overviewDisclaimer:
+    '<strong>Cet outil ne donne qu’une estimation</strong>. Il ne garantit pas que vous serez admissible ou que vous recevrez le montant estimé.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   inflationInfo: `Cet estimateur utilise les taux des prestations de janvier à mars&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
@@ -327,7 +330,7 @@ const fr: WebTranslations = {
     ifYouChoseToDefer:
       'Si vous choisissez de reporter votre pension, votre estimation future sera plus élevée.',
     header: "Tableau des résultats d'estimation",
-    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie. <p class="mt-4">Vous devez être citoyen ou résident autorisé du Canada pour recevoir ces prestations.</p>`,
+    general: `Ces résultats ne sont qu'une estimation de vos paiements mensuels. Les montants utilisent les <strong>taux actuels</strong>. Ceux-ci augmenteront avec le coût de la vie. <p class="mt-4">Vous devez être citoyen ou résident autorisé du Canada pour recevoir ces prestations.</p>`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
@@ -386,6 +389,10 @@ const fr: WebTranslations = {
     toReceive: 'vous pourriez être admissible à recevoir :',
     partnerToReceive: 'votre conjoint pourrait être admissible à recevoir :',
     theyToReceive: 'il pourrait être admissible à recevoir :',
+    psdTitle: 'Changez votre date de début de pension',
+    psdDescription:
+      'Vous pouvez attendre jusqu’à l’âge de 70&nbsp;ans. Pour chaque mois de report, votre pension augmente de 0,6&nbsp;%.',
+    psdUpdateBtn: 'Mettre à jour l’estimation',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,

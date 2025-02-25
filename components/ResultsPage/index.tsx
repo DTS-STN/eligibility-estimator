@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
-import { FieldInput } from '../../client-state/InputHelper'
+import { useRef, useState } from 'react'
+import { FieldInput, InputHelper } from '../../client-state/InputHelper'
+import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
   LivingCountry,
@@ -14,13 +15,14 @@ import {
   BenefitResultsObject,
   SummaryObject,
 } from '../../utils/api/definitions/types'
+import { getTargetDate } from '../../utils/api/helpers/utils'
 import { Button } from '../Forms/Button'
 import { useTranslation } from '../Hooks'
 import { BenefitCards } from './BenefitCards'
-import { YourAnswers } from './YourAnswers'
-import { Translations, getTranslations } from '../../i18n/api'
-import { SummaryEstimates } from './SummaryEstimates'
 import { Intro } from './Intro'
+import { PSDBox } from './PSDBox'
+import { SummaryEstimates } from './SummaryEstimates'
+import { YourAnswers } from './YourAnswers'
 
 const getEligibility = (
   resultsEligible: BenefitResult[],
@@ -30,24 +32,32 @@ const getEligibility = (
 }
 
 const ResultsPage: React.VFC<{
-  inputs: FieldInput[]
+  inputHelper: InputHelper
   results: BenefitResultsObject
   futureClientResults: any
   partnerResults: BenefitResultsObject
   futurePartnerResults: any
+  handleUpdateEstimate: (psdAge: number, maxEliAge: number) => void
   summary: SummaryObject
+  psdCalc: boolean
 }> = ({
-  inputs,
+  inputHelper,
   results,
   futureClientResults,
   partnerResults,
   futurePartnerResults,
+  handleUpdateEstimate,
   summary,
+  psdCalc,
 }) => {
   const ref = useRef<HTMLDivElement>()
+  const inputs: FieldInput[] = inputHelper.asArray
+  const inputObj = inputHelper.asObject
+
   const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   const apiTsln = getTranslations(tsln._language)
+  const [isUpdating, setIsUpdating] = useState(false)
 
   const isPartnered =
     inputs.find((input) => input.key === FieldKey.MARITAL_STATUS)['value'] ===
@@ -158,12 +168,11 @@ const ResultsPage: React.VFC<{
   const userArrNew = userArr.concat(futureClientResults)
   const partnerArrNew = partnerArr.concat(futurePartnerResults)
 
-  const currentYear = new Date().getFullYear()
-
   const newestUser = userArrNew.map((item, index) => {
     if (item) {
       const age = Number(Object.keys(item)[0])
-      const headingYear = Math.trunc(currentYear + (age - Number(userAge)))
+      const headingYear = getTargetDate(age, Number(userAge)).year
+
       let key
       if (age == 0) {
         key = apiTsln.detail.currentEligible
@@ -178,9 +187,8 @@ const ResultsPage: React.VFC<{
     ? partnerArrNew.map((item, index) => {
         if (item) {
           const age = Number(Object.keys(item)[0])
-          const headingYear = Math.trunc(
-            currentYear + (age - Number(partnerAge))
-          )
+          const headingYear = getTargetDate(age, Number(partnerAge)).year
+
           let key
           if (age == 0) {
             key = apiTsln.detail.currentEligible
@@ -216,6 +224,15 @@ const ResultsPage: React.VFC<{
       .filter((item) => item !== null)
       .filter((obj) => !!obj[Object.keys(obj)[0]]['oas']).length > 1
 
+  const handleUpdate = async (psdAge, maxEliAge) => {
+    setIsUpdating(true)
+    await new Promise((resolve) => setTimeout(resolve, 600))
+
+    handleUpdateEstimate(psdAge, maxEliAge)
+
+    setIsUpdating(false)
+  }
+
   return (
     <div className="flex flex-col space-y-12" ref={ref}>
       <div className="md:grid md:grid-cols-3 md:gap-12">
@@ -231,7 +248,11 @@ const ResultsPage: React.VFC<{
             alreadyReceiving={alreadyReceiving === 'true'}
           />
           {/* Summary Estimates section */}
-          <div className="border-[#269ABC] bg-[#EEFAFF] p-8">
+          <div
+            className={`border-[#269ABC] bg-[#EEFAFF] p-8 ${
+              isUpdating ? 'opacity-20' : ''
+            }`}
+          >
             {headings && (
               <SummaryEstimates
                 headings={headings}
@@ -247,22 +268,30 @@ const ResultsPage: React.VFC<{
           </div>
         </div>
 
-        <div className="col-span-1 row-span-2">
+        <div className="col-span-1 row-span-2 space-y-4">
+          <PSDBox
+            onUpdate={handleUpdate}
+            inputObj={inputObj}
+            isUpdating={isUpdating}
+          />
           <YourAnswers title={tsln.resultsPage.whatYouToldUs} inputs={inputs} />
         </div>
         <div className="col-span-2 row-span-1">
-          <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
-          <BenefitCards
-            inputAge={Number(userAge)}
-            results={resultsArray}
-            futureClientResults={futureClientResults}
-            partnerResults={partnerResultsArray}
-            liveInCanada={
-              inputs.find((input) => input.key === 'livingCountry').value ===
-              LivingCountry.CANADA
-            }
-            formYears={yearsinCan}
-          />
+          <div className={isUpdating ? 'opacity-20' : ''}>
+            <h2 className="h2"> {apiTsln.nextStepTitle}</h2>
+            <BenefitCards
+              inputAge={Number(userAge)}
+              results={resultsArray}
+              futureClientResults={futureClientResults}
+              partnerResults={partnerResultsArray}
+              liveInCanada={
+                inputs.find((input) => input.key === 'livingCountry').value ===
+                LivingCountry.CANADA
+              }
+              formYears={yearsinCan}
+              psdCalc={psdCalc}
+            />
+          </div>
 
           <Button
             text={tsln.modifyAnswers}

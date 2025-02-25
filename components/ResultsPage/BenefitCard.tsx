@@ -14,6 +14,7 @@ export const BenefitCard: React.VFC<{
   benefitName: string
   isEligible: boolean
   future: boolean
+  psdCalc: boolean
   liveInCanada: boolean
   eligibleText: string
   collapsedDetails: any
@@ -31,6 +32,7 @@ export const BenefitCard: React.VFC<{
   benefitName,
   isEligible,
   future,
+  psdCalc,
   liveInCanada,
   eligibleText,
   collapsedDetails,
@@ -45,7 +47,7 @@ export const BenefitCard: React.VFC<{
       className={` px-2 py-1 ml-2 h-7 flex items-center justify-center border-left border-l-4 font-semibold text-[15px] ${
         benefitKey !== BenefitKey.oas && liveInCanada
           ? 'border-[#6e6e6e] bg-[#EAEBED] '
-          : isEligible || future
+          : isEligible || (future && !psdCalc)
           ? ' border-success bg-[#D8EECA] '
           : ' border-[#EE7100] bg-[#F9F4D4] '
       }`}
