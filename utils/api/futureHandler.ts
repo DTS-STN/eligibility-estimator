@@ -260,6 +260,8 @@ export class FutureHandler {
     const futureAges = getAgeArray(agesInputObj)
     const psdAge = Number(this.query.psdAge)
 
+    console.log('futureAges', futureAges)
+
     let result = this.futureResultsObj
     if (futureAges.length !== 0) {
       const clientResults = []
@@ -272,6 +274,7 @@ export class FutureHandler {
       futureAges.forEach((ageSet) => {
         const [userAge, partnerAge] = ageSet
 
+        console.log('ageSet', ageSet)
         const newQuery = buildQuery(
           this.query,
           ageSet,
