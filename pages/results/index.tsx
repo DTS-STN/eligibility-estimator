@@ -247,11 +247,13 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         return Number(ageA) - Number(ageB)
       })
 
+      let clientHasAlw = false
       const mappedClientRes = mergedClientRes
         .map((ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
           if (currAge < psdAge) {
             const hasAlw = Object.values(ageRes)[0].hasOwnProperty('alw')
+            clientHasAlw = hasAlw
             return hasAlw ? ageRes : null
           }
 
@@ -266,13 +268,15 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         .map((ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
           const equivClientAge = String(currAge + partnersAgeDiff)
-          const tableChangeCase =
+
+          const recalcCase =
             partnerAge > clientAge &&
             currAge > partnerEliObj.ageOfEligibility &&
-            !invSep
+            !invSep &&
+            clientHasAlw
 
           if (!clientResAges.includes(equivClientAge)) {
-            if (currAge === partnerEliObj.ageOfEligibility || tableChangeCase) {
+            if (currAge === partnerEliObj.ageOfEligibility || recalcCase) {
               // This means that the partner became independently eligible for OAS before the client's pension start date,
               // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
 
