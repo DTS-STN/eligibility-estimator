@@ -121,7 +121,6 @@ export class EntitlementFormula {
       const superGIS =
         this.age >= 75 || this.inputAge >= 75 ? oasCoverageAmount * 0.1 : 0
 
-      console.log('superGIS', superGIS)
       // Always return 0 when result is negative
       return preOasAmount + oasCoverageAmount > 0
         ? roundToTwo(preOasAmount + oasCoverageAmount + superGIS)

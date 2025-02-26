@@ -479,7 +479,6 @@ export class BenefitHandler {
         clientOas,
         true
       )
-
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =
@@ -606,7 +605,6 @@ export class BenefitHandler {
       allResults.partner.oas,
       true
     )
-
     this.setValueForAllResults(allResults, 'partner', 'gis', partnerGis)
 
     this.input.client.partnerBenefitStatus =

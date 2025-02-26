@@ -305,7 +305,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
               )
 
               return { [currAge]: newPartnerResults }
-              // if partner is older and this is not inv. sep. case and current age > eli age for partner
             } else {
               return null
             }
