@@ -138,6 +138,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdPartneredHandleAndSet = (psdAge) => {
     const clientAge = Number(inputHelper.asObjectWithLanguage.age)
     const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+    const invSep = inputHelper.asObjectWithLanguage.invSeparated === 'true'
     const clientRes = Number(
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
         Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
@@ -265,9 +266,13 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         .map((ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
           const equivClientAge = String(currAge + partnersAgeDiff)
+          const tableChangeCase =
+            partnerAge > clientAge &&
+            currAge > partnerEliObj.ageOfEligibility &&
+            !invSep
 
           if (!clientResAges.includes(equivClientAge)) {
-            if (currAge === partnerEliObj.ageOfEligibility) {
+            if (currAge === partnerEliObj.ageOfEligibility || tableChangeCase) {
               // This means that the partner became independently eligible for OAS before the client's pension start date,
               // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
 
