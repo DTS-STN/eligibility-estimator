@@ -1,9 +1,4 @@
-import { faClipboardQuestion } from '@fortawesome/free-solid-svg-icons'
-import {
-  EntitlementResultType,
-  MaritalStatus,
-  PartnerBenefitStatus,
-} from '../definitions/enums'
+import { EntitlementResultType, MaritalStatus } from '../definitions/enums'
 import { BenefitResult, EntitlementResultOas } from '../definitions/types'
 import {
   MaritalStatusHelper,
