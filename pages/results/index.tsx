@@ -194,8 +194,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     })
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
-    console.log('psdResults', psdResults)
-
     if ('results' in psdResults) {
       const clientPsd = {
         [psdAge]: getEligibleBenefits(psdResults.results) || {},
@@ -240,8 +238,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         return Number(ageA) - Number(ageB)
       })
 
-      console.log('mergedClientRes', mergedClientRes)
-
       const mergedPartnerRes = mergeUniqueObjects(
         partialFuturePartnerResults,
         responseClone?.futurePartnerResults
@@ -250,8 +246,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         const ageB = Object.keys(b)[0]
         return Number(ageA) - Number(ageB)
       })
-
-      console.log('mergedPartnerRes', mergedPartnerRes)
 
       const mappedClientRes = mergedClientRes
         .map((ageRes) => {
@@ -267,7 +261,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         })
         .filter((obj) => obj !== null)
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
-      console.log('clientResAges', clientResAges)
 
       const mappedPartnerRes = mergedPartnerRes
         .map((ageRes) => {
@@ -278,15 +271,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
             currAge > partnerEliObj.ageOfEligibility &&
             !invSep
 
-          console.log('currAge', currAge)
-          console.log('equivClientAge', equivClientAge)
-          console.log('ageRes', ageRes)
-
           if (!clientResAges.includes(equivClientAge)) {
-            console.log(
-              'partnerEliObj.ageOfEligibility',
-              partnerEliObj.ageOfEligibility
-            )
             if (currAge === partnerEliObj.ageOfEligibility || tableChangeCase) {
               // This means that the partner became independently eligible for OAS before the client's pension start date,
               // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
