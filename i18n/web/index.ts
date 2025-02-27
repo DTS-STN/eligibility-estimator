@@ -125,10 +125,14 @@ export type WebTranslations = {
   incomeHintTitleReceiveOAS: string
   incomeHintText: string
   incomeHintTextReceiveOAS: string
+  incomeHelpText: string
+  incomeHelpTextReceiveOAS: string
   partnerIncomeHintTitleReceiveOAS: string
   partnerIncomeHintTitle: string
   partnerIncomeHintText: string
   partnerIncomeHintTextReceiveOAS: string
+  partnerIncomeHelpText: string
+  partnerIncomeHelpTextReceiveOAS: string
 
   //Main footer links
   aboutGovernment: string

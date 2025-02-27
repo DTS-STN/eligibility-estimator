@@ -167,15 +167,15 @@ const fr: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Fournir votre revenu vous donnera des résultats plus précis.',
     [FieldKey.INCOME]:
-      "<p class='text-multi-neutrals-grey90a'>Incluez tous les types de revenus après déductions, y compris :</p> <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> <p class='mt-4 text-multi-neutrals-grey90a'>N'incluez pas les paiements :</p> <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "<p>Votre déclaration de revenus sera utilisée lors de votre demande. Pour l'instant, estimez ce que vous pourriez recevoir par année.</p>", //overwritten in Stepper/index
     [FieldKey.INCOME_WORK]:
-      "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel net.",
+      "<p>Incluez tout salaire net provenant d'un emploi ou de travail indépendant que vous avez inclus dans votre revenu annuel. N'incluez pas le revenu de pension.</p>",
     [FieldKey.INV_SEPARATED]:
       "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
-      "<p class='text-multi-neutrals-grey90a'>Incluez tous les types de revenus après déductions, y compris :</p> <ul><li>les pensions (y compris le <dfn><abbr title='Régime de pensions du Canada'>RPC</abbr></dfn> et le <dfn><abbr title='Régime de rentes du Québec'>RRQ</abbr></dfn>);</li><li>les prestations;</li><li>les salaires;</li><li>les retraits d'un fonds de retraite (y compris d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>).</li></ul> <p class='mt-4 text-multi-neutrals-grey90a'>N'incluez pas les paiements :</p> <ul><li>de la pension de la Sécurité de la vieillesse;</li><li>du Supplément de revenu garanti;</li><li>de l’Allocation;</li><li>de l’Allocation au survivant.</li></ul>",
+      "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année</p>", //overwritten in Stepper/index
     [FieldKey.PARTNER_INCOME_WORK]:
-      "Incluez tout salaire provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel net.",
+      "<p>Incluez tout salaire net provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel. N'incluez pas le revenu de pension.</p>",
     [FieldKey.OAS_DEFER]:
       '<div>Si vous recevez déjà la pension de la SV, indiquez quand vous avez commencé à la recevoir. {LINK_OAS_DEFER_INLINE}</div>',
     [FieldKey.OAS_AGE]: 'Ce nombre doit être entre 65 et 70.',

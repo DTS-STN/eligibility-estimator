@@ -159,15 +159,15 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>)</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p>Your income tax return will be used when you apply. For now, estimate what you could be receiving per year</p>', //overwritten in Stepper/index
     [FieldKey.INCOME_WORK]:
-      'Enter any salary from a job or self-employment that you included in your annual net income. ',
+      "<p>Enter any net salary from a job or self-employment that you included in your annual income. Don't include pension income.</p>",
     [FieldKey.INV_SEPARATED]:
       'For example, because your partner lives in a care home or lives in a separate home to be close to work or medical help.',
     [FieldKey.PARTNER_INCOME]:
-      '<p class="text-multi-neutrals-grey90a">Add all types of income after deductions, including:</p> <ul><li>pensions (including <dfn><abbr title="Canada Pension Plan">CPP</abbr></dfn> and <dfn><abbr title="Québec Pension Plan">QPP</abbr></dfn>)</li><li>benefits</li><li>salaries</li><li>retirement fund withdrawals (including <dfn><abbr title="Registered Retirement Savings Plans">RRSPs</abbr></dfn>)</li></ul> <p class="mt-4 text-multi-neutrals-grey90a">Do not include payments from the:</p> <ul><li>Old Age Security pension</li><li>Guaranteed Income Supplement</li><li>Allowance</li><li>Allowance for the Survivor</li></ul>',
+      '<p>Their income tax return will be used when you apply. For now, estimate what they could be receiving per year.</p>', //overwritten in Stepper/index
     [FieldKey.PARTNER_INCOME_WORK]:
-      'Enter any salary from a job or self-employment that you included in your partner’s annual net income.',
+      "<p>Enter any salary from a job or self-employment that you included in your partner’s annual net income. Don't include pension income.</p>",
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',

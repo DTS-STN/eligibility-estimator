@@ -80,6 +80,11 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   const [partnerIncomeHintText, setPartnerIncomeHintText] = useState(
     tsln.partnerIncomeHintText
   )
+  const [incomeHelpText, setIncomeHelpText] = useState(tsln.incomeHelpText)
+  const [partnerIncomeHelpText, setPartnerIncomeHelpText] = useState(
+    tsln.partnerIncomeHelpText
+  )
+
   const incomeTooltip = {
     moreinfo: incomeHintTitle,
     text: incomeHintText,
@@ -88,7 +93,14 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     moreinfo: partnerIncomeHintTitle,
     text: partnerIncomeHintText,
   }
+
   const [receiveOAS, setReceiveOAS] = useState(false)
+
+  const today = new Date()
+  const currYear =
+    today.getMonth() + 1 <= 6
+      ? today.getFullYear() - 2
+      : today.getFullYear() - 1
 
   useEffect(() => {
     setSteps(getSteps(tsln))
@@ -119,6 +131,8 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
         acc['partnerIncomeLabel'] = partnerIncomeLabel
         acc['incomeTooltip'] = incomeTooltip
         acc['partnerIncomeTooltip'] = partnerIncomeTooltip
+        acc['incomeHelpText'] = incomeHelpText
+        acc['partnerIncomeHelpText'] = partnerIncomeHelpText
       }
 
       return acc
@@ -238,10 +252,10 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   useEffect(() => {
     const incomeLabel = receiveOAS
-      ? tsln.incomeLabelReceiveOAS
+      ? `${tsln.incomeLabelReceiveOAS} ${currYear}?`
       : tsln.incomeLabel
     const partnerIncomeLabel = receiveOAS
-      ? tsln.partnerIncomeLabelReceiveOAS
+      ? `${tsln.partnerIncomeLabelReceiveOAS} ${currYear}?`
       : tsln.partnerIncomeLabel
     const incomeHintTitle = receiveOAS
       ? tsln.incomeHintTitleReceiveOAS
@@ -249,18 +263,27 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     const incomeHintText = receiveOAS
       ? tsln.incomeHintTextReceiveOAS
       : tsln.incomeHintText
+    const incomeHelpText = receiveOAS
+      ? tsln.incomeHelpTextReceiveOAS
+      : tsln.incomeHelpText
     const partnerIncomeHintTitle = receiveOAS
       ? tsln.partnerIncomeHintTitleReceiveOAS
       : tsln.partnerIncomeHintTitle
     const partnerIncomeHintText = receiveOAS
       ? tsln.partnerIncomeHintTextReceiveOAS
       : tsln.partnerIncomeHintText
+    const partnerIncomeHelpText = receiveOAS
+      ? tsln.partnerIncomeHelpTextReceiveOAS
+      : tsln.partnerIncomeHelpText
+
     setIncomeLabel(incomeLabel)
     setPartnerIncomeLabel(partnerIncomeLabel)
     setIncomeHintTitle(incomeHintTitle)
     setIncomeHintText(incomeHintText)
+    setIncomeHelpText(incomeHelpText)
     setPartnerIncomeHintTitle(partnerIncomeHintTitle)
     setPartnerIncomeHintText(partnerIncomeHintText)
+    setPartnerIncomeHelpText(partnerIncomeHelpText)
   }, [receiveOAS, tsln])
 
   useEffect(() => {
@@ -272,6 +295,8 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
     incomeHintText,
     partnerIncomeHintTitle,
     partnerIncomeHintText,
+    incomeHelpText,
+    partnerIncomeHelpText,
   ])
 
   useEffect(() => {
