@@ -88,7 +88,13 @@ const FieldFactory: React.FC<FieldProps> = ({
               ? field.config.default
               : field.value
           }
-          helpText={field.config.helpText}
+          helpText={
+            field.key === 'income'
+              ? metaData.incomeHelpText
+              : field.key === 'partnerIncome'
+              ? metaData.partnerIncomeHelpText
+              : field.config.helpText
+          }
           requiredText={
             field.key === FieldKey.INCOME ||
             field.key === FieldKey.PARTNER_INCOME

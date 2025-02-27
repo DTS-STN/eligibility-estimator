@@ -80,7 +80,7 @@ const fr: TooltipTranslations = {
     moreinfo: '	Pourquoi demandons-nous vos revenus d’emploi?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-            Vos premiers 15&nbsp;000&nbsp;$ de revenu lié au travail sont sujets à des exemptions. Nous allons les calculer pour vous. \
+            Vos premiers 5 000 $ de revenu lié au travail sont exemptés, de plus que 50 % des prochains 10 000 $. Nous allons calculer ceci pour vous. \
             </p> \
           </div> \
     ",
@@ -100,7 +100,7 @@ const fr: TooltipTranslations = {
     moreinfo: 'Pourquoi demandons-nous ses revenus d’emploi?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-            Ses premiers 15&nbsp;000&nbsp;$ de revenu lié au travail sont sujets à des exemptions. Nous allons les calculer pour vous. \
+            Ses premiers 5 000 $ de revenu lié au travail sont exemptés, de plus que 50 % des prochains 10 000 $. Nous allons calculer ceci pour vous. \
             </p> \
           </div> \
     ",
