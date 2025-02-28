@@ -159,7 +159,7 @@ const en: Translations = {
     [FieldKey.INCOME_AVAILABLE]:
       'Providing your income will give you more accurate results.',
     [FieldKey.INCOME]:
-      '<p>Your income tax return will be used when you apply. For now, estimate what you could be receiving per year</p>', //overwritten in Stepper/index
+      '<p>Your income tax return will be used when you apply. For now, estimate what you could be receiving per year.</p>', //overwritten in Stepper/index
     [FieldKey.INCOME_WORK]:
       "<p>Enter any net salary from a job or self-employment that you included in your annual income. Don't include pension income.</p>",
     [FieldKey.INV_SEPARATED]:
@@ -167,7 +167,7 @@ const en: Translations = {
     [FieldKey.PARTNER_INCOME]:
       '<p>Their income tax return will be used when you apply. For now, estimate what they could be receiving per year.</p>', //overwritten in Stepper/index
     [FieldKey.PARTNER_INCOME_WORK]:
-      "<p>Enter any salary from a job or self-employment that you included in your partner’s annual net income. Don't include pension income.</p>",
+      "<p>Enter any net salary from a job or self-employment that you included in your partner’s annual income. Don't include pension income.</p>",
     [FieldKey.OAS_DEFER]:
       'If you already receive the OAS pension, enter when you started receiving it. {LINK_OAS_DEFER_INLINE}',
     [FieldKey.OAS_AGE]: 'This should be between 65 and 70.',

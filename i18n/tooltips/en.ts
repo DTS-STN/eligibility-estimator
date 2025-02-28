@@ -99,7 +99,7 @@ const en: TooltipTranslations = {
     moreinfo: 'Why are we asking for their work income?',
     text: "<div style='margin-bottom: 16px;'> \
             <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-            Their first $5,000 of work income is exempt, as well as 50% of the next $10,000. We'll calculate this for you \
+            Their first $5,000 of work income is exempt, as well as 50% of the next $10,000. We'll calculate this for you. \
             </p> \
           </div> \
     ",

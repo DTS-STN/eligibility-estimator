@@ -173,7 +173,7 @@ const fr: Translations = {
     [FieldKey.INV_SEPARATED]:
       "Par exemple, parce que votre conjoint vit dans un foyer de soins ou dans un logement séparé pour être proche de son travail ou d'assistance médicale.",
     [FieldKey.PARTNER_INCOME]:
-      "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année</p>", //overwritten in Stepper/index
+      "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année.</p>", //overwritten in Stepper/index
     [FieldKey.PARTNER_INCOME_WORK]:
       "<p>Incluez tout salaire net provenant d'un emploi ou de travail indépendant que vous avez inclus dans son revenu annuel. N'incluez pas le revenu de pension.</p>",
     [FieldKey.OAS_DEFER]:
