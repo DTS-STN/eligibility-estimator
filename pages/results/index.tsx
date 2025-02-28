@@ -86,8 +86,47 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       psdAge,
     })
 
-    const psdResults: ResponseSuccess | ResponseError = psdHandler.results
+    let psdResults: ResponseSuccess | ResponseError = psdHandler.results
+
     if ('results' in psdResults) {
+      const responseClone = JSON.parse(JSON.stringify(originalResponse))
+
+      const getDeferralTable = () => {
+        if (Array.isArray(responseClone.futureClientResults)) {
+          const oasEntry = responseClone.futureClientResults
+            .flatMap((item) => Object.values(item))
+            .find((entry: any) => entry?.oas)
+          return oasEntry?.oas?.cardDetail?.meta?.tableData ?? []
+        }
+
+        return responseClone.results?.oas?.cardDetail?.meta?.tableData ?? []
+      }
+
+      const filteredDeferralTable = getDeferralTable().filter((row) => {
+        return row.age > psdAge
+      })
+
+      // Check if the `tableData` field exists on present results before updating
+      if (psdResults.results.oas.cardDetail.meta?.tableData) {
+        psdResults.results.oas.cardDetail.meta.tableData = filteredDeferralTable
+      }
+
+      // If updating a future result (e.g., age 69)
+      const futureResultWithOAS = psdResults.futureClientResults?.find(
+        (entry) => Object.values(entry).some((benefit: any) => benefit?.oas)
+      )
+
+      if (futureResultWithOAS) {
+        const ageKey = Object.keys(futureResultWithOAS).find(
+          (key) => futureResultWithOAS[key]?.oas
+        )
+
+        if (ageKey) {
+          futureResultWithOAS[ageKey].oas.cardDetail.meta.tableData =
+            filteredDeferralTable
+        }
+      }
+
       psdResults.results.oas.eligibility.result = ResultKey.INELIGIBLE
       psdResults.results.gis.eligibility.result = ResultKey.INELIGIBLE
     }
@@ -99,6 +138,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdPartneredHandleAndSet = (psdAge) => {
     const clientAge = Number(inputHelper.asObjectWithLanguage.age)
     const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+    const invSep = inputHelper.asObjectWithLanguage.invSeparated === 'true'
     const clientRes = Number(
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
         Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
@@ -155,9 +195,11 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
     if ('results' in psdResults) {
-      const clientPsd = { [psdAge]: getEligibleBenefits(psdResults.results) }
+      const clientPsd = {
+        [psdAge]: getEligibleBenefits(psdResults.results) || {},
+      }
       const partnerPsd = {
-        [psdPartnerAge]: getEligibleBenefits(psdResults.partnerResults),
+        [psdPartnerAge]: getEligibleBenefits(psdResults.partnerResults) || {},
       }
 
       const partialFutureClientResults = psdResults.futureClientResults
@@ -205,11 +247,13 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         return Number(ageA) - Number(ageB)
       })
 
+      let clientHasAlw = false
       const mappedClientRes = mergedClientRes
         .map((ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
           if (currAge < psdAge) {
             const hasAlw = Object.values(ageRes)[0].hasOwnProperty('alw')
+            clientHasAlw = hasAlw
             return hasAlw ? ageRes : null
           }
 
@@ -225,8 +269,14 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           const currAge = Number(Object.keys(ageRes)[0])
           const equivClientAge = String(currAge + partnersAgeDiff)
 
+          const recalcCase =
+            partnerAge > clientAge &&
+            currAge > partnerEliObj.ageOfEligibility &&
+            !invSep &&
+            clientHasAlw
+
           if (!clientResAges.includes(equivClientAge)) {
-            if (currAge === partnerEliObj.ageOfEligibility) {
+            if (currAge === partnerEliObj.ageOfEligibility || recalcCase) {
               // This means that the partner became independently eligible for OAS before the client's pension start date,
               // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
 

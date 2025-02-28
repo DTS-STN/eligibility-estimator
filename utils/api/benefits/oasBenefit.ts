@@ -17,7 +17,7 @@ import {
   ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
-import { getDeferralIncrease } from '../helpers/utils'
+import { getDeferralIncrease, OasEligibility } from '../helpers/utils'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 

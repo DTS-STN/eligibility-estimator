@@ -42,6 +42,10 @@ export abstract class BaseBenefit<T extends EntitlementResult> {
     return this._cardDetail
   }
 
+  set cardDetail(value: CardDetail) {
+    this._cardDetail = value
+  }
+
   protected getEligibility(): EligibilityResult {
     return undefined
   }

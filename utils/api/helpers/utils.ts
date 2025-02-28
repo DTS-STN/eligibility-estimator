@@ -231,7 +231,9 @@ export function OasEligibility(
 
   return {
     ageOfEligibility: age,
-    yearsOfResAtEligibility: livedOnlyInCanada ? 40 : Math.floor(yearsInCanada),
+    yearsOfResAtEligibility: livedOnlyInCanada
+      ? 40
+      : Math.min(Math.floor(yearsInCanada), 40),
   }
 }
 
