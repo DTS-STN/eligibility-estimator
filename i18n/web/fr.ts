@@ -194,6 +194,7 @@ const fr: WebTranslations = {
   breadcrumb6URL: '/fr',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/fr/questions',
+  retirementUrl: 'https://www.canada.ca/fr/services/retraite.html',
   //
   title: 'Estimateur de prestations de vieillesse canadiennes',
   introPageTitle: 'Estimateur des prestations de la Sécurité de la vieillesse',
@@ -237,6 +238,8 @@ const fr: WebTranslations = {
   startBenefitsEstimator: "Démarrer l'estimateur de prestations",
   estimatorTimeEstimate:
     'Il vous faudra environ 5 à 10 minutes pour obtenir une estimation.',
+  overviewDisclaimer:
+    '<strong>Cet outil ne donne qu’une estimation</strong>. Il ne garantit pas que vous serez admissible ou que vous recevrez le montant estimé.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   inflationInfo: `Cet estimateur utilise les taux des prestations de janvier à mars&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
@@ -314,8 +317,20 @@ const fr: WebTranslations = {
     homeSubject: `EC Économie et industrie;Allocation;Avantages sociaux;Prestation au survivant;Finances;Finances personnelles;Revenu;Pension;Pension publique,PE Personnes;Adulte;Aîné,SO Société et culture;Vieillesse`,
   },
   resultsPage: {
+    moreInformation: "Plus d'information",
+    yourMonEstimateHeading: 'Votre estimation mensuelle',
+    changeInSituation:
+      'Si votre situation change, vos résultats pourraient changer.',
+    youEstimateMayChange:
+      'Votre estimation peut changer au fil du temps en fonction',
+    yourEstimateMayChangeList:
+      'Votre estimation peut changer au fil du temps en fonction\xa0:',
+    basedYourAge: 'de votre âge',
+    basedYourPartner: 'des prestations que votre conjoint reçoit.',
+    ifYouChoseToDefer:
+      'Si vous choisissez de reporter votre pension, votre estimation future sera plus élevée.',
     header: "Tableau des résultats d'estimation",
-    general: `Les résultats suivants ne sont qu'une estimation de votre admissibilité et de vos paiements mensuels <strong>basée sur les montants actuels</strong>. Ceux-ci peuvent augmenter avec le coût de la vie. <p class="mt-4">Vous devez être citoyen ou résident autorisé du Canada pour recevoir ces prestations.</p>`,
+    general: `Ces résultats ne sont qu'une estimation de vos paiements mensuels. Les montants utilisent les <strong>taux actuels</strong>. Ceux-ci augmenteront avec le coût de la vie. <p class="mt-4">Vous devez être citoyen ou résident autorisé du Canada pour recevoir ces prestations.</p>`,
     onThisPage: 'Sur cette page',
     tableHeader1: 'Prestations',
     tableHeader2: 'Montant mensuel estimé (CAD)',
@@ -374,6 +389,10 @@ const fr: WebTranslations = {
     toReceive: 'vous pourriez être admissible à recevoir :',
     partnerToReceive: 'votre conjoint pourrait être admissible à recevoir :',
     theyToReceive: 'il pourrait être admissible à recevoir :',
+    psdTitle: 'Changez votre date de début de pension',
+    psdDescription:
+      'Vous pouvez attendre jusqu’à l’âge de 70&nbsp;ans. Pour chaque mois de report, votre pension augmente de 0,6&nbsp;%.',
+    psdUpdateBtn: 'Mettre à jour l’estimation',
   },
   resultsQuestions: apiFr.questionShortText,
   resultsEditAriaLabels: apiFr.questionAriaLabel,
@@ -482,6 +501,8 @@ const fr: WebTranslations = {
   tooltip: {
     moreInformation: "Plus d'information",
   },
+  openNewTab: "s'ouvre dans un nouvel onglet",
+
   partnerIsNotEligible: "Votre conjoint n'est pas admissible",
   partnerLegalStatusNotEligible:
     "Le statut légal de votre conjoint indique qu'il ne reçoit pas la pension de la Sécurité de la vieillesse.",
@@ -496,45 +517,84 @@ const fr: WebTranslations = {
   },
   incomeLabel:
     'Quel sera votre revenu annuel net lorsque vous commencerez à recevoir vos prestations?',
-  incomeHintTitle:
-    'Comment votre revenu sera-t-il calculé lors de votre demande?',
-  incomeHintText:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        Vos <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> seront évalués lors de votre demande selon votre dernière déclaration de revenus. \
-      </p> \
-    </div> \
-  ",
+  incomeHintTitle: 'Comment le revenu est-il calculé?',
+  incomeHintText: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
+      <li class="text-multi-neutrals-grey90a">salaires;</li> \
+      <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      </ul>`,
   incomeLabelReceiveOAS: 'Quel est votre revenu annuel net?',
-  incomeHintTitleReceiveOAS: 'Votre revenu va bientôt changer?',
-  incomeHintTextReceiveOAS:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        Si vous prévoyez une baisse de revenu, vous pouvez entrer votre revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='Communiquez avec nous. Ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
-      </p> \
-    </div> \
-  ",
+  incomeHintTitleReceiveOAS: 'Comment le revenu est-il calculé?',
+  incomeHintTextReceiveOAS: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
+      <li class="text-multi-neutrals-grey90a">salaires;</li> \
+      <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      </ul>`,
   partnerIncomeLabel:
     'Quel sera le revenu annuel net de votre conjoint lorsque vous commencerez à recevoir vos prestations?',
-  partnerIncomeHintTitle:
-    'Comment son revenu sera-t-il calculé lors de votre demande?',
-  partnerIncomeHintText:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        Les <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/services/prestations/pensionspubliques/rpc/securite-vieillesse/supplement-revenu-garanti/demande.html#h2.2-3.1' target='_blank' aria-label='ouvre dans un nouvel onglet'>revenus et exemptions</a> de votre conjoint seront évalués lors de votre demande selon sa dernière déclaration de revenus. \
-      </p> \
-    </div> \
-  ",
+  partnerIncomeHintTitle: 'Comment le revenu est-il calculé?',
+  partnerIncomeHintText: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
+      <li class="text-multi-neutrals-grey90a">salaires;</li> \
+      <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      </ul>`,
   partnerIncomeLabelReceiveOAS:
     'Quel est le revenu annuel net de votre conjoint?',
-  partnerIncomeHintTitleReceiveOAS: 'Son revenu va bientôt changer?',
-  partnerIncomeHintTextReceiveOAS:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        Si votre conjoint prévoit une baisse de revenu, vous pouvez entrer son revenu prévu. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html' target='_blank' aria-label='ouvre dans un nouvel onglet'>Communiquez avec nous</a> pour signaler cet événement. \
-      </p> \
-    </div> \
-  ",
+  partnerIncomeHintTitleReceiveOAS: 'Comment le revenu est-il calculé?',
+  partnerIncomeHintTextReceiveOAS: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
+      <li class="text-multi-neutrals-grey90a">salaires;</li> \
+      <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      </ul>`,
+  incomeHelpText:
+    "<p>Votre déclaration de revenus sera utilisée lors de votre demande. Pour l'instant, estimez ce que vous pourriez recevoir par année.</p>",
+  incomeHelpTextReceiveOAS:
+    "<p>De janvier à juin, vos prestations sont basées sur le revenu de 2 ans passés. De juillet à décembre, elles sont basées sur le revenu de l'année dernière.</p> \
+      <p style='margin-top: 16px;'>Si vous avez pris votre retraite cette année et votre revenu a beaucoup changé, entrez le revenu de cette année.</p>",
+  partnerIncomeHelpText:
+    "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année</p>",
+  partnerIncomeHelpTextReceiveOAS:
+    "<p>De janvier à juin, vos prestations sont basées sur le revenu de 2 ans passés. De juillet à décembre, elles sont basées sur le revenu de l'année dernière.</p>",
 }
 
 export default fr

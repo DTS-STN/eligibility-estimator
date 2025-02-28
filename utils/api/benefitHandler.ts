@@ -35,6 +35,7 @@ export class BenefitHandler {
   compare: Boolean
   formAge: number
   formYearsInCanada: number
+  psdCalc: Boolean
 
   constructor(
     readonly rawInput: Partial<RequestInput>,
@@ -49,6 +50,14 @@ export class BenefitHandler {
     this.compare = compare
     this.formAge = formAge
     this.formYearsInCanada = formYearsInCanada
+    // Below conditions explained:
+    // For partnered case, it is simpler to treat the pension start date age as current age so the results get saved to "results"
+    this.psdCalc =
+      (this.input.client.maritalStatus.partnered
+        ? !this.future
+        : this.future) &&
+      !!this.rawInput.psdAge &&
+      this.input.client.age >= 65
   }
 
   get benefitResults(): BenefitResultsObjectWithPartner {
@@ -119,13 +128,15 @@ export class BenefitHandler {
     // Future handler takes care of cases when partner is not yet eligible by creating "age sets" of future eligible ages
     // If partner was already eligible in the past based on residency, we need to adjust the inputs
     if (!this.future) {
-      const partnerEliObj = OasEligibility(
-        this.input.partner.age,
-        this.input.partner.yearsInCanadaSince18 ||
-          this.input.partner.yearsInCanadaSinceOAS,
-        this.input.partner.livedOnlyInCanada,
-        this.rawInput.partnerLivingCountry
-      )
+      const partnerEliObj = this.rawInput.partnerEliObj
+        ? this.rawInput.partnerEliObj
+        : OasEligibility(
+            this.input.partner.age,
+            this.input.partner.yearsInCanadaSince18 ||
+              this.input.partner.yearsInCanadaSinceOAS,
+            this.input.partner.livedOnlyInCanada,
+            this.rawInput.partnerLivingCountry
+          )
 
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
@@ -160,22 +171,79 @@ export class BenefitHandler {
       )
     }
 
-    const clientOasNoDeferral = new OasBenefit(
-      this.input.client,
-      this.fields.translations,
-      false,
-      this.future,
-      false,
-      this.input.client.age,
-      this.formAge,
-      this.formYearsInCanada
-    )
+    // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
+    const clientOasHelper = evaluateOASInput(this.input.client)
+
+    const clientEliObj = this.rawInput.clientEliObj
+      ? this.rawInput.clientEliObj
+      : OasEligibility(
+          this.input.client.age,
+          this.input.client.yearsInCanadaSince18 ||
+            this.input.client.yearsInCanadaSinceOAS,
+          this.input.client.livedOnlyInCanada,
+          this.rawInput.livingCountry
+        )
+
+    let clientOasNoDeferral
+    // Addresses a special case when the benefit handler is called from the result page's PSDBox component
+
+    if (this.psdCalc) {
+      const psdAge = this.rawInput.psdAge
+      const yrsDiff = +this.rawInput.psdAge - clientEliObj.ageOfEligibility
+      const resAtEli = clientEliObj.yearsOfResAtEligibility
+      const maxRes = resAtEli + yrsDiff
+      const resWhole = Math.floor(maxRes)
+      const resRemainder = (maxRes - resWhole) * 12
+
+      const psdRes = resWhole
+      const extraDeferral = psdRes - 40
+
+      const psdDef =
+        Math.round(resRemainder) + (extraDeferral > 0 ? extraDeferral * 12 : 0)
+
+      const psdInput = {
+        ...this.input.client,
+        age: psdAge,
+        yearsInCanadaSince18: Math.min(psdRes, 40),
+        oasDeferDuration: JSON.stringify({
+          months: Math.min(psdDef, 60),
+          years: 0,
+        }),
+      }
+      clientOasNoDeferral = new OasBenefit(
+        psdInput,
+        this.fields.translations,
+        null,
+        false,
+        this.future,
+        true,
+        psdInput.age,
+        this.formAge,
+        this.formYearsInCanada,
+        psdInput.receiveOAS
+      )
+    } else {
+      clientOasNoDeferral = new OasBenefit(
+        this.input.client,
+        this.fields.translations,
+        null,
+        false,
+        this.future,
+        false,
+        this.input.client.age,
+        this.formAge,
+        this.formYearsInCanada,
+        this.input.client.receiveOAS
+      )
+    }
+
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
     if (this.input.client.partnerBenefitStatus.helpMe) {
       const partnerOasNoDeferral = new OasBenefit(
         this.input.partner,
         this.fields.translations,
+        clientOasNoDeferral,
         true
       )
 
@@ -199,11 +267,8 @@ export class BenefitHandler {
       clientOasNoDeferral.entitlement.result
     )
 
-    // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
-    const clientOasHelper = evaluateOASInput(this.input.client)
-
     let clientOasWithDeferral
-    if (clientOasHelper.canDefer) {
+    if (clientOasHelper.canDefer && !this.psdCalc) {
       consoleDev(
         'Modified input to calculate OAS with deferral',
         clientOasHelper.newInput
@@ -211,11 +276,64 @@ export class BenefitHandler {
       clientOasWithDeferral = new OasBenefit(
         clientOasHelper.newInput,
         this.fields.translations,
+        null,
         false,
         this.future,
         true,
-        this.input.client.age
+        this.input.client.age,
+        this.formAge,
+        this.formYearsInCanada,
+        this.input.client.receiveOAS
       )
+
+      consoleDev('WITH DEFERRAL', clientOasWithDeferral)
+      consoleDev(
+        'Client OAS amount WITH deferral',
+        clientOasWithDeferral.entitlement.result
+      )
+    }
+
+    if (this.psdCalc) {
+      // res needs to be residence at time of eligibiliity (ex. 25 years at 65 years)
+      // deferral is (psdAge - eliAge) * 12
+      const psdAge = this.rawInput.psdAge
+      const psdInput = {
+        ...this.input.client,
+        inputAge: psdAge,
+        age: clientEliObj.ageOfEligibility,
+        receiveOAS: true,
+        yearsInCanadaSince18: clientEliObj.yearsOfResAtEligibility,
+        oasDeferDuration: JSON.stringify({
+          months: Math.min(
+            Math.round(
+              (Number(this.rawInput.psdAge) - clientEliObj.ageOfEligibility) *
+                12
+            ),
+            60
+          ),
+          years: 0,
+        }),
+      }
+      clientOasWithDeferral = new OasBenefit(
+        psdInput,
+        this.fields.translations,
+        null,
+        false,
+        this.future,
+        true,
+        psdAge,
+        this.formAge,
+        this.formYearsInCanada,
+        this.input.client.receiveOAS
+      )
+
+      clientOasWithDeferral.cardDetail = {
+        ...clientOasNoDeferral.cardDetail,
+        meta: {
+          ...clientOasNoDeferral.cardDetail.meta,
+          residency: clientOasWithDeferral.cardDetail.meta.residency,
+        },
+      }
 
       consoleDev('WITH DEFERRAL', clientOasWithDeferral)
       consoleDev(
@@ -229,7 +347,10 @@ export class BenefitHandler {
       this.fields.translations,
       clientOasNoDeferral.info,
       false,
-      this.future
+      this.future,
+      null,
+      this.formAge,
+      this.formYearsInCanada
     )
 
     consoleDev(
@@ -245,7 +366,9 @@ export class BenefitHandler {
         clientOasWithDeferral.info,
         false,
         this.future,
-        this.input.client
+        this.input.client,
+        this.formAge,
+        this.formYearsInCanada
       )
 
       consoleDev(
@@ -305,7 +428,8 @@ export class BenefitHandler {
             this.input.client,
             clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
             clientOasWithDeferral.entitlement,
-            this.future
+            this.future,
+            this.formYearsInCanada
           )
         } else {
           // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
@@ -316,7 +440,8 @@ export class BenefitHandler {
               this.input.client,
               clientOasNoDeferral.eligibility,
               clientOasNoDeferral.entitlement,
-              this.future
+              this.future,
+              this.formYearsInCanada
             )
           } else {
             clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
@@ -325,7 +450,8 @@ export class BenefitHandler {
               this.input.client,
               clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
               clientOasWithDeferral.entitlement,
-              this.future
+              this.future,
+              this.formYearsInCanada
             )
           }
         }
@@ -336,7 +462,8 @@ export class BenefitHandler {
           this.input.client,
           clientOasNoDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
           clientOasNoDeferral.entitlement,
-          this.future
+          this.future,
+          this.formYearsInCanada
         )
       }
     }
@@ -349,6 +476,7 @@ export class BenefitHandler {
       const partnerOas = new OasBenefit(
         this.input.partner,
         this.fields.translations,
+        clientOas,
         true
       )
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
@@ -466,6 +594,7 @@ export class BenefitHandler {
     const partnerOas = new OasBenefit(
       this.input.partner,
       this.fields.translations,
+      clientOas,
       true
     )
     this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
@@ -490,7 +619,10 @@ export class BenefitHandler {
         this.fields.translations,
         allResults.client.oas,
         false,
-        this.future
+        this.future,
+        null,
+        this.formAge,
+        this.formYearsInCanada
       )
       this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
     }

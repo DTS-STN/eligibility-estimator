@@ -22,6 +22,8 @@ import { EntitlementFormula } from './entitlementFormula'
 export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   partner: Boolean
   future: Boolean
+  formAge: number
+  formYearsInCanada: number
   originalInput?: ProcessedInput
   constructor(
     input: ProcessedInput,
@@ -29,12 +31,16 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
     private oasResult: BenefitResult<EntitlementResultOas>,
     partner?: Boolean,
     future?: Boolean,
-    originalInput?: ProcessedInput
+    originalInput?: ProcessedInput,
+    formAge?: number,
+    formYearsInCanada?: number
   ) {
     super(input, translations, BenefitKey.gis)
     this.partner = partner
     this.future = future
     this.originalInput = originalInput
+    this.formAge = formAge
+    this.formYearsInCanada = formYearsInCanada
   }
 
   protected getEligibility(): EligibilityResult {
@@ -261,52 +267,10 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
       this.eligibility.result === ResultKey.ELIGIBLE ||
       this.eligibility.result === ResultKey.INCOME_DEPENDENT
     ) {
-      !this.future && links.push(this.translations.links.apply[BenefitKey.gis])
+      links.push(this.translations.links.apply[BenefitKey.gis])
     }
     links.push(this.translations.links.overview[BenefitKey.gis])
     return links
-  }
-
-  protected getCardText(): string {
-    /**
-     * The following IF block is a copy from benefitHandler.translateResults,
-     *   the issue is that cardDetail object is updated only once if undefined, and could have the wrong information.
-     *   overwrite eligibility.detail and autoEnrollment when entitlement.type = none.
-     */
-
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.entitlement.type === EntitlementResultType.NONE
-    ) {
-      //this.eligibility.result = ResultKey.INELIGIBLE
-      this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.future
-        ? this.translations.detail.gis.futureEligibleIncomeTooHigh
-        : this.translations.detail.gis.incomeTooHigh
-      this.entitlement.autoEnrollment = this.getAutoEnrollment()
-    }
-
-    // another hack, to avoid adding message expectToReceive
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.eligibility.reason === ResultReason.INCOME &&
-      this.entitlement.result > 0
-    ) {
-      return this.eligibility.detail
-    }
-
-    let text = this.eligibility.detail
-
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.entitlement.result > 0
-    ) {
-      text += this.future
-        ? ` ${this.translations.detail.futureExpectToReceive}`
-        : ` ${this.translations.detail.expectToReceive}`
-    }
-
-    return text
   }
 
   public updateCollapsedText(): CardCollapsedText[] {
@@ -316,41 +280,58 @@ export class GisBenefit extends BaseBenefit<EntitlementResultGeneric> {
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
-    if (
-      this.eligibility.result !== ResultKey.ELIGIBLE &&
-      this.eligibility.result !== ResultKey.INCOME_DEPENDENT
-    )
-      return cardCollapsedText
-
-    const inputs = this.originalInput === null ? this.input : this.originalInput
-    // Related to OAS Deferral, don't show if already receiving
-    if (inputs) {
-      const ageInOasRange = inputs.age >= 65 && inputs.age < 70
-      if (
-        this.partner !== true &&
-        this.entitlement.result !== 0 &&
-        ageInOasRange &&
-        !inputs.receiveOAS &&
-        !this.future
-      ) {
-        cardCollapsedText.push(
-          this.translations.detailWithHeading.ifYouDeferYourPension
-        )
-      }
+    if (this.input.everLivedSocialCountry) {
+      cardCollapsedText.push(
+        this.partner
+          ? this.translations.detailWithHeading.socialSecurityEligiblePartner
+          : this.translations.detailWithHeading.socialSecurityEligible
+      )
     }
 
-    if (this.partner) {
-      if (this.input.income.provided && this.entitlement.result !== 0) {
-        if (
-          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
-        ) {
-          cardCollapsedText.push(
-            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
-          )
-        } else {
-          cardCollapsedText.push(
-            this.translations.detailWithHeading.partnerEligible
-          )
+    //Deferral options Expand-Collapse
+    if (!this.partner) {
+      let text = ''
+      let heading
+
+      if (
+        this.oasResult.eligibility.result === ResultKey.ELIGIBLE ||
+        this.oasResult.eligibility.result === ResultKey.WILL_BE_ELIGIBLE
+      ) {
+        const ageToCheck = this.originalInput?.age ?? this.input.age
+
+        if (this.oasResult.cardDetail.meta.receiveOAS == false) {
+          heading = this.translations.detail.yourDeferralOptions
+
+          if (this.oasResult.entitlement.result > 0 && ageToCheck < 70) {
+            if (ageToCheck >= 65 && ageToCheck < 70) {
+              //CHECK IF RECEIVING OAS
+              text += this.translations.detail.deferralEligible
+
+              text += `<p class="sm:hidden underline text-default-text mt-2"><a href="#psdBox">${this.translations.oasDeferralTable.psdAnchor}</a></p>`
+            } else if (this.input.age < 65) {
+              text += this.translations.detail.deferralWillBeEligible
+            }
+            if (text !== '') {
+              if (this.entitlement.result !== 0) {
+                text += `<p class="mt-6">${this.translations.detail.deferralNoGis}</p>`
+              }
+
+              //Removing due to complexity, revisit potential for EC6- EC5
+              // if (!this.input.livedOnlyInCanada && ageToCheck > 64) {
+              //   if (
+              //     ageToCheck != this.input.age &&
+              //     this.formYearsInCanada <= 40 &&
+              //     this.formYearsInCanada != this.input.yearsInCanadaSince18
+              //   ) {
+              //     text += `<p class="mt-6">${this.translations.detail.deferralYearsInCanada}</p>`
+              //   }
+              // }
+            }
+          }
+
+          if (text !== '') {
+            this.oasResult.cardDetail.collapsedText.push({ heading, text })
+          }
         }
       }
     }

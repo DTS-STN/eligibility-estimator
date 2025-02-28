@@ -49,6 +49,8 @@ export function Header({
         targetId =
           router.pathname === '/'
             ? topNavProps.skipToMainPath
+            : router.pathname === '/results' || router.pathname === '/resultats'
+            ? topNavProps.skipToMainPath
             : topNavProps.skipToFormPath
       } else {
         targetId = target

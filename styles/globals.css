@@ -165,7 +165,7 @@ html {
   }
 
   .inputStyles {
-    width: 165px;
+    /* width: 165px; */
     height: 44px;
     padding-left: 14px;
     margin: 4px 16px 4px 0;
@@ -406,6 +406,11 @@ html {
 
   [id^='help-text'] > ul > li::marker {
     font-size: 12px;
+  }
+
+  a#inCanada,
+  a.link-no-deco:visited {
+    color: #284162;
   }
 
   a:visited {

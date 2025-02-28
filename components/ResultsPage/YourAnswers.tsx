@@ -257,8 +257,8 @@ export const YourAnswers: React.VFC<{
         return deferralVal === 0
           ? `${tsln.no}`
           : deferralVal > 1
-          ? `<div>${deferralVal} ${tsln.duration.months.toLowerCase()}<div>`
-          : `<div>${deferralVal} ${tsln.resultsPage.month}</div>`
+          ? `<div>${deferralVal}&nbsp;${tsln.duration.months.toLowerCase()}<div>`
+          : `<div>${deferralVal}&nbsp;${tsln.resultsPage.month}</div>`
       default:
         throw new Error(`field type not supported in YourAnswers: ${fieldType}`)
     }
@@ -266,7 +266,7 @@ export const YourAnswers: React.VFC<{
 
   return (
     <div className="fz-10">
-      <div className="py-8 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
+      <div className="mb-8 sm:p-8 sm:bg-emphasis rounded mt-8 md:mt-0 md:max-w-[360px]">
         <h3 className="h3" id="answers">
           {title}
         </h3>

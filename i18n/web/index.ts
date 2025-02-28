@@ -36,6 +36,7 @@ export type WebTranslations = {
   timeToCompleteText: string
   startBenefitsEstimator: string
   estimatorTimeEstimate: string
+  overviewDisclaimer: string
   whatBenefitsIncluded: string
   inflationInfo: string
   notIncludeCPP: string
@@ -74,6 +75,7 @@ export type WebTranslations = {
   breadcrumb6URL: string
   breadcrumb7Title: string
   breadcrumb7URL: string
+  retirementUrl: string
   title: string
   introPageTitle: string
   questionPageTitle: string
@@ -123,10 +125,14 @@ export type WebTranslations = {
   incomeHintTitleReceiveOAS: string
   incomeHintText: string
   incomeHintTextReceiveOAS: string
+  incomeHelpText: string
+  incomeHelpTextReceiveOAS: string
   partnerIncomeHintTitleReceiveOAS: string
   partnerIncomeHintTitle: string
   partnerIncomeHintText: string
   partnerIncomeHintTextReceiveOAS: string
+  partnerIncomeHelpText: string
+  partnerIncomeHelpTextReceiveOAS: string
 
   //Main footer links
   aboutGovernment: string
@@ -220,6 +226,14 @@ export type WebTranslations = {
   }
   //results page
   resultsPage: {
+    moreInformation: string
+    yourMonEstimateHeading: string
+    changeInSituation: string
+    youEstimateMayChange: string
+    yourEstimateMayChangeList: string
+    basedYourAge: string
+    basedYourPartner: string
+    ifYouChoseToDefer: string
     header: string
     general: string
     onThisPage: string
@@ -266,6 +280,9 @@ export type WebTranslations = {
     partnerToReceive: string
     theyToReceive: string
     //nextStepOas: string
+    psdTitle: string
+    psdDescription: string
+    psdUpdateBtn: string
   }
 
   resultsQuestions: Translations['questionShortText']
@@ -290,6 +307,8 @@ export type WebTranslations = {
   tooltip: {
     moreInformation: string
   }
+
+  openNewTab: string
 
   partnerIsNotEligible: string
   partnerLegalStatusNotEligible: string

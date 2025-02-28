@@ -190,6 +190,7 @@ const en: WebTranslations = {
   breadcrumb6URL: '/en',
   breadcrumb7Title: 'Questions',
   breadcrumb7URL: '/en/questions',
+  retirementUrl: 'https://www.canada.ca/en/services/retirement.html',
   //
   title: 'Old Age Benefits Estimator',
   introPageTitle: 'Old Age Security Benefits Estimator',
@@ -229,6 +230,8 @@ const en: WebTranslations = {
   timeToCompleteText: 'Time to complete',
   startBenefitsEstimator: 'Start benefits estimator',
   estimatorTimeEstimate: 'It will take about 5 to 10 minutes to complete.',
+  overviewDisclaimer:
+    "<strong>This tool gives an estimate only</strong>. It doesn't guarantee that you'll be eligible or that you'll receive the amount estimated.",
   whatBenefitsIncluded: 'Benefits included in the estimator',
   inflationInfo: `This estimator uses January to March&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
@@ -312,9 +315,18 @@ const en: WebTranslations = {
       'EC Economics and Industry;Allowances;Benefits;Survivor benefits;Finance;Personal finance;Income;Pensions;Public pensions,PE Persons;Adults;Seniors,So Society and Culture;Old age',
   },
   resultsPage: {
+    moreInformation: 'More information on ',
+    yourMonEstimateHeading: 'Your monthly estimate',
+    changeInSituation: 'Changes in your situation may impact your results.',
+    youEstimateMayChange: 'Your estimate may change over time based on',
+    yourEstimateMayChangeList: 'Your estimate may change over time based on:',
+    basedYourAge: 'your age',
+    basedYourPartner: 'the benefits your partner receives',
+    ifYouChoseToDefer:
+      'If you choose to defer your pension, your future estimate will be higher.',
     header: 'Table of estimated monthly amounts',
     general:
-      'The following is only an estimate of your eligibility and monthly payments <strong>based on current rates</strong>. Amounts may increase with the cost of living. <p class="mt-4">You must be a citizen or legal resident of Canada to receive these benefits.</p>',
+      'This is only an estimate of your monthly payments. Amounts use <strong>current rates</strong> and will increase with the cost of living. <p class="mt-4">You must be a citizen or legal resident of Canada to receive these benefits.</p>',
     onThisPage: 'On this page',
     tableHeader1: 'Benefit',
     tableHeader2: 'Estimated monthly amount (CAD)',
@@ -368,6 +380,10 @@ const en: WebTranslations = {
     toReceive: "you'll likely be eligible to receive:",
     partnerToReceive: 'your partner will likely be eligible to receive:',
     theyToReceive: 'they will likely be eligible to receive:',
+    psdTitle: 'Change your pension start date',
+    psdDescription:
+      'You can delay until age 70. For each month you wait, your pension increases by 0.6%.',
+    psdUpdateBtn: 'Update estimate',
   },
   resultsQuestions: apiEn.questionShortText,
   resultsEditAriaLabels: apiEn.questionAriaLabel,
@@ -376,7 +392,7 @@ const en: WebTranslations = {
     empty: 'This information is required',
   },
   validationErrors: {
-    [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
+    [ValidationErrors.invalidAge]: `Please enter a year between 1900 and ${getMaxYear()}.`,
     [ValidationErrors.receiveOASEmpty]:
       'Please indicate if you receive the Old Age Security pension.',
     [ValidationErrors.providePartnerIncomeEmpty]:
@@ -394,18 +410,18 @@ const en: WebTranslations = {
     [ValidationErrors.partnerIncomeWorkGreaterThanNetIncome]:
       'This amount can’t be higher than your partner’s annual net income.',
     [ValidationErrors.partnerYearsSince18Empty]:
-      "Please enter a number no higher than your partner's age minus 18.",
+      "Please enter a number no higher than your partner's age minus 18.",
     [ValidationErrors.maritalStatusEmpty]: 'Please select a marital status.',
     [ValidationErrors.yearsInCanadaMinusAge]:
-      'Please enter a number no higher than your age minus 18.',
+      'Please enter a number no higher than your age minus 18.',
     [ValidationErrors.yearsInCanadaMinusDeferred]:
       'This number must be at least 10 at the time you deferred your pension.',
     [ValidationErrors.yearsNotInCanadaMinusDeferred]:
       'This number must be at least 20 at the time you deferred your pension.',
     [ValidationErrors.partnerResCanadaNotEnough10]:
-      'This number must be at least 10 because your partner receives the Old Age Security pension.',
+      'This number must be at least 10 because your partner receives the Old Age Security pension.',
     [ValidationErrors.partnerResCanadaNotEnough20]:
-      'This number must be at least 20 because your partner receives the Old Age Security pension outside Canada.',
+      'This number must be at least 20 because your partner receives the Old Age Security pension outside Canada.',
     [ValidationErrors.legalStatusNotSelected]:
       'Please indicate if you have legal status in Canada.',
     [ValidationErrors.partnerLegalStatusNotSelected]:
@@ -435,18 +451,18 @@ const en: WebTranslations = {
       'Your annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.',
     [ValidationErrors.partnerIncomeTooHigh]:
       "The sum of you and your partner's annual income must be less than {OAS_MAX_INCOME} to receive any of the benefits covered by this tool.",
-    [ValidationErrors.ageUnder18]: 'You must be at least 18.',
-    [ValidationErrors.partnerAgeUnder18]: 'Your partner must be at least 18.',
-    [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
+    [ValidationErrors.ageUnder18]: 'You must be at least 18.',
+    [ValidationErrors.partnerAgeUnder18]: 'Your partner must be at least 18.',
+    [ValidationErrors.ageOver150]: 'Your age should be less than 150.',
     [ValidationErrors.partnerAgeOver150]:
-      "Your partner's age should be less than 150.",
-    [ValidationErrors.oasAge65to70]: 'Please enter an age between 65 and 70.',
+      "Your partner's age should be less than 150.",
+    [ValidationErrors.oasAge65to70]: 'Please enter an age between 65 and 70.',
     [ValidationErrors.yearsInCanadaNotEnough10]:
       'You need to have lived in Canada for at least 10&nbsp;years to receive any of the benefits covered by this tool.',
     [ValidationErrors.yearsInCanadaNotEnough20]:
       'You need to have at least 20&nbsp;years of Canadian residence to receive the Old Age Security pension outside Canada.',
     [ValidationErrors.partnerYearsInCanadaMinusAge]:
-      "Your partner's number of years in Canada should be no more than their age minus 18.",
+      "Your partner's number of years in Canada should be no more than their age minus 18.",
     [ValidationErrors.maritalUnavailable]:
       'You have indicated a marital status that is not covered by this tool. For further help, please {LINK_SERVICE_CANADA}.',
     [ValidationErrors.legalUnavailable]:
@@ -471,6 +487,7 @@ const en: WebTranslations = {
   tooltip: {
     moreInformation: 'More information',
   },
+  openNewTab: 'Opens in a new tab',
   partnerIsNotEligible: 'Your partner is not eligible',
   partnerLegalStatusNotEligible:
     "Your partner's legal status indicates that they are not receiving the Old Age Security pension.",
@@ -486,42 +503,87 @@ const en: WebTranslations = {
   },
   incomeLabel:
     'What will be your annual net income when you start receiving your benefits?',
-  incomeHintTitle: 'How will your income be calculated when you apply?',
+  incomeHintTitle: 'What is included as income?',
   incomeHintText:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        Your <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply based on your latest income tax return. \
-      </p> \
-    </div> \
-  ",
-  incomeLabelReceiveOAS: 'What is your annual net income?',
-  incomeHintTitleReceiveOAS: 'Is your income about to change?',
+    '<p class="text-multi-neutrals-grey90a">Add all types of income, such as:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">private and public pensions (including retirement and disability)</li> \
+      <li class="text-multi-neutrals-grey90a">benefits (including EI and worker’s compensation)</li> \
+      <li class="text-multi-neutrals-grey90a">salaries</li> \
+      <li class="text-multi-neutrals-grey90a">rental income</li> \
+      <li class="text-multi-neutrals-grey90a">RRSP withdrawals</li> \
+      <li class="text-multi-neutrals-grey90a">taxable interest, dividends and capital gains</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">Don’t includee:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
+      <li class="text-multi-neutrals-grey90a">RDSP payments</li> \
+      <li class="text-multi-neutrals-grey90a">GST/HST credit payments</li> \
+      </ul>',
+  incomeLabelReceiveOAS: 'What is your annual net income',
+  incomeHintTitleReceiveOAS: 'What is included as income?',
   incomeHintTextReceiveOAS:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        If you're expecting a drop in income, you can enter your estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='Contact us. Opens a new tab'>Contact us</a> to report this event. \
-      </p> \
-    </div> \
-  ",
+    '<p class="text-multi-neutrals-grey90a">Add all types of income, such as:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">private and public pensions (including retirement and disability)</li> \
+      <li class="text-multi-neutrals-grey90a">benefits (including EI and worker’s compensation)</li> \
+      <li class="text-multi-neutrals-grey90a">salaries</li> \
+      <li class="text-multi-neutrals-grey90a">rental income</li> \
+      <li class="text-multi-neutrals-grey90a">RRSP withdrawals</li> \
+      <li class="text-multi-neutrals-grey90a">taxable interest, dividends and capital gains</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">Don’t includee:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
+      <li class="text-multi-neutrals-grey90a">RDSP payments</li> \
+      <li class="text-multi-neutrals-grey90a">GST/HST credit payments</li> \
+      </ul>',
   partnerIncomeLabel:
     'What will be your partner’s annual net income when you start receiving your benefits?',
-  partnerIncomeHintTitle: 'How will their income be calculated when you apply?',
+  partnerIncomeHintTitle: 'What is included as income?',
   partnerIncomeHintText:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        Your partner’s <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/services/benefits/publicpensions/cpp/old-age-security/guaranteed-income-supplement/apply.html#h2.2-3.1' target='_blank' aria-label='opens a new tab'>income and exemptions</a> will be assessed when you apply based on their latest income tax return. \
-      </p> \
-    </div> \
-  ",
-  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income?',
-  partnerIncomeHintTitleReceiveOAS: 'Is their income about to change?',
+    '<p class="text-multi-neutrals-grey90a">Add all types of income, such as:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">private and public pensions (including retirement and disability)</li> \
+      <li class="text-multi-neutrals-grey90a">benefits (including EI and worker’s compensation)</li> \
+      <li class="text-multi-neutrals-grey90a">salaries</li> \
+      <li class="text-multi-neutrals-grey90a">rental income</li> \
+      <li class="text-multi-neutrals-grey90a">RRSP withdrawals</li> \
+      <li class="text-multi-neutrals-grey90a">taxable interest, dividends and capital gains</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">Don’t includee:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
+      <li class="text-multi-neutrals-grey90a">RDSP payments</li> \
+      <li class="text-multi-neutrals-grey90a">GST/HST credit payments</li> \
+      </ul>',
+  partnerIncomeLabelReceiveOAS: 'What is your partner’s annual net income',
+  partnerIncomeHintTitleReceiveOAS: 'What is included as income?',
   partnerIncomeHintTextReceiveOAS:
-    "<div style='margin-bottom: 16px;'> \
-      <p style='padding-bottom: 8px; color: rgba(51, 51, 51);'> \
-        If your partner is expecting a drop in income, you can enter their estimated income. <a class='hintText' style='text-decoration: underline;' href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html' target='_blank' aria-label='opens a new tab'>Contact us</a> to report this event. \
-      </p> \
-    </div> \
-  ",
+    '<p class="text-multi-neutrals-grey90a">Add all types of income, such as:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">private and public pensions (including retirement and disability)</li> \
+      <li class="text-multi-neutrals-grey90a">benefits (including EI and worker’s compensation)</li> \
+      <li class="text-multi-neutrals-grey90a">salaries</li> \
+      <li class="text-multi-neutrals-grey90a">rental income</li> \
+      <li class="text-multi-neutrals-grey90a">RRSP withdrawals</li> \
+      <li class="text-multi-neutrals-grey90a">taxable interest, dividends and capital gains</li> \
+      </ul> \
+      <p class="mt-4 text-multi-neutrals-grey90a">Don’t includee:</p> \
+      <ul class="list-disc" style="margin-left:36px;"> \
+      <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
+      <li class="text-multi-neutrals-grey90a">RDSP payments</li> \
+      <li class="text-multi-neutrals-grey90a">GST/HST credit payments</li> \
+      </ul>',
+  incomeHelpText:
+    '<p>Your income tax return will be used when you apply. For now, estimate what you could be receiving per year</p>',
+  incomeHelpTextReceiveOAS:
+    "<p>From January to June, your benefits are based on income from 2 years ago. From July to December, they're based on last year's income.</p> \
+      <p style='margin-top: 16px;'>If you retired this year and your income changed significantly, enter this year's income.</p>",
+  partnerIncomeHelpText:
+    '<p>Their income tax return will be used when you apply. For now, estimate what they could be receiving per year.</p>',
+  partnerIncomeHelpTextReceiveOAS:
+    "<p>From January to June, your benefits are based on income from 2 years ago. From July to December, they're based on last year's income.</p>",
 }
 
 export default en

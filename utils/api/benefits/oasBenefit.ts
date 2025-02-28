@@ -2,6 +2,7 @@ import { Translations } from '../../../i18n/api'
 import {
   BenefitKey,
   EntitlementResultType,
+  LivingCountry,
   PartnerBenefitStatus,
   ResultKey,
   ResultReason,
@@ -10,13 +11,13 @@ import {
   CardCollapsedText,
   EligibilityResult,
   EntitlementResultOas,
-  ProcessedInput,
   LinkWithAction,
   MetaDataObject,
   MonthsYears,
+  ProcessedInput,
 } from '../definitions/types'
 import roundToTwo from '../helpers/roundToTwo'
-import { getDeferralIncrease } from '../helpers/utils'
+import { getDeferralIncrease, OasEligibility } from '../helpers/utils'
 import legalValues from '../scrapers/output'
 import { BaseBenefit } from './_base'
 
@@ -28,15 +29,19 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   inputAge: number // Age on the form. Needed as a reference when calculating eligibility for a different age ONLY for non-future benefits
   formAge: number
   formYearsInCanada: number
+  userOas: OasBenefit
+  formReceiving: boolean
   constructor(
     input: ProcessedInput,
     translations: Translations,
+    userOas?: OasBenefit,
     partner?: Boolean,
     future?: Boolean,
     deferral: boolean = false,
     inputAge?: number,
     formAge?: number,
-    formYearsInCanada?: number
+    formYearsInCanada?: number,
+    formReceiving?: boolean
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -48,6 +53,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     this.inputAge = inputAge
     this.formAge = formAge
     this.formYearsInCanada = formYearsInCanada
+    this.userOas = userOas
+    this.formReceiving = formReceiving
   }
 
   protected getEligibility(): EligibilityResult {
@@ -76,7 +83,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       if (meetsReqAge && skipReqIncome)
         return {
           result: ResultKey.INCOME_DEPENDENT,
-          reason: ResultReason.INCOME_MISSING,
+          reason: ResultReason.LIVING_COUNTRY,
           detail: this.translations.detail.oas.eligibleIfIncomeIsLessThan,
           incomeMustBeLessThan: incomeLimit,
         }
@@ -343,7 +350,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         this.input,
         this.eligibility,
         this.entitlement,
-        this.future
+        this.future,
+        this.formYearsInCanada
       )
     } else {
       return {
@@ -361,16 +369,26 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     input,
     eligibility,
     entitlement,
-    future
+    future,
+    formYearsInCanada
   ): MetaDataObject {
     const eligible =
       eligibility.result === ResultKey.ELIGIBLE ||
       eligibility.result === ResultKey.INCOME_DEPENDENT
 
+    //Check future first, if !future don't bother
+    const filledYears =
+      future && !input.livedOnlyInCanada
+        ? +input.yearsInCanadaSince18 !== +formYearsInCanada
+          ? input.yearsInCanadaSince18
+          : null
+        : null
+
     const meta: MetaDataObject = {
       tableData: null,
       currentAge: null,
       monthsTo70: null,
+      residency: filledYears,
       receiveOAS: false,
     }
 
@@ -427,14 +445,26 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         tableData: null,
         currentAge: null,
         monthsTo70: null,
+        residency: filledYears,
         receiveOAS: receivingOAS,
       }
     }
   }
 
+  public updateCollapsedText(): CardCollapsedText[] {
+    return this.getCardCollapsedText()
+  }
+
   protected getCardCollapsedText(): CardCollapsedText[] {
     let cardCollapsedText = super.getCardCollapsedText()
 
+    if (this.input.everLivedSocialCountry) {
+      cardCollapsedText.push(
+        this.partner
+          ? this.translations.detailWithHeading.socialSecurityEligiblePartner
+          : this.translations.detailWithHeading.socialSecurityEligible
+      )
+    }
     // if not eligible, don't bother with any of the below
     if (
       this.eligibility.result !== ResultKey.ELIGIBLE &&
@@ -442,180 +472,112 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     )
       return cardCollapsedText
 
-    if (this.partner && this.entitlement.result !== 0) {
+    if (this.partner) {
+      //EC15
+      if (this.entitlement.result > 0) {
+        if (
+          this.input.partnerBenefitStatus.value === PartnerBenefitStatus.NONE
+        ) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+          )
+        }
+      }
+      //Handle EC9 - EC14
+      if (this.userOas) {
+        if (
+          this.eligibility.result === ResultKey.ELIGIBLE &&
+          this.userOas.eligibility.result === ResultKey.ELIGIBLE
+        ) {
+          if (this.clawbackAmount > 0 && this.userOas.clawbackAmount > 0) {
+            //EC13
+            if (
+              this.userOas.input.livingCountry.value !== LivingCountry.CANADA
+            ) {
+              cardCollapsedText.push(
+                this.translations.detailWithHeading.nonResidentTaxBoth
+              )
+            }
+            //EC14
+            else {
+              cardCollapsedText.push(
+                this.translations.detailWithHeading.recoveryTaxBoth
+              )
+            }
+          }
+        }
+        if (this.clawbackAmount > 0 && this.userOas.clawbackAmount <= 0) {
+          //EC11
+          if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.nonResidentTaxPartner
+            )
+          }
+          //EC12
+          else {
+            cardCollapsedText.push(
+              this.translations.detailWithHeading.recoveryTaxPartner
+            )
+          }
+        }
+      }
+    }
+
+    if (!this.partner) {
+      //RECOVER TAX MESSAGE - if partnered better to handle it in the partnered section to access both benefits
+      if (this.clawbackAmount > 0) {
+        //EC10
+        if (this.input.livingCountry.value !== LivingCountry.CANADA) {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.nonResidentTax
+          )
+        }
+        //EC09
+        else {
+          cardCollapsedText.push(
+            this.translations.detailWithHeading.recoveryTax
+          )
+        }
+      }
+
       if (
-        // eslint-disable-next-line prettier/prettier
-        this.input.partnerBenefitStatus.value ===
-          PartnerBenefitStatus.OAS_GIS ||
-        this.input.partnerBenefitStatus.value === PartnerBenefitStatus.HELP_ME
+        this.entitlement.result == 0 &&
+        this.inputAge > 64 &&
+        this.inputAge < 70 &&
+        !this.input.receiveOAS
       ) {
         cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligible
+          this.translations.detailWithHeading.deferralDelay
         )
-      } else {
+      }
+      const ageCalc = this.formAge ? this.formAge : this.inputAge
+
+      //EC8
+      if (
+        ageCalc >= 70 &&
+        this.inputAge == ageCalc &&
+        !this.formReceiving &&
+        this.entitlement.result > 0
+      ) {
         cardCollapsedText.push(
-          this.translations.detailWithHeading.partnerEligibleButAnsweredNo
+          this.translations.detailWithHeading.retroactivePayment
+        )
+      }
+      //EC19 && EC20
+      if (ageCalc >= 75 && this.entitlement.result > 0) {
+        cardCollapsedText.push(
+          this.translations.detailWithHeading.oasIncreaseAt75Applied
         )
       }
 
-      return cardCollapsedText
-    }
-
-    // getCardText reset the eligibility reason
-    if (this.eligibility.reason === ResultReason.INCOME)
-      return cardCollapsedText
-
-    // increase at 75
-    if (this.currentEntitlementAmount !== this.age75EntitlementAmount) {
-      if (!this.future) {
+      if (ageCalc > 64 && ageCalc < 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75
         )
       }
-    } else
-      cardCollapsedText.push(
-        this.translations.detailWithHeading.oasIncreaseAt75Applied
-      )
-
-    // deferral
-    // if (this.deferralIncrease)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasDeferralApplied
-    //   )
-    // else if (this.input.age >= 65 && this.input.age < 70)
-    //   cardCollapsedText.push(
-    //     this.translations.detailWithHeading.oasDeferralAvailable
-    //   )
+    }
 
     return cardCollapsedText
-  }
-
-  protected getCardText(): string {
-    // overwrite eligibility detail if income too high
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.entitlement.type === EntitlementResultType.NONE
-    ) {
-      //this.eligibility.result = ResultKey.INELIGIBLE
-      this.eligibility.reason = ResultReason.INCOME
-      this.eligibility.detail = this.future
-        ? this.translations.detail.futureEligibleIncomeTooHigh
-        : this.translations.detail.eligibleIncomeTooHigh
-      this.entitlement.autoEnrollment = this.getAutoEnrollment()
-    }
-
-    // INTRO 1 - general eligibility already in the detail
-    let text = this.eligibility.detail
-
-    // INTRO 2 - "expect to receive" variation
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      this.eligibility.reason !== ResultReason.INCOME &&
-      this.entitlement.result > 0
-    ) {
-      if (this.future) {
-        if (!this.input.livedOnlyInCanada) {
-          text += ` ${this.translations.detail.futureExpectToReceivePartial1}`
-          if (
-            this.formAge != this.input.age &&
-            this.formYearsInCanada <= 40 &&
-            this.formYearsInCanada != this.input.yearsInCanadaSince18
-          ) {
-            text += `${this.translations.detail.futureExpectToReceivePartial2}`
-          }
-          text += ` ${this.translations.detail.futureExpectToReceivePartial3}`
-        } else {
-          text += ` ${this.translations.detail.futureExpectToReceive}`
-        }
-      } else {
-        text += ` ${this.translations.detail.expectToReceive}`
-      }
-    }
-
-    // special case
-    if (this.eligibility.result === ResultKey.INCOME_DEPENDENT) {
-      text += `<p class="mt-6">${this.translations.detail.oas.dependOnYourIncome}</p>`
-    }
-
-    // special case
-    if (
-      this.eligibility.result === ResultKey.INELIGIBLE &&
-      this.eligibility.reason === ResultReason.AGE_YOUNG
-    ) {
-      text += this.translations.nextStepTitle
-      //text += `<p class='mt-6'>${this.translations.detail.oas.youShouldReceiveLetter}</p>`
-      text += `<p class='mt-6'>${this.translations.detail.oas.youShouldHaveReceivedLetter}</p>`
-    }
-
-    if (this.eligibility.reason !== ResultReason.INCOME) {
-      const clawbackValue = this.entitlement.clawback
-
-      if (!this.partner && this.input.livingCountry.canada) {
-        text +=
-          clawbackValue > 0
-            ? this.future
-              ? `<div class="mt-8">${this.translations.detail.futureOasClawbackInCanada}</div>`
-              : `<div class="mt-8">${this.translations.detail.oasClawbackInCanada}</div>`
-            : ''
-      } else {
-        text +=
-          clawbackValue > 0
-            ? `<div class="mt-8">${this.translations.detail.oasClawbackNotInCanada}</div>`
-            : ''
-      }
-    }
-
-    // RETROACTIVE PAY
-    if (
-      !this.future &&
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      !this.partner &&
-      (!this.input.receiveOAS || this.deferral) &&
-      (this.input.age > 70 || this.inputAge > 70) &&
-      this.eligibility.reason !== ResultReason.INCOME
-    ) {
-      // if (this.inputAge !== this.input.age) {
-      // Retroactive pay
-      text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.retroactivePay}</p>`
-      text += `<p class='mb-2 mt-6'>${this.translations.detail.oas.receivePayment}</p>`
-      // }
-    }
-
-    // DEFERRAL
-    if (
-      this.eligibility.result === ResultKey.ELIGIBLE &&
-      !this.partner &&
-      (!this.input.receiveOAS || this.deferral) &&
-      this.input.age < 70 &&
-      this.inputAge < 70
-    ) {
-      // your Deferral Options
-
-      // if income too high
-      if (this.eligibility.reason === ResultReason.INCOME) {
-        if (!this.future) {
-          text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-          text += this.translations.detail.delayMonths
-        }
-      }
-
-      // normal case
-      if (this.entitlement.result > 0) {
-        text += `<p class='mb-2 mt-6 font-bold text-[24px]'>${this.translations.detail.yourDeferralOptions}</p>`
-        if (this.future) {
-          // can also check if this.entitlement.clawback === 0
-          text += this.translations.detail.futureDeferralOptions
-        } else {
-          text += this.translations.detail.sinceYouAreSixty
-
-          if (!this.deferral && this.input.yearsInCanadaSince18 < 40) {
-            text += `<p class='mb-2 mt-6'>${this.translations.detail.oas.chooseToDefer}</p>`
-          }
-        }
-      }
-    }
-
-    return text
   }
 
   protected getCardLinks(): LinkWithAction[] {
@@ -625,7 +587,9 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       this.eligibility.result === ResultKey.INCOME_DEPENDENT ||
       this.eligibility.reason === ResultReason.AGE_YOUNG_64
     )
-      links.push(this.translations.links.apply[this.benefitKey])
+      this.formReceiving
+        ? links.push(this.translations.links.SignInSC)
+        : links.push(this.translations.links.apply[this.benefitKey])
     links.push(this.translations.links.overview[this.benefitKey])
     return links
   }
