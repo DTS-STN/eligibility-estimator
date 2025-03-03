@@ -58,10 +58,14 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }, [])
 
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
+
   const [inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
   ] = useSessionStorage('inputs', getDefaultInputs(allFieldConfigs))
+
+  const savedResults = JSON.parse(sessionStorage.getItem('resultPageInputs'))
+
   const [ageDate, setAgeDate] = useState(
     inputs.age ? getBirthMonthAndYear(inputs.age) : null
   )
@@ -95,6 +99,17 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
   }
 
   const [receiveOAS, setReceiveOAS] = useState(false)
+
+  // Get savedResults, overwite inputs with it.
+  useEffect(() => {
+    if (savedResults !== null) {
+      if ('inputs' in savedResults) {
+        for (const [key, value] of Object.entries(savedResults.inputs)) {
+          inputs[key] = value
+        }
+      }
+    }
+  }, [savedResults])
 
   const today = new Date()
   const currYear =
