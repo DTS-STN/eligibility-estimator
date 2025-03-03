@@ -520,71 +520,71 @@ const fr: WebTranslations = {
   incomeHintTitle: 'Comment le revenu est-il calculé?',
   incomeHintText: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
-      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite);</li> \
       <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
       <li class="text-multi-neutrals-grey90a">salaires;</li> \
       <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
-      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>;</li> \
       <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
       </ul> \
       <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
-      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
-  incomeLabelReceiveOAS: 'Quel est votre revenu annuel net?',
+  incomeLabelReceiveOAS: 'Quel était votre revenu annuel net en',
   incomeHintTitleReceiveOAS: 'Comment le revenu est-il calculé?',
   incomeHintTextReceiveOAS: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
-      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite);</li> \
       <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
       <li class="text-multi-neutrals-grey90a">salaires;</li> \
       <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
-      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>;</li> \
       <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
       </ul> \
       <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
-      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   partnerIncomeLabel:
     'Quel sera le revenu annuel net de votre conjoint lorsque vous commencerez à recevoir vos prestations?',
   partnerIncomeHintTitle: 'Comment le revenu est-il calculé?',
   partnerIncomeHintText: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
-      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite);</li> \
       <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
       <li class="text-multi-neutrals-grey90a">salaires;</li> \
       <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
-      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>;</li> \
       <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
       </ul> \
       <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
-      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   partnerIncomeLabelReceiveOAS:
-    'Quel est le revenu annuel net de votre conjoint?',
+    'Quel était le revenu annuel net de votre conjoint en',
   partnerIncomeHintTitleReceiveOAS: 'Comment le revenu est-il calculé?',
   partnerIncomeHintTextReceiveOAS: `<p class="text-multi-neutrals-grey90a">Incluez tous les types de revenus, y compris les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
-      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite;</li> \
+      <li class="text-multi-neutrals-grey90a">pensions privées et publiques (y compris d'invalidité et de retraite);</li> \
       <li class="text-multi-neutrals-grey90a">prestations (y compris l’assurance-emploi et les indemnités de travail);</li> \
       <li class="text-multi-neutrals-grey90a">salaires;</li> \
       <li class="text-multi-neutrals-grey90a">revenus de location;</li> \
-      <li class="text-multi-neutrals-grey90a">retraits d’un REER;</li> \
+      <li class="text-multi-neutrals-grey90a">retraits d’un <dfn><abbr title='Régime enregistré d’épargne-retraite'>REER</abbr></dfn>;</li> \
       <li class="text-multi-neutrals-grey90a">intérêts, dividendes et gains en capital imposables.</li> \
       </ul> \
       <p class="mt-4 text-multi-neutrals-grey90a">N'incluez pas les :</p> \
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
-      <li class="text-multi-neutrals-grey90a">paiements d’un REEI;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la TPS/TVH</li> \
+      <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   incomeHelpText:
     "<p>Votre déclaration de revenus sera utilisée lors de votre demande. Pour l'instant, estimez ce que vous pourriez recevoir par année.</p>",
@@ -592,7 +592,7 @@ const fr: WebTranslations = {
     "<p>De janvier à juin, vos prestations sont basées sur le revenu de 2 ans passés. De juillet à décembre, elles sont basées sur le revenu de l'année dernière.</p> \
       <p style='margin-top: 16px;'>Si vous avez pris votre retraite cette année et votre revenu a beaucoup changé, entrez le revenu de cette année.</p>",
   partnerIncomeHelpText:
-    "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année</p>",
+    "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année.</p>",
   partnerIncomeHelpTextReceiveOAS:
     "<p>De janvier à juin, vos prestations sont basées sur le revenu de 2 ans passés. De juillet à décembre, elles sont basées sur le revenu de l'année dernière.</p>",
 }

@@ -252,10 +252,10 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   useEffect(() => {
     const incomeLabel = receiveOAS
-      ? `${tsln.incomeLabelReceiveOAS} ${currYear}?`
+      ? `${tsln.incomeLabelReceiveOAS} ${currYear}?`
       : tsln.incomeLabel
     const partnerIncomeLabel = receiveOAS
-      ? `${tsln.partnerIncomeLabelReceiveOAS} ${currYear}?`
+      ? `${tsln.partnerIncomeLabelReceiveOAS} ${currYear}?`
       : tsln.partnerIncomeLabel
     const incomeHintTitle = receiveOAS
       ? tsln.incomeHintTitleReceiveOAS
