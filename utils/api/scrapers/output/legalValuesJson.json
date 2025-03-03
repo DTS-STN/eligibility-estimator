@@ -1,13 +1,13 @@
 {
   "lastUpdatedYear": 2023,
-  "lastUpdatedQuarter": "October to December 2024",
+  "lastUpdatedQuarter": "January to March 2025",
   "renewalYearGIS": 2024,
   "oas": {
     "amount": 727.67,
     "amount75": 800.44,
-    "incomeLimit": 148451,
-    "incomeLimit75": 154196,
-    "clawbackIncomeLimit": 90997
+    "incomeLimit": 142609,
+    "incomeLimit75": 148179,
+    "clawbackIncomeLimit": 86912
   },
   "gis": {
     "singleAmount": 1086.88,
