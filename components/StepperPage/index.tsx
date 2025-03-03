@@ -100,17 +100,6 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   const [receiveOAS, setReceiveOAS] = useState(false)
 
-  // Get savedResults, overwite inputs with it.
-  useEffect(() => {
-    if (savedResults !== null) {
-      if ('inputs' in savedResults) {
-        for (const [key, value] of Object.entries(savedResults.inputs)) {
-          inputs[key] = value
-        }
-      }
-    }
-  }, [savedResults])
-
   const today = new Date()
   const currYear =
     today.getMonth() + 1 <= 6
