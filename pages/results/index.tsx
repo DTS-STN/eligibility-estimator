@@ -247,21 +247,22 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         return Number(ageA) - Number(ageB)
       })
 
-      let clientHasAlw = false
-      const mappedClientRes = mergedClientRes
-        .map((ageRes) => {
+      const { mappedClientRes, clientHasAlw } = mergedClientRes.reduce(
+        (acc, ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
+
           if (currAge < psdAge) {
             const hasAlw = Object.values(ageRes)[0].hasOwnProperty('alw')
-            clientHasAlw = hasAlw
-            return hasAlw ? ageRes : null
+            acc.clientHasAlw ||= hasAlw // Flip to true but never back to false
+            if (hasAlw) acc.mappedClientRes.push(ageRes)
+          } else if (currAge >= psdAge) {
+            acc.mappedClientRes.push(ageRes)
           }
 
-          if (currAge >= psdAge) {
-            return ageRes
-          }
-        })
-        .filter((obj) => obj !== null)
+          return acc
+        },
+        { mappedClientRes: [], clientHasAlw: false }
+      )
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
       const mappedPartnerRes = mergedPartnerRes
