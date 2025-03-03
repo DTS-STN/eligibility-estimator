@@ -454,7 +454,6 @@ export class BenefitHandler {
               clientOasWithDeferral.entitlement,
               this.future,
               this.formYearsInCanada
-              // this.rawInput.psdAge
             )
           }
         }
