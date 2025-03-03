@@ -236,9 +236,9 @@ const en: WebTranslations = {
   inflationInfo: `This estimator uses January to March&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
-  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
+  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" aria-label="Learn more about the Canada Pension Plan, opens a new tab" target="_blank">Learn more about the Canada Pension Plan</a>`,
   aboutResultText: 'About the results',
-  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' aria-label='opens a new tab'href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.`,
+  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' aria-label='contact us, opens a new tab'href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.`,
   privacyHeading: 'Privacy',
   privacyDefinition:
     'We don’t collect the information you enter in the estimator.',
