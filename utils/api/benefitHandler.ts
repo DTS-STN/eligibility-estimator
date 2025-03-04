@@ -222,6 +222,8 @@ export class BenefitHandler {
         this.formYearsInCanada,
         psdInput.receiveOAS
       )
+
+      clientOasNoDeferral.cardDetail.meta.residency = psdRes
     } else {
       clientOasNoDeferral = new OasBenefit(
         this.input.client,
@@ -419,7 +421,7 @@ export class BenefitHandler {
         : clientGisNoDeferral
 
     // Add appropriate meta data info and table
-    if (!this.future) {
+    if (!this.future && !this.psdCalc) {
       if (clientOasHelper.canDefer) {
         if (deferralMoreBeneficial) {
           clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
