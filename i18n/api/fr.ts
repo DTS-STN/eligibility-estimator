@@ -528,7 +528,7 @@ const fr: Translations = {
         'Si vous présentez une demande, Service Canada révisera votre déclaration de revenus chaque année. Vous recevrez automatiquement des paiements si votre revenu  est admissible.',
       canApplyOnline: 'Vous pouvez faire une demande pour cette prestation.',
       ifYouAlreadyApplied:
-        "Si vous avez déjà demandé le Supplément de revenu garanti, vous pouvez <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='opens a new tab' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>vous connecter à Mon dossier Service Canada<a/> pour confirmer que vos renseignements sont à jour.",
+        "Si vous avez déjà demandé le Supplément de revenu garanti, vous pouvez <a id='oasLink2' class='text-default-text' style='text-decoration: underline' target='_blank' aria-label='ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/services/mon-dossier.html'>vous connecter à Mon dossier Service Canada<a/> pour confirmer que vos renseignements sont à jour.",
       ifYouAlreadyReceive:
         'Si vous recevez déjà le Supplément de revenu garanti, vous pouvez confirmer que vos renseignements sont à jour dans votre compte {MY_SERVICE_CANADA}.',
     },

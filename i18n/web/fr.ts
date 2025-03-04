@@ -243,7 +243,7 @@ const fr: WebTranslations = {
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
   inflationInfo: `Cet estimateur utilise les taux des prestations de janvier à mars&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
-  learnMoreAboutCpp: `<a className="underline text-default-text" aria-label="En savoir plus sur le Régime de pensions du Canada, opens a new tab" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
+  learnMoreAboutCpp: `<a className="underline text-default-text" aria-label="En savoir plus sur le Régime de pensions du Canada, ouvre dans un nouvel onglet" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
   resultDefinition: `Les résultats ne sont pas des conseils financiers et peuvent changer. Pour une évaluation plus précise de votre montant de prestations estimé, veuillez <a className='text-default-text underline' target='_blank' aria-label='communiquer avec nous, ouvre dans un nouvel onglet' href='https://www.canada.ca/fr/emploi-developpement-social/ministere/coordonnees/sv.html'>communiquer avec nous</a>.`,
   privacyHeading: 'Confidentialité',
