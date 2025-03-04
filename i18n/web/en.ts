@@ -236,9 +236,9 @@ const en: WebTranslations = {
   inflationInfo: `This estimator uses January to March&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
-  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" target="_blank">Learn more about the Canada Pension Plan</a>`,
+  learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" aria-label="Learn more about the Canada Pension Plan, opens a new tab" target="_blank">Learn more about the Canada Pension Plan</a>`,
   aboutResultText: 'About the results',
-  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' aria-label='opens a new tab'href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.`,
+  resultDefinition: `The results are not financial advice and are subject to change. For a more accurate assessment of your estimated benefits amount, please <a className='text-default-text underline' target='_blank' aria-label='contact us, opens a new tab'href='https://www.canada.ca/en/employment-social-development/corporate/contact/oas.html'>contact us</a>.`,
   privacyHeading: 'Privacy',
   privacyDefinition:
     'We don’t collect the information you enter in the estimator.',
@@ -518,7 +518,7 @@ const en: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
       <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Registered Disability Savings Plan">RDSP</abbr></dfn> payments</li> \
-      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Goods and services tax/Harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
+      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="goods and services tax/harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
       </ul>',
   incomeLabelReceiveOAS: 'What was your annual net income in',
   incomeHintTitleReceiveOAS: 'What is included as income?',
@@ -536,7 +536,7 @@ const en: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
       <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Registered Disability Savings Plan">RDSP</abbr></dfn> payments</li> \
-      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Goods and services tax/Harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
+      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="goods and services tax/harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
       </ul>',
   partnerIncomeLabel:
     'What will be your partner’s annual net income when you start receiving your benefits?',
@@ -555,7 +555,7 @@ const en: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
       <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Registered Disability Savings Plan">RDSP</abbr></dfn> payments</li> \
-      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Goods and services tax/Harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
+      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="goods and services tax/harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
       </ul>',
   partnerIncomeLabelReceiveOAS: 'What was your partner’s annual net income in',
   partnerIncomeHintTitleReceiveOAS: 'What is included as income?',
@@ -573,7 +573,7 @@ const en: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">Old Age Security pension, Guaranteed Income Supplement, Allowance or Allowance for the Survivor payments</li> \
       <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Registered Disability Savings Plan">RDSP</abbr></dfn> payments</li> \
-      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="Goods and services tax/Harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
+      <li class="text-multi-neutrals-grey90a"><dfn><abbr title="goods and services tax/harmonized sales tax">GST/HST</abbr></dfn> credit payments</li> \
       </ul>',
   incomeHelpText:
     '<p>Your income tax return will be used when you apply. For now, estimate what you could be receiving per year.</p>',

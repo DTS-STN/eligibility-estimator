@@ -106,7 +106,7 @@ export const CurrencyField: React.VFC<CurrencyFieldProps> = ({
           isNumericString={true}
           placeholder={placeholder}
           onChange={(e) => handleOnChange(e)}
-          required
+          required={requiredText ? true : false}
           autoComplete="off"
           enterKeyHint="done"
           allowNegative={false}
