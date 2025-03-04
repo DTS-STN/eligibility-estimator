@@ -531,7 +531,7 @@ const fr: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
       <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="taxe sur les produits et services/taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   incomeLabelReceiveOAS: 'Quel était votre revenu annuel net en',
   incomeHintTitleReceiveOAS: 'Comment le revenu est-il calculé?',
@@ -548,7 +548,7 @@ const fr: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
       <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="taxe sur les produits et services/taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   partnerIncomeLabel:
     'Quel sera le revenu annuel net de votre conjoint lorsque vous commencerez à recevoir vos prestations?',
@@ -566,7 +566,7 @@ const fr: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
       <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="taxe sur les produits et services/taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   partnerIncomeLabelReceiveOAS:
     'Quel était le revenu annuel net de votre conjoint en',
@@ -584,7 +584,7 @@ const fr: WebTranslations = {
       <ul class="list-disc" style="margin-left:36px;"> \
       <li class="text-multi-neutrals-grey90a">paiements de la pension de la Sécurité de la vieillesse, du Supplément de revenu garanti, de l’Allocation et de l’Allocation au survivant;</li> \
       <li class="text-multi-neutrals-grey90a">paiements d’un <dfn><abbr title='Régime enregistré d’épargne-invalidité'>REEI</abbr></dfn>;</li> \
-      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="Taxe sur les produits et services/Taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
+      <li class="text-multi-neutrals-grey90a">crédits pour la <dfn><abbr title="taxe sur les produits et services/taxe de vente harmonisée">TPS/TVH</abbr></dfn>.</li> \
       </ul>`,
   incomeHelpText:
     "<p>Votre déclaration de revenus sera utilisée lors de votre demande. Pour l'instant, estimez ce que vous pourriez recevoir par année.</p>",
