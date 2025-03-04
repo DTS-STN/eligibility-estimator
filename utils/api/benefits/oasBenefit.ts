@@ -31,6 +31,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   formYearsInCanada: number
   userOas: OasBenefit
   formReceiving: boolean
+  psdCalc: boolean
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -41,7 +42,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     inputAge?: number,
     formAge?: number,
     formYearsInCanada?: number,
-    formReceiving?: boolean
+    formReceiving?: boolean,
+    psdCalc?: boolean
   ) {
     super(input, translations, BenefitKey.oas)
     this.partner = partner
@@ -55,6 +57,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     this.formYearsInCanada = formYearsInCanada
     this.userOas = userOas
     this.formReceiving = formReceiving
+    this.psdCalc = psdCalc
   }
 
   protected getEligibility(): EligibilityResult {
@@ -343,7 +346,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
-    if (this.future) {
+    if (this.future || this.psdCalc) {
       return OasBenefit.buildMetadataObj(
         this.input.age,
         this.input.age,
