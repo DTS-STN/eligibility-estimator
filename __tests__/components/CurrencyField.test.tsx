@@ -25,14 +25,14 @@ describe('CurrencyField component', () => {
     const props = {
       name: 'income',
       label: 'What is your annual net income?',
-      required: true,
+      requiredText: 'Required',
     }
 
     const ui = (
       <CurrencyField
         name={props.name}
         label={props.label}
-        required={props.required}
+        requiredText={props.requiredText}
       />
     )
 
@@ -54,7 +54,7 @@ describe('CurrencyField component', () => {
       name: 'income',
       label: 'What is your annual net income?',
       error: 'This field is required.',
-      required: true,
+      requiredText: 'Required',
     }
 
     const ui = (
@@ -62,7 +62,7 @@ describe('CurrencyField component', () => {
         name={props.name}
         label={props.label}
         error={props.error}
-        required={props.required}
+        requiredText={props.requiredText}
       />
     )
 
