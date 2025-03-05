@@ -592,7 +592,7 @@ const fr: WebTranslations = {
     "<p>De janvier à juin, vos prestations sont basées sur le revenu de 2 ans passés. De juillet à décembre, elles sont basées sur le revenu de l'année dernière.</p> \
       <p style='margin-top: 16px;'>Si vous avez pris votre retraite cette année et votre revenu a beaucoup changé, entrez le revenu de cette année.</p>",
   partnerIncomeHelpText:
-    "<p>Leur déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année.</p>",
+    "<p>Sa déclaration de revenus sera évaluée lors de votre demande. Pour l'instant, estimez ce que votre conjoint pourrait recevoir par année.</p>",
   partnerIncomeHelpTextReceiveOAS:
     "<p>De janvier à juin, vos prestations sont basées sur le revenu de 2 ans passés. De juillet à décembre, elles sont basées sur le revenu de l'année dernière.</p>",
 }
