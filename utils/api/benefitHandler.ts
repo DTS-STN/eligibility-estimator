@@ -35,7 +35,7 @@ export class BenefitHandler {
   compare: Boolean
   formAge: number
   formYearsInCanada: number
-  psdCalc: boolean
+  psdCalc: Boolean
 
   constructor(
     readonly rawInput: Partial<RequestInput>,
