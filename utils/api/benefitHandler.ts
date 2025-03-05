@@ -35,7 +35,7 @@ export class BenefitHandler {
   compare: Boolean
   formAge: number
   formYearsInCanada: number
-  psdCalc: boolean
+  psdCalc: Boolean
 
   constructor(
     readonly rawInput: Partial<RequestInput>,
@@ -210,7 +210,6 @@ export class BenefitHandler {
           years: 0,
         }),
       }
-
       clientOasNoDeferral = new OasBenefit(
         psdInput,
         this.fields.translations,
@@ -221,8 +220,7 @@ export class BenefitHandler {
         psdInput.age,
         this.formAge,
         this.formYearsInCanada,
-        psdInput.receiveOAS,
-        this.psdCalc
+        psdInput.receiveOAS
       )
 
       clientOasNoDeferral.cardDetail.meta.residency = psdRes
