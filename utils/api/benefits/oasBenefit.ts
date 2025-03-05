@@ -370,7 +370,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     eligibility,
     entitlement,
     future,
-    formYearsInCanada
+    formYearsInCanada,
+    psdCalc = false
   ): MetaDataObject {
     const eligible =
       eligibility.result === ResultKey.ELIGIBLE ||
