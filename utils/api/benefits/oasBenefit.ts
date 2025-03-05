@@ -346,7 +346,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   // Add logic here that will generate data for Table component and additional text
   // Translations delegated to BenefitCards component on FE
   protected getMetadata(): any {
-    if (this.future || this.psdCalc) {
+    if (this.future) {
       return OasBenefit.buildMetadataObj(
         this.input.age,
         this.input.age,
@@ -373,19 +373,28 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     eligibility,
     entitlement,
     future,
-    formYearsInCanada
+    formYearsInCanada,
+    psdCalc = false
   ): MetaDataObject {
     const eligible =
       eligibility.result === ResultKey.ELIGIBLE ||
       eligibility.result === ResultKey.INCOME_DEPENDENT
 
     //Check future first, if !future don't bother
+    console.log('currentAge', currentAge)
+    console.log('baseAge', baseAge)
+    console.log('input', input)
+    console.log('input.yearsInCanadaSince18', input.yearsInCanadaSince18)
+    console.log('formYearsInCanada', formYearsInCanada)
+
     const filledYears =
-      future && !input.livedOnlyInCanada
+      (future || psdCalc) && !input.livedOnlyInCanada
         ? +input.yearsInCanadaSince18 !== +formYearsInCanada
           ? input.yearsInCanadaSince18
           : null
         : null
+
+    console.log('filledYears', filledYears)
 
     const meta: MetaDataObject = {
       tableData: null,

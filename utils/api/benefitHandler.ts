@@ -423,7 +423,8 @@ export class BenefitHandler {
         : clientGisNoDeferral
 
     // Add appropriate meta data info and table
-    if (!this.future && !this.psdCalc) {
+    if (!this.future) {
+      console.log('build metadata being triggered here')
       if (clientOasHelper.canDefer) {
         if (deferralMoreBeneficial) {
           clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
@@ -433,7 +434,8 @@ export class BenefitHandler {
             clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
             clientOasWithDeferral.entitlement,
             this.future,
-            this.formYearsInCanada
+            this.formYearsInCanada,
+            this.psdCalc
           )
         } else {
           // Scenario when client age is same as eligibility age. They could choose not to receive OAS yet until later so we show the deferral table.
@@ -445,7 +447,8 @@ export class BenefitHandler {
               clientOasNoDeferral.eligibility,
               clientOasNoDeferral.entitlement,
               this.future,
-              this.formYearsInCanada
+              this.formYearsInCanada,
+              this.psdCalc
             )
           } else {
             clientOas.cardDetail.meta = OasBenefit.buildMetadataObj(
@@ -455,7 +458,8 @@ export class BenefitHandler {
               clientOasWithDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
               clientOasWithDeferral.entitlement,
               this.future,
-              this.formYearsInCanada
+              this.formYearsInCanada,
+              this.psdCalc
             )
           }
         }
@@ -467,7 +471,8 @@ export class BenefitHandler {
           clientOasNoDeferral.eligibility, // 65to74 entitlement is equivalent to entitlement at age of eligibility with years of residency at age of eligibility and 0 months deferral
           clientOasNoDeferral.entitlement,
           this.future,
-          this.formYearsInCanada
+          this.formYearsInCanada,
+          this.psdCalc
         )
       }
     }

@@ -258,6 +258,7 @@ export class FutureHandler {
     }
 
     const futureAges = getAgeArray(agesInputObj)
+    console.log('futureAges', futureAges)
     const psdAge = Number(this.query.psdAge)
 
     let result = this.futureResultsObj
