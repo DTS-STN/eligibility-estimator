@@ -1,13 +1,13 @@
 {
 	"lastupdatedYear": "2023",
-	"lastupdatedQuarter": "October to December 2024",
+	"lastupdatedQuarter": "January to March 2025",
 	"renewalYearGIS": "2024",
 	"oas": {
 		"average": "727.67",
 		"average75": "800.44",
-		"maximum": "148,451",
-		"maximum75": "154,196",
-		"clawback": "90,997"
+		"maximum": "142,609",
+		"maximum75": "148,179",
+		"clawback": "86,912"
 	},
 	"gis": {
 		"single-amount": "1,086.88",

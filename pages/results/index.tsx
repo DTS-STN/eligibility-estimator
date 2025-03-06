@@ -138,6 +138,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdPartneredHandleAndSet = (psdAge) => {
     const clientAge = Number(inputHelper.asObjectWithLanguage.age)
     const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+    const invSep = inputHelper.asObjectWithLanguage.invSeparated === 'true'
     const clientRes = Number(
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
         Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
@@ -246,19 +247,22 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         return Number(ageA) - Number(ageB)
       })
 
-      const mappedClientRes = mergedClientRes
-        .map((ageRes) => {
+      const { mappedClientRes, clientHasAlw } = mergedClientRes.reduce(
+        (acc, ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
+
           if (currAge < psdAge) {
             const hasAlw = Object.values(ageRes)[0].hasOwnProperty('alw')
-            return hasAlw ? ageRes : null
+            acc.clientHasAlw ||= hasAlw // Flip to true but never back to false
+            if (hasAlw) acc.mappedClientRes.push(ageRes)
+          } else if (currAge >= psdAge) {
+            acc.mappedClientRes.push(ageRes)
           }
 
-          if (currAge >= psdAge) {
-            return ageRes
-          }
-        })
-        .filter((obj) => obj !== null)
+          return acc
+        },
+        { mappedClientRes: [], clientHasAlw: false }
+      )
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
       const mappedPartnerRes = mergedPartnerRes
@@ -266,8 +270,14 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           const currAge = Number(Object.keys(ageRes)[0])
           const equivClientAge = String(currAge + partnersAgeDiff)
 
+          const recalcCase =
+            partnerAge > clientAge &&
+            currAge > partnerEliObj.ageOfEligibility &&
+            !invSep &&
+            clientHasAlw
+
           if (!clientResAges.includes(equivClientAge)) {
-            if (currAge === partnerEliObj.ageOfEligibility) {
+            if (currAge === partnerEliObj.ageOfEligibility || recalcCase) {
               // This means that the partner became independently eligible for OAS before the client's pension start date,
               // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
 

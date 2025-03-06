@@ -249,11 +249,11 @@ export class FutureHandler {
     const agesInputObj = {
       client: {
         age: orgClientAge,
-        res: clientOnlyCanada ? 40 : clientRes,
+        res: clientRes,
       },
       partner: {
         age: orgPartnerAge,
-        res: partnerOnlyCanada || orgPartnerAge < 60 ? 40 : partnerRes || 0,
+        res: partnerRes,
       },
     }
 
