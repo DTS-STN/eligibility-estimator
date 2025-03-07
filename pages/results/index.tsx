@@ -276,9 +276,10 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
       const mappedPartnerRes = mergedPartnerRes
-        .map((ageRes) => {
+        .map((ageRes, index) => {
           const currAge = Number(Object.keys(ageRes)[0])
           const equivClientAge = String(currAge + partnersAgeDiff)
+          const prevResult = mergedPartnerRes[index - 1]
 
           const recalcCase =
             partnerAge > clientAge &&
@@ -318,6 +319,21 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
               const newPartnerResults = getEligibleBenefits(
                 partnerHandler.benefitResults.partner
               )
+
+              if (prevResult) {
+                const gis = prevResult[Object.keys(prevResult)[0]]['gis']
+                const previousBenefitTotal =
+                  prevResult[Object.keys(prevResult)[0]]['oas'].entitlement
+                    .result + (gis ? gis.entitlement.result : 0)
+
+                const eligibleTotalAmount = Object.values(newPartnerResults)
+                  .map((benefit: any) => benefit.entitlement?.result || 0)
+                  .reduce((sum, amount) => sum + amount, 0)
+
+                if (previousBenefitTotal === eligibleTotalAmount) {
+                  return null
+                }
+              }
 
               return { [currAge]: newPartnerResults }
             } else {
