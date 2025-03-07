@@ -119,9 +119,7 @@ const FieldFactory: React.FC<FieldProps> = ({
           field={field}
           requiredText={tsln.required}
           placeholder={getPlaceholderForSelect(field, tsln)}
-          customOnChange={(newValue: { value: string; label: string }) =>
-            handleOnChange(field, newValue.value)
-          }
+          customOnChange={(e) => handleOnChange(field, e.target.value)}
           value={null}
         />
       )
