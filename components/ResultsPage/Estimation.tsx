@@ -114,6 +114,46 @@ export const Estimation: React.VFC<{
     return isLast
   }
 
+  const formatAge = (age: number): string => {
+    const years = Math.floor(age) // Extract years
+    const decimalPart = age - years // Get decimal portion
+
+    // Map decimal parts to corresponding months
+    const monthMapping: { [key: number]: number } = {
+      0: 0,
+      0.08: 1,
+      0.17: 2,
+      0.25: 3,
+      0.33: 4,
+      0.42: 5,
+      0.5: 6,
+      0.58: 7,
+      0.67: 8,
+      0.75: 9,
+      0.83: 10,
+      0.92: 11,
+    }
+
+    // Find the closest month value
+    const closestKey = Object.keys(monthMapping)
+      .map(parseFloat)
+      .reduce((prev, curr) =>
+        Math.abs(curr - decimalPart) < Math.abs(prev - decimalPart)
+          ? curr
+          : prev
+      )
+
+    const months = monthMapping[closestKey] ?? 0
+
+    return `${years}${
+      months != 0
+        ? language == 'fr'
+          ? ` ans et ${months} mois`
+          : ` and ${months} months`
+        : ''
+    }`
+  }
+
   //BUILD THE SUMMARY STRINGS FOR EACH BENFIT
   const buildSummaryString = () => {
     let text = ''
@@ -123,7 +163,8 @@ export const Estimation: React.VFC<{
       ? apiTrans.detail.yourPartner
       : apiTrans.detail.you
 
-    const displayAge = Math.trunc(Number(age)) // If this is the first occurence of the "same" age (68.08), leave truncated, but if it's subsequent (68.67) then add the months
+    // const displayAge = Math.trunc(Number(age)) // If this is the first occurence of the "same" age (68.08), leave truncated, but if it's subsequent (68.67) then add the months
+    const displayAge = age
     const firstOasGis = isFirstOasGis()
     const lastOasGis = isLastOasGis()
 
@@ -140,9 +181,20 @@ export const Estimation: React.VFC<{
       }
       //FUTURE ELIGIBLE
       else {
-        text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
-          apiTrans.detail.youCouldReceiveTo
-        } 65${language == 'fr' ? ' ans' : ''},`
+        const hasNext = arrayOfBen.indexOf(resultObject) < arrayOfBen.length - 1
+        const nextBenefitResult = hasNext
+          ? arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
+          : null
+
+        const nextBenefitAge = nextBenefitResult
+          ? Math.trunc(Number(Object.keys(nextBenefitResult)[0]))
+          : '65'
+
+        text = `${apiTrans.detail.youCouldReceiveFrom} ${Math.trunc(
+          displayAge
+        )} ${apiTrans.detail.youCouldReceiveTo} ${nextBenefitAge}${
+          language == 'fr' ? ' ans' : ''
+        },`
       }
       text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
     }
@@ -206,11 +258,11 @@ export const Estimation: React.VFC<{
           //LAST ESTIMATE
           if (lastOasGis) {
             //I5
-            text = `${apiTrans.detail.youCouldStartReceivingAt} ${displayAge}${
-              language == 'fr' ? ' ans' : ''
-            }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
-              apiTrans.detail.youCouldStartReceiving
-            }${
+            text = `${apiTrans.detail.youCouldStartReceivingAt} ${Math.trunc(
+              displayAge
+            )}${language == 'fr' ? ' ans' : ''}, ${
+              partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
+            } ${apiTrans.detail.youCouldStartReceiving}${
               showPartnerAmounts()
                 ? ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
                 : ''
@@ -229,15 +281,17 @@ export const Estimation: React.VFC<{
               nextBenefitResult[Object.keys(nextBenefitResult)[0]]['oas']
                 .entitlement.result + (gis ? gis.entitlement.result : 0)
 
-            const nextBenefitAge = Math.trunc(
-              Number(Object.keys(nextBenefitResult)[0])
-            )
+            const nextBenefitAge = Number(Object.keys(nextBenefitResult)[0])
+
+            const theSame = Math.trunc(displayAge) == Math.trunc(nextBenefitAge)
 
             //NEXT SAME
             if (eligibleTotalAmount == nextBenefitTotal) {
-              text = `${
-                apiTrans.detail.youCouldStartReceivingAt
-              } ${displayAge}${language == 'fr' ? ' ans' : ''}, ${
+              text = `${apiTrans.detail.youCouldStartReceivingAt} ${
+                theSame
+                  ? formatAge(displayAge)
+                  : `${Math.trunc(displayAge)}${language == 'fr' ? ' ans' : ''}`
+              }, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldStartReceiving}${
                 showPartnerAmounts()
@@ -247,9 +301,18 @@ export const Estimation: React.VFC<{
             }
             //NEXT NOT SAME
             else {
-              text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
-                apiTrans.detail.youCouldReceiveTo
-              } ${nextBenefitAge}${language == 'fr' ? ' ans' : ''},`
+              const theSame =
+                Math.trunc(displayAge) == Math.trunc(nextBenefitAge)
+
+              text = `${apiTrans.detail.youCouldReceiveFrom} ${
+                theSame ? formatAge(displayAge) : Math.trunc(displayAge)
+              } ${apiTrans.detail.youCouldReceiveTo} ${
+                theSame
+                  ? formatAge(nextBenefitAge)
+                  : `${Math.trunc(nextBenefitAge)}${
+                      language == 'fr' ? ' ans' : ''
+                    }`
+              },`
               text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive}${
                 showPartnerAmounts()
                   ? ` ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}`
@@ -289,10 +352,19 @@ export const Estimation: React.VFC<{
         }
         //PREVIOUS NOT THE SAME
         else {
+          const previousBenefitResult =
+            arrayOfBen[arrayOfBen.indexOf(resultObject) - 1]
+
+          const prevBenefitAge = Number(Object.keys(previousBenefitResult)[0])
+
+          const theSame = Math.trunc(prevBenefitAge) == Math.trunc(displayAge)
+
           //IS LAST
           if (lastOasGis) {
-            text = `${apiTrans.detail.youCouldStartReceivingAt} ${displayAge}${
-              language == 'fr' ? ' ans' : ''
+            text = `${apiTrans.detail.youCouldStartReceivingAt} ${
+              theSame
+                ? formatAge(displayAge)
+                : `${Math.trunc(displayAge)}${language == 'fr' ? ' ans' : ''}`
             }, ${partner ? apiTrans.detail.yourPartner : apiTrans.detail.you} ${
               apiTrans.detail.youCouldContinueReceiving
             }${
@@ -301,6 +373,13 @@ export const Estimation: React.VFC<{
                 : ''
             }:`
           } else {
+            const previousBenefitResult =
+              arrayOfBen[arrayOfBen.indexOf(resultObject) - 1]
+
+            const prevBenefitAge = Number(Object.keys(previousBenefitResult)[0])
+
+            const theSame = Math.trunc(prevBenefitAge) == Math.trunc(displayAge)
+
             const nextBenefitResult =
               arrayOfBen[arrayOfBen.indexOf(resultObject) + 1]
 
@@ -315,9 +394,9 @@ export const Estimation: React.VFC<{
             const nextBenefitAge = Object.keys(nextBenefitResult)[0]
 
             if (eligibleTotalAmount == nextBenefitTotal) {
-              text = `${
-                apiTrans.detail.youCouldStartReceivingAt
-              } ${displayAge}${language == 'fr' ? ' ans' : ''}, ${
+              text = `${apiTrans.detail.youCouldStartReceivingAt} ${Math.trunc(
+                displayAge
+              )}${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldContinueReceiving}${
                 showPartnerAmounts()
@@ -325,11 +404,11 @@ export const Estimation: React.VFC<{
                   : ''
               }:`
             } else {
-              text = `${apiTrans.detail.youCouldReceiveFrom} ${displayAge} ${
-                apiTrans.detail.youCouldReceiveTo
-              } ${Math.trunc(Number(nextBenefitAge))}${
-                language == 'fr' ? ' ans' : ''
-              },`
+              text = `${apiTrans.detail.youCouldReceiveFrom} ${
+                theSame ? formatAge(displayAge) : Math.trunc(displayAge)
+              } ${apiTrans.detail.youCouldReceiveTo} ${Math.trunc(
+                Number(nextBenefitAge)
+              )}${language == 'fr' ? ' ans' : ''},`
               text += ` ${isPartnerStr} ${
                 apiTrans.detail.youCouldContinueReceiving
               }${
