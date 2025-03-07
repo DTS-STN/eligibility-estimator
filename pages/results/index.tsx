@@ -322,6 +322,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
               if (prevResult) {
                 const gis = prevResult[Object.keys(prevResult)[0]]['gis']
+
                 const previousBenefitTotal =
                   prevResult[Object.keys(prevResult)[0]]['oas'].entitlement
                     .result + (gis ? gis.entitlement.result : 0)
@@ -340,6 +341,28 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
               return null
             }
           } else {
+            // if current age and previous result age are the same and are both less than 65 (ALW case) get the ALW amount and if they are the same then return null
+
+            if (prevResult) {
+              const sameAgeResults =
+                Math.floor(currAge) === Math.floor(+Object.keys(prevResult)[0])
+
+              const alwAges =
+                Math.floor(currAge) < 65 &&
+                Math.floor(+Object.keys(prevResult)[0]) < 65
+
+              if (sameAgeResults && alwAges) {
+                const alw = prevResult[Object.keys(prevResult)[0]]['alw']
+                const previousBenefitTotal = alw ? alw.entitlement.result : 0
+                const eligibleTotalAmount =
+                  Object.values(ageRes)[0]['alw'].entitlement?.result || 0
+
+                return previousBenefitTotal === eligibleTotalAmount
+                  ? null
+                  : ageRes
+              }
+            }
+
             return ageRes
           }
         })
