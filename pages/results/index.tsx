@@ -194,7 +194,17 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     })
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
+    const sameResUsed =
+      psdQuery.yearsInCanadaSince18 ===
+      inputHelper.asObjectWithLanguage.yearsInCanadaSince18
+
     if ('results' in psdResults) {
+      // not their actual residency necessarily but how many years of residency the calculation is based on
+      psdResults.results.oas.cardDetail.meta.residency = !clientOnlyCanada
+        ? sameResUsed
+          ? null
+          : psdQuery.yearsInCanadaSince18
+        : null
       const clientPsd = {
         [psdAge]: getEligibleBenefits(psdResults.results) || {},
       }
