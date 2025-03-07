@@ -588,7 +588,7 @@ const fr: Translations = {
     },
     partnerEligibleButAnsweredNo: {
       heading: 'Votre conjoint pourrait être admissible',
-      text: 'Vous pouvez <a class="link-no-deco" href="/fr/questions?step=age" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
+      text: 'Vous pouvez <a class="link-no-deco" href="/fr/questions?step=age#partnerBenefitStatus" class="text-default-text" style="text-decoration: underline">modifier vos réponses</a> pour voir ce que vous et votre partenaire pourriez recevoir si votre partenaire recevait la pension de la Sécurité de la vieillesse.',
     },
     recoveryTax: {
       heading: 'L’impôt de récupération s’appliquera à votre pension',
