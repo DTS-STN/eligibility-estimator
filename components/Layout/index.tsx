@@ -128,7 +128,7 @@ export const Layout: React.VFC<{
     <>
       <Head title={title} />
       {/* <TestBanner /> */}
-      <main className="mainContent">
+      <div className="mainContent">
         <div
           id="topOfPageFocus"
           tabIndex={-1}
@@ -175,8 +175,7 @@ export const Layout: React.VFC<{
               </div>
             </>
           )}
-
-          {children}
+          <main property="mainContentOfPage">{children}</main>
         </div>
 
         {(router.pathname === '/results' ||
@@ -197,7 +196,7 @@ export const Layout: React.VFC<{
         </div>
 
         <Footer id="footer" locale={router.locale} />
-      </main>
+      </div>
     </>
   )
 }
