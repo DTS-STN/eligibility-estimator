@@ -155,27 +155,31 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          {!router.pathname.includes('/questions') && (
-            <>
-              <h1 id="applicationTitle" className="h1 mt-8 mb-2">
-                {title}
-              </h1>
-              <div>
-                <div className="my-6">
-                  <Message
-                    id={'wip'}
-                    iconId={'testkey'}
-                    iconAltText={tsln.infoText}
-                    type={'info'}
-                    heading={tsln.workInProgress}
-                    body={tsln.workInProgressBody}
-                    asHtml
-                  />
+
+          <main property="mainContentOfPage">
+            {!router.pathname.includes('/questions') && (
+              <>
+                <h1 id="applicationTitle" className="h1 mt-8 mb-2">
+                  {title}
+                </h1>
+                <div>
+                  <div className="my-6">
+                    <Message
+                      id={'wip'}
+                      iconId={'testkey'}
+                      iconAltText={tsln.infoText}
+                      type={'info'}
+                      heading={tsln.workInProgress}
+                      body={tsln.workInProgressBody}
+                      asHtml
+                    />
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
-          <main property="mainContentOfPage">{children}</main>
+              </>
+            )}
+
+            {children}
+          </main>
         </div>
 
         {(router.pathname === '/results' ||
