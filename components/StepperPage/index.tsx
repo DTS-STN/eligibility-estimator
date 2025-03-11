@@ -46,17 +46,6 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   const { step } = router.query
 
-  useEffect(() => {
-    // Redirect to the default step if no step is specified or the step is invalid
-    if (
-      !step ||
-      typeof step !== 'string' ||
-      !Object.values(formSteps).includes(step)
-    ) {
-      router.replace(`/questions?step=${defaultStep}`)
-    }
-  }, [])
-
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
   const [inputs, setInputs]: [
     FieldInputsObject,
