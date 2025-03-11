@@ -340,6 +340,25 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
               return null
             }
           } else {
+            if (prevResult) {
+              const sameAgeResults =
+                Math.floor(currAge) === Math.floor(+Object.keys(prevResult)[0])
+
+              const alwAges =
+                Math.floor(currAge) < 65 &&
+                Math.floor(+Object.keys(prevResult)[0]) < 65
+
+              if (sameAgeResults && alwAges) {
+                const alw = prevResult[Object.keys(prevResult)[0]]['alw']
+                const previousBenefitTotal = alw ? alw.entitlement.result : 0
+                const eligibleTotalAmount =
+                  Object.values(ageRes)[0]['alw'].entitlement?.result || 0
+
+                return previousBenefitTotal === eligibleTotalAmount
+                  ? null
+                  : ageRes
+              }
+            }
             return ageRes
           }
         })
