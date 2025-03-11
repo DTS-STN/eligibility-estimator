@@ -130,6 +130,17 @@ export function Header({
                 width="375"
                 height="35"
               />
+              <span className="hidden">
+                {' '}
+                /{' '}
+                <span lang={`${language === 'en' ? 'en' : 'fr'}`}>
+                  {`${
+                    language === 'en'
+                      ? 'Government of Canada'
+                      : 'Gouvernement du Canada'
+                  }`}
+                </span>
+              </span>
             </a>
             <h3 className="sr-only">{headerText.languageSelection}</h3>
             <Link href={langUrl} locale={language}>
