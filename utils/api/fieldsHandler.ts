@@ -252,7 +252,7 @@ export class FieldsHandler {
       // default value = undefined
       if (
         this.input.partner.livedOnlyInCanada === false ||
-        !this.input.partner.livingCountry.canada
+        this.input.partner.livingCountry.value === 'OTH'
       ) {
         if (
           this.input.client.partnerBenefitStatus.value ===
