@@ -40,8 +40,6 @@ export const FormSelect: React.VFC<SelectProps> = ({
     (item) => item.key === field.value
   )
 
-  console.log('current item', currentItemKeyText)
-
   const currentItem = {
     label: currentItemKeyText.text,
     value: currentItemKeyText.key,
