@@ -453,6 +453,8 @@ const en: Translations = {
     firstYearEligible: '{FIRST_ELIGIBLE_YEAR}',
     lastYearEligible: ' onwards',
     currentEligible: 'At this time',
+    inTheYear: '<span class="hidden">In the year</span>',
+    fromYear: '<span class="hidden">In the year</span>',
     you: 'you',
     yourPartner: 'your partner',
     youCouldReceive: 'could receive',

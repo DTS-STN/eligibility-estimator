@@ -464,6 +464,8 @@ const fr: Translations = {
     firstYearEligible: '{FIRST_ELIGIBLE_YEAR}',
     lastYearEligible: 'À partir de ',
     currentEligible: 'Présentement',
+    inTheYear: "<span class='hidden'>Dans l'année</span>",
+    fromYear: "<span class='hidden'>l'année</span>",
     you: 'vous pourriez',
     yourPartner: 'votre conjoint pourrait',
     youCouldReceivePerMonth: 'par mois',
