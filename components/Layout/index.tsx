@@ -128,7 +128,7 @@ export const Layout: React.VFC<{
     <>
       <Head title={title} />
       {/* <TestBanner /> */}
-      <main className="mainContent">
+      <div className="mainContent">
         <div
           id="topOfPageFocus"
           tabIndex={-1}
@@ -155,28 +155,31 @@ export const Layout: React.VFC<{
               logoAltText: tsln.logoAltText,
             }}
           />
-          {!router.pathname.includes('/questions') && (
-            <>
-              <h1 id="applicationTitle" className="h1 mt-8 mb-2">
-                {title}
-              </h1>
-              <div>
-                <div className="my-6">
-                  <Message
-                    id={'wip'}
-                    iconId={'testkey'}
-                    iconAltText={tsln.infoText}
-                    type={'info'}
-                    heading={tsln.workInProgress}
-                    body={tsln.workInProgressBody}
-                    asHtml
-                  />
-                </div>
-              </div>
-            </>
-          )}
 
-          {children}
+          <main property="mainContentOfPage">
+            {!router.pathname.includes('/questions') && (
+              <>
+                <h1 id="applicationTitle" className="h1 mt-8 mb-2">
+                  {title}
+                </h1>
+                <div>
+                  <div className="my-6">
+                    <Message
+                      id={'wip'}
+                      iconId={'testkey'}
+                      iconAltText={tsln.infoText}
+                      type={'info'}
+                      heading={tsln.workInProgress}
+                      body={tsln.workInProgressBody}
+                      asHtml
+                    />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {children}
+          </main>
         </div>
 
         {(router.pathname === '/results' ||
@@ -197,7 +200,7 @@ export const Layout: React.VFC<{
         </div>
 
         <Footer id="footer" locale={router.locale} />
-      </main>
+      </div>
     </>
   )
 }
