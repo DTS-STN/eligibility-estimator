@@ -47,6 +47,21 @@ export class InputHelper {
         field.config.type === FieldType.CURRENCY
           ? InputHelper.sanitizeValue(newValue, this.language)
           : newValue
+
+      if (field.key === FieldKey.LIVING_COUNTRY && newValue === 'OTH') {
+        this.inputs['livedOnlyInCanada'] = 'false'
+      }
+      if (field.key === FieldKey.LIVING_COUNTRY && newValue === 'CAN') {
+        delete this.inputs['livedOnlyInCanada']
+      }
+
+      if (field.key === FieldKey.PARTNER_LIVING_COUNTRY && newValue === 'OTH') {
+        this.inputs['partnerLivedOnlyInCanada'] = 'false'
+      }
+      if (field.key === FieldKey.PARTNER_LIVING_COUNTRY && newValue === 'CAN') {
+        delete this.inputs['partnerLivedOnlyInCanada']
+      }
+
       this.setInputs(this.inputs)
     }
   }

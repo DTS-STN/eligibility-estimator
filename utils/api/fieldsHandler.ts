@@ -192,7 +192,10 @@ export class FieldsHandler {
     }
 
     // default value = undefined
-    if (this.input.client.livedOnlyInCanada === false) {
+    if (
+      this.input.client.livedOnlyInCanada === false ||
+      !this.input.client.livingCountry.canada
+    ) {
       if (this.input.client.receiveOAS === true) {
         requiredFields.push(FieldKey.YEARS_IN_CANADA_SINCE_OAS)
       } else {
@@ -240,14 +243,17 @@ export class FieldsHandler {
         this.input.partner.legalStatus.value &&
         this.input.partner.legalStatus.value !== LegalStatus.NO
       ) {
-        requiredFields.push(
-          FieldKey.PARTNER_LIVING_COUNTRY,
-          FieldKey.PARTNER_LIVED_ONLY_IN_CANADA
-        )
+        if (this.input.partner.livingCountry.canada) {
+          requiredFields.push(FieldKey.PARTNER_LIVED_ONLY_IN_CANADA)
+        }
+        requiredFields.push(FieldKey.PARTNER_LIVING_COUNTRY)
       }
 
       // default value = undefined
-      if (this.input.partner.livedOnlyInCanada === false) {
+      if (
+        this.input.partner.livedOnlyInCanada === false ||
+        this.input.partner.livingCountry.value === 'OTH'
+      ) {
         if (
           this.input.client.partnerBenefitStatus.value ===
           PartnerBenefitStatus.OAS_GIS
