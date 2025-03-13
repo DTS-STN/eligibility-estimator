@@ -64,6 +64,7 @@ export const FormSelect: React.VFC<SelectProps> = ({
           data-testid="select"
           name={field.key}
           onChange={customOnChange}
+          value={currentItem.value}
         >
           {field.config.values.map((opt) => (
             <option value={opt.key} key={opt.key}>

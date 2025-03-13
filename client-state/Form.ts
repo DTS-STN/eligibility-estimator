@@ -33,7 +33,12 @@ export class Form {
   }
 
   update(inputs: InputHelper) {
-    const data = new MainHandler(inputs.asObjectWithLanguage).results
+    let inputsObj = inputs.asObjectWithLanguage
+    if (inputs.inputs.livingCountry === 'OTH') {
+      inputsObj = { ...inputsObj, livedOnlyInCanada: 'false' }
+    }
+
+    const data = new MainHandler(inputsObj).results
 
     this.results = data
     this.localInputs = inputs
