@@ -140,14 +140,24 @@ export class BenefitHandler {
 
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
-          this.input.partner.age = partnerEliObj.ageOfEligibility
-          this.input.partner.yearsInCanadaSince18 =
-            partnerEliObj.yearsOfResAtEligibility
+          if (this.input.partner.yearsInCanadaSinceOAS) {
+            this.input.partner.yearsInCanadaSince18 =
+              this.input.partner.yearsInCanadaSinceOAS
+          } else {
+            this.input.partner.age = partnerEliObj.ageOfEligibility
+            this.input.partner.yearsInCanadaSince18 =
+              partnerEliObj.yearsOfResAtEligibility
+          }
         }
 
         if (this.input.partner.age >= 75) {
-          this.input.partner.yearsInCanadaSince18 =
-            partnerEliObj.yearsOfResAtEligibility
+          if (this.input.partner.yearsInCanadaSinceOAS) {
+            this.input.partner.yearsInCanadaSince18 =
+              this.input.partner.yearsInCanadaSinceOAS
+          } else {
+            this.input.partner.yearsInCanadaSince18 =
+              partnerEliObj.yearsOfResAtEligibility
+          }
         }
       }
     }
