@@ -98,12 +98,12 @@ export const SummaryEstimates: React.VFC<{
         if (year == apiTrans.detail.currentEligible) {
           heading = apiTrans.detail.currentEligible
         } else if (index < headings.length - 1) {
-          heading = year
+          heading = `${apiTrans.detail.inTheYear} ${year}`
         } else {
           heading =
             language == 'fr'
-              ? `${apiTrans.detail.lastYearEligible} ${year}`
-              : `${year} ${apiTrans.detail.lastYearEligible}`
+              ? `${apiTrans.detail.lastYearEligible} ${apiTrans.detail.fromYear} ${year}`
+              : `${apiTrans.detail.fromYear} ${year} ${apiTrans.detail.lastYearEligible}`
         }
 
         const yearResults = userResult
@@ -180,10 +180,8 @@ export const SummaryEstimates: React.VFC<{
           <div key={heading}>
             <h3
               className={`h3 ${index != 0 ? 'mt-5' : ''} mb-5`}
-              key={'heading' + heading}
-            >
-              {heading}
-            </h3>
+              dangerouslySetInnerHTML={{ __html: heading }}
+            />
             <div key={`estimation-${year}`} className="mb-5">
               <div key={`estimation-sub-${year}`} className="space-y-4">
                 {userResult &&
