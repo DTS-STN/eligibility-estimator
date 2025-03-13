@@ -128,6 +128,7 @@ export class BenefitHandler {
     // Future handler takes care of cases when partner is not yet eligible by creating "age sets" of future eligible ages
     // If partner was already eligible in the past based on residency, we need to adjust the inputs
     if (!this.future) {
+      console.log('this.input', this.input)
       const partnerEliObj = this.rawInput.partnerEliObj
         ? this.rawInput.partnerEliObj
         : OasEligibility(
@@ -140,14 +141,28 @@ export class BenefitHandler {
 
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
-          this.input.partner.age = partnerEliObj.ageOfEligibility
-          this.input.partner.yearsInCanadaSince18 =
-            partnerEliObj.yearsOfResAtEligibility
+          if (this.input.partner.yearsInCanadaSinceOAS) {
+            // this.input.partner.age = partnerEliObj.ageOfEligibility
+            this.input.partner.yearsInCanadaSince18 =
+              this.input.partner.yearsInCanadaSinceOAS
+          } else {
+            this.input.partner.age = partnerEliObj.ageOfEligibility
+            this.input.partner.yearsInCanadaSince18 =
+              partnerEliObj.yearsOfResAtEligibility
+          }
         }
 
         if (this.input.partner.age >= 75) {
-          this.input.partner.yearsInCanadaSince18 =
-            partnerEliObj.yearsOfResAtEligibility
+          if (this.input.partner.yearsInCanadaSinceOAS) {
+            console.log('partner is 75+')
+            this.input.partner.yearsInCanadaSince18 =
+              this.input.partner.yearsInCanadaSinceOAS
+
+            console.log('this.input.partner', this.input.partner)
+          } else {
+            this.input.partner.yearsInCanadaSince18 =
+              partnerEliObj.yearsOfResAtEligibility
+          }
         }
       }
     }
