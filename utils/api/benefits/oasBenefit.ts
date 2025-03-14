@@ -554,8 +554,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
 
       //EC8
       if (
-        ageCalc >= 70 &&
-        this.inputAge == ageCalc &&
+        this.inputAge >= 70 &&
+        // this.inputAge == ageCalc &&
         !this.formReceiving &&
         this.entitlement.result > 0
       ) {
@@ -564,13 +564,17 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         )
       }
       //EC19 && EC20
-      if (ageCalc >= 75 && this.entitlement.result > 0) {
+      if (this.inputAge >= 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75Applied
         )
       }
 
-      if (ageCalc > 64 && ageCalc < 75 && this.entitlement.result > 0) {
+      if (
+        this.inputAge > 64 &&
+        this.inputAge < 75 &&
+        this.entitlement.result > 0
+      ) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75
         )
