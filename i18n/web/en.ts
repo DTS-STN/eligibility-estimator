@@ -316,7 +316,7 @@ const en: WebTranslations = {
   },
   resultsPage: {
     moreInformation: 'More information on ',
-    yourMonEstimateHeading: 'Your monthly estimate',
+    yourMonEstimateHeading: 'Your monthly estimate timeline',
     changeInSituation: 'Changes in your situation may impact your results.',
     youEstimateMayChange: 'Your estimate may change over time based on',
     yourEstimateMayChangeList: 'Your estimate may change over time based on:',
