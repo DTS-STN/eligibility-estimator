@@ -27,12 +27,15 @@ export const DeferralTable: React.VFC<{
       </caption>
       <thead data-cy="deferral-heading">
         <tr>
-          <th scope="col" className="border border-gray-800 bg-gray-100 p-4">
+          <th
+            scope="col"
+            className="border border-gray-800 bg-gray-100 py-4 px-2"
+          >
             {future
               ? apiTsln.oasDeferralTable.futureHeadingAge
               : apiTsln.oasDeferralTable.headingAge}
           </th>
-          <th scope="col" className="border border-gray-800 bg-gray-100">
+          <th scope="col" className="border border-gray-800 bg-gray-100 px-2">
             {apiTsln.oasDeferralTable.headingAmount}
           </th>
         </tr>
