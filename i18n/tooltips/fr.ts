@@ -7,29 +7,29 @@ const fr: TooltipTranslations = {
     heading: apiFr.category.marital,
     moreinfo: 'Lequel s’applique à vous?',
     text: "<dl> \
-            <dt>Célibataire :</dt> \
+            <dt>Célibataire :</dt> \
             <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Vous n'avez jamais été marié et ne vivez pas en union de fait. \
             </dd> \
-            <dt>Divorcé :</dt> \
+            <dt>Divorcé :</dt> \
             <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Vous êtes officiellement séparé et avez légalement mis fin à votre mariage. \
             </dd> \
-            <dt>Séparé :</dt> \
+            <dt>Séparé :</dt> \
             <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Vous vivez séparé de votre conjoint à cause de la rupture de votre relation \
               depuis au moins 90 jours et vous ne vous êtes pas réconcilié. \
             </dd> \
-            <dt>Marié :</dt> \
+            <dt>Marié :</dt> \
             <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Vous et votre conjoint avez été unis officiellement au cours d’une cérémonie. \
               Ce mariage doit être reconnu en vertu des lois du pays où il a été célébré et en vertu du droit canadien. \
             </dd> \
-            <dt>Conjoint de fait :</dt> \
+            <dt>Conjoint de fait :</dt> \
             <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Vous vivez avec une autre personne dans une relation conjugale depuis au moins 1&nbsp;an. \
             </dd> \
-            <dt>Veuf :</dt> \
+            <dt>Veuf :</dt> \
             <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Votre conjoint est décédé et vous ne vous êtes pas remarié ou engagé dans une union de fait. \
             </dd> \

@@ -318,7 +318,7 @@ const fr: WebTranslations = {
   },
   resultsPage: {
     moreInformation: "Plus d'information",
-    yourMonEstimateHeading: 'Votre estimation mensuelle',
+    yourMonEstimateHeading: 'Chronologie de votre estimation mensuelle',
     changeInSituation:
       'Si votre situation change, vos résultats pourraient changer.',
     youEstimateMayChange:
