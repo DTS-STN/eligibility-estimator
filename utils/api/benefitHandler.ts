@@ -122,6 +122,7 @@ export class BenefitHandler {
       },
     }
 
+    console.log('this.input', this.input)
     const initialPartnerBenefitStatus =
       this.input.client.partnerBenefitStatus.value
 
@@ -138,6 +139,11 @@ export class BenefitHandler {
             this.rawInput.partnerLivingCountry
           )
 
+      console.log('this.input.partner.age', this.input.partner.age)
+      console.log(
+        'partnerEliObj.ageOfEligibility',
+        partnerEliObj.ageOfEligibility
+      )
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
           if (this.input.partner.yearsInCanadaSinceOAS) {
@@ -250,12 +256,15 @@ export class BenefitHandler {
     // If the client needs help, check their partner's OAS.
     // no defer and defer options?
     if (this.input.client.partnerBenefitStatus.helpMe) {
+      console.log('this.input.partner', this.input.partner)
       const partnerOasNoDeferral = new OasBenefit(
         this.input.partner,
         this.fields.translations,
         clientOasNoDeferral,
         true
       )
+
+      console.log('partnerOasNoDeferral', partnerOasNoDeferral)
 
       this.setValueForAllResults(
         allResults,
@@ -489,6 +498,8 @@ export class BenefitHandler {
         clientOas,
         true
       )
+
+      console.log('partnerOas', partnerOas)
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =

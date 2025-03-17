@@ -204,6 +204,7 @@ export class FutureHandler {
       : Number(this.query.partnerYearsInCanadaSince18) ||
         Number(this.query.partnerYearsInCanadaSinceOAS)
 
+    console.log('partnerRes', partnerRes)
     const clientOasEliObj = OasEligibility(
       orgClientAge,
       clientRes,
@@ -217,6 +218,8 @@ export class FutureHandler {
       partnerOnlyCanada,
       String(this.query.partnerLivingCountry)
     )
+
+    console.log('partnerEliObj', partnerEliObj)
 
     const clientDeferralMeta =
       this.currentHandler.benefitResults?.client?.oas?.entitlement?.deferral
@@ -283,6 +286,7 @@ export class FutureHandler {
           partnerLockResidence
         )
 
+        console.log('newQuery', newQuery)
         const { value } = schema.validate(newQuery, { abortEarly: false })
         const handler = new BenefitHandler(
           value,
