@@ -146,12 +146,14 @@ export function buildQuery(
   // PARTNER
   newQuery['partnerAge'] = String(partnerAge)
 
-  console.log('query', query)
-
   if (partnerAge >= 60) {
     addKeyValue(newQuery, 'partnerLegalStatus', 'yes')
-    addKeyValue(newQuery, 'partnerLivingCountry', 'CAN')
-    addKeyValue(newQuery, 'partnerLivedOnlyInCanada', 'false')
+    addKeyValue(newQuery, 'partnerLivingCountry', query.partnerLivingCountry)
+    addKeyValue(
+      newQuery,
+      'partnerLivedOnlyInCanada',
+      query.partnerLivingCountry === 'OTH' ? 'false' : 'true'
+    )
   }
 
   if (partnerAge >= 65) {
@@ -161,7 +163,6 @@ export function buildQuery(
   const partnerRes =
     query.partnerYearsInCanadaSince18 || query.partnerYearsInCanadaSinceOAS
 
-  console.log('partnerRes', partnerRes)
   if (query.partnerLivedOnlyInCanada === 'false' && partnerRes) {
     const increaseResidence = !partnerAlreadyOasEligible
     // const ageLimit = partnerAge < 65 ? 65 : partnerAge
@@ -171,7 +172,6 @@ export function buildQuery(
         ? Number(partnerAge) - Number(query.partnerAge) + Number(partnerRes)
         : partnerRes
 
-    console.log('partnerNewYrsInCanada', partnerNewYrsInCanada)
     newQuery['partnerYearsInCanadaSince18'] = String(
       Math.floor(
         increaseResidence
@@ -219,7 +219,7 @@ export function OasEligibility(
       yearsInCanada < minYearsOfResEligibility
     ) {
       if (yearsInCanada < minYearsOfResEligibility) {
-        if (livingCountry === 'CAN') {
+        if (livingCountry !== 'OTH') {
           yearsInCanada++
         }
         age++
@@ -229,7 +229,7 @@ export function OasEligibility(
             age + 1 > minAgeEligibility ? minAgeEligibility - age : 1
           const resToAdd = ageToAdd < 1 ? 0 : 1
           age += ageToAdd
-          yearsInCanada += livingCountry === 'CAN' ? resToAdd : 0
+          yearsInCanada += livingCountry !== 'OTH' ? resToAdd : 0
         }
       }
     }
