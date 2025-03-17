@@ -219,9 +219,12 @@ export const PSDBox: React.VFC<{
             isUpdating ? 'opacity-50' : 'opacity-100'
           }`}
         >
-          <h3 className="h3">{tsln.resultsPage.psdTitle}</h3>
+          <h3 className="h3" id="psdTitle">
+            {tsln.resultsPage.psdTitle}
+          </h3>
           <p
             className="text-[20px] leading-[30px]"
+            aria-labelledby="psdTitle"
             dangerouslySetInnerHTML={{
               __html: tsln.resultsPage.psdDescription,
             }}
