@@ -115,7 +115,6 @@ export function Header({
         <div className="flex-col flex lg:flex lg:flex-row justify-between mb-4">
           <div
             className="w-full flex flex-row justify-between items-start"
-            role="navigation"
             aria-labelledby="officialSiteNav"
           >
             <h3 className="sr-only" id="officialSiteNav">
