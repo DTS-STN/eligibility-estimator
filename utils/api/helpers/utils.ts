@@ -1,5 +1,4 @@
 import { consoleDev } from '../../web/helpers/utils'
-import { LivingCountry } from '../definitions/enums'
 import roundToTwo from './roundToTwo'
 
 export const getDeferralIncrease = (months, baseAmount) => {
