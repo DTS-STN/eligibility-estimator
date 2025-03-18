@@ -1,4 +1,5 @@
 import { consoleDev } from '../../web/helpers/utils'
+import { LivingCountry } from '../definitions/enums'
 import roundToTwo from './roundToTwo'
 
 export const getDeferralIncrease = (months, baseAmount) => {
@@ -203,6 +204,17 @@ export function OasEligibility(
   const minAgeEligibility = 65
   const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
 
+  if (
+    livingCountry === 'OTH' &&
+    livedOnlyInCanada === false &&
+    yearsInCanadaAtStart < minYearsOfResEligibility
+  ) {
+    return {
+      ageOfEligibility: null,
+      yearsOfResAtEligibility: null,
+    }
+  }
+
   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
     const yearsPastEligibility = Math.min(
       age - minAgeEligibility,
@@ -219,9 +231,7 @@ export function OasEligibility(
       yearsInCanada < minYearsOfResEligibility
     ) {
       if (yearsInCanada < minYearsOfResEligibility) {
-        if (livingCountry !== 'OTH') {
-          yearsInCanada++
-        }
+        yearsInCanada++
         age++
       } else {
         if (age < minAgeEligibility) {
