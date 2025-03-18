@@ -150,7 +150,6 @@ export const RequestSchema = Joi.object({
           }
         }
       }
-      console.log('value inside schema', value)
       return value
     }, 'custom validation for the "yearsInCanadaSince18" question'),
   yearsInCanadaSinceOAS: Joi.number()
