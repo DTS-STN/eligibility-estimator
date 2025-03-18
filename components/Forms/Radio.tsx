@@ -44,7 +44,10 @@ export const Radio: React.VFC<InputProps> = ({
         requiredText={requiredText}
         helpText={helpText}
       />
-      <div role="radiogroup" aria-labelledby={`${keyforid}-label`}>
+      <div
+        role="radiogroup"
+        aria-labelledby={`${keyforid}-label help-text-${keyforid}`}
+      >
         {values.map((val, index) => (
           <div
             key={index}

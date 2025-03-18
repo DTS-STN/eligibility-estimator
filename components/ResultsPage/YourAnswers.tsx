@@ -118,7 +118,9 @@ export const YourAnswers: React.VFC<{
                       <a
                         onClick={handlePageChange(input.key)}
                         className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
-                        aria-label={tsln.resultsEditAriaLabels[input.key]}
+                        aria-label={`${
+                          tsln.resultsEditAriaLabels[input.key]
+                        } ${getDisplayValue(input)}`}
                       >
                         {tsln.resultsPage.edit}
                       </a>
@@ -187,7 +189,9 @@ export const YourAnswers: React.VFC<{
                           <a
                             onClick={handlePageChange(input.key)}
                             className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
-                            aria-label={tsln.resultsEditAriaLabels[input.key]}
+                            aria-label={`${
+                              tsln.resultsEditAriaLabels[input.key]
+                            } ${getDisplayValue(input)}`}
                           >
                             {tsln.resultsPage.edit}
                           </a>
