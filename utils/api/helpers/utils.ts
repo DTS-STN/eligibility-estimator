@@ -148,8 +148,12 @@ export function buildQuery(
 
   if (partnerAge >= 60) {
     addKeyValue(newQuery, 'partnerLegalStatus', 'yes')
-    addKeyValue(newQuery, 'partnerLivingCountry', 'CAN')
-    addKeyValue(newQuery, 'partnerLivedOnlyInCanada', 'true')
+    addKeyValue(newQuery, 'partnerLivingCountry', query.partnerLivingCountry)
+    addKeyValue(
+      newQuery,
+      'partnerLivedOnlyInCanada',
+      query.partnerLivingCountry === 'OTH' ? 'false' : 'true'
+    )
   }
 
   if (partnerAge >= 65) {
@@ -158,6 +162,7 @@ export function buildQuery(
 
   const partnerRes =
     query.partnerYearsInCanadaSince18 || query.partnerYearsInCanadaSinceOAS
+
   if (query.partnerLivedOnlyInCanada === 'false' && partnerRes) {
     const increaseResidence = !partnerAlreadyOasEligible
     // const ageLimit = partnerAge < 65 ? 65 : partnerAge
@@ -214,7 +219,9 @@ export function OasEligibility(
       yearsInCanada < minYearsOfResEligibility
     ) {
       if (yearsInCanada < minYearsOfResEligibility) {
-        yearsInCanada++
+        if (livingCountry !== 'OTH') {
+          yearsInCanada++
+        }
         age++
       } else {
         if (age < minAgeEligibility) {
@@ -222,7 +229,7 @@ export function OasEligibility(
             age + 1 > minAgeEligibility ? minAgeEligibility - age : 1
           const resToAdd = ageToAdd < 1 ? 0 : 1
           age += ageToAdd
-          yearsInCanada += resToAdd
+          yearsInCanada += livingCountry !== 'OTH' ? resToAdd : 0
         }
       }
     }
