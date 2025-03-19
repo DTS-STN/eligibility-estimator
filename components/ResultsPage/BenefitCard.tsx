@@ -107,7 +107,7 @@ export const BenefitCard: React.VFC<{
                         ? `/openNewTab.svg`
                         : `/openNewTabWhite.svg`
                     }
-                    alt={tsln.openNewTab}
+                    title={tsln.openNewTab}
                     href={url}
                   />
                 </span>
