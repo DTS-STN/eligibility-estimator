@@ -5,6 +5,8 @@ export enum FieldKey {
   PSD_AGE = 'psdAge',
   ELI_OBJ = 'clientEliObj',
   PARTNER_ELI_OBJ = 'partnerEliObj',
+  AGE_SETS = 'agesArray',
+  ORG_INPUT = 'orgInput',
   INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
   INCOME_WORK = 'incomeWork',
@@ -58,6 +60,16 @@ export const fieldDefinitions: FieldDefinitions = {
   },
   [FieldKey.PARTNER_ELI_OBJ]: {
     key: FieldKey.PARTNER_ELI_OBJ,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.AGE_SETS]: {
+    key: FieldKey.AGE_SETS,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.ORG_INPUT]: {
+    key: FieldKey.ORG_INPUT,
     category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
   },
