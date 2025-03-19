@@ -138,6 +138,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdPartneredHandleAndSet = (psdAge) => {
     const clientAge = Number(inputHelper.asObjectWithLanguage.age)
     const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+
     const invSep = inputHelper.asObjectWithLanguage.invSeparated === 'true'
     const clientRes = Number(
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
@@ -173,6 +174,17 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       partnerLivingCountry
     )
 
+    const responseClone = JSON.parse(JSON.stringify(originalResponse))
+
+    const agesArray = responseClone.futureClientResults
+      .map((result) => {
+        const clientAge = parseFloat(Object.keys(result)[0])
+        const partnerAge = Number(clientAge) - partnersAgeDiff
+
+        return [clientAge, partnerAge]
+      })
+      .filter(([clientAge]) => clientAge >= psdAge)
+
     // Build a query and get estimate results for pension start date (PSD) age
     // "Current" results are results for the PSD age
     const psdQuery = buildQuery(
@@ -191,7 +203,10 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       psdAge,
       clientEliObj,
       partnerEliObj,
+      agesArray,
+      orgInput: inputHelper.asObjectWithLanguage,
     })
+
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
     const sameResUsed =
