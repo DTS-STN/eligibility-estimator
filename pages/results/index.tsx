@@ -335,7 +335,11 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
                 partnerHandler.benefitResults.partner
               )
 
-              if (prevResult) {
+              if (
+                prevResult &&
+                prevResult[Object.keys(prevResult)[0]]?.oas &&
+                prevResult[Object.keys(prevResult)[0]]?.gis
+              ) {
                 const gis = prevResult[Object.keys(prevResult)[0]]['gis']
                 const previousBenefitTotal =
                   prevResult[Object.keys(prevResult)[0]]['oas'].entitlement
