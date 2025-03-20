@@ -26,6 +26,7 @@ import { FieldConfig, FieldKey } from './fields'
  */
 export interface RequestInput {
   psdAge?: number
+  orgInput?: RequestInput
   clientEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   partnerEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   incomeAvailable?: boolean

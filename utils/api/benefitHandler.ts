@@ -228,7 +228,7 @@ export class BenefitHandler {
         this.future,
         true,
         psdInput.age,
-        this.formAge,
+        this.rawInput.orgInput ? this.rawInput.orgInput.age : this.formAge,
         this.formYearsInCanada,
         psdInput.receiveOAS
       )
@@ -332,7 +332,7 @@ export class BenefitHandler {
         this.future,
         true,
         psdAge,
-        this.formAge,
+        this.rawInput.orgInput ? this.rawInput.orgInput.age : this.formAge,
         this.formYearsInCanada,
         this.input.client.receiveOAS
       )

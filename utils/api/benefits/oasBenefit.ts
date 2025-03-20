@@ -540,10 +540,14 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         }
       }
 
+      const ageCalc = this.formAge
+        ? Math.trunc(this.formAge)
+        : Math.trunc(this.inputAge)
+
       if (
         this.entitlement.result == 0 &&
-        this.inputAge > 64 &&
-        this.inputAge < 70 &&
+        ageCalc > 64 &&
+        ageCalc < 70 &&
         !this.input.receiveOAS
       ) {
         cardCollapsedText.push(
@@ -552,27 +556,19 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       }
 
       //EC8
-      if (
-        this.inputAge >= 70 &&
-        !this.formReceiving &&
-        this.entitlement.result > 0
-      ) {
+      if (ageCalc >= 70 && !this.formReceiving && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.retroactivePayment
         )
       }
       //EC19 && EC20
-      if (this.inputAge >= 75 && this.entitlement.result > 0) {
+      if (ageCalc >= 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75Applied
         )
       }
 
-      if (
-        this.inputAge > 64 &&
-        this.inputAge < 75 &&
-        this.entitlement.result > 0
-      ) {
+      if (ageCalc > 64 && ageCalc < 75 && this.entitlement.result > 0) {
         cardCollapsedText.push(
           this.translations.detailWithHeading.oasIncreaseAt75
         )
