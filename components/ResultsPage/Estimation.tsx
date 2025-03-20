@@ -394,9 +394,9 @@ export const Estimation: React.VFC<{
             const nextBenefitAge = Object.keys(nextBenefitResult)[0]
 
             if (eligibleTotalAmount == nextBenefitTotal) {
-              text = `${apiTrans.detail.youCouldStartReceivingAt} ${Math.trunc(
-                displayAge
-              )}${language == 'fr' ? ' ans' : ''}, ${
+              text = `${apiTrans.detail.youCouldStartReceivingAt} ${
+                theSame ? formatAge(displayAge) : Math.trunc(displayAge)
+              }${language == 'fr' ? ' ans' : ''}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldContinueReceiving}${
                 showPartnerAmounts()
