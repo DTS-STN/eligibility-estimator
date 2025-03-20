@@ -44,6 +44,7 @@ const en: Translations = {
     [FieldKey.PARTNER_ELI_OBJ]: 'N/A',
     [FieldKey.AGE_SETS]: 'N/A',
     [FieldKey.ORG_INPUT]: 'N/A',
+    [FieldKey.ALREADY_ELIGIBLE]: 'N/A',
     [FieldKey.INCOME_AVAILABLE]:
       'Are you able to provide us your annual net income?',
     [FieldKey.INCOME]:

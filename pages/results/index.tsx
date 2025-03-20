@@ -81,16 +81,19 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const psdSingleHandleAndSet = (psdAge) => {
+    const responseClone = JSON.parse(JSON.stringify(originalResponse))
+
     const psdHandler = new MainHandler({
       ...inputHelper.asObjectWithLanguage,
       psdAge,
+      orgInput: inputHelper.asObjectWithLanguage,
+      alreadyEligible:
+        responseClone.results.oas.eligibility.result === 'eligible',
     })
 
     let psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
     if ('results' in psdResults) {
-      const responseClone = JSON.parse(JSON.stringify(originalResponse))
-
       const getDeferralTable = () => {
         if (Array.isArray(responseClone.futureClientResults)) {
           const oasEntry = responseClone.futureClientResults
