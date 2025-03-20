@@ -85,6 +85,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
           <label
             className="text-[#333333] font-medium text-[20px] leading-[22px]"
             htmlFor={props.monthId}
+            id={`${props.id}-month`}
           >
             {tsln.datePicker.month}
           </label>
@@ -94,6 +95,9 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
             onChange={props.onMonthChange}
             className="inputStyles w-[165px]"
             aria-invalid={!!props.hasError}
+            aria-labelledby={`${props.id.replace('enter-', '')}-label ${
+              props.id
+            }-month`}
           >
             {monthValues.map((mv, index) => (
               <option value={mv} key={`datePicker-month-option-${index}`}>
@@ -124,6 +128,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
             <label
               htmlFor={props.yearId}
               className="text-[#333333] font-medium text-[20px] leading-[22px]"
+              id={`${props.id}-year`}
             >
               {tsln.datePicker.year}
             </label>
@@ -137,6 +142,9 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
               onChange={_onYearChange}
               onKeyUpCapture={restrictNonNumbers}
               className="inputStyles w-[165px]"
+              aria-labelledby={`${props.id.replace('enter-', '')}-label ${
+                props.id
+              }-year`}
             />
           </div>
         ) : null}
