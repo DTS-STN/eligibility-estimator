@@ -539,13 +539,10 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           )
         }
       }
-      const inputs = sessionStorage.getItem('inputs')
-      const parsedInputs = inputs ? JSON.parse(inputs) : {}
 
-      const ageCalc =
-        parsedInputs && parsedInputs.age
-          ? Math.trunc(+parsedInputs.age)
-          : this.input.age // Or default to 0 if you prefer
+      const ageCalc = this.formAge
+        ? Math.trunc(this.formAge)
+        : Math.trunc(this.inputAge)
 
       if (
         this.entitlement.result == 0 &&

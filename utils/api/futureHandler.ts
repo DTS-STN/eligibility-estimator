@@ -294,7 +294,7 @@ export class FutureHandler {
         const handler = new BenefitHandler(
           value,
           true,
-          +this.query.age,
+          psdAge ? +this.query.orgInput['age'] : +this.query.age,
           +this.query.yearsInCanadaSince18,
           false // this.compare boolean set to false means that we disregard the comparison between 'non-deferred' and 'deferred'. The non-deferred results are saved
         )
