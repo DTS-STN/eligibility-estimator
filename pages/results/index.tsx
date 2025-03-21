@@ -179,7 +179,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
 
     const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
-    const agesArray = responseClone.futureClientResults
+    const agesArray = (responseClone.futureClientResults || [])
       .map((result) => {
         const clientAge = parseFloat(Object.keys(result)[0])
         const partnerAge = Number(clientAge) - partnersAgeDiff
@@ -254,8 +254,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           return hasEligibleBenefit
         }
       )
-
-      const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
       const mergedClientRes = mergeUniqueObjects(
         partialFutureClientResults,
