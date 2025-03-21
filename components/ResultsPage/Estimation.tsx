@@ -149,7 +149,7 @@ export const Estimation: React.VFC<{
       months != 0
         ? language == 'fr'
           ? ` ans et ${months} mois`
-          : ` and ${months} months`
+          : ` and ${months} month${months > 1 ? 's' : ''}`
         : ''
     }`
   }
@@ -287,11 +287,11 @@ export const Estimation: React.VFC<{
 
             //NEXT SAME
             if (eligibleTotalAmount == nextBenefitTotal) {
-              text = `${apiTrans.detail.youCouldStartReceivingAt} ${
-                theSame
-                  ? formatAge(displayAge)
-                  : `${Math.trunc(displayAge)}${language == 'fr' ? ' ans' : ''}`
-              }, ${
+              text = `${
+                apiTrans.detail.youCouldStartReceivingAt
+              } ${`${Math.trunc(displayAge)}${
+                language == 'fr' ? ' ans' : ''
+              }`}, ${
                 partner ? apiTrans.detail.yourPartner : apiTrans.detail.you
               } ${apiTrans.detail.youCouldStartReceiving}${
                 showPartnerAmounts()
