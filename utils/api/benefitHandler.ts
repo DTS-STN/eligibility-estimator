@@ -202,7 +202,9 @@ export class BenefitHandler {
 
       const alreadyEligible = this.rawInput.alreadyEligible
       const orgAge = +this.rawInput.orgInput.age
-      const orgRes = +this.rawInput.orgInput.yearsInCanadaSince18
+      const orgRes = this.rawInput.livedOnlyInCanada
+        ? 40
+        : +this.rawInput.orgInput.yearsInCanadaSince18
 
       const psdAge = this.rawInput.psdAge
       const yrsDiff =
