@@ -346,7 +346,6 @@ export class BenefitHandler {
         this.formYearsInCanada,
         this.input.client.receiveOAS
       )
-
       clientOasWithDeferral.cardDetail = {
         ...clientOasNoDeferral.cardDetail,
         meta: {
@@ -487,6 +486,7 @@ export class BenefitHandler {
         )
       }
     }
+    clientOas.cardDetail.collapsedText = clientOas.updateCollapsedText()
 
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
