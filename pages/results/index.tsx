@@ -88,7 +88,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       psdAge,
       orgInput: inputHelper.asObjectWithLanguage,
       alreadyEligible:
-        responseClone.results.oas.eligibility.result === ResultKey.ELIGIBLE,
+        responseClone.results.oas.eligibility.result === 'eligible',
     })
 
     let psdResults: ResponseSuccess | ResponseError = psdHandler.results
