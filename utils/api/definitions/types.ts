@@ -29,6 +29,7 @@ export interface RequestInput {
   orgInput?: RequestInput
   clientEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
   partnerEliObj?: { ageOfEligibility: number; yearsOfResAtEligibility: number }
+  alreadyEligible?: boolean
   incomeAvailable?: boolean
   income: number // personal income
   incomeWork: number // personal income from work

@@ -198,10 +198,20 @@ export class BenefitHandler {
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 
     if (this.psdCalc) {
+      // Need to use current age and residence if currently eligible. Otherwise, use age of eligibility and years of residence at age of eligibility.
+
+      const alreadyEligible = this.rawInput.alreadyEligible
+      const orgAge = +this.rawInput.orgInput.age
+      const orgRes = +this.rawInput.orgInput.yearsInCanadaSince18
+
       const psdAge = this.rawInput.psdAge
-      const yrsDiff = +this.rawInput.psdAge - clientEliObj.ageOfEligibility
-      const resAtEli = clientEliObj.yearsOfResAtEligibility
-      const maxRes = resAtEli + yrsDiff
+      const yrsDiff =
+        +this.rawInput.psdAge -
+        (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
+      const resToUse = alreadyEligible
+        ? orgRes
+        : clientEliObj.yearsOfResAtEligibility
+      const maxRes = resToUse + yrsDiff
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
 
