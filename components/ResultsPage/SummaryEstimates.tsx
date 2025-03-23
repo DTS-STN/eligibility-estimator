@@ -52,33 +52,7 @@ export const SummaryEstimates: React.VFC<{
   let collapsed = []
 
   //To remove recovery tax EC
-  useLayoutEffect(() => {
-    const element =
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTaxPartner.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTaxPartner.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTax.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTax.heading}`
-      )
-
-    const recoveryBoth =
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTaxBoth.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTaxBoth.heading}`
-      )
-
-    if (recoveryBoth) {
-      element?.remove()
-    }
-  })
+  
 
   return (
     <>

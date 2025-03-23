@@ -50,11 +50,11 @@ const ResultsPage: React.VFC<{
   summary,
   psdCalc,
 }) => {
+  const tsln = useTranslation<WebTranslations>()
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject
 
-  const tsln = useTranslation<WebTranslations>()
   const router = useRouter()
   const apiTsln = getTranslations(tsln._language)
   const [isUpdating, setIsUpdating] = useState(false)
