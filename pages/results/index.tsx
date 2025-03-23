@@ -109,7 +109,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     if (recoveryBoth) {
       element?.remove()
     }
-  })
+  }, [response])
 
   const psdSingleHandleAndSet = (psdAge) => {
     const responseClone = JSON.parse(JSON.stringify(originalResponse))
