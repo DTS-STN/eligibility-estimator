@@ -51,9 +51,6 @@ export const SummaryEstimates: React.VFC<{
 
   let collapsed = []
 
-  //To remove recovery tax EC
-  
-
   return (
     <>
       {headings.map((year, index) => {
