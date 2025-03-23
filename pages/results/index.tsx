@@ -24,6 +24,7 @@ import {
 } from '../../utils/api/helpers/utils'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { RequestSchema as schema } from '../../utils/api/definitions/schemas'
+import { getTranslations } from '../../i18n/api'
 
 /*
  It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
@@ -40,6 +41,8 @@ const ResultsPage = dynamic(
 const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
+  const tsln = useTranslation<WebTranslations>()
+  const apiTrans = getTranslations(tsln._language)
   const [_inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -69,7 +72,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   )
 
   const [psdAge, setPsdAge] = useState(null)
-  const tsln = useTranslation<WebTranslations>()
   const partnered =
     inputHelper.asObjectWithLanguage.maritalStatus === 'partnered'
 
@@ -79,6 +81,35 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       window.adobeDataLayer.push({ event: 'pageLoad' })
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  //To remove recovery tax EC
+  useEffect(() => {
+    const element =
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTaxPartner.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTaxPartner.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTax.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTax.heading}`
+      )
+
+    const recoveryBoth =
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.recoveryTaxBoth.heading}`
+      ) ||
+      document.getElementById(
+        `collapse-${apiTrans.detailWithHeading.nonResidentTaxBoth.heading}`
+      )
+
+    if (recoveryBoth) {
+      element?.remove()
+    }
+  })
 
   const psdSingleHandleAndSet = (psdAge) => {
     const responseClone = JSON.parse(JSON.stringify(originalResponse))
