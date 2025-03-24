@@ -295,99 +295,109 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       )
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
-      const mappedPartnerRes = mergedPartnerRes
-        .map((ageRes, index) => {
-          const currAge = Number(Object.keys(ageRes)[0])
-          const equivClientAge = String(currAge + partnersAgeDiff)
-          const prevResult = mergedPartnerRes[index - 1]
+      const mappedPartnerRes = []
+      for (let index = 0; index < mergedPartnerRes.length; index++) {
+        const ageRes = mergedPartnerRes[index]
+        const currAge = Number(Object.keys(ageRes)[0])
+        const equivClientAge = String(currAge + partnersAgeDiff)
+        const prevResult = mergedPartnerRes[index - 1]
 
-          const recalcCase =
-            partnerAge > clientAge &&
-            currAge > partnerEliObj.ageOfEligibility &&
-            !invSep &&
-            clientHasAlw
+        const recalcCase =
+          partnerAge > clientAge &&
+          currAge > partnerEliObj.ageOfEligibility &&
+          !invSep &&
+          clientHasAlw
 
-          if (!clientResAges.includes(equivClientAge)) {
-            if (currAge === partnerEliObj.ageOfEligibility || recalcCase) {
-              // This means that the partner became independently eligible for OAS before the client's pension start date,
-              // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
+        if (!clientResAges.includes(equivClientAge)) {
+          if (currAge === partnerEliObj.ageOfEligibility || recalcCase) {
+            // This means that the partner became independently eligible for OAS before the client's pension start date,
+            // so we should recalculate it using a different rate table (since user is not going to be receiving OAS at this time)
 
-              const partnerQuery = buildQuery(
-                inputHelper.asObjectWithLanguage,
-                [equivClientAge, currAge],
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              )
+            const partnerQuery = buildQuery(
+              inputHelper.asObjectWithLanguage,
+              [equivClientAge, currAge],
+              null,
+              null,
+              null,
+              null,
+              null,
+              null
+            )
 
-              partnerQuery['livedOnlyInCanada'] = 'false'
-              partnerQuery['yearsInCanadaSince18'] = '5' // We are forcing the user to be ineligible for OAS
-              partnerQuery['everLivedSocialCountry'] = 'true'
-              partnerQuery['partnerBenefitStatus'] = 'helpMe'
-              partnerQuery['clientEliObj'] = clientEliObj
-              partnerQuery['partnerEliObj'] = partnerEliObj
+            partnerQuery['livedOnlyInCanada'] = 'false'
+            partnerQuery['yearsInCanadaSince18'] = '5' // We are forcing the user to be ineligible for OAS
+            partnerQuery['everLivedSocialCountry'] = 'true'
+            partnerQuery['partnerBenefitStatus'] = 'helpMe'
+            partnerQuery['clientEliObj'] = clientEliObj
+            partnerQuery['partnerEliObj'] = partnerEliObj
 
-              const { value } = schema.validate(partnerQuery, {
-                abortEarly: false,
-              })
+            const { value } = schema.validate(partnerQuery, {
+              abortEarly: false,
+            })
 
-              const partnerHandler = new BenefitHandler(value)
+            const partnerHandler = new BenefitHandler(value)
 
-              const newPartnerResults = getEligibleBenefits(
-                partnerHandler.benefitResults.partner
-              )
+            const newPartnerResults = getEligibleBenefits(
+              partnerHandler.benefitResults.partner
+            )
 
-              if (
-                prevResult &&
-                prevResult[Object.keys(prevResult)[0]]?.oas &&
-                prevResult[Object.keys(prevResult)[0]]?.gis
-              ) {
-                const gis = prevResult[Object.keys(prevResult)[0]]['gis']
-                const previousBenefitTotal =
-                  prevResult[Object.keys(prevResult)[0]]['oas'].entitlement
-                    .result + (gis ? gis.entitlement.result : 0)
+            if (
+              prevResult &&
+              prevResult[Object.keys(prevResult)[0]]?.oas &&
+              prevResult[Object.keys(prevResult)[0]]?.gis
+            ) {
+              const gis = prevResult[Object.keys(prevResult)[0]]['gis']
+              const previousBenefitTotal =
+                prevResult[Object.keys(prevResult)[0]]['oas'].entitlement
+                  .result + (gis ? gis.entitlement.result : 0)
 
-                const eligibleTotalAmount = Object.values(newPartnerResults)
-                  .map((benefit: any) => benefit.entitlement?.result || 0)
-                  .reduce((sum, amount) => sum + amount, 0)
+              const eligibleTotalAmount = Object.values(newPartnerResults)
+                .map((benefit: any) => benefit.entitlement?.result || 0)
+                .reduce((sum, amount) => sum + amount, 0)
 
-                if (previousBenefitTotal === eligibleTotalAmount) {
-                  return null
+              if (previousBenefitTotal === eligibleTotalAmount) {
+                continue
+              }
+            }
+
+            mappedPartnerRes.push({ [currAge]: newPartnerResults })
+          } else {
+            continue
+          }
+        } else {
+          if (prevResult) {
+            const inputKey = Object.keys(prevResult)[0]
+            const existsInPartnerArr = mappedPartnerRes.some(
+              (obj) => inputKey in obj
+            )
+
+            const alwAges =
+              Math.floor(currAge) < 65 &&
+              Math.floor(+Object.keys(prevResult)[0]) < 65
+
+            if (alwAges) {
+              const alw = prevResult[Object.keys(prevResult)[0]]['alw']
+              const previousBenefitTotal = alw ? alw.entitlement.result : 0
+              const eligibleTotalAmount =
+                Object.values(ageRes)[0]['alw'].entitlement?.result || 0
+
+              if (previousBenefitTotal !== eligibleTotalAmount) {
+                mappedPartnerRes.push(ageRes)
+                continue
+              } else {
+                if (!existsInPartnerArr) {
+                  mappedPartnerRes.push(ageRes)
+                  continue
+                } else {
+                  continue
                 }
               }
-
-              return { [currAge]: newPartnerResults }
-            } else {
-              return null
             }
-          } else {
-            if (prevResult) {
-              const sameAgeResults =
-                Math.floor(currAge) === Math.floor(+Object.keys(prevResult)[0])
-
-              const alwAges =
-                Math.floor(currAge) < 65 &&
-                Math.floor(+Object.keys(prevResult)[0]) < 65
-
-              if (sameAgeResults && alwAges) {
-                const alw = prevResult[Object.keys(prevResult)[0]]['alw']
-                const previousBenefitTotal = alw ? alw.entitlement.result : 0
-                const eligibleTotalAmount =
-                  Object.values(ageRes)[0]['alw'].entitlement?.result || 0
-
-                return previousBenefitTotal === eligibleTotalAmount
-                  ? null
-                  : ageRes
-              }
-            }
-            return ageRes
           }
-        })
-        .filter((obj) => obj !== null)
 
+          mappedPartnerRes.push(ageRes)
+        }
+      }
       responseClone.futureClientResults = mappedClientRes
       responseClone.futurePartnerResults = mappedPartnerRes
 
