@@ -188,13 +188,13 @@ export const Estimation: React.VFC<{
 
         const nextBenefitAge = nextBenefitResult
           ? Math.trunc(Number(Object.keys(nextBenefitResult)[0]))
-          : '65'
+          : 65
 
         text = `${apiTrans.detail.youCouldReceiveFrom} ${Math.trunc(
           displayAge
-        )} ${apiTrans.detail.youCouldReceiveTo} ${nextBenefitAge}${
-          language == 'fr' ? ' ans' : ''
-        },`
+        )} ${apiTrans.detail.youCouldReceiveTo} ${
+          nextBenefitAge > 65 ? '65' : nextBenefitAge
+        }${language == 'fr' ? ' ans' : ''},`
       }
       text += ` ${isPartnerStr} ${apiTrans.detail.youCouldReceive} ${eligibleAmt} ${apiTrans.detail.youCouldReceivePerMonth}:`
     }
