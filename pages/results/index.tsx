@@ -210,6 +210,8 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       partnerEliObj,
       agesArray,
       orgInput: inputHelper.asObjectWithLanguage,
+      alreadyEligible:
+        responseClone.results.oas.eligibility.result === ResultKey.ELIGIBLE,
     })
 
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
