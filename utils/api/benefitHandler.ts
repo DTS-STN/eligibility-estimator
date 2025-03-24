@@ -213,10 +213,6 @@ export class BenefitHandler {
         ? orgRes
         : clientEliObj.yearsOfResAtEligibility
 
-      console.log('this.rawInput', this.rawInput)
-      console.log('alreadyEligible', alreadyEligible)
-      console.log('psdAge', psdAge)
-      console.log('yrsDiff', yrsDiff)
       const maxRes = resToUse + yrsDiff
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
