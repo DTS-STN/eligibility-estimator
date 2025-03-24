@@ -46,17 +46,6 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
 
   const { step } = router.query
 
-  useEffect(() => {
-    // Redirect to the default step if no step is specified or the step is invalid
-    if (
-      !step ||
-      typeof step !== 'string' ||
-      !Object.values(formSteps).includes(step)
-    ) {
-      router.replace(`/questions?step=${defaultStep}`)
-    }
-  }, [])
-
   const allFieldConfigs: FieldConfig[] = FieldsHandler.getAllFieldData(language)
   const [inputs, setInputs]: [
     FieldInputsObject,
@@ -335,31 +324,39 @@ const StepperPage: React.FC<StepperPageProps> = ({ setPageTitle }) => {
             tsln
           )
 
+          const hideElement =
+            (inputs.livingCountry === 'OTH' &&
+              field.key === 'livedOnlyInCanada') ||
+            (inputs.partnerLivingCountry === 'OTH' &&
+              field.key === 'partnerLivedOnlyInCanada')
+
           return (
-            <div
-              key={field.key}
-              className={!(index === fields.length - 1) ? 'mb-8' : ''}
-            >
-              <div id={field.key}>
-                <FieldFactory
-                  field={field}
-                  metaData={metaDataForFields}
-                  tsln={tsln}
-                  handleOnChange={handleOnChange}
-                  formError={formError}
-                />
-                {field.error && alertError && (
-                  <div className="mt-6">
-                    <Warning
-                      id={field.key}
-                      heading={tsln.unableToProceed}
-                      body={field.error}
-                      asHtml
-                    />
-                  </div>
-                )}
+            !hideElement && (
+              <div
+                key={field.key}
+                className={!(index === fields.length - 1) ? 'mb-8' : ''}
+              >
+                <div id={field.key}>
+                  <FieldFactory
+                    field={field}
+                    metaData={metaDataForFields}
+                    tsln={tsln}
+                    handleOnChange={handleOnChange}
+                    formError={formError}
+                  />
+                  {field.error && alertError && (
+                    <div className="mt-6">
+                      <Warning
+                        id={field.key}
+                        heading={tsln.unableToProceed}
+                        body={field.error}
+                        asHtml
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            )
           )
         })}
         {isPartnered && (

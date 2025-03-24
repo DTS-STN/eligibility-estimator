@@ -24,6 +24,7 @@ import {
 } from '../../utils/api/helpers/utils'
 import { BenefitHandler } from '../../utils/api/benefitHandler'
 import { RequestSchema as schema } from '../../utils/api/definitions/schemas'
+import { getTranslations } from '../../i18n/api'
 
 /*
  It appears that the Design System components and/or dangerouslySetInnerHTML does not properly support SSR,
@@ -40,6 +41,8 @@ const ResultsPage = dynamic(
 const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   adobeAnalyticsUrl,
 }) => {
+  const tsln = useTranslation<WebTranslations>()
+  const apiTrans = getTranslations(tsln._language)
   const [_inputs, setInputs]: [
     FieldInputsObject,
     (value: FieldInputsObject) => void
@@ -69,7 +72,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   )
 
   const [psdAge, setPsdAge] = useState(null)
-  const tsln = useTranslation<WebTranslations>()
   const partnered =
     inputHelper.asObjectWithLanguage.maritalStatus === 'partnered'
 
@@ -81,16 +83,19 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const psdSingleHandleAndSet = (psdAge) => {
+    const responseClone = JSON.parse(JSON.stringify(originalResponse))
+
     const psdHandler = new MainHandler({
       ...inputHelper.asObjectWithLanguage,
       psdAge,
+      orgInput: inputHelper.asObjectWithLanguage,
+      alreadyEligible:
+        responseClone.results.oas.eligibility.result === ResultKey.ELIGIBLE,
     })
 
     let psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
     if ('results' in psdResults) {
-      const responseClone = JSON.parse(JSON.stringify(originalResponse))
-
       const getDeferralTable = () => {
         if (Array.isArray(responseClone.futureClientResults)) {
           const oasEntry = responseClone.futureClientResults
@@ -138,6 +143,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdPartneredHandleAndSet = (psdAge) => {
     const clientAge = Number(inputHelper.asObjectWithLanguage.age)
     const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
+
     const invSep = inputHelper.asObjectWithLanguage.invSeparated === 'true'
     const clientRes = Number(
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
@@ -173,6 +179,17 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       partnerLivingCountry
     )
 
+    const responseClone = JSON.parse(JSON.stringify(originalResponse))
+
+    const agesArray = (responseClone.futureClientResults || [])
+      .map((result) => {
+        const clientAge = parseFloat(Object.keys(result)[0])
+        const partnerAge = Number(clientAge) - partnersAgeDiff
+
+        return [clientAge, partnerAge]
+      })
+      .filter(([clientAge]) => clientAge >= psdAge)
+
     // Build a query and get estimate results for pension start date (PSD) age
     // "Current" results are results for the PSD age
     const psdQuery = buildQuery(
@@ -191,10 +208,25 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       psdAge,
       clientEliObj,
       partnerEliObj,
+      agesArray,
+      orgInput: inputHelper.asObjectWithLanguage,
+      alreadyEligible:
+        responseClone.results.oas.eligibility.result === ResultKey.ELIGIBLE,
     })
+
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
 
+    const sameResUsed =
+      psdQuery.yearsInCanadaSince18 ===
+      inputHelper.asObjectWithLanguage.yearsInCanadaSince18
+
     if ('results' in psdResults) {
+      // not their actual residency necessarily but how many years of residency the calculation is based on
+      psdResults.results.oas.cardDetail.meta.residency = !clientOnlyCanada
+        ? sameResUsed
+          ? null
+          : psdQuery.yearsInCanadaSince18
+        : null
       const clientPsd = {
         [psdAge]: getEligibleBenefits(psdResults.results) || {},
       }
@@ -226,8 +258,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           return hasEligibleBenefit
         }
       )
-
-      const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
       const mergedClientRes = mergeUniqueObjects(
         partialFutureClientResults,
@@ -266,9 +296,10 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
 
       const mappedPartnerRes = mergedPartnerRes
-        .map((ageRes) => {
+        .map((ageRes, index) => {
           const currAge = Number(Object.keys(ageRes)[0])
           const equivClientAge = String(currAge + partnersAgeDiff)
+          const prevResult = mergedPartnerRes[index - 1]
 
           const recalcCase =
             partnerAge > clientAge &&
@@ -309,11 +340,49 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
                 partnerHandler.benefitResults.partner
               )
 
+              if (
+                prevResult &&
+                prevResult[Object.keys(prevResult)[0]]?.oas &&
+                prevResult[Object.keys(prevResult)[0]]?.gis
+              ) {
+                const gis = prevResult[Object.keys(prevResult)[0]]['gis']
+                const previousBenefitTotal =
+                  prevResult[Object.keys(prevResult)[0]]['oas'].entitlement
+                    .result + (gis ? gis.entitlement.result : 0)
+
+                const eligibleTotalAmount = Object.values(newPartnerResults)
+                  .map((benefit: any) => benefit.entitlement?.result || 0)
+                  .reduce((sum, amount) => sum + amount, 0)
+
+                if (previousBenefitTotal === eligibleTotalAmount) {
+                  return null
+                }
+              }
+
               return { [currAge]: newPartnerResults }
             } else {
               return null
             }
           } else {
+            if (prevResult) {
+              const sameAgeResults =
+                Math.floor(currAge) === Math.floor(+Object.keys(prevResult)[0])
+
+              const alwAges =
+                Math.floor(currAge) < 65 &&
+                Math.floor(+Object.keys(prevResult)[0]) < 65
+
+              if (sameAgeResults && alwAges) {
+                const alw = prevResult[Object.keys(prevResult)[0]]['alw']
+                const previousBenefitTotal = alw ? alw.entitlement.result : 0
+                const eligibleTotalAmount =
+                  Object.values(ageRes)[0]['alw'].entitlement?.result || 0
+
+                return previousBenefitTotal === eligibleTotalAmount
+                  ? null
+                  : ageRes
+              }
+            }
             return ageRes
           }
         })

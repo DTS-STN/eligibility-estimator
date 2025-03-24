@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useLayoutEffect } from 'react'
 import { getTranslations } from '../../i18n/api'
 import { WebTranslations } from '../../i18n/web'
 import {
@@ -51,35 +50,6 @@ export const SummaryEstimates: React.VFC<{
 
   let collapsed = []
 
-  //To remove recovery tax EC
-  useLayoutEffect(() => {
-    const element =
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTaxPartner.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTaxPartner.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTax.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTax.heading}`
-      )
-
-    const recoveryBoth =
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTaxBoth.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTaxBoth.heading}`
-      )
-
-    if (recoveryBoth) {
-      element?.remove()
-    }
-  })
-
   return (
     <>
       {headings.map((year, index) => {
@@ -98,12 +68,12 @@ export const SummaryEstimates: React.VFC<{
         if (year == apiTrans.detail.currentEligible) {
           heading = apiTrans.detail.currentEligible
         } else if (index < headings.length - 1) {
-          heading = year
+          heading = `${apiTrans.detail.inTheYear} ${year}`
         } else {
           heading =
             language == 'fr'
-              ? `${apiTrans.detail.lastYearEligible} ${year}`
-              : `${year} ${apiTrans.detail.lastYearEligible}`
+              ? `${apiTrans.detail.lastYearEligible} ${apiTrans.detail.fromYear} ${year}`
+              : `${apiTrans.detail.fromYear} ${year} ${apiTrans.detail.lastYearEligible}`
         }
 
         const yearResults = userResult
@@ -176,14 +146,41 @@ export const SummaryEstimates: React.VFC<{
         }
         eligible = eligible.concat(partnerEli)
 
+        const allCollapsedDetails = []
+        eligible.forEach((benefit) => {
+          const collapsedDetails = benefit.cardDetail?.collapsedText
+          if (collapsedDetails) {
+            allCollapsedDetails.push(...collapsedDetails)
+          }
+        })
+
+        const headingList = [
+          apiTrans.detailWithHeading.recoveryTaxPartner.heading,
+          apiTrans.detailWithHeading.nonResidentTaxPartner.heading,
+          apiTrans.detailWithHeading.recoveryTax.heading,
+          apiTrans.detailWithHeading.nonResidentTax.heading,
+        ]
+        const bothRecoveryTaxArr = [
+          apiTrans.detailWithHeading.recoveryTaxBoth.heading,
+          apiTrans.detailWithHeading.nonResidentTaxBoth.heading,
+        ]
+        const hasBothRecoveryTax = allCollapsedDetails.some((detail) =>
+          bothRecoveryTaxArr.includes(detail.heading)
+        )
+
+        let headingToDelete: string | undefined
+        if (hasBothRecoveryTax) {
+          headingToDelete = headingList.find((heading) =>
+            allCollapsedDetails.some((detail) => detail.heading === heading)
+          )
+        }
+
         return (
           <div key={heading}>
             <h3
               className={`h3 ${index != 0 ? 'mt-5' : ''} mb-5`}
-              key={'heading' + heading}
-            >
-              {heading}
-            </h3>
+              dangerouslySetInnerHTML={{ __html: heading }}
+            />
             <div key={`estimation-${year}`} className="mb-5">
               <div key={`estimation-sub-${year}`} className="space-y-4">
                 {userResult &&
@@ -266,6 +263,13 @@ export const SummaryEstimates: React.VFC<{
                         newCollapsedDetails.map((detail, index) => {
                           if (!collapsed.includes(detail.heading)) {
                             collapsed.push(detail.heading)
+
+                            if (headingToDelete) {
+                              if (detail.heading === headingToDelete) {
+                                return null
+                              }
+                            }
+
                             return (
                               <CustomCollapse
                                 datacy={`collapse-${benefit.benefitKey}-${index}`}

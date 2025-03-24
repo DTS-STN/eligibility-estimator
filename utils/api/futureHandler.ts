@@ -190,6 +190,7 @@ export class FutureHandler {
   }
 
   private getPartneredResults() {
+    const orgAgeSets = this.query.agesArray
     const orgClientAge = Number(this.query.age)
     const orgPartnerAge = Number(this.query.partnerAge)
     const clientOnlyCanada = this.query.livedOnlyInCanada === 'true'
@@ -257,7 +258,13 @@ export class FutureHandler {
       },
     }
 
-    const futureAges = getAgeArray(agesInputObj)
+    const futureAges = [...getAgeArray(agesInputObj), ...(orgAgeSets || [])]
+      .sort((a, b) => a[0] - b[0])
+      .filter(
+        (set, index, arr) =>
+          index === arr.findIndex((otherSet) => otherSet[0] === set[0])
+      )
+
     const psdAge = Number(this.query.psdAge)
 
     let result = this.futureResultsObj
@@ -273,7 +280,7 @@ export class FutureHandler {
         const [userAge, partnerAge] = ageSet
 
         const newQuery = buildQuery(
-          this.query,
+          psdAge ? this.query.orgInput : this.query,
           ageSet,
           clientDeferralMeta,
           partnerDeferralMeta,
@@ -287,7 +294,7 @@ export class FutureHandler {
         const handler = new BenefitHandler(
           value,
           true,
-          +this.query.age,
+          psdAge ? +this.query.orgInput['age'] : +this.query.age,
           +this.query.yearsInCanadaSince18,
           false // this.compare boolean set to false means that we disregard the comparison between 'non-deferred' and 'deferred'. The non-deferred results are saved
         )
@@ -338,14 +345,16 @@ export class FutureHandler {
         if (orgClientAge >= orgPartnerAge) {
           if (
             !partnerEligibleBenefits &&
-            userAge != clientOasEliObj.ageOfEligibility
+            userAge != clientOasEliObj.ageOfEligibility &&
+            !this.query.psdAge
           ) {
             clientEligibleBenefits = null
           }
         } else {
           if (
             !clientEligibleBenefits &&
-            partnerAge != partnerEliObj.ageOfEligibility
+            partnerAge != partnerEliObj.ageOfEligibility &&
+            !this.query.psdAge
           ) {
             partnerEligibleBenefits = null
           }
@@ -383,6 +392,7 @@ export class FutureHandler {
         partner: partnerResults.length !== 0 ? partnerResults : null,
       }
     }
+
     return result
   }
 }

@@ -249,7 +249,7 @@ const ResultsPage: React.VFC<{
           />
           {/* Summary Estimates section */}
           <div
-            className={`border-[#269ABC] bg-[#EEFAFF] p-8 ${
+            className={`border-[#269ABC] bg-[#EEFAFF] p-4 ${
               isUpdating ? 'opacity-20' : ''
             }`}
           >

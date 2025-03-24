@@ -56,6 +56,11 @@ export const RequestSchema = Joi.object({
     ageOfEligibility: Joi.number(),
     yearsOfResAtEligibility: Joi.number(),
   }).optional(),
+  agesArray: Joi.array()
+    .items(Joi.array().items(Joi.number().required()).min(2).required())
+    .optional(),
+  orgInput: Joi.object().optional(),
+  alreadyEligible: Joi.boolean().optional(),
   incomeAvailable: Joi.boolean()
     .required()
     .messages({ 'any.required': ValidationErrors.provideIncomeEmpty }),

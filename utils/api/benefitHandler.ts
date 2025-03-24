@@ -140,14 +140,24 @@ export class BenefitHandler {
 
       if (this.input.partner.age >= partnerEliObj.ageOfEligibility) {
         if (this.input.partner.age < 75) {
-          this.input.partner.age = partnerEliObj.ageOfEligibility
-          this.input.partner.yearsInCanadaSince18 =
-            partnerEliObj.yearsOfResAtEligibility
+          if (this.input.partner.yearsInCanadaSinceOAS) {
+            this.input.partner.yearsInCanadaSince18 =
+              this.input.partner.yearsInCanadaSinceOAS
+          } else {
+            this.input.partner.age = partnerEliObj.ageOfEligibility
+            this.input.partner.yearsInCanadaSince18 =
+              partnerEliObj.yearsOfResAtEligibility
+          }
         }
 
         if (this.input.partner.age >= 75) {
-          this.input.partner.yearsInCanadaSince18 =
-            partnerEliObj.yearsOfResAtEligibility
+          if (this.input.partner.yearsInCanadaSinceOAS) {
+            this.input.partner.yearsInCanadaSince18 =
+              this.input.partner.yearsInCanadaSinceOAS
+          } else {
+            this.input.partner.yearsInCanadaSince18 =
+              partnerEliObj.yearsOfResAtEligibility
+          }
         }
       }
     }
@@ -188,10 +198,22 @@ export class BenefitHandler {
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 
     if (this.psdCalc) {
-      const psdAge = this.rawInput.psdAge
-      const yrsDiff = +this.rawInput.psdAge - clientEliObj.ageOfEligibility
-      const resAtEli = clientEliObj.yearsOfResAtEligibility
-      const maxRes = resAtEli + yrsDiff
+      // Need to use current age and residence if currently eligible. Otherwise, use age of eligibility and years of residence at age of eligibility.
+
+      const alreadyEligible = this.rawInput.alreadyEligible
+      const orgAge = +this.rawInput.orgInput.age
+      const orgRes = this.rawInput.livedOnlyInCanada
+        ? 40
+        : +this.rawInput.orgInput.yearsInCanadaSince18
+
+      const psdAge = +this.rawInput.psdAge
+      const yrsDiff =
+        psdAge - (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
+      const resToUse = alreadyEligible
+        ? orgRes
+        : clientEliObj.yearsOfResAtEligibility
+
+      const maxRes = resToUse + yrsDiff
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
 
@@ -218,7 +240,7 @@ export class BenefitHandler {
         this.future,
         true,
         psdInput.age,
-        this.formAge,
+        this.rawInput.orgInput ? this.rawInput.orgInput.age : this.formAge,
         this.formYearsInCanada,
         psdInput.receiveOAS
       )
@@ -322,11 +344,10 @@ export class BenefitHandler {
         this.future,
         true,
         psdAge,
-        this.formAge,
+        this.rawInput.orgInput ? this.rawInput.orgInput.age : this.formAge,
         this.formYearsInCanada,
         this.input.client.receiveOAS
       )
-
       clientOasWithDeferral.cardDetail = {
         ...clientOasNoDeferral.cardDetail,
         meta: {
@@ -467,6 +488,7 @@ export class BenefitHandler {
         )
       }
     }
+    clientOas.cardDetail.collapsedText = clientOas.updateCollapsedText()
 
     this.setValueForAllResults(allResults, 'client', 'oas', clientOas)
     this.setValueForAllResults(allResults, 'client', 'gis', clientGis)
@@ -479,6 +501,7 @@ export class BenefitHandler {
         clientOas,
         true
       )
+
       this.setValueForAllResults(allResults, 'partner', 'oas', partnerOas)
       // Save the partner result to the client's partnerBenefitStatus field, which is used for client's GIS
       this.input.client.partnerBenefitStatus.oasResultEntitlement =

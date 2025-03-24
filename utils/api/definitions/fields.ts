@@ -5,6 +5,9 @@ export enum FieldKey {
   PSD_AGE = 'psdAge',
   ELI_OBJ = 'clientEliObj',
   PARTNER_ELI_OBJ = 'partnerEliObj',
+  AGE_SETS = 'agesArray',
+  ORG_INPUT = 'orgInput',
+  ALREADY_ELIGIBLE = 'alreadyEligible',
   INCOME_AVAILABLE = 'incomeAvailable',
   INCOME = 'income',
   INCOME_WORK = 'incomeWork',
@@ -46,6 +49,7 @@ export enum FieldType {
 
 // the order of fields here will define the order within the application
 export const fieldDefinitions: FieldDefinitions = {
+  // ==== The following 6 fields are meta fields and do not show up in the UI. ====
   [FieldKey.PSD_AGE]: {
     key: FieldKey.PSD_AGE,
     category: { key: FieldCategory.AGE },
@@ -61,6 +65,22 @@ export const fieldDefinitions: FieldDefinitions = {
     category: { key: FieldCategory.AGE },
     type: FieldType.NUMBER,
   },
+  [FieldKey.AGE_SETS]: {
+    key: FieldKey.AGE_SETS,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.ORG_INPUT]: {
+    key: FieldKey.ORG_INPUT,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  [FieldKey.ALREADY_ELIGIBLE]: {
+    key: FieldKey.ALREADY_ELIGIBLE,
+    category: { key: FieldCategory.AGE },
+    type: FieldType.NUMBER,
+  },
+  // =================================================================
   [FieldKey.MARITAL_STATUS]: {
     key: FieldKey.MARITAL_STATUS,
     category: { key: FieldCategory.MARITAL },

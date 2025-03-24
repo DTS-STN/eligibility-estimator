@@ -84,41 +84,54 @@ export const YourAnswers: React.VFC<{
   function getMainContent(): JSX.Element {
     if (inputs.length === 0)
       return <div className="py-4">{tsln.resultsPage.noAnswersFound}</div>
+
     return (
       <>
-        {inputs.map((input, index) => {
-          const showBorder = index != inputs.length - 1
-          const borderStyle = showBorder
-            ? 'py-4 border-b border-info-border'
-            : 'py-4'
-          return shouldDisplay(input) ? (
-            <div key={input.key} className={borderStyle}>
-              <div>{tsln.resultsQuestions[input.key]}</div>
-              <div className="grid gap-0 grid-cols-3">
-                <div className="col-span-2">
-                  <strong
-                    dangerouslySetInnerHTML={{
-                      __html: getDisplayValue(input),
-                    }}
-                  />
-                </div>
-                <div className="justify-self-end self-end">
-                  <Link href={`questions#${input.key}`}>
-                    <a
-                      onClick={handlePageChange(input.key)}
-                      className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
-                      aria-label={tsln.resultsEditAriaLabels[input.key]}
-                    >
-                      {tsln.resultsPage.edit}
-                    </a>
-                  </Link>
+        {inputs
+          .filter(
+            (item) =>
+              !(
+                item.key === 'livedOnlyInCanada' &&
+                inputs.some(
+                  (d) => d.key === 'livingCountry' && d.value === 'OTH'
+                )
+              )
+          )
+          .map((input, index) => {
+            const showBorder = index != inputs.length - 1
+            const borderStyle = showBorder
+              ? 'py-4 border-b border-info-border'
+              : 'py-4'
+            return shouldDisplay(input) ? (
+              <div key={input.key} className={borderStyle}>
+                <div>{tsln.resultsQuestions[input.key]}</div>
+                <div className="grid gap-0 grid-cols-3">
+                  <div className="col-span-2">
+                    <strong
+                      dangerouslySetInnerHTML={{
+                        __html: getDisplayValue(input),
+                      }}
+                    />
+                  </div>
+                  <div className="justify-self-end self-end">
+                    <Link href={`questions#${input.key}`}>
+                      <a
+                        onClick={handlePageChange(input.key)}
+                        className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
+                        aria-label={`${
+                          tsln.resultsEditAriaLabels[input.key]
+                        } ${getDisplayValue(input)}`}
+                      >
+                        {tsln.resultsPage.edit}
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            ''
-          )
-        })}
+            ) : (
+              ''
+            )
+          })}
       </>
     )
   }
@@ -176,7 +189,9 @@ export const YourAnswers: React.VFC<{
                           <a
                             onClick={handlePageChange(input.key)}
                             className="ds-underline ds-text-multi-blue-blue70b ds-font-body ds-text-browserh5 ds-leading-33px hover:ds-text-multi-blue-blue50b"
-                            aria-label={tsln.resultsEditAriaLabels[input.key]}
+                            aria-label={`${
+                              tsln.resultsEditAriaLabels[input.key]
+                            } ${getDisplayValue(input)}`}
                           >
                             {tsln.resultsPage.edit}
                           </a>

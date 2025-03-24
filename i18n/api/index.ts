@@ -115,6 +115,8 @@ export interface Translations {
     firstYearEligible: string
     lastYearEligible: string
     currentEligible: string
+    inTheYear: string
+    fromYear: string
     you: string
     yourPartner: string
     youCouldReceive: string

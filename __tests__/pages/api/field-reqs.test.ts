@@ -45,6 +45,7 @@ describe('field requirement analysis', () => {
       // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
     ])
     expect(res.body.visibleFields).toEqual([
       FieldKey.MARITAL_STATUS,
@@ -54,6 +55,7 @@ describe('field requirement analysis', () => {
       // FieldKey.LEGAL_STATUS,
       FieldKey.LIVING_COUNTRY,
       FieldKey.LIVED_ONLY_IN_CANADA,
+      FieldKey.YEARS_IN_CANADA_SINCE_18,
     ])
   })
 
@@ -197,7 +199,6 @@ describe('field requirements analysis: conditional fields', () => {
       FieldKey.PARTNER_AGE,
       FieldKey.PARTNER_INCOME,
       FieldKey.PARTNER_LIVING_COUNTRY,
-      FieldKey.PARTNER_LIVED_ONLY_IN_CANADA,
     ])
     // expect(res.body.visibleFields).toContain(FieldKey.PARTNER_INCOME_AVAILABLE)
     expect(res.body.visibleFields).toContain(FieldKey.PARTNER_AGE)

@@ -55,64 +55,23 @@ export const FormSelect: React.VFC<SelectProps> = ({
         requiredText={requiredText}
         fieldId={`${name}-select`}
       />
-      <div className="w-full md:w-80">
-        <Select
-          inputId={`${name}-select`}
+      <div className="w-full md:w-80 datePicker">
+        <select
+          id={`${name}-select`}
+          className="inputStyles w-[320px] bg-white"
           aria-labelledby={`${name}-label`}
-          ariaLiveMessages={{
-            onFocus: (value) =>
-              `You are currently focused on option ${value.label}`,
-          }}
-          styles={{
-            container: (styles) => ({
-              ...styles,
-              fontSize: '20px', // tailwind incompatible unfortunately, but since this component is only used here and wrapped as `FormSelect` it should be fine
-              border: error ? '1px solid red' : '1px solid #6f6f6f',
-              borderRadius: '4px',
-            }),
-            control: (styles) => ({
-              ...styles,
-              border: 'none',
-            }),
-            dropdownIndicator: (styles) => ({
-              ...styles,
-              color: '#333',
-              paddingRight: '6px',
-            }),
-            clearIndicator: (styles) => ({
-              ...styles,
-              color: '#333',
-              paddingRight: '6px',
-            }),
-            input: (styles) => ({
-              ...styles,
-              boxShadow: 'none', // remove a blue inset box from react-select
-            }),
-            indicatorSeparator: (styles) => ({
-              ...styles,
-              opacity:
-                field.config.type == FieldType.DROPDOWN_SEARCHABLE ? 1 : 0,
-            }),
-          }}
-          className="rselect"
           placeholder={placeholder}
           data-testid="select"
-          value={currentItem}
           name={field.key}
-          options={field.config.values.map((opt) => ({
-            value: opt.key,
-            label: opt.text,
-          }))}
-          onChange={async (newValue: { value: string; label: string }) => {
-            customOnChange(newValue)
-          }}
-          closeMenuOnScroll={false}
-          isSearchable={
-            field.config.type !== FieldType.DROPDOWN_SEARCHABLE
-              ? undefined
-              : true
-          }
-        />
+          onChange={customOnChange}
+          value={currentItem.value}
+        >
+          {field.config.values.map((opt) => (
+            <option value={opt.key} key={opt.key}>
+              {opt.text}
+            </option>
+          ))}
+        </select>
       </div>
     </>
   )

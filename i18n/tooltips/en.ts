@@ -6,33 +6,33 @@ const en: TooltipTranslations = {
   [FieldKey.MARITAL_STATUS]: {
     heading: apiEn.category.marital,
     moreinfo: 'Which option applies to you?',
-    text: "<ul> \
-            <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Single</span>: \
+    text: "<dl> \
+            <dt>Single:</dt> \
+            <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               You have never been married and are not in a common-law relationship. \
             </li> \
-            <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Divorced</span>: \
+            <dt>Divorced:</dt> \
+            <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               You're officially separated and have legally ended your marriage. \
-            </li> \
-            <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Separated:</span> \
+            </dd> \
+            <dt>Separated:</dt> \
+            <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               You have been living apart from your spouse or common-law partner because of a breakdown in the relationship for a period of at least 90 days and you have not reconciled. \
-            </li> \
-            <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Married</span>: \
+            </dd> \
+            <dt>Married:</dt> \
+            <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               You and your spouse have had a ceremony that legally binds you to each other. \
               Your marriage must be legally recognized in the country where it was performed and in Canada. \
-            </li> \
-            <li style='padding-bottom: 12px;'> \
-              <span style='font-weight: bold;'>Common-law</span>: \
+            </dd> \
+            <dt>Common-law:</dt> \
+            <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               You have lived continuously with your partner in a marital-type relationship for a minimum of 1&nbsp;year.\
-            </li> \
-            <li style='padding-bottom: 8px;'> \
-              <span style='font-weight: bold;'>Widowed</span>: \
+            </dd> \
+            <dt>Widowed:</dt> \
+            <dd style='padding-bottom: 12px; margin-left: 24px;'> \
               Your spouse or common-law partner has died and you have not remarried or entered into a common-law relationship. \
-            </li> \
-          </ul>",
+            </dd> \
+          </dl>",
   },
   [FieldKey.LEGAL_STATUS]: {
     heading: apiEn.category.legal,

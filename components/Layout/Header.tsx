@@ -115,7 +115,6 @@ export function Header({
         <div className="flex-col flex lg:flex lg:flex-row justify-between mb-4">
           <div
             className="w-full flex flex-row justify-between items-start"
-            role="navigation"
             aria-labelledby="officialSiteNav"
           >
             <h3 className="sr-only" id="officialSiteNav">
@@ -130,6 +129,17 @@ export function Header({
                 width="375"
                 height="35"
               />
+              <span className="hidden">
+                {' '}
+                /{' '}
+                <span lang={`${language === 'en' ? 'en' : 'fr'}`}>
+                  {`${
+                    language === 'en'
+                      ? 'Government of Canada'
+                      : 'Gouvernement du Canada'
+                  }`}
+                </span>
+              </span>
             </a>
             <h3 className="sr-only">{headerText.languageSelection}</h3>
             <Link href={langUrl} locale={language}>
