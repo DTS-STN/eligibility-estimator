@@ -206,13 +206,17 @@ export class BenefitHandler {
         ? 40
         : +this.rawInput.orgInput.yearsInCanadaSince18
 
-      const psdAge = this.rawInput.psdAge
+      const psdAge = +this.rawInput.psdAge
       const yrsDiff =
-        +this.rawInput.psdAge -
-        (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
+        psdAge - (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
       const resToUse = alreadyEligible
         ? orgRes
         : clientEliObj.yearsOfResAtEligibility
+
+      console.log('this.rawInput', this.rawInput)
+      console.log('alreadyEligible', alreadyEligible)
+      console.log('psdAge', psdAge)
+      console.log('yrsDiff', yrsDiff)
       const maxRes = resToUse + yrsDiff
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
