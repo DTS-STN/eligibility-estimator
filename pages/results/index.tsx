@@ -82,35 +82,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  //To remove recovery tax EC
-  useEffect(() => {
-    const element =
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTaxPartner.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTaxPartner.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTax.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTax.heading}`
-      )
-
-    const recoveryBoth =
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.recoveryTaxBoth.heading}`
-      ) ||
-      document.getElementById(
-        `collapse-${apiTrans.detailWithHeading.nonResidentTaxBoth.heading}`
-      )
-
-    if (recoveryBoth) {
-      element?.remove()
-    }
-  }, [response])
-
   const psdSingleHandleAndSet = (psdAge) => {
     const responseClone = JSON.parse(JSON.stringify(originalResponse))
 

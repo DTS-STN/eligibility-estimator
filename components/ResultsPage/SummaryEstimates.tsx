@@ -146,6 +146,35 @@ export const SummaryEstimates: React.VFC<{
         }
         eligible = eligible.concat(partnerEli)
 
+        const allCollapsedDetails = []
+        eligible.forEach((benefit) => {
+          const collapsedDetails = benefit.cardDetail?.collapsedText
+          if (collapsedDetails) {
+            allCollapsedDetails.push(...collapsedDetails)
+          }
+        })
+
+        const headingList = [
+          apiTrans.detailWithHeading.recoveryTaxPartner.heading,
+          apiTrans.detailWithHeading.nonResidentTaxPartner.heading,
+          apiTrans.detailWithHeading.recoveryTax.heading,
+          apiTrans.detailWithHeading.nonResidentTax.heading,
+        ]
+        const bothRecoveryTaxArr = [
+          apiTrans.detailWithHeading.recoveryTaxBoth.heading,
+          apiTrans.detailWithHeading.nonResidentTaxBoth.heading,
+        ]
+        const hasBothRecoveryTax = allCollapsedDetails.some((detail) =>
+          bothRecoveryTaxArr.includes(detail.heading)
+        )
+
+        let headingToDelete: string | undefined
+        if (hasBothRecoveryTax) {
+          headingToDelete = headingList.find((heading) =>
+            allCollapsedDetails.some((detail) => detail.heading === heading)
+          )
+        }
+
         return (
           <div key={heading}>
             <h3
@@ -234,6 +263,13 @@ export const SummaryEstimates: React.VFC<{
                         newCollapsedDetails.map((detail, index) => {
                           if (!collapsed.includes(detail.heading)) {
                             collapsed.push(detail.heading)
+
+                            if (headingToDelete) {
+                              if (detail.heading === headingToDelete) {
+                                return null
+                              }
+                            }
+
                             return (
                               <CustomCollapse
                                 datacy={`collapse-${benefit.benefitKey}-${index}`}
