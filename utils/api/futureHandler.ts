@@ -134,6 +134,8 @@ export class FutureHandler {
       String(this.query.livingCountry)
     )
 
+    console.log('eliObjOas FROM FUTURE HANDLER', eliObjOas)
+
     const oasAge = psdAge ? psdAge : eliObjOas.ageOfEligibility
 
     const eliObjAlws = AlwsEligibility(age, yearsInCanada)

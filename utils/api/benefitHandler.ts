@@ -184,6 +184,7 @@ export class BenefitHandler {
     // Determines if it is possible to defer OAS and provides useful properties such as new inputs and deferral months to calculate the OAS deferred case
     const clientOasHelper = evaluateOASInput(this.input.client)
 
+    console.log('this.rawInput', this.rawInput)
     const clientEliObj = this.rawInput.clientEliObj
       ? this.rawInput.clientEliObj
       : OasEligibility(
@@ -194,6 +195,7 @@ export class BenefitHandler {
           this.rawInput.livingCountry
         )
 
+    console.log('clientEliObj', clientEliObj)
     let clientOasNoDeferral
     // Addresses a special case when the benefit handler is called from the result page's PSDBox component
 

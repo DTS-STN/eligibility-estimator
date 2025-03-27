@@ -85,15 +85,38 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdSingleHandleAndSet = (psdAge) => {
     const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
+    const clientAge = Number(inputHelper.asObjectWithLanguage.age)
+    const clientRes = Number(
+      inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
+        Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
+    )
+    const clientOnlyCanada =
+      inputHelper.asObjectWithLanguage.livedOnlyInCanada === 'true'
+    const livingCountry = inputHelper.asObjectWithLanguage.livingCountry
+
+    const clientEliObj = OasEligibility(
+      clientAge,
+      clientRes,
+      clientOnlyCanada,
+      livingCountry
+    )
+
+    console.log('PSD TRIGGERED')
+
     const psdHandler = new MainHandler({
       ...inputHelper.asObjectWithLanguage,
       psdAge,
+      clientEliObj,
       orgInput: inputHelper.asObjectWithLanguage,
       alreadyEligible:
         responseClone.results.oas.eligibility.result === ResultKey.ELIGIBLE,
     })
 
+    console.log('psdHandler', psdHandler)
+
     let psdResults: ResponseSuccess | ResponseError = psdHandler.results
+
+    console.log('psdResults', psdResults)
 
     if ('results' in psdResults) {
       const getDeferralTable = () => {

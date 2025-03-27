@@ -203,6 +203,7 @@ export function OasEligibility(
   const minAgeEligibility = 65
   const minYearsOfResEligibility = livingCountry === 'CAN' ? 10 : 20
 
+  // Early return if residence is below threshold - it cannot increase if living outside of Canada
   if (
     livingCountry === 'OTH' &&
     livedOnlyInCanada === false &&
@@ -211,6 +212,19 @@ export function OasEligibility(
     return {
       ageOfEligibility: null,
       yearsOfResAtEligibility: null,
+    }
+  }
+
+  // Early return if already eligible while living outside of Canada. Age and residence don't increase.
+  if (
+    livingCountry === 'OTH' &&
+    livedOnlyInCanada === false &&
+    yearsInCanadaAtStart >= minYearsOfResEligibility &&
+    ageAtStart >= minAgeEligibility
+  ) {
+    return {
+      ageOfEligibility: ageAtStart,
+      yearsOfResAtEligibility: yearsInCanadaAtStart,
     }
   }
 
