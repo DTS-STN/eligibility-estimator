@@ -209,9 +209,6 @@ const fr: WebTranslations = {
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
   required: '(obligatoire)',
-  workInProgress: 'Cet estimateur est un travail en cours',
-  workInProgressBody:
-    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Il ne s'agit pas d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
