@@ -162,19 +162,6 @@ export const Layout: React.VFC<{
                 <h1 id="applicationTitle" className="h1 mt-8 mb-2">
                   {title}
                 </h1>
-                <div>
-                  <div className="my-6">
-                    <Message
-                      id={'wip'}
-                      iconId={'testkey'}
-                      iconAltText={tsln.infoText}
-                      type={'info'}
-                      heading={tsln.workInProgress}
-                      body={tsln.workInProgressBody}
-                      asHtml
-                    />
-                  </div>
-                </div>
               </>
             )}
 
