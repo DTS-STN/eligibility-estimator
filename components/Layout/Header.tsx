@@ -77,6 +77,7 @@ export function Header({
               onClick={handleAutoScroll('main')}
               data-cy-button="skip-Content"
               draggable="false"
+              tabIndex={1}
             >
               {topNavProps.skipToMain}
             </a>
@@ -89,6 +90,7 @@ export function Header({
               onClick={handleAutoScroll('footer')}
               data-cy-button="skip-About"
               draggable="false"
+              tabIndex={1}
             >
               {topNavProps.skipToAbout}
             </a>
@@ -100,6 +102,7 @@ export function Header({
                 className="font-[700] text-[24px] p-1 text-white visited:text-white focus:bg-[#26374A]"
                 href={topNavProps.switchToBasicPath}
                 rel="alternate"
+                tabIndex={1}
               >
                 {topNavProps.switchToBasic}
               </a>
@@ -145,6 +148,7 @@ export function Header({
             <Link href={langUrl} locale={language}>
               <a
                 lang={language}
+                tabIndex={1}
                 className="ml-6 sm:ml-16 -mt-1 underline font-lato text-[16px] leading-[23px] text-[#295376] hover:text-[#0535D2]"
               >
                 <span className="md:hidden font-bold">{shortLanguageText}</span>

@@ -432,13 +432,12 @@ export const Estimation: React.VFC<{
 
   return (
     <div key={age}>
-      <strong>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: buildSummaryString(),
-          }}
-        />
-      </strong>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: buildSummaryString(),
+        }}
+        className="font-bold"
+      />
 
       <ul className="pl-[35px] ml-[20px] my-1 list-disc text-content">
         {!estimateIsSame &&
