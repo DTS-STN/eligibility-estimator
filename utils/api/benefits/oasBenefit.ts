@@ -31,6 +31,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
   formYearsInCanada: number
   userOas: OasBenefit
   formReceiving: boolean
+  residency: number
   constructor(
     input: ProcessedInput,
     translations: Translations,
@@ -55,6 +56,8 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     this.formYearsInCanada = formYearsInCanada
     this.userOas = userOas
     this.formReceiving = formReceiving
+    this.residency =
+      this.input.yearsInCanadaSince18 || this.input.yearsInCanadaSinceOAS
   }
 
   protected getEligibility(): EligibilityResult {
@@ -74,8 +77,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const meetsReqIncome = skipReqIncome || this.income >= 0
 
     const requiredYearsInCanada = this.input.livingCountry.canada ? 10 : 20
-    const meetsReqYears =
-      this.input.yearsInCanadaSince18 >= requiredYearsInCanada
+    const meetsReqYears = this.residency >= requiredYearsInCanada
     const meetsReqLegal = this.input.legalStatus.canadian
 
     // main checks
@@ -188,7 +190,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           increase: 0,
           deferred: this.deferral || !!this.input.oasDeferDuration,
           length: this.input.oasDeferDuration,
-          residency: this.input.yearsInCanadaSince18,
+          residency: this.residency,
         },
         type: EntitlementResultType.NONE,
         autoEnrollment,
@@ -214,7 +216,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
           increase: 0,
           deferred: this.deferral || !!this.input.oasDeferDuration,
           length: this.input.oasDeferDuration,
-          residency: this.input.yearsInCanadaSince18,
+          residency: this.residency,
         },
         type: EntitlementResultType.NONE,
         autoEnrollment,
@@ -224,7 +226,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
     const result65To74 = this.age65to74Amount
     const resultAt75 = this.age75EntitlementAmount
     const type =
-      this.input.yearsInCanadaSince18 < 40
+      this.residency < 40
         ? EntitlementResultType.PARTIAL
         : EntitlementResultType.FULL
 
@@ -244,7 +246,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
         increase: this.deferralIncrease,
         deferred: this.deferral || !!this.input.oasDeferDuration,
         length: this.input.oasDeferDuration,
-        residency: this.input.yearsInCanadaSince18,
+        residency: this.residency,
       },
       type,
       autoEnrollment,
@@ -255,9 +257,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
    * The "base" OAS amount, considering yearsInCanada, ignoring deferral.
    */
   private get baseAmount() {
-    return (
-      Math.min(this.input.yearsInCanadaSince18 / 40, 1) * legalValues.oas.amount
-    )
+    return Math.min(this.residency / 40, 1) * legalValues.oas.amount
   }
 
   /**

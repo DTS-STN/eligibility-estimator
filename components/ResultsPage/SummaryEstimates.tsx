@@ -49,7 +49,7 @@ export const SummaryEstimates: React.VFC<{
   }
 
   let collapsed = []
-
+  console.log('headings', headings)
   return (
     <>
       {headings.map((year, index) => {
@@ -59,7 +59,7 @@ export const SummaryEstimates: React.VFC<{
 
         const partnerResult = partnerResults
           ? partnerResults.filter((elm) => elm).length > 0
-            ? partnerResults.some((obj) => year in obj)
+            ? partnerResults.filter(Boolean).some((obj) => year in obj)
             : null
           : null
 
