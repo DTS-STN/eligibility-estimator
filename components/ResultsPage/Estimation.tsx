@@ -453,14 +453,18 @@ export const Estimation: React.VFC<{
       {isFirstOasGis() &&
         eligible.map((benefit, index) => {
           if (
-            benefit.cardDetail.meta.residency &&
+            (benefit.cardDetail.meta.residency ||
+              benefit.entitlement?.deferral?.residency) &&
             benefit.entitlement.result > 0
           ) {
+            let yrs = benefit.cardDetail.meta.residency
+              ? benefit.cardDetail.meta.residency
+              : benefit.entitlement?.deferral?.residency
             return (
               <p>
                 {language == 'en'
-                  ? `This estimate is based on ${benefit.cardDetail.meta.residency} years of Canadian residence.`
-                  : `Cette estimation est basée sur ${benefit.cardDetail.meta.residency} années de résidence canadienne.`}
+                  ? `This estimate is based on ${yrs} years of Canadian residence.`
+                  : `Cette estimation est basée sur ${yrs}  années de résidence canadienne.`}
               </p>
             )
           }
