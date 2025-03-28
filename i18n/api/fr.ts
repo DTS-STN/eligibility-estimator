@@ -144,6 +144,8 @@ const fr: Translations = {
       'Modifier le nombre d’années vécues au Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Modifier le nombre d’années vécues au Canada',
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
+      'Modifier si vous avez vécu dans un pays avec un accord de sécurité sociale',
     [FieldKey.MARITAL_STATUS]: 'Modifier votre état matrimonial',
     [FieldKey.INV_SEPARATED]:
       'Modifier votre statut de séparation involontaire',

@@ -138,6 +138,8 @@ const en: Translations = {
       'Edit how long you have lived in Canada',
     [FieldKey.YEARS_IN_CANADA_SINCE_OAS]:
       'Edit how long you have lived in Canada',
+    [FieldKey.EVER_LIVED_SOCIAL_COUNTRY]:
+      'Edit if you have lived in a country with a social security agreement',
     [FieldKey.MARITAL_STATUS]: 'Edit your marital status',
     [FieldKey.INV_SEPARATED]: 'Edit your involuntary separation status',
     [FieldKey.PARTNER_INCOME_AVAILABLE]:
