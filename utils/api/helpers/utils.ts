@@ -215,19 +215,6 @@ export function OasEligibility(
     }
   }
 
-  // Early return if already eligible while living outside of Canada. Age and residence don't increase.
-  // if (
-  //   livingCountry === 'OTH' &&
-  //   livedOnlyInCanada === false &&
-  //   yearsInCanadaAtStart >= minYearsOfResEligibility &&
-  //   ageAtStart >= minAgeEligibility
-  // ) {
-  //   return {
-  //     ageOfEligibility: ageAtStart,
-  //     yearsOfResAtEligibility: yearsInCanadaAtStart,
-  //   }
-  // }
-
   if (age >= minAgeEligibility && yearsInCanada >= minYearsOfResEligibility) {
     const yearsPastEligibility = Math.min(
       age - minAgeEligibility,
