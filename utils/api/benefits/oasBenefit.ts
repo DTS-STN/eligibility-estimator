@@ -377,6 +377,7 @@ export class OasBenefit extends BaseBenefit<EntitlementResultOas> {
       eligibility.result === ResultKey.INCOME_DEPENDENT
 
     //Check future first, if !future don't bother
+
     const filledYears =
       future && !input.livedOnlyInCanada
         ? +input.yearsInCanadaSince18 !== +formYearsInCanada
