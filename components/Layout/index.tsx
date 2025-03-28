@@ -158,11 +158,11 @@ export const Layout: React.VFC<{
 
           <main property="mainContentOfPage">
             {!router.pathname.includes('/questions') && (
-              <>
+              <div className="sm:pb-8 pb-4">
                 <h1 id="applicationTitle" className="h1 mt-8 mb-2">
                   {title}
                 </h1>
-              </>
+              </div>
             )}
 
             {children}
