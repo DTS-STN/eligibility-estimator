@@ -38,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fortawesome/fontawesome-svg-core", "npm:6.4.0"],\
             ["@fortawesome/free-solid-svg-icons", "npm:6.4.0"],\
             ["@fortawesome/react-fontawesome", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.2.0"],\
+            ["@next/swc-darwin-arm64", "npm:15.2.4"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/jest-dom", "npm:5.16.4"],\
             ["@testing-library/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:12.1.4"],\
@@ -1709,6 +1710,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/@next-swc-darwin-arm64-npm-12.1.4-8bc9a59090/node_modules/@next/swc-darwin-arm64/",\
           "packageDependencies": [\
             ["@next/swc-darwin-arm64", "npm:12.1.4"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:15.2.4", {\
+          "packageLocation": "./.yarn/unplugged/@next-swc-darwin-arm64-npm-15.2.4-766f9d8890/node_modules/@next/swc-darwin-arm64/",\
+          "packageDependencies": [\
+            ["@next/swc-darwin-arm64", "npm:15.2.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5155,6 +5163,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@fortawesome/fontawesome-svg-core", "npm:6.4.0"],\
             ["@fortawesome/free-solid-svg-icons", "npm:6.4.0"],\
             ["@fortawesome/react-fontawesome", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.2.0"],\
+            ["@next/swc-darwin-arm64", "npm:15.2.4"],\
             ["@tailwindcss/forms", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:0.5.0"],\
             ["@testing-library/jest-dom", "npm:5.16.4"],\
             ["@testing-library/react", "virtual:681281c59dad27b631c32269a449c43baa0ba3057a9783ffbbd0369615843c80b4fc8dc74800023e967d416c55215c22d29cf1363936f070b3a95c86dd1f9515#npm:12.1.4"],\

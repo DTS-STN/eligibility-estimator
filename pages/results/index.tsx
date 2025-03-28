@@ -85,9 +85,26 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
   const psdSingleHandleAndSet = (psdAge) => {
     const responseClone = JSON.parse(JSON.stringify(originalResponse))
 
+    const clientAge = Number(inputHelper.asObjectWithLanguage.age)
+    const clientRes = Number(
+      inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
+        Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
+    )
+    const clientOnlyCanada =
+      inputHelper.asObjectWithLanguage.livedOnlyInCanada === 'true'
+    const livingCountry = inputHelper.asObjectWithLanguage.livingCountry
+
+    const clientEliObj = OasEligibility(
+      clientAge,
+      clientRes,
+      clientOnlyCanada,
+      livingCountry
+    )
+
     const psdHandler = new MainHandler({
       ...inputHelper.asObjectWithLanguage,
       psdAge,
+      clientEliObj,
       orgInput: inputHelper.asObjectWithLanguage,
       alreadyEligible:
         responseClone.results.oas.eligibility.result === ResultKey.ELIGIBLE,
@@ -145,20 +162,30 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     const partnerAge = Number(inputHelper.asObjectWithLanguage.partnerAge)
 
     const invSep = inputHelper.asObjectWithLanguage.invSeparated === 'true'
-    const clientRes = Number(
-      inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
-        Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
-    )
-    const partnerRes = Number(
-      inputHelper.asObjectWithLanguage.partnerYearsInCanadaSince18 ||
-        Number(inputHelper.asObjectWithLanguage.partnerYearsInCanadaSinceOAS)
-    )
-    const partnerOnlyCanada =
-      inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada === 'true'
-    const partnerLivingCountry =
-      inputHelper.asObjectWithLanguage.partnerLivingCountry
     const clientOnlyCanada =
       inputHelper.asObjectWithLanguage.livedOnlyInCanada === 'true'
+    const clientRes = clientOnlyCanada
+      ? 40
+      : Number(
+          inputHelper.asObjectWithLanguage.yearsInCanadaSince18 ||
+            Number(inputHelper.asObjectWithLanguage.yearsInCanadaSinceOAS)
+        )
+
+    const partnerOnlyCanada =
+      inputHelper.asObjectWithLanguage.partnerLivedOnlyInCanada === 'true'
+
+    const partnerRes = partnerOnlyCanada
+      ? 40
+      : Number(
+          inputHelper.asObjectWithLanguage.partnerYearsInCanadaSince18 ||
+            Number(
+              inputHelper.asObjectWithLanguage.partnerYearsInCanadaSinceOAS
+            )
+        )
+
+    const partnerLivingCountry =
+      inputHelper.asObjectWithLanguage.partnerLivingCountry
+
     const livingCountry = inputHelper.asObjectWithLanguage.livingCountry
 
     const partnersAgeDiff = clientAge - partnerAge

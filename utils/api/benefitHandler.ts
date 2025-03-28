@@ -207,13 +207,19 @@ export class BenefitHandler {
         : +this.rawInput.orgInput.yearsInCanadaSince18
 
       const psdAge = +this.rawInput.psdAge
+
       const yrsDiff =
-        psdAge - (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
-      const resToUse = alreadyEligible
-        ? orgRes
-        : clientEliObj.yearsOfResAtEligibility
+        psdAge -
+        (alreadyEligible && orgRes <= 40
+          ? orgAge
+          : clientEliObj.ageOfEligibility)
+      const resToUse =
+        alreadyEligible && orgRes <= 40
+          ? orgRes
+          : clientEliObj.yearsOfResAtEligibility
 
       const maxRes = resToUse + yrsDiff
+
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
 
