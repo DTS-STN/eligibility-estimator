@@ -258,13 +258,14 @@ export class FutureHandler {
       },
     }
 
+    console.log('orgAgeSets', orgAgeSets)
     const futureAges = [...getAgeArray(agesInputObj), ...(orgAgeSets || [])]
       .sort((a, b) => a[0] - b[0])
       .filter(
         (set, index, arr) =>
           index === arr.findIndex((otherSet) => otherSet[0] === set[0])
       )
-
+    console.log('futureAges', futureAges)
     const psdAge = Number(this.query.psdAge)
 
     let result = this.futureResultsObj

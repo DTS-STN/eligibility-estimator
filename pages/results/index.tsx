@@ -242,7 +242,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     })
 
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
-
+    console.log('psdResults', psdResults)
     const sameResUsed =
       psdQuery.yearsInCanadaSince18 ===
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18
@@ -304,6 +304,9 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         return Number(ageA) - Number(ageB)
       })
 
+      console.log('mergedClientRes', mergedClientRes)
+      console.log('mergedPartnerRes', mergedPartnerRes)
+
       const { mappedClientRes, clientHasAlw } = mergedClientRes.reduce(
         (acc, ageRes) => {
           const currAge = Number(Object.keys(ageRes)[0])
@@ -321,6 +324,8 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
         { mappedClientRes: [], clientHasAlw: false }
       )
       const clientResAges = mappedClientRes.map((obj) => Object.keys(obj)[0])
+
+      console.log('mappedClientRes', mappedClientRes)
 
       const mappedPartnerRes = []
       for (let index = 0; index < mergedPartnerRes.length; index++) {
@@ -425,6 +430,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           mappedPartnerRes.push(ageRes)
         }
       }
+
       responseClone.futureClientResults = mappedClientRes
       responseClone.futurePartnerResults = mappedPartnerRes
 
