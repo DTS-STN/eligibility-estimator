@@ -21,6 +21,7 @@ export const SummaryEstimates: React.VFC<{
   maritalStatus
   partnerReceiving
   involSep
+  inputObj
 }> = ({
   headings,
   userResults,
@@ -30,7 +31,9 @@ export const SummaryEstimates: React.VFC<{
   maritalStatus,
   partnerReceiving,
   involSep,
+  inputObj,
 }) => {
+  console.log('inputObj', inputObj)
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language
@@ -195,6 +198,7 @@ export const SummaryEstimates: React.VFC<{
                         partnerReceiving={partnerReceiving}
                         involSep={involSep}
                         isSecondEstimate={index > 0}
+                        inputObj={inputObj}
                       />
                     )
                   })}
