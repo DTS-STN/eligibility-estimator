@@ -127,7 +127,6 @@ export const Layout: React.VFC<{
   return (
     <>
       <Head title={title} />
-      {/* <TestBanner /> */}
       <div className="mainContent">
         <div
           id="topOfPageFocus"
@@ -149,7 +148,6 @@ export const Layout: React.VFC<{
             topNavProps={topnavProps}
             headerText={{
               globalHeader: tsln.globalHeader,
-              testSiteNotice: tsln.testSiteNotice,
               officialSiteNavigation: tsln.officialSiteNavigation,
               languageSelection: tsln.languageSelection,
               logoAltText: tsln.logoAltText,

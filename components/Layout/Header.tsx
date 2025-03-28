@@ -20,7 +20,6 @@ interface HeaderProps {
   }
   headerText: {
     globalHeader: string
-    testSiteNotice: string
     officialSiteNavigation: string
     languageSelection: string
     logoAltText: string
@@ -114,7 +113,6 @@ export function Header({
       </nav>
       <header>
         <h2 className="sr-only">{headerText.globalHeader}</h2>
-        <h3 className="sr-only">{headerText.testSiteNotice}</h3>
         <div className="flex-col flex lg:flex lg:flex-row justify-between mb-4">
           <div
             className="w-full flex flex-row justify-between items-start"
