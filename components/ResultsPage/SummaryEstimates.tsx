@@ -49,7 +49,6 @@ export const SummaryEstimates: React.VFC<{
   }
 
   let collapsed = []
-  console.log('headings', headings)
   return (
     <>
       {headings.map((year, index) => {

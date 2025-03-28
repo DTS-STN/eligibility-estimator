@@ -209,13 +209,19 @@ export class BenefitHandler {
         : +this.rawInput.orgInput.yearsInCanadaSince18
 
       const psdAge = +this.rawInput.psdAge
+
       const yrsDiff =
-        psdAge - (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
-      const resToUse = alreadyEligible
-        ? orgRes
-        : clientEliObj.yearsOfResAtEligibility
+        psdAge -
+        (alreadyEligible && orgRes <= 40
+          ? orgAge
+          : clientEliObj.ageOfEligibility)
+      const resToUse =
+        alreadyEligible && orgRes <= 40
+          ? orgRes
+          : clientEliObj.yearsOfResAtEligibility
 
       const maxRes = resToUse + yrsDiff
+
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
 
@@ -224,6 +230,19 @@ export class BenefitHandler {
 
       const psdDef =
         Math.round(resRemainder) + (extraDeferral > 0 ? extraDeferral * 12 : 0)
+
+      console.log('orgAge', orgAge)
+      console.log('orgRes', orgRes)
+      console.log('psdAge', psdAge)
+      console.log('yrsDiff', yrsDiff)
+      console.log('resToUse', resToUse)
+      console.log('maxRes', maxRes)
+      console.log('resWhole', resWhole)
+      console.log('resRemainder', resRemainder)
+      console.log('extraDeferral', extraDeferral)
+
+      console.log('psdRes', psdRes)
+      console.log('psdDef', psdDef)
 
       const psdInput = {
         ...this.input.client,
