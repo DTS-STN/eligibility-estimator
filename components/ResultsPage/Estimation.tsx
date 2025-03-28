@@ -461,7 +461,7 @@ export const Estimation: React.VFC<{
               ? benefit.cardDetail.meta.residency
               : benefit.entitlement?.deferral?.residency
             return (
-              <p>
+              <p key={index}>
                 {language == 'en'
                   ? `This estimate is based on ${yrs} years of Canadian residence.`
                   : `Cette estimation est basée sur ${yrs}  années de résidence canadienne.`}
