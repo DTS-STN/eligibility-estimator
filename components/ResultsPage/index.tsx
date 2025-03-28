@@ -50,7 +50,6 @@ const ResultsPage: React.VFC<{
   summary,
   psdCalc,
 }) => {
-  console.log('inputHelper', inputHelper)
   const ref = useRef<HTMLDivElement>()
   const inputs: FieldInput[] = inputHelper.asArray
   const inputObj = inputHelper.asObject

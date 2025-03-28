@@ -33,7 +33,6 @@ export const SummaryEstimates: React.VFC<{
   involSep,
   inputObj,
 }) => {
-  console.log('inputObj', inputObj)
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
   const language = useRouter().locale as Language

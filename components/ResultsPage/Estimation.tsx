@@ -41,7 +41,6 @@ export const Estimation: React.VFC<{
   const benefitType = Object.keys(resultObject[Object.keys(resultObject)[0]])
 
   let estimateIsSame = false
-  console.log('inputObj', inputObj)
 
   const showPartnerAmounts = () => {
     if (!partner) return true
@@ -460,23 +459,18 @@ export const Estimation: React.VFC<{
       {isFirstOasGis() &&
         eligible.map((benefit, index) => {
           let resToShow = null
-          if (inputObj?.livedOnlyInCanada === 'false') {
-            console.log(
-              'inputObj.livedOnlyInCanada',
-              inputObj.livedOnlyInCanada
-            )
+          if (inputObj?.livedOnlyInCanada === 'false' && !partner) {
+            const orgRes =
+              inputObj.yearsInCanadaSince18 || inputObj.yearsInCanadaSinceOAS
+
             const res1 = benefit.cardDetail.meta.residency
             let res2 = null
             if ('deferral' in benefit.entitlement) {
               res2 = benefit.entitlement.deferral.residency
             }
-            resToShow = res2 || res1
 
-            console.log('resultArray', resultArray)
-            console.log('age', age)
-            console.log('res1', res1)
-            console.log('res2', res2)
-            console.log('resToShow', resToShow)
+            const tempRes = res2 || res1
+            resToShow = +tempRes !== +orgRes && tempRes
           }
 
           if (resToShow && benefit.entitlement.result > 0) {
