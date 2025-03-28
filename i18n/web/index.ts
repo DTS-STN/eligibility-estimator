@@ -17,7 +17,6 @@ export type WebTranslations = {
   skipToAbout: string
   switchToBasic: string
   globalHeader: string
-  testSiteNotice: string
   officialSiteNavigation: string
   languageSelection: string
   logoAltText: string
@@ -51,8 +50,6 @@ export type WebTranslations = {
   gis: string
   alw: string
   alws: string
-  testSiteTitle: string
-  testSiteHeader: string
   otherLang: string
   otherLangCode: string
   creator: string
@@ -88,8 +85,6 @@ export type WebTranslations = {
   getEstimate: string
   required: string
   homePageHeader1: string
-  workInProgress: string
-  workInProgressBody: string
   homePageP1: string
   homePageP3: string
   homePageP4: string
