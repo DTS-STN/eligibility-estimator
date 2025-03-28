@@ -19,7 +19,6 @@ const en: WebTranslations = {
   skipToAbout: "Skip to 'About government'",
   switchToBasic: 'Switch to basic HTML version',
   globalHeader: 'Global header',
-  testSiteNotice: 'Test site notice',
   officialSiteNavigation: 'Canada.ca official site',
   languageSelection: 'Language selection',
   logoAltText: 'Government of Canada',
@@ -27,9 +26,6 @@ const en: WebTranslations = {
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
   alws: 'Allowance for the Survivor',
-  testSiteTitle: 'TEST SITE',
-  testSiteHeader:
-    'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   otherLangCode: 'FR',
   creator: 'Employment and Social Development Canada',

@@ -20,7 +20,6 @@ const fr: WebTranslations = {
   skipToAbout: 'Passer à « Au sujet du gouvernement »',
   switchToBasic: 'Passer à la version HTML simplifiée',
   globalHeader: 'En-tête général',
-  testSiteNotice: "Avis de site d'essai",
   officialSiteNavigation: 'Site officiel de Canada.ca',
   languageSelection: 'Sélection de la langue',
   logoAltText: 'Gouvernement du Canada',
@@ -28,9 +27,6 @@ const fr: WebTranslations = {
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
   alws: 'Allocation au survivant',
-  testSiteTitle: "SITE D'ESSAI",
-  testSiteHeader:
-    'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   otherLangCode: 'EN',
   creator: 'Emploi et Développement social Canada',
