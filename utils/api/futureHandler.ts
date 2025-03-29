@@ -258,14 +258,12 @@ export class FutureHandler {
       },
     }
 
-    console.log('orgAgeSets', orgAgeSets)
     const futureAges = [...getAgeArray(agesInputObj), ...(orgAgeSets || [])]
       .sort((a, b) => a[0] - b[0])
       .filter(
         (set, index, arr) =>
           index === arr.findIndex((otherSet) => otherSet[0] === set[0])
       )
-    console.log('futureAges', futureAges)
     const psdAge = Number(this.query.psdAge)
 
     let result = this.futureResultsObj
@@ -346,16 +344,14 @@ export class FutureHandler {
         if (orgClientAge >= orgPartnerAge) {
           if (
             !partnerEligibleBenefits &&
-            userAge != clientOasEliObj.ageOfEligibility &&
-            !this.query.psdAge
+            userAge != clientOasEliObj.ageOfEligibility
           ) {
             clientEligibleBenefits = null
           }
         } else {
           if (
             !clientEligibleBenefits &&
-            partnerAge != partnerEliObj.ageOfEligibility &&
-            !this.query.psdAge
+            partnerAge != partnerEliObj.ageOfEligibility
           ) {
             partnerEligibleBenefits = null
           }
