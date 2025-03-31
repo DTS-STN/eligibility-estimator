@@ -20,7 +20,6 @@ const fr: WebTranslations = {
   skipToAbout: 'Passer à « Au sujet du gouvernement »',
   switchToBasic: 'Passer à la version HTML simplifiée',
   globalHeader: 'En-tête général',
-  testSiteNotice: "Avis de site d'essai",
   officialSiteNavigation: 'Site officiel de Canada.ca',
   languageSelection: 'Sélection de la langue',
   logoAltText: 'Gouvernement du Canada',
@@ -28,9 +27,6 @@ const fr: WebTranslations = {
   gis: 'Supplément de revenu garanti',
   alw: 'Allocation',
   alws: 'Allocation au survivant',
-  testSiteTitle: "SITE D'ESSAI",
-  testSiteHeader:
-    'Vous ne pouvez pas demander de services ou de prestations par l’intermédiaire de ce site d’essai. Certaines parties du site pourraient ne pas fonctionner et seront modifiées.',
   otherLang: 'English',
   otherLangCode: 'EN',
   creator: 'Emploi et Développement social Canada',
@@ -209,9 +205,6 @@ const fr: WebTranslations = {
   nextStep: 'Prochaine étape',
   getEstimate: 'Estimer mes prestations',
   required: '(obligatoire)',
-  workInProgress: 'Cet estimateur est un travail en cours',
-  workInProgressBody:
-    'Vous pouvez aider à l’améliorer en donnant votre <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=fra" target="_blank">rétroaction</a>.',
   homePageP1:
     "Utilisez cet outil pour déterminer le montant que vous pourriez recevoir des prestations de la Sécurité de la vieillesse. Il ne s'agit pas d'une demande de prestations.",
   homePageHeader1: 'Qui peut recevoir ces prestations',
@@ -241,7 +234,7 @@ const fr: WebTranslations = {
   overviewDisclaimer:
     '<strong>Cet outil ne donne qu’une estimation</strong>. Il ne garantit pas que vous serez admissible ou que vous recevrez le montant estimé.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
-  inflationInfo: `Cet estimateur utilise les taux des prestations de janvier à mars&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
+  inflationInfo: `Cet estimateur utilise les taux des prestations d'avril à juin&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" aria-label="En savoir plus sur le Régime de pensions du Canada, ouvre dans un nouvel onglet" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',

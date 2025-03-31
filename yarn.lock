@@ -1147,6 +1147,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-darwin-arm64@npm:^15.2.4":
+  version: 15.2.4
+  resolution: "@next/swc-darwin-arm64@npm:15.2.4"
+  checksum: c832c7990b571fdea155406a5798ca12bbc9714cb09cb8a479ef7a85cd884fa59d5a55ad1552606e67e75736bea8613722ea64d5ea72b6ac603f86eecccc15aa
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "@next/swc-darwin-x64@npm:12.1.4":
   version: 12.1.4
   resolution: "@next/swc-darwin-x64@npm:12.1.4"
@@ -3971,6 +3979,7 @@ __metadata:
     "@fortawesome/fontawesome-svg-core": ^6.4.0
     "@fortawesome/free-solid-svg-icons": ^6.4.0
     "@fortawesome/react-fontawesome": latest
+    "@next/swc-darwin-arm64": ^15.2.4
     "@tailwindcss/forms": ^0.5.0
     "@testing-library/jest-dom": ^5.16.4
     "@testing-library/react": ^12.1.4

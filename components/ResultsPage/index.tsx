@@ -263,6 +263,7 @@ const ResultsPage: React.VFC<{
                 maritalStatus={maritalStatus}
                 partnerReceiving={partnerReceiving}
                 involSep={involSep}
+                inputObj={inputObj}
               ></SummaryEstimates>
             )}
           </div>

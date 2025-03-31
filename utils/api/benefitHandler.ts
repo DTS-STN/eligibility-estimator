@@ -207,13 +207,27 @@ export class BenefitHandler {
         : +this.rawInput.orgInput.yearsInCanadaSince18
 
       const psdAge = +this.rawInput.psdAge
+
+      let over40Deferral = null
+      if (orgAge >= 65 && orgAge < 70 && orgRes >= 40) {
+        const resDiff = orgRes - 40
+        const ageAt40Res = orgAge - resDiff
+        const deferralStartAge = ageAt40Res > 65 ? ageAt40Res : 65
+        over40Deferral = Math.round((psdAge - deferralStartAge) * 12)
+      }
+
       const yrsDiff =
-        psdAge - (alreadyEligible ? orgAge : clientEliObj.ageOfEligibility)
-      const resToUse = alreadyEligible
-        ? orgRes
-        : clientEliObj.yearsOfResAtEligibility
+        psdAge -
+        (alreadyEligible && orgRes <= 40
+          ? orgAge
+          : clientEliObj.ageOfEligibility)
+      const resToUse =
+        alreadyEligible && orgRes <= 40
+          ? orgRes
+          : clientEliObj.yearsOfResAtEligibility
 
       const maxRes = resToUse + yrsDiff
+
       const resWhole = Math.floor(maxRes)
       const resRemainder = (maxRes - resWhole) * 12
 
@@ -228,7 +242,7 @@ export class BenefitHandler {
         age: psdAge,
         yearsInCanadaSince18: Math.min(psdRes, 40),
         oasDeferDuration: JSON.stringify({
-          months: Math.min(psdDef, 60),
+          months: Math.min(over40Deferral || psdDef, 60),
           years: 0,
         }),
       }

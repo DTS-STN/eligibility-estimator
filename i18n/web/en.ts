@@ -19,7 +19,6 @@ const en: WebTranslations = {
   skipToAbout: "Skip to 'About government'",
   switchToBasic: 'Switch to basic HTML version',
   globalHeader: 'Global header',
-  testSiteNotice: 'Test site notice',
   officialSiteNavigation: 'Canada.ca official site',
   languageSelection: 'Language selection',
   logoAltText: 'Government of Canada',
@@ -27,9 +26,6 @@ const en: WebTranslations = {
   gis: 'Guaranteed Income Supplement',
   alw: 'Allowance',
   alws: 'Allowance for the Survivor',
-  testSiteTitle: 'TEST SITE',
-  testSiteHeader:
-    'You cannot apply for services or benefits through this test site. Parts of this site may not work and will change.',
   otherLang: 'Français',
   otherLangCode: 'FR',
   creator: 'Employment and Social Development Canada',
@@ -203,9 +199,6 @@ const en: WebTranslations = {
   nextStep: 'Next step',
   getEstimate: 'Estimate my benefits',
   required: '(required)',
-  workInProgress: 'This estimator is a work in progress',
-  workInProgressBody:
-    'You can help improve it by giving your <a class="underline text-default-text generatedLink" href="https://srv217.services.gc.ca/ihst4/Intro.aspx?cid=74938e05-8e91-42a9-8e9d-29daf79f6fe0&lc=eng" target="_blank">feedback</a>.',
   homePageP1:
     'Use this estimator to find out how much money you could get from Old Age Security benefits. This is not an application for benefits.',
   homePageHeader1: 'Who these benefits are for',
@@ -233,7 +226,7 @@ const en: WebTranslations = {
   overviewDisclaimer:
     "<strong>This tool gives an estimate only</strong>. It doesn't guarantee that you'll be eligible or that you'll receive the amount estimated.",
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  inflationInfo: `This estimator uses January to March&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
+  inflationInfo: `This estimator uses April to June&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" aria-label="Learn more about the Canada Pension Plan, opens a new tab" target="_blank">Learn more about the Canada Pension Plan</a>`,

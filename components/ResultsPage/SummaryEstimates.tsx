@@ -21,6 +21,7 @@ export const SummaryEstimates: React.VFC<{
   maritalStatus
   partnerReceiving
   involSep
+  inputObj
 }> = ({
   headings,
   userResults,
@@ -30,6 +31,7 @@ export const SummaryEstimates: React.VFC<{
   maritalStatus,
   partnerReceiving,
   involSep,
+  inputObj,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -49,7 +51,6 @@ export const SummaryEstimates: React.VFC<{
   }
 
   let collapsed = []
-
   return (
     <>
       {headings.map((year, index) => {
@@ -59,7 +60,7 @@ export const SummaryEstimates: React.VFC<{
 
         const partnerResult = partnerResults
           ? partnerResults.filter((elm) => elm).length > 0
-            ? partnerResults.some((obj) => year in obj)
+            ? partnerResults.filter(Boolean).some((obj) => year in obj)
             : null
           : null
 
@@ -196,6 +197,7 @@ export const SummaryEstimates: React.VFC<{
                         partnerReceiving={partnerReceiving}
                         involSep={involSep}
                         isSecondEstimate={index > 0}
+                        inputObj={inputObj}
                       />
                     )
                   })}

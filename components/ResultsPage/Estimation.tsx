@@ -18,6 +18,7 @@ export const Estimation: React.VFC<{
   partnerReceiving
   involSep
   isSecondEstimate
+  inputObj?
 }> = ({
   partner,
   resultObject,
@@ -27,6 +28,7 @@ export const Estimation: React.VFC<{
   partnerReceiving,
   involSep,
   isSecondEstimate,
+  inputObj,
 }) => {
   const tsln = useTranslation<WebTranslations>()
   const apiTrans = getTranslations(tsln._language)
@@ -432,13 +434,12 @@ export const Estimation: React.VFC<{
 
   return (
     <div key={age}>
-      <strong>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: buildSummaryString(),
-          }}
-        />
-      </strong>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: buildSummaryString(),
+        }}
+        className="font-bold"
+      />
 
       <ul className="pl-[35px] ml-[20px] my-1 list-disc text-content">
         {!estimateIsSame &&
@@ -457,15 +458,27 @@ export const Estimation: React.VFC<{
       </ul>
       {isFirstOasGis() &&
         eligible.map((benefit, index) => {
-          if (
-            benefit.cardDetail.meta.residency &&
-            benefit.entitlement.result > 0
-          ) {
+          let resToShow = null
+          if (inputObj?.livedOnlyInCanada === 'false' && !partner) {
+            const orgRes =
+              inputObj.yearsInCanadaSince18 || inputObj.yearsInCanadaSinceOAS
+
+            const res1 = benefit.cardDetail.meta.residency
+            let res2 = null
+            if ('deferral' in benefit.entitlement) {
+              res2 = benefit.entitlement.deferral.residency
+            }
+
+            const tempRes = res2 || res1
+            resToShow = +tempRes !== +orgRes && tempRes
+          }
+
+          if (resToShow && benefit.entitlement.result > 0) {
             return (
               <p>
                 {language == 'en'
-                  ? `This estimate is based on ${benefit.cardDetail.meta.residency} years of Canadian residence.`
-                  : `Cette estimation est basée sur ${benefit.cardDetail.meta.residency} années de résidence canadienne.`}
+                  ? `This estimate is based on ${resToShow} years of Canadian residence.`
+                  : `Cette estimation est basée sur ${resToShow} années de résidence canadienne.`}
               </p>
             )
           }
