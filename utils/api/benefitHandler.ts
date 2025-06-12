@@ -212,7 +212,7 @@ export class BenefitHandler {
       if (orgAge >= 65 && orgAge < 70 && orgRes >= 40) {
         const resDiff = orgRes - 40
         const ageAt40Res = orgAge - resDiff
-        const deferralStartAge = ageAt40Res > 65 ? ageAt40Res : 65
+        const deferralStartAge = ageAt40Res > 65 ? 65 : ageAt40Res
         over40Deferral = Math.round((psdAge - deferralStartAge) * 12)
       }
 
