@@ -212,7 +212,13 @@ export class BenefitHandler {
       if (orgAge >= 65 && orgAge < 70 && orgRes >= 40) {
         const resDiff = orgRes - 40
         const ageAt40Res = orgAge - resDiff
-        const deferralStartAge = ageAt40Res > 65 ? ageAt40Res : 65
+        const deferralStartAge =
+          ageAt40Res > 65
+            ? orgAge == ageAt40Res &&
+              this.input.client.livedOnlyInCanada == true
+              ? 65
+              : ageAt40Res
+            : clientEliObj.ageOfEligibility
         over40Deferral = Math.round((psdAge - deferralStartAge) * 12)
       }
 
