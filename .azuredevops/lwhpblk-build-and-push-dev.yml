@@ -3,6 +3,9 @@ trigger:
 
 pr: none
 
+# need to use our own self-hosted agent because that is the one who's system identity has AcrPush access to the container registry
+pool: lwhpblk-dev-agent-pool
+
 variables:
   azureContainerRegistry.repository: 'oas/eligibility-estimator'
   azureContainerRegistry.name: 'acrlwhpblkdev.azurecr.io'
