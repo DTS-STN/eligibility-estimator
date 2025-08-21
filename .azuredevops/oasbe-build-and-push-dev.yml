@@ -10,7 +10,7 @@ variables:
   azureContainerRegistry.repository: 'oas/eligibility-estimator'
   azureContainerRegistry.name: 'acrlwhpblkdev.azurecr.io'
   azureContainerRegistry.domain: 'acrlwhpblkdev.azurecr.io'
-  app.environment: production
+  app.environment: development
   app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
   app.domain: 'https://oasbe-dev.lwhpblack-phclnoire.service.cloud-nuage.canada.ca/'
   app.logLevel: 'info'
