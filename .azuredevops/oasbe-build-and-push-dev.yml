@@ -60,7 +60,7 @@ stages:
             inputs:
               containerRegistry: '$(azureContainerRegistry.name)'
               repository: '$(azureContainerRegistry.repository)'
-              command: 'buildx build'
+              command: 'build'
               Dockerfile: './Dockerfile'
               tags: |
                 $(image.tag)
