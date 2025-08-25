@@ -78,6 +78,8 @@ stages:
                 --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
                 --build-arg APP_ENV=$(app.environment)
                 --build-arg LOGGING_LEVEL=$(app.logLevel)
+            env: 
+              DOCKER_BUILDKIT: 1
 
           - task: Docker@2
             displayName: Docker Push
