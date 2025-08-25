@@ -10,7 +10,8 @@ function MyApp({
   router: { route },
 }: AppProps) {
   const AuthRequired =
-    process.env.APP_ENV !== 'production' && process.env.APP_ENV !== 'alpha'
+    false  
+  //process.env.APP_ENV !== 'production' && process.env.APP_ENV !== 'alpha'
   const logger = getLogger('app')
   logger.info('_app started....')
   return (
