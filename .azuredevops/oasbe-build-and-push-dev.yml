@@ -10,7 +10,7 @@ variables:
   azureContainerRegistry.repository: 'oas/eligibility-estimator'
   azureContainerRegistry.name: 'acrlwhpblkdev.azurecr.io'
   azureContainerRegistry.domain: 'acrlwhpblkdev.azurecr.io'
-  app.environment: alpha
+  app.environment: production
   app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
   app.domain: 'https://oasbe-dev.lwhpblack-phclnoire.service.cloud-nuage.canada.ca/'
   app.logLevel: 'info'
@@ -52,7 +52,7 @@ stages:
             inputs:
               azureSubscription: 'lwhpblk-oasbe-dev'
               KeyVaultName: 'kvlwhpblkoasbedev'
-              SecretsFilter: 'DEV-ADOBE-ANALYTICS-URL, NEXT-AUTH-PASSWORD, NEXT-AUTH-USERCODE'
+              SecretsFilter: 'PROD-ADOBE-ANALYTICS-URL, NEXT-AUTH-PASSWORD, NEXT-AUTH-USERCODE'
               RunAsPreJob: false
 
           - task: Docker@2
@@ -75,7 +75,7 @@ stages:
                 --build-arg NEXT_AUTH_USERNAME=$(NEXT-AUTH-USERCODE)
                 --build-arg NEXT_AUTH_PASSWORD=$(NEXT-AUTH-PASSWORD)
                 --build-arg NEXTAUTH_SECRET=$(NEXT_AUTH_SECRET)
-                --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
+                --build-arg ADOBE_ANALYTICS_URL=$(PROD-ADOBE-ANALYTICS-URL)
                 --build-arg APP_ENV=$(app.environment)
                 --build-arg LOGGING_LEVEL=$(app.logLevel)
 
