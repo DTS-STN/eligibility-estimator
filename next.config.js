@@ -25,27 +25,27 @@ module.exports = {
     ]
   },
   //
-  async redirects() {
-    return [
-      {
-        source: '/interact',
-        destination: '/interact.html',
-        permanent: false,
-      },
-      {
-        source: '/en/index',
-        destination: '/en',
-        permanent: true,
-        locale: false,
-      },
-      {
-        source: '/fr/index',
-        destination: '/fr',
-        permanent: true,
-        locale: false,
-      },
-    ]
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/interact',
+  //       destination: '/interact.html',
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: '/en/index',
+  //       destination: '/en',
+  //       permanent: true,
+  //       locale: false,
+  //     },
+  //     {
+  //       source: '/fr/index',
+  //       destination: '/fr',
+  //       permanent: true,
+  //       locale: false,
+  //     },
+  //   ]
+  // },
   async rewrites() {
     return [
       {
