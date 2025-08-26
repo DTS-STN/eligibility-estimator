@@ -4,8 +4,7 @@ import type { NextRequest } from 'next/server'
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   //
-  const AuthRequired =
-    process.env.APP_ENV === 'production' || process.env.APP_ENV === 'alpha'
+  const AuthRequired = false
 
   const url = request.nextUrl
   const { pathname } = url
