@@ -14,7 +14,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
   useEffect(() => {
     if (typeof window !== undefined) {
       const hostName = window.location.hostname
-      setIsAlpha(hostName.includes('.alpha.service'))
+      setIsAlpha(false)
     }
   }, [])
 

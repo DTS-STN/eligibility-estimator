@@ -23,7 +23,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
   useEffect(() => {
     if (typeof window !== undefined) {
       const hostName = window.location.hostname
-      setIsCanadaDotCa(hostName.includes('.canada.ca'))
+      setIsCanadaDotCa(hostName.includes('.service.canada.ca'))
     }
   }, [])
 
