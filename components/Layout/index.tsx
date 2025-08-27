@@ -140,9 +140,7 @@ export const Layout: React.VFC<{
             id="header"
             locale={router.locale}
             langUrl={langToggleLink}
-            breadcrumbItems={
-              betaBreadcrumbs
-            }
+            breadcrumbItems={betaBreadcrumbs}
             topNavProps={topnavProps}
             headerText={{
               globalHeader: tsln.globalHeader,
