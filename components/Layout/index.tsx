@@ -141,9 +141,7 @@ export const Layout: React.VFC<{
             locale={router.locale}
             langUrl={langToggleLink}
             breadcrumbItems={
-              !prodEnv || prodEnv === 'alpha'
-                ? alphaBreadcrumbs
-                : betaBreadcrumbs
+              betaBreadcrumbs
             }
             topNavProps={topnavProps}
             headerText={{
