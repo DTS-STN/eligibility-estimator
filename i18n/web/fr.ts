@@ -234,7 +234,7 @@ const fr: WebTranslations = {
   overviewDisclaimer:
     '<strong>Cet outil ne donne qu’une estimation</strong>. Il ne garantit pas que vous serez admissible ou que vous recevrez le montant estimé.',
   whatBenefitsIncluded: "Prestations incluses dans l'estimateur",
-  inflationInfo: `Cet estimateur utilise les taux des prestations de juillet à septembre&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
+  inflationInfo: `Cet estimateur utilise les taux des prestations d'octobre à décembre&nbsp;2025. Les montants des prestations futures pourraient être plus élevés en raison de l’inflation.`,
   notIncludeCPP: `Cet estimateur n'inclut pas la pension de retraite du Régime de pensions du Canada.`,
   learnMoreAboutCpp: `<a className="underline text-default-text" aria-label="En savoir plus sur le Régime de pensions du Canada, ouvre dans un nouvel onglet" href="${apiFr.links.cpp.url}" target="_blank">En savoir plus sur le Régime de pensions du Canada</a>`,
   aboutResultText: 'À propos des résultats',
