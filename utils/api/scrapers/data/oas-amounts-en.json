@@ -1,39 +1,74 @@
 {
 	"lastupdatedYear": "2024",
-	"lastupdatedQuarter": "July to September 2025",
+	"lastupdatedQuarter": "October to December 2025",
 	"renewalYearGIS": "2025",
 	"oas": {
-		"average": "734.95",
-		"average75": "808.45",
-		"maximum": "148,541",
+		"average": "740.09",
+		"average75": "814.10",
+		"maximum": "148,451",
 		"maximum75": "154,196",
 		"clawback": "90,997"
 	},
 	"gis": {
-		"single-amount": "1,097.75",
-		"single-limit": "22,272",
-		"spouse-oas-amount": "660.78",
-		"spouse-oas-limit": "29,424",
-		"spouse-no-oas-amount": "1,097.75",
-		"spouse-no-oas-limit": "53,376",
-		"spouse-allowance-amount": "660.78",
-		"spouse-allowance-limit": "41,184"
+		"single-amount": "1,105.43",
+		"single-limit": "22,440",
+		"spouse-oas-amount": "665.41",
+		"spouse-oas-limit": "29,616",
+		"spouse-no-oas-amount": "1,105.43",
+		"spouse-no-oas-limit": "53,808",
+		"spouse-allowance-amount": "665.41",
+		"spouse-allowance-limit": "41,472"
 	},
 	"allowance": {
-		"spouse-gis-amount": "1,395.73",
-		"spouse-gis-limit": "41,184",
-		"survivor-amount": "1,663.81",
-		"survivor-limit": "29,976"
+		"spouse-gis-amount": "1,405.50",
+		"spouse-gis-limit": "41,472",
+		"survivor-amount": "1,675.45",
+		"survivor-limit": "30,216"
 	},
 	"topup": {
-		"single": "170.04",
-		"married": "48.18"
+		"single": "171.23",
+		"married": "48.52"
 	},
 	"delay": {
-		"oas66": "787.87",
-		"oas67": "840.78",
-		"oas68": "893.70",
-		"oas69": "946.62",
-		"oas70": "999.53"
+		"oas66": "793.38",
+		"oas67": "846.66",
+		"oas68": "899.95",
+		"oas69": "953.24",
+		"oas70": "1,006.52"
+	},
+	"calculated": {
+		"lastupdatedYearPlus1": "2025",
+		"lastupdatedYearPlus2": "2026",
+		"lastupdatedYearPlus3": "2027",
+		"lastupdatedYearPlus4": "2028"
+	},
+	"recovery": {
+		"lastrecoveryYear": "2023",
+		"lastrecoveryYearPlus1": "2024",
+		"lastrecoveryYearPlus2": "2025",
+		"lastrecoveryYearPlus3": "2026",
+		"lastrecoveryYearPlus4": "2027",
+		"clawbackFirstLine": "86,912",
+		"clawbackSecondLine": "90,997",
+		"clawbackThirdLine": "93,454",
+		"maximumFirstLine": "142,609",
+		"maximumSecondLine": "148,451",
+		"maximumThirdLine": "151,668",
+		"maximum75FirstLine": "148,179",
+		"maximum75SecondLine": "154,196",
+		"maximum75ThirdLine": "157,490"
+	},
+	"exampleRecovery": {
+		"income": "98,000",
+		"difference": "4,546",
+		"repayment": "681.90"
+	},
+	"exampleRepayment": {
+		"income": "98,000",
+		"difference": "4,546",
+		"repayment": "681.90",
+		"repaymentMonthly": "57.00",
+		"lastupdatedYearPlus1": "2025",
+		"lastupdatedYearPlus2": "2026"
 	}
 }
