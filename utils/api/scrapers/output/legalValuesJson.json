@@ -1,39 +1,74 @@
 {
   "lastUpdatedYear": 2024,
-  "lastUpdatedQuarter": "July to September 2025",
+  "lastUpdatedQuarter": "October to December 2025",
   "renewalYearGIS": 2025,
   "oas": {
-    "amount": 734.95,
-    "amount75": 808.45,
-    "incomeLimit": 148541,
+    "amount": 740.09,
+    "amount75": 814.1,
+    "incomeLimit": 148451,
     "incomeLimit75": 154196,
     "clawbackIncomeLimit": 90997
   },
   "gis": {
-    "singleAmount": 1097.75,
-    "singleIncomeLimit": 22272,
-    "spouseOasAmount": 660.78,
-    "spouseOasIncomeLimit": 29424,
-    "spouseNoOasAmount": 1097.75,
-    "spouseNoOasIncomeLimit": 53376,
-    "spouseAlwAmount": 660.78,
-    "spouseAlwIncomeLimit": 41184
+    "singleAmount": 1105.43,
+    "singleIncomeLimit": 22440,
+    "spouseOasAmount": 665.41,
+    "spouseOasIncomeLimit": 29616,
+    "spouseNoOasAmount": 1105.43,
+    "spouseNoOasIncomeLimit": 53808,
+    "spouseAlwAmount": 665.41,
+    "spouseAlwIncomeLimit": 41472
   },
   "alw": {
-    "alwAmount": 1395.73,
-    "alwIncomeLimit": 41184,
-    "afsAmount": 1663.81,
-    "afsIncomeLimit": 29976
+    "alwAmount": 1405.5,
+    "alwIncomeLimit": 41472,
+    "afsAmount": 1675.45,
+    "afsIncomeLimit": 30216
   },
   "topUp": {
-    "single": 170.04,
-    "married": 48.18
+    "single": 171.23,
+    "married": 48.52
   },
   "delay": {
-    "oas66": 787.87,
-    "oas67": 840.78,
-    "oas68": 893.7,
-    "oas69": 946.62,
-    "oas70": 999.53
+    "oas66": 793.38,
+    "oas67": 846.66,
+    "oas68": 899.95,
+    "oas69": 953.24,
+    "oas70": 1006.52
+  },
+  "calculated": {
+    "lastUpdatedYearPlus1": 2025,
+    "lastUpdatedYearPlus2": 2026,
+    "lastUpdatedYearPlus3": 2027,
+    "lastUpdatedYearPlus4": 2028
+  },
+  "recovery": {
+    "lastrecoveryYear": 2023,
+    "lastrecoveryYearPlus1": 2024,
+    "lastrecoveryYearPlus2": 2025,
+    "lastrecoveryYearPlus3": 2026,
+    "lastrecoveryYearPlus4": 2027,
+    "clawbackIncomeLimitFirstLine": 86912,
+    "clawbackIncomeLimitSecondLine": 90997,
+    "clawbackIncomeLimitThirdLine": 93454,
+    "incomeLimitFirstLine": 142609,
+    "incomeLimitSecondLine": 148451,
+    "incomeLimitThirdLine": 151668,
+    "incomeLimit75FirstLine": 148179,
+    "incomeLimit75SecondLine": 154196,
+    "incomeLimit75ThirdLine": 157490
+  },
+  "exampleRecovery": {
+    "income": 98000,
+    "difference": 4546,
+    "repayment": 681.9
+  },
+  "exampleRepayment": {
+    "income": 98000,
+    "difference": 4546,
+    "repayment": 681.9,
+    "repaymentMonthly": 57,
+    "lastUpdatedYearPlus1": 2025,
+    "lastUpdatedYearPlus2": 2026
   }
 }
