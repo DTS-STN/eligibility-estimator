@@ -35,3 +35,4 @@ To learn more about Next.js, take a look at the following resources:
 ## License
 
 Canadian Old Age Benefits Estimator is open source and licensed under the GNU General Public license.
+
