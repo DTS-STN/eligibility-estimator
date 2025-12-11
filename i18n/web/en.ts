@@ -226,7 +226,7 @@ const en: WebTranslations = {
   overviewDisclaimer:
     "<strong>This tool gives an estimate only</strong>. It doesn't guarantee that you'll be eligible or that you'll receive the amount estimated.",
   whatBenefitsIncluded: 'Benefits included in the estimator',
-  inflationInfo: `This estimator uses October to December&nbsp;2025 benefit rates. Future benefit amounts may be higher due to inflation.`,
+  inflationInfo: `This estimator uses January to March&nbsp;2026 benefit rates. Future benefit amounts may be higher due to inflation.`,
   notIncludeCPP:
     'This estimator does not include the Canada Pension Plan retirement pension.',
   learnMoreAboutCpp: `<a className="underline text-default-text" href="${apiEn.links.cpp.url}" aria-label="Learn more about the Canada Pension Plan, opens a new tab" target="_blank">Learn more about the Canada Pension Plan</a>`,
