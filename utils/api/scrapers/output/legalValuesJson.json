@@ -1,40 +1,40 @@
 {
   "lastUpdatedYear": 2024,
-  "lastUpdatedQuarter": "October to December 2025",
+  "lastUpdatedQuarter": "January to March 2026",
   "renewalYearGIS": 2025,
   "oas": {
-    "amount": 740.09,
-    "amount75": 814.1,
+    "amount": 742.31,
+    "amount75": 816.54,
     "incomeLimit": 148451,
     "incomeLimit75": 154196,
     "clawbackIncomeLimit": 90997
   },
   "gis": {
-    "singleAmount": 1105.43,
-    "singleIncomeLimit": 22440,
-    "spouseOasAmount": 665.41,
-    "spouseOasIncomeLimit": 29616,
-    "spouseNoOasAmount": 1105.43,
-    "spouseNoOasIncomeLimit": 53808,
-    "spouseAlwAmount": 665.41,
-    "spouseAlwIncomeLimit": 41472
+    "singleAmount": 1108.74,
+    "singleIncomeLimit": 22488,
+    "spouseOasAmount": 667.41,
+    "spouseOasIncomeLimit": 29712,
+    "spouseNoOasAmount": 1108.74,
+    "spouseNoOasIncomeLimit": 53904,
+    "spouseAlwAmount": 667.41,
+    "spouseAlwIncomeLimit": 41616
   },
   "alw": {
-    "alwAmount": 1405.5,
-    "alwIncomeLimit": 41472,
-    "afsAmount": 1675.45,
-    "afsIncomeLimit": 30216
+    "alwAmount": 1409.72,
+    "alwIncomeLimit": 41616,
+    "afsAmount": 1680.47,
+    "afsIncomeLimit": 30312
   },
   "topUp": {
-    "single": 171.23,
-    "married": 48.52
+    "single": 171.74,
+    "married": 48.67
   },
   "delay": {
-    "oas66": 793.38,
-    "oas67": 846.66,
-    "oas68": 899.95,
-    "oas69": 953.24,
-    "oas70": 1006.52
+    "oas66": 795.76,
+    "oas67": 849.2,
+    "oas68": 902.65,
+    "oas69": 956.1,
+    "oas70": 1009.54
   },
   "calculated": {
     "lastUpdatedYearPlus1": 2025,
@@ -43,31 +43,31 @@
     "lastUpdatedYearPlus4": 2028
   },
   "recovery": {
-    "lastrecoveryYear": 2023,
-    "lastrecoveryYearPlus1": 2024,
-    "lastrecoveryYearPlus2": 2025,
-    "lastrecoveryYearPlus3": 2026,
-    "lastrecoveryYearPlus4": 2027,
-    "clawbackIncomeLimitFirstLine": 86912,
-    "clawbackIncomeLimitSecondLine": 90997,
-    "clawbackIncomeLimitThirdLine": 93454,
-    "incomeLimitFirstLine": 142609,
-    "incomeLimitSecondLine": 148451,
-    "incomeLimitThirdLine": 151668,
-    "incomeLimit75FirstLine": 148179,
-    "incomeLimit75SecondLine": 154196,
-    "incomeLimit75ThirdLine": 157490
+    "lastrecoveryYear": 2024,
+    "lastrecoveryYearPlus1": 2025,
+    "lastrecoveryYearPlus2": 2026,
+    "lastrecoveryYearPlus3": 2027,
+    "lastrecoveryYearPlus4": 2028,
+    "clawbackIncomeLimitFirstLine": 90997,
+    "clawbackIncomeLimitSecondLine": 93454,
+    "clawbackIncomeLimitThirdLine": 95323,
+    "incomeLimitFirstLine": 148451,
+    "incomeLimitSecondLine": 152062,
+    "incomeLimitThirdLine": 154708,
+    "incomeLimit75FirstLine": 154196,
+    "incomeLimit75SecondLine": 157923,
+    "incomeLimit75ThirdLine": 160647
   },
   "exampleRecovery": {
     "income": 98000,
-    "difference": 4546,
-    "repayment": 681.9
+    "difference": 7003,
+    "repayment": 1050.45
   },
   "exampleRepayment": {
     "income": 98000,
-    "difference": 4546,
-    "repayment": 681.9,
-    "repaymentMonthly": 57,
+    "difference": 7003,
+    "repayment": 1050.45,
+    "repaymentMonthly": 88,
     "lastUpdatedYearPlus1": 2025,
     "lastUpdatedYearPlus2": 2026
   }
