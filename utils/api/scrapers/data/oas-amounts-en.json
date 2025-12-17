@@ -1,74 +1,74 @@
 {
-	"lastupdatedYear": "2024",
-	"lastupdatedQuarter": "January to March 2026",
-	"renewalYearGIS": "2025",
-	"oas": {
-		"average": "742.31",
-		"average75": "816.54",
-		"maximum": "148,451",
-		"maximum75": "154,196",
-		"clawback": "90,997"
-	},
-	"gis": {
-		"single-amount": "1,108.74",
-		"single-limit": "22,488",
-		"spouse-oas-amount": "667.41",
-		"spouse-oas-limit": "29,712",
-		"spouse-no-oas-amount": "1,108.74",
-		"spouse-no-oas-limit": "53,904",
-		"spouse-allowance-amount": "667.41",
-		"spouse-allowance-limit": "41,616"
-	},
-	"allowance": {
-		"spouse-gis-amount": "1,409.72",
-		"spouse-gis-limit": "41,616",
-		"survivor-amount": "1,680.47",
-		"survivor-limit": "30,312"
-	},
-	"topup": {
-		"single": "171.74",
-		"married": "48.67"
-	},
-	"delay": {
-		"oas66": "795.76",
-		"oas67": "849.20",
-		"oas68": "902.65",
-		"oas69": "956.10",
-		"oas70": "1,009.54"
-	},
-	"calculated": {
-		"lastupdatedYearPlus1": "2025",
-		"lastupdatedYearPlus2": "2026",
-		"lastupdatedYearPlus3": "2027",
-		"lastupdatedYearPlus4": "2028"
-	},
-	"recovery": {
-		"lastrecoveryYear": "2024",
-		"lastrecoveryYearPlus1": "2025",
-		"lastrecoveryYearPlus2": "2026",
-		"lastrecoveryYearPlus3": "2027",
-		"lastrecoveryYearPlus4": "2028",
-		"clawbackFirstLine": "90,997",
-		"clawbackSecondLine": "93,454",
-		"clawbackThirdLine": "95,323",
-		"maximumFirstLine": "148,451",
-		"maximumSecondLine": "152,062",
-		"maximumThirdLine": "154,708",
-		"maximum75FirstLine": "154,196",
-		"maximum75SecondLine": "157,923",
-		"maximum75ThirdLine": "160,647"
-	},
-	"exampleRecovery": {
-		"income": "98,000",
-		"difference": "7,003",
-		"repayment": "1,050.45"
-	},
-	"exampleRepayment": {
-		"income": "98,000",
-		"difference": "7,003",
-		"repayment": "1,050.45",
-		"repaymentMonthly": "88.00",
-		"lastupdatedYearPlus1": "2025",
-		"lastupdatedYearPlus2": "2026"
-	}
+  "lastupdatedYear": "2024",
+  "lastupdatedQuarter": "January to March 2026",
+  "renewalYearGIS": "2025",
+  "oas": {
+    "average": "742.31",
+    "average75": "816.54",
+    "maximum": "148,451",
+    "maximum75": "154,196",
+    "clawback": "90,997"
+  },
+  "gis": {
+    "single-amount": "1,108.74",
+    "single-limit": "22,488",
+    "spouse-oas-amount": "667.41",
+    "spouse-oas-limit": "29,712",
+    "spouse-no-oas-amount": "1,108.74",
+    "spouse-no-oas-limit": "53,904",
+    "spouse-allowance-amount": "667.41",
+    "spouse-allowance-limit": "41,616"
+  },
+  "allowance": {
+    "spouse-gis-amount": "1,409.72",
+    "spouse-gis-limit": "41,616",
+    "survivor-amount": "1,680.47",
+    "survivor-limit": "30,312"
+  },
+  "topup": {
+    "single": "171.74",
+    "married": "48.67"
+  },
+  "delay": {
+    "oas66": "795.76",
+    "oas67": "849.20",
+    "oas68": "902.65",
+    "oas69": "956.10",
+    "oas70": "1,009.54"
+  },
+  "calculated": {
+    "lastupdatedYearPlus1": "2025",
+    "lastupdatedYearPlus2": "2026",
+    "lastupdatedYearPlus3": "2027",
+    "lastupdatedYearPlus4": "2028"
+  },
+  "recovery": {
+    "lastrecoveryYear": "2024",
+    "lastrecoveryYearPlus1": "2025",
+    "lastrecoveryYearPlus2": "2026",
+    "lastrecoveryYearPlus3": "2027",
+    "lastrecoveryYearPlus4": "2028",
+    "clawbackFirstLine": "90,997",
+    "clawbackSecondLine": "93,454",
+    "clawbackThirdLine": "95,323",
+    "maximumFirstLine": "148,451",
+    "maximumSecondLine": "152,062",
+    "maximumThirdLine": "154,708",
+    "maximum75FirstLine": "154,196",
+    "maximum75SecondLine": "157,923",
+    "maximum75ThirdLine": "160,647"
+  },
+  "exampleRecovery": {
+    "income": "98,000",
+    "difference": "7,003",
+    "repayment": "1,050.45"
+  },
+  "exampleRepayment": {
+    "income": "98,000",
+    "difference": "7,003",
+    "repayment": "1,050.45",
+    "repaymentMonthly": "88.00",
+    "lastupdatedYearPlus1": "2025",
+    "lastupdatedYearPlus2": "2026"
+  }
 }
