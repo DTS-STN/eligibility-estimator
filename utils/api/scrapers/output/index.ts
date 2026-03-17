@@ -29,3 +29,4 @@ const exportLegalValues =
   process.env.NODE_ENV === 'test' ? legalValuesForTest : legalValues
 
 export default exportLegalValues
+
