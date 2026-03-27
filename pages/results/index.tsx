@@ -242,7 +242,6 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
     })
 
     const psdResults: ResponseSuccess | ResponseError = psdHandler.results
-
     const sameResUsed =
       psdQuery.yearsInCanadaSince18 ===
       inputHelper.asObjectWithLanguage.yearsInCanadaSince18
@@ -425,6 +424,7 @@ const Results: NextPage<{ adobeAnalyticsUrl: string }> = ({
           mappedPartnerRes.push(ageRes)
         }
       }
+
       responseClone.futureClientResults = mappedClientRes
       responseClone.futurePartnerResults = mappedPartnerRes
 
