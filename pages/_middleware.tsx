@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
       if (
         !request.headers
           .get('referer')
-          ?.includes('estimateursv-oasestimator.service.canada.ca')
+          ?.includes('estimateursv-oasestimator.digital.service.canada.ca')
       ) {
         return NextResponse.redirect(new URL('/', request.url))
       }

@@ -37,7 +37,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         href={
           isAlpha
             ? `http://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
-            : `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://estimateursv-oasestimator.digital.service.canada.ca/${tsln._language}${router.pathname}`
         }
       />
       <link
@@ -46,7 +46,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         href={
           isAlpha
             ? `https://ep-be.alpha.service.canada.ca/${altLang}${router.pathname}`
-            : `https://estimateursv-oasestimator.service.canada.ca/${altLang}${router.pathname}`
+            : `https://estimateursv-oasestimator.digital.service.canada.ca/${altLang}${router.pathname}`
         }
       />
 
@@ -56,7 +56,7 @@ export const Head: React.VFC<{ title: string }> = ({ title }) => {
         href={
           isAlpha
             ? `https://ep-be.alpha.service.canada.ca/${tsln._language}${router.pathname}`
-            : `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}${router.pathname}`
+            : `https://estimateursv-oasestimator.digital.service.canada.ca/${tsln._language}${router.pathname}`
         }
       />
       <meta name="keywords" content={tsln.meta.homeKeywords} />
