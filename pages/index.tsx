@@ -45,7 +45,7 @@ const Home: NextPage<{ adobeAnalyticsUrl: string }> = ({
           property="og:url"
           content={
             isCanadaDotCa
-              ? `https://estimateursv-oasestimator.service.canada.ca/${tsln._language}`
+              ? `https://estimateursv-oasestimator.digital.service.canada.ca/${tsln._language}`
               : `https://ep-be.alpha.service.canada.ca/${tsln._language}`
           }
         />

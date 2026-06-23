@@ -12,7 +12,7 @@ variables:
   azureContainerRegistry.domain: 'acrlwhpblkprod.azurecr.io'
   app.environment: production
   app.buildDate: $[ format('{0:yyyy}-{0:MM}-{0:dd}', pipeline.startTime) ]
-  app.domain: 'https://staging.estimateursv-oasestimator.service.canada.ca/'
+  app.domain: 'https://staging.estimateursv-oasestimator.digital.service.canada.ca/'
   app.logLevel: 'info'
   image.tag: '$(Build.SourceVersion)'
 

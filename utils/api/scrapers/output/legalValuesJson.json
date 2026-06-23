@@ -1,46 +1,46 @@
 {
-  "lastUpdatedYear": 2024,
-  "lastUpdatedQuarter": "April to June 2026",
-  "renewalYearGIS": 2025,
+  "lastUpdatedYear": 2025,
+  "lastUpdatedQuarter": "July to September 2026",
+  "renewalYearGIS": 2026,
   "oas": {
-    "amount": 743.05,
-    "amount75": 817.36,
-    "incomeLimit": 148451,
-    "incomeLimit75": 154196,
-    "clawbackIncomeLimit": 90997
+    "amount": 751.97,
+    "amount75": 827.17,
+    "incomeLimit": 152062,
+    "incomeLimit75": 157923,
+    "clawbackIncomeLimit": 93454
   },
   "gis": {
-    "singleAmount": 1109.85,
-    "singleIncomeLimit": 22512,
-    "spouseOasAmount": 668.08,
-    "spouseOasIncomeLimit": 29760,
-    "spouseNoOasAmount": 1109.85,
-    "spouseNoOasIncomeLimit": 53952,
-    "spouseAlwAmount": 668.08,
-    "spouseAlwIncomeLimit": 41664
+    "singleAmount": 1123.17,
+    "singleIncomeLimit": 22800,
+    "spouseOasAmount": 676.09,
+    "spouseOasIncomeLimit": 30096,
+    "spouseNoOasAmount": 1123.17,
+    "spouseNoOasIncomeLimit": 54624,
+    "spouseAlwAmount": 676.09,
+    "spouseAlwIncomeLimit": 42144
   },
   "alw": {
-    "alwAmount": 1411.13,
-    "alwIncomeLimit": 41664,
-    "afsAmount": 1682.15,
-    "afsIncomeLimit": 30336
+    "alwAmount": 1428.06,
+    "alwIncomeLimit": 42144,
+    "afsAmount": 1702.34,
+    "afsIncomeLimit": 30696
   },
   "topUp": {
-    "single": 171.91,
-    "married": 48.72
+    "single": 173.97,
+    "married": 49.3
   },
   "delay": {
-    "oas66": 796.55,
-    "oas67": 850.05,
-    "oas68": 903.55,
-    "oas69": 957.05,
-    "oas70": 1010.55
+    "oas66": 806.11,
+    "oas67": 860.25,
+    "oas68": 914.4,
+    "oas69": 968.54,
+    "oas70": 1022.68
   },
   "calculated": {
-    "lastUpdatedYearPlus1": 2025,
-    "lastUpdatedYearPlus2": 2026,
-    "lastUpdatedYearPlus3": 2027,
-    "lastUpdatedYearPlus4": 2028
+    "lastUpdatedYearPlus1": 2026,
+    "lastUpdatedYearPlus2": 2027,
+    "lastUpdatedYearPlus3": 2028,
+    "lastUpdatedYearPlus4": 2029
   },
   "recovery": {
     "lastrecoveryYear": 2024,
@@ -53,22 +53,22 @@
     "clawbackIncomeLimitThirdLine": 95323,
     "incomeLimitFirstLine": 148451,
     "incomeLimitSecondLine": 152062,
-    "incomeLimitThirdLine": 154753,
+    "incomeLimitThirdLine": 155109,
     "incomeLimit75FirstLine": 154196,
     "incomeLimit75SecondLine": 157923,
-    "incomeLimit75ThirdLine": 160696
+    "incomeLimit75ThirdLine": 161088
   },
   "exampleRecovery": {
-    "income": 98000,
-    "difference": 7003,
-    "repayment": 1050.45
+    "income": 100000,
+    "difference": 6546,
+    "repayment": 981.9
   },
   "exampleRepayment": {
-    "income": 98000,
-    "difference": 7003,
-    "repayment": 1050.45,
-    "repaymentMonthly": 88,
-    "lastUpdatedYearPlus1": 2025,
-    "lastUpdatedYearPlus2": 2026
+    "income": 100000,
+    "difference": 6546,
+    "repayment": 981.9,
+    "repaymentMonthly": 82,
+    "lastUpdatedYearPlus1": 2026,
+    "lastUpdatedYearPlus2": 2027
   }
 }
