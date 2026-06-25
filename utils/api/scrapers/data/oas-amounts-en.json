@@ -1,71 +1,74 @@
 {
-  "lastupdatedYear": "2024",
-  "lastupdatedQuarter": "April to June 2026",
-  "renewalYearGIS": "2025",
-  "oas": {
-    "average": "743.05",
-    "average75": "817.36",
-    "maximum": "148,451.00",
-    "maximum75": "154,196.00",
-    "clawback": "90,997.00"
-  },
-  "gis": {
-    "single-amount": "1,109.85",
-    "single-limit": "22,512",
-    "spouse-oas-amount": "668.08",
-    "spouse-oas-limit": "29,760",
-    "spouse-no-oas-amount": "1,109.85",
-    "spouse-no-oas-limit": "53,952",
-    "spouse-allowance-amount": "668.08",
-    "spouse-allowance-limit": "41,664"
-  },
-  "allowance": {
-    "spouse-gis-amount": "1,411.13",
-    "spouse-gis-limit": "41,664.00",
-    "survivor-amount": "1,682.15",
-    "survivor-limit": "30,336.00"
-  },
-  "topup": { "single": " 171.91 ", "married": " 48.72 " },
-  "delay": {
-    "oas66": " 796.55 ",
-    "oas67": " 850.05 ",
-    "oas68": " 903.55 ",
-    "oas69": " 957.05 ",
-    "oas70": " 1,010.55 "
-  },
-  "calculated": {
-    "lastupdatedYearPlus1": "2025",
-    "lastupdatedYearPlus2": "2026",
-    "lastupdatedYearPlus3": "2027",
-    "lastupdatedYearPlus4": "2028"
-  },
-  "recovery": {
-    "lastrecoveryYear": "2024",
-    "lastrecoveryYearPlus1": "2025",
-    "lastrecoveryYearPlus2": "2026",
-    "lastrecoveryYearPlus3": "2027",
-    "lastrecoveryYearPlus4": "2028",
-    "clawbackFirstLine": "90,997",
-    "clawbackSecondLine": "93,454",
-    "clawbackThirdLine": "95,323",
-    "maximumFirstLine": "148,451",
-    "maximumSecondLine": "152,062",
-    "maximumThirdLine": "154,753",
-    "maximum75FirstLine": "154,196",
-    "maximum75SecondLine": "157,923",
-    "maximum75ThirdLine": "160,696"
-  },
-  "exampleRecovery": {
-    "income": "98,000",
-    "difference": "7,003",
-    "repayment": "1,050.45"
-  },
-  "exampleRepayment": {
-    "income": "98,000",
-    "difference": "7,003",
-    "repayment": "1,050.45",
-    "repaymentMonthly": "88.00",
-    "lastupdatedYearPlus1": "2025",
-    "lastupdatedYearPlus2": "2026"
-  }
+   "lastupdatedYear": "2025",
+   "lastupdatedQuarter": "July to September 2026",
+   "renewalYearGIS": "2026",
+   "oas": {
+      "average": "751.97",
+      "average75": "827.17",
+      "maximum": "152,062",
+      "maximum75": "157,923",
+      "clawback": "93,454"
+   },
+   "gis": {
+      "single-amount": "1,123.17",
+      "single-limit": "22,800",
+      "spouse-oas-amount": "676.09",
+      "spouse-oas-limit": "30,096",
+      "spouse-no-oas-amount": "1,123.17",
+      "spouse-no-oas-limit": "54,624",
+      "spouse-allowance-amount": "676.09",
+      "spouse-allowance-limit": "42,144"
+   },
+   "allowance": {
+      "spouse-gis-amount": "1,428.06",
+      "spouse-gis-limit": "42,144",
+      "survivor-amount": "1,702.34",
+      "survivor-limit": "30,696"
+   },
+   "topup": {
+      "single": " 173.97 ",
+      "married": " 49.30 "
+   },
+   "delay": {
+      "oas66": " 806.11 ",
+      "oas67": " 860.25 ",
+      "oas68": " 914.40 ",
+      "oas69": " 968.54 ",
+      "oas70": " 1,022.68 "
+   },
+   "calculated": {
+      "lastupdatedYearPlus1": "2026",
+      "lastupdatedYearPlus2": "2027",
+      "lastupdatedYearPlus3": "2028",
+      "lastupdatedYearPlus4": "2029"
+   },
+   "recovery": {
+      "lastrecoveryYear": "2024",
+      "lastrecoveryYearPlus1": "2025",
+      "lastrecoveryYearPlus2": "2026",
+      "lastrecoveryYearPlus3": "2027",
+      "lastrecoveryYearPlus4": "2028",
+      "clawbackFirstLine": "90,997",
+      "clawbackSecondLine": "93,454",
+      "clawbackThirdLine": "95,323",
+      "maximumFirstLine": "148,451",
+      "maximumSecondLine": "152,062",
+      "maximumThirdLine": "155,109",
+      "maximum75FirstLine": "154,196",
+      "maximum75SecondLine": "157,923",
+      "maximum75ThirdLine": "161,088"
+   },
+   "exampleRecovery": {
+      "income": "100,000",
+      "difference": "6,546",
+      "repayment": "981.90"
+   },
+   "exampleRepayment": {
+      "income": "100,000",
+      "difference": "6,546",
+      "repayment": "981.90",
+      "repaymentMonthly": "82.00",
+      "lastupdatedYearPlus1": "2026",
+      "lastupdatedYearPlus2": "2027"
+   }
 }
