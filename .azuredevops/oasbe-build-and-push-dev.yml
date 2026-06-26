@@ -57,8 +57,6 @@ stages:
 
           - task: Docker@2
             displayName: Docker Build
-            env:
-              DOCKER_BUILDKIT: 1
             inputs:
               containerRegistry: '$(azureContainerRegistry.name)'
               repository: '$(azureContainerRegistry.repository)'
@@ -70,7 +68,6 @@ stages:
                 release-candidate
               arguments: |
                 --pull
-                --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
                 --build-arg home=/app
                 --build-arg NEXT_BUILD_DATE=$(app.buildDate)
                 --build-arg NEXTAUTH_URL=$(app.domain)
@@ -80,7 +77,6 @@ stages:
                 --build-arg ADOBE_ANALYTICS_URL=$(DEV-ADOBE-ANALYTICS-URL)
                 --build-arg APP_ENV=$(app.environment)
                 --build-arg LOGGING_LEVEL=$(app.logLevel)
-                --build-arg BUILDKIT_INLINE_CACHE=1
 
           - task: Docker@2
             displayName: Docker Push
