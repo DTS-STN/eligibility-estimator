@@ -68,7 +68,6 @@ stages:
                 release-candidate
               arguments: |
                 --pull
-                --cache-from $(azureContainerRegistry.domain)/$(azureContainerRegistry.repository):latest
                 --build-arg home=/app
                 --build-arg NEXT_BUILD_DATE=$(app.buildDate)
                 --build-arg NEXTAUTH_URL=$(app.domain)
