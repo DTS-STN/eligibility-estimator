@@ -87,7 +87,9 @@ ENV NEXT_BUILD_DATE=$NEXT_BUILD_DATE
 WORKDIR $home
 COPY --chown=55:$group . . 
 RUN yarn install --immutable
+
 RUN yarn build
+RUN mkdir -p /app/.next/cache/images
 COPY --chown=55:$group public ./public
 
 RUN VERSION_NEXT=`node -p -e "require('./package.json').dependencies.next"`&& yarn add next@"$VERSION_NEXT"
